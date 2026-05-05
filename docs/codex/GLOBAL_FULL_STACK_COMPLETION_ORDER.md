@@ -163,15 +163,19 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
      performance/battery budget, static fallback, Reduce Motion fallback,
      nonvisual equivalent, isolated file boundary, rendered proof, and profiling
      plan.
-32E. FVQ05 Final Visual Proof Packet Integration Hook. Queued next before PFC15.
+32E. FVQ05 Final Visual Proof Packet Integration Hook. Completed Green on
+     2026-05-05 as the final visual proof packet integration hook. It indexes
+     FVQ01-FVQ04 and MEG01 evidence, carries missing proof as Yellow-owned, and
+     requires future FCP28/FCP29/FCP30/PFC39/PFC40 handoff reports to reference
+     the packet before final visual, accessibility, device, external-surface,
+     release, or handoff claims.
 
 ### Phase 4 — External Surface Strategy Before Implementation
 
 33. PFC13 WidgetKit Strategy And Object Map. Completed Green as docs/product/
     platform WidgetKit object map and privacy matrix on 2026-05-05 after the
     local run had already started PFC13. FVQ01, FVQ02, and FVQ03 have closed
-    Accepted Yellow. FVQ04 and MEG01 are complete Green, and FVQ05 is next
-    before PFC15.
+    Accepted Yellow. FVQ04, MEG01, and FVQ05 are complete Green.
 34. PFC15 Live Activities / ActivityKit Strategy.
 35. PFC17 App Intents / Shortcuts / Spotlight Strategy.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.

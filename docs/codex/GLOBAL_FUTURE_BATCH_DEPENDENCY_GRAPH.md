@@ -153,6 +153,11 @@ performance/battery budget, static fallback, Reduce Motion fallback, nonvisual
 equivalent, isolated file boundary, rendered proof, and profiling plan before
 implementation. No advanced renderer is approved by default.
 
+FVQ05 is complete Green as of 2026-05-05. Future FCP28, FCP29, FCP30, PFC39,
+and PFC40 visual/accessibility/device/external-surface/release/handoff claims
+must reference `docs/audits/visual-evidence/fvq05/final-visual-proof-packet.md`
+or a successor packet and keep missing proof Yellow-owned.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
