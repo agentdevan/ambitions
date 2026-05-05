@@ -2,12 +2,15 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FVQ05 Final Visual Proof Packet Integration Hook complete Green;
-full-stack order selects PFC15 Live Activities / ActivityKit Strategy next.
-Scope: FVQ05 created the final visual proof packet integration hook at
-`docs/audits/visual-evidence/fvq05/final-visual-proof-packet.md`, indexed
-FVQ01-FVQ04 and MEG01 evidence, and carried missing visual/accessibility/
-device/external-surface proof as Yellow-owned. FVQ05 changed only docs and
+Current batch: PFC15 Live Activities / ActivityKit Strategy complete Green;
+full-stack order selects PFC17 App Intents / Shortcuts / Spotlight Strategy
+next.
+Scope: PFC15 created the docs/product/platform ActivityKit strategy at
+`docs/canon/Ambitions_Live_Activities_ActivityKit_Strategy.md`, defined Active
+Step Focus Window as the only allowed future launch candidate, deferred broader
+Live Activity candidates to named proof batches, and kept Lock Screen /
+Dynamic Island, device, accessibility, legal/privacy, App Store, TestFlight, and
+release claims blocked until evidence exists. PFC15 changed only docs and
 train-state files. It did not change production Swift, route/raw value,
 persistence/schema, permission request, calendar write, sync/account, release,
 legal/privacy, CI, workflow/signing, entitlement, AI runtime, AOS runtime, LDI
@@ -47,7 +50,8 @@ FVQ03 is complete / Accepted Yellow as drill-down and external-surface visual
 sweep evidence. FVQ04 is complete / Green as recurring rendered-proof protocol
 evidence. MEG01 is complete / Green as advanced-rendering eligibility evidence.
 FVQ05 is complete / Green as final visual proof packet integration evidence.
-PFC15 is the next eligible global batch. Accepted Yellow:
+PFC15 is complete / Green as Live Activities / ActivityKit strategy evidence.
+PFC17 is the next eligible global batch. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,

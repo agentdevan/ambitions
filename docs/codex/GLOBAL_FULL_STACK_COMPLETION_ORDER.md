@@ -176,7 +176,12 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     platform WidgetKit object map and privacy matrix on 2026-05-05 after the
     local run had already started PFC13. FVQ01, FVQ02, and FVQ03 have closed
     Accepted Yellow. FVQ04, MEG01, and FVQ05 are complete Green.
-34. PFC15 Live Activities / ActivityKit Strategy.
+34. PFC15 Live Activities / ActivityKit Strategy. Completed Green on
+    2026-05-05 as docs/product/platform ActivityKit strategy. It defines
+    Active Step Focus Window as the only allowed future launch candidate,
+    defers broader Live Activity candidates to named proof batches, and keeps
+    Lock Screen / Dynamic Island, device, accessibility, legal/privacy,
+    App Store, TestFlight, and release claims blocked until evidence exists.
 35. PFC17 App Intents / Shortcuts / Spotlight Strategy.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.
 37. PFC21 StoreKit / Monetization Strategy.

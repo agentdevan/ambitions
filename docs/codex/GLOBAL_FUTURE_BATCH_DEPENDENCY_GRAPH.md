@@ -158,6 +158,14 @@ and PFC40 visual/accessibility/device/external-surface/release/handoff claims
 must reference `docs/audits/visual-evidence/fvq05/final-visual-proof-packet.md`
 or a successor packet and keep missing proof Yellow-owned.
 
+PFC15 is complete Green as of 2026-05-05. Future ActivityKit implementation,
+PFC16 proof, or any Live Activity expansion must use
+`docs/canon/Ambitions_Live_Activities_ActivityKit_Strategy.md` as the platform
+boundary: Active Step Focus Window is the only allowed launch candidate, broader
+Live Activity candidates stay deferred to named proof batches, and Lock Screen /
+Dynamic Island, device, accessibility, legal/privacy, App Store, TestFlight, and
+release claims remain blocked until evidence exists.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
