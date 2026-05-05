@@ -829,6 +829,71 @@ struct CreateGoalPreviewState: Sendable {
     let planningEvaluation: PlanningEvaluation?
 }
 
+struct GoalSeedReviewState: Sendable, Equatable, Identifiable {
+    let id: String
+    let title: String
+    let whyGoalLabel: String
+    let startingPositionLabel: String
+    let firstMilestoneLabel: String
+    let firstStepLabel: String
+    let proofSourceSeedLabel: String
+    let confirmationLabel: String
+    let state: AmbitionVisualState
+
+    var accessibilityValue: String {
+        [
+            whyGoalLabel,
+            startingPositionLabel,
+            firstMilestoneLabel,
+            firstStepLabel,
+            proofSourceSeedLabel,
+            confirmationLabel
+        ].joined(separator: ". ")
+    }
+}
+
+extension CreateGoalPreviewState {
+    var goalSeedReviewState: GoalSeedReviewState {
+        let activeStage = pathStages.first { stage in
+            stage.position == .current || stage.position == .blocked
+        } ?? pathStages.first
+        let firstMilestone = milestonePreview.first
+        let firstStep = firstMilestone?.title ?? activeStage?.highlight
+
+        return GoalSeedReviewState(
+            id: "goal-seed-review-\(normalizedTitle.lowercased().filter { $0.isLetter || $0.isNumber })",
+            title: "Goal seed review",
+            whyGoalLabel: whyGoalLabel,
+            startingPositionLabel: "Starting position: \(activeStage?.title ?? "Needs one clearer starting point").",
+            firstMilestoneLabel: "First milestone: \(firstMilestone?.summary ?? activeStage?.summary ?? "Hold the setup until a first milestone is visible.").",
+            firstStepLabel: "First recommended step: \(firstStep ?? "Add one concrete next step before this becomes active.").",
+            proofSourceSeedLabel: "Proof/source seed: current setup only; review before saving.",
+            confirmationLabel: confirmationLabel,
+            state: renderState.visualState
+        )
+    }
+
+    private var whyGoalLabel: String {
+        switch resultKind {
+        case .planned, .starterPlanned:
+            "Why this might be a goal: \(summary)"
+        case .clarificationRequired:
+            "Why this might be a goal: the idea has signal, but one clarification is needed first."
+        case .blocked:
+            "Why this might be a goal: the blocker is visible before anything goes live."
+        }
+    }
+
+    private var confirmationLabel: String {
+        switch resultKind {
+        case .planned, .starterPlanned:
+            "Confirmation: create the goal only when you choose Create Goal."
+        case .clarificationRequired, .blocked:
+            "Confirmation: save a draft until the setup is clear enough."
+        }
+    }
+}
+
 struct GoalDetailActionState: Identifiable, Sendable {
     let kind: GoalDetailActionKind
     let title: String

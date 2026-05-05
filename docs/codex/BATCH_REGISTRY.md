@@ -109,6 +109,13 @@ Current 4.0 status:
   a goal, not now, correction receipt, and local/no-hidden-memory boundaries;
   no hidden learning, personalization, automatic goal creation, route/raw-value
   change, AI/LDI runtime, or broad app implementation was added.
+- Complete / accepted Yellow: PD11 Grow Into Goal Flow is complete as bounded
+  Capture/Goals implementation evidence. Create Goal now includes a
+  presentation-derived goal seed review for why this might be a goal, starting
+  position, first milestone, first recommended step, proof/source seed, and
+  explicit confirmation before promotion; no automatic goal creation,
+  persistence/schema, navigation, route/raw-value change, AI/LDI runtime, or
+  broad app implementation was added.
 - Completed: CS01 Compatibility Seam Registry And Risk Map.
 - Completed: CS07 External Route Widget AppIntent Compatibility Proof.
 - Completed: CS08 Import Export Persistence Compatibility Proof.
@@ -521,7 +528,7 @@ Current 4.0 status:
   proof/decision-history review trail; PD08 added alternate-path/tradeoff
   review. These do not change routes, persistence/schema, runtime AOS/AI/LDI,
   or top-level IA.
-- Queued / Blocked: PD11-PD18 pending each batch's predecessor, PXOS/ME/CS/SI/AOS-if-needed gates, and Product Depth continuation checks.
+- Queued / Blocked: PD12-PD18 pending each batch's predecessor, PXOS/ME/CS/SI/AOS-if-needed gates, and Product Depth continuation checks.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Queued / Blocked: LDI01-LDI22 Living Dream Intelligence Train pending AOS30 Green by default or explicit user decision for earlier dependency split.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
@@ -879,7 +886,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS08 Import Export Persistence Compatibility Proof | Completed / focused proof | Import/export, portable snapshot, legacy import, persistence repository, sync posture, and persistence budget focused tests passed; no seam retired. |
 | CS02-CS06 / CS09-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires current global preauthorization or `Start CS Train` and Green predecessor gates. |
 | SI01-SI18 Signature Interface Implementation Train | Complete / accepted Yellow | SI01-SI18 complete; Product Depth approval phrase has now been provided for PD01. |
-| PD01-PD18 Product Depth Train | Active / PD10 accepted Yellow | Formal Product Depth train. PD01 is docs/planning only and creates canon, inventory, ownership, and dependency truth. PD02 completed the Today-owned lightweight Step Detail drill-down behind Reality Rail. PD03 completed the Today-owned Step Session execution environment. PD04 completed Today-owned recovery and closure depth without runtime recovery or plan-mutation claims. PD05 completed the Goals-owned Goal Detail Mission Control visible lane order to Completed / Now / Friction / Next / Horizon while preserving internal compatibility. PD06 completed the Goals-owned lifecycle/path visualization layer with text-plus-symbol markers for current position, progress shape, proof, risk, and route options. PD07 completed the Goals-owned proof/decision history review trail from existing mission-control state without runtime proof model changes. PD08 completed the Goals-owned alternate-path/tradeoff review layer without automated reroute or AOS runtime changes. PD09 completed the Capture-owned placement review layer without inbox/feed mode, silent placement, or AOS runtime changes. PD10 completed the Capture-owned correction review layer without hidden learning, personalization, user-facing confidence copy, or AOS runtime changes. PD11 is the next direct successor if continuation gates allow it. PD12-PD18 remain queued/blocked by predecessor, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
+| PD01-PD18 Product Depth Train | Active / PD11 accepted Yellow | Formal Product Depth train. PD01 is docs/planning only and creates canon, inventory, ownership, and dependency truth. PD02 completed the Today-owned lightweight Step Detail drill-down behind Reality Rail. PD03 completed the Today-owned Step Session execution environment. PD04 completed Today-owned recovery and closure depth without runtime recovery or plan-mutation claims. PD05 completed the Goals-owned Goal Detail Mission Control visible lane order to Completed / Now / Friction / Next / Horizon while preserving internal compatibility. PD06 completed the Goals-owned lifecycle/path visualization layer with text-plus-symbol markers for current position, progress shape, proof, risk, and route options. PD07 completed the Goals-owned proof/decision history review trail from existing mission-control state without runtime proof model changes. PD08 completed the Goals-owned alternate-path/tradeoff review layer without automated reroute or AOS runtime changes. PD09 completed the Capture-owned placement review layer without inbox/feed mode, silent placement, or AOS runtime changes. PD10 completed the Capture-owned correction review layer without hidden learning, personalization, user-facing confidence copy, or AOS runtime changes. PD11 completed the Capture/Goals-owned goal seed review layer without automatic goal creation, route/raw-value changes, persistence/schema changes, or AOS runtime changes. PD12 is the next direct successor if continuation gates allow it. PD13-PD18 remain queued/blocked by predecessor, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
 | PX01-PX20 Product Experience OS Train | Completed / docs-only | PX01-PX20 are complete as future canon/roadmap evidence. PXOS implementation is not started. |
 
@@ -903,7 +910,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS08 Import Export Persistence Compatibility Proof | Completed / focused proof | Import/export/persistence proof only; no seam retired in this pass. |
 | CS02-CS06 / CS09-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Retirements, repair, and handoff remain queued/blocked. |
 | Product Experience OS / PXOS | Queued / Blocked future canon | User-facing future experience canon in Ambitions 4.0. Does not claim implementation. |
-| Product Depth / PD01-PD18 | Active / PD10 accepted Yellow | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. PD01 is canon/inventory/ownership only. PD02, PD03, and PD04 deepen only the named Today Step Detail, Step Session, and recovery/closure boundaries. PD05 deepens only the Goal Detail Mission Control visible lane order. PD06 deepens only the Goal Detail lifecycle/path visualization boundary. PD07 deepens only Goal Detail proof/decision history presentation. PD08 deepens only Goal Detail alternate-path/tradeoff presentation. PD09 deepens only Capture placement review presentation. PD10 deepens only Capture correction review presentation. These batches do not add top-level destinations. |
+| Product Depth / PD01-PD18 | Active / PD11 accepted Yellow | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. PD01 is canon/inventory/ownership only. PD02, PD03, and PD04 deepen only the named Today Step Detail, Step Session, and recovery/closure boundaries. PD05 deepens only the Goal Detail Mission Control visible lane order. PD06 deepens only the Goal Detail lifecycle/path visualization boundary. PD07 deepens only Goal Detail proof/decision history presentation. PD08 deepens only Goal Detail alternate-path/tradeoff presentation. PD09 deepens only Capture placement review presentation. PD10 deepens only Capture correction review presentation. PD11 deepens only Capture/Goals grow-into-goal seed review presentation. These batches do not add top-level destinations. |
 
 
 ## Living Dream Intelligence Train Registry

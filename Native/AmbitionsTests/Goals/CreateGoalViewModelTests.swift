@@ -117,6 +117,64 @@ final class CreateGoalViewModelTests: XCTestCase {
         XCTAssertEqual(createRequest?.entrySource, .capturesScreen)
     }
 
+    func testPD11GoalSeedReviewKeepsPromotionExplicitAndEditable() {
+        let preview = CreateGoalPreviewState(
+            normalizedTitle: "Launch community workshop",
+            summary: "A capture can become a goal after confirmation.",
+            modeLabel: GoalMode.project.displayTitle,
+            resultKind: .starterPlanned,
+            renderState: .starter,
+            selectedPace: .balanced,
+            paceOptions: [],
+            feasibility: nil,
+            deadlineGuidance: nil,
+            pathStages: [
+                GoalPathStage(
+                    id: "start",
+                    title: "Starting phase",
+                    summary: "Begin with a small invitation list.",
+                    stepCountLabel: "1 step",
+                    position: .current,
+                    statusLabel: GoalPathStagePosition.current.title,
+                    highlight: "Draft the first invitation",
+                    state: .selected
+                )
+            ],
+            milestonePreview: [
+                GoalDetailStepItem(
+                    id: "first-step",
+                    title: "Draft the first invitation",
+                    summary: "Make the workshop concrete without locking the whole path.",
+                    timingLabel: "Flexible",
+                    statusLabel: "Next",
+                    state: .selected
+                )
+            ],
+            clarification: nil,
+            blocked: nil,
+            trust: StrategyComposerTrustState(
+                title: "Trust framing",
+                lines: ["This remains confirmation-based."],
+                badgeTitle: "Capture-led",
+                state: .selected
+            ),
+            planningEvaluation: nil
+        )
+
+        let review = preview.goalSeedReviewState
+
+        XCTAssertEqual(review.title, "Goal seed review")
+        XCTAssertTrue(review.whyGoalLabel.localizedCaseInsensitiveContains("might be a goal"))
+        XCTAssertTrue(review.startingPositionLabel.localizedCaseInsensitiveContains("Starting phase"))
+        XCTAssertTrue(review.firstMilestoneLabel.localizedCaseInsensitiveContains("workshop concrete"))
+        XCTAssertTrue(review.firstStepLabel.localizedCaseInsensitiveContains("Draft the first invitation"))
+        XCTAssertTrue(review.proofSourceSeedLabel.localizedCaseInsensitiveContains("review before saving"))
+        XCTAssertTrue(review.confirmationLabel.localizedCaseInsensitiveContains("only when you choose Create Goal"))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("classified as"))
+    }
+
     func testSubmitMovesIntoFailureStateWhenServiceThrows() async {
         let service = RecordingGoalsService(error: CreateGoalFailure.unavailable)
         let viewModel = CreateGoalViewModel(title: "Ship native create-goal flow")

@@ -2,14 +2,15 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD10 complete / accepted Yellow
-Scope: PD10 deepened only Capture-owned correction review presentation behind
-existing captured items. It added presentation-derived correction options for
-place-somewhere-else, not-a-goal, not-now, correction receipt, and local review
-boundaries. It did not add hidden learning, user-facing confidence language,
-automatic goal creation, personalization, persistence/schema, sync/auth/
-network, AI/LDI runtime, navigation, route/raw values, CI/config, dependencies,
-release/platform claims, broad app implementation, or Candidate finalization.
+Current batch: PD11 complete / accepted Yellow
+Scope: PD11 deepened only the existing Capture-to-Goals grow-into-goal setup
+path. It added a presentation-derived goal seed review to Create Goal covering
+why this might be a goal, starting position, first milestone, first recommended
+step, proof/source seed, and explicit confirmation before promotion. It did not
+add automatic goal creation, hidden learning, personalization, persistence/
+schema, sync/auth/network, AI/LDI runtime, navigation, route/raw values,
+CI/config, dependencies, release/platform claims, broad app implementation, or
+Candidate finalization.
 Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:
@@ -122,6 +123,18 @@ accessibility/release claim change was made.
 - CS02C-CS06C deferred truth remains preserved.
 
 ## Current Validation Result
+
+PD11 result: PASS WITH ACCEPTED YELLOW.
+`docs/audits/pd11-grow-into-goal-flow-report.md` records the bounded
+Capture/Goals grow-into-goal seed review layer, explicit confirmation before
+promotion, focused Capture/Create Goal/Goal Creation tests, `xcodegen
+generate`, `scripts/build-local.sh`, Product Depth copy/drift/release scans,
+accessibility and Reduce Motion advisory scans, doc QA, batch gate, and
+boundary scan. Yellow items are no screenshot/rendered proof, no human/device/
+VoiceOver/Dynamic Type/Reduce Motion walkthrough, existing file-size/doc-QA
+advisory backlog, internal compatibility vocabulary in existing Goals/Capture
+tests/source, and the generic boundary script flagging PD11-allowed Goals files
+despite explicit Capture/Goals implementation scope.
 
 PD10 result: PASS WITH ACCEPTED YELLOW.
 `docs/audits/pd10-capture-correction-review-report.md` records the bounded

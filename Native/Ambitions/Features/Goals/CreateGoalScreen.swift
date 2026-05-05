@@ -82,6 +82,8 @@ struct CreateGoalScreen: View {
                         clarificationCard(clarification)
                     }
 
+                    goalSeedReviewCard(preview.goalSeedReviewState)
+
                     strategyCard(preview)
 
                     if let feasibility = preview.feasibility {
@@ -226,6 +228,33 @@ struct CreateGoalScreen: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("create-goal.capture-handoff")
+    }
+
+    private func goalSeedReviewCard(_ review: GoalSeedReviewState) -> some View {
+        AppCard(state: review.state) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                SectionHeader(
+                    title: review.title,
+                    subtitle: "Review the goal seed before anything is saved."
+                ) {
+                    TagPill("Confirm first", icon: "checkmark.seal", state: review.state)
+                }
+
+                Label(review.whyGoalLabel, systemImage: "questionmark.circle")
+                Label(review.startingPositionLabel, systemImage: "location")
+                Label(review.firstMilestoneLabel, systemImage: "flag")
+                Label(review.firstStepLabel, systemImage: "arrow.forward.circle")
+                Label(review.proofSourceSeedLabel, systemImage: "doc.text.magnifyingglass")
+                Label(review.confirmationLabel, systemImage: "hand.raised")
+            }
+            .font(theme.typography.caption)
+            .foregroundStyle(theme.colors.textSecondary)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(review.title)
+            .accessibilityValue(review.accessibilityValue)
+            .accessibilityIdentifier("create-goal.seed-review")
+            .padding(theme.spacing.lg)
+        }
     }
 
     private func clarificationCard(_ clarification: GoalClarificationState) -> some View {

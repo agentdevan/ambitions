@@ -1,7 +1,7 @@
 # Ambitions Product Depth Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control Detail Architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation; PD10 accepted Yellow as bounded Capture Correction Review implementation
+Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control Detail Architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation; PD10 accepted Yellow as bounded Capture Correction Review implementation; PD11 accepted Yellow as bounded Grow Into Goal Flow implementation
 Date: 2026-05-02
 
 ## Purpose
@@ -159,7 +159,15 @@ and local build validation. PD08 closed accepted Yellow as bounded Goal
 alternate path/tradeoff implementation after focused Goal Detail tests and
 local build validation.
 
-PD11-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
+PD11 closed accepted Yellow as bounded Capture/Goals implementation evidence
+after focused Capture/Create Goal/Goal Creation tests and local build
+validation. Create Goal now includes a presentation-derived goal seed review
+for why this might be a goal, starting position, first milestone, first
+recommended step, proof/source seed, and confirmation before promotion without
+automatic goal creation, route/raw-value changes, persistence/schema changes,
+or AOS runtime changes.
+
+PD12-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
 validation, and predecessor gates are Green or accepted Yellow.
 
 ## Anti-Sprawl Tests
