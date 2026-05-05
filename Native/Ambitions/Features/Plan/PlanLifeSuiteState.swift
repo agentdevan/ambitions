@@ -24,9 +24,76 @@ struct PlanLifeSuiteState: Sendable {
     let title: String
     let subtitle: String
     let shapes: [PlanLifeSuiteShapeState]
+    let drillDown: PlanLifeShapeDrillDownState
     let calendarBoundaryLabel: String
     let manualFallbackLabel: String
     let trustLabel: String
+
+    init(
+        title: String,
+        subtitle: String,
+        shapes: [PlanLifeSuiteShapeState],
+        drillDown: PlanLifeShapeDrillDownState = .baseline,
+        calendarBoundaryLabel: String,
+        manualFallbackLabel: String,
+        trustLabel: String
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.shapes = shapes
+        self.drillDown = drillDown
+        self.calendarBoundaryLabel = calendarBoundaryLabel
+        self.manualFallbackLabel = manualFallbackLabel
+        self.trustLabel = trustLabel
+    }
+}
+
+struct PlanLifeShapeDrillDownItemState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let value: String
+    let detail: String
+    let visualState: AmbitionVisualState
+}
+
+struct PlanLifeShapeDrillDownState: Sendable {
+    let title: String
+    let subtitle: String
+    let rhythmLabel: String
+    let pressureWeeksLabel: String
+    let milestoneLabel: String
+    let protectedTimeLabel: String
+    let freeTimeLabel: String
+    let recoverySpaceLabel: String
+    let commitmentLoadLabel: String
+    let items: [PlanLifeShapeDrillDownItemState]
+
+    static let baseline = PlanLifeShapeDrillDownState(
+        title: "Life Shape detail",
+        subtitle: "Longer-range shape stays explanatory, not event-like.",
+        rhythmLabel: "Rhythm: no pattern loaded yet.",
+        pressureWeeksLabel: "Pressure weeks: none visible.",
+        milestoneLabel: "Milestones: no active milestones visible.",
+        protectedTimeLabel: "Protected time: none marked.",
+        freeTimeLabel: "Free-time bands: manual review available.",
+        recoverySpaceLabel: "Recovery space: keep one pocket open.",
+        commitmentLoadLabel: "Commitment load: qualitative only.",
+        items: []
+    )
+
+    var accessibilityValue: String {
+        [
+            title,
+            subtitle,
+            rhythmLabel,
+            pressureWeeksLabel,
+            milestoneLabel,
+            protectedTimeLabel,
+            freeTimeLabel,
+            recoverySpaceLabel,
+            commitmentLoadLabel
+        ].joined(separator: ". ")
+    }
 }
 
 struct PlanLifeSuiteProjector: Sendable {
@@ -45,6 +112,11 @@ struct PlanLifeSuiteProjector: Sendable {
                 weekShape(weekDays: weekDays, openCaptureCount: openCaptureCount, mode: mode),
                 lifeShape(activeGoalCount: activeGoalCount)
             ],
+            drillDown: lifeShapeDrillDown(
+                weekDays: weekDays,
+                activeGoalCount: activeGoalCount,
+                openCaptureCount: openCaptureCount
+            ),
             calendarBoundaryLabel: calendarAwareness.canRequestCalendarRead ? "Calendar stays optional" : "Manual planning still works",
             manualFallbackLabel: "Manual fallback available",
             trustLabel: "No silent calendar changes"
@@ -134,5 +206,106 @@ struct PlanLifeSuiteProjector: Sendable {
             openCaptureCount == 1 ? "1 capture needs a place." : "\(openCaptureCount) captures need a place.",
             "\(weekDays.count) day\((weekDays.count == 1) ? "" : "s") included in this week."
         ]
+    }
+
+    private func lifeShapeDrillDown(
+        weekDays: [PlanElasticWeekDayState],
+        activeGoalCount: Int,
+        openCaptureCount: Int
+    ) -> PlanLifeShapeDrillDownState {
+        let pressuredDays = weekDays.filter { [.tight, .fragile, .overloaded].contains($0.level) }.count
+        let openDays = weekDays.filter { $0.level == .open }.count
+        let protectedBlocks = weekDays.flatMap(\.blocks).filter { $0.kind == .protected || $0.kind == .fixed }
+        let allBlocks = weekDays.flatMap(\.blocks)
+        let milestoneTitles = Array(allBlocks.prefix(2)).map(\.goalLabel).uniqued()
+        let pressureState: AmbitionVisualState = pressuredDays > 0 ? .warning : .selected
+        let rhythmLabel = pressuredDays > 0
+            ? "Rhythm: pressure gathers on \(pressuredDays) day\((pressuredDays == 1) ? "" : "s")."
+            : "Rhythm: the visible week has room to breathe."
+        let milestoneLabel = milestoneTitles.isEmpty
+            ? "Milestones: no active milestone needs a wider lane yet."
+            : "Milestones: \(milestoneTitles.joined(separator: ", ")) shape the longer arc."
+
+        return PlanLifeShapeDrillDownState(
+            title: "Life Shape detail",
+            subtitle: "Longer-range planning explains rhythm, pressure, recovery, and milestones without becoming an event list.",
+            rhythmLabel: rhythmLabel,
+            pressureWeeksLabel: pressuredDays == 0
+                ? "Pressure weeks: no pressured band is asking for review."
+                : "Pressure weeks: review relief before adding new commitments.",
+            milestoneLabel: milestoneLabel,
+            protectedTimeLabel: protectedBlocks.isEmpty
+                ? "Protected time: nothing protected is competing loudly."
+                : "Protected time: \(protectedBlocks.count) fixed or protected block\((protectedBlocks.count == 1) ? "" : "s") stay visible.",
+            freeTimeLabel: openDays == 0
+                ? "Free-time bands: create one smaller pocket before widening the shape."
+                : "Free-time bands: \(openDays) open day\((openDays == 1) ? "" : "s") can protect recovery.",
+            recoverySpaceLabel: openDays > 0
+                ? "Recovery space: protect open room before filling it."
+                : "Recovery space: reduce the ask before the next commitment.",
+            commitmentLoadLabel: allBlocks.isEmpty
+                ? "Commitment load: no visible commitments are crowding the shape."
+                : "Commitment load: \(allBlocks.count) visible block\((allBlocks.count == 1) ? "" : "s") across active planning.",
+            items: [
+                PlanLifeShapeDrillDownItemState(
+                    id: "life-areas",
+                    title: "Life areas",
+                    value: activeGoalCount == 0 ? "Quiet" : "\(activeGoalCount) active",
+                    detail: activeGoalCount == 0
+                        ? "Life Shape waits for active goals before drawing a wider pattern."
+                        : "Active goals are the source for longer-range shape.",
+                    visualState: activeGoalCount == 0 ? .default : .selected
+                ),
+                PlanLifeShapeDrillDownItemState(
+                    id: "pressure-weeks",
+                    title: "Pressure weeks",
+                    value: pressuredDays == 0 ? "Clear" : "\(pressuredDays) visible",
+                    detail: pressuredDays == 0
+                        ? "No pressure band needs a larger review right now."
+                        : "Pressure needs relief before the shape grows.",
+                    visualState: pressureState
+                ),
+                PlanLifeShapeDrillDownItemState(
+                    id: "milestones",
+                    title: "Milestones",
+                    value: milestoneTitles.isEmpty ? "None visible" : "\(milestoneTitles.count) visible",
+                    detail: milestoneTitles.first.map { "\($0) is the clearest current milestone source." }
+                        ?? "Milestones appear when active plans carry visible steps.",
+                    visualState: milestoneTitles.isEmpty ? .default : .selected
+                ),
+                PlanLifeShapeDrillDownItemState(
+                    id: "protected-time",
+                    title: "Protected time",
+                    value: protectedBlocks.isEmpty ? "Clear" : "\(protectedBlocks.count) protected",
+                    detail: protectedBlocks.isEmpty
+                        ? "No protected block needs a wider explanation."
+                        : "Protected time stays visible before any reflow.",
+                    visualState: protectedBlocks.isEmpty ? .success : .warning
+                ),
+                PlanLifeShapeDrillDownItemState(
+                    id: "free-time",
+                    title: "Free-time bands",
+                    value: openDays == 0 ? "Tight" : "\(openDays) open",
+                    detail: openDays == 0
+                        ? "Make room by reducing the ask."
+                        : "Open room is recovery space, not automatic capacity.",
+                    visualState: openDays == 0 ? .warning : .success
+                ),
+                PlanLifeShapeDrillDownItemState(
+                    id: "commitment-load",
+                    title: "Commitment load",
+                    value: allBlocks.isEmpty ? "Light" : "\(allBlocks.count) visible",
+                    detail: "Load stays qualitative and reviewable.",
+                    visualState: pressureState
+                )
+            ]
+        )
+    }
+}
+
+private extension Array where Element: Hashable {
+    func uniqued() -> [Element] {
+        var seen = Set<Element>()
+        return filter { seen.insert($0).inserted }
     }
 }

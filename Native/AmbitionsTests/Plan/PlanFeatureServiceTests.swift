@@ -100,6 +100,61 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertFalse(items.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("calendar grid"))
     }
 
+    func testLifeShapeDrillDownExplainsLongRangeShapeWithoutCalendarClone() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "life-shape-1", title: "Life shape one"),
+            makeWeekVisibleGoal(id: "life-shape-2", title: "Life shape two"),
+            makeWeekVisibleGoal(id: "life-shape-3", title: "Life shape three")
+        ])
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+        let drillDown = dashboard.lifeSuite.drillDown
+
+        XCTAssertEqual(drillDown.title, "Life Shape detail")
+        XCTAssertTrue(drillDown.subtitle.contains("rhythm"))
+        XCTAssertTrue(drillDown.rhythmLabel.contains("Rhythm"))
+        XCTAssertTrue(drillDown.pressureWeeksLabel.contains("Pressure weeks"))
+        XCTAssertTrue(drillDown.milestoneLabel.contains("Milestones"))
+        XCTAssertTrue(drillDown.protectedTimeLabel.contains("Protected time"))
+        XCTAssertTrue(drillDown.freeTimeLabel.contains("Free-time bands"))
+        XCTAssertTrue(drillDown.recoverySpaceLabel.contains("Recovery space"))
+        XCTAssertTrue(drillDown.commitmentLoadLabel.contains("Commitment load"))
+        XCTAssertEqual(drillDown.items.map(\.id), [
+            "life-areas",
+            "pressure-weeks",
+            "milestones",
+            "protected-time",
+            "free-time",
+            "commitment-load"
+        ])
+        XCTAssertTrue(drillDown.items.contains(where: { $0.title == "Life areas" }))
+        XCTAssertTrue(drillDown.accessibilityValue.contains("Life Shape detail"))
+
+        let copy = [
+            drillDown.subtitle,
+            drillDown.rhythmLabel,
+            drillDown.pressureWeeksLabel,
+            drillDown.milestoneLabel,
+            drillDown.protectedTimeLabel,
+            drillDown.freeTimeLabel,
+            drillDown.recoverySpaceLabel,
+            drillDown.commitmentLoadLabel
+        ].joined(separator: " ").lowercased()
+
+        XCTAssertFalse(copy.contains("calendar grid"))
+        XCTAssertFalse(copy.contains("schedule grid"))
+        XCTAssertFalse(copy.contains("overdue"))
+        XCTAssertFalse(copy.contains("failed"))
+        XCTAssertFalse(copy.contains("score"))
+        XCTAssertFalse(copy.contains("confidence"))
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+    }
+
     func testF11DayAndWeekShapeExposeVisibleFactsWithoutReplanning() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])

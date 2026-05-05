@@ -1,7 +1,7 @@
 # Ambitions Product Depth Canon, Inventory, And Ownership Map
 <!-- markdownlint-disable MD013 -->
 
-Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation; PD10 accepted Yellow as bounded Capture Correction Review implementation
+Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation; PD10 accepted Yellow as bounded Capture Correction Review implementation; PD11 accepted Yellow as bounded Grow Into Goal implementation; PD12 accepted Yellow as bounded Plan Reflow Decision implementation; PD13 accepted Yellow as bounded Plan Recovery and Pressure Review implementation; PD14 Green as bounded Life Shape Drill-Down implementation
 Date: 2026-05-04
 
 ## Purpose
@@ -97,7 +97,7 @@ stacked-card top-level composition.
 | Grow into Goal | Capture / Goals | PD11 | Candidate remains gated | PD09/PD10 Green, PX03/PX04/PX15, CS navigation if route touched, AOS goal path if runtime touched | Candidate items must not be silently upgraded. |
 | Reflow Decision depth | Plan | PD12 | Complete / accepted Yellow after validation and commit | PX05/PX07/PX08, SI08/SI10/SI13/SI17, ME Plan, AOS if commitment/runtime logic touched | User-owned, non-silent consequence review; no calendar write, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
 | Pressure review | Plan | PD13 | Complete / accepted Yellow after validation and commit | PD12 accepted Yellow, accessibility/copy, Plan pressure evidence | Plan pressure/recovery review now explains overload, recovery space, protected-time conflict, late-start adjustment, recovery-day review, and qualitative capacity without shame framing, fake precision, calendar writes, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
-| Month LifeShape Lens | Plan | PD14 | Candidate remains high-risk | PX05/PX10/PX12, SI08/SI12/SI13/SI17, ME Plan/PlanScreen | Highest calendar-clone risk; capacity lens only. |
+| Month LifeShape Lens | Plan | PD14 | Complete / Green after validation and commit | PX05/PX10/PX12, SI08/SI12/SI13/SI17, ME Plan/PlanScreen | Life Shape drill-down now explains life areas, pressure weeks, milestones, protected time, free-time bands, recovery space, commitment load, and long-range rhythm from existing Plan state without calendar clone behavior, event-grid posture, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
 | Trust history and receipts center | You | PD15 | Candidate implementation owner mapped | PX06/PX08, SI10/SI11/SI13/SI14, ME You/Profile, privacy/trust | Receipt is consequence/reversibility, not feed. |
 | Schedule, availability, defaults | You | PD16 | Candidate remains gated | PX06/PX11, REC claim boundaries, privacy/permission copy, CS if route/default touched | Plan-owned calendar permission; no unsupported integration claim. |
 | Cross-surface proof/review | Cross-surface | PD17 | Candidate remains gated | Earlier PD proof/reflow/You history, PX15, CS route/navigation, AOS proof if data touched | Must not create new review tab or activity feed. |
@@ -132,7 +132,8 @@ stacked-card top-level composition.
 | PD11 | Complete / accepted Yellow after validation and commit | Bounded Capture/Goals implementation; Create Goal surfaces a goal seed review with why-this-might-be-a-goal, starting position, first milestone, first recommended step, proof/source seed, and explicit confirmation before promotion without automatic goal creation, route/raw-value changes, persistence/schema changes, or AOS runtime changes. |
 | PD12 | Complete / accepted Yellow after validation and commit | Bounded Plan implementation; Reflow Decision options now name what changed, why, impacted steps, capacity impact, protected-time impact, and accept/edit/decline choices without silent rearrangement, calendar writes, persistence/schema changes, route/raw-value changes, or AOS runtime changes. |
 | PD13 | Complete / accepted Yellow after validation and commit | Bounded Plan implementation; Pressure/recovery review now names overload relief, recovery space, protected-time conflict, late-start adjustment, recovery-day review, and qualitative capacity review without shame framing, fake precision, calendar writes, persistence/schema changes, route/raw-value changes, or AOS runtime changes. |
-| PD14-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
+| PD14 | Complete / Green after validation and commit | Bounded Plan implementation; Life Shape drill-down now explains life areas, pressure weeks, milestones, protected time, free-time bands, recovery space, commitment load, and long-range rhythm without calendar clone behavior, dense event-grid posture, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
+| PD15-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
 | Global train outside PD | Stopped / not resumed | Requires its own explicit approval and gate path. |
 
 ## Conflict Register
@@ -143,7 +144,7 @@ stacked-card top-level composition.
 | MissionControlTimeSpine order mismatch / unknown | Green for Goal Detail visible lane order; internal compatibility preserved | Goals / PD05 | PD05 reconciled visible Goal Detail Mission Control lane order to Completed/Now/Friction/Next/Horizon and kept internal lane-kind compatibility cases intact. Remaining future Goals depth must preserve this order. |
 | User-facing copy boundary | Yellow | Cross-surface copy / PD implementation batches | Preserve staged remediation model from Batch 1C. Future PD batches must avoid forbidden copy and run copy scans. |
 | Step Session depth previously unknown | Accepted Yellow | Today / PD03 | PD03 adds bounded implementation proof; no broader Step Session persistence/runtime claim is made. |
-| Month LifeShape calendar-clone risk | Yellow | Plan / PD14 | Preserve; PD14 must prove capacity-lens behavior. |
+| Month LifeShape calendar-clone risk | Green for bounded PD14 presentation; future Plan expansion remains Yellow | Plan / PD14 | PD14 proves a capacity-lens Life Shape drill-down from existing Plan state. Future Month/LifeShape expansion must preserve the anti-calendar-clone boundary. |
 | You / Privacy / Memory / Receipts density | Yellow | You / PD15-PD16 | Preserve copy-density and trust/control-first guardrails. |
 | Candidate items | Yellow | Object owners | PD08 deepens the Goal alternate path/tradeoff detail as a bounded presentation layer. Other Candidate items remain Candidate until a named batch explicitly finalizes or defers them. |
 | Broad app implementation | Red | Cross-surface | Remains Red and unauthorized. |
@@ -179,6 +180,7 @@ review presentation depth. PD10 proves only bounded Capture correction review
 presentation depth. PD11 proves only bounded Capture/Goals grow-into-goal seed
 review depth. PD12 proves only bounded Plan Reflow Decision presentation depth.
 PD13 proves only bounded Plan pressure/recovery review presentation depth.
+PD14 proves only bounded Plan Life Shape drill-down presentation depth.
 These batches do not prove later PD readiness beyond
 continuation eligibility, release readiness, TestFlight readiness, App Store
 readiness, physical-device proof, public accessibility conformance, signed

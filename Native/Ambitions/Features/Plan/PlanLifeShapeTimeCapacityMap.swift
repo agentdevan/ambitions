@@ -126,6 +126,8 @@ struct PlanLifeShapeTimeCapacityMap: View {
                     PlanLifeShapeSelectedBandPanel(item: selectedItem, revealsPressure: revealsPressure)
                 }
 
+                PlanLifeShapeDrillDownPanel(drillDown: suite.drillDown)
+
                 QuietActionButton(
                     revealsPressure ? "Hide pressure" : "Reveal pressure",
                     icon: revealsPressure ? "eye.slash" : "waveform.path"
