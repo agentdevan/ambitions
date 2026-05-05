@@ -1,7 +1,7 @@
 # Ambitions Product Depth Canon, Inventory, And Ownership Map
 <!-- markdownlint-disable MD013 -->
 
-Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation; PD10 accepted Yellow as bounded Capture Correction Review implementation; PD11 accepted Yellow as bounded Grow Into Goal implementation; PD12 accepted Yellow as bounded Plan Reflow Decision implementation; PD13 accepted Yellow as bounded Plan Recovery and Pressure Review implementation; PD14 Green as bounded Life Shape Drill-Down implementation
+Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation; PD10 accepted Yellow as bounded Capture Correction Review implementation; PD11 accepted Yellow as bounded Grow Into Goal implementation; PD12 accepted Yellow as bounded Plan Reflow Decision implementation; PD13 accepted Yellow as bounded Plan Recovery and Pressure Review implementation; PD14 Green as bounded Life Shape Drill-Down implementation; PD15 Green as bounded You Trust History implementation
 Date: 2026-05-04
 
 ## Purpose
@@ -98,7 +98,7 @@ stacked-card top-level composition.
 | Reflow Decision depth | Plan | PD12 | Complete / accepted Yellow after validation and commit | PX05/PX07/PX08, SI08/SI10/SI13/SI17, ME Plan, AOS if commitment/runtime logic touched | User-owned, non-silent consequence review; no calendar write, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
 | Pressure review | Plan | PD13 | Complete / accepted Yellow after validation and commit | PD12 accepted Yellow, accessibility/copy, Plan pressure evidence | Plan pressure/recovery review now explains overload, recovery space, protected-time conflict, late-start adjustment, recovery-day review, and qualitative capacity without shame framing, fake precision, calendar writes, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
 | Month LifeShape Lens | Plan | PD14 | Complete / Green after validation and commit | PX05/PX10/PX12, SI08/SI12/SI13/SI17, ME Plan/PlanScreen | Life Shape drill-down now explains life areas, pressure weeks, milestones, protected time, free-time bands, recovery space, commitment load, and long-range rhythm from existing Plan state without calendar clone behavior, event-grid posture, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
-| Trust history and receipts center | You | PD15 | Candidate implementation owner mapped | PX06/PX08, SI10/SI11/SI13/SI14, ME You/Profile, privacy/trust | Receipt is consequence/reversibility, not feed. |
+| Trust history and receipts center | You | PD15 | Complete / Green after validation and commit | PX06/PX08, SI10/SI11/SI13/SI14, ME You/Profile, privacy/trust | You/Profile now includes a Trust History Center for receipts, proof, changes, source review, privacy labels, and automation boundaries. Receipt remains consequence/reversibility, not feed. |
 | Schedule, availability, defaults | You | PD16 | Candidate remains gated | PX06/PX11, REC claim boundaries, privacy/permission copy, CS if route/default touched | Plan-owned calendar permission; no unsupported integration claim. |
 | Cross-surface proof/review | Cross-surface | PD17 | Candidate remains gated | Earlier PD proof/reflow/You history, PX15, CS route/navigation, AOS proof if data touched | Must not create new review tab or activity feed. |
 | Product Depth handoff | Cross-surface | PD18 | Handoff owner mapped | PD01-PD17 resolved or deferred | Must not claim release/app implementation beyond evidence. |
@@ -133,7 +133,8 @@ stacked-card top-level composition.
 | PD12 | Complete / accepted Yellow after validation and commit | Bounded Plan implementation; Reflow Decision options now name what changed, why, impacted steps, capacity impact, protected-time impact, and accept/edit/decline choices without silent rearrangement, calendar writes, persistence/schema changes, route/raw-value changes, or AOS runtime changes. |
 | PD13 | Complete / accepted Yellow after validation and commit | Bounded Plan implementation; Pressure/recovery review now names overload relief, recovery space, protected-time conflict, late-start adjustment, recovery-day review, and qualitative capacity review without shame framing, fake precision, calendar writes, persistence/schema changes, route/raw-value changes, or AOS runtime changes. |
 | PD14 | Complete / Green after validation and commit | Bounded Plan implementation; Life Shape drill-down now explains life areas, pressure weeks, milestones, protected time, free-time bands, recovery space, commitment load, and long-range rhythm without calendar clone behavior, dense event-grid posture, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
-| PD15-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
+| PD15 | Complete / Green after validation and commit | Bounded You implementation; Trust History Center surfaces receipts, proof, changes, source review, privacy labels, and automation boundaries from existing local state without feed posture, vanity analytics, route/raw-value changes, persistence/schema, sync/account claims, or AOS/LDI runtime changes. |
+| PD16-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
 | Global train outside PD | Stopped / not resumed | Requires its own explicit approval and gate path. |
 
 ## Conflict Register
@@ -181,6 +182,7 @@ presentation depth. PD11 proves only bounded Capture/Goals grow-into-goal seed
 review depth. PD12 proves only bounded Plan Reflow Decision presentation depth.
 PD13 proves only bounded Plan pressure/recovery review presentation depth.
 PD14 proves only bounded Plan Life Shape drill-down presentation depth.
+PD15 proves only bounded You Trust History presentation depth.
 These batches do not prove later PD readiness beyond
 continuation eligibility, release readiness, TestFlight readiness, App Store
 readiness, physical-device proof, public accessibility conformance, signed

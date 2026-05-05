@@ -298,6 +298,52 @@ struct ProfileReceiptAuditState: Sendable, Equatable {
     let footer: String
 }
 
+enum ProfileTrustHistoryCategory: String, Sendable, Equatable, CaseIterable {
+    case receipts
+    case proof
+    case changes
+    case sourceReview
+    case privacy
+    case automation
+
+    var title: String {
+        switch self {
+        case .receipts: "Receipts"
+        case .proof: "Proof"
+        case .changes: "Changes"
+        case .sourceReview: "Source Review"
+        case .privacy: "Privacy"
+        case .automation: "Automation"
+        }
+    }
+}
+
+struct ProfileTrustHistoryItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let category: ProfileTrustHistoryCategory
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let reviewLabel: String
+    let privacyLabel: String
+    let reversibilityLabel: String
+    let state: AmbitionVisualState
+}
+
+struct ProfileTrustHistoryCenterState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let items: [ProfileTrustHistoryItem]
+    let footer: String
+
+    static let empty = ProfileTrustHistoryCenterState(
+        title: "Trust History",
+        subtitle: "Receipts, proof, source review, changes, privacy, and automation boundaries stay reviewable from You.",
+        items: [],
+        footer: "This is a review surface, not a feed. Detail stays behind the owning surface."
+    )
+}
+
 struct ProfileReviewsState: Sendable, Equatable {
     let projection: ReviewsV1Projection
     let title: String
@@ -360,6 +406,7 @@ struct ProfileDashboard: Sendable, Equatable {
     let assumptionCorrections: ProfileAssumptionCorrectionState
     let automationBoundary: ProfileAutomationBoundaryState
     let receiptAudit: ProfileReceiptAuditState
+    let trustHistoryCenter: ProfileTrustHistoryCenterState
     let reviews: ProfileReviewsState
     let appearanceStudio: ProfileAppearanceStudioState
     let trustCenter: ProfileTrustCenterState
@@ -369,4 +416,44 @@ struct ProfileDashboard: Sendable, Equatable {
     let accountSection: ProfileSectionGroup
     let notificationAuthorization: ProfileNotificationAuthorization
     let preferences: ProfilePreferencesState
+
+    init(
+        hero: ProfileHeroState,
+        systemCenter: ProfileSystemCenterState,
+        controlRoom: ProfileControlRoomState,
+        constitution: ProfileConstitutionState,
+        memoryControls: ProfileMemoryControlState,
+        assumptionCorrections: ProfileAssumptionCorrectionState,
+        automationBoundary: ProfileAutomationBoundaryState,
+        receiptAudit: ProfileReceiptAuditState,
+        trustHistoryCenter: ProfileTrustHistoryCenterState = .empty,
+        reviews: ProfileReviewsState,
+        appearanceStudio: ProfileAppearanceStudioState,
+        trustCenter: ProfileTrustCenterState,
+        contextVault: ProfileContextVaultState,
+        integrationsSection: ProfileSectionGroup,
+        defaultsSection: ProfileSectionGroup,
+        accountSection: ProfileSectionGroup,
+        notificationAuthorization: ProfileNotificationAuthorization,
+        preferences: ProfilePreferencesState
+    ) {
+        self.hero = hero
+        self.systemCenter = systemCenter
+        self.controlRoom = controlRoom
+        self.constitution = constitution
+        self.memoryControls = memoryControls
+        self.assumptionCorrections = assumptionCorrections
+        self.automationBoundary = automationBoundary
+        self.receiptAudit = receiptAudit
+        self.trustHistoryCenter = trustHistoryCenter
+        self.reviews = reviews
+        self.appearanceStudio = appearanceStudio
+        self.trustCenter = trustCenter
+        self.contextVault = contextVault
+        self.integrationsSection = integrationsSection
+        self.defaultsSection = defaultsSection
+        self.accountSection = accountSection
+        self.notificationAuthorization = notificationAuthorization
+        self.preferences = preferences
+    }
 }

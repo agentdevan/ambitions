@@ -1,16 +1,16 @@
 # Current Run State
 
-Date: 2026-05-04
+Date: 2026-05-05
 Active train: Product Depth
-Current batch: PD14 complete / Green
-Scope: PD14 deepened only the existing Plan LifeShape presentation. It added a
-Plan-owned Life Shape drill-down that explains life areas, pressure weeks,
-milestones, protected time, free-time bands, recovery space, commitment load,
-and long-range rhythm from existing visible Plan state. It did not add a
-calendar clone, dense event grid, silent rearrangement, calendar writes,
-persistence/schema changes, sync/auth/network, AI/LDI runtime, route/raw-value
-changes, CI/config, dependencies, release/platform claims, broad app
-implementation, or Candidate finalization.
+Current batch: PD15 complete / Green
+Scope: PD15 deepened only the existing You/Profile Personal System Center
+trust/history seam. It added a You-owned Trust History Center that distinguishes
+receipts, proof, changes, source review, privacy labels, and automation
+boundaries from existing local receipts, proof, event ledger, permission, and
+safe automation policy state. It did not add a feed, vanity analytics
+dashboard, route/raw-value change, persistence/schema change, sync/auth/network,
+AI/LDI runtime, account/cloud behavior, CI/config, dependencies, release/platform
+claims, broad app implementation, or Candidate finalization.
 Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:
@@ -123,6 +123,15 @@ accessibility/release claim change was made.
 - CS02C-CS06C deferred truth remains preserved.
 
 ## Current Validation Result
+
+PD15 result: PASS / GREEN.
+`docs/audits/pd15-you-trust-history-receipts-report.md` records the bounded
+You Trust History Center, receipt/proof/change/source-review/privacy/automation
+categories, non-feed posture, privacy-safe labels, accessibility summary, and
+no-runtime/no-route/no-persistence contract. Focused Profile tests passed.
+Accepted advisory backlog remains limited to existing doc-QA/file-size/static
+scan noise and human/device/rendered accessibility proof not being part of this
+batch's validation evidence.
 
 PD14 result: PASS / GREEN.
 `docs/audits/pd14-life-shape-drilldowns-report.md` records the bounded Plan

@@ -207,6 +207,7 @@ private struct ProfileRootDetailSheet: View {
             )
             ProfileAutomationBoundaryCard(boundary: dashboard.automationBoundary)
         case .receiptsHistory:
+            ProfileTrustHistoryCenterCard(history: dashboard.trustHistoryCenter)
             ProfileSectionCard(
                 eyebrow: "Receipts",
                 section: ProfileSectionGroup(

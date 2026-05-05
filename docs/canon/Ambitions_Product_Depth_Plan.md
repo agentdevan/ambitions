@@ -1,7 +1,7 @@
 # Ambitions Product Depth Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control Detail Architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation; PD10 accepted Yellow as bounded Capture Correction Review implementation; PD11 accepted Yellow as bounded Grow Into Goal Flow implementation; PD12 accepted Yellow as bounded Plan Reflow Decision Depth implementation; PD13 accepted Yellow as bounded Plan Recovery and Pressure Review implementation; PD14 Green as bounded Life Shape Drill-Down implementation
+Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control Detail Architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation; PD10 accepted Yellow as bounded Capture Correction Review implementation; PD11 accepted Yellow as bounded Grow Into Goal Flow implementation; PD12 accepted Yellow as bounded Plan Reflow Decision Depth implementation; PD13 accepted Yellow as bounded Plan Recovery and Pressure Review implementation; PD14 Green as bounded Life Shape Drill-Down implementation; PD15 Green as bounded You Trust History implementation
 Date: 2026-05-02
 
 ## Purpose
@@ -60,7 +60,8 @@ Capture placement review implementation. PD10 is accepted Yellow as bounded
 Capture correction review implementation. PD11 is accepted Yellow as bounded
 Capture/Goals grow-into-goal implementation. PD12 and PD13 are accepted Yellow
 as bounded Plan depth implementation. PD14 is Green as bounded Plan Life Shape
-drill-down implementation. Later Product Depth implementation
+drill-down implementation. PD15 is Green as bounded You Trust History
+implementation. Later Product Depth implementation
 remains blocked until each individual PD implementation batch runs, validates,
 commits, and closes.
 
@@ -192,7 +193,13 @@ calendar clone behavior, event-grid posture, silent rearrangement, calendar
 writes, persistence/schema changes, route/raw-value changes, or AOS runtime
 changes.
 
-PD15-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
+PD15 closed Green as bounded You implementation evidence only. It adds a Trust
+History Center under You/Profile for receipts, proof, changes, source review,
+privacy labels, and automation boundaries from existing local state without
+feed posture, vanity analytics, route/raw-value changes, persistence/schema
+changes, sync/account claims, or AOS/LDI runtime changes.
+
+PD16-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
 validation, and predecessor gates are Green or accepted Yellow.
 
 ## Anti-Sprawl Tests

@@ -623,6 +623,89 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-signals" && $0.detail.contains("1 recent ledger events") }))
     }
 
+    func testPD15TrustHistoryCenterDistinguishesReceiptsProofSourceChangesPrivacyAndAutomation() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "proof-pd15",
+                goalID: "goal-pd15",
+                stepID: "step-pd15",
+                evidenceKind: .stepCompleted,
+                source: .manual,
+                capturedAt: "2026-05-05T04:00:00Z",
+                progressDelta: nil,
+                confidenceDelta: nil,
+                minutesInvested: 25,
+                note: "Saved one local proof point."
+            )
+        ])
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-pd15-review",
+                kind: .planRecovered,
+                occurredAt: "2026-05-05T04:01:00Z",
+                source: .plan,
+                title: "Plan recovery recorded",
+                summary: "A smaller plan shape was kept for review.",
+                tone: .recovering,
+                trust: EventLedgerTrustMetadata(isUserConfirmed: true, requiresReview: true),
+                privacy: .privateUserText,
+                localOnly: true
+            )
+        )
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let history = dashboard.trustHistoryCenter
+        let categories = Set(history.items.map(\.category))
+        let visibleCopy = ([history.title, history.subtitle, history.footer] + history.items.flatMap {
+            [$0.title, $0.summary, $0.sourceLabel, $0.reviewLabel, $0.privacyLabel, $0.reversibilityLabel]
+        }).joined(separator: " ")
+
+        XCTAssertEqual(history.title, "Trust History")
+        XCTAssertTrue(categories.isSuperset(of: Set(ProfileTrustHistoryCategory.allCases)))
+        XCTAssertTrue(history.items.contains(where: {
+            $0.category == .receipts &&
+            $0.sourceLabel.hasPrefix("Source:") &&
+            ($0.reversibilityLabel.localizedCaseInsensitiveContains("undo") || $0.reviewLabel.localizedCaseInsensitiveContains("review"))
+        }))
+        XCTAssertTrue(history.items.contains(where: {
+            $0.category == .proof &&
+            $0.summary.contains("1 proof records") &&
+            $0.summary.contains("without turning proof into performance copy")
+        }))
+        XCTAssertTrue(history.items.contains(where: {
+            $0.category == .changes &&
+            $0.sourceLabel == "Source: Plan" &&
+            $0.privacyLabel == "Private detail hidden" &&
+            $0.reviewLabel == "Review source"
+        }))
+        XCTAssertTrue(history.items.contains(where: {
+            $0.category == .sourceReview &&
+            $0.privacyLabel == "Review boundary only" &&
+            $0.reviewLabel == "Review source"
+        }))
+        XCTAssertTrue(history.items.contains(where: {
+            $0.category == .privacy &&
+            $0.reversibilityLabel == "No destructive action from this center"
+        }))
+        XCTAssertTrue(history.items.contains(where: {
+            $0.category == .automation &&
+            $0.summary.contains("confirmation-gated or blocked") &&
+            $0.privacyLabel == "Permission posture only"
+        }))
+        XCTAssertTrue(history.footer.contains("not a feed"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("activity feed"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("notification feed"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI verified"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI certification"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("productivity loss"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("surveillance"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("trophy"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("achievement"))
+    }
+
     func testTopLevelShellStillExcludesLegacyProfileInsightsAndHabitsTabs() {
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))

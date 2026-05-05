@@ -193,6 +193,13 @@ private extension RepositoryBackedProfileService {
             assumptionCorrections: makeAssumptionCorrections(snapshot: snapshot),
             automationBoundary: makeAutomationBoundary(safetySamples: safetySamples),
             receiptAudit: makeReceiptAudit(snapshot: snapshot, receipts: policyReceipts),
+            trustHistoryCenter: makeTrustHistoryCenter(
+                snapshot: snapshot,
+                receipts: policyReceipts,
+                safetySamples: safetySamples,
+                calendarAuthorization: calendarAuthorization,
+                notificationStatus: notificationStatus
+            ),
             reviews: reviews,
             appearanceStudio: ProfileAppearanceStudioState(
                 title: "Appearance Studio",
@@ -1544,6 +1551,25 @@ private extension RepositoryBackedProfileService {
                 )
             ],
             footer: "Receipts are exposed here as trust posture, not as a full history browser."
+        )
+    }
+
+    func makeTrustHistoryCenter(
+        snapshot: Snapshot,
+        receipts: [ActionReceipt],
+        safetySamples: SafetyBoundarySamples,
+        calendarAuthorization: CalendarRemindersAuthorizationState,
+        notificationStatus: ProfileNotificationAuthorization
+    ) -> ProfileTrustHistoryCenterState {
+        ProfileTrustHistoryProjector().project(
+            ProfileTrustHistoryProjector.Input(
+                receipts: ActionReceiptProjection(receipts: receipts).displaySummaries(limit: 2),
+                recentEvents: Array(snapshot.eventLedger.prefix(2)),
+                proofCount: snapshot.evidence.count,
+                sourceReviewCount: snapshot.eventLedger.filter(\.trust.requiresReview).count + snapshot.teachingSignals.count,
+                automationReviewCount: safetySamples.confirmationRequired + (safetySamples.destructiveBlocked ? 1 : 0),
+                permissionSummary: "Notifications \(notificationStatus.statusLabel); calendar \(calendarAuthorizationLabel(calendarAuthorization))."
+            )
         )
     }
 
