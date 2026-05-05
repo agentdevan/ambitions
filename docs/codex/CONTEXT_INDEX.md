@@ -41,6 +41,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   PFC work that touches life visibility, recall, commitment memory, option
   value, weekly sweep, recommendations, proof, paths, or external surfaces.
   FL02 is complete Green as Life Inventory object model source truth. FL03 is
+  complete Green as Commitment Memory / Open Loop Registry source truth. FL04 is
   the next eligible global batch.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.

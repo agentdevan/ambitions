@@ -201,6 +201,45 @@ Commitment Memory must distinguish:
 - parked commitments
 - waiting commitments
 
+#### FL03 Commitment Memory Contract
+
+Commitment Memory is the Found Life contract for promises, obligations,
+follow-ups, and remembered life threads. It is not surveillance and not an
+automatic obligation engine.
+
+Commitment Memory records must preserve these fields:
+
+| Field | Meaning | Rule |
+| --- | --- | --- |
+| `commitmentId` | Stable local identity for the remembered commitment. | Must not imply cloud identity unless implemented. |
+| `commitmentKind` | Promise, errand, follow-up, birthday/event, relationship attention, family attention, work thread, home thread, money/career review, project loop, parked idea, or dream follow-up. | Must remain correctable by the user. |
+| `commitmentState` | Active, parked, waiting, blocked, needs review, needs recovery, intentionally dropped, ready to revive, converted to goal, converted to one-off step, completed, or archived. | No shame or binary failure state. |
+| `confirmationState` | User-confirmed, inferred candidate, imported, source-backed, rejected, or needs review. | Inferred candidate cannot become fact or mutate plans silently. |
+| `sourceState` | Fresh, stale, conflicted, missing source, private source, or review required. | Source is a freshness/conflict/review boundary. |
+| `privacyClass` | Standard, private, sensitive, redacted in previews, external-surface blocked, or user-only review. | Sensitive commitments cannot leak externally by default. |
+| `closurePath` | Complete, park, wait, recover, drop intentionally, revive, convert to goal, convert to one-off step, or keep under review. | Closure must be receipt-backed when it changes user-visible state. |
+| `receiptRequirement` | None, lightweight receipt, proof receipt, correction receipt, recovery receipt, or private receipt. | Receipts are consequence and reversibility, not notifications. |
+
+Commitment Memory must separate:
+
+- user-confirmed commitments
+- inferred possible commitments
+- imported/sourced commitments
+- private commitments
+- stale commitments
+- completed commitments
+- intentionally dropped commitments
+- parked commitments
+- waiting commitments
+- blocked commitments
+- commitments that need recovery
+
+Future implementation rule:
+
+No commitment may move from candidate to active, from parked to active, or from
+private/sensitive to visible without explicit source/review path and a user
+confirmation or batch-scoped permission model.
+
 ### 3.3 Open Loop Registry
 
 A registry for unfinished threads.
@@ -220,6 +259,45 @@ Open loops can be:
 - converted into one-off step
 
 The registry must remove shame. Its job is closure and clarity, not guilt.
+
+#### FL03 Open Loop Registry Contract
+
+Open Loop Registry is the Found Life contract for unfinished threads. It helps
+the user see what still exists without making every unfinished thing urgent.
+
+Open loops can be:
+
+- active
+- parked
+- waiting
+- blocked
+- needs review
+- needs recovery
+- no longer worth pursuing
+- abandoned intentionally
+- ready to revive
+- converted into goal
+- converted into one-off step
+- completed
+- archived
+
+Open Loop Registry must provide a non-shaming closure ladder:
+
+| Closure option | Meaning | Required boundary |
+| --- | --- | --- |
+| Complete | The loop is actually done. | Proof or user confirmation when consequential. |
+| Park | The loop still matters but not now. | Review date or review reason when useful. |
+| Wait | The loop depends on someone/something else. | Source or waiting reason. |
+| Recover | The loop slipped but still matters. | Non-shaming recovery copy. |
+| Drop intentionally | The user chooses to stop carrying it. | Reversibility or receipt when consequential. |
+| Revive | A parked/dropped loop becomes relevant again. | User confirmation. |
+| Convert to goal | The loop is large enough to become a goal. | Explicit confirmation; no silent upgrade. |
+| Convert to one-off step | The loop is small enough for Today/Plan. | Explicit placement or review path. |
+| Archive | The loop remains searchable/reviewable but inactive. | Privacy/source metadata preserved. |
+
+Open loops must not be rendered as a feed, scorecard, overdue list, shame
+ritual, or productivity-loss report. They are clarity objects. The default
+surface should show only what the user can review or act on safely.
 
 ### 3.4 Option Value Engine
 

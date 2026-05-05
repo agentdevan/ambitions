@@ -1,7 +1,7 @@
 # FL01-FL06 Found Life Layer Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; FL01-FL02 complete Green, FL03 queued.
+Status: Active-scope planning truth; FL01-FL03 complete Green, FL04 queued.
 Date: 2026-05-05
 Train code: FL
 
@@ -107,6 +107,8 @@ Evidence:
 
 ### FL03 — Commitment Memory / Open Loop Registry
 
+Status: Complete / Green on 2026-05-05.
+
 Type: Docs/domain contract.
 Owner: Memory / Capture / Today / You.
 Depends on: FL02.
@@ -117,6 +119,11 @@ Acceptance:
 - Commitment states include active, parked, waiting, blocked, needs review, needs recovery, intentionally dropped, ready to revive, converted to goal, converted to one-off step.
 - User-confirmed, inferred, imported, private, stale, and completed commitments are separate.
 - Closure is non-shaming and receipt-backed.
+
+Evidence:
+
+- `docs/codex/batches/FL03_Commitment_Memory_Open_Loop_Registry_Prompt.md`
+- `docs/audits/fl03-commitment-memory-open-loop-registry-report.md`
 
 ### FL04 — Searchable Life Recall Contract
 

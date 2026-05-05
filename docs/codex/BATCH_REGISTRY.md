@@ -108,7 +108,13 @@ Current 4.0 status:
   Plan, You, Memory Lens, AmbitionsOS, and LDI without creating a dashboard,
   sixth tab, runtime memory, persistence/schema, sync/cloud, or release/legal
   claim.
-- Queued source truth: FL03-FL06 Found Life Layer docs/domain-contract batches
+- Complete / Green: FL03 Commitment Memory / Open Loop Registry is complete as
+  docs-only Found Life domain-contract evidence. It defines commitment memory
+  fields, candidate/user-confirmed/imported/source-backed/private/stale/
+  completed/parked/waiting/blocked/recovery-needed separation, open-loop states,
+  and a non-shaming closure ladder without hidden automation, runtime memory,
+  persistence/schema, sync/cloud, or release/legal claim.
+- Queued source truth: FL04-FL06 Found Life Layer docs/domain-contract batches
   are queued before further FCP implementation. They authorize no production
   Swift, route/raw-value, persistence/schema, sync/cloud, AI/AOS/LDI runtime,
   legal/privacy, release, workflow/signing/CI, or public accessibility claim by

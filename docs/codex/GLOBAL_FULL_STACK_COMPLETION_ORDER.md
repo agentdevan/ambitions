@@ -90,7 +90,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 20. FL02 Life Inventory Object Model. Completed Green as docs-only life-thread
     object model, owner map, privacy classification, freshness/source boundary,
     and five-tab surface mapping on 2026-05-05.
-21. FL03 Commitment Memory / Open Loop Registry.
+21. FL03 Commitment Memory / Open Loop Registry. Completed Green as docs-only
+    commitment memory, open-loop state, non-shaming closure ladder, and
+    receipt-boundary contract on 2026-05-05.
 22. FL04 Searchable Life Recall Contract.
 23. FL05 Option Value / Pivot Preservation Model.
 24. FL06 Weekly Life Sweep Ritual.

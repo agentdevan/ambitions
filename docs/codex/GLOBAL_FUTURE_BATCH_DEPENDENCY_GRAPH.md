@@ -41,7 +41,8 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - FL01 is complete Green as Found Life product-soul source truth with accepted
   Yellow order reconciliation because FCP17 landed before the remote Found Life
   insertion. FL02 is complete Green as Life Inventory object model source truth.
-  FL03-FL06 now depend on FL02 and must run before any further FCP,
+  FL03 is complete Green as Commitment Memory / Open Loop Registry source truth.
+  FL04-FL06 now depend on FL03 and must run before any further FCP,
   AOS, LDI, or PFC work that touches life visibility, recall, commitment
   memory, option value, weekly sweep, recommendations, proof, paths, or
   external surfaces.
