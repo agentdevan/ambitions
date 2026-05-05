@@ -21,6 +21,25 @@ Locked tagline:
 
 This tagline is not decorative marketing. It is the operating promise for Ambitions and AmbitionsOS.
 
+### FL01 Product Soul Lock
+
+FL01 locks this section as active product-soul source truth for later FCP, PFC, AOS, LDI, and Found Life work.
+
+The founder backstory must remain product truth, not marketing fluff:
+
+- Ambitions serves people who can have high drive and scattered continuity at the same time.
+- The "sports car with no GPS" metaphor describes high potential without enough life navigation; it must not become a narrow persona that excludes calmer or more guided users.
+- The product promise is to help the user become found in life while still enjoying today, not to shame them into productivity.
+- Found Life is a layer under Today, Goals, Capture, Plan, You, AmbitionsOS, and future source-grounded recall; it is never a sixth top-level tab.
+- Found Life must hold context safely and reveal only what the user needs now.
+
+No-drift rules:
+
+- Do not turn Found Life into an all-at-once dashboard, life database, generic notes app, task dump, diary, CRM, LMS, career website, or memory chatbot.
+- Do not present inferred memory, inferred commitments, career direction, relationship context, family context, health-adjacent context, or money context as fact without source, freshness, privacy, and review boundaries.
+- Do not frame open loops, parked ambitions, abandoned ideas, or missed commitments as failure.
+- Do not claim runtime memory, searchable recall, sync, AOS, LDI, legal/privacy compliance, App Store readiness, or release readiness from Found Life docs alone.
+
 ## 1. Core Thesis
 
 Ambitions is not only for executing goals. Ambitions is for becoming found in life.

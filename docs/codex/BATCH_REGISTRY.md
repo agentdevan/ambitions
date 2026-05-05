@@ -91,6 +91,21 @@ Current 4.0 status:
   Schedule & Availability detail card, and focused Profile tests without
   route/raw-value, persistence/schema, permission-request, calendar-write,
   sync/account, release, legal/privacy, or public accessibility claims.
+- Complete / Green with accepted Yellow order note: FL01 Founder Backstory /
+  Product Soul Lock is complete as docs-only Found Life product-soul source
+  truth. It locks the tagline `Find your life. Keep your promises. Build your
+  future. Enjoy today.`, records Found Life as life visibility and life
+  continuity under Today / Goals / Capture / Plan / You, and prevents
+  dashboard, shame, surveillance, generic memory chatbot, and unsupported
+  runtime/release/legal/privacy claim drift. Accepted Yellow: the remote Found
+  Life source landed after FCP17 had already completed; FL02-FL06 now run before
+  any further FCP/AOS/LDI/PFC work, and FCP17 may receive later compatibility
+  review if FL02-FL06 changes availability assumptions.
+- Queued source truth: FL02-FL06 Found Life Layer docs/domain-contract batches
+  are queued before further FCP implementation. They authorize no production
+  Swift, route/raw-value, persistence/schema, sync/cloud, AI/AOS/LDI runtime,
+  legal/privacy, release, workflow/signing/CI, or public accessibility claim by
+  themselves.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as active implementation truth. FCP implementation has started with FCP17.
   FCP targets

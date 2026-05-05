@@ -2,16 +2,16 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP17 Schedule / Availability / Defaults Center Green;
-full-stack order selects FCP06 Receipt Drawer / Trust Layer next if continuation
-gates allow.
-Scope: FCP17 completed as bounded You-owned Availability Center implementation
-after PFC12. It added typed Availability Center state, hard context, protected
-pockets, planning defaults, automation trust controls, duration source proof,
-vacation/away behavior, a Schedule & Availability detail card, and focused
-Profile tests. FCP17 changed no route/raw value, persistence/schema,
-permission-request, calendar-write, sync/account, release, legal/privacy, or
-public accessibility claim file.
+Current batch: FL01 Founder Backstory / Product Soul Lock Green with accepted
+Yellow order-reconciliation note; full-stack order selects FL02 Life Inventory
+Object Model next if continuation gates allow.
+Scope: FL01 completed as docs-only Found Life product-soul source truth after a
+recoverable remote-order mismatch. FCP17 remains completed Green, but Found Life
+now governs all further FCP/AOS/LDI/PFC work before FCP06 or later batches.
+FL01 changed no production Swift, route/raw value, persistence/schema,
+permission-request, calendar-write, sync/account, release, legal/privacy, CI,
+workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
+accessibility claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -28,6 +28,12 @@ vocabulary/anatomy lock, and FCP03 ownership/boundary map are complete as
 docs-only operating truth. FCP04 preview fixture and QA matrix expansion is
 complete as source-truth planning evidence. FCP17 is complete / Green as the
 first bounded FCP production Swift implementation in the global order.
+
+FL01 is complete / Green as Found Life product-soul lock. Accepted Yellow:
+Found Life source truth was inserted by remote after FCP17 had already landed,
+so FL01 records the mismatch and inserts FL02-FL06 before any further FCP,
+AOS, LDI, or PFC work that touches life visibility, recall, commitment memory,
+option value, weekly sweep, recommendations, proof, paths, or external surfaces.
 
 PD16 is complete / Green as bounded You/Profile implementation evidence. It
 adds typed planning setup depth for Schedule & Availability, Planning Defaults,

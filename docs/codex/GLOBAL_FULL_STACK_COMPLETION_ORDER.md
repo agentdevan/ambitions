@@ -80,16 +80,23 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 18. PFC12 App Groups / Shared Storage Boundary. Completed Green as app
     group/shared-storage boundary proof on 2026-05-05.
 
-### Phase 3 — Found Life And FCP Core Product Objects
+### Phase 2.5 — Found Life Layer / Product Soul And Life Continuity
 
-19. FCP17 Schedule / Availability / Defaults Center. Completed Green as
+19. FL01 Founder Backstory / Product Soul Lock. Completed Green with accepted
+    Yellow order-reconciliation note on 2026-05-05. Found Life was inserted
+    after FCP17 had already landed because the Found Life remote source arrived
+    during the global train; this is recorded as recoverable order mismatch, and
+    FL now governs all further FCP/AOS/LDI/PFC work.
+20. FL02 Life Inventory Object Model.
+21. FL03 Commitment Memory / Open Loop Registry.
+22. FL04 Searchable Life Recall Contract.
+23. FL05 Option Value / Pivot Preservation Model.
+24. FL06 Weekly Life Sweep Ritual.
+
+### Phase 3 — FCP Core Product Objects
+
+25. FCP17 Schedule / Availability / Defaults Center. Completed Green as
     You-owned Availability Center implementation on 2026-05-05.
-20. FL01 Founder Backstory / Product Soul Lock.
-21. FL02 Life Inventory Object Model.
-22. FL03 Commitment Memory / Open Loop Registry.
-23. FL04 Searchable Life Recall Contract.
-24. FL05 Option Value / Pivot Preservation Model.
-25. FL06 Weekly Life Sweep Ritual.
 26. FCP06 Receipt Drawer / Trust Layer.
 27. FCP05 Start Here Surface.
 28. FCP07 Reality Rail Continuity.

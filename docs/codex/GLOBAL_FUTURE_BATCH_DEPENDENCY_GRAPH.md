@@ -13,12 +13,13 @@ Date: 2026-05-05
 | 1 PXOS / ME / CS / SI foundations | Historical complete or deferred where noted | Preserve source truth, maintainability, compatibility, and signature interface foundations. | Future work has source truth, owner boundaries, compatibility proof, and UI primitives. |
 | 2 Product Depth closeout plus CQS insertion | PD15-PD17, CQS01-CQS24, PD18 | Finish You trust history, Schedule / Availability / Defaults, Cross-Surface Proof/Review, insert CQS quality gates, and then close PD handoff. | Remaining depth foundations and Codex quality gates exist before flagship refactors. |
 | 3 FCP source-truth and fixture foundations | FCP reconciliation, FCP01-FCP04 | Make 10/10 object standard, boundaries, and QA matrix executable. | FCP implementation can run without rethinking product direction. |
-| 4 FCP flagship object refactor | FCP17/FCP06/FCP05/FCP07/FCP13A/FCP08/FCP09 etc. | Build shared availability, receipt, Start Here, Reality Rail, closure, shell, and motion foundations first. | Core product object language becomes real. |
-| 5 FCP surface maturity | Remaining FCP implementation | Mature You, Capture, Plan, Goals, object states, and status grammar around the shared object language. | All 25 objects are at 10/10 target or have accepted Yellow owner. |
-| 6 AOS internal foundations | AOS01-AOS23 optimized | Build AmbitionsOS contracts and kernels after stable product object slots exist. | Internal intelligence has typed, private, source-grounded contracts. |
-| 7 LDI dependency-split gates | LDI01-LDI22 optimized before AOS24 | Add living dream safety/source/runtime/continuity gates before UI integration exposes them. | Living Dream behavior is classified, protected, sourced, and mutation-safe before exposure. |
-| 8 AOS UI integration and QA | AOS24-AOS26 | Integrate and validate AOS/LDI against stable product objects. | User-facing intelligence waits for proof and gates. |
-| 9 Final proof / claim / handoff | FCP28-FCP30, AOS27-AOS30 | Full 10/10 audit, human-proof packet, claim truth, handoff, conditional repairs, roadmap. | No public readiness claim without evidence. |
+| 4 Found Life source-truth layer | FL01-FL06 | Lock life visibility, continuity, recall, open-loop, option-value, and weekly-sweep contracts before further FCP/AOS/LDI work. | Found Life remains a layer under Today / Goals / Capture / Plan / You, not a new tab or dashboard. |
+| 5 FCP flagship object refactor | FCP17/FCP06/FCP05/FCP07/FCP13A/FCP08/FCP09 etc. | Build shared availability, receipt, Start Here, Reality Rail, closure, shell, and motion foundations first. | Core product object language becomes real. |
+| 6 FCP surface maturity | Remaining FCP implementation | Mature You, Capture, Plan, Goals, object states, and status grammar around the shared object language. | All 25 objects are at 10/10 target or have accepted Yellow owner. |
+| 7 AOS internal foundations | AOS01-AOS23 optimized | Build AmbitionsOS contracts and kernels after stable product object slots exist. | Internal intelligence has typed, private, source-grounded contracts. |
+| 8 LDI dependency-split gates | LDI01-LDI22 optimized before AOS24 | Add living dream safety/source/runtime/continuity gates before UI integration exposes them. | Living Dream behavior is classified, protected, sourced, and mutation-safe before exposure. |
+| 9 AOS UI integration and QA | AOS24-AOS26 | Integrate and validate AOS/LDI against stable product objects. | User-facing intelligence waits for proof and gates. |
+| 10 Final proof / claim / handoff | FCP28-FCP30, AOS27-AOS30 | Full 10/10 audit, human-proof packet, claim truth, handoff, conditional repairs, roadmap. | No public readiness claim without evidence. |
 
 Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. This graph now references `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` for remaining order. It does not make PXOS, SI, Product Depth, FCP, AmbitionsOS, LDI, or release readiness implemented.
 
@@ -37,7 +38,15 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - FCP01-FCP04 depend on reconciliation and must remain docs/planning or fixture-planning scoped unless their prompts explicitly permit otherwise.
 - FCP implementation batches depend on FCP01-FCP04 and the object-specific PD/SI/DAV/EB/ME/CS evidence named in `FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md` and `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`.
 - All post-CQS implementation batches depend on CQS reviewer/repair/report gates as an operating layer.
-- FCP17 is optimized before Start Here implementation because Schedule / Availability / Defaults is a hard context dependency for time-fit proof.
+- FL01 is complete Green as Found Life product-soul source truth with accepted
+  Yellow order reconciliation because FCP17 landed before the remote Found Life
+  insertion. FL02-FL06 now depend on FL01 and must run before any further FCP,
+  AOS, LDI, or PFC work that touches life visibility, recall, commitment
+  memory, option value, weekly sweep, recommendations, proof, paths, or
+  external surfaces.
+- FCP17 is complete Green as bounded Availability Center implementation. It
+  landed before FL due to the remote-order race and may be reviewed against
+  FL02-FL06 if later Found Life contracts affect availability assumptions.
 - FCP06 is optimized before Start Here implementation because Receipt Drawer / Source Fold is a hard trust dependency for Start Here, Reality Rail, Capture, Plan, Goals, and You.
 - FCP05 must precede FCP07 because Start Here is the active node in Reality Rail.
 - FCP13A Action Closure Diamond must precede final Recovery Loop and cross-surface proof mesh.

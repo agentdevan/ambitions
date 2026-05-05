@@ -1,7 +1,7 @@
 # FL01-FL06 Found Life Layer Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; queued docs/product-contract train before FCP core product objects.
+Status: Active-scope planning truth; FL01 complete Green, FL02 queued.
 Date: 2026-05-05
 Train code: FL
 
@@ -58,6 +58,8 @@ Stop on hard Red:
 
 ### FL01 — Founder Backstory / Product Soul Lock
 
+Status: Complete / Green on 2026-05-05 with accepted Yellow order-reconciliation note.
+
 Type: Docs/canon.
 Owner: Product soul / positioning.
 Depends on: Found Life canon file.
@@ -70,6 +72,18 @@ Acceptance:
 - The product is explicitly defined as life visibility and life continuity, not only goal execution.
 - Found Life is not a new top-level tab.
 - The source truth protects against dashboards, shame, surveillance, and generic memory chatbot drift.
+
+Evidence:
+
+- `docs/codex/batches/FL01_Founder_Backstory_Product_Soul_Lock_Prompt.md`
+- `docs/audits/fl01-founder-backstory-product-soul-lock-report.md`
+
+Accepted Yellow:
+
+- The preferred order placed FL01-FL06 before FCP17, but FCP17 landed before FL
+  because the Found Life remote source arrived after local FCP17 execution.
+  FCP17 remains completed Green. FL now governs all further FCP/AOS/LDI/PFC
+  work, and later FL batches may flag FCP17 for compatibility review if needed.
 
 ### FL02 — Life Inventory Object Model
 

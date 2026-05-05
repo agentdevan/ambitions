@@ -19,7 +19,12 @@ As of this order update:
 - Product Depth is complete through PD18 Green.
 - CQS is inserted after PD17 and before PD18 so remaining batches use the
   upgraded repair/reviewer/script gates.
-- FCP source-truth docs exist, but FCP implementation has not started until registry/context reconciliation and the required approval phrase.
+- Found Life Layer source truth is active. FL01 is complete Green with an
+  accepted Yellow order-reconciliation note after the remote Found Life source
+  arrived after FCP17 had already landed. FL02-FL06 now run before any further
+  FCP implementation.
+- FCP source-truth docs exist, and FCP17 has completed as the first bounded FCP
+  implementation batch. Further FCP implementation now waits for FL02-FL06.
 - AOS01-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
@@ -77,8 +82,17 @@ full-stack order.
 PFC12 is complete / Green as app-group/shared-storage boundary evidence. It
 documented the existing app/widget/share extension entitlement match,
 privacy-safe shared snapshot and external creation queue boundaries, and focused
-test proof. The full-stack order now resumes row 011 FCP17 next.
+test proof. Found Life FL01 is complete / Green as product-soul source truth
+with accepted Yellow order reconciliation because FCP17 landed before the
+remote Found Life insertion. The full-stack order now selects FL02 before any
+further FCP implementation.
 | 011 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Completed Green on 2026-05-05 as bounded You-owned Availability Center with hard context, protected pockets, defaults, automation trust, durations, and away behavior. | PD16; FCP01-FCP04. | Complete; next FCP06. |
+| 011A | FL01 Founder Backstory / Product Soul Lock | FL | Docs / Canon | Completed Green on 2026-05-05 as Found Life product-soul lock, with accepted Yellow order reconciliation because FCP17 had already landed. | PFC12; Found Life canon. | Complete; next FL02. |
+| 011B | FL02 Life Inventory Object Model | FL | Docs / Domain contract | Inserts life-thread ownership, privacy class, freshness, and surface mapping before further FCP/AOS/LDI work. | FL01. | Single-batch. |
+| 011C | FL03 Commitment Memory / Open Loop Registry | FL | Docs / Domain contract | Defines promise/open-loop states before recall, receipts, and Start Here use them. | FL02. | Single-batch. |
+| 011D | FL04 Searchable Life Recall Contract | FL | Docs / Trust contract | Defines source/freshness/privacy/review rules before memory or recall behavior is exposed. | FL02-FL03. | Single-batch. |
+| 011E | FL05 Option Value / Pivot Preservation Model | FL | Docs / Intelligence contract | Defines proof transfer and path uncertainty before Goals/AOS/LDI path work. | FL02-FL04. | Single-batch. |
+| 011F | FL06 Weekly Life Sweep Ritual | FL | Docs / Ritual contract | Defines the non-shaming weekly continuity ritual before future Start Here/Reality Rail/AOS use. | FL01-FL05. | Single-batch. |
 | 012 | FCP06 Receipt Drawer / Trust Layer | FCP | Implementation | Shared trust drawer should exist before Start Here/Rail/Plan/Goal integrations mature. | FCP01-FCP04; PD15/PD17 preferred. | Single-batch. |
 | 013 | FCP05 Start Here Surface | FCP | Implementation | Start Here becomes flagship daily decision object after trust and availability foundations. | FCP01-FCP04; PD02-PD04; FCP06/FCP17 preferred. | Single-batch. |
 | 014 | FCP07 Reality Rail Continuity | FCP | Implementation | Rail integrates Start Here, proof, closure, pressure. | FCP05/FCP06. | Single-batch. |
