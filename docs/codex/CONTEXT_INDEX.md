@@ -148,11 +148,13 @@ Use this context when the full-stack order selects FCP or PFC work:
 - `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md`
 - `docs/codex/batches/FCP_NEXT_ELIGIBLE_BATCH_PROMPT.md`
 - `docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md`
+- `docs/codex/batches/PFC01_Repo_And_Build_System_Inventory_Prompt.md`
 - `docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md`
 - `docs/audits/fcp01-flagship-completion-source-truth-lock-report.md`
 - `docs/audits/fcp02-object-vocabulary-anatomy-lock-report.md`
 - `docs/audits/fcp03-ownership-file-boundary-dependency-map-report.md`
 - `docs/audits/fcp04-preview-fixture-qa-matrix-expansion-report.md`
+- `docs/audits/pfc01-repo-build-system-inventory-report.md`
 
 FCP/PFC reconciliation is complete as docs-only operating truth. FCP01 is
 complete as a source-truth lock only: it makes the 10/10 object standard,
@@ -163,8 +165,9 @@ Proof, Closure, Lens, Resolver, and Center are implementation objects, not
 decorative labels. FCP03 is complete as a docs-only
 ownership/file-boundary/dependency map for all 25 flagship objects. FCP04 is
 complete as a docs-only preview fixture and QA matrix expansion for universal
-states and object-group fixture ownership. FCP and PFC source truth remain
-active planning truth only. They do not claim FCP implementation, PFC
+states and object-group fixture ownership. PFC01 is complete as docs-only
+repo/build inventory and repair-map evidence. FCP and PFC source truth remain
+active planning truth only. They do not claim FCP implementation, later PFC
 implementation, App Store readiness, TestFlight readiness, legal/privacy
 compliance, physical-device proof, public accessibility proof, sync/cloud
 behavior, monetization, or release readiness.

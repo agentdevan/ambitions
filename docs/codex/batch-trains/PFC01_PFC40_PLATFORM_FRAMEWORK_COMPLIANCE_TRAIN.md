@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; queued implementation/compliance train. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -64,6 +64,8 @@ Owner: Platform / Build.
 Goal: Inventory repo layout, build system, project generation, scripts, workflows, generated files, dependencies, local setup, and handoff docs.
 Allowed: docs/audits, docs/canon/codex. No production Swift.
 Required result: repo/build cleanliness scorecard and repair map.
+Status: Green as docs-only inventory and repair map. No production Swift,
+project, workflow, dependency, signing, or generated build output changed.
 
 ### PFC02 — Architecture Boundary And Module Map
 
