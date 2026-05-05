@@ -362,6 +362,7 @@ Use this context when the global full-stack order selects PFC batches:
 - `docs/codex/batches/PFC05_CI_Local_Toolchain_Reproducibility_Prompt.md`
 - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
 - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+- `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
 - `docs/audits/pfc01-repo-build-system-inventory-report.md`
 - `docs/audits/pfc02-architecture-boundary-module-map-report.md`
 - `docs/audits/pfc03-dead-code-prompt-artifact-naming-smell-audit-report.md`
@@ -369,6 +370,7 @@ Use this context when the global full-stack order selects PFC batches:
 - `docs/audits/pfc05-ci-local-toolchain-reproducibility-report.md`
 - `docs/audits/pfc06-schema-persistence-source-truth-report.md`
 - `docs/audits/pfc07-migration-ladder-backward-compatibility-tests-report.md`
+- `docs/audits/pfc08-corruption-recovery-backup-restore-plan-report.md`
 
 PFC01 is Green as docs-only repo/build inventory evidence. PFC02 is Green as
 docs-only architecture boundary evidence. PFC03 is Green as docs-only
@@ -390,7 +392,10 @@ focused persistence compatibility proof; 28 existing repository, legacy import,
 portable snapshot, and local-only sync tests passed with 0 failures. PFC07 does
 not authorize schema edits, CloudKit/account sync, export/import UI claims, or
 release/legal/privacy claims. PFC08 Corruption Recovery / Backup / Restore Plan
-is the next eligible PFC batch under the full-stack order.
+is Green as docs-only recovery planning evidence and claim boundary. It does not
+authorize recovery UI, destructive store behavior, CloudKit/account sync, device
+backup claims, or production source edits. PFC09 iCloud / CloudKit Sync Strategy
+Decision is the next eligible PFC batch under the full-stack order.
 
 
 ## Living Dream Intelligence Context

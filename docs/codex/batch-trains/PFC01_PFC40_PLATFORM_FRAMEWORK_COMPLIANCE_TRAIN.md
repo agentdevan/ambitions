@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -142,6 +142,12 @@ Type: Docs/tests where applicable.
 Owner: Persistence / Reliability.
 Goal: Define corruption handling, safe fallback, backups, restore, and user-visible recovery copy.
 Required result: recovery plan and tests if code exists.
+Status: Green as docs-only recovery plan and evidence boundary. It classified
+current service-level malformed package, unsupported version, conflict,
+manifest-warning, and fresh-store restore proof from PFC07; documented safe
+future copy and stop conditions; and changed no production Swift, schema, tests,
+workflow, project, dependency, signing, entitlement, privacy manifest, lockfile,
+or generated output.
 
 ### PFC09 — iCloud / CloudKit Sync Strategy Decision
 

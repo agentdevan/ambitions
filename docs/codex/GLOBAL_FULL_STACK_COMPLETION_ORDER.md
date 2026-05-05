@@ -71,7 +71,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     truth on 2026-05-05.
 15. PFC07 Migration Ladder And Backward Compatibility Tests. Completed Green as
     focused persistence compatibility proof on 2026-05-05.
-16. PFC08 Corruption Recovery / Backup / Restore Plan.
+16. PFC08 Corruption Recovery / Backup / Restore Plan. Completed Green as
+    docs-only recovery plan and claim-boundary evidence on 2026-05-05.
 17. PFC09 iCloud / CloudKit Sync Strategy Decision.
 18. PFC12 App Groups / Shared Storage Boundary.
 

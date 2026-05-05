@@ -2,16 +2,15 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC07 Migration Ladder And Backward Compatibility Tests Green;
-PFC08 Corruption Recovery / Backup / Restore Plan next if continuation gates
-allow.
-Scope: PFC07 completed as focused persistence compatibility proof after PFC06.
-It ran existing repository, legacy import, portable snapshot, and local-only sync
-tests as a 28-test focused slice with 0 failures, documented the current
-local-only non-schema boundary, and changed no production Swift, shared
-packages, tests, project generation source truth, workflows, dependencies,
-signing, entitlements, privacy manifests, lockfiles, Brewfiles, or generated
-output.
+Current batch: PFC08 Corruption Recovery / Backup / Restore Plan Green; PFC09
+iCloud / CloudKit Sync Strategy Decision next if continuation gates allow.
+Scope: PFC08 completed as docs-only recovery planning evidence after PFC07. It
+classified current service-level malformed package, unsupported version,
+manifest-warning, conflict, fresh-store restore, and local-only sync proof;
+documented safe future recovery copy and destructive-action stop conditions; and
+changed no production Swift, shared packages, tests, project generation source
+truth, workflows, dependencies, signing, entitlements, privacy manifests,
+lockfiles, Brewfiles, or generated output.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -64,8 +63,9 @@ docs-only dead-code, prompt-artifact, and naming-smell evidence. PFC04 is
 complete / Green as docs-only dependency and supply-chain evidence. PFC05 is
 complete / Green as local tooling/docs evidence. PFC06 is complete / Green as
 docs-only persistence source truth and migration-risk evidence. PFC07 is
-complete / Green as focused persistence compatibility proof. Later PFC
-implementation beyond existing test execution has not started.
+complete / Green as focused persistence compatibility proof. PFC08 is complete /
+Green as docs-only recovery planning evidence. Later PFC implementation beyond
+existing test execution has not started.
 
 No production Swift, route/raw value, persistence/schema, sync/cloud,
 monetization, privacy/legal, release, App Store, TestFlight, physical-device,
