@@ -2,14 +2,14 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FVQ02 Five Top-Level Surface Visual Sweep Accepted Yellow;
-full-stack order selects FVQ03 Drill-Down And External Surface Visual Sweep
-next under the stricter FVQ visual excellence train.
-Scope: FVQ02 captured durable simulator screenshots for Today, Goals, Capture,
-Plan, and You; removed the generic top-level composition explainer card from
-Goals, Capture, Plan, and You; and documented remaining visual evidence gaps.
-FVQ02 changed only scoped top-level feature surface presentation files, visual
-evidence docs, and train-state docs. It did not change route/raw value,
+Current batch: FVQ03 Drill-Down And External Surface Visual Sweep Accepted
+Yellow; full-stack order selects FVQ04 Recurring UI-Batch Rendered Proof
+Protocol next under the stricter FVQ visual excellence train.
+Scope: FVQ03 captured durable simulator screenshots for implemented
+drill-down/detail surfaces, inspected current external surface source truth,
+and bounded missing rendered widget, Live Activity, and App Intent evidence to
+future platform/FVQ owners. FVQ03 changed only visual evidence docs and
+train-state docs. It did not change production Swift, route/raw value,
 persistence/schema, permission request, calendar write, sync/account, release,
 legal/privacy, CI, workflow/signing, entitlement, AI runtime, AOS runtime, LDI
 runtime, or public accessibility claim files.
@@ -44,7 +44,9 @@ Reduced Motion Proof implementation evidence. PFC13 is complete / Green as
 WidgetKit Strategy And Object Map evidence. FVQ01 is complete / Accepted
 Yellow as rendered visual freshness and flagship proof evidence. FVQ02 is
 complete / Accepted Yellow as five top-level surface visual sweep evidence.
-FVQ03 is the next eligible global batch before PFC15. Accepted Yellow:
+FVQ03 is complete / Accepted Yellow as drill-down and external-surface visual
+sweep evidence. FVQ04 is the next eligible global batch before PFC15. Accepted
+Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,

@@ -144,9 +144,13 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
      You plus removal of generic top-level explainer cards from Goals, Capture,
      Plan, and You. FVQ02 does not claim final visual, accessibility, device,
      release, App Store, TestFlight, legal, or privacy readiness.
-32B. FVQ03 Drill-Down And External Surface Visual Sweep. Queued next under the
+32B. FVQ03 Drill-Down And External Surface Visual Sweep. Completed Accepted
+     Yellow on 2026-05-05 after rendered simulator evidence for Step Detail,
+     Goal Mission lane expansion, Personalization detail, and Schedule &
+     Availability detail. External widget, Live Activity, and App Intent
+     rendered proof remains Yellow-owned by later platform/FVQ batches.
+32C. FVQ04 Recurring UI-Batch Rendered Proof Protocol. Queued next under the
      stricter FVQ visual excellence train.
-32C. FVQ04 Recurring UI-Batch Rendered Proof Protocol.
 32D. MEG01 Metal / Advanced Rendering Eligibility Gate.
 32E. FVQ05 Final Visual Proof Packet Integration Hook.
 
@@ -154,8 +158,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 33. PFC13 WidgetKit Strategy And Object Map. Completed Green as docs/product/
     platform WidgetKit object map and privacy matrix on 2026-05-05 after the
-    local run had already started PFC13. FVQ01 has now closed Accepted Yellow,
-    and FVQ02 has now closed Accepted Yellow. FVQ03 is next before PFC15.
+    local run had already started PFC13. FVQ01, FVQ02, and FVQ03 have now
+    closed Accepted Yellow. FVQ04 is next before PFC15.
 34. PFC15 Live Activities / ActivityKit Strategy.
 35. PFC17 App Intents / Shortcuts / Spotlight Strategy.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.
