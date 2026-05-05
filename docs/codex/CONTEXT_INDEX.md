@@ -52,9 +52,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   implementation evidence. FCP08 is complete Green as default Ambition Meridian
   Shell implementation evidence. FCP09 is complete Green as shared Motion /
   Haptics / Reduced Motion Proof implementation evidence. PFC13 is complete
-  Green as WidgetKit Strategy And Object Map evidence. FVQ01 was inserted
-  remotely while local PFC13 was already active, so the next eligible global
-  batch is FVQ01 before PFC15 Live Activities / ActivityKit Strategy.
+  Green as WidgetKit Strategy And Object Map evidence. FVQ01 is complete
+  Accepted Yellow as rendered visual freshness evidence. The next eligible
+  global batch is FVQ02 Five Top-Level Surface Visual Sweep.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -442,7 +442,7 @@ Rail continuity spine implementation evidence. FCP13A is complete Green as
 Today-owned Action Closure Diamond implementation evidence. FCP08 is complete
 Green as default Ambition Meridian Shell implementation evidence. FCP09 is
 complete Green as shared object-motion policy evidence, and the full-stack
-order selects FVQ01 next because FVQ01 was inserted while PFC13 was active.
+order selects FVQ02 next after FVQ01 closed Accepted Yellow.
 
 
 ## Living Dream Intelligence Context

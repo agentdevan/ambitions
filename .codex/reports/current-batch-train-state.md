@@ -2,19 +2,17 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC13 WidgetKit Strategy And Object Map Green; full-stack order
-selects FVQ01 Rendered Visual Freshness And Flagship Gate next because FVQ01
-was inserted remotely while local PFC13 was already active.
-Scope: PFC13 completed as docs/product/platform WidgetKit strategy evidence.
-It adds the WidgetKit object map and privacy matrix for allowed and deferred
-Ambitions widget objects, widget family guidance, accessibility / Reduced
-Motion requirements, performance/battery requirements, and PFC14 implementation
-boundaries. FVQ01 was inserted remotely while local PFC13 was already active,
-so FVQ01 is the next eligible batch before PFC15 continues external strategy.
-PFC13 changed no production Swift, widget extension source,
-route/raw value, persistence/schema, permission-request, calendar-write,
-sync/account, release, legal/privacy, CI, workflow/signing, entitlement, AI
-runtime, AOS runtime, LDI runtime, or public accessibility claim file.
+Current batch: FVQ01 Rendered Visual Freshness And Flagship Gate Accepted
+Yellow; full-stack order selects FVQ02 Five Top-Level Surface Visual Sweep next
+under the stricter FVQ visual excellence train.
+Scope: FVQ01 captured durable default Today simulator evidence, recorded
+freshness metadata, repaired the generic Today composition explainer out of the
+first viewport, and reordered Start Here before rail metadata. FVQ01 changed
+only scoped Today visual owner files, visual evidence docs, and train-state
+docs. It did not change route/raw value, persistence/schema, permission
+request, calendar write, sync/account, release, legal/privacy, CI,
+workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
+accessibility claim files.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -43,8 +41,9 @@ implementation evidence. FCP13A is complete / Green as Action Closure Diamond
 implementation evidence. FCP08 is complete / Green as Ambition Meridian Shell
 implementation evidence. FCP09 is complete / Green as Motion / Haptics /
 Reduced Motion Proof implementation evidence. PFC13 is complete / Green as
-WidgetKit Strategy And Object Map evidence. FVQ01 was inserted remotely while
-local PFC13 was already active, so FVQ01 is next before PFC15. Accepted Yellow:
+WidgetKit Strategy And Object Map evidence. FVQ01 is complete / Accepted
+Yellow as rendered visual freshness and flagship proof evidence. FVQ02 is the
+next eligible global batch before PFC15. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,

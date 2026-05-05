@@ -46,9 +46,6 @@ struct AmbitionsDayRailView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            header
-            DayRailRhythmStrip(state: state, semanticState: semanticState)
-
             if let heroStep = state.heroStep {
                 StartHereSurface(
                     step: heroStep,
@@ -61,6 +58,9 @@ struct AmbitionsDayRailView: View {
             } else {
                 DayRailEmptyCard(state: state)
             }
+
+            header
+            DayRailRhythmStrip(state: state, semanticState: semanticState)
 
             DayRailSection(title: "Now", rows: rows(for: .now), privacy: state.privacyProjection, contextLabel: state.contextSummary, onOpenStepDetail: onOpenStepDetail)
                 .accessibilityIdentifier("TodayRealityRailNowSection")
@@ -96,8 +96,8 @@ struct AmbitionsDayRailView: View {
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
                 Text(state.dateTitle)
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textTertiary)
@@ -106,20 +106,9 @@ struct AmbitionsDayRailView: View {
             }
 
             Text(state.contextSummary)
-                .font(theme.typography.body)
+                .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
-
-            if state.contextLabels.isEmpty == false {
-                HStack(spacing: theme.spacing.xs) {
-                    ForEach(state.contextLabels.prefix(3)) { label in
-                        AmbitionChip(sourceLabel(label), role: .state, semanticState: sourceSemanticState(label))
-                    }
-                }
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("Source context")
-                .accessibilityValue(state.contextLabels.prefix(3).map(sourceLabel).joined(separator: ", "))
-            }
 
             EvidenceLabel(
                 modeLabel,

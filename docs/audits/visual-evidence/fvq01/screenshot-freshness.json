@@ -1,0 +1,33 @@
+{
+  "batch": "FVQ01",
+  "capturedAtUTC": "2026-05-05T17:52:52Z",
+  "repoHead": "47fca04fec06c6c7cbafe9fe4f245a86e9aece60",
+  "originMain": "47fca04fec06c6c7cbafe9fe4f245a86e9aece60",
+  "branch": "main",
+  "scheme": "Ambitions",
+  "buildConfiguration": "Debug",
+  "simulatorDevice": "iPhone 17",
+  "simulatorId": "8ACCD665-4807-4102-B526-5A1AE20686A8",
+  "simulatorState": "Booted",
+  "appBundleId": "com.ambitions.ios",
+  "appVersion": "1.0",
+  "appBuildNumber": "1",
+  "appBuildSha": "not exposed by app runtime",
+  "installStatus": "build_run_sim installed and launched simulator build from current HEAD after xcodegen generate and scripts/build-local.sh passed",
+  "buildCommand": "xcodegen generate && scripts/build-local.sh; build_run_sim CODE_SIGNING_ALLOWED=NO",
+  "screenshotTool": "xcodebuildmcp screenshot, converted to PNG with sips",
+  "screenshots": [
+    {
+      "name": "today-default.png",
+      "sourceTempPath": "/var/folders/y1/sl7_d6_j11gb24rysqdj8c1r0000gn/T/screenshot_optimized_1e87105a-5300-4882-971f-98c16aeee394.jpg",
+      "durablePath": "docs/audits/visual-evidence/fvq01/today-default.png",
+      "dimensions": "368x800"
+    }
+  ],
+  "freshnessClassification": "Accepted Yellow",
+  "freshnessNotes": [
+    "Repo HEAD and origin/main matched before capture.",
+    "Clean local build passed before simulator build and run.",
+    "The app does not yet expose a build SHA inside runtime UI or accessibility metadata, so screenshot freshness is repo/toolchain proven but not app-self-proven."
+  ]
+}

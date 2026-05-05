@@ -25,8 +25,6 @@ struct TodayScreen: View {
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    TopLevelSurfaceCompositionBar(surface: .today)
-
                     switch viewModel.state {
                     case .loading:
                         AsyncStateCard(.loading(lines: 6))

@@ -133,20 +133,26 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 ### Phase 3.5 — Rendered Visual Freshness And Flagship Proof
 
-32. FVQ01 Rendered Visual Freshness And Flagship Gate. Must run before broad
-    external-surface strategy continues, unless PFC13 is already actively in
-    progress in the local worktree when Codex pulls this update; if so, finish
-    that active batch safely and run FVQ01 immediately afterward. FVQ01 must
-    prove simulator freshness, durable screenshot evidence, FAANG-level Today
-    visual scoring, and visual Red/Yellow repair handling before the train
-    continues.
+32. FVQ01 Rendered Visual Freshness And Flagship Gate. Completed Accepted
+    Yellow on 2026-05-05 after PFC13. FVQ01 proved fresh simulator default
+    Today screenshot evidence, repaired the explanatory Today composition card
+    out of the first viewport, and recorded remaining visual/accessibility
+    fixture gaps without claiming final visual, accessibility, device, release,
+    App Store, TestFlight, legal, or privacy readiness.
+32A. FVQ02 Five Top-Level Surface Visual Sweep. Queued next under the stricter
+     FVQ visual excellence train before PFC15 or any broader external/platform
+     strategy continues.
+32B. FVQ03 Drill-Down And External Surface Visual Sweep.
+32C. FVQ04 Recurring UI-Batch Rendered Proof Protocol.
+32D. MEG01 Metal / Advanced Rendering Eligibility Gate.
+32E. FVQ05 Final Visual Proof Packet Integration Hook.
 
 ### Phase 4 — External Surface Strategy Before Implementation
 
 33. PFC13 WidgetKit Strategy And Object Map. Completed Green as docs/product/
     platform WidgetKit object map and privacy matrix on 2026-05-05 after the
-    local run had already started PFC13. The exception above now requires
-    FVQ01 to run immediately before PFC15.
+    local run had already started PFC13. FVQ01 has now closed Accepted Yellow,
+    and FVQ02 is next before PFC15.
 34. PFC15 Live Activities / ActivityKit Strategy.
 35. PFC17 App Intents / Shortcuts / Spotlight Strategy.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.
