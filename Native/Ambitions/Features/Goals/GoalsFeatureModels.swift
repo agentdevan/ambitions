@@ -1356,6 +1356,49 @@ struct GoalDetailDecisionsState: Sendable {
     let emptyMessage: String
 }
 
+enum GoalDetailReviewTrailKind: String, Sendable {
+    case proof
+    case decision
+    case assumption
+    case receipt
+
+    var title: String {
+        switch self {
+        case .proof: "Proof"
+        case .decision: "Decision"
+        case .assumption: "Assumption"
+        case .receipt: "Receipt"
+        }
+    }
+
+    var symbolName: String {
+        switch self {
+        case .proof: "checkmark.seal"
+        case .decision: "arrow.triangle.branch"
+        case .assumption: "scope"
+        case .receipt: "doc.text.magnifyingglass"
+        }
+    }
+}
+
+struct GoalDetailReviewTrailItemState: Identifiable, Sendable {
+    let id: String
+    let kind: GoalDetailReviewTrailKind
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let reviewLabel: String
+    let reversibilityLabel: String
+    let state: AmbitionVisualState
+}
+
+struct GoalDetailReviewTrailState: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [GoalDetailReviewTrailItemState]
+    let accessibilitySummary: String
+}
+
 struct GoalDetailRiskState: Identifiable, Sendable {
     let id: String
     let title: String
@@ -1394,6 +1437,76 @@ struct GoalDetailMissionControlState: Sendable {
     let risks: GoalDetailRisksState
     let archive: GoalDetailArchiveState
     let receipts: GoalDetailReceiptsState
+}
+
+extension GoalDetailMissionControlState {
+    var reviewTrail: GoalDetailReviewTrailState {
+        let proofSummary = proofRail.items.first.map {
+            "\($0.title): \($0.subtitle)"
+        } ?? proofRail.emptyMessage
+        let decisionSummary = decisions.items.first.map {
+            "\($0.title): \($0.summary)"
+        } ?? decisions.emptyMessage
+        let assumption = assumptions.first(where: { $0.state == .warning }) ?? assumptions.first
+        let assumptionSummary = assumption.map {
+            "\($0.title) \($0.status). \($0.whyItMatters)"
+        } ?? "No assumptions are visible for review."
+        let receiptSummary = receipts.items.first.map {
+            "\($0.title): \($0.summary)"
+        } ?? receipts.emptyMessage
+
+        let items = [
+            GoalDetailReviewTrailItemState(
+                id: "review-proof",
+                kind: .proof,
+                title: proofRail.items.isEmpty ? proofRail.emptyTitle : "Proof attached",
+                summary: proofSummary,
+                sourceLabel: "Evidence",
+                reviewLabel: "Review proof",
+                reversibilityLabel: "Proof is attached when saved",
+                state: proofRail.items.isEmpty ? .default : .selected
+            ),
+            GoalDetailReviewTrailItemState(
+                id: "review-decision",
+                kind: .decision,
+                title: decisions.items.isEmpty ? decisions.emptyTitle : "Decision recorded",
+                summary: decisionSummary,
+                sourceLabel: "Decision",
+                reviewLabel: "Review decision trail",
+                reversibilityLabel: "Change reasons stay visible",
+                state: decisions.items.isEmpty ? .default : .selected
+            ),
+            GoalDetailReviewTrailItemState(
+                id: "review-assumption",
+                kind: .assumption,
+                title: assumption?.title ?? "No assumptions visible",
+                summary: assumptionSummary,
+                sourceLabel: "Assumption",
+                reviewLabel: assumption?.correctionLabel.map { "Review: \($0)" } ?? "Review assumption",
+                reversibilityLabel: "Review before changing the path",
+                state: assumption?.state ?? .default
+            ),
+            GoalDetailReviewTrailItemState(
+                id: "review-receipt",
+                kind: .receipt,
+                title: receipts.items.isEmpty ? receipts.emptyTitle : "Receipt recorded",
+                summary: receiptSummary,
+                sourceLabel: "Receipt",
+                reviewLabel: "Review receipts",
+                reversibilityLabel: "Reversibility only when available",
+                state: receipts.items.isEmpty ? .default : .selected
+            )
+        ]
+
+        return GoalDetailReviewTrailState(
+            title: "Review trail",
+            subtitle: "Proof, decisions, assumptions, and receipts stay separated before anything changes.",
+            items: items,
+            accessibilitySummary: items.map {
+                "\($0.kind.title): \($0.title). \($0.summary). \($0.reversibilityLabel)"
+            }.joined(separator: " ")
+        )
+    }
 }
 
 struct GoalClarificationState: Sendable {

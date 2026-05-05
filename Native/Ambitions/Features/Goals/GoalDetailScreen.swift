@@ -88,6 +88,7 @@ struct GoalDetailScreen: View {
                     }
 
                     if let missionControl = detail.missionControl {
+                        GoalDetailReviewTrailCard(state: missionControl.reviewTrail)
                         GoalDetailAssumptionsCard(assumptions: missionControl.assumptions)
                         GoalDetailProofRailCard(state: missionControl.proofRail)
                         GoalDetailDecisionsCard(state: missionControl.decisions)
@@ -602,6 +603,50 @@ private struct GoalDetailAssumptionsCard: View {
             }
         }
         .accessibilityIdentifier("goal-detail.assumptions")
+    }
+}
+
+private struct GoalDetailReviewTrailCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailReviewTrailState
+
+    var body: some View {
+        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                ForEach(state.items) { item in
+                    WidgetCard(state: item.state) {
+                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                                Label(item.kind.title, systemImage: item.kind.symbolName)
+                                    .font(theme.typography.micro)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                                Spacer()
+                                TagPill(item.sourceLabel, state: item.state)
+                            }
+
+                            Text(item.title)
+                                .font(theme.typography.bodyEmphasized)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text(item.summary)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+
+                            HStack(spacing: theme.spacing.xs) {
+                                Label(item.reviewLabel, systemImage: "eye")
+                                Text(item.reversibilityLabel)
+                            }
+                            .font(theme.typography.micro)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(state.title)
+        .accessibilityValue(state.accessibilitySummary)
+        .accessibilityIdentifier("goal-detail.review-trail")
     }
 }
 

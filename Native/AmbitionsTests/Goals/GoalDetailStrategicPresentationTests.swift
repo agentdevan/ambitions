@@ -45,6 +45,8 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(missionControl.risks.emptyTitle, "No major risk visible")
         XCTAssertFalse(missionControl.archive.title.isEmpty)
         XCTAssertFalse(missionControl.timeline.items.isEmpty)
+        XCTAssertEqual(missionControl.reviewTrail.items.map(\.kind), [.proof, .decision, .assumption, .receipt])
+        XCTAssertTrue(missionControl.reviewTrail.accessibilitySummary.contains("Receipt"))
     }
 
     func testMissionControlLanePrimitivePreservesGoalDetailLaneContract() async throws {
@@ -271,6 +273,8 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertTrue(missionControl.assumptions.contains(where: { $0.correctionLabel != nil }))
         XCTAssertTrue(missionControl.receipts.items.isEmpty)
         XCTAssertEqual(missionControl.receipts.emptyMessage, "Receipts will appear here after goal changes are recorded.")
+        XCTAssertEqual(missionControl.reviewTrail.items.last?.reversibilityLabel, "Reversibility only when available")
+        XCTAssertTrue(missionControl.reviewTrail.items.contains(where: { $0.sourceLabel == "Assumption" && $0.reviewLabel.localizedCaseInsensitiveContains("review") }))
     }
 
     func testMissionControlCopyAvoidsTechnicalEngineNames() async throws {
@@ -286,10 +290,14 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         let copy = ([missionControl.currentTruth, missionControl.receipts.subtitle, missionControl.proofRail.subtitle]
             + missionControl.lanes.flatMap { [$0.title, $0.headline, $0.summary, $0.detail] }
             + missionControl.assumptions.flatMap { [$0.title, $0.status, $0.whyItMatters, $0.correctionLabel ?? ""] }
+            + missionControl.reviewTrail.items.flatMap { [$0.title, $0.summary, $0.sourceLabel, $0.reviewLabel, $0.reversibilityLabel] }
         ).joined(separator: " ")
 
         for forbidden in ["Life Graph", "Believability Kernel", "Action Closure Layer", "Proof Graph", "Promise Ledger", "Safe Automation Boundary", "Assumption Watchtower", "RC maturity"] {
             XCTAssertFalse(copy.contains(forbidden), "Unexpected technical copy: \(forbidden)")
+        }
+        for forbidden in ["AI verified", "AI confidence", "notification feed", "activity feed", "classified as"] {
+            XCTAssertFalse(copy.localizedCaseInsensitiveContains(forbidden), "Unexpected trust copy: \(forbidden)")
         }
     }
 

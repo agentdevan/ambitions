@@ -1,7 +1,7 @@
 # PD01-PD18 Product Depth Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; PD03 accepted Yellow; PD04 accepted Yellow; PD05 Green; PD06 Green; Product Depth implementation started only within named Today and Goals depth scopes.
+Status: Active Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; PD03 accepted Yellow; PD04 accepted Yellow; PD05 Green; PD06 Green; PD07 accepted Yellow; Product Depth implementation started only within named Today and Goals depth scopes.
 Train type: queued implementation / product-depth / drill-down expansion
 Date: 2026-05-02
 
@@ -52,7 +52,7 @@ Product Depth must deepen existing surfaces and must not widen the app. No new t
 - PD04: Today Recovery and Closure Depth. Type: Implementation. Owner: Today / Recovery. Boundary: Make missed, moved, blocked, skipped, and still-valid steps recoverable without shame. Status: accepted Yellow after focused Today tests and local build; closure/recovery remains presentation-bounded with no silent plan mutation or AOS runtime claim.
 - PD05: Goals Mission Control Detail Architecture. Type: Implementation. Owner: Goals. Boundary: Turn Goal Detail into the real depth hub for a goal. Status: Green after focused Goal Detail tests and local build; visible MissionControlTimeSpine order reconciled to Completed / Now / Friction / Next / Horizon while preserving internal lane-kind compatibility.
 - PD06: Goal Lifecycle and Path Visualization. Type: Implementation. Owner: Goals. Boundary: Make a goal feel visually alive. Status: Green after focused Goal Detail tests and local build; Goal Detail now gives path stages text-plus-symbol lifecycle, progress, proof, risk, and route markers with non-color accessibility summaries while keeping route/navigation/data boundaries unchanged.
-- PD07: Goal Proof and Decision History Depth. Type: Implementation. Owner: Goals / Proof. Boundary: Make goal changes trustworthy and reviewable.
+- PD07: Goal Proof and Decision History Depth. Type: Implementation. Owner: Goals / Proof. Boundary: Make goal changes trustworthy and reviewable. Status: accepted Yellow after focused Goal Detail tests and local build; Goal Detail now includes a presentation-derived review trail for proof, decisions, assumptions, and receipts without proof runtime/data-model changes.
 - PD08: Goal Alternate Path and Tradeoff Depth. Type: Implementation. Owner: Goals. Boundary: Make goal pivots and alternate routes visible without creating overwhelm.
 - PD09: Capture Placement Review. Type: Implementation. Owner: Capture. Boundary: Make captured thoughts easy to place without turning Capture into an inbox.
 - PD10: Capture Correction and Confidence Loops. Type: Implementation. Owner: Capture. Boundary: Let the user correct where captured items go and improve future placement without hidden automation.

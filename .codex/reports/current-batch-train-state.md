@@ -2,12 +2,12 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD06 complete / Green
-Scope: PD06 deepened only Goals-owned Goal Detail lifecycle/path visualization.
-It adjusted Goal Detail path stage state, path filmstrip rendering, Path
-Builder copy, and focused Goals tests. It did not add a top-level destination,
-edit navigation/source-truth tabs, persistence, sync/auth/network, AI/LDI
-runtime, CI/config, dependency, release/platform claims, broad app
+Current batch: PD07 complete / accepted Yellow
+Scope: PD07 deepened only Goals-owned Goal Detail proof and decision history
+presentation. It added presentation-derived review trail state, Goal Detail UI,
+focused Goals tests, and Product Depth docs. It did not touch proof runtime
+models, persistence/schema, sync/auth/network, AI/LDI runtime, navigation,
+route/raw values, CI/config, dependencies, release/platform claims, broad app
 implementation, or Candidate finalization. Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:
@@ -593,6 +593,29 @@ finalization, or release/platform claim changed. Validation passed for
 0 failures), `scripts/build-local.sh`, diff checks, and advisory scans. Yellow
 items are expected historical/advisory scan hits, no screenshot/rendered proof,
 no manual VoiceOver traversal, no toggled Reduce Motion walkthrough, and no
+physical-device proof.
+
+## PD07 Goal Proof And Decision History Depth
+
+Date: 2026-05-04
+Result: ACCEPTED YELLOW
+
+PD07 deepened Goal Detail proof and decision history as a presentation-derived
+review trail inside the Goals owner boundary. The review trail summarizes proof,
+decision, assumption, and receipt state with symbol-plus-text markers, source
+labels, review labels, reversibility language, and a combined accessibility
+summary. The implementation derives from existing Goal Detail mission-control
+state and does not add proof runtime/data models, persistence/schema,
+sync/auth/network, AI/LDI runtime, navigation, route/raw-value changes,
+dependencies, workflow/config edits, broad app implementation, Candidate
+finalization, or release/platform claims. A repair changed assumption review
+copy from a direct correction title to review-prefixed language before focused
+tests passed. Validation passed for `git diff --check`, `xcodegen generate`,
+focused `GoalDetailStrategicPresentationTests` (17 tests, 0 failures), and
+`scripts/build-local.sh`. Yellow items are existing/advisory doc QA backlog,
+existing file-size advisory backlog, changed-file-boundary-check flagging
+PD07-allowed Goals/test files as forbidden, no screenshot/rendered proof, no
+manual VoiceOver traversal, no toggled Reduce Motion walkthrough, and no
 physical-device proof.
 
 ## SI15 Accessibility Adaptive Interface Pass
