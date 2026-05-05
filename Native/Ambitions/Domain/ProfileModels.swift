@@ -405,6 +405,7 @@ struct ProfileDashboard: Sendable, Equatable {
     let memoryControls: ProfileMemoryControlState
     let assumptionCorrections: ProfileAssumptionCorrectionState
     let automationBoundary: ProfileAutomationBoundaryState
+    let planningDefaultsCenter: ProfilePlanningDefaultsCenterState
     let receiptAudit: ProfileReceiptAuditState
     let trustHistoryCenter: ProfileTrustHistoryCenterState
     let reviews: ProfileReviewsState
@@ -425,6 +426,7 @@ struct ProfileDashboard: Sendable, Equatable {
         memoryControls: ProfileMemoryControlState,
         assumptionCorrections: ProfileAssumptionCorrectionState,
         automationBoundary: ProfileAutomationBoundaryState,
+        planningDefaultsCenter: ProfilePlanningDefaultsCenterState = .empty,
         receiptAudit: ProfileReceiptAuditState,
         trustHistoryCenter: ProfileTrustHistoryCenterState = .empty,
         reviews: ProfileReviewsState,
@@ -444,6 +446,7 @@ struct ProfileDashboard: Sendable, Equatable {
         self.memoryControls = memoryControls
         self.assumptionCorrections = assumptionCorrections
         self.automationBoundary = automationBoundary
+        self.planningDefaultsCenter = planningDefaultsCenter
         self.receiptAudit = receiptAudit
         self.trustHistoryCenter = trustHistoryCenter
         self.reviews = reviews

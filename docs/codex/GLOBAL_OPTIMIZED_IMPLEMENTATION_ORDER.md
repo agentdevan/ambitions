@@ -16,8 +16,8 @@ As of this order update:
 
 - Ambitions 4.0 remains an active post-3.0 execution program, not a shipped product version.
 - Top-level surfaces remain `Today / Goals / Capture / Plan / You`.
-- Product Depth is active through PD15 Green.
-- PD16-PD18 remain queued.
+- Product Depth is active through PD16 Green.
+- PD17-PD18 remain queued.
 - FCP source-truth docs exist, but FCP implementation has not started until registry/context reconciliation and the required approval phrase.
 - AOS01-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
@@ -56,7 +56,7 @@ Train-specific approval remains valid for a single train only:
 | 004 | FCP03 Ownership / File Boundary / Dependency Map | FCP | Docs | Completed Green on 2026-05-05 as docs-only ownership/file-boundary/dependency map. | FCP02. | Complete; next FCP04. |
 | 005 | FCP04 Preview Fixture And QA Matrix Expansion | FCP | Docs / Fixture planning | Completed Green on 2026-05-05 as docs-only preview/QA matrix expansion. | FCP03. | Complete; next PD16 by full-stack order. |
 | 006 | PD15 You Trust History And Receipts Center | PD | Implementation | Completed Green as You trust/receipt depth before Personal System Center and Receipt Drawer integration. | PD14 Green; PD train gates. | Completed. |
-| 007 | PD16 Schedule Availability And Planning Defaults Depth | PD | Implementation | Hard context must precede Start Here time-fit and Availability Center. | PD15 Green/accepted Yellow. | Single-batch preferred. |
+| 007 | PD16 Schedule Availability And Planning Defaults Depth | PD | Implementation | Completed Green as You/Profile planning-defaults depth before Start Here time-fit and Availability Center. | PD15 Green/accepted Yellow. | Complete. |
 | 008 | PD17 Cross-Surface Proof And Review Integration | PD | Implementation | Gives proof/review bridge before FCP proof spine and final mesh. | PD16 Green/accepted Yellow. | Single-batch preferred. |
 | 009 | PD18 Product Depth Handoff And Next-Lane Readiness | PD | Handoff | Closes PD before flagship refactor train. | PD17 Green/accepted Yellow. | May continue to FCP if approval covers it. |
 | 010 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Build Availability Center before Start Here relies on time-fit proof. | PD16; FCP01-FCP04. | Single-batch. |

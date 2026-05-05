@@ -2,13 +2,12 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP04 Preview Fixture And QA Matrix Expansion active
-Scope: FCP04 is a docs/planning-only preview fixture and QA matrix expansion. It
-may update FCP docs, registry/context pointers, run-state docs, and an audit
-report. It may not edit production Swift, app behavior, route/raw values,
-persistence/schema, dependency/workflow/signing/CI, generated project files,
-release/platform claims, accessibility conformance claims, privacy/legal claims,
-sync/cloud, StoreKit, AI runtime, or LDI runtime.
+Current batch: PD16 Schedule Availability And Planning Defaults Depth Green;
+PD17 Cross-Surface Proof And Review Integration next if continuation gates allow.
+Scope: PD16 completed as bounded You/Profile planning setup/defaults depth. It
+did not edit routes/raw values, persistence/schema, dependency/workflow/signing/
+CI, release/platform claims, privacy/legal claims, sync/cloud, StoreKit,
+calendar/reminder behavior, AI runtime, or LDI runtime.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -22,9 +21,16 @@ FCP source truth exists through `Ambitions_10_10_Flagship_Completion_Plan.md`,
 the FCP train manifest, object scorecard, gate matrix, and file-boundary map.
 FCP/PFC registry-context reconciliation, FCP01 source-truth lock, FCP02 object
 vocabulary/anatomy lock, and FCP03 ownership/boundary map are complete as
-docs-only operating truth. FCP04 is expanding preview fixture and QA matrix
-requirements as source-truth planning evidence. FCP production Swift
-implementation has not started.
+docs-only operating truth. FCP04 preview fixture and QA matrix expansion is
+complete as source-truth planning evidence. FCP production Swift implementation
+has not started.
+
+PD16 is complete / Green as bounded You/Profile implementation evidence. It
+adds typed planning setup depth for Schedule & Availability, Planning Defaults,
+Vacation / Away Time, and Automation & Trust, preserves Guided automation as
+the default, keeps calendar awareness Plan-owned, and claims no calendar write,
+permission prompt, sync/account, AOS runtime, LDI runtime, release, legal, or
+public accessibility proof.
 
 PFC source truth exists through
 `Ambitions_Platform_Legal_And_Framework_Completion_Plan.md` and the PFC train

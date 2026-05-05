@@ -192,6 +192,11 @@ private extension RepositoryBackedProfileService {
             memoryControls: makeMemoryControls(snapshot: snapshot),
             assumptionCorrections: makeAssumptionCorrections(snapshot: snapshot),
             automationBoundary: makeAutomationBoundary(safetySamples: safetySamples),
+            planningDefaultsCenter: makePlanningDefaultsCenter(
+                calendarAuthorization: calendarAuthorization,
+                remindersAuthorization: remindersAuthorization,
+                safetySamples: safetySamples
+            ),
             receiptAudit: makeReceiptAudit(snapshot: snapshot, receipts: policyReceipts),
             trustHistoryCenter: makeTrustHistoryCenter(
                 snapshot: snapshot,
@@ -1504,6 +1509,132 @@ private extension RepositoryBackedProfileService {
                 )
             ],
             footer: "This describes policy decisions only. It does not execute calendar writes, sync resolution, deletion, or undo."
+        )
+    }
+
+    func makePlanningDefaultsCenter(
+        calendarAuthorization: CalendarRemindersAuthorizationState,
+        remindersAuthorization: CalendarRemindersAuthorizationState,
+        safetySamples: SafetyBoundarySamples
+    ) -> ProfilePlanningDefaultsCenterState {
+        ProfilePlanningDefaultsCenterState(
+            title: "Planning setup that earns its place",
+            subtitle: "These defaults explain how Ambitions shapes Plan suggestions without treating setup as homework.",
+            sections: [
+                ProfilePlanningDefaultsSection(
+                    id: "schedule-availability",
+                    title: "Schedule & Availability",
+                    subtitle: "Time boundaries help Plan avoid treating committed or protected time as available.",
+                    preferences: [
+                        ProfilePlanningDefaultsPreference(
+                            id: "schedule-anchors",
+                            title: "Work, school, and anchors",
+                            whyItMatters: "Plan can keep committed blocks, transitions, sleep, care, and recovery from being mistaken for open capacity.",
+                            statusLabel: calendarAuthorizationLabel(calendarAuthorization),
+                            privacyLabel: "Calendar awareness is Plan-owned and requested only after a clear Plan action.",
+                            defaultLabel: "Optional",
+                            accessibilityHint: "Explains why schedule anchors improve planning fit.",
+                            state: .default
+                        ),
+                        ProfilePlanningDefaultsPreference(
+                            id: "schedule-buffers",
+                            title: "Buffers and protected time",
+                            whyItMatters: "Buffers and protected free time create breathing room before Ambitions suggests where work can fit.",
+                            statusLabel: "Protected",
+                            privacyLabel: "Open time is not automatically filled.",
+                            defaultLabel: "Do not fill",
+                            accessibilityHint: "Explains how buffers protect capacity.",
+                            state: .success
+                        )
+                    ],
+                    footer: "Setup remains optional. Ambitions should ask for clearer boundaries only when planning quality depends on them."
+                ),
+                ProfilePlanningDefaultsSection(
+                    id: "planning-defaults",
+                    title: "Planning Defaults",
+                    subtitle: "Defaults keep Plan useful without making hidden changes.",
+                    preferences: [
+                        ProfilePlanningDefaultsPreference(
+                            id: "planning-open-time",
+                            title: "Open time behavior",
+                            whyItMatters: "Open windows are capacity signals, not an invitation to pack the day.",
+                            statusLabel: AvailabilityState.doNotFill.displayLabel,
+                            privacyLabel: "Your time, your rules.",
+                            defaultLabel: "Default",
+                            accessibilityHint: "Explains the open time default.",
+                            state: .success
+                        ),
+                        ProfilePlanningDefaultsPreference(
+                            id: "planning-reflow",
+                            title: "Reflow permission",
+                            whyItMatters: "Meaningful day changes stay reviewable so Plan can recover without taking over.",
+                            statusLabel: "Ask first",
+                            privacyLabel: "Receipts explain consequential changes.",
+                            defaultLabel: nil,
+                            accessibilityHint: "Explains the reflow permission boundary.",
+                            state: .warning
+                        )
+                    ],
+                    footer: "Day, Week, and Month remain capacity lenses. They are not calendar modes."
+                ),
+                ProfilePlanningDefaultsSection(
+                    id: "vacation-away-time",
+                    title: "Vacation / Away Time",
+                    subtitle: "Away time protects recovery unless you explicitly mark a window open.",
+                    preferences: [
+                        ProfilePlanningDefaultsPreference(
+                            id: "vacation-default",
+                            title: "Away time default",
+                            whyItMatters: "Vacation is not free time by default, so Plan does not turn recovery into a work queue.",
+                            statusLabel: VacationAvailabilityBehavior.defaultBehavior.displayLabel,
+                            privacyLabel: "The selected behavior applies only to planning fit.",
+                            defaultLabel: "Default",
+                            accessibilityHint: "Explains the away time default.",
+                            state: .success
+                        ),
+                        ProfilePlanningDefaultsPreference(
+                            id: "vacation-override",
+                            title: "Per-vacation override",
+                            whyItMatters: "A specific trip can be open, protected, or mixed without changing future away-time defaults unless you choose to.",
+                            statusLabel: "Per away block",
+                            privacyLabel: "Future defaults change only through visible user choice.",
+                            defaultLabel: nil,
+                            accessibilityHint: "Explains per-vacation override behavior.",
+                            state: .default
+                        )
+                    ],
+                    footer: "Away-time behavior is a planning boundary, not a judgment about how time should be spent."
+                ),
+                ProfilePlanningDefaultsSection(
+                    id: "automation-trust",
+                    title: "Automation & Trust",
+                    subtitle: "Automation is permission posture, not silent control.",
+                    preferences: [
+                        ProfilePlanningDefaultsPreference(
+                            id: "automation-guided",
+                            title: "Guided automation",
+                            whyItMatters: AutomationLevel.defaultLevel.explanation,
+                            statusLabel: AutomationLevel.defaultLevel.displayLabel,
+                            privacyLabel: "Ambitions proposes first and asks before consequential changes.",
+                            defaultLabel: "Default",
+                            accessibilityHint: "Explains the Guided automation default.",
+                            state: .selected
+                        ),
+                        ProfilePlanningDefaultsPreference(
+                            id: "automation-confirmation",
+                            title: "Confirmation boundary",
+                            whyItMatters: safetySamples.calendarWrite.reasons.map(\.userFacingSummary).joined(separator: " "),
+                            statusLabel: "Requires confirmation",
+                            privacyLabel: "No silent calendar changes.",
+                            defaultLabel: nil,
+                            accessibilityHint: "Explains the automation confirmation boundary.",
+                            state: .warning
+                        )
+                    ],
+                    footer: "This center explains the default. It does not execute calendar writes, permission requests, or broad reflow."
+                )
+            ],
+            footer: "Planning setup is useful when it makes recommendations fit real capacity. It should never pressure completion or imply hidden access."
         )
     }
 

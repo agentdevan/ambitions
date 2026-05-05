@@ -247,63 +247,21 @@ private struct ProfileRootDetailSheet: View {
         case .archive:
             ProfileSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "profile.archive-card")
         case .scheduleAvailability:
-            ProfileSectionCard(
-                eyebrow: "Planning Behavior",
-                section: ProfileSectionGroup(
-                    title: "Schedule & Availability",
-                    subtitle: "Ambitions uses this to avoid treating busy time as free time.",
-                    items: [
-                        SettingsItem(id: "schedule-work", title: "Work schedule", subtitle: "Multiple windows, irregular blocks, and low-control work are supported by the v2 model.", icon: "briefcase", valueLabel: "Local"),
-                        SettingsItem(id: "schedule-school", title: "School schedule", subtitle: "School blocks and transition buffers are hard context before open time is calculated.", icon: "graduationcap", valueLabel: "Local"),
-                        SettingsItem(id: "schedule-protected", title: "Protected time", subtitle: "Family, household, pet care, sleep, and recovery anchors stay out of free time.", icon: "shield", valueLabel: "Protected"),
-                        SettingsItem(id: "schedule-buffers", title: "Commute / transition buffers", subtitle: "Buffers count as real protected time.", icon: "arrow.left.arrow.right", valueLabel: "Hard context")
-                    ],
-                    footer: "Setup remains optional and non-blocking."
-                ),
-                accessibilityIdentifier: "profile.schedule-availability-card"
-            )
+            if let section = dashboard.planningDefaultsCenter.section(id: "schedule-availability") {
+                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.schedule-availability-card")
+            }
         case .planBehavior:
-            ProfileSectionCard(
-                eyebrow: "Planning Behavior",
-                section: ProfileSectionGroup(
-                    title: "Plan Behavior",
-                    subtitle: "Control how Ambitions treats open windows and recovery prompts.",
-                    items: [
-                        SettingsItem(id: "plan-open-time", title: "Open time behavior", subtitle: "Open time is not automatically filled.", icon: "rectangle.dashed", valueLabel: AvailabilityState.doNotFill.displayLabel),
-                        SettingsItem(id: "plan-protected-free", title: "Protected free time", subtitle: "Some open windows should stay quiet.", icon: "lock", valueLabel: AvailabilityState.protectedFreeTime.displayLabel),
-                        SettingsItem(id: "plan-reflow", title: "Reflow permission", subtitle: "Meaningful day changes ask first and save receipts.", icon: "arrow.triangle.2.circlepath", valueLabel: "Ask first"),
-                        SettingsItem(id: "plan-rigidity", title: "Default rigidity", subtitle: "Flexible and optional items can shift only inside trusted rules.", icon: "pin", valueLabel: RigidityLevel.flexible.displayLabel)
-                    ],
-                    footer: "Hard context, protected blocks, and user-owned boundaries win before recommendations."
-                ),
-                accessibilityIdentifier: "profile.plan-behavior-card"
-            )
+            if let section = dashboard.planningDefaultsCenter.section(id: "planning-defaults") {
+                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.plan-behavior-card")
+            }
         case .automationTrust:
-            ProfileSectionCard(
-                eyebrow: "Planning Behavior",
-                section: ProfileSectionGroup(
-                    title: "Automation & Trust",
-                    subtitle: "Choose how much Ambitions may change without asking.",
-                    items: AutomationLevel.allCases.map {
-                        SettingsItem(id: "automation-\($0.rawValue)", title: $0.displayLabel, subtitle: $0.explanation, icon: $0 == .guided ? "checkmark.shield" : "hand.raised", valueLabel: $0 == AutomationLevel.defaultLevel ? "Default" : nil)
-                    },
-                    footer: "Guided is the default: Ambitions proposes and asks before changing meaningful parts of the day."
-                ),
-                accessibilityIdentifier: "profile.automation-trust-card"
-            )
+            if let section = dashboard.planningDefaultsCenter.section(id: "automation-trust") {
+                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.automation-trust-card")
+            }
         case .vacationAwayTime:
-            ProfileSectionCard(
-                eyebrow: "Planning Behavior",
-                section: ProfileSectionGroup(
-                    title: "Vacation / Away Time",
-                    subtitle: "Vacation is not free time by default.",
-                    items: VacationAvailabilityBehavior.allCases.map {
-                        SettingsItem(id: "vacation-\($0.rawValue)", title: $0.displayLabel, subtitle: vacationAvailabilitySubtitle(for: $0), icon: "airplane.departure", valueLabel: $0 == VacationAvailabilityBehavior.defaultBehavior ? "Default" : nil)
-                    },
-                    footer: "A new vacation can make its selected behavior the future default."
-                ),
-                accessibilityIdentifier: "profile.vacation-away-card"
-            )
+            if let section = dashboard.planningDefaultsCenter.section(id: "vacation-away-time") {
+                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.vacation-away-card")
+            }
         case .durations:
             ProfileSectionCard(
                 eyebrow: "Planning Behavior",

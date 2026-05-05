@@ -706,6 +706,41 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("achievement"))
     }
 
+    func testPD16PlanningDefaultsCenterExplainsWhySetupMattersWithoutPressure() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let center = dashboard.planningDefaultsCenter
+        let sectionIDs = center.sections.map(\.id)
+        let visibleCopy = ([center.title, center.subtitle, center.footer] + center.sections.flatMap { section in
+            [section.title, section.subtitle, section.footer] + section.preferences.flatMap {
+                [$0.title, $0.whyItMatters, $0.statusLabel, $0.privacyLabel, $0.defaultLabel ?? "", $0.accessibilityHint]
+            }
+        }).joined(separator: " ")
+
+        XCTAssertEqual(sectionIDs, [
+            "schedule-availability",
+            "planning-defaults",
+            "vacation-away-time",
+            "automation-trust"
+        ])
+        XCTAssertTrue(center.subtitle.contains("without treating setup as homework"))
+        XCTAssertTrue(visibleCopy.contains("Calendar awareness is Plan-owned"))
+        XCTAssertTrue(visibleCopy.contains("Open time is not automatically filled"))
+        XCTAssertTrue(visibleCopy.contains("Vacation is not free time by default"))
+        XCTAssertTrue(visibleCopy.contains("Per-vacation override"))
+        XCTAssertTrue(visibleCopy.contains("Guided automation"))
+        XCTAssertTrue(visibleCopy.contains("Ambitions proposes first and asks before consequential changes"))
+        XCTAssertTrue(visibleCopy.contains("This center explains the default. It does not execute calendar writes, permission requests, or broad reflow."))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("calendar sync"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("calendar written"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI verified"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("productivity score"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("permission grab"))
+    }
+
     func testTopLevelShellStillExcludesLegacyProfileInsightsAndHabitsTabs() {
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))

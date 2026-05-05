@@ -21,7 +21,7 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 ## Baseline
 
-- Product Depth is active through PD15 Green.
+- Product Depth is active through PD16 Green.
 - FCP source truth exists and is queued.
 - PFC source truth exists and is queued.
 - AOS and LDI remain queued.
@@ -48,7 +48,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 8. PD15 You Trust History And Receipts Center. Completed Green after local
    reconciliation on 2026-05-05.
-9. PD16 Schedule Availability And Planning Defaults Depth.
+9. PD16 Schedule Availability And Planning Defaults Depth. Completed Green as
+   bounded You/Profile planning-defaults depth on 2026-05-05.
 10. PD17 Cross-Surface Proof And Review Integration.
 11. PD18 Product Depth Handoff And Next-Lane Readiness.
 
