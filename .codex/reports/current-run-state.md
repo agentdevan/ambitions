@@ -2,8 +2,13 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD01 complete / accepted Yellow; PD02 next eligible if continuation gates allow
-Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
+Current batch: PD02 complete / accepted Yellow; PD03 next eligible if continuation gates allow
+Scope: PD02 implemented only the Today-owned lightweight Step Detail drill-down
+behind Reality Rail. Top-level Today remains compact and visual; no new tab,
+navigation route, persistence, sync/auth/network, AI/LDI runtime, CI/config,
+dependency, release/platform claim, broad app implementation, or Candidate
+finalization was added. Complete: EB03A Universal Capture Composer Routing
+Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
 Review Bundles And Open Loops. Complete: EB06 Capture Receipts Undo And
@@ -472,14 +477,16 @@ public accessibility or profiling proof.
 
 ## Next Safe Path
 
-Product Depth approval phrase is satisfied. Run PD01 only within docs/planning
-scope, then continue to PD02 only if PD01 closes Green or accepted Yellow and
-the Product Depth continuation gates allow it. Do not restart broad
+Product Depth approval phrase is satisfied. PD01 is complete / accepted Yellow
+as docs/planning source truth. PD02 is complete / accepted Yellow as bounded
+Today Step Detail implementation. Continue to PD03 only if PD02 commits,
+pushes, leaves a clean worktree, and the Product Depth continuation gates allow
+it. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
 SI12, SI13, SI14, SI15, SI16, SI17, SI18, or completed DAV / EB20-EB24 batches.
-The next safe action is PD02 if PD01 has been committed, pushed, the worktree is
+The next safe action is PD03 if PD02 has been committed, pushed, the worktree is
 clean, and Product Depth continuation gates allow it.
 
 ## PD01 Product Depth Canon, Inventory, And Ownership Map
@@ -495,6 +502,26 @@ AI/LDI runtime, CI/config, generated files, routes/raw values, tests, previews,
 fixtures, or release/platform claims. Validation closed accepted Yellow because
 the advisory docs QA backlog and scan hits are known/nonblocking and no
 forbidden production file family was touched.
+
+## PD02 Today Step Detail Depth
+
+Date: 2026-05-04
+Result: ACCEPTED YELLOW
+
+PD02 made Today Step Detail a real lightweight drill-down behind Reality Rail.
+The Step Detail sheet now exposes source, context, goal, why-now, Step Session,
+Close the Loop, and proof/receipt access copy without expanding the top-level
+rail into a task row or adding a destination. It touched only Today owner files,
+focused Today tests, and train/run-state docs. No navigation route, top-level
+tab, persistence/schema, sync/auth/network, AI/LDI runtime, dependency,
+workflow, design-token, generated project, or release/platform claim changed.
+Validation passed for `xcodegen generate`, focused `TodayViewModelTests` (34
+tests, 0 failures), `scripts/build-local.sh`, diff checks, touched-path copy
+scan, file-size/diff-size review, and advisory accessibility/product/AI drift
+scans. Yellow items are existing scan backlog, large existing Today owner-file
+watch, no rendered screenshot, no manual VoiceOver traversal, no toggled Reduce
+Motion walkthrough, no physical-device proof, and no release/accessibility
+claim.
 
 ## SI15 Accessibility Adaptive Interface Pass
 

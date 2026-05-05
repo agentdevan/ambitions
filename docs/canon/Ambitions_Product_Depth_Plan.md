@@ -1,17 +1,19 @@
 # Ambitions Product Depth Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; Product Depth implementation not started
+Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation
 Date: 2026-05-02
 
 ## Purpose
 
 Product Depth is the future Ambitions lane for making the existing product surfaces deeper, more trustworthy, and more useful without widening the app. It turns secondary information, proof, review, recovery, setup, and continuity into owned drill-downs behind the existing five top-level surfaces.
 
-This plan is not implementation approval. PD01 started only after the required
-approval phrase was provided. PD01 creates canon, inventory, ownership, and
-dependency truth. It does not implement app code, start REC02, restart PXOS,
-restart ME/CS/AOS, resume the global train, or create release work.
+This plan is not broad implementation approval. PD01 started only after the
+required approval phrase was provided. PD01 creates canon, inventory,
+ownership, and dependency truth. PD02 starts Product Depth implementation only
+inside the named Today Step Detail boundary. Neither batch starts REC02,
+restarts PXOS, restarts ME/CS/AOS, resumes the global train, or creates release
+work.
 
 ## Governing Rule
 
@@ -47,9 +49,9 @@ Top-level surfaces remain visual orientation surfaces. Detail belongs behind dri
 Train name: `PD01-PD18 Product Depth Train`
 
 Status: Active after approval phrase; PD01 is accepted Yellow as the
-docs/planning source-truth batch. Product Depth implementation remains not
-started until an individual PD implementation batch runs, validates, commits,
-and closes.
+docs/planning source-truth batch. PD02 is accepted Yellow as bounded Today Step
+Detail implementation. Later Product Depth implementation remains blocked until
+each individual PD implementation batch runs, validates, commits, and closes.
 
 Required approval phrase: `Start Product Depth Train`.
 
@@ -134,11 +136,12 @@ Candidate item status.
 ## Blocked And Unblocked Status
 
 PD01 may run after the required approval phrase and prerequisite gates. PD01
-closed accepted Yellow with docs-only evidence. PD02 is the next direct
-successor only after PD01 commits, pushes, leaves a clean worktree, and the
-continuation gate allows it.
+closed accepted Yellow with docs-only evidence. PD02 closed accepted Yellow as
+bounded Today implementation evidence after focused Today tests and local
+build validation. PD03 is the next direct successor only after PD02 commits,
+pushes, leaves a clean worktree, and the continuation gate allows it.
 
-PD03-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
+PD04-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
 validation, and predecessor gates are Green or accepted Yellow.
 
 ## Anti-Sprawl Tests

@@ -105,7 +105,12 @@ struct TodayScreen: View {
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.transientMessage?.title)
         .sheet(item: $selectedStepDetail) { detail in
-            TodayStepDetailSheet(detail: detail)
+            TodayStepDetailSheet(detail: detail) { action in
+                selectedStepDetail = nil
+                Task { @MainActor in
+                    handleAction(action)
+                }
+            }
                 .ambitionTheme(theme)
         }
         .sheet(item: $selectedActionClosure) { closure in

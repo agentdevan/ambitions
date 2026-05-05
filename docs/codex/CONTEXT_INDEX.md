@@ -210,9 +210,9 @@ Use this context when SI is selected by global order or explicit phrase:
 
 SI01-SI18 are complete as bounded Signature Interface evidence. The Product
 Depth approval phrase has been provided; PD01 is accepted Yellow as the Product
-Depth docs/planning source-truth batch. Product Depth implementation remains
-unstarted until an individual PD implementation batch runs and proves its
-scope.
+Depth docs/planning source-truth batch. PD02 is accepted Yellow as the first
+bounded Product Depth implementation batch and only proves Today Step Detail
+depth behind Reality Rail.
 
 ## Product Depth Queued Train Context
 
@@ -246,8 +246,8 @@ required PXOS, ME, CS, AOS-if-needed, and REC claim gates:
 
 Product Depth started only after the user said exactly
 `Start Product Depth Train`. PD01 is accepted Yellow as the docs/planning
-source-truth batch; Product Depth implementation remains unstarted until an
-individual implementation batch runs and validates. Product Depth must deepen
+source-truth batch. PD02 is accepted Yellow as a bounded Today Step Detail
+implementation batch. Product Depth must deepen
 Today, Goals, Capture, Plan, and You; it must not add new top-level tabs,
 generic dashboards, stacked-card top-level screens, habit tracker modes,
 calendar clones, chatbot-first AI surfaces, inbox/notes modes, or enterprise

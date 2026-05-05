@@ -48,7 +48,7 @@ SI may start only when the global order reaches it or the exact phrase `Start Si
 
 ## Relationship To PD
 
-Product Depth is now a formal PD01-PD18 train in the Ambitions 4.0 global order. The train is active at PD01 for docs/planning canon, inventory, and ownership mapping after the exact approval phrase was supplied. Product Depth app implementation is not started and remains bounded by batch-specific gates.
+Product Depth is now a formal PD01-PD18 train in the Ambitions 4.0 global order. The train is active after the exact approval phrase was supplied. PD01 is accepted Yellow as docs/planning canon, inventory, and ownership mapping. PD02 is accepted Yellow as bounded Today Step Detail implementation. Broader Product Depth app implementation remains bounded by batch-specific gates.
 
 Product Depth may continue only after `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS-if-needed gates. Product Depth deepens Today, Goals, Capture, Plan, and You through drill-downs and owned detail flows. It must not widen the app.
 

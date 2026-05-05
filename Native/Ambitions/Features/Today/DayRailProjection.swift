@@ -167,6 +167,12 @@ extension DayRailPrivacyProjectionState {
         isSensitiveProjection ? "Details hidden here" : contextLabel.todayShortSentence
     }
 
+    func goalLinkLabel(from label: String) -> String {
+        isSensitiveProjection
+            ? "Goal link hidden here"
+            : "Goal link: \(label.todayShortSentence)"
+    }
+
     func sourceSummary(from labels: [DayRailSourceLabelState]) -> String {
         if isSensitiveProjection {
             return sourceLabel

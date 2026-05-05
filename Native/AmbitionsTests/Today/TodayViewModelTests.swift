@@ -330,9 +330,12 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(heroDetail.timingBucket, "Start here")
         XCTAssertEqual(heroDetail.title, hero.title)
         XCTAssertEqual(heroDetail.primaryAction.title, "Start now")
+        XCTAssertEqual(heroDetail.closureAction.title, "Close the loop")
+        XCTAssertEqual(heroDetail.stepSessionLabel, "Step Session opens for this one step.")
         XCTAssertEqual(heroDetail.detailTarget.kind, .stepDetail)
         XCTAssertEqual(rowDetail.timingBucket, "Now")
         XCTAssertEqual(rowDetail.title, row.title)
+        XCTAssertTrue(rowDetail.goalLinkLabel.contains(row.title))
         XCTAssertEqual(rowDetail.detailTarget.kind, .stepDetail)
     }
 
@@ -345,8 +348,11 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(copy.contains("Based on your plan"))
         XCTAssertTrue(copy.contains("Duration source: Suggested duration"))
         XCTAssertTrue(copy.contains("Start now"))
+        XCTAssertTrue(copy.contains("Close the loop"))
         XCTAssertTrue(copy.contains("Adjust plan"))
         XCTAssertTrue(copy.contains("Review later"))
+        XCTAssertTrue(copy.contains("Proof and receipts stay attached to this step"))
+        XCTAssertTrue(copy.contains("No silent changes"))
         XCTAssertFalse(detail.whyBullets.isEmpty)
     }
 
@@ -357,6 +363,8 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(detail.isPrivateProjection)
         XCTAssertEqual(detail.title, "Private step")
         XCTAssertEqual(detail.privacyStateLabel, "Details hidden here")
+        XCTAssertEqual(detail.goalLinkLabel, "Goal link hidden here")
+        XCTAssertTrue(detail.proofReceiptLabel.contains("stay private"))
         XCTAssertTrue(copy.contains("Private source"))
         XCTAssertTrue(copy.contains("Details hidden here"))
         XCTAssertFalse(copy.contains("Draft the talk outline"))
@@ -402,6 +410,8 @@ final class TodayViewModelTests: XCTestCase {
 
         XCTAssertEqual(detail.primaryAction.title, "Start now")
         XCTAssertEqual(detail.primaryAction.kind, .startStepSession)
+        XCTAssertEqual(detail.closureAction.kind, .closeActionClosure)
+        XCTAssertEqual(detail.closureAction.title, "Close the loop")
         XCTAssertEqual(detail.secondaryActions.map(\.title), ["Adjust plan", "Review later"])
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertTrue(rail.proofSlot.reservedForReceiptPeek)

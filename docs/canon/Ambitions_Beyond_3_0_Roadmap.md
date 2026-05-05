@@ -114,7 +114,11 @@ focused tests, and rollback path.
 Goal: deepen the existing primitives instead of adding new top-level
 destinations.
 
-Status: formal Ambitions 4.0 train created; Product Depth train active at PD01 for docs/planning canon, inventory, and ownership mapping after the exact approval phrase was supplied. Product Depth app implementation is not started.
+Status: formal Ambitions 4.0 train created; Product Depth train active after
+the exact approval phrase was supplied. PD01 is accepted Yellow for
+docs/planning canon, inventory, and ownership mapping. PD02 is accepted Yellow
+as bounded Today Step Detail implementation. Broader Product Depth app
+implementation remains gated by named batches.
 Required approval phrase to start Product Depth train:
 `Start Product Depth Train`.
 
@@ -211,7 +215,7 @@ AOS implementation is queued/blocked through `docs/codex/batch-trains/AOS01_AOS3
 
 ## Post-F30 Activation Status
 
-As of 2026-05-02, Ambitions 3.0 is complete by F30 closeout evidence and F17-F30 is historical Green train evidence. AmbitionsOS remains future canon, not current implementation truth. The first safe post-3.0 train selected after pre-train hardening is Release Evidence Closure, beginning with REC01 Release Evidence Truth Inventory. Product Depth PD01 is active for docs/planning canon, inventory, and ownership mapping after the exact approval phrase. This activation does not start AOS, ME, CS, or app implementation work.
+As of 2026-05-02, Ambitions 3.0 is complete by F30 closeout evidence and F17-F30 is historical Green train evidence. AmbitionsOS remains future canon, not current implementation truth. The first safe post-3.0 train selected after pre-train hardening is Release Evidence Closure, beginning with REC01 Release Evidence Truth Inventory. Product Depth PD01 is accepted Yellow for docs/planning canon, inventory, and ownership mapping after the exact approval phrase. PD02 is accepted Yellow as bounded Today Step Detail implementation. This activation does not start AOS, ME, CS, or broad app implementation work.
 
 ## PXOS Future-Canon Path
 

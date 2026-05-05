@@ -70,6 +70,12 @@ Current 4.0 status:
   Ownership Map is complete as docs/planning source truth. It creates the
   Product Depth canon/inventory/ownership map and updates train status without
   implementing app code. Product Depth implementation is not started.
+- Complete / accepted Yellow: PD02 Today Step Detail Depth is complete as
+  bounded Today implementation evidence. Step Detail now acts as a lightweight
+  drill-down behind Reality Rail with active Start now, Close the loop,
+  source/context/goal labels, and proof/receipt access copy; no new top-level
+  destination, route, persistence, runtime AI/LDI, or broad app implementation
+  was added.
 - Completed: CS01 Compatibility Seam Registry And Risk Map.
 - Completed: CS07 External Route Widget AppIntent Compatibility Proof.
 - Completed: CS08 Import Export Persistence Compatibility Proof.
@@ -471,7 +477,7 @@ Current 4.0 status:
   Ownership Map is complete as docs/planning evidence. Product Depth
   implementation is not started. LDI hooks are future-only and do not rewrite
   SI01-SI18 history.
-- Queued / Blocked: PD02-PD18 pending each batch's predecessor, PXOS/ME/CS/SI/AOS-if-needed gates, and Product Depth continuation checks.
+- Queued / Blocked: PD03-PD18 pending each batch's predecessor, PXOS/ME/CS/SI/AOS-if-needed gates, and Product Depth continuation checks.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Queued / Blocked: LDI01-LDI22 Living Dream Intelligence Train pending AOS30 Green by default or explicit user decision for earlier dependency split.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
@@ -829,7 +835,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS08 Import Export Persistence Compatibility Proof | Completed / focused proof | Import/export, portable snapshot, legacy import, persistence repository, sync posture, and persistence budget focused tests passed; no seam retired. |
 | CS02-CS06 / CS09-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires current global preauthorization or `Start CS Train` and Green predecessor gates. |
 | SI01-SI18 Signature Interface Implementation Train | Complete / accepted Yellow | SI01-SI18 complete; Product Depth approval phrase has now been provided for PD01. |
-| PD01-PD18 Product Depth Train | Active / PD01 accepted Yellow | Formal Product Depth train. PD01 is docs/planning only and creates canon, inventory, ownership, and dependency truth. PD02 is the next direct successor if continuation gates allow it. PD03-PD18 remain queued/blocked by predecessor, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
+| PD01-PD18 Product Depth Train | Active / PD02 accepted Yellow | Formal Product Depth train. PD01 is docs/planning only and creates canon, inventory, ownership, and dependency truth. PD02 completed the Today-owned lightweight Step Detail drill-down behind Reality Rail. PD03 is the next direct successor if continuation gates allow it. PD04-PD18 remain queued/blocked by predecessor, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
 | PX01-PX20 Product Experience OS Train | Completed / docs-only | PX01-PX20 are complete as future canon/roadmap evidence. PXOS implementation is not started. |
 
@@ -853,7 +859,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS08 Import Export Persistence Compatibility Proof | Completed / focused proof | Import/export/persistence proof only; no seam retired in this pass. |
 | CS02-CS06 / CS09-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Retirements, repair, and handoff remain queued/blocked. |
 | Product Experience OS / PXOS | Queued / Blocked future canon | User-facing future experience canon in Ambitions 4.0. Does not claim implementation. |
-| Product Depth / PD01-PD18 | Active / PD01 accepted Yellow | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. PD01 is canon/inventory/ownership only and does not add top-level destinations or claim implementation. |
+| Product Depth / PD01-PD18 | Active / PD02 accepted Yellow | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. PD01 is canon/inventory/ownership only. PD02 starts Product Depth implementation only within the named Today Step Detail boundary and does not add top-level destinations. |
 
 
 ## Living Dream Intelligence Train Registry
