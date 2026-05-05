@@ -125,6 +125,23 @@ struct DayRailProofSlotState: Equatable {
     let reservedForReceiptPeek: Bool
 }
 
+struct DayRailContinuityMarkerState: Identifiable, Equatable {
+    let id: String
+    let kind: DayRailNodeKind
+    let title: String
+    let summary: String
+    let detail: String
+    let semanticState: AmbitionSemanticState
+}
+
+struct DayRailContinuityState: Equatable {
+    let title: String
+    let summary: String
+    let markers: [DayRailContinuityMarkerState]
+    let pressureLabel: String
+    let noSilentChangesLabel: String
+}
+
 struct DayRailPrivacyProjectionState: Equatable {
     let classification: EventLedgerPrivacyClassification
     let isSensitiveProjection: Bool
@@ -144,6 +161,7 @@ struct AmbitionsDayRailViewState: Equatable {
     let durationSource: DayRailDurationSource
     let contextLabels: [DayRailSourceLabelState]
     let privacyProjection: DayRailPrivacyProjectionState
+    let continuity: DayRailContinuityState
     let closureSlot: DayRailClosureSlotState
     let proofSlot: DayRailProofSlotState
 }

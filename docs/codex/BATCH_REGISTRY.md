@@ -152,9 +152,17 @@ Current 4.0 status:
   dashboard, feed, generic task card, new route/raw value, persistence/schema
   change, sync/cloud behavior, AI/AOS/LDI runtime, release/legal/privacy claim,
   or public accessibility claim.
+- Complete / Green: FCP07 Reality Rail Continuity is complete as Today-owned
+  flagship rail implementation evidence. It adds a typed continuity spine that
+  connects Start Here, Now/Next/Later, closure, proof, and pressure with
+  non-color text markers and no-silent-change posture. FCP07 does not create a
+  dashboard, agenda clone, task list, route/raw-value change,
+  persistence/schema change, hidden completion/proof mutation, sync/cloud
+  behavior, AI/AOS/LDI runtime, release/legal/privacy claim, or public
+  accessibility claim.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as active implementation truth. FCP implementation has started with FCP17,
-  FCP06, and FCP05.
+  FCP06, FCP05, and FCP07.
   FCP targets
   25 major product objects and app-wide 10/10 audit closure, but the docs alone
   authorize no production Swift, route/raw-value, persistence/schema,

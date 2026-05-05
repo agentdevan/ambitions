@@ -53,6 +53,9 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   FL02-FL06 if later Found Life contracts affect availability assumptions.
 - FCP06 is optimized before Start Here implementation because Receipt Drawer / Source Fold is a hard trust dependency for Start Here, Reality Rail, Capture, Plan, Goals, and You.
 - FCP05 is complete as the Today-owned Start Here surface and must precede FCP07 because Start Here is now the active node in Reality Rail.
+- FCP07 is complete as the Today-owned Reality Rail continuity spine and must
+  precede FCP13A because closure is now visible as a rail knot but not yet the
+  final Action Closure Diamond.
 - FCP13A Action Closure Diamond must precede final Recovery Loop and cross-surface proof mesh.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.

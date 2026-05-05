@@ -112,6 +112,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertTrue(rail.proofSlot.noSilentChanges)
+        XCTAssertEqual(rail.continuity.markers.map(\.title), ["Start Here", "Now", "Next", "Later", "Closure knot", "Proof marker", "Pressure"])
         XCTAssertEqual(heroStep.contextEdge.title, "Context edge")
         XCTAssertEqual(heroStep.timeFitProof.title, "Time fit")
         XCTAssertEqual(heroStep.goalThread.title, "Goal thread")
@@ -207,6 +208,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Now"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Next"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Later"))
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Reality Rail continuity"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("No silent changes"))
     }
 
@@ -239,6 +241,36 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(hero.receiptItem.kind, .needsReview)
         XCTAssertEqual(hero.receiptItem.changeLabel, "Starting opens the current step; closing writes the receipt later.")
     }
+
+    func testFCP07RealityRailContinuityConnectsStartHereClosureProofAndPressure() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-fcp07",
+            stepID: "step-fcp07",
+            stepTitle: "Draft PM transition notes",
+            dueAt: "2026-04-15T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let rail = try await service.loadTodayExperience(userDisplayName: "", now: now).execution.dayRail
+        let copy = f02VisibleRailCopy(rail)
+
+        XCTAssertEqual(rail.continuity.title, "Reality Rail continuity")
+        XCTAssertTrue(copy.contains("Start Here, Now, Next, Later, closure, proof, and pressure stay connected."))
+        XCTAssertTrue(copy.contains("Closure knot"))
+        XCTAssertTrue(copy.contains("Close the loop"))
+        XCTAssertTrue(copy.contains("Proof marker"))
+        XCTAssertTrue(copy.contains("Proof saved"))
+        XCTAssertTrue(copy.contains("Pressure"))
+        XCTAssertTrue(copy.contains("No silent changes."))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("agenda"))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("task list"))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("dashboard"))
+    }
+
 
     func testF02RealityRailRowsStayDeterministicallyOrdered() async throws {
         let repositories = try await makeRepositories()
@@ -348,14 +380,17 @@ final class TodayViewModelTests: XCTestCase {
         }
     }
 
-    func testF02RealityRailReservedSlotsDoNotClaimClosureOrProofBehaviorImplemented() {
+    func testF02RealityRailContinuityDoesNotClaimHiddenClosureOrProofMutation() {
         let rail = PreviewTodayScenarios.stable.execution.dayRail
         let renderedReservationCopy = f02RenderedReservationCopy(rail)
 
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
-        XCTAssertTrue(renderedReservationCopy.contains("Close the loop stays reserved for F05."))
-        XCTAssertFalse(renderedReservationCopy.contains("Completed"))
+        XCTAssertTrue(renderedReservationCopy.contains("Closure knot"))
+        XCTAssertTrue(renderedReservationCopy.contains("Proof marker"))
+        XCTAssertTrue(renderedReservationCopy.contains("No silent changes."))
+        XCTAssertFalse(renderedReservationCopy.localizedCaseInsensitiveContains("auto-complete"))
+        XCTAssertFalse(renderedReservationCopy.localizedCaseInsensitiveContains("rearrange"))
     }
 
     func testF03RealityRailHeroAndRowProduceStepDetailState() throws {
@@ -454,7 +489,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(detail.secondaryActions.map(\.title), ["Adjust plan", "Review later"])
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
-        XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Close the loop stays reserved for F05."))
+        XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Closure knot"))
     }
 
     func testF05ActionClosureSheetSupportsStillCountsWithoutProofLedger() throws {
@@ -886,6 +921,11 @@ private extension TodayViewModelTests {
             "Next",
             "Later",
             rail.rows.map { "\($0.slot.rawValue) \($0.title) \($0.subtitle) \($0.duration.label)" }.joined(separator: " "),
+            rail.continuity.title,
+            rail.continuity.summary,
+            rail.continuity.markers.map { "\($0.title) \($0.summary) \($0.detail)" }.joined(separator: " "),
+            rail.continuity.pressureLabel,
+            rail.continuity.noSilentChangesLabel,
             f02RenderedReservationCopy(rail)
         ].compactMap { $0 }
 
@@ -897,17 +937,9 @@ private extension TodayViewModelTests {
     }
 
     func f02RenderedReservationCopy(_ rail: AmbitionsDayRailViewState) -> String {
-        var parts: [String] = []
-        if rail.closureSlot.reservedForActionClosureSheet {
-            parts.append("Close the loop stays reserved for F05.")
-        }
-        if rail.proofSlot.reservedForReceiptPeek {
-            parts.append("Proof and receipts stay reserved for F06.")
-        }
-        if rail.proofSlot.noSilentChanges {
-            parts.append("No silent changes.")
-        }
-        return parts.joined(separator: " ")
+        (rail.continuity.markers.map { "\($0.title) \($0.summary) \($0.detail)" } + [
+            rail.continuity.noSilentChangesLabel
+        ]).joined(separator: " ")
     }
 
     func makeRepositories() async throws -> AppRepositories {

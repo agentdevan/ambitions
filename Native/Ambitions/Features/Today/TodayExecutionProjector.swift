@@ -146,31 +146,49 @@ private extension TodayExecutionProjector {
             sourceLabels: sourceLabels
         )
 
+        let rows = DayRailRowState.rows(
+            from: todayPlan.items,
+            fallbackHero: heroStep,
+            privacy: privacy,
+            source: publicSource
+        )
+        let closureSlot = DayRailClosureSlotState(
+            title: contract.closure.title,
+            subtitle: contract.closure.subtitle,
+            reservedForActionClosureSheet: true
+        )
+        let proofSlot = DayRailProofSlotState(
+            title: "Proof saved",
+            subtitle: input.nowState.evidenceSummaries.isEmpty
+                ? "Start Here keeps the receipt seam visible before anything changes."
+                : "\(input.nowState.evidenceSummaries.count) local evidence item\(input.nowState.evidenceSummaries.count == 1 ? "" : "s") counted.",
+            noSilentChanges: true,
+            reservedForReceiptPeek: false
+        )
+        let mode = dayRailMode(input, hero: hero, friction: friction)
+
         return AmbitionsDayRailViewState(
             id: "day-rail.\(input.nowState.id)",
-            mode: dayRailMode(input, hero: hero, friction: friction),
+            mode: mode,
             dateTitle: "Today",
             contextSummary: privacy.visibleSubtitle("\(lensSummary(input.nowState)) \(todayPlan.openWindowLabel)"),
             heroStep: heroStep,
-            rows: DayRailRowState.rows(from: todayPlan.items, fallbackHero: heroStep, privacy: privacy, source: publicSource),
+            rows: rows,
             primaryAction: input.mode == .empty ? nil : heroAction,
             rowTapDetailTargetPlaceholder: input.mode == .empty ? nil : detailTarget,
             durationSource: duration.source,
             contextLabels: sourceLabels,
             privacyProjection: privacy,
-            closureSlot: DayRailClosureSlotState(
-                title: contract.closure.title,
-                subtitle: contract.closure.subtitle,
-                reservedForActionClosureSheet: true
+            continuity: DayRailContinuityState.make(
+                heroStep: heroStep,
+                rows: rows,
+                closureSlot: closureSlot,
+                proofSlot: proofSlot,
+                mode: mode,
+                pressureLabel: friction.value
             ),
-            proofSlot: DayRailProofSlotState(
-                title: "Proof saved",
-                subtitle: input.nowState.evidenceSummaries.isEmpty
-                    ? "Start Here keeps the receipt seam visible before anything changes."
-                    : "\(input.nowState.evidenceSummaries.count) local evidence item\(input.nowState.evidenceSummaries.count == 1 ? "" : "s") counted.",
-                noSilentChanges: true,
-                reservedForReceiptPeek: false
-            )
+            closureSlot: closureSlot,
+            proofSlot: proofSlot
         )
     }
 

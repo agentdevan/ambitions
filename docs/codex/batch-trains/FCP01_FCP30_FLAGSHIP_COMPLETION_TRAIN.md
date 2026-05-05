@@ -194,6 +194,7 @@ Owner: Today.
 Depends on: FCP05-FCP06; SI04; PD02-PD04.
 Goal: Make Start Here, Now/Next/Later, closure, proof, and pressure one continuous Reality Rail object.
 Acceptance: no agenda clone; closure knots and proof markers are integrated.
+Evidence: `docs/audits/fcp07-reality-rail-continuity-report.md`.
 
 ### FCP08 — Ambition Meridian Shell
 

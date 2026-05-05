@@ -25,7 +25,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   proof mutation, persistence/schema changes, sync/account claims, or AOS/LDI
   runtime changes. PD18 closed Product Depth as docs-only handoff evidence; the
   current full-stack order has since advanced through PFC/FL/FCP evidence and
-  now selects FCP07 after FCP05.
+  now selects FCP13A after FCP07.
 - CQS01-CQS24 is complete as the Codex Quality System operating layer inserted
   after PD17 and before PD18. Use
   `docs/canon/Ambitions_Codex_Quality_System.md`,
@@ -46,8 +46,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   as Option Value / Pivot Preservation source truth. FL06 is complete Green as
   Weekly Life Sweep ritual source truth. FCP06 is complete Green as shared
   ReceiptDrawer / SourceFold trust foundation. FCP05 is complete Green as
-  Today-owned Start Here Surface implementation evidence. The next eligible
-  global batch is FCP07 Reality Rail Continuity.
+  Today-owned Start Here Surface implementation evidence. FCP07 is complete
+  Green as Today-owned Reality Rail continuity spine implementation evidence.
+  The next eligible global batch is FCP13A Action Closure Diamond.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -430,7 +431,9 @@ Profile tests. It does not authorize route/raw-value, persistence/schema,
 permission-request, calendar-write, sync/account, release, legal/privacy, or
 public accessibility claims. FCP06 is complete Green as shared ReceiptDrawer /
 SourceFold trust foundation. FCP05 is complete Green as Today-owned Start Here
-Surface implementation evidence, and the full-stack order selects FCP07 next.
+Surface implementation evidence. FCP07 is complete Green as Today-owned Reality
+Rail continuity spine implementation evidence, and the full-stack order selects
+FCP13A next.
 
 
 ## Living Dream Intelligence Context

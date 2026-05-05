@@ -2,15 +2,15 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP05 Start Here Surface Green; full-stack order selects FCP07
-Reality Rail Continuity next if continuation gates allow.
-Scope: FCP05 completed as Today-owned Start Here implementation evidence. It
-replaces the Hero Step card posture with typed Context Edge, Time Fit Proof,
-Goal Thread, source-quality, because-line, primary/secondary action, privacy,
-and FCP06 Receipt Drawer seam evidence inside the Reality Rail. FCP05 changed
-no route/raw value, persistence/schema, permission-request, calendar-write,
-sync/account, release, legal/privacy, CI, workflow/signing, entitlement, AI
-runtime, AOS runtime, LDI runtime, or public accessibility claim file.
+Current batch: FCP07 Reality Rail Continuity Green; full-stack order selects
+FCP13A Action Closure Diamond next if continuation gates allow.
+Scope: FCP07 completed as Today-owned Reality Rail implementation evidence. It
+adds a typed continuity spine connecting Start Here, Now/Next/Later, closure,
+proof, and pressure with non-color text markers, Dynamic Type fallback, and
+no-silent-change posture. FCP07 changed no route/raw value, persistence/schema,
+permission-request, calendar-write, sync/account, release, legal/privacy, CI,
+workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
+accessibility claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -34,6 +34,7 @@ Commitment Memory / Open Loop Registry source truth. FL04 is complete / Green
 as Searchable Life Recall source truth. FL05 is complete / Green as Option
 Value / Pivot Preservation source truth. FL06 is complete / Green as Weekly
 Life Sweep ritual source truth. FCP05 is complete / Green as Start Here Surface
+implementation evidence. FCP07 is complete / Green as Reality Rail Continuity
 implementation evidence. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

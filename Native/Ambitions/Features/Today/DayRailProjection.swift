@@ -55,29 +55,45 @@ extension AmbitionsDayRailViewState {
             detailTarget: detailTarget,
             sourceLabels: [source]
         )
+        let rows = DayRailRowState.rows(
+            from: todayPlanLayer.items,
+            fallbackHero: heroStep,
+            privacy: privacy,
+            source: source
+        )
+        let closureSlot = DayRailClosureSlotState(
+            title: closure.title,
+            subtitle: closure.subtitle,
+            reservedForActionClosureSheet: true
+        )
+        let proofSlot = DayRailProofSlotState(
+            title: "Proof saved",
+            subtitle: "Start Here keeps the receipt seam visible before anything changes.",
+            noSilentChanges: true,
+            reservedForReceiptPeek: false
+        )
         return AmbitionsDayRailViewState(
             id: "day-rail.compat.\(mode.rawValue)",
             mode: mode == .empty ? .empty : .normal,
             dateTitle: "Today",
             contextSummary: todayPlanLayer.openWindowLabel,
             heroStep: mode == .empty ? nil : heroStep,
-            rows: DayRailRowState.rows(from: todayPlanLayer.items, fallbackHero: heroStep, privacy: privacy, source: source),
+            rows: rows,
             primaryAction: mode == .empty ? nil : hero.primaryAction,
             rowTapDetailTargetPlaceholder: mode == .empty ? nil : detailTarget,
             durationSource: duration.source,
             contextLabels: [source],
             privacyProjection: privacy,
-            closureSlot: DayRailClosureSlotState(
-                title: closure.title,
-                subtitle: closure.subtitle,
-                reservedForActionClosureSheet: true
+            continuity: DayRailContinuityState.make(
+                heroStep: mode == .empty ? nil : heroStep,
+                rows: rows,
+                closureSlot: closureSlot,
+                proofSlot: proofSlot,
+                mode: mode == .empty ? .empty : .normal,
+                pressureLabel: mode == .empty ? "Open" : "Ready"
             ),
-            proofSlot: DayRailProofSlotState(
-                title: "Proof saved",
-                subtitle: "Start Here keeps the receipt seam visible before anything changes.",
-                noSilentChanges: true,
-                reservedForReceiptPeek: false
-            )
+            closureSlot: closureSlot,
+            proofSlot: proofSlot
         )
     }
 }
@@ -311,5 +327,163 @@ extension DayRailHeroStepState {
             reviewLabel: nil,
             redactedDetail: title
         )
+    }
+}
+
+extension DayRailContinuityState {
+    static func make(
+        heroStep: DayRailHeroStepState?,
+        rows: [DayRailRowState],
+        closureSlot: DayRailClosureSlotState,
+        proofSlot: DayRailProofSlotState,
+        mode: DayRailMode,
+        pressureLabel: String
+    ) -> DayRailContinuityState {
+        var markers: [DayRailContinuityMarkerState] = []
+        markers.append(
+            DayRailContinuityMarkerState(
+                id: "rail.continuity.start",
+                kind: heroStep == nil ? .empty : .recommended,
+                title: "Start Here",
+                summary: heroStep?.title ?? "Nothing needs you right now.",
+                detail: heroStep?.becauseLine ?? "Today stays open until something real exists.",
+                semanticState: heroStep == nil ? .trust : .focus
+            )
+        )
+
+        for slot in DayRailRowSlot.allCases {
+            let row = rows.first { $0.slot == slot }
+            markers.append(
+                DayRailContinuityMarkerState(
+                    id: "rail.continuity.\(slot.rawValue)",
+                    kind: row?.nodeKind ?? .empty,
+                    title: slot.title,
+                    summary: row?.title ?? slot.emptyContinuitySummary,
+                    detail: row?.duration.label ?? slot.emptyContinuityDetail,
+                    semanticState: row == nil ? .trust : slot.semanticState
+                )
+            )
+        }
+
+        markers.append(
+            DayRailContinuityMarkerState(
+                id: "rail.continuity.closure",
+                kind: .closure,
+                title: "Closure knot",
+                summary: closureSlot.title,
+                detail: closureSlot.subtitle,
+                semanticState: .review
+            )
+        )
+        markers.append(
+            DayRailContinuityMarkerState(
+                id: "rail.continuity.proof",
+                kind: .proof,
+                title: "Proof marker",
+                summary: proofSlot.title,
+                detail: proofSlot.subtitle,
+                semanticState: .trust
+            )
+        )
+        markers.append(
+            DayRailContinuityMarkerState(
+                id: "rail.continuity.pressure",
+                kind: mode == .overloaded ? .blocked : .protected,
+                title: "Pressure",
+                summary: pressureLabel,
+                detail: mode.pressureContinuityDetail,
+                semanticState: mode.pressureSemanticState
+            )
+        )
+
+        return DayRailContinuityState(
+            title: "Reality Rail continuity",
+            summary: "Start Here, Now, Next, Later, closure, proof, and pressure stay connected.",
+            markers: markers,
+            pressureLabel: pressureLabel,
+            noSilentChangesLabel: proofSlot.noSilentChanges ? "No silent changes." : "Review before changing."
+        )
+    }
+}
+
+private extension DayRailRowState {
+    var nodeKind: DayRailNodeKind {
+        switch slot {
+        case .now:
+            return .active
+        case .next:
+            return .upcoming
+        case .later:
+            return .flexible
+        }
+    }
+}
+
+private extension DayRailRowSlot {
+    var semanticState: AmbitionSemanticState {
+        switch self {
+        case .now:
+            return .focus
+        case .next:
+            return .calendarDerived
+        case .later:
+            return .trust
+        }
+    }
+
+    var emptyContinuitySummary: String {
+        switch self {
+        case .now:
+            return "Nothing needs you right now."
+        case .next:
+            return "No next step is being pulled forward."
+        case .later:
+            return "Later stays open."
+        }
+    }
+
+    var emptyContinuityDetail: String {
+        switch self {
+        case .now:
+            return "Open"
+        case .next:
+            return "Held back"
+        case .later:
+            return "Flexible"
+        }
+    }
+}
+
+private extension DayRailMode {
+    var pressureSemanticState: AmbitionSemanticState {
+        switch self {
+        case .recovery:
+            return .recovery
+        case .protected:
+            return .protected
+        case .overloaded:
+            return .caution
+        case .noSchedule:
+            return .calendarDerived
+        case .normal, .empty:
+            return .trust
+        }
+    }
+
+    var pressureContinuityDetail: String {
+        switch self {
+        case .normal:
+            return "Pressure is held in context."
+        case .recovery:
+            return "Recovery stays visible before action."
+        case .protected:
+            return "Protected time stays visible."
+        case .overloaded:
+            return "Reduce the ask before adding more."
+        case .empty:
+            return "No pressure is invented."
+        case .noSchedule:
+            return "Plan owns schedule review."
+        }
     }
 }

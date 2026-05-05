@@ -235,6 +235,14 @@ enum PreviewTodayScenarios {
             durationSource: baseRail.durationSource,
             contextLabels: [DayRailSourceLabelState(id: "source.private", label: privacy.sourceLabel, source: .privateUserText)],
             privacyProjection: privacy,
+            continuity: DayRailContinuityState.make(
+                heroStep: privateHero,
+                rows: privateRows,
+                closureSlot: baseRail.closureSlot,
+                proofSlot: baseRail.proofSlot,
+                mode: baseRail.mode,
+                pressureLabel: baseRail.continuity.pressureLabel
+            ),
             closureSlot: baseRail.closureSlot,
             proofSlot: baseRail.proofSlot
         )
@@ -298,6 +306,14 @@ enum PreviewTodayScenarios {
             durationSource: baseRail.durationSource,
             contextLabels: baseRail.contextLabels,
             privacyProjection: baseRail.privacyProjection,
+            continuity: DayRailContinuityState.make(
+                heroStep: hero,
+                rows: baseRail.rows,
+                closureSlot: baseRail.closureSlot,
+                proofSlot: baseRail.proofSlot,
+                mode: baseRail.mode,
+                pressureLabel: baseRail.continuity.pressureLabel
+            ),
             closureSlot: baseRail.closureSlot,
             proofSlot: baseRail.proofSlot
         )
