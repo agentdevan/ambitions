@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -94,6 +94,10 @@ Type: Audit/docs.
 Owner: Platform / Security.
 Goal: Inventory dependencies, licenses, lockfiles, SDK privacy manifests, and supply-chain risks.
 Required result: dependency ledger and license/privacy-SDK review list.
+Status: Green as docs-only dependency and supply-chain ledger. Runtime
+third-party SDKs were not found; unpinned workflow actions/Homebrew tooling,
+privacy manifest review, App Group shared-storage review, and license posture
+remain Yellow-owned by later PFC owners.
 
 ### PFC05 — CI / Local Toolchain Reproducibility
 

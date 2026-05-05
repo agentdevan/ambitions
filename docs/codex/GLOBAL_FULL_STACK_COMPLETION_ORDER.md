@@ -45,7 +45,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
    architecture boundary map and extraction queue on 2026-05-05.
 6. PFC03 Dead Code / Prompt Artifact / Naming Smell Audit. Completed Green as
    docs-only cleanup queue and naming-smell audit on 2026-05-05.
-7. PFC04 Dependency And Supply Chain Policy Enforcement.
+7. PFC04 Dependency And Supply Chain Policy Enforcement. Completed Green as
+   docs-only dependency and supply-chain ledger on 2026-05-05.
 
 ### Phase 1 — Remaining Product Depth
 
