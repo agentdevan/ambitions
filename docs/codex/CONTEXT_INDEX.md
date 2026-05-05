@@ -15,11 +15,15 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   truth exists and PFC implementation has not started. Both are queued under the
   full-stack order and require batch-specific gates before any production app,
   platform, persistence, sync, legal/privacy, or release claim work.
-- Product Depth is active through PD16 Green. PD16 added You-owned planning
+- Product Depth is active through PD17 Green. PD16 added You-owned planning
   setup/defaults depth for Schedule & Availability, Planning Defaults,
   Vacation / Away Time, and Automation & Trust without permission prompts,
   calendar/reminder behavior claims, route/raw-value changes,
   persistence/schema changes, sync/account claims, or AOS/LDI runtime changes.
+  PD17 added You-owned cross-surface proof/review summary depth inside Receipts
+  & History without dashboard/feed/tab posture, route/raw-value changes, hidden
+  proof mutation, persistence/schema changes, sync/account claims, or AOS/LDI
+  runtime changes.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -323,7 +327,8 @@ Yellow as bounded Plan reflow decision implementation. PD13 is accepted Yellow
 as bounded Plan pressure/recovery review implementation. PD14 is Green as
 bounded Plan Life Shape drill-down implementation. PD15 is Green as bounded
 You Trust History implementation. PD16 is Green as bounded You planning setup
-and defaults implementation. Product Depth must deepen
+and defaults implementation. PD17 is Green as bounded You/Profile
+cross-surface proof and review summary implementation. Product Depth must deepen
 Today, Goals, Capture, Plan, and You; it must not add new top-level tabs,
 generic dashboards, stacked-card top-level screens, habit tracker modes,
 calendar clones, chatbot-first AI surfaces, inbox/notes modes, or enterprise

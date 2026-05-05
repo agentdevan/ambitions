@@ -408,6 +408,7 @@ struct ProfileDashboard: Sendable, Equatable {
     let planningDefaultsCenter: ProfilePlanningDefaultsCenterState
     let receiptAudit: ProfileReceiptAuditState
     let trustHistoryCenter: ProfileTrustHistoryCenterState
+    let crossSurfaceProofReview: ProfileCrossSurfaceProofReviewState
     let reviews: ProfileReviewsState
     let appearanceStudio: ProfileAppearanceStudioState
     let trustCenter: ProfileTrustCenterState
@@ -429,6 +430,7 @@ struct ProfileDashboard: Sendable, Equatable {
         planningDefaultsCenter: ProfilePlanningDefaultsCenterState = .empty,
         receiptAudit: ProfileReceiptAuditState,
         trustHistoryCenter: ProfileTrustHistoryCenterState = .empty,
+        crossSurfaceProofReview: ProfileCrossSurfaceProofReviewState = .empty,
         reviews: ProfileReviewsState,
         appearanceStudio: ProfileAppearanceStudioState,
         trustCenter: ProfileTrustCenterState,
@@ -449,6 +451,7 @@ struct ProfileDashboard: Sendable, Equatable {
         self.planningDefaultsCenter = planningDefaultsCenter
         self.receiptAudit = receiptAudit
         self.trustHistoryCenter = trustHistoryCenter
+        self.crossSurfaceProofReview = crossSurfaceProofReview
         self.reviews = reviews
         self.appearanceStudio = appearanceStudio
         self.trustCenter = trustCenter

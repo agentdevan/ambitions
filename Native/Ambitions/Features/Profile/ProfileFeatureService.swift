@@ -205,6 +205,7 @@ private extension RepositoryBackedProfileService {
                 calendarAuthorization: calendarAuthorization,
                 notificationStatus: notificationStatus
             ),
+            crossSurfaceProofReview: makeCrossSurfaceProofReview(snapshot: snapshot),
             reviews: reviews,
             appearanceStudio: ProfileAppearanceStudioState(
                 title: "Appearance Studio",
@@ -1700,6 +1701,47 @@ private extension RepositoryBackedProfileService {
                 sourceReviewCount: snapshot.eventLedger.filter(\.trust.requiresReview).count + snapshot.teachingSignals.count,
                 automationReviewCount: safetySamples.confirmationRequired + (safetySamples.destructiveBlocked ? 1 : 0),
                 permissionSummary: "Notifications \(notificationStatus.statusLabel); calendar \(calendarAuthorizationLabel(calendarAuthorization))."
+            )
+        )
+    }
+
+    func makeCrossSurfaceProofReview(snapshot: Snapshot) -> ProfileCrossSurfaceProofReviewState {
+        let captureSeedCount = snapshot.captures.filter { $0.status != .archived }.count +
+            snapshot.drafts.filter { draft in
+                draft.latestResultKind == .planned ||
+                    draft.latestResultKind == .starterPlanned ||
+                    draft.latestResultKind == .clarificationRequired
+            }.count
+        let goalProofCount = snapshot.evidence.filter { !$0.goalID.isEmpty }.count
+        let todayCompletionProofCount = snapshot.evidence.filter { evidence in
+            evidence.evidenceKind == .stepCompleted || evidence.evidenceKind == .sessionLogged
+        }.count
+        let planReceiptCount = snapshot.eventLedger.filter { event in
+            event.source == .plan ||
+                event.source == .planner ||
+                event.kind == .planRecovered ||
+                event.kind == .planRescheduled ||
+                event.kind == .planUpdated
+        }.count
+        let goalChangeCount = snapshot.eventLedger.filter { event in
+            event.source == .goals ||
+                event.source == .goalEngine ||
+                event.kind == .goalCreated ||
+                event.kind == .goalUpdated ||
+                event.kind == .deadlineChanged ||
+                event.kind == .priorityChanged
+        }.count
+        let reviewPromptCount = snapshot.eventLedger.filter(\.trust.requiresReview).count +
+            snapshot.teachingSignals.count
+
+        return ProfileCrossSurfaceProofReviewProjector().project(
+            ProfileCrossSurfaceProofReviewProjector.Input(
+                captureSeedCount: captureSeedCount,
+                goalProofCount: goalProofCount,
+                todayCompletionProofCount: todayCompletionProofCount,
+                planReceiptCount: planReceiptCount,
+                goalChangeCount: goalChangeCount,
+                reviewPromptCount: reviewPromptCount
             )
         )
     }

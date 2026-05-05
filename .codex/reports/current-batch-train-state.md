@@ -2,12 +2,12 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PD16 Schedule Availability And Planning Defaults Depth Green;
-PD17 Cross-Surface Proof And Review Integration next if continuation gates allow.
-Scope: PD16 completed as bounded You/Profile planning setup/defaults depth. It
+Current batch: PD17 Cross-Surface Proof And Review Integration Green; CQS
+Codex Quality System insertion next before PD18 if continuation gates allow.
+Scope: PD17 completed as bounded You/Profile proof and review integration. It
 did not edit routes/raw values, persistence/schema, dependency/workflow/signing/
 CI, release/platform claims, privacy/legal claims, sync/cloud, StoreKit,
-calendar/reminder behavior, AI runtime, or LDI runtime.
+calendar/reminder behavior, AI runtime, AOS runtime, or LDI runtime.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -31,6 +31,14 @@ Vacation / Away Time, and Automation & Trust, preserves Guided automation as
 the default, keeps calendar awareness Plan-owned, and claims no calendar write,
 permission prompt, sync/account, AOS runtime, LDI runtime, release, legal, or
 public accessibility proof.
+
+PD17 is complete / Green as bounded You/Profile implementation evidence. It
+adds a typed cross-surface proof and review map inside Receipts & History so
+Capture, Today, Goals, Plan, and You can be reviewed through owning-surface
+proof/receipt boundaries without adding a dashboard, feed, tab, route/raw-value
+change, hidden proof mutation, persistence/schema change, sync/account claim,
+AOS runtime, LDI runtime, release/legal/privacy claim, or public accessibility
+proof.
 
 PFC source truth exists through
 `Ambitions_Platform_Legal_And_Framework_Completion_Plan.md` and the PFC train

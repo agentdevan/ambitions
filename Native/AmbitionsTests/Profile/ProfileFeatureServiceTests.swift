@@ -741,6 +741,84 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("permission grab"))
     }
 
+    func testPD17CrossSurfaceProofReviewConnectsOwningSurfacesWithoutNewDashboard() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "proof-pd17-step",
+                goalID: "goal-pd17",
+                stepID: "step-pd17",
+                evidenceKind: .stepCompleted,
+                source: .manual,
+                capturedAt: "2026-05-05T09:00:00Z",
+                progressDelta: nil,
+                confidenceDelta: nil,
+                minutesInvested: 20,
+                note: nil
+            )
+        ])
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-pd17-plan",
+                kind: .planRecovered,
+                occurredAt: "2026-05-05T09:05:00Z",
+                source: .plan,
+                planID: "plan-pd17",
+                title: "Plan recovery recorded",
+                summary: "Plan kept a smaller shape for review.",
+                tone: .recovering,
+                trust: EventLedgerTrustMetadata(isUserConfirmed: true, requiresReview: true),
+                privacy: .standard,
+                localOnly: true
+            )
+        )
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-pd17-goal",
+                kind: .goalUpdated,
+                occurredAt: "2026-05-05T09:06:00Z",
+                source: .goals,
+                goalID: "goal-pd17",
+                title: "Goal changed",
+                summary: "Goal change saved as local review context.",
+                tone: .positive,
+                trust: EventLedgerTrustMetadata(isUserConfirmed: true),
+                privacy: .standard,
+                localOnly: true
+            )
+        )
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let state = dashboard.crossSurfaceProofReview
+        let itemIDs = state.items.map(\.id)
+        let visibleCopy = ([state.title, state.subtitle, state.footer] + state.items.flatMap {
+            [$0.title, $0.summary, $0.sourceLabel, $0.reviewLabel, $0.privacyLabel, $0.routeLabel]
+        }).joined(separator: " ")
+
+        XCTAssertEqual(itemIDs, [
+            "cross-review-capture-goal-proof",
+            "cross-review-today-goal-proof",
+            "cross-review-plan-reflow-receipt",
+            "cross-review-goal-you-history",
+            "cross-review-receipt-detail-navigation",
+            "cross-review-sparse-prompts"
+        ])
+        XCTAssertTrue(visibleCopy.contains("Capture to Goal proof"))
+        XCTAssertTrue(visibleCopy.contains("Today completion to Goal proof"))
+        XCTAssertTrue(visibleCopy.contains("Plan reflow to receipt"))
+        XCTAssertTrue(visibleCopy.contains("Goal change to You history"))
+        XCTAssertTrue(visibleCopy.contains("Review in Today or Goal Detail"))
+        XCTAssertTrue(visibleCopy.contains("Review in Plan or Receipts"))
+        XCTAssertTrue(visibleCopy.contains("Receipt, not notification"))
+        XCTAssertTrue(visibleCopy.contains("This map does not create a dashboard, raw log, or new tab."))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("activity feed"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("notification feed"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("new top-level tab"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI verified"))
+    }
+
     func testTopLevelShellStillExcludesLegacyProfileInsightsAndHabitsTabs() {
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
