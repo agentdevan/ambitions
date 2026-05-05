@@ -21,12 +21,32 @@ Use this order unless MEG01 approves escalation:
 
 ## Metal / Advanced Rendering Candidate Areas
 
-Potential candidates:
+Potential candidates for future evaluation only:
 
 - Capture Atmosphere starfield / thought-field renderer
 - LifeShape contour / pressure / protected-pocket renderer
 - MissionControlTimeSpine proof/pressure field renderer
 - subtle material texture/noise/light-falloff where Canvas is insufficient
+
+These candidates are not implementation approval. Each candidate must still
+produce a primitive-specific eligibility report before any Metal, shader, or
+advanced renderer is added.
+
+## Current Gate Decision
+
+MEG01 approves no Metal implementation by default.
+
+Current decision:
+
+- SwiftUI native layout, materials, typography, and controls remain the default.
+- SwiftUI Shapes and Canvas remain the preferred escalation path for rich
+  Ambitions visuals.
+- Metal is deferred until a named signature primitive proves SwiftUI/Canvas
+  insufficiency, performance/battery budget, static fallback, Reduce Motion
+  fallback, nonvisual equivalent, isolated file boundary, screenshot evidence,
+  and profiling plan.
+- Existing DAV rendering/battery evidence remains Yellow for device/Instruments
+  proof and does not authorize new shader or Metal work.
 
 ## Forbidden Uses
 
@@ -67,7 +87,7 @@ Metal/advanced rendering is allowed only when all are true:
 
 ## Required Report
 
-Any batch adding Metal/advanced rendering must write:
+Any batch requesting or adding Metal/advanced rendering must write:
 
 `docs/audits/meg01-advanced-rendering-eligibility-report.md`
 
@@ -75,7 +95,9 @@ Report must include:
 
 - why SwiftUI/Canvas was insufficient
 - visual primitive owner
+- exact requested escalation: Canvas / shader / Metal / other renderer
 - renderer file boundary
+- files forbidden to touch
 - performance/battery budget
 - fallback behavior
 - accessibility equivalent
@@ -83,6 +105,8 @@ Report must include:
 - screenshots
 - profiling plan or evidence
 - rollback path
+- no-claim boundary for App Store, release, physical device, public
+  accessibility, and legal/privacy proof
 
 ## Hard Red
 

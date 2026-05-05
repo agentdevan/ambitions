@@ -144,6 +144,15 @@ for the allowed widget objects, privacy matrix, family constraints, and PFC14
 boundary. PFC13 does not provide rendered widget gallery, device, App Store,
 TestFlight, legal/privacy, or public accessibility proof.
 
+FVQ04 is complete Green as of 2026-05-05. Later UI-affecting batches must use
+the recurring rendered-proof gate before closing Green.
+
+MEG01 is complete Green as of 2026-05-05. Later Metal, shader, Canvas
+escalation, or advanced renderer work must prove SwiftUI/Canvas insufficiency,
+performance/battery budget, static fallback, Reduce Motion fallback, nonvisual
+equivalent, isolated file boundary, rendered proof, and profiling plan before
+implementation. No advanced renderer is approved by default.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

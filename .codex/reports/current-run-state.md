@@ -2,17 +2,18 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FVQ04 Recurring UI-Batch Rendered Proof Protocol complete Green;
-full-stack order selects MEG01 Metal / Advanced Rendering Eligibility Gate next
-under the stricter FVQ visual excellence train before PFC15.
-Scope: FVQ04 integrated recurring rendered-proof requirements into global
-orchestrator, CQS, AQOS, report-template, dependency graph, registry/context,
-and run-state docs. Future UI-affecting batches cannot close Green from
-compile/tests/docs alone. FVQ04 changed only docs and train-state files. It did
-not change production Swift, route/raw value, persistence/schema, permission
-request, calendar write, sync/account, release, legal/privacy, CI,
-workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
-accessibility claim files.
+Current batch: MEG01 Metal / Advanced Rendering Eligibility Gate complete
+Green; full-stack order selects FVQ05 Final Visual Proof Packet Integration
+Hook next under the stricter FVQ visual excellence train before PFC15.
+Scope: MEG01 completed as an advanced-rendering policy gate. No Metal, shader,
+or new advanced renderer implementation is approved by default. Future
+signature primitive escalation requires SwiftUI/Canvas insufficiency proof,
+performance/battery budget, static fallback, Reduce Motion fallback, nonvisual
+equivalent, isolated file boundary, rendered proof, and profiling plan. MEG01
+changed only docs and train-state files. It did not change production Swift,
+route/raw value, persistence/schema, permission request, calendar write,
+sync/account, release, legal/privacy, CI, workflow/signing, entitlement, AI
+runtime, AOS runtime, LDI runtime, or public accessibility claim files.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -46,8 +47,8 @@ Yellow as rendered visual freshness and flagship proof evidence. FVQ02 is
 complete / Accepted Yellow as five top-level surface visual sweep evidence.
 FVQ03 is complete / Accepted Yellow as drill-down and external-surface visual
 sweep evidence. FVQ04 is complete / Green as recurring rendered-proof protocol
-evidence. MEG01 is the next eligible global batch before PFC15. Accepted
-Yellow:
+evidence. MEG01 is complete / Green as advanced-rendering eligibility evidence.
+FVQ05 is the next eligible global batch before PFC15. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
