@@ -228,6 +228,11 @@ Owner: Shared design system.
 Depends on: FCP05-FCP08; SI12; DAV10.
 Goal: Object-specific motion/haptic policies for Start Here, Rail, Drawer, Fold, Spine, Closure, LifeShape, Capture.
 Acceptance: no motion-only meaning; every motion has reduced-motion equivalent.
+Status: Complete Green on 2026-05-05 as shared object-motion policy evidence
+for Start Here, Reality Rail, Receipt Drawer, Source Fold,
+MissionControlTimeSpine, Action Closure Diamond, LifeShape Map, and Capture
+Atmosphere Composer.
+Evidence: `docs/audits/fcp09-motion-haptics-reduced-motion-proof-report.md`.
 
 ### FCP10 — MissionControlTimeSpine
 

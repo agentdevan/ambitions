@@ -122,7 +122,12 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 30. FCP08 Ambition Meridian Shell. Completed Green as default Meridian shell
     presentation with native rollback, five destinations, receipt overlay zone
     contract, and focused shell proof on 2026-05-05.
-31. FCP09 Motion / Haptics / Reduced Motion Proof.
+31. FCP09 Motion / Haptics / Reduced Motion Proof. Completed Green as shared
+    object-motion policy evidence for Start Here, Reality Rail, Receipt Drawer,
+    Source Fold, MissionControlTimeSpine, Action Closure Diamond, LifeShape,
+    and Capture, with non-motion cues, Reduce Motion equivalents, bounded
+    user-initiated haptic policy, preview evidence, and focused tests on
+    2026-05-05.
 
 ### Phase 4 — External Surface Strategy Before Implementation
 

@@ -2,16 +2,18 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP08 Ambition Meridian Shell Green; full-stack order selects
-FCP09 Motion / Haptics / Reduced Motion Proof next if continuation gates allow.
-Scope: FCP08 completed as default Ambition Meridian Shell implementation
-evidence. It promotes the existing Meridian shell to the default presentation,
-preserves native rollback, and adds a typed shell-chrome contract for five
-destinations, receipt overlay zone, global action, safe-area posture, and
-rollback truth. FCP08 changed no route/raw value, persistence/schema,
-permission-request, calendar-write, sync/account, release, legal/privacy, CI,
-workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
-accessibility claim file.
+Current batch: FCP09 Motion / Haptics / Reduced Motion Proof Green;
+full-stack order selects PFC13 WidgetKit Strategy And Object Map next if
+continuation gates allow.
+Scope: FCP09 completed as shared design-system object-motion policy evidence.
+It adds object-specific motion/haptic policies for Start Here, Reality Rail,
+Receipt Drawer, Source Fold, MissionControlTimeSpine, Action Closure Diamond,
+LifeShape Map, and Capture Atmosphere Composer, with non-motion cues, Reduce
+Motion equivalents, optional user-initiated haptic boundaries, preview
+evidence, and focused tests. FCP09 changed no route/raw value,
+persistence/schema, permission-request, calendar-write, sync/account, release,
+legal/privacy, CI, workflow/signing, entitlement, AI runtime, AOS runtime, LDI
+runtime, or public accessibility claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -38,7 +40,8 @@ Life Sweep ritual source truth. FCP05 is complete / Green as Start Here Surface
 implementation evidence. FCP07 is complete / Green as Reality Rail Continuity
 implementation evidence. FCP13A is complete / Green as Action Closure Diamond
 implementation evidence. FCP08 is complete / Green as Ambition Meridian Shell
-implementation evidence. Accepted Yellow:
+implementation evidence. FCP09 is complete / Green as Motion / Haptics /
+Reduced Motion Proof implementation evidence. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,

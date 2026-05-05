@@ -174,6 +174,141 @@ public enum AmbitionInteractionToken: String, CaseIterable, Sendable {
     }
 }
 
+public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
+    case startHere
+    case realityRail
+    case receiptDrawer
+    case sourceFold
+    case missionControlTimeSpine
+    case actionClosureDiamond
+    case lifeShapeMap
+    case captureComposer
+
+    public var motionPolicy: AmbitionObjectMotionPolicy {
+        switch self {
+        case .startHere:
+            return AmbitionObjectMotionPolicy(
+                objectTitle: "Start Here",
+                owner: "Today",
+                motionToken: .selectionConfirm,
+                stateMeaning: "The recommended starting point became selected by the user.",
+                nonMotionCues: ["selected label", "because line", "time fit proof"],
+                hapticBoundary: "Selection haptic only after a user chooses Start Here."
+            )
+        case .realityRail:
+            return AmbitionObjectMotionPolicy(
+                objectTitle: "Reality Rail",
+                owner: "Today",
+                motionToken: .routeOrientation,
+                stateMeaning: "The day rail advanced to a visible execution position.",
+                nonMotionCues: ["rail position", "Now/Next/Later text", "selected value"],
+                hapticBoundary: "Route haptic only when the user changes orientation."
+            )
+        case .receiptDrawer:
+            return AmbitionObjectMotionPolicy(
+                objectTitle: "Receipt Drawer",
+                owner: "Shared trust",
+                motionToken: .proofConfirm,
+                stateMeaning: "A receipt, consequence, or reversibility state settled.",
+                nonMotionCues: ["receipt title", "source label", "undo or correction affordance"],
+                hapticBoundary: "Confirmation haptic only when a user closes or saves a receipt."
+            )
+        case .sourceFold:
+            return AmbitionObjectMotionPolicy(
+                objectTitle: "Source Fold",
+                owner: "Shared trust",
+                motionToken: .sourceCheck,
+                stateMeaning: "Freshness, conflict, or review boundaries became visible.",
+                nonMotionCues: ["source state label", "review affordance", "freshness copy"],
+                hapticBoundary: "No haptic; source state is review context, not a reward."
+            )
+        case .missionControlTimeSpine:
+            return AmbitionObjectMotionPolicy(
+                objectTitle: "MissionControlTimeSpine",
+                owner: "Goals",
+                motionToken: .panelReveal,
+                stateMeaning: "Goal depth became legible across Completed, Now, Friction, Next, Horizon.",
+                nonMotionCues: ["lane title", "selected lane detail", "proof or blocker marker"],
+                hapticBoundary: "No haptic until the Goals implementation defines a user-initiated lane action."
+            )
+        case .actionClosureDiamond:
+            return AmbitionObjectMotionPolicy(
+                objectTitle: "Action Closure Diamond",
+                owner: "Today / Recovery",
+                motionToken: .proofConfirm,
+                stateMeaning: "Outcome, consequence, proof, and recovery settled after user closure.",
+                nonMotionCues: ["facet label", "still-counts copy", "next recovery action"],
+                hapticBoundary: "Confirmation haptic only after a user records closure."
+            )
+        case .lifeShapeMap:
+            return AmbitionObjectMotionPolicy(
+                objectTitle: "LifeShape Map",
+                owner: "Plan",
+                motionToken: .reviewRequired,
+                stateMeaning: "Capacity, pressure, or defaults need review before shape changes.",
+                nonMotionCues: ["capacity label", "pressure text", "review-needed action"],
+                hapticBoundary: "No haptic; LifeShape changes must remain review-first and non-calendar-like."
+            )
+        case .captureComposer:
+            return AmbitionObjectMotionPolicy(
+                objectTitle: "Capture Atmosphere Composer",
+                owner: "Capture",
+                motionToken: .panelReveal,
+                stateMeaning: "Text-first capture context became available before placement appears.",
+                nonMotionCues: ["text field focus", "draft state", "placement appears after content"],
+                hapticBoundary: "No haptic while typing; placement feedback waits for user action."
+            )
+        }
+    }
+}
+
+public struct AmbitionObjectMotionPolicy: Equatable, Sendable {
+    public let objectTitle: String
+    public let owner: String
+    public let motionToken: AmbitionInteractionToken
+    public let stateMeaning: String
+    public let nonMotionCues: [String]
+    public let hapticBoundary: String
+
+    public init(
+        objectTitle: String,
+        owner: String,
+        motionToken: AmbitionInteractionToken,
+        stateMeaning: String,
+        nonMotionCues: [String],
+        hapticBoundary: String
+    ) {
+        self.objectTitle = objectTitle
+        self.owner = owner
+        self.motionToken = motionToken
+        self.stateMeaning = stateMeaning
+        self.nonMotionCues = nonMotionCues
+        self.hapticBoundary = hapticBoundary
+    }
+
+    public var motionPreset: DAVMotionPreset {
+        motionToken.davMotionPreset
+    }
+
+    public var hapticPolicy: AmbitionHapticPolicy {
+        motionToken.hapticPolicy
+    }
+
+    public var reduceMotionEquivalent: String {
+        "\(motionToken.reduceMotionEquivalent) Non-motion cues: \(nonMotionCues.joined(separator: ", "))."
+    }
+
+    public var accessibilitySummary: String {
+        "\(objectTitle). \(stateMeaning) Reduce Motion: \(reduceMotionEquivalent)"
+    }
+
+    public var preservesMeaningWithoutMotion: Bool {
+        reduceMotionEquivalent.isEmpty == false &&
+        nonMotionCues.isEmpty == false &&
+        nonMotionCues.allSatisfy { $0.isEmpty == false }
+    }
+}
+
 public extension AnyTransition {
     static var ambitionPanel: AnyTransition {
         ambitionTransition(.panelEntry)

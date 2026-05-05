@@ -64,4 +64,83 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("production AI"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("automatic commitment"))
     }
+
+    func testFCP09ObjectMotionPoliciesCoverFlagshipObjects() {
+        XCTAssertEqual(Set(AmbitionFlagshipMotionObject.allCases), [
+            .startHere,
+            .realityRail,
+            .receiptDrawer,
+            .sourceFold,
+            .missionControlTimeSpine,
+            .actionClosureDiamond,
+            .lifeShapeMap,
+            .captureComposer
+        ])
+
+        let titles = Set(AmbitionFlagshipMotionObject.allCases.map { $0.motionPolicy.objectTitle })
+        XCTAssertEqual(titles, [
+            "Start Here",
+            "Reality Rail",
+            "Receipt Drawer",
+            "Source Fold",
+            "MissionControlTimeSpine",
+            "Action Closure Diamond",
+            "LifeShape Map",
+            "Capture Atmosphere Composer"
+        ])
+    }
+
+    func testFCP09ObjectMotionPoliciesPreserveMeaningWithoutMotion() {
+        for object in AmbitionFlagshipMotionObject.allCases {
+            let policy = object.motionPolicy
+
+            XCTAssertTrue(policy.preservesMeaningWithoutMotion, policy.objectTitle)
+            XCTAssertFalse(policy.stateMeaning.isEmpty, policy.objectTitle)
+            XCTAssertFalse(policy.hapticBoundary.isEmpty, policy.objectTitle)
+            XCTAssertFalse(policy.accessibilitySummary.isEmpty, policy.objectTitle)
+            XCTAssertTrue(policy.accessibilitySummary.localizedCaseInsensitiveContains("Reduce Motion"), policy.objectTitle)
+        }
+    }
+
+    func testFCP09ObjectMotionPoliciesKeepHapticsUserInitiatedAndBounded() {
+        for object in AmbitionFlagshipMotionObject.allCases {
+            let policy = object.motionPolicy
+
+            if policy.hapticPolicy.intent != nil {
+                XCTAssertTrue(
+                    policy.hapticBoundary.localizedCaseInsensitiveContains("user"),
+                    "\(policy.objectTitle) haptics must stay user initiated."
+                )
+            }
+
+            XCTAssertFalse(policy.hapticBoundary.localizedCaseInsensitiveContains("automatic"), policy.objectTitle)
+            XCTAssertFalse(policy.accessibilitySummary.localizedCaseInsensitiveContains("confetti"), policy.objectTitle)
+            XCTAssertFalse(policy.accessibilitySummary.localizedCaseInsensitiveContains("reward"), policy.objectTitle)
+            XCTAssertFalse(policy.accessibilitySummary.localizedCaseInsensitiveContains("AI confidence"), policy.objectTitle)
+        }
+    }
+
+    func testFCP09ObjectMotionPoliciesRespectProductBoundaries() {
+        let combined = AmbitionFlagshipMotionObject.allCases
+            .map {
+                let policy = $0.motionPolicy
+                return [
+                    policy.objectTitle,
+                    policy.owner,
+                    policy.stateMeaning,
+                    policy.reduceMotionEquivalent,
+                    policy.hapticBoundary
+                ].joined(separator: " ")
+            }
+            .joined(separator: " ")
+
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("placement appears after content"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Completed, Now, Friction, Next, Horizon"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("capacity"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("calendar clone"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("habit"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("streak"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("score"))
+    }
 }

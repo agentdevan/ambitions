@@ -20,6 +20,20 @@ private struct InteractionMotionHapticsPreviewGallery: View {
                         }
                     }
                 }
+
+                AdaptiveModuleChrome(
+                    title: "FCP09 Object Motion Policies",
+                    subtitle: "Flagship objects keep static meaning, bounded haptics, and Reduce Motion equivalents.",
+                    context: .today,
+                    state: .proof,
+                    evidence: "Start Here, Rail, Drawer, Fold, Spine, Closure, LifeShape, and Capture share one object-policy contract."
+                ) {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(AmbitionFlagshipMotionObject.allCases, id: \.rawValue) { object in
+                            objectPolicyRow(object.motionPolicy)
+                        }
+                    }
+                }
             }
             .padding(theme.spacing.lg)
         }
@@ -63,6 +77,47 @@ private struct InteractionMotionHapticsPreviewGallery: View {
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(token.accessibilitySummary)
+    }
+
+    private func objectPolicyRow(_ policy: AmbitionObjectMotionPolicy) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                EvidenceLabel(policy.owner, state: .proof, context: .trust)
+
+                Text(policy.objectTitle)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer(minLength: theme.spacing.xs)
+
+                Text(policy.motionPreset.rawValue)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Text(policy.stateMeaning)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(policy.reduceMotionEquivalent)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.48))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(policy.accessibilitySummary)
     }
 
     private func visualState(for token: AmbitionInteractionToken) -> LivingVisualState {

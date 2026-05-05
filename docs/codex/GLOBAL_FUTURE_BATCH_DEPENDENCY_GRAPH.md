@@ -124,6 +124,12 @@ Motion Proof may use the default Meridian shell evidence, but must keep motion
 meaning optional, provide static equivalents, avoid haptic-only meaning, and
 claim no public accessibility proof.
 
+FCP09 is complete Green as of 2026-05-05. Later FCP/PFC/AOS/LDI implementation
+batches may use the shared object-motion policy evidence, but must still prove
+surface-specific accessibility, Reduce Motion, haptic, performance, and
+claim-boundary behavior inside their own scopes. FCP09 does not provide
+physical-device haptic proof or public accessibility conformance.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
