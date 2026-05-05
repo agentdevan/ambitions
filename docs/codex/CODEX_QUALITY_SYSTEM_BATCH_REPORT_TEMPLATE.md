@@ -33,6 +33,26 @@ Batch ID:
 
 ## CQS Reviewers Applied
 
+## AQOS Impact Classification
+
+## FVQ Rendered Proof Classification
+
+Use one of: not applicable / inherited / produced / operator checklist /
+Recoverable Red / Hard Red.
+
+Required for UI-affecting batches:
+
+- visible surfaces touched
+- primary object owner
+- screenshot or rendered preview evidence path
+- freshness proof
+- visual score impact
+- accessibility/readability impact
+- Reduce Motion impact
+- privacy-sensitive rendering impact
+- dashboard/card-stack/prototype drift result
+- FVQ repair decision
+
 ## Accessibility / Reduced Motion Impact
 
 ## Privacy / Legal / App Store Impact

@@ -14,7 +14,7 @@ Codex must map every batch to required evidence before execution. If the batch t
 
 | Domain touched | Required evidence before Green |
 |---|---|
-| Visual UI / SwiftUI surface | FVQ durable screenshots, freshness proof, visual score, no dashboard/prototype/card-stack Red. |
+| Visual UI / SwiftUI surface | FVQ durable screenshots or rendered previews, freshness proof, visual score, accessibility/readability impact, Reduce Motion impact, privacy-sensitive rendering impact, no dashboard/prototype/card-stack Red, and repair decision. If tooling prevents rendering, the batch cannot be Green and must include an operator proof checklist. |
 | Motion / haptics | Motion policy, reduced-motion equivalent, no motion-only meaning, haptic boundary, state sequence or screen recording where feasible. |
 | Accessibility | VoiceOver order, Dynamic Type, Reduce Motion, non-color meaning, tap targets, truncation check, privacy-safe labels. |
 | User-facing copy | Copy diff, internal-term scan, no shame, no fake AI confidence, no generic productivity cliche, source/privacy language where needed. |

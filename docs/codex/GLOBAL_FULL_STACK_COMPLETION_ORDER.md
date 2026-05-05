@@ -149,17 +149,23 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
      Goal Mission lane expansion, Personalization detail, and Schedule &
      Availability detail. External widget, Live Activity, and App Intent
      rendered proof remains Yellow-owned by later platform/FVQ batches.
-32C. FVQ04 Recurring UI-Batch Rendered Proof Protocol. Queued next under the
-     stricter FVQ visual excellence train.
-32D. MEG01 Metal / Advanced Rendering Eligibility Gate.
+32C. FVQ04 Recurring UI-Batch Rendered Proof Protocol. Completed Green on
+     2026-05-05 as the recurring rendered-proof gate for every later
+     UI-affecting batch. Future visible UI, shell/chrome, visual primitive,
+     preview fixture, widget, Live Activity, App Intent confirmation,
+     notification, onboarding, screenshot, motion/haptic visual state, and
+     accessibility-presentation work cannot close Green from compile/tests/docs
+     alone.
+32D. MEG01 Metal / Advanced Rendering Eligibility Gate. Queued next under the
+     stricter FVQ visual excellence train before PFC15.
 32E. FVQ05 Final Visual Proof Packet Integration Hook.
 
 ### Phase 4 — External Surface Strategy Before Implementation
 
 33. PFC13 WidgetKit Strategy And Object Map. Completed Green as docs/product/
     platform WidgetKit object map and privacy matrix on 2026-05-05 after the
-    local run had already started PFC13. FVQ01, FVQ02, and FVQ03 have now
-    closed Accepted Yellow. FVQ04 is next before PFC15.
+    local run had already started PFC13. FVQ01, FVQ02, and FVQ03 have closed
+    Accepted Yellow. FVQ04 is complete Green, and MEG01 is next before PFC15.
 34. PFC15 Live Activities / ActivityKit Strategy.
 35. PFC17 App Intents / Shortcuts / Spotlight Strategy.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.

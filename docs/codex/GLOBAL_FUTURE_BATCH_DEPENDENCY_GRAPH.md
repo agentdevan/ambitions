@@ -38,6 +38,13 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - FCP01-FCP04 depend on reconciliation and must remain docs/planning or fixture-planning scoped unless their prompts explicitly permit otherwise.
 - FCP implementation batches depend on FCP01-FCP04 and the object-specific PD/SI/DAV/EB/ME/CS evidence named in `FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md` and `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`.
 - All post-CQS implementation batches depend on CQS reviewer/repair/report gates as an operating layer.
+- All post-FVQ04 UI-affecting batches depend on the FVQ recurring rendered
+  proof gate. Visible UI, shell/chrome, visual primitive, preview fixture,
+  widget, Live Activity, App Intent confirmation, notification, onboarding,
+  screenshot, motion/haptic visual state, and accessibility-presentation
+  changes must either produce durable rendered evidence or close Accepted
+  Yellow with an operator proof checklist and owner. Compile/tests/docs alone
+  cannot make a UI-affecting batch Green.
 - FL01 is complete Green as Found Life product-soul source truth with accepted
   Yellow order reconciliation because FCP17 landed before the remote Found Life
   insertion. FL02 is complete Green as Life Inventory object model source truth.
@@ -112,6 +119,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 | Product Depth Gate | PD01-PD18 or drill-down/detail work beyond current canon | PXOS, ME, CS, SI, AOS-runtime-if-needed, or approval prerequisites are unresolved. |
 | Signature Interface Gate | SI01-SI18 or Ambitions-native interface primitives | SI Codex OS gates, PXOS source truth, ME/CS prerequisites, visual QA, accessibility, or file-size evidence is unresolved. |
 | CQS Quality Gate | Every post-CQS batch | Required reviewer, repair, validation, report, anti-slop, and hard-Red classification evidence is missing. |
+| FVQ Rendered Proof Gate | Every post-FVQ04 UI-affecting batch | Durable rendered proof, freshness metadata, score/impact record, or accepted Yellow operator checklist is missing. |
 
 FCP13A is complete Green as of 2026-05-05. FCP08 Ambition Meridian Shell may
 use the completed Today Start Here, Reality Rail, Receipt Drawer, and Action
@@ -153,6 +161,7 @@ TestFlight, legal/privacy, or public accessibility proof.
 - ME10 architecture scan before large SwiftUI or service expansion.
 - AOS16 performance and AOS17 privacy gates before runtime-heavy or sensitive work.
 - FCP 10/10 object standard before flagship object implementation.
+- FVQ recurring rendered proof gate before any UI-affecting batch closes Green.
 - LDI safety/source/mutation/professional-boundary gates before living-dream exposure.
 
 ## Parallel-Safe Lanes

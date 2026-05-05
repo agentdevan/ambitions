@@ -25,6 +25,8 @@ Use this order for remaining work:
 6. `docs/canon/Ambitions_Codex_Quality_System.md` and
    `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md` — recurring quality,
    repair, and review gates for every later batch.
+7. `docs/codex/visual-quality/FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL.md`
+   — recurring rendered proof gate for every UI-affecting batch.
 
 When the full-stack order, optimized order, historical order, or train manifest conflict for remaining queued work, use the stricter dependency, stricter gate, or safer order. Stop and write a reconciliation report if the conflict affects safety.
 
@@ -121,10 +123,14 @@ Run gates in this order unless the batch prompt adds stricter sequencing:
 6. Product Drift Gate.
 7. Platform / Framework / Legal Gate when PFC or platform behavior is touched.
 8. Validation Evidence Gate.
-9. Validation Strength Gate.
-10. Handoff Gate.
-11. Rollback Gate.
-12. Continuation Gate.
+9. FVQ Rendered Proof Gate when a batch touches visible UI, shell/chrome,
+   visual primitives, preview fixtures, widgets, Live Activities, App Intents
+   confirmations, notifications, onboarding, screenshots, motion/haptics with
+   visual state, or accessibility presentation.
+10. Validation Strength Gate.
+11. Handoff Gate.
+12. Rollback Gate.
+13. Continuation Gate.
 
 ## CQS Repair Cycle
 
@@ -142,6 +148,28 @@ Hard Red means continuing could break the app, corrupt data/schema, severely
 drift canon, hide security/privacy risk, require unsupported legal/privacy/
 release claims, require human legal/device/App Store/signing/credential proof,
 or require weakening gates, deleting tests, or lying in docs.
+
+## FVQ Recurring Rendered Proof Gate
+
+Every UI-affecting batch must classify its rendered-proof impact before it can
+close:
+
+- `FVQ not applicable`: no visible UI, preview, screenshot, external surface,
+  motion/haptic visual state, or accessibility presentation changed.
+- `FVQ inherited`: visible risk is already covered by a current FVQ artifact
+  and the batch did not materially change rendered output.
+- `FVQ produced`: durable screenshot or rendered preview evidence, freshness
+  proof, visual score, accessibility/readability impact, Reduce Motion impact,
+  privacy-sensitive rendering impact, dashboard/card-stack drift result, and
+  repair decision were recorded in the batch report.
+- `FVQ operator checklist`: tooling, device, or external-surface constraints
+  prevented rendered proof; the batch may close only Accepted Yellow with an
+  explicit owner, proof checklist, no-claim boundary, and no Hard Visual Red.
+
+A UI-affecting batch may not close Green from compile, tests, or docs alone.
+If rendered output is materially worse, screenshot freshness cannot be proven,
+or a primary object becomes dashboard/card-stack/prototype/generic, classify as
+Recoverable Red or Hard Red according to CQS/AQOS.
 
 ## Skills And Review Boards
 
@@ -171,6 +199,9 @@ Use additional reviewers by batch type:
   anti-agentic-slop, canon drift, accessibility/reduced-motion, privacy/legal/
   App Store, performance/battery, platform surface, StoreKit, schema/sync/
   migration, and FAANG handoff reviewers as applicable.
+- FVQ/visible UI: FAANG rendered visual reviewer, AQOS impact/evidence
+  classifier, accessibility/reduced-motion reviewer, product canon drift
+  reviewer, and privacy-safe rendering reviewer.
 
 If a required skill does not exist, map to an existing equivalent skill, define the review behavior in the batch report, or document the gap as Yellow only if safe.
 
