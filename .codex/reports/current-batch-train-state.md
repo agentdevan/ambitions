@@ -2,12 +2,15 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD02 complete / accepted Yellow; PD03 next eligible if continuation gates allow
-Scope: PD02 implemented only the Today-owned lightweight Step Detail drill-down
-behind Reality Rail. Top-level Today remains compact and visual; no new tab,
-navigation route, persistence, sync/auth/network, AI/LDI runtime, CI/config,
-dependency, release/platform claim, broad app implementation, or Candidate
-finalization was added. Complete: EB03A Universal Capture Composer Routing
+Current batch: PD03 complete / accepted Yellow; PD04 next eligible if
+continuation gates allow
+Scope: PD03 deepened only the Today-owned Step Session surface behind Reality
+Rail. It added step-first context, goal connection, optional timer copy,
+pause/stop/close controls, and receipt/proof boundary copy without adding a
+top-level destination, broadening Today into a dashboard, editing
+navigation/source-truth tabs, persistence, sync/auth/network, AI/LDI runtime,
+CI/config, dependency, release/platform claim, broad app implementation, or
+Candidate finalization. Complete: EB03A Universal Capture Composer Routing
 Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -118,6 +121,17 @@ accessibility/release claim change was made.
 - CS02C-CS06C deferred truth remains preserved.
 
 ## Current Validation Result
+
+PD03 result: PASS WITH ACCEPTED YELLOW.
+`docs/audits/pd03-today-step-session-depth-report.md` records the bounded
+Today Step Session implementation, explicit session controls, optional timer
+posture, proof/receipt boundary copy, focused Today tests, `xcodegen generate`,
+`scripts/build-local.sh`, Product Depth copy/drift/release scans, accessibility
+and Reduce Motion advisory scans, doc QA, batch gate, and boundary scan.
+Yellow items are no screenshot/rendered proof, no human/device/VoiceOver/
+Dynamic Type/Reduce Motion walkthrough, existing file-size/doc-QA advisory
+backlog, and the generic boundary script flagging Today files despite PD03's
+explicit Today implementation scope.
 
 SI14 result: PASS WITH YELLOW.
 `docs/audits/si14-iconography-symbol-status-grammar-report.md` records the
@@ -479,14 +493,15 @@ public accessibility or profiling proof.
 
 Product Depth approval phrase is satisfied. PD01 is complete / accepted Yellow
 as docs/planning source truth. PD02 is complete / accepted Yellow as bounded
-Today Step Detail implementation. Continue to PD03 only if PD02 commits,
-pushes, leaves a clean worktree, and the Product Depth continuation gates allow
-it. Do not restart broad
+Today Step Detail implementation. PD03 is complete / accepted Yellow as
+bounded Today Step Session implementation. Continue to PD04 only if PD03
+commits, pushes, leaves a clean worktree, and the Product Depth continuation
+gates allow it. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
 SI12, SI13, SI14, SI15, SI16, SI17, SI18, or completed DAV / EB20-EB24 batches.
-The next safe action is PD03 if PD02 has been committed, pushed, the worktree is
+The next safe action is PD04 if PD03 has been committed, pushed, the worktree is
 clean, and Product Depth continuation gates allow it.
 
 ## PD01 Product Depth Canon, Inventory, And Ownership Map

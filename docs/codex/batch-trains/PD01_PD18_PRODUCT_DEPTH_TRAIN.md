@@ -1,7 +1,7 @@
 # PD01-PD18 Product Depth Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; Product Depth implementation started only within named PD02 Today Step Detail scope.
+Status: Active Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; PD03 accepted Yellow; Product Depth implementation started only within named Today depth scopes.
 Train type: queued implementation / product-depth / drill-down expansion
 Date: 2026-05-02
 
@@ -48,7 +48,7 @@ Product Depth must deepen existing surfaces and must not widen the app. No new t
 
 - PD01: Product Depth Canon, Inventory, and Ownership Map. Type: Docs/planning. Owner: Cross-surface. Boundary: Create the formal Product Depth source of truth. Status: accepted Yellow as PD01 source-truth map; no app implementation.
 - PD02: Today Step Detail Depth. Type: Implementation. Owner: Today. Boundary: Make Step Detail a real lightweight drill-down, not a card-expanded task row. Status: accepted Yellow after focused Today tests and local build; no top-level widening.
-- PD03: Today Step Session Depth. Type: Implementation. Owner: Today. Boundary: Make Step Session the execution environment for a step.
+- PD03: Today Step Session Depth. Type: Implementation. Owner: Today. Boundary: Make Step Session the execution environment for a step. Status: accepted Yellow after focused Today tests and local build; session remains step-first and timer-secondary.
 - PD04: Today Recovery and Closure Depth. Type: Implementation. Owner: Today / Recovery. Boundary: Make missed, moved, blocked, skipped, and still-valid steps recoverable without shame.
 - PD05: Goals Mission Control Detail Architecture. Type: Implementation. Owner: Goals. Boundary: Turn Goal Detail into the real depth hub for a goal.
 - PD06: Goal Lifecycle and Path Visualization. Type: Implementation. Owner: Goals. Boundary: Make a goal feel visually alive.

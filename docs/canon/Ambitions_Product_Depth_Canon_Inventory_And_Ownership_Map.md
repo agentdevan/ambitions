@@ -1,7 +1,7 @@
 # Ambitions Product Depth Canon, Inventory, And Ownership Map
 <!-- markdownlint-disable MD013 -->
 
-Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation
+Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation
 Date: 2026-05-04
 
 ## Purpose
@@ -86,7 +86,7 @@ stacked-card top-level composition.
 | Candidate | Owning surface | PD batch | Status after PD01 | Required gates before implementation | Caveat / conflict |
 | --- | --- | --- | --- | --- | --- |
 | Step Detail depth | Today | PD02 | Accepted Yellow implementation evidence | PX02, PX07/PX08 where proof/recovery appears, SI04/SI05/SI10/SI13/SI17, ME Today | Lightweight drill-down behind Reality Rail; no card expansion. |
-| Step Session depth | Today | PD03 | Candidate implementation owner mapped | PD02 accepted Yellow, SI05/SI10/SI12/SI13/SI17, ME Today/TodayPanels, accessibility/copy | Depth not proven complete; timer remains secondary. |
+| Step Session depth | Today | PD03 | Accepted Yellow implementation evidence | PD02 accepted Yellow, SI05/SI10/SI12/SI13/SI17, ME Today/TodayPanels, accessibility/copy | Step-first execution environment implemented; timer remains secondary and no persistence/runtime claim is added. |
 | Recovery and closure depth | Today / Recovery | PD04 | Candidate implementation owner mapped | PD02 accepted Yellow, PX07/PX09, SI10/SI13, AOS if runtime recovery logic changes | Must not become overdue/failure/shame loop. |
 | MissionControlTimeSpine | Goals | PD05 | Candidate implementation owner mapped; Yellow conflict remains | PX03/PX14, SI06/SI07/SI10/SI14/SI17, ME Goals, CS if routes/raw values touched | Locked order Completed -> Now -> Friction -> Next -> Horizon unresolved against current lane evidence. |
 | Goal lifecycle/path visualization | Goals | PD06 | Candidate implementation owner mapped | PD05 Green, SI06/SI07/SI12/SI17, visual/accessibility gates | Must not become KPI/OKR or decorative path. |
@@ -121,7 +121,7 @@ stacked-card top-level composition.
 | --- | --- | --- |
 | PD01 | Complete / accepted Yellow after validation and commit | Docs/planning only; no app code changed. |
 | PD02 | Complete / accepted Yellow after validation and commit | Bounded Today implementation; Step Detail is a lightweight drill-down behind Reality Rail. |
-| PD03 | Next eligible direct successor only if PD02 is accepted Yellow/Green, committed, pushed, clean, and continuation gates allow it | Implementation batch; requires strong validation and Today/TodayPanels owner gates. |
+| PD03 | Complete / accepted Yellow after validation and commit | Bounded Today implementation; Step Session is step-first, timer-secondary, and receipt/proof-boundary aware. |
 | PD04-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
 | Global train outside PD | Stopped / not resumed | Requires its own explicit approval and gate path. |
 
@@ -132,7 +132,7 @@ stacked-card top-level composition.
 | Accent taxonomy/default mismatch | Yellow | Appearance Studio / theme / You | Preserve as Yellow. Do not edit design tokens or persistence defaults in PD01. Future docs-only alias/migration plan or approved implementation needed. |
 | MissionControlTimeSpine order mismatch / unknown | Yellow | Goals / PD05 | Preserve as Yellow. PD05 must reconcile current Proof/Blockers/Next Step/Momentum-style evidence to Completed/Now/Friction/Next/Horizon before code. |
 | User-facing copy boundary | Yellow | Cross-surface copy / PD implementation batches | Preserve staged remediation model from Batch 1C. Future PD batches must avoid forbidden copy and run copy scans. |
-| Step Session depth unknown | Yellow | Today / PD03 | Preserve; PD03 cannot claim depth from existing evidence before implementation proof. |
+| Step Session depth previously unknown | Accepted Yellow | Today / PD03 | PD03 adds bounded implementation proof; no broader Step Session persistence/runtime claim is made. |
 | Month LifeShape calendar-clone risk | Yellow | Plan / PD14 | Preserve; PD14 must prove capacity-lens behavior. |
 | You / Privacy / Memory / Receipts density | Yellow | You / PD15-PD16 | Preserve copy-density and trust/control-first guardrails. |
 | Candidate items | Yellow | Object owners | Candidate items remain Candidate until a named batch explicitly finalizes or defers them. |
@@ -158,7 +158,8 @@ Every future PD batch must prove:
 ## Non-Claims
 
 PD01 does not prove Product Depth implementation. PD02 proves only bounded
-Today Step Detail implementation. Neither batch proves PD03 readiness beyond
+Today Step Detail implementation. PD03 proves only bounded Today Step Session
+implementation. These batches do not prove later PD readiness beyond
 continuation eligibility, release readiness, TestFlight readiness, App Store
 readiness, physical-device proof, public accessibility conformance, signed
 archive validation, App Store Connect validation, external-platform rendering,

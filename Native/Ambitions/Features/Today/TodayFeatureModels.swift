@@ -53,6 +53,8 @@ enum TodayDayPosture: String, Sendable {
 
 enum TodayActionKind: String, Sendable {
     case startStepSession
+    case pauseStepSession
+    case stopStepSession
     case closeActionClosure
     case complete
     case `defer`
@@ -407,6 +409,56 @@ struct TodayStepSessionState: Sendable {
     let primaryAction: TodayInlineAction
     let secondaryActions: [TodayInlineAction]
     let trustWhisper: TodayTrustWhisperState?
+    let contextReminderLabel: String
+    let goalConnectionLabel: String
+    let timerLabel: String
+    let sessionControlActions: [TodayInlineAction]
+    let receiptGenerationLabel: String
+    let exitBoundaryLabel: String
+
+    init(
+        title: String,
+        subtitle: String,
+        detail: String,
+        primaryAction: TodayInlineAction,
+        secondaryActions: [TodayInlineAction],
+        trustWhisper: TodayTrustWhisperState?,
+        contextReminderLabel: String = "",
+        goalConnectionLabel: String = "",
+        timerLabel: String = "",
+        sessionControlActions: [TodayInlineAction] = [],
+        receiptGenerationLabel: String = "",
+        exitBoundaryLabel: String = ""
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.detail = detail
+        self.primaryAction = primaryAction
+        self.secondaryActions = secondaryActions
+        self.trustWhisper = trustWhisper
+        self.contextReminderLabel = contextReminderLabel
+        self.goalConnectionLabel = goalConnectionLabel
+        self.timerLabel = timerLabel
+        self.sessionControlActions = sessionControlActions
+        self.receiptGenerationLabel = receiptGenerationLabel
+        self.exitBoundaryLabel = exitBoundaryLabel
+    }
+
+    var visibleCopy: String {
+        ([
+            title,
+            subtitle,
+            detail,
+            contextReminderLabel,
+            goalConnectionLabel,
+            timerLabel,
+            receiptGenerationLabel,
+            exitBoundaryLabel,
+            trustWhisper?.title,
+            trustWhisper?.detail
+        ].compactMap { $0 } + [primaryAction.title] + sessionControlActions.map(\.title) + secondaryActions.map(\.title))
+            .joined(separator: " ")
+    }
 }
 
 struct TodayFreeTimeState: Sendable {

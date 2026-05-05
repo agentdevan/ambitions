@@ -163,6 +163,19 @@ struct TodayScreen: View {
         switch action.kind {
         case .startStepSession:
             container.navigation.selectToday(entryContext: .stepSession)
+        case .pauseStepSession:
+            viewModel.transientMessage = TodayInlineMessage(
+                title: "Session paused",
+                body: "This step is still here. Nothing changes until you close the loop.",
+                state: .selected
+            )
+        case .stopStepSession:
+            container.navigation.selectToday(entryContext: .standard)
+            viewModel.transientMessage = TodayInlineMessage(
+                title: "Back to Today",
+                body: "Step Session ended without changing proof or plan.",
+                state: .selected
+            )
         case .closeActionClosure:
             selectedActionClosure = actionClosureState(for: action)
         case .openDetail, .askForHelp:

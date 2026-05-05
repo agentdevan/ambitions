@@ -138,8 +138,10 @@ Candidate item status.
 PD01 may run after the required approval phrase and prerequisite gates. PD01
 closed accepted Yellow with docs-only evidence. PD02 closed accepted Yellow as
 bounded Today implementation evidence after focused Today tests and local
-build validation. PD03 is the next direct successor only after PD02 commits,
-pushes, leaves a clean worktree, and the continuation gate allows it.
+build validation. PD03 closed accepted Yellow as bounded Today Step Session
+implementation evidence after focused Today tests and local build validation.
+PD04 is the next direct successor only after PD03 commits, pushes, leaves a
+clean worktree, and the continuation gate allows it.
 
 PD04-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
 validation, and predecessor gates are Green or accepted Yellow.

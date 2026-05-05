@@ -81,7 +81,7 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The F17-F30 train is complete by current train evidence. After the 2026-05-02 pre-train hardening pass and CS09 conditional repair, Release Evidence Closure is complete through REC06; PX01-PX20 are complete as future PXOS canon/roadmap evidence; ME01 is complete as maintainability audit evidence; ME08 is complete as shared standards evidence; ME10 is complete as recurring architecture-gate evidence; ME02 is complete as behavior-preserving Goals service extraction evidence; ME03 is complete as behavior-preserving Today service extraction evidence; ME04 is complete as behavior-preserving TodayPanels extraction evidence; ME05 is complete as behavior-preserving Plan service extraction evidence; ME06 is complete as behavior-preserving You root surface extraction evidence; ME07 is complete as behavior-preserving PlanScreen extraction evidence; ME09 is complete as product-contract test evidence; ME11 is not triggered; ME12 is complete as maintainability handoff evidence; CS01 is complete as compatibility seam registry evidence; CS07 is complete as focused external compatibility proof; CS08 is complete as focused import/export/persistence compatibility proof; CS02A and CS02B are complete as Profile/You seam repair and focused proof evidence; CS03A and CS03B are complete as Insights compatibility seam repair and focused proof evidence; CS04A and CS04B are complete as Habits/Ritual/Plan compatibility seam repair and focused proof evidence; CS05A and CS05B are complete as ActiveFocus/TodayFocus seam repair and focused proof evidence; CS06A and CS06B are complete as Failed-Taxonomy seam repair and focused proof evidence; CS09 is accepted Yellow/parked because no named compatibility regression target exists; SI01-SI18 are complete as Signature Interface evidence; PD01 is stopped for the Product Depth approval phrase; CS02C, CS03C, CS04C, CS05C, CS06C, CS09C, Product Depth, and AOS remain queued/blocked under the Ambitions 4.0 Execution Program.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The F17-F30 train is complete by current train evidence. After the 2026-05-02 pre-train hardening pass and CS09 conditional repair, Release Evidence Closure is complete through REC06; PX01-PX20 are complete as future PXOS canon/roadmap evidence; ME01 is complete as maintainability audit evidence; ME08 is complete as shared standards evidence; ME10 is complete as recurring architecture-gate evidence; ME02 is complete as behavior-preserving Goals service extraction evidence; ME03 is complete as behavior-preserving Today service extraction evidence; ME04 is complete as behavior-preserving TodayPanels extraction evidence; ME05 is complete as behavior-preserving Plan service extraction evidence; ME06 is complete as behavior-preserving You root surface extraction evidence; ME07 is complete as behavior-preserving PlanScreen extraction evidence; ME09 is complete as product-contract test evidence; ME11 is not triggered; ME12 is complete as maintainability handoff evidence; CS01 is complete as compatibility seam registry evidence; CS07 is complete as focused external compatibility proof; CS08 is complete as focused import/export/persistence compatibility proof; CS02A and CS02B are complete as Profile/You seam repair and focused proof evidence; CS03A and CS03B are complete as Insights compatibility seam repair and focused proof evidence; CS04A and CS04B are complete as Habits/Ritual/Plan compatibility seam repair and focused proof evidence; CS05A and CS05B are complete as ActiveFocus/TodayFocus seam repair and focused proof evidence; CS06A and CS06B are complete as Failed-Taxonomy seam repair and focused proof evidence; CS09 is accepted Yellow/parked because no named compatibility regression target exists; SI01-SI18 are complete as Signature Interface evidence; PD01 is accepted Yellow as Product Depth docs/planning; PD02 and PD03 are accepted Yellow as bounded Today depth implementation; CS02C, CS03C, CS04C, CS05C, CS06C, CS09C, later Product Depth, and AOS remain queued/blocked under the Ambitions 4.0 Execution Program.
 
 ## Ambitions 4.0 Global Batch Execution Context
 
@@ -210,9 +210,10 @@ Use this context when SI is selected by global order or explicit phrase:
 
 SI01-SI18 are complete as bounded Signature Interface evidence. The Product
 Depth approval phrase has been provided; PD01 is accepted Yellow as the Product
-Depth docs/planning source-truth batch. PD02 is accepted Yellow as the first
-bounded Product Depth implementation batch and only proves Today Step Detail
-depth behind Reality Rail.
+Depth docs/planning source-truth batch. PD02 is accepted Yellow as bounded
+Today Step Detail depth behind Reality Rail. PD03 is accepted Yellow as
+bounded Today Step Session depth; it proves only the step-first Today execution
+environment, not broader Product Depth implementation.
 
 ## Product Depth Queued Train Context
 
@@ -247,6 +248,7 @@ required PXOS, ME, CS, AOS-if-needed, and REC claim gates:
 Product Depth started only after the user said exactly
 `Start Product Depth Train`. PD01 is accepted Yellow as the docs/planning
 source-truth batch. PD02 is accepted Yellow as a bounded Today Step Detail
+implementation batch. PD03 is accepted Yellow as a bounded Today Step Session
 implementation batch. Product Depth must deepen
 Today, Goals, Capture, Plan, and You; it must not add new top-level tabs,
 generic dashboards, stacked-card top-level screens, habit tracker modes,

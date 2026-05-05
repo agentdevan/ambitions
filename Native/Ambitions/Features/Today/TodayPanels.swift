@@ -1591,7 +1591,27 @@ private struct TodayStepSessionCard: View {
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
 
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                stepSessionLine(icon: "scope", title: "Focus", value: state.contextReminderLabel)
+                stepSessionLine(icon: "link", title: "Goal", value: state.goalConnectionLabel)
+                stepSessionLine(icon: "timer", title: "Timer", value: state.timerLabel)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("TodayStepSessionContext")
+
             TodayPrimaryActionButton(action: state.primaryAction, handler: onAction)
+
+            if state.sessionControlActions.isEmpty == false {
+                TodayActionGrid(actions: state.sessionControlActions, handler: onAction)
+                    .accessibilityIdentifier("TodayStepSessionControls")
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                stepSessionLine(icon: "checkmark.seal", title: "Receipt", value: state.receiptGenerationLabel)
+                stepSessionLine(icon: "arrow.uturn.left", title: "Exit", value: state.exitBoundaryLabel)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("TodayStepSessionReceiptBoundary")
 
             if state.secondaryActions.isEmpty == false {
                 TodayActionGrid(actions: state.secondaryActions, handler: onAction)
@@ -1622,6 +1642,22 @@ private struct TodayStepSessionCard: View {
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
+    }
+
+    private func stepSessionLine(icon: String, title: String, value: String) -> some View {
+        Label {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(title)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(value)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+        } icon: {
+            Image(systemName: icon)
+                .foregroundStyle(theme.colors.accentWarm)
+        }
     }
 }
 
@@ -1730,6 +1766,12 @@ private struct TodayActionAccessibilityHint: ViewModifier {
         switch action.kind {
         case .startStepSession:
             content.accessibilityHint("Starts a bounded Step Session for this one step.")
+        case .pauseStepSession:
+            content.accessibilityHint("Pauses the session without changing proof or plan.")
+        case .stopStepSession:
+            content.accessibilityHint("Returns to Today without changing proof or plan.")
+        case .closeActionClosure:
+            content.accessibilityHint("Opens closure options and receipt preview for this step.")
         case .askWhyThisMatters:
             content.accessibilityHint("Explains why this step is worth doing now.")
         case .protectLater:

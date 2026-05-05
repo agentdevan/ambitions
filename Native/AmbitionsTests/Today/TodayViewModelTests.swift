@@ -454,9 +454,12 @@ final class TodayViewModelTests: XCTestCase {
         )
 
         let session = try XCTUnwrap(experience.support.stepSession)
-        XCTAssertEqual(session.secondaryActions.first?.kind, .closeActionClosure)
-        XCTAssertEqual(session.secondaryActions.first?.title, "Close the loop")
+        XCTAssertEqual(session.sessionControlActions.map(\.kind), [.pauseStepSession, .stopStepSession, .closeActionClosure])
+        XCTAssertEqual(session.sessionControlActions.map(\.title), ["Pause", "Stop session", "Close the loop"])
         XCTAssertNotEqual(session.primaryAction.kind, .closeActionClosure)
+        XCTAssertEqual(session.timerLabel, "Timer optional")
+        XCTAssertTrue(session.receiptGenerationLabel.contains("receipt preview"))
+        XCTAssertTrue(session.exitBoundaryLabel.contains("without changing proof or plan"))
     }
 
     func testF06ActionClosureProjectsProofReceiptPeekWithoutPersistence() {
@@ -756,6 +759,11 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.support.stepSession?.title, "Step Session-backed step")
         XCTAssertTrue(experience.support.stepSession?.detail.contains("Step Session") == true)
         XCTAssertEqual(experience.support.stepSession?.primaryAction.kind, .complete)
+        XCTAssertEqual(experience.support.stepSession?.contextReminderLabel, "One step is in focus. The rest of Today stays available behind it.")
+        XCTAssertEqual(experience.support.stepSession?.goalConnectionLabel, "Goal context stays attached while this step is in session.")
+        XCTAssertFalse(experience.support.stepSession?.visibleCopy.localizedCaseInsensitiveContains("AI confidence") == true)
+        XCTAssertFalse(experience.support.stepSession?.visibleCopy.localizedCaseInsensitiveContains("overdue") == true)
+        XCTAssertFalse(experience.support.stepSession?.visibleCopy.localizedCaseInsensitiveContains("streak") == true)
     }
 
     @MainActor

@@ -54,7 +54,7 @@ struct RepositoryBackedTodayService: TodayServicing {
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
         switch action.kind {
-        case .startStepSession:
+        case .startStepSession, .pauseStepSession, .stopStepSession:
             return TodayActionResponse(message: nil)
         case .openDetail:
             return TodayActionResponse(
@@ -1201,7 +1201,33 @@ private extension RepositoryBackedTodayService {
             state: .selected,
             target: primary.target
         )
-        let supportingActions = [closeAction] + focus.primaryActionsForRecovery.filter { $0.id != primary.id && $0.kind != .startStepSession && $0.kind != .complete }
+        let pauseAction = TodayInlineAction(
+            kind: .pauseStepSession,
+            title: "Pause",
+            systemImage: "pause.circle",
+            state: .default,
+            target: primary.target
+        )
+        let stopAction = TodayInlineAction(
+            kind: .stopStepSession,
+            title: "Stop session",
+            systemImage: "xmark.circle",
+            state: .default,
+            target: primary.target
+        )
+        let supportingActions = focus.primaryActionsForRecovery.filter {
+            $0.id != primary.id
+                && $0.kind != .startStepSession
+                && $0.kind != .complete
+                && $0.kind != .pauseStepSession
+                && $0.kind != .stopStepSession
+        }
+        let contextReminder = posture == .stable
+            ? "One step is in focus. The rest of Today stays available behind it."
+            : "One step is in focus. Recovery stays available without changing proof."
+        let goalConnection = primary.target.goalID == nil
+            ? "Goal context is not attached yet."
+            : "Goal context stays attached while this step is in session."
 
         return TodayStepSessionState(
             title: title,
@@ -1215,7 +1241,13 @@ private extension RepositoryBackedTodayService {
                     detail: $0.explanationSummary,
                     state: .selected
                 )
-            }
+            },
+            contextReminderLabel: contextReminder,
+            goalConnectionLabel: goalConnection,
+            timerLabel: "Timer optional",
+            sessionControlActions: [pauseAction, stopAction, closeAction],
+            receiptGenerationLabel: "Closing the loop opens the receipt preview before proof changes.",
+            exitBoundaryLabel: "Stopping the session returns to Today without changing proof or plan."
         )
     }
 
@@ -1805,7 +1837,7 @@ private extension RepositoryBackedTodayService {
                 body: explanation,
                 state: .selected
             )
-        case .startStepSession, .closeActionClosure, .openDetail, .openPlan, .protectLater, .dismissCelebration:
+        case .startStepSession, .pauseStepSession, .stopStepSession, .closeActionClosure, .openDetail, .openPlan, .protectLater, .dismissCelebration:
             break
         }
 
@@ -2430,7 +2462,7 @@ private extension RepositoryBackedTodayService {
 
     func rescheduleTrigger(for kind: TodayActionKind) -> RescheduleTrigger? {
         switch kind {
-        case .startStepSession:
+        case .startStepSession, .pauseStepSession, .stopStepSession:
             return nil
         case .defer:
             return .delay
@@ -2449,6 +2481,10 @@ private extension RepositoryBackedTodayService {
         switch kind {
         case .startStepSession:
             return "Started step from Today."
+        case .pauseStepSession:
+            return "Paused Step Session from Today."
+        case .stopStepSession:
+            return "Stopped Step Session from Today."
         case .complete:
             return "Completed from Today."
         case .defer:
