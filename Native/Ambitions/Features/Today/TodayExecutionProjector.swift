@@ -105,14 +105,43 @@ private extension TodayExecutionProjector {
         let duration = DayRailDurationState.placeholder(for: heroAction)
         let heroTitle = privacy.visibleTitle(hero.title)
         let heroSubtitle = privacy.visibleSubtitle(hero.subtitle)
+        let sourceSummary = privacy.sourceSummary(from: sourceLabels)
+        let heroBecause = privacy.visibleSubtitle(hero.explanation?.summary ?? contract.why.subtitle)
+        let sourceFreshness: SourceFreshnessState = input.nowState.localOnly ? .localOnly : .fresh
         let heroStep = input.mode == .empty ? nil : DayRailHeroStepState(
             id: "day-rail.hero.\(heroAction.id)",
             title: heroTitle,
             subtitle: heroSubtitle,
             duration: duration,
             fitLabel: fitLabel(for: hero),
-            whySummary: privacy.visibleSubtitle(hero.explanation?.summary ?? contract.why.subtitle),
+            whySummary: heroBecause,
+            sourceQualityLabel: sourceQualityLabel(input, sourceSummary: sourceSummary),
+            becauseLine: "Because \(heroBecause)",
+            contextEdge: StartHereContextEdgeState(
+                title: "Context edge",
+                summary: privacy.visibleSubtitle("\(lensSummary(input.nowState)) \(todayPlan.openWindowLabel)"),
+                sourceLabel: sourceSummary
+            ),
+            timeFitProof: StartHereTimeFitProofState(
+                title: "Time fit",
+                summary: duration.label,
+                detail: "\(fitLabel(for: hero)) from the current plan shape."
+            ),
+            goalThread: StartHereGoalThreadState(
+                title: "Goal thread",
+                summary: DayRailHeroStepState.goalThreadSummary(for: detailTarget),
+                detail: DayRailHeroStepState.goalThreadDetail(for: detailTarget)
+            ),
+            receiptItem: DayRailHeroStepState.receiptItem(
+                id: "start-here.\(heroAction.id)",
+                title: heroTitle,
+                sourceLabel: sourceSummary,
+                freshness: sourceFreshness,
+                privacyLabel: privacy.isSensitiveProjection ? "Private details hidden" : "Private by default",
+                becauseLine: heroBecause
+            ),
             primaryAction: heroAction,
+            secondaryAction: hero.secondaryActions.first ?? DayRailStepDetailState.placeholderActions(target: heroAction.target).first,
             detailTarget: detailTarget,
             sourceLabels: sourceLabels
         )
@@ -137,10 +166,10 @@ private extension TodayExecutionProjector {
             proofSlot: DayRailProofSlotState(
                 title: "Proof saved",
                 subtitle: input.nowState.evidenceSummaries.isEmpty
-                    ? "Receipt peek lands in a later F-series batch."
+                    ? "Start Here keeps the receipt seam visible before anything changes."
                     : "\(input.nowState.evidenceSummaries.count) local evidence item\(input.nowState.evidenceSummaries.count == 1 ? "" : "s") counted.",
                 noSilentChanges: true,
-                reservedForReceiptPeek: true
+                reservedForReceiptPeek: false
             )
         )
     }
@@ -166,6 +195,19 @@ private extension TodayExecutionProjector {
             labels.append(DayRailSourceLabelState(id: "source.local", label: "Stored on this device", source: .standard))
         }
         return Array(labels.prefix(3))
+    }
+
+    func sourceQualityLabel(_ input: TodayExecutionProjectionInput, sourceSummary: String) -> String {
+        if input.nowState.privacy == .privateUserText || input.nowState.privacy == .sensitive {
+            return "Private source"
+        }
+        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
+            return "Plan source with calendar awareness"
+        }
+        if input.nowState.localOnly {
+            return "Local source on this device"
+        }
+        return sourceSummary.isEmpty ? "Source needs review" : "Source-backed by current plan"
     }
 
     func fitLabel(for hero: TodayExecutionHeroState) -> String {

@@ -144,8 +144,17 @@ Current 4.0 status:
   persistence/schema change, sync/cloud behavior, external surface behavior,
   AI runtime, LDI runtime, release/legal/privacy claim, or public accessibility
   claim.
+- Complete / Green: FCP05 Start Here Surface is complete as Today-owned
+  flagship decision-object implementation evidence. It replaces the Hero Step
+  card posture with typed Context Edge, Time Fit Proof, Goal Thread,
+  source-quality, because-line, primary/secondary action, privacy, and FCP06
+  Receipt Drawer seam evidence inside the Reality Rail. FCP05 does not create a
+  dashboard, feed, generic task card, new route/raw value, persistence/schema
+  change, sync/cloud behavior, AI/AOS/LDI runtime, release/legal/privacy claim,
+  or public accessibility claim.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
-  as active implementation truth. FCP implementation has started with FCP17.
+  as active implementation truth. FCP implementation has started with FCP17,
+  FCP06, and FCP05.
   FCP targets
   25 major product objects and app-wide 10/10 audit closure, but the docs alone
   authorize no production Swift, route/raw-value, persistence/schema,

@@ -65,6 +65,23 @@ struct DayRailDetailTargetState: Equatable {
     let placeholderLabel: String
 }
 
+struct StartHereContextEdgeState: Equatable {
+    let title: String
+    let summary: String
+    let sourceLabel: String
+}
+
+struct StartHereTimeFitProofState: Equatable {
+    let title: String
+    let summary: String
+    let detail: String
+}
+
+struct StartHereGoalThreadState: Equatable {
+    let title: String
+    let summary: String
+    let detail: String
+}
 
 struct DayRailHeroStepState: Equatable {
     let id: String
@@ -73,7 +90,14 @@ struct DayRailHeroStepState: Equatable {
     let duration: DayRailDurationState
     let fitLabel: String
     let whySummary: String
+    let sourceQualityLabel: String
+    let becauseLine: String
+    let contextEdge: StartHereContextEdgeState
+    let timeFitProof: StartHereTimeFitProofState
+    let goalThread: StartHereGoalThreadState
+    let receiptItem: TrustReceiptLayerItem
     let primaryAction: TodayInlineAction
+    let secondaryAction: TodayInlineAction?
     let detailTarget: DayRailDetailTargetState
     let sourceLabels: [DayRailSourceLabelState]
 }

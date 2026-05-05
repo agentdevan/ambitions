@@ -25,7 +25,33 @@ extension AmbitionsDayRailViewState {
             duration: duration,
             fitLabel: hero.confidenceLabel,
             whySummary: hero.explanation?.summary ?? hero.subtitle,
+            sourceQualityLabel: "Source-backed by the current plan",
+            becauseLine: "Because \(hero.explanation?.summary ?? hero.subtitle)",
+            contextEdge: StartHereContextEdgeState(
+                title: "Context edge",
+                summary: todayPlanLayer.openWindowLabel,
+                sourceLabel: source.label
+            ),
+            timeFitProof: StartHereTimeFitProofState(
+                title: "Time fit",
+                summary: duration.label,
+                detail: hero.confidenceLabel
+            ),
+            goalThread: StartHereGoalThreadState(
+                title: "Goal thread",
+                summary: DayRailHeroStepState.goalThreadSummary(for: detailTarget),
+                detail: DayRailHeroStepState.goalThreadDetail(for: detailTarget)
+            ),
+            receiptItem: DayRailHeroStepState.receiptItem(
+                id: "start-here.compat.\(hero.primaryAction.id)",
+                title: hero.title,
+                sourceLabel: source.label,
+                freshness: .fresh,
+                privacyLabel: privacy.sourceLabel,
+                becauseLine: hero.explanation?.summary ?? hero.subtitle
+            ),
             primaryAction: hero.primaryAction,
+            secondaryAction: DayRailStepDetailState.placeholderActions(target: hero.primaryAction.target).first,
             detailTarget: detailTarget,
             sourceLabels: [source]
         )
@@ -48,9 +74,9 @@ extension AmbitionsDayRailViewState {
             ),
             proofSlot: DayRailProofSlotState(
                 title: "Proof saved",
-                subtitle: "Receipt peek lands in a later F-series batch.",
+                subtitle: "Start Here keeps the receipt seam visible before anything changes.",
                 noSilentChanges: true,
-                reservedForReceiptPeek: true
+                reservedForReceiptPeek: false
             )
         )
     }
@@ -235,5 +261,55 @@ extension DayRailRowState {
             ]
         }
         return Array(mapped)
+    }
+}
+
+extension DayRailHeroStepState {
+    static func goalThreadSummary(for target: DayRailDetailTargetState) -> String {
+        if target.goalID != nil || target.stepID != nil {
+            return "Connected to the current goal path"
+        }
+        if target.draftID != nil {
+            return "Connected to a draft that needs a place"
+        }
+        return "One-step path"
+    }
+
+    static func goalThreadDetail(for target: DayRailDetailTargetState) -> String {
+        switch target.kind {
+        case .stepDetail:
+            return "Step Detail keeps the path and receipt together."
+        case .planContext:
+            return "Plan keeps the next capacity choice reviewable."
+        case .captureContext:
+            return "Capture keeps placement reviewable before anything changes."
+        case .unavailable:
+            return "No hidden goal change is implied."
+        }
+    }
+
+    static func receiptItem(
+        id: String,
+        title: String,
+        sourceLabel: String,
+        freshness: SourceFreshnessState,
+        privacyLabel: String,
+        becauseLine: String
+    ) -> TrustReceiptLayerItem {
+        TrustReceiptLayerItem(
+            id: id,
+            kind: .needsReview,
+            title: "Start Here receipt seam",
+            summary: "No change has been made yet.",
+            sourceLabel: sourceLabel,
+            freshness: freshness,
+            privacyLabel: privacyLabel,
+            whyLabel: becauseLine.todayShortSentence,
+            changeLabel: "Starting opens the current step; closing writes the receipt later.",
+            undoLabel: nil,
+            correctionLabel: "Review or adjust before changing the plan.",
+            reviewLabel: nil,
+            redactedDetail: title
+        )
     }
 }

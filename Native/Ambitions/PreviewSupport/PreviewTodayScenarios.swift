@@ -189,7 +189,25 @@ enum PreviewTodayScenarios {
                 duration: hero.duration,
                 fitLabel: hero.fitLabel,
                 whySummary: privacy.visibleSubtitle(hero.whySummary),
+                sourceQualityLabel: "Private source",
+                becauseLine: privacy.visibleSubtitle(hero.becauseLine),
+                contextEdge: StartHereContextEdgeState(
+                    title: hero.contextEdge.title,
+                    summary: privacy.visibleSubtitle(hero.contextEdge.summary),
+                    sourceLabel: privacy.sourceLabel
+                ),
+                timeFitProof: hero.timeFitProof,
+                goalThread: hero.goalThread,
+                receiptItem: DayRailHeroStepState.receiptItem(
+                    id: "\(hero.receiptItem.id).private",
+                    title: "Private item",
+                    sourceLabel: privacy.sourceLabel,
+                    freshness: .localOnly,
+                    privacyLabel: "Private details hidden",
+                    becauseLine: "Details stay private on Today."
+                ),
                 primaryAction: hero.primaryAction,
+                secondaryAction: hero.secondaryAction,
                 detailTarget: hero.detailTarget,
                 sourceLabels: [DayRailSourceLabelState(id: "source.private", label: privacy.sourceLabel, source: .privateUserText)]
             )
@@ -244,7 +262,27 @@ enum PreviewTodayScenarios {
             whySummary: action.state == .disabled
                 ? "The source is visible, but the next action should wait for review."
                 : baseHero.whySummary,
+            sourceQualityLabel: action.state == .disabled ? "Source needs review" : baseHero.sourceQualityLabel,
+            becauseLine: action.state == .disabled
+                ? "Because the source is visible, but the next action should wait for review."
+                : baseHero.becauseLine,
+            contextEdge: baseHero.contextEdge,
+            timeFitProof: action.state == .disabled
+                ? StartHereTimeFitProofState(title: baseHero.timeFitProof.title, summary: baseHero.timeFitProof.summary, detail: "Review before starting.")
+                : baseHero.timeFitProof,
+            goalThread: baseHero.goalThread,
+            receiptItem: action.state == .disabled
+                ? DayRailHeroStepState.receiptItem(
+                    id: "\(baseHero.receiptItem.id).needs-review",
+                    title: baseHero.title,
+                    sourceLabel: baseHero.receiptItem.sourceLabel,
+                    freshness: .partial,
+                    privacyLabel: baseHero.receiptItem.privacyLabel,
+                    becauseLine: "The source is visible, but the next action should wait for review."
+                )
+                : baseHero.receiptItem,
             primaryAction: action,
+            secondaryAction: baseHero.secondaryAction,
             detailTarget: baseHero.detailTarget,
             sourceLabels: baseHero.sourceLabels
         )
@@ -304,7 +342,14 @@ enum PreviewTodayScenarios {
             duration: DayRailDurationState(minutes: 25, source: .suggested, label: "25 min suggested"),
             fitLabel: baseHero.fitLabel,
             whySummary: baseHero.whySummary,
+            sourceQualityLabel: baseHero.sourceQualityLabel,
+            becauseLine: baseHero.becauseLine,
+            contextEdge: baseHero.contextEdge,
+            timeFitProof: baseHero.timeFitProof,
+            goalThread: baseHero.goalThread,
+            receiptItem: baseHero.receiptItem,
             primaryAction: DayRailStepDetailState.reservedStartNowAction(target: baseHero.primaryAction.target),
+            secondaryAction: baseHero.secondaryAction,
             detailTarget: baseHero.detailTarget,
             sourceLabels: baseHero.sourceLabels
         )

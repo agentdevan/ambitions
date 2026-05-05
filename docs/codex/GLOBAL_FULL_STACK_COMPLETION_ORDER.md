@@ -109,7 +109,10 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 26. FCP06 Receipt Drawer / Trust Layer. Completed Green as shared
     ReceiptDrawer / SourceFold trust foundation on 2026-05-05; Start Here
     attachment is deferred to FCP05.
-27. FCP05 Start Here Surface.
+27. FCP05 Start Here Surface. Completed Green as Today-owned Start Here
+    decision surface with Context Edge, Time Fit Proof, Goal Thread, source
+    quality, because line, primary/secondary actions, and Receipt Drawer seam
+    on 2026-05-05.
 28. FCP07 Reality Rail Continuity.
 29. FCP13A Action Closure Diamond.
 30. FCP08 Ambition Meridian Shell.

@@ -50,7 +50,7 @@ struct AmbitionsDayRailView: View {
             DayRailRhythmStrip(state: state, semanticState: semanticState)
 
             if let heroStep = state.heroStep {
-                DayRailHeroStepCard(
+                StartHereSurface(
                     step: heroStep,
                     privacy: state.privacyProjection,
                     contextLabel: state.contextSummary,
@@ -238,9 +238,10 @@ struct AmbitionsDayRailView: View {
     }
 }
 
-private struct DayRailHeroStepCard: View {
+private struct StartHereSurface: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let step: DayRailHeroStepState
     let privacy: DayRailPrivacyProjectionState
@@ -249,7 +250,7 @@ private struct DayRailHeroStepCard: View {
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
+        VStack(alignment: .leading, spacing: theme.spacing.lg) {
             Button {
                 onOpenStepDetail(step.stepDetail(privacy: privacy, contextLabel: contextLabel))
             } label: {
@@ -257,7 +258,7 @@ private struct DayRailHeroStepCard: View {
                     DayRailNode(kind: .recommended, active: true)
                         .accessibilityHidden(true)
 
-                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    VStack(alignment: .leading, spacing: theme.spacing.md) {
                         Text("Start here")
                             .font(theme.typography.caption)
                             .foregroundStyle(theme.colors.textTertiary)
@@ -273,48 +274,143 @@ private struct DayRailHeroStepCard: View {
                             .foregroundStyle(theme.colors.textSecondary)
                             .fixedSize(horizontal: false, vertical: true)
 
-                        HStack(spacing: theme.spacing.xs) {
-                            AmbitionChip(step.duration.label, role: .time, semanticState: .calendarDerived)
-                            AmbitionChip(step.fitLabel, role: .state, semanticState: .focus)
-                        }
+                        Text(step.becauseLine)
+                            .font(theme.typography.bodySecondary)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityIdentifier("TodayStartHereBecauseLine")
 
-                        if step.sourceLabels.isEmpty == false {
-                            Text(sourceSummary)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textTertiary)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
+                        sourceAndFit
 
-                        HeroStepPanelSignalRow(
-                            action: step.primaryAction,
-                            reason: step.whySummary,
-                            sourceSummary: sourceSummary,
-                            isPrivateProjection: privacy.isSensitiveProjection
-                        )
+                        startHereFacts
                     }
                     Spacer(minLength: theme.spacing.sm)
                 }
             }
             .buttonStyle(.plain)
 
-            TodayPrimaryActionButton(action: step.primaryAction, handler: onAction)
-                .accessibilityIdentifier("TodayRealityRailPrimaryAction")
+            ReceiptDrawer(
+                title: "Receipt seam",
+                subtitle: "What will stay reviewable after action.",
+                sections: [
+                    ReceiptDrawerSection(
+                        id: "start-here",
+                        title: "Start Here",
+                        subtitle: privacy.isSensitiveProjection ? "Private details stay hidden." : "Source, change, and correction path stay attached.",
+                        items: [step.receiptItem]
+                    )
+                ]
+            )
+            .accessibilityIdentifier("TodayStartHereReceiptDrawer")
+
+            actionRow
         }
         .padding(theme.spacing.md)
         .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay.opacity(0.95))
+            UnevenRoundedRectangle(
+                topLeadingRadius: theme.radius.sm,
+                bottomLeadingRadius: theme.radius.sm,
+                bottomTrailingRadius: theme.radius.lg,
+                topTrailingRadius: theme.radius.lg,
+                style: .continuous
+            )
+            .fill(theme.colors.surfaceOverlay.opacity(0.95))
         )
         .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.accentWarm.opacity(0.28), lineWidth: 1)
+            HStack(spacing: 0) {
+                Rectangle()
+                    .fill(theme.colors.accentWarm.opacity(0.86))
+                    .frame(width: 3)
+                    .accessibilityHidden(true)
+                Spacer(minLength: 0)
+            }
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
-        .accessibilityValue("\(step.duration.label). \(sourceSummary)")
-        .accessibilityHint("Opens Step Detail. Start now opens Step Session.")
-        .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayRealityRailHeroCard")
+        .accessibilityValue(accessibilityValue)
+        .accessibilityHint("Opens Step Detail. Start now opens Step Session. The receipt seam explains what will stay reviewable.")
+        .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayStartHereSurface")
         .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
+    }
+
+    @ViewBuilder
+    private var sourceAndFit: some View {
+        let stacksVertically = dynamicTypeSize.isAccessibilitySize
+        if stacksVertically {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                sourceAndFitContent
+            }
+        } else {
+            HStack(spacing: theme.spacing.xs) {
+                sourceAndFitContent
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var sourceAndFitContent: some View {
+        AmbitionChip(step.duration.label, role: .time, semanticState: .calendarDerived)
+        AmbitionChip(step.fitLabel, role: .state, semanticState: .focus)
+        AmbitionChip(step.sourceQualityLabel, role: .state, semanticState: .trust)
+    }
+
+    private var startHereFacts: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            StartHereFactRow(
+                icon: "point.topleft.down.curvedto.point.bottomright.up",
+                title: step.contextEdge.title,
+                value: step.contextEdge.summary,
+                detail: step.contextEdge.sourceLabel,
+                identifier: "TodayStartHereContextEdge"
+            )
+            StartHereFactRow(
+                icon: "clock.badge.checkmark",
+                title: step.timeFitProof.title,
+                value: step.timeFitProof.summary,
+                detail: step.timeFitProof.detail,
+                identifier: "TodayStartHereTimeFitProof"
+            )
+            StartHereFactRow(
+                icon: "point.3.connected.trianglepath.dotted",
+                title: step.goalThread.title,
+                value: step.goalThread.summary,
+                detail: step.goalThread.detail,
+                identifier: "TodayStartHereGoalThread"
+            )
+        }
+    }
+
+    @ViewBuilder
+    private var actionRow: some View {
+        let stacksVertically = dynamicTypeSize.isAccessibilitySize
+        if stacksVertically {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                actions
+            }
+        } else {
+            HStack(spacing: theme.spacing.sm) {
+                actions
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var actions: some View {
+        TodayPrimaryActionButton(action: step.primaryAction, handler: onAction)
+            .accessibilityIdentifier("TodayRealityRailPrimaryAction")
+        if let secondaryAction = step.secondaryAction {
+            Button {
+                onAction(secondaryAction)
+            } label: {
+                Label(secondaryAction.title, systemImage: secondaryAction.systemImage)
+                    .font(theme.typography.bodyEmphasized)
+                    .frame(maxWidth: .infinity)
+                    .frame(minHeight: 48)
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            .accessibilityHint("Uses the existing Today action without changing anything silently.")
+            .accessibilityIdentifier("TodayStartHereSecondaryAction")
+        }
     }
 
     private var sourceSummary: String {
@@ -329,6 +425,55 @@ private struct DayRailHeroStepCard: View {
         privacy.isSensitiveProjection
             ? "Start here. Private item. Details stay private on Today."
             : "Start here. \(step.title). \(step.subtitle)"
+    }
+
+    private var accessibilityValue: String {
+        [
+            step.duration.label,
+            sourceSummary,
+            step.contextEdge.summary,
+            step.timeFitProof.summary,
+            step.goalThread.summary,
+            step.receiptItem.accessibilitySummary
+        ].joined(separator: ". ")
+    }
+}
+
+private struct StartHereFactRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let icon: String
+    let title: String
+    let value: String
+    let detail: String
+    let identifier: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: icon)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.accentWarm)
+                .frame(width: 24, height: 24)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(title)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                Text(value)
+                    .font(theme.typography.bodySecondary)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(detail)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(title)
+        .accessibilityValue("\(value). \(detail)")
+        .accessibilityIdentifier(identifier)
     }
 }
 

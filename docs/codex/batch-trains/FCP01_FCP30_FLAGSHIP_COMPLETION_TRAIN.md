@@ -157,6 +157,12 @@ Evidence: `docs/audits/fcp04-preview-fixture-qa-matrix-expansion-report.md`.
 
 ### FCP05 — Start Here Surface
 
+Status: Complete Green on 2026-05-05 as Today-owned Start Here Surface
+implementation. It replaces the Hero Step card posture with typed Context Edge,
+Time Fit Proof, Goal Thread, source-quality, because-line, primary/secondary
+actions, and FCP06 Receipt Drawer seam evidence.
+Evidence: `docs/audits/fcp05-start-here-surface-report.md`.
+
 Type: Implementation.
 Owner: Today.
 Depends on: FCP01-FCP04; SI05; SI10; PD02/PD03/PD04 evidence.

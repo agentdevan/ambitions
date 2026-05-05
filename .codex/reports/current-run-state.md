@@ -2,16 +2,15 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP06 Receipt Drawer / Trust Layer Green; full-stack order
-selects FCP05 Start Here Surface next if continuation gates allow.
-Scope: FCP06 completed as shared trust primitive implementation evidence. It
-adds ReceiptDrawer, ReceiptDrawerSection, and SourceFold, extends receipt items
-with why/change/correction facts, and proves source/freshness/privacy/review/
-undo/correction facts with focused tests. Start Here attachment is deferred to
-FCP05. FCP06 changed no route/raw value, persistence/schema, permission-request,
-calendar-write, sync/account, release, legal/privacy, CI, workflow/signing,
-entitlement, AI runtime, AOS runtime, LDI runtime, or public accessibility
-claim file.
+Current batch: FCP05 Start Here Surface Green; full-stack order selects FCP07
+Reality Rail Continuity next if continuation gates allow.
+Scope: FCP05 completed as Today-owned Start Here implementation evidence. It
+replaces the Hero Step card posture with typed Context Edge, Time Fit Proof,
+Goal Thread, source-quality, because-line, primary/secondary action, privacy,
+and FCP06 Receipt Drawer seam evidence inside the Reality Rail. FCP05 changed
+no route/raw value, persistence/schema, permission-request, calendar-write,
+sync/account, release, legal/privacy, CI, workflow/signing, entitlement, AI
+runtime, AOS runtime, LDI runtime, or public accessibility claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -34,7 +33,8 @@ Green as Life Inventory object model source truth. FL03 is complete / Green as
 Commitment Memory / Open Loop Registry source truth. FL04 is complete / Green
 as Searchable Life Recall source truth. FL05 is complete / Green as Option
 Value / Pivot Preservation source truth. FL06 is complete / Green as Weekly
-Life Sweep ritual source truth. Accepted Yellow:
+Life Sweep ritual source truth. FCP05 is complete / Green as Start Here Surface
+implementation evidence. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
@@ -82,7 +82,7 @@ docs-only sync strategy decision evidence. PFC12 is complete / Green as
 app-group/shared-storage boundary evidence. Later PFC implementation beyond
 existing test execution has not started.
 
-No further production Swift beyond the scoped FCP06 shared trust primitive
+No further production Swift beyond the scoped FCP05 Today Start Here Surface
 changes is authorized by these docs alone. No route/raw value,
 persistence/schema, sync/cloud, monetization, privacy/legal, release, App
 Store, TestFlight, physical-device, public accessibility, workflow, signing,

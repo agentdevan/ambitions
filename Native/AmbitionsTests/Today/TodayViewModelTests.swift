@@ -110,8 +110,12 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(rail.contextLabels.contains { $0.label == "Based on your plan" })
         XCTAssertTrue(rail.contextLabels.contains { $0.label == "Stored on this device" })
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
-        XCTAssertTrue(rail.proofSlot.reservedForReceiptPeek)
+        XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertTrue(rail.proofSlot.noSilentChanges)
+        XCTAssertEqual(heroStep.contextEdge.title, "Context edge")
+        XCTAssertEqual(heroStep.timeFitProof.title, "Time fit")
+        XCTAssertEqual(heroStep.goalThread.title, "Goal thread")
+        XCTAssertEqual(heroStep.receiptItem.title, "Start Here receipt seam")
     }
 
     func testF01DayRailPrivacyProjectionRedactsSensitiveTitles() {
@@ -149,7 +153,14 @@ final class TodayViewModelTests: XCTestCase {
             rail.heroStep?.subtitle,
             rail.heroStep?.fitLabel,
             rail.heroStep?.whySummary,
+            rail.heroStep?.sourceQualityLabel,
+            rail.heroStep?.becauseLine,
+            rail.heroStep?.contextEdge.summary,
+            rail.heroStep?.timeFitProof.detail,
+            rail.heroStep?.goalThread.summary,
+            rail.heroStep?.receiptItem.accessibilitySummary,
             rail.heroStep?.primaryAction.title,
+            rail.heroStep?.secondaryAction?.title,
             rail.closureSlot.title,
             rail.closureSlot.subtitle,
             rail.proofSlot.title,
@@ -197,6 +208,36 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Next"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Later"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("No silent changes"))
+    }
+
+    func testFCP05StartHereSurfaceCarriesSourceTimeGoalAndReceiptSeam() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-fcp05",
+            stepID: "step-fcp05",
+            stepTitle: "Draft PM transition notes",
+            dueAt: "2026-04-15T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let rail = try await service.loadTodayExperience(userDisplayName: "", now: now).execution.dayRail
+        let hero = try XCTUnwrap(rail.heroStep)
+        let copy = f02VisibleRailCopy(rail)
+
+        XCTAssertTrue(copy.contains("Context edge"))
+        XCTAssertTrue(copy.contains("Time fit"))
+        XCTAssertTrue(copy.contains("Goal thread"))
+        XCTAssertTrue(copy.contains("Start Here receipt seam"))
+        XCTAssertTrue(copy.contains("No change has been made yet."))
+        XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("productivity score"))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("notification feed"))
+        XCTAssertEqual(hero.receiptItem.kind, .needsReview)
+        XCTAssertEqual(hero.receiptItem.changeLabel, "Starting opens the current step; closing writes the receipt later.")
     }
 
     func testF02RealityRailRowsStayDeterministicallyOrdered() async throws {
@@ -312,11 +353,9 @@ final class TodayViewModelTests: XCTestCase {
         let renderedReservationCopy = f02RenderedReservationCopy(rail)
 
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
-        XCTAssertTrue(rail.proofSlot.reservedForReceiptPeek)
+        XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertTrue(renderedReservationCopy.contains("Close the loop stays reserved for F05."))
-        XCTAssertTrue(renderedReservationCopy.contains("Proof and receipts stay reserved for F06."))
         XCTAssertFalse(renderedReservationCopy.contains("Completed"))
-        XCTAssertFalse(renderedReservationCopy.contains("Proof saved"))
     }
 
     func testF03RealityRailHeroAndRowProduceStepDetailState() throws {
@@ -414,9 +453,8 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(detail.closureAction.title, "Close the loop")
         XCTAssertEqual(detail.secondaryActions.map(\.title), ["Adjust plan", "Review later"])
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
-        XCTAssertTrue(rail.proofSlot.reservedForReceiptPeek)
+        XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Close the loop stays reserved for F05."))
-        XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Proof and receipts stay reserved for F06."))
     }
 
     func testF05ActionClosureSheetSupportsStillCountsWithoutProofLedger() throws {
@@ -833,7 +871,17 @@ private extension TodayViewModelTests {
             rail.heroStep?.subtitle,
             rail.heroStep?.duration.label,
             rail.heroStep?.fitLabel,
+            rail.heroStep?.sourceQualityLabel,
+            rail.heroStep?.becauseLine,
+            rail.heroStep?.contextEdge.title,
+            rail.heroStep?.contextEdge.summary,
+            rail.heroStep?.timeFitProof.title,
+            rail.heroStep?.timeFitProof.detail,
+            rail.heroStep?.goalThread.title,
+            rail.heroStep?.goalThread.summary,
+            rail.heroStep?.receiptItem.accessibilitySummary,
             rail.heroStep?.primaryAction.title,
+            rail.heroStep?.secondaryAction?.title,
             "Now",
             "Next",
             "Later",
