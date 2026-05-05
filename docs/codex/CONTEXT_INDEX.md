@@ -361,12 +361,14 @@ Use this context when the global full-stack order selects PFC batches:
 - `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
 - `docs/codex/batches/PFC05_CI_Local_Toolchain_Reproducibility_Prompt.md`
 - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+- `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
 - `docs/audits/pfc01-repo-build-system-inventory-report.md`
 - `docs/audits/pfc02-architecture-boundary-module-map-report.md`
 - `docs/audits/pfc03-dead-code-prompt-artifact-naming-smell-audit-report.md`
 - `docs/audits/pfc04-dependency-supply-chain-policy-report.md`
 - `docs/audits/pfc05-ci-local-toolchain-reproducibility-report.md`
 - `docs/audits/pfc06-schema-persistence-source-truth-report.md`
+- `docs/audits/pfc07-migration-ladder-backward-compatibility-tests-report.md`
 
 PFC01 is Green as docs-only repo/build inventory evidence. PFC02 is Green as
 docs-only architecture boundary evidence. PFC03 is Green as docs-only
@@ -383,8 +385,12 @@ production source edits. PFC06 Schema And Persistence Source Truth is Green as
 docs-only persistence source truth and migration risk ledger. It does not
 authorize schema edits, migration implementation, sync/cloud/account behavior,
 export/import UI claims, privacy/legal/release claims, or production source
-edits. PFC07 Migration Ladder And Backward Compatibility Tests is the next
-eligible PFC batch under the full-stack order.
+edits. PFC07 Migration Ladder And Backward Compatibility Tests is Green as
+focused persistence compatibility proof; 28 existing repository, legacy import,
+portable snapshot, and local-only sync tests passed with 0 failures. PFC07 does
+not authorize schema edits, CloudKit/account sync, export/import UI claims, or
+release/legal/privacy claims. PFC08 Corruption Recovery / Backup / Restore Plan
+is the next eligible PFC batch under the full-stack order.
 
 
 ## Living Dream Intelligence Context

@@ -2,15 +2,16 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC06 Schema And Persistence Source Truth Green; PFC07 Migration
-Ladder And Backward Compatibility Tests next if continuation gates allow.
-Scope: PFC06 completed as docs-only persistence source truth after PFC05. It
-mapped SwiftData records, repository ownership, portable snapshot export/import
-contracts, legacy import compatibility, app preference storage, explicit
-local-only sync posture, privacy/export/delete caveats, and migration-risk
-owners without editing production Swift, shared packages, tests, project
-generation, workflows, dependencies, signing, entitlements, privacy manifests,
-lockfiles, Brewfiles, or generated output.
+Current batch: PFC07 Migration Ladder And Backward Compatibility Tests Green;
+PFC08 Corruption Recovery / Backup / Restore Plan next if continuation gates
+allow.
+Scope: PFC07 completed as focused persistence compatibility proof after PFC06.
+It ran existing repository, legacy import, portable snapshot, and local-only sync
+tests as a 28-test focused slice with 0 failures, documented the current
+local-only non-schema boundary, and changed no production Swift, shared
+packages, tests, project generation source truth, workflows, dependencies,
+signing, entitlements, privacy manifests, lockfiles, Brewfiles, or generated
+output.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -62,8 +63,9 @@ boundary map and extraction-queue evidence. PFC03 is complete / Green as
 docs-only dead-code, prompt-artifact, and naming-smell evidence. PFC04 is
 complete / Green as docs-only dependency and supply-chain evidence. PFC05 is
 complete / Green as local tooling/docs evidence. PFC06 is complete / Green as
-docs-only persistence source truth and migration-risk evidence. Later PFC
-implementation has not started.
+docs-only persistence source truth and migration-risk evidence. PFC07 is
+complete / Green as focused persistence compatibility proof. Later PFC
+implementation beyond existing test execution has not started.
 
 No production Swift, route/raw value, persistence/schema, sync/cloud,
 monetization, privacy/legal, release, App Store, TestFlight, physical-device,

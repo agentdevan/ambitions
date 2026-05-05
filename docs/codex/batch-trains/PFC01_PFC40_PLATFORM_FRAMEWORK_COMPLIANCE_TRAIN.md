@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -130,6 +130,11 @@ Type: Implementation/tests.
 Owner: Persistence.
 Goal: Add migration fixtures/tests and payload survival proof where applicable.
 Required result: migration tests or documented local-only non-schema boundary.
+Status: Green as focused persistence compatibility proof. Existing repository,
+legacy import, portable snapshot, and local-only sync tests passed as a 28-test
+focused slice; no production Swift, schema, migration, workflow, project,
+dependency, signing, entitlement, privacy manifest, lockfile, or generated
+output changed.
 
 ### PFC08 — Corruption Recovery / Backup / Restore Plan
 

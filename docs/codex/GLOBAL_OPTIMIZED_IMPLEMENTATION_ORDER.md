@@ -67,8 +67,9 @@ repo/build inventory. PFC02 is complete / Green as architecture boundary map.
 PFC03 is complete / Green as dead-code, prompt-artifact, and naming-smell audit.
 PFC04 is complete / Green as dependency and supply-chain policy ledger. PFC05
 is complete / Green as local CI parity wrapper and toolchain runbook update.
-PFC06 is complete / Green as schema and persistence source truth. PFC07 is the
-next eligible full-stack batch before row 011 FCP implementation under the
+PFC06 is complete / Green as schema and persistence source truth. PFC07 is
+complete / Green as focused migration/backward-compatibility proof. PFC08 is
+the next eligible full-stack batch before row 011 FCP implementation under the
 stricter full-stack order.
 | 011 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Build Availability Center before Start Here relies on time-fit proof. | PD16; FCP01-FCP04. | Single-batch. |
 | 012 | FCP06 Receipt Drawer / Trust Layer | FCP | Implementation | Shared trust drawer should exist before Start Here/Rail/Plan/Goal integrations mature. | FCP01-FCP04; PD15/PD17 preferred. | Single-batch. |
