@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -116,6 +116,13 @@ Type: Docs/contract.
 Owner: Persistence.
 Goal: Document current local data models, schema ownership, sensitive fields, retention, export/delete/import posture.
 Required result: schema map and migration risk ledger.
+Status: Green as docs-only persistence source truth and migration risk ledger.
+It mapped the current SwiftData records, repository owners, portable snapshot
+package, legacy import bridge, app preferences store, explicit local-only sync
+capability, privacy/export/delete caveats, and future PFC owners without
+changing production Swift, schema, tests, workflows, project files,
+dependencies, signing, entitlements, privacy manifests, lockfiles, or generated
+output.
 
 ### PFC07 — Migration Ladder And Backward Compatibility Tests
 

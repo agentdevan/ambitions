@@ -66,7 +66,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 13. PFC05 CI / Local Toolchain Reproducibility. Completed Green as local CI
     parity wrapper and toolchain runbook update on 2026-05-05.
-14. PFC06 Schema And Persistence Source Truth.
+14. PFC06 Schema And Persistence Source Truth. Completed Green as docs-only
+    schema, repository, export/import, sync-posture, and migration-risk source
+    truth on 2026-05-05.
 15. PFC07 Migration Ladder And Backward Compatibility Tests.
 16. PFC08 Corruption Recovery / Backup / Restore Plan.
 17. PFC09 iCloud / CloudKit Sync Strategy Decision.

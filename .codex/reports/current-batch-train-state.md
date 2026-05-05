@@ -2,13 +2,15 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC05 CI / Local Toolchain Reproducibility Green; PFC06 Schema
-And Persistence Source Truth next if continuation gates allow.
-Scope: PFC05 completed as local tooling/docs implementation after PFC04. It
-added a non-mutating local CI parity wrapper and toolchain runbook updates
-without editing production Swift, shared packages, tests, project generation,
-workflows, dependencies, signing, entitlements, privacy manifests, lockfiles,
-Brewfiles, or generated output.
+Current batch: PFC06 Schema And Persistence Source Truth Green; PFC07 Migration
+Ladder And Backward Compatibility Tests next if continuation gates allow.
+Scope: PFC06 completed as docs-only persistence source truth after PFC05. It
+mapped SwiftData records, repository ownership, portable snapshot export/import
+contracts, legacy import compatibility, app preference storage, explicit
+local-only sync posture, privacy/export/delete caveats, and migration-risk
+owners without editing production Swift, shared packages, tests, project
+generation, workflows, dependencies, signing, entitlements, privacy manifests,
+lockfiles, Brewfiles, or generated output.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -56,8 +58,12 @@ PFC source truth exists through
 `Ambitions_Platform_Legal_And_Framework_Completion_Plan.md` and the PFC train
 manifest. PFC01 is complete / Green as docs-only repo/build inventory and
 repair-map evidence. PFC02 is complete / Green as docs-only architecture
-boundary map and extraction-queue evidence. Later PFC implementation has not
-started.
+boundary map and extraction-queue evidence. PFC03 is complete / Green as
+docs-only dead-code, prompt-artifact, and naming-smell evidence. PFC04 is
+complete / Green as docs-only dependency and supply-chain evidence. PFC05 is
+complete / Green as local tooling/docs evidence. PFC06 is complete / Green as
+docs-only persistence source truth and migration-risk evidence. Later PFC
+implementation has not started.
 
 No production Swift, route/raw value, persistence/schema, sync/cloud,
 monetization, privacy/legal, release, App Store, TestFlight, physical-device,
