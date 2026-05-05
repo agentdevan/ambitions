@@ -2,99 +2,72 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through CS04B Habits/Ritual/Plan compatibility proof evidence and SI formalization
-Date: 2026-05-02
+Status: Ambitions 4.0 dependency graph; optimized implementation order overlay active for remaining work
+Date: 2026-05-05
 
 ## Phase Map
 
-| Phase | Global order | Purpose | Required result |
+| Phase | Optimized order | Purpose | Required result |
 | --- | --- | --- | --- |
-| 0 Release evidence truth | 001-005 | Close REC02-REC06 evidence, human proof plan, claim guard, review packet, and closure handoff. | Release claims remain evidence-bound. |
-| 1 PXOS surface canon | 006-015 | Define PXOS parent, five surfaces, closure, trust, copy, and visual system. | Future user-facing work has source truth. |
-| 2 PXOS readiness canon | 016-025 | Define onboarding, accessibility, degraded states, Product Depth, continuity, intelligence expression, messaging, reorder, handoff, roadmap. | PXOS can gate implementation without claiming implementation. |
-| 3 Maintainability prerequisites | 026-037 | Map large files, set extraction standards, run architecture gate, extract owners, rebaseline tests, repair, handoff. | Large UI work has maintainable owners. |
-| 4 Compatibility prerequisites | 038-047 | Map seams, prove external/import/export/persistence compatibility, retire safe seams, repair, handoff. | Renames/removals do not break routes or data. |
-| 5 Signature Interface | 048-065 | Build SI01-SI18 interface primitives after ME/CS prerequisites and before Product Depth. | Ambitions-native UI primitives and visual QA gates exist before depth work. |
-| 6 Product Depth | 066-083 | Deepen existing surfaces through PD01-PD18 after PXOS plus ME/CS/SI gates. | Formal depth work remains deep-not-wide and gate-bound. |
-| 7 AOS internal foundations | 084-106 | Build AmbitionsOS contracts and kernels without user-facing exposure. | Internal intelligence has typed, private, source-grounded contracts. |
-| 8 AOS expression and QA | 107-113 | Integrate only after PXOS/ME/CS/SI/PD where relevant, build fixtures, QA, claim truth, handoff, repair/roadmap. | User-facing intelligence waits for proof and gates. |
-| 8 Release readiness evidence | Future human-led lane | Actual release readiness proof after implementation evidence and human/platform proof. | No public readiness claim without evidence. |
-| 9 Living Dream Intelligence | 169-190 | Implement LDI01-LDI22 after AOS30 by default. | Every dream is classified, protected, routed, and handled honestly; full runtime only after evidence. |
+| 0 Release evidence truth | Historical complete | Close REC02-REC06 evidence, human proof plan, claim guard, review packet, and closure handoff. | Release claims remain evidence-bound. |
+| 1 PXOS / ME / CS / SI foundations | Historical complete or deferred where noted | Preserve source truth, maintainability, compatibility, and signature interface foundations. | Future work has source truth, owner boundaries, compatibility proof, and UI primitives. |
+| 2 Product Depth closeout | PD15-PD18 | Finish You trust history, Schedule / Availability / Defaults, Cross-Surface Proof/Review, and PD handoff. | Remaining depth foundations exist before flagship refactors. |
+| 3 FCP source-truth and fixture foundations | FCP reconciliation, FCP01-FCP04 | Make 10/10 object standard, boundaries, and QA matrix executable. | FCP implementation can run without rethinking product direction. |
+| 4 FCP flagship object refactor | FCP17/FCP06/FCP05/FCP07/FCP13A/FCP08/FCP09 etc. | Build shared availability, receipt, Start Here, Reality Rail, closure, shell, and motion foundations first. | Core product object language becomes real. |
+| 5 FCP surface maturity | Remaining FCP implementation | Mature You, Capture, Plan, Goals, object states, and status grammar around the shared object language. | All 25 objects are at 10/10 target or have accepted Yellow owner. |
+| 6 AOS internal foundations | AOS01-AOS23 optimized | Build AmbitionsOS contracts and kernels after stable product object slots exist. | Internal intelligence has typed, private, source-grounded contracts. |
+| 7 LDI dependency-split gates | LDI01-LDI22 optimized before AOS24 | Add living dream safety/source/runtime/continuity gates before UI integration exposes them. | Living Dream behavior is classified, protected, sourced, and mutation-safe before exposure. |
+| 8 AOS UI integration and QA | AOS24-AOS26 | Integrate and validate AOS/LDI against stable product objects. | User-facing intelligence waits for proof and gates. |
+| 9 Final proof / claim / handoff | FCP28-FCP30, AOS27-AOS30 | Full 10/10 audit, human-proof packet, claim truth, handoff, conditional repairs, roadmap. | No public readiness claim without evidence. |
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. This graph now covers 190 active planned batches after EB, DAV, SI, PD, AOS, and LDI insertion. It does not make PXOS, SI, Product Depth, AmbitionsOS, or Living Dream runtime implemented.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. This graph now references `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` for remaining order. It does not make PXOS, SI, Product Depth, FCP, AmbitionsOS, LDI, or release readiness implemented.
 
 ## Hard Dependencies
 
 - REC02 depends on REC01 Green or accepted Yellow and the approval phrase `Continue Release Evidence Closure`.
 - PX01 depends on explicit approval phrase `Start PXOS Future-Canon Train`.
-- PX02 is complete as Today future-canon surface work.
-- PX03 is complete as Goals future-canon surface work.
-- PX04 is complete as Capture future-canon surface work.
-- PX05 is complete as Plan future-canon surface work.
-- PX06 is complete as You future-canon surface work.
-- PX07 is complete as Action Closure Recovery future-canon work.
-- PX08 is complete as Trust Proof Receipts future-canon work.
-- PX09 is complete as Copy Language Explanation future-canon work.
-- PX10 is complete as Visual Interaction future-canon work.
-- PX11 is complete as Onboarding Setup future-canon work.
-- PX12 is complete as Accessibility Cognitive Load Emotional Safety future-canon work.
-- PX13 is complete as Empty Edge Degraded States future-canon work.
-- PX14 is complete as Product Depth Drilldown Architecture future-canon work.
-- PX15 is complete as Cross Surface Continuity future-canon work.
-- PX16 is complete as User Facing AI Trust And Recommendation Copy future-canon work.
-- PX17 is complete as Release Truth Product Messaging future-canon work.
-- PX18 is complete as PXOS Implementation Readiness Reorder recurring-gate work.
-- PX19 is complete as PXOS Handoff future-canon work.
-- PX20 is complete as PXOS Beyond Roadmap future-canon work.
-- PX14 depends on PX02-PX13.
-- PX18 depends on PX01-PX17 and recurs before major implementation lanes.
-- ME01 is complete as maintainability audit evidence under current global preauthorization.
-- ME08 is complete as shared projector/state/helper standards evidence under current global preauthorization.
-- ME10 is complete as recurring architecture gate evidence under current global preauthorization.
-- ME02-ME07 are complete as behavior-preserving extraction evidence. ME09 is complete as product-contract test validation evidence. ME11 is not triggered because no current ME Red or unaccepted Yellow requires repair. ME12 is complete as maintainability handoff evidence.
-- CS01 is complete as audit-only compatibility seam registry evidence under current global preauthorization.
-- CS07 is complete as focused external route/widget/App Intent compatibility proof under current global preauthorization.
-- CS08 is complete as focused import/export/persistence compatibility proof under current global preauthorization.
-- CS02 is internally staged under global order `041`: CS02A Profile/You compatibility map and ledger repair precedes CS02B route/raw/default/display proof; CS02C narrow internal retirement is blocked until CS02A and CS02B are Green or accepted Yellow. The formal batch count remains 113.
-- CS03 is internally staged under global order `042`: CS03A Insights/Plan compatibility map and ledger repair precedes CS03B route/raw/default/external/display proof; CS03C narrow internal retirement is blocked/deferred after CS03A and CS03B Green or accepted Yellow. Current repo truth maps legacy `insights` compatibility to You/Profile history support rather than directly to Plan; CS03B preserves that behavior with focused tests. The formal batch count remains 113.
-- CS04 is internally staged under global order `043`: CS04A Habits/Ritual/Plan compatibility map and retirement ledger repair precedes CS04B route/raw/default/external/accessibility proof; CS04C narrow internal retirement is blocked/deferred after CS04A and CS04B Green or accepted Yellow. The formal batch count remains 113.
-- CS05 is internally staged under global order `044`: CS05A ActiveFocus/TodayFocus compatibility map and schema/route/payload ledger repair and CS05B external snapshot/widget/App Intent/Today proof are complete; CS05C narrow internal retirement is blocked/deferred as accepted Yellow until a later proof shows retirement is safe. The formal batch count remains 113.
-- CS06 depends on CS01 and the relevant CS07/CS08 compatibility proof where route/raw/external/import/export/persistence risk exists.
-- SI01 depends on PXOS complete, ME01/ME08/ME10/ME02 Green, and SI Codex OS quality gates.
-- SI02-SI18 depend on SI01, predecessor SI batches, relevant ME gates, relevant CS gates, SI review-board gates, preview/visual QA evidence, and accessibility/Reduce Motion gates.
-- PD02-PD04 depend on SI04/SI05/SI10/SI12/SI13/SI17 where relevant.
-- PD05-PD08 depend on SI06/SI07/SI10/SI12/SI14/SI17 where relevant.
-- PD09-PD11 depend on SI09/SI12/SI13/SI17 where relevant.
-- PD12-PD14 depend on SI08/SI12/SI13/SI17 where relevant.
-- PD15-PD16 depend on SI03/SI10/SI11/SI13/SI14 where relevant.
-- PD17 depends on SI03/SI10/SI12/SI17.
-- PD18 depends on SI18.
-- AOS01 depends on explicit approval phrase `Start AOS Train`.
+- PX02-PX20 are complete as PXOS future-canon/roadmap evidence.
+- ME01, ME02-ME10, and ME12 are complete as maintainability evidence; ME11 is conditional and not triggered.
+- CS01, CS02A/B, CS03A/B, CS04A/B, CS05A/B, CS06A/B, CS07, CS08, and CS10 are complete or accepted Yellow as recorded. CS02C-CS06C and CS09C remain blocked/deferred until a named owner batch and proof target exist.
+- SI01-SI18 are complete as Signature Interface evidence.
+- PD01-PD14 are complete or accepted Yellow as recorded; Product Depth remains active through PD14 Green.
+- PD15-PD16 depend on SI03/SI10/SI11/SI13/SI14 where relevant and predecessor PD batches.
+- PD17 depends on SI03/SI10/SI12/SI17 and predecessor PD batches.
+- PD18 depends on SI18 and predecessor PD batches.
+- FCP Registry/Context Reconciliation depends on committed FCP source truth files.
+- FCP01-FCP04 depend on reconciliation and must remain docs/planning or fixture-planning scoped unless their prompts explicitly permit otherwise.
+- FCP implementation batches depend on FCP01-FCP04 and the object-specific PD/SI/DAV/EB/ME/CS evidence named in `FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md` and `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`.
+- FCP17 is optimized before Start Here implementation because Schedule / Availability / Defaults is a hard context dependency for time-fit proof.
+- FCP06 is optimized before Start Here implementation because Receipt Drawer / Source Fold is a hard trust dependency for Start Here, Reality Rail, Capture, Plan, Goals, and You.
+- FCP05 must precede FCP07 because Start Here is the active node in Reality Rail.
+- FCP13A Action Closure Diamond must precede final Recovery Loop and cross-surface proof mesh.
+- FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
+- FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
+- AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.
 - AOS02-AOS23 depend on AOS01 and the kernel dependencies named in the AOS train manifest.
-- AOS24 depends on AOS18-AOS23, PXOS expression gates, ME maintainability gates, CS compatibility gates, and SI18 handoff if intelligence is exposed in the UI.
-- PD01 depends on `Start Product Depth Train`, PX14, PX18, SI18 handoff where UI primitives are relevant, affected ME/CS dependency identification, and explicit train gates.
-- PD02-PD18 depend on PD01, their predecessor PD batches, affected PXOS surface gates, affected ME gates, affected CS gates, and AOS runtime gates if runtime/source-truth/proof logic is touched.
-
-- LDI01 depends on AOS30 Green by default, or an explicit user decision plus dependency review for an earlier individual LDI gate.
+- AOS24 depends on AOS18-AOS23, PXOS expression gates, ME maintainability gates, CS compatibility gates, SI18 handoff, relevant FCP object gates, and relevant LDI gates where living dream behavior would be exposed.
+- AOS25 depends on AOS18 and AOS24.
+- AOS26 depends on AOS16, AOS17, AOS18, AOS25, and relevant FCP proof/mesh gates.
+- LDI01 depends on AOS23 in the optimized order, or AOS30 by legacy default if the optimized overlay is not explicitly selected.
 - LDI02-LDI22 depend on predecessor LDI batches and the LDI train manifest.
-- SI queued batches may add LDI visual hooks only; SI does not implement LDI runtime.
-- PD queued batches may add LDI drill-down homes inside existing destinations only; PD does not create a sixth destination.
-- AOS queued batches may map LDI contracts into owned kernels; mismatched runtime requirements defer to LDI.
-- AOS24 UI integration must not expose LDI user-facing intelligence without SI/PD/AOS/LDI gates where relevant.
-- PD runtime-touching batches must stop if LDI/AOS source truth, proof trust, recommendation, privacy, or recompiler gates are not ready.
+- LDI20 and LDI21 are optimized before continuity/sync/archive/merge because source freshness and red-team proof should precede broader continuity claims.
+- LDI17-LDI19 remain entitlement/persistence-sensitive and must preserve no-claim boundaries unless explicit implementation proof exists.
+- FCP27 depends on PD17, FCP06, FCP12, FCP15, FCP19, FCP22, and is optimized after AOS24/AOS25 when AOS/LDI scopes have been implemented so final proof/review mesh can integrate real runtime/UI seams.
+- FCP28-FCP30 are final audit/proof/handoff gates and should run after FCP27, AOS26, and relevant AOS/LDI integration evidence.
 
 ## Soft Dependencies
 
 - REC should precede PX17 and any public product messaging.
 - PX09 should precede most copy-bearing future implementation.
-- PX10 should precede major visual implementation.
 - PX10 and PX12 should precede major UI implementation.
 - ME01/ME10 should precede any large SwiftUI/product-surface expansion.
 - CS01 should precede any user-facing terminology work that tempts internal seam deletion.
+- Product Depth should close before FCP implementation unless the user explicitly inserts FCP earlier.
+- FCP Start Here, Receipt Drawer, Availability Center, and Reality Rail should precede AOS recommendation UI exposure.
 - AOS16/AOS17 should precede runtime-heavy or sensitive projection work.
 - AOS18 should precede broad AOS behavior implementation.
-- SI18 should precede Product Depth and AOS24 UI exposure.
-- AOS30 should precede LDI01 by default unless explicit user decision and dependency review choose a narrower earlier gate.
+- LDI01-LDI16 should precede any living-dream user-facing integration.
+- LDI20/LDI21 should precede source freshness claims, source operations, and broad living-dream UI exposure.
 
 ## Blockers
 
@@ -103,9 +76,9 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - Forbidden file touch in docs/protocol-only work.
 - Weak or Missing validation for an implementation batch.
 - Human-proof requirement that Codex cannot perform.
-- Global order and train manifest disagreement that affects safety.
-- PXOS, Product Depth, or AmbitionsOS described as implemented without evidence.
-- REC02, PXOS, ME, CS, AOS, or Product Depth started by implication.
+- Optimized order and train manifest disagreement that affects safety.
+- PXOS, Product Depth, FCP, AmbitionsOS, LDI, or release readiness described as implemented without evidence.
+- REC, PXOS, ME, CS, SI, PD, FCP, AOS, or LDI started by implication.
 - Top-level surface composition rule weakened or bypassed.
 
 ## Cross-Train Dependencies
@@ -117,6 +90,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 | Top-Level Surface Composition Gate | Any Today/Goals/Capture/Plan/You top-level UI work | Proposed surface is a vertical stack of generic cards or detail archive. |
 | ME Maintainability Gate | Large UI/product expansion in affected files | Owner file is too large/tangled or lacks behavior-preservation tests. |
 | CS Compatibility Gate | Renames, removals, routes, raw values, widgets, App Intents, import/export, persistence | Replacement map or compatibility proof is missing. |
+| FCP 10/10 Object Gate | Any flagship object implementation or top-level product-object refactor | Object remains generic card/grid/list/settings or lacks trust/accessibility/reduced-motion proof. |
 | AOS Runtime/Intelligence Gate | Recommendation/source-truth/runtime/intelligence work | Typed contracts, privacy projection, fallback, or source truth is missing. |
 | LDI Living Dream Gate | Dream handling, source packs, recompiler, continuity, or safety triage | LDI source truth, handling lane, safety/privacy/source/professional-boundary, no-silent-mutation, and release-claim evidence are missing. |
 | Product Depth Gate | PD01-PD18 or drill-down/detail work beyond current canon | PXOS, ME, CS, SI, AOS-runtime-if-needed, or approval prerequisites are unresolved. |
@@ -125,6 +99,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 ## Gates That Must Recur
 
 - Source Truth Gate.
+- Optimized Order Selection Gate.
 - Scope Boundary Gate.
 - Product Decision Lock Gate.
 - Product Drift Gate.
@@ -137,15 +112,17 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX18 implementation-readiness reorder before major post-PXOS implementation.
 - ME10 architecture scan before large SwiftUI or service expansion.
 - AOS16 performance and AOS17 privacy gates before runtime-heavy or sensitive work.
+- FCP 10/10 object standard before flagship object implementation.
+- LDI safety/source/mutation/professional-boundary gates before living-dream exposure.
 
 ## Parallel-Safe Lanes
 
 Parallel work is disabled by default. It is allowed only after explicit approval, disjoint write sets, Green prerequisites, and one commit per batch.
 
-- PX02-PX10 are conceptually parallel-safe after PX01 because they are surface-canon docs, but serial is preferred unless a user explicitly authorizes parallel work.
-- No remaining ME extraction batch is parallel-enabled by default; continue serially through ME12 unless a future Green gate explicitly permits disjoint work.
 - AOS10, AOS12, and AOS13 may be parallel-safe after AOS04 if contracts and write sets are disjoint.
 - AOS22 may be parallel-safe after AOS02/AOS12/AOS13 if it does not touch the same owner files as active work.
+- FCP implementation batches are serial by default because they touch shared object language and top-level product identity.
+- LDI implementation batches are serial by default because safety/source/mutation dependencies are cumulative.
 
 ## Serial-Only Lanes
 
@@ -153,10 +130,12 @@ Parallel work is disabled by default. It is allowed only after explicit approval
 - PX01, PX14, PX15, PX16, PX17, PX18, PX19-PX20.
 - ME01, ME09, ME11, ME12.
 - CS01-CS10 unless a future CS proof explicitly permits disjoint parallelism.
+- SI01-SI18.
+- PD01-PD18 unless a future Green PD01 dependency map explicitly permits disjoint work; implementation PD batches are serial by default.
+- FCP01-FCP30 unless an FCP audit explicitly approves a disjoint docs-only split.
 - AOS01-AOS09, AOS11, AOS14-AOS21, AOS23-AOS30.
-- SI01-SI18 are serial-only unless a future Green SI01 owner map explicitly permits disjoint work.
-- PD01-PD18 are serial-only unless a future Green PD01 dependency map explicitly permits disjoint work; implementation PD batches are serial by default.
-- Any human-proof, release-claim, route/persistence, top-level UI, or runtime/intelligence exposure batch.
+- LDI01-LDI22.
+- Any human-proof, release-claim, route/persistence, top-level UI, runtime/intelligence exposure, continuity/sync, safety triage, or mutation permission batch.
 
 ## Human-Proof Stops
 
@@ -166,5 +145,5 @@ Human proof stops apply to physical devices, App Store Connect, signed archives,
 
 - Docs/protocol batches: Adequate validation can pass with `git diff --check`, doc/status scans, changed-file boundary checks, and advisory doc QA.
 - Evidence batches: Adequate validation requires claim scans, evidence ledger/log checks, and human-proof boundary review.
-- Code implementation/extraction/compatibility/AOS runtime batches: Strong validation is expected. Weak or Missing validation is normally Red.
+- Code implementation/extraction/compatibility/AOS/FCP/LDI runtime batches: Strong validation is expected. Weak or Missing validation is normally Red.
 - UI batches: Strong validation includes focused tests, build where tooling supports it, UI/accessibility/copy/visual evidence, and no top-level composition violation.
