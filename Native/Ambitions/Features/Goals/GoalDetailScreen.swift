@@ -423,6 +423,7 @@ private struct GoalPathBuilderCard: View {
 
                 if state.forks.isEmpty == false {
                     forks
+                    tradeoffReview
                 }
 
                 if state.proofRequirements.isEmpty == false {
@@ -528,6 +529,42 @@ private struct GoalPathBuilderCard: View {
                 }
             }
         }
+    }
+
+    private var tradeoffReview: some View {
+        let review = state.tradeoffReview
+
+        return VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(title: review.title, subtitle: review.subtitle)
+            ForEach(review.lanes) { lane in
+                WidgetCard(state: lane.state) {
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        HStack(alignment: .firstTextBaseline) {
+                            Label(lane.title, systemImage: "arrow.triangle.branch")
+                                .font(theme.typography.section)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Spacer()
+                            TagPill("Review first", state: lane.state)
+                        }
+                        Text(lane.summary)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                        Label(lane.effortLabel, systemImage: "wrench.and.screwdriver")
+                        Label(lane.timeLabel, systemImage: "clock")
+                        Label(lane.energyLabel, systemImage: "battery.75percent")
+                        Label(lane.recoveryLabel, systemImage: "arrow.uturn.backward")
+                        Label(lane.reviewRequirementLabel, systemImage: "hand.raised")
+                    }
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(review.title)
+        .accessibilityValue(review.accessibilitySummary)
+        .accessibilityHint("Review route tradeoffs before choosing, editing, or parking a path.")
+        .accessibilityIdentifier("goal-detail.tradeoff-review")
     }
 
     private var proofRequirements: some View {

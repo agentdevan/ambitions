@@ -2,11 +2,12 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD07 complete / accepted Yellow
-Scope: PD07 deepened only Goals-owned Goal Detail proof and decision history
-presentation. It added presentation-derived review trail state, Goal Detail UI,
-focused Goals tests, and Product Depth docs. It did not touch proof runtime
-models, persistence/schema, sync/auth/network, AI/LDI runtime, navigation,
+Current batch: PD08 complete / accepted Yellow
+Scope: PD08 deepened only Goals-owned Goal Detail alternate path and tradeoff
+presentation. It added presentation-derived tradeoff/review state, Goal Detail
+UI, focused Goals tests, and Product Depth docs. It did not touch AOS
+alternate-path runtime logic, automated reroute behavior, plan mutation,
+persistence/schema, sync/auth/network, AI/LDI runtime, navigation,
 route/raw values, CI/config, dependencies, release/platform claims, broad app
 implementation, or Candidate finalization. Complete: EB03A
 Universal Capture Composer Routing
@@ -120,6 +121,18 @@ accessibility/release claim change was made.
 - CS02C-CS06C deferred truth remains preserved.
 
 ## Current Validation Result
+
+PD08 result: PASS WITH ACCEPTED YELLOW.
+`docs/audits/pd08-goal-alternate-path-tradeoff-depth-report.md` records the
+bounded Goal Detail alternate-path/tradeoff presentation layer, route option
+comparison, effort/time/energy labels, recovery labels, user-review requirement,
+focused Goal Detail tests, `xcodegen generate`, `scripts/build-local.sh`,
+Product Depth copy/drift/release scans, accessibility and Reduce Motion
+advisory scans, doc QA, batch gate, and boundary scan. Yellow items are no
+screenshot/rendered proof, no human/device/VoiceOver/Dynamic Type/Reduce
+Motion walkthrough, existing file-size/doc-QA advisory backlog, and the generic
+boundary script flagging PD08-allowed Goals files despite explicit Goals
+implementation scope.
 
 PD03 result: PASS WITH ACCEPTED YELLOW.
 `docs/audits/pd03-today-step-session-depth-report.md` records the bounded

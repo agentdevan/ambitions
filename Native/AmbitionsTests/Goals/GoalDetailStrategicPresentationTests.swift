@@ -84,17 +84,28 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
             [pathBuilder.title, pathBuilder.subtitle, pathBuilder.todayConnectionTitle, pathBuilder.todayConnectionSummary, pathBuilder.decisionReceiptSummary]
                 + pathBuilder.phases.flatMap { [$0.title, $0.summary, $0.dependencySummary, $0.proofSummary] }
                 + pathBuilder.forks.flatMap { [$0.title, $0.summary, $0.basisSummary, $0.decisionPrompt] }
+                + pathBuilder.tradeoffReview.lanes.flatMap { [$0.title, $0.summary, $0.effortLabel, $0.timeLabel, $0.energyLabel, $0.reviewRequirementLabel, $0.recoveryLabel] }
         ).joined(separator: " ")
 
         XCTAssertEqual(pathBuilder.title, "Path Builder")
         XCTAssertFalse(pathBuilder.phases.isEmpty)
         XCTAssertLessThanOrEqual(pathBuilder.phases.count, 6)
         XCTAssertFalse(pathBuilder.proofRequirements.isEmpty)
+        XCTAssertFalse(pathBuilder.tradeoffReview.lanes.isEmpty)
+        XCTAssertTrue(pathBuilder.tradeoffReview.lanes.allSatisfy {
+            $0.reviewRequirementLabel.localizedCaseInsensitiveContains("user review required")
+        })
+        XCTAssertTrue(pathBuilder.tradeoffReview.lanes.allSatisfy {
+            $0.recoveryLabel.localizedCaseInsensitiveContains("recovery")
+        })
+        XCTAssertTrue(pathBuilder.tradeoffReview.accessibilitySummary.localizedCaseInsensitiveContains("energy"))
         XCTAssertTrue(pathBuilder.forks.contains(where: { $0.decisionPrompt.localizedCaseInsensitiveContains("choose, edit, or park") }))
         XCTAssertTrue(pathBuilder.todayConnectionTitle.isEmpty == false)
         XCTAssertEqual(pathBuilder.roadmapListTitle, "Path list")
         XCTAssertTrue(pathBuilder.performanceBudgetSummary.contains("\(pathBuilder.phases.count) phases"))
         XCTAssertTrue(pathBuilder.performanceBudgetSummary.contains("route options"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("AI decided"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("fully automated"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("best path"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("highest score"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("Path tab"))

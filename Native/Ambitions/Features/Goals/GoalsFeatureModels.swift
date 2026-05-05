@@ -1144,6 +1144,25 @@ struct GoalPathBuilderForkState: Identifiable, Sendable {
     let state: AmbitionVisualState
 }
 
+struct GoalPathTradeoffLaneState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let effortLabel: String
+    let timeLabel: String
+    let energyLabel: String
+    let reviewRequirementLabel: String
+    let recoveryLabel: String
+    let state: AmbitionVisualState
+}
+
+struct GoalPathTradeoffReviewState: Sendable {
+    let title: String
+    let subtitle: String
+    let lanes: [GoalPathTradeoffLaneState]
+    let accessibilitySummary: String
+}
+
 struct GoalPathBuilderProofState: Identifiable, Sendable {
     let id: String
     let title: String
@@ -1169,6 +1188,43 @@ struct GoalPathBuilderState: Sendable {
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String
+}
+
+extension GoalPathBuilderState {
+    var tradeoffReview: GoalPathTradeoffReviewState {
+        let blockedPhase = phases.first {
+            $0.state == .warning ||
+            $0.statusLabel.localizedCaseInsensitiveContains("blocked") ||
+            $0.dependencySummary.localizedCaseInsensitiveContains("blocked")
+        }
+        let recoveryLabel = blockedPhase.map {
+            "Recovery: review \($0.title) before changing route."
+        } ?? "Recovery: park or edit before changing route."
+        let lanes = forks.map { fork in
+            GoalPathTradeoffLaneState(
+                id: "tradeoff-\(fork.id)",
+                title: fork.title,
+                summary: fork.summary,
+                effortLabel: "Effort: compare setup cost before choosing.",
+                timeLabel: fork.freshnessLabel == "Current"
+                    ? "Time: current context still needs review."
+                    : "Time: review the source before using it.",
+                energyLabel: "Energy: choose the sustainable path, not the biggest one.",
+                reviewRequirementLabel: "User review required before this changes Today or Plan.",
+                recoveryLabel: recoveryLabel,
+                state: fork.state
+            )
+        }
+
+        return GoalPathTradeoffReviewState(
+            title: "Tradeoff review",
+            subtitle: "Route options stay comparable and reversible before any path changes.",
+            lanes: lanes,
+            accessibilitySummary: lanes.map {
+                "\($0.title). \($0.effortLabel) \($0.timeLabel) \($0.energyLabel) \($0.reviewRequirementLabel)"
+            }.joined(separator: " ")
+        )
+    }
 }
 
 struct GoalDetailNextMovement: Sendable {

@@ -1,7 +1,7 @@
 # Ambitions Product Depth Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control Detail Architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation
+Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control Detail Architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation
 Date: 2026-05-02
 
 ## Purpose
@@ -54,9 +54,10 @@ Detail implementation. PD03 and PD04 are accepted Yellow as bounded Today depth
 implementation. PD05 is Green as bounded Goals Mission Control detail
 architecture implementation. PD06 is Green as bounded Goals lifecycle/path
 visualization implementation. PD07 is accepted Yellow as bounded Goals proof
-and decision history implementation. Later Product Depth implementation remains
-blocked until each individual PD implementation batch runs, validates, commits,
-and closes.
+and decision history implementation. PD08 is accepted Yellow as bounded Goals
+alternate path/tradeoff implementation. Later Product Depth implementation
+remains blocked until each individual PD implementation batch runs, validates,
+commits, and closes.
 
 Required approval phrase: `Start Product Depth Train`.
 
@@ -152,9 +153,11 @@ after focused Goal Detail tests and local build validation. PD06 closed Green
 as bounded Goals lifecycle/path visualization implementation after focused Goal
 Detail tests and local build validation. PD07 closed accepted Yellow as bounded
 Goal proof and decision history implementation after focused Goal Detail tests
-and local build validation.
+and local build validation. PD08 closed accepted Yellow as bounded Goal
+alternate path/tradeoff implementation after focused Goal Detail tests and
+local build validation.
 
-PD08-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
+PD09-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
 validation, and predecessor gates are Green or accepted Yellow.
 
 ## Anti-Sprawl Tests
