@@ -27,6 +27,7 @@ struct TodayActionClosureSheet: View {
                     }
 
                     closureContext
+                    softPriorStepPrompt
                     closureOutcomeSection(title: "Likely outcomes", outcomes: state.primaryOutcomes)
 
                     if state.moreOutcomes.isEmpty == false {
@@ -89,6 +90,29 @@ struct TodayActionClosureSheet: View {
         .accessibilityIdentifier("TodayActionClosureContext")
     }
 
+    private var softPriorStepPrompt: some View {
+        Label {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text("Recovery prompt")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(state.softPriorStepPrompt)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+        } icon: {
+            Image(systemName: "arrow.triangle.2.circlepath")
+                .foregroundStyle(theme.colors.accentWarm)
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.74))
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("TodayActionClosureRecoveryPrompt")
+    }
+
     @ViewBuilder
     private func closureOutcomeSection(title: String?, outcomes: [TodayActionClosureOutcomeState]) -> some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -111,6 +135,12 @@ struct TodayActionClosureSheet: View {
                             Text(outcome.meaning)
                                 .font(theme.typography.caption)
                                 .foregroundStyle(theme.colors.textSecondary)
+                            Text(outcome.consequenceLabel)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                            Text(outcome.recoveryPrompt)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textTertiary)
                         }
                         Spacer(minLength: theme.spacing.xs)
                         if outcome.createsProof {
@@ -130,8 +160,8 @@ struct TodayActionClosureSheet: View {
                         .stroke(selectedOutcome?.id == outcome.id ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: 1)
                 )
                 .accessibilityLabel(outcome.title)
-                .accessibilityValue(outcome.meaning)
-                .accessibilityHint(outcome.receiptPreview)
+                .accessibilityValue("\(outcome.meaning) \(outcome.consequenceLabel)")
+                .accessibilityHint("\(outcome.recoveryPrompt) \(outcome.receiptPreview)")
                 .accessibilityIdentifier("TodayActionClosureOutcome.\(outcome.id)")
             }
         }
@@ -146,6 +176,9 @@ struct TodayActionClosureSheet: View {
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
             Text(selectedOutcome.map { state.proofReceiptPeek(for: $0).noSilentChangesLabel } ?? "No silent changes")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+            Text(state.recoveryReceiptLabel)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
         }

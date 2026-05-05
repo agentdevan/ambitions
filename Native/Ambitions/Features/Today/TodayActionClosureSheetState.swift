@@ -9,6 +9,48 @@ struct TodayActionClosureOutcomeState: Identifiable, Equatable {
     let isPrimary: Bool
 
     var id: String { closureState.rawValue }
+
+    var consequenceLabel: String {
+        switch closureState {
+        case .completed:
+            "Records the step as complete and attaches proof."
+        case .stillCounts:
+            "Saves the real progress as proof without pretending the original ask happened."
+        case .moved:
+            "Keeps the step alive for planning review."
+        case .notNeeded, .skippedIntentionally:
+            "Keeps the decision visible without treating it as a problem."
+        case .blocked:
+            "Keeps the blocker visible so recovery can shrink the ask."
+        case .waiting:
+            "Keeps the dependency visible without changing the plan silently."
+        case .needsRecovery:
+            "Marks recovery as available before any plan change."
+        case .needsReview, .awaitingClosure:
+            "Keeps the step open for one more look."
+        case .now, .next, .later:
+            "Keeps the timing decision visible for review."
+        }
+    }
+
+    var recoveryPrompt: String {
+        switch closureState {
+        case .completed, .stillCounts:
+            "Save proof and return to Today."
+        case .moved:
+            "Open Plan only when you want to choose the new time."
+        case .notNeeded, .skippedIntentionally:
+            "Save the decision so it can be reversed later."
+        case .blocked, .needsRecovery:
+            "Reduce the ask or move the step before trying again."
+        case .waiting:
+            "Name what you are waiting on before changing the day."
+        case .needsReview, .awaitingClosure:
+            "Come back when the next detail is clear."
+        case .now, .next, .later:
+            "Review timing before changing anything else."
+        }
+    }
 }
 
 struct TodayActionClosureSheetState: Identifiable, Equatable {
@@ -57,7 +99,19 @@ struct TodayActionClosureSheetState: Identifiable, Equatable {
             privacyLabel,
             receiptPreviewTitle,
             confirmTitle,
-        ] + outcomes.flatMap { [$0.title, $0.meaning, $0.receiptPreview] }).joined(separator: " ")
+            softPriorStepPrompt,
+            recoveryReceiptLabel,
+        ] + outcomes.flatMap {
+            [$0.title, $0.meaning, $0.consequenceLabel, $0.recoveryPrompt, $0.receiptPreview]
+        }).joined(separator: " ")
+    }
+
+    var softPriorStepPrompt: String {
+        "If the step changed shape, choose the closest honest outcome."
+    }
+
+    var recoveryReceiptLabel: String {
+        "Receipt records the consequence you choose; Ambitions does not rearrange the day from this sheet."
     }
 
     private static let defaultOutcomes: [TodayActionClosureOutcomeState] = [

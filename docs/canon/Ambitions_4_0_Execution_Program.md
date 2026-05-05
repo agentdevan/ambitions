@@ -48,7 +48,7 @@ SI may start only when the global order reaches it or the exact phrase `Start Si
 
 ## Relationship To PD
 
-Product Depth is now a formal PD01-PD18 train in the Ambitions 4.0 global order. The train is active after the exact approval phrase was supplied. PD01 is accepted Yellow as docs/planning canon, inventory, and ownership mapping. PD02 is accepted Yellow as bounded Today Step Detail implementation. PD03 is accepted Yellow as bounded Today Step Session implementation. Broader Product Depth app implementation remains bounded by batch-specific gates.
+Product Depth is now a formal PD01-PD18 train in the Ambitions 4.0 global order. The train is active after the exact approval phrase was supplied. PD01 is accepted Yellow as docs/planning canon, inventory, and ownership mapping. PD02 is accepted Yellow as bounded Today Step Detail implementation. PD03 is accepted Yellow as bounded Today Step Session implementation. PD04 is accepted Yellow as bounded Today recovery/closure implementation. Broader Product Depth app implementation remains bounded by batch-specific gates.
 
 Product Depth may continue only after `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS-if-needed gates. Product Depth deepens Today, Goals, Capture, Plan, and You through drill-downs and owned detail flows. It must not widen the app.
 
@@ -95,7 +95,7 @@ Queued batches:
 - ME01-ME12: global order 026-037; queued/blocked pending `Start ME Train`.
 - CS01-CS10: global order 038-047; queued/blocked pending `Start CS Train`.
 - SI01-SI18: global order 048-065; queued/blocked pending global-order selection or `Start Signature Interface Train`, PXOS complete, relevant ME/CS gates, and SI quality gates.
-- PD01-PD18: global order 066-083; PD01 accepted Yellow for docs/planning canon, inventory, and ownership mapping after `Start Product Depth Train`; PD02 accepted Yellow for bounded Today Step Detail; PD03 accepted Yellow for bounded Today Step Session; PD04-PD18 remain gated by prerequisite PXOS/ME/CS/SI/AOS-if-needed gates and batch-specific file boundaries.
+- PD01-PD18: global order 066-083; PD01 accepted Yellow for docs/planning canon, inventory, and ownership mapping after `Start Product Depth Train`; PD02 accepted Yellow for bounded Today Step Detail; PD03 accepted Yellow for bounded Today Step Session; PD04 accepted Yellow for bounded Today recovery/closure; PD05-PD18 remain gated by prerequisite PXOS/ME/CS/SI/AOS-if-needed gates and batch-specific file boundaries.
 - AOS01-AOS30: global order 084-113; queued/blocked pending `Start AOS Train`.
 
 ## Blocked And Gated Areas

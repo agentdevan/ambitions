@@ -1,7 +1,7 @@
 # Ambitions Product Depth Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation
+Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation
 Date: 2026-05-02
 
 ## Purpose
@@ -140,10 +140,12 @@ closed accepted Yellow with docs-only evidence. PD02 closed accepted Yellow as
 bounded Today implementation evidence after focused Today tests and local
 build validation. PD03 closed accepted Yellow as bounded Today Step Session
 implementation evidence after focused Today tests and local build validation.
-PD04 is the next direct successor only after PD03 commits, pushes, leaves a
-clean worktree, and the continuation gate allows it.
+PD04 closed accepted Yellow as bounded Today recovery/closure implementation
+evidence after focused Today tests and local build validation. PD05 is the next
+direct successor only after PD04 commits, pushes, leaves a clean worktree, and
+the continuation gate allows it.
 
-PD04-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
+PD05-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
 validation, and predecessor gates are Green or accepted Yellow.
 
 ## Anti-Sprawl Tests

@@ -2,15 +2,14 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD03 complete / accepted Yellow; PD04 next eligible if
-continuation gates allow
-Scope: PD03 deepened only the Today-owned Step Session surface behind Reality
-Rail. It added step-first context, goal connection, optional timer copy,
-pause/stop/close controls, and receipt/proof boundary copy without adding a
-top-level destination, broadening Today into a dashboard, editing
-navigation/source-truth tabs, persistence, sync/auth/network, AI/LDI runtime,
-CI/config, dependency, release/platform claim, broad app implementation, or
-Candidate finalization. Complete: EB03A Universal Capture Composer Routing
+Current batch: PD04 accepted Yellow; PD05 next eligible if continuation gates allow
+Scope: PD04 deepened only the Today-owned closure and recovery surface behind
+Reality Rail. It clarified closure outcomes, Still Counts, recovery prompts,
+and receipt preview copy without adding a top-level destination, broadening
+Today into a dashboard, editing navigation/source-truth tabs, persistence,
+sync/auth/network, AI/LDI runtime, CI/config, dependency, release/platform
+claim, broad app implementation, or Candidate finalization. Complete: EB03A
+Universal Capture Composer Routing
 Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -494,14 +493,15 @@ public accessibility or profiling proof.
 Product Depth approval phrase is satisfied. PD01 is complete / accepted Yellow
 as docs/planning source truth. PD02 is complete / accepted Yellow as bounded
 Today Step Detail implementation. PD03 is complete / accepted Yellow as
-bounded Today Step Session implementation. Continue to PD04 only if PD03
+bounded Today Step Session implementation. PD04 is complete / accepted Yellow
+as bounded Today recovery/closure implementation. Continue to PD05 only if PD04
 commits, pushes, leaves a clean worktree, and the Product Depth continuation
 gates allow it. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
 SI12, SI13, SI14, SI15, SI16, SI17, SI18, or completed DAV / EB20-EB24 batches.
-The next safe action is PD04 if PD03 has been committed, pushed, the worktree is
+The next safe action is PD05 if PD04 has been committed, pushed, the worktree is
 clean, and Product Depth continuation gates allow it.
 
 ## PD01 Product Depth Canon, Inventory, And Ownership Map
@@ -537,6 +537,29 @@ scans. Yellow items are existing scan backlog, large existing Today owner-file
 watch, no rendered screenshot, no manual VoiceOver traversal, no toggled Reduce
 Motion walkthrough, no physical-device proof, and no release/accessibility
 claim.
+
+## PD03 Today Step Session Depth
+
+Date: 2026-05-04
+Result: ACCEPTED YELLOW
+
+PD03 made Step Session a step-first Today execution environment behind Reality
+Rail and Step Detail. It added session context, goal connection, optional timer
+copy, pause/stop/close controls, receipt/proof boundary copy, and focused Today
+tests without adding persistence, background timer behavior, navigation, AI/LDI
+runtime, sync/auth/network, or release/accessibility claims.
+
+## PD04 Today Recovery And Closure Depth
+
+Date: 2026-05-04
+Result: ACCEPTED YELLOW
+
+PD04 deepened the Today-owned closure/recovery sheet with consequence copy,
+recovery prompts, a soft prior-step prompt, and recovery receipt boundary copy
+for Still Counts, Moved, Skipped / Not Needed, Blocked, Waiting, Needs
+Recovery, and Needs Review outcomes. It did not add runtime recovery logic,
+Plan mutation, persistence, navigation, AI/LDI behavior, or broad Product Depth
+implementation.
 
 ## SI15 Accessibility Adaptive Interface Pass
 

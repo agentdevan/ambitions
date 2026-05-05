@@ -435,6 +435,15 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .needsReview })
         XCTAssertTrue(sheet.outcomes.contains { $0.title == "Review later" })
         XCTAssertEqual(sheet.outcomes.first { $0.closureState == .stillCounts }?.receiptPreview, "Still Counts · saved as proof")
+        XCTAssertEqual(
+            sheet.outcomes.first { $0.closureState == .stillCounts }?.consequenceLabel,
+            "Saves the real progress as proof without pretending the original ask happened."
+        )
+        XCTAssertEqual(
+            sheet.outcomes.first { $0.closureState == .blocked }?.recoveryPrompt,
+            "Reduce the ask or move the step before trying again."
+        )
+        XCTAssertTrue(sheet.recoveryReceiptLabel.contains("does not rearrange the day"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("failed"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("overdue"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
@@ -471,9 +480,11 @@ final class TodayViewModelTests: XCTestCase {
         )
         let stillCounts = try! XCTUnwrap(sheet.outcomes.first { $0.closureState == .stillCounts })
         let reviewLater = try! XCTUnwrap(sheet.outcomes.first { $0.closureState == .needsReview })
+        let waiting = try! XCTUnwrap(sheet.outcomes.first { $0.closureState == .waiting })
 
         let proofPeek = sheet.proofReceiptPeek(for: stillCounts, occurredAt: "2026-05-01T12:00:00Z")
         let reviewPeek = sheet.proofReceiptPeek(for: reviewLater, occurredAt: "2026-05-01T12:05:00Z")
+        let waitingPeek = sheet.proofReceiptPeek(for: waiting, occurredAt: "2026-05-01T12:10:00Z")
 
         XCTAssertEqual(proofPeek.title, "Proof saved")
         XCTAssertTrue(proofPeek.subtitle.contains("Still Counts"))
@@ -482,6 +493,8 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(proofPeek.noSilentChangesLabel, "No silent changes")
         XCTAssertEqual(reviewPeek.title, "Needs confirmation")
         XCTAssertEqual(reviewPeek.proofLabel, "Needs confirmation")
+        XCTAssertEqual(waitingPeek.proofLabel, "Needs confirmation")
+        XCTAssertTrue(waitingPeek.subtitle.contains("Waiting"))
     }
 
     func testF03StepDetailSupportsMissingDurationFallback() {
