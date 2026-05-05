@@ -118,6 +118,62 @@ Life Inventory includes:
 
 Life Inventory is not a new top-level tab. It is a domain layer expressed through You, Capture, Today, Goals, Plan, Memory Lens, and Search.
 
+#### FL02 Life Inventory Object Contract
+
+Life Inventory is the Found Life object that lets Ambitions hold what the user
+is carrying without forcing the whole life map into the morning surface.
+
+Life Inventory contains `LifeThread` records. A future implementation may name
+the concrete type differently, but the product contract must preserve these
+fields:
+
+| Field | Meaning | Rule |
+| --- | --- | --- |
+| `threadId` | Stable local identity for the life thread. | Must not imply sync/cloud identity unless implemented. |
+| `threadType` | Work, family, relationship, home, health-adjacent, money, career, creative, company/app work, friend/social, errand, birthday/event, promise, project, idea, dream, parked loop, or abandoned loop. | Must stay reviewable and correctable by the user. |
+| `threadState` | Active, parked, waiting, blocked, needs review, needs recovery, intentionally dropped, ready to revive, converted to goal, converted to one-off step, completed, or archived. | No binary failure state. |
+| `sourceState` | User-entered, imported, inferred candidate, source-backed, stale source, conflict, or needs review. | Inferred candidate is not fact. |
+| `freshness` | Fresh, aging, stale, conflicted, or unknown. | Freshness is a review boundary, not an AI certification. |
+| `privacyClass` | Standard, private, sensitive, redacted in previews, external-surface blocked, or user-only review. | Sensitive/private threads cannot surface externally by default. |
+| `ownerSurface` | Today, Goals, Capture, Plan, You, Memory Lens, AmbitionsOS, or LDI. | Ownership controls where the thread is reviewed, not a new tab. |
+| `reviewPath` | Where the user can correct, delete, park, convert, or close the thread. | Every thread needs a review path before it influences recommendations. |
+| `proofLinks` | Optional receipt, proof, decision, source, or captured-fragment references. | Proof is evidence, not achievement. |
+| `visibilityRule` | Now-only, review-only, search-only, hidden-from-previews, external-blocked, or needs-user-confirmation. | No all-at-once life database default. |
+
+Life Inventory owner map:
+
+| Surface | Owner responsibility |
+| --- | --- |
+| Today | Shows only the life thread that matters now, through Start Here / Reality Rail / recovery context. |
+| Capture | Creates candidate threads from fragments without requiring perfect placement upfront. |
+| Goals | Owns long arcs, option value, proof transfer, converted goals, and path pivots. |
+| Plan | Owns capacity, pressure, protected time, commitments, and usable-time constraints. |
+| You | Owns Life Inventory review, memory controls, privacy, correction, deletion, export/import posture, identity/direction review, and setup. |
+| Memory Lens | Owns source-grounded recall/review views when implemented by a future batch. |
+| AmbitionsOS | Owns typed local projection and recommendation contracts only when AOS batches implement them. |
+| LDI | Owns dream/path requirements only after LDI safety/source/professional-boundary gates. |
+
+Life Inventory privacy classes:
+
+- `standard`: visible in normal in-app review surfaces.
+- `private`: visible only in explicit user-owned review contexts.
+- `sensitive`: redacted from previews and collapsed by default.
+- `externalSurfaceBlocked`: cannot appear in widgets, Live Activities,
+  notifications, App Intents, Spotlight, or shared storage projections by
+  default.
+- `userOnlyReview`: can influence nothing until the user explicitly reviews or
+  confirms it.
+
+Life Inventory must never become:
+
+- a sixth tab
+- a life dashboard
+- a generic database view
+- a notes archive
+- a task dump
+- a surveillance memory layer
+- a source of hidden automation
+
 ### 3.2 Commitment Memory
 
 A memory layer for things the user said, promised, implied, needs to remember, or should review.

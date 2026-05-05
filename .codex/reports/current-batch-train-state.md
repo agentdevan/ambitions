@@ -2,13 +2,13 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FL01 Founder Backstory / Product Soul Lock Green with accepted
-Yellow order-reconciliation note; full-stack order selects FL02 Life Inventory
-Object Model next if continuation gates allow.
-Scope: FL01 completed as docs-only Found Life product-soul source truth after a
-recoverable remote-order mismatch. FCP17 remains completed Green, but Found Life
-now governs all further FCP/AOS/LDI/PFC work before FCP06 or later batches.
-FL01 changed no production Swift, route/raw value, persistence/schema,
+Current batch: FL02 Life Inventory Object Model Green; full-stack order selects
+FL03 Commitment Memory / Open Loop Registry next if continuation gates allow.
+Scope: FL02 completed as docs-only Found Life domain-contract source truth. It
+defines LifeThread fields, states, source states, freshness, privacy classes,
+owner surfaces, review paths, proof links, and visibility rules without
+implementing runtime memory, search, sync, persistence/schema, or a new surface.
+FL02 changed no production Swift, route/raw value, persistence/schema,
 permission-request, calendar-write, sync/account, release, legal/privacy, CI,
 workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
 accessibility claim file.
@@ -29,7 +29,8 @@ docs-only operating truth. FCP04 preview fixture and QA matrix expansion is
 complete as source-truth planning evidence. FCP17 is complete / Green as the
 first bounded FCP production Swift implementation in the global order.
 
-FL01 is complete / Green as Found Life product-soul lock. Accepted Yellow:
+FL01 is complete / Green as Found Life product-soul lock. FL02 is complete /
+Green as Life Inventory object model source truth. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and inserts FL02-FL06 before any further FCP,
 AOS, LDI, or PFC work that touches life visibility, recall, commitment memory,

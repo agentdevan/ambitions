@@ -1,7 +1,7 @@
 # FL01-FL06 Found Life Layer Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; FL01 complete Green, FL02 queued.
+Status: Active-scope planning truth; FL01-FL02 complete Green, FL03 queued.
 Date: 2026-05-05
 Train code: FL
 
@@ -87,6 +87,8 @@ Accepted Yellow:
 
 ### FL02 — Life Inventory Object Model
 
+Status: Complete / Green on 2026-05-05.
+
 Type: Docs/domain contract.
 Owner: AOS / Memory / You / Capture.
 Depends on: FL01.
@@ -97,6 +99,11 @@ Acceptance:
 - Life threads have states, sources, freshness, privacy class, and owner surfaces.
 - Life Inventory maps to Today, Capture, Goals, Plan, You, Memory Lens, AOS, and LDI.
 - No dashboard or all-at-once life database is introduced.
+
+Evidence:
+
+- `docs/codex/batches/FL02_Life_Inventory_Object_Model_Prompt.md`
+- `docs/audits/fl02-life-inventory-object-model-report.md`
 
 ### FL03 — Commitment Memory / Open Loop Registry
 

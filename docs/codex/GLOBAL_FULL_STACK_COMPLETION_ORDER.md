@@ -87,7 +87,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     after FCP17 had already landed because the Found Life remote source arrived
     during the global train; this is recorded as recoverable order mismatch, and
     FL now governs all further FCP/AOS/LDI/PFC work.
-20. FL02 Life Inventory Object Model.
+20. FL02 Life Inventory Object Model. Completed Green as docs-only life-thread
+    object model, owner map, privacy classification, freshness/source boundary,
+    and five-tab surface mapping on 2026-05-05.
 21. FL03 Commitment Memory / Open Loop Registry.
 22. FL04 Searchable Life Recall Contract.
 23. FL05 Option Value / Pivot Preservation Model.

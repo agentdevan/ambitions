@@ -101,7 +101,14 @@ Current 4.0 status:
   Life source landed after FCP17 had already completed; FL02-FL06 now run before
   any further FCP/AOS/LDI/PFC work, and FCP17 may receive later compatibility
   review if FL02-FL06 changes availability assumptions.
-- Queued source truth: FL02-FL06 Found Life Layer docs/domain-contract batches
+- Complete / Green: FL02 Life Inventory Object Model is complete as docs-only
+  Found Life domain-contract evidence. It defines life threads with state,
+  source state, freshness, privacy class, owner surface, review path, proof
+  links, and visibility rules, and maps Life Inventory to Today, Capture, Goals,
+  Plan, You, Memory Lens, AmbitionsOS, and LDI without creating a dashboard,
+  sixth tab, runtime memory, persistence/schema, sync/cloud, or release/legal
+  claim.
+- Queued source truth: FL03-FL06 Found Life Layer docs/domain-contract batches
   are queued before further FCP implementation. They authorize no production
   Swift, route/raw-value, persistence/schema, sync/cloud, AI/AOS/LDI runtime,
   legal/privacy, release, workflow/signing/CI, or public accessibility claim by
