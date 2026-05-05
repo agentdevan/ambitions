@@ -370,6 +370,56 @@ Examples:
 
 Searchable Life Recall must show source, freshness, privacy, and review paths. It must not hallucinate life facts.
 
+#### FL04 Searchable Life Recall Contract
+
+Searchable Life Recall is a future review/search capability contract. It is not
+implemented by this canon file.
+
+Recall can answer only when it can show:
+
+- source
+- freshness
+- privacy class
+- confidence-free review state
+- correction/deletion path
+- whether the answer is user-confirmed, source-backed, imported, inferred
+  candidate, stale, conflicted, or unavailable
+
+Recall answer states:
+
+| State | Meaning | Required user-facing posture |
+| --- | --- | --- |
+| `sourceBacked` | The answer is grounded in a captured, imported, proof, receipt, or user-confirmed source. | Show source and freshness. |
+| `needsReview` | The answer has possible support but requires user review. | Ask the user to review before acting. |
+| `inferredCandidate` | The answer is a possible memory derived from context. | Present as a candidate, never as fact. |
+| `conflicted` | Sources disagree. | Show conflict and review path. |
+| `stale` | Source may be stale. | Use `Source may be stale.` |
+| `privateHidden` | Content exists but is hidden by privacy rules. | Say private details are hidden from this view. |
+| `notFound` | No grounded answer exists. | Do not invent an answer. |
+
+Recall must never:
+
+- answer from unsupported inference as fact
+- expose relationship, family, work, money, health-adjacent, career, or dream
+  detail in widgets, Live Activities, notifications, App Intents, Spotlight,
+  shared storage, screenshots, or previews by default
+- claim AI verification, AI confidence, legal/privacy compliance, release
+  readiness, or durable memory implementation
+- mutate commitments, goals, plans, or receipts silently
+- turn into a chatbot wrapper or life database search portal
+
+Recall examples must preserve source/review language:
+
+| User question | Safe answer posture |
+| --- | --- |
+| "What did I say I needed to buy?" | Show sourced items and review stale/private entries separately. |
+| "What promises are open?" | Show confirmed promises first; keep inferred candidates under review. |
+| "What career paths have I considered?" | Show source-backed thoughts and requirements/uncertainty, not certainty. |
+| "What should I not forget this week?" | Show reviewable commitments, waiting loops, and private-hidden counts. |
+
+Every recall surface needs correction, deletion, privacy, and source-review
+paths before it can become user-facing implementation.
+
 ## 4. Surface Relationships
 
 Found Life is not a sixth tab. It is expressed through the five locked tabs.

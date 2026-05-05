@@ -114,7 +114,13 @@ Current 4.0 status:
   completed/parked/waiting/blocked/recovery-needed separation, open-loop states,
   and a non-shaming closure ladder without hidden automation, runtime memory,
   persistence/schema, sync/cloud, or release/legal claim.
-- Queued source truth: FL04-FL06 Found Life Layer docs/domain-contract batches
+- Complete / Green: FL04 Searchable Life Recall Contract is complete as
+  docs-only Found Life trust-contract evidence. It defines recall answer states,
+  source/freshness/privacy/review requirements, correction/deletion paths,
+  private-hidden and not-found posture, and forbids unsupported inference as
+  fact, sensitive external exposure, silent mutation, AI confidence, AI
+  verification, durable-memory implementation, or release/legal claims.
+- Queued source truth: FL05-FL06 Found Life Layer docs/domain-contract batches
   are queued before further FCP implementation. They authorize no production
   Swift, route/raw-value, persistence/schema, sync/cloud, AI/AOS/LDI runtime,
   legal/privacy, release, workflow/signing/CI, or public accessibility claim by

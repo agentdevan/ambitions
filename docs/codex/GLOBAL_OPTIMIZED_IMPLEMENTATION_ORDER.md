@@ -23,7 +23,8 @@ As of this order update:
   accepted Yellow order-reconciliation note after the remote Found Life source
   arrived after FCP17 had already landed. FL02 is complete Green as docs-only
   Life Inventory object model; FL03 is complete Green as docs-only Commitment
-  Memory / Open Loop Registry contract; FL04-FL06 now run before any further
+  Memory / Open Loop Registry contract; FL04 is complete Green as docs-only
+  Searchable Life Recall contract; FL05-FL06 now run before any further
   FCP implementation.
 - FCP source-truth docs exist, and FCP17 has completed as the first bounded FCP
   implementation batch. Further FCP implementation now waits for FL02-FL06.
@@ -88,13 +89,14 @@ test proof. Found Life FL01 is complete / Green as product-soul source truth
 with accepted Yellow order reconciliation because FCP17 landed before the
 remote Found Life insertion. FL02 is complete / Green as docs-only Life
 Inventory object model. FL03 is complete / Green as docs-only Commitment Memory
-/ Open Loop Registry contract. The full-stack order now selects FL04 before any
-further FCP implementation.
+/ Open Loop Registry contract. FL04 is complete / Green as docs-only
+Searchable Life Recall contract. The full-stack order now selects FL05 before
+any further FCP implementation.
 | 011 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Completed Green on 2026-05-05 as bounded You-owned Availability Center with hard context, protected pockets, defaults, automation trust, durations, and away behavior. | PD16; FCP01-FCP04. | Complete; next FCP06. |
 | 011A | FL01 Founder Backstory / Product Soul Lock | FL | Docs / Canon | Completed Green on 2026-05-05 as Found Life product-soul lock, with accepted Yellow order reconciliation because FCP17 had already landed. | PFC12; Found Life canon. | Complete; next FL02. |
 | 011B | FL02 Life Inventory Object Model | FL | Docs / Domain contract | Completed Green on 2026-05-05 as life-thread ownership, privacy class, freshness, and surface mapping source truth before further FCP/AOS/LDI work. | FL01. | Complete; next FL03. |
 | 011C | FL03 Commitment Memory / Open Loop Registry | FL | Docs / Domain contract | Completed Green on 2026-05-05 as promise/open-loop states before recall, receipts, and Start Here use them. | FL02. | Complete; next FL04. |
-| 011D | FL04 Searchable Life Recall Contract | FL | Docs / Trust contract | Defines source/freshness/privacy/review rules before memory or recall behavior is exposed. | FL02-FL03. | Single-batch. |
+| 011D | FL04 Searchable Life Recall Contract | FL | Docs / Trust contract | Completed Green on 2026-05-05 as source/freshness/privacy/review rules before memory or recall behavior is exposed. | FL02-FL03. | Complete; next FL05. |
 | 011E | FL05 Option Value / Pivot Preservation Model | FL | Docs / Intelligence contract | Defines proof transfer and path uncertainty before Goals/AOS/LDI path work. | FL02-FL04. | Single-batch. |
 | 011F | FL06 Weekly Life Sweep Ritual | FL | Docs / Ritual contract | Defines the non-shaming weekly continuity ritual before future Start Here/Reality Rail/AOS use. | FL01-FL05. | Single-batch. |
 | 012 | FCP06 Receipt Drawer / Trust Layer | FCP | Implementation | Shared trust drawer should exist before Start Here/Rail/Plan/Goal integrations mature. | FCP01-FCP04; PD15/PD17 preferred. | Single-batch. |

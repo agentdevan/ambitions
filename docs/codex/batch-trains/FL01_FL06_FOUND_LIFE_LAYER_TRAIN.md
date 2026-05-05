@@ -1,7 +1,7 @@
 # FL01-FL06 Found Life Layer Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; FL01-FL03 complete Green, FL04 queued.
+Status: Active-scope planning truth; FL01-FL04 complete Green, FL05 queued.
 Date: 2026-05-05
 Train code: FL
 
@@ -127,6 +127,8 @@ Evidence:
 
 ### FL04 — Searchable Life Recall Contract
 
+Status: Complete / Green on 2026-05-05.
+
 Type: Docs/domain/trust contract.
 Owner: Memory Lens / You / AOS.
 Depends on: FL02-FL03.
@@ -138,6 +140,11 @@ Acceptance:
 - Every recall answer has source/freshness/privacy/review path.
 - Sensitive content is private by default.
 - Widgets/Live Activities/notifications cannot expose sensitive Found Life content by default.
+
+Evidence:
+
+- `docs/codex/batches/FL04_Searchable_Life_Recall_Contract_Prompt.md`
+- `docs/audits/fl04-searchable-life-recall-contract-report.md`
 
 ### FL05 — Option Value / Pivot Preservation Model
 
