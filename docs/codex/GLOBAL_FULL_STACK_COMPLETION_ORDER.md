@@ -36,7 +36,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 3. FCP01-FCP04 source truth, object vocabulary, boundary map, QA matrix. FCP01
    completed Green after docs-only source-truth lock on 2026-05-05. FCP02
    completed Green after docs-only object vocabulary/anatomy lock on 2026-05-05.
-   FCP03-FCP04 remain next in sequence.
+   FCP03 completed Green after docs-only ownership/file-boundary/dependency map
+   on 2026-05-05. FCP04 remains next in sequence.
 4. PFC01 Repo And Build System Inventory.
 5. PFC02 Architecture Boundary And Module Map.
 6. PFC03 Dead Code / Prompt Artifact / Naming Smell Audit.

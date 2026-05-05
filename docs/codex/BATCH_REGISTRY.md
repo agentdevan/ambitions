@@ -49,6 +49,13 @@ Current 4.0 status:
   Resolver, and Center as implementation vocabulary with anatomy and acceptance
   rules. It introduces no new top-level destinations and does not authorize app
   code edits by itself.
+- Complete / accepted Yellow: FCP03 Ownership / File Boundary / Dependency Map
+  is complete as docs-only source-truth evidence. It maps all 25 flagship
+  objects to likely owner files, tests, previews, dependencies, and risk owners
+  while preserving the rule that future batches must choose the smallest owner
+  set and cannot edit route/raw-value, persistence/schema, dependency,
+  workflow/CI, signing/entitlements, generated project, or release/platform
+  files without explicit scope.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as docs-only planning truth. FCP implementation has not started. FCP targets
   25 major product objects and app-wide 10/10 audit closure, but the docs alone

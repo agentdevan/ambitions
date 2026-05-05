@@ -142,6 +142,8 @@ Depends on: FCP02.
 Goal: Map all 25 objects to likely files, tests, previews, dependencies, and risk owners.
 Required output: boundary map update.
 Stop if: route/raw/persistence/schema changes are authorized without explicit owner proof.
+Status: Complete Green on 2026-05-05 as docs-only ownership/file-boundary/dependency map.
+Evidence: `docs/audits/fcp03-ownership-file-boundary-dependency-map-report.md`.
 
 ### FCP04 — Preview Fixture And QA Matrix Expansion
 
