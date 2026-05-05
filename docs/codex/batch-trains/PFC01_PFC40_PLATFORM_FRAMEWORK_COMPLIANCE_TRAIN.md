@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -155,6 +155,11 @@ Type: Docs/architecture.
 Owner: Sync / Privacy.
 Goal: Decide whether Ambitions is local-only, iCloud private database, or future server-backed. Define no-claim boundaries.
 Required result: sync strategy decision record.
+Status: Green as docs-only sync strategy decision record. Current/launch
+strategy remains explicit local-only, no account, no launch sync, and no
+CloudKit/server/backend claim. CloudKit, server-backed sync, or indefinite
+local-only future posture require later approved product/platform/privacy/legal
+decision and proof.
 
 ### PFC10 — CloudKit Schema / Zone / Conflict Model
 

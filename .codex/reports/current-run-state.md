@@ -2,15 +2,15 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC08 Corruption Recovery / Backup / Restore Plan Green; PFC09
-iCloud / CloudKit Sync Strategy Decision next if continuation gates allow.
-Scope: PFC08 completed as docs-only recovery planning evidence after PFC07. It
-classified current service-level malformed package, unsupported version,
-manifest-warning, conflict, fresh-store restore, and local-only sync proof;
-documented safe future recovery copy and destructive-action stop conditions; and
-changed no production Swift, shared packages, tests, project generation source
-truth, workflows, dependencies, signing, entitlements, privacy manifests,
-lockfiles, Brewfiles, or generated output.
+Current batch: PFC09 iCloud / CloudKit Sync Strategy Decision Green; full-stack
+order selects PFC12 App Groups / Shared Storage Boundary next if continuation
+gates allow.
+Scope: PFC09 completed as docs-only sync strategy decision evidence after PFC08.
+Current/launch strategy remains explicit local-only, no account, no launch sync,
+and no CloudKit/server/backend claim. PFC09 changed no production Swift, shared
+packages, tests, project generation source truth, workflows, dependencies,
+signing, entitlements, privacy manifests, lockfiles, Brewfiles, or generated
+output.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -64,7 +64,8 @@ complete / Green as docs-only dependency and supply-chain evidence. PFC05 is
 complete / Green as local tooling/docs evidence. PFC06 is complete / Green as
 docs-only persistence source truth and migration-risk evidence. PFC07 is
 complete / Green as focused persistence compatibility proof. PFC08 is complete /
-Green as docs-only recovery planning evidence. Later PFC implementation beyond
+Green as docs-only recovery planning evidence. PFC09 is complete / Green as
+docs-only sync strategy decision evidence. Later PFC implementation beyond
 existing test execution has not started.
 
 No production Swift, route/raw value, persistence/schema, sync/cloud,

@@ -363,6 +363,7 @@ Use this context when the global full-stack order selects PFC batches:
 - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
 - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
 - `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+- `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
 - `docs/audits/pfc01-repo-build-system-inventory-report.md`
 - `docs/audits/pfc02-architecture-boundary-module-map-report.md`
 - `docs/audits/pfc03-dead-code-prompt-artifact-naming-smell-audit-report.md`
@@ -371,6 +372,7 @@ Use this context when the global full-stack order selects PFC batches:
 - `docs/audits/pfc06-schema-persistence-source-truth-report.md`
 - `docs/audits/pfc07-migration-ladder-backward-compatibility-tests-report.md`
 - `docs/audits/pfc08-corruption-recovery-backup-restore-plan-report.md`
+- `docs/audits/pfc09-icloud-cloudkit-sync-strategy-decision-report.md`
 
 PFC01 is Green as docs-only repo/build inventory evidence. PFC02 is Green as
 docs-only architecture boundary evidence. PFC03 is Green as docs-only
@@ -395,7 +397,11 @@ release/legal/privacy claims. PFC08 Corruption Recovery / Backup / Restore Plan
 is Green as docs-only recovery planning evidence and claim boundary. It does not
 authorize recovery UI, destructive store behavior, CloudKit/account sync, device
 backup claims, or production source edits. PFC09 iCloud / CloudKit Sync Strategy
-Decision is the next eligible PFC batch under the full-stack order.
+Decision is Green as current local-only/no-launch-sync decision evidence. It
+does not authorize CloudKit, server sync, account systems, entitlement edits, or
+sync UI claims. The full-stack order places PFC12 App Groups / Shared Storage
+Boundary next; PFC10/PFC11 remain governed by the PFC train and future sync
+approval gates.
 
 
 ## Living Dream Intelligence Context
