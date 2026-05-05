@@ -152,6 +152,8 @@ Owner: PreviewSupport / QA.
 Depends on: FCP03.
 Goal: Expand preview scenario requirements for normal/loading/empty/private/stale/blocked/recovery/overloaded/reduced-motion/Dynamic Type states.
 Stop if: preview work changes production behavior.
+Status: Complete Green on 2026-05-05 as docs-only preview/QA matrix expansion.
+Evidence: `docs/audits/fcp04-preview-fixture-qa-matrix-expansion-report.md`.
 
 ### FCP05 — Start Here Surface
 

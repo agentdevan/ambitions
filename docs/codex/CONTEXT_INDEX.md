@@ -134,6 +134,7 @@ Use this context when the full-stack order selects FCP or PFC work:
 - `docs/audits/fcp01-flagship-completion-source-truth-lock-report.md`
 - `docs/audits/fcp02-object-vocabulary-anatomy-lock-report.md`
 - `docs/audits/fcp03-ownership-file-boundary-dependency-map-report.md`
+- `docs/audits/fcp04-preview-fixture-qa-matrix-expansion-report.md`
 
 FCP/PFC reconciliation is complete as docs-only operating truth. FCP01 is
 complete as a source-truth lock only: it makes the 10/10 object standard,
@@ -142,11 +143,13 @@ batches. FCP02 is complete as a docs-only object vocabulary/anatomy lock:
 Surface, Rail, Spine, Thread, Edge, Fold, Drawer, Pocket, Field, Receipt,
 Proof, Closure, Lens, Resolver, and Center are implementation objects, not
 decorative labels. FCP03 is complete as a docs-only
-ownership/file-boundary/dependency map for all 25 flagship objects. FCP and PFC
-source truth remain active planning truth only. They do not claim FCP
-implementation, PFC implementation, App Store readiness, TestFlight readiness,
-legal/privacy compliance, physical-device proof, public accessibility proof,
-sync/cloud behavior, monetization, or release readiness.
+ownership/file-boundary/dependency map for all 25 flagship objects. FCP04 is
+complete as a docs-only preview fixture and QA matrix expansion for universal
+states and object-group fixture ownership. FCP and PFC source truth remain
+active planning truth only. They do not claim FCP implementation, PFC
+implementation, App Store readiness, TestFlight readiness, legal/privacy
+compliance, physical-device proof, public accessibility proof, sync/cloud
+behavior, monetization, or release readiness.
 
 ## Handoff Package
 

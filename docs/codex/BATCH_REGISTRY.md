@@ -56,6 +56,12 @@ Current 4.0 status:
   set and cannot edit route/raw-value, persistence/schema, dependency,
   workflow/CI, signing/entitlements, generated project, or release/platform
   files without explicit scope.
+- Complete / accepted Yellow: FCP04 Preview Fixture And QA Matrix Expansion is
+  complete as docs-only QA planning evidence. It expands universal preview
+  states, object-group fixture ownership, acceptance rules, and validation gates
+  for normal/loading/empty/private/source-review/blocked/recovery/overloaded/
+  Reduced Motion/Dynamic Type coverage without changing preview Swift,
+  production UI, or app behavior.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as docs-only planning truth. FCP implementation has not started. FCP targets
   25 major product objects and app-wide 10/10 audit closure, but the docs alone

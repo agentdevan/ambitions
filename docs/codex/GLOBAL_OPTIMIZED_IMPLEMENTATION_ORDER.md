@@ -54,7 +54,7 @@ Train-specific approval remains valid for a single train only:
 | 002 | FCP01 Flagship Completion Source Truth Lock | FCP | Docs | Completed Green on 2026-05-05 as docs-only source-truth lock. | Reconciliation Green or accepted Yellow. | Complete; next FCP02. |
 | 003 | FCP02 Object Vocabulary And Anatomy Lock | FCP | Docs | Completed Green on 2026-05-05 as docs-only vocabulary/anatomy lock. | FCP01. | Complete; next FCP03. |
 | 004 | FCP03 Ownership / File Boundary / Dependency Map | FCP | Docs | Completed Green on 2026-05-05 as docs-only ownership/file-boundary/dependency map. | FCP02. | Complete; next FCP04. |
-| 005 | FCP04 Preview Fixture And QA Matrix Expansion | FCP | Docs / Fixture planning | Defines object state proof before implementation. | FCP03. | May continue on Green. |
+| 005 | FCP04 Preview Fixture And QA Matrix Expansion | FCP | Docs / Fixture planning | Completed Green on 2026-05-05 as docs-only preview/QA matrix expansion. | FCP03. | Complete; next PD16 by full-stack order. |
 | 006 | PD15 You Trust History And Receipts Center | PD | Implementation | Completed Green as You trust/receipt depth before Personal System Center and Receipt Drawer integration. | PD14 Green; PD train gates. | Completed. |
 | 007 | PD16 Schedule Availability And Planning Defaults Depth | PD | Implementation | Hard context must precede Start Here time-fit and Availability Center. | PD15 Green/accepted Yellow. | Single-batch preferred. |
 | 008 | PD17 Cross-Surface Proof And Review Integration | PD | Implementation | Gives proof/review bridge before FCP proof spine and final mesh. | PD16 Green/accepted Yellow. | Single-batch preferred. |

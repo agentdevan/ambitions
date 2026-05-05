@@ -2,10 +2,10 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP03 Ownership / File Boundary / Dependency Map active
-Scope: FCP03 is a docs/planning-only ownership, file-boundary, and dependency
-map. It may update FCP docs, registry/context pointers, run-state docs, and an
-audit report. It may not edit production Swift, app behavior, route/raw values,
+Current batch: FCP04 Preview Fixture And QA Matrix Expansion active
+Scope: FCP04 is a docs/planning-only preview fixture and QA matrix expansion. It
+may update FCP docs, registry/context pointers, run-state docs, and an audit
+report. It may not edit production Swift, app behavior, route/raw values,
 persistence/schema, dependency/workflow/signing/CI, generated project files,
 release/platform claims, accessibility conformance claims, privacy/legal claims,
 sync/cloud, StoreKit, AI runtime, or LDI runtime.
@@ -20,11 +20,11 @@ eligible full-stack batch.
 
 FCP source truth exists through `Ambitions_10_10_Flagship_Completion_Plan.md`,
 the FCP train manifest, object scorecard, gate matrix, and file-boundary map.
-FCP/PFC registry-context reconciliation, FCP01 source-truth lock, and FCP02
-object vocabulary/anatomy lock are complete as docs-only operating truth. FCP03
-is mapping ownership, file boundaries, dependencies, tests, previews, and risk
-owners as source-truth planning evidence. FCP production Swift implementation
-has not started.
+FCP/PFC registry-context reconciliation, FCP01 source-truth lock, FCP02 object
+vocabulary/anatomy lock, and FCP03 ownership/boundary map are complete as
+docs-only operating truth. FCP04 is expanding preview fixture and QA matrix
+requirements as source-truth planning evidence. FCP production Swift
+implementation has not started.
 
 PFC source truth exists through
 `Ambitions_Platform_Legal_And_Framework_Completion_Plan.md` and the PFC train

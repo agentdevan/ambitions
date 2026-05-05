@@ -270,6 +270,54 @@ Red examples:
 - memory UI claims durable behavior not implemented
 - export/delete/sync claims exceed implementation
 
+## FCP04 Preview Fixture And QA Matrix
+
+Future FCP implementation batches must prove object state coverage before they
+claim a flagship object is complete. Preview-only proof is accepted Yellow until
+focused tests also pass. Missing preview/test proof is Red for implementation
+batches that materially change a visible object.
+
+### Universal Preview States
+
+Every object must classify these states as applicable, not-applicable, or
+deferred with owner:
+
+| State | Required proof | Red condition |
+| --- | --- | --- |
+| Normal | Primary object visible with one clear orientation and action. | Normal preview is a generic card/list/grid. |
+| Loading | Object-specific loading that preserves layout and privacy. | Fake progress, skeleton spam, or layout jump. |
+| Empty | Useful empty state with next safe action. | Blank dead end or marketing explanation. |
+| Private / sensitive | Sensitive detail hidden while role/control remain. | Hidden detail leaks through text, VoiceOver, or receipt. |
+| Source stale / review | Freshness or review boundary is visible without AI certification. | Source stale silently drives a recommendation. |
+| Blocked / waiting | Blocker or waiting state is non-shaming and actionable. | Overdue/failure/shame framing. |
+| Recovery | Smaller safe next step or review path is visible. | Recovery becomes guilt, streak rescue, or productivity score. |
+| Overloaded / high pressure | Detail collapses and capacity pressure is legible. | Fake precision, dashboard pressure, or no relief path. |
+| Reduced Motion | Static equivalent preserves hierarchy and meaning. | Motion is required to understand state. |
+| Dynamic Type / accessibility | Meaning survives large text and VoiceOver traversal. | Text overlap, color-only meaning, or broken order. |
+
+### Object QA Matrix
+
+| Object group | Required fixture owners | Required QA states | Required validation |
+| --- | --- | --- | --- |
+| Start Here / Reality Rail / Step Detail / Step Session / Closure | `Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift`, Today tests, Today accessibility scans | normal, tight day, overloaded, private, no schedule, missing duration, source review, blocked/waiting, recovery, reduced motion, Dynamic Type | focused Today tests, copy guard, product drift scan, accessibility/reduced-motion scan |
+| LifePath / MissionControlTimeSpine / Proof Spine / alternate paths | `Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift`, Goals tests, proof/resource tests | active goal, private goal, proof-heavy, blocker, alternate path pressure, stale source, no proof, reduced motion, Dynamic Type | focused Goals tests, proof/source scan, PM-board/grid drift scan |
+| Capture composer / placement / correction / Grow Into Goal | `Native/Ambitions/PreviewSupport/PreviewFixtures.swift`, Capture tests, Smart Attachment tests | empty needs-place, typed route suggestion, ambiguous route clarification, private item, placement corrected, decide later, error, mic unavailable/connected, reduced motion, Dynamic Type | focused Capture tests, no inbox/feed scan, no hidden learning/confidence scan |
+| LifeShape / reflow / pressure / availability links | `Native/Ambitions/PreviewSupport/PreviewPlanScenarios.swift`, Plan tests, reschedule/planning domain tests | open day, tight day, overloaded, protected time, vacation/away, late start, no calendar, source review, recovery, reduced motion, Dynamic Type | focused Plan tests, calendar-clone scan, silent-reflow scan |
+| Personal System Center / Appearance Studio / Memory Lens / schedule defaults | Profile preview fixtures or Personal System Center previews, Profile tests, appearance tests, memory tests | setup incomplete, setup complete, private/local-only, denied permission, stale memory/source, empty receipt history, unsaved changes, reduced motion, Dynamic Type | focused Profile/appearance tests, settings-dump scan, memory/privacy/release-claim scan |
+| Shared Receipt Drawer / status grammar / degraded states / motion / adaptive visual primitives | `Sources/Previews/*`, shared design-system tests | normal, empty, degraded, source review, private, reduced motion, Dynamic Type, high contrast where scoped | design-system tests, non-color meaning scan, motion-only meaning scan, no runtime-claim scan |
+
+### Preview Acceptance Rules
+
+- Preview fixtures must use real object vocabulary from FCP02.
+- Preview fixtures must not add or imply new top-level destinations.
+- Preview fixtures must not claim production behavior, platform readiness, legal
+  compliance, public accessibility conformance, sync/cloud, StoreKit, AI
+  runtime, or LDI runtime.
+- Preview scenarios must include visible labels or accessibility summaries for
+  every semantic mark.
+- Preview coverage must be paired with focused tests before an implementation
+  batch closes Green; otherwise the preview-only state is accepted Yellow.
+
 ## Object-Specific Gates
 
 ### Start Here Surface Gate
