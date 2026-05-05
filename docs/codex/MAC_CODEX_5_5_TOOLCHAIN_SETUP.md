@@ -59,11 +59,27 @@ The local wrappers prefer iPhone 17, then iPhone 16, then the first available iP
 ```bash
 scripts/build-local.sh
 scripts/test-local.sh
+scripts/ci-local-parity.sh
 ```
 
 Both wrappers run `xcodegen generate`, select an available simulator, write generated logs under ignored `output/logs/`, and use `xcbeautify` when installed while preserving the underlying `xcodebuild` exit status.
 
 The full UI lane currently has known failures from the FAANG handoff report. Do not claim FAANG handoff readiness or release readiness from a partial or failing full test run.
+
+`scripts/ci-local-parity.sh` is the local CI parity wrapper. By default it runs
+tool validation, project generation, diff whitespace checks, docs QA, and the
+batch-train gate wrapper while writing an ignored log under `output/logs/`.
+Native build and full test lanes remain opt-in:
+
+```bash
+RUN_BUILD=1 scripts/ci-local-parity.sh
+RUN_TESTS=1 scripts/ci-local-parity.sh
+RUN_DOC_QA=0 RUN_GATE=0 scripts/ci-local-parity.sh
+```
+
+The wrapper records local evidence only. It does not install tools, stage files,
+edit workflows, or claim release, TestFlight, App Store, device, or public
+accessibility readiness.
 
 ## Direct Build/Test Commands
 

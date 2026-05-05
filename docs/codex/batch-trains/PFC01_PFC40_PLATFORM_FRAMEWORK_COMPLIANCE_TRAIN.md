@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -105,6 +105,10 @@ Type: Implementation/docs.
 Owner: Build / CI.
 Goal: Make local and CI validation reproducible, documented, and evidence-producing.
 Required result: clean setup/runbook and validated scripts; no release claim.
+Status: Green as local tooling/docs implementation. Added
+`scripts/ci-local-parity.sh` as a non-mutating evidence wrapper and updated
+toolchain docs; native build/test lanes remain opt-in and no workflow, project,
+dependency, signing, or production Swift file changed.
 
 ### PFC06 — Schema And Persistence Source Truth
 

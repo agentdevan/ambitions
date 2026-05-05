@@ -25,6 +25,7 @@ advisory tools reduce evidence quality but do not prove app failure.
 | xcbeautify | Adopted developer tool | Readable Xcode logs | `brew install xcbeautify` | `xcbeautify --version` | Logs noisier | Advisory | wrappers |
 | markdownlint-cli2 | Adopted docs QA | Markdown lint | `brew install markdownlint-cli2` | `markdownlint-cli2 --version` | Docs lint unavailable | Advisory | docs QA |
 | lychee | Adopted docs QA | Link checking | `brew install lychee` | `lychee --version` | Link audit unavailable | Advisory | docs QA |
+| ci-local-parity wrapper | Adopted local script | Stable local validation order | repo script | `bash -n scripts/ci-local-parity.sh` | Evidence order less consistent | Advisory | local CI parity |
 | shellcheck | Recommended next | Shell script lint | `brew install shellcheck` | `shellcheck --version` | Shell issues caught later | Docs only | Script hardening |
 | shfmt | Recommended next | Shell formatting | `brew install shfmt` | `shfmt --version` | Formatting manual | Docs only | Script hardening |
 | yq | Recommended next | YAML parsing | `brew install yq` | `yq --version` | YAML parsing manual | Docs only | project/workflow audits |
@@ -50,6 +51,7 @@ Use:
 ```bash
 brew bundle check || true
 scripts/validate-dev-tools.sh || true
+RUN_DOC_QA=0 RUN_GATE=0 scripts/ci-local-parity.sh || true
 scripts/build-local.sh || true
 ```
 

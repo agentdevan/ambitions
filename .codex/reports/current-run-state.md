@@ -2,14 +2,13 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC04 Dependency And Supply Chain Policy Enforcement Green;
-PFC05 CI / Local Toolchain Reproducibility next if continuation gates allow.
-Scope: PFC04 completed as docs-only dependency and supply-chain audit after
-PFC03. It created a runtime dependency, local tooling, workflow action, privacy
-manifest, entitlement, lockfile, and license posture ledger without editing
-production Swift, shared packages, tests, project generation, workflows,
-dependencies, signing, entitlements, privacy manifests, lockfiles, or generated
-output.
+Current batch: PFC05 CI / Local Toolchain Reproducibility Green; PFC06 Schema
+And Persistence Source Truth next if continuation gates allow.
+Scope: PFC05 completed as local tooling/docs implementation after PFC04. It
+added a non-mutating local CI parity wrapper and toolchain runbook updates
+without editing production Swift, shared packages, tests, project generation,
+workflows, dependencies, signing, entitlements, privacy manifests, lockfiles,
+Brewfiles, or generated output.
 
 ## Full-Stack Global Order Reconciliation
 

@@ -359,10 +359,12 @@ Use this context when the global full-stack order selects PFC batches:
 - `docs/codex/batches/PFC02_Architecture_Boundary_And_Module_Map_Prompt.md`
 - `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
 - `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
+- `docs/codex/batches/PFC05_CI_Local_Toolchain_Reproducibility_Prompt.md`
 - `docs/audits/pfc01-repo-build-system-inventory-report.md`
 - `docs/audits/pfc02-architecture-boundary-module-map-report.md`
 - `docs/audits/pfc03-dead-code-prompt-artifact-naming-smell-audit-report.md`
 - `docs/audits/pfc04-dependency-supply-chain-policy-report.md`
+- `docs/audits/pfc05-ci-local-toolchain-reproducibility-report.md`
 
 PFC01 is Green as docs-only repo/build inventory evidence. PFC02 is Green as
 docs-only architecture boundary evidence. PFC03 is Green as docs-only
@@ -372,7 +374,11 @@ edits, config/dependency/workflow changes, or release/handoff readiness claims.
 PFC04 is Green as docs-only dependency and supply-chain policy evidence. It
 does not authorize dependency, workflow, signing, entitlement, privacy manifest,
 project, lockfile, or production source edits. PFC05 CI / Local Toolchain
-Reproducibility is the next eligible PFC batch under the full-stack order.
+Reproducibility is Green as a local CI parity wrapper and toolchain runbook
+update. PFC05 does not authorize workflow, project, dependency, signing,
+entitlement, privacy manifest, lockfile, Brewfile, generated output, or
+production source edits. PFC06 Schema And Persistence Source Truth is the next
+eligible PFC batch under the full-stack order.
 
 
 ## Living Dream Intelligence Context
