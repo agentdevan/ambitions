@@ -43,11 +43,11 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   insertion. FL02 is complete Green as Life Inventory object model source truth.
   FL03 is complete Green as Commitment Memory / Open Loop Registry source truth.
   FL04 is complete Green as Searchable Life Recall source truth. FL05 is
-  complete Green as Option Value / Pivot Preservation source truth. FL06 now
-  depends on FL05 and must run before any further FCP,
-  AOS, LDI, or PFC work that touches life visibility, recall, commitment
-  memory, option value, weekly sweep, recommendations, proof, paths, or
-  external surfaces.
+  complete Green as Option Value / Pivot Preservation source truth. FL06 is
+  complete Green as Weekly Life Sweep ritual source truth. FL01-FL06 must
+  govern any further FCP, AOS, LDI, or PFC work that touches life visibility,
+  recall, commitment memory, option value, weekly sweep, recommendations,
+  proof, paths, or external surfaces.
 - FCP17 is complete Green as bounded Availability Center implementation. It
   landed before FL due to the remote-order race and may be reviewed against
   FL02-FL06 if later Found Life contracts affect availability assumptions.

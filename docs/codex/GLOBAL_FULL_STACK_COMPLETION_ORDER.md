@@ -98,7 +98,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 23. FL05 Option Value / Pivot Preservation Model. Completed Green as docs-only
     proof-transfer, requirement, uncertainty, and path-boundary contract on
     2026-05-05.
-24. FL06 Weekly Life Sweep Ritual.
+24. FL06 Weekly Life Sweep Ritual. Completed Green as docs-only calm weekly
+    ritual, prompt, privacy/source/review, candidate-safety, and integration
+    contract on 2026-05-05.
 
 ### Phase 3 — FCP Core Product Objects
 

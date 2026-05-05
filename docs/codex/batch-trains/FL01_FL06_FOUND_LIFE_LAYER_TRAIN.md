@@ -1,7 +1,7 @@
 # FL01-FL06 Found Life Layer Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; FL01-FL05 complete Green, FL06 queued.
+Status: Complete / Green; FL01-FL06 complete as Found Life source truth.
 Date: 2026-05-05
 Train code: FL
 
@@ -169,6 +169,8 @@ Evidence:
 
 ### FL06 — Weekly Life Sweep Ritual
 
+Status: Complete / Green on 2026-05-05.
+
 Type: Docs/product ritual contract.
 Owner: Today / Plan / You / AOS.
 Depends on: FL01-FL05.
@@ -180,6 +182,11 @@ Acceptance:
 - The ritual is calm and short enough to complete.
 - It feeds Start Here, Reality Rail, Life Inventory, Option Value, and Memory Lens.
 - It never becomes a dashboard, scorecard, or shame ritual.
+
+Evidence:
+
+- `docs/codex/batches/FL06_Weekly_Life_Sweep_Ritual_Prompt.md`
+- `docs/audits/fl06-weekly-life-sweep-ritual-report.md`
 
 ## Validation
 

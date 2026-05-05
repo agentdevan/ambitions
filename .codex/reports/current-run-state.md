@@ -2,16 +2,17 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FL05 Option Value / Pivot Preservation Model Green; full-stack
-order selects FL06 Weekly Life Sweep Ritual next if continuation gates allow.
-Scope: FL05 completed as docs-only Found Life intelligence-contract source
-truth. It defines proof-transfer states, requirement states, risk boundaries,
-adjacent-path uncertainty, and missing-source review rules without implementing
-AOS runtime, LDI runtime, path mutation, persistence/schema, or a new surface.
-FL05 changed no production Swift, route/raw value, persistence/schema,
-permission-request, calendar-write, sync/account, release, legal/privacy, CI,
-workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
-accessibility claim file.
+Current batch: FL06 Weekly Life Sweep Ritual Green; full-stack order selects
+FCP06 Receipt Drawer / Trust Layer next if continuation gates allow.
+Scope: FL06 completed as docs-only Found Life product-ritual source truth. It
+defines the calm weekly sweep prompt set, state model, source/privacy/receipt
+boundaries, candidate-safety rules, and integration map without implementing
+AOS runtime, LDI runtime, persistence/schema, sync/cloud, notifications,
+widgets, Live Activities, App Intents, or a new surface. FL06 changed no
+production Swift, route/raw value, persistence/schema, permission-request,
+calendar-write, sync/account, release, legal/privacy, CI, workflow/signing,
+entitlement, AI runtime, AOS runtime, LDI runtime, or public accessibility
+claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -33,11 +34,13 @@ FL01 is complete / Green as Found Life product-soul lock. FL02 is complete /
 Green as Life Inventory object model source truth. FL03 is complete / Green as
 Commitment Memory / Open Loop Registry source truth. FL04 is complete / Green
 as Searchable Life Recall source truth. FL05 is complete / Green as Option
-Value / Pivot Preservation source truth. Accepted Yellow:
+Value / Pivot Preservation source truth. FL06 is complete / Green as Weekly
+Life Sweep ritual source truth. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
-so FL01 records the mismatch and inserts FL02-FL06 before any further FCP,
-AOS, LDI, or PFC work that touches life visibility, recall, commitment memory,
-option value, weekly sweep, recommendations, proof, paths, or external surfaces.
+so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
+LDI, or PFC work that touches life visibility, recall, commitment memory,
+option value, weekly sweep, recommendations, proof, paths, or external
+surfaces.
 
 PD16 is complete / Green as bounded You/Profile implementation evidence. It
 adds typed planning setup depth for Schedule & Availability, Planning Defaults,

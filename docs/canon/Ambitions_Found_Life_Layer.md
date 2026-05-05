@@ -377,6 +377,81 @@ Weekly Life Sweep asks:
 
 This ritual must be calm, non-shaming, and short enough to complete.
 
+#### FL06 Weekly Life Sweep Ritual Contract
+
+Weekly Life Sweep is a future product ritual contract. It is not implemented
+by this canon file.
+
+Weekly Life Sweep exists to help the user become found again without turning
+life review into a dashboard, feed, scorecard, or shame loop.
+
+Weekly Life Sweep object fields:
+
+| Field | Meaning | Boundary |
+| --- | --- | --- |
+| `sweepId` | Stable identifier for the sweep session or review window. | Must not become a global life dashboard. |
+| `sweepWindow` | The week or review period being considered. | A review window is not a calendar mode. |
+| `promptSet` | The calm prompts shown for the sweep. | Keep the ritual short enough to finish. |
+| `reviewState` | Not started, in progress, complete, parked, skipped intentionally, or needs recovery. | Skipping is not failure. |
+| `sourceInputs` | Commitments, captures, receipts, proof, plans, goals, memory items, and user notes considered. | Source and privacy boundaries must remain visible. |
+| `privateSummaryState` | Standard, private hidden, user-only review, or external-surface blocked. | Private details must not leak into previews, widgets, notifications, or Live Activities. |
+| `outputIntents` | Start Here candidate, Reality Rail review, Life Inventory update, Option Value review, Memory Lens review, or parked loop. | Outputs are candidates until the user confirms consequential changes. |
+| `receiptState` | No receipt needed, review receipt, closure receipt, recovery receipt, or correction receipt. | Receipts are consequence and reversibility, not notifications. |
+
+Weekly Life Sweep prompts:
+
+- What did I forget?
+- What did I promise?
+- What still matters?
+- What can I drop?
+- What is becoming real?
+- What is noise?
+- What is the next income or career move to review?
+- What relationship or family item needs attention?
+- What work thread is risky?
+- What future path is gaining evidence?
+
+Ritual pacing rules:
+
+- Use one clear prompt at a time.
+- Prefer review, park, drop intentionally, recover, or create one next step
+  over bulk planning.
+- Keep inferred items under review and never upgrade them silently.
+- Keep private, relationship, family, work, money, health-adjacent, career,
+  and dream details protected by source and privacy posture.
+- Use non-shaming recovery language when the sweep is skipped, parked, or
+  overloaded.
+- Preserve Reduce Motion and non-visual equivalents for any sweep progress,
+  stack, fold, or visual grouping.
+
+Integration map:
+
+| Surface or system | Weekly Life Sweep role | Boundary |
+| --- | --- | --- |
+| Today / Start Here | May receive one confirmed next step or review candidate. | No bulk dashboard import. |
+| Today / Reality Rail | May surface the most relevant review or recovery item. | Reality Rail remains focused on now. |
+| Capture | May receive unresolved fragments from the sweep. | Capture remains text-first and placement follows content. |
+| Goals | May receive confirmed proof/path/option-value review. | No automatic path mutation. |
+| Plan | May receive capacity and recovery signals. | Plan remains LifeShape-first, not a calendar clone. |
+| You | Owns sweep setup, privacy, memory controls, and history. | You remains trust/control-first. |
+| Life Inventory | Receives reviewed thread state updates. | Candidate items remain candidates. |
+| Option Value | Receives proof-transfer and adjacent-path review inputs. | No career, education, income, financial, legal, or health certainty. |
+| Memory Lens | Receives reviewable recall and correction paths. | Source, freshness, privacy, and deletion/correction paths are required. |
+| AOS / LDI | May later use sweep signals only through typed, permissioned, source-grounded contracts. | No runtime claim is made by FL06. |
+
+Weekly Life Sweep must never become:
+
+- a dashboard
+- a productivity score
+- a shame ritual
+- an inbox
+- an activity feed
+- a habit tracker
+- a calendar clone
+- a surveillance memory layer
+- a generic AI life coach
+- a silent automation surface
+
 ### 3.6 Identity / Direction Memory
 
 A source-grounded memory of what the user is trying to become and what kind of life they want.

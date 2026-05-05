@@ -126,11 +126,14 @@ Current 4.0 status:
   missing-source review rules without career/education/legal/financial/
   medical/professional certainty, hidden path mutation, AOS runtime, LDI
   runtime, or release/legal claim.
-- Queued source truth: FL06 Found Life Layer docs/product-ritual batch
-  is queued before further FCP implementation. It authorizes no production
-  Swift, route/raw-value, persistence/schema, sync/cloud, AI/AOS/LDI runtime,
-  legal/privacy, release, workflow/signing/CI, or public accessibility claim by
-  itself.
+- Complete / Green: FL06 Weekly Life Sweep Ritual is complete as docs-only
+  Found Life product-ritual evidence. It defines the calm weekly sweep prompt
+  set, state model, source/privacy/receipt boundaries, candidate-safety rules,
+  and integration map for Start Here, Reality Rail, Life Inventory, Option
+  Value, Memory Lens, Today, Capture, Goals, Plan, You, AOS, and LDI. It
+  authorizes no production Swift, route/raw-value, persistence/schema,
+  sync/cloud, AI/AOS/LDI runtime, legal/privacy, release, workflow/signing/CI,
+  or public accessibility claim by itself.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as active implementation truth. FCP implementation has started with FCP17.
   FCP targets
