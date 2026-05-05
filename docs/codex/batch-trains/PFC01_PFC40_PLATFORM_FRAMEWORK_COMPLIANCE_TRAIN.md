@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -181,6 +181,12 @@ Type: Docs/implementation.
 Owner: Platform.
 Goal: Define app/widget/Live Activity shared storage and privacy boundaries.
 Required result: app group data map and privacy-safe sharing proof.
+Status: Green as app-group/shared-storage boundary evidence. It documented the
+existing `group.com.ambitions.shared` app/widget/share extension entitlement
+match, shared external snapshot path, external creation queue path, minimized
+privacy rules, and focused test proof without changing production Swift,
+entitlements, signing, project generation, workflows, dependencies, schema,
+sync/cloud/account behavior, release claims, or legal/privacy claims.
 
 ### PFC13 — WidgetKit Strategy And Object Map
 

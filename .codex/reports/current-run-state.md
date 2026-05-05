@@ -2,15 +2,17 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC09 iCloud / CloudKit Sync Strategy Decision Green; full-stack
-order selects PFC12 App Groups / Shared Storage Boundary next if continuation
-gates allow.
-Scope: PFC09 completed as docs-only sync strategy decision evidence after PFC08.
-Current/launch strategy remains explicit local-only, no account, no launch sync,
-and no CloudKit/server/backend claim. PFC09 changed no production Swift, shared
-packages, tests, project generation source truth, workflows, dependencies,
-signing, entitlements, privacy manifests, lockfiles, Brewfiles, or generated
-output.
+Current batch: PFC12 App Groups / Shared Storage Boundary Green; full-stack
+order selects FCP17 Schedule / Availability / Defaults Center next if
+continuation gates allow.
+Scope: PFC12 completed as app-group/shared-storage boundary evidence after
+PFC09. It documents the existing `group.com.ambitions.shared` app/widget/share
+entitlement match, shared external snapshot path, external creation queue path,
+privacy-safe minimization rules, and focused test proof. PFC12 changed no
+production Swift, shared packages, tests, project generation source truth,
+workflows, dependencies, signing, entitlements, privacy manifests, lockfiles,
+Brewfiles, schema, sync/cloud/account behavior, release claim, or legal/privacy
+claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -65,7 +67,8 @@ complete / Green as local tooling/docs evidence. PFC06 is complete / Green as
 docs-only persistence source truth and migration-risk evidence. PFC07 is
 complete / Green as focused persistence compatibility proof. PFC08 is complete /
 Green as docs-only recovery planning evidence. PFC09 is complete / Green as
-docs-only sync strategy decision evidence. Later PFC implementation beyond
+docs-only sync strategy decision evidence. PFC12 is complete / Green as
+app-group/shared-storage boundary evidence. Later PFC implementation beyond
 existing test execution has not started.
 
 No production Swift, route/raw value, persistence/schema, sync/cloud,

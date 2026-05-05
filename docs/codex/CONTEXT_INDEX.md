@@ -399,9 +399,12 @@ authorize recovery UI, destructive store behavior, CloudKit/account sync, device
 backup claims, or production source edits. PFC09 iCloud / CloudKit Sync Strategy
 Decision is Green as current local-only/no-launch-sync decision evidence. It
 does not authorize CloudKit, server sync, account systems, entitlement edits, or
-sync UI claims. The full-stack order places PFC12 App Groups / Shared Storage
-Boundary next; PFC10/PFC11 remain governed by the PFC train and future sync
-approval gates.
+sync UI claims. PFC12 App Groups / Shared Storage Boundary is Green as
+app-group/shared-storage evidence for the existing `group.com.ambitions.shared`
+app/widget/share entitlement match, shared snapshot path, external creation
+queue path, privacy-safe minimization rules, and focused test proof. PFC10/PFC11
+remain governed by the PFC train and future sync approval gates. The full-stack
+order resumes FCP17 next.
 
 
 ## Living Dream Intelligence Context
