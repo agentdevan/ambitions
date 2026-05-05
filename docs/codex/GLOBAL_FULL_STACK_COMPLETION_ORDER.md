@@ -116,7 +116,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 28. FCP07 Reality Rail Continuity. Completed Green as Today-owned continuity
     spine connecting Start Here, Now/Next/Later, closure, proof, and pressure
     on 2026-05-05.
-29. FCP13A Action Closure Diamond.
+29. FCP13A Action Closure Diamond. Completed Green as Today-owned closure /
+    decision object with Outcome, Consequence, Proof, Recovery, accessibility,
+    Dynamic Type, and Reduce Motion equivalents on 2026-05-05.
 30. FCP08 Ambition Meridian Shell.
 31. FCP09 Motion / Haptics / Reduced Motion Proof.
 

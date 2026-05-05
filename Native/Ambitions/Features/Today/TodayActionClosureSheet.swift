@@ -4,6 +4,8 @@ import SwiftUI
 struct TodayActionClosureSheet: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let state: TodayActionClosureSheetState
     let onConfirm: (TodayActionClosureOutcomeState) -> Void
@@ -27,6 +29,7 @@ struct TodayActionClosureSheet: View {
                     }
 
                     closureContext
+                    closureDiamond
                     softPriorStepPrompt
                     closureOutcomeSection(title: "Likely outcomes", outcomes: state.primaryOutcomes)
 
@@ -88,6 +91,109 @@ struct TodayActionClosureSheet: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("TodayActionClosureContext")
+    }
+
+    private var closureDiamond: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                Text(state.diamond.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(state.diamond.summary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+
+            if dynamicTypeSize.isAccessibilitySize {
+                closureDiamondList
+            } else {
+                closureDiamondVisual
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(state.diamond.title)
+        .accessibilityValue("\(state.diamond.summary) \(state.diamond.accessibilityValue). \(state.diamond.noSilentChangeLabel).")
+        .accessibilityIdentifier("TodayActionClosureDiamond")
+    }
+
+    private var closureDiamondVisual: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                .fill(theme.colors.accentWarm.opacity(0.12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                        .stroke(theme.colors.accentWarm.opacity(0.52), lineWidth: 1)
+                )
+                .rotationEffect(reduceMotion ? .zero : .degrees(45))
+                .frame(width: 118, height: 118)
+
+            Text(state.diamond.centerLabel)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .multilineTextAlignment(.center)
+                .frame(width: 72)
+
+            closureDiamondFacet(state.diamond.facets[0])
+                .offset(y: -74)
+            closureDiamondFacet(state.diamond.facets[1])
+                .offset(x: 106)
+            closureDiamondFacet(state.diamond.facets[2])
+                .offset(y: 74)
+            closureDiamondFacet(state.diamond.facets[3])
+                .offset(x: -106)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 192)
+        .accessibilityHidden(true)
+    }
+
+    private var closureDiamondList: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            ForEach(state.diamond.facets) { facet in
+                Label {
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(facet.title)
+                            .font(theme.typography.caption.weight(.semibold))
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(facet.summary)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                } icon: {
+                    Image(systemName: facet.systemImage)
+                        .foregroundStyle(theme.colors.accentWarm)
+                }
+            }
+            Text(state.diamond.noSilentChangeLabel)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+        }
+    }
+
+    private func closureDiamondFacet(_ facet: TodayActionClosureDiamondFacetState) -> some View {
+        VStack(spacing: theme.spacing.xxxs) {
+            Image(systemName: facet.systemImage)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.accentWarm)
+            Text(facet.title)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+        }
+        .padding(.horizontal, theme.spacing.xs)
+        .padding(.vertical, theme.spacing.xxxs)
+        .background(
+            Capsule(style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.86))
+        )
     }
 
     private var softPriorStepPrompt: some View {

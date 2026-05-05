@@ -2,15 +2,16 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP07 Reality Rail Continuity Green; full-stack order selects
-FCP13A Action Closure Diamond next if continuation gates allow.
-Scope: FCP07 completed as Today-owned Reality Rail implementation evidence. It
-adds a typed continuity spine connecting Start Here, Now/Next/Later, closure,
-proof, and pressure with non-color text markers, Dynamic Type fallback, and
-no-silent-change posture. FCP07 changed no route/raw value, persistence/schema,
-permission-request, calendar-write, sync/account, release, legal/privacy, CI,
-workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
-accessibility claim file.
+Current batch: FCP13A Action Closure Diamond Green; full-stack order selects
+FCP08 Ambition Meridian Shell next if continuation gates allow.
+Scope: FCP13A completed as Today-owned Action Closure Diamond implementation
+evidence. It adds a typed closure / decision Diamond with Outcome, Consequence,
+Proof, and Recovery facets plus accessibility text, Dynamic Type list
+equivalent, Reduce Motion static equivalent, and no-silent-change posture.
+FCP13A changed no route/raw value, persistence/schema, permission-request,
+calendar-write, sync/account, release, legal/privacy, CI, workflow/signing,
+entitlement, AI runtime, AOS runtime, LDI runtime, or public accessibility
+claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -35,6 +36,7 @@ as Searchable Life Recall source truth. FL05 is complete / Green as Option
 Value / Pivot Preservation source truth. FL06 is complete / Green as Weekly
 Life Sweep ritual source truth. FCP05 is complete / Green as Start Here Surface
 implementation evidence. FCP07 is complete / Green as Reality Rail Continuity
+implementation evidence. FCP13A is complete / Green as Action Closure Diamond
 implementation evidence. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
@@ -83,8 +85,9 @@ docs-only sync strategy decision evidence. PFC12 is complete / Green as
 app-group/shared-storage boundary evidence. Later PFC implementation beyond
 existing test execution has not started.
 
-No further production Swift beyond the scoped FCP05 Today Start Here Surface
-changes is authorized by these docs alone. No route/raw value,
+No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality
+Rail Continuity, and FCP13A Action Closure Diamond changes is authorized by
+these docs alone. No route/raw value,
 persistence/schema, sync/cloud, monetization, privacy/legal, release, App
 Store, TestFlight, physical-device, public accessibility, workflow, signing,
 entitlement, CI, AI runtime, or LDI runtime claim is authorized by these docs

@@ -522,6 +522,27 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
     }
 
+    func testFCP13AActionClosureDiamondExplainsOutcomeConsequenceProofAndRecoveryWithoutSilentMutation() throws {
+        let target = TodayActionTarget(goalID: "goal-fcp13a", stepID: "step-fcp13a")
+        let sheet = TodayActionClosureSheetState.step(
+            title: "Send the launch note",
+            context: "Start Here",
+            target: target
+        )
+
+        XCTAssertEqual(sheet.diamond.title, "Closure diamond")
+        XCTAssertEqual(sheet.diamond.centerLabel, "Close the loop")
+        XCTAssertEqual(sheet.diamond.facets.map(\.title), ["Outcome", "Consequence", "Proof", "Recovery"])
+        XCTAssertTrue(sheet.diamond.visibleCopy.contains("Evidence only when it is true."))
+        XCTAssertTrue(sheet.diamond.visibleCopy.contains("No silent changes"))
+        XCTAssertTrue(sheet.diamond.accessibilityValue.contains("Recovery: A smaller path if reality changed."))
+        XCTAssertTrue(sheet.visibleCopy.contains("Choose the honest outcome"))
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("score"))
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("failed"))
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("overdue"))
+    }
+
     func testF05StepSessionSurfacesCloseTheLoopWithoutAutoCompleting() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)

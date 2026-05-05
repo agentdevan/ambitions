@@ -113,6 +113,12 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 | Signature Interface Gate | SI01-SI18 or Ambitions-native interface primitives | SI Codex OS gates, PXOS source truth, ME/CS prerequisites, visual QA, accessibility, or file-size evidence is unresolved. |
 | CQS Quality Gate | Every post-CQS batch | Required reviewer, repair, validation, report, anti-slop, and hard-Red classification evidence is missing. |
 
+FCP13A is complete Green as of 2026-05-05. FCP08 Ambition Meridian Shell may
+use the completed Today Start Here, Reality Rail, Receipt Drawer, and Action
+Closure Diamond evidence, but still must preserve five-tab navigation and
+avoid route/raw-value, persistence/schema, sync/account, AI runtime, release,
+legal/privacy, or public accessibility claims.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

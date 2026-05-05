@@ -53,12 +53,74 @@ struct TodayActionClosureOutcomeState: Identifiable, Equatable {
     }
 }
 
+struct TodayActionClosureDiamondFacetState: Identifiable, Equatable {
+    let id: String
+    let title: String
+    let summary: String
+    let systemImage: String
+}
+
+struct TodayActionClosureDiamondState: Equatable {
+    let title: String
+    let summary: String
+    let centerLabel: String
+    let noSilentChangeLabel: String
+    let facets: [TodayActionClosureDiamondFacetState]
+
+    var visibleCopy: String {
+        ([
+            title,
+            summary,
+            centerLabel,
+            noSilentChangeLabel
+        ] + facets.flatMap { [$0.title, $0.summary] }).joined(separator: " ")
+    }
+
+    var accessibilityValue: String {
+        facets.map { "\($0.title): \($0.summary)" }.joined(separator: ". ")
+    }
+
+    static let todayDefault = TodayActionClosureDiamondState(
+        title: "Closure diamond",
+        summary: "Choose the honest outcome, then Ambitions shows the consequence before anything changes.",
+        centerLabel: "Close the loop",
+        noSilentChangeLabel: "No silent changes",
+        facets: [
+            TodayActionClosureDiamondFacetState(
+                id: "diamond.outcome",
+                title: "Outcome",
+                summary: "What actually happened.",
+                systemImage: "checkmark.seal"
+            ),
+            TodayActionClosureDiamondFacetState(
+                id: "diamond.consequence",
+                title: "Consequence",
+                summary: "What this means for Today.",
+                systemImage: "arrow.triangle.branch"
+            ),
+            TodayActionClosureDiamondFacetState(
+                id: "diamond.proof",
+                title: "Proof",
+                summary: "Evidence only when it is true.",
+                systemImage: "doc.text"
+            ),
+            TodayActionClosureDiamondFacetState(
+                id: "diamond.recovery",
+                title: "Recovery",
+                summary: "A smaller path if reality changed.",
+                systemImage: "arrow.triangle.2.circlepath"
+            ),
+        ]
+    )
+}
+
 struct TodayActionClosureSheetState: Identifiable, Equatable {
     let id: String
     let objectTitle: String
     let originalContext: String
     let prompt: String
     let privacyLabel: String
+    let diamond: TodayActionClosureDiamondState
     let outcomes: [TodayActionClosureOutcomeState]
     let receiptPreviewTitle: String
     let confirmTitle: String
@@ -76,6 +138,7 @@ struct TodayActionClosureSheetState: Identifiable, Equatable {
             originalContext: context.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "From Today" : context,
             prompt: "What happened with this step?",
             privacyLabel: privacyLabel,
+            diamond: .todayDefault,
             outcomes: Self.defaultOutcomes,
             receiptPreviewTitle: "Receipt preview",
             confirmTitle: "Save closure",
@@ -101,6 +164,7 @@ struct TodayActionClosureSheetState: Identifiable, Equatable {
             confirmTitle,
             softPriorStepPrompt,
             recoveryReceiptLabel,
+            diamond.visibleCopy,
         ] + outcomes.flatMap {
             [$0.title, $0.meaning, $0.consequenceLabel, $0.recoveryPrompt, $0.receiptPreview]
         }).joined(separator: " ")

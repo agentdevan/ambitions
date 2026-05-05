@@ -196,6 +196,20 @@ Goal: Make Start Here, Now/Next/Later, closure, proof, and pressure one continuo
 Acceptance: no agenda clone; closure knots and proof markers are integrated.
 Evidence: `docs/audits/fcp07-reality-rail-continuity-report.md`.
 
+### FCP13A — Action Closure Diamond
+
+Type: Implementation.
+Owner: Today / Action Closure.
+Depends on: FCP05-FCP07; PD04; FCP06.
+Goal: Upgrade the existing Today closure sheet into a closure / decision
+Diamond that explains Outcome, Consequence, Proof, and Recovery before any
+confirmation.
+Acceptance: no hidden mutation; no proof-as-achievement; no feed posture;
+accessibility, Dynamic Type, and Reduce Motion equivalents are present.
+Status: Complete Green on 2026-05-05 as Today-owned Action Closure Diamond
+implementation.
+Evidence: `docs/audits/fcp13a-action-closure-diamond-report.md`.
+
 ### FCP08 — Ambition Meridian Shell
 
 Type: Implementation.
@@ -236,7 +250,7 @@ Depends on: FCP06, FCP10, FCP11, PD07.
 Goal: Create shared ProofSpine used by Today, Goals, Plan, and You as later integration allows.
 Acceptance: proof has source/freshness/privacy/correction/stale behavior.
 
-### FCP13 — Goal Alternate Path / Decision History Polish
+### FCP13B — Goal Alternate Path / Decision History Polish
 
 Type: Implementation.
 Owner: Goals.
