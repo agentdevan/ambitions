@@ -30,7 +30,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - ME01, ME02-ME10, and ME12 are complete as maintainability evidence; ME11 is conditional and not triggered.
 - CS01, CS02A/B, CS03A/B, CS04A/B, CS05A/B, CS06A/B, CS07, CS08, and CS10 are complete or accepted Yellow as recorded. CS02C-CS06C and CS09C remain blocked/deferred until a named owner batch and proof target exist.
 - SI01-SI18 are complete as Signature Interface evidence.
-- PD01-PD17 are complete or accepted Yellow as recorded; Product Depth remains active through PD17 Green.
+- PD01-PD18 are complete or accepted Yellow as recorded; Product Depth is complete through PD18 Green.
 - CQS01-CQS24 depend on PD17 Green and must run before PD18 unless a safer order is explicitly documented.
 - PD18 depends on SI18, predecessor PD batches, and CQS Green or accepted Yellow when CQS has been inserted.
 - FCP Registry/Context Reconciliation depends on committed FCP source truth files.

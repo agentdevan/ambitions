@@ -21,7 +21,7 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 ## Baseline
 
-- Product Depth is active through PD17 Green.
+- Product Depth is complete through PD18 Green.
 - FCP source truth exists and is queued.
 - PFC source truth exists and is queued.
 - AOS and LDI remain queued.
@@ -55,7 +55,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 11. CQS01-CQS24 Codex Quality System insertion. Completed Green as a Codex OS
     source-truth, reviewer-skill, advisory-script, repair-protocol, and global
     order integration layer before later implementation trains on 2026-05-05.
-12. PD18 Product Depth Handoff And Next-Lane Readiness.
+12. PD18 Product Depth Handoff And Next-Lane Readiness. Completed Green as
+    docs-only Product Depth closeout and next-lane readiness on 2026-05-05.
 
 ### Phase 2 — Build / Architecture / Schema Foundations Before More UI
 

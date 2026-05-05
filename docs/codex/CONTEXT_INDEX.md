@@ -15,7 +15,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   truth exists and PFC implementation has not started. Both are queued under the
   full-stack order and require batch-specific gates before any production app,
   platform, persistence, sync, legal/privacy, or release claim work.
-- Product Depth is active through PD17 Green. PD16 added You-owned planning
+- Product Depth is complete through PD18 Green. PD16 added You-owned planning
   setup/defaults depth for Schedule & Availability, Planning Defaults,
   Vacation / Away Time, and Automation & Trust without permission prompts,
   calendar/reminder behavior claims, route/raw-value changes,
@@ -23,7 +23,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   PD17 added You-owned cross-surface proof/review summary depth inside Receipts
   & History without dashboard/feed/tab posture, route/raw-value changes, hidden
   proof mutation, persistence/schema changes, sync/account claims, or AOS/LDI
-  runtime changes.
+  runtime changes. PD18 closed Product Depth as docs-only handoff evidence and
+  selected PFC01 as the next eligible global batch under the stricter
+  full-stack order.
 - CQS01-CQS24 is complete as the Codex Quality System operating layer inserted
   after PD17 and before PD18. Use
   `docs/canon/Ambitions_Codex_Quality_System.md`,
@@ -334,7 +336,8 @@ as bounded Plan pressure/recovery review implementation. PD14 is Green as
 bounded Plan Life Shape drill-down implementation. PD15 is Green as bounded
 You Trust History implementation. PD16 is Green as bounded You planning setup
 and defaults implementation. PD17 is Green as bounded You/Profile
-cross-surface proof and review summary implementation. Product Depth must deepen
+cross-surface proof and review summary implementation. PD18 is Green as
+docs-only Product Depth handoff and next-lane readiness evidence. Product Depth must deepen
 Today, Goals, Capture, Plan, and You; it must not add new top-level tabs,
 generic dashboards, stacked-card top-level screens, habit tracker modes,
 calendar clones, chatbot-first AI surfaces, inbox/notes modes, or enterprise

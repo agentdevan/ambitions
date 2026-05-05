@@ -1,7 +1,7 @@
 # PD01-PD18 Product Depth Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; PD03 accepted Yellow; PD04 accepted Yellow; PD05 Green; PD06 Green; PD07 accepted Yellow; PD08 accepted Yellow; PD09 accepted Yellow; PD10 accepted Yellow; PD11 accepted Yellow; PD12 accepted Yellow; PD13 accepted Yellow; PD14 Green; PD15 Green; PD16 Green; PD17 Green; Product Depth implementation started only within named Today, Goals, Capture, Plan, and You depth scopes.
+Status: Complete Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; PD03 accepted Yellow; PD04 accepted Yellow; PD05 Green; PD06 Green; PD07 accepted Yellow; PD08 accepted Yellow; PD09 accepted Yellow; PD10 accepted Yellow; PD11 accepted Yellow; PD12 accepted Yellow; PD13 accepted Yellow; PD14 Green; PD15 Green; PD16 Green; PD17 Green; PD18 Green; Product Depth implementation occurred only within named Today, Goals, Capture, Plan, and You depth scopes.
 Train type: queued implementation / product-depth / drill-down expansion
 Date: 2026-05-02
 
@@ -63,7 +63,7 @@ Product Depth must deepen existing surfaces and must not widen the app. No new t
 - PD15: You Trust History and Receipts Center. Type: Implementation. Owner: You. Boundary: Make You the place where the user can review what Ambitions did and why. Status: Green after focused Profile tests and local build; You/Profile now includes a Trust History Center for receipts, proof, changes, source review, privacy labels, and automation boundaries without feed posture, vanity analytics, route/raw-value changes, persistence/schema changes, sync/account claims, or AOS/LDI runtime changes.
 - PD16: Schedule, Availability, and Planning Defaults Depth. Type: Implementation. Owner: You. Boundary: Make setup/preferences clearly useful to planning and recommendations. Status: Green after focused Profile tests; You/Profile now includes typed planning setup depth for Schedule & Availability, Planning Defaults, Vacation / Away Time, and Automation & Trust without permission prompts, calendar/reminder behavior claims, route/raw-value changes, persistence/schema changes, AOS runtime, or LDI runtime.
 - PD17: Cross-Surface Proof and Review Integration. Type: Mixed implementation. Owner: Cross-surface. Boundary: Connect Today, Goals, Capture, Plan, and You through proof and review. Status: Green after focused Profile tests and local build; You/Profile now includes a typed cross-surface proof and review map inside Receipts & History without adding a dashboard, feed, tab, route/raw-value changes, hidden proof mutation, persistence/schema changes, AOS runtime, or LDI runtime.
-- PD18: Product Depth Handoff and Next-Lane Readiness. Type: Docs/handoff. Owner: Cross-surface. Boundary: Close the Product Depth train and determine what can safely run next.
+- PD18: Product Depth Handoff and Next-Lane Readiness. Type: Docs/handoff. Owner: Cross-surface. Boundary: Close the Product Depth train and determine what can safely run next. Status: Green as docs-only handoff; Product Depth is complete through PD18, remaining Yellows are preserved with owners, and the next eligible global batch is PFC01 under the stricter full-stack order.
 
 ## Validation Plan
 

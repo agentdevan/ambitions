@@ -16,7 +16,7 @@ As of this order update:
 
 - Ambitions 4.0 remains an active post-3.0 execution program, not a shipped product version.
 - Top-level surfaces remain `Today / Goals / Capture / Plan / You`.
-- Product Depth is active through PD17 Green.
+- Product Depth is complete through PD18 Green.
 - CQS is inserted after PD17 and before PD18 so remaining batches use the
   upgraded repair/reviewer/script gates.
 - FCP source-truth docs exist, but FCP implementation has not started until registry/context reconciliation and the required approval phrase.
@@ -60,7 +60,7 @@ Train-specific approval remains valid for a single train only:
 | 007 | PD16 Schedule Availability And Planning Defaults Depth | PD | Implementation | Completed Green as You/Profile planning-defaults depth before Start Here time-fit and Availability Center. | PD15 Green/accepted Yellow. | Complete. |
 | 008 | PD17 Cross-Surface Proof And Review Integration | PD | Implementation | Completed Green on 2026-05-05 as bounded proof/review bridge before FCP proof spine and final mesh. | PD16 Green/accepted Yellow. | Complete; next CQS insertion by user directive. |
 | 009 | CQS01-CQS24 Codex Quality System | CQS / Codex OS | Docs / Scripts / Skills | Completed Green on 2026-05-05 as mature repair cycle, reviewer skill, advisory quality scan, and hard-Red-only stopping layer before remaining implementation trains. | PD17 Green; no production Swift unless explicitly scoped by a later batch. | Complete; next PD18. |
-| 010 | PD18 Product Depth Handoff And Next-Lane Readiness | PD | Handoff | Closes PD with upgraded Codex OS quality layer available. | PD17 Green/accepted Yellow; CQS Green/accepted Yellow if inserted. | May continue to FCP if approval covers it. |
+| 010 | PD18 Product Depth Handoff And Next-Lane Readiness | PD | Handoff | Completed Green on 2026-05-05 as docs-only Product Depth closeout with upgraded Codex OS quality layer available. | PD17 Green/accepted Yellow; CQS Green/accepted Yellow if inserted. | Complete; full-stack order selects PFC01 next before FCP implementation. |
 | 011 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Build Availability Center before Start Here relies on time-fit proof. | PD16; FCP01-FCP04. | Single-batch. |
 | 012 | FCP06 Receipt Drawer / Trust Layer | FCP | Implementation | Shared trust drawer should exist before Start Here/Rail/Plan/Goal integrations mature. | FCP01-FCP04; PD15/PD17 preferred. | Single-batch. |
 | 013 | FCP05 Start Here Surface | FCP | Implementation | Start Here becomes flagship daily decision object after trust and availability foundations. | FCP01-FCP04; PD02-PD04; FCP06/FCP17 preferred. | Single-batch. |
