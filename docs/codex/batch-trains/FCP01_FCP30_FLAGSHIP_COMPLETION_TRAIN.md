@@ -39,9 +39,13 @@ Product-object implementation / signature interface upgrade / cross-surface matu
 
 ## Relationship To Existing Trains
 
-- Product Depth remains active at PD14 Green in current run-state evidence.
-- PD15-PD18 remain the recommended immediate continuation before FCP implementation because they cover You trust history, Schedule / Availability / Defaults, Cross-Surface Proof/Review, and handoff.
-- FCP may be inserted before PD15 only by explicit user instruction and must record the insertion decision in registry/context/run-state.
+- Product Depth remains active through PD15 Green in current run-state evidence.
+- PD16-PD18 remain queued Product Depth continuation before broad FCP
+  implementation unless the global full-stack order selects a stricter
+  prerequisite first.
+- FCP docs/planning foundation may proceed under the global full-stack approval.
+  FCP production Swift implementation still requires the selected batch to
+  authorize implementation and prove file boundaries.
 - FCP does not retire CS seams, alter route/raw values, add dependencies, change persistence/schema, or claim release readiness by itself.
 - FCP may compose SI, DAV, EB, PD, ME, and CS evidence only where source truth and owner files allow it.
 
@@ -116,6 +120,8 @@ Goal: Lock FCP source truth and make the 10/10 object standard discoverable.
 Allowed files: FCP docs, registry/context/run-state pointers.
 Required output: source-truth report.
 Stop if: any production Swift or app behavior changes.
+Status: Complete Green on 2026-05-05 as docs-only source-truth lock.
+Evidence: `docs/audits/fcp01-flagship-completion-source-truth-lock-report.md`.
 
 ### FCP02 — Object Vocabulary And Anatomy Lock
 

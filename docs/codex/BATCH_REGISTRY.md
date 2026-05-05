@@ -30,6 +30,19 @@ Current 4.0 status:
   highest-priority remaining-work order. It adds FCP flagship completion and
   PFC platform/framework/compliance completion while preserving completed
   batch history.
+- Complete / accepted Yellow: FCP/PFC global registry-context reconciliation
+  is complete as docs-only operating truth. It reconciled the full-stack order,
+  FCP/PFC source truth, registry, context index, and run-state docs after PD15
+  closed Green; it authorized no production Swift, route/raw-value,
+  persistence/schema, dependency/workflow/signing/CI, release/platform,
+  accessibility/privacy, AI runtime, LDI runtime, sync/cloud, StoreKit, or legal
+  claim.
+- Complete / accepted Yellow: FCP01 Flagship Completion Source Truth Lock is
+  complete as docs-only source-truth evidence. It locks the 10/10 object
+  standard as discoverable planning truth through the FCP plan, train manifest,
+  scorecard, gate matrix, file-boundary map, registry/context pointers, and the
+  FCP01 audit report. It does not start FCP production Swift implementation or
+  claim any object has reached 10/10 runtime quality.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as docs-only planning truth. FCP implementation has not started. FCP targets
   25 major product objects and app-wide 10/10 audit closure, but the docs alone

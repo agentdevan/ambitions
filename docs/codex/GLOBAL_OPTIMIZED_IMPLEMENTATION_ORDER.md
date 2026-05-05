@@ -51,7 +51,7 @@ Train-specific approval remains valid for a single train only:
 | Optimized | Batch / Prompt | Train | Type | Why this position | Required dependency/gate | Continuation |
 | ---: | --- | --- | --- | --- | --- | --- |
 | 001 | FCP Registry / Context Reconciliation | FCP / Governance | Docs | Makes FCP discoverable without corrupting large registry/run-state files. | FCP source-truth files exist. No production Swift. | May continue on Green. |
-| 002 | FCP01 Flagship Completion Source Truth Lock | FCP | Docs | Confirms source truth before remaining implementation. | Reconciliation Green or accepted Yellow. | May continue on Green. |
+| 002 | FCP01 Flagship Completion Source Truth Lock | FCP | Docs | Completed Green on 2026-05-05 as docs-only source-truth lock. | Reconciliation Green or accepted Yellow. | Complete; next FCP02. |
 | 003 | FCP02 Object Vocabulary And Anatomy Lock | FCP | Docs | Locks object language before any UI refactor. | FCP01. | May continue on Green. |
 | 004 | FCP03 Ownership / File Boundary / Dependency Map | FCP | Docs | Prevents broad refactors before cross-train work. | FCP02. | May continue on Green. |
 | 005 | FCP04 Preview Fixture And QA Matrix Expansion | FCP | Docs / Fixture planning | Defines object state proof before implementation. | FCP03. | May continue on Green. |

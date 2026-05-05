@@ -2,15 +2,13 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP/PFC registry-context reconciliation active
-Scope: PD15 deepened only the existing You/Profile Personal System Center
-trust/history seam. It added a You-owned Trust History Center that distinguishes
-receipts, proof, changes, source review, privacy labels, and automation
-boundaries from existing local receipts, proof, event ledger, permission, and
-safe automation policy state. It did not add a feed, vanity analytics
-dashboard, route/raw-value change, persistence/schema change, sync/auth/network,
-AI/LDI runtime, account/cloud behavior, CI/config, dependencies, release/platform
-claims, broad app implementation, or Candidate finalization.
+Current batch: FCP01 Flagship Completion Source Truth Lock active
+Scope: FCP01 is a docs/planning-only source-truth lock. It may update FCP docs,
+registry/context pointers, run-state docs, and an audit report. It may not edit
+production Swift, app behavior, route/raw values, persistence/schema,
+dependency/workflow/signing/CI, generated project files, release/platform
+claims, accessibility conformance claims, privacy/legal claims, sync/cloud,
+StoreKit, AI runtime, or LDI runtime.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -22,7 +20,9 @@ eligible full-stack batch.
 
 FCP source truth exists through `Ambitions_10_10_Flagship_Completion_Plan.md`,
 the FCP train manifest, object scorecard, gate matrix, and file-boundary map.
-FCP implementation has not started.
+FCP/PFC registry-context reconciliation is complete as docs-only operating
+truth. FCP01 is now locking the FCP 10/10 source-truth package as discoverable
+planning truth. FCP production Swift implementation has not started.
 
 PFC source truth exists through
 `Ambitions_Platform_Legal_And_Framework_Completion_Plan.md` and the PFC train

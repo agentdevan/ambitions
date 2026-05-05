@@ -130,11 +130,16 @@ Use this context when the full-stack order selects FCP or PFC work:
 - `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md`
 - `docs/codex/batches/FCP_NEXT_ELIGIBLE_BATCH_PROMPT.md`
 - `docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md`
+- `docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md`
+- `docs/audits/fcp01-flagship-completion-source-truth-lock-report.md`
 
-FCP and PFC source truth are active planning truth only. They do not claim FCP
-implementation, PFC implementation, App Store readiness, TestFlight readiness,
-legal/privacy compliance, physical-device proof, public accessibility proof,
-sync/cloud behavior, monetization, or release readiness.
+FCP/PFC reconciliation is complete as docs-only operating truth. FCP01 is
+complete as a source-truth lock only: it makes the 10/10 object standard,
+scorecard, gate matrix, and file-boundary map discoverable before later FCP
+batches. FCP and PFC source truth remain active planning truth only. They do not
+claim FCP implementation, PFC implementation, App Store readiness, TestFlight
+readiness, legal/privacy compliance, physical-device proof, public
+accessibility proof, sync/cloud behavior, monetization, or release readiness.
 
 ## Handoff Package
 
