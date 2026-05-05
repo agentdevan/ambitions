@@ -24,6 +24,12 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   & History without dashboard/feed/tab posture, route/raw-value changes, hidden
   proof mutation, persistence/schema changes, sync/account claims, or AOS/LDI
   runtime changes.
+- CQS01-CQS24 is complete as the Codex Quality System operating layer inserted
+  after PD17 and before PD18. Use
+  `docs/canon/Ambitions_Codex_Quality_System.md`,
+  `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md`,
+  `docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md`, and the CQS skill/
+  script maps for every remaining global batch.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.

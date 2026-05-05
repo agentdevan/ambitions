@@ -11,7 +11,7 @@ Date: 2026-05-05
 | --- | --- | --- | --- |
 | 0 Release evidence truth | Historical complete | Close REC02-REC06 evidence, human proof plan, claim guard, review packet, and closure handoff. | Release claims remain evidence-bound. |
 | 1 PXOS / ME / CS / SI foundations | Historical complete or deferred where noted | Preserve source truth, maintainability, compatibility, and signature interface foundations. | Future work has source truth, owner boundaries, compatibility proof, and UI primitives. |
-| 2 Product Depth closeout | PD15-PD18 | Finish You trust history, Schedule / Availability / Defaults, Cross-Surface Proof/Review, and PD handoff. | Remaining depth foundations exist before flagship refactors. |
+| 2 Product Depth closeout plus CQS insertion | PD15-PD17, CQS01-CQS24, PD18 | Finish You trust history, Schedule / Availability / Defaults, Cross-Surface Proof/Review, insert CQS quality gates, and then close PD handoff. | Remaining depth foundations and Codex quality gates exist before flagship refactors. |
 | 3 FCP source-truth and fixture foundations | FCP reconciliation, FCP01-FCP04 | Make 10/10 object standard, boundaries, and QA matrix executable. | FCP implementation can run without rethinking product direction. |
 | 4 FCP flagship object refactor | FCP17/FCP06/FCP05/FCP07/FCP13A/FCP08/FCP09 etc. | Build shared availability, receipt, Start Here, Reality Rail, closure, shell, and motion foundations first. | Core product object language becomes real. |
 | 5 FCP surface maturity | Remaining FCP implementation | Mature You, Capture, Plan, Goals, object states, and status grammar around the shared object language. | All 25 objects are at 10/10 target or have accepted Yellow owner. |
@@ -30,13 +30,13 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - ME01, ME02-ME10, and ME12 are complete as maintainability evidence; ME11 is conditional and not triggered.
 - CS01, CS02A/B, CS03A/B, CS04A/B, CS05A/B, CS06A/B, CS07, CS08, and CS10 are complete or accepted Yellow as recorded. CS02C-CS06C and CS09C remain blocked/deferred until a named owner batch and proof target exist.
 - SI01-SI18 are complete as Signature Interface evidence.
-- PD01-PD14 are complete or accepted Yellow as recorded; Product Depth remains active through PD14 Green.
-- PD15-PD16 depend on SI03/SI10/SI11/SI13/SI14 where relevant and predecessor PD batches.
-- PD17 depends on SI03/SI10/SI12/SI17 and predecessor PD batches.
-- PD18 depends on SI18 and predecessor PD batches.
+- PD01-PD17 are complete or accepted Yellow as recorded; Product Depth remains active through PD17 Green.
+- CQS01-CQS24 depend on PD17 Green and must run before PD18 unless a safer order is explicitly documented.
+- PD18 depends on SI18, predecessor PD batches, and CQS Green or accepted Yellow when CQS has been inserted.
 - FCP Registry/Context Reconciliation depends on committed FCP source truth files.
 - FCP01-FCP04 depend on reconciliation and must remain docs/planning or fixture-planning scoped unless their prompts explicitly permit otherwise.
 - FCP implementation batches depend on FCP01-FCP04 and the object-specific PD/SI/DAV/EB/ME/CS evidence named in `FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md` and `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`.
+- All post-CQS implementation batches depend on CQS reviewer/repair/report gates as an operating layer.
 - FCP17 is optimized before Start Here implementation because Schedule / Availability / Defaults is a hard context dependency for time-fit proof.
 - FCP06 is optimized before Start Here implementation because Receipt Drawer / Source Fold is a hard trust dependency for Start Here, Reality Rail, Capture, Plan, Goals, and You.
 - FCP05 must precede FCP07 because Start Here is the active node in Reality Rail.
@@ -95,6 +95,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 | LDI Living Dream Gate | Dream handling, source packs, recompiler, continuity, or safety triage | LDI source truth, handling lane, safety/privacy/source/professional-boundary, no-silent-mutation, and release-claim evidence are missing. |
 | Product Depth Gate | PD01-PD18 or drill-down/detail work beyond current canon | PXOS, ME, CS, SI, AOS-runtime-if-needed, or approval prerequisites are unresolved. |
 | Signature Interface Gate | SI01-SI18 or Ambitions-native interface primitives | SI Codex OS gates, PXOS source truth, ME/CS prerequisites, visual QA, accessibility, or file-size evidence is unresolved. |
+| CQS Quality Gate | Every post-CQS batch | Required reviewer, repair, validation, report, anti-slop, and hard-Red classification evidence is missing. |
 
 ## Gates That Must Recur
 

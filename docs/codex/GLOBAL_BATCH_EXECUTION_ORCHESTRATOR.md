@@ -22,6 +22,9 @@ Use this order for remaining work:
 3. `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md` — historical global order, completed-batch evidence, and stable batch identity map.
 4. Train manifests under `docs/codex/batch-trains/` — batch-local dependencies, boundaries, and gates.
 5. Batch prompts under `docs/codex/batches/` — exact selected-batch instructions.
+6. `docs/canon/Ambitions_Codex_Quality_System.md` and
+   `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md` — recurring quality,
+   repair, and review gates for every later batch.
 
 When the full-stack order, optimized order, historical order, or train manifest conflict for remaining queued work, use the stricter dependency, stricter gate, or safer order. Stop and write a reconciliation report if the conflict affects safety.
 
@@ -60,9 +63,15 @@ When a current user prompt says the exact phrase `Run Global Batch Sequence Unti
 11. Invoke required skills/review boards and record gate outputs.
 12. Implement only the batch scope.
 13. Run required validation and classify validation strength as Strong, Adequate, Weak, or Missing.
-14. If Green, update evidence, registry/context/run-state as required, stage, commit, and continue only if continuation rules allow.
-15. If Yellow, classify, fix now if it affects safety, or defer with an owner and continue only if safe.
-16. If Red, stop forward progress and enter the Red repair loop.
+14. Classify the batch through CQS as Green, Accepted Yellow, Recoverable Red,
+    or Hard Red.
+15. If Green, update evidence, registry/context/run-state as required, stage,
+    commit, and continue only if continuation rules allow.
+16. If Accepted Yellow, document owner, why safe, repair path, and explicit
+    no-claim boundary, then continue only if safe.
+17. If Recoverable Red, repair in scope, rerun validation, or split a narrow
+    repair batch when safer.
+18. If Hard Red, stop forward progress and write a stop report.
 17. Commit only after Green or accepted Yellow.
 18. Continue to the next full-stack batch only when the continuation protocol allows.
 
@@ -117,6 +126,23 @@ Run gates in this order unless the batch prompt adds stricter sequencing:
 11. Rollback Gate.
 12. Continuation Gate.
 
+## CQS Repair Cycle
+
+Every batch now uses the Codex Quality System repair cycle:
+
+1. Execute.
+2. Validate.
+3. Classify as Green, Accepted Yellow, Recoverable Red, or Hard Red.
+4. Repair Recoverable Red in scope.
+5. Split a narrow repair batch only when it reduces risk.
+6. Commit only Green or Accepted Yellow.
+7. Stop only on Hard Red.
+
+Hard Red means continuing could break the app, corrupt data/schema, severely
+drift canon, hide security/privacy risk, require unsupported legal/privacy/
+release claims, require human legal/device/App Store/signing/credential proof,
+or require weakening gates, deleting tests, or lying in docs.
+
 ## Skills And Review Boards
 
 Always invoke or map an equivalent protocol for:
@@ -128,6 +154,7 @@ Always invoke or map an equivalent protocol for:
 - Product decision lock review.
 - Scope boundary review.
 - Full-stack order / dependency review.
+- CQS reviewer selection and anti-agentic-slop review.
 
 Use additional reviewers by batch type:
 
@@ -140,6 +167,10 @@ Use additional reviewers by batch type:
 - AOS/intelligence: runtime contract, privacy/trust, recommendation/source-truth, fallback/degraded-state.
 - LDI/living dream: safety/legality/feasibility, source claim graph, pack integrity, mutation permissions, professional boundary, privacy/local-first, red-team evaluation.
 - REC/release: release evidence, claim boundary, human proof.
+- CQS/Codex OS: staff iOS architecture, SwiftUI composition, visual quality,
+  anti-agentic-slop, canon drift, accessibility/reduced-motion, privacy/legal/
+  App Store, performance/battery, platform surface, StoreKit, schema/sync/
+  migration, and FAANG handoff reviewers as applicable.
 
 If a required skill does not exist, map to an existing equivalent skill, define the review behavior in the batch report, or document the gap as Yellow only if safe.
 

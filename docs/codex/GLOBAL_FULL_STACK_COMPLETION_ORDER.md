@@ -52,9 +52,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
    bounded You/Profile planning-defaults depth on 2026-05-05.
 10. PD17 Cross-Surface Proof And Review Integration. Completed Green as
     bounded You/Profile cross-surface proof/review integration on 2026-05-05.
-11. CQS01-CQS24 Codex Quality System insertion. Operating-system layer for
-    mature repair cycles, reviewer skills, advisory quality scans, and
-    hard-Red-only stopping before later implementation trains.
+11. CQS01-CQS24 Codex Quality System insertion. Completed Green as a Codex OS
+    source-truth, reviewer-skill, advisory-script, repair-protocol, and global
+    order integration layer before later implementation trains on 2026-05-05.
 12. PD18 Product Depth Handoff And Next-Lane Readiness.
 
 ### Phase 2 — Build / Architecture / Schema Foundations Before More UI

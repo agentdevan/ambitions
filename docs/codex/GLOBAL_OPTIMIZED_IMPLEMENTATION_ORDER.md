@@ -17,7 +17,8 @@ As of this order update:
 - Ambitions 4.0 remains an active post-3.0 execution program, not a shipped product version.
 - Top-level surfaces remain `Today / Goals / Capture / Plan / You`.
 - Product Depth is active through PD17 Green.
-- PD18 remains queued, with CQS insertion preferred before PD18.
+- CQS is inserted after PD17 and before PD18 so remaining batches use the
+  upgraded repair/reviewer/script gates.
 - FCP source-truth docs exist, but FCP implementation has not started until registry/context reconciliation and the required approval phrase.
 - AOS01-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
@@ -58,7 +59,7 @@ Train-specific approval remains valid for a single train only:
 | 006 | PD15 You Trust History And Receipts Center | PD | Implementation | Completed Green as You trust/receipt depth before Personal System Center and Receipt Drawer integration. | PD14 Green; PD train gates. | Completed. |
 | 007 | PD16 Schedule Availability And Planning Defaults Depth | PD | Implementation | Completed Green as You/Profile planning-defaults depth before Start Here time-fit and Availability Center. | PD15 Green/accepted Yellow. | Complete. |
 | 008 | PD17 Cross-Surface Proof And Review Integration | PD | Implementation | Completed Green on 2026-05-05 as bounded proof/review bridge before FCP proof spine and final mesh. | PD16 Green/accepted Yellow. | Complete; next CQS insertion by user directive. |
-| 009 | CQS01-CQS24 Codex Quality System | CQS / Codex OS | Docs / Scripts / Skills | Inserts mature repair cycles, reviewer skills, advisory quality scans, and hard-Red-only stopping before remaining implementation trains. | PD17 Green; no production Swift unless explicitly scoped by a later batch. | May continue to PD18 on Green/accepted Yellow. |
+| 009 | CQS01-CQS24 Codex Quality System | CQS / Codex OS | Docs / Scripts / Skills | Completed Green on 2026-05-05 as mature repair cycle, reviewer skill, advisory quality scan, and hard-Red-only stopping layer before remaining implementation trains. | PD17 Green; no production Swift unless explicitly scoped by a later batch. | Complete; next PD18. |
 | 010 | PD18 Product Depth Handoff And Next-Lane Readiness | PD | Handoff | Closes PD with upgraded Codex OS quality layer available. | PD17 Green/accepted Yellow; CQS Green/accepted Yellow if inserted. | May continue to FCP if approval covers it. |
 | 011 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Build Availability Center before Start Here relies on time-fit proof. | PD16; FCP01-FCP04. | Single-batch. |
 | 012 | FCP06 Receipt Drawer / Trust Layer | FCP | Implementation | Shared trust drawer should exist before Start Here/Rail/Plan/Goal integrations mature. | FCP01-FCP04; PD15/PD17 preferred. | Single-batch. |
