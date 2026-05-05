@@ -314,6 +314,50 @@ Example:
 
 Option Value must not make unsafe career/legal/financial claims. It must expose source, uncertainty, and requirements.
 
+#### FL05 Option Value / Pivot Preservation Contract
+
+Option Value preserves proof when a user changes direction. It prevents
+Ambitions from treating prior work as wasted, while also preventing the app from
+claiming that a pivot is guaranteed, credentialed, legal, financially sound, or
+professionally sufficient.
+
+Option Value records need:
+
+| Field | Meaning | Rule |
+| --- | --- | --- |
+| `sourcePath` | The original goal, dream, project, skill, proof, or life thread. | Must show source and freshness. |
+| `targetPath` | The possible adjacent path or new direction. | Must expose uncertainty and requirements. |
+| `overlapType` | Skill, proof, credential, experience, relationship, portfolio, habit-of-work, context, or constraint overlap. | Must not overstate eligibility. |
+| `proofTransferState` | Directly reusable, partially reusable, inspiration only, needs evidence, conflicted, stale, or not transferable. | Proof transfer is evidence, not achievement. |
+| `requirementState` | Known requirement, unknown requirement, source needed, human/professional review needed, or not applicable. | Career/education/regulated-path claims need source and review. |
+| `riskBoundary` | Low risk, requires review, professional boundary, legal/financial/medical boundary, or blocked. | Boundaries must be visible before recommendation. |
+| `nextReviewAction` | Research requirement, compare proof, ask user, park path, convert to goal, create one-off step, or drop. | No automatic path mutation. |
+
+Option Value answer rules:
+
+- Show what still counts.
+- Show what does not yet count.
+- Show what requirement/source is missing.
+- Preserve proof across pivots only when overlap is real and source-backed.
+- Keep career, education, money, health-adjacent, legal, and professional paths
+  as review-bound unless a later legally reviewed implementation proves more.
+- Do not claim eligibility, admission likelihood, job likelihood, income
+  outcome, financial outcome, credential equivalence, legal compliance, or
+  medical/health outcome.
+
+Pivot preservation must support:
+
+- dreams that become adjacent careers
+- abandoned projects that become portfolio proof
+- hobbies that become skills
+- relationship/family commitments that become values or constraints
+- work problems that reveal repeating strengths or risks
+- proof that transfers into a new Goal only after explicit user confirmation
+
+Option Value must never become a career website, school-admission advisor,
+financial planner, professional coach with guaranteed outcomes, or generic AI
+life-optimizer.
+
 ### 3.5 Weekly Life Sweep
 
 A ritual surface that helps the user become found again.

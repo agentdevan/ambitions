@@ -120,11 +120,17 @@ Current 4.0 status:
   private-hidden and not-found posture, and forbids unsupported inference as
   fact, sensitive external exposure, silent mutation, AI confidence, AI
   verification, durable-memory implementation, or release/legal claims.
-- Queued source truth: FL05-FL06 Found Life Layer docs/domain-contract batches
-  are queued before further FCP implementation. They authorize no production
+- Complete / Green: FL05 Option Value / Pivot Preservation Model is complete as
+  docs-only Found Life intelligence-contract evidence. It defines proof-transfer
+  states, requirement states, risk boundaries, adjacent-path uncertainty, and
+  missing-source review rules without career/education/legal/financial/
+  medical/professional certainty, hidden path mutation, AOS runtime, LDI
+  runtime, or release/legal claim.
+- Queued source truth: FL06 Found Life Layer docs/product-ritual batch
+  is queued before further FCP implementation. It authorizes no production
   Swift, route/raw-value, persistence/schema, sync/cloud, AI/AOS/LDI runtime,
   legal/privacy, release, workflow/signing/CI, or public accessibility claim by
-  themselves.
+  itself.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as active implementation truth. FCP implementation has started with FCP17.
   FCP targets

@@ -2,14 +2,13 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FL04 Searchable Life Recall Contract Green; full-stack order
-selects FL05 Option Value / Pivot Preservation Model next if continuation gates
-allow.
-Scope: FL04 completed as docs-only Found Life trust-contract source truth. It
-defines recall answer states, source/freshness/privacy/review requirements,
-private-hidden/not-found posture, and correction/deletion paths without
-implementing runtime memory, search, sync, persistence/schema, or a new surface.
-FL04 changed no production Swift, route/raw value, persistence/schema,
+Current batch: FL05 Option Value / Pivot Preservation Model Green; full-stack
+order selects FL06 Weekly Life Sweep Ritual next if continuation gates allow.
+Scope: FL05 completed as docs-only Found Life intelligence-contract source
+truth. It defines proof-transfer states, requirement states, risk boundaries,
+adjacent-path uncertainty, and missing-source review rules without implementing
+AOS runtime, LDI runtime, path mutation, persistence/schema, or a new surface.
+FL05 changed no production Swift, route/raw value, persistence/schema,
 permission-request, calendar-write, sync/account, release, legal/privacy, CI,
 workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
 accessibility claim file.
@@ -33,7 +32,8 @@ first bounded FCP production Swift implementation in the global order.
 FL01 is complete / Green as Found Life product-soul lock. FL02 is complete /
 Green as Life Inventory object model source truth. FL03 is complete / Green as
 Commitment Memory / Open Loop Registry source truth. FL04 is complete / Green
-as Searchable Life Recall source truth. Accepted Yellow:
+as Searchable Life Recall source truth. FL05 is complete / Green as Option
+Value / Pivot Preservation source truth. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and inserts FL02-FL06 before any further FCP,
 AOS, LDI, or PFC work that touches life visibility, recall, commitment memory,

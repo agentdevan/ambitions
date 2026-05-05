@@ -1,7 +1,7 @@
 # FL01-FL06 Found Life Layer Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; FL01-FL04 complete Green, FL05 queued.
+Status: Active-scope planning truth; FL01-FL05 complete Green, FL06 queued.
 Date: 2026-05-05
 Train code: FL
 
@@ -148,6 +148,8 @@ Evidence:
 
 ### FL05 — Option Value / Pivot Preservation Model
 
+Status: Complete / Green on 2026-05-05.
+
 Type: Docs/domain/intelligence contract.
 Owner: Goals / AOS / LDI.
 Depends on: FL02-FL04.
@@ -159,6 +161,11 @@ Acceptance:
 - Adjacent paths expose requirements and uncertainty.
 - Career/education recommendations are source-grounded and non-claimy.
 - No legal/financial/medical/professional claim outruns source truth.
+
+Evidence:
+
+- `docs/codex/batches/FL05_Option_Value_Pivot_Preservation_Model_Prompt.md`
+- `docs/audits/fl05-option-value-pivot-preservation-model-report.md`
 
 ### FL06 — Weekly Life Sweep Ritual
 
