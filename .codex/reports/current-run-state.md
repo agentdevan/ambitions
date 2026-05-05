@@ -2,18 +2,19 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC21 StoreKit / Monetization Strategy complete Accepted Yellow;
-full-stack order selects PFC24 Privacy Data Map And App Privacy Labels next.
-Scope: PFC21 created the docs/business/platform monetization strategy at
-`docs/canon/Ambitions_StoreKit_Monetization_Strategy.md`, set safe launch
-default to no StoreKit, subscription, IAP, paywall, ads, or external purchase
-link, and left exact future free-tier limits, product ids, pricing, entitlement,
-App Store Connect, paywall, and legal/business decisions owner-gated. PFC21
-changed only docs and train-state files. It did not change production Swift,
-route/raw value, persistence/schema, StoreKit runtime, product configuration,
-purchase flow, paywall UI, entitlement behavior, sync/account, release,
-legal/privacy, CI, workflow/signing, AI runtime, AOS runtime, LDI runtime, or
-public accessibility claim files.
+Current batch: PFC24 Privacy Data Map And App Privacy Labels complete Green;
+full-stack order selects PFC25 Privacy Manifest / Required-Reason API Audit
+next.
+Scope: PFC24 created the docs/legal/privacy data map at
+`docs/canon/Ambitions_Privacy_Data_Map_And_App_Privacy_Labels.md`, mapped
+current local-first repo behavior to draft App Privacy labels of Data Not
+Collected and No Tracking, and left final App Store Connect entry, live privacy
+policy URL, signed-binary reconciliation, required-reason API audit, and human
+legal/privacy approval gated. PFC24 changed only docs and train-state files. It
+did not change production Swift, route/raw value, persistence/schema,
+privacy-manifest, entitlement, dependency, analytics, tracking, network,
+StoreKit, sync/account, release, legal/privacy, CI, workflow/signing, AI
+runtime, AOS runtime, LDI runtime, or public accessibility claim files.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -53,7 +54,8 @@ PFC15 is complete / Green as Live Activities / ActivityKit strategy evidence.
 PFC17 is complete / Green as App Intents / Shortcuts / Spotlight strategy
 evidence. PFC19 is complete / Green as Notifications / Focus / Calendar /
 Reminders integration strategy evidence. PFC21 is complete / Accepted Yellow as
-StoreKit / monetization strategy evidence. PFC24 is the next eligible global
+StoreKit / monetization strategy evidence. PFC24 is complete / Green as Privacy
+Data Map And App Privacy Labels evidence. PFC25 is the next eligible global
 batch. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

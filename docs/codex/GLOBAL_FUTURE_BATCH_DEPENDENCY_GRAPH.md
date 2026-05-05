@@ -191,6 +191,16 @@ IAP, paywall, ads, or external purchase link; future exact pricing, product ids,
 tiers, App Store Connect setup, legal review, and business decisions remain
 owner-gated before PFC22/PFC23.
 
+PFC24 is complete Green as of 2026-05-05. Future App Store privacy labels,
+privacy policy, data collection, tracking, analytics, StoreKit, account, cloud,
+sync, external-service, permission, notification, widget, Live Activity, App
+Intent, Share Extension, or App Group privacy claims must use
+`docs/canon/Ambitions_Privacy_Data_Map_And_App_Privacy_Labels.md` as the data
+map boundary. The current draft posture is Data Not Collected and No Tracking
+based on local-first repo evidence only; final App Store Connect entry, live
+privacy policy URL, signed-binary reconciliation, and human legal/privacy review
+remain gated.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

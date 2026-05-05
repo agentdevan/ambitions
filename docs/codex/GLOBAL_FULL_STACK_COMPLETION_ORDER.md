@@ -196,7 +196,11 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     2026-05-05 as docs/business/platform strategy. Safe launch default is no
     StoreKit, subscription, IAP, paywall, ads, or external purchase link; exact
     future tier/pricing/product/legal decisions remain owner-gated.
-38. PFC24 Privacy Data Map And App Privacy Labels.
+38. PFC24 Privacy Data Map And App Privacy Labels. Completed Green on
+    2026-05-05 as docs/legal/privacy source truth. It maps current local-first
+    data behavior to draft App Privacy labels of Data Not Collected and No
+    Tracking, while keeping final App Store Connect entry, live privacy policy,
+    signed-binary reconciliation, and human legal/privacy approval gated.
 39. PFC25 Privacy Manifest / Required-Reason API Audit.
 40. PFC26 Terms / Privacy Policy / Legal Review Packet.
 41. PFC27 Safety / Professional Boundary / Crisis Policy.
