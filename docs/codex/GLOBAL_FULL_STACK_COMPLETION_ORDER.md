@@ -143,7 +143,10 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 ### Phase 4 — External Surface Strategy Before Implementation
 
-33. PFC13 WidgetKit Strategy And Object Map.
+33. PFC13 WidgetKit Strategy And Object Map. Completed Green as docs/product/
+    platform WidgetKit object map and privacy matrix on 2026-05-05 after the
+    local run had already started PFC13. The exception above now requires
+    FVQ01 to run immediately before PFC15.
 34. PFC15 Live Activities / ActivityKit Strategy.
 35. PFC17 App Intents / Shortcuts / Spotlight Strategy.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.

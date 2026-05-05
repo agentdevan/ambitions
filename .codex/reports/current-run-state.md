@@ -2,18 +2,19 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP09 Motion / Haptics / Reduced Motion Proof Green;
-full-stack order selects PFC13 WidgetKit Strategy And Object Map next if
-continuation gates allow.
-Scope: FCP09 completed as shared design-system object-motion policy evidence.
-It adds object-specific motion/haptic policies for Start Here, Reality Rail,
-Receipt Drawer, Source Fold, MissionControlTimeSpine, Action Closure Diamond,
-LifeShape Map, and Capture Atmosphere Composer, with non-motion cues, Reduce
-Motion equivalents, optional user-initiated haptic boundaries, preview
-evidence, and focused tests. FCP09 changed no route/raw value,
-persistence/schema, permission-request, calendar-write, sync/account, release,
-legal/privacy, CI, workflow/signing, entitlement, AI runtime, AOS runtime, LDI
-runtime, or public accessibility claim file.
+Current batch: PFC13 WidgetKit Strategy And Object Map Green; full-stack order
+selects FVQ01 Rendered Visual Freshness And Flagship Gate next because FVQ01
+was inserted remotely while local PFC13 was already active.
+Scope: PFC13 completed as docs/product/platform WidgetKit strategy evidence.
+It adds the WidgetKit object map and privacy matrix for allowed and deferred
+Ambitions widget objects, widget family guidance, accessibility / Reduced
+Motion requirements, performance/battery requirements, and PFC14 implementation
+boundaries. FVQ01 was inserted remotely while local PFC13 was already active,
+so FVQ01 is the next eligible batch before PFC15 continues external strategy.
+PFC13 changed no production Swift, widget extension source,
+route/raw value, persistence/schema, permission-request, calendar-write,
+sync/account, release, legal/privacy, CI, workflow/signing, entitlement, AI
+runtime, AOS runtime, LDI runtime, or public accessibility claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -41,7 +42,9 @@ implementation evidence. FCP07 is complete / Green as Reality Rail Continuity
 implementation evidence. FCP13A is complete / Green as Action Closure Diamond
 implementation evidence. FCP08 is complete / Green as Ambition Meridian Shell
 implementation evidence. FCP09 is complete / Green as Motion / Haptics /
-Reduced Motion Proof implementation evidence. Accepted Yellow:
+Reduced Motion Proof implementation evidence. PFC13 is complete / Green as
+WidgetKit Strategy And Object Map evidence. FVQ01 was inserted remotely while
+local PFC13 was already active, so FVQ01 is next before PFC15. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,

@@ -130,6 +130,12 @@ surface-specific accessibility, Reduce Motion, haptic, performance, and
 claim-boundary behavior inside their own scopes. FCP09 does not provide
 physical-device haptic proof or public accessibility conformance.
 
+PFC13 is complete Green as of 2026-05-05. Later WidgetKit implementation or
+repair must use `docs/canon/Ambitions_WidgetKit_Strategy_And_Object_Map.md`
+for the allowed widget objects, privacy matrix, family constraints, and PFC14
+boundary. PFC13 does not provide rendered widget gallery, device, App Store,
+TestFlight, legal/privacy, or public accessibility proof.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

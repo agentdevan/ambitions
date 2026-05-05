@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 queued next under full-stack order before PFC15 because FVQ01 was inserted while PFC13 was active. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -194,6 +194,9 @@ Type: Docs/product/platform.
 Owner: Widgets.
 Goal: Define which Ambitions objects are allowed as widgets and what they may expose.
 Required result: widget object map and privacy matrix.
+Status: Green as docs/product/platform strategy. Evidence:
+`docs/canon/Ambitions_WidgetKit_Strategy_And_Object_Map.md` and
+`docs/audits/pfc13-widgetkit-strategy-object-map-report.md`.
 
 ### PFC14 — WidgetKit Implementation And Tests
 
