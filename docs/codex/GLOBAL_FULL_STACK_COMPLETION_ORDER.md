@@ -41,7 +41,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
    matrix expansion on 2026-05-05.
 4. PFC01 Repo And Build System Inventory. Completed Green as docs-only
    repo/build inventory and repair map on 2026-05-05.
-5. PFC02 Architecture Boundary And Module Map.
+5. PFC02 Architecture Boundary And Module Map. Completed Green as docs-only
+   architecture boundary map and extraction queue on 2026-05-05.
 6. PFC03 Dead Code / Prompt Artifact / Naming Smell Audit.
 7. PFC04 Dependency And Supply Chain Policy Enforcement.
 

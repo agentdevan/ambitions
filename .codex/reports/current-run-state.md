@@ -2,11 +2,11 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC01 Repo And Build System Inventory Green; PFC02 Architecture
-Boundary And Module Map next if continuation gates allow.
-Scope: PFC01 completed as docs-only repo/build inventory after PD18. It did not
-edit production Swift, project generation, workflows, dependencies, signing, or
-generated output.
+Current batch: PFC02 Architecture Boundary And Module Map Green; PFC03 Dead
+Code / Prompt Artifact / Naming Smell Audit next if continuation gates allow.
+Scope: PFC02 completed as docs-only architecture boundary map after PFC01. It
+did not edit production Swift, shared packages, tests, project generation,
+workflows, dependencies, signing, or generated output.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -53,7 +53,9 @@ batch under the stricter highest-priority full-stack order.
 PFC source truth exists through
 `Ambitions_Platform_Legal_And_Framework_Completion_Plan.md` and the PFC train
 manifest. PFC01 is complete / Green as docs-only repo/build inventory and
-repair-map evidence. Later PFC implementation has not started.
+repair-map evidence. PFC02 is complete / Green as docs-only architecture
+boundary map and extraction-queue evidence. Later PFC implementation has not
+started.
 
 No production Swift, route/raw value, persistence/schema, sync/cloud,
 monetization, privacy/legal, release, App Store, TestFlight, physical-device,

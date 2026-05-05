@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -73,6 +73,9 @@ Type: Docs/audit.
 Owner: Architecture.
 Goal: Map feature/domain/service/shared/test/preview boundaries and identify Codex-smell files.
 Required result: architecture boundary map and extraction queue.
+Status: Green as docs-only architecture boundary map. Existing large-file and
+domain SwiftUI import advisories are Yellow-owned by future architecture,
+maintainability, and owner-specific batches.
 
 ### PFC03 — Dead Code / Prompt Artifact / Naming Smell Audit
 
