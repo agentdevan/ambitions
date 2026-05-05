@@ -119,6 +119,11 @@ Closure Diamond evidence, but still must preserve five-tab navigation and
 avoid route/raw-value, persistence/schema, sync/account, AI runtime, release,
 legal/privacy, or public accessibility claims.
 
+FCP08 is complete Green as of 2026-05-05. FCP09 Motion / Haptics / Reduced
+Motion Proof may use the default Meridian shell evidence, but must keep motion
+meaning optional, provide static equivalents, avoid haptic-only meaning, and
+claim no public accessibility proof.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

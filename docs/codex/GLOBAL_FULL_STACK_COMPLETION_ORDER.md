@@ -119,7 +119,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 29. FCP13A Action Closure Diamond. Completed Green as Today-owned closure /
     decision object with Outcome, Consequence, Proof, Recovery, accessibility,
     Dynamic Type, and Reduce Motion equivalents on 2026-05-05.
-30. FCP08 Ambition Meridian Shell.
+30. FCP08 Ambition Meridian Shell. Completed Green as default Meridian shell
+    presentation with native rollback, five destinations, receipt overlay zone
+    contract, and focused shell proof on 2026-05-05.
 31. FCP09 Motion / Haptics / Reduced Motion Proof.
 
 ### Phase 4 — External Surface Strategy Before Implementation

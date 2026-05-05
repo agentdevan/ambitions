@@ -2,16 +2,16 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP13A Action Closure Diamond Green; full-stack order selects
-FCP08 Ambition Meridian Shell next if continuation gates allow.
-Scope: FCP13A completed as Today-owned Action Closure Diamond implementation
-evidence. It adds a typed closure / decision Diamond with Outcome, Consequence,
-Proof, and Recovery facets plus accessibility text, Dynamic Type list
-equivalent, Reduce Motion static equivalent, and no-silent-change posture.
-FCP13A changed no route/raw value, persistence/schema, permission-request,
-calendar-write, sync/account, release, legal/privacy, CI, workflow/signing,
-entitlement, AI runtime, AOS runtime, LDI runtime, or public accessibility
-claim file.
+Current batch: FCP08 Ambition Meridian Shell Green; full-stack order selects
+FCP09 Motion / Haptics / Reduced Motion Proof next if continuation gates allow.
+Scope: FCP08 completed as default Ambition Meridian Shell implementation
+evidence. It promotes the existing Meridian shell to the default presentation,
+preserves native rollback, and adds a typed shell-chrome contract for five
+destinations, receipt overlay zone, global action, safe-area posture, and
+rollback truth. FCP08 changed no route/raw value, persistence/schema,
+permission-request, calendar-write, sync/account, release, legal/privacy, CI,
+workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
+accessibility claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -37,6 +37,7 @@ Value / Pivot Preservation source truth. FL06 is complete / Green as Weekly
 Life Sweep ritual source truth. FCP05 is complete / Green as Start Here Surface
 implementation evidence. FCP07 is complete / Green as Reality Rail Continuity
 implementation evidence. FCP13A is complete / Green as Action Closure Diamond
+implementation evidence. FCP08 is complete / Green as Ambition Meridian Shell
 implementation evidence. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
@@ -86,8 +87,8 @@ app-group/shared-storage boundary evidence. Later PFC implementation beyond
 existing test execution has not started.
 
 No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality
-Rail Continuity, and FCP13A Action Closure Diamond changes is authorized by
-these docs alone. No route/raw value,
+Rail Continuity, FCP13A Action Closure Diamond, and FCP08 Ambition Meridian
+Shell changes is authorized by these docs alone. No route/raw value,
 persistence/schema, sync/cloud, monetization, privacy/legal, release, App
 Store, TestFlight, physical-device, public accessibility, workflow, signing,
 entitlement, CI, AI runtime, or LDI runtime claim is authorized by these docs

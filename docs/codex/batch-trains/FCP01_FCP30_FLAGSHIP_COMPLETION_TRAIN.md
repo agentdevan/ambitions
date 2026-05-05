@@ -217,6 +217,9 @@ Owner: Shell / navigation.
 Depends on: FCP04; SI03; SI17.
 Goal: Create familiar native shell with proprietary meridian chrome and receipt overlay zone.
 Acceptance: no hidden nav; five tabs preserved; compact contextual header is accessible.
+Status: Complete Green on 2026-05-05 as default Meridian shell presentation
+with native rollback and focused shell proof.
+Evidence: `docs/audits/fcp08-ambition-meridian-shell-report.md`.
 
 ### FCP09 — Motion / Haptics / Reduced Motion Proof
 

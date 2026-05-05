@@ -6,12 +6,25 @@ struct AppMeridianDestinationRail: View {
     let theme: AmbitionTheme
     let selectedTab: AppTab
     let onSelect: (AppTab) -> Void
+    private let chromeState = AppMeridianShellChromeState.launchDefault
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: theme.spacing.xxs) {
-                ForEach(AppMeridianDestination.all) { destination in
-                    destinationButton(destination)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.xs) {
+                    Text(chromeState.title)
+                        .font(theme.typography.micro.weight(.semibold))
+                        .foregroundStyle(theme.colors.textSecondary)
+                    Text(selectedTab.title)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+                .padding(.horizontal, theme.spacing.sm)
+
+                HStack(spacing: theme.spacing.xxs) {
+                    ForEach(chromeState.destinations) { destination in
+                        destinationButton(destination)
+                    }
                 }
             }
             .padding(.horizontal, theme.spacing.xs)
@@ -34,7 +47,8 @@ struct AppMeridianDestinationRail: View {
         )
         .padding(.horizontal, theme.spacing.sm)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Meridian destinations")
+        .accessibilityLabel(chromeState.title)
+        .accessibilityValue(chromeState.accessibilitySummary)
         .accessibilityIdentifier("shell.meridian.destination-rail")
     }
 

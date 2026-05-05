@@ -28,9 +28,17 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertFalse(AppTab.insights.isCanonicalTopLevel)
     }
 
-    func testShellPresentationModeDefaultsToNativeFallback() {
+    func testFCP08ShellPresentationModeDefaultsToMeridianWithNativeRollback() {
         XCTAssertEqual(
             AppShellPresentationMode.resolved(arguments: ["Ambitions"], environment: [:]),
+            .meridian
+        )
+
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(
+                arguments: ["Ambitions", "--ambitions-shell=native"],
+                environment: [:]
+            ),
             .nativeFallback
         )
     }
@@ -88,6 +96,21 @@ final class AppShellNavigationTests: XCTestCase {
                 "shell.meridian.destination.profile"
             ]
         )
+    }
+
+    func testFCP08MeridianShellChromeContractPreservesFiveTabsAndReceiptZone() {
+        let chrome = AppMeridianShellChromeState.launchDefault
+
+        XCTAssertEqual(chrome.title, "Ambition Meridian")
+        XCTAssertEqual(chrome.destinations.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertTrue(chrome.destinationRailLabel.contains("Today, Goals, Capture, Plan, You"))
+        XCTAssertTrue(chrome.receiptOverlayZoneLabel.contains("temporary and dismissible"))
+        XCTAssertTrue(chrome.globalActionLabel.contains("without changing tabs"))
+        XCTAssertTrue(chrome.safeAreaLabel.contains("safe areas"))
+        XCTAssertTrue(chrome.rollbackLabel.contains("--ambitions-shell=native"))
+        XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("sixth"))
     }
 
     @MainActor
