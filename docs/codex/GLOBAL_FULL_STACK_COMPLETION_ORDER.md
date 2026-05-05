@@ -182,7 +182,11 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     defers broader Live Activity candidates to named proof batches, and keeps
     Lock Screen / Dynamic Island, device, accessibility, legal/privacy,
     App Store, TestFlight, and release claims blocked until evidence exists.
-35. PFC17 App Intents / Shortcuts / Spotlight Strategy.
+35. PFC17 App Intents / Shortcuts / Spotlight Strategy. Completed Green on
+    2026-05-05 as docs/product/platform strategy. It defines the bounded App
+    Intent / Shortcut launch candidate set, keeps hidden mutation blocked behind
+    in-app confirmation and receipt proof, and does not approve launch
+    CoreSpotlight indexing by default.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.
 37. PFC21 StoreKit / Monetization Strategy.
 38. PFC24 Privacy Data Map And App Privacy Labels.

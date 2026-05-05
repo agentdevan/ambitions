@@ -60,9 +60,10 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   for every later UI-affecting batch. MEG01 is complete Green as the
   advanced-rendering eligibility gate with no Metal implementation approved by
   default. FVQ05 is complete Green as the final visual proof packet integration
-  hook. PFC15 is complete Green as Live Activities / ActivityKit strategy. The
-  next eligible global batch is PFC17 App Intents / Shortcuts / Spotlight
-  Strategy.
+  hook. PFC15 is complete Green as Live Activities / ActivityKit strategy.
+  PFC17 is complete Green as App Intents / Shortcuts / Spotlight strategy. The
+  next eligible global batch is PFC19 Notifications / Focus / Calendar /
+  Reminders Integration Strategy.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -453,7 +454,8 @@ complete Green as shared object-motion policy evidence. FVQ04 is complete
 Green as recurring rendered-proof protocol evidence. MEG01 is complete Green
 as advanced-rendering eligibility evidence. FVQ05 is complete Green as the
 final visual proof packet integration hook. PFC15 is complete Green as Live
-Activities / ActivityKit strategy, and the full-stack order selects PFC17 next.
+Activities / ActivityKit strategy. PFC17 is complete Green as App Intents /
+Shortcuts / Spotlight strategy, and the full-stack order selects PFC19 next.
 
 
 ## Living Dream Intelligence Context

@@ -166,6 +166,15 @@ Live Activity candidates stay deferred to named proof batches, and Lock Screen /
 Dynamic Island, device, accessibility, legal/privacy, App Store, TestFlight, and
 release claims remain blocked until evidence exists.
 
+PFC17 is complete Green as of 2026-05-05. Future App Intent, Shortcut, Siri, or
+Spotlight implementation must use
+`docs/canon/Ambitions_App_Intents_Shortcuts_Spotlight_Strategy.md` as the
+platform boundary: bounded app-opening and text-first capture commands are the
+only approved launch candidates, consequential mutation requires in-app
+confirmation plus receipt proof, compatibility destinations remain internal
+unless separately proved, and CoreSpotlight indexing of user life content is not
+approved by default.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
