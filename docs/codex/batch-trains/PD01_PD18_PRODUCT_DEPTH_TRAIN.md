@@ -1,7 +1,7 @@
 # PD01-PD18 Product Depth Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; PD03 accepted Yellow; PD04 accepted Yellow; Product Depth implementation started only within named Today depth scopes.
+Status: Active Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; PD03 accepted Yellow; PD04 accepted Yellow; PD05 Green; Product Depth implementation started only within named Today and Goals depth scopes.
 Train type: queued implementation / product-depth / drill-down expansion
 Date: 2026-05-02
 
@@ -50,7 +50,7 @@ Product Depth must deepen existing surfaces and must not widen the app. No new t
 - PD02: Today Step Detail Depth. Type: Implementation. Owner: Today. Boundary: Make Step Detail a real lightweight drill-down, not a card-expanded task row. Status: accepted Yellow after focused Today tests and local build; no top-level widening.
 - PD03: Today Step Session Depth. Type: Implementation. Owner: Today. Boundary: Make Step Session the execution environment for a step. Status: accepted Yellow after focused Today tests and local build; session remains step-first and timer-secondary.
 - PD04: Today Recovery and Closure Depth. Type: Implementation. Owner: Today / Recovery. Boundary: Make missed, moved, blocked, skipped, and still-valid steps recoverable without shame. Status: accepted Yellow after focused Today tests and local build; closure/recovery remains presentation-bounded with no silent plan mutation or AOS runtime claim.
-- PD05: Goals Mission Control Detail Architecture. Type: Implementation. Owner: Goals. Boundary: Turn Goal Detail into the real depth hub for a goal.
+- PD05: Goals Mission Control Detail Architecture. Type: Implementation. Owner: Goals. Boundary: Turn Goal Detail into the real depth hub for a goal. Status: Green after focused Goal Detail tests and local build; visible MissionControlTimeSpine order reconciled to Completed / Now / Friction / Next / Horizon while preserving internal lane-kind compatibility.
 - PD06: Goal Lifecycle and Path Visualization. Type: Implementation. Owner: Goals. Boundary: Make a goal feel visually alive.
 - PD07: Goal Proof and Decision History Depth. Type: Implementation. Owner: Goals / Proof. Boundary: Make goal changes trustworthy and reviewable.
 - PD08: Goal Alternate Path and Tradeoff Depth. Type: Implementation. Owner: Goals. Boundary: Make goal pivots and alternate routes visible without creating overwhelm.

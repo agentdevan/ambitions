@@ -1,7 +1,7 @@
 # Ambitions Product Depth Canon, Inventory, And Ownership Map
 <!-- markdownlint-disable MD013 -->
 
-Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation
+Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation
 Date: 2026-05-04
 
 ## Purpose
@@ -88,7 +88,7 @@ stacked-card top-level composition.
 | Step Detail depth | Today | PD02 | Accepted Yellow implementation evidence | PX02, PX07/PX08 where proof/recovery appears, SI04/SI05/SI10/SI13/SI17, ME Today | Lightweight drill-down behind Reality Rail; no card expansion. |
 | Step Session depth | Today | PD03 | Accepted Yellow implementation evidence | PD02 accepted Yellow, SI05/SI10/SI12/SI13/SI17, ME Today/TodayPanels, accessibility/copy | Step-first execution environment implemented; timer remains secondary and no persistence/runtime claim is added. |
 | Recovery and closure depth | Today / Recovery | PD04 | Accepted Yellow implementation evidence | PD02 accepted Yellow, PX07/PX09, SI10/SI13, AOS if runtime recovery logic changes | Closure sheet now exposes humane consequence/recovery copy and receipt boundary; no runtime recovery or silent plan mutation claim. |
-| MissionControlTimeSpine | Goals | PD05 | Candidate implementation owner mapped; Yellow conflict remains | PX03/PX14, SI06/SI07/SI10/SI14/SI17, ME Goals, CS if routes/raw values touched | Locked order Completed -> Now -> Friction -> Next -> Horizon unresolved against current lane evidence. |
+| MissionControlTimeSpine | Goals | PD05 | Green implementation evidence | PX03/PX14, SI06/SI07/SI10/SI14/SI17, ME Goals, CS if routes/raw values touched | Visible Goal Detail lane order reconciled to Completed -> Now -> Friction -> Next -> Horizon while preserving internal lane-kind compatibility. |
 | Goal lifecycle/path visualization | Goals | PD06 | Candidate implementation owner mapped | PD05 Green, SI06/SI07/SI12/SI17, visual/accessibility gates | Must not become KPI/OKR or decorative path. |
 | Goal proof/decision history | Goals / Proof | PD07 | Candidate implementation owner mapped | PD05 Green, PX08, SI10/SI14, AOS proof if runtime/data logic touched | Proof is evidence, not achievement. |
 | Goal alternate path/tradeoff | Goals | PD08 | Candidate implementation owner mapped | PD05 Green, PX03/PX15, AOS alternate-path if runtime logic touched | Candidate-style detail remains gated; no fake certainty. |
@@ -123,7 +123,8 @@ stacked-card top-level composition.
 | PD02 | Complete / accepted Yellow after validation and commit | Bounded Today implementation; Step Detail is a lightweight drill-down behind Reality Rail. |
 | PD03 | Complete / accepted Yellow after validation and commit | Bounded Today implementation; Step Session is step-first, timer-secondary, and receipt/proof-boundary aware. |
 | PD04 | Complete / accepted Yellow after validation and commit | Bounded Today implementation; closure/recovery depth is presentation-bounded and does not claim AOS runtime recovery or plan mutation. |
-| PD05-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
+| PD05 | Complete / Green after validation and commit | Bounded Goals implementation; Goal Detail Mission Control visible lane order now follows Completed -> Now -> Friction -> Next -> Horizon without navigation/raw-value changes. |
+| PD06-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
 | Global train outside PD | Stopped / not resumed | Requires its own explicit approval and gate path. |
 
 ## Conflict Register
@@ -131,7 +132,7 @@ stacked-card top-level composition.
 | Conflict | Severity | Owner | PD01 decision |
 | --- | --- | --- | --- |
 | Accent taxonomy/default mismatch | Yellow | Appearance Studio / theme / You | Preserve as Yellow. Do not edit design tokens or persistence defaults in PD01. Future docs-only alias/migration plan or approved implementation needed. |
-| MissionControlTimeSpine order mismatch / unknown | Yellow | Goals / PD05 | Preserve as Yellow. PD05 must reconcile current Proof/Blockers/Next Step/Momentum-style evidence to Completed/Now/Friction/Next/Horizon before code. |
+| MissionControlTimeSpine order mismatch / unknown | Green for Goal Detail visible lane order; internal compatibility preserved | Goals / PD05 | PD05 reconciled visible Goal Detail Mission Control lane order to Completed/Now/Friction/Next/Horizon and kept internal lane-kind compatibility cases intact. Remaining future Goals depth must preserve this order. |
 | User-facing copy boundary | Yellow | Cross-surface copy / PD implementation batches | Preserve staged remediation model from Batch 1C. Future PD batches must avoid forbidden copy and run copy scans. |
 | Step Session depth previously unknown | Accepted Yellow | Today / PD03 | PD03 adds bounded implementation proof; no broader Step Session persistence/runtime claim is made. |
 | Month LifeShape calendar-clone risk | Yellow | Plan / PD14 | Preserve; PD14 must prove capacity-lens behavior. |
@@ -160,7 +161,9 @@ Every future PD batch must prove:
 
 PD01 does not prove Product Depth implementation. PD02 proves only bounded
 Today Step Detail implementation. PD03 proves only bounded Today Step Session
-implementation. These batches do not prove later PD readiness beyond
+implementation. PD04 proves only bounded Today recovery/closure presentation
+depth. PD05 proves only bounded Goal Detail Mission Control visible lane-order
+depth. These batches do not prove later PD readiness beyond
 continuation eligibility, release readiness, TestFlight readiness, App Store
 readiness, physical-device proof, public accessibility conformance, signed
 archive validation, App Store Connect validation, external-platform rendering,

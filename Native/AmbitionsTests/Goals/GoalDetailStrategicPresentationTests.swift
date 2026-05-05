@@ -31,12 +31,14 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         let detail = try await service.loadDetail(target: created.target)
         let missionControl = try XCTUnwrap(detail.missionControl)
 
-        XCTAssertEqual(missionControl.lanes.map(\.kind), [.overview, .path, .steps, .proof, .decisions, .risks, .archive])
+        XCTAssertEqual(missionControl.lanes.map(\.kind), [.proof, .overview, .risks, .steps, .path])
+        XCTAssertEqual(missionControl.lanes.map(\.title), ["Completed", "Now", "Friction", "Next", "Horizon"])
         XCTAssertFalse(missionControl.currentTruth.isEmpty)
         XCTAssertEqual(missionControl.sourceLabel, "Based on this goal")
         XCTAssertEqual(missionControl.ownershipLabel, "You own the path")
         XCTAssertTrue(missionControl.proofBoundaryLabel.contains("Proof"))
         XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .steps })?.badgeTitle, "Next step")
+        XCTAssertTrue(missionControl.lanes.first(where: { $0.kind == .proof })?.summary.contains("Needs evidence") == true)
         XCTAssertEqual(missionControl.decisions.emptyTitle, "No decisions yet")
         XCTAssertEqual(missionControl.risks.emptyTitle, "No major risk visible")
         XCTAssertFalse(missionControl.archive.title.isEmpty)
@@ -53,14 +55,14 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
 
         let detail = try await service.loadDetail(target: created.target)
         let missionControl = try XCTUnwrap(detail.missionControl)
-        let proofLane = try XCTUnwrap(missionControl.lanes.first(where: { $0.kind == .proof }))
-        let laneItem = MissionControlLaneItem(detailLane: proofLane)
+        let completedLane = try XCTUnwrap(missionControl.lanes.first(where: { $0.kind == .proof }))
+        let laneItem = MissionControlLaneItem(detailLane: completedLane)
 
         XCTAssertEqual(laneItem.id, GoalDetailMissionLaneKind.proof.rawValue)
-        XCTAssertEqual(laneItem.title, proofLane.title)
-        XCTAssertEqual(laneItem.value, proofLane.headline)
-        XCTAssertEqual(laneItem.badgeTitle, proofLane.badgeTitle)
-        XCTAssertEqual(laneItem.accessibilityIdentifier, proofLane.kind.accessibilityIdentifier)
+        XCTAssertEqual(laneItem.title, completedLane.title)
+        XCTAssertEqual(laneItem.value, completedLane.headline)
+        XCTAssertEqual(laneItem.badgeTitle, completedLane.badgeTitle)
+        XCTAssertEqual(laneItem.accessibilityIdentifier, completedLane.kind.accessibilityIdentifier)
         XCTAssertTrue(laneItem.accessibilityHint.contains("Goal Detail"))
     }
 

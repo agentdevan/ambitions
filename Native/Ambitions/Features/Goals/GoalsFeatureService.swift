@@ -2551,8 +2551,6 @@ private extension RepositoryBackedGoalsService {
         let riskHeadline = riskItems.first?.title ?? risks.emptyTitle
         let riskDetail = riskItems.first?.summary ?? risks.emptyMessage
         let decisionHeadline = decisions.items.first?.title ?? decisions.emptyTitle
-        let decisionDetail = decisions.items.first?.summary ?? decisions.emptyMessage
-
         return GoalDetailMissionControlState(
             currentTruth: currentTruth,
             primaryNextMove: nextStep,
@@ -2562,58 +2560,30 @@ private extension RepositoryBackedGoalsService {
             breadcrumb: goalDetailBreadcrumb(context: context, title: title),
             lanes: [
                 GoalDetailMissionLaneState(
-                    kind: .overview,
-                    title: "Overview",
-                    headline: renderState.title,
-                    summary: currentTruth,
-                    detail: "Next: \(nextStep.title)",
-                    badgeTitle: "State",
-                    systemImage: "rectangle.and.text.magnifyingglass",
-                    state: renderState.visualState
-                ),
-                GoalDetailMissionLaneState(
-                    kind: .path,
-                    title: "Path",
-                    headline: currentPhase?.title ?? trajectory.phaseTitle,
-                    summary: nextMilestone.map { "Next milestone: \($0)" } ?? "The route is still forming.",
-                    detail: pathDetail,
-                    badgeTitle: currentPhase?.statusLabel ?? "Current",
-                    systemImage: "point.topleft.down.curvedto.point.bottomright.up",
-                    state: currentPhase?.state ?? .default
-                ),
-                GoalDetailMissionLaneState(
-                    kind: .steps,
-                    title: "Steps",
-                    headline: nextStep.title,
-                    summary: nextStep.detail,
-                    detail: nextStep.isAvailable ? "Keep this as the primary contained Step." : "This goal needs one safe next Step before the tactical list grows.",
-                    badgeTitle: nextStep.isAvailable ? "Next step" : "Needs review",
-                    systemImage: "scope",
-                    state: nextStep.isAvailable ? .selected : .warning
-                ),
-                GoalDetailMissionLaneState(
                     kind: .proof,
-                    title: "Proof",
-                    headline: proofSummary.title,
+                    title: "Completed",
+                    headline: proofSummary.latestTitle ?? proofSummary.title,
                     summary: proofSummary.detail,
-                    detail: proofSummary.latestTitle.map { "Latest: \($0)" } ?? "No proof has been recorded for this goal yet.",
+                    detail: archive.learning.isEmpty
+                        ? "Completed work stays attached as evidence, not as a trophy."
+                        : archive.learning,
                     badgeTitle: proofSummary.count == 0 ? "No proof yet" : "Evidence visible",
                     systemImage: "checkmark.seal",
                     state: proofSummary.visualState
                 ),
                 GoalDetailMissionLaneState(
-                    kind: .decisions,
-                    title: "Decisions",
-                    headline: decisionHeadline,
-                    summary: decisionDetail,
-                    detail: decisions.items.dropFirst().map(\.title).joined(separator: " · "),
-                    badgeTitle: decisions.items.isEmpty ? "No decisions" : "\(decisions.items.count) recorded",
-                    systemImage: "arrow.triangle.branch",
-                    state: decisions.items.first?.state ?? .default
+                    kind: .overview,
+                    title: "Now",
+                    headline: renderState.title,
+                    summary: currentTruth,
+                    detail: "Current path: \(currentPhase?.title ?? trajectory.phaseTitle).",
+                    badgeTitle: currentPhase?.statusLabel ?? "Current",
+                    systemImage: "scope",
+                    state: renderState.visualState
                 ),
                 GoalDetailMissionLaneState(
                     kind: .risks,
-                    title: "Risks",
+                    title: "Friction",
                     headline: riskHeadline,
                     summary: riskDetail,
                     detail: riskItems.dropFirst().map(\.title).joined(separator: " · "),
@@ -2622,14 +2592,28 @@ private extension RepositoryBackedGoalsService {
                     state: riskItems.isEmpty ? .success : .warning
                 ),
                 GoalDetailMissionLaneState(
-                    kind: .archive,
-                    title: "Archive",
-                    headline: archive.title,
-                    summary: archive.summary,
-                    detail: archive.learning,
-                    badgeTitle: archive.statusLabel,
-                    systemImage: "archivebox",
-                    state: archive.state
+                    kind: .steps,
+                    title: "Next",
+                    headline: nextStep.title,
+                    summary: nextStep.detail,
+                    detail: nextStep.isAvailable ? "Keep this as the primary contained Step." : "This goal needs one safe next Step before the tactical list grows.",
+                    badgeTitle: nextStep.isAvailable ? "Next step" : "Needs review",
+                    systemImage: "arrow.right.circle",
+                    state: nextStep.isAvailable ? .selected : .warning
+                ),
+                GoalDetailMissionLaneState(
+                    kind: .path,
+                    title: "Horizon",
+                    headline: nextMilestone ?? currentPhase?.title ?? trajectory.phaseTitle,
+                    summary: nextMilestone.map { "Next milestone: \($0)" } ?? "The route is still forming.",
+                    detail: [
+                        pathDetail,
+                        "Decisions: \(decisionHeadline).",
+                        "Horizon stays directional, not a roadmap or Gantt chart."
+                    ].joined(separator: " "),
+                    badgeTitle: "Direction",
+                    systemImage: "point.topleft.down.curvedto.point.bottomright.up",
+                    state: currentPhase?.state ?? decisions.items.first?.state ?? .default
                 )
             ],
             timeline: goalDetailTimeline(

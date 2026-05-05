@@ -2,13 +2,14 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD04 accepted Yellow; PD05 next eligible if continuation gates allow
-Scope: PD04 deepened only the Today-owned closure and recovery surface behind
-Reality Rail. It clarified closure outcomes, Still Counts, recovery prompts,
-and receipt preview copy without adding a top-level destination, broadening
-Today into a dashboard, editing navigation/source-truth tabs, persistence,
-sync/auth/network, AI/LDI runtime, CI/config, dependency, release/platform
-claim, broad app implementation, or Candidate finalization. Complete: EB03A
+Current batch: PD05 Green; PD06 next eligible after commit/push
+Scope: PD05 reconciles only the Goals-owned Goal Detail Mission Control lane
+architecture to the locked MissionControlTimeSpine order: Completed, Now,
+Friction, Next, Horizon. It adjusts Goal Detail mission-control state,
+rendered lane labels, and focused Goals tests without adding a top-level
+destination, editing navigation/source-truth tabs, persistence, sync/auth/
+network, AI/LDI runtime, CI/config, dependency, release/platform claim, broad
+app implementation, or Candidate finalization. Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
@@ -494,15 +495,16 @@ Product Depth approval phrase is satisfied. PD01 is complete / accepted Yellow
 as docs/planning source truth. PD02 is complete / accepted Yellow as bounded
 Today Step Detail implementation. PD03 is complete / accepted Yellow as
 bounded Today Step Session implementation. PD04 is complete / accepted Yellow
-as bounded Today recovery/closure implementation. Continue to PD05 only if PD04
-commits, pushes, leaves a clean worktree, and the Product Depth continuation
-gates allow it. Do not restart broad
+as bounded Today recovery/closure implementation. PD05 is Green as bounded
+Goals Mission Control detail architecture implementation. Continue to PD06 only
+if PD05 commits, pushes, leaves a clean worktree, and the Product Depth
+continuation gates allow it. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
 SI12, SI13, SI14, SI15, SI16, SI17, SI18, or completed DAV / EB20-EB24 batches.
-The next safe action is PD05 if PD04 has been committed, pushed, the worktree is
-clean, and Product Depth continuation gates allow it.
+The next safe action is PD06 if PD05 commits, pushes, the worktree is clean,
+and Product Depth continuation gates allow it.
 
 ## PD01 Product Depth Canon, Inventory, And Ownership Map
 

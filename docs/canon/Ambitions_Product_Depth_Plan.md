@@ -1,7 +1,7 @@
 # Ambitions Product Depth Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation
+Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control Detail Architecture implementation
 Date: 2026-05-02
 
 ## Purpose
@@ -50,8 +50,11 @@ Train name: `PD01-PD18 Product Depth Train`
 
 Status: Active after approval phrase; PD01 is accepted Yellow as the
 docs/planning source-truth batch. PD02 is accepted Yellow as bounded Today Step
-Detail implementation. Later Product Depth implementation remains blocked until
-each individual PD implementation batch runs, validates, commits, and closes.
+Detail implementation. PD03 and PD04 are accepted Yellow as bounded Today depth
+implementation. PD05 is Green as bounded Goals Mission Control detail
+architecture implementation. Later Product Depth implementation remains blocked
+until each individual PD implementation batch runs, validates, commits, and
+closes.
 
 Required approval phrase: `Start Product Depth Train`.
 
@@ -141,11 +144,13 @@ bounded Today implementation evidence after focused Today tests and local
 build validation. PD03 closed accepted Yellow as bounded Today Step Session
 implementation evidence after focused Today tests and local build validation.
 PD04 closed accepted Yellow as bounded Today recovery/closure implementation
-evidence after focused Today tests and local build validation. PD05 is the next
-direct successor only after PD04 commits, pushes, leaves a clean worktree, and
+evidence after focused Today tests and local build validation. PD05 closed
+Green as bounded Goals Mission Control detail architecture implementation
+after focused Goal Detail tests and local build validation. PD06 is the next
+direct successor only after PD05 commits, pushes, leaves a clean worktree, and
 the continuation gate allows it.
 
-PD05-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
+PD06-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
 validation, and predecessor gates are Green or accepted Yellow.
 
 ## Anti-Sprawl Tests

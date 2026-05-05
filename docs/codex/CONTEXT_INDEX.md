@@ -251,7 +251,10 @@ Product Depth started only after the user said exactly
 source-truth batch. PD02 is accepted Yellow as a bounded Today Step Detail
 implementation batch. PD03 is accepted Yellow as a bounded Today Step Session
 implementation batch. PD04 is accepted Yellow as a bounded Today
-recovery/closure implementation batch. Product Depth must deepen
+recovery/closure implementation batch. PD05 is Green as a bounded Goals
+Mission Control detail architecture batch that reconciles visible Goal Detail
+lane order to Completed / Now / Friction / Next / Horizon while preserving
+internal compatibility. Product Depth must deepen
 Today, Goals, Capture, Plan, and You; it must not add new top-level tabs,
 generic dashboards, stacked-card top-level screens, habit tracker modes,
 calendar clones, chatbot-first AI surfaces, inbox/notes modes, or enterprise
