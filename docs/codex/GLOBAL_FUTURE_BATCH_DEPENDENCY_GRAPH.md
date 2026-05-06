@@ -277,6 +277,12 @@ posture, and rejection/deletion boundaries without claiming omniscient memory,
 cloud sync, durable deletion, legal/privacy compliance, release readiness, or
 AI runtime certainty.
 
+FCP24 is complete Green as of 2026-05-05. Future appearance, theme, design
+system, Start Here, Reality Rail, LifeShape, Receipt Drawer, You, or preview
+work must preserve Appearance Studio as a real-object preview surface, not a
+theme shop, personality system, behavior promise, or palette catalog detached
+from Ambitions objects.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

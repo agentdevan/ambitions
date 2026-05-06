@@ -129,6 +129,41 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.appearanceStudio.title, "Appearance Studio")
     }
 
+    func testFCP24AppearanceStudioPreviewsRealAmbitionsObjectsWithoutThemeShopClaims() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let studio = dashboard.appearanceStudio
+
+        XCTAssertEqual(studio.previewSwatches.map(\.id), [
+            "preview-now",
+            "preview-rail",
+            "preview-lifeshape",
+            "preview-receipt"
+        ])
+        XCTAssertEqual(studio.previewSwatches.map(\.objectKind), [
+            .startHere,
+            .realityRail,
+            .lifeShape,
+            .receiptDrawer
+        ])
+        XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Start Here" }))
+        XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Reality Rail" }))
+        XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "LifeShape" }))
+        XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Receipt Drawer" }))
+        XCTAssertTrue(studio.previewSummary.contains("real Ambitions objects"))
+
+        let visibleCopy = ([studio.title, studio.subtitle, studio.previewSummary, studio.footer] +
+            studio.previewSwatches.flatMap { [$0.title, $0.subtitle, $0.eyebrow, $0.accessibilityLabel] })
+            .joined(separator: " ")
+
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("theme shop"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("personality"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("behavior"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("skin store"))
+    }
+
     func testYouControlRoomProjectsBatch87TrustAreasWithoutFutureBatchClaims() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedProfileService(repositories: repositories)

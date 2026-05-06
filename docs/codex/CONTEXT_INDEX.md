@@ -118,7 +118,12 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   evidence. Visible memory context now names source age, why-remembered,
   privacy shutter, review state, correction posture, and rejection/deletion
   boundaries without claiming durable memory, sync/cloud, or runtime AI
-  certainty. The next eligible global batch is FCP24 Appearance Studio.
+  certainty.
+- FCP24 is complete Green as bounded You-owned Appearance Studio
+  implementation evidence. Appearance now previews Start Here, Reality Rail,
+  LifeShape, and Receipt Drawer as real Ambitions objects without claiming a
+  theme shop, behavior/personality system, or release/platform readiness. The
+  next eligible global batch is FCP18 Capture Placement Shelf.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -521,8 +526,9 @@ Green as Security Threat Model And Secrets Audit evidence. PFC29 is complete
 Green as Logging / Analytics / Observability Policy evidence. PFC30 is complete
 Green as Performance Budget And Instruments Plan evidence. FCP22 is complete
 Green as bounded Personal System Center implementation evidence. FCP23 is
-complete Green as bounded Memory Lens visual-layer evidence, and the full-stack
-order selects FCP24 next.
+complete Green as bounded Memory Lens visual-layer evidence. FCP24 is complete
+Green as bounded Appearance Studio object-preview evidence, and the full-stack
+order selects FCP18 next.
 
 
 ## Living Dream Intelligence Context

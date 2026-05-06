@@ -263,7 +263,12 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     route/raw-value, persistence/schema, sync/cloud, durable-memory,
     legal/privacy/release, App Store, TestFlight, device, public accessibility,
     AOS runtime, or LDI runtime claim.
-47. FCP24 Appearance Studio.
+47. FCP24 Appearance Studio. Completed Green on 2026-05-05 as bounded
+    You-owned Appearance Studio implementation evidence, with real object
+    previews for Start Here, Reality Rail, LifeShape, and Receipt Drawer. It
+    adds no route/raw-value, persistence/schema, sync/cloud,
+    behavior/personality, legal/privacy/release, App Store, TestFlight, device,
+    public accessibility, AOS runtime, or LDI runtime claim.
 48. FCP18 Capture Placement Shelf.
 49. FCP19 Placement Resolver / Correction Fold.
 50. FCP20 Grow Into Goal Seed Incubator.

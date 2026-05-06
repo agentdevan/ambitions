@@ -214,8 +214,8 @@ private extension RepositoryBackedProfileService {
             reviews: reviews,
             appearanceStudio: ProfileAppearanceStudioState(
                 title: "Appearance Studio",
-                subtitle: "Curated, authored control over mode and accent so the shell feels personal without turning into a skin chooser.",
-                previewSummary: "Preview the current palette against system-style hierarchy before you save.",
+                subtitle: "Curated, authored control over mode and accent so the shell stays legible without turning into a palette catalog.",
+                previewSummary: "Preview the current palette against real Ambitions objects before you save.",
                 modeOptions: AppAppearancePreference.allCases.map { preference in
                     ProfileAppearanceOption(
                         id: "appearance-\(preference.rawValue)",
@@ -926,30 +926,47 @@ private extension RepositoryBackedProfileService {
         [
             ProfilePreviewSwatch(
                 id: "preview-now",
-                title: "Current shell",
-                subtitle: "How the core hierarchy will render after save.",
-                eyebrow: selectedAppearance.title,
+                title: "Start Here",
+                subtitle: "Primary decision surface with one calm action and source proof.",
+                eyebrow: "Decision",
+                objectKind: .startHere,
                 accentFamily: selectedAccent,
                 appearancePreference: selectedAppearance,
-                state: .selected
+                state: .selected,
+                accessibilityLabel: "Appearance preview for Start Here decision surface"
             ),
             ProfilePreviewSwatch(
-                id: "preview-trust",
-                title: "Trust calm",
-                subtitle: "Trust status keeps a quieter layer than hero actions.",
-                eyebrow: "Trust",
+                id: "preview-rail",
+                title: "Reality Rail",
+                subtitle: "Now, Next, and Later stay readable without status clutter.",
+                eyebrow: "Continuity",
+                objectKind: .realityRail,
                 accentFamily: selectedAccent,
                 appearancePreference: selectedAppearance,
-                state: .default
+                state: .default,
+                accessibilityLabel: "Appearance preview for Reality Rail continuity spine"
             ),
             ProfilePreviewSwatch(
-                id: "preview-context",
-                title: "Context optionality",
-                subtitle: "Optional context stays helpful, not invasive.",
-                eyebrow: "Context",
+                id: "preview-lifeshape",
+                title: "LifeShape",
+                subtitle: "Capacity contour keeps pressure visible without becoming a calendar.",
+                eyebrow: "Capacity",
+                objectKind: .lifeShape,
                 accentFamily: selectedAccent,
                 appearancePreference: selectedAppearance,
-                state: .default
+                state: .default,
+                accessibilityLabel: "Appearance preview for LifeShape capacity contour"
+            ),
+            ProfilePreviewSwatch(
+                id: "preview-receipt",
+                title: "Receipt Drawer",
+                subtitle: "Proof and source folds keep trust quieter than primary action.",
+                eyebrow: "Proof",
+                objectKind: .receiptDrawer,
+                accentFamily: selectedAccent,
+                appearancePreference: selectedAppearance,
+                state: .default,
+                accessibilityLabel: "Appearance preview for Receipt Drawer trust layer"
             )
         ]
     }

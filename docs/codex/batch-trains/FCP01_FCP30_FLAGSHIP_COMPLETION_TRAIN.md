@@ -358,6 +358,8 @@ Acceptance: no creepy omniscient copy; no unsupported durable sync/export/delete
 
 ### FCP24 — Appearance Studio
 
+Status: Complete Green on 2026-05-05 as bounded You-owned Appearance Studio
+object-preview implementation evidence.
 Type: Implementation.
 Owner: You / Design system.
 Depends on: FCP22.

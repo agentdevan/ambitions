@@ -1523,7 +1523,7 @@ private struct ProfileAppearanceStudioCard: View {
     let hasUnsavedChanges: Bool
     let onSave: () -> Void
 
-    private let previewColumns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    private let previewColumns = [GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
         AppCard {
@@ -1591,8 +1591,8 @@ private struct ProfileAppearanceStudioCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     SectionHeader(
-                        title: "Live preview",
-                        subtitle: "See the selected appearance against Ambitions hierarchy before you commit it."
+                        title: "Object previews",
+                        subtitle: "See the selected appearance against real Ambitions surfaces before you commit it."
                     )
 
                     LazyVGrid(columns: previewColumns, spacing: theme.spacing.sm) {
@@ -1744,9 +1744,7 @@ private struct ProfilePreviewSwatchCard: View {
                 .foregroundStyle(selectedTheme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            RoundedRectangle(cornerRadius: selectedTheme.radius.sm, style: .continuous)
-                .fill(selectedTheme.colors.accentPrimary.opacity(0.8))
-                .frame(height: 6)
+            ProfileObjectPreviewMiniature(kind: swatch.objectKind, previewTheme: selectedTheme)
 
             TagPill(
                 appearancePreference.title,
@@ -1764,6 +1762,81 @@ private struct ProfilePreviewSwatchCard: View {
             RoundedRectangle(cornerRadius: selectedTheme.radius.lg, style: .continuous)
                 .stroke(selectedTheme.colors.strokeSubtle, lineWidth: 1)
         )
+        .ambitionPanelAccessibility(
+            label: swatch.accessibilityLabel,
+            value: "\(appearancePreference.title) mode, \(accentFamily.title) accent.",
+            hint: "Shows how the selected appearance applies to this Ambitions object preview."
+        )
+    }
+}
+
+private struct ProfileObjectPreviewMiniature: View {
+    let kind: ProfileAppearanceObjectPreviewKind
+    let previewTheme: AmbitionTheme
+
+    var body: some View {
+        switch kind {
+        case .startHere:
+            VStack(alignment: .leading, spacing: 6) {
+                Capsule().fill(previewTheme.colors.accentWarm.opacity(0.9)).frame(width: 52, height: 5)
+                RoundedRectangle(cornerRadius: previewTheme.radius.sm, style: .continuous)
+                    .fill(previewTheme.colors.accentPrimary.opacity(0.82))
+                    .frame(height: 22)
+                HStack(spacing: 5) {
+                    Capsule().fill(previewTheme.colors.textSecondary.opacity(0.35)).frame(height: 5)
+                    Capsule().fill(previewTheme.colors.textSecondary.opacity(0.22)).frame(width: 36, height: 5)
+                }
+            }
+            .accessibilityHidden(true)
+
+        case .realityRail:
+            HStack(alignment: .center, spacing: 8) {
+                VStack(spacing: 5) {
+                    Circle().fill(previewTheme.colors.accentPrimary).frame(width: 7, height: 7)
+                    Rectangle().fill(previewTheme.colors.strokeSubtle).frame(width: 2, height: 20)
+                    Circle().fill(previewTheme.colors.accentWarm.opacity(0.85)).frame(width: 7, height: 7)
+                    Rectangle().fill(previewTheme.colors.strokeSubtle).frame(width: 2, height: 20)
+                    Circle().fill(previewTheme.colors.textTertiary.opacity(0.8)).frame(width: 7, height: 7)
+                }
+                VStack(alignment: .leading, spacing: 8) {
+                    Capsule().fill(previewTheme.colors.accentPrimary.opacity(0.75)).frame(height: 8)
+                    Capsule().fill(previewTheme.colors.surfaceOverlay.opacity(0.9)).frame(height: 8)
+                    Capsule().fill(previewTheme.colors.surfaceOverlay.opacity(0.65)).frame(height: 8)
+                }
+            }
+            .accessibilityHidden(true)
+
+        case .lifeShape:
+            HStack(alignment: .bottom, spacing: 5) {
+                RoundedRectangle(cornerRadius: 3).fill(previewTheme.colors.surfaceOverlay).frame(width: 12, height: 22)
+                RoundedRectangle(cornerRadius: 3).fill(previewTheme.colors.accentPrimary.opacity(0.7)).frame(width: 12, height: 38)
+                RoundedRectangle(cornerRadius: 3).fill(previewTheme.colors.accentWarm.opacity(0.82)).frame(width: 12, height: 28)
+                RoundedRectangle(cornerRadius: 3).fill(previewTheme.colors.surfaceOverlay).frame(width: 12, height: 46)
+                RoundedRectangle(cornerRadius: 3).fill(previewTheme.colors.accentPrimary.opacity(0.45)).frame(width: 12, height: 32)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityHidden(true)
+
+        case .receiptDrawer:
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 5) {
+                    Image(systemName: "checkmark.seal.fill")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(previewTheme.colors.accentPrimary)
+                    Capsule().fill(previewTheme.colors.textSecondary.opacity(0.35)).frame(height: 6)
+                }
+                HStack(spacing: 5) {
+                    Image(systemName: "doc.text.magnifyingglass")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(previewTheme.colors.accentWarm)
+                    Capsule().fill(previewTheme.colors.surfaceOverlay.opacity(0.9)).frame(height: 6)
+                }
+                RoundedRectangle(cornerRadius: previewTheme.radius.sm, style: .continuous)
+                    .fill(previewTheme.colors.strokeSubtle.opacity(0.7))
+                    .frame(height: 1)
+            }
+            .accessibilityHidden(true)
+        }
     }
 }
 

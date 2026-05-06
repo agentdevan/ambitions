@@ -48,14 +48,23 @@ struct ProfileAccentOption: Identifiable, Sendable, Equatable {
     let family: AmbitionAccentFamily
 }
 
+enum ProfileAppearanceObjectPreviewKind: String, Sendable, Equatable {
+    case startHere
+    case realityRail
+    case lifeShape
+    case receiptDrawer
+}
+
 struct ProfilePreviewSwatch: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
     let eyebrow: String
+    let objectKind: ProfileAppearanceObjectPreviewKind
     let accentFamily: AmbitionAccentFamily
     let appearancePreference: AppAppearancePreference
     let state: AmbitionVisualState
+    let accessibilityLabel: String
 }
 
 struct ProfileAppearanceStudioState: Sendable, Equatable {
