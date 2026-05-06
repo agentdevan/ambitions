@@ -145,6 +145,57 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(detail.screenContractSnapshot().topLevelTabTitles, ScreenContractValidator.canonicalTopLevelTabs)
     }
 
+    func testFCP11LifePathThreadPreservesOrderPrimitivesAndPrivateRedaction() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Build a family emergency fund by 2026-12-01"),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let pathBuilder = try XCTUnwrap(detail.pathBuilder)
+        let thread = LifePathThreadState(stages: detail.pathStages, pathBuilder: pathBuilder)
+
+        XCTAssertEqual(thread.title, "LifePath Thread")
+        XCTAssertEqual(thread.nodes.map(\.order), Array(1...thread.nodes.count))
+        XCTAssertTrue(thread.nodes.allSatisfy { $0.nonColorMeaning.isEmpty == false })
+        XCTAssertFalse(thread.proofBeads.isEmpty)
+        XCTAssertFalse(thread.alternateRouteFolds.isEmpty)
+        XCTAssertEqual(thread.sourceFold.title, "GoalPathSourceFold")
+        XCTAssertTrue(thread.accessibilityValue.contains("Order 1"))
+        XCTAssertTrue(thread.accessibilityHint.contains("proof beads"))
+        XCTAssertTrue(thread.accessibilityHint.contains("risk pinch"))
+        XCTAssertTrue(thread.accessibilityHint.contains("alternate route fold"))
+        XCTAssertTrue(thread.accessibilityHint.contains("source fold"))
+        XCTAssertFalse(thread.nodes.map(\.title).joined(separator: " ").localizedCaseInsensitiveContains("roadmap board"))
+        XCTAssertFalse(thread.nodes.map(\.title).joined(separator: " ").localizedCaseInsensitiveContains("timeline clone"))
+
+        let privateThread = LifePathThreadState(stages: detail.pathStages, pathBuilder: pathBuilder, privacySensitive: true)
+        XCTAssertTrue(privateThread.nodes.allSatisfy { $0.title == "Private path stage" })
+        XCTAssertTrue(privateThread.proofBeads.allSatisfy { $0.summary == "Proof detail hidden." })
+        XCTAssertTrue(privateThread.sourceFold.privacyLabel.localizedCaseInsensitiveContains("hides titles"))
+    }
+
+    func testFCP11BlockedPathCreatesRiskPinchWithoutColorOnlyMeaning() throws {
+        let blockedStage = GoalPathStage(
+            id: "blocked-stage",
+            title: "Waiting on the permit",
+            summary: "The path cannot move until the real blocker is resolved.",
+            stepCountLabel: "1 step",
+            position: .blocked,
+            statusLabel: "Blocked",
+            highlight: "Call the office",
+            state: .warning
+        )
+        let thread = LifePathThreadState(stages: [blockedStage], pathBuilder: nil)
+
+        XCTAssertFalse(thread.riskPinches.isEmpty)
+        XCTAssertTrue(thread.riskPinches.contains { $0.title.localizedCaseInsensitiveContains("Risk") || $0.title.localizedCaseInsensitiveContains("review") })
+        XCTAssertTrue(thread.riskPinches.allSatisfy { $0.summary.isEmpty == false })
+        XCTAssertTrue(thread.nodes.contains { $0.nonColorMeaning.localizedCaseInsensitiveContains("Risk visible") })
+    }
+
     func testD14GoalDetailScreenContractSnapshotSatisfiesImplementationGate() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)

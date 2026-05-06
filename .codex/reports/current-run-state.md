@@ -2,15 +2,15 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP10 MissionControlTimeSpine complete / Green.
-Next eligible batch: FCP11 LifePath Thread.
-Scope: FCP10 replaced Goal Detail Mission Control's primary lane presentation
-with a MissionControlTimeSpine. The spine preserves Completed / Now / Friction
-/ Next / Horizon order, attaches lanes along one inspectable object, exposes a
-static selected-lane inspector for Reduce Motion, and avoids the dashboard grid
-posture for the Goal Detail primary object. It preserved no route/raw-value,
-persistence/schema, dependency, top-level tab, sync/cloud, legal/privacy,
-release/device/accessibility, AOS runtime, or LDI runtime claims.
+Current batch: FCP11 LifePath Thread complete / Green.
+Next eligible batch: FCP12 Proof Spine / Evidence Ledger.
+Scope: FCP11 replaced Goal Detail's first path presentation with a
+LifePathThread object. The thread preserves accessible path order, attaches
+proof as beads, marks friction as a risk pinch, keeps alternate routes folded
+behind review copy, and exposes a GoalPathSourceFold without adding a
+destination, route/raw-value, persistence/schema, dependency, top-level tab,
+sync/cloud, legal/privacy/release, App Store, TestFlight, device, public
+accessibility, AOS runtime, or LDI runtime claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -67,8 +67,8 @@ Incubator evidence. FCP21 is complete / Green as Voice / Motor Capture
 Accessibility evidence. FCP14 is complete / Green as LifeShape Contour Map
 evidence. FCP15 is complete / Green as Reflow Decision Fold evidence. FCP16 is
 complete / Green as Pressure Field / Recovery Loop evidence. FCP10 is complete
-/ Green as MissionControlTimeSpine evidence. FCP11 is the next eligible global
-batch.
+/ Green as MissionControlTimeSpine evidence. FCP11 is complete / Green as
+LifePath Thread evidence. FCP12 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

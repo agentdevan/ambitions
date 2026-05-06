@@ -257,6 +257,12 @@ Depends on: FCP10; SI06; PD06-PD08.
 Goal: Replace path-card feel with LifePathThread, proof beads, risk pinch, alternate branch fold.
 Acceptance: private path redaction; non-color state meaning; accessible path order.
 
+Result: Complete / Green on 2026-05-06. Goal Detail now renders LifePathThread
+as its first path presentation, with ordered LifePathThreadNode state,
+ProofBead evidence markers, RiskPinch friction markers, AlternateRouteFold
+review branches, GoalPathSourceFold source truth, and focused Goal Detail test
+proof for private redaction and non-color state meaning.
+
 ### FCP12 — Proof Spine / Evidence Ledger
 
 Type: Implementation.

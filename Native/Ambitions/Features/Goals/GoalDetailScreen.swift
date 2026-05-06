@@ -59,7 +59,12 @@ struct GoalDetailScreen: View {
                     }
 
                     if detail.pathStages.isEmpty == false {
-                        GoalDetailFilmstripCard(stages: detail.pathStages)
+                        LifePathThreadCard(
+                            state: LifePathThreadState(
+                                stages: detail.pathStages,
+                                pathBuilder: detail.pathBuilder
+                            )
+                        )
                     }
 
                     if let movement = detail.nextMovement {

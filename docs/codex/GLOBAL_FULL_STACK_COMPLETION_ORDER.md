@@ -333,7 +333,14 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     posture, route/raw-value, persistence/schema, dependency, top-level tab,
     sync/cloud, legal/privacy/release, App Store, TestFlight, device, public
     accessibility, AOS runtime, or LDI runtime claim.
-56. FCP11 LifePath Thread.
+56. FCP11 LifePath Thread. Completed Green on 2026-05-06 as bounded Goals /
+    Goal Detail implementation evidence. It replaces Goal Detail's first path
+    presentation with a LifePathThread object, preserves accessible path order,
+    attaches proof beads, marks friction through risk pinch copy/icons, keeps
+    alternate routes folded for review, and exposes GoalPathSourceFold source
+    truth. It adds no route/raw-value, persistence/schema, dependency,
+    top-level tab, sync/cloud, legal/privacy/release, App Store, TestFlight,
+    device, public accessibility, AOS runtime, or LDI runtime claim.
 57. FCP12 Proof Spine / Evidence Ledger.
 58. FCP13B Goal Alternate Path / Decision History Polish.
 59. FCP25 Loading / Empty / Degraded State Objectization.

@@ -1255,6 +1255,174 @@ struct GoalPathBuilderState: Sendable {
     let accessibilityHint: String
 }
 
+struct LifePathThreadState: Sendable {
+    let title: String
+    let subtitle: String
+    let nodes: [LifePathThreadNode]
+    let proofBeads: [ProofBead]
+    let riskPinches: [RiskPinch]
+    let alternateRouteFolds: [AlternateRouteFold]
+    let sourceFold: GoalPathSourceFold
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+
+    init(
+        stages: [GoalPathStage],
+        pathBuilder: GoalPathBuilderState?,
+        privacySensitive: Bool = false
+    ) {
+        let visibleStages = Array(stages.prefix(6))
+        let nodes = visibleStages.enumerated().map { index, stage in
+            LifePathThreadNode(
+                id: stage.id,
+                order: index + 1,
+                roleLabel: stage.lifecycleMarkerLabel,
+                title: privacySensitive ? "Private path stage" : stage.title,
+                summary: privacySensitive ? "Stage detail hidden. The path role remains visible." : stage.summary,
+                statusLabel: stage.statusLabel,
+                stepCountLabel: stage.stepCountLabel,
+                markerLabel: stage.progressShapeLabel,
+                nonColorMeaning: stage.accessibilitySummary,
+                symbolName: LifePathThreadState.symbolName(for: stage.position),
+                state: stage.state
+            )
+        }
+        let stageProof = visibleStages.compactMap { stage -> ProofBead? in
+            guard let marker = stage.proofMarkerLabel else { return nil }
+            return ProofBead(
+                id: "stage-proof-\(stage.id)",
+                title: marker,
+                summary: privacySensitive ? "Proof detail hidden." : stage.highlight ?? stage.summary,
+                state: stage.position == .completed ? .success : .default
+            )
+        }
+        let requirementProof = (pathBuilder?.proofRequirements ?? []).prefix(3).map { proof in
+            ProofBead(
+                id: "requirement-\(proof.id)",
+                title: privacySensitive ? "Private proof check" : proof.title,
+                summary: privacySensitive ? "Proof detail hidden." : proof.summary,
+                state: proof.state
+            )
+        }
+        let stageRiskPinches = visibleStages.compactMap { stage -> RiskPinch? in
+            guard let risk = stage.riskMarkerLabel else { return nil }
+            return RiskPinch(
+                id: "risk-\(stage.id)",
+                title: risk,
+                summary: privacySensitive ? "Risk detail hidden." : stage.highlight ?? stage.summary,
+                state: .warning
+            )
+        }
+        let phaseRiskPinches = (pathBuilder?.phases ?? []).filter { $0.state == .warning }.prefix(3).map { phase in
+            RiskPinch(
+                id: "phase-risk-\(phase.id)",
+                title: "Risk visible",
+                summary: privacySensitive ? "Risk detail hidden." : phase.dependencySummary,
+                state: .warning
+            )
+        }
+        let forkRiskPinches = (pathBuilder?.forks ?? []).filter { $0.state == .warning }.prefix(2).map { fork in
+            RiskPinch(
+                id: "fork-risk-\(fork.id)",
+                title: "Route needs review",
+                summary: privacySensitive ? "Risk detail hidden." : fork.basisSummary,
+                state: .warning
+            )
+        }
+        let alternateRouteFolds = (pathBuilder?.forks ?? []).prefix(3).map { fork in
+            AlternateRouteFold(
+                id: "alternate-\(fork.id)",
+                title: privacySensitive ? "Private alternate route" : fork.title,
+                summary: privacySensitive ? "Alternate route detail hidden." : fork.summary,
+                reviewLabel: fork.decisionPrompt,
+                state: fork.state
+            )
+        }
+        let sourceFold = GoalPathSourceFold(
+            id: "goal-path-source-fold",
+            title: "GoalPathSourceFold",
+            summary: pathBuilder?.performanceBudgetSummary ?? "Thread is based on the visible goal path stages.",
+            breadcrumbLabels: pathBuilder?.breadcrumbLabels ?? ["Goal Detail", "LifePath Thread"],
+            privacyLabel: privacySensitive ? "Private mode hides titles while preserving path roles." : "Source labels stay visible for review.",
+            state: .default
+        )
+
+        self.title = "LifePath Thread"
+        self.subtitle = "Path roles, proof, risk, and alternate routes stay connected before deeper tactics."
+        self.nodes = nodes
+        self.proofBeads = Array((stageProof + requirementProof).prefix(6))
+        self.riskPinches = Array((stageRiskPinches + phaseRiskPinches + forkRiskPinches).prefix(3))
+        self.alternateRouteFolds = Array(alternateRouteFolds)
+        self.sourceFold = sourceFold
+        self.accessibilityLabel = "LifePath Thread"
+        self.accessibilityValue = nodes
+            .map { "Order \($0.order), \($0.roleLabel), \($0.statusLabel), \($0.title)" }
+            .joined(separator: ". ")
+        self.accessibilityHint = privacySensitive
+            ? "Private mode preserves accessible path order, proof beads, risk pinch, alternate route fold, and source fold roles without exposing titles."
+            : "Review the path in order with proof beads, risk pinch, alternate route fold, and source fold."
+    }
+
+    private static func symbolName(for position: GoalPathStagePosition) -> String {
+        switch position {
+        case .completed:
+            "checkmark.seal"
+        case .current:
+            "scope"
+        case .blocked:
+            "exclamationmark.triangle"
+        case .upcoming:
+            "arrow.triangle.branch"
+        }
+    }
+}
+
+struct LifePathThreadNode: Identifiable, Sendable {
+    let id: String
+    let order: Int
+    let roleLabel: String
+    let title: String
+    let summary: String
+    let statusLabel: String
+    let stepCountLabel: String
+    let markerLabel: String
+    let nonColorMeaning: String
+    let symbolName: String
+    let state: AmbitionVisualState
+}
+
+struct ProofBead: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let state: AmbitionVisualState
+}
+
+struct RiskPinch: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let state: AmbitionVisualState
+}
+
+struct AlternateRouteFold: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let reviewLabel: String
+    let state: AmbitionVisualState
+}
+
+struct GoalPathSourceFold: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let breadcrumbLabels: [String]
+    let privacyLabel: String
+    let state: AmbitionVisualState
+}
+
 extension GoalPathBuilderState {
     var tradeoffReview: GoalPathTradeoffReviewState {
         let blockedPhase = phases.first {

@@ -348,6 +348,14 @@ place without adding a destination, and avoid dashboard grid, kanban,
 enterprise project-management lanes, route/raw-value, persistence/schema,
 sync/cloud, release, legal/privacy, AOS runtime, or LDI runtime claims.
 
+FCP11 is complete Green as of 2026-05-06. Future Goals, proof, alternate-path,
+AOS, LDI, and Found Life work that touches Goal Detail path presentation must
+preserve LifePathThread as the first path object, keep path order accessible,
+attach proof as beads, mark friction as a risk pinch, keep alternate routes
+folded behind user review, preserve GoalPathSourceFold source truth, support
+private redaction, and avoid route/raw-value, persistence/schema, sync/cloud,
+release, legal/privacy, AOS runtime, or LDI runtime claims.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
