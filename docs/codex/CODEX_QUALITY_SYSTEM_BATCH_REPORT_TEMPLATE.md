@@ -33,6 +33,28 @@ Batch ID:
 
 ## CQS Reviewers Applied
 
+## Gate Result Manifest
+
+Required for every CQS-enhanced batch unless explicitly not applicable.
+
+- Manifest path: `docs/audits/gate-results/<batch-id>-gate-result.json`
+- Schema: `gate-result-manifest.v1`
+- Validation command: `python3 scripts/validate-gate-result-manifest.py docs/audits/gate-results/<batch-id>-gate-result.json`
+- Strict/advisory mode:
+- Gate families invoked:
+- Yellow/Red items represented in manifest:
+
+## Commit Provenance
+
+- Base SHA before batch:
+- Head SHA after batch:
+- Commit SHA:
+- Commit author if available:
+- Commit timestamp if available:
+- Branch:
+- Remote main SHA at validation:
+- Working tree clean at closeout: yes / no
+
 ## AQOS Impact Classification
 
 ## FVQ Rendered Proof Classification
@@ -62,6 +84,16 @@ Required for UI-affecting batches:
 ## Validation Commands
 
 ## Validation Results
+
+## Advisory / Strict Gate Results
+
+Record:
+
+- CQS advisory scripts run
+- Source Atlas advisory scripts run, if relevant
+- CQS_STRICT value
+- warnings accepted as Yellow
+- hard failures, if any
 
 ## Repairs Attempted
 
