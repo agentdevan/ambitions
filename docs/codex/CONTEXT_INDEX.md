@@ -237,8 +237,14 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   no active StoreKit runtime, product catalog, paywall, purchase flow, receipt
   validation, subscription validation, or entitlement implementation, and the
   safe decision remains no StoreKit, no subscription, no in-app purchase, no
-  paywall, no ads, and no external purchase link. The next eligible global
-  batch is PFC23 Paywall / Upgrade UX Compliance Review.
+  paywall, no ads, and no external purchase link.
+- PFC23 is complete Green as no-paywall compliance review and safe deferral.
+  PFC21/PFC22 prerequisites remain unresolved, the source scan found no active
+  paywall, upgrade surface, StoreKit runtime, product catalog, purchase flow,
+  receipt validation, subscription validation, or entitlement implementation,
+  existing Billing copy remains not-active, and trust/privacy/delete/export/
+  data-access controls remain not paywalled. The next eligible global batch is
+  AOS01 AmbitionsOS Canon And Runtime Contract.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -663,7 +669,8 @@ complete Green as bounded ActivityKit source hardening evidence. PFC18 is
 complete Green as bounded App Intents / Shortcuts source hardening evidence.
 PFC20 is complete Green as bounded notification, Calendar, and Reminders source
 hardening evidence. PFC22 is complete Green as explicit StoreKit implementation
-deferral proof, and the full-stack order selects PFC23 next.
+deferral proof. PFC23 is complete Green as no-paywall compliance review and
+safe deferral evidence, and the full-stack order selects AOS01 next.
 
 
 ## Living Dream Intelligence Context

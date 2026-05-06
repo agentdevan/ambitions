@@ -468,7 +468,17 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     dependency, signing/project/workflow change, legal/privacy/release claim,
     App Store claim, TestFlight claim, physical-device proof, or public
     accessibility claim.
-68. PFC23 Paywall / Upgrade UX Compliance Review.
+68. PFC23 Paywall / Upgrade UX Compliance Review. Completed Green on
+    2026-05-06 as no-paywall compliance review and safe deferral: PFC21/PFC22
+    prerequisites remain unresolved, the source scan found no active paywall,
+    upgrade surface, StoreKit runtime, product catalog, purchase flow, receipt
+    validation, subscription validation, or entitlement implementation,
+    existing Billing copy remains not-active, and trust/privacy/delete/export/
+    data-access controls remain not paywalled. It adds no paywall, upgrade UX,
+    locked feature gate, product IDs, pricing, StoreKit runtime, external
+    purchase link, dependency, signing/project/workflow change,
+    legal/privacy/release claim, App Store claim, TestFlight claim,
+    physical-device proof, or public accessibility claim.
 
 ### Phase 7 — AOS Internal Foundations
 

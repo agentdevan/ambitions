@@ -2,16 +2,16 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral complete / Green.
-Next eligible batch: PFC23 Paywall / Upgrade UX Compliance Review.
-Scope: PFC22 closed as explicit StoreKit implementation deferral proof because
-PFC21 accepted-Yellow prerequisites remain unresolved: exact product IDs,
-pricing, entitlement model, App Store Connect setup, restore behavior, testing
-fixtures, and legal/business approval. It adds no StoreKit runtime, product
-catalog, purchase flow, receipt validation, entitlement model, paywall,
-subscription, in-app purchase, ads, external purchase link, entitlement,
-signing, project/workflow/dependency change, persistence/schema change, privacy
-manifest change, sync/account/backend behavior, AI/LDI runtime,
+Current batch: PFC23 Paywall / Upgrade UX Compliance Review complete / Green.
+Next eligible batch: AOS01 AmbitionsOS Canon And Runtime Contract.
+Scope: PFC23 closed as no-paywall compliance review and safe deferral because
+PFC21/PFC22 prerequisites remain unresolved and the source scan found no active
+paywall, upgrade surface, StoreKit runtime, product catalog, purchase flow,
+receipt validation, subscription validation, or entitlement implementation. It
+adds no paywall, upgrade UX, locked feature gate, StoreKit runtime, product ID,
+pricing, subscription, in-app purchase, ad model, external purchase link,
+entitlement, signing, project/workflow/dependency change, persistence/schema
+change, privacy manifest change, sync/account/backend behavior, AI/LDI runtime,
 legal/privacy/release claim, App Store claim, TestFlight claim, physical-device
 proof, or public accessibility claim.
 
@@ -53,14 +53,17 @@ PFC15 is complete / Green as Live Activities / ActivityKit strategy evidence.
 PFC17 is complete / Green as App Intents / Shortcuts / Spotlight strategy
 evidence. PFC19 is complete / Green as Notifications / Focus / Calendar /
 Reminders integration strategy evidence. PFC21 is complete / Accepted Yellow as
-StoreKit / monetization strategy evidence. PFC24 is complete / Green as Privacy
-Data Map And App Privacy Labels evidence. PFC25 is complete / Green as Privacy
-Manifest / Required-Reason API Audit evidence. PFC26 is complete / Green as
-Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is complete /
-Green as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is
-complete / Green as Security Threat Model And Secrets Audit evidence. PFC29 is
-complete / Green as Logging / Analytics / Observability Policy evidence. PFC30
-is complete / Green as Performance Budget And Instruments Plan evidence. FCP22
+StoreKit / monetization strategy evidence. PFC22 is complete / Green as
+StoreKit implementation deferral proof. PFC23 is complete / Green as no-paywall
+compliance review and safe deferral evidence. PFC24 is complete / Green as
+Privacy Data Map And App Privacy Labels evidence. PFC25 is complete / Green as
+Privacy Manifest / Required-Reason API Audit evidence. PFC26 is complete /
+Green as Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is
+complete / Green as Safety / Professional Boundary / Crisis Policy evidence.
+PFC28 is complete / Green as Security Threat Model And Secrets Audit evidence.
+PFC29 is complete / Green as Logging / Analytics / Observability Policy
+evidence. PFC30 is complete / Green as Performance Budget And Instruments Plan
+evidence. FCP22
 is complete / Green as Personal System Center Refactor evidence. FCP23 is
 complete / Green as Memory Lens / External Brain Visual Layer evidence. FCP24
 is complete / Green as Appearance Studio evidence. FCP18 is complete / Green
@@ -83,7 +86,8 @@ Green as Live Activity source hardening and focused-test evidence. PFC18 is
 complete / Green as App Intents / Shortcuts source hardening and focused-test
 evidence. PFC20 is complete / Green as notification, Calendar, and Reminders
 implementation proof. PFC22 is complete / Green as StoreKit implementation
-deferral proof. PFC23 is the next eligible global batch.
+deferral proof. PFC23 is complete / Green as no-paywall compliance review and
+safe deferral evidence. AOS01 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC11 Green; PFC12 Green; PFC13 Green; PFC14 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC16 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC11 Green; PFC12 Green; PFC13 Green; PFC14 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC16 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC22 Green; PFC23 Green; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -317,7 +317,14 @@ purchase, no paywall, no ads, and no external purchase link.
 Type: UX/legal review; implementation if approved.
 Owner: Monetization / Legal.
 Goal: Ensure paywall is clear, accessible, review-safe, not manipulative, and not hostile to free users.
-Required result: paywall compliance report.
+Required result: Complete / Green as no-paywall compliance review and safe
+deferral. PFC23 did not implement paywall or upgrade UX because PFC21/PFC22
+prerequisites remain unresolved and the source scan found no active paywall,
+upgrade surface, StoreKit runtime, product catalog, purchase flow, receipt
+validation, subscription validation, or entitlement implementation. Future
+paywall or upgrade UX remains blocked until approved product, pricing,
+StoreKit, App Store Connect, legal/business, accessibility, and rendered-UX
+proof exists.
 
 ### PFC24 — Privacy Data Map And App Privacy Labels
 

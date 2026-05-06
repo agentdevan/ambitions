@@ -262,6 +262,13 @@ external-purchase work must preserve the PFC22 deferral boundary until exact
 product IDs, pricing, entitlement model, App Store Connect setup, StoreKit
 testing fixtures, and legal/business approval exist.
 
+PFC23 is complete Green as of 2026-05-06. Future paywall, upgrade UX, locked
+feature gate, pricing, StoreKit, subscription, in-app purchase, trial, offer,
+restore, cancellation, renewal, external-purchase, or premium-feature work must
+preserve the PFC23 no-paywall compliance boundary until approved product,
+pricing, StoreKit, App Store Connect, legal/business, accessibility, and
+rendered-UX proof exists.
+
 PFC24 is complete Green as of 2026-05-05. Future App Store privacy labels,
 privacy policy, data collection, tracking, analytics, StoreKit, account, cloud,
 sync, external-service, permission, notification, widget, Live Activity, App
