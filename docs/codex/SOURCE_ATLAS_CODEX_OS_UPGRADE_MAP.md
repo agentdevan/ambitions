@@ -1,12 +1,12 @@
 # Source Atlas Codex OS Upgrade Map
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Codex OS upgrade map for Source Atlas.
+Status: Active Codex OS upgrade map for Source Atlas and SAP composition/projection lock.
 Date: 2026-05-06
 
 ## Purpose
 
-Source Atlas is a trust-critical system. This map makes Source Atlas enforceable by Codex through reviewer skills, advisory scripts, reports, and stop conditions.
+Source Atlas is a trust-critical system. This map makes Source Atlas enforceable by Codex through reviewer skills, advisory scripts, reports, stop conditions, and composition/projection anti-sprawl gates.
 
 ## Required reviewer skills
 
@@ -29,6 +29,13 @@ Create or invoke equivalent protocols for:
 15. `source-atlas-fvq-reviewer`
 16. `source-atlas-pack-factory-reviewer`
 17. `source-atlas-aos-ldi-integration-reviewer`
+18. `source-atlas-composition-architect`
+19. `goal-projection-reviewer`
+20. `capability-graph-reviewer`
+21. `projection-recipe-reviewer`
+22. `alternative-path-option-value-reviewer`
+23. `pack-duplication-reviewer`
+24. `generated-step-boundary-reviewer`
 
 Each skill must define:
 
@@ -38,6 +45,7 @@ Each skill must define:
 - Hard Red criteria
 - required tests/previews
 - privacy/source/no-claim risks
+- composition/projection risks when relevant
 - required report sections
 
 ## Required advisory scripts
@@ -57,6 +65,11 @@ Create or invoke equivalent scripts:
 - `scripts/sa-pack-revocation-rollback-scan.sh`
 - `scripts/sa-private-document-leak-scan.sh`
 - `scripts/sa-fixture-coverage-scan.sh`
+- `scripts/sa-composition-projection-scan.sh`
+- `scripts/sa-pack-duplication-scan.sh`
+- `scripts/sa-projection-fixture-coverage-scan.sh`
+- `scripts/sa-generated-step-boundary-scan.sh`
+- `scripts/sa-alternative-path-option-value-scan.sh`
 
 Scripts must be non-mutating by default, safe to run locally, and must not print private source contents or secrets.
 
@@ -82,6 +95,19 @@ Source Atlas review is mandatory when work touches:
 - Pack Factory tooling
 - Freshness Broker manifests
 - source pack signatures/revocation/rollback
+- domain packs
+- capability graphs
+- level ladders
+- role overlays
+- requirement overlays
+- path overlays
+- projection recipes
+- GoalProjection
+- PersonalPathInstance
+- StepCandidateSeed
+- AlternativePathSet
+- OptionValueMap
+- pack composition or aliasing
 
 ## Batch report additions
 
@@ -95,6 +121,12 @@ Source Atlas batch reports must include:
 - review flow status
 - no-claim scan status
 - offline fallback status
+- composition/projection status
+- duplicate pack/claim status
+- skill-slice status if relevant
+- highest-path reuse status if relevant
+- alternative path / option value status if relevant
+- generated-step boundary status if relevant
 - FVQ rendered proof status if UI-affecting
 - AOS/LDI integration status if relevant
 - unresolved Yellow items with owner
@@ -114,7 +146,27 @@ Stop on:
 - app requires internet for basic cached/source-needed behavior
 - Source Atlas dashboard/tab/marketplace appears
 - hosted AI/user-data-server/live-API dependency is introduced without explicit scope/legal review
+- one pack per individual goal phrase
+- pro/elite pack duplicates lower-level graph nodes instead of reusing shared nodes
+- narrow skill goal loads entire elite/pro path without reason
+- final scheduled steps are stored as universal pack output
+- PersonalPathInstance cannot vary by user context
+- serious path has no alternative path/option value handling or explicit no-known-alternative statement
+
+## Physical skill requirements
+
+SAP05 or the earliest Source Atlas Codex OS batch must create or map physical skill files for:
+
+- `.codex/skills/source-atlas-composition-architect.md`
+- `.codex/skills/goal-projection-reviewer.md`
+- `.codex/skills/capability-graph-reviewer.md`
+- `.codex/skills/projection-recipe-reviewer.md`
+- `.codex/skills/alternative-path-option-value-reviewer.md`
+- `.codex/skills/pack-duplication-reviewer.md`
+- `.codex/skills/generated-step-boundary-reviewer.md`
+
+If physical scripts are not yet created, batches must mark the gap Yellow with owner and cannot close runtime implementation as Green if the missing script would have caught a touched failure mode.
 
 ## Closeout
 
-SA32 cannot close until all skills/scripts are created or mapped, every SA gate is owned, and later AOS/LDI/FCP/PFC batches have mandatory Source Atlas review triggers.
+SA32 cannot close until all skills/scripts are created or mapped, every SA/SAP gate is owned, and later AOS/LDI/FCP/PFC batches have mandatory Source Atlas and composition/projection review triggers.
