@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 Accepted Yellow; HPS09 Accepted Yellow; HPS10 Accepted Yellow; HPS11 Accepted Yellow; HPS12 next.
+Status: Complete / Accepted Yellow; HPS01-HPS12 Accepted Yellow with owners.
 Date: 2026-05-06
 Train code: HPS
 
@@ -261,6 +261,16 @@ Owner: Product Cohesion / Architecture / Strategy.
 Goal: Ensure HPS strengthens the app without sprawl. Define one-primary-object surface law, no-dashboard enforcement, five-tab cohesion, language continuity, acquisition-readable architecture requirements, moat packet requirements, diligence packet requirements.
 Required result: HPS closeout and cross-train integration lock.
 Acceptance: HPS updates AOS, LDI, FCP, PFC, CQS, FVQ integration maps and leaves no missing quality gate without owner.
+Status: Accepted Yellow as docs/cross-train audit lock in
+`docs/canon/Ambitions_Singular_Experience_Acquisition_Readiness_Lock.md`.
+HPS12 defines one-primary-object surface law, five-tab cohesion, language
+continuity, cross-train inheritance, internal acquirer-readable packet outline,
+missing quality gate owners, and no-claim boundaries. Yellow is owned by later
+HPS Codex OS work for missing physical HPS advisory scripts/skills and by
+future AOS/LDI/FCP/PFC/CQS/FVQ/human-owner batches for typed runtime,
+fixtures, rendered proof, StoreKit/paywall, legal/privacy, release, device,
+accessibility, security, vertical, revenue, marketplace, API/platform,
+account/backend/sync, and buyer narrative proof.
 
 ## Common gates
 

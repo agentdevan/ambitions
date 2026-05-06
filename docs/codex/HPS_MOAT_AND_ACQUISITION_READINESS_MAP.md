@@ -84,3 +84,11 @@ This map does not claim any buyer exists or is interested.
 ## HPS12 closeout requirement
 
 HPS12 must produce or point to an acquisition-readable packet outline covering product, architecture, privacy, AI governance, data model, UI cohesion, future vertical strategy, and unresolved proof gaps.
+
+HPS12 closeout pointer:
+
+- `docs/canon/Ambitions_Singular_Experience_Acquisition_Readiness_Lock.md`
+
+This pointer is an internal strategy and diligence-outline reference only. It
+does not claim buyer interest, commercial value, valuation, diligence success,
+or acquisition readiness.

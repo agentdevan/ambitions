@@ -199,3 +199,16 @@ Preferred order:
 6. Run LDI only after HPS inheritance.
 
 If work has advanced past this point, insert HPS at the earliest safe remaining point and document accepted Yellow rather than replaying completed batches.
+
+## HPS12 closeout lock
+
+HPS12 closes the HPS train as accepted Yellow source truth in
+`docs/canon/Ambitions_Singular_Experience_Acquisition_Readiness_Lock.md`.
+Future FCP, PFC, AOS, LDI, Found Life, CQS, and FVQ work that touches HPS-owned
+concepts must preserve one-primary-object surface law, five-tab cohesion,
+language continuity, privacy/source/proof/evaluation boundaries, and owner-
+labeled proof gaps.
+
+HPS12 does not approve AOS runtime, LDI runtime, vertical products, revenue
+products, marketplace behavior, API/platform behavior, account/backend/sync
+behavior, hosted AI, public claims, or buyer-facing action.

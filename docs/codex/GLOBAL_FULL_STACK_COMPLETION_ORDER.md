@@ -611,12 +611,21 @@ remaining sensitive intelligence work.
      account/backend/sync services, hosted AI, buyer outreach, legal/privacy
      approval, or release/platform/acquisition claims. Yellow owners: later HPS
      Codex OS scripts/skills and future PFC/AOS/LDI/HPS/human-owner batches.
-79H. HPS12 Singular Experience + Acquisition Readiness Lock.
+79H. HPS12 Singular Experience + Acquisition Readiness Lock. Completed
+     Accepted Yellow on 2026-05-06 as docs/cross-train audit lock. It defines
+     one-primary-object surface law, five-tab cohesion, language continuity,
+     cross-train inheritance, internal acquirer-readable packet outline,
+     missing quality gate owners, and no-claim boundaries without implementing
+     AOS runtime, LDI runtime, HPS runtime, vertical products, revenue
+     products, marketplaces, API/platform products, account/backend/sync
+     services, hosted AI, buyer outreach, legal/privacy approval, or release/
+     platform/acquisition claims. Yellow owners: later HPS Codex OS scripts/
+     skills and future AOS/LDI/FCP/PFC/CQS/FVQ/human-owner proof batches.
 
 ### Phase 7 — AOS Internal Foundations
 
-69. AOS01 AmbitionsOS Canon And Runtime Contract. Blocked until HPS01-HPS12
-    are Green or accepted Yellow with owners.
+69. AOS01 AmbitionsOS Canon And Runtime Contract. Next eligible after
+    HPS01-HPS12 closed Green or accepted Yellow with owners.
 70. AOS02 Life Graph Event Log Foundation.
 71. AOS03 Graph Delta Review Projection Store.
 72. AOS04 Control Plane Work Classifier.

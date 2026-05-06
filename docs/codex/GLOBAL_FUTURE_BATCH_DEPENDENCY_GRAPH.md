@@ -195,6 +195,13 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   claim without explicit owner proof. Yellow owners: later HPS Codex OS scripts/
   skills and future PFC/AOS/LDI/HPS/human-owner implementation or approval
   batches.
+- HPS12 is complete Accepted Yellow as of 2026-05-06. Future FCP, PFC, AOS,
+  LDI, Found Life, CQS, FVQ, vertical, revenue, source-pack, API/platform, and
+  buyer-fit work must inherit one-primary-object surface law, five-tab
+  cohesion, language continuity, cross-train inheritance, internal packet
+  outline boundaries, missing quality gate owner map, and no-claim boundary.
+  Yellow owners: later HPS Codex OS scripts/skills and future AOS/LDI/FCP/PFC/
+  CQS/FVQ/human-owner proof batches.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.
