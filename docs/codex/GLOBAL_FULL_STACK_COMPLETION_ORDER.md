@@ -575,7 +575,20 @@ remaining sensitive intelligence work.
      behavior, or release/platform claims. Yellow owners: later HPS Codex OS
      scripts/skills and future typed compiler/evaluation implementation
      batches.
-76H. HPS09 Privacy / Memory Permission + Local Intelligence Adapter.
+76H. HPS09 Privacy / Memory Permission + Local Intelligence Adapter. Completed
+     Accepted Yellow on 2026-05-06 as docs-privacy intelligence architecture
+     in
+     `docs/canon/Ambitions_Privacy_Memory_Permission_Local_Intelligence_Adapter_Architecture.md`.
+     It defines memory permission object families, required privacy fields,
+     permission states, sensitive area classes, external-surface redaction,
+     deterministic fallback tier ladder, structured extraction boundary, tool
+     approval states, performance/battery boundaries, surface projection rules,
+     and memory permission read/permission proposal/local adapter evaluation/
+     structured extraction/tool approval API contract families without
+     implementing memory permission runtime, model runtime, extraction,
+     classification, tool calling, UI, external-surface behavior, or release/
+     platform claims. Yellow owners: later HPS Codex OS scripts/skills and
+     future typed privacy/local-adapter/evaluation implementation batches.
 77H. HPS10 AI Governance + Evaluation Assurance Lab.
 78H. HPS11 Vertical Expansion + Revenue Architecture.
 79H. HPS12 Singular Experience + Acquisition Readiness Lock.

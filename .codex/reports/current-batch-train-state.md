@@ -2,18 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS08 Living Dream Compiler Upgrade complete / Accepted Yellow.
-Next eligible batch: HPS09 Privacy / Memory Permission + Local Intelligence Adapter.
-Scope: HPS08 added docs-LDI Living Dream Compiler architecture. It defines
-compiler input/output families, required fields, seriousness ladder,
-dream-to-domain classifier, feasibility spectrum, safe symbolic translation,
-source trust bridge, requirement graph bridge, capacity bridge, mutation
-permissions, blast radius states, next evidence recommendation, safe
-refusal/redirect, surface projection rules, and dream intake classification/
-compiler/bridge/recompiler impact/dream handling receipt contract families. It
-adds no production Swift, schema, migration, LDI runtime, source-pack runtime,
-path generation, recommendation behavior, sync/account/backend, hosted AI, UI,
-external-surface behavior, professional advice, crisis service,
+Current batch: HPS09 Privacy / Memory Permission + Local Intelligence Adapter complete / Accepted Yellow.
+Next eligible batch: HPS10 AI Governance + Evaluation Assurance Lab.
+Scope: HPS09 added docs-privacy intelligence architecture. It defines memory
+permission object families, required privacy fields, permission states,
+sensitive area classes, external-surface redaction, deterministic fallback tier
+ladder, structured extraction boundary, tool approval states, performance/
+battery boundaries, surface projection rules, and memory permission read/
+permission proposal/local adapter evaluation/structured extraction/tool
+approval contract families. It adds no production Swift, schema, migration,
+memory permission runtime, model runtime, extraction, classification, tool
+calling, sync/account/backend, hosted AI, UI, external-surface behavior,
+professional advice,
 release claim, App Store claim,
 TestFlight claim, physical-device proof, public accessibility claim, or
 acquisition outcome claim.
@@ -100,8 +100,10 @@ and Searchable Life Recall architecture evidence. HPS06 is complete / Accepted
 Yellow as Recommendation Quality and Start Here Brain architecture evidence.
 HPS07 is complete / Accepted Yellow as Option Value and Pivot Preservation
 architecture evidence. HPS08 is complete / Accepted Yellow as Living Dream
-Compiler architecture evidence. HPS09 is the next eligible global batch, and AOS01
-remains blocked until HPS01-HPS12 are Green or accepted Yellow with owners.
+Compiler architecture evidence. HPS09 is complete / Accepted Yellow as Privacy
+Memory Permission and Local Intelligence Adapter architecture evidence. HPS10
+is the next eligible global batch, and AOS01 remains blocked until HPS01-HPS12
+are Green or accepted Yellow with owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

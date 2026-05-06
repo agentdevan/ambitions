@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 Accepted Yellow; HPS09 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 Accepted Yellow; HPS09 Accepted Yellow; HPS10 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -207,6 +207,17 @@ Owner: Privacy Safety / Local Intelligence.
 Goal: Define memory permission ledger, sensitive area classes, external-surface redaction, deterministic fallback, local/on-device model adapter strategy, structured extraction boundaries, tool-calling approval boundaries, no hidden mutation, no model dependency, performance/battery boundaries.
 Required result: privacy/local intelligence adapter contract.
 Acceptance: no hosted AI, cloud, user-data server, or model-runtime claim.
+Status: Accepted Yellow as docs-privacy intelligence architecture in
+`docs/canon/Ambitions_Privacy_Memory_Permission_Local_Intelligence_Adapter_Architecture.md`.
+HPS09 defines memory permission object families, required privacy fields,
+permission states, sensitive area classes, external-surface redaction,
+deterministic fallback tier ladder, structured extraction boundary, tool
+approval states, performance/battery boundaries, surface projection rules, and
+memory permission read/permission proposal/local adapter evaluation/structured
+extraction/tool approval contract families. Yellow is owned by later HPS Codex
+OS work for missing physical HPS advisory scripts/skills and by
+AOS15/AOS17/AOS18/LDI/external-surface/evaluation batches for future typed
+privacy and local-adapter behavior.
 
 ### HPS10 — AI Governance + Evaluation Assurance Lab
 

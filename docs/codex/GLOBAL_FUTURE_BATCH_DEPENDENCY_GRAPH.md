@@ -170,6 +170,15 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   radius states, safe refusal/redirect, and no unsafe/professional-boundary
   operationalization rule. Yellow owners: later HPS Codex OS scripts/skills and
   future typed compiler/evaluation implementation batches.
+- HPS09 is complete Accepted Yellow as of 2026-05-06. Future privacy, memory,
+  local intelligence, extraction, classification, model-adapter, tool approval,
+  external-surface, AOS, LDI, and evaluation work must inherit memory
+  permission object families, sensitive area classes, external-surface
+  redaction, deterministic fallback tier ladder, structured extraction
+  boundary, tool approval states, performance/battery boundaries, and no
+  hidden mutation or model-required core behavior rule. Yellow owners: later
+  HPS Codex OS scripts/skills and future typed privacy/local-adapter/evaluation
+  implementation batches.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.
