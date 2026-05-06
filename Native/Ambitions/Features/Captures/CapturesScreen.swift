@@ -38,11 +38,11 @@ struct CapturesScreen: View {
 
                     switch viewModel.state {
                     case .loading:
-                        LoadingSkeletonCard(lineCount: 4)
+                        DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.capturePlacementShelf))
                             .transition(.ambitionPanel)
                     case .failed:
                         DegradedStateCard(
-                            state: DegradedStateOrchestrator.unavailable(surface: "Capture"),
+                            state: DegradedStateOrchestrator.objectUnavailable(.capturePlacementShelf),
                             primaryAccessibilityIdentifier: "captures.retry-button",
                             onPrimaryAction: {
                                 Task { await load() }

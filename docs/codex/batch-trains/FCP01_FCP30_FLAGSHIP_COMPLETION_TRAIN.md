@@ -415,6 +415,11 @@ Depends on: FCP05, FCP10, FCP14, FCP18, FCP22; SI13.
 Goal: Object-specific honest states.
 Acceptance: no generic error; no fake progress; every major object has state matrix.
 
+Status: Complete / Green on 2026-05-06 as shared/top-level object-state
+implementation evidence with a Flagship Object State Matrix and object-specific
+loading/unavailable states across Today, Goals, Goal Detail, Capture, Plan, and
+You. Focused state-matrix and degraded-state proof passed.
+
 ### FCP26 — Iconography / Status Grammar Hardening
 
 Type: Implementation.

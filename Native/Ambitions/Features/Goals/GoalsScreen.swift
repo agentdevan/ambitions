@@ -35,17 +35,10 @@ struct GoalsScreen: View {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    HeroCard {
-                        SectionHeader(
-                            eyebrow: "Direction Board",
-                            title: "Goals",
-                            subtitle: "Loading the current board, direction pressure, and horizon signals."
-                        )
-                    }
-                    AsyncStateCard(.loading(lines: 8))
+                    DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
                 case .failed:
                     DegradedStateCard(
-                        state: DegradedStateOrchestrator.unavailable(surface: "Goals"),
+                        state: DegradedStateOrchestrator.objectUnavailable(.missionControlTimeSpine),
                         primaryAccessibilityIdentifier: "goals.retry-button",
                         onPrimaryAction: {
                             Task { await viewModel.refresh(using: container.goalsService) }

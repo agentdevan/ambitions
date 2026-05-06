@@ -27,11 +27,11 @@ struct TodayScreen: View {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                     switch viewModel.state {
                     case .loading:
-                        AsyncStateCard(.loading(lines: 6))
+                        DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.startHere))
                             .transition(.ambitionPanel)
                     case .failed:
                         DegradedStateCard(
-                            state: DegradedStateOrchestrator.unavailable(surface: "Today"),
+                            state: DegradedStateOrchestrator.objectUnavailable(.startHere),
                             primaryAccessibilityIdentifier: "today.retry-button",
                             onPrimaryAction: {
                                 Task {

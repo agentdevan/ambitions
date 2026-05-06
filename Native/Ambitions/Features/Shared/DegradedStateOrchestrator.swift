@@ -71,6 +71,170 @@ struct DegradedStatePresentation: Identifiable, Sendable, Equatable {
     }
 }
 
+enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
+    case startHere
+    case realityRail
+    case missionControlTimeSpine
+    case proofSpine
+    case capturePlacementShelf
+    case lifeShapeContourMap
+    case personalSystemCenter
+    case memoryLens
+
+    var title: String {
+        switch self {
+        case .startHere: "Start Here"
+        case .realityRail: "Reality Rail"
+        case .missionControlTimeSpine: "MissionControlTimeSpine"
+        case .proofSpine: "Proof Spine"
+        case .capturePlacementShelf: "Capture Placement Shelf"
+        case .lifeShapeContourMap: "LifeShape Contour Map"
+        case .personalSystemCenter: "Personal System Center"
+        case .memoryLens: "Memory Lens"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .startHere: "scope"
+        case .realityRail: "point.3.connected.trianglepath.dotted"
+        case .missionControlTimeSpine: "arrow.triangle.branch"
+        case .proofSpine: "checkmark.seal"
+        case .capturePlacementShelf: "tray.and.arrow.down"
+        case .lifeShapeContourMap: "map"
+        case .personalSystemCenter: "person.crop.circle"
+        case .memoryLens: "memories"
+        }
+    }
+
+    var loadingExplanation: String {
+        switch self {
+        case .startHere:
+            "Ambitions is preserving the Start Here slot while it reads the local day."
+        case .realityRail:
+            "The rail keeps its order while local steps, waiting points, and recovery signals settle."
+        case .missionControlTimeSpine:
+            "Goal Detail keeps the spine shape while lanes, path, proof, and decisions load."
+        case .proofSpine:
+            "Proof stays hidden until source, freshness, privacy, and correction posture are ready."
+        case .capturePlacementShelf:
+            "Capture keeps the composer available while placement, privacy, and correction signals settle."
+        case .lifeShapeContourMap:
+            "Plan preserves the contour map while capacity, pressure, and protected pockets load."
+        case .personalSystemCenter:
+            "You keeps the system center stable while setup, trust, memory, and receipts load."
+        case .memoryLens:
+            "Memory Lens waits for local source age, privacy, and correction posture before showing detail."
+        }
+    }
+
+    var emptyExplanation: String {
+        switch self {
+        case .startHere:
+            "Start Here waits for one real goal, capture, or promise instead of inventing urgency."
+        case .realityRail:
+            "The rail can stay open; empty space is not treated as failure."
+        case .missionControlTimeSpine:
+            "Mission Control waits for a goal with enough local shape to inspect."
+        case .proofSpine:
+            "No proof is shown until the user saves evidence or a local receipt exists."
+        case .capturePlacementShelf:
+            "The shelf stays quiet until there is a capture that needs a place."
+        case .lifeShapeContourMap:
+            "The map can stay open when no real constraints need shaping."
+        case .personalSystemCenter:
+            "The system center starts with setup and trust controls before it shows deeper history."
+        case .memoryLens:
+            "Memory Lens stays quiet until explicit local evidence makes recall useful."
+        }
+    }
+
+    var degradedExplanation: String {
+        switch self {
+        case .startHere:
+            "Start Here can retry without moving commitments or pretending the recommendation is current."
+        case .realityRail:
+            "The rail stays readable and does not silently reorder steps while source state is uncertain."
+        case .missionControlTimeSpine:
+            "Goal Detail can retry without changing the path, decisions, or proof."
+        case .proofSpine:
+            "Proof remains review-bound until source freshness and privacy posture are clear."
+        case .capturePlacementShelf:
+            "Capture can keep the text local and wait for placement review instead of saving silently."
+        case .lifeShapeContourMap:
+            "Plan can retry without reshaping protected time or writing calendar changes."
+        case .personalSystemCenter:
+            "You can retry without changing setup, trust, memory, or receipts."
+        case .memoryLens:
+            "Memory Lens hides detail until stale or sensitive source state is reviewed."
+        }
+    }
+}
+
+struct FlagshipObjectStateMatrixEntry: Identifiable, Sendable, Equatable {
+    let owner: FlagshipObjectStateOwner
+    let normalState: AmbitionsLoadingState
+    let loadingState: AmbitionsLoadingState
+    let emptyState: AmbitionsLoadingState
+    let degradedState: AmbitionsLoadingState
+    let boundary: String
+
+    var id: String { owner.rawValue }
+
+    var accessibilitySummary: String {
+        "\(owner.title). Normal: \(normalState.title). Loading: \(loadingState.title). Empty: \(emptyState.title). Degraded: \(degradedState.title). \(boundary)"
+    }
+}
+
+enum FlagshipObjectStateMatrix {
+    static let entries: [FlagshipObjectStateMatrixEntry] = FlagshipObjectStateOwner.allCases.map { owner in
+        FlagshipObjectStateMatrixEntry(
+            owner: owner,
+            normalState: .localOnly,
+            loadingState: .loading,
+            emptyState: owner == .proofSpine || owner == .memoryLens ? .noDataYet : .empty,
+            degradedState: degradedState(for: owner),
+            boundary: boundary(for: owner)
+        )
+    }
+
+    static func entry(for owner: FlagshipObjectStateOwner) -> FlagshipObjectStateMatrixEntry {
+        entries.first { $0.owner == owner }!
+    }
+
+    private static func degradedState(for owner: FlagshipObjectStateOwner) -> AmbitionsLoadingState {
+        switch owner {
+        case .proofSpine, .memoryLens:
+            .staleSource
+        case .capturePlacementShelf, .lifeShapeContourMap, .missionControlTimeSpine:
+            .needsReview
+        case .startHere, .realityRail:
+            .recovery
+        case .personalSystemCenter:
+            .privacySensitive
+        }
+    }
+
+    private static func boundary(for owner: FlagshipObjectStateOwner) -> String {
+        switch owner {
+        case .startHere, .realityRail:
+            "Progress stays source-bound, recovery stays non-shaming, and there is no silent commitment mutation."
+        case .missionControlTimeSpine:
+            "Routes stay user-reviewed, path changes stay visible, and Goal Detail stays out of PM-board posture."
+        case .proofSpine:
+            "Proof stays source-bound and never becomes a trophy shelf, activity feed, or certification claim."
+        case .capturePlacementShelf:
+            "Capture stays composer-first with review before placement, learning, or goal creation."
+        case .lifeShapeContourMap:
+            "Plan stays contour-first with reviewed reflow and grounded time language."
+        case .personalSystemCenter:
+            "Setup, trust, memory, and receipts stay explicit and user-owned."
+        case .memoryLens:
+            "Recall stays source-bound, privacy-preserving, and correction-ready."
+        }
+    }
+}
+
 enum DegradedStateOrchestrator {
     static func todayEmpty() -> DegradedStatePresentation {
         let rule = ActivationContract.emptyStateRule(for: .today)
@@ -226,6 +390,35 @@ enum DegradedStateOrchestrator {
             primaryAction: DegradedStateAction(title: "Loading", systemImage: "hourglass", routingHint: nil),
             tone: .default,
             icon: "hourglass"
+        )
+    }
+
+    static func objectLoading(_ owner: FlagshipObjectStateOwner) -> DegradedStatePresentation {
+        let entry = FlagshipObjectStateMatrix.entry(for: owner)
+        return DegradedStatePresentation(
+            id: "degraded.\(owner.rawValue).loading",
+            kind: .loading,
+            title: "\(owner.title) is getting ready",
+            explanation: "\(owner.loadingExplanation) \(entry.boundary)",
+            primaryAction: DegradedStateAction(title: entry.loadingState.action.title, systemImage: owner.icon),
+            tone: .default,
+            icon: owner.icon
+        )
+    }
+
+    static func objectUnavailable(
+        _ owner: FlagshipObjectStateOwner,
+        retryHint: DegradedStateRoutingHint? = nil
+    ) -> DegradedStatePresentation {
+        let entry = FlagshipObjectStateMatrix.entry(for: owner)
+        return DegradedStatePresentation(
+            id: "degraded.\(owner.rawValue).unavailable",
+            kind: .unavailable,
+            title: "\(owner.title) needs review",
+            explanation: "\(owner.degradedExplanation) \(entry.boundary)",
+            primaryAction: DegradedStateAction(title: "Retry", systemImage: "arrow.clockwise", routingHint: retryHint),
+            tone: .warning,
+            icon: owner.icon
         )
     }
 

@@ -17,16 +17,16 @@ struct GoalDetailScreen: View {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    LoadingSkeletonCard(lineCount: 10)
+                    DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
                 case let .failed(message):
-                    EmptyStateCard(
-                        title: "Goal Detail is unavailable",
-                        message: message,
-                        icon: "exclamationmark.triangle",
-                        actionTitle: "Retry"
-                    ) {
-                        Task { await viewModel.refresh(using: container.goalsService) }
-                    }
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.objectUnavailable(.missionControlTimeSpine),
+                        primaryAccessibilityIdentifier: "goal-detail.retry-button",
+                        onPrimaryAction: {
+                            _ = message
+                            Task { await viewModel.refresh(using: container.goalsService) }
+                        }
+                    )
                 case let .loaded(detail):
                     GoalDetailHeroCard(detail: detail)
 

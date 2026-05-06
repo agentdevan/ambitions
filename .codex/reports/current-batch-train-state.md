@@ -2,16 +2,19 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP13B Goal Alternate Path / Decision History Polish complete /
+Current batch: FCP25 Loading / Empty / Degraded State Objectization complete /
 Green.
-Next eligible batch: FCP25 Loading / Empty / Degraded State Objectization.
-Scope: FCP13B upgraded Goal Detail alternate paths and decision history into a
-typed Decision Spine with alternate-path and decision-history branches, review
-labels, consequence labels, and explicit no-automated-reroute / no-hidden-path
-mutation boundaries. It adds no route/raw-value change, persistence/schema
-change, dependency, top-level tab, sync/cloud behavior, legal/privacy/release
-claim, App Store claim, TestFlight claim, physical-device proof, public
-accessibility claim, AOS runtime claim, or LDI runtime claim.
+Next eligible batch: FCP26 Iconography / Status Grammar Hardening.
+Scope: FCP25 added a shared Flagship Object State Matrix for Start Here,
+Reality Rail, MissionControlTimeSpine, Proof Spine, Capture Placement Shelf,
+LifeShape Contour Map, Personal System Center, and Memory Lens; wired
+object-specific loading/unavailable states across Today, Goals, Goal Detail,
+Capture, Plan, and You; and added focused proof against generic error, risky
+progress copy, skeleton spam, hidden mutation, calendar-write, and cloud-sync
+claims. It adds no route/raw-value change, persistence/schema change,
+dependency, top-level tab, sync/cloud behavior, legal/privacy/release claim,
+App Store claim, TestFlight claim, physical-device proof, public accessibility
+claim, AOS runtime claim, or LDI runtime claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -71,7 +74,8 @@ complete / Green as Pressure Field / Recovery Loop evidence. FCP10 is complete
 / Green as MissionControlTimeSpine evidence. FCP11 is complete / Green as
 LifePath Thread evidence. FCP12 is complete / Green as Proof Spine / Evidence
 Ledger evidence. FCP13B is complete / Green as Goal Alternate Path / Decision
-History Polish evidence. FCP25 is the next eligible global batch.
+History Polish evidence. FCP25 is complete / Green as Loading / Empty /
+Degraded State Objectization evidence. FCP26 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

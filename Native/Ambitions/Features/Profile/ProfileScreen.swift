@@ -23,15 +23,17 @@ struct ProfileScreen: View {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    AsyncStateCard(.loading(lines: 12))
+                    DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.personalSystemCenter))
                         .transition(.ambitionPanel)
                 case let .failed(message):
-                    AsyncStateCard(
-                        .error(title: "You is unavailable", message: message, icon: "person.crop.circle.badge.exclamationmark", actionTitle: "Retry"),
-                        actionAccessibilityIdentifier: "profile.retry-button"
-                    ) {
-                        Task { await refresh() }
-                    }
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.objectUnavailable(.personalSystemCenter),
+                        primaryAccessibilityIdentifier: "profile.retry-button",
+                        onPrimaryAction: {
+                            _ = message
+                            Task { await refresh() }
+                        }
+                    )
                     .transition(.ambitionPanel)
                 case let .loaded(dashboard):
                     PersonalSystemCenterRootView(

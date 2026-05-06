@@ -70,6 +70,11 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - FCP13B is complete as Goal Detail Decision Spine evidence. It satisfies the
   alternate-path / decision-history polish dependency with no automated reroute,
   no hidden path mutation, and no PM dashboard.
+- FCP25 is complete as shared Flagship Object State Matrix evidence. It
+  satisfies the loading/empty/degraded-state hardening dependency for FCP26 by
+  objectizing loading and unavailable states across Today, Goals, Goal Detail,
+  Capture, Plan, and You without generic error, risky progress copy, skeleton
+  spam, hidden mutation, calendar-write, or cloud-sync claims.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
 - AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.

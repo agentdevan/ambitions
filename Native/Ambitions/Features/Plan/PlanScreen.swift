@@ -25,11 +25,11 @@ struct PlanScreen: View {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                     switch viewModel.state {
                     case .loading:
-                        AsyncStateCard(.loading(lines: 9))
+                        DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.lifeShapeContourMap))
                             .transition(.ambitionPanel)
                     case .failed:
                         DegradedStateCard(
-                            state: DegradedStateOrchestrator.unavailable(surface: "Plan"),
+                            state: DegradedStateOrchestrator.objectUnavailable(.lifeShapeContourMap),
                             primaryAccessibilityIdentifier: "plan.retry-button",
                             onPrimaryAction: {
                                 Task { await viewModel.refresh(using: container.planService) }

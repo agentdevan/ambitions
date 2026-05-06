@@ -1,4 +1,5 @@
 import AmbitionsDesignSystem
+@testable import Ambitions
 import XCTest
 
 final class LoadingDegradedStateDesignSystemTests: XCTestCase {
@@ -81,5 +82,48 @@ final class LoadingDegradedStateDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("production model"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("automatic commitment"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("release ready"))
+    }
+
+    func testFCP25FlagshipObjectStateMatrixIsObjectSpecificAndHonest() {
+        let entries = FlagshipObjectStateMatrix.entries
+        let owners = Set(entries.map(\.owner))
+
+        XCTAssertEqual(owners, Set(FlagshipObjectStateOwner.allCases))
+        XCTAssertEqual(owners.count, 8)
+
+        for entry in entries {
+            XCTAssertEqual(entry.loadingState, .loading)
+            XCTAssertFalse(entry.owner.title.isEmpty)
+            XCTAssertFalse(entry.owner.icon.isEmpty)
+            XCTAssertFalse(entry.boundary.isEmpty)
+            XCTAssertTrue(entry.accessibilitySummary.contains(entry.owner.title))
+            XCTAssertFalse(entry.accessibilitySummary.localizedCaseInsensitiveContains("generic error"))
+            XCTAssertFalse(entry.accessibilitySummary.localizedCaseInsensitiveContains("fake progress"))
+            XCTAssertFalse(entry.accessibilitySummary.localizedCaseInsensitiveContains("skeleton"))
+        }
+    }
+
+    func testFCP25ObjectLoadingAndUnavailableCardsAvoidGenericErrorAndHiddenMutationClaims() {
+        let presentations = FlagshipObjectStateOwner.allCases.flatMap { owner in
+            [
+                DegradedStateOrchestrator.objectLoading(owner),
+                DegradedStateOrchestrator.objectUnavailable(owner)
+            ]
+        }
+        let combinedCopy = presentations
+            .flatMap { [$0.title, $0.explanation, $0.primaryAction.title, $0.icon] }
+            .joined(separator: " ")
+
+        XCTAssertTrue(combinedCopy.contains("Start Here"))
+        XCTAssertTrue(combinedCopy.contains("MissionControlTimeSpine"))
+        XCTAssertTrue(combinedCopy.contains("Capture Placement Shelf"))
+        XCTAssertTrue(combinedCopy.contains("LifeShape Contour Map"))
+        XCTAssertTrue(combinedCopy.contains("Personal System Center"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("generic error"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("fake progress"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("automatic reroute"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("calendar write"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("cloud synced"))
+        XCTAssertTrue(combinedCopy.localizedCaseInsensitiveContains("no silent"))
     }
 }
