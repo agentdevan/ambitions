@@ -388,7 +388,17 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 ### Phase 6 — External Surface Implementation
 
-61. PFC10 CloudKit Schema / Zone / Conflict Model.
+61. PFC10 CloudKit Schema / Zone / Conflict Model. Completed Green on
+    2026-05-06 as docs-only future CloudKit contract and test plan. It defines
+    a private CloudKit option, one future custom core zone, record families,
+    privacy field classes, tombstone/deletion rules, conflict review behavior,
+    account/offline/local-only states, subscription/change-token posture, and
+    PFC11 proof gates while preserving current local-only runtime truth. It
+    adds no CloudKit container, entitlement, signing, project/workflow/
+    dependency change, schema/persistence change, production Swift, tests,
+    account UI, backend, sync runtime, legal/privacy/release claim, App Store
+    claim, TestFlight claim, physical-device proof, public accessibility claim,
+    AOS runtime claim, or LDI runtime claim.
 62. PFC11 Sync Implementation And Conflict Tests, or explicit local-only closure.
 63. PFC14 WidgetKit Implementation And Tests.
 64. PFC16 Live Activities Implementation And Tests.

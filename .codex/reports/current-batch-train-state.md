@@ -2,19 +2,20 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP26 Iconography / Status Grammar Hardening complete /
+Current batch: PFC10 CloudKit Schema / Zone / Conflict Model complete /
 Green.
-Next eligible batch: PFC10 CloudKit Schema / Zone / Conflict Model.
-Scope: FCP26 hardened the SI14 status grammar with explicit allowed placement
-metadata and shape cues, then wired FCP25 degraded/loading cards to render
-through `AmbitionsStatusSymbol` instead of local ad hoc status chips. Focused
-tests prove every status role has symbol, shape, visible label, non-color cue,
-VoiceOver meaning, Reduce Motion semantics, and allowed placement; object
-loading/unavailable states now map through that grammar. It adds no
-route/raw-value change, persistence/schema change, dependency, top-level tab,
-sync/cloud behavior, legal/privacy/release claim, App Store claim, TestFlight
-claim, physical-device proof, public accessibility claim, AOS runtime claim, or
-LDI runtime claim.
+Next eligible batch: PFC11 Sync Implementation And Conflict Tests, or explicit
+local-only closure.
+Scope: PFC10 created a docs-only future CloudKit contract and test plan while
+preserving current local-only runtime truth. The contract defines a future
+private CloudKit database posture, one custom core zone, record families,
+privacy field classes, tombstone/deletion rules, conflict review behavior,
+account/offline/local-only states, subscription/change-token posture, and PFC11
+validation requirements. It adds no production Swift, tests, persistence/schema
+change, entitlement, signing, project/workflow/dependency change, privacy
+manifest change, CloudKit container, account UI, backend, sync runtime,
+legal/privacy/release claim, App Store claim, TestFlight claim, physical-device
+proof, public accessibility claim, AOS runtime claim, or LDI runtime claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -76,7 +77,9 @@ LifePath Thread evidence. FCP12 is complete / Green as Proof Spine / Evidence
 Ledger evidence. FCP13B is complete / Green as Goal Alternate Path / Decision
 History Polish evidence. FCP25 is complete / Green as Loading / Empty /
 Degraded State Objectization evidence. FCP26 is complete / Green as Iconography
-/ Status Grammar Hardening evidence. PFC10 is the next eligible global batch.
+/ Status Grammar Hardening evidence. PFC10 is complete / Green as CloudKit
+Schema / Zone / Conflict Model contract evidence. PFC11 is the next eligible
+global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

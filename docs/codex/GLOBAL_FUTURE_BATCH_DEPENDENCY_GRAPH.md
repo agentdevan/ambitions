@@ -79,6 +79,13 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   iconography/status dependency by adding allowed placement and shape-cue
   metadata to SI14 status roles and wiring degraded/loading cards through the
   shared `AmbitionsStatusSymbol` grammar.
+- PFC10 is complete as docs-only future CloudKit contract and test-plan
+  evidence. It preserves the PFC09 local-only/no-launch-sync runtime truth
+  while defining a future private CloudKit option, one custom core zone, record
+  families, privacy field classes, tombstone/deletion rules, conflict review
+  behavior, account/offline/local-only states, subscription/change-token
+  posture, and PFC11 proof gates. PFC11 remains sync-gated unless it closes as
+  explicit local-only deferral.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
 - AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.

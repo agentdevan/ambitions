@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. PFC11 remains future sync-gated unless it closes as explicit local-only deferral. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -167,6 +167,14 @@ Type: Docs/contracts; implementation only if approved.
 Owner: Sync.
 Goal: Define zones, records, conflicts, tombstones, merges, local-only fallback, account unavailable state.
 Required result: CloudKit contract and test plan.
+Status: Green as docs-only future CloudKit contract and test plan. It defines
+a private CloudKit option, one future custom core zone, record families,
+privacy field classes, tombstone/deletion rules, conflict review behavior,
+account/offline/local-only states, subscription/change-token posture, and PFC11
+proof gates while preserving current local-only runtime truth. No CloudKit
+container, entitlement, signing, project, workflow, dependency, schema,
+production Swift, tests, account UI, backend, sync runtime, release, legal, or
+privacy compliance claim changed.
 
 ### PFC11 — Sync Implementation And Conflict Tests
 

@@ -199,8 +199,14 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - FCP26 is complete Green as bounded shared/status-grammar evidence. SI14
   status roles now carry allowed placement and shape-cue metadata, and
   degraded/loading cards render through `AmbitionsStatusSymbol` with focused
-  non-color/status-placement proof. The next eligible global batch is PFC10
-  CloudKit Schema / Zone / Conflict Model.
+  non-color/status-placement proof.
+- PFC10 is complete Green as docs-only future CloudKit contract and test-plan
+  evidence. It defines a private CloudKit option, one future custom core zone,
+  record families, privacy field classes, tombstone/deletion rules, conflict
+  review behavior, account/offline/local-only states, subscription/change-token
+  posture, and PFC11 proof gates while preserving current local-only runtime
+  truth. The next eligible global batch is PFC11 Sync Implementation And
+  Conflict Tests, or explicit local-only closure.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -617,8 +623,9 @@ Thread evidence. FCP12 is complete Green as bounded Proof Spine / Evidence
 Ledger evidence. FCP13B is complete Green as bounded Goal Alternate Path /
 Decision History Polish evidence. FCP25 is complete Green as bounded Loading /
 Empty / Degraded State Objectization evidence. FCP26 is complete Green as
-bounded Iconography / Status Grammar Hardening evidence, and the full-stack
-order selects PFC10 next.
+bounded Iconography / Status Grammar Hardening evidence. PFC10 is complete
+Green as docs-only CloudKit Schema / Zone / Conflict Model contract evidence,
+and the full-stack order selects PFC11 next.
 
 
 ## Living Dream Intelligence Context
