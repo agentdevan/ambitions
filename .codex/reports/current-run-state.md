@@ -2,18 +2,16 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC28 Security Threat Model And Secrets Audit complete Green;
-full-stack order selects PFC29 Logging / Analytics / Observability Policy next.
-Scope: PFC28 created the docs/security threat model and secrets audit packet at
-`docs/canon/Ambitions_Security_Threat_Model_And_Secrets_Audit.md`. It records
-no live credential-shaped secret in tracked app source, defines local data, App
-Group, external-surface, EventKit, privacy-manifest, backup, future
-sync/cloud/account, future logging/observability, StoreKit, AOS, LDI, and
-Found Life security threats, and creates a repair queue without claiming
-security certification, legal/privacy compliance, App Store readiness,
-TestFlight readiness, release readiness, physical-device proof, or public
-accessibility conformance. PFC28 changed only docs and train-state files. It
-did not change production Swift, route/raw value, persistence/schema,
+Current batch: PFC29 Logging / Analytics / Observability Policy complete
+Green; full-stack order selects PFC30 Performance Budget And Instruments Plan
+next.
+Scope: PFC29 created the docs/privacy/observability policy at
+`docs/canon/Ambitions_Logging_Analytics_Observability_Policy.md`. It locks the
+current runtime decision of no remote analytics, no remote telemetry, no
+third-party crash SDK, no developer diagnostics collection, and no private user
+content in logs; local Event Ledger and receipt records remain user-trust
+product data, not developer telemetry. PFC29 changed only docs and train-state
+files. It did not change production Swift, route/raw value, persistence/schema,
 privacy-manifest, entitlement, dependency, analytics, tracking, network,
 StoreKit, sync/account, release, legal/privacy compliance, CI,
 workflow/signing, AI runtime, AOS runtime, LDI runtime, App Store Connect, or
@@ -63,7 +61,8 @@ Manifest / Required-Reason API Audit evidence. PFC26 is complete / Green as
 Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is complete /
 Green as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is
 complete / Green as Security Threat Model And Secrets Audit evidence. PFC29 is
-the next eligible global batch. Accepted Yellow:
+complete / Green as Logging / Analytics / Observability Policy evidence. PFC30
+is the next eligible global batch. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
@@ -114,7 +113,7 @@ privacy manifest / required-reason API audit evidence. PFC26 is complete /
 Green as docs/legal/privacy human-review packet evidence. PFC27 is complete /
 Green as docs/safety professional-boundary crisis policy evidence. PFC28 is
 complete / Green as docs/security threat model and secrets audit evidence.
-Later PFC
+PFC29 is complete / Green as docs/privacy observability policy evidence. Later PFC
 implementation beyond existing test execution has not started.
 
 No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality

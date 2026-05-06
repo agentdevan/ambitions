@@ -244,6 +244,14 @@ manifests, add dependencies, create CI secret scanning, claim legal/privacy
 compliance, claim App Store/TestFlight/release readiness, prove physical-device
 behavior, or claim public accessibility conformance.
 
+PFC29 is complete Green as of 2026-05-05. Future logging, analytics,
+observability, crash reporting, diagnostics upload, telemetry, SDK, App Privacy
+label, privacy manifest, release, or handoff work must use
+`docs/canon/Ambitions_Logging_Analytics_Observability_Policy.md` as the
+observability boundary. PFC29 does not add runtime logging, remote telemetry,
+analytics, crash reporting, SDKs, dependencies, privacy manifest entries, App
+Store metadata, release artifacts, or user-facing telemetry controls.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

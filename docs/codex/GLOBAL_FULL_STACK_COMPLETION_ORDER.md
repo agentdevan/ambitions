@@ -233,7 +233,12 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     without claiming security certification, legal/privacy compliance, App
     Store readiness, TestFlight readiness, release readiness, physical-device
     proof, or public accessibility conformance.
-43. PFC29 Logging / Analytics / Observability Policy.
+43. PFC29 Logging / Analytics / Observability Policy. Completed Green on
+    2026-05-05 as docs/privacy/observability policy. It locks the current
+    runtime decision of no remote analytics, no remote telemetry, no third-party
+    crash SDK, no developer diagnostics collection, and no private user content
+    in logs; local Event Ledger and receipt records remain user-trust product
+    data, not developer telemetry.
 44. PFC30 Performance Budget And Instruments Plan.
 
 ### Phase 5 — FCP Surface Maturity

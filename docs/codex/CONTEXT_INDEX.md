@@ -95,6 +95,12 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   readiness, TestFlight readiness, release readiness, physical-device proof, or
   public accessibility conformance. The next eligible global batch is PFC29
   Logging / Analytics / Observability Policy.
+- PFC29 is complete Green as docs/privacy/observability policy. It locks the
+  current runtime decision of no remote analytics, no remote telemetry, no
+  third-party crash SDK, no developer diagnostics collection, and no private
+  user content in logs; local Event Ledger and receipt records remain
+  user-trust product data, not developer telemetry. The next eligible global
+  batch is PFC30 Performance Budget And Instruments Plan.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -493,8 +499,9 @@ Data Map And App Privacy Labels evidence. PFC25 is complete Green as Privacy
 Manifest / Required-Reason API Audit evidence. PFC26 is complete Green as
 Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is complete Green
 as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is complete
-Green as Security Threat Model And Secrets Audit evidence, and the full-stack
-order selects PFC29 next.
+Green as Security Threat Model And Secrets Audit evidence. PFC29 is complete
+Green as Logging / Analytics / Observability Policy evidence, and the
+full-stack order selects PFC30 next.
 
 
 ## Living Dream Intelligence Context
