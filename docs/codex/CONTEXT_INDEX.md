@@ -205,8 +205,12 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   record families, privacy field classes, tombstone/deletion rules, conflict
   review behavior, account/offline/local-only states, subscription/change-token
   posture, and PFC11 proof gates while preserving current local-only runtime
-  truth. The next eligible global batch is PFC11 Sync Implementation And
-  Conflict Tests, or explicit local-only closure.
+  truth.
+- PFC11 is complete Green as explicit local-only sync closure and safe
+  deferral. PFC09 and PFC10 did not approve CloudKit runtime work, so current
+  runtime remains `LocalOnlySyncCapability`, sync unavailable, no account, no
+  launch sync, and no CloudKit/iCloud/server/backend/account-sync claim. The
+  next eligible global batch is PFC14 WidgetKit Implementation And Tests.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -624,8 +628,9 @@ Ledger evidence. FCP13B is complete Green as bounded Goal Alternate Path /
 Decision History Polish evidence. FCP25 is complete Green as bounded Loading /
 Empty / Degraded State Objectization evidence. FCP26 is complete Green as
 bounded Iconography / Status Grammar Hardening evidence. PFC10 is complete
-Green as docs-only CloudKit Schema / Zone / Conflict Model contract evidence,
-and the full-stack order selects PFC11 next.
+Green as docs-only CloudKit Schema / Zone / Conflict Model contract evidence.
+PFC11 is complete Green as explicit local-only sync closure evidence, and the
+full-stack order selects PFC14 next.
 
 
 ## Living Dream Intelligence Context

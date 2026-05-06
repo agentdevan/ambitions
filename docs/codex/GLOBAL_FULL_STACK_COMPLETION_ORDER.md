@@ -399,7 +399,17 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     account UI, backend, sync runtime, legal/privacy/release claim, App Store
     claim, TestFlight claim, physical-device proof, public accessibility claim,
     AOS runtime claim, or LDI runtime claim.
-62. PFC11 Sync Implementation And Conflict Tests, or explicit local-only closure.
+62. PFC11 Sync Implementation And Conflict Tests, or explicit local-only
+    closure. Completed Green on 2026-05-06 as explicit local-only sync closure
+    and safe deferral. PFC09 and PFC10 did not approve CloudKit runtime work,
+    so PFC11 preserves `LocalOnlySyncCapability`, sync unavailable, no account
+    requirement, no launch sync, and no CloudKit/iCloud/server/backend/
+    account-sync claim. It adds no production Swift, tests, persistence/schema
+    change, entitlement, signing, project/workflow/dependency change, privacy
+    manifest change, CloudKit container, account UI, backend, sync runtime,
+    legal/privacy/release claim, App Store claim, TestFlight claim,
+    physical-device proof, public accessibility claim, AOS runtime claim, or
+    LDI runtime claim.
 63. PFC14 WidgetKit Implementation And Tests.
 64. PFC16 Live Activities Implementation And Tests.
 65. PFC18 App Intents / Shortcuts Implementation And Tests.

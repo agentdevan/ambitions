@@ -84,8 +84,11 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   while defining a future private CloudKit option, one custom core zone, record
   families, privacy field classes, tombstone/deletion rules, conflict review
   behavior, account/offline/local-only states, subscription/change-token
-  posture, and PFC11 proof gates. PFC11 remains sync-gated unless it closes as
-  explicit local-only deferral.
+  posture, and PFC11 proof gates.
+- PFC11 is complete as explicit local-only sync closure and safe deferral. It
+  preserves `LocalOnlySyncCapability`, sync unavailable, no account, no launch
+  sync, and no CloudKit/iCloud/server/backend/account-sync claim because
+  PFC09/PFC10 did not approve runtime sync implementation.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
 - AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.

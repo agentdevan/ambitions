@@ -2,20 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: PFC10 CloudKit Schema / Zone / Conflict Model complete /
-Green.
-Next eligible batch: PFC11 Sync Implementation And Conflict Tests, or explicit
-local-only closure.
-Scope: PFC10 created a docs-only future CloudKit contract and test plan while
-preserving current local-only runtime truth. The contract defines a future
-private CloudKit database posture, one custom core zone, record families,
-privacy field classes, tombstone/deletion rules, conflict review behavior,
-account/offline/local-only states, subscription/change-token posture, and PFC11
-validation requirements. It adds no production Swift, tests, persistence/schema
-change, entitlement, signing, project/workflow/dependency change, privacy
-manifest change, CloudKit container, account UI, backend, sync runtime,
-legal/privacy/release claim, App Store claim, TestFlight claim, physical-device
-proof, public accessibility claim, AOS runtime claim, or LDI runtime claim.
+Current batch: PFC11 Sync Implementation And Conflict Tests complete / Green as
+explicit local-only closure.
+Next eligible batch: PFC14 WidgetKit Implementation And Tests.
+Scope: PFC11 closed the sync implementation branch as a safe local-only
+deferral because PFC09 and PFC10 did not approve CloudKit runtime work. Current
+runtime remains `LocalOnlySyncCapability`, sync unavailable, no account, no
+launch sync, and no CloudKit/iCloud/server/backend/account-sync claim. It adds
+no production Swift, tests, persistence/schema change, entitlement, signing,
+project/workflow/dependency change, privacy manifest change, CloudKit
+container, account UI, backend, sync runtime, legal/privacy/release claim, App
+Store claim, TestFlight claim, physical-device proof, public accessibility
+claim, AOS runtime claim, or LDI runtime claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -78,8 +76,9 @@ Ledger evidence. FCP13B is complete / Green as Goal Alternate Path / Decision
 History Polish evidence. FCP25 is complete / Green as Loading / Empty /
 Degraded State Objectization evidence. FCP26 is complete / Green as Iconography
 / Status Grammar Hardening evidence. PFC10 is complete / Green as CloudKit
-Schema / Zone / Conflict Model contract evidence. PFC11 is the next eligible
-global batch.
+Schema / Zone / Conflict Model contract evidence. PFC11 is complete / Green as
+explicit local-only sync closure evidence. PFC14 is the next eligible global
+batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

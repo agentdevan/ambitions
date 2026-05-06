@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. PFC11 remains future sync-gated unless it closes as explicit local-only deferral. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC11 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -182,6 +182,13 @@ Type: Implementation/tests if PFC09/PFC10 approve sync.
 Owner: Sync.
 Goal: Implement bounded iCloud sync and conflict tests, or explicitly close as deferred local-only.
 Required result: sync proof or safe deferral.
+Status: Green as explicit local-only sync closure and safe deferral. PFC09 and
+PFC10 did not approve CloudKit runtime work, so PFC11 preserves
+`LocalOnlySyncCapability`, sync unavailable, no account requirement, no launch
+sync, and no CloudKit/iCloud/server/backend/account-sync claim. No production
+Swift, tests, schema, entitlement, signing, project, workflow, dependency,
+privacy manifest, CloudKit container, account UI, backend, sync runtime,
+release, legal, or privacy compliance claim changed.
 
 ### PFC12 — App Groups / Shared Storage Boundary
 
