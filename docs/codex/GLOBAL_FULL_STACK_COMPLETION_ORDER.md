@@ -443,7 +443,19 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     privacy manifest change, sync/account/backend behavior,
     legal/privacy/release claim, App Store claim, TestFlight claim,
     physical-device proof, or public accessibility claim.
-66. PFC20 Notifications / Calendar / Reminders Implementation Proof.
+66. PFC20 Notifications / Calendar / Reminders Implementation Proof. Completed
+    Green on 2026-05-06 as bounded notification, Calendar, and Reminders source
+    hardening and focused-test evidence: notification copy hides ambient
+    private detail by default, notification mutation actions route into
+    Ambitions instead of mutating in the background, EventKit notes stay minimal
+    and explicit-request grounded, Plan-owned Calendar read/write boundaries
+    remain intact, and Today does not request Calendar access. It adds no Focus
+    Filter implementation, onboarding permission prompt, silent
+    calendar/reminder write, entitlement, signing, project/workflow/dependency
+    change, persistence/schema change, privacy manifest change,
+    sync/account/backend behavior, legal/privacy/release claim, App Store
+    claim, TestFlight claim, physical-device proof, or public accessibility
+    claim.
 67. PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral.
 68. PFC23 Paywall / Upgrade UX Compliance Review.
 

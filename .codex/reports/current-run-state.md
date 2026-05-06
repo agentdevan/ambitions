@@ -2,19 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: PFC18 App Intents / Shortcuts Implementation And Tests complete / Green.
-Next eligible batch: PFC20 Notifications / Calendar / Reminders Implementation Proof.
-Scope: PFC18 hardened the existing App Intents / Shortcuts source contract so
-public launch candidates remain bounded to the PFC17-approved surface, internal
-compatibility routes do not drift into public launch truth, text capture builds
-a local Capture-review request without echoing private text in the success
-dialog, and mutation-capable shortcuts retain in-app confirmation plus receipt
-posture. It adds no new top-level destination, hidden mutation, destructive
-shortcut action, Spotlight/CoreSpotlight user-life-content indexing,
-entitlement, signing, project/workflow/dependency change, persistence/schema
-change, privacy manifest change, sync/account/backend behavior, AI/LDI runtime,
-legal/privacy/release claim, App Store claim, TestFlight claim, physical-device
-proof, or public accessibility claim.
+Current batch: PFC20 Notifications / Calendar / Reminders Implementation Proof complete / Green.
+Next eligible batch: PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral.
+Scope: PFC20 hardened existing notification, Calendar, and Reminders seams so
+notification copy hides ambient private detail by default, notification
+mutation actions route into Ambitions instead of mutating in the background,
+and EventKit reminder/calendar notes remain minimal and explicit-request
+grounded. It adds no Focus Filter implementation, onboarding permission prompt,
+silent calendar/reminder write, entitlement, signing, project/workflow/
+dependency change, persistence/schema change, privacy manifest change,
+sync/account/backend behavior, AI/LDI runtime, legal/privacy/release claim, App
+Store claim, TestFlight claim, physical-device proof, or public accessibility
+claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -82,7 +81,8 @@ explicit local-only sync closure evidence. PFC14 is complete / Green as
 WidgetKit projection hardening and focused-test evidence. PFC16 is complete /
 Green as Live Activity source hardening and focused-test evidence. PFC18 is
 complete / Green as App Intents / Shortcuts source hardening and focused-test
-evidence. PFC20 is the next eligible global batch.
+evidence. PFC20 is complete / Green as notification, Calendar, and Reminders
+implementation proof. PFC22 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

@@ -340,7 +340,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
 
         let payload = EventKitReminderPayload(
             title: selection.stepTitle,
-            notes: reminderNotes(from: selection),
+            notes: explicitRequestNotes(from: selection, itemKind: "reminder"),
             dueDate: selection.suggestedDate
         )
         do {
@@ -365,7 +365,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
 
         let payload = EventKitEventPayload(
             title: selection.stepTitle,
-            notes: reminderNotes(from: selection),
+            notes: explicitRequestNotes(from: selection, itemKind: "calendar event"),
             startDate: interval.start,
             endDate: interval.end
         )
@@ -397,15 +397,14 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         return makeConflictReport(events: events, proposed: interval)
     }
 
-    private func reminderNotes(from selection: NextStepSchedulingSelection) -> String {
-        var lines = [
-            "Goal: \(selection.goalTitle)"
-        ]
-        if let stepSummary = selection.stepSummary, stepSummary.isEmpty == false {
-            lines.append(stepSummary)
-        }
-        lines.append("Ambitions IDs: goal=\(selection.goalID), step=\(selection.stepID)")
-        return lines.joined(separator: "\n")
+    private func explicitRequestNotes(
+        from selection: NextStepSchedulingSelection,
+        itemKind: String
+    ) -> String {
+        [
+            "Created by Ambitions after an explicit \(itemKind) request.",
+            "Ambitions step ID: \(selection.stepID)"
+        ].joined(separator: "\n")
     }
 
     private func proposedInterval(

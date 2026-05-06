@@ -241,6 +241,13 @@ Plan-owned, Calendar writes require explicit confirmation, Reminders require an
 explicit user action, Focus Filter implementation is deferred by default, and
 hidden mutation is blocked before PFC20 proof.
 
+PFC20 is complete Green as of 2026-05-06. Future notification, Calendar,
+Reminders, EventKit, or Focus work must preserve the PFC20 proof boundary:
+notification copy hides ambient private detail by default, notification-origin
+mutation actions route into Ambitions instead of mutating in the background,
+EventKit notes stay minimal and explicit-request grounded, Calendar read/write
+behavior remains Plan-owned, and Today must not request Calendar access.
+
 PFC21 is complete Accepted Yellow as of 2026-05-05. Future StoreKit,
 monetization, entitlement, paywall, trial, offer, external-purchase, or
 subscription work must use `docs/canon/Ambitions_StoreKit_Monetization_Strategy.md`

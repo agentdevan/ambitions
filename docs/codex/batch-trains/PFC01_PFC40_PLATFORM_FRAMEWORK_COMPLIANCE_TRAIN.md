@@ -285,7 +285,13 @@ Required result: integration decision record and permission copy.
 Type: Implementation/tests if approved.
 Owner: Integrations.
 Goal: Implement bounded integrations or explicitly defer. No silent calendar writes.
-Required result: tests, privacy copy, and permission handling.
+Required result: Complete / Green. PFC20 hardened notification copy, routed
+notification-origin mutation actions into Ambitions instead of background
+mutation, minimized EventKit notes to explicit-request receipts, and preserved
+Plan-owned Calendar read/write behavior without Focus Filters, onboarding
+permission prompts, entitlements, signing, project/workflow/dependency changes,
+privacy manifest changes, silent writes, or release/App Store/TestFlight/
+device/public accessibility claims.
 
 ### PFC21 — StoreKit / Monetization Strategy
 

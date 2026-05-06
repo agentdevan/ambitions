@@ -114,8 +114,8 @@ actor LocalNotificationFoundation: NotificationServicing {
                     ),
                     LocalNotificationActionDescriptor(
                         identifier: AppNotificationConstants.completeActionID,
-                        title: "Done",
-                        opensApp: false
+                        title: "Close the loop",
+                        opensApp: true
                     ),
                 ]
             )
@@ -154,9 +154,6 @@ struct NextStepLocalNotificationPlanner: Sendable {
     }
 
     private func title(for snapshot: ExternalSurfaceSnapshot?) -> String {
-        if let ambientTitle = snapshot?.ambientState?.focus.title {
-            return ambientTitle
-        }
         guard let ritualCue = snapshot?.nowState?.ritualCue else { return "Next step ready" }
         switch ritualCue.kind {
         case .morningSetup:
@@ -171,22 +168,22 @@ struct NextStepLocalNotificationPlanner: Sendable {
     }
 
     private func body(for snapshot: ExternalSurfaceSnapshot?) -> String {
-        if let focus = snapshot?.ambientState?.focus,
-           let continuity = snapshot?.continuity {
-            return "\(focus.detail) \(continuity.syncHealth.detail)."
-        }
+        _ = snapshot?.ambientState
+        _ = snapshot?.continuity
         guard let ritualCue = snapshot?.nowState?.ritualCue else {
-            return "A bounded next step is available from your latest local plan."
+            return "Details stay private until you open Ambitions."
         }
         switch ritualCue.kind {
         case .morningSetup:
-            return "One next step is ready."
+            return "One next step is ready. Details stay private until you open Ambitions."
         case .middayReset:
-            return ritualCue.progressState == .needsReset ? "A smaller next step is ready." : "Your next step is still available."
+            return ritualCue.progressState == .needsReset
+                ? "A smaller next step is ready. Details stay private until you open Ambitions."
+                : "Your next step is still available. Details stay private until you open Ambitions."
         case .eveningClose:
-            return "Close the loop from Today."
+            return "Close the loop from Today. Details stay private until you open Ambitions."
         case .weeklyReset:
-            return "Review the week from Today."
+            return "Review the week from Today. Details stay private until you open Ambitions."
         }
     }
 

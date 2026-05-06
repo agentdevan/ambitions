@@ -30,7 +30,10 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertEqual(record.title, "Draft conference abstract")
         XCTAssertEqual(payload?.title, "Draft conference abstract")
         XCTAssertEqual(payload?.dueDate, fixtureSuggestedDate())
-        XCTAssertTrue(payload?.notes.contains("Goal: Ship CFP proposal") == true)
+        XCTAssertTrue(payload?.notes.contains("Created by Ambitions after an explicit reminder request.") == true)
+        XCTAssertTrue(payload?.notes.contains("Ambitions step ID: step-1") == true)
+        XCTAssertFalse(payload?.notes.contains("Ship CFP proposal") == true)
+        XCTAssertFalse(payload?.notes.contains("First concrete draft") == true)
     }
 
     func testDetectConflictsReturnsOverlappingEventsAndNearbyRoom() async {

@@ -51,8 +51,9 @@ struct ExternalActionCommand: Equatable, Sendable {
     }
 
     init(notificationPayload payload: AppNotificationRoutingPayload) {
+        let parsedKind = Self.kind(from: payload.action, values: payload.values)
         self.init(
-            kind: Self.kind(from: payload.action, values: payload.values),
+            kind: Self.notificationSafeKind(parsedKind, values: payload.values),
             target: ExternalActionTarget(
                 goalID: payload.values["goalID"],
                 stepID: payload.values["stepID"],
@@ -100,6 +101,20 @@ struct ExternalActionCommand: Equatable, Sendable {
             return .openMemoryLens
         default:
             return .unsupported(rawAction)
+        }
+    }
+
+    private static func notificationSafeKind(
+        _ kind: ExternalActionKind,
+        values: [String: String]
+    ) -> ExternalActionKind {
+        switch kind {
+        case .complete:
+            return values["goalID"]?.isEmpty == false ? .openGoal : .openToday
+        case .snooze, .delay, .askForSmallerStep:
+            return .openToday
+        case .openGoal, .openToday, .openCapturesInbox, .openMemoryLens, .unsupported:
+            return kind
         }
     }
 }

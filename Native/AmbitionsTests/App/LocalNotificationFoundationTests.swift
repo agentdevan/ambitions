@@ -19,6 +19,8 @@ final class LocalNotificationFoundationTests: XCTestCase {
             AppNotificationConstants.snoozeActionID,
             AppNotificationConstants.completeActionID,
         ])
+        XCTAssertEqual(categories.first?.actions.last?.title, "Close the loop")
+        XCTAssertEqual(categories.first?.actions.last?.opensApp, true)
     }
 
     func testSchedulingBuildsDeterministicRequestFromNextActionSnapshot() async {
@@ -55,7 +57,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
         XCTAssertEqual(request?.userInfo["stepID"], "step-456")
         XCTAssertEqual(request?.timeInterval, 300)
         XCTAssertEqual(request?.title, "Next step ready")
-        XCTAssertEqual(request?.body, "A bounded next step is available from your latest local plan.")
+        XCTAssertEqual(request?.body, "Details stay private until you open Ambitions.")
         XCTAssertEqual(request?.userInfo["origin"], "notification")
         XCTAssertEqual(request?.userInfo["continuity"], "local_first")
         XCTAssertEqual(request?.userInfo["lease"], "current")
@@ -116,11 +118,81 @@ final class LocalNotificationFoundationTests: XCTestCase {
 
         let request = await center.replacedRequest
         XCTAssertEqual(request?.title, "Midday reset")
-        XCTAssertEqual(request?.body, "A smaller next step is ready.")
+        XCTAssertEqual(request?.body, "A smaller next step is ready. Details stay private until you open Ambitions.")
         XCTAssertEqual(request?.userInfo["action"], "open")
         XCTAssertEqual(request?.userInfo["surface"], "goal-detail")
         XCTAssertEqual(request?.userInfo["goalID"], "goal-123")
         XCTAssertEqual(request?.userInfo["stepID"], "step-456")
+    }
+
+    func testPFC20NotificationCopyDoesNotExposeAmbientFocusDetails() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T13:00:00Z",
+            nextAction: ExternalSurfaceNextAction(
+                goalID: "goal-private",
+                stepID: "step-private",
+                display: ExternalSurfaceDisplayMetadata(
+                    templateKey: "next_tiny_step",
+                    goalMode: .project,
+                    stepState: .planned,
+                    urgency: .soon,
+                    timing: .deadline
+                )
+            ),
+            ambientState: ExternalSurfaceAmbientState(
+                today: ExternalSurfaceVariantState(
+                    kind: .today,
+                    title: "Private tax appointment",
+                    detail: "Call advisor with account number",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
+                    prominence: .elevated
+                ),
+                focus: ExternalSurfaceVariantState(
+                    kind: .focus,
+                    title: "Private tax appointment",
+                    detail: "Call advisor with account number",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
+                    prominence: .elevated
+                ),
+                goal: ExternalSurfaceVariantState(
+                    kind: .goal,
+                    title: "Private goal",
+                    detail: "Sensitive goal",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Goals", surface: .tab, tab: "goals"),
+                    reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
+                    prominence: .standard
+                ),
+                plan: ExternalSurfaceVariantState(
+                    kind: .plan,
+                    title: "Private plan",
+                    detail: "Sensitive plan",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Plan", surface: .tab, tab: "plan"),
+                    reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
+                    prominence: .standard
+                )
+            )
+        )
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: snapshot)
+        )
+
+        await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
+
+        let request = await center.replacedRequest
+        XCTAssertEqual(request?.title, "Next step ready")
+        XCTAssertEqual(request?.body, "Details stay private until you open Ambitions.")
+        XCTAssertFalse(request?.title.contains("tax") == true)
+        XCTAssertFalse(request?.body.contains("advisor") == true)
+        XCTAssertFalse(request?.body.contains("account") == true)
     }
 }
 

@@ -233,6 +233,49 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertEqual(today.performedActions.first?.target.goalID, "goal-1")
         XCTAssertEqual(today.performedActions.first?.target.stepID, "step-1")
     }
+
+    func testPFC20NotificationMutationPayloadRoutesInsteadOfMutating() async {
+        let today = RecordingExternalActionTodayService()
+        let router = RecordingExternalActionRouter()
+        let service = makeService(todayService: today, router: router)
+        let completePayload = AppNotificationRoutingPayload(
+            action: "complete",
+            values: [
+                "goalID": "goal-1",
+                "stepID": "step-1",
+                "origin": "notification"
+            ]
+        )
+        let snoozePayload = AppNotificationRoutingPayload(
+            action: "snooze",
+            values: [
+                "goalID": "goal-1",
+                "stepID": "step-1",
+                "origin": "notification"
+            ]
+        )
+
+        let completeResult = await service.execute(
+            ExternalActionCommand(notificationPayload: completePayload),
+            now: .now
+        )
+        let snoozeResult = await service.execute(
+            ExternalActionCommand(notificationPayload: snoozePayload),
+            now: .now
+        )
+
+        XCTAssertEqual(completeResult.outcome, .routed)
+        XCTAssertEqual(snoozeResult.outcome, .routed)
+        XCTAssertTrue(today.performedActions.isEmpty)
+        XCTAssertEqual(router.dispatchedRoutes.map(\.route), [
+            .openGoalDetail(goalID: "goal-1"),
+            .openTab(.today),
+        ])
+        XCTAssertEqual(router.dispatchedRoutes.map(\.source), [
+            .notificationAction,
+            .notificationAction,
+        ])
+    }
 }
 
 @MainActor
