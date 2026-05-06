@@ -178,6 +178,12 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   RiskPinch friction, AlternateRouteFold review branches, GoalPathSourceFold
   source truth, private redaction, and non-color path meaning. The next eligible
   global batch is FCP12 Proof Spine / Evidence Ledger.
+- FCP12 is complete Green as bounded Goals / shared trust Proof Spine evidence.
+  The shared trust receipt layer now owns ProofSpine, ProofBead,
+  ProofFreshnessLabel, ProofCorrectionMark, and ProofPrivacyRedaction; Goal
+  Detail renders proof through that spine with source, freshness, privacy,
+  correction, and stale-review posture. The next eligible global batch is
+  FCP13B Goal Alternate Path / Decision History Polish.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -590,7 +596,8 @@ bounded LifeShape Contour Map evidence. FCP15 is complete Green as bounded
 Reflow Decision Fold evidence. FCP16 is complete Green as bounded Pressure
 Field / Recovery Loop evidence. FCP10 is complete Green as bounded
 MissionControlTimeSpine evidence. FCP11 is complete Green as bounded LifePath
-Thread evidence, and the full-stack order selects FCP12 next.
+Thread evidence. FCP12 is complete Green as bounded Proof Spine / Evidence
+Ledger evidence, and the full-stack order selects FCP13B next.
 
 
 ## Living Dream Intelligence Context

@@ -2,15 +2,15 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP11 LifePath Thread complete / Green.
-Next eligible batch: FCP12 Proof Spine / Evidence Ledger.
-Scope: FCP11 replaced Goal Detail's first path presentation with a
-LifePathThread object. The thread preserves accessible path order, attaches
-proof as beads, marks friction as a risk pinch, keeps alternate routes folded
-behind review copy, and exposes a GoalPathSourceFold without adding a
-destination, route/raw-value, persistence/schema, dependency, top-level tab,
-sync/cloud, legal/privacy/release, App Store, TestFlight, device, public
-accessibility, AOS runtime, or LDI runtime claim.
+Current batch: FCP12 Proof Spine / Evidence Ledger complete / Green.
+Next eligible batch: FCP13B Goal Alternate Path / Decision History Polish.
+Scope: FCP12 added a shared ProofSpine to the trust receipt layer and wired
+Goal Detail proof to that spine. Proof now carries source, freshness, privacy,
+correction, and stale-review posture without adding a trophy shelf, activity
+feed, analytics ledger, persistence/schema change, route/raw-value change,
+dependency, sync/cloud behavior, legal/privacy/release claim, App Store claim,
+TestFlight claim, physical-device proof, public accessibility claim, AOS
+runtime claim, or LDI runtime claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -68,7 +68,8 @@ Accessibility evidence. FCP14 is complete / Green as LifeShape Contour Map
 evidence. FCP15 is complete / Green as Reflow Decision Fold evidence. FCP16 is
 complete / Green as Pressure Field / Recovery Loop evidence. FCP10 is complete
 / Green as MissionControlTimeSpine evidence. FCP11 is complete / Green as
-LifePath Thread evidence. FCP12 is the next eligible global batch.
+LifePath Thread evidence. FCP12 is complete / Green as Proof Spine / Evidence
+Ledger evidence. FCP13B is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

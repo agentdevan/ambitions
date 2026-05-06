@@ -341,7 +341,16 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     truth. It adds no route/raw-value, persistence/schema, dependency,
     top-level tab, sync/cloud, legal/privacy/release, App Store, TestFlight,
     device, public accessibility, AOS runtime, or LDI runtime claim.
-57. FCP12 Proof Spine / Evidence Ledger.
+57. FCP12 Proof Spine / Evidence Ledger. Completed Green on 2026-05-06 as
+    bounded Goals / shared trust implementation evidence. It adds a shared
+    ProofSpine with ProofBead, ProofFreshnessLabel, ProofCorrectionMark, and
+    ProofPrivacyRedaction primitives, wires Goal Detail proof to the shared
+    spine, and carries source, freshness, privacy, correction, and stale-review
+    boundaries without turning proof into a trophy shelf, activity feed, or
+    analytics ledger. It adds no persistence/schema change, route/raw-value
+    change, dependency, sync/cloud behavior, legal/privacy/release claim, App
+    Store claim, TestFlight claim, physical-device proof, public accessibility
+    claim, AOS runtime claim, or LDI runtime claim.
 58. FCP13B Goal Alternate Path / Decision History Polish.
 59. FCP25 Loading / Empty / Degraded State Objectization.
 60. FCP26 Iconography / Status Grammar Hardening.

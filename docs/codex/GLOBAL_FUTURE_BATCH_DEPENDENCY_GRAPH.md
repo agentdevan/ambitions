@@ -64,6 +64,9 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   precede FCP13A because closure is now visible as a rail knot but not yet the
   final Action Closure Diamond.
 - FCP13A Action Closure Diamond must precede final Recovery Loop and cross-surface proof mesh.
+- FCP12 is complete as shared ProofSpine / Goal Detail proof integration
+  evidence and satisfies the FCP13B proof-spine dependency; wider Today, Plan,
+  and You mesh integration remains later-batch scoped.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
 - AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.

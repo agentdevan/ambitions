@@ -693,36 +693,16 @@ private struct GoalDetailReviewTrailCard: View {
 }
 
 private struct GoalDetailProofRailCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
     let state: GoalDetailProofRailState
 
     var body: some View {
-        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
-            if state.items.isEmpty {
-                EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "checkmark.seal")
-            } else {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(state.items) { item in
-                        HStack(alignment: .top, spacing: theme.spacing.sm) {
-                            Image(systemName: "checkmark.seal.fill")
-                                .foregroundStyle(theme.stateStyle(for: item.state).accent)
-                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                Text(item.title)
-                                    .font(theme.typography.bodyEmphasized)
-                                    .foregroundStyle(theme.colors.textPrimary)
-                                Text(item.subtitle)
-                                    .font(theme.typography.caption)
-                                    .foregroundStyle(theme.colors.textSecondary)
-                                Text(item.timestamp)
-                                    .font(theme.typography.micro)
-                                    .foregroundStyle(theme.colors.textTertiary)
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        ProofSpine(
+            title: state.title,
+            subtitle: state.subtitle,
+            beads: state.spineBeads,
+            emptyTitle: state.emptyTitle,
+            emptyMessage: state.emptyMessage
+        )
         .accessibilityIdentifier("goal-detail.proof-rail")
     }
 }

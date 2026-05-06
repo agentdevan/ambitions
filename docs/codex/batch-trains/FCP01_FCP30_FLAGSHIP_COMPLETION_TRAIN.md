@@ -265,6 +265,8 @@ proof for private redaction and non-color state meaning.
 
 ### FCP12 — Proof Spine / Evidence Ledger
 
+Status: Complete Green on 2026-05-06 as bounded shared ProofSpine / Goal
+Detail proof integration evidence.
 Type: Implementation.
 Owner: Goals / Trust.
 Depends on: FCP06, FCP10, FCP11, PD07.

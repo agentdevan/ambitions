@@ -220,6 +220,296 @@ public struct SourceFreshnessLabel: View {
     }
 }
 
+public struct ProofBead: Identifiable, Equatable, Sendable {
+    public let id: String
+    public let title: String
+    public let summary: String
+    public let sourceLabel: String
+    public let freshness: SourceFreshnessState
+    public let privacyLabel: String
+    public let timestampLabel: String?
+    public let correctionLabel: String?
+    public let staleReviewLabel: String?
+    public let redactedDetail: String?
+
+    public init(
+        id: String,
+        title: String,
+        summary: String,
+        sourceLabel: String,
+        freshness: SourceFreshnessState,
+        privacyLabel: String,
+        timestampLabel: String? = nil,
+        correctionLabel: String? = nil,
+        staleReviewLabel: String? = nil,
+        redactedDetail: String? = nil
+    ) {
+        self.id = id
+        self.title = title
+        self.summary = summary
+        self.sourceLabel = sourceLabel
+        self.freshness = freshness
+        self.privacyLabel = privacyLabel
+        self.timestampLabel = timestampLabel
+        self.correctionLabel = correctionLabel
+        self.staleReviewLabel = staleReviewLabel
+        self.redactedDetail = redactedDetail
+    }
+
+    public var visibleSummary: String {
+        redactedDetail ?? summary
+    }
+
+    public var isRedacted: Bool {
+        redactedDetail != nil
+    }
+
+    public var requiresReviewBeforeRecommendation: Bool {
+        switch freshness {
+        case .stale, .partial, .denied, .blocked, .unavailable:
+            return true
+        case .fresh, .offline, .localOnly:
+            return false
+        }
+    }
+
+    public var accessibilitySummary: String {
+        [
+            title,
+            visibleSummary,
+            sourceLabel,
+            freshness.label,
+            privacyLabel,
+            correctionLabel,
+            staleReviewLabel,
+            timestampLabel
+        ]
+        .compactMap { $0 }
+        .joined(separator: ". ")
+    }
+}
+
+public struct ProofFreshnessLabel: View {
+    private let freshness: SourceFreshnessState
+
+    public init(_ freshness: SourceFreshnessState) {
+        self.freshness = freshness
+    }
+
+    public var body: some View {
+        SourceFreshnessLabel(freshness)
+            .accessibilityIdentifier("proof-spine.freshness.\(freshness.rawValue)")
+    }
+}
+
+public struct ProofCorrectionMark: View {
+    private let label: String
+
+    public init(_ label: String) {
+        self.label = label
+    }
+
+    public var body: some View {
+        EvidenceLabel(
+            label,
+            detail: "Correction remains visible",
+            source: "User review",
+            state: .stale,
+            context: .trust
+        )
+        .accessibilityIdentifier("proof-spine.correction-mark")
+    }
+}
+
+public struct ProofPrivacyRedaction: View {
+    private let label: String
+
+    public init(_ label: String = "Private details hidden") {
+        self.label = label
+    }
+
+    public var body: some View {
+        EvidenceLabel(
+            label,
+            detail: "Proof role remains visible",
+            source: "Privacy boundary",
+            state: .sensitive,
+            context: .trust
+        )
+        .accessibilityIdentifier("proof-spine.privacy-redaction")
+    }
+}
+
+public struct ProofSpine: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    private let title: String
+    private let subtitle: String
+    private let beads: [ProofBead]
+    private let emptyTitle: String
+    private let emptyMessage: String
+
+    public init(
+        title: String = "Proof Spine",
+        subtitle: String = "Source, freshness, privacy, correction, and review stay attached to proof.",
+        beads: [ProofBead],
+        emptyTitle: String = "No proof yet",
+        emptyMessage: String = "Proof will appear here after something real is saved."
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.beads = beads
+        self.emptyTitle = emptyTitle
+        self.emptyMessage = emptyMessage
+    }
+
+    public var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(title)
+                    .font(theme.typography.sectionTitle)
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Text(subtitle)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            if beads.isEmpty {
+                proofEmptyState
+            } else if dynamicTypeSize.isAccessibilitySize {
+                accessibleStack
+            } else {
+                visualSpine
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(title)
+        .accessibilityValue(accessibilitySummary)
+        .accessibilityIdentifier("proof-spine")
+    }
+
+    private var proofEmptyState: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            ProofPulse(isActive: false, label: emptyTitle)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(emptyTitle)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Text(emptyMessage)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay {
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .strokeBorder(theme.colors.strokeSubtle, lineWidth: 1)
+        }
+    }
+
+    private var visualSpine: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(Array(beads.enumerated()), id: \.element.id) { index, bead in
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    VStack(spacing: theme.spacing.xxs) {
+                        ProofPulse(isActive: true, label: "Proof bead \(index + 1)")
+
+                        if index < beads.count - 1 {
+                            Capsule(style: .continuous)
+                                .fill(theme.semanticColors.protected.opacity(0.36))
+                                .frame(width: 3, height: 34)
+                                .accessibilityHidden(true)
+                        }
+                    }
+
+                    beadBody(bead)
+                        .padding(.bottom, index < beads.count - 1 ? theme.spacing.sm : 0)
+                }
+            }
+        }
+    }
+
+    private var accessibleStack: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            ForEach(beads) { bead in
+                beadBody(bead)
+            }
+        }
+    }
+
+    private func beadBody(_ bead: ProofBead) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                Text(bead.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer(minLength: theme.spacing.xs)
+
+                if let timestamp = bead.timestampLabel {
+                    Text(timestamp)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+            }
+
+            Text(bead.visibleSummary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                EvidenceLabel(bead.sourceLabel, detail: "Proof source", state: bead.freshness.visualState, context: .trust)
+                ProofFreshnessLabel(bead.freshness)
+                EvidenceLabel(bead.privacyLabel, detail: "Privacy boundary", state: bead.isRedacted ? .sensitive : .calm, context: .trust)
+
+                if let correction = bead.correctionLabel {
+                    ProofCorrectionMark(correction)
+                }
+
+                if let staleReview = bead.staleReviewLabel ?? (bead.requiresReviewBeforeRecommendation ? "Review before recommendations use this proof." : nil) {
+                    EvidenceLabel(staleReview, detail: "Recommendation boundary", state: .stale, context: .trust)
+                        .accessibilityIdentifier("proof-spine.stale-review")
+                }
+
+                if bead.isRedacted {
+                    ProofPrivacyRedaction()
+                }
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay {
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .strokeBorder(bead.freshness.visualState == .stale ? theme.semanticColors.risk.opacity(0.42) : theme.semanticColors.protected.opacity(0.26), lineWidth: 1)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(bead.accessibilitySummary)
+    }
+
+    private var accessibilitySummary: String {
+        if beads.isEmpty {
+            return "\(emptyTitle). \(emptyMessage)"
+        }
+
+        return beads.map(\.accessibilitySummary).joined(separator: " ")
+    }
+}
+
 public struct SourceFold: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize

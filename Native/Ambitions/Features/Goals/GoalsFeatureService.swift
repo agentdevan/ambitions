@@ -2231,6 +2231,7 @@ private extension RepositoryBackedGoalsService {
             sections: sectionStates,
             suggestions: suggestions,
             evidenceItems: Array(context.evidence.prefix(6)).map(makeEvidenceItem),
+            proofBeads: Array(context.evidence.prefix(6)).map { makeProofSpineBead($0, now: .now) },
             feedbackItems: Array(context.feedback.prefix(6)).map(makeFeedbackItem),
             nextMovement: nextMovement,
             trajectory: trajectory,
@@ -2513,6 +2514,7 @@ private extension RepositoryBackedGoalsService {
         sections: [GoalDetailSectionState],
         suggestions: [GoalDetailStepItem],
         evidenceItems: [GoalEvidenceItem],
+        proofBeads: [ProofBead],
         feedbackItems: [GoalFeedbackItem],
         nextMovement: GoalDetailNextMovement?,
         trajectory: GoalDetailTrajectoryState,
@@ -2635,8 +2637,9 @@ private extension RepositoryBackedGoalsService {
             ),
             proofRail: GoalDetailProofRailState(
                 title: "Proof",
-                subtitle: proofSummary.count == 0 ? "Evidence will appear here when it is recorded." : proofSummary.detail,
+                subtitle: proofSummary.count == 0 ? "Evidence will appear here when it is recorded." : "Proof keeps source, freshness, privacy, correction, and review visible.",
                 items: evidenceItems,
+                spineBeads: proofBeads,
                 emptyTitle: "No proof yet",
                 emptyMessage: "Add proof later when there is something real to show."
             ),
@@ -4090,6 +4093,74 @@ private extension RepositoryBackedGoalsService {
             timestamp: evidence.capturedAt,
             state: .success
         )
+    }
+
+    func makeProofSpineBead(_ evidence: ProgressEvidence, now: Date) -> ProofBead {
+        let freshness = proofFreshness(for: evidence, now: now)
+        let correctionLabel = evidence.source == .imported || evidence.source == .migration
+            ? "Correction available after import review."
+            : "Correction can be reviewed from the proof source."
+        let staleReviewLabel = freshness == .stale || freshness == .partial
+            ? "Review before recommendations use this proof."
+            : nil
+
+        return ProofBead(
+            id: evidence.id,
+            title: evidence.note ?? "Progress signal recorded",
+            summary: evidence.evidenceKind.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+            sourceLabel: "Source: \(proofSourceTitle(evidence.source))",
+            freshness: freshness,
+            privacyLabel: proofPrivacyLabel(evidence.source),
+            timestampLabel: evidence.capturedAt,
+            correctionLabel: correctionLabel,
+            staleReviewLabel: staleReviewLabel
+        )
+    }
+
+    func proofFreshness(for evidence: ProgressEvidence, now: Date) -> SourceFreshnessState {
+        switch evidence.source {
+        case .aiSuggested:
+            return .stale
+        case .imported, .migration, .derived:
+            return .partial
+        case .manual:
+            guard
+                let capturedAt = ISO8601DateFormatter().date(from: evidence.capturedAt),
+                let staleThreshold = Calendar.current.date(byAdding: .day, value: -30, to: now)
+            else {
+                return .partial
+            }
+
+            return capturedAt < staleThreshold ? .stale : .fresh
+        }
+    }
+
+    func proofSourceTitle(_ source: EvidenceSource) -> String {
+        switch source {
+        case .manual:
+            return "Manual save"
+        case .migration:
+            return "Migration"
+        case .imported:
+            return "Imported file"
+        case .derived:
+            return "Derived local state"
+        case .aiSuggested:
+            return "Suggested draft"
+        }
+    }
+
+    func proofPrivacyLabel(_ source: EvidenceSource) -> String {
+        switch source {
+        case .manual:
+            return "Private to this goal unless the user exports it."
+        case .migration, .imported:
+            return "Imported proof stays local until export or sync is explicitly enabled."
+        case .derived:
+            return "Derived proof stays on device and needs review before reuse."
+        case .aiSuggested:
+            return "Suggested proof is not treated as verified user evidence."
+        }
     }
 
     func makeFeedbackItem(_ feedback: GoalFeedbackEvent) -> GoalFeedbackItem {

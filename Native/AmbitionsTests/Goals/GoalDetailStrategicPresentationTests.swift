@@ -249,6 +249,60 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .proof })?.badgeTitle, "Evidence visible")
     }
 
+    func testFCP12ProofSpineCarriesSourceFreshnessPrivacyCorrectionAndStaleBoundary() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Keep launch evidence honest"),
+            now: fixedNow
+        )
+        let goalID = try XCTUnwrap(created.target.goalID)
+
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "evidence-stale",
+                goalID: goalID,
+                stepID: nil,
+                evidenceKind: .observationLogged,
+                source: .manual,
+                capturedAt: "2026-03-01T12:00:00Z",
+                progressDelta: nil,
+                confidenceDelta: nil,
+                minutesInvested: nil,
+                note: "Old proof needs review"
+            ),
+            ProgressEvidence(
+                id: "evidence-imported",
+                goalID: goalID,
+                stepID: nil,
+                evidenceKind: .reflectionLogged,
+                source: .imported,
+                capturedAt: "2026-04-26T12:00:00Z",
+                progressDelta: nil,
+                confidenceDelta: nil,
+                minutesInvested: nil,
+                note: "Imported proof needs correction posture"
+            )
+        ])
+
+        let detail = try await service.loadDetail(target: created.target)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+        let staleBead = try XCTUnwrap(missionControl.proofRail.spineBeads.first(where: { $0.id == "evidence-stale" }))
+        let importedBead = try XCTUnwrap(missionControl.proofRail.spineBeads.first(where: { $0.id == "evidence-imported" }))
+
+        XCTAssertEqual(staleBead.freshness, .stale)
+        XCTAssertTrue(staleBead.requiresReviewBeforeRecommendation)
+        XCTAssertTrue(staleBead.staleReviewLabel?.localizedCaseInsensitiveContains("Review before recommendations") == true)
+        XCTAssertTrue(staleBead.privacyLabel.localizedCaseInsensitiveContains("Private to this goal"))
+        XCTAssertTrue(staleBead.correctionLabel?.localizedCaseInsensitiveContains("Correction can be reviewed") == true)
+        XCTAssertEqual(importedBead.freshness, .partial)
+        XCTAssertTrue(importedBead.privacyLabel.localizedCaseInsensitiveContains("Imported proof stays local"))
+        XCTAssertTrue(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("source"))
+        XCTAssertTrue(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("privacy"))
+        XCTAssertFalse(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("trophy"))
+        XCTAssertFalse(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("activity feed"))
+    }
+
     func testMissionControlDegradesWhenGoalHasNoNextStep() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)

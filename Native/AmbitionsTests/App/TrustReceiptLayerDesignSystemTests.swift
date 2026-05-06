@@ -83,4 +83,42 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("cloud synced"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("AI confidence"))
     }
+
+    func testFCP12ProofBeadCarriesSourceFreshnessPrivacyCorrectionAndStaleReview() {
+        let bead = ProofBead(
+            id: "proof-stale",
+            title: "Proposal draft saved",
+            summary: "The draft exists, but the source is older.",
+            sourceLabel: "Source: Manual save",
+            freshness: .stale,
+            privacyLabel: "Private to this goal unless exported.",
+            timestampLabel: "2026-03-01T12:00:00Z",
+            correctionLabel: "Correction can be reviewed from the proof source.",
+            staleReviewLabel: "Review before recommendations use this proof."
+        )
+
+        XCTAssertTrue(bead.requiresReviewBeforeRecommendation)
+        XCTAssertEqual(bead.visibleSummary, "The draft exists, but the source is older.")
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Source: Manual save"))
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Review before recommendations"))
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Private to this goal"))
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Correction can be reviewed"))
+    }
+
+    func testFCP12ProofPrivacyRedactionPreservesRoleWhileHidingDetail() {
+        let bead = ProofBead(
+            id: "proof-private",
+            title: "Private proof",
+            summary: "Specific private details",
+            sourceLabel: "Source: Imported file",
+            freshness: .partial,
+            privacyLabel: "Private detail hidden.",
+            redactedDetail: "Proof detail hidden."
+        )
+
+        XCTAssertTrue(bead.isRedacted)
+        XCTAssertEqual(bead.visibleSummary, "Proof detail hidden.")
+        XCTAssertTrue(bead.requiresReviewBeforeRecommendation)
+        XCTAssertFalse(bead.accessibilitySummary.contains("Specific private details"))
+    }
 }

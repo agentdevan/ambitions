@@ -1259,7 +1259,7 @@ struct LifePathThreadState: Sendable {
     let title: String
     let subtitle: String
     let nodes: [LifePathThreadNode]
-    let proofBeads: [ProofBead]
+    let proofBeads: [LifePathProofBead]
     let riskPinches: [RiskPinch]
     let alternateRouteFolds: [AlternateRouteFold]
     let sourceFold: GoalPathSourceFold
@@ -1288,9 +1288,9 @@ struct LifePathThreadState: Sendable {
                 state: stage.state
             )
         }
-        let stageProof = visibleStages.compactMap { stage -> ProofBead? in
+        let stageProof = visibleStages.compactMap { stage -> LifePathProofBead? in
             guard let marker = stage.proofMarkerLabel else { return nil }
-            return ProofBead(
+            return LifePathProofBead(
                 id: "stage-proof-\(stage.id)",
                 title: marker,
                 summary: privacySensitive ? "Proof detail hidden." : stage.highlight ?? stage.summary,
@@ -1298,7 +1298,7 @@ struct LifePathThreadState: Sendable {
             )
         }
         let requirementProof = (pathBuilder?.proofRequirements ?? []).prefix(3).map { proof in
-            ProofBead(
+            LifePathProofBead(
                 id: "requirement-\(proof.id)",
                 title: privacySensitive ? "Private proof check" : proof.title,
                 summary: privacySensitive ? "Proof detail hidden." : proof.summary,
@@ -1392,7 +1392,7 @@ struct LifePathThreadNode: Identifiable, Sendable {
     let state: AmbitionVisualState
 }
 
-struct ProofBead: Identifiable, Sendable {
+struct LifePathProofBead: Identifiable, Sendable {
     let id: String
     let title: String
     let summary: String
@@ -1609,6 +1609,7 @@ struct GoalDetailProofRailState: Sendable {
     let title: String
     let subtitle: String
     let items: [GoalEvidenceItem]
+    let spineBeads: [ProofBead]
     let emptyTitle: String
     let emptyMessage: String
 }

@@ -742,6 +742,18 @@ enum PreviewGoalsScenarios {
         let riskIsCalm = riskTitle == "No major visible risk"
         let nextAvailable = nextTitle != "No next step needed"
         let proofHeadline = hasProof ? "\(proofItems.count) proof point\(proofItems.count == 1 ? "" : "s")" : "No proof yet"
+        let proofBeads = proofItems.map { item in
+            ProofBead(
+                id: item.id,
+                title: item.title,
+                summary: item.subtitle,
+                sourceLabel: "Source: Preview proof",
+                freshness: .fresh,
+                privacyLabel: "Preview proof stays local.",
+                timestampLabel: item.timestamp,
+                correctionLabel: "Correction can be reviewed from the proof source."
+            )
+        }
         let riskItems = riskIsCalm ? [] : [
             GoalDetailRiskState(
                 id: "preview-risk-\(title)",
@@ -790,7 +802,7 @@ enum PreviewGoalsScenarios {
                 GoalDetailAssumptionState(id: "next-step", title: "This goal has a next step.", status: nextAvailable ? "Visible" : "Closed", whyItMatters: "The screen should lead with one step, not a long step dump.", correctionLabel: nextAvailable ? "Change next step" : nil, state: nextAvailable ? .selected : .default),
                 GoalDetailAssumptionState(id: "proof", title: "This goal has enough proof.", status: hasProof ? "Proof visible" : "No proof yet", whyItMatters: "Progress should be backed by something observable.", correctionLabel: "Add proof later", state: hasProof ? .selected : .default),
             ],
-            proofRail: GoalDetailProofRailState(title: "Proof", subtitle: hasProof ? "Evidence is visible." : "Evidence will appear here when it is recorded.", items: proofItems, emptyTitle: "No proof yet", emptyMessage: "Add proof later when there is something real to show."),
+            proofRail: GoalDetailProofRailState(title: "Proof", subtitle: hasProof ? "Proof keeps source, freshness, privacy, correction, and review visible." : "Evidence will appear here when it is recorded.", items: proofItems, spineBeads: proofBeads, emptyTitle: "No proof yet", emptyMessage: "Add proof later when there is something real to show."),
             decisions: GoalDetailDecisionsState(title: "Decisions", subtitle: "Decision trail stays here when this goal changes.", items: [], emptyTitle: "No decisions yet", emptyMessage: "When you change, park, or explain this goal, the reason will stay visible here."),
             risks: GoalDetailRisksState(title: "Risks", subtitle: riskItems.isEmpty ? "No major risk is visible from this goal data." : "Risks stay explicit so recovery can stay calm.", items: riskItems, emptyTitle: "No major risk visible", emptyMessage: "Nothing in this goal is asking for rescue right now."),
             archive: archiveState,
