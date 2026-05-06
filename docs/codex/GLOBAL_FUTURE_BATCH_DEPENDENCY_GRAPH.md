@@ -252,6 +252,16 @@ observability boundary. PFC29 does not add runtime logging, remote telemetry,
 analytics, crash reporting, SDKs, dependencies, privacy manifest entries, App
 Store metadata, release artifacts, or user-facing telemetry controls.
 
+PFC30 is complete Green as of 2026-05-05. Future launch, memory, rendering,
+animation, widget reload, Live Activity, sync, background-task, battery,
+SwiftUI performance, Instruments, old-device, large-history, App Intent,
+notification, or performance-repair work must use
+`docs/canon/Ambitions_Performance_Budget_And_Benchmark_Readiness.md` as the
+performance budget and measurement boundary. PFC30 does not claim performance
+compliance, battery safety, release readiness, App Store readiness, TestFlight
+readiness, physical-device proof, public accessibility proof, telemetry,
+analytics, crash reporting, or production observability.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

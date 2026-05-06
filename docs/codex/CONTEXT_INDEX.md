@@ -101,6 +101,16 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   user content in logs; local Event Ledger and receipt records remain
   user-trust product data, not developer telemetry. The next eligible global
   batch is PFC30 Performance Budget And Instruments Plan.
+- PFC30 is complete Green as docs/QA performance budget and Instruments
+  checklist. It promotes
+  [Ambitions_Performance_Budget_And_Benchmark_Readiness.md](../canon/Ambitions_Performance_Budget_And_Benchmark_Readiness.md)
+  into active source truth for launch, memory, rendering, animation, widgets,
+  Live Activities, sync, background tasks, battery, SwiftUI review, and
+  measured-evidence lanes without claiming performance compliance, battery
+  safety, release readiness, App Store readiness, TestFlight readiness,
+  physical-device proof, public accessibility proof, or production
+  observability. The next eligible global batch is FCP22 Personal System
+  Center Refactor.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -500,8 +510,9 @@ Manifest / Required-Reason API Audit evidence. PFC26 is complete Green as
 Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is complete Green
 as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is complete
 Green as Security Threat Model And Secrets Audit evidence. PFC29 is complete
-Green as Logging / Analytics / Observability Policy evidence, and the
-full-stack order selects PFC30 next.
+Green as Logging / Analytics / Observability Policy evidence. PFC30 is complete
+Green as Performance Budget And Instruments Plan evidence, and the full-stack
+order selects FCP22 next.
 
 
 ## Living Dream Intelligence Context

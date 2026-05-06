@@ -2,20 +2,21 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC29 Logging / Analytics / Observability Policy complete
-Green; full-stack order selects PFC30 Performance Budget And Instruments Plan
-next.
-Scope: PFC29 created the docs/privacy/observability policy at
-`docs/canon/Ambitions_Logging_Analytics_Observability_Policy.md`. It locks the
-current runtime decision of no remote analytics, no remote telemetry, no
-third-party crash SDK, no developer diagnostics collection, and no private user
-content in logs; local Event Ledger and receipt records remain user-trust
-product data, not developer telemetry. PFC29 changed only docs and train-state
-files. It did not change production Swift, route/raw value, persistence/schema,
-privacy-manifest, entitlement, dependency, analytics, tracking, network,
-StoreKit, sync/account, release, legal/privacy compliance, CI,
-workflow/signing, AI runtime, AOS runtime, LDI runtime, App Store Connect, or
-public accessibility claim files.
+Current batch: PFC30 Performance Budget And Instruments Plan complete
+Green; full-stack order selects FCP22 Personal System Center Refactor next.
+Scope: PFC30 promoted
+`docs/canon/Ambitions_Performance_Budget_And_Benchmark_Readiness.md` into the
+active performance budget and Instruments checklist. It defines launch, memory,
+rendering, animation, widget reload, Live Activity, sync, background-task,
+battery, SwiftUI review, and evidence-bound measurement lanes without claiming
+performance compliance, battery safety, release readiness, App Store readiness,
+TestFlight readiness, physical-device proof, public accessibility proof,
+telemetry, analytics, crash reporting, or production observability. PFC30
+changed only docs and train-state files. It did not change production Swift,
+route/raw value, persistence/schema, privacy-manifest, entitlement, dependency,
+CI, workflow/signing, MetricKit, analytics, telemetry, crash SDK, sync/account,
+release, legal/privacy compliance, AI runtime, AOS runtime, LDI runtime,
+App Store Connect, or public accessibility claim files.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -62,6 +63,7 @@ Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is complete /
 Green as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is
 complete / Green as Security Threat Model And Secrets Audit evidence. PFC29 is
 complete / Green as Logging / Analytics / Observability Policy evidence. PFC30
+is complete / Green as Performance Budget And Instruments Plan evidence. FCP22
 is the next eligible global batch. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
@@ -113,8 +115,10 @@ privacy manifest / required-reason API audit evidence. PFC26 is complete /
 Green as docs/legal/privacy human-review packet evidence. PFC27 is complete /
 Green as docs/safety professional-boundary crisis policy evidence. PFC28 is
 complete / Green as docs/security threat model and secrets audit evidence.
-PFC29 is complete / Green as docs/privacy observability policy evidence. Later PFC
-implementation beyond existing test execution has not started.
+PFC29 is complete / Green as docs/privacy observability policy evidence. PFC30
+is complete / Green as docs/performance budget and Instruments checklist
+evidence. Later PFC implementation beyond existing test execution has not
+started.
 
 No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality
 Rail Continuity, FCP13A Action Closure Diamond, and FCP08 Ambition Meridian

@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -350,6 +350,13 @@ Type: Docs/QA.
 Owner: Performance.
 Goal: Define launch, memory, rendering, animation, widget reload, Live Activity, sync, background-task, battery budgets.
 Required result: performance budget and Instruments checklist.
+Status: Green as active docs/QA performance budget and Instruments checklist.
+It promotes `docs/canon/Ambitions_Performance_Budget_And_Benchmark_Readiness.md`
+with launch, memory, rendering, animation, widget reload, Live Activity, sync,
+background-task, battery, SwiftUI review, and measured-evidence lanes while
+preserving no performance compliance, battery safety, release, App Store,
+TestFlight, physical-device, public accessibility, telemetry, analytics, crash
+SDK, or production observability claim.
 
 ### PFC31 — Performance / Battery Implementation Repairs
 

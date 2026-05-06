@@ -239,7 +239,14 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     crash SDK, no developer diagnostics collection, and no private user content
     in logs; local Event Ledger and receipt records remain user-trust product
     data, not developer telemetry.
-44. PFC30 Performance Budget And Instruments Plan.
+44. PFC30 Performance Budget And Instruments Plan. Completed Green on
+    2026-05-05 as docs/QA performance budget and Instruments checklist
+    evidence. It promotes the active performance budget for launch, memory,
+    rendering, animation, widget reload, Live Activity, sync, background-task,
+    battery, SwiftUI review, and measurement lanes without claiming performance
+    compliance, battery safety, release readiness, App Store readiness,
+    TestFlight readiness, physical-device proof, public accessibility proof, or
+    production observability.
 
 ### Phase 5 — FCP Surface Maturity
 
