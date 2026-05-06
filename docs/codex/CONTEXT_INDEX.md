@@ -219,8 +219,15 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   focused-test evidence. Stale or unavailable Live Activity content collapses
   to open/confirm copy, spoken accessibility summary uses the same redacted
   state, lifecycle decision ends when no concrete step exists, and
-  `origin=live_activity` deep links remain bounded. The next eligible global
-  batch is PFC18 App Intents / Shortcuts Implementation And Tests.
+  `origin=live_activity` deep links remain bounded.
+- PFC18 is complete Green as bounded App Intents / Shortcuts source hardening
+  and focused-test evidence. Public launch candidates remain limited to the
+  PFC17-approved surface, compatibility routes stay internal, text capture
+  builds local Capture-review requests without echoing private text in shortcut
+  dialogs, mutation-capable shortcuts require in-app confirmation plus receipt
+  posture, and `origin=app_intent` routing remains bounded. The next eligible
+  global batch is PFC20 Notifications / Calendar / Reminders Implementation
+  Proof.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -641,8 +648,9 @@ bounded Iconography / Status Grammar Hardening evidence. PFC10 is complete
 Green as docs-only CloudKit Schema / Zone / Conflict Model contract evidence.
 PFC11 is complete Green as explicit local-only sync closure evidence. PFC14 is
 complete Green as bounded WidgetKit projection hardening evidence. PFC16 is
-complete Green as bounded ActivityKit source hardening evidence, and the
-full-stack order selects PFC18 next.
+complete Green as bounded ActivityKit source hardening evidence. PFC18 is
+complete Green as bounded App Intents / Shortcuts source hardening evidence,
+and the full-stack order selects PFC20 next.
 
 
 ## Living Dream Intelligence Context

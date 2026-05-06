@@ -75,6 +75,60 @@ final class AppIntentRoutingTests: XCTestCase {
         })
     }
 
+    func testPFC18PublicLaunchCandidatesExcludeCompatibilityDestinations() {
+        let publicCandidates = Set(
+            AmbitionsAppShortcutDestination.allCases.filter(\.isPFC18PublicLaunchCandidate)
+        )
+
+        XCTAssertEqual(publicCandidates, [
+            .today,
+            .plan,
+            .captureInbox,
+            .command,
+            .memoryLens,
+            .startNextStep,
+            .markDone,
+            .saveTheDay,
+        ])
+        XCTAssertFalse(publicCandidates.contains(.quickCapture))
+        XCTAssertFalse(publicCandidates.contains(.quickFocus))
+        XCTAssertFalse(publicCandidates.contains(.quickRecovery))
+        XCTAssertFalse(publicCandidates.contains(.quickPlanPatch))
+    }
+
+    func testPFC18CaptureIntentBuildsLocalReviewRequestWithoutEchoingDialogText() throws {
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2026-04-15T12:00:00Z"))
+
+        let request = try CreateAmbitionsCaptureIntent.makeCaptureRequest(
+            text: "  Private appointment note  ",
+            now: now,
+            id: "intent-test"
+        )
+
+        XCTAssertEqual(request.id, "intent-test")
+        XCTAssertEqual(request.createdAt, "2026-04-15T12:00:00Z")
+        XCTAssertEqual(request.text, "Private appointment note")
+        XCTAssertEqual(request.source, .appIntent)
+        XCTAssertEqual(request.landing, .captureInbox)
+        XCTAssertThrowsError(
+            try CreateAmbitionsCaptureIntent.makeCaptureRequest(text: "  ", now: now, id: "empty")
+        )
+    }
+
+    func testPFC18MutationCapableShortcutsRequireInAppConfirmationAndReceipts() {
+        let descriptors = AmbitionsAppShortcutDestination.allCases.map(\.d25CommandDescriptor)
+        let mutationDescriptors = descriptors.filter { descriptor in
+            descriptor.commandKind == .completeAction || descriptor.commandKind == .recoverAction
+        }
+
+        XCTAssertEqual(Set(mutationDescriptors.map(\.destination)), [.markDone, .saveTheDay, .quickRecovery])
+        XCTAssertTrue(mutationDescriptors.allSatisfy(\.requiresConfirmation))
+        XCTAssertTrue(mutationDescriptors.allSatisfy(\.producesReceipt))
+        XCTAssertTrue(mutationDescriptors.allSatisfy { descriptor in
+            descriptor.routeURL?.absoluteString.contains("origin=app_intent") == true
+        })
+    }
+
     @MainActor
     func testIntentLaunchRouterQueuesAndConsumesOnePendingURL() throws {
         let router = AppIntentLaunchRouter.shared

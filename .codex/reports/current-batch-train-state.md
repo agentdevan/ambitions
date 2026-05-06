@@ -2,18 +2,19 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: PFC16 Live Activities Implementation And Tests complete / Green.
-Next eligible batch: PFC18 App Intents / Shortcuts Implementation And Tests.
-Scope: PFC16 hardened the existing ActivityKit `Active Step Focus Window` source
-path so stale or unavailable Live Activity state collapses to open/confirm copy
-instead of carrying ambient focus title/detail text. Focused tests prove stale
-privacy copy, stale ambient text suppression, accessibility-summary redaction,
-safe live-activity deep links, and ending when no concrete step exists. It adds
-no new Live Activity candidate, entitlement, signing, project/workflow/
-dependency change, persistence/schema change, privacy manifest change,
-sync/account/backend behavior, AI/LDI runtime, legal/privacy/release claim, App
-Store claim, TestFlight claim, physical-device proof, or public accessibility
-claim.
+Current batch: PFC18 App Intents / Shortcuts Implementation And Tests complete / Green.
+Next eligible batch: PFC20 Notifications / Calendar / Reminders Implementation Proof.
+Scope: PFC18 hardened the existing App Intents / Shortcuts source contract so
+public launch candidates remain bounded to the PFC17-approved surface, internal
+compatibility routes do not drift into public launch truth, text capture builds
+a local Capture-review request without echoing private text in the success
+dialog, and mutation-capable shortcuts retain in-app confirmation plus receipt
+posture. It adds no new top-level destination, hidden mutation, destructive
+shortcut action, Spotlight/CoreSpotlight user-life-content indexing,
+entitlement, signing, project/workflow/dependency change, persistence/schema
+change, privacy manifest change, sync/account/backend behavior, AI/LDI runtime,
+legal/privacy/release claim, App Store claim, TestFlight claim, physical-device
+proof, or public accessibility claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -79,8 +80,9 @@ Degraded State Objectization evidence. FCP26 is complete / Green as Iconography
 Schema / Zone / Conflict Model contract evidence. PFC11 is complete / Green as
 explicit local-only sync closure evidence. PFC14 is complete / Green as
 WidgetKit projection hardening and focused-test evidence. PFC16 is complete /
-Green as Live Activity source hardening and focused-test evidence. PFC18 is the
-next eligible global batch.
+Green as Live Activity source hardening and focused-test evidence. PFC18 is
+complete / Green as App Intents / Shortcuts source hardening and focused-test
+evidence. PFC20 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
@@ -138,8 +140,8 @@ evidence. FCP22 is complete / Green as bounded You root Personal System Center
 implementation evidence. FCP23 is complete / Green as bounded You-owned Memory
 Lens visual layer evidence. FCP24 is complete / Green as bounded You-owned
 Appearance Studio object-preview evidence. FCP18 is complete / Green as
-bounded Capture Placement Shelf implementation evidence. Later PFC implementation beyond existing test
-execution has not started.
+bounded Capture Placement Shelf implementation evidence. PFC18 is complete /
+Green as bounded App Intents / Shortcuts implementation evidence.
 
 No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality
 Rail Continuity, FCP13A Action Closure Diamond, and FCP08 Ambition Meridian

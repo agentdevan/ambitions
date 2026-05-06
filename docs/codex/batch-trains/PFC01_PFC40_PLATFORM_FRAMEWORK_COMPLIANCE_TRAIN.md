@@ -264,7 +264,14 @@ Required result: App Intent contract.
 Type: Implementation/tests.
 Owner: App Intents.
 Goal: Implement safe intents for capture, start step, close loop, open plan, review receipts as approved.
-Required result: App Intent tests/snapshots and no hidden mutation.
+Required result: Complete / Green. PFC18 bounded public launch candidates to the
+PFC17-approved App Intents / Shortcuts surface, kept compatibility routes
+internal, added pure local Capture-review request construction, proved
+mutation-capable shortcut confirmation/receipt posture, and preserved
+`origin=app_intent` routing without new destinations, hidden mutation,
+Spotlight indexing, entitlements, signing, project/workflow/dependency changes,
+privacy manifest changes, or release/App Store/TestFlight/device/public
+accessibility claims.
 
 ### PFC19 — Notifications / Focus / Calendar / Reminders Integration Strategy
 

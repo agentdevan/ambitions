@@ -226,6 +226,13 @@ confirmation plus receipt proof, compatibility destinations remain internal
 unless separately proved, and CoreSpotlight indexing of user life content is not
 approved by default.
 
+PFC18 is complete Green as of 2026-05-06. Future App Intent, Shortcut, Siri, or
+Spotlight implementation must preserve the PFC18 proof boundary: public launch
+candidates remain bounded to the PFC17-approved surface, compatibility routes
+stay internal unless separately proved, text capture routes to local Capture
+review without echoing private text in shortcut dialogs, and mutation-capable
+shortcuts require in-app confirmation plus receipt posture.
+
 PFC19 is complete Green as of 2026-05-05. Future notification, Focus, Calendar,
 Reminders, EventKit, or permission work must use
 `docs/canon/Ambitions_Notifications_Focus_Calendar_Reminders_Strategy.md` as the

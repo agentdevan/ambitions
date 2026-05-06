@@ -96,6 +96,15 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     var routeURL: URL? {
         d25CommandDescriptor.routeURL
     }
+
+    var isPFC18PublicLaunchCandidate: Bool {
+        switch self {
+        case .today, .plan, .captureInbox, .command, .memoryLens, .startNextStep, .markDone, .saveTheDay:
+            return true
+        case .quickCapture, .quickRecovery, .quickFocus, .quickPlanPatch:
+            return false
+        }
+    }
 }
 
 enum AmbitionsShortcutExecutionPosture: String, Sendable, Equatable {
@@ -288,18 +297,13 @@ struct CreateAmbitionsCaptureIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard trimmed.isEmpty == false else {
+        let request: ExternalCreationRequest
+        do {
+            request = try Self.makeCaptureRequest(text: text, now: Date(), id: "intent-\(UUID().uuidString)")
+        } catch {
             return .result(dialog: "Capture needs text.")
         }
 
-        let request = ExternalCreationRequest(
-            id: "intent-\(UUID().uuidString)",
-            createdAt: ISO8601DateFormatter().string(from: Date()),
-            text: trimmed,
-            source: .appIntent,
-            landing: .captureInbox
-        )
         try SharedExternalCreationStore().append(request)
 
         await MainActor.run {
@@ -312,6 +316,21 @@ struct CreateAmbitionsCaptureIntent: AppIntent {
         }
 
         return .result(dialog: IntentDialog("Saved locally to Capture. Open Ambitions to review the receipt."))
+    }
+
+    static func makeCaptureRequest(text: String, now: Date, id: String) throws -> ExternalCreationRequest {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.isEmpty == false else {
+            throw SharedExternalCreationStoreError.emptyText
+        }
+
+        return ExternalCreationRequest(
+            id: id,
+            createdAt: ISO8601DateFormatter().string(from: now),
+            text: trimmed,
+            source: .appIntent,
+            landing: .captureInbox
+        )
     }
 }
 

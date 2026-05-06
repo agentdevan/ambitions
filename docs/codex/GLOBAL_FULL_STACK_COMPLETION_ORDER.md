@@ -430,7 +430,19 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     sync/account/backend behavior, legal/privacy/release claim, App Store
     claim, TestFlight claim, physical-device proof, or public accessibility
     claim.
-65. PFC18 App Intents / Shortcuts Implementation And Tests.
+65. PFC18 App Intents / Shortcuts Implementation And Tests. Completed Green on
+    2026-05-06 as bounded App Intents / Shortcuts source hardening and
+    focused-test evidence: public launch candidates remain limited to the
+    PFC17-approved surface, compatibility routes stay internal, text capture
+    builds local Capture-review requests without echoing private text in
+    shortcut dialogs, mutation-capable shortcuts require in-app confirmation
+    plus receipt posture, and `origin=app_intent` routing remains bounded. It
+    adds no new top-level destination, hidden mutation, destructive shortcut
+    action, Spotlight/CoreSpotlight user-life-content indexing, entitlement,
+    signing, project/workflow/dependency change, persistence/schema change,
+    privacy manifest change, sync/account/backend behavior,
+    legal/privacy/release claim, App Store claim, TestFlight claim,
+    physical-device proof, or public accessibility claim.
 66. PFC20 Notifications / Calendar / Reminders Implementation Proof.
 67. PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral.
 68. PFC23 Paywall / Upgrade UX Compliance Review.
