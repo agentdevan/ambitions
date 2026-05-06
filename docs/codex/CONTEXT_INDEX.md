@@ -266,8 +266,16 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   boundaries, and proof read/proposal/portability/receipt contract families
   without runtime ledger/schema/export/verifier/product implementation. Yellow
   owners: later HPS Codex OS scripts/skills and future typed proof
-  implementation batches. The next eligible global batch is HPS04 Source Truth
-  + Requirement Graph Architecture.
+  implementation batches. The next HPS batch was HPS04.
+- HPS04 is complete Accepted Yellow as docs-domain Source Truth and Requirement
+  Graph architecture. It adds requirement object families, requirement state
+  fields, claim/source-quality/freshness/uncertainty states, requirement edge
+  families, source conflict behavior, recommendation source boundaries, Source
+  Atlas inheritance, and requirement read/proposal/conflict/projection contract
+  families without source runtime/schema/ingestion/official-requirement
+  implementation. Yellow owners: later HPS Codex OS scripts/skills and future
+  typed source/requirement implementation batches. The next eligible global
+  batch is HPS05 Commitment Memory + Searchable Life Recall Architecture.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -696,8 +704,9 @@ deferral proof. PFC23 is complete Green as no-paywall compliance review and
 safe deferral evidence. HPS01 is complete Accepted Yellow as local
 category-lock reconciliation. HPS02 is complete Accepted Yellow as Human
 Progress Graph API architecture evidence. HPS03 is complete Accepted Yellow as
-Verified Proof Ledger and proof portability architecture evidence, and the
-full-stack order selects HPS04 next.
+Verified Proof Ledger and proof portability architecture evidence. HPS04 is
+complete Accepted Yellow as Source Truth and Requirement Graph architecture
+evidence, and the full-stack order selects HPS05 next.
 
 
 ## Living Dream Intelligence Context

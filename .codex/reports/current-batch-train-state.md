@@ -2,18 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS03 Verified Proof Ledger + Proof Portability Architecture complete / Accepted Yellow.
-Next eligible batch: HPS04 Source Truth + Requirement Graph Architecture.
-Scope: HPS03 added docs-domain Verified Proof Ledger and proof portability
-architecture. It defines proof object families, proof state fields, qualitative
-proof-strength states, portability states, proof-to-requirement mapping,
-privacy/redaction rules, future verifier boundaries, and proof read/proposal/
-portability/receipt contract families. It adds no production Swift, schema,
-migration, runtime proof ledger, export/import implementation, verifier
-product, public credential, marketplace, sync/account/backend, hosted AI,
-Source Atlas runtime, top-level destination, visible proof dashboard, release
-claim, App Store claim, TestFlight claim, physical-device proof, public
-accessibility claim, or acquisition outcome claim.
+Current batch: HPS04 Source Truth + Requirement Graph Architecture complete / Accepted Yellow.
+Next eligible batch: HPS05 Commitment Memory + Searchable Life Recall Architecture.
+Scope: HPS04 added docs-domain Source Truth and Requirement Graph architecture.
+It defines requirement object families, requirement state fields,
+claim/source-quality/freshness/uncertainty states, requirement edge families,
+source conflict behavior, recommendation source boundaries, Source Atlas
+inheritance, and requirement read/proposal/conflict/projection contract
+families. It adds no production Swift, schema, migration, source runtime,
+source ingestion, official requirement database, professional advice product,
+sync/account/backend, hosted AI, top-level destination, visible requirement
+control surface, release claim, App Store claim, TestFlight claim,
+physical-device proof, public accessibility claim, or acquisition outcome claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -91,8 +91,9 @@ safe deferral evidence. HPS01 is complete / Accepted Yellow as local
 category-lock reconciliation. HPS02 is complete / Accepted Yellow as
 Human Progress Graph API architecture evidence. HPS03 is complete / Accepted
 Yellow as Verified Proof Ledger and proof portability architecture evidence.
-HPS04 is the next eligible global batch, and AOS01 remains blocked until
-HPS01-HPS12 are Green or accepted Yellow with owners.
+HPS04 is complete / Accepted Yellow as Source Truth and Requirement Graph
+architecture evidence. HPS05 is the next eligible global batch, and AOS01
+remains blocked until HPS01-HPS12 are Green or accepted Yellow with owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -119,6 +119,15 @@ Owner: Source Truth / Goal Path / LDI.
 Goal: Define claim states, source trust levels, requirement graph v2, source freshness, jurisdiction/institution boundaries, source conflict behavior, and no-certification posture.
 Required result: source/requirement contract that AOS and LDI must inherit.
 Acceptance: no official requirement claim without source; no career/education/professional certainty.
+Status: Accepted Yellow as docs-domain architecture in
+`docs/canon/Ambitions_Source_Truth_Requirement_Graph_Architecture.md`. HPS04
+defines requirement object families, requirement state fields, claim/source
+quality/freshness/uncertainty states, requirement edge families, source
+conflict behavior, recommendation source boundaries, Source Atlas inheritance,
+and requirement read/proposal/conflict/projection API contract families.
+Yellow is owned by later HPS Codex OS work for missing physical HPS advisory
+scripts/skills and by Source Atlas/AOS/LDI/recommendation/export-import batches
+for future typed source and requirement behavior.
 
 ### HPS05 — Commitment Memory + Searchable Life Recall Architecture
 

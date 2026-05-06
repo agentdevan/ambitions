@@ -40,7 +40,10 @@ If the live run has advanced beyond PFC30 or FCP22 by the time this overlay is r
      Accepted Yellow on 2026-05-06 as docs-domain architecture. Yellow owners:
      later HPS Codex OS scripts/skills and future typed proof implementation
      batches.
-48H. HPS04 Source Truth + Requirement Graph Architecture.
+48H. HPS04 Source Truth + Requirement Graph Architecture. Completed Accepted
+     Yellow on 2026-05-06 as docs-domain architecture. Yellow owners: later
+     HPS Codex OS scripts/skills and future typed source/requirement
+     implementation batches.
 49H. HPS05 Commitment Memory + Searchable Life Recall Architecture.
 50H. HPS06 Recommendation Quality + Start Here Brain Architecture.
 51H. HPS07 Option Value + Pivot Preservation Architecture.

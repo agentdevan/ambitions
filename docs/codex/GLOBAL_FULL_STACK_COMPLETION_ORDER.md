@@ -516,7 +516,17 @@ remaining sensitive intelligence work.
      schema, export/import, verifier product, public credential, marketplace,
      sync, hosted AI, UI, or release/platform claims. Yellow owners: later HPS
      Codex OS scripts/skills and future typed proof implementation batches.
-71H. HPS04 Source Truth + Requirement Graph Architecture.
+71H. HPS04 Source Truth + Requirement Graph Architecture. Completed Accepted
+     Yellow on 2026-05-06 as docs-domain architecture in
+     `docs/canon/Ambitions_Source_Truth_Requirement_Graph_Architecture.md`.
+     It defines requirement object families, requirement state fields,
+     claim/source-quality/freshness/uncertainty states, requirement edge
+     families, source conflict behavior, recommendation source boundaries,
+     Source Atlas inheritance, and requirement read/proposal/conflict/
+     projection API contract families without implementing source runtime,
+     source ingestion, schema, sync, hosted AI, official requirement database,
+     UI, or release/platform claims. Yellow owners: later HPS Codex OS
+     scripts/skills and future typed source/requirement implementation batches.
 72H. HPS05 Commitment Memory + Searchable Life Recall Architecture.
 73H. HPS06 Recommendation Quality + Start Here Brain Architecture.
 74H. HPS07 Option Value + Pivot Preservation Architecture.

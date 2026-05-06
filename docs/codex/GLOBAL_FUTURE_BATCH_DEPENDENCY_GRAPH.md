@@ -131,6 +131,14 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   proof creation, promotion, export, or externalization rule. Yellow owners:
   later HPS Codex OS scripts/skills and future typed proof implementation
   batches.
+- HPS04 is complete Accepted Yellow as of 2026-05-06. Future source,
+  requirement, recommendation, AOS, LDI, Source Atlas, proof, export/import,
+  and external-handoff work must inherit the Source Truth and Requirement Graph
+  object families, state fields, claim/source-quality/freshness/uncertainty
+  states, conflict behavior, recommendation source boundary, Source Atlas
+  inheritance, and no silent requirement promotion/officialization rule. Yellow
+  owners: later HPS Codex OS scripts/skills and future typed source/
+  requirement implementation batches.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.
