@@ -2,19 +2,17 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: SAP01 Composable Pack Architecture Lock complete / Green.
-Next eligible batch: SAP02 Goal Projection Object Model.
-Scope: SAP01 reconciled the existing Source Atlas composition and goal
-projection model as live architecture lock before SA06 pack schema work or
-scaled pack creation. Source packs are reusable ingredients, goals are
-projection requests, and AOS/LDI/Plan own final user-context step generation.
-It rejects one-pack-per-goal templates, static same-path outputs, pro/elite
-duplication of lower-level graph nodes, source-free official requirements, and
-packs that store final scheduled steps for every user. It changes docs/state
-only and adds no Swift runtime, seed import, source ingestion, extraction, OCR,
-classifier, source pack, Pack Factory output, Freshness Broker behavior, UI,
-sync/account/backend service, release claim, legal/current-requirement claim, or
-platform proof.
+Current batch: SAP02 Goal Projection Object Model complete / Green.
+Next eligible batch: SAP03 Pack Factory Composition Rules.
+Scope: SAP02 reconciled the goal projection object model as live train truth.
+GoalProjection, ProjectionProfile, PersonalPathInstance, ProjectionRecipe,
+StepCandidateSeed, AlternativePathSet, OptionValueMap, and projection receipts
+are explicit prerequisites before SA06 pack schema work or any scaled pack
+creation. User goals must not map directly to static packs or static paths. It
+changes docs/state only and adds no Swift runtime, seed import, source
+ingestion, extraction, OCR, classifier, source pack, Pack Factory output,
+Freshness Broker behavior, UI, sync/account/backend service, release claim,
+legal/current-requirement claim, or platform proof.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -113,9 +111,9 @@ complete / Green as Source Atlas Gate Matrix reconciliation. SA03 is complete /
 Green as Universal Source Binder Coverage Map reconciliation. SA04 is complete
 / Green as Source Atlas Codex OS Upgrade. SA05 is complete / Green as Source
 Atlas Global Order And Integration Lock. SAP01 is complete / Green as
-Composable Pack Architecture Lock. SAP02 is the next eligible global batch
-before SA06, AOS12, and other deep source/freshness-dependent AOS/LDI work
-continues.
+Composable Pack Architecture Lock. SAP02 is complete / Green as Goal Projection
+Object Model. SAP03 is the next eligible global batch before SA06, AOS12, and
+other deep source/freshness-dependent AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

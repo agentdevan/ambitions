@@ -731,7 +731,17 @@ remaining sensitive intelligence work.
      source packs, Pack Factory output, Freshness Broker behavior, UI,
      sync/account/backend service, release claim, legal/current-requirement
      claim, or platform proof. SAP02 is next.
-72G. SAP02 Goal Projection Object Model.
+72G. SAP02 Goal Projection Object Model. Completed Green on 2026-05-06 as
+     docs/state reconciliation of the existing goal projection object model.
+     GoalProjection, ProjectionProfile, PersonalPathInstance,
+     ProjectionRecipe, StepCandidateSeed, AlternativePathSet, OptionValueMap,
+     and projection receipts are explicit prerequisites before SA06 pack schema
+     work or scaled pack creation. User goals must not map directly to static
+     packs or static paths. It does not add Swift runtime, seed data, source
+     ingestion, extraction, OCR, classifier, source packs, Pack Factory output,
+     Freshness Broker behavior, UI, sync/account/backend service, release
+     claim, legal/current-requirement claim, or platform proof. SAP03 is next.
+72H. SAP03 Pack Factory Composition Rules.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.
