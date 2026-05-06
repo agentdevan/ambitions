@@ -241,6 +241,13 @@ Owner: Goals.
 Depends on: FCP06; PD05-PD08; SI07; DAV06.
 Goal: Replace Mission Control grid as primary object with MissionControlTimeSpine.
 Acceptance: Completed / Now / Friction / Next / Horizon preserved; no dashboard grid.
+Status: Complete Green on 2026-05-06 as bounded Goals / Goal Detail
+implementation. It replaced the primary Mission Control lane grid with
+MissionControlTimeSpine, preserved Completed / Now / Friction / Next / Horizon
+order, added in-place lane inspection, and preserved no route/raw-value,
+persistence/schema, dependency, top-level tab, sync/cloud, release,
+legal/privacy, public accessibility, AOS runtime, or LDI runtime claims.
+Evidence: `docs/audits/fcp10-mission-control-time-spine-report.md`.
 
 ### FCP11 — LifePath Thread
 

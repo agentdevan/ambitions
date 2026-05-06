@@ -145,6 +145,152 @@ struct MissionControlLaneHeaderBadge: Identifiable, Sendable, Hashable {
     }
 }
 
+struct MissionControlTimeSpine: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    @State private var selectedItemID: MissionControlLaneItem.ID?
+
+    let items: [MissionControlLaneItem]
+    let defaultSelectedID: MissionControlLaneItem.ID?
+
+    init(
+        items: [MissionControlLaneItem],
+        defaultSelectedID: MissionControlLaneItem.ID? = nil
+    ) {
+        self.items = items
+        self.defaultSelectedID = defaultSelectedID
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                let isSelected = selectedID == item.id
+                MissionControlSpineLane(
+                    item: item,
+                    positionLabel: positionLabel(for: index),
+                    isSelected: isSelected,
+                    isFirst: index == 0,
+                    isLast: index == items.count - 1,
+                    onSelect: {
+                        withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) {
+                            selectedItemID = item.id
+                        }
+                    }
+                )
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("mission-control-time-spine")
+    }
+
+    private var selectedID: MissionControlLaneItem.ID? {
+        selectedItemID ?? defaultSelectedID ?? items.first?.id
+    }
+
+    private func positionLabel(for index: Int) -> String {
+        "\(index + 1) of \(items.count)"
+    }
+}
+
+private struct MissionControlSpineLane: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: MissionControlLaneItem
+    let positionLabel: String
+    let isSelected: Bool
+    let isFirst: Bool
+    let isLast: Bool
+    let onSelect: () -> Void
+
+    var body: some View {
+        let style = theme.stateStyle(for: isSelected ? .pressed : item.visualState)
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            spineRail(style: style)
+
+            Button(action: onSelect) {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                        Text(item.title)
+                            .font(theme.typography.bodyEmphasized)
+                            .foregroundStyle(theme.colors.textPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        TagPill(positionLabel, state: item.visualState)
+                    }
+
+                    Text(item.value)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    if isSelected {
+                        MissionControlLaneInspector(item: item)
+                            .padding(.top, theme.spacing.xxxs)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(theme.spacing.sm)
+                .background(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .fill(theme.colors.surfaceOverlay)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .stroke(style.stroke, lineWidth: isSelected ? 1.4 : 1)
+                )
+            }
+            .buttonStyle(.plain)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(item.accessibilityLabel)
+            .accessibilityValue(isSelected ? "Selected lane. \(item.detail)" : "Lane")
+            .accessibilityHint("Inspects this lane inside the MissionControlTimeSpine without opening another destination.")
+            .accessibilityIdentifier("mission-control-time-spine.\(item.id)")
+        }
+    }
+
+    @ViewBuilder
+    private func spineRail(style: AmbitionStateStyle) -> some View {
+        VStack(spacing: 0) {
+            Rectangle()
+                .fill(isFirst ? Color.clear : style.stroke.opacity(0.7))
+                .frame(width: 2, height: 12)
+            Circle()
+                .fill(style.accent)
+                .frame(width: 12, height: 12)
+                .overlay(Circle().stroke(style.stroke, lineWidth: 2))
+            Rectangle()
+                .fill(isLast ? Color.clear : style.stroke.opacity(0.7))
+                .frame(width: 2)
+        }
+        .frame(width: 16)
+        .accessibilityHidden(true)
+    }
+}
+
+private struct MissionControlLaneInspector: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: MissionControlLaneItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text("Lane inspector")
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+            Text(item.detail)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            if let hint = item.drillDownHint {
+                Text(hint)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
+}
+
 struct MissionControlLaneGrid: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -335,7 +481,7 @@ extension MissionControlLaneItem {
             visualState: lane.state,
             badgeTitle: lane.badgeTitle,
             accessibilityIdentifier: lane.kind.accessibilityIdentifier,
-            drillDownHint: "Keeps \(lane.title) available inside Goal Detail without adding a new destination."
+            drillDownHint: "Keeps \(lane.title) inspectable inside the MissionControlTimeSpine without adding a new destination."
         )
     }
 

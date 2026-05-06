@@ -161,8 +161,17 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   receipt preview, affected steps, capacity impact, protected-time impact, and
   accept/edit/decline controls for reflow decisions without adding silent
   reflow, hidden mutation, Calendar writes, route/raw-value changes, or
-  persistence/schema changes. The next eligible global batch is FCP16 Pressure
-  Field / Recovery Loop.
+  persistence/schema changes.
+- FCP16 is complete Green as bounded Plan / Today Pressure Field / Recovery
+  Loop implementation evidence. Plan and Today now share pressure field,
+  recovery loop, smaller-step anchor, and recovery receipt preview language
+  without adding hidden mutation, Calendar writes, route/raw-value changes, or
+  persistence/schema changes.
+- FCP10 is complete Green as bounded Goals / Goal Detail MissionControlTimeSpine
+  implementation evidence. Goal Detail Mission Control now uses a primary
+  spine object with Completed / Now / Friction / Next / Horizon order and
+  in-place lane inspection without adding a destination or dashboard grid. The
+  next eligible global batch is FCP11 LifePath Thread.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -573,7 +582,8 @@ as bounded Goal Seed Incubator evidence. FCP21 is complete Green as bounded
 Voice / Motor Capture Accessibility evidence. FCP14 is complete Green as
 bounded LifeShape Contour Map evidence. FCP15 is complete Green as bounded
 Reflow Decision Fold evidence. FCP16 is complete Green as bounded Pressure
-Field / Recovery Loop evidence, and the full-stack order selects FCP10 next.
+Field / Recovery Loop evidence. FCP10 is complete Green as bounded
+MissionControlTimeSpine evidence, and the full-stack order selects FCP11 next.
 
 
 ## Living Dream Intelligence Context

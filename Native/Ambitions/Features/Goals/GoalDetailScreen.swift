@@ -308,9 +308,9 @@ private struct GoalDetailMissionControlCard: View {
                     ]
                 )
 
-                MissionControlLaneGrid(
+                MissionControlTimeSpine(
                     items: state.lanes.map(MissionControlLaneItem.init(detailLane:)),
-                    density: .standard
+                    defaultSelectedID: GoalDetailMissionLaneKind.overview.rawValue
                 )
             }
         }

@@ -340,6 +340,14 @@ the recovery receipt, and avoid silent mutation, Calendar write,
 route/raw-value, persistence/schema, sync/cloud, release, legal/privacy, AOS
 runtime, or LDI runtime claims.
 
+FCP10 is complete Green as of 2026-05-06. Future Goals, LifePath, proof,
+alternate-path, AOS, LDI, and Found Life work that touches Goal Detail Mission
+Control must preserve MissionControlTimeSpine as the primary object, keep
+Completed / Now / Friction / Next / Horizon order intact, inspect lanes in
+place without adding a destination, and avoid dashboard grid, kanban,
+enterprise project-management lanes, route/raw-value, persistence/schema,
+sync/cloud, release, legal/privacy, AOS runtime, or LDI runtime claims.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

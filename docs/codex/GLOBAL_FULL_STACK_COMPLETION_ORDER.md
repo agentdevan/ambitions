@@ -324,7 +324,15 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     route/raw-value, persistence/schema, sync/cloud, legal/privacy/release, App
     Store, TestFlight, device, public accessibility, AOS runtime, or LDI
     runtime claim.
-55. FCP10 MissionControlTimeSpine.
+55. FCP10 MissionControlTimeSpine. Completed Green on 2026-05-06 as bounded
+    Goals / Goal Detail implementation evidence. It replaces Goal Detail
+    Mission Control's primary lane grid with a MissionControlTimeSpine that
+    preserves Completed / Now / Friction / Next / Horizon order, attaches
+    lanes to one spine object, and inspects a selected lane in place without
+    adding a destination. It adds no dashboard grid, kanban, enterprise PM lane
+    posture, route/raw-value, persistence/schema, dependency, top-level tab,
+    sync/cloud, legal/privacy/release, App Store, TestFlight, device, public
+    accessibility, AOS runtime, or LDI runtime claim.
 56. FCP11 LifePath Thread.
 57. FCP12 Proof Spine / Evidence Ledger.
 58. FCP13B Goal Alternate Path / Decision History Polish.

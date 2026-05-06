@@ -67,7 +67,39 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(laneItem.value, completedLane.headline)
         XCTAssertEqual(laneItem.badgeTitle, completedLane.badgeTitle)
         XCTAssertEqual(laneItem.accessibilityIdentifier, completedLane.kind.accessibilityIdentifier)
-        XCTAssertTrue(laneItem.accessibilityHint.contains("Goal Detail"))
+        XCTAssertTrue(laneItem.accessibilityHint.contains("MissionControlTimeSpine"))
+    }
+
+    @MainActor
+    func testFCP10MissionControlTimeSpinePreservesOrderAndInspection() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Ship a proof-backed mission spine"),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+        let items = missionControl.lanes.map(MissionControlLaneItem.init(detailLane:))
+        _ = MissionControlTimeSpine(
+            items: items,
+            defaultSelectedID: GoalDetailMissionLaneKind.overview.rawValue
+        )
+
+        XCTAssertEqual(missionControl.lanes.map(\.title), ["Completed", "Now", "Friction", "Next", "Horizon"])
+        XCTAssertEqual(items.map(\.id), ["proof", "overview", "risks", "steps", "path"])
+        XCTAssertTrue(items.first(where: { $0.id == "proof" })?.accessibilityHint.contains("MissionControlTimeSpine") == true)
+        XCTAssertEqual(items.first(where: { $0.id == "risks" })?.title, "Friction")
+        XCTAssertFalse(items.first(where: { $0.id == "risks" })?.detail.isEmpty == true)
+        XCTAssertTrue(items.first(where: { $0.id == "steps" })?.detail.localizedCaseInsensitiveContains("Step") == true)
+        XCTAssertTrue(items.first(where: { $0.id == "path" })?.detail.localizedCaseInsensitiveContains("Decisions") == true)
+
+        let visibleCopy = items.flatMap { [$0.title, $0.value, $0.detail, $0.accessibilityHint] }.joined(separator: " ").lowercased()
+        XCTAssertFalse(visibleCopy.contains("dashboard metrics grid"))
+        XCTAssertFalse(visibleCopy.contains("kanban"))
+        XCTAssertFalse(visibleCopy.contains("enterprise pm"))
+        XCTAssertFalse(visibleCopy.contains("sparkline-as-product"))
     }
 
     func testM07PathBuilderConnectsRoadmapForkProofAndTodayWithoutNewTab() async throws {
