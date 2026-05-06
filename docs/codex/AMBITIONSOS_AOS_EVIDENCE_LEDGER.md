@@ -139,3 +139,39 @@ Does not prove:
 - external projection
 - platform behavior
 - release/platform readiness
+
+## AOS12
+
+Batch: AOS12 Proof Trust Closure Receipts.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Proof Trust Kernel receipt kinds
+- closure outcomes including Still Counts and Needs Review
+- non-punitive unresolved closure prompt contract
+- proof/action receipt requirement before trust closure
+- source-needed and stale high-risk review blocking
+- professional-boundary review blocking
+- mutation receipt evidence/review gate
+- sensitive receipt redaction requirement before external projection
+
+Commands:
+
+- `xcodegen generate`
+- `git diff --check`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSProofTrustModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS12 report
+
+Does not prove:
+
+- persistent receipt store
+- Life Graph mutation
+- AOS runtime orchestration
+- source-change runtime
+- source-pack runtime
+- Today, Goal Detail, or You UI integration
+- external projection
+- platform behavior
+- release/platform readiness

@@ -659,7 +659,8 @@ remaining sensitive intelligence work.
     tests. It does not add model invocation, Life Graph mutation, source-pack
     runtime, UI, external-surface behavior, platform integration, sync/account/
     backend service, hosted AI, professional advice, or release/platform
-    claims. Source Atlas now governs the next eligible work before AOS12.
+    claims. Source Atlas governed the AOS12 continuation, which is now
+    complete; AOS13 is the next eligible global batch.
 72A. SA01 Source Atlas Canon Lock. Completed Green on 2026-05-06 as docs/state
      reconciliation of the existing Source Atlas canon into the live global
      train. It locks Source Atlas as a signed, offline-first, claim-level
@@ -785,7 +786,15 @@ remaining sensitive intelligence work.
      Factory implementation, Freshness Broker behavior, persistence/schema, UI,
      sync/account/backend service, hosted AI, release claim,
      legal/current-requirement claim, or platform proof.
-73. AOS12 Proof Trust Closure Receipts.
+73. AOS12 Proof Trust Closure Receipts. Completed Green on 2026-05-06 as
+    additive Proof Trust Kernel domain-contract evidence. It adds typed proof
+    trust receipt kinds, closure outcomes, non-punitive unresolved prompt
+    contract, source/freshness/review/privacy/professional-boundary gates,
+    mutation evidence gates, and focused tests. It does not add AOS runtime
+    orchestration, Life Graph mutation, persistent receipt storage, Today /
+    Goal Detail / You UI, source runtime, external projection, sync/account/
+    backend service, hosted AI, release/platform, legal/current-requirement, or
+    public accessibility claims.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.
 76. AOS05 Starting Position Kernel.

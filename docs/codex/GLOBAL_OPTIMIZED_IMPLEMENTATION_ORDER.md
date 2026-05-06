@@ -36,8 +36,9 @@ As of this order update:
 - AOS02 is complete Green as additive Life Graph Event Log Foundation evidence.
 - AOS03 is complete Green as additive Graph Delta Review Projection Store
   evidence.
-- AOS04 is complete Green as additive Control Plane Work Classifier evidence;
-  AOS12 is next by optimized order.
+- AOS04 is complete Green as additive Control Plane Work Classifier evidence.
+- AOS12 is complete Green as additive Proof Trust Closure Receipts evidence;
+  AOS13 is next by global order.
 - AOS05-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
@@ -117,8 +118,9 @@ Yellow as Singular Experience and Acquisition Readiness Lock. AOS01 is
 complete / Accepted Yellow as AmbitionsOS Canon and Runtime Contract. AOS02 is
 complete / Green as Life Graph Event Log Foundation. AOS03 is complete / Green
 as Graph Delta Review Projection Store. AOS04 is complete / Green as Control
-Plane Work Classifier; AOS12 is the next eligible remaining batch under the
-stricter HPS-before-AOS overlay.
+Plane Work Classifier. AOS12 is complete / Green as Proof Trust Closure
+Receipts; AOS13 is the next eligible remaining batch under the stricter
+HPS-before-AOS overlay.
 PFC12 is complete / Green as app-group/shared-storage boundary evidence. It
 documented the existing app/widget/share extension entitlement match,
 privacy-safe shared snapshot and external creation queue boundaries, and focused
@@ -182,8 +184,8 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 034 | AOS01 AmbitionsOS Canon And Runtime Contract | AOS | Docs / Contract | Completed Accepted Yellow on 2026-05-06 as runtime contract source truth with HPS and Source Atlas inheritance. | HPS01-HPS12 accepted Yellow; global preauthorization. | Complete; next AOS02. |
 | 035 | AOS02 Life Graph Event Log Foundation | AOS | Contract/Foundation | Completed Green on 2026-05-06 with typed Human Progress Graph nodes/edges, local-only Life Graph events, proposal-first graph deltas, and focused tests. | AOS01. | Complete; AOS03 followed and is now complete. |
 | 036 | AOS03 Graph Delta Review Projection Store | AOS | Contract/Foundation | Completed Green on 2026-05-06 with graph delta review records, risk inference, receipt-required projection eligibility, private projection snapshots, and focused tests. | AOS02. | Complete; AOS04 followed and is now complete. |
-| 037 | AOS04 Control Plane Work Classifier | AOS | Contract/Foundation | Completed Green on 2026-05-06 with typed work requests, work classes, signals, gates, output kinds, deterministic classification, graph-delta review gating, and focused tests. | AOS01-AOS03. | Complete; next AOS12. |
-| 038 | AOS12 Proof Trust Closure Receipts | AOS | Kernel | Proof/trust/closure kernel should precede recommendation and reflow runtime. | AOS02-AOS04. | Single-batch. |
+| 037 | AOS04 Control Plane Work Classifier | AOS | Contract/Foundation | Completed Green on 2026-05-06 with typed work requests, work classes, signals, gates, output kinds, deterministic classification, graph-delta review gating, and focused tests. | AOS01-AOS03. | Complete; AOS12 followed and is now complete. |
+| 038 | AOS12 Proof Trust Closure Receipts | AOS | Kernel | Completed Green on 2026-05-06 with typed proof-trust receipt kinds, closure outcomes, non-punitive unresolved prompt contract, source/freshness/review/privacy/professional-boundary gates, mutation evidence gates, sensitive external projection protection, and focused tests. | AOS02-AOS04. | Complete; next AOS13. |
 | 039 | AOS13 Source Truth Claim State Machine | AOS | Kernel | Source truth gates recommendation, proof, and memory. | AOS02-AOS04. | Single-batch. |
 | 040 | AOS10 Commitment Time Kernel | AOS | Kernel | Real capacity/time kernel should precede reflow and recommendation runtime. | AOS02-AOS04. | Single-batch. |
 | 041 | AOS05 Starting Position Kernel | AOS | Kernel | Starting position feeds goal compiler and recommendation. | AOS02-AOS04. | Single-batch. |

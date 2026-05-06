@@ -2,16 +2,16 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: SA06 Pack Schema Implementation complete / Green.
-Next eligible batch: AOS12 Proof Trust Closure Receipts.
-Scope: SA06 added compact Swift Codable Source Atlas pack schema/test proof for
-pack manifest, sources, claims, requirements, starter step candidate seeds,
-proof maps, policies, composition, projection recipes, validator rejection, no
-runtime-store behavior, and canon integration. It keeps Research Seeds v1
-pending unless local seed data is explicitly required. It adds no source
-ingestion, extraction, OCR, classifier, source pack runtime, Pack Factory
-implementation, Freshness Broker behavior, UI, sync/account/backend service,
-release claim, legal/current-requirement claim, or platform proof.
+Current batch: AOS12 Proof Trust Closure Receipts complete / Green.
+Next eligible batch: AOS13 Source Truth Claim State Machine.
+Scope: AOS12 added additive Proof Trust Kernel domain-contract proof for typed
+proof-trust receipt kinds, closure outcomes, non-punitive unresolved prompt
+contracts, source/freshness/review/privacy/professional-boundary gates,
+mutation evidence gates, sensitive external projection protection, and focused
+tests. It adds no AOS runtime orchestrator, Life Graph mutation, persistent
+receipt store, Today/Goal Detail/You UI, source runtime, external projection,
+sync/account/backend service, hosted AI, release/platform, legal/current-
+requirement, or public accessibility claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -114,8 +114,9 @@ Composable Pack Architecture Lock. SAP02 is complete / Green as Goal Projection
 Object Model. SAP03 is complete / Green as Pack Factory Composition Rules.
 SAP04 is complete / Green as Projection QA Fixtures. SAP05 is complete / Green
 as No-Sprawl / No-Duplicate Pack Gate. SA06 is complete / Green as compact pack
-schema implementation evidence before AOS12 and other deep
-source/freshness-dependent AOS/LDI work continues.
+schema implementation evidence. AOS12 is complete / Green as Proof Trust
+Closure Receipts evidence. AOS13 is the next eligible global batch before
+other deep source/freshness-dependent AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable
