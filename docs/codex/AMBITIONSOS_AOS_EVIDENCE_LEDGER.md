@@ -175,3 +175,40 @@ Does not prove:
 - external projection
 - platform behavior
 - release/platform readiness
+
+## AOS13
+
+Batch: AOS13 Source Truth Claim State Machine.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Source Truth Kernel claim states
+- source quality and approved-official-source gates
+- freshness, risk, review, and privacy gates
+- claim transition receipt/review requirement
+- conflict and revocation blocking
+- sensitive external projection protection
+- runtime-store and source-certification overclaim blocking
+
+Commands:
+
+- `xcodegen generate`
+- `git diff --check`
+- first focused `xcodebuild` run, failed on test helper argument order
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSSourceTruthModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS13 report
+
+Does not prove:
+
+- source ingestion
+- OCR or extraction
+- source certification
+- persistent source ledger
+- Life Graph mutation
+- source runtime
+- You or Goal Detail UI integration
+- external projection
+- platform behavior
+- release/platform readiness

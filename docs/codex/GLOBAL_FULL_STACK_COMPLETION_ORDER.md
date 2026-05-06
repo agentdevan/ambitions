@@ -795,7 +795,16 @@ remaining sensitive intelligence work.
     Goal Detail / You UI, source runtime, external projection, sync/account/
     backend service, hosted AI, release/platform, legal/current-requirement, or
     public accessibility claims.
-74. AOS13 Source Truth Claim State Machine.
+74. AOS13 Source Truth Claim State Machine. Completed Green on 2026-05-06 as
+    additive Source Truth Kernel domain-contract evidence. It adds typed claim
+    states, source quality, source references, freshness/review/privacy/risk
+    gates, reviewable claim transitions, conflict/revocation handling,
+    sensitive external projection protection, runtime-boundary checks,
+    source-certification overclaim rejection, and focused tests. It does not
+    add source ingestion, extraction, OCR, source certification, persistent
+    source ledger, Life Graph mutation, You / Goal Detail UI, source runtime,
+    external projection, sync/account/backend service, hosted AI, release/
+    platform, legal/current-requirement, or public accessibility claims.
 75. AOS10 Commitment Time Kernel.
 76. AOS05 Starting Position Kernel.
 77. AOS06 Goal Path Kernel Goal Compiler.

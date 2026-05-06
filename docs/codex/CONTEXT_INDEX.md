@@ -394,8 +394,19 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   boundary gates, mutation evidence gates, sensitive external projection
   protection, and no runtime orchestrator, Life Graph mutation, persistence
   store, UI, platform, sync/account/backend, hosted AI, external-surface,
-  release, legal/current-requirement, or public accessibility claim. The next
-  eligible global batch is AOS13 Source Truth Claim State Machine.
+  release, legal/current-requirement, or public accessibility claim. AOS13
+  followed and is now complete.
+- AOS13 is complete Green as additive Source Truth Claim State Machine
+  evidence. It adds `Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift`
+  and focused domain tests with typed claim states, source quality, source
+  references, freshness/review/privacy/risk gates, reviewable claim
+  transitions, conflict/revocation handling, sensitive external projection
+  protection, runtime-boundary checks, and source-certification overclaim
+  rejection. It adds no source ingestion, extraction, OCR, source
+  certification, persistent source ledger, Life Graph mutation, UI, platform,
+  sync/account/backend, hosted AI, external-surface, release, legal/current-
+  requirement, or public accessibility claim. The next eligible global batch is
+  AOS10 Commitment Time Kernel.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

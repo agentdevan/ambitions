@@ -1,6 +1,6 @@
 # AOS01-AOS30 AmbitionsOS Local Intelligence Train
 
-Status: Active Ambitions 4.0 train manifest; AOS01 Accepted Yellow; AOS02 Green; AOS03 Green; AOS04 Green; AOS12 Green; AOS13 next by global order.
+Status: Active Ambitions 4.0 train manifest; AOS01 Accepted Yellow; AOS02 Green; AOS03 Green; AOS04 Green; AOS12 Green; AOS13 Green; AOS10 next by global order.
 Started by live global full-stack authorization after HPS01-HPS12 closed
 accepted Yellow with owners. Source Atlas dependency closure remains required
 where real-world source/requirement intelligence is used.
@@ -90,8 +90,8 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 - AOS09: Option Value North Star. Gate: depends on AOS08 and HPS07. Owner: Alternate Path Kernel / Longevity Kernel. Surface: Goal Detail, Plan. Boundary: North Star preservation and option-value comparison only.
 - AOS10: Commitment Time Kernel. Gate: depends on AOS02-AOS04 and HPS05/HPS06. Owner: Commitment Time Kernel. Surface: Plan, Today. Boundary: commitment model and capacity projection only; no platform calendar implementation.
 - AOS11: Reality Drift Bounded Reflow. Gate: depends on AOS10, AOS12, and HPS06/HPS12. Owner: Reality Drift Kernel. Surface: Today, Plan. Boundary: bounded reflow contracts only; no silent rescheduling.
-- AOS12: Proof Trust Closure Receipts. Gate: depends on AOS02-AOS04, HPS03/HPS04, and Source Atlas proof-map references where external requirements are used. Owner: Proof Trust Kernel. Surface: Today, Goal Detail, You. Boundary: closure, receipt, proof-trust contracts only. Status: Green with additive Proof Trust Kernel receipt contracts and focused tests; AOS13 next by global order.
-- AOS13: Source Truth Claim State Machine. Gate: depends on AOS02-AOS04, HPS04, and Source Atlas claim/freshness/revocation states. Owner: Source Truth Kernel. Surface: You, Goal Detail. Boundary: claim states and source ledger only; no source certification.
+- AOS12: Proof Trust Closure Receipts. Gate: depends on AOS02-AOS04, HPS03/HPS04, and Source Atlas proof-map references where external requirements are used. Owner: Proof Trust Kernel. Surface: Today, Goal Detail, You. Boundary: closure, receipt, proof-trust contracts only. Status: Green with additive Proof Trust Kernel receipt contracts and focused tests; AOS13 followed and is now complete.
+- AOS13: Source Truth Claim State Machine. Gate: depends on AOS02-AOS04, HPS04, and Source Atlas claim/freshness/revocation states. Owner: Source Truth Kernel. Surface: You, Goal Detail. Boundary: claim states and source ledger only; no source certification. Status: Green with additive Source Truth Kernel claim contracts and focused tests; AOS10 next by global order.
 - AOS14: Recommendation Start Here Kernel. Gate: depends on AOS04, AOS12, AOS13, HPS06, and Source Atlas source/freshness proof or source-needed fallback. Owner: Recommendation Kernel. Surface: Today, Goal Detail. Boundary: Start Here recommendation contract only; no confidence scoring and no ungrounded AI suggestion behavior.
 - AOS15: Local Language Kernel Planning. Gate: depends on AOS04, AOS13, AOS14, deterministic fallback, HPS09, and Universal Source Binder review routes when extraction touches sources. Owner: Local Language Kernel. Surface: Capture, You. Boundary: planning and adapter boundaries only; no model runtime before deterministic fallback.
 - AOS16: Performance Energy Kernel. Gate: must be active before runtime-heavy implementation and must inherit HPS09/HPS10 and Source Atlas PDF/OCR/pack traversal budgets. Owner: Performance Energy Kernel. Surface: all surfaces. Boundary: budgets, measurement plan, and scheduler contracts before runtime-heavy work.
