@@ -2,16 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS06 Recommendation Quality + Start Here Brain Architecture complete / Accepted Yellow.
-Next eligible batch: HPS07 Option Value + Pivot Preservation Architecture.
-Scope: HPS06 added docs-domain Recommendation Quality and Start Here Brain
-architecture. It defines candidate families, candidate evidence fields,
-eligibility and rejection gates, explanation contract, recovery behavior,
-regression oracle scenarios, Start Here projection rules, and candidate
-generation/rejection/explanation/evaluation contract families. It adds no
-production Swift, schema, migration, recommendation runtime, model logic,
-personalization, sync/account/backend, hosted AI, Start Here UI, external-
-surface behavior, professional advice, release claim, App Store claim,
+Current batch: HPS07 Option Value + Pivot Preservation Architecture complete / Accepted Yellow.
+Next eligible batch: HPS08 Living Dream Compiler Upgrade.
+Scope: HPS07 added docs-domain Option Value and Pivot Preservation
+architecture. It defines option value object families, required fields,
+transfer states, requirement/proof overlap states, path transfer matrix,
+adjacent path detection, North Star continuity, dream parking/revival, Still
+Counts receipts, mutation permission states, surface projection rules, and
+option-value read/path-transfer proposal/North Star continuity/pivot receipt
+contract families. It adds no production Swift, schema, migration,
+option-value runtime, path mutation, recommendation behavior, sync/account/
+backend, hosted AI, UI, external-surface behavior, professional advice,
+release claim, App Store claim,
 TestFlight claim, physical-device proof, public accessibility claim, or
 acquisition outcome claim.
 
@@ -95,8 +97,9 @@ HPS04 is complete / Accepted Yellow as Source Truth and Requirement Graph
 architecture evidence. HPS05 is complete / Accepted Yellow as Commitment Memory
 and Searchable Life Recall architecture evidence. HPS06 is complete / Accepted
 Yellow as Recommendation Quality and Start Here Brain architecture evidence.
-HPS07 is the next eligible global batch, and AOS01 remains blocked until
-HPS01-HPS12 are Green or accepted Yellow with owners.
+HPS07 is complete / Accepted Yellow as Option Value and Pivot Preservation
+architecture evidence. HPS08 is the next eligible global batch, and AOS01
+remains blocked until HPS01-HPS12 are Green or accepted Yellow with owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

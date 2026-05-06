@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -170,6 +170,16 @@ Owner: Option Value / Goals / LDI.
 Goal: Define option value ledger, path transfer matrix, proof-to-path transfer, adjacent path detection, North Star continuity, dream parking/revival, and this-still-counts receipts.
 Required result: pivot preservation contract.
 Acceptance: abandoned work is not failure; career/path claims are source-bound.
+Status: Accepted Yellow as docs-domain architecture in
+`docs/canon/Ambitions_Option_Value_Pivot_Preservation_Architecture.md`.
+HPS07 defines option value object families, required fields, transfer states,
+requirement/proof overlap states, path transfer matrix, adjacent path
+detection, North Star continuity, dream parking/revival, Still Counts receipts,
+mutation permission states, surface projection rules, and option-value read/
+path-transfer proposal/North Star continuity/pivot receipt contract families.
+Yellow is owned by later HPS Codex OS work for missing physical HPS advisory
+scripts/skills and by AOS09/AOS18/LDI/Goals/evaluation batches for future
+typed option-value behavior and proof.
 
 ### HPS08 — Living Dream Compiler Upgrade
 

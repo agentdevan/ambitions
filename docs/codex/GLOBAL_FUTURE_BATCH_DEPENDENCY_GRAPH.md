@@ -154,6 +154,14 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   one-primary-object Start Here projection, and no confidence-score/hidden-
   mutation/professional-advice rule. Yellow owners: later HPS Codex OS scripts/
   skills and future typed recommendation/evaluation implementation batches.
+- HPS07 is complete Accepted Yellow as of 2026-05-06. Future option-value,
+  path transfer, North Star, Goals, AOS, LDI, proof, source, recommendation,
+  and evaluation work must inherit option value object families, transfer
+  states, requirement/proof overlap states, path transfer matrix, adjacent path
+  detection, North Star continuity, dream parking/revival, Still Counts
+  receipts, mutation permission states, and no silent path/proof/source/privacy
+  mutation rule. Yellow owners: later HPS Codex OS scripts/skills and future
+  typed option-value/evaluation implementation batches.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.

@@ -549,7 +549,18 @@ remaining sensitive intelligence work.
      external-surface behavior, or release/platform claims. Yellow owners:
      later HPS Codex OS scripts/skills and future typed recommendation/
      evaluation implementation batches.
-74H. HPS07 Option Value + Pivot Preservation Architecture.
+74H. HPS07 Option Value + Pivot Preservation Architecture. Completed Accepted
+     Yellow on 2026-05-06 as docs-domain architecture in
+     `docs/canon/Ambitions_Option_Value_Pivot_Preservation_Architecture.md`.
+     It defines option value object families, required fields, transfer states,
+     requirement/proof overlap states, path transfer matrix, adjacent path
+     detection, North Star continuity, dream parking/revival, Still Counts
+     receipts, mutation permission states, surface projection rules, and
+     option-value read/path-transfer proposal/North Star continuity/pivot
+     receipt API contract families without implementing option-value runtime,
+     path mutation, recommendation behavior, UI, external-surface behavior, or
+     release/platform claims. Yellow owners: later HPS Codex OS scripts/skills
+     and future typed option-value/evaluation implementation batches.
 75H. HPS08 Living Dream Compiler Upgrade.
 76H. HPS09 Privacy / Memory Permission + Local Intelligence Adapter.
 77H. HPS10 AI Governance + Evaluation Assurance Lab.
