@@ -2,17 +2,17 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS10 Commitment Time Kernel complete / Green.
-Next eligible batch: AOS05 Starting Position Kernel.
-Scope: AOS10 added additive Commitment Time Kernel domain-contract proof for
-typed commitments, capacity windows, capacity-fit projection,
-source/freshness/review gates, protected-time violation detection,
-silent-reschedule blocking, sensitive external projection protection, and
-runtime-boundary checks. It adds no platform calendar implementation,
-EventKit/Reminder write path, schedule mutation, persistence/schema, runtime
-store, Today/Plan UI, notification behavior, sync/account/backend service,
-hosted AI, release/platform, legal/current-requirement, or public accessibility
-claim.
+Current batch: AOS05 Starting Position Kernel complete / Green.
+Next eligible batch: AOS06 Goal Path Kernel Goal Compiler.
+Scope: AOS05 added additive Starting Position Kernel domain-contract proof for
+typed baseline snapshots, advantages, constraints, unknowns, ask-only-needed
+intake questions, dignity language, path-fit projection,
+source/freshness/review gates, privacy projection protection,
+eligibility-certification blocking, and runtime-boundary checks. It adds no
+Goals/You UI, intake runtime, Life Graph mutation, source certification,
+eligibility database, profile store, external projection, sync/account/backend
+service, hosted AI, release/platform, legal/current-requirement, or public
+accessibility claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -118,8 +118,8 @@ as No-Sprawl / No-Duplicate Pack Gate. SA06 is complete / Green as compact pack
 schema implementation evidence. AOS12 is complete / Green as Proof Trust
 Closure Receipts evidence. AOS13 is complete / Green as Source Truth Claim
 State Machine evidence. AOS10 is complete / Green as Commitment Time Kernel
-evidence. AOS05 is the next eligible global batch before other AOS/LDI work
-continues.
+evidence. AOS05 is complete / Green as Starting Position Kernel evidence.
+AOS06 is the next eligible global batch before other AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

@@ -815,7 +815,16 @@ remaining sensitive intelligence work.
     persistence/schema, runtime store, Today / Plan UI, notification behavior,
     sync/account/backend service, hosted AI, release/platform,
     legal/current-requirement, or public accessibility claims.
-76. AOS05 Starting Position Kernel.
+76. AOS05 Starting Position Kernel. Completed Green on 2026-05-06 as
+    additive Starting Position Kernel domain-contract evidence. It adds typed
+    baseline snapshots, starting advantages, constraints, unknowns,
+    ask-only-needed intake questions, dignity language, path-fit projection,
+    source/freshness/review gates, privacy projection protection,
+    eligibility-certification blocking, runtime-boundary checks, and focused
+    tests. It does not add Goals / You UI, intake runtime, Life Graph mutation,
+    source certification, eligibility database, profile store, external
+    projection, sync/account/backend service, hosted AI, release/platform,
+    legal/current-requirement, or public accessibility claims.
 77. AOS06 Goal Path Kernel Goal Compiler.
 78. AOS07 Local Goal Packs Requirement Slots.
 79. AOS08 Alternate Path Kernel Path Portfolio.

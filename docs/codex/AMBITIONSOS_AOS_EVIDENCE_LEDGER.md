@@ -140,6 +140,44 @@ Does not prove:
 - platform behavior
 - release/platform readiness
 
+## AOS05
+
+Batch: AOS05 Starting Position Kernel.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Starting Position Kernel dimensions and signals
+- baseline snapshot advantage, constraint, and unknown maps
+- ask-only-needed intake question contract
+- dignity language guard
+- path-fit projection
+- source-sensitive fact review blocking
+- eligibility-certification overclaim blocking
+- sensitive intake and external projection blocking
+- runtime-store and invalid-schema blocking
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSStartingPositionModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS05 report
+
+Does not prove:
+
+- Goals or You UI integration
+- intake runtime
+- profile persistence
+- source certification
+- eligibility database behavior
+- Life Graph mutation
+- goal compiler integration
+- recommendation runtime
+- external projection
+- platform behavior
+- release/platform readiness
+
 ## AOS10
 
 Batch: AOS10 Commitment Time Kernel.
