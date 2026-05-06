@@ -2,17 +2,17 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued future implementation train. Inserted after AOS30 by default. This train does not start until global order selects it or the user explicitly authorizes an earlier dependency split. LDI is blocked until HPS01-HPS12 are Green or accepted Yellow with owners.
+Status: Queued future implementation train. Inserted after AOS30 by default. This train does not start until global order selects it or the user explicitly authorizes an earlier dependency split. LDI is blocked until HPS01-HPS12 are Green or accepted Yellow with owners and Source Atlas dependencies are Green or accepted Yellow where real-world requirements, source packs, freshness, user-imported sources, or claim review are used.
 
 ## Purpose
 
-Implement AmbitionsOS Living Dream Architecture in bounded, evidence-first stages after SI, PD, HPS, and AOS prerequisites create visual, drill-down, human-progress, and local runtime foundations.
+Implement AmbitionsOS Living Dream Architecture in bounded, evidence-first stages after SI, PD, HPS, Source Atlas, and AOS prerequisites create visual, drill-down, human-progress, source/freshness, and local runtime foundations.
 
-LDI is not motivational goal generation. LDI is the Living Dream Compiler: vague dream -> safe meaning -> seriousness/domain classification -> source/requirement graph -> path portfolio -> proof needed -> capacity fit -> next evidence -> Today step, with receipts and mutation permissions.
+LDI is not motivational goal generation. LDI is the Living Dream Compiler: vague dream -> safe meaning -> seriousness/domain classification -> Source Atlas claim/source check -> source/requirement graph -> path portfolio -> proof needed -> capacity fit -> next evidence -> Today step, with receipts and mutation permissions.
 
 ## Claim Boundary
 
-This train manifest is governance and future implementation planning. It does not claim runtime Living Dream behavior, source pack review, CloudKit sync, hosted AI, user-data server, release readiness, device proof, public accessibility conformance, legal/privacy signoff, App Store/TestFlight readiness, education/career certainty, or professional advice.
+This train manifest is governance and future implementation planning. It does not claim runtime Living Dream behavior, source pack review, CloudKit sync, hosted AI, user-data server, release readiness, device proof, public accessibility conformance, legal/privacy signoff, App Store/TestFlight readiness, education/career certainty, professional advice, PDF/OCR understanding, always-current source data, or official source-pack completeness.
 
 ## HPS Prerequisite
 
@@ -35,36 +35,64 @@ LDI must inherit:
 - Vertical Expansion No-Build Gate
 - No Silent Mutation Gate
 
+## Source Atlas Prerequisite
+
+LDI batches that turn dreams into real-world requirements, eligibility/deadlines, source packs, source freshness, user-imported sources, or Today steps derived from external requirements must inherit Source Atlas.
+
+Required Source Atlas files:
+
+- `docs/canon/Ambitions_Source_Atlas.md`
+- `docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md`
+- `docs/codex/SOURCE_ATLAS_GATE_MATRIX.md`
+- `docs/codex/SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP.md`
+- `docs/codex/SOURCE_ATLAS_UI_OBJECT_LANGUAGE.md`
+- `docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md`
+- `docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md`
+- `docs/codex/GLOBAL_SOURCE_ATLAS_COMPLETION_ORDER_OVERLAY.md`
+
+LDI must not claim official/current requirements unless Source Atlas provides current source proof. If no pack/source exists, LDI must use Source Needed Mode or general starter/meta guidance with clear uncertainty.
+
+LDI must route source-dependent behavior through:
+
+- Universal Source Binder for user-imported URL/PDF/image/text sources
+- Source Atlas claim/freshness/risk states
+- Source Atlas high-risk stale-claim block
+- Source Atlas user-provided-is-not-official rule
+- Source Atlas job-posting example-only rule
+- Source Atlas school/certification strict-review rule
+- Source Atlas local/offline fallback
+- Source Atlas pack/revocation/rollback contracts
+
 ## Train Table
 
 | Batch | Title | Status | Boundary | Required result |
 | --- | --- | --- | --- | --- |
-| LDI01 | Living Dream Architecture Source Truth | Queued after AOS30 by default and HPS closeout | docs/canon + codex governance only | Creates/updates LDI source truth and governance references, importing HPS Living Dream Compiler invariants. |
-| LDI02 | Capture Handling Ladder | Queued after AOS30 by default and HPS closeout | capture -> classify -> seriousness -> triage -> route contracts and fixtures | Defines local contracts and fixtures for the dream handling ladder, using HPS dream-to-domain classifier and seriousness ladder. |
-| LDI03 | Dream Safety Legality Feasibility Triage | Queued after AOS30 by default and HPS closeout | unsafe/illegal/crisis/fantasy/regulated/minor/professional boundary contracts, fixtures, and safe redirect rules | Builds safety triage contracts and red-team proof, including minor/student-data and career/education false-certainty risks. |
-| LDI04 | North Star Extraction | Queued after AOS30 by default and HPS closeout | impossible/fantasy/symbolic/unsafe-literal dream conversion contracts and examples | Turns impossible or unsafe-literal dreams into safe meaning without validating literal harm, preserving identity continuity and option value. |
-| LDI05 | Source Claim Graph | Queued after AOS30 by default and HPS closeout | atomic claims, source refs, claim states, jurisdiction, freshness policies | Implements claim graph contracts and proof fixtures using HPS Source Truth / Requirement Graph states. |
-| LDI06 | Pack Registry And Pack Compiler | Queued after AOS30 by default and HPS closeout | pack types, pack schema, pack quality states, generation/review pipeline | Defines pack registry/compiler contracts, review states, and no-build marketplace boundaries. |
-| LDI07 | Pack Supply Chain Security | Queued after AOS30 by default and HPS closeout | signed packs, checksum, provenance, rollback, corruption handling, no executable logic | Adds pack integrity, validation, rollback, and tamper-handling proof without executable pack logic. |
-| LDI08 | Requirement Graph Runtime | Queued after AOS30 by default and HPS closeout | hard/soft requirements, blockers, dependencies, proof needed | Implements requirement graph contracts and tests within owned seams, with proof-needed mapping and source uncertainty. |
-| LDI09 | Eligibility And Deadline Runtime | Queued after AOS30 by default and HPS closeout | age/date/window/deadline/minimum lead time logic | Implements eligibility/deadline logic with source-state, jurisdiction, institution, and no-certification boundaries. |
-| LDI10 | Starting Position And Privacy Intake | Queued after AOS30 by default and HPS closeout | ask-only-needed intake, local storage boundary, sensitive controls | Defines minimal intake, memory permission states, and sensitivity controls. |
-| LDI11 | Path Portfolio Runtime | Queued after AOS30 by default and HPS closeout | primary/conservative/aggressive/exploration/fallback/North Star paths | Generates path portfolio candidates without guarantees, using HPS option value and proof transfer. |
-| LDI12 | Capacity And Commitment-Time Bridge | Queued after AOS30 by default and HPS closeout | capacity fit, no fantasy schedules, no silent rescheduling | Fits plans into real life and blocks fantasy schedules using HPS reality-fit and Start Here quality rules. |
-| LDI13 | Today Bridge And Action Closure | Queued after AOS30 by default and HPS closeout | 1-3 useful next steps, proof/source/review steps, closure states | Maps living plans into Today steps and closure states without dashboard or hidden mutation. |
-| LDI14 | Trust Review And Dream Handling Receipts | Queued after AOS30 by default and HPS closeout | assumptions/source/user-confirmed/stale/unverified/change receipts | Creates receipt contracts for handling, source, mutation, refusal, and safe translation. |
-| LDI15 | Living Plan Recompiler | Queued after AOS30 by default and HPS closeout | source/user/jurisdiction/capacity/proof changes -> local recompile | Implements local recompile and blast-radius contracts with approval gates. |
-| LDI16 | Mutation Permissions And Impact Levels | Queued after AOS30 by default and HPS closeout | no silent commitment mutation, approval model, impact levels 0-5 | Implements mutation permission contracts and approval gates; high-impact changes require explicit user review. |
-| LDI17 | Continuity Sync | Queued after AOS30 by default and HPS closeout | CloudKit-private sync plan, iCloud states, local-only fallback. No entitlement/signing change in docs-only batch | Defines future continuity sync contracts without entitlements and with most-restrictive privacy-wins rules. |
-| LDI18 | Archive And Schema Migration | Queued after AOS30 by default and HPS closeout | encrypted archive design, schema migration ladder, import/export rules | Defines archive/migration safety and restore proof for dream/path/proof state. |
-| LDI19 | Multi-Device Merge Ledger | Queued after AOS30 by default and HPS closeout | conflict rules, tombstones, most-restrictive privacy wins | Implements merge-policy contracts and conflict fixtures for HPS-sensitive records. |
-| LDI20 | Freshness Broker | Queued after AOS30 by default and HPS closeout | manifest, changed claim IDs, signed diffs, generic update notifications, no user-data backend | Defines minimal non-personal source operation surface; no user-data backend. |
-| LDI21 | Red-Team Evaluation Suite | Queued after AOS30 by default and HPS closeout | 100+ fixture families and validation matrix | Builds permanent abuse-resistance fixture suite, expanding beyond the original 45-family minimum. |
-| LDI22 | Governance And Maintenance Console | Queued after AOS30 by default and HPS closeout | pack/source/safety/sync/governance metrics, no user personal data | Defines governance metrics without personal data and references HPS assurance ledger. |
+| LDI01 | Living Dream Architecture Source Truth | Queued after AOS30 by default and HPS/SA closeout | docs/canon + codex governance only | Creates/updates LDI source truth and governance references, importing HPS and Source Atlas invariants. |
+| LDI02 | Capture Handling Ladder | Queued after AOS30 by default and HPS/SA closeout | capture -> classify -> seriousness -> triage -> source binder route -> route contracts and fixtures | Defines local contracts and fixtures for the dream handling ladder, using HPS dream-to-domain classifier and Source Atlas source binder routes. |
+| LDI03 | Dream Safety Legality Feasibility Triage | Queued after AOS30 by default and HPS/SA closeout | unsafe/illegal/crisis/fantasy/regulated/minor/professional/source-risk boundary contracts, fixtures, and safe redirect rules | Builds safety triage contracts and red-team proof, including minor/student-data, career/education false-certainty, and high-risk source stale-claim risks. |
+| LDI04 | North Star Extraction | Queued after AOS30 by default and HPS/SA closeout | impossible/fantasy/symbolic/unsafe-literal dream conversion contracts and examples | Turns impossible or unsafe-literal dreams into safe meaning without validating literal harm, preserving identity continuity and option value; official requirements remain source-needed unless Source Atlas proves them. |
+| LDI05 | Source Claim Graph | Queued after AOS30 by default and HPS/SA closeout | atomic claims, source refs, claim states, jurisdiction, freshness policies | Implements claim graph contracts and proof fixtures using Source Atlas claim and freshness states. |
+| LDI06 | Pack Registry And Pack Compiler | Queued after AOS30 by default and HPS/SA closeout | pack types, pack schema, pack quality states, generation/review pipeline | Defines pack registry/compiler contracts through Source Atlas pack schema, review states, and no-build marketplace boundaries. |
+| LDI07 | Pack Supply Chain Security | Queued after AOS30 by default and HPS/SA closeout | signed packs, checksum, provenance, rollback, corruption handling, no executable logic | Adds pack integrity, validation, rollback, and tamper-handling proof using Source Atlas pack validation/revocation contracts. |
+| LDI08 | Requirement Graph Runtime | Queued after AOS30 by default and HPS/SA closeout | hard/soft requirements, blockers, dependencies, proof needed | Implements requirement graph contracts and tests within owned seams, with Source Atlas proof-needed mapping and source uncertainty. |
+| LDI09 | Eligibility And Deadline Runtime | Queued after AOS30 by default and HPS/SA closeout | age/date/window/deadline/minimum lead time logic | Implements eligibility/deadline logic with Source Atlas source-state, jurisdiction, institution, stale-critical, and no-certification boundaries. |
+| LDI10 | Starting Position And Privacy Intake | Queued after AOS30 by default and HPS/SA closeout | ask-only-needed intake, local storage boundary, sensitive controls, user source binder | Defines minimal intake, memory permission states, source import boundaries, and sensitivity controls. |
+| LDI11 | Path Portfolio Runtime | Queued after AOS30 by default and HPS/SA closeout | primary/conservative/aggressive/exploration/fallback/North Star paths | Generates path portfolio candidates without guarantees, using HPS option value, Source Atlas source states, and proof transfer. |
+| LDI12 | Capacity And Commitment-Time Bridge | Queued after AOS30 by default and HPS/SA closeout | capacity fit, no fantasy schedules, no silent rescheduling | Fits plans into real life and blocks fantasy schedules; stale high-risk Source Atlas claims cannot drive scheduled actions as current. |
+| LDI13 | Today Bridge And Action Closure | Queued after AOS30 by default and HPS/SA closeout | 1-3 useful next steps, proof/source/review steps, closure states | Maps living plans into Today steps and closure states with source/freshness/source-needed lines where relevant. |
+| LDI14 | Trust Review And Dream Handling Receipts | Queued after AOS30 by default and HPS/SA closeout | assumptions/source/user-confirmed/stale/unverified/change receipts | Creates receipt contracts for handling, source, mutation, refusal, safe translation, user-imported source, OCR, and pack update states. |
+| LDI15 | Living Plan Recompiler | Queued after AOS30 by default and HPS/SA closeout | source/user/jurisdiction/capacity/proof changes -> local recompile | Implements local recompile and blast-radius contracts with Source Atlas changed-claim IDs and approval gates. |
+| LDI16 | Mutation Permissions And Impact Levels | Queued after AOS30 by default and HPS/SA closeout | no silent commitment/source mutation, approval model, impact levels 0-5 | Implements mutation permission contracts and approval gates; high-impact/source-driven changes require explicit user review. |
+| LDI17 | Continuity Sync | Queued after AOS30 by default and HPS/SA closeout | CloudKit-private sync plan, iCloud states, local-only fallback. No entitlement/signing change in docs-only batch | Defines future continuity sync contracts without entitlements and with most-restrictive privacy-wins rules for source/user mini-pack records. |
+| LDI18 | Archive And Schema Migration | Queued after AOS30 by default and HPS/SA closeout | encrypted archive design, schema migration ladder, import/export rules | Defines archive/migration safety and restore proof for dream/path/proof/source states. |
+| LDI19 | Multi-Device Merge Ledger | Queued after AOS30 by default and HPS/SA closeout | conflict rules, tombstones, most-restrictive privacy wins | Implements merge-policy contracts and conflict fixtures for HPS/Source Atlas-sensitive records. |
+| LDI20 | Freshness Broker | Queued after AOS30 by default and HPS/SA closeout | manifest, changed claim IDs, signed diffs, generic update notifications, no user-data backend | Uses Source Atlas Freshness Broker manifest/diff/revocation contracts and no user-data backend. |
+| LDI21 | Red-Team Evaluation Suite | Queued after AOS30 by default and HPS/SA closeout | 100+ fixture families and validation matrix | Builds permanent abuse-resistance fixture suite, including URL/PDF/OCR/job/school/certification/source-stale families. |
+| LDI22 | Governance And Maintenance Console | Queued after AOS30 by default and HPS/SA closeout | pack/source/safety/sync/governance metrics, no user personal data | Defines governance metrics without personal data and references HPS assurance ledger and Source Atlas pack/freshness governance. |
 
 ## Global Placement
 
-Default global placement is after AOS30 and HPS closeout. Earlier insertion of an individual LDI gate requires explicit user decision and a dependency review proving it is safer than waiting.
+Default global placement is after AOS30 and HPS/Source Atlas closeout. Earlier insertion of an individual LDI gate requires explicit user decision and a dependency review proving it is safer than waiting.
 
 ## Hard Gates
 
@@ -72,12 +100,15 @@ Default global placement is after AOS30 and HPS closeout. Earlier insertion of a
 - Scope Boundary Gate
 - Product Drift Gate
 - HPS Inheritance Gate
+- Source Atlas Inheritance Gate
 - Safety/Legality/Feasibility Gate
 - Professional Boundary Gate
 - Minor/Student-Data Gate where relevant
 - Source Claim/Pack Integrity Gate when claims or packs are touched
 - Privacy/Local-First Gate
-- No Silent Commitment Mutation Gate
+- Universal Source Binder Gate when user sources are touched
+- PDF/OCR Review-Required Gate when document extraction is touched
+- No Silent Commitment/Source Mutation Gate
 - Recommendation Quality Gate when Today/next steps are touched
 - Proof/Source Contract Gate when proof or requirement claims are touched
 - Vertical No-Build Gate
@@ -87,4 +118,4 @@ Default global placement is after AOS30 and HPS closeout. Earlier insertion of a
 
 ## Continuation Rule
 
-Continue only on Green or accepted Yellow with an owner. Stop on Red, forbidden file touch, unsupported release/platform/backend/AI/user-data-server claim, unsafe operationalization, professional advice claim, education/career certainty claim, new top-level destination, user-data server introduction, or HPS no-sprawl/no-claim failure.
+Continue only on Green or accepted Yellow with an owner. Stop on Red, forbidden file touch, unsupported release/platform/backend/AI/user-data-server claim, unsafe operationalization, professional advice claim, education/career certainty claim, new top-level destination, user-data server introduction, HPS no-sprawl/no-claim failure, or Source Atlas source/freshness/no-claim failure.
