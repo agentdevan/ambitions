@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 Accepted Yellow; HPS09 Accepted Yellow; HPS10 Accepted Yellow; HPS11 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 Accepted Yellow; HPS09 Accepted Yellow; HPS10 Accepted Yellow; HPS11 Accepted Yellow; HPS12 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -244,6 +244,15 @@ Owner: Strategy / PFC / Found Life.
 Goal: Architect future education, career, workforce, coaching, family, proof economy, source-pack marketplace, API/platform licensing, and acquisition buyer map without implementing verticals.
 Required result: vertical/revenue architecture with no-build boundaries.
 Acceptance: no vertical product, marketplace, multi-user role, or API product launches.
+Status: Accepted Yellow as docs-strategy and legal-boundary architecture in
+`docs/canon/Ambitions_Vertical_Expansion_Revenue_Architecture.md`. HPS11
+defines future vertical object families, revenue lanes, no-build gates,
+vertical risk boundaries, buyer-fit strategy, vertical/revenue/buyer narrative
+contract families, surface placement rules, and later owner stops. Yellow is
+owned by later HPS Codex OS work for missing physical HPS advisory
+scripts/skills and by future PFC/AOS/LDI/HPS/human-owner batches for any
+vertical, revenue, StoreKit/paywall, source-pack, API/platform, role, account,
+backend, buyer narrative, or public claim.
 
 ### HPS12 — Singular Experience + Acquisition Readiness Lock
 

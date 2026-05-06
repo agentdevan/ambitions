@@ -2,17 +2,16 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS10 AI Governance + Evaluation Assurance Lab complete / Accepted Yellow.
-Next eligible batch: HPS11 Vertical Expansion + Revenue Architecture.
-Scope: HPS10 added docs-evaluation governance architecture. It defines
-assurance object families, required fields, AOS golden scenarios, LDI red-team
-expansion, recommendation regression oracle, privacy leak scenarios,
-source/professional-boundary scenarios, claim truth tests, AI risk register,
-continuous assurance ledger, and scenario registry/regression oracle/risk
-register/assurance ledger/claim truth contract families. It adds no production
-Swift, tests, fixtures, CI, telemetry, analytics, model evaluation, AOS runtime,
-LDI runtime, UI, external-surface behavior, professional advice, release claim,
-App Store claim, TestFlight claim, physical-device proof, public accessibility
+Current batch: HPS11 Vertical Expansion + Revenue Architecture complete / Accepted Yellow.
+Next eligible batch: HPS12 Singular Experience + Acquisition Readiness Lock.
+Scope: HPS11 added docs-strategy and legal-boundary architecture. It defines
+future vertical object families, revenue lanes, no-build gates, vertical risk
+boundaries, buyer-fit strategy, vertical/revenue/buyer narrative contract
+families, surface placement rules, and later owner stops. It adds no production
+Swift, vertical product, marketplace, API/platform product, multi-user role,
+StoreKit behavior, pricing, entitlement model, paywall, account/backend/sync
+service, hosted AI, buyer outreach, legal/privacy approval, release claim, App
+Store claim, TestFlight claim, physical-device proof, public accessibility
 claim, or acquisition outcome claim.
 
 ## Full-Stack Global Order Reconciliation
@@ -100,8 +99,10 @@ architecture evidence. HPS08 is complete / Accepted Yellow as Living Dream
 Compiler architecture evidence. HPS09 is complete / Accepted Yellow as Privacy
 Memory Permission and Local Intelligence Adapter architecture evidence. HPS10
 is complete / Accepted Yellow as AI Governance and Evaluation Assurance Lab
-architecture evidence. HPS11 is the next eligible global batch, and AOS01
-remains blocked until HPS01-HPS12 are Green or accepted Yellow with owners.
+architecture evidence. HPS11 is complete / Accepted Yellow as Vertical
+Expansion and Revenue Architecture evidence. HPS12 is the next eligible global
+batch, and AOS01 remains blocked until HPS01-HPS12 are Green or accepted
+Yellow with owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

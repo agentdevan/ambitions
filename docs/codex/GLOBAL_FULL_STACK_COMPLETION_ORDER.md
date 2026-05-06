@@ -601,7 +601,16 @@ remaining sensitive intelligence work.
      analytics, model evaluation, UI, external-surface behavior, or release/
      platform claims. Yellow owners: later HPS Codex OS scripts/skills and
      future typed fixture/evaluation implementation batches.
-78H. HPS11 Vertical Expansion + Revenue Architecture.
+78H. HPS11 Vertical Expansion + Revenue Architecture. Completed Accepted
+     Yellow on 2026-05-06 as docs-strategy and legal-boundary architecture.
+     It defines future vertical object families, revenue lanes, no-build gates,
+     vertical risk boundaries, buyer-fit strategy, vertical/revenue/buyer
+     narrative contract families, surface placement rules, and later owner
+     stops without implementing vertical products, marketplaces, API/platform
+     products, multi-user roles, StoreKit, pricing, entitlements, paywalls,
+     account/backend/sync services, hosted AI, buyer outreach, legal/privacy
+     approval, or release/platform/acquisition claims. Yellow owners: later HPS
+     Codex OS scripts/skills and future PFC/AOS/LDI/HPS/human-owner batches.
 79H. HPS12 Singular Experience + Acquisition Readiness Lock.
 
 ### Phase 7 — AOS Internal Foundations

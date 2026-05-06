@@ -68,7 +68,12 @@ If the live run has advanced beyond PFC30 or FCP22 by the time this overlay is r
      Yellow on 2026-05-06 as docs-evaluation governance architecture. Yellow
      owners: later HPS Codex OS scripts/skills and future typed fixture/
      evaluation implementation batches.
-55H. HPS11 Vertical Expansion + Revenue Architecture.
+55H. HPS11 Vertical Expansion + Revenue Architecture. Completed Accepted
+     Yellow on 2026-05-06 as docs-strategy and legal-boundary architecture.
+     Yellow owners: later HPS Codex OS scripts/skills and future PFC/AOS/LDI/
+     HPS/human-owner batches for any vertical, revenue, StoreKit/paywall,
+     source-pack, API/platform, role, account, backend, buyer narrative, or
+     public claim.
 56H. HPS12 Singular Experience + Acquisition Readiness Lock.
 
 ## Blocks until HPS closes

@@ -334,7 +334,17 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   fixtures, CI, telemetry, analytics, model evaluation, AOS runtime, LDI
   runtime, or UI implementation. Yellow owners: later HPS Codex OS scripts/
   skills and future typed fixture/evaluation implementation batches. The next
-  eligible global batch is HPS11 Vertical Expansion + Revenue Architecture.
+  HPS batch was HPS11.
+- HPS11 is complete Accepted Yellow as docs-strategy and legal-boundary
+  Vertical Expansion and Revenue Architecture. It adds future vertical object
+  families, revenue lanes, no-build gates, vertical risk boundaries, buyer-fit
+  strategy, vertical/revenue/buyer narrative contract families, surface
+  placement rules, and later owner stops without vertical product, marketplace,
+  API/platform product, multi-user role, StoreKit behavior, account/backend/
+  sync service, hosted AI, buyer outreach, or public claim implementation.
+  Yellow owners: later HPS Codex OS scripts/skills and future PFC/AOS/LDI/HPS/
+  human-owner batches. The next eligible global batch is HPS12 Singular
+  Experience + Acquisition Readiness Lock.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -773,7 +783,8 @@ evidence. HPS08 is complete Accepted Yellow as Living Dream Compiler
 architecture evidence. HPS09 is complete Accepted Yellow as Privacy Memory
 Permission and Local Intelligence Adapter architecture evidence. HPS10 is
 complete Accepted Yellow as AI Governance and Evaluation Assurance Lab
-architecture evidence, and the full-stack order selects HPS11 next.
+architecture evidence. HPS11 is complete Accepted Yellow as Vertical Expansion
+and Revenue Architecture evidence, and the full-stack order selects HPS12 next.
 
 
 ## Living Dream Intelligence Context

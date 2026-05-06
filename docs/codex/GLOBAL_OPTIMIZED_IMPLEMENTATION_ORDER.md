@@ -30,8 +30,8 @@ As of this order update:
 - FCP source-truth docs exist, and FCP17 has completed as the first bounded FCP
   implementation batch. Further FCP implementation now depends on completed
   FL01-FL06 source truth.
-- HPS01-HPS10 are complete Accepted Yellow as docs-domain Human Progress
-  Systems architecture evidence; HPS11 is next by full-stack order.
+- HPS01-HPS11 are complete Accepted Yellow as docs-domain Human Progress
+  Systems architecture evidence; HPS12 is next by full-stack order.
 - AOS01-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
@@ -105,8 +105,9 @@ as Option Value and Pivot Preservation architecture. HPS08 is complete /
 Accepted Yellow as Living Dream Compiler architecture. HPS09 is complete /
 Accepted Yellow as Privacy Memory Permission and Local Intelligence Adapter
 architecture. HPS10 is complete / Accepted Yellow as AI Governance and
-Evaluation Assurance Lab architecture; HPS11 is the next eligible remaining
-batch under the stricter HPS-before-AOS overlay.
+Evaluation Assurance Lab architecture. HPS11 is complete / Accepted Yellow as
+Vertical Expansion and Revenue Architecture; HPS12 is the next eligible
+remaining batch under the stricter HPS-before-AOS overlay.
 PFC12 is complete / Green as app-group/shared-storage boundary evidence. It
 documented the existing app/widget/share extension entitlement match,
 privacy-safe shared snapshot and external creation queue boundaries, and focused
@@ -166,7 +167,7 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 030 | FCP12 Proof Spine / Evidence Ledger | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared ProofSpine / Goal Detail proof integration evidence with source, freshness, privacy, correction, and stale-review boundaries. | FCP06/FCP10/FCP11; PD07/PD17. | Complete; next FCP13B. |
 | 031 | FCP13B Goal Alternate Path / Decision History Polish | FCP split | Implementation | Completed Green on 2026-05-06 as bounded Goal Detail Decision Spine evidence with alternate-path and decision-history branches, review/consequence/no-mutation labels, and no automated reroute. | FCP11-FCP12; PD08. | Complete; next FCP25. |
 | 032 | FCP25 Loading / Empty / Degraded State Objectization | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared/top-level object-state evidence with a Flagship Object State Matrix and object-specific loading/unavailable states across Today, Goals, Goal Detail, Capture, Plan, and You. | FCP05/FCP10/FCP14/FCP18/FCP22. | Complete; next FCP26. |
-| 033 | FCP26 Iconography / Status Grammar Hardening | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared/status-grammar evidence with SI14 placement metadata, shape cues, degraded-card wiring, and focused non-color/status-placement proof. | FCP25; SI14. | Complete; PFC10/PFC11/PFC14/PFC16/PFC18/PFC20/PFC22/PFC23/HPS01/HPS02/HPS03/HPS04/HPS05/HPS06/HPS07/HPS08/HPS09/HPS10 are also complete; next HPS11 per HPS-before-AOS overlay. |
+| 033 | FCP26 Iconography / Status Grammar Hardening | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared/status-grammar evidence with SI14 placement metadata, shape cues, degraded-card wiring, and focused non-color/status-placement proof. | FCP25; SI14. | Complete; PFC10/PFC11/PFC14/PFC16/PFC18/PFC20/PFC22/PFC23/HPS01/HPS02/HPS03/HPS04/HPS05/HPS06/HPS07/HPS08/HPS09/HPS10/HPS11 are also complete; next HPS12 per HPS-before-AOS overlay. |
 | 034 | AOS01 AmbitionsOS Canon And Runtime Contract | AOS | Docs / Contract | Runtime work starts after flagship object slots and product depth exist. | Start AOS Train or global preauthorization. | May continue on Green. |
 | 035 | AOS02 Life Graph Event Log Foundation | AOS | Contract/Foundation | Foundation for graph-backed memory/proof. | AOS01. | Single-batch preferred. |
 | 036 | AOS03 Graph Delta Review Projection Store | AOS | Contract/Foundation | Projection review precedes control plane and kernels. | AOS02. | Single-batch. |
