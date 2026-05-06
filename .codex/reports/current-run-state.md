@@ -2,18 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS04 Source Truth + Requirement Graph Architecture complete / Accepted Yellow.
-Next eligible batch: HPS05 Commitment Memory + Searchable Life Recall Architecture.
-Scope: HPS04 added docs-domain Source Truth and Requirement Graph architecture.
-It defines requirement object families, requirement state fields,
-claim/source-quality/freshness/uncertainty states, requirement edge families,
-source conflict behavior, recommendation source boundaries, Source Atlas
-inheritance, and requirement read/proposal/conflict/projection contract
-families. It adds no production Swift, schema, migration, source runtime,
-source ingestion, official requirement database, professional advice product,
-sync/account/backend, hosted AI, top-level destination, visible requirement
-control surface, release claim, App Store claim, TestFlight claim,
-physical-device proof, public accessibility claim, or acquisition outcome claim.
+Current batch: HPS05 Commitment Memory + Searchable Life Recall Architecture complete / Accepted Yellow.
+Next eligible batch: HPS06 Recommendation Quality + Start Here Brain Architecture.
+Scope: HPS05 added docs-domain Commitment Memory and Searchable Life Recall
+architecture. It defines memory object families, memory state fields,
+confirmation states, recall permission states, sensitivity states, searchable
+recall contract, correction/rejection/hide/forget/delete boundaries, and memory
+read/proposal/recall-query/projection contract families. It adds no production
+Swift, schema, migration, durable memory, search index, embeddings, model
+memory, sync/account/backend, hosted AI, external recall, top-level
+destination, visible all-life memory surface, release claim, App Store claim,
+TestFlight claim, physical-device proof, public accessibility claim, or
+acquisition outcome claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -92,8 +92,10 @@ category-lock reconciliation. HPS02 is complete / Accepted Yellow as
 Human Progress Graph API architecture evidence. HPS03 is complete / Accepted
 Yellow as Verified Proof Ledger and proof portability architecture evidence.
 HPS04 is complete / Accepted Yellow as Source Truth and Requirement Graph
-architecture evidence. HPS05 is the next eligible global batch, and AOS01
-remains blocked until HPS01-HPS12 are Green or accepted Yellow with owners.
+architecture evidence. HPS05 is complete / Accepted Yellow as Commitment Memory
+and Searchable Life Recall architecture evidence. HPS06 is the next eligible
+global batch, and AOS01 remains blocked until HPS01-HPS12 are Green or accepted
+Yellow with owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -136,6 +136,15 @@ Owner: Memory Lens / Found Life / AOS.
 Goal: Define promise memory, inferred-vs-confirmed commitment boundary, errands, birthdays, follow-ups, parked projects, abandoned ideas, sensitive memories, stale memories, deletion/correction/rejection, and recall contract.
 Required result: searchable life recall architecture.
 Acceptance: inferred memory is never fact; recall shows source/freshness/privacy/review path.
+Status: Accepted Yellow as docs-domain architecture in
+`docs/canon/Ambitions_Commitment_Memory_Searchable_Life_Recall_Architecture.md`.
+HPS05 defines memory object families, memory state fields, confirmation states,
+recall permission states, sensitivity states, searchable recall contract,
+correction/rejection/hide/forget/delete boundaries, and memory read/proposal/
+recall-query/projection API contract families. Yellow is owned by later HPS
+Codex OS work for missing physical HPS advisory scripts/skills and by
+AOS/LDI/Found Life/You/export-delete batches for future typed memory and recall
+behavior.
 
 ### HPS06 — Recommendation Quality + Start Here Brain Architecture
 

@@ -527,7 +527,17 @@ remaining sensitive intelligence work.
      source ingestion, schema, sync, hosted AI, official requirement database,
      UI, or release/platform claims. Yellow owners: later HPS Codex OS
      scripts/skills and future typed source/requirement implementation batches.
-72H. HPS05 Commitment Memory + Searchable Life Recall Architecture.
+72H. HPS05 Commitment Memory + Searchable Life Recall Architecture. Completed
+     Accepted Yellow on 2026-05-06 as docs-domain architecture in
+     `docs/canon/Ambitions_Commitment_Memory_Searchable_Life_Recall_Architecture.md`.
+     It defines memory object families, memory state fields, confirmation
+     states, recall permission states, sensitivity states, searchable recall
+     contract, correction/rejection/hide/forget/delete boundaries, and memory
+     read/proposal/recall-query/projection API contract families without
+     implementing durable memory, search index, embeddings, model memory,
+     sync/cloud/account, external recall, UI, or release/platform claims.
+     Yellow owners: later HPS Codex OS scripts/skills and future typed memory/
+     recall implementation batches.
 73H. HPS06 Recommendation Quality + Start Here Brain Architecture.
 74H. HPS07 Option Value + Pivot Preservation Architecture.
 75H. HPS08 Living Dream Compiler Upgrade.
