@@ -182,12 +182,14 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let items = dashboard.systemCenter.sections.flatMap(\.items)
         let titles = items.map(\.title)
 
-        XCTAssertEqual(dashboard.systemCenter.title, "You")
-        XCTAssertEqual(dashboard.systemCenter.subtitle, "Your settings, memory, and trust controls.")
+        XCTAssertEqual(dashboard.systemCenter.title, "Personal System Center")
+        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("Planning setup"))
         XCTAssertEqual(titles, [
-            "Profile",
-            "Personalization",
-            "Appearance",
+            "Schedule & Availability",
+            "Plan Behavior",
+            "Automation & Trust",
+            "Vacation / Away Time",
+            "Durations",
             "What Ambitions Knows",
             "Trust Center",
             "Receipts & History",
@@ -195,11 +197,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
             "Reviews",
             "Proof",
             "Archive / Completed",
-            "Schedule & Availability",
-            "Plan Behavior",
-            "Automation & Trust",
-            "Vacation / Away Time",
-            "Durations",
+            "Profile",
+            "Personalization",
+            "Appearance",
             "Notifications",
             "Integrations",
             "Widgets / Live Activities / Shortcuts",
@@ -209,13 +209,15 @@ final class ProfileFeatureServiceTests: XCTestCase {
             "About"
         ])
         XCTAssertEqual(dashboard.systemCenter.sections.map(\.id), [
-            "me",
+            "planning-behavior",
             "memory-and-trust",
             "reviews-and-progress",
-            "planning-behavior",
+            "personal-defaults",
             "system-edges",
             "accessibility-and-support"
         ])
+        XCTAssertEqual(dashboard.systemCenter.sections.first?.title, "Planning Setup")
+        XCTAssertTrue(dashboard.systemCenter.footer.contains("without changing anything silently"))
         XCTAssertTrue(items.allSatisfy { !$0.accessibilityHint.isEmpty })
         XCTAssertTrue(items.contains(where: {
             $0.id == "appearance" &&

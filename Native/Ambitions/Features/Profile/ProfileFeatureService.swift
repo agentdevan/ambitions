@@ -671,40 +671,58 @@ private extension RepositoryBackedProfileService {
         appearanceSummary: String
     ) -> ProfileSystemCenterState {
         ProfileSystemCenterState(
-            title: "You",
-            subtitle: "Your settings, memory, and trust controls.",
+            title: "Personal System Center",
+            subtitle: "Planning setup, trust controls, memory, receipts, and personal defaults stay in one user-owned place.",
             sections: [
                 ProfileSystemCenterSection(
-                    id: "me",
-                    title: "Me",
-                    footer: nil,
+                    id: "planning-behavior",
+                    title: "Planning Setup",
+                    footer: "Guided automation is the default. Ambitions does not fill open time just because it exists.",
                     items: [
                         ProfileSystemCenterItem(
-                            id: "profile",
-                            title: "Profile",
-                            subtitle: "Name and default landing tab.",
-                            icon: "person.crop.circle",
-                            statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Local",
-                            semanticState: .neutral,
-                            accessibilityHint: "Opens profile settings."
+                            id: "schedule-availability",
+                            title: "Schedule & Availability",
+                            subtitle: "Work, school, protected time, buffers, and anchors.",
+                            icon: "calendar.badge.clock",
+                            statusLabel: calendarAuthorizationLabel(calendarAuthorization),
+                            semanticState: .calendarDerived,
+                            accessibilityHint: "Opens Schedule and Availability."
                         ),
                         ProfileSystemCenterItem(
-                            id: "personalization",
-                            title: "Personalization",
-                            subtitle: "Tone and planning defaults.",
-                            icon: "slider.horizontal.3",
-                            statusLabel: "Defaults",
+                            id: "plan-behavior",
+                            title: "Plan Behavior",
+                            subtitle: "Open time, protected free time, buffers, and reflow rules.",
+                            icon: "slider.horizontal.below.rectangle",
+                            statusLabel: "Do not fill",
+                            semanticState: .protected,
+                            accessibilityHint: "Opens Plan Behavior."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "automation-trust",
+                            title: "Automation & Trust",
+                            subtitle: AutomationLevel.defaultLevel.explanation,
+                            icon: "hand.raised",
+                            statusLabel: AutomationLevel.defaultLevel.displayLabel,
                             semanticState: .trust,
-                            accessibilityHint: "Opens personalization settings."
+                            accessibilityHint: "Opens Automation and Trust."
                         ),
                         ProfileSystemCenterItem(
-                            id: "appearance",
-                            title: "Appearance",
-                            subtitle: "Mode and accent.",
-                            icon: "paintpalette",
-                            statusLabel: snapshot.appState.appearancePreference.title,
-                            semanticState: .success,
-                            accessibilityHint: "Opens Appearance Studio."
+                            id: "vacation-away-time",
+                            title: "Vacation / Away Time",
+                            subtitle: "Vacation is not free time unless you mark it open.",
+                            icon: "airplane.departure",
+                            statusLabel: VacationAvailabilityBehavior.defaultBehavior.displayLabel,
+                            semanticState: .protected,
+                            accessibilityHint: "Opens Vacation and Away Time."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "durations",
+                            title: "Durations",
+                            subtitle: "Planned, suggested, historical, actual, or unset.",
+                            icon: "timer",
+                            statusLabel: "Grounded",
+                            semanticState: .trust,
+                            accessibilityHint: "Opens duration behavior."
                         )
                     ]
                 ),
@@ -786,54 +804,36 @@ private extension RepositoryBackedProfileService {
                     ]
                 ),
                 ProfileSystemCenterSection(
-                    id: "planning-behavior",
-                    title: "Planning Behavior",
-                    footer: "Guided automation is the default. Ambitions does not fill open time just because it exists.",
+                    id: "personal-defaults",
+                    title: "Personal Defaults",
+                    footer: nil,
                     items: [
                         ProfileSystemCenterItem(
-                            id: "schedule-availability",
-                            title: "Schedule & Availability",
-                            subtitle: "Work, school, protected time, buffers, and anchors.",
-                            icon: "calendar.badge.clock",
-                            statusLabel: calendarAuthorizationLabel(calendarAuthorization),
-                            semanticState: .calendarDerived,
-                            accessibilityHint: "Opens Schedule and Availability."
+                            id: "profile",
+                            title: "Profile",
+                            subtitle: "Name and default landing tab.",
+                            icon: "person.crop.circle",
+                            statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Local",
+                            semanticState: .neutral,
+                            accessibilityHint: "Opens profile settings."
                         ),
                         ProfileSystemCenterItem(
-                            id: "plan-behavior",
-                            title: "Plan Behavior",
-                            subtitle: "Open time, protected free time, buffers, and reflow rules.",
-                            icon: "slider.horizontal.below.rectangle",
-                            statusLabel: "Do not fill",
-                            semanticState: .protected,
-                            accessibilityHint: "Opens Plan Behavior."
-                        ),
-                        ProfileSystemCenterItem(
-                            id: "automation-trust",
-                            title: "Automation & Trust",
-                            subtitle: AutomationLevel.defaultLevel.explanation,
-                            icon: "hand.raised",
-                            statusLabel: AutomationLevel.defaultLevel.displayLabel,
+                            id: "personalization",
+                            title: "Personalization",
+                            subtitle: "Tone and planning defaults.",
+                            icon: "slider.horizontal.3",
+                            statusLabel: "Defaults",
                             semanticState: .trust,
-                            accessibilityHint: "Opens Automation and Trust."
+                            accessibilityHint: "Opens personalization settings."
                         ),
                         ProfileSystemCenterItem(
-                            id: "vacation-away-time",
-                            title: "Vacation / Away Time",
-                            subtitle: "Vacation is not free time unless you mark it open.",
-                            icon: "airplane.departure",
-                            statusLabel: VacationAvailabilityBehavior.defaultBehavior.displayLabel,
-                            semanticState: .protected,
-                            accessibilityHint: "Opens Vacation and Away Time."
-                        ),
-                        ProfileSystemCenterItem(
-                            id: "durations",
-                            title: "Durations",
-                            subtitle: "Planned, suggested, historical, actual, or unset.",
-                            icon: "timer",
-                            statusLabel: "Grounded",
-                            semanticState: .trust,
-                            accessibilityHint: "Opens duration behavior."
+                            id: "appearance",
+                            title: "Appearance",
+                            subtitle: "Mode and accent.",
+                            icon: "paintpalette",
+                            statusLabel: snapshot.appState.appearancePreference.title,
+                            semanticState: .success,
+                            accessibilityHint: "Opens Appearance Studio."
                         )
                     ]
                 ),
@@ -915,7 +915,7 @@ private extension RepositoryBackedProfileService {
                     ]
                 )
             ],
-            footer: "You keeps settings, history, trust, and controls together."
+            footer: "You keeps setup, history, trust, and controls together without changing anything silently."
         )
     }
 

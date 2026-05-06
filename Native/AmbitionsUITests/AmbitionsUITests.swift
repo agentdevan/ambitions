@@ -129,12 +129,11 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
-        XCTAssertTrue(app.staticTexts["Me"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Memory and Trust"].waitForExistence(timeout: 10))
-        XCTAssertTrue(youRow(named: "Appearance", in: app).waitForExistence(timeout: 10))
-        XCTAssertTrue(youRow(named: "What Ambitions Knows", in: app).waitForExistence(timeout: 10))
-        XCTAssertTrue(youRow(named: "Trust Center", in: app).waitForExistence(timeout: 10))
-        XCTAssertLessThan(youRow(named: "Appearance", in: app).frame.minY, youRow(named: "What Ambitions Knows", in: app).frame.minY)
+        XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
+        XCTAssertTrue(youRow(named: "Schedule & Availability", in: app).waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Trust, Memory & Receipts", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Memory", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
     }
 
     func testProfileAppearanceStudioControlsAreAccessibleFromKeyboardAndTouch() throws {
@@ -142,8 +141,8 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Appearance", in: app, maxAttempts: 8))
         let appearanceRow = youRow(named: "Appearance", in: app)
-        XCTAssertTrue(appearanceRow.waitForExistence(timeout: 10))
         XCTAssertTrue(appearanceRow.isHittable)
         appearanceRow.tap()
         XCTAssertTrue(app.staticTexts["Appearance Studio"].waitForExistence(timeout: 10))
@@ -158,8 +157,8 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Profile", in: app, maxAttempts: 8))
         let profileRow = youRow(named: "Profile", in: app)
-        XCTAssertTrue(profileRow.waitForExistence(timeout: 10))
         profileRow.tap()
         XCTAssertTrue(scrollUntilStaticTextExists("Personal defaults", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Default landing tab", in: app, maxAttempts: 8))
@@ -170,10 +169,12 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
+        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["you.root"].waitForExistence(timeout: 10))
 
-        XCTAssertTrue(youRow(named: "What Ambitions Knows", in: app).waitForExistence(timeout: 10))
-        XCTAssertTrue(youRow(named: "Trust Center", in: app).waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Memory", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
         youRow(named: "Trust Center", in: app).tap()
         XCTAssertTrue(app.descendants(matching: .any)["profile.trust-center-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: app))
@@ -849,6 +850,19 @@ final class AmbitionsUITests: XCTestCase {
 
     private func youRow(named title: String, in app: XCUIApplication) -> XCUIElement {
         app.buttons.matching(NSPredicate(format: "label CONTAINS %@", title)).firstMatch
+    }
+
+    private func scrollUntilYouRowExists(named title: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
+        let element = youRow(named: title, in: app)
+
+        for _ in 0..<maxAttempts {
+            if element.waitForExistence(timeout: 2), element.isHittable {
+                return true
+            }
+            app.swipeUp()
+        }
+
+        return element.exists
     }
 
     private func openTodayStepDetail(in app: XCUIApplication) -> Bool {

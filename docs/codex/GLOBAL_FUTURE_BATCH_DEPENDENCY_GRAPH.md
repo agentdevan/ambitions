@@ -262,6 +262,13 @@ compliance, battery safety, release readiness, App Store readiness, TestFlight
 readiness, physical-device proof, public accessibility proof, telemetry,
 analytics, crash reporting, or production observability.
 
+FCP22 is complete Green as of 2026-05-05. Future You, memory, recall, trust,
+privacy, correction, receipt, defaults, AOS, LDI, Found Life, or external
+surface work must preserve the Personal System Center root: Planning Setup is
+first, Trust / Memory / Receipts remain prominent, Personal Defaults are
+separate, and existing Profile route/file compatibility is preserved unless a
+future compatibility batch proves a safe retirement.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

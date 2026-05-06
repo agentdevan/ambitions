@@ -109,8 +109,12 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   measured-evidence lanes without claiming performance compliance, battery
   safety, release readiness, App Store readiness, TestFlight readiness,
   physical-device proof, public accessibility proof, or production
-  observability. The next eligible global batch is FCP22 Personal System
-  Center Refactor.
+  observability.
+- FCP22 is complete Green as bounded You root Personal System Center
+  implementation evidence. Planning Setup is first, Trust / Memory / Receipts
+  are prominent, Personal Defaults are separated, and existing Profile
+  route/file compatibility remains intact. The next eligible global batch is
+  FCP23 Memory Lens / External Brain Visual Layer.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -511,8 +515,9 @@ Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is complete Green
 as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is complete
 Green as Security Threat Model And Secrets Audit evidence. PFC29 is complete
 Green as Logging / Analytics / Observability Policy evidence. PFC30 is complete
-Green as Performance Budget And Instruments Plan evidence, and the full-stack
-order selects FCP22 next.
+Green as Performance Budget And Instruments Plan evidence. FCP22 is complete
+Green as bounded Personal System Center implementation evidence, and the
+full-stack order selects FCP23 next.
 
 
 ## Living Dream Intelligence Context

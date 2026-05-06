@@ -55,7 +55,7 @@ enum ProfileRootDetail: String, Identifiable {
     }
 }
 
-struct ProfileSettingsRootView: View {
+struct PersonalSystemCenterRootView: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var selectedRowHapticToken = ""
 
@@ -97,20 +97,20 @@ struct ProfileSettingsRootView: View {
             groupedSection(
                 id: "planning-setup",
                 title: "Planning Setup",
-                subtitle: "Defaults that shape how Ambitions helps without taking over.",
-                itemIDs: ["profile", "personalization", "appearance"]
-            ),
-            groupedSection(
-                id: "schedule-availability",
-                title: "Schedule & Availability",
                 subtitle: "Time, availability, away states, and duration defaults stay user-owned.",
-                itemIDs: ["schedule-availability", "plan-behavior", "vacation-away-time", "durations"]
+                itemIDs: ["schedule-availability", "plan-behavior", "automation-trust", "vacation-away-time", "durations"]
             ),
             groupedSection(
                 id: "trust-memory",
                 title: "Trust, Memory & Receipts",
                 subtitle: "Inspectable memory, receipts, corrections, proof, and review history.",
                 itemIDs: ["trust-center", "what-ambitions-knows", "receipts-history", "corrections", "reviews", "proof", "archive-completed"]
+            ),
+            groupedSection(
+                id: "personal-defaults",
+                title: "Personal Defaults",
+                subtitle: "Identity, preference, and appearance controls stay separate from trust-critical choices.",
+                itemIDs: ["profile", "personalization", "appearance"]
             ),
             groupedSection(
                 id: "privacy-accessibility",
@@ -160,13 +160,12 @@ struct ProfileSettingsRootView: View {
 
     private func normalizedTitle(for item: ProfileSystemCenterItem) -> String {
         switch item.id {
-        case "profile": "Planning Setup"
+        case "profile": "Profile"
         case "personalization": "Planning Defaults"
         case "what-ambitions-knows": "Memory"
         case "receipts-history": "Receipts / History"
         case "export-import": "Privacy"
-        case "notifications", "integrations", "widgets-live-activities-shortcuts":
-            "Automation & Trust"
+        case "widgets-live-activities-shortcuts": "External Surfaces"
         default: item.title
         }
     }
@@ -241,10 +240,10 @@ struct ProfileSettingsRootView: View {
 
     private var setupItems: [PersonalSystemCenterSetupItem] {
         [
-            setupItem(id: "profile"),
+            setupItem(id: "schedule-availability"),
+            setupItem(id: "automation-trust"),
             setupItem(id: "what-ambitions-knows"),
             setupItem(id: "trust-center"),
-            setupItem(id: "schedule-availability"),
             setupItem(id: "accessibility")
         ].compactMap { $0 }
     }

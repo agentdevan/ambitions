@@ -34,7 +34,7 @@ struct ProfileScreen: View {
                     }
                     .transition(.ambitionPanel)
                 case let .loaded(dashboard):
-                    ProfileSettingsRootView(
+                    PersonalSystemCenterRootView(
                         dashboard: dashboard,
                         onOpenDetail: { activeDetail = $0 }
                     )

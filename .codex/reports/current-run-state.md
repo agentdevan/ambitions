@@ -2,21 +2,13 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC30 Performance Budget And Instruments Plan complete
-Green; full-stack order selects FCP22 Personal System Center Refactor next.
-Scope: PFC30 promoted
-`docs/canon/Ambitions_Performance_Budget_And_Benchmark_Readiness.md` into the
-active performance budget and Instruments checklist. It defines launch, memory,
-rendering, animation, widget reload, Live Activity, sync, background-task,
-battery, SwiftUI review, and evidence-bound measurement lanes without claiming
-performance compliance, battery safety, release readiness, App Store readiness,
-TestFlight readiness, physical-device proof, public accessibility proof,
-telemetry, analytics, crash reporting, or production observability. PFC30
-changed only docs and train-state files. It did not change production Swift,
-route/raw value, persistence/schema, privacy-manifest, entitlement, dependency,
-CI, workflow/signing, MetricKit, analytics, telemetry, crash SDK, sync/account,
-release, legal/privacy compliance, AI runtime, AOS runtime, LDI runtime,
-App Store Connect, or public accessibility claim files.
+Current batch: FCP22 Personal System Center Refactor complete / Green.
+Next eligible batch: FCP23 Memory Lens / External Brain Visual Layer.
+Scope: FCP22 refactored the You root into the Personal System Center by making
+Planning Setup the first section, keeping Trust, Memory & Receipts prominent,
+and moving Profile, Personalization, and Appearance into Personal Defaults. It
+preserved the five-tab shell, existing Profile route/file compatibility, and
+all legal/privacy/release/device/accessibility claims as evidence-bound.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -64,7 +56,8 @@ Green as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is
 complete / Green as Security Threat Model And Secrets Audit evidence. PFC29 is
 complete / Green as Logging / Analytics / Observability Policy evidence. PFC30
 is complete / Green as Performance Budget And Instruments Plan evidence. FCP22
-is the next eligible global batch. Accepted Yellow:
+is complete / Green as Personal System Center Refactor evidence. FCP23 is the
+next eligible global batch. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
@@ -117,8 +110,9 @@ Green as docs/safety professional-boundary crisis policy evidence. PFC28 is
 complete / Green as docs/security threat model and secrets audit evidence.
 PFC29 is complete / Green as docs/privacy observability policy evidence. PFC30
 is complete / Green as docs/performance budget and Instruments checklist
-evidence. Later PFC implementation beyond existing test execution has not
-started.
+evidence. FCP22 is complete / Green as bounded You root Personal System Center
+implementation evidence. Later PFC implementation beyond existing test
+execution has not started.
 
 No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality
 Rail Continuity, FCP13A Action Closure Diamond, and FCP08 Ambition Meridian

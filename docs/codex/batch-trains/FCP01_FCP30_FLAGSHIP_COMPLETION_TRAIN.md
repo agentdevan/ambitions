@@ -338,6 +338,8 @@ Acceptance: mic unavailable state honest if not connected; motor alternatives do
 
 ### FCP22 — Personal System Center Refactor
 
+Status: Complete Green on 2026-05-05 as bounded You root Personal System
+Center implementation evidence.
 Type: Implementation.
 Owner: You.
 Depends on: PD15-PD16 preferred; SI11; DAV07; ME06.

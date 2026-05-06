@@ -250,7 +250,12 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 ### Phase 5 — FCP Surface Maturity
 
-45. FCP22 Personal System Center Refactor.
+45. FCP22 Personal System Center Refactor. Completed Green on 2026-05-05 as
+    bounded You root Personal System Center implementation evidence, with
+    Planning Setup first, Trust / Memory / Receipts prominent, Personal
+    Defaults separated, and no route/raw-value, persistence/schema, sync/cloud,
+    legal/privacy/release, App Store, TestFlight, device, or public
+    accessibility claim.
 46. FCP23 Memory Lens / External Brain Visual Layer.
 47. FCP24 Appearance Studio.
 48. FCP18 Capture Placement Shelf.
