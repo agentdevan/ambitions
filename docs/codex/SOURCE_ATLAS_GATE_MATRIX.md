@@ -1,14 +1,14 @@
 # Source Atlas Gate Matrix
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Source Atlas gate matrix for SA01-SA32 and all Source Atlas-dependent work.
+Status: Active Source Atlas gate matrix for SA01-SA32, SAP composition/projection lock, and all Source Atlas-dependent work.
 Date: 2026-05-06
 
 ## Purpose
 
-This matrix prevents Source Atlas from becoming a brittle scraper, vague AI source system, source dashboard, privacy leak, or unsupported official-requirement engine.
+This matrix prevents Source Atlas from becoming a brittle scraper, vague AI source system, source dashboard, privacy leak, unsupported official-requirement engine, static goal-template library, or one-pack-per-goal sprawl system.
 
-Source Atlas must make Ambitions more trustworthy, not more claimy.
+Source Atlas must make Ambitions more trustworthy, more scalable, and more personal — not more claimy or more generic.
 
 ## Universal hard Red gates
 
@@ -30,6 +30,61 @@ Source Atlas must make Ambitions more trustworthy, not more claimy.
 | Private Document Protection Gate | Private source text, PDF content, OCR output, or extracted claims can enter logs, analytics, widgets, Live Activities, notifications, or screenshots by default. |
 | No-Claim Language Gate | Copy claims always-current, official-complete, legal/career/education certainty, or professional advice without evidence. |
 | Rendered Source-State Proof Gate | UI-affecting Source Atlas work closes Green without rendered proof for relevant source states. |
+| No One-Pack-Per-Goal Gate | Source Atlas creates isolated duplicate full packs for individual goals instead of composable domain/capability/overlay graph pieces. |
+| Composable Pack Graph Gate | A pack lacks domain, pack type, reusable nodes, dependency packs, projection compatibility, and composition contract. |
+| Goal Projection Gate | A user goal maps directly to a static pack/path instead of a GoalProjection and PersonalPathInstance. |
+| Skill Slice Gate | Narrow skill goals load broad elite/pro paths instead of slicing relevant capability nodes. |
+| Highest-Path Reuse Gate | Elite/pro paths duplicate lower-level beginner/intermediate nodes instead of reusing shared graph nodes. |
+| Personal Path Instance Gate | Same goal/source projection cannot produce different outputs based on starting position, proof, constraints, time, source freshness, and privacy. |
+| Alternative Path / Option Value Gate | Serious paths omit adjacent alternatives or transferable proof without an explicit no-known-alternative reason. |
+| Steps Are Generated, Not Stored Gate | Source packs hardcode universal scheduled step plans rather than providing step candidate seeds for AOS/LDI/Plan. |
+| Source Overlay Gate | Official/current requirements are stored in generic domain packs rather than source-sensitive RequirementOverlays. |
+| Pack Duplication Gate | Duplicate claims/requirements appear across packs as copies rather than stable aliases or shared nodes. |
+| Projection Receipt Gate | Generated paths lack a receipt explaining graph slice, sources used, sources excluded, uncertainty, and why the projection fits the user. |
+
+## Composition and projection gates
+
+Composition/projection is required before runtime pack creation scales.
+
+Required objects:
+
+- DomainPack
+- SpecificDomainPack
+- CapabilityGraph
+- CapabilityNode
+- CapabilityEdge
+- LevelLadder
+- RequirementOverlay
+- RoleOverlay
+- PathOverlay
+- ProofMap
+- AlternativePathSet
+- OptionValueMap
+- ProjectionRecipe
+- GoalProjection
+- ProjectionProfile
+- PersonalPathInstance
+- StepCandidateSeed
+
+Required projection behavior:
+
+1. User goal text is classified by intent.
+2. Domain and ambition level are detected.
+3. Relevant pack graph slices are selected.
+4. Requirement overlays attach source/freshness/uncertainty.
+5. User starting position, proof, time, constraints, privacy, and source state shape the PersonalPathInstance.
+6. StepCandidateSeeds are produced; final steps are generated elsewhere.
+7. AlternativePathSet and OptionValueMap are available for serious paths when meaningful.
+8. Projection receipt explains why this graph slice was used and what source limits remain.
+
+Forbidden projection behavior:
+
+- one static path for every user with same goal
+- using a pro-path pack as master owner of all lower paths
+- creating separate full packs for every goal phrase
+- duplicating official source claims across packs
+- treating job postings or school pages as universal requirement paths
+- generating final scheduled steps directly from packs
 
 ## Supported source containers
 
@@ -73,6 +128,7 @@ Every claim candidate must show:
 - source locator when available
 - extraction quality
 - privacy state
+- projection compatibility when it can affect a path
 - actions: confirm, edit, reject, mark private, needs official review, do not use for recommendations, delete source
 
 No claim candidate may affect user state until confirmed or explicitly allowed by a future deterministic low-risk rule.
@@ -97,6 +153,9 @@ Required UI states when touched:
 - no internet / last-known-good
 - corrupt/invalid pack
 - high-risk review required
+- projection receipt
+- alternative path / still-counts state
+- narrow skill slice state
 - reduced-motion equivalent
 - Dynamic Type-adjacent proof
 
@@ -112,6 +171,10 @@ Allowed UI primitives:
 - PrivateSourceShield
 - OCRReviewNotice
 - SourceImpactReceipt
+- ProjectionReceiptFold
+- SkillSliceIndicator
+- AlternativePathReceipt
+- OptionValueFold
 
 Forbidden UI patterns:
 
@@ -121,6 +184,7 @@ Forbidden UI patterns:
 - AI chat source assistant
 - KPI/source health dashboard on top-level tabs
 - generic card stack of imported sources
+- graph visualization as default top-level UI
 
 ## Pack factory gates
 
@@ -138,6 +202,11 @@ Pack Factory output must pass:
 - fixture coverage
 - diff support
 - rollback/revocation contract
+- composition contract
+- reusable capability node IDs
+- overlay dependency declaration
+- projection recipe validation
+- duplicate claim alias validation
 
 ## Freshness Broker gates
 
@@ -164,8 +233,10 @@ Required contract:
 
 ## Accessibility gates
 
-Source/freshness state must not rely on color alone. Every badge/fold/drawer must have readable text, VoiceOver label, Dynamic Type behavior, and reduced-motion equivalent when animation is used.
+Source/freshness/projection state must not rely on color alone. Every badge/fold/drawer must have readable text, VoiceOver label, Dynamic Type behavior, and reduced-motion equivalent when animation is used.
 
 ## Closeout standard
 
 SA32 cannot close until every Source Atlas gate is implemented, integrated into a later batch, or accepted Yellow with owner, repair path, and explicit user-facing claim block.
+
+SAP cannot close until no one-pack-per-goal, graph composition, goal projection, skill slice, highest-path reuse, personal path instance, alternative path, and generated-step gates are implemented or explicitly owned by a later Source Atlas runtime batch.
