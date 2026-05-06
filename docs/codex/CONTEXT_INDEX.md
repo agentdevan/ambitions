@@ -405,8 +405,18 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   rejection. It adds no source ingestion, extraction, OCR, source
   certification, persistent source ledger, Life Graph mutation, UI, platform,
   sync/account/backend, hosted AI, external-surface, release, legal/current-
-  requirement, or public accessibility claim. The next eligible global batch is
-  AOS10 Commitment Time Kernel.
+  requirement, or public accessibility claim. AOS10 followed and is now
+  complete.
+- AOS10 is complete Green as additive Commitment Time Kernel evidence. It adds
+  `Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift` and focused
+  domain tests with typed commitments, capacity windows, capacity-fit
+  projection, source/freshness/review gates, protected-time violation
+  detection, silent-reschedule blocking, sensitive external projection
+  protection, runtime-boundary checks, and no platform calendar implementation,
+  EventKit/Reminder write path, schedule mutation, persistence/schema, runtime
+  store, Today/Plan UI, notification behavior, sync/account/backend, hosted AI,
+  external-surface, release, legal/current-requirement, or public accessibility
+  claim. The next eligible global batch is AOS05 Starting Position Kernel.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

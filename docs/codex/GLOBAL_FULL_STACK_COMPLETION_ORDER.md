@@ -805,7 +805,16 @@ remaining sensitive intelligence work.
     source ledger, Life Graph mutation, You / Goal Detail UI, source runtime,
     external projection, sync/account/backend service, hosted AI, release/
     platform, legal/current-requirement, or public accessibility claims.
-75. AOS10 Commitment Time Kernel.
+75. AOS10 Commitment Time Kernel. Completed Green on 2026-05-06 as additive
+    Commitment Time Kernel domain-contract evidence. It adds typed
+    commitments, capacity windows, capacity-fit projection,
+    source/freshness/review gates, protected-time violation detection,
+    silent-reschedule blocking, sensitive external projection protection,
+    runtime-boundary checks, and focused tests. It does not add platform
+    calendar implementation, EventKit/Reminder write paths, schedule mutation,
+    persistence/schema, runtime store, Today / Plan UI, notification behavior,
+    sync/account/backend service, hosted AI, release/platform,
+    legal/current-requirement, or public accessibility claims.
 76. AOS05 Starting Position Kernel.
 77. AOS06 Goal Path Kernel Goal Compiler.
 78. AOS07 Local Goal Packs Requirement Slots.

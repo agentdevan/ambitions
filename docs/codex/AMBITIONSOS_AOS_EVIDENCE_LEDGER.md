@@ -140,6 +140,43 @@ Does not prove:
 - platform behavior
 - release/platform readiness
 
+## AOS10
+
+Batch: AOS10 Commitment Time Kernel.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Commitment Time Kernel commitment kinds
+- typed capacity windows and capacity-fit projection
+- source-needed and stale deadline review blocking
+- protected-time and over-capacity blocking
+- silent reschedule and platform calendar implementation blocking
+- sensitive commitment external projection protection
+- runtime-store and invalid-schema blocking
+
+Commands:
+
+- `xcodegen generate`
+- `git diff --check`
+- first focused `xcodebuild` run, failed on test helper argument order
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSCommitmentTimeModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS10 report
+
+Does not prove:
+
+- EventKit or Reminders implementation
+- calendar writes
+- schedule mutation runtime
+- persistence or schema
+- bounded reflow
+- recommendation runtime
+- Today or Plan UI integration
+- external projection
+- platform behavior
+- release/platform readiness
+
 ## AOS12
 
 Batch: AOS12 Proof Trust Closure Receipts.

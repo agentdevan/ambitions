@@ -2,17 +2,17 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS13 Source Truth Claim State Machine complete / Green.
-Next eligible batch: AOS10 Commitment Time Kernel.
-Scope: AOS13 added additive Source Truth Kernel domain-contract proof for typed
-claim states, source quality, source references, freshness/review/privacy/risk
-gates, reviewable claim transitions, conflict/revocation handling, sensitive
-external projection protection, runtime-boundary checks, and source-
-certification overclaim rejection. It adds no source ingestion, extraction,
-OCR, source certification, persistent source ledger, Life Graph mutation,
-You/Goal Detail UI, source runtime, external projection, sync/account/backend
-service, hosted AI, release/platform, legal/current-requirement, or public
-accessibility claim.
+Current batch: AOS10 Commitment Time Kernel complete / Green.
+Next eligible batch: AOS05 Starting Position Kernel.
+Scope: AOS10 added additive Commitment Time Kernel domain-contract proof for
+typed commitments, capacity windows, capacity-fit projection,
+source/freshness/review gates, protected-time violation detection,
+silent-reschedule blocking, sensitive external projection protection, and
+runtime-boundary checks. It adds no platform calendar implementation,
+EventKit/Reminder write path, schedule mutation, persistence/schema, runtime
+store, Today/Plan UI, notification behavior, sync/account/backend service,
+hosted AI, release/platform, legal/current-requirement, or public accessibility
+claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -117,8 +117,9 @@ SAP04 is complete / Green as Projection QA Fixtures. SAP05 is complete / Green
 as No-Sprawl / No-Duplicate Pack Gate. SA06 is complete / Green as compact pack
 schema implementation evidence. AOS12 is complete / Green as Proof Trust
 Closure Receipts evidence. AOS13 is complete / Green as Source Truth Claim
-State Machine evidence. AOS10 is the next eligible global batch before other
-deep source/freshness-dependent AOS/LDI work continues.
+State Machine evidence. AOS10 is complete / Green as Commitment Time Kernel
+evidence. AOS05 is the next eligible global batch before other AOS/LDI work
+continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable
