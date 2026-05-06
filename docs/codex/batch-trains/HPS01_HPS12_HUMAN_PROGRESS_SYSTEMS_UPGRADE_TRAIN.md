@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; queued pre-AOS/pre-LDI upgrade train.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -74,6 +74,12 @@ Owner: Product Strategy / Founder Vision.
 Goal: Lock Ambitions as the private operating system for verified human progress.
 Required result: category lock, consumer wedge, product promise, no-sprawl rules, vertical-deferral rules.
 Acceptance: no new surface, no vertical implementation, no acquisition guarantee claim.
+Status: Accepted Yellow as local category-lock reconciliation. HPS01 confirms
+Ambitions as the private operating system for verified human progress, preserves
+Start here every day as the consumer wedge, keeps HPS internal and no-sprawl,
+and makes no vertical, release, hosted-AI, user-data-server, API-platform, or
+acquisition-outcome claim. Yellow is owned by later HPS Codex OS work because
+physical HPS advisory scripts/skills are specified but not executable yet.
 
 ### HPS02 — Human Progress Graph + API Architecture
 

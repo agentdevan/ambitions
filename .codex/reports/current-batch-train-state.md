@@ -2,18 +2,16 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: PFC23 Paywall / Upgrade UX Compliance Review complete / Green.
-Next eligible batch: AOS01 AmbitionsOS Canon And Runtime Contract.
-Scope: PFC23 closed as no-paywall compliance review and safe deferral because
-PFC21/PFC22 prerequisites remain unresolved and the source scan found no active
-paywall, upgrade surface, StoreKit runtime, product catalog, purchase flow,
-receipt validation, subscription validation, or entitlement implementation. It
-adds no paywall, upgrade UX, locked feature gate, StoreKit runtime, product ID,
-pricing, subscription, in-app purchase, ad model, external purchase link,
-entitlement, signing, project/workflow/dependency change, persistence/schema
-change, privacy manifest change, sync/account/backend behavior, AI/LDI runtime,
-legal/privacy/release claim, App Store claim, TestFlight claim, physical-device
-proof, or public accessibility claim.
+Current batch: HPS01 Verified Human Progress OS Category Lock complete / Accepted Yellow.
+Next eligible batch: HPS02 Human Progress Graph + API Architecture.
+Scope: HPS01 reconciled the HPS-before-AOS overlay into the active global train
+after AOS01 was found blocked by stricter HPS prerequisites. It locks Ambitions
+as the private operating system for verified human progress, keeps HPS internal
+and no-sprawl, preserves Today / Goals / Capture / Plan / You, and adds no
+production Swift, top-level destination, dashboard, vertical product, hosted AI,
+user-data server, API platform, release claim, App Store claim, TestFlight
+claim, physical-device proof, public accessibility claim, or acquisition
+outcome claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -87,7 +85,10 @@ complete / Green as App Intents / Shortcuts source hardening and focused-test
 evidence. PFC20 is complete / Green as notification, Calendar, and Reminders
 implementation proof. PFC22 is complete / Green as StoreKit implementation
 deferral proof. PFC23 is complete / Green as no-paywall compliance review and
-safe deferral evidence. AOS01 is the next eligible global batch.
+safe deferral evidence. HPS01 is complete / Accepted Yellow as local
+category-lock reconciliation. HPS02 is the next eligible global batch, and
+AOS01 remains blocked until HPS01-HPS12 are Green or accepted Yellow with
+owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

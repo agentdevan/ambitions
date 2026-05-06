@@ -480,9 +480,39 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     legal/privacy/release claim, App Store claim, TestFlight claim,
     physical-device proof, or public accessibility claim.
 
+### Phase 6.5 — Human Progress Systems Upgrade
+
+HPS is inserted by the active
+`docs/codex/GLOBAL_HPS_COMPLETION_ORDER_OVERLAY.md` because AOS and LDI now
+depend on HPS inheritance. This insertion happened after several
+HPS-dependent FCP/PFC batches had already completed; do not replay completed
+batches. HPS governs later repair, audit, handoff, AOS, LDI, Source Atlas, and
+remaining sensitive intelligence work.
+
+68H. HPS01 Verified Human Progress OS Category Lock. Completed Accepted Yellow
+     on 2026-05-06 as local category-lock reconciliation: Ambitions is locked
+     as the private operating system for verified human progress, HPS remains
+     internal/no-sprawl, the five-tab app remains Today / Goals / Capture /
+     Plan / You, and no vertical product, hosted AI, user-data server, API
+     platform, release claim, or acquisition-outcome claim is introduced.
+     Yellow owner: later HPS Codex OS work must create or map physical HPS
+     advisory scripts/skills.
+69H. HPS02 Human Progress Graph + API Architecture.
+70H. HPS03 Verified Proof Ledger + Proof Portability Architecture.
+71H. HPS04 Source Truth + Requirement Graph Architecture.
+72H. HPS05 Commitment Memory + Searchable Life Recall Architecture.
+73H. HPS06 Recommendation Quality + Start Here Brain Architecture.
+74H. HPS07 Option Value + Pivot Preservation Architecture.
+75H. HPS08 Living Dream Compiler Upgrade.
+76H. HPS09 Privacy / Memory Permission + Local Intelligence Adapter.
+77H. HPS10 AI Governance + Evaluation Assurance Lab.
+78H. HPS11 Vertical Expansion + Revenue Architecture.
+79H. HPS12 Singular Experience + Acquisition Readiness Lock.
+
 ### Phase 7 — AOS Internal Foundations
 
-69. AOS01 AmbitionsOS Canon And Runtime Contract.
+69. AOS01 AmbitionsOS Canon And Runtime Contract. Blocked until HPS01-HPS12
+    are Green or accepted Yellow with owners.
 70. AOS02 Life Graph Event Log Foundation.
 71. AOS03 Graph Delta Review Projection Store.
 72. AOS04 Control Plane Work Classifier.

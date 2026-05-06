@@ -30,7 +30,9 @@ If the live run has advanced beyond PFC30 or FCP22 by the time this overlay is r
 
 ### Phase 4.5 — Human Progress Systems Upgrade
 
-45H. HPS01 Verified Human Progress OS Category Lock.
+45H. HPS01 Verified Human Progress OS Category Lock. Completed Accepted Yellow
+     on 2026-05-06 as local category-lock reconciliation. Yellow owner: later
+     HPS Codex OS work must create or map physical HPS advisory scripts/skills.
 46H. HPS02 Human Progress Graph + API Architecture.
 47H. HPS03 Verified Proof Ledger + Proof Portability Architecture.
 48H. HPS04 Source Truth + Requirement Graph Architecture.

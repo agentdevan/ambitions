@@ -106,7 +106,17 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   claims.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
-- AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.
+- HPS01 is complete Accepted Yellow as of 2026-05-06. Future HPS, AOS, LDI,
+  Source Atlas, recommendation, proof/source, memory, option-value, vertical
+  strategy, local-intelligence, or acquisition/moat work must preserve the
+  HPS01 category lock: Ambitions is the private operating system for verified
+  human progress, HPS remains internal/no-sprawl, and no vertical product,
+  hosted-AI, user-data-server, API-platform, release, or acquisition-outcome
+  claim may be introduced. Yellow owner: later HPS Codex OS work must create or
+  map physical HPS advisory scripts/skills.
+- AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
+  explicit approval phrase `Start AOS Train` or global cross-train
+  preauthorization.
 - AOS02-AOS23 depend on AOS01 and the kernel dependencies named in the AOS train manifest.
 - AOS24 depends on AOS18-AOS23, PXOS expression gates, ME maintainability gates, CS compatibility gates, SI18 handoff, relevant FCP object gates, and relevant LDI gates where living dream behavior would be exposed.
 - AOS25 depends on AOS18 and AOS24.
