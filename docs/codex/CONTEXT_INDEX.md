@@ -422,7 +422,12 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Codex OS map, and SA train into live global order before AOS12, later AOS
   runtime, LDI runtime, source import, real-world requirements, pack schema,
   Pack Factory, or Freshness Broker work continues. The stricter next eligible
-  batch is SAP01 Composable Pack Architecture Lock before SA06.
+  batch was SAP01 Composable Pack Architecture Lock before SA06.
+- SAP01 is complete Green as Composable Pack Architecture Lock. It reconciles
+  `docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md` as live
+  architecture truth: source packs are reusable ingredients, goals are
+  projection requests, and AOS/LDI/Plan own final user-context step generation.
+  The next eligible global batch is SAP02 Goal Projection Object Model.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
