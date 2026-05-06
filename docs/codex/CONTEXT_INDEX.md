@@ -445,8 +445,13 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   physical reviewer skills and advisory scripts for composition architecture,
   goal projection, capability graph review, projection recipes, alternative
   path / option value, pack duplication, generated-step boundaries, no-claim
-  language, and projection fixture coverage. The next eligible global batch is
-  SA06 Pack Schema Implementation.
+  language, and projection fixture coverage.
+- SA06 is complete Green as Pack Schema Implementation. It adds a compact Swift
+  Codable Source Atlas pack value model and focused tests for valid decode,
+  unsupported schema rejection, no-sprawl/composition gates, source-free
+  official claim blocking, high-risk review blocking, generated-step boundary
+  enforcement, runtime-store behavior rejection, and canon integration. The
+  next eligible global batch is AOS12 Proof Trust Closure Receipts.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.

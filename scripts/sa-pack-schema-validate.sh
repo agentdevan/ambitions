@@ -19,8 +19,38 @@ if ! grep -R "Pack Schema Validation Gate" docs/codex docs/canon >/dev/null 2>&1
   status=1
 fi
 
-if [[ ! -d "Resources/SourceAtlas" && ! -d "tools/source-atlas" ]]; then
-  echo "SA PACK SCHEMA INFO: pack schema/runtime directories not present yet; docs-only stage."
+if [[ ! -f "Native/Ambitions/Domain/SourceAtlasPackModels.swift" ]]; then
+  echo "SA PACK SCHEMA WARNING: SourceAtlasPackModels.swift not found"
+  status=1
+fi
+
+if [[ ! -f "Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift" ]]; then
+  echo "SA PACK SCHEMA WARNING: SourceAtlasPackModelsTests.swift not found"
+  status=1
+fi
+
+if [[ -f "Native/Ambitions/Domain/SourceAtlasPackModels.swift" ]]; then
+  if ! grep -q "SourceAtlasPackValidator" "Native/Ambitions/Domain/SourceAtlasPackModels.swift"; then
+    echo "SA PACK SCHEMA WARNING: SourceAtlasPackValidator not found"
+    status=1
+  fi
+
+  if ! grep -q "SourceAtlasRuntimeBoundary" "Native/Ambitions/Domain/SourceAtlasPackModels.swift"; then
+    echo "SA PACK SCHEMA WARNING: SourceAtlas runtime boundary not found"
+    status=1
+  fi
+fi
+
+if [[ -f "Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift" ]]; then
+  if ! grep -q "testUnsupportedSchemaIsRejectedByValidator" "Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift"; then
+    echo "SA PACK SCHEMA WARNING: unsupported schema rejection test not found"
+    status=1
+  fi
+
+  if ! grep -q "testRuntimeStoreBehaviorIsRejected" "Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift"; then
+    echo "SA PACK SCHEMA WARNING: runtime-store rejection test not found"
+    status=1
+  fi
 fi
 
 exit "$status"
