@@ -2,17 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: SA01 Source Atlas Canon Lock complete / Green.
-Next eligible batch: SA02 Source Atlas Gate Matrix.
-Scope: SA01 reconciled the existing Source Atlas canon into the live global
-batch train before deep AOS/LDI/source/freshness work continues. Source Atlas is
-locked as a signed, offline-first, claim-level world-source system with no
-standalone top-level source surface, no official/current requirement overclaim, no hosted AI or
-user-data-server dependency, no hidden mutation, no internet-required core
-behavior, and no one-pack-per-goal sprawl. It changed docs/state only and adds
-no Swift runtime, seed import, source pack, URL/PDF/OCR behavior, Pack Factory
-output, Freshness Broker behavior, UI, sync/account/backend service, release
-claim, legal/current-requirement claim, or platform proof.
+Current batch: SA02 Source Atlas Gate Matrix complete / Green.
+Next eligible batch: SA03 Universal Source Binder Coverage Map.
+Scope: SA02 reconciled the existing Source Atlas gate matrix into the live
+global batch train. The matrix locks hard gates for source container coverage,
+PDFKit extraction, OCR review, URL snapshots, user-provided-is-not-official,
+high-risk review, offline fallback, pack validation, private document
+protection, no-claim copy, rendered source-state proof, composable pack graph,
+goal projection, skill slicing, highest-path reuse, generated-step boundaries,
+alternative paths, option value, and projection receipts. It changed docs/state
+only and adds no Swift runtime, seed import, source pack, URL/PDF/OCR behavior,
+Pack Factory output, Freshness Broker behavior, UI, sync/account/backend
+service, release claim, legal/current-requirement claim, or platform proof.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -106,9 +107,10 @@ is complete / Accepted Yellow as AmbitionsOS Canon and Runtime Contract
 evidence. AOS02 is complete / Green as Life Graph Event Log Foundation
 evidence. AOS03 is complete / Green as Graph Delta Review Projection Store
 evidence. AOS04 is complete / Green as Control Plane Work Classifier evidence.
-SA01 is complete / Green as Source Atlas Canon Lock reconciliation. SA02 is the
-next eligible global batch under the active Source Atlas overlay before AOS12
-and other deep source/freshness-dependent AOS/LDI work continues.
+SA01 is complete / Green as Source Atlas Canon Lock reconciliation. SA02 is
+complete / Green as Source Atlas Gate Matrix reconciliation. SA03 is the next
+eligible global batch under the active Source Atlas overlay before AOS12 and
+other deep source/freshness-dependent AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

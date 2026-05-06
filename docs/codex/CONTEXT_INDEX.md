@@ -394,8 +394,16 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   top-level source surfaces, official/current requirement overclaims, hosted
   AI or user-data-server dependency, hidden mutation, internet-required core
   behavior, and one-pack-per-goal sprawl. Source Atlas Research Seeds v1 import
-  remains Yellow / pending because the local ZIP was unavailable. The next
-  eligible global batch is SA02 Source Atlas Gate Matrix.
+  remains Yellow / pending because the local ZIP was unavailable.
+- SA02 is complete Green as Source Atlas Gate Matrix reconciliation. It records
+  `docs/codex/SOURCE_ATLAS_GATE_MATRIX.md` as live gate truth for source
+  container coverage, PDFKit extraction, OCR review, URL snapshots,
+  user-provided-is-not-official, high-risk review, offline fallback, pack
+  validation, private document protection, no-claim copy, rendered source-state
+  proof, composable pack graph, goal projection, skill slicing,
+  highest-path reuse, generated-step boundaries, alternative paths, option
+  value, and projection receipts. The next eligible global batch is SA03
+  Universal Source Binder Coverage Map.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.

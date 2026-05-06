@@ -672,7 +672,19 @@ remaining sensitive intelligence work.
      claim, legal/current-requirement claim, or platform proof. Source Atlas
      Research Seeds v1 import remains Yellow / pending because the local ZIP
      was unavailable. SA02 is next.
-72B. SA02 Source Atlas Gate Matrix.
+72B. SA02 Source Atlas Gate Matrix. Completed Green on 2026-05-06 as docs/state
+     reconciliation of the existing Source Atlas gate matrix into the live
+     global train. It locks hard gates for source container coverage, PDFKit
+     extraction, OCR review, URL snapshots, user-provided-is-not-official,
+     high-risk source review, offline fallback, pack validation,
+     revocation/rollback, private document protection, no-claim language,
+     rendered source-state proof, composable pack graph, goal projection, skill
+     slicing, highest-path reuse, generated-step boundaries, alternative paths,
+     option value, and projection receipts. It does not add Swift runtime, seed
+     data, source packs, URL/PDF/OCR behavior, Pack Factory output, Freshness
+     Broker behavior, UI, sync/account/backend service, release claim,
+     legal/current-requirement claim, or platform proof. SA03 is next.
+72C. SA03 Universal Source Binder Coverage Map.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.
