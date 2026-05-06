@@ -103,6 +103,6 @@ struct NextStepLiveActivityWidget: Widget {
     }
 
     private func accessibilityLabel(state: NextStepActivityAttributes.ContentState) -> String {
-        "\(state.stateLabel). \(state.title). \(state.detail). \(state.privacyLabel). \(state.leaseLabel)."
+        state.accessibilitySummary
     }
 }

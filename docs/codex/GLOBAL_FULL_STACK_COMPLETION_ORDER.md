@@ -419,7 +419,17 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     persistence/schema change, privacy manifest change, sync/account/backend
     behavior, legal/privacy/release claim, App Store claim, TestFlight claim,
     physical-device proof, or public accessibility claim.
-64. PFC16 Live Activities Implementation And Tests.
+64. PFC16 Live Activities Implementation And Tests. Completed Green on
+    2026-05-06 as bounded ActivityKit source hardening and focused-test
+    evidence: stale or unavailable Live Activity content collapses to
+    open/confirm copy, spoken accessibility summary uses the same redacted
+    state, lifecycle decision ends when no concrete step exists, and
+    `origin=live_activity` deep links remain bounded. It adds no new Live
+    Activity candidate, entitlement, signing, project/workflow/dependency
+    change, persistence/schema change, privacy manifest change,
+    sync/account/backend behavior, legal/privacy/release claim, App Store
+    claim, TestFlight claim, physical-device proof, or public accessibility
+    claim.
 65. PFC18 App Intents / Shortcuts Implementation And Tests.
 66. PFC20 Notifications / Calendar / Reminders Implementation Proof.
 67. PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral.

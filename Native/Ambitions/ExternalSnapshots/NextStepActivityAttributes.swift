@@ -18,6 +18,10 @@ struct NextStepActivityAttributes: ActivityAttributes {
         let deepLinkURLString: String
         let endsAt: String
 
+        var accessibilitySummary: String {
+            "\(stateLabel). \(title). \(detail). \(privacyLabel). \(leaseLabel)."
+        }
+
         init(
             goalID: String,
             stepID: String,
@@ -72,8 +76,8 @@ struct NextStepActivityAttributes: ActivityAttributes {
             self.init(
                 goalID: reference.goalID,
                 stepID: stepID,
-                title: glance.ambientState?.focus.title ?? "Focus step ready",
-                detail: glance.ambientState?.focus.detail ?? "Return to the bounded next step.",
+                title: Self.title(for: glance),
+                detail: Self.detail(for: glance),
                 leaseLabel: glance.continuity.lease.freshnessLabel,
                 syncLabel: glance.continuity.syncHealth.label,
                 urgency: glance.urgency,
@@ -151,12 +155,48 @@ struct NextStepActivityAttributes: ActivityAttributes {
             case .current:
                 return "Current focus window"
             case .stale:
-                return "May need refresh"
+                return "Open Ambitions to refresh"
             case .unavailable:
                 return "Open Ambitions to confirm"
+            }
+        }
+
+        private static func title(for glance: ExternalSurfaceGlanceState) -> String {
+            switch glance.continuity.lease.status {
+            case .current:
+                return glance.ambientState?.focus.title ?? "Focus step ready"
+            case .stale:
+                return "Open Ambitions to refresh"
+            case .unavailable:
+                return "Open Ambitions"
+            }
+        }
+
+        private static func detail(for glance: ExternalSurfaceGlanceState) -> String {
+            switch glance.continuity.lease.status {
+            case .current:
+                return glance.ambientState?.focus.detail ?? "Return to the bounded next step."
+            case .stale, .unavailable:
+                return "Confirm the latest local state in Ambitions."
             }
         }
     }
 
     let contextID: String
+}
+
+enum NextStepLiveActivityLifecycleDecision: Equatable {
+    case end
+    case requestOrUpdate(NextStepActivityAttributes.ContentState)
+
+    static func evaluate(
+        snapshot: ExternalSurfaceSnapshot?,
+        now: Date
+    ) -> NextStepLiveActivityLifecycleDecision {
+        guard let contentState = NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now) else {
+            return .end
+        }
+
+        return .requestOrUpdate(contentState)
+    }
 }

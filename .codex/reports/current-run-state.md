@@ -2,13 +2,14 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: PFC14 WidgetKit Implementation And Tests complete / Green.
-Next eligible batch: PFC16 Live Activities Implementation And Tests.
-Scope: PFC14 hardened the existing widget projection path so stale or
-unavailable snapshots collapse to open/refresh copy and suppress ambient
-variant rows. Focused tests prove missing snapshot fallback, stale copy, stale
-row suppression, and private ambient text not appearing in widget accessibility
-output. It adds no new widget family, entitlement, signing, project/workflow/
+Current batch: PFC16 Live Activities Implementation And Tests complete / Green.
+Next eligible batch: PFC18 App Intents / Shortcuts Implementation And Tests.
+Scope: PFC16 hardened the existing ActivityKit `Active Step Focus Window` source
+path so stale or unavailable Live Activity state collapses to open/confirm copy
+instead of carrying ambient focus title/detail text. Focused tests prove stale
+privacy copy, stale ambient text suppression, accessibility-summary redaction,
+safe live-activity deep links, and ending when no concrete step exists. It adds
+no new Live Activity candidate, entitlement, signing, project/workflow/
 dependency change, persistence/schema change, privacy manifest change,
 sync/account/backend behavior, AI/LDI runtime, legal/privacy/release claim, App
 Store claim, TestFlight claim, physical-device proof, or public accessibility
@@ -77,8 +78,9 @@ Degraded State Objectization evidence. FCP26 is complete / Green as Iconography
 / Status Grammar Hardening evidence. PFC10 is complete / Green as CloudKit
 Schema / Zone / Conflict Model contract evidence. PFC11 is complete / Green as
 explicit local-only sync closure evidence. PFC14 is complete / Green as
-WidgetKit projection hardening and focused-test evidence. PFC16 is the next
-eligible global batch.
+WidgetKit projection hardening and focused-test evidence. PFC16 is complete /
+Green as Live Activity source hardening and focused-test evidence. PFC18 is the
+next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

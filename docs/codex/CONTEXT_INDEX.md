@@ -214,8 +214,13 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   focused-test evidence. Stale or unavailable snapshots collapse to open/
   refresh copy, suppress ambient variant rows, preserve widget deep-link
   routing, and avoid exposing private ambient titles or IDs through widget
-  accessibility output. The next eligible global batch is PFC16 Live Activities
-  Implementation And Tests.
+  accessibility output.
+- PFC16 is complete Green as bounded ActivityKit source hardening and
+  focused-test evidence. Stale or unavailable Live Activity content collapses
+  to open/confirm copy, spoken accessibility summary uses the same redacted
+  state, lifecycle decision ends when no concrete step exists, and
+  `origin=live_activity` deep links remain bounded. The next eligible global
+  batch is PFC18 App Intents / Shortcuts Implementation And Tests.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -635,8 +640,9 @@ Empty / Degraded State Objectization evidence. FCP26 is complete Green as
 bounded Iconography / Status Grammar Hardening evidence. PFC10 is complete
 Green as docs-only CloudKit Schema / Zone / Conflict Model contract evidence.
 PFC11 is complete Green as explicit local-only sync closure evidence. PFC14 is
-complete Green as bounded WidgetKit projection hardening evidence, and the
-full-stack order selects PFC16 next.
+complete Green as bounded WidgetKit projection hardening evidence. PFC16 is
+complete Green as bounded ActivityKit source hardening evidence, and the
+full-stack order selects PFC18 next.
 
 
 ## Living Dream Intelligence Context

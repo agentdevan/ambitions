@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC11 Green; PFC12 Green; PFC13 Green; PFC14 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC11 Green; PFC12 Green; PFC13 Green; PFC14 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC16 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -242,6 +242,15 @@ Type: Implementation/tests if approved.
 Owner: Live Activities.
 Goal: Implement bounded ActivityKit surfaces with deep links, privacy redaction, stale/ended states, Dynamic Type/accessibility proof.
 Required result: ActivityKit proof or safe deferral.
+Status: Green as bounded ActivityKit source hardening and focused-test
+evidence. Stale or unavailable Live Activity content collapses to open/confirm
+copy, spoken accessibility summary uses the same redacted state, lifecycle
+decision ends when no concrete step exists, and `origin=live_activity` deep
+links remain bounded. PFC16 adds no new Live Activity candidate, entitlement,
+signing, project/workflow/dependency change, persistence/schema change, privacy
+manifest change, sync/account/backend behavior, legal/privacy/release claim,
+App Store claim, TestFlight claim, physical-device proof, or public
+accessibility claim.
 
 ### PFC17 — App Intents / Shortcuts / Spotlight Strategy
 

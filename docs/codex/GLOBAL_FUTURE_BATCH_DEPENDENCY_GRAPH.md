@@ -95,6 +95,15 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   signing, project/workflow/dependency, persistence/schema, privacy manifest,
   sync/account/backend, release, legal/privacy, TestFlight, App Store,
   physical-device, or public accessibility claims.
+- PFC16 is complete as bounded ActivityKit source hardening and focused-test
+  evidence. Stale or unavailable Live Activity content collapses to
+  open/confirm copy, spoken accessibility summary uses the same redacted state,
+  lifecycle decision ends when no concrete step exists, and
+  `origin=live_activity` deep links remain bounded without new Live Activity
+  candidates, entitlement, signing, project/workflow/dependency,
+  persistence/schema, privacy manifest, sync/account/backend, release,
+  legal/privacy, TestFlight, App Store, physical-device, or public accessibility
+  claims.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
 - AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.
@@ -201,6 +210,12 @@ boundary: Active Step Focus Window is the only allowed launch candidate, broader
 Live Activity candidates stay deferred to named proof batches, and Lock Screen /
 Dynamic Island, device, accessibility, legal/privacy, App Store, TestFlight, and
 release claims remain blocked until evidence exists.
+
+PFC16 is complete Green as of 2026-05-06. Later Live Activity expansion must
+continue to use the PFC15 strategy and PFC16 stale/unavailable content-state
+contract; PFC16 does not provide rendered Lock Screen / Dynamic Island,
+physical-device, signed-archive, App Store, TestFlight, legal/privacy, release,
+or public accessibility proof.
 
 PFC17 is complete Green as of 2026-05-05. Future App Intent, Shortcut, Siri, or
 Spotlight implementation must use

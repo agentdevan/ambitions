@@ -277,14 +277,92 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
 
         let state = try XCTUnwrap(NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now))
 
-        XCTAssertEqual(state.title, "Focus step ready")
-        XCTAssertEqual(state.detail, "Return to the bounded next step.")
+        XCTAssertEqual(state.title, "Open Ambitions to refresh")
+        XCTAssertEqual(state.detail, "Confirm the latest local state in Ambitions.")
         XCTAssertEqual(state.privacyLabel, "This may be behind. Open Ambitions to refresh.")
-        XCTAssertEqual(state.stateLabel, "May need refresh")
+        XCTAssertEqual(state.stateLabel, "Open Ambitions to refresh")
         XCTAssertEqual(state.deepLinkURLString, "ambitions://goal/goal-private?origin=live_activity")
         XCTAssertEqual(state.endsAt, "2026-04-15T13:00:00Z")
         XCTAssertFalse(state.title.contains("Private Tax Debt Goal"))
         XCTAssertFalse(state.detail.contains("private numbers"))
+    }
+
+    func testPFC16LiveActivitySuppressesPrivateAmbientCopyWhenSnapshotIsStale() throws {
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2026-04-15T12:00:00Z"))
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T11:00:00Z",
+            nextAction: ExternalSurfaceNextAction(
+                goalID: "private-goal-id",
+                stepID: "private-step-id",
+                display: ExternalSurfaceDisplayMetadata(
+                    templateKey: "next_tiny_step",
+                    goalMode: .project,
+                    stepState: .planned,
+                    urgency: .soon,
+                    timing: .window
+                )
+            ),
+            ambientState: ExternalSurfaceAmbientState(
+                today: ExternalSurfaceVariantState(
+                    kind: .today,
+                    title: "Private medical task",
+                    detail: "Call the clinic",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .elevated
+                ),
+                focus: ExternalSurfaceVariantState(
+                    kind: .focus,
+                    title: "Private focus window",
+                    detail: "Discuss protected details",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                ),
+                goal: ExternalSurfaceVariantState(
+                    kind: .goal,
+                    title: "Private goal",
+                    detail: "Sensitive goal",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Goals", surface: .tab, tab: "goals"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                ),
+                plan: ExternalSurfaceVariantState(
+                    kind: .plan,
+                    title: "Private plan",
+                    detail: "Sensitive plan",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Plan", surface: .tab, tab: "plan"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                )
+            ),
+            continuity: ExternalSurfaceContinuityState(
+                lease: ExternalSurfaceNowStateLease(
+                    status: .stale,
+                    generatedAt: "2026-04-15T11:00:00Z",
+                    freshnessLabel: "This may be behind",
+                    staleActionLabel: "Open Ambitions to refresh"
+                ),
+                syncHealth: ExternalSurfaceSyncHealth(
+                    state: .stale,
+                    label: "Local state may be behind",
+                    detail: "Open Ambitions before acting from this surface."
+                ),
+                receipt: ExternalSurfaceContinuityReceipt(origin: .liveActivity, label: "Opened from Live Activity")
+            )
+        )
+
+        let state = try XCTUnwrap(NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now))
+
+        XCTAssertEqual(state.title, "Open Ambitions to refresh")
+        XCTAssertEqual(state.detail, "Confirm the latest local state in Ambitions.")
+        XCTAssertFalse(state.accessibilitySummary.contains("Private focus window"))
+        XCTAssertFalse(state.accessibilitySummary.contains("private-goal-id"))
+        XCTAssertFalse(state.accessibilitySummary.contains("private-step-id"))
     }
 
     func testD24LiveActivityDoesNotStartWithoutAConcreteStep() throws {
@@ -296,6 +374,19 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                 snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nil),
                 now: now
             )
+        )
+    }
+
+    func testPFC16LiveActivityLifecycleDecisionEndsWithoutConcreteStep() throws {
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2026-04-15T12:00:00Z"))
+
+        XCTAssertEqual(NextStepLiveActivityLifecycleDecision.evaluate(snapshot: nil, now: now), .end)
+        XCTAssertEqual(
+            NextStepLiveActivityLifecycleDecision.evaluate(
+                snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nil),
+                now: now
+            ),
+            .end
         )
     }
 

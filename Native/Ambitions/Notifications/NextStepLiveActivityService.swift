@@ -9,7 +9,8 @@ actor NextStepLiveActivityService: NextStepLiveActivityServicing {
     func refresh(from snapshot: ExternalSurfaceSnapshot?, now: Date) async {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
 
-        guard let contentState = NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now) else {
+        let decision = NextStepLiveActivityLifecycleDecision.evaluate(snapshot: snapshot, now: now)
+        guard case let .requestOrUpdate(contentState) = decision else {
             await endAll()
             return
         }
