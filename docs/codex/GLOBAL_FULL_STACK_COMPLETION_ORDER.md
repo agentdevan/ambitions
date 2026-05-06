@@ -216,7 +216,14 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     manifest relationship, third-party SDK/logging/analytics/crash boundaries,
     user-generated proof/evidence, human legal review checklist, and
     launch-blocking legal proof stops without claiming legal compliance.
-41. PFC27 Safety / Professional Boundary / Crisis Policy.
+41. PFC27 Safety / Professional Boundary / Crisis Policy. Completed Green on
+    2026-05-05 as docs/safety policy and fixture matrix. It defines health,
+    legal, financial, crisis, education, career, minors, illegal/harmful act,
+    Found Life/Searchable Life Recall, AOS, LDI, notification, widget, Live
+    Activity, and App Intent safety/professional-boundary rules without
+    claiming runtime enforcement, professional review, crisis support, legal
+    compliance, App Store readiness, TestFlight readiness, release readiness,
+    physical-device proof, or public accessibility conformance.
 42. PFC28 Security Threat Model And Secrets Audit.
 43. PFC29 Logging / Analytics / Observability Policy.
 44. PFC30 Performance Budget And Instruments Plan.

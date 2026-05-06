@@ -222,6 +222,17 @@ does not certify legal/privacy compliance, and does not provide human legal
 signoff, App Store Connect action, TestFlight readiness, release readiness,
 physical-device proof, or public accessibility conformance.
 
+PFC27 is complete Green as of 2026-05-05. Future safety, crisis,
+professional-boundary, regulated-domain, health, legal, financial, education,
+career, minors, student-data, Found Life, Searchable Life Recall, AOS, LDI,
+notification, widget, Live Activity, App Intent, or external-surface safety
+claims must use
+`docs/canon/Ambitions_Safety_Professional_Boundary_Crisis_Policy.md` as the
+policy boundary. PFC27 does not implement runtime enforcement, crisis support,
+moderation, professional review, hosted AI, user-data server, legal/privacy
+compliance, App Store readiness, TestFlight readiness, release readiness,
+physical-device proof, or public accessibility conformance.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

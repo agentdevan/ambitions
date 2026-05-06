@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -307,6 +307,14 @@ Type: Docs/tests.
 Owner: Safety.
 Goal: Define health/legal/financial/crisis/professional advice boundaries across app, AOS, LDI, notifications, widgets.
 Required result: policy fixtures and copy boundaries.
+Status: Green as docs/safety policy and policy-fixture matrix. It creates
+`docs/canon/Ambitions_Safety_Professional_Boundary_Crisis_Policy.md`, defines
+health, legal, financial, crisis, education, career, minors, illegal/harmful
+act, Found Life / Searchable Life Recall, AOS, LDI, notification, widget, Live
+Activity, and App Intent safety/professional-boundary rules, and does not
+implement runtime enforcement, crisis support, professional review, moderation,
+legal/privacy compliance, App Store readiness, TestFlight readiness, release
+readiness, physical-device proof, or public accessibility conformance.
 
 ### PFC28 — Security Threat Model And Secrets Audit
 

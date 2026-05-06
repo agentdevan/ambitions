@@ -100,7 +100,8 @@ PFC21. PFC21 is complete / Accepted Yellow as StoreKit / monetization strategy.
 PFC24 is complete / Green as Privacy Data Map And App Privacy Labels evidence.
 PFC25 is complete / Green as Privacy Manifest / Required-Reason API Audit
 evidence. PFC26 is complete / Green as Terms / Privacy Policy / Legal Review
-Packet evidence, so the next global batch is PFC27.
+Packet evidence. PFC27 is complete / Green as Safety / Professional Boundary /
+Crisis Policy evidence, so the next global batch is PFC28.
 Found Life
 FL01 is complete / Green as product-soul source truth
 with accepted Yellow order reconciliation because FCP17 landed before the
@@ -123,7 +124,7 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 014 | FCP07 Reality Rail Continuity | FCP | Implementation | Completed Green on 2026-05-05 as Today-owned continuity spine connecting Start Here, Now/Next/Later, closure, proof, and pressure without hidden mutation. | FCP05/FCP06. | Complete; next FCP13A. |
 | 015 | FCP13A Action Closure Diamond | FCP split | Implementation | Completed Green on 2026-05-05 as Today-owned closure / decision object with Outcome, Consequence, Proof, Recovery, accessibility, Dynamic Type, and Reduce Motion equivalents. | FCP05-FCP07; PD04; FCP06. | Complete; next FCP08. |
 | 016 | FCP08 Ambition Meridian Shell | FCP | Implementation | Completed Green on 2026-05-05 as default Meridian shell presentation with native rollback, five destinations, receipt overlay zone contract, and focused shell proof. | FCP05-FCP07 preferred; SI03/SI17. | Complete; next FCP09. |
-| 017 | FCP09 Motion / Haptics / Reduced Motion Proof | FCP | Implementation | Completed Green on 2026-05-05 as shared object-motion policy evidence for Start Here, Reality Rail, Receipt Drawer, Source Fold, MissionControlTimeSpine, Action Closure Diamond, LifeShape, and Capture with non-motion cues, Reduce Motion equivalents, bounded user-initiated haptic policy, preview evidence, and focused tests. | FCP05-FCP08; SI12; DAV10. | Complete; PFC13, FVQ01-FVQ05, MEG01, PFC15, PFC17, PFC19, PFC21, PFC24, PFC25, and PFC26 are also complete; global order next selects PFC27. |
+| 017 | FCP09 Motion / Haptics / Reduced Motion Proof | FCP | Implementation | Completed Green on 2026-05-05 as shared object-motion policy evidence for Start Here, Reality Rail, Receipt Drawer, Source Fold, MissionControlTimeSpine, Action Closure Diamond, LifeShape, and Capture with non-motion cues, Reduce Motion equivalents, bounded user-initiated haptic policy, preview evidence, and focused tests. | FCP05-FCP08; SI12; DAV10. | Complete; PFC13, FVQ01-FVQ05, MEG01, PFC15, PFC17, PFC19, PFC21, PFC24, PFC25, PFC26, and PFC27 are also complete; global order next selects PFC28. |
 | 018 | FCP22 Personal System Center Refactor | FCP | Implementation | You root can now compose trust/history/defaults into one center. | PD15-PD16; FCP06/FCP17; ME06. | Single-batch. |
 | 019 | FCP23 Memory Lens / External Brain Visual Layer | FCP | Implementation | Memory Lens belongs after Personal System Center trust controls. | FCP22; EB memory/trust evidence. | Single-batch. |
 | 020 | FCP24 Appearance Studio | FCP | Implementation | Appearance can preview real object samples after Start Here/Rail/You exist. | FCP05/FCP07/FCP22. | Single-batch. |

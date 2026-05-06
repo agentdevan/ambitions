@@ -77,6 +77,15 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   legal review checklist, and launch-blocking legal proof stops without
   claiming legal compliance or public launch readiness. The next eligible
   global batch is PFC27 Safety / Professional Boundary / Crisis Policy.
+- PFC27 is complete Green as docs/safety policy and policy-fixture matrix. It
+  defines health, legal, financial, crisis, education, career, minors,
+  illegal/harmful act, Found Life/Searchable Life Recall, AOS, LDI,
+  notification, widget, Live Activity, and App Intent safety/professional
+  boundary rules without claiming runtime enforcement, professional review,
+  crisis support, legal/privacy compliance, App Store readiness, TestFlight
+  readiness, release readiness, physical-device proof, or public accessibility
+  conformance. The next eligible global batch is PFC28 Security Threat Model
+  And Secrets Audit.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -473,8 +482,9 @@ Focus / Calendar / Reminders integration strategy. PFC21 is complete Accepted
 Yellow as StoreKit / monetization strategy. PFC24 is complete Green as Privacy
 Data Map And App Privacy Labels evidence. PFC25 is complete Green as Privacy
 Manifest / Required-Reason API Audit evidence. PFC26 is complete Green as
-Terms / Privacy Policy / Legal Review Packet evidence, and the full-stack
-order selects PFC27 next.
+Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is complete Green
+as Safety / Professional Boundary / Crisis Policy evidence, and the full-stack
+order selects PFC28 next.
 
 
 ## Living Dream Intelligence Context
