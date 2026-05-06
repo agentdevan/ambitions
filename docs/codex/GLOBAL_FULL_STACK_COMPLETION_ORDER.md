@@ -589,7 +589,18 @@ remaining sensitive intelligence work.
      classification, tool calling, UI, external-surface behavior, or release/
      platform claims. Yellow owners: later HPS Codex OS scripts/skills and
      future typed privacy/local-adapter/evaluation implementation batches.
-77H. HPS10 AI Governance + Evaluation Assurance Lab.
+77H. HPS10 AI Governance + Evaluation Assurance Lab. Completed Accepted
+     Yellow on 2026-05-06 as docs-evaluation governance architecture in
+     `docs/canon/Ambitions_AI_Governance_Evaluation_Assurance_Lab_Architecture.md`.
+     It defines assurance object families, required fields, AOS golden
+     scenarios, LDI red-team expansion, recommendation regression oracle,
+     privacy leak scenarios, source/professional-boundary scenarios, claim
+     truth tests, AI risk register, continuous assurance ledger, and scenario
+     registry/regression oracle/risk register/assurance ledger/claim truth API
+     contract families without implementing tests, fixtures, CI, telemetry,
+     analytics, model evaluation, UI, external-surface behavior, or release/
+     platform claims. Yellow owners: later HPS Codex OS scripts/skills and
+     future typed fixture/evaluation implementation batches.
 78H. HPS11 Vertical Expansion + Revenue Architecture.
 79H. HPS12 Singular Experience + Acquisition Readiness Lock.
 

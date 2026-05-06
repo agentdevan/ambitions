@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 Accepted Yellow; HPS09 Accepted Yellow; HPS10 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 Accepted Yellow; HPS09 Accepted Yellow; HPS10 Accepted Yellow; HPS11 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -226,6 +226,16 @@ Owner: Evaluation / AI Governance / Safety.
 Goal: Define AOS golden scenarios, LDI red-team expansion, recommendation regression oracle, privacy leak scenarios, minor/student-data scenarios, career false-certainty scenarios, source-stale scenarios, professional-boundary scenarios, unsafe dream scenarios, memory hallucination scenarios, open-loop recovery scenarios, ADHD overload, new-baby overload, claim truth tests, AI risk register, continuous assurance ledger.
 Required result: assurance lab contract.
 Acceptance: intelligence cannot remain vibe-based; no unsafe claim can pass silently.
+Status: Accepted Yellow as docs-evaluation governance architecture in
+`docs/canon/Ambitions_AI_Governance_Evaluation_Assurance_Lab_Architecture.md`.
+HPS10 defines assurance object families, required fields, AOS golden
+scenarios, LDI red-team expansion, recommendation regression oracle, privacy
+leak scenarios, source/professional-boundary scenarios, claim truth tests, AI
+risk register, continuous assurance ledger, and scenario registry/regression
+oracle/risk register/assurance ledger/claim truth contract families. Yellow is
+owned by later HPS Codex OS work for missing physical HPS advisory
+scripts/skills and by AOS18/AOS25/AOS26/LDI21/CQS/AQOS/evaluation batches for
+future typed fixture, test, and assurance-ledger proof.
 
 ### HPS11 — Vertical Expansion + Revenue Architecture
 

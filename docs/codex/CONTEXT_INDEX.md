@@ -322,8 +322,19 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   permission read/permission proposal/local adapter evaluation/structured
   extraction/tool approval contract families without runtime/model/tool/UI
   implementation. Yellow owners: later HPS Codex OS scripts/skills and future
-  typed privacy/local-adapter/evaluation implementation batches. The next
-  eligible global batch is HPS10 AI Governance + Evaluation Assurance Lab.
+  typed privacy/local-adapter/evaluation implementation batches. The next HPS
+  batch was HPS10.
+- HPS10 is complete Accepted Yellow as docs-evaluation governance AI
+  Governance and Evaluation Assurance Lab architecture. It adds assurance
+  object families, required fields, AOS golden scenarios, LDI red-team
+  expansion, recommendation regression oracle, privacy leak scenarios,
+  source/professional-boundary scenarios, claim truth tests, AI risk register,
+  continuous assurance ledger, and scenario registry/regression oracle/risk
+  register/assurance ledger/claim truth contract families without tests,
+  fixtures, CI, telemetry, analytics, model evaluation, AOS runtime, LDI
+  runtime, or UI implementation. Yellow owners: later HPS Codex OS scripts/
+  skills and future typed fixture/evaluation implementation batches. The next
+  eligible global batch is HPS11 Vertical Expansion + Revenue Architecture.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -760,8 +771,9 @@ Recommendation Quality and Start Here Brain architecture evidence. HPS07 is
 complete Accepted Yellow as Option Value and Pivot Preservation architecture
 evidence. HPS08 is complete Accepted Yellow as Living Dream Compiler
 architecture evidence. HPS09 is complete Accepted Yellow as Privacy Memory
-Permission and Local Intelligence Adapter architecture evidence, and the
-full-stack order selects HPS10 next.
+Permission and Local Intelligence Adapter architecture evidence. HPS10 is
+complete Accepted Yellow as AI Governance and Evaluation Assurance Lab
+architecture evidence, and the full-stack order selects HPS11 next.
 
 
 ## Living Dream Intelligence Context

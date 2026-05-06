@@ -64,7 +64,10 @@ If the live run has advanced beyond PFC30 or FCP22 by the time this overlay is r
      Accepted Yellow on 2026-05-06 as docs-privacy intelligence architecture.
      Yellow owners: later HPS Codex OS scripts/skills and future typed privacy/
      local-adapter/evaluation implementation batches.
-54H. HPS10 AI Governance + Evaluation Assurance Lab.
+54H. HPS10 AI Governance + Evaluation Assurance Lab. Completed Accepted
+     Yellow on 2026-05-06 as docs-evaluation governance architecture. Yellow
+     owners: later HPS Codex OS scripts/skills and future typed fixture/
+     evaluation implementation batches.
 55H. HPS11 Vertical Expansion + Revenue Architecture.
 56H. HPS12 Singular Experience + Acquisition Readiness Lock.
 

@@ -179,6 +179,14 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   hidden mutation or model-required core behavior rule. Yellow owners: later
   HPS Codex OS scripts/skills and future typed privacy/local-adapter/evaluation
   implementation batches.
+- HPS10 is complete Accepted Yellow as of 2026-05-06. Future AOS, LDI,
+  recommendation, source, proof, memory, privacy, external-surface, safety,
+  claim-truth, and evaluation work must inherit assurance object families,
+  golden scenarios, LDI red-team expansion, recommendation regression oracle,
+  privacy leak scenarios, source/professional-boundary scenarios, claim truth
+  tests, AI risk register, continuous assurance ledger, and no unsafe claim can
+  pass silently rule. Yellow owners: later HPS Codex OS scripts/skills and
+  future typed fixture/evaluation implementation batches.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.

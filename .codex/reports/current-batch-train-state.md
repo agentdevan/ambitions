@@ -2,21 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS09 Privacy / Memory Permission + Local Intelligence Adapter complete / Accepted Yellow.
-Next eligible batch: HPS10 AI Governance + Evaluation Assurance Lab.
-Scope: HPS09 added docs-privacy intelligence architecture. It defines memory
-permission object families, required privacy fields, permission states,
-sensitive area classes, external-surface redaction, deterministic fallback tier
-ladder, structured extraction boundary, tool approval states, performance/
-battery boundaries, surface projection rules, and memory permission read/
-permission proposal/local adapter evaluation/structured extraction/tool
-approval contract families. It adds no production Swift, schema, migration,
-memory permission runtime, model runtime, extraction, classification, tool
-calling, sync/account/backend, hosted AI, UI, external-surface behavior,
-professional advice,
-release claim, App Store claim,
-TestFlight claim, physical-device proof, public accessibility claim, or
-acquisition outcome claim.
+Current batch: HPS10 AI Governance + Evaluation Assurance Lab complete / Accepted Yellow.
+Next eligible batch: HPS11 Vertical Expansion + Revenue Architecture.
+Scope: HPS10 added docs-evaluation governance architecture. It defines
+assurance object families, required fields, AOS golden scenarios, LDI red-team
+expansion, recommendation regression oracle, privacy leak scenarios,
+source/professional-boundary scenarios, claim truth tests, AI risk register,
+continuous assurance ledger, and scenario registry/regression oracle/risk
+register/assurance ledger/claim truth contract families. It adds no production
+Swift, tests, fixtures, CI, telemetry, analytics, model evaluation, AOS runtime,
+LDI runtime, UI, external-surface behavior, professional advice, release claim,
+App Store claim, TestFlight claim, physical-device proof, public accessibility
+claim, or acquisition outcome claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -102,8 +99,9 @@ HPS07 is complete / Accepted Yellow as Option Value and Pivot Preservation
 architecture evidence. HPS08 is complete / Accepted Yellow as Living Dream
 Compiler architecture evidence. HPS09 is complete / Accepted Yellow as Privacy
 Memory Permission and Local Intelligence Adapter architecture evidence. HPS10
-is the next eligible global batch, and AOS01 remains blocked until HPS01-HPS12
-are Green or accepted Yellow with owners.
+is complete / Accepted Yellow as AI Governance and Evaluation Assurance Lab
+architecture evidence. HPS11 is the next eligible global batch, and AOS01
+remains blocked until HPS01-HPS12 are Green or accepted Yellow with owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
