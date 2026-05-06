@@ -538,7 +538,17 @@ remaining sensitive intelligence work.
      sync/cloud/account, external recall, UI, or release/platform claims.
      Yellow owners: later HPS Codex OS scripts/skills and future typed memory/
      recall implementation batches.
-73H. HPS06 Recommendation Quality + Start Here Brain Architecture.
+73H. HPS06 Recommendation Quality + Start Here Brain Architecture. Completed
+     Accepted Yellow on 2026-05-06 as docs-domain architecture in
+     `docs/canon/Ambitions_Recommendation_Quality_Start_Here_Brain_Architecture.md`.
+     It defines candidate families, candidate evidence fields, eligibility and
+     rejection gates, explanation contract, recovery behavior, regression
+     oracle scenarios, Start Here projection rules, and candidate generation/
+     rejection/explanation/evaluation API contract families without
+     implementing recommendation runtime, model logic, personalization, UI,
+     external-surface behavior, or release/platform claims. Yellow owners:
+     later HPS Codex OS scripts/skills and future typed recommendation/
+     evaluation implementation batches.
 74H. HPS07 Option Value + Pivot Preservation Architecture.
 75H. HPS08 Living Dream Compiler Upgrade.
 76H. HPS09 Privacy / Memory Permission + Local Intelligence Adapter.

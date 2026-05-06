@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -153,6 +153,15 @@ Owner: Recommendation Kernel / Today.
 Goal: Define candidate generation, candidate rejection, why-this, why-now, why-not-alternatives, time-fit proof, source/freshness proof, proof/commitment context, recovery behavior, privacy constraints, forbidden candidates, evidence strength, and regression oracle.
 Required result: Start Here quality contract that future AOS14/FCP/FVQ must enforce.
 Acceptance: no fake confidence scoring or ungrounded AI suggestion behavior.
+Status: Accepted Yellow as docs-domain architecture in
+`docs/canon/Ambitions_Recommendation_Quality_Start_Here_Brain_Architecture.md`.
+HPS06 defines candidate families, candidate evidence fields, eligibility and
+rejection gates, explanation contract, recovery behavior, regression oracle
+scenarios, Start Here projection rules, and candidate generation/rejection/
+explanation/evaluation API contract families. Yellow is owned by later HPS
+Codex OS work for missing physical HPS advisory scripts/skills and by
+AOS14/AOS18/FCP/FVQ/evaluation batches for future typed recommendation
+behavior and proof.
 
 ### HPS07 — Option Value + Pivot Preservation Architecture
 

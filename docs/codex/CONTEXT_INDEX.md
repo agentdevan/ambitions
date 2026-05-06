@@ -283,8 +283,16 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   boundaries, and memory read/proposal/recall-query/projection contract
   families without durable memory/search/index/AI-memory/export/delete runtime
   implementation. Yellow owners: later HPS Codex OS scripts/skills and future
-  typed memory/recall implementation batches. The next eligible global batch is
-  HPS06 Recommendation Quality + Start Here Brain Architecture.
+  typed memory/recall implementation batches. The next HPS batch was HPS06.
+- HPS06 is complete Accepted Yellow as docs-domain Recommendation Quality and
+  Start Here Brain architecture. It adds candidate families, candidate evidence
+  fields, eligibility and rejection gates, explanation contract, recovery
+  behavior, regression oracle scenarios, Start Here projection rules, and
+  candidate generation/rejection/explanation/evaluation contract families
+  without recommendation runtime/model/UI implementation. Yellow owners: later
+  HPS Codex OS scripts/skills and future typed recommendation/evaluation
+  implementation batches. The next eligible global batch is HPS07 Option Value
+  + Pivot Preservation Architecture.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -716,7 +724,9 @@ Progress Graph API architecture evidence. HPS03 is complete Accepted Yellow as
 Verified Proof Ledger and proof portability architecture evidence. HPS04 is
 complete Accepted Yellow as Source Truth and Requirement Graph architecture
 evidence. HPS05 is complete Accepted Yellow as Commitment Memory and Searchable
-Life Recall architecture evidence, and the full-stack order selects HPS06 next.
+Life Recall architecture evidence. HPS06 is complete Accepted Yellow as
+Recommendation Quality and Start Here Brain architecture evidence, and the
+full-stack order selects HPS07 next.
 
 
 ## Living Dream Intelligence Context

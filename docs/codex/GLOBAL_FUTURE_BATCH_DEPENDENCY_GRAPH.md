@@ -147,6 +147,13 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   and no silent memory creation/promotion/recall/externalization rule. Yellow
   owners: later HPS Codex OS scripts/skills and future typed memory/recall
   implementation batches.
+- HPS06 is complete Accepted Yellow as of 2026-05-06. Future recommendation,
+  Start Here, AOS, LDI, FCP, FVQ, proof, source, memory, and evaluation work
+  must inherit candidate families, candidate evidence fields, eligibility and
+  rejection gates, explanation contract, recovery behavior, regression oracle,
+  one-primary-object Start Here projection, and no confidence-score/hidden-
+  mutation/professional-advice rule. Yellow owners: later HPS Codex OS scripts/
+  skills and future typed recommendation/evaluation implementation batches.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.

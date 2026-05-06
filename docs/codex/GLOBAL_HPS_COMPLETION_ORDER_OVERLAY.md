@@ -48,7 +48,10 @@ If the live run has advanced beyond PFC30 or FCP22 by the time this overlay is r
      Accepted Yellow on 2026-05-06 as docs-domain architecture. Yellow owners:
      later HPS Codex OS scripts/skills and future typed memory/recall
      implementation batches.
-50H. HPS06 Recommendation Quality + Start Here Brain Architecture.
+50H. HPS06 Recommendation Quality + Start Here Brain Architecture. Completed
+     Accepted Yellow on 2026-05-06 as docs-domain architecture. Yellow owners:
+     later HPS Codex OS scripts/skills and future typed recommendation/
+     evaluation implementation batches.
 51H. HPS07 Option Value + Pivot Preservation Architecture.
 52H. HPS08 Living Dream Compiler Upgrade.
 53H. HPS09 Privacy / Memory Permission + Local Intelligence Adapter.

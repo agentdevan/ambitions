@@ -2,16 +2,16 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS05 Commitment Memory + Searchable Life Recall Architecture complete / Accepted Yellow.
-Next eligible batch: HPS06 Recommendation Quality + Start Here Brain Architecture.
-Scope: HPS05 added docs-domain Commitment Memory and Searchable Life Recall
-architecture. It defines memory object families, memory state fields,
-confirmation states, recall permission states, sensitivity states, searchable
-recall contract, correction/rejection/hide/forget/delete boundaries, and memory
-read/proposal/recall-query/projection contract families. It adds no production
-Swift, schema, migration, durable memory, search index, embeddings, model
-memory, sync/account/backend, hosted AI, external recall, top-level
-destination, visible all-life memory surface, release claim, App Store claim,
+Current batch: HPS06 Recommendation Quality + Start Here Brain Architecture complete / Accepted Yellow.
+Next eligible batch: HPS07 Option Value + Pivot Preservation Architecture.
+Scope: HPS06 added docs-domain Recommendation Quality and Start Here Brain
+architecture. It defines candidate families, candidate evidence fields,
+eligibility and rejection gates, explanation contract, recovery behavior,
+regression oracle scenarios, Start Here projection rules, and candidate
+generation/rejection/explanation/evaluation contract families. It adds no
+production Swift, schema, migration, recommendation runtime, model logic,
+personalization, sync/account/backend, hosted AI, Start Here UI, external-
+surface behavior, professional advice, release claim, App Store claim,
 TestFlight claim, physical-device proof, public accessibility claim, or
 acquisition outcome claim.
 
@@ -93,9 +93,10 @@ Human Progress Graph API architecture evidence. HPS03 is complete / Accepted
 Yellow as Verified Proof Ledger and proof portability architecture evidence.
 HPS04 is complete / Accepted Yellow as Source Truth and Requirement Graph
 architecture evidence. HPS05 is complete / Accepted Yellow as Commitment Memory
-and Searchable Life Recall architecture evidence. HPS06 is the next eligible
-global batch, and AOS01 remains blocked until HPS01-HPS12 are Green or accepted
-Yellow with owners.
+and Searchable Life Recall architecture evidence. HPS06 is complete / Accepted
+Yellow as Recommendation Quality and Start Here Brain architecture evidence.
+HPS07 is the next eligible global batch, and AOS01 remains blocked until
+HPS01-HPS12 are Green or accepted Yellow with owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
