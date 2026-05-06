@@ -348,6 +348,8 @@ Acceptance: root has one primary system center; Planning Setup and Trust control
 
 ### FCP23 — Memory Lens / External Brain Visual Layer
 
+Status: Complete Green on 2026-05-05 as bounded You-owned Memory Lens
+implementation evidence.
 Type: Implementation.
 Owner: You / Memory.
 Depends on: FCP22; EB08-EB12, EB33, EB37, EB38 evidence.

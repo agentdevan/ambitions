@@ -2,13 +2,14 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP22 Personal System Center Refactor complete / Green.
-Next eligible batch: FCP23 Memory Lens / External Brain Visual Layer.
-Scope: FCP22 refactored the You root into the Personal System Center by making
-Planning Setup the first section, keeping Trust, Memory & Receipts prominent,
-and moving Profile, Personalization, and Appearance into Personal Defaults. It
-preserved the five-tab shell, existing Profile route/file compatibility, and
-all legal/privacy/release/device/accessibility claims as evidence-bound.
+Current batch: FCP23 Memory Lens / External Brain Visual Layer complete /
+Green.
+Next eligible batch: FCP24 Appearance Studio.
+Scope: FCP23 added a You-owned Memory Lens visual layer with source age,
+why-remembered text, privacy shutter posture, review state, correction posture,
+and rejection/deletion boundaries. It preserved the five-tab shell, existing
+Profile route/file compatibility, and all sync/cloud, durable-memory,
+legal/privacy/release/device/accessibility claims as evidence-bound.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -56,8 +57,9 @@ Green as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is
 complete / Green as Security Threat Model And Secrets Audit evidence. PFC29 is
 complete / Green as Logging / Analytics / Observability Policy evidence. PFC30
 is complete / Green as Performance Budget And Instruments Plan evidence. FCP22
-is complete / Green as Personal System Center Refactor evidence. FCP23 is the
-next eligible global batch. Accepted Yellow:
+is complete / Green as Personal System Center Refactor evidence. FCP23 is
+complete / Green as Memory Lens / External Brain Visual Layer evidence. FCP24
+is the next eligible global batch. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
@@ -111,7 +113,8 @@ complete / Green as docs/security threat model and secrets audit evidence.
 PFC29 is complete / Green as docs/privacy observability policy evidence. PFC30
 is complete / Green as docs/performance budget and Instruments checklist
 evidence. FCP22 is complete / Green as bounded You root Personal System Center
-implementation evidence. Later PFC implementation beyond existing test
+implementation evidence. FCP23 is complete / Green as bounded You-owned Memory
+Lens visual layer evidence. Later PFC implementation beyond existing test
 execution has not started.
 
 No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality

@@ -1090,6 +1090,12 @@ private extension RepositoryBackedProfileService {
             correctionCount: correctionCount,
             openCaptures: openCaptures
         )
+        let memoryLensItems = makeMemoryLensItems(
+            eventCount: eventCount,
+            proofFeedbackCount: proofFeedbackCount,
+            correctionCount: correctionCount,
+            openCaptures: openCaptures
+        )
         return ProfileMemoryControlState(
             title: "What Ambitions Knows",
             subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
@@ -1267,9 +1273,74 @@ private extension RepositoryBackedProfileService {
             ],
             narrativeMemories: narrativeMemories,
             conservativePatterns: conservativePatterns,
+            memoryLensItems: memoryLensItems,
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
             footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and durable rejected-memory rules remain manual/future until the safe boundary can prove the result."
         )
+    }
+
+    func makeMemoryLensItems(
+        eventCount: Int,
+        proofFeedbackCount: Int,
+        correctionCount: Int,
+        openCaptures: Int
+    ) -> [ProfileMemoryLensItem] {
+        [
+            ProfileMemoryLensItem(
+                id: "memory-lens-current-plan",
+                title: "Current plan context",
+                summary: proofFeedbackCount == 0
+                    ? "Memory Lens can return to the current plan, but progress proof is still light."
+                    : "\(proofFeedbackCount) proof or feedback records can ground plan recall.",
+                sourceLabel: "Current plan",
+                sourceAgeLabel: proofFeedbackCount == 0 ? "May need review" : "Current",
+                whyRemembered: "Why remembered: current goals, proof, and feedback help recall return to Plan or Goal Detail instead of inventing a second history.",
+                privacyShutterLabel: "Summary only",
+                reviewLabel: "Safe for context recall",
+                correctionLabel: "Correct in owning surface",
+                rejectionLabel: "No durable memory claim",
+                state: proofFeedbackCount == 0 ? .warning : .success,
+                accessibilityLabel: "Memory Lens current plan context",
+                accessibilityValue: proofFeedbackCount == 0 ? "May need review. Summary only." : "Current. Summary only.",
+                accessibilityHint: "Shows source age, why remembered, privacy boundary, and correction posture for current plan recall."
+            ),
+            ProfileMemoryLensItem(
+                id: "memory-lens-corrections",
+                title: "Correction memory",
+                summary: correctionCount == 0
+                    ? "No active correction memory is available yet."
+                    : "\(correctionCount) user-confirmed corrections can shape future explanation language.",
+                sourceLabel: "Manual corrections",
+                sourceAgeLabel: correctionCount == 0 ? "Based on older context" : "Current",
+                whyRemembered: "Why remembered: user corrections can prevent repeated bad assumptions, but reuse stays reviewable.",
+                privacyShutterLabel: "No sensitive inference",
+                reviewLabel: "Review before durable memory",
+                correctionLabel: "Correct or reject reuse",
+                rejectionLabel: "Deletion waits for receipt proof",
+                state: correctionCount == 0 ? .default : .warning,
+                accessibilityLabel: "Memory Lens correction memory",
+                accessibilityValue: correctionCount == 0 ? "Based on older context. No sensitive inference." : "Current. Review before durable memory.",
+                accessibilityHint: "Shows correction, rejection, and deletion boundaries for correction memory."
+            ),
+            ProfileMemoryLensItem(
+                id: "memory-lens-open-captures",
+                title: "Open capture context",
+                summary: openCaptures == 0
+                    ? "No open captures need Memory Lens recall right now."
+                    : "\(openCaptures) open captures may need placement before they influence planning.",
+                sourceLabel: "Captured thought",
+                sourceAgeLabel: openCaptures == 0 ? "Current" : "May need review",
+                whyRemembered: "Why remembered: unresolved captures may explain what needs a place without becoming hidden work.",
+                privacyShutterLabel: "Stored on this device",
+                reviewLabel: "Place before stronger use",
+                correctionLabel: "Edit in Capture",
+                rejectionLabel: "Archive from Capture",
+                state: openCaptures == 0 ? .success : .warning,
+                accessibilityLabel: "Memory Lens open capture context",
+                accessibilityValue: openCaptures == 0 ? "Current. Stored on this device." : "May need review. Stored on this device.",
+                accessibilityHint: "Shows source age, privacy boundary, and placement controls for open capture recall."
+            )
+        ]
     }
 
     func makeNarrativeMemories(

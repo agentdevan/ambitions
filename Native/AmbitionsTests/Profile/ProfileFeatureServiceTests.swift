@@ -576,6 +576,104 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(memoryReceipt.subtitle?.localizedCaseInsensitiveContains("permanent") ?? true)
     }
 
+    func testFCP23MemoryLensVisualLayerShowsSourceAgeWhyRememberedAndPrivacyShutters() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "proof-fcp23",
+                goalID: "goal-fcp23",
+                stepID: "step-fcp23",
+                evidenceKind: .stepCompleted,
+                source: .manual,
+                capturedAt: "2026-05-05T12:00:00Z",
+                progressDelta: nil,
+                confidenceDelta: nil,
+                minutesInvested: 15,
+                note: "Grounded recall proof."
+            )
+        ])
+        try await repositories.captures.saveCaptures([
+            Capture(
+                id: "capture-fcp23",
+                createdAt: "2026-05-05T12:05:00Z",
+                updatedAt: "2026-05-05T12:05:00Z",
+                rawText: "Renew passport before the trip",
+                sourceType: nil,
+                status: .needsTriage,
+                linkedGoalID: nil
+            )
+        ])
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-fcp23",
+                goalID: "goal-fcp23",
+                createdAt: "2026-05-05T12:10:00Z",
+                updatedAt: "2026-05-05T12:10:00Z",
+                source: .explicitManualCorrection,
+                kind: .energyFitCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .energyEvaluation,
+                    canonicalField: nil,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: "step-fcp23",
+                    targetFingerprint: "energy::step-fcp23",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+                applicationKey: "goal##energy##step",
+                userNote: "Use a lighter version"
+            )
+        ])
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let lensItems = dashboard.memoryControls.memoryLensItems
+        let visibleCopy = lensItems.map {
+            [
+                $0.title,
+                $0.summary,
+                $0.sourceLabel,
+                $0.sourceAgeLabel,
+                $0.whyRemembered,
+                $0.privacyShutterLabel,
+                $0.reviewLabel,
+                $0.correctionLabel,
+                $0.rejectionLabel
+            ].joined(separator: " ")
+        }.joined(separator: " ")
+
+        XCTAssertEqual(lensItems.map(\.id), [
+            "memory-lens-current-plan",
+            "memory-lens-corrections",
+            "memory-lens-open-captures"
+        ])
+        XCTAssertTrue(lensItems.contains(where: {
+            $0.id == "memory-lens-current-plan" &&
+                $0.sourceAgeLabel == "Current" &&
+                $0.privacyShutterLabel == "Summary only" &&
+                $0.reviewLabel == "Safe for context recall"
+        }))
+        XCTAssertTrue(lensItems.contains(where: {
+            $0.id == "memory-lens-corrections" &&
+                $0.whyRemembered.contains("prevent repeated bad assumptions") &&
+                $0.reviewLabel == "Review before durable memory" &&
+                $0.rejectionLabel == "Deletion waits for receipt proof"
+        }))
+        XCTAssertTrue(lensItems.contains(where: {
+            $0.id == "memory-lens-open-captures" &&
+                $0.sourceLabel == "Captured thought" &&
+                $0.correctionLabel == "Edit in Capture" &&
+                $0.rejectionLabel == "Archive from Capture"
+        }))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("omniscient"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud memory"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("durable delete"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+    }
+
     func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {
         let repositories = try await makeRepositories()
         try await repositories.teaching.saveSignals([

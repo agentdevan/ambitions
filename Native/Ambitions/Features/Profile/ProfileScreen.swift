@@ -556,11 +556,26 @@ private struct ProfileMemoryControlsCard: View {
                     subtitle: memoryControls.subtitle
                 )
 
+                if memoryControls.memoryLensItems.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Memory Lens",
+                            title: "Source-grounded recall",
+                            subtitle: "Each visible memory names source age, why it is remembered, privacy posture, and review controls."
+                        )
+
+                        ForEach(memoryControls.memoryLensItems) { item in
+                            ProfileMemoryLensItemRow(item: item)
+                        }
+                    }
+                    .accessibilityIdentifier("profile.memory-lens-visual-layer")
+                }
+
                 ContextRecallCard(
                     title: "What Ambitions remembers",
                     summary: memoryControls.recoverySummary,
                     sourceLabel: "Source: local receipts, corrections, reviews, and explicit profile context",
-                    confidenceLabel: primaryRecallState == .current ? "Confidence: reviewable" : "Confidence: needs review",
+                    confidenceLabel: primaryRecallState == .current ? "Review state: current" : "Review state: needs review",
                     state: primaryRecallState,
                     context: .memory,
                     controls: memoryControls.items.prefix(3).map(\.title)
@@ -723,6 +738,60 @@ private struct ProfileMemoryControlsCard: View {
         }
 
         return nodes
+    }
+}
+
+private struct ProfileMemoryLensItemRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: ProfileMemoryLensItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: "scope")
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                    .frame(width: 28)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.summary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(item.whyRemembered)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+            }
+
+            HStack(spacing: theme.spacing.xs) {
+                TagPill(item.sourceLabel, icon: "doc.text.magnifyingglass", state: .default)
+                TagPill(item.sourceAgeLabel, icon: "clock", state: item.state)
+                TagPill(item.privacyShutterLabel, icon: "eye.slash", state: .default)
+            }
+
+            HStack(spacing: theme.spacing.xs) {
+                TagPill(item.reviewLabel, icon: "checkmark.seal", state: item.state)
+                TagPill(item.correctionLabel, icon: "pencil", state: .default)
+                TagPill(item.rejectionLabel, icon: "xmark.seal", state: item.state == .success ? .default : .warning)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: item.accessibilityLabel,
+            value: item.accessibilityValue,
+            hint: item.accessibilityHint
+        )
     }
 }
 
@@ -2297,7 +2366,7 @@ private struct ProfileSettingRow: View {
             title: "Availability pattern may need review",
             summary: "This recall is old enough that Ambitions should ask before using it to shape planning.",
             sourceLabel: "Source: older local review",
-            confidenceLabel: "Confidence: needs review",
+            confidenceLabel: "Review state: needs review",
             state: .stale,
             controls: ["Review", "Correct", "Ignore"]
         )
@@ -2314,7 +2383,7 @@ private struct ProfileSettingRow: View {
             title: "Rejected assumption",
             summary: "The user rejected this signal, so it remains visible only as correction history.",
             sourceLabel: "Source: correction receipt",
-            confidenceLabel: "Confidence: not active",
+            confidenceLabel: "Review state: not active",
             state: .rejected,
             controls: ["View receipt"]
         )
@@ -2331,7 +2400,7 @@ private struct ProfileSettingRow: View {
             title: "Sensitive context is protected",
             summary: "This context requires explicit review before it appears in planning guidance.",
             sourceLabel: "Source: private profile context",
-            confidenceLabel: "Confidence: protected",
+            confidenceLabel: "Review state: protected",
             state: .sensitive,
             controls: ["Review privacy", "Keep hidden"]
         )
@@ -2348,7 +2417,7 @@ private struct ProfileSettingRow: View {
             title: "Planning default corrected",
             summary: "The corrected version is the only active version used for future recall surfaces.",
             sourceLabel: "Source: explicit correction",
-            confidenceLabel: "Confidence: user-confirmed",
+            confidenceLabel: "Review state: user-confirmed",
             state: .corrected,
             controls: ["View correction"]
         )
@@ -2365,7 +2434,7 @@ private struct ProfileSettingRow: View {
             title: "No hidden memory",
             summary: "Ambitions has no recall result for this context and should say so plainly.",
             sourceLabel: "Source: none",
-            confidenceLabel: "Confidence: no result",
+            confidenceLabel: "Review state: no result",
             state: .noResult,
             controls: []
         )

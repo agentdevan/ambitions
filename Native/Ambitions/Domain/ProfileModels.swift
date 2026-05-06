@@ -245,6 +245,23 @@ struct ProfileMemoryPattern: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
+struct ProfileMemoryLensItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let sourceAgeLabel: String
+    let whyRemembered: String
+    let privacyShutterLabel: String
+    let reviewLabel: String
+    let correctionLabel: String
+    let rejectionLabel: String
+    let state: AmbitionVisualState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
 struct ProfilePersonalizationConsentState: Sendable, Equatable {
     let title: String
     let summary: String
@@ -273,6 +290,7 @@ struct ProfileMemoryControlState: Sendable, Equatable {
     let groups: [ProfileMemoryGroup]
     let narrativeMemories: [ProfileNarrativeMemory]
     let conservativePatterns: [ProfileMemoryPattern]
+    let memoryLensItems: [ProfileMemoryLensItem]
     let recoverySummary: String
     let footer: String
 }

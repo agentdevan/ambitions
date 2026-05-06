@@ -269,6 +269,14 @@ first, Trust / Memory / Receipts remain prominent, Personal Defaults are
 separate, and existing Profile route/file compatibility is preserved unless a
 future compatibility batch proves a safe retirement.
 
+FCP23 is complete Green as of 2026-05-05. Future memory, recall, Found Life,
+AOS, LDI, trust, correction, export/delete, privacy, or external-surface work
+must preserve Memory Lens proof posture: visible memory context names source
+age, why it is remembered, privacy shutter posture, review state, correction
+posture, and rejection/deletion boundaries without claiming omniscient memory,
+cloud sync, durable deletion, legal/privacy compliance, release readiness, or
+AI runtime certainty.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

@@ -472,6 +472,56 @@ struct PreviewFixtures: Sendable {
                         state: .success
                     )
                 ],
+                memoryLensItems: [
+                    ProfileMemoryLensItem(
+                        id: "memory-lens-current-plan",
+                        title: "Current plan context",
+                        summary: "4 proof or feedback records can ground plan recall.",
+                        sourceLabel: "Current plan",
+                        sourceAgeLabel: "Current",
+                        whyRemembered: "Why remembered: current goals, proof, and feedback help recall return to Plan or Goal Detail instead of inventing a second history.",
+                        privacyShutterLabel: "Summary only",
+                        reviewLabel: "Safe for context recall",
+                        correctionLabel: "Correct in owning surface",
+                        rejectionLabel: "No durable memory claim",
+                        state: .success,
+                        accessibilityLabel: "Memory Lens current plan context",
+                        accessibilityValue: "Current. Summary only.",
+                        accessibilityHint: "Shows source age, why remembered, privacy boundary, and correction posture for current plan recall."
+                    ),
+                    ProfileMemoryLensItem(
+                        id: "memory-lens-corrections",
+                        title: "Correction memory",
+                        summary: "2 user-confirmed corrections can shape future explanation language.",
+                        sourceLabel: "Manual corrections",
+                        sourceAgeLabel: "Current",
+                        whyRemembered: "Why remembered: user corrections can prevent repeated bad assumptions, but reuse stays reviewable.",
+                        privacyShutterLabel: "No sensitive inference",
+                        reviewLabel: "Review before durable memory",
+                        correctionLabel: "Correct or reject reuse",
+                        rejectionLabel: "Deletion waits for receipt proof",
+                        state: .warning,
+                        accessibilityLabel: "Memory Lens correction memory",
+                        accessibilityValue: "Current. Review before durable memory.",
+                        accessibilityHint: "Shows correction, rejection, and deletion boundaries for correction memory."
+                    ),
+                    ProfileMemoryLensItem(
+                        id: "memory-lens-open-captures",
+                        title: "Open capture context",
+                        summary: "1 open capture may need placement before it influences planning.",
+                        sourceLabel: "Captured thought",
+                        sourceAgeLabel: "May need review",
+                        whyRemembered: "Why remembered: unresolved captures may explain what needs a place without becoming hidden work.",
+                        privacyShutterLabel: "Stored on this device",
+                        reviewLabel: "Place before stronger use",
+                        correctionLabel: "Edit in Capture",
+                        rejectionLabel: "Archive from Capture",
+                        state: .warning,
+                        accessibilityLabel: "Memory Lens open capture context",
+                        accessibilityValue: "May need review. Stored on this device.",
+                        accessibilityHint: "Shows source age, privacy boundary, and placement controls for open capture recall."
+                    )
+                ],
                 recoverySummary: "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned.",
                 footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
             ),
