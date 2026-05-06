@@ -124,6 +124,12 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   LifeShape, and Receipt Drawer as real Ambitions objects without claiming a
   theme shop, behavior/personality system, or release/platform readiness. The
   next eligible global batch is FCP18 Capture Placement Shelf.
+- FCP18 is complete Green as bounded Capture Placement Shelf implementation
+  evidence. Capture route reveal now shows destination, object type,
+  appearance, consequence, privacy, local source, correction posture, and
+  receipt seam before saving without adding inbox/feed/notes mode, automatic
+  goal creation, hidden learning, or route/persistence changes. The next
+  eligible global batch is FCP19 Placement Resolver / Correction Fold.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -527,8 +533,9 @@ Green as Logging / Analytics / Observability Policy evidence. PFC30 is complete
 Green as Performance Budget And Instruments Plan evidence. FCP22 is complete
 Green as bounded Personal System Center implementation evidence. FCP23 is
 complete Green as bounded Memory Lens visual-layer evidence. FCP24 is complete
-Green as bounded Appearance Studio object-preview evidence, and the full-stack
-order selects FCP18 next.
+Green as bounded Appearance Studio object-preview evidence. FCP18 is complete
+Green as bounded Capture Placement Shelf evidence, and the full-stack order
+selects FCP19 next.
 
 
 ## Living Dream Intelligence Context

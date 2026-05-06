@@ -64,6 +64,7 @@ struct CaptureDraftRouteChoice: Identifiable, Sendable, Equatable {
 
 struct CaptureDraftRoutePreview: Sendable, Equatable {
     let originalText: String
+    let placementShelfTitle: String
     let postInputStateTitle: String
     let receiptTitle: String
     let summary: String
@@ -74,6 +75,9 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
     let appearanceLabel: String
     let consequenceLabel: String
     let privacyLabel: String
+    let localSourceLabel: String
+    let correctionLabel: String
+    let receiptSeamLabel: String
     let primaryActionTitle: String
     let changeActionTitle: String
     let safeActionTitle: String
@@ -87,6 +91,7 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
     var visibleCopy: String {
         ([
             originalText,
+            placementShelfTitle,
             postInputStateTitle,
             receiptTitle,
             summary,
@@ -97,6 +102,9 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             appearanceLabel,
             consequenceLabel,
             privacyLabel,
+            localSourceLabel,
+            correctionLabel,
+            receiptSeamLabel,
             primaryActionTitle,
             changeActionTitle,
             safeActionTitle,
@@ -372,6 +380,7 @@ final class CapturesViewModel {
         let placementPreview = decision.placementPreview
         return CaptureDraftRoutePreview(
             originalText: placementPreview.originalText,
+            placementShelfTitle: "Placement Shelf",
             postInputStateTitle: placementPreview.postInputStateTitle,
             receiptTitle: decision.receiptLine,
             summary: decision.summary,
@@ -382,6 +391,9 @@ final class CapturesViewModel {
             appearanceLabel: placementPreview.appearanceLabel,
             consequenceLabel: placementPreview.consequenceLabel,
             privacyLabel: placementPreview.privacyLabel,
+            localSourceLabel: "Local source: typed in Capture",
+            correctionLabel: decision.selectedRouteType == nil ? "Correction: change the route before saving" : "Correction: route chosen by you",
+            receiptSeamLabel: "Receipt seam: save creates a local capture receipt",
             primaryActionTitle: placementPreview.primaryActionTitle,
             changeActionTitle: placementPreview.changeActionTitle,
             safeActionTitle: placementPreview.safeActionTitle,

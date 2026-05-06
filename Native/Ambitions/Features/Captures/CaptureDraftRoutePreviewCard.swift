@@ -15,21 +15,7 @@ struct CaptureDraftRoutePreviewCard: View {
         StateDrivenMaterialPanel(context: .capture, state: livingState) {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 routeSummary
-                EvidenceLabel(
-                    preview.postInputStateTitle,
-                    detail: preview.summary,
-                    source: preview.destinationLabel,
-                    state: livingState,
-                    context: .capture
-                )
-                EvidenceLabel(
-                    preview.routeProofTitle,
-                    detail: preview.routeProofDetail,
-                    source: "Local route proof",
-                    state: livingState,
-                    context: .capture
-                )
-                placementDetails
+                placementShelf
                 clarificationQuestion
                 routeChoices
                 routeCommands
@@ -73,20 +59,78 @@ struct CaptureDraftRoutePreviewCard: View {
 
     private var placementDetails: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-            Text(preview.objectTypeLabel)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textPrimary)
-            Text(preview.appearanceLabel)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-            Text(preview.consequenceLabel)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-            Text(preview.privacyLabel)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
+            placementLine(icon: "target", title: "Destination", value: preview.destinationLabel, state: .selected)
+            placementLine(icon: "square.stack.3d.up", title: "Object", value: preview.objectTypeLabel, state: .default)
+            placementLine(icon: "eye", title: "Appearance", value: preview.appearanceLabel, state: .default)
+            placementLine(icon: "arrow.triangle.branch", title: "Consequence", value: preview.consequenceLabel, state: visualState)
+            placementLine(icon: "lock", title: "Privacy", value: preview.privacyLabel, state: .default)
+            placementLine(icon: "doc.text.magnifyingglass", title: "Source", value: preview.localSourceLabel, state: .default)
+            placementLine(icon: "pencil", title: "Correction", value: preview.correctionLabel, state: .default)
+            placementLine(icon: "checkmark.seal", title: "Receipt", value: preview.receiptSeamLabel, state: visualState)
         }
         .accessibilityElement(children: .combine)
+    }
+
+    private var placementShelf: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(
+                eyebrow: "Capture",
+                title: preview.placementShelfTitle,
+                subtitle: "Destination, consequence, privacy, source, correction, and receipt stay visible before saving."
+            )
+
+            EvidenceLabel(
+                preview.postInputStateTitle,
+                detail: preview.summary,
+                source: preview.destinationLabel,
+                state: livingState,
+                context: .capture
+            )
+            EvidenceLabel(
+                preview.routeProofTitle,
+                detail: preview.routeProofDetail,
+                source: "Local route proof",
+                state: livingState,
+                context: .capture
+            )
+            placementDetails
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityIdentifier("captures.placement-shelf")
+    }
+
+    private func placementLine(
+        icon: String,
+        title: String,
+        value: String,
+        state: AmbitionVisualState
+    ) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.xs) {
+            Image(systemName: icon)
+                .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                .foregroundStyle(theme.stateStyle(for: state).accent)
+                .frame(width: 16)
+                .accessibilityHidden(true)
+
+            Text(title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .frame(width: 78, alignment: .leading)
+
+            Text(value)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
     }
 
     @ViewBuilder

@@ -2,13 +2,14 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FCP24 Appearance Studio complete / Green.
-Next eligible batch: FCP18 Capture Placement Shelf.
-Scope: FCP24 upgraded the You-owned Appearance Studio from generic palette
-swatches into real object previews for Start Here, Reality Rail, LifeShape, and
-Receipt Drawer. It preserved the five-tab shell, existing Profile route/file
-compatibility, and all behavior/personality, sync/cloud,
-legal/privacy/release/device/accessibility claims as evidence-bound.
+Current batch: FCP18 Capture Placement Shelf complete / Green.
+Next eligible batch: FCP19 Placement Resolver / Correction Fold.
+Scope: FCP18 upgraded Capture route reveal into an explicit Placement Shelf
+with destination, object type, appearance, consequence, privacy, local source,
+correction posture, and receipt seam visible before saving. It preserved the
+five-tab shell, text-first bottom composer, existing route/raw-value and
+persistence compatibility, and all sync/cloud, legal/privacy/release/device/
+accessibility claims as evidence-bound.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -58,8 +59,9 @@ complete / Green as Logging / Analytics / Observability Policy evidence. PFC30
 is complete / Green as Performance Budget And Instruments Plan evidence. FCP22
 is complete / Green as Personal System Center Refactor evidence. FCP23 is
 complete / Green as Memory Lens / External Brain Visual Layer evidence. FCP24
-is complete / Green as Appearance Studio evidence. FCP18 is the next eligible
-global batch. Accepted Yellow:
+is complete / Green as Appearance Studio evidence. FCP18 is complete / Green
+as Capture Placement Shelf evidence. FCP19 is the next eligible global batch.
+Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
@@ -115,7 +117,8 @@ is complete / Green as docs/performance budget and Instruments checklist
 evidence. FCP22 is complete / Green as bounded You root Personal System Center
 implementation evidence. FCP23 is complete / Green as bounded You-owned Memory
 Lens visual layer evidence. FCP24 is complete / Green as bounded You-owned
-Appearance Studio object-preview evidence. Later PFC implementation beyond existing test
+Appearance Studio object-preview evidence. FCP18 is complete / Green as
+bounded Capture Placement Shelf implementation evidence. Later PFC implementation beyond existing test
 execution has not started.
 
 No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality

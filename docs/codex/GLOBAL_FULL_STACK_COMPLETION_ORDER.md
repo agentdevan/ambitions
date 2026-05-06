@@ -269,7 +269,13 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     adds no route/raw-value, persistence/schema, sync/cloud,
     behavior/personality, legal/privacy/release, App Store, TestFlight, device,
     public accessibility, AOS runtime, or LDI runtime claim.
-48. FCP18 Capture Placement Shelf.
+48. FCP18 Capture Placement Shelf. Completed Green on 2026-05-06 as bounded
+    Capture Placement Shelf implementation evidence, with destination, object
+    type, appearance, consequence, privacy, local source, correction posture,
+    and receipt seam visible before saving. It adds no route/raw-value,
+    persistence/schema, sync/cloud, automatic goal creation, hidden learning,
+    legal/privacy/release, App Store, TestFlight, device, public accessibility,
+    AOS runtime, or LDI runtime claim.
 49. FCP19 Placement Resolver / Correction Fold.
 50. FCP20 Grow Into Goal Seed Incubator.
 51. FCP21 Voice / Motor Capture Accessibility.

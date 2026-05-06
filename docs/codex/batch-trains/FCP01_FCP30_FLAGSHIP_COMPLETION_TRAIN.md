@@ -306,6 +306,8 @@ Evidence: `docs/audits/fcp17-schedule-availability-defaults-center-report.md`.
 
 ### FCP18 — Capture Placement Shelf
 
+Status: Complete Green on 2026-05-06 as bounded Capture Placement Shelf
+implementation evidence.
 Type: Implementation.
 Owner: Capture.
 Depends on: FCP06; PD09; SI09; DAV04.

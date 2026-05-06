@@ -283,6 +283,13 @@ work must preserve Appearance Studio as a real-object preview surface, not a
 theme shop, personality system, behavior promise, or palette catalog detached
 from Ambitions objects.
 
+FCP18 is complete Green as of 2026-05-06. Future Capture, placement resolver,
+correction fold, goal seeding, source fold, receipt, accessibility, AOS, LDI,
+or external-surface work must preserve Capture Placement Shelf posture:
+text-first bottom composer, destination/consequence/privacy/source/correction/
+receipt visibility before saving, no inbox/feed/notes mode, no automatic goal
+creation, and no hidden learning.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

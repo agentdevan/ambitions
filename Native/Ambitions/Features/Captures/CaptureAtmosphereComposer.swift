@@ -34,7 +34,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             evidenceDetail = "Ambitions will suggest a route after you save."
         } else {
             evidenceTitle = "Needs a place"
-            evidenceDetail = "Type one real thing; no inbox pressure is added."
+            evidenceDetail = "Type one real thing; no routing pressure is added."
         }
 
         accessibilityValue = [
@@ -310,6 +310,7 @@ private struct CaptureRouteRevealStrip: View {
     @Previewable @State var text = "Book dentist before Friday"
     let preview = CaptureDraftRoutePreview(
         originalText: "Book dentist before Friday",
+        placementShelfTitle: "Placement Shelf",
         postInputStateTitle: "Suggested Place",
         receiptTitle: "Saved as Task · Today",
         summary: "Looks like a standalone task.",
@@ -320,6 +321,9 @@ private struct CaptureRouteRevealStrip: View {
         appearanceLabel: "Today",
         consequenceLabel: "Adds a visible Task to Today after you confirm.",
         privacyLabel: "Private item",
+        localSourceLabel: "Local source: typed in Capture",
+        correctionLabel: "Correction: change the route before saving",
+        receiptSeamLabel: "Receipt seam: save creates a local capture receipt",
         primaryActionTitle: "Place it",
         changeActionTitle: "Change",
         safeActionTitle: "Decide later",
