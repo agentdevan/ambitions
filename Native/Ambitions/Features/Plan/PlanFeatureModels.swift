@@ -295,12 +295,16 @@ struct PlanPressureRecoverySignalState: Identifiable, Sendable, Hashable {
 struct PlanPressureRecoveryReviewState: Sendable {
     let title: String
     let detail: String
+    let pressureFieldLabel: String
+    let recoveryLoopLabel: String
     let weekPressureLabel: String
     let overloadedDayLabel: String
     let recoverySpaceLabel: String
+    let smallerStepAnchorLabel: String
     let protectedTimeConflictLabel: String
     let lateStartAdjustmentLabel: String
     let recoveryDayReviewLabel: String
+    let recoveryReceiptPreviewLabel: String
     let capacityReviewLabel: String
     let signals: [PlanPressureRecoverySignalState]
     let visualState: AmbitionVisualState
@@ -308,12 +312,16 @@ struct PlanPressureRecoveryReviewState: Sendable {
     static let baseline = PlanPressureRecoveryReviewState(
         title: "Pressure and recovery review",
         detail: "Pressure gets explained before the week changes.",
+        pressureFieldLabel: "Pressure field: no relief needed.",
+        recoveryLoopLabel: "Recovery loop: keep breathing room visible.",
         weekPressureLabel: "Pressure is readable.",
         overloadedDayLabel: "Overloaded day explanation: no day is asking for relief right now.",
         recoverySpaceLabel: "Recovery space: keep breathing room visible.",
+        smallerStepAnchorLabel: "Smaller step anchor: keep the next ask believable.",
         protectedTimeConflictLabel: "Protected time conflict: nothing protected is competing loudly.",
         lateStartAdjustmentLabel: "Late-start adjustment: start with the smaller version.",
         recoveryDayReviewLabel: "Recovery-day review: Still counts.",
+        recoveryReceiptPreviewLabel: "Recovery receipt preview: nothing changes without review.",
         capacityReviewLabel: "Capacity review: qualitative only.",
         signals: [],
         visualState: .default
@@ -322,12 +330,16 @@ struct PlanPressureRecoveryReviewState: Sendable {
     var accessibilityValue: String {
         [
             detail,
+            pressureFieldLabel,
+            recoveryLoopLabel,
             weekPressureLabel,
             overloadedDayLabel,
             recoverySpaceLabel,
+            smallerStepAnchorLabel,
             protectedTimeConflictLabel,
             lateStartAdjustmentLabel,
             recoveryDayReviewLabel,
+            recoveryReceiptPreviewLabel,
             capacityReviewLabel,
             signals.map { "\($0.title): \($0.detail)" }.joined(separator: ". ")
         ].joined(separator: ". ")

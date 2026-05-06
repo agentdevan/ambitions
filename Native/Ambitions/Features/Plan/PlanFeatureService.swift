@@ -617,6 +617,12 @@ private extension RepositoryBackedPlanService {
             detail: pressureVisible
                 ? "Pressure gets explained before the week changes, then recovery stays smaller than the strain."
                 : "The week still has readable room, so recovery can stay protective instead of becoming extra planning.",
+            pressureFieldLabel: overloadedDays > 0
+                ? "Pressure field: \(overloadedDays) \(dayNoun) should be lightened before new work lands."
+                : "Pressure field: keep the current week shape readable before widening it.",
+            recoveryLoopLabel: pressureVisible
+                ? "Recovery loop: explain pressure, choose the smaller step, then preview the receipt."
+                : "Recovery loop: preserve room and keep Still Counts available.",
             weekPressureLabel: overloadedDays > 0
                 ? "\(overloadedDays) \(dayNoun) need relief before adding work."
                 : tightDays > 0
@@ -628,11 +634,15 @@ private extension RepositoryBackedPlanService {
             recoverySpaceLabel: openDays > 0
                 ? "Recovery space: \(openDays) open \(openNoun) can protect breathing room."
                 : "Recovery space: make one smaller pocket before widening the week.",
+            smallerStepAnchorLabel: overloadedDays > 0
+                ? "Smaller step anchor: make the next ask lighter before protecting anything else."
+                : "Smaller step anchor: keep one believable next move available.",
             protectedTimeConflictLabel: protectedConflicts.isEmpty
                 ? "Protected time conflict: nothing protected is competing loudly."
                 : "Protected time conflict: \(protectedConflicts.count) fixed or protected \(conflictNoun) need care before moving anything.",
             lateStartAdjustmentLabel: "Late-start adjustment: \(saveTheDay.adjustment) Start with the smaller version.",
             recoveryDayReviewLabel: "Recovery-day review: Still counts; protect what remains and make the next ask lighter.",
+            recoveryReceiptPreviewLabel: "Recovery receipt preview: records what was lightened, what stayed protected, and what still counts before any plan change.",
             capacityReviewLabel: "Capacity review: \(capacityEnvelope.label.lowercased()) is qualitative, with no percentage or certainty claim.",
             signals: [
                 PlanPressureRecoverySignalState(
@@ -1683,7 +1693,7 @@ private extension RepositoryBackedPlanService {
             append(.parkGoal, detail: "Park the goal that has no believable next step yet.", impact: "Broad change needs confirmation", state: .warning)
         case .calendarUnavailableOrDenied:
             append(.protectOneItem, detail: "Pick the one item to protect manually.", impact: "Manual planning still works", state: .selected)
-            append(.moveLocalActionLater, detail: "Reschedule a local action later without writing to Calendar.", impact: "No calendar write", state: .default)
+            append(.moveLocalActionLater, detail: "Reschedule a local action later while Calendar stays untouched.", impact: "Calendar untouched", state: .default)
         case .tooManyActiveGoals:
             append(.protectOneItem, detail: "Protect the one goal that must stay active now.", impact: "Narrows focus", state: .selected)
             append(.parkGoal, detail: "Park one active goal until it has real room.", impact: "Broad change needs confirmation", state: .warning)
@@ -1772,7 +1782,7 @@ private extension RepositoryBackedPlanService {
             recoveryExplanation: reflow.reasonKind == .stillBelievable
                 ? "No rescue is needed; keep recovery room visible."
                 : "Recovery works by protecting one thing, reducing one thing, and leaving the rest unchanged until you confirm.",
-            boundary: "No silent rescheduling. No calendar write. Nothing changed yet.",
+            boundary: "No hidden rescheduling. Calendar stays untouched. Nothing changed yet.",
             visualState: reflow.visualState
         )
     }
@@ -1797,7 +1807,7 @@ private extension RepositoryBackedPlanService {
 
         return PlanReflowReceiptPreviewState(
             title: "Before anything changes",
-            detail: "A reflow receipt preview shows the tradeoff before action, not after a silent mutation.",
+            detail: "A reflow receipt preview shows the tradeoff before action, not after a hidden change.",
             whatChanged: wouldChange,
             whatWouldNotChange: wouldNotChange,
             confirmationRequired: confirmationRequired,

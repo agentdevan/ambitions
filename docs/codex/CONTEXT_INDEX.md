@@ -572,7 +572,8 @@ bounded Placement Resolver / Correction Fold evidence. FCP20 is complete Green
 as bounded Goal Seed Incubator evidence. FCP21 is complete Green as bounded
 Voice / Motor Capture Accessibility evidence. FCP14 is complete Green as
 bounded LifeShape Contour Map evidence. FCP15 is complete Green as bounded
-Reflow Decision Fold evidence, and the full-stack order selects FCP16 next.
+Reflow Decision Fold evidence. FCP16 is complete Green as bounded Pressure
+Field / Recovery Loop evidence, and the full-stack order selects FCP10 next.
 
 
 ## Living Dream Intelligence Context

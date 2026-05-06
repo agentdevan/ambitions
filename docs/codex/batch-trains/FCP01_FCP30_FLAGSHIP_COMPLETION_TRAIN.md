@@ -293,6 +293,13 @@ Owner: Plan / Today.
 Depends on: FCP14-FCP15; PD13; PD04.
 Goal: Shared pressure and recovery object language.
 Acceptance: no shame copy; overloaded day produces smaller safe next step and receipt.
+Status: Complete Green on 2026-05-06 as bounded Plan / Today implementation.
+It added shared Pressure Field / Recovery Loop object language to Plan's
+pressure review and Today's recovery bloom, kept the smaller safe next step
+first for overloaded Today, and preserved no shame copy, no silent mutation,
+Calendar write, route/raw-value, persistence/schema, sync/cloud, release,
+legal/privacy, public accessibility, AOS runtime, or LDI runtime claims.
+Evidence: `docs/audits/fcp16-pressure-field-recovery-loop-report.md`.
 
 ### FCP17 — Schedule / Availability / Defaults Center
 

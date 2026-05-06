@@ -437,12 +437,16 @@ final class PlanFeatureServiceTests: XCTestCase {
         let review = dashboard.pressureRecoveryReview
 
         XCTAssertEqual(review.title, "Pressure and recovery review")
+        XCTAssertTrue(review.pressureFieldLabel.contains("Pressure field"))
+        XCTAssertTrue(review.recoveryLoopLabel.contains("Recovery loop"))
         XCTAssertTrue(review.weekPressureLabel.contains("need relief"))
         XCTAssertTrue(review.overloadedDayLabel.contains("reduce one ask"))
         XCTAssertTrue(review.recoverySpaceLabel.contains("Recovery space"))
+        XCTAssertTrue(review.smallerStepAnchorLabel.contains("Smaller step anchor"))
         XCTAssertTrue(review.protectedTimeConflictLabel.contains("Protected time conflict"))
         XCTAssertTrue(review.lateStartAdjustmentLabel.contains("Late-start adjustment"))
         XCTAssertTrue(review.recoveryDayReviewLabel.contains("Still counts"))
+        XCTAssertTrue(review.recoveryReceiptPreviewLabel.contains("Recovery receipt preview"))
         XCTAssertTrue(review.capacityReviewLabel.contains("qualitative"))
         XCTAssertTrue(review.signals.contains(where: { $0.id == "week-pressure" && $0.boundaryLabel == "Explain before changing" }))
         XCTAssertTrue(review.signals.contains(where: { $0.id == "protected-time" && $0.boundaryLabel == "No silent rescheduling" }))
@@ -451,12 +455,16 @@ final class PlanFeatureServiceTests: XCTestCase {
         let riskyCopy = [
             review.title,
             review.detail,
+            review.pressureFieldLabel,
+            review.recoveryLoopLabel,
             review.weekPressureLabel,
             review.overloadedDayLabel,
             review.recoverySpaceLabel,
+            review.smallerStepAnchorLabel,
             review.protectedTimeConflictLabel,
             review.lateStartAdjustmentLabel,
             review.recoveryDayReviewLabel,
+            review.recoveryReceiptPreviewLabel,
             review.capacityReviewLabel
         ].joined(separator: " ").lowercased()
 

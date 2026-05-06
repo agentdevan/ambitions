@@ -399,6 +399,10 @@ struct TodayRecoveryBloomState: Sendable {
     let title: String
     let subtitle: String
     let explanation: String
+    let pressureFieldLabel: String
+    let recoveryLoopLabel: String
+    let smallerStepAnchorLabel: String
+    let recoveryReceiptPreviewLabel: String
     let options: [TodayRecoveryOptionState]
 }
 

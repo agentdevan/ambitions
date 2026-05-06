@@ -607,6 +607,12 @@ enum PreviewTodayScenarios {
             title: posture == .overloaded ? "Lighten today" : "Recovery Bloom",
             subtitle: "The safer path appears before any deeper explanation.",
             explanation: "Recovery reorganizes the day softly so the user never has to fight through a broken-plan feeling.",
+            pressureFieldLabel: posture == .overloaded
+                ? "Pressure field: too many asks are touching today at once."
+                : "Pressure field: the day needs one calmer lane.",
+            recoveryLoopLabel: "Recovery loop: shrink the next ask, keep Still Counts available, and preview the receipt.",
+            smallerStepAnchorLabel: "Smaller step anchor: choose the lightest useful version first.",
+            recoveryReceiptPreviewLabel: "Recovery receipt preview: records the lighter path and what stayed unchanged.",
             options: Array(options)
         )
     }

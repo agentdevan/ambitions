@@ -315,7 +315,15 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     persistence/schema, sync/cloud, legal/privacy/release, App Store,
     TestFlight, device, public accessibility, AOS runtime, or LDI runtime
     claim.
-54. FCP16 Pressure Field / Recovery Loop.
+54. FCP16 Pressure Field / Recovery Loop. Completed Green on 2026-05-06 as
+    bounded Plan / Today shared pressure and recovery object-language
+    implementation evidence, with Pressure Field, Recovery Loop, Smaller Step
+    Anchor, and Recovery Receipt Preview labels on Plan's pressure review and
+    Today's overloaded-day recovery bloom. It keeps no-shame copy, places the
+    smaller safe next step first, and adds no silent mutation, Calendar write,
+    route/raw-value, persistence/schema, sync/cloud, legal/privacy/release, App
+    Store, TestFlight, device, public accessibility, AOS runtime, or LDI
+    runtime claim.
 55. FCP10 MissionControlTimeSpine.
 56. FCP11 LifePath Thread.
 57. FCP12 Proof Spine / Evidence Ledger.

@@ -332,6 +332,14 @@ any meaningful reflow. No silent reflow, hidden mutation, Calendar write,
 route/raw-value change, persistence/schema change, release claim, or runtime
 claim may be inferred from this batch.
 
+FCP16 is complete Green as of 2026-05-06. Future Plan, Today, AOS, LDI, and
+Found Life work that touches pressure or recovery must preserve the shared
+Pressure Field / Recovery Loop object language, keep overloaded-day recovery
+non-shaming, place the smaller safe next step before heavier effort, preview
+the recovery receipt, and avoid silent mutation, Calendar write,
+route/raw-value, persistence/schema, sync/cloud, release, legal/privacy, AOS
+runtime, or LDI runtime claims.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

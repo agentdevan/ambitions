@@ -1084,23 +1084,43 @@ private extension RepositoryBackedTodayService {
         let title: String
         let subtitle: String
         let explanation: String
+        let pressureField: String
+        let recoveryLoop: String
+        let smallerStepAnchor: String
+        let receiptPreview: String
         switch posture {
         case .tight:
             title = "Keep the day believable"
             subtitle = "One light adjustment now is calmer than a mess later."
             explanation = "Recovery here is small on purpose. The app is reducing pressure before the day turns into catch-up theater."
+            pressureField = "Pressure field: the day is tight, so extra switching should stay visible."
+            recoveryLoop = "Recovery loop: lighten one ask, keep Still Counts available, and review before changing the day."
+            smallerStepAnchor = "Smaller step anchor: choose the lightest useful version before adding effort."
+            receiptPreview = "Recovery receipt preview: records the lighter path and what stayed unchanged."
         case .drifted:
             title = "Recovery Bloom"
             subtitle = "The day can still recover through one believable step."
             explanation = "The safer path is shown first, and the prior plan stays visible only as background context."
+            pressureField = "Pressure field: the first plan drifted, so recovery starts with one believable lane."
+            recoveryLoop = "Recovery loop: orient, shrink the next step, and preview the receipt before anything changes."
+            smallerStepAnchor = "Smaller step anchor: return through one safe action, not the whole original plan."
+            receiptPreview = "Recovery receipt preview: records what changed and what still counts."
         case .overloaded:
             title = "Lighten today"
             subtitle = "The day needs fewer simultaneous asks before effort goes up."
             explanation = "This is not a failure state. The system is narrowing the day so the next step feels real again."
+            pressureField = "Pressure field: too many asks are touching today at once."
+            recoveryLoop = "Recovery loop: reduce the load, offer the smaller safe next step, and keep review in front."
+            smallerStepAnchor = "Smaller step anchor: make the next step small enough to start without sacrificing protected time."
+            receiptPreview = "Recovery receipt preview: records the lighter next step, protected time, and Still Counts boundary."
         case .recovering:
             title = "Stay in the recovery lane"
             subtitle = "Use one gentle step to stabilize the rest of the day."
             explanation = "The bloom keeps the next step singular so recovery feels relieving instead of corrective."
+            pressureField = "Pressure field: recovery is already active, so the day stays narrowed."
+            recoveryLoop = "Recovery loop: continue the lighter path and keep the receipt visible."
+            smallerStepAnchor = "Smaller step anchor: stay with the smallest stabilizing block."
+            receiptPreview = "Recovery receipt preview: records that recovery continued without turning into catch-up."
         case .stable, .lowData, .noPlan:
             return nil
         }
@@ -1109,6 +1129,10 @@ private extension RepositoryBackedTodayService {
             title: title,
             subtitle: subtitle,
             explanation: explanation,
+            pressureFieldLabel: pressureField,
+            recoveryLoopLabel: recoveryLoop,
+            smallerStepAnchorLabel: smallerStepAnchor,
+            recoveryReceiptPreviewLabel: receiptPreview,
             options: options
         )
     }

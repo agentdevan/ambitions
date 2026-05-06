@@ -1538,6 +1538,13 @@ private struct TodayRecoveryBloomCard: View {
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
 
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                TodayRecoveryProofRow(label: "Pressure field", value: state.pressureFieldLabel, state: .warning)
+                TodayRecoveryProofRow(label: "Recovery loop", value: state.recoveryLoopLabel, state: .selected)
+                TodayRecoveryProofRow(label: "Smaller step", value: state.smallerStepAnchorLabel, state: .selected)
+                TodayRecoveryProofRow(label: "Receipt", value: state.recoveryReceiptPreviewLabel, state: .default)
+            }
+
             ForEach(state.options) { option in
                 HStack(alignment: .top, spacing: theme.spacing.md) {
                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -1571,6 +1578,33 @@ private struct TodayRecoveryBloomCard: View {
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
+    }
+}
+
+private struct TodayRecoveryProofRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let label: String
+    let value: String
+    let state: AmbitionVisualState
+
+    var body: some View {
+        let style = theme.stateStyle(for: state)
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Circle()
+                .fill(style.accent)
+                .frame(width: 6, height: 6)
+                .padding(.top, 6)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(label)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                Text(value)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
     }
 }
 

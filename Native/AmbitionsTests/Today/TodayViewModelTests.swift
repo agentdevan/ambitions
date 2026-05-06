@@ -848,6 +848,53 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(experience.support.timeAperture.windows.isEmpty)
     }
 
+    func testFCP16OverloadedTodayShowsSmallerRecoveryLoopAndReceiptPreview() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goals = (0..<5).map {
+            makeGoal(
+                id: "goal-overload-\($0)",
+                stepID: "step-overload-\($0)",
+                stepTitle: "Overload step \($0)",
+                dueAt: "2026-04-15T20:00:00Z"
+            )
+        }
+        try await repositories.goals.saveGoals(goals)
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+        let recovery = try XCTUnwrap(experience.support.recoveryBloom)
+        let visibleCopy = [
+            recovery.title,
+            recovery.subtitle,
+            recovery.explanation,
+            recovery.pressureFieldLabel,
+            recovery.recoveryLoopLabel,
+            recovery.smallerStepAnchorLabel,
+            recovery.recoveryReceiptPreviewLabel,
+            recovery.options.map { "\($0.title) \($0.detail)" }.joined(separator: " ")
+        ].joined(separator: " ").lowercased()
+
+        XCTAssertEqual(experience.hero.truth.posture, .overloaded)
+        XCTAssertEqual(recovery.title, "Lighten today")
+        XCTAssertTrue(recovery.pressureFieldLabel.contains("Pressure field"))
+        XCTAssertTrue(recovery.recoveryLoopLabel.contains("smaller safe next step"))
+        XCTAssertTrue(recovery.smallerStepAnchorLabel.contains("small enough to start"))
+        XCTAssertTrue(recovery.recoveryReceiptPreviewLabel.contains("Recovery receipt preview"))
+        XCTAssertEqual(recovery.options.first?.title, "Smaller version")
+        XCTAssertEqual(recovery.options.first?.action.kind, .split)
+        XCTAssertFalse(visibleCopy.contains("overdue"))
+        XCTAssertFalse(visibleCopy.contains("failed"))
+        XCTAssertFalse(visibleCopy.contains("streak rescue"))
+        XCTAssertFalse(visibleCopy.contains("productivity score"))
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+    }
+
     func testStepSessionEntryContextSurfacesBoundedStepSession() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)

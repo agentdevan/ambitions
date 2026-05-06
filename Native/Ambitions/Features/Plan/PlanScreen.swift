@@ -793,12 +793,16 @@ private struct PlanPressureRecoveryReviewCard: View {
                 .fixedSize(horizontal: false, vertical: true)
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    PlanKeyValueRow(label: "Pressure field", value: review.pressureFieldLabel, state: review.visualState)
+                    PlanKeyValueRow(label: "Recovery loop", value: review.recoveryLoopLabel, state: .selected)
                     PlanKeyValueRow(label: "Week", value: review.weekPressureLabel, state: review.visualState)
                     PlanKeyValueRow(label: "Overload", value: review.overloadedDayLabel, state: review.visualState)
                     PlanKeyValueRow(label: "Recovery", value: review.recoverySpaceLabel, state: .success)
+                    PlanKeyValueRow(label: "Smaller step", value: review.smallerStepAnchorLabel, state: .selected)
                     PlanKeyValueRow(label: "Protected", value: review.protectedTimeConflictLabel, state: .selected)
                     PlanKeyValueRow(label: "Late start", value: review.lateStartAdjustmentLabel, state: .default)
                     PlanKeyValueRow(label: "Review", value: review.recoveryDayReviewLabel, state: .success)
+                    PlanKeyValueRow(label: "Receipt", value: review.recoveryReceiptPreviewLabel, state: .default)
                     PlanKeyValueRow(label: "Capacity", value: review.capacityReviewLabel, state: .default)
                 }
 
