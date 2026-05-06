@@ -1,0 +1,63 @@
+name: CQS Advisory Gates
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  cqs-advisory-gates:
+    name: CQS advisory gate scans
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show repository state
+        run: |
+          git status --short
+          git rev-parse HEAD
+
+      - name: Validate gate result manifests
+        run: |
+          python3 scripts/validate-gate-result-manifest.py docs/audits/gate-results
+
+      - name: Run CQS advisory scans
+        env:
+          CQS_STRICT: "0"
+        run: |
+          set -o pipefail
+          mkdir -p .codex/ci-logs
+          for script in \
+            scripts/cqs-architecture-boundary-scan.sh \
+            scripts/cqs-product-drift-scan.sh \
+            scripts/cqs-accessibility-motion-scan.sh \
+            scripts/cqs-performance-budget-scan.sh \
+            scripts/cqs-prompt-built-smell-scan.sh \
+            scripts/cqs-privacy-security-claim-scan.sh \
+            scripts/batch-train-gate-check.sh \
+            scripts/sa-composition-projection-scan.sh \
+            scripts/sa-pack-duplication-scan.sh \
+            scripts/sa-generated-step-boundary-scan.sh \
+            scripts/sa-projection-fixture-coverage-scan.sh \
+            scripts/sa-research-seeds-integrity-scan.sh; do
+            if [[ -x "$script" || -f "$script" ]]; then
+              echo "::group::$script"
+              bash "$script" 2>&1 | tee ".codex/ci-logs/$(basename "$script").log" || true
+              echo "::endgroup::"
+            else
+              echo "ADVISORY: missing $script" | tee ".codex/ci-logs/$(basename "$script").missing.log"
+            fi
+          done
+
+      - name: Upload advisory gate logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cqs-advisory-gate-logs
+          path: .codex/ci-logs
+          if-no-files-found: warn
