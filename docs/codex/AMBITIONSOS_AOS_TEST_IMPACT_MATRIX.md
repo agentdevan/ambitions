@@ -8,3 +8,4 @@ Date: 2026-05-06
 | --- | --- | --- | --- | --- |
 | AOS01 | Docs/protocol runtime contract lock | None | doc QA, gate check, diff check, targeted scans | Accepted Yellow; no app behavior changed. |
 | AOS02 | Additive domain contract and focused tests | No app behavior, persistence, or UI change | `LifeGraphEventLogModelsTests`, CQS scans, doc QA, gate check, architecture scan, diff check | Green; focused tests passed. |
+| AOS03 | Additive domain contract and focused tests | No app behavior, persistence, graph-store runtime, external projection, or UI change | `LifeGraphDeltaReviewModelsTests`, CQS scans, doc QA, gate check, architecture scan, diff check | Green; focused tests passed. |

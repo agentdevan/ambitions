@@ -2,15 +2,16 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS02 Life Graph Event Log Foundation complete / Green.
-Next eligible batch: AOS03 Graph Delta Review Projection Store.
-Scope: AOS02 added additive domain contracts for Human Progress Graph nodes,
-edges, local-only Life Graph event log entries, and proposal-first graph deltas
-with source/freshness/review/privacy gates plus focused domain tests. It adds no
-graph persistence, graph store, runtime graph mutation, source-pack runtime, UI,
-platform integration, sync/account/backend service, hosted AI, external-surface
-behavior, release claim, App Store claim, TestFlight claim, physical-device
-proof, public accessibility proof, privacy/legal approval, or platform proof.
+Current batch: AOS03 Graph Delta Review Projection Store complete / Green.
+Next eligible batch: AOS04 Control Plane Work Classifier.
+Scope: AOS03 added additive domain contracts for graph delta review records,
+review decisions, risk inference, receipt-required projection eligibility,
+private projection snapshots, and in-memory/value projection store boundaries
+plus focused domain tests. It adds no graph persistence, graph store runtime,
+silent graph mutation, source-pack runtime, UI, platform integration,
+sync/account/backend service, hosted AI, external-surface behavior, release
+claim, App Store claim, TestFlight claim, physical-device proof, public
+accessibility proof, privacy/legal approval, or platform proof.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -102,7 +103,8 @@ Expansion and Revenue Architecture evidence. HPS12 is complete / Accepted
 Yellow as Singular Experience and Acquisition Readiness Lock evidence. AOS01
 is complete / Accepted Yellow as AmbitionsOS Canon and Runtime Contract
 evidence. AOS02 is complete / Green as Life Graph Event Log Foundation
-evidence. AOS03 is the next eligible global batch under the active global
+evidence. AOS03 is complete / Green as Graph Delta Review Projection Store
+evidence. AOS04 is the next eligible global batch under the active global
 authorization.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,

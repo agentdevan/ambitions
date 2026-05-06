@@ -73,3 +73,37 @@ Does not prove:
 - UI integration
 - platform behavior
 - release/platform readiness
+
+## AOS03
+
+Batch: AOS03 Graph Delta Review Projection Store.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- graph delta review record contract
+- review decisions and projection eligibility gates
+- source, freshness, privacy, delete-pending, malformed-delta, and review-risk
+  inference
+- receipt-required projection eligibility
+- private projection snapshot contract
+- in-memory/value projection store separation of pending and projectable records
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/LifeGraphDeltaReviewModelsTests test`
+- final validation pack recorded in the AOS03 report
+
+Does not prove:
+
+- graph persistence
+- graph store runtime
+- silent graph mutation
+- source-pack runtime
+- model behavior
+- UI integration
+- external projection
+- platform behavior
+- release/platform readiness
