@@ -2,18 +2,15 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS01 AmbitionsOS Canon And Runtime Contract complete / Accepted Yellow.
-Next eligible batch: AOS02 Life Graph Event Log Foundation.
-Scope: AOS01 activated the AmbitionsOS runtime contract as docs/protocol source
-truth. It imports HPS and Source Atlas inheritance into
-`docs/canon/AmbitionsOS_Runtime_Contract.md`, creates AOS evidence,
-traceability, and test-impact records, and records global-authorization
-reconciliation for starting AOS after HPS closed. It adds no production Swift,
-AOS runtime behavior, model behavior, event log, graph persistence, source-pack
-runtime, UI, platform integration, sync/account/backend service, hosted AI,
-external-surface behavior, release claim, App Store claim, TestFlight claim,
-physical-device proof, public accessibility proof, security certification, or
-acquisition claim.
+Current batch: AOS02 Life Graph Event Log Foundation complete / Green.
+Next eligible batch: AOS03 Graph Delta Review Projection Store.
+Scope: AOS02 added additive domain contracts for Human Progress Graph nodes,
+edges, local-only Life Graph event log entries, and proposal-first graph deltas
+with source/freshness/review/privacy gates plus focused domain tests. It adds no
+graph persistence, graph store, runtime graph mutation, source-pack runtime, UI,
+platform integration, sync/account/backend service, hosted AI, external-surface
+behavior, release claim, App Store claim, TestFlight claim, physical-device
+proof, public accessibility proof, privacy/legal approval, or platform proof.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -104,7 +101,8 @@ architecture evidence. HPS11 is complete / Accepted Yellow as Vertical
 Expansion and Revenue Architecture evidence. HPS12 is complete / Accepted
 Yellow as Singular Experience and Acquisition Readiness Lock evidence. AOS01
 is complete / Accepted Yellow as AmbitionsOS Canon and Runtime Contract
-evidence. AOS02 is the next eligible global batch under the active global
+evidence. AOS02 is complete / Green as Life Graph Event Log Foundation
+evidence. AOS03 is the next eligible global batch under the active global
 authorization.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,

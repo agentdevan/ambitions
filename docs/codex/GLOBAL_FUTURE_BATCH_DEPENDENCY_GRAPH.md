@@ -210,7 +210,11 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   where source-dependent, typed outputs, deterministic fallback, proposal-before
   mutation, source proof, privacy projection, performance budget,
   compatibility, maintainability, and release-claim review locks.
-- AOS02-AOS23 depend on AOS01 and the kernel dependencies named in the AOS train manifest.
+- AOS02 is complete Green as of 2026-05-06. Later graph and kernel work may use
+  `Native/Ambitions/Domain/LifeGraphEventLogModels.swift` as the additive typed
+  event/delta contract, but persistence, mutation runtime, projection stores,
+  source-pack runtime, and external projections remain later-owned.
+- AOS03-AOS23 depend on AOS01/AOS02 and the kernel dependencies named in the AOS train manifest.
 - AOS24 depends on AOS18-AOS23, PXOS expression gates, ME maintainability gates, CS compatibility gates, SI18 handoff, relevant FCP object gates, and relevant LDI gates where living dream behavior would be exposed.
 - AOS25 depends on AOS18 and AOS24.
 - AOS26 depends on AOS16, AOS17, AOS18, AOS25, and relevant FCP proof/mesh gates.

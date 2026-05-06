@@ -362,8 +362,16 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   source-pack runtime, UI, platform integration, sync/account/backend service,
   hosted AI, external-surface behavior, or public claim implementation. Yellow
   owners: later AOS kernel implementation and AOS Codex OS skill/script
-  mapping. The next eligible global batch is AOS02 Life Graph Event Log
+  mapping. The next eligible global batch was AOS02 Life Graph Event Log
   Foundation.
+- AOS02 is complete Green as additive Life Graph Event Log Foundation evidence.
+  It adds `Native/Ambitions/Domain/LifeGraphEventLogModels.swift` and focused
+  domain tests with typed Human Progress Graph nodes/edges, local-only event
+  entries, proposal-first graph deltas, source/freshness/review/privacy gates,
+  rollback hints, and no persistence/schema, runtime mutation, UI, platform,
+  sync/account/backend, hosted AI, external-surface, release, or platform
+  claim. The next eligible global batch is AOS03 Graph Delta Review Projection
+  Store.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.

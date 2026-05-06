@@ -41,3 +41,35 @@ Does not prove:
 - UI integration
 - platform behavior
 - release/platform readiness
+
+## AOS02
+
+Batch: AOS02 Life Graph Event Log Foundation.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Human Progress Graph node families
+- typed Human Progress Graph edge families
+- privacy, source, freshness, and review states
+- local-only Life Graph event log entry contract
+- proposal-first graph delta contract with rollback hint
+- focused domain tests for state fields, source gates, review gates, and
+  deterministic ordering
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/LifeGraphEventLogModelsTests test`
+- final validation pack recorded in the AOS02 report
+
+Does not prove:
+
+- graph persistence
+- graph mutation runtime
+- source-pack runtime
+- model behavior
+- UI integration
+- platform behavior
+- release/platform readiness
