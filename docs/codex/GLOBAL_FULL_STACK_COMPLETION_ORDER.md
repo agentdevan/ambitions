@@ -506,7 +506,16 @@ remaining sensitive intelligence work.
      schema, sync, hosted AI, Source Atlas runtime, UI, or release/platform
      claims. Yellow owners: later HPS Codex OS scripts/skills and AOS02 typed
      graph implementation.
-70H. HPS03 Verified Proof Ledger + Proof Portability Architecture.
+70H. HPS03 Verified Proof Ledger + Proof Portability Architecture. Completed
+     Accepted Yellow on 2026-05-06 as docs-domain architecture in
+     `docs/canon/Ambitions_Verified_Proof_Ledger_Portability_Architecture.md`.
+     It defines proof object families, proof state fields, qualitative proof
+     strength states, portability states, proof-to-requirement mapping, privacy
+     and redaction rules, future verifier boundaries, and proof read/proposal/
+     portability/receipt API contract families without implementing runtime,
+     schema, export/import, verifier product, public credential, marketplace,
+     sync, hosted AI, UI, or release/platform claims. Yellow owners: later HPS
+     Codex OS scripts/skills and future typed proof implementation batches.
 71H. HPS04 Source Truth + Requirement Graph Architecture.
 72H. HPS05 Commitment Memory + Searchable Life Recall Architecture.
 73H. HPS06 Recommendation Quality + Start Here Brain Architecture.

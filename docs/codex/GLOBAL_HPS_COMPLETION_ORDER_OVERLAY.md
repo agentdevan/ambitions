@@ -36,7 +36,10 @@ If the live run has advanced beyond PFC30 or FCP22 by the time this overlay is r
 46H. HPS02 Human Progress Graph + API Architecture. Completed Accepted Yellow
      on 2026-05-06 as docs-domain architecture. Yellow owners: later HPS Codex
      OS scripts/skills and AOS02 typed graph implementation.
-47H. HPS03 Verified Proof Ledger + Proof Portability Architecture.
+47H. HPS03 Verified Proof Ledger + Proof Portability Architecture. Completed
+     Accepted Yellow on 2026-05-06 as docs-domain architecture. Yellow owners:
+     later HPS Codex OS scripts/skills and future typed proof implementation
+     batches.
 48H. HPS04 Source Truth + Requirement Graph Architecture.
 49H. HPS05 Commitment Memory + Searchable Life Recall Architecture.
 50H. HPS06 Recommendation Quality + Start Here Brain Architecture.

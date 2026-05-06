@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -103,6 +103,14 @@ Owner: Proof Trust / Source Truth.
 Goal: Define proof object model, evidence classes, proof-to-requirement mapping, proof strength, proof privacy, proof correction/revocation, proof receipts, future verifier roles, proof export, proof abuse risk.
 Required result: proof ledger architecture and portability boundary.
 Acceptance: no public credential network or verifier product implementation.
+Status: Accepted Yellow as docs-domain architecture in
+`docs/canon/Ambitions_Verified_Proof_Ledger_Portability_Architecture.md`.
+HPS03 defines proof object families, proof state fields, qualitative proof
+strength states, portability states, proof-to-requirement mapping, privacy/
+redaction rules, future verifier boundaries, and proof read/proposal/
+portability/receipt API contract families. Yellow is owned by later HPS Codex
+OS work for missing physical HPS advisory scripts/skills and by AOS/LDI/Source
+Atlas/export-import batches for future typed proof behavior.
 
 ### HPS04 — Source Truth + Requirement Graph Architecture
 

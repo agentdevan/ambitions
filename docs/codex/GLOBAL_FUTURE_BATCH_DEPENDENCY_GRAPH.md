@@ -123,6 +123,14 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   privacy/source/freshness/review state, source-needed fallback, and no silent
   graph mutation. Yellow owners: later HPS Codex OS scripts/skills and AOS02
   typed graph implementation.
+- HPS03 is complete Accepted Yellow as of 2026-05-06. Future proof, source,
+  AOS, LDI, Source Atlas, export/import, and external-handoff work must inherit
+  the Verified Proof Ledger object families, proof state fields, qualitative
+  proof-strength states, portability states, proof-to-requirement mapping,
+  privacy/redaction rules, future verifier no-build boundary, and no silent
+  proof creation, promotion, export, or externalization rule. Yellow owners:
+  later HPS Codex OS scripts/skills and future typed proof implementation
+  batches.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.
