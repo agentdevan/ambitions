@@ -2,17 +2,20 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: SA03 Universal Source Binder Coverage Map complete / Green.
-Next eligible batch: SA04 Source Atlas Codex OS Upgrade.
-Scope: SA03 reconciled the existing Universal Source Binder coverage map into
-the live global batch train. The map defines the support envelope for URL, PDF,
-screenshot/image, copied text, local file, official pack, and user mini-pack
-containers plus rulebook, school program page, job posting, certification
-handbook, official page, generic text, and legal/civic/professional source
-categories. It changed docs/state only and adds no Swift runtime, seed import,
-source ingestion, extraction, OCR, classifier, source pack, Pack Factory output,
-Freshness Broker behavior, UI, sync/account/backend service, release claim,
-legal/current-requirement claim, or platform proof.
+Current batch: SA04 Source Atlas Codex OS Upgrade complete / Green.
+Next eligible batch: SA05 Source Atlas Global Order And Integration Lock.
+Scope: SA04 installed physical Source Atlas reviewer skills and non-mutating
+advisory scripts, and repaired executable bits for existing Source Atlas
+scripts. It adds concrete review tools for source container coverage, pack
+schema/validation, no-claim language, source freshness, OCR review-required,
+user-provided-is-not-official, offline fallback, source UI FVQ, high-risk
+claims, pack revocation/rollback, private document leakage, fixture coverage,
+composition/projection, pack duplication, generated-step boundaries, and
+alternative path / option value. It changes Codex OS tooling only and adds no
+Swift runtime, seed import, source ingestion, extraction, OCR, classifier,
+source pack, Pack Factory output, Freshness Broker behavior, UI,
+sync/account/backend service, release claim, legal/current-requirement claim, or
+platform proof.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -108,9 +111,10 @@ evidence. AOS03 is complete / Green as Graph Delta Review Projection Store
 evidence. AOS04 is complete / Green as Control Plane Work Classifier evidence.
 SA01 is complete / Green as Source Atlas Canon Lock reconciliation. SA02 is
 complete / Green as Source Atlas Gate Matrix reconciliation. SA03 is complete /
-Green as Universal Source Binder Coverage Map reconciliation. SA04 is the next
-eligible global batch under the active Source Atlas overlay before AOS12 and
-other deep source/freshness-dependent AOS/LDI work continues.
+Green as Universal Source Binder Coverage Map reconciliation. SA04 is complete
+/ Green as Source Atlas Codex OS Upgrade. SA05 is the next eligible global
+batch under the active Source Atlas overlay before AOS12 and other deep
+source/freshness-dependent AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

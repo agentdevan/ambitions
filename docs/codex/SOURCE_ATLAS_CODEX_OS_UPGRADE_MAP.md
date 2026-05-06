@@ -144,7 +144,7 @@ Stop on:
 - source pack loads without validation
 - stale high-risk claim drives recommendation as current
 - app requires internet for basic cached/source-needed behavior
-- Source Atlas dashboard/tab/marketplace appears
+- Source Atlas standalone top-level source surface or marketplace appears
 - hosted AI/user-data-server/live-API dependency is introduced without explicit scope/legal review
 - one pack per individual goal phrase
 - pro/elite pack duplicates lower-level graph nodes instead of reusing shared nodes
@@ -155,15 +155,16 @@ Stop on:
 
 ## Physical skill requirements
 
-SAP05 or the earliest Source Atlas Codex OS batch must create or map physical skill files for:
+SA04 created physical skill files for the first composition/projection reviewer
+set:
 
-- `.codex/skills/source-atlas-composition-architect.md`
-- `.codex/skills/goal-projection-reviewer.md`
-- `.codex/skills/capability-graph-reviewer.md`
-- `.codex/skills/projection-recipe-reviewer.md`
-- `.codex/skills/alternative-path-option-value-reviewer.md`
-- `.codex/skills/pack-duplication-reviewer.md`
-- `.codex/skills/generated-step-boundary-reviewer.md`
+- `.codex/skills/source-atlas-composition-architect/SKILL.md`
+- `.codex/skills/goal-projection-reviewer/SKILL.md`
+- `.codex/skills/capability-graph-reviewer/SKILL.md`
+- `.codex/skills/projection-recipe-reviewer/SKILL.md`
+- `.codex/skills/alternative-path-option-value-reviewer/SKILL.md`
+- `.codex/skills/pack-duplication-reviewer/SKILL.md`
+- `.codex/skills/generated-step-boundary-reviewer/SKILL.md`
 
 If physical scripts are not yet created, batches must mark the gap Yellow with owner and cannot close runtime implementation as Green if the missing script would have caught a touched failure mode.
 

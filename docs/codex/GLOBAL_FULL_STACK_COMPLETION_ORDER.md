@@ -695,7 +695,19 @@ remaining sensitive intelligence work.
      Factory output, Freshness Broker behavior, UI, sync/account/backend
      service, release claim, legal/current-requirement claim, or platform
      proof. SA04 is next.
-72D. SA04 Source Atlas Codex OS Upgrade.
+72D. SA04 Source Atlas Codex OS Upgrade. Completed Green on 2026-05-06 as
+     Codex OS tooling implementation. It adds physical Source Atlas reviewer
+     skills and non-mutating advisory scripts for source container coverage,
+     pack schema/validation, no-claim language, source freshness, OCR review,
+     user-provided source boundaries, offline fallback, source UI FVQ,
+     high-risk claims, pack revocation/rollback, private document leakage,
+     fixture coverage, composition/projection, pack duplication,
+     generated-step boundaries, and alternative path / option value. It does
+     not add Swift runtime, seed data, source ingestion, extraction, OCR,
+     classifier, source packs, Pack Factory output, Freshness Broker behavior,
+     UI, sync/account/backend service, release claim, legal/current-requirement
+     claim, or platform proof. SA05 is next.
+72E. SA05 Source Atlas Global Order And Integration Lock.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.
