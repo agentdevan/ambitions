@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC11 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC10 Green; PFC11 Green; PFC12 Green; PFC13 Green; PFC14 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 Green; PFC30 Green. PFC31 remains later under Phase 9 of the global order. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -219,6 +219,15 @@ Type: Implementation/tests.
 Owner: Widgets.
 Goal: Implement or repair widgets with stale-state handling, deep links, privacy redaction, accessibility labels.
 Required result: widget tests/previews and privacy proof.
+Status: Green as bounded WidgetKit projection hardening and focused-test
+evidence. Stale or unavailable snapshots collapse to open/refresh copy and
+suppress ambient variant rows, while focused tests cover fallback copy,
+stale-state copy, stale row suppression, deep-link preservation, and private
+ambient text not appearing in widget accessibility output. PFC14 adds no new
+widget family, entitlement, signing, project/workflow/dependency change,
+persistence/schema change, privacy manifest change, sync/account/backend
+behavior, legal/privacy/release claim, App Store claim, TestFlight claim,
+physical-device proof, or public accessibility claim.
 
 ### PFC15 — Live Activities / ActivityKit Strategy
 

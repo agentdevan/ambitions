@@ -2,18 +2,17 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: PFC11 Sync Implementation And Conflict Tests complete / Green as
-explicit local-only closure.
-Next eligible batch: PFC14 WidgetKit Implementation And Tests.
-Scope: PFC11 closed the sync implementation branch as a safe local-only
-deferral because PFC09 and PFC10 did not approve CloudKit runtime work. Current
-runtime remains `LocalOnlySyncCapability`, sync unavailable, no account, no
-launch sync, and no CloudKit/iCloud/server/backend/account-sync claim. It adds
-no production Swift, tests, persistence/schema change, entitlement, signing,
-project/workflow/dependency change, privacy manifest change, CloudKit
-container, account UI, backend, sync runtime, legal/privacy/release claim, App
-Store claim, TestFlight claim, physical-device proof, public accessibility
-claim, AOS runtime claim, or LDI runtime claim.
+Current batch: PFC14 WidgetKit Implementation And Tests complete / Green.
+Next eligible batch: PFC16 Live Activities Implementation And Tests.
+Scope: PFC14 hardened the existing widget projection path so stale or
+unavailable snapshots collapse to open/refresh copy and suppress ambient
+variant rows. Focused tests prove missing snapshot fallback, stale copy, stale
+row suppression, and private ambient text not appearing in widget accessibility
+output. It adds no new widget family, entitlement, signing, project/workflow/
+dependency change, persistence/schema change, privacy manifest change,
+sync/account/backend behavior, AI/LDI runtime, legal/privacy/release claim, App
+Store claim, TestFlight claim, physical-device proof, or public accessibility
+claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -77,8 +76,9 @@ History Polish evidence. FCP25 is complete / Green as Loading / Empty /
 Degraded State Objectization evidence. FCP26 is complete / Green as Iconography
 / Status Grammar Hardening evidence. PFC10 is complete / Green as CloudKit
 Schema / Zone / Conflict Model contract evidence. PFC11 is complete / Green as
-explicit local-only sync closure evidence. PFC14 is the next eligible global
-batch.
+explicit local-only sync closure evidence. PFC14 is complete / Green as
+WidgetKit projection hardening and focused-test evidence. PFC16 is the next
+eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

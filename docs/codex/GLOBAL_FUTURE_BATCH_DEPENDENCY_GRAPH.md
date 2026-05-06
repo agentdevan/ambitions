@@ -89,6 +89,12 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   preserves `LocalOnlySyncCapability`, sync unavailable, no account, no launch
   sync, and no CloudKit/iCloud/server/backend/account-sync claim because
   PFC09/PFC10 did not approve runtime sync implementation.
+- PFC14 is complete as bounded WidgetKit projection hardening and focused-test
+  evidence. Stale or unavailable snapshots collapse to open/refresh copy and
+  suppress ambient variant rows without new widget families, entitlement,
+  signing, project/workflow/dependency, persistence/schema, privacy manifest,
+  sync/account/backend, release, legal/privacy, TestFlight, App Store,
+  physical-device, or public accessibility claims.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
 - AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.
@@ -168,6 +174,11 @@ repair must use `docs/canon/Ambitions_WidgetKit_Strategy_And_Object_Map.md`
 for the allowed widget objects, privacy matrix, family constraints, and PFC14
 boundary. PFC13 does not provide rendered widget gallery, device, App Store,
 TestFlight, legal/privacy, or public accessibility proof.
+
+PFC14 is complete Green as of 2026-05-06. Later widget expansion must continue
+to use the PFC13 strategy and the PFC14 stale/unavailable projection contract;
+PFC14 does not provide new widget-family, rendered widget-gallery, device,
+App Store, TestFlight, legal/privacy, or public accessibility proof.
 
 FVQ04 is complete Green as of 2026-05-05. Later UI-affecting batches must use
 the recurring rendered-proof gate before closing Green.

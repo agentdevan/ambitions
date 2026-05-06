@@ -84,7 +84,9 @@ PFC09 is complete / Green as a local-only/no-launch-sync strategy decision
 record. PFC10 is complete / Green as a docs-only future CloudKit
 schema/zone/conflict contract and PFC11 test plan. PFC11 is complete / Green as
 explicit local-only sync closure and safe deferral under current local-only
-truth.
+truth. PFC14 is complete / Green as bounded WidgetKit projection hardening and
+focused-test evidence; PFC16 is the next eligible remaining PFC implementation
+batch in the live global order.
 PFC12 is complete / Green as app-group/shared-storage boundary evidence. It
 documented the existing app/widget/share extension entitlement match,
 privacy-safe shared snapshot and external creation queue boundaries, and focused
@@ -144,7 +146,7 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 030 | FCP12 Proof Spine / Evidence Ledger | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared ProofSpine / Goal Detail proof integration evidence with source, freshness, privacy, correction, and stale-review boundaries. | FCP06/FCP10/FCP11; PD07/PD17. | Complete; next FCP13B. |
 | 031 | FCP13B Goal Alternate Path / Decision History Polish | FCP split | Implementation | Completed Green on 2026-05-06 as bounded Goal Detail Decision Spine evidence with alternate-path and decision-history branches, review/consequence/no-mutation labels, and no automated reroute. | FCP11-FCP12; PD08. | Complete; next FCP25. |
 | 032 | FCP25 Loading / Empty / Degraded State Objectization | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared/top-level object-state evidence with a Flagship Object State Matrix and object-specific loading/unavailable states across Today, Goals, Goal Detail, Capture, Plan, and You. | FCP05/FCP10/FCP14/FCP18/FCP22. | Complete; next FCP26. |
-| 033 | FCP26 Iconography / Status Grammar Hardening | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared/status-grammar evidence with SI14 placement metadata, shape cues, degraded-card wiring, and focused non-color/status-placement proof. | FCP25; SI14. | Complete; PFC10/PFC11 are also complete; next PFC14 per live global order. |
+| 033 | FCP26 Iconography / Status Grammar Hardening | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared/status-grammar evidence with SI14 placement metadata, shape cues, degraded-card wiring, and focused non-color/status-placement proof. | FCP25; SI14. | Complete; PFC10/PFC11/PFC14 are also complete; next PFC16 per live global order. |
 | 034 | AOS01 AmbitionsOS Canon And Runtime Contract | AOS | Docs / Contract | Runtime work starts after flagship object slots and product depth exist. | Start AOS Train or global preauthorization. | May continue on Green. |
 | 035 | AOS02 Life Graph Event Log Foundation | AOS | Contract/Foundation | Foundation for graph-backed memory/proof. | AOS01. | Single-batch preferred. |
 | 036 | AOS03 Graph Delta Review Projection Store | AOS | Contract/Foundation | Projection review precedes control plane and kernels. | AOS02. | Single-batch. |

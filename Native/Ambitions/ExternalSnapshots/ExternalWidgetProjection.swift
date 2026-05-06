@@ -53,6 +53,7 @@ struct ExternalWidgetProjection: Sendable, Equatable {
     }
 
     private static func variantRows(for glance: ExternalSurfaceGlanceState) -> [VariantRow] {
+        guard glance.continuity.lease.status == .current else { return [] }
         guard let ambientState = glance.ambientState else { return [] }
         return [ambientState.today, ambientState.focus, ambientState.goal, ambientState.plan]
             .sorted { prominenceRank($0.prominence) > prominenceRank($1.prominence) }
@@ -60,6 +61,14 @@ struct ExternalWidgetProjection: Sendable, Equatable {
     }
 
     private static func title(for glance: ExternalSurfaceGlanceState) -> String {
+        switch glance.continuity.lease.status {
+        case .current:
+            break
+        case .stale:
+            return "Open Ambitions to refresh"
+        case .unavailable:
+            return "Open Ambitions"
+        }
         if let today = glance.ambientState?.today {
             return today.title
         }
@@ -79,6 +88,14 @@ struct ExternalWidgetProjection: Sendable, Equatable {
     }
 
     private static func detail(for glance: ExternalSurfaceGlanceState) -> String {
+        switch glance.continuity.lease.status {
+        case .current:
+            break
+        case .stale:
+            return "This may be behind."
+        case .unavailable:
+            return "Confirm the latest local state in Ambitions."
+        }
         if let today = glance.ambientState?.today {
             return today.detail
         }

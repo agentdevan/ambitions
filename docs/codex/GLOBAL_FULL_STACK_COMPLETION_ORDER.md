@@ -410,7 +410,15 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     legal/privacy/release claim, App Store claim, TestFlight claim,
     physical-device proof, public accessibility claim, AOS runtime claim, or
     LDI runtime claim.
-63. PFC14 WidgetKit Implementation And Tests.
+63. PFC14 WidgetKit Implementation And Tests. Completed Green on 2026-05-06 as
+    bounded WidgetKit projection hardening and focused-test evidence: stale or
+    unavailable snapshots collapse to open/refresh copy, suppress ambient
+    variant rows, preserve widget deep-link routing, and avoid exposing private
+    ambient titles or IDs through widget accessibility output. It adds no new
+    widget family, entitlement, signing, project/workflow/dependency change,
+    persistence/schema change, privacy manifest change, sync/account/backend
+    behavior, legal/privacy/release claim, App Store claim, TestFlight claim,
+    physical-device proof, or public accessibility claim.
 64. PFC16 Live Activities Implementation And Tests.
 65. PFC18 App Intents / Shortcuts Implementation And Tests.
 66. PFC20 Notifications / Calendar / Reminders Implementation Proof.

@@ -107,8 +107,8 @@ final class ExternalWidgetProjectionTests: XCTestCase {
     func testD23WidgetProjectionUsesSafeFallbackForMissingSnapshot() {
         let projection = ExternalWidgetProjection(snapshot: nil)
 
-        XCTAssertEqual(projection.title, "No next step")
-        XCTAssertEqual(projection.detail, "Open Ambitions to refresh your plan.")
+        XCTAssertEqual(projection.title, "Open Ambitions")
+        XCTAssertEqual(projection.detail, "Confirm the latest local state in Ambitions.")
         XCTAssertEqual(projection.lockDetail, "Open Ambitions to confirm the latest local state.")
         XCTAssertEqual(projection.privacySummary, "Open Ambitions to confirm the latest local state.")
         XCTAssertEqual(projection.primaryURL?.absoluteString, "ambitions://tab/today?origin=widget")
@@ -137,9 +137,88 @@ final class ExternalWidgetProjectionTests: XCTestCase {
 
         let projection = ExternalWidgetProjection(snapshot: snapshot)
 
+        XCTAssertEqual(projection.title, "Open Ambitions to refresh")
+        XCTAssertEqual(projection.detail, "This may be behind.")
         XCTAssertEqual(projection.lockDetail, "This may be behind. Open Ambitions to refresh.")
         XCTAssertEqual(projection.privacySummary, "This may be behind. Open Ambitions to refresh.")
         XCTAssertEqual(projection.trustSummary, "Local state may be behind · This may be behind")
         XCTAssertEqual(projection.primaryURL?.absoluteString, "ambitions://tab/today?origin=widget")
+    }
+
+    func testPFC14WidgetProjectionSuppressesAmbientRowsWhenSnapshotIsStale() {
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T12:00:00Z",
+            nextAction: ExternalSurfaceNextAction(
+                goalID: "private-goal-id",
+                stepID: "private-step-id",
+                display: ExternalSurfaceDisplayMetadata(
+                    templateKey: "next_tiny_step",
+                    goalMode: .project,
+                    stepState: .planned,
+                    urgency: .soon,
+                    timing: .deadline
+                )
+            ),
+            ambientState: ExternalSurfaceAmbientState(
+                today: ExternalSurfaceVariantState(
+                    kind: .today,
+                    title: "Private medical task",
+                    detail: "Call the clinic",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .elevated
+                ),
+                focus: ExternalSurfaceVariantState(
+                    kind: .focus,
+                    title: "Private focus",
+                    detail: "Sensitive focus",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                ),
+                goal: ExternalSurfaceVariantState(
+                    kind: .goal,
+                    title: "Private goal",
+                    detail: "Sensitive goal",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Goals", surface: .tab, tab: "goals"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                ),
+                plan: ExternalSurfaceVariantState(
+                    kind: .plan,
+                    title: "Private plan",
+                    detail: "Sensitive plan",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Plan", surface: .tab, tab: "plan"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                )
+            ),
+            continuity: ExternalSurfaceContinuityState(
+                lease: ExternalSurfaceNowStateLease(
+                    status: .stale,
+                    generatedAt: "2026-04-15T11:00:00Z",
+                    freshnessLabel: "This may be behind",
+                    staleActionLabel: "Open Ambitions to refresh"
+                ),
+                syncHealth: ExternalSurfaceSyncHealth(
+                    state: .stale,
+                    label: "Local state may be behind",
+                    detail: "Open Ambitions before acting from this surface."
+                ),
+                receipt: ExternalSurfaceContinuityReceipt(origin: .widget, label: "Opened from widget")
+            )
+        )
+
+        let projection = ExternalWidgetProjection(snapshot: snapshot)
+
+        XCTAssertEqual(projection.title, "Open Ambitions to refresh")
+        XCTAssertEqual(projection.detail, "This may be behind.")
+        XCTAssertTrue(projection.variants.isEmpty)
+        XCTAssertFalse(projection.accessibilityLabel.contains("Private medical task"))
+        XCTAssertFalse(projection.accessibilityLabel.contains("private-goal-id"))
     }
 }
