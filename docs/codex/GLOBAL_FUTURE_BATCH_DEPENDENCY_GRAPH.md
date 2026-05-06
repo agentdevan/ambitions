@@ -307,6 +307,15 @@ No automatic-goal, project-wizard, habit-conversion, route/raw-value,
 persistence/schema, sync/cloud, release, or runtime claim may be inferred from
 this batch.
 
+FCP21 is complete Green as of 2026-05-06. Future Capture, accessibility, AOS,
+LDI, or external-surface work must preserve input-alternatives posture: voice
+capture remains honestly unavailable until a real permission/runtime path is
+implemented, keyboard/system-dictation fallback copy stays explicit, motor
+alternatives use buttons and menus rather than drag/swipe/long-press-only
+paths, and review-before-save remains visible. No microphone permission, audio
+capture, route/raw-value, persistence/schema, sync/cloud, release, public
+accessibility, or runtime claim may be inferred from this batch.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

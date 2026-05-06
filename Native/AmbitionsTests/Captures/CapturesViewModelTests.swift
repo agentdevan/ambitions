@@ -198,6 +198,52 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("AI"))
     }
 
+    func testFCP21ComposerInputAlternativesKeepVoiceUnavailableAndMotorPathsHonest() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Book dentist")
+
+        let presentation = CaptureAtmosphereComposerPresentation(
+            text: viewModel.draftText,
+            routePreview: viewModel.draftRoutePreview,
+            error: nil,
+            isSubmitEnabled: true
+        )
+        let alternatives = presentation.inputAlternatives
+
+        XCTAssertEqual(alternatives.title, "Input alternatives")
+        XCTAssertEqual(alternatives.voiceStatusLabel, "Voice capture is not connected yet")
+        XCTAssertTrue(alternatives.voiceStatusDetail.localizedCaseInsensitiveContains("system dictation"))
+        XCTAssertTrue(alternatives.voiceStatusDetail.localizedCaseInsensitiveContains("does not record audio"))
+        XCTAssertTrue(alternatives.motorStatusDetail.localizedCaseInsensitiveContains("buttons and menus"))
+        XCTAssertTrue(alternatives.motorStatusDetail.localizedCaseInsensitiveContains("no drag, swipe, or long press"))
+        XCTAssertTrue(alternatives.reviewControlLabel.localizedCaseInsensitiveContains("visible buttons"))
+        XCTAssertTrue(presentation.accessibilityValue.localizedCaseInsensitiveContains("Input alternatives"))
+        XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("listening"))
+        XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("transcript"))
+        XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
+        XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
+    }
+
+    func testFCP21ComposerInputAlternativesKeepEmptyComposerFromImplyingAutoPlacement() {
+        let presentation = CaptureAtmosphereComposerPresentation(
+            text: "",
+            routePreview: nil,
+            error: nil,
+            isSubmitEnabled: false
+        )
+
+        XCTAssertEqual(presentation.inputAlternatives.reviewControlLabel, "Review before saving: type first; placement waits for Save.")
+        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("Voice capture is not connected yet"))
+        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("placement waits for Save"))
+        XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
+        XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("hidden learning"))
+        XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("confidence percentage"))
+    }
+
     func testEB03BRouteProofUsesGoalEvidenceWhenAvailable() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [

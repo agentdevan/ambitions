@@ -291,7 +291,14 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     habit conversion, route/raw-value, persistence/schema, sync/cloud,
     legal/privacy/release, App Store, TestFlight, device, public accessibility,
     AOS runtime, or LDI runtime claim.
-51. FCP21 Voice / Motor Capture Accessibility.
+51. FCP21 Voice / Motor Capture Accessibility. Completed Green on 2026-05-06
+    as bounded Capture composer input-alternatives implementation evidence,
+    with honest voice-unavailable status, keyboard/system-dictation fallback
+    wording, motor-safe button/menu alternatives, and review-before-save copy.
+    It adds no microphone permission, audio capture, route/raw-value,
+    persistence/schema, dependency, sync/cloud, legal/privacy/release, App
+    Store, TestFlight, device, public accessibility, AOS runtime, or LDI
+    runtime claim.
 52. FCP14 LifeShape Contour Map.
 53. FCP15 Reflow Decision Fold.
 54. FCP16 Pressure Field / Recovery Loop.

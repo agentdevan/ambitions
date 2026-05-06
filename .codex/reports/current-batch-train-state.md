@@ -2,15 +2,14 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP20 Grow Into Goal Seed Incubator complete / Green.
-Next eligible batch: FCP21 Voice / Motor Capture Accessibility.
-Scope: FCP20 objectized Grow into Goal as a Goal Seed Incubator across Capture
-and Create Goal review surfaces, showing why a capture may be a goal, starting
-position proof, first milestone anchor, first step, proof/source seed, and
-explicit promotion confirmation. It preserved no automatic goal creation,
-route/raw-value and persistence compatibility, no project-wizard posture, and
-all sync/cloud, legal/privacy/release/device/accessibility claims as
-evidence-bound.
+Current batch: FCP21 Voice / Motor Capture Accessibility complete / Green.
+Next eligible batch: FCP14 LifeShape Contour Map.
+Scope: FCP21 added a Capture composer input-alternatives object with honest
+voice-unavailable status, keyboard/system-dictation fallback wording,
+motor-safe button/menu alternatives, and review-before-save copy. It preserved
+no microphone permission, audio capture, route/raw-value, persistence/schema,
+dependency, sync/cloud, legal/privacy/release/device, public accessibility,
+AOS runtime, or LDI runtime claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -63,7 +62,8 @@ complete / Green as Memory Lens / External Brain Visual Layer evidence. FCP24
 is complete / Green as Appearance Studio evidence. FCP18 is complete / Green
 as Capture Placement Shelf evidence. FCP19 is complete / Green as Placement
 Resolver / Correction Fold evidence. FCP20 is complete / Green as Goal Seed
-Incubator evidence. FCP21 is the next eligible global batch.
+Incubator evidence. FCP21 is complete / Green as Voice / Motor Capture
+Accessibility evidence. FCP14 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

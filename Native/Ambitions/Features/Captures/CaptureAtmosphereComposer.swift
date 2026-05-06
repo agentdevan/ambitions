@@ -8,6 +8,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
     let privacyLabel: String
     let evidenceTitle: String
     let evidenceDetail: String
+    let inputAlternatives: CaptureInputAlternativesPresentation
     let accessibilityValue: String
     let submitLabel: String
 
@@ -37,16 +38,56 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             evidenceDetail = "Type one real thing; no routing pressure is added."
         }
 
+        inputAlternatives = CaptureInputAlternativesPresentation(
+            isRouteRevealVisible: isRouteRevealVisible,
+            isSubmitEnabled: isSubmitEnabled
+        )
         accessibilityValue = [
             placementTitle,
             destinationLabel,
             privacyLabel,
             routePreview?.consequenceLabel,
-            error
+            error,
+            inputAlternatives.accessibilityValue
         ]
         .compactMap { $0 }
         .joined(separator: ". ")
         submitLabel = isSubmitEnabled ? "Save capture" : "Save unavailable"
+    }
+}
+
+struct CaptureInputAlternativesPresentation: Equatable {
+    let title: String
+    let voiceStatusLabel: String
+    let voiceStatusDetail: String
+    let motorStatusLabel: String
+    let motorStatusDetail: String
+    let reviewControlLabel: String
+
+    init(isRouteRevealVisible: Bool, isSubmitEnabled: Bool) {
+        title = "Input alternatives"
+        voiceStatusLabel = "Voice capture is not connected yet"
+        voiceStatusDetail = "Use typing or system dictation from the keyboard. Ambitions does not record audio here."
+        motorStatusLabel = "Motor alternative"
+        motorStatusDetail = "Use buttons and menus; no drag, swipe, or long press is required."
+        if isRouteRevealVisible {
+            reviewControlLabel = "Review before saving: route choices are visible buttons and stay editable."
+        } else if isSubmitEnabled {
+            reviewControlLabel = "Review before saving: save stays a separate button after typing."
+        } else {
+            reviewControlLabel = "Review before saving: type first; placement waits for Save."
+        }
+    }
+
+    var accessibilityValue: String {
+        [
+            title,
+            voiceStatusLabel,
+            voiceStatusDetail,
+            motorStatusLabel,
+            motorStatusDetail,
+            reviewControlLabel
+        ].joined(separator: ". ")
     }
 }
 
@@ -100,6 +141,8 @@ struct CaptureAtmosphereComposer: View {
                 state: composerState,
                 context: .capture
             )
+
+            inputAlternatives
         }
         .padding(.horizontal, theme.spacing.lg)
         .padding(.top, theme.spacing.sm)
@@ -122,6 +165,37 @@ struct CaptureAtmosphereComposer: View {
         .accessibilityIdentifier("captures.composer")
         .accessibilityElement(children: .contain)
         .accessibilityValue(presentation.accessibilityValue)
+    }
+
+    private var inputAlternatives: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Label(presentation.inputAlternatives.title, systemImage: "figure.hand.circle")
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+
+            Label(
+                presentation.inputAlternatives.voiceStatusLabel,
+                systemImage: "mic.slash"
+            )
+            Text(presentation.inputAlternatives.voiceStatusDetail)
+                .padding(.leading, 20)
+
+            Label(
+                presentation.inputAlternatives.motorStatusLabel,
+                systemImage: "hand.tap"
+            )
+            Text(presentation.inputAlternatives.motorStatusDetail)
+                .padding(.leading, 20)
+
+            Label(presentation.inputAlternatives.reviewControlLabel, systemImage: "checkmark.seal")
+        }
+        .font(theme.typography.caption)
+        .foregroundStyle(theme.colors.textSecondary)
+        .fixedSize(horizontal: false, vertical: true)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(presentation.inputAlternatives.title)
+        .accessibilityValue(presentation.inputAlternatives.accessibilityValue)
+        .accessibilityIdentifier("captures.input-alternatives")
     }
 
     private var composerInput: some View {

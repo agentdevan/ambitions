@@ -141,8 +141,14 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   be a goal, starting position proof, first milestone anchor, first step,
   proof/source seed, and explicit promotion confirmation without adding
   automatic goal creation, project-wizard posture, route/raw-value changes, or
-  persistence/schema changes. The next eligible global batch is FCP21 Voice /
-  Motor Capture Accessibility.
+  persistence/schema changes.
+- FCP21 is complete Green as bounded Capture composer input-alternatives
+  implementation evidence. Capture now exposes honest voice-unavailable
+  status, keyboard/system-dictation fallback wording, motor-safe button/menu
+  alternatives, and review-before-save copy without adding microphone
+  permission, audio capture, route/raw-value changes, persistence/schema
+  changes, or public accessibility claims. The next eligible global batch is
+  FCP14 LifeShape Contour Map.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -549,8 +555,9 @@ complete Green as bounded Memory Lens visual-layer evidence. FCP24 is complete
 Green as bounded Appearance Studio object-preview evidence. FCP18 is complete
 Green as bounded Capture Placement Shelf evidence. FCP19 is complete Green as
 bounded Placement Resolver / Correction Fold evidence. FCP20 is complete Green
-as bounded Goal Seed Incubator evidence, and the full-stack order selects
-FCP21 next.
+as bounded Goal Seed Incubator evidence. FCP21 is complete Green as bounded
+Voice / Motor Capture Accessibility evidence, and the full-stack order selects
+FCP14 next.
 
 
 ## Living Dream Intelligence Context

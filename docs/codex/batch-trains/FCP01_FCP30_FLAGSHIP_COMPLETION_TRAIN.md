@@ -336,6 +336,8 @@ Acceptance: explicit promotion confirmation; no automatic goal creation.
 
 ### FCP21 — Voice / Motor Capture Accessibility
 
+Status: Complete Green on 2026-05-06 as bounded Capture composer
+input-alternatives implementation evidence.
 Type: Implementation.
 Owner: Capture / Accessibility.
 Depends on: FCP18-FCP20; EB29/EB30 evidence.
