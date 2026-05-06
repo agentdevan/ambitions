@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -88,6 +88,13 @@ Owner: AOS / Found Life / Data Architecture.
 Goal: Define LifeGraph, LifeThread, CommitmentMemory, OpenLoopRegistry, RequirementGraph, ProofLedger, SourceTruthGraph, OptionValueGraph, RealityFit, PrivacyClass, IdentityDirectionMemory contracts.
 Required result: minimal core graph, node/edge taxonomy, API map, privacy/source/freshness states.
 Acceptance: graph remains internal substrate; no graph dashboard.
+Status: Accepted Yellow as docs-domain architecture in
+`docs/canon/Ambitions_Human_Progress_Graph_API_Architecture.md`. HPS02 defines
+node families, edge families, required state fields, privacy/source/freshness/
+review states, read/proposal/receipt/projection API contract families, and
+Source Atlas inheritance for real-world requirements. Yellow is owned by later
+HPS Codex OS work for missing physical HPS advisory scripts/skills and by AOS02
+for future typed graph implementation.
 
 ### HPS03 — Verified Proof Ledger + Proof Portability Architecture
 

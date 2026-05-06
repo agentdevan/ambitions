@@ -497,7 +497,15 @@ remaining sensitive intelligence work.
      platform, release claim, or acquisition-outcome claim is introduced.
      Yellow owner: later HPS Codex OS work must create or map physical HPS
      advisory scripts/skills.
-69H. HPS02 Human Progress Graph + API Architecture.
+69H. HPS02 Human Progress Graph + API Architecture. Completed Accepted Yellow
+     on 2026-05-06 as docs-domain architecture in
+     `docs/canon/Ambitions_Human_Progress_Graph_API_Architecture.md`. It
+     defines node/edge taxonomy, privacy/source/freshness/review states, graph
+     read/proposal/receipt/projection API contract families, and Source Atlas
+     inheritance for real-world requirements without implementing runtime,
+     schema, sync, hosted AI, Source Atlas runtime, UI, or release/platform
+     claims. Yellow owners: later HPS Codex OS scripts/skills and AOS02 typed
+     graph implementation.
 70H. HPS03 Verified Proof Ledger + Proof Portability Architecture.
 71H. HPS04 Source Truth + Requirement Graph Architecture.
 72H. HPS05 Commitment Memory + Searchable Life Recall Architecture.

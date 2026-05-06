@@ -114,6 +114,15 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   hosted-AI, user-data-server, API-platform, release, or acquisition-outcome
   claim may be introduced. Yellow owner: later HPS Codex OS work must create or
   map physical HPS advisory scripts/skills.
+- HPS02 is complete Accepted Yellow as of 2026-05-06. Future graph, memory,
+  proof, source, recommendation, AOS, LDI, Source Atlas, or external-surface
+  work must preserve the Human Progress Graph architecture:
+  `LifeThread`/`Commitment`/`OpenLoop`/`GoalPath`/`Requirement`/`Proof`/
+  `SourceClaim`/`TimeCapacity`/`Pivot`/`IdentityDirection`/
+  `PrivacyPermission`/`Receipt` node families, reviewable edge families,
+  privacy/source/freshness/review state, source-needed fallback, and no silent
+  graph mutation. Yellow owners: later HPS Codex OS scripts/skills and AOS02
+  typed graph implementation.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.

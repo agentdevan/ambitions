@@ -251,8 +251,15 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   and no vertical product, hosted AI, user-data server, API platform, release,
   platform, accessibility, or acquisition-outcome claim is introduced. Yellow
   owner: later HPS Codex OS work must create or map physical HPS advisory
-  scripts/skills. The next eligible global batch is HPS02 Human Progress Graph
-  + API Architecture.
+  scripts/skills.
+- HPS02 is complete Accepted Yellow as docs-domain Human Progress Graph API
+  architecture. It adds node/edge taxonomy, required state fields,
+  privacy/source/freshness/review states, graph read/proposal/receipt/
+  projection contract families, and Source Atlas inheritance for real-world
+  requirements without runtime/schema/UI implementation. Yellow owners: later
+  HPS Codex OS scripts/skills and AOS02 typed graph implementation. The next
+  eligible global batch is HPS03 Verified Proof Ledger + Proof Portability
+  Architecture.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -679,7 +686,9 @@ PFC20 is complete Green as bounded notification, Calendar, and Reminders source
 hardening evidence. PFC22 is complete Green as explicit StoreKit implementation
 deferral proof. PFC23 is complete Green as no-paywall compliance review and
 safe deferral evidence. HPS01 is complete Accepted Yellow as local
-category-lock reconciliation, and the full-stack order selects HPS02 next.
+category-lock reconciliation. HPS02 is complete Accepted Yellow as Human
+Progress Graph API architecture evidence, and the full-stack order selects
+HPS03 next.
 
 
 ## Living Dream Intelligence Context
