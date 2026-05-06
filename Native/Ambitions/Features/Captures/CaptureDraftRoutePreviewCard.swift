@@ -16,6 +16,7 @@ struct CaptureDraftRoutePreviewCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 routeSummary
                 placementShelf
+                resolverFold
                 clarificationQuestion
                 routeChoices
                 routeCommands
@@ -105,6 +106,49 @@ struct CaptureDraftRoutePreviewCard: View {
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
         .accessibilityIdentifier("captures.placement-shelf")
+    }
+
+    private var resolverFold: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(
+                eyebrow: "Review",
+                title: preview.resolverFoldTitle,
+                subtitle: "Change the route, keep it out of Goals, decide later, or discard before saving."
+            )
+
+            placementLine(
+                icon: "lightbulb",
+                title: "Thinks",
+                value: preview.resolverWhyLabel,
+                state: visualState
+            )
+            placementLine(
+                icon: "doc.badge.clock",
+                title: "Receipt",
+                value: preview.correctionReceiptLabel,
+                state: .default
+            )
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                ForEach(preview.correctionControlLabels, id: \.self) { label in
+                    Label(label, systemImage: "checkmark.circle")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("captures.resolver-fold")
     }
 
     private func placementLine(

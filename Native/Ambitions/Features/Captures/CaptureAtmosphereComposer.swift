@@ -324,6 +324,17 @@ private struct CaptureRouteRevealStrip: View {
         localSourceLabel: "Local source: typed in Capture",
         correctionLabel: "Correction: change the route before saving",
         receiptSeamLabel: "Receipt seam: save creates a local capture receipt",
+        resolverFoldTitle: "Resolver Fold",
+        resolverWhyLabel: "What Ambitions thinks: Task based on local text only.",
+        correctionReceiptLabel: "Correction receipt: saved route changes are recorded locally and stay reviewable.",
+        correctionControlLabels: [
+            "Place somewhere else: choose a route below.",
+            "Not a goal: no Goal is created unless you choose Goal.",
+            "Not now: Decide later keeps it out of Today.",
+            "Decide later: save to Needs a Place.",
+            "Discard: clear the composer before saving.",
+            "Archive: after saving, move it out of active review."
+        ],
         primaryActionTitle: "Place it",
         changeActionTitle: "Change",
         safeActionTitle: "Decide later",

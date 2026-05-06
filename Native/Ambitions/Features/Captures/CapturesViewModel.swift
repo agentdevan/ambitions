@@ -78,6 +78,10 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
     let localSourceLabel: String
     let correctionLabel: String
     let receiptSeamLabel: String
+    let resolverFoldTitle: String
+    let resolverWhyLabel: String
+    let correctionReceiptLabel: String
+    let correctionControlLabels: [String]
     let primaryActionTitle: String
     let changeActionTitle: String
     let safeActionTitle: String
@@ -105,11 +109,14 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             localSourceLabel,
             correctionLabel,
             receiptSeamLabel,
+            resolverFoldTitle,
+            resolverWhyLabel,
+            correctionReceiptLabel,
             primaryActionTitle,
             changeActionTitle,
             safeActionTitle,
             clarificationQuestion
-        ].compactMap { $0 } + choices.map(\.title)).joined(separator: " ")
+        ].compactMap { $0 } + correctionControlLabels + choices.map(\.title)).joined(separator: " ")
     }
 }
 
@@ -394,6 +401,10 @@ final class CapturesViewModel {
             localSourceLabel: "Local source: typed in Capture",
             correctionLabel: decision.selectedRouteType == nil ? "Correction: change the route before saving" : "Correction: route chosen by you",
             receiptSeamLabel: "Receipt seam: save creates a local capture receipt",
+            resolverFoldTitle: "Resolver Fold",
+            resolverWhyLabel: resolverWhyLabel(from: decision),
+            correctionReceiptLabel: "Correction receipt: saved route changes are recorded locally and stay reviewable.",
+            correctionControlLabels: correctionControlLabels(from: decision),
             primaryActionTitle: placementPreview.primaryActionTitle,
             changeActionTitle: placementPreview.changeActionTitle,
             safeActionTitle: placementPreview.safeActionTitle,
@@ -404,6 +415,13 @@ final class CapturesViewModel {
             accessibilityValue: decision.accessibilityValue,
             accessibilityHint: decision.accessibilityHint
         )
+    }
+
+    private func resolverWhyLabel(from decision: SmartAttachmentCaptureDecision) -> String {
+        if decision.selectedRouteType != nil {
+            return "What Ambitions thinks: use the route you chose."
+        }
+        return "What Ambitions thinks: \(decision.routeType.userFacingLabel) based on local text only."
     }
 
     private func routeProofTitle(from decision: SmartAttachmentCaptureDecision) -> String {
@@ -454,6 +472,20 @@ final class CapturesViewModel {
         case .savedStandalone, .failedSafely:
             return [.task, .goal, .idea]
         }
+    }
+
+    private func correctionControlLabels(from decision: SmartAttachmentCaptureDecision) -> [String] {
+        let notGoalLabel = decision.routeType == .goal
+            ? "Not a goal: choose Task or Needs a Place."
+            : "Not a goal: no Goal is created unless you choose Goal."
+        return [
+            "Place somewhere else: choose a route below.",
+            notGoalLabel,
+            "Not now: Decide later keeps it out of Today.",
+            "Decide later: save to Needs a Place.",
+            "Discard: clear the composer before saving.",
+            "Archive: after saving, move it out of active review."
+        ]
     }
 
     private func routeChoiceTitle(for routeType: SmartAttachmentRouteType) -> String {

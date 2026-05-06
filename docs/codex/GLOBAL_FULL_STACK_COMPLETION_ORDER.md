@@ -276,7 +276,13 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     persistence/schema, sync/cloud, automatic goal creation, hidden learning,
     legal/privacy/release, App Store, TestFlight, device, public accessibility,
     AOS runtime, or LDI runtime claim.
-49. FCP19 Placement Resolver / Correction Fold.
+49. FCP19 Placement Resolver / Correction Fold. Completed Green on 2026-05-06
+    as bounded draft Resolver Fold implementation evidence, with what Ambitions
+    thinks, why, user-owned correction choices, and a local correction-receipt
+    seam visible before saving. It adds no route/raw-value, persistence/schema,
+    sync/cloud, automatic goal creation, hidden learning, model confidence,
+    legal/privacy/release, App Store, TestFlight, device, public accessibility,
+    AOS runtime, or LDI runtime claim.
 50. FCP20 Grow Into Goal Seed Incubator.
 51. FCP21 Voice / Motor Capture Accessibility.
 52. FCP14 LifeShape Contour Map.

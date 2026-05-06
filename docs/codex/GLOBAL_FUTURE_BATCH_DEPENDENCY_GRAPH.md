@@ -290,6 +290,14 @@ text-first bottom composer, destination/consequence/privacy/source/correction/
 receipt visibility before saving, no inbox/feed/notes mode, no automatic goal
 creation, and no hidden learning.
 
+FCP19 is complete Green as of 2026-05-06. Future Capture, goal seeding, source
+fold, receipt, accessibility, AOS, LDI, or external-surface work must preserve
+Resolver Fold posture: what Ambitions thinks and why must remain visible, route
+correction must stay user-owned, correction receipts must stay local/reviewable,
+and no model-confidence, hidden-learning, automatic-goal, route/raw-value,
+persistence/schema, sync/cloud, release, or runtime claim may be inferred from
+this batch.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

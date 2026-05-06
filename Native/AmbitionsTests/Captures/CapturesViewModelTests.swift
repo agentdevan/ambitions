@@ -129,12 +129,21 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertEqual(preview.localSourceLabel, "Local source: typed in Capture")
         XCTAssertEqual(preview.correctionLabel, "Correction: change the route before saving")
         XCTAssertEqual(preview.receiptSeamLabel, "Receipt seam: save creates a local capture receipt")
+        XCTAssertEqual(preview.resolverFoldTitle, "Resolver Fold")
+        XCTAssertEqual(preview.resolverWhyLabel, "What Ambitions thinks: Task based on local text only.")
+        XCTAssertTrue(preview.correctionReceiptLabel.localizedCaseInsensitiveContains("recorded locally"))
+        XCTAssertTrue(preview.correctionControlLabels.contains("Place somewhere else: choose a route below."))
+        XCTAssertTrue(preview.correctionControlLabels.contains("Not now: Decide later keeps it out of Today."))
+        XCTAssertTrue(preview.correctionControlLabels.contains("Discard: clear the composer before saving."))
         XCTAssertEqual(preview.routeProofTitle, "Route evidence")
         XCTAssertEqual(preview.routeProofDetail, "Standalone")
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Placement Shelf"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Resolver Fold"))
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Local source"))
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Correction"))
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Receipt seam"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("not a goal"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("no hidden memory") == false)
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("inbox"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("backlog"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("triage"))
@@ -142,6 +151,25 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("chat"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("AI"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("cloud"))
+    }
+
+    func testFCP19ManualRouteSelectionKeepsCorrectionFoldUserOwned() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Maybe start a guitar goal")
+        viewModel.selectDraftRoute(.idea)
+
+        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        XCTAssertEqual(preview.correctionLabel, "Correction: route chosen by you")
+        XCTAssertEqual(preview.resolverWhyLabel, "What Ambitions thinks: use the route you chose.")
+        XCTAssertTrue(preview.correctionControlLabels.contains("Not a goal: no Goal is created unless you choose Goal."))
+        XCTAssertTrue(preview.correctionControlLabels.contains("Decide later: save to Needs a Place."))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("confidence percentage"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("fully automated"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("hidden learning"))
     }
 
     func testSI09ComposerPresentationRevealsRouteWithoutSilentMutationCopy() async {

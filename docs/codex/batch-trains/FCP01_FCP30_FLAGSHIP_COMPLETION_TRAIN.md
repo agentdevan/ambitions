@@ -316,6 +316,8 @@ Acceptance: text-first composer; destination/consequence/privacy/source/correcti
 
 ### FCP19 — Placement Resolver / Correction Fold
 
+Status: Complete Green on 2026-05-06 as bounded Placement Resolver /
+Correction Fold implementation evidence.
 Type: Implementation.
 Owner: Capture.
 Depends on: FCP18; PD10.

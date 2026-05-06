@@ -1,14 +1,14 @@
 # Current Batch Train State
 
-Date: 2026-05-05
+Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP18 Capture Placement Shelf complete / Green.
-Next eligible batch: FCP19 Placement Resolver / Correction Fold.
-Scope: FCP18 upgraded Capture route reveal into an explicit Placement Shelf
-with destination, object type, appearance, consequence, privacy, local source,
-correction posture, and receipt seam visible before saving. It preserved the
-five-tab shell, text-first bottom composer, existing route/raw-value and
-persistence compatibility, and all sync/cloud, legal/privacy/release/device/
+Current batch: FCP19 Placement Resolver / Correction Fold complete / Green.
+Next eligible batch: FCP20 Grow Into Goal Seed Incubator.
+Scope: FCP19 added a draft Resolver Fold to Capture with what Ambitions thinks,
+why, user-owned correction choices, and a local correction-receipt seam visible
+before saving. It preserved the five-tab shell, text-first bottom composer,
+existing route/raw-value and persistence compatibility, no hidden learning, no
+model confidence, and all sync/cloud, legal/privacy/release/device/
 accessibility claims as evidence-bound.
 
 ## Full-Stack Global Order Reconciliation
@@ -60,7 +60,8 @@ is complete / Green as Performance Budget And Instruments Plan evidence. FCP22
 is complete / Green as Personal System Center Refactor evidence. FCP23 is
 complete / Green as Memory Lens / External Brain Visual Layer evidence. FCP24
 is complete / Green as Appearance Studio evidence. FCP18 is complete / Green
-as Capture Placement Shelf evidence. FCP19 is the next eligible global batch.
+as Capture Placement Shelf evidence. FCP19 is complete / Green as Placement
+Resolver / Correction Fold evidence. FCP20 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
