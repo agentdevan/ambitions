@@ -435,8 +435,13 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - SAP03 is complete Green as Pack Factory Composition Rules. It locks Pack
   Factory output to domain packs, capability graphs, overlays, proof maps,
   projection recipes, and stable aliases rather than isolated packs for
-  individual goal phrases. The next eligible global batch is SAP04 Projection
-  QA Fixtures.
+  individual goal phrases.
+- SAP04 is complete Green as Projection QA Fixtures. It adds
+  `docs/codex/SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES.md` with required
+  fixture families for pickleball, football, U.S. president strict source,
+  job posting example-only, school program strict review, certification strict
+  review, and option value / Still Counts scenarios. The next eligible global
+  batch is SAP05 No-Sprawl / No-Duplicate Pack Gate.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.

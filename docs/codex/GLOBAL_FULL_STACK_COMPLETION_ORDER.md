@@ -751,7 +751,17 @@ remaining sensitive intelligence work.
      Pack Factory implementation, Freshness Broker behavior, UI,
      sync/account/backend service, release claim, legal/current-requirement
      claim, or platform proof. SAP04 is next.
-72I. SAP04 Projection QA Fixtures.
+72I. SAP04 Projection QA Fixtures. Completed Green on 2026-05-06 as docs/QA
+     fixture family source truth. It adds required fixture families for
+     pickleball skill slice, pickleball starter/pro path, football varsity/NFL,
+     football catching/commentator path, U.S. president strict source overlay,
+     job posting example-only, school program strict review, certification
+     strict review, and option value / Still Counts scenarios. It does not add
+     Swift runtime, seed data, source ingestion, extraction, OCR, classifier,
+     source packs, Pack Factory implementation, Freshness Broker behavior, UI,
+     sync/account/backend service, release claim, legal/current-requirement
+     claim, or platform proof. SAP05 is next.
+72J. SAP05 No-Sprawl / No-Duplicate Pack Gate.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.
