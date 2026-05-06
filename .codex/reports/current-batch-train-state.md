@@ -2,17 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS12 Singular Experience + Acquisition Readiness Lock complete / Accepted Yellow.
-Next eligible batch: AOS01 AmbitionsOS Canon And Runtime Contract.
-Scope: HPS12 closed the HPS train as docs/cross-train audit truth. It defines
-one-primary-object surface law, five-tab cohesion, language continuity,
-cross-train inheritance, internal acquirer-readable packet outline, missing
-quality gate owners, and no-claim boundaries. It adds no production Swift, AOS
-runtime, LDI runtime, HPS runtime, vertical product, revenue product,
-marketplace, API/platform product, account/backend/sync service, hosted AI,
-buyer outreach, legal/privacy approval, release claim, App Store claim,
-TestFlight claim, physical-device proof, public accessibility proof, security
-certification, or acquisition outcome claim.
+Current batch: AOS01 AmbitionsOS Canon And Runtime Contract complete / Accepted Yellow.
+Next eligible batch: AOS02 Life Graph Event Log Foundation.
+Scope: AOS01 activated the AmbitionsOS runtime contract as docs/protocol source
+truth. It imports HPS and Source Atlas inheritance into
+`docs/canon/AmbitionsOS_Runtime_Contract.md`, creates AOS evidence,
+traceability, and test-impact records, and records global-authorization
+reconciliation for starting AOS after HPS closed. It adds no production Swift,
+AOS runtime behavior, model behavior, event log, graph persistence, source-pack
+runtime, UI, platform integration, sync/account/backend service, hosted AI,
+external-surface behavior, release claim, App Store claim, TestFlight claim,
+physical-device proof, public accessibility proof, security certification, or
+acquisition claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -102,8 +103,9 @@ is complete / Accepted Yellow as AI Governance and Evaluation Assurance Lab
 architecture evidence. HPS11 is complete / Accepted Yellow as Vertical
 Expansion and Revenue Architecture evidence. HPS12 is complete / Accepted
 Yellow as Singular Experience and Acquisition Readiness Lock evidence. AOS01
-is the next eligible global batch under the active global authorization now
-that HPS01-HPS12 are Green or accepted Yellow with owners.
+is complete / Accepted Yellow as AmbitionsOS Canon and Runtime Contract
+evidence. AOS02 is the next eligible global batch under the active global
+authorization.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

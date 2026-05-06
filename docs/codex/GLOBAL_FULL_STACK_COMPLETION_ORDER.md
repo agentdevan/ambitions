@@ -624,8 +624,16 @@ remaining sensitive intelligence work.
 
 ### Phase 7 — AOS Internal Foundations
 
-69. AOS01 AmbitionsOS Canon And Runtime Contract. Next eligible after
-    HPS01-HPS12 closed Green or accepted Yellow with owners.
+69. AOS01 AmbitionsOS Canon And Runtime Contract. Completed Accepted Yellow on
+    2026-05-06 as docs/protocol runtime contract source truth. It imports HPS
+    and Source Atlas inheritance into `docs/canon/AmbitionsOS_Runtime_Contract.md`,
+    creates AOS evidence, traceability, and test-impact records, and records
+    global-authorization reconciliation for starting AOS after HPS closed. It
+    does not implement AOS runtime behavior, model behavior, event log, graph
+    persistence, source-pack runtime, UI, platform integration, sync/account/
+    backend service, hosted AI, external-surface behavior, or release/platform
+    claims. Yellow owners: later AOS kernel implementation and AOS Codex OS
+    skill/script mapping. AOS02 is next.
 70. AOS02 Life Graph Event Log Foundation.
 71. AOS03 Graph Delta Review Projection Store.
 72. AOS04 Control Plane Work Classifier.

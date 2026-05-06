@@ -205,6 +205,11 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.
+- AOS01 is complete Accepted Yellow as of 2026-05-06. Future AOS work must
+  inherit the AOS01 runtime contract, HPS invariants, Source Atlas invariants
+  where source-dependent, typed outputs, deterministic fallback, proposal-before
+  mutation, source proof, privacy projection, performance budget,
+  compatibility, maintainability, and release-claim review locks.
 - AOS02-AOS23 depend on AOS01 and the kernel dependencies named in the AOS train manifest.
 - AOS24 depends on AOS18-AOS23, PXOS expression gates, ME maintainability gates, CS compatibility gates, SI18 handoff, relevant FCP object gates, and relevant LDI gates where living dream behavior would be exposed.
 - AOS25 depends on AOS18 and AOS24.

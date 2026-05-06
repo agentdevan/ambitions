@@ -1,6 +1,8 @@
 # AOS01 AmbitionsOS Canon And Runtime Contract Prompt
 
-Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only until implemented by evidence; blocked pending `Start AOS Train`.
+Status: Complete / Accepted Yellow on 2026-05-06. Selected by live global
+full-stack authorization after HPS01-HPS12 closed accepted Yellow with owners.
+Docs/protocol only; future canon only until implemented by later evidence.
 
 ## Batch Identity
 

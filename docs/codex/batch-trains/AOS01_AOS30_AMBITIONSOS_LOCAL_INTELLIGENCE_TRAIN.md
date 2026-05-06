@@ -1,6 +1,9 @@
 # AOS01-AOS30 AmbitionsOS Local Intelligence Train
 
-Status: Queued Ambitions 4.0 train manifest; not started; blocked pending `Start AOS Train`, HPS inheritance, and Source Atlas dependency closure where real-world source/requirement intelligence is used.
+Status: Active Ambitions 4.0 train manifest; AOS01 Accepted Yellow; AOS02 next.
+Started by live global full-stack authorization after HPS01-HPS12 closed
+accepted Yellow with owners. Source Atlas dependency closure remains required
+where real-world source/requirement intelligence is used.
 
 ## Start Rule
 
@@ -76,7 +79,7 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 
 ## Batch Order And Gates
 
-- AOS01: AmbitionsOS Canon And Runtime Contract. Gate: blocks all AOS work and must import HPS and Source Atlas invariants. Owner: Governance Kernel / Runtime Contract. Surface: all canonical surfaces. Boundary: docs/protocol only; no app implementation.
+- AOS01: AmbitionsOS Canon And Runtime Contract. Gate: blocks all AOS work and must import HPS and Source Atlas invariants. Owner: Governance Kernel / Runtime Contract. Surface: all canonical surfaces. Boundary: docs/protocol only; no app implementation. Status: Accepted Yellow as runtime contract source truth in `docs/canon/AmbitionsOS_Runtime_Contract.md`; AOS02 next.
 - AOS02: Life Graph Event Log Foundation. Gate: depends on AOS01 and HPS02. Owner: Life Graph Kernel. Surface: Goals, Plan, You. Boundary: event log and typed Human Progress Graph foundation only after AOS01; external world facts must reference Source Atlas when used.
 - AOS03: Graph Delta Review Projection Store. Gate: depends on AOS02 and HPS03/HPS05. Owner: Life Graph Kernel / Runtime Contract. Surface: all projections. Boundary: graph delta review, receipts, correction, and projection store contracts only after AOS02.
 - AOS04: Control Plane Work Classifier. Gate: depends on AOS01-AOS03 and HPS12. Owner: Control Plane. Surface: all surfaces. Boundary: work classifier, gates, no-sprawl routing, and orchestration contracts only.

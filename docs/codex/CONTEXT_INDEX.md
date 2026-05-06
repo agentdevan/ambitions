@@ -352,8 +352,18 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   product, revenue product, marketplace, API/platform product, account/backend/
   sync service, hosted AI, buyer outreach, or public claim implementation.
   Yellow owners: later HPS Codex OS scripts/skills and future AOS/LDI/FCP/PFC/
-  CQS/FVQ/human-owner proof batches. The next eligible global batch is AOS01
-  AmbitionsOS Canon And Runtime Contract.
+  CQS/FVQ/human-owner proof batches. The next global batch was AOS01.
+- AOS01 is complete Accepted Yellow as docs/protocol AmbitionsOS Canon and
+  Runtime Contract source truth. It updates
+  `docs/canon/AmbitionsOS_Runtime_Contract.md` with AOS01 activation boundary,
+  HPS inheritance, Source Atlas inheritance, and runtime contract locks; creates
+  AOS evidence, traceability, and test-impact records; and selects AOS02 next
+  without AOS runtime behavior, model behavior, event log, graph persistence,
+  source-pack runtime, UI, platform integration, sync/account/backend service,
+  hosted AI, external-surface behavior, or public claim implementation. Yellow
+  owners: later AOS kernel implementation and AOS Codex OS skill/script
+  mapping. The next eligible global batch is AOS02 Life Graph Event Log
+  Foundation.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -794,8 +804,9 @@ Permission and Local Intelligence Adapter architecture evidence. HPS10 is
 complete Accepted Yellow as AI Governance and Evaluation Assurance Lab
 architecture evidence. HPS11 is complete Accepted Yellow as Vertical Expansion
 and Revenue Architecture evidence. HPS12 is complete Accepted Yellow as
-Singular Experience and Acquisition Readiness Lock evidence, and the
-full-stack order selects AOS01 next.
+Singular Experience and Acquisition Readiness Lock evidence. AOS01 is complete
+Accepted Yellow as AmbitionsOS Canon and Runtime Contract evidence, and the
+full-stack order selects AOS02 next.
 
 
 ## Living Dream Intelligence Context

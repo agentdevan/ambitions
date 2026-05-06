@@ -54,7 +54,7 @@ Product Depth may continue only after `Start Product Depth Train`, PXOS Product 
 
 ## Relationship To AOS
 
-AmbitionsOS is future canon and a queued Ambitions 4.0 train. AOS01-AOS30 are queued/blocked pending `Start AOS Train`.
+AmbitionsOS is future canon and an active Ambitions 4.0 train after global full-stack authorization. AOS01 is complete as docs/protocol runtime-contract source truth; AOS02-AOS30 remain queued/blocked by predecessor, HPS, Source Atlas where relevant, and AOS proof gates.
 
 AOS may define internal intelligence/runtime contracts and later implementation gates, but AmbitionsOS is not implemented app behavior until explicit batches run, validate, commit, and record evidence.
 
@@ -96,7 +96,7 @@ Queued batches:
 - CS01-CS10: global order 038-047; queued/blocked pending `Start CS Train`.
 - SI01-SI18: global order 048-065; queued/blocked pending global-order selection or `Start Signature Interface Train`, PXOS complete, relevant ME/CS gates, and SI quality gates.
 - PD01-PD18: global order 066-083; PD01 accepted Yellow for docs/planning canon, inventory, and ownership mapping after `Start Product Depth Train`; PD02 accepted Yellow for bounded Today Step Detail; PD03 accepted Yellow for bounded Today Step Session; PD04 accepted Yellow for bounded Today recovery/closure; PD05-PD18 remain gated by prerequisite PXOS/ME/CS/SI/AOS-if-needed gates and batch-specific file boundaries.
-- AOS01-AOS30: global order 084-113; queued/blocked pending `Start AOS Train`.
+- AOS01-AOS30: global order 084-113; AOS01 complete as docs/protocol runtime-contract source truth; AOS02-AOS30 remain queued/blocked by predecessor, HPS, Source Atlas where relevant, and AOS proof gates.
 
 ## Blocked And Gated Areas
 
@@ -114,7 +114,7 @@ Queued batches:
 - Ambitions 4.0 is the active post-3.0 execution program.
 - The 4.0 global execution order includes 113 formal batches after SI insertion.
 - REC01 is active/started.
-- REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30 are queued/blocked as named.
+- REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS02-AOS30 are queued/blocked as named; AOS01 is complete as docs/protocol runtime-contract source truth.
 - PXOS, SI, Product Depth, and AmbitionsOS are future canon or queued trains until implemented by explicit evidence-producing batches.
 
 ## What 4.0 Must Not Claim
