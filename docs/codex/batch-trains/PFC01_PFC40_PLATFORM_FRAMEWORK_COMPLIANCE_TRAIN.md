@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -288,6 +288,18 @@ Type: Docs/legal.
 Owner: Legal / Privacy.
 Goal: Prepare legal-review packet: privacy policy needs, terms needs, data rights, minors, professional advice boundaries, subscriptions, liability.
 Required result: human legal-review checklist. No legal compliance claim.
+Status: Green as docs/legal/privacy human-review packet. It creates
+`docs/canon/Ambitions_Terms_Privacy_Policy_Legal_Review_Packet.md`, covers
+privacy policy and terms review needs, data ownership/portability,
+deletion/correction/export posture, children/minors, education/student-data
+future risk, Found Life / Searchable Life Recall, AOS / LDI, professional
+advice and crisis/safety boundaries, StoreKit/paywall legal considerations, App
+Privacy label and privacy manifest relationships, third-party SDK/logging/
+analytics/crash-reporting considerations, user-generated proof/evidence, human
+legal review checklist, and launch-blocking legal proof stops. It does not
+publish legal pages, approve launch, certify compliance, or change production
+Swift, privacy manifests, entitlements, dependencies, StoreKit, sync/cloud, or
+App Store Connect state.
 
 ### PFC27 — Safety / Professional Boundary / Crisis Policy
 

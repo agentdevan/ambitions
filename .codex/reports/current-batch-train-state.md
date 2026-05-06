@@ -2,18 +2,25 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC25 Privacy Manifest / Required-Reason API Audit complete
-Green; full-stack order selects PFC26 Terms / Privacy Policy / Legal Review
-Packet next.
-Scope: PFC25 created the docs/platform/privacy audit at
-`docs/canon/Ambitions_Privacy_Manifest_Required_Reason_API_Audit.md`, left
-`PrivacyInfo.xcprivacy` unchanged because active source scans found no direct
-required-reason API usage requiring declaration, and kept final Xcode archive
-privacy-report proof release-gated. PFC25 changed only docs and train-state
+Current batch: PFC26 Terms / Privacy Policy / Legal Review Packet complete
+Green; full-stack order selects PFC27 Safety / Professional Boundary / Crisis
+Policy next.
+Scope: PFC26 created the docs/legal/privacy human-review packet at
+`docs/canon/Ambitions_Terms_Privacy_Policy_Legal_Review_Packet.md`. It covers
+privacy policy needs, terms needs, data ownership/portability,
+deletion/correction/export posture, local-only versus future sync/cloud
+boundaries, children/minors, education/student-data future risk,
+career/education/professional advice boundaries, crisis/safety, Found Life /
+Searchable Life Recall, AOS / LDI legal risks, StoreKit/paywall
+considerations, App Privacy label and privacy manifest relationship,
+third-party SDK/logging/analytics/crash-reporting considerations,
+user-generated proof/evidence, human legal review checklist, and
+launch-blocking legal proof stops. PFC26 changed only docs and train-state
 files. It did not change production Swift, route/raw value, persistence/schema,
 privacy-manifest, entitlement, dependency, analytics, tracking, network,
-StoreKit, sync/account, release, legal/privacy, CI, workflow/signing, AI
-runtime, AOS runtime, LDI runtime, or public accessibility claim files.
+StoreKit, sync/account, release, legal/privacy compliance, CI,
+workflow/signing, AI runtime, AOS runtime, LDI runtime, App Store Connect, or
+public accessibility claim files.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -55,8 +62,9 @@ evidence. PFC19 is complete / Green as Notifications / Focus / Calendar /
 Reminders integration strategy evidence. PFC21 is complete / Accepted Yellow as
 StoreKit / monetization strategy evidence. PFC24 is complete / Green as Privacy
 Data Map And App Privacy Labels evidence. PFC25 is complete / Green as Privacy
-Manifest / Required-Reason API Audit evidence. PFC26 is the next eligible
-global batch. Accepted Yellow:
+Manifest / Required-Reason API Audit evidence. PFC26 is complete / Green as
+Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is the next
+eligible global batch. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
@@ -101,8 +109,11 @@ docs-only persistence source truth and migration-risk evidence. PFC07 is
 complete / Green as focused persistence compatibility proof. PFC08 is complete /
 Green as docs-only recovery planning evidence. PFC09 is complete / Green as
 docs-only sync strategy decision evidence. PFC12 is complete / Green as
-app-group/shared-storage boundary evidence. Later PFC implementation beyond
-existing test execution has not started.
+app-group/shared-storage boundary evidence. PFC24 is complete / Green as
+privacy data map and App Privacy label evidence. PFC25 is complete / Green as
+privacy manifest / required-reason API audit evidence. PFC26 is complete /
+Green as docs/legal/privacy human-review packet evidence. Later PFC
+implementation beyond existing test execution has not started.
 
 No further production Swift beyond the scoped FCP05 Start Here, FCP07 Reality
 Rail Continuity, FCP13A Action Closure Diamond, and FCP08 Ambition Meridian

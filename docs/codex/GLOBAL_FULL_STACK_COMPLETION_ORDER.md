@@ -206,7 +206,16 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     `PrivacyInfo.xcprivacy` unchanged because active source scans found no
     direct required-reason API usage requiring declaration, while final archive
     privacy-report proof remains release-gated.
-40. PFC26 Terms / Privacy Policy / Legal Review Packet.
+40. PFC26 Terms / Privacy Policy / Legal Review Packet. Completed Green on
+    2026-05-05 as docs/legal/privacy human-review packet. It covers privacy
+    policy needs, terms needs, data ownership/portability, deletion/
+    correction/export posture, local-only versus future sync/cloud boundaries,
+    children/minors, education/student-data future risk, professional advice
+    boundaries, crisis/safety, AOS/LDI and Found Life/Searchable Life Recall
+    legal risks, StoreKit/paywall considerations, App Privacy label and privacy
+    manifest relationship, third-party SDK/logging/analytics/crash boundaries,
+    user-generated proof/evidence, human legal review checklist, and
+    launch-blocking legal proof stops without claiming legal compliance.
 41. PFC27 Safety / Professional Boundary / Crisis Policy.
 42. PFC28 Security Threat Model And Secrets Audit.
 43. PFC29 Logging / Analytics / Observability Policy.

@@ -210,6 +210,18 @@ because active source scans found no direct UserDefaults, file timestamp, disk
 space, system boot time, or active-keyboard API use requiring declaration;
 final Xcode archive privacy-report proof remains release-gated.
 
+PFC26 is complete Green as of 2026-05-05. Future privacy policy, terms, data
+rights, deletion/correction/export, account, cloud/sync, StoreKit, App Store
+privacy label, privacy manifest, third-party SDK, analytics/logging/crash,
+Found Life, Searchable Life Recall, AOS, LDI, minors, student-data, crisis,
+health, legal, financial, education, career, or professional-boundary claims
+must use
+`docs/canon/Ambitions_Terms_Privacy_Policy_Legal_Review_Packet.md` as the
+legal-review packet boundary. PFC26 does not publish a privacy policy or terms,
+does not certify legal/privacy compliance, and does not provide human legal
+signoff, App Store Connect action, TestFlight readiness, release readiness,
+physical-device proof, or public accessibility conformance.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
