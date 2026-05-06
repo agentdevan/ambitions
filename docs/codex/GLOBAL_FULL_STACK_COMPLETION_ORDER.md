@@ -741,7 +741,17 @@ remaining sensitive intelligence work.
      ingestion, extraction, OCR, classifier, source packs, Pack Factory output,
      Freshness Broker behavior, UI, sync/account/backend service, release
      claim, legal/current-requirement claim, or platform proof. SAP03 is next.
-72H. SAP03 Pack Factory Composition Rules.
+72H. SAP03 Pack Factory Composition Rules. Completed Green on 2026-05-06 as
+     docs/state reconciliation of Pack Factory composition rules. Pack Factory
+     must produce domain packs, capability graphs, overlays, proof maps,
+     projection recipes, and stable aliases rather than isolated packs for
+     individual goal phrases. Packs may provide StepCandidateSeeds but must not
+     store final scheduled steps for every user. It does not add Swift runtime,
+     seed data, source ingestion, extraction, OCR, classifier, source packs,
+     Pack Factory implementation, Freshness Broker behavior, UI,
+     sync/account/backend service, release claim, legal/current-requirement
+     claim, or platform proof. SAP04 is next.
+72I. SAP04 Projection QA Fixtures.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.
