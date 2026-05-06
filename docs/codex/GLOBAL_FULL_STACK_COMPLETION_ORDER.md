@@ -684,7 +684,18 @@ remaining sensitive intelligence work.
      data, source packs, URL/PDF/OCR behavior, Pack Factory output, Freshness
      Broker behavior, UI, sync/account/backend service, release claim,
      legal/current-requirement claim, or platform proof. SA03 is next.
-72C. SA03 Universal Source Binder Coverage Map.
+72C. SA03 Universal Source Binder Coverage Map. Completed Green on 2026-05-06
+     as docs/state reconciliation of the existing Universal Source Binder
+     coverage map into the live global train. It defines support requirements
+     for URL, PDF, screenshot/image, copied text, local file, official pack,
+     and user mini-pack containers plus rulebook, school program page, job
+     posting, certification handbook, official page, generic text, and legal/
+     civic/professional source categories. It does not add Swift runtime, seed
+     data, source ingestion, extraction, OCR, classifier, source packs, Pack
+     Factory output, Freshness Broker behavior, UI, sync/account/backend
+     service, release claim, legal/current-requirement claim, or platform
+     proof. SA04 is next.
+72D. SA04 Source Atlas Codex OS Upgrade.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.

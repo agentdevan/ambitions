@@ -402,8 +402,15 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   validation, private document protection, no-claim copy, rendered source-state
   proof, composable pack graph, goal projection, skill slicing,
   highest-path reuse, generated-step boundaries, alternative paths, option
-  value, and projection receipts. The next eligible global batch is SA03
-  Universal Source Binder Coverage Map.
+  value, and projection receipts.
+- SA03 is complete Green as Universal Source Binder Coverage Map reconciliation.
+  It records
+  `docs/codex/SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP.md` as live
+  coverage truth for URL, PDF, screenshot/image, copied text, local file,
+  official pack, user mini-pack, rulebook, school program page, job posting,
+  certification handbook, official page, generic text, and legal/civic/
+  professional source categories. The next eligible global batch is SA04 Source
+  Atlas Codex OS Upgrade.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.

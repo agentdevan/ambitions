@@ -2,18 +2,17 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: SA02 Source Atlas Gate Matrix complete / Green.
-Next eligible batch: SA03 Universal Source Binder Coverage Map.
-Scope: SA02 reconciled the existing Source Atlas gate matrix into the live
-global batch train. The matrix locks hard gates for source container coverage,
-PDFKit extraction, OCR review, URL snapshots, user-provided-is-not-official,
-high-risk review, offline fallback, pack validation, private document
-protection, no-claim copy, rendered source-state proof, composable pack graph,
-goal projection, skill slicing, highest-path reuse, generated-step boundaries,
-alternative paths, option value, and projection receipts. It changed docs/state
-only and adds no Swift runtime, seed import, source pack, URL/PDF/OCR behavior,
-Pack Factory output, Freshness Broker behavior, UI, sync/account/backend
-service, release claim, legal/current-requirement claim, or platform proof.
+Current batch: SA03 Universal Source Binder Coverage Map complete / Green.
+Next eligible batch: SA04 Source Atlas Codex OS Upgrade.
+Scope: SA03 reconciled the existing Universal Source Binder coverage map into
+the live global batch train. The map defines the support envelope for URL, PDF,
+screenshot/image, copied text, local file, official pack, and user mini-pack
+containers plus rulebook, school program page, job posting, certification
+handbook, official page, generic text, and legal/civic/professional source
+categories. It changed docs/state only and adds no Swift runtime, seed import,
+source ingestion, extraction, OCR, classifier, source pack, Pack Factory output,
+Freshness Broker behavior, UI, sync/account/backend service, release claim,
+legal/current-requirement claim, or platform proof.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -108,7 +107,8 @@ evidence. AOS02 is complete / Green as Life Graph Event Log Foundation
 evidence. AOS03 is complete / Green as Graph Delta Review Projection Store
 evidence. AOS04 is complete / Green as Control Plane Work Classifier evidence.
 SA01 is complete / Green as Source Atlas Canon Lock reconciliation. SA02 is
-complete / Green as Source Atlas Gate Matrix reconciliation. SA03 is the next
+complete / Green as Source Atlas Gate Matrix reconciliation. SA03 is complete /
+Green as Universal Source Binder Coverage Map reconciliation. SA04 is the next
 eligible global batch under the active Source Atlas overlay before AOS12 and
 other deep source/freshness-dependent AOS/LDI work continues.
 Accepted Yellow:
