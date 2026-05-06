@@ -224,7 +224,15 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     claiming runtime enforcement, professional review, crisis support, legal
     compliance, App Store readiness, TestFlight readiness, release readiness,
     physical-device proof, or public accessibility conformance.
-42. PFC28 Security Threat Model And Secrets Audit.
+42. PFC28 Security Threat Model And Secrets Audit. Completed Green on
+    2026-05-05 as docs/security threat model and secrets audit evidence. It
+    records no live credential-shaped secret in tracked app source, defines
+    local data, App Group, external-surface, EventKit, privacy-manifest,
+    backup, future sync/cloud/account, future logging/observability, StoreKit,
+    AOS, LDI, and Found Life security threats, and creates a repair queue
+    without claiming security certification, legal/privacy compliance, App
+    Store readiness, TestFlight readiness, release readiness, physical-device
+    proof, or public accessibility conformance.
 43. PFC29 Logging / Analytics / Observability Policy.
 44. PFC30 Performance Budget And Instruments Plan.
 

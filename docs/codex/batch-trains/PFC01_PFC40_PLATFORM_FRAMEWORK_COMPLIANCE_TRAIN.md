@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 Green; PFC05 Green; PFC06 Green; PFC07 Green; PFC08 Green; PFC09 Green; PFC12 Green; PFC13 Green; FVQ01 Accepted Yellow; FVQ02 Accepted Yellow; FVQ03 Accepted Yellow; FVQ04 Green; MEG01 Green; FVQ05 Green; PFC15 Green; PFC17 Green; PFC19 Green; PFC21 Accepted Yellow; PFC24 Green; PFC25 Green; PFC26 Green; PFC27 Green; PFC28 Green; PFC29 queued next under full-stack order. PFC10/PFC11 remain future sync-gated. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -322,6 +322,14 @@ Type: Docs/security; implementation repairs if scoped.
 Owner: Security.
 Goal: Threat model local data, sync, widgets, logs, App Groups, entitlements, dependencies, backups, and screenshots.
 Required result: threat model and repair queue.
+Status: Green as docs/security threat model and secrets audit evidence. It
+creates `docs/canon/Ambitions_Security_Threat_Model_And_Secrets_Audit.md`,
+records no live credential-shaped secret in tracked app source, defines local
+data, App Group, external-surface, EventKit, privacy-manifest, backup, future
+sync/cloud/account, future logging/observability, StoreKit, AOS, LDI, and Found
+Life security threats, and does not edit production Swift, entitlements,
+privacy manifests, project files, dependencies, workflows, signing, App Store
+Connect state, or release artifacts.
 
 ### PFC29 — Logging / Analytics / Observability Policy
 

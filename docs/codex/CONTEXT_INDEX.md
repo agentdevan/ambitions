@@ -86,6 +86,15 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   readiness, release readiness, physical-device proof, or public accessibility
   conformance. The next eligible global batch is PFC28 Security Threat Model
   And Secrets Audit.
+- PFC28 is complete Green as docs/security threat model and secrets audit
+  evidence. It records no live credential-shaped secret in tracked app source,
+  defines local data, App Group, external-surface, EventKit, privacy-manifest,
+  backup, future sync/cloud/account, future logging/observability, StoreKit,
+  AOS, LDI, and Found Life security threats, and creates a repair queue without
+  claiming security certification, legal/privacy compliance, App Store
+  readiness, TestFlight readiness, release readiness, physical-device proof, or
+  public accessibility conformance. The next eligible global batch is PFC29
+  Logging / Analytics / Observability Policy.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -483,8 +492,9 @@ Yellow as StoreKit / monetization strategy. PFC24 is complete Green as Privacy
 Data Map And App Privacy Labels evidence. PFC25 is complete Green as Privacy
 Manifest / Required-Reason API Audit evidence. PFC26 is complete Green as
 Terms / Privacy Policy / Legal Review Packet evidence. PFC27 is complete Green
-as Safety / Professional Boundary / Crisis Policy evidence, and the full-stack
-order selects PFC28 next.
+as Safety / Professional Boundary / Crisis Policy evidence. PFC28 is complete
+Green as Security Threat Model And Secrets Audit evidence, and the full-stack
+order selects PFC29 next.
 
 
 ## Living Dream Intelligence Context

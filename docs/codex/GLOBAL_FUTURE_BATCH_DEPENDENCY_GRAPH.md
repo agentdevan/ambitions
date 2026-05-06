@@ -233,6 +233,17 @@ moderation, professional review, hosted AI, user-data server, legal/privacy
 compliance, App Store readiness, TestFlight readiness, release readiness,
 physical-device proof, or public accessibility conformance.
 
+PFC28 is complete Green as of 2026-05-05. Future security, secrets, App Group,
+external-surface, EventKit, privacy-manifest, backup, sync/cloud/account,
+logging/observability, StoreKit, AOS, LDI, Found Life, release, or handoff work
+must use
+`docs/canon/Ambitions_Security_Threat_Model_And_Secrets_Audit.md` as the
+security threat-model boundary. PFC28 does not certify security, run a
+penetration test, change production Swift, edit entitlements, edit privacy
+manifests, add dependencies, create CI secret scanning, claim legal/privacy
+compliance, claim App Store/TestFlight/release readiness, prove physical-device
+behavior, or claim public accessibility conformance.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
