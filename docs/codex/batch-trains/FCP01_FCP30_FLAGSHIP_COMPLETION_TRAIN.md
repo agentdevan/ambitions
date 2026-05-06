@@ -278,6 +278,8 @@ Acceptance: no calendar grid, no bar chart as primary object, protected pockets 
 
 ### FCP15 — Reflow Decision Fold
 
+Status: Complete Green on 2026-05-06 as bounded Plan Reflow Decision Fold
+implementation evidence.
 Type: Implementation.
 Owner: Plan.
 Depends on: FCP14; PD12.

@@ -2,14 +2,15 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP14 LifeShape Contour Map complete / Green.
-Next eligible batch: FCP15 Reflow Decision Fold.
-Scope: FCP14 upgraded Plan's LifeShape map from band/bar expression to a
-contour-first object with capacity contours, protected pockets, pressure
-fields, recovery pockets, milestone ridges, and commitment-load contours. It
-preserved no calendar grid, no analytics chart, no fake precision, no
-route/raw-value or persistence/schema change, and all sync/cloud,
-legal/privacy/release/device/accessibility claims as evidence-bound.
+Current batch: FCP15 Reflow Decision Fold complete / Green.
+Next eligible batch: FCP16 Pressure Field / Recovery Loop.
+Scope: FCP15 upgraded Plan's Reflow Decision surface with a before/after fold
+for each decision option, including before shape, after shape, shape-change
+summary, receipt preview, affected steps, capacity impact, protected-time
+impact, and accept/edit/decline controls. It preserved no silent reflow, no
+hidden mutation, no Calendar write, no route/raw-value or persistence/schema
+change, and all sync/cloud, legal/privacy/release/device/accessibility claims
+as evidence-bound.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -64,7 +65,8 @@ as Capture Placement Shelf evidence. FCP19 is complete / Green as Placement
 Resolver / Correction Fold evidence. FCP20 is complete / Green as Goal Seed
 Incubator evidence. FCP21 is complete / Green as Voice / Motor Capture
 Accessibility evidence. FCP14 is complete / Green as LifeShape Contour Map
-evidence. FCP15 is the next eligible global batch.
+evidence. FCP15 is complete / Green as Reflow Decision Fold evidence. FCP16 is
+the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

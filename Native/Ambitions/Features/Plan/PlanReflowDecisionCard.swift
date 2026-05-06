@@ -85,6 +85,11 @@ private struct PlanReflowDecisionOptionRow: View {
                 Spacer(minLength: theme.spacing.sm)
             }
 
+            PlanReflowBeforeAfterPreview(
+                preview: option.beforeAfterPreview,
+                visualState: option.visualState
+            )
+
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 decisionFact(option.whatChangedLabel, icon: "arrow.triangle.2.circlepath")
                 decisionFact(option.whyChangedLabel, icon: "questionmark.circle")
@@ -121,6 +126,64 @@ private struct PlanReflowDecisionOptionRow: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(option.title)
         .accessibilityValue(option.accessibilityValue)
+    }
+
+    private func decisionFact(_ text: String, icon: String) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.xs) {
+            Image(systemName: icon)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.textTertiary)
+                .frame(width: 18)
+            Text(text)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+}
+
+private struct PlanReflowBeforeAfterPreview: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let preview: PlanReflowBeforeAfterShapePreviewState
+    let visualState: AmbitionVisualState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Label(preview.title, systemImage: "rectangle.split.2x1")
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+
+            HStack(alignment: .top, spacing: theme.spacing.xs) {
+                previewColumn(preview.beforeLabel, icon: "arrow.left.circle")
+                previewColumn(preview.afterLabel, icon: "arrow.right.circle")
+            }
+
+            decisionFact(preview.shapeChangeLabel, icon: "point.3.connected.trianglepath.dotted")
+            decisionFact(preview.receiptPreviewLabel, icon: "doc.text.magnifyingglass")
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.stateStyle(for: visualState).accent.opacity(0.08))
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(preview.title)
+        .accessibilityValue(preview.accessibilityValue)
+    }
+
+    private func previewColumn(_ text: String, icon: String) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.xs) {
+            Image(systemName: icon)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.stateStyle(for: visualState).accent)
+                .frame(width: 18)
+            Text(text)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
     }
 
     private func decisionFact(_ text: String, icon: String) -> some View {

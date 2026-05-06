@@ -74,6 +74,7 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
     let impactedStepsLabel: String
     let capacityImpactLabel: String
     let protectedTimeImpactLabel: String
+    let beforeAfterPreview: PlanReflowBeforeAfterShapePreviewState
     let impactLabel: String
     let sourceLabel: String
     let trustLabel: String
@@ -93,6 +94,7 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
         impactedStepsLabel: String = "Impacted steps: review before anything moves.",
         capacityImpactLabel: String = "Capacity impact: reviewed before mutation.",
         protectedTimeImpactLabel: String = "Protected time impact: unchanged until you decide.",
+        beforeAfterPreview: PlanReflowBeforeAfterShapePreviewState = .unchanged,
         impactLabel: String,
         sourceLabel: String,
         trustLabel: String,
@@ -111,6 +113,7 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
         self.impactedStepsLabel = impactedStepsLabel
         self.capacityImpactLabel = capacityImpactLabel
         self.protectedTimeImpactLabel = protectedTimeImpactLabel
+        self.beforeAfterPreview = beforeAfterPreview
         self.impactLabel = impactLabel
         self.sourceLabel = sourceLabel
         self.trustLabel = trustLabel
@@ -129,6 +132,7 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
             impactedStepsLabel,
             capacityImpactLabel,
             protectedTimeImpactLabel,
+            beforeAfterPreview.accessibilityValue,
             trustLabel,
             boundaryLabel,
             actions.map(\.title).joined(separator: ", ")
@@ -159,6 +163,32 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
                 isEnabled: true
             )
         ]
+    }
+}
+
+struct PlanReflowBeforeAfterShapePreviewState: Sendable, Hashable {
+    let title: String
+    let beforeLabel: String
+    let afterLabel: String
+    let shapeChangeLabel: String
+    let receiptPreviewLabel: String
+
+    static let unchanged = PlanReflowBeforeAfterShapePreviewState(
+        title: "Before / after",
+        beforeLabel: "Before: current plan stays visible.",
+        afterLabel: "After: no plan shape changes until you choose.",
+        shapeChangeLabel: "Shape change: none yet.",
+        receiptPreviewLabel: "Receipt preview: no mutation recorded."
+    )
+
+    var accessibilityValue: String {
+        [
+            title,
+            beforeLabel,
+            afterLabel,
+            shapeChangeLabel,
+            receiptPreviewLabel
+        ].joined(separator: ". ")
     }
 }
 
@@ -250,6 +280,13 @@ struct PlanReflowDecisionProjector: Sendable {
                 impactedStepsLabel: "Impacted steps: none.",
                 capacityImpactLabel: "Capacity impact: unchanged.",
                 protectedTimeImpactLabel: "Protected time impact: unchanged.",
+                beforeAfterPreview: PlanReflowBeforeAfterShapePreviewState(
+                    title: "Before / after",
+                    beforeLabel: "Before: current plan stays visible.",
+                    afterLabel: "After: plan remains unchanged.",
+                    shapeChangeLabel: "Shape change: none.",
+                    receiptPreviewLabel: "Receipt preview: no mutation recorded."
+                ),
                 impactLabel: "No plan mutation",
                 sourceLabel: sourceLabel,
                 trustLabel: trustLabel,
@@ -283,6 +320,7 @@ struct PlanReflowDecisionProjector: Sendable {
             impactedStepsLabel: impactedStepsLabel(for: suggestion),
             capacityImpactLabel: capacityImpactLabel(for: suggestion),
             protectedTimeImpactLabel: protectedTimeImpactLabel(for: suggestion),
+            beforeAfterPreview: beforeAfterPreview(for: suggestion, receiptPreview: receiptPreview),
             impactLabel: suggestion.impactLabel,
             sourceLabel: sourceLabel,
             trustLabel: trustLabel,
@@ -409,11 +447,60 @@ struct PlanReflowDecisionProjector: Sendable {
         case .protectOneItem, .recoverRest:
             return "Protected time impact: one protected pocket stays defended."
         case .moveLocalActionLater:
-            return "Protected time impact: no calendar write."
+            return "Protected time impact: Calendar is untouched."
         case .keepPlanUnchanged, .askForConfirmation:
             return "Protected time impact: unchanged."
         default:
             return "Protected time impact: reviewed before anything moves."
+        }
+    }
+
+    private func beforeAfterPreview(
+        for suggestion: PlanReflowSuggestionState,
+        receiptPreview: PlanReflowReceiptPreviewState
+    ) -> PlanReflowBeforeAfterShapePreviewState {
+        PlanReflowBeforeAfterShapePreviewState(
+            title: "Before / after",
+            beforeLabel: beforeLabel(for: suggestion),
+            afterLabel: afterLabel(for: suggestion),
+            shapeChangeLabel: "Shape change: \(suggestion.impactLabel).",
+            receiptPreviewLabel: "Receipt preview: \(receiptPreview.confirmationRequired)"
+        )
+    }
+
+    private func beforeLabel(for suggestion: PlanReflowSuggestionState) -> String {
+        switch suggestion.kind {
+        case .keepPlanUnchanged, .askForConfirmation:
+            return "Before: current plan stays visible."
+        case .protectOneItem:
+            return "Before: protected time is not defended yet."
+        case .recoverRest:
+            return "Before: recovery space is not protected yet."
+        case .moveLocalActionLater, .deferGoalOrItem, .dropOptionalWork, .parkGoal:
+            return "Before: load still sits in the current plan window."
+        case .markWaiting:
+            return "Before: waiting stays mixed with doing."
+        case .shrinkAction, .splitAction:
+            return "Before: the next ask is still too large."
+        }
+    }
+
+    private func afterLabel(for suggestion: PlanReflowSuggestionState) -> String {
+        switch suggestion.kind {
+        case .keepPlanUnchanged:
+            return "After: plan remains unchanged."
+        case .askForConfirmation:
+            return "After: nothing changes until you confirm."
+        case .protectOneItem:
+            return "After: one protected pocket is clearer."
+        case .recoverRest:
+            return "After: recovery has visible room."
+        case .moveLocalActionLater, .deferGoalOrItem, .dropOptionalWork, .parkGoal:
+            return "After: capacity has more room after confirmation."
+        case .markWaiting:
+            return "After: waiting is separated from doing."
+        case .shrinkAction, .splitAction:
+            return "After: the ask is smaller and reviewable."
         }
     }
 }

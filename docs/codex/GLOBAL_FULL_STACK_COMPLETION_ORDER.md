@@ -307,7 +307,14 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     persistence/schema, sync/cloud, legal/privacy/release, App Store,
     TestFlight, device, public accessibility, AOS runtime, or LDI runtime
     claim.
-53. FCP15 Reflow Decision Fold.
+53. FCP15 Reflow Decision Fold. Completed Green on 2026-05-06 as bounded Plan
+    Reflow Decision Fold implementation evidence, with before/after shape
+    preview, shape-change summary, receipt preview, affected steps, capacity
+    impact, protected-time impact, and accept/edit/decline controls. It adds no
+    silent reflow, hidden mutation, Calendar write, route/raw-value,
+    persistence/schema, sync/cloud, legal/privacy/release, App Store,
+    TestFlight, device, public accessibility, AOS runtime, or LDI runtime
+    claim.
 54. FCP16 Pressure Field / Recovery Loop.
 55. FCP10 MissionControlTimeSpine.
 56. FCP11 LifePath Thread.

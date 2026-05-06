@@ -679,6 +679,36 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(beforeCaptures, afterCaptures)
     }
 
+    func testFCP15ReflowDecisionFoldShowsBeforeAfterReceiptAndUserChoice() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "fcp15-\($0)", title: "FCP15 \($0)") })
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+
+        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+        let decision = dashboard.reflowDecision
+        let protectedOption = try XCTUnwrap(decision.options.first { $0.kind == .protectTime })
+        let preview = protectedOption.beforeAfterPreview
+
+        XCTAssertEqual(preview.title, "Before / after")
+        XCTAssertTrue(preview.beforeLabel.hasPrefix("Before:"))
+        XCTAssertTrue(preview.afterLabel.hasPrefix("After:"))
+        XCTAssertTrue(preview.shapeChangeLabel.hasPrefix("Shape change:"))
+        XCTAssertTrue(preview.receiptPreviewLabel.hasPrefix("Receipt preview:"))
+        XCTAssertTrue(preview.accessibilityValue.contains("Before / after"))
+        XCTAssertTrue(protectedOption.accessibilityValue.contains("Before / after"))
+        XCTAssertEqual(protectedOption.actions.map(\.kind), [.accept, .edit, .decline])
+        XCTAssertTrue(protectedOption.protectedTimeImpactLabel.contains("Protected time impact:"))
+        XCTAssertFalse(protectedOption.accessibilityValue.localizedCaseInsensitiveContains("optimized for you"))
+        XCTAssertFalse(protectedOption.accessibilityValue.localizedCaseInsensitiveContains("hidden mutation"))
+        XCTAssertFalse(protectedOption.accessibilityValue.localizedCaseInsensitiveContains("silent reflow"))
+        XCTAssertFalse(protectedOption.accessibilityValue.localizedCaseInsensitiveContains("calendar write"))
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+    }
+
     func testReflowCopyAvoidsFakeFutureSystemClaims() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "copy-\($0)", title: "Copy \($0)") })

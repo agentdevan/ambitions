@@ -324,6 +324,14 @@ contours. It must not become a calendar grid, bar chart, analytics dashboard,
 fake-precision score, silent replanning surface, route/raw-value change,
 persistence/schema change, release claim, or runtime claim.
 
+FCP15 is complete Green as of 2026-05-06. Future Plan, pressure/recovery, AOS,
+LDI, or external-surface work must preserve Reflow Decision Fold posture:
+before/after shape preview, receipt preview, affected steps, capacity impact,
+protected-time impact, and accept/edit/decline controls remain visible before
+any meaningful reflow. No silent reflow, hidden mutation, Calendar write,
+route/raw-value change, persistence/schema change, release claim, or runtime
+claim may be inferred from this batch.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
