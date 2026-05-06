@@ -825,7 +825,18 @@ remaining sensitive intelligence work.
     source certification, eligibility database, profile store, external
     projection, sync/account/backend service, hosted AI, release/platform,
     legal/current-requirement, or public accessibility claims.
-77. AOS06 Goal Path Kernel Goal Compiler.
+77. AOS06 Goal Path Kernel Goal Compiler. Completed Green on 2026-05-06 as
+    additive Goal Path Kernel domain-contract evidence. It adds typed compiled
+    goal candidates, goal classes, stage contracts, requirement slots,
+    activation review, source-needed fallback, proof-needed gates,
+    professional-boundary review, privacy projection protection,
+    official-requirement overclaim blocking, auto-activation blocking,
+    runtime-boundary checks, and focused tests. It does not add Goals / Goal
+    Detail UI, goal activation runtime, Life Graph mutation, source
+    certification, official requirement database, local pack runtime,
+    persistence/schema, external projection, sync/account/backend service,
+    hosted AI, release/platform, legal/current-requirement, or public
+    accessibility claims.
 78. AOS07 Local Goal Packs Requirement Slots.
 79. AOS08 Alternate Path Kernel Path Portfolio.
 80. AOS09 Option Value North Star.

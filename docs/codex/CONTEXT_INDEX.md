@@ -426,8 +426,19 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   UI, intake runtime, Life Graph mutation, source certification, eligibility
   database, profile store, external projection, sync/account/backend, hosted
   AI, external-surface, release, legal/current-requirement, or public
-  accessibility claim. The next eligible global batch is AOS06 Goal Path Kernel
-  Goal Compiler.
+  accessibility claim. AOS06 followed and is now complete.
+- AOS06 is complete Green as additive Goal Path Kernel Goal Compiler evidence.
+  It adds `Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift` and
+  focused domain tests with typed compiled goal candidates, goal classes, stage
+  contracts, requirement slots, activation review, source-needed fallback,
+  proof-needed gates, professional-boundary review, privacy projection
+  protection, official-requirement overclaim blocking, auto-activation blocking,
+  runtime-boundary checks, and no Goals/Goal Detail UI, goal activation runtime,
+  Life Graph mutation, source certification, official requirement database,
+  local pack runtime, persistence/schema, external projection, sync/account/
+  backend, hosted AI, external-surface, release, legal/current-requirement, or
+  public accessibility claim. The next eligible global batch is AOS07 Local
+  Goal Packs Requirement Slots.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

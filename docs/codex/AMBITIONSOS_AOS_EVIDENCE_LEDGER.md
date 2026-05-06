@@ -178,6 +178,45 @@ Does not prove:
 - platform behavior
 - release/platform readiness
 
+## AOS06
+
+Batch: AOS06 Goal Path Kernel Goal Compiler.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Goal Path Kernel goal classes
+- compiled goal candidate contract
+- stage and requirement slot contracts
+- activation review without auto-activation
+- source-needed fallback for regulated requirements
+- proof-needed review blocking
+- professional-boundary review blocking
+- official-requirement overclaim blocking
+- sensitive external projection protection
+- runtime-mutation blocking
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSGoalPathCompilerModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS06 report
+
+Does not prove:
+
+- Goals or Goal Detail UI integration
+- path activation runtime
+- Life Graph mutation
+- source certification
+- official requirement database behavior
+- local goal pack runtime
+- eligibility timeline runtime
+- deadline realism runtime
+- external projection
+- platform behavior
+- release/platform readiness
+
 ## AOS10
 
 Batch: AOS10 Commitment Time Kernel.
