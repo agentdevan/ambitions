@@ -12,6 +12,12 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
     let visualState: AmbitionVisualState
     let pressureLevel: Double
     let capacityLabel: String
+    let capacityContourLabel: String
+    let protectedPocketLabel: String
+    let pressureFieldLabel: String
+    let recoveryPocketLabel: String
+    let milestoneRidgeLabel: String
+    let commitmentLoadContourLabel: String
     let recoveryLabel: String
     let symbolName: String
     let accessibilityIdentifier: String
@@ -27,19 +33,35 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         self.visualState = shape.visualState
         self.pressureLevel = Self.pressureLevel(for: shape)
         self.capacityLabel = Self.capacityLabel(for: shape)
+        self.capacityContourLabel = "Capacity contour: \(Self.capacityLabel(for: shape))."
+        self.protectedPocketLabel = Self.protectedPocketLabel(for: shape)
+        self.pressureFieldLabel = Self.pressureFieldLabel(for: shape)
+        self.recoveryPocketLabel = Self.recoveryPocketLabel(for: shape)
+        self.milestoneRidgeLabel = Self.milestoneRidgeLabel(for: shape)
+        self.commitmentLoadContourLabel = Self.commitmentLoadContourLabel(for: shape)
         self.recoveryLabel = Self.recoveryLabel(for: shape)
         self.symbolName = Self.symbolName(for: shape.kind)
         self.accessibilityIdentifier = "plan.life-shape-map.\(shape.kind.rawValue)"
     }
 
     var accessibilityLabel: String {
-        [title, capacityLabel, summary, recoveryLabel]
+        [
+            title,
+            capacityContourLabel,
+            protectedPocketLabel,
+            pressureFieldLabel,
+            recoveryPocketLabel,
+            milestoneRidgeLabel,
+            commitmentLoadContourLabel,
+            summary,
+            recoveryLabel
+        ]
             .filter { $0.isEmpty == false }
             .joined(separator: ". ")
     }
 
     var accessibilityHint: String {
-        "Selects this LifeShape band without changing the plan or calendar."
+        "Selects this LifeShape contour without changing the plan or calendar."
     }
 
     private static func pressureLevel(for shape: PlanLifeSuiteShapeState) -> Double {
@@ -81,6 +103,61 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
+    private static func protectedPocketLabel(for shape: PlanLifeSuiteShapeState) -> String {
+        switch shape.kind {
+        case .day:
+            return "Protected pocket: keep the clearest opening guarded."
+        case .week:
+            return "Protected pocket: reserve one lighter lane before adding more."
+        case .life:
+            return "Protected pocket: keep direction wider than today's slots."
+        }
+    }
+
+    private static func pressureFieldLabel(for shape: PlanLifeSuiteShapeState) -> String {
+        switch shape.visualState {
+        case .warning:
+            return "Pressure field: visible and asking for review."
+        case .disabled:
+            return "Pressure field: quiet because this shape is unavailable."
+        default:
+            return "Pressure field: present but not crowding the shape."
+        }
+    }
+
+    private static func recoveryPocketLabel(for shape: PlanLifeSuiteShapeState) -> String {
+        switch shape.kind {
+        case .day:
+            return "Recovery pocket: space before the next ask."
+        case .week:
+            return "Recovery pocket: lighten one pressured day first."
+        case .life:
+            return "Recovery pocket: preserve room for the next season."
+        }
+    }
+
+    private static func milestoneRidgeLabel(for shape: PlanLifeSuiteShapeState) -> String {
+        switch shape.kind {
+        case .day:
+            return "Milestone ridge: today's clearest plan edge."
+        case .week:
+            return "Milestone ridge: the week bends around active goals."
+        case .life:
+            return "Milestone ridge: active goals anchor the longer arc."
+        }
+    }
+
+    private static func commitmentLoadContourLabel(for shape: PlanLifeSuiteShapeState) -> String {
+        switch shape.visualState {
+        case .warning:
+            return "Commitment load contour: tight, qualitative only."
+        case .disabled:
+            return "Commitment load contour: unavailable."
+        default:
+            return "Commitment load contour: reviewable, not measured as a number."
+        }
+    }
+
     private static func symbolName(for kind: PlanLifeSuiteShapeKind) -> String {
         switch kind {
         case .day:
@@ -117,13 +194,13 @@ struct PlanLifeShapeTimeCapacityMap: View {
                 header
 
                 if dynamicTypeSize.isAccessibilitySize {
-                    accessibilityBandStack
+                    accessibilityContourStack
                 } else {
-                    visualBandMap
+                    visualContourMap
                 }
 
                 if let selectedItem {
-                    PlanLifeShapeSelectedBandPanel(item: selectedItem, revealsPressure: revealsPressure)
+                    PlanLifeShapeSelectedContourPanel(item: selectedItem, revealsPressure: revealsPressure)
                 }
 
                 PlanLifeShapeDrillDownPanel(drillDown: suite.drillDown)
@@ -157,7 +234,7 @@ struct PlanLifeShapeTimeCapacityMap: View {
                 Text("LifeShape Time Capacity Map")
                     .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Capacity, pressure, and recovery markers without a calendar grid.")
+                Text("Capacity, pressure, and recovery markers without a schedule table.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -169,10 +246,10 @@ struct PlanLifeShapeTimeCapacityMap: View {
         }
     }
 
-    private var visualBandMap: some View {
-        HStack(alignment: .bottom, spacing: theme.spacing.sm) {
+    private var visualContourMap: some View {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
             ForEach(items) { item in
-                PlanLifeShapeBandButton(
+                PlanLifeShapeContourButton(
                     item: item,
                     isSelected: selectedItem?.id == item.id,
                     revealsPressure: revealsPressure,
@@ -181,15 +258,15 @@ struct PlanLifeShapeTimeCapacityMap: View {
                 )
             }
         }
-        .frame(minHeight: 188, alignment: .bottom)
+        .frame(minHeight: 188, alignment: .center)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("LifeShape Time Capacity Map")
+        .accessibilityLabel("LifeShape Contour Map")
     }
 
-    private var accessibilityBandStack: some View {
+    private var accessibilityContourStack: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             ForEach(items) { item in
-                PlanLifeShapeBandButton(
+                PlanLifeShapeContourButton(
                     item: item,
                     isSelected: selectedItem?.id == item.id,
                     revealsPressure: revealsPressure,
@@ -208,7 +285,7 @@ struct PlanLifeShapeTimeCapacityMap: View {
     }
 }
 
-private struct PlanLifeShapeBandButton: View {
+private struct PlanLifeShapeContourButton: View {
     @Environment(\.ambitionTheme) private var theme
 
     let item: PlanLifeShapeMapItem
@@ -231,11 +308,11 @@ private struct PlanLifeShapeBandButton: View {
 
     private var content: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            bandHeader
+            contourHeader
 
             Spacer(minLength: theme.spacing.xs)
 
-            bandStack
+            contourMap
 
             Text(item.capacityLabel)
                 .font(theme.typography.micro)
@@ -254,7 +331,7 @@ private struct PlanLifeShapeBandButton: View {
         }
     }
 
-    private var bandHeader: some View {
+    private var contourHeader: some View {
         HStack(spacing: theme.spacing.xs) {
             Image(systemName: item.symbolName)
                 .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
@@ -266,31 +343,76 @@ private struct PlanLifeShapeBandButton: View {
         }
     }
 
-    private var bandStack: some View {
-        ZStack(alignment: .bottom) {
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(accent.opacity(isSelected ? 0.24 : 0.13))
-                .frame(height: 120)
+    private var contourMap: some View {
+        ZStack {
+            Capsule(style: .continuous)
+                .fill(accent.opacity(isSelected ? 0.24 : 0.14))
+                .frame(height: 108)
+                .scaleEffect(x: contourWidthScale, y: contourHeightScale, anchor: .center)
 
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(accent.opacity(revealsPressure ? 0.86 : 0.58))
-                .frame(height: pressureHeight)
-                .overlay(alignment: .topTrailing) {
-                    pressureMarker
-                }
+            Capsule(style: .continuous)
+                .stroke(accent.opacity(0.55), lineWidth: isSelected ? 1.5 : 1)
+                .frame(height: 108)
+                .scaleEffect(x: contourWidthScale, y: contourHeightScale, anchor: .center)
+
+            milestoneRidge
+
+            if revealsPressure {
+                pressureField
+            }
+
+            pocketRow
         }
+        .frame(maxWidth: .infinity, minHeight: 128)
     }
 
     @ViewBuilder
-    private var pressureMarker: some View {
+    private var pressureField: some View {
         if revealsPressure {
-            Image(systemName: "exclamationmark.circle")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(theme.colors.textInverse)
-                .padding(6)
+            Circle()
+                .fill(accent.opacity(0.42))
+                .frame(width: pressureDiameter, height: pressureDiameter)
+                .overlay {
+                    Image(systemName: "waveform.path")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(theme.colors.textInverse)
+                        .accessibilityHidden(true)
+                }
+                .offset(x: 28, y: -8)
                 .transition(reduceMotion ? .opacity : .scale.combined(with: .opacity))
                 .accessibilityHidden(true)
         }
+    }
+
+    private var milestoneRidge: some View {
+        Capsule(style: .continuous)
+            .fill(accent.opacity(0.72))
+            .frame(width: 72, height: 4)
+            .rotationEffect(.degrees(item.pressureLevel > 0.6 ? -8 : 6))
+            .offset(y: -36)
+            .accessibilityHidden(true)
+    }
+
+    private var pocketRow: some View {
+        HStack(spacing: theme.spacing.xxxs) {
+            pocketLabel("Protected", icon: "lock")
+            pocketLabel("Recovery", icon: "leaf")
+        }
+        .offset(y: 38)
+    }
+
+    private func pocketLabel(_ title: String, icon: String) -> some View {
+        Label(title, systemImage: icon)
+            .font(theme.typography.micro)
+            .foregroundStyle(theme.colors.textPrimary)
+            .lineLimit(1)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 4)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(theme.colors.surfaceSecondary.opacity(0.88))
+            )
+            .accessibilityHidden(true)
     }
 
     private var accent: Color {
@@ -302,12 +424,20 @@ private struct PlanLifeShapeBandButton: View {
             .opacity(isSelected ? 0.82 : 0.45)
     }
 
-    private var pressureHeight: CGFloat {
-        34 + CGFloat(item.pressureLevel * 82)
+    private var contourWidthScale: CGFloat {
+        0.84 + CGFloat(item.pressureLevel * 0.14)
+    }
+
+    private var contourHeightScale: CGFloat {
+        0.58 + CGFloat(item.pressureLevel * 0.30)
+    }
+
+    private var pressureDiameter: CGFloat {
+        26 + CGFloat(item.pressureLevel * 28)
     }
 }
 
-private struct PlanLifeShapeSelectedBandPanel: View {
+private struct PlanLifeShapeSelectedContourPanel: View {
     @Environment(\.ambitionTheme) private var theme
 
     let item: PlanLifeShapeMapItem
@@ -322,6 +452,17 @@ private struct PlanLifeShapeSelectedBandPanel: View {
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(item.capacityContourLabel)
+                Text(item.protectedPocketLabel)
+                Text(item.pressureFieldLabel)
+                Text(item.recoveryPocketLabel)
+                Text(item.milestoneRidgeLabel)
+                Text(item.commitmentLoadContourLabel)
+            }
+            .font(theme.typography.micro)
+            .foregroundStyle(theme.colors.textTertiary)
+            .fixedSize(horizontal: false, vertical: true)
             HStack(spacing: theme.spacing.xs) {
                 TagPill(item.sourceLabel, icon: "scope", state: .default)
                 TagPill(item.boundaryLabel, icon: "hand.raised", state: item.visualState)

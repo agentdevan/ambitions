@@ -147,8 +147,15 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   status, keyboard/system-dictation fallback wording, motor-safe button/menu
   alternatives, and review-before-save copy without adding microphone
   permission, audio capture, route/raw-value changes, persistence/schema
-  changes, or public accessibility claims. The next eligible global batch is
-  FCP14 LifeShape Contour Map.
+  changes, or public accessibility claims. FCP14 follows it in the global order
+  as LifeShape Contour Map.
+- FCP14 is complete Green as bounded Plan LifeShape Contour Map implementation
+  evidence. Plan now renders LifeShape as a contour-first object with capacity
+  contours, protected pockets, pressure fields, recovery pockets, milestone
+  ridges, and commitment-load contours instead of the prior band/bar
+  expression, without adding calendar-grid, analytics-chart, fake-precision,
+  route/raw-value, or persistence/schema changes. The next eligible global
+  batch is FCP15 Reflow Decision Fold.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -557,7 +564,8 @@ Green as bounded Capture Placement Shelf evidence. FCP19 is complete Green as
 bounded Placement Resolver / Correction Fold evidence. FCP20 is complete Green
 as bounded Goal Seed Incubator evidence. FCP21 is complete Green as bounded
 Voice / Motor Capture Accessibility evidence, and the full-stack order selects
-FCP14 next.
+FCP14 next. FCP14 is complete Green as bounded LifeShape Contour Map evidence,
+and the full-stack order selects FCP15 next.
 
 
 ## Living Dream Intelligence Context

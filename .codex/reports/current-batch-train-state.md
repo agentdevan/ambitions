@@ -2,14 +2,14 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP21 Voice / Motor Capture Accessibility complete / Green.
-Next eligible batch: FCP14 LifeShape Contour Map.
-Scope: FCP21 added a Capture composer input-alternatives object with honest
-voice-unavailable status, keyboard/system-dictation fallback wording,
-motor-safe button/menu alternatives, and review-before-save copy. It preserved
-no microphone permission, audio capture, route/raw-value, persistence/schema,
-dependency, sync/cloud, legal/privacy/release/device, public accessibility,
-AOS runtime, or LDI runtime claim.
+Current batch: FCP14 LifeShape Contour Map complete / Green.
+Next eligible batch: FCP15 Reflow Decision Fold.
+Scope: FCP14 upgraded Plan's LifeShape map from band/bar expression to a
+contour-first object with capacity contours, protected pockets, pressure
+fields, recovery pockets, milestone ridges, and commitment-load contours. It
+preserved no calendar grid, no analytics chart, no fake precision, no
+route/raw-value or persistence/schema change, and all sync/cloud,
+legal/privacy/release/device/accessibility claims as evidence-bound.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -63,7 +63,8 @@ is complete / Green as Appearance Studio evidence. FCP18 is complete / Green
 as Capture Placement Shelf evidence. FCP19 is complete / Green as Placement
 Resolver / Correction Fold evidence. FCP20 is complete / Green as Goal Seed
 Incubator evidence. FCP21 is complete / Green as Voice / Motor Capture
-Accessibility evidence. FCP14 is the next eligible global batch.
+Accessibility evidence. FCP14 is complete / Green as LifeShape Contour Map
+evidence. FCP15 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

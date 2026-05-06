@@ -96,8 +96,34 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertGreaterThan(weekItem.pressureLevel, 0.45)
         XCTAssertTrue(weekItem.capacityLabel.localizedCaseInsensitiveContains("pressure"))
         XCTAssertTrue(weekItem.recoveryLabel.localizedCaseInsensitiveContains("lighten"))
+        XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("LifeShape contour"))
         XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("without changing"))
         XCTAssertFalse(items.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("calendar grid"))
+    }
+
+    func testFCP14LifeShapeMapItemsExposeContourPocketFieldAndRidgePrimitives() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "contour-tight-1", title: "Contour one"),
+            makeWeekVisibleGoal(id: "contour-tight-2", title: "Contour two"),
+            makeWeekVisibleGoal(id: "contour-tight-3", title: "Contour three")
+        ])
+        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+        let items = dashboard.lifeSuite.shapes.map(PlanLifeShapeMapItem.init(shape:))
+        let combined = items.map(\.accessibilityLabel).joined(separator: " ")
+
+        XCTAssertEqual(items.count, 3)
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Capacity contour"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Protected pocket"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Pressure field"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Recovery pocket"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Milestone ridge"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Commitment load contour"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("bar chart"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("calendar grid"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("event grid"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("score"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("fake precision"))
     }
 
     func testLifeShapeDrillDownExplainsLongRangeShapeWithoutCalendarClone() async throws {

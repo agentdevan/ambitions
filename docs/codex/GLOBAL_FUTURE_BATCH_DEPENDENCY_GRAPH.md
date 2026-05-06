@@ -316,6 +316,14 @@ paths, and review-before-save remains visible. No microphone permission, audio
 capture, route/raw-value, persistence/schema, sync/cloud, release, public
 accessibility, or runtime claim may be inferred from this batch.
 
+FCP14 is complete Green as of 2026-05-06. Future Plan, reflow, recovery, AOS,
+LDI, or external-surface work must preserve LifeShape Contour Map posture:
+LifeShape is a contour-first capacity object with protected pockets, pressure
+fields, recovery pockets, milestone ridges, and qualitative commitment-load
+contours. It must not become a calendar grid, bar chart, analytics dashboard,
+fake-precision score, silent replanning surface, route/raw-value change,
+persistence/schema change, release claim, or runtime claim.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
