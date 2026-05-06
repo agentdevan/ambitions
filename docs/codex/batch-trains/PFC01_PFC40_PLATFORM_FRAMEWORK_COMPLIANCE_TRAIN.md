@@ -305,7 +305,12 @@ Required result: monetization decision record.
 Type: Implementation/tests if approved.
 Owner: Monetization.
 Goal: Implement StoreKit 2 products/entitlements/restoration/testing or defer monetization.
-Required result: StoreKit tests and no dark pattern proof.
+Required result: Complete / Green as safe deferral proof. PFC22 did not
+implement StoreKit because PFC21 prerequisites remain unresolved; the source
+scan found no active StoreKit runtime, product catalog, paywall, purchase flow,
+receipt validation, subscription validation, or entitlement implementation, and
+the safe launch decision remains no StoreKit, no subscription, no in-app
+purchase, no paywall, no ads, and no external purchase link.
 
 ### PFC23 — Paywall / Upgrade UX Compliance Review
 

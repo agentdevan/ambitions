@@ -256,6 +256,12 @@ IAP, paywall, ads, or external purchase link; future exact pricing, product ids,
 tiers, App Store Connect setup, legal review, and business decisions remain
 owner-gated before PFC22/PFC23.
 
+PFC22 is complete Green as of 2026-05-06. Future StoreKit, entitlement, product
+catalog, purchase, restore, receipt-validation, subscription, paywall, or
+external-purchase work must preserve the PFC22 deferral boundary until exact
+product IDs, pricing, entitlement model, App Store Connect setup, StoreKit
+testing fixtures, and legal/business approval exist.
+
 PFC24 is complete Green as of 2026-05-05. Future App Store privacy labels,
 privacy policy, data collection, tracking, analytics, StoreKit, account, cloud,
 sync, external-service, permission, notification, widget, Live Activity, App

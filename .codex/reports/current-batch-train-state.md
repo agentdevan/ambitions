@@ -2,18 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: PFC20 Notifications / Calendar / Reminders Implementation Proof complete / Green.
-Next eligible batch: PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral.
-Scope: PFC20 hardened existing notification, Calendar, and Reminders seams so
-notification copy hides ambient private detail by default, notification
-mutation actions route into Ambitions instead of mutating in the background,
-and EventKit reminder/calendar notes remain minimal and explicit-request
-grounded. It adds no Focus Filter implementation, onboarding permission prompt,
-silent calendar/reminder write, entitlement, signing, project/workflow/
-dependency change, persistence/schema change, privacy manifest change,
-sync/account/backend behavior, AI/LDI runtime, legal/privacy/release claim, App
-Store claim, TestFlight claim, physical-device proof, or public accessibility
-claim.
+Current batch: PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral complete / Green.
+Next eligible batch: PFC23 Paywall / Upgrade UX Compliance Review.
+Scope: PFC22 closed as explicit StoreKit implementation deferral proof because
+PFC21 accepted-Yellow prerequisites remain unresolved: exact product IDs,
+pricing, entitlement model, App Store Connect setup, restore behavior, testing
+fixtures, and legal/business approval. It adds no StoreKit runtime, product
+catalog, purchase flow, receipt validation, entitlement model, paywall,
+subscription, in-app purchase, ads, external purchase link, entitlement,
+signing, project/workflow/dependency change, persistence/schema change, privacy
+manifest change, sync/account/backend behavior, AI/LDI runtime,
+legal/privacy/release claim, App Store claim, TestFlight claim, physical-device
+proof, or public accessibility claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -82,7 +82,8 @@ WidgetKit projection hardening and focused-test evidence. PFC16 is complete /
 Green as Live Activity source hardening and focused-test evidence. PFC18 is
 complete / Green as App Intents / Shortcuts source hardening and focused-test
 evidence. PFC20 is complete / Green as notification, Calendar, and Reminders
-implementation proof. PFC22 is the next eligible global batch.
+implementation proof. PFC22 is complete / Green as StoreKit implementation
+deferral proof. PFC23 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
