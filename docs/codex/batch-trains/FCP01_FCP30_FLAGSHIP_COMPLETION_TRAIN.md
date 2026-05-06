@@ -428,6 +428,10 @@ Depends on: FCP25; SI14.
 Goal: Complete status glyph/shape/copy/non-color meaning grammar.
 Acceptance: no color-only status; no arbitrary symbol drift.
 
+Status: Complete / Green on 2026-05-06 as shared/status-grammar
+implementation evidence with allowed placement metadata, shape cues,
+degraded-card wiring, and focused non-color/status-placement proof.
+
 ### FCP27 — Cross-Surface Proof / Review Mesh
 
 Type: Implementation.

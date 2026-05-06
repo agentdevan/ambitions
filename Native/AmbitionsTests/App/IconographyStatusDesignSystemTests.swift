@@ -1,4 +1,5 @@
 import XCTest
+@testable import Ambitions
 @testable import AmbitionsDesignSystem
 
 final class IconographyStatusDesignSystemTests: XCTestCase {
@@ -25,6 +26,7 @@ final class IconographyStatusDesignSystemTests: XCTestCase {
             XCTAssertFalse(role.title.isEmpty)
             XCTAssertFalse(role.detail.isEmpty)
             XCTAssertFalse(role.symbolName.isEmpty)
+            XCTAssertFalse(role.shapeCue.isEmpty)
             XCTAssertTrue(role.nonColorCue.contains(role.symbolName))
             XCTAssertTrue(role.nonColorCue.contains(role.title))
             XCTAssertTrue(role.accessibilityLabel.contains(role.title))
@@ -68,5 +70,40 @@ final class IconographyStatusDesignSystemTests: XCTestCase {
             XCTAssertTrue(role.reduceMotionSemantics.localizedCaseInsensitiveContains("static"))
             XCTAssertTrue(role.reduceMotionSemantics.localizedCaseInsensitiveContains("label"))
         }
+    }
+
+    func testFCP26EveryStatusRoleHasAllowedPlacementAndShapeCue() {
+        for role in AmbitionsStatusSymbolRole.allCases {
+            XCTAssertFalse(role.allowedPlacements.isEmpty, role.rawValue)
+            XCTAssertFalse(role.placementSummary.isEmpty, role.rawValue)
+            XCTAssertTrue(role.allowedPlacements.contains(.statusBadge), role.rawValue)
+            XCTAssertTrue(role.shapeCue.contains(role.symbolName), role.rawValue)
+            XCTAssertFalse(role.nonColorCue.localizedCaseInsensitiveContains("color-only"))
+            XCTAssertFalse(role.accessibilityLabel.localizedCaseInsensitiveContains("AI confidence"))
+        }
+    }
+
+    func testFCP26ObjectDegradedCardsRenderThroughStatusGrammar() {
+        let loadingPresentations = FlagshipObjectStateOwner.allCases.map {
+            DegradedStateOrchestrator.objectLoading($0)
+        }
+        let unavailablePresentations = FlagshipObjectStateOwner.allCases.map {
+            DegradedStateOrchestrator.objectUnavailable($0)
+        }
+
+        XCTAssertTrue(loadingPresentations.allSatisfy { $0.statusRole == .loading })
+
+        for presentation in unavailablePresentations {
+            XCTAssertTrue(
+                presentation.statusRole.allowedPlacements.contains(.loadingDegradedCard),
+                presentation.title
+            )
+            XCTAssertFalse(presentation.statusRole.title.isEmpty)
+            XCTAssertFalse(presentation.statusRole.shapeCue.isEmpty)
+        }
+
+        let missionControl = DegradedStateOrchestrator.objectUnavailable(.missionControlTimeSpine)
+        XCTAssertEqual(missionControl.statusRole, .needsReview)
+        XCTAssertTrue(missionControl.statusRole.placementSummary.contains("Loading or degraded card"))
     }
 }

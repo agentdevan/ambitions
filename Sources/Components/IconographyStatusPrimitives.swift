@@ -21,6 +21,26 @@ public enum AmbitionsStatusSymbolFamily: String, CaseIterable, Sendable {
     }
 }
 
+public enum AmbitionsStatusSymbolPlacement: String, CaseIterable, Sendable {
+    case objectHeader
+    case statusBadge
+    case receiptProof
+    case externalCompact
+    case loadingDegradedCard
+    case reviewFold
+
+    public var title: String {
+        switch self {
+        case .objectHeader: "Object header"
+        case .statusBadge: "Status badge"
+        case .receiptProof: "Receipt proof"
+        case .externalCompact: "External compact"
+        case .loadingDegradedCard: "Loading or degraded card"
+        case .reviewFold: "Review fold"
+        }
+    }
+}
+
 public enum AmbitionsStatusSymbolRole: String, CaseIterable, Identifiable, Sendable {
     case proofSaved
     case proofPending
@@ -188,7 +208,49 @@ public enum AmbitionsStatusSymbolRole: String, CaseIterable, Identifiable, Senda
     }
 
     public var nonColorCue: String {
-        "\(symbolName) with visible label: \(title)"
+        "\(shapeCue) with visible label: \(title)"
+    }
+
+    public var shapeCue: String {
+        switch family {
+        case .proof:
+            return "Seal/document shape using \(symbolName)"
+        case .source:
+            return "Source shield/clock/conflict shape using \(symbolName)"
+        case .privacy:
+            return "Privacy device/lock/cloud-slash shape using \(symbolName)"
+        case .pressure:
+            return "Boundary/pressure/support shape using \(symbolName)"
+        case .recovery:
+            return "Recovery turn-back shape using \(symbolName)"
+        case .system:
+            return "System waiting/review/setup shape using \(symbolName)"
+        }
+    }
+
+    public var allowedPlacements: [AmbitionsStatusSymbolPlacement] {
+        switch self {
+        case .proofSaved, .proofPending, .receiptAvailable:
+            return [.objectHeader, .statusBadge, .receiptProof, .reviewFold]
+        case .sourceFresh, .sourcePartial, .sourceStale, .sourceDenied,
+             .sourceConflict, .packUnavailable:
+            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
+        case .privacyProtected, .privacySensitive, .localOnly,
+             .syncUnavailable:
+            return [.objectHeader, .statusBadge, .externalCompact, .loadingDegradedCard]
+        case .professionalBoundary, .unsafeBlocked, .crisisSupport,
+             .pressureRising:
+            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
+        case .recoveryAvailable:
+            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
+        case .waiting, .needsReview, .setupNeeded, .noDataYet,
+             .disabledPendingValidation, .loading:
+            return [.objectHeader, .statusBadge, .loadingDegradedCard]
+        }
+    }
+
+    public var placementSummary: String {
+        allowedPlacements.map(\.title).joined(separator: ", ")
     }
 
     public var reduceMotionSemantics: String {

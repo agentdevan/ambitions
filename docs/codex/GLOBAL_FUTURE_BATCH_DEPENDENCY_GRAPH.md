@@ -75,6 +75,10 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   objectizing loading and unavailable states across Today, Goals, Goal Detail,
   Capture, Plan, and You without generic error, risky progress copy, skeleton
   spam, hidden mutation, calendar-write, or cloud-sync claims.
+- FCP26 is complete as shared status-grammar evidence. It satisfies the
+  iconography/status dependency by adding allowed placement and shape-cue
+  metadata to SI14 status roles and wiring degraded/loading cards through the
+  shared `AmbitionsStatusSymbol` grammar.
 - FCP08/FCP09 must run after core Today/trust posture is stable enough to avoid shell/motion churn.
 - FCP25/FCP26 must run after major object implementations so loading/degraded states and status grammar harden real objects rather than abstract primitives.
 - AOS01 depends on explicit approval phrase `Start AOS Train` or global cross-train preauthorization.

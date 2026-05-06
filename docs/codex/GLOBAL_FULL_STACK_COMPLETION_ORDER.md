@@ -374,7 +374,17 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     legal/privacy/release claim, App Store claim, TestFlight claim,
     physical-device proof, public accessibility claim, AOS runtime claim, or
     LDI runtime claim.
-60. FCP26 Iconography / Status Grammar Hardening.
+60. FCP26 Iconography / Status Grammar Hardening. Completed Green on
+    2026-05-06 as bounded shared/status-grammar implementation evidence. It
+    adds allowed placement and shape-cue metadata to the SI14 status roles,
+    wires degraded/loading cards through `AmbitionsStatusSymbol`, and proves
+    every status role has symbol, shape, visible label, non-color cue,
+    VoiceOver meaning, Reduce Motion semantics, and allowed placement. It adds
+    no arbitrary symbol drift, color-only status, route/raw-value change,
+    persistence/schema change, dependency, top-level tab, sync/cloud behavior,
+    legal/privacy/release claim, App Store claim, TestFlight claim,
+    physical-device proof, public accessibility claim, AOS runtime claim, or
+    LDI runtime claim.
 
 ### Phase 6 — External Surface Implementation
 

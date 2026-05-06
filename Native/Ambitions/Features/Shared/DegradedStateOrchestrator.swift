@@ -49,6 +49,7 @@ struct DegradedStatePresentation: Identifiable, Sendable, Equatable {
     let secondaryAction: DegradedStateAction?
     let tone: AmbitionVisualState
     let icon: String
+    let statusRole: AmbitionsStatusSymbolRole
 
     init(
         id: String,
@@ -58,7 +59,8 @@ struct DegradedStatePresentation: Identifiable, Sendable, Equatable {
         primaryAction: DegradedStateAction,
         secondaryAction: DegradedStateAction? = nil,
         tone: AmbitionVisualState,
-        icon: String
+        icon: String,
+        statusRole: AmbitionsStatusSymbolRole? = nil
     ) {
         self.id = id
         self.kind = kind
@@ -68,6 +70,28 @@ struct DegradedStatePresentation: Identifiable, Sendable, Equatable {
         self.secondaryAction = secondaryAction
         self.tone = tone
         self.icon = icon
+        self.statusRole = statusRole ?? Self.defaultStatusRole(for: kind)
+    }
+
+    private static func defaultStatusRole(for kind: DegradedStateKind) -> AmbitionsStatusSymbolRole {
+        switch kind {
+        case .empty, .lowHistory:
+            .noDataYet
+        case .permissionNeeded:
+            .setupNeeded
+        case .permissionDenied:
+            .sourceDenied
+        case .stale:
+            .sourceStale
+        case .offline:
+            .localOnly
+        case .unavailable, .error:
+            .needsReview
+        case .loading:
+            .loading
+        case .cannotExplainYet:
+            .disabledPendingValidation
+        }
     }
 }
 
@@ -402,7 +426,8 @@ enum DegradedStateOrchestrator {
             explanation: "\(owner.loadingExplanation) \(entry.boundary)",
             primaryAction: DegradedStateAction(title: entry.loadingState.action.title, systemImage: owner.icon),
             tone: .default,
-            icon: owner.icon
+            icon: owner.icon,
+            statusRole: entry.loadingState.statusSymbolRole
         )
     }
 
@@ -418,7 +443,8 @@ enum DegradedStateOrchestrator {
             explanation: "\(owner.degradedExplanation) \(entry.boundary)",
             primaryAction: DegradedStateAction(title: "Retry", systemImage: "arrow.clockwise", routingHint: retryHint),
             tone: .warning,
-            icon: owner.icon
+            icon: owner.icon,
+            statusRole: entry.degradedState.statusSymbolRole
         )
     }
 
@@ -465,7 +491,8 @@ struct DegradedStateCard: View {
                     Image(systemName: state.icon)
                         .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
                         .foregroundStyle(theme.colors.textSecondary)
-                    StatusChip(statusTitle, icon: statusIcon, state: state.tone)
+                        .accessibilityHidden(true)
+                    AmbitionsStatusSymbol(state.statusRole, style: .badge)
                 }
 
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
@@ -505,31 +532,4 @@ struct DegradedStateCard: View {
         .accessibilityIdentifier(state.id)
     }
 
-    private var statusTitle: String {
-        switch state.kind {
-        case .empty: "Ready when you are"
-        case .lowHistory: "Low history"
-        case .permissionNeeded: "Optional"
-        case .permissionDenied: "Limited"
-        case .stale: "Older context"
-        case .offline: "Local mode"
-        case .unavailable, .error: "May need attention"
-        case .loading: "Loading"
-        case .cannotExplainYet: "Not enough signal"
-        }
-    }
-
-    private var statusIcon: String {
-        switch state.kind {
-        case .empty: "sparkles"
-        case .lowHistory: "chart.line.uptrend.xyaxis"
-        case .permissionNeeded: "hand.raised"
-        case .permissionDenied: "hand.raised.slash"
-        case .stale: "clock"
-        case .offline: "wifi.slash"
-        case .unavailable, .error: "exclamationmark.triangle"
-        case .loading: "hourglass"
-        case .cannotExplainYet: "questionmark.circle"
-        }
-    }
 }

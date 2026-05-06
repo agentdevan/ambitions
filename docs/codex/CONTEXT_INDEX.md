@@ -196,6 +196,11 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Detail, Capture, Plan, and You now use object-specific loading/unavailable
   states. The next eligible global batch is FCP26 Iconography / Status Grammar
   Hardening.
+- FCP26 is complete Green as bounded shared/status-grammar evidence. SI14
+  status roles now carry allowed placement and shape-cue metadata, and
+  degraded/loading cards render through `AmbitionsStatusSymbol` with focused
+  non-color/status-placement proof. The next eligible global batch is PFC10
+  CloudKit Schema / Zone / Conflict Model.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -611,8 +616,9 @@ MissionControlTimeSpine evidence. FCP11 is complete Green as bounded LifePath
 Thread evidence. FCP12 is complete Green as bounded Proof Spine / Evidence
 Ledger evidence. FCP13B is complete Green as bounded Goal Alternate Path /
 Decision History Polish evidence. FCP25 is complete Green as bounded Loading /
-Empty / Degraded State Objectization evidence, and the full-stack order selects
-FCP26 next.
+Empty / Degraded State Objectization evidence. FCP26 is complete Green as
+bounded Iconography / Status Grammar Hardening evidence, and the full-stack
+order selects PFC10 next.
 
 
 ## Living Dream Intelligence Context
