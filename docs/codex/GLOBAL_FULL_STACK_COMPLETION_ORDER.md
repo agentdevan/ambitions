@@ -659,7 +659,20 @@ remaining sensitive intelligence work.
     tests. It does not add model invocation, Life Graph mutation, source-pack
     runtime, UI, external-surface behavior, platform integration, sync/account/
     backend service, hosted AI, professional advice, or release/platform
-    claims. AOS12 is next by optimized order.
+    claims. Source Atlas now governs the next eligible work before AOS12.
+72A. SA01 Source Atlas Canon Lock. Completed Green on 2026-05-06 as docs/state
+     reconciliation of the existing Source Atlas canon into the live global
+     train. It locks Source Atlas as a signed, offline-first, claim-level
+     world-source system and forbids standalone top-level source surfaces,
+     official/current requirement overclaims, hosted AI or user-data-server
+     dependency, hidden mutation, internet-required core behavior, and
+     one-pack-per-goal sprawl. It does not add Swift runtime, seed data,
+     production source packs, URL/PDF/OCR behavior, Pack Factory output,
+     Freshness Broker behavior, UI, sync/account/backend service, release
+     claim, legal/current-requirement claim, or platform proof. Source Atlas
+     Research Seeds v1 import remains Yellow / pending because the local ZIP
+     was unavailable. SA02 is next.
+72B. SA02 Source Atlas Gate Matrix.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.

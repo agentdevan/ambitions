@@ -2,16 +2,17 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS04 Control Plane Work Classifier complete / Green.
-Next eligible batch: AOS12 Proof Trust Closure Receipts by optimized order.
-Scope: AOS04 added additive domain contracts for typed work requests, work
-classes, signals, gates, output kinds, deterministic classification,
-graph-delta review gating, and source/safety/privacy/compatibility/
-maintainability/performance/release-evidence gates plus focused tests. It adds
-no model invocation, Life Graph mutation, source-pack runtime, UI, platform
-integration, sync/account/backend service, hosted AI, external-surface
-behavior, release claim, App Store claim, TestFlight claim, physical-device
-proof, public accessibility proof, privacy/legal approval, or platform proof.
+Current batch: SA01 Source Atlas Canon Lock complete / Green.
+Next eligible batch: SA02 Source Atlas Gate Matrix.
+Scope: SA01 reconciled the existing Source Atlas canon into the live global
+batch train before deep AOS/LDI/source/freshness work continues. Source Atlas is
+locked as a signed, offline-first, claim-level world-source system with no
+standalone top-level source surface, no official/current requirement overclaim, no hosted AI or
+user-data-server dependency, no hidden mutation, no internet-required core
+behavior, and no one-pack-per-goal sprawl. It changed docs/state only and adds
+no Swift runtime, seed import, source pack, URL/PDF/OCR behavior, Pack Factory
+output, Freshness Broker behavior, UI, sync/account/backend service, release
+claim, legal/current-requirement claim, or platform proof.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -105,9 +106,15 @@ is complete / Accepted Yellow as AmbitionsOS Canon and Runtime Contract
 evidence. AOS02 is complete / Green as Life Graph Event Log Foundation
 evidence. AOS03 is complete / Green as Graph Delta Review Projection Store
 evidence. AOS04 is complete / Green as Control Plane Work Classifier evidence.
-AOS12 is the next eligible global batch under the active global authorization
-and optimized order.
+SA01 is complete / Green as Source Atlas Canon Lock reconciliation. SA02 is the
+next eligible global batch under the active Source Atlas overlay before AOS12
+and other deep source/freshness-dependent AOS/LDI work continues.
 Accepted Yellow:
+Source Atlas Research Seeds v1 import is pending because the expected
+`ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable
+locally during the requested search. No seed files were fabricated and no import
+was marked complete.
+
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
