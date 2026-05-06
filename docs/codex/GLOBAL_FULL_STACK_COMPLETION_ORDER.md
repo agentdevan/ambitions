@@ -761,7 +761,19 @@ remaining sensitive intelligence work.
      source packs, Pack Factory implementation, Freshness Broker behavior, UI,
      sync/account/backend service, release claim, legal/current-requirement
      claim, or platform proof. SAP05 is next.
-72J. SAP05 No-Sprawl / No-Duplicate Pack Gate.
+72J. SAP05 No-Sprawl / No-Duplicate Pack Gate. Completed Green on 2026-05-06
+     as docs/state reconciliation of no-sprawl and no-duplicate pack gates.
+     Physical reviewer skills and advisory scripts now exist for composition
+     architecture, goal projection, capability graph review, projection
+     recipes, alternative path / option value, pack duplication,
+     generated-step boundaries, no-claim language, and projection fixture
+     coverage. SA06 is now eligible subject to schema/test proof and Research
+     Seeds v1 remaining pending unless local seed data is explicitly required.
+     It does not add Swift runtime, seed data, source ingestion, extraction,
+     OCR, classifier, source packs, Pack Factory implementation, Freshness
+     Broker behavior, UI, sync/account/backend service, release claim,
+     legal/current-requirement claim, or platform proof. SA06 is next.
+72K. SA06 Pack Schema Implementation.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.

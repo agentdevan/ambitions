@@ -2,17 +2,17 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: SAP04 Projection QA Fixtures complete / Green.
-Next eligible batch: SAP05 No-Sprawl / No-Duplicate Pack Gate.
-Scope: SAP04 added Source Atlas projection QA fixture family source truth for
-pickleball skill slice, pickleball starter/pro path, football varsity/NFL,
-football catching/commentator path, U.S. president strict source overlay, job
-posting example-only, school program strict review, certification strict review,
-and option value / Still Counts scenarios. It changes docs only and adds no
-Swift runtime, seed import, source ingestion, extraction, OCR, classifier,
-source pack, Pack Factory implementation, Freshness Broker behavior, UI,
-sync/account/backend service, release claim, legal/current-requirement claim, or
-platform proof.
+Current batch: SAP05 No-Sprawl / No-Duplicate Pack Gate complete / Green.
+Next eligible batch: SA06 Pack Schema Implementation.
+Scope: SAP05 reconciled no-sprawl and no-duplicate pack gates into live train
+truth. SAP01-SAP05 are complete, so SA06 is now eligible if it creates real
+schema/test proof and keeps Research Seeds v1 pending unless local seed data is
+explicitly required. Runtime implementation must use composable graph,
+projection objects, Pack Factory composition rules, fixture families, and
+no-sprawl scans. It changes docs/state only and adds no Swift runtime, seed
+import, source ingestion, extraction, OCR, classifier, source pack, Pack Factory
+implementation, Freshness Broker behavior, UI, sync/account/backend service,
+release claim, legal/current-requirement claim, or platform proof.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -113,9 +113,9 @@ Green as Universal Source Binder Coverage Map reconciliation. SA04 is complete
 Atlas Global Order And Integration Lock. SAP01 is complete / Green as
 Composable Pack Architecture Lock. SAP02 is complete / Green as Goal Projection
 Object Model. SAP03 is complete / Green as Pack Factory Composition Rules.
-SAP04 is complete / Green as Projection QA Fixtures. SAP05 is the next eligible
-global batch before SA06, AOS12, and other deep source/freshness-dependent
-AOS/LDI work continues.
+SAP04 is complete / Green as Projection QA Fixtures. SAP05 is complete / Green
+as No-Sprawl / No-Duplicate Pack Gate. SA06 is the next eligible global batch
+before AOS12 and other deep source/freshness-dependent AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable
