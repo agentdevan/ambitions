@@ -416,8 +416,13 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   freshness, OCR review-required, user-provided source boundaries, offline
   fallback, source UI FVQ, high-risk claims, pack revocation/rollback, private
   document leakage, fixture coverage, composition/projection, pack duplication,
-  generated-step boundaries, and alternative path / option value. The next
-  eligible global batch is SA05 Source Atlas Global Order And Integration Lock.
+  generated-step boundaries, and alternative path / option value.
+- SA05 is complete Green as Source Atlas Global Order And Integration Lock. It
+  reconciles Source Atlas overlay, HPS/AOS/LDI integration map, gate matrix,
+  Codex OS map, and SA train into live global order before AOS12, later AOS
+  runtime, LDI runtime, source import, real-world requirements, pack schema,
+  Pack Factory, or Freshness Broker work continues. The stricter next eligible
+  batch is SAP01 Composable Pack Architecture Lock before SA06.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.

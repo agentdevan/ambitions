@@ -707,7 +707,18 @@ remaining sensitive intelligence work.
      classifier, source packs, Pack Factory output, Freshness Broker behavior,
      UI, sync/account/backend service, release claim, legal/current-requirement
      claim, or platform proof. SA05 is next.
-72E. SA05 Source Atlas Global Order And Integration Lock.
+72E. SA05 Source Atlas Global Order And Integration Lock. Completed Green on
+     2026-05-06 as docs/state ordering reconciliation. It locks Source Atlas
+     overlay, HPS/AOS/LDI integration map, gate matrix, Codex OS map, and SA
+     train as governing truth before AOS12, later AOS runtime, LDI runtime,
+     source import, real-world requirements, pack schema, Pack Factory, or
+     Freshness Broker work continues. The stricter dependency path requires
+     SAP01-SAP05 before SA06 or any scaled pack creation. It does not add Swift
+     runtime, seed data, source ingestion, extraction, OCR, classifier, source
+     packs, Pack Factory output, Freshness Broker behavior, UI,
+     sync/account/backend service, release claim, legal/current-requirement
+     claim, or platform proof. SAP01 is next.
+72F. SAP01 Composable Pack Architecture Lock.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.
