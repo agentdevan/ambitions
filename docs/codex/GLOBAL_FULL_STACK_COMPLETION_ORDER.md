@@ -561,7 +561,20 @@ remaining sensitive intelligence work.
      path mutation, recommendation behavior, UI, external-surface behavior, or
      release/platform claims. Yellow owners: later HPS Codex OS scripts/skills
      and future typed option-value/evaluation implementation batches.
-75H. HPS08 Living Dream Compiler Upgrade.
+75H. HPS08 Living Dream Compiler Upgrade. Completed Accepted Yellow on
+     2026-05-06 as docs-LDI architecture in
+     `docs/canon/Ambitions_Living_Dream_Compiler_Upgrade_Architecture.md`.
+     It defines compiler input/output families, required fields, seriousness
+     ladder, dream-to-domain classifier, feasibility spectrum, safe symbolic
+     translation, source trust bridge, requirement graph bridge, capacity
+     bridge, mutation permissions, blast radius states, next evidence
+     recommendation, safe refusal/redirect, surface projection rules, and dream
+     intake classification/compiler/bridge/recompiler impact/dream handling
+     receipt API contract families without implementing LDI runtime, source
+     packs, requirement extraction, path generation, UI, external-surface
+     behavior, or release/platform claims. Yellow owners: later HPS Codex OS
+     scripts/skills and future typed compiler/evaluation implementation
+     batches.
 76H. HPS09 Privacy / Memory Permission + Local Intelligence Adapter.
 77H. HPS10 AI Governance + Evaluation Assurance Lab.
 78H. HPS11 Vertical Expansion + Revenue Architecture.

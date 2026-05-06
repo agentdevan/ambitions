@@ -56,7 +56,10 @@ If the live run has advanced beyond PFC30 or FCP22 by the time this overlay is r
      Accepted Yellow on 2026-05-06 as docs-domain architecture. Yellow owners:
      later HPS Codex OS scripts/skills and future typed option-value/
      evaluation implementation batches.
-52H. HPS08 Living Dream Compiler Upgrade.
+52H. HPS08 Living Dream Compiler Upgrade. Completed Accepted Yellow on
+     2026-05-06 as docs-LDI architecture. Yellow owners: later HPS Codex OS
+     scripts/skills and future typed compiler/evaluation implementation
+     batches.
 53H. HPS09 Privacy / Memory Permission + Local Intelligence Adapter.
 54H. HPS10 AI Governance + Evaluation Assurance Lab.
 55H. HPS11 Vertical Expansion + Revenue Architecture.

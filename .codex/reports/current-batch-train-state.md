@@ -2,17 +2,18 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: HPS07 Option Value + Pivot Preservation Architecture complete / Accepted Yellow.
-Next eligible batch: HPS08 Living Dream Compiler Upgrade.
-Scope: HPS07 added docs-domain Option Value and Pivot Preservation
-architecture. It defines option value object families, required fields,
-transfer states, requirement/proof overlap states, path transfer matrix,
-adjacent path detection, North Star continuity, dream parking/revival, Still
-Counts receipts, mutation permission states, surface projection rules, and
-option-value read/path-transfer proposal/North Star continuity/pivot receipt
-contract families. It adds no production Swift, schema, migration,
-option-value runtime, path mutation, recommendation behavior, sync/account/
-backend, hosted AI, UI, external-surface behavior, professional advice,
+Current batch: HPS08 Living Dream Compiler Upgrade complete / Accepted Yellow.
+Next eligible batch: HPS09 Privacy / Memory Permission + Local Intelligence Adapter.
+Scope: HPS08 added docs-LDI Living Dream Compiler architecture. It defines
+compiler input/output families, required fields, seriousness ladder,
+dream-to-domain classifier, feasibility spectrum, safe symbolic translation,
+source trust bridge, requirement graph bridge, capacity bridge, mutation
+permissions, blast radius states, next evidence recommendation, safe
+refusal/redirect, surface projection rules, and dream intake classification/
+compiler/bridge/recompiler impact/dream handling receipt contract families. It
+adds no production Swift, schema, migration, LDI runtime, source-pack runtime,
+path generation, recommendation behavior, sync/account/backend, hosted AI, UI,
+external-surface behavior, professional advice, crisis service,
 release claim, App Store claim,
 TestFlight claim, physical-device proof, public accessibility claim, or
 acquisition outcome claim.
@@ -98,7 +99,8 @@ architecture evidence. HPS05 is complete / Accepted Yellow as Commitment Memory
 and Searchable Life Recall architecture evidence. HPS06 is complete / Accepted
 Yellow as Recommendation Quality and Start Here Brain architecture evidence.
 HPS07 is complete / Accepted Yellow as Option Value and Pivot Preservation
-architecture evidence. HPS08 is the next eligible global batch, and AOS01
+architecture evidence. HPS08 is complete / Accepted Yellow as Living Dream
+Compiler architecture evidence. HPS09 is the next eligible global batch, and AOS01
 remains blocked until HPS01-HPS12 are Green or accepted Yellow with owners.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,

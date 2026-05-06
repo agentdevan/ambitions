@@ -162,6 +162,14 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
   receipts, mutation permission states, and no silent path/proof/source/privacy
   mutation rule. Yellow owners: later HPS Codex OS scripts/skills and future
   typed option-value/evaluation implementation batches.
+- HPS08 is complete Accepted Yellow as of 2026-05-06. Future Living Dream,
+  AOS, LDI, source, proof, requirement, capacity, recommendation, safety, and
+  evaluation work must inherit compiler input/output families, seriousness
+  ladder, dream-to-domain classifier, feasibility spectrum, safe symbolic
+  translation, source/requirement/capacity bridges, mutation permissions, blast
+  radius states, safe refusal/redirect, and no unsafe/professional-boundary
+  operationalization rule. Yellow owners: later HPS Codex OS scripts/skills and
+  future typed compiler/evaluation implementation batches.
 - AOS01 depends on HPS01-HPS12 being Green or accepted Yellow with owners, plus
   explicit approval phrase `Start AOS Train` or global cross-train
   preauthorization.

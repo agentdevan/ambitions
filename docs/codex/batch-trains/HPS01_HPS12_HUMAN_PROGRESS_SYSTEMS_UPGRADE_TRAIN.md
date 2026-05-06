@@ -1,7 +1,7 @@
 # HPS01-HPS12 Human Progress Systems Upgrade Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 next.
+Status: Active-scope planning truth; HPS01 Accepted Yellow; HPS02 Accepted Yellow; HPS03 Accepted Yellow; HPS04 Accepted Yellow; HPS05 Accepted Yellow; HPS06 Accepted Yellow; HPS07 Accepted Yellow; HPS08 Accepted Yellow; HPS09 next.
 Date: 2026-05-06
 Train code: HPS
 
@@ -188,6 +188,17 @@ Owner: LDI / Safety / Source Truth.
 Goal: Upgrade LDI with dream-to-domain classifier, seriousness ladder, feasibility spectrum, North Star extraction, safe symbolic translation, requirement graph bridge, source trust bridge, capacity bridge, mutation permissions, recompiler blast radius, next evidence recommendation, safe refusal/redirect.
 Required result: LDI upgrade contract before LDI01.
 Acceptance: dreams become safe paths, not motivational text; no professional advice or hosted-AI claim.
+Status: Accepted Yellow as docs-LDI architecture in
+`docs/canon/Ambitions_Living_Dream_Compiler_Upgrade_Architecture.md`.
+HPS08 defines compiler input/output families, required fields, seriousness
+ladder, dream-to-domain classifier, feasibility spectrum, safe symbolic
+translation, source trust bridge, requirement graph bridge, capacity bridge,
+mutation permissions, blast radius states, next evidence recommendation, safe
+refusal/redirect, surface projection rules, and dream intake classification/
+compiler/bridge/recompiler impact/dream handling receipt contract families.
+Yellow is owned by later HPS Codex OS work for missing physical HPS advisory
+scripts/skills and by LDI/AOS/safety/evaluation implementation batches for
+future typed compiler behavior and proof.
 
 ### HPS09 — Privacy / Memory Permission + Local Intelligence Adapter
 
