@@ -107,3 +107,35 @@ Does not prove:
 - external projection
 - platform behavior
 - release/platform readiness
+
+## AOS04
+
+Batch: AOS04 Control Plane Work Classifier.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Control Plane work request contract
+- work classes, signals, gates, output kinds, and dispositions
+- deterministic source, safety, graph-delta, external-surface, background,
+  compatibility, maintainability, and release-claim classification gates
+- graph delta proposal blocked from event-log reachability until AOS03 review
+  record is projectable
+- focused domain tests for review, block, and local-work paths
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSControlPlaneModelsTests test`
+- final validation pack recorded in the AOS04 report
+
+Does not prove:
+
+- model invocation
+- Life Graph mutation
+- source-pack runtime
+- UI integration
+- external projection
+- platform behavior
+- release/platform readiness

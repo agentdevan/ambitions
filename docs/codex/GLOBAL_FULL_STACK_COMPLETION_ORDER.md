@@ -650,8 +650,16 @@ remaining sensitive intelligence work.
     does not add persistence/schema, graph store runtime, silent mutation,
     source-pack runtime, UI, platform integration, sync/account/backend
     service, hosted AI, external-surface behavior, professional advice, or
-    release/platform claims. AOS04 is next.
-72. AOS04 Control Plane Work Classifier.
+    release/platform claims. AOS04 followed and is now complete.
+72. AOS04 Control Plane Work Classifier. Completed Green on 2026-05-06 as
+    additive Control Plane domain foundation. It adds typed work requests,
+    work classes, signals, gates, output kinds, deterministic classification,
+    graph-delta review gating, source/safety/privacy/compatibility/
+    maintainability/performance/release-evidence gates, and focused domain
+    tests. It does not add model invocation, Life Graph mutation, source-pack
+    runtime, UI, external-surface behavior, platform integration, sync/account/
+    backend service, hosted AI, professional advice, or release/platform
+    claims. AOS12 is next by optimized order.
 73. AOS12 Proof Trust Closure Receipts.
 74. AOS13 Source Truth Claim State Machine.
 75. AOS10 Commitment Time Kernel.

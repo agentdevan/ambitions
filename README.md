@@ -34,8 +34,8 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 
 Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
 means the repo has a 113-batch global execution order after SI insertion; REC02-REC06,
-PX01-PX20, ME01, HPS01-HPS12, AOS01, AOS02, and AOS03 are complete as
-docs/evidence/canon/audit/domain work, while AOS04-AOS30 remain gated by
+PX01-PX20, ME01, HPS01-HPS12, AOS01-AOS04 are complete as
+docs/evidence/canon/audit/domain work, while AOS05-AOS30 remain gated by
 predecessor, HPS, Source Atlas where relevant, and AOS proof gates. Future canon
 remains future canon until implemented and proven.
 

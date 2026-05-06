@@ -1,5 +1,13 @@
 # AOS04 Control Plane Work Classifier Prompt
 
+Status: Complete / Green as of 2026-05-06. AOS04 added additive domain
+contracts and focused tests for typed work requests, work classes, signals,
+gates, output kinds, deterministic classification, graph-delta review gating,
+and source/safety/privacy/compatibility/maintainability/performance/release-
+evidence gates. It made no model invocation, Life Graph mutation, source-pack
+runtime, UI, platform, sync/account/backend, hosted AI, external projection,
+release, legal/privacy, or platform-proof claim.
+
 Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only until implemented by evidence; blocked pending `Start AOS Train`.
 
 ## Batch Identity

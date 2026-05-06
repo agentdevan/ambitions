@@ -379,7 +379,15 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   snapshots, in-memory/value projection store contracts, and no persistence/
   schema, graph store runtime, silent mutation, UI, platform, sync/account/
   backend, hosted AI, external-surface, release, or platform claim. The next
-  eligible global batch is AOS04 Control Plane Work Classifier.
+  eligible global batch was AOS04 Control Plane Work Classifier.
+- AOS04 is complete Green as additive Control Plane Work Classifier evidence.
+  It adds `Native/Ambitions/Domain/AmbitionsOSControlPlaneModels.swift` and
+  focused domain tests with typed work requests, work classes, signals, gates,
+  output kinds, deterministic classification, graph-delta review gating, and no
+  model invocation, Life Graph mutation, source-pack runtime, UI, platform,
+  sync/account/backend, hosted AI, external-surface, release, or platform
+  claim. The next eligible global batch is AOS12 Proof Trust Closure Receipts
+  by optimized order.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.

@@ -1,6 +1,6 @@
 # AOS01-AOS30 AmbitionsOS Local Intelligence Train
 
-Status: Active Ambitions 4.0 train manifest; AOS01 Accepted Yellow; AOS02 Green; AOS03 Green; AOS04 next.
+Status: Active Ambitions 4.0 train manifest; AOS01 Accepted Yellow; AOS02 Green; AOS03 Green; AOS04 Green; AOS12 next by optimized order.
 Started by live global full-stack authorization after HPS01-HPS12 closed
 accepted Yellow with owners. Source Atlas dependency closure remains required
 where real-world source/requirement intelligence is used.
@@ -81,8 +81,8 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 
 - AOS01: AmbitionsOS Canon And Runtime Contract. Gate: blocks all AOS work and must import HPS and Source Atlas invariants. Owner: Governance Kernel / Runtime Contract. Surface: all canonical surfaces. Boundary: docs/protocol only; no app implementation. Status: Accepted Yellow as runtime contract source truth in `docs/canon/AmbitionsOS_Runtime_Contract.md`; AOS02 next.
 - AOS02: Life Graph Event Log Foundation. Gate: depends on AOS01 and HPS02. Owner: Life Graph Kernel. Surface: Goals, Plan, You. Boundary: event log and typed Human Progress Graph foundation only after AOS01; external world facts must reference Source Atlas when used. Status: Green with additive domain contracts and focused tests; AOS03 followed and is now complete.
-- AOS03: Graph Delta Review Projection Store. Gate: depends on AOS02 and HPS03/HPS05. Owner: Life Graph Kernel / Runtime Contract. Surface: all projections. Boundary: graph delta review, receipts, correction, and projection store contracts only after AOS02. Status: Green with additive domain contracts and focused tests; AOS04 next.
-- AOS04: Control Plane Work Classifier. Gate: depends on AOS01-AOS03 and HPS12. Owner: Control Plane. Surface: all surfaces. Boundary: work classifier, gates, no-sprawl routing, and orchestration contracts only.
+- AOS03: Graph Delta Review Projection Store. Gate: depends on AOS02 and HPS03/HPS05. Owner: Life Graph Kernel / Runtime Contract. Surface: all projections. Boundary: graph delta review, receipts, correction, and projection store contracts only after AOS02. Status: Green with additive domain contracts and focused tests; AOS04 followed and is now complete.
+- AOS04: Control Plane Work Classifier. Gate: depends on AOS01-AOS03 and HPS12. Owner: Control Plane. Surface: all surfaces. Boundary: work classifier, gates, no-sprawl routing, and orchestration contracts only. Status: Green with additive domain contracts and focused tests; AOS12 next by optimized order.
 - AOS05: Starting Position Kernel. Gate: depends on AOS02-AOS04 and HPS02/HPS05. Owner: Starting Position Kernel. Surface: Goals, You. Boundary: baseline snapshot and starting-position projection only; eligibility cannot be certified.
 - AOS06: Goal Path Kernel Goal Compiler. Gate: depends on AOS05, HPS04/HPS07, and Source Atlas requirement/source proof where real-world requirements are compiled. Owner: Goal Path Kernel. Surface: Goals, Goal Detail. Boundary: goal compiler and requirement graph contracts only.
 - AOS07: Local Goal Packs Requirement Slots. Gate: depends on AOS06, HPS04, and Source Atlas pack schema/source-state rules. Owner: Goal Path Kernel. Surface: Goals, Goal Detail. Boundary: local archetype packs and requirement slots only; not official requirement databases.
