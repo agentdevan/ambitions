@@ -13,20 +13,21 @@ The global full-stack order may also select SA batches when the user explicitly 
 
 ## Purpose
 
-Implement Source Atlas as Ambitions’ signed, offline-first, claim-level world-source system with Universal Source Binder, Pack Factory, Claim Review, Freshness Broker, and AOS/LDI integration.
+Implement Source Atlas as Ambitions’ signed, offline-first, claim-level world-source system with Universal Source Binder, Pack Factory, Claim Review, Freshness Broker, Composable Pack Graph, Goal Projection, and AOS/LDI integration.
 
-Source Atlas exists so Ambitions can help users create trustworthy paths from life goals and external requirements without hallucinating, requiring a user-data server, breaking offline, or overclaiming legal/career/education/professional certainty.
+Source Atlas exists so Ambitions can help users create trustworthy, personalized paths from life goals and external requirements without hallucinating, requiring a user-data server, breaking offline, duplicating one pack per goal, or overclaiming legal/career/education/professional certainty.
 
 ## Placement
 
 Preferred placement:
 
 1. HPS01-HPS12 Green or accepted Yellow with owners.
-2. SA01-SA32.
-3. Deep AOS runtime batches.
-4. LDI runtime batches.
+2. SAP01-SAP05 composition/projection lock.
+3. SA01-SA32.
+4. Deep AOS runtime batches.
+5. LDI runtime batches.
 
-If the live train has advanced, insert SA at the earliest safe point before any unimplemented AOS/LDI work that depends on real-world requirements, source packs, user source import, freshness, or claim review.
+If the live train has advanced, insert SAP/SA at the earliest safe point before any unimplemented AOS/LDI work that depends on real-world requirements, source packs, pack composition, user source import, freshness, claim review, goal projection, alternative pathing, or step generation.
 
 ## Train law
 
@@ -46,20 +47,77 @@ Forbidden:
 - OCR-as-truth behavior
 - legal/career/education/professional certainty
 - internet-required core behavior
+- one pack per individual goal phrase
+- static same path for every user with same goal
+- pro/elite path duplication of lower-level graph nodes
+- packs generating final scheduled steps without AOS/LDI/Plan context
+
+## SAP — Source Atlas Projection Lock Prephase
+
+SAP batches must run before SA06 Pack Schema Implementation and before any real pack creation scales.
+
+### SAP01 — Composable Pack Architecture Lock
+
+Type: docs/architecture/gates.
+Goal: Lock Source Atlas as composable domain/capability/overlay graph architecture, not one-pack-per-goal templates.
+Allowed files: docs/codex, docs/canon, audit docs, Codex OS maps.
+Acceptance: `docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md` exists; no one-pack-per-goal, composable graph, highest-path reuse, and generated-step laws are explicit.
+Hard Red: architecture treats individual goal strings as full source-pack owners.
+
+### SAP02 — Goal Projection Object Model
+
+Type: docs/schema planning.
+Goal: Define GoalProjection, ProjectionProfile, PersonalPathInstance, ProjectionRecipe, StepCandidateSeed, AlternativePathSet, and OptionValueMap before runtime implementation.
+Acceptance: SA schema work cannot begin until projection objects are referenced by train and gate matrix.
+Hard Red: user goal maps directly to static pack/path without projection contract.
+
+### SAP03 — Pack Factory Composition Rules
+
+Type: docs/tooling contract.
+Goal: Define how Pack Factory produces domain packs, capability graphs, overlays, proof maps, projection recipes, and aliases rather than isolated goal packs.
+Acceptance: Pack Factory gates require composition contract, overlay dependency declaration, projection recipe validation, duplicate claim alias validation.
+Hard Red: Pack Factory encourages duplicate claims/requirements across packs without stable aliases.
+
+### SAP04 — Projection QA Fixtures
+
+Type: docs/QA fixtures.
+Goal: Add required fixture families for narrow skill goals, elite path reuse, alternative pathing, option value, official requirement overlays, and user-specific path variance.
+Required scenarios:
+
+- improve pickleball serve
+- become pickleball pro
+- learn pickleball
+- make varsity football
+- make it to the NFL
+- improve football catching
+- become football commentator
+- become product manager
+- become U.S. president
+- get certification
+- import school program page
+
+Acceptance: SA fixture coverage cannot close without narrow skill slice, highest-path reuse, personalization, and alternative path tests.
+
+### SAP05 — No-Sprawl / No-Duplicate Pack Gate
+
+Type: Codex OS/gate integration.
+Goal: Install reviewer skills/scripts and source-order hooks so Codex rejects one-pack-per-goal sprawl, pack duplication, and static path output.
+Acceptance: Source Atlas Codex OS map references composition/projection reviewers and scripts; later SA batches invoke them.
+Hard Red: SA implementation proceeds without ownership of composition/projection gates.
 
 ## Phase 0 — Source Truth And Codex OS
 
 ### SA01 — Source Atlas Canon Lock
 
 Type: docs/canon.
-Goal: Lock Source Atlas thesis, boundaries, supported source types, source states, freshness states, risk classes, UI law, and completion standard.
+Goal: Lock Source Atlas thesis, boundaries, supported source types, source states, freshness states, risk classes, UI law, completion standard, and composition/projection inheritance.
 Allowed files: docs/canon, docs/codex, audit docs.
-Acceptance: `docs/canon/Ambitions_Source_Atlas.md` exists and forbids Source Atlas dashboard, official overclaim, hosted AI/user-data server, hidden mutation, and internet dependency.
+Acceptance: `docs/canon/Ambitions_Source_Atlas.md` exists and forbids Source Atlas dashboard, official overclaim, hosted AI/user-data server, hidden mutation, internet dependency, and one-pack-per-goal sprawl.
 
 ### SA02 — Source Atlas Gate Matrix
 
 Type: docs/gates.
-Goal: Add hard gates for source container coverage, PDFKit extraction, OCR review-required, URL snapshots, user-provided-is-not-official, high-risk source review, offline fallback, pack validation, revocation/rollback, private document protection, and rendered source-state proof.
+Goal: Add hard gates for source container coverage, PDFKit extraction, OCR review-required, URL snapshots, user-provided-is-not-official, high-risk source review, offline fallback, pack validation, revocation/rollback, private document protection, rendered source-state proof, composable pack graph, goal projection, skill slicing, highest-path reuse, generated-step boundaries, and option value.
 Acceptance: `docs/codex/SOURCE_ATLAS_GATE_MATRIX.md` exists and Source Atlas-dependent work cannot close Green without invoked or owned gates.
 
 ### SA03 — Universal Source Binder Coverage Map
@@ -71,7 +129,7 @@ Acceptance: every supported type has import, extraction, failure, privacy, revie
 ### SA04 — Source Atlas Codex OS Upgrade
 
 Type: Codex OS docs/scripts/skills.
-Goal: Add Source Atlas reviewer skills, advisory scripts, report requirements, stop conditions, and CQS/FVQ invocation triggers.
+Goal: Add Source Atlas reviewer skills, advisory scripts, composition/projection reviewers, report requirements, stop conditions, and CQS/FVQ invocation triggers.
 Acceptance: skill/script map exists and later batches must create or invoke physical skills/scripts before closing relevant implementation work.
 
 ### SA05 — Source Atlas Global Order And Integration Lock
@@ -85,8 +143,8 @@ Acceptance: global order overlay and AOS/LDI/FCP/PFC/HPS integration map exist.
 ### SA06 — Pack Schema Implementation
 
 Type: Swift domain model + fixtures.
-Goal: Implement SourceAtlasPack, manifest, source record, claim, requirement, starter item, proof map, freshness policy, risk policy, disclosure copy, fixture types.
-Acceptance: typed Codable models, sample pack decode tests, invalid schema tests, no production network behavior.
+Goal: Implement SourceAtlasPack, manifest, source record, claim, requirement, starter item, proof map, freshness policy, risk policy, disclosure copy, fixture types, and composition/projection primitives from SAP.
+Acceptance: typed Codable models, sample pack decode tests, invalid schema tests, composition schema tests, no production network behavior.
 
 ### SA07 — Claim State Machine
 
@@ -97,13 +155,13 @@ Acceptance: state transitions tested; user-provided/OCR cannot become official w
 ### SA08 — Requirement Graph Implementation
 
 Type: Swift domain model/tests.
-Goal: Implement hard/soft/prerequisite/equipment/skill/proof/deadline/blocker/accelerator/review-required requirement nodes and edges.
+Goal: Implement hard/soft/prerequisite/equipment/skill/proof/deadline/blocker/accelerator/review-required requirement nodes and edges, plus RequirementOverlay composition.
 Acceptance: requirement graph can attach source/freshness/risk states and cannot mark source-free official requirements.
 
 ### SA09 — Proof Map Implementation
 
 Type: Swift domain model/tests.
-Goal: Map requirements to proof candidates, proof strength, proof privacy, correction/revocation hooks, and Evidence Ledger bridge.
+Goal: Map requirements/capability nodes to proof candidates, proof strength, proof privacy, correction/revocation hooks, and Evidence Ledger bridge.
 Acceptance: proof is user-owned evidence, not score; proof-to-requirement mapping is source/claim-bound.
 
 ### SA10 — Freshness And Risk Model Implementation
@@ -111,6 +169,26 @@ Acceptance: proof is user-owned evidence, not score; proof-to-requirement mappin
 Type: Swift domain model/tests.
 Goal: Implement freshness states, review intervals, high-risk stale blocking, and risk classes.
 Acceptance: staleCritical high-risk claims cannot drive recommendations as current.
+
+## Phase 1.5 — Composition And Projection Runtime
+
+### SA10A — Capability Graph / Level Ladder Implementation
+
+Type: Swift domain model/tests.
+Goal: Implement DomainPack, SpecificDomainPack, CapabilityGraph, CapabilityNode, CapabilityEdge, LevelLadder, RoleOverlay, PathOverlay.
+Acceptance: narrow skill slice and highest-path reuse fixtures pass.
+
+### SA10B — Goal Projection Engine Contract
+
+Type: Swift runtime contract/tests.
+Goal: Implement GoalProjection, ProjectionProfile, ProjectionRecipe, PersonalPathInstance, StepCandidateSeed, AlternativePathSet, OptionValueMap.
+Acceptance: user goals produce projections rather than static paths; different users can receive different PersonalPathInstances from the same source graph.
+
+### SA10C — Projection Fixtures And No-Sprawl Validation
+
+Type: tests/tools.
+Goal: Add fixtures for pickleball skill slice/pro path, football varsity/NFL/commentator paths, U.S. president strict source overlay, job posting example-only path, and school program strict review.
+Acceptance: no one-pack-per-goal scan, pack duplication scan, and projection fixture scan pass or create accepted Yellow with owner.
 
 ## Phase 2 — Runtime
 
@@ -217,8 +295,8 @@ Acceptance: local-only, deletable, correctable, rejectable, private-state aware.
 ### SA27 — Pack Factory Lite
 
 Type: tools/source-atlas scripts/schemas/tests.
-Goal: Build and validate packs from JSON/YAML.
-Acceptance: pack schema validation, fixtures, no-claim scan hooks, sample packs.
+Goal: Build and validate packs from JSON/YAML, including composable domain/capability/overlay/projection recipe packs.
+Acceptance: pack schema validation, composition validation, fixtures, no-claim scan hooks, sample packs.
 
 ### SA28 — Pack Diff / Changed Claim Tooling
 
@@ -249,12 +327,12 @@ Acceptance: adapters are factory inputs, not app runtime dependencies; no API ke
 ### SA32 — Source Atlas UI Primitives / QA / Handoff
 
 Type: SwiftUI + tests + FVQ + docs.
-Goal: Add SourceBadge, FreshnessBadge, SourceNeededFold, RequirementSourceFold, ClaimReviewDrawer, SourceBinderReviewSheet, PackUpdateReceipt, PrivateSourceShield, OCRReviewNotice, SourceImpactReceipt; close QA/handoff.
-Acceptance: rendered proof covers source-backed, source-needed, user-provided, stale, source-changed, disputed, revoked, private source, OCR low-confidence, partial PDF extraction, review-needed, no internet, high-risk strict-review, Dynamic Type-adjacent, and reduced-motion equivalent states.
+Goal: Add SourceBadge, FreshnessBadge, SourceNeededFold, RequirementSourceFold, ClaimReviewDrawer, SourceBinderReviewSheet, PackUpdateReceipt, PrivateSourceShield, OCRReviewNotice, SourceImpactReceipt, ProjectionReceiptFold, SkillSliceIndicator, AlternativePathReceipt, OptionValueFold; close QA/handoff.
+Acceptance: rendered proof covers source-backed, source-needed, user-provided, stale, source-changed, disputed, revoked, private source, OCR low-confidence, partial PDF extraction, review-needed, no internet, high-risk strict-review, projection receipt, skill slice, alternative path, still-counts option value, Dynamic Type-adjacent, and reduced-motion equivalent states.
 
 ## Common validation
 
-Every SA batch must run or document inability to run:
+Every SA/SAP batch must run or document inability to run:
 
 - `git status --short`
 - `git diff --check`
@@ -263,8 +341,11 @@ Every SA batch must run or document inability to run:
 - `scripts/sa-pack-schema-validate.sh || true`
 - `scripts/sa-no-claim-scan.sh || true`
 - `scripts/sa-offline-fallback-scan.sh || true`
+- `scripts/sa-composition-projection-scan.sh || true`
+- `scripts/sa-pack-duplication-scan.sh || true`
+- `scripts/sa-projection-fixture-coverage-scan.sh || true`
 - relevant CQS/FVQ scripts
 
 ## Closeout
 
-SA is complete only when all source containers and document categories are either fully supported or explicitly removed from scope, no Source Atlas-dependent AOS/LDI path can hallucinate official requirements, and all source/freshness states have tests and rendered proof where visible.
+SA is complete only when all source containers and document categories are either fully supported or explicitly removed from scope, no Source Atlas-dependent AOS/LDI path can hallucinate official requirements, every goal is compiled through composable graph/projection rules rather than one-off goal packs, and all source/freshness/projection states have tests and rendered proof where visible.
