@@ -326,6 +326,8 @@ Acceptance: no hidden learning; no model confidence; correction choices preserve
 
 ### FCP20 — Grow Into Goal Seed Incubator
 
+Status: Complete Green on 2026-05-06 as bounded Goal Seed Incubator
+implementation evidence.
 Type: Implementation.
 Owner: Capture / Goals.
 Depends on: FCP18-FCP19; PD11.

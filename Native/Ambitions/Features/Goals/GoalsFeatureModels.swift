@@ -862,7 +862,7 @@ extension CreateGoalPreviewState {
 
         return GoalSeedReviewState(
             id: "goal-seed-review-\(normalizedTitle.lowercased().filter { $0.isLetter || $0.isNumber })",
-            title: "Goal seed review",
+            title: "Goal Seed Incubator",
             whyGoalLabel: whyGoalLabel,
             startingPositionLabel: "Starting position: \(activeStage?.title ?? "Needs one clearer starting point").",
             firstMilestoneLabel: "First milestone: \(firstMilestone?.summary ?? activeStage?.summary ?? "Hold the setup until a first milestone is visible.").",

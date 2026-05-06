@@ -163,7 +163,7 @@ final class CreateGoalViewModelTests: XCTestCase {
 
         let review = preview.goalSeedReviewState
 
-        XCTAssertEqual(review.title, "Goal seed review")
+        XCTAssertEqual(review.title, "Goal Seed Incubator")
         XCTAssertTrue(review.whyGoalLabel.localizedCaseInsensitiveContains("might be a goal"))
         XCTAssertTrue(review.startingPositionLabel.localizedCaseInsensitiveContains("Starting phase"))
         XCTAssertTrue(review.firstMilestoneLabel.localizedCaseInsensitiveContains("workshop concrete"))

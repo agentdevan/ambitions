@@ -298,6 +298,15 @@ and no model-confidence, hidden-learning, automatic-goal, route/raw-value,
 persistence/schema, sync/cloud, release, or runtime claim may be inferred from
 this batch.
 
+FCP20 is complete Green as of 2026-05-06. Future Capture, Goals, accessibility,
+AOS, LDI, or external-surface work must preserve Goal Seed Incubator posture:
+captured ideas may mature into goals only through explicit promotion
+confirmation, with why-this-may-be-a-goal, starting position proof, first
+milestone anchor, first step, and proof/source seed visible before promotion.
+No automatic-goal, project-wizard, habit-conversion, route/raw-value,
+persistence/schema, sync/cloud, release, or runtime claim may be inferred from
+this batch.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

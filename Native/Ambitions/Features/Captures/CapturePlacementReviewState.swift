@@ -45,6 +45,29 @@ struct CaptureCorrectionReviewState: Sendable, Equatable, Identifiable {
     }
 }
 
+struct CaptureGoalSeedIncubatorState: Sendable, Equatable, Identifiable {
+    let id: String
+    let title: String
+    let whyGoalLabel: String
+    let startingPositionProofLabel: String
+    let firstMilestoneAnchorLabel: String
+    let firstStepLabel: String
+    let proofSourceSeedLabel: String
+    let promotionConfirmationLabel: String
+    let state: AmbitionVisualState
+
+    var accessibilityValue: String {
+        [
+            whyGoalLabel,
+            startingPositionProofLabel,
+            firstMilestoneAnchorLabel,
+            firstStepLabel,
+            proofSourceSeedLabel,
+            promotionConfirmationLabel
+        ].joined(separator: ". ")
+    }
+}
+
 extension Capture {
     var placementReviewState: CapturePlacementReviewState {
         CapturePlacementReviewState(
@@ -70,6 +93,20 @@ extension Capture {
             notNowLabel: "Not now: Review later keeps it out of Today.",
             receiptLabel: "Correction receipt: the change you choose is reviewable.",
             learningBoundaryLabel: "Placement choices stay local and reviewable; no hidden memory changes."
+        )
+    }
+
+    var goalSeedIncubatorState: CaptureGoalSeedIncubatorState {
+        CaptureGoalSeedIncubatorState(
+            id: "capture-goal-seed-incubator-\(id)",
+            title: "Goal Seed Incubator",
+            whyGoalLabel: "Why this may be a goal: the capture can be shaped, but it is not promoted yet.",
+            startingPositionProofLabel: "Starting position proof: \(sourceType?.title ?? "Capture") text stays editable.",
+            firstMilestoneAnchorLabel: "First milestone anchor: Create Goal will show the first bounded milestone before saving.",
+            firstStepLabel: "First step: review the seed setup in Goals before promotion.",
+            proofSourceSeedLabel: "Proof/source seed: the capture can stay attached after you confirm.",
+            promotionConfirmationLabel: "Promotion confirmation: no Goal is created until you choose Grow into Goal and then Create Goal.",
+            state: placementVisualState
         )
     }
 

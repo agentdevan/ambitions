@@ -2,14 +2,15 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP19 Placement Resolver / Correction Fold complete / Green.
-Next eligible batch: FCP20 Grow Into Goal Seed Incubator.
-Scope: FCP19 added a draft Resolver Fold to Capture with what Ambitions thinks,
-why, user-owned correction choices, and a local correction-receipt seam visible
-before saving. It preserved the five-tab shell, text-first bottom composer,
-existing route/raw-value and persistence compatibility, no hidden learning, no
-model confidence, and all sync/cloud, legal/privacy/release/device/
-accessibility claims as evidence-bound.
+Current batch: FCP20 Grow Into Goal Seed Incubator complete / Green.
+Next eligible batch: FCP21 Voice / Motor Capture Accessibility.
+Scope: FCP20 objectized Grow into Goal as a Goal Seed Incubator across Capture
+and Create Goal review surfaces, showing why a capture may be a goal, starting
+position proof, first milestone anchor, first step, proof/source seed, and
+explicit promotion confirmation. It preserved no automatic goal creation,
+route/raw-value and persistence compatibility, no project-wizard posture, and
+all sync/cloud, legal/privacy/release/device/accessibility claims as
+evidence-bound.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -61,7 +62,8 @@ is complete / Green as Personal System Center Refactor evidence. FCP23 is
 complete / Green as Memory Lens / External Brain Visual Layer evidence. FCP24
 is complete / Green as Appearance Studio evidence. FCP18 is complete / Green
 as Capture Placement Shelf evidence. FCP19 is complete / Green as Placement
-Resolver / Correction Fold evidence. FCP20 is the next eligible global batch.
+Resolver / Correction Fold evidence. FCP20 is complete / Green as Goal Seed
+Incubator evidence. FCP21 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

@@ -293,6 +293,9 @@ struct CapturesScreen: View {
                 }
 
                 placementReview(capture.placementReviewState, correction: capture.correctionReviewState)
+                if canPromoteCaptureToGoal(capture) {
+                    goalSeedIncubator(capture.goalSeedIncubatorState)
+                }
 
                 captureActions(for: capture, activeGoalOptions: activeGoalOptions)
             }
@@ -335,6 +338,33 @@ struct CapturesScreen: View {
         .accessibilityLabel(review.title)
         .accessibilityValue([review.accessibilityValue, correction.accessibilityValue].joined(separator: ". "))
         .accessibilityIdentifier("captures.placement-review.\(review.id)")
+    }
+
+    private func goalSeedIncubator(_ state: CaptureGoalSeedIncubatorState) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Divider()
+
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                Label(state.title, systemImage: "seedling")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Spacer()
+                TagPill("Confirm first", state: state.state)
+            }
+
+            Label(state.whyGoalLabel, systemImage: "questionmark.circle")
+            Label(state.startingPositionProofLabel, systemImage: "location")
+            Label(state.firstMilestoneAnchorLabel, systemImage: "flag")
+            Label(state.firstStepLabel, systemImage: "arrow.forward.circle")
+            Label(state.proofSourceSeedLabel, systemImage: "doc.text.magnifyingglass")
+            Label(state.promotionConfirmationLabel, systemImage: "hand.raised")
+        }
+        .font(theme.typography.caption)
+        .foregroundStyle(theme.colors.textSecondary)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(state.title)
+        .accessibilityValue(state.accessibilityValue)
+        .accessibilityIdentifier("captures.goal-seed-incubator.\(state.id)")
     }
 
     private func state(for capture: Capture) -> AmbitionVisualState {

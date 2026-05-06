@@ -68,6 +68,27 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains("fully automated"))
     }
 
+    func testGoalSeedIncubatorRequiresExplicitPromotionBeforeGoalCreation() {
+        let capture = makeCapture(
+            status: .needsTriage,
+            route: .captureInbox,
+            privacy: .privateUserText
+        )
+
+        let incubator = capture.goalSeedIncubatorState
+
+        XCTAssertEqual(incubator.title, "Goal Seed Incubator")
+        XCTAssertTrue(incubator.whyGoalLabel.localizedCaseInsensitiveContains("not promoted yet"))
+        XCTAssertTrue(incubator.startingPositionProofLabel.localizedCaseInsensitiveContains("Capture"))
+        XCTAssertTrue(incubator.firstMilestoneAnchorLabel.localizedCaseInsensitiveContains("first bounded milestone"))
+        XCTAssertTrue(incubator.firstStepLabel.localizedCaseInsensitiveContains("review the seed setup"))
+        XCTAssertTrue(incubator.proofSourceSeedLabel.localizedCaseInsensitiveContains("stay attached"))
+        XCTAssertTrue(incubator.promotionConfirmationLabel.localizedCaseInsensitiveContains("no Goal is created"))
+        XCTAssertFalse(incubator.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
+        XCTAssertFalse(incubator.accessibilityValue.localizedCaseInsensitiveContains("project wizard"))
+        XCTAssertFalse(incubator.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
+    }
+
     private func makeCapture(
         status: CaptureStatus,
         route: CaptureRoute,
