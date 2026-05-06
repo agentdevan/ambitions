@@ -184,6 +184,11 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Detail renders proof through that spine with source, freshness, privacy,
   correction, and stale-review posture. The next eligible global batch is
   FCP13B Goal Alternate Path / Decision History Polish.
+- FCP13B is complete Green as bounded Goals / Goal Detail Decision Spine
+  evidence. Goal Detail now folds alternate-path branches and decision-history
+  branches into one review-first spine with consequence labels and explicit
+  no-automated-reroute / no-hidden-path-mutation boundaries. The next eligible
+  global batch is FCP25 Loading / Empty / Degraded State Objectization.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -597,7 +602,8 @@ Reflow Decision Fold evidence. FCP16 is complete Green as bounded Pressure
 Field / Recovery Loop evidence. FCP10 is complete Green as bounded
 MissionControlTimeSpine evidence. FCP11 is complete Green as bounded LifePath
 Thread evidence. FCP12 is complete Green as bounded Proof Spine / Evidence
-Ledger evidence, and the full-stack order selects FCP13B next.
+Ledger evidence. FCP13B is complete Green as bounded Goal Alternate Path /
+Decision History Polish evidence, and the full-stack order selects FCP25 next.
 
 
 ## Living Dream Intelligence Context

@@ -141,7 +141,7 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 028 | FCP10 MissionControlTimeSpine | FCP | Implementation | Completed Green on 2026-05-06 as bounded Goal Detail MissionControlTimeSpine evidence that replaces the primary Mission Control grid with an inspectable spine. | FCP06; PD05-PD08. | Complete; next FCP11. |
 | 029 | FCP11 LifePath Thread | FCP | Implementation | Completed Green on 2026-05-06 as bounded Goal Detail LifePathThread evidence with proof beads, risk pinch, AlternateRouteFold, GoalPathSourceFold, private redaction, and accessible path order. | FCP10; PD06-PD08. | Complete; next FCP12. |
 | 030 | FCP12 Proof Spine / Evidence Ledger | FCP | Implementation | Completed Green on 2026-05-06 as bounded shared ProofSpine / Goal Detail proof integration evidence with source, freshness, privacy, correction, and stale-review boundaries. | FCP06/FCP10/FCP11; PD07/PD17. | Complete; next FCP13B. |
-| 031 | FCP13B Goal Alternate Path / Decision History Polish | FCP split | Implementation | Goal alternate-path polish follows proof spine and LifePath. | FCP11-FCP12; PD08. | Single-batch. |
+| 031 | FCP13B Goal Alternate Path / Decision History Polish | FCP split | Implementation | Completed Green on 2026-05-06 as bounded Goal Detail Decision Spine evidence with alternate-path and decision-history branches, review/consequence/no-mutation labels, and no automated reroute. | FCP11-FCP12; PD08. | Complete; next FCP25. |
 | 032 | FCP25 Loading / Empty / Degraded State Objectization | FCP | Implementation | Object-specific state pass should run after major surfaces exist. | FCP05/FCP10/FCP14/FCP18/FCP22. | Single-batch. |
 | 033 | FCP26 Iconography / Status Grammar Hardening | FCP | Implementation | Status grammar finalizes after object states are visible. | FCP25; SI14. | Single-batch. |
 | 034 | AOS01 AmbitionsOS Canon And Runtime Contract | AOS | Docs / Contract | Runtime work starts after flagship object slots and product depth exist. | Start AOS Train or global preauthorization. | May continue on Green. |
@@ -207,7 +207,8 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 FCP13 is split in this optimized order because the 25-object scorecard requires Action Closure Diamond and the FCP train also needs Goal Alternate Path / Decision History polish.
 
 - FCP13A is Today-owned Action Closure Diamond.
-- FCP13B is Goals-owned Goal Alternate Path / Decision History Polish.
+- FCP13B is Goals-owned Goal Alternate Path / Decision History Polish and is
+  complete Green as Decision Spine evidence.
 
 This split avoids mixing Today closure behavior with Goals alternate-path polish in one broad batch.
 

@@ -2,15 +2,16 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: FCP12 Proof Spine / Evidence Ledger complete / Green.
-Next eligible batch: FCP13B Goal Alternate Path / Decision History Polish.
-Scope: FCP12 added a shared ProofSpine to the trust receipt layer and wired
-Goal Detail proof to that spine. Proof now carries source, freshness, privacy,
-correction, and stale-review posture without adding a trophy shelf, activity
-feed, analytics ledger, persistence/schema change, route/raw-value change,
-dependency, sync/cloud behavior, legal/privacy/release claim, App Store claim,
-TestFlight claim, physical-device proof, public accessibility claim, AOS
-runtime claim, or LDI runtime claim.
+Current batch: FCP13B Goal Alternate Path / Decision History Polish complete /
+Green.
+Next eligible batch: FCP25 Loading / Empty / Degraded State Objectization.
+Scope: FCP13B upgraded Goal Detail alternate paths and decision history into a
+typed Decision Spine with alternate-path and decision-history branches, review
+labels, consequence labels, and explicit no-automated-reroute / no-hidden-path
+mutation boundaries. It adds no route/raw-value change, persistence/schema
+change, dependency, top-level tab, sync/cloud behavior, legal/privacy/release
+claim, App Store claim, TestFlight claim, physical-device proof, public
+accessibility claim, AOS runtime claim, or LDI runtime claim.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -69,7 +70,8 @@ evidence. FCP15 is complete / Green as Reflow Decision Fold evidence. FCP16 is
 complete / Green as Pressure Field / Recovery Loop evidence. FCP10 is complete
 / Green as MissionControlTimeSpine evidence. FCP11 is complete / Green as
 LifePath Thread evidence. FCP12 is complete / Green as Proof Spine / Evidence
-Ledger evidence. FCP13B is the next eligible global batch.
+Ledger evidence. FCP13B is complete / Green as Goal Alternate Path / Decision
+History Polish evidence. FCP25 is the next eligible global batch.
 Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,

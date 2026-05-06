@@ -96,7 +96,12 @@ struct GoalDetailScreen: View {
                         GoalDetailReviewTrailCard(state: missionControl.reviewTrail)
                         GoalDetailAssumptionsCard(assumptions: missionControl.assumptions)
                         GoalDetailProofRailCard(state: missionControl.proofRail)
-                        GoalDetailDecisionsCard(state: missionControl.decisions)
+                        GoalAlternatePathDecisionSpine(
+                            state: GoalAlternatePathDecisionSpineState(
+                                decisions: missionControl.decisions,
+                                pathBuilder: detail.pathBuilder
+                            )
+                        )
                         GoalDetailRisksCard(state: missionControl.risks)
                         GoalDetailArchiveCard(state: missionControl.archive)
                         GoalDetailReceiptsCard(state: missionControl.receipts)
@@ -740,39 +745,92 @@ private struct GoalDetailReceiptsCard: View {
     }
 }
 
-private struct GoalDetailDecisionsCard: View {
+private struct GoalAlternatePathDecisionSpine: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let state: GoalDetailDecisionsState
+    let state: GoalAlternatePathDecisionSpineState
 
     var body: some View {
         GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
-            if state.items.isEmpty {
+            if state.branches.isEmpty {
                 EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "arrow.triangle.branch")
             } else {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(state.items) { item in
-                        HStack(alignment: .top, spacing: theme.spacing.sm) {
-                            Image(systemName: "arrow.triangle.branch")
-                                .foregroundStyle(theme.stateStyle(for: item.state).accent)
-                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                Text(item.title)
-                                    .font(theme.typography.bodyEmphasized)
-                                    .foregroundStyle(theme.colors.textPrimary)
-                                Text(item.summary)
-                                    .font(theme.typography.caption)
-                                    .foregroundStyle(theme.colors.textSecondary)
-                                Text(item.timestamp)
-                                    .font(theme.typography.micro)
-                                    .foregroundStyle(theme.colors.textTertiary)
-                            }
+                VStack(alignment: .leading, spacing: theme.spacing.md) {
+                    decisionBoundary
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(Array(state.branches.enumerated()), id: \.element.id) { index, branch in
+                            branchFold(branch, isLast: index == state.branches.count - 1)
                         }
                     }
                 }
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("goal-detail.decisions")
+        .accessibilityLabel(state.title)
+        .accessibilityValue(state.accessibilitySummary)
+        .accessibilityHint("Review alternate paths and decisions before changing this goal.")
+        .accessibilityIdentifier("goal-detail.decision-spine")
+    }
+
+    private var decisionBoundary: some View {
+        Label(state.boundaryLabel, systemImage: "hand.raised")
+            .font(theme.typography.caption)
+            .foregroundStyle(theme.colors.textSecondary)
+            .padding(.vertical, theme.spacing.xs)
+            .padding(.horizontal, theme.spacing.sm)
+            .background(
+                Capsule()
+                    .fill(theme.colors.surfaceSecondary.opacity(0.72))
+            )
+    }
+
+    private func branchFold(
+        _ branch: GoalAlternatePathDecisionBranchState,
+        isLast: Bool
+    ) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            VStack(spacing: theme.spacing.xs) {
+                Image(systemName: branch.kind.symbolName)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.stateStyle(for: branch.state).accent)
+                    .frame(width: 24, height: 24)
+                    .background(
+                        Circle()
+                            .fill(theme.stateStyle(for: branch.state).fill.opacity(0.72))
+                    )
+                if isLast == false {
+                    Rectangle()
+                        .fill(theme.colors.strokeSubtle)
+                        .frame(width: 1)
+                        .frame(minHeight: 44)
+                }
+            }
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                    Text(branch.kind.title)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                    Spacer(minLength: theme.spacing.sm)
+                    TagPill(branch.freshnessLabel, state: branch.state)
+                }
+                Text(branch.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(branch.summary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Label(branch.basisLabel, systemImage: "point.3.connected.trianglepath.dotted")
+                    Label(branch.reviewLabel, systemImage: "eye")
+                    Label(branch.consequenceLabel, systemImage: "arrow.left.and.right")
+                    Label(branch.mutationBoundaryLabel, systemImage: "lock")
+                }
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+            }
+            .padding(.bottom, isLast ? 0 : theme.spacing.xs)
+        }
+        .accessibilityElement(children: .combine)
     }
 }
 

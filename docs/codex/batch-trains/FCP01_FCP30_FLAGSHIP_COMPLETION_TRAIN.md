@@ -275,11 +275,18 @@ Acceptance: proof has source/freshness/privacy/correction/stale behavior.
 
 ### FCP13B — Goal Alternate Path / Decision History Polish
 
+Status: Complete Green on 2026-05-06 as bounded Goals / Goal Detail Decision
+Spine implementation evidence.
 Type: Implementation.
 Owner: Goals.
 Depends on: FCP11-FCP12; PD08.
 Goal: Upgrade alternate routes and decision history into native folds/spine branches, not cards/lists.
 Acceptance: no automated reroute; no PM dashboard.
+Result: Complete / Green on 2026-05-06. Goal Detail now renders a typed
+Decision Spine that folds alternate-path branches and decision-history branches
+together, carries review/consequence/no-mutation labels, and preserves the
+no-automated-reroute / no-PM-dashboard boundary with focused Goal Detail test
+proof.
 
 ### FCP14 — LifeShape Contour Map
 

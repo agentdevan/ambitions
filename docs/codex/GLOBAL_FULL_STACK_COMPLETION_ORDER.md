@@ -351,7 +351,16 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     change, dependency, sync/cloud behavior, legal/privacy/release claim, App
     Store claim, TestFlight claim, physical-device proof, public accessibility
     claim, AOS runtime claim, or LDI runtime claim.
-58. FCP13B Goal Alternate Path / Decision History Polish.
+58. FCP13B Goal Alternate Path / Decision History Polish. Completed Green on
+    2026-05-06 as bounded Goals / Goal Detail implementation evidence. It
+    upgrades alternate paths and decision history into a typed Decision Spine
+    with alternate-path and decision-history branches, review labels,
+    consequence labels, and explicit no-automated-reroute / no-hidden-path
+    mutation boundaries. It adds no route/raw-value change, persistence/schema
+    change, dependency, top-level tab, sync/cloud behavior,
+    legal/privacy/release claim, App Store claim, TestFlight claim,
+    physical-device proof, public accessibility claim, AOS runtime claim, or
+    LDI runtime claim.
 59. FCP25 Loading / Empty / Degraded State Objectization.
 60. FCP26 Iconography / Status Grammar Hardening.
 

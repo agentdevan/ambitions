@@ -145,6 +145,62 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(detail.screenContractSnapshot().topLevelTabTitles, ScreenContractValidator.canonicalTopLevelTabs)
     }
 
+    func testFCP13BDecisionSpineFoldsAlternatePathsAndHistoryWithoutAutomatedReroute() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Build a family emergency fund by 2026-12-01"),
+            now: fixedNow
+        )
+        let initialDetail = try await service.loadDetail(target: created.target)
+        let primaryStepID = try XCTUnwrap(initialDetail.primaryStepID)
+
+        _ = try await service.performAction(
+            GoalDetailActionRequest(target: created.target, kind: .delay, stepID: primaryStepID),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+        let pathBuilder = try XCTUnwrap(detail.pathBuilder)
+        let decisionSpine = GoalAlternatePathDecisionSpineState(
+            decisions: missionControl.decisions,
+            pathBuilder: pathBuilder
+        )
+        let combinedCopy = (
+            [decisionSpine.title, decisionSpine.subtitle, decisionSpine.boundaryLabel, decisionSpine.accessibilitySummary]
+                + decisionSpine.branches.flatMap {
+                    [
+                        $0.kind.title,
+                        $0.title,
+                        $0.summary,
+                        $0.basisLabel,
+                        $0.reviewLabel,
+                        $0.consequenceLabel,
+                        $0.mutationBoundaryLabel,
+                        $0.freshnessLabel,
+                    ]
+                }
+        ).joined(separator: " ")
+
+        XCTAssertEqual(decisionSpine.title, "Decision Spine")
+        XCTAssertFalse(decisionSpine.branches.isEmpty)
+        XCTAssertTrue(decisionSpine.branches.contains { $0.kind == .alternatePath })
+        XCTAssertTrue(decisionSpine.branches.contains { $0.kind == .decisionHistory })
+        XCTAssertTrue(decisionSpine.branches.allSatisfy {
+            $0.reviewLabel.localizedCaseInsensitiveContains("review")
+        })
+        XCTAssertTrue(decisionSpine.branches.allSatisfy {
+            $0.mutationBoundaryLabel.localizedCaseInsensitiveContains("no")
+        })
+        XCTAssertTrue(combinedCopy.localizedCaseInsensitiveContains("No automated reroute"))
+        XCTAssertTrue(combinedCopy.localizedCaseInsensitiveContains("no hidden plan or path mutation"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("AI decided"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("fully automated"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("kanban"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("PM dashboard"))
+    }
+
     func testFCP11LifePathThreadPreservesOrderPrimitivesAndPrivateRedaction() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
