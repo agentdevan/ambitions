@@ -653,6 +653,78 @@ Does not prove:
 - physical-device proof
 - release/platform readiness
 
+## AOS20
+
+Batch: AOS20 Adaptation Kernel Local Personalization.
+Result: Green.
+Evidence date: 2026-05-07.
+
+Proof scope:
+
+- typed local adaptation profile, dimension, assumption, permission, and
+  receipt contracts
+- user-controlled calibration and reset/review/correct controls
+- hidden personalization, rejected assumption, unreviewed assumption, and
+  invisible assumption blocking
+- seriousness-change receipt requirement
+- sensitive-adaptation privacy review and user-reviewed receipt requirement
+- deterministic fallback and model-required path blocking
+- forbidden personalization, productivity-score, confidence, release/device
+  overclaim language blocking
+- hidden-mutation and runtime-store behavior blocking
+- value-only runtime boundary
+
+Commands:
+
+- `git status --short`
+- `git branch --show-current`
+- `git rev-parse HEAD`
+- `git log -1 --oneline`
+- `test ! -d .github/workflows`
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos20 -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSAdaptationModelsTests test CODE_SIGNING_ALLOWED=NO`
+- `xcodebuild -quiet -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos20-rerun -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSAdaptationModelsTests test CODE_SIGNING_ALLOWED=NO`
+- `git diff --check`
+- `scripts/run-doc-qa.sh || true`
+- `scripts/batch-train-gate-check.sh || true`
+- `scripts/swiftui-architecture-scan.sh || true`
+- `scripts/build-local.sh || true`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos20-build -destination "platform=iOS Simulator,name=iPhone 17" build CODE_SIGNING_ALLOWED=NO`
+
+Result bundle:
+
+- `output/DerivedData-aos20-rerun/Logs/Test/Test-Ambitions-2026.05.07_00-53-45--0400.xcresult`
+
+Build note:
+
+- The first focused run exposed a test helper argument-order compile failure,
+  which was repaired in scope.
+- A quiet rerun against `output/DerivedData-aos20` hit a local Xcode build
+  database lock after the earlier failed invocation.
+- The focused proof passed in fresh repo-local DerivedData at
+  `output/DerivedData-aos20-rerun`.
+- `scripts/run-doc-qa.sh || true`, `scripts/batch-train-gate-check.sh ||
+  true`, and `scripts/swiftui-architecture-scan.sh || true` completed with
+  existing advisory backlogs only.
+- `scripts/build-local.sh || true` hit the known malformed shared Xcode
+  DerivedData build database; the dedicated repo-local build passed at
+  `output/DerivedData-aos20-build`.
+
+Does not prove:
+
+- adaptation runtime or personalization runtime
+- hidden learning, durable memory store, or assumption persistence
+- UI integration or rendered proof
+- model runtime or LDI runtime
+- Life Graph mutation
+- persistence or schema
+- sync/account/backend
+- hosted AI or hosted CI proof
+- legal/privacy compliance
+- public accessibility conformance
+- physical-device proof
+- release/platform readiness
+
 ## AOS19
 
 Batch: AOS19 Experience Kernel Celestial Cognitive Load.

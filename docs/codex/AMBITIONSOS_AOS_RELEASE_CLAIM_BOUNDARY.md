@@ -17,11 +17,12 @@ Status: Future release-claim boundary
 
 ## Allowed Current Claims
 
-- AmbitionsOS is future canon plus bounded additive AOS01-AOS19 contract
+- AmbitionsOS is future canon plus bounded additive AOS01-AOS20 contract
   evidence where reports and focused tests prove it.
-- AOS01-AOS19 do not prove runtime implementation, UI integration,
+- AOS01-AOS20 do not prove runtime implementation, UI integration,
   persistence, sync/cloud, hosted AI, release readiness, App Store readiness,
   TestFlight readiness, public accessibility conformance, signed-RC proof, or
   physical-device proof.
 - AOS requires evidence gates before broader implementation or release claims.
-- AOS20 Adaptation Kernel Local Personalization is next after AOS19 Green.
+- AOS21 Interoperability Kernel App Intents EventKit Planning is next after
+  AOS20 Green.

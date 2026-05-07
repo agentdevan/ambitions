@@ -93,3 +93,33 @@ Not proven:
 - legal/privacy compliance
 - external projection runtime
 - physical-device proof
+
+## AOS20 Adaptation Kernel Local Personalization
+
+Owner: Adaptation Kernel.
+Status: Green value-contract proof.
+
+Projection rules now represented in code:
+
+- local adaptation requires explicit user controls
+- inferred, rejected, hidden, or delete-pending personalization cannot drive use
+- rejected, unreviewed, or invisible assumptions are blocked
+- sensitive adaptation requires privacy review and user-reviewed receipts
+- seriousness changes require user-reviewed receipts
+- hidden mutation and runtime-store behavior are invalid
+
+Evidence:
+
+- `Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift`
+- `Native/AmbitionsTests/Domain/AmbitionsOSAdaptationModelsTests.swift`
+- `docs/audits/aos20-adaptation-kernel-local-personalization-report.md`
+
+Not proven:
+
+- personalization runtime
+- durable memory store
+- hidden learning behavior
+- privacy-state persistence
+- UI disclosure
+- legal/privacy compliance
+- physical-device proof

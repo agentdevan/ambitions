@@ -562,8 +562,19 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   rendered proof, personalization runtime, recommendation runtime, Life Graph
   mutation, persistence/schema, sync/account/backend, hosted AI,
   legal/privacy compliance, physical-device proof, release, or public
-  accessibility claim. The next eligible global batch is AOS20 Adaptation
-  Kernel Local Personalization.
+  accessibility claim. AOS20 followed and is now complete.
+- AOS20 is complete Green as additive Adaptation Kernel Local Personalization
+  evidence. It adds
+  `Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift` and focused
+  domain tests with local user-controlled calibration profiles, visible
+  assumptions, receipts, permission states, sensitive-adaptation review,
+  seriousness-change receipt gates, deterministic fallback requirements,
+  forbidden-language gates, hidden-mutation blocking, and runtime-boundary
+  checks, and no UI integration, hidden personalization runtime,
+  recommendation runtime, Life Graph mutation, persistence/schema,
+  sync/account/backend, hosted AI, legal/privacy compliance, physical-device
+  proof, release, or public accessibility claim. The next eligible global
+  batch is AOS21 Interoperability Kernel App Intents EventKit Planning.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

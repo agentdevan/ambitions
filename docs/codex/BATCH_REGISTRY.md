@@ -705,8 +705,8 @@ Current 4.0 status:
   with no feed posture, vanity analytics, route/raw-value change,
   persistence/schema, sync/account claim, or AOS/LDI runtime change.
 - Queued / Blocked: PD16-PD18 pending each batch's predecessor, PXOS/ME/CS/SI/AOS-if-needed gates, and Product Depth continuation checks.
-- Active / Green: AOS01 complete Accepted Yellow; AOS02-AOS19 complete Green;
-  AOS20-AOS30 pending predecessor,
+- Active / Green: AOS01 complete Accepted Yellow; AOS02-AOS20 complete Green;
+  AOS21-AOS30 pending predecessor,
   HPS, Source Atlas where relevant, and AOS train gates.
 - Queued / Blocked: LDI01-LDI22 Living Dream Intelligence Train pending AOS30 Green by default or explicit user decision for earlier dependency split.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
@@ -1054,8 +1054,8 @@ note and the PD18 audit report.
 | Release Evidence Closure Train | Completed / docs-only | Completed REC01-REC06 as evidence/status/release-truth work after the 2026-05-02 pre-train hardening and 3.0 truth check. Human/operator proof remains pending. |
 | REC01 Release Evidence Truth Inventory | Completed / accepted baseline | Created `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserved F17-F30 truth, inventoried simulator evidence and release proof gaps, and did not implement app behavior or claim readiness. |
 | REC02-REC06 Evidence Closure | Completed / docs-only | REC02 proof plan, REC03 validation ledger, REC04 claim copy guard, REC05 human review packet, and REC06 closure handoff are complete without claiming human proof or release readiness. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS19 complete Green under live global full-stack authorization after HPS and SA06 closure; AOS20 is next by global order, while AOS20-AOS30 require predecessor, HPS, Source Atlas where relevant, and AOS train gates. |
-| SA01-SA32 Source Atlas Full Maturity Train | Active / SA06 Green | SA01-SA06 and SAP01-SAP05 are complete Green as docs/state/Codex OS/order/composition/projection/Pack Factory rule/fixture/no-sprawl reconciliation plus compact pack schema implementation evidence. AOS05-AOS19 are complete; AOS20 is next before other deep source/freshness-dependent AOS/LDI work continues. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS20 complete Green under live global full-stack authorization after HPS and SA06 closure; AOS21 is next by global order, while AOS21-AOS30 require predecessor, HPS, Source Atlas where relevant, and AOS train gates. |
+| SA01-SA32 Source Atlas Full Maturity Train | Active / SA06 Green | SA01-SA06 and SAP01-SAP05 are complete Green as docs/state/Codex OS/order/composition/projection/Pack Factory rule/fixture/no-sprawl reconciliation plus compact pack schema implementation evidence. AOS05-AOS20 are complete; AOS21 is next before other deep source/freshness-dependent AOS/LDI work continues. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Created the Lane 2 ownership map and risk baseline. No extraction run. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Created shared projector/state/helper standards and corrected the stale Plan projector assumption. No extraction run. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Converted the architecture scan into a recurring ME gate. No extraction run. |
@@ -1182,7 +1182,7 @@ the stricter highest-priority global order.
 | Path | Status | Notes |
 | --- | --- | --- |
 | AmbitionsOS Future-Canon Integration | Completed / docs-only | Creates the future AmbitionsOS parent canon, kernel docs, runtime contract, AOS train controls, ME/CS train plans, Codex OS protocols, skills, review boards, consolidated catalogs, and audit reports. No app behavior, production refactor, compatibility seam retirement, dependency, workflow, platform capability, persistence/schema, release, App Store, TestFlight, device, accessibility, or final RC claim is added. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS19 complete Green under live global full-stack authorization after HPS and SA06 closure; AOS20 is next by global order, while AOS20-AOS30 require predecessor, HPS, Source Atlas where relevant, and AOS train gates. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS20 complete Green under live global full-stack authorization after HPS and SA06 closure; AOS21 is next by global order, while AOS21-AOS30 require predecessor, HPS, Source Atlas where relevant, and AOS train gates. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Planning baseline complete; no extraction run in this pass. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Standards baseline complete; no extraction run in this pass. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Recurring architecture gate complete; no extraction run in this pass. |
