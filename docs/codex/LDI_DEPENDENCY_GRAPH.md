@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active dependency graph. LDI01-LDI03 are Green after explicit
+Status: Active dependency graph. LDI01-LDI04 are Green after explicit
 user-directed early insertion; no LDI runtime is claimed.
 
 ## Placement
@@ -13,7 +13,7 @@ unrecoverable Red, and the optimized global order selected LDI01 after AOS23
 Governance Kernel Registry as a docs/Codex OS source-truth gate before later
 AOS UI integration. This does not authorize LDI runtime implementation.
 
-LDI04-LDI22 remain serial LDI successors after LDI03 Green or accepted Yellow.
+LDI05-LDI22 remain serial LDI successors after LDI04 Green or accepted Yellow.
 
 ## Required Predecessors
 

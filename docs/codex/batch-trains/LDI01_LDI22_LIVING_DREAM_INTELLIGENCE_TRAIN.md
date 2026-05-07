@@ -7,7 +7,8 @@ source-truth and governance evidence after explicit user-directed early
 insertion following AOS23. LDI02 is Green as local value-model Capture Handling
 Ladder contract and focused-test evidence. LDI03 is Green as local value-model
 safety triage contract, 45-family red-team fixture manifest, and focused-test
-evidence. LDI04-LDI22 remain queued serial
+evidence. LDI04 is Green as local value-model North Star Extraction contract
+and focused-test evidence. LDI05-LDI22 remain queued serial
 successors. This train does not claim runtime implementation. LDI remains
 blocked from runtime work until each successor batch proves its own HPS, Source
 Atlas, safety, privacy, professional-boundary, and release-claim gates.
@@ -78,7 +79,7 @@ LDI must route source-dependent behavior through:
 | LDI01 | Living Dream Architecture Source Truth | Complete / Green after explicit user-directed early insertion following AOS23 | docs/canon + codex governance only | Creates/updates LDI source truth and governance references, importing HPS and Source Atlas invariants. |
 | LDI02 | Capture Handling Ladder | Complete / Green after explicit user-directed early insertion following LDI01 | capture -> classify -> seriousness -> triage -> source binder route -> route contracts and fixtures | Adds local value-model handling lane contracts, deterministic routing, validator issues, and focused tests; no UI/runtime/persistence/source-pack behavior is claimed. |
 | LDI03 | Dream Safety Legality Feasibility Triage | Complete / Green after LDI02 | unsafe/illegal/crisis/fantasy/regulated/minor/professional/source-risk boundary contracts, fixtures, and safe redirect rules | Adds local safety triage contracts, 45-family red-team fixture manifest, and focused tests; no UI/runtime/persistence/professional advice/crisis service behavior is claimed. |
-| LDI04 | North Star Extraction | Queued after AOS30 by default and HPS/SA closeout | impossible/fantasy/symbolic/unsafe-literal dream conversion contracts and examples | Turns impossible or unsafe-literal dreams into safe meaning without validating literal harm, preserving identity continuity and option value; official requirements remain source-needed unless Source Atlas proves them. |
+| LDI04 | North Star Extraction | Complete / Green after LDI03 | impossible/fantasy/symbolic/unsafe-literal dream conversion contracts and examples | Adds local North Star Extraction contracts and focused tests; impossible or unsafe-literal dreams become reviewed meaning and safe alternative seeds without validating literal harm, UI/runtime/persistence, or professional advice claims. |
 | LDI05 | Source Claim Graph | Queued after AOS30 by default and HPS/SA closeout | atomic claims, source refs, claim states, jurisdiction, freshness policies | Implements claim graph contracts and proof fixtures using Source Atlas claim and freshness states. |
 | LDI06 | Pack Registry And Pack Compiler | Queued after AOS30 by default and HPS/SA closeout | pack types, pack schema, pack quality states, generation/review pipeline | Defines pack registry/compiler contracts through Source Atlas pack schema, review states, and no-build marketplace boundaries. |
 | LDI07 | Pack Supply Chain Security | Queued after AOS30 by default and HPS/SA closeout | signed packs, checksum, provenance, rollback, corruption handling, no executable logic | Adds pack integrity, validation, rollback, and tamper-handling proof using Source Atlas pack validation/revocation contracts. |

@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active gate matrix for LDI batches. LDI01-LDI03 are Green after
+Status: Active gate matrix for LDI batches. LDI01-LDI04 are Green after
 explicit user-directed early insertion; no runtime implementation is claimed.
 
 | Gate | Applies when | Green | Yellow | Red |
