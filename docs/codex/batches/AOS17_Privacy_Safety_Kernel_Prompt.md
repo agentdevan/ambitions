@@ -2,6 +2,10 @@
 
 Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only until implemented by evidence; blocked pending `Start AOS Train`.
 
+## Flagship Overlay Addendum
+
+Before AOS17 starts, read `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md` and treat `FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY` as active governance. AOS17 must respect the terminal-only physical-device gate, the rule that all pre-device gates close before device proof, the no-hosted-workflow validation posture, and the hard-Red-only continuation rule. GitHub Actions, hosted CI, Actions artifacts, and `.github/workflows/**` are not valid current proof. Continue only unless a Hard Red exists.
+
 ## Batch Identity
 
 - Batch ID: `AOS17`
@@ -24,6 +28,7 @@ LDI hook: Privacy Safety should map Personal Data Vault, sensitivity modes, loca
 
 - `README.md`
 - `AGENTS.md`
+- `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md`
 - `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
 - `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
 - `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`
@@ -42,7 +47,7 @@ LDI hook: Privacy Safety should map Personal Data Vault, sensitivity modes, loca
 - `git branch --show-current`
 - `git rev-parse HEAD`
 - `git log -1 --oneline`
-- `rg -n "AOS17|Privacy Safety Kernel|AmbitionsOS|release ready|App Store ready|TestFlight ready" docs .codex Native README.md AGENTS.md || true`
+- `rg -n "AOS17|Privacy Safety Kernel|AmbitionsOS|FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY|DPTG00|Physical Device Terminal Gate|terminal-only|release ready|App Store ready|TestFlight ready" docs .codex Native README.md AGENTS.md || true`
 
 Proceed only on `main`, with a coherent worktree, no unclassified user changes in target files, and a Green predecessor gate recorded in the AOS dependency graph.
 
@@ -73,7 +78,7 @@ This batch may read typed local state relevant to Privacy Safety Kernel; it may 
 
 - No chatbot tab, AI-first surface, productivity score, confidence percentage, or guaranteed-path wording.
 - No release, App Store, TestFlight, physical-device, public accessibility, platform-readiness, or production-model claim.
-- No backend, account, sync, telemetry, remote config, hosted AI, or bundled custom LLM pivot.
+- No backend, account, sync, telemetry, remote config, hosted AI, hosted CI, GitHub Actions proof, or bundled custom LLM pivot.
 - No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement.
 
 ## Required Codex OS Gates
@@ -135,7 +140,7 @@ It must not claim AmbitionsOS is implemented, that Ambitions has an on-device re
 
 ## What This Batch Does Not Prove
 
-This batch does not prove physical-device behavior, public accessibility conformance, signed archive validation, App Store Connect validation, external-platform rendering, production model behavior, backend availability, or future AOS batch readiness beyond the next named gate.
+This batch does not prove physical-device behavior, public accessibility conformance, signed archive validation, App Store Connect validation, external-platform rendering, production model behavior, backend availability, hosted-CI proof, or future AOS batch readiness beyond the next named gate.
 
 ## Commit Message Recommendation
 
