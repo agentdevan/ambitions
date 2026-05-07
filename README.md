@@ -23,6 +23,7 @@ Start Ambitions 3.0 work from this read order:
 7. The target primitive, surface, state-machine, privacy, accessibility, or QA doc for the work being done.
 
 Use [docs/codex/BATCH_REGISTRY.md](docs/codex/BATCH_REGISTRY.md) for implementation status truth.
+Use [docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md](docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md) for the active flagship maturity, terminal-device, pre-device closure, and hosted-workflow removal overlay.
 
 Older docs are supporting context unless an active 3.0 doc explicitly keeps them binding for a domain that 3.0 does not replace.
 
@@ -32,12 +33,7 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 
 [Ambitions 4.0 Execution Program](docs/canon/Ambitions_4_0_Execution_Program.md) is the active post-3.0 implementation and canon-execution program. It is not a shipped product version, release-readiness claim, App Store claim, TestFlight claim, physical-device proof, platform proof, or public accessibility proof.
 
-Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
-means the repo has a 113-batch global execution order after SI insertion; REC02-REC06,
-PX01-PX20, ME01, HPS01-HPS12, AOS01-AOS04 are complete as
-docs/evidence/canon/audit/domain work, while AOS05-AOS30 remain gated by
-predecessor, HPS, Source Atlas where relevant, and AOS proof gates. Future canon
-remains future canon until implemented and proven.
+Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently means the repo has a global execution order after SI insertion; REC02-REC06, PX01-PX20, ME01, HPS01-HPS12, and AOS01-AOS16 are complete where proven by registry and run-state evidence. AOS17 Privacy Safety Kernel is the next eligible global batch unless newer repo evidence advances the train. Future canon remains future canon until implemented and proven.
 
 ---
 
@@ -153,9 +149,10 @@ Codex work should follow:
 1. active 3.0 read order from this README
 2. [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md)
 3. [docs/codex/BATCH_REGISTRY.md](docs/codex/BATCH_REGISTRY.md) for implementation status
-4. target primitive/surface docs
-5. [Codex-Only Implementation And Testing Strategy](docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md)
-6. [Release Readiness And Evidence Gates](docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
+4. [docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md](docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md) for flagship maturity, terminal-device, and local-validation overlay rules
+5. target primitive/surface docs
+6. [Codex-Only Implementation And Testing Strategy](docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md)
+7. [Release Readiness And Evidence Gates](docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
 
 Every implementation batch should report canon docs read, files changed, primitive advanced, loop step advanced, tests run, previews added, copy guard results, accessibility notes, privacy notes, and remaining gaps.
 
@@ -163,11 +160,13 @@ Every implementation batch should report canon docs read, files changed, primiti
 
 ## iOS native validation
 
-GitHub Actions validates iOS-native integrity on `macos-15` in [.github/workflows/ios-validate.yml](.github/workflows/ios-validate.yml).
+Hosted workflows are intentionally absent from this repo. Current validation is local/Codex-operated only.
 
-The workflow currently regenerates the Xcode project, resolves Swift package dependencies, builds the app target, runs unit tests, runs UI tests, runs an unsigned Release archive sanity check, and uploads `.xcresult` bundles.
+Validation evidence must come from checked-in scripts, local terminal command logs, local Xcode or `xcodebuild` commands, local simulator commands, proof artifacts, and terminal gates.
 
-The workflow does not prove signed archives, TestFlight, App Store Connect validation, distribution exports, physical-device behavior, external accessibility conformance, or human usability.
+Use [docs/native-build-and-release.md](docs/native-build-and-release.md) for local project generation, build, unit test, UI test, unsigned archive sanity, signed App Store validation handoff, and physical-device terminal-gate boundaries.
+
+This local validation posture does not prove signed archives, TestFlight readiness, App Store Connect validation, distribution exports, physical-device behavior, public accessibility conformance, legal/privacy compliance, or human approval unless the owning release gate records matching evidence.
 
 ---
 
