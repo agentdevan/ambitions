@@ -9,7 +9,9 @@ Ladder contract and focused-test evidence. LDI03 is Green as local value-model
 safety triage contract, 45-family red-team fixture manifest, and focused-test
 evidence. LDI04 is Green as local value-model North Star Extraction contract
 and focused-test evidence. LDI05 is Green as local value-model Source Claim
-Graph contract and focused-test evidence. LDI06-LDI22 remain queued serial
+Graph contract and focused-test evidence. LDI06 is Green as local value-model
+Pack Registry And Pack Compiler contract, local fixture, and focused-test
+evidence. LDI07-LDI22 remain queued serial
 successors. This train does not claim runtime implementation. LDI remains
 blocked from runtime work until each successor batch proves its own HPS, Source
 Atlas, safety, privacy, professional-boundary, and release-claim gates.
@@ -82,7 +84,7 @@ LDI must route source-dependent behavior through:
 | LDI03 | Dream Safety Legality Feasibility Triage | Complete / Green after LDI02 | unsafe/illegal/crisis/fantasy/regulated/minor/professional/source-risk boundary contracts, fixtures, and safe redirect rules | Adds local safety triage contracts, 45-family red-team fixture manifest, and focused tests; no UI/runtime/persistence/professional advice/crisis service behavior is claimed. |
 | LDI04 | North Star Extraction | Complete / Green after LDI03 | impossible/fantasy/symbolic/unsafe-literal dream conversion contracts and examples | Adds local North Star Extraction contracts and focused tests; impossible or unsafe-literal dreams become reviewed meaning and safe alternative seeds without validating literal harm, UI/runtime/persistence, or professional advice claims. |
 | LDI05 | Source Claim Graph | Complete / Green after LDI04 | atomic claims, source refs, claim states, jurisdiction, freshness policies | Adds local Source Claim Graph contracts and focused tests for source refs, freshness policy, conflict/supersession, official-source overclaim blocking, stale high-risk blocking, professional-boundary flags, and runtime boundaries without UI/runtime/persistence, user-data server, or official requirement verification claims. |
-| LDI06 | Pack Registry And Pack Compiler | Queued after AOS30 by default and HPS/SA closeout | pack types, pack schema, pack quality states, generation/review pipeline | Defines pack registry/compiler contracts through Source Atlas pack schema, review states, and no-build marketplace boundaries. |
+| LDI06 | Pack Registry And Pack Compiler | Complete / Green after LDI05 | pack types, pack schema, pack quality states, generation/review pipeline | Adds local pack registry/compiler contracts, source-claim graph attachment, supply-chain proof gating, no-executable-logic checks, non-activating compiled output, local fixture, and focused tests without UI/runtime/persistence or official source-pack claims. |
 | LDI07 | Pack Supply Chain Security | Queued after AOS30 by default and HPS/SA closeout | signed packs, checksum, provenance, rollback, corruption handling, no executable logic | Adds pack integrity, validation, rollback, and tamper-handling proof using Source Atlas pack validation/revocation contracts. |
 | LDI08 | Requirement Graph Runtime | Queued after AOS30 by default and HPS/SA closeout | hard/soft requirements, blockers, dependencies, proof needed | Implements requirement graph contracts and tests within owned seams, with Source Atlas proof-needed mapping and source uncertainty. |
 | LDI09 | Eligibility And Deadline Runtime | Queued after AOS30 by default and HPS/SA closeout | age/date/window/deadline/minimum lead time logic | Implements eligibility/deadline logic with Source Atlas source-state, jurisdiction, institution, stale-critical, and no-certification boundaries. |

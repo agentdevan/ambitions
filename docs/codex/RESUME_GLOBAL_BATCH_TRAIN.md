@@ -45,8 +45,9 @@ triage contract, 45-family red-team fixture manifest, and focused tests. LDI04
 North Star Extraction is complete / Green as a local value-model contract with
 focused tests. LDI05 Source Claim Graph is complete / Green as a local
 value-model contract with focused tests. LDI06 Pack Registry And Pack Compiler
-is the next eligible global batch
-unless a later repo-truth update proves newer progress.
+is complete / Green as a local value-model contract, local fixture, and
+focused tests. LDI07 Pack Supply Chain Security is the next eligible global
+batch unless a later repo-truth update proves newer progress.
 
 Required first-pass checks:
 
@@ -85,14 +86,15 @@ Current proven repo evidence before this alias selected:
 - LDI03 Dream Safety Legality Feasibility Triage complete / Green.
 - LDI04 North Star Extraction complete / Green.
 - LDI05 Source Claim Graph complete / Green.
-- LDI06 Pack Registry And Pack Compiler is the next eligible global batch unless newer
+- LDI06 Pack Registry And Pack Compiler complete / Green.
+- LDI07 Pack Supply Chain Security is the next eligible global batch unless newer
   repo evidence selects a later batch.
 
-Continue to LDI06 unless a Hard Red or unrecoverable Red is found.
+Continue to LDI07 unless a Hard Red or unrecoverable Red is found.
 
 ## Queued Repo Hygiene Closeout
 
-RHC01-RHC06 Repo Hygiene Closeout is queued but must not interrupt LDI05 or any unfinished LDI/AOS/FCP/PFC batch. Codex may select RHC only after the active full-stack tail clears, in this order: LDI05-LDI22, AOS24-AOS30, FCP27-FCP30, PFC31-PFC40, then RHC01-RHC06. RHC may run earlier only when a Hard Red proves repo hygiene blocks the active batch and the repair is limited to the blocking owner files.
+RHC01-RHC06 Repo Hygiene Closeout is queued but must not interrupt any unfinished LDI/AOS/FCP/PFC batch. Codex may select RHC only after the active full-stack tail clears, in this order: LDI07-LDI22, AOS24-AOS30, FCP27-FCP30, PFC31-PFC40, then RHC01-RHC06. RHC may run earlier only when a Hard Red proves repo hygiene blocks the active batch and the repair is limited to the blocking owner files.
 
 RHC source truth:
 
@@ -179,13 +181,13 @@ For each batch:
 
 ## Required Final Response Shape
 
-Latest train checkpoint: LDI05 Source Claim Graph is complete Green as a local
-value-model contract and focused tests. It does not implement UI integration,
-route/raw-value changes, persistence/schema, sync/cloud, hosted AI, user-data
-server, professional-advice behavior, official requirement verification,
-release/device proof, legal/privacy compliance proof, public accessibility
-proof, or full LDI runtime behavior. LDI06 is next unless repo evidence shows
-later progress.
+Latest train checkpoint: LDI06 Pack Registry And Pack Compiler is complete
+Green as a local value-model contract, local fixture, and focused tests. It
+does not implement UI integration, route/raw-value changes, persistence/schema,
+sync/cloud, hosted AI, user-data server, professional-advice behavior, official
+requirement verification, release/device proof, legal/privacy compliance proof,
+public accessibility proof, or full LDI runtime behavior. LDI07 is next unless
+repo evidence shows later progress.
 
 At each visible checkpoint, report:
 

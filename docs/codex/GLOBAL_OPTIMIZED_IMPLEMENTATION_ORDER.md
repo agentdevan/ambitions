@@ -84,7 +84,9 @@ As of this order update:
 - LDI04 is complete Green as a local North Star Extraction value-model
   contract with focused tests; LDI05 followed and is now complete.
 - LDI05 is complete Green as a local Source Claim Graph value-model contract
-  with focused tests; LDI06 follows unless dependency review selects another
+  with focused tests; LDI06 followed and is now complete.
+- LDI06 is complete Green as a local Pack Registry And Pack Compiler
+  value-model contract with focused tests; LDI07 follows unless dependency review selects another
   eligible batch.
 - FIO01/PFC05A are complete after this run passes checks as docs/governance/
   repo-hygiene evidence. `FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY` is active,
@@ -93,10 +95,10 @@ As of this order update:
 - DPTG00 is locked as a future terminal physical-device release-candidate proof
   gate, not an implementation batch. All pre-device gates must close before it.
 - AOS24-AOS30 remain queued.
-- LDI06-LDI22 remain queued and are inserted by dependency, not train silo.
+- LDI07-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 - No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay
-  package. LDI06 is next unless repo evidence shows later progress.
+  package. LDI07 is next unless repo evidence shows later progress.
 
 ## Selection Rule
 
@@ -271,8 +273,8 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 058 | LDI02 Capture Handling Ladder | LDI | Contract | Completed Green on 2026-05-07 with local value-model handling lane, seriousness, source/freshness/privacy/safety signal, terminal blocking, review, activation, and runtime-boundary contracts plus focused tests. | LDI01. | Complete; LDI03 followed and is complete. |
 | 059 | LDI03 Dream Safety Legality Feasibility Triage | LDI | Safety | Completed Green on 2026-05-07 with local safety triage contracts, 45-family red-team fixture manifest, unsafe/crisis/professional-boundary/privacy/source review rules, and focused tests. | LDI02. | Complete; LDI04 followed and is now complete. |
 | 060 | LDI04 North Star Extraction | LDI | Contract | Completed Green on 2026-05-07 with local North Star Extraction contracts, fantasy/impossible/symbolic/unsafe-literal conversion rules, safe alternative seeds, review gates, and focused tests. | LDI03. | Complete; LDI05 followed and is complete. |
-| 061 | LDI05 Source Claim Graph | LDI | Contract | Completed Green on 2026-05-07 with local Source Claim Graph contracts, atomic claim/source/freshness/conflict/professional-boundary gates, official-source overclaim blocking, stale high-risk blocking, runtime-boundary checks, and focused tests. | LDI04. | Complete; next LDI06. |
-| 062 | LDI06 Pack Registry And Pack Compiler | LDI | Contract | Pack registry follows source graph. | LDI05. | Single-batch. |
+| 061 | LDI05 Source Claim Graph | LDI | Contract | Completed Green on 2026-05-07 with local Source Claim Graph contracts, atomic claim/source/freshness/conflict/professional-boundary gates, official-source overclaim blocking, stale high-risk blocking, runtime-boundary checks, and focused tests. | LDI04. | Complete; LDI06 followed and is complete. |
+| 062 | LDI06 Pack Registry And Pack Compiler | LDI | Contract | Completed Green on 2026-05-07 with local pack registry/compiler contracts, pack taxonomy/schema/quality/lifecycle states, source-claim graph attachment, supply-chain proof gating, no-executable-logic checks, non-activating compiler output, runtime-boundary checks, local fixture, and focused tests. | LDI05. | Complete; next LDI07. |
 | 063 | LDI07 Pack Supply Chain Security | LDI | Security | Pack security must precede pack usage. | LDI06. | Single-batch. |
 | 064 | LDI08 Requirement Graph Runtime | LDI | Runtime | Requirement graph follows safe source/pack contracts. | LDI05-LDI07. | Single-batch. |
 | 065 | LDI09 Eligibility And Deadline Runtime | LDI | Runtime | Eligibility follows requirement graph. | LDI08. | Single-batch. |

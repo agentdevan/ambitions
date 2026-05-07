@@ -1,0 +1,30 @@
+{
+  "pack_id": "ldi.pack.training",
+  "version": "1.0.0",
+  "schema_version": "ambitionsos_living_dream_pack_registry.native.v1",
+  "checksum": "sha256-example",
+  "provenance": "local-fixture",
+  "source_state": "source_backed",
+  "quality_state": "reviewed",
+  "freshness_policy": {
+    "review_interval_days": 30,
+    "stale_blocks_consequential_use": true
+  },
+  "source_claim_graph_id": "claim-graph.training",
+  "source_claim_ids": [
+    "claim-training-age"
+  ],
+  "review_state": "ready",
+  "rollback_version": "0.9.0",
+  "signed_manifest_id": "manifest.training.v1",
+  "contains_executable_logic": false,
+  "safe_import_validation": true,
+  "corruption_handling": true,
+  "tamper_detection": true,
+  "signature_verification": true,
+  "pack_diff_integrity": true,
+  "pack_manifest_integrity": true,
+  "claims_official_source_pack": false,
+  "allows_activation": false,
+  "uses_user_data_server": false
+}
