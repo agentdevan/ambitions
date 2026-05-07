@@ -1,19 +1,20 @@
 # Current Run State
 
-Date: 2026-05-06
+Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: AOS17 Privacy Safety Kernel complete / Green.
-Next eligible batch: AOS18 Evaluation Golden Scenarios.
-Scope: AOS17 added additive Privacy Safety Kernel proof for typed sensitive
-areas, permission states, projection policies, privacy receipts, redaction
-summary requirements, source/review/freshness privacy gates,
-inferred-memory-as-fact blocking, delete-pending projection blocking,
-tool-approval and deterministic-fallback gates, hidden-mutation blocking, and
-value-only runtime boundaries. It adds no memory permission runtime, durable
-memory store, source ingestion, external projection runtime, model runtime,
-tool bus, UI integration, Life Graph mutation, persistence/schema,
-sync/account/backend service, hosted AI, release/platform, legal/privacy
-compliance, physical-device proof, or public accessibility claim.
+Current batch: AOS18 Evaluation Golden Scenarios complete / Green.
+Next eligible batch: AOS19 Experience Kernel Celestial Cognitive Load.
+Scope: AOS18 added additive Evaluation Golden Scenarios proof for typed
+evaluation suites, scenarios, receipts, scenario kinds, fixture coverage,
+deterministic-oracle requirements, source/freshness/review gates, external
+privacy projection redaction gates, Yellow/professional-boundary owner gates,
+passed-scenario evidence gates, unsupported-claim blocking, model-required
+path blocking, hidden-mutation blocking, and value-only runtime boundaries. It
+adds no evaluation runner runtime, generated fixture library, model evaluation
+runtime, LDI runtime, source import, UI integration, Life Graph mutation,
+persistence/schema, sync/account/backend service, hosted AI,
+release/platform, legal/privacy compliance, physical-device proof, or public
+accessibility claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -24,7 +25,7 @@ commands, proof artifacts, and terminal gates. Physical-device proof is
 terminal-only and final-only. All feature, product-object, primitive,
 intelligence, source/freshness, accessibility, visual, performance,
 privacy/legal, platform, release, signed-RC, and claim-safety gates must close
-before device proof begins. AOS17 has since closed Green; AOS18 remains next
+before device proof begins. AOS18 has since closed Green; AOS19 remains next
 unless repo evidence shows later progress. No AOS or LDI work was fabricated by
 this governance package.
 
@@ -140,8 +141,9 @@ complete / Green as Option Value North Star evidence. AOS11 is complete /
 Green as Reality Drift Bounded Reflow evidence. AOS14 is complete / Green as
 Recommendation Start Here Kernel evidence. AOS15 is complete / Green as Local
 Language Kernel Planning evidence. AOS16 is complete / Green as Performance
-Energy Kernel evidence. AOS17 is the next eligible global batch before other
-AOS/LDI work continues.
+Energy Kernel evidence. AOS17 is complete / Green as Privacy Safety Kernel
+evidence. AOS18 is complete / Green as Evaluation Golden Scenarios evidence.
+AOS19 is the next eligible global batch before other AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

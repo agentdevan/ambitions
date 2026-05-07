@@ -34,3 +34,33 @@ Not proven:
 - source ingestion
 - UI disclosure
 - physical-device proof
+
+## AOS18 Evaluation Golden Scenarios
+
+Owner: Evaluation Kernel.
+Status: Green value-contract proof.
+
+Projection rules now represented in code:
+
+- privacy-leak scenarios are first-class evaluation inputs
+- sensitive or delete-pending scenarios are privacy-sensitive
+- external scenarios require `externalRedacted` or `hidden` projection posture
+- fixture families can require external-surface redaction coverage
+- passed scenarios require evidence links or proof receipts
+- hidden mutation and runtime-store behavior are invalid
+
+Evidence:
+
+- `Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift`
+- `Native/AmbitionsTests/Domain/AmbitionsOSEvaluationModelsTests.swift`
+- `docs/audits/aos18-evaluation-golden-scenarios-report.md`
+
+Not proven:
+
+- external projection runtime
+- redaction engine
+- privacy leak scanner
+- generated fixture library
+- UI disclosure
+- legal/privacy compliance
+- physical-device proof

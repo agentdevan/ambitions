@@ -538,8 +538,20 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   projection runtime, model runtime, tool bus, UI integration, Life Graph
   mutation, persistence/schema, sync/account/backend, hosted AI,
   legal/privacy compliance, physical-device proof, release, or public
-  accessibility claim. The next eligible global batch is AOS18 Evaluation
-  Golden Scenarios.
+  accessibility claim. AOS18 followed and is now complete.
+- AOS18 is complete Green as additive Evaluation Golden Scenarios evidence. It
+  adds `Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift` and focused
+  domain tests with typed evaluation suites, scenarios, receipts, scenario
+  kinds, fixture coverage, deterministic-oracle requirements,
+  source/freshness/review gates, external privacy projection redaction gates,
+  Yellow/professional-boundary owner gates, passed-scenario evidence gates,
+  unsupported-claim blocking, model-required path blocking, hidden-mutation
+  blocking, runtime-boundary checks, and no evaluation runner runtime,
+  generated fixture library, model evaluation runtime, LDI runtime, source
+  import, UI integration, Life Graph mutation, persistence/schema,
+  sync/account/backend, hosted AI, legal/privacy compliance, physical-device
+  proof, release, or public accessibility claim. The next eligible global batch
+  is AOS19 Experience Kernel Celestial Cognitive Load.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

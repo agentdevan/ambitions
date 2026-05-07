@@ -652,3 +652,60 @@ Does not prove:
 - public accessibility conformance
 - physical-device proof
 - release/platform readiness
+
+## AOS18
+
+Batch: AOS18 Evaluation Golden Scenarios.
+Result: Green.
+Evidence date: 2026-05-07.
+
+Proof scope:
+
+- typed evaluation-suite, scenario, and receipt contracts
+- golden, red-team, claim-truth, privacy-leak, source/professional-boundary,
+  and LDI red-team scenario kinds
+- required fixture-family coverage
+- deterministic oracle requirements
+- source/freshness/review gates for source-sensitive and high-risk scenarios
+- external privacy projection redaction gates
+- Yellow repair-owner and professional-boundary owner requirements
+- passed-scenario evidence requirements
+- unsupported-claim, model-required, hidden-mutation, and runtime-store blocking
+- value-only runtime boundary
+
+Commands:
+
+- `git status --short`
+- `git branch --show-current`
+- `git rev-parse HEAD`
+- `git log -1 --oneline`
+- `test ! -d .github/workflows`
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos18 -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSEvaluationModelsTests test CODE_SIGNING_ALLOWED=NO`
+- `scripts/build-local.sh || true`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos18-build -destination "platform=iOS Simulator,name=iPhone 17" build CODE_SIGNING_ALLOWED=NO`
+
+Result bundle:
+
+- `output/DerivedData-aos18/Logs/Test/Test-Ambitions-2026.05.07_00-17-25--0400.xcresult`
+
+Build note:
+
+- `scripts/build-local.sh` hit the existing shared Xcode DerivedData database
+  corruption. The dedicated repo-local DerivedData build passed.
+
+Does not prove:
+
+- evaluation runner runtime
+- generated fixture library
+- model evaluation system
+- LDI runtime
+- source import, OCR, PDF parsing, or official source certification
+- UI integration or rendered proof
+- persistence or schema
+- sync/account/backend
+- hosted AI or hosted CI proof
+- legal/privacy compliance
+- public accessibility conformance
+- physical-device proof
+- release/platform readiness

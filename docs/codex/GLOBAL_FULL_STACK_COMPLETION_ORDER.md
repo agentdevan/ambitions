@@ -31,7 +31,7 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - AOS and LDI remain queued.
 - No FL/FCP/PFC/FVQ production implementation has started by virtue of this document.
 - Historical IDs are not renumbered by the FIO01/PFC05A/DPTG00 overlay package.
-- AOS17 is complete Green as additive Privacy Safety Kernel evidence; AOS18
+- AOS18 is complete Green as additive Evaluation Golden Scenarios evidence; AOS19
   remains next unless repo evidence shows later progress.
 
 ## Full-Stack Optimized Order
@@ -931,7 +931,17 @@ remaining sensitive intelligence work.
     projection runtime, model runtime, tool bus, UI integration,
     persistence/schema, legal/privacy compliance, physical-device proof, or
     release/platform claims.
-86. AOS18 Evaluation Golden Scenarios.
+86. AOS18 Evaluation Golden Scenarios. Completed Green on 2026-05-07 as
+    additive Evaluation Golden Scenarios domain-contract evidence with typed
+    evaluation suites, scenarios, receipts, scenario kinds, fixture coverage,
+    deterministic-oracle requirements, source/freshness/review gates, external
+    privacy projection redaction gates, Yellow/professional-boundary owner
+    gates, passed-scenario evidence gates, unsupported-claim blocking,
+    model-required path blocking, hidden-mutation blocking, runtime-boundary
+    checks, and focused tests. It does not add evaluation runner runtime,
+    generated fixture library, model evaluation runtime, LDI runtime, source
+    import, UI integration, persistence/schema, legal/privacy compliance,
+    physical-device proof, or release/platform claims.
 87. AOS19 Experience Kernel Celestial Cognitive Load.
 88. AOS20 Adaptation Kernel Local Personalization.
 89. AOS21 Interoperability Kernel App Intents EventKit Planning.

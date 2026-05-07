@@ -60,19 +60,21 @@ As of this order update:
   AOS16 followed and is now complete.
 - AOS16 is complete Green as additive Performance Energy Kernel evidence;
   AOS17 followed and is now complete.
-- AOS17 is complete Green as additive Privacy Safety Kernel evidence; AOS18 is
-  next by global order.
+- AOS17 is complete Green as additive Privacy Safety Kernel evidence; AOS18
+  followed and is now complete.
+- AOS18 is complete Green as additive Evaluation Golden Scenarios evidence;
+  AOS19 is next by global order.
 - FIO01/PFC05A are complete after this run passes checks as docs/governance/
   repo-hygiene evidence. `FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY` is active,
   hosted workflows are intentionally absent, and local/Codex-operated
   validation governs current proof.
 - DPTG00 is locked as a future terminal physical-device release-candidate proof
   gate, not an implementation batch. All pre-device gates must close before it.
-- AOS18-AOS30 remain queued.
+- AOS19-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 - No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay
-  package. AOS18 remains next unless repo evidence shows later progress.
+  package. AOS19 remains next unless repo evidence shows later progress.
 
 ## Selection Rule
 
@@ -236,8 +238,8 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 047 | AOS14 Recommendation Start Here Kernel | AOS | Kernel | Completed Green on 2026-05-06 with typed Start Here recommendations, fit states, source labels, source/proof/control-plane inheritance, explanation, assumptions, alternatives, user controls, source/freshness/proof/control gates, confidence-score/generic-priority/guarantee/harmful-language/hidden-mutation/privacy/runtime-boundary blocking, and focused tests. | AOS04/AOS12/AOS13; FCP05. | Complete; AOS15 followed and is now complete. |
 | 048 | AOS15 Local Language Kernel Planning | AOS | Kernel | Completed Green on 2026-05-06 with typed local-language intents, structured fields, Capture/You owner-surface boundary, adapter tier ladder planning, deterministic fallback, source/freshness/review/privacy/sensitive-area gates, model-runtime/blocked-tier/performance/tool/external-projection/hidden-mutation/confidence-language/runtime-boundary blocking, and focused tests. | AOS04/AOS13/AOS14. | Complete; AOS16 followed and is now complete. |
 | 049 | AOS16 Performance Energy Kernel | AOS | Kernel/QA | Completed Green on 2026-05-06 with typed workload kinds, bounded budget envelopes, scheduler modes, low-power and thermal fallback states, inherited Source Atlas and Local Language budget gates, measurement-plan/release-claim evidence gates, privacy/hidden-mutation/runtime-boundary blocking, and focused tests. | Before runtime-heavy implementation. | Complete; AOS17 followed and is now complete. |
-| 050 | AOS17 Privacy Safety Kernel | AOS | Kernel/QA | Completed Green on 2026-05-06 with typed sensitive areas, permission states, projection policies, privacy receipts, redaction summary requirements, inferred-memory-as-fact blocking, delete-pending projection blocking, tool-approval/deterministic-fallback gates, hidden-mutation/runtime-boundary blocking, and focused tests. | Before sensitive projection. | Complete; next AOS18. |
-| 051 | AOS18 Evaluation Golden Scenarios | AOS | Evaluation | Golden scenarios follow kernel contracts. | AOS01-AOS17. | Single-batch. |
+| 050 | AOS17 Privacy Safety Kernel | AOS | Kernel/QA | Completed Green on 2026-05-06 with typed sensitive areas, permission states, projection policies, privacy receipts, redaction summary requirements, inferred-memory-as-fact blocking, delete-pending projection blocking, tool-approval/deterministic-fallback gates, hidden-mutation/runtime-boundary blocking, and focused tests. | Before sensitive projection. | Complete; AOS18 followed and is now complete. |
+| 051 | AOS18 Evaluation Golden Scenarios | AOS | Evaluation | Completed Green on 2026-05-07 with typed evaluation suites, scenarios, receipts, scenario kinds, fixture coverage, deterministic-oracle requirements, source/freshness/review gates, external privacy projection redaction gates, owner/evidence gates, unsupported-claim/model-required/hidden-mutation/runtime-boundary blocking, and focused tests. | AOS01-AOS17. | Complete; next AOS19. |
 | 052 | AOS19 Experience Kernel Celestial Cognitive Load | AOS | Experience contract | Experience language follows evaluation. | AOS18. | Single-batch. |
 | 053 | AOS20 Adaptation Kernel Local Personalization | AOS | Kernel | Local calibration follows recommendation and evaluation. | AOS14/AOS18. | Single-batch. |
 | 054 | AOS21 Interoperability Kernel App Intents EventKit Planning | AOS | Planning | External interop waits for privacy/performance gates. | AOS16/AOS17. | Single-batch. |
