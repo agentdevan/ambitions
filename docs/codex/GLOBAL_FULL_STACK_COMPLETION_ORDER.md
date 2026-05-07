@@ -47,8 +47,10 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   Graph Runtime contract. LDI09 followed and is now complete Green as a local
   Eligibility And Deadline Runtime contract. LDI10 followed and is now complete
   Green as a local Starting Position And Privacy Intake contract. LDI11 followed
-  and is now complete Green as a local Path Portfolio Runtime contract. LDI12 follows
-  unless repo evidence or dependency review selects another eligible batch.
+  and is now complete Green as a local Path Portfolio Runtime contract. LDI12
+  followed and is now complete Green as a local Capacity And Commitment-Time
+  Bridge contract. LDI13 follows unless repo evidence or dependency review
+  selects another eligible batch.
 
 ## Full-Stack Optimized Order
 
@@ -1070,7 +1072,7 @@ remaining sensitive intelligence work.
 100. LDI09 Eligibility And Deadline Runtime. Complete Green on 2026-05-07 as local eligibility/deadline contract and focused-test evidence.
 101. LDI10 Starting Position And Privacy Intake. Complete Green on 2026-05-07 as local starting-position/privacy intake contract and focused-test evidence.
 102. LDI11 Path Portfolio Runtime. Complete Green on 2026-05-07 as local path portfolio contract and focused-test evidence.
-103. LDI12 Capacity And Commitment-Time Bridge.
+103. LDI12 Capacity And Commitment-Time Bridge. Complete Green on 2026-05-07 as local capacity bridge contract and focused-test evidence.
 104. LDI13 Today Bridge And Action Closure.
 105. LDI14 Trust Review And Dream Handling Receipts.
 106. LDI15 Living Plan Recompiler.

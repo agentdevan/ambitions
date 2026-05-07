@@ -26,6 +26,6 @@ Status: Active release-claim boundary through AOS23 Governance Kernel Registry
   physical-device proof.
 - AOS requires evidence gates before broader implementation or release claims.
 - AOS23 Governance Kernel Registry is complete as docs/Codex OS governance
-  evidence only; LDI01-LDI11 followed and are complete Green by optimized
-  global order, and LDI12 is next unless dependency review selects another
+  evidence only; LDI01-LDI12 followed and are complete Green by optimized
+  global order, and LDI13 is next unless dependency review selects another
   eligible batch.

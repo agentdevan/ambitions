@@ -2,15 +2,15 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: LDI11 Path Portfolio Runtime
+Current batch: LDI12 Capacity And Commitment-Time Bridge
 complete / Green.
-Next eligible batch: LDI12 Capacity And Commitment-Time Bridge.
-Scope: LDI11 added the local value-model Path Portfolio Runtime contract and
-focused domain tests for primary, conservative, aggressive, exploration,
-fallback, and North Star path candidates; LDI10 intake prerequisite checks;
-source-claim graph readiness; North Star no-guarantee linkage; required
-conservative/fallback path coverage; user review; unsafe-lane blocking; no plan
-activation; no commitment mutation; no user-data server; and value-model-only
+Next eligible batch: LDI13 Today Bridge And Action Closure.
+Scope: LDI12 added the local value-model Capacity And Commitment-Time Bridge
+contract and focused domain tests that compose LDI11 Path Portfolio Runtime with
+AOS10 Commitment Time Kernel projections. It checks real capacity fit, blocks
+over-capacity fantasy schedules, source/stale/protected/private projection
+risks, missing recovery buffers, silent reschedule risk, platform-calendar
+implementation, activation, hidden mutation, user-data server use, and non-value
 runtime boundaries. It adds no UI integration, route/raw-value change,
 persistence/schema, sync/cloud, hosted AI, user-data server, professional
 advice, official source/path verification, release/platform claim, legal/privacy
@@ -23,8 +23,8 @@ The overlay package is complete after checks pass. Workflow removal is complete:
 `.github/workflows` is absent and hosted workflows are intentionally not valid
 current proof. DPTG00 is locked as the future terminal physical-device
 release-candidate proof gate. All pre-device gates must close before device
-proof begins. AOS23 and LDI01-LDI11 have since closed Green; LDI11 is closed
-and LDI12 is next unless repo evidence shows later progress.
+proof begins. AOS23 and LDI01-LDI12 have since closed Green; LDI13 is next
+unless repo evidence shows later progress.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
 entitlement, dependency, generated-project, or hosted-CI proof claim.
@@ -1003,7 +1003,7 @@ Batch type: docs/Codex OS/global-train integration only.
   Runtime contract; LDI09 has since closed Green as a local Eligibility And
   Deadline Runtime contract; LDI10 has since closed Green as a local Starting
   Position And Privacy Intake contract; LDI11 has since closed Green as a local
-  Path Portfolio Runtime contract; and LDI12 is next.
+  Path Portfolio Runtime contract; and LDI13 is next.
 - Queued PD01-PD18 and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,
