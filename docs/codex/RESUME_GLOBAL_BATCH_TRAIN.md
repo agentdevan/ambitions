@@ -24,8 +24,9 @@ Before doing any work, read:
 8. `docs/codex/CONTEXT_INDEX.md`
 9. `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
 10. `docs/codex/GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`
-11. target batch prompt and target train manifest
-12. target canon/source files named by that batch
+11. `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` when the live full-stack tail has cleared or a blocking hygiene Red explicitly selects RHC
+12. target batch prompt and target train manifest
+13. target canon/source files named by that batch
 
 If these files disagree, use the active source hierarchy and repair stale dependent artifacts only where the newest proven repo evidence is clear. Do not silently choose between contradictory source-truth files.
 
@@ -56,6 +57,7 @@ test ! -d .github/workflows
 git diff --check
 scripts/run-doc-qa.sh || true
 scripts/batch-train-gate-check.sh || true
+scripts/global-train-next-batch.sh || true
 rg -n "FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY|DPTG00|Physical Device Terminal Gate|terminal-only" docs .codex README.md || true
 rg -n "\.github/workflows|GitHub Actions|hosted CI|Actions artifact|ios-validate\.yml" README.md docs .codex || true
 ```
@@ -84,6 +86,22 @@ Current proven repo evidence before this alias selected:
   repo evidence selects a later batch.
 
 Continue to LDI05 unless a Hard Red or unrecoverable Red is found.
+
+## Queued Repo Hygiene Closeout
+
+RHC01-RHC06 Repo Hygiene Closeout is queued but must not interrupt LDI05 or any unfinished LDI/AOS/FCP/PFC batch. Codex may select RHC only after the active full-stack tail clears, in this order: LDI05-LDI22, AOS24-AOS30, FCP27-FCP30, PFC31-PFC40, then RHC01-RHC06. RHC may run earlier only when a Hard Red proves repo hygiene blocks the active batch and the repair is limited to the blocking owner files.
+
+RHC source truth:
+
+- `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
+- `docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md`
+- `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+- `docs/codex/batches/RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt.md`
+- `docs/codex/batches/RHC04_Stale_Copy_Docs_And_Generated_Artifact_Hygiene_Prompt.md`
+- `docs/codex/batches/RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt.md`
+- `docs/codex/batches/RHC06_Repo_Hygiene_Closeout_And_Handoff_Prompt.md`
+
+RHC must preserve local/Codex-operated validation, avoid hosted workflows, avoid release/platform/legal/privacy/device/public-accessibility claims, and never delete or rename route/raw-value/persistence/external-surface compatibility seams without owner proof and focused tests.
 
 ## Continuation Policy
 
