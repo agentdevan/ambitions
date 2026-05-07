@@ -39,7 +39,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   governance evidence. LDI02 followed and is now complete Green as a local
   Capture Handling Ladder contract. LDI03 followed and is now complete Green as
   a local safety triage contract. LDI04 followed and is now complete Green as a
-  local North Star Extraction contract. LDI05 follows unless repo evidence or dependency review
+  local North Star Extraction contract. LDI05 followed and is now complete
+  Green as a local Source Claim Graph contract. LDI06 follows unless repo evidence or dependency review
   selects another eligible batch.
 
 ## Full-Stack Optimized Order
@@ -1035,7 +1036,14 @@ remaining sensitive intelligence work.
     changing UI, route/raw values, persistence/schema, sync/cloud, hosted AI,
     release/device proof, legal/privacy compliance proof, public accessibility
     proof, or full LDI runtime behavior.
-96. LDI05 Source Claim Graph.
+96. LDI05 Source Claim Graph. Completed Green on 2026-05-07 as a local
+    value-model Source Claim Graph contract and focused-test proof. It models
+    atomic claim IDs, source refs, jurisdiction, authority, freshness policy,
+    conflict/supersession state, professional-boundary flags, and quality
+    state without claiming official requirement verification, UI integration,
+    route/raw values, persistence/schema, sync/cloud, hosted AI, user-data
+    server, release/device proof, legal/privacy compliance proof, public
+    accessibility proof, or full LDI runtime behavior.
 97. LDI06 Pack Registry And Pack Compiler.
 98. LDI07 Pack Supply Chain Security.
 99. LDI08 Requirement Graph Runtime.

@@ -43,7 +43,9 @@ complete / Green as a local value-model contract with focused tests. LDI03
 Dream Safety Legality Feasibility Triage is complete / Green as a local safety
 triage contract, 45-family red-team fixture manifest, and focused tests. LDI04
 North Star Extraction is complete / Green as a local value-model contract with
-focused tests. LDI05 Source Claim Graph is the next eligible global batch
+focused tests. LDI05 Source Claim Graph is complete / Green as a local
+value-model contract with focused tests. LDI06 Pack Registry And Pack Compiler
+is the next eligible global batch
 unless a later repo-truth update proves newer progress.
 
 Required first-pass checks:
@@ -82,10 +84,11 @@ Current proven repo evidence before this alias selected:
 - LDI02 Capture Handling Ladder complete / Green.
 - LDI03 Dream Safety Legality Feasibility Triage complete / Green.
 - LDI04 North Star Extraction complete / Green.
-- LDI05 Source Claim Graph is the next eligible global batch unless newer
+- LDI05 Source Claim Graph complete / Green.
+- LDI06 Pack Registry And Pack Compiler is the next eligible global batch unless newer
   repo evidence selects a later batch.
 
-Continue to LDI05 unless a Hard Red or unrecoverable Red is found.
+Continue to LDI06 unless a Hard Red or unrecoverable Red is found.
 
 ## Queued Repo Hygiene Closeout
 
@@ -176,12 +179,12 @@ For each batch:
 
 ## Required Final Response Shape
 
-Latest train checkpoint: LDI04 North Star Extraction is complete Green as a
-local value-model contract and focused tests. It does not implement UI
-integration, route/raw-value changes, persistence/schema, sync/cloud, hosted
-AI, user-data server, professional-advice behavior, crisis-service behavior,
+Latest train checkpoint: LDI05 Source Claim Graph is complete Green as a local
+value-model contract and focused tests. It does not implement UI integration,
+route/raw-value changes, persistence/schema, sync/cloud, hosted AI, user-data
+server, professional-advice behavior, official requirement verification,
 release/device proof, legal/privacy compliance proof, public accessibility
-proof, or full LDI runtime behavior. LDI05 is next unless repo evidence shows
+proof, or full LDI runtime behavior. LDI06 is next unless repo evidence shows
 later progress.
 
 At each visible checkpoint, report:

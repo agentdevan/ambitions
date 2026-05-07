@@ -2,19 +2,19 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: LDI04 North Star Extraction
+Current batch: LDI05 Source Claim Graph
 complete / Green.
-Next eligible batch: LDI05 Source Claim Graph.
-Scope: LDI04 added the local value-model North Star Extraction contract and
-focused domain tests for fantasy/impossible, symbolic, unsafe-literal,
-impossible-timeline, source-review, privacy-review, literal-guarantee,
-professional-boundary, user-review, and local-first runtime boundaries. It
-turns impossible or unsafe-literal dreams into reviewed meaning and safe
-alternative seeds without validating literal harm. It adds no UI integration,
-route/raw-value change, persistence/schema, sync/cloud, hosted AI, user-data
-server, professional advice, crisis service behavior, release/platform claim,
-legal/privacy compliance, physical-device proof, public accessibility proof,
-signing, entitlement, dependency, generated-project, or hosted workflow claim.
+Next eligible batch: LDI06 Pack Registry And Pack Compiler.
+Scope: LDI05 added the local value-model Source Claim Graph contract and
+focused domain tests for atomic claim IDs, claim types, source references,
+jurisdiction, authority level, freshness policy, conflict/supersession state,
+professional-boundary flags, review gates, official-source overclaim blocking,
+high-risk stale-claim blocking, and local-first runtime boundaries. It adds no
+UI integration, route/raw-value change, persistence/schema, sync/cloud, hosted
+AI, user-data server, professional advice, official source certification,
+release/platform claim, legal/privacy compliance, physical-device proof, public
+accessibility proof, signing, entitlement, dependency, generated-project, or
+hosted workflow claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -22,7 +22,7 @@ The overlay package is complete after checks pass. Workflow removal is complete:
 `.github/workflows` is absent and hosted workflows are intentionally not valid
 current proof. DPTG00 is locked as the future terminal physical-device
 release-candidate proof gate. All pre-device gates must close before device
-proof begins. AOS23 and LDI01-LDI04 have since closed Green; LDI05 remains
+proof begins. AOS23 and LDI01-LDI05 have since closed Green; LDI06 remains
 next unless repo evidence shows later progress.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
@@ -148,8 +148,8 @@ evidence. AOS21 is complete / Green as Interoperability Kernel App Intents
 EventKit Planning evidence. AOS22 is complete / Green as Longevity Kernel
 Archive Aging evidence. AOS23 is complete / Green as Governance Kernel Registry
 evidence. LDI01 is complete / Green as Living Dream Architecture source-truth
-governance evidence after explicit user-directed early insertion. LDI02-LDI04
-have since closed Green, and LDI05 is the next eligible global batch
+governance evidence after explicit user-directed early insertion. LDI02-LDI05
+have since closed Green, and LDI06 is the next eligible global batch
 unless dependency review selects another eligible batch.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
@@ -995,7 +995,8 @@ Batch type: docs/Codex OS/global-train integration only.
   after AOS23; LDI02 has since closed Green as a local Capture Handling Ladder
   value-model contract; LDI03 has since closed Green as a local safety triage
   contract; LDI04 has since closed Green as a local North Star Extraction
-  contract, and LDI05 is next.
+  contract; LDI05 has since closed Green as a local Source Claim Graph
+  contract; and LDI06 is next.
 - Queued PD01-PD18 and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,
