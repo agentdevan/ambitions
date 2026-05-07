@@ -485,8 +485,22 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   notification behavior, schedule mutation runtime, Life Graph mutation,
   persistence/schema, external projection, sync/account/backend, hosted AI,
   external-surface, release, legal/current-requirement, or public accessibility
-  claim. The next eligible global batch is AOS14 Recommendation Start Here
-  Kernel.
+  claim. AOS14 followed and is now complete.
+- AOS14 is complete Green as additive Recommendation Start Here Kernel
+  evidence. It adds
+  `Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift` and
+  focused domain tests with typed recommendation kinds, qualitative fit states,
+  source labels, AOS13 source-claim inheritance, AOS12 proof-trust receipt
+  inheritance, AOS04 control-plane classification inheritance, plain-language
+  explanation, assumptions, alternatives, user controls, source/freshness/
+  proof/control gates, confidence-score blocking, generic-priority-only
+  blocking, guarantee and harmful-language blocking, hidden-mutation blocking,
+  privacy-risk blocking, runtime-boundary checks, and no Today UI, Goal Detail
+  UI, recommendation runtime, ranking engine, model runtime, Start Here
+  rendering, Life Graph mutation, path/plan mutation, persistence/schema,
+  external projection, sync/account/backend, hosted AI, external-surface,
+  release, legal/current-requirement, or public accessibility claim. The next
+  eligible global batch is AOS15 Local Language Kernel Planning.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

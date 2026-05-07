@@ -885,7 +885,16 @@ remaining sensitive intelligence work.
     persistence/schema, external projection, sync/account/backend service,
     hosted AI, release/platform, legal/current-requirement, or public
     accessibility claims.
-82. AOS14 Recommendation Start Here Kernel.
+82. AOS14 Recommendation Start Here Kernel. Completed Green on 2026-05-06 as
+    additive Recommendation Kernel Start Here domain-contract evidence with
+    typed recommendation kinds, qualitative fit states, source labels,
+    source/proof/control-plane inheritance, explanation, alternatives, user
+    controls, source/freshness/proof/control gates, confidence-score and
+    generic-priority blocking, guarantee/harmful-language blocking,
+    hidden-mutation/privacy/runtime-boundary checks, and focused tests. It
+    does not add recommendation runtime, ranking engine, Start Here rendering,
+    Life Graph mutation, path/plan mutation, persistence/schema, external
+    projection, hosted AI, or release/platform claims.
 83. AOS15 Local Language Kernel Planning.
 84. AOS16 Performance Energy Kernel.
 85. AOS17 Privacy Safety Kernel.

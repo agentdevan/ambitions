@@ -488,3 +488,42 @@ Does not prove:
 - external projection
 - platform behavior
 - release/platform readiness
+
+## AOS14
+
+Batch: AOS14 Recommendation Start Here Kernel.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Recommendation Kernel Start Here recommendation kinds
+- source labels and AOS13 source-claim inheritance
+- AOS12 proof-trust receipt inheritance
+- AOS04 control-plane classification inheritance
+- qualitative fit states and plain-language explanation contract
+- assumptions, alternatives, and user-control actions
+- source, freshness, proof, control-plane, explanation, and user-control gates
+- confidence-score, generic-priority-only, guarantee, harmful-language,
+  hidden-mutation, privacy-risk, and runtime-store blocking
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSRecommendationStartHereModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS14 report
+
+Does not prove:
+
+- Today UI integration
+- Goal Detail UI integration
+- recommendation runtime
+- ranking engine
+- model runtime
+- Start Here rendering
+- Life Graph mutation
+- path or plan mutation
+- persistence or schema
+- external projection
+- platform behavior
+- release/platform readiness
