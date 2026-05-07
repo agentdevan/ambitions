@@ -2,13 +2,14 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS07 Local Goal Packs Requirement Slots complete / Green.
-Next eligible batch: AOS08 Alternate Path Kernel Path Portfolio.
-Scope: AOS07 added additive Local Goal Pack domain-contract proof for Source
-Atlas-anchored pack manifests, quality states, requirement slot definitions,
-starter seeds, no-sprawl gates, generated/reviewed boundaries, AOS06 compiler
-slot projection, executable-logic blocking, and runtime-boundary checks. It adds
-no Goals/Goal Detail UI, local pack runtime loader, goal activation runtime,
+Current batch: AOS08 Alternate Path Kernel Path Portfolio complete / Green.
+Next eligible batch: AOS09 Option Value North Star.
+Scope: AOS08 added additive Alternate Path Kernel domain-contract proof
+for path portfolios, path candidates, path-change receipts, review-state
+projection, proof-transfer overlap, source/professional review gates,
+non-shaming language, guaranteed-outcome blocking, privacy projection
+protection, hidden-mutation blocking, and runtime-boundary checks. It adds no
+Goal Detail UI, alternate-path runtime, recommendation runtime, path mutation,
 Life Graph mutation, source certification, official requirement database,
 persistence/schema, external projection, sync/account/backend service, hosted
 AI, release/platform, legal/current-requirement, or public accessibility
@@ -120,7 +121,8 @@ Closure Receipts evidence. AOS13 is complete / Green as Source Truth Claim
 State Machine evidence. AOS10 is complete / Green as Commitment Time Kernel
 evidence. AOS05 is complete / Green as Starting Position Kernel evidence.
 AOS06 is complete / Green as Goal Path Kernel Goal Compiler evidence. AOS07 is
-complete / Green as Local Goal Packs Requirement Slots evidence. AOS08 is the
+complete / Green as Local Goal Packs Requirement Slots evidence. AOS08 is
+complete / Green as Alternate Path Kernel Path Portfolio evidence. AOS09 is the
 next eligible global batch before other AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected

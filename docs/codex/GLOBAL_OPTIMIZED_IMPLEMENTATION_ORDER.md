@@ -47,8 +47,10 @@ As of this order update:
 - AOS06 is complete Green as additive Goal Path Kernel Goal Compiler evidence;
   AOS07 followed and is now complete.
 - AOS07 is complete Green as additive Local Goal Packs Requirement Slots
-  evidence; AOS08 is next by global order.
-- AOS08-AOS30 remain queued.
+  evidence; AOS08 followed and is now complete.
+- AOS08 is complete Green as additive Alternate Path Kernel Path Portfolio
+  evidence; AOS09 is next by global order.
+- AOS09-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 
@@ -131,8 +133,9 @@ Plane Work Classifier. AOS12 is complete / Green as Proof Trust Closure
 Receipts. AOS13 is complete / Green as Source Truth Claim State Machine. AOS10
 is complete / Green as Commitment Time Kernel. AOS05 is complete / Green as
 Starting Position Kernel. AOS06 is complete / Green as Goal Path Kernel Goal
-Compiler. AOS07 is complete / Green as Local Goal Packs Requirement Slots;
-AOS08 is the next eligible
+Compiler. AOS07 is complete / Green as Local Goal Packs Requirement Slots.
+AOS08 is complete / Green as Alternate Path Kernel Path Portfolio; AOS09 is
+the next eligible
 remaining batch under the stricter HPS-before-AOS overlay.
 PFC12 is complete / Green as app-group/shared-storage boundary evidence. It
 documented the existing app/widget/share extension entitlement match,
@@ -203,8 +206,8 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 040 | AOS10 Commitment Time Kernel | AOS | Kernel | Completed Green on 2026-05-06 with typed commitments, capacity windows, capacity-fit projection, source/freshness/review gates, protected-time violation detection, silent-reschedule blocking, sensitive external projection protection, runtime-boundary checks, and focused tests. | AOS02-AOS04. | Complete; AOS05 followed and is now complete. |
 | 041 | AOS05 Starting Position Kernel | AOS | Kernel | Completed Green on 2026-05-06 with typed baseline snapshots, starting advantages, constraints, unknowns, ask-only-needed intake questions, dignity language, path-fit projection, source/freshness/review gates, privacy projection protection, eligibility-certification blocking, runtime-boundary checks, and focused tests. | AOS02-AOS04. | Complete; AOS06 followed and is now complete. |
 | 042 | AOS06 Goal Path Kernel Goal Compiler | AOS | Kernel | Completed Green on 2026-05-06 with typed compiled goal candidates, goal classes, stage contracts, requirement slots, activation review, source-needed fallback, proof-needed gates, professional-boundary review, privacy projection protection, official-requirement overclaim blocking, auto-activation blocking, runtime-boundary checks, and focused tests. | AOS05. | Complete; AOS07 followed and is now complete. |
-| 043 | AOS07 Local Goal Packs Requirement Slots | AOS | Kernel | Completed Green on 2026-05-06 with Source Atlas-anchored pack manifests, quality states, requirement slot definitions, starter seeds, no-sprawl gates, source-free official requirement blocking, generated/reviewed boundaries, AOS06 compiler-slot projection, executable-logic blocking, runtime-boundary checks, and focused tests. | AOS06. | Complete; next AOS08. |
-| 044 | AOS08 Alternate Path Kernel Path Portfolio | AOS | Kernel | Alternate path runtime follows goal path slots. | AOS05-AOS07. | Single-batch. |
+| 043 | AOS07 Local Goal Packs Requirement Slots | AOS | Kernel | Completed Green on 2026-05-06 with Source Atlas-anchored pack manifests, quality states, requirement slot definitions, starter seeds, no-sprawl gates, source-free official requirement blocking, generated/reviewed boundaries, AOS06 compiler-slot projection, executable-logic blocking, runtime-boundary checks, and focused tests. | AOS06. | Complete; AOS08 followed and is now complete. |
+| 044 | AOS08 Alternate Path Kernel Path Portfolio | AOS | Kernel | Completed Green on 2026-05-06 with typed path portfolios, path candidates, path-change receipts, review-state projection, active/alternate coverage, proof-transfer overlap gates, source/professional review gates, non-shaming language, guaranteed-outcome blocking, sensitive external projection protection, hidden-mutation blocking, runtime-boundary checks, and focused tests. | AOS05-AOS07. | Complete; next AOS09. |
 | 045 | AOS09 Option Value North Star | AOS | Kernel | North Star/option value follows alternate paths. | AOS08. | Single-batch. |
 | 046 | AOS11 Reality Drift Bounded Reflow | AOS | Kernel | Reflow runtime follows commitment time and proof/receipt contracts. | AOS10/AOS12. | Single-batch. |
 | 047 | AOS14 Recommendation Start Here Kernel | AOS | Kernel | Start Here recommendation follows source/proof/control contracts and flagship UI. | AOS04/AOS12/AOS13; FCP05. | Single-batch. |

@@ -448,8 +448,19 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   activation runtime, Life Graph mutation, source certification, official
   requirement database, persistence/schema, external projection, sync/account/
   backend, hosted AI, external-surface, release, legal/current-requirement, or
-  public accessibility claim. The next eligible global batch is AOS08
-  Alternate Path Kernel Path Portfolio.
+  public accessibility claim. AOS08 followed and is now complete.
+- AOS08 is complete Green as additive Alternate Path Kernel Path Portfolio
+  evidence. It adds `Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift`
+  and focused domain tests with typed path portfolios, path candidates,
+  path-change receipts, review-state projection, active/alternate coverage,
+  proof-transfer overlap gates, source/professional review gates, non-shaming
+  language, guaranteed-outcome blocking, sensitive external projection
+  protection, hidden-mutation blocking, runtime-boundary checks, and no Goal
+  Detail UI, alternate-path runtime, recommendation runtime, path mutation,
+  Life Graph mutation, source certification, official requirement database,
+  persistence/schema, external projection, sync/account/backend, hosted AI,
+  external-surface, release, legal/current-requirement, or public accessibility
+  claim. The next eligible global batch is AOS09 Option Value North Star.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

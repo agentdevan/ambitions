@@ -257,6 +257,46 @@ Does not prove:
 - platform behavior
 - release/platform readiness
 
+## AOS08
+
+Batch: AOS08 Alternate Path Kernel Path Portfolio.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Alternate Path Kernel path portfolio
+- active and alternate path coverage
+- path candidate states and review projection
+- proof transfer overlap gates
+- source-check and professional-boundary review gates
+- non-shaming path language
+- guaranteed-outcome blocking
+- path-change receipt requirement
+- hidden mutation and runtime-store blocking
+- sensitive external projection protection
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSAlternatePathModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS08 report
+
+Does not prove:
+
+- Goal Detail UI integration
+- alternate-path runtime
+- recommendation runtime
+- path activation or switching runtime
+- Life Graph mutation
+- proof transfer runtime
+- requirement transfer runtime
+- source certification
+- official requirement database behavior
+- external projection
+- platform behavior
+- release/platform readiness
+
 ## AOS10
 
 Batch: AOS10 Commitment Time Kernel.

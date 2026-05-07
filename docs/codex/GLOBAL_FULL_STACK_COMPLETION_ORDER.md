@@ -848,7 +848,18 @@ remaining sensitive intelligence work.
     official requirement database, persistence/schema, external projection,
     sync/account/backend service, hosted AI, release/platform,
     legal/current-requirement, or public accessibility claims.
-79. AOS08 Alternate Path Kernel Path Portfolio.
+79. AOS08 Alternate Path Kernel Path Portfolio. Completed Green on 2026-05-06
+    as additive Alternate Path Kernel path-portfolio evidence. It adds typed
+    path portfolios, path candidates, path-change receipts, review-state
+    projection, active/alternate coverage, proof-transfer overlap gates,
+    source/professional review gates, non-shaming language,
+    guaranteed-outcome blocking, sensitive external projection protection,
+    hidden-mutation blocking, runtime-boundary checks, and focused tests. It
+    does not add Goal Detail UI, alternate-path runtime, recommendation runtime,
+    path mutation, Life Graph mutation, source certification, official
+    requirement database, persistence/schema, external projection,
+    sync/account/backend service, hosted AI, release/platform,
+    legal/current-requirement, or public accessibility claims.
 80. AOS09 Option Value North Star.
 81. AOS11 Reality Drift Bounded Reflow.
 82. AOS14 Recommendation Start Here Kernel.
