@@ -16,7 +16,8 @@ contract, expanded local fixture, and focused-test evidence. LDI08 is Green as
 local Requirement Graph Runtime contract and focused-test evidence. LDI09 is
 Green as local Eligibility And Deadline Runtime contract and focused-test
 evidence. LDI10 is Green as local Starting Position And Privacy Intake contract
-and focused-test evidence. LDI11-LDI22 remain queued serial
+and focused-test evidence. LDI11 is Green as local Path Portfolio Runtime
+contract and focused-test evidence. LDI12-LDI22 remain queued serial
 successors. This train does not claim runtime implementation. LDI remains
 blocked from runtime work until each successor batch proves its own HPS, Source
 Atlas, safety, privacy, professional-boundary, and release-claim gates.
@@ -94,7 +95,7 @@ LDI must route source-dependent behavior through:
 | LDI08 | Requirement Graph Runtime | Complete / Green after LDI07 | hard/soft requirements, blockers, dependencies, proof needed | Adds local requirement graph contracts, source-claim linkage, pack-security prerequisites, proof-needed blocking, professional review boundaries, and focused tests without UI/runtime/persistence or official requirement claims. |
 | LDI09 | Eligibility And Deadline Runtime | Complete / Green after LDI08 | age/date/window/deadline/minimum lead time logic | Adds local eligibility/deadline contracts and focused tests with requirement-graph prerequisites, source-claim readiness, stale/conflicted source blocking, jurisdiction, institution, professional-review, no-activation, no-user-data-server, and no-certification boundaries. |
 | LDI10 | Starting Position And Privacy Intake | Complete / Green after LDI09 | ask-only-needed intake, local storage boundary, sensitive controls, user source binder | Adds local intake contracts and focused tests for starting-position and eligibility prerequisites, sensitive-area privacy policy review, local-only sensitive retention, no external sensitive projection, no persistence write, no commitment mutation, and no user-data server. |
-| LDI11 | Path Portfolio Runtime | Queued after AOS30 by default and HPS/SA closeout | primary/conservative/aggressive/exploration/fallback/North Star paths | Generates path portfolio candidates without guarantees, using HPS option value, Source Atlas source states, and proof transfer. |
+| LDI11 | Path Portfolio Runtime | Complete / Green after LDI10 | primary/conservative/aggressive/exploration/fallback/North Star paths | Adds local path portfolio contracts and focused tests for intake prerequisites, source-claim graph readiness, required primary/conservative/fallback coverage, North Star linkage without guarantees, user review, unsafe-lane blocking, no activation, no hidden mutation, no user-data server, and value-model-only runtime boundaries. |
 | LDI12 | Capacity And Commitment-Time Bridge | Queued after AOS30 by default and HPS/SA closeout | capacity fit, no fantasy schedules, no silent rescheduling | Fits plans into real life and blocks fantasy schedules; stale high-risk Source Atlas claims cannot drive scheduled actions as current. |
 | LDI13 | Today Bridge And Action Closure | Queued after AOS30 by default and HPS/SA closeout | 1-3 useful next steps, proof/source/review steps, closure states | Maps living plans into Today steps and closure states with source/freshness/source-needed lines where relevant. |
 | LDI14 | Trust Review And Dream Handling Receipts | Queued after AOS30 by default and HPS/SA closeout | assumptions/source/user-confirmed/stale/unverified/change receipts | Creates receipt contracts for handling, source, mutation, refusal, safe translation, user-imported source, OCR, and pack update states. |
