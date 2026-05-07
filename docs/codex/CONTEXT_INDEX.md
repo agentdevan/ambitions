@@ -472,8 +472,21 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   proof transfer runtime, path mutation, Life Graph mutation, source
   certification, official requirement database, persistence/schema,
   external projection, sync/account/backend, hosted AI, external-surface,
-  release, legal/current-requirement, or public accessibility claim. The next
-  eligible global batch is AOS11 Reality Drift Bounded Reflow.
+  release, legal/current-requirement, or public accessibility claim. AOS11
+  followed and is now complete.
+- AOS11 is complete Green as additive Reality Drift Bounded Reflow evidence. It
+  adds `Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift` and
+  focused domain tests with typed drift signals, bounded reflow proposals,
+  no-update policy, review scopes, blast radius limits, AOS10 commitment-time
+  inheritance, AOS12 proof-trust receipt inheritance, source/freshness/review/
+  privacy gates, silent-reschedule blocking, platform-calendar blocking,
+  harmful recovery language blocking, runtime-boundary checks, and no Today UI,
+  Plan UI, reflow runtime, calendar writes, EventKit/Reminder implementation,
+  notification behavior, schedule mutation runtime, Life Graph mutation,
+  persistence/schema, external projection, sync/account/backend, hosted AI,
+  external-surface, release, legal/current-requirement, or public accessibility
+  claim. The next eligible global batch is AOS14 Recommendation Start Here
+  Kernel.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

@@ -873,7 +873,18 @@ remaining sensitive intelligence work.
     external projection, sync/account/backend service, hosted AI,
     release/platform, legal/current-requirement, or public accessibility
     claims.
-81. AOS11 Reality Drift Bounded Reflow.
+81. AOS11 Reality Drift Bounded Reflow. Completed Green on 2026-05-06 as
+    additive Reality Drift Kernel bounded-reflow evidence. It adds typed drift
+    signals, bounded reflow proposals, no-update policy, review scopes, blast
+    radius limits, AOS10 commitment-time inheritance, AOS12 proof-trust receipt
+    inheritance, source/freshness/review/privacy gates, silent-reschedule
+    blocking, platform-calendar blocking, harmful recovery language blocking,
+    runtime-boundary checks, and focused tests. It does not add Today UI, Plan
+    UI, reflow runtime, calendar writes, EventKit/Reminder implementation,
+    notification behavior, schedule mutation runtime, Life Graph mutation,
+    persistence/schema, external projection, sync/account/backend service,
+    hosted AI, release/platform, legal/current-requirement, or public
+    accessibility claims.
 82. AOS14 Recommendation Start Here Kernel.
 83. AOS15 Local Language Kernel Planning.
 84. AOS16 Performance Energy Kernel.

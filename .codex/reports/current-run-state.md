@@ -2,17 +2,16 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS09 Option Value North Star complete / Green.
-Next eligible batch: AOS11 Reality Drift Bounded Reflow.
-Scope: AOS09 added additive Option Value / North Star domain-contract proof
-for option-value entry families, transfer states, requirement overlap,
-proof/source overlap, North Star continuity, Still Counts receipt boundaries,
-source/freshness/review/privacy gates, silent-mutation blocking, harmful
-literal-plan blocking, destiny/shame language blocking, guarantee blocking,
-fake-completion blocking, and value-only runtime boundaries. It adds no Goal
-Detail UI, Plan UI, option-value runtime, North Star extraction runtime, proof
-transfer runtime, path mutation, Life Graph mutation, source certification,
-official requirement database, persistence/schema, external projection,
+Current batch: AOS11 Reality Drift Bounded Reflow complete / Green.
+Next eligible batch: AOS14 Recommendation Start Here Kernel.
+Scope: AOS11 added additive Reality Drift / Bounded Reflow domain-contract
+proof for drift levels, no-update policy, review scopes, reflow actions, blast
+radius limits, AOS10 commitment-time inheritance, AOS12 proof-trust receipt
+inheritance, source/freshness/review/privacy gates, non-shaming recovery
+language, platform-calendar blocking, silent-reschedule blocking, and
+value-only runtime boundaries. It adds no Today UI, Plan UI, reflow runtime,
+calendar write path, EventKit/Reminder integration, notification behavior, Life
+Graph mutation, path mutation, persistence/schema, external projection,
 sync/account/backend service, hosted AI, release/platform,
 legal/current-requirement, or public accessibility claim.
 
@@ -124,8 +123,9 @@ evidence. AOS05 is complete / Green as Starting Position Kernel evidence.
 AOS06 is complete / Green as Goal Path Kernel Goal Compiler evidence. AOS07 is
 complete / Green as Local Goal Packs Requirement Slots evidence. AOS08 is
 complete / Green as Alternate Path Kernel Path Portfolio evidence. AOS09 is
-complete / Green as Option Value North Star evidence. AOS11 is the next
-eligible global batch before other AOS/LDI work continues.
+complete / Green as Option Value North Star evidence. AOS11 is complete /
+Green as Reality Drift Bounded Reflow evidence. AOS14 is the next eligible
+global batch before other AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

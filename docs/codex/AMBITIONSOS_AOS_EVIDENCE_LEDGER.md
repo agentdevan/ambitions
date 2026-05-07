@@ -374,6 +374,48 @@ Does not prove:
 - platform behavior
 - release/platform readiness
 
+## AOS11
+
+Batch: AOS11 Reality Drift Bounded Reflow.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Reality Drift Kernel drift levels and signals
+- bounded reflow proposal actions and review scopes
+- no-update-is-not-failure boundary
+- week drift review and goal-deadline confirmation gates
+- blast radius bounds
+- AOS10 commitment-time validator inheritance
+- AOS12 proof-trust receipt validator inheritance
+- source, freshness, review, and privacy gates
+- silent reschedule, platform calendar, and runtime-store blocking
+- harmful recovery language blocking
+
+Commands:
+
+- `xcodegen generate`
+- first focused `xcodebuild` run, failed on test helper argument order
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSRealityDriftModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS11 report
+
+Does not prove:
+
+- Today UI integration
+- Plan UI integration
+- reflow runtime
+- calendar writes
+- EventKit or Reminders implementation
+- notification behavior
+- schedule mutation runtime
+- persistence or schema
+- Life Graph mutation
+- recommendation runtime
+- external projection
+- platform behavior
+- release/platform readiness
+
 ## AOS12
 
 Batch: AOS12 Proof Trust Closure Receipts.
