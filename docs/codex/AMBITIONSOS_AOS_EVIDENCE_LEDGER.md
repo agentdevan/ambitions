@@ -913,3 +913,50 @@ Does not prove:
 - public accessibility conformance
 - physical-device proof
 - release/platform readiness
+
+## AOS22
+
+Batch: AOS22 Longevity Kernel Archive Aging.
+Result: Green.
+Evidence date: 2026-05-07.
+
+Proof scope:
+
+- typed archive-aging plan and legacy-payload survival contracts
+- archive object kinds and archive states for Goals/You longevity review
+- source/freshness/review continuity before archive-aging use
+- proof-reference and legacy evidence survival requirements
+- redacted local projection for sensitive legacy payloads
+- user-reviewed receipts, restore path, rollback plan, migration review, and
+  conflict-review gates
+- persistence, sync, multi-device merge, hosted dependency, hidden mutation,
+  runtime-store behavior, and release/device/compliance overclaim blocking
+- value-only runtime boundary
+
+Commands:
+
+- `git status --short`
+- `git branch --show-current`
+- `git rev-parse HEAD`
+- `git log -1 --oneline`
+- `test ! -d .github/workflows`
+- `xcodegen generate`
+- `xcodebuild -quiet -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos22-rerun -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSLongevityModelsTests test CODE_SIGNING_ALLOWED=NO`
+
+Result bundle:
+
+- `output/DerivedData-aos22-rerun/Logs/Test/Test-Ambitions-2026.05.07_02-33-53--0400.xcresult`
+
+Does not prove:
+
+- archive runtime
+- restore runtime
+- persistence or schema migration
+- sync/cloud or multi-device merge runtime
+- conflict-resolution runtime
+- UI integration or rendered proof
+- Life Graph mutation
+- legal/privacy compliance
+- public accessibility conformance
+- physical-device proof
+- release/platform readiness

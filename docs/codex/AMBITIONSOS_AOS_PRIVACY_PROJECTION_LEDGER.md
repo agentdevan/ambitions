@@ -156,3 +156,39 @@ Not proven:
 - UI disclosure
 - legal/privacy compliance
 - physical-device proof
+
+## AOS22 Longevity Kernel Archive Aging
+
+Owner: Longevity Kernel.
+Status: Green value-contract proof.
+
+Projection rules now represented in code:
+
+- archive-aging plans carry privacy class, sensitive areas, projection policy,
+  and redaction summaries
+- sensitive legacy payloads require redacted local projection before archive
+  use
+- source, freshness, and review state must remain ready before source-sensitive
+  archive summaries can pass
+- proof and source references must survive archive aging and legacy payload
+  migration review
+- destructive archive actions require user-reviewed receipts, restore path, and
+  rollback plan
+- hidden mutation, runtime-store behavior, hosted dependencies, and
+  release/device/compliance overclaim language are invalid
+
+Evidence:
+
+- `Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift`
+- `Native/AmbitionsTests/Domain/AmbitionsOSLongevityModelsTests.swift`
+- `docs/audits/aos22-longevity-kernel-archive-aging-report.md`
+
+Not proven:
+
+- archive runtime
+- persistence or schema migration
+- restore runtime
+- sync/cloud or multi-device merge runtime
+- external projection runtime
+- legal/privacy compliance
+- physical-device proof

@@ -36,9 +36,9 @@ workflows are intentionally absent, and current validation is local/Codex-
 operated only. Physical-device proof is final-only, terminal-only, and blocked
 until all pre-device gates close.
 
-AOS21 Interoperability Kernel App Intents EventKit Planning is complete / Green
-as additive value-contract evidence. AOS22 Longevity Kernel Archive Aging is
-the next eligible global batch unless a later repo-truth update proves newer
+AOS22 Longevity Kernel Archive Aging is complete / Green as additive
+value-contract evidence. AOS23 Governance Kernel Registry is the next eligible
+global batch unless a later repo-truth update proves newer
 progress.
 
 Required first-pass checks:
@@ -70,10 +70,11 @@ Current proven repo evidence before this alias selected:
 - AOS19 Experience Kernel Celestial Cognitive Load complete / Green.
 - AOS20 Adaptation Kernel Local Personalization complete / Green.
 - AOS21 Interoperability Kernel App Intents EventKit Planning complete / Green.
-- AOS22 Longevity Kernel Archive Aging is the next eligible global batch unless
+- AOS22 Longevity Kernel Archive Aging complete / Green.
+- AOS23 Governance Kernel Registry is the next eligible global batch unless
   newer repo evidence selects a later batch.
 
-Continue to AOS22 unless a Hard Red or unrecoverable Red is found.
+Continue to AOS23 unless a Hard Red or unrecoverable Red is found.
 
 ## Continuation Policy
 
@@ -148,13 +149,13 @@ For each batch:
 
 ## Required Final Response Shape
 
-Latest AOS checkpoint: AOS21 Interoperability Kernel App Intents EventKit
-Planning is complete Green as additive planning-only external-surface contract
-evidence. It does not implement App Intents, EventKit, Reminders, platform
-permissions, external writes, background refresh, sync/cloud/backend, UI,
-persistence/schema, model runtime, LDI runtime, hosted CI, release/platform,
-legal/privacy, public accessibility, or physical-device proof. AOS22 Longevity
-Kernel Archive Aging is next unless repo evidence shows later progress.
+Latest AOS checkpoint: AOS22 Longevity Kernel Archive Aging is complete Green
+as additive archive-aging contract evidence. It does not implement archive
+runtime, restore runtime, persistence/schema migration, sync/cloud or
+multi-device merge runtime, conflict-resolution runtime, UI, Life Graph
+mutation, model runtime, LDI runtime, hosted CI, release/platform,
+legal/privacy, public accessibility, or physical-device proof. AOS23
+Governance Kernel Registry is next unless repo evidence shows later progress.
 
 At each visible checkpoint, report:
 

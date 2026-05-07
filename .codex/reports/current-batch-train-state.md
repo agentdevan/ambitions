@@ -2,20 +2,20 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: AOS21 Interoperability Kernel App Intents EventKit Planning
+Current batch: AOS22 Longevity Kernel Archive Aging
 complete / Green.
-Next eligible batch: AOS22 Longevity Kernel Archive Aging.
-Scope: AOS21 added additive Interoperability Kernel proof for planning-only
-external-surface contracts, source/freshness/review gates for
-calendar/reminder/external suggestions, external-redaction privacy projection,
-user-reviewed receipts, performance budgets, compatibility review, and
-release/platform language guards. It adds no App Intent implementation,
-EventKit or Reminders implementation, platform permission prompt, calendar or
-reminder write, external invocation, background refresh, route/raw-value,
-entitlement/signing/project/dependency change, UI integration, model runtime,
-LDI runtime, Life Graph mutation, persistence/schema, sync/account/backend
-service, hosted AI, release/platform, legal/privacy compliance,
-physical-device proof, or public accessibility claim.
+Next eligible batch: AOS23 Governance Kernel Registry.
+Scope: AOS22 added additive Longevity Kernel archive-aging proof for typed
+archive plans, legacy-payload survival, source/proof continuity, privacy
+redaction, user-reviewed receipts, restore and rollback gates,
+migration/conflict review, persistence/sync/merge implementation-boundary
+blocking, hosted-dependency blocking, release/device/compliance language
+guards, and runtime-boundary checks. It adds no archive runtime, restore
+runtime, persistence/schema migration, sync/cloud or multi-device merge
+runtime, conflict-resolution runtime, UI integration, model runtime, LDI
+runtime, Life Graph mutation, sync/account/backend service, hosted AI,
+release/platform, legal/privacy compliance, physical-device proof, or public
+accessibility claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -23,7 +23,7 @@ The overlay package is complete after checks pass. Workflow removal is complete:
 `.github/workflows` is absent and hosted workflows are intentionally not valid
 current proof. DPTG00 is locked as the future terminal physical-device
 release-candidate proof gate. All pre-device gates must close before device
-proof begins. AOS21 has since closed Green; AOS22 remains next unless repo
+proof begins. AOS22 has since closed Green; AOS23 remains next unless repo
 evidence shows later progress.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
@@ -146,7 +146,8 @@ evidence. AOS18 is complete / Green as Evaluation Golden Scenarios evidence.
 AOS19 is complete / Green as Experience Kernel Celestial Cognitive Load
 evidence. AOS20 is complete / Green as Adaptation Kernel Local Personalization
 evidence. AOS21 is complete / Green as Interoperability Kernel App Intents
-EventKit Planning evidence. AOS22 is the next eligible global batch before
+EventKit Planning evidence. AOS22 is complete / Green as Longevity Kernel
+Archive Aging evidence. AOS23 is the next eligible global batch before
 other AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected

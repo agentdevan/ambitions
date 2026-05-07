@@ -32,8 +32,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - No FL/FCP/PFC/FVQ production implementation has started by virtue of this document.
 - Historical IDs are not renumbered by the FIO01/PFC05A/DPTG00 overlay package.
 - AOS21 is complete Green as additive Interoperability Kernel App Intents
-  EventKit Planning evidence; AOS22 remains next unless repo evidence shows
-  later progress.
+  EventKit Planning evidence; AOS22 followed and is now complete.
+- AOS22 is complete Green as additive Longevity Kernel Archive Aging evidence;
+  AOS23 remains next unless repo evidence shows later progress.
 
 ## Full-Stack Optimized Order
 
@@ -972,7 +973,14 @@ remaining sensitive intelligence work.
     entitlement/signing/project/dependency change, UI integration,
     persistence/schema, legal/privacy compliance, physical-device proof, or
     release/platform claims.
-90. AOS22 Longevity Kernel Archive Aging.
+90. AOS22 Longevity Kernel Archive Aging. Completed Green on 2026-05-07 with
+    additive archive-aging, legacy-payload survival, source/proof continuity,
+    privacy redaction, user-review, restore/rollback, migration/conflict
+    review, implementation-boundary, hosted-dependency, and runtime-boundary
+    contracts plus focused tests. It does not add archive runtime, restore
+    runtime, persistence/schema migration, sync/cloud or multi-device merge
+    runtime, conflict-resolution runtime, UI integration, legal/privacy
+    compliance, physical-device proof, or release/platform claims.
 91. AOS23 Governance Kernel Registry.
 
 ### Phase 8 — LDI Safety / Runtime / Source Gates

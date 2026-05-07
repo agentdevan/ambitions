@@ -589,8 +589,20 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   entitlement/signing/project/dependency change, UI integration, Life Graph
   mutation, persistence/schema, sync/account/backend, hosted AI,
   legal/privacy compliance, physical-device proof, release, or public
-  accessibility claim. The next eligible global batch is AOS22 Longevity
-  Kernel Archive Aging.
+  accessibility claim. AOS22 followed and is now complete.
+- AOS22 is complete Green as additive Longevity Kernel Archive Aging evidence.
+  It adds `Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift`, focused
+  domain tests, and
+  `docs/audits/aos22-longevity-kernel-archive-aging-report.md` with
+  archive-aging, legacy-payload survival, source/proof continuity, privacy
+  redaction, user-review, restore/rollback, migration/conflict review,
+  persistence/sync/merge implementation-boundary, hosted-dependency,
+  forbidden-language, and value-only runtime-boundary checks. It adds no
+  archive runtime, restore runtime, persistence/schema migration, sync/cloud
+  or multi-device merge runtime, conflict-resolution runtime, UI integration,
+  Life Graph mutation, legal/privacy compliance, physical-device proof,
+  release, or public accessibility claim. The next eligible global batch is
+  AOS23 Governance Kernel Registry.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone
