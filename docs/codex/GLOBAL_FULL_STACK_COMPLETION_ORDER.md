@@ -895,7 +895,17 @@ remaining sensitive intelligence work.
     does not add recommendation runtime, ranking engine, Start Here rendering,
     Life Graph mutation, path/plan mutation, persistence/schema, external
     projection, hosted AI, or release/platform claims.
-83. AOS15 Local Language Kernel Planning.
+83. AOS15 Local Language Kernel Planning. Completed Green on 2026-05-06 as
+    additive Local Language Kernel planning domain-contract evidence with typed
+    local-language intents, structured fields, Capture/You owner-surface
+    boundary, adapter tier ladder planning, deterministic fallback,
+    source/freshness/review/privacy/sensitive-area gates, model-runtime and
+    blocked-tier gates, performance-budget gates, tool-approval gates, external
+    sensitive projection blocking, hidden-mutation blocking, confidence-language
+    blocking, runtime-boundary checks, and focused tests. It does not add model
+    runtime, Foundation Models adapter, classifier runtime, tool bus, extraction
+    runtime, Life Graph mutation, privacy-state mutation, persistence/schema,
+    external projection, hosted AI, or release/platform claims.
 84. AOS16 Performance Energy Kernel.
 85. AOS17 Privacy Safety Kernel.
 86. AOS18 Evaluation Golden Scenarios.

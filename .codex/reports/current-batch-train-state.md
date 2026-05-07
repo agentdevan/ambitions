@@ -2,18 +2,17 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS14 Recommendation Start Here Kernel complete / Green.
-Next eligible batch: AOS15 Local Language Kernel Planning.
-Scope: AOS14 added additive Recommendation / Start Here domain-contract proof
-for recommendation kinds, qualitative fit states, source labels, AOS13
-source-claim inheritance, AOS12 proof-trust receipt inheritance, AOS04
-control-plane classification inheritance, plain-language explanation,
-assumptions, alternatives, user controls, confidence-score blocking,
-generic-priority-only blocking, guarantee and harmful-language blocking,
-hidden-mutation blocking, privacy-risk blocking, and value-only runtime
-boundaries. It adds no Today UI, Goal Detail UI, recommendation runtime,
-ranking engine, model runtime, Start Here rendering, Life Graph mutation, path
-mutation, plan mutation, persistence/schema, external projection,
+Current batch: AOS15 Local Language Kernel Planning complete / Green.
+Next eligible batch: AOS16 Performance Energy Kernel.
+Scope: AOS15 added additive Local Language Kernel planning proof for
+deterministic-first Capture/You planning, structured fields, source boundaries,
+adapter tiers, deterministic fallback, source/freshness/review/privacy labels,
+sensitive-area labels, tool approval, performance-budget flags, confidence
+language blocking, model-runtime blocking, blocked model-tier gates,
+hidden-mutation blocking, privacy/external projection blocking, and value-only
+runtime boundaries. It adds no Capture UI, You UI, model runtime, Foundation
+Models adapter, classifier runtime, tool bus, extraction runtime, Life Graph
+mutation, privacy-state mutation, persistence/schema, external projection,
 sync/account/backend service, hosted AI, release/platform,
 legal/current-requirement, or public accessibility claim.
 
@@ -127,8 +126,9 @@ complete / Green as Local Goal Packs Requirement Slots evidence. AOS08 is
 complete / Green as Alternate Path Kernel Path Portfolio evidence. AOS09 is
 complete / Green as Option Value North Star evidence. AOS11 is complete /
 Green as Reality Drift Bounded Reflow evidence. AOS14 is complete / Green as
-Recommendation Start Here Kernel evidence. AOS15 is the next eligible global
-batch before other AOS/LDI work continues.
+Recommendation Start Here Kernel evidence. AOS15 is complete / Green as Local
+Language Kernel Planning evidence. AOS16 is the next eligible global batch
+before other AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

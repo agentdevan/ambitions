@@ -527,3 +527,45 @@ Does not prove:
 - external projection
 - platform behavior
 - release/platform readiness
+
+## AOS15
+
+Batch: AOS15 Local Language Kernel Planning.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Local Language Kernel intents and structured extraction fields
+- Capture/You owner-surface boundary
+- adapter tier ladder planning contract
+- deterministic fallback requirement
+- no model-runtime invocation boundary
+- source, freshness, review, privacy, and sensitive-area gates
+- tool approval and hidden-mutation gates
+- external sensitive projection blocking
+- model-tier performance-budget requirement
+- confidence-language, blocked-model-tier, and runtime-store blocking
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSLocalLanguageModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS15 report
+
+Does not prove:
+
+- Capture UI integration
+- You UI integration
+- model runtime
+- Foundation Models adapter
+- classifier runtime
+- tool bus
+- extraction runtime
+- source certification
+- Life Graph mutation
+- privacy-state mutation
+- persistence or schema
+- external projection
+- platform behavior
+- release/platform readiness
