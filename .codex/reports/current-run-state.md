@@ -2,18 +2,19 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: LDI02 Capture Handling Ladder
+Current batch: LDI03 Dream Safety Legality Feasibility Triage
 complete / Green.
-Next eligible batch: LDI03 Dream Safety Legality Feasibility Triage.
-Scope: LDI02 added the local value-model Capture Handling Ladder contract and
-focused domain tests for canonical handling lanes, deterministic routing,
-review-before-activation, source/freshness review, privacy-sensitive handling,
-professional-boundary scaffolds, unsafe/crisis blocking, and local-first runtime
+Next eligible batch: LDI04 North Star Extraction.
+Scope: LDI03 added the local value-model Dream Safety Legality Feasibility
+Triage contract, a 45-family red-team fixture manifest, and focused domain
+tests for unsafe/illegal/crisis/harm/coercion/dishonesty, regulated/minor/
+dangerous-domain boundary review, fantasy/impossible/timeline handling,
+privacy/source review, red-team fixture mapping, and local-first runtime
 boundaries. It adds no UI integration, route/raw-value change, persistence/
-schema, sync/cloud, hosted AI, user-data server, professional advice, release/
-platform claim, legal/privacy compliance, physical-device proof, public
-accessibility proof, signing, entitlement, dependency, generated-project, or
-hosted workflow claim.
+schema, sync/cloud, hosted AI, user-data server, professional advice, crisis
+service behavior, release/platform claim, legal/privacy compliance,
+physical-device proof, public accessibility proof, signing, entitlement,
+dependency, generated-project, or hosted workflow claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -24,8 +25,8 @@ commands, proof artifacts, and terminal gates. Physical-device proof is
 terminal-only and final-only. All feature, product-object, primitive,
 intelligence, source/freshness, accessibility, visual, performance,
 privacy/legal, platform, release, signed-RC, and claim-safety gates must close
-before device proof begins. AOS23, LDI01, and LDI02 have since closed Green;
-LDI03 remains next unless repo evidence shows later progress.
+before device proof begins. AOS23 and LDI01-LDI03 have since closed Green;
+LDI04 remains next unless repo evidence shows later progress.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -147,9 +148,9 @@ evidence. AOS21 is complete / Green as Interoperability Kernel App Intents
 EventKit Planning evidence. AOS22 is complete / Green as Longevity Kernel
 Archive Aging evidence. AOS23 is complete / Green as Governance Kernel Registry
 evidence. LDI01 is complete / Green as Living Dream Architecture source-truth
-governance evidence after explicit user-directed early insertion. LDI02 is the
-next eligible global batch unless dependency review selects another eligible
-batch.
+governance evidence after explicit user-directed early insertion. LDI02 and
+LDI03 have since closed Green, and LDI04 is the next eligible global batch
+unless dependency review selects another eligible batch.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable
@@ -979,7 +980,8 @@ Batch type: docs/Codex OS/global-train integration only.
 - PD01-PD18 have since closed through PD18 Green.
 - LDI01 is complete Green as a source-truth/governance-only early insertion
   after AOS23; LDI02 has since closed Green as a local Capture Handling Ladder
-  value-model contract, and LDI03 is next.
+  value-model contract; LDI03 has since closed Green as a local safety triage
+  contract, and LDI04 is next.
 - Queued PD01-PD18 and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,

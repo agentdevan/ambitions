@@ -77,7 +77,10 @@ As of this order update:
 - LDI01 is complete Green as docs/Codex OS Living Dream source-truth and
   governance evidence; LDI02 followed and is now complete.
 - LDI02 is complete Green as a local Capture Handling Ladder value-model
-  contract with focused tests; LDI03 follows unless dependency review selects
+  contract with focused tests; LDI03 followed and is now complete.
+- LDI03 is complete Green as a local Dream Safety Legality Feasibility Triage
+  value-model contract, 45-family red-team fixture manifest, and focused tests;
+  LDI04 follows unless dependency review selects
   another eligible batch.
 - FIO01/PFC05A are complete after this run passes checks as docs/governance/
   repo-hygiene evidence. `FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY` is active,
@@ -86,10 +89,10 @@ As of this order update:
 - DPTG00 is locked as a future terminal physical-device release-candidate proof
   gate, not an implementation batch. All pre-device gates must close before it.
 - AOS24-AOS30 remain queued.
-- LDI03-LDI22 remain queued and are inserted by dependency, not train silo.
+- LDI04-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 - No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay
-  package. LDI03 is next unless repo evidence shows later progress.
+  package. LDI04 is next unless repo evidence shows later progress.
 
 ## Selection Rule
 
@@ -261,9 +264,9 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 055 | AOS22 Longevity Kernel Archive Aging | AOS | Kernel | Completed Green on 2026-05-07 with archive-aging, legacy-payload survival, source/proof continuity, privacy redaction, user-review, restore/rollback, migration/conflict review, implementation-boundary, hosted-dependency, and runtime-boundary contracts. | AOS02/AOS12/AOS13. | Complete; AOS23 followed and is now complete. |
 | 056 | AOS23 Governance Kernel Registry | AOS | Governance | Completed Green on 2026-05-07 with Governance Kernel registry, AOS01-AOS22 ownership map, train-integrity gates, local-validation-only proof, hosted-workflow absence preservation, and terminal-device gate boundaries. | AOS01-AOS22. | Complete; LDI01 followed and is complete. |
 | 057 | LDI01 Living Dream Architecture Source Truth | LDI | Docs/Contract | Completed Green on 2026-05-07 as source-truth/governance evidence after explicit user-directed early insertion following AOS23. | AOS23 or explicit dependency review. | Complete; LDI02 followed and is complete. |
-| 058 | LDI02 Capture Handling Ladder | LDI | Contract | Completed Green on 2026-05-07 with local value-model handling lane, seriousness, source/freshness/privacy/safety signal, terminal blocking, review, activation, and runtime-boundary contracts plus focused tests. | LDI01. | Complete; next LDI03. |
-| 059 | LDI03 Dream Safety Legality Feasibility Triage | LDI | Safety | Safety triage must precede path/runtime work. | LDI02. | Next eligible. |
-| 060 | LDI04 North Star Extraction | LDI | Contract | Meaning extraction follows safety. | LDI03. | Single-batch. |
+| 058 | LDI02 Capture Handling Ladder | LDI | Contract | Completed Green on 2026-05-07 with local value-model handling lane, seriousness, source/freshness/privacy/safety signal, terminal blocking, review, activation, and runtime-boundary contracts plus focused tests. | LDI01. | Complete; LDI03 followed and is complete. |
+| 059 | LDI03 Dream Safety Legality Feasibility Triage | LDI | Safety | Completed Green on 2026-05-07 with local safety triage contracts, 45-family red-team fixture manifest, unsafe/crisis/professional-boundary/privacy/source review rules, and focused tests. | LDI02. | Complete; next LDI04. |
+| 060 | LDI04 North Star Extraction | LDI | Contract | Meaning extraction follows safety. | LDI03. | Next eligible. |
 | 061 | LDI05 Source Claim Graph | LDI | Contract | Source graph gates requirements and packs. | LDI04. | Single-batch. |
 | 062 | LDI06 Pack Registry And Pack Compiler | LDI | Contract | Pack registry follows source graph. | LDI05. | Single-batch. |
 | 063 | LDI07 Pack Supply Chain Security | LDI | Security | Pack security must precede pack usage. | LDI06. | Single-batch. |

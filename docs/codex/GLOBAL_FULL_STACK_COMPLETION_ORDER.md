@@ -37,7 +37,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - AOS23 is complete Green as docs/Codex OS Governance Kernel Registry
   evidence. LDI01 followed and is now complete Green as source-truth/
   governance evidence. LDI02 followed and is now complete Green as a local
-  Capture Handling Ladder contract. LDI03 follows unless repo evidence or dependency review
+  Capture Handling Ladder contract. LDI03 followed and is now complete Green as
+  a local safety triage contract. LDI04 follows unless repo evidence or dependency review
   selects another eligible batch.
 
 ## Full-Stack Optimized Order
@@ -1014,7 +1015,17 @@ remaining sensitive intelligence work.
     persistence/schema, sync/cloud, hosted AI, user-data server,
     professional-advice behavior, release/device proof, legal/privacy
     compliance proof, public accessibility proof, or full LDI runtime behavior.
-94. LDI03 Dream Safety Legality Feasibility Triage.
+94. LDI03 Dream Safety Legality Feasibility Triage. Completed Green on
+    2026-05-07 as a local value-model safety triage contract, 45-family
+    red-team fixture manifest, and focused-test proof. It blocks unsafe,
+    crisis, harm, coercion, dishonesty, and delusion/paranoia-coded
+    operationalization; requires regulated, minor, dangerous-domain,
+    privacy, and source review where relevant; and avoids literal-plan claims
+    for fantasy, impossible, or impossible-timeline input. It does not add UI
+    integration, route/raw-value changes, persistence/schema, sync/cloud,
+    hosted AI, user-data server, professional-advice behavior, crisis-service
+    behavior, release/device proof, legal/privacy compliance proof, public
+    accessibility proof, or full LDI runtime behavior.
 95. LDI04 North Star Extraction.
 96. LDI05 Source Claim Graph.
 97. LDI06 Pack Registry And Pack Compiler.

@@ -39,7 +39,9 @@ until all pre-device gates close.
 LDI01 Living Dream Architecture Source Truth is complete / Green as docs/Codex
 OS source-truth and governance evidence. LDI02 Capture Handling Ladder is
 complete / Green as a local value-model contract with focused tests. LDI03
-Dream Safety Legality Feasibility Triage is the next eligible global batch
+Dream Safety Legality Feasibility Triage is complete / Green as a local safety
+triage contract, 45-family red-team fixture manifest, and focused tests. LDI04
+North Star Extraction is the next eligible global batch
 unless a later repo-truth update proves newer progress.
 
 Required first-pass checks:
@@ -75,10 +77,11 @@ Current proven repo evidence before this alias selected:
 - AOS23 Governance Kernel Registry complete / Green.
 - LDI01 Living Dream Architecture Source Truth complete / Green.
 - LDI02 Capture Handling Ladder complete / Green.
-- LDI03 Dream Safety Legality Feasibility Triage is the next eligible global batch unless newer
+- LDI03 Dream Safety Legality Feasibility Triage complete / Green.
+- LDI04 North Star Extraction is the next eligible global batch unless newer
   repo evidence selects a later batch.
 
-Continue to LDI03 unless a Hard Red or unrecoverable Red is found.
+Continue to LDI04 unless a Hard Red or unrecoverable Red is found.
 
 ## Continuation Policy
 
@@ -153,12 +156,13 @@ For each batch:
 
 ## Required Final Response Shape
 
-Latest train checkpoint: LDI02 Capture Handling Ladder is complete Green as a
-local value-model contract with focused tests. It does not implement UI
-integration, route/raw-value changes, persistence/schema, sync/cloud, hosted
-AI, user-data server, professional-advice behavior, release/device proof,
-legal/privacy compliance proof, public accessibility proof, or full LDI runtime
-behavior. LDI03 is next unless repo evidence shows later progress.
+Latest train checkpoint: LDI03 Dream Safety Legality Feasibility Triage is
+complete Green as a local safety triage contract, 45-family red-team fixture
+manifest, and focused tests. It does not implement UI integration,
+route/raw-value changes, persistence/schema, sync/cloud, hosted AI, user-data
+server, professional-advice behavior, crisis-service behavior, release/device
+proof, legal/privacy compliance proof, public accessibility proof, or full LDI
+runtime behavior. LDI04 is next unless repo evidence shows later progress.
 
 At each visible checkpoint, report:
 
