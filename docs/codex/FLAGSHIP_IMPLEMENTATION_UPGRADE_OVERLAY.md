@@ -1,5 +1,7 @@
 # Flagship Implementation Upgrade Overlay
 
+Overlay ID: `FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY`
+
 Status: active docs/governance overlay after merge. This file changes Ambitions execution governance only; it does not change app behavior, Swift production code, routing, persistence/schema, signing, entitlements, dependencies, AI runtime, LDI runtime, sync/cloud, StoreKit, release configuration, or hosted validation.
 
 ## Purpose
@@ -10,9 +12,11 @@ The overlay upgrades acceptance posture. It does not, by itself, prove that any 
 
 ## Terminal-Device Rule
 
-Physical-device proof is final-only. It is the terminal release-candidate proof gate, not an intermediate discovery phase, exploratory validation pass, or substitute for code/product/design/accessibility/privacy/legal/platform/release gates.
+Physical-device proof is final-only and terminal-only. It is the terminal release-candidate proof gate, not an intermediate discovery phase, exploratory validation pass, or substitute for code/product/design/accessibility/privacy/legal/platform/release gates.
 
 Device proof may begin only after all pre-device gates have closed and a release-candidate proof packet exists.
+
+If a later physical-device gate fails, the release candidate is invalidated and the train routes back to the owning repair batch. No code changes occur inside the device gate.
 
 ## Pre-Device Closure Rule
 
