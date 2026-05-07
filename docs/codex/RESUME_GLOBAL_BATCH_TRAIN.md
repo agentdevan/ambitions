@@ -36,10 +36,10 @@ workflows are intentionally absent, and current validation is local/Codex-
 operated only. Physical-device proof is final-only, terminal-only, and blocked
 until all pre-device gates close.
 
-AOS20 Adaptation Kernel Local Personalization is complete / Green as additive
-value-contract evidence. AOS21 Interoperability Kernel App Intents EventKit
-Planning is the next eligible global batch unless a later repo-truth update
-proves newer progress.
+AOS21 Interoperability Kernel App Intents EventKit Planning is complete / Green
+as additive value-contract evidence. AOS22 Longevity Kernel Archive Aging is
+the next eligible global batch unless a later repo-truth update proves newer
+progress.
 
 Required first-pass checks:
 
@@ -69,10 +69,11 @@ Current proven repo evidence before this alias selected:
 - AOS18 Evaluation Golden Scenarios complete / Green.
 - AOS19 Experience Kernel Celestial Cognitive Load complete / Green.
 - AOS20 Adaptation Kernel Local Personalization complete / Green.
-- AOS21 Interoperability Kernel App Intents EventKit Planning is the next
-  eligible global batch unless newer repo evidence selects a later batch.
+- AOS21 Interoperability Kernel App Intents EventKit Planning complete / Green.
+- AOS22 Longevity Kernel Archive Aging is the next eligible global batch unless
+  newer repo evidence selects a later batch.
 
-Continue to AOS21 unless a Hard Red or unrecoverable Red is found.
+Continue to AOS22 unless a Hard Red or unrecoverable Red is found.
 
 ## Continuation Policy
 
@@ -146,6 +147,14 @@ For each batch:
 12. Continue until complete or unrecoverable Red.
 
 ## Required Final Response Shape
+
+Latest AOS checkpoint: AOS21 Interoperability Kernel App Intents EventKit
+Planning is complete Green as additive planning-only external-surface contract
+evidence. It does not implement App Intents, EventKit, Reminders, platform
+permissions, external writes, background refresh, sync/cloud/backend, UI,
+persistence/schema, model runtime, LDI runtime, hosted CI, release/platform,
+legal/privacy, public accessibility, or physical-device proof. AOS22 Longevity
+Kernel Archive Aging is next unless repo evidence shows later progress.
 
 At each visible checkpoint, report:
 

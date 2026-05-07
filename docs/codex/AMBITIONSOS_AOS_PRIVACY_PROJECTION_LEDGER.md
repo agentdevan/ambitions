@@ -65,6 +65,39 @@ Not proven:
 - legal/privacy compliance
 - physical-device proof
 
+## AOS21 Interoperability Kernel App Intents EventKit Planning
+
+Owner: Interoperability Kernel.
+Status: Green value-contract proof.
+
+Projection rules now represented in code:
+
+- external interoperability plans require redacted projection for sensitive
+  payloads
+- source-sensitive calendar/reminder/external suggestions require ready source,
+  freshness, and review state before use
+- raw sensitive external payloads are blocked
+- user-reviewed receipts, performance budgets, and compatibility review are
+  required before the plan can pass
+- platform writes, permission prompts, external invocation, hosted dependencies,
+  hidden mutation, and runtime-store behavior are invalid
+
+Evidence:
+
+- `Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift`
+- `Native/AmbitionsTests/Domain/AmbitionsOSInteroperabilityModelsTests.swift`
+- `docs/audits/aos21-interoperability-kernel-app-intents-eventkit-planning-report.md`
+
+Not proven:
+
+- App Intent implementation
+- EventKit or Reminders implementation
+- platform permission prompt behavior
+- external writes or invocation
+- external projection runtime
+- legal/privacy compliance
+- physical-device proof
+
 ## AOS19 Experience Kernel Celestial Cognitive Load
 
 Owner: Experience Kernel.

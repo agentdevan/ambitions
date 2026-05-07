@@ -2,18 +2,20 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: AOS20 Adaptation Kernel Local Personalization complete / Green.
-Next eligible batch: AOS21 Interoperability Kernel App Intents EventKit
-Planning.
-Scope: AOS20 added additive Adaptation Kernel proof for local, user-controlled
-calibration profiles, visible assumptions, receipts, permission states,
-sensitive-adaptation review, seriousness-change receipt gates, deterministic
-fallback requirements, forbidden-language gates, hidden-mutation blocking, and
-value-only runtime boundaries. It adds no UI integration, hidden
-personalization runtime, recommendation runtime, model runtime, LDI runtime,
-Life Graph mutation, persistence/schema, sync/account/backend service, hosted
-AI, release/platform, legal/privacy compliance, physical-device proof, or
-public accessibility claim.
+Current batch: AOS21 Interoperability Kernel App Intents EventKit Planning
+complete / Green.
+Next eligible batch: AOS22 Longevity Kernel Archive Aging.
+Scope: AOS21 added additive Interoperability Kernel proof for planning-only
+external-surface contracts, source/freshness/review gates for
+calendar/reminder/external suggestions, external-redaction privacy projection,
+user-reviewed receipts, performance budgets, compatibility review, and
+release/platform language guards. It adds no App Intent implementation,
+EventKit or Reminders implementation, platform permission prompt, calendar or
+reminder write, external invocation, background refresh, route/raw-value,
+entitlement/signing/project/dependency change, UI integration, model runtime,
+LDI runtime, Life Graph mutation, persistence/schema, sync/account/backend
+service, hosted AI, release/platform, legal/privacy compliance,
+physical-device proof, or public accessibility claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -24,7 +26,7 @@ commands, proof artifacts, and terminal gates. Physical-device proof is
 terminal-only and final-only. All feature, product-object, primitive,
 intelligence, source/freshness, accessibility, visual, performance,
 privacy/legal, platform, release, signed-RC, and claim-safety gates must close
-before device proof begins. AOS20 has since closed Green; AOS21 remains next
+before device proof begins. AOS21 has since closed Green; AOS22 remains next
 unless repo evidence shows later progress. No AOS or LDI work was fabricated by
 this governance package.
 
@@ -144,8 +146,9 @@ Energy Kernel evidence. AOS17 is complete / Green as Privacy Safety Kernel
 evidence. AOS18 is complete / Green as Evaluation Golden Scenarios evidence.
 AOS19 is complete / Green as Experience Kernel Celestial Cognitive Load
 evidence. AOS20 is complete / Green as Adaptation Kernel Local Personalization
-evidence. AOS21 is the next eligible global batch before other AOS/LDI work
-continues.
+evidence. AOS21 is complete / Green as Interoperability Kernel App Intents
+EventKit Planning evidence. AOS22 is the next eligible global batch before
+other AOS/LDI work continues.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

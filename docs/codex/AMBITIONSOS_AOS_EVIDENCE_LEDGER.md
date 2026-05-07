@@ -653,6 +653,79 @@ Does not prove:
 - physical-device proof
 - release/platform readiness
 
+## AOS21
+
+Batch: AOS21 Interoperability Kernel App Intents EventKit Planning.
+Result: Green.
+Evidence date: 2026-05-07.
+
+Proof scope:
+
+- typed external-surface interoperability planning contracts
+- planning-only App Intent, Shortcut, Spotlight, EventKit, Reminder, Widget,
+  Live Activity, and Share Extension surface representation
+- source/freshness/review gates for calendar/reminder/external suggestions
+- external-redaction privacy projection gates
+- user-reviewed receipt, performance-budget, and compatibility-review gates
+- external invocation, calendar write, permission prompt, remote sync, and
+  background refresh blocking
+- raw sensitive payload, hosted dependency, hidden mutation, runtime-store, and
+  release/platform overclaim blocking
+- value-only runtime boundary
+
+Commands:
+
+- `git status --short`
+- `git branch --show-current`
+- `git rev-parse HEAD`
+- `git log -1 --oneline`
+- `test ! -d .github/workflows`
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos21 -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSInteroperabilityModelsTests test CODE_SIGNING_ALLOWED=NO`
+- `xcodebuild -quiet -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos21-rerun -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSInteroperabilityModelsTests test CODE_SIGNING_ALLOWED=NO`
+- `git diff --check`
+- `scripts/run-doc-qa.sh || true`
+- `scripts/batch-train-gate-check.sh || true`
+- `scripts/swiftui-architecture-scan.sh || true`
+- `scripts/build-local.sh || true`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos21-build -destination "platform=iOS Simulator,name=iPhone 17" build CODE_SIGNING_ALLOWED=NO`
+
+Result bundle:
+
+- `output/DerivedData-aos21-rerun/Logs/Test/Test-Ambitions-2026.05.07_01-54-18--0400.xcresult`
+
+Build note:
+
+- The first focused run exposed a test fixture source-state compile failure,
+  because the test used a non-existent `HumanProgressSourceState.unverified`
+  case.
+- The fixture was repaired to use the existing `.sourceNeeded` vocabulary.
+- The focused proof passed in fresh repo-local DerivedData at
+  `output/DerivedData-aos21-rerun`.
+- `scripts/run-doc-qa.sh || true`, `scripts/batch-train-gate-check.sh ||
+  true`, and `scripts/swiftui-architecture-scan.sh || true` completed with
+  existing advisory backlogs only.
+- `scripts/build-local.sh || true` hit the known malformed shared Xcode
+  DerivedData build database; the dedicated repo-local build passed at
+  `output/DerivedData-aos21-build`.
+
+Does not prove:
+
+- App Intent implementation
+- EventKit or Reminders implementation
+- Shortcut, Spotlight, Widget, Live Activity, or Share Extension implementation
+- platform permission prompt behavior
+- calendar/reminder writes or external invocation
+- background refresh or sync/cloud/backend
+- UI integration or rendered proof
+- route/raw-value, entitlement/signing/project/dependency, persistence, or
+  schema changes
+- hosted AI or hosted CI proof
+- legal/privacy compliance
+- public accessibility conformance
+- physical-device proof
+- release/platform readiness
+
 ## AOS20
 
 Batch: AOS20 Adaptation Kernel Local Personalization.

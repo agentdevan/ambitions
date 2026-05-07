@@ -573,8 +573,24 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   checks, and no UI integration, hidden personalization runtime,
   recommendation runtime, Life Graph mutation, persistence/schema,
   sync/account/backend, hosted AI, legal/privacy compliance, physical-device
-  proof, release, or public accessibility claim. The next eligible global
-  batch is AOS21 Interoperability Kernel App Intents EventKit Planning.
+  proof, release, or public accessibility claim. AOS21 followed and is now
+  complete.
+- AOS21 is complete Green as additive Interoperability Kernel App Intents
+  EventKit Planning evidence. It adds
+  `Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift`, focused
+  domain tests, and
+  `docs/audits/aos21-interoperability-kernel-app-intents-eventkit-planning-report.md`
+  with planning-only external-surface contracts, source/freshness/review gates,
+  external-redaction privacy projection, user-reviewed receipts, performance
+  budgets, compatibility review, platform-write/permission/external-invocation
+  blocking, hosted-dependency blocking, release/platform language guards, and
+  value-only runtime-boundary checks. It adds no App Intent implementation,
+  EventKit/Reminder write, platform permission prompt, route/raw-value,
+  entitlement/signing/project/dependency change, UI integration, Life Graph
+  mutation, persistence/schema, sync/account/backend, hosted AI,
+  legal/privacy compliance, physical-device proof, release, or public
+  accessibility claim. The next eligible global batch is AOS22 Longevity
+  Kernel Archive Aging.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

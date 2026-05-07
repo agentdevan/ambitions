@@ -31,8 +31,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - AOS and LDI remain queued.
 - No FL/FCP/PFC/FVQ production implementation has started by virtue of this document.
 - Historical IDs are not renumbered by the FIO01/PFC05A/DPTG00 overlay package.
-- AOS20 is complete Green as additive Adaptation Kernel Local Personalization
-  evidence; AOS21 remains next unless repo evidence shows later progress.
+- AOS21 is complete Green as additive Interoperability Kernel App Intents
+  EventKit Planning evidence; AOS22 remains next unless repo evidence shows
+  later progress.
 
 ## Full-Stack Optimized Order
 
@@ -960,7 +961,17 @@ remaining sensitive intelligence work.
     model/runtime AI, LDI runtime, persistence/schema, sync/account/backend,
     legal/privacy compliance, physical-device proof, or release/platform
     claims.
-89. AOS21 Interoperability Kernel App Intents EventKit Planning.
+89. AOS21 Interoperability Kernel App Intents EventKit Planning. Completed
+    Green on 2026-05-07 with additive planning-only external-surface
+    contracts, source/freshness/review gates, external-redaction privacy
+    projection, user-reviewed receipts, performance/compatibility gates,
+    platform-write/permission/external-invocation blocking, hosted-dependency
+    blocking, and runtime-boundary contracts plus focused tests. It does not
+    add App Intent implementation, EventKit/Reminder implementation, platform
+    permission prompt, calendar/reminder write, route/raw-value,
+    entitlement/signing/project/dependency change, UI integration,
+    persistence/schema, legal/privacy compliance, physical-device proof, or
+    release/platform claims.
 90. AOS22 Longevity Kernel Archive Aging.
 91. AOS23 Governance Kernel Registry.
 
