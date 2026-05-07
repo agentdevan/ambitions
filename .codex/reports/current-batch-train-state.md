@@ -2,18 +2,30 @@
 
 Date: 2026-05-06
 Active train: Global full-stack execution
-Current batch: AOS16 Performance Energy Kernel complete / Green.
-Next eligible batch: AOS17 Privacy Safety Kernel.
-Scope: AOS16 added additive Performance Energy Kernel proof for typed workload
-kinds, bounded budget envelopes, scheduler modes, low-power/thermal/old-device
-fallback states, measurement plans, Source Atlas traversal budget inheritance,
-Local Language budget inheritance, release-claim evidence gates, privacy
-projection blocking, hidden-mutation blocking, and value-only runtime
-boundaries. It adds no runtime scheduler, background task, telemetry,
-analytics, cache behavior, Instruments automation, physical-device measurement,
-battery-safety proof, Life Graph mutation, persistence/schema, external
-projection runtime, sync/account/backend service, hosted AI, release/platform,
-legal/current-requirement, or public accessibility claim.
+Current batch: AOS17 Privacy Safety Kernel complete / Green.
+Next eligible batch: AOS18 Evaluation Golden Scenarios.
+Scope: AOS17 added additive Privacy Safety Kernel proof for typed sensitive
+areas, permission states, projection policies, privacy receipts, redaction
+summary requirements, source/review/freshness privacy gates,
+inferred-memory-as-fact blocking, delete-pending projection blocking,
+tool-approval and deterministic-fallback gates, hidden-mutation blocking, and
+value-only runtime boundaries. It adds no memory permission runtime, durable
+memory store, source ingestion, external projection runtime, model runtime,
+tool bus, UI integration, Life Graph mutation, persistence/schema,
+sync/account/backend service, hosted AI, release/platform, legal/privacy
+compliance, physical-device proof, or public accessibility claim.
+
+## FIO01 / PFC05A / DPTG00 Governance Overlay Package
+
+The overlay package is complete after checks pass. Workflow removal is complete:
+`.github/workflows` is absent and hosted workflows are intentionally not valid
+current proof. DPTG00 is locked as the future terminal physical-device
+release-candidate proof gate. All pre-device gates must close before device
+proof begins. AOS17 has since closed Green; AOS18 remains next unless repo
+evidence shows later progress.
+This package makes no app behavior, release, device, AI runtime, LDI runtime,
+sync/cloud, public accessibility, legal/privacy, production Swift, signing,
+entitlement, dependency, generated-project, or hosted-CI proof claim.
 
 ## Full-Stack Global Order Reconciliation
 

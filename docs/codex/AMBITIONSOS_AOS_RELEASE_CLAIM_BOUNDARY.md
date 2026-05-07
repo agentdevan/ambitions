@@ -17,7 +17,11 @@ Status: Future release-claim boundary
 
 ## Allowed Current Claims
 
-- AmbitionsOS is future canon.
-- AOS train is planned.
-- AOS implementation has not started.
-- AOS requires evidence gates before implementation claims.
+- AmbitionsOS is future canon plus bounded additive AOS01-AOS17 contract
+  evidence where reports and focused tests prove it.
+- AOS01-AOS17 do not prove runtime implementation, UI integration,
+  persistence, sync/cloud, hosted AI, release readiness, App Store readiness,
+  TestFlight readiness, public accessibility conformance, signed-RC proof, or
+  physical-device proof.
+- AOS requires evidence gates before broader implementation or release claims.
+- AOS18 Evaluation Golden Scenarios is next after AOS17 Green.

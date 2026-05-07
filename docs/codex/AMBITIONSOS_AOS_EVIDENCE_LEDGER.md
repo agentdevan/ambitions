@@ -610,3 +610,45 @@ Does not prove:
 - external projection runtime
 - platform behavior
 - release/platform readiness
+
+## AOS17
+
+Batch: AOS17 Privacy Safety Kernel.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed privacy-sensitive areas and permission states
+- projection policies for local, hidden, and redacted external projection
+- privacy receipts for approved projection
+- sensitive-area review gates
+- inferred-memory-as-fact blocking
+- delete-pending visibility blocking
+- external redaction-summary requirement
+- explicit tool-approval and deterministic fallback gates
+- hidden-mutation and runtime-store blocking
+- value-only runtime boundary
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos17 -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSPrivacySafetyModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS17 report
+
+Does not prove:
+
+- memory permission runtime
+- durable memory store
+- source ingestion
+- external projection runtime
+- privacy-state mutation
+- model runtime
+- tool bus implementation
+- UI integration
+- persistence or schema
+- sync/account/backend
+- legal/privacy compliance
+- public accessibility conformance
+- physical-device proof
+- release/platform readiness

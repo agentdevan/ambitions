@@ -31,7 +31,14 @@ If these files disagree, use the active source hierarchy and repair stale depend
 
 ## Immediate Resume Rule
 
-On the next `resume global batch train` run, Codex must first inspect the latest FIO01 / PFC05A / DPTG00 overlay work and close any parked Yellow if safe.
+The FIO01/PFC05A/DPTG00 governance package is complete / Green, hosted
+workflows are intentionally absent, and current validation is local/Codex-
+operated only. Physical-device proof is final-only, terminal-only, and blocked
+until all pre-device gates close.
+
+AOS17 Privacy Safety Kernel is complete / Green as additive value-contract
+evidence. AOS18 Evaluation Golden Scenarios is the next eligible global batch
+unless a later repo-truth update proves newer progress.
 
 Required first-pass checks:
 
@@ -56,11 +63,12 @@ If remaining mentions are historical, archived, removed-policy, or forbidden-cur
 
 Current proven repo evidence before this alias selected:
 
-- AOS16 Performance Energy Kernel complete / Green.
-- AOS17 Privacy Safety Kernel as the next eligible global batch.
-- FIO01 / PFC05A / DPTG00 overlay artifacts created with Yellow parked for large-file registry/context/run-state inline pointer updates and residual hosted-CI mention classification.
+- FIO01 / PFC05A / DPTG00 complete / Green.
+- AOS17 Privacy Safety Kernel complete / Green.
+- AOS18 Evaluation Golden Scenarios is the next eligible global batch unless
+  newer repo evidence selects a later batch.
 
-After the overlay Yellow is closed or accepted as non-blocking with owner/follow-up/recheck, continue to AOS17 unless newer repo evidence selects a later batch.
+Continue to AOS18 unless a Hard Red or unrecoverable Red is found.
 
 ## Continuation Policy
 

@@ -30,6 +30,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - FVQ source truth exists and is inserted after completed FCP09 before broad external-surface strategy unless the active local run has already started PFC13, in which case Codex must finish the active batch safely and run FVQ01 immediately afterward.
 - AOS and LDI remain queued.
 - No FL/FCP/PFC/FVQ production implementation has started by virtue of this document.
+- Historical IDs are not renumbered by the FIO01/PFC05A/DPTG00 overlay package.
+- AOS17 is complete Green as additive Privacy Safety Kernel evidence; AOS18
+  remains next unless repo evidence shows later progress.
 
 ## Full-Stack Optimized Order
 
@@ -917,7 +920,17 @@ remaining sensitive intelligence work.
     Instruments automation, device measurement, battery-safety proof, Life
     Graph mutation, persistence/schema, external projection runtime, hosted AI,
     or release/platform claims.
-85. AOS17 Privacy Safety Kernel.
+85. AOS17 Privacy Safety Kernel. Completed Green on 2026-05-06 as additive
+    Privacy Safety Kernel domain-contract evidence with typed sensitive-area
+    classes, permission states, projection policies, privacy receipts,
+    redaction-summary requirements, source/review/freshness privacy gates,
+    inferred-memory-as-fact blocking, delete-pending projection blocking,
+    tool-approval and deterministic-fallback gates, hidden-mutation blocking,
+    runtime-boundary checks, and focused tests. It does not add memory
+    permission runtime, durable memory store, source ingestion, external
+    projection runtime, model runtime, tool bus, UI integration,
+    persistence/schema, legal/privacy compliance, physical-device proof, or
+    release/platform claims.
 86. AOS18 Evaluation Golden Scenarios.
 87. AOS19 Experience Kernel Celestial Cognitive Load.
 88. AOS20 Adaptation Kernel Local Personalization.

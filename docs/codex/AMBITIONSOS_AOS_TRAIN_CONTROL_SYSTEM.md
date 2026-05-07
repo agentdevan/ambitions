@@ -1,6 +1,6 @@
 # AmbitionsOS AOS Train Control System
 
-Status: Future implementation train governance; AOS implementation not started
+Status: Active AmbitionsOS train governance; AOS01-AOS17 have bounded evidence
 
 ## Rule
 
