@@ -513,8 +513,21 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Foundation Models adapter, classifier runtime, tool bus, extraction runtime,
   Life Graph mutation, privacy-state mutation, persistence/schema, external
   projection, sync/account/backend, hosted AI, external-surface, release,
-  legal/current-requirement, or public accessibility claim. The next eligible
-  global batch is AOS16 Performance Energy Kernel.
+  legal/current-requirement, or public accessibility claim. AOS16 followed and
+  is now complete.
+- AOS16 is complete Green as additive Performance Energy Kernel evidence. It
+  adds `Native/Ambitions/Domain/AmbitionsOSPerformanceEnergyModels.swift` and
+  focused domain tests with typed workload kinds, bounded budget envelopes,
+  scheduler modes, low-power/thermal/old-device fallback states, measurement
+  plans, Source Atlas traversal budget inheritance, Local Language budget
+  inheritance, release-claim evidence gates, privacy projection blocking,
+  hidden-mutation blocking, runtime-boundary checks, and no runtime scheduler,
+  background task, telemetry, analytics, cache behavior, Instruments
+  automation, physical-device measurement, battery-safety proof, Life Graph
+  mutation, persistence/schema, external projection runtime, sync/account/
+  backend, hosted AI, external-surface, release, legal/current-requirement, or
+  public accessibility claim. The next eligible global batch is AOS17 Privacy
+  Safety Kernel.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

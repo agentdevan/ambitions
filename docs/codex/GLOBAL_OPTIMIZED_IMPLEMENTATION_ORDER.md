@@ -57,8 +57,10 @@ As of this order update:
 - AOS14 is complete Green as additive Recommendation Start Here Kernel
   evidence; AOS15 followed and is now complete.
 - AOS15 is complete Green as additive Local Language Kernel Planning evidence;
-  AOS16 is next by global order.
-- AOS16-AOS30 remain queued.
+  AOS16 followed and is now complete.
+- AOS16 is complete Green as additive Performance Energy Kernel evidence;
+  AOS17 is next by global order.
+- AOS17-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 
@@ -222,8 +224,8 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 045 | AOS09 Option Value North Star | AOS | Kernel | Completed Green on 2026-05-06 with typed option-value entry families, transfer states, requirement overlap, proof/source links, North Star continuity, Still Counts boundaries, source/freshness/review/privacy gates, silent-mutation blocking, harmful-literal-plan blocking, destiny/shame language blocking, guarantee blocking, fake-completion blocking, runtime-boundary checks, and focused tests. | AOS08. | Complete; AOS11 followed and is now complete. |
 | 046 | AOS11 Reality Drift Bounded Reflow | AOS | Kernel | Completed Green on 2026-05-06 with typed drift signals, bounded reflow proposals, no-update policy, review scopes, blast radius limits, commitment-time inheritance, proof-trust receipt inheritance, source/freshness/review/privacy gates, silent-reschedule blocking, platform-calendar blocking, harmful recovery language blocking, runtime-boundary checks, and focused tests. | AOS10/AOS12. | Complete; AOS14 followed and is now complete. |
 | 047 | AOS14 Recommendation Start Here Kernel | AOS | Kernel | Completed Green on 2026-05-06 with typed Start Here recommendations, fit states, source labels, source/proof/control-plane inheritance, explanation, assumptions, alternatives, user controls, source/freshness/proof/control gates, confidence-score/generic-priority/guarantee/harmful-language/hidden-mutation/privacy/runtime-boundary blocking, and focused tests. | AOS04/AOS12/AOS13; FCP05. | Complete; AOS15 followed and is now complete. |
-| 048 | AOS15 Local Language Kernel Planning | AOS | Kernel | Completed Green on 2026-05-06 with typed local-language intents, structured fields, Capture/You owner-surface boundary, adapter tier ladder planning, deterministic fallback, source/freshness/review/privacy/sensitive-area gates, model-runtime/blocked-tier/performance/tool/external-projection/hidden-mutation/confidence-language/runtime-boundary blocking, and focused tests. | AOS04/AOS13/AOS14. | Complete; next AOS16. |
-| 049 | AOS16 Performance Energy Kernel | AOS | Kernel/QA | Performance budgets must precede runtime-heavy exposure. | Before runtime-heavy implementation. | Single-batch. |
+| 048 | AOS15 Local Language Kernel Planning | AOS | Kernel | Completed Green on 2026-05-06 with typed local-language intents, structured fields, Capture/You owner-surface boundary, adapter tier ladder planning, deterministic fallback, source/freshness/review/privacy/sensitive-area gates, model-runtime/blocked-tier/performance/tool/external-projection/hidden-mutation/confidence-language/runtime-boundary blocking, and focused tests. | AOS04/AOS13/AOS14. | Complete; AOS16 followed and is now complete. |
+| 049 | AOS16 Performance Energy Kernel | AOS | Kernel/QA | Completed Green on 2026-05-06 with typed workload kinds, bounded budget envelopes, scheduler modes, low-power and thermal fallback states, inherited Source Atlas and Local Language budget gates, measurement-plan/release-claim evidence gates, privacy/hidden-mutation/runtime-boundary blocking, and focused tests. | Before runtime-heavy implementation. | Complete; next AOS17. |
 | 050 | AOS17 Privacy Safety Kernel | AOS | Kernel/QA | Privacy contracts must precede sensitive projections. | Before sensitive projection. | Single-batch. |
 | 051 | AOS18 Evaluation Golden Scenarios | AOS | Evaluation | Golden scenarios follow kernel contracts. | AOS01-AOS17. | Single-batch. |
 | 052 | AOS19 Experience Kernel Celestial Cognitive Load | AOS | Experience contract | Experience language follows evaluation. | AOS18. | Single-batch. |

@@ -569,3 +569,44 @@ Does not prove:
 - external projection
 - platform behavior
 - release/platform readiness
+
+## AOS16
+
+Batch: AOS16 Performance Energy Kernel.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed Performance Energy workload kinds and budget envelopes
+- scheduler modes and deferred background-work boundary
+- low-power, thermal-pressure, and old-device fallback states
+- Source Atlas traversal budget inheritance
+- Local Language planning budget inheritance
+- measurement-plan and release-claim evidence boundary
+- privacy projection, hidden-mutation, and runtime-store blocking
+- value-only runtime boundary
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSPerformanceEnergyModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS16 report
+
+Does not prove:
+
+- runtime scheduling
+- background task behavior
+- telemetry or analytics
+- cache behavior
+- Instruments automation
+- physical-device measurement
+- battery safety
+- thermal behavior
+- Source Atlas traversal runtime
+- Local Language adapter runtime
+- Life Graph mutation
+- persistence or schema
+- external projection runtime
+- platform behavior
+- release/platform readiness

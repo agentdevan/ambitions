@@ -906,7 +906,17 @@ remaining sensitive intelligence work.
     runtime, Foundation Models adapter, classifier runtime, tool bus, extraction
     runtime, Life Graph mutation, privacy-state mutation, persistence/schema,
     external projection, hosted AI, or release/platform claims.
-84. AOS16 Performance Energy Kernel.
+84. AOS16 Performance Energy Kernel. Completed Green on 2026-05-06 as
+    additive Performance Energy Kernel domain-contract evidence with typed
+    workload kinds, bounded budget envelopes, scheduler modes, low-power and
+    thermal fallback states, Source Atlas traversal budget inheritance, Local
+    Language budget inheritance, measurement-plan and release-claim evidence
+    gates, privacy projection blocking, hidden-mutation blocking,
+    runtime-boundary checks, and focused tests. It does not add runtime
+    scheduling, background tasks, telemetry, analytics, cache behavior,
+    Instruments automation, device measurement, battery-safety proof, Life
+    Graph mutation, persistence/schema, external projection runtime, hosted AI,
+    or release/platform claims.
 85. AOS17 Privacy Safety Kernel.
 86. AOS18 Evaluation Golden Scenarios.
 87. AOS19 Experience Kernel Celestial Cognitive Load.
