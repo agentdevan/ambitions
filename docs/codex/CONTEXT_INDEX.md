@@ -460,7 +460,20 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Life Graph mutation, source certification, official requirement database,
   persistence/schema, external projection, sync/account/backend, hosted AI,
   external-surface, release, legal/current-requirement, or public accessibility
-  claim. The next eligible global batch is AOS09 Option Value North Star.
+  claim. AOS09 followed and is now complete.
+- AOS09 is complete Green as additive Option Value North Star evidence. It adds
+  `Native/Ambitions/Domain/AmbitionsOSOptionValueModels.swift` and focused
+  domain tests with typed option-value entry families, transfer states,
+  requirement overlap, proof/source links, North Star continuity, Still Counts
+  receipt boundaries, source/freshness/review/privacy gates, silent-mutation
+  blocking, harmful-literal-plan blocking, destiny/shame language blocking,
+  guarantee blocking, fake-completion blocking, runtime-boundary checks, and no
+  Goal Detail UI, Plan UI, option-value runtime, North Star extraction runtime,
+  proof transfer runtime, path mutation, Life Graph mutation, source
+  certification, official requirement database, persistence/schema,
+  external projection, sync/account/backend, hosted AI, external-surface,
+  release, legal/current-requirement, or public accessibility claim. The next
+  eligible global batch is AOS11 Reality Drift Bounded Reflow.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

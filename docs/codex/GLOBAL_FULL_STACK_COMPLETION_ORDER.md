@@ -860,7 +860,19 @@ remaining sensitive intelligence work.
     requirement database, persistence/schema, external projection,
     sync/account/backend service, hosted AI, release/platform,
     legal/current-requirement, or public accessibility claims.
-80. AOS09 Option Value North Star.
+80. AOS09 Option Value North Star. Completed Green on 2026-05-06 as additive
+    Option Value / North Star evidence. It adds typed option-value entry
+    families, transfer states, requirement overlap, proof/source links, North
+    Star continuity, Still Counts receipt boundaries, source/freshness/review/
+    privacy gates, silent-mutation blocking, harmful-literal-plan blocking,
+    destiny/shame language blocking, guarantee blocking, fake-completion
+    blocking, runtime-boundary checks, and focused tests. It does not add Goal
+    Detail UI, Plan UI, option-value runtime, North Star extraction runtime,
+    proof transfer runtime, path mutation, Life Graph mutation, source
+    certification, official requirement database, persistence/schema,
+    external projection, sync/account/backend service, hosted AI,
+    release/platform, legal/current-requirement, or public accessibility
+    claims.
 81. AOS11 Reality Drift Bounded Reflow.
 82. AOS14 Recommendation Start Here Kernel.
 83. AOS15 Local Language Kernel Planning.

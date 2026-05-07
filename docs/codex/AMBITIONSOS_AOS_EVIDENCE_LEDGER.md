@@ -297,6 +297,46 @@ Does not prove:
 - platform behavior
 - release/platform readiness
 
+## AOS09
+
+Batch: AOS09 Option Value North Star.
+Result: Green.
+Evidence date: 2026-05-06.
+
+Proof scope:
+
+- typed option-value entry families
+- transfer states and requirement-overlap states
+- proof/source overlap gates for transferable proof
+- source, freshness, review, and privacy gates
+- North Star continuity as user-reviewed context
+- Still Counts fake-completion and shame-language blocking
+- silent mutation and runtime-store blocking
+- harmful literal plan, destiny-language, and guaranteed-outcome blocking
+- sensitive external projection protection
+
+Commands:
+
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSOptionValueModelsTests test CODE_SIGNING_ALLOWED=NO`
+- final validation pack recorded in the AOS09 report
+
+Does not prove:
+
+- Goal Detail UI integration
+- Plan UI integration
+- option-value runtime
+- North Star extraction runtime
+- proof transfer runtime
+- option-value ranking
+- path mutation
+- Life Graph mutation
+- source certification
+- official requirement database behavior
+- external projection
+- platform behavior
+- release/platform readiness
+
 ## AOS10
 
 Batch: AOS10 Commitment Time Kernel.
