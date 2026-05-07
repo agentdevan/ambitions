@@ -45,8 +45,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   followed and is now complete Green as a local Pack Supply Chain Security
   contract. LDI08 followed and is now complete Green as a local Requirement
   Graph Runtime contract. LDI09 followed and is now complete Green as a local
-  Eligibility And Deadline Runtime contract. LDI10 follows unless repo evidence or dependency
-  review selects another eligible batch.
+  Eligibility And Deadline Runtime contract. LDI10 followed and is now complete
+  Green as a local Starting Position And Privacy Intake contract. LDI11 follows
+  unless repo evidence or dependency review selects another eligible batch.
 
 ## Full-Stack Optimized Order
 

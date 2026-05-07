@@ -15,7 +15,8 @@ evidence. LDI07 is Green as local value-model Pack Supply Chain Security
 contract, expanded local fixture, and focused-test evidence. LDI08 is Green as
 local Requirement Graph Runtime contract and focused-test evidence. LDI09 is
 Green as local Eligibility And Deadline Runtime contract and focused-test
-evidence. LDI10-LDI22 remain queued serial
+evidence. LDI10 is Green as local Starting Position And Privacy Intake contract
+and focused-test evidence. LDI11-LDI22 remain queued serial
 successors. This train does not claim runtime implementation. LDI remains
 blocked from runtime work until each successor batch proves its own HPS, Source
 Atlas, safety, privacy, professional-boundary, and release-claim gates.
@@ -92,7 +93,7 @@ LDI must route source-dependent behavior through:
 | LDI07 | Pack Supply Chain Security | Complete / Green after LDI06 | signed packs, checksum, provenance, rollback, corruption handling, no executable logic | Adds local pack supply-chain security contracts, expanded fixture fields, non-mutating receipts, and focused tests for checksum, signature, provenance, rollback, corruption, tamper, diff/manifest integrity, no-executable-logic, and runtime-boundary proof. |
 | LDI08 | Requirement Graph Runtime | Complete / Green after LDI07 | hard/soft requirements, blockers, dependencies, proof needed | Adds local requirement graph contracts, source-claim linkage, pack-security prerequisites, proof-needed blocking, professional review boundaries, and focused tests without UI/runtime/persistence or official requirement claims. |
 | LDI09 | Eligibility And Deadline Runtime | Complete / Green after LDI08 | age/date/window/deadline/minimum lead time logic | Adds local eligibility/deadline contracts and focused tests with requirement-graph prerequisites, source-claim readiness, stale/conflicted source blocking, jurisdiction, institution, professional-review, no-activation, no-user-data-server, and no-certification boundaries. |
-| LDI10 | Starting Position And Privacy Intake | Queued after AOS30 by default and HPS/SA closeout | ask-only-needed intake, local storage boundary, sensitive controls, user source binder | Defines minimal intake, memory permission states, source import boundaries, and sensitivity controls. |
+| LDI10 | Starting Position And Privacy Intake | Complete / Green after LDI09 | ask-only-needed intake, local storage boundary, sensitive controls, user source binder | Adds local intake contracts and focused tests for starting-position and eligibility prerequisites, sensitive-area privacy policy review, local-only sensitive retention, no external sensitive projection, no persistence write, no commitment mutation, and no user-data server. |
 | LDI11 | Path Portfolio Runtime | Queued after AOS30 by default and HPS/SA closeout | primary/conservative/aggressive/exploration/fallback/North Star paths | Generates path portfolio candidates without guarantees, using HPS option value, Source Atlas source states, and proof transfer. |
 | LDI12 | Capacity And Commitment-Time Bridge | Queued after AOS30 by default and HPS/SA closeout | capacity fit, no fantasy schedules, no silent rescheduling | Fits plans into real life and blocks fantasy schedules; stale high-risk Source Atlas claims cannot drive scheduled actions as current. |
 | LDI13 | Today Bridge And Action Closure | Queued after AOS30 by default and HPS/SA closeout | 1-3 useful next steps, proof/source/review steps, closure states | Maps living plans into Today steps and closure states with source/freshness/source-needed lines where relevant. |

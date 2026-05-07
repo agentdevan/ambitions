@@ -2,17 +2,17 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: LDI09 Eligibility And Deadline Runtime
+Current batch: LDI10 Starting Position And Privacy Intake
 complete / Green.
-Next eligible batch: LDI10 Starting Position And Privacy Intake.
-Scope: LDI09 added the local value-model Eligibility And Deadline Runtime
-contract and focused domain tests for age/date/window/deadline/minimum lead
-time gating, requirement-graph prerequisites, source-claim readiness,
-stale/conflicted source blocking, jurisdiction/institution review boundaries,
-professional-review boundaries, no activation, no user-data server, and
-local-first runtime boundaries. It adds no UI integration, route/raw-value
-change, persistence/schema, sync/cloud, hosted AI, user-data server,
-professional advice, official eligibility or deadline verification,
+Next eligible batch: LDI11 Path Portfolio Runtime.
+Scope: LDI10 added the local value-model Starting Position And Privacy Intake
+contract and focused domain tests for ask-only-needed intake questions,
+starting-position prerequisite checks, LDI09 eligibility prerequisites,
+sensitive-area privacy policy review, local-only sensitive retention, no
+external sensitive projection, no persistence write, no commitment mutation, no
+user-data server, and local-first runtime boundaries. It adds no UI integration,
+route/raw-value change, persistence/schema, sync/cloud, hosted AI, user-data
+server, professional advice, official intake/privacy verification,
 release/platform claim, legal/privacy compliance, physical-device proof, public
 accessibility proof, signing, entitlement, dependency, generated-project, or
 hosted workflow claim.
@@ -26,8 +26,8 @@ commands, proof artifacts, and terminal gates. Physical-device proof is
 terminal-only and final-only. All feature, product-object, primitive,
 intelligence, source/freshness, accessibility, visual, performance,
 privacy/legal, platform, release, signed-RC, and claim-safety gates must close
-before device proof begins. AOS23 and LDI01-LDI09 have since closed Green;
-LDI10 remains next unless repo evidence shows later progress.
+before device proof begins. AOS23 and LDI01-LDI10 have since closed Green;
+LDI11 remains next unless repo evidence shows later progress.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -149,8 +149,8 @@ evidence. AOS21 is complete / Green as Interoperability Kernel App Intents
 EventKit Planning evidence. AOS22 is complete / Green as Longevity Kernel
 Archive Aging evidence. AOS23 is complete / Green as Governance Kernel Registry
 evidence. LDI01 is complete / Green as Living Dream Architecture source-truth
-governance evidence after explicit user-directed early insertion. LDI02-LDI09
-have since closed Green, and LDI10 is the next eligible global batch
+governance evidence after explicit user-directed early insertion. LDI02-LDI10
+have since closed Green, and LDI11 is the next eligible global batch
 unless dependency review selects another eligible batch.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
@@ -988,7 +988,8 @@ Batch type: docs/Codex OS/global-train integration only.
   Compiler contract; LDI07 has since closed Green as a local Pack Supply Chain
   Security contract; LDI08 has since closed Green as a local Requirement Graph
   Runtime contract; LDI09 has since closed Green as a local Eligibility And
-  Deadline Runtime contract; and LDI10 is next.
+  Deadline Runtime contract; LDI10 has since closed Green as a local Starting
+  Position And Privacy Intake contract; and LDI11 is next.
 - Queued PD01-PD18 and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,

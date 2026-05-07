@@ -713,8 +713,8 @@ Current 4.0 status:
   Star Extraction, LDI05 Source Claim Graph, LDI06 Pack Registry And Pack
   Compiler, LDI07 Pack Supply Chain Security, LDI08 Requirement Graph Runtime,
   and LDI09 Eligibility And Deadline Runtime are complete Green after
-  explicit user-directed early insertion following AOS23; LDI10 is next.
-  LDI10-LDI22 remain queued serial successors.
+  explicit user-directed early insertion following AOS23; LDI11 is next.
+  LDI11-LDI22 remain queued serial successors.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
 - Active External Brain expansion added: EB01-EB40 as active planned Ambitions 4.0 scope.
 - Active Dynamic Adaptive Visual System expansion added: DAV01-DAV15 as active planned Ambitions 4.0 implementation scope.
@@ -1060,8 +1060,8 @@ note and the PD18 audit report.
 | Release Evidence Closure Train | Completed / docs-only | Completed REC01-REC06 as evidence/status/release-truth work after the 2026-05-02 pre-train hardening and 3.0 truth check. Human/operator proof remains pending. |
 | REC01 Release Evidence Truth Inventory | Completed / accepted baseline | Created `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserved F17-F30 truth, inventoried simulator evidence and release proof gaps, and did not implement app behavior or claim readiness. |
 | REC02-REC06 Evidence Closure | Completed / docs-only | REC02 proof plan, REC03 validation ledger, REC04 claim copy guard, REC05 human review packet, and REC06 closure handoff are complete without claiming human proof or release readiness. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI09 followed and are complete Green before later AOS UI integration, LDI10 is next unless dependency review selects another eligible batch, while AOS24-AOS30 require predecessor, HPS, Source Atlas where relevant, and AOS train gates. |
-| SA01-SA32 Source Atlas Full Maturity Train | Active / SA06 Green | SA01-SA06 and SAP01-SAP05 are complete Green as docs/state/Codex OS/order/composition/projection/Pack Factory rule/fixture/no-sprawl reconciliation plus compact pack schema implementation evidence. AOS05-AOS23 and LDI01-LDI09 are complete; LDI10 is next before other deep source/freshness-dependent AOS/LDI work continues unless dependency review selects another eligible batch. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI10 followed and are complete Green before later AOS UI integration, LDI11 is next unless dependency review selects another eligible batch, while AOS24-AOS30 require predecessor, HPS, Source Atlas where relevant, and AOS train gates. |
+| SA01-SA32 Source Atlas Full Maturity Train | Active / SA06 Green | SA01-SA06 and SAP01-SAP05 are complete Green as docs/state/Codex OS/order/composition/projection/Pack Factory rule/fixture/no-sprawl reconciliation plus compact pack schema implementation evidence. AOS05-AOS23 and LDI01-LDI10 are complete; LDI11 is next before other deep source/freshness-dependent AOS/LDI work continues unless dependency review selects another eligible batch. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Created the Lane 2 ownership map and risk baseline. No extraction run. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Created shared projector/state/helper standards and corrected the stale Plan projector assumption. No extraction run. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Converted the architecture scan into a recurring ME gate. No extraction run. |
@@ -1192,7 +1192,7 @@ the stricter highest-priority global order.
 | Path | Status | Notes |
 | --- | --- | --- |
 | AmbitionsOS Future-Canon Integration | Completed / docs-only | Creates the future AmbitionsOS parent canon, kernel docs, runtime contract, AOS train controls, ME/CS train plans, Codex OS protocols, skills, review boards, consolidated catalogs, and audit reports. No app behavior, production refactor, compatibility seam retirement, dependency, workflow, platform capability, persistence/schema, release, App Store, TestFlight, device, accessibility, or final RC claim is added. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI09 followed and are complete Green before later AOS UI integration, LDI10 is next unless dependency review selects another eligible batch, while AOS24-AOS30 require predecessor, HPS, Source Atlas where relevant, and AOS train gates. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI10 followed and are complete Green before later AOS UI integration, LDI11 is next unless dependency review selects another eligible batch, while AOS24-AOS30 require predecessor, HPS, Source Atlas where relevant, and AOS train gates. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Planning baseline complete; no extraction run in this pass. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Standards baseline complete; no extraction run in this pass. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Recurring architecture gate complete; no extraction run in this pass. |
@@ -1214,7 +1214,7 @@ the stricter highest-priority global order.
 
 | Train | Status | Gate / owner |
 | --- | --- | --- |
-| LDI01-LDI22 Living Dream Intelligence Train | Active / Green | LDI01-LDI09 are complete Green after explicit user-directed early insertion following AOS23; LDI10-LDI22 remain queued serial successors and require LDI source truth, safety/privacy/source/professional-boundary gates, and no runtime/release overclaim. |
+| LDI01-LDI22 Living Dream Intelligence Train | Active / Green | LDI01-LDI10 are complete Green after explicit user-directed early insertion following AOS23; LDI11-LDI22 remain queued serial successors and require LDI source truth, safety/privacy/source/professional-boundary gates, and no runtime/release overclaim. |
 
 | LDI01 Living Dream Architecture Source Truth | Complete / Green | LDI01 completed as docs/Codex OS source-truth and governance evidence. It updates LDI dependency, gate, invariant, train, registry, context, order, resume, current-state, and audit docs, and repairs `scripts/ldi-release-claim-scan.sh` so current-batch release scans evaluate changed files instead of the full historical repo when clean. No app behavior, production Swift, runtime, model runtime, LDI runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud, platform integration, signing, entitlement, dependency, generated project, hosted workflow, professional advice, user-data server, hosted AI, legal/privacy compliance, physical-device proof, release/platform, or public accessibility claim changed. |
 

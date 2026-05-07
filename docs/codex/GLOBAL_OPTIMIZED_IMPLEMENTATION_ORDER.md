@@ -92,6 +92,8 @@ As of this order update:
 - LDI08 is complete Green as a local Requirement Graph Runtime value-model
   contract with focused tests; LDI09 followed and is now complete.
 - LDI09 is complete Green as a local Eligibility And Deadline Runtime
+  value-model contract with focused tests; LDI10 followed and is now complete.
+- LDI10 is complete Green as a local Starting Position And Privacy Intake
   value-model contract with focused tests.
 - FIO01/PFC05A are complete after this run passes checks as docs/governance/
   repo-hygiene evidence. `FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY` is active,
@@ -100,10 +102,10 @@ As of this order update:
 - DPTG00 is locked as a future terminal physical-device release-candidate proof
   gate, not an implementation batch. All pre-device gates must close before it.
 - AOS24-AOS30 remain queued.
-- LDI10-LDI22 remain queued and are inserted by dependency, not train silo.
+- LDI11-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 - No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay
-  package. LDI10 is next unless repo evidence shows later progress.
+  package. LDI11 is next unless repo evidence shows later progress.
 
 ## Selection Rule
 
@@ -282,8 +284,8 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 062 | LDI06 Pack Registry And Pack Compiler | LDI | Contract | Completed Green on 2026-05-07 with local pack registry/compiler contracts, pack taxonomy/schema/quality/lifecycle states, source-claim graph attachment, supply-chain proof gating, no-executable-logic checks, non-activating compiler output, runtime-boundary checks, local fixture, and focused tests. | LDI05. | Complete; LDI07 followed and is complete. |
 | 063 | LDI07 Pack Supply Chain Security | LDI | Security | Completed Green on 2026-05-07 with local pack supply-chain security contracts, checksum/signature/provenance/rollback/corruption/tamper/diff/manifest/no-executable-logic checks, non-mutating receipts, expanded fixture, and focused tests. | LDI06. | Complete; LDI08 followed and is complete. |
 | 064 | LDI08 Requirement Graph Runtime | LDI | Runtime | Completed Green on 2026-05-07 with local requirement graph contracts, hard/soft/blocker/dependency/proof-needed validation, source-claim linkage, pack-security prerequisite, professional review boundary, no activation, no user-data server, and focused tests. | LDI05-LDI07. | Complete; LDI09 followed and is complete. |
-| 065 | LDI09 Eligibility And Deadline Runtime | LDI | Runtime | Completed Green on 2026-05-07 with local eligibility/deadline contracts, age/date/window/deadline/minimum lead-time gating, requirement-graph prerequisite, source-claim readiness, stale/conflicted source blocking, jurisdiction/institution/professional-review boundaries, no activation, no user-data server, and focused tests. | LDI08. | Complete; next LDI10. |
-| 066 | LDI10 Starting Position And Privacy Intake | LDI | Runtime | Intake follows safety/source/eligibility. | LDI09. | Single-batch. |
+| 065 | LDI09 Eligibility And Deadline Runtime | LDI | Runtime | Completed Green on 2026-05-07 with local eligibility/deadline contracts, age/date/window/deadline/minimum lead-time gating, requirement-graph prerequisite, source-claim readiness, stale/conflicted source blocking, jurisdiction/institution/professional-review boundaries, no activation, no user-data server, and focused tests. | LDI08. | Complete; LDI10 followed and is complete. |
+| 066 | LDI10 Starting Position And Privacy Intake | LDI | Runtime | Completed Green on 2026-05-07 with local ask-only-needed intake contracts, starting-position and eligibility prerequisites, sensitive-area privacy policy review, local-only sensitive retention, no external sensitive projection, no persistence write, no commitment mutation, no user-data server, and focused tests. | LDI09. | Complete; next LDI11. |
 | 067 | LDI11 Path Portfolio Runtime | LDI | Runtime | Path portfolio follows intake. | LDI10. | Single-batch. |
 | 068 | LDI12 Capacity And Commitment-Time Bridge | LDI | Runtime | Capacity bridge follows path portfolio and AOS time kernel. | LDI11; AOS10. | Single-batch. |
 | 069 | LDI13 Today Bridge And Action Closure | LDI | Runtime | Today bridge follows capacity and FCP closure/Start Here. | LDI12; FCP05/FCP13A. | Single-batch. |
