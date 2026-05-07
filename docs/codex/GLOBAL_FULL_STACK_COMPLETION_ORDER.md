@@ -35,8 +35,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   EventKit Planning evidence; AOS22 followed and is now complete.
 - AOS22 is complete Green as additive Longevity Kernel Archive Aging evidence.
 - AOS23 is complete Green as docs/Codex OS Governance Kernel Registry
-  evidence; LDI01 follows by optimized global order unless repo evidence or
-  dependency review selects another eligible batch.
+  evidence. LDI01 followed and is now complete Green as source-truth/
+  governance evidence. LDI02 follows unless repo evidence or dependency review
+  selects another eligible batch.
 
 ## Full-Stack Optimized Order
 
@@ -994,7 +995,16 @@ remaining sensitive intelligence work.
 
 ### Phase 8 — LDI Safety / Runtime / Source Gates
 
-92. LDI01 Living Dream Architecture Source Truth.
+92. LDI01 Living Dream Architecture Source Truth. Completed Green on
+    2026-05-07 as docs/Codex OS source-truth and governance evidence after
+    explicit user-directed early insertion following AOS23. It updates LDI
+    dependency, gate, invariant, train, registry, context, order, resume,
+    current-state, and audit docs, and repairs the LDI release-claim scanner
+    for current-batch changed-file scans. It does not add app behavior,
+    production Swift, runtime, model runtime, LDI runtime, UI integration,
+    persistence/schema, sync/cloud, platform, hosted AI, user-data server,
+    professional advice, legal/privacy compliance, physical-device proof,
+    public accessibility proof, or release/platform claims.
 93. LDI02 Capture Handling Ladder.
 94. LDI03 Dream Safety Legality Feasibility Triage.
 95. LDI04 North Star Extraction.

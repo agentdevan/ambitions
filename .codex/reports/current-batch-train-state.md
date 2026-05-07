@@ -2,19 +2,19 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: AOS23 Governance Kernel Registry
+Current batch: LDI01 Living Dream Architecture Source Truth
 complete / Green.
-Next eligible batch: LDI01 Living Dream Architecture Source Truth by optimized
-global order unless dependency review selects another eligible batch.
-Scope: AOS23 added docs/Codex OS Governance Kernel registry proof for AOS01-AOS22
-kernel ownership, current evidence, open boundaries, HPS/Source Atlas/Pack
-Factory inheritance, privacy/accessibility/visual/performance gates,
-local-validation-only proof, hosted-workflow removal preservation, and
-terminal-device gate rules. It adds no app behavior, production Swift, runtime,
-model runtime, LDI runtime, UI integration, Life Graph mutation,
-persistence/schema, sync/cloud, platform integration, signing, entitlement,
-dependency, generated project, hosted workflow, release/platform, legal/privacy
-compliance, physical-device proof, or public accessibility claim.
+Next eligible batch: LDI02 Capture Handling Ladder.
+Scope: LDI01 recorded explicit early Living Dream source-truth insertion after
+AOS23, updated LDI gate/dependency/invariant/train governance, repaired the
+LDI release-claim scanner to scan changed batch files instead of the full
+historical repo on a clean tree, and added an LDI01 audit report. It adds no
+app behavior, production Swift, runtime, model runtime, LDI runtime, UI
+integration, Life Graph mutation, persistence/schema, sync/cloud, platform
+integration, signing, entitlement, dependency, generated project, hosted
+workflow, release/platform, legal/privacy compliance, physical-device proof,
+professional advice, user-data server, hosted AI, or public accessibility
+claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -147,8 +147,10 @@ evidence. AOS20 is complete / Green as Adaptation Kernel Local Personalization
 evidence. AOS21 is complete / Green as Interoperability Kernel App Intents
 EventKit Planning evidence. AOS22 is complete / Green as Longevity Kernel
 Archive Aging evidence. AOS23 is complete / Green as Governance Kernel Registry
-evidence. LDI01 is the next eligible global batch before later AOS UI
-integration unless dependency review selects another eligible batch.
+evidence. LDI01 is complete / Green as Living Dream Architecture source-truth
+governance evidence after explicit user-directed early insertion. LDI02 is the
+next eligible global batch unless dependency review selects another eligible
+batch.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable
@@ -988,9 +990,9 @@ Date: 2026-05-04
 Batch type: docs/Codex OS/global-train integration only.
 
 - SI01-SI18 completion history above remains binding and is not rewritten.
-- PD01 is the next formal global successor only after the Product Depth
-  approval phrase is satisfied.
-- LDI01-LDI22 Living Dream Intelligence Train is inserted after AOS30 by default.
+- PD01-PD18 have since closed through PD18 Green.
+- LDI01 is complete Green as a source-truth/governance-only early insertion
+  after AOS23; LDI02 is next.
 - Queued PD01-PD18 and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,

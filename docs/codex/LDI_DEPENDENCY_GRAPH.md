@@ -2,11 +2,18 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Future dependency graph. No LDI runtime is claimed.
+Status: Active dependency graph. LDI01 is Green after explicit user-directed
+early insertion; no LDI runtime is claimed.
 
 ## Placement
 
-LDI01 starts after AOS30 by default. A future explicit user decision may move an individual LDI gate earlier only after dependency review.
+LDI01 starts after AOS30 by default. On 2026-05-07, the active global train
+received explicit user direction to continue without stopping unless
+unrecoverable Red, and the optimized global order selected LDI01 after AOS23
+Governance Kernel Registry as a docs/Codex OS source-truth gate before later
+AOS UI integration. This does not authorize LDI runtime implementation.
+
+LDI02-LDI22 remain serial LDI successors after LDI01 Green or accepted Yellow.
 
 ## Required Predecessors
 

@@ -18,7 +18,7 @@ Move exactly this batch's AmbitionsOS contract or implementation slice forward w
 
 ## Living Dream Architecture Hook
 
-LDI hook: Beyond roadmap should hand off to LDI01-LDI22 after AOS30 by default and record any earlier-insertion decision as explicit future work.
+LDI hook: Beyond roadmap should hand off to the remaining LDI successors after AOS30 by default. LDI01 was explicitly inserted early after AOS23 as source-truth/governance evidence; do not treat that as runtime implementation or release readiness.
 
 ## Source Truth Files To Read First
 

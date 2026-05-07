@@ -2,7 +2,12 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued future implementation train. Inserted after AOS30 by default. This train does not start until global order selects it or the user explicitly authorizes an earlier dependency split. LDI is blocked until HPS01-HPS12 are Green or accepted Yellow with owners and Source Atlas dependencies are Green or accepted Yellow where real-world requirements, source packs, freshness, user-imported sources, or claim review are used.
+Status: Active future implementation train. LDI01 is Green as docs/Codex OS
+source-truth and governance evidence after explicit user-directed early
+insertion following AOS23. LDI02-LDI22 remain queued serial successors. This
+train does not claim runtime implementation. LDI remains blocked from runtime
+work until each successor batch proves its own HPS, Source Atlas, safety,
+privacy, professional-boundary, and release-claim gates.
 
 ## Purpose
 
@@ -67,7 +72,7 @@ LDI must route source-dependent behavior through:
 
 | Batch | Title | Status | Boundary | Required result |
 | --- | --- | --- | --- | --- |
-| LDI01 | Living Dream Architecture Source Truth | Queued after AOS30 by default and HPS/SA closeout | docs/canon + codex governance only | Creates/updates LDI source truth and governance references, importing HPS and Source Atlas invariants. |
+| LDI01 | Living Dream Architecture Source Truth | Complete / Green after explicit user-directed early insertion following AOS23 | docs/canon + codex governance only | Creates/updates LDI source truth and governance references, importing HPS and Source Atlas invariants. |
 | LDI02 | Capture Handling Ladder | Queued after AOS30 by default and HPS/SA closeout | capture -> classify -> seriousness -> triage -> source binder route -> route contracts and fixtures | Defines local contracts and fixtures for the dream handling ladder, using HPS dream-to-domain classifier and Source Atlas source binder routes. |
 | LDI03 | Dream Safety Legality Feasibility Triage | Queued after AOS30 by default and HPS/SA closeout | unsafe/illegal/crisis/fantasy/regulated/minor/professional/source-risk boundary contracts, fixtures, and safe redirect rules | Builds safety triage contracts and red-team proof, including minor/student-data, career/education false-certainty, and high-risk source stale-claim risks. |
 | LDI04 | North Star Extraction | Queued after AOS30 by default and HPS/SA closeout | impossible/fantasy/symbolic/unsafe-literal dream conversion contracts and examples | Turns impossible or unsafe-literal dreams into safe meaning without validating literal harm, preserving identity continuity and option value; official requirements remain source-needed unless Source Atlas proves them. |
@@ -92,7 +97,11 @@ LDI must route source-dependent behavior through:
 
 ## Global Placement
 
-Default global placement is after AOS30 and HPS/Source Atlas closeout. Earlier insertion of an individual LDI gate requires explicit user decision and a dependency review proving it is safer than waiting.
+Default global placement is after AOS30 and HPS/Source Atlas closeout. Earlier
+insertion of an individual LDI gate requires explicit user decision and a
+dependency review proving it is safer than waiting. LDI01 met that condition
+on 2026-05-07 as a source-truth/governance-only gate after AOS23; it does not
+start LDI runtime implementation.
 
 ## Hard Gates
 

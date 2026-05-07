@@ -36,10 +36,10 @@ workflows are intentionally absent, and current validation is local/Codex-
 operated only. Physical-device proof is final-only, terminal-only, and blocked
 until all pre-device gates close.
 
-AOS23 Governance Kernel Registry is complete / Green as docs/Codex OS
-governance evidence. LDI01 Living Dream Architecture Source Truth is the next
-eligible global batch by optimized global order unless a later repo-truth
-update proves newer progress.
+LDI01 Living Dream Architecture Source Truth is complete / Green as docs/Codex
+OS source-truth and governance evidence. LDI02 Capture Handling Ladder is the
+next eligible global batch unless a later repo-truth update proves newer
+progress.
 
 Required first-pass checks:
 
@@ -72,10 +72,11 @@ Current proven repo evidence before this alias selected:
 - AOS21 Interoperability Kernel App Intents EventKit Planning complete / Green.
 - AOS22 Longevity Kernel Archive Aging complete / Green.
 - AOS23 Governance Kernel Registry complete / Green.
-- LDI01 Living Dream Architecture Source Truth is the next eligible global
-  batch unless newer repo evidence selects a later batch.
+- LDI01 Living Dream Architecture Source Truth complete / Green.
+- LDI02 Capture Handling Ladder is the next eligible global batch unless newer
+  repo evidence selects a later batch.
 
-Continue to LDI01 unless a Hard Red or unrecoverable Red is found.
+Continue to LDI02 unless a Hard Red or unrecoverable Red is found.
 
 ## Continuation Policy
 
@@ -150,13 +151,14 @@ For each batch:
 
 ## Required Final Response Shape
 
-Latest AOS checkpoint: AOS23 Governance Kernel Registry is complete Green as
-docs/Codex OS governance evidence. It does not implement app behavior,
-production Swift, runtime, model runtime, LDI runtime, UI integration,
-Life Graph mutation, persistence/schema, sync/cloud, platform integration,
-signing, entitlement, dependency, generated project, hosted workflow,
-legal/privacy, public accessibility, physical-device proof, or release/platform
-claim. LDI01 is next unless repo evidence shows later progress.
+Latest train checkpoint: LDI01 Living Dream Architecture Source Truth is
+complete Green as docs/Codex OS source-truth and governance evidence. It does
+not implement app behavior, production Swift, runtime, model runtime, LDI
+runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud,
+platform integration, signing, entitlement, dependency, generated project,
+hosted workflow, legal/privacy, public accessibility, physical-device proof,
+professional advice, hosted AI, user-data server, or release/platform claim.
+LDI02 is next unless repo evidence shows later progress.
 
 At each visible checkpoint, report:
 

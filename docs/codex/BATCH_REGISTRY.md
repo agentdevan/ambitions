@@ -708,7 +708,9 @@ Current 4.0 status:
 - Active / Green: AOS01 complete Accepted Yellow; AOS02-AOS23 complete Green;
   AOS24-AOS30 pending predecessor,
   HPS, Source Atlas where relevant, and AOS train gates.
-- Queued / Blocked: LDI01-LDI22 Living Dream Intelligence Train pending AOS30 Green by default or explicit user decision for earlier dependency split.
+- Active / Green: LDI01 Living Dream Architecture Source Truth is complete
+  Green after explicit user-directed early insertion following AOS23; LDI02 is
+  next. LDI02-LDI22 remain queued serial successors.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
 - Active External Brain expansion added: EB01-EB40 as active planned Ambitions 4.0 scope.
 - Active Dynamic Adaptive Visual System expansion added: DAV01-DAV15 as active planned Ambitions 4.0 implementation scope.
@@ -1208,6 +1210,8 @@ the stricter highest-priority global order.
 
 | Train | Status | Gate / owner |
 | --- | --- | --- |
-| LDI01-LDI22 Living Dream Intelligence Train | Queued / Blocked | Inserted after AOS30 by default; requires LDI source truth, safety/privacy/source/professional-boundary gates, and no runtime/release overclaim. |
+| LDI01-LDI22 Living Dream Intelligence Train | Active / Green | LDI01 is complete Green as source-truth/governance evidence after explicit user-directed early insertion following AOS23; LDI02-LDI22 remain queued serial successors and require LDI source truth, safety/privacy/source/professional-boundary gates, and no runtime/release overclaim. |
 
-LDI integration note: Living Dream Architecture is future implementation source truth and train governance. It does not claim full Living Dream runtime behavior until LDI/AOS/PD/SI implementation batches run, validate, commit, and record evidence.
+| LDI01 Living Dream Architecture Source Truth | Complete / Green | LDI01 completed as docs/Codex OS source-truth and governance evidence. It updates LDI dependency, gate, invariant, train, registry, context, order, resume, current-state, and audit docs, and repairs `scripts/ldi-release-claim-scan.sh` so current-batch release scans evaluate changed files instead of the full historical repo when clean. No app behavior, production Swift, runtime, model runtime, LDI runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud, platform integration, signing, entitlement, dependency, generated project, hosted workflow, professional advice, user-data server, hosted AI, legal/privacy compliance, physical-device proof, release/platform, or public accessibility claim changed. |
+
+LDI integration note: Living Dream Architecture is future implementation source truth and train governance. LDI01 proves source-truth/governance activation only. It does not claim full Living Dream runtime behavior until LDI/AOS/PD/SI implementation batches run, validate, commit, and record evidence.

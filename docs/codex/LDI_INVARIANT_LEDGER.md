@@ -2,7 +2,8 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active future invariant ledger.
+Status: Active invariant ledger. LDI01 is Green as source-truth/governance
+evidence; no runtime implementation is claimed.
 
 - Every dream is classified, protected, routed, and handled honestly.
 - Not every dream becomes a complete plan.
@@ -21,3 +22,6 @@ Status: Active future invariant ledger.
 - Sensitive goals may be local-only and excluded from sync.
 - LDI does not create a sixth top-level destination.
 - LDI does not make Ambitions a chatbot or generic productivity dashboard.
+- Early LDI insertion before AOS24 is source-truth/governance only unless a
+  later batch explicitly owns implementation, tests, rendered proof, and
+  claim boundaries.
