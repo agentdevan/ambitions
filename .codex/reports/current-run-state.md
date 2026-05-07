@@ -2,21 +2,19 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: LDI06 Pack Registry And Pack Compiler
+Current batch: LDI07 Pack Supply Chain Security
 complete / Green.
-Next eligible batch: LDI07 Pack Supply Chain Security.
-Scope: LDI06 added the local value-model Pack Registry And Pack Compiler
-contract, a focused local fixture, and focused domain tests for pack taxonomy,
-schema/version checks, quality and lifecycle states, review-gated compiler
-entry, source-claim-graph attachment, supply-chain proof requirements,
-no-executable-logic boundaries, official-source-pack overclaim blocking,
-unsafe/stale/conflict blocking, regulated-pack review gates, non-activating
-compiler output, and local-first runtime boundaries. It adds no UI integration,
-route/raw-value change, persistence/schema, sync/cloud, hosted AI, user-data
-server, professional advice, official source certification, release/platform
-claim, legal/privacy compliance, physical-device proof, public accessibility
-proof, signing, entitlement, dependency, generated-project, or hosted workflow
-claim.
+Next eligible batch: LDI08 Requirement Graph Runtime.
+Scope: LDI07 added the local value-model Pack Supply Chain Security contract,
+expanded the local pack fixture, and focused domain tests for checksum,
+signature, provenance, rollback, safe import validation, corruption handling,
+tamper detection, pack diff integrity, pack manifest integrity, no executable
+logic, source-claim graph readiness, non-activating receipts, and local-first
+runtime boundaries. It adds no UI integration, route/raw-value change,
+persistence/schema, sync/cloud, hosted AI, user-data server, professional
+advice, official source certification, release/platform claim, legal/privacy
+compliance, physical-device proof, public accessibility proof, signing,
+entitlement, dependency, generated-project, or hosted workflow claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -27,8 +25,8 @@ commands, proof artifacts, and terminal gates. Physical-device proof is
 terminal-only and final-only. All feature, product-object, primitive,
 intelligence, source/freshness, accessibility, visual, performance,
 privacy/legal, platform, release, signed-RC, and claim-safety gates must close
-before device proof begins. AOS23 and LDI01-LDI06 have since closed Green;
-LDI07 remains next unless repo evidence shows later progress.
+before device proof begins. AOS23 and LDI01-LDI07 have since closed Green;
+LDI08 remains next unless repo evidence shows later progress.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -150,8 +148,8 @@ evidence. AOS21 is complete / Green as Interoperability Kernel App Intents
 EventKit Planning evidence. AOS22 is complete / Green as Longevity Kernel
 Archive Aging evidence. AOS23 is complete / Green as Governance Kernel Registry
 evidence. LDI01 is complete / Green as Living Dream Architecture source-truth
-governance evidence after explicit user-directed early insertion. LDI02-LDI06
-have since closed Green, and LDI07 is the next eligible global batch
+governance evidence after explicit user-directed early insertion. LDI02-LDI07
+have since closed Green, and LDI08 is the next eligible global batch
 unless dependency review selects another eligible batch.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
@@ -986,7 +984,8 @@ Batch type: docs/Codex OS/global-train integration only.
   contract; LDI04 has since closed Green as a local North Star Extraction
   contract; LDI05 has since closed Green as a local Source Claim Graph
   contract; LDI06 has since closed Green as a local Pack Registry And Pack
-  Compiler contract; and LDI07 is next.
+  Compiler contract; LDI07 has since closed Green as a local Pack Supply Chain
+  Security contract; and LDI08 is next.
 - Queued PD01-PD18 and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,
