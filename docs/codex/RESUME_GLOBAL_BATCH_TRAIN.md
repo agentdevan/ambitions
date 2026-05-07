@@ -36,9 +36,10 @@ workflows are intentionally absent, and current validation is local/Codex-
 operated only. Physical-device proof is final-only, terminal-only, and blocked
 until all pre-device gates close.
 
-AOS18 Evaluation Golden Scenarios is complete / Green as additive value-contract
-evidence. AOS19 Experience Kernel Celestial Cognitive Load is the next eligible
-global batch unless a later repo-truth update proves newer progress.
+AOS19 Experience Kernel Celestial Cognitive Load is complete / Green as
+additive value-contract evidence. AOS20 Adaptation Kernel Local Personalization
+is the next eligible global batch unless a later repo-truth update proves newer
+progress.
 
 Required first-pass checks:
 
@@ -66,10 +67,11 @@ Current proven repo evidence before this alias selected:
 - FIO01 / PFC05A / DPTG00 complete / Green.
 - AOS17 Privacy Safety Kernel complete / Green.
 - AOS18 Evaluation Golden Scenarios complete / Green.
-- AOS19 Experience Kernel Celestial Cognitive Load is the next eligible global
+- AOS19 Experience Kernel Celestial Cognitive Load complete / Green.
+- AOS20 Adaptation Kernel Local Personalization is the next eligible global
   batch unless newer repo evidence selects a later batch.
 
-Continue to AOS19 unless a Hard Red or unrecoverable Red is found.
+Continue to AOS20 unless a Hard Red or unrecoverable Red is found.
 
 ## Continuation Policy
 

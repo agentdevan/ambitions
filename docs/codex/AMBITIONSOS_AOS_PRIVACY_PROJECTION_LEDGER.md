@@ -64,3 +64,32 @@ Not proven:
 - UI disclosure
 - legal/privacy compliance
 - physical-device proof
+
+## AOS19 Experience Kernel Celestial Cognitive Load
+
+Owner: Experience Kernel.
+Status: Green value-contract proof.
+
+Projection rules now represented in code:
+
+- sensitive or private experience copy requires privacy-safe labels
+- canonical user surfaces remain Today, Goals, Capture, Plan, and You
+- experience contracts reject hidden mutation and runtime-store behavior
+- recovery copy must stay non-shaming before later surface projection
+- forbidden release/device/platform and AI/productivity overclaim language is
+  rejected before presentation proof
+
+Evidence:
+
+- `Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift`
+- `Native/AmbitionsTests/Domain/AmbitionsOSExperienceModelsTests.swift`
+- `docs/audits/aos19-experience-kernel-celestial-cognitive-load-report.md`
+
+Not proven:
+
+- UI integration
+- rendered simulator proof
+- public accessibility conformance
+- legal/privacy compliance
+- external projection runtime
+- physical-device proof

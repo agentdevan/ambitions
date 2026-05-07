@@ -653,6 +653,65 @@ Does not prove:
 - physical-device proof
 - release/platform readiness
 
+## AOS19
+
+Batch: AOS19 Experience Kernel Celestial Cognitive Load.
+Result: Green.
+Evidence date: 2026-05-07.
+
+Proof scope:
+
+- typed experience contract for Today, Goals, Capture, Plan, and You
+- canonical primary-object and top-level IA preservation gates
+- visible-section, primary-decision, wayfinding, density, and Today full-path
+  depth checks
+- dashboard drift, generic productivity, chatbot wrapper, confidence-score,
+  streak/trophy, calendar-clone, and release/device overclaim language blocking
+- accessibility pre-device review gates for VoiceOver, Dynamic Type, Reduce
+  Motion, non-color meaning, hit targets, and cognitive load
+- sensitive-copy privacy-safe label and non-shaming recovery-language checks
+- hidden-mutation and runtime-store behavior blocking
+- value-only runtime boundary
+
+Commands:
+
+- `git status --short`
+- `git branch --show-current`
+- `git rev-parse HEAD`
+- `git log -1 --oneline`
+- `test ! -d .github/workflows`
+- `xcodegen generate`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos19 -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AmbitionsOSExperienceModelsTests test CODE_SIGNING_ALLOWED=NO`
+- `git diff --check`
+- `scripts/run-doc-qa.sh || true`
+- `scripts/batch-train-gate-check.sh || true`
+- `scripts/swiftui-architecture-scan.sh || true`
+- `scripts/build-local.sh || true`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -derivedDataPath output/DerivedData-aos19-build -destination "platform=iOS Simulator,name=iPhone 17" build CODE_SIGNING_ALLOWED=NO`
+
+Result bundle:
+
+- `output/DerivedData-aos19/Logs/Test/Test-Ambitions-2026.05.07_00-34-03--0400.xcresult`
+
+Build note:
+
+- `scripts/build-local.sh` hit the existing shared Xcode DerivedData database
+  corruption. The dedicated repo-local DerivedData build passed.
+
+Does not prove:
+
+- UI integration or rendered proof
+- experience runtime, personalization runtime, or recommendation runtime
+- model runtime or LDI runtime
+- Life Graph mutation
+- persistence or schema
+- sync/account/backend
+- hosted AI or hosted CI proof
+- legal/privacy compliance
+- public accessibility conformance
+- physical-device proof
+- release/platform readiness
+
 ## AOS18
 
 Batch: AOS18 Evaluation Golden Scenarios.
