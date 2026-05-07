@@ -36,7 +36,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - AOS22 is complete Green as additive Longevity Kernel Archive Aging evidence.
 - AOS23 is complete Green as docs/Codex OS Governance Kernel Registry
   evidence. LDI01 followed and is now complete Green as source-truth/
-  governance evidence. LDI02 follows unless repo evidence or dependency review
+  governance evidence. LDI02 followed and is now complete Green as a local
+  Capture Handling Ladder contract. LDI03 follows unless repo evidence or dependency review
   selects another eligible batch.
 
 ## Full-Stack Optimized Order
@@ -1005,7 +1006,14 @@ remaining sensitive intelligence work.
     persistence/schema, sync/cloud, platform, hosted AI, user-data server,
     professional advice, legal/privacy compliance, physical-device proof,
     public accessibility proof, or release/platform claims.
-93. LDI02 Capture Handling Ladder.
+93. LDI02 Capture Handling Ladder. Completed Green on 2026-05-07 as a local
+    value-model contract and focused-test proof. It adds typed canonical
+    handling lanes, seriousness, source/freshness/privacy/safety signals,
+    terminal blocking, review requirements, activation gates, and runtime
+    boundaries. It does not add UI integration, route/raw-value changes,
+    persistence/schema, sync/cloud, hosted AI, user-data server,
+    professional-advice behavior, release/device proof, legal/privacy
+    compliance proof, public accessibility proof, or full LDI runtime behavior.
 94. LDI03 Dream Safety Legality Feasibility Triage.
 95. LDI04 North Star Extraction.
 96. LDI05 Source Claim Graph.

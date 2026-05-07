@@ -4,10 +4,11 @@
 
 Status: Active future implementation train. LDI01 is Green as docs/Codex OS
 source-truth and governance evidence after explicit user-directed early
-insertion following AOS23. LDI02-LDI22 remain queued serial successors. This
-train does not claim runtime implementation. LDI remains blocked from runtime
-work until each successor batch proves its own HPS, Source Atlas, safety,
-privacy, professional-boundary, and release-claim gates.
+insertion following AOS23. LDI02 is Green as local value-model Capture Handling
+Ladder contract and focused-test evidence. LDI03-LDI22 remain queued serial
+successors. This train does not claim runtime implementation. LDI remains
+blocked from runtime work until each successor batch proves its own HPS, Source
+Atlas, safety, privacy, professional-boundary, and release-claim gates.
 
 ## Purpose
 
@@ -73,7 +74,7 @@ LDI must route source-dependent behavior through:
 | Batch | Title | Status | Boundary | Required result |
 | --- | --- | --- | --- | --- |
 | LDI01 | Living Dream Architecture Source Truth | Complete / Green after explicit user-directed early insertion following AOS23 | docs/canon + codex governance only | Creates/updates LDI source truth and governance references, importing HPS and Source Atlas invariants. |
-| LDI02 | Capture Handling Ladder | Queued after AOS30 by default and HPS/SA closeout | capture -> classify -> seriousness -> triage -> source binder route -> route contracts and fixtures | Defines local contracts and fixtures for the dream handling ladder, using HPS dream-to-domain classifier and Source Atlas source binder routes. |
+| LDI02 | Capture Handling Ladder | Complete / Green after explicit user-directed early insertion following LDI01 | capture -> classify -> seriousness -> triage -> source binder route -> route contracts and fixtures | Adds local value-model handling lane contracts, deterministic routing, validator issues, and focused tests; no UI/runtime/persistence/source-pack behavior is claimed. |
 | LDI03 | Dream Safety Legality Feasibility Triage | Queued after AOS30 by default and HPS/SA closeout | unsafe/illegal/crisis/fantasy/regulated/minor/professional/source-risk boundary contracts, fixtures, and safe redirect rules | Builds safety triage contracts and red-team proof, including minor/student-data, career/education false-certainty, and high-risk source stale-claim risks. |
 | LDI04 | North Star Extraction | Queued after AOS30 by default and HPS/SA closeout | impossible/fantasy/symbolic/unsafe-literal dream conversion contracts and examples | Turns impossible or unsafe-literal dreams into safe meaning without validating literal harm, preserving identity continuity and option value; official requirements remain source-needed unless Source Atlas proves them. |
 | LDI05 | Source Claim Graph | Queued after AOS30 by default and HPS/SA closeout | atomic claims, source refs, claim states, jurisdiction, freshness policies | Implements claim graph contracts and proof fixtures using Source Atlas claim and freshness states. |

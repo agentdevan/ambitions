@@ -4,16 +4,17 @@ Status: Active release-claim boundary through AOS23 Governance Kernel Registry
 
 ## Forbidden Current Claims
 
-- AmbitionsOS is implemented.
-- Ambitions uses an on-device reasoning engine.
-- Ambitions replaces Calendar.
-- Ambitions replaces Reminders.
-- Ambitions verifies official requirements.
-- Ambitions is App Store ready.
-- Ambitions is TestFlight ready.
-- Ambitions is device verified.
-- Ambitions has public accessibility conformance.
-- Ambitions has rendered widget/Live Activity/App Intent proof.
+- Forbidden current claim: AmbitionsOS is implemented.
+- Forbidden current claim: Ambitions uses an on-device reasoning engine.
+- Forbidden current claim: Ambitions replaces Calendar.
+- Forbidden current claim: Ambitions replaces Reminders.
+- Forbidden current claim: Ambitions verifies official requirements.
+- Forbidden current claim: Ambitions is App Store ready.
+- Forbidden current claim: Ambitions is TestFlight ready.
+- Forbidden current claim: Ambitions is device verified.
+- Forbidden current claim: Ambitions has public accessibility conformance.
+- Forbidden current claim: Ambitions has rendered widget/Live Activity/App
+  Intent proof.
 
 ## Allowed Current Claims
 
@@ -25,5 +26,6 @@ Status: Active release-claim boundary through AOS23 Governance Kernel Registry
   physical-device proof.
 - AOS requires evidence gates before broader implementation or release claims.
 - AOS23 Governance Kernel Registry is complete as docs/Codex OS governance
-  evidence only; LDI01 is next by optimized global order unless dependency
-  review selects another eligible batch.
+  evidence only; LDI01 and LDI02 followed and are complete Green by optimized
+  global order, and LDI03 is next unless dependency review selects another
+  eligible batch.

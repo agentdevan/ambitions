@@ -2,19 +2,18 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: LDI01 Living Dream Architecture Source Truth
+Current batch: LDI02 Capture Handling Ladder
 complete / Green.
-Next eligible batch: LDI02 Capture Handling Ladder.
-Scope: LDI01 recorded explicit early Living Dream source-truth insertion after
-AOS23, updated LDI gate/dependency/invariant/train governance, repaired the
-LDI release-claim scanner to scan changed batch files instead of the full
-historical repo on a clean tree, and added an LDI01 audit report. It adds no
-app behavior, production Swift, runtime, model runtime, LDI runtime, UI
-integration, Life Graph mutation, persistence/schema, sync/cloud, platform
-integration, signing, entitlement, dependency, generated project, hosted
-workflow, release/platform, legal/privacy compliance, physical-device proof,
-professional advice, user-data server, hosted AI, or public accessibility
-claim.
+Next eligible batch: LDI03 Dream Safety Legality Feasibility Triage.
+Scope: LDI02 added the local value-model Capture Handling Ladder contract and
+focused domain tests for canonical handling lanes, deterministic routing,
+review-before-activation, source/freshness review, privacy-sensitive handling,
+professional-boundary scaffolds, unsafe/crisis blocking, and local-first runtime
+boundaries. It adds no UI integration, route/raw-value change, persistence/
+schema, sync/cloud, hosted AI, user-data server, professional advice, release/
+platform claim, legal/privacy compliance, physical-device proof, public
+accessibility proof, signing, entitlement, dependency, generated-project, or
+hosted workflow claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -22,8 +21,8 @@ The overlay package is complete after checks pass. Workflow removal is complete:
 `.github/workflows` is absent and hosted workflows are intentionally not valid
 current proof. DPTG00 is locked as the future terminal physical-device
 release-candidate proof gate. All pre-device gates must close before device
-proof begins. AOS23 has since closed Green; LDI01 remains next unless repo
-evidence shows later progress.
+proof begins. AOS23, LDI01, and LDI02 have since closed Green; LDI03 remains
+next unless repo evidence shows later progress.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
 entitlement, dependency, generated-project, or hosted-CI proof claim.
@@ -992,7 +991,8 @@ Batch type: docs/Codex OS/global-train integration only.
 - SI01-SI18 completion history above remains binding and is not rewritten.
 - PD01-PD18 have since closed through PD18 Green.
 - LDI01 is complete Green as a source-truth/governance-only early insertion
-  after AOS23; LDI02 is next.
+  after AOS23; LDI02 has since closed Green as a local Capture Handling Ladder
+  value-model contract, and LDI03 is next.
 - Queued PD01-PD18 and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,

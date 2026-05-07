@@ -35,11 +35,11 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 
 Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
 means the repo has a global execution order after SI insertion; REC02-REC06,
-PX01-PX20, ME01, HPS01-HPS12, AOS01 accepted Yellow, and AOS02-AOS23 complete
-Green where proven by registry and run-state evidence. LDI01 Living Dream
-Architecture Source Truth is the next eligible global batch unless newer repo
-evidence advances the train. Future canon remains future canon until
-implemented and proven.
+PX01-PX20, ME01, HPS01-HPS12, AOS01 accepted Yellow, AOS02-AOS23 complete
+Green, and LDI01-LDI02 complete Green where proven by registry and run-state
+evidence. LDI03 Dream Safety Legality Feasibility Triage is the next eligible
+global batch unless newer repo evidence advances the train. Future canon remains
+future canon until implemented and proven.
 
 ---
 

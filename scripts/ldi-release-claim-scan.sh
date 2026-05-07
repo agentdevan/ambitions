@@ -18,7 +18,7 @@ patterns=(
   "backend sync"
   "user-data server"
 )
-allow='not|\bno\b|without|forbidden|must not|does not claim|future|queued|not implemented|non-claim|not prove|unless|forbidden claims|forbidden files|not allowed|no runtime|No runtime|No .* claimed|claim boundary|Must Not Claim|Does Not Prove|Red Criteria|Hard Non-Goals|Release-Claim|Release Claim|unsupported claims|rejects unsupported|must not include|should not claim|do not claim|Do not claim|do not implement|Do not implement|Validation Commands|rg -n|grep -R|cat \|\| true|Never claim'
+allow='not|\bno\b|without|forbidden|must not|does not claim|future|queued|not implemented|non-claim|not prove|unless|forbidden claims|Forbidden Current Claims|forbidden files|not allowed|no runtime|No runtime|No .* claimed|claim boundary|Must Not Claim|Does Not Prove|Red Criteria|Hard Non-Goals|Release-Claim|Release Claim|unsupported claims|rejects unsupported|must not include|should not claim|do not claim|Do not claim|do not implement|Do not implement|Validation Commands|rg -n|grep -R|cat \|\| true|Never claim'
 changed_files=()
 while IFS= read -r f; do
   [[ -n "$f" ]] && changed_files+=("$f")
