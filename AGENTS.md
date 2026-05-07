@@ -14,6 +14,8 @@ Ambitions 3.0 is the active source of truth. Ambitions 2.0, v2, Waves, Batch 61+
 8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
 9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
 10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
+11. `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md` when the user says `resume global batch train`.
+12. `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md` for flagship maturity, terminal-device, pre-device closure, and no-hosted-workflow validation rules.
 
 Older docs may remain useful, but they do not override Ambitions 3.0 source docs. If old docs conflict with Ambitions 3.0, resolve in favor of Ambitions 3.0 and document the conflict when it affects implementation.
 
@@ -75,7 +77,13 @@ Use these entry points for Codex performance and execution:
 - `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md`
 - `docs/canon/Ambitions_3_0_Dependency_Management_Policy.md`
 - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
+- `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`
+- `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md`
 
 ## Batch Train Rule
 
 For multi-batch Ambitions 3.0 execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `.codex/reports/current-batch-train-state.md`, and the selected manifest under `docs/codex/batch-trains/`. Codex may continue automatically only on Green. Yellow/Red stops and produces a repair or decision prompt. F17 Shell/Meridian implementation requires explicit approval.
+
+## Resume Global Batch Train Alias
+
+When the user says `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`. Resume from repo evidence, first close any parked FIO01 / PFC05A / DPTG00 Yellow if safe, then continue the next eligible global batch until all eligible batches are complete or an unrecoverable Red stops the train.
