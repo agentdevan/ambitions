@@ -2,6 +2,8 @@
 
 This repo does not check in an `.xcodeproj`. Native contributors generate the project from `project.yml`, then build and validate the `Ambitions` scheme from Xcode or `xcodebuild`.
 
+Hosted workflows are intentionally absent. Current Ambitions validation is local/Codex-operated only, through checked-in scripts, explicit local terminal logs, local Xcode / `xcodebuild` commands, proof artifacts, and terminal gates.
+
 ## Prerequisites
 
 - macOS with Xcode 16 or newer
@@ -44,7 +46,23 @@ The privacy manifest lives at `Native/Ambitions/Resources/PrivacyInfo.xcprivacy`
 
 R05 records the current repo release posture in `ReleaseCandidateLockDecisionReport` as `Candidate prepared; human approval required`.
 
-That status is not a substitute for the native release workflow below. TestFlight, App Store submission, final RC lock, and public accessibility/platform claims still require physical-device smoke, manual accessibility proof, signed archive/App Store Connect validation, rendered external-surface checks, current store assets, live support/privacy URLs, and explicit human approval.
+That status is not a substitute for the native release workflow below. TestFlight, App Store submission, final RC lock, and public accessibility/platform claims still require terminal physical-device proof, manual accessibility proof, signed archive/App Store Connect validation, rendered external-surface checks, current store assets, live support/privacy URLs, and explicit human approval.
+
+## Local Validation Coverage
+
+Local validation should preserve the same evidence categories formerly represented by hosted validation, without treating hosted runs or artifacts as current proof.
+
+At minimum, local proof packets should include:
+
+- repo status and commit identity
+- project generation
+- package dependency resolution
+- simulator build
+- unit tests
+- UI tests
+- unsigned Release archive sanity
+- signed App Store validation handoff when the release gate requires it
+- explicit non-claim notes for device, App Store, TestFlight, public accessibility, legal/privacy, and human approval gaps
 
 ## Build The App
 
@@ -63,6 +81,19 @@ xcodebuild \
 Expected output:
 
 - `** BUILD SUCCEEDED **`
+
+## Resolve Swift Package Dependencies
+
+```bash
+xcodebuild \
+  -project Ambitions.xcodeproj \
+  -scheme Ambitions \
+  -resolvePackageDependencies
+```
+
+Expected output:
+
+- package resolution completes without unresolved dependency errors
 
 ## Run Unit Tests
 
@@ -100,7 +131,7 @@ xcodebuild \
   test
 ```
 
-The current UI suite launches the app with `AMBITIONS_BOOTSTRAP_MODE=preview`, so it is intentionally CI-friendly and validates the preview-backed user flows rather than a signed production install path.
+The current UI suite launches the app with `AMBITIONS_BOOTSTRAP_MODE=preview`, so it validates preview-backed user flows rather than a signed production install path.
 
 Expected output:
 
@@ -151,6 +182,8 @@ Expected output:
 - `** ARCHIVE SUCCEEDED **`
 - `output/Ambitions.xcarchive`
 
+This unsigned archive is not installable proof, TestFlight proof, App Store proof, signed-RC proof, or physical-device proof.
+
 ## Signed App Store Validation
 
 This repo does not include signing identities, provisioning profiles, or App Store Connect credentials, so final Apple-side validation remains a local Mac release step:
@@ -160,13 +193,13 @@ This repo does not include signing identities, provisioning profiles, or App Sto
 3. Select the `Ambitions` scheme and a generic iOS device destination.
 4. Run `Product > Archive`.
 5. In Organizer, choose `Validate App` for App Store checks.
-6. Use `Distribute App` only after validation passes.
+6. Use `Distribute App` only after validation passes and the owning release gate explicitly authorizes distribution.
 
-GitHub Actions does not perform these signed validation or distribution steps.
+These signed validation or distribution steps are not proven by docs alone.
 
 ## R04 External Truth Packet
 
-`ReleaseExternalTruthReadinessPacket` records the current App Store/privacy/marketing/demo truth from repo evidence. It is useful for drafting metadata and review materials, but it is not a signed archive, App Store Connect validation, screenshot set, support URL proof, TestFlight upload, or RC lock.
+`ReleaseExternalTruthReadinessPacket` records the current App Store/privacy/marketing/demo truth from repo evidence. It is useful for drafting metadata and review materials, but it is not a signed archive, App Store Connect validation, screenshot set, support URL proof, TestFlight upload, physical-device proof, or RC lock.
 
 Before submission, reconcile the packet against:
 
@@ -174,7 +207,7 @@ Before submission, reconcile the packet against:
 - current App Store screenshots from privacy-safe demo data
 - live support and privacy URLs
 - App Privacy disclosures for the submitted binary
-- physical-device proof for external surfaces where enabled
+- terminal physical-device proof for external surfaces where enabled
 - human approval recorded during the R05 gate
 
 ## Launch Planning And Submission Operations
@@ -190,97 +223,22 @@ Use the following documents together when the task is no longer just build/test/
 - [codex/Launch_Operator_Runbook.md](codex/Launch_Operator_Runbook.md)
   Short operator checklist for App Store Connect, TestFlight, metadata, reviewer notes, submission, and launch monitoring.
 
-## GitHub Actions CI Coverage
+## Physical Device Terminal Gate
 
-The native CI workflow lives in [.github/workflows/ios-validate.yml](../.github/workflows/ios-validate.yml) and runs on `macos-15`.
+Physical-device proof is terminal-only. It may not be used as a discovery phase.
 
-### Build, Unit Tests, Archive job
+Before device proof begins, all feature, product-object, primitive, intelligence, source/freshness, accessibility, visual, performance, privacy/legal, platform, release, signed-RC, and claim-safety gates must close.
 
-This job verifies:
+If the physical-device gate fails, the release candidate is invalidated and the train routes back to the owning repair batch. No code changes occur inside the device gate.
 
-- `project.yml` can regenerate `Ambitions.xcodeproj`
-- the generated project still exposes the expected scheme
-- Swift package resolution succeeds
-- the native app target builds for `iphonesimulator`
-- `AmbitionsTests` pass on an available simulator
-- an unsigned Release archive can be produced
-- an unsigned `.ipa` container can be packaged from that archive and uploaded as an artifact with an explicit unsigned limitation note
+The future terminal device gate is documented in:
 
-Core commands used in CI:
+- [codex/batches/DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt.md](codex/batches/DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt.md)
+- [codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md](codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md)
 
-```bash
-xcodegen generate
+## What Local Validation Does Not Validate
 
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -resolvePackageDependencies
-
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -sdk iphonesimulator \
-  -destination "generic/platform=iOS Simulator" \
-  CODE_SIGNING_ALLOWED=NO \
-  build
-
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -destination "platform=iOS Simulator,id=<selected-simulator-udid>" \
-  -only-testing:AmbitionsTests \
-  test
-
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -configuration Release \
-  -destination "generic/platform=iOS" \
-  -archivePath "$RUNNER_TEMP/Ambitions.xcarchive" \
-  CODE_SIGNING_ALLOWED=NO \
-  CODE_SIGN_IDENTITY="" \
-  archive
-```
-
-CI then packages `Payload/Ambitions.app` from the unsigned archive into `Ambitions-unsigned.ipa` and uploads it as an artifact. This is intentionally not described as sideloadable or installable; device installation still requires signing and provisioning outside GitHub Actions.
-
-### UI Tests job
-
-This job verifies:
-
-- the UI test bundle builds for testing
-- the current preview-backed UI suite executes on a deterministic simulator destination
-
-Core commands used in CI:
-
-```bash
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -destination "platform=iOS Simulator,id=<selected-simulator-udid>" \
-  -only-testing:AmbitionsUITests \
-  build-for-testing
-
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -destination "platform=iOS Simulator,id=<selected-simulator-udid>" \
-  -only-testing:AmbitionsUITests \
-  test-without-building
-```
-
-The workflow selects the simulator dynamically from the first available preferred device in this order:
-
-1. `iPhone 16 Pro`
-2. `iPhone 16`
-3. `iPhone 15 Pro`
-4. `iPhone 15`
-
-Both test jobs upload `.xcresult` bundles so failures can be inspected from GitHub Actions artifacts.
-
-## What CI Does Not Validate
-
-CI intentionally does not claim the following:
+Local simulator/build/archive evidence does not claim the following unless a later owning release gate records matching proof:
 
 - signed archives
 - provisioning profile correctness
@@ -288,5 +246,8 @@ CI intentionally does not claim the following:
 - App Store Connect validation
 - App Store distribution
 - physical-device install or runtime behavior
+- public accessibility conformance
+- legal/privacy compliance
+- human approval
 
-R03 adds a code-backed simulator/source readiness ledger in `ReleaseDeviceQAReadinessReport`, but it does not replace this physical-device gate. Do not use TestFlight-ready, real-device verified, or App Store-ready language until the device checks above have separate evidence.
+R03 adds a code-backed simulator/source readiness ledger in `ReleaseDeviceQAReadinessReport`, but it does not replace the terminal physical-device gate. Do not use TestFlight-ready, real-device verified, or App Store-ready language until the terminal gate has separate evidence.
