@@ -71,18 +71,21 @@ As of this order update:
 - AOS21 is complete Green as additive Interoperability Kernel App Intents
   EventKit Planning evidence; AOS22 followed and is now complete.
 - AOS22 is complete Green as additive Longevity Kernel Archive Aging evidence;
-  AOS23 is next by global order.
+  AOS23 followed and is now complete.
+- AOS23 is complete Green as docs/Codex OS Governance Kernel Registry
+  evidence; LDI01 follows by optimized global order unless dependency review
+  selects another eligible batch.
 - FIO01/PFC05A are complete after this run passes checks as docs/governance/
   repo-hygiene evidence. `FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY` is active,
   hosted workflows are intentionally absent, and local/Codex-operated
   validation governs current proof.
 - DPTG00 is locked as a future terminal physical-device release-candidate proof
   gate, not an implementation batch. All pre-device gates must close before it.
-- AOS23-AOS30 remain queued.
+- AOS24-AOS30 remain queued.
 - LDI01-LDI22 remain queued and are inserted by dependency, not train silo.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 - No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay
-  package. AOS23 remains next unless repo evidence shows later progress.
+  package. LDI01 is next unless repo evidence shows later progress.
 
 ## Selection Rule
 
@@ -251,9 +254,9 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 052 | AOS19 Experience Kernel Celestial Cognitive Load | AOS | Experience contract | Completed Green on 2026-05-07 with typed canonical surface, primary object, wayfinding, density, decision/section budget, Today full-path depth, top-level IA preservation, accessibility pre-device review, privacy-safe label, recovery language, forbidden-language, hidden-mutation, runtime-boundary checks, and focused tests. | AOS18. | Complete; AOS20 followed and is now complete. |
 | 053 | AOS20 Adaptation Kernel Local Personalization | AOS | Kernel | Completed Green on 2026-05-07 with local user-controlled calibration profiles, visible assumptions, receipts, permission states, sensitive-adaptation review, seriousness-change receipt gates, deterministic fallback requirements, forbidden-language gates, hidden-mutation blocking, and runtime-boundary checks. | AOS14/AOS18. | Complete; AOS21 followed and is now complete. |
 | 054 | AOS21 Interoperability Kernel App Intents EventKit Planning | AOS | Planning | Completed Green on 2026-05-07 with planning-only external-surface contracts, source/freshness/review gates, external-redaction privacy projection, user-reviewed receipts, performance/compatibility gates, platform-write/permission/external-invocation blocking, hosted-dependency blocking, release/platform language guards, and runtime-boundary checks. | AOS16/AOS17. | Complete; AOS22 followed and is now complete. |
-| 055 | AOS22 Longevity Kernel Archive Aging | AOS | Kernel | Completed Green on 2026-05-07 with archive-aging, legacy-payload survival, source/proof continuity, privacy redaction, user-review, restore/rollback, migration/conflict review, implementation-boundary, hosted-dependency, and runtime-boundary contracts. | AOS02/AOS12/AOS13. | Complete; next AOS23. |
-| 056 | AOS23 Governance Kernel Registry | AOS | Governance | Registry follows all kernel contracts. | AOS01-AOS22. | Single-batch. |
-| 057 | LDI01 Living Dream Architecture Source Truth | LDI | Docs/Contract | LDI begins after AOS governance contracts, before AOS UI integration. | AOS23 or explicit dependency review. | Single-batch. |
+| 055 | AOS22 Longevity Kernel Archive Aging | AOS | Kernel | Completed Green on 2026-05-07 with archive-aging, legacy-payload survival, source/proof continuity, privacy redaction, user-review, restore/rollback, migration/conflict review, implementation-boundary, hosted-dependency, and runtime-boundary contracts. | AOS02/AOS12/AOS13. | Complete; AOS23 followed and is now complete. |
+| 056 | AOS23 Governance Kernel Registry | AOS | Governance | Completed Green on 2026-05-07 with Governance Kernel registry, AOS01-AOS22 ownership map, train-integrity gates, local-validation-only proof, hosted-workflow absence preservation, and terminal-device gate boundaries. | AOS01-AOS22. | Complete; next LDI01 unless dependency review selects another eligible batch. |
+| 057 | LDI01 Living Dream Architecture Source Truth | LDI | Docs/Contract | LDI begins after AOS governance contracts, before AOS UI integration. | AOS23 or explicit dependency review. | Next eligible. |
 | 058 | LDI02 Capture Handling Ladder | LDI | Contract | Dream handling begins with capture ladder. | LDI01. | Single-batch. |
 | 059 | LDI03 Dream Safety Legality Feasibility Triage | LDI | Safety | Safety triage must precede path/runtime work. | LDI02. | Single-batch. |
 | 060 | LDI04 North Star Extraction | LDI | Contract | Meaning extraction follows safety. | LDI03. | Single-batch. |

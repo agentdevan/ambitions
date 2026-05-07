@@ -601,8 +601,18 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   archive runtime, restore runtime, persistence/schema migration, sync/cloud
   or multi-device merge runtime, conflict-resolution runtime, UI integration,
   Life Graph mutation, legal/privacy compliance, physical-device proof,
+  release, or public accessibility claim. AOS23 followed and is now complete.
+- AOS23 is complete Green as docs/Codex OS Governance Kernel Registry evidence.
+  Use `docs/codex/AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md` and
+  `docs/audits/aos23-governance-kernel-registry-report.md` for AOS01-AOS22
+  ownership maps, train-integrity gates, local-validation-only proof,
+  hosted-workflow absence preservation, and terminal-device gate boundaries.
+  It adds no app behavior, production Swift, runtime, model runtime, LDI
+  runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud,
+  platform integration, legal/privacy compliance, physical-device proof,
   release, or public accessibility claim. The next eligible global batch is
-  AOS23 Governance Kernel Registry.
+  LDI01 Living Dream Architecture Source Truth unless dependency review selects
+  another eligible batch.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

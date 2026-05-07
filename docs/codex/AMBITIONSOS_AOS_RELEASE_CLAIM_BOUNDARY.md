@@ -1,6 +1,6 @@
 # AmbitionsOS AOS Release Claim Boundary
 
-Status: Future release-claim boundary
+Status: Active release-claim boundary through AOS23 Governance Kernel Registry
 
 ## Forbidden Current Claims
 
@@ -17,12 +17,13 @@ Status: Future release-claim boundary
 
 ## Allowed Current Claims
 
-- AmbitionsOS is future canon plus bounded additive AOS01-AOS22 contract
-  evidence where reports and focused tests prove it.
-- AOS01-AOS22 do not prove runtime implementation, UI integration,
+- AmbitionsOS is future canon plus bounded additive AOS01-AOS23 contract and
+  governance evidence where reports and focused tests prove it.
+- AOS01-AOS23 do not prove runtime implementation, UI integration,
   persistence, sync/cloud, hosted AI, release readiness, App Store readiness,
   TestFlight readiness, public accessibility conformance, signed-RC proof, or
   physical-device proof.
 - AOS requires evidence gates before broader implementation or release claims.
-- AOS22 Longevity Kernel Archive Aging is complete as archive-aging contract
-  evidence only; AOS23 Governance Kernel Registry is next after AOS22 Green.
+- AOS23 Governance Kernel Registry is complete as docs/Codex OS governance
+  evidence only; LDI01 is next by optimized global order unless dependency
+  review selects another eligible batch.

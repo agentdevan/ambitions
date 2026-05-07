@@ -1,6 +1,6 @@
 # AmbitionsOS AOS Batch Gate Matrix
 
-Status: Future train gate matrix
+Status: Active train gate matrix; AOS01 Accepted Yellow and AOS02-AOS23 Green
 
 | Batch | Kernel | Primitive | Surface | Preconditions | Skills | Review Board | Validation Pack | Fixture Pack | Source | Privacy | Performance | Compatibility | Maintainability | Release | Logs | Stop | Next |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ Status: Future train gate matrix
 | AOS20 | Adaptation | mapped 3.0 primitive | You/Today/Plan | depends on AOS14 and AOS18 | AOS skills | AOS boards | AOS packs | fixture group | review | review | review | review | review | no claim | evidence log | gate failure | next manifest row |
 | AOS21 | Interoperability | mapped 3.0 primitive | external | depends on AOS16, AOS17, and interoperability privacy gates | AOS skills | AOS boards | AOS packs | fixture group | review | review | review | review | review | no claim | evidence log | gate failure | next manifest row |
 | AOS22 | Longevity | mapped 3.0 primitive | You/Goals | depends on AOS02, AOS12, and AOS13 | AOS skills | AOS boards | AOS packs | fixture group | review | review | review | review | review | no claim | evidence log | gate failure | next manifest row |
-| AOS23 | Governance | mapped 3.0 primitive | Codex OS | depends on all kernel contracts | AOS skills | AOS boards | AOS packs | fixture group | review | review | review | review | review | no claim | evidence log | gate failure | next manifest row |
+| AOS23 | Governance | mapped 3.0 primitive | Codex OS | depends on all kernel contracts | AOS skills | AOS boards | AOS registry and train-integrity packs | fixture group | review | review | review | review | review | no claim | `AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md`; AOS23 report | gate failure | LDI01 by optimized global order unless dependency review selects another eligible batch |
 | AOS24 | Experience | mapped 3.0 primitive | Today/Goals/Capture/Plan/You | depends on AOS18-AOS23 | AOS skills | AOS boards | AOS packs | fixture group | review | review | review | review | review | no claim | evidence log | gate failure | next manifest row |
 | AOS25 | Evaluation | mapped 3.0 primitive | tests | depends on AOS18 and AOS24 | AOS skills | AOS boards | AOS packs | fixture group | review | review | review | review | review | no claim | evidence log | gate failure | next manifest row |
 | AOS26 | Evaluation | mapped 3.0 primitive | all | depends on AOS16, AOS17, AOS18, and AOS25 | AOS skills | AOS boards | AOS packs | fixture group | review | review | review | review | review | no claim | evidence log | gate failure | next manifest row |

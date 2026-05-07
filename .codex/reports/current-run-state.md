@@ -2,20 +2,19 @@
 
 Date: 2026-05-07
 Active train: Global full-stack execution
-Current batch: AOS22 Longevity Kernel Archive Aging
+Current batch: AOS23 Governance Kernel Registry
 complete / Green.
-Next eligible batch: AOS23 Governance Kernel Registry.
-Scope: AOS22 added additive Longevity Kernel archive-aging proof for typed
-archive plans, legacy-payload survival, source/proof continuity, privacy
-redaction, user-reviewed receipts, restore and rollback gates,
-migration/conflict review, persistence/sync/merge implementation-boundary
-blocking, hosted-dependency blocking, release/device/compliance language
-guards, and runtime-boundary checks. It adds no archive runtime, restore
-runtime, persistence/schema migration, sync/cloud or multi-device merge
-runtime, conflict-resolution runtime, UI integration, model runtime, LDI
-runtime, Life Graph mutation, sync/account/backend service, hosted AI,
-release/platform, legal/privacy compliance, physical-device proof, or public
-accessibility claim.
+Next eligible batch: LDI01 Living Dream Architecture Source Truth by optimized
+global order unless dependency review selects another eligible batch.
+Scope: AOS23 added docs/Codex OS Governance Kernel registry proof for AOS01-AOS22
+kernel ownership, current evidence, open boundaries, HPS/Source Atlas/Pack
+Factory inheritance, privacy/accessibility/visual/performance gates,
+local-validation-only proof, hosted-workflow removal preservation, and
+terminal-device gate rules. It adds no app behavior, production Swift, runtime,
+model runtime, LDI runtime, UI integration, Life Graph mutation,
+persistence/schema, sync/cloud, platform integration, signing, entitlement,
+dependency, generated project, hosted workflow, release/platform, legal/privacy
+compliance, physical-device proof, or public accessibility claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -26,9 +25,9 @@ commands, proof artifacts, and terminal gates. Physical-device proof is
 terminal-only and final-only. All feature, product-object, primitive,
 intelligence, source/freshness, accessibility, visual, performance,
 privacy/legal, platform, release, signed-RC, and claim-safety gates must close
-before device proof begins. AOS22 has since closed Green; AOS23 remains next
-unless repo evidence shows later progress. No AOS or LDI work was fabricated by
-this governance package.
+before device proof begins. AOS23 has since closed Green; LDI01 remains next
+unless repo evidence shows later progress. No LDI work was fabricated by this
+governance package.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -148,8 +147,9 @@ AOS19 is complete / Green as Experience Kernel Celestial Cognitive Load
 evidence. AOS20 is complete / Green as Adaptation Kernel Local Personalization
 evidence. AOS21 is complete / Green as Interoperability Kernel App Intents
 EventKit Planning evidence. AOS22 is complete / Green as Longevity Kernel
-Archive Aging evidence. AOS23 is the next eligible global batch before
-other AOS/LDI work continues.
+Archive Aging evidence. AOS23 is complete / Green as Governance Kernel Registry
+evidence. LDI01 is the next eligible global batch before later AOS UI
+integration unless dependency review selects another eligible batch.
 Accepted Yellow:
 Source Atlas Research Seeds v1 import is pending because the expected
 `ambitions_source_atlas_machine_readable_appendices.zip` file was unavailable

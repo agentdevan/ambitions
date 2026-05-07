@@ -2,7 +2,7 @@
 <!-- markdownlint-disable MD013 -->
 
 Status: Active AOS evidence ledger
-Date: 2026-05-06
+Date: 2026-05-07
 
 ## AOS01
 
@@ -720,6 +720,52 @@ Does not prove:
 - UI integration or rendered proof
 - route/raw-value, entitlement/signing/project/dependency, persistence, or
   schema changes
+- hosted AI or hosted CI proof
+- legal/privacy compliance
+- public accessibility conformance
+- physical-device proof
+- release/platform readiness
+
+## AOS23
+
+Batch: AOS23 Governance Kernel Registry.
+Result: Green.
+Evidence date: 2026-05-07.
+
+Proof scope:
+
+- compact Governance Kernel owner registry for AOS01-AOS22 contracts
+- train-integrity baseline update across AOS control, dependency, invariant,
+  evidence, traceability, test-impact, registry, context, and current-state docs
+- HPS, Source Atlas, Pack Factory, privacy, accessibility, visual,
+  performance, hosted-workflow, and terminal-device gate locks
+- local/Codex-operated validation policy preserved
+- next eligible optimized global-order successor recorded as LDI01 unless
+  dependency review selects another eligible batch
+
+Commands:
+
+- `git status --short`
+- `git branch --show-current`
+- `git rev-parse HEAD`
+- `git log -1 --oneline`
+- `test ! -d .github/workflows`
+- `git diff --check`
+- `scripts/run-doc-qa.sh || true`
+- `scripts/batch-train-gate-check.sh || true`
+- `scripts/swiftui-architecture-scan.sh || true`
+- hosted-workflow residual mention scan
+- AOS23/governance/release-claim boundary scan
+
+Does not prove:
+
+- AOS runtime implementation
+- model runtime or LDI runtime
+- UI integration or rendered proof
+- Life Graph mutation
+- persistence or schema
+- source ingestion, OCR/PDF parsing, or source certification
+- sync/account/backend
 - hosted AI or hosted CI proof
 - legal/privacy compliance
 - public accessibility conformance

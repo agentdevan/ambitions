@@ -1,10 +1,22 @@
 # AmbitionsOS AOS Train Control System
 
-Status: Active AmbitionsOS train governance; AOS01-AOS17 have bounded evidence
+Status: Active AmbitionsOS train governance; AOS01 Accepted Yellow and AOS02-AOS23 Green have bounded evidence
 
 ## Rule
 
 No AOS batch may start unless predecessor gates are Green or explicitly accepted as Yellow with documented risk. This system does not implement app behavior.
+
+## Current Baseline
+
+AOS23 Governance Kernel Registry is complete Green after local validation as
+docs/Codex OS governance evidence. `AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md`
+is the compact owner map for AOS01-AOS22 kernel contracts, train integrity,
+HPS/Source Atlas/Pack Factory inheritance, local-validation-only proof, and
+terminal-device gate boundaries. AOS23 adds no app behavior, production Swift,
+runtime, model, persistence/schema, platform, sync/cloud, release, legal,
+privacy-compliance, public-accessibility, physical-device, or hosted-CI claim.
+Continue only to the next eligible global-order batch unless a Hard Red or
+unrecoverable Red appears.
 
 ## Batch Requirements
 

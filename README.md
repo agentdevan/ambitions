@@ -33,7 +33,13 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 
 [Ambitions 4.0 Execution Program](docs/canon/Ambitions_4_0_Execution_Program.md) is the active post-3.0 implementation and canon-execution program. It is not a shipped product version, release-readiness claim, App Store claim, TestFlight claim, physical-device proof, platform proof, or public accessibility proof.
 
-Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently means the repo has a global execution order after SI insertion; REC02-REC06, PX01-PX20, ME01, HPS01-HPS12, and AOS01-AOS16 are complete where proven by registry and run-state evidence. AOS17 Privacy Safety Kernel is the next eligible global batch unless newer repo evidence advances the train. Future canon remains future canon until implemented and proven.
+Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
+means the repo has a global execution order after SI insertion; REC02-REC06,
+PX01-PX20, ME01, HPS01-HPS12, AOS01 accepted Yellow, and AOS02-AOS23 complete
+Green where proven by registry and run-state evidence. LDI01 Living Dream
+Architecture Source Truth is the next eligible global batch unless newer repo
+evidence advances the train. Future canon remains future canon until
+implemented and proven.
 
 ---
 

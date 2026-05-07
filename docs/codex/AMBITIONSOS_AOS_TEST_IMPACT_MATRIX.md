@@ -2,7 +2,7 @@
 <!-- markdownlint-disable MD013 -->
 
 Status: Active AOS test impact matrix
-Date: 2026-05-06
+Date: 2026-05-07
 
 | Batch | Change type | Runtime impact | Required proof | Result |
 | --- | --- | --- | --- | --- |
@@ -28,3 +28,4 @@ Date: 2026-05-06
 | AOS20 | Additive Adaptation Kernel local personalization contract and focused tests | No app behavior, personalization runtime, durable memory store, hidden learning, persistence, Life Graph mutation, model runtime, external projection runtime, or UI change | `AmbitionsOSAdaptationModelsTests`, XcodeGen | Green; repaired helper argument order, then focused proof passed in fresh DerivedData after a local build DB lock. |
 | AOS21 | Additive Interoperability Kernel planning contract and focused tests | No app behavior, App Intent implementation, EventKit/Reminder writes, platform permission prompt, external invocation, background refresh, persistence, Life Graph mutation, route/raw-value, entitlement/signing/project/dependency, external projection runtime, or UI change | `AmbitionsOSInteroperabilityModelsTests`, XcodeGen | Green; repaired test source-state fixture to existing `.sourceNeeded`, then focused proof passed in fresh DerivedData. |
 | AOS22 | Additive Longevity Kernel archive-aging contract and focused tests | No app behavior, archive runtime, restore runtime, persistence/schema migration, sync/cloud or multi-device merge runtime, conflict-resolution runtime, Life Graph mutation, external projection runtime, or UI change | `AmbitionsOSLongevityModelsTests`, XcodeGen | Green; repaired test helper argument order, then focused proof passed in fresh DerivedData. |
+| AOS23 | Docs/Codex OS governance registry and train-integrity updates | No app behavior, production Swift, runtime, model, LDI, UI, route, persistence/schema, sync/cloud, platform, signing, dependency, or workflow change | doc QA, batch-train gate check, architecture advisory scan, diff check, hosted-workflow residual scan | Green after local validation; no focused Swift tests required for docs-only batch. |

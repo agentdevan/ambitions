@@ -33,8 +33,10 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - Historical IDs are not renumbered by the FIO01/PFC05A/DPTG00 overlay package.
 - AOS21 is complete Green as additive Interoperability Kernel App Intents
   EventKit Planning evidence; AOS22 followed and is now complete.
-- AOS22 is complete Green as additive Longevity Kernel Archive Aging evidence;
-  AOS23 remains next unless repo evidence shows later progress.
+- AOS22 is complete Green as additive Longevity Kernel Archive Aging evidence.
+- AOS23 is complete Green as docs/Codex OS Governance Kernel Registry
+  evidence; LDI01 follows by optimized global order unless repo evidence or
+  dependency review selects another eligible batch.
 
 ## Full-Stack Optimized Order
 
@@ -981,7 +983,14 @@ remaining sensitive intelligence work.
     runtime, persistence/schema migration, sync/cloud or multi-device merge
     runtime, conflict-resolution runtime, UI integration, legal/privacy
     compliance, physical-device proof, or release/platform claims.
-91. AOS23 Governance Kernel Registry.
+91. AOS23 Governance Kernel Registry. Completed Green on 2026-05-07 with
+    docs/Codex OS Governance Kernel registry, AOS01-AOS22 ownership map,
+    train-integrity gates, local-validation-only proof, hosted-workflow
+    absence preservation, and terminal-device gate boundaries. It does not add
+    app behavior, production Swift, runtime, model runtime, LDI runtime, UI
+    integration, persistence/schema, sync/cloud, platform, legal/privacy
+    compliance, physical-device proof, public accessibility proof, or
+    release/platform claims.
 
 ### Phase 8 — LDI Safety / Runtime / Source Gates
 

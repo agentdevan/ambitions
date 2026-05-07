@@ -1,6 +1,6 @@
 # AmbitionsOS AOS Dependency Graph
 
-Status: Future train dependency truth
+Status: Active train dependency truth through AOS23
 
 - AOS01: blocks all AOS work
 - AOS02: depends on AOS01
@@ -24,8 +24,12 @@ Status: Future train dependency truth
 - AOS20: depends on AOS14 and AOS18
 - AOS21: depends on AOS16, AOS17, and interoperability privacy gates
 - AOS22: depends on AOS02, AOS12, and AOS13
-- AOS23: depends on all kernel contracts
-- AOS24: depends on AOS18-AOS23
+- AOS23: depends on all kernel contracts; complete Green as Governance Kernel
+  registry evidence after local validation
+- LDI01: optimized global order follows AOS23 before later AOS UI integration
+  unless dependency review selects another eligible batch
+- AOS24: depends on AOS18-AOS23 and any global-order LDI predecessor gates that
+  expose Living Dream behavior into UI
 - AOS25: depends on AOS18 and AOS24
 - AOS26: depends on AOS16, AOS17, AOS18, and AOS25
 - AOS27: depends on AOS26
