@@ -83,7 +83,7 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
             "Reality Meridian",
             "Receipt Drawer",
             "Source Fold",
-            "MissionControlTimeSpine",
+            "Constellation Atlas",
             "Action Closure Diamond",
             "LifeShape Map",
             "Capture Atmosphere Composer"
@@ -135,7 +135,7 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
             .joined(separator: " ")
 
         XCTAssertTrue(combined.localizedCaseInsensitiveContains("placement appears after content"))
-        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Completed, Now, Friction, Next, Horizon"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("life areas, proof, pressure, and next steps"))
         XCTAssertTrue(combined.localizedCaseInsensitiveContains("capacity"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("calendar clone"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("dashboard"))

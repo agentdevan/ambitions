@@ -9,12 +9,13 @@ Date: 2026-05-08
 
 AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object
 Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
-and AFI06 Today Reality Meridian are complete / Accepted Yellow.
+AFI06 Today Reality Meridian, and AFI07 Goals Constellation Atlas are complete /
+Accepted Yellow.
 
 Next eligible batch:
 
 ```text
-AFI07 Goals Constellation Atlas
+AFI08 Capture Atmosphere Composer
 ```
 
 ## Active IA
@@ -40,6 +41,7 @@ as contextual/action language or historical compatibility evidence.
 | AFI04 Material System Proof | Accepted Yellow | Active material canon now defines proof rules for Celestial Field, Graphite Recess, Luminous Trace, and Quiet Glass while keeping final token/rendered quality claims blocked without screenshots. | AFI05 |
 | AFI05 Shell And Continuity Chrome | Accepted Yellow | User-facing shell/chrome labels now use Time as the fourth top-level destination while `.plan` remains an internal compatibility route/raw value. | AFI06 |
 | AFI06 Today Reality Meridian | Accepted Yellow | Today user-facing object language now uses Reality Meridian, with Start Here emerging from the active Meridian node while internal Reality Rail identifiers remain compatibility seams. | AFI07 |
+| AFI07 Goals Constellation Atlas | Accepted Yellow | Goals top-level copy and contracts now use Your Direction, Constellation Atlas, and Orbital Lens while Mission Control remains a Goal Detail/internal compatibility seam. | AFI08 |
 
 ## Claims
 

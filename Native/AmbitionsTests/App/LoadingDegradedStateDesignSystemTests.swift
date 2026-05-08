@@ -115,7 +115,7 @@ final class LoadingDegradedStateDesignSystemTests: XCTestCase {
             .joined(separator: " ")
 
         XCTAssertTrue(combinedCopy.contains("Start Here"))
-        XCTAssertTrue(combinedCopy.contains("MissionControlTimeSpine"))
+        XCTAssertTrue(combinedCopy.contains("Constellation Atlas"))
         XCTAssertTrue(combinedCopy.contains("Capture Placement Shelf"))
         XCTAssertTrue(combinedCopy.contains("LifeShape Contour Map"))
         XCTAssertTrue(combinedCopy.contains("Personal System Center"))

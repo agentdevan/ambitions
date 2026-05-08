@@ -23,7 +23,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
     public var primaryObject: String {
         switch self {
         case .today: "Reality Meridian"
-        case .goals: "Mission Control"
+        case .goals: "Constellation Atlas + Orbital Lens"
         case .capture: "Placement Composer"
         case .plan: "LifeShape Field"
         case .you: "Personal System Center"

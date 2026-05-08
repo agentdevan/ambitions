@@ -1497,11 +1497,11 @@ private extension RepositoryBackedGoalsService {
         }
 
         return GoalsBoardHeroState(
-            eyebrow: "Direction Board",
-            title: "Goals",
+            eyebrow: "Your Direction",
+            title: "Your Direction",
             subtitle: seeded
-                ? "Starter and live goals are being composed as a direction board instead of a portfolio list."
-                : "Live goals, drafts, and evidence are now grouped by direction pressure instead of list sorting.",
+                ? "Starter and live goals are arranged as a Constellation Atlas instead of a ranked list."
+                : "Live goals, drafts, and evidence stay grouped by life area and direction pressure instead of list sorting.",
             dominantTruth: dominantTruth,
             pressureSummary: pressureSummary,
             contextPills: [
@@ -1717,14 +1717,14 @@ private extension RepositoryBackedGoalsService {
         ].joined(separator: ". ")
 
         return GoalPortfolioMaturitySummary(
-            title: "Portfolio maturity",
+            title: "Direction maturity",
             subtitle: "A qualitative read on scope, proof, stuck work, and what should happen next.",
             scopeSignal: scopeSignal,
             stuckWorkSignal: stuckWorkSignal,
             proofSignal: proofSignal,
             nextStepSignal: nextStepSignal,
             archiveLearning: archiveSummary.learningLines,
-            accessibilityLabel: "Portfolio maturity",
+            accessibilityLabel: "Direction maturity",
             accessibilityValue: accessibilityValue,
             accessibilityHint: "Review scope, stuck work, proof, and next-step clarity before adding more goals."
         )
@@ -1824,10 +1824,10 @@ private extension RepositoryBackedGoalsService {
         }
 
         return GoalsLifeAreasOverviewState(
-            title: "Life Areas",
+            title: "Constellation Atlas",
             subtitle: contentAreas.isEmpty
                 ? "Life Areas will fill in as goals, North Stars, and One-Step Goals appear."
-                : "Goals, North Stars, and standalone Tasks stay organized by the parts of life they belong to.",
+                : "Life areas stay visible without being ranked by the system.",
             items: Array(items),
             contentAreaCount: contentAreas.count,
             emptyTitle: projection.emptyTitle,
@@ -1835,7 +1835,7 @@ private extension RepositoryBackedGoalsService {
             availableZoomModes: GoalsSemanticZoomMode.allCases,
             supportsListFallback: true,
             maxVisibleAreas: maxVisibleAreas,
-            accessibilityLabel: projection.accessibility.label,
+            accessibilityLabel: "Constellation Atlas",
             accessibilityValue: projection.accessibility.value,
             accessibilityHint: "Map view has a list fallback and never adds a top-level tab."
         )
@@ -2029,8 +2029,8 @@ private extension RepositoryBackedGoalsService {
 
         guard groups.isEmpty == false else { return nil }
         return GoalAtlasPreviewState(
-            title: "Goal Atlas preview",
-            subtitle: "A lightweight grouping by life area. Full path mapping stays owned by later batches.",
+            title: "Constellation Atlas",
+            subtitle: "Life areas remain equal-weight; Orbital Lens can inspect one goal thread without moving detail tools into the top level.",
             groups: Array(groups)
         )
     }

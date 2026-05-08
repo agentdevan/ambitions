@@ -247,14 +247,14 @@ struct GoalPortfolioMaturitySummary: Sendable, Hashable {
         let proof = GoalPortfolioMaturitySignal(id: "proof", title: "Proof will appear here", detail: "Proof maturity starts after a goal has evidence or receipts.", state: .default)
         let next = GoalPortfolioMaturitySignal(id: "next-step", title: "Next steps will appear here", detail: "Create or shape a goal to make the next step visible.", state: .default)
         return GoalPortfolioMaturitySummary(
-            title: "Portfolio maturity",
+            title: "Direction maturity",
             subtitle: "A qualitative read on scope, proof, stuck work, and what should happen next.",
             scopeSignal: scope,
             stuckWorkSignal: stuck,
             proofSignal: proof,
             nextStepSignal: next,
             archiveLearning: ["Archive learning will appear after a goal is completed, parked, or closed."],
-            accessibilityLabel: "Portfolio maturity",
+            accessibilityLabel: "Direction maturity",
             accessibilityValue: [scope.title, stuck.title, proof.title, next.title].joined(separator: ". "),
             accessibilityHint: "Review scope, stuck work, proof, and next-step clarity before adding more goals."
         )
@@ -665,10 +665,11 @@ struct GoalsOverview: Sendable {
         ScreenContractImplementationSnapshot(
             screenID: .goals,
             firstScreenContent: [
-                "Direction hero",
+                "Your Direction",
+                "Constellation Atlas",
+                "Orbital Lens",
                 "Goal Lifecycle Rail",
                 "Active goals",
-                "Life Areas preview",
                 "North Stars rail",
                 "Controlled One-Step Goals"
             ],

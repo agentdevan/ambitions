@@ -494,7 +494,7 @@ extension MissionControlLaneItem {
             symbolName: lane.symbolName,
             visualState: lane.state.ambitionState,
             accessibilityIdentifier: "goals.mission-control-lane.\(lane.id)",
-            drillDownHint: "Keeps \(lane.title) visible as a Mission Control lane inside Goals.",
+            drillDownHint: "Keeps \(lane.title) visible as a Constellation Atlas lane inside Goals.",
             sparkLevel: lane.level,
             pulseLabel: lane.showsProofPulse ? "Proof lane has saved proof" : nil
         )

@@ -72,8 +72,8 @@ struct GoalMissionControlLanes: View {
 
     var body: some View {
         AdaptiveModuleChrome(
-            title: "Mission Control",
-            subtitle: "Proof, blockers, next step, and momentum stay visible without turning Goals into a task board.",
+            title: "Your Direction",
+            subtitle: "Constellation Atlas keeps life areas equal-weight while Orbital Lens keeps one thread connected to Today.",
             context: .goals,
             state: pressureGoal == nil ? .active : .pressured,
             evidence: "Photo-matched DAV06 reference inspected"
@@ -98,7 +98,7 @@ struct GoalMissionControlLanes: View {
             PressureGlow(
                 level: pressureGoal == nil ? 0.28 : pressureLevel(for: pressureGoal),
                 context: .goals,
-                label: "Goal mission pressure"
+                label: "Goal direction pressure"
             )
             .frame(width: 150)
             .padding(theme.spacing.lg)
@@ -113,7 +113,7 @@ struct GoalMissionControlLanes: View {
     private var heroHeader: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                Text("Goals")
+                Text("Constellation Atlas")
                     .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.accentWarm)
 
@@ -146,7 +146,7 @@ struct GoalMissionControlLanes: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel([
-            "Goals Mission Control",
+            "Goals Constellation Atlas",
             primaryGoal?.title ?? overview.hero.title,
             primaryGoal?.renderState.title ?? "Ready",
             overview.hero.dominantTruth
@@ -1054,7 +1054,7 @@ struct GoalAtlasPreviewCard: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Goal Atlas preview. \(state.groups.map { "\($0.title), \($0.items.count) visible goals" }.joined(separator: ". "))")
+        .accessibilityLabel("Constellation Atlas. \(state.groups.map { "\($0.title), \($0.items.count) visible goals" }.joined(separator: ". "))")
         .accessibilityIdentifier("goals.atlas-preview")
         .ambitionPanelAccessibility()
     }

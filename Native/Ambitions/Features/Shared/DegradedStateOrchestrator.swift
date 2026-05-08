@@ -109,7 +109,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         switch self {
         case .startHere: "Start Here"
         case .realityRail: "Reality Meridian"
-        case .missionControlTimeSpine: "MissionControlTimeSpine"
+        case .missionControlTimeSpine: "Constellation Atlas"
         case .proofSpine: "Proof Spine"
         case .capturePlacementShelf: "Capture Placement Shelf"
         case .lifeShapeContourMap: "LifeShape Contour Map"
@@ -138,7 +138,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .realityRail:
             "The rail keeps its order while local steps, waiting points, and recovery signals settle."
         case .missionControlTimeSpine:
-            "Goal Detail keeps the spine shape while lanes, path, proof, and decisions load."
+            "Goals keeps the atlas shape while life areas, proof, pressure, and next steps load."
         case .proofSpine:
             "Proof stays hidden until source, freshness, privacy, and correction posture are ready."
         case .capturePlacementShelf:
@@ -159,7 +159,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .realityRail:
             "The rail can stay open; empty space is not treated as failure."
         case .missionControlTimeSpine:
-            "Mission Control waits for a goal with enough local shape to inspect."
+            "Constellation Atlas waits for a goal with enough local shape to inspect."
         case .proofSpine:
             "No proof is shown until the user saves evidence or a local receipt exists."
         case .capturePlacementShelf:
@@ -180,7 +180,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .realityRail:
             "The rail stays readable and does not silently reorder steps while source state is uncertain."
         case .missionControlTimeSpine:
-            "Goal Detail can retry without changing the path, decisions, or proof."
+            "Goals can retry without changing the path, decisions, or proof."
         case .proofSpine:
             "Proof remains review-bound until source freshness and privacy posture are clear."
         case .capturePlacementShelf:

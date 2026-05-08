@@ -286,7 +286,7 @@ struct GoalsScreen: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Goals Mission Control Large Type") {
+#Preview("Goals Constellation Atlas Large Type") {
     NavigationStack {
         GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
     }

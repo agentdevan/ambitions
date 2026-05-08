@@ -224,10 +224,10 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
             )
         case .missionControlTimeSpine:
             return AmbitionObjectMotionPolicy(
-                objectTitle: "MissionControlTimeSpine",
+                objectTitle: "Constellation Atlas",
                 owner: "Goals",
                 motionToken: .panelReveal,
-                stateMeaning: "Goal depth became legible across Completed, Now, Friction, Next, Horizon.",
+                stateMeaning: "Goal direction became legible across life areas, proof, pressure, and next steps.",
                 nonMotionCues: ["lane title", "selected lane detail", "proof or blocker marker"],
                 hapticBoundary: "No haptic until the Goals implementation defines a user-initiated lane action."
             )

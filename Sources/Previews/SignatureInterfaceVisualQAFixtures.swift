@@ -151,7 +151,7 @@ public enum SI16PreviewFixtureCatalog {
 
     public static let fixtures: [SI16VisualQAFixture] = [
         fixture(.normal, "Today", "Reality Meridian", lane: nil),
-        fixture(.selected, "Goals", "Mission Control lane", lane: nil),
+        fixture(.selected, "Goals", "Constellation Atlas", lane: nil),
         fixture(.focused, "Capture", "Placement composer", lane: "clarification_needed"),
         fixture(.loading, "Plan", "LifeShape map", lane: "source_check_first"),
         fixture(.empty, "You", "Personal System Center", lane: nil),

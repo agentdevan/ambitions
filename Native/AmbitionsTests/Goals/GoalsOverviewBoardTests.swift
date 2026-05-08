@@ -186,14 +186,14 @@ final class GoalsOverviewBoardTests: XCTestCase {
         try await repositories.drafts.saveDrafts([blocked])
         try await repositories.captures.saveCaptures(captures)
         try await repositories.evidence.saveEvidence([
-            evidence(goalID: "goal-m10-primary", stepID: "step-goal-m10-primary", note: "Portfolio maturity proof")
+            evidence(goalID: "goal-m10-primary", stepID: "step-goal-m10-primary", note: "Direction maturity proof")
         ])
         try await savePriorityOrder(goals.map(\.id) + [blocked.id], repositories: repositories)
 
         let overview = try await service.loadOverview()
         let maturity = overview.maturitySummary
 
-        XCTAssertEqual(maturity.title, "Portfolio maturity")
+        XCTAssertEqual(maturity.title, "Direction maturity")
         XCTAssertEqual(maturity.scopeSignal.title, "Scope needs review")
         XCTAssertEqual(maturity.stuckWorkSignal.title, "Stuck work is visible")
         XCTAssertTrue(maturity.stuckWorkSignal.detail.contains("waiting or blocked"))
@@ -226,14 +226,56 @@ final class GoalsOverviewBoardTests: XCTestCase {
         let overview = try await service.loadOverview()
         let atlasPreview = try XCTUnwrap(overview.atlasPreview)
 
-        XCTAssertEqual(atlasPreview.title, "Goal Atlas preview")
+        XCTAssertEqual(atlasPreview.title, "Constellation Atlas")
         XCTAssertEqual(atlasPreview.groups.map(\.title), ["Career", "Money"])
         XCTAssertTrue(atlasPreview.groups.contains(where: { $0.id == "finance" && $0.items.map(\.id) == [moneyGoal.id] }))
-        XCTAssertEqual(overview.lifeAreas.title, "Life Areas")
+        XCTAssertEqual(overview.lifeAreas.title, "Constellation Atlas")
         XCTAssertEqual(overview.lifeAreas.items.map(\.title), ["Career", "Money"])
         XCTAssertTrue(overview.lifeAreas.supportsListFallback)
         XCTAssertEqual(overview.lifeAreas.availableZoomModes, [.map, .list])
         XCTAssertLessThanOrEqual(overview.lifeAreas.items.count, overview.lifeAreas.maxVisibleAreas)
+    }
+
+    func testAFI07GoalsConstellationAtlasKeepsThreadsConnectedToTodayWithoutTopLevelMissionControl() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let musicGoal = makeGoal(
+            id: "goal-afi07-music",
+            title: "Open Music",
+            dueInDays: 14,
+            lifeDomain: .creativity
+        )
+        let healthGoal = makeGoal(
+            id: "goal-afi07-health",
+            title: "Protect morning strength",
+            dueInDays: 21,
+            lifeDomain: .health
+        )
+
+        try await repositories.goals.saveGoals([musicGoal, healthGoal])
+        try await savePriorityOrder([musicGoal.id, healthGoal.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let atlasPreview = try XCTUnwrap(overview.atlasPreview)
+        let orbitalLens = GoalLifePathState(overview: overview)
+        let snapshot = overview.screenContractSnapshot()
+        let firstScreenCopy = (snapshot.firstScreenContent + snapshot.copySamples).joined(separator: " ")
+
+        XCTAssertEqual(overview.hero.eyebrow, "Your Direction")
+        XCTAssertEqual(overview.hero.title, "Your Direction")
+        XCTAssertEqual(overview.lifeAreas.title, "Constellation Atlas")
+        XCTAssertEqual(atlasPreview.title, "Constellation Atlas")
+        XCTAssertEqual(orbitalLens.accessibilityLabel, "Goals Orbital Lens")
+        XCTAssertTrue(orbitalLens.accessibilityHint.contains("feed Today"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Constellation Atlas"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Orbital Lens"))
+        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Capture", "Time", "You"])
+
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Mission Control"))
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("KPI"))
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("score"))
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("astrology"))
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("habit ring"))
     }
 
     func testD13GoalsProjectionSurfacesNorthStarsAndOneStepFoundationsWithoutNewTabs() async throws {
