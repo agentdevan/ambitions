@@ -29,6 +29,8 @@ EFC is the active peak-proof overlay for unfinished work. Use [EFC_FLAGSHIP_PROO
 - [AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md](AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md) — how to choose context packs, skills, operations, and validation.
 - [AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md](AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md) — repo-local skill catalog.
 - [MAC_CODEX_5_5_TOOLCHAIN_SETUP.md](MAC_CODEX_5_5_TOOLCHAIN_SETUP.md) — local Mac/Codex setup and validation commands.
+- [MCP_LOCAL_PRODUCTION_OS_PLAN.md](MCP_LOCAL_PRODUCTION_OS_PLAN.md) — local MCP production acceleration plan.
+- [MCP_CODEX_SETUP.md](MCP_CODEX_SETUP.md) — Mac VM / Codex setup for Ambitions MCP servers.
 - [AMBITIONS_3_0_RUN_STATE_PROTOCOL.md](AMBITIONS_3_0_RUN_STATE_PROTOCOL.md) — checkpointable state model for long Codex runs.
 - [AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md](AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md) — XL batch checkpoint and compaction recovery rules.
 - [AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md](AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md) — prompt quality scoring for future implementation asks.
@@ -53,6 +55,21 @@ The reusable system lives under `.codex/`:
 - `.codex/playbooks/` for failure recovery.
 - `.codex/context-packs/` for minimal context sets.
 - `.codex/checklists/` for preflight, commit, release, privacy, accessibility, and handoff checks.
+
+## Local MCP Production OS
+
+The first Ambitions MCP server lives at:
+
+- `tools/mcp/ambitions_repo_mcp/`
+
+Use it as a local, read-only Codex acceleration layer for active-batch state, EFC applicability, source-truth stack, changed-file impact, forbidden claim scanning, closeout shape validation, and repo posture summaries.
+
+Setup docs:
+
+- [MCP Local Production OS Plan](MCP_LOCAL_PRODUCTION_OS_PLAN.md)
+- [MCP Codex Setup](MCP_CODEX_SETUP.md)
+
+MCP is local developer tooling only. It is not an Ambitions app runtime dependency, does not authorize hosted AI, does not add telemetry, and does not prove release/device/accessibility/legal/privacy readiness by itself.
 
 ## FAANG Team Operating Protocols
 
