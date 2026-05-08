@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
+import json
 import shutil
 import subprocess
 import sys
@@ -15,6 +17,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 LOG_ROOT = ROOT / ".codex" / "logs"
 OVERRIDES = ROOT / ".codex" / "local" / "acx-local-overrides.yml"
+BUNDLES = ROOT / ".codex" / "manifests" / "acx-bundles.yml"
+PROOF_CACHE = ROOT / ".codex" / "state" / "proof-cache.json"
 DESTRUCTIVE_TERMS = [
     "rm",
     "mv",
@@ -121,6 +125,30 @@ def all_profiles() -> dict[str, Profile]:
     return merged
 
 
+def load_bundles() -> dict[str, list[str]]:
+    if not BUNDLES.exists():
+        return {}
+    bundles: dict[str, list[str]] = {}
+    current: str | None = None
+    in_profiles = False
+    for raw in BUNDLES.read_text(encoding="utf-8").splitlines():
+        stripped = raw.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        leading = len(raw) - len(raw.lstrip(" "))
+        if leading == 2 and stripped.endswith(":") and stripped[:-1] not in {"bundles", "safety"}:
+            current = stripped[:-1]
+            bundles.setdefault(current, [])
+            in_profiles = False
+            continue
+        if current and stripped == "profiles:":
+            in_profiles = True
+            continue
+        if current and in_profiles and stripped.startswith("-"):
+            bundles[current].append(stripped[1:].strip().strip('"').strip("'"))
+    return bundles
+
+
 def concern_for(path: str) -> str:
     if path.startswith(".codex/"):
         return ".codex"
@@ -180,13 +208,47 @@ def discover_docs(kind: str) -> str:
     return "\n".join(lines[:80])
 
 
+def sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8", errors="replace")).hexdigest()
+
+
 def write_logs(profile_name: str, raw: str, summary: str, code: int) -> Path:
     log_dir = timestamp_dir()
     raw_path = log_dir / f"{profile_name}.raw.log"
     summary_path = log_dir / f"{profile_name}.summary.md"
     raw_path.write_text(raw, encoding="utf-8")
-    summary_path.write_text(summary + f"\n\nExit code: {code}\nRaw log: `{raw_path}`\n", encoding="utf-8")
+    summary_path.write_text(summary + f"\n\nExit code: {code}\nRaw log: `{raw_path}`\nRaw log sha256: `{sha256_text(raw)}`\n", encoding="utf-8")
+    update_proof_cache(profile_name, code, raw_path, sha256_text(raw))
     return raw_path
+
+
+def current_commit() -> str:
+    try:
+        proc = subprocess.run(("git", "rev-parse", "HEAD"), cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
+        return proc.stdout.strip() if proc.returncode == 0 else "unknown"
+    except Exception:
+        return "unknown"
+
+
+def update_proof_cache(profile_name: str, code: int, raw_path: Path, digest: str) -> None:
+    PROOF_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        data = json.loads(PROOF_CACHE.read_text(encoding="utf-8")) if PROOF_CACHE.exists() else {}
+    except json.JSONDecodeError:
+        data = {}
+    entries = data.setdefault("entries", [])
+    entries.append(
+        {
+            "timestamp": dt.datetime.now().isoformat(timespec="seconds"),
+            "commit": current_commit(),
+            "profile": profile_name,
+            "exit": code,
+            "raw_log": str(raw_path.relative_to(ROOT)) if raw_path.is_relative_to(ROOT) else str(raw_path),
+            "raw_log_sha256": digest,
+        }
+    )
+    data["entries"] = entries[-200:]
+    PROOF_CACHE.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def run_profile(profile: Profile) -> int:
@@ -261,12 +323,40 @@ def run_profile(profile: Profile) -> int:
     return exit_code
 
 
+def run_bundle(name: str) -> int:
+    bundles = load_bundles()
+    profiles = all_profiles()
+    selected = bundles.get(name)
+    if not selected:
+        raw = f"Unknown bundle rejected before execution: {name}\nNo profile executed.\n"
+        summary = f"# ACX Local Bundle Summary: invalid-bundle\n\nResult: Red\n- Unknown bundle `{name}` rejected before execution."
+        raw_path = write_logs("invalid-bundle", raw, summary, 2)
+        print(f"ACX Local Red: unknown bundle `{name}`. No profile executed.", file=sys.stderr)
+        print(f"Raw log: {raw_path}", file=sys.stderr)
+        return 2
+    print(f"# ACX Local Bundle: {name}")
+    result = 0
+    for profile_name in selected:
+        profile = profiles.get(profile_name)
+        if profile is None:
+            print(f"- Missing profile `{profile_name}` in bundle `{name}`")
+            result = 2
+            continue
+        code = run_profile(profile)
+        if code != 0:
+            result = code
+    return result
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="ACX Local allowlisted executor.")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("list", help="List allowlisted profiles")
+    sub.add_parser("bundles", help="List configured bundles")
     run = sub.add_parser("run", help="Run one allowlisted profile")
     run.add_argument("profile")
+    bundle = sub.add_parser("bundle", help="Run one allowlisted profile bundle")
+    bundle.add_argument("name")
     args = parser.parse_args()
 
     profiles = all_profiles()
@@ -274,6 +364,12 @@ def main() -> int:
         for name in sorted(profiles):
             print(f"{name}: {profiles[name].description}")
         return 0
+    if args.command == "bundles":
+        for name, profile_names in sorted(load_bundles().items()):
+            print(f"{name}: {', '.join(profile_names)}")
+        return 0
+    if args.command == "bundle":
+        return run_bundle(args.name)
     profile = profiles.get(args.profile)
     if profile is None:
         raw = f"Unknown profile rejected before execution: {args.profile}\nNo command executed.\n"
