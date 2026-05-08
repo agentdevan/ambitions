@@ -2,10 +2,10 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI05 Shell And Continuity Chrome / Accepted Yellow.
-Next eligible batch: AFI06 Today Reality Meridian.
-Scope: AFI05 aligned user-facing shell/chrome labels to Time while preserving
-internal `.plan` route/raw-value compatibility.
+Current batch: AFI06 Today Reality Meridian / Accepted Yellow.
+Next eligible batch: AFI07 Goals Constellation Atlas.
+Scope: AFI06 aligned Today object language to Reality Meridian while preserving
+internal Reality Rail/DayRail compatibility seams.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
@@ -13,7 +13,7 @@ action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This AFI05 pass changed app shell/chrome labels and focused tests only. It made
+This AFI06 pass changed Today object labels, focused preview/contract seams, and focused tests only. It made
 no persistence/schema, route raw-value, package manifest, dependency, signing,
 entitlement, hosted workflow, release/platform, legal/privacy,
 physical-device proof, public accessibility proof, sync/cloud, hosted AI, or
@@ -33,8 +33,8 @@ PK00 is complete / Green with accepted Yellow follow-ups as a report-only
 backend/platform proof baseline. AFI source truth now controls active
 flagship IA: Today / Goals / Capture / Time / You. AFI01 Canon Language Purge,
 AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material
-System Proof, and AFI05 Shell And Continuity Chrome are complete / Accepted
-Yellow. AFI06 Today Reality Meridian is now the next eligible global batch
+System Proof, AFI05 Shell And Continuity Chrome, and AFI06 Today Reality
+Meridian are complete / Accepted Yellow. AFI07 Goals Constellation Atlas is now the next eligible global batch
 unless repo evidence shows a dirty or half-complete active batch must close
 first. PK01-PK41 remain queued active planned Platform Kernel scope,
 but are not minimum prerequisites for AFI01 unless later evidence proves that

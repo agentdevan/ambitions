@@ -125,7 +125,7 @@ final class ScreenContractRegistryTests: XCTestCase {
         let contract = ScreenContractRegistry.contract(for: .today)
         let snapshot = ScreenContractImplementationSnapshot(
             screenID: .today,
-            firstScreenContent: ["Reality Rail", "Now Layer"],
+            firstScreenContent: ["Reality Meridian", "Now Layer"],
             panels: [.heroDecision, .nowLayer],
             actions: [.start],
             copySamples: ["What matters now?"],

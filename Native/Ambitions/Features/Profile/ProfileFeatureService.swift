@@ -937,14 +937,14 @@ private extension RepositoryBackedProfileService {
             ),
             ProfilePreviewSwatch(
                 id: "preview-rail",
-                title: "Reality Rail",
+                title: "Reality Meridian",
                 subtitle: "Now, Next, and Later stay readable without status clutter.",
                 eyebrow: "Continuity",
                 objectKind: .realityRail,
                 accentFamily: selectedAccent,
                 appearancePreference: selectedAppearance,
                 state: .default,
-                accessibilityLabel: "Appearance preview for Reality Rail continuity spine"
+                accessibilityLabel: "Appearance preview for Reality Meridian continuity spine"
             ),
             ProfilePreviewSwatch(
                 id: "preview-lifeshape",

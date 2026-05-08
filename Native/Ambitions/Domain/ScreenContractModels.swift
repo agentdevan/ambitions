@@ -452,7 +452,7 @@ enum ScreenContractRegistry {
     private static let today = ScreenContract(
         id: .today,
         dominantQuestion: "What matters now?",
-        requiredFirstScreenContent: ["Reality Rail", "Now Layer", "Today Plan Layer", "Compact timeline", "Relevant One-Step Goals", "Open-window awareness", "Recovery"],
+        requiredFirstScreenContent: ["Reality Meridian", "Now Layer", "Today Plan Layer", "Compact timeline", "Relevant One-Step Goals", "Open-window awareness", "Recovery"],
         requiredPanels: [.heroDecision, .nowLayer, .todayPlan, .compactTimeline, .oneStepGoals, .schedule, .recovery],
         optionalPanels: [.insight, .trust, .receipt],
         forbiddenFirstScreenContent: ["Full analytics", "Raw ledger", "Permission prompt", "Standalone Habits"],

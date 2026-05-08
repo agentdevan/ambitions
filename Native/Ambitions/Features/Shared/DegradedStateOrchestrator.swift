@@ -108,7 +108,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
     var title: String {
         switch self {
         case .startHere: "Start Here"
-        case .realityRail: "Reality Rail"
+        case .realityRail: "Reality Meridian"
         case .missionControlTimeSpine: "MissionControlTimeSpine"
         case .proofSpine: "Proof Spine"
         case .capturePlacementShelf: "Capture Placement Shelf"

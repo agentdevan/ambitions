@@ -197,7 +197,7 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
             )
         case .realityRail:
             return AmbitionObjectMotionPolicy(
-                objectTitle: "Reality Rail",
+                objectTitle: "Reality Meridian",
                 owner: "Today",
                 motionToken: .routeOrientation,
                 stateMeaning: "The day rail advanced to a visible execution position.",

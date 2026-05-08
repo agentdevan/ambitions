@@ -302,7 +302,7 @@ struct TodayScreen: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Today Reality Rail Private") {
+#Preview("Today Reality Meridian Private") {
     NavigationStack {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.privateRail)), autoLoad: false)
     }
@@ -310,7 +310,7 @@ struct TodayScreen: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Today Reality Rail Empty") {
+#Preview("Today Reality Meridian Empty") {
     NavigationStack {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.unavailableRail)), autoLoad: false)
     }

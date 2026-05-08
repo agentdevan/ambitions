@@ -189,7 +189,7 @@ struct AmbitionsDayRailView: View {
     }
 
     private var accessibilityLabel: String {
-        var parts = ["Reality Rail", state.dateTitle, modeLabel, state.contextSummary]
+        var parts = ["Reality Meridian", state.dateTitle, modeLabel, state.contextSummary]
         if let heroStep = state.heroStep {
             parts.append("Start here")
             parts.append(heroStep.title)

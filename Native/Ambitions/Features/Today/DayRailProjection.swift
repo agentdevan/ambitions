@@ -397,8 +397,8 @@ extension DayRailContinuityState {
         )
 
         return DayRailContinuityState(
-            title: "Reality Rail continuity",
-            summary: "Start Here, Now, Next, Later, closure, proof, and pressure stay connected.",
+            title: "Reality Meridian continuity",
+            summary: "Start Here emerges from the active Meridian node; Now, Next, Later, closure, proof, and pressure stay connected.",
             markers: markers,
             pressureLabel: pressureLabel,
             noSilentChangesLabel: proofSlot.noSilentChanges ? "No silent changes." : "Review before changing."

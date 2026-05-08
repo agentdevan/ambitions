@@ -16,9 +16,10 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Today / Goals / Capture / Time / You. Plan is superseded as a top-level
   destination and remains valid only as an action/contextual noun. ACUI is a
   compatibility alias only. AFI01 Canon Language Purge, AFI02 IA Hierarchy
-  Lock, AFI03 Flagship Object Silhouettes, AFI04 Material System Proof, and
-  AFI05 Shell And Continuity Chrome are complete / Accepted Yellow. AFI06 Today
-  Reality Meridian is the next eligible global batch unless a specific minimum
+  Lock, AFI03 Flagship Object Silhouettes, AFI04 Material System Proof,
+  AFI05 Shell And Continuity Chrome, and AFI06 Today Reality Meridian are
+  complete / Accepted Yellow. AFI07 Goals
+  Constellation Atlas is the next eligible global batch unless a specific minimum
   prerequisite is proven.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific
@@ -638,7 +639,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud,
   platform integration, legal/privacy compliance, physical-device proof,
   release, or public accessibility claim. LDI01-LDI14, PK00, and AFI01-AFI04
-  have since closed Green or accepted Yellow; AFI06 Today Reality Meridian is
+  have since closed Green or accepted Yellow; AFI07 Goals Constellation Atlas is
   now the next eligible batch unless repo evidence shows a dirty or
   half-complete active batch must close first or a specific PK batch is
   registry-proven as a minimum prerequisite.

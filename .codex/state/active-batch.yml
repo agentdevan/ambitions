@@ -6,10 +6,10 @@ source_of_truth:
   - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md"
 current:
   train: "Global full-stack execution"
-  batch: "AFI05 Shell And Continuity Chrome"
-  previous_batch: "AFI04 Material System Proof"
+  batch: "AFI06 Today Reality Meridian"
+  previous_batch: "AFI05 Shell And Continuity Chrome"
   previous_result: "Accepted Yellow"
-  next_eligible_batch: "AFI06 Today Reality Meridian"
+  next_eligible_batch: "AFI07 Goals Constellation Atlas"
 codex_os_override:
   active_pass: "AFI implementation lane"
   app_feature_implementation_allowed: true

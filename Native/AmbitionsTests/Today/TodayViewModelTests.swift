@@ -208,7 +208,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Now"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Next"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Later"))
-        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Reality Rail continuity"))
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Reality Meridian continuity"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("No silent changes"))
     }
 
@@ -258,8 +258,9 @@ final class TodayViewModelTests: XCTestCase {
         let rail = try await service.loadTodayExperience(userDisplayName: "", now: now).execution.dayRail
         let copy = f02VisibleRailCopy(rail)
 
-        XCTAssertEqual(rail.continuity.title, "Reality Rail continuity")
-        XCTAssertTrue(copy.contains("Start Here, Now, Next, Later, closure, proof, and pressure stay connected."))
+        XCTAssertEqual(rail.continuity.title, "Reality Meridian continuity")
+        XCTAssertTrue(copy.contains("Start Here emerges from the active Meridian node"))
+        XCTAssertTrue(copy.contains("Now, Next, Later, closure, proof, and pressure stay connected."))
         XCTAssertTrue(copy.contains("Closure knot"))
         XCTAssertTrue(copy.contains("Close the loop"))
         XCTAssertTrue(copy.contains("Proof marker"))
@@ -269,6 +270,39 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("agenda"))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("task list"))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("dashboard"))
+    }
+
+    func testAFI06RealityMeridianConnectsStartHereWhyThisClosureAndProof() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-afi06",
+            stepID: "step-afi06",
+            stepTitle: "Draft PM transition notes",
+            dueAt: "2026-04-15T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let rail = try await service.loadTodayExperience(userDisplayName: "", now: now).execution.dayRail
+        let hero = try XCTUnwrap(rail.heroStep)
+        let copy = f02VisibleRailCopy(rail)
+
+        XCTAssertEqual(rail.continuity.title, "Reality Meridian continuity")
+        XCTAssertTrue(copy.contains("Start Here emerges from the active Meridian node"))
+        XCTAssertTrue(copy.contains("Now"))
+        XCTAssertTrue(copy.contains("Next"))
+        XCTAssertTrue(copy.contains("Later"))
+        XCTAssertEqual(hero.contextEdge.title, "Context edge")
+        XCTAssertEqual(hero.timeFitProof.title, "Time fit")
+        XCTAssertEqual(hero.goalThread.title, "Goal thread")
+        XCTAssertEqual(hero.receiptItem.title, "Start Here receipt seam")
+        XCTAssertEqual(hero.receiptItem.summary, "No change has been made yet.")
+        XCTAssertTrue(try XCTUnwrap(hero.receiptItem.changeLabel).contains("closing writes the receipt later"))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("task list"))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains("overdue"))
     }
 
 
@@ -374,7 +408,7 @@ final class TodayViewModelTests: XCTestCase {
             for term in forbidden {
                 XCTAssertFalse(
                     copy.localizedCaseInsensitiveContains(term),
-                    "Reality Rail visible copy should not contain forbidden term: \(term)"
+                    "Reality Meridian visible copy should not contain forbidden term: \(term)"
                 )
             }
         }

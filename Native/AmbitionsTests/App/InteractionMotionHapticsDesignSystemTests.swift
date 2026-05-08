@@ -80,7 +80,7 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         let titles = Set(AmbitionFlagshipMotionObject.allCases.map { $0.motionPolicy.objectTitle })
         XCTAssertEqual(titles, [
             "Start Here",
-            "Reality Rail",
+            "Reality Meridian",
             "Receipt Drawer",
             "Source Fold",
             "MissionControlTimeSpine",

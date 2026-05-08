@@ -8,10 +8,10 @@ extension TodayExecutionViewState {
         ScreenContractImplementationSnapshot(
             screenID: .today,
             firstScreenContent: [
-                "Reality Rail",
+                "Reality Meridian",
                 "Start here",
                 "Now / Next / Later",
-                "Reality Rail",
+                "Reality Meridian",
                 "Now Layer",
                 "Today Plan Layer",
                 "Compact timeline",
