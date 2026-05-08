@@ -9,12 +9,30 @@ This document separates what the repo currently contains from what is scaffolded
 For product and design intent, use:
 
 1. `docs/AmbitionsCanon/README.md`
-2. `docs/AmbitionsCanon/01_Product_Canon.md`
-3. `docs/AmbitionsCanon/*` supporting canon files
+2. `docs/AmbitionsCanon/10_Ambitions_Flagship_Interface_Canon.md`
+3. `docs/AmbitionsCanon/01A_Product_Canon_Flagship_Amendment.md`
+4. `docs/AmbitionsCanon/01_Product_Canon.md` where not superseded by AFI / amendment source truth
+5. `docs/AmbitionsCanon/*` supporting canon files
 
 For current implementation evidence, use this document plus the live source tree.
 
 For build and validation procedure, use `docs/native-build-and-release.md`.
+
+## Active flagship target vs current compatibility seams
+
+Active flagship top-level IA:
+
+```text
+Today / Goals / Capture / Time / You
+```
+
+`Plan` is not an active top-level destination. It remains valid only as:
+
+- a contextual/action noun such as Adjust plan
+- historical/supporting documentation language
+- an internal compatibility seam in current source code, tests, routes, or folder names
+
+Current implementation note: the live user-facing shell now exposes `Time` / `Shape Time`, while some internal owner names still use `Plan`, including `.plan`, `PlanScreen`, `planNavigation()`, and `Native/Ambitions/Features/Plan/`. Those internal names are compatibility debt, not active product language.
 
 ## Implemented repo foundations
 
@@ -24,7 +42,8 @@ The repo currently contains these native foundations:
 | --- | --- | --- |
 | Native app | `Native/Ambitions/`, `project.yml` app target | Implemented foundation |
 | SwiftUI shell | `Native/Ambitions/App/` | Implemented foundation |
-| Five user-facing destinations | Today, Goals, Capture, Plan, You through app tab/shell code | Implemented foundation |
+| Five user-facing destinations | Today, Goals, Capture, Time, You through app tab/shell code | Implemented foundation |
+| Time compatibility owner | `.plan`, `PlanScreen`, `planNavigation()`, `Native/Ambitions/Features/Plan/` | Internal compatibility seam |
 | Persistence | SwiftData-backed repositories under `Native/Ambitions/Persistence/` | Implemented foundation where wired |
 | Design system package | `Sources/` / `AmbitionsDesignSystem` | Implemented foundation |
 | Widget UI package | `AppUI/Sources/` / `AmbitionsWidgetUI` | Implemented foundation |
@@ -40,7 +59,7 @@ The repo currently contains these native foundations:
 | Today | `Native/Ambitions/Features/Today/` | Runtime surface exists. Latest Signature Object maturity must still be validated against current canon. |
 | Goals | `Native/Ambitions/Features/Goals/` | Runtime surface exists. Some internal names and objects may still reflect older Mission Control-era implementation language. |
 | Capture | `Native/Ambitions/Features/Captures/` | User-facing destination is Capture. Internal folder/name compatibility remains. Composer-first foundation exists. |
-| Plan | `Native/Ambitions/Features/Plan/` | Runtime surface exists. Current implementation is broader than the latest LifeShape Field ideal and should be treated as foundation, not final visual maturity. |
+| Time | User-facing shell through `AppTab.title`, `AmbitionsRootView`, and `PlanScreen` compatibility owner | Runtime surface exists. Internal Plan naming remains compatibility debt. Current implementation is broader than the latest LifeShape Field ideal and should be treated as foundation, not final visual maturity. |
 | You | `Native/Ambitions/Features/Profile/` | User-facing destination is You. Internal Profile naming is compatibility debt, not active product language. |
 
 ## Implemented capability foundations
