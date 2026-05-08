@@ -24,7 +24,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         switch self {
         case .today: "Reality Meridian"
         case .goals: "Constellation Atlas + Orbital Lens"
-        case .capture: "Placement Composer"
+        case .capture: "Atmosphere Composer"
         case .plan: "LifeShape Field"
         case .you: "Personal System Center"
         }
@@ -34,7 +34,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         switch self {
         case .today: "One calm execution path with Start here, Now, Next, Later, closure, and proof."
         case .goals: "Strategic direction, path pressure, proof lanes, and goal drill-downs stay connected."
-        case .capture: "Private intake stays editable before anything becomes planned work."
+        case .capture: "Capture Anything stays composer-first; placement appears only after input."
         case .plan: "Capacity, pressure, protected time, and reflow stay visible without becoming a calendar clone."
         case .you: "Trust, setup, data, preferences, and receipts stay user-controlled."
         }
@@ -67,7 +67,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .goals:
             ["Life Path", "Lanes", "Proof"]
         case .capture:
-            ["What needs a place?", "Route preview", "Receipt"]
+            ["Needs a Place", "Ready to Place", "Grow into Goal"]
         case .plan:
             ["Capacity", "Pressure", "Reflow"]
         case .you:

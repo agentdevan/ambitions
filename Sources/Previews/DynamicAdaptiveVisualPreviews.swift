@@ -50,7 +50,7 @@ private struct DAVScenario: Identifiable, Sendable {
             state: .empty,
             evidence: "Photo target 02 / Capture",
             pressure: nil,
-            labels: ["What needs a place?", "Private until placed", "No fake routing"]
+            labels: ["Capture Anything", "Needs a Place", "No fake routing"]
         ),
         DAVScenario(
             id: "routed-capture",

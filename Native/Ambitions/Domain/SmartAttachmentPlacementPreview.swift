@@ -23,7 +23,7 @@ extension SmartAttachmentResult {
 
         return SmartAttachmentPlacementPreview(
             originalText: input.rawText,
-            postInputStateTitle: postInputStateTitle,
+            postInputStateTitle: postInputStateTitle(for: routeType),
             suggestedDestination: destination,
             objectTypeLabel: objectTypeLabel(for: routeType),
             appearanceLabel: appearance,
@@ -38,14 +38,14 @@ extension SmartAttachmentResult {
 }
 
 private extension SmartAttachmentResult {
-    var postInputStateTitle: String {
+    func postInputStateTitle(for routeType: SmartAttachmentRouteType) -> String {
         switch resultState {
         case .needsClarification:
-            return "Needs a Decision"
+            return "Needs a Place"
         case .savedToNeedsPlace, .failedSafely:
             return "Needs a Place"
         case .savedStandalone, .attached:
-            return "Suggested Place"
+            return routeType == .goal ? "Grow into Goal" : "Ready to Place"
         }
     }
 

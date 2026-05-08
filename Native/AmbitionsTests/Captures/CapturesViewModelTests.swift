@@ -91,7 +91,7 @@ final class CapturesViewModelTests: XCTestCase {
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("NASA")
 
-        XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Needs a Decision")
+        XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Needs a Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved to Needs a Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.clarificationQuestion, "What should this become?")
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.map(\.title), ["Task", "Goal", "Needs a Place"])
@@ -102,10 +102,31 @@ final class CapturesViewModelTests: XCTestCase {
         viewModel.selectDraftRoute(.task)
 
         XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved as Task · Today")
-        XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Suggested Place")
+        XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Ready to Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.first?.isSelected, true)
         XCTAssertEqual(viewModel.draftRoutePreview?.routeProofTitle, "Chosen by you")
         XCTAssertEqual(viewModel.draftRoutePreview?.routeProofDetail, "Chosen route")
+    }
+
+    func testAFI08DraftPreviewUsesApprovedAtmosphereComposerRouteStates() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Maybe start a guitar goal")
+        viewModel.selectDraftRoute(.goal)
+
+        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        XCTAssertEqual(preview.placementShelfTitle, "Atmosphere Composer")
+        XCTAssertEqual(preview.postInputStateTitle, "Grow into Goal")
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Needs a Place"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Ready to Place") == false)
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("Suggested Place"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("Needs a Decision"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("inbox"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("category board"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("chat"))
     }
 
     func testF07ComposerPreviewUsesPlacementLanguageWithoutInboxFraming() async {
@@ -117,8 +138,8 @@ final class CapturesViewModelTests: XCTestCase {
         viewModel.updateDraftText("Book dentist")
 
         let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
-        XCTAssertEqual(preview.placementShelfTitle, "Placement Shelf")
-        XCTAssertEqual(preview.postInputStateTitle, "Suggested Place")
+        XCTAssertEqual(preview.placementShelfTitle, "Atmosphere Composer")
+        XCTAssertEqual(preview.postInputStateTitle, "Ready to Place")
         XCTAssertEqual(preview.primaryActionTitle, "Place it")
         XCTAssertEqual(preview.changeActionTitle, "Change")
         XCTAssertEqual(preview.safeActionTitle, "Decide later")
@@ -137,7 +158,7 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertTrue(preview.correctionControlLabels.contains("Discard: clear the composer before saving."))
         XCTAssertEqual(preview.routeProofTitle, "Route evidence")
         XCTAssertEqual(preview.routeProofDetail, "Standalone")
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Placement Shelf"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Atmosphere Composer"))
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Resolver Fold"))
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Local source"))
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Correction"))
@@ -188,7 +209,7 @@ final class CapturesViewModelTests: XCTestCase {
         )
 
         XCTAssertTrue(presentation.isRouteRevealVisible)
-        XCTAssertEqual(presentation.placementTitle, "Suggested Place")
+        XCTAssertEqual(presentation.placementTitle, "Ready to Place")
         XCTAssertEqual(presentation.destinationLabel, "Task · Today")
         XCTAssertEqual(presentation.privacyLabel, "Private item")
         XCTAssertEqual(presentation.submitLabel, "Save capture")

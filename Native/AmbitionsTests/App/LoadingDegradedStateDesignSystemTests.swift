@@ -116,7 +116,7 @@ final class LoadingDegradedStateDesignSystemTests: XCTestCase {
 
         XCTAssertTrue(combinedCopy.contains("Start Here"))
         XCTAssertTrue(combinedCopy.contains("Constellation Atlas"))
-        XCTAssertTrue(combinedCopy.contains("Capture Placement Shelf"))
+        XCTAssertTrue(combinedCopy.contains("Atmosphere Composer"))
         XCTAssertTrue(combinedCopy.contains("LifeShape Contour Map"))
         XCTAssertTrue(combinedCopy.contains("Personal System Center"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("generic error"))

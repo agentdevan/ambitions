@@ -130,7 +130,7 @@ struct CapturesScreen: View {
 
     private var capturePrompt: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text("What needs a place?")
+            Text("Capture Anything")
                 .font(theme.typography.title)
                 .foregroundStyle(theme.colors.textPrimary)
                 .accessibilityAddTraits(.isHeader)
@@ -141,8 +141,8 @@ struct CapturesScreen: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             EvidenceLabel(
-                "Composer first",
-                detail: "Capture stays low-friction and route suggestions stay editable.",
+                "Atmosphere Composer",
+                detail: "Capture stays text-first and route choices stay editable after input.",
                 source: "Capture",
                 state: captureLivingState,
                 context: .capture
@@ -165,9 +165,9 @@ struct CapturesScreen: View {
     private var promptSubtitle: String {
         let draftIsEmpty = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         if draftIsEmpty {
-            return "Capture one real thing. Ambitions can suggest where it belongs after you type."
+            return "What needs a place? Type one real thing; placement appears only after input."
         }
-        return "Route suggestions stay editable. Nothing becomes plan work until you save it."
+        return "Needs a Place, Ready to Place, and Grow into Goal stay editable. Nothing becomes planned work until you save it."
     }
 
     @ViewBuilder
@@ -395,7 +395,7 @@ struct CapturesScreen: View {
                         )
                     }
                 } label: {
-                    Label("Task", systemImage: "checkmark.circle")
+                    Label("Ready to Place", systemImage: "checkmark.circle")
                 }
                 .buttonStyle(.bordered)
                 .disabled(capture.status.canTransition(to: .scheduled) == false)
@@ -580,9 +580,9 @@ private extension CapturesScreenShellMode {
     var subtitle: String {
         switch self {
         case .planSupport:
-            "Absorb raw inputs into the current week so captures feel like part of the operating system, not a separate holding bin."
+            "Absorb raw inputs into the current week without turning Capture into a feed, inbox, or category board."
         case .topLevelCapture:
-            "Hold raw inputs in one calm place until they are ready to become a goal, plan adjustment, proof, or decision."
+            "Capture Anything stays calm until a thought is ready to place, grow into a goal, or hold as Needs a Place."
         }
     }
 }

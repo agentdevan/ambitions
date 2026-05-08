@@ -285,7 +285,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
         let preview = result.placementPreview
 
         XCTAssertEqual(preview.originalText, "Book dentist")
-        XCTAssertEqual(preview.postInputStateTitle, "Suggested Place")
+        XCTAssertEqual(preview.postInputStateTitle, "Ready to Place")
         XCTAssertEqual(preview.suggestedDestination, "Task · Today")
         XCTAssertEqual(preview.objectTypeLabel, "Task")
         XCTAssertEqual(preview.appearanceLabel, "Today")
@@ -307,7 +307,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
         )
         let preview = result.placementPreview
 
-        XCTAssertEqual(preview.postInputStateTitle, "Needs a Decision")
+        XCTAssertEqual(preview.postInputStateTitle, "Needs a Place")
         XCTAssertEqual(preview.suggestedDestination, "Needs a Place")
         XCTAssertEqual(preview.objectTypeLabel, "Unplaced capture")
         XCTAssertEqual(preview.appearanceLabel, "Needs a Place")

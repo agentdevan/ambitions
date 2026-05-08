@@ -9,13 +9,13 @@ Date: 2026-05-08
 
 AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object
 Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
-AFI06 Today Reality Meridian, and AFI07 Goals Constellation Atlas are complete /
-Accepted Yellow.
+AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, and AFI08
+Capture Atmosphere Composer are complete / Accepted Yellow.
 
 Next eligible batch:
 
 ```text
-AFI08 Capture Atmosphere Composer
+AFI09 Time LifeShape Field
 ```
 
 ## Active IA
@@ -42,6 +42,7 @@ as contextual/action language or historical compatibility evidence.
 | AFI05 Shell And Continuity Chrome | Accepted Yellow | User-facing shell/chrome labels now use Time as the fourth top-level destination while `.plan` remains an internal compatibility route/raw value. | AFI06 |
 | AFI06 Today Reality Meridian | Accepted Yellow | Today user-facing object language now uses Reality Meridian, with Start Here emerging from the active Meridian node while internal Reality Rail identifiers remain compatibility seams. | AFI07 |
 | AFI07 Goals Constellation Atlas | Accepted Yellow | Goals top-level copy and contracts now use Your Direction, Constellation Atlas, and Orbital Lens while Mission Control remains a Goal Detail/internal compatibility seam. | AFI08 |
+| AFI08 Capture Atmosphere Composer | Accepted Yellow | Capture top-level copy and route-preview states now use Capture Anything, Atmosphere Composer, Needs a Place, Ready to Place, and Grow into Goal while the plural Captures implementation path remains a compatibility seam. | AFI09 |
 
 ## Claims
 

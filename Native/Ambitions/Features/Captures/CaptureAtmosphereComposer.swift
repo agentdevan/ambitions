@@ -20,7 +20,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
     ) {
         let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
         isRouteRevealVisible = routePreview != nil && trimmedText.isEmpty == false
-        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to place" : "Needs a place")
+        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to Place" : "Needs a Place")
         destinationLabel = routePreview?.destinationLabel ?? "Private intake"
         privacyLabel = routePreview?.privacyLabel ?? "Stored locally when saved"
 
@@ -31,10 +31,10 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             evidenceTitle = routePreview.receiptTitle
             evidenceDetail = routePreview.consequenceLabel
         } else if isSubmitEnabled {
-            evidenceTitle = "Ready to place"
+            evidenceTitle = "Ready to Place"
             evidenceDetail = "Ambitions will suggest a route after you save."
         } else {
-            evidenceTitle = "Needs a place"
+            evidenceTitle = "Needs a Place"
             evidenceDetail = "Type one real thing; no routing pressure is added."
         }
 
@@ -384,8 +384,8 @@ private struct CaptureRouteRevealStrip: View {
     @Previewable @State var text = "Book dentist before Friday"
     let preview = CaptureDraftRoutePreview(
         originalText: "Book dentist before Friday",
-        placementShelfTitle: "Placement Shelf",
-        postInputStateTitle: "Suggested Place",
+        placementShelfTitle: "Atmosphere Composer",
+        postInputStateTitle: "Ready to Place",
         receiptTitle: "Saved as Task · Today",
         summary: "Looks like a standalone task.",
         routeProofTitle: "Route evidence",

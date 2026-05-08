@@ -9,10 +9,11 @@ struct CapturesViewState: Sendable {
         ScreenContractImplementationSnapshot(
             screenID: .capture,
             firstScreenContent: [
-                "Bottom composer",
+                "Capture Anything",
+                "Atmosphere Composer",
                 "Needs a Place",
-                "Suggested routes",
                 "Ready to Place",
+                "Grow into Goal",
                 "Changeable route receipt"
             ],
             panels: [
@@ -29,10 +30,12 @@ struct CapturesViewState: Sendable {
             ],
             drillDowns: ["Needs a Place", "Object details", "Route settings"],
             copySamples: [
+                "Capture Anything",
                 "What needs a place?",
                 "Saved as Task · Today",
                 "Saved to Needs a Place",
-                "Attached as Proof"
+                "Attached as Proof",
+                "Grow into Goal"
             ],
             topLevelTabTitles: topLevelTabTitles,
             supportsDensityBehavior: true,
@@ -387,7 +390,7 @@ final class CapturesViewModel {
         let placementPreview = decision.placementPreview
         return CaptureDraftRoutePreview(
             originalText: placementPreview.originalText,
-            placementShelfTitle: "Placement Shelf",
+            placementShelfTitle: "Atmosphere Composer",
             postInputStateTitle: placementPreview.postInputStateTitle,
             receiptTitle: decision.receiptLine,
             summary: decision.summary,

@@ -2,11 +2,12 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI07 Goals Constellation Atlas / Accepted Yellow.
-Next eligible batch: AFI08 Capture Atmosphere Composer.
-Scope: AFI07 aligned Goals top-level object language to Your Direction,
-Constellation Atlas, and Orbital Lens while preserving Goal Detail/internal
-Mission Control compatibility seams.
+Current batch: AFI08 Capture Atmosphere Composer / Accepted Yellow.
+Next eligible batch: AFI09 Time LifeShape Field.
+Scope: AFI08 aligned Capture top-level object language to Capture Anything /
+Atmosphere Composer and replaced older touched route-state copy with Needs a
+Place, Ready to Place, and Grow into Goal while preserving local-first Capture
+compatibility seams.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
@@ -14,8 +15,8 @@ action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This AFI07 pass changed Goals top-level object labels, focused preview/contract
-seams, and focused tests only. It made
+This AFI08 pass changed Capture route-preview labels, screen/contract
+copy, focused preview/degraded-state seams, and focused tests only. It made
 no persistence/schema, route raw-value, package manifest, dependency, signing,
 entitlement, hosted workflow, release/platform, legal/privacy,
 physical-device proof, public accessibility proof, sync/cloud, hosted AI, or
@@ -36,11 +37,11 @@ backend/platform proof baseline. AFI source truth now controls active
 flagship IA: Today / Goals / Capture / Time / You. AFI01 Canon Language Purge,
 AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material
 System Proof, AFI05 Shell And Continuity Chrome, AFI06 Today Reality
-Meridian, and AFI07 Goals Constellation Atlas are complete / Accepted Yellow.
-AFI08 Capture Atmosphere Composer is now the next eligible global batch
+Meridian, AFI07 Goals Constellation Atlas, and AFI08 Capture Atmosphere
+Composer are complete / Accepted Yellow. AFI09 Time LifeShape Field is now the next eligible global batch
 unless repo evidence shows a dirty or half-complete active batch must close
 first. PK01-PK41 remain queued active planned Platform Kernel scope,
-but are not minimum prerequisites for AFI08 unless later evidence proves that
+but are not minimum prerequisites for AFI09 unless later evidence proves that
 dependency.
 
 ## Full-Stack Global Order Reconciliation

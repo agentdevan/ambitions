@@ -111,7 +111,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .realityRail: "Reality Meridian"
         case .missionControlTimeSpine: "Constellation Atlas"
         case .proofSpine: "Proof Spine"
-        case .capturePlacementShelf: "Capture Placement Shelf"
+        case .capturePlacementShelf: "Atmosphere Composer"
         case .lifeShapeContourMap: "LifeShape Contour Map"
         case .personalSystemCenter: "Personal System Center"
         case .memoryLens: "Memory Lens"
@@ -142,7 +142,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .proofSpine:
             "Proof stays hidden until source, freshness, privacy, and correction posture are ready."
         case .capturePlacementShelf:
-            "Capture keeps the composer available while placement, privacy, and correction signals settle."
+            "Capture keeps the Atmosphere Composer available while placement, privacy, and correction signals settle."
         case .lifeShapeContourMap:
             "Plan preserves the contour map while capacity, pressure, and protected pockets load."
         case .personalSystemCenter:
@@ -163,7 +163,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .proofSpine:
             "No proof is shown until the user saves evidence or a local receipt exists."
         case .capturePlacementShelf:
-            "The shelf stays quiet until there is a capture that needs a place."
+            "The composer stays quiet until there is a capture that needs a place."
         case .lifeShapeContourMap:
             "The map can stay open when no real constraints need shaping."
         case .personalSystemCenter:
