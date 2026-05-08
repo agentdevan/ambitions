@@ -61,3 +61,4 @@ output/logs/
 output/manual-audit/
 docs/audits/doc-qa/*.log
 docs/audits/build-logs/*.log
+.codex/logs/
