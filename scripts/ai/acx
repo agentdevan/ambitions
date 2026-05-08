@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# ACX — Ambitions Command eXtractor launcher.
+# This wrapper only starts the repo-local Python extractor.
+exec python3 "$(dirname "$0")/acx.py" "$@"
