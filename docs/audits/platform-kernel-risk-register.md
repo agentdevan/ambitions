@@ -14,5 +14,15 @@ Date: 2026-05-08
 | Intelligence output must stay claim-bounded. | Open Yellow | PK32-PK34 | No AI-ready or autonomous-intelligence claim; quarantine uncertain/generated intelligence until PK proof exists. |
 | Performance scale has not been PK-budget-proven. | Open Yellow | PK35-PK37 | No performance-budget-proven claim until large-store fixtures, budgets, and cache invalidation proof exist. |
 | Package/module moves can destabilize builds. | Open Yellow | PK38-PK41 | No package-split claim until boundary scaffold, scanner, and focused builds pass. |
+| Pre-sync stash contains source-truth conflicts. | Parked Yellow | Repo steward / sequencing reconciliation | Stash remains preserved and unapplied; do not drop it until a future reconciliation confirms every useful piece is merged or obsolete. |
 
 Hard Red entries: none recorded by PK integration as of 2026-05-08.
+
+## PK00 Baseline Findings
+
+PK00 completed a report-only backend/platform proof baseline. It found current
+SwiftData repository, portable snapshot, runtime service, notification,
+EventKit, external snapshot, local-only sync, and test evidence, but it did not
+prove transaction safety, migration safety, rollback, side-effect isolation,
+sync readiness, intelligence readiness, performance-budget compliance, or
+package split safety.

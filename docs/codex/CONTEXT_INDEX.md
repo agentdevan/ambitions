@@ -17,9 +17,10 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   gates before any production app, platform, persistence, sync, legal/privacy,
   or release claim work.
 - PK00-PK41 Platform Kernel is active planned scope for local backend/platform
-  hardening. PK00 Current Backend Proof Baseline is the next eligible
-  backend/platform batch unless a dirty or half-complete active batch must close
-  first. PK supersedes older backend/platform sequencing where dependency order
+  hardening. PK00 Current Backend Proof Baseline is complete / Green with
+  accepted Yellow follow-ups as a report-only backend/platform baseline. PK01
+  Package/Module Boundary Scaffold is the next eligible Platform Kernel batch.
+  PK supersedes older backend/platform sequencing where dependency order
   conflicts, but it does not claim backend completion, migration safety, sync
   readiness, privacy compliance, CI green, performance proof, or release
   readiness.

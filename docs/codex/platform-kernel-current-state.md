@@ -9,15 +9,17 @@ Date: 2026-05-08
 ## Current Position
 
 - PK00-PK41 is active planned scope for local backend/platform hardening.
-- PK00 Current Backend Proof Baseline is the next eligible backend/platform
-  batch unless a dirty or half-complete active batch must close first.
+- PK00 Current Backend Proof Baseline is complete / Green with accepted Yellow
+  follow-ups as a report-only backend/platform proof baseline.
+- PK01 Package/Module Boundary Scaffold is the next eligible Platform Kernel
+  batch.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
   notification foundations, EventKit integration services, external snapshot
   contracts/writers/builders, and broad domain/test coverage.
 - Existing PFC/AOS/LDI work contains valuable platform, persistence, privacy,
   sync-posture, side-effect, and intelligence-boundary evidence, but it does
-  not replace PK00-PK41 proof unless a PK batch explicitly reconciles it.
+  not replace remaining PK proof unless a PK batch explicitly reconciles it.
 
 ## Active No-Claims
 
@@ -41,4 +43,4 @@ proof.
 
 ## Next Eligible
 
-PK00 Current Backend Proof Baseline.
+PK01 Package/Module Boundary Scaffold.

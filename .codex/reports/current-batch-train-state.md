@@ -2,14 +2,13 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK Platform Kernel integration
-in progress / docs-governance.
-Next eligible batch: PK00 Current Backend Proof Baseline after integration
-commit/push unless a dirty or half-complete active batch must close first.
-Scope: PK00-PK41 is being integrated as active planned local backend/platform
-scope. LDI14 remains complete / Green as local Trust Review And Dream Handling
-Receipts contract evidence, but LDI15 is no longer the next backend/platform
-selection while PK00 is unrun. This pass makes no production Swift, persistence
+Current batch: PK00 Current Backend Proof Baseline complete / Green with
+accepted Yellow follow-ups.
+Next eligible batch: PK01 Package/Module Boundary Scaffold.
+Scope: PK00-PK41 is active planned local backend/platform scope. LDI14 remains
+complete / Green as local Trust Review And Dream Handling Receipts contract
+evidence, but LDI15 is no longer the next backend/platform selection while PK
+foundation batches remain unrun. PK00 made no production Swift, persistence
 schema, sync/cloud, hosted AI, user-data server, release/platform, legal/privacy
 compliance, physical-device proof, public accessibility proof, signing,
 entitlement, dependency, generated-project, or hosted workflow claim.
@@ -20,9 +19,11 @@ The overlay package is complete after checks pass. Workflow removal is complete:
 `.github/workflows` is absent and hosted workflows are intentionally not valid
 current proof. DPTG00 is locked as the future terminal physical-device
 release-candidate proof gate. All pre-device gates must close before device
-proof begins. AOS23 and LDI01-LDI14 have since closed Green. PK00 is now the
-next eligible backend/platform batch after PK integration unless repo evidence
-shows a dirty or half-complete active batch must close first.
+proof begins. AOS23 and LDI01-LDI14 have since closed Green. PK00 is complete /
+Green with accepted Yellow follow-ups as a report-only backend/platform proof
+baseline. PK01 Package/Module Boundary Scaffold is now the next eligible
+Platform Kernel batch unless repo evidence shows a dirty or half-complete active
+batch must close first.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
 entitlement, dependency, generated-project, or hosted-CI proof claim.
