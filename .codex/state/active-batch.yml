@@ -1,0 +1,24 @@
+# Compact efficiency mirror. Authoritative train state remains:
+# .codex/reports/current-batch-train-state.md
+status: efficiency_mirror
+last_audited: "2026-05-07"
+active_train: "Global full-stack execution"
+current_batch_from_audit: "LDI12 Capacity And Commitment-Time Bridge"
+current_batch_status_from_audit: "complete / Green"
+next_eligible_batch_from_audit: "LDI13 Today Bridge And Action Closure"
+authoritative_state_file: ".codex/reports/current-batch-train-state.md"
+do_not_override_authoritative_state: true
+usage:
+  - "Read this file for quick boot only."
+  - "Before executing a batch, re-read the authoritative state file and selected batch prompt."
+  - "Update this mirror only after the authoritative batch state is updated."
+stop_policy:
+  continue_through:
+    - "Green"
+    - "accepted Yellow when owner and no-claim boundary are recorded"
+  stop_on:
+    - "unrecoverable Red"
+    - "unknown dirty tree"
+    - "destructive source-truth conflict"
+    - "privacy/security/legal ambiguity"
+    - "unsupported release/device/accessibility claim"
