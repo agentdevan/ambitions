@@ -1,9 +1,11 @@
 import importlib.util
+import sys
 from pathlib import Path
 
 SERVER_PATH = Path(__file__).resolve().parents[1] / "server.py"
 spec = importlib.util.spec_from_file_location("ambitions_repo_mcp_server", SERVER_PATH)
 server = importlib.util.module_from_spec(spec)
+sys.modules["ambitions_repo_mcp_server"] = server
 assert spec.loader is not None
 spec.loader.exec_module(server)
 
