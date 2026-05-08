@@ -60,6 +60,34 @@ actor AmbitionsPersistenceStore {
         return value
     }
 
+    func transaction<Value: Sendable>(
+        id: String = UUID().uuidString,
+        writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext,
+        timestampProvider: () -> String = { ISO8601DateFormatter().string(from: .now) },
+        _ block: (ModelContext) throws -> Value
+    ) throws -> AppUnitOfWorkResult<Value> {
+        let startedAt = timestampProvider()
+        let context = ModelContext(container)
+        context.autosaveEnabled = false
+        let value = try block(context)
+        let didCommitChanges = context.hasChanges
+        if didCommitChanges {
+            try context.save()
+        }
+        return AppUnitOfWorkResult(
+            value: value,
+            receipt: AppUnitOfWorkReceipt(
+                id: id,
+                startedAt: startedAt,
+                completedAt: timestampProvider(),
+                writeScope: writeScope,
+                didCommitChanges: didCommitChanges,
+                rollbackBehavior: AppUnitOfWorkReceipt.rollbackOnThrownError,
+                sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects
+            )
+        )
+    }
+
     func resetAllData() throws {
         let context = ModelContext(container)
         context.autosaveEnabled = false
@@ -79,6 +107,24 @@ actor AmbitionsPersistenceStore {
         if context.hasChanges {
             try context.save()
         }
+    }
+}
+
+struct SwiftDataAppUnitOfWork: Sendable {
+    let store: AmbitionsPersistenceStore
+
+    func perform<Value: Sendable>(
+        id: String = UUID().uuidString,
+        writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext,
+        timestampProvider: () -> String = { ISO8601DateFormatter().string(from: .now) },
+        _ operation: (ModelContext) throws -> Value
+    ) async throws -> AppUnitOfWorkResult<Value> {
+        try await store.transaction(
+            id: id,
+            writeScope: writeScope,
+            timestampProvider: timestampProvider,
+            operation
+        )
     }
 }
 

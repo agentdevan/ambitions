@@ -2,22 +2,22 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK02 Architecture Boundary Scanner / Accepted Yellow.
-Next eligible batch: PK03 AppUnitOfWork Foundation.
-Scope: PK02 added a non-mutating Platform Kernel boundary scanner. The scanner
-reports current architecture drift as Yellow evidence and includes a future
-`--strict` mode.
+Current batch: PK03 AppUnitOfWork Foundation / Green.
+Next eligible batch: PK04 Atomic Goal Creation.
+Scope: PK03 added a local SwiftData AppUnitOfWork boundary with receipt
+metadata and focused persistence tests for commit and thrown-error rollback.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
 action/contextual noun. PK00 remains complete / Green with accepted Yellow
-follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
+follow-ups as a backend/platform proof baseline. PK01-PK03 are complete;
+PK04-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This PK02 pass changed tooling/docs/state evidence only. It made no app code,
-runtime UI behavior, persistence/schema, package manifest, project target,
-route raw-value,
-package manifest, dependency, signing, entitlement, hosted workflow,
+This PK03 pass changed only the persistence UnitOfWork seam, focused
+persistence tests, and PK train status/report docs. It made no runtime UI
+behavior, schema/model-record change, package manifest, project target,
+route raw-value, dependency, signing, entitlement, hosted workflow,
 release/platform, legal/privacy, physical-device proof, rendered walkthrough,
 founder acceptance, public accessibility proof, sync/cloud, hosted AI, account,
 calendar-write, permission, user-data server, production readiness, TestFlight,

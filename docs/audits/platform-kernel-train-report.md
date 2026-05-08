@@ -8,38 +8,44 @@ Status: Active
 
 ## Current Closeout
 
-Result: Accepted Yellow
-Batch: PK02 Architecture Boundary Scanner
+Result: Green
+Batch: PK03 AppUnitOfWork Foundation
 Commit: pending
-Files changed: PK02 boundary scanner, batch file, audit report, risk register,
-and train-state docs.
-Behavior changed: no app behavior changed. PK02 adds non-mutating scanner
-tooling that reports architecture boundary drift.
-Tests run: `git diff --check`;
-`python3 -m py_compile scripts/ai/pk_boundary_scan.py`;
-`python3 scripts/ai/pk_boundary_scan.py`;
-`python3 scripts/ai/acx_impact.py $(git diff --name-only)`;
-`python3 scripts/ai/acx_local.py bundle docs`;
-`python3 scripts/ai/acx_local.py bundle batch-closeout`;
-`python3 scripts/ai/acx_repair.py diagnose`; and
-`scripts/global-train-next-batch.sh`.
-Tests not run: app build, focused unit tests, package
-split build proof, physical-device proof, signed archive proof, and hosted CI.
+Files changed: AppUnitOfWork persistence contracts/implementation, focused
+persistence tests, PK03 audit report, risk register, and train-state docs.
+Behavior changed: no user-facing app behavior changed. PK03 adds a local
+SwiftData AppUnitOfWork boundary for single-context commit and thrown-error
+rollback before save.
+Tests run: `python3 tools/mcp/ambitions_repo_mcp/server.py --self-test`;
+Ambitions Repo MCP `get_active_batch`, `summarize_repo_posture`,
+`get_efc_overlay_status`, `changed_file_impact`, and
+`check_efc_applicability`; `xcodegen generate`;
+focused `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions
+-destination 'platform=iOS Simulator,name=iPhone 17'
+-only-testing:AmbitionsTests/PersistenceRepositoryTests`;
+`git diff --check`; `python3 scripts/ai/pk_boundary_scan.py`;
+`python3 scripts/ai/acx_impact.py ...`; `python3 scripts/ai/acx_local.py
+bundle batch-closeout`; and `python3 scripts/ai/acx_local.py bundle docs`.
+Tests not run: full app build, full unit/UI suite, package split build proof,
+physical-device proof, signed archive proof, hosted CI, and simulator visual
+or public accessibility proof.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
-Yellows carried: PK03-PK41 remain active planned scope; transaction safety,
-migration/backup/rollback, side-effect isolation, sync readiness, intelligence
-quarantine, package split safety, and performance budgets are not PK-proven
-yet. PK02 scanner output is Yellow and not package-cleanliness proof. Founder
-acceptance, rendered visual approval, manual accessibility proof, device proof,
-signed archive proof, hosted CI, and release readiness remain Yellow/unproven.
+Yellows carried: PK04-PK41 remain active planned scope; atomic product-flow
+mutation safety, migration/backup/rollback, side-effect isolation, sync
+readiness, intelligence quarantine, package split safety, and performance
+budgets are not fully PK-proven yet. PK02 scanner output remains Yellow for
+`Native/Ambitions/Domain/AppSession.swift` importing SwiftUI and is not
+package-cleanliness proof. Founder acceptance, rendered visual approval,
+manual accessibility proof, device proof, signed archive proof, hosted CI, and
+release readiness remain Yellow/unproven.
 The pre-sync stash remains preserved and unapplied.
-Rollback path: revert the PK02 implementation commit.
+Rollback path: revert the PK03 implementation/status commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
-PK02 boundary scanner evidence is recorded.
+PK03 UnitOfWork foundation evidence is recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: PK03 AppUnitOfWork Foundation.
+Next eligible batch: PK04 Atomic Goal Creation.
 
 ## Completed
 
@@ -49,8 +55,8 @@ Next eligible batch: PK03 AppUnitOfWork Foundation.
 
 ## Active / Next
 
-- PK03 AppUnitOfWork Foundation is next eligible.
-- PK03-PK41 remain queued active planned Platform Kernel scope.
+- PK04 Atomic Goal Creation is next eligible.
+- PK04-PK41 remain queued active planned Platform Kernel scope.
 
 ## Parked Yellows
 

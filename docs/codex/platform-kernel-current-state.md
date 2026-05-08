@@ -17,6 +17,9 @@ Date: 2026-05-08
 - PK02 Architecture Boundary Scanner is complete / Accepted Yellow as local
   non-mutating scanner tooling. Current findings are Yellow boundary drift
   evidence, not a package-cleanliness claim.
+- PK03 AppUnitOfWork Foundation is complete / Green as a local SwiftData
+  transaction boundary. It adds receipt metadata and focused persistence proof
+  for multi-record commit and thrown-error rollback before save.
 - AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object
   Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
   AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, and AFI08
@@ -26,8 +29,8 @@ Date: 2026-05-08
   Coherence Review, AFI15 Founder Acceptance Review, and AFI16 Release-Claim
   Safety Review are complete / Accepted Yellow under the active AFI insertion
   overlay.
-  PK03 AppUnitOfWork Foundation is the next eligible global batch.
-  PK03-PK41 remain active planned Platform Kernel scope.
+  PK04 Atomic Goal Creation is the next eligible global batch.
+  PK04-PK41 remain active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
   notification foundations, EventKit integration services, external snapshot
@@ -46,7 +49,8 @@ proof.
 
 ## Current Known Risks
 
-- Atomic multi-repository mutation safety has not been proven by PK.
+- AppUnitOfWork single-context commit/rollback is PK-proven by focused
+  persistence tests, but atomic product flows are not yet PK-proven.
 - Schema version ledger, migration plan, pre-migration backup, import dry run,
   and restore rollback are not yet PK-proven.
 - Side effects are present in platform-adjacent paths, but SideEffectLedger
@@ -58,4 +62,4 @@ proof.
 
 ## Next Eligible
 
-PK03 AppUnitOfWork Foundation.
+PK04 Atomic Goal Creation.

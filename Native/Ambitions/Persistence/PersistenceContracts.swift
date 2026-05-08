@@ -328,6 +328,28 @@ protocol AppStateRepository: Sendable {
     func saveState(_ state: AppStateSnapshot) async throws
 }
 
+enum AppUnitOfWorkWriteScope: String, Sendable, Codable, Equatable {
+    case localSwiftDataSingleContext = "local_swiftdata_single_context"
+}
+
+struct AppUnitOfWorkReceipt: Sendable, Codable, Equatable {
+    let id: String
+    let startedAt: String
+    let completedAt: String
+    let writeScope: AppUnitOfWorkWriteScope
+    let didCommitChanges: Bool
+    let rollbackBehavior: String
+    let sideEffectPolicy: String
+
+    static let rollbackOnThrownError = "rollback_on_thrown_error_before_save"
+    static let noExternalSideEffects = "no_external_side_effects_inside_unit_of_work"
+}
+
+struct AppUnitOfWorkResult<Value: Sendable>: Sendable {
+    let value: Value
+    let receipt: AppUnitOfWorkReceipt
+}
+
 protocol LegacyImportServicing: Sendable {
     func importSnapshot(_ snapshot: LegacyPrototypeSnapshot) async throws -> LegacyImportReport
 }

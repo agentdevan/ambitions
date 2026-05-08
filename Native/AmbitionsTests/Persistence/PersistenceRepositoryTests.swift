@@ -3,6 +3,10 @@ import XCTest
 @testable import Ambitions
 
 final class PersistenceRepositoryTests: XCTestCase {
+    enum UnitOfWorkProbeError: Error, Equatable {
+        case intentionalRollback
+    }
+
     func testGoalRepositoryRoundTripsGoalPlanAndSteps() async throws {
         let repositories = try await makeRepositories()
         let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
@@ -344,6 +348,55 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loadedByID["legacy-processed"]?.status, .goalBound)
         XCTAssertEqual(loadedByID["legacy-processed"]?.linkedGoalID, "goal-legacy")
     }
+
+    func testAppUnitOfWorkCommitsMultipleRecordsThroughOneBoundary() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let unitOfWork = SwiftDataAppUnitOfWork(store: store)
+
+        let result = try await unitOfWork.perform(
+            id: "uow-commit",
+            timestampProvider: unitOfWorkTimestampProvider()
+        ) { context in
+            context.insert(try captureRecord(id: "uow-capture", rawText: "Unit of work capture"))
+            context.insert(try appStateRecord(userDisplayName: "Unit Worker"))
+            return "committed"
+        }
+
+        let loadedCapture = try await repositories.captures.capture(id: "uow-capture")
+        let loadedState = try await repositories.appState.loadState()
+
+        XCTAssertEqual(result.value, "committed")
+        XCTAssertEqual(result.receipt.id, "uow-commit")
+        XCTAssertEqual(result.receipt.writeScope, .localSwiftDataSingleContext)
+        XCTAssertTrue(result.receipt.didCommitChanges)
+        XCTAssertEqual(result.receipt.rollbackBehavior, AppUnitOfWorkReceipt.rollbackOnThrownError)
+        XCTAssertEqual(result.receipt.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
+        XCTAssertEqual(loadedCapture?.rawText, "Unit of work capture")
+        XCTAssertEqual(loadedState.userDisplayName, "Unit Worker")
+    }
+
+    func testAppUnitOfWorkRollsBackUnsavedChangesWhenOperationThrows() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let unitOfWork = SwiftDataAppUnitOfWork(store: store)
+
+        do {
+            _ = try await unitOfWork.perform(
+                id: "uow-rollback",
+                timestampProvider: unitOfWorkTimestampProvider()
+            ) { context in
+                context.insert(try captureRecord(id: "uow-rollback-capture", rawText: "Should not persist"))
+                throw UnitOfWorkProbeError.intentionalRollback
+            }
+            XCTFail("Expected unit of work to throw before save.")
+        } catch let error as UnitOfWorkProbeError {
+            XCTAssertEqual(error, .intentionalRollback)
+        }
+
+        let loadedCapture = try await repositories.captures.capture(id: "uow-rollback-capture")
+        XCTAssertNil(loadedCapture)
+    }
 }
 
 private extension PersistenceRepositoryTests {
@@ -384,6 +437,59 @@ private extension PersistenceRepositoryTests {
         default:
             return nil
         }
+    }
+
+    func unitOfWorkTimestampProvider() -> () -> String {
+        var index = 0
+        let timestamps = [
+            "2026-05-08T12:00:00Z",
+            "2026-05-08T12:00:01Z",
+        ]
+        return {
+            defer { index += 1 }
+            return timestamps[min(index, timestamps.count - 1)]
+        }
+    }
+
+    func captureRecord(id: String, rawText: String) throws -> CaptureRecord {
+        let capture = Capture(
+            id: id,
+            createdAt: "2026-05-08T12:00:00Z",
+            updatedAt: "2026-05-08T12:00:00Z",
+            rawText: rawText,
+            sourceType: .todayQuickCapture,
+            status: .actionable,
+            linkedGoalID: nil
+        )
+        return CaptureRecord(
+            id: capture.id,
+            createdAt: capture.createdAt,
+            updatedAt: capture.updatedAt,
+            rawText: capture.rawText,
+            sourceTypeRaw: capture.sourceType?.rawValue,
+            statusRaw: capture.status.rawValue,
+            linkedGoalID: capture.linkedGoalID,
+            snapshotData: try PersistenceCoding.encode(capture)
+        )
+    }
+
+    func appStateRecord(userDisplayName: String) throws -> AppStateRecord {
+        var state = AppStateSnapshot.default
+        state.userDisplayName = userDisplayName
+        return AppStateRecord(
+            id: state.id,
+            preferredTabRaw: state.preferredTab.rawValue,
+            userDisplayName: state.userDisplayName,
+            appearancePreferenceRaw: state.appearancePreference.rawValue,
+            accentFamilyRaw: state.accentFamily.rawValue,
+            hasCompletedBootstrap: state.hasCompletedBootstrap,
+            lastBootstrapSourceRaw: state.lastBootstrapSource?.rawValue,
+            lastBootstrapAt: state.lastBootstrapAt,
+            lastSeedVersion: state.lastSeedVersion,
+            lastSeededAt: state.lastSeededAt,
+            lastOpenedGoalID: state.lastOpenedGoalID,
+            snapshotData: try PersistenceCoding.encode(state)
+        )
     }
 }
 
