@@ -8,7 +8,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertTrue(dashboard.hero.subtitle.contains("Trust Center"))
+        XCTAssertTrue(dashboard.hero.subtitle.contains("Your System"))
         XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-sync" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-accessibility" && $0.valueLabel == "Claims locked" }))
@@ -54,7 +54,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertEqual(dashboard.hero.title, "Your system")
+        XCTAssertEqual(dashboard.hero.title, "Your System")
         XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
         XCTAssertEqual(dashboard.preferences.accentFamily, .sage)
         XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-storage" && $0.valueLabel == "Local-only" }))
@@ -149,7 +149,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
             .receiptDrawer
         ])
         XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Start Here" }))
-        XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Reality Rail" }))
+        XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Reality Meridian" }))
         XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "LifeShape" }))
         XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Receipt Drawer" }))
         XCTAssertTrue(studio.previewSummary.contains("real Ambitions objects"))
@@ -217,11 +217,11 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let items = dashboard.systemCenter.sections.flatMap(\.items)
         let titles = items.map(\.title)
 
-        XCTAssertEqual(dashboard.systemCenter.title, "Personal System Center")
-        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("Planning setup"))
+        XCTAssertEqual(dashboard.systemCenter.title, "Your System")
+        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("User System Profile"))
         XCTAssertEqual(titles, [
             "Schedule & Availability",
-            "Plan Behavior",
+            "Time Behavior",
             "Automation & Trust",
             "Vacation / Away Time",
             "Durations",
@@ -232,7 +232,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
             "Reviews",
             "Proof",
             "Archive / Completed",
-            "Profile",
+            "About You",
             "Personalization",
             "Appearance",
             "Notifications",

@@ -278,7 +278,7 @@ enum ScreenContractValidator {
         "Confidence score",
         "Fix AI",
         "Mission Control",
-        "Personal System Center",
+        "User System Profile",
         "Action Closure",
         "Proof Rail",
         "Believability hero",
@@ -581,11 +581,11 @@ enum ScreenContractRegistry {
 
     private static let you = ScreenContract(
         id: .you,
-        dominantQuestion: "How is my system working for me?",
-        requiredFirstScreenContent: ["Profile card", "Personal system status", "Light analytics summary", "Next review", "Trust signal", "Categorized Grouped Navigation Lists"],
+        dominantQuestion: "How does Ambitions work for me?",
+        requiredFirstScreenContent: ["Your System", "User System Profile", "Planning Setup", "Trust & Automation", "Privacy", "Receipts & History", "Defaults", "Grouped Navigation Lists"],
         requiredPanels: [.trust, .review, .settingsPreference, .groupedNavigationList],
         optionalPanels: [.progress, .receipt],
-        forbiddenFirstScreenContent: ["Primary execution UI", "Top-level Insights clone"],
+        forbiddenFirstScreenContent: ["Primary execution UI", "Top-level Insights clone", "Social profile", "Admin console", "Account hub", "AI settings wall"],
         primaryActions: [.openSection, .updatePreference, .inspect],
         drillDowns: ["Trust Center", "What Ambitions Knows", "Accessibility", "Sync / Export", "Reviews"],
         densityBehavior: "Detailed allowed in subpages; root stays grouped.",

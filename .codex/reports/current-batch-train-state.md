@@ -2,12 +2,12 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI09 Time LifeShape Field / Accepted Yellow.
-Next eligible batch: AFI10 You User System Profile.
-Scope: AFI09 aligned Time top-level object language to Shape Time /
-LifeShape Field and replaced older touched top-level Plan copy with Time while
-preserving `.plan`, Plan paths, and route raw values as internal compatibility
-seams.
+Current batch: AFI10 You User System Profile / Accepted Yellow.
+Next eligible batch: AFI11 Trust Seam And Receipts.
+Scope: AFI10 aligned You top-level object language to Your System / User System
+Profile and replaced older touched Profile / Personal System Center copy while
+preserving `Profile` paths, model names, tests, and route identifiers as
+internal compatibility seams.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
@@ -15,12 +15,12 @@ action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This AFI09 pass changed touched Time/Plan screen/contract copy, Calendar-aware
-labels, preview/external-surface copy, and focused tests only. It made no
-persistence/schema, route raw-value, package manifest, dependency, signing,
-entitlement, hosted workflow, release/platform, legal/privacy,
-physical-device proof, public accessibility proof, sync/cloud, hosted AI, or
-user-data server claim.
+This AFI10 pass changed touched You/Profile screen/contract copy, composition
+primitive labels, degraded-state object names, preview fixture copy, and
+focused tests only. It made no persistence/schema, route raw-value, package
+manifest, dependency, signing, entitlement, hosted workflow, release/platform,
+legal/privacy, physical-device proof, public accessibility proof, sync/cloud,
+hosted AI, account, or user-data server claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -34,12 +34,12 @@ baseline. AFI source truth now controls active flagship IA: Today / Goals /
 Capture / Time / You. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock,
 AFI03 Flagship Object Silhouettes, AFI04 Material System Proof, AFI05 Shell
 And Continuity Chrome, AFI06 Today Reality Meridian, AFI07 Goals
-Constellation Atlas, AFI08 Capture Atmosphere Composer, and AFI09 Time
-LifeShape Field are complete / Accepted Yellow. AFI10 You User System Profile
-is now the next eligible global batch unless repo evidence shows a
+Constellation Atlas, AFI08 Capture Atmosphere Composer, AFI09 Time LifeShape
+Field, and AFI10 You User System Profile are complete / Accepted Yellow. AFI11
+Trust Seam And Receipts is now the next eligible global batch unless repo evidence shows a
 dirty or half-complete active batch must close first.
 PK01-PK41 remain queued active planned Platform Kernel scope, but are not
-minimum prerequisites for AFI10 unless later evidence proves that dependency.
+minimum prerequisites for AFI11 unless later evidence proves that dependency.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
 entitlement, dependency, generated-project, or hosted-CI proof claim.

@@ -154,7 +154,7 @@ public enum SI16PreviewFixtureCatalog {
         fixture(.selected, "Goals", "Constellation Atlas", lane: nil),
         fixture(.focused, "Capture", "Atmosphere Composer", lane: "clarification_needed"),
         fixture(.loading, "Time", "LifeShape Field", lane: "source_check_first"),
-        fixture(.empty, "You", "Personal System Center", lane: nil),
+        fixture(.empty, "You", "User System Profile", lane: nil),
         fixture(.disabled, "Today", "Start here decision", lane: "user_review_required"),
         fixture(.degraded, "Goals", "Source review lane", lane: "source_conflict_review"),
         fixture(.privacySensitive, "You", "Trust receipt", lane: "privacy_sensitive_plan"),

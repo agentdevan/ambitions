@@ -113,7 +113,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .proofSpine: "Proof Spine"
         case .capturePlacementShelf: "Atmosphere Composer"
         case .lifeShapeContourMap: "LifeShape Field"
-        case .personalSystemCenter: "Personal System Center"
+        case .personalSystemCenter: "User System Profile"
         case .memoryLens: "Memory Lens"
         }
     }
@@ -146,7 +146,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .lifeShapeContourMap:
             "Time preserves the LifeShape Field while capacity, pressure, and protected pockets load."
         case .personalSystemCenter:
-            "You keeps the system center stable while setup, trust, memory, and receipts load."
+            "You keeps Your System stable while setup, trust, privacy, receipts, and defaults load."
         case .memoryLens:
             "Memory Lens waits for local source age, privacy, and correction posture before showing detail."
         }
@@ -167,7 +167,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .lifeShapeContourMap:
             "The LifeShape Field can stay open when no real constraints need shaping."
         case .personalSystemCenter:
-            "The system center starts with setup and trust controls before it shows deeper history."
+            "Your System starts with setup and trust controls before it shows deeper history."
         case .memoryLens:
             "Memory Lens stays quiet until explicit local evidence makes recall useful."
         }

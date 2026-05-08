@@ -26,7 +26,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .goals: "Constellation Atlas + Orbital Lens"
         case .capture: "Atmosphere Composer"
         case .plan: "LifeShape Field"
-        case .you: "Personal System Center"
+        case .you: "User System Profile"
         }
     }
 

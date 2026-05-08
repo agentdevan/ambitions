@@ -118,7 +118,7 @@ final class LoadingDegradedStateDesignSystemTests: XCTestCase {
         XCTAssertTrue(combinedCopy.contains("Constellation Atlas"))
         XCTAssertTrue(combinedCopy.contains("Atmosphere Composer"))
         XCTAssertTrue(combinedCopy.contains("LifeShape Field"))
-        XCTAssertTrue(combinedCopy.contains("Personal System Center"))
+        XCTAssertTrue(combinedCopy.contains("User System Profile"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("generic error"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("fake progress"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("automatic reroute"))

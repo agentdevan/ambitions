@@ -29,7 +29,7 @@ enum ProfileRootDetail: String, Identifiable {
 
     var title: String {
         switch self {
-        case .profile: "Profile"
+        case .profile: "About You"
         case .personalization: "Personalization"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "What Ambitions Knows"
@@ -40,7 +40,7 @@ enum ProfileRootDetail: String, Identifiable {
         case .proof: "Proof"
         case .archive: "Archive / Completed"
         case .scheduleAvailability: "Schedule & Availability"
-        case .planBehavior: "Plan Behavior"
+        case .planBehavior: "Time Behavior"
         case .automationTrust: "Automation & Trust"
         case .vacationAwayTime: "Vacation / Away Time"
         case .durations: "Durations"
@@ -108,7 +108,7 @@ struct PersonalSystemCenterRootView: View {
             ),
             groupedSection(
                 id: "personal-defaults",
-                title: "Personal Defaults",
+                title: "Defaults",
                 subtitle: "Identity, preference, and appearance controls stay separate from trust-critical choices.",
                 itemIDs: ["profile", "personalization", "appearance"]
             ),
@@ -160,7 +160,7 @@ struct PersonalSystemCenterRootView: View {
 
     private func normalizedTitle(for item: ProfileSystemCenterItem) -> String {
         switch item.id {
-        case "profile": "Profile"
+        case "profile": "About You"
         case "personalization": "Planning Defaults"
         case "what-ambitions-knows": "Memory"
         case "receipts-history": "Receipts / History"

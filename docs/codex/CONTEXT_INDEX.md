@@ -18,9 +18,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   compatibility alias only. AFI01 Canon Language Purge, AFI02 IA Hierarchy
   Lock, AFI03 Flagship Object Silhouettes, AFI04 Material System Proof,
   AFI05 Shell And Continuity Chrome, AFI06 Today Reality Meridian, AFI07
-  Goals Constellation Atlas, AFI08 Capture Atmosphere Composer, and AFI09 Time
-  LifeShape Field are complete / Accepted Yellow. AFI10 You User System
-  Profile is the next eligible global batch unless a specific minimum
+  Goals Constellation Atlas, AFI08 Capture Atmosphere Composer, AFI09 Time
+  LifeShape Field, and AFI10 You User System Profile are complete / Accepted
+  Yellow. AFI11 Trust Seam And Receipts is the next eligible global batch unless a specific minimum
   prerequisite is proven.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific
@@ -639,8 +639,8 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   It adds no app behavior, production Swift, runtime, model runtime, LDI
   runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud,
   platform integration, legal/privacy compliance, physical-device proof,
-  release, or public accessibility claim. LDI01-LDI14, PK00, and AFI01-AFI09
-  have since closed Green or accepted Yellow; AFI10 You User System Profile is
+  release, or public accessibility claim. LDI01-LDI14, PK00, and AFI01-AFI10
+  have since closed Green or accepted Yellow; AFI11 Trust Seam And Receipts is
   now the next eligible batch unless repo evidence shows a dirty or
   half-complete active batch must close first or a specific PK batch is
   registry-proven as a minimum prerequisite.

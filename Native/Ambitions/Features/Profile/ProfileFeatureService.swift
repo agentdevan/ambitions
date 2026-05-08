@@ -92,7 +92,7 @@ private extension RepositoryBackedProfileService {
         let blockedCount = snapshot.drafts.filter { $0.latestResultKind == .blocked }.count
         let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
         let trimmedName = snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let profileTitle = trimmedName.isEmpty ? "Your system" : "\(trimmedName)'s system"
+        let profileTitle = trimmedName.isEmpty ? "Your System" : "\(trimmedName)'s System"
         let notificationStatus = notificationAuthorizationStatus(notificationAuthorization)
         let syncState = syncVisualState(syncStatus)
         let appearanceSummary = "\(snapshot.appState.appearancePreference.title) mode with \(snapshot.appState.accentFamily.title)"
@@ -109,7 +109,7 @@ private extension RepositoryBackedProfileService {
         return ProfileDashboard(
             hero: ProfileHeroState(
                 title: profileTitle,
-                subtitle: "Your Trust Center for what Ambitions knows, what it can do, and what it will not change silently.",
+                subtitle: "Your System keeps trust, privacy, receipts, planning setup, and defaults visible.",
                 dominantTruth: dominantTruth(
                     syncStatus: syncStatus,
                     notificationStatus: notificationStatus,
@@ -441,19 +441,19 @@ private extension RepositoryBackedProfileService {
                 footer: nil
             ),
             accountSection: ProfileSectionGroup(
-                title: "Account and billing",
+                title: "Local app status",
                 subtitle: "This build stays explicit about what is not configured yet so You never implies hidden account requirements.",
                 items: [
                     SettingsItem(
                         id: "profile-account-mode",
-                        title: "Account mode",
+                        title: "Local mode",
                         subtitle: "No sign-in or cloud account is required for the current shipping native experience.",
                         icon: "person.crop.circle",
                         valueLabel: "On-device only"
                     ),
                     SettingsItem(
                         id: "profile-account-billing",
-                        title: "Billing",
+                        title: "Purchases",
                         subtitle: "Subscriptions, digital unlocks, and purchase flows are not active product scope in this build.",
                         icon: "creditcard",
                         valueLabel: "Not active"
@@ -671,8 +671,8 @@ private extension RepositoryBackedProfileService {
         appearanceSummary: String
     ) -> ProfileSystemCenterState {
         ProfileSystemCenterState(
-            title: "Personal System Center",
-            subtitle: "Planning setup, trust controls, memory, receipts, and personal defaults stay in one user-owned place.",
+            title: "Your System",
+            subtitle: "User System Profile keeps Planning Setup, Trust & Automation, Privacy, Receipts & History, and Defaults visible.",
             sections: [
                 ProfileSystemCenterSection(
                     id: "planning-behavior",
@@ -690,12 +690,12 @@ private extension RepositoryBackedProfileService {
                         ),
                         ProfileSystemCenterItem(
                             id: "plan-behavior",
-                            title: "Plan Behavior",
+                            title: "Time Behavior",
                             subtitle: "Open time, protected free time, buffers, and reflow rules.",
                             icon: "slider.horizontal.below.rectangle",
                             statusLabel: "Do not fill",
                             semanticState: .protected,
-                            accessibilityHint: "Opens Plan Behavior."
+                            accessibilityHint: "Opens Time Behavior."
                         ),
                         ProfileSystemCenterItem(
                             id: "automation-trust",
@@ -805,17 +805,17 @@ private extension RepositoryBackedProfileService {
                 ),
                 ProfileSystemCenterSection(
                     id: "personal-defaults",
-                    title: "Personal Defaults",
+                    title: "Defaults",
                     footer: nil,
                     items: [
                         ProfileSystemCenterItem(
                             id: "profile",
-                            title: "Profile",
+                            title: "About You",
                             subtitle: "Name and default landing tab.",
                             icon: "person.crop.circle",
                             statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Local",
                             semanticState: .neutral,
-                            accessibilityHint: "Opens profile settings."
+                            accessibilityHint: "Opens About You settings."
                         ),
                         ProfileSystemCenterItem(
                             id: "personalization",

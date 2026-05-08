@@ -9,30 +9,32 @@ Status: Active
 ## Current Closeout
 
 Result: Accepted Yellow
-Batch: AFI09 Time LifeShape Field
+Batch: AFI10 You User System Profile
 Commit: pending
-Files changed: focused Time/Plan app copy, contract, preview, test, ACX visual
-packet routing, and train-state docs.
-Behavior changed: touched user-facing fourth-destination copy now presents Time
-as Shape Time / LifeShape Field while preserving internal `.plan` compatibility.
-Tests run: `xcodegen generate`, focused Time/contract/reality `xcodebuild`
-lane, `./scripts/build-local.sh`, ACX quick/docs/batch-closeout/build-triage/codex-os bundles, ACX repair diagnose, `python3 -m py_compile scripts/ai/acx.py scripts/ai/acx_local.py scripts/ai/acx_impact.py scripts/ai/acx_closeout.py scripts/ai/acx_repair.py scripts/ai/acx_visual_packet.py scripts/ai/acx_accessibility_packet.py`, Time visual/accessibility packet generation, `scripts/batch-train-gate-check.sh || true`, `scripts/global-train-next-batch.sh`, and `git diff --check`.
+Files changed: focused You/Profile app copy, contract, composition, preview,
+test, ACX visual packet routing, and train-state docs.
+Behavior changed: touched user-facing You copy now presents Your System / User
+System Profile while preserving internal `Profile` compatibility seams.
+Tests run: `xcodegen generate`, focused You/contract/composition `xcodebuild`
+lane, `./scripts/build-local.sh`, ACX helper py_compile, You
+visual/accessibility packet generation, ACX quick/batch-closeout/codex-os
+bundles, `python3 scripts/ai/acx_repair.py diagnose`, `scripts/batch-train-gate-check.sh || true`, `scripts/global-train-next-batch.sh`, and `git diff --check`.
 Tests not run: rendered screenshot proof, manual accessibility traversal, full
 UI test suite, physical-device proof, and signed archive proof.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
 Yellows carried: PK01-PK41 remain active planned scope but are paused behind
 AFI unless a specific PK prerequisite is proven; transaction safety,
 migration/backup/rollback, side-effect isolation, sync readiness, intelligence
-quarantine, and performance budgets are not PK-proven yet. AFI09 rendered
+quarantine, and performance budgets are not PK-proven yet. AFI10 rendered
 visual/manual accessibility proof remains Yellow. The pre-sync stash remains
 preserved and unapplied.
-Rollback path: revert the AFI09 implementation commit.
+Rollback path: revert the AFI10 implementation commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
-AFI09 focused tests and local build passed in this session.
+AFI10 focused tests and local build passed in this session.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: AFI10 You User System Profile.
+Next eligible batch: AFI11 Trust Seam And Receipts.
 
 ## Completed
 
@@ -42,7 +44,7 @@ Next eligible batch: AFI10 You User System Profile.
 
 ## Active / Next
 
-- AFI10 You User System Profile is next eligible.
+- AFI11 Trust Seam And Receipts is next eligible.
 - PK01-PK41 remain queued active planned Platform Kernel scope, but no PK batch
   after PK00 is treated as a prerequisite for AFI unless a later owner report
   proves the dependency.

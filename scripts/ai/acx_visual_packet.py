@@ -15,7 +15,7 @@ SURFACE_OBJECTS = {
     "Capture": "Capture Atmosphere Composer / Placement Shelf / Correction Fold",
     "Time": "Shape Time / LifeShape Field / Reflow Decision Fold / Pressure Field",
     "Plan": "Compatibility alias for Time; use Time for active AFI proof",
-    "You": "Personal System Center / Memory Lens / Appearance Studio",
+    "You": "Your System / User System Profile / Memory Lens / Appearance Studio",
 }
 
 
