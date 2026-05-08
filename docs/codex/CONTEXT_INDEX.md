@@ -4,6 +4,8 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 
 ## Current Operating Truth
 
+- GQ01 Global Queue Maturity is complete / Green with accepted Yellow advisories. Use `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` and `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` as the canonical fallback queue after live current-run state. PK04 Atomic Goal Creation is the next implementation batch. SA07-SA32 are visible; EFC is overlay-first; CS02C-CS06C/CS09C are conditional triggers; PX01-PX20 are historical complete do-not-run.
+
 - Ambitions 3.0 is active for product, front-end, product language, primitive architecture, implementation sequencing, repo hygiene, dependency discipline, and handoff readiness.
 - Older 1.0/2.0/v2/Waves/D/M/R material is implementation history or supporting context only where Ambitions 3.0 explicitly keeps a domain binding.
 - `docs/codex/BATCH_REGISTRY.md` is implementation status truth only. It does not override Ambitions 3.0 product direction.

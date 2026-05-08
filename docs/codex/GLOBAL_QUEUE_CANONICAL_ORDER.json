@@ -1,0 +1,1178 @@
+{
+  "schema_version": 1,
+  "date": "2026-05-08",
+  "post_pk03_total": 146,
+  "next_eligible_batch": "PK04",
+  "next_eligible_title": "Atomic Goal Creation",
+  "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
+  "batches": [
+    {
+      "id": "PK04",
+      "title": "Atomic Goal Creation",
+      "classification": "executable_now",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK05",
+      "title": "Atomic Clarification / Materialization",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK04 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK06",
+      "title": "Atomic Capture Promotion",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK05 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK07",
+      "title": "Storage Schema Version Ledger",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK06 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK08",
+      "title": "Migration Plan Scaffold",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK07 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK09",
+      "title": "Unknown Persisted Value Degradation",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK08 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK10",
+      "title": "Storage Invariant Checker",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK09 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK11",
+      "title": "Pre-Migration Backup",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK10 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK12",
+      "title": "Staged Portable Import Dry Run",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK11 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK13",
+      "title": "Restore Rollback",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK12 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK14",
+      "title": "Durable Command/Event Ledger",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK13 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK15",
+      "title": "Receipt Backend",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK14 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK16",
+      "title": "Trust History Query",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK15 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK17",
+      "title": "Today Read Model Extraction",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK16 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK18",
+      "title": "Today Command Handler Extraction",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK17 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK19",
+      "title": "Goals Query/Projector Extraction",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK18 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK20",
+      "title": "Capture Service Extraction",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK19 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK21",
+      "title": "Time Service Extraction",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK20 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK22",
+      "title": "SideEffectLedger Foundation",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK21 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK23",
+      "title": "Notifications Through SideEffectLedger",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK22 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK24",
+      "title": "EventKit Through SideEffectLedger",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK23 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK25",
+      "title": "External Snapshots Through SideEffectLedger",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK24 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK26",
+      "title": "Privacy Classification System",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK25 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK27",
+      "title": "Diagnostic Ledger",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK26 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK28",
+      "title": "Data Control Commands",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK27 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK29",
+      "title": "Entity Revision And Tombstones",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK28 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK30",
+      "title": "Conflict Policy Engine",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK29 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK31",
+      "title": "Manual Portable Sync Merge",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK30 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK32",
+      "title": "Knowledge Claim Boundary Hardening",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK31 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK33",
+      "title": "Recommendation Evidence Model",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK32 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK34",
+      "title": "Intelligence Quarantine",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK33 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK35",
+      "title": "Large-Store Fixture Generator",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK34 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK36",
+      "title": "Performance Budgets",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK35 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK37",
+      "title": "Derived Read-Model Cache",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK36 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK38",
+      "title": "Move Domain To Package",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK37 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK39",
+      "title": "Move Storage To Package",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK38 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK40",
+      "title": "Move Runtime To Package",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK39 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PK41",
+      "title": "Move Feature Engines To Package",
+      "classification": "executable_later",
+      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "Complete prior PK batch PK40 and any data-safety proof named by the PK train.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA07",
+      "title": "Claim State Machine",
+      "classification": "executable_later",
+      "reason": "Source Atlas is now visible to the autonomous queue, but runs after PK safety prerequisites or when selected as a hard dependency for source/freshness work.",
+      "blocking_prerequisites": "PK source/storage prerequisites and SA06 completion evidence; do not skip SA in fallback order.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA08",
+      "title": "Requirement Graph Implementation",
+      "classification": "executable_later",
+      "reason": "Source Atlas is now visible to the autonomous queue, but runs after PK safety prerequisites or when selected as a hard dependency for source/freshness work.",
+      "blocking_prerequisites": "PK source/storage prerequisites and SA06 completion evidence; do not skip SA in fallback order.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA09",
+      "title": "Proof Map Implementation",
+      "classification": "executable_later",
+      "reason": "Source Atlas is now visible to the autonomous queue, but runs after PK safety prerequisites or when selected as a hard dependency for source/freshness work.",
+      "blocking_prerequisites": "PK source/storage prerequisites and SA06 completion evidence; do not skip SA in fallback order.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA10",
+      "title": "Freshness And Risk Model Implementation",
+      "classification": "executable_later",
+      "reason": "Source Atlas is now visible to the autonomous queue, but runs after PK safety prerequisites or when selected as a hard dependency for source/freshness work.",
+      "blocking_prerequisites": "PK source/storage prerequisites and SA06 completion evidence; do not skip SA in fallback order.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA10A",
+      "title": "Capability Graph / Level Ladder Implementation",
+      "classification": "executable_later",
+      "reason": "Source Atlas composition/projection runtime must be visible and must not be hidden behind AOS/LDI continuation.",
+      "blocking_prerequisites": "SA07-SA10 plus SAP composition/projection gates.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA10B",
+      "title": "Goal Projection Engine Contract",
+      "classification": "executable_later",
+      "reason": "Source Atlas composition/projection runtime must be visible and must not be hidden behind AOS/LDI continuation.",
+      "blocking_prerequisites": "SA07-SA10 plus SAP composition/projection gates.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA10C",
+      "title": "Projection Fixtures And No-Sprawl Validation",
+      "classification": "executable_later",
+      "reason": "Source Atlas composition/projection runtime must be visible and must not be hidden behind AOS/LDI continuation.",
+      "blocking_prerequisites": "SA07-SA10 plus SAP composition/projection gates.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA11",
+      "title": "SA11",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA12",
+      "title": "SA12",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA13",
+      "title": "SA13",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA14",
+      "title": "SA14",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA15",
+      "title": "SA15",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA16",
+      "title": "SA16",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA17",
+      "title": "SA17",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA18",
+      "title": "SA18",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA19",
+      "title": "SA19",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA20",
+      "title": "SA20",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA21",
+      "title": "SA21",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA22",
+      "title": "SA22",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA23",
+      "title": "SA23",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA24",
+      "title": "SA24",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA25",
+      "title": "SA25",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA26",
+      "title": "SA26",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA27",
+      "title": "SA27",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA28",
+      "title": "SA28",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA29",
+      "title": "SA29",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA30",
+      "title": "SA30",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA31",
+      "title": "SA31",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "SA32",
+      "title": "SA32",
+      "classification": "executable_later",
+      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
+      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "LDI15",
+      "title": "Living Plan Recompiler",
+      "classification": "blocked_until_dependency",
+      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
+      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "LDI16",
+      "title": "Mutation Permissions And Impact Levels",
+      "classification": "blocked_until_dependency",
+      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
+      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "LDI17",
+      "title": "Continuity Sync",
+      "classification": "executable_later",
+      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
+      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "LDI18",
+      "title": "Archive And Schema Migration",
+      "classification": "executable_later",
+      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
+      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "LDI19",
+      "title": "Multi-Device Merge Ledger",
+      "classification": "executable_later",
+      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
+      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "LDI20",
+      "title": "Freshness Broker",
+      "classification": "blocked_until_dependency",
+      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
+      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "LDI21",
+      "title": "Red-Team Evaluation Suite",
+      "classification": "blocked_until_dependency",
+      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
+      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "LDI22",
+      "title": "Governance And Maintenance Console",
+      "classification": "blocked_until_dependency",
+      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
+      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "AOS24",
+      "title": "AmbitionsOS Runtime Tail Gate",
+      "classification": "blocked_until_dependency",
+      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
+      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "AOS25",
+      "title": "AmbitionsOS Integration Tail Gate",
+      "classification": "blocked_until_dependency",
+      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
+      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "AOS26",
+      "title": "AmbitionsOS Evaluation Tail Gate",
+      "classification": "blocked_until_dependency",
+      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
+      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "AOS27",
+      "title": "AmbitionsOS Privacy Safety Tail Gate",
+      "classification": "blocked_until_dependency",
+      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
+      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "AOS28",
+      "title": "AmbitionsOS Experience Tail Gate",
+      "classification": "blocked_until_dependency",
+      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
+      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "AOS29",
+      "title": "AmbitionsOS Handoff Tail Gate",
+      "classification": "blocked_until_dependency",
+      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
+      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "AOS30",
+      "title": "AmbitionsOS Closeout",
+      "classification": "blocked_until_dependency",
+      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
+      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "FCP27",
+      "title": "App-Wide Flagship Audit And Remediation",
+      "classification": "executable_later",
+      "reason": "Late final product proof remains after core platform/source/intelligence maturity.",
+      "blocking_prerequisites": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "FCP28",
+      "title": "Final Visual Proof Packet",
+      "classification": "executable_later",
+      "reason": "Late final product proof remains after core platform/source/intelligence maturity.",
+      "blocking_prerequisites": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "FCP29",
+      "title": "Accessibility And Dynamic Type Closeout",
+      "classification": "executable_later",
+      "reason": "Late final product proof remains after core platform/source/intelligence maturity.",
+      "blocking_prerequisites": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "FCP30",
+      "title": "Flagship Completion Handoff",
+      "classification": "executable_later",
+      "reason": "Late final product proof remains after core platform/source/intelligence maturity.",
+      "blocking_prerequisites": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC31",
+      "title": "Architecture Extraction Closeout",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC32",
+      "title": "Build And Test Determinism Closeout",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC33",
+      "title": "External Surface Release Evidence",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC34",
+      "title": "Privacy Legal Review Reconciliation",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC35",
+      "title": "Security And Threat Model Reconciliation",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC36",
+      "title": "Performance And Observability Reconciliation",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC37",
+      "title": "Release Engineering Evidence",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC38",
+      "title": "Signed Candidate Preparation Gate",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC39",
+      "title": "Final Platform Handoff",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "PFC40",
+      "title": "Platform Framework Compliance Closeout",
+      "classification": "executable_later",
+      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "RHC01",
+      "title": "Repo Hygiene Triage And Owner Map",
+      "classification": "executable_later",
+      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
+      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "RHC02",
+      "title": "Large File Extraction And Module Boundary",
+      "classification": "executable_later",
+      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
+      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "RHC03",
+      "title": "Placeholder Stub And Compatibility Seam Cleanup",
+      "classification": "executable_later",
+      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
+      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "RHC04",
+      "title": "Stale Copy Docs And Generated Artifact Hygiene",
+      "classification": "executable_later",
+      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
+      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "RHC05",
+      "title": "Validation Script Noise And Allowlist Hardening",
+      "classification": "executable_later",
+      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
+      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "RHC06",
+      "title": "Repo Hygiene Closeout And Handoff",
+      "classification": "executable_later",
+      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
+      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "EFC01",
+      "title": "Private Product Evidence Engine",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC02",
+      "title": "First Useful Object Onboarding",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC03",
+      "title": "First 30 Days Lifecycle And Retention Proof",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC04",
+      "title": "Time Physics Edge Case Lab",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC05",
+      "title": "Recommendation Court Integration Gate",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC06",
+      "title": "Goal Thermodynamics And Drift Handling",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC07",
+      "title": "Ambitions Twin Fixture Library",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC08",
+      "title": "Source Freshness Commons And Operations",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC09",
+      "title": "Accessibility Shadow Surface System",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC10",
+      "title": "Real Device Proof Lab",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC11",
+      "title": "Privacy-Safe Observability And Support Pack",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC12",
+      "title": "Data Control And Proof Portability Vault",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC13",
+      "title": "Notification Cadence Governor",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC14",
+      "title": "Local Language Quality Benchmark",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC15",
+      "title": "Localization And Globalization Readiness",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC16",
+      "title": "Release Truth Machine",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC17",
+      "title": "App Store Creative And Reviewer Package",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "EFC18",
+      "title": "Anti-Ceremony Compiler",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "efc_applicability": "invoked"
+    },
+    {
+      "id": "CS02C",
+      "title": "CSCS02C",
+      "classification": "conditional_trigger_only",
+      "reason": "Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target.",
+      "blocking_prerequisites": "Named regression/proof target, owner, rollback plan, and focused tests.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "CS03C",
+      "title": "CSCS03C",
+      "classification": "conditional_trigger_only",
+      "reason": "Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target.",
+      "blocking_prerequisites": "Named regression/proof target, owner, rollback plan, and focused tests.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "CS04C",
+      "title": "CSCS04C",
+      "classification": "conditional_trigger_only",
+      "reason": "Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target.",
+      "blocking_prerequisites": "Named regression/proof target, owner, rollback plan, and focused tests.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "CS05C",
+      "title": "CSCS05C",
+      "classification": "conditional_trigger_only",
+      "reason": "Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target.",
+      "blocking_prerequisites": "Named regression/proof target, owner, rollback plan, and focused tests.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "CS06C",
+      "title": "CSCS06C",
+      "classification": "conditional_trigger_only",
+      "reason": "Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target.",
+      "blocking_prerequisites": "Named regression/proof target, owner, rollback plan, and focused tests.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "CS09C",
+      "title": "CSCS09C",
+      "classification": "conditional_trigger_only",
+      "reason": "Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target.",
+      "blocking_prerequisites": "Named regression/proof target, owner, rollback plan, and focused tests.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX01",
+      "title": "PXOS Parent Canon",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX02",
+      "title": "Today Experience Canon",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX03",
+      "title": "Goals Mission Control Canon",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX04",
+      "title": "Capture Experience Canon",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX05",
+      "title": "Plan Life Shape Canon",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX06",
+      "title": "You Personal System Center Canon",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX07",
+      "title": "Action Closure Recovery Canon",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX08",
+      "title": "Trust Proof Receipts Canon",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX09",
+      "title": "Copy Language And Explanation System",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX10",
+      "title": "Visual Interaction System",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX11",
+      "title": "Onboarding Setup And Personalization",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX12",
+      "title": "Accessibility Cognitive Load And Emotional Safety",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX13",
+      "title": "Empty Edge And Degraded States",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX14",
+      "title": "Product Depth And Drilldown Rules",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX15",
+      "title": "Cross Surface Continuity System",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX16",
+      "title": "User-Facing Intelligence Expression",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX17",
+      "title": "Release Safe Product Messaging",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX18",
+      "title": "Implementation Readiness Reorder",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX19",
+      "title": "PXOS Handoff",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    },
+    {
+      "id": "PX20",
+      "title": "PXOS Beyond Roadmap",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PXOS/PX batches are complete future-canon and roadmap evidence; do not rerun as implementation batches.",
+      "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
+      "efc_applicability": "not applicable"
+    }
+  ]
+}

@@ -127,6 +127,8 @@ Current 4.0 status:
   transaction boundary, receipt metadata, and focused persistence proof for
   multi-record commit plus thrown-error rollback before save.
 - Next eligible global batch: PK04 Atomic Goal Creation.
+
+- Complete / Green with accepted Yellow advisories: GQ01 Global Queue Maturity, Repo Root Prune, Time Hydration, Dirty Worktree Resolution, And Refactor Readiness Gate is complete. It created `GLOBAL_QUEUE_MATURITY_LEDGER.md`, `GLOBAL_QUEUE_CANONICAL_ORDER.json`, `TIME_REPLACES_PLAN_COMPATIBILITY_LEDGER.md`, updated next-batch scripts, repaired active Time/Plan backlog wording, and selected PK04 as the next implementation batch. Accepted Yellow: broad historical tracked-doc deletion is deferred to RHC because reference scans still preserve evidence/history links.
 - Complete / accepted Yellow: FCP/PFC global registry-context reconciliation
   is complete as docs-only operating truth. It reconciled the full-stack order,
   FCP/PFC source truth, registry, context index, and run-state docs after PD15

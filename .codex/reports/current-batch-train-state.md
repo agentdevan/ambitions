@@ -2,8 +2,30 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
+Current batch: GQ01 Global Queue Maturity / Green with Yellow advisories.
+Next eligible batch: PK04 Atomic Goal Creation
+Scope: GQ01 resolved the dirty worktree, committed/pushed PK03, committed/pushed local MCP/tooling dirty-state resolution, created canonical queue maturity data, made next-batch scripts data-backed, repaired active Time/Plan backlog wording, removed local generated junk, and recorded refactor readiness. No production Swift behavior changed in GQ01.
+AFI source truth is active for product/IA/UI/visual/copy decisions.
+The active flagship top-level IA is Today / Goals / Capture / Time / You.
+Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / Green with accepted Yellow advisories for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+
+## GQ01 Queue Maturity Closeout
+
+- Canonical queue ledger: `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md`.
+- Canonical machine-readable queue: `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`.
+- Time compatibility ledger: `docs/codex/TIME_REPLACES_PLAN_COMPATIBILITY_LEDGER.md`.
+- GQ01 report: `docs/audits/gq01-global-queue-maturity-report.md`.
+- Refactor assessment: `docs/audits/gq01-refactor-maturity-assessment.md`.
+- Next-batch scripts now print next eligible batch, classification reason, blockers, and EFC applicability.
+- SA07-SA32 are visible in fallback queue; PX01-PX20 are historical do-not-run; EFC01-EFC18 are overlays first; CS02C-CS06C/CS09C are trigger-only.
+- Release, device, accessibility, legal/privacy, hosted CI, App Store, TestFlight, sync/cloud, telemetry, analytics, hosted AI, and production readiness remain non-claims.
+
+
+Date: 2026-05-08
+Active train: Global full-stack execution
 Current batch: PK03 AppUnitOfWork Foundation / Green.
-Next eligible batch: PK04 Atomic Goal Creation.
+Next eligible batch: PK04 Atomic Goal Creation
 Scope: PK03 added a local SwiftData AppUnitOfWork boundary with receipt
 metadata and focused persistence tests for commit and thrown-error rollback.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
