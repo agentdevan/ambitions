@@ -15,7 +15,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "Today"
         case .goals: "Goals"
         case .capture: "Capture"
-        case .plan: "Plan"
+        case .plan: "Time"
         case .you: "You"
         }
     }
@@ -25,7 +25,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "Reality Rail"
         case .goals: "Mission Control"
         case .capture: "Placement Composer"
-        case .plan: "Life Shape"
+        case .plan: "LifeShape Field"
         case .you: "Personal System Center"
         }
     }

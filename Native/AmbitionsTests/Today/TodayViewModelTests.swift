@@ -648,7 +648,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.execution.oneStepGoalsPanel.title, "One-Step Goals")
         XCTAssertEqual(experience.execution.oneStepGoalsPanel.value, "1 open")
         XCTAssertEqual(experience.execution.oneStepGoalsPanel.previews.first?.title, "Book dentist")
-        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertFalse(ScreenContractValidator.canonicalTopLevelTabs.contains("Tasks"))
     }
 

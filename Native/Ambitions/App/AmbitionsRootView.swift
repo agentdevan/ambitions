@@ -176,8 +176,8 @@ struct AmbitionsRootView: View {
     private func planNavigation() -> some View {
         NavigationStack(path: $navigation.planPath) {
             AppShellScaffold(
-                title: "Plan",
-                subtitle: "Shaping",
+                title: "Time",
+                subtitle: "Shape Time",
                 posture: .shaping,
                 trailingButtons: shellUtilityButtons(for: .plan)
             ) {
@@ -188,7 +188,7 @@ struct AmbitionsRootView: View {
                 case .captureInbox:
                     AppShellScaffold(
                         title: "Capture",
-                        subtitle: "Plan support route",
+                        subtitle: "Time support route",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
                         onBack: { navigation.resetPlanPath() },
@@ -199,7 +199,7 @@ struct AmbitionsRootView: View {
                 case .habits:
                     AppShellScaffold(
                         title: "Rituals",
-                        subtitle: "Plan-owned loop view",
+                        subtitle: "Time-owned loop view",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
                         onBack: { navigation.resetPlanPath() },
@@ -210,7 +210,7 @@ struct AmbitionsRootView: View {
                 case .weeklyReview:
                     AppShellScaffold(
                         title: "Weekly Review",
-                        subtitle: "Plan shaping continuation",
+                        subtitle: "Time shaping continuation",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
                         onBack: { navigation.resetPlanPath() },

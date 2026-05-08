@@ -986,7 +986,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
     }
 
     func testTopLevelShellStillExcludesLegacyProfileInsightsAndHabitsTabs() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))

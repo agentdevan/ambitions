@@ -55,7 +55,7 @@ enum AppShellHeaderPosture: String, Sendable {
         case .direction:
             "Goals keeps direction connected to the next step."
         case .shaping:
-            "Plan reshapes the week only with confirmation."
+            "Time shapes the week only with confirmation."
         case .reflection:
             "Reviews carry proof forward without changing plans silently."
         case .utility:

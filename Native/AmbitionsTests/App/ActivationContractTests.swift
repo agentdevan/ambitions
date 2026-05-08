@@ -31,7 +31,7 @@ final class ActivationContractTests: XCTestCase {
         let rules = ActivationSurface.allCases.map { ActivationContract.emptyStateRule(for: $0) }
 
         XCTAssertEqual(rules.map(\.surface), [.today, .goals, .capture, .plan, .you])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .capture).surface.title, "Capture")
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .you).primaryAction.routingHint, .profileTrust)
     }

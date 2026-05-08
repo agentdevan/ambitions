@@ -19,7 +19,7 @@ final class AppShellChromeTests: XCTestCase {
 
     func testMissionControlLaneLabelsDoNotCreateTopLevelTabs() {
         XCTAssertEqual(AmbitionMissionLane.allCases.map(\.title), ["Overview", "Path", "Steps", "Proof", "Decisions", "Risks", "Archive"])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
     }
 
     func testTrustBadgeCopyDoesNotClaimGlobalSyncByDefault() {
@@ -97,6 +97,6 @@ final class AppShellChromeTests: XCTestCase {
             XCTAssertTrue(AmbitionAmbientStatus.allCases.contains(kind.defaultStatus))
         }
 
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
     }
 }

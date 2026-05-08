@@ -30,7 +30,7 @@ final class ScreenContractRegistryTests: XCTestCase {
                 "Goals",
                 "Goal Detail",
                 "Capture",
-                "Plan",
+                "Time",
                 "You",
                 "Life Areas Overview",
                 "North Star Detail",

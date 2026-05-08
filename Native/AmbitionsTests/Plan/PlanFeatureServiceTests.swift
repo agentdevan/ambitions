@@ -744,7 +744,7 @@ final class PlanFeatureServiceTests: XCTestCase {
     }
 
     func testTopLevelIARemainsCanonicalFiveTabShell() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
@@ -760,7 +760,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         let snapshot = dashboard.screenContractSnapshot()
 
         XCTAssertEqual(snapshot.screenID, .plan)
-        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertTrue(snapshot.copySamples.contains("Does this hold together?"))
         XCTAssertTrue(snapshot.copySamples.contains("Based on your plan"))
         XCTAssertTrue(ScreenContractValidator.validate(snapshot: snapshot, against: contract).isEmpty)

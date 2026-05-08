@@ -38,7 +38,7 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
         case .captures: "Capture"
         case .goals: "Goals"
         case .habits: "Rituals"
-        case .plan: "Plan"
+        case .plan: "Time"
         case .insights: "History"
         case .profile: "You"
         }
@@ -50,7 +50,7 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
         case .captures: "tray.full"
         case .goals: "target"
         case .habits: "repeat"
-        case .plan: "calendar.badge.clock"
+        case .plan: "clock.badge"
         case .insights: "chart.line.uptrend.xyaxis"
         case .profile: "person.crop.circle"
         }

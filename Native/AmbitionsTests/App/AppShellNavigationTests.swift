@@ -4,7 +4,7 @@ import XCTest
 final class AppShellNavigationTests: XCTestCase {
     func testCanonicalTopLevelTabsMatchProductSpec() {
         XCTAssertEqual(AppTab.allCases, [.today, .goals, .captures, .plan, .profile])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.contains(.insights))
         XCTAssertFalse(AppTab.allCases.contains(.habits))
     }
@@ -85,7 +85,7 @@ final class AppShellNavigationTests: XCTestCase {
         let destinations = AppMeridianDestination.all
 
         XCTAssertEqual(destinations.map(\.tab), AppTab.allCases)
-        XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertEqual(
             destinations.map(\.accessibilityIdentifier),
             [
@@ -102,8 +102,8 @@ final class AppShellNavigationTests: XCTestCase {
         let chrome = AppMeridianShellChromeState.launchDefault
 
         XCTAssertEqual(chrome.title, "Ambition Meridian")
-        XCTAssertEqual(chrome.destinations.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
-        XCTAssertTrue(chrome.destinationRailLabel.contains("Today, Goals, Capture, Plan, You"))
+        XCTAssertEqual(chrome.destinations.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertTrue(chrome.destinationRailLabel.contains("Today, Goals, Capture, Time, You"))
         XCTAssertTrue(chrome.receiptOverlayZoneLabel.contains("temporary and dismissible"))
         XCTAssertTrue(chrome.globalActionLabel.contains("without changing tabs"))
         XCTAssertTrue(chrome.safeAreaLabel.contains("safe areas"))
@@ -179,7 +179,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .plan)
         XCTAssertEqual(navigation.planPath, [.habits])
         XCTAssertTrue(navigation.insightsPath.isEmpty)
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.contains(.habits))
         XCTAssertEqual(AppTab.habits.rawValue, "habits")
         XCTAssertEqual(AppTab.habits.title, "Rituals")
@@ -193,7 +193,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .profile)
         XCTAssertEqual(navigation.insightsPath, [.history])
         XCTAssertTrue(navigation.planPath.isEmpty)
-        XCTAssertEqual(AppTab.plan.title, "Plan")
+        XCTAssertEqual(AppTab.plan.title, "Time")
         XCTAssertEqual(AppTab.insights.rawValue, "insights")
         XCTAssertEqual(AppTab.insights.title, "History")
         XCTAssertFalse(AppTab.allCases.contains(.insights))
@@ -208,9 +208,9 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .profile)
         XCTAssertEqual(navigation.insightsPath, [.history])
         XCTAssertTrue(navigation.planPath.isEmpty)
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.contains(.insights))
-        XCTAssertEqual(AppTab.plan.title, "Plan")
+        XCTAssertEqual(AppTab.plan.title, "Time")
         XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
     }
 

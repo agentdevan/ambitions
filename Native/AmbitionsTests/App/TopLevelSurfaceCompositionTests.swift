@@ -10,7 +10,7 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
 
         XCTAssertEqual(
             AmbitionsTopLevelSurfaceComposition.allCases.map(\.title),
-            ["Today", "Goals", "Capture", "Plan", "You"]
+            ["Today", "Goals", "Capture", "Time", "You"]
         )
     }
 

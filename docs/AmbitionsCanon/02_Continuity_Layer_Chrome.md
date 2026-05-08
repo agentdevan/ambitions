@@ -38,7 +38,7 @@ This document does not implement app behavior.
 
 ## 2. Continuity Layer Thesis
 
-The Ambitions Continuity Layer makes Today, Goals, Capture, Plan, and You feel like one native, evolving life operating system.
+The Ambitions Continuity Layer makes Today, Goals, Capture, Time, and You feel like one native, evolving life operating system.
 
 It connects:
 
@@ -135,7 +135,7 @@ enum AmbitionsTab {
     case today
     case goals
     case capture
-    case plan
+    case time
     case you
 }
 ```
@@ -209,7 +209,7 @@ Ambitions should feel aware, not noisy.
 6. Meridian Edge hides when it has no orientation or state work.
 7. Context Crown never becomes a dashboard header.
 8. Trust Seam never becomes a chat drawer.
-9. Plan pressure does not create red badge anxiety.
+9. Time pressure does not create red badge anxiety.
 10. Goals thread markers do not imply system-ranked life priorities.
 
 ---
@@ -238,7 +238,7 @@ Per-tab copy examples:
 | Today | Today · Tuesday | Now · 30 min open | Receipt · Still counts |
 | Goals | Goals · Life areas | Music · Active thread | Source · Goal thread |
 | Capture | Capture | Capturing | Saved · Needs a Place |
-| Plan | Plan · This week | Pressure · Friday | Receipt · Plan adjusted |
+| Time | Time · This week | Pressure · Friday | Receipt · Plan adjusted |
 | You | You | Automation & Trust | Source · Calendar |
 
 Rules:
@@ -272,7 +272,7 @@ Per-tab expression:
 | Today | aligns with Reality Meridian | strongest when Now/active step matters |
 | Goals | faint orbital/constellation edge | selected area/thread state |
 | Capture | nearly absent | after capture as route trace only |
-| Plan | capacity/pressure edge | pressure/protected/reflow states |
+| Time | capacity/pressure edge | pressure/protected/reflow states |
 | You | practical trust boundary | rare; trust/settings only |
 
 Visual rules:
@@ -305,7 +305,7 @@ Locked tabs:
 1. Today
 2. Goals
 3. Capture
-4. Plan
+4. Time
 5. You
 
 Icon concepts:
@@ -315,13 +315,13 @@ Icon concepts:
 | Today | solar/dayline symbol |
 | Goals | constellation cluster |
 | Capture | aperture/orbit symbol |
-| Plan | orbital LifeShape symbol |
+| Time | orbital LifeShape symbol |
 | You | refined person outline |
 
 Hard Red:
 
 - Capture uses plus icon
-- Plan uses menu icon
+- Time uses menu icon
 - icons change meaning by state
 - badges overpower selected state
 
@@ -330,7 +330,7 @@ Allowed markers:
 - Today: active step live
 - Goals: goal thread feeding Today
 - Capture: unplaced capture
-- Plan: pressure needs review
+- Time: pressure needs review
 - You: automation setting needs attention
 
 Rules:
@@ -346,7 +346,7 @@ Accessibility examples:
 
 - Today, selected. Active step live.
 - Capture. One unplaced capture.
-- Plan. Pressure needs review.
+- Time. Pressure needs review.
 
 ---
 
@@ -546,7 +546,7 @@ Per-tab tint direction:
 | Today | dawn blue-white / warm current trace |
 | Goals | cool constellation blue |
 | Capture | violet-blue open sky |
-| Plan | amber-cyan pressure/capacity |
+| Time | amber-cyan pressure/capacity |
 | You | graphite amber / system trust |
 
 Tint is never the only state channel.
@@ -568,13 +568,13 @@ Thread types:
 
 | Thread | Source | Destination |
 | --- | --- | --- |
-| Capture placement | Atmosphere Composer | Goal / Plan / Today |
+| Capture placement | Atmosphere Composer | Goal / Time / Today |
 | Goal execution | Constellation Atlas / Orbital Lens | Reality Meridian |
-| Plan capacity | LifeShape Field | Today / Start Here |
-| Protected time | You / Plan | Today / Plan |
+| Time capacity | LifeShape Field | Today / Start Here |
+| Protected time | You / Time | Today / Time |
 | Receipt proof | Any object | Trust Seam / You archive |
 | Automation setting | You | recommendations/reflow behavior |
-| Recovery | Today / Plan | Quiet Reflow / receipts |
+| Recovery | Today / Time | Quiet Reflow / receipts |
 
 Allowed visual expression:
 

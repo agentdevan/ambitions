@@ -32,7 +32,7 @@ enum ActivationSurface: String, CaseIterable, Sendable, Equatable {
         case .today: "Today"
         case .goals: "Goals"
         case .capture: "Capture"
-        case .plan: "Plan"
+        case .plan: "Time"
         case .you: "You"
         }
     }
@@ -85,7 +85,7 @@ enum ActivationContract {
         ActivationCopyRow(title: "Today", detail: "Choose one doable next step.", icon: AppTab.today.systemImage),
         ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction.", icon: AppTab.goals.systemImage),
         ActivationCopyRow(title: "Capture", detail: "Put messy life here first.", icon: AppTab.captures.systemImage),
-        ActivationCopyRow(title: "Plan", detail: "Shape the week only when something real asks for room.", icon: AppTab.plan.systemImage),
+        ActivationCopyRow(title: "Time", detail: "Shape the week only when something real asks for room.", icon: AppTab.plan.systemImage),
         ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AppTab.profile.systemImage)
     ]
 

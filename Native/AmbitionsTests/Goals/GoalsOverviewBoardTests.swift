@@ -273,7 +273,7 @@ final class GoalsOverviewBoardTests: XCTestCase {
         XCTAssertTrue(item.canPromoteToGoal)
         XCTAssertTrue(item.accessibilityHint.contains("Standalone task"))
 
-        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Capture", "Time", "You"])
     }
 
     func testD13GoalsScreenContractSnapshotSatisfiesImplementationGate() async throws {
