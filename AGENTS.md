@@ -10,6 +10,7 @@ Current repo posture:
 - Validation is local VM/Mac only. There is no active hosted CI workflow.
 - Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, `.codex`, and `.agents` material is retained as history, operating context, or stricter proof gates where compatible. It is not the public repo front door.
 - EFC is an active peak-proof overlay for unfinished planned work. It does not replace the active batch, implement product behavior by itself, or authorize release/platform claims.
+- The local Ambitions Repo MCP under `tools/mcp/ambitions_repo_mcp/` is optional read-only Codex tooling for active-batch, EFC, source-truth, claim-scan, closeout, and changed-file impact checks. It is not an app dependency.
 
 ## Required read order
 
@@ -35,13 +36,15 @@ For Codex OS, batch-train, or long-run governance work, additionally read:
 - `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
 - `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md`
 - `docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`
+- `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md` when local MCP tooling matters
+- `docs/codex/MCP_CODEX_SETUP.md` when configuring or verifying local MCP tooling
 - `docs/codex/CODEX_OS_INDEX.md`
 - `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` when the active model tier, Mini/Senior alias, or autonomous batch-train continuation matters
 - `docs/codex/MODEL_TIER_BATCH_MATRIX.md` when classifying remaining batch families for Mini/Senior routing
 - `.codex/README.md`
 - the selected route or batch manifest
 
-For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `.codex/state/active-batch.yml`, and the EFC overlay files before continuing from repo evidence.
+For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `.codex/state/active-batch.yml`, and the EFC overlay files before continuing from repo evidence. If the Ambitions Repo MCP is configured, call `get_active_batch`, `summarize_repo_posture`, and `get_efc_overlay_status` before edits.
 
 For `resume mini global batch train`, immediately read `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, and the EFC overlay files. Mini may execute bounded batches, but must defer or stop on senior-only gates.
 
@@ -58,6 +61,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - `EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`, `BATCH_REGISTRY_EFC_OVERLAY.md`, and `GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md` decide peak proof obligations for unfinished work where compatible with active batch state.
 - Historical docs may remain useful, but they do not override the current front-door/status files.
 - Do not treat docs-only plans as shipped behavior.
+- MCP tool output is repo-derived execution aid, not a replacement for source truth, raw logs, or human/device/release evidence.
 
 ## Repo behavior
 
@@ -73,6 +77,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - During Codex OS / developer-tooling / governance passes, do not implement app features, refactor SwiftUI source, modify product IA, or add runtime app dependencies.
 - Do not add hosted CI unless a future patch explicitly records provider, cost model, billing/quota risk, triggers, artifact retention, owner approval, and release-claim limits.
 - Do not treat EFC as approval for hosted AI, user-data servers, telemetry, analytics, productivity scoring, shame/streak mechanics, silent mutation, or release claims.
+- Do not add write-capable MCP tools, shell MCP tools, network MCP tools, or secret-reading MCP tools without explicit approval and a security review.
 
 ## Architecture boundaries
 
@@ -82,8 +87,9 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - `Native/Ambitions/Persistence` owns SwiftData persistence.
 - `Native/Ambitions/Features` owns feature UI for Today, Goals, Capture, Time, You, and owned secondary surfaces.
 - `Native/Ambitions/Features/Plan` currently remains the internal compatibility owner for the user-facing Time surface until a scoped route/file migration lands.
-- `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources/` own shared UI and package surfaces.
+- `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources` own shared UI and package surfaces.
 - `project.yml` is the XcodeGen source of truth for targets, schemes, app extensions, and build wiring.
+- `tools/mcp/` owns local developer MCP tooling only. It must not be referenced by production app targets.
 
 ## Execution rules
 
@@ -97,9 +103,10 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - For docs-only cleanup, do not claim build/test success unless current local logs exist.
 - Validation summaries must separate verified, failed, not verified, and human/device follow-up.
 - Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, release readiness, CI proof, or legal/privacy approval without matching evidence.
-- Use repo-local Codex operating docs and scripts under `.codex/`, `docs/codex/`, and `scripts/ai/` only as operating context; they do not override source code, raw logs, current implementation status, or release evidence status.
+- Use repo-local Codex operating docs and scripts under `.codex/`, `docs/codex/`, `scripts/ai/`, and `tools/mcp/` only as operating context; they do not override source code, raw logs, current implementation status, or release evidence status.
 - When using a Mini-tier or unknown-tier model, follow `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` and `docs/codex/MODEL_TIER_BATCH_MATRIX.md`. Mini is execution-only for bounded batches; senior-only gates must be deferred or stopped, not guessed through.
 - After EFC insertion, every batch report must state EFC applicability: invoked, not applicable, or accepted Yellow with owner.
+- If the Ambitions Repo MCP is configured, use it to preflight active batch, EFC applicability, changed-file impact, and forbidden claims before closeout.
 
 ## Local validation
 
@@ -111,6 +118,11 @@ Primary validation remains local VM/Mac validation:
 - focused `xcodebuild` UI tests
 - unsigned archive sanity checks when relevant
 - raw command logs saved under `output/logs/`, `.codex/logs/`, or a named local proof packet
+
+Local MCP validation:
+
+- `python3 tools/mcp/ambitions_repo_mcp/server.py --self-test`
+- optional: `python3 -m pytest tools/mcp/ambitions_repo_mcp/tests` when pytest is available
 
 Local simulator evidence is not signed archive proof, TestFlight proof, App Store proof, physical-device proof, public accessibility proof, legal/privacy signoff, or human release approval.
 
