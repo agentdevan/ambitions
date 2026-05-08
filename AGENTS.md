@@ -38,6 +38,8 @@ For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATC
 ## Source-truth rules
 
 - AmbitionsCanon decides product/design direction.
+- The active flagship top-level IA is `Today / Goals / Capture / Time / You`.
+- `Plan` is not an active top-level destination. It remains valid only as a contextual/action noun, historical reference, or internal compatibility seam.
 - The current implementation map decides what is implemented, scaffolded, planned, historical, or unproven.
 - The release evidence packet decides validation and release claim language.
 - `BATCH_REGISTRY.md` decides operational batch status only.
@@ -51,7 +53,9 @@ For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATC
 - Preserve completed implementation history as history.
 - Preserve XcodeGen. Edit `project.yml` and regenerate the project locally; do not rely on a checked-in `.xcodeproj` as source truth.
 - Preserve the native SwiftUI architecture.
-- Do not create new top-level Ambitions destinations. The canonical destinations remain `Today / Goals / Capture / Plan / You`.
+- Do not create new top-level Ambitions destinations. The canonical destinations are `Today / Goals / Capture / Time / You`.
+- Preserve existing `.plan`, `PlanScreen`, `planNavigation()`, and `Native/Ambitions/Features/Plan/` references only as internal compatibility seams unless a scoped AFI migration batch explicitly changes them.
+- Do not reintroduce `Plan` as user-facing top-level IA.
 - Do not implement product features in docs/tooling passes unless the tooling itself requires a narrow test or compatibility fix.
 - During Codex OS / developer-tooling / governance passes, do not implement app features, refactor SwiftUI source, modify product IA, or add runtime app dependencies.
 - Do not add hosted CI unless a future patch explicitly records provider, cost model, billing/quota risk, triggers, artifact retention, owner approval, and release-claim limits.
@@ -62,7 +66,8 @@ For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATC
 - `Native/Ambitions/Domain` owns domain models, contracts, state machines, receipts, proof, recommendation, and planning logic.
 - `Native/Ambitions/Services` owns service protocols and implementations.
 - `Native/Ambitions/Persistence` owns SwiftData persistence.
-- `Native/Ambitions/Features` owns feature UI for Today, Goals, Capture, Plan, You, and owned secondary surfaces.
+- `Native/Ambitions/Features` owns feature UI for Today, Goals, Capture, Time, You, and owned secondary surfaces.
+- `Native/Ambitions/Features/Plan` currently remains the internal compatibility owner for the user-facing Time surface until a scoped route/file migration lands.
 - `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources/` own shared UI and package surfaces.
 - `project.yml` is the XcodeGen source of truth for targets, schemes, app extensions, and build wiring.
 
@@ -96,7 +101,7 @@ Local simulator evidence is not signed archive proof, TestFlight proof, App Stor
 ## Ambitions product truth
 
 - Ambitions is a premium native iPhone app for turning long-term goals into grounded daily execution.
-- Core loop: `Capture -> Place -> Plan -> Do Today -> Close / Recover -> Save Proof`.
+- Core loop: `Capture -> Place -> Shape Time -> Do Today -> Close / Recover -> Save Proof`.
 - Ambitions is not a generic task app, calendar clone, habit tracker, productivity score app, chatbot, AI wrapper, dashboard, or SaaS admin panel.
 - User-facing language should follow AmbitionsCanon first.
 - Avoid fake precision, fake certainty, AI theater, shame language, and silent automation.
