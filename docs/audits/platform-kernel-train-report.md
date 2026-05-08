@@ -9,34 +9,37 @@ Status: Active
 ## Current Closeout
 
 Result: Accepted Yellow
-Batch: PK01 Package/Module Boundary Scaffold
+Batch: PK02 Architecture Boundary Scanner
 Commit: pending
-Files changed: PK01 module-boundary scaffold, batch file, audit report, risk
-register, and train-state docs.
-Behavior changed: no app behavior changed. PK01 records future package/module
-boundaries and PK02 scanner requirements without moving code.
+Files changed: PK02 boundary scanner, batch file, audit report, risk register,
+and train-state docs.
+Behavior changed: no app behavior changed. PK02 adds non-mutating scanner
+tooling that reports architecture boundary drift.
 Tests run: `git diff --check`;
+`python3 -m py_compile scripts/ai/pk_boundary_scan.py`;
+`python3 scripts/ai/pk_boundary_scan.py`;
 `python3 scripts/ai/acx_impact.py $(git diff --name-only)`;
 `python3 scripts/ai/acx_local.py bundle docs`;
 `python3 scripts/ai/acx_local.py bundle batch-closeout`;
 `python3 scripts/ai/acx_repair.py diagnose`; and
 `scripts/global-train-next-batch.sh`.
-Tests not run: `xcodegen generate`, app build, focused unit tests, package
+Tests not run: app build, focused unit tests, package
 split build proof, physical-device proof, signed archive proof, and hosted CI.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
-Yellows carried: PK02-PK41 remain active planned scope; transaction safety,
+Yellows carried: PK03-PK41 remain active planned scope; transaction safety,
 migration/backup/rollback, side-effect isolation, sync readiness, intelligence
 quarantine, package split safety, and performance budgets are not PK-proven
-yet. Founder acceptance, rendered visual approval, manual accessibility proof,
-device proof, signed archive proof, hosted CI, and release readiness remain
-Yellow/unproven. The pre-sync stash remains preserved and unapplied.
-Rollback path: revert the PK01 implementation commit.
+yet. PK02 scanner output is Yellow and not package-cleanliness proof. Founder
+acceptance, rendered visual approval, manual accessibility proof, device proof,
+signed archive proof, hosted CI, and release readiness remain Yellow/unproven.
+The pre-sync stash remains preserved and unapplied.
+Rollback path: revert the PK02 implementation commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
-PK01 boundary scaffold evidence is recorded.
+PK02 boundary scanner evidence is recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: PK02 Architecture Boundary Scanner.
+Next eligible batch: PK03 AppUnitOfWork Foundation.
 
 ## Completed
 
@@ -46,8 +49,8 @@ Next eligible batch: PK02 Architecture Boundary Scanner.
 
 ## Active / Next
 
-- PK02 Architecture Boundary Scanner is next eligible.
-- PK02-PK41 remain queued active planned Platform Kernel scope.
+- PK03 AppUnitOfWork Foundation is next eligible.
+- PK03-PK41 remain queued active planned Platform Kernel scope.
 
 ## Parked Yellows
 

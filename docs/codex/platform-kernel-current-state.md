@@ -14,6 +14,9 @@ Date: 2026-05-08
 - PK01 Package/Module Boundary Scaffold is complete / Accepted Yellow as a
   docs-only future module-boundary scaffold. It did not move code or change
   package/project files.
+- PK02 Architecture Boundary Scanner is complete / Accepted Yellow as local
+  non-mutating scanner tooling. Current findings are Yellow boundary drift
+  evidence, not a package-cleanliness claim.
 - AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object
   Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
   AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, and AFI08
@@ -23,8 +26,8 @@ Date: 2026-05-08
   Coherence Review, AFI15 Founder Acceptance Review, and AFI16 Release-Claim
   Safety Review are complete / Accepted Yellow under the active AFI insertion
   overlay.
-  PK02 Architecture Boundary Scanner is the next eligible global batch.
-  PK02-PK41 remain active planned Platform Kernel scope.
+  PK03 AppUnitOfWork Foundation is the next eligible global batch.
+  PK03-PK41 remain active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
   notification foundations, EventKit integration services, external snapshot
@@ -55,4 +58,4 @@ proof.
 
 ## Next Eligible
 
-PK02 Architecture Boundary Scanner.
+PK03 AppUnitOfWork Foundation.

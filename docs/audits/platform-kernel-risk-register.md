@@ -13,7 +13,7 @@ Date: 2026-05-08
 | Sync readiness is architectural only. | Open Yellow | PK29-PK31 | No sync-ready, cloud-ready, or conflict-safe claim until revisions, tombstones, conflict policy, and manual merge proof exist. |
 | Intelligence output must stay claim-bounded. | Open Yellow | PK32-PK34 | No AI-ready or autonomous-intelligence claim; quarantine uncertain/generated intelligence until PK proof exists. |
 | Performance scale has not been PK-budget-proven. | Open Yellow | PK35-PK37 | No performance-budget-proven claim until large-store fixtures, budgets, and cache invalidation proof exist. |
-| Package/module moves can destabilize builds. | Scaffolded Yellow | PK02-PK41 | PK01 boundary scaffold exists; no package-split claim until PK02 scanner and later focused builds pass. |
+| Package/module moves can destabilize builds. | Scanner Yellow | PK03-PK41 | PK01 boundary scaffold and PK02 scanner exist; current scanner findings are Yellow and no package-split claim is allowed until later focused builds pass. |
 | Pre-sync stash contains source-truth conflicts. | Parked Yellow | Repo steward / sequencing reconciliation | Stash remains preserved and unapplied; do not drop it until a future reconciliation confirms every useful piece is merged or obsolete. |
 
 Hard Red entries: none recorded by PK integration as of 2026-05-08.
