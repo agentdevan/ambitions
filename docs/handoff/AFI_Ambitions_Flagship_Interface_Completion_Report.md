@@ -12,12 +12,13 @@ Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
 AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, AFI08 Capture
 Atmosphere Composer, AFI09 Time LifeShape Field, AFI10 You User System
 Profile, AFI11 Trust Seam And Receipts, AFI12 Accessibility And State Proof,
-and AFI13 Visual QA And Drift Gallery are complete / Accepted Yellow.
+AFI13 Visual QA And Drift Gallery, and AFI14 Cross-Surface Coherence Review are
+complete / Accepted Yellow.
 
 Next eligible batch:
 
 ```text
-AFI14 Cross-Surface Coherence Review
+AFI15 Founder Acceptance Review
 ```
 
 ## Active IA
@@ -50,6 +51,7 @@ as contextual/action language or historical compatibility evidence.
 | AFI11 Trust Seam And Receipts | Accepted Yellow | Touched You trust copy now uses Trust & Automation, and Trust Center exposes Why This? plus Quiet Reflow/manual fallback routes without executing automation or making readiness claims. | AFI12 |
 | AFI12 Accessibility And State Proof | Accepted Yellow | AFI-specific accessibility-state proof now covers Today / Goals / Capture / Time / You with VoiceOver, Dynamic Type, Reduce Motion, non-color, and trust/receipt paths while keeping public accessibility claims locked. | AFI13 |
 | AFI13 Visual QA And Drift Gallery | Accepted Yellow | Source/test visual QA scorecards and drift-gallery examples now cover Today / Goals / Capture / Time / You with 95+ minimum targets, 98 targets for Today/Capture, and explicit rendered-proof Yellow boundaries. | AFI14 |
+| AFI14 Cross-Surface Coherence Review | Accepted Yellow | Source/test coherence proof now maps Capture -> Clarify -> Shape -> Start -> Close -> Remember across Today / Goals / Capture / Time / You with trust-routed handoffs and no disconnected one-off surface claim. | AFI15 |
 
 ## Claims
 

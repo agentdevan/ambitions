@@ -80,6 +80,97 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
     }
 }
 
+public struct AFI14ProductGrammarStage: Identifiable, Hashable, Sendable {
+    public let id: String
+    public let verb: String
+    public let promise: String
+    public let ownerSurfaces: [String]
+    public let evidenceObject: String
+}
+
+public struct AFI14CrossSurfaceHandoff: Identifiable, Hashable, Sendable {
+    public let id: String
+    public let fromSurface: String
+    public let toSurface: String
+    public let thread: String
+    public let trustRoute: String
+}
+
+public enum AFI14CrossSurfaceCoherenceCatalog {
+    public static let ownerBatch = "AFI14"
+    public static let activeTopLevelSurfaces = ["Today", "Goals", "Capture", "Time", "You"]
+    public static let productGrammar = ["Capture", "Clarify", "Shape", "Start", "Close", "Remember"]
+    public static let changesRuntimeBehavior = false
+    public static let claimsRenderedProof = false
+    public static let claimsHumanApproval = false
+    public static let claimsReleaseReadiness = false
+
+    public static let stages: [AFI14ProductGrammarStage] = [
+        stage("Capture", promise: "Capture anything.", surfaces: ["Capture"], object: "Atmosphere Composer"),
+        stage("Clarify", promise: "Give it a place.", surfaces: ["Capture", "Goals"], object: "Needs a Place / Grow into Goal"),
+        stage("Shape", promise: "Shape your time around what matters.", surfaces: ["Time"], object: "LifeShape Field"),
+        stage("Start", promise: "Start where reality allows.", surfaces: ["Today"], object: "Start Here / Reality Meridian"),
+        stage("Close", promise: "Close the loop without shame.", surfaces: ["Today"], object: "Receipt Surface"),
+        stage("Remember", promise: "Trust what changed.", surfaces: ["You"], object: "Trust Seam / Receipts & History")
+    ]
+
+    public static let handoffs: [AFI14CrossSurfaceHandoff] = [
+        handoff("Capture", "Goals", thread: "Grow into Goal / place into life area", trust: "route explanation before placement"),
+        handoff("Capture", "Time", thread: "captured commitment influences capacity after user confirms", trust: "manual confirmation and receipt"),
+        handoff("Capture", "Today", thread: "quick step can become Start Here candidate after placement", trust: "source visible before start"),
+        handoff("Goals", "Time", thread: "goal thread asks for capacity", trust: "capacity source visible"),
+        handoff("Goals", "Today", thread: "thread feeds Recommended step", trust: "Why this? route"),
+        handoff("Time", "Today", thread: "capacity informs what fits now", trust: "pressure source and manual fallback"),
+        handoff("Today", "Time", thread: "pressure or reflow sends user to Shape Time", trust: "Quiet Reflow preview"),
+        handoff("Today", "Goals", thread: "closed step updates goal thread proof", trust: "receipt and proof path"),
+        handoff("Any", "You", thread: "Trust Seam routes to Trust & Automation / Privacy / Receipts & History", trust: "user-controlled review")
+    ]
+
+    public static var missingStageSurfaces: [String] {
+        activeTopLevelSurfaces.filter { surface in
+            stages.allSatisfy { $0.ownerSurfaces.contains(surface) == false }
+        }
+    }
+
+    public static var containsPlanTopLevelSurface: Bool {
+        activeTopLevelSurfaces.contains("Plan")
+    }
+
+    public static var disconnectedOneOffRisk: Bool {
+        missingStageSurfaces.isEmpty == false || handoffs.isEmpty
+    }
+
+    private static func stage(
+        _ verb: String,
+        promise: String,
+        surfaces: [String],
+        object: String
+    ) -> AFI14ProductGrammarStage {
+        AFI14ProductGrammarStage(
+            id: verb.lowercased(),
+            verb: verb,
+            promise: promise,
+            ownerSurfaces: surfaces,
+            evidenceObject: object
+        )
+    }
+
+    private static func handoff(
+        _ from: String,
+        _ to: String,
+        thread: String,
+        trust: String
+    ) -> AFI14CrossSurfaceHandoff {
+        AFI14CrossSurfaceHandoff(
+            id: "\(from.lowercased())-\(to.lowercased())",
+            fromSurface: from,
+            toSurface: to,
+            thread: thread,
+            trustRoute: trust
+        )
+    }
+}
+
 public struct TopLevelSurfaceCompositionBar: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize

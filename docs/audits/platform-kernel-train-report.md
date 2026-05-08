@@ -9,37 +9,41 @@ Status: Active
 ## Current Closeout
 
 Result: Accepted Yellow
-Batch: AFI13 Visual QA And Drift Gallery
+Batch: AFI14 Cross-Surface Coherence Review
 Commit: pending
-Files changed: AFI visual QA preview/fixture proof, focused visual QA tests, and
-train-state docs.
-Behavior changed: AFI source/test visual QA scorecards now cover Today, Goals,
-Capture, Time, and You with 95+ minimum targets, 98 targets for Today/Capture,
-required rendered screenshot inventories, and explicit Yellow proof boundaries.
-Tests run: `git diff --check`; `python3 scripts/ai/acx_impact.py $(git diff
---name-only)`; `xcodegen generate`; focused Visual QA fixture xcodebuild lane
-covering 7 selected tests with 0 failures; `./scripts/build-local.sh`;
-`python3 scripts/ai/acx_local.py bundle docs`; `python3 scripts/ai/acx_local.py
-bundle batch-closeout`; `python3 scripts/ai/acx_repair.py diagnose`;
-`scripts/global-train-next-batch.sh`; ACX visual packets for Today, Goals,
-Capture, Time, and You.
-Tests not run: rendered screenshot proof, human visual QA review, full UI test
-suite, physical-device proof, and signed archive proof.
+Files changed: AFI cross-surface coherence source proof, focused coherence
+tests, and train-state docs.
+Behavior changed: AFI source/test coherence proof now maps Capture -> Clarify
+-> Shape -> Start -> Close -> Remember across Today, Goals, Capture, Time, and
+You with trust-routed handoffs.
+Tests run: `xcodegen generate`; focused
+`AmbitionsTests/TopLevelSurfaceCompositionTests` lane on iPhone 17 simulator
+(`6` selected tests, `0` failures; raw log
+`.codex/logs/2026-05-08T19-afi14-focused-tests.raw.log`);
+`./scripts/build-local.sh` (raw log
+`output/logs/build-local-20260508-152045.log`); `git diff --check`;
+`python3 scripts/ai/acx_impact.py $(git diff --name-only)`;
+`python3 scripts/ai/acx_local.py bundle docs`;
+`python3 scripts/ai/acx_local.py bundle batch-closeout`;
+`python3 scripts/ai/acx_repair.py diagnose`; and
+`scripts/global-train-next-batch.sh`.
+Tests not run: rendered cross-surface walkthrough, human founder acceptance
+review, full UI test suite, manual accessibility traversal, physical-device
+proof, and signed archive proof.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
 Yellows carried: PK01-PK41 remain active planned scope but are paused behind
 AFI unless a specific PK prerequisite is proven; transaction safety,
 migration/backup/rollback, side-effect isolation, sync readiness, intelligence
-quarantine, and performance budgets are not PK-proven yet. AFI13 rendered
-screenshot proof and human visual QA review remain Yellow. The
+quarantine, and performance budgets are not PK-proven yet. AFI14 rendered
+cross-surface walkthrough and founder acceptance review remain Yellow. The
 pre-sync stash remains preserved and unapplied.
-Rollback path: revert the AFI13 implementation commit.
+Rollback path: revert the AFI14 implementation commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
-AFI13 source/test proof passed the focused Visual QA fixture lane and local
-simulator build listed above.
+AFI14 source/test coherence proof and focused validation are recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: AFI14 Cross-Surface Coherence Review.
+Next eligible batch: AFI15 Founder Acceptance Review.
 
 ## Completed
 
@@ -49,7 +53,7 @@ Next eligible batch: AFI14 Cross-Surface Coherence Review.
 
 ## Active / Next
 
-- AFI14 Cross-Surface Coherence Review is next eligible.
+- AFI15 Founder Acceptance Review is next eligible.
 - PK01-PK41 remain queued active planned Platform Kernel scope, but no PK batch
   after PK00 is treated as a prerequisite for AFI unless a later owner report
   proves the dependency.
