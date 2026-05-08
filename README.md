@@ -2,10 +2,10 @@
 
 Ambitions is a native iPhone app for turning long-term goals into grounded daily execution.
 
-It helps you capture what is on your mind, place it into goals or plans, choose what matters today, and close the loop with proof.
+It helps you capture what is on your mind, place it into goals or time-shaping, choose what matters today, and close the loop with proof.
 
 ```text
-Capture -> Place -> Plan -> Do Today -> Close / Recover -> Save Proof
+Capture -> Place -> Shape Time -> Do Today -> Close / Recover -> Save Proof
 ```
 
 ## Current status
@@ -21,15 +21,17 @@ Ambitions is under active native iOS development.
 
 ## Product model
 
-Ambitions has five top-level surfaces:
+The active flagship product model has five top-level surfaces:
 
 - Today — what matters now
 - Goals — long-term direction
 - Capture — low-friction intake
-- Plan — capacity and shaping
+- Time — capacity and shaping
 - You — preferences, trust, privacy, and control
 
 The active product and design source truth starts in [`docs/AmbitionsCanon/README.md`](docs/AmbitionsCanon/README.md).
+
+Compatibility note: some internal source paths, route raw values, tests, and historical docs still use `Plan` / `.plan` naming. Those are compatibility seams, not active user-facing IA. The active top-level destination is `Time`.
 
 ## What is implemented today
 
@@ -37,9 +39,10 @@ The repo currently contains:
 
 - a native SwiftUI app target
 - local SwiftData-backed persistence foundations
-- Today, Goals, Capture, Plan, and You surfaces
+- Today, Goals, Capture, Time, and You user-facing shell destinations
+- internal Time-surface compatibility seams through `PlanScreen`, `.plan`, `planNavigation()`, and `Native/Ambitions/Features/Plan/`
 - capture and goal creation flows
-- planning, proof, receipt, notification, external-routing, widget, Live Activity, share-extension, and calendar/reminder foundations where implemented
+- time-shaping, proof, receipt, notification, external-routing, widget, Live Activity, share-extension, and calendar/reminder foundations where implemented
 - local build and validation scripts
 - unit and UI test targets
 
