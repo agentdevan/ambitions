@@ -7,6 +7,8 @@ Ambitions 3.0 is the active source of truth. Older Codex prompts and batch files
 
 Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) for queued/blocked status semantics across the 113-batch global order after SI insertion.
 
+EFC is the active peak-proof overlay for unfinished work. Use [EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md](EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md), [BATCH_REGISTRY_EFC_OVERLAY.md](BATCH_REGISTRY_EFC_OVERLAY.md), [GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md](GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md), and [batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md](batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md) after checking active batch state. EFC is not a parallel feature train; it wires proof obligations into existing unfinished owners and adds missing owner batches only where no existing train can produce the proof.
+
 ## Required Read Order
 
 1. `README.md`
@@ -19,6 +21,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
 9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
 10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
+11. `docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md` and `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md` for peak proof obligations on unfinished work.
 
 ## Primary Codex Entry Points
 
@@ -32,6 +35,9 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - [AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md](AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md) — parallel worktree guardrails.
 - [CONTEXT_INDEX.md](CONTEXT_INDEX.md) — source precedence and implementation-history navigation.
 - [BATCH_REGISTRY.md](BATCH_REGISTRY.md) — implementation status truth only.
+- [BATCH_REGISTRY_EFC_OVERLAY.md](BATCH_REGISTRY_EFC_OVERLAY.md) — EFC proof-owner overlay for the active registry.
+- [GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md](GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md) — peak optimized global sequencing overlay.
+- [EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md](EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md) — 100/100 planned-architecture proof operating layer.
 - [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) — active post-3.0 execution-program status semantics.
 - [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) — standing Codex behavior, now subordinate to Ambitions 3.0.
 - [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md) — free local validation and handoff workflow.
@@ -74,6 +80,15 @@ Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in
 
 Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is complete through REC06; PX01-PX20 are complete as future canon/roadmap evidence, and PXOS, ME, CS, Signature Interface, Product Depth, and AOS remain future/queued until selected and proven by evidence.
 
+## EFC Peak Proof Controls
+
+- [EFC Flagship Proof Operating Layer](EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md)
+- [Batch Registry EFC Overlay](BATCH_REGISTRY_EFC_OVERLAY.md)
+- [Global Full-Stack Completion Order — EFC Peak Overlay](GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md)
+- [EFC00-EFC18 Flagship Proof Closure Overlay](batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md)
+
+EFC defines the peak optimized proof sequence for unfinished work. It does not authorize production Swift, release claims, hosted AI, telemetry, sync, signing, entitlements, hosted CI, App Store readiness, TestFlight readiness, physical-device proof, public accessibility proof, or legal/privacy compliance by itself.
+
 ## Ambitions 4.0 Global Batch Controls
 
 - [Global Future Batch Execution Order](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md)
@@ -109,9 +124,6 @@ These trains are queued/blocked in Ambitions 4.0 and must not run automatically 
 - [PXOS Batch Prompt Standard](PXOS_BATCH_PROMPT_STANDARD.md)
 - [PX01-PX20 Train](batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md)
 
-PXOS is future user-facing product experience canon. PX01-PX20 are complete as
-future canon/roadmap evidence; PXOS implementation is not started. Later
-implementation work starts only through global dry-run and valid approval
-gates.
+PXOS is future user-facing product experience canon. PX01-PX20 are complete as future canon/roadmap evidence; PXOS implementation is not started. Later implementation work starts only through global dry-run and valid approval gates.
 
 - [EB External Brain Dependency Graph](EB_EXTERNAL_BRAIN_DEPENDENCY_GRAPH.md) - active planned 4.0 EB train dependencies.
