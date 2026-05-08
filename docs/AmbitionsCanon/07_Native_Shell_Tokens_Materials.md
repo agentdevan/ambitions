@@ -56,7 +56,7 @@ The shell should feel familiar. The invention belongs inside Ambitions-specific 
 ## 3. Native Shell Non-Negotiables
 
 1. Top-level navigation is five-tab bottom navigation only.
-2. The tabs are Today, Goals, Capture, Plan, You.
+2. The tabs are Today, Goals, Capture, Time, You.
 3. The bottom tab system is the Continuity Dock.
 4. Basic navigation must be immediately understandable.
 5. All primary controls are obvious, tappable, and thumb-zone aware.
@@ -108,7 +108,7 @@ Only these tabs may exist:
 - Today
 - Goals
 - Capture
-- Plan
+- Time
 - You
 
 Forbidden top-level destinations:
@@ -300,7 +300,7 @@ Editorial Serif scale:
 
 | Token | Size | Weight | Use |
 | --- | ---: | --- | --- |
-| Type.meaningTitle | 30–38 | regular/medium | Capture hero, selected goal, Plan meaning title |
+| Type.meaningTitle | 30–38 | regular/medium | Capture hero, selected goal, Time meaning title |
 | Type.meaningPhrase | 22–28 | regular | reflective moments |
 
 Rules:
@@ -398,7 +398,7 @@ Allowed uses:
 - root backgrounds
 - open fields
 - Capture atmosphere
-- Goals/Plan/Today atmosphere
+- Goals/Time/Today atmosphere
 
 Forbidden:
 
@@ -497,7 +497,7 @@ Per-tab direction:
 | Today | dawn blue-white / warm current trace |
 | Goals | cool constellation blue |
 | Capture | violet-blue open sky |
-| Plan | amber-cyan pressure/capacity |
+| Time | amber-cyan pressure/capacity |
 | You | graphite amber / system trust |
 
 Hard Red:
@@ -522,6 +522,30 @@ Hard Red failures:
 - token invented in a feature folder
 - generic Card component becomes primary structure
 - ad hoc glass modifier appears outside material layer
+
+## 18A. AFI04 Material Proof Matrix
+
+AFI04 locks the material proof rules for active AFI work. It does not lock final
+numeric token values and does not claim the current app has rendered these
+materials correctly.
+
+| Material | Product job | Pass evidence | Yellow until | Hard Red |
+| --- | --- | --- | --- | --- |
+| Celestial Field | orientation, atmosphere, life-scale calm | screenshot/preview shows sparse depth supporting the primary object | rendered proof exists for each affected top-level surface | wallpaper, galaxy art, decorative stars, sci-fi HUD, or atmosphere competing with controls |
+| Graphite Recess | embedded seams, grouped settings, receipts, contextual drawers | screenshot/preview shows embedded depth without card-pile dominance | grouped surfaces and receipts are rendered and reviewed | floating SaaS panels, dashboard tiles, generic card architecture |
+| Luminous Trace | continuity, current state, relationships, proof | screenshot/preview shows trace meaning with non-color equivalent | accessibility equivalent and rendered state proof exist | neon line art, color-only state, glow competing with text, random separators |
+| Quiet Glass | restrained controls, composer field, compact utility chrome | screenshot/preview shows native-feeling controls with readable contrast | performance/accessibility review confirms blur/tint does not harm use | generic glassmorphism, shiny cards, full-screen glass panels, decorative glass |
+
+AFI04 acceptance rules:
+
+- Semantic token names and material purposes are locked.
+- Candidate values remain candidate until visual QA validates screenshots or
+  previews.
+- No final-token, material-complete, or visual-Green claim is allowed without
+  rendered proof.
+- Feature code must use approved semantic tokens/material layers; raw values in
+  feature surfaces remain a material-gate Red unless an owning migration report
+  explicitly parks the compatibility risk.
 
 ---
 

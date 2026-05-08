@@ -22,7 +22,7 @@ The interface should be familiar enough to understand instantly, but proprietary
 
 Native, obvious, and useful come before spectacle.
 
-Reject any direction that is beautiful but unclear, celestial but decorative, innovative but not iPhone-native, premium but not useful, or cohesive in a way that flattens the unique identity of Today, Goals, Capture, Plan, and You.
+Reject any direction that is beautiful but unclear, celestial but decorative, innovative but not iPhone-native, premium but not useful, or cohesive in a way that flattens the unique identity of Today, Goals, Capture, Time, and You.
 
 ---
 
@@ -62,7 +62,7 @@ Every top-level screen needs one clear primary object:
 - Today: Reality Meridian
 - Goals: Constellation Atlas
 - Capture: Atmosphere Composer
-- Plan: LifeShape Field
+- Time: LifeShape Field
 - You: User System Profile
 
 The interface can be beautiful, but never mysterious.
@@ -131,7 +131,7 @@ Top-level surfaces are thin compositions:
 TodayScreen = AmbitionsShell + RealityMeridian + StartHereSurface
 GoalsScreen = AmbitionsShell + ConstellationAtlas + OrbitalLens
 CaptureScreen = AmbitionsShell + AtmosphereComposer
-PlanScreen = AmbitionsShell + LifeShapeField
+TimeScreen = AmbitionsShell + LifeShapeField
 YouScreen = AmbitionsShell + UserSystemProfile
 ```
 
@@ -139,7 +139,7 @@ YouScreen = AmbitionsShell + UserSystemProfile
 
 ## 4. Ambitions Continuity Layer
 
-The Ambitions Continuity Layer is the canonical chrome and behavior model. It makes Today, Goals, Capture, Plan, and You feel like one native, evolving life operating system.
+The Ambitions Continuity Layer is the canonical chrome and behavior model. It makes Today, Goals, Capture, Time, and You feel like one native, evolving life operating system.
 
 It consists of:
 
@@ -166,7 +166,7 @@ Ambitions has five top-level destinations only:
 - Today
 - Goals
 - Capture
-- Plan
+- Time
 - You
 
 Each tab owns one primary object.
@@ -257,7 +257,7 @@ Every material must do product work.
 Ambitions uses two voices:
 
 - Native Sans for controls, rows, metadata, body text, CTAs, explanations, receipts, tab labels, operational UI, Context Crown, Trust Seam, and Quiet Reflow.
-- Editorial Serif sparingly for meaning moments: Capture hero phrase, selected Goal category title, Plan title/date range, and reflective life-scale moments.
+- Editorial Serif sparingly for meaning moments: Capture hero phrase, selected Goal category title, Time title/date range, and reflective life-scale moments.
 
 Rule: Sans is for control. Serif is for meaning.
 

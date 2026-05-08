@@ -13,10 +13,10 @@ Date: 2026-05-08
   follow-ups as a report-only backend/platform proof baseline.
 - PK01 Package/Module Boundary Scaffold remains queued. It is not a proven
   minimum prerequisite for AFI01-AFI16.
-- AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, and AFI03 Flagship
-  Object Silhouettes are complete / Accepted Yellow under the active AFI
-  insertion overlay. AFI04 Material System Proof is the next eligible global
-  batch.
+- AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object
+  Silhouettes, and AFI04 Material System Proof are complete / Accepted Yellow
+  under the active AFI insertion overlay. AFI05 Shell And Continuity Chrome is
+  the next eligible global batch.
   PK01-PK41 remain active planned Platform Kernel scope
   but must not outrun AFI unless registry evidence proves a minimum safety
   prerequisite.
@@ -50,4 +50,4 @@ proof.
 
 ## Next Eligible
 
-AFI04 Material System Proof.
+AFI05 Shell And Continuity Chrome.

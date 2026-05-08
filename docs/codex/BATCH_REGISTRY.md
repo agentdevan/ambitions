@@ -56,7 +56,11 @@ Current 4.0 status:
   docs/canon/governance silhouette-lock evidence. It defines one living object
   silhouette per top-level AFI surface and blocks stacked-card/module drift
   without rendered visual proof or app-code changes.
-- Next eligible global batch: AFI04 Material System Proof.
+- Complete / accepted Yellow: AFI04 Material System Proof is complete as
+  docs/canon/governance material-proof evidence. It defines proof requirements
+  for Celestial Field, Graphite Recess, Luminous Trace, and Quiet Glass without
+  final-token, rendered visual, app-code, or readiness claims.
+- Next eligible global batch: AFI05 Shell And Continuity Chrome.
 - Complete / accepted Yellow: FCP/PFC global registry-context reconciliation
   is complete as docs-only operating truth. It reconciled the full-stack order,
   FCP/PFC source truth, registry, context index, and run-state docs after PD15
@@ -1093,8 +1097,8 @@ note and the PD18 audit report.
 | Release Evidence Closure Train | Completed / docs-only | Completed REC01-REC06 as evidence/status/release-truth work after the 2026-05-02 pre-train hardening and 3.0 truth check. Human/operator proof remains pending. |
 | REC01 Release Evidence Truth Inventory | Completed / accepted baseline | Created `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserved F17-F30 truth, inventoried simulator evidence and release proof gaps, and did not implement app behavior or claim readiness. |
 | REC02-REC06 Evidence Closure | Completed / docs-only | REC02 proof plan, REC03 validation ledger, REC04 claim copy guard, REC05 human review packet, and REC06 closure handoff are complete without claiming human proof or release readiness. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI14 followed and are complete Green before later AOS UI integration. AFI01-AFI03 are complete / Accepted Yellow; AFI04 is next for active flagship material-system proof. PK00 is complete / Green; PK01-PK41 remain queued active planned scope and may precede later AOS work only when a specific prerequisite is proven. |
-| SA01-SA32 Source Atlas Full Maturity Train | Active / SA06 Green | SA01-SA06 and SAP01-SAP05 are complete Green as docs/state/Codex OS/order/composition/projection/Pack Factory rule/fixture/no-sprawl reconciliation plus compact pack schema implementation evidence. AOS05-AOS23, LDI01-LDI14, PK00, and AFI01-AFI03 are complete. AFI04 is next before unrelated source/freshness-dependent AOS/LDI work continues unless dependency review proves a dirty or half-complete active batch must close first. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI14 followed and are complete Green before later AOS UI integration. AFI01-AFI04 are complete / Accepted Yellow; AFI05 is next for active shell and continuity chrome alignment. PK00 is complete / Green; PK01-PK41 remain queued active planned scope and may precede later AOS work only when a specific prerequisite is proven. |
+| SA01-SA32 Source Atlas Full Maturity Train | Active / SA06 Green | SA01-SA06 and SAP01-SAP05 are complete Green as docs/state/Codex OS/order/composition/projection/Pack Factory rule/fixture/no-sprawl reconciliation plus compact pack schema implementation evidence. AOS05-AOS23, LDI01-LDI14, PK00, and AFI01-AFI04 are complete. AFI05 is next before unrelated source/freshness-dependent AOS/LDI work continues unless dependency review proves a dirty or half-complete active batch must close first. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Created the Lane 2 ownership map and risk baseline. No extraction run. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Created shared projector/state/helper standards and corrected the stale Plan projector assumption. No extraction run. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Converted the architecture scan into a recurring ME gate. No extraction run. |
@@ -1220,13 +1224,14 @@ note and the PD18 audit report.
 
 Product Depth closeout update: PD01-PD18 is complete through PD18 Green. PK00
 Current Backend Proof Baseline is complete / Green with accepted Yellow
-follow-ups. AFI source truth is active, and AFI04 Material System Proof is the
-next eligible global batch under the stricter highest-priority global order.
+follow-ups. AFI source truth is active, and AFI05 Shell And Continuity Chrome
+is the next eligible global batch under the stricter highest-priority global
+order.
 
 | Path | Status | Notes |
 | --- | --- | --- |
 | AmbitionsOS Future-Canon Integration | Completed / docs-only | Creates the future AmbitionsOS parent canon, kernel docs, runtime contract, AOS train controls, ME/CS train plans, Codex OS protocols, skills, review boards, consolidated catalogs, and audit reports. No app behavior, production refactor, compatibility seam retirement, dependency, workflow, platform capability, persistence/schema, release, App Store, TestFlight, device, accessibility, or final RC claim is added. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI14 followed and are complete Green before later AOS UI integration. AFI01-AFI03 are complete / Accepted Yellow; AFI04 is next for active flagship material-system proof. PK00 is complete / Green; PK01-PK41 remain queued active planned scope and may precede later AOS work only when a specific prerequisite is proven. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI14 followed and are complete Green before later AOS UI integration. AFI01-AFI04 are complete / Accepted Yellow; AFI05 is next for active shell and continuity chrome alignment. PK00 is complete / Green; PK01-PK41 remain queued active planned scope and may precede later AOS work only when a specific prerequisite is proven. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Planning baseline complete; no extraction run in this pass. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Standards baseline complete; no extraction run in this pass. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Recurring architecture gate complete; no extraction run in this pass. |
@@ -1250,7 +1255,7 @@ next eligible global batch under the stricter highest-priority global order.
 | --- | --- | --- |
 | LDI01-LDI22 Living Dream Intelligence Train | Active / Green | LDI01-LDI14 are complete Green after explicit user-directed early insertion following AOS23; LDI15-LDI22 remain queued serial successors and require LDI source truth, safety/privacy/source/professional-boundary gates, relevant PK prerequisites, and no runtime/release overclaim. |
 
-| AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Active / AFI03 Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, and AFI03 Flagship Object Silhouettes are complete as docs/canon/governance evidence. AFI04 Material System Proof is the next eligible global batch. Active top-level IA is Today / Goals / Capture / Time / You; Plan is not top-level. |
+| AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Active / AFI04 Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, and AFI04 Material System Proof are complete as docs/canon/governance evidence. AFI05 Shell And Continuity Chrome is the next eligible global batch. Active top-level IA is Today / Goals / Capture / Time / You; Plan is not top-level. |
 
 | PK00-PK41 Platform Kernel Train | Active / PK00 Green | PK00 Current Backend Proof Baseline is complete / Green with accepted Yellow follow-ups. PK01-PK41 remain queued in dependency order for transaction safety, storage/migration, backup/restore, events/receipts/trust, service decomposition, side effects, privacy/diagnostics/data controls, sync readiness, intelligence readiness, performance/scale, and modularization. PK does not override AFI unless a specific batch is proven as a minimum safety prerequisite. |
 
