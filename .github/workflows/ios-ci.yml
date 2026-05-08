@@ -1,0 +1,106 @@
+name: iOS CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ios-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Generate, build, and test
+    runs-on: macos-15
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+          xcrun simctl list runtimes
+
+      - name: Install local build tools
+        run: |
+          set -euo pipefail
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+          if ! command -v xcbeautify >/dev/null 2>&1; then
+            brew install xcbeautify
+          fi
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Resolve Swift package dependencies
+        run: |
+          xcodebuild \
+            -project Ambitions.xcodeproj \
+            -scheme Ambitions \
+            -resolvePackageDependencies
+
+      - name: Select simulator destination
+        id: simulator
+        run: |
+          set -euo pipefail
+          DEVICES="$(xcrun simctl list devices available)"
+          DESTINATION_NAME="$(printf "%s\n" "$DEVICES" | sed -n 's/^[[:space:]]*\(iPhone[^()]*\) (.*/\1/p' | head -1 | sed 's/[[:space:]]*$//')"
+          if [ -z "$DESTINATION_NAME" ]; then
+            echo "No available iPhone simulator found." >&2
+            exit 1
+          fi
+          echo "name=$DESTINATION_NAME" >> "$GITHUB_OUTPUT"
+          echo "Selected simulator: $DESTINATION_NAME"
+
+      - name: Build unsigned simulator app
+        run: |
+          set -o pipefail
+          mkdir -p output/logs
+          xcodebuild \
+            -project Ambitions.xcodeproj \
+            -scheme Ambitions \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.name }}" \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee output/logs/ci-build.log | xcbeautify
+
+      - name: Run unit tests
+        run: |
+          set -o pipefail
+          mkdir -p output/logs
+          xcodebuild \
+            -project Ambitions.xcodeproj \
+            -scheme Ambitions \
+            -derivedDataPath output/DerivedData-unit \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.name }}" \
+            -only-testing:AmbitionsTests \
+            test 2>&1 | tee output/logs/ci-unit-tests.log | xcbeautify
+
+      - name: Run preview-backed UI smoke tests
+        run: |
+          set -o pipefail
+          mkdir -p output/logs
+          xcodebuild \
+            -project Ambitions.xcodeproj \
+            -scheme Ambitions \
+            -derivedDataPath output/DerivedData-ui \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.name }}" \
+            -only-testing:AmbitionsUITests \
+            test 2>&1 | tee output/logs/ci-ui-tests.log | xcbeautify
+
+      - name: Upload validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-ci-logs
+          path: output/logs
+          if-no-files-found: ignore
