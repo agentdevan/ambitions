@@ -168,6 +168,46 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
     }
 
+    func testAFI12AccessibilityStateProofLocksActiveFlagshipSurfaces() {
+        XCTAssertEqual(AFI12AccessibilityStateProof.ownerBatch, "AFI12")
+        XCTAssertFalse(AFI12AccessibilityStateProof.userFacingClaimsAllowed)
+        XCTAssertEqual(AFI12AccessibilityStateProof.activeTopLevelSurfaces, [
+            "Today",
+            "Goals",
+            "Capture",
+            "Time",
+            "You"
+        ])
+        XCTAssertEqual(Set(AFI12AccessibilityStateProof.supportObjects), [
+            "Trust Seam",
+            "Quiet Reflow",
+            "Receipt Surface"
+        ])
+        XCTAssertTrue(AFI12AccessibilityStateProof.missingActiveSurfaceProofs.isEmpty)
+        XCTAssertFalse(AFI12AccessibilityStateProof.containsPlanTopLevelProof)
+        XCTAssertEqual(
+            AFI12AccessibilityStateProof.surfaceProofs.map(\.surface),
+            AFI12AccessibilityStateProof.activeTopLevelSurfaces
+        )
+    }
+
+    func testAFI12SurfaceProofsPreserveMeaningWithoutPublicClaims() {
+        for proof in AFI12AccessibilityStateProof.surfaceProofs {
+            XCTAssertFalse(proof.primaryObject.isEmpty)
+            XCTAssertFalse(proof.voiceOverSummary.isEmpty)
+            XCTAssertFalse(proof.dynamicTypeFallback.isEmpty)
+            XCTAssertFalse(proof.reduceMotionFallback.isEmpty)
+            XCTAssertFalse(proof.nonColorStateSupport.isEmpty)
+            XCTAssertFalse(proof.trustReceiptPath.isEmpty)
+            XCTAssertFalse(proof.publicAccessibilityClaimAllowed)
+            XCTAssertTrue(proof.manualProofStillRequired.localizedCaseInsensitiveContains("Manual VoiceOver"))
+            XCTAssertTrue(proof.manualProofStillRequired.localizedCaseInsensitiveContains("Dynamic Type"))
+            XCTAssertTrue(proof.manualProofStillRequired.localizedCaseInsensitiveContains("Reduce Motion"))
+            XCTAssertFalse(proof.voiceOverSummary.localizedCaseInsensitiveContains("AI confidence"))
+            XCTAssertFalse(proof.voiceOverSummary.localizedCaseInsensitiveContains("verified accessible"))
+        }
+    }
+
     func testEB28PlainLanguageEvidenceCoversCopyRecoveryAndScreenExplanation() {
         let requirements = EB28PlainLanguageExplanationEvidence.requirements
 

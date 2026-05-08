@@ -9,33 +9,36 @@ Status: Active
 ## Current Closeout
 
 Result: Accepted Yellow
-Batch: AFI11 Trust Seam And Receipts
+Batch: AFI12 Accessibility And State Proof
 Commit: pending
-Files changed: focused You/Profile trust copy, Trust Center route models,
-focused tests, and train-state docs.
-Behavior changed: touched user-facing You trust copy now uses Trust &
-Automation, and Trust Center exposes Why This? plus Quiet Reflow/manual
-fallback routes without executing automation.
-Tests run: `git diff --check`, `python3 scripts/ai/acx_impact.py $(git diff --name-only)`, `xcodegen generate`, focused Profile/Trust `xcodebuild`
-lane with 32 selected tests and 0 failures, `./scripts/build-local.sh`, ACX
-docs/batch-closeout bundles, You visual/accessibility packet generation,
-`python3 scripts/ai/acx_repair.py diagnose`, and `scripts/global-train-next-batch.sh`.
+Files changed: AFI accessibility source proof, focused accessibility tests, and
+train-state docs.
+Behavior changed: AFI accessibility-state proof now covers Today, Goals,
+Capture, Time, and You with VoiceOver, Dynamic Type, Reduce Motion, non-color,
+and trust/receipt paths while public claims remain locked.
+Tests run: `git diff --check`; `python3 scripts/ai/acx_impact.py $(git diff
+--name-only)`; `xcodegen generate`; focused accessibility xcodebuild lane
+covering 26 selected tests with 0 failures; `./scripts/build-local.sh`;
+`python3 scripts/ai/acx_local.py bundle docs`; `python3 scripts/ai/acx_local.py
+bundle batch-closeout`; `python3 scripts/ai/acx_repair.py diagnose`;
+`scripts/global-train-next-batch.sh`.
 Tests not run: rendered screenshot proof, manual accessibility traversal, full
 UI test suite, physical-device proof, and signed archive proof.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
 Yellows carried: PK01-PK41 remain active planned scope but are paused behind
 AFI unless a specific PK prerequisite is proven; transaction safety,
 migration/backup/rollback, side-effect isolation, sync readiness, intelligence
-quarantine, and performance budgets are not PK-proven yet. AFI11 rendered
-visual/manual accessibility proof remains Yellow. The pre-sync stash remains
-preserved and unapplied.
-Rollback path: revert the AFI11 implementation commit.
+quarantine, and performance budgets are not PK-proven yet. AFI12 manual
+VoiceOver/Dynamic Type/Reduce Motion/contrast/motor proof remains Yellow. The
+pre-sync stash remains preserved and unapplied.
+Rollback path: revert the AFI12 implementation commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
-AFI11 focused tests and local build passed in this session.
+AFI12 source/test proof passed the focused accessibility lane and local
+simulator build listed above.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: AFI12 Accessibility And State Proof.
+Next eligible batch: AFI13 Visual QA And Drift Gallery.
 
 ## Completed
 
@@ -45,7 +48,7 @@ Next eligible batch: AFI12 Accessibility And State Proof.
 
 ## Active / Next
 
-- AFI12 Accessibility And State Proof is next eligible.
+- AFI13 Visual QA And Drift Gallery is next eligible.
 - PK01-PK41 remain queued active planned Platform Kernel scope, but no PK batch
   after PK00 is treated as a prerequisite for AFI unless a later owner report
   proves the dependency.

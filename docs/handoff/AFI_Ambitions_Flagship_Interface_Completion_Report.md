@@ -11,12 +11,13 @@ AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object
 Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
 AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, AFI08 Capture
 Atmosphere Composer, AFI09 Time LifeShape Field, AFI10 You User System
-Profile, and AFI11 Trust Seam And Receipts are complete / Accepted Yellow.
+Profile, AFI11 Trust Seam And Receipts, and AFI12 Accessibility And State Proof
+are complete / Accepted Yellow.
 
 Next eligible batch:
 
 ```text
-AFI12 Accessibility And State Proof
+AFI13 Visual QA And Drift Gallery
 ```
 
 ## Active IA
@@ -47,6 +48,7 @@ as contextual/action language or historical compatibility evidence.
 | AFI09 Time LifeShape Field | Accepted Yellow | Time top-level copy and contracts now use Shape Time and LifeShape Field while `.plan`, Plan paths, and Plan route raw values remain internal compatibility seams. | AFI10 |
 | AFI10 You User System Profile | Accepted Yellow | You top-level copy and contracts now use Your System and User System Profile while `Profile` paths, model names, and tests remain internal compatibility seams. | AFI11 |
 | AFI11 Trust Seam And Receipts | Accepted Yellow | Touched You trust copy now uses Trust & Automation, and Trust Center exposes Why This? plus Quiet Reflow/manual fallback routes without executing automation or making readiness claims. | AFI12 |
+| AFI12 Accessibility And State Proof | Accepted Yellow | AFI-specific accessibility-state proof now covers Today / Goals / Capture / Time / You with VoiceOver, Dynamic Type, Reduce Motion, non-color, and trust/receipt paths while keeping public accessibility claims locked. | AFI13 |
 
 ## Claims
 

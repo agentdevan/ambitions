@@ -2,11 +2,11 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI11 Trust Seam And Receipts / Accepted Yellow.
-Next eligible batch: AFI12 Accessibility And State Proof.
-Scope: AFI11 aligned touched You trust copy to Trust & Automation, added Trust
-Center Why This? and Quiet Reflow/manual fallback routes, and preserved
-receipts as consequence/reversibility proof without executing automation.
+Current batch: AFI12 Accessibility And State Proof / Accepted Yellow.
+Next eligible batch: AFI13 Visual QA And Drift Gallery.
+Scope: AFI12 added AFI-specific accessibility-state proof for Today, Goals,
+Capture, Time, and You, with VoiceOver summary, Dynamic Type fallback, Reduce
+Motion fallback, non-color state support, and trust/receipt path per surface.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
@@ -14,8 +14,8 @@ action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This AFI11 pass changed touched You/Profile trust copy, Trust Center route
-models, focused tests, and train-state docs only. It made no persistence/schema,
+This AFI12 pass changed accessibility source proof, focused accessibility tests,
+and train-state docs only. It made no runtime UI behavior, persistence/schema,
 route raw-value, package manifest, dependency, signing, entitlement, hosted
 workflow, release/platform, legal/privacy, physical-device proof, public
 accessibility proof, sync/cloud, hosted AI, account, calendar-write, permission,
@@ -37,11 +37,12 @@ flagship IA: Today / Goals / Capture / Time / You. AFI01 Canon Language Purge,
 AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material
 System Proof, AFI05 Shell And Continuity Chrome, AFI06 Today Reality
 Meridian, AFI07 Goals Constellation Atlas, AFI08 Capture Atmosphere Composer,
-AFI09 Time LifeShape Field, AFI10 You User System Profile, and AFI11 Trust Seam
-And Receipts are complete / Accepted Yellow. AFI12 Accessibility And State Proof is now the next eligible global batch
+AFI09 Time LifeShape Field, AFI10 You User System Profile, AFI11 Trust Seam
+And Receipts, and AFI12 Accessibility And State Proof are complete / Accepted
+Yellow. AFI13 Visual QA And Drift Gallery is now the next eligible global batch
 unless repo evidence shows a dirty or half-complete active batch must close
 first. PK01-PK41 remain queued active planned Platform Kernel scope,
-but are not minimum prerequisites for AFI12 unless later evidence proves that
+but are not minimum prerequisites for AFI13 unless later evidence proves that
 dependency.
 
 ## Full-Stack Global Order Reconciliation
