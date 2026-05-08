@@ -43,7 +43,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         case .quickRecovery: "Return to Today with recovery posture in view."
         case .quickFocus: "Return to Today and center the next step."
         case .openGoal: "Find and open one goal in its canonical destination."
-        case .openWeek: "Open Plan as the canonical week surface."
+        case .openWeek: "Open Time as the canonical week surface."
         case .openCapture: "Open Capture."
         case .memoryLens: "Search goals, captures, and recent changes."
         }
@@ -103,7 +103,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
                 destination: .tab(.plan),
                 sourceOfTruth: "Plan",
                 safetySummary: "Routes to Plan without writing calendar or reshaping the week.",
-                fallbackSummary: "If route context is missing, open Plan root."
+                fallbackSummary: "If route context is missing, open Time root."
             )
         case .quickRecovery, .quickFocus:
             ShellExternalBrainCommandContract(

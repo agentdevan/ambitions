@@ -211,7 +211,7 @@ struct PlanReflowDecisionProjector: Sendable {
         saveTheDay: PlanSaveTheDayState,
         receiptPreview: PlanReflowReceiptPreviewState
     ) -> PlanReflowDecisionState {
-        let sourceLabel = "Based on your plan"
+        let sourceLabel = "Based on Time"
         let trustLabel = "No silent changes"
         let options = preferredOptions(
             from: reflow.suggestions,
@@ -224,7 +224,7 @@ struct PlanReflowDecisionProjector: Sendable {
         return PlanReflowDecisionState(
             title: "Reflow decisions",
             subtitle: reflow.reasonKind == .stillBelievable
-                ? "The plan still holds together. Keep the path visible unless you choose to adjust it."
+                ? "Time still holds together. Keep the path visible unless you choose to adjust it."
                 : "Choose one path before anything changes.",
             sourceLabel: sourceLabel,
             trustLabel: trustLabel,

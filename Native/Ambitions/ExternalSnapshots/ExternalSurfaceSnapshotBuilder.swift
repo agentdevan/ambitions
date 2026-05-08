@@ -170,7 +170,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
                 title: planVariantTitle(pressure: nowState.pressureLevel),
                 detail: openCaptureCount == 0 ? "The week can be shaped from the latest local state." : "\(openCaptureCount) captures are waiting for review.",
                 privacySummary: "Plan detail opens in app",
-                action: ExternalSurfaceVariantAction(title: "Open Plan", surface: .tab, tab: "plan"),
+                action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "plan"),
                 reference: primaryReference,
                 prominence: nowState.openCaptureUrgency == .elevated ? .elevated : .standard
             )

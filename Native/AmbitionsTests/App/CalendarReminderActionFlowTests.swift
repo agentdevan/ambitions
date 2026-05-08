@@ -95,10 +95,10 @@ final class CalendarReminderActionFlowTests: XCTestCase {
         let message = try XCTUnwrap(response.message)
         let selection = await calendarService.lastCalendarSelection
 
-        XCTAssertEqual(message.title, "Use Plan for Calendar access")
+        XCTAssertEqual(message.title, "Use Time for Calendar access")
         XCTAssertEqual(
             message.body,
-            "Today will not request Calendar permission or write calendar blocks. Open Plan to make planning calendar-aware from there."
+            "Today will not request Calendar permission or write calendar blocks. Open Time to make planning calendar-aware from there."
         )
         XCTAssertNil(selection)
     }

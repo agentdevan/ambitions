@@ -16,7 +16,7 @@ final class RealityModelsTests: XCTestCase {
         XCTAssertTrue(snapshot.localOnly)
         XCTAssertFalse(snapshot.openWindowCandidates.isEmpty)
         XCTAssertEqual(snapshot.capacityEstimate.totalOpenMinutes, 240)
-        XCTAssertTrue(snapshot.availability.summary.contains("Plan still works without calendar access"))
+        XCTAssertTrue(snapshot.availability.summary.contains("Time still works without calendar access"))
     }
 
     func testCalendarDerivedWindowsRemainLocalOnlyAndPrivacyMarked() {

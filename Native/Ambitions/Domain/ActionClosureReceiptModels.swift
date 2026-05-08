@@ -1448,7 +1448,7 @@ extension ActionReceipt {
         case .today:
             return ActionReceiptNextAction(kind: .openToday, title: "Open Today", destination: .today)
         case .plan:
-            return ActionReceiptNextAction(kind: .openPlan, title: "Open Plan", destination: .plan)
+            return ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan)
         case .goalDetail, .goals:
             return ActionReceiptNextAction(kind: .reviewGoal, title: "Review goal", destination: result.route)
         case .capture, .captureInbox:

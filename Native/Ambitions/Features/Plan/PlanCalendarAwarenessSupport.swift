@@ -14,8 +14,8 @@ extension RepositoryBackedPlanService {
             return PlanCalendarAwarenessState(
                 status: .calendarAware,
                 title: "Calendar-aware planning",
-                detail: openWindowCount.map { "Plan used calendar-derived busy time locally and found \($0) open window\($0 == 1 ? "" : "s")." }
-                    ?? "Plan can use calendar-derived busy time locally when you ask for real open windows.",
+                detail: openWindowCount.map { "Time used calendar-derived busy time locally and found \($0) open window\($0 == 1 ? "" : "s")." }
+                    ?? "Time can use calendar-derived busy time locally when you ask for real open windows.",
                 primaryActionTitle: "Find real open windows",
                 primaryActionSystemImage: "calendar.badge.clock",
                 valueLabel: "Aware",
@@ -27,8 +27,8 @@ extension RepositoryBackedPlanService {
             return PlanCalendarAwarenessState(
                 status: .writeOnly,
                 title: "Calendar write is available",
-                detail: "Plan can write confirmed blocks, but it cannot read availability until calendar read access is granted.",
-                primaryActionTitle: "Make Plan calendar-aware",
+                detail: "Time can write confirmed blocks, but it cannot read availability until calendar read access is granted.",
+                primaryActionTitle: "Make Time calendar-aware",
                 primaryActionSystemImage: "calendar.badge.clock",
                 valueLabel: "Write only",
                 sourceLabel: "Created in Ambitions",
@@ -38,8 +38,8 @@ extension RepositoryBackedPlanService {
         case .denied, .restricted:
             return PlanCalendarAwarenessState(
                 status: .denied,
-                title: "Plan works without Calendar",
-                detail: "Calendar access is unavailable, so Plan uses Ambitions data and baseline windows without reading events.",
+                title: "Time works without Calendar",
+                detail: "Calendar access is unavailable, so Time uses Ambitions data and baseline windows without reading events.",
                 primaryActionTitle: "Find real open windows",
                 primaryActionSystemImage: "calendar.badge.exclamationmark",
                 valueLabel: "Denied",
@@ -50,12 +50,12 @@ extension RepositoryBackedPlanService {
         case .notDetermined:
             return PlanCalendarAwarenessState(
                 status: .baseline,
-                title: "Make Plan calendar-aware",
-                detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
-                primaryActionTitle: "Make Plan calendar-aware",
+                title: "Make Time calendar-aware",
+                detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+                primaryActionTitle: "Make Time calendar-aware",
                 primaryActionSystemImage: "calendar.badge.plus",
                 valueLabel: "Optional",
-                sourceLabel: "Based on your plan",
+                sourceLabel: "Based on Time",
                 visualState: .default,
                 canRequestCalendarRead: true
             )
@@ -63,7 +63,7 @@ extension RepositoryBackedPlanService {
             return PlanCalendarAwarenessState(
                 status: .unavailable,
                 title: "Calendar-aware mode unavailable",
-                detail: "Plan is using Ambitions data only in this runtime.",
+                detail: "Time is using Ambitions data only in this runtime.",
                 primaryActionTitle: "Find real open windows",
                 primaryActionSystemImage: "calendar",
                 valueLabel: "Local",

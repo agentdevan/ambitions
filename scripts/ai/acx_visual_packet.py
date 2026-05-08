@@ -13,7 +13,8 @@ SURFACE_OBJECTS = {
     "Today": "Start Here Surface / Reality Meridian / Action Closure Diamond",
     "Goals": "Goal Atlas / MissionControlTimeSpine / LifePath Thread / Proof Spine",
     "Capture": "Capture Atmosphere Composer / Placement Shelf / Correction Fold",
-    "Plan": "LifeShape Contour Map / Reflow Decision Fold / Pressure Field",
+    "Time": "Shape Time / LifeShape Field / Reflow Decision Fold / Pressure Field",
+    "Plan": "Compatibility alias for Time; use Time for active AFI proof",
     "You": "Personal System Center / Memory Lens / Appearance Studio",
 }
 

@@ -91,7 +91,7 @@ enum CoreSurfaceIntegrationScenarioCatalog {
             manualSteps: [
                 "Use a state where yesterday slipped or an action was skipped.",
                 "Confirm Today offers recovery without blame.",
-                "Open Plan only when a broader adjustment is needed.",
+                "Open Time only when a broader adjustment is needed.",
                 "Confirm receipts/reviews can explain what changed or did not change."
             ],
             expectedEvidence: ["Recovery copy is non-shaming", "No silent calendar write", "Review/receipt context visible"],

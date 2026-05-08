@@ -3132,8 +3132,8 @@ private extension RepositoryBackedGoalsService {
             guard authorization.canWrite else {
                 return GoalDetailActionResponse(
                     message: GoalDetailInlineMessage(
-                        title: "Use Plan for Calendar access",
-                        body: "Plan works without Calendar. To add calendar-aware blocks, open Plan and choose Make Plan calendar-aware first.",
+                        title: "Use Time for Calendar access",
+                        body: "Time works without Calendar. To add calendar-aware blocks, open Time and choose Make Time calendar-aware first.",
                         state: .warning
                     )
                 )

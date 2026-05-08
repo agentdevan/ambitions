@@ -176,14 +176,14 @@ enum ActivationContract {
                 title: "Capture messy life here",
                 explanation: "Use Capture as the singular intake for loose thoughts, one-time tasks, waiting items, and seeds. Nothing here needs to become a full plan yet.",
                 primaryAction: DegradedStateAction(title: "Capture now", systemImage: "square.and.pencil", routingHint: .quickCapture),
-                secondaryAction: DegradedStateAction(title: "Return to Plan", systemImage: AppTab.plan.systemImage, routingHint: .plan),
+                secondaryAction: DegradedStateAction(title: "Return to Time", systemImage: AppTab.plan.systemImage, routingHint: .plan),
                 icon: "tray"
             )
         case .plan:
             return ActivationSurfaceEmptyStateRule(
                 surface: surface,
                 title: "The week has room",
-                explanation: "Plan works without calendar access. Add a goal or capture first, then shape only the work that truly needs room this week.",
+                explanation: "Time works without calendar access. Add a goal or capture first, then shape only the work that truly needs room this week.",
                 primaryAction: DegradedStateAction(title: "Create goal", systemImage: "target", routingHint: .createGoal),
                 secondaryAction: DegradedStateAction(title: "Open Capture", systemImage: "tray.full", routingHint: .captures),
                 icon: AppTab.plan.systemImage

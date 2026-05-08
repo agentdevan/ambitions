@@ -149,7 +149,7 @@ enum ExternalSurfaceVerificationChecklist {
             ],
             routingRequirements: [
                 "Route App Intent origin separately from widget fallback",
-                "Use canonical destinations for Capture, Start Next Step, Mark Done, Save the Day, and Open Plan"
+                "Use canonical destinations for Capture, Start Next Step, Mark Done, Save the Day, and Open Time"
             ],
             receiptRequirements: [
                 "Mark Done and Save the Day require confirmation and receipts where mutation occurs"

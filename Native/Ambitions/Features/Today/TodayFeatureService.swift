@@ -648,7 +648,7 @@ private extension RepositoryBackedTodayService {
             quickCaptureDetail: quickCapture.helpText,
             planAction: TodayInlineAction(
                 kind: .openPlan,
-                title: "Open Plan",
+                title: "Open Time",
                 systemImage: "calendar",
                 state: .default,
                 target: TodayActionTarget()
@@ -1187,7 +1187,7 @@ private extension RepositoryBackedTodayService {
         guard entryContext.normalized == .stepSession else { return nil }
         let fallbackAction = TodayInlineAction(
             kind: .openPlan,
-            title: "Open Plan",
+            title: "Open Time",
             systemImage: "calendar",
             state: .selected,
             target: TodayActionTarget()
@@ -1705,8 +1705,8 @@ private extension RepositoryBackedTodayService {
             )
         case .createCalendarEvent:
             message = TodayInlineMessage(
-                title: "Use Plan for Calendar access",
-                body: "Today will not request Calendar permission or write calendar blocks. Open Plan to make planning calendar-aware from there.",
+                title: "Use Time for Calendar access",
+                body: "Today will not request Calendar permission or write calendar blocks. Open Time to make planning calendar-aware from there.",
                 state: .warning
             )
         case .split:

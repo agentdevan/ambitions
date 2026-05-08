@@ -112,7 +112,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .missionControlTimeSpine: "Constellation Atlas"
         case .proofSpine: "Proof Spine"
         case .capturePlacementShelf: "Atmosphere Composer"
-        case .lifeShapeContourMap: "LifeShape Contour Map"
+        case .lifeShapeContourMap: "LifeShape Field"
         case .personalSystemCenter: "Personal System Center"
         case .memoryLens: "Memory Lens"
         }
@@ -144,7 +144,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .capturePlacementShelf:
             "Capture keeps the Atmosphere Composer available while placement, privacy, and correction signals settle."
         case .lifeShapeContourMap:
-            "Plan preserves the contour map while capacity, pressure, and protected pockets load."
+            "Time preserves the LifeShape Field while capacity, pressure, and protected pockets load."
         case .personalSystemCenter:
             "You keeps the system center stable while setup, trust, memory, and receipts load."
         case .memoryLens:
@@ -165,7 +165,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .capturePlacementShelf:
             "The composer stays quiet until there is a capture that needs a place."
         case .lifeShapeContourMap:
-            "The map can stay open when no real constraints need shaping."
+            "The LifeShape Field can stay open when no real constraints need shaping."
         case .personalSystemCenter:
             "The system center starts with setup and trust controls before it shows deeper history."
         case .memoryLens:
@@ -186,7 +186,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .capturePlacementShelf:
             "Capture can keep the text local and wait for placement review instead of saving silently."
         case .lifeShapeContourMap:
-            "Plan can retry without reshaping protected time or writing calendar changes."
+            "Time can retry without reshaping protected time or writing calendar changes."
         case .personalSystemCenter:
             "You can retry without changing setup, trust, memory, or receipts."
         case .memoryLens:
@@ -336,7 +336,7 @@ enum DegradedStateOrchestrator {
             kind: .empty,
             title: "No routines are shaping the week yet",
             explanation: "Rituals stay quiet until a repeatable loop is useful enough to support the week.",
-            primaryAction: DegradedStateAction(title: "Return to Plan", systemImage: AppTab.plan.systemImage, routingHint: .plan),
+            primaryAction: DegradedStateAction(title: "Return to Time", systemImage: AppTab.plan.systemImage, routingHint: .plan),
             tone: .default,
             icon: "repeat"
         )
@@ -348,7 +348,7 @@ enum DegradedStateOrchestrator {
             kind: .lowHistory,
             title: "The review has little to carry forward",
             explanation: "A few goals, captures, or completed steps will give Weekly Review enough signal to shape the next week.",
-            primaryAction: DegradedStateAction(title: "Return to Plan", systemImage: AppTab.plan.systemImage, routingHint: .plan),
+            primaryAction: DegradedStateAction(title: "Return to Time", systemImage: AppTab.plan.systemImage, routingHint: .plan),
             tone: .default,
             icon: "arrow.triangle.branch"
         )

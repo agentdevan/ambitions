@@ -324,13 +324,13 @@ private extension DefaultMemoryLensService {
         MemoryLensResult(
             id: "memory-week",
             title: "This week is the shaping surface",
-            subtitle: "Open Plan when the question is how the week holds together.",
+            subtitle: "Open Time when the question is how the week holds together.",
             explanation: "What Ambitions knows keeps week recall calm by returning to the owning Plan surface instead of building a second planning history.",
             queryText: "week plan shaping open week current week what changed why now",
             timestamp: "9999-12-31T23:59:59Z",
             kind: .week,
             facet: .open,
-            actionTitle: "Open Plan",
+            actionTitle: "Open Time",
             destination: .tab(.plan)
         )
     }

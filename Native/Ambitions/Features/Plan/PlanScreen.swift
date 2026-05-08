@@ -165,7 +165,7 @@ struct PlanScreen: View {
             }
             .scrollIndicators(.hidden)
         }
-        .navigationTitle(showsNavigationChrome ? "Plan" : "")
+        .navigationTitle(showsNavigationChrome ? "Time" : "")
         .toolbar {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -325,13 +325,13 @@ private struct PlanScopeChipStrip: View {
                     AmbitionChip("Month", role: .time, semanticState: .neutral)
                 }
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("Plan scope")
+                .accessibilityLabel("Time scope")
                 .accessibilityValue("Day, Week, Month")
 
                 EvidenceLabel(
-                    "Time-aware plan",
+                    "Shape Time",
                     detail: timeframeLabel,
-                    source: "Plan",
+                    source: "Time",
                     state: .active,
                     context: .plan
                 )

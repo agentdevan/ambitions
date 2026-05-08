@@ -44,13 +44,13 @@ final class CalendarRealityServiceTests: XCTestCase {
         let result = await service.findOpenWindows(
             request: CalendarRealityReadRequest(
                 horizon: DateInterval(start: now, end: now.addingTimeInterval(2 * 3_600)),
-                userInitiatedPlanAction: "Make Plan calendar-aware"
+                userInitiatedPlanAction: "Make Time calendar-aware"
             )
         )
 
         XCTAssertEqual(result.permissionState, .denied)
         XCTAssertTrue(result.derivedBusyWindows.isEmpty)
-        XCTAssertTrue(result.calendarContext.explanation.contains("Plan still works without calendar access"))
+        XCTAssertTrue(result.calendarContext.explanation.contains("Time still works without calendar access"))
         let fetchCount = await store.currentFetchCount()
         XCTAssertEqual(fetchCount, 0)
     }
@@ -81,7 +81,7 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertEqual(written.calendarEventIdentifier, "event-1")
         XCTAssertEqual(writeOnlyRequestCount, 1)
         XCTAssertEqual(payload?.title, "Draft proposal")
-        XCTAssertEqual(payload?.notes, "Created by Ambitions after explicit Plan confirmation.")
+        XCTAssertEqual(payload?.notes, "Created by Ambitions after explicit Time confirmation.")
     }
 }
 

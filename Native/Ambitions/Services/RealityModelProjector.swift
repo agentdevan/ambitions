@@ -327,7 +327,7 @@ private extension RealityModelProjector {
         if calendarContext?.hasCalendarReadAccess == true {
             return "\(openCandidates.count) open window\(openCandidates.count == 1 ? "" : "s") after calendar-derived busy time."
         }
-        return "\(openCandidates.count) baseline open window\(openCandidates.count == 1 ? "" : "s"); Plan still works without calendar access."
+        return "\(openCandidates.count) baseline open window\(openCandidates.count == 1 ? "" : "s"); Time still works without calendar access."
     }
 
     func contextFitSummary(activeContextLens: NowContextLens, openCandidates: [OpenWindowCandidate]) -> String {

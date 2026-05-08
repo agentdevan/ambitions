@@ -7,15 +7,15 @@ extension PlanDashboard {
         ScreenContractImplementationSnapshot(
             screenID: .plan,
             firstScreenContent: [
-                "Day Shape",
-                "Week fit",
-                "Week Shape",
-                "Life Shape",
-                "Weekly Plan Strip",
-                "Rich Timeline Widget",
-                "Rituals",
-                "Scheduling",
-                "Open windows"
+                "Shape Time",
+                "LifeShape Field",
+                "Open time",
+                "Goal time",
+                "Protected time",
+                "Pressure",
+                "Shape week",
+                "Review pressure",
+                "Manual mode"
             ],
             panels: [.heroDecision, .schedule, .timeline, .weeklyPlanStrip, .recovery, .trust],
             actions: [.makeCalendarAware, .findWindows, .move, .protect, .saveTheWeek],
@@ -37,6 +37,7 @@ extension PlanDashboard {
                 reflowDecision.title,
                 reflowDecision.sourceLabel,
                 reflowDecision.trustLabel,
+                lifeSuite.shapes.map(\.sourceLabel).joined(separator: " "),
                 saveTheDay.title,
                 recoveryMaturity.title,
                 recoveryMaturity.confirmationBoundary

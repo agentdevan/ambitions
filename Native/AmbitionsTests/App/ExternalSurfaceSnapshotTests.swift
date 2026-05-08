@@ -335,7 +335,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                     title: "Private plan",
                     detail: "Sensitive plan",
                     privacySummary: "Sensitive detail",
-                    action: ExternalSurfaceVariantAction(title: "Open Plan", surface: .tab, tab: "plan"),
+                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "plan"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
                 )

@@ -258,7 +258,7 @@ extension DayRailRowState {
                 slot: slot,
                 title: privacy.visibleTitle(item.title),
                 subtitle: privacy.visibleSubtitle(item.subtitle),
-                duration: DayRailDurationState.placeholder(for: item.action ?? fallbackHero?.primaryAction ?? TodayInlineAction(kind: .openPlan, title: "Open Plan", systemImage: "calendar", state: .default, target: TodayActionTarget())),
+                duration: DayRailDurationState.placeholder(for: item.action ?? fallbackHero?.primaryAction ?? TodayInlineAction(kind: .openPlan, title: "Open Time", systemImage: "calendar", state: .default, target: TodayActionTarget())),
                 detailTarget: DayRailDetailTargetState.from(item.action ?? fallbackHero?.primaryAction),
                 sourceLabels: [source]
             )

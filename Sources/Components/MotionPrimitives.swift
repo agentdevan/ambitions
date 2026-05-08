@@ -242,8 +242,8 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
             )
         case .lifeShapeMap:
             return AmbitionObjectMotionPolicy(
-                objectTitle: "LifeShape Map",
-                owner: "Plan",
+                objectTitle: "LifeShape Field",
+                owner: "Time",
                 motionToken: .reviewRequired,
                 stateMeaning: "Capacity, pressure, or defaults need review before shape changes.",
                 nonMotionCues: ["capacity label", "pressure text", "review-needed action"],

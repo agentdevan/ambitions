@@ -38,7 +38,7 @@ struct TodayActionClosureOutcomeState: Identifiable, Equatable {
         case .completed, .stillCounts:
             "Save proof and return to Today."
         case .moved:
-            "Open Plan only when you want to choose the new time."
+            "Open Time only when you want to choose the new time."
         case .notNeeded, .skippedIntentionally:
             "Save the decision so it can be reversed later."
         case .blocked, .needsRecovery:

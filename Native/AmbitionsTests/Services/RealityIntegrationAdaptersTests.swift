@@ -18,7 +18,7 @@ final class RealityIntegrationAdaptersTests: XCTestCase {
         let entry = RealityIntegrationAdapter.calendarContextObservedEntry(
             snapshot: snapshot,
             occurredAt: now,
-            actionName: "Make Plan calendar-aware"
+            actionName: "Make Time calendar-aware"
         )
 
         XCTAssertEqual(entry.kind, .calendarContextObserved)

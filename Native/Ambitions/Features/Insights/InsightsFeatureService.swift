@@ -448,8 +448,8 @@ private extension RepositoryBackedInsightsService {
             id: "constellation-plan",
             title: blockedCount > 0 || current.frictionCount > current.visibleFollowThrough ? "The week needs a calmer shape" : "Weekly review can carry this learning forward",
             summary: blockedCount > 0 || current.frictionCount > current.visibleFollowThrough
-                ? "Open Plan to remove pressure, protect what still fits, and keep reflection attached to the real week."
-                : "Open Plan when you want this reflection to shape the next week instead of staying retrospective.",
+                ? "Open Time to remove pressure, protect what still fits, and keep reflection attached to the real week."
+                : "Open Time when you want this reflection to shape the next week instead of staying retrospective.",
             signalLabel: blockedCount > 0 || current.frictionCount > current.visibleFollowThrough ? "Shape next" : "Carry forward",
             visualState: blockedCount > 0 || current.frictionCount > current.visibleFollowThrough ? .warning : .selected,
             goalTarget: nil,

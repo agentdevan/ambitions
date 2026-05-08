@@ -42,7 +42,7 @@ enum PreviewTodayScenarios {
         title: "Split the next step",
         supporting: "A smaller version is the safest way back into the day.",
         nowSubtitle: "Ship the native create goal flow",
-        nextTitle: "Open Plan",
+        nextTitle: "Open Time",
         nextSubtitle: "If the day still feels too heavy, protect the block there.",
         primaryAction: TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
         supportingActions: [
@@ -534,7 +534,7 @@ enum PreviewTodayScenarios {
                 quickCaptureAction: mode == .empty ? nil : TodayInlineAction(kind: .quickLog, title: "Quick log", systemImage: "plus.bubble", state: .success, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
                 quickCaptureTitle: "Quick capture",
                 quickCaptureDetail: "Capture and ask-for-help stay bounded and shell-owned.",
-                planAction: TodayInlineAction(kind: .openPlan, title: "Open Plan", systemImage: "calendar", state: .default, target: TodayActionTarget()),
+                planAction: TodayInlineAction(kind: .openPlan, title: "Open Time", systemImage: "calendar", state: .default, target: TodayActionTarget()),
                 reflectionPrompt: "When tonight arrives, what do you want to feel good about?",
                 reflectionHighlights: mode == .empty ? [] : ["Captured one completed session", "Kept the day from turning into dashboard noise"]
             )

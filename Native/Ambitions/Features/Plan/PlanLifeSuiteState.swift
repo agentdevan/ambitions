@@ -69,7 +69,7 @@ struct PlanLifeShapeDrillDownState: Sendable {
     let items: [PlanLifeShapeDrillDownItemState]
 
     static let baseline = PlanLifeShapeDrillDownState(
-        title: "Life Shape detail",
+        title: "LifeShape Field detail",
         subtitle: "Longer-range shape stays explanatory, not event-like.",
         rhythmLabel: "Rhythm: no pattern loaded yet.",
         pressureWeeksLabel: "Pressure weeks: none visible.",
@@ -105,8 +105,8 @@ struct PlanLifeSuiteProjector: Sendable {
         mode: PlanDashboardMode
     ) -> PlanLifeSuiteState {
         PlanLifeSuiteState(
-            title: "Plan Life Suite",
-            subtitle: "Does this hold together?",
+            title: "Shape Time",
+            subtitle: "LifeShape Field shows what the week can hold.",
             shapes: [
                 dayShape(weekDays: weekDays),
                 weekShape(weekDays: weekDays, openCaptureCount: openCaptureCount, mode: mode),
@@ -132,7 +132,7 @@ struct PlanLifeSuiteProjector: Sendable {
             summary: today.map { "\($0.weekdayLabel) has \($0.roomLabel.lowercased()) and \($0.blocks.count) planned block\($0.blocks.count == 1 ? "" : "s")." }
                 ?? "No day shape is loaded yet.",
             facts: dayShapeFacts(today),
-            sourceLabel: "Based on your plan",
+            sourceLabel: "Based on Time",
             boundaryLabel: "No silent replanning",
             visualState: today?.level.visualState ?? .default
         )
@@ -171,13 +171,13 @@ struct PlanLifeSuiteProjector: Sendable {
         PlanLifeSuiteShapeState(
             kind: .life,
             title: "Life Shape",
-            question: "Is the plan still pointed at the life you are building?",
+            question: "Is Time still pointed at the life you are building?",
             summary: activeGoalCount == 0
-                ? "Life Shape is quiet until active goals give Plan something to coordinate."
-                : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the current life plan.",
+                ? "Life Shape is quiet until active goals give Time something to shape."
+                : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the current LifeShape Field.",
             facts: [
                 activeGoalCount == 0 ? "No active goals shaping life view yet." : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") included.",
-                "Life Shape stays inside Plan."
+                "Life Shape stays inside Time."
             ],
             sourceLabel: "Based on active goals",
             boundaryLabel: "Life view, broader than time slots",
@@ -227,7 +227,7 @@ struct PlanLifeSuiteProjector: Sendable {
             : "Milestones: \(milestoneTitles.joined(separator: ", ")) shape the longer arc."
 
         return PlanLifeShapeDrillDownState(
-            title: "Life Shape detail",
+            title: "LifeShape Field detail",
             subtitle: "Longer-range planning explains rhythm, pressure, recovery, and milestones without becoming an event list.",
             rhythmLabel: rhythmLabel,
             pressureWeeksLabel: pressuredDays == 0
@@ -252,7 +252,7 @@ struct PlanLifeSuiteProjector: Sendable {
                     title: "Life areas",
                     value: activeGoalCount == 0 ? "Quiet" : "\(activeGoalCount) active",
                     detail: activeGoalCount == 0
-                        ? "Life Shape waits for active goals before drawing a wider pattern."
+                        ? "LifeShape Field waits for active goals before drawing a wider pattern."
                         : "Active goals are the source for longer-range shape.",
                     visualState: activeGoalCount == 0 ? .default : .selected
                 ),

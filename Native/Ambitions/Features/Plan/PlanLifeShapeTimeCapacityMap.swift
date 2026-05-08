@@ -61,7 +61,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
     }
 
     var accessibilityHint: String {
-        "Selects this LifeShape contour without changing the plan or calendar."
+        "Selects this LifeShape Field contour without changing Time or calendar."
     }
 
     private static func pressureLevel(for shape: PlanLifeSuiteShapeState) -> Double {
@@ -216,7 +216,7 @@ struct PlanLifeShapeTimeCapacityMap: View {
                 .accessibilityIdentifier("plan.life-shape-map.pressure-toggle")
 
                 EvidenceLabel(
-                    "Shape before schedule",
+                    "Shape Time",
                     detail: suite.subtitle,
                     source: suite.manualFallbackLabel,
                     state: .active,
@@ -231,10 +231,10 @@ struct PlanLifeShapeTimeCapacityMap: View {
     private var header: some View {
         HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("LifeShape Time Capacity Map")
+                Text("LifeShape Field")
                     .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Capacity, pressure, and recovery markers without a schedule table.")
+                Text("Open time, goal time, protected time, and pressure without becoming an event grid.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -260,7 +260,7 @@ struct PlanLifeShapeTimeCapacityMap: View {
         }
         .frame(minHeight: 188, alignment: .center)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("LifeShape Contour Map")
+        .accessibilityLabel("Time LifeShape Field")
     }
 
     private var accessibilityContourStack: some View {
@@ -478,15 +478,15 @@ private struct PlanLifeShapeSelectedContourPanel: View {
     }
 }
 
-#Preview("SI08 LifeShape Map") {
+#Preview("AFI09 Time LifeShape Field") {
     PlanLifeShapeTimeCapacityMap(
         suite: PlanLifeSuiteState(
-            title: "Plan Life Suite",
-            subtitle: "Does this hold together?",
+            title: "Shape Time",
+            subtitle: "LifeShape Field shows what the week can hold.",
             shapes: [
                 PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has a protected pocket and one planned block.", facts: ["Protected pocket visible."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .selected),
                 PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need lighter scope before the week feels believable.", facts: ["2 pressured days visible."], sourceLabel: "Based on goals and captures", boundaryLabel: "Confirm first", visualState: .warning),
-                PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan pointed at the life you are building?", summary: "Three active goals shape the current life plan.", facts: ["3 active goals included."], sourceLabel: "Based on active goals", boundaryLabel: "Broader than time slots", visualState: .default),
+                PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included."], sourceLabel: "Based on active goals", boundaryLabel: "Broader than time slots", visualState: .default),
             ],
             calendarBoundaryLabel: "Calendar stays optional",
             manualFallbackLabel: "Manual fallback available",

@@ -423,7 +423,7 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 safety: .broadPlanMutation,
                 reasons: [.broadReflowMustBeConfirmed],
                 degradedFacts: ["Plan changes are represented by policy only in this batch."],
-                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Plan", destination: .plan),
+                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan),
                 receiptState: .needsConfirmation,
                 receiptSafety: .confirmationRequired
             )
@@ -436,7 +436,7 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 safety: .confirmationGated,
                 reasons: [.calendarIsPlanOwned, .localDraftOnly],
                 degradedFacts: ["No calendar block is written by this policy."],
-                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Plan", destination: .plan),
+                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan),
                 receiptState: .draftedPrepared,
                 receiptSafety: .degraded
             )
@@ -449,7 +449,7 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 safety: .externalEffect,
                 reasons: [.calendarIsPlanOwned, .externalSideEffect, .confirmationRequired],
                 blockedFacts: ["No calendar data was changed."],
-                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Plan", destination: .plan),
+                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan),
                 receiptState: .needsConfirmation,
                 receiptSafety: .confirmationRequired
             )

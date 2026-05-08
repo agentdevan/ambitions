@@ -69,7 +69,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .capture:
             ["Needs a Place", "Ready to Place", "Grow into Goal"]
         case .plan:
-            ["Capacity", "Pressure", "Reflow"]
+            ["Open time", "Goal time", "Protected time"]
         case .you:
             ["Trust", "Data", "Setup"]
         }

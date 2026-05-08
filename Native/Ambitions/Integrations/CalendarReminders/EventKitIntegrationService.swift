@@ -271,7 +271,7 @@ extension StubCalendarRemindersService: CalendarRealityServicing, CalendarBlockW
             userInitiatedPlanAction: request.userInitiatedPlanAction,
             explanation: permission.canRead
                 ? "Plan used derived calendar busy time locally to find open windows."
-                : "Plan still works without calendar access; no calendar busy time was read."
+                : "Time still works without calendar access; no calendar busy time was read."
         )
         let snapshot = RealityModelProjector().project(
             input: RealityProjectionInput(
@@ -570,7 +570,7 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
             userInitiatedPlanAction: request.userInitiatedPlanAction,
             explanation: permission.canRead
                 ? "Plan used derived calendar busy time locally to find open windows."
-                : "Plan still works without calendar access; no calendar busy time was read."
+                : "Time still works without calendar access; no calendar busy time was read."
         )
         let snapshot = RealityModelProjector().project(
             input: RealityProjectionInput(
@@ -599,7 +599,7 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
         }
         let payload = EventKitEventPayload(
             title: intent.block.title,
-            notes: "Created by Ambitions after explicit Plan confirmation.",
+            notes: "Created by Ambitions after explicit Time confirmation.",
             startDate: intent.block.start,
             endDate: intent.block.end
         )

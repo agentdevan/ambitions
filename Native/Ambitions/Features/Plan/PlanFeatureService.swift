@@ -32,7 +32,7 @@ struct RepositoryBackedPlanService: PlanServicing {
         let result = await calendarRealityService.findOpenWindows(
             request: CalendarRealityReadRequest(
                 horizon: weekHorizon(now: now),
-                userInitiatedPlanAction: "Make Plan calendar-aware",
+                userInitiatedPlanAction: "Make Time calendar-aware",
                 minimumWindowMinutes: 30
             )
         )
@@ -49,7 +49,7 @@ struct RepositoryBackedPlanService: PlanServicing {
         let event = RealityIntegrationAdapter.calendarContextObservedEntry(
             snapshot: realitySnapshot,
             occurredAt: now,
-            actionName: "Make Plan calendar-aware"
+            actionName: "Make Time calendar-aware"
         )
         try? await repositories.eventLedger.append(event)
         return makeDashboard(
@@ -294,7 +294,7 @@ private extension RepositoryBackedPlanService {
                 PlanSecondaryDestination(
                     id: "plan-weekly-review",
                     title: "Weekly review",
-                    detail: "Close the current week by shaping carry-forward, ritual pressure, and unresolved captures without leaving Plan.",
+                    detail: "Close the current week by shaping carry-forward, ritual pressure, and unresolved captures without leaving Time.",
                     valueLabel: posture.label,
                     icon: "arrow.triangle.branch",
                     visualState: posture.visualState,
@@ -302,7 +302,7 @@ private extension RepositoryBackedPlanService {
                 )
             ],
             emptyTitle: mode == .empty ? "No weekly pressure yet" : nil,
-            emptyMessage: mode == .empty ? "As soon as goals, captures, or routines create real constraints, Plan will show where the week still has room." : nil
+            emptyMessage: mode == .empty ? "As soon as goals, captures, or routines create real constraints, Time will show where the week still has room." : nil
         )
     }
 
@@ -368,7 +368,7 @@ private extension RepositoryBackedPlanService {
             habitSummary: habitGoals.isEmpty
                 ? "No recurring loops are currently shaping the review."
                 : "\(habitGoals.count) routine\(habitGoals.count == 1 ? "" : "s") should support the next week without crowding it.",
-            returnActionTitle: "Return to Plan",
+            returnActionTitle: "Return to Time",
             returnActionSubtitle: "Use the reshaped week, then adjust one goal or support route only if it still needs help.",
             returnPlanRoute: nil,
             splitPaneContext: splitPaneContext
@@ -877,9 +877,9 @@ private extension RepositoryBackedPlanService {
         }()
 
         return PlanRealityHeroState(
-            eyebrow: "Plan",
-            title: "Does this hold together?",
-            subtitle: "Plan now reads the week as room, pressure, and protected structure instead of a dense calendar clone.",
+            eyebrow: "Time",
+            title: "Shape Time",
+            subtitle: "Time reads the week as open room, goal time, pressure, and protected structure.",
             dominantTruth: dominantTruth,
             roomSummary: roomSummary,
             pressureSummary: pressureSummary,
@@ -1774,15 +1774,15 @@ private extension RepositoryBackedPlanService {
             : "What is the one thing that still needs protection?"
 
         return PlanSaveTheDayState(
-            title: "Save the Day in Plan",
-            detail: "Plan handles the deeper recovery shape without changing anything for you.",
+            title: "Save the Day in Time",
+            detail: "Time handles the deeper recovery shape without changing anything for you.",
             oneQuestion: question,
             protectedItem: protected,
             adjustment: adjustment,
             recoveryExplanation: reflow.reasonKind == .stillBelievable
                 ? "No rescue is needed; keep recovery room visible."
                 : "Recovery works by protecting one thing, reducing one thing, and leaving the rest unchanged until you confirm.",
-            boundary: "No hidden rescheduling. Calendar stays untouched. Nothing changed yet.",
+            boundary: "No silent rescheduling. Calendar stays untouched. Nothing changed yet.",
             visualState: reflow.visualState
         )
     }

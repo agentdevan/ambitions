@@ -2,12 +2,12 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI08 Capture Atmosphere Composer / Accepted Yellow.
-Next eligible batch: AFI09 Time LifeShape Field.
-Scope: AFI08 aligned Capture top-level object language to Capture Anything /
-Atmosphere Composer and replaced older touched route-state copy with Needs a
-Place, Ready to Place, and Grow into Goal while preserving local-first Capture
-compatibility seams.
+Current batch: AFI09 Time LifeShape Field / Accepted Yellow.
+Next eligible batch: AFI10 You User System Profile.
+Scope: AFI09 aligned Time top-level object language to Shape Time /
+LifeShape Field and replaced older touched top-level Plan copy with Time while
+preserving `.plan`, Plan paths, and route raw values as internal compatibility
+seams.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
@@ -15,9 +15,9 @@ action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This AFI08 pass changed Capture route-preview labels, screen/contract
-copy, focused preview/degraded-state seams, and focused tests only. It made
-no persistence/schema, route raw-value, package manifest, dependency, signing,
+This AFI09 pass changed touched Time/Plan screen/contract copy, Calendar-aware
+labels, preview/external-surface copy, and focused tests only. It made no
+persistence/schema, route raw-value, package manifest, dependency, signing,
 entitlement, hosted workflow, release/platform, legal/privacy,
 physical-device proof, public accessibility proof, sync/cloud, hosted AI, or
 user-data server claim.
@@ -34,11 +34,12 @@ baseline. AFI source truth now controls active flagship IA: Today / Goals /
 Capture / Time / You. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock,
 AFI03 Flagship Object Silhouettes, AFI04 Material System Proof, AFI05 Shell
 And Continuity Chrome, AFI06 Today Reality Meridian, AFI07 Goals
-Constellation Atlas, and AFI08 Capture Atmosphere Composer are complete /
-Accepted Yellow. AFI09 Time LifeShape Field is now the next eligible global batch unless repo evidence shows a
+Constellation Atlas, AFI08 Capture Atmosphere Composer, and AFI09 Time
+LifeShape Field are complete / Accepted Yellow. AFI10 You User System Profile
+is now the next eligible global batch unless repo evidence shows a
 dirty or half-complete active batch must close first.
 PK01-PK41 remain queued active planned Platform Kernel scope, but are not
-minimum prerequisites for AFI09 unless later evidence proves that dependency.
+minimum prerequisites for AFI10 unless later evidence proves that dependency.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
 entitlement, dependency, generated-project, or hosted-CI proof claim.

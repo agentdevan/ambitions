@@ -532,7 +532,7 @@ private extension ReviewsV1Projector {
                 id: "review.handoff.decision",
                 title: "Decide before changing the plan",
                 detail: review.detail,
-                destinationLabel: "Open Plan",
+                destinationLabel: "Open Time",
                 safetyLabel: "Requires confirmation",
                 state: .warning
             ))

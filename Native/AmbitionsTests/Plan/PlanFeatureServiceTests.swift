@@ -16,8 +16,8 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.pressureScrubber.points.count, 7)
         XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
         XCTAssertTrue(dashboard.goalShapingItems.isEmpty)
-        XCTAssertEqual(dashboard.hero.title, "Does this hold together?")
-        XCTAssertEqual(dashboard.lifeSuite.title, "Plan Life Suite")
+        XCTAssertEqual(dashboard.hero.title, "Shape Time")
+        XCTAssertEqual(dashboard.lifeSuite.title, "Shape Time")
         XCTAssertEqual(dashboard.lifeSuite.shapes.map(\.title), ["Day Shape", "Week Shape", "Life Shape"])
         XCTAssertTrue(dashboard.lifeSuite.shapes.allSatisfy { $0.facts.isEmpty == false })
         XCTAssertEqual(dashboard.lifeSuite.manualFallbackLabel, "Manual fallback available")
@@ -44,7 +44,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.hero.contextPills.contains(where: { $0.title.contains("goals visible") }))
         XCTAssertFalse(dashboard.resilience.lanes.isEmpty)
         XCTAssertNotNil(dashboard.primaryAction.goalTarget)
-        XCTAssertEqual(dashboard.hero.title, "Does this hold together?")
+        XCTAssertEqual(dashboard.hero.title, "Shape Time")
         XCTAssertEqual(dashboard.treaty.title, "This week's agreement")
         XCTAssertFalse(dashboard.treaty.summary.contains("Kernel"))
         XCTAssertTrue(["Light", "Steady", "Tight", "Overloaded", "Fragile"].contains(dashboard.capacityEnvelope.label))
@@ -65,7 +65,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadPlanDashboard(now: fixedDate)
         let shapes = Dictionary(uniqueKeysWithValues: dashboard.lifeSuite.shapes.map { ($0.kind, $0) })
 
-        XCTAssertEqual(dashboard.lifeSuite.subtitle, "Does this hold together?")
+        XCTAssertEqual(dashboard.lifeSuite.subtitle, "LifeShape Field shows what the week can hold.")
         XCTAssertEqual(dashboard.lifeSuite.calendarBoundaryLabel, "Manual planning still works")
         XCTAssertEqual(shapes[.day]?.boundaryLabel, "No silent replanning")
         XCTAssertTrue(shapes[.day]?.facts.contains(where: { $0.contains("planned block") }) == true)
@@ -96,7 +96,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertGreaterThan(weekItem.pressureLevel, 0.45)
         XCTAssertTrue(weekItem.capacityLabel.localizedCaseInsensitiveContains("pressure"))
         XCTAssertTrue(weekItem.recoveryLabel.localizedCaseInsensitiveContains("lighten"))
-        XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("LifeShape contour"))
+        XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("LifeShape Field contour"))
         XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("without changing"))
         XCTAssertFalse(items.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("calendar grid"))
     }
@@ -140,7 +140,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         let afterCaptures = try await repositories.captures.listCaptures()
         let drillDown = dashboard.lifeSuite.drillDown
 
-        XCTAssertEqual(drillDown.title, "Life Shape detail")
+        XCTAssertEqual(drillDown.title, "LifeShape Field detail")
         XCTAssertTrue(drillDown.subtitle.contains("rhythm"))
         XCTAssertTrue(drillDown.rhythmLabel.contains("Rhythm"))
         XCTAssertTrue(drillDown.pressureWeeksLabel.contains("Pressure weeks"))
@@ -158,7 +158,7 @@ final class PlanFeatureServiceTests: XCTestCase {
             "commitment-load"
         ])
         XCTAssertTrue(drillDown.items.contains(where: { $0.title == "Life areas" }))
-        XCTAssertTrue(drillDown.accessibilityValue.contains("Life Shape detail"))
+        XCTAssertTrue(drillDown.accessibilityValue.contains("LifeShape Field detail"))
 
         let copy = [
             drillDown.subtitle,
@@ -294,7 +294,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.hero.eyebrow, "Weekly Review")
         XCTAssertFalse(dashboard.carryForwardItems.isEmpty)
         XCTAssertTrue(dashboard.captureSummary.contains("capture"))
-        XCTAssertEqual(dashboard.returnActionTitle, "Return to Plan")
+        XCTAssertEqual(dashboard.returnActionTitle, "Return to Time")
     }
 
     func testDemoPlanProtectActionRemainsActionable() async throws {
@@ -325,7 +325,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         let events = try await ledger.fetchRecent(limit: 5)
 
         let requestedActionNames = await calendar.currentRequestedActionNames()
-        XCTAssertEqual(requestedActionNames, ["Make Plan calendar-aware"])
+        XCTAssertEqual(requestedActionNames, ["Make Time calendar-aware"])
         XCTAssertEqual(dashboard.calendarAwareness.status, .calendarAware)
         XCTAssertEqual(dashboard.calendarAwareness.sourceLabel, "From your calendar")
         XCTAssertEqual(dashboard.calendarBoundary.sourceLabel, "From your calendar")
@@ -659,7 +659,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         let afterCaptures = try await repositories.captures.listCaptures()
 
         XCTAssertEqual(dashboard.reflowDecision.title, "Reflow decisions")
-        XCTAssertEqual(dashboard.reflowDecision.sourceLabel, "Based on your plan")
+        XCTAssertEqual(dashboard.reflowDecision.sourceLabel, "Based on Time")
         XCTAssertEqual(dashboard.reflowDecision.trustLabel, "No silent changes")
         XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .protectTime }))
         XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .makeSmaller }))
@@ -761,9 +761,13 @@ final class PlanFeatureServiceTests: XCTestCase {
 
         XCTAssertEqual(snapshot.screenID, .plan)
         XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Capture", "Time", "You"])
-        XCTAssertTrue(snapshot.copySamples.contains("Does this hold together?"))
-        XCTAssertTrue(snapshot.copySamples.contains("Based on your plan"))
-        XCTAssertTrue(ScreenContractValidator.validate(snapshot: snapshot, against: contract).isEmpty)
+        XCTAssertTrue(snapshot.firstScreenContent.contains("LifeShape Field"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Open time"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Protected time"))
+        XCTAssertTrue(snapshot.copySamples.contains("LifeShape Field shows what the week can hold."))
+        XCTAssertTrue(snapshot.copySamples.contains("Based on Time"))
+        let issues = ScreenContractValidator.validate(snapshot: snapshot, against: contract)
+        XCTAssertTrue(issues.isEmpty, "\(issues)")
     }
 }
 

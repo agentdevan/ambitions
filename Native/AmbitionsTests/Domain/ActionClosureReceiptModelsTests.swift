@@ -187,7 +187,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
                 whatFailed: "Calendar write",
                 whyFailed: "Plan-owned writer was unavailable.",
                 unchangedFacts: ["No calendar data was changed.", "No plan item was moved."],
-                nextSafeAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Plan", destination: .plan)
+                nextSafeAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan)
             )
         )
 

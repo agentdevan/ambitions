@@ -324,7 +324,7 @@ private extension TodayExecutionProjector {
             value: protectedSummary == nil && input.mode == .empty ? "No must-do yet" : "Kept on today",
             semanticState: .protected,
             action: protectedSummary?.relatedGoalID.map {
-                TodayInlineAction(kind: .openPlan, title: "Open Plan", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: $0))
+                TodayInlineAction(kind: .openPlan, title: "Open Time", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: $0))
             } ?? hero.primaryAction,
             explanation: explanation(input, preferred: input.nowState.nextActionExplanationID, fallbackTitle: "Why this?")
         )
@@ -840,7 +840,7 @@ private extension TodayExecutionProjector {
         let target = TodayActionTarget(goalID: option.relatedGoalID, draftID: nil)
         switch option.strategy {
         case .openPlan, .protectDeadlineWork, .rescheduleLater, .acceptSlip:
-            return TodayInlineAction(kind: .openPlan, title: "Open Plan", systemImage: "calendar", state: .selected, target: target)
+            return TodayInlineAction(kind: .openPlan, title: "Open Time", systemImage: "calendar", state: .selected, target: target)
         case .openCapture, .clarifyNextStep, .askForDecision:
             return TodayInlineAction(kind: .quickLog, title: "Open Capture", systemImage: "tray.and.arrow.down", state: .selected, target: target)
         case .openGoal, .reduceScope:
@@ -872,7 +872,7 @@ private extension TodayExecutionProjector {
         return actions.filter { seen.insert($0.id).inserted }.prefix(3).map { $0 }
     }
 
-    func openPlanAction(title: String = "Open Plan") -> TodayInlineAction {
+    func openPlanAction(title: String = "Open Time") -> TodayInlineAction {
         TodayInlineAction(kind: .openPlan, title: title, systemImage: "calendar", state: .default, target: TodayActionTarget())
     }
 

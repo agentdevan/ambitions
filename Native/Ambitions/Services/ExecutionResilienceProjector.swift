@@ -445,7 +445,7 @@ private extension ExecutionResilienceProjector {
             options.append(
                 ExecutionRecoveryOption(
                     id: "option.open.plan",
-                    title: "Open Plan",
+                    title: "Open Time",
                     summary: "Plan can inspect the real week, but this assessment will not schedule or write calendar blocks.",
                     strategy: .openPlan,
                     expectedEffect: "Moves the decision to the Plan workspace without automatic scheduling.",

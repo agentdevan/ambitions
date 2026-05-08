@@ -6,9 +6,9 @@ enum PreviewPlanScenarios {
         mode: .active,
         timeframeLabel: "Apr 20-Apr 26",
         hero: PlanRealityHeroState(
-            eyebrow: "Plan",
-            title: "Does this hold together?",
-            subtitle: "Plan reads the week as room, pressure, and protected structure instead of a dense calendar clone.",
+            eyebrow: "Time",
+            title: "Shape Time",
+            subtitle: "Time reads the week as open room, goal time, pressure, and protected structure.",
             dominantTruth: "Pressure is clustering into one overloaded day, while two calmer windows still have believable room.",
             roomSummary: "Wednesday and Saturday can still carry one small step without collapsing into calendar noise.",
             pressureSummary: "Open captures and one fragile goal are the loudest reasons the week still needs shaping.",
@@ -99,9 +99,9 @@ enum PreviewPlanScenarios {
         ),
         calendarBoundary: PlanCalendarBoundaryContractState(
             title: "Calendar stays optional",
-            detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+            detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
             permissionLabel: "Optional",
-            sourceLabel: "Based on your plan",
+            sourceLabel: "Based on Time",
             manualFallback: "Manual planning still works without calendar access.",
             writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
             visualState: .default,
@@ -339,12 +339,12 @@ enum PreviewPlanScenarios {
         ),
         calendarAwareness: PlanCalendarAwarenessState(
             status: .baseline,
-            title: "Make Plan calendar-aware",
-            detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
-            primaryActionTitle: "Make Plan calendar-aware",
+            title: "Make Time calendar-aware",
+            detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+            primaryActionTitle: "Make Time calendar-aware",
             primaryActionSystemImage: "calendar.badge.plus",
             valueLabel: "Optional",
-            sourceLabel: "Based on your plan",
+            sourceLabel: "Based on Time",
             visualState: .default,
             canRequestCalendarRead: true
         ),
@@ -412,7 +412,7 @@ enum PreviewPlanScenarios {
         secondaryDestinations: [
             PlanSecondaryDestination(id: "plan-habits", title: "Routines and habits", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: AppTab.habits.systemImage, visualState: .selected, planRoute: .habits),
             PlanSecondaryDestination(id: "plan-captures", title: "Captures into the week", detail: "2 captures still need to be absorbed, attached, or intentionally parked.", valueLabel: "2", icon: AppTab.captures.systemImage, visualState: .warning, planRoute: .captureInbox),
-            PlanSecondaryDestination(id: "plan-weekly-review", title: "Weekly review", detail: "Close the current week by shaping carry-forward and unresolved capture pressure without leaving Plan.", valueLabel: "Tight", icon: "arrow.triangle.branch", visualState: .selected, planRoute: .weeklyReview)
+            PlanSecondaryDestination(id: "plan-weekly-review", title: "Weekly review", detail: "Close the current week by shaping carry-forward and unresolved capture pressure without leaving Time.", valueLabel: "Tight", icon: "arrow.triangle.branch", visualState: .selected, planRoute: .weeklyReview)
         ],
         emptyTitle: nil,
         emptyMessage: nil
@@ -422,8 +422,8 @@ enum PreviewPlanScenarios {
         mode: .empty,
         timeframeLabel: "Apr 20-Apr 26",
         hero: PlanRealityHeroState(
-            eyebrow: "Plan",
-            title: "Does this hold together?",
+            eyebrow: "Time",
+            title: "Shape Time",
             subtitle: "Plan stays calm until real goals, captures, or routines create week pressure worth shaping.",
             dominantTruth: "The week is mostly empty, which is useful information.",
             roomSummary: "All seven days are carrying visible room right now.",
@@ -506,9 +506,9 @@ enum PreviewPlanScenarios {
         ),
         calendarBoundary: PlanCalendarBoundaryContractState(
             title: "Calendar stays optional",
-            detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+            detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
             permissionLabel: "Optional",
-            sourceLabel: "Based on your plan",
+            sourceLabel: "Based on Time",
             manualFallback: "Manual planning still works without calendar access.",
             writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
             visualState: .default,
@@ -633,12 +633,12 @@ enum PreviewPlanScenarios {
         ),
         calendarAwareness: PlanCalendarAwarenessState(
             status: .baseline,
-            title: "Make Plan calendar-aware",
-            detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
-            primaryActionTitle: "Make Plan calendar-aware",
+            title: "Make Time calendar-aware",
+            detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+            primaryActionTitle: "Make Time calendar-aware",
             primaryActionSystemImage: "calendar.badge.plus",
             valueLabel: "Optional",
-            sourceLabel: "Based on your plan",
+            sourceLabel: "Based on Time",
             visualState: .default,
             canRequestCalendarRead: true
         ),
@@ -670,7 +670,7 @@ enum PreviewPlanScenarios {
             PlanSecondaryDestination(id: "plan-weekly-review", title: "Weekly review", detail: "Review stays available as the eventual closeout path for a real week.", valueLabel: "Open", icon: "arrow.triangle.branch", visualState: .default, planRoute: .weeklyReview)
         ],
         emptyTitle: "No weekly pressure yet",
-        emptyMessage: "As soon as goals, captures, or routines create real constraints, Plan will show where the week still has room."
+        emptyMessage: "As soon as goals, captures, or routines create real constraints, Time will show where the week still has room."
     )
 
     static let weeklyReview = WeeklyReviewDashboard(
@@ -696,7 +696,7 @@ enum PreviewPlanScenarios {
         ],
         captureSummary: "2 captures still need to be absorbed, attached, or intentionally parked.",
         habitSummary: "1 routine should support the next week without crowding it.",
-        returnActionTitle: "Return to Plan",
+        returnActionTitle: "Return to Time",
         returnActionSubtitle: "Use the reshaped week, then adjust one goal or support route only if it still needs help.",
         returnPlanRoute: nil,
         splitPaneContext: PlanWindowMagnetismState(
@@ -711,12 +711,12 @@ enum PreviewPlanScenarios {
     )
 
     private static let seededLifeSuite = PlanLifeSuiteState(
-        title: "Plan Life Suite",
-        subtitle: "Does this hold together?",
+        title: "Shape Time",
+        subtitle: "LifeShape Field shows what the week can hold.",
         shapes: [
-            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has tight room and three planned blocks.", facts: ["Tight room", "One open window", "3 planned blocks attached."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .warning),
+            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has tight room and three planned blocks.", facts: ["Tight room", "One open window", "3 planned blocks attached."], sourceLabel: "Based on Time", boundaryLabel: "No silent replanning", visualState: .warning),
             PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need shaping before the week feels believable.", facts: ["2 pressured days visible.", "2 captures need a place.", "7 days included in this week."], sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .warning),
-            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan still pointed at the life you are building?", summary: "Three active goals shape the current life plan.", facts: ["3 active goals included.", "Life Shape stays inside Plan."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .selected)
+            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time still pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included.", "Life Shape stays inside Time."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .selected)
         ],
         calendarBoundaryLabel: "Calendar stays optional",
         manualFallbackLabel: "Manual fallback available",
@@ -724,12 +724,12 @@ enum PreviewPlanScenarios {
     )
 
     private static let emptyLifeSuite = PlanLifeSuiteState(
-        title: "Plan Life Suite",
-        subtitle: "Does this hold together?",
+        title: "Shape Time",
+        subtitle: "LifeShape Field shows what the week can hold.",
         shapes: [
-            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "No day shape is loaded yet.", facts: ["Manual shaping is available.", "Nothing moves without review."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .default),
+            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "No day shape is loaded yet.", facts: ["Manual shaping is available.", "Nothing moves without review."], sourceLabel: "Based on Time", boundaryLabel: "No silent replanning", visualState: .default),
             PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "The week has room until goals, captures, or routines create real constraints.", facts: ["0 pressured days visible.", "0 captures need a place.", "7 days included in this week."], sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .selected),
-            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan still pointed at the life you are building?", summary: "Life Shape is quiet until active goals give Plan something to coordinate.", facts: ["No active goals shaping life view yet.", "Life Shape stays inside Plan."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .default)
+            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time still pointed at the life you are building?", summary: "Life Shape is quiet until active goals give Time something to shape.", facts: ["No active goals shaping life view yet.", "Life Shape stays inside Time."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .default)
         ],
         calendarBoundaryLabel: "Manual planning still works",
         manualFallbackLabel: "Manual fallback available",

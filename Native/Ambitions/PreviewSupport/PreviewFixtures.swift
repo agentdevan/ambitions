@@ -206,7 +206,7 @@ struct PreviewFixtures: Sendable {
                 items: [
                     InsightsReviewConstellationItem(id: "preview-constellation-1", title: "Close the hardening pass", summary: "This goal has visible evidence this week, which keeps its current path grounded in real follow-through.", signalLabel: "Believable", visualState: .success, goalTarget: GoalRouteTarget(goalID: "goal-native"), planRoute: nil),
                     InsightsReviewConstellationItem(id: "preview-constellation-2", title: "Retention loop", summary: "Recent friction suggests the current version of the work needs a smaller or clearer next step.", signalLabel: "Adjusting", visualState: .selected, goalTarget: GoalRouteTarget(goalID: "goal-growth"), planRoute: nil),
-                    InsightsReviewConstellationItem(id: "preview-constellation-3", title: "The week needs a calmer shape", summary: "Open Plan to remove pressure, protect what still fits, and keep reflection attached to the real week.", signalLabel: "Shape next", visualState: .warning, goalTarget: nil, planRoute: .weeklyReview)
+                    InsightsReviewConstellationItem(id: "preview-constellation-3", title: "The week needs a calmer shape", summary: "Open Time to remove pressure, protect what still fits, and keep reflection attached to the real week.", signalLabel: "Shape next", visualState: .warning, goalTarget: nil, planRoute: .weeklyReview)
                 ]
             ),
             historyLayer: InsightsHistoryLayerState(

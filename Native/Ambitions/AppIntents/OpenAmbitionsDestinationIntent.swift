@@ -357,10 +357,10 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .plan),
             phrases: [
-                "Open Plan in \(.applicationName)",
+                "Open Time in \(.applicationName)",
                 "Show Plan in \(.applicationName)",
             ],
-            shortTitle: "Open Plan",
+            shortTitle: "Open Time",
             systemImageName: "calendar.badge.clock"
         )
         AppShortcut(

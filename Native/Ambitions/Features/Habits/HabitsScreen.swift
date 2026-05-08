@@ -48,7 +48,7 @@ struct HabitsScreen: View {
                                 .foregroundStyle(theme.colors.textSecondary)
 
                             HStack(spacing: theme.spacing.sm) {
-                                Button("Return to Plan") {
+                                Button("Return to Time") {
                                     container.navigation.resetPlanPath()
                                 }
                                 .buttonStyle(.bordered)
