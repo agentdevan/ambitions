@@ -17,10 +17,10 @@ Date: 2026-05-08
   Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
   AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, and AFI08
   Capture Atmosphere Composer, AFI09 Time LifeShape Field, AFI10 You User
-  System Profile, AFI11 Trust Seam And Receipts, and AFI12 Accessibility And
-  State Proof are complete / Accepted Yellow under the active AFI insertion
-  overlay.
-  AFI13 Visual QA And Drift Gallery is the next eligible global batch.
+  System Profile, AFI11 Trust Seam And Receipts, AFI12 Accessibility And
+  State Proof, and AFI13 Visual QA And Drift Gallery are complete / Accepted
+  Yellow under the active AFI insertion overlay.
+  AFI14 Cross-Surface Coherence Review is the next eligible global batch.
   PK01-PK41 remain active planned Platform Kernel scope
   but must not outrun AFI unless registry evidence proves a minimum safety
   prerequisite.
@@ -54,4 +54,4 @@ proof.
 
 ## Next Eligible
 
-AFI13 Visual QA And Drift Gallery.
+AFI14 Cross-Surface Coherence Review.

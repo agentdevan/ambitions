@@ -20,8 +20,8 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   AFI05 Shell And Continuity Chrome, AFI06 Today Reality Meridian, AFI07
   Goals Constellation Atlas, AFI08 Capture Atmosphere Composer, AFI09 Time
   LifeShape Field, AFI10 You User System Profile, AFI11 Trust Seam And
-  Receipts, and AFI12 Accessibility And State Proof are complete / Accepted
-  Yellow. AFI13 Visual QA And Drift Gallery is the next eligible global batch unless a specific minimum
+  Receipts, AFI12 Accessibility And State Proof, and AFI13 Visual QA And Drift
+  Gallery are complete / Accepted Yellow. AFI14 Cross-Surface Coherence Review is the next eligible global batch unless a specific minimum
   prerequisite is proven.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific

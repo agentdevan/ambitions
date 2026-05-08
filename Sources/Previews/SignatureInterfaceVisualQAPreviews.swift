@@ -22,6 +22,24 @@ struct SignatureInterfaceVisualQAPreviewGallery: View {
                         fixtureTile(fixture)
                     }
                 }
+
+                SectionHeader(
+                    eyebrow: "AFI13",
+                    title: "Visual QA And Drift Gallery",
+                    subtitle: "Scorecard targets and pass/fail drift examples for Today, Goals, Capture, Time, and You. Rendered proof remains Yellow until screenshots and human visual review exist."
+                )
+
+                LazyVGrid(columns: columns, alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(AFI13VisualQACatalog.scorecards) { entry in
+                        scorecardTile(entry)
+                    }
+                }
+
+                LazyVGrid(columns: columns, alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(AFI13VisualQACatalog.driftGallery) { example in
+                        driftTile(example)
+                    }
+                }
             }
             .padding(theme.spacing.lg)
         }
@@ -67,6 +85,78 @@ struct SignatureInterfaceVisualQAPreviewGallery: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(fixture.previewName). \(fixture.accessibilityNote)")
         .accessibilityValue(fixture.reduceMotionNote)
+    }
+
+    private func scorecardTile(_ entry: AFI13VisualQAScorecardEntry) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                AmbitionsStatusSymbol(.needsReview, style: .inline)
+
+                Text(entry.status)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+
+            Text(entry.surface)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(entry.primaryObject)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text("Target \(entry.targetScore), minimum \(entry.minimumScore)")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.md)
+        .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.64))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(entry.surface). \(entry.primaryObject). \(entry.status). \(entry.yellowReason)")
+        .accessibilityValue("Target \(entry.targetScore), minimum \(entry.minimumScore).")
+    }
+
+    private func driftTile(_ example: AFI13VisualDriftGalleryExample) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text(example.category)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(example.passPattern)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(example.failPattern)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.md)
+        .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.48))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(example.category). Pass: \(example.passPattern). Fail: \(example.failPattern).")
+        .accessibilityValue(example.redLabel)
     }
 }
 

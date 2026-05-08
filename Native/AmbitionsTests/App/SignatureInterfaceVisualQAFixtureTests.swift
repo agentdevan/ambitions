@@ -84,4 +84,69 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
             )
         }
     }
+
+    func testAFI13VisualQAScorecardsLockActiveSurfaceTargetsWithoutClaims() {
+        XCTAssertEqual(AFI13VisualQACatalog.ownerBatch, "AFI13")
+        XCTAssertEqual(
+            AFI13VisualQACatalog.activeTopLevelSurfaces,
+            ["Today", "Goals", "Capture", "Time", "You"]
+        )
+        XCTAssertFalse(AFI13VisualQACatalog.containsPlanTopLevelSurface)
+        XCTAssertFalse(AFI13VisualQACatalog.changesRuntimeBehavior)
+        XCTAssertFalse(AFI13VisualQACatalog.claimsRenderedScreenshotProof)
+        XCTAssertFalse(AFI13VisualQACatalog.claimsHumanVisualApproval)
+        XCTAssertFalse(AFI13VisualQACatalog.claimsDeviceProof)
+        XCTAssertFalse(AFI13VisualQACatalog.claimsAccessibilityConformance)
+
+        XCTAssertEqual(
+            AFI13VisualQACatalog.scorecards.map(\.surface),
+            AFI13VisualQACatalog.activeTopLevelSurfaces
+        )
+        XCTAssertEqual(
+            Set(AFI13VisualQACatalog.missingGreenProofSurfaces),
+            Set(AFI13VisualQACatalog.activeTopLevelSurfaces)
+        )
+
+        for entry in AFI13VisualQACatalog.scorecards {
+            XCTAssertGreaterThanOrEqual(entry.minimumScore, 95)
+            XCTAssertGreaterThanOrEqual(entry.targetScore, entry.minimumScore)
+            if entry.surface == "Today" || entry.surface == "Capture" {
+                XCTAssertEqual(entry.targetScore, 98)
+            }
+            XCTAssertFalse(entry.requiredRenderedInventory.isEmpty)
+            XCTAssertFalse(entry.hardRedDriftExamples.isEmpty)
+            XCTAssertEqual(entry.status, "Yellow")
+            XCTAssertTrue(entry.isBlockedFromGreen)
+            XCTAssertFalse(entry.hasRenderedScreenshotProof)
+            XCTAssertFalse(entry.primaryObject.localizedCaseInsensitiveContains("Plan"))
+        }
+    }
+
+    func testAFI13VisualDriftGalleryCarriesPassAndFailExamples() {
+        let categories = Set(AFI13VisualQACatalog.driftGallery.map(\.category))
+        let required: Set<String> = [
+            "Native shell",
+            "Celestial Field",
+            "Graphite Recess",
+            "Luminous Trace",
+            "Quiet Glass",
+            "Today",
+            "Goals",
+            "Capture",
+            "Time",
+            "You",
+            "Trust",
+            "Continuity Dock"
+        ]
+
+        XCTAssertTrue(required.isSubset(of: categories), "Missing categories: \(required.subtracting(categories))")
+
+        for example in AFI13VisualQACatalog.driftGallery {
+            XCTAssertFalse(example.passPattern.isEmpty)
+            XCTAssertFalse(example.failPattern.isEmpty)
+            XCTAssertTrue(example.redLabel == "Yellow: adjacent drift" || example.redLabel.hasPrefix("Red: "))
+            XCTAssertFalse(example.passPattern.localizedCaseInsensitiveContains("dashboard"))
+            XCTAssertFalse(example.passPattern.localizedCaseInsensitiveContains("chatbot"))
+        }
+    }
 }

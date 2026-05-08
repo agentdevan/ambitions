@@ -9,10 +9,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "AFI12 Accessibility And State Proof"
-  previous_batch: "AFI11 Trust Seam And Receipts"
+  batch: "AFI13 Visual QA And Drift Gallery"
+  previous_batch: "AFI12 Accessibility And State Proof"
   previous_result: "Accepted Yellow"
-  next_eligible_batch: "AFI13 Visual QA And Drift Gallery"
+  next_eligible_batch: "AFI14 Cross-Surface Coherence Review"
 codex_os_override:
   active_pass: "AFI implementation lane"
   app_feature_implementation_allowed: true
