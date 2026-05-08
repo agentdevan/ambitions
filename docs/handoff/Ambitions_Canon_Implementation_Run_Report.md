@@ -158,13 +158,13 @@ None from the touched package scope.
 
 - Resumed after AmbitionsCanon Phase 1-5 report update.
 - Next eligible batch before resume: LDI13 Today Bridge And Action Closure by `.codex/reports/current-batch-train-state.md`, `.codex/reports/current-run-state.md`, `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, and `docs/codex/BATCH_REGISTRY.md`.
-- Batches completed during resume: LDI13 Today Bridge And Action Closure, Green with non-blocking Yellow advisories.
-- Batches parked Yellow during resume: LDI14 remains the next unproven LDI trust receipt layer; future Today UI wiring remains out of scope for LDI13.
-- Validation during resume: `xcodegen generate` passed; focused `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' -only-testing:AmbitionsTests/AmbitionsOSLivingDreamTodayBridgeModelsTests` passed with 7 tests and 0 failures after a local test-helper repair.
+- Batches completed during resume: LDI13 Today Bridge And Action Closure and LDI14 Trust Review And Dream Handling Receipts, both Green with non-blocking Yellow advisories.
+- Batches parked Yellow during resume: LDI15 remains the next unproven LDI local recompiler layer; future Today/Trust UI wiring remains out of scope for LDI13-LDI14.
+- Validation during resume: `xcodegen generate` passed; focused `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' -only-testing:AmbitionsTests/AmbitionsOSLivingDreamTodayBridgeModelsTests` passed with 7 tests and 0 failures after a local test-helper repair; focused `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' -only-testing:AmbitionsTests/AmbitionsOSLivingDreamTrustReceiptModelsTests` passed with 7 tests and 0 failures after one fixture repair.
 - Train complete: not claimed.
 
 ## Next Recommended Safe Step
 
 ```text
-LDI14 Trust Review And Dream Handling Receipts
+LDI15 Living Plan Recompiler
 ```
