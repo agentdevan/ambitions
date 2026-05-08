@@ -9,6 +9,7 @@ Current repo posture:
 - `docs/status/release-evidence-packet.md` is current validation/release-evidence truth.
 - Validation is local VM/Mac only. There is no active hosted CI workflow.
 - Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, `.codex`, and `.agents` material is retained as history, operating context, or stricter proof gates where compatible. It is not the public repo front door.
+- EFC is an active peak-proof overlay for unfinished planned work. It does not replace the active batch, implement product behavior by itself, or authorize release/platform claims.
 
 ## Required read order
 
@@ -27,19 +28,24 @@ For product, visual, shell, chrome, IA, Signature Object, trust, accessibility, 
 
 For Codex OS, batch-train, or long-run governance work, additionally read:
 
+- `.codex/state/active-batch.yml` before any write, and re-read it before updating train-state files
 - `docs/codex/CONTEXT_INDEX.md`
 - `docs/codex/BATCH_REGISTRY.md`
+- `docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md`
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md`
+- `docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`
 - `docs/codex/CODEX_OS_INDEX.md`
 - `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` when the active model tier, Mini/Senior alias, or autonomous batch-train continuation matters
 - `docs/codex/MODEL_TIER_BATCH_MATRIX.md` when classifying remaining batch families for Mini/Senior routing
 - `.codex/README.md`
 - the selected route or batch manifest
 
-For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md` and continue from repo evidence.
+For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `.codex/state/active-batch.yml`, and the EFC overlay files before continuing from repo evidence.
 
-For `resume mini global batch train`, immediately read `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, and `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`. Mini may execute bounded batches, but must defer or stop on senior-only gates.
+For `resume mini global batch train`, immediately read `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, and the EFC overlay files. Mini may execute bounded batches, but must defer or stop on senior-only gates.
 
-For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, and `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`. Senior resolves model-tier deferrals and owns judgment-heavy gates.
+For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, and the EFC overlay files. Senior resolves model-tier deferrals and owns judgment-heavy gates.
 
 ## Source-truth rules
 
@@ -49,6 +55,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - The current implementation map decides what is implemented, scaffolded, planned, historical, or unproven.
 - The release evidence packet decides validation and release claim language.
 - `BATCH_REGISTRY.md` decides operational batch status only.
+- `EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`, `BATCH_REGISTRY_EFC_OVERLAY.md`, and `GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md` decide peak proof obligations for unfinished work where compatible with active batch state.
 - Historical docs may remain useful, but they do not override the current front-door/status files.
 - Do not treat docs-only plans as shipped behavior.
 
@@ -65,6 +72,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - Do not implement product features in docs/tooling passes unless the tooling itself requires a narrow test or compatibility fix.
 - During Codex OS / developer-tooling / governance passes, do not implement app features, refactor SwiftUI source, modify product IA, or add runtime app dependencies.
 - Do not add hosted CI unless a future patch explicitly records provider, cost model, billing/quota risk, triggers, artifact retention, owner approval, and release-claim limits.
+- Do not treat EFC as approval for hosted AI, user-data servers, telemetry, analytics, productivity scoring, shame/streak mechanics, silent mutation, or release claims.
 
 ## Architecture boundaries
 
@@ -79,7 +87,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 
 ## Execution rules
 
-- Start non-trivial work by checking repo status, current docs, and the target code paths.
+- Start non-trivial work by checking repo status, current docs, active batch state, and the target code paths.
 - Use the smallest safe touch budget. Name primary files before edits.
 - Prefer deterministic, additive, compatibility-safe changes.
 - Do not silently rewrite product strategy, IA, naming, release posture, or roadmap structure.
@@ -91,6 +99,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, release readiness, CI proof, or legal/privacy approval without matching evidence.
 - Use repo-local Codex operating docs and scripts under `.codex/`, `docs/codex/`, and `scripts/ai/` only as operating context; they do not override source code, raw logs, current implementation status, or release evidence status.
 - When using a Mini-tier or unknown-tier model, follow `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` and `docs/codex/MODEL_TIER_BATCH_MATRIX.md`. Mini is execution-only for bounded batches; senior-only gates must be deferred or stopped, not guessed through.
+- After EFC insertion, every batch report must state EFC applicability: invoked, not applicable, or accepted Yellow with owner.
 
 ## Local validation
 
@@ -115,6 +124,8 @@ Local simulator evidence is not signed archive proof, TestFlight proof, App Stor
 
 ## Batch train rule
 
-For multi-batch execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` and `docs/codex/MODEL_TIER_BATCH_MATRIX.md` when model tier matters, and the selected manifest under `docs/codex/batch-trains/`.
+For multi-batch execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `.codex/state/active-batch.yml`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, the EFC overlay files, and the selected manifest under `docs/codex/batch-trains/`.
 
 Continue automatically through Green and accepted Yellow only when owner, safety reason, and no-claim boundary are recorded. Hard Red stops. Mini may additionally defer non-blocking senior-only batches to `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`; Senior must resolve blocking deferrals before closeout.
+
+After EFC00, continuation also requires an EFC applicability note for every batch that touches user-facing behavior, user data, intelligence, source/freshness, side effects, accessibility, performance, release posture, or public claims.
