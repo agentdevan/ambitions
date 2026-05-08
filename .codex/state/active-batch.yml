@@ -9,10 +9,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "AFI16 Release-Claim Safety Review"
-  previous_batch: "AFI15 Founder Acceptance Review"
+  batch: "PK01 Package/Module Boundary Scaffold"
+  previous_batch: "AFI16 Release-Claim Safety Review"
   previous_result: "Accepted Yellow"
-  next_eligible_batch: "PK01 Package/Module Boundary Scaffold"
+  next_eligible_batch: "PK02 Architecture Boundary Scanner"
 codex_os_override:
   active_pass: "AFI implementation lane"
   app_feature_implementation_allowed: true

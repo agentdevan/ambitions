@@ -13,7 +13,7 @@ Date: 2026-05-08
 | Sync readiness is architectural only. | Open Yellow | PK29-PK31 | No sync-ready, cloud-ready, or conflict-safe claim until revisions, tombstones, conflict policy, and manual merge proof exist. |
 | Intelligence output must stay claim-bounded. | Open Yellow | PK32-PK34 | No AI-ready or autonomous-intelligence claim; quarantine uncertain/generated intelligence until PK proof exists. |
 | Performance scale has not been PK-budget-proven. | Open Yellow | PK35-PK37 | No performance-budget-proven claim until large-store fixtures, budgets, and cache invalidation proof exist. |
-| Package/module moves can destabilize builds. | Open Yellow | PK01-PK41 | PK01 is queued; no package-split claim until scaffold, scanner, and focused builds pass. |
+| Package/module moves can destabilize builds. | Scaffolded Yellow | PK02-PK41 | PK01 boundary scaffold exists; no package-split claim until PK02 scanner and later focused builds pass. |
 | Pre-sync stash contains source-truth conflicts. | Parked Yellow | Repo steward / sequencing reconciliation | Stash remains preserved and unapplied; do not drop it until a future reconciliation confirms every useful piece is merged or obsolete. |
 
 Hard Red entries: none recorded by PK integration as of 2026-05-08.
@@ -29,8 +29,8 @@ package split safety.
 
 ## AFI / PK Ordering Finding
 
-After AFI correction, PK is active planned Platform Kernel scope, but PK01-PK41
-are not registry-proven minimum prerequisites for AFI01 Canon Language Purge or
-AFI02 IA Hierarchy Lock. PK00 remains useful safety baseline evidence. Further
-PK work must not outrun AFI unless a later registry/report proves that specific
-PK batch is a minimum safety prerequisite for the active AFI batch.
+AFI01-AFI16 are complete / Accepted Yellow. PK01 now starts the Platform
+Kernel safety ladder before applicable LDI/backend/platform, mutation, sync,
+migration, intelligence, package split, or major expansion work. PK00 remains
+useful safety baseline evidence, and PK01 adds docs-only module-boundary
+scaffold evidence without moving code.

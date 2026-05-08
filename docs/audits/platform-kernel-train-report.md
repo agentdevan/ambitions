@@ -9,37 +9,34 @@ Status: Active
 ## Current Closeout
 
 Result: Accepted Yellow
-Batch: AFI16 Release-Claim Safety Review
+Batch: PK01 Package/Module Boundary Scaffold
 Commit: pending
-Files changed: AFI release-claim safety table, audit report, handoff, and
-train-state docs.
-Behavior changed: no app behavior changed. AFI16 records that AFI completion
-does not imply production, release, accessibility, device, privacy/legal, CI,
-backend, sync, migration, or performance readiness.
+Files changed: PK01 module-boundary scaffold, batch file, audit report, risk
+register, and train-state docs.
+Behavior changed: no app behavior changed. PK01 records future package/module
+boundaries and PK02 scanner requirements without moving code.
 Tests run: `git diff --check`;
 `python3 scripts/ai/acx_impact.py $(git diff --name-only)`;
 `python3 scripts/ai/acx_local.py bundle docs`;
 `python3 scripts/ai/acx_local.py bundle batch-closeout`;
 `python3 scripts/ai/acx_repair.py diagnose`; and
 `scripts/global-train-next-batch.sh`.
-Tests not run: human founder acceptance review, rendered visual review, full
-UI test suite, manual accessibility traversal, physical-device proof, signed
-archive proof, and hosted CI.
+Tests not run: `xcodegen generate`, app build, focused unit tests, package
+split build proof, physical-device proof, signed archive proof, and hosted CI.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
-Yellows carried: PK01-PK41 remain active planned scope but are paused behind
-AFI unless a specific PK prerequisite is proven; transaction safety,
+Yellows carried: PK02-PK41 remain active planned scope; transaction safety,
 migration/backup/rollback, side-effect isolation, sync readiness, intelligence
-quarantine, and performance budgets are not PK-proven yet. Founder acceptance,
-rendered visual approval, manual accessibility proof, device proof, signed
-archive proof, hosted CI, and release readiness remain Yellow/unproven. The
-pre-sync stash remains preserved and unapplied.
-Rollback path: revert the AFI16 implementation commit.
+quarantine, package split safety, and performance budgets are not PK-proven
+yet. Founder acceptance, rendered visual approval, manual accessibility proof,
+device proof, signed archive proof, hosted CI, and release readiness remain
+Yellow/unproven. The pre-sync stash remains preserved and unapplied.
+Rollback path: revert the PK01 implementation commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
-AFI16 release-claim safety evidence is recorded.
+PK01 boundary scaffold evidence is recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: PK01 Package/Module Boundary Scaffold.
+Next eligible batch: PK02 Architecture Boundary Scanner.
 
 ## Completed
 
@@ -49,10 +46,8 @@ Next eligible batch: PK01 Package/Module Boundary Scaffold.
 
 ## Active / Next
 
-- PK01 Package/Module Boundary Scaffold is next eligible.
-- PK01-PK41 remain queued active planned Platform Kernel scope, but no PK batch
-  after PK00 is treated as a prerequisite for AFI unless a later owner report
-  proves the dependency.
+- PK02 Architecture Boundary Scanner is next eligible.
+- PK02-PK41 remain queued active planned Platform Kernel scope.
 
 ## Parked Yellows
 

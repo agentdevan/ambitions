@@ -23,18 +23,19 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Receipts, AFI12 Accessibility And State Proof, AFI13 Visual QA And Drift
   Gallery, AFI14 Cross-Surface Coherence Review, AFI15 Founder Acceptance
   Review, and AFI16 Release-Claim Safety Review are complete / Accepted
-  Yellow. PK01 Package/Module Boundary Scaffold is the next eligible global
-  batch unless repo evidence shows a dirty or half-complete active batch must
-  close first.
+  Yellow. PK00 is complete / Green, and PK01 Package/Module Boundary Scaffold
+  is complete / Accepted Yellow as docs-only module-boundary scaffold evidence.
+  PK02 Architecture Boundary Scanner is the next eligible global batch unless
+  repo evidence shows a dirty or half-complete active batch must close first.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific
   gates before any production app, platform, persistence, sync, legal/privacy,
   or release claim work.
 - PK00-PK41 Platform Kernel is active planned scope for local backend/platform
   hardening. PK00 Current Backend Proof Baseline is complete / Green with
-  accepted Yellow follow-ups as a report-only backend/platform baseline. PK01-
-  PK41 remain queued active planned scope, but must not outrun AFI unless a
-  specific PK batch is registry-proven as a minimum safety prerequisite. PK
+  accepted Yellow follow-ups as a report-only backend/platform baseline. PK01
+  is complete / Accepted Yellow as a boundary scaffold. PK02-PK41 remain queued
+  active planned scope. PK
   supersedes older backend/platform sequencing where dependency order
   conflicts, but it does not claim backend completion, migration safety, sync
   readiness, privacy compliance, CI green, performance proof, or release
