@@ -1,197 +1,96 @@
 # Ambitions Docs
 
-This folder contains product, canon, implementation, build, and release documentation for the native SwiftUI Ambitions app.
-
-Ambitions 3.0 is the active rebuild documentation system.
-
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [canon/Ambitions_4_0_Execution_Program.md](canon/Ambitions_4_0_Execution_Program.md) for queued/blocked batch semantics and the 113-batch global execution order after SI insertion.
-
-> Source-truth update: For future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work, start with [AmbitionsCanon/README.md](AmbitionsCanon/README.md). Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible, but they do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist.
-
----
+This folder contains product, canon, implementation, build, release, audit, and Codex documentation for the native SwiftUI Ambitions app.
 
 ## Start here
 
-Use this read order for non-trivial product, design, roadmap, language, privacy, accessibility, QA, or implementation work:
+Use this read order for current work:
 
-1. [canon/Ambitions_3_0_Source_Of_Truth_Override.md](canon/Ambitions_3_0_Source_Of_Truth_Override.md)
-2. [canon/Ambitions_3_0_Front_End_Redesign_Index.md](canon/Ambitions_3_0_Front_End_Redesign_Index.md)
-3. [canon/Ambitions_3_0_Rebuild_Operating_Model.md](canon/Ambitions_3_0_Rebuild_Operating_Model.md)
-4. [canon/Ambitions_3_0_Documentation_System_Index.md](canon/Ambitions_3_0_Documentation_System_Index.md)
-5. [canon/Ambitions_3_0_Primitive_Architecture.md](canon/Ambitions_3_0_Primitive_Architecture.md)
-6. [canon/Ambitions_3_0_Product_Language_System.md](canon/Ambitions_3_0_Product_Language_System.md)
-7. The target primitive, surface, state-machine, privacy, accessibility, QA, or release doc.
+1. [AmbitionsCanon/README.md](AmbitionsCanon/README.md) — active product and design source truth.
+2. [status/current-implementation-map.md](status/current-implementation-map.md) — current implemented, scaffolded, planned, and historical status.
+3. [status/repo-cleanup-index.md](status/repo-cleanup-index.md) — cleanup, quarantine, and hosted-CI cost policy.
+4. [status/release-evidence-packet.md](status/release-evidence-packet.md) — local validation and release evidence posture.
+5. [native-build-and-release.md](native-build-and-release.md) — local VM/Mac build, test, archive, and release-validation workflow.
+6. [../AGENTS.md](../AGENTS.md) — AI/Codex contributor rules.
 
-Use [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md) for implementation status truth.
+## Current posture
 
-Older docs are supporting context unless an active Ambitions 3.0 doc explicitly keeps them binding for a domain that 3.0 does not replace.
+- The current app is the native SwiftUI target under `Native/Ambitions/`.
+- The app is local-first / on-device first where implemented.
+- Validation is local VM/Mac validation only.
+- There is no active hosted CI workflow in this repo.
+- The repo no longer has an active TypeScript / Expo / React Native runtime path.
+- Sync, auth, account backend flows, TestFlight readiness, App Store readiness, physical-device proof, public accessibility conformance, legal/privacy signoff, and human release approval are not current claims.
 
----
+## Active source-truth package
 
-## Active Ambitions 3.0 documentation system
+Use [AmbitionsCanon/README.md](AmbitionsCanon/README.md) for future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work.
 
-### Source / parent / governance
+Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible. They do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist.
 
-- [Ambitions_3_0_Source_Of_Truth_Override.md](canon/Ambitions_3_0_Source_Of_Truth_Override.md)
-- [Ambitions_3_0_Front_End_Redesign_Index.md](canon/Ambitions_3_0_Front_End_Redesign_Index.md)
-- [Ambitions_3_0_Rebuild_Operating_Model.md](canon/Ambitions_3_0_Rebuild_Operating_Model.md)
-- [Ambitions_3_0_Documentation_System_Index.md](canon/Ambitions_3_0_Documentation_System_Index.md)
-- [Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md](canon/Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md)
-- [Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md](canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md)
-- [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
-- [Ambitions_3_0_As_Current_Baseline_Policy.md](canon/Ambitions_3_0_As_Current_Baseline_Policy.md)
-- [Ambitions_3_0_Human_Made_Codebase_Standard.md](canon/Ambitions_3_0_Human_Made_Codebase_Standard.md)
-- [Ambitions_3_0_Active_History_Archive_Policy.md](canon/Ambitions_3_0_Active_History_Archive_Policy.md)
-- [Ambitions_4_0_Execution_Program.md](canon/Ambitions_4_0_Execution_Program.md)
-- [Ambitions_Beyond_3_0_Roadmap.md](canon/Ambitions_Beyond_3_0_Roadmap.md)
-- [Ambitions_Product_Experience_OS_Index.md](canon/Ambitions_Product_Experience_OS_Index.md) - future PXOS user-facing product experience canon
+## Status and evidence docs
 
-### Strategy / product management
+- [status/current-implementation-map.md](status/current-implementation-map.md)
+- [status/repo-cleanup-index.md](status/repo-cleanup-index.md)
+- [status/release-evidence-packet.md](status/release-evidence-packet.md)
 
-- [Ambitions_3_0_Product_Strategy_Brief.md](canon/Ambitions_3_0_Product_Strategy_Brief.md)
-- [Ambitions_3_0_North_Star_And_Product_Metrics.md](canon/Ambitions_3_0_North_Star_And_Product_Metrics.md)
-- [Ambitions_3_0_Competitive_Positioning_And_Language_Research.md](canon/Ambitions_3_0_Competitive_Positioning_And_Language_Research.md)
-- [Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md)
-- [Ambitions_3_0_Current_Implementation_Gap_Audit.md](canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md)
-- [Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md](canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
-
-### Product architecture / IA
-
-- [Ambitions_3_0_Primitive_Architecture.md](canon/Ambitions_3_0_Primitive_Architecture.md)
-- [Ambitions_3_0_Information_Architecture_And_Routing_Model.md](canon/Ambitions_3_0_Information_Architecture_And_Routing_Model.md)
-- [Ambitions_3_0_Top_Level_Surface_Density_Constitution.md](canon/Ambitions_3_0_Top_Level_Surface_Density_Constitution.md)
-- [Ambitions_3_0_Ambitions_Operating_Shell.md](canon/Ambitions_3_0_Ambitions_Operating_Shell.md)
-- [Ambitions_3_0_Plan_Life_Suite_Endgame.md](canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md)
-
-### UI / design system
-
-- [Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md](canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md)
-- [Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md](canon/Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md)
-- [Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md](canon/Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md)
-- [Ambitions_3_0_Design_System_Primitives.md](canon/Ambitions_3_0_Design_System_Primitives.md)
-- [Ambitions_3_0_Screenshot_Readiness_Spec.md](canon/Ambitions_3_0_Screenshot_Readiness_Spec.md)
-- [Ambitions_3_0_First_60_Seconds_Spec.md](canon/Ambitions_3_0_First_60_Seconds_Spec.md)
-
-### Golden Launch Loop / contracts
-
-- [Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md](canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
-- [Ambitions_3_0_UI_Invention_Upgrade_Bank.md](canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md)
-- [Ambitions_3_0_Universal_Object_Lifecycle_Contract.md](canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md)
-- [Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md](canon/Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md)
-- [Ambitions_3_0_Surface_State_Matrix.md](canon/Ambitions_3_0_Surface_State_Matrix.md)
-- [Ambitions_3_0_Placement_Resolver_Spec.md](canon/Ambitions_3_0_Placement_Resolver_Spec.md)
-- [Ambitions_3_0_Action_Closure_Sheet_Spec.md](canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md)
-- [Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md](canon/Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md)
-
-### Language / content
-
-- [Ambitions_3_0_Product_Language_System.md](canon/Ambitions_3_0_Product_Language_System.md)
-- [Ambitions_3_0_Microcopy_Pattern_Library.md](canon/Ambitions_3_0_Microcopy_Pattern_Library.md)
-- [Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md](canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md)
-- [Ambitions_3_0_Content_QA_And_Copy_Guard.md](canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md)
-- [Ambitions_3_0_Migration_And_Deprecation_Plan.md](canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md)
-- [Ambitions_3_0_Launch_Narrative_And_Demo_Script.md](canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md)
-
-### Engineering / data / AI
-
-- [Ambitions_3_0_State_Machines_And_Domain_Flows.md](canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md)
-- [Ambitions_3_0_Recommendation_Contract.md](canon/Ambitions_3_0_Recommendation_Contract.md)
-- [Ambitions_3_0_Recommendation_Eligibility_Engine.md](canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md)
-- [Ambitions_3_0_Evidence_Hierarchy.md](canon/Ambitions_3_0_Evidence_Hierarchy.md)
-- [Ambitions_3_0_Data_Event_Taxonomy.md](canon/Ambitions_3_0_Data_Event_Taxonomy.md)
-- [Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md](canon/Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md)
-- [Ambitions_3_0_Personalization_Consent_Model.md](canon/Ambitions_3_0_Personalization_Consent_Model.md)
-
-### QA / privacy / accessibility / research
-
-- [Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md](canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md)
-- [Ambitions_3_0_Privacy_Threat_Model.md](canon/Ambitions_3_0_Privacy_Threat_Model.md)
-- [Ambitions_3_0_Accessibility_Conformance_Plan.md](canon/Ambitions_3_0_Accessibility_Conformance_Plan.md)
-- [Ambitions_3_0_UX_Research_Plan.md](canon/Ambitions_3_0_UX_Research_Plan.md)
-
----
-
-## Supporting older canon
-
-Some older canon remains binding only where Ambitions 3.0 does not replace it. Use the 3.0 source override and documentation system index to decide priority before relying on older docs.
-
-Older docs that still commonly matter for domains not fully replaced by 3.0 include:
-
-- [canon/DOMAIN_MODEL.md](canon/DOMAIN_MODEL.md)
-- [canon/TRUST_PRIVACY_MEMORY.md](canon/TRUST_PRIVACY_MEMORY.md)
-- [canon/DATA_LOCAL_SYNC_EXPORT.md](canon/DATA_LOCAL_SYNC_EXPORT.md)
-- [canon/IMPLEMENTATION_ACCEPTANCE_GATES.md](canon/IMPLEMENTATION_ACCEPTANCE_GATES.md)
-- [canon/ROADMAP_BATCH_GOVERNANCE.md](canon/ROADMAP_BATCH_GOVERNANCE.md)
-
-Archived and superseded material is indexed from [archive/README.md](archive/README.md).
-
----
-
-## Native build, release, and Codex docs
+## Native build and release docs
 
 - [native-build-and-release.md](native-build-and-release.md)
-- [handoff/Ambitions_3_0_FAANG_Engineer_Handoff.md](handoff/Ambitions_3_0_FAANG_Engineer_Handoff.md)
-- [handoff/Ambitions_3_0_Architecture_Map.md](handoff/Ambitions_3_0_Architecture_Map.md)
 - [handoff/Ambitions_3_0_Testing_And_Release_Proof.md](handoff/Ambitions_3_0_Testing_And_Release_Proof.md)
 - [marketing/Ambitions_3_0_App_Store_Truth_Packet.md](marketing/Ambitions_3_0_App_Store_Truth_Packet.md)
-- [marketing/Ambitions_3_0_Demo_Script.md](marketing/Ambitions_3_0_Demo_Script.md)
-- [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
-- [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md)
-- [codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md](codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md)
 - [codex/Launch_Operator_Runbook.md](codex/Launch_Operator_Runbook.md)
 - [codex/Release_Candidate_Review_Checklist.md](codex/Release_Candidate_Review_Checklist.md)
 
----
+These files are useful only to the extent their claims match the current release evidence packet.
 
-## Current baseline and history posture
+## Product/design canon package
 
-Ambitions 3.0 is the current product baseline. Active docs should describe the product directly, not as a migration from older launches, older tabs, older shell models, or older batch programs.
+- [AmbitionsCanon/Ambitions_Design_System.md](AmbitionsCanon/Ambitions_Design_System.md)
+- [AmbitionsCanon/00_Canon_Index_10_10_Maturity_Gate.md](AmbitionsCanon/00_Canon_Index_10_10_Maturity_Gate.md)
+- [AmbitionsCanon/01_Product_Canon.md](AmbitionsCanon/01_Product_Canon.md)
+- [AmbitionsCanon/02_Continuity_Layer_Chrome.md](AmbitionsCanon/02_Continuity_Layer_Chrome.md)
+- [AmbitionsCanon/03_Signature_Object_Specs.md](AmbitionsCanon/03_Signature_Object_Specs.md)
+- [AmbitionsCanon/04_Trust_Privacy_Automation.md](AmbitionsCanon/04_Trust_Privacy_Automation.md)
+- [AmbitionsCanon/05_Accessibility_Motion_Performance.md](AmbitionsCanon/05_Accessibility_Motion_Performance.md)
+- [AmbitionsCanon/06_QA_Preview_Visual_Drift.md](AmbitionsCanon/06_QA_Preview_Visual_Drift.md)
+- [AmbitionsCanon/07_Native_Shell_Tokens_Materials.md](AmbitionsCanon/07_Native_Shell_Tokens_Materials.md)
+- [AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md](AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md)
 
-Historical docs remain useful only when labeled as archive, supporting context, implementation evidence, or still-binding older canon where Ambitions 3.0 does not replace the domain.
+## Historical/supporting docs
 
----
+The repo retains older docs for traceability, audit evidence, and Codex continuity. Treat them as historical/supporting unless explicitly elevated by the active canon or current implementation map.
 
-## Repo truth
+Common historical/supporting areas:
 
-- The current app is the native SwiftUI target under `Native/Ambitions/`.
-- The repo no longer has an active TypeScript / Expo / React Native runtime path.
-- The current shipped native surface is local-first and on-device first.
-- Platform features exist only to the evidence level documented in release/readiness docs and batch registry.
-- Sync, auth, and account backend flows are not current shipping features unless later implementation evidence says otherwise.
+- `docs/canon/`
+- `docs/codex/`
+- `docs/audits/`
+- `docs/handoff/`
+- `docs/archive/`
+- `.codex/`
+- `.agents/`
 
----
+## Codex and batch-train docs
 
-## Ambitions 3.0 Codex Performance Operating System
+Codex and batch-train files remain available for AI-assisted implementation, but they are not the public repo front door and are not release proof by themselves.
 
-- [Codex Performance Operating System](canon/Ambitions_3_0_Codex_Performance_Operating_System.md)
-- [FAANG Team Operating Model](canon/Ambitions_3_0_FAANG_Team_Operating_Model.md)
-- [Task Width And Batch Combining Gate](canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md)
-- [UI Test Contract](canon/Ambitions_3_0_UI_Test_Contract.md)
-- [Local Toolchain Readiness Matrix](canon/Ambitions_3_0_Local_Toolchain_Readiness_Matrix.md)
-- [Definition Of Ready And Done](canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md)
-- [Release Claim Truth Protocol](canon/Ambitions_3_0_Release_Claim_Truth_Protocol.md)
-- [Beyond 3.0 Continuity Rules](canon/Ambitions_Beyond_3_0_Continuity_Rules.md)
-- [Master Ambitions 3.0 Codex Prompt](codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md)
-- [Context Loading And Task Routing](codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md)
-- [Skill System Index](codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md)
-- [Run State Protocol](codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md)
-- [Large Batch And Compact Recovery Protocol](codex/AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md)
-- [Prompt Quality Rubric](codex/AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md)
-- [Parallel Codex Worktree Protocol](codex/AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md)
-- [Dependency Management Policy](canon/Ambitions_3_0_Dependency_Management_Policy.md)
-- [Mac Codex 5.5 Toolchain Setup](codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md)
+Key entry points:
 
-## Batch Train Orchestrator
+- [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md)
+- [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
+- [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md)
+- [codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md](codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md)
 
-Ambitions 3.0 batch trains are governed by [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The [F17-F30 FAANG Handoff Completion Train](codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md) is complete and preserved as historical train evidence after F30. F27 remains PASS after F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final train closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program.
+## Update rule
 
-## AmbitionsOS Future Canon
+When changing documentation, preserve this separation:
 
-AmbitionsOS future-canon docs are indexed from [canon/AmbitionsOS_Index.md](canon/AmbitionsOS_Index.md). They consolidate queued Ambitions 4.0 life-intelligence architecture and AOS/ME/CS train planning without changing current app behavior or release claims.
+- product/design truth -> `docs/AmbitionsCanon/`
+- implementation status -> `docs/status/current-implementation-map.md`
+- cleanup/quarantine policy -> `docs/status/repo-cleanup-index.md`
+- release/validation proof -> `docs/status/release-evidence-packet.md`
+- local build procedure -> `docs/native-build-and-release.md`
+- AI/Codex operation -> `AGENTS.md`, `docs/codex/`, `.codex/`, `.agents/`
 
-
-## PXOS Future Canon
-
-PXOS future-canon docs are indexed from [canon/Ambitions_Product_Experience_OS_Index.md](canon/Ambitions_Product_Experience_OS_Index.md). They define queued Ambitions 4.0 future user-facing product experience, Codex process controls, and implementation ordering. They do not claim current app implementation, release readiness, or PXOS train activation.
-
-- [Ambitions 4.0 External Brain Foundation](canon/Ambitions_4_0_External_Brain_Foundation_Index.md) - active planned 4.0 expansion scope; not app behavior until EB batch evidence proves it.
+Do not add hosted CI or hosted validation docs without an explicit cost/billing decision.
