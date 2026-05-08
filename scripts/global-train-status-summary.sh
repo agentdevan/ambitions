@@ -20,6 +20,48 @@ completed() {
 
 batch_name() {
   case "$1" in
+    PK00) echo "Current Backend Proof Baseline" ;;
+    PK01) echo "Package/Module Boundary Scaffold" ;;
+    PK02) echo "Architecture Boundary Scanner" ;;
+    PK03) echo "AppUnitOfWork Foundation" ;;
+    PK04) echo "Atomic Goal Creation" ;;
+    PK05) echo "Atomic Clarification / Materialization" ;;
+    PK06) echo "Atomic Capture Promotion" ;;
+    PK07) echo "Storage Schema Version Ledger" ;;
+    PK08) echo "Migration Plan Scaffold" ;;
+    PK09) echo "Unknown Persisted Value Degradation" ;;
+    PK10) echo "Storage Invariant Checker" ;;
+    PK11) echo "Pre-Migration Backup" ;;
+    PK12) echo "Staged Portable Import Dry Run" ;;
+    PK13) echo "Restore Rollback" ;;
+    PK14) echo "Durable Command/Event Ledger" ;;
+    PK15) echo "Receipt Backend" ;;
+    PK16) echo "Trust History Query" ;;
+    PK17) echo "Today Read Model Extraction" ;;
+    PK18) echo "Today Command Handler Extraction" ;;
+    PK19) echo "Goals Query/Projector Extraction" ;;
+    PK20) echo "Capture Service Extraction" ;;
+    PK21) echo "Plan Service Extraction" ;;
+    PK22) echo "SideEffectLedger Foundation" ;;
+    PK23) echo "Notifications Through SideEffectLedger" ;;
+    PK24) echo "EventKit Through SideEffectLedger" ;;
+    PK25) echo "External Snapshots Through SideEffectLedger" ;;
+    PK26) echo "Privacy Classification System" ;;
+    PK27) echo "Diagnostic Ledger" ;;
+    PK28) echo "Data Control Commands" ;;
+    PK29) echo "Entity Revision And Tombstones" ;;
+    PK30) echo "Conflict Policy Engine" ;;
+    PK31) echo "Manual Portable Sync Merge" ;;
+    PK32) echo "Knowledge Claim Boundary Hardening" ;;
+    PK33) echo "Recommendation Evidence Model" ;;
+    PK34) echo "Intelligence Quarantine" ;;
+    PK35) echo "Large-Store Fixture Generator" ;;
+    PK36) echo "Performance Budgets" ;;
+    PK37) echo "Derived Read-Model Cache" ;;
+    PK38) echo "Move Domain To Package" ;;
+    PK39) echo "Move Storage To Package" ;;
+    PK40) echo "Move Runtime To Package" ;;
+    PK41) echo "Move Feature Engines To Package" ;;
     LDI05) echo "Source Claim Graph" ;;
     LDI06) echo "Requirement Slot Mapping" ;;
     LDI07) echo "Safe Alternate Seed Generation" ;;
@@ -72,9 +114,9 @@ batch_name() {
 live_next="$(sed -n 's/^Next eligible batch: //p' .codex/reports/current-run-state.md 2>/dev/null | head -n 1 || true)"
 if [[ -n "$live_next" ]]; then
   live_id="${live_next%% *}"
-  if [[ "$live_id" =~ ^(LDI|AOS|FCP|PFC|RHC)[0-9A-Z]+$ ]] && ! completed "$live_id"; then
+  if [[ "$live_id" =~ ^(PK|LDI|AOS|FCP|PFC|RHC)[0-9A-Z]+$ ]] && ! completed "$live_id"; then
     echo "Active train: Global full-stack execution"
-    echo "Total planned batches: live full-stack overlay, not legacy 190"
+    echo "Total planned batches: live full-stack overlay with PK insertion, not legacy 190"
     echo "Next eligible batch: $live_next"
     echo "Source: .codex/reports/current-run-state.md"
     echo "Queued cleanup train: RHC01-RHC06 after LDI/AOS/FCP/PFC tails unless blocking hygiene Red requires scoped repair"
@@ -85,6 +127,7 @@ if [[ -n "$live_next" ]]; then
 fi
 
 ORDER=(
+  PK00 PK01 PK02 PK03 PK04 PK05 PK06 PK07 PK08 PK09 PK10 PK11 PK12 PK13 PK14 PK15 PK16 PK17 PK18 PK19 PK20 PK21 PK22 PK23 PK24 PK25 PK26 PK27 PK28 PK29 PK30 PK31 PK32 PK33 PK34 PK35 PK36 PK37 PK38 PK39 PK40 PK41
   LDI05 LDI06 LDI07 LDI08 LDI09 LDI10 LDI11 LDI12 LDI13 LDI14 LDI15 LDI16 LDI17 LDI18 LDI19 LDI20 LDI21 LDI22
   AOS24 AOS25 AOS26 AOS27 AOS28 AOS29 AOS30
   FCP27 FCP28 FCP29 FCP30
@@ -95,7 +138,7 @@ ORDER=(
 for id in "${ORDER[@]}"; do
   if ! completed "$id"; then
     echo "Active train: Global full-stack execution"
-    echo "Total planned batches: live full-stack overlay, not legacy 190"
+    echo "Total planned batches: live full-stack overlay with PK insertion, not legacy 190"
     echo "Next eligible batch: $id $(batch_name "$id")"
     if [[ "$id" == RHC* ]]; then
       echo "Source: queued RHC after full-stack tails"
@@ -109,7 +152,7 @@ for id in "${ORDER[@]}"; do
 done
 
 echo "Active train: Global full-stack execution"
-echo "Total planned batches: live full-stack overlay, not legacy 190"
+echo "Total planned batches: live full-stack overlay with PK insertion, not legacy 190"
 echo "Next eligible batch: none"
 echo "Source: full-stack overlay and queued RHC appear complete"
 echo "Working tree:"

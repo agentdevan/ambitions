@@ -8,7 +8,7 @@ Date: 2026-05-05
 
 This document extends the optimized implementation order to cover every non-user-facing domain required for a true 10/10 FAANG-grade app: repo cleanliness, build framework, architecture, schema, iCloud sync, widgets, Live Activities, App Intents, notifications, monetization, privacy, legal review, security, performance, observability, release engineering, and handoff.
 
-Use this file as the highest-priority overlay for remaining work. It supersedes `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` only where it adds or reorders PFC platform/framework/compliance batches, Found Life source-truth batches, and rendered visual quality proof insertions. Historical batch identities remain stable.
+Use this file as the highest-priority overlay for remaining work. It supersedes `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` only where it adds or reorders PFC platform/framework/compliance batches, Found Life source-truth batches, rendered visual quality proof insertions, and the active Platform Kernel train. Historical batch identities remain stable.
 
 ## Core Rule
 
@@ -18,6 +18,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - FCP closes product-object quality.
 - FVQ proves rendered simulator output is fresh, durable, and visually worthy of a FAANG-level flagship app rather than only structurally correct.
 - PFC closes platform/framework/legal/business/build quality.
+- PK closes local backend/platform kernel proof before further storage, sync,
+  side-effect, intelligence, performance, modularization, or major feature
+  expansion work.
 - AOS/LDI close runtime intelligence and living-dream safety where implemented.
 - Release evidence and human/legal/device proof gates remain evidence-bound.
 
@@ -28,7 +31,12 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - PFC source truth exists and is queued.
 - FL source truth exists and is queued after completed FCP17 and before remaining FCP core product-object implementation.
 - FVQ source truth exists and is inserted after completed FCP09 before broad external-surface strategy unless the active local run has already started PFC13, in which case Codex must finish the active batch safely and run FVQ01 immediately afterward.
-- AOS and LDI remain queued.
+- PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
+  Baseline is the next eligible backend/platform batch after this integration
+  unless a dirty or half-complete active batch must close first.
+- AOS and LDI remaining successors are queued behind the new PK insertion where
+  they depend on backend/platform safety, storage, sync, side effects,
+  intelligence quarantine, performance, or modularization.
 - No FL/FCP/PFC/FVQ production implementation has started by virtue of this document.
 - Historical IDs are not renumbered by the FIO01/PFC05A/DPTG00 overlay package.
 - AOS21 is complete Green as additive Interoperability Kernel App Intents
@@ -51,8 +59,18 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   followed and is now complete Green as a local Capacity And Commitment-Time
   Bridge contract. LDI13 followed and is now complete Green as a local Today
   Bridge And Action Closure contract. LDI14 followed and is now complete Green
-  as a local Trust Review And Dream Handling Receipts contract. LDI15 follows unless repo evidence or dependency review
-  selects another eligible batch.
+  as a local Trust Review And Dream Handling Receipts contract. PK00 now
+  follows as the dependency-first backend/platform baseline before LDI15 unless
+  repo evidence proves a half-complete active batch must close first.
+
+### Phase 0.5 — Platform Kernel Insertion
+
+PK00. Current Backend Proof Baseline. Active next eligible backend/platform
+batch after PK train integration. Report-only; no production code changes.
+PK01-PK41 remain queued in `docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md`
+and may supersede older backend/platform sequencing where dependency order
+conflicts. Remote sync, remote intelligence, migration, package-split, and
+major platform feature work must wait for the relevant PK prerequisites.
 
 ## Full-Stack Optimized Order
 

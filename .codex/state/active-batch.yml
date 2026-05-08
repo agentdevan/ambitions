@@ -1,16 +1,17 @@
 status: compact-mirror
-date: "2026-05-07"
+date: "2026-05-08"
 source_of_truth:
   - ".codex/reports/current-batch-train-state.md"
   - "docs/codex/BATCH_REGISTRY.md"
   - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md"
 current:
   train: "Global full-stack execution"
-  batch: "LDI13 Today Bridge And Action Closure"
-  previous_batch: "LDI12 Capacity And Commitment-Time Bridge"
+  batch: "PK Platform Kernel integration"
+  previous_batch: "LDI14 Trust Review And Dream Handling Receipts"
   previous_result: "Green"
+  next_eligible_batch: "PK00 Current Backend Proof Baseline"
 codex_os_override:
-  active_pass: "Codex OS upgrade"
+  active_pass: "Platform Kernel integration"
   app_feature_implementation_allowed: false
   production_swift_allowed: false
   branch_creation_allowed: false

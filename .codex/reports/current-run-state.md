@@ -2,20 +2,15 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: LDI14 Trust Review And Dream Handling Receipts
-complete / Green.
-Next eligible batch: LDI15 Living Plan Recompiler.
-Scope: LDI14 added the local value-model Trust Review And Dream Handling
-Receipts contract and focused domain tests for handling, source review, user
-confirmation, stale/unverified source review, mutation review, refusal, safe
-translation, user-imported source, OCR review, and pack update receipts. It
-checks visible user controls, canonical handling lanes, source references,
-source/freshness review, OCR review, explicit mutation approval and changed
-facts, safe refusal alternatives, review-bounded translation language,
-professional-boundary review, no hidden receipts, no user-data server use, and
-value-model-only runtime boundaries. It adds no UI integration, route/raw-value change,
-persistence/schema, sync/cloud, hosted AI, user-data server, professional
-advice, official source/path verification, release/platform claim, legal/privacy
+Current batch: PK Platform Kernel integration
+in progress / docs-governance.
+Next eligible batch: PK00 Current Backend Proof Baseline after integration
+commit/push unless a dirty or half-complete active batch must close first.
+Scope: PK00-PK41 is being integrated as active planned local backend/platform
+scope. LDI14 remains complete / Green as local Trust Review And Dream Handling
+Receipts contract evidence, but LDI15 is no longer the next backend/platform
+selection while PK00 is unrun. This pass makes no production Swift, persistence
+schema, sync/cloud, hosted AI, user-data server, release/platform, legal/privacy
 compliance, physical-device proof, public accessibility proof, signing,
 entitlement, dependency, generated-project, or hosted workflow claim.
 
@@ -28,8 +23,10 @@ commands, proof artifacts, and terminal gates. Physical-device proof is
 terminal-only and final-only. All feature, product-object, primitive,
 intelligence, source/freshness, accessibility, visual, performance,
 privacy/legal, platform, release, signed-RC, and claim-safety gates must close
-before device proof begins. AOS23 and LDI01-LDI14 have since closed Green;
-LDI15 remains next unless repo evidence shows later progress.
+before device proof begins. AOS23 and LDI01-LDI14 have since closed Green.
+PK00 is now the next eligible backend/platform batch after PK integration
+unless repo evidence shows a dirty or half-complete active batch must close
+first.
 
 ## Full-Stack Global Order Reconciliation
 

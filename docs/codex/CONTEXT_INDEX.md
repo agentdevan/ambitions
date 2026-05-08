@@ -9,12 +9,20 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - `docs/codex/BATCH_REGISTRY.md` is implementation status truth only. It does not override Ambitions 3.0 product direction.
 - `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md` is the highest-priority
   overlay for remaining cross-train execution. It inserts FCP flagship
-  completion and PFC platform/framework/compliance completion while preserving
-  completed batch history and no-claim boundaries.
+  completion, PFC platform/framework/compliance completion, and the active
+  PK00-PK41 Platform Kernel train while preserving completed batch history and
+  no-claim boundaries.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific
   gates before any production app, platform, persistence, sync, legal/privacy,
   or release claim work.
+- PK00-PK41 Platform Kernel is active planned scope for local backend/platform
+  hardening. PK00 Current Backend Proof Baseline is the next eligible
+  backend/platform batch unless a dirty or half-complete active batch must close
+  first. PK supersedes older backend/platform sequencing where dependency order
+  conflicts, but it does not claim backend completion, migration safety, sync
+  readiness, privacy compliance, CI green, performance proof, or release
+  readiness.
 - Product Depth is complete through PD18 Green. PD16 added You-owned planning
   setup/defaults depth for Schedule & Availability, Planning Defaults,
   Vacation / Away Time, and Automation & Trust without permission prompts,
@@ -619,8 +627,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud,
   platform integration, legal/privacy compliance, physical-device proof,
   release, or public accessibility claim. LDI01-LDI14 have since closed
-  Green; the next eligible global batch is LDI15 Living Plan Recompiler unless
-  dependency review selects another eligible batch.
+  Green; PK00 Current Backend Proof Baseline is now the next eligible
+  backend/platform batch unless repo evidence shows a dirty or half-complete
+  active batch must close first.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone
@@ -692,7 +701,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
 - F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, F10 Plan Life Suite foundation, F11 Day Shape / Week Shape, F12 Reflow / Recovery / Decisions, F13 Goals / Goal Mission Control, F13.5 Goals / You / Trust architecture checkpoint, F14 You / Trust / What Ambitions Knows, F15 Legacy Identifier Migration, and F16 UI Test Modernization are complete.
 - F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, F26, F27, F27.5, F28, F29, and F30 are Green by current train evidence. F27 passed after F28 rebaselined the Goal Detail trust/memory UI proof to stable owned section anchors and reran `scripts/test-local.sh` cleanly with 779 unit tests and 29 UI tests. F27.5 found no critical maintainability blocker and fixed stale active train-entry wording. F29 created the engineer handoff package. F30 created the Beyond 3.0 continuation roadmap and final train closeout.
-- Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It started with 113 formal batches in global order after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30, with LDI01-LDI22 inserted by dependency. LDI01-LDI14 are complete Green after explicit user-directed early insertion following AOS23; LDI15 is next. Future canon remains not implemented until explicit batches produce evidence.
+- Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It started with 113 formal batches in global order after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30, with LDI01-LDI22 inserted by dependency. LDI01-LDI14 are complete Green after explicit user-directed early insertion following AOS23; PK00-PK41 is now inserted as active Platform Kernel scope before backend/platform-dependent successors. Future canon remains not implemented until explicit batches produce evidence.
 
 ## Required Read Order
 

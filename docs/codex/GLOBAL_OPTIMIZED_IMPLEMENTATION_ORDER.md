@@ -105,11 +105,27 @@ As of this order update:
   validation governs current proof.
 - DPTG00 is locked as a future terminal physical-device release-candidate proof
   gate, not an implementation batch. All pre-device gates must close before it.
-- AOS24-AOS30 remain queued.
-- LDI13-LDI22 remain queued and are inserted by dependency, not train silo.
+- PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
+  Baseline is the next eligible backend/platform batch after this integration
+  unless a dirty or half-complete active batch must close first.
+- AOS24-AOS30 remain queued behind PK where they depend on platform/backend
+  safety, side effects, diagnostics, sync readiness, intelligence quarantine,
+  performance, or module extraction.
+- LDI15-LDI22 remain queued behind PK where they depend on platform/backend
+  safety, storage/migration, sync readiness, intelligence quarantine, or
+  mutation/receipt backend proof.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
-- No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay
-  package. LDI13 is next unless repo evidence shows later progress.
+- No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay or
+  PK insertion package. PK00 is next unless repo evidence shows a dirty or
+  half-complete active batch must close first.
+
+## Platform Kernel Insertion
+
+PK00-PK41 is now an active planned train, not optional brainstorming. PK00
+precedes further backend/platform, storage, sync, intelligence, performance,
+module-split, or major feature expansion work. Existing PFC/AOS/LDI evidence is
+preserved and may be reconciled into PK batches, but no older backend/platform
+batch may bypass a stricter PK dependency.
 
 ## Selection Rule
 
