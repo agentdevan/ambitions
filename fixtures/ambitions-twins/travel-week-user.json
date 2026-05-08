@@ -1,0 +1,16 @@
+{
+  "id": "travel-week-user",
+  "goals": [
+    {"title": "Keep commitments realistic during travel", "state": "active", "privacy": "private"}
+  ],
+  "captures": [
+    {"text": "Shift gym goal to hotel-room version", "state": "ready_to_place"}
+  ],
+  "time_context": {"capacity": "travel_week", "constraints": ["flight", "time zone", "hotel check-in"]},
+  "proof_receipts": [{"kind": "schedule_context", "state": "user_confirmed"}],
+  "recovery_state": {"mode": "travel_adjustment", "tone": "practical"},
+  "privacy_mode": "redacted_external",
+  "source_freshness_state": {"state": "user_confirmed", "review_required": false},
+  "accessibility_variant": {"dynamic_type": "standard", "reduce_motion": true},
+  "expected_surface_states": {"Today": "degraded", "Goals": "normal", "Capture": "normal", "Time": "travel", "You": "normal"}
+}

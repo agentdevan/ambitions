@@ -1,0 +1,14 @@
+name: MCP Self Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mcp-self-test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: MCP01 self-test
+        run: python3 tools/mcp/ambitions_repo_mcp/server.py --self-test
+      - name: MCP02 self-test
+        run: python3 tools/mcp/ambitions_proof_mcp/server.py --self-test

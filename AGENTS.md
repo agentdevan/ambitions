@@ -11,6 +11,7 @@ Current repo posture:
 - Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, `.codex`, and `.agents` material is retained as history, operating context, or stricter proof gates where compatible. It is not the public repo front door.
 - EFC is an active peak-proof overlay for unfinished planned work. It does not replace the active batch, implement product behavior by itself, or authorize release/platform claims.
 - The local Ambitions Repo MCP under `tools/mcp/ambitions_repo_mcp/` is optional read-only Codex tooling for active-batch, EFC, source-truth, claim-scan, closeout, and changed-file impact checks. It is not an app dependency.
+- The local Ambitions Proof MCP under `tools/mcp/ambitions_proof_mcp/` exposes allowlisted validation names only. It is not a generic shell and must not gain write, network, secrets, signing, App Store, hosted CI, or git mutation tools without explicit approval.
 
 ## Required read order
 
@@ -39,6 +40,8 @@ For Codex OS, batch-train, or long-run governance work, additionally read:
 - `docs/codex/POST_BATCH_GATE_REGISTRY.md`
 - `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md` when local MCP tooling matters
 - `docs/codex/MCP_CODEX_SETUP.md` when configuring or verifying local MCP tooling
+- `docs/codex/MCP_EXTERNAL_SERVER_SETUP.md` when external MCP registration matters
+- `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md` when GitHub MCP, Dependabot, CodeQL, Actions, or runner setup matters
 - `docs/codex/CODEX_OS_INDEX.md`
 - `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` when the active model tier, Mini/Senior alias, or autonomous batch-train continuation matters
 - `docs/codex/MODEL_TIER_BATCH_MATRIX.md` when classifying remaining batch families for Mini/Senior routing
@@ -80,6 +83,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - Do not add hosted CI unless a future patch explicitly records provider, cost model, billing/quota risk, triggers, artifact retention, owner approval, and release-claim limits.
 - Do not treat EFC as approval for hosted AI, user-data servers, telemetry, analytics, productivity scoring, shame/streak mechanics, silent mutation, or release claims.
 - Do not add write-capable MCP tools, shell MCP tools, network MCP tools, or secret-reading MCP tools without explicit approval and a security review.
+- Do not add GitHub write MCP tools, hosted CI workflows, signing automation, App Store upload automation, or self-hosted runners without the policy gates in `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md`.
 
 ## Architecture boundaries
 
@@ -126,6 +130,8 @@ Local MCP validation:
 
 - `python3 tools/mcp/ambitions_repo_mcp/server.py --self-test`
 - optional: `python3 -m pytest tools/mcp/ambitions_repo_mcp/tests` when pytest is available
+- `python3 tools/mcp/ambitions_proof_mcp/server.py --self-test`
+- optional: `python3 -m pytest tools/mcp/ambitions_proof_mcp/tests` when pytest is available
 
 Local dirty-worktree gate:
 

@@ -31,6 +31,14 @@ EFC is the active peak-proof overlay for unfinished work. Use [EFC_FLAGSHIP_PROO
 - [MAC_CODEX_5_5_TOOLCHAIN_SETUP.md](MAC_CODEX_5_5_TOOLCHAIN_SETUP.md) — local Mac/Codex setup and validation commands.
 - [MCP_LOCAL_PRODUCTION_OS_PLAN.md](MCP_LOCAL_PRODUCTION_OS_PLAN.md) — local MCP production acceleration plan.
 - [MCP_CODEX_SETUP.md](MCP_CODEX_SETUP.md) — Mac VM / Codex setup for Ambitions MCP servers.
+- [MCP_EXTERNAL_SERVER_SETUP.md](MCP_EXTERNAL_SERVER_SETUP.md) — external MCP setup and local registration evidence.
+- [MCP02_CONTROLLED_PROOF_MCP.md](MCP02_CONTROLLED_PROOF_MCP.md) — allowlisted local proof MCP.
+- [MCP03_VISUAL_PROOF_MCP_PLAN.md](MCP03_VISUAL_PROOF_MCP_PLAN.md) — visual proof MCP plan and folder shape.
+- [MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md](MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md) — EFC09 accessibility shadow MCP plan.
+- [MCP05_AMBITIONS_TWIN_FIXTURE_MCP_PLAN.md](MCP05_AMBITIONS_TWIN_FIXTURE_MCP_PLAN.md) — Ambitions Twin fixture MCP plan.
+- [MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md](MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md) — Source Atlas pack MCP plan.
+- [MCP07_RELEASE_TRUTH_MCP_PLAN.md](MCP07_RELEASE_TRUTH_MCP_PLAN.md) — release truth MCP plan.
+- [GITHUB_NATIVE_TOOLING_POLICY.md](GITHUB_NATIVE_TOOLING_POLICY.md) — GitHub MCP, Dependabot, CodeQL, Actions, and runner policy.
 - [AMBITIONS_3_0_RUN_STATE_PROTOCOL.md](AMBITIONS_3_0_RUN_STATE_PROTOCOL.md) — checkpointable state model for long Codex runs.
 - [AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md](AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md) — XL batch checkpoint and compaction recovery rules.
 - [AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md](AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md) — prompt quality scoring for future implementation asks.
@@ -58,16 +66,29 @@ The reusable system lives under `.codex/`:
 
 ## Local MCP Production OS
 
-The first Ambitions MCP server lives at:
+The Ambitions local production MCP stack starts with:
 
 - `tools/mcp/ambitions_repo_mcp/`
+- `tools/mcp/ambitions_proof_mcp/`
 
-Use it as a local, read-only Codex acceleration layer for active-batch state, EFC applicability, source-truth stack, changed-file impact, forbidden claim scanning, closeout shape validation, and repo posture summaries.
+Use `ambitions_repo_mcp` as a local, read-only Codex acceleration layer for active-batch state, EFC applicability, source-truth stack, changed-file impact, forbidden claim scanning, closeout shape validation, and repo posture summaries.
+
+Use `ambitions_proof_mcp` for allowlisted local validation names only. It is not a generic shell.
+
+Scaffold-only MCP plans live under:
+
+- `tools/mcp/ambitions_visual_mcp/`
+- `tools/mcp/ambitions_accessibility_mcp/`
+- `tools/mcp/ambitions_fixture_mcp/`
+- `tools/mcp/ambitions_source_atlas_mcp/`
+- `tools/mcp/ambitions_release_truth_mcp/`
 
 Setup docs:
 
 - [MCP Local Production OS Plan](MCP_LOCAL_PRODUCTION_OS_PLAN.md)
 - [MCP Codex Setup](MCP_CODEX_SETUP.md)
+- [MCP External Server Setup](MCP_EXTERNAL_SERVER_SETUP.md)
+- [GitHub Native Tooling Policy](GITHUB_NATIVE_TOOLING_POLICY.md)
 
 MCP is local developer tooling only. It is not an Ambitions app runtime dependency, does not authorize hosted AI, does not add telemetry, and does not prove release/device/accessibility/legal/privacy readiness by itself.
 

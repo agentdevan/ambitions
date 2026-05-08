@@ -1,0 +1,13 @@
+name: Docs and Claims
+
+on:
+  workflow_dispatch:
+
+jobs:
+  docs-and-claims:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Claim scan placeholder
+        run: |
+          python3 tools/mcp/ambitions_repo_mcp/server.py --self-test

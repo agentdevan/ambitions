@@ -52,15 +52,26 @@ Codex can start every batch by asking the repo for active state and EFC obligati
 
 ## Phase 2 — Controlled Proof MCP
 
-Future server or module: `ambitions_proof_mcp`
+Server: `ambitions_proof_mcp`
 
 Allowed named tools only:
 
-- `run_doc_qa`
-- `run_claim_scan`
-- `run_efc_scan`
-- `run_changed_file_impact`
-- `collect_validation_logs`
+- `list_available_validations`
+- `run_named_validation`
+- `collect_latest_logs`
+- `generate_proof_packet`
+- `check_validation_policy`
+
+Allowed validation names:
+
+- `mcp01_self_test`
+- `repo_claim_scan`
+- `efc_applicability_scan`
+- `doc_link_scan_basic`
+- `git_status_summary`
+- `xcodegen_check_dry_run`
+- `build_local`
+- `focused_tests`
 
 No generic shell tool is allowed. Commands must be allowlisted and must produce claim-safe evidence packets.
 
@@ -97,6 +108,18 @@ Targets:
 - App Store claim scanning
 - support/privacy URL readiness
 
+## External MCP Policy
+
+External MCPs are governed by [MCP External Server Setup](MCP_EXTERNAL_SERVER_SETUP.md) and [GitHub Native Tooling Policy](GITHUB_NATIVE_TOOLING_POLICY.md).
+
+Current approved posture:
+
+- Ambitions Repo MCP: local read-only.
+- OpenAI Developer Docs MCP: configured for docs lookup.
+- GitHub MCP: read-only future setup only; no token in repo; no write tools.
+- XcodeBuildMCP: simulator workflow only until baseline validation expands.
+- Hosted CI: not allowed without explicit cost/security/runner approval.
+
 ## Security Rules
 
 Hard rules for all Ambitions MCPs:
@@ -129,4 +152,4 @@ This turns Ambitions from a repo with strong docs into a repo with executable pr
 
 ## Non-Claims
 
-This plan does not install MCP into the Mac VM's `~/.codex/config.toml`, run Codex, run local validation, implement app behavior, change production Swift, add app dependencies, create hosted CI, or claim release/device/accessibility/legal/privacy readiness.
+This plan does not implement app behavior, change production Swift, add app dependencies, create hosted CI, or claim release/device/accessibility/legal/privacy readiness.

@@ -8,13 +8,14 @@ Scope: dedicated Ambitions Mac VM / Codex setup.
 
 ## What This Installs
 
-The first Ambitions MCP server is:
+Ambitions local MCP setup now has one verified repo-truth server and one controlled proof server scaffold:
 
 ```text
 tools/mcp/ambitions_repo_mcp/
+tools/mcp/ambitions_proof_mcp/
 ```
 
-It is read-only and local-only. It exposes repo-truth tools for Codex:
+`ambitions_repo_mcp` is read-only and local-only. It exposes repo-truth tools for Codex:
 
 - active batch detection
 - EFC overlay status
@@ -25,7 +26,17 @@ It is read-only and local-only. It exposes repo-truth tools for Codex:
 - closeout shape validation
 - current repo posture summary
 
-It does not run shell commands, write files, access secrets, use the network, or become part of the Ambitions app runtime.
+`ambitions_proof_mcp` exposes named local validation tools only. It is not a generic shell and does not add write, network, secrets, signing, App Store, hosted CI, or git mutation tools.
+
+Scaffold-only MCP plans also exist for visual proof, accessibility shadow proof, Ambitions Twin fixtures, Source Atlas packs, and release truth:
+
+- `tools/mcp/ambitions_visual_mcp/`
+- `tools/mcp/ambitions_accessibility_mcp/`
+- `tools/mcp/ambitions_fixture_mcp/`
+- `tools/mcp/ambitions_source_atlas_mcp/`
+- `tools/mcp/ambitions_release_truth_mcp/`
+
+None of these servers are part of the Ambitions app runtime.
 
 ## Install On The Mac VM
 
@@ -34,6 +45,7 @@ From the Ambitions repo root:
 ```bash
 cd /Users/devan/Documents/GitHub/ambitions
 python3 tools/mcp/ambitions_repo_mcp/server.py --self-test
+python3 tools/mcp/ambitions_proof_mcp/server.py --self-test
 ```
 
 If the self-test passes, the server can be configured for Codex.
@@ -65,9 +77,25 @@ Some Codex versions also support adding MCPs through a command such as:
 
 ```bash
 codex mcp add ambitionsRepo -- python3 /Users/devan/Documents/GitHub/ambitions/tools/mcp/ambitions_repo_mcp/server.py
+codex mcp add openaiDeveloperDocs --url https://developers.openai.com/mcp
 ```
 
 If the command is unavailable, use the `config.toml` method.
+
+MCP02 config example, for a later explicit registration step:
+
+```toml
+[mcp_servers.ambitionsProof]
+command = "python3"
+args = ["/Users/devan/Documents/GitHub/ambitions/tools/mcp/ambitions_proof_mcp/server.py"]
+```
+
+Do not add the GitHub MCP until a fine-grained read-only token exists outside the repo. Do not add GitHub write tools until a separate approval batch.
+
+See:
+
+- [MCP External Server Setup](MCP_EXTERNAL_SERVER_SETUP.md)
+- [GitHub Native Tooling Policy](GITHUB_NATIVE_TOOLING_POLICY.md)
 
 ## Recommended Codex Prompt After Setup
 
@@ -83,6 +111,8 @@ Use the ambitionsRepo MCP before touching the repo. First call get_active_batch,
 - It does not use external network.
 - It does not access Keychain, environment secrets, or files outside the repo.
 - It does not add runtime dependencies to the Ambitions app.
+- MCP02 exposes only named validations and keeps proof logs local.
+- MCP03-MCP07 are scaffolds/plans only until a later batch implements their tools.
 
 ## Troubleshooting
 
@@ -90,6 +120,7 @@ Run self-test:
 
 ```bash
 python3 tools/mcp/ambitions_repo_mcp/server.py --self-test
+python3 tools/mcp/ambitions_proof_mcp/server.py --self-test
 ```
 
 Expected output includes:

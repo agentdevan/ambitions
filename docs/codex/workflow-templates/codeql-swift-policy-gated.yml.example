@@ -1,0 +1,17 @@
+name: CodeQL Swift Policy Gated
+
+on:
+  workflow_dispatch:
+
+jobs:
+  codeql-swift:
+    runs-on: macos-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Policy gate
+        run: |
+          echo "Do not enable as hosted CI until cost, runner, artifact, and security policy are approved."
+          exit 1
