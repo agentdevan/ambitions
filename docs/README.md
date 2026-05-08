@@ -13,6 +13,13 @@ Use this read order for current work:
 5. [native-build-and-release.md](native-build-and-release.md) — local VM/Mac build, test, archive, and release-validation workflow.
 6. [../AGENTS.md](../AGENTS.md) — AI/Codex contributor rules.
 
+For Codex/batch-train continuation, also read the active EFC proof overlay files after checking current active batch state:
+
+- [codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md](codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md)
+- [codex/BATCH_REGISTRY_EFC_OVERLAY.md](codex/BATCH_REGISTRY_EFC_OVERLAY.md)
+- [codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md](codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md)
+- [codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md](codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md)
+
 ## Current posture
 
 - The current app is the native SwiftUI target under `Native/Ambitions/`.
@@ -23,6 +30,7 @@ Use this read order for current work:
 - There is no active hosted CI workflow in this repo.
 - The repo no longer has an active TypeScript / Expo / React Native runtime path.
 - Sync, auth, account backend flows, TestFlight readiness, App Store readiness, physical-device proof, public accessibility conformance, legal/privacy signoff, and human release approval are not current claims.
+- EFC is an active peak-proof overlay for unfinished planned work. It raises closeout standards but does not implement product behavior or authorize release/platform claims by itself.
 
 ## Active source-truth package
 
@@ -93,6 +101,10 @@ Key entry points:
 
 - [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md)
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
+- [codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md](codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md)
+- [codex/BATCH_REGISTRY_EFC_OVERLAY.md](codex/BATCH_REGISTRY_EFC_OVERLAY.md)
+- [codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md](codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md)
+- [codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md](codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md)
 - [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md)
 - [codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md](codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md)
 
