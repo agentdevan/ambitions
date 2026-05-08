@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Codex operating protocol for Ambitions 4.0 plus External Brain train execution; not product implementation evidence.
+Status: Active Codex operating protocol for Ambitions 4.0 plus External Brain train execution; not product implementation evidence.  
 Date: 2026-05-03
 
 ## Source-Truth Hierarchy
@@ -14,6 +14,18 @@ Date: 2026-05-03
 5. PXOS, SI, Product Depth, AmbitionsOS, REC, ME, CS source docs for their owned layers.
 6. `docs/codex/BATCH_REGISTRY.md` for status truth only.
 7. Current source code and validation evidence for implementation truth.
+
+## Usage-Efficiency Overlay
+
+Use the Codex OS efficiency layer to reduce context and output waste without weakening proof:
+
+- `docs/codex/CODEX_OS_INDEX.md` is the current navigation index for Codex OS entry points.
+- `docs/codex/CODEX_USAGE_EFFICIENCY.md` defines ACX, route-first context, state mirrors, and validation tiers.
+- `docs/codex/CODEX_EVIDENCE_STANDARD.md` defines raw-log and claim-boundary requirements.
+- `.codex/routes/README.md` should be selected before broad repo search.
+- `.codex/state/*.md` and `.codex/state/*.yml` are compact mirrors only; owner docs remain authoritative.
+- `scripts/ai/acx.py` is a non-executing extractor for bounded reads, saved-log summaries, changed-file grouping from saved status text, advisory gates, and gate reports.
+- Summarized ACX output is not enough for failed build/test/gate, hard Red, release, device, accessibility, legal/privacy, and proof-sensitive claims. Use raw logs and owner evidence.
 
 ## Batch Execution Lifecycle
 
