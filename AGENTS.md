@@ -1,39 +1,62 @@
 # Ambitions Codex Guidance
 
-Ambitions 3.0 remains the completed implementation baseline, but the Ambitions Design System and AmbitionsCanon pack are now the highest source truth for future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work. Ambitions 2.0, v2, Waves, Batch 61+, D/M/R, Ambitions 3.0/4.0, PXOS, SI, handoff, audit, and Codex train material are preserved as implementation history, supporting context, or stricter proof gates where compatible.
+This file is for AI/Codex contributors working in the Ambitions repo.
 
-## Required Read Order
+Current repo posture:
 
-0. `docs/AmbitionsCanon/README.md` for future product/design/source-truth precedence, then the AmbitionsCanon docs it names when the task touches product, visual, shell, chrome, IA, Signature Objects, trust, accessibility, QA, tokens/materials, or implementation planning.
+- AmbitionsCanon is the highest product/design source truth.
+- `docs/status/current-implementation-map.md` is current implementation-status truth.
+- `docs/status/release-evidence-packet.md` is current validation/release-evidence truth.
+- Validation is local VM/Mac only. There is no active hosted CI workflow.
+- Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, `.codex`, and `.agents` material is retained as history, operating context, or stricter proof gates where compatible. It is not the public repo front door.
+
+## Required read order
+
+For normal repo work, read in this order:
+
 1. `README.md`
 2. `docs/README.md`
-3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
-4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
-5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
-6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
-7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
-8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
-9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
-10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
-11. `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md` when the user says `resume global batch train`.
-12. `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md` for flagship maturity, terminal-device, pre-device closure, and no-hosted-workflow validation rules.
-13. `docs/codex/CODEX_OS_INDEX.md` for Codex OS route, ACX, gate, evidence, batch-state, speed, repair, proof, and skills routing when the task is developer-tooling, governance, or long-run execution.
+3. `docs/AmbitionsCanon/README.md`
+4. `docs/status/current-implementation-map.md`
+5. `docs/status/repo-cleanup-index.md`
+6. `docs/status/release-evidence-packet.md`
+7. `docs/native-build-and-release.md`
+8. the target source files and tests
 
-Older docs may remain useful, but they do not override Ambitions 3.0 source docs. If old docs conflict with Ambitions 3.0, resolve in favor of Ambitions 3.0 and document the conflict when it affects implementation.
+For product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, or implementation-planning work, read the AmbitionsCanon files named by `docs/AmbitionsCanon/README.md` before changing source.
 
-## Repo Behavior
+For Codex OS, batch-train, or long-run governance work, additionally read:
+
+- `docs/codex/CONTEXT_INDEX.md`
+- `docs/codex/BATCH_REGISTRY.md`
+- `docs/codex/CODEX_OS_INDEX.md`
+- `.codex/README.md`
+- the selected route or batch manifest
+
+For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md` and continue from repo evidence.
+
+## Source-truth rules
+
+- AmbitionsCanon decides product/design direction.
+- The current implementation map decides what is implemented, scaffolded, planned, historical, or unproven.
+- The release evidence packet decides validation and release claim language.
+- `BATCH_REGISTRY.md` decides operational batch status only.
+- Historical docs may remain useful, but they do not override the current front-door/status files.
+- Do not treat docs-only plans as shipped behavior.
+
+## Repo behavior
 
 - Work on `main` only unless the user explicitly requests branch-based work.
 - Do not create or switch branches for normal Ambitions execution.
-- Preserve completed implementation history exactly as history.
-- Preserve XcodeGen. Edit `project.yml` and regenerate the project; do not rely on a checked-in `.xcodeproj` as source truth.
+- Preserve completed implementation history as history.
+- Preserve XcodeGen. Edit `project.yml` and regenerate the project locally; do not rely on a checked-in `.xcodeproj` as source truth.
 - Preserve the native SwiftUI architecture.
 - Do not create new top-level Ambitions destinations. The canonical destinations remain `Today / Goals / Capture / Plan / You`.
 - Do not implement product features in docs/tooling passes unless the tooling itself requires a narrow test or compatibility fix.
-- Use repo-local Codex operating docs, skills, validation packs, context packs, playbooks, templates, routes, state mirrors, manifests, proof protocols, and scripts under `.codex/`, `docs/codex/`, and `scripts/ai/`.
 - During Codex OS / developer-tooling / governance passes, do not implement app features, refactor SwiftUI source, modify product IA, or add runtime app dependencies.
+- Do not add hosted CI unless a future patch explicitly records provider, cost model, billing/quota risk, triggers, artifact retention, owner approval, and release-claim limits.
 
-## Architecture Boundaries
+## Architecture boundaries
 
 - `Native/Ambitions/App` owns app entry, dependency container, environment injection, shell, and routing.
 - `Native/Ambitions/Domain` owns domain models, contracts, state machines, receipts, proof, recommendation, and planning logic.
@@ -43,74 +66,43 @@ Older docs may remain useful, but they do not override Ambitions 3.0 source docs
 - `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources/` own shared UI and package surfaces.
 - `project.yml` is the XcodeGen source of truth for targets, schemes, app extensions, and build wiring.
 
-## Execution Rules
+## Execution rules
 
 - Start non-trivial work by checking repo status, current docs, and the target code paths.
-- For non-trivial work, pick one route from `.codex/routes/README.md` before broad search. Add a second route only for real cross-boundary work.
-- Use `python3 scripts/ai/acx_local.py bundle quick` for fast local preflight when local tooling is available.
-- Use `python3 scripts/ai/acx_impact.py <changed files>` to map changed paths to routes, bundles, and gates.
-- Use `python3 scripts/ai/acx_repair.py diagnose` after failed gates, failed profiles, hard Reds, or repeated Yellow churn.
-- Use `python3 scripts/ai/acx_closeout.py` and `python3 scripts/ai/acx_sanitized_evidence.py` for compact proof and closeout packets when local proof exists.
 - Use the smallest safe touch budget. Name primary files before edits.
 - Prefer deterministic, additive, compatibility-safe changes.
 - Do not silently rewrite product strategy, IA, naming, release posture, or roadmap structure.
 - Do not invent seams or claim implementation without repo evidence.
 - Do not add runtime app dependencies unless the dependency policy permits it and the user explicitly accepts the tradeoff.
-- Prefer focused validation first, then broaden based on risk.
-- After meaningful changes, run `xcodegen generate` and the relevant build/test/scan pack when local tooling supports it.
+- After meaningful app-source changes, run `xcodegen generate` and the relevant local build/test/scan pack when local tooling supports it.
+- For docs-only cleanup, do not claim build/test success unless current local logs exist.
 - Validation summaries must separate verified, failed, not verified, and human/device follow-up.
-- Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, or release readiness without matching evidence.
-- Use `scripts/ai/acx.py` only as a non-executing extractor for bounded reads, saved-log summaries, changed-file grouping, advisory scans, and gate reports.
-- Use `scripts/ai/acx_local.py` only for allowlisted local command profiles and bundles. It must not accept arbitrary shell strings, use `shell=True`, run destructive commands, stage, commit, push, reset, clean, delete, switch branches, run `sudo`, or run `bash -c` / `sh -c`.
-- Preserve raw command logs under `.codex/logs/` when using ACX Local. Summaries do not replace raw logs.
-- If ACX is unavailable, fall back to direct `rg`, `git status`, documented validation commands, and manual raw-log capture; report the fallback.
+- Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, release readiness, CI proof, or legal/privacy approval without matching evidence.
+- Use repo-local Codex operating docs and scripts under `.codex/`, `docs/codex/`, and `scripts/ai/` only as operating context; they do not override source code, raw logs, current implementation status, or release evidence status.
 
-## Ambitions Product Truth
+## Local validation
 
-- Ambitions is a premium native iOS life execution system.
+Primary validation remains local VM/Mac validation:
+
+- `xcodegen generate`
+- `./scripts/build-local.sh`
+- focused `xcodebuild` unit tests
+- focused `xcodebuild` UI tests
+- unsigned archive sanity checks when relevant
+- raw command logs saved under `output/logs/`, `.codex/logs/`, or a named local proof packet
+
+Local simulator evidence is not signed archive proof, TestFlight proof, App Store proof, physical-device proof, public accessibility proof, legal/privacy signoff, or human release approval.
+
+## Ambitions product truth
+
+- Ambitions is a premium native iPhone app for turning long-term goals into grounded daily execution.
 - Core loop: `Capture -> Place -> Plan -> Do Today -> Close / Recover -> Save Proof`.
-- Ambitions is not a generic task app, calendar clone, habit tracker, productivity score app, chatbot, or AI wrapper.
-- User-facing language should prefer Ambitions 3.0 terms such as `Start here`, `What needs a place?`, `Does this hold together?`, `Close the loop`, `Still Counts`, `Proof saved`, and `You are in control`.
+- Ambitions is not a generic task app, calendar clone, habit tracker, productivity score app, chatbot, AI wrapper, dashboard, or SaaS admin panel.
+- User-facing language should follow AmbitionsCanon first.
 - Avoid fake precision, fake certainty, AI theater, shame language, and silent automation.
 
-## Repo-Local Codex System
+## Batch train rule
 
-Use these entry points for Codex performance and execution:
+For multi-batch execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, and the selected manifest under `docs/codex/batch-trains/`.
 
-- `.codex/README.md`
-- `docs/codex/CODEX_OS_INDEX.md`
-- `docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md`
-- `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md`
-- `docs/codex/CODEX_SPEED_ENGINE.md`
-- `docs/codex/CODEX_REPAIR_ENGINE.md`
-- `docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md`
-- `docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md`
-- `docs/codex/CODEX_VISUAL_QA_PROTOCOL.md`
-- `docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md`
-- `docs/codex/CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL.md`
-- `docs/codex/CODEX_EVIDENCE_STANDARD.md`
-- `docs/codex/CODEX_GATE_ENGINE.md`
-- `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`
-- `docs/codex/CODEX_SKILLS_KIT.md`
-- `docs/codex/CODEX_REPO_HYGIENE_PROTOCOL.md`
-- `docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md`
-- `docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md`
-- `docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md`
-- `docs/canon/Ambitions_3_0_UI_Test_Contract.md`
-- `docs/canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md`
-- `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`
-- `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
-- `docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md`
-- `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md`
-- `docs/canon/Ambitions_3_0_Dependency_Management_Policy.md`
-- `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
-- `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`
-- `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md`
-
-## Batch Train Rule
-
-For multi-batch Ambitions 3.0 execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, and the selected manifest under `docs/codex/batch-trains/`. Codex may continue automatically through Green and accepted Yellow only when owner, safety reason, and no-claim boundary are recorded. Hard Red stops. F17 Shell/Meridian implementation requires explicit approval.
-
-## Resume Global Batch Train Alias
-
-When the user says `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`. Resume from repo evidence, first close any parked FIO01 / PFC05A / DPTG00 Yellow if safe, then continue the next eligible global batch until all eligible batches are complete or an unrecoverable Red stops the train.
+Continue automatically through Green and accepted Yellow only when owner, safety reason, and no-claim boundary are recorded. Hard Red stops.
