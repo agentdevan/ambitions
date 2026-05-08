@@ -1,85 +1,51 @@
 # Codex Evidence Standard
 
-Status: Active evidence and claim-boundary standard.  
-Date: 2026-05-07  
-Scope: Required evidence for Codex OS reports, gates, batch trains, and implementation claims.
+Status: Active Codex OS evidence standard; not release or compliance proof.
+Date: 2026-05-07
 
-## Evidence Packet
+## Evidence Packet Required Fields
 
-A valid evidence packet contains:
-
-```text
 - task
 - scope
 - files touched
+- files intentionally not touched
 - commands run
 - exit codes
-- raw log paths when commands ran
-- summarized output
+- raw logs
 - validation tier
-- Green / Yellow / Red classification
-- unsupported or deferred claims
+- gates
+- screenshots/rendered proof when UI is touched
+- human/device proof when claimed
+- claims not made
+- Green / Yellow / Red result
 - next eligible action
-```
 
-## Raw Logs
+## Proof States
 
-Summarized output is acceptable for navigation and routine summaries. Raw logs are mandatory for:
-
-- failed builds
-- failed tests
-- failed gates
-- hard Reds
-- release-readiness claims
-- TestFlight/App Store claims
-- device proof
-- public accessibility proof
-- legal/privacy compliance claims
-- destructive or migration operations
-
-## Claim Matrix
-
-| Claim | Minimum evidence |
-| --- | --- |
-| Docs file created/updated | File path plus diff or GitHub commit evidence. |
-| Script syntax checked | `python3 <script> --help` or equivalent exit code. |
-| Script preserves failure | A deliberately failing local validation command with nonzero exit code. |
-| Build passes | Raw `xcodebuild` or documented build command log for current commit. |
-| Tests pass | Raw test log for current commit. |
-| UI looks correct | Fresh screenshot/rendered proof plus visual QA notes. |
-| Accessibility reviewed | VoiceOver/Dynamic Type/Reduce Motion proof or explicit Yellow. |
-| Device verified | Physical-device operator evidence. |
-| Release-ready | Release checklist evidence plus human/operator signoff. |
+| State | Meaning | Required proof |
+| --- | --- | --- |
+| Planned | Future work is described. | Owner doc or roadmap entry. |
+| Canonized | Source truth has accepted the concept. | Canon owner doc. |
+| Scaffolded | Structural placeholder, prompt, model, or docs exist. | Files and boundaries. |
+| Implemented | App/source behavior exists. | Source evidence and relevant tests/build as scoped. |
+| Built | Build command completed. | Raw build log and exit code. |
+| Tested | Test command completed. | Raw test log and exit code. |
+| Device verified | Physical device proof exists. | Human/operator device evidence. |
+| Accessible | Accessibility claim has proof. | Scope-specific accessibility evidence and limitations. |
+| Privacy/legal reviewed | Human review completed. | Human/legal/privacy review artifact. |
+| Release-ready | Release checklist and human approvals complete. | Matching release evidence; Codex cannot infer it. |
 
 ## Forbidden Claim Shortcuts
 
-Do not claim any of the following from docs-only work, summarized logs, or intent:
+Do not say production-ready, release-ready, fully tested, fully accessible, App Store ready, TestFlight ready, device verified, privacy compliant, legally approved, or performance safe unless matching evidence exists.
 
-- production-ready
-- release-ready
-- fully tested
-- fully accessible
-- App Store ready
-- TestFlight ready
-- device verified
-- privacy compliant
-- legally approved
-- performance safe
+## Raw Log Policy
 
-## Evidence Location
+Raw command output is the durable proof. Summaries help humans, but they do not replace raw logs. ACX Local logs are local-only under `.codex/logs/`; committed reports should reference paths when useful without committing noisy raw files.
 
-Generated local logs stay under:
+## Green / Yellow / Red
 
-```text
-.codex/logs/
-```
-
-Committed audit and handoff evidence should use:
-
-```text
-docs/audits/
-docs/handoff/
-.codex/reports/
-```
-
-Commit generated logs only when explicitly requested and scrubbed.
+- Green: required proof exists and claims are bounded.
+- Yellow: gap is owned, safe, and nonblocking with no-claim boundary.
+- Red: proof is missing for a required claim, scope is unsafe, source truth conflicts, or validation fails.
+- Hard Red: Red that must stop continuation.

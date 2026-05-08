@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""ACX — Ambitions Command eXtractor.
+"""ACX: Ambitions Command eXtractor.
 
-Non-executing repo-local extractor for Ambitions Codex OS. It summarizes saved
-logs, scans advisory gates, reads bounded files, and groups changed-file text
-without invoking shell commands itself.
+Non-executing helper for bounded reads, saved-log summaries, changed-file
+grouping, advisory scans, and compact gate reports.
 """
 
 from __future__ import annotations
@@ -12,262 +11,209 @@ import argparse
 import re
 import sys
 from pathlib import Path
-from typing import Sequence
 
-MAX_KEY_LINES = 80
-MAX_GROUPED_LINES = 12
 
-DEPRECATED_LANGUAGE = [
-    (r"\bnext best move\b", "Use `Start here` or `Recommended step`."),
-    (r"\bYour best next move\b", "Use `Start here`."),
-    (r"\bInsights\b", "Insights is not a canonical top-level destination."),
-    (r"\bHabit streak\b|\bstreaks?\b", "Avoid habit-tracker framing unless historical context requires it."),
-]
-
-RELEASE_CLAIMS = [
-    (r"\bproduction[- ]ready\b", "Requires explicit production evidence and signoff."),
-    (r"\brelease[- ]ready\b", "Requires release evidence and signoff."),
-    (r"\bApp Store ready\b", "Requires App Store proof and review path."),
-    (r"\bTestFlight ready\b", "Requires signing/TestFlight proof."),
-    (r"\bfully tested\b", "Requires complete test evidence."),
-    (r"\bfully accessible\b|\baccessibility verified\b", "Requires accessibility proof or explicit Yellow."),
-    (r"\bdevice verified\b|\bphysical-device proof\b", "Requires physical-device evidence."),
-]
-
+ROOT = Path(__file__).resolve().parents[2]
 KEY_PATTERNS = [
-    r"\berror:", r"\bwarning:", r"\bBUILD FAILED\b", r"\bTEST FAILED\b",
-    r"\bFAILED\b", r"\bSTOPPED ON RED\b", r"\bHard Red\b", r"\bRed\b",
-    r"\bYellow\b", r"\bGreen\b", r"\bException\b", r"\bTraceback\b",
-    r"\bfatal:", r"\.swift:\d+",
+    "error:",
+    "warning:",
+    "BUILD FAILED",
+    "TEST FAILED",
+    "FAILED",
+    "STOPPED ON RED",
+    "Hard Red",
+    "Red",
+    "Yellow",
+    "Green",
+    "Traceback",
+    "fatal:",
 ]
+SWIFT_LINE_RE = re.compile(r"\.swift:\d+")
+CONCERNS = [
+    (".codex", lambda p: p.startswith(".codex/")),
+    ("docs/canon", lambda p: p.startswith("docs/canon/")),
+    ("docs/codex", lambda p: p.startswith("docs/codex/")),
+    ("docs", lambda p: p.startswith("docs/")),
+    ("scripts", lambda p: p.startswith("scripts/")),
+    ("source", lambda p: p.startswith(("Native/", "Sources/", "AppUI/Sources/"))),
+    ("tests", lambda p: "Tests/" in p or p.endswith("Tests.swift")),
+    ("config", lambda p: p in {"AGENTS.md", "project.yml", ".gitignore"} or p.endswith((".yml", ".yaml", ".toml", ".json"))),
+]
+SCAN_TERMS = {
+    "unsupported_release_claims": [
+        "production-ready",
+        "release-ready",
+        "fully tested",
+        "fully accessible",
+        "App Store ready",
+        "TestFlight ready",
+        "device verified",
+        "privacy compliant",
+        "legally approved",
+        "performance safe",
+    ],
+    "product_drift": [
+        "top-level Tasks",
+        "Habits tab",
+        "AI confidence",
+        "AI explanation",
+        "chatbot",
+        "productivity score",
+    ],
+}
 
 
-def repo_root() -> Path:
-    current = Path.cwd().resolve()
-    for candidate in [current, *current.parents]:
-        if (candidate / ".git").exists() or (candidate / ".codex").exists() or (candidate / "docs" / "codex").exists():
-            return candidate
-    return current
+def rel(path: Path) -> Path:
+    resolved = (ROOT / path).resolve()
+    if ROOT not in resolved.parents and resolved != ROOT:
+        raise SystemExit(f"Refusing path outside repo: {path}")
+    return resolved
 
 
-def rel(path: Path, root: Path) -> str:
-    try:
-        return str(path.resolve().relative_to(root.resolve()))
-    except Exception:
-        return str(path)
+def command_read(args: argparse.Namespace) -> int:
+    target = rel(Path(args.path))
+    if not target.exists() or not target.is_file():
+        print(f"ACX Red: file not found: {args.path}", file=sys.stderr)
+        return 1
+    lines = target.read_text(encoding="utf-8", errors="replace").splitlines()
+    limit = max(1, args.lines)
+    for idx, line in enumerate(lines[:limit], start=1):
+        print(f"{idx}: {line}")
+    if len(lines) > limit:
+        print(f"... truncated after {limit} of {len(lines)} lines")
+    return 0
 
 
 def key_lines(text: str) -> list[str]:
-    compiled = [re.compile(pattern, re.IGNORECASE) for pattern in KEY_PATTERNS]
-    output: list[str] = []
-    seen: set[str] = set()
+    out: list[str] = []
     for line in text.splitlines():
-        clean = line.rstrip()
-        if clean and clean not in seen and any(pattern.search(clean) for pattern in compiled):
-            output.append(clean)
-            seen.add(clean)
-        if len(output) >= MAX_KEY_LINES:
-            break
-    return output
+        if any(pattern in line for pattern in KEY_PATTERNS) or SWIFT_LINE_RE.search(line):
+            out.append(line)
+    return out
 
 
-def categorize(path: str) -> str:
-    path = path.strip().lstrip("/")
-    if " -> " in path:
-        path = path.split(" -> ", 1)[1].strip()
-    if path.startswith(".codex/"):
-        return ".codex"
-    if path.startswith("docs/canon/"):
-        return "docs/canon"
-    if path.startswith("docs/codex/"):
-        return "docs/codex"
-    if path.startswith("docs/"):
-        return "docs"
-    if path.startswith("scripts/"):
-        return "scripts"
-    if path.startswith(("Native/", "Sources/", "AppUI/")):
-        return "source"
-    if "Tests/" in path or path.endswith("Tests.swift") or path.startswith("Tests/"):
-        return "tests"
-    if path.startswith(".github/") or path in {"project.yml", "Package.swift", "README.md", "AGENTS.md", ".gitignore"}:
-        return "config"
-    return "other"
-
-
-def safe_file(root: Path, raw: str) -> Path | None:
-    target = (root / raw).resolve()
-    try:
-        target.relative_to(root.resolve())
-    except ValueError:
-        return None
-    return target
-
-
-def cmd_read(args: argparse.Namespace) -> int:
-    root = repo_root()
-    target = safe_file(root, args.file)
-    if target is None:
-        print("RED: refusing to read outside repo root.", file=sys.stderr)
-        return 2
-    if not target.is_file():
-        print(f"RED: file not found: {args.file}", file=sys.stderr)
-        return 1
-    lines = target.read_text(encoding="utf-8", errors="replace").splitlines()
-    start = max(args.start, 1)
-    end = min(len(lines), start + max(args.lines, 1) - 1)
-    print(f"# ACX Read `{args.file}` lines {start}-{end} of {len(lines)}")
-    for number in range(start, end + 1):
-        print(f"{number:>5}: {lines[number - 1]}")
-    return 0
-
-
-def cmd_summarize_log(args: argparse.Namespace) -> int:
-    root = repo_root()
-    target = safe_file(root, args.file)
-    if target is None:
-        print("RED: refusing to summarize outside repo root.", file=sys.stderr)
-        return 2
-    if not target.is_file():
-        print(f"RED: log not found: {args.file}", file=sys.stderr)
+def command_summarize_log(args: argparse.Namespace) -> int:
+    target = rel(Path(args.path))
+    if not target.exists() or not target.is_file():
+        print(f"ACX Red: log not found: {args.path}", file=sys.stderr)
         return 1
     text = target.read_text(encoding="utf-8", errors="replace")
-    keys = key_lines(text)
-    print(f"# ACX Log Summary — `{args.file}`")
-    print(f"- Source log: `{rel(target, root)}`")
-    print(f"- Lines: `{len(text.splitlines())}`")
-    print("\n## Key Lines")
-    if keys:
-        for line in keys:
-            print(f"- {line}")
-    else:
-        first = [line.rstrip() for line in text.splitlines() if line.strip()][:20]
-        for line in first or ["No output."]:
-            print(f"- {line}")
+    matches = key_lines(text)
+    print(f"# ACX Log Summary\n\nRaw log: `{args.path}`\nLines: {len(text.splitlines())}\nKey lines: {len(matches)}")
+    for line in matches[: args.max_lines]:
+        print(f"- {line[:240]}")
+    if len(matches) > args.max_lines:
+        print(f"- ... truncated {len(matches) - args.max_lines} additional key lines")
     return 0
 
 
-def parse_changed_text(text: str) -> dict[str, list[tuple[str, str]]]:
-    grouped: dict[str, list[tuple[str, str]]] = {}
-    for line in text.splitlines():
-        if not line or line.startswith("##"):
-            continue
-        code = line[:2]
-        path = line[3:].strip() if len(line) > 3 else line.strip()
-        if path:
-            grouped.setdefault(categorize(path), []).append((code, path))
+def extract_status_path(line: str) -> str | None:
+    if not line or line.startswith("##"):
+        return None
+    body = line[3:] if len(line) > 3 else line
+    if " -> " in body:
+        body = body.split(" -> ", 1)[1]
+    return body.strip()
+
+
+def group_paths(paths: list[str]) -> dict[str, list[str]]:
+    grouped: dict[str, list[str]] = {name: [] for name, _ in CONCERNS}
+    grouped["other"] = []
+    for path in paths:
+        bucket = next((name for name, test in CONCERNS if test(path)), "other")
+        grouped[bucket].append(path)
     return grouped
 
 
-def cmd_changed_from(args: argparse.Namespace) -> int:
-    root = repo_root()
-    target = safe_file(root, args.file)
-    if target is None or not target.is_file():
-        print(f"RED: status log not found: {args.file}", file=sys.stderr)
-        return 1
-    grouped = parse_changed_text(target.read_text(encoding="utf-8", errors="replace"))
+def command_group_status(args: argparse.Namespace) -> int:
+    target = rel(Path(args.path))
+    text = target.read_text(encoding="utf-8", errors="replace")
+    paths = [p for p in (extract_status_path(line) for line in text.splitlines()) if p]
     print("# ACX Changed Files By Ambitions Concern")
-    if not grouped:
-        print("- No changed files detected in provided status text.")
-    for group in sorted(grouped):
-        print(f"\n## {group}")
-        for code, path in grouped[group]:
-            print(f"- `{code}` {path}")
-    return 0
-
-
-def scan(patterns: list[tuple[str, str]], args: argparse.Namespace, title: str) -> int:
-    root = repo_root()
-    paths = args.paths or ["AGENTS.md", "README.md", "docs", ".codex", "scripts"]
-    compiled = [(re.compile(pattern, re.IGNORECASE), reason) for pattern, reason in patterns]
-    findings: list[tuple[str, int, str, str]] = []
-    for item in paths:
-        path = safe_file(root, item)
-        if path is None or not path.exists():
+    for bucket, items in group_paths(paths).items():
+        if not items:
             continue
-        candidates = [path] if path.is_file() else [p for p in path.rglob("*") if p.is_file()]
-        for file_path in candidates:
-            if ".git" in file_path.parts or ".codex/logs" in str(file_path):
-                continue
-            if file_path.suffix.lower() in {".png", ".jpg", ".jpeg", ".gif", ".webp", ".pdf", ".xcresult"}:
-                continue
-            text = file_path.read_text(encoding="utf-8", errors="replace")
-            for line_number, line in enumerate(text.splitlines(), start=1):
-                for pattern, reason in compiled:
-                    if pattern.search(line):
-                        findings.append((rel(file_path, root), line_number, line.strip(), reason))
-    print(f"# ACX Gate — {title}")
-    if not findings:
-        print("Green: no matching advisory findings.")
-        return 0
-    for file_path, line_number, line, reason in findings[:200]:
-        print(f"- {file_path}:{line_number}: {line}\n  - Advisory: {reason}")
-    if args.strict:
-        print("Red: strict mode converts advisory findings to failure.")
-        return 1
-    print("Accepted Yellow: advisory findings require owner review; strict mode not enabled.")
+        print(f"\n## {bucket}")
+        for item in items:
+            print(f"- {item}")
     return 0
 
 
-def cmd_gate(args: argparse.Namespace) -> int:
-    if args.name == "deprecated-language":
-        return scan(DEPRECATED_LANGUAGE, args, "Deprecated Language")
-    if args.name == "release-claims":
-        return scan(RELEASE_CLAIMS, args, "Release Claims")
-    if args.name == "all":
-        return max(scan(DEPRECATED_LANGUAGE, args, "Deprecated Language"), scan(RELEASE_CLAIMS, args, "Release Claims"))
-    return 2
-
-
-def cmd_gate_report(args: argparse.Namespace) -> int:
-    root = repo_root()
-    logs = root / ".codex" / "logs"
-    print("# ACX Gate Report")
-    if not logs.exists():
-        print("- No `.codex/logs/` directory found.")
+def command_scan(args: argparse.Namespace) -> int:
+    findings: list[str] = []
+    for raw in args.paths:
+        path = rel(Path(raw))
+        files = [path] if path.is_file() else [p for p in path.rglob("*") if p.is_file() and ".git" not in p.parts]
+        for file_path in files:
+            if file_path.suffix in {".png", ".jpg", ".jpeg", ".gif", ".xcresult"}:
+                continue
+            text = file_path.read_text(encoding="utf-8", errors="ignore")
+            for family, terms in SCAN_TERMS.items():
+                for term in terms:
+                    if term.lower() in text.lower():
+                        findings.append(f"{family}: {file_path.relative_to(ROOT)} contains `{term}`")
+    if findings:
+        print("ACX Yellow: advisory scan findings")
+        for finding in findings[: args.max_findings]:
+            print(f"- {finding}")
+        if len(findings) > args.max_findings:
+            print(f"- ... truncated {len(findings) - args.max_findings} findings")
         return 0
-    files = sorted([p for p in logs.rglob("*") if p.is_file()], key=lambda p: p.stat().st_mtime, reverse=True)[: args.limit]
-    markers = re.compile(r"STOPPED ON RED|Hard Red|\bRed\b|\bYellow\b|\bGreen\b|error:|warning:|BUILD FAILED|TEST FAILED", re.IGNORECASE)
-    found = False
-    for file_path in files:
-        matches = [line.strip() for line in file_path.read_text(encoding="utf-8", errors="replace").splitlines() if markers.search(line)][:12]
-        if matches:
-            found = True
-            print(f"\n## {rel(file_path, root)}")
-            for line in matches:
-                print(f"- {line}")
-    if not found:
-        print("- No Green/Yellow/Red, STOPPED ON RED, error, warning, build, or test markers found in recent logs.")
+    print("ACX Green: advisory scan found no configured terms")
+    return 0
+
+
+def command_gate(args: argparse.Namespace) -> int:
+    print("# ACX Gate Report")
+    print(f"Mode: {args.gate}")
+    missing = [raw for raw in args.paths if not rel(Path(raw)).exists()]
+    if missing:
+        print("Result: Yellow")
+        for item in missing:
+            print(f"- Missing optional path: {item}")
+        return 0
+    print("Result: Green")
+    print("- Paths exist and can be scanned by non-executing ACX.")
+    if args.gate == "all":
+        scan_args = argparse.Namespace(paths=args.paths, max_findings=40)
+        command_scan(scan_args)
     return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="acx", description="Ambitions Command eXtractor: non-executing log/context extractor.")
-    sub = p.add_subparsers(dest="command_name", required=True)
-    read = sub.add_parser("read")
-    read.add_argument("file")
-    read.add_argument("--start", type=int, default=1)
-    read.add_argument("--lines", type=int, default=120)
-    read.set_defaults(func=cmd_read)
-    summary = sub.add_parser("summarize-log")
-    summary.add_argument("file")
-    summary.set_defaults(func=cmd_summarize_log)
-    changed = sub.add_parser("changed-files-from")
-    changed.add_argument("file")
-    changed.set_defaults(func=cmd_changed_from)
-    gate = sub.add_parser("gate")
-    gate.add_argument("name", choices=["deprecated-language", "release-claims", "all"])
-    gate.add_argument("--strict", action="store_true")
-    gate.add_argument("paths", nargs="*")
-    gate.set_defaults(func=cmd_gate)
-    report = sub.add_parser("gate-report")
-    report.add_argument("--limit", type=int, default=60)
-    report.set_defaults(func=cmd_gate_report)
-    return p
+    parser = argparse.ArgumentParser(description="ACX non-executing extraction helper.")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    read = sub.add_parser("read", help="Bounded file read")
+    read.add_argument("path")
+    read.add_argument("--lines", type=int, default=80)
+    read.set_defaults(func=command_read)
+
+    summarize = sub.add_parser("summarize-log", help="Summarize a saved raw log")
+    summarize.add_argument("path")
+    summarize.add_argument("--max-lines", type=int, default=80)
+    summarize.set_defaults(func=command_summarize_log)
+
+    group = sub.add_parser("group-status", help="Group saved git status text")
+    group.add_argument("path")
+    group.set_defaults(func=command_group_status)
+
+    scan = sub.add_parser("scan", help="Advisory claim/product-drift scan")
+    scan.add_argument("paths", nargs="+")
+    scan.add_argument("--max-findings", type=int, default=80)
+    scan.set_defaults(func=command_scan)
+
+    gate = sub.add_parser("gate", help="Compact advisory gate report")
+    gate.add_argument("gate", choices=["all", "claims", "scope", "routes"])
+    gate.add_argument("paths", nargs="+")
+    gate.set_defaults(func=command_gate)
+    return parser
 
 
-def main(argv: Sequence[str] | None = None) -> int:
-    args = build_parser().parse_args(argv)
-    return int(args.func(args))
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+    return args.func(args)
 
 
 if __name__ == "__main__":

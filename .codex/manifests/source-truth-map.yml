@@ -1,0 +1,15 @@
+version: 1
+status: active
+date: "2026-05-07"
+precedence:
+  - "Current user directive"
+  - "AGENTS.md"
+  - "Ambitions 3.0 canon owner docs"
+  - "Current source code"
+  - "Raw validation evidence"
+  - "Batch registry for implementation status only"
+  - "Codex OS maps and compact mirrors"
+non_override_maps:
+  - ".codex/routes/README.md"
+  - ".codex/state/"
+  - ".codex/manifests/"

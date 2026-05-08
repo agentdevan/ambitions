@@ -32,6 +32,14 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md`,
   `docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md`, and the CQS skill/
   script maps for every remaining global batch.
+- Codex OS now has a six-subsystem operating map for developer-tooling,
+  governance, route-first context, evidence packets, batch state, and skills
+  routing. Use `docs/codex/CODEX_OS_INDEX.md`, `.codex/routes/README.md`,
+  `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md`,
+  `docs/codex/CODEX_GATE_ENGINE.md`, and
+  `docs/codex/CODEX_EVIDENCE_STANDARD.md` for Codex OS mechanics. These files
+  do not override Ambitions 3.0 source truth, source code, raw logs, or batch
+  registry status truth.
 - Found Life Layer source truth is active. FL01 is complete Green as
   product-soul source truth with accepted Yellow order reconciliation because
   the remote Found Life source arrived after FCP17 had already landed. Use

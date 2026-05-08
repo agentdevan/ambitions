@@ -1,41 +1,34 @@
-# Codex Route Catalog
+# Ambitions Route Context Map
 
-Status: Active route catalog.  
-Date: 2026-05-07  
-Scope: Compact routing for Ambitions Codex OS usage efficiency.
+Status: Active route-first context map. Route files are maps, not source truth.
+Date: 2026-05-07
 
-## Route Selection Rule
+## Route Rule
 
-Pick one route before broad repo search. Add a second route only when the task crosses a real boundary, such as UI plus build failure or canon drift plus release claims.
+Pick one route before broad search. Add a second route only when the task truly crosses ownership boundaries. If this map conflicts with owner docs or current source, trust the owner docs/source and update this route later.
 
 ## Routes
 
-| Route | Use | Read first | Required gates | Forbidden drift |
-| --- | --- | --- | --- | --- |
-| Today UI | Start Here Surface, Reality Meridian/Rail, pressure/recovery, closure, Step Session entry. | `AGENTS.md`, `CODEX_OS_INDEX.md`, current batch state, Today owner canon/FCP evidence. | Source Truth, Top-Level Composition, Visual/FVQ, Accessibility, Canon Drift, Validation. | Generic task dashboard, card stack, silent schedule mutation, unsupported release/accessibility claims. |
-| Goals UI | Goals atlas, Goal Detail, Mission Control, LifePath, Proof Spine. | Goals owner canon and FCP10-FCP13B evidence. | Source Truth, no-KPI-dashboard, Visual/FVQ, Accessibility, Proof/Receipt, Validation. | Forced single primary goal, KPI dashboard, hidden path mutation. |
-| Capture UI | Composer, Placement Shelf, Placement Resolver, Correction Fold, Goal Seed Incubator. | Capture owner canon and FCP18-FCP21 evidence. | Composer-first, Privacy/Hidden Learning, Accessibility, Validation. | Inbox/feed/notes posture, automatic goal creation, hidden learning. |
-| Plan UI | LifeShape, pressure/recovery, reflow, schedule/availability, capacity. | Plan/LifeShape/Reflow owner canon and FCP14-FCP16 evidence. | Calendar-clone rejection, silent-reflow rejection, protected/free-time proof, Accessibility. | Generic calendar clone, silent mutation, fake precision. |
-| You UI | Personal System Center, Planning Setup, Trust/Memory/Receipts, Appearance Studio. | You/Profile compatibility docs and FCP22-FCP24 evidence. | You terminology, grouped-list, privacy/trust/memory, Accessibility. | New Profile top-level destination, hidden durable memory/sync claims. |
-| Build Failure | Compile, test, Xcode, Swift, XcodeGen, dependency, validation failure. | Raw log, evidence standard, build/toolchain docs. | Validation, Senior Architecture, Release Claim, Report. | Broad refactor before root cause, dependency addition without approval. |
-| Visual QA | Screenshot/rendered proof, flagship object quality, native believability. | CQS gate matrix, surface route, FVQ evidence. | Visual Quality, FVQ Rendered Proof, Accessibility, Anti-Slop. | Claiming human-approved visuals/public accessibility/release readiness without proof. |
-| Canon Drift | Product language, source truth, supersession, naming conflicts, top-level IA. | Context index, peak protocol, CQS matrix, owner doc. | Source Truth, Canon Drift, Report, Release Claim when needed. | Erasing history, creating new top-level tabs, turning status truth into product truth. |
-| Global Batch Train | Resume/continue batch train until complete or hard Red. | `RESUME_GLOBAL_BATCH_TRAIN.md`, current batch state, global order, selected batch prompt. | Source Truth, Scope, No-Double-Work, Validation, Report, batch-specific gates. | Continuing through hard Red, claiming app behavior from canon/scaffold alone. |
-| Repo Hygiene | Stale docs, duplicated concepts, generated artifacts, ignored logs, script maps. | `.codex/README.md`, CQS script map, RHC reports. | Scope, No-Overwrite, Anti-Slop, Validation, Report. | Deleting historical docs or accepted Yellow history without approval. |
-| Source Atlas | Pack manifests, claims, requirements, proof maps, validators, projection recipes. | Source Atlas canon, SA/SAP reports, SA06 schema evidence. | Source Truth, Schema/Sync/Migration if touched, Privacy/Security, Validation. | Fabricating seed files, marking missing imports complete, hosted-AI claims. |
+| Route | Purpose | Read first | Likely paths | Likely tests | Required gates | Forbidden edits | Evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Today UI | Today surface and Start Here / Reality Rail / Action Closure visual behavior. | `AGENTS.md`, `docs/canon/Ambitions_3_0_Primitive_Architecture.md`, Today context pack, active batch prompt. | `Native/Ambitions/Features/Today/`, shared UI used by Today. | Today unit/UI tests, focused snapshots when available. | Source Truth, Scope, SwiftUI, Visual, FVQ, Accessibility, Validation, Report. | Top-level IA changes, calendar permission requests, generic dashboard sprawl. | Build/test logs plus rendered proof for UI changes. |
+| Goals UI | Goals portfolio, Goal Detail, Mission Control, LifePath, Proof Spine. | Goals context pack, primitive architecture, product language, active batch. | `Native/Ambitions/Features/Goals/`, shared trust UI. | Goals and Goal Detail tests. | Source Truth, Scope, SwiftUI, Visual, Accessibility, Canon Drift. | New Tasks tab, path wizard sprawl, fake scoring. | Focused tests and screenshots for visible changes. |
+| Capture UI | Capture, placement shelf, resolver, correction, goal seed review. | Capture placement context, product language, privacy/trust docs. | `Native/Ambitions/Features/Capture/`. | Capture tests and routing tests. | Source Truth, Privacy, Scope, Visual, Accessibility. | Inbox/feed/notes mode, automatic goal creation, hidden learning. | Focused tests, privacy non-claims, rendered proof if UI changes. |
+| Plan UI | Plan, LifeShape, Reflow, calendar boundaries, recovery suggestions. | Plan context pack, calendar/privacy docs. | `Native/Ambitions/Features/Plan/`. | Plan tests, calendar-boundary tests. | Source Truth, Privacy, Accessibility, Scope, Visual. | Silent mutation, calendar writes without explicit owner proof, onboarding permission prompts. | Focused tests and no-claim boundary. |
+| You UI | Personal System Center, Memory, Trust, Receipts, Appearance. | You trust/memory context, product language, privacy docs. | `Native/Ambitions/Features/Profile/`, You-owned shared UI. | Profile/You tests, memory/trust tests. | Source Truth, Privacy, Accessibility, Canon Drift. | Renaming the user-facing tab away from You, fake durable memory claims. | Focused tests, privacy proof, rendered proof for UI changes. |
+| Build Failure | Build generation, compiler, linker, project wiring. | `project.yml`, XcodeGen docs, toolchain readiness, recent raw logs. | `project.yml`, `Native/`, package/config files. | Minimal failing build/test lane. | Source Truth, Validation, Senior Architecture, Report. | Product fixes not required by the failure, generated-project source truth drift. | Raw build logs and exact exit codes. |
+| Visual QA | Rendered visual proof, screenshots, FVQ packets. | FVQ protocol docs, visual QA routes, selected surface route. | Feature UI, preview fixtures, audit reports. | Preview/screenshot/UI evidence lane. | Visual, FVQ, Accessibility, Performance, Report. | Claiming visual quality from docs or compile alone. | Fresh screenshot/render proof plus limitations. |
+| Canon Drift | Product language, IA, source-truth conflicts. | Ambitions 3.0 source override, product language system, docs index. | `docs/canon/`, `docs/codex/`, user-facing copy. | CQS product drift scan. | Source Truth, Canon Drift, Deprecated Language, Report. | New top-level destinations, generic AI-wrapper language. | Drift findings and owner-doc citations. |
+| Global Batch Train | Long train selection, continuation, gates, restart. | `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, batch train state, global order, registry. | `docs/codex/`, `.codex/reports/`, selected owner files. | Batch-specific validation pack. | Route Context, Gate Engine, Evidence Packet, Report. | Skipping dependencies, double work, unowned Yellow continuation. | Run state, evidence packet, commit/push proof when requested. |
+| Repo Hygiene | Stale docs, generated artifacts, ownership maps, ignored files. | Hygiene protocol, `.gitignore`, repo maps, CQS maps. | `.codex/`, `docs/codex/`, scripts, ignore files. | ACX status/diff profiles, hygiene scans. | Source Truth, Scope, Repo Hygiene, Report. | Deleting history without owner permission. | Changed-file grouping, raw logs, no-overwrite notes. |
+| Source Atlas | Source packs, external references, source truth claim graph. | Source Atlas docs and Source Atlas route owner docs. | `docs/canon/`, `docs/audits/`, source pack files. | Source Atlas validation where present. | Source Truth, Privacy, Evidence, Report. | Fabricating missing source packs or marking unavailable imports complete. | Source availability and non-claim boundary. |
+| External Brain / Memory / Trust | Memory, trust, receipts, local intelligence boundaries. | You trust/memory context, AOS/LDI owner docs, privacy docs. | You/Profile, Domain trust/memory models, docs/canon. | Memory/trust/privacy tests. | Privacy, Source Truth, Canon Drift, Evidence. | Hosted AI claims, durable memory claims, creepy intelligence copy. | Tests and privacy non-claims. |
+| Release Claim Audit | Release, TestFlight, App Store, device, legal, privacy claim safety. | Release claim protocols, PFC docs, evidence standard. | Docs/copy/reports, privacy manifests. | CQS release claim scan. | Release Claim Firewall, Privacy/Legal/App Store, Evidence. | Claiming readiness without operator proof. | Raw scan logs and claim matrix. |
+| Accessibility / Motion | Dynamic Type, Reduce Motion, labels, gesture alternatives. | Accessibility/motion docs, selected surface route. | UI files, previews, tests. | Accessibility/motion scans, focused UI proof. | Accessibility, FVQ, Visual, Report. | Public conformance claims without proof. | Manual/simulator/device distinction. |
+| Privacy / Security | Data, secrets, logs, local-first, legal/privacy review boundaries. | PFC privacy/security docs, privacy checklist. | Docs, PrivacyInfo, services, persistence. | CQS privacy/security scan. | Privacy/Legal/App Store, Evidence, Report. | Compliance/legal approval claims without human proof. | Scan logs and human-review stops. |
+| Performance / Energy | Budgets, Instruments plans, animation/update risks. | Performance budget docs, CQS performance map. | UI/runtime/platform surfaces. | CQS performance scan, focused profiling if owned. | Performance/Battery, SwiftUI, Evidence. | Performance-safe claims without measurement. | Raw logs and measurement boundaries. |
+| Xcode / Toolchain | XcodeGen, simulator, local toolchain readiness. | XcodeGen policy, MAC toolchain setup, build docs. | `project.yml`, generated project, scripts. | `xcodegen generate` when safe; documented build/test only. | Validation, Source Truth, Repo Hygiene. | Treating generated `.xcodeproj` as source truth. | Raw logs and exact tool versions when checked. |
 
-## Evidence Requirements
+## Fallback If Stale
 
-Every route must report:
-
-- files read
-- files touched
-- commands run
-- exit codes
-- raw logs when relevant
-- claims not made
-- Green / Accepted Yellow / Red
-
-## Staleness Rule
-
-This file is a route map, not source truth. If it conflicts with `AGENTS.md`, active canon, `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md`, or `.codex/reports/current-batch-train-state.md`, trust the owner file and update this catalog in a Codex OS maintenance pass.
+When a route is stale, stop broad execution, read the owner docs/source, record the stale route line in the closeout, and repair the route as a docs/tooling change before relying on it.

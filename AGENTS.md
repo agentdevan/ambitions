@@ -16,7 +16,7 @@ Ambitions 3.0 is the active source of truth. Ambitions 2.0, v2, Waves, Batch 61+
 10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
 11. `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md` when the user says `resume global batch train`.
 12. `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md` for flagship maturity, terminal-device, pre-device closure, and no-hosted-workflow validation rules.
-13. `docs/codex/CODEX_OS_INDEX.md` for Codex OS routing, usage efficiency, evidence, route, and state-map entry points.
+13. `docs/codex/CODEX_OS_INDEX.md` for Codex OS route, ACX, gate, evidence, batch-state, and skills routing when the task is developer-tooling, governance, or long-run execution.
 
 Older docs may remain useful, but they do not override Ambitions 3.0 source docs. If old docs conflict with Ambitions 3.0, resolve in favor of Ambitions 3.0 and document the conflict when it affects implementation.
 
@@ -29,7 +29,8 @@ Older docs may remain useful, but they do not override Ambitions 3.0 source docs
 - Preserve the native SwiftUI architecture.
 - Do not create new top-level Ambitions destinations. The canonical destinations remain `Today / Goals / Capture / Plan / You`.
 - Do not implement product features in docs/tooling passes unless the tooling itself requires a narrow test or compatibility fix.
-- Use repo-local Codex operating docs, skills, validation packs, context packs, playbooks, templates, routes, state mirrors, evidence protocols, and extractors under `.codex/`, `docs/codex/`, and `scripts/ai/`.
+- Use repo-local Codex operating docs, skills, validation packs, context packs, playbooks, and templates under `.codex/` and `docs/codex/`.
+- During Codex OS / developer-tooling / governance passes, do not implement app features, refactor SwiftUI source, modify product IA, or add runtime app dependencies.
 
 ## Architecture Boundaries
 
@@ -44,6 +45,7 @@ Older docs may remain useful, but they do not override Ambitions 3.0 source docs
 ## Execution Rules
 
 - Start non-trivial work by checking repo status, current docs, and the target code paths.
+- For non-trivial work, pick one route from `.codex/routes/README.md` before broad search. Add a second route only for real cross-boundary work.
 - Use the smallest safe touch budget. Name primary files before edits.
 - Prefer deterministic, additive, compatibility-safe changes.
 - Do not silently rewrite product strategy, IA, naming, release posture, or roadmap structure.
@@ -53,6 +55,10 @@ Older docs may remain useful, but they do not override Ambitions 3.0 source docs
 - After meaningful changes, run `xcodegen generate` and the relevant build/test/scan pack when local tooling supports it.
 - Validation summaries must separate verified, failed, not verified, and human/device follow-up.
 - Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, or release readiness without matching evidence.
+- Use `scripts/ai/acx.py` only as a non-executing extractor for bounded reads, saved-log summaries, changed-file grouping, advisory scans, and gate reports.
+- Use `scripts/ai/acx_local.py` only for allowlisted local command profiles. It must not accept arbitrary shell strings, use `shell=True`, run destructive commands, stage, commit, push, reset, clean, delete, switch branches, run `sudo`, or run `bash -c` / `sh -c`.
+- Preserve raw command logs under `.codex/logs/` when using ACX Local. Summaries do not replace raw logs.
+- If ACX is unavailable, fall back to direct `rg`, `git status`, documented validation commands, and manual raw-log capture; report the fallback.
 
 ## Ambitions Product Truth
 
@@ -68,13 +74,13 @@ Use these entry points for Codex performance and execution:
 
 - `.codex/README.md`
 - `docs/codex/CODEX_OS_INDEX.md`
-- `docs/codex/CODEX_USAGE_EFFICIENCY.md`
-- `docs/codex/CODEX_AGENT_PROTOCOL.md`
-- `docs/codex/CODEX_EVIDENCE_STANDARD.md`
-- `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`
 - `docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md`
+- `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md`
+- `docs/codex/CODEX_EVIDENCE_STANDARD.md`
 - `docs/codex/CODEX_GATE_ENGINE.md`
+- `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`
 - `docs/codex/CODEX_SKILLS_KIT.md`
+- `docs/codex/CODEX_REPO_HYGIENE_PROTOCOL.md`
 - `docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md`
 - `docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md`
 - `docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md`
@@ -89,29 +95,9 @@ Use these entry points for Codex performance and execution:
 - `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`
 - `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md`
 
-## Codex OS Efficiency Overlay
-
-Use ACX and route files for usage-heavy sessions:
-
-```bash
-python3 scripts/ai/acx.py read AGENTS.md --lines 140
-python3 scripts/ai/acx.py read docs/codex/CODEX_OS_INDEX.md --lines 160
-python3 scripts/ai/acx.py summarize-log output/logs/latest-build.log
-python3 scripts/ai/acx.py changed-files-from output/logs/git-status-short.txt
-python3 scripts/ai/acx.py gate all
-python3 scripts/ai/acx.py gate-report
-```
-
-- ACX is non-executing. It reads bounded files, summarizes saved logs, groups changed-file text from saved status output, and runs advisory scans.
-- Use `.codex/routes/README.md` before broad repo search.
-- Use `.codex/state/ambitions-known-facts.md` and `.codex/state/active-batch.yml` only as compact mirrors; authoritative truth remains in the owner docs they reference.
-- Use ACX summaries for navigation and routine review only.
-- Inspect raw logs for failed builds, failed tests, failed gates, hard Reds, release/device/accessibility claims, and proof-sensitive decisions.
-- If ACX is unavailable, fall back to normal file reads and bounded shell output; do not fail a task only because ACX is missing.
-
 ## Batch Train Rule
 
-For multi-batch Ambitions execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, and the selected manifest under `docs/codex/batch-trains/`. Codex may continue automatically through Green and accepted Yellow only when the owner, safety reason, and no-claim boundary are recorded. Red/hard Red stops and produces a repair or decision prompt. F17 Shell/Meridian implementation requires explicit approval.
+For multi-batch Ambitions 3.0 execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, and the selected manifest under `docs/codex/batch-trains/`. Codex may continue automatically through Green and accepted Yellow only when owner, safety reason, and no-claim boundary are recorded. Hard Red stops. F17 Shell/Meridian implementation requires explicit approval.
 
 ## Resume Global Batch Train Alias
 

@@ -1,0 +1,80 @@
+version: 1
+status: active
+date: "2026-05-07"
+local_executor: "scripts/ai/acx_local.py"
+rules:
+  arbitrary_shell: forbidden
+  shell_true: forbidden
+  destructive_terms:
+    - "rm"
+    - "mv"
+    - "cp -r"
+    - "git reset"
+    - "git clean"
+    - "git checkout"
+    - "git switch"
+    - "git push"
+    - "git commit"
+    - "sudo"
+    - "bash -c"
+    - "sh -c"
+    - "curl | sh"
+profiles:
+  status:
+    argv:
+      - ["git", "status", "--short", "--branch"]
+  changed-files:
+    argv:
+      - ["git", "status", "--short", "--branch"]
+    postprocess: "group by Ambitions concern"
+  diff-stat:
+    argv:
+      - ["git", "diff", "--stat"]
+  diff-names:
+    argv:
+      - ["git", "diff", "--name-status"]
+  diff-compact:
+    argv:
+      - ["git", "diff", "--unified=2"]
+    postprocess: "key lines and compact summary"
+  log:
+    argv:
+      - ["git", "log", "--oneline", "-n", "12"]
+  acx-help:
+    argv:
+      - ["python3", "scripts/ai/acx.py", "--help"]
+  acx-gate-all:
+    argv:
+      - ["python3", "scripts/ai/acx.py", "gate", "all", "docs/codex", ".codex", "AGENTS.md"]
+  cqs-product-drift:
+    argv:
+      - ["bash", "scripts/cqs-product-drift-scan.sh"]
+    optional_tool_yellow: true
+  cqs-release-claims:
+    argv:
+      - ["bash", "scripts/cqs-privacy-security-claim-scan.sh"]
+    optional_tool_yellow: true
+  cqs-accessibility-motion:
+    argv:
+      - ["bash", "scripts/cqs-accessibility-motion-scan.sh"]
+    optional_tool_yellow: true
+  cqs-performance:
+    argv:
+      - ["bash", "scripts/cqs-performance-budget-scan.sh"]
+    optional_tool_yellow: true
+  xcodegen-generate:
+    argv:
+      - ["xcodegen", "generate"]
+    optional_tool_yellow: true
+    preconditions:
+      - "project.yml exists"
+      - "xcodegen is installed"
+  build-help:
+    docs_only: true
+  test-help:
+    docs_only: true
+local_overrides:
+  path: ".codex/local/acx-local-overrides.yml"
+  gitignored: true
+  command_shape: "argv arrays only"
+  still_rejects_destructive_terms: true

@@ -1,0 +1,17 @@
+version: 1
+status: active
+date: "2026-05-07"
+owners:
+  codex_os_index: "docs/codex/CODEX_OS_INDEX.md"
+  acx_non_executing: "scripts/ai/acx.py"
+  acx_local_executor: "scripts/ai/acx_local.py"
+  command_profiles: ".codex/manifests/acx-command-profiles.yml"
+  routes: ".codex/routes/README.md"
+  route_protocol: "docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md"
+  compact_state: ".codex/state/"
+  evidence_standard: "docs/codex/CODEX_EVIDENCE_STANDARD.md"
+  gate_engine: "docs/codex/CODEX_GATE_ENGINE.md"
+  skills_kit: "docs/codex/CODEX_SKILLS_KIT.md"
+  repo_hygiene: "docs/codex/CODEX_REPO_HYGIENE_PROTOCOL.md"
+  batch_registry_status_truth: "docs/codex/BATCH_REGISTRY.md"
+  active_product_truth: "docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md"

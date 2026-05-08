@@ -1,61 +1,59 @@
-# Ambitions Codex OS Index
+# Codex OS Index
 
-Status: Active Codex OS index and usage-efficiency overlay.  
-Date: 2026-05-07  
-Scope: Developer tooling, execution governance, evidence discipline, and batch-train efficiency. This file is not product implementation evidence.
+Status: Active repo-local Codex OS index for Ambitions engineering sessions; not product implementation evidence.
+Date: 2026-05-07
 
 ## Purpose
 
-This index prevents future Codex sessions from rediscovering the repo from scratch. It points agents to the smallest operating layer that can safely answer the current task.
+This file is the top-level map for the Ambitions Codex OS. It exists to make future Codex sessions faster, less noisy, safer, and more evidence-bound while preserving Ambitions 3.0 source truth.
 
-## Source-Truth Precedence
+It does not override `AGENTS.md`, Ambitions 3.0 canon, owner docs, source code, validation logs, or `docs/codex/BATCH_REGISTRY.md`.
 
-1. Current user directive.
-2. `AGENTS.md`.
-3. `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md`.
-4. `.codex/README.md`.
-5. `docs/codex/CONTEXT_INDEX.md`.
-6. `docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md`.
-7. `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md`.
-8. `docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md`.
-9. `.codex/reports/current-batch-train-state.md`.
-10. This index and the route/state/evidence files named below.
+## Six Subsystems
 
-When files disagree, preserve the older historical record and add a reconciliation note instead of overwriting history.
+| Subsystem | Name | Purpose | Primary owners |
+| --- | --- | --- | --- |
+| ACX | Ambitions Command eXtractor | Bounded reads, saved-log summaries, changed-file grouping, advisory scans, and allowlisted local execution through a separate companion. | `scripts/ai/acx.py`, `scripts/ai/acx_local.py`, `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md` |
+| ARC | Ambitions Route Context | Pick a route before broad search so sessions load targeted docs, paths, tests, gates, and forbidden edits. | `.codex/routes/README.md`, `docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md` |
+| AGE | Ambitions Gate Engine | Advisory/strict gate families for source truth, scope, architecture, design, claims, privacy, accessibility, validation, and reports. | `docs/codex/CODEX_GATE_ENGINE.md`, `.codex/manifests/gate-engine-map.yml` |
+| AEP | Ambitions Evidence Packets | Raw-log, exit-code, validation-tier, claim-boundary, screenshot/device/human-proof, and closeout standards. | `docs/codex/CODEX_EVIDENCE_STANDARD.md`, `.codex/templates/evidence-packet.md` |
+| ABS | Ambitions Batch State | Compact mirrors for current facts, active batch, Yellow/Hard Red ledgers, recent validation, and restart prompts. | `.codex/state/*`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md` |
+| ASK | Ambitions Skills Kit | Routes work to existing `.codex/skills/` agents and review boards without duplicating skills. | `docs/codex/CODEX_SKILLS_KIT.md`, `.codex/manifests/skills-routing-map.yml` |
 
-## Codex OS Subsystems
+## Read Order For Codex OS Passes
 
-| Subsystem | Path | Use |
-| --- | --- | --- |
-| Operating protocol | `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md` | Red/Yellow/Green rules, no-overwrite, no-double-work, stop/repair conditions. |
-| Run state | `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md` | How to persist and resume long sessions. |
-| Batch state | `.codex/reports/current-batch-train-state.md` | Current train truth and next eligible batch. |
-| CQS gates | `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md` | Source truth, scope, architecture, visual quality, accessibility, privacy, validation, report gates. |
-| CQS scripts | `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md` | Advisory scan entry points. |
-| ACX extractor | `scripts/ai/acx.py` and `scripts/ai/acx` | Bounded reads, saved-log summaries, changed-file grouping from saved status text, advisory gates, and gate reports. |
-| Route context | `.codex/routes/*.route.md` | Small read lists and proof rules by task. |
-| State snapshots | `.codex/state/*.md` and `.codex/state/*.yml` | Efficiency snapshots that point back to authoritative run/batch state. |
-| Evidence standard | `docs/codex/CODEX_EVIDENCE_STANDARD.md` | Required proof before claims. |
-| Usage efficiency | `docs/codex/CODEX_USAGE_EFFICIENCY.md` | Context budget, ACX, route-first execution, proof policy. |
-| Agent protocol | `docs/codex/CODEX_AGENT_PROTOCOL.md` | How Codex should start, inspect, edit, validate, and report. |
-| Batch protocol | `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md` | Continue-until-hard-Red behavior and restart discipline. |
+1. `AGENTS.md`
+2. `docs/codex/CODEX_OS_INDEX.md`
+3. `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md`
+4. `docs/codex/CONTEXT_INDEX.md`
+5. `docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md`
+6. `.codex/routes/README.md`
+7. The selected route owner docs and source paths.
+8. `docs/codex/CODEX_GATE_ENGINE.md`
+9. `docs/codex/CODEX_EVIDENCE_STANDARD.md`
+10. `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md` when a train is involved.
 
-## Default Session Boot
+## Operating Rules
 
-Use this sequence unless the user scopes a smaller task:
+- Pick one route before broad search. Add a second route only for real cross-boundary work.
+- Use `scripts/ai/acx.py` for non-executing extraction. It must not execute commands.
+- Use `scripts/ai/acx_local.py` only for allowlisted local profiles. It must not accept arbitrary shell strings or use `shell=True`.
+- Preserve raw logs under `.codex/logs/`; the directory is local-only and gitignored.
+- Treat `.codex/state/*` as compact mirrors only. Owner docs and raw evidence win.
+- Continue batch trains through Green and accepted Yellow only when owner, safety reason, and no-claim boundary are recorded.
+- Stop on hard Red, unknown dirty tree, destructive conflict, privacy/security/legal ambiguity, unsupported release/device/accessibility/legal/privacy claims, or repeated same-root Red.
+- Never claim planned, canonized, scaffolded, implemented, built, tested, device-verified, accessible, privacy/legal reviewed, or release-ready as the same proof state.
 
-```bash
-python3 scripts/ai/acx.py read AGENTS.md --lines 140
-python3 scripts/ai/acx.py read docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md --lines 120
-python3 scripts/ai/acx.py read .codex/reports/current-batch-train-state.md --lines 180
-```
+## Subsystem Artifacts
 
-Then select exactly one route file from `.codex/routes/`.
+- Efficiency map: `.codex/manifests/codex-os-efficiency-map.yml`
+- Command profiles: `.codex/manifests/acx-command-profiles.yml`
+- Gate map: `.codex/manifests/gate-engine-map.yml`
+- Skills routing: `.codex/manifests/skills-routing-map.yml`
+- File ownership: `.codex/manifests/file-ownership.yml`
+- Source truth: `.codex/manifests/source-truth-map.yml`
+- No double work: `.codex/manifests/no-double-work-map.yml`
 
-## Efficiency Rule
+## Claim Firewall
 
-Read summaries first, owner docs second, full source third. Use broad repo search only after route context and existing state fail to answer the question.
-
-## Claim Boundary
-
-This operating layer can prove that Codex OS docs/tooling were added or changed. It cannot prove app behavior, build success, device success, public accessibility conformance, privacy/legal compliance, App Store readiness, TestFlight readiness, release readiness, or production readiness without matching command and human/operator evidence.
+Forbidden shortcuts remain forbidden unless matching raw evidence exists: production-ready, release-ready, fully tested, fully accessible, App Store ready, TestFlight ready, device verified, privacy compliant, legally approved, and performance safe.

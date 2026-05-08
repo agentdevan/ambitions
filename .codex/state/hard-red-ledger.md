@@ -1,31 +1,15 @@
 # Hard Red Ledger
 
-Status: Compact index.  
-Date: 2026-05-07  
-Authority: Full hard Red truth belongs in batch reports, raw logs, and current train state.
+Status: Compact mirror only. Append historical hard Red references; do not rewrite closed evidence.
+Date: 2026-05-07
 
-No active hard Red was added by this Codex OS efficiency upgrade.
+No hard Red is recorded by this Codex OS upgrade pass at creation time.
 
-## Hard Red Entry Template
+Hard Red stop examples:
 
-```text
-Date:
-Batch / task:
-Root cause:
-Stop condition:
-Files touched:
-Command:
-Exit code:
-Raw log:
-Why unrecoverable in current run:
-Next safe action:
-Restart prompt:
-```
-
-## Hard Red Examples
-
-- Unknown dirty tree that may contain user work.
-- Destructive source-truth conflict.
-- Privacy/security/legal uncertainty that affects runtime or user data.
-- Unsupported release, App Store, TestFlight, physical-device, or public accessibility claim.
-- Repeated same-root Red after two repair attempts.
+- unknown dirty tree that affects the requested scope
+- destructive conflict or overwrite need
+- privacy/security/legal ambiguity
+- unsupported release/device/accessibility/legal/privacy claim
+- repeated same-root Red after two repair attempts
+- forbidden app behavior or production Swift change during a Codex OS-only pass

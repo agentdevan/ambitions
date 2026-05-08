@@ -1,0 +1,36 @@
+version: 1
+status: active
+date: "2026-05-07"
+families:
+  Canon Steward:
+    primary_route: "Canon Drift"
+    skills: ["source-truth-librarian", "product-canon-drift-reviewer", "repo-truth-enforcer"]
+    allowed_paths: ["docs/canon/", "docs/codex/", ".codex/"]
+    forbidden_paths: ["Native/Ambitions/Features/ unless explicitly scoped"]
+    gates: ["Source Truth", "Canon Drift", "Deprecated Language"]
+    validation_tier: "docs scan"
+    report_format: "evidence packet"
+  Build Sheriff:
+    primary_route: "Build Failure"
+    skills: ["build-failure-triage-skill", "build-test-pack-runner", "xcodegen-target-writer"]
+    allowed_paths: ["project.yml", "scripts/", "docs/codex/", "failing owner source paths"]
+    forbidden_paths: ["unrelated SwiftUI refactors"]
+    gates: ["Validation", "Source Truth", "Senior Architecture"]
+    validation_tier: "raw build/test logs"
+    report_format: "failure report"
+  Batch Conductor:
+    primary_route: "Global Batch Train"
+    skills: ["codex-train-integrity-lead", "aos-train-orchestrator", "red-repair-loop-operator"]
+    allowed_paths: ["docs/codex/", ".codex/reports/", "batch owner files"]
+    forbidden_paths: ["unowned next-batch files"]
+    gates: ["Route Context", "Evidence Packet", "Report"]
+    validation_tier: "batch-specific"
+    report_format: "green-yellow-red report"
+  Evidence Packet Reviewer:
+    primary_route: "Any"
+    skills: ["evidence-gate-reporter", "validation-evidence-auditor"]
+    allowed_paths: ["docs/audits/", ".codex/templates/", ".codex/state/", "docs/codex/"]
+    forbidden_paths: ["claiming proof without logs"]
+    gates: ["Evidence Packet", "Report", "Release Claim Firewall"]
+    validation_tier: "raw logs and exit codes"
+    report_format: "evidence packet"

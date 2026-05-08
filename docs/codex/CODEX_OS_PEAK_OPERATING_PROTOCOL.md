@@ -14,6 +14,15 @@ Date: 2026-05-03
 5. PXOS, SI, Product Depth, AmbitionsOS, REC, ME, CS source docs for their owned layers.
 6. `docs/codex/BATCH_REGISTRY.md` for status truth only.
 7. Current source code and validation evidence for implementation truth.
+8. `docs/codex/CODEX_OS_INDEX.md` and its route/gate/evidence maps for Codex OS execution mechanics only.
+
+## Route-First Context
+
+Select one route from `.codex/routes/README.md` before broad search. Add a second route only for real cross-boundary work. Route files are maps, not source truth; owner docs and current source win.
+
+## ACX And Raw Logs
+
+Use `scripts/ai/acx.py` for non-executing extraction only. Use `scripts/ai/acx_local.py` for allowlisted local profiles only. ACX Local preserves exit codes, captures stdout/stderr, writes raw logs and compact summaries under `.codex/logs/`, prints raw log paths, rejects unknown profiles, and rejects destructive command terms before execution.
 
 ## Usage-Efficiency Overlay
 
@@ -39,7 +48,7 @@ Verify repo state, read source truth, select next eligible batch, run dry-run ga
 
 ## Continuation Rules
 
-Continue automatically through Green and accepted Yellow. Repair recoverable Red into executable sub-stages when safe. Stop on unrecoverable Red. Do not continue through dirty unknown changes, human-proof requirements, destructive overwrite needs, unsupported release claims, or privacy/security ambiguity.
+Continue automatically through Green and accepted Yellow when owner, safety reason, and no-claim boundary are recorded. Repair recoverable Red into executable sub-stages when safe. Stop on hard Red. Do not continue through dirty unknown changes, human-proof requirements, destructive overwrite needs, unsupported release/device/accessibility/legal/privacy claims, or privacy/security ambiguity.
 
 ## Commit And Push Cadence
 

@@ -1,39 +1,26 @@
 # Codex Route Context Protocol
 
-Status: Active context-routing protocol.  
-Date: 2026-05-07  
-Scope: Route files under `.codex/routes/`.
+Status: Active Codex OS protocol; not product canon.
+Date: 2026-05-07
 
 ## Purpose
 
-Route files reduce Codex usage by replacing broad repo discovery with small, task-owned read lists.
+Route Context prevents broad repo rediscovery. Every non-trivial session selects a route, reads the route map, and loads the smallest owner-doc/source set needed to act safely.
 
-## Route File Contract
+## Protocol
 
-Each route must name:
+1. Read `AGENTS.md` and `docs/codex/CODEX_OS_INDEX.md`.
+2. Select one primary route from `.codex/routes/README.md`.
+3. Add a second route only for real cross-boundary ownership.
+4. Read the route’s owner docs, likely source paths, and required gates.
+5. Name forbidden edits before implementation.
+6. Use ACX or `rg` to inspect targeted files before broad search.
+7. If route and owner docs conflict, trust owner docs/source, record the conflict, and update the route later.
 
-- purpose
-- read first
-- relevant source paths
-- relevant docs/canon
-- likely tests
-- required gates
-- forbidden edits
-- evidence requirements
-- fallback if stale
+## Route Fields
 
-## Selection Rule
+Each route must define purpose, read first, relevant docs/canon, likely source paths, likely tests, required gates, forbidden edits, evidence requirements, and stale fallback.
 
-Select one route per task. Add a second route only when a task crosses a real boundary, such as UI plus build failure or canon drift plus release claim.
+## Non-Override Rule
 
-## Staleness Rule
-
-A route is a starting map, not source truth. If it conflicts with `AGENTS.md`, the peak protocol, current batch-train state, or active canon, trust the owner and update the route in a Codex OS maintenance pass.
-
-## Route-First Boot
-
-```bash
-python3 scripts/ai/acx.py read .codex/routes/<route>.route.md
-```
-
-Then follow the route read list before broad search.
+Routes are maps. They do not override product canon, architecture owners, source code, raw logs, human/device proof boundaries, or `docs/codex/BATCH_REGISTRY.md`.

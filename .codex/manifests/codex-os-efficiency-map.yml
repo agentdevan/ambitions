@@ -1,71 +1,64 @@
+version: 1
 status: active
 date: "2026-05-07"
-purpose: "Map the Ambitions Codex OS usage-efficiency layer."
+purpose: "Compact map for the Ambitions Codex OS six-subsystem model."
 subsystems:
   ACX:
     name: "Ambitions Command eXtractor"
-    files:
+    owners:
       - "scripts/ai/acx.py"
-      - "scripts/ai/acx"
-    duties:
-      - "bounded file reads"
-      - "saved-log summarization"
-      - "changed-file grouping from saved status text"
-      - "advisory gates"
-      - "gate reports"
-    command_execution: false
+      - "scripts/ai/acx_local.py"
+      - "docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md"
+    saves_context_by:
+      - "bounded reads instead of full-file dumps"
+      - "saved raw log summarization"
+      - "changed-file grouping by Ambitions concern"
+      - "allowlisted local command summaries"
   ARC:
     name: "Ambitions Route Context"
-    files:
+    owners:
       - ".codex/routes/README.md"
-    duties:
-      - "task-specific read lists"
-      - "allowed/forbidden path reminders"
-      - "gate routing"
+      - "docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md"
+    saves_context_by:
+      - "route-first read lists"
+      - "forbidden edit lists before discovery"
   AGE:
     name: "Ambitions Gate Engine"
-    files:
+    owners:
       - "docs/codex/CODEX_GATE_ENGINE.md"
-      - "docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md"
-      - "docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md"
-    duties:
-      - "advisory scans"
-      - "strict closeout mode when requested"
+      - ".codex/manifests/gate-engine-map.yml"
+    saves_context_by:
+      - "gate families mapped to scripts and proof"
+      - "strict/advisory language"
   AEP:
     name: "Ambitions Evidence Packets"
-    files:
+    owners:
       - "docs/codex/CODEX_EVIDENCE_STANDARD.md"
-    duties:
-      - "claim-proof mapping"
-      - "raw log rules"
+      - ".codex/templates/evidence-packet.md"
+    saves_context_by:
+      - "one packet format for commands, exit codes, logs, proof, and non-claims"
   ABS:
     name: "Ambitions Batch State"
-    files:
-      - ".codex/reports/current-batch-train-state.md"
-      - ".codex/state/active-batch.yml"
-      - ".codex/state/yellow-ledger.md"
-      - ".codex/state/hard-red-ledger.md"
-    duties:
-      - "resumable train state"
-      - "compact Yellow/Red indexing"
+    owners:
+      - ".codex/state/"
+      - "docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md"
+      - "docs/codex/CODEX_BATCH_RESTART_PROMPT_PROTOCOL.md"
+    saves_context_by:
+      - "compact mirrors"
+      - "restart prompts"
+      - "Yellow and hard Red ledgers"
   ASK:
     name: "Ambitions Skills Kit"
-    files:
-      - ".codex/skills/*.md"
+    owners:
       - "docs/codex/CODEX_SKILLS_KIT.md"
-    duties:
-      - "role routing"
-      - "agent specialization"
-claim_boundary:
-  summarized_output_only:
-    allowed_for:
-      - "navigation"
-      - "routine summaries"
-      - "advisory scans"
-    not_allowed_for:
-      - "build pass"
-      - "test pass"
-      - "release readiness"
-      - "device proof"
-      - "public accessibility proof"
-      - "legal/privacy compliance"
+      - ".codex/manifests/skills-routing-map.yml"
+    saves_context_by:
+      - "existing skill reuse"
+      - "route to gate to report mapping"
+owner_precedence:
+  - "Current user directive"
+  - "AGENTS.md"
+  - "Ambitions 3.0 canon and owner docs"
+  - "Current source code"
+  - "Raw validation logs"
+  - "Codex OS compact maps"

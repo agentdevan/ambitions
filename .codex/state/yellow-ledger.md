@@ -1,27 +1,17 @@
-# Accepted Yellow Ledger
+# Yellow Ledger
 
-Status: Compact index.  
-Date: 2026-05-07  
-Authority: Historical Yellow truth remains in batch reports and `.codex/reports/current-batch-train-state.md`.
+Status: Compact mirror only. Do not overwrite historical Yellow evidence.
+Date: 2026-05-07
 
-## Known Accepted Yellow Classes From Audit
+Accepted Yellow may continue only when all fields are present:
 
-| Class | Owner source | Continue condition |
-| --- | --- | --- |
-| Source Atlas Research Seeds import pending | `.codex/reports/current-batch-train-state.md` | Do not fabricate missing seed files or mark import complete. |
-| FVQ rendered/manual proof gaps | FVQ reports and CQS visual gates | Safe only when missing proof is named and no visual approval/release claim depends on it. |
-| HPS/AOS architecture evidence Accepted Yellow entries | Batch reports and context index | Architecture evidence does not equal runtime implementation. |
-| Human/legal/device/accessibility future proof | PFC/FVQ/DPTG reports | Park only with explicit no-claim boundary. |
+- owner
+- safety reason
+- no-claim boundary
+- next eligible action
+- raw evidence or owner doc reference
 
-## Yellow Entry Template
+Known open Yellow from current batch-train state:
 
-```text
-Date:
-Batch / task:
-Owner:
-Finding:
-Why safe to continue:
-Files affected:
-Future proof needed:
-Claims explicitly not made:
-```
+- Source Atlas Research Seeds v1 import pending because expected local zip was unavailable. No seed files fabricated and no import marked complete.
+- Found Life source truth arrived after FCP17 had already landed; FL01-FL06 now govern affected later work.
