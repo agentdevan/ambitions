@@ -3,7 +3,10 @@ date: "2026-05-08"
 source_of_truth:
   - ".codex/reports/current-batch-train-state.md"
   - "docs/codex/BATCH_REGISTRY.md"
+  - "docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md"
   - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md"
+  - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+  - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
   batch: "AFI12 Accessibility And State Proof"
@@ -15,3 +18,13 @@ codex_os_override:
   app_feature_implementation_allowed: true
   production_swift_allowed: true
   branch_creation_allowed: false
+efc_overlay:
+  status: "active proof overlay inserted without changing current active batch"
+  current_batch_preserved: true
+  next_batch_must_inherit_efc: true
+  peak_optimized_sequence_owner: "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+  overlay_files:
+    - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
+    - "docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md"
+    - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+    - "docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md"
