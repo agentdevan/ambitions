@@ -16,6 +16,8 @@ Use this read order for current work:
 ## Current posture
 
 - The current app is the native SwiftUI target under `Native/Ambitions/`.
+- The active flagship top-level IA is Today / Goals / Capture / Time / You.
+- The live user-facing shell exposes Time, while some internal route/file names still use `Plan` as compatibility seams.
 - The app is local-first / on-device first where implemented.
 - Validation is local VM/Mac validation only.
 - There is no active hosted CI workflow in this repo.
@@ -25,6 +27,8 @@ Use this read order for current work:
 ## Active source-truth package
 
 Use [AmbitionsCanon/README.md](AmbitionsCanon/README.md) for future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work.
+
+Active AFI source truth supersedes older Plan-era product canon where conflicts exist. In active flagship language, `Plan` is not a top-level destination; it remains valid only as a contextual/action noun, historical reference, or internal compatibility seam. The top-level destination is `Time`.
 
 Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible. They do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist.
 
@@ -47,8 +51,18 @@ These files are useful only to the extent their claims match the current release
 ## Product/design canon package
 
 - [AmbitionsCanon/Ambitions_Design_System.md](AmbitionsCanon/Ambitions_Design_System.md)
+- [AmbitionsCanon/10_Ambitions_Flagship_Interface_Canon.md](AmbitionsCanon/10_Ambitions_Flagship_Interface_Canon.md)
+- [AmbitionsCanon/01A_Product_Canon_Flagship_Amendment.md](AmbitionsCanon/01A_Product_Canon_Flagship_Amendment.md)
 - [AmbitionsCanon/00_Canon_Index_10_10_Maturity_Gate.md](AmbitionsCanon/00_Canon_Index_10_10_Maturity_Gate.md)
-- [AmbitionsCanon/01_Product_Canon.md](AmbitionsCanon/01_Product_Canon.md)
+- [AmbitionsCanon/01_Product_Canon.md](AmbitionsCanon/01_Product_Canon.md) — preserved baseline where not superseded by AFI / 01A
+- [AmbitionsCanon/11_Canonical_Vocabulary_And_Copy_Bible.md](AmbitionsCanon/11_Canonical_Vocabulary_And_Copy_Bible.md)
+- [AmbitionsCanon/12_Screen_Composition_Constitution.md](AmbitionsCanon/12_Screen_Composition_Constitution.md)
+- [AmbitionsCanon/13_Flagship_Experience_Laws.md](AmbitionsCanon/13_Flagship_Experience_Laws.md)
+- [AmbitionsCanon/14_Flagship_QA_And_Award_Caliber_Bar.md](AmbitionsCanon/14_Flagship_QA_And_Award_Caliber_Bar.md)
+- [AmbitionsCanon/15_AFI_Implementation_Lane.md](AmbitionsCanon/15_AFI_Implementation_Lane.md)
+- [AmbitionsCanon/16_Surface_Identity_And_Signature_Moments.md](AmbitionsCanon/16_Surface_Identity_And_Signature_Moments.md)
+- [AmbitionsCanon/17_Ambitions_Product_Grammar.md](AmbitionsCanon/17_Ambitions_Product_Grammar.md)
+- [AmbitionsCanon/18_Trust_Receipts_And_Closure_Language.md](AmbitionsCanon/18_Trust_Receipts_And_Closure_Language.md)
 - [AmbitionsCanon/02_Continuity_Layer_Chrome.md](AmbitionsCanon/02_Continuity_Layer_Chrome.md)
 - [AmbitionsCanon/03_Signature_Object_Specs.md](AmbitionsCanon/03_Signature_Object_Specs.md)
 - [AmbitionsCanon/04_Trust_Privacy_Automation.md](AmbitionsCanon/04_Trust_Privacy_Automation.md)
