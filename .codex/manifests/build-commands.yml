@@ -1,0 +1,32 @@
+status: active
+version: 1
+date: "2026-05-08"
+purpose: "Document build/test command discovery without overclaiming build success."
+
+principles:
+  raw_log_required_for_build_claim: true
+  raw_log_required_for_test_claim: true
+  no_build_success_from_help_profile: true
+  no_test_success_from_help_profile: true
+
+known_profiles:
+  build_help:
+    acx_profile: build-help
+    proves: "document discovery only"
+  test_help:
+    acx_profile: test-help
+    proves: "document discovery only"
+  xcodegen_generate:
+    acx_profile: xcodegen-generate
+    proves: "project generation command exit only when available"
+
+future_required_fields_for_real_build_profile:
+  - scheme
+  - destination
+  - configuration
+  - derived_data_path
+  - raw_log
+  - exit_code
+  - commit
+  - xcode_version
+  - xcodegen_version_when_relevant
