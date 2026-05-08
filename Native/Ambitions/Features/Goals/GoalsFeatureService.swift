@@ -276,17 +276,19 @@ struct RepositoryBackedGoalsService: GoalsServicing {
             answer: trimmed,
             now: now
         )
-        try await repositories.drafts.saveDrafts([updatedDraft.draft])
-        if let goal = updatedDraft.goal {
-            try await repositories.goals.saveGoals([goal])
-        }
+        let receipt = try await saveClarificationMaterialization(
+            goal: updatedDraft.goal,
+            draft: updatedDraft.draft,
+            now: now
+        )
 
         return GoalDetailActionResponse(
             message: GoalDetailInlineMessage(
                 title: updatedDraft.draft.latestResultKind == .clarificationRequired ? "Clarification saved" : "Plan refreshed",
                 body: updatedDraft.message,
                 state: updatedDraft.draft.latestResultKind == .clarificationRequired ? .selected : .success
-            )
+            ),
+            unitOfWorkReceipt: receipt
         )
     }
 
@@ -605,6 +607,23 @@ private extension RepositoryBackedGoalsService {
         let result = try await unitOfWork.saveGoalCreation(
             GoalCreationUnitOfWorkPayload(goal: goal, draft: draft),
             id: "goal-creation.\(goal?.id ?? "draft-only").\(draft.id)",
+            timestampProvider: { DomainTimestamp.string(from: now) }
+        )
+        return result.receipt
+    }
+
+    func saveClarificationMaterialization(goal: Goal?, draft: PersistedGoalDraft, now: Date) async throws -> AppUnitOfWorkReceipt? {
+        guard let unitOfWork = repositories.goalCreationUnitOfWork else {
+            if let goal {
+                try await repositories.goals.saveGoals([goal])
+            }
+            try await repositories.drafts.saveDrafts([draft])
+            return nil
+        }
+
+        let result = try await unitOfWork.saveGoalCreation(
+            GoalCreationUnitOfWorkPayload(goal: goal, draft: draft),
+            id: "goal-materialization.\(goal?.id ?? "draft-only").\(draft.id)",
             timestampProvider: { DomainTimestamp.string(from: now) }
         )
         return result.receipt

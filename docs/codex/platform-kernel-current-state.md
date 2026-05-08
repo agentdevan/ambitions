@@ -25,6 +25,11 @@ Date: 2026-05-08
   clarification/blocked draft creation through a goal-creation UnitOfWork,
   records local receipt metadata, and proves thrown-error rollback leaves no
   partial Goal, Draft, or Step state.
+- PK05 Atomic Clarification / Materialization is complete / Green as focused
+  SwiftData-backed clarification answer write-back proof. It routes refreshed
+  persisted drafts and optional materialized/revised Goals through the local
+  UnitOfWork seam and proves injected rollback preserves pre-existing Goal,
+  Step, and Draft state.
 - AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object
   Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
   AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, and AFI08
@@ -34,8 +39,8 @@ Date: 2026-05-08
   Coherence Review, AFI15 Founder Acceptance Review, and AFI16 Release-Claim
   Safety Review are complete / Accepted Yellow under the active AFI insertion
   overlay.
-  PK05 Atomic Clarification / Materialization is the next eligible global
-  batch. PK05-PK41 remain active planned Platform Kernel scope.
+  PK06 Atomic Capture Promotion is the next eligible global batch. PK06-PK41
+  remain active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
   notification foundations, EventKit integration services, external snapshot
@@ -54,9 +59,10 @@ proof.
 
 ## Current Known Risks
 
-- AppUnitOfWork single-context commit/rollback and SwiftData-backed atomic goal
-  creation are PK-proven by focused persistence/goal tests. Clarification,
-  materialization, and Capture promotion are not yet PK-proven.
+- AppUnitOfWork single-context commit/rollback, SwiftData-backed atomic goal
+  creation, and SwiftData-backed clarification/materialization write-back are
+  PK-proven by focused persistence/goal tests. Capture promotion is not yet
+  PK-proven.
 - Schema version ledger, migration plan, pre-migration backup, import dry run,
   and restore rollback are not yet PK-proven.
 - Side effects are present in platform-adjacent paths, but SideEffectLedger
@@ -68,4 +74,4 @@ proof.
 
 ## Next Eligible
 
-PK05 Atomic Clarification / Materialization.
+PK06 Atomic Capture Promotion.

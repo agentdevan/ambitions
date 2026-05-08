@@ -260,6 +260,98 @@ final class GoalCreationServiceTests: XCTestCase {
         XCTAssertTrue(drafts.isEmpty)
         XCTAssertTrue(steps.isEmpty)
     }
+
+    func testClarificationMaterializationPersistsGoalAndDraftThroughUnitOfWork() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        let createResponse = try await service.createGoal(
+            CreateGoalRequest(title: "Do better"),
+            now: fixedNow
+        )
+        let draftID = try XCTUnwrap(createResponse.target.draftID)
+        let originalDraftResult = try await repositories.drafts.draft(id: draftID)
+        let originalDraft = try XCTUnwrap(originalDraftResult)
+        let question = try XCTUnwrap(originalDraft.clarification?.questions.first)
+
+        let response = try await service.submitClarificationAnswer(
+            GoalClarificationAnswerRequest(
+                target: GoalRouteTarget(draftID: draftID),
+                questionID: question.id,
+                field: question.field,
+                answer: "Improve my weekly study consistency for the certification."
+            ),
+            now: fixedNow.addingTimeInterval(60)
+        )
+
+        let updatedDraftResult = try await repositories.drafts.draft(id: draftID)
+        let updatedDraft = try XCTUnwrap(updatedDraftResult)
+        let goalID = try XCTUnwrap(updatedDraft.plannedGoalID)
+        let goalResult = try await repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(goalResult)
+
+        XCTAssertEqual(response.unitOfWorkReceipt?.writeScope, .localSwiftDataSingleContext)
+        XCTAssertEqual(response.unitOfWorkReceipt?.didCommitChanges, true)
+        XCTAssertEqual(response.unitOfWorkReceipt?.rollbackBehavior, AppUnitOfWorkReceipt.rollbackOnThrownError)
+        XCTAssertEqual(response.unitOfWorkReceipt?.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
+        XCTAssertTrue([.planned, .starterPlanned].contains(updatedDraft.latestResultKind))
+        XCTAssertEqual(goal.id, goalID)
+        XCTAssertFalse(goal.plan?.sections.isEmpty ?? true)
+    }
+
+    func testAtomicClarificationMaterializationRollsBackGoalAndKeepsOriginalDraftWhenGoalWriteFailsBeforeSave() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let setupRepositories = makeRepositories(
+            store: store,
+            unitOfWork: SwiftDataGoalCreationUnitOfWork(store: store)
+        )
+        let setupService = RepositoryBackedGoalsService(repositories: setupRepositories)
+
+        let createResponse = try await setupService.createGoal(
+            CreateGoalRequest(title: "Do better"),
+            now: fixedNow
+        )
+        let draftID = try XCTUnwrap(createResponse.target.draftID)
+        let originalDraftResult = try await setupRepositories.drafts.draft(id: draftID)
+        let originalDraft = try XCTUnwrap(originalDraftResult)
+        let question = try XCTUnwrap(originalDraft.clarification?.questions.first)
+        let originalGoals = try await setupRepositories.goals.listGoals()
+        let originalSteps = try await setupRepositories.goals.listActionableSteps()
+
+        let failingRepositories = makeRepositories(
+            store: store,
+            unitOfWork: SwiftDataGoalCreationUnitOfWork(
+                store: store,
+                failureInjection: .afterGoalWriteBeforeDraftWrite
+            )
+        )
+        let failingService = RepositoryBackedGoalsService(repositories: failingRepositories)
+
+        await XCTAssertThrowsErrorAsync(
+            try await failingService.submitClarificationAnswer(
+                GoalClarificationAnswerRequest(
+                    target: GoalRouteTarget(draftID: draftID),
+                    questionID: question.id,
+                    field: question.field,
+                    answer: "Improve my weekly study consistency for the certification."
+                ),
+                now: fixedNow.addingTimeInterval(60)
+            )
+        ) { error in
+            XCTAssertEqual(error as? GoalCreationUnitOfWorkProbeError, .afterGoalWriteBeforeDraftWrite)
+        }
+
+        let goals = try await failingRepositories.goals.listGoals()
+        let storedDraftResult = try await failingRepositories.drafts.draft(id: draftID)
+        let storedDraft = try XCTUnwrap(storedDraftResult)
+        let steps = try await failingRepositories.goals.listActionableSteps()
+
+        XCTAssertEqual(goals, originalGoals)
+        XCTAssertEqual(steps, originalSteps)
+        XCTAssertEqual(storedDraft.latestResultKind, originalDraft.latestResultKind)
+        XCTAssertEqual(storedDraft.plannedGoalID, originalDraft.plannedGoalID)
+        XCTAssertEqual(storedDraft.metadata?.context.clarifiedFields, originalDraft.metadata?.context.clarifiedFields)
+    }
 }
 
 private extension GoalCreationServiceTests {

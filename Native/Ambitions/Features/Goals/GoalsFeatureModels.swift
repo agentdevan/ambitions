@@ -1060,6 +1060,15 @@ struct GoalDetailInlineMessage: Identifiable, Sendable {
 
 struct GoalDetailActionResponse: Sendable {
     let message: GoalDetailInlineMessage?
+    let unitOfWorkReceipt: AppUnitOfWorkReceipt?
+
+    init(
+        message: GoalDetailInlineMessage?,
+        unitOfWorkReceipt: AppUnitOfWorkReceipt? = nil
+    ) {
+        self.message = message
+        self.unitOfWorkReceipt = unitOfWorkReceipt
+    }
 }
 
 struct GoalDetailHeadline: Sendable {

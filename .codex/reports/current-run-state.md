@@ -2,13 +2,22 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK04 Atomic Goal Creation / Green.
-Next eligible batch: PK05 Atomic Clarification / Materialization
-Scope: PK04 routes SwiftData-backed goal creation through the PK03 AppUnitOfWork boundary, records local UnitOfWork receipt metadata on Create Goal responses, and proves thrown-error rollback leaves no partial Goal, Draft, or Step state. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
+Current batch: PK05 Atomic Clarification / Materialization / Green.
+Next eligible batch: PK06 Atomic Capture Promotion
+Scope: PK05 routes SwiftData-backed clarification answer write-back through the PK03/PK04 AppUnitOfWork boundary, records local UnitOfWork receipt metadata on Goal Detail action responses, and proves injected rollback preserves pre-existing Goal, Step, and Draft state. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+
+## PK05 Atomic Clarification / Materialization Closeout
+
+- PK05 report: `docs/audits/pk05-atomic-clarification-materialization-report.md`.
+- Clarification/materialization UnitOfWork path: `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`.
+- Goal Detail response receipt metadata: `Native/Ambitions/Features/Goals/GoalsFeatureModels.swift`.
+- Focused proof: `GoalCreationServiceTests` passed for clarification materialization receipt metadata and thrown-error rollback, 2 tests, 0 failures.
+- Canonical queue now marks PK05 complete/do-not-run and PK06 executable now.
+- Release, device, accessibility, legal/privacy, hosted CI, App Store, TestFlight, sync/cloud, telemetry, analytics, hosted AI, and production readiness remain non-claims.
 
 ## PK04 Atomic Goal Creation Closeout
 

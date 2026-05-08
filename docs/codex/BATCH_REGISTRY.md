@@ -38,7 +38,7 @@ Current 4.0 status:
 - Active planned scope: PK00-PK41 Platform Kernel is integrated as local
   backend/platform train. PK00 Current Backend Proof Baseline is complete /
   Green with accepted Yellow follow-ups as a report-only backend/platform proof
-  baseline. PK01-PK04 are complete and PK05-PK41 remain queued active planned
+  baseline. PK01-PK05 are complete and PK06-PK41 remain queued active planned
   scope, but must not outrun AFI unless a specific minimum safety prerequisite
   is proven by registry/report evidence. PK does not claim backend completion,
   migration safety, sync
@@ -131,7 +131,12 @@ Current 4.0 status:
   goal creation and draft-only outcomes through a goal-creation UnitOfWork,
   records local receipt metadata, and focused tests prove thrown-error rollback
   leaves no partial Goal, Draft, or Step state.
-- Next eligible global batch: PK05 Atomic Clarification / Materialization.
+- Complete / Green: PK05 Atomic Clarification / Materialization is complete as
+  focused SwiftData-backed clarification/materialization UnitOfWork evidence.
+  It routes refreshed persisted Draft and optional materialized/revised Goal
+  writes through the local UnitOfWork seam and proves injected rollback
+  preserves pre-existing Goal, Step, and Draft state.
+- Next eligible global batch: PK06 Atomic Capture Promotion.
 
 - Complete / Green with accepted Yellow advisories: GQ01 Global Queue Maturity, Repo Root Prune, Time Hydration, Dirty Worktree Resolution, And Refactor Readiness Gate is complete. It created `GLOBAL_QUEUE_MATURITY_LEDGER.md`, `GLOBAL_QUEUE_CANONICAL_ORDER.json`, `TIME_REPLACES_PLAN_COMPATIBILITY_LEDGER.md`, updated next-batch scripts, repaired active Time/Plan backlog wording, and selected PK04 as the next implementation batch. Accepted Yellow: broad historical tracked-doc deletion is deferred to RHC because reference scans still preserve evidence/history links.
 - Complete / accepted Yellow: FCP/PFC global registry-context reconciliation
@@ -1170,8 +1175,8 @@ note and the PD18 audit report.
 | Release Evidence Closure Train | Completed / docs-only | Completed REC01-REC06 as evidence/status/release-truth work after the 2026-05-02 pre-train hardening and 3.0 truth check. Human/operator proof remains pending. |
 | REC01 Release Evidence Truth Inventory | Completed / accepted baseline | Created `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserved F17-F30 truth, inventoried simulator evidence and release proof gaps, and did not implement app behavior or claim readiness. |
 | REC02-REC06 Evidence Closure | Completed / docs-only | REC02 proof plan, REC03 validation ledger, REC04 claim copy guard, REC05 human review packet, and REC06 closure handoff are complete without claiming human proof or release readiness. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI14 followed and are complete Green before later AOS UI integration. AFI01-AFI16 are complete / Accepted Yellow. PK00 is complete / Green; PK01 and PK02 are complete / Accepted Yellow; PK03 and PK04 are complete / Green; PK05 is next before applicable backend/platform, mutation, sync, migration, package split, intelligence, or major expansion work. |
-| SA01-SA32 Source Atlas Full Maturity Train | Active / SA06 Green | SA01-SA06 and SAP01-SAP05 are complete Green as docs/state/Codex OS/order/composition/projection/Pack Factory rule/fixture/no-sprawl reconciliation plus compact pack schema implementation evidence. AOS05-AOS23, LDI01-LDI14, PK00, AFI01-AFI16, PK01, PK02, PK03, and PK04 are complete. PK05 is next before unrelated source/freshness-dependent AOS/LDI work continues unless dependency review proves a dirty or half-complete active batch must close first. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI14 followed and are complete Green before later AOS UI integration. AFI01-AFI16 are complete / Accepted Yellow. PK00 is complete / Green; PK01 and PK02 are complete / Accepted Yellow; PK03, PK04, and PK05 are complete / Green; PK06 is next before applicable backend/platform, mutation, sync, migration, package split, intelligence, or major expansion work. |
+| SA01-SA32 Source Atlas Full Maturity Train | Active / SA06 Green | SA01-SA06 and SAP01-SAP05 are complete Green as docs/state/Codex OS/order/composition/projection/Pack Factory rule/fixture/no-sprawl reconciliation plus compact pack schema implementation evidence. AOS05-AOS23, LDI01-LDI14, PK00, AFI01-AFI16, PK01, PK02, PK03, PK04, and PK05 are complete. PK06 is next before unrelated source/freshness-dependent AOS/LDI work continues unless dependency review proves a dirty or half-complete active batch must close first. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Created the Lane 2 ownership map and risk baseline. No extraction run. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Created shared projector/state/helper standards and corrected the stale Plan projector assumption. No extraction run. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Converted the architecture scan into a recurring ME gate. No extraction run. |
@@ -1300,14 +1305,15 @@ Current Backend Proof Baseline is complete / Green with accepted Yellow
 follow-ups. AFI source truth is active, AFI01-AFI16 are complete / Accepted
 Yellow, PK01 Package/Module Boundary Scaffold and PK02 Architecture Boundary
 Scanner are complete / Accepted Yellow, PK03 AppUnitOfWork Foundation is
-complete / Green, PK04 Atomic Goal Creation is complete / Green, and PK05
-Atomic Clarification / Materialization is the next eligible global batch under
+complete / Green, PK04 Atomic Goal Creation and PK05 Atomic Clarification /
+Materialization are complete / Green, and PK06 Atomic Capture Promotion is the
+next eligible global batch under
 the stricter highest-priority global order.
 
 | Path | Status | Notes |
 | --- | --- | --- |
 | AmbitionsOS Future-Canon Integration | Completed / docs-only | Creates the future AmbitionsOS parent canon, kernel docs, runtime contract, AOS train controls, ME/CS train plans, Codex OS protocols, skills, review boards, consolidated catalogs, and audit reports. No app behavior, production refactor, compatibility seam retirement, dependency, workflow, platform capability, persistence/schema, release, App Store, TestFlight, device, accessibility, or final RC claim is added. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI14 followed and are complete Green before later AOS UI integration. AFI01-AFI16 are complete / Accepted Yellow. PK00 is complete / Green; PK01 and PK02 are complete / Accepted Yellow; PK03 and PK04 are complete / Green; PK05 is next before applicable backend/platform, mutation, sync, migration, package split, intelligence, or major expansion work. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Active / Green | AOS01 complete accepted Yellow and AOS02-AOS23 complete Green under live global full-stack authorization after HPS and SA06 closure; LDI01-LDI14 followed and are complete Green before later AOS UI integration. AFI01-AFI16 are complete / Accepted Yellow. PK00 is complete / Green; PK01 and PK02 are complete / Accepted Yellow; PK03, PK04, and PK05 are complete / Green; PK06 is next before applicable backend/platform, mutation, sync, migration, package split, intelligence, or major expansion work. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Planning baseline complete; no extraction run in this pass. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Standards baseline complete; no extraction run in this pass. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Recurring architecture gate complete; no extraction run in this pass. |
@@ -1333,7 +1339,7 @@ the stricter highest-priority global order.
 
 | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome, AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, AFI08 Capture Atmosphere Composer, AFI09 Time LifeShape Field, AFI10 You User System Profile, AFI11 Trust Seam And Receipts, AFI12 Accessibility And State Proof, AFI13 Visual QA And Drift Gallery, AFI14 Cross-Surface Coherence Review, AFI15 Founder Acceptance Review, and AFI16 Release-Claim Safety Review are complete as docs/canon/governance or focused shell/Today/Goals/Capture/Time/You/trust/accessibility/visual-QA/coherence/founder/no-claim evidence. Human founder acceptance, rendered visual approval, manual accessibility proof, device proof, signed archive proof, hosted CI, and release readiness remain parked Yellow/unproven. Active top-level IA is Today / Goals / Capture / Time / You; Plan is not top-level. |
 
-| PK00-PK41 Platform Kernel Train | Active / PK04 Green | PK00 Current Backend Proof Baseline is complete / Green with accepted Yellow follow-ups. PK01 Package/Module Boundary Scaffold and PK02 Architecture Boundary Scanner are complete / Accepted Yellow. PK03 AppUnitOfWork Foundation is complete / Green. PK04 Atomic Goal Creation is complete / Green. PK05-PK41 remain queued in dependency order for atomic flow safety, storage/migration, backup/restore, events/receipts/trust, service decomposition, side effects, privacy/diagnostics/data controls, sync readiness, intelligence readiness, performance/scale, and modularization. |
+| PK00-PK41 Platform Kernel Train | Active / PK05 Green | PK00 Current Backend Proof Baseline is complete / Green with accepted Yellow follow-ups. PK01 Package/Module Boundary Scaffold and PK02 Architecture Boundary Scanner are complete / Accepted Yellow. PK03 AppUnitOfWork Foundation is complete / Green. PK04 Atomic Goal Creation and PK05 Atomic Clarification / Materialization are complete / Green. PK06-PK41 remain queued in dependency order for atomic flow safety, storage/migration, backup/restore, events/receipts/trust, service decomposition, side effects, privacy/diagnostics/data controls, sync readiness, intelligence readiness, performance/scale, and modularization. |
 
 | PK00 Current Backend Proof Baseline | Complete / Green with accepted Yellow | PK00 completed as report-only backend/platform baseline evidence. It mapped current SwiftData repositories, repository write paths, portable snapshot flows, runtime service graph, side-effect paths, test inventory, local-only sync posture, and proof gaps without production code changes or readiness claims. |
 
@@ -1345,7 +1351,9 @@ the stricter highest-priority global order.
 
 | PK04 Atomic Goal Creation | Complete / Green | PK04 routes SwiftData-backed goal creation through the AppUnitOfWork boundary before broader atomic flow work. Focused tests prove successful atomic goal creation, local receipt metadata, and thrown-error rollback with no partial Goal, Draft, or Step state. |
 
-| PK05 Atomic Clarification / Materialization | Queued / Next | PK05 extends atomicity to clarification/materialization after PK04 goal-creation proof. |
+| PK05 Atomic Clarification / Materialization | Complete / Green | PK05 extends atomicity to clarification/materialization after PK04 goal-creation proof. Focused tests prove successful local receipt metadata and injected rollback that preserves pre-existing Goal, Step, and Draft state. |
+
+| PK06 Atomic Capture Promotion | Queued / Next | PK06 extends atomicity to Capture promotion after PK05 clarification/materialization proof. |
 
 | LDI01 Living Dream Architecture Source Truth | Complete / Green | LDI01 completed as docs/Codex OS source-truth and governance evidence. It updates LDI dependency, gate, invariant, train, registry, context, order, resume, current-state, and audit docs, and repairs `scripts/ldi-release-claim-scan.sh` so current-batch release scans evaluate changed files instead of the full historical repo when clean. No app behavior, production Swift, runtime, model runtime, LDI runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud, platform integration, signing, entitlement, dependency, generated project, hosted workflow, professional advice, user-data server, hosted AI, legal/privacy compliance, physical-device proof, release/platform, or public accessibility claim changed. |
 

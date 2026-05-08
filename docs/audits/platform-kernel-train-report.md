@@ -9,46 +9,49 @@ Status: Active
 ## Current Closeout
 
 Result: Green
-Batch: PK04 Atomic Goal Creation
+Batch: PK05 Atomic Clarification / Materialization
 Commit: pending
-Files changed: goal-creation UnitOfWork persistence contract/implementation,
-SwiftData app/preview repository wiring, Create Goal response receipt metadata,
-focused Goal Creation tests, PK04 audit report, queue/state docs, and PK
-closeout docs.
-Behavior changed: repository-backed goal creation now writes the Goal, plan
-records, steps, and persisted draft through a local SwiftData goal-creation
-UnitOfWork when the runtime uses SwiftData repositories. Clarification/blocked
-draft outcomes also use the goal-creation UnitOfWork path. No route/raw-value,
-Plan compatibility, schema, dependency, signing, entitlement, sync/cloud,
-server, hosted AI, telemetry, analytics, or release/platform behavior changed.
-Tests run: `git diff --check`; `xcodegen generate`; focused
-`xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination
-'platform=iOS Simulator,name=iPhone 17'
--only-testing:AmbitionsTests/GoalCreationServiceTests
--only-testing:AmbitionsTests/PersistenceRepositoryTests` (26 tests, 0
-failures); and `scripts/build-local.sh`.
+Files changed: Goal Detail action response receipt metadata, Goals service
+clarification/materialization UnitOfWork routing, focused Goal Creation tests,
+PK05 audit report, queue/state docs, and PK closeout docs.
+Behavior changed: repository-backed clarification answers now save the
+refreshed persisted draft and optional materialized/revised Goal through the
+local SwiftData goal-creation UnitOfWork. No route/raw-value, Plan
+compatibility, schema, dependency, signing, entitlement, sync/cloud, server,
+hosted AI, telemetry, analytics, or release/platform behavior changed.
+Tests run: focused `xcodebuild test -project Ambitions.xcodeproj -scheme
+Ambitions -destination 'platform=iOS Simulator,name=iPhone 17'
+-only-testing:AmbitionsTests/GoalCreationServiceTests/testClarificationMaterializationPersistsGoalAndDraftThroughUnitOfWork
+-only-testing:AmbitionsTests/GoalCreationServiceTests/testAtomicClarificationMaterializationRollsBackGoalAndKeepsOriginalDraftWhenGoalWriteFailsBeforeSave`
+(2 tests, 0 failures); `git diff --check`; `scripts/global-train-next-batch.sh
+|| true`; `scripts/global-train-status-summary.sh || true`;
+`scripts/run-doc-qa.sh || true`; `scripts/batch-train-gate-check.sh || true`;
+`xcodegen generate`; and `scripts/build-local.sh` (Build Succeeded,
+`output/logs/build-local-20260508-193942.log`).
 Tests not run: full unit/UI suite, package split build proof, physical-device
-proof, signed archive proof, hosted CI, simulator visual proof, or public
-accessibility proof.
+proof, signed archive proof, hosted CI, simulator visual proof, public
+accessibility proof, migration/import/export proof, or performance-budget
+proof.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
-Yellows carried: PK05-PK41 remain active planned scope; clarification,
-materialization, Capture promotion, migration/backup/rollback, side-effect
-isolation, sync readiness, intelligence quarantine, package split safety, and
-performance budgets are not fully PK-proven yet. PK02 scanner output remains
+Yellows carried: PK06-PK41 remain active planned scope; Capture promotion,
+migration/backup/rollback, side-effect isolation, sync readiness, intelligence
+quarantine, package split safety, and performance budgets are not fully
+PK-proven yet. PK02 scanner output remains
 Yellow for `Native/Ambitions/Domain/AppSession.swift` importing SwiftUI and is
 not package-cleanliness proof. Founder acceptance, rendered visual approval,
 manual accessibility proof, device proof, signed archive proof, hosted CI, and
 release readiness remain Yellow/unproven. GQ01 is normalized as accepted
 Yellow for historical-doc prune breadth and scan noise.
 The pre-sync stash remains preserved and unapplied.
-Rollback path: revert the PK04 implementation/status commit.
+Rollback path: revert the PK05 implementation/status commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
 PK03 UnitOfWork foundation evidence is recorded; PK04 atomic goal-creation
-evidence is recorded.
+evidence is recorded; PK05 atomic clarification/materialization evidence is
+recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: PK05 Atomic Clarification / Materialization.
+Next eligible batch: PK06 Atomic Capture Promotion.
 
 ## Completed
 
@@ -59,8 +62,9 @@ Next eligible batch: PK05 Atomic Clarification / Materialization.
 ## Active / Next
 
 - PK04 Atomic Goal Creation is complete / Green.
-- PK05 Atomic Clarification / Materialization is next eligible.
-- PK05-PK41 remain queued active planned Platform Kernel scope.
+- PK05 Atomic Clarification / Materialization is complete / Green.
+- PK06 Atomic Capture Promotion is next eligible.
+- PK06-PK41 remain queued active planned Platform Kernel scope.
 
 ## Parked Yellows
 

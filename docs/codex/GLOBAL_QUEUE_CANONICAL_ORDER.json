@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-08",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PK05",
-  "next_eligible_title": "Atomic Clarification / Materialization",
+  "next_eligible_batch": "PK06",
+  "next_eligible_title": "Atomic Capture Promotion",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "batches": [
     {
@@ -17,24 +17,24 @@
     {
       "id": "PK05",
       "title": "Atomic Clarification / Materialization",
-      "classification": "executable_now",
-      "reason": "Active Platform Kernel work after PK04; PK05 is the next implementation batch, later PK stays serial/dependency gated.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK05 completed as focused AppUnitOfWork clarification/materialization proof; do not rerun through normal fallback.",
       "blocking_prerequisites": "",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK06",
       "title": "Atomic Capture Promotion",
-      "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
-      "blocking_prerequisites": "Complete prior PK batch PK05 and any data-safety proof named by the PK train.",
+      "classification": "executable_now",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK07",
       "title": "Storage Schema Version Ledger",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK06 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -42,7 +42,7 @@
       "id": "PK08",
       "title": "Migration Plan Scaffold",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK07 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -50,7 +50,7 @@
       "id": "PK09",
       "title": "Unknown Persisted Value Degradation",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK08 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -58,7 +58,7 @@
       "id": "PK10",
       "title": "Storage Invariant Checker",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK09 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -66,7 +66,7 @@
       "id": "PK11",
       "title": "Pre-Migration Backup",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK10 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -74,7 +74,7 @@
       "id": "PK12",
       "title": "Staged Portable Import Dry Run",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK11 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -82,7 +82,7 @@
       "id": "PK13",
       "title": "Restore Rollback",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK12 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -90,7 +90,7 @@
       "id": "PK14",
       "title": "Durable Command/Event Ledger",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK13 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -98,7 +98,7 @@
       "id": "PK15",
       "title": "Receipt Backend",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK14 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -106,7 +106,7 @@
       "id": "PK16",
       "title": "Trust History Query",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK15 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -114,7 +114,7 @@
       "id": "PK17",
       "title": "Today Read Model Extraction",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK16 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -122,7 +122,7 @@
       "id": "PK18",
       "title": "Today Command Handler Extraction",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK17 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -130,7 +130,7 @@
       "id": "PK19",
       "title": "Goals Query/Projector Extraction",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK18 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -138,7 +138,7 @@
       "id": "PK20",
       "title": "Capture Service Extraction",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK19 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -146,7 +146,7 @@
       "id": "PK21",
       "title": "Time Service Extraction",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK20 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -154,7 +154,7 @@
       "id": "PK22",
       "title": "SideEffectLedger Foundation",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK21 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -162,7 +162,7 @@
       "id": "PK23",
       "title": "Notifications Through SideEffectLedger",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK22 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -170,7 +170,7 @@
       "id": "PK24",
       "title": "EventKit Through SideEffectLedger",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK23 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -178,7 +178,7 @@
       "id": "PK25",
       "title": "External Snapshots Through SideEffectLedger",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK24 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -186,7 +186,7 @@
       "id": "PK26",
       "title": "Privacy Classification System",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK25 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -194,7 +194,7 @@
       "id": "PK27",
       "title": "Diagnostic Ledger",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK26 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -202,7 +202,7 @@
       "id": "PK28",
       "title": "Data Control Commands",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK27 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -210,7 +210,7 @@
       "id": "PK29",
       "title": "Entity Revision And Tombstones",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK28 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -218,7 +218,7 @@
       "id": "PK30",
       "title": "Conflict Policy Engine",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK29 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -226,7 +226,7 @@
       "id": "PK31",
       "title": "Manual Portable Sync Merge",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK30 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -234,7 +234,7 @@
       "id": "PK32",
       "title": "Knowledge Claim Boundary Hardening",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK31 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -242,7 +242,7 @@
       "id": "PK33",
       "title": "Recommendation Evidence Model",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK32 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -250,7 +250,7 @@
       "id": "PK34",
       "title": "Intelligence Quarantine",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK33 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -258,7 +258,7 @@
       "id": "PK35",
       "title": "Large-Store Fixture Generator",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK34 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -266,7 +266,7 @@
       "id": "PK36",
       "title": "Performance Budgets",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK35 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -274,7 +274,7 @@
       "id": "PK37",
       "title": "Derived Read-Model Cache",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK36 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -282,7 +282,7 @@
       "id": "PK38",
       "title": "Move Domain To Package",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK37 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -290,7 +290,7 @@
       "id": "PK39",
       "title": "Move Storage To Package",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK38 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -298,7 +298,7 @@
       "id": "PK40",
       "title": "Move Runtime To Package",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK39 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
@@ -306,7 +306,7 @@
       "id": "PK41",
       "title": "Move Feature Engines To Package",
       "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "reason": "Active Platform Kernel work after PK05; PK06 is the next implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK40 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
