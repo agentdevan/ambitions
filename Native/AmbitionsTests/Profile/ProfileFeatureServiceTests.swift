@@ -222,7 +222,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(titles, [
             "Schedule & Availability",
             "Time Behavior",
-            "Automation & Trust",
+            "Trust & Automation",
             "Vacation / Away Time",
             "Durations",
             "What Ambitions Knows",
@@ -294,6 +294,17 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(routes.contains(where: {
             $0.id == "trust-route-receipts" &&
             ($0.subtitle.contains("what happened, what changed, why"))
+        }))
+        XCTAssertTrue(routes.contains(where: {
+            $0.id == "trust-route-why-this" &&
+            $0.title == "Why This?" &&
+            $0.statusLabel == "Explain first" &&
+            $0.subtitle.contains("source, reason, uncertainty, user control, and receipt behavior")
+        }))
+        XCTAssertTrue(routes.contains(where: {
+            $0.id == "trust-route-quiet-reflow" &&
+            $0.statusLabel == "Preview first" &&
+            $0.subtitle.contains("manual planning remains available")
         }))
         XCTAssertTrue(routes.contains(where: {
             $0.id == "trust-route-corrections" &&

@@ -41,7 +41,7 @@ enum ProfileRootDetail: String, Identifiable {
         case .archive: "Archive / Completed"
         case .scheduleAvailability: "Schedule & Availability"
         case .planBehavior: "Time Behavior"
-        case .automationTrust: "Automation & Trust"
+        case .automationTrust: "Trust & Automation"
         case .vacationAwayTime: "Vacation / Away Time"
         case .durations: "Durations"
         case .notifications: "Notifications"

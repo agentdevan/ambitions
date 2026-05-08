@@ -19,8 +19,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Lock, AFI03 Flagship Object Silhouettes, AFI04 Material System Proof,
   AFI05 Shell And Continuity Chrome, AFI06 Today Reality Meridian, AFI07
   Goals Constellation Atlas, AFI08 Capture Atmosphere Composer, AFI09 Time
-  LifeShape Field, and AFI10 You User System Profile are complete / Accepted
-  Yellow. AFI11 Trust Seam And Receipts is the next eligible global batch unless a specific minimum
+  LifeShape Field, AFI10 You User System Profile, and AFI11 Trust Seam And
+  Receipts are complete / Accepted Yellow. AFI12 Accessibility And State Proof
+  is the next eligible global batch unless a specific minimum
   prerequisite is proven.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific

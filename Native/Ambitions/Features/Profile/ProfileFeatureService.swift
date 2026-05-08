@@ -596,6 +596,24 @@ private extension RepositoryBackedProfileService {
                         accessibilityHint: "Shows receipt history posture."
                     ),
                     ProfileTrustCenterRoute(
+                        id: "trust-route-why-this",
+                        title: "Why This?",
+                        subtitle: "Recommendations name the action, source, reason, uncertainty, user control, and receipt behavior before trust-sensitive action.",
+                        icon: "questionmark.bubble",
+                        statusLabel: "Explain first",
+                        semanticState: .trust,
+                        accessibilityHint: "Shows why this explanation posture."
+                    ),
+                    ProfileTrustCenterRoute(
+                        id: "trust-route-quiet-reflow",
+                        title: "Quiet Reflow",
+                        subtitle: "Meaningful time changes stay previewed before apply; manual planning remains available if a source is unavailable.",
+                        icon: "arrow.triangle.2.circlepath",
+                        statusLabel: "Preview first",
+                        semanticState: .calendarDerived,
+                        accessibilityHint: "Shows reflow preview and manual fallback posture."
+                    ),
+                    ProfileTrustCenterRoute(
                         id: "trust-route-corrections",
                         title: "Correction routes",
                         subtitle: "Supported corrections stay tied to existing Goal Detail, Capture, teaching, and explanation seams.",
@@ -699,12 +717,12 @@ private extension RepositoryBackedProfileService {
                         ),
                         ProfileSystemCenterItem(
                             id: "automation-trust",
-                            title: "Automation & Trust",
-                            subtitle: AutomationLevel.defaultLevel.explanation,
+                            title: "Trust & Automation",
+                            subtitle: "Trust comes before automation. \(AutomationLevel.defaultLevel.explanation)",
                             icon: "hand.raised",
                             statusLabel: AutomationLevel.defaultLevel.displayLabel,
                             semanticState: .trust,
-                            accessibilityHint: "Opens Automation and Trust."
+                            accessibilityHint: "Opens Trust and Automation."
                         ),
                         ProfileSystemCenterItem(
                             id: "vacation-away-time",
@@ -1701,8 +1719,8 @@ private extension RepositoryBackedProfileService {
                 ),
                 ProfilePlanningDefaultsSection(
                     id: "automation-trust",
-                    title: "Automation & Trust",
-                    subtitle: "Automation is permission posture, not silent control.",
+                    title: "Trust & Automation",
+                    subtitle: "Trust comes before automation; automation remains permission posture, not silent control.",
                     preferences: [
                         ProfilePlanningDefaultsPreference(
                             id: "automation-guided",
