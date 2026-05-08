@@ -1,0 +1,76 @@
+status: active
+version: 1
+date: "2026-05-08"
+purpose: "Bundle allowlisted ACX Local profiles into repeatable fast lanes."
+
+bundles:
+  quick:
+    description: "Fast repo state and diff-size check."
+    profiles:
+      - status
+      - changed-files
+      - diff-stat
+
+  docs:
+    description: "Docs/Codex OS preflight with claim and language gates."
+    profiles:
+      - status
+      - changed-files
+      - diff-stat
+      - acx-gate-all
+      - cqs-release-claims
+
+  codex-os:
+    description: "Codex OS tooling/docs validation lane."
+    profiles:
+      - status
+      - changed-files
+      - diff-stat
+      - acx-help
+      - acx-gate-all
+      - cqs-release-claims
+
+  ui:
+    description: "UI-affecting preflight without running full Xcode build."
+    profiles:
+      - status
+      - changed-files
+      - diff-stat
+      - cqs-product-drift
+      - cqs-accessibility-motion
+      - cqs-performance
+
+  build-triage:
+    description: "Build/toolchain triage without claiming build success."
+    profiles:
+      - status
+      - changed-files
+      - diff-stat
+      - build-help
+      - test-help
+
+  batch-closeout:
+    description: "Global batch closeout preflight."
+    profiles:
+      - status
+      - changed-files
+      - diff-stat
+      - acx-gate-all
+      - cqs-product-drift
+      - cqs-release-claims
+      - cqs-accessibility-motion
+      - cqs-performance
+
+  repair-diagnosis:
+    description: "Repair loop diagnosis preflight."
+    profiles:
+      - status
+      - changed-files
+      - diff-stat
+      - acx-gate-all
+
+safety:
+  all_profiles_must_be_allowlisted: true
+  no_arbitrary_shell: true
+  shell_true_allowed: false
+  destructive_terms_rejected_by_acx_local: true
