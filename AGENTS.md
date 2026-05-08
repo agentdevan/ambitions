@@ -17,7 +17,7 @@ Ambitions 3.0 remains the completed implementation baseline, but the Ambitions D
 10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
 11. `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md` when the user says `resume global batch train`.
 12. `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md` for flagship maturity, terminal-device, pre-device closure, and no-hosted-workflow validation rules.
-13. `docs/codex/CODEX_OS_INDEX.md` for Codex OS route, ACX, gate, evidence, batch-state, and skills routing when the task is developer-tooling, governance, or long-run execution.
+13. `docs/codex/CODEX_OS_INDEX.md` for Codex OS route, ACX, gate, evidence, batch-state, speed, repair, proof, and skills routing when the task is developer-tooling, governance, or long-run execution.
 
 Older docs may remain useful, but they do not override Ambitions 3.0 source docs. If old docs conflict with Ambitions 3.0, resolve in favor of Ambitions 3.0 and document the conflict when it affects implementation.
 
@@ -30,7 +30,7 @@ Older docs may remain useful, but they do not override Ambitions 3.0 source docs
 - Preserve the native SwiftUI architecture.
 - Do not create new top-level Ambitions destinations. The canonical destinations remain `Today / Goals / Capture / Plan / You`.
 - Do not implement product features in docs/tooling passes unless the tooling itself requires a narrow test or compatibility fix.
-- Use repo-local Codex operating docs, skills, validation packs, context packs, playbooks, and templates under `.codex/` and `docs/codex/`.
+- Use repo-local Codex operating docs, skills, validation packs, context packs, playbooks, templates, routes, state mirrors, manifests, proof protocols, and scripts under `.codex/`, `docs/codex/`, and `scripts/ai/`.
 - During Codex OS / developer-tooling / governance passes, do not implement app features, refactor SwiftUI source, modify product IA, or add runtime app dependencies.
 
 ## Architecture Boundaries
@@ -47,6 +47,10 @@ Older docs may remain useful, but they do not override Ambitions 3.0 source docs
 
 - Start non-trivial work by checking repo status, current docs, and the target code paths.
 - For non-trivial work, pick one route from `.codex/routes/README.md` before broad search. Add a second route only for real cross-boundary work.
+- Use `python3 scripts/ai/acx_local.py bundle quick` for fast local preflight when local tooling is available.
+- Use `python3 scripts/ai/acx_impact.py <changed files>` to map changed paths to routes, bundles, and gates.
+- Use `python3 scripts/ai/acx_repair.py diagnose` after failed gates, failed profiles, hard Reds, or repeated Yellow churn.
+- Use `python3 scripts/ai/acx_closeout.py` and `python3 scripts/ai/acx_sanitized_evidence.py` for compact proof and closeout packets when local proof exists.
 - Use the smallest safe touch budget. Name primary files before edits.
 - Prefer deterministic, additive, compatibility-safe changes.
 - Do not silently rewrite product strategy, IA, naming, release posture, or roadmap structure.
@@ -57,7 +61,7 @@ Older docs may remain useful, but they do not override Ambitions 3.0 source docs
 - Validation summaries must separate verified, failed, not verified, and human/device follow-up.
 - Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, or release readiness without matching evidence.
 - Use `scripts/ai/acx.py` only as a non-executing extractor for bounded reads, saved-log summaries, changed-file grouping, advisory scans, and gate reports.
-- Use `scripts/ai/acx_local.py` only for allowlisted local command profiles. It must not accept arbitrary shell strings, use `shell=True`, run destructive commands, stage, commit, push, reset, clean, delete, switch branches, run `sudo`, or run `bash -c` / `sh -c`.
+- Use `scripts/ai/acx_local.py` only for allowlisted local command profiles and bundles. It must not accept arbitrary shell strings, use `shell=True`, run destructive commands, stage, commit, push, reset, clean, delete, switch branches, run `sudo`, or run `bash -c` / `sh -c`.
 - Preserve raw command logs under `.codex/logs/` when using ACX Local. Summaries do not replace raw logs.
 - If ACX is unavailable, fall back to direct `rg`, `git status`, documented validation commands, and manual raw-log capture; report the fallback.
 
@@ -77,6 +81,13 @@ Use these entry points for Codex performance and execution:
 - `docs/codex/CODEX_OS_INDEX.md`
 - `docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md`
 - `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md`
+- `docs/codex/CODEX_SPEED_ENGINE.md`
+- `docs/codex/CODEX_REPAIR_ENGINE.md`
+- `docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md`
+- `docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md`
+- `docs/codex/CODEX_VISUAL_QA_PROTOCOL.md`
+- `docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md`
+- `docs/codex/CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL.md`
 - `docs/codex/CODEX_EVIDENCE_STANDARD.md`
 - `docs/codex/CODEX_GATE_ENGINE.md`
 - `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`
