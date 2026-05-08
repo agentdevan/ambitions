@@ -36,6 +36,7 @@ For Codex OS, batch-train, or long-run governance work, additionally read:
 - `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
 - `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md`
 - `docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`
+- `docs/codex/POST_BATCH_GATE_REGISTRY.md`
 - `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md` when local MCP tooling matters
 - `docs/codex/MCP_CODEX_SETUP.md` when configuring or verifying local MCP tooling
 - `docs/codex/CODEX_OS_INDEX.md`
@@ -44,11 +45,11 @@ For Codex OS, batch-train, or long-run governance work, additionally read:
 - `.codex/README.md`
 - the selected route or batch manifest
 
-For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `.codex/state/active-batch.yml`, and the EFC overlay files before continuing from repo evidence. If the Ambitions Repo MCP is configured, call `get_active_batch`, `summarize_repo_posture`, and `get_efc_overlay_status` before edits.
+For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files before continuing from repo evidence. If the Ambitions Repo MCP is configured, call `get_active_batch`, `summarize_repo_posture`, and `get_efc_overlay_status` before edits.
 
-For `resume mini global batch train`, immediately read `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, and the EFC overlay files. Mini may execute bounded batches, but must defer or stop on senior-only gates.
+For `resume mini global batch train`, immediately read `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files. Mini may execute bounded batches, but must defer or stop on senior-only gates.
 
-For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, and the EFC overlay files. Senior resolves model-tier deferrals and owns judgment-heavy gates.
+For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files. Senior resolves model-tier deferrals and owns judgment-heavy gates.
 
 ## Source-truth rules
 
@@ -59,6 +60,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - The release evidence packet decides validation and release claim language.
 - `BATCH_REGISTRY.md` decides operational batch status only.
 - `EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`, `BATCH_REGISTRY_EFC_OVERLAY.md`, and `GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md` decide peak proof obligations for unfinished work where compatible with active batch state.
+- `POST_BATCH_GATE_REGISTRY.md` decides mandatory continuation gates such as the Post-PK03 Dirty Worktree Reconciliation Gate.
 - Historical docs may remain useful, but they do not override the current front-door/status files.
 - Do not treat docs-only plans as shipped behavior.
 - MCP tool output is repo-derived execution aid, not a replacement for source truth, raw logs, or human/device/release evidence.
@@ -93,7 +95,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 
 ## Execution rules
 
-- Start non-trivial work by checking repo status, current docs, active batch state, and the target code paths.
+- Start non-trivial work by checking repo status, current docs, active batch state, post-batch gate registry, and the target code paths.
 - Use the smallest safe touch budget. Name primary files before edits.
 - Prefer deterministic, additive, compatibility-safe changes.
 - Do not silently rewrite product strategy, IA, naming, release posture, or roadmap structure.
@@ -107,6 +109,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - When using a Mini-tier or unknown-tier model, follow `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` and `docs/codex/MODEL_TIER_BATCH_MATRIX.md`. Mini is execution-only for bounded batches; senior-only gates must be deferred or stopped, not guessed through.
 - After EFC insertion, every batch report must state EFC applicability: invoked, not applicable, or accepted Yellow with owner.
 - If the Ambitions Repo MCP is configured, use it to preflight active batch, EFC applicability, changed-file impact, and forbidden claims before closeout.
+- After PK03 closes, run `bash scripts/codex-post-pk03-dirty-reconciliation.sh` before continuing the global train. Exit code `86` blocks continuation until dirty files are classified.
 
 ## Local validation
 
@@ -124,6 +127,10 @@ Local MCP validation:
 - `python3 tools/mcp/ambitions_repo_mcp/server.py --self-test`
 - optional: `python3 -m pytest tools/mcp/ambitions_repo_mcp/tests` when pytest is available
 
+Local dirty-worktree gate:
+
+- `bash scripts/codex-post-pk03-dirty-reconciliation.sh`
+
 Local simulator evidence is not signed archive proof, TestFlight proof, App Store proof, physical-device proof, public accessibility proof, legal/privacy signoff, or human release approval.
 
 ## Ambitions product truth
@@ -136,8 +143,8 @@ Local simulator evidence is not signed archive proof, TestFlight proof, App Stor
 
 ## Batch train rule
 
-For multi-batch execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `.codex/state/active-batch.yml`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, the EFC overlay files, and the selected manifest under `docs/codex/batch-trains/`.
+For multi-batch execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, the EFC overlay files, and the selected manifest under `docs/codex/batch-trains/`.
 
-Continue automatically through Green and accepted Yellow only when owner, safety reason, and no-claim boundary are recorded. Hard Red stops. Mini may additionally defer non-blocking senior-only batches to `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`; Senior must resolve blocking deferrals before closeout.
+Continue automatically through Green and accepted Yellow only when owner, safety reason, no-claim boundary, and applicable post-batch gates are recorded. Hard Red stops. Mini may additionally defer non-blocking senior-only batches to `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`; Senior must resolve blocking deferrals before closeout.
 
 After EFC00, continuation also requires an EFC applicability note for every batch that touches user-facing behavior, user data, intelligence, source/freshness, side effects, accessibility, performance, release posture, or public claims.
