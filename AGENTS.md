@@ -31,14 +31,15 @@ For Codex OS, batch-train, or long-run governance work, additionally read:
 - `docs/codex/BATCH_REGISTRY.md`
 - `docs/codex/CODEX_OS_INDEX.md`
 - `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` when the active model tier, Mini/Senior alias, or autonomous batch-train continuation matters
+- `docs/codex/MODEL_TIER_BATCH_MATRIX.md` when classifying remaining batch families for Mini/Senior routing
 - `.codex/README.md`
 - the selected route or batch manifest
 
 For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md` and continue from repo evidence.
 
-For `resume mini global batch train`, immediately read `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, and `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`. Mini may execute bounded batches, but must defer or stop on senior-only gates.
+For `resume mini global batch train`, immediately read `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, and `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`. Mini may execute bounded batches, but must defer or stop on senior-only gates.
 
-For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, and `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`. Senior resolves model-tier deferrals and owns judgment-heavy gates.
+For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, and `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`. Senior resolves model-tier deferrals and owns judgment-heavy gates.
 
 ## Source-truth rules
 
@@ -89,7 +90,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 - Validation summaries must separate verified, failed, not verified, and human/device follow-up.
 - Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, release readiness, CI proof, or legal/privacy approval without matching evidence.
 - Use repo-local Codex operating docs and scripts under `.codex/`, `docs/codex/`, and `scripts/ai/` only as operating context; they do not override source code, raw logs, current implementation status, or release evidence status.
-- When using a Mini-tier or unknown-tier model, follow `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`. Mini is execution-only for bounded batches; senior-only gates must be deferred or stopped, not guessed through.
+- When using a Mini-tier or unknown-tier model, follow `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` and `docs/codex/MODEL_TIER_BATCH_MATRIX.md`. Mini is execution-only for bounded batches; senior-only gates must be deferred or stopped, not guessed through.
 
 ## Local validation
 
@@ -114,6 +115,6 @@ Local simulator evidence is not signed archive proof, TestFlight proof, App Stor
 
 ## Batch train rule
 
-For multi-batch execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` when model tier matters, and the selected manifest under `docs/codex/batch-trains/`.
+For multi-batch execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` and `docs/codex/MODEL_TIER_BATCH_MATRIX.md` when model tier matters, and the selected manifest under `docs/codex/batch-trains/`.
 
 Continue automatically through Green and accepted Yellow only when owner, safety reason, and no-claim boundary are recorded. Hard Red stops. Mini may additionally defer non-blocking senior-only batches to `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`; Senior must resolve blocking deferrals before closeout.
