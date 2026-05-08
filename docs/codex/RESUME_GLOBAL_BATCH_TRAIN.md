@@ -8,7 +8,12 @@ Scope: global batch-train continuation with repair loops until complete or unrec
 
 When the user says `resume global batch train`, Codex must resume Ambitions global execution from repo evidence, not from chat memory, and continue the global batch train until every eligible batch is complete or an unrecoverable Red condition blocks safe continuation.
 
-This alias exists so the user does not need to restate the full global orchestration prompt after compaction, usage interruption, local machine handoff, or Yellow repair-loop closure.
+For model-tier-specific execution, prefer:
+
+- `resume mini global batch train` for Mini Execution Tier / `gpt-5.4-mini` runs.
+- `resume senior global batch train` for Senior Judgment Tier / `gpt-5.5` or stronger selected-model runs.
+
+The generic alias still loads model-tier policy so unknown-tier sessions do not accidentally close senior-only gates.
 
 ## Source-Truth Loading Order
 
@@ -17,48 +22,44 @@ Before doing any work, read:
 1. `README.md`
 2. `AGENTS.md`
 3. `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`
-4. `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md`
-5. `.codex/reports/current-run-state.md`
-6. `.codex/reports/current-batch-train-state.md`
-7. `docs/codex/BATCH_REGISTRY.md`
-8. `docs/codex/CONTEXT_INDEX.md`
-9. `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
-10. `docs/codex/GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`
-11. `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` when the live full-stack tail has cleared or a blocking hygiene Red explicitly selects RHC
-12. target batch prompt and target train manifest
-13. target canon/source files named by that batch
+4. `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`
+5. `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`
+6. `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md`
+7. `.codex/reports/current-run-state.md`
+8. `.codex/reports/current-batch-train-state.md`
+9. `docs/codex/BATCH_REGISTRY.md`
+10. `docs/codex/CONTEXT_INDEX.md`
+11. `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
+12. `docs/codex/GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`
+13. `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` when the live full-stack tail has cleared or a blocking hygiene Red explicitly selects RHC
+14. target batch prompt and target train manifest
+15. target canon/source files named by that batch
 
 If these files disagree, use the active source hierarchy and repair stale dependent artifacts only where the newest proven repo evidence is clear. Do not silently choose between contradictory source-truth files.
 
-## Immediate Resume Rule
+## Model-Tier Rule
 
-The FIO01/PFC05A/DPTG00 governance package is complete / Green, hosted
-workflows are intentionally absent, and current validation is local/Codex-
-operated only. Physical-device proof is final-only, terminal-only, and blocked
-until all pre-device gates close.
+If the active model is known, record it in the batch report. If the model is unknown, record `model tier: unknown` and apply Mini-safe restrictions.
 
-LDI01 Living Dream Architecture Source Truth is complete / Green as docs/Codex
-OS source-truth and governance evidence. LDI02 Capture Handling Ladder is
-complete / Green as a local value-model contract with focused tests. LDI03
-Dream Safety Legality Feasibility Triage is complete / Green as a local safety
-triage contract, 45-family red-team fixture manifest, and focused tests. LDI04
-North Star Extraction is complete / Green as a local value-model contract with
-focused tests. LDI05 Source Claim Graph is complete / Green as a local
-value-model contract with focused tests. LDI06 Pack Registry And Pack Compiler
-is complete / Green as a local value-model contract, local fixture, and
-focused tests. LDI07 Pack Supply Chain Security is complete / Green as a local
-value-model contract, expanded local fixture, and focused tests. LDI08
-Requirement Graph Runtime is complete / Green as a local value-model contract
-and focused tests. LDI09 Eligibility And Deadline Runtime is complete / Green
-as a local value-model contract and focused tests. LDI10 Starting Position And
-Privacy Intake is complete / Green as a local value-model contract and focused
-tests. LDI11 Path Portfolio Runtime is complete / Green as a local value-model
-contract and focused tests. LDI12 Capacity And Commitment-Time Bridge is
-complete / Green as a local value-model contract and focused tests. LDI13 Today
-Bridge And Action Closure is the next eligible global batch unless a later
-repo-truth update proves newer progress.
+- Mini / unknown tier may execute only Mini-safe batches.
+- Mini / unknown tier must defer non-blocking senior-only batches to `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`.
+- Mini / unknown tier must stop on blocking senior-only prerequisites.
+- Senior tier must inspect and resolve blocking deferrals before final closeout or judgment-heavy continuation.
 
-Required first-pass checks:
+## Current Resume Target
+
+Do not trust this section over live repo evidence. The live target must be selected from `.codex/reports/current-run-state.md`, `.codex/reports/current-batch-train-state.md`, `docs/codex/BATCH_REGISTRY.md`, and `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`.
+
+Current repo evidence at the time this alias was refreshed:
+
+- AFI01-AFI08 are complete / Accepted Yellow.
+- AFI source truth controls product/IA/UI/visual/copy decisions.
+- Active flagship IA is `Today / Goals / Capture / Time / You`.
+- `Plan` is superseded as a top-level destination and remains valid only as contextual/action language or internal compatibility seam.
+- AFI09 Time LifeShape Field is the next eligible global batch unless newer repo evidence shows a dirty/half-complete batch, blocking prerequisite, or senior-only model-tier stop.
+- LDI01-LDI14 have closed Green in current order evidence; LDI15-LDI22 remain queued after AFI unless global order or dependency proof selects otherwise.
+
+## Required First-Pass Checks
 
 ```bash
 git status --short
@@ -70,46 +71,17 @@ git diff --check
 scripts/run-doc-qa.sh || true
 scripts/batch-train-gate-check.sh || true
 scripts/global-train-next-batch.sh || true
-rg -n "FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY|DPTG00|Physical Device Terminal Gate|terminal-only" docs .codex README.md || true
+rg -n "MODEL_TIER_EXECUTION_POLICY|RESUME_MINI_GLOBAL_BATCH_TRAIN|RESUME_SENIOR_GLOBAL_BATCH_TRAIN|MODEL_TIER_DEFERRAL_LEDGER" AGENTS.md docs/codex .codex || true
 rg -n "\.github/workflows|GitHub Actions|hosted CI|Actions artifact|ios-validate\.yml" README.md docs .codex || true
 ```
 
-If active docs still instruct contributors to use GitHub Actions, hosted CI, Actions artifacts, or `.github/workflows/ios-validate.yml` as current validation, repair those active docs before marking the overlay Green.
+If active docs still instruct contributors to use GitHub Actions, hosted CI, Actions artifacts, or `.github/workflows/ios-validate.yml` as current validation, repair those active docs before marking any validation overlay Green.
 
 If remaining mentions are historical, archived, removed-policy, or forbidden-current-proof references, classify them in the relevant audit/current-state note and continue.
 
-## Current Known Resume Target
-
-Current proven repo evidence before this alias selected:
-
-- FIO01 / PFC05A / DPTG00 complete / Green.
-- AOS17 Privacy Safety Kernel complete / Green.
-- AOS18 Evaluation Golden Scenarios complete / Green.
-- AOS19 Experience Kernel Celestial Cognitive Load complete / Green.
-- AOS20 Adaptation Kernel Local Personalization complete / Green.
-- AOS21 Interoperability Kernel App Intents EventKit Planning complete / Green.
-- AOS22 Longevity Kernel Archive Aging complete / Green.
-- AOS23 Governance Kernel Registry complete / Green.
-- LDI01 Living Dream Architecture Source Truth complete / Green.
-- LDI02 Capture Handling Ladder complete / Green.
-- LDI03 Dream Safety Legality Feasibility Triage complete / Green.
-- LDI04 North Star Extraction complete / Green.
-- LDI05 Source Claim Graph complete / Green.
-- LDI06 Pack Registry And Pack Compiler complete / Green.
-- LDI07 Pack Supply Chain Security complete / Green.
-- LDI08 Requirement Graph Runtime complete / Green.
-- LDI09 Eligibility And Deadline Runtime complete / Green.
-- LDI10 Starting Position And Privacy Intake complete / Green.
-- LDI11 Path Portfolio Runtime complete / Green.
-- LDI12 Capacity And Commitment-Time Bridge complete / Green.
-- LDI13 Today Bridge And Action Closure is the next eligible global batch unless newer
-  repo evidence selects a later batch.
-
-Continue to LDI13 unless a Hard Red or unrecoverable Red is found.
-
 ## Queued Repo Hygiene Closeout
 
-RHC01-RHC06 Repo Hygiene Closeout is queued but must not interrupt any unfinished LDI/AOS/FCP/PFC batch. Codex may select RHC only after the active full-stack tail clears, in this order: LDI13-LDI22, AOS24-AOS30, FCP27-FCP30, PFC31-PFC40, then RHC01-RHC06. RHC may run earlier only when a Hard Red proves repo hygiene blocks the active batch and the repair is limited to the blocking owner files.
+RHC01-RHC06 Repo Hygiene Closeout is queued but must not interrupt unfinished AFI/LDI/AOS/FCP/PFC/PK work. Codex may select RHC only after the active full-stack tail clears or when a Hard Red proves repo hygiene blocks the active batch and the repair is limited to the blocking owner files.
 
 RHC source truth:
 
@@ -125,22 +97,22 @@ RHC must preserve local/Codex-operated validation, avoid hosted workflows, avoid
 
 ## Continuation Policy
 
-Codex must continue automatically across eligible global batches when each batch is Green or accepted Yellow with explicit owner, reason, follow-up, and recheck condition.
+Codex must continue automatically across eligible global batches when each batch is Green or accepted Yellow with explicit owner, safety reason, follow-up, and recheck condition.
 
 Do not stop for ordinary Yellow advisories when they are non-blocking, owned, and evidence-bounded.
 
-Stop only for Hard Red or unrecoverable Red.
+Stop for Hard Red or unrecoverable Red. Mini / unknown tier also stops for blocking senior-only prerequisites.
 
 ## Repair Loop Policy
 
 For every failing check:
 
 1. Inspect the failure.
-2. Classify it as expected advisory, unrelated pre-existing issue, repairable scoped failure, Hard Red, or unrecoverable Red.
+2. Classify it as expected advisory, unrelated pre-existing issue, repairable scoped failure, Hard Red, model-tier deferral, or unrecoverable Red.
 3. Make the smallest targeted repair if it is in scope.
 4. Rerun the relevant check.
 5. Record proof and residual Yellow notes.
-6. Continue the train if no Hard Red remains.
+6. Continue the train if no Hard Red or blocking senior-only gate remains.
 
 Do not widen scope to unrelated cleanup. Do not weaken validators to pass. Do not fabricate proof.
 
@@ -157,6 +129,7 @@ Unrecoverable Red means one of:
 - build/focused-test/validator failure cannot be repaired without broad unauthorized refactor
 - dependency, signing, entitlement, persistence/schema, release, sync/cloud, AI runtime, or LDI runtime change is required but not authorized by the current batch
 - privacy, memory, source, safety, or release-claim ambiguity requires human decision
+- Mini / unknown tier reaches a blocking senior-only gate
 - commit/push/proof artifact creation fails and cannot be repaired locally
 
 On unrecoverable Red, stop with a Red report and a copy/paste repair or decision prompt.
@@ -166,7 +139,8 @@ On unrecoverable Red, stop with a Red report and a copy/paste repair or decision
 Preserve:
 
 - Ambitions canon
-- top-level tabs: Today, Goals, Capture, Plan, You
+- top-level tabs: Today, Goals, Capture, Time, You
+- `Plan` only as contextual/action language or internal compatibility seam
 - Start Here Surface as Today flagship object
 - Capture as minimalist and composer-driven
 - Mission Control as Goals detail, not a top-level tab
@@ -183,37 +157,34 @@ For each batch:
 
 1. Confirm repo state.
 2. Read source truth.
-3. Name exact allowed files before edits.
-4. Execute the smallest safe implementation slice.
-5. Run focused validation first.
-6. Run required broader docs/scripts/build/tests when scoped.
-7. Repair failures in loop.
-8. Write or update the batch report.
-9. Update registry/context/current-state/order files where safe.
-10. Commit with a batch-specific message.
-11. Select the next eligible batch from repo evidence.
-12. Continue until complete or unrecoverable Red.
+3. Classify model tier and Mini-safe status when relevant.
+4. Name exact allowed files before edits.
+5. Execute the smallest safe implementation slice.
+6. Run focused validation first.
+7. Run required broader docs/scripts/build/tests when scoped.
+8. Repair failures in loop.
+9. Write or update the batch report.
+10. Update registry/context/current-state/order files where safe.
+11. Update model-tier deferral ledger when a Mini/Senior split is created or closed.
+12. Commit with a batch-specific message.
+13. Select the next eligible batch from repo evidence.
+14. Continue until complete, deferred, or unrecoverable Red.
 
 ## Required Final Response Shape
 
-Latest train checkpoint: LDI12 Capacity And Commitment-Time Bridge is complete Green as a
-local value-model contract and focused tests. It does not implement UI
-integration, route/raw-value changes, persistence/schema, sync/cloud, hosted AI,
-user-data server, professional-advice behavior, official source or path
-verification, plan activation, commitment mutation, release/device proof,
-legal/privacy compliance proof, public accessibility proof, or full LDI runtime
-behavior. LDI13 is next unless repo evidence shows later progress.
-
 At each visible checkpoint, report:
 
-- Batch status: Green / Yellow / Red
+- Model tier used
+- Batch status: Green / accepted Yellow / Deferred / Red
 - Current train state before the batch
 - Files changed
 - Implementation summary
 - Tests/checks run
 - Proof artifacts
+- Senior-only gates encountered
+- Deferrals created or closed
 - Hard Reds, if any
 - Yellow advisories, if any
-- Registry/context/current-state updates
+- Registry/context/current-state/ledger updates
 - Next eligible global batch
 - Whether the train is continuing or stopped
