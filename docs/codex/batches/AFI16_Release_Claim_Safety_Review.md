@@ -1,0 +1,55 @@
+# AFI16 Release-Claim Safety Review
+
+<!-- markdownlint-disable MD013 -->
+
+Status: Complete / Accepted Yellow
+Date: 2026-05-08
+Owner train: AFI01-AFI16 Ambitions Flagship Interface Implementation Lane
+Next eligible batch: PK01 Package/Module Boundary Scaffold
+
+## Goal
+
+Close AFI with a final release-claim safety table that separates implemented
+or documented AFI evidence from unsupported production, release, accessibility,
+privacy/legal, device, CI, backend, sync, migration, and performance claims.
+
+## Final No-Claim Safety Table
+
+| Claim area | Current AFI evidence | Claim status |
+| --- | --- | --- |
+| Active IA | AFI docs/state lock Today / Goals / Capture / Time / You. | Active IA claim allowed for source truth only. |
+| AFI source truth | AFI01-AFI16 docs/state reports are recorded. | AFI lane complete / Accepted Yellow. |
+| Runtime implementation | Focused batches updated bounded source/test seams where recorded. | No full app implementation completion claim. |
+| Rendered visual QA | AFI13 source/test scorecards and drift-gallery examples exist. | No rendered visual approval claim. |
+| Founder acceptance | AFI15 checklist and decision record exist. | No founder approval claim. |
+| Accessibility | AFI12 source/test proof and known gaps are recorded. | No public accessibility conformance claim. |
+| Physical device | No physical-device validation was run for AFI closeout. | No physical-device claim. |
+| Signed archive | No signed archive validation was run for AFI closeout. | No signed-archive claim. |
+| TestFlight / App Store | No TestFlight or App Store workflow was run. | No TestFlight/App Store readiness claim. |
+| CI | Repo posture remains local/Codex-operated validation only. | No CI green claim. |
+| Privacy/legal | AFI trust/privacy wording is bounded, but no legal review ran. | No privacy/legal approval claim. |
+| Backend/platform | PK00 baseline is complete; PK01-PK41 remain queued. | No backend completion claim. |
+| Migration/sync | PK migration/sync readiness gates remain queued. | No migration-safe or sync-ready claim. |
+| Performance | No AFI closeout performance profile ran. | No performance-budget proof claim. |
+
+## Known Limitations
+
+- Founder acceptance remains Yellow until a human/founder review is supplied.
+- Rendered visual QA, screenshot proof, and manual accessibility traversal are
+  still not completed by this AFI closeout.
+- Platform Kernel PK01-PK41 remains queued for backend/platform hardening.
+- The preserved pre-sync stash remains Yellow evidence and was not applied.
+
+## Next Safe Step
+
+PK01 Package/Module Boundary Scaffold is the next eligible global batch because
+AFI01-AFI16 are now closed as Accepted Yellow and remaining LDI/backend/platform
+work depends on the Platform Kernel safety ladder where applicable.
+
+## Non-Claims
+
+This file does not claim production readiness, release readiness, TestFlight
+readiness, App Store readiness, CI green, all-tests-pass, physical-device
+verification, public accessibility conformance, legal/privacy approval, sync
+readiness, cloud readiness, migration safety, data-loss-proof storage, backend
+completion, AI readiness, or performance-budget proof.

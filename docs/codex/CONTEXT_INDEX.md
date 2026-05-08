@@ -21,10 +21,11 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Goals Constellation Atlas, AFI08 Capture Atmosphere Composer, AFI09 Time
   LifeShape Field, AFI10 You User System Profile, AFI11 Trust Seam And
   Receipts, AFI12 Accessibility And State Proof, AFI13 Visual QA And Drift
-  Gallery, AFI14 Cross-Surface Coherence Review, and AFI15 Founder Acceptance
-  Review are complete / Accepted Yellow. AFI16 Release-Claim Safety Review is
-  the next eligible global batch unless a specific minimum prerequisite is
-  proven.
+  Gallery, AFI14 Cross-Surface Coherence Review, AFI15 Founder Acceptance
+  Review, and AFI16 Release-Claim Safety Review are complete / Accepted
+  Yellow. PK01 Package/Module Boundary Scaffold is the next eligible global
+  batch unless repo evidence shows a dirty or half-complete active batch must
+  close first.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific
   gates before any production app, platform, persistence, sync, legal/privacy,

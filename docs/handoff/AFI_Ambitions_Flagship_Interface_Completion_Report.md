@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active
+Status: Accepted Yellow
 Date: 2026-05-08
 
 ## Current Status
@@ -12,13 +12,14 @@ Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
 AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, AFI08 Capture
 Atmosphere Composer, AFI09 Time LifeShape Field, AFI10 You User System
 Profile, AFI11 Trust Seam And Receipts, AFI12 Accessibility And State Proof,
-AFI13 Visual QA And Drift Gallery, AFI14 Cross-Surface Coherence Review, and
-AFI15 Founder Acceptance Review are complete / Accepted Yellow.
+AFI13 Visual QA And Drift Gallery, AFI14 Cross-Surface Coherence Review,
+AFI15 Founder Acceptance Review, and AFI16 Release-Claim Safety Review are
+complete / Accepted Yellow.
 
 Next eligible batch:
 
 ```text
-AFI16 Release-Claim Safety Review
+PK01 Package/Module Boundary Scaffold
 ```
 
 ## Active IA
@@ -53,11 +54,13 @@ as contextual/action language or historical compatibility evidence.
 | AFI13 Visual QA And Drift Gallery | Accepted Yellow | Source/test visual QA scorecards and drift-gallery examples now cover Today / Goals / Capture / Time / You with 95+ minimum targets, 98 targets for Today/Capture, and explicit rendered-proof Yellow boundaries. | AFI14 |
 | AFI14 Cross-Surface Coherence Review | Accepted Yellow | Source/test coherence proof now maps Capture -> Clarify -> Shape -> Start -> Close -> Remember across Today / Goals / Capture / Time / You with trust-routed handoffs and no disconnected one-off surface claim. | AFI15 |
 | AFI15 Founder Acceptance Review | Accepted Yellow | Founder checklist and decision record now exist, but no human/founder acceptance was supplied in this session, so founder acceptance remains a parked Yellow with explicit no-claim boundaries. | AFI16 |
+| AFI16 Release-Claim Safety Review | Accepted Yellow | Final AFI no-claim table now blocks production, release, TestFlight, App Store, accessibility-conformance, physical-device, CI, privacy/legal, migration, sync, backend-completion, and performance-budget claims without matching proof. | PK01 |
 
 ## Claims
 
 AFI is active source truth for product, IA, UI, visual, copy, trust, and QA
-decisions. AFI15 records that founder acceptance is not proven yet.
+decisions. AFI15 records that founder acceptance is not proven yet. AFI16
+records that AFI completion is not release readiness.
 
 ## Non-Claims
 

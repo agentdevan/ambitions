@@ -2,11 +2,12 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI15 Founder Acceptance Review / Accepted Yellow.
-Next eligible batch: AFI16 Release-Claim Safety Review.
-Scope: AFI15 added a founder acceptance checklist and decision record without
-inventing human approval. Founder review remains parked Yellow until the
-founder performs an actual acceptance pass or records objections.
+Current batch: AFI16 Release-Claim Safety Review / Accepted Yellow.
+Next eligible batch: PK01 Package/Module Boundary Scaffold.
+Scope: AFI16 added the final AFI release-claim safety table and no-claim
+handoff. AFI remains active, but AFI completion does not create release,
+production, accessibility, device, privacy/legal, CI, migration, sync, backend,
+or performance-readiness claims.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
@@ -14,7 +15,7 @@ action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This AFI15 pass changed docs/state evidence only. It made no app code, runtime
+This AFI16 pass changed docs/state evidence only. It made no app code, runtime
 UI behavior, persistence/schema, route raw-value,
 package manifest, dependency, signing, entitlement, hosted workflow,
 release/platform, legal/privacy, physical-device proof, rendered walkthrough,
@@ -37,12 +38,13 @@ And Continuity Chrome, AFI06 Today Reality Meridian, AFI07 Goals
 Constellation Atlas, AFI08 Capture Atmosphere Composer, AFI09 Time LifeShape
 Field, AFI10 You User System Profile, AFI11 Trust Seam And Receipts, AFI12
 Accessibility And State Proof, AFI13 Visual QA And Drift Gallery, AFI14
-Cross-Surface Coherence Review, and AFI15 Founder Acceptance Review are
-complete / Accepted Yellow. AFI16 Release-Claim Safety Review is now the next
-eligible global batch unless repo evidence shows a dirty or half-complete
-active batch must close first.
-PK01-PK41 remain queued active planned Platform Kernel scope, but are not
-minimum prerequisites for AFI16 unless later evidence proves that dependency.
+Cross-Surface Coherence Review, AFI15 Founder Acceptance Review, and AFI16
+Release-Claim Safety Review are complete / Accepted Yellow. PK01
+Package/Module Boundary Scaffold is now the next eligible global batch unless
+repo evidence shows a dirty or half-complete active batch must close first.
+PK01 begins the queued Platform Kernel safety ladder before LDI15-LDI22 or
+other backend/platform, sync, migration, mutation, intelligence, package split,
+or major feature-expansion work that depends on PK proof.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
 entitlement, dependency, generated-project, or hosted-CI proof claim.

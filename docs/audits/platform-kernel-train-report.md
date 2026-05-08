@@ -9,13 +9,13 @@ Status: Active
 ## Current Closeout
 
 Result: Accepted Yellow
-Batch: AFI15 Founder Acceptance Review
+Batch: AFI16 Release-Claim Safety Review
 Commit: pending
-Files changed: AFI founder acceptance checklist, decision record, audit
-report, and train-state docs.
-Behavior changed: no app behavior changed. AFI15 records that founder
-acceptance is unproven and parked Yellow until a human/founder review is
-supplied.
+Files changed: AFI release-claim safety table, audit report, handoff, and
+train-state docs.
+Behavior changed: no app behavior changed. AFI16 records that AFI completion
+does not imply production, release, accessibility, device, privacy/legal, CI,
+backend, sync, migration, or performance readiness.
 Tests run: `git diff --check`;
 `python3 scripts/ai/acx_impact.py $(git diff --name-only)`;
 `python3 scripts/ai/acx_local.py bundle docs`;
@@ -23,22 +23,23 @@ Tests run: `git diff --check`;
 `python3 scripts/ai/acx_repair.py diagnose`; and
 `scripts/global-train-next-batch.sh`.
 Tests not run: human founder acceptance review, rendered visual review, full
-UI test suite, manual accessibility traversal, physical-device proof, and
-signed archive proof.
+UI test suite, manual accessibility traversal, physical-device proof, signed
+archive proof, and hosted CI.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
 Yellows carried: PK01-PK41 remain active planned scope but are paused behind
 AFI unless a specific PK prerequisite is proven; transaction safety,
 migration/backup/rollback, side-effect isolation, sync readiness, intelligence
-quarantine, and performance budgets are not PK-proven yet. Founder acceptance
-remains Yellow because no human/founder decision was supplied. The pre-sync
-stash remains preserved and unapplied.
-Rollback path: revert the AFI15 implementation commit.
+quarantine, and performance budgets are not PK-proven yet. Founder acceptance,
+rendered visual approval, manual accessibility proof, device proof, signed
+archive proof, hosted CI, and release readiness remain Yellow/unproven. The
+pre-sync stash remains preserved and unapplied.
+Rollback path: revert the AFI16 implementation commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
-AFI15 checklist and decision-record evidence is recorded.
+AFI16 release-claim safety evidence is recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: AFI16 Release-Claim Safety Review.
+Next eligible batch: PK01 Package/Module Boundary Scaffold.
 
 ## Completed
 
@@ -48,7 +49,7 @@ Next eligible batch: AFI16 Release-Claim Safety Review.
 
 ## Active / Next
 
-- AFI16 Release-Claim Safety Review is next eligible.
+- PK01 Package/Module Boundary Scaffold is next eligible.
 - PK01-PK41 remain queued active planned Platform Kernel scope, but no PK batch
   after PK00 is treated as a prerequisite for AFI unless a later owner report
   proves the dependency.
