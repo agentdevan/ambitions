@@ -12,6 +12,7 @@ The active flagship interface canon is now installed through:
 
 - [09_Flagship_Interface_Preservation_Ledger.md](09_Flagship_Interface_Preservation_Ledger.md)
 - [10_Ambitions_Flagship_Interface_Canon.md](10_Ambitions_Flagship_Interface_Canon.md)
+- [01A_Product_Canon_Flagship_Amendment.md](01A_Product_Canon_Flagship_Amendment.md)
 - [11_Canonical_Vocabulary_And_Copy_Bible.md](11_Canonical_Vocabulary_And_Copy_Bible.md)
 - [12_Screen_Composition_Constitution.md](12_Screen_Composition_Constitution.md)
 - [13_Flagship_Experience_Laws.md](13_Flagship_Experience_Laws.md)
@@ -31,22 +32,23 @@ Use this hierarchy for future Ambitions work:
 2. [10_Ambitions_Flagship_Interface_Canon.md](10_Ambitions_Flagship_Interface_Canon.md)
 3. [00_Canon_Index_10_10_Maturity_Gate.md](00_Canon_Index_10_10_Maturity_Gate.md)
 4. [01_Product_Canon.md](01_Product_Canon.md)
-5. [11_Canonical_Vocabulary_And_Copy_Bible.md](11_Canonical_Vocabulary_And_Copy_Bible.md)
-6. [17_Ambitions_Product_Grammar.md](17_Ambitions_Product_Grammar.md)
-7. [16_Surface_Identity_And_Signature_Moments.md](16_Surface_Identity_And_Signature_Moments.md)
-8. [12_Screen_Composition_Constitution.md](12_Screen_Composition_Constitution.md)
-9. [03_Signature_Object_Specs.md](03_Signature_Object_Specs.md)
-10. [02_Continuity_Layer_Chrome.md](02_Continuity_Layer_Chrome.md)
-11. [18_Trust_Receipts_And_Closure_Language.md](18_Trust_Receipts_And_Closure_Language.md)
-12. [04_Trust_Privacy_Automation.md](04_Trust_Privacy_Automation.md)
-13. [05_Accessibility_Motion_Performance.md](05_Accessibility_Motion_Performance.md)
-14. [14_Flagship_QA_And_Award_Caliber_Bar.md](14_Flagship_QA_And_Award_Caliber_Bar.md)
-15. [06_QA_Preview_Visual_Drift.md](06_QA_Preview_Visual_Drift.md)
-16. [07_Native_Shell_Tokens_Materials.md](07_Native_Shell_Tokens_Materials.md)
-17. [08_Implementation_Codex_Repo_Integration.md](08_Implementation_Codex_Repo_Integration.md)
-18. [09_Flagship_Interface_Preservation_Ledger.md](09_Flagship_Interface_Preservation_Ledger.md)
-19. Visual references
-20. Existing repo convenience
+5. [01A_Product_Canon_Flagship_Amendment.md](01A_Product_Canon_Flagship_Amendment.md)
+6. [11_Canonical_Vocabulary_And_Copy_Bible.md](11_Canonical_Vocabulary_And_Copy_Bible.md)
+7. [17_Ambitions_Product_Grammar.md](17_Ambitions_Product_Grammar.md)
+8. [16_Surface_Identity_And_Signature_Moments.md](16_Surface_Identity_And_Signature_Moments.md)
+9. [12_Screen_Composition_Constitution.md](12_Screen_Composition_Constitution.md)
+10. [03_Signature_Object_Specs.md](03_Signature_Object_Specs.md)
+11. [02_Continuity_Layer_Chrome.md](02_Continuity_Layer_Chrome.md)
+12. [18_Trust_Receipts_And_Closure_Language.md](18_Trust_Receipts_And_Closure_Language.md)
+13. [04_Trust_Privacy_Automation.md](04_Trust_Privacy_Automation.md)
+14. [05_Accessibility_Motion_Performance.md](05_Accessibility_Motion_Performance.md)
+15. [14_Flagship_QA_And_Award_Caliber_Bar.md](14_Flagship_QA_And_Award_Caliber_Bar.md)
+16. [06_QA_Preview_Visual_Drift.md](06_QA_Preview_Visual_Drift.md)
+17. [07_Native_Shell_Tokens_Materials.md](07_Native_Shell_Tokens_Materials.md)
+18. [08_Implementation_Codex_Repo_Integration.md](08_Implementation_Codex_Repo_Integration.md)
+19. [09_Flagship_Interface_Preservation_Ledger.md](09_Flagship_Interface_Preservation_Ledger.md)
+20. Visual references
+21. Existing repo convenience
 
 Existing repo convenience, older prompts, older implementation plans, generated images, screenshots, and prior visual direction do not override this canon pack.
 
@@ -56,20 +58,21 @@ Existing repo convenience, older prompts, older implementation plans, generated 
 2. `10_Ambitions_Flagship_Interface_Canon.md`
 3. `00_Canon_Index_10_10_Maturity_Gate.md`
 4. `01_Product_Canon.md`
-5. `11_Canonical_Vocabulary_And_Copy_Bible.md`
-6. `17_Ambitions_Product_Grammar.md`
-7. `16_Surface_Identity_And_Signature_Moments.md`
-8. `12_Screen_Composition_Constitution.md`
-9. `03_Signature_Object_Specs.md`
-10. `02_Continuity_Layer_Chrome.md`
-11. `18_Trust_Receipts_And_Closure_Language.md`
-12. `04_Trust_Privacy_Automation.md`
-13. `05_Accessibility_Motion_Performance.md`
-14. `14_Flagship_QA_And_Award_Caliber_Bar.md`
-15. `06_QA_Preview_Visual_Drift.md`
-16. `07_Native_Shell_Tokens_Materials.md`
-17. `08_Implementation_Codex_Repo_Integration.md`
-18. `09_Flagship_Interface_Preservation_Ledger.md`
+5. `01A_Product_Canon_Flagship_Amendment.md`
+6. `11_Canonical_Vocabulary_And_Copy_Bible.md`
+7. `17_Ambitions_Product_Grammar.md`
+8. `16_Surface_Identity_And_Signature_Moments.md`
+9. `12_Screen_Composition_Constitution.md`
+10. `03_Signature_Object_Specs.md`
+11. `02_Continuity_Layer_Chrome.md`
+12. `18_Trust_Receipts_And_Closure_Language.md`
+13. `04_Trust_Privacy_Automation.md`
+14. `05_Accessibility_Motion_Performance.md`
+15. `14_Flagship_QA_And_Award_Caliber_Bar.md`
+16. `06_QA_Preview_Visual_Drift.md`
+17. `07_Native_Shell_Tokens_Materials.md`
+18. `08_Implementation_Codex_Repo_Integration.md`
+19. `09_Flagship_Interface_Preservation_Ledger.md`
 
 ## Active IA Update
 
