@@ -168,6 +168,7 @@ enum AppContainerFactory {
             captures: SwiftDataCaptureRepository(store: store),
             teaching: SwiftDataGoalTeachingSignalRepository(store: store),
             eventLedger: SwiftDataEventLedgerRepository(store: store),
+            goalCreationUnitOfWork: SwiftDataGoalCreationUnitOfWork(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

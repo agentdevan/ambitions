@@ -177,9 +177,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
                 plannedGoalID: goalID,
                 resultKind: .planned
             )
-            try await repositories.goals.saveGoals([goal])
-            try await repositories.drafts.saveDrafts([storedDraft])
-            return CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: planned.draft), resultKind: .planned, planningEvaluation: planned.plan.evaluation)
+            let receipt = try await saveGoalCreation(goal: goal, draft: storedDraft, now: now)
+            return CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: planned.draft), resultKind: .planned, planningEvaluation: planned.plan.evaluation, unitOfWorkReceipt: receipt)
         case let .starterPlanned(starter):
             let goal = goal(from: starter.draft, plan: starter.plan, id: goalID, createdAt: createdAt, updatedAt: createdAt)
             let storedDraft = storedDraft(
@@ -195,9 +194,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
                 plannedGoalID: goalID,
                 resultKind: .starterPlanned
             )
-            try await repositories.goals.saveGoals([goal])
-            try await repositories.drafts.saveDrafts([storedDraft])
-            return CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: starter.draft), resultKind: .starterPlanned, planningEvaluation: starter.plan.evaluation)
+            let receipt = try await saveGoalCreation(goal: goal, draft: storedDraft, now: now)
+            return CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: starter.draft), resultKind: .starterPlanned, planningEvaluation: starter.plan.evaluation, unitOfWorkReceipt: receipt)
         case let .clarificationRequired(required):
             let storedDraft = storedDraft(
                 id: draftID,
@@ -212,8 +210,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
                 plannedGoalID: nil,
                 resultKind: .clarificationRequired
             )
-            try await repositories.drafts.saveDrafts([storedDraft])
-            return CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: required.draft), resultKind: .clarificationRequired, planningEvaluation: nil)
+            let receipt = try await saveGoalCreation(goal: nil, draft: storedDraft, now: now)
+            return CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: required.draft), resultKind: .clarificationRequired, planningEvaluation: nil, unitOfWorkReceipt: receipt)
         case let .blocked(blocked):
             let storedDraft = storedDraft(
                 id: draftID,
@@ -228,8 +226,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
                 plannedGoalID: nil,
                 resultKind: .blocked
             )
-            try await repositories.drafts.saveDrafts([storedDraft])
-            return CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: blocked.draft), resultKind: .blocked, planningEvaluation: nil)
+            let receipt = try await saveGoalCreation(goal: nil, draft: storedDraft, now: now)
+            return CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: blocked.draft), resultKind: .blocked, planningEvaluation: nil, unitOfWorkReceipt: receipt)
         }
     }
 
@@ -593,6 +591,23 @@ private extension RepositoryBackedGoalsService {
 
     func goalScopedStepID(goalID: String, templateID: String) -> String {
         "\(goalID)-\(templateID)"
+    }
+
+    func saveGoalCreation(goal: Goal?, draft: PersistedGoalDraft, now: Date) async throws -> AppUnitOfWorkReceipt? {
+        guard let unitOfWork = repositories.goalCreationUnitOfWork else {
+            if let goal {
+                try await repositories.goals.saveGoals([goal])
+            }
+            try await repositories.drafts.saveDrafts([draft])
+            return nil
+        }
+
+        let result = try await unitOfWork.saveGoalCreation(
+            GoalCreationUnitOfWorkPayload(goal: goal, draft: draft),
+            id: "goal-creation.\(goal?.id ?? "draft-only").\(draft.id)",
+            timestampProvider: { DomainTimestamp.string(from: now) }
+        )
+        return result.receipt
     }
 
     func loadSnapshot() async throws -> Snapshot {

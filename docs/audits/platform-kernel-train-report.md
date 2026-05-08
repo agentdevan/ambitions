@@ -9,43 +9,46 @@ Status: Active
 ## Current Closeout
 
 Result: Green
-Batch: PK03 AppUnitOfWork Foundation
+Batch: PK04 Atomic Goal Creation
 Commit: pending
-Files changed: AppUnitOfWork persistence contracts/implementation, focused
-persistence tests, PK03 audit report, risk register, and train-state docs.
-Behavior changed: no user-facing app behavior changed. PK03 adds a local
-SwiftData AppUnitOfWork boundary for single-context commit and thrown-error
-rollback before save.
-Tests run: `python3 tools/mcp/ambitions_repo_mcp/server.py --self-test`;
-Ambitions Repo MCP `get_active_batch`, `summarize_repo_posture`,
-`get_efc_overlay_status`, `changed_file_impact`, and
-`check_efc_applicability`; `xcodegen generate`;
-focused `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions
--destination 'platform=iOS Simulator,name=iPhone 17'
--only-testing:AmbitionsTests/PersistenceRepositoryTests`;
-`git diff --check`; `python3 scripts/ai/pk_boundary_scan.py`;
-`python3 scripts/ai/acx_impact.py ...`; `python3 scripts/ai/acx_local.py
-bundle batch-closeout`; and `python3 scripts/ai/acx_local.py bundle docs`.
-Tests not run: full app build, full unit/UI suite, package split build proof,
-physical-device proof, signed archive proof, hosted CI, and simulator visual
-or public accessibility proof.
+Files changed: goal-creation UnitOfWork persistence contract/implementation,
+SwiftData app/preview repository wiring, Create Goal response receipt metadata,
+focused Goal Creation tests, PK04 audit report, queue/state docs, and PK
+closeout docs.
+Behavior changed: repository-backed goal creation now writes the Goal, plan
+records, steps, and persisted draft through a local SwiftData goal-creation
+UnitOfWork when the runtime uses SwiftData repositories. Clarification/blocked
+draft outcomes also use the goal-creation UnitOfWork path. No route/raw-value,
+Plan compatibility, schema, dependency, signing, entitlement, sync/cloud,
+server, hosted AI, telemetry, analytics, or release/platform behavior changed.
+Tests run: `git diff --check`; `xcodegen generate`; focused
+`xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination
+'platform=iOS Simulator,name=iPhone 17'
+-only-testing:AmbitionsTests/GoalCreationServiceTests
+-only-testing:AmbitionsTests/PersistenceRepositoryTests` (26 tests, 0
+failures); and `scripts/build-local.sh`.
+Tests not run: full unit/UI suite, package split build proof, physical-device
+proof, signed archive proof, hosted CI, simulator visual proof, or public
+accessibility proof.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
-Yellows carried: PK04-PK41 remain active planned scope; atomic product-flow
-mutation safety, migration/backup/rollback, side-effect isolation, sync
-readiness, intelligence quarantine, package split safety, and performance
-budgets are not fully PK-proven yet. PK02 scanner output remains Yellow for
-`Native/Ambitions/Domain/AppSession.swift` importing SwiftUI and is not
-package-cleanliness proof. Founder acceptance, rendered visual approval,
+Yellows carried: PK05-PK41 remain active planned scope; clarification,
+materialization, Capture promotion, migration/backup/rollback, side-effect
+isolation, sync readiness, intelligence quarantine, package split safety, and
+performance budgets are not fully PK-proven yet. PK02 scanner output remains
+Yellow for `Native/Ambitions/Domain/AppSession.swift` importing SwiftUI and is
+not package-cleanliness proof. Founder acceptance, rendered visual approval,
 manual accessibility proof, device proof, signed archive proof, hosted CI, and
-release readiness remain Yellow/unproven.
+release readiness remain Yellow/unproven. GQ01 is normalized as accepted
+Yellow for historical-doc prune breadth and scan noise.
 The pre-sync stash remains preserved and unapplied.
-Rollback path: revert the PK03 implementation/status commit.
+Rollback path: revert the PK04 implementation/status commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
-PK03 UnitOfWork foundation evidence is recorded.
+PK03 UnitOfWork foundation evidence is recorded; PK04 atomic goal-creation
+evidence is recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: PK04 Atomic Goal Creation.
+Next eligible batch: PK05 Atomic Clarification / Materialization.
 
 ## Completed
 
@@ -55,8 +58,9 @@ Next eligible batch: PK04 Atomic Goal Creation.
 
 ## Active / Next
 
-- PK04 Atomic Goal Creation is next eligible.
-- PK04-PK41 remain queued active planned Platform Kernel scope.
+- PK04 Atomic Goal Creation is complete / Green.
+- PK05 Atomic Clarification / Materialization is next eligible.
+- PK05-PK41 remain queued active planned Platform Kernel scope.
 
 ## Parked Yellows
 

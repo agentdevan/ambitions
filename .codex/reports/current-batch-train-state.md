@@ -2,38 +2,38 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: GQ01 Global Queue Maturity / Green with Yellow advisories.
-Next eligible batch: PK04 Atomic Goal Creation
-Scope: GQ01 resolved the dirty worktree, committed/pushed PK03, committed/pushed local MCP/tooling dirty-state resolution, created canonical queue maturity data, made next-batch scripts data-backed, repaired active Time/Plan backlog wording, removed local generated junk, and recorded refactor readiness. No production Swift behavior changed in GQ01.
+Current batch: PK04 Atomic Goal Creation / Green.
+Next eligible batch: PK05 Atomic Clarification / Materialization
+Scope: PK04 routes SwiftData-backed goal creation through the PK03 AppUnitOfWork boundary, records local UnitOfWork receipt metadata on Create Goal responses, and proves thrown-error rollback leaves no partial Goal, Draft, or Step state. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / Green with accepted Yellow advisories for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
 
-## GQ01 Queue Maturity Closeout
+## PK04 Atomic Goal Creation Closeout
 
-- Canonical queue ledger: `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md`.
-- Canonical machine-readable queue: `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`.
-- Time compatibility ledger: `docs/codex/TIME_REPLACES_PLAN_COMPATIBILITY_LEDGER.md`.
-- GQ01 report: `docs/audits/gq01-global-queue-maturity-report.md`.
-- Refactor assessment: `docs/audits/gq01-refactor-maturity-assessment.md`.
-- Next-batch scripts now print next eligible batch, classification reason, blockers, and EFC applicability.
-- SA07-SA32 are visible in fallback queue; PX01-PX20 are historical do-not-run; EFC01-EFC18 are overlays first; CS02C-CS06C/CS09C are trigger-only.
+- PK04 report: `docs/audits/pk04-atomic-goal-creation-report.md`.
+- Goal creation UnitOfWork contract/wiring: `Native/Ambitions/Persistence/PersistenceContracts.swift`, `Native/Ambitions/Persistence/SwiftDataRepositories.swift`, and app/preview repository construction.
+- Goal creation service path: `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`.
+- Focused proof: `GoalCreationServiceTests` and `PersistenceRepositoryTests` passed, 26 tests, 0 failures.
+- Canonical queue now marks PK04 complete/do-not-run and PK05 executable now.
 - Release, device, accessibility, legal/privacy, hosted CI, App Store, TestFlight, sync/cloud, telemetry, analytics, hosted AI, and production readiness remain non-claims.
 
 
-Date: 2026-05-08
+## Historical Pre-PK04 Snapshot
+
+Snapshot date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK03 AppUnitOfWork Foundation / Green.
-Next eligible batch: PK04 Atomic Goal Creation
+Batch at snapshot time: PK03 AppUnitOfWork Foundation / Green.
+Then-next eligible batch: PK04 Atomic Goal Creation
 Scope: PK03 added a local SwiftData AppUnitOfWork boundary with receipt
 metadata and focused persistence tests for commit and thrown-error rollback.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
 action/contextual noun. PK00 remains complete / Green with accepted Yellow
-follow-ups as a backend/platform proof baseline. PK01-PK03 are complete;
-PK04-PK41 remain active
+follow-ups as a backend/platform proof baseline. PK01-PK04 are complete;
+PK05-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
 This PK03 pass changed only the persistence UnitOfWork seam, focused
@@ -64,9 +64,10 @@ Cross-Surface Coherence Review, AFI15 Founder Acceptance Review, and AFI16
 Release-Claim Safety Review are complete / Accepted Yellow. PK00 is complete /
 Green. PK01 Package/Module Boundary Scaffold and PK02 Architecture Boundary
 Scanner are complete / Accepted Yellow. PK03 AppUnitOfWork Foundation is
-complete / Green. PK04 Atomic Goal Creation is now the next eligible global
-batch unless repo evidence shows a dirty or half-complete active batch must
-close first.
+complete / Green, PK04 Atomic Goal Creation is complete / Green, and PK05
+Atomic Clarification / Materialization is now the next eligible global batch
+unless repo evidence shows a dirty or half-complete active batch must close
+first.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
 entitlement, dependency, generated-project, or hosted-CI proof claim.

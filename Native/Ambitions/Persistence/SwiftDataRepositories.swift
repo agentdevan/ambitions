@@ -632,32 +632,14 @@ struct SwiftDataGoalRepository: GoalRepository {
             let sectionRecords = try context.fetch(FetchDescriptor<PlanSectionRecord>())
             let stepRecords = try context.fetch(FetchDescriptor<StepRecord>())
 
-            for goal in goals {
-                if let record = goalIndex[goal.id] {
-                    try RepositoryMapping.apply(goal, to: record)
-                } else {
-                    context.insert(try RepositoryMapping.goalRecord(from: goal))
-                }
-
-                for step in stepRecords where step.goalID == goal.id {
-                    context.delete(step)
-                }
-                for section in sectionRecords where section.goalID == goal.id {
-                    context.delete(section)
-                }
-                for plan in planRecords where plan.goalID == goal.id {
-                    context.delete(plan)
-                }
-
-                guard let plan = goal.plan else { continue }
-                context.insert(try RepositoryMapping.planRecord(from: plan))
-                for section in plan.sections {
-                    context.insert(RepositoryMapping.sectionRecord(from: section, planID: plan.id))
-                    for (index, step) in section.steps.enumerated() {
-                        context.insert(try RepositoryMapping.stepRecord(from: step, goalID: goal.id, planID: plan.id, orderIndex: index))
-                    }
-                }
-            }
+            try SwiftDataGoalPersistence.saveGoals(
+                goals,
+                in: context,
+                goalIndex: goalIndex,
+                planRecords: planRecords,
+                sectionRecords: sectionRecords,
+                stepRecords: stepRecords
+            )
         }
     }
 
@@ -742,20 +724,7 @@ struct SwiftDataGoalDraftRepository: GoalDraftRepository {
     func saveDrafts(_ drafts: [PersistedGoalDraft]) async throws {
         try await store.write { context in
             let existing = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<GoalDraftRecord>()).map { ($0.id, $0) })
-            for draft in drafts {
-                if let record = existing[draft.id] {
-                    record.createdAt = draft.createdAt
-                    record.updatedAt = draft.updatedAt
-                    record.title = draft.draft.title
-                    record.modeRaw = draft.draft.mode.rawValue
-                    record.resultKindRaw = draft.latestResultKind?.rawValue
-                    record.readinessRaw = draft.clarification?.readiness.rawValue
-                    record.plannedGoalID = draft.plannedGoalID
-                    record.snapshotData = try PersistenceCoding.encode(draft)
-                } else {
-                    context.insert(try RepositoryMapping.draftRecord(from: draft))
-                }
-            }
+            try SwiftDataGoalDraftPersistence.saveDrafts(drafts, in: context, existing: existing)
         }
     }
 
@@ -763,6 +732,137 @@ struct SwiftDataGoalDraftRepository: GoalDraftRepository {
         try await store.write { context in
             for record in try context.fetch(FetchDescriptor<GoalDraftRecord>()) where record.id == id {
                 context.delete(record)
+            }
+        }
+    }
+}
+
+enum GoalCreationUnitOfWorkProbeError: Error, Equatable {
+    case afterGoalWriteBeforeDraftWrite
+}
+
+enum GoalCreationUnitOfWorkFailureInjection: Sendable, Equatable {
+    case afterGoalWriteBeforeDraftWrite
+}
+
+struct SwiftDataGoalCreationUnitOfWork: GoalCreationUnitOfWorking {
+    let store: AmbitionsPersistenceStore
+    let failureInjection: GoalCreationUnitOfWorkFailureInjection?
+
+    init(
+        store: AmbitionsPersistenceStore,
+        failureInjection: GoalCreationUnitOfWorkFailureInjection? = nil
+    ) {
+        self.store = store
+        self.failureInjection = failureInjection
+    }
+
+    func saveGoalCreation(
+        _ payload: GoalCreationUnitOfWorkPayload,
+        id: String = UUID().uuidString,
+        timestampProvider: () -> String = { ISO8601DateFormatter().string(from: .now) }
+    ) async throws -> AppUnitOfWorkResult<GoalCreationUnitOfWorkCommit> {
+        try await store.transaction(
+            id: id,
+            writeScope: .localSwiftDataSingleContext,
+            timestampProvider: timestampProvider
+        ) { context in
+            if let goal = payload.goal {
+                try SwiftDataGoalPersistence.saveGoals([goal], in: context)
+
+                if failureInjection == .afterGoalWriteBeforeDraftWrite {
+                    throw GoalCreationUnitOfWorkProbeError.afterGoalWriteBeforeDraftWrite
+                }
+            }
+
+            try SwiftDataGoalDraftPersistence.saveDrafts([payload.draft], in: context)
+
+            return GoalCreationUnitOfWorkCommit(
+                goalID: payload.goal?.id,
+                draftID: payload.draft.id,
+                resultKind: payload.draft.latestResultKind
+            )
+        }
+    }
+}
+
+private enum SwiftDataGoalPersistence {
+    static func saveGoals(_ goals: [Goal], in context: ModelContext) throws {
+        let goalIndex = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<GoalRecord>()).map { ($0.id, $0) })
+        let planRecords = try context.fetch(FetchDescriptor<GoalPlanRecord>())
+        let sectionRecords = try context.fetch(FetchDescriptor<PlanSectionRecord>())
+        let stepRecords = try context.fetch(FetchDescriptor<StepRecord>())
+
+        try saveGoals(
+            goals,
+            in: context,
+            goalIndex: goalIndex,
+            planRecords: planRecords,
+            sectionRecords: sectionRecords,
+            stepRecords: stepRecords
+        )
+    }
+
+    static func saveGoals(
+        _ goals: [Goal],
+        in context: ModelContext,
+        goalIndex: [String: GoalRecord],
+        planRecords: [GoalPlanRecord],
+        sectionRecords: [PlanSectionRecord],
+        stepRecords: [StepRecord]
+    ) throws {
+        for goal in goals {
+            if let record = goalIndex[goal.id] {
+                try RepositoryMapping.apply(goal, to: record)
+            } else {
+                context.insert(try RepositoryMapping.goalRecord(from: goal))
+            }
+
+            for step in stepRecords where step.goalID == goal.id {
+                context.delete(step)
+            }
+            for section in sectionRecords where section.goalID == goal.id {
+                context.delete(section)
+            }
+            for plan in planRecords where plan.goalID == goal.id {
+                context.delete(plan)
+            }
+
+            guard let plan = goal.plan else { continue }
+            context.insert(try RepositoryMapping.planRecord(from: plan))
+            for section in plan.sections {
+                context.insert(RepositoryMapping.sectionRecord(from: section, planID: plan.id))
+                for (index, step) in section.steps.enumerated() {
+                    context.insert(try RepositoryMapping.stepRecord(from: step, goalID: goal.id, planID: plan.id, orderIndex: index))
+                }
+            }
+        }
+    }
+}
+
+private enum SwiftDataGoalDraftPersistence {
+    static func saveDrafts(_ drafts: [PersistedGoalDraft], in context: ModelContext) throws {
+        let existing = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<GoalDraftRecord>()).map { ($0.id, $0) })
+        try saveDrafts(drafts, in: context, existing: existing)
+    }
+
+    static func saveDrafts(
+        _ drafts: [PersistedGoalDraft],
+        in context: ModelContext,
+        existing: [String: GoalDraftRecord]
+    ) throws {
+        for draft in drafts {
+            if let record = existing[draft.id] {
+                record.createdAt = draft.createdAt
+                record.updatedAt = draft.updatedAt
+                record.title = draft.draft.title
+                record.modeRaw = draft.draft.mode.rawValue
+                record.resultKindRaw = draft.latestResultKind?.rawValue
+                record.readinessRaw = draft.clarification?.readiness.rawValue
+                record.plannedGoalID = draft.plannedGoalID
+                record.snapshotData = try PersistenceCoding.encode(draft)
+            } else {
+                context.insert(try RepositoryMapping.draftRecord(from: draft))
             }
         }
     }

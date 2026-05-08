@@ -2,24 +2,24 @@
   "schema_version": 1,
   "date": "2026-05-08",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PK04",
-  "next_eligible_title": "Atomic Goal Creation",
+  "next_eligible_batch": "PK05",
+  "next_eligible_title": "Atomic Clarification / Materialization",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "batches": [
     {
       "id": "PK04",
       "title": "Atomic Goal Creation",
-      "classification": "executable_now",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK04 completed as focused AppUnitOfWork goal-creation proof; do not rerun through normal fallback.",
       "blocking_prerequisites": "",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK05",
       "title": "Atomic Clarification / Materialization",
-      "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK03; PK04 is the next implementation batch, later PK stays serial/dependency gated.",
-      "blocking_prerequisites": "Complete prior PK batch PK04 and any data-safety proof named by the PK train.",
+      "classification": "executable_now",
+      "reason": "Active Platform Kernel work after PK04; PK05 is the next implementation batch, later PK stays serial/dependency gated.",
+      "blocking_prerequisites": "",
       "efc_applicability": "invoked"
     },
     {

@@ -350,6 +350,25 @@ struct AppUnitOfWorkResult<Value: Sendable>: Sendable {
     let receipt: AppUnitOfWorkReceipt
 }
 
+struct GoalCreationUnitOfWorkPayload: Sendable {
+    let goal: Goal?
+    let draft: PersistedGoalDraft
+}
+
+struct GoalCreationUnitOfWorkCommit: Sendable, Equatable {
+    let goalID: String?
+    let draftID: String
+    let resultKind: GoalOrchestrationResultKind?
+}
+
+protocol GoalCreationUnitOfWorking: Sendable {
+    func saveGoalCreation(
+        _ payload: GoalCreationUnitOfWorkPayload,
+        id: String,
+        timestampProvider: () -> String
+    ) async throws -> AppUnitOfWorkResult<GoalCreationUnitOfWorkCommit>
+}
+
 protocol LegacyImportServicing: Sendable {
     func importSnapshot(_ snapshot: LegacyPrototypeSnapshot) async throws -> LegacyImportReport
 }
@@ -362,6 +381,7 @@ struct AppRepositories: Sendable {
     let captures: any CaptureRepository
     let teaching: any GoalTeachingSignalRepository
     let eventLedger: any EventLedgerRepository
+    let goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)?
     let appState: any AppStateRepository
 
     init(
@@ -372,6 +392,7 @@ struct AppRepositories: Sendable {
         captures: any CaptureRepository,
         teaching: any GoalTeachingSignalRepository = InMemoryGoalTeachingSignalRepository(),
         eventLedger: any EventLedgerRepository = InMemoryEventLedgerRepository(),
+        goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)? = nil,
         appState: any AppStateRepository
     ) {
         self.goals = goals
@@ -381,6 +402,7 @@ struct AppRepositories: Sendable {
         self.captures = captures
         self.teaching = teaching
         self.eventLedger = eventLedger
+        self.goalCreationUnitOfWork = goalCreationUnitOfWork
         self.appState = appState
     }
 }

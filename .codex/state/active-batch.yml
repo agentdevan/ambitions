@@ -11,14 +11,14 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "GQ01 Global Queue Maturity"
-  previous_batch: "PK03 AppUnitOfWork Foundation"
-  previous_result: "Green"
-  next_eligible_batch: "PK04 Atomic Goal Creation"
+  batch: "PK04 Atomic Goal Creation"
+  previous_batch: "GQ01 Global Queue Maturity"
+  previous_result: "Accepted Yellow"
+  next_eligible_batch: "PK05 Atomic Clarification / Materialization"
 codex_os_override:
-  active_pass: "queue maturity / governance"
-  app_feature_implementation_allowed: false
-  production_swift_allowed: false
+  active_pass: "platform kernel implementation"
+  app_feature_implementation_allowed: true
+  production_swift_allowed: true
   branch_creation_allowed: false
 efc_overlay:
   status: "active proof overlay wired into canonical queue"

@@ -62,6 +62,10 @@ final class GoalCreationServiceTests: XCTestCase {
             XCTAssertEqual(response.blueprint.mode, expectedMode)
             XCTAssertEqual(response.resultKind, expectedKind)
             XCTAssertNotNil(response.planningEvaluation)
+            XCTAssertEqual(response.unitOfWorkReceipt?.writeScope, .localSwiftDataSingleContext)
+            XCTAssertEqual(response.unitOfWorkReceipt?.rollbackBehavior, AppUnitOfWorkReceipt.rollbackOnThrownError)
+            XCTAssertEqual(response.unitOfWorkReceipt?.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
+            XCTAssertEqual(response.unitOfWorkReceipt?.didCommitChanges, true)
             XCTAssertEqual(goal.title, title)
             XCTAssertEqual(goal.mode, expectedMode)
             XCTAssertGreaterThanOrEqual(goal.plan?.sections.count ?? 0, 2)
@@ -112,6 +116,8 @@ final class GoalCreationServiceTests: XCTestCase {
         let storedDraft = try XCTUnwrap(maybeStoredDraft)
         let goals = try await repositories.goals.listGoals()
 
+        XCTAssertEqual(response.unitOfWorkReceipt?.writeScope, .localSwiftDataSingleContext)
+        XCTAssertEqual(response.unitOfWorkReceipt?.didCommitChanges, true)
         XCTAssertEqual(storedDraft.latestResultKind, .clarificationRequired)
         XCTAssertNil(storedDraft.plannedGoalID)
         XCTAssertEqual(storedDraft.clarification?.analysis.decision, .mustClarifyBeforeCompile)
@@ -225,6 +231,35 @@ final class GoalCreationServiceTests: XCTestCase {
             XCTAssertEqual((error as? LocalizedError)?.errorDescription, "A goal title is required before a native plan can be created.")
         }
     }
+
+    func testAtomicGoalCreationRollsBackGoalWhenDraftWriteFailsBeforeSave() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(
+            store: store,
+            unitOfWork: SwiftDataGoalCreationUnitOfWork(
+                store: store,
+                failureInjection: .afterGoalWriteBeforeDraftWrite
+            )
+        )
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        await XCTAssertThrowsErrorAsync(
+            try await service.createGoal(
+                CreateGoalRequest(title: "Launch a rollback-safe experiment"),
+                now: fixedNow
+            )
+        ) { error in
+            XCTAssertEqual(error as? GoalCreationUnitOfWorkProbeError, .afterGoalWriteBeforeDraftWrite)
+        }
+
+        let goals = try await repositories.goals.listGoals()
+        let drafts = try await repositories.drafts.listDrafts()
+        let steps = try await repositories.goals.listActionableSteps()
+
+        XCTAssertTrue(goals.isEmpty)
+        XCTAssertTrue(drafts.isEmpty)
+        XCTAssertTrue(steps.isEmpty)
+    }
 }
 
 private extension GoalCreationServiceTests {
@@ -234,12 +269,23 @@ private extension GoalCreationServiceTests {
 
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
+        return makeRepositories(
+            store: store,
+            unitOfWork: SwiftDataGoalCreationUnitOfWork(store: store)
+        )
+    }
+
+    func makeRepositories(
+        store: AmbitionsPersistenceStore,
+        unitOfWork: SwiftDataGoalCreationUnitOfWork
+    ) -> AppRepositories {
         return AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
             drafts: SwiftDataGoalDraftRepository(store: store),
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            goalCreationUnitOfWork: unitOfWork,
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

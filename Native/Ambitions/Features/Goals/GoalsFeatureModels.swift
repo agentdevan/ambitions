@@ -730,17 +730,20 @@ struct CreateGoalResponse: Sendable {
     let blueprint: GoalBlueprint
     let resultKind: GoalOrchestrationResultKind
     let planningEvaluation: PlanningEvaluation?
+    let unitOfWorkReceipt: AppUnitOfWorkReceipt?
 
     init(
         target: GoalRouteTarget,
         blueprint: GoalBlueprint,
         resultKind: GoalOrchestrationResultKind = .planned,
-        planningEvaluation: PlanningEvaluation? = nil
+        planningEvaluation: PlanningEvaluation? = nil,
+        unitOfWorkReceipt: AppUnitOfWorkReceipt? = nil
     ) {
         self.target = target
         self.blueprint = blueprint
         self.resultKind = resultKind
         self.planningEvaluation = planningEvaluation
+        self.unitOfWorkReceipt = unitOfWorkReceipt
     }
 }
 
