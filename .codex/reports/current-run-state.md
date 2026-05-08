@@ -2,12 +2,11 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI14 Cross-Surface Coherence Review / Accepted Yellow.
-Next eligible batch: AFI15 Founder Acceptance Review.
-Scope: AFI14 added source/test cross-surface coherence proof for Capture ->
-Clarify -> Shape -> Start -> Close -> Remember. Every active AFI surface
-participates in the product grammar, and cross-surface handoffs require trust
-routing.
+Current batch: AFI15 Founder Acceptance Review / Accepted Yellow.
+Next eligible batch: AFI16 Release-Claim Safety Review.
+Scope: AFI15 added a founder acceptance checklist and decision record without
+inventing human approval. Founder review remains parked Yellow until the
+founder performs an actual acceptance pass or records objections.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
@@ -15,12 +14,13 @@ action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This AFI14 pass changed source/test proof infrastructure and train-state docs
-only. It made no runtime UI behavior, persistence/schema, route raw-value,
+This AFI15 pass changed docs/state evidence only. It made no app code, runtime
+UI behavior, persistence/schema, route raw-value,
 package manifest, dependency, signing, entitlement, hosted workflow,
 release/platform, legal/privacy, physical-device proof, rendered walkthrough,
 founder acceptance, public accessibility proof, sync/cloud, hosted AI, account,
-calendar-write, permission, or user-data server claim.
+calendar-write, permission, user-data server, production readiness, TestFlight,
+or App Store claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -40,12 +40,12 @@ System Proof, AFI05 Shell And Continuity Chrome, AFI06 Today Reality
 Meridian, AFI07 Goals Constellation Atlas, AFI08 Capture Atmosphere Composer,
 AFI09 Time LifeShape Field, AFI10 You User System Profile, AFI11 Trust Seam
 And Receipts, AFI12 Accessibility And State Proof, AFI13 Visual QA And Drift
-Gallery, and AFI14 Cross-Surface Coherence Review are complete / Accepted
-Yellow. AFI15 Founder Acceptance Review is now the next eligible global batch
-unless repo evidence shows a dirty or half-complete active batch must close
-first. PK01-PK41 remain queued active planned Platform Kernel scope,
-but are not minimum prerequisites for AFI15 unless later evidence proves that
-dependency.
+Gallery, AFI14 Cross-Surface Coherence Review, and AFI15 Founder Acceptance
+Review are complete / Accepted Yellow. AFI16 Release-Claim Safety Review is
+now the next eligible global batch unless repo evidence shows a dirty or
+half-complete active batch must close first. PK01-PK41 remain queued active
+planned Platform Kernel scope, but are not minimum prerequisites for AFI16
+unless later evidence proves that dependency.
 
 ## Full-Stack Global Order Reconciliation
 

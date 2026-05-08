@@ -18,10 +18,10 @@ Date: 2026-05-08
   AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, and AFI08
   Capture Atmosphere Composer, AFI09 Time LifeShape Field, AFI10 You User
   System Profile, AFI11 Trust Seam And Receipts, AFI12 Accessibility And
-  State Proof, AFI13 Visual QA And Drift Gallery, and AFI14 Cross-Surface
-  Coherence Review are complete / Accepted Yellow under the active AFI
-  insertion overlay.
-  AFI15 Founder Acceptance Review is the next eligible global batch.
+  State Proof, AFI13 Visual QA And Drift Gallery, AFI14 Cross-Surface
+  Coherence Review, and AFI15 Founder Acceptance Review are complete /
+  Accepted Yellow under the active AFI insertion overlay.
+  AFI16 Release-Claim Safety Review is the next eligible global batch.
   PK01-PK41 remain active planned Platform Kernel scope
   but must not outrun AFI unless registry evidence proves a minimum safety
   prerequisite.
@@ -55,4 +55,4 @@ proof.
 
 ## Next Eligible
 
-AFI15 Founder Acceptance Review.
+AFI16 Release-Claim Safety Review.
