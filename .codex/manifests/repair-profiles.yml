@@ -1,0 +1,128 @@
+status: active
+version: 1
+date: "2026-05-08"
+purpose: "Classify failures and select safe repair behavior for Ambitions Codex OS."
+
+repair_profiles:
+  R1-formatting-whitespace:
+    class: R1
+    detect:
+      - "git diff --check"
+      - "markdownlint"
+    safe_auto_repair: true
+    repair_type: formatting
+    validate:
+      - codex-os
+    stop_if_repeats: 2
+
+  R2-docs-drift:
+    class: R2
+    detect:
+      - "source truth"
+      - "stale route"
+      - "missing index"
+    safe_auto_repair: true
+    repair_type: docs_reconciliation
+    validate:
+      - docs
+    stop_if_repeats: 2
+
+  R3-deprecated-language:
+    class: R3
+    detect:
+      - "next best move"
+      - "Your best next move"
+      - "Insights top-level"
+    safe_auto_repair: true
+    repair_type: copy_repair
+    validate:
+      - docs
+
+  R4-unsupported-release-claim:
+    class: R4
+    detect:
+      - "production-ready"
+      - "release-ready"
+      - "TestFlight ready"
+      - "App Store ready"
+      - "device verified"
+      - "fully accessible"
+    safe_auto_repair: true
+    repair_type: claim_firewall
+    validate:
+      - docs
+
+  R5-cqs-advisory:
+    class: R5
+    detect:
+      - "CQS"
+      - "Accepted Yellow"
+      - "advisory hits"
+    safe_auto_repair: false
+    repair_type: advisory_review
+    validate:
+      - batch-closeout
+
+  R6-xcodegen-project-drift:
+    class: R6
+    detect:
+      - "xcodegen"
+      - "project.yml"
+      - "generated project drift"
+    safe_auto_repair: false
+    repair_type: toolchain_repair
+    validate:
+      - build-triage
+
+  R7-build-failure:
+    class: R7
+    detect:
+      - "BUILD FAILED"
+      - "error:"
+      - ".swift:"
+    safe_auto_repair: false
+    repair_type: build_repair
+    requires_raw_log: true
+    validate:
+      - build-triage
+
+  R8-test-failure:
+    class: R8
+    detect:
+      - "TEST FAILED"
+      - "failed test"
+      - "XCTest"
+    safe_auto_repair: false
+    repair_type: test_repair
+    requires_raw_log: true
+    validate:
+      - build-triage
+
+  R9-source-truth-conflict:
+    class: R9
+    detect:
+      - "source-truth conflict"
+      - "owner conflict"
+      - "contradiction"
+    safe_auto_repair: false
+    repair_type: stop_or_owner_reconcile
+    hard_stop: true
+
+  R10-hard-red-stop:
+    class: R10
+    detect:
+      - "Hard Red"
+      - "STOPPED ON RED"
+      - "privacy/security/legal ambiguity"
+      - "unknown dirty tree"
+      - "destructive source-truth conflict"
+    safe_auto_repair: false
+    repair_type: hard_stop
+    hard_stop: true
+
+rules:
+  no_swift_auto_repair: true
+  no_persistence_schema_auto_repair: true
+  no_privacy_security_behavior_auto_repair: true
+  no_destructive_git_actions: true
+  stop_after_same_root_repeats: 2
