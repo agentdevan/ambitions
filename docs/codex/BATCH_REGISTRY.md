@@ -48,7 +48,11 @@ Current 4.0 status:
   in source-truth, reports, order docs, and helper scans without app-code
   changes or implementation/readiness claims. Historical Plan-era references
   remain parked only as history, compatibility, or hard-Red guardrails.
-- Next eligible global batch: AFI02 IA Hierarchy Lock.
+- Complete / accepted Yellow: AFI02 IA Hierarchy Lock is complete as
+  docs/canon/governance hierarchy lock evidence. It confirmed Today / Goals /
+  Capture / Time / You, Goals -> Time -> Today, and Time as the LifeShape Field
+  owner without app-code changes or implementation/readiness claims.
+- Next eligible global batch: AFI03 Flagship Object Silhouettes.
 - Complete / accepted Yellow: FCP/PFC global registry-context reconciliation
   is complete as docs-only operating truth. It reconciled the full-stack order,
   FCP/PFC source truth, registry, context index, and run-state docs after PD15
@@ -1242,7 +1246,7 @@ next eligible global batch under the stricter highest-priority global order.
 | --- | --- | --- |
 | LDI01-LDI22 Living Dream Intelligence Train | Active / Green | LDI01-LDI14 are complete Green after explicit user-directed early insertion following AOS23; LDI15-LDI22 remain queued serial successors and require LDI source truth, safety/privacy/source/professional-boundary gates, relevant PK prerequisites, and no runtime/release overclaim. |
 
-| AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Active / AFI01 Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge is complete as docs/canon/governance language purge evidence. AFI02 IA Hierarchy Lock is the next eligible global batch. Active top-level IA is Today / Goals / Capture / Time / You; Plan is not top-level. |
+| AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Active / AFI02 Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge and AFI02 IA Hierarchy Lock are complete as docs/canon/governance evidence. AFI03 Flagship Object Silhouettes is the next eligible global batch. Active top-level IA is Today / Goals / Capture / Time / You; Plan is not top-level. |
 
 | PK00-PK41 Platform Kernel Train | Active / PK00 Green | PK00 Current Backend Proof Baseline is complete / Green with accepted Yellow follow-ups. PK01-PK41 remain queued in dependency order for transaction safety, storage/migration, backup/restore, events/receipts/trust, service decomposition, side effects, privacy/diagnostics/data controls, sync readiness, intelligence readiness, performance/scale, and modularization. PK does not override AFI unless a specific batch is proven as a minimum safety prerequisite. |
 

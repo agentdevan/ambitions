@@ -392,7 +392,7 @@ Each category needs at least one Pass and one Fail example during visual QA.
 | Today | Reality Meridian + Start Here | task list/timeline |
 | Goals | equal-weight atlas | KPI dashboard / astrology |
 | Capture | quiet composer | notes feed / chatbot |
-| Plan | capacity field | calendar clone / analytics |
+| Time | capacity field | calendar clone / analytics |
 | You | premium settings | social profile / admin console |
 | Trust | seam/source/receipt | AI assistant drawer |
 | Continuity Dock | native five-tab with calm markers | red badges / notification bar |

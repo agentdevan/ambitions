@@ -310,7 +310,7 @@ Adaptive openings:
 - Day when immediate execution pressure is highest
 - Month for higher-level shaping
 
-Plan must not become a calendar clone.
+Time must not become a calendar clone in active flagship canon.
 
 ---
 
@@ -356,7 +356,7 @@ Launch Ambitions should prove:
 
 1. Today can turn life direction into grounded daily action.
 2. Capture can accept anything quietly and route it without pressure.
-3. Plan can reveal capacity without becoming a calendar clone.
+3. Time can reveal capacity without becoming a calendar clone.
 4. Goals can hold life areas without ranking or gamifying the user.
 5. You can make trust, privacy, planning defaults, and automation inspectable.
 
@@ -442,7 +442,7 @@ Stop and repair if any are true:
 2. Mission Control promoted to top-level tab.
 3. Capture becomes feed, inbox, chat, category grid, or task board.
 4. Today becomes generic task list or calendar timeline.
-5. Plan becomes calendar clone.
+5. Time becomes calendar clone.
 6. Goals becomes KPI dashboard, habit tracker, astrology, or ranked life score.
 7. You becomes social profile or admin console.
 8. Continuity signals appear outside Crown, Edge, Dock, Seam.

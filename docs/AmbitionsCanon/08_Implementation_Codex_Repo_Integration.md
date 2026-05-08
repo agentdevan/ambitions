@@ -258,7 +258,7 @@ Codex must stop and report Red if:
 - Mission Control would become top-level tab
 - Capture becomes busy board/feed/chat
 - Today loses Reality Meridian / Start Here relationship
-- Plan becomes calendar clone
+- Time becomes calendar clone
 - Goals becomes KPI/habit/dashboard model
 - You becomes social/admin profile
 - broad refactor is required but not authorized
@@ -369,7 +369,7 @@ Hard Red if:
 - repo uses different top-level IA
 - Mission Control is top-level
 - Capture is plus-tab or feed-first
-- Plan is calendar clone
+- Time is calendar clone
 - Goals is dashboard/habit/KPI model
 - You is social/admin profile
 - raw visual styles dominate
@@ -463,7 +463,7 @@ Acceptance:
 - Manual/Suggest/Preview Reflow available
 - privacy controls visible
 
-### Batch 8 — Plan LifeShape Field
+### Batch 8 — Time LifeShape Field
 
 Objective: implement capacity shaping without calendar clone.
 

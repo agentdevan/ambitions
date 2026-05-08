@@ -540,9 +540,9 @@ Hard Red:
 
 ### Purpose
 
-LifeShape Field is Plan’s primary object. It helps the user understand and shape open time, goal time, protected time, pressure, and planning horizon without becoming a calendar clone.
+LifeShape Field is Time’s primary object. It helps the user understand and shape open time, goal time, protected time, pressure, and planning horizon without becoming a calendar clone.
 
-Plan should feel like the user shapes the week like a living field, not a grid of appointments.
+Time should feel like the user shapes the week like a living field, not a grid of appointments.
 
 ### Anatomy
 
@@ -657,11 +657,11 @@ Reduced Motion: no morph dependency; before/after textual summary; static field 
 
 ### Acceptance Criteria
 
-LifeShape Field passes only if Plan avoids calendar clone, open/goal/protected/pressure are understandable, Week default is useful, Day/Month appear adaptively, reflow preview is clear, source/permission states are inspectable, and accessibility summary preserves meaning.
+LifeShape Field passes only if Time avoids calendar clone, open/goal/protected/pressure are understandable, Week default is useful, Day/Month appear adaptively, reflow preview is clear, source/permission states are inspectable, and accessibility summary preserves meaning.
 
 Hard Red:
 
-- primary Plan UI is calendar grid
+- primary Time UI is calendar grid
 - metrics become dashboard tiles
 - pressure is red alert behavior
 - protected time reads as failure/blockage
@@ -976,7 +976,7 @@ Stop and repair if any are true:
 1. Today becomes task list, calendar timeline, or focus widget.
 2. Start Here becomes detached generic card.
 3. Capture becomes notes feed, inbox, chatbot, category board, or plus-tab app.
-4. Plan becomes calendar clone, heatmap, or analytics dashboard.
+4. Time becomes calendar clone, heatmap, or analytics dashboard.
 5. Goals becomes KPI dashboard, habit ring system, astrology, or ranked life score.
 6. You becomes social profile, family hub, or admin console.
 7. Any primary object requires visual-only interpretation.
