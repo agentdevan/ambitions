@@ -12,6 +12,8 @@ Capture → Place → Plan → Do Today → Close / Recover → Save Proof
 
 ## Current source of truth
 
+> Source-truth update: For future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work, start with `docs/AmbitionsCanon/README.md`. Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible, but they do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist.
+
 Start Ambitions 3.0 work from this read order:
 
 1. [Ambitions_3_0_Source_Of_Truth_Override.md](docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md)

@@ -1,17 +1,19 @@
 # Current Run State
 
-Date: 2026-05-07
+Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: LDI12 Capacity And Commitment-Time Bridge
+Current batch: LDI13 Today Bridge And Action Closure
 complete / Green.
-Next eligible batch: LDI13 Today Bridge And Action Closure.
-Scope: LDI12 added the local value-model Capacity And Commitment-Time Bridge
-contract and focused domain tests that compose LDI11 Path Portfolio Runtime with
-AOS10 Commitment Time Kernel projections. It checks real capacity fit, blocks
-over-capacity fantasy schedules, source/stale/protected/private projection
-risks, missing recovery buffers, silent reschedule risk, platform-calendar
-implementation, activation, hidden mutation, user-data server use, and non-value
-runtime boundaries. It adds no UI integration, route/raw-value change,
+Next eligible batch: LDI14 Trust Review And Dream Handling Receipts.
+Scope: LDI13 added the local value-model Today Bridge And Action Closure
+contract and focused domain tests that compose LDI12 Capacity And
+Commitment-Time Bridge evidence with Today step projections, Start Here
+recommendations, proof receipts, and closure prompts. It checks the one-to-three
+Today step boundary, recommended step presence, proof/review evidence,
+source/freshness/proof review propagation, user control, non-punitive closure
+language, no confidence-score or guaranteed-outcome language, no activation, no
+hidden mutation, no user-data server use, and value-model-only runtime
+boundaries. It adds no UI integration, route/raw-value change,
 persistence/schema, sync/cloud, hosted AI, user-data server, professional
 advice, official source/path verification, release/platform claim, legal/privacy
 compliance, physical-device proof, public accessibility proof, signing,
@@ -26,8 +28,8 @@ commands, proof artifacts, and terminal gates. Physical-device proof is
 terminal-only and final-only. All feature, product-object, primitive,
 intelligence, source/freshness, accessibility, visual, performance,
 privacy/legal, platform, release, signed-RC, and claim-safety gates must close
-before device proof begins. AOS23 and LDI01-LDI12 have since closed Green;
-LDI13 remains next unless repo evidence shows later progress.
+before device proof begins. AOS23 and LDI01-LDI13 have since closed Green;
+LDI14 remains next unless repo evidence shows later progress.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -990,7 +992,9 @@ Batch type: docs/Codex OS/global-train integration only.
   Runtime contract; LDI09 has since closed Green as a local Eligibility And
   Deadline Runtime contract; LDI10 has since closed Green as a local Starting
   Position And Privacy Intake contract; LDI11 has since closed Green as a local
-  Path Portfolio Runtime contract; and LDI13 is next.
+  Path Portfolio Runtime contract; LDI12 has since closed Green as a local
+  Capacity And Commitment-Time Bridge contract; LDI13 has since closed Green as
+  a local Today Bridge And Action Closure contract; and LDI14 is next.
 - Queued PD01-PD18 and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,

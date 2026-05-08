@@ -132,6 +132,26 @@ public struct AmbitionTheme: Sendable {
         public let celebrationGradient: LinearGradient
     }
 
+    public struct CanonSurfaces: Sendable {
+        public let celestialField: Color
+        public let celestialFieldDeep: Color
+        public let graphiteRecess: Color
+        public let quietGlass: Color
+        public let hairline: Color
+        public let luminousTrace: Color
+        public let pressure: Color
+        public let protectedTime: Color
+        public let recovery: Color
+        public let trust: Color
+    }
+
+    public struct CanonMaterials: Sendable {
+        public let celestialField: LinearGradient
+        public let graphiteRecess: LinearGradient
+        public let luminousTrace: Color
+        public let quietGlass: LinearGradient
+    }
+
     public struct Surfaces: Sendable {
         public let canvasGradient: LinearGradient
         public let elevatedGradient: LinearGradient
@@ -332,6 +352,28 @@ public struct AmbitionTheme: Sendable {
     public let materials: Materials
     public let surfaces: Surfaces
     public let shell: ShellTokens
+    public var canonSurfaces: CanonSurfaces {
+        CanonSurfaces(
+            celestialField: colors.canvas,
+            celestialFieldDeep: colors.canvasElevated,
+            graphiteRecess: colors.surfacePrimary,
+            quietGlass: colors.surfaceOverlay,
+            hairline: colors.strokeSubtle,
+            luminousTrace: colors.accentSecondary,
+            pressure: colors.warning,
+            protectedTime: semanticColors.protected,
+            recovery: semanticColors.recovery,
+            trust: semanticColors.trust
+        )
+    }
+    public var canonMaterials: CanonMaterials {
+        CanonMaterials(
+            celestialField: materials.canvasGradient,
+            graphiteRecess: materials.elevatedGradient,
+            luminousTrace: colors.accentSecondary,
+            quietGlass: materials.overlayGradient
+        )
+    }
     public let typography: Typography
     public let spacing: Spacing
     public let radius: Radius

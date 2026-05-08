@@ -2,7 +2,9 @@
 
 This folder contains Ambitions canon, active rebuild docs, supporting older canon, and historical context.
 
-Ambitions 3.0 is the active rebuild source of truth.
+Ambitions 3.0 is the completed implementation baseline and remains important source truth where compatible.
+
+> Source-truth update: For future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work, start with [../AmbitionsCanon/README.md](../AmbitionsCanon/README.md). Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible, but they do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist.
 
 ---
 

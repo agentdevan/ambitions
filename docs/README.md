@@ -6,6 +6,8 @@ Ambitions 3.0 is the active rebuild documentation system.
 
 Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [canon/Ambitions_4_0_Execution_Program.md](canon/Ambitions_4_0_Execution_Program.md) for queued/blocked batch semantics and the 113-batch global execution order after SI insertion.
 
+> Source-truth update: For future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work, start with [AmbitionsCanon/README.md](AmbitionsCanon/README.md). Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible, but they do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist.
+
 ---
 
 ## Start here

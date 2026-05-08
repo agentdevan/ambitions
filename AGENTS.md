@@ -1,9 +1,10 @@
 # Ambitions Codex Guidance
 
-Ambitions 3.0 is the active source of truth. Ambitions 2.0, v2, Waves, Batch 61+, D/M/R, and earlier batch material are preserved as implementation history or supporting context only where Ambitions 3.0 explicitly keeps them binding.
+Ambitions 3.0 remains the completed implementation baseline, but the Ambitions Design System and AmbitionsCanon pack are now the highest source truth for future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work. Ambitions 2.0, v2, Waves, Batch 61+, D/M/R, Ambitions 3.0/4.0, PXOS, SI, handoff, audit, and Codex train material are preserved as implementation history, supporting context, or stricter proof gates where compatible.
 
 ## Required Read Order
 
+0. `docs/AmbitionsCanon/README.md` for future product/design/source-truth precedence, then the AmbitionsCanon docs it names when the task touches product, visual, shell, chrome, IA, Signature Objects, trust, accessibility, QA, tokens/materials, or implementation planning.
 1. `README.md`
 2. `docs/README.md`
 3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`

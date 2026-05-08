@@ -18,8 +18,9 @@ Green as local Eligibility And Deadline Runtime contract and focused-test
 evidence. LDI10 is Green as local Starting Position And Privacy Intake contract
 and focused-test evidence. LDI11 is Green as local Path Portfolio Runtime
 contract and focused-test evidence. LDI12 is Green as local Capacity And
-Commitment-Time Bridge contract and focused-test evidence. LDI13-LDI22 remain
-queued serial successors. This train does not claim runtime implementation. LDI remains
+Commitment-Time Bridge contract and focused-test evidence. LDI13 is Green as
+local Today Bridge And Action Closure contract and focused-test evidence.
+LDI14-LDI22 remain queued serial successors. This train does not claim runtime implementation. LDI remains
 blocked from runtime work until each successor batch proves its own HPS, Source
 Atlas, safety, privacy, professional-boundary, and release-claim gates.
 
@@ -98,7 +99,7 @@ LDI must route source-dependent behavior through:
 | LDI10 | Starting Position And Privacy Intake | Complete / Green after LDI09 | ask-only-needed intake, local storage boundary, sensitive controls, user source binder | Adds local intake contracts and focused tests for starting-position and eligibility prerequisites, sensitive-area privacy policy review, local-only sensitive retention, no external sensitive projection, no persistence write, no commitment mutation, and no user-data server. |
 | LDI11 | Path Portfolio Runtime | Complete / Green after LDI10 | primary/conservative/aggressive/exploration/fallback/North Star paths | Adds local path portfolio contracts and focused tests for intake prerequisites, source-claim graph readiness, required primary/conservative/fallback coverage, North Star linkage without guarantees, user review, unsafe-lane blocking, no activation, no hidden mutation, no user-data server, and value-model-only runtime boundaries. |
 | LDI12 | Capacity And Commitment-Time Bridge | Complete / Green after LDI11 | capacity fit, no fantasy schedules, no silent rescheduling | Adds local capacity bridge contracts and focused tests that compose Path Portfolio Runtime with Commitment Time projections, checking fit, source/stale/protected/private review, recovery buffer, no silent reschedule, no platform-calendar implementation, no activation, no hidden mutation, no user-data server, and value-model-only runtime boundaries. |
-| LDI13 | Today Bridge And Action Closure | Queued after AOS30 by default and HPS/SA closeout | 1-3 useful next steps, proof/source/review steps, closure states | Maps living plans into Today steps and closure states with source/freshness/source-needed lines where relevant. |
+| LDI13 | Today Bridge And Action Closure | Complete / Green after LDI12 | 1-3 useful next steps, proof/source/review steps, closure states | Adds local Today bridge contracts and focused tests that compose Capacity And Commitment-Time Bridge evidence with Today steps, Start Here recommendations, proof receipts, and closure prompts, checking one-to-three steps, source/freshness/proof review, user control, non-punitive closure, no confidence/guarantee language, no activation, no hidden mutation, no user-data server, and value-model-only runtime boundaries. |
 | LDI14 | Trust Review And Dream Handling Receipts | Queued after AOS30 by default and HPS/SA closeout | assumptions/source/user-confirmed/stale/unverified/change receipts | Creates receipt contracts for handling, source, mutation, refusal, safe translation, user-imported source, OCR, and pack update states. |
 | LDI15 | Living Plan Recompiler | Queued after AOS30 by default and HPS/SA closeout | source/user/jurisdiction/capacity/proof changes -> local recompile | Implements local recompile and blast-radius contracts with Source Atlas changed-claim IDs and approval gates. |
 | LDI16 | Mutation Permissions And Impact Levels | Queued after AOS30 by default and HPS/SA closeout | no silent commitment/source mutation, approval model, impact levels 0-5 | Implements mutation permission contracts and approval gates; high-impact/source-driven changes require explicit user review. |

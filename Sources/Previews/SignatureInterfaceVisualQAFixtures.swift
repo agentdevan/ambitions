@@ -212,4 +212,114 @@ public enum SI16PreviewFixtureCatalog {
         )
     }
 }
+
+public struct AmbitionsCanonPreviewFixtureRequirement: Identifiable, Hashable, Sendable {
+    public let id: String
+    public let ownerSurface: String
+    public let canonObject: String
+    public let currentlyCoveredBySI16FixtureID: String?
+
+    public var isCurrentlyCovered: Bool {
+        currentlyCoveredBySI16FixtureID != nil
+    }
+}
+
+public enum AmbitionsCanonPreviewFixtureCatalog {
+    public static let changesRuntimeBehavior = false
+    public static let claimsScreenshotProof = false
+    public static let claimsAccessibilityConformance = false
+    public static let claimsDeviceProof = false
+
+    public static let requiredFixtures: [AmbitionsCanonPreviewFixtureRequirement] = [
+        requirement("TodayEmptyManual", "Today", "Reality Meridian", coveredBy: "today.empty"),
+        requirement("TodayNowOpenCapacity", "Today", "Reality Meridian", coveredBy: "today.normal"),
+        requirement("TodayRecommendedStepReady", "Today", "Start Here Surface", coveredBy: "today.disabled"),
+        requirement("TodayActiveStepLive", "Today", "Reality Meridian", coveredBy: "today.selected"),
+        requirement("TodayNextSoon", "Today", "Reality Meridian", coveredBy: nil),
+        requirement("TodayProtectedBlockActive", "Today", "Reality Meridian", coveredBy: nil),
+        requirement("TodayPressureSoon", "Today", "Reality Meridian", coveredBy: nil),
+        requirement("TodayMissedStillCounts", "Today", "Reality Meridian", coveredBy: "today.recovery"),
+        requirement("TodayBlocked", "Today", "Reality Meridian", coveredBy: nil),
+        requirement("TodayWaiting", "Today", "Reality Meridian", coveredBy: "today.waiting"),
+        requirement("TodayNeedsRecovery", "Today", "Reality Meridian", coveredBy: "today.recovery"),
+        requirement("TodayReceiptPlanAdjusted", "Today", "Trust Seam / Receipt Surface", coveredBy: nil),
+        requirement("TodayTrustWhyThisOpen", "Today", "Trust Seam", coveredBy: nil),
+        requirement("TodayCalendarDeniedManualFallback", "Today", "Reality Meridian", coveredBy: nil),
+        requirement("TodayLargeText", "Today", "Reality Meridian", coveredBy: nil),
+        requirement("TodayReduceMotion", "Today", "Reality Meridian", coveredBy: nil),
+        requirement("CaptureEmptyQuietField", "Capture", "Atmosphere Composer", coveredBy: "capture.noDataYet"),
+        requirement("CaptureTypingKeyboardVisible", "Capture", "Atmosphere Composer", coveredBy: nil),
+        requirement("CaptureDictating", "Capture", "Atmosphere Composer", coveredBy: nil),
+        requirement("CaptureCapturedLocal", "Capture", "Atmosphere Composer", coveredBy: nil),
+        requirement("CaptureClassifying", "Capture", "Atmosphere Composer", coveredBy: nil),
+        requirement("CaptureHighConfidenceRoutes", "Capture", "Atmosphere Composer", coveredBy: nil),
+        requirement("CaptureNeedsAPlace", "Capture", "Atmosphere Composer", coveredBy: "capture.focused"),
+        requirement("CaptureReadyToPlace", "Capture", "Atmosphere Composer", coveredBy: nil),
+        requirement("CaptureGrowIntoGoal", "Capture", "Atmosphere Composer", coveredBy: nil),
+        requirement("CaptureSaveError", "Capture", "Atmosphere Composer", coveredBy: "capture.blocked"),
+        requirement("CaptureTrustClassificationOpen", "Capture", "Trust Seam", coveredBy: nil),
+        requirement("CaptureLargeTextKeyboard", "Capture", "Atmosphere Composer", coveredBy: "capture.dynamicType"),
+        requirement("CaptureReduceMotion", "Capture", "Atmosphere Composer", coveredBy: nil),
+        requirement("PlanWeekDefault", "Plan", "LifeShape Field", coveredBy: "plan.normal"),
+        requirement("PlanDayPressure", "Plan", "LifeShape Field", coveredBy: "plan.partialSource"),
+        requirement("PlanMonthShaping", "Plan", "LifeShape Field", coveredBy: nil),
+        requirement("PlanOpenCapacity", "Plan", "LifeShape Field", coveredBy: nil),
+        requirement("PlanLowCapacity", "Plan", "LifeShape Field", coveredBy: nil),
+        requirement("PlanProtectedBlocks", "Plan", "LifeShape Field", coveredBy: nil),
+        requirement("PlanPressureFriday", "Plan", "LifeShape Field", coveredBy: nil),
+        requirement("PlanCalendarDeniedManual", "Plan", "LifeShape Field", coveredBy: "plan.deniedSource"),
+        requirement("PlanSourceConflict", "Plan", "Trust Seam", coveredBy: nil),
+        requirement("PlanReflowPreview", "Plan", "Quiet Reflow", coveredBy: nil),
+        requirement("PlanReceiptAdjusted", "Plan", "Receipt Surface", coveredBy: nil),
+        requirement("PlanLargeText", "Plan", "LifeShape Field", coveredBy: nil),
+        requirement("PlanReduceMotion", "Plan", "LifeShape Field", coveredBy: "plan.reducedMotion"),
+        requirement("GoalsDefaultLifeAreas", "Goals", "Constellation Atlas", coveredBy: "goals.selected"),
+        requirement("GoalsNoGoalsYet", "Goals", "Constellation Atlas", coveredBy: nil),
+        requirement("GoalsPinnedArea", "Goals", "Constellation Atlas", coveredBy: nil),
+        requirement("GoalsReorderedAreas", "Goals", "Constellation Atlas", coveredBy: nil),
+        requirement("GoalsHiddenArea", "Goals", "Constellation Atlas", coveredBy: nil),
+        requirement("GoalsSelectedArea", "Goals", "Orbital Lens", coveredBy: "goals.selected"),
+        requirement("GoalsOrbitalLensOpen", "Goals", "Orbital Lens", coveredBy: nil),
+        requirement("GoalsThreadFeedingToday", "Goals", "Cross-Object Threads", coveredBy: nil),
+        requirement("GoalsSourceUnavailable", "Goals", "Trust Seam", coveredBy: "goals.degraded"),
+        requirement("GoalsLargeText", "Goals", "Constellation Atlas", coveredBy: nil),
+        requirement("GoalsReduceMotion", "Goals", "Constellation Atlas", coveredBy: nil),
+        requirement("YouDefault", "You", "User System Profile", coveredBy: "you.empty"),
+        requirement("YouManualAutomation", "You", "Automation & Trust", coveredBy: nil),
+        requirement("YouSuggestAutomation", "You", "Automation & Trust", coveredBy: nil),
+        requirement("YouPreviewReflowAutomation", "You", "Automation & Trust", coveredBy: nil),
+        requirement("YouCalendarDenied", "You", "User System Profile", coveredBy: nil),
+        requirement("YouCalendarGranted", "You", "User System Profile", coveredBy: nil),
+        requirement("YouReceiptArchive", "You", "Receipt Surface", coveredBy: nil),
+        requirement("YouPrivacyControls", "You", "User System Profile", coveredBy: "you.privacySensitive"),
+        requirement("YouLargeText", "You", "User System Profile", coveredBy: nil),
+        requirement("YouIncreaseContrast", "You", "User System Profile", coveredBy: nil)
+    ]
+
+    public static var coveredRequirements: [AmbitionsCanonPreviewFixtureRequirement] {
+        requiredFixtures.filter(\.isCurrentlyCovered)
+    }
+
+    public static var missingRequirements: [AmbitionsCanonPreviewFixtureRequirement] {
+        requiredFixtures.filter { $0.isCurrentlyCovered == false }
+    }
+
+    public static var coverageSummary: String {
+        "\(coveredRequirements.count) of \(requiredFixtures.count) AmbitionsCanon fixture requirements have a current SI16 inventory mapping."
+    }
+
+    private static func requirement(
+        _ id: String,
+        _ ownerSurface: String,
+        _ canonObject: String,
+        coveredBy: String?
+    ) -> AmbitionsCanonPreviewFixtureRequirement {
+        AmbitionsCanonPreviewFixtureRequirement(
+            id: id,
+            ownerSurface: ownerSurface,
+            canonObject: canonObject,
+            currentlyCoveredBySI16FixtureID: coveredBy
+        )
+    }
+}
 #endif

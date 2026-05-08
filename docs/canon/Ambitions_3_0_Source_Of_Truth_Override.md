@@ -7,6 +7,8 @@ Last updated: 2026-04-30
 
 ---
 
+> Source-truth update: For future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work, start with `docs/AmbitionsCanon/README.md`. Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible, but they do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist. This 3.0 override remains preserved baseline and evidence-gate context.
+
 ## Purpose
 
 This document makes the Ambitions 3.0 supersession rule explicit.

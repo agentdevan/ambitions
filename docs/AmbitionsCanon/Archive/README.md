@@ -4,6 +4,8 @@ Status: docs-only conflict and supersession index.
 
 This archive index preserves older Ambitions design/product/canon sources as historical or supporting context when they conflict with the Ambitions Design System and the split Ambitions Canon Pack.
 
+> Source-truth update: For future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work, start with `docs/AmbitionsCanon/README.md`. Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible, but they do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist.
+
 No existing docs were deleted during canon installation.
 
 No app code, assets, Xcode settings, tests, CI, generated screenshots, or implementation files were modified.
