@@ -54,6 +54,10 @@ SCAN_TERMS = {
     ],
     "product_drift": [
         "top-level Tasks",
+        "Plan tab",
+        "Plan screen",
+        "top-level Plan",
+        "ACUI",
         "Habits tab",
         "AI confidence",
         "AI explanation",

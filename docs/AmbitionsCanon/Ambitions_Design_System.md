@@ -206,9 +206,9 @@ Allowed route labels:
 
 The Capture tab icon is not a plus. The plus belongs to the composer action.
 
-### Plan — LifeShape Field
+### Time — LifeShape Field
 
-Plan is the capacity-shaping surface. It reveals open time, goal time, protected time, pressure, and horizon structure without becoming a calendar clone.
+Time is the capacity-shaping surface. It reveals open time, goal time, protected time, pressure, and horizon structure without becoming a calendar clone.
 
 Use Day / Week / Month, Open time, Goal time, Protected, Pressure, Shape week, and Review pressure.
 

@@ -242,7 +242,7 @@ PK batch as a minimum prerequisite.
     CoreSpotlight indexing by default.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.
     Completed Green on 2026-05-05 as docs/product/platform integration
-    strategy. It locks sparse opt-in notifications, Plan-owned Calendar read
+    strategy. It locks sparse opt-in notifications, Time-owned Calendar read
     and write permission copy, explicit Reminders posture, deferred Focus
     Filter integration, and no hidden mutation before PFC20 proof.
 37. PFC21 StoreKit / Monetization Strategy. Completed Accepted Yellow on
@@ -501,7 +501,7 @@ PK batch as a minimum prerequisite.
     hardening and focused-test evidence: notification copy hides ambient
     private detail by default, notification mutation actions route into
     Ambitions instead of mutating in the background, EventKit notes stay minimal
-    and explicit-request grounded, Plan-owned Calendar read/write boundaries
+    and explicit-request grounded, Time-owned Calendar read/write boundaries
     remain intact, and Today does not request Calendar access. It adds no Focus
     Filter implementation, onboarding permission prompt, silent
     calendar/reminder write, entitlement, signing, project/workflow/dependency
@@ -545,8 +545,8 @@ remaining sensitive intelligence work.
 68H. HPS01 Verified Human Progress OS Category Lock. Completed Accepted Yellow
      on 2026-05-06 as local category-lock reconciliation: Ambitions is locked
      as the private operating system for verified human progress, HPS remains
-     internal/no-sprawl, the five-tab app remains Today / Goals / Capture /
-     Plan / You, and no vertical product, hosted AI, user-data server, API
+     internal/no-sprawl, the active AFI five-tab app is Today / Goals /
+     Capture / Time / You, and no vertical product, hosted AI, user-data server, API
      platform, release claim, or acquisition-outcome claim is introduced.
      Yellow owner: later HPS Codex OS work must create or map physical HPS
      advisory scripts/skills.

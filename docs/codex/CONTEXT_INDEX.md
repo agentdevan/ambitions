@@ -15,8 +15,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - AFI is active for product/IA/UI/visual/copy decisions. Active flagship IA is
   Today / Goals / Capture / Time / You. Plan is superseded as a top-level
   destination and remains valid only as an action/contextual noun. ACUI is a
-  compatibility alias only. AFI01 Canon Language Purge is the next eligible
-  global batch unless a specific minimum prerequisite is proven.
+  compatibility alias only. AFI01 Canon Language Purge is complete / Accepted
+  Yellow. AFI02 IA Hierarchy Lock is the next eligible global batch unless a
+  specific minimum prerequisite is proven.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific
   gates before any production app, platform, persistence, sync, legal/privacy,
@@ -253,7 +254,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   source hardening and focused-test evidence. Notification copy hides ambient
   private detail by default, notification mutation actions route into Ambitions
   instead of mutating in the background, EventKit notes stay minimal and
-  explicit-request grounded, Plan-owned Calendar read/write boundaries remain
+  explicit-request grounded, Time-owned Calendar read/write boundaries remain
   intact, and Today does not request Calendar access.
 - PFC22 is complete Green as explicit StoreKit implementation deferral proof.
   PFC21 accepted-Yellow prerequisites remain unresolved, the source scan found
@@ -634,10 +635,11 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   It adds no app behavior, production Swift, runtime, model runtime, LDI
   runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud,
   platform integration, legal/privacy compliance, physical-device proof,
-  release, or public accessibility claim. LDI01-LDI14 and PK00 have since
-  closed Green; AFI01 Canon Language Purge is now the next eligible batch
-  unless repo evidence shows a dirty or half-complete active batch must close
-  first or a specific PK batch is registry-proven as a minimum prerequisite.
+  release, or public accessibility claim. LDI01-LDI14, PK00, and AFI01 have
+  since closed Green or accepted Yellow; AFI02 IA Hierarchy Lock is now the
+  next eligible batch unless repo evidence shows a dirty or half-complete active
+  batch must close first or a specific PK batch is registry-proven as a minimum
+  prerequisite.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone

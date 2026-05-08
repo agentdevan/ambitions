@@ -5,7 +5,7 @@ cd "$ROOT"
 
 echo "canon-language-drift-scan"
 
-pattern='next best move|your best next move|generic AI dashboard|generic habit tracker|profile tab|Insights tab|Habits tab|Ambitions 5\.0|AI confidence|AI explanation|productivity score'
+pattern='next best move|your best next move|generic AI dashboard|generic habit tracker|Plan tab|Plan screen|top-level Plan|Profile tab|Insights tab|Habits tab|ACUI|Ambitions 5\.0|AI confidence|AI explanation|productivity score'
 changed="$(git diff --name-only HEAD -- Native Sources AppUI docs .codex 2>/dev/null | tr '\n' ' ')"
 
 if [ -n "$changed" ]; then

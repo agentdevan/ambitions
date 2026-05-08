@@ -163,7 +163,7 @@ Happy-path-only previews are a maturity failure.
 - CaptureLargeTextKeyboard
 - CaptureReduceMotion
 
-### Plan / LifeShape Field
+### Time / LifeShape Field
 
 - PlanWeekDefault
 - PlanDayPressure
@@ -362,11 +362,11 @@ Capture passes only if Atmosphere Composer is primary, composer is bottom-orient
 
 Hard Red: Capture tab icon is plus, empty Capture shows feed/list, AI chat leads, or keyboard covers composer.
 
-### Plan
+### Time
 
-Plan passes only if LifeShape Field is primary, Week is default planning home, Day/Month appear adaptively, open time/goal time/protected time/pressure are legible, pressure opens from field, protected time is respected, reflow previews changes, and VoiceOver summarizes capacity/pressure.
+Time passes only if LifeShape Field is primary, Week is default shaping home, Day/Month appear adaptively, open time/goal time/protected time/pressure are legible, pressure opens from field, protected time is respected, reflow previews changes, and VoiceOver summarizes capacity/pressure.
 
-Hard Red: top-level Plan is calendar clone, pressure is red alert system, protected time reads as blockage/failure, or silent reflow occurs.
+Hard Red: top-level Time is a calendar clone, pressure is red alert system, protected time reads as blockage/failure, or silent reflow occurs.
 
 ### You
 

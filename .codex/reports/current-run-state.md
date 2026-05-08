@@ -2,16 +2,17 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI source-truth correction and stash reconciliation / Yellow.
-Next eligible batch: AFI01 Canon Language Purge.
-Scope: AFI source truth is active for product/IA/UI/visual/copy decisions.
+Current batch: AFI01 Canon Language Purge / Accepted Yellow.
+Next eligible batch: AFI02 IA Hierarchy Lock.
+Scope: AFI01 completed as docs/canon/governance language purge evidence.
+AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
 action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This correction made no app code, runtime, route, persistence/schema, package
+This AFI01 pass made no app code, runtime, route, persistence/schema, package
 manifest, project, dependency, signing, entitlement, generated-project, hosted
 workflow, release/platform, legal/privacy, physical-device proof, public
 accessibility proof, sync/cloud, hosted AI, or user-data server claim.
@@ -29,10 +30,11 @@ before device proof begins. AOS23 and LDI01-LDI14 have since closed Green.
 PK00 is complete / Green with accepted Yellow follow-ups as a report-only
 backend/platform proof baseline. AFI source truth now controls active
 flagship IA: Today / Goals / Capture / Time / You. AFI01 Canon Language Purge
-is now the next eligible global batch unless repo evidence shows a dirty or
-half-complete active batch must close first. PK01-PK41 remain queued active
-planned Platform Kernel scope, but are not minimum prerequisites for AFI01
-unless later evidence proves that dependency.
+is complete / Accepted Yellow. AFI02 IA Hierarchy Lock is now the next eligible
+global batch unless repo evidence shows a dirty or half-complete active batch
+must close first. PK01-PK41 remain queued active planned Platform Kernel scope,
+but are not minimum prerequisites for AFI01 unless later evidence proves that
+dependency.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -172,7 +174,7 @@ surfaces.
 PD16 is complete / Green as bounded You/Profile implementation evidence. It
 adds typed planning setup depth for Schedule & Availability, Planning Defaults,
 Vacation / Away Time, and Automation & Trust, preserves Guided automation as
-the default, keeps calendar awareness Plan-owned, and claims no calendar write,
+the default, keeps calendar awareness Time-owned, and claims no calendar write,
 permission prompt, sync/account, AOS runtime, LDI runtime, release, legal, or
 public accessibility proof.
 

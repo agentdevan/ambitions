@@ -13,8 +13,9 @@ Date: 2026-05-08
   follow-ups as a report-only backend/platform proof baseline.
 - PK01 Package/Module Boundary Scaffold remains queued. It is not a proven
   minimum prerequisite for AFI01-AFI16.
-- AFI01 Canon Language Purge is the next eligible global batch under the active
-  AFI insertion overlay. PK01-PK41 remain active planned Platform Kernel scope
+- AFI01 Canon Language Purge is complete / Accepted Yellow under the active AFI
+  insertion overlay. AFI02 IA Hierarchy Lock is the next eligible global batch.
+  PK01-PK41 remain active planned Platform Kernel scope
   but must not outrun AFI unless registry evidence proves a minimum safety
   prerequisite.
 - Current repo evidence shows local SwiftData-backed persistence, portable
@@ -47,4 +48,4 @@ proof.
 
 ## Next Eligible
 
-AFI01 Canon Language Purge.
+AFI02 IA Hierarchy Lock.

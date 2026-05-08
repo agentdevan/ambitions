@@ -617,11 +617,11 @@ Context Crown remains minimal. Meridian Edge is nearly invisible. Composer is pr
 
 Hard Red: Capture becomes feed/inbox/chat/category board or continuity noise interrupts thought.
 
-### Plan
+### Time
 
 Context Crown shows horizon and key state. Meridian Edge becomes capacity trace. LifeShape Field drives behavior. Pressure opens from field. Protected time is respected structure. Trust Seam explains pressure/protection/source.
 
-Hard Red: Plan becomes calendar grid or analytics dashboard.
+Hard Red: Time becomes calendar grid, agenda, or analytics dashboard.
 
 ### You
 
@@ -638,7 +638,7 @@ Stop and repair if any are true:
 1. Continuity signal appears outside Crown, Edge, Dock, Seam.
 2. Dock uses red badge/counts.
 3. Capture tab icon is plus.
-4. Plan tab icon is menu.
+4. Time tab icon is menu.
 5. Context Crown becomes dashboard header.
 6. Trust Seam becomes chatbot/AI coach.
 7. Quiet Reflow silently changes plan at launch.
