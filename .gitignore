@@ -59,8 +59,8 @@ tmp/
 # local validation artifacts
 .codex/logs/
 .codex/local/
+.codex/state/proof-cache.json
 output/logs/
 output/manual-audit/
 docs/audits/doc-qa/*.log
 docs/audits/build-logs/*.log
-.codex/logs/
