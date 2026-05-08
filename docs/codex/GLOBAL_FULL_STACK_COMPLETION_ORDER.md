@@ -31,9 +31,14 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - PFC source truth exists and is queued.
 - FL source truth exists and is queued after completed FCP17 and before remaining FCP core product-object implementation.
 - FVQ source truth exists and is inserted after completed FCP09 before broad external-surface strategy unless the active local run has already started PFC13, in which case Codex must finish the active batch safely and run FVQ01 immediately afterward.
+- AFI01-AFI16 Ambitions Flagship Interface is active current source truth. The
+  top-level surfaces are `Today / Goals / Capture / Time / You`; Plan is
+  superseded as a top-level destination and remains contextual/action language
+  only.
 - PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
-  Baseline is the next eligible backend/platform batch after this integration
-  unless a dirty or half-complete active batch must close first.
+  Baseline is complete. PK01-PK41 remain queued and may precede later AFI, PLR,
+  AOS, or LDI work only when registry evidence proves the specific PK batch is
+  a minimum safety prerequisite.
 - AOS and LDI remaining successors are queued behind the new PK insertion where
   they depend on backend/platform safety, storage, sync, side effects,
   intelligence quarantine, performance, or modularization.
@@ -59,18 +64,25 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   followed and is now complete Green as a local Capacity And Commitment-Time
   Bridge contract. LDI13 followed and is now complete Green as a local Today
   Bridge And Action Closure contract. LDI14 followed and is now complete Green
-  as a local Trust Review And Dream Handling Receipts contract. PK00 now
-  follows as the dependency-first backend/platform baseline before LDI15 unless
-  repo evidence proves a half-complete active batch must close first.
+  as a local Trust Review And Dream Handling Receipts contract. AFI01 now
+  follows as the active flagship interface source-truth lane before LDI15 unless
+  repo evidence proves a half-complete active batch must close first or a
+  specific PK batch is a registry-proven minimum safety prerequisite.
 
-### Phase 0.5 — Platform Kernel Insertion
+### Phase 0.5 — AFI Correction And Platform Kernel Insertion
 
-PK00. Current Backend Proof Baseline. Active next eligible backend/platform
-batch after PK train integration. Report-only; no production code changes.
+AFI01. Canon Language Purge. Active next eligible flagship interface batch
+after AFI correction and PK00 baseline. No app-code change is implied by this
+sequencing document.
+
+PK00. Current Backend Proof Baseline. Complete report-only baseline; no
+production code changes.
 PK01-PK41 remain queued in `docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md`
 and may supersede older backend/platform sequencing where dependency order
 conflicts. Remote sync, remote intelligence, migration, package-split, and
-major platform feature work must wait for the relevant PK prerequisites.
+major platform feature work must wait for the relevant PK prerequisites, but
+optional PK expansion may not outrun AFI unless the registry names the specific
+PK batch as a minimum prerequisite.
 
 ## Full-Stack Optimized Order
 

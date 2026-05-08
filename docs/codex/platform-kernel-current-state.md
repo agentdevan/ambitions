@@ -11,8 +11,12 @@ Date: 2026-05-08
 - PK00-PK41 is active planned scope for local backend/platform hardening.
 - PK00 Current Backend Proof Baseline is complete / Green with accepted Yellow
   follow-ups as a report-only backend/platform proof baseline.
-- PK01 Package/Module Boundary Scaffold is the next eligible Platform Kernel
-  batch.
+- PK01 Package/Module Boundary Scaffold remains queued. It is not a proven
+  minimum prerequisite for AFI01-AFI16.
+- AFI01 Canon Language Purge is the next eligible global batch under the active
+  AFI insertion overlay. PK01-PK41 remain active planned Platform Kernel scope
+  but must not outrun AFI unless registry evidence proves a minimum safety
+  prerequisite.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
   notification foundations, EventKit integration services, external snapshot
@@ -43,4 +47,4 @@ proof.
 
 ## Next Eligible
 
-PK01 Package/Module Boundary Scaffold.
+AFI01 Canon Language Purge.

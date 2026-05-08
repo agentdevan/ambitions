@@ -3,9 +3,10 @@
 <!-- markdownlint-disable MD013 -->
 
 Date: 2026-05-08
-Result: Yellow / accepted for integration commit. PK is integrated and helper
-scripts route to PK00. The historical stash is preserved and not applied
-because it conflicts with current PK priority and current IA truth.
+Result: Yellow / accepted for integration commit and later AFI correction. PK00
+is integrated and complete; helper scripts must now route to AFI01, not LDI15 or
+unproven PK expansion. The historical stash is preserved and not blindly
+applied.
 
 ## Initial State
 
@@ -39,7 +40,11 @@ because it conflicts with current PK priority and current IA truth.
 ## Sequencing Reconciliation
 
 - Before: LDI15 Living Plan Recompiler was next eligible.
-- After: PK00 Current Backend Proof Baseline is next eligible backend/platform batch and should run before LDI15 or other feature/intelligence expansion unless a dirty or half-complete active batch must close first.
+- After initial PK integration: PK00 Current Backend Proof Baseline was next
+  eligible and has since completed Green with accepted Yellow follow-ups.
+- After AFI correction: AFI01 Canon Language Purge is next eligible. PK01-PK41
+  remain active planned scope, but must not outrun AFI unless registry/report
+  evidence proves a specific PK batch is a minimum safety prerequisite.
 - Existing PFC/AOS/LDI evidence is retained, not deleted. Future backend/platform work must be reconciled into PK batches where dependency order overlaps.
 
 ## Dirty / Stashed Worktree
@@ -53,12 +58,14 @@ because it conflicts with current PK priority and current IA truth.
   `scripts/global-train-status-summary.sh`.
 - Stash classification: docs/source truth, batch registry/state, and helper
   scripts. No generated artifacts were identified from the name/stat view.
-- Stash disposition: defer with explicit Yellow. The stashed docs insert PLR/AFI
-  and include `Today / Goals / Capture / Time / You`, which conflicts with the
-  current supplied source truth of `Today / Goals / Capture / Plan / You` and
-  with the new PK-first priority. The useful helper-script idea was reconciled
-  narrowly by teaching the live helper scripts to recognize PK IDs and route
-  `PK00` from run state.
+- Stash disposition: preserve with explicit Yellow. The stashed docs include
+  PLR/AFI sequencing and `Today / Goals / Capture / Time / You`, which is
+  compatible with active AFI source truth. They also include PLR sequencing
+  that is not fully registry-proven in current HEAD because the corresponding
+  PLR owner docs are not present in the active worktree. No stash hunk was
+  applied blindly. Helper scripts should recognize the current reconciled next
+  batch from run state and must not fall back to LDI15 while AFI/PK/PLR
+  sequencing says otherwise.
 
 ## Validation Log
 
@@ -87,15 +94,21 @@ because it conflicts with current PK priority and current IA truth.
 - `python3 scripts/ai/acx_sanitized_evidence.py`: produced sanitized evidence
   packet; raw logs remain local.
 - `bash -n scripts/global-train-next-batch.sh scripts/global-train-status-summary.sh`: exit 0.
-- `scripts/global-train-next-batch.sh`: returned `PK00 Current Backend Proof
-  Baseline after integration` from `.codex/reports/current-run-state.md`.
-- `scripts/global-train-status-summary.sh`: returned PK insertion summary and
-  `PK00` as next eligible.
+- `bash -n scripts/global-train-next-batch.sh scripts/global-train-status-summary.sh`: rerun exit 0 after AFI correction.
+- `scripts/global-train-next-batch.sh`: now returns `AFI01 Canon Language Purge.` from `.codex/reports/current-run-state.md`.
+- `scripts/global-train-status-summary.sh`: now returns AFI/PK insertion summary and `AFI01 Canon Language Purge.` as next eligible.
+- `python3 scripts/ai/acx_local.py bundle quick`: rerun exit 0; raw logs under `.codex/logs/2026-05-08T10-22-46/`.
+- `python3 scripts/ai/acx_impact.py <changed files>`: rerun exit 0; route `Canon Drift`, suggested bundles `docs` and `batch-closeout`.
+- `python3 scripts/ai/acx_local.py bundle docs`: rerun exit 0; `acx-gate-all` Green with advisory scan findings; raw logs under `.codex/logs/2026-05-08T10-23-29/`, `.codex/logs/2026-05-08T10-23-30/`, and `.codex/logs/2026-05-08T10-23-31/`.
+- `python3 scripts/ai/acx_local.py bundle batch-closeout`: rerun exit 0; advisory CQS scan findings only.
+- `python3 scripts/ai/acx_repair.py diagnose`: rerun exit 0; Yellow `NoActiveRepairEvidence`; no state written.
 
 ## Known Yellows
 
-- Historical stash is preserved and deferred because it contains PLR/AFI order
-  changes that conflict with current PK-first sequencing and current IA truth.
+- Historical stash is preserved and deferred because it contains mixed PLR/AFI
+  order changes, including valid AFI source-truth material, stale or unproven
+  sequencing relative to current HEAD, and no separately present PLR owner docs
+  in the active worktree.
 - Docs QA has broad pre-existing markdown/deprecated-language advisory backlog.
 - No app build/test was run because this pass changed docs/state/scripts only.
 

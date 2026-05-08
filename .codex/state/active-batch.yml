@@ -6,12 +6,12 @@ source_of_truth:
   - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK00 Current Backend Proof Baseline"
-  previous_batch: "PK Platform Kernel integration"
-  previous_result: "Green"
-  next_eligible_batch: "PK01 Package/Module Boundary Scaffold"
+  batch: "AFI source-truth correction and stash reconciliation"
+  previous_batch: "PK00 Current Backend Proof Baseline"
+  previous_result: "Green with accepted Yellow follow-ups"
+  next_eligible_batch: "AFI01 Canon Language Purge"
 codex_os_override:
-  active_pass: "Platform Kernel train"
+  active_pass: "AFI source-truth reconciliation"
   app_feature_implementation_allowed: false
   production_swift_allowed: false
   branch_creation_allowed: false

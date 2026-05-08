@@ -12,15 +12,21 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   completion, PFC platform/framework/compliance completion, and the active
   PK00-PK41 Platform Kernel train while preserving completed batch history and
   no-claim boundaries.
+- AFI is active for product/IA/UI/visual/copy decisions. Active flagship IA is
+  Today / Goals / Capture / Time / You. Plan is superseded as a top-level
+  destination and remains valid only as an action/contextual noun. ACUI is a
+  compatibility alias only. AFI01 Canon Language Purge is the next eligible
+  global batch unless a specific minimum prerequisite is proven.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific
   gates before any production app, platform, persistence, sync, legal/privacy,
   or release claim work.
 - PK00-PK41 Platform Kernel is active planned scope for local backend/platform
   hardening. PK00 Current Backend Proof Baseline is complete / Green with
-  accepted Yellow follow-ups as a report-only backend/platform baseline. PK01
-  Package/Module Boundary Scaffold is the next eligible Platform Kernel batch.
-  PK supersedes older backend/platform sequencing where dependency order
+  accepted Yellow follow-ups as a report-only backend/platform baseline. PK01-
+  PK41 remain queued active planned scope, but must not outrun AFI unless a
+  specific PK batch is registry-proven as a minimum safety prerequisite. PK
+  supersedes older backend/platform sequencing where dependency order
   conflicts, but it does not claim backend completion, migration safety, sync
   readiness, privacy compliance, CI green, performance proof, or release
   readiness.
@@ -264,8 +270,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - HPS01 is complete Accepted Yellow as local category-lock reconciliation after
   AOS01 was found blocked by stricter HPS prerequisites. Ambitions is locked as
   the private operating system for verified human progress, HPS remains internal
-  and no-sprawl, the five-tab app remains Today / Goals / Capture / Plan / You,
-  and no vertical product, hosted AI, user-data server, API platform, release,
+  and no-sprawl. The current active AFI top-level app is Today / Goals /
+  Capture / Time / You; HPS history must not restore Plan as a top-level
+  destination. No vertical product, hosted AI, user-data server, API platform, release,
   platform, accessibility, or acquisition-outcome claim is introduced. Yellow
   owner: later HPS Codex OS work must create or map physical HPS advisory
   scripts/skills.
@@ -627,10 +634,10 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   It adds no app behavior, production Swift, runtime, model runtime, LDI
   runtime, UI integration, Life Graph mutation, persistence/schema, sync/cloud,
   platform integration, legal/privacy compliance, physical-device proof,
-  release, or public accessibility claim. LDI01-LDI14 have since closed
-  Green; PK00 Current Backend Proof Baseline is now the next eligible
-  backend/platform batch unless repo evidence shows a dirty or half-complete
-  active batch must close first.
+  release, or public accessibility claim. LDI01-LDI14 and PK00 have since
+  closed Green; AFI01 Canon Language Purge is now the next eligible batch
+  unless repo evidence shows a dirty or half-complete active batch must close
+  first or a specific PK batch is registry-proven as a minimum prerequisite.
 - SA01 is complete Green as Source Atlas Canon Lock reconciliation. It records
   `docs/canon/Ambitions_Source_Atlas.md` as the live source-truth lock for a
   signed, offline-first, claim-level world-source system and forbids standalone
@@ -761,7 +768,9 @@ For non-trivial work, read in this order:
 
 ## Execution Guardrails
 
-- Preserve `Today / Goals / Capture / Plan / You` as the canonical destination set.
+- Preserve `Today / Goals / Capture / Time / You` as the current AFI
+  canonical destination set. Do not restore Plan as a top-level destination;
+  Plan remains contextual/action language only.
 - Preserve XcodeGen as the project generation system.
 - Do not add runtime dependencies without dependency-policy approval.
 - Do not claim implementation or readiness without evidence.

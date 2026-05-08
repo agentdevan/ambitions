@@ -15,7 +15,9 @@ The legacy `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md` preserves historical global 
 As of this order update:
 
 - Ambitions 4.0 remains an active post-3.0 execution program, not a shipped product version.
-- Top-level surfaces remain `Today / Goals / Capture / Plan / You`.
+- Active AFI top-level surfaces are `Today / Goals / Capture / Time / You`.
+  `Plan` is superseded as a top-level destination and remains valid only as an
+  action/contextual noun such as Adjust plan, Shape week, or Review pressure.
 - Product Depth is complete through PD18 Green.
 - CQS is inserted after PD17 and before PD18 so remaining batches use the
   upgraded repair/reviewer/script gates.
@@ -105,9 +107,13 @@ As of this order update:
   validation governs current proof.
 - DPTG00 is locked as a future terminal physical-device release-candidate proof
   gate, not an implementation batch. All pre-device gates must close before it.
+- AFI01-AFI16 Ambitions Flagship Interface is active current source truth and
+  the next eligible global lane unless a dirty or half-complete active batch
+  must close first. AFI supersedes older ACUI/Plan-era interface sequencing.
 - PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
-  Baseline is the next eligible backend/platform batch after this integration
-  unless a dirty or half-complete active batch must close first.
+  Baseline is complete. PK01-PK41 remain queued and may precede a later AFI,
+  PLR, AOS, or LDI batch only when registry evidence proves that specific PK
+  batch is a minimum safety prerequisite for the later work.
 - AOS24-AOS30 remain queued behind PK where they depend on platform/backend
   safety, side effects, diagnostics, sync readiness, intelligence quarantine,
   performance, or module extraction.
@@ -115,17 +121,19 @@ As of this order update:
   safety, storage/migration, sync readiness, intelligence quarantine, or
   mutation/receipt backend proof.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
-- No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay or
-  PK insertion package. PK00 is next unless repo evidence shows a dirty or
-  half-complete active batch must close first.
+- No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay, AFI
+  correction, or PK insertion package. AFI01 is next unless repo evidence shows
+  a dirty or half-complete active batch must close first.
 
 ## Platform Kernel Insertion
 
-PK00-PK41 is now an active planned train, not optional brainstorming. PK00
-precedes further backend/platform, storage, sync, intelligence, performance,
-module-split, or major feature expansion work. Existing PFC/AOS/LDI evidence is
-preserved and may be reconciled into PK batches, but no older backend/platform
-batch may bypass a stricter PK dependency.
+PK00-PK41 is now an active planned train, not optional brainstorming. PK00 is
+complete as a report-only baseline. PK01-PK41 precede further backend/platform,
+storage, sync, intelligence, performance, module-split, or major feature
+expansion work when that work depends on the corresponding PK proof. Existing
+PFC/AOS/LDI evidence is preserved and may be reconciled into PK batches, but no
+optional PK expansion may outrun AFI01-AFI16 unless the registry names it as a
+minimum prerequisite.
 
 ## Selection Rule
 

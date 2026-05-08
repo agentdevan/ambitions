@@ -15,11 +15,27 @@ STATUS_SOURCES=(
 
 completed() {
   local id="$1"
-  rg -q "Complete: ${id}\b|${id} is complete|${id} .*complete / (Green|Accepted Yellow)|${id} .*complete Green|${id} .*closed Green|${id} .*closed Accepted Yellow|\| [0-9A-Z]+ \| ${id} \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| No; complete" "${STATUS_SOURCES[@]}" 2>/dev/null
+  rg -q "Complete: ${id}\b|${id} is complete|${id} .*complete Green|${id} .*closed Green|${id} .*closed Accepted Yellow|\| [0-9A-Z]+ \| ${id} \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| No; complete" "${STATUS_SOURCES[@]}" 2>/dev/null
 }
 
 batch_name() {
   case "$1" in
+    AFI01) echo "Canon Language Purge" ;;
+    AFI02) echo "IA Hierarchy Lock" ;;
+    AFI03) echo "Flagship Object Silhouettes" ;;
+    AFI04) echo "Material System Proof" ;;
+    AFI05) echo "Shell And Continuity Chrome" ;;
+    AFI06) echo "Today Reality Meridian" ;;
+    AFI07) echo "Goals Constellation Atlas" ;;
+    AFI08) echo "Capture Atmosphere Composer" ;;
+    AFI09) echo "Time LifeShape Field" ;;
+    AFI10) echo "You User System Profile" ;;
+    AFI11) echo "Trust Seam And Receipts" ;;
+    AFI12) echo "Accessibility And State Proof" ;;
+    AFI13) echo "Visual QA And Drift Gallery" ;;
+    AFI14) echo "Cross-Surface Coherence Review" ;;
+    AFI15) echo "Founder Acceptance Review" ;;
+    AFI16) echo "Release-Claim Safety Review" ;;
     PK00) echo "Current Backend Proof Baseline" ;;
     PK01) echo "Package/Module Boundary Scaffold" ;;
     PK02) echo "Architecture Boundary Scanner" ;;
@@ -117,7 +133,7 @@ batch_name() {
 live_next="$(sed -n 's/^Next eligible batch: //p' .codex/reports/current-run-state.md 2>/dev/null | head -n 1 || true)"
 if [[ -n "$live_next" ]]; then
   live_id="${live_next%% *}"
-  if [[ "$live_id" =~ ^(PK|LDI|AOS|FCP|PFC|RHC)[0-9A-Z]+$ ]] && ! completed "$live_id"; then
+  if [[ "$live_id" =~ ^(AFI|PK|LDI|AOS|FCP|PFC|RHC)[0-9A-Z]+$ ]] && ! completed "$live_id"; then
     echo "Next eligible batch: $live_next"
     echo "Source: .codex/reports/current-run-state.md"
     exit 0
@@ -125,6 +141,7 @@ if [[ -n "$live_next" ]]; then
 fi
 
 ORDER=(
+  AFI01 AFI02 AFI03 AFI04 AFI05 AFI06 AFI07 AFI08 AFI09 AFI10 AFI11 AFI12 AFI13 AFI14 AFI15 AFI16
   PK00 PK01 PK02 PK03 PK04 PK05 PK06 PK07 PK08 PK09 PK10 PK11 PK12 PK13 PK14 PK15 PK16 PK17 PK18 PK19 PK20 PK21 PK22 PK23 PK24 PK25 PK26 PK27 PK28 PK29 PK30 PK31 PK32 PK33 PK34 PK35 PK36 PK37 PK38 PK39 PK40 PK41
   LDI05 LDI06 LDI07 LDI08 LDI09 LDI10 LDI11 LDI12 LDI13 LDI14 LDI15 LDI16 LDI17 LDI18 LDI19 LDI20 LDI21 LDI22
   AOS24 AOS25 AOS26 AOS27 AOS28 AOS29 AOS30

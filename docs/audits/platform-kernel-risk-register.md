@@ -13,7 +13,7 @@ Date: 2026-05-08
 | Sync readiness is architectural only. | Open Yellow | PK29-PK31 | No sync-ready, cloud-ready, or conflict-safe claim until revisions, tombstones, conflict policy, and manual merge proof exist. |
 | Intelligence output must stay claim-bounded. | Open Yellow | PK32-PK34 | No AI-ready or autonomous-intelligence claim; quarantine uncertain/generated intelligence until PK proof exists. |
 | Performance scale has not been PK-budget-proven. | Open Yellow | PK35-PK37 | No performance-budget-proven claim until large-store fixtures, budgets, and cache invalidation proof exist. |
-| Package/module moves can destabilize builds. | Open Yellow | PK38-PK41 | No package-split claim until boundary scaffold, scanner, and focused builds pass. |
+| Package/module moves can destabilize builds. | Open Yellow | PK01-PK41 | PK01 is queued; no package-split claim until scaffold, scanner, and focused builds pass. |
 | Pre-sync stash contains source-truth conflicts. | Parked Yellow | Repo steward / sequencing reconciliation | Stash remains preserved and unapplied; do not drop it until a future reconciliation confirms every useful piece is merged or obsolete. |
 
 Hard Red entries: none recorded by PK integration as of 2026-05-08.
@@ -26,3 +26,11 @@ EventKit, external snapshot, local-only sync, and test evidence, but it did not
 prove transaction safety, migration safety, rollback, side-effect isolation,
 sync readiness, intelligence readiness, performance-budget compliance, or
 package split safety.
+
+## AFI / PK Ordering Finding
+
+After AFI correction, PK is active planned Platform Kernel scope, but PK01-PK41
+are not registry-proven minimum prerequisites for AFI01 Canon Language Purge or
+AFI02 IA Hierarchy Lock. PK00 remains useful safety baseline evidence. Further
+PK work must not outrun AFI unless a later registry/report proves that specific
+PK batch is a minimum safety prerequisite for the active AFI batch.

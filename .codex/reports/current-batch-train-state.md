@@ -2,16 +2,19 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK00 Current Backend Proof Baseline complete / Green with
-accepted Yellow follow-ups.
-Next eligible batch: PK01 Package/Module Boundary Scaffold.
-Scope: PK00-PK41 is active planned local backend/platform scope. LDI14 remains
-complete / Green as local Trust Review And Dream Handling Receipts contract
-evidence, but LDI15 is no longer the next backend/platform selection while PK
-foundation batches remain unrun. PK00 made no production Swift, persistence
-schema, sync/cloud, hosted AI, user-data server, release/platform, legal/privacy
-compliance, physical-device proof, public accessibility proof, signing,
-entitlement, dependency, generated-project, or hosted workflow claim.
+Current batch: AFI source-truth correction and stash reconciliation / Yellow.
+Next eligible batch: AFI01 Canon Language Purge.
+Scope: AFI source truth is active for product/IA/UI/visual/copy decisions.
+The active flagship top-level IA is Today / Goals / Capture / Time / You.
+Plan is superseded as a top-level destination and remains valid only as an
+action/contextual noun. PK00 remains complete / Green with accepted Yellow
+follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
+planned Platform Kernel scope, but are not allowed to outrun AFI unless a
+specific minimum safety prerequisite is proven by registry/report evidence.
+This correction made no app code, runtime, route, persistence/schema, package
+manifest, project, dependency, signing, entitlement, generated-project, hosted
+workflow, release/platform, legal/privacy, physical-device proof, public
+accessibility proof, sync/cloud, hosted AI, or user-data server claim.
 
 ## FIO01 / PFC05A / DPTG00 Governance Overlay Package
 
@@ -21,9 +24,12 @@ current proof. DPTG00 is locked as the future terminal physical-device
 release-candidate proof gate. All pre-device gates must close before device
 proof begins. AOS23 and LDI01-LDI14 have since closed Green. PK00 is complete /
 Green with accepted Yellow follow-ups as a report-only backend/platform proof
-baseline. PK01 Package/Module Boundary Scaffold is now the next eligible
-Platform Kernel batch unless repo evidence shows a dirty or half-complete active
-batch must close first.
+baseline. AFI source truth now controls active flagship IA: Today / Goals /
+Capture / Time / You. AFI01 Canon Language Purge is now the next eligible
+global batch unless repo evidence shows a dirty or half-complete active batch
+must close first. PK01-PK41 remain queued active planned Platform Kernel scope,
+but are not minimum prerequisites for AFI01 unless later evidence proves that
+dependency.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,
 sync/cloud, public accessibility, legal/privacy, production Swift, signing,
 entitlement, dependency, generated-project, or hosted-CI proof claim.

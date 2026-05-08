@@ -4,7 +4,8 @@ Status: Compact mirror only. Owner docs and source code win.
 Date: 2026-05-07
 
 - Active product truth: Ambitions 3.0.
-- Top-level IA: Today / Goals / Capture / Plan / You.
+- Top-level IA: Today / Goals / Capture / Time / You. Plan is superseded as a
+  top-level destination and remains valid only as contextual/action language.
 - Insights is contextual intelligence, not a top-level tab.
 - Habits are absorbed into Rituals, Plan, Today, Reviews, and You.
 - Task means standalone One-Step Goal.

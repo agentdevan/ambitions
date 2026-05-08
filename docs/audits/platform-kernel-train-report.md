@@ -8,26 +8,27 @@ Status: Active
 
 ## Current Closeout
 
-Result: Green with accepted Yellow follow-ups
-Batch: PK00 Current Backend Proof Baseline
+Result: Yellow
+Batch: AFI source-truth correction after PK00
 Commit: pending
 Files changed: docs and Codex train-state mirrors only.
 Behavior changed: none.
-Tests run: `git diff --check`; ACX quick, docs, and batch-closeout bundles;
-ACX impact; global next-batch helper; batch-train gate check; docs QA.
+Tests run: `bash -n scripts/global-train-next-batch.sh scripts/global-train-status-summary.sh`, `scripts/global-train-next-batch.sh`, `scripts/global-train-status-summary.sh`, `git diff --check`, `python3 scripts/ai/acx_local.py bundle quick`, `python3 scripts/ai/acx_impact.py <changed files>`, `python3 scripts/ai/acx_local.py bundle docs`, `python3 scripts/ai/acx_local.py bundle batch-closeout`, `scripts/batch-train-gate-check.sh || true`, and `python3 scripts/ai/acx_repair.py diagnose`.
 Tests not run: app build and focused Swift tests were not run for this
-report-only baseline because no app source, persistence schema, generated
-project, signing, entitlement, dependency, or runtime behavior changed.
+source-truth reconciliation because no app source, persistence schema,
+generated project, package manifest, signing, entitlement, dependency, or
+runtime behavior changed.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
-Yellows carried: transaction safety, migration/backup/rollback, side-effect
-isolation, sync readiness, intelligence quarantine, performance budgets, and
-package/module moves are not PK-proven yet.
-Rollback path: revert the PK00 docs/state commit.
-Claims: current backend/platform proof baseline recorded.
+Yellows carried: PK01-PK41 remain active planned scope but are paused behind
+AFI unless a specific PK prerequisite is proven; transaction safety,
+migration/backup/rollback, side-effect isolation, sync readiness, intelligence
+quarantine, and performance budgets are not PK-proven yet.
+Rollback path: revert the AFI correction docs/state commit.
+Claims: PK00 baseline remains complete; AFI source truth controls active IA.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: PK01 Package/Module Boundary Scaffold.
+Next eligible batch: AFI01 Canon Language Purge.
 
 ## Completed
 
@@ -37,13 +38,17 @@ Next eligible batch: PK01 Package/Module Boundary Scaffold.
 
 ## Active / Next
 
-- PK01 Package/Module Boundary Scaffold is next eligible.
+- AFI01 Canon Language Purge is next eligible.
+- PK01-PK41 remain queued active planned Platform Kernel scope, but no PK batch
+  after PK00 is treated as a prerequisite for AFI unless a later owner report
+  proves the dependency.
 
 ## Parked Yellows
 
 - Pre-sync stash remains preserved and unapplied. It contains historical train
-  sequencing work that conflicts with current `Today / Goals / Capture / Plan /
-  You` IA truth and the newer PK priority. No stash content was dropped.
+  sequencing work with AFI-compatible `Today / Goals / Capture / Time / You`
+  material plus PLR sequencing that is not fully registry-proven in current
+  HEAD. No stash content was dropped.
 - Docs QA continues to report broad historical advisory backlog. That does not
   block PK00 because PK00 is a docs/state baseline and no new hard Red emerged.
 - `scripts/batch-train-gate-check.sh || true` reported expected dirty-tree
