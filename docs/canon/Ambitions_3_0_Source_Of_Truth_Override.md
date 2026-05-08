@@ -1,48 +1,47 @@
-# Ambitions 3.0 — Source Of Truth Override
+# Ambitions 3.0 — Preserved Source-Truth Override
 
-Status: Active canon override for Ambitions 3.0 rebuild  
-Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
-Rebuild model: [Ambitions 3.0 Rebuild Operating Model](./Ambitions_3_0_Rebuild_Operating_Model.md)  
-Last updated: 2026-04-30
+Status: preserved baseline / historical source-truth context.
 
----
+Current higher-priority source truth:
 
-> Source-truth update: For future Ambitions product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, and implementation-planning work, start with `docs/AmbitionsCanon/README.md`. Older Ambitions 3.0, 4.0, PXOS, SI, handoff, audit, and Codex train docs remain historical/supporting context or stricter proof gates where compatible, but they do not override the Ambitions Design System or AmbitionsCanon pack where conflicts exist. This 3.0 override remains preserved baseline and evidence-gate context.
+1. `docs/AmbitionsCanon/README.md`
+2. `docs/status/current-implementation-map.md`
+3. `docs/status/release-evidence-packet.md`
+4. `docs/status/repo-cleanup-index.md`
+5. `docs/native-build-and-release.md`
+
+This document remains useful as Ambitions 3.0 rebuild history, compatibility context, and stricter evidence-gate context where compatible. It no longer overrides the AmbitionsCanon pack or the current status/evidence docs.
 
 ## Purpose
 
-This document makes the Ambitions 3.0 supersession rule explicit.
+This document records the Ambitions 3.0 supersession model that previously governed front-end rebuild work.
 
-Ambitions 3.0 is the current rebuild canon for front-end, product language, primitive architecture, implementation phases, and Codex-only evidence gates.
+It should now be read as:
 
-It supersedes older conflicting front-end, visual, interaction, navigation, wording, shell, Today, Capture, Plan, Goals, You, closure, proof, receipt, recommendation, and rebuild-process guidance wherever the 3.0 parent or linked 3.0 child docs are more recent and explicit.
+- preserved Ambitions 3.0 baseline history
+- compatibility context for older prompts and implementation batches
+- a source of stricter proof/evidence discipline where still compatible
+- not the current highest product/design source truth
+- not current implementation proof by itself
 
-This does not mean 3.0 canon is implemented. Implementation remains evidence-gated.
+## Current read order
 
----
-
-## Front-End / Rebuild Reading Order
-
-For Ambitions 3.0 work, use this order:
+For current Ambitions work, use this order:
 
 1. `README.md`
 2. `docs/README.md`
-3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
-4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
-5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
-6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
-7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
-8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
-9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
-10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
+3. `docs/AmbitionsCanon/README.md`
+4. `docs/status/current-implementation-map.md`
+5. `docs/status/repo-cleanup-index.md`
+6. `docs/status/release-evidence-packet.md`
+7. `docs/native-build-and-release.md`
+8. target source files and tests
 
-Older docs may be consulted only after this order, and only where Ambitions 3.0 does not replace their domain.
+Use the older Ambitions 3.0 docs only after the current source-truth/status files, and only where they remain compatible or stricter in evidence discipline.
 
----
+## Historical 3.0 supersession rule
 
-## What 3.0 Supersedes When Conflicting
-
-Ambitions 3.0 supersedes older conflicting guidance for:
+Ambitions 3.0 superseded older conflicting guidance for:
 
 - front-end layout
 - surface hierarchy
@@ -65,49 +64,52 @@ Ambitions 3.0 supersedes older conflicting guidance for:
 - front-end build sequence
 - primitive-led implementation scope
 - Codex-only testing/evidence strategy
-- Ambitions-native UI invention candidates where the 3.0 invention bank is more recent and explicit
 
----
+That historical rule is now subordinate to AmbitionsCanon for current product/design decisions.
 
-## What 3.0 Does Not Supersede By Default
+## What remains useful here
 
-Ambitions 3.0 does not replace these older canon domains unless an active 3.0 doc explicitly says so:
+This file and the older 3.0 canon set may still help when a task needs:
 
-- core domain object definitions
-- local-first data posture
-- sync/export rules
-- sensitive Life Area policy not explicitly refined by 3.0
-- permission timing not explicitly refined by 3.0
-- major confirmation requirements not explicitly refined by 3.0
-- trust/privacy/data controls remaining available
-- roadmap/batch status
-- implementation acceptance gates where stricter than 3.0
-- release readiness gates where stricter than 3.0
-- monetization policy
+- migration context
+- terminology history
+- older compatibility seams
+- stricter release-claim discipline
+- stricter evidence-gate rules
+- traceability from older batch trains
+- explanation for why older docs were superseded
 
----
+## What this file does not prove
 
-## Conflict Resolution
+This file does not prove:
+
+- app behavior
+- current implementation completeness
+- visual QA
+- accessibility conformance
+- performance readiness
+- TestFlight readiness
+- App Store readiness
+- physical-device proof
+- release readiness
+- legal/privacy approval
+- human release approval
+
+## Conflict resolution
 
 When documents conflict:
 
-1. `BATCH_REGISTRY.md` decides implementation/status truth only.
-2. This override and the 3.0 parent decide rebuild/front-end truth.
-3. `Ambitions_3_0_Rebuild_Operating_Model.md` decides cross-functional process truth.
-4. `Ambitions_3_0_Primitive_Architecture.md` decides primitive-led scope truth.
-5. `Ambitions_3_0_Product_Language_System.md` decides user-facing language, deprecated terms, and copy direction.
-6. Linked active 3.0 child docs decide their owned surface, component, primitive, or contract.
-7. `Ambitions_3_0_UI_Invention_Upgrade_Bank.md` decides validity of canonized Ambitions-native invention candidates, but does not create implementation permission by itself.
-8. Domain Model decides object definitions where 3.0 has not explicitly refined lifecycle or presentation.
-9. Trust / Privacy / Memory and 3.0 Privacy / Consent docs decide sensitive data, memory, permission, confirmation, receipt, and removal policy.
-10. Release Readiness And Evidence Gates decide release status truth.
-11. Older docs remain valid only where compatible.
+1. AmbitionsCanon decides current product/design direction.
+2. `docs/status/current-implementation-map.md` decides current implementation status.
+3. `docs/status/release-evidence-packet.md` decides validation and release-claim posture.
+4. `docs/status/repo-cleanup-index.md` decides cleanup/quarantine posture.
+5. `docs/native-build-and-release.md` decides local build/release validation procedure.
+6. `docs/codex/BATCH_REGISTRY.md` decides operational batch status only.
+7. Older Ambitions 3.0 docs remain useful only where compatible or stricter in evidence discipline.
 
----
+## Canon vs implementation status
 
-## Canon vs Implementation Status
-
-A 3.0 concept may be:
+A concept may be:
 
 - Canonized
 - Designed
@@ -120,21 +122,11 @@ A 3.0 concept may be:
 
 Do not collapse these statuses.
 
-Do not claim that a 3.0 concept exists in app code until code, previews, tests, and relevant device/platform evidence support it.
+Do not claim that a concept exists in app code until code, previews, tests, and relevant device/platform evidence support it.
 
----
+## Active historical 3.0 canon set
 
-## Required Future Prompt Addition
-
-Future Codex prompts touching Ambitions 3.0 should include:
-
-```text
-Read docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md, docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md, docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md, docs/canon/Ambitions_3_0_Primitive_Architecture.md, and docs/canon/Ambitions_3_0_Product_Language_System.md before implementation. Ambitions 3.0 supersedes older conflicting front-end, visual, interaction, navigation, wording, Today, Capture, Plan, Goals, You, closure, proof, receipt, recommendation, and rebuild-process canon where the 3.0 parent or linked 3.0 child docs are more recent and explicit. Do not treat 3.0 canon as implementation completion. Preserve the five canonical destinations, Ambitions Operating Shell, Golden Launch Loop, locked Day Rail/Reality Rail, primitive-led implementation, object ownership, trust/privacy boundaries, local-first posture, accessibility requirements, copy guard, and release evidence gates.
-```
-
----
-
-## Active 3.0 Canon Set
+The following older files are preserved as historical/supporting context, not current front-door truth:
 
 ### Source / parent / governance
 
@@ -236,6 +228,8 @@ Read docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md, docs/canon/Ambitions_
 - `Ambitions_3_0_Postmortem_And_Learning_Loop.md`
 - `Ambitions_3_0_Human_Approval_Escalation_Rules.md`
 
-## Codex Operating System
+## Codex operating system
 
-Codex work is governed by `docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md`, `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`, `.codex/`, and the Ambitions 3.0 dependency/toolchain docs.
+Codex work is governed by current repo routing first, then repo-local Codex operating docs where needed.
+
+Use `.codex/`, `docs/codex/`, and older Ambitions 3.0 Codex docs as operating context only. They do not override AmbitionsCanon, current implementation status, current release evidence status, source code, tests, or raw validation logs.
