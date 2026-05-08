@@ -85,7 +85,7 @@ Acceptance bands:
 Immediate rejection if:
 
 - Today looks like task list
-- Plan looks like calendar clone
+- Time looks like calendar clone
 - Goals looks like KPI dashboard or astrology app
 - Capture looks like notes feed, inbox, or chatbot
 - You looks like social profile or admin console
@@ -165,19 +165,19 @@ Happy-path-only previews are a maturity failure.
 
 ### Time / LifeShape Field
 
-- PlanWeekDefault
-- PlanDayPressure
-- PlanMonthShaping
-- PlanOpenCapacity
-- PlanLowCapacity
-- PlanProtectedBlocks
-- PlanPressureFriday
-- PlanCalendarDeniedManual
-- PlanSourceConflict
-- PlanReflowPreview
-- PlanReceiptAdjusted
-- PlanLargeText
-- PlanReduceMotion
+- TimeWeekDefault
+- TimeDayPressure
+- TimeMonthShaping
+- TimeOpenCapacity
+- TimeLowCapacity
+- TimeProtectedBlocks
+- TimePressureFriday
+- TimeCalendarDeniedManual
+- TimeSourceConflict
+- TimeReflowPreview
+- TimeReceiptAdjusted
+- TimeLargeText
+- TimeReduceMotion
 
 ### Goals / Constellation Atlas
 
@@ -258,6 +258,18 @@ Forbidden:
 
 | Object | Must prove | Hard Red failure |
 | --- | --- | --- |
+| Reality Meridian + Start Here Surface | vertical meridian dominates Today; Start Here emerges from current state; no task-list dominance | detached task card, generic task list, dashboard pile, shame/overdue emphasis |
+| Constellation Atlas + Orbital Lens | atlas/lens silhouette dominates Goals; life areas are visible without ranking; Mission Control stays in Goal Detail | KPI portfolio, ranked score, habit rings, astrology map, endless module stack |
+| Atmosphere Composer | open field and bottom-oriented composer dominate Capture; route reveal waits for input; unresolved thought can stay safe | notes feed, inbox, chatbot, category board, plus-tab utility |
+| LifeShape Field | capacity field dominates Time; open, goal, protected, and pressure states are visible without calendar identity | calendar clone, agenda, analytics dashboard, red pressure warning, silent scheduling |
+| User System Profile | grouped system profile dominates You; trust, privacy, receipts/history, planning setup, and defaults are findable | social profile, admin console, account hub, AI settings wall |
+
+AFI03 acceptance:
+
+- Pass requires a silhouette table and screen composition constitution entry.
+- Visual Green requires screenshot or rendered preview evidence for the relevant
+  top-level surface.
+- Docs-only silhouette lock is Yellow until rendered evidence exists.
 | Reality Meridian | Now / Next / Later feel inhabited, not listed | generic task list or calendar timeline |
 | Start Here Surface | one primary action emerges from active Meridian node | detached card / Begin Focus / AI prompt |
 | Constellation Atlas | equal-weight life areas with user order/pin/hide/rename | KPI dashboard, ranked life score, astrology |

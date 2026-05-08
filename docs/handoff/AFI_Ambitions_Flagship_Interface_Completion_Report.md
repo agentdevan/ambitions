@@ -7,13 +7,13 @@ Date: 2026-05-08
 
 ## Current Status
 
-AFI01 Canon Language Purge and AFI02 IA Hierarchy Lock are complete / Accepted
-Yellow.
+AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, and AFI03 Flagship Object
+Silhouettes are complete / Accepted Yellow.
 
 Next eligible batch:
 
 ```text
-AFI03 Flagship Object Silhouettes
+AFI04 Material System Proof
 ```
 
 ## Active IA
@@ -35,6 +35,7 @@ as contextual/action language or historical compatibility evidence.
 | --- | --- | --- | --- |
 | AFI01 Canon Language Purge | Accepted Yellow | Active canon/governance wording now preserves AFI naming and rejects Plan-era top-level IA. Historical compatibility backlog remains parked. | AFI02 |
 | AFI02 IA Hierarchy Lock | Accepted Yellow | Active canon/governance wording now locks Today / Goals / Capture / Time / You, Goals -> Time -> Today, and Time as LifeShape Field owner. Historical/app-symbol compatibility backlog remains parked. | AFI03 |
+| AFI03 Flagship Object Silhouettes | Accepted Yellow | Active composition and visual QA canon now define one living object silhouette per top-level surface and block stacked-card/module drift. Rendered visual proof remains future work. | AFI04 |
 
 ## Claims
 

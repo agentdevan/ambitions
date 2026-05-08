@@ -2,9 +2,9 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: AFI02 IA Hierarchy Lock / Accepted Yellow.
-Next eligible batch: AFI03 Flagship Object Silhouettes.
-Scope: AFI02 completed as docs/canon/governance hierarchy lock evidence.
+Current batch: AFI03 Flagship Object Silhouettes / Accepted Yellow.
+Next eligible batch: AFI04 Material System Proof.
+Scope: AFI03 completed as docs/canon/governance silhouette-lock evidence.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an
@@ -12,7 +12,7 @@ action/contextual noun. PK00 remains complete / Green with accepted Yellow
 follow-ups as a backend/platform proof baseline. PK01-PK41 remain active
 planned Platform Kernel scope, but are not allowed to outrun AFI unless a
 specific minimum safety prerequisite is proven by registry/report evidence.
-This AFI02 pass made no app code, runtime, route, persistence/schema, package
+This AFI03 pass made no app code, runtime, route, persistence/schema, package
 manifest, project, dependency, signing, entitlement, generated-project, hosted
 workflow, release/platform, legal/privacy, physical-device proof, public
 accessibility proof, sync/cloud, hosted AI, or user-data server claim.
@@ -26,10 +26,10 @@ release-candidate proof gate. All pre-device gates must close before device
 proof begins. AOS23 and LDI01-LDI14 have since closed Green. PK00 is complete /
 Green with accepted Yellow follow-ups as a report-only backend/platform proof
 baseline. AFI source truth now controls active flagship IA: Today / Goals /
-Capture / Time / You. AFI01 Canon Language Purge and AFI02 IA Hierarchy Lock
-are complete / Accepted Yellow. AFI03 Flagship Object Silhouettes is now the
-next eligible global batch unless repo evidence shows a dirty or half-complete
-active batch must close first.
+Capture / Time / You. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, and
+AFI03 Flagship Object Silhouettes are complete / Accepted Yellow. AFI04
+Material System Proof is now the next eligible global batch unless repo
+evidence shows a dirty or half-complete active batch must close first.
 PK01-PK41 remain queued active planned Platform Kernel scope, but are not
 minimum prerequisites for AFI01 unless later evidence proves that dependency.
 This package makes no app behavior, release, device, AI runtime, LDI runtime,

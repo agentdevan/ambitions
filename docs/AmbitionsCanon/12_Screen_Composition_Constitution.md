@@ -34,6 +34,32 @@ If a top-level surface requires more than three visible modules at rest, the com
 
 A screen must remain recognizably Ambitions with labels removed. If text removal leaves a generic app shell, the visual object is not strong enough.
 
+## AFI03 Silhouette Lock
+
+These silhouettes are the minimum composition contract for the active AFI
+top-level surfaces. They are source truth for implementation, preview, visual
+QA, and future refactor work, but they are not proof that the current app UI
+already renders this way.
+
+| Surface | Living object | Required silhouette | At-rest dominant shape | Allowed support at rest | Hard Red drift |
+| --- | --- | --- | --- | --- | --- |
+| Today | Reality Meridian + Start Here Surface | vertical meridian with one emergent start point | current-day axis, now/next/later relationship, one clear start affordance | one trust seam or one receipt/proof summary | task list, detached hero card, dashboard stack, overdue/shame queue |
+| Goals | Constellation Atlas + Orbital Lens | atlas field with one focused lens | equal-weight life areas and visible direction without ranking | one selected area lens or thread-to-Today hint | KPI portfolio, ranked score, habit rings, astrology map, endless modules |
+| Capture | Atmosphere Composer | open field anchored by composer | quiet holding field plus bottom-oriented input | route reveal only after input, Needs a Place / Ready to Place / Grow into Goal state | feed, inbox, chatbot, category board, plus-tab utility |
+| Time | LifeShape Field | capacity field | open time, goal time, protected time, and pressure as capacity relationships | Shape week / Review pressure action and source/manual-mode hint | calendar grid, agenda, analytics dashboard, red warning surface, silent scheduler |
+| You | User System Profile | grouped system profile | iOS Settings-like groups for trust, privacy, receipts, planning setup, and defaults | one trust/receipt/default summary | social profile, admin console, account hub, AI settings wall |
+
+Acceptance rule:
+
+- The primary object must occupy roughly 70-80% of attention at rest.
+- A blurred or text-stripped screenshot must still reveal the intended
+  silhouette.
+- If the surface works better after the primary object is replaced by a stack
+  of cards or modules, the surface is not AFI-compliant.
+- Green visual/composition status requires rendered screenshot or preview
+  evidence. Without rendered proof, silhouette status is Yellow even if the
+  source-truth contract is complete.
+
 ## Top-Level Surface Laws
 
 1. One living object dominates each top-level surface.
