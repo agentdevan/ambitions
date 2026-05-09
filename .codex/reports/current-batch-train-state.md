@@ -2,13 +2,22 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK08 Migration Plan Scaffold / Green.
-Next eligible batch: PK09 Unknown Persisted Value Degradation
-Scope: PK08 adds an inert local migration planning scaffold over the PK07 storage version ledger. It names blocked no-change, version-change, added-type, and removed-type migration plan entries, requires future safety gates for mutation plans, and keeps migration execution blocked. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
+Current batch: PK09 Unknown Persisted Value Degradation / Green.
+Next eligible batch: PK10 Storage Invariant Checker
+Scope: PK09 adds a persistence-local degradation contract for unknown persisted raw values and routes repository fallback mapping through deterministic fallback or optional nil fallback metadata. It does not run migrations or claim migration/data-loss safety. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+
+## PK09 Unknown Persisted Value Degradation Closeout
+
+- PK09 report: `docs/audits/pk09-unknown-persisted-value-degradation-report.md`.
+- Degradation contract: `Native/Ambitions/Persistence/PersistedValueDegradation.swift`.
+- Repository integration: `Native/Ambitions/Persistence/SwiftDataRepositories.swift` centralizes persisted raw-value fallbacks for Goals, Steps, Progress Evidence, Capture, Event Ledger, App State, and Plan sections.
+- Focused proof: `PersistedValueDegradationTests` plus focused `PersistenceRepositoryTests` passed for known raw values, unknown raw deterministic fallback entries, legacy aliases, unknown optional nil fallback, unknown Goal/AppState raw values when snapshots cannot decode, and legacy Capture status aliases, 7 tests, 0 failures.
+- Canonical queue now marks PK09 complete/do-not-run and PK10 executable now.
+- No migration runner, migration execution, destructive storage action, schema mutation, UI behavior change, sync/cloud behavior, release/readiness, migration-safe, or data-loss-proof claim is made.
 
 ## PK08 Migration Plan Scaffold Closeout
 
@@ -29,7 +38,7 @@ PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete /
 ## Global Sequence Optimization After PK07
 
 - Optimization report: `docs/audits/global-batch-train-sequence-optimization-report.md`.
-- The global order now prioritizes PK09-PK13 storage data safety, PK14-PK16 events/receipts/trust, PK17-PK21 service extraction, PK22-PK28 side effects/privacy/data controls, PK29-PK31 sync/merge, PK32-PK34 intelligence boundaries, and PK35-PK41 performance/package work before dependent cross-train tails.
+- The global order now prioritizes PK10-PK13 storage data safety, PK14-PK16 events/receipts/trust, PK17-PK21 service extraction, PK22-PK28 side effects/privacy/data controls, PK29-PK31 sync/merge, PK32-PK34 intelligence boundaries, and PK35-PK41 performance/package work before dependent cross-train tails.
 - No new train, runtime behavior, UI behavior, hosted AI, sync, or release/readiness claim is made.
 
 ## AIR Ambitions Intelligence Runtime Fold-In Overlay

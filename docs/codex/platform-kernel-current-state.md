@@ -51,7 +51,12 @@ Date: 2026-05-08
   planning scaffold over the storage version ledger. It describes no-change,
   version-change, added-type, and removed-type plans with required future
   safety gates while keeping migration execution blocked.
-- PK09 Unknown Persisted Value Degradation is the next eligible global batch. PK09-PK41
+- PK09 Unknown Persisted Value Degradation is complete / Green as a
+  persistence-local forward-compatible raw-value degradation contract. It
+  routes unknown persisted enum raw values through deterministic fallbacks or
+  optional nil fallbacks with review-blocking degradation metadata, without
+  executing migrations.
+- PK10 Storage Invariant Checker is the next eligible global batch. PK10-PK41
   remain active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
@@ -76,8 +81,9 @@ proof.
   PK-proven by focused persistence/goal/capture tests.
 - Storage schema version ledger coverage is PK-proven by PK07. Migration plan
   mutation gate scaffolding and execution blocking are PK-proven by PK08.
-  Unknown persisted value degradation, pre-migration backup, import dry run,
-  and restore rollback are not yet PK-proven.
+  Unknown persisted value degradation is PK-proven by PK09. Storage invariant
+  checking, pre-migration backup, import dry run, and restore rollback are not
+  yet PK-proven.
 - Side effects are present in platform-adjacent paths, but SideEffectLedger
   isolation is not yet PK-proven.
 - Sync-readiness primitives, conflict policy, and manual portable merge are not
@@ -87,4 +93,4 @@ proof.
 
 ## Next Eligible
 
-PK09 Unknown Persisted Value Degradation.
+PK10 Storage Invariant Checker.

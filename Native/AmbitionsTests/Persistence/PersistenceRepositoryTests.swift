@@ -349,6 +349,69 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loadedByID["legacy-processed"]?.linkedGoalID, "goal-legacy")
     }
 
+    func testGoalRepositoryDegradesUnknownRawValuesWhenSnapshotCannotDecode() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        let goal = try XCTUnwrap(goalFromFixture(fixture))
+
+        try await repositories.goals.saveGoals([goal])
+        try await store.write { context in
+            let records = try context.fetch(FetchDescriptor<GoalRecord>())
+            let record = try XCTUnwrap(records.first { $0.id == goal.id })
+            record.snapshotData = Data("{}".utf8)
+            record.stateRaw = "future_state"
+            record.modeRaw = "future_mode"
+            record.relationshipKindRaw = "future_relationship"
+            record.actorOwnershipRaw = "future_owner"
+            record.tempoRaw = "future_tempo"
+            record.timingTypeRaw = "future_timing"
+        }
+
+        let loadedGoal = try await repositories.goals.goal(id: goal.id)
+        let loaded = try XCTUnwrap(loadedGoal)
+
+        XCTAssertEqual(loaded.state, .active)
+        XCTAssertEqual(loaded.mode, .project)
+        XCTAssertEqual(loaded.relationshipKind, .independent)
+        XCTAssertEqual(loaded.actor.ownership, .self)
+        XCTAssertEqual(loaded.timing.tempo, .untimed)
+        XCTAssertEqual(loaded.timing.timingType, .logWhenDone)
+    }
+
+    func testAppStateRepositoryDegradesUnknownRawValuesWhenSnapshotCannotDecode() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+
+        try await store.write { context in
+            context.insert(
+                AppStateRecord(
+                    id: "default",
+                    preferredTabRaw: "future_tab",
+                    userDisplayName: "Taylor",
+                    appearancePreferenceRaw: "future_appearance",
+                    accentFamilyRaw: "future_accent",
+                    hasCompletedBootstrap: true,
+                    lastBootstrapSourceRaw: "future_source",
+                    lastBootstrapAt: "2026-05-08T12:00:00Z",
+                    lastSeedVersion: "seed.v1",
+                    lastSeededAt: "2026-05-08T12:00:00Z",
+                    lastOpenedGoalID: "goal-1",
+                    snapshotData: Data("{}".utf8)
+                )
+            )
+        }
+
+        let loaded = try await repositories.appState.loadState()
+
+        XCTAssertEqual(loaded.preferredTab, .today)
+        XCTAssertEqual(loaded.userDisplayName, "Taylor")
+        XCTAssertEqual(loaded.appearancePreference, .system)
+        XCTAssertEqual(loaded.accentFamily, .sage)
+        XCTAssertNil(loaded.lastBootstrapSource)
+        XCTAssertEqual(loaded.lastOpenedGoalID, "goal-1")
+    }
+
     func testAppUnitOfWorkCommitsMultipleRecordsThroughOneBoundary() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = makeRepositories(store: store)

@@ -110,8 +110,8 @@ As of this order update:
 - AFI01-AFI16 Ambitions Flagship Interface is complete / Accepted Yellow as
   current source truth. AFI supersedes older ACUI/Plan-era interface sequencing.
 - PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
-  Baseline is complete. PK01-PK08 are complete. PK09 is the active next batch
-  because unknown persisted value degradation is a minimum safety prerequisite before
+  Baseline is complete. PK01-PK09 are complete. PK10 is the active next batch
+  because storage invariant checking is a minimum safety prerequisite before
   further storage, sync, intelligence, or broad cross-train tail work.
 - AOS24-AOS30 remain queued behind PK where they depend on platform/backend
   safety, side effects, diagnostics, sync readiness, intelligence quarantine,
@@ -126,15 +126,15 @@ As of this order update:
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 - No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay, AFI
   correction, PK insertion package, AIR fold-in, or surface encapsulation
-  overlays. PK09 is next unless repo evidence shows a dirty or half-complete
+  overlays. PK10 is next unless repo evidence shows a dirty or half-complete
   active batch must close first.
 
-## 2026-05-08 Sequence Optimization After PK08
+## 2026-05-08 Sequence Optimization After PK09
 
-After PK08 Green, the maximum-safe global order keeps dependency-critical
+After PK09 Green, the maximum-safe global order keeps dependency-critical
 Platform Kernel work first regardless of original train grouping:
 
-1. PK09-PK13: unknown persisted value degradation, invariant checks, backup,
+1. PK10-PK13: invariant checks, backup,
    portable import dry run, and restore rollback.
 2. PK14-PK16: durable events, receipt backend, and trust history query.
 3. PK17-PK21: Today, Goals, Capture, and Time service/read-model extraction.
@@ -154,7 +154,7 @@ claims.
 ## Platform Kernel Insertion
 
 PK00-PK41 is now an active planned train, not optional brainstorming. PK00 is
-complete as a report-only baseline. PK01-PK08 are complete. PK09-PK41 precede
+complete as a report-only baseline. PK01-PK09 are complete. PK10-PK41 precede
 further backend/platform, storage, sync, intelligence, performance, module-split, or major feature
 expansion work when that work depends on the corresponding PK proof. Existing
 PFC/AOS/LDI evidence is preserved and may be reconciled into PK batches, but no

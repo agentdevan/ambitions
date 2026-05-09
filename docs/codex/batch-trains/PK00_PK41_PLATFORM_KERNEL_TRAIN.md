@@ -187,8 +187,8 @@ work, persisted-data evidence, migration findings, or human review notes.
 
 ## Global Integration
 
-PK09 is the next eligible backend/platform batch after PK08 Green unless a
+PK10 is the next eligible backend/platform batch after PK09 Green unless a
 dirty or half-complete active batch must be closed first. Remote sync,
 remote-intelligence, migration, package-split, and major platform feature work
-must wait for the relevant PK prerequisites, especially PK09-PK13, PK22-PK34,
+must wait for the relevant PK prerequisites, especially PK10-PK13, PK22-PK34,
 and PK38-PK41.

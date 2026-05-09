@@ -69,6 +69,44 @@ private extension StoredGoalFeedbackEvent {
 }
 
 private enum RepositoryMapping {
+    static func persisted<Value>(
+        _ type: Value.Type,
+        rawValue: String,
+        fallback: Value,
+        storedTypeName: String,
+        fieldName: String,
+        legacyAliases: [String: Value] = [:]
+    ) -> Value where Value: RawRepresentable & Sendable & Equatable, Value.RawValue == String {
+        PersistedValueDegradation
+            .resolve(
+                type,
+                rawValue: rawValue,
+                fallback: fallback,
+                storedTypeName: storedTypeName,
+                fieldName: fieldName,
+                legacyAliases: legacyAliases
+            )
+            .value
+    }
+
+    static func persistedOptional<Value>(
+        _ type: Value.Type,
+        rawValue: String?,
+        storedTypeName: String,
+        fieldName: String,
+        legacyAliases: [String: Value] = [:]
+    ) -> Value? where Value: RawRepresentable & Sendable & Equatable, Value.RawValue == String {
+        PersistedValueDegradation
+            .resolveOptional(
+                type,
+                rawValue: rawValue,
+                storedTypeName: storedTypeName,
+                fieldName: fieldName,
+                legacyAliases: legacyAliases
+            )
+            .value
+    }
+
     static func goalRecord(from goal: Goal) throws -> GoalRecord {
         GoalRecord(
             id: goal.id,
@@ -166,15 +204,15 @@ private enum RepositoryMapping {
             revision: record.revision,
             createdAt: record.createdAt,
             updatedAt: record.updatedAt,
-            state: GoalLifecycleState(rawValue: record.stateRaw) ?? .active,
+            state: persisted(GoalLifecycleState.self, rawValue: record.stateRaw, fallback: .active, storedTypeName: "GoalRecord", fieldName: "stateRaw"),
             title: record.title,
             summary: record.summaryText,
-            mode: GoalMode(rawValue: record.modeRaw) ?? .project,
-            relationshipKind: GoalRelationshipKind(rawValue: record.relationshipKindRaw) ?? .independent,
+            mode: persisted(GoalMode.self, rawValue: record.modeRaw, fallback: .project, storedTypeName: "GoalRecord", fieldName: "modeRaw"),
+            relationshipKind: persisted(GoalRelationshipKind.self, rawValue: record.relationshipKindRaw, fallback: .independent, storedTypeName: "GoalRecord", fieldName: "relationshipKindRaw"),
             actor: GoalActor(
                 actorID: record.actorOwnershipRaw,
                 displayName: record.actorDisplayName,
-                ownership: ExecutionOwnership(rawValue: record.actorOwnershipRaw) ?? .self,
+                ownership: persisted(ExecutionOwnership.self, rawValue: record.actorOwnershipRaw, fallback: .self, storedTypeName: "GoalRecord", fieldName: "actorOwnershipRaw"),
                 roleLabel: nil,
                 isPrimary: true
             ),
@@ -183,8 +221,8 @@ private enum RepositoryMapping {
             supportGoalIDs: try PersistenceCoding.decode([String].self, from: record.supportGoalIDsData),
             tags: try PersistenceCoding.decode([String].self, from: record.tagsData),
             timing: GoalTiming(
-                tempo: GoalTempo(rawValue: record.tempoRaw) ?? .untimed,
-                timingType: TimingType(rawValue: record.timingTypeRaw) ?? .logWhenDone,
+                tempo: persisted(GoalTempo.self, rawValue: record.tempoRaw, fallback: .untimed, storedTypeName: "GoalRecord", fieldName: "tempoRaw"),
+                timingType: persisted(TimingType.self, rawValue: record.timingTypeRaw, fallback: .logWhenDone, storedTypeName: "GoalRecord", fieldName: "timingTypeRaw"),
                 startsOn: record.startsOn,
                 dueAt: record.dueAt,
                 targetBy: record.targetBy,
@@ -299,12 +337,12 @@ private enum RepositoryMapping {
             sectionID: record.sectionID,
             title: record.title,
             summary: record.summaryText,
-            type: StepType(rawValue: record.typeRaw) ?? .actionUnit,
-            state: StepLifecycleState(rawValue: record.stateRaw) ?? .planned,
-            owner: GoalActor(actorID: record.ownerOwnershipRaw, displayName: record.ownerDisplayName, ownership: ExecutionOwnership(rawValue: record.ownerOwnershipRaw) ?? .self, roleLabel: nil, isPrimary: true),
+            type: persisted(StepType.self, rawValue: record.typeRaw, fallback: .actionUnit, storedTypeName: "StepRecord", fieldName: "typeRaw"),
+            state: persisted(StepLifecycleState.self, rawValue: record.stateRaw, fallback: .planned, storedTypeName: "StepRecord", fieldName: "stateRaw"),
+            owner: GoalActor(actorID: record.ownerOwnershipRaw, displayName: record.ownerDisplayName, ownership: persisted(ExecutionOwnership.self, rawValue: record.ownerOwnershipRaw, fallback: .self, storedTypeName: "StepRecord", fieldName: "ownerOwnershipRaw"), roleLabel: nil, isPrimary: true),
             timing: GoalTiming(
-                tempo: GoalTempo(rawValue: record.tempoRaw) ?? .untimed,
-                timingType: TimingType(rawValue: record.timingTypeRaw) ?? .logWhenDone,
+                tempo: persisted(GoalTempo.self, rawValue: record.tempoRaw, fallback: .untimed, storedTypeName: "StepRecord", fieldName: "tempoRaw"),
+                timingType: persisted(TimingType.self, rawValue: record.timingTypeRaw, fallback: .logWhenDone, storedTypeName: "StepRecord", fieldName: "timingTypeRaw"),
                 startsOn: record.startsOn,
                 dueAt: record.dueAt,
                 targetBy: record.targetBy,
@@ -348,8 +386,8 @@ private enum RepositoryMapping {
             id: record.id,
             goalID: record.goalID,
             stepID: record.stepID,
-            evidenceKind: ProgressEvidenceKind(rawValue: record.evidenceKindRaw) ?? .stepCompleted,
-            source: EvidenceSource(rawValue: record.sourceRaw) ?? .manual,
+            evidenceKind: persisted(ProgressEvidenceKind.self, rawValue: record.evidenceKindRaw, fallback: .stepCompleted, storedTypeName: "ProgressEvidenceRecord", fieldName: "evidenceKindRaw"),
+            source: persisted(EvidenceSource.self, rawValue: record.sourceRaw, fallback: .manual, storedTypeName: "ProgressEvidenceRecord", fieldName: "sourceRaw"),
             capturedAt: record.capturedAt,
             progressDelta: record.progressDelta,
             confidenceDelta: record.confidenceDelta,
@@ -398,7 +436,7 @@ private enum RepositoryMapping {
             createdAt: record.createdAt,
             updatedAt: record.updatedAt,
             rawText: record.rawText,
-            sourceType: record.sourceTypeRaw.flatMap(CaptureSourceType.init(rawValue:)),
+            sourceType: persistedOptional(CaptureSourceType.self, rawValue: record.sourceTypeRaw, storedTypeName: "CaptureRecord", fieldName: "sourceTypeRaw"),
             status: captureStatus(from: record.statusRaw),
             linkedGoalID: record.linkedGoalID
         )
@@ -486,9 +524,9 @@ private enum RepositoryMapping {
 
         return EventLedgerEntry(
             id: record.id,
-            kind: EventLedgerKind(rawValue: record.kindRaw) ?? .goalUpdated,
+            kind: persisted(EventLedgerKind.self, rawValue: record.kindRaw, fallback: .goalUpdated, storedTypeName: "EventLedgerRecord", fieldName: "kindRaw"),
             occurredAt: record.occurredAt,
-            source: EventLedgerSource(rawValue: record.sourceRaw) ?? .system,
+            source: persisted(EventLedgerSource.self, rawValue: record.sourceRaw, fallback: .system, storedTypeName: "EventLedgerRecord", fieldName: "sourceRaw"),
             goalID: record.goalID,
             captureID: record.captureID,
             planID: record.planID,
@@ -497,13 +535,13 @@ private enum RepositoryMapping {
             title: record.title,
             summary: record.summaryText,
             semanticState: record.semanticState,
-            tone: EventLedgerTone(rawValue: record.toneRaw) ?? .neutral,
+            tone: persisted(EventLedgerTone.self, rawValue: record.toneRaw, fallback: .neutral, storedTypeName: "EventLedgerRecord", fieldName: "toneRaw"),
             trust: (try? PersistenceCoding.decode(EventLedgerTrustMetadata.self, from: record.trustData)) ?? EventLedgerTrustMetadata(),
             evidenceReferences: (try? PersistenceCoding.decode([EventLedgerEvidenceReference].self, from: record.evidenceReferencesData)) ?? [],
             metadata: (try? PersistenceCoding.decode([String: String].self, from: record.metadataData)) ?? [:],
             payload: (try? PersistenceCoding.decode([String: String].self, from: record.payloadData)) ?? [:],
             schemaVersion: record.schemaVersion,
-            privacy: EventLedgerPrivacyClassification(rawValue: record.privacyRaw) ?? .standard,
+            privacy: persisted(EventLedgerPrivacyClassification.self, rawValue: record.privacyRaw, fallback: .standard, storedTypeName: "EventLedgerRecord", fieldName: "privacyRaw"),
             localOnly: record.localOnly,
             createdAt: record.createdAt,
             updatedAt: record.updatedAt
@@ -511,14 +549,17 @@ private enum RepositoryMapping {
     }
 
     static func captureStatus(from rawValue: String) -> CaptureStatus {
-        switch rawValue {
-        case "pending":
-            return .actionable
-        case "processed":
-            return .goalBound
-        default:
-            return CaptureStatus(rawValue: rawValue) ?? .actionable
-        }
+        persisted(
+            CaptureStatus.self,
+            rawValue: rawValue,
+            fallback: .actionable,
+            storedTypeName: "CaptureRecord",
+            fieldName: "statusRaw",
+            legacyAliases: [
+                "pending": .actionable,
+                "processed": .goalBound,
+            ]
+        )
     }
 
     static func draftRecord(from draft: PersistedGoalDraft) throws -> GoalDraftRecord {
@@ -563,10 +604,10 @@ private enum RepositoryMapping {
 
         return AppStateSnapshot(
             id: record.id,
-            preferredTab: AppTab(rawValue: record.preferredTabRaw) ?? .today,
+            preferredTab: persisted(AppTab.self, rawValue: record.preferredTabRaw, fallback: .today, storedTypeName: "AppStateRecord", fieldName: "preferredTabRaw"),
             userDisplayName: record.userDisplayName,
-            appearancePreference: AppAppearancePreference(rawValue: record.appearancePreferenceRaw) ?? .system,
-            accentFamily: record.accentFamilyRaw.flatMap(AmbitionAccentFamily.init(rawValue:)) ?? .sage,
+            appearancePreference: persisted(AppAppearancePreference.self, rawValue: record.appearancePreferenceRaw, fallback: .system, storedTypeName: "AppStateRecord", fieldName: "appearancePreferenceRaw"),
+            accentFamily: persistedOptional(AmbitionAccentFamily.self, rawValue: record.accentFamilyRaw, storedTypeName: "AppStateRecord", fieldName: "accentFamilyRaw") ?? .sage,
             reviewCadenceDays: 7,
             localOnlyModeEnabled: true,
             hasCompletedBootstrap: record.hasCompletedBootstrap,
@@ -574,7 +615,7 @@ private enum RepositoryMapping {
             onboardingVersion: 1,
             onboardingCompletedAt: record.lastBootstrapAt,
             onboardingEntryChoice: nil,
-            lastBootstrapSource: record.lastBootstrapSourceRaw.flatMap(AppSession.BootstrapSource.init(rawValue:)),
+            lastBootstrapSource: persistedOptional(AppSession.BootstrapSource.self, rawValue: record.lastBootstrapSourceRaw, storedTypeName: "AppStateRecord", fieldName: "lastBootstrapSourceRaw"),
             lastBootstrapAt: record.lastBootstrapAt,
             lastSeedVersion: record.lastSeedVersion,
             lastSeededAt: record.lastSeededAt,
@@ -694,7 +735,13 @@ struct SwiftDataGoalRepository: GoalRepository {
                         goalID: sectionRecord.goalID,
                         title: sectionRecord.title,
                         summary: sectionRecord.summaryText,
-                        kind: PlanSectionKind(rawValue: sectionRecord.kindRaw) ?? .overview,
+                        kind: RepositoryMapping.persisted(
+                            PlanSectionKind.self,
+                            rawValue: sectionRecord.kindRaw,
+                            fallback: .overview,
+                            storedTypeName: "PlanSectionRecord",
+                            fieldName: "kindRaw"
+                        ),
                         orderIndex: sectionRecord.orderIndex,
                         steps: steps
                     )

@@ -9,26 +9,27 @@ Status: Active
 ## Current Closeout
 
 Result: Green
-Batch: PK08 Migration Plan Scaffold
+Batch: PK09 Unknown Persisted Value Degradation
 Commit: pending
-Files changed: migration plan scaffold contract, focused migration scaffold
-tests, PK08 audit report, queue/state docs, and PK closeout docs.
-Behavior changed: no runtime behavior changed. PK08 adds an inert local
-migration planning scaffold over the PK07 storage version ledger. It can
-describe no-change, version-change, added-type, and removed-type migration
-plans, but all mutation entries require explicit future safety gates and
-migration execution remains blocked.
+Files changed: persisted value degradation contract, repository raw-value
+fallback routing, focused persistence tests, PK09 audit report, queue/state
+docs, and PK closeout docs.
+Behavior changed: no UI/runtime product behavior changed. PK09 adds a
+persistence-local degradation contract for unknown persisted raw values and
+routes repository fallback mapping through deterministic fallback or optional
+nil fallback metadata. It does not execute migrations.
 Tests run: `xcodegen generate`; focused `xcodebuild test -project
 Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17'
--only-testing:AmbitionsTests/StorageMigrationPlanScaffoldTests` (4 tests,
-0 failures). Closeout scripts run after this state update.
+-only-testing:AmbitionsTests/PersistedValueDegradationTests` plus focused
+`PersistenceRepositoryTests` selection (7 tests, 0 failures). Closeout scripts
+run after this state update.
 Tests not run: full unit/UI suite, package split build proof, physical-device
 proof, signed archive proof, hosted CI, simulator visual proof, public
 accessibility proof, migration/import/export proof, or performance-budget
 proof.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
-Yellows carried: PK09-PK41 remain active planned scope; unknown persisted value
-degradation, invariant checking, backup/rollback, side-effect isolation, sync readiness, intelligence quarantine,
+Yellows carried: PK10-PK41 remain active planned scope; storage invariant
+checking, backup/rollback, side-effect isolation, sync readiness, intelligence quarantine,
 package split safety, and performance budgets are not fully
 PK-proven yet. PK02 scanner output remains
 Yellow for `Native/Ambitions/Domain/AppSession.swift` importing SwiftUI and is
@@ -37,17 +38,18 @@ manual accessibility proof, device proof, signed archive proof, hosted CI, and
 release readiness remain Yellow/unproven. GQ01 is normalized as accepted
 Yellow for historical-doc prune breadth and scan noise.
 The pre-sync stash remains preserved and unapplied.
-Rollback path: revert the PK07 implementation/status commit.
+Rollback path: revert the PK09 implementation/status commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
 PK03 UnitOfWork foundation evidence is recorded; PK04 atomic goal-creation
 evidence is recorded; PK05 atomic clarification/materialization evidence is
 recorded; PK06 atomic Capture promotion evidence is recorded; PK07 storage
 schema version ledger evidence is recorded; PK08 migration plan scaffold
-evidence is recorded.
+evidence is recorded; PK09 unknown persisted value degradation evidence is
+recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: PK09 Unknown Persisted Value Degradation.
+Next eligible batch: PK10 Storage Invariant Checker.
 
 ## Completed
 
@@ -62,8 +64,9 @@ Next eligible batch: PK09 Unknown Persisted Value Degradation.
 - PK06 Atomic Capture Promotion is complete / Green.
 - PK07 Storage Schema Version Ledger is complete / Green.
 - PK08 Migration Plan Scaffold is complete / Green.
-- PK09 Unknown Persisted Value Degradation is next eligible.
-- PK09-PK41 remain queued active planned Platform Kernel scope.
+- PK09 Unknown Persisted Value Degradation is complete / Green.
+- PK10 Storage Invariant Checker is next eligible.
+- PK10-PK41 remain queued active planned Platform Kernel scope.
 
 ## Parked Yellows
 
