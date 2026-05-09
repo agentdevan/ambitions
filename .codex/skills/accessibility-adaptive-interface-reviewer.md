@@ -30,14 +30,18 @@ manual-proof limitations.
 - Motion has a reduced-motion equivalent.
 - Privacy-sensitive states avoid accidental exposure.
 - Recovery language remains calm and non-shaming.
+- Touch targets remain at least 44pt, with 48pt preferred for primary actions.
+- Cognitive load is reviewed as an accessibility issue, not only a taste issue.
 
 ## Green / Yellow / Red Criteria
 
 - Green: relevant adaptive states are covered by source, preview, test, or
   documented manual-limitation evidence.
 - Yellow: human/manual proof pending but no active claim or blocker.
-- Red: inaccessible primary action, missing labels, color-only meaning, no
-  Reduce Motion equivalent for meaningful motion, or public proof overclaim.
+- Red: inaccessible primary action, missing labels, color-only meaning, collapsed
+  Dynamic Type primary object, missing touch-target evidence, no Reduce Motion
+  equivalent for meaningful motion, missing cognitive-load evidence for touched
+  UI, or public proof overclaim.
 
 ## Forbidden Approvals
 

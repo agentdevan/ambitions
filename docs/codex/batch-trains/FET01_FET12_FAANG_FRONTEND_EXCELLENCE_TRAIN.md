@@ -18,18 +18,18 @@ FET01-FET12 must run before any further visible top-level UI expansion. Future F
 
 | Batch | Title | Type | Purpose | Stop rule |
 | --- | --- | --- | --- | --- |
-| FET01 | Frontend Operating System Source Truth | docs/governance | Reconcile FET with AFI/FCP/FVQ/SI/PD/PFC/AOS/LDI source truth and remove ambiguity about UI-touching gates. | Stop on source-truth conflict affecting active IA, route compatibility, or release claims. |
-| FET02 | Screenshot Evidence Packet Standard | docs/tooling | Define screenshot naming, freshness, simulator metadata, preview fallback, evidence directory layout, and non-claims. | Stop if the standard implies human/device/release proof. |
-| FET03 | First Viewport Budget Protocol | docs/tooling | Formalize primary-object, chip, copy-line, hero-depth, and nested-content budgets. | Stop if budget weakens current FET Red conditions. |
-| FET04 | Bottom Chrome Ownership Protocol | docs/tooling | Lock native tab bar, custom rail, FAB, toolbar, receipt overlay, and bottom safe-area rules. | Stop on route/raw-value or shell behavior implementation without approval. |
-| FET05 | Primitive Identity And Anti-Card-Stack Protocol | docs/tooling | Map signature objects to allowed anatomy and reject generic rounded-card drift. | Stop if it invents new product IA or weakens SI. |
-| FET06 | Copy Compression And Product Language Protocol | docs/tooling | Lock root copy budgets, user-value language, internal-architecture suppression, and AI-theater bans. | Stop on product strategy rewrite or release overclaim. |
-| FET07 | Accessibility Evidence Packet Upgrade | docs/tooling | Require Dynamic Type, VoiceOver, touch target, contrast, non-color, Reduce Motion, and cognitive-load evidence beyond identifiers. | Stop if public accessibility approval is claimed. |
-| FET08 | SwiftUI Composition And Maintainability Protocol | docs/tooling | Require state matrices, previewable components, owner-file budgets, extraction triggers, and no giant view accumulation. | Stop if production Swift changes are attempted. |
-| FET09 | Surface Distinction Rubric | docs/governance | Define how Today, Goals, Capture, Time, and You must differ at first glance without changing route/raw values. | Stop if it changes active top-level IA. |
-| FET10 | Visual QA Reviewer Packet Automation | tooling | Harden read-only scanners and report templates for FET evidence packets. | Stop if scripts mutate source, require network, signing, hosted CI, or secrets. |
-| FET11 | Interface Recovery Batch Plan | docs/planning | Create IR repair sequencing for current UI debt without claiming fixes. | Stop if it implements app UI or claims current UI is approved. |
-| FET12 | Frontend Excellence Handoff And Continuation Gate | docs/handoff | Close the train with inherited gate map, unresolved Yellow owners, rollback paths, and next eligible batch selection. | Stop on unclassified Red or unsafe dirty state. |
+| FET01 | Frontend Operating System Source Truth | docs/governance | Reconcile FET with AFI/FCP/FVQ/SI/PD/PFC/AOS/LDI source truth and explain the difference between feature completion and frontend composition completion. | Stop on source-truth conflict affecting active IA, route compatibility, or release claims. |
+| FET02 | Screenshot Evidence Pipeline | docs/tooling | Define screenshot location, naming, baseline/after packets, dark mode, Dynamic Type, Reduce Motion, what counts as visual proof, and what does not. | Stop if the standard implies human/device/release proof. |
+| FET03 | First Viewport Budget Gate | docs/tooling | Formalize one-primary-object, support-object, chip, copy-line, floating-control, bottom-nav, nested-content, and architecture-copy budgets. | Stop if budget weakens current FET Red conditions. |
+| FET04 | Shell / Bottom Chrome Ownership Gate | docs/tooling | Lock native tab bar, custom rail, FAB, toolbar, receipt overlay, header, and bottom safe-area ownership rules. | Stop on route/raw-value or shell behavior implementation without approval. |
+| FET05 | Top-Level Surface Composition Gate | docs/governance | Define the one-thesis composition gate for Today, Goals, Capture, Time, and You. | Stop if it changes active top-level IA. |
+| FET06 | Primitive Misuse And Density Gate | docs/tooling | Map signature objects to constrained anatomy and reject generic rounded-card, chip-grid, nested-panel, and unlimited-content drift. | Stop if it invents new product IA or weakens SI. |
+| FET07 | Copy Compression And Product-Language Gate | docs/tooling | Lock root copy budgets, user-value language, internal-architecture suppression, and AI-theater bans. | Stop on product strategy rewrite or release overclaim. |
+| FET08 | Accessibility / Dynamic Type / Reduce Motion Gate | docs/tooling | Require Dynamic Type, VoiceOver, touch target, contrast, non-color, Reduce Motion, and cognitive-load evidence beyond identifiers. | Stop if public accessibility approval is claimed. |
+| FET09 | Motion / Haptics / Interaction Believability Gate | docs/governance | Require motion and haptics to orient, confirm, or reduce uncertainty with Reduce Motion equivalents. | Stop if it approves decorative/gimmicky motion or device proof without evidence. |
+| FET10 | Visual QA Scorecard And Review Packet | docs/tooling | Harden the 1-100 scorecard, review packet, screenshot reviewer, and readiness gate. | Stop if scripts mutate source, require network, signing, hosted CI, or secrets. |
+| FET11 | UI Regression Stop Protocol | docs/planning | Define when visual regressions stop continuation, enter repair loops, and block build-passed overrides. | Stop if it implements app UI or claims current UI is approved. |
+| FET12 | Resume Global Train With Frontend Council Enforcement | docs/handoff | Close the train with inherited gate map, unresolved Yellow owners, rollback paths, and next eligible implementation prompt. | Stop on unclassified Red or unsafe dirty state. |
 
 ## Required Validation Baseline
 
@@ -49,3 +49,7 @@ scripts/fet-visual-qa-packet-check.sh || true
 ## Non-Claims
 
 This train does not implement or fix current app UI by itself. It does not approve current visual quality, accessibility, device behavior, App Store screenshots, TestFlight, release readiness, legal/privacy readiness, or human visual approval.
+
+## Completion Note
+
+FET01-FET12 may be marked complete only when the per-batch reports and final train report exist, the FET scripts validate as present/executable, global gate docs inherit FET, and no unsupported UI repair or release/readiness claim is introduced.

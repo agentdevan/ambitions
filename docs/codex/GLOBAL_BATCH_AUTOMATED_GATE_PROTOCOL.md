@@ -91,6 +91,7 @@ Hard frontend Red conditions:
 - UI batch has no simulator screenshots or preview evidence.
 - Build passes but no visual evidence exists.
 - First viewport has more than one primary object.
+- First viewport has more than two support objects.
 - Native tab bar, custom tab rail, floating global action, or toolbar affordances compete visually.
 - Hero/primary surface contains unlimited nested content or generic panel stacking.
 - More than four chips appear above the fold.
@@ -102,6 +103,8 @@ Hard frontend Red conditions:
 - Top-level Today / Goals / Capture / Time / You surfaces look visually interchangeable.
 - A primitive intended as a signature object becomes a generic rounded card.
 - Build/test success is used as substitute for visual proof.
+
+FET01-FET12 adds the concrete operating gates for screenshot packet structure, first-viewport budget, shell/bottom chrome ownership, top-level surface composition, primitive density roles, copy compression, accessibility/Dynamic Type/Reduce Motion evidence, motion/haptics believability, visual QA scorecards, and UI regression stops. Future UI-touching batches must cite the relevant FET gate docs in their dry-run and report.
 
 Frontend scorecard categories are first-glance clarity, native iPhone believability, visual hierarchy, surface originality, restraint, emotional tone, accessibility resilience, motion/interaction believability, product-language quality, system coherence, maintainability, and screenshot evidence quality. Score each 1-100. Green requires average >= 90, no category below 85, and no Red in accessibility, screenshot evidence, bottom chrome ownership, first viewport composition, route compatibility, or release-claim safety. Yellow is average 80-89 with no hard Red and a named owner. Red is average below 80, any hard Red, missing screenshots for UI-touching work, or build/test success used as substitute for visual proof.
 

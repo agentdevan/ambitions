@@ -11,6 +11,8 @@ Use this skill to verify that UI-touching batches have fresh rendered evidence a
 - device/simulator or preview context
 - touched surface list
 - limitations and non-claims
+- first-viewport budget table for touched root surfaces
+- frontend scorecard when UI is touched
 
 ## Green Criteria
 
@@ -22,7 +24,7 @@ Docs-only or tooling-only batch has no rendered UI claim, or a nonblocking scree
 
 ## Red Criteria
 
-UI-touching work has no screenshot/preview evidence, screenshots are stale/unattributed, or the report substitutes compile/tests/docs for visual proof.
+UI-touching work has no screenshot/preview evidence, screenshots are stale/unattributed, evidence is not mapped to changed surfaces, scorecard is missing, or the report substitutes compile/tests/docs for visual proof.
 
 ## Output
 

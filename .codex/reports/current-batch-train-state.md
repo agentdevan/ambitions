@@ -1,9 +1,24 @@
 # Current Batch Train State
 
-Date: 2026-05-08
+Date: 2026-05-09
 Active train: Global full-stack execution
-Current batch: PK13 Restore Rollback / Green.
-Next eligible batch: PK14 Durable Command/Event Ledger
+Current batch: FET01-FET12 FAANG Frontend Excellence Train / Green.
+Next recommended implementation pass: IR-01 Big Frontend Recovery Implementation before further visible top-level feature expansion.
+Next eligible non-UI platform batch remains: PK14 Durable Command/Event Ledger after the frontend recovery stop/Yellow owner is resolved.
+Scope: FET01-FET12 added Codex OS/frontend quality-system gates only. It did not implement live UI recovery, mutate app UI behavior, change route/raw values, persistence/schema, signing, workflows, dependencies, generated project files, or claim release/readiness/accessibility/device/legal proof.
+
+## FET01-FET12 FAANG Frontend Excellence Train Closeout
+
+- Final report: `docs/audits/fet01-fet12-faang-frontend-excellence-train-report.md`.
+- Gate docs added: screenshot evidence, first viewport budget, shell/bottom chrome ownership, top-level surface composition, primitive misuse/density, copy compression, accessibility/Dynamic Type/Reduce Motion, motion/haptics, visual QA scorecard, and UI regression stop protocol.
+- Script hardening: `scripts/fet-readiness-gate.sh`, `scripts/fet-first-viewport-budget-scan.sh`, `scripts/fet-bottom-chrome-conflict-scan.sh`, `scripts/fet-primitive-density-scan.sh`, `scripts/fet-copy-density-scan.sh`, and `scripts/fet-visual-qa-packet-check.sh`.
+- Reviewer skills hardened for first viewport, screenshot QA, primitive density, copy compression, accessibility, and interaction/motion/haptics.
+- Future FCP, AFI, DAV, PD, SI, FVQ, AOS UI, LDI UI, Source Atlas UI, and PFC external-surface UI batches inherit FET gates.
+- Big Frontend Recovery / IR-01 is the next recommended implementation pass before visible top-level feature expansion resumes.
+- Current live UI is not claimed fixed.
+
+## PK13 Restore Rollback Previous Closeout
+
 Scope: PK13 adds a storage-local portable restore rollback wrapper that preflights incoming and rollback packages, attempts import, and restores the rollback package if import throws. It does not claim arbitrary migration safety, data-loss-proof behavior, sync readiness, or release readiness. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.

@@ -12,6 +12,14 @@ This operating system prevents a known Ambitions failure mode: SwiftUI builds, f
 
 FET does not claim the current UI is fixed. It is a Codex OS gate layer for future frontend work. It changes no app behavior, route/raw values, persistence/schema, workflows, signing, dependencies, or release posture.
 
+## FET01 Train Upgrade
+
+FET01-FET12 turns the FET00 foundation into an enforceable frontend operating system. The train records the failure pattern plainly: Codex previously treated feature completion, source-truth naming, build success, route reachability, and accessibility identifiers as enough to close UI batches. That allowed Ambitions to accumulate interface inventory instead of interface judgment.
+
+Feature completion means the intended state, route, control, or capability exists. Frontend composition completion means the rendered first viewport proves the user can understand the primary object, next action, hierarchy, native iPhone behavior, accessibility posture, and product tone without reading architecture prose or trusting a build log.
+
+Deletion, collapse, hiding detail behind drill-downs, constraining primitive slots, and shortening copy are valid implementation work. Codex must not render canon literally as UI inventory. Canon names define product intelligence and QA targets; the app must show the experience, not every scaffold.
+
 ## Source Truth
 
 FET inherits these sources:
@@ -42,13 +50,31 @@ Docs-only batches invoke FET when they define future visible UI gates or make fr
 
 Future UI batches must act like a senior product engineering room, not a generic executor:
 
-- Product/design lead owns first-glance user value, emotional tone, native believability, and restraint.
-- Senior SwiftUI systems engineer owns composition, state, file boundaries, previews, accessibility, and maintainability.
-- Visual QA reviewer owns fresh simulator screenshots or preview evidence and blocks build-only closeout.
+- Frontend Implementation Lead owns batch classification, lifecycle, scorecard, Red repair loop, and final Green/Yellow/Red truth.
+- iOS Product Design Director owns first-glance user value, emotional tone, native believability, restraint, and surface distinction.
+- SwiftUI Senior Systems Engineer owns composition, state, file boundaries, previews, accessibility implementation, route compatibility, and maintainability.
+- Accessibility Lead owns Dynamic Type, VoiceOver, tap target, contrast, no color-only meaning, and cognitive-load evidence.
+- Motion / Haptics Lead owns meaningful motion, native haptic purpose, object continuity, and Reduce Motion equivalents.
+- Visual QA Lead owns fresh simulator screenshot, preview screenshot, or rendered visual evidence and blocks build-only closeout.
+- Release Gatekeeper owns quality-claim and release-claim safety, including no premium/flagship/FAANG/Apple-level/10/10 claim without screenshot evidence and scoring.
 - Copy reviewer owns compression, user-value language, and removal of internal architecture explanations.
 - Chrome/navigation reviewer owns tab bar, toolbar, floating action, receipt overlay, and bottom-safe-area ownership.
 
 Required reviewer skills are named in `FRONTEND_EXCELLENCE_GATE_MATRIX.md`.
+
+## UI Batch Lifecycle
+
+Every future UI-touching batch must run this lifecycle:
+
+1. Source truth: read the current canon/status/gate docs and name conflicts before edits.
+2. Composition plan: declare primary object, support objects, first-viewport budget, bottom chrome owner, accessibility/motion evidence, screenshots required, allowed files, and forbidden files.
+3. Implementation: build, delete, collapse, constrain, and compose within the selected owner files.
+4. Screenshot evidence: capture simulator screenshots, preview screenshots, or rendered preview evidence mapped to touched surfaces.
+5. Scorecard: score the 12 FET categories strictly and identify hard Reds before closeout.
+6. Red repair loop: repair ordinary Reds, re-run focused validation, and re-score.
+7. Final report: record changed files, evidence paths, non-claims, Yellow owners, rollback path, and the next safe prompt.
+
+No UI-touching batch may close Green without visual evidence. Build/test success can support but cannot replace rendered proof.
 
 ## Non-Negotiable Frontend Rules
 
@@ -69,6 +95,7 @@ Any of these is Red for a UI-touching batch:
 - UI batch has no simulator screenshots or preview evidence.
 - Build passes but no visual evidence exists.
 - First viewport has more than one primary object.
+- First viewport has more than two support objects.
 - Native tab bar, custom tab rail, floating global action, or toolbar affordances compete visually.
 - Hero/primary surface contains unlimited nested content or generic panel stacking.
 - More than four chips appear above the fold.

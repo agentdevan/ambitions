@@ -142,6 +142,16 @@ work before later cross-train tails that depend on those proofs.
      UI-touching batches cannot close Green from build/test proof alone. It
      does not implement app UI, change routes/raw values, persistence/schema,
      workflows, signing, dependencies, or release claims.
+11B. FET01-FET12 FAANG Frontend Excellence Train. Completed Green on
+     2026-05-09 as Codex OS/frontend quality-system source truth. It adds
+     screenshot evidence, first-viewport budget, bottom chrome, top-level
+     surface composition, primitive density, copy compression, accessibility,
+     motion, scorecard, UI regression stop, and global-train enforcement
+     gates. It does not implement live UI recovery, change app behavior,
+     routes/raw values, persistence/schema, workflows, signing, dependencies,
+     generated project files, or release/readiness claims. Big Frontend
+     Recovery / IR-01 is the next recommended UI implementation pass before
+     further visible top-level feature expansion.
 12. PD18 Product Depth Handoff And Next-Lane Readiness. Completed Green as
     docs-only Product Depth closeout and next-lane readiness on 2026-05-05.
 
@@ -1144,20 +1154,20 @@ remaining sensitive intelligence work.
 
 ### Phase 8.5 — Frontend Excellence Before Further Visible Top-Level UI Expansion
 
-113A. FET01 Frontend Operating System Source Truth.
-113B. FET02 Screenshot Evidence Packet Standard.
-113C. FET03 First Viewport Budget Protocol.
-113D. FET04 Bottom Chrome Ownership Protocol.
-113E. FET05 Primitive Identity And Anti-Card-Stack Protocol.
-113F. FET06 Copy Compression And Product Language Protocol.
-113G. FET07 Accessibility Evidence Packet Upgrade.
-113H. FET08 SwiftUI Composition And Maintainability Protocol.
-113I. FET09 Surface Distinction Rubric.
-113J. FET10 Visual QA Reviewer Packet Automation.
-113K. FET11 Interface Recovery Batch Plan.
-113L. FET12 Frontend Excellence Handoff And Continuation Gate.
+113A. FET01 Frontend Operating System Source Truth. Complete Green as Codex OS source truth; no app UI repair claimed.
+113B. FET02 Screenshot Evidence Pipeline. Complete Green as screenshot packet standard and visual QA packet check hardening; no screenshots captured.
+113C. FET03 First Viewport Budget Gate. Complete Green as first-viewport source truth and static scan hardening.
+113D. FET04 Shell / Bottom Chrome Ownership Gate. Complete Green as shell/chrome ownership source truth and static scan hardening.
+113E. FET05 Top-Level Surface Composition Gate. Complete Green as one-thesis-per-tab source truth.
+113F. FET06 Primitive Misuse And Density Gate. Complete Green as primitive density-role source truth and static scan hardening.
+113G. FET07 Copy Compression And Product-Language Gate. Complete Green as root-copy compression source truth and static scan hardening.
+113H. FET08 Accessibility / Dynamic Type / Reduce Motion Gate. Complete Green as accessibility evidence source truth.
+113I. FET09 Motion / Haptics / Interaction Believability Gate. Complete Green as motion/haptics evidence source truth.
+113J. FET10 Visual QA Scorecard And Review Packet. Complete Green as 1-100 scorecard/review-packet source truth and readiness hardening.
+113K. FET11 UI Regression Stop Protocol. Complete Green as Red repair/continuation-stop source truth.
+113L. FET12 Resume Global Train With Frontend Council Enforcement. Complete Green as global integration truth.
 
-FET01-FET12 are inserted before any further visible top-level UI expansion. Future FCP, AFI, DAV, PD, SI, FVQ, AOS UI, LDI UI, Source Atlas UI, and PFC external-surface UI work inherits FET gates immediately. This insertion preserves completed history and does not replay completed batches.
+FET01-FET12 are complete and apply before any further visible top-level UI expansion. Future FCP, AFI, DAV, PD, SI, FVQ, AOS UI, LDI UI, Source Atlas UI, and PFC external-surface UI work inherits FET gates immediately. This insertion preserves completed history and does not replay completed batches. Big Frontend Recovery / IR-01 is the next recommended implementation pass before visible feature expansion resumes.
 
 ### Phase 9 — Integration / QA / Performance / External Proof
 

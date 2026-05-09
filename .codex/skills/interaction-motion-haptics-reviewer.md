@@ -29,13 +29,16 @@ equivalent, preview/video/screenshot status, and tests where available.
 - Reduced Motion has a meaningful non-motion equivalent.
 - Motion does not hide state changes or increase cognitive load.
 - Timing is restrained and native-feeling.
+- Celestial motion is orientation or continuity only, never spectacle.
+- Haptics are optional and never used as reward loops.
 
 ## Green / Yellow / Red Criteria
 
 - Green: purpose, fallback, accessibility, and evidence are documented.
 - Yellow: optional polish evidence missing but fallback and behavior are safe.
-- Red: decorative/gamified motion, missing Reduce Motion equivalent, inaccessible
-  transition, or fake human/device proof.
+- Red: decorative/gamified motion, fake AI glow, gimmicky celestial animation,
+  missing Reduce Motion equivalent, inaccessible transition, haptic reward loop,
+  or fake human/device proof.
 
 ## Forbidden Approvals
 
