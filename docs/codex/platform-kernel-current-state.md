@@ -59,7 +59,10 @@ Date: 2026-05-08
 - PK10 Storage Invariant Checker is complete / Green as a read-only SwiftData
   invariant checker for broken references, malformed payloads/snapshots, and
   unknown raw values before backup/import/restore work.
-- PK11 Pre-Migration Backup is the next eligible global batch. PK11-PK41
+- PK11 Pre-Migration Backup is complete / Green as a local backup gate that
+  prepares an inspectable portable snapshot package and typed receipt before
+  later dry-run/restore work while keeping migration execution blocked.
+- PK12 Staged Portable Import Dry Run is the next eligible global batch. PK12-PK41
   remain active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
@@ -85,8 +88,8 @@ proof.
 - Storage schema version ledger coverage is PK-proven by PK07. Migration plan
   mutation gate scaffolding and execution blocking are PK-proven by PK08.
   Unknown persisted value degradation is PK-proven by PK09. Storage invariant
-  checking is PK-proven by PK10. Pre-migration backup, import dry run, and
-  restore rollback are not yet PK-proven.
+  checking is PK-proven by PK10. Pre-migration backup is PK-proven by PK11.
+  Import dry run and restore rollback are not yet PK-proven.
 - Side effects are present in platform-adjacent paths, but SideEffectLedger
   isolation is not yet PK-proven.
 - Sync-readiness primitives, conflict policy, and manual portable merge are not
@@ -96,4 +99,4 @@ proof.
 
 ## Next Eligible
 
-PK11 Pre-Migration Backup.
+PK12 Staged Portable Import Dry Run.

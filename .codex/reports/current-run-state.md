@@ -2,13 +2,21 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK10 Storage Invariant Checker / Green.
-Next eligible batch: PK11 Pre-Migration Backup
-Scope: PK10 adds a read-only SwiftData storage invariant checker for broken references, malformed encoded payloads/snapshots, and unknown raw values before backup/import/restore work. It does not mutate storage, run migrations, or claim migration/data-loss safety. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
+Current batch: PK11 Pre-Migration Backup / Green.
+Next eligible batch: PK12 Staged Portable Import Dry Run
+Scope: PK11 adds a local pre-migration backup gate that prepares an inspectable portable snapshot package, typed backup receipt, invariant check, and migration-plan validation before later dry-run/restore work. It does not execute migrations, restore data, or claim migration/data-loss safety. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+
+## PK11 Pre-Migration Backup Closeout
+
+- PK11 report: `docs/audits/pk11-pre-migration-backup-report.md`.
+- Pre-migration backup contract: `Native/Ambitions/Persistence/PreMigrationBackup.swift`.
+- Focused proof: `PreMigrationBackupTests` passed for creating a backup receipt without authorizing migration execution, blocking invariant-report blockers, and blocking malformed mutation plans/empty packages, 3 tests, 0 failures.
+- Canonical queue now marks PK11 complete/do-not-run and PK12 executable now.
+- No migration runner, migration execution, destructive storage action, restore rollback, durable import dry run, schema mutation, UI behavior change, sync/cloud behavior, release/readiness, migration-safe, or data-loss-proof claim is made.
 
 ## PK10 Storage Invariant Checker Closeout
 
