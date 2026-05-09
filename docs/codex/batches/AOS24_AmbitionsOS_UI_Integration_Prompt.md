@@ -7,8 +7,8 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS24`
 - Name: AmbitionsOS UI Integration
 - Owning kernel: Experience Kernel / Control Plane
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
-- Affected surface: Today, Goals, Capture, Plan, You
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
+- Affected surface: Today, Goals, Capture, Time, You
 - Dependency gate: depends on AOS18-AOS23
 - Implementation boundary: UI integration only after contracts and fixtures prove safe; no new top-level tab
 

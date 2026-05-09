@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS29`
 - Name: AmbitionsOS Repair Train
 - Owning kernel: Governance Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: repair scope only
 - Dependency gate: runs only after failed/Yellow AOS gates are classified
 - Implementation boundary: classified repair only after Yellow/failed AOS gates

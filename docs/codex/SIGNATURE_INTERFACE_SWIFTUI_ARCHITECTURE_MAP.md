@@ -29,7 +29,7 @@ This map translates PXOS experience intent into bounded SwiftUI owner families f
 
 PXOS owns the intended experience. SI owns reusable native SwiftUI expression. ME protects file ownership. CS protects route/raw/external/import/export/persistence compatibility. PD composes SI primitives into drill-down depth after SI handoff. AOS may expose intelligence through SI only after source-truth, privacy, fallback, and trust gates.
 
-The locked top-level surfaces remain `Today / Goals / Capture / Plan / You`. SI must deepen these surfaces with rails, lanes, maps, composers, receipts, grouped navigation, and detail routes; it must not widen the product into new tabs, dashboards, inboxes, notes, habit modes, or AI wrapper surfaces.
+The locked top-level surfaces remain `Today / Goals / Capture / Time / You`. SI must deepen these surfaces with rails, lanes, maps, composers, receipts, grouped navigation, and detail routes; it must not widen the product into new tabs, dashboards, inboxes, notes, habit modes, or AI wrapper surfaces.
 
 ## SwiftUI Owner Families
 

@@ -71,7 +71,7 @@ an owner, safety reason, no-claim boundary, and next review condition.
 | PK18 | Today Command Handler Extraction | Service decomposition | Separates Today commands after read model. |
 | PK19 | Goals Query/Projector Extraction | Service decomposition | Separates Goals query/projection after Today boundary. |
 | PK20 | Capture Service Extraction | Service decomposition | Extracts Capture behind atomic promotion rules. |
-| PK21 | Plan Service Extraction | Service decomposition | Extracts Plan after command/read boundaries exist. |
+| PK21 | Time Service Extraction | Service decomposition | Extracts the Time surface service after command/read boundaries exist while preserving existing Plan compatibility seams until a scoped migration proves safe. |
 | PK22 | SideEffectLedger Foundation | Side effects | Creates side-effect isolation before platform outputs. |
 | PK23 | Notifications Through SideEffectLedger | Side effects | Routes notification effects through ledger. |
 | PK24 | EventKit Through SideEffectLedger | Side effects | Routes calendar/reminder effects through ledger. |
@@ -101,6 +101,65 @@ the narrowest safe focused build/test lane. Storage, migration, backup, restore,
 sync-readiness, side-effect, privacy, and diagnostic batches must record
 explicit Green/Yellow/Red data-safety classification.
 
+## AIR Fold-In Inheritance
+
+AIR Ambitions Intelligence Runtime is a planned fold-in overlay, not a new PK
+train. The following future PK owners inherit AIR proof obligations where their
+scope touches the named invention families:
+
+- PK06: residual AIR01/AIR03/AIR04/AIR11/AIR16/AIR27/AIR28 capture promotion,
+  correction, no-chat, and materialization inheritance, already closed by
+  current repo evidence for PK06's focused atomic Capture promotion seam.
+- PK14: AIR04/AIR30/AIR33 durable event and recommendation-outcome ledger
+  inheritance.
+- PK15: AIR06/AIR10/AIR18/AIR19/AIR30/AIR33 receipt backend inheritance.
+- PK16: AIR04/AIR10/AIR18/AIR33 trust-history query inheritance.
+- PK21 Time Service Extraction: AIR09/AIR37/AIR38 Time intelligence,
+  read-only simulation, and counterfactual planning inheritance.
+- PK26: AIR41/AIR47 privacy classification and sensitive-area inheritance.
+- PK28: AIR06/AIR11/AIR17/AIR28/AIR33/AIR47 data-control and user-owned rule
+  inheritance.
+- PK32: AIR14/AIR23/AIR25/AIR45/AIR50 knowledge-claim and model-independence
+  boundary inheritance.
+- PK33: AIR08/AIR20/AIR24/AIR29/AIR30/AIR31/AIR34/AIR35/AIR36/AIR37/AIR38/
+  AIR39/AIR42 recommendation evidence inheritance.
+- PK34: AIR14/AIR25/AIR45/AIR50 intelligence quarantine inheritance.
+- PK36: AIR15/AIR44/AIR46 capability, performance, and optional local model
+  candidate lab inheritance. AIR46 remains evaluation-only and must not bundle,
+  download, invoke, or require models.
+
+Each inheriting PK closeout must state AIR applicability, exact AIR numbers,
+deterministic fallback or blocked state, review/receipt/correction posture,
+privacy/source gates, no-chat/no-hosted-AI/no-message-drafting check, and
+claim boundary.
+
+## Surface Encapsulation And Signature Language Inheritance
+
+Surface encapsulation is planned canon/governance, not runtime proof. Future PK
+owners must preserve deep-not-wide surface homes across Today, Goals, Capture,
+Time, and You.
+
+- PK06 Capture surface encapsulation must preserve Place, Needs a Place, Ready
+  to Place, Hold, Correction Fold, no chatbot, no message drafting, no hidden
+  learning, and receipt-backed correction. PK06 is Green only for the focused
+  atomic Capture promotion proof recorded in its report.
+- PK14 / PK15 / PK16 must preserve Receipt, Trust, Proof, Still Counts, and
+  Personal System Changes paths.
+- PK21 Time Service Extraction must preserve LifeShape Consequence Preview,
+  Shape Time, This week can hold, and no calendar clone.
+- PK26 / PK28 must preserve Personal Data Dignity, Sensitive Areas, Assumption
+  Ledger, and user controls.
+- PK32 / PK33 / PK34 must preserve Why This?, Start Here Receipt, Hold, Source
+  Needed, Intelligence Quarantine as user-facing Held state, and no
+  best-local-AI claims.
+- PK36 must preserve local capability/degraded-state language without hardware
+  overclaim.
+
+Every inheriting PK closeout must record surface encapsulation applicability,
+affected surface, signature language, receipt path, correction path,
+privacy/source/trust path, degraded state, no-chat/no-dashboard/no-hidden-
+learning check, Plan-to-Time check, and no-claim boundary.
+
 ## Closeout Requirements
 
 Each PK batch closeout updates:
@@ -128,8 +187,8 @@ work, persisted-data evidence, migration findings, or human review notes.
 
 ## Global Integration
 
-PK00 is the next eligible backend/platform batch after this integration unless
-a dirty or half-complete active batch must be closed first. Remote sync,
+PK09 is the next eligible backend/platform batch after PK08 Green unless a
+dirty or half-complete active batch must be closed first. Remote sync,
 remote-intelligence, migration, package-split, and major platform feature work
-must wait for the relevant PK prerequisites, especially PK07-PK13, PK22-PK34,
+must wait for the relevant PK prerequisites, especially PK09-PK13, PK22-PK34,
 and PK38-PK41.

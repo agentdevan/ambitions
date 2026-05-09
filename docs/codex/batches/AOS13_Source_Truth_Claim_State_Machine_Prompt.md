@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS13`
 - Name: Source Truth Claim State Machine
 - Owning kernel: Source Truth Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: You, Goal Detail
 - Dependency gate: depends on AOS02-AOS04
 - Implementation boundary: claim states and source ledger only; no source certification

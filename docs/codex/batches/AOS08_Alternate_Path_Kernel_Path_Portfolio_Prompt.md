@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS08`
 - Name: Alternate Path Kernel Path Portfolio
 - Owning kernel: Alternate Path Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: Goal Detail
 - Dependency gate: depends on AOS05-AOS07
 - Implementation boundary: path portfolio contracts and receipts only

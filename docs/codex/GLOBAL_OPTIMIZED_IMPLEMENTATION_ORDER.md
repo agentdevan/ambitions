@@ -107,33 +107,69 @@ As of this order update:
   validation governs current proof.
 - DPTG00 is locked as a future terminal physical-device release-candidate proof
   gate, not an implementation batch. All pre-device gates must close before it.
-- AFI01-AFI16 Ambitions Flagship Interface is active current source truth and
-  the next eligible global lane unless a dirty or half-complete active batch
-  must close first. AFI supersedes older ACUI/Plan-era interface sequencing.
+- AFI01-AFI16 Ambitions Flagship Interface is complete / Accepted Yellow as
+  current source truth. AFI supersedes older ACUI/Plan-era interface sequencing.
 - PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
-  Baseline is complete. PK01-PK41 remain queued and may precede a later AFI,
-  PLR, AOS, or LDI batch only when registry evidence proves that specific PK
-  batch is a minimum safety prerequisite for the later work.
+  Baseline is complete. PK01-PK08 are complete. PK09 is the active next batch
+  because unknown persisted value degradation is a minimum safety prerequisite before
+  further storage, sync, intelligence, or broad cross-train tail work.
 - AOS24-AOS30 remain queued behind PK where they depend on platform/backend
   safety, side effects, diagnostics, sync readiness, intelligence quarantine,
   performance, or module extraction.
 - LDI15-LDI22 remain queued behind PK where they depend on platform/backend
   safety, storage/migration, sync readiness, intelligence quarantine, or
   mutation/receipt backend proof.
+- AIR01-AIR50 are active planned fold-in scope, not an independent train. AIR
+  inherits existing PK/AOS/LDI/AFI/HPS/Source Atlas/FVQ/claim-boundary owners
+  and must not authorize hosted AI, chatbot behavior, message drafting, hidden
+  learning, model runtime, new top-level navigation, or readiness claims.
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 - No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay, AFI
-  correction, or PK insertion package. AFI01 is next unless repo evidence shows
-  a dirty or half-complete active batch must close first.
+  correction, PK insertion package, AIR fold-in, or surface encapsulation
+  overlays. PK09 is next unless repo evidence shows a dirty or half-complete
+  active batch must close first.
+
+## 2026-05-08 Sequence Optimization After PK08
+
+After PK08 Green, the maximum-safe global order keeps dependency-critical
+Platform Kernel work first regardless of original train grouping:
+
+1. PK09-PK13: unknown persisted value degradation, invariant checks, backup,
+   portable import dry run, and restore rollback.
+2. PK14-PK16: durable events, receipt backend, and trust history query.
+3. PK17-PK21: Today, Goals, Capture, and Time service/read-model extraction.
+4. PK22-PK28: side-effect ledger, notifications, EventKit, external snapshots,
+   privacy classification, diagnostics, and data control commands.
+5. PK29-PK31: revision/tombstone, conflict policy, and manual portable merge.
+6. PK32-PK34: knowledge claim boundary, recommendation evidence, and
+   intelligence quarantine.
+7. PK35-PK41: scale, performance budgets, cache, and package/module moves.
+8. Source Atlas, LDI/AOS tails, FCP/FVQ/PFC/RHC tails resume only when their
+   required PK proof gates are Green or accepted Yellow in the registry.
+
+This does not create a new train, does not reorder completed history, and does
+not authorize release, sync, runtime intelligence, hosted AI, or readiness
+claims.
 
 ## Platform Kernel Insertion
 
 PK00-PK41 is now an active planned train, not optional brainstorming. PK00 is
-complete as a report-only baseline. PK01-PK41 precede further backend/platform,
-storage, sync, intelligence, performance, module-split, or major feature
+complete as a report-only baseline. PK01-PK08 are complete. PK09-PK41 precede
+further backend/platform, storage, sync, intelligence, performance, module-split, or major feature
 expansion work when that work depends on the corresponding PK proof. Existing
 PFC/AOS/LDI evidence is preserved and may be reconciled into PK batches, but no
-optional PK expansion may outrun AFI01-AFI16 unless the registry names it as a
-minimum prerequisite.
+cross-train tails may outrun the matching PK prerequisite unless the registry
+names that proof as unnecessary for the specific batch.
+
+AIR fold-in inheritance travels with the existing optimized order. It does not
+insert AIR rows or reorder the train.
+
+AmbitionsOS Surface Encapsulation & Signature Language inheritance also travels
+with the existing optimized order. It does not insert new rows, create a train,
+or reorder the queue. Future intelligence, source, proof, privacy,
+personalization, capture-placement, time-shaping, or Living Dream batches must
+name the five-surface home, receipt path, correction path, trust/source/privacy
+path, degraded state, and signature language before claiming Green.
 
 ## Selection Rule
 
@@ -272,7 +308,7 @@ Receipt Drawer / Trust Layer before any further FCP implementation.
 | 022 | FCP19 Placement Resolver / Correction Fold | FCP | Implementation | Completed Green on 2026-05-06 as bounded draft Resolver Fold evidence with what Ambitions thinks, why, user-owned correction choices, and a local correction-receipt seam before saving. | FCP18; PD10. | Complete; next FCP20. |
 | 023 | FCP20 Grow Into Goal Seed Incubator | FCP | Implementation | Completed Green on 2026-05-06 as bounded Goal Seed Incubator evidence across Capture and Create Goal review surfaces with explicit promotion confirmation. | FCP18-FCP19; PD11. | Complete; next FCP21. |
 | 024 | FCP21 Voice / Motor Capture Accessibility | FCP | Implementation | Completed Green on 2026-05-06 as bounded Capture composer input-alternatives evidence with honest voice-unavailable status, keyboard/system-dictation fallback wording, motor-safe button/menu alternatives, and review-before-save copy. | FCP18-FCP20; EB29/EB30 evidence. | Complete; next FCP14. |
-| 025 | FCP14 LifeShape Contour Map | FCP | Implementation | Completed Green on 2026-05-06 as bounded Plan LifeShape Contour Map implementation evidence with capacity contours, protected pockets, pressure fields, recovery pockets, milestone ridges, and commitment-load contours. | PD14; FCP17. | Complete; next FCP15. |
+| 025 | FCP14 LifeShape Contour Map | FCP | Implementation | Completed Green on 2026-05-06 as bounded Time LifeShape Contour Map implementation evidence with capacity contours, protected pockets, pressure fields, recovery pockets, milestone ridges, and commitment-load contours. | PD14; FCP17. | Complete; next FCP15. |
 | 026 | FCP15 Reflow Decision Fold | FCP | Implementation | Completed Green on 2026-05-06 as bounded Plan Reflow Decision Fold evidence with before/after shape preview, receipt preview, affected steps, capacity impact, protected-time impact, and accept/edit/decline controls. | FCP14; PD12. | Complete; next FCP16. |
 | 027 | FCP16 Pressure Field / Recovery Loop | FCP | Implementation | Completed Green on 2026-05-06 as bounded Plan / Today shared pressure and recovery object-language evidence with Pressure Field, Recovery Loop, Smaller Step Anchor, and Recovery Receipt Preview labels. | FCP13A; FCP14-FCP15; PD13. | Complete; next FCP10. |
 | 028 | FCP10 MissionControlTimeSpine | FCP | Implementation | Completed Green on 2026-05-06 as bounded Goal Detail MissionControlTimeSpine evidence that replaces the primary Mission Control grid with an inspectable spine. | FCP06; PD05-PD08. | Complete; next FCP11. |
@@ -355,7 +391,7 @@ This split avoids mixing Today closure behavior with Goals alternate-path polish
 2. Remaining PD depth closes the exact areas FCP depends on: You trust, Schedule/Availability, Cross-Surface Proof/Review, and handoff.
 3. Availability and Receipt foundations land before Start Here, because Start Here needs real time-fit and trust seams.
 4. Today flagship objects land before broad shell and motion polish.
-5. You, Capture, Plan, and Goals then mature around the shared trust/object language.
+5. You, Capture, Time, and Goals then mature around the shared trust/object language.
 6. Loading/degraded and status grammar harden after the major objects exist.
 7. AOS kernels then plug into stable product objects instead of forcing UI rework.
 8. LDI safety/runtime gates run before AOS UI integration exposes living-dream behavior.

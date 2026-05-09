@@ -324,7 +324,7 @@ Commands:
 Does not prove:
 
 - Goal Detail UI integration
-- Plan UI integration
+- Time UI integration
 - option-value runtime
 - North Star extraction runtime
 - proof transfer runtime
@@ -369,7 +369,7 @@ Does not prove:
 - persistence or schema
 - bounded reflow
 - recommendation runtime
-- Today or Plan UI integration
+- Today or Time UI integration
 - external projection
 - platform behavior
 - release/platform readiness
@@ -403,7 +403,7 @@ Commands:
 Does not prove:
 
 - Today UI integration
-- Plan UI integration
+- Time UI integration
 - reflow runtime
 - calendar writes
 - EventKit or Reminders implementation
@@ -852,7 +852,7 @@ Evidence date: 2026-05-07.
 
 Proof scope:
 
-- typed experience contract for Today, Goals, Capture, Plan, and You
+- typed experience contract for Today, Goals, Capture, Time, and You
 - canonical primary-object and top-level IA preservation gates
 - visible-section, primary-decision, wayfinding, density, and Today full-path
   depth checks

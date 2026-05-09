@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS21`
 - Name: Interoperability Kernel App Intents EventKit Planning
 - Owning kernel: Interoperability Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: external surfaces
 - Dependency gate: depends on AOS16, AOS17, and interoperability privacy gates
 - Implementation boundary: planning only; source verification required before platform implementation

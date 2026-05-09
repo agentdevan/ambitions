@@ -7,8 +7,8 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS19`
 - Name: Experience Kernel Celestial Cognitive Load
 - Owning kernel: Experience Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
-- Affected surface: Today, Goals, Capture, Plan, You
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
+- Affected surface: Today, Goals, Capture, Time, You
 - Dependency gate: depends on AOS18
 - Implementation boundary: experience language, cognitive load, and wayfinding contracts only
 

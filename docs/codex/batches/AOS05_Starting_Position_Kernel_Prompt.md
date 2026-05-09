@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS05`
 - Name: Starting Position Kernel
 - Owning kernel: Starting Position Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: Goals, You
 - Dependency gate: depends on AOS02-AOS04
 - Implementation boundary: baseline snapshot and starting-position projection only

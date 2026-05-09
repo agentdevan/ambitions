@@ -87,7 +87,7 @@ PXOS controls:
 Locked decisions live in `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`. The
 handoff-critical locks are:
 
-- top-level surfaces remain `Today / Goals / Capture / Plan / You`;
+- top-level surfaces remain `Today / Goals / Capture / Time / You`;
 - top-level surfaces are visual orientation surfaces, not stacked-card detail
   containers;
 - PXOS is future user-facing canon, not implementation;

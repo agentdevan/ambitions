@@ -7,8 +7,8 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS10`
 - Name: Commitment Time Kernel
 - Owning kernel: Commitment Time Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
-- Affected surface: Plan, Today
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
+- Affected surface: Time, Today
 - Dependency gate: depends on AOS02-AOS04
 - Implementation boundary: commitment model and capacity projection only; no platform calendar implementation
 

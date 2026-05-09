@@ -18,11 +18,16 @@ Capture → Clarify → Shape → Start → Close → Remember
 Ambitions does not simply manage tasks. Ambitions carries intention through a lifecycle:
 
 1. Capture what appears.
-2. Clarify where it belongs.
+2. Clarify where it belongs and place it when ready.
 3. Shape time around what matters.
 4. Start the step that fits now.
 5. Close the loop without shame.
 6. Remember what changed with trust and control.
+
+The lifecycle remains `Capture -> Clarify -> Shape -> Start -> Close -> Remember`.
+Implementation grammar may include `Place` and `Hold` as sub-stages inside
+Capture/Clarify so raw intent can be safely kept, reviewed, corrected, or
+placed without becoming chatbot behavior or hidden automation.
 
 ## Product Spine
 
@@ -78,6 +83,8 @@ Patterns:
 - What needs a place?
 - Saved safely
 - Needs a Place
+- Hold
+- Held for Review
 
 ### Clarify
 
@@ -88,9 +95,11 @@ Surfaces: Capture / Goals
 Patterns:
 
 - Ready to Place
+- Place
 - Grow into Goal
 - Life area
 - Goal thread
+- Correction Fold
 
 ### Shape
 
@@ -131,6 +140,7 @@ Surfaces: Today / Receipt Surface
 Patterns:
 
 - Still counts
+- Close Today
 - Moved
 - Not needed
 - Waiting
@@ -148,6 +158,8 @@ Patterns:
 
 - Trust & Automation
 - Receipts & History
+- Personal Runtime
+- Personal System Changes
 - Source
 - Why this?
 - Manual mode
@@ -174,6 +186,7 @@ This ladder must be visible in UI behavior, not just marketing copy.
 | Capture | Today | quick step can become Start Here candidate after placement |
 | Goals | Time | goal thread asks for capacity |
 | Goals | Today | thread feeds Recommended step |
+| Goals | You | Proof Transfer Fold records what still counts across a path change |
 | Time | Today | capacity informs what fits now |
 | Today | Time | pressure/reflow sends user to Shape Time |
 | Today | Goals | completed/closed step updates goal thread proof |

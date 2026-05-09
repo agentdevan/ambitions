@@ -8,7 +8,7 @@ Date: 2026-05-02
 ## Product Quality Requirements
 
 - Product intent is clear and source-bound.
-- Work preserves `Today / Goals / Capture / Plan / You`.
+- Work preserves `Today / Goals / Capture / Time / You`.
 - Ambitions remains a premium native life execution system.
 - Work advances the core loop: Capture, Place, Plan, Do Today, Close/Recover, Save Proof.
 - No new top-level destination is added.

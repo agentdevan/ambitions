@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS18`
 - Name: Evaluation Golden Scenarios
 - Owning kernel: Evaluation Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: test and fixture surfaces
 - Dependency gate: depends on AOS01-AOS17 contracts
 - Implementation boundary: golden scenarios, fixtures, and kernel contract tests only

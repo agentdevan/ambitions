@@ -327,6 +327,87 @@ final class CaptureServiceTests: XCTestCase {
         XCTAssertEqual(binding?.target.draftID, "draft-created")
     }
 
+    func testTurnCaptureIntoGoalPersistsGoalDraftAndCaptureThroughUnitOfWork() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goalsService = RepositoryBackedGoalsService(repositories: repositories)
+        let service = DefaultCaptureService(
+            repository: repositories.captures,
+            goalsService: goalsService,
+            goalCreationPreparer: goalsService,
+            capturePromotionUnitOfWork: repositories.capturePromotionUnitOfWork,
+            idProvider: { "capture-promotion" }
+        )
+
+        _ = try await service.createCapture(CreateCaptureRequest(rawText: "Launch my business"), now: fixedNow)
+        let binding = try await service.turnCaptureIntoGoal(
+            TurnCaptureIntoGoalRequest(captureID: "capture-promotion", mode: .project),
+            now: fixedNow.addingTimeInterval(60)
+        )
+
+        let promoted = try XCTUnwrap(binding)
+        let goalID = try XCTUnwrap(promoted.target.goalID)
+        let draftID = try XCTUnwrap(promoted.target.draftID)
+        let storedGoal = try await repositories.goals.goal(id: goalID)
+        let storedDraft = try await repositories.drafts.draft(id: draftID)
+        let storedCapture = try await repositories.captures.capture(id: "capture-promotion")
+
+        XCTAssertEqual(promoted.unitOfWorkReceipt?.writeScope, .localSwiftDataSingleContext)
+        XCTAssertEqual(promoted.unitOfWorkReceipt?.rollbackBehavior, AppUnitOfWorkReceipt.rollbackOnThrownError)
+        XCTAssertEqual(promoted.unitOfWorkReceipt?.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
+        XCTAssertEqual(promoted.unitOfWorkReceipt?.didCommitChanges, true)
+        XCTAssertEqual(storedGoal?.id, goalID)
+        XCTAssertEqual(storedDraft?.plannedGoalID, goalID)
+        XCTAssertEqual(storedCapture?.linkedGoalID, goalID)
+        XCTAssertEqual(storedCapture?.status, .goalBound)
+        XCTAssertEqual(storedCapture?.goalRelationship?.relationshipKind, .activeGoal)
+    }
+
+    func testAtomicCapturePromotionRollsBackGoalDraftAndKeepsOriginalCaptureWhenCaptureWriteFailsBeforeSave() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let setupRepositories = makeRepositories(store: store)
+        let setupService = DefaultCaptureService(
+            repository: setupRepositories.captures,
+            idProvider: { "capture-promotion-fail" }
+        )
+        _ = try await setupService.createCapture(CreateCaptureRequest(rawText: "Launch my business"), now: fixedNow)
+
+        let failingRepositories = makeRepositories(
+            store: store,
+            capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(
+                store: store,
+                failureInjection: .afterGoalDraftWriteBeforeCaptureWrite
+            )
+        )
+        let goalsService = RepositoryBackedGoalsService(repositories: failingRepositories)
+        let failingService = DefaultCaptureService(
+            repository: failingRepositories.captures,
+            goalsService: goalsService,
+            goalCreationPreparer: goalsService,
+            capturePromotionUnitOfWork: failingRepositories.capturePromotionUnitOfWork,
+            idProvider: { "unused" }
+        )
+
+        await XCTAssertThrowsErrorAsync(
+            try await failingService.turnCaptureIntoGoal(
+                TurnCaptureIntoGoalRequest(captureID: "capture-promotion-fail", mode: .project),
+                now: fixedNow.addingTimeInterval(60)
+            )
+        ) { error in
+            XCTAssertEqual(error as? CapturePromotionUnitOfWorkProbeError, .afterGoalDraftWriteBeforeCaptureWrite)
+        }
+
+        let goals = try await failingRepositories.goals.listGoals()
+        let drafts = try await failingRepositories.drafts.listDrafts()
+        let capture = try await failingRepositories.captures.capture(id: "capture-promotion-fail")
+
+        XCTAssertTrue(goals.isEmpty)
+        XCTAssertTrue(drafts.isEmpty)
+        XCTAssertEqual(capture?.status, .needsTriage)
+        XCTAssertNil(capture?.linkedGoalID)
+        XCTAssertNil(capture?.goalRelationship)
+    }
+
     func testCreateCaptureRejectsWhitespaceOnlyText() async throws {
         let repository = PreviewCaptureRepository()
         let service = DefaultCaptureService(repository: repository, idProvider: { "capture-3" })
@@ -364,13 +445,18 @@ private extension CaptureServiceTests {
         Date(timeIntervalSince1970: 1_712_692_800)
     }
 
-    func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {
+    func makeRepositories(
+        store: AmbitionsPersistenceStore,
+        capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork? = nil
+    ) -> AppRepositories {
         AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
             drafts: SwiftDataGoalDraftRepository(store: store),
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            goalCreationUnitOfWork: SwiftDataGoalCreationUnitOfWork(store: store),
+            capturePromotionUnitOfWork: capturePromotionUnitOfWork ?? SwiftDataCapturePromotionUnitOfWork(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

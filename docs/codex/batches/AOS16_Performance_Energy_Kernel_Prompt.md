@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS16`
 - Name: Performance Energy Kernel
 - Owning kernel: Performance Energy Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: all surfaces
 - Dependency gate: must be active before runtime-heavy implementation
 - Implementation boundary: budgets, measurement plan, and scheduler contracts before runtime-heavy work

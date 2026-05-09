@@ -111,6 +111,48 @@ LDI must route source-dependent behavior through:
 | LDI21 | Red-Team Evaluation Suite | Queued after AOS30 by default and HPS/SA closeout | 100+ fixture families and validation matrix | Builds permanent abuse-resistance fixture suite, including URL/PDF/OCR/job/school/certification/source-stale families. |
 | LDI22 | Governance And Maintenance Console | Queued after AOS30 by default and HPS/SA closeout | pack/source/safety/sync/governance metrics, no user personal data | Defines governance metrics without personal data and references HPS assurance ledger and Source Atlas pack/freshness governance. |
 
+## AIR Fold-In Inheritance
+
+AIR Ambitions Intelligence Runtime is inherited by LDI where Living Dream work
+touches dream compilation, option value, source truth, sensitive handling,
+long-horizon memory, simulation, red-team evaluation, or governance. AIR does
+not duplicate the Living Dream Compiler and does not create a standalone AIR
+train.
+
+- LDI15-LDI22 inherit AIR21/AIR22/AIR23/AIR33/AIR37/AIR38/AIR41/AIR43 where
+  relevant.
+- LDI15 must preserve option value, local recompile, source-change review,
+  read-only simulation, and no silent mutation.
+- LDI16-LDI19 must preserve mutation permissions, impact levels, archive,
+  merge, tombstone, delete-pending, and review/receipt boundaries.
+- LDI20 must preserve Source Atlas freshness, revocation, rollback, source
+  needed, offline fallback, and no official/current overclaim.
+- LDI21 must preserve AIR13/AIR43 red-team and local regression obligations
+  without generic AI benchmarks.
+- LDI22 must preserve governance metrics without personal data and without
+  release, legal/privacy, company-ready, or best-local-AI claims.
+
+## Surface Encapsulation And Signature Language Inheritance
+
+AmbitionsOS Surface Encapsulation & Signature Language is planned canon/
+governance and does not implement Living Dream runtime behavior.
+
+LDI15-LDI22 must preserve:
+
+- Grow into Goal
+- Path
+- Proof Transfers
+- Source Needed
+- Parked Dream
+- Hold
+- no motivational fantasy plan
+- no source overclaim
+- no professional advice
+
+LDI15-LDI22 must route dream, path, proof, source, and long-horizon memory
+depth through Goals, Capture, Time, Today, and You rather than creating a new
+Living Dream destination, dashboard, chatbot, AI console, or motivation feed.
+
 ## Global Placement
 
 Default global placement is after AOS30 and HPS/Source Atlas closeout. Earlier

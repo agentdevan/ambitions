@@ -29,7 +29,7 @@ Locked tagline:
 - LDI turns dreams into safe, sourced, feasible paths.
 - FL gives all of those trains the deeper life-continuity purpose so they do not devolve into task management, dashboards, or generic AI memory.
 
-FL is not a sixth tab. FL is a domain/canon layer expressed through Today, Goals, Capture, Plan, You, AOS, LDI, FCP, and PFC.
+FL is not a sixth tab. FL is a domain/canon layer expressed through Today, Goals, Capture, Time, You, AOS, LDI, FCP, and PFC.
 
 ## Placement
 

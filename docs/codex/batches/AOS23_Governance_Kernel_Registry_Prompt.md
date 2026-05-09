@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS23`
 - Name: Governance Kernel Registry
 - Owning kernel: Governance Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: Codex OS and docs
 - Dependency gate: depends on all kernel contracts
 - Implementation boundary: registries, ownership maps, and train integrity only

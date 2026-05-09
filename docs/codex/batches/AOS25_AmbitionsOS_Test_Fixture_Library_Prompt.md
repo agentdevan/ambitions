@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS25`
 - Name: AmbitionsOS Test Fixture Library
 - Owning kernel: Evaluation Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: tests and fixtures
 - Dependency gate: depends on AOS18 and AOS24
 - Implementation boundary: fixture library and coverage matrix only

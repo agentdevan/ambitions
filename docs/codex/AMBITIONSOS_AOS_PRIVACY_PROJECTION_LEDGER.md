@@ -106,7 +106,7 @@ Status: Green value-contract proof.
 Projection rules now represented in code:
 
 - sensitive or private experience copy requires privacy-safe labels
-- canonical user surfaces remain Today, Goals, Capture, Plan, and You
+- canonical user surfaces remain Today, Goals, Capture, Time, and You
 - experience contracts reject hidden mutation and runtime-store behavior
 - recovery copy must stay non-shaming before later surface projection
 - forbidden release/device/platform and AI/productivity overclaim language is

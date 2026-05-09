@@ -94,7 +94,7 @@ Pass only if ReceiptDrawer becomes the system-wide trust layer, not merely toast
 
 ### 12. Evidence Ledger / Proof Spine
 
-Pass only if proof appears as a shared ProofSpine with source/freshness/privacy/correction/stale behavior across Today, Goals, Plan, and You as allowed. It fails as activity feed, trophy shelf, or analytics ledger.
+Pass only if proof appears as a shared ProofSpine with source/freshness/privacy/correction/stale behavior across Today, Goals, Time, and You as allowed. It fails as activity feed, trophy shelf, or analytics ledger.
 
 ### 13. Action Closure Diamond
 
@@ -110,7 +110,7 @@ Pass only if Appearance Studio previews real Ambitions objects and supports acce
 
 ### 16. Loading / Empty / Degraded States
 
-Pass only if state expression becomes object-specific across Today, Goals, Capture, Plan, You, Trust, and Memory. It fails on generic error cards, skeleton spam, or fake progress.
+Pass only if state expression becomes object-specific across Today, Goals, Capture, Time, You, Trust, and Memory. It fails on generic error cards, skeleton spam, or fake progress.
 
 ### 17. Iconography / Status Grammar
 
@@ -142,7 +142,7 @@ Pass only if Grow Into Goal becomes Goal Seed Incubator with why-this-goal, star
 
 ### 24. Cross-surface proof/review integration
 
-Pass only if ContinuityReceiptMesh connects receipts/proof/review across Capture, Today, Goals, Plan, and You without becoming an activity feed. It fails on duplicated receipt islands or generic history log.
+Pass only if ContinuityReceiptMesh connects receipts/proof/review across Capture, Today, Goals, Time, and You without becoming an activity feed. It fails on duplicated receipt islands or generic history log.
 
 ### 25. Schedule / Availability / Defaults depth
 

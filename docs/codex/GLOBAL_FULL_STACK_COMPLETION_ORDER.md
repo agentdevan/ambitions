@@ -22,6 +22,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   side-effect, intelligence, performance, modularization, or major feature
   expansion work.
 - AOS/LDI close runtime intelligence and living-dream safety where implemented.
+- AIR preserves Ambitions Intelligence Runtime inventions as a fold-in overlay
+  across existing PK/AOS/LDI/AFI/HPS/Source Atlas owners, not as an independent
+  train.
 - Release evidence and human/legal/device proof gates remain evidence-bound.
 
 ## Baseline
@@ -36,12 +39,23 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   superseded as a top-level destination and remains contextual/action language
   only.
 - PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
-  Baseline is complete. PK01-PK41 remain queued and may precede later AFI, PLR,
-  AOS, or LDI work only when registry evidence proves the specific PK batch is
-  a minimum safety prerequisite.
+  Baseline is complete. PK01-PK08 are complete. PK09-PK41 remain queued and may
+  precede later AFI, PLR, AOS, or LDI work only when registry evidence proves
+  the specific PK batch is a minimum safety prerequisite.
 - AOS and LDI remaining successors are queued behind the new PK insertion where
   they depend on backend/platform safety, storage, sync, side effects,
   intelligence quarantine, performance, or modularization.
+- AIR01-AIR50 fold into existing future owners through the AIR fold-in overlay.
+  Future batches that inherit AIR must cite the exact AIR numbers, preserve
+  deterministic fallback, user review, receipts, correction/reset, privacy and
+  source gates, no-chat/no-hosted-AI/no-message-drafting boundaries, and the
+  Plan-to-Time correction rule.
+- AmbitionsOS Surface Encapsulation & Signature Language folds into existing
+  future owners through the surface matrix and signature language system.
+  Future batches that expose intelligence must name the Today, Goals, Capture,
+  Time, or You surface home; receipt path; correction path;
+  privacy/source/trust path; degraded state; signature language; and
+  deep-not-wide drift boundary.
 - No FL/FCP/PFC/FVQ production implementation has started by virtue of this document.
 - Historical IDs are not renumbered by the FIO01/PFC05A/DPTG00 overlay package.
 - AOS21 is complete Green as additive Interoperability Kernel App Intents
@@ -64,25 +78,30 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   followed and is now complete Green as a local Capacity And Commitment-Time
   Bridge contract. LDI13 followed and is now complete Green as a local Today
   Bridge And Action Closure contract. LDI14 followed and is now complete Green
-  as a local Trust Review And Dream Handling Receipts contract. AFI01 now
-  follows as the active flagship interface source-truth lane before LDI15 unless
-  repo evidence proves a half-complete active batch must close first or a
-  specific PK batch is a registry-proven minimum safety prerequisite.
+  as a local Trust Review And Dream Handling Receipts contract. AFI01-AFI16
+  later closed as active flagship interface source-truth. PK09 now follows
+  PK08 as the active Platform Kernel data-safety prerequisite unless repo
+  evidence proves a dirty or half-complete active batch must close first.
 
 ### Phase 0.5 — AFI Correction And Platform Kernel Insertion
 
-AFI01. Canon Language Purge. Active next eligible flagship interface batch
-after AFI correction and PK00 baseline. No app-code change is implied by this
-sequencing document.
+AFI01-AFI16. Ambitions Flagship Interface. Complete / Accepted Yellow as
+current surface source truth. No app-code change is implied by this sequencing
+document.
 
 PK00. Current Backend Proof Baseline. Complete report-only baseline; no
 production code changes.
-PK01-PK41 remain queued in `docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md`
-and may supersede older backend/platform sequencing where dependency order
-conflicts. Remote sync, remote intelligence, migration, package-split, and
-major platform feature work must wait for the relevant PK prerequisites, but
-optional PK expansion may not outrun AFI unless the registry names the specific
-PK batch as a minimum prerequisite.
+PK01-PK08 are complete. PK09-PK41 remain queued in
+`docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md` and may supersede
+older backend/platform sequencing where dependency order conflicts. Remote
+sync, remote intelligence, migration, package-split, and major platform feature
+work must wait for the relevant PK prerequisites.
+
+After PK08, the optimized global path is PK09-PK13 storage data safety first,
+then PK14-PK16 events/receipts/trust, PK17-PK21 service extraction,
+PK22-PK28 side effects/privacy/data controls, PK29-PK31 sync/merge,
+PK32-PK34 knowledge and intelligence boundaries, and PK35-PK41 scale/package
+work before later cross-train tails that depend on those proofs.
 
 ## Full-Stack Optimized Order
 
@@ -353,7 +372,7 @@ PK batch as a minimum prerequisite.
     Store, TestFlight, device, public accessibility, AOS runtime, or LDI
     runtime claim.
 52. FCP14 LifeShape Contour Map. Completed Green on 2026-05-06 as bounded
-    Plan LifeShape Contour Map implementation evidence, with capacity contours,
+    Time LifeShape Contour Map implementation evidence, with capacity contours,
     protected pockets, pressure fields, recovery pockets, milestone ridges, and
     commitment-load contours replacing the prior band/bar expression. It adds
     no calendar grid, analytics chart, fake precision, route/raw-value,

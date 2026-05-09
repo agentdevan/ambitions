@@ -51,6 +51,9 @@ Required copy:
 - Reality changed
 - Make today lighter
 - Needs closure
+- Start Here Receipt
+- Close Today
+- Held for Review
 
 Hard Red:
 
@@ -89,6 +92,11 @@ Required copy:
 - Connected to Today
 - This thread can feed Today
 - Open Music / Open Career / Open [Life Area]
+- Proof Transfer Fold
+- Proof Transfers
+- Path Continuity
+- Parked Dream
+- Source Fold
 
 Hard Red:
 
@@ -129,6 +137,11 @@ Required copy:
 - Needs a Place
 - Ready to Place
 - Grow into Goal
+- Placement Preview
+- Correction Fold
+- Held Items Shelf
+- Source Needed Mode
+- Hold
 
 Hard Red:
 
@@ -172,6 +185,10 @@ Required copy:
 - Shape week
 - Review pressure
 - Capacity truth
+- LifeShape Consequence Preview
+- Counterfactual Fold
+- Protected-Time Shield
+- Recovery Pocket
 
 Hard Red:
 
@@ -215,6 +232,11 @@ Required copy:
 - Planning Defaults
 - Schedule & Availability
 - Manual mode
+- Personal Runtime
+- Assumption Ledger
+- Personal Operating Constitution
+- Personal System Changes
+- Personal Data Dignity
 
 Hard Red:
 

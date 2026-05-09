@@ -80,6 +80,7 @@ enum PreviewAppContainerFactory {
             captures: SwiftDataCaptureRepository(store: store),
             teaching: SwiftDataGoalTeachingSignalRepository(store: store),
             goalCreationUnitOfWork: SwiftDataGoalCreationUnitOfWork(store: store),
+            capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
         return AmbitionsRuntimeFactory.make(

@@ -194,12 +194,25 @@ struct TurnCaptureIntoGoalRequest: Sendable, Equatable {
 struct CaptureGoalBinding: Sendable, Equatable {
     let capture: Capture
     let target: GoalRouteTarget
+    let unitOfWorkReceipt: AppUnitOfWorkReceipt?
+
+    init(
+        capture: Capture,
+        target: GoalRouteTarget,
+        unitOfWorkReceipt: AppUnitOfWorkReceipt? = nil
+    ) {
+        self.capture = capture
+        self.target = target
+        self.unitOfWorkReceipt = unitOfWorkReceipt
+    }
 }
 
 struct DefaultCaptureService: CaptureServicing {
     private let repository: any CaptureRepository
     private let goalRepository: (any GoalRepository)?
     private let goalsService: (any GoalsServicing)?
+    private let goalCreationPreparer: (any GoalCreationPreparing)?
+    private let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
     private let eventLedger: (any EventLedgerRepository)?
     private let idProvider: @Sendable () -> String
 
@@ -207,12 +220,16 @@ struct DefaultCaptureService: CaptureServicing {
         repository: any CaptureRepository,
         goalRepository: (any GoalRepository)? = nil,
         goalsService: (any GoalsServicing)? = nil,
+        goalCreationPreparer: (any GoalCreationPreparing)? = nil,
+        capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
         idProvider: @escaping @Sendable () -> String = { DomainIdentifier.prefixed("capture") }
     ) {
         self.repository = repository
         self.goalRepository = goalRepository
         self.goalsService = goalsService
+        self.goalCreationPreparer = goalCreationPreparer
+        self.capturePromotionUnitOfWork = capturePromotionUnitOfWork
         self.eventLedger = eventLedger
         self.idProvider = idProvider
     }
@@ -444,10 +461,50 @@ struct DefaultCaptureService: CaptureServicing {
             throw CaptureServiceError.invalidTransition(from: existing.status, to: .goalBound)
         }
 
-        let response = try await goalsService.createGoal(
-            CreateGoalRequest(title: existing.rawText, mode: request.mode),
-            now: now
-        )
+        let createRequest = CreateGoalRequest(title: existing.rawText, mode: request.mode)
+
+        if let goalCreationPreparer,
+           let capturePromotionUnitOfWork {
+            let prepared = try await goalCreationPreparer.prepareGoalCreation(createRequest, now: now)
+            guard let goal = prepared.goal,
+                  let goalID = prepared.response.target.goalID else {
+                throw CaptureServiceError.goalCreationDidNotReturnGoal
+            }
+
+            let updated = capture(
+                from: existing,
+                status: .goalBound,
+                linkedGoalID: goalID,
+                triage: CaptureTriageMetadata(destination: .turnIntoGoal, hint: existing.triage?.hint),
+                revisitAfter: existing.revisitAfter,
+                kind: .goalSeed,
+                route: .goalSeed,
+                triageStatus: .routed,
+                commitmentKind: existing.commitmentKind,
+                deadlineText: existing.deadlineText,
+                deadlineKind: existing.deadlineKind,
+                contextLensHint: existing.contextLensHint,
+                priorityHints: existing.priorityHints,
+                goalRelationship: CaptureGoalRelationship(goalID: goalID, relationshipKind: .activeGoal),
+                deliverableHint: existing.deliverableHint,
+                scopeItemHint: existing.scopeItemHint,
+                waitingMetadata: existing.waitingMetadata,
+                assumptionSummary: "This capture became a goal through the existing goal creation flow.",
+                correctionActions: existing.correctionActions,
+                recommendationExplanationIDs: existing.recommendationExplanationIDs,
+                now: now
+            )
+            let result = try await capturePromotionUnitOfWork.saveCapturePromotion(
+                CapturePromotionUnitOfWorkPayload(goal: goal, draft: prepared.draft, capture: updated),
+                id: "capture-promotion.\(existing.id).\(goalID).\(prepared.draft.id)",
+                timestampProvider: { DomainTimestamp.string(from: now) }
+            )
+            try await appendCaptureEvent(.captureTriaged, capture: updated, occurredAt: DomainTimestamp.string(from: now))
+            await goalCreationPreparer.didCommitPreparedGoalCreation(now: now)
+            return CaptureGoalBinding(capture: updated, target: prepared.response.target, unitOfWorkReceipt: result.receipt)
+        }
+
+        let response = try await goalsService.createGoal(createRequest, now: now)
         guard let goalID = response.target.goalID else {
             throw CaptureServiceError.goalCreationDidNotReturnGoal
         }
@@ -477,7 +534,7 @@ struct DefaultCaptureService: CaptureServicing {
         )
         try await repository.saveCaptures([updated])
         try await appendCaptureEvent(.captureTriaged, capture: updated, occurredAt: DomainTimestamp.string(from: now))
-        return CaptureGoalBinding(capture: updated, target: response.target)
+        return CaptureGoalBinding(capture: updated, target: response.target, unitOfWorkReceipt: response.unitOfWorkReceipt)
     }
 
     func markCaptureProcessed(id: String, now: Date) async throws -> Capture? {

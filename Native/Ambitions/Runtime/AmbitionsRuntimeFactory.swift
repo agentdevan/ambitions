@@ -81,6 +81,8 @@ enum AmbitionsRuntimeFactory {
             repository: repositories.captures,
             goalRepository: repositories.goals,
             goalsService: goalsService,
+            goalCreationPreparer: goalsService,
+            capturePromotionUnitOfWork: repositories.capturePromotionUnitOfWork,
             eventLedger: repositories.eventLedger
         )
         let profileService = RepositoryBackedProfileService(

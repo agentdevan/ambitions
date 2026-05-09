@@ -15,7 +15,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS04`
 - Name: Control Plane Work Classifier
 - Owning kernel: Control Plane
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: all surfaces
 - Dependency gate: depends on AOS01-AOS03
 - Implementation boundary: work classifier, gates, and orchestration contracts only after AOS01-AOS03

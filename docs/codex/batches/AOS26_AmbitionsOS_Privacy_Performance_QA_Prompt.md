@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS26`
 - Name: AmbitionsOS Privacy Performance QA
 - Owning kernel: Evaluation Kernel / Privacy Safety / Performance Energy
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: all affected surfaces
 - Dependency gate: depends on AOS16, AOS17, AOS18, and AOS25
 - Implementation boundary: privacy and performance QA only; no feature expansion

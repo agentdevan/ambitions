@@ -16,14 +16,16 @@ The active global order continues to preserve completed batch history and next e
 
 ## Active State At Overlay Creation
 
-At overlay creation, the active batch state is:
+At overlay creation, the active batch state was:
 
 ```text
 Current batch: AFI11 Trust Seam And Receipts / Accepted Yellow
 Next eligible batch: AFI12 Accessibility And State Proof
 ```
 
-AFI12 remains next eligible unless repo evidence shows a dirty or half-complete active batch must close first.
+AFI12-AFI16 have since closed under the active train. As of the PK08 closeout,
+PK09 Unknown Persisted Value Degradation is the next eligible global batch unless repo
+evidence shows a dirty or half-complete active batch must close first.
 
 EFC must not interrupt or overwrite Codex while it is actively running. Before any continuation, read:
 
@@ -59,7 +61,9 @@ Result:
 - `docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md` exists.
 - `docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md` exists.
 - this peak overlay exists.
-- active state remains AFI11 / AFI12 unless a later active-batch check changes it.
+- active state is historical for AFI11 / AFI12; current continuation must follow
+  `.codex/state/active-batch.yml`, current run-state docs, and
+  `docs/codex/BATCH_REGISTRY.md`.
 - no production Swift, persistence, schema, route, signing, entitlement, dependency, hosted CI, sync, AI runtime, legal/privacy, release, device, or accessibility proof claim is made.
 
 ### Phase 1 — Continue Active AFI Accessibility And State Proof

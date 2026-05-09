@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS27`
 - Name: AmbitionsOS App Store Claim Truth
 - Owning kernel: Governance Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: release docs
 - Dependency gate: depends on AOS26
 - Implementation boundary: claim-boundary proof only; no readiness claim without evidence

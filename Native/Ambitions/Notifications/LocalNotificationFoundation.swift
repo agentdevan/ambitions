@@ -328,7 +328,7 @@ struct NotificationSchedulingTodayService: TodayServicing {
     }
 }
 
-struct NotificationSchedulingGoalsService: GoalsServicing {
+struct NotificationSchedulingGoalsService: GoalsServicing, GoalCreationPreparing {
     let base: any GoalsServicing
     let notificationService: any NotificationServicing
 
@@ -348,6 +348,20 @@ struct NotificationSchedulingGoalsService: GoalsServicing {
         let response = try await base.createGoal(request, now: now)
         await notificationService.refreshSchedule(now: now)
         return response
+    }
+
+    func prepareGoalCreation(_ request: CreateGoalRequest, now: Date) async throws -> PreparedGoalCreation {
+        guard let base = base as? any GoalCreationPreparing else {
+            throw GoalsFeatureError.notActionable
+        }
+        return try await base.prepareGoalCreation(request, now: now)
+    }
+
+    func didCommitPreparedGoalCreation(now: Date) async {
+        if let base = base as? any GoalCreationPreparing {
+            await base.didCommitPreparedGoalCreation(now: now)
+        }
+        await notificationService.refreshSchedule(now: now)
     }
 
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse {

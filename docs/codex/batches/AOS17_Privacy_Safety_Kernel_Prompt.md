@@ -11,7 +11,7 @@ Before AOS17 starts, read `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md
 - Batch ID: `AOS17`
 - Name: Privacy Safety Kernel
 - Owning kernel: Privacy Safety Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: all surfaces and external projections
 - Dependency gate: must be active before external/sensitive projection work
 - Implementation boundary: privacy projection contracts and sensitive-goal boundaries only

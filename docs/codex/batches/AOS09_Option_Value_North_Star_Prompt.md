@@ -7,8 +7,8 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS09`
 - Name: Option Value North Star
 - Owning kernel: Alternate Path Kernel / Longevity Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
-- Affected surface: Goal Detail, Plan
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
+- Affected surface: Goal Detail, Time
 - Dependency gate: depends on AOS08
 - Implementation boundary: North Star preservation and option-value comparison only
 

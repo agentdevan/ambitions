@@ -49,7 +49,7 @@ Integrate FVQ01-FVQ05 into every UI-affecting batch.
 
 ## AQOS07 — Five-Tab Visual Baseline
 
-Require durable baselines for Today, Goals, Capture, Plan, You across key states.
+Require durable baselines for Today, Goals, Capture, Time, You across key states.
 
 ## AQOS08 — Screenshot Freshness Infrastructure
 

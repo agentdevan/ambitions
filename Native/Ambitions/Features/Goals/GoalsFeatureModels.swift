@@ -747,6 +747,12 @@ struct CreateGoalResponse: Sendable {
     }
 }
 
+struct PreparedGoalCreation: Sendable {
+    let response: CreateGoalResponse
+    let goal: Goal?
+    let draft: PersistedGoalDraft
+}
+
 enum StrategyComposerPaceChoice: String, CaseIterable, Identifiable, Sendable {
     case conservative
     case balanced

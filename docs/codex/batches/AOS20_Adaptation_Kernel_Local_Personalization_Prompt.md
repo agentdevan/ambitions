@@ -7,8 +7,8 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS20`
 - Name: Adaptation Kernel Local Personalization
 - Owning kernel: Adaptation Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
-- Affected surface: You, Today, Plan
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
+- Affected surface: You, Today, Time
 - Dependency gate: depends on AOS14 and AOS18
 - Implementation boundary: local user-controlled calibration only; no hidden personalization
 

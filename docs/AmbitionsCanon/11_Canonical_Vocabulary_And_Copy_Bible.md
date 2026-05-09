@@ -77,6 +77,18 @@ Approved terms:
 - Make today lighter
 - Reality changed
 - Saved safely
+- Place
+- Hold
+- Held item
+- Held for Review
+- Close Today
+- Personal Runtime
+- Proof
+- Proof Transfers
+- Source Needed
+- Source Needed Mode
+- Correction Fold
+- This week can hold
 
 ## Internal Object Names
 
@@ -117,6 +129,12 @@ Rule: users should not need internal object names to understand Ambitions.
 | unplaced input | Needs a Place | safe, non-shaming |
 | route-ready input | Ready to Place | user-owned placement |
 | goal seed | Grow into Goal | not automatic overclassification |
+| uncertain or sensitive item | Hold / Held item | safe until reviewed |
+| personal intelligence profile | Personal Runtime | You drill-down, not top-level label |
+| Today closure ritual | Close Today | small closure, not daily dashboard |
+| path/pivot proof continuity | Proof Transfers | Goals / Option Value language |
+| unsafe or unproven source state | Source Needed Mode | consistent trust/source state |
+| focused correction reveal | Correction Fold | secondary action, not generic settings |
 | system controls | You / Your System | not Profile |
 | automation controls | Trust & Automation | trust before automation |
 | unavailable by choice | Protected | not blocked |
@@ -204,15 +222,57 @@ Hard-ban in active user-facing UI:
 - life score
 - productivity score
 - assistant
+- AI assistant
 - coach
+- AI coach
+- chatbot
 - dashboard
 - inbox zero
 - focus mode as primary CTA
 - smart, when used as vague product adjective
+- smart capture
 - AI-powered, inside product UI
+- GPT
+- GPT-like
+- model confidence
+- confidence percentage
+- best local AI
+- write text
+- draft email
+- draft message
+- message-writing assistant
 - boost
 - hustle
 - grind
+
+## Surface Encapsulation Signature Addendum
+
+This addendum preserves mature signature language for future AmbitionsOS / AIR
+surface encapsulation. It does not implement UI/runtime behavior.
+
+Required additions:
+
+- `Hold` / `Held item` is the user-facing uncertainty and safety language for
+  items that need review, source, privacy confirmation, or placement.
+- `Personal Runtime` is a You drill-down concept for visible local
+  personalization, not a top-level label, AI profile, or theme setting.
+- `Close Today` is the Today closure phrase for resolving what closed, moved,
+  still counts, or remains held.
+- `Proof Transfers` is the Goals / Option Value phrase for path and pivot proof
+  continuity.
+- `This week can hold` is protected Tier 1 Time language and must remain tied
+  to capacity truth, not calendar availability theater.
+- `Source Needed Mode` is the consistent source/trust state for facts Ambitions
+  cannot safely use as guidance yet.
+- `Correction Fold` is the secondary action/fold concept for focused
+  corrections such as wrong place, wrong time, wrong size, wrong goal, too
+  personal, stop using this, and forget this.
+
+Forbidden active user-facing product language also includes chatbot, AI
+assistant, AI coach, model confidence, confidence percentage, GPT, GPT-like,
+best local AI, write text, draft email, draft message, and message-writing
+assistant. Internal architecture docs may discuss a GPT-like understanding
+effect only as non-user-facing explanation.
 
 ## Surface Copy Patterns
 

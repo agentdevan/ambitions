@@ -4,7 +4,29 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 
 ## Current Operating Truth
 
-- GQ01 Global Queue Maturity is complete / accepted Yellow. PK04 Atomic Goal Creation and PK05 Atomic Clarification / Materialization are complete / Green. Use `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` and `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` as the canonical fallback queue after live current-run state. PK06 Atomic Capture Promotion is the next implementation batch. SA07-SA32 are visible; EFC is overlay-first; CS02C-CS06C/CS09C are conditional triggers; PX01-PX20 are historical complete do-not-run.
+- GQ01 Global Queue Maturity is complete / accepted Yellow. PK04 Atomic Goal Creation, PK05 Atomic Clarification / Materialization, and PK06 Atomic Capture Promotion are complete / Green. Use `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` and `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` as the canonical fallback queue after live current-run state. PK07 Storage Schema Version Ledger is the next implementation batch. SA07-SA32 are visible; EFC is overlay-first; CS02C-CS06C/CS09C are conditional triggers; PX01-PX20 are historical complete do-not-run.
+
+- AIR Ambitions Intelligence Runtime fold-in overlay is active planned scope
+  through `docs/canon/Ambitions_Intelligence_Runtime.md`,
+  `docs/codex/AIR_AMBITIONS_INTELLIGENCE_RUNTIME_FOLD_IN_OVERLAY.md`, and
+  `docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md`. AIR is not an
+  independent train and must fold into existing PK/AOS/LDI/AFI/HPS/Source Atlas
+  owners. PK05 Green evidence is verified locally for the focused atomic
+  clarification/materialization foundation only; AIR is not implemented by the
+  fold-in overlay. Active IA remains Today / Goals / Capture / Time / You, and
+  Plan remains superseded as a top-level destination.
+
+- AmbitionsOS Surface Encapsulation & Signature Language canon is active
+  planned scope through
+  `docs/canon/AmbitionsOS_Surface_Encapsulation_And_Signature_Language.md`,
+  `docs/codex/AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX.md`, and
+  `docs/codex/AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM.md`. It does not implement
+  UI/runtime behavior. Every intelligence capability must have a surface home,
+  receipt path, correction path, privacy/source/trust path, degraded state, and
+  deep-not-wide signature language across Today / Goals / Capture / Time /
+  You. Protected language includes Start Here, Still Counts, Place, Shape,
+  Close, Hold, Proof, Receipt, Why This?, Personal Runtime, Needs a Place, and
+  This week can hold. Plan remains superseded as top-level.
 
 - Ambitions 3.0 is active for product, front-end, product language, primitive architecture, implementation sequencing, repo hygiene, dependency discipline, and handoff readiness.
 - Older 1.0/2.0/v2/Waves/D/M/R material is implementation history or supporting context only where Ambitions 3.0 explicitly keeps a domain binding.
@@ -25,10 +47,11 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   Receipts, AFI12 Accessibility And State Proof, AFI13 Visual QA And Drift
   Gallery, AFI14 Cross-Surface Coherence Review, AFI15 Founder Acceptance
   Review, and AFI16 Release-Claim Safety Review are complete / Accepted
-  Yellow. PK00 is complete / Green, and PK01 Package/Module Boundary Scaffold
-  is complete / Accepted Yellow as docs-only module-boundary scaffold evidence.
-  PK02 Architecture Boundary Scanner is the next eligible global batch unless
-  repo evidence shows a dirty or half-complete active batch must close first.
+  Yellow. PK00 is complete / Green, PK01 Package/Module Boundary Scaffold and
+  PK02 Architecture Boundary Scanner are complete / Accepted Yellow, and PK03
+  through PK06 are complete / Green. PK07 Storage Schema Version Ledger is the
+  next eligible global batch unless repo evidence shows a dirty or
+  half-complete active batch must close first.
 - FCP and PFC source truth exist. The full-stack order has completed multiple
   bounded FCP/PFC/FL batches; remaining work still requires batch-specific
   gates before any production app, platform, persistence, sync, legal/privacy,
@@ -38,7 +61,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   accepted Yellow follow-ups as a report-only backend/platform baseline. PK01
   is complete / Accepted Yellow as a boundary scaffold. PK02 Architecture
   Boundary Scanner is complete / Accepted Yellow as local scanner tooling.
-  PK03-PK41 remain queued active planned scope. PK
+  PK03 AppUnitOfWork Foundation, PK04 Atomic Goal Creation, PK05 Atomic
+  Clarification / Materialization, and PK06 Atomic Capture Promotion are
+  complete / Green. PK07-PK41 remain queued active planned scope. PK
   supersedes older backend/platform sequencing where dependency order
   conflicts, but it does not claim backend completion, migration safety, sync
   readiness, privacy compliance, CI green, performance proof, or release
@@ -185,7 +210,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   permission, audio capture, route/raw-value changes, persistence/schema
   changes, or public accessibility claims. FCP14 follows it in the global order
   as LifeShape Contour Map.
-- FCP14 is complete Green as bounded Plan LifeShape Contour Map implementation
+- FCP14 is complete Green as bounded Time LifeShape Contour Map implementation
   evidence. Plan now renders LifeShape as a contour-first object with capacity
   contours, protected pockets, pressure fields, recovery pockets, milestone
   ridges, and commitment-load contours instead of the prior band/bar

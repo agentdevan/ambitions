@@ -30,6 +30,11 @@ Date: 2026-05-08
   persisted drafts and optional materialized/revised Goals through the local
   UnitOfWork seam and proves injected rollback preserves pre-existing Goal,
   Step, and Draft state.
+- PK06 Atomic Capture Promotion is complete / Green as focused SwiftData-backed
+  Capture promotion proof. It routes deterministic Goal preparation plus new
+  Goal, persisted Draft, and promoted Capture writes through one local
+  UnitOfWork and proves injected rollback before Capture save leaves no
+  Goal/Draft residue.
 - AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object
   Silhouettes, AFI04 Material System Proof, AFI05 Shell And Continuity Chrome,
   AFI06 Today Reality Meridian, AFI07 Goals Constellation Atlas, and AFI08
@@ -39,7 +44,14 @@ Date: 2026-05-08
   Coherence Review, AFI15 Founder Acceptance Review, and AFI16 Release-Claim
   Safety Review are complete / Accepted Yellow under the active AFI insertion
   overlay.
-  PK06 Atomic Capture Promotion is the next eligible global batch. PK06-PK41
+- PK07 Storage Schema Version Ledger is complete / Green as an inert local
+  version-ledger contract for current SwiftData model families and the portable
+  snapshot schema. It does not implement migrations.
+- PK08 Migration Plan Scaffold is complete / Green as an inert local migration
+  planning scaffold over the storage version ledger. It describes no-change,
+  version-change, added-type, and removed-type plans with required future
+  safety gates while keeping migration execution blocked.
+- PK09 Unknown Persisted Value Degradation is the next eligible global batch. PK09-PK41
   remain active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
@@ -60,10 +72,11 @@ proof.
 ## Current Known Risks
 
 - AppUnitOfWork single-context commit/rollback, SwiftData-backed atomic goal
-  creation, and SwiftData-backed clarification/materialization write-back are
-  PK-proven by focused persistence/goal tests. Capture promotion is not yet
-  PK-proven.
-- Schema version ledger, migration plan, pre-migration backup, import dry run,
+  creation, clarification/materialization write-back, and Capture promotion are
+  PK-proven by focused persistence/goal/capture tests.
+- Storage schema version ledger coverage is PK-proven by PK07. Migration plan
+  mutation gate scaffolding and execution blocking are PK-proven by PK08.
+  Unknown persisted value degradation, pre-migration backup, import dry run,
   and restore rollback are not yet PK-proven.
 - Side effects are present in platform-adjacent paths, but SideEffectLedger
   isolation is not yet PK-proven.
@@ -74,4 +87,4 @@ proof.
 
 ## Next Eligible
 
-PK06 Atomic Capture Promotion.
+PK09 Unknown Persisted Value Degradation.

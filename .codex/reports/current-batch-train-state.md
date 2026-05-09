@@ -2,13 +2,69 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK05 Atomic Clarification / Materialization / Green.
-Next eligible batch: PK06 Atomic Capture Promotion
-Scope: PK05 routes SwiftData-backed clarification answer write-back through the PK03/PK04 AppUnitOfWork boundary, records local UnitOfWork receipt metadata on Goal Detail action responses, and proves injected rollback preserves pre-existing Goal, Step, and Draft state. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
+Current batch: PK08 Migration Plan Scaffold / Green.
+Next eligible batch: PK09 Unknown Persisted Value Degradation
+Scope: PK08 adds an inert local migration planning scaffold over the PK07 storage version ledger. It names blocked no-change, version-change, added-type, and removed-type migration plan entries, requires future safety gates for mutation plans, and keeps migration execution blocked. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+
+## PK08 Migration Plan Scaffold Closeout
+
+- PK08 report: `docs/audits/pk08-migration-plan-scaffold-report.md`.
+- Migration scaffold contract: `Native/Ambitions/Persistence/StorageMigrationPlanScaffold.swift`.
+- Focused proof: `StorageMigrationPlanScaffoldTests` passed for current-ledger no-change planning, blocked version-change planning, blocked added/removed stored-type planning, and executable/under-gated plan rejection, 4 tests, 0 failures.
+- Canonical queue now marks PK08 complete/do-not-run and PK09 executable now.
+- No migration runner, destructive storage action, schema mutation, import/export behavior change, UI behavior change, sync/cloud behavior, or release/readiness claim is made.
+
+## PK07 Storage Schema Version Ledger Closeout
+
+- PK07 report: `docs/audits/pk07-storage-schema-version-ledger-report.md`.
+- Storage ledger contract: `Native/Ambitions/Persistence/StorageSchemaVersionLedger.swift`.
+- Focused proof: `StorageSchemaVersionLedgerTests` passed for current SwiftData family coverage, portable snapshot version registration, default migration blocking, and malformed-ledger validation, 3 tests, 0 failures.
+- Canonical queue now marks PK07 complete/do-not-run and PK08 executable now.
+- No migration runner, migration plan execution, destructive storage action, schema mutation, import/export behavior change, UI behavior change, sync/cloud behavior, or release/readiness claim is made.
+
+## Global Sequence Optimization After PK07
+
+- Optimization report: `docs/audits/global-batch-train-sequence-optimization-report.md`.
+- The global order now prioritizes PK09-PK13 storage data safety, PK14-PK16 events/receipts/trust, PK17-PK21 service extraction, PK22-PK28 side effects/privacy/data controls, PK29-PK31 sync/merge, PK32-PK34 intelligence boundaries, and PK35-PK41 performance/package work before dependent cross-train tails.
+- No new train, runtime behavior, UI behavior, hosted AI, sync, or release/readiness claim is made.
+
+## AIR Ambitions Intelligence Runtime Fold-In Overlay
+
+- AIR fold-in overlay added as docs/canon/governance planned scope.
+- AIR is not a standalone train and no AIR queue was created.
+- Files created: `docs/canon/Ambitions_Intelligence_Runtime.md`, `docs/codex/AIR_AMBITIONS_INTELLIGENCE_RUNTIME_FOLD_IN_OVERLAY.md`, `docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md`, and `docs/audits/air-fold-in-integration-report.md`.
+- PK05 Green evidence is visible locally for focused atomic clarification/materialization foundation only.
+- AIR01-AIR50 now inherit existing PK/AOS/LDI/AFI/HPS/Source Atlas/FVQ/claim-boundary owners.
+- No runtime behavior, production Swift behavior, hosted AI, chatbot, message drafting, model runtime, hidden learning, new top-level navigation, release/readiness, privacy compliance, accessibility compliance, physical-device proof, company-ready, or best-local-AI claim is made.
+- Next eligible batch from current repo evidence is PK09 Unknown Persisted Value Degradation.
+
+## AmbitionsOS Surface Encapsulation & Signature Language
+
+- PK06 Green evidence is visible locally through run-state, batch-state,
+  registry, canonical queue, and `docs/audits/pk06-atomic-capture-promotion-report.md`.
+- AIR fold-in prerequisite files are visible locally.
+- Surface encapsulation/signature language files created:
+  `docs/canon/AmbitionsOS_Surface_Encapsulation_And_Signature_Language.md`,
+  `docs/codex/AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX.md`,
+  `docs/codex/AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM.md`, and
+  `docs/audits/ambitionsos-surface-encapsulation-signature-language-report.md`.
+- This is docs/canon/governance only. No production Swift, app UI code, routes,
+  top-level tabs, runtime intelligence, chatbot UI, AI console, generic
+  dashboard, or release/readiness claim is made.
+- Next eligible batch from current repo evidence is PK09 Unknown Persisted Value Degradation.
+
+## PK06 Atomic Capture Promotion Closeout
+
+- PK06 report: `docs/audits/pk06-atomic-capture-promotion-report.md`.
+- Capture promotion UnitOfWork contract/wiring: `Native/Ambitions/Persistence/PersistenceContracts.swift`, `Native/Ambitions/Persistence/SwiftDataRepositories.swift`, app/preview repository construction, and runtime service construction.
+- Capture-to-Goal atomic service path: `Native/Ambitions/Services/CaptureService.swift` with deterministic Goal preparation from `RepositoryBackedGoalsService`.
+- Focused proof: `CaptureServiceTests` passed for Capture promotion receipt metadata and thrown-error rollback before Capture save, 2 tests, 0 failures.
+- Canonical queue now marks PK06 complete/do-not-run and PK07 executable now.
+- Release, device, accessibility, legal/privacy, hosted CI, App Store, TestFlight, sync/cloud, telemetry, analytics, hosted AI, and production readiness remain non-claims.
 
 ## PK05 Atomic Clarification / Materialization Closeout
 
@@ -225,7 +281,7 @@ public accessibility proof.
 
 PD17 is complete / Green as bounded You/Profile implementation evidence. It
 adds a typed cross-surface proof and review map inside Receipts & History so
-Capture, Today, Goals, Plan, and You can be reviewed through owning-surface
+Capture, Today, Goals, Time, and You can be reviewed through owning-surface
 proof/receipt boundaries without adding a dashboard, feed, tab, route/raw-value
 change, hidden proof mutation, persistence/schema change, sync/account claim,
 AOS runtime, LDI runtime, release/legal/privacy claim, or public accessibility
@@ -377,7 +433,7 @@ accessibility/release claim change was made.
   implementation evidence. SI15 is complete as shared Accessibility Adaptive
   Interface evidence. SI16 is complete as Preview Fixture And Visual QA
   Infrastructure evidence. SI17 is complete as bounded top-level surface
-  composition evidence across Today, Goals, Capture, Plan, and You. SI18 is
+  composition evidence across Today, Goals, Capture, Time, and You. SI18 is
   complete as Signature Interface handoff and Product Depth readiness evidence.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
@@ -1006,7 +1062,7 @@ SI17 result: PASS WITH YELLOW. `docs/audits/si17-top-level-surface-composition-r
 records the bounded top-level composition primitive and five-surface adoption.
 `Sources/Components/TopLevelSurfaceCompositionPrimitives.swift` adds a shared
 orientation model and `TopLevelSurfaceCompositionBar` for Today, Goals,
-Capture, Plan, and You. `Sources/Previews/TopLevelSurfaceCompositionPreviews.swift`
+Capture, Time, and You. `Sources/Previews/TopLevelSurfaceCompositionPreviews.swift`
 adds named default, Dynamic Type, and static-motion preview variants.
 `Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift` adds focused
 automated proof that the canonical five surfaces stay fixed, each surface has

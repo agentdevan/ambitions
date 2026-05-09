@@ -368,7 +368,7 @@ A flagship product does not need every future capability at launch. It needs a c
 
 | Area | Must-have |
 | --- | --- |
-| IA | Today, Goals, Capture, Plan, You only |
+| IA | Today, Goals, Capture, Time, You only |
 | Today | Reality Meridian + Start Here relationship |
 | Capture | Atmosphere Composer composer-first flow |
 | Plan | LifeShape Field with Week default |

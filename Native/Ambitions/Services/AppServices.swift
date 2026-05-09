@@ -26,6 +26,17 @@ protocol GoalsServicing: Sendable {
     func submitExplainabilityCorrection(_ request: GoalExplainabilityCorrectionRequest, now: Date) async throws -> GoalDetailActionResponse
 }
 
+protocol GoalCreationPreparing: Sendable {
+    func prepareGoalCreation(_ request: CreateGoalRequest, now: Date) async throws -> PreparedGoalCreation
+    func didCommitPreparedGoalCreation(now: Date) async
+}
+
+extension GoalCreationPreparing {
+    func didCommitPreparedGoalCreation(now: Date) async {
+        _ = now
+    }
+}
+
 extension GoalsServicing {
     func submitExplainabilityCorrection(_ request: GoalExplainabilityCorrectionRequest, now: Date) async throws -> GoalDetailActionResponse {
         _ = request

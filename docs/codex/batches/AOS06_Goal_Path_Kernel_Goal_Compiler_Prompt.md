@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS06`
 - Name: Goal Path Kernel Goal Compiler
 - Owning kernel: Goal Path Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: Goals, Goal Detail
 - Dependency gate: depends on AOS05
 - Implementation boundary: goal compiler and requirement graph contracts only

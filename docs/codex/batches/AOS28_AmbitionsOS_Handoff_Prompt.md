@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS28`
 - Name: AmbitionsOS Handoff
 - Owning kernel: Governance Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: handoff docs
 - Dependency gate: depends on AOS27
 - Implementation boundary: handoff package only; no release approval by implication

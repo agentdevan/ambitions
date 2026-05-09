@@ -79,7 +79,7 @@ Operator steps:
 1. Record commit SHA, date, device model, iOS version, and build identifier.
 2. Install the candidate build on the physical device.
 3. Fresh launch the app.
-4. Confirm the five-tab shell: Today / Goals / Capture / Plan / You.
+4. Confirm the five-tab shell: Today / Goals / Capture / Time / You.
 5. Confirm Today loads and shows `Start here`.
 6. Capture a loose thought and confirm input is not lost.
 7. Confirm placement / Needs a Place behavior is understandable where visible.
@@ -101,7 +101,7 @@ Expected evidence:
 Stop conditions:
 
 - app cannot install or launch
-- top-level shell differs from Today / Goals / Capture / Plan / You
+- top-level shell differs from Today / Goals / Capture / Time / You
 - Capture can lose input
 - private details leak to external surfaces
 - app behavior contradicts release claim boundaries
@@ -158,7 +158,7 @@ Human/operator inputs:
 
 Operator steps:
 
-1. Traverse Today, Goals, Capture, Plan, and You with VoiceOver.
+1. Traverse Today, Goals, Capture, Time, and You with VoiceOver.
 2. Confirm primary controls have meaningful labels and reachable actions.
 3. Increase text size and inspect top-level screens for clipping or overlap.
 4. Enable Reduce Motion and confirm no essential meaning depends on motion.

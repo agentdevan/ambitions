@@ -20,7 +20,7 @@ No FCP implementation batch may be accepted unless every applicable gate is Gree
 
 | Gate | Red condition |
 |---|---|
-| Top-Level Tab Gate | Adds, renames, hides, or replaces Today / Goals / Capture / Plan / You. |
+| Top-Level Tab Gate | Adds, renames, hides, or replaces Today / Goals / Capture / Time / You. |
 | Deep-Not-Wide Gate | Creates new top-level surface or parallel workflow instead of deepening an existing owner. |
 | Anti-Generic UI Gate | Dominant object is generic card stack, dashboard grid, calendar clone, task list, PM board, notes feed, or settings dump. |
 | Release Claim Gate | Claims App Store, TestFlight, physical-device, public accessibility, privacy/legal, AI runtime, sync/cloud, or platform readiness without proof. |

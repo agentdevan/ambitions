@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS22`
 - Name: Longevity Kernel Archive Aging
 - Owning kernel: Longevity Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: You, Goals
 - Dependency gate: depends on AOS02, AOS12, and AOS13
 - Implementation boundary: archive aging and legacy payload survival contracts only

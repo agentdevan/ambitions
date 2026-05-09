@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS15`
 - Name: Local Language Kernel Planning
 - Owning kernel: Local Language Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: Capture, You
 - Dependency gate: depends on AOS04, AOS13, AOS14, and deterministic fallback
 - Implementation boundary: planning and adapter boundaries only; no model runtime before deterministic fallback

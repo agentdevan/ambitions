@@ -75,7 +75,7 @@ Physical-device smoke:
 
 - Required input: supported iPhone, exact commit SHA, build identifier, iOS
   version, install path, and operator notes.
-- Required evidence: install/launch result, Today / Goals / Capture / Plan / You
+- Required evidence: install/launch result, Today / Goals / Capture / Time / You
   shell check, Capture no-input-loss check, Today `Start here` check, Goal
   Detail, Plan denied-calendar fallback, You / Trust Center reachability, crash
   or no-crash note, screenshots or screen recording where useful.

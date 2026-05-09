@@ -41,7 +41,7 @@ If lower-priority source truth conflicts with higher-priority source truth, the 
 | `00_Canon_Index_10_10_Maturity_Gate.md` | Current | readiness gate and maturity reconciliation |
 | `01_Product_Canon.md` | Locked | identity, IA, primary objects, launch scope, anti-drift |
 | `02_Continuity_Layer_Chrome.md` | Locked | Context Crown, Dock, Edge, Trust Seam, Reflow, Receipts, Threads |
-| `03_Signature_Object_Specs.md` | Locked direction | Today, Goals, Capture, Plan, You primary objects |
+| `03_Signature_Object_Specs.md` | Locked direction | Today, Goals, Capture, Time, You primary objects |
 | `04_Trust_Privacy_Automation.md` | Locked direction | source labels, permissions, receipts, automation levels |
 | `05_Accessibility_Motion_Performance.md` | Locked direction | nonvisual behavior, motion, haptics, performance budget |
 | `06_QA_Preview_Visual_Drift.md` | Locked direction | rubrics, fixtures, gates, drift prevention, copy QA |

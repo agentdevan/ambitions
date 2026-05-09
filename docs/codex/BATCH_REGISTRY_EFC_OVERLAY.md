@@ -14,7 +14,7 @@ EFC exists to raise the planned architecture target to 100/100 by forcing every 
 
 ## Active Batch Preservation
 
-At EFC insertion time, the active compact mirror says:
+At EFC insertion time, the active compact mirror said:
 
 ```yaml
 current:
@@ -23,9 +23,14 @@ current:
   next_eligible_batch: "AFI12 Accessibility And State Proof"
 ```
 
-EFC does not supersede that active state.
+EFC did not supersede that active state. AFI12-AFI16 have since closed under
+the active train, and current live state must be read from `.codex/state/
+active-batch.yml`, `.codex/reports/current-batch-train-state.md`, and
+`docs/codex/BATCH_REGISTRY.md`.
 
-AFI12 remains the next eligible global batch unless repo evidence shows a dirty or half-complete active batch must close first. EFC attaches to AFI12 as a proof overlay, especially for Accessibility Shadow Surface requirements, state proof, Dynamic Type, Reduce Motion, Differentiate Without Color, VoiceOver order, rendered proof, and no-claim boundaries.
+As of the PK08 closeout, PK09 Unknown Persisted Value Degradation is the next eligible
+global batch. EFC attaches to PK09 as a data-safety proof overlay and continues
+to attach to later surface/accessibility batches through their existing owners.
 
 ## Registry Overlay Rules
 

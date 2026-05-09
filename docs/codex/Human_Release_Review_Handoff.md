@@ -67,7 +67,7 @@ If command-line launch is needed after a successful build, install and launch th
 ## Manual In-Simulator Playtest Checklist
 
 - Fresh launch.
-- Confirm the five-tab shell: Today / Goals / Capture / Plan / You.
+- Confirm the five-tab shell: Today / Goals / Capture / Time / You.
 - Today loads and feels calm/readable.
 - Goals loads and shows portfolio/goal modules.
 - Goal Detail opens and lanes are understandable.
@@ -84,7 +84,7 @@ If command-line launch is needed after a successful build, install and launch th
 
 - Fresh install.
 - Launch.
-- Confirm the five-tab shell: Today / Goals / Capture / Plan / You.
+- Confirm the five-tab shell: Today / Goals / Capture / Time / You.
 - Capture a loose thought.
 - Smart Attachment / Needs a Place behavior.
 - Create or inspect a Goal.

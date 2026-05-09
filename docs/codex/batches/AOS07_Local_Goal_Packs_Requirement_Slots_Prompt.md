@@ -7,7 +7,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS07`
 - Name: Local Goal Packs Requirement Slots
 - Owning kernel: Goal Path Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: Goals, Goal Detail
 - Dependency gate: depends on AOS06
 - Implementation boundary: local archetype packs and requirement slots only; not official requirement databases

@@ -7,8 +7,8 @@ Status: Complete / Green on 2026-05-06. Selected by live global full-stack autho
 - Batch ID: `AOS02`
 - Name: Life Graph Event Log Foundation
 - Owning kernel: Life Graph Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
-- Affected surface: Goals, Plan, You
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
+- Affected surface: Goals, Time, You
 - Dependency gate: depends on AOS01
 - Implementation boundary: event log and typed graph foundation only after AOS01
 

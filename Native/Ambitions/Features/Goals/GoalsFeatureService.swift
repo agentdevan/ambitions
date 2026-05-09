@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-struct RepositoryBackedGoalsService: GoalsServicing {
+struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
     let repositories: AppRepositories
     let planner: DeterministicGoalPlanner
     let adaptationService: GoalEngineAdaptationService
@@ -139,6 +139,18 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     }
 
     func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse {
+        let prepared = try await prepareGoalCreation(request, now: now)
+        let receipt = try await saveGoalCreation(goal: prepared.goal, draft: prepared.draft, now: now)
+        return CreateGoalResponse(
+            target: prepared.response.target,
+            blueprint: prepared.response.blueprint,
+            resultKind: prepared.response.resultKind,
+            planningEvaluation: prepared.response.planningEvaluation,
+            unitOfWorkReceipt: receipt
+        )
+    }
+
+    func prepareGoalCreation(_ request: CreateGoalRequest, now: Date) async throws -> PreparedGoalCreation {
         let trimmedTitle = request.title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmedTitle.isEmpty == false else {
             throw GoalsFeatureError.invalidTitle
@@ -177,8 +189,11 @@ struct RepositoryBackedGoalsService: GoalsServicing {
                 plannedGoalID: goalID,
                 resultKind: .planned
             )
-            let receipt = try await saveGoalCreation(goal: goal, draft: storedDraft, now: now)
-            return CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: planned.draft), resultKind: .planned, planningEvaluation: planned.plan.evaluation, unitOfWorkReceipt: receipt)
+            return PreparedGoalCreation(
+                response: CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: planned.draft), resultKind: .planned, planningEvaluation: planned.plan.evaluation),
+                goal: goal,
+                draft: storedDraft
+            )
         case let .starterPlanned(starter):
             let goal = goal(from: starter.draft, plan: starter.plan, id: goalID, createdAt: createdAt, updatedAt: createdAt)
             let storedDraft = storedDraft(
@@ -194,8 +209,11 @@ struct RepositoryBackedGoalsService: GoalsServicing {
                 plannedGoalID: goalID,
                 resultKind: .starterPlanned
             )
-            let receipt = try await saveGoalCreation(goal: goal, draft: storedDraft, now: now)
-            return CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: starter.draft), resultKind: .starterPlanned, planningEvaluation: starter.plan.evaluation, unitOfWorkReceipt: receipt)
+            return PreparedGoalCreation(
+                response: CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: starter.draft), resultKind: .starterPlanned, planningEvaluation: starter.plan.evaluation),
+                goal: goal,
+                draft: storedDraft
+            )
         case let .clarificationRequired(required):
             let storedDraft = storedDraft(
                 id: draftID,
@@ -210,8 +228,11 @@ struct RepositoryBackedGoalsService: GoalsServicing {
                 plannedGoalID: nil,
                 resultKind: .clarificationRequired
             )
-            let receipt = try await saveGoalCreation(goal: nil, draft: storedDraft, now: now)
-            return CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: required.draft), resultKind: .clarificationRequired, planningEvaluation: nil, unitOfWorkReceipt: receipt)
+            return PreparedGoalCreation(
+                response: CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: required.draft), resultKind: .clarificationRequired, planningEvaluation: nil),
+                goal: nil,
+                draft: storedDraft
+            )
         case let .blocked(blocked):
             let storedDraft = storedDraft(
                 id: draftID,
@@ -226,8 +247,11 @@ struct RepositoryBackedGoalsService: GoalsServicing {
                 plannedGoalID: nil,
                 resultKind: .blocked
             )
-            let receipt = try await saveGoalCreation(goal: nil, draft: storedDraft, now: now)
-            return CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: blocked.draft), resultKind: .blocked, planningEvaluation: nil, unitOfWorkReceipt: receipt)
+            return PreparedGoalCreation(
+                response: CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: blocked.draft), resultKind: .blocked, planningEvaluation: nil),
+                goal: nil,
+                draft: storedDraft
+            )
         }
     }
 

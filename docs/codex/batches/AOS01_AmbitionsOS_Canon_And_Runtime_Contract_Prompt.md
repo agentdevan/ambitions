@@ -9,7 +9,7 @@ Docs/protocol only; future canon only until implemented by later evidence.
 - Batch ID: `AOS01`
 - Name: AmbitionsOS Canon And Runtime Contract
 - Owning kernel: Governance Kernel / Runtime Contract
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: all canonical surfaces
 - Dependency gate: blocks all AOS work
 - Implementation boundary: docs/protocol only; no app implementation

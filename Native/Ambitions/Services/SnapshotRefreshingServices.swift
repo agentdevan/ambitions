@@ -15,7 +15,7 @@ struct SnapshotRefreshingTodayService: TodayServicing {
     }
 }
 
-struct SnapshotRefreshingGoalsService: GoalsServicing {
+struct SnapshotRefreshingGoalsService: GoalsServicing, GoalCreationPreparing {
     let base: any GoalsServicing
     let snapshotWriter: any ExternalSurfaceSnapshotWriting
 
@@ -35,6 +35,20 @@ struct SnapshotRefreshingGoalsService: GoalsServicing {
         let response = try await base.createGoal(request, now: now)
         await snapshotWriter.refresh(now: now)
         return response
+    }
+
+    func prepareGoalCreation(_ request: CreateGoalRequest, now: Date) async throws -> PreparedGoalCreation {
+        guard let base = base as? any GoalCreationPreparing else {
+            throw GoalsFeatureError.notActionable
+        }
+        return try await base.prepareGoalCreation(request, now: now)
+    }
+
+    func didCommitPreparedGoalCreation(now: Date) async {
+        await snapshotWriter.refresh(now: now)
+        if let base = base as? any GoalCreationPreparing {
+            await base.didCommitPreparedGoalCreation(now: now)
+        }
     }
 
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse {

@@ -786,6 +786,55 @@ struct SwiftDataGoalCreationUnitOfWork: GoalCreationUnitOfWorking {
     }
 }
 
+enum CapturePromotionUnitOfWorkProbeError: Error, Equatable {
+    case afterGoalDraftWriteBeforeCaptureWrite
+}
+
+enum CapturePromotionUnitOfWorkFailureInjection: Sendable, Equatable {
+    case afterGoalDraftWriteBeforeCaptureWrite
+}
+
+struct SwiftDataCapturePromotionUnitOfWork: CapturePromotionUnitOfWorking {
+    let store: AmbitionsPersistenceStore
+    let failureInjection: CapturePromotionUnitOfWorkFailureInjection?
+
+    init(
+        store: AmbitionsPersistenceStore,
+        failureInjection: CapturePromotionUnitOfWorkFailureInjection? = nil
+    ) {
+        self.store = store
+        self.failureInjection = failureInjection
+    }
+
+    func saveCapturePromotion(
+        _ payload: CapturePromotionUnitOfWorkPayload,
+        id: String = UUID().uuidString,
+        timestampProvider: () -> String = { ISO8601DateFormatter().string(from: .now) }
+    ) async throws -> AppUnitOfWorkResult<CapturePromotionUnitOfWorkCommit> {
+        try await store.transaction(
+            id: id,
+            writeScope: .localSwiftDataSingleContext,
+            timestampProvider: timestampProvider
+        ) { context in
+            try SwiftDataGoalPersistence.saveGoals([payload.goal], in: context)
+            try SwiftDataGoalDraftPersistence.saveDrafts([payload.draft], in: context)
+
+            if failureInjection == .afterGoalDraftWriteBeforeCaptureWrite {
+                throw CapturePromotionUnitOfWorkProbeError.afterGoalDraftWriteBeforeCaptureWrite
+            }
+
+            try SwiftDataCapturePersistence.saveCaptures([payload.capture], in: context)
+
+            return CapturePromotionUnitOfWorkCommit(
+                goalID: payload.goal.id,
+                draftID: payload.draft.id,
+                captureID: payload.capture.id,
+                resultKind: payload.draft.latestResultKind
+            )
+        }
+    }
+}
+
 private enum SwiftDataGoalPersistence {
     static func saveGoals(_ goals: [Goal], in context: ModelContext) throws {
         let goalIndex = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<GoalRecord>()).map { ($0.id, $0) })
@@ -944,19 +993,25 @@ struct SwiftDataCaptureRepository: CaptureRepository {
 
     func saveCaptures(_ captures: [Capture]) async throws {
         try await store.write { context in
-            let existing = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<CaptureRecord>()).map { ($0.id, $0) })
-            for capture in captures {
-                if let record = existing[capture.id] {
-                    record.createdAt = capture.createdAt
-                    record.updatedAt = capture.updatedAt
-                    record.rawText = capture.rawText
-                    record.sourceTypeRaw = capture.sourceType?.rawValue
-                    record.statusRaw = capture.status.rawValue
-                    record.linkedGoalID = capture.linkedGoalID
-                    record.snapshotData = try PersistenceCoding.encode(capture)
-                } else {
-                    context.insert(try RepositoryMapping.captureRecord(from: capture))
-                }
+            try SwiftDataCapturePersistence.saveCaptures(captures, in: context)
+        }
+    }
+}
+
+private enum SwiftDataCapturePersistence {
+    static func saveCaptures(_ captures: [Capture], in context: ModelContext) throws {
+        let existing = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<CaptureRecord>()).map { ($0.id, $0) })
+        for capture in captures {
+            if let record = existing[capture.id] {
+                record.createdAt = capture.createdAt
+                record.updatedAt = capture.updatedAt
+                record.rawText = capture.rawText
+                record.sourceTypeRaw = capture.sourceType?.rawValue
+                record.statusRaw = capture.status.rawValue
+                record.linkedGoalID = capture.linkedGoalID
+                record.snapshotData = try PersistenceCoding.encode(capture)
+            } else {
+                context.insert(try RepositoryMapping.captureRecord(from: capture))
             }
         }
     }

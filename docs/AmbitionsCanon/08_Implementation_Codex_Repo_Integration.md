@@ -418,7 +418,7 @@ Objective: establish five-tab shell and Dock behavior.
 
 Acceptance:
 
-- Today, Goals, Capture, Plan, You only
+- Today, Goals, Capture, Time, You only
 - Capture icon not plus
 - Plan icon not menu
 - no red badges

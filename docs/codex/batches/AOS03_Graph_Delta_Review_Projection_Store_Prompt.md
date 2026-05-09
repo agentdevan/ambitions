@@ -14,7 +14,7 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 - Batch ID: `AOS03`
 - Name: Graph Delta Review Projection Store
 - Owning kernel: Life Graph Kernel / Runtime Contract
-- Affected 3.0 primitive: Today / Goals / Capture / Plan / You only where the train gate names a concrete surface
+- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
 - Affected surface: all projections
 - Dependency gate: depends on AOS02
 - Implementation boundary: graph delta review and projection store contracts only after AOS02
