@@ -23,8 +23,8 @@ Current batch: AFI11 Trust Seam And Receipts / Accepted Yellow
 Next eligible batch: AFI12 Accessibility And State Proof
 ```
 
-AFI12-AFI16 have since closed under the active train. As of the PK09 closeout,
-PK10 Storage Invariant Checker is the next eligible global batch unless repo
+AFI12-AFI16 have since closed under the active train. As of the PK10 closeout,
+PK11 Pre-Migration Backup is the next eligible global batch unless repo
 evidence shows a dirty or half-complete active batch must close first.
 
 EFC must not interrupt or overwrite Codex while it is actively running. Before any continuation, read:

@@ -8,12 +8,12 @@ Date: 2026-05-08
 | Risk | Status | Owner batch | Current boundary |
 | --- | --- | --- | --- |
 | Multi-repository mutation is product-flow-proven for goal creation, clarification/materialization, and Capture promotion. | Closed Green | PK04-PK06 | PK04 proves SwiftData-backed goal creation through a local UnitOfWork with rollback before draft save. PK05 proves SwiftData-backed clarification/materialization through the same UnitOfWork seam. PK06 proves Capture promotion across Goal, Draft, and Capture writes with rollback before Capture save. |
-| Schema version ledger, migration scaffold, and unknown raw-value degradation coverage are PK-proven, but migration safety is not. | Open Yellow | PK10-PK13 | PK07 names current storage versions; PK08 scaffolds blocked migration planning gates; PK09 proves deterministic unknown raw-value degradation. No migration-safe or data-loss-proof claim until invariant checks, backup, import dry run, and rollback are proven. |
+| Schema version ledger, migration scaffold, unknown raw-value degradation, and storage invariant checking are PK-proven, but migration safety is not. | Open Yellow | PK11-PK13 | PK07 names current storage versions; PK08 scaffolds blocked migration planning gates; PK09 proves deterministic unknown raw-value degradation; PK10 proves read-only invariant checking. No migration-safe or data-loss-proof claim until backup, import dry run, and rollback are proven. |
 | Side effects can be triggered from multiple platform paths. | Open Yellow | PK22-PK25 | No side-effect-isolated claim until SideEffectLedger routes notifications, EventKit, and external snapshots. |
 | Sync readiness is architectural only. | Open Yellow | PK29-PK31 | No sync-ready, cloud-ready, or conflict-safe claim until revisions, tombstones, conflict policy, and manual merge proof exist. |
 | Intelligence output must stay claim-bounded. | Open Yellow | PK32-PK34 | No AI-ready or autonomous-intelligence claim; quarantine uncertain/generated intelligence until PK proof exists. |
 | Performance scale has not been PK-budget-proven. | Open Yellow | PK35-PK37 | No performance-budget-proven claim until large-store fixtures, budgets, and cache invalidation proof exist. |
-| Package/module moves can destabilize builds. | Scanner Yellow | PK10-PK41 | PK01 boundary scaffold and PK02 scanner exist; current scanner findings are Yellow and no package-split claim is allowed until later focused builds pass. |
+| Package/module moves can destabilize builds. | Scanner Yellow | PK11-PK41 | PK01 boundary scaffold and PK02 scanner exist; current scanner findings are Yellow and no package-split claim is allowed until later focused builds pass. |
 | Pre-sync stash contains source-truth conflicts. | Parked Yellow | Repo steward / sequencing reconciliation | Stash remains preserved and unapplied; do not drop it until a future reconciliation confirms every useful piece is merged or obsolete. |
 
 Hard Red entries: none recorded by PK08 as of 2026-05-08.
@@ -32,7 +32,9 @@ materialization write-back. PK06 extends it to focused Capture promotion.
 PK07 adds storage schema version ledger coverage without proving migration
 safety. PK08 adds a blocked migration plan scaffold without proving migration
 execution safety. PK09 adds unknown persisted raw-value degradation coverage
-without proving migration execution or data-loss safety.
+without proving migration execution or data-loss safety. PK10 adds read-only
+storage invariant checking without proving backup, import dry run, restore
+rollback, migration execution, or data-loss safety.
 
 ## AFI / PK Ordering Finding
 

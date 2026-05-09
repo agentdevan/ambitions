@@ -28,8 +28,8 @@ the active train, and current live state must be read from `.codex/state/
 active-batch.yml`, `.codex/reports/current-batch-train-state.md`, and
 `docs/codex/BATCH_REGISTRY.md`.
 
-As of the PK09 closeout, PK10 Storage Invariant Checker is the next eligible
-global batch. EFC attaches to PK10 as a data-safety proof overlay and continues
+As of the PK10 closeout, PK11 Pre-Migration Backup is the next eligible
+global batch. EFC attaches to PK11 as a data-safety proof overlay and continues
 to attach to later surface/accessibility batches through their existing owners.
 
 ## Registry Overlay Rules

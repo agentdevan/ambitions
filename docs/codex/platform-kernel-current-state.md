@@ -56,7 +56,10 @@ Date: 2026-05-08
   routes unknown persisted enum raw values through deterministic fallbacks or
   optional nil fallbacks with review-blocking degradation metadata, without
   executing migrations.
-- PK10 Storage Invariant Checker is the next eligible global batch. PK10-PK41
+- PK10 Storage Invariant Checker is complete / Green as a read-only SwiftData
+  invariant checker for broken references, malformed payloads/snapshots, and
+  unknown raw values before backup/import/restore work.
+- PK11 Pre-Migration Backup is the next eligible global batch. PK11-PK41
   remain active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
@@ -82,8 +85,8 @@ proof.
 - Storage schema version ledger coverage is PK-proven by PK07. Migration plan
   mutation gate scaffolding and execution blocking are PK-proven by PK08.
   Unknown persisted value degradation is PK-proven by PK09. Storage invariant
-  checking, pre-migration backup, import dry run, and restore rollback are not
-  yet PK-proven.
+  checking is PK-proven by PK10. Pre-migration backup, import dry run, and
+  restore rollback are not yet PK-proven.
 - Side effects are present in platform-adjacent paths, but SideEffectLedger
   isolation is not yet PK-proven.
 - Sync-readiness primitives, conflict policy, and manual portable merge are not
@@ -93,4 +96,4 @@ proof.
 
 ## Next Eligible
 
-PK10 Storage Invariant Checker.
+PK11 Pre-Migration Backup.
