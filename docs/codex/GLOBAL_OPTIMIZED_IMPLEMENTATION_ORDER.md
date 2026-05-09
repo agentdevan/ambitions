@@ -110,9 +110,9 @@ As of this order update:
 - AFI01-AFI16 Ambitions Flagship Interface is complete / Accepted Yellow as
   current source truth. AFI supersedes older ACUI/Plan-era interface sequencing.
 - PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
-  Baseline is complete. PK01-PK12 are complete. PK13 is the active next batch
-  because restore rollback is a minimum safety prerequisite before further
-  storage, sync, intelligence, or broad cross-train tail work.
+  Baseline is complete. PK01-PK13 are complete. PK14 is the active next batch
+  because durable command/event ledger proof is a minimum prerequisite before
+  receipt/trust and side-effect train work.
 - AOS24-AOS30 remain queued behind PK where they depend on platform/backend
   safety, side effects, diagnostics, sync readiness, intelligence quarantine,
   performance, or module extraction.
@@ -126,24 +126,23 @@ As of this order update:
 - CS02C-CS06C and CS09C remain deferred/blocked until a named compatibility proof target exists; they are not part of the happy-path optimized order.
 - No historical entries are renumbered by the FIO01/PFC05A/DPTG00 overlay, AFI
   correction, PK insertion package, AIR fold-in, or surface encapsulation
-  overlays. PK13 is next unless repo evidence shows a dirty or half-complete
+  overlays. PK14 is next unless repo evidence shows a dirty or half-complete
   active batch must close first.
 
-## 2026-05-08 Sequence Optimization After PK12
+## 2026-05-08 Sequence Optimization After PK13
 
-After PK12 Green, the maximum-safe global order keeps dependency-critical
+After PK13 Green, the maximum-safe global order keeps dependency-critical
 Platform Kernel work first regardless of original train grouping:
 
-1. PK13: restore rollback.
-2. PK14-PK16: durable events, receipt backend, and trust history query.
-3. PK17-PK21: Today, Goals, Capture, and Time service/read-model extraction.
-4. PK22-PK28: side-effect ledger, notifications, EventKit, external snapshots,
+1. PK14-PK16: durable events, receipt backend, and trust history query.
+2. PK17-PK21: Today, Goals, Capture, and Time service/read-model extraction.
+3. PK22-PK28: side-effect ledger, notifications, EventKit, external snapshots,
    privacy classification, diagnostics, and data control commands.
-5. PK29-PK31: revision/tombstone, conflict policy, and manual portable merge.
-6. PK32-PK34: knowledge claim boundary, recommendation evidence, and
+4. PK29-PK31: revision/tombstone, conflict policy, and manual portable merge.
+5. PK32-PK34: knowledge claim boundary, recommendation evidence, and
    intelligence quarantine.
-7. PK35-PK41: scale, performance budgets, cache, and package/module moves.
-8. Source Atlas, LDI/AOS tails, FCP/FVQ/PFC/RHC tails resume only when their
+6. PK35-PK41: scale, performance budgets, cache, and package/module moves.
+7. Source Atlas, LDI/AOS tails, FCP/FVQ/PFC/RHC tails resume only when their
    required PK proof gates are Green or accepted Yellow in the registry.
 
 This does not create a new train, does not reorder completed history, and does
@@ -153,7 +152,7 @@ claims.
 ## Platform Kernel Insertion
 
 PK00-PK41 is now an active planned train, not optional brainstorming. PK00 is
-complete as a report-only baseline. PK01-PK12 are complete. PK13-PK41 precede
+complete as a report-only baseline. PK01-PK13 are complete. PK14-PK41 precede
 further backend/platform, storage, sync, intelligence, performance, module-split, or major feature
 expansion work when that work depends on the corresponding PK proof. Existing
 PFC/AOS/LDI evidence is preserved and may be reconciled into PK batches, but no

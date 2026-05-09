@@ -187,7 +187,7 @@ work, persisted-data evidence, migration findings, or human review notes.
 
 ## Global Integration
 
-PK13 is the next eligible backend/platform batch after PK12 Green unless a
+PK14 is the next eligible backend/platform batch after PK13 Green unless a
 dirty or half-complete active batch must be closed first. Remote sync,
 remote-intelligence, migration, package-split, and major platform feature work
 must wait for the relevant PK prerequisites, especially PK11-PK13, PK22-PK34,

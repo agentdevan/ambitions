@@ -66,8 +66,11 @@ Date: 2026-05-08
   snapshot import dry-run report for replace and merge modes. It reports
   would-reset/would-import counts, conflicts, warnings, and no-durable-mutation
   safety state without saving, resetting, restoring, or importing data.
-- PK13 Restore Rollback is the next eligible global batch. PK13-PK41 remain
-  active planned Platform Kernel scope.
+- PK13 Restore Rollback is complete / Green as a storage-local portable restore
+  rollback wrapper. It preflights incoming and rollback packages, attempts the
+  requested import, and restores the rollback package if import throws.
+- PK14 Durable Command/Event Ledger is the next eligible global batch.
+  PK14-PK41 remain active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
   notification foundations, EventKit integration services, external snapshot
@@ -93,8 +96,9 @@ proof.
   mutation gate scaffolding and execution blocking are PK-proven by PK08.
   Unknown persisted value degradation is PK-proven by PK09. Storage invariant
   checking is PK-proven by PK10. Pre-migration backup is PK-proven by PK11.
-  Focused replace/merge import dry-run reporting is PK-proven by PK12. Restore
-  rollback is not yet PK-proven.
+  Focused replace/merge import dry-run reporting is PK-proven by PK12. Focused
+  restore rollback wrapper behavior is PK-proven by PK13. Arbitrary migration
+  safety and data-loss-proof behavior remain non-claims.
 - Side effects are present in platform-adjacent paths, but SideEffectLedger
   isolation is not yet PK-proven.
 - Sync-readiness primitives, conflict policy, and manual portable merge are not
@@ -104,4 +108,4 @@ proof.
 
 ## Next Eligible
 
-PK13 Restore Rollback.
+PK14 Durable Command/Event Ledger.
