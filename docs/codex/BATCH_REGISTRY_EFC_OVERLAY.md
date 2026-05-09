@@ -28,9 +28,10 @@ the active train, and current live state must be read from `.codex/state/
 active-batch.yml`, `.codex/reports/current-batch-train-state.md`, and
 `docs/codex/BATCH_REGISTRY.md`.
 
-As of the PK11 closeout, PK12 Staged Portable Import Dry Run is the next eligible
-global batch. EFC attaches to PK12 as a data-safety proof overlay and continues
-to attach to later surface/accessibility batches through their existing owners.
+As of the PK12 closeout, PK13 Restore Rollback is the next eligible global
+batch. EFC attached to PK12 as a data-safety proof overlay and continues to
+attach to PK13 and later surface/accessibility batches through their existing
+owners.
 
 ## Registry Overlay Rules
 

@@ -357,6 +357,70 @@ struct PortableImportSafetySummary: Codable, Sendable, Equatable {
     let warningMessages: [String]
 }
 
+struct PortableImportDryRunSafetySummary: Codable, Sendable, Equatable {
+    let mode: PortableImportMode
+    let headline: String
+    let safeFailureMessage: String
+    let requiresExplicitConfirmation: Bool
+    let wouldImportItemCount: Int
+    let conflictCount: Int
+    let warningMessages: [String]
+}
+
+struct PortableImportDryRunReport: Codable, Sendable, Equatable {
+    let mode: PortableImportMode
+    let wouldResetLocalStore: Bool
+    let wouldImportGoalCount: Int
+    let wouldImportDraftCount: Int
+    let wouldImportEvidenceCount: Int
+    let wouldImportFeedbackCount: Int
+    let wouldImportCaptureCount: Int
+    let wouldImportTeachingSignalCount: Int
+    let wouldImportAppStateCount: Int
+    let conflicts: [PortableConflict]
+    let warnings: [PortableImportWarning]
+    let safetySummary: PortableImportDryRunSafetySummary
+    let durableMutationAllowed: Bool
+
+    init(
+        mode: PortableImportMode,
+        wouldResetLocalStore: Bool,
+        wouldImportGoalCount: Int,
+        wouldImportDraftCount: Int,
+        wouldImportEvidenceCount: Int,
+        wouldImportFeedbackCount: Int,
+        wouldImportCaptureCount: Int,
+        wouldImportTeachingSignalCount: Int = 0,
+        wouldImportAppStateCount: Int,
+        conflicts: [PortableConflict],
+        warnings: [PortableImportWarning],
+        durableMutationAllowed: Bool = false,
+        safetySummary: PortableImportDryRunSafetySummary? = nil
+    ) {
+        self.mode = mode
+        self.wouldResetLocalStore = wouldResetLocalStore
+        self.wouldImportGoalCount = wouldImportGoalCount
+        self.wouldImportDraftCount = wouldImportDraftCount
+        self.wouldImportEvidenceCount = wouldImportEvidenceCount
+        self.wouldImportFeedbackCount = wouldImportFeedbackCount
+        self.wouldImportCaptureCount = wouldImportCaptureCount
+        self.wouldImportTeachingSignalCount = wouldImportTeachingSignalCount
+        self.wouldImportAppStateCount = wouldImportAppStateCount
+        self.conflicts = conflicts
+        self.warnings = warnings
+        self.durableMutationAllowed = durableMutationAllowed
+        self.safetySummary = safetySummary ?? PortableImportDryRunSafetySummary(
+            mode: mode,
+            headline: conflicts.isEmpty ? "Dry run completed without durable changes." : "Dry run found items that need review before import.",
+            safeFailureMessage: "Dry run does not reset, save, or overwrite local Ambitions data.",
+            requiresExplicitConfirmation: mode == .replaceLocalStore,
+            wouldImportItemCount: wouldImportGoalCount + wouldImportDraftCount + wouldImportEvidenceCount + wouldImportFeedbackCount + wouldImportCaptureCount + wouldImportTeachingSignalCount + wouldImportAppStateCount,
+            conflictCount: conflicts.count,
+            warningMessages: warnings.map(\.message)
+        )
+    }
+}
+
 struct PortableImportReport: Codable, Sendable, Equatable {
     let mode: PortableImportMode
     let importedGoalCount: Int

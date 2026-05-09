@@ -118,6 +118,21 @@ private struct FixedSnapshotService: PortableSnapshotServicing {
         snapshot
     }
 
+    func dryRunImportSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportDryRunReport {
+        PortableImportDryRunReport(
+            mode: mode,
+            wouldResetLocalStore: mode == .replaceLocalStore,
+            wouldImportGoalCount: 0,
+            wouldImportDraftCount: 0,
+            wouldImportEvidenceCount: 0,
+            wouldImportFeedbackCount: 0,
+            wouldImportCaptureCount: 0,
+            wouldImportAppStateCount: 0,
+            conflicts: [],
+            warnings: []
+        )
+    }
+
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
         PortableImportReport(
             mode: mode,

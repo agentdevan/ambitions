@@ -378,6 +378,101 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(restoredTeaching.map(\.updatedAt), [localTeaching.updatedAt])
     }
 
+    func testDryRunReplaceReportsIncomingPackageWithoutResettingLocalStore() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let localGoal = try XCTUnwrap(sampleGoal(id: "goal-dry-run-local", revision: 1, updatedAt: "2026-04-18T10:00:00Z"))
+        let incomingGoal = try XCTUnwrap(sampleGoal(id: "goal-dry-run-incoming", revision: 2, updatedAt: "2026-04-19T10:00:00Z"))
+        let incomingCapture = sampleCapture(id: "capture-dry-run-incoming", updatedAt: "2026-04-19T14:00:00Z")
+        var incomingState = AppStateSnapshot.default
+        incomingState.userDisplayName = "Dry Run Incoming"
+
+        try await repositories.goals.saveGoals([localGoal])
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+        let snapshot = PortableAppSnapshot(
+            metadata: PortableAppSnapshotMetadata(
+                schemaVersion: .v1,
+                exportedAt: "2026-04-19T15:00:00Z",
+                source: "native.local.repositories",
+                trustPosture: .localOnly
+            ),
+            goals: [incomingGoal],
+            drafts: [],
+            evidence: [],
+            feedback: [],
+            captures: [incomingCapture],
+            teachingSignals: [],
+            appState: incomingState
+        )
+
+        let report = try await service.dryRunImportSnapshot(snapshot, mode: .replaceLocalStore)
+        let loadedGoals = try await repositories.goals.listGoals()
+        let loadedCaptures = try await repositories.captures.listCaptures()
+        let loadedState = try await repositories.appState.loadState()
+
+        XCTAssertTrue(report.wouldResetLocalStore)
+        XCTAssertEqual(report.wouldImportGoalCount, 1)
+        XCTAssertEqual(report.wouldImportCaptureCount, 1)
+        XCTAssertEqual(report.wouldImportAppStateCount, 1)
+        XCTAssertFalse(report.durableMutationAllowed)
+        XCTAssertTrue(report.safetySummary.requiresExplicitConfirmation)
+        XCTAssertEqual(loadedGoals.map(\.id), [localGoal.id])
+        XCTAssertTrue(loadedCaptures.isEmpty)
+        XCTAssertEqual(loadedState.userDisplayName, "")
+    }
+
+    func testDryRunMergeReportsAcceptedItemsAndConflictsWithoutSaving() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let localGoal = try XCTUnwrap(sampleGoal(id: "goal-dry-run-shared", revision: 3, updatedAt: "2026-04-19T10:00:00Z"))
+        let incomingGoal = try XCTUnwrap(sampleGoal(id: "goal-dry-run-shared", revision: 3, updatedAt: "2026-04-19T10:00:00Z", title: "Incoming dry-run conflict"))
+        let incomingDraft = sampleDraft(id: "draft-dry-run-new", plannedGoalID: incomingGoal.id, updatedAt: "2026-04-19T11:00:00Z")
+        let incomingCapture = sampleCapture(id: "capture-dry-run-new", updatedAt: "2026-04-19T14:00:00Z")
+
+        try await repositories.goals.saveGoals([localGoal])
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+        let snapshot = PortableAppSnapshot(
+            metadata: PortableAppSnapshotMetadata(
+                schemaVersion: .v1,
+                exportedAt: "2026-04-19T15:00:00Z",
+                source: "native.local.repositories",
+                trustPosture: .localOnly
+            ),
+            goals: [incomingGoal],
+            drafts: [incomingDraft],
+            evidence: [],
+            feedback: [],
+            captures: [incomingCapture],
+            teachingSignals: [],
+            appState: .default
+        )
+
+        let report = try await service.dryRunImportSnapshot(snapshot, mode: .mergeWithConflictReport)
+        let loadedDrafts = try await repositories.drafts.listDrafts()
+        let loadedCaptures = try await repositories.captures.listCaptures()
+        let loadedGoal = try await repositories.goals.goal(id: localGoal.id)
+
+        XCTAssertFalse(report.wouldResetLocalStore)
+        XCTAssertEqual(report.wouldImportDraftCount, 1)
+        XCTAssertEqual(report.wouldImportCaptureCount, 1)
+        XCTAssertEqual(report.wouldImportGoalCount, 0)
+        XCTAssertEqual(report.wouldImportAppStateCount, 1)
+        XCTAssertEqual(report.conflicts.map(\.recommendation), [.requiresUserDecision])
+        XCTAssertFalse(report.durableMutationAllowed)
+        XCTAssertEqual(report.safetySummary.wouldImportItemCount, 3)
+        XCTAssertTrue(loadedDrafts.isEmpty)
+        XCTAssertTrue(loadedCaptures.isEmpty)
+        XCTAssertEqual(loadedGoal?.title, localGoal.title)
+    }
+
     func testNewPhoneDisasterDrillRestoresEncodedPackageIntoFreshStore() async throws {
         let sourceStore = try AmbitionsPersistenceStore(inMemory: true)
         let sourceRepositories = makeRepositories(store: sourceStore)

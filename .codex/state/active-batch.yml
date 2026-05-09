@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK11 Pre-Migration Backup"
-  previous_batch: "PK10 Storage Invariant Checker"
+  batch: "PK12 Staged Portable Import Dry Run"
+  previous_batch: "PK11 Pre-Migration Backup"
   previous_result: "Green"
-  next_eligible_batch: "PK12 Staged Portable Import Dry Run"
+  next_eligible_batch: "PK13 Restore Rollback"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true

@@ -9,34 +9,37 @@ Status: Active
 ## Current Closeout
 
 Result: Green
-Batch: PK11 Pre-Migration Backup
+Batch: PK12 Staged Portable Import Dry Run
 Commit: pending
-Files changed: pre-migration backup contract, focused pre-migration backup
-tests, PK11 audit report, queue/state docs, and PK closeout docs.
-Behavior changed: no UI/runtime product behavior changed. PK11 adds a local
-pre-migration backup gate that prepares an inspectable portable snapshot
-package and typed receipt, checks storage invariants, validates the migration
-plan scaffold, and keeps migration execution blocked.
+Files changed: portable snapshot dry-run contracts/service, focused portable
+snapshot and backup tests, PK12 audit report, queue/state docs, and PK closeout
+docs.
+Behavior changed: no UI/runtime product behavior changed. PK12 adds a local
+portable import dry-run report for replace and merge modes that validates and
+compares incoming snapshot data without resetting, saving, restoring, or
+importing data.
 Tests run: `xcodegen generate`; focused `xcodebuild test -project
 Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17'
--only-testing:AmbitionsTests/PreMigrationBackupTests` (3 tests, 0
-failures). Closeout scripts completed with advisory backlog only.
+-only-testing:AmbitionsTests/PortableSnapshotServiceTests/testDryRunReplaceReportsIncomingPackageWithoutResettingLocalStore
+-only-testing:AmbitionsTests/PortableSnapshotServiceTests/testDryRunMergeReportsAcceptedItemsAndConflictsWithoutSaving
+-only-testing:AmbitionsTests/PreMigrationBackupTests` (5 tests, 0 failures).
+Closeout scripts completed with advisory backlog only.
 Tests not run: full unit/UI suite, package split build proof, physical-device
 proof, signed archive proof, hosted CI, simulator visual proof, public
-accessibility proof, migration/import/export proof, or performance-budget
-proof.
+accessibility proof, durable migration/import/export proof, restore rollback,
+or performance-budget proof.
 Known risks: see `docs/audits/platform-kernel-risk-register.md`.
-Yellows carried: PK12-PK41 remain active planned scope; import dry run/rollback,
-side-effect isolation, sync readiness, intelligence quarantine,
-package split safety, and performance budgets are not fully
-PK-proven yet. PK02 scanner output remains
+Yellows carried: PK13-PK41 remain active planned scope; restore rollback,
+side-effect isolation, sync readiness, intelligence quarantine, package split
+safety, and performance budgets are not fully PK-proven yet. PK02 scanner
+output remains
 Yellow for `Native/Ambitions/Domain/AppSession.swift` importing SwiftUI and is
 not package-cleanliness proof. Founder acceptance, rendered visual approval,
 manual accessibility proof, device proof, signed archive proof, hosted CI, and
 release readiness remain Yellow/unproven. GQ01 is normalized as accepted
 Yellow for historical-doc prune breadth and scan noise.
 The pre-sync stash remains preserved and unapplied.
-Rollback path: revert the PK11 implementation/status commit.
+Rollback path: revert the PK12 implementation/status commit.
 Claims: PK00 baseline remains complete; AFI source truth controls active IA;
 PK03 UnitOfWork foundation evidence is recorded; PK04 atomic goal-creation
 evidence is recorded; PK05 atomic clarification/materialization evidence is
@@ -44,11 +47,12 @@ recorded; PK06 atomic Capture promotion evidence is recorded; PK07 storage
 schema version ledger evidence is recorded; PK08 migration plan scaffold
 evidence is recorded; PK09 unknown persisted value degradation evidence is
 recorded; PK10 storage invariant checker evidence is recorded; PK11
-pre-migration backup evidence is recorded.
+pre-migration backup evidence is recorded; PK12 staged portable import dry-run
+evidence is recorded.
 Non-claims: no production readiness, backend completion, migration safety,
 sync readiness, privacy compliance, CI green, all-tests-pass, performance
 proof, release readiness, or physical-device proof.
-Next eligible batch: PK12 Staged Portable Import Dry Run.
+Next eligible batch: PK13 Restore Rollback.
 
 ## Completed
 
@@ -66,8 +70,9 @@ Next eligible batch: PK12 Staged Portable Import Dry Run.
 - PK09 Unknown Persisted Value Degradation is complete / Green.
 - PK10 Storage Invariant Checker is complete / Green.
 - PK11 Pre-Migration Backup is complete / Green.
-- PK12 Staged Portable Import Dry Run is next eligible.
-- PK12-PK41 remain queued active planned Platform Kernel scope.
+- PK12 Staged Portable Import Dry Run is complete / Green.
+- PK13 Restore Rollback is next eligible.
+- PK13-PK41 remain queued active planned Platform Kernel scope.
 
 ## Parked Yellows
 

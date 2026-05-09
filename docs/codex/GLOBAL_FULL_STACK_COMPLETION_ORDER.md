@@ -39,7 +39,7 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   superseded as a top-level destination and remains contextual/action language
   only.
 - PK00-PK41 Platform Kernel is active planned scope. PK00 Current Backend Proof
-  Baseline is complete. PK01-PK11 are complete. PK12-PK41 remain queued and may
+  Baseline is complete. PK01-PK12 are complete. PK13-PK41 remain queued and may
   precede later AFI, PLR, AOS, or LDI work only when registry evidence proves
   the specific PK batch is a minimum safety prerequisite.
 - AOS and LDI remaining successors are queued behind the new PK insertion where
@@ -79,8 +79,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
   Bridge contract. LDI13 followed and is now complete Green as a local Today
   Bridge And Action Closure contract. LDI14 followed and is now complete Green
   as a local Trust Review And Dream Handling Receipts contract. AFI01-AFI16
-  later closed as active flagship interface source-truth. PK12 now follows
-  PK11 as the active Platform Kernel data-safety prerequisite unless repo
+  later closed as active flagship interface source-truth. PK13 now follows
+  PK12 as the active Platform Kernel data-safety prerequisite unless repo
   evidence proves a dirty or half-complete active batch must close first.
 
 ### Phase 0.5 — AFI Correction And Platform Kernel Insertion
@@ -91,13 +91,13 @@ document.
 
 PK00. Current Backend Proof Baseline. Complete report-only baseline; no
 production code changes.
-PK01-PK11 are complete. PK12-PK41 remain queued in
+PK01-PK12 are complete. PK13-PK41 remain queued in
 `docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md` and may supersede
 older backend/platform sequencing where dependency order conflicts. Remote
 sync, remote intelligence, migration, package-split, and major platform feature
 work must wait for the relevant PK prerequisites.
 
-After PK11, the optimized global path is PK12-PK13 storage data safety first,
+After PK12, the optimized global path is PK13 storage data safety first,
 then PK14-PK16 events/receipts/trust, PK17-PK21 service extraction,
 PK22-PK28 side effects/privacy/data controls, PK29-PK31 sync/merge,
 PK32-PK34 knowledge and intelligence boundaries, and PK35-PK41 scale/package

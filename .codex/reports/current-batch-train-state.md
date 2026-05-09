@@ -2,13 +2,21 @@
 
 Date: 2026-05-08
 Active train: Global full-stack execution
-Current batch: PK11 Pre-Migration Backup / Green.
-Next eligible batch: PK12 Staged Portable Import Dry Run
-Scope: PK11 adds a local pre-migration backup gate that prepares an inspectable portable snapshot package, typed backup receipt, invariant check, and migration-plan validation before later dry-run/restore work. It does not execute migrations, restore data, or claim migration/data-loss safety. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
+Current batch: PK12 Staged Portable Import Dry Run / Green.
+Next eligible batch: PK13 Restore Rollback
+Scope: PK12 adds a local portable snapshot import dry-run path for replace and merge modes. It reports would-reset/would-import counts, conflicts, warnings, and a no-durable-mutation safety summary without saving, resetting, restoring, or importing data. GQ01 remains complete / accepted Yellow for historical-doc prune breadth and scan noise.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+
+## PK12 Staged Portable Import Dry Run Closeout
+
+- PK12 report: `docs/audits/pk12-staged-portable-import-dry-run-report.md`.
+- Portable import dry-run contract: `Native/Ambitions/Persistence/PortableSnapshotContracts.swift` and `Native/Ambitions/Persistence/PortableSnapshotService.swift`.
+- Focused proof: `PortableSnapshotServiceTests` and `PreMigrationBackupTests` passed for replace dry-run no reset, merge dry-run accepted/conflict reporting without saving, and backup-gate compatibility, 5 tests, 0 failures.
+- Canonical queue now marks PK12 complete/do-not-run and PK13 executable now.
+- No durable import, restore rollback, migration execution, destructive storage action, schema mutation, UI behavior change, sync/cloud behavior, release/readiness, migration-safe, or data-loss-proof claim is made.
 
 ## PK11 Pre-Migration Backup Closeout
 

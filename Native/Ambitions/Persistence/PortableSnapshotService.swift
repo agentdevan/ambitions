@@ -3,6 +3,7 @@ import Foundation
 protocol PortableSnapshotServicing: Sendable {
     func exportSnapshot() async throws -> PortableAppSnapshot
     func exportSnapshot(selection: PortableExportSelection) async throws -> PortableAppSnapshot
+    func dryRunImportSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportDryRunReport
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport
 }
 
@@ -72,6 +73,29 @@ struct PortableSnapshotService: PortableSnapshotServicing {
                 appState: exportedAppState
             )
         )
+    }
+
+    func dryRunImportSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportDryRunReport {
+        let warnings = try validate(snapshot)
+
+        switch mode {
+        case .replaceLocalStore:
+            return PortableImportDryRunReport(
+                mode: .replaceLocalStore,
+                wouldResetLocalStore: true,
+                wouldImportGoalCount: snapshot.goals.count,
+                wouldImportDraftCount: snapshot.drafts.count,
+                wouldImportEvidenceCount: snapshot.evidence.count,
+                wouldImportFeedbackCount: snapshot.feedback.count,
+                wouldImportCaptureCount: snapshot.captures.count,
+                wouldImportTeachingSignalCount: snapshot.teachingSignals.count,
+                wouldImportAppStateCount: 1,
+                conflicts: [],
+                warnings: warnings
+            )
+        case .mergeWithConflictReport:
+            return try await dryRunMergeWithConflictReport(snapshot, warnings: warnings)
+        }
     }
 
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
@@ -201,6 +225,38 @@ private extension PortableSnapshotService {
             importedCaptureCount: captureResult.accepted.count,
             importedTeachingSignalCount: teachingResult.accepted.count,
             importedAppStateCount: appStateResult.accepted ? 1 : 0,
+            conflicts: goalResult.conflicts + draftResult.conflicts + evidenceResult.conflicts + feedbackResult.conflicts + captureResult.conflicts + teachingResult.conflicts + appStateResult.conflicts,
+            warnings: warnings
+        )
+    }
+
+    func dryRunMergeWithConflictReport(_ snapshot: PortableAppSnapshot, warnings: [PortableImportWarning]) async throws -> PortableImportDryRunReport {
+        async let localGoals = repositories.goals.listGoals()
+        async let localDrafts = repositories.drafts.listDrafts()
+        async let localEvidence = repositories.evidence.listEvidence(goalID: nil)
+        async let localFeedback = repositories.feedback.listEvents(goalID: nil)
+        async let localCaptures = repositories.captures.listCaptures()
+        async let localTeaching = repositories.teaching.listSignals(goalID: nil)
+        async let localAppState = repositories.appState.loadState()
+
+        let goalResult = compareGoals(incoming: snapshot.goals, local: try await localGoals)
+        let draftResult = compareDrafts(incoming: snapshot.drafts, local: try await localDrafts)
+        let evidenceResult = compareEvidence(incoming: snapshot.evidence, local: try await localEvidence)
+        let feedbackResult = compareFeedback(incoming: snapshot.feedback, local: try await localFeedback)
+        let captureResult = compareCaptures(incoming: snapshot.captures, local: try await localCaptures)
+        let teachingResult = compareTeachingSignals(incoming: snapshot.teachingSignals, local: try await localTeaching)
+        let appStateResult = compareAppState(incoming: snapshot.appState, local: try await localAppState)
+
+        return PortableImportDryRunReport(
+            mode: .mergeWithConflictReport,
+            wouldResetLocalStore: false,
+            wouldImportGoalCount: goalResult.accepted.count,
+            wouldImportDraftCount: draftResult.accepted.count,
+            wouldImportEvidenceCount: evidenceResult.accepted.count,
+            wouldImportFeedbackCount: feedbackResult.accepted.count,
+            wouldImportCaptureCount: captureResult.accepted.count,
+            wouldImportTeachingSignalCount: teachingResult.accepted.count,
+            wouldImportAppStateCount: appStateResult.accepted ? 1 : 0,
             conflicts: goalResult.conflicts + draftResult.conflicts + evidenceResult.conflicts + feedbackResult.conflicts + captureResult.conflicts + teachingResult.conflicts + appStateResult.conflicts,
             warnings: warnings
         )
