@@ -135,6 +135,13 @@ work before later cross-train tails that depend on those proofs.
 11. CQS01-CQS24 Codex Quality System insertion. Completed Green as a Codex OS
     source-truth, reviewer-skill, advisory-script, repair-protocol, and global
     order integration layer before later implementation trains on 2026-05-05.
+11A. CQS25 / FET00 FAANG Frontend Codex OS Upgrade. Completed Green on
+     2026-05-09 as a Codex OS frontend excellence layer. It adds FET source
+     truth, gate matrix, FET01-FET12 train, reviewer skills, read-only
+     advisory scripts, and protocol/order/registry integration so future
+     UI-touching batches cannot close Green from build/test proof alone. It
+     does not implement app UI, change routes/raw values, persistence/schema,
+     workflows, signing, dependencies, or release claims.
 12. PD18 Product Depth Handoff And Next-Lane Readiness. Completed Green as
     docs-only Product Depth closeout and next-lane readiness on 2026-05-05.
 
@@ -1135,6 +1142,23 @@ remaining sensitive intelligence work.
 112. LDI19 Multi-Device Merge Ledger.
 113. LDI22 Governance And Maintenance Console.
 
+### Phase 8.5 — Frontend Excellence Before Further Visible Top-Level UI Expansion
+
+113A. FET01 Frontend Operating System Source Truth.
+113B. FET02 Screenshot Evidence Packet Standard.
+113C. FET03 First Viewport Budget Protocol.
+113D. FET04 Bottom Chrome Ownership Protocol.
+113E. FET05 Primitive Identity And Anti-Card-Stack Protocol.
+113F. FET06 Copy Compression And Product Language Protocol.
+113G. FET07 Accessibility Evidence Packet Upgrade.
+113H. FET08 SwiftUI Composition And Maintainability Protocol.
+113I. FET09 Surface Distinction Rubric.
+113J. FET10 Visual QA Reviewer Packet Automation.
+113K. FET11 Interface Recovery Batch Plan.
+113L. FET12 Frontend Excellence Handoff And Continuation Gate.
+
+FET01-FET12 are inserted before any further visible top-level UI expansion. Future FCP, AFI, DAV, PD, SI, FVQ, AOS UI, LDI UI, Source Atlas UI, and PFC external-surface UI work inherits FET gates immediately. This insertion preserves completed history and does not replay completed batches.
+
 ### Phase 9 — Integration / QA / Performance / External Proof
 
 114. AOS24 AmbitionsOS UI Integration.
@@ -1169,6 +1193,12 @@ remaining sensitive intelligence work.
 - FVQ01 forces simulator freshness proof, durable screenshot evidence, numeric visual scoring, and repair classification before the train moves into broad external/platform strategy.
 - If PFC13 is already in progress when this file is pulled, Codex must finish that active batch safely and run FVQ01 immediately afterward.
 - FVQ01 is not final human visual signoff; it is a blocking Codex OS visual proof gate so Green cannot mean merely compiled.
+
+## Why FET Is Inserted Before Further Visible Top-Level UI Expansion
+
+- FVQ and SI proved that rendered visual evidence matters, but future UI trains still need a universal operating layer that blocks build-only frontend success.
+- FET makes screenshot/preview evidence, first-viewport budgets, bottom chrome ownership, primitive identity, copy compression, accessibility resilience, and frontend scoring mandatory for UI-touching Green closeout.
+- FET does not claim the current UI is fixed. It creates the gate layer and repair train needed before further visible top-level UI expansion.
 
 ## Why Found Life Is Placed After FCP17 And Before The Remaining FCP Core Objects
 

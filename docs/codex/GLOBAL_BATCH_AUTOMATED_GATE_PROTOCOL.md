@@ -58,6 +58,7 @@ Red means a correctness-affecting test failure, build failure caused by the batc
 - CS: replacement map, compatibility proof, rollback plan.
 - AOS: typed contracts, privacy/fallback/source-truth/performance/evaluation evidence.
 - SI: Signature Interface creative direction, invented-but-native rubric, anti-generic UI scan, top-level composition evidence when surfaces are touched, preview coverage, visual QA report, accessibility/Dynamic Type/VoiceOver notes, Reduce Motion evidence, symbol grammar, and file-size/component-boundary evidence.
+- FET: FAANG Frontend Excellence classification for every UI-touching batch, first-viewport screenshot or preview evidence, one-primary-object proof, chip/body-copy budget, bottom chrome ownership, primitive identity, copy compression, accessibility evidence beyond identifiers, Reduce Motion/non-motion evidence, 1-100 frontend scorecard, and no unsupported premium/flagship/10/10 claim.
 - Validation: commands, logs, PASS/PARTIAL/FAIL, proof scope, non-claims.
 - Handoff/Rollback: report, next prompt, rollback steps.
 - Batch report: batch-specific report under `docs/audits/`, unless the prompt
@@ -73,11 +74,36 @@ Docs-only batches must run Source Truth, Scope Boundary, Product Decision Lock, 
 
 Implementation batches must also run file-size/diff-size, test strength, maintainability, accessibility/copy/visual if UI is touched, compatibility if seams are touched, privacy/trust if data or recommendations are touched, and release-claim scans if messaging is touched.
 
+Frontend/UI-touching implementation batches must run the FET readiness gate and the Frontend Excellence gate pack in `FRONTEND_EXCELLENCE_GATE_MATRIX.md`. This includes future FCP, AFI, DAV, PD, SI, FVQ, AOS UI, LDI UI, Source Atlas UI, and PFC external-surface UI batches. Build, unit tests, UI smoke tests, or source-contract tests cannot close a UI-touching batch Green without fresh simulator screenshots or meaningful preview evidence for the touched visible surface.
+
 Release/evidence batches must run REC Release Evidence, Release Claim Safety, Human Proof, Handoff, and Rollback gates.
 
 Signature Interface implementation batches must run Signature Interface Creative Direction, Native iPhone Believability, Anti-Generic UI, Interaction/Motion/Haptics, Reduce Motion, Accessibility/Dynamic Type/VoiceOver, Preview Coverage, Visual QA, File-Size/Component Boundary, and Release-Claim Safety gates. If the batch touches Today, Goals, Capture, Plan, You, app shell, surface shell, navigation lists, or drill-down entry/exit, it must also run the Top-Level Surface Composition or IA/Shell/Navigation gate as relevant.
 
 SI implementation Green requires build/focused test proof plus UI-quality evidence. Build passing alone is not enough. Each primitive must document the component state matrix, preview or screenshot evidence where tooling supports it, and an invented-but-native rubric scored 1-5 for originality, native iPhone believability, usefulness, restraint, accessibility, emotional tone, system coherence, and maintainability. Green requires average score >= 4, no category below 3, and no Red in accessibility, release-claim safety, route/compatibility, or file-size boundary.
+
+## FAANG Frontend Excellence Gate
+
+FET applies to visible UI, shell/chrome, navigation, visual primitives, motion, haptics, symbols, material, typography, color, preview fixtures, screenshot packets, accessibility presentation, external-surface UI, and user-facing copy.
+
+Hard frontend Red conditions:
+
+- UI batch has no simulator screenshots or preview evidence.
+- Build passes but no visual evidence exists.
+- First viewport has more than one primary object.
+- Native tab bar, custom tab rail, floating global action, or toolbar affordances compete visually.
+- Hero/primary surface contains unlimited nested content or generic panel stacking.
+- More than four chips appear above the fold.
+- More than twelve body-copy lines appear above the fold.
+- Product explains internal architecture instead of user value.
+- Motion is decorative, unexplained, or lacks Reduce Motion equivalent.
+- Accessibility identifiers exist but Dynamic Type, VoiceOver, touch target, contrast, or reduced cognitive load evidence is missing.
+- The batch claims premium, flagship, Apple-level, FAANG-level, or 10/10 without screenshot evidence and rubric scoring.
+- Top-level Today / Goals / Capture / Time / You surfaces look visually interchangeable.
+- A primitive intended as a signature object becomes a generic rounded card.
+- Build/test success is used as substitute for visual proof.
+
+Frontend scorecard categories are first-glance clarity, native iPhone believability, visual hierarchy, surface originality, restraint, emotional tone, accessibility resilience, motion/interaction believability, product-language quality, system coherence, maintainability, and screenshot evidence quality. Score each 1-100. Green requires average >= 90, no category below 85, and no Red in accessibility, screenshot evidence, bottom chrome ownership, first viewport composition, route compatibility, or release-claim safety. Yellow is average 80-89 with no hard Red and a named owner. Red is average below 80, any hard Red, missing screenshots for UI-touching work, or build/test success used as substitute for visual proof.
 
 ## Failure Handling
 
@@ -115,3 +141,16 @@ scripts/si-readiness-gate.sh || true
 ```
 
 These scripts are advisory and read-only. They do not fake screenshot proof, human visual approval, physical-device proof, public accessibility conformance, App Store/TestFlight proof, or release readiness.
+
+Frontend/UI-touching batches should add the local FET advisory scans:
+
+```bash
+scripts/fet-readiness-gate.sh || true
+scripts/fet-first-viewport-budget-scan.sh || true
+scripts/fet-bottom-chrome-conflict-scan.sh || true
+scripts/fet-primitive-density-scan.sh || true
+scripts/fet-copy-density-scan.sh || true
+scripts/fet-visual-qa-packet-check.sh || true
+```
+
+These scripts are advisory and read-only at FET00. Advisory findings become hard Red when they map to the FET hard frontend Red conditions and the batch touches visible UI.
