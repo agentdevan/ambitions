@@ -7,6 +7,7 @@ This patch implemented the bounded Phase 02 output set for `QUEUE-INTEL-CODEXOS-
 - Created `docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md`
 - Created `docs/audits/queue-intel-codexos-upgrade-report.md`
 - Repaired stale `.codex/reports/current-run-state.md`
+- Repaired stale `.codex/state/active-batch.yml` previous-result mirror
 
 ## What changed
 - Rebuilt remaining-batch reference from canonical queue source and enriched entries with proof owner/path, dependency, risk, consolidation, next action, and EFC/AIR/surface inheritance.
@@ -20,11 +21,13 @@ This patch implemented the bounded Phase 02 output set for `QUEUE-INTEL-CODEXOS-
   - EFC16-EFC18 and RHC01-RHC06 terminal ordering
   - DPTG00 terminal-only proof marker
 - Updated `.codex/reports/current-run-state.md` to align current batch and next eligible batch with live state.
+- Updated `.codex/state/active-batch.yml` to preserve PK15 as an accepted-Yellow predecessor to the PK16 Green anchor.
 
 ## Authority conflicts discovered and repaired
 - `docs/codex/AMB_REMAINING_BATCH_REFERENCE.md` initially used mixed owner labels for SA entries (`Unknown`). This was repaired using canonical IDs and canonical source/train mapping.
 - `.codex/reports/current-run-state.md` still showed `PK14 / PK15` as current/next, which conflicted with active state evidence (`PK16 / PK17`). Updated to current mirror values.
 - Phase 03 review found and repaired a bounded mirror/reference overclaim where PK15 was phrased as Green instead of accepted Yellow. The repaired files now preserve PK15 as historical-complete / accepted Yellow while keeping PK17 as next eligible.
+- Final-gate review found `.codex/state/active-batch.yml` still had `previous_result: "green"` for PK15. It was repaired to `accepted_yellow` to match registry, batch-train state, current-run-state, and remaining-batch reference evidence.
 
 ## Codex OS gaps surfaced
 - Required macro-epoch sequence exists now in `docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md`, but no new implementation was performed (governance/docs-only mode only).
@@ -64,4 +67,4 @@ This batch does not claim:
 - **PK17 Today Read Model Extraction** (unless a fresh hard stopper appears in live run-state).
 
 ## Rollback command
-- `git restore -- docs/codex/AMB_REMAINING_BATCH_REFERENCE.md docs/codex/AMB_REMAINING_BATCH_REFERENCE.json docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md docs/audits/queue-intel-codexos-upgrade-report.md .codex/reports/current-run-state.md scripts/ambitions-queue-snapshot.sh`
+- `git restore -- docs/codex/AMB_REMAINING_BATCH_REFERENCE.md docs/codex/AMB_REMAINING_BATCH_REFERENCE.json docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md docs/audits/queue-intel-codexos-upgrade-report.md .codex/reports/current-run-state.md .codex/state/active-batch.yml`
