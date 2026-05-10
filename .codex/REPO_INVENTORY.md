@@ -209,8 +209,8 @@ rg -n -i "supabase|provider|hosted ci|testflight|app store|release|accessibility
 Fresh as of Phase 8 on 2026-05-10, branch `main`, HEAD `661206bd` before the
 Phase 8 commit.
 
-Phase 8 result: Green with accepted Yellow items. Large-file and stale-material
-details continue in the Phase 9 archive/stale ledger.
+Phase 8 result: Green. Large-file and stale-material details are governed by
+the Phase 9 archive/stale ledger.
 
 ## Release Evidence Firewall
 

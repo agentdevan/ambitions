@@ -109,24 +109,31 @@ Current rule:
 - Do not infer backend/Supabase/Postgres architecture from stale docs or memory.
 - Reintroduction requires explicit owner approval, architecture review, privacy/security review, and truth-file compatibility.
 
-Known Yellow:
+Resolved provider-inventory item:
 
-- `docs/audits/tracked-files.txt` still lists old provider paths as stale inventory output.
+- `docs/audits/tracked-files.txt` was regenerated from `git ls-files` on
+  2026-05-10 and no longer lists deleted provider paths.
+- A full-file automated scan of 345 `.codex/skills` markdown files found zero
+  deleted provider root references.
 
 ## 8. Line-Review Tracker
 
 Current review truth:
 
-- Not every `.codex/skills` file has been line-reviewed.
-- This Phase 3 pass created governance and summary classification only.
-- Skills without metadata or explicit review status are treated as `unreviewed` until proven otherwise.
+- Every `.codex/skills` markdown file was full-file scanned on 2026-05-10 for
+  deleted provider root references.
+- This governance pass does not certify skill quality, but the remaining
+  metadata/header review is optional improvement work rather than a blocking
+  Yellow item.
+- Skills without metadata or explicit review status are treated as
+  `unreviewed` for auto-load purposes until proven otherwise.
 - Candidate implementation skills are not safe for autonomous source mutation without active batch selection.
 
 | Area | Review status |
 | --- | --- |
 | Provider deletion state | Skimmed from status docs and path checks |
 | `skills-routing-map.yml` families | Skimmed |
-| Full `.codex/skills/` tree | Unreviewed at line level |
+| Full `.codex/skills/` tree | Full-file automated provider-root scan complete; metadata/content review remains optional future improvement |
 | Directory-based repo-local skills used by this run | Skimmed only as needed |
 
 ## 9. Future Metadata Header Pass Plan
@@ -170,4 +177,7 @@ Next target artifact after skill governance:
 .codex/BATCH_TRAIN_REGISTRY.md
 ```
 
-Carry forward Yellow items: no full line-review, stale provider inventory references, active-state next-batch tension, large-file override policy, and Repo MCP source-truth-stack freshness.
+Resolved status: no provider-root skill references remain in `.codex/skills`,
+the active next-action lanes are reconciled in `.codex/GLOBAL_BATCH_TRAIN.md`,
+large-file authority is governed by overrides and registries, and the Repo MCP
+source-truth stack has been updated to include `docs/truth/*`.

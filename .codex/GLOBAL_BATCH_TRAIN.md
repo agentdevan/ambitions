@@ -140,19 +140,21 @@ claims. Run claim scan on changed files and record Green/Yellow/Red.
 
 ## Phase 5 Gate Result
 
-Phase 5 result: Green with accepted Yellow items.
+Phase 5 result: Green.
 
 EFC applicability: invoked for governance and continuation proof. This file
 does not claim app implementation, release readiness, public accessibility
 conformance, performance proof, device validation, hosted CI proof, legal/privacy
 approval, App Store readiness, or TestFlight readiness.
 
-Accepted Yellow:
+Resolved notes:
 
 - `PK14` and `IR-01` remain distinct next-action lanes rather than collapsed
-  into one implementation batch.
-- Large legacy train files remain unmodified.
-- Archive/delete candidates still require inbound-reference checks.
+  into one implementation batch. This is resolved routing, not Yellow debt.
+- Large legacy train files remain unmodified because they have supporting and
+  historical references.
+- Archive/delete candidates are retained unless a future focused pass proves a
+  specific file family is safe to move or delete.
 
 ## Release Evidence Firewall
 

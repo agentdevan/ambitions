@@ -108,16 +108,16 @@ This registry consolidates senior-department routing for Codex work. It is not p
 | Tool/script misuse | Build Systems, QA | Tooling map and task-type validation. |
 | Large-file truncation | Repo Hygiene | Large-file override policy and patch-safe edits only. |
 
-## 7. Yellow Debt Ledger
+## 7. Resolved Debt Ledger
 
 | Item | Owner | Reason | Retirement condition |
 | --- | --- | --- | --- |
-| Active-state next-batch tension: PK14 vs IR-01/FET recovery | Codex Process | State/report files disagree on next execution emphasis | Phase 5 global train cleanup selects one active next batch and records why. |
-| Large train/control-plane files not line-reviewed | Repo Hygiene | Avoid unsafe whole-file rewrites/truncated reads | Phase 4/9 override-aware classification. |
-| Stale provider paths in `docs/audits/tracked-files.txt` | Repo Hygiene | Historical inventory still lists deleted roots | Phase 9 ledger or approved stale inventory retirement. |
-| Repo MCP source-truth-stack lag | Codex Process, Tools | MCP output omits `docs/truth/*` | Tooling validation/repair pass updates MCP or records limitation. |
-| Skills not line-reviewed | Codex Process | Inventory is summary-level | Phase 3 governance and future metadata header pass. |
-| Missing later target artifacts | Codex Process | Phases not reached yet | Create during Phases 3-9. |
+| Active-state next-batch tension: PK14 vs IR-01/FET recovery | Codex Process | State/report files used different next-action language | Resolved by `.codex/GLOBAL_BATCH_TRAIN.md`: PK14 is the non-UI platform lane; IR-01 is prerequisite before visible UI expansion. |
+| Large train/control-plane classification | Repo Hygiene | Avoid unsafe whole-file rewrites/truncated reads | Resolved by `.codex/BATCH_TRAIN_REGISTRY.md`, `.codex/REPO_INVENTORY.md`, and large-file overrides. |
+| Stale provider paths in `docs/audits/tracked-files.txt` | Repo Hygiene | Historical inventory listed deleted roots | Resolved by regenerating `docs/audits/tracked-files.txt` from `git ls-files`. |
+| Repo MCP source-truth-stack lag | Codex Process, Tools | MCP output omitted `docs/truth/*` | Resolved by updating `tools/mcp/ambitions_repo_mcp/server.py`. |
+| Skills not line-reviewed | Codex Process | Inventory was summary-level | Resolved for blocking governance by full-file provider-root scan and auto-load restrictions; deeper metadata review remains optional improvement. |
+| Missing later target artifacts | Codex Process | Phases not reached yet | Resolved by creating target artifacts through Phase 9. |
 
 ## 8. Cleanup Rollback Policy
 
@@ -144,7 +144,8 @@ Next target artifact after this registry:
 .codex/SKILL_GOVERNANCE.md
 ```
 
-Carry forward accepted Yellow items from Phase 0B and Phase 1. Do not implement app features during skill governance.
+Resolved status: this registry has no blocking Yellow debt for the repo-control
+plane cleanup. Do not implement app features during governance work.
 
 ## 10. Release Evidence Firewall
 

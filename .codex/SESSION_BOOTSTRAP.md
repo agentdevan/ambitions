@@ -126,7 +126,7 @@ Recover from repo state, not chat memory:
 
 ## Phase 7 Gate Result
 
-Phase 7 result: Green with accepted Yellow items.
+Phase 7 result: Green.
 
 EFC applicability: invoked for Codex governance and continuation proof. This
 file does not claim app implementation, build/test success, release readiness,
@@ -134,11 +134,11 @@ real-hardware validation, accessibility conformance, performance proof,
 legal/privacy approval, hosted CI proof, App Store readiness, or TestFlight
 readiness.
 
-Accepted Yellow:
+Resolved notes:
 
-- Older prompt/resume docs remain in place and must be classified in the stale
-  ledger before archive/move/delete decisions.
-- `.codex/REPO_INVENTORY.md` does not exist until Phase 8.
+- Older prompt/resume docs are classified as historical/supporting in the stale
+  ledger and retained because inbound references remain.
+- `.codex/REPO_INVENTORY.md` exists.
 
 ## Release Evidence Firewall
 

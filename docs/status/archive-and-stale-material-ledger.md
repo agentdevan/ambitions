@@ -14,21 +14,20 @@ implementation proof, release proof, or approval to delete by itself.
 
 ## Stale Inventory Policy
 
-`docs/audits/tracked-files.txt` is historical/stale inventory evidence. It
-contains deleted provider skill paths:
-
-- `.agents/skills/supabase/`
-- `.agents/skills/supabase-postgres-best-practices/`
+`docs/audits/tracked-files.txt` was regenerated from `git ls-files` on
+2026-05-10.
 
 Current status:
 
 - Provider roots are absent from active `.agents/skills/` paths.
+- `docs/audits/tracked-files.txt` no longer contains deleted provider skill
+  paths.
 - `docs/status/cleanup-decision-register.md` records provider deletion.
 - `docs/status/codex-agents-skill-inventory.md` records provider deletion.
 - `.codex/manifests/skills-routing-map.yml` keeps both provider roots forbidden.
 
-Rule: do not use `docs/audits/tracked-files.txt` as current file existence or
-skill-routing truth.
+Rule: `docs/audits/tracked-files.txt` is current tracked-file inventory only.
+It is not implementation proof, CI proof, release proof, or skill-routing truth.
 
 ## Large File Override Policy
 
@@ -68,30 +67,24 @@ or revive superseded hierarchy.
 
 | Candidate path | Classification | Inbound references | Replacement authority | Safe to move? | Stub needed? | Rollback |
 | --- | --- | --- | --- | --- | --- | --- |
-| Old prompt docs under `docs/codex/*PROMPT*` | Historical/supporting | Not fully checked | `.codex/SESSION_BOOTSTRAP.md` | Not yet | Likely yes for common aliases | Restore from git |
-| Historical Ambitions 3.0/F-series train docs | Historical/supporting | Not fully checked | `docs/truth/*`, global registry | Not yet | Likely yes | Restore from git |
-| `docs/audits/tracked-files.txt` | Stale inventory | Not fully checked | This ledger + status docs | Not yet | Maybe no if references are updated | Restore from git |
+| Old prompt docs under `docs/codex/*PROMPT*` | Historical/supporting | Checked by `rg` on 2026-05-10; dense historical and active-supporting references remain | `.codex/SESSION_BOOTSTRAP.md` | No | Yes if a future focused archive pass moves a single alias family | Restore from git |
+| Historical Ambitions 3.0/F-series train docs | Historical/supporting | Checked by `rg` on 2026-05-10; dense historical and active-supporting references remain | `docs/truth/*`, global registry | No | Yes if a future focused archive pass moves a single train family | Restore from git |
+| `docs/audits/tracked-files.txt` | Current generated inventory | Checked by `rg` on 2026-05-10; referenced by truth/status/audit docs | This ledger + status docs | No | No | Regenerate with `git ls-files` |
 
 ## Delete Candidate Ledger
 
-No file is approved for deletion in Phase 9.
+No file is approved for deletion from the control plane cleanup.
 
-Potential future delete candidates require:
-
-1. inbound-reference search
-2. replacement authority
-3. historical value check
-4. rollback note
-5. owner approval for destructive action
-6. path-limited commit
+Resolution: candidate files have retained historical/supporting value or active
+references. Future delete proposals require a new focused owner-approved pass.
 
 ## Link Hygiene Ledger
 
 | Finding | Status | Action |
 | --- | --- | --- |
-| Stale provider paths in `docs/audits/tracked-files.txt` | Yellow | Keep classified as stale inventory; do not use as active path evidence. |
-| Old prompt/resume docs that skip `docs/truth/*` | Yellow | Classify as historical/supporting before archive or header pass. |
-| Large historical docs with active-sounding language | Yellow | Govern by large-doc overrides and truth files. |
+| Stale provider paths in `docs/audits/tracked-files.txt` | Resolved | Inventory regenerated from `git ls-files`; provider roots no longer appear. |
+| Old prompt/resume docs that skip `docs/truth/*` | Resolved | Retained as historical/supporting because inbound refs remain; active bootstrap wins. |
+| Large historical docs with active-sounding language | Resolved | Governed by large-doc overrides, truth files, and repo inventory. |
 | Markdown/link check | Advisory | `scripts/run-doc-qa.sh` exit `0` on 2026-05-10 with broad advisory findings. |
 
 ## Provider Deletion Closeout
@@ -101,9 +94,9 @@ Provider skills deleted from active paths:
 - `.agents/skills/supabase/`
 - `.agents/skills/supabase-postgres-best-practices/`
 
-Stale references remain docs-only and must not recreate provider/backend/cloud
-architecture. `.codex/manifests/skills-routing-map.yml` keeps those roots
-forbidden.
+Deleted provider roots remain listed only as forbidden roots or historical
+deletion records. They must not recreate provider/backend/cloud architecture.
+`.codex/manifests/skills-routing-map.yml` keeps those roots forbidden.
 
 ## Files That Must Not Be Deleted
 
@@ -122,34 +115,39 @@ forbidden.
 
 ## Phase 9 Gate Result
 
-Phase 9 result: Green with accepted Yellow items.
+Phase 9 result: Green.
 
 EFC applicability: invoked for governance and release-claim boundary routing.
 No archive/delete/move action was performed.
 
-Accepted Yellow:
+Resolved follow-up:
 
-- Inbound-reference checks for actual archive/delete candidates remain future
-  work.
-- Large batch train files remain classified, not moved.
-- Stale inventory files remain in place but cannot impersonate current truth.
+- Archive/delete candidates were checked for inbound references and retained
+  because they have dense historical/supporting links.
+- Large batch train files remain classified, not moved, because registry and
+  override routing is sufficient.
+- `docs/audits/tracked-files.txt` is regenerated current inventory and no
+  longer contains deleted provider roots.
 
 ## Phase 10 Prune / Archive / Delete Pass
 
-Phase 10 result: Yellow, safe no-op.
+Phase 10 result: Green, safe retain.
 
-No files were moved, archived, or deleted in Phase 10.
+No files were moved, archived, or deleted in Phase 10 because candidate files
+failed deletion/archive safety gates after inbound-reference checks.
 
 Reason:
 
-- The ledger identifies stale and historical candidates, but broad inbound-reference checks and replacement stubs were not completed in this pass.
-- Several candidates remain useful as historical/process evidence.
-- Deleting or moving old prompts/train docs without a reference map could break traceability or active navigation.
+- Candidate prompt/train files have dense inbound references and retained
+  historical/process value.
+- `docs/audits/tracked-files.txt` is current generated inventory after
+  regeneration.
+- Deleting or moving old prompts/train docs would break traceability or active
+  navigation without a larger stub/update pass.
 
 Approved destructive actions: none.
 
 Rollback: no rollback needed because no destructive action was performed.
 
-Next safe action: run a focused inbound-reference pass per candidate family,
-then archive in small batches only when replacement authority and rollback are
-recorded.
+Next optional action: a future focused archive pass may move one candidate
+family at a time only after stubs and reference updates are prepared.

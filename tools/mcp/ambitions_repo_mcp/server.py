@@ -244,12 +244,28 @@ def tool_get_efc_overlay_status(_: JSON) -> JSON:
 
 def tool_get_source_truth_stack(_: JSON) -> JSON:
     stack = [
+        "docs/truth/README.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "docs/truth/RELEASE_TRUTH.md",
+        "docs/truth/CODEX_PROCESS_TRUTH.md",
+        "docs/truth/HISTORICAL_POLICY.md",
         "README.md",
         "docs/README.md",
+        "AGENTS.md",
+        ".codex/OPERATING_SYSTEM.md",
+        ".codex/REPO_INVENTORY.md",
+        ".codex/SESSION_BOOTSTRAP.md",
+        ".codex/GLOBAL_BATCH_TRAIN.md",
+        ".codex/BATCH_TRAIN_REGISTRY.md",
+        ".codex/SKILL_GOVERNANCE.md",
+        ".codex/TOOLING_AND_VALIDATION.md",
         "docs/AmbitionsCanon/README.md",
         "docs/status/current-implementation-map.md",
-        "docs/status/repo-cleanup-index.md",
         "docs/status/release-evidence-packet.md",
+        "docs/status/archive-and-stale-material-ledger.md",
+        "docs/status/repo-control-plane-cleanup-final-report.md",
+        "docs/status/repo-cleanup-index.md",
         "docs/native-build-and-release.md",
         ".codex/state/active-batch.yml",
         "docs/codex/BATCH_REGISTRY.md",
@@ -260,7 +276,7 @@ def tool_get_source_truth_stack(_: JSON) -> JSON:
     ]
     return {
         "stack": [{"path": path, "exists": _exists(path)} for path in stack],
-        "precedence_note": "AmbitionsCanon owns product/design truth; implementation map owns implemented/scaffolded/planned status; release evidence owns release claims; EFC owns peak proof obligations for unfinished work.",
+        "precedence_note": "docs/truth/* wins conflicts. Live source plus IMPLEMENTATION_TRUTH and the current implementation map own implementation status; RELEASE_TRUTH plus current raw evidence own proof claims; CODEX_PROCESS_TRUTH, AGENTS.md, and active .codex OS files own Codex operation; HISTORICAL_POLICY owns archive/delete policy. AmbitionsCanon and docs/codex history are supporting where compatible.",
     }
 
 

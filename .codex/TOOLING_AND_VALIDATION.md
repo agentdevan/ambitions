@@ -121,17 +121,18 @@ Dangerous unless explicitly approved and gated:
 
 ## Phase 6 Gate Result
 
-Phase 6 result: Green with accepted Yellow items.
+Phase 6 result: Green.
 
 EFC applicability: invoked for governance and release-claim boundary routing.
 No app implementation, build, release, accessibility, performance, device,
 legal/privacy, hosted CI, App Store, or TestFlight proof is claimed.
 
-Accepted Yellow:
+Resolved notes:
 
-- Some scripts are advisory and noisy by design.
-- Repo MCP source-truth stack freshness remains a later repair item.
-- Candidate MCPs remain classified, not proven production tools.
+- Advisory/noisy scripts are classified as advisory, not blockers.
+- Repo MCP source-truth stack freshness was repaired on 2026-05-10.
+- Candidate MCPs remain classified as candidate/supporting; no production proof
+  or app dependency is implied.
 
 ## Release Evidence Firewall
 

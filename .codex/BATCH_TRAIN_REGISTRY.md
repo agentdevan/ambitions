@@ -136,12 +136,12 @@ Classify before moving or deleting:
 
 ## Active Next-Batch Reconciliation
 
-Current evidence is intentionally recorded as Yellow:
+Current evidence is reconciled:
 
 - `.codex/state/active-batch.yml`, `docs/codex/BATCH_REGISTRY.md`, `docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md`, and `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` point to `PK14 Durable Command/Event Ledger` as next eligible or executable now.
 - `.codex/reports/current-batch-train-state.md` and `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md` also record `IR-01 Big Frontend Recovery Implementation` as the next recommended UI implementation pass before further visible top-level feature expansion.
 
-Phase 4 does not choose between them. Phase 5 must reconcile the clean global batch train by distinguishing:
+Phase 5 resolved this by distinguishing lanes:
 
 - next non-UI platform batch: `PK14`
 - next UI recovery prerequisite before visible expansion: `IR-01`
@@ -158,7 +158,8 @@ No move/delete action is authorized by this registry alone.
 
 ## Phase 4 Gate Result
 
-Phase 4 result: Green with accepted Yellow items.
+Phase 4 result: Green. Former Yellow items were resolved by later cleanup
+passes.
 
 EFC applicability: invoked. This registry changes Codex governance and evidence-status routing, so EFC proof obligations apply as release-claim boundary and continuation-proof checks. No release, implementation, accessibility, performance, device, hosted CI, legal/privacy, App Store, or TestFlight claims are made.
 
@@ -169,12 +170,14 @@ Green basis:
 - It does not claim implementation, release, accessibility, performance, device, hosted CI, legal/privacy, App Store, or TestFlight proof.
 - It does not archive, move, delete, or rewrite large train files.
 
-Accepted Yellow basis:
+Resolved follow-up basis:
 
-- Large train files were classified from registries, ledgers, state files, and headers rather than full line-review.
-- Active next-batch state still needs Phase 5 reconciliation between `PK14` and `IR-01`.
-- Some completed-train details remain summary-level until archive/stale ledger and inventory passes.
-- No inbound-reference checks were performed for archive/delete candidates in Phase 4.
+- Large train files are governed by registry/ledger/override classification.
+- Phase 5 reconciled `PK14` and `IR-01` as separate lanes.
+- Completed-train details are routed through `.codex/REPO_INVENTORY.md` and
+  `docs/status/archive-and-stale-material-ledger.md`.
+- Archive/delete candidates were retained after inbound references showed dense
+  historical/supporting links.
 
 ## Release Evidence Firewall
 

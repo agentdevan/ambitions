@@ -806,8 +806,7 @@ docs/audits/tracked-files.txt
 Inspection result:
 
 - Existing release/status docs say there is no active hosted CI workflow.
-- Old tracked-file audit lists `.github/workflows/ios-validate.yml`.
-- Direct fetch of `.github/workflows/ios-validate.yml` returned not found during inspection.
+- `docs/audits/tracked-files.txt` was regenerated from `git ls-files` on 2026-05-10 and does not list `.github/workflows/ios-validate.yml`.
 - Repo code search for workflow markers did not find active workflow evidence.
 
 Implementation truth:
@@ -816,13 +815,14 @@ Implementation truth:
 No active hosted CI workflow was found in the inspected repo state.
 ```
 
-Stale evidence:
+Current inventory evidence:
 
 ```text
 docs/audits/tracked-files.txt
 ```
 
-lists a workflow path that is not currently fetchable. Treat that audit inventory as historical/stale unless a future tree inspection proves otherwise.
+is a regenerated tracked-file inventory for repo-hygiene lookup. It is not CI
+proof, implementation proof, or release proof.
 
 Forbidden claim:
 
@@ -846,8 +846,8 @@ unless a current workflow file and current run evidence exist.
 | DayTimelineRail vs Reality Meridian | Today source uses `DayTimelineRail`; Product Truth says Reality Meridian. | Product identity drift. |
 | Hero Step Panel / Start Here | Old terms may persist in source/previews/docs. | Detached-card/generic AI suggestion risk. |
 | Mission Control / board / KPI language | Goals source/docs use mission-control/board/maturity/pressure terms. | Dashboard drift risk against Product Truth. |
-| `.agents/supabase*` skills | Tracked inventory includes Supabase/Postgres skill material. | Hosted backend/provider drift risk. |
-| Stale workflow inventory | `tracked-files.txt` lists workflow that direct fetch did not find. | False CI proof risk. |
+| Provider/backend assumptions | Provider skill roots are absent from active paths and forbidden by skill governance. | Hosted backend/provider drift risk if stale docs are reused. |
+| Hosted workflow assumptions | `.github/` is absent; workflow templates are examples only. | False CI proof risk if example files are treated as active. |
 
 Compatibility rule:
 

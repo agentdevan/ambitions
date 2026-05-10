@@ -212,7 +212,10 @@ Before moving, archiving, or deleting a file:
 - Completed docs batches do not prove app implementation.
 - Completed release batches require release evidence.
 
-Current Phase 0B Yellow: active state needs later reconciliation between `PK14 Durable Command/Event Ledger` and `IR-01 Big Frontend Recovery Implementation` guidance before declaring one next batch.
+Resolved sequencing note: `.codex/GLOBAL_BATCH_TRAIN.md` distinguishes
+`PK14 Durable Command/Event Ledger` as the non-UI platform lane and `IR-01 Big
+Frontend Recovery Implementation` as the prerequisite before visible UI
+expansion.
 
 ## 16. Model-Tier Policy
 
@@ -262,7 +265,9 @@ The inventory will be a map, not authority or proof.
 Resume the Ambitions repo-control-plane cleanup from live repo evidence.
 Read docs/truth/README.md, PRODUCT_DESIGN_TRUTH.md, IMPLEMENTATION_TRUTH.md, RELEASE_TRUTH.md, CODEX_PROCESS_TRUTH.md, HISTORICAL_POLICY.md, AGENTS.md, .codex/OPERATING_SYSTEM.md, and docs/status/repo-control-plane-cleanup-final-report.md first.
 Preserve app runtime/source behavior unless an explicitly approved implementation batch owns it.
-Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, and Repo MCP source-truth-stack freshness.
+Use resolved control-plane routing from `.codex/REPO_INVENTORY.md`,
+`.codex/GLOBAL_BATCH_TRAIN.md`, `.codex/BATCH_TRAIN_REGISTRY.md`, and
+`docs/status/archive-and-stale-material-ledger.md`.
 Use Green/Yellow/Red gates, record evidence, and make no release/build/test/device/accessibility/performance/legal/privacy claims without current proof.
 ```
 
