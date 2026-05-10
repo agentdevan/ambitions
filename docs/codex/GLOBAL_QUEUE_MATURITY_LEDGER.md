@@ -34,8 +34,10 @@ This ledger classifies the post-PK03 146-count universe for autonomous continuat
 `AUTO-HARDEN-01` is a required runner-hardening prerequisite before a full
 autonomous global-train run may be treated as unblocked. It is not counted in
 the original post-PK03 146-count queue universe; it is a governance prerequisite
-prompt for safe autonomous execution. Until `AUTO-HARDEN-01` closes Green, the
-full autonomous train prompt remains blocked.
+prompt for safe autonomous execution. `AUTO-HARDEN-01` has closed Green through
+`.codex/runs/AUTO-HARDEN-01/20260510T064859Z/final-summary.md`; the full
+autonomous train prompt is unblocked only after `GLOBAL-SEQUENCE-AUTONOMY-01`
+also closes Green and runner/no-claim gates remain intact.
 
 ## Canonical Classification
 

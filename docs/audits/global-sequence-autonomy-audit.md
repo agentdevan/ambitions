@@ -53,7 +53,7 @@ expansion.
 ## Queue Repairs Made
 
 - `docs/audits/global-sequence-autonomy-audit.md` and `prompts/batches/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION.md` — reconciled stale `AUTO-HARDEN-01` blocking language to Green-proof status.
-- `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` — earlier stale count prose was already corrected and currently matches canonical JSON classification.
+- `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` — reconciled stale `AUTO-HARDEN-01` prerequisite wording to Green-proof status while preserving the `GLOBAL-SEQUENCE-AUTONOMY-01` Green closeout gate.
 
 ## Queue Repairs Not Made
 
@@ -78,7 +78,7 @@ expansion.
 
 Commands run:
 
-- `git status --short --branch` — exit 0 — confirmed `main...origin/main`; only allowed docs/prompt changes plus runner artifacts were present.
+- `git status --short --branch` — exit 0 — confirmed `main...origin/main`; only allowed audit, queue-ledger, prompt, and runner-artifact paths were present.
 - `git rev-parse HEAD` — exit 0 — starting commit `814bba98ce0860dc7b63e2a77b5a321890bae71f`.
 - `git branch --show-current` — exit 0 — `main`.
 - `sed -n ...` source-truth, queue, runner, prompt, and governance files — exit 0 — required files were readable.
@@ -99,12 +99,17 @@ Commands run:
 - `scripts/ambitions-codex-train.sh --self-check` — exit 0 — Green self-check; did not invoke Codex phases, commit, push, or mutate app source.
 - `scripts/ambitions-prompt-audit.sh` — exit 0 — Yellow classification; no active runnable prompt missing runner metadata; 3 active runnable prompts audited, 775 support/eval/template/historical files classified.
 - `git diff --name-only | rg '^(Native|Sources|AppUI|Package.swift|project.yml|docs/truth/|scripts/|Makefile)'` — exit 1 — no forbidden app, truth, script, Makefile, package, or project paths were touched.
+- Phase 04 repair pass: `git diff --check` — exit 0 — no whitespace errors after the maturity-ledger repair.
+- Phase 04 repair pass: `python3 -m json.tool docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json >/tmp/ambitions-global-queue-json-check.txt` — exit 0 — canonical queue still parsed.
+- Phase 04 repair pass: `python3 - <<'PY' ...` canonical queue count reconciliation — exit 0 — counted 1 executable now, 79 executable later, 12 blocked, 18 overlays, 6 conditional, 30 historical; next remains `PK14 Durable Command/Event Ledger`.
+- Phase 04 repair pass: `scripts/ambitions-prompt-audit.sh` — exit 0 — Yellow classification only; no active runnable prompt missing metadata.
+- Phase 04 repair pass: `scripts/ambitions-codex-train.sh --self-check` — exit 0 — Green self-check; did not invoke Codex phases, commit, push, or mutate app source.
 
 Commands not run:
 
 - full global train — forbidden by this batch
 - real implementation batch — forbidden by this batch
-- `make batch BATCH=RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION ...` — blocked until prerequisite Green closeouts
+- `make batch BATCH=RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION ...` — not run in this phase; full global train execution is explicitly forbidden here.
 
 ## Claims Not Made
 
