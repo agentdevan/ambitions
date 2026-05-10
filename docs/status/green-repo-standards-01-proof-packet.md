@@ -6,7 +6,8 @@
 - Run directory: `.codex/runs/GREEN-REPO-STANDARDS-01/20260510T201751Z`
 - Branch at start: `main`
 - Commit before patch (from handoff): `a13616463acb5fc0716b8dc254bb4b5bb665bbed`
-- Commit after patch: not committed in this phase
+- Phase 04 repair commit: `b15fea813e7555e085dc66a559d2ee817c66d999`
+- Final gate note: this proof packet records the Phase 04 repair commit that closed the source/test/docs patch; any later final-gate documentation-only correction is reported in the final closeout.
 
 ## Environment
 
