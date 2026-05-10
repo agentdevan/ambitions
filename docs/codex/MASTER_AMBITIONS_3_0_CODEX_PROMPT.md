@@ -1,4 +1,11 @@
+> Historical prompt note: This prompt is retained for traceability only.
+> It is not active product, implementation, release, or Codex process authority.
+> Do not copy as a current resume prompt. Current authority begins in `docs/truth/`; use `docs/truth/CODEX_PROCESS_TRUTH.md` and `AGENTS.md` instead.
+
 # Master Ambitions 3.0 Codex Prompt
+
+Status: Historical prompt; superseded as active Codex entry by `docs/truth/*` and `AGENTS.md`  
+T05 classification: Historical / prompt-only
 
 Copy this into a fresh Codex 5.5 session from the repo root.
 
