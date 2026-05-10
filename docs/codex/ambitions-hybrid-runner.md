@@ -28,6 +28,14 @@ Run future batches with:
 make batch BATCH=<BATCH_ID> PROMPT=prompts/batches/<BATCH_ID>.md
 ```
 
+For global train continuation with one bounded child-at-a-time loop, use:
+
+```bash
+make autonomous-train
+```
+
+That command uses `scripts/ambitions-autonomous-train.sh` (status / next / one-child-run / until-complete mode) so the conductor path remains top-level and non-recursive.
+
 Audit active prompt files with:
 
 ```bash

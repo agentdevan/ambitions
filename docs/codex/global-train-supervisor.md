@@ -5,6 +5,14 @@ Authority: Supporting process doc subordinate to `docs/truth/*`
 
 The global train should be run by the external supervisor script, not by a long-lived nested Codex conductor phase.
 
+For non-recursive continuation after autonomy-hardening, prefer:
+
+```bash
+make autonomous-train
+```
+
+The existing supervisor remains available for compatibility and manual scoped operations.
+
 ## Why This Exists
 
 The previous recursive conductor model could start a parent prompt, generate or select a child batch, launch the child through the runner, see incomplete/Yellow/Unknown artifacts, and then launch another attempt before the first path was finalized. That caused repeated same-root retries, Phase 02 reruns when final GPT-5.5 review was needed, and overlapping validation/Xcode lock risk.

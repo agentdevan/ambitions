@@ -1,9 +1,10 @@
-.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete repair-status repair-next repair-current
+.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
 AUDIT := scripts/ambitions-prompt-audit.sh
 GLOBAL_SUPERVISOR := scripts/ambitions-global-train-supervisor.sh
+AUTONOMOUS_TRAINER := scripts/ambitions-autonomous-train.sh
 
 check-batch-input:
 	@test -n "$(BATCH)" || (echo "BATCH is required. Example: make batch BATCH=SI07 PROMPT=prompts/SI07.md" >&2; exit 2)
@@ -60,6 +61,26 @@ global-train-once:
 global-train-until-complete:
 	@test -x "$(GLOBAL_SUPERVISOR)" || (echo "$(GLOBAL_SUPERVISOR) is missing or not executable" >&2; exit 2)
 	"$(GLOBAL_SUPERVISOR)" --until-complete
+
+autonomous-train-status:
+	@test -x "$(AUTONOMOUS_TRAINER)" || (echo "$(AUTONOMOUS_TRAINER) is missing or not executable" >&2; exit 2)
+	"$(AUTONOMOUS_TRAINER)" --status
+
+autonomous-train-next:
+	@test -x "$(AUTONOMOUS_TRAINER)" || (echo "$(AUTONOMOUS_TRAINER) is missing or not executable" >&2; exit 2)
+	"$(AUTONOMOUS_TRAINER)" --next
+
+autonomous-train:
+	@test -x "$(AUTONOMOUS_TRAINER)" || (echo "$(AUTONOMOUS_TRAINER) is missing or not executable" >&2; exit 2)
+	"$(AUTONOMOUS_TRAINER)" --until-complete
+
+autonomous-train-run-current:
+	@test -x "$(AUTONOMOUS_TRAINER)" || (echo "$(AUTONOMOUS_TRAINER) is missing or not executable" >&2; exit 2)
+	"$(AUTONOMOUS_TRAINER)" --run-current
+
+autonomous-train-until-complete:
+	@test -x "$(AUTONOMOUS_TRAINER)" || (echo "$(AUTONOMOUS_TRAINER) is missing or not executable" >&2; exit 2)
+	"$(AUTONOMOUS_TRAINER)" --until-complete
 
 repair-status:
 	@scripts/ambitions-process-preflight.sh --status
