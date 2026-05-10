@@ -4,7 +4,14 @@ description: "Use when doing ANY task involving Supabase. Triggers: Supabase pro
 metadata:
   author: supabase
   version: "0.1.0"
+ambitions_classification: quarantine
+ambitions_rule: "Do not auto-load or use for Ambitions core work unless explicitly re-approved by docs/truth/* and a scoped owner decision."
+ambitions_reason: "External hosted-provider workflow is not active Ambitions core architecture."
 ---
+
+> Quarantine note: This external Supabase skill is retained for traceability/candidate reference only.
+> It is not active Ambitions product, implementation, backend, release, or Codex process authority.
+> Current authority begins in `docs/truth/`; see `docs/status/codex-agents-skill-inventory.md` and `docs/status/cleanup-decision-register.md`.
 
 # Supabase
 
