@@ -1,3 +1,7 @@
+> T05b classification: Historical / supporting context.
+> This file is not current source-truth authority for product, implementation, release, or Codex process.
+> Current authority begins in `docs/truth/`; if any wording below names older “current” or “higher-priority” sources, treat it as preserved history unless re-approved by `docs/truth/*`.
+
 # Ambitions 3.0 — Preserved Source-Truth Override
 
 Status: preserved baseline / historical source-truth context.
