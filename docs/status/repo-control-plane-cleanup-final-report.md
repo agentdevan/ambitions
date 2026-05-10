@@ -1,14 +1,14 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 6 Green with accepted Yellow items
+Status: Phase 7 Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phases 0, 0B, 1, 2, 3, 4, 5, and 6 only
+Scope: Phases 0, 0B, 1, 2, 3, 4, 5, 6, and 7 only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Phase 5 created the cleaned global sequencing file at `.codex/GLOBAL_BATCH_TRAIN.md`. Phase 6 created the tooling and validation map at `.codex/TOOLING_AND_VALIDATION.md`. Later cleanup phases were not started in this checkpoint.
+Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Phase 5 created the cleaned global sequencing file at `.codex/GLOBAL_BATCH_TRAIN.md`. Phase 6 created the tooling and validation map at `.codex/TOOLING_AND_VALIDATION.md`. Phase 7 created the current session bootstrap at `.codex/SESSION_BOOTSTRAP.md`. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
@@ -529,11 +529,36 @@ Accepted Yellow basis:
 - Repo MCP source-truth stack freshness remains a later repair item.
 - Candidate MCPs remain classified, not proven production tools.
 
+## Phase 7 Session Bootstrap
+
+Created:
+
+- `.codex/SESSION_BOOTSTRAP.md`
+- `.codex/templates/current-resume-prompt.md`
+
+Updated:
+
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+Phase 7 result: Green with accepted Yellow items carried forward.
+
+Green basis:
+
+- A single current start/resume/recovery path exists.
+- The bootstrap is truth-first and explicitly subordinate to `docs/truth/*`.
+- It records model-tier rules, skill selection, old prompt policy, recovery policy, and a current resume prompt.
+- It does not delete or move older prompts before the stale/archive ledger pass.
+
+Accepted Yellow basis:
+
+- Older prompt/resume docs remain in place and require stale-ledger classification before archive/move/delete decisions.
+- `.codex/REPO_INVENTORY.md` does not exist until Phase 8.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 7 only.
-Use the current repo state after Phase 6. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/SESSION_BOOTSTRAP.md as the single current start/resume/recovery path.
-Carry forward accepted Yellow items: large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, separate PK14/IR-01 next-action lanes, advisory/noisy scripts, candidate MCPs, and archive/delete candidates requiring inbound-reference checks.
-Do not continue to Phase 8 unless Phase 7 is Green or accepted Yellow with reason.
+Continue the Ambitions repo-control-plane cleanup with Phase 8 only.
+Use the current repo state after Phase 7. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/REPO_INVENTORY.md as a repo map and routing index, not product truth or proof.
+Carry forward accepted Yellow items: large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, separate PK14/IR-01 next-action lanes, advisory/noisy scripts, candidate MCPs, old prompt classification, and archive/delete candidates requiring inbound-reference checks.
+Do not continue to Phase 9 unless Phase 8 is Green or accepted Yellow with reason.
 ```
