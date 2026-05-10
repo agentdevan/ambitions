@@ -133,3 +133,23 @@ Accepted Yellow:
   work.
 - Large batch train files remain classified, not moved.
 - Stale inventory files remain in place but cannot impersonate current truth.
+
+## Phase 10 Prune / Archive / Delete Pass
+
+Phase 10 result: Yellow, safe no-op.
+
+No files were moved, archived, or deleted in Phase 10.
+
+Reason:
+
+- The ledger identifies stale and historical candidates, but broad inbound-reference checks and replacement stubs were not completed in this pass.
+- Several candidates remain useful as historical/process evidence.
+- Deleting or moving old prompts/train docs without a reference map could break traceability or active navigation.
+
+Approved destructive actions: none.
+
+Rollback: no rollback needed because no destructive action was performed.
+
+Next safe action: run a focused inbound-reference pass per candidate family,
+then archive in small batches only when replacement authority and rollback are
+recorded.
