@@ -68,6 +68,18 @@ stops before creating a branch unless the owner explicitly sets
 `ALLOW_RUNNER_BRANCH_EXCEPTION=1` or disables runner branch creation with
 `AUTO_BRANCH=0`.
 
+Conductor safety rule:
+
+- Do not emit parent prompts that instruct a batch to invoke itself or to invoke
+  the global conductor recursively.
+- A parent should record one child attempt in ledger state for the current
+  parent pass/run and stop on non-green child outcomes, routing to
+  `<FAILED_BATCH_ID>-REPAIR-01` instead of re-run.
+- Historical closed attempts remain audit evidence; they do not become Green and
+  do not permanently block a separately approved clean child attempt.
+- PK-level prompts must be single-attempt by default and must explicitly forbid
+  recursive `make batch` patterns.
+
 Active user-facing IA is `Today / Goals / Capture / Time / You`. `Plan` remains
 an internal compatibility seam only where current source/truth allows it.
 

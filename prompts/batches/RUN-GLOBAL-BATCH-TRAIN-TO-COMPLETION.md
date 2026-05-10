@@ -80,19 +80,44 @@ no-claim boundary, and resume path are recorded. Stop on Hard Red.
 4. If the prompt is missing, generate a runner-compatible prompt from the batch
    registry, canonical order, active truth files, and allowed scope.
 5. Add the required runner header to any generated prompt.
-6. Run that batch through the runner.
-7. Inspect runner result, changed files, validation proof, and final status.
-8. If Green, update state and continue.
-9. If Yellow, determine whether it is accepted Yellow or blocking Yellow.
-10. If accepted Yellow, record owner, reason, retirement condition,
+6. Consult `.codex/state/global-train-attempt-ledger.md` before launching any child
+   batch for the current parent pass/run:
+   - If there is an open attempt for `<PARENT_BATCH_ID>` → `<CHILD_BATCH_ID>`
+     with status `in_progress`, stop and emit that child batch's repair prompt.
+   - If an attempt for this current parent pass/run and child already exists with
+     `attempt_count >= 1` and `status` not `GREEN`, stop and emit
+     `<CHILD_BATCH_ID>-REPAIR-01.md`.
+   - Historical closed attempts from prior parent runs remain evidence, but do not
+     authorize or block a separately approved clean child attempt by themselves.
+   - Otherwise record attempt `1` before launch.
+7. Run that batch through the runner.
+8. Inspect runner result, changed files, validation proof, and final status.
+9. If Green, update state and continue.
+10. If Yellow, determine whether it is accepted Yellow or blocking Yellow.
+11. If accepted Yellow, record owner, reason, retirement condition,
     no-claim boundary, and resume path; then continue.
-11. If blocking Yellow, attempt bounded repair only if safe and inside scope.
-12. If Red, attempt an allowed repair cycle only when the Red is within scope
-    and repairable.
-13. If repair succeeds, rerun validation and continue.
-14. If repair fails, repeats the same root failure, or expands scope, stop with
-    Hard Red.
+12. If blocking Yellow, stop the parent loop and emit
+    `<CHILD_BATCH_ID>-REPAIR-01.md`.
+13. If Red, stop the parent loop and emit `<CHILD_BATCH_ID>-REPAIR-01.md`.
+14. Do not run the failed child batch again from this parent pass.
 15. Repeat until no normal autonomous batches remain.
+
+## Attempt Ledger Rule for Nested Runner Control
+
+The global conductor itself must not authorize recursive child-runner nesting:
+
+- A child batch run may never execute the global-train prompt.
+- A batch prompt must never instruct direct recursion (`PK14`, any `make batch`, or
+  self-invocation loops).
+- Parent loops are allowed one child attempt per parent/child pair per current
+  parent pass/run only.
+- Historical failed attempts must remain recorded as evidence, but a fresh
+  owner-approved clean child attempt must use a new ledger entry instead of
+  editing history or pretending the prior failure was Green.
+- On first child attempt failure, stop the parent loop and emit a bounded repair
+  batch (`<FAILED_BATCH_ID>-REPAIR-01`) for the same run.
+- The parent should never auto-execute the failed batch a second time in the same
+  parent pass.
 
 # Current Sequence Rules
 
