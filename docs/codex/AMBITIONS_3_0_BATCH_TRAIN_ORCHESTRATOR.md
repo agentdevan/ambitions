@@ -1,3 +1,7 @@
+> T05b classification: Historical / supporting Codex process context.
+> This file is not current Codex process authority.
+> Current Codex process authority begins in `docs/truth/CODEX_PROCESS_TRUTH.md` and `AGENTS.md`; if any wording below says “Active,” read it as preserved Ambitions 3.0 batch-train context unless re-approved by `docs/truth/*`.
+
 # Ambitions 3.0 Batch Train Orchestrator
 
 Path: docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md
