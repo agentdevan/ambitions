@@ -118,6 +118,70 @@ Evidence required:
 No public accessibility conformance claim is allowed without current,
 scope-specific evidence and release-truth approval.
 
+## 6A. Accessibility Gate Details
+
+VoiceOver gate:
+
+- primary object has one coherent summary
+- primary action is reachable and labeled
+- source/trust/proof state is exposed without visual-only dependency
+- decorative atmosphere is hidden or demoted
+- rotor/order does not trap the user in repeated metadata
+
+Dynamic Type gate:
+
+- primary action remains visible
+- labels do not overlap or clip in the claimed size range
+- controls reflow rather than shrink below readability
+- dense metadata can wrap, collapse, or move behind a seam
+
+Contrast and color gate:
+
+- state is never carried by color alone
+- low-contrast graphite-on-graphite controls are repaired or rejected
+- Increase Contrast has a stronger boundary/state alternative when claimed
+
+Touch and gesture gate:
+
+- primary tap targets are at least 44 pt, 48 pt preferred
+- custom gestures have visible alternatives
+- destructive actions require clear affordance and rollback/receipt where
+  appropriate
+
+Copy and cognition gate:
+
+- no shaming recovery language
+- no fake certainty or opaque model language
+- one primary question/action per surface
+- explanation moves through Trust Seam or equivalent detail, not a prose wall
+
+## 6B. Motion Gate Details
+
+Motion may clarify:
+
+- origin
+- state transition
+- relationship between objects
+- proof/receipt creation
+- reflow after change
+
+Motion must not be:
+
+- decorative particles, scans, bounce, or parallax gimmicks
+- the only cue for state change
+- required to understand before/after relationships
+- continuous without meaningful live state
+
+Reduce Motion requirement:
+
+- provide static before/after or state-label equivalent
+- preserve object origin and destination
+- avoid replacing meaning with fade-only transitions
+- record whether Reduce Motion was inspected, simulated, or not run
+
+Motion proof must cite screenshots, recordings, simulator evidence, or a manual
+inspection checklist before claiming motion-safe behavior.
+
 ## 7. Visual Proof Pack
 
 Use when visual state, layout, motion, screenshots, or screenshots-as-evidence
@@ -245,4 +309,3 @@ Validation for this phase:
 - no app/source/runtime files touched
 - no release, accessibility, performance, device, hosted CI, legal/privacy, or
   implementation-complete claim made
-
