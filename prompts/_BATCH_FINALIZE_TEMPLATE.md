@@ -28,13 +28,15 @@ This is a review/finalization attempt, not an implementation restart. Inspect th
 
 # Process Locks
 
-Before validation, check:
+Before validation, check for process blockers with the shared preflight helper:
 
 ```bash
-pgrep -fl 'ambitions-codex-train|codex exec|xcodebuild' || true
+scripts/ambitions-process-preflight.sh --assert-clear
 ```
 
-If conflicting processes are active, stop with `STATUS: RED` or unresolved Yellow. Do not kill processes unless a separate repair prompt explicitly authorizes it.
+If helper output is `STATUS: BLOCKED`, report blockers and stop with `STATUS: RED` or unresolved Yellow. Do not kill processes unless a separate repair prompt explicitly authorizes it.
+If helper output is `STATUS: UNKNOWN`, classify conservatively and stop with `STATUS: RED` until uncertainty is resolved.
+`xcodebuildmcp` is not a blocker; it is ignored by the shared preflight helper.
 
 # Validation Shape
 

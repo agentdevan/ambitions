@@ -7,6 +7,7 @@ LEDGER=".codex/state/global-train-attempt-ledger.md"
 QUEUE="docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
 RUNNER="scripts/ambitions-codex-train.sh"
 AUDIT="scripts/ambitions-prompt-audit.sh"
+PREFLIGHT="scripts/ambitions-process-preflight.sh"
 
 die() {
   echo "ERROR: $*" >&2
@@ -34,6 +35,7 @@ EOF
 require_base_files() {
   [[ -x "$RUNNER" ]] || die "$RUNNER is missing or not executable"
   [[ -x "$AUDIT" ]] || die "$AUDIT is missing or not executable"
+  [[ -x "$PREFLIGHT" ]] || die "$PREFLIGHT is missing or not executable"
   [[ -f "$QUEUE" ]] || die "$QUEUE is missing"
   [[ -f "$LEDGER" ]] || die "$LEDGER is missing"
 }
@@ -46,11 +48,16 @@ active_conflicts() {
 }
 
 require_no_process_conflicts() {
-  local conflicts
-  conflicts="$(active_conflicts)"
-  if [[ -n "$conflicts" ]]; then
-    printf 'RED: conflicting runner/Codex/Xcode process is active:\n%s\n' "$conflicts" >&2
-    exit 1
+  local preflight_output preflight_exit
+  set +e
+  preflight_output="$(scripts/ambitions-process-preflight.sh --assert-clear 2>&1)"
+  preflight_exit=$?
+  set -e
+  if [[ "$preflight_exit" -ne 0 ]]; then
+    printf '%s\n' "$preflight_output" >&2
+    printf '\nDEBUG: broad process scan output after helper classification:\n' >&2
+    active_conflicts | awk 'NF' >&2 || true
+    exit "$preflight_exit"
   fi
 }
 

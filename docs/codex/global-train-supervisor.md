@@ -72,7 +72,14 @@ Missing Yellow acceptance data keeps the state unresolved and stops the supervis
 
 ## Red And Unknown Handling
 
-Red stops. Unknown is treated as unresolved unless artifact inspection proves otherwise. A build lock or active conflicting runner/Codex/Xcode process also stops.
+Red stops. Unknown is treated as unresolved unless artifact inspection proves otherwise.
+A build lock or active conflicting runner/Codex/Xcode process also stops.
+
+Hard-red process conflict gate rule:
+
+- Do not use broad `pgrep` patterns as a hard red gate.
+- Use `scripts/ambitions-process-preflight.sh --assert-clear` instead.
+- `xcodebuildmcp` is not a real `xcodebuild` validation process and is ignored by the shared preflight helper.
 
 The supervisor does not kill processes automatically. It reports process IDs and exits.
 

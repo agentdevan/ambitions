@@ -12,7 +12,7 @@ The follow-up cleanup gate stopped the overlapping PK15 runner/Codex execution c
 - repeated child launch: attempt ledger records unresolved child state and blocks normal reruns.
 - incomplete artifact retry: Unknown/incomplete artifacts are classified unresolved, not retry triggers.
 - Phase 02 rerun when finalization needed: `prompts/_BATCH_FINALIZE_TEMPLATE.md` and `PK15-FINALIZE-01` route existing diffs to review/finalization.
-- Xcode build lock risk: supervisor checks active `ambitions-codex-train`, `codex exec`, and `xcodebuild` processes before launching.
+- Xcode build lock risk: supervisor now delegates to `scripts/ambitions-process-preflight.sh` and does not block on `xcodebuildmcp` helper processes.
 - same-root retry risk: supervisor blocks repeated same-batch launch within a supervisor pass.
 
 ## Files Changed
@@ -30,8 +30,8 @@ The follow-up cleanup gate stopped the overlapping PK15 runner/Codex execution c
 
 ## Guards Added
 
-- guard: process conflict preflight - file: `scripts/ambitions-global-train-supervisor.sh` - effect: stops before overlapping runner/Codex/Xcode work.
-- guard: actual Xcode build matching - file: `scripts/ambitions-global-train-supervisor.sh` - effect: blocks real `xcodebuild` jobs without treating `xcodebuildmcp` helper processes as build-lock conflicts.
+- guard: process conflict preflight - files: `scripts/ambitions-process-preflight.sh`, `scripts/ambitions-global-train-supervisor.sh` - effect: stops before overlapping runner/Codex/Xcode work using a deterministic matcher.
+- guard: finalization/repair preflight flow - file: `Makefile` targets `repair-status`, `repair-next`, `repair-current` - effect: routes unresolved state into `*-FINALIZE-01` / `*-REPAIR-01` workflows.
 - guard: lock file - file: `scripts/ambitions-global-train-supervisor.sh` - effect: prevents concurrent supervisor launches and safely clears stale locks.
 - guard: tracked dirty worktree stop - file: `scripts/ambitions-global-train-supervisor.sh` - effect: prevents global train launch over unresolved tracked work.
 - guard: global conductor child refusal - file: `scripts/ambitions-global-train-supervisor.sh` - effect: refuses to run `RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION` as a child.

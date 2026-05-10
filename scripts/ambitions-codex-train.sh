@@ -71,6 +71,25 @@ if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
 fi
 
 if [[ "${1:-}" == "--self-check" ]]; then
+  preflight="$(dirname "$0")/ambitions-process-preflight.sh"
+  [[ -x "$preflight" ]] || die "preflight helper is missing or not executable: $preflight"
+  bash -n "$preflight"
+  grep -q 'scripts/ambitions-process-preflight.sh --assert-clear' scripts/ambitions-global-train-supervisor.sh \
+    || die "supervisor no longer calls the shared preflight helper"
+
+  mock_preflight="$(mktemp)"
+  trap 'rm -f "$mock_preflight"' EXIT
+  cat >"$mock_preflight" <<EOF
+1001 1000 bash scripts/ambitions-codex-train.sh SELF-CHECK prompts/batches/SELF-CHECK.md
+1002 1001 codex exec --mock-runner-self-check
+1003 1001 bash scripts/ambitions-codex-train.sh SELF-CHECK prompts/batches/SELF-CHECK.md
+1004 1002 xcodebuildmcp --simulate --self-check-mock
+1005 1002 bash scripts/ambitions-process-preflight.sh --assert-clear
+EOF
+  PROCESS_PREFLIGHT_SELF_PID=1005 PROCESS_PREFLIGHT_PS_FILE="$mock_preflight" "$preflight" --assert-clear >/dev/null \
+    || die "preflight helper mock check failed"
+  rm -f "$mock_preflight"
+  trap - EXIT
   exec "$(dirname "$0")/ambitions-runner-self-check.sh"
 fi
 
