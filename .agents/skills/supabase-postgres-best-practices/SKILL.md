@@ -8,7 +8,14 @@ metadata:
   organization: Supabase
   date: January 2026
   abstract: Comprehensive Postgres performance optimization guide for developers using Supabase and Postgres. Contains performance rules across 8 categories, prioritized by impact from critical (query performance, connection management) to incremental (advanced features). Each rule includes detailed explanations, incorrect vs. correct SQL examples, query plan analysis, and specific performance metrics to guide automated optimization and code generation.
+ambitions_classification: quarantine_candidate_reference
+ambitions_rule: "Do not auto-load or use for Ambitions core work unless explicitly re-approved by docs/truth/* and a scoped owner decision."
+ambitions_reason: "External hosted-provider/database workflow is not active Ambitions core architecture."
 ---
+
+> Quarantine note: This external Supabase/Postgres skill is retained for traceability/candidate reference only.
+> It is not active Ambitions product, implementation, backend, release, or Codex process authority.
+> Current authority begins in `docs/truth/`; see `docs/status/codex-agents-skill-inventory.md` and `docs/status/cleanup-decision-register.md`.
 
 # Supabase Postgres Best Practices
 
