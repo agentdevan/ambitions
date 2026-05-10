@@ -88,4 +88,3 @@ Validation:
 - no app/source/runtime files touched
 - no product quality, release, accessibility, performance, or implementation
   proof claimed
-
