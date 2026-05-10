@@ -18,6 +18,14 @@ Current repo map for future ChatGPT/Codex questions: [`../../.codex/REPO_INVENTO
 8. [`../../.codex/REPO_INVENTORY.md`](../../.codex/REPO_INVENTORY.md) for repo map / routing questions.
 9. Current active-batch state, Codex docs, manifests, reports, and scripts as needed.
 
+## Throughput operating docs
+
+- [`BATCH_THROUGHPUT_OPERATING_MODEL.md`](./BATCH_THROUGHPUT_OPERATING_MODEL.md)
+- [`BATCH_LANE_CLASSIFICATION_POLICY.md`](./BATCH_LANE_CLASSIFICATION_POLICY.md)
+- [`BATCH_PREP_FACTORY.md`](./BATCH_PREP_FACTORY.md)
+- [`BATCH_TEST_ROUTER.md`](./BATCH_TEST_ROUTER.md)
+- [`KNOWN_YELLOW_QUARANTINE_LEDGER.md`](./KNOWN_YELLOW_QUARANTINE_LEDGER.md)
+
 ## Boundary
 
 Codex OS files are operating context. They are not product source truth, shipped behavior proof, validation proof, release proof, or approval to change app behavior.

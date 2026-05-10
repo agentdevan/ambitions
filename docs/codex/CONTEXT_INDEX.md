@@ -5,6 +5,19 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 ## Current Operating Truth
 
 - GQ01 Global Queue Maturity is complete / accepted Yellow. PK04 Atomic Goal Creation, PK05 Atomic Clarification / Materialization, and PK06 Atomic Capture Promotion are complete / Green. Use `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` and `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` as the canonical fallback queue after live current-run state. PK07 Storage Schema Version Ledger is the next implementation batch. SA07-SA32 are visible; EFC is overlay-first; CS02C-CS06C/CS09C are conditional triggers; PX01-PX20 are historical complete do-not-run.
+- Throughput operating assets:
+  - `docs/codex/BATCH_THROUGHPUT_OPERATING_MODEL.md`
+  - `docs/codex/BATCH_LANE_CLASSIFICATION_POLICY.md`
+  - `docs/codex/BATCH_PREP_FACTORY.md`
+  - `docs/codex/BATCH_TEST_ROUTER.md`
+  - `docs/codex/KNOWN_YELLOW_QUARANTINE_LEDGER.md`
+  - `docs/codex/batch-prep/README.md`
+  - `docs/codex/batch-prep/PK16.md` through `docs/codex/batch-prep/PK25.md`
+  - `scripts/ambitions-throughput-plan.sh`
+  - `scripts/ambitions-batch-lane-classifier.py`
+  - `scripts/ambitions-batch-prep-scaffold.py`
+  - `scripts/ambitions-known-yellow-scan.sh`
+  - `prompts/_BATCH_PREP_TEMPLATE.md`
 
 - AIR Ambitions Intelligence Runtime fold-in overlay is active planned scope
   through `docs/canon/Ambitions_Intelligence_Runtime.md`,

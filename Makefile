@@ -1,4 +1,5 @@
 .PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
+.PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
@@ -141,3 +142,27 @@ repair-current:
 	printf 'Running repair/finalization command:\\n'; \
 	printf 'ALLOW_DIRTY=1 ALLOW_MAIN_COMMIT=1 AUTO_BRANCH=0 make batch BATCH=%s PROMPT=%s\\n' "$$target" "$$prompt"; \
 	ALLOW_DIRTY=1 ALLOW_MAIN_COMMIT=1 AUTO_BRANCH=0 make batch BATCH="$$target" PROMPT="$$prompt"
+
+throughput-status:
+	@echo "Throughput status snapshot"
+	@git status --short --branch
+	@make batch-self-check
+	@make prompt-audit
+	@make autonomous-train-status
+	@make autonomous-train-next
+
+throughput-next:
+	@echo "Throughput next-lane command"
+	@bash scripts/ambitions-throughput-plan.sh --next
+
+throughput-classify:
+	@echo "Throughput lane classification sample"
+	@bash scripts/ambitions-throughput-plan.sh --classify --limit 20
+
+throughput-prep:
+	@echo "Throughput prep scaffold dry run"
+	@python3 scripts/ambitions-batch-prep-scaffold.py --from-queue docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json --start-at PK16 --limit 10 --output-dir docs/codex/batch-prep --dry-run
+
+throughput-known-yellow:
+	@echo "Throughput known-yellow scan"
+	@bash scripts/ambitions-known-yellow-scan.sh
