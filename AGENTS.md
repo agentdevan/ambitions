@@ -2,13 +2,21 @@
 
 This file is for AI/Codex contributors working in the Ambitions repo.
 
+Authority notice: active repo authority starts in `docs/truth/README.md`. If this file conflicts with `docs/truth/*`, the truth files win. This file is contributor guidance, not implementation proof, validation proof, or release proof.
+
 Current repo posture:
 
-- AmbitionsCanon is the highest product/design source truth.
-- `docs/status/current-implementation-map.md` is current implementation-status truth.
-- `docs/status/release-evidence-packet.md` is current validation/release-evidence truth.
+- `docs/truth/README.md` is the active authority index.
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md` is current product/design truth.
+- `docs/truth/IMPLEMENTATION_TRUTH.md` is current implementation/source truth.
+- `docs/truth/RELEASE_TRUTH.md` is current validation/release/proof truth.
+- `docs/truth/CODEX_PROCESS_TRUTH.md` is current Codex operating truth.
+- `docs/truth/HISTORICAL_POLICY.md` decides historical extraction, quarantine, archive, and deletion policy.
+- AmbitionsCanon is supporting product/design canon where compatible with `docs/truth/*`.
+- `docs/status/current-implementation-map.md` is supporting implementation-status evidence.
+- `docs/status/release-evidence-packet.md` is supporting validation/release-evidence posture.
 - Validation is local VM/Mac only. There is no active hosted CI workflow.
-- Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, `.codex`, and `.agents` material is retained as history, operating context, or stricter proof gates where compatible. It is not the public repo front door.
+- Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, `.codex`, and `.agents` material is retained as history, operating context, or stricter proof gates where compatible with `docs/truth/*`. It is not the public repo front door.
 - EFC is an active peak-proof overlay for unfinished planned work. It does not replace the active batch, implement product behavior by itself, or authorize release/platform claims.
 - The local Ambitions Repo MCP under `tools/mcp/ambitions_repo_mcp/` is optional read-only Codex tooling for active-batch, EFC, source-truth, claim-scan, closeout, and changed-file impact checks. It is not an app dependency.
 - The local Ambitions Proof MCP under `tools/mcp/ambitions_proof_mcp/` exposes allowlisted validation names only. It is not a generic shell and must not gain write, network, secrets, signing, App Store, hosted CI, or git mutation tools without explicit approval.
@@ -17,16 +25,22 @@ Current repo posture:
 
 For normal repo work, read in this order:
 
-1. `README.md`
-2. `docs/README.md`
-3. `docs/AmbitionsCanon/README.md`
-4. `docs/status/current-implementation-map.md`
-5. `docs/status/repo-cleanup-index.md`
-6. `docs/status/release-evidence-packet.md`
-7. `docs/native-build-and-release.md`
-8. the target source files and tests
+1. `docs/truth/README.md`
+2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+3. `docs/truth/IMPLEMENTATION_TRUTH.md`
+4. `docs/truth/RELEASE_TRUTH.md`
+5. `docs/truth/CODEX_PROCESS_TRUTH.md`
+6. `docs/truth/HISTORICAL_POLICY.md`
+7. `README.md`
+8. `docs/README.md`
+9. `docs/status/current-implementation-map.md`
+10. `docs/status/repo-cleanup-index.md`
+11. `docs/status/release-evidence-packet.md`
+12. `docs/native-build-and-release.md`
+13. the target source files and tests
+14. relevant `.codex` / `.agents` files only after the truth files
 
-For product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, or implementation-planning work, read the AmbitionsCanon files named by `docs/AmbitionsCanon/README.md` before changing source.
+For product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, or implementation-planning work, read `docs/truth/PRODUCT_DESIGN_TRUTH.md` first, then the compatible AmbitionsCanon files named by `docs/AmbitionsCanon/README.md` before changing source.
 
 For Codex OS, batch-train, or long-run governance work, additionally read:
 
@@ -48,23 +62,29 @@ For Codex OS, batch-train, or long-run governance work, additionally read:
 - `.codex/README.md`
 - the selected route or batch manifest
 
-For `resume global batch train`, immediately read `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files before continuing from repo evidence. If the Ambitions Repo MCP is configured, call `get_active_batch`, `summarize_repo_posture`, and `get_efc_overlay_status` before edits.
+For `resume global batch train`, immediately read `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files before continuing from repo evidence. If the Ambitions Repo MCP is configured, call `get_active_batch`, `summarize_repo_posture`, and `get_efc_overlay_status` before edits.
 
-For `resume mini global batch train`, immediately read `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files. Mini may execute bounded batches, but must defer or stop on senior-only gates.
+For `resume mini global batch train`, immediately read `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files. Mini may execute bounded batches, but must defer or stop on senior-only gates.
 
-For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files. Senior resolves model-tier deferrals and owns judgment-heavy gates.
+For `resume senior global batch train`, immediately read `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files. Senior resolves model-tier deferrals and owns judgment-heavy gates.
 
 ## Source-truth rules
 
-- AmbitionsCanon decides product/design direction.
+- `docs/truth/README.md` decides active authority hierarchy and conflict rules.
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md` decides product/design direction.
+- `docs/truth/IMPLEMENTATION_TRUTH.md` decides implementation/source boundaries together with live source, tests, scripts, and project evidence.
+- `docs/truth/RELEASE_TRUTH.md` decides validation, release, proof, and claim language.
+- `docs/truth/CODEX_PROCESS_TRUTH.md` decides Codex operating behavior.
+- `docs/truth/HISTORICAL_POLICY.md` decides historical extraction, quarantine, archive, and deletion policy.
+- AmbitionsCanon supports product/design direction where compatible with active truth files.
 - The active flagship top-level IA is `Today / Goals / Capture / Time / You`.
 - `Plan` is not an active top-level destination. It remains valid only as a contextual/action noun, historical reference, or internal compatibility seam.
-- The current implementation map decides what is implemented, scaffolded, planned, historical, or unproven.
-- The release evidence packet decides validation and release claim language.
+- The current implementation map supports what is implemented, scaffolded, planned, historical, or unproven.
+- The release evidence packet supports validation and release claim language.
 - `BATCH_REGISTRY.md` decides operational batch status only.
-- `EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`, `BATCH_REGISTRY_EFC_OVERLAY.md`, and `GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md` decide peak proof obligations for unfinished work where compatible with active batch state.
+- `EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`, `BATCH_REGISTRY_EFC_OVERLAY.md`, and `GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md` decide peak proof obligations for unfinished work where compatible with active batch state and `docs/truth/*`.
 - `POST_BATCH_GATE_REGISTRY.md` decides mandatory continuation gates such as the Post-PK03 Dirty Worktree Reconciliation Gate.
-- Historical docs may remain useful, but they do not override the current front-door/status files.
+- Historical docs may remain useful, but they do not override the current truth files.
 - Do not treat docs-only plans as shipped behavior.
 - MCP tool output is repo-derived execution aid, not a replacement for source truth, raw logs, or human/device/release evidence.
 
@@ -99,7 +119,7 @@ For `resume senior global batch train`, immediately read `docs/codex/RESUME_SENI
 
 ## Execution rules
 
-- Start non-trivial work by checking repo status, current docs, active batch state, post-batch gate registry, and the target code paths.
+- Start non-trivial work by checking repo status, current truth files, active batch state, post-batch gate registry, and the target code paths.
 - Use the smallest safe touch budget. Name primary files before edits.
 - Prefer deterministic, additive, compatibility-safe changes.
 - Do not silently rewrite product strategy, IA, naming, release posture, or roadmap structure.
@@ -144,12 +164,12 @@ Local simulator evidence is not signed archive proof, TestFlight proof, App Stor
 - Ambitions is a premium native iPhone app for turning long-term goals into grounded daily execution.
 - Core loop: `Capture -> Place -> Shape Time -> Do Today -> Close / Recover -> Save Proof`.
 - Ambitions is not a generic task app, calendar clone, habit tracker, productivity score app, chatbot, AI wrapper, dashboard, or SaaS admin panel.
-- User-facing language should follow AmbitionsCanon first.
+- User-facing language should follow `docs/truth/PRODUCT_DESIGN_TRUTH.md` first, then compatible AmbitionsCanon support.
 - Avoid fake precision, fake certainty, AI theater, shame language, and silent automation.
 
 ## Batch train rule
 
-For multi-batch execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, the EFC overlay files, and the selected manifest under `docs/codex/batch-trains/`.
+For multi-batch execution, use `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, the EFC overlay files, and the selected manifest under `docs/codex/batch-trains/`.
 
 Continue automatically through Green and accepted Yellow only when owner, safety reason, no-claim boundary, and applicable post-batch gates are recorded. Hard Red stops. Mini may additionally defer non-blocking senior-only batches to `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`; Senior must resolve blocking deferrals before closeout.
 
