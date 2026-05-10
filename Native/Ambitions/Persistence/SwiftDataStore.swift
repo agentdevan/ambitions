@@ -33,6 +33,7 @@ actor AmbitionsPersistenceStore {
         EventLedgerRecord.self,
         CommandExecutionRecord.self,
         AppStateRecord.self,
+        ActionReceiptHistoryRecordModel.self
     ])
 
     private let container: ModelContainer
@@ -105,6 +106,7 @@ actor AmbitionsPersistenceStore {
         try context.fetch(FetchDescriptor<EventLedgerRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<CommandExecutionRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<AppStateRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>()).forEach(context.delete)
 
         if context.hasChanges {
             try context.save()

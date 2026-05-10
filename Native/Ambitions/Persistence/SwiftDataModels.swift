@@ -591,3 +591,47 @@ final class AppStateRecord {
         self.snapshotData = snapshotData
     }
 }
+
+@Model
+final class ActionReceiptHistoryRecordModel {
+    @Attribute(.unique) var id: String
+    var schemaVersion: String
+    var sourceDomainRaw: String
+    var resultStateRaw: String
+    var privacyLevelRaw: String
+    var proofRelevanceRaw: String
+    var undoAvailabilityRaw: String
+    var requiresConfirmationBeforeBroaderUse: Bool
+    var localOnly: Bool
+    var createdAt: String
+    var occurredAt: String
+    var receiptData: Data
+
+    init(
+        id: String,
+        schemaVersion: String,
+        sourceDomainRaw: String,
+        resultStateRaw: String,
+        privacyLevelRaw: String,
+        proofRelevanceRaw: String,
+        undoAvailabilityRaw: String,
+        requiresConfirmationBeforeBroaderUse: Bool,
+        localOnly: Bool,
+        createdAt: String,
+        occurredAt: String,
+        receiptData: Data
+    ) {
+        self.id = id
+        self.schemaVersion = schemaVersion
+        self.sourceDomainRaw = sourceDomainRaw
+        self.resultStateRaw = resultStateRaw
+        self.privacyLevelRaw = privacyLevelRaw
+        self.proofRelevanceRaw = proofRelevanceRaw
+        self.undoAvailabilityRaw = undoAvailabilityRaw
+        self.requiresConfirmationBeforeBroaderUse = requiresConfirmationBeforeBroaderUse
+        self.localOnly = localOnly
+        self.createdAt = createdAt
+        self.occurredAt = occurredAt
+        self.receiptData = receiptData
+    }
+}

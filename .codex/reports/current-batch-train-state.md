@@ -2,10 +2,10 @@
 
 Date: 2026-05-10
 Active train: Global full-stack execution
-Current batch: PK14 Durable Command/Event Ledger / Green.
-Next recommended implementation pass: IR-01 Big Frontend Recovery Implementation before further visible top-level feature expansion.
-Next eligible non-UI platform batch: PK15 Receipt Backend.
-Scope: PK14 added a local durable command execution ledger seam and focused domain/persistence/service tests. It did not implement release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+Current batch: PK15 Receipt Backend / Accepted Yellow.
+Next recommended implementation pass: PK16 Trust History Query.
+Next eligible non-UI platform batch: PK16 Trust History Query.
+Scope: PK15 adds local Action Receipt persistence and query contracts with focused repository coverage; it does not implement release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
 
 ## PK14 Durable Command/Event Ledger Closeout
 
@@ -17,8 +17,23 @@ Scope: PK14 added a local durable command execution ledger seam and focused doma
 - Executor integration: `Native/Ambitions/Services/AmbitionsCommandExecutor.swift` persists command execution records, including validation-blocked attempts, without adding external side effects.
 - Focused proof: `xcodegen generate` passed and focused `xcodebuild test` passed with 36 selected tests, 0 failures.
 - EFC applicability: invoked for local durable command/event evidence; privacy/local-only/no external side effects stayed bounded.
-- Canonical queue now marks PK14 complete/do-not-run and PK15 executable now.
+- Canonical queue now marks PK14 complete/do-not-run and PK15 accepted-yellow.
 - No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, or global-train-completion claim is made.
+
+## PK15 Receipt Backend Closeout
+
+- PK15 report: `docs/audits/pk15-receipt-backend-report.md`.
+- Focused proof: `xcodegen generate` passed; focused `ActionReceiptHistoryRepositoryTests` passed with 4 tests, 0 failures.
+- PK15 focused source/test scope:
+  - `Native/Ambitions/Persistence/PersistenceContracts.swift`
+  - `Native/Ambitions/Persistence/StorageSchemaVersionLedger.swift`
+  - `Native/Ambitions/Persistence/SwiftDataModels.swift`
+  - `Native/Ambitions/Persistence/SwiftDataRepositories.swift`
+  - `Native/Ambitions/Persistence/SwiftDataStore.swift`
+  - `Native/AmbitionsTests/Persistence/ActionReceiptHistoryRepositoryTests.swift`.
+- Known unrelated test mismatch: `ExternalSurfaceVerificationChecklistTests.testM04ExistingProjectionsCarryStalePrivateAndFallbackBehavior`.
+- No full-suite green claim is made because the known external-surface mismatch remains for QA / External Surface follow-up.
+- Canonical queue now marks PK15 accepted-yellow and PK16 executable now.
 
 ## FET01-FET12 FAANG Frontend Excellence Train Closeout
 
@@ -36,7 +51,7 @@ Scope: PK13 adds a storage-local portable restore rollback wrapper that prefligh
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is complete / accepted Yellow.
 
 ## PK13 Restore Rollback Closeout
 

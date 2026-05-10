@@ -301,6 +301,11 @@ protocol FeedbackEventRepository: Sendable {
     func saveEvents(_ events: [GoalFeedbackEvent], goalID: String) async throws
 }
 
+protocol ActionReceiptHistoryRepository: Sendable {
+    func save(_ records: [ActionReceiptHistoryRecord]) async throws
+    func fetch(_ query: ActionReceiptSearchQuery) async throws -> ActionReceiptSearchProjection
+}
+
 protocol CaptureRepository: Sendable {
     func listCaptures() async throws -> [Capture]
     func capture(id: String) async throws -> Capture?
@@ -408,6 +413,7 @@ struct AppRepositories: Sendable {
     let captures: any CaptureRepository
     let teaching: any GoalTeachingSignalRepository
     let eventLedger: any EventLedgerRepository
+    let actionReceiptHistory: (any ActionReceiptHistoryRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)?
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
@@ -421,6 +427,7 @@ struct AppRepositories: Sendable {
         captures: any CaptureRepository,
         teaching: any GoalTeachingSignalRepository = InMemoryGoalTeachingSignalRepository(),
         eventLedger: any EventLedgerRepository = InMemoryEventLedgerRepository(),
+        actionReceiptHistory: (any ActionReceiptHistoryRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)? = nil,
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
@@ -433,6 +440,7 @@ struct AppRepositories: Sendable {
         self.captures = captures
         self.teaching = teaching
         self.eventLedger = eventLedger
+        self.actionReceiptHistory = actionReceiptHistory
         self.commandExecutionRecords = commandExecutionRecords
         self.goalCreationUnitOfWork = goalCreationUnitOfWork
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork

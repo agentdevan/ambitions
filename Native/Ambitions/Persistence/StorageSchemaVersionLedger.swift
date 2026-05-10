@@ -158,6 +158,13 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Receipt/trust history event ledger persisted locally."
         ),
         .swiftData(
+            id: "swiftdata.action_receipt_history_record",
+            storedTypeName: "ActionReceiptHistoryRecordModel",
+            currentVersion: "action_receipt_history_record.swiftdata.v1",
+            versionEvidence: "ActionReceiptHistoryRecord.snapshot schema derives from actionClosureReceiptSchemaVersion and metadata columns.",
+            notes: "Receipt history records persisted locally for deterministic local history search and recovery."
+        ),
+        .swiftData(
             id: "swiftdata.command_execution_record",
             storedTypeName: "CommandExecutionRecord",
             currentVersion: ambitionsCommandExecutionRecordSchemaVersion,
@@ -207,6 +214,7 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "CommandExecutionRecord",
         "TeachingSignalRecord",
         "EventLedgerRecord",
+        "ActionReceiptHistoryRecordModel",
         "AppStateRecord",
     ]
 

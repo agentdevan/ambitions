@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK14 Durable Command/Event Ledger"
+  batch: "PK15 Receipt Backend"
   previous_batch: "PK14 Durable Command/Event Ledger"
-  previous_result: "Green"
-  next_eligible_batch: "PK15 Receipt Backend"
+  previous_result: "accepted-yellow"
+  next_eligible_batch: "PK16 Trust History Query"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true

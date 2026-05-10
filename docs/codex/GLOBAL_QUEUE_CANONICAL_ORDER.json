@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-08",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PK15",
-  "next_eligible_title": "Receipt Backend",
+  "next_eligible_batch": "PK16",
+  "next_eligible_title": "Trust History Query",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -116,15 +116,15 @@
     {
       "id": "PK15",
       "title": "Receipt Backend",
-      "classification": "executable_now",
-      "reason": "Active Platform Kernel work after PK14; PK15 is the next implementation batch, later PK stays serial/dependency gated.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK15 completed receipt backend persistence/query proof; full-suite remains blocked by one unrelated external-surface expectation mismatch.",
       "blocking_prerequisites": "",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK16",
       "title": "Trust History Query",
-      "classification": "executable_later",
+      "classification": "executable_now",
       "reason": "Active Platform Kernel work after PK14; PK15 is the current implementation batch, later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK15 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"

@@ -11,10 +11,10 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 - child prompt: prompts/batches/PK15.md
 - child run dir: .codex/runs/PK15/20260510T151222Z
 - child attempt number: 1
-- status: finalization-required
+- status: accepted-yellow
 - started: 2026-05-10T15:12:22Z
-- completed: 2026-05-10T15:12:22Z
-- next action: run `make batch BATCH=PK15-FINALIZE-01 PROMPT=prompts/batches/PK15-FINALIZE-01.md`
+- completed: 2026-05-10T17:35:20Z
+- next action: `make global-train-until-complete`
 - retry allowed: false
 - reason: PK15 stopped Yellow after Spark with bounded uncommitted persistence/test work; continuation must inspect and finalize the existing diff instead of rerunning PK15 or the global conductor.
 
@@ -35,3 +35,4 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 | 2026-05-10T13:25:24Z | PK14-CONDUCTOR-REPAIR-01 | PK14 | 1 | green | .codex/runs/PK14/20260510T134429Z/final/03-review.final.md | PK14 consumed by clean top-level repair; do not rerun PK14. |
 | 2026-05-10T14:58:52Z | RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION | PK15 | 2 | red-unresolved | .codex/runs/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION/20260510T145852Z/ | Parent conductor loop guard stopped nested PK15 churn; do not launch another nested child attempt. |
 | 2026-05-10T15:12:22Z | top-level-runner | PK15 | 1 | finalization-required | .codex/runs/PK15/20260510T151222Z/final-summary.md | Run PK15-FINALIZE-01 to inspect existing diff/artifacts; do not rerun Spark. |
+| 2026-05-10T17:35:20Z | top-level-runner | PK15 | 1 | accepted-yellow | docs/audits/pk15-receipt-backend-report.md | PK15 focused receipt tests passed; one pre-existing external-surface expectation mismatch remains in `ExternalSurfaceVerificationChecklistTests` and is owned by QA / External Surface for follow-up. |

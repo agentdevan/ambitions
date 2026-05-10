@@ -687,6 +687,69 @@ private enum RepositoryMapping {
             goalPriorityOrder: []
         )
     }
+
+    static func actionReceiptHistoryRecord(from record: ActionReceiptHistoryRecord) throws -> ActionReceiptHistoryRecordModel {
+        ActionReceiptHistoryRecordModel(
+            id: record.id,
+            schemaVersion: actionClosureReceiptSchemaVersion,
+            sourceDomainRaw: record.receipt.sourceDomain.rawValue,
+            resultStateRaw: record.receipt.resultState.rawValue,
+            privacyLevelRaw: record.privacyLevel.rawValue,
+            proofRelevanceRaw: record.proofRelevance.rawValue,
+            undoAvailabilityRaw: record.receipt.undoAvailability.rawValue,
+            requiresConfirmationBeforeBroaderUse: record.requiresConfirmationBeforeBroaderUse,
+            localOnly: record.localOnly,
+            createdAt: record.receipt.createdAt,
+            occurredAt: record.receipt.occurredAt,
+            receiptData: try PersistenceCoding.encode(record.receipt)
+        )
+    }
+
+    static func apply(_ record: ActionReceiptHistoryRecord, to persisted: ActionReceiptHistoryRecordModel) throws {
+        persisted.schemaVersion = actionClosureReceiptSchemaVersion
+        persisted.sourceDomainRaw = record.receipt.sourceDomain.rawValue
+        persisted.resultStateRaw = record.receipt.resultState.rawValue
+        persisted.privacyLevelRaw = record.privacyLevel.rawValue
+        persisted.proofRelevanceRaw = record.proofRelevance.rawValue
+        persisted.undoAvailabilityRaw = record.receipt.undoAvailability.rawValue
+        persisted.requiresConfirmationBeforeBroaderUse = record.requiresConfirmationBeforeBroaderUse
+        persisted.localOnly = record.localOnly
+        persisted.createdAt = record.receipt.createdAt
+        persisted.occurredAt = record.receipt.occurredAt
+        persisted.receiptData = try PersistenceCoding.encode(record.receipt)
+    }
+
+    static func actionReceiptHistoryRecord(from persistedRecord: ActionReceiptHistoryRecordModel) throws -> ActionReceiptHistoryRecord {
+        if let receipt = try? PersistenceCoding.decode(ActionReceipt.self, from: persistedRecord.receiptData) {
+            return ActionReceiptHistoryRecord(
+                receipt: receipt,
+                privacyLevel: RepositoryMapping.persisted(ActionReceiptPrivacyLevel.self, rawValue: persistedRecord.privacyLevelRaw, fallback: .safeToShow, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "privacyLevelRaw"),
+                localOnly: persistedRecord.localOnly,
+                proofRelevance: RepositoryMapping.persisted(ActionReceiptProofRelevance.self, rawValue: persistedRecord.proofRelevanceRaw, fallback: .notProof, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "proofRelevanceRaw"),
+                requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse
+            )
+        }
+
+        return ActionReceiptHistoryRecord(
+            receipt: ActionReceipt(
+                id: persistedRecord.id,
+                resultState: RepositoryMapping.persisted(ActionReceiptResultState.self, rawValue: persistedRecord.resultStateRaw, fallback: .changed, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "resultStateRaw"),
+                title: "Recovered receipt",
+                summary: "Recovered receipt payload was unavailable.",
+                sourceDomain: RepositoryMapping.persisted(ActionReceiptSourceDomain.self, rawValue: persistedRecord.sourceDomainRaw, fallback: .system, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "sourceDomainRaw"),
+                occurredAt: persistedRecord.occurredAt,
+                createdAt: persistedRecord.createdAt,
+                affectedObjects: [],
+                changedFacts: [],
+                correctionAvailability: .unavailable,
+                undoAvailability: RepositoryMapping.persisted(ActionReceiptUndoAvailability.self, rawValue: persistedRecord.undoAvailabilityRaw, fallback: .unavailable, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "undoAvailabilityRaw")
+            ),
+            privacyLevel: RepositoryMapping.persisted(ActionReceiptPrivacyLevel.self, rawValue: persistedRecord.privacyLevelRaw, fallback: .safeToShow, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "privacyLevelRaw"),
+            localOnly: persistedRecord.localOnly,
+            proofRelevance: RepositoryMapping.persisted(ActionReceiptProofRelevance.self, rawValue: persistedRecord.proofRelevanceRaw, fallback: .notProof, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "proofRelevanceRaw"),
+            requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse
+        )
+    }
 }
 
 private extension Array where Element == Step {
@@ -1365,6 +1428,36 @@ struct SwiftDataAppStateRepository: AppStateRepository {
             } else {
                 context.insert(try RepositoryMapping.appStateRecord(from: state))
             }
+        }
+    }
+}
+
+struct SwiftDataActionReceiptHistoryRepository: ActionReceiptHistoryRepository {
+    let store: AmbitionsPersistenceStore
+
+    func save(_ records: [ActionReceiptHistoryRecord]) async throws {
+        try await store.write { context in
+            let existing = Dictionary(
+                uniqueKeysWithValues: try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>()).map { ($0.id, $0) }
+            )
+
+            for record in records {
+                if let persisted = existing[record.id] {
+                    try RepositoryMapping.apply(record, to: persisted)
+                } else {
+                    context.insert(try RepositoryMapping.actionReceiptHistoryRecord(from: record))
+                }
+            }
+        }
+    }
+
+    func fetch(_ query: ActionReceiptSearchQuery) async throws -> ActionReceiptSearchProjection {
+        try await store.read { context in
+            let persisted = try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>())
+            let records = persisted.compactMap { persistedRecord in
+                try? RepositoryMapping.actionReceiptHistoryRecord(from: persistedRecord)
+            }
+            return ActionReceiptHistoryProjection(records: records).search(query)
         }
     }
 }
