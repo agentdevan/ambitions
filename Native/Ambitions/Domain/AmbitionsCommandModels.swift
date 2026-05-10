@@ -1,6 +1,7 @@
 import Foundation
 
 let ambitionsCommandSchemaVersion = "ambitions_command.native.v1"
+let ambitionsCommandExecutionRecordSchemaVersion = "ambitions_command_execution_record.native.v1"
 
 enum AmbitionsCommandKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case openDestination = "open_destination"
@@ -279,6 +280,38 @@ struct AmbitionsCommandExecutionResult: Codable, Sendable, Equatable, Hashable {
         self.eventLedgerEntryIDs = Array(Set(eventLedgerEntryIDs.filter { $0.isEmpty == false })).sorted()
         self.recommendationExplanationIDs = Array(Set(recommendationExplanationIDs.filter { $0.isEmpty == false })).sorted()
         self.metadata = metadata.filter { $0.key.isEmpty == false && $0.value.isEmpty == false }
+    }
+}
+
+struct AmbitionsCommandExecutionRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let command: AmbitionsCommand
+    let result: AmbitionsCommandExecutionResult
+    let recordedAt: String
+    let localOnly: Bool
+    let privacy: EventLedgerPrivacyClassification
+    let schemaVersion: String
+
+    init(
+        id: String? = nil,
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        recordedAt: String,
+        localOnly: Bool? = nil,
+        privacy: EventLedgerPrivacyClassification? = nil,
+        schemaVersion: String = ambitionsCommandExecutionRecordSchemaVersion
+    ) {
+        self.id = id ?? "command.execution.\(command.id)"
+        self.command = command
+        self.result = result
+        self.recordedAt = recordedAt
+        self.localOnly = localOnly ?? command.localOnly
+        self.privacy = privacy ?? command.privacy
+        self.schemaVersion = schemaVersion
+    }
+
+    var commandID: String {
+        command.id
     }
 }
 

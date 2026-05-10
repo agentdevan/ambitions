@@ -502,6 +502,53 @@ final class EventLedgerRecord {
 }
 
 @Model
+final class CommandExecutionRecord {
+    @Attribute(.unique) var id: String
+    var commandID: String
+    var commandKindRaw: String
+    var commandSourceRaw: String
+    var actorRaw: String
+    var executionStatusRaw: String
+    var resultStatusRaw: String
+    var recordedAt: String
+    var schemaVersion: String
+    var localOnly: Bool
+    var privacyRaw: String
+    var commandData: Data
+    var resultData: Data
+
+    init(
+        id: String,
+        commandID: String,
+        commandKindRaw: String,
+        commandSourceRaw: String,
+        actorRaw: String,
+        executionStatusRaw: String,
+        resultStatusRaw: String,
+        recordedAt: String,
+        schemaVersion: String,
+        localOnly: Bool,
+        privacyRaw: String,
+        commandData: Data,
+        resultData: Data
+    ) {
+        self.id = id
+        self.commandID = commandID
+        self.commandKindRaw = commandKindRaw
+        self.commandSourceRaw = commandSourceRaw
+        self.actorRaw = actorRaw
+        self.executionStatusRaw = executionStatusRaw
+        self.resultStatusRaw = resultStatusRaw
+        self.recordedAt = recordedAt
+        self.schemaVersion = schemaVersion
+        self.localOnly = localOnly
+        self.privacyRaw = privacyRaw
+        self.commandData = commandData
+        self.resultData = resultData
+    }
+}
+
+@Model
 final class AppStateRecord {
     @Attribute(.unique) var id: String
     var preferredTabRaw: String

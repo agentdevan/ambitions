@@ -29,7 +29,12 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let captureRepository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-command" })
         let ledger = InMemoryEventLedgerRepository()
-        let executor = AmbitionsCommandExecutor(captureService: captureService, eventLedger: ledger)
+        let commandRecordRepository = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            eventLedger: ledger,
+            commandExecutionRecords: commandRecordRepository
+        )
         let now = Date(timeIntervalSince1970: 1_777_113_600)
         let command = AmbitionsCommand(
             id: "command-capture",
@@ -70,6 +75,51 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertEqual(events.first?.captureID, "capture-command")
         XCTAssertEqual(events.first?.privacy, .privateUserText)
         XCTAssertEqual(result.eventLedgerEntryIDs, ["ledger.command.command-capture"])
+
+        let records = try await commandRecordRepository.fetchRecent(limit: 10)
+        let record = try XCTUnwrap(records.first)
+        XCTAssertEqual(record.command.id, "command-capture")
+        XCTAssertEqual(record.result.status, .succeeded)
+        XCTAssertEqual(record.result.eventLedgerEntryIDs, ["ledger.command.command-capture"])
+        XCTAssertEqual(record.localOnly, command.localOnly)
+        XCTAssertEqual(record.privacy, command.privacy)
+        XCTAssertEqual(record.schemaVersion, ambitionsCommandExecutionRecordSchemaVersion)
+    }
+
+    func testQuickCapturePersistsExecutionRecordWhenEmissionDisabled() async throws {
+        let captureRepository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-no-ledger" })
+        let ledger = InMemoryEventLedgerRepository()
+        let commandRecordRepository = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            eventLedger: ledger,
+            commandExecutionRecords: commandRecordRepository
+        )
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+        let command = AmbitionsCommand(
+            id: "command-record-no-ledger",
+            kind: .quickCapture,
+            source: .widget,
+            payload: AmbitionsCommandPayload(rawText: "No ledger capture"),
+            createdAt: "2026-04-25T12:00:00Z",
+            actor: .externalSurface,
+            sourceSurface: "widget"
+        )
+
+        let result = await executor.execute(
+            command,
+            context: CommandExecutionContext(now: now, allowsEventLedgerEmission: false)
+        )
+
+        XCTAssertEqual(result.status, .succeeded)
+        XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
+
+        let records = try await commandRecordRepository.fetchRecent(limit: 10)
+        let record = try XCTUnwrap(records.first)
+        XCTAssertEqual(record.result.summary, "Saved to Needs a Place")
+        XCTAssertEqual(record.result.eventLedgerEntryIDs, [])
+        XCTAssertEqual(record.command.actor, .externalSurface)
     }
 
     func testQuickCaptureCanExecuteWithoutLedgerEmission() async throws {
@@ -98,6 +148,45 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let captures = try await captureRepository.listCaptures()
         let events = try await ledger.fetchRecent(limit: 10)
         XCTAssertEqual(captures.count, 1)
+        XCTAssertTrue(events.isEmpty)
+    }
+
+    func testUnsupportedFutureCommandsArePersistedWithoutEventLedgerEmission() async throws {
+        let captureRepository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "unused" })
+        let ledger = InMemoryEventLedgerRepository()
+        let commandRecordRepository = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            eventLedger: ledger,
+            commandExecutionRecords: commandRecordRepository
+        )
+        let command = AmbitionsCommand(
+            id: "command-unsupported",
+            kind: .scheduleItem,
+            source: .plan,
+            payload: AmbitionsCommandPayload(
+                title: "Schedule work block",
+                destinationRoute: "plan"
+            ),
+            createdAt: "2026-04-25T12:00:00Z"
+        )
+
+        let result = await executor.execute(
+            command,
+            context: CommandExecutionContext(now: Date(timeIntervalSince1970: 1_777_113_600))
+        )
+
+        XCTAssertEqual(result.status, .unsupported)
+        XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
+
+        let record = try await commandRecordRepository.fetchRecord(commandID: "command-unsupported")
+        let fetched = try XCTUnwrap(record)
+        XCTAssertEqual(fetched.result.status, .unsupported)
+        XCTAssertEqual(fetched.result.metadata["blockedBy"], "plan_2_not_implemented")
+        XCTAssertEqual(fetched.command.id, "command-unsupported")
+
+        let events = try await ledger.fetchRecent(limit: 10)
         XCTAssertTrue(events.isEmpty)
     }
 
@@ -205,7 +294,12 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let captureRepository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "unused" })
         let ledger = InMemoryEventLedgerRepository()
-        let executor = AmbitionsCommandExecutor(captureService: captureService, eventLedger: ledger)
+        let commandRecordRepository = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            eventLedger: ledger,
+            commandExecutionRecords: commandRecordRepository
+        )
         let missingTarget = AmbitionsCommand(
             id: "command-complete-missing",
             kind: .completeAction,
@@ -238,6 +332,11 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let captures = try await captureRepository.listCaptures()
         XCTAssertTrue(events.isEmpty)
         XCTAssertTrue(captures.isEmpty)
+
+        let records = try await commandRecordRepository.fetchRecent(limit: 10)
+        XCTAssertEqual(records.map(\.command.id), ["command-empty-capture", "command-complete-missing"])
+        XCTAssertEqual(records.map(\.result.status), [.failed, .blocked])
+        XCTAssertEqual(records.first?.result.metadata["validation"], AmbitionsCommandValidationState.invalid.rawValue)
     }
 
     func testExecutorDoesNotDependOnCalendarOrExternalSurfaceRuntime() async {

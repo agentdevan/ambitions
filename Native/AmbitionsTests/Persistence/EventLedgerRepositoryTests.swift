@@ -90,12 +90,92 @@ final class EventLedgerRepositoryTests: XCTestCase {
 
         XCTAssertEqual(recent.map(\.id), ["event-b", "event-a"])
     }
+
+    func testSwiftDataCommandExecutionRepositoryAppendsAndFetchesRecent() async throws {
+        let repository = try await makeCommandRepository()
+        let command = AmbitionsCommand(
+            id: "command-old",
+            kind: .quickCapture,
+            source: .today,
+            target: AmbitionsCommandTarget(captureID: "capture-1"),
+            payload: AmbitionsCommandPayload(rawText: "Write a note"),
+            createdAt: "2026-04-25T12:00:00Z"
+        )
+        let older = AmbitionsCommandExecutionRecord(
+            command: command,
+            result: AmbitionsCommandExecutionResult(status: .succeeded, summary: "Created"),
+            recordedAt: "2026-04-24T09:00:00Z"
+        )
+        let newer = AmbitionsCommandExecutionRecord(
+            command: AmbitionsCommand(
+                id: "command-new",
+                kind: .quickCapture,
+                source: .today,
+                target: AmbitionsCommandTarget(captureID: "capture-2"),
+                payload: AmbitionsCommandPayload(rawText: "Write a second note"),
+                createdAt: "2026-04-25T12:00:00Z"
+            ),
+            result: AmbitionsCommandExecutionResult(status: .failed, summary: "Ignored"),
+            recordedAt: "2026-04-24T10:00:00Z"
+        )
+
+        try await repository.append(older)
+        try await repository.append(newer)
+
+        let recent = try await repository.fetchRecent(limit: 2)
+        let fetched = try await repository.fetchRecord(commandID: "command-old")
+
+        XCTAssertEqual(recent.map(\.command.id), ["command-new", "command-old"])
+        XCTAssertEqual(recent.map(\.result.status), [.failed, .succeeded])
+        XCTAssertEqual(recent.map(\.recordedAt), ["2026-04-24T10:00:00Z", "2026-04-24T09:00:00Z"])
+        XCTAssertEqual(fetched?.result.summary, "Created")
+        XCTAssertEqual(fetched?.commandID, "command-old")
+    }
+
+    func testInMemoryCommandExecutionRepositoryPreservesFetchByCommandIDAndReplacesByCommandID() async throws {
+        let repository = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let command = AmbitionsCommand(
+            id: "command-memory",
+            kind: .routeCommitment,
+            source: .capture,
+            target: AmbitionsCommandTarget(captureID: "capture-2"),
+            payload: AmbitionsCommandPayload(rawText: "Plan tomorrow"),
+            executionStatus: .queued,
+            createdAt: "2026-04-25T13:00:00Z"
+        )
+        try await repository.append(
+            AmbitionsCommandExecutionRecord(
+                command: command,
+                result: AmbitionsCommandExecutionResult(status: .queued, summary: "Queued"),
+                recordedAt: "2026-04-25T13:30:00Z"
+            )
+        )
+        try await repository.append(
+            AmbitionsCommandExecutionRecord(
+                command: command,
+                result: AmbitionsCommandExecutionResult(status: .succeeded, summary: "Replaced"),
+                recordedAt: "2026-04-25T14:00:00Z"
+            )
+        )
+
+        let fetched = try await repository.fetchRecord(commandID: "command-memory")
+        let records = try await repository.fetchRecent(limit: 10)
+
+        XCTAssertEqual(fetched?.command.id, "command-memory")
+        XCTAssertEqual(records.count, 1)
+        XCTAssertEqual(records.first?.result.summary, "Replaced")
+    }
 }
 
 private extension EventLedgerRepositoryTests {
     func makeRepository() async throws -> SwiftDataEventLedgerRepository {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return SwiftDataEventLedgerRepository(store: store)
+    }
+
+    func makeCommandRepository() async throws -> SwiftDataAmbitionsCommandExecutionRecordRepository {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        return SwiftDataAmbitionsCommandExecutionRecordRepository(store: store)
     }
 
     func event(

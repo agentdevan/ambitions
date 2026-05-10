@@ -158,6 +158,13 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Receipt/trust history event ledger persisted locally."
         ),
         .swiftData(
+            id: "swiftdata.command_execution_record",
+            storedTypeName: "CommandExecutionRecord",
+            currentVersion: ambitionsCommandExecutionRecordSchemaVersion,
+            versionEvidence: "AmbitionsCommandExecutionRecord.schemaVersion persists durable command execution result and metadata.",
+            notes: "Durable command execution attempts and results for local-only replay/reconciliation."
+        ),
+        .swiftData(
             id: "swiftdata.app_state_record",
             storedTypeName: "AppStateRecord",
             currentVersion: "app_state_record.swiftdata.v1",
@@ -197,6 +204,7 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "ProgressEvidenceRecord",
         "FeedbackEventRecord",
         "CaptureRecord",
+        "CommandExecutionRecord",
         "TeachingSignalRecord",
         "EventLedgerRecord",
         "AppStateRecord",

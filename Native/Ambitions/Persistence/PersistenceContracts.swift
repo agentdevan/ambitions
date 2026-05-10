@@ -323,6 +323,12 @@ protocol EventLedgerRepository: Sendable {
     func deleteEvent(id: String) async throws
 }
 
+protocol AmbitionsCommandExecutionRecordRepository: Sendable {
+    func append(_ record: AmbitionsCommandExecutionRecord) async throws
+    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord]
+    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord?
+}
+
 protocol AppStateRepository: Sendable {
     func loadState() async throws -> AppStateSnapshot
     func saveState(_ state: AppStateSnapshot) async throws
@@ -402,6 +408,7 @@ struct AppRepositories: Sendable {
     let captures: any CaptureRepository
     let teaching: any GoalTeachingSignalRepository
     let eventLedger: any EventLedgerRepository
+    let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)?
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
     let appState: any AppStateRepository
@@ -414,6 +421,7 @@ struct AppRepositories: Sendable {
         captures: any CaptureRepository,
         teaching: any GoalTeachingSignalRepository = InMemoryGoalTeachingSignalRepository(),
         eventLedger: any EventLedgerRepository = InMemoryEventLedgerRepository(),
+        commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)? = nil,
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
         appState: any AppStateRepository
@@ -425,6 +433,7 @@ struct AppRepositories: Sendable {
         self.captures = captures
         self.teaching = teaching
         self.eventLedger = eventLedger
+        self.commandExecutionRecords = commandExecutionRecords
         self.goalCreationUnitOfWork = goalCreationUnitOfWork
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork
         self.appState = appState

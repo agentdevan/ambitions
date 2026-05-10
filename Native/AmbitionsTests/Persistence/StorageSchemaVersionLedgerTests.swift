@@ -17,6 +17,17 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
         )
     }
 
+    func testCurrentLedgerIncludesCommandExecutionRecordSchemaType() {
+        let ledger = StorageSchemaVersionLedger.current
+        let commandEntry = ledger.swiftDataEntries.first(where: { $0.id == "swiftdata.command_execution_record" })
+
+        XCTAssertNotNil(commandEntry)
+        XCTAssertEqual(commandEntry?.storedTypeName, "CommandExecutionRecord")
+        XCTAssertEqual(commandEntry?.currentVersion, ambitionsCommandExecutionRecordSchemaVersion)
+        XCTAssertEqual(commandEntry?.migrationReadiness, .migrationPlanRequired)
+        XCTAssertEqual(commandEntry?.rollbackRequirement, .rollbackPlanRequired)
+    }
+
     func testCurrentLedgerBlocksMigrationExecutionUntilFutureMigrationProofExists() {
         let ledger = StorageSchemaVersionLedger.current
 

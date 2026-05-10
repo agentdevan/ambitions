@@ -27,17 +27,20 @@ protocol CommandExecuting: Sendable {
 struct AmbitionsCommandExecutor: CommandExecuting {
     private let captureService: (any CaptureServicing)?
     private let eventLedger: (any EventLedgerRepository)?
+    private let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     private let smartAttachmentService: (any SmartAttachmentRouting)?
     private let validator: AmbitionsCommandValidator
 
     init(
         captureService: (any CaptureServicing)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
+        commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         smartAttachmentService: (any SmartAttachmentRouting)? = DefaultSmartAttachmentService(),
         validator: AmbitionsCommandValidator = AmbitionsCommandValidator()
     ) {
         self.captureService = captureService
         self.eventLedger = eventLedger
+        self.commandExecutionRecords = commandExecutionRecords
         self.smartAttachmentService = smartAttachmentService
         self.validator = validator
     }
@@ -52,15 +55,20 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     ) async -> AmbitionsCommandExecutionResult {
         let validation = validate(command)
         guard validation == .valid else {
-            return blockedResult(for: validation, command: command)
+            let result = blockedResult(for: validation, command: command)
+            await persistExecution(command: command, result: result, at: context.now)
+            return result
         }
+
+        let result: AmbitionsCommandExecutionResult
 
         switch command.kind {
         case .openDestination:
             guard let destination = command.target.destination else {
-                return blockedResult(for: .needsMissingTarget, command: command)
+                result = blockedResult(for: .needsMissingTarget, command: command)
+                break
             }
-            return AmbitionsCommandExecutionResult(
+            result = AmbitionsCommandExecutionResult(
                 status: .succeeded,
                 summary: "Open destination command validated.",
                 route: destination,
@@ -68,21 +76,21 @@ struct AmbitionsCommandExecutor: CommandExecuting {
                 recommendationExplanationIDs: command.relations.recommendationExplanationIDs
             )
         case .quickCapture:
-            return await executeQuickCapture(command, context: context)
+            result = await executeQuickCapture(command, context: context)
         case .routeCommitment:
-            return await executeRouteCommitment(command, context: context)
+            result = await executeRouteCommitment(command, context: context)
         case .markWaiting:
-            return await executeCaptureRoute(command, context: context, kind: .waitingItem, route: .waiting)
+            result = await executeCaptureRoute(command, context: context, kind: .waitingItem, route: .waiting)
         case .archiveItem:
-            return await executeArchive(command, context: context)
+            result = await executeArchive(command, context: context)
         case .attachToGoal:
-            return await executeAttachToGoal(command, context: context)
+            result = await executeAttachToGoal(command, context: context)
         case .setDeadline:
-            return await executeDeadlineChange(command, context: context)
+            result = await executeDeadlineChange(command, context: context)
         case .setPriority, .setUrgency:
-            return await executePriorityChange(command, context: context)
+            result = await executePriorityChange(command, context: context)
         case .scheduleItem where command.payload.metadata["calendarWriteIntent"] == "true":
-            return AmbitionsCommandExecutionResult(
+            result = AmbitionsCommandExecutionResult(
                 status: .unsupported,
                 summary: "Calendar write intents require the Plan-owned calendar block writer and explicit user confirmation; this command path does not write calendar data.",
                 target: command.target,
@@ -93,9 +101,9 @@ struct AmbitionsCommandExecutor: CommandExecuting {
                 ]
             )
         case .createPlanItem, .scheduleItem:
-            return await executePlanSeedRepresentation(command, context: context)
+            result = await executePlanSeedRepresentation(command, context: context)
         default:
-            return AmbitionsCommandExecutionResult(
+            result = AmbitionsCommandExecutionResult(
                 status: .unsupported,
                 summary: "\(command.kind.rawValue) is represented by the shared command model, but its owning foundation is not executable in this build.",
                 target: command.target,
@@ -106,6 +114,24 @@ struct AmbitionsCommandExecutor: CommandExecuting {
                 ]
             )
         }
+
+        await persistExecution(command: command, result: result, at: context.now)
+        return result
+    }
+
+    private func persistExecution(
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        at timestamp: Date
+    ) async {
+        guard let commandExecutionRecords else { return }
+        let record = AmbitionsCommandExecutionRecord(
+            command: command,
+            result: result,
+            recordedAt: DomainTimestamp.string(from: timestamp)
+        )
+
+        try? await commandExecutionRecords.append(record)
     }
 }
 

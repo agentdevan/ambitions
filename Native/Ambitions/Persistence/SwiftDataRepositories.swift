@@ -548,6 +548,69 @@ private enum RepositoryMapping {
         )
     }
 
+    static func commandExecutionRecord(from record: AmbitionsCommandExecutionRecord) throws -> CommandExecutionRecord {
+        CommandExecutionRecord(
+            id: record.id,
+            commandID: record.command.id,
+            commandKindRaw: record.command.kind.rawValue,
+            commandSourceRaw: record.command.source.rawValue,
+            actorRaw: record.command.actor.rawValue,
+            executionStatusRaw: record.command.executionStatus.rawValue,
+            resultStatusRaw: record.result.status.rawValue,
+            recordedAt: record.recordedAt,
+            schemaVersion: record.schemaVersion,
+            localOnly: record.localOnly,
+            privacyRaw: record.privacy.rawValue,
+            commandData: try PersistenceCoding.encode(record.command),
+            resultData: try PersistenceCoding.encode(record.result)
+        )
+    }
+
+    static func apply(_ record: AmbitionsCommandExecutionRecord, to persisted: CommandExecutionRecord) throws {
+        persisted.commandID = record.command.id
+        persisted.commandKindRaw = record.command.kind.rawValue
+        persisted.commandSourceRaw = record.command.source.rawValue
+        persisted.actorRaw = record.command.actor.rawValue
+        persisted.executionStatusRaw = record.command.executionStatus.rawValue
+        persisted.resultStatusRaw = record.result.status.rawValue
+        persisted.recordedAt = record.recordedAt
+        persisted.schemaVersion = record.schemaVersion
+        persisted.localOnly = record.localOnly
+        persisted.privacyRaw = record.privacy.rawValue
+        persisted.commandData = try PersistenceCoding.encode(record.command)
+        persisted.resultData = try PersistenceCoding.encode(record.result)
+    }
+
+    static func commandExecutionRecord(from record: CommandExecutionRecord) throws -> AmbitionsCommandExecutionRecord {
+        let command = try? PersistenceCoding.decode(AmbitionsCommand.self, from: record.commandData)
+        let result = try? PersistenceCoding.decode(AmbitionsCommandExecutionResult.self, from: record.resultData)
+
+        let fallbackCommand = AmbitionsCommand(
+            id: record.commandID,
+            kind: persisted(AmbitionsCommandKind.self, rawValue: record.commandKindRaw, fallback: .openDestination, storedTypeName: "CommandExecutionRecord", fieldName: "commandKindRaw"),
+            source: persisted(AmbitionsCommandSource.self, rawValue: record.commandSourceRaw, fallback: .system, storedTypeName: "CommandExecutionRecord", fieldName: "commandSourceRaw"),
+            executionStatus: persisted(AmbitionsCommandExecutionStatus.self, rawValue: record.executionStatusRaw, fallback: .blocked, storedTypeName: "CommandExecutionRecord", fieldName: "executionStatusRaw"),
+            createdAt: record.recordedAt,
+            actor: persisted(AmbitionsCommandActor.self, rawValue: record.actorRaw, fallback: .user, storedTypeName: "CommandExecutionRecord", fieldName: "actorRaw"),
+            localOnly: record.localOnly,
+            privacy: persisted(EventLedgerPrivacyClassification.self, rawValue: record.privacyRaw, fallback: .standard, storedTypeName: "CommandExecutionRecord", fieldName: "privacyRaw"),
+            schemaVersion: ambitionsCommandSchemaVersion
+        )
+        let fallbackResult = AmbitionsCommandExecutionResult(
+            status: persisted(AmbitionsCommandExecutionStatus.self, rawValue: record.resultStatusRaw, fallback: .failed, storedTypeName: "CommandExecutionRecord", fieldName: "resultStatusRaw"),
+            summary: "Recovered from durable command execution record."
+        )
+
+        return AmbitionsCommandExecutionRecord(
+            command: command ?? fallbackCommand,
+            result: result ?? fallbackResult,
+            recordedAt: record.recordedAt,
+            localOnly: record.localOnly,
+            privacy: persisted(EventLedgerPrivacyClassification.self, rawValue: record.privacyRaw, fallback: .standard, storedTypeName: "CommandExecutionRecord", fieldName: "privacyRaw"),
+            schemaVersion: record.schemaVersion
+        )
+    }
+
     static func captureStatus(from rawValue: String) -> CaptureStatus {
         persisted(
             CaptureStatus.self,
@@ -1171,6 +1234,35 @@ actor InMemoryEventLedgerRepository: EventLedgerRepository {
     }
 }
 
+actor InMemoryAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecutionRecordRepository {
+    private var records: [AmbitionsCommandExecutionRecord] = []
+
+    func append(_ record: AmbitionsCommandExecutionRecord) async throws {
+        records.removeAll { $0.command.id == record.command.id }
+        records.append(record)
+    }
+
+    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord] {
+        Array(records.sorted { lhs, rhs in
+            if lhs.recordedAt == rhs.recordedAt {
+                return lhs.command.id > rhs.command.id
+            }
+            return lhs.recordedAt > rhs.recordedAt
+        }.prefix(max(0, limit)))
+    }
+
+    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord? {
+        records
+            .sorted {
+                if $0.recordedAt == $1.recordedAt {
+                    return $0.command.id > $1.command.id
+                }
+                return $0.recordedAt > $1.recordedAt
+            }
+            .first(where: { $0.command.id == commandID })
+    }
+}
+
 struct SwiftDataEventLedgerRepository: EventLedgerRepository {
     let store: AmbitionsPersistenceStore
 
@@ -1273,6 +1365,43 @@ struct SwiftDataAppStateRepository: AppStateRepository {
             } else {
                 context.insert(try RepositoryMapping.appStateRecord(from: state))
             }
+        }
+    }
+}
+
+struct SwiftDataAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecutionRecordRepository {
+    let store: AmbitionsPersistenceStore
+
+    func append(_ record: AmbitionsCommandExecutionRecord) async throws {
+        try await store.write { context in
+            if let persisted = try context.fetch(FetchDescriptor<CommandExecutionRecord>())
+                .first(where: { $0.id == record.id || $0.commandID == record.command.id }) {
+                try RepositoryMapping.apply(record, to: persisted)
+            } else {
+                context.insert(try RepositoryMapping.commandExecutionRecord(from: record))
+            }
+        }
+    }
+
+    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<CommandExecutionRecord>())
+                .sorted {
+                    if $0.recordedAt == $1.recordedAt {
+                        return $0.id > $1.id
+                    }
+                    return $0.recordedAt > $1.recordedAt
+                }
+                .prefix(max(0, limit))
+                .map(RepositoryMapping.commandExecutionRecord(from:))
+        }
+    }
+
+    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord? {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<CommandExecutionRecord>())
+                .first(where: { $0.commandID == commandID })
+                .map(RepositoryMapping.commandExecutionRecord(from:))
         }
     }
 }

@@ -113,6 +113,47 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         XCTAssertEqual(command.privacy, .privateUserText)
     }
 
+    func testCommandExecutionRecordDefaultsRoundTripAndSchemaVersion() throws {
+        let command = AmbitionsCommand(
+            id: "command-queue",
+            kind: .completeAction,
+            source: .capture,
+            target: AmbitionsCommandTarget(stepID: "step-1"),
+            payload: AmbitionsCommandPayload(rawText: "Review the proposal", notes: "After lunch"),
+            validationState: .valid,
+            executionStatus: .pending,
+            createdAt: "2026-04-25T12:00:00Z",
+            actor: .user,
+            sourceSurface: "capture",
+            localOnly: false,
+            privacy: .sensitive
+        )
+        let result = AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: "Done"
+        )
+        let record = AmbitionsCommandExecutionRecord(
+            command: command,
+            result: result,
+            recordedAt: "2026-04-25T12:01:00Z"
+        )
+
+        XCTAssertEqual(record.id, "command.execution.command-queue")
+        XCTAssertEqual(record.commandID, "command-queue")
+        XCTAssertEqual(record.localOnly, false)
+        XCTAssertEqual(record.privacy, .sensitive)
+        XCTAssertEqual(record.schemaVersion, ambitionsCommandExecutionRecordSchemaVersion)
+
+        let payload = try JSONEncoder().encode(record)
+        let decoded = try JSONDecoder().decode(AmbitionsCommandExecutionRecord.self, from: payload)
+
+        XCTAssertEqual(decoded, record)
+        XCTAssertEqual(decoded.recordedAt, "2026-04-25T12:01:00Z")
+        XCTAssertEqual(decoded.result.status, .succeeded)
+        XCTAssertEqual(decoded.result.summary, "Done")
+        XCTAssertEqual(decoded.command.id, "command-queue")
+    }
+
     func testValidationDistinguishesInvalidPayloadAndMissingTargets() {
         let validator = AmbitionsCommandValidator()
         let emptyCapture = command(kind: .quickCapture, payload: AmbitionsCommandPayload(rawText: "   "))
