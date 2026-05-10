@@ -1,3 +1,7 @@
+> T05b classification: Supporting cleanup/status context.
+> This file is not product, implementation, release, or Codex process authority.
+> Current authority begins in `docs/truth/`; any older routing below is retained as cleanup history unless re-approved by `docs/truth/*`.
+
 # Repo Cleanup Index
 
 Status: cleanup routing and quarantine policy, not product canon.
