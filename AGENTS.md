@@ -12,6 +12,7 @@ Current repo posture:
 - `docs/truth/RELEASE_TRUTH.md` is current validation/release/proof truth.
 - `docs/truth/CODEX_PROCESS_TRUTH.md` is current Codex operating truth.
 - `docs/truth/HISTORICAL_POLICY.md` decides historical extraction, quarantine, archive, and deletion policy.
+- `.codex/REPO_INVENTORY.md` is the current repo map for future ChatGPT/Codex repo questions. It is a routing index, not product truth or proof.
 - AmbitionsCanon is supporting product/design canon where compatible with `docs/truth/*`.
 - `docs/status/current-implementation-map.md` is supporting implementation-status evidence.
 - `docs/status/release-evidence-packet.md` is supporting validation/release-evidence posture.
@@ -39,6 +40,8 @@ For normal repo work, read in this order:
 12. `docs/native-build-and-release.md`
 13. the target source files and tests
 14. relevant `.codex` / `.agents` files only after the truth files
+
+For repo structure, status-location, or "where should I inspect first" questions, inspect `.codex/REPO_INVENTORY.md` after the truth files.
 
 For product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, or implementation-planning work, read `docs/truth/PRODUCT_DESIGN_TRUTH.md` first, then the compatible AmbitionsCanon files named by `docs/AmbitionsCanon/README.md` before changing source.
 
@@ -157,13 +160,13 @@ Local dirty-worktree gate:
 
 - `bash scripts/codex-post-pk03-dirty-reconciliation.sh`
 
-Local simulator evidence is not signed archive proof, TestFlight proof, App Store proof, physical-device proof, public accessibility proof, legal/privacy signoff, or human release approval.
+Local simulator evidence is not signed archive proof, TestFlight proof, App Store proof, real-hardware proof, public accessibility proof, legal/privacy signoff, or human release approval.
 
 ## Ambitions product truth
 
 - Ambitions is a premium native iPhone app for turning long-term goals into grounded daily execution.
 - Core loop: `Capture -> Place -> Shape Time -> Do Today -> Close / Recover -> Save Proof`.
-- Ambitions is not a generic task app, calendar clone, habit tracker, productivity score app, chatbot, AI wrapper, dashboard, or SaaS admin panel.
+- Ambitions is not a generic task app, calendar clone, habit tracker, score-based productivity app, chatbot, AI wrapper, dashboard, or SaaS admin panel.
 - User-facing language should follow `docs/truth/PRODUCT_DESIGN_TRUTH.md` first, then compatible AmbitionsCanon support.
 - Avoid fake precision, fake certainty, AI theater, shame language, and silent automation.
 

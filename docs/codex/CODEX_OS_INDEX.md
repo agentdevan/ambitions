@@ -4,6 +4,8 @@ Active repo authority starts in [`../truth/README.md`](../truth/README.md). If t
 
 Current consolidated Codex OS router: [`../../.codex/OPERATING_SYSTEM.md`](../../.codex/OPERATING_SYSTEM.md). This index remains supporting navigation.
 
+Current repo map for future ChatGPT/Codex questions: [`../../.codex/REPO_INVENTORY.md`](../../.codex/REPO_INVENTORY.md). It is a routing index, not product truth or proof.
+
 ## Required read order
 
 1. [`../truth/README.md`](../truth/README.md)
@@ -13,7 +15,8 @@ Current consolidated Codex OS router: [`../../.codex/OPERATING_SYSTEM.md`](../..
 5. [`../truth/CODEX_PROCESS_TRUTH.md`](../truth/CODEX_PROCESS_TRUTH.md)
 6. [`../truth/HISTORICAL_POLICY.md`](../truth/HISTORICAL_POLICY.md)
 7. [`../../AGENTS.md`](../../AGENTS.md)
-8. Current active-batch state, Codex docs, manifests, reports, and scripts as needed.
+8. [`../../.codex/REPO_INVENTORY.md`](../../.codex/REPO_INVENTORY.md) for repo map / routing questions.
+9. Current active-batch state, Codex docs, manifests, reports, and scripts as needed.
 
 ## Boundary
 

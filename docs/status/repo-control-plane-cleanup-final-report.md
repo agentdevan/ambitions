@@ -1,14 +1,14 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 7 Green with accepted Yellow items
+Status: Phase 8 Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phases 0, 0B, 1, 2, 3, 4, 5, 6, and 7 only
+Scope: Phases 0, 0B, 1, 2, 3, 4, 5, 6, 7, and 8 only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Phase 5 created the cleaned global sequencing file at `.codex/GLOBAL_BATCH_TRAIN.md`. Phase 6 created the tooling and validation map at `.codex/TOOLING_AND_VALIDATION.md`. Phase 7 created the current session bootstrap at `.codex/SESSION_BOOTSTRAP.md`. Later cleanup phases were not started in this checkpoint.
+Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Phase 5 created the cleaned global sequencing file at `.codex/GLOBAL_BATCH_TRAIN.md`. Phase 6 created the tooling and validation map at `.codex/TOOLING_AND_VALIDATION.md`. Phase 7 created the current session bootstrap at `.codex/SESSION_BOOTSTRAP.md`. Phase 8 created the repo inventory at `.codex/REPO_INVENTORY.md`. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
@@ -554,11 +554,39 @@ Accepted Yellow basis:
 - Older prompt/resume docs remain in place and require stale-ledger classification before archive/move/delete decisions.
 - `.codex/REPO_INVENTORY.md` does not exist until Phase 8.
 
+## Phase 8 Repo Inventory
+
+Created:
+
+- `.codex/REPO_INVENTORY.md`
+
+Updated:
+
+- `.codex/README.md`
+- `docs/codex/CODEX_OS_INDEX.md`
+- `AGENTS.md`
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+Phase 8 result: Green with accepted Yellow items carried forward.
+
+Green basis:
+
+- Future ChatGPT/Codex sessions now have a single repo map and routing index.
+- The inventory states that it is not product truth or proof.
+- Front doors route repo map questions to `.codex/REPO_INVENTORY.md` after truth files.
+- The inventory includes authority map, top-level repo map, source map, docs map, Codex OS map, train map, skill map, tooling map, stale material map, future question routing, no-claim reminder, and regeneration commands.
+
+Accepted Yellow basis:
+
+- Large historical/train files were not line-reviewed end to end.
+- Phase 9 still needs the archive/stale material ledger.
+- Inventory freshness is current only to this phase.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 8 only.
-Use the current repo state after Phase 7. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/REPO_INVENTORY.md as a repo map and routing index, not product truth or proof.
+Continue the Ambitions repo-control-plane cleanup with Phase 9 only.
+Use the current repo state after Phase 8. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update docs/status/archive-and-stale-material-ledger.md as the single stale/archive/delete ledger.
 Carry forward accepted Yellow items: large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, separate PK14/IR-01 next-action lanes, advisory/noisy scripts, candidate MCPs, old prompt classification, and archive/delete candidates requiring inbound-reference checks.
-Do not continue to Phase 9 unless Phase 8 is Green or accepted Yellow with reason.
+Do not continue to Phase 10 unless Phase 9 is Green or accepted Yellow with reason.
 ```
