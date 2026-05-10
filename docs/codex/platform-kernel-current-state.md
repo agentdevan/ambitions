@@ -69,8 +69,10 @@ Date: 2026-05-08
 - PK13 Restore Rollback is complete / Green as a storage-local portable restore
   rollback wrapper. It preflights incoming and rollback packages, attempts the
   requested import, and restores the rollback package if import throws.
-- PK14 Durable Command/Event Ledger is the next eligible global batch.
-  PK14-PK41 remain active planned Platform Kernel scope.
+- PK14 Durable Command/Event Ledger is complete / Green as local durable command
+  execution record proof.
+- PK15 Receipt Backend is the next eligible global batch. PK15-PK41 remain
+  active planned Platform Kernel scope.
 - Current repo evidence shows local SwiftData-backed persistence, portable
   snapshot contracts/services, runtime service factories/contracts,
   notification foundations, EventKit integration services, external snapshot

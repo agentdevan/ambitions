@@ -3,14 +3,14 @@
 <!-- markdownlint-disable MD013 -->
 
 Status: Active canonical queue classification after GQ01.
-Date: 2026-05-08
+Date: 2026-05-10
 
 This ledger classifies the post-PK03 146-count universe for autonomous continuation. It is operational queue truth for fallback selection; it does not override AmbitionsCanon, current implementation status, release evidence, or raw validation logs.
 
 ## Queue Rules
 
 - Live unfinished current-run state wins over this fallback queue.
-- PK14 Durable Command/Event Ledger is the next implementation batch unless a fresh hard blocker appears.
+- PK15 Receipt Backend is the next implementation batch unless a fresh hard blocker appears.
 - SA07-SA32 are visible to the queue and must not remain counted-but-unreachable.
 - EFC01-EFC18 are proof overlays first; standalone EFC runs only when no existing owner can produce proof.
 - CS02C-CS06C and CS09C are conditional triggers only.
@@ -20,11 +20,11 @@ This ledger classifies the post-PK03 146-count universe for autonomous continuat
 ## Counts
 
 - executable_now: 1
-- executable_later: 79
+- executable_later: 78
 - blocked_until_dependency: 12
 - absorbed_as_overlay: 18
 - conditional_trigger_only: 6
-- historical_complete_do_not_run: 30
+- historical_complete_do_not_run: 31
 - deleted_obsolete: 0
 - evidence_preserved_minimal: 0
 - unknown_requires_repair: 0
@@ -43,12 +43,12 @@ also closes Green and runner/no-claim gates remain intact.
 
 | Classification | Batches | Reason |
 | --- | --- | --- |
-| executable_now | PK14 | Active Platform Kernel work after PK13; PK14 is the next implementation batch, later PK stays serial/dependency gated. |
-| executable_later | PK15, PK16, PK17, PK18, PK19, PK20, PK21, PK22, PK23, PK24, PK25, PK26, PK27, PK28, PK29, PK30, PK31, PK32, PK33, PK34, PK35, PK36, PK37, PK38, PK39, PK40, PK41, SA07, SA08, SA09, SA10, SA10A, SA10B, SA10C, SA11, SA12, SA13, SA14, SA15, SA16, SA17, SA18, SA19, SA20, SA21, SA22, SA23, SA24, SA25, SA26, SA27, SA28, SA29, SA30, SA31, SA32, LDI17, LDI18, LDI19, FCP27, FCP28, FCP29, FCP30, PFC31, PFC32, PFC33, PFC34, PFC35, PFC36, PFC37, PFC38, PFC39, PFC40, RHC01, RHC02, RHC03, RHC04, RHC05, RHC06 | Active Platform Kernel work after PK13; PK14 is the current implementation batch, later PK stays serial/dependency gated. |
+| executable_now | PK15 | Active Platform Kernel work after PK14; PK15 is the next implementation batch, later PK stays serial/dependency gated. |
+| executable_later | PK16, PK17, PK18, PK19, PK20, PK21, PK22, PK23, PK24, PK25, PK26, PK27, PK28, PK29, PK30, PK31, PK32, PK33, PK34, PK35, PK36, PK37, PK38, PK39, PK40, PK41, SA07, SA08, SA09, SA10, SA10A, SA10B, SA10C, SA11, SA12, SA13, SA14, SA15, SA16, SA17, SA18, SA19, SA20, SA21, SA22, SA23, SA24, SA25, SA26, SA27, SA28, SA29, SA30, SA31, SA32, LDI17, LDI18, LDI19, FCP27, FCP28, FCP29, FCP30, PFC31, PFC32, PFC33, PFC34, PFC35, PFC36, PFC37, PFC38, PFC39, PFC40, RHC01, RHC02, RHC03, RHC04, RHC05, RHC06 | Active Platform Kernel work after PK14; PK15 is the current implementation batch, later PK stays serial/dependency gated. |
 | blocked_until_dependency | LDI15, LDI16, LDI20, LDI21, LDI22, AOS24, AOS25, AOS26, AOS27, AOS28, AOS29, AOS30 | LDI tail is dependency-split; it must not blindly run before or after all AOS. |
 | absorbed_as_overlay | EFC01, EFC02, EFC03, EFC04, EFC05, EFC06, EFC07, EFC08, EFC09, EFC10, EFC11, EFC12, EFC13, EFC14, EFC15, EFC16, EFC17, EFC18 | EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof. |
 | conditional_trigger_only | CS02C, CS03C, CS04C, CS05C, CS06C, CS09C | Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target. |
-| historical_complete_do_not_run | PK04, PK05, PK06, PK07, PK08, PK09, PK10, PK11, PK12, PK13, PX01, PX02, PX03, PX04, PX05, PX06, PX07, PX08, PX09, PX10, PX11, PX12, PX13, PX14, PX15, PX16, PX17, PX18, PX19, PX20 | PK04, PK05, PK06, PK07, PK08, PK09, PK10, PK11, PK12, and PK13 are complete; PXOS/PX batches are complete future-canon and roadmap evidence. Do not rerun these as implementation batches. |
+| historical_complete_do_not_run | PK04, PK05, PK06, PK07, PK08, PK09, PK10, PK11, PK12, PK13, PK14, PX01, PX02, PX03, PX04, PX05, PX06, PX07, PX08, PX09, PX10, PX11, PX12, PX13, PX14, PX15, PX16, PX17, PX18, PX19, PX20 | PK04, PK05, PK06, PK07, PK08, PK09, PK10, PK11, PK12, PK13, and PK14 are complete; PXOS/PX batches are complete future-canon and roadmap evidence. Do not rerun these as implementation batches. |
 
 ## Batch Details
 
@@ -64,8 +64,8 @@ also closes Green and runner/no-claim gates remain intact.
 | PK11 | Pre-Migration Backup | historical_complete_do_not_run | Complete / Green; do not rerun through normal fallback. | invoked |
 | PK12 | Staged Portable Import Dry Run | historical_complete_do_not_run | Complete / Green; do not rerun through normal fallback. | invoked |
 | PK13 | Restore Rollback | historical_complete_do_not_run | Complete / Green; do not rerun through normal fallback. | invoked |
-| PK14 | Durable Command/Event Ledger | executable_now | None | invoked |
-| PK15 | Receipt Backend | executable_later | Complete prior PK batch PK14 and any data-safety proof named by the PK train. | invoked |
+| PK14 | Durable Command/Event Ledger | historical_complete_do_not_run | Complete / Green; do not rerun through normal fallback. | invoked |
+| PK15 | Receipt Backend | executable_now | None | invoked |
 | PK16 | Trust History Query | executable_later | Complete prior PK batch PK15 and any data-safety proof named by the PK train. | invoked |
 | PK17 | Today Read Model Extraction | executable_later | Complete prior PK batch PK16 and any data-safety proof named by the PK train. | invoked |
 | PK18 | Today Command Handler Extraction | executable_later | Complete prior PK batch PK17 and any data-safety proof named by the PK train. | invoked |

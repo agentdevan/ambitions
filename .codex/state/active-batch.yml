@@ -1,5 +1,5 @@
 status: compact-mirror
-date: "2026-05-08"
+date: "2026-05-10"
 source_of_truth:
   - ".codex/reports/current-batch-train-state.md"
   - "docs/codex/BATCH_REGISTRY.md"
@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK13 Restore Rollback"
-  previous_batch: "PK12 Staged Portable Import Dry Run"
+  batch: "PK14 Durable Command/Event Ledger"
+  previous_batch: "PK14 Durable Command/Event Ledger"
   previous_result: "Green"
-  next_eligible_batch: "PK14 Durable Command/Event Ledger"
+  next_eligible_batch: "PK15 Receipt Backend"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true

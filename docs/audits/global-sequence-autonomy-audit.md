@@ -7,29 +7,29 @@ Green
 ## Remaining Batch Counts
 
 - executable_now: 1
-- executable_later: 79
+- executable_later: 78
 - blocked_until_dependency: 12
 - absorbed_as_overlay: 18
 - conditional_trigger_only: 6
-- historical_complete_do_not_run: 30
+- historical_complete_do_not_run: 31
 - unknown_requires_repair: 0
 
 ## Derived Totals
 
-- normal autonomous remaining: 80
-- real future work remaining: 92
-- non-historical non-complete universe: 116
+- normal autonomous remaining: 79
+- real future work remaining: 91
+- non-historical non-complete universe: 115
 
 ## Next Eligible Batch
 
-- canonical next: `PK14 Durable Command/Event Ledger`
+- canonical next: `PK15 Receipt Backend`
 - visible/UI recovery next, if different: `IR-01 Big Frontend Recovery Implementation` before further visible top-level UI expansion
-- non-UI platform next, if different: `PK14 Durable Command/Event Ledger`
+- non-UI platform next, if different: `PK15 Receipt Backend`
 
 ## Sequence Verdict
 
 Perfect. The canonical JSON queue is parseable and unambiguous, and it
-selects `PK14` as the next non-UI platform batch. Live state also preserves
+selects `PK15` as the next non-UI platform batch. Live state also preserves
 `IR-01` as a separate UI recovery prerequisite before visible top-level
 expansion.
 
@@ -38,9 +38,9 @@ expansion.
 - Active truth files win over older canon and queue prose.
 - Evidence: `docs/truth/PRODUCT_DESIGN_TRUTH.md` and `AGENTS.md` both preserve `Today / Goals / Capture / Time / You`; `Plan` is compatibility/context only.
 - Live unfinished current-run state wins over fallback queue.
-- Evidence: `.codex/reports/current-batch-train-state.md` records `FET01-FET12` Green and separates `IR-01` UI recovery from `PK14` non-UI platform continuation.
+- Evidence: `.codex/reports/current-batch-train-state.md` records `PK14` Green and separates `IR-01` UI recovery from `PK15` non-UI platform continuation.
 - No completed or historical batch is runnable.
-- Evidence: canonical JSON classifies `PK04-PK13` and `PX01-PX20` as `historical_complete_do_not_run`.
+- Evidence: canonical JSON classifies `PK04-PK14` and `PX01-PX20` as `historical_complete_do_not_run`.
 - EFC overlays are inherited by owner batches.
 - Evidence: EFC overlay docs classify `EFC01-EFC18` as proof overlays except when no current owner can produce the proof.
 - Conditional triggers stay out of the normal path.
@@ -58,7 +58,7 @@ expansion.
 ## Queue Repairs Not Made
 
 - `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` — no change; it parsed cleanly and already held the reconciled counts.
-- `docs/codex/BATCH_REGISTRY.md` — no change; it already distinguishes `PK14` from the `IR-01` UI recovery prerequisite.
+- `docs/codex/BATCH_REGISTRY.md` — reconciled after PK14 Green; it now distinguishes `PK15` from the `IR-01` UI recovery prerequisite.
 - `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md` — no change; it already records FET/IR-01 as a visible UI expansion gate.
 
 ## AUTO-HARDEN-01 Status
@@ -83,7 +83,7 @@ Commands run:
 - `git branch --show-current` — exit 0 — `main`.
 - `sed -n ...` source-truth, queue, runner, prompt, and governance files — exit 0 — required files were readable.
 - `python3 -m json.tool docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json >/tmp/ambitions-global-queue-json-check.txt` — exit 0 — canonical queue parsed.
-- `python3 - <<'PY' ...` canonical queue count reconciliation — exit 0 — counted 1 executable now, 79 executable later, 12 blocked, 18 overlays, 6 conditional, 30 historical.
+- `python3 - <<'PY' ...` canonical queue count reconciliation — exit 0 — counted 1 executable now, 78 executable later, 12 blocked, 18 overlays, 6 conditional, 31 historical.
 - `git diff --check` — exit 0 — no whitespace errors.
 - `bash -n scripts/ambitions-codex-train.sh` — exit 0 — runner syntax valid.
 - `bash -n scripts/ambitions-wrap-prompt.sh` — exit 0 — wrapper syntax valid.
@@ -101,7 +101,7 @@ Commands run:
 - `git diff --name-only | rg '^(Native|Sources|AppUI|Package.swift|project.yml|docs/truth/|scripts/|Makefile)'` — exit 1 — no forbidden app, truth, script, Makefile, package, or project paths were touched.
 - Phase 04 repair pass: `git diff --check` — exit 0 — no whitespace errors after the maturity-ledger repair.
 - Phase 04 repair pass: `python3 -m json.tool docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json >/tmp/ambitions-global-queue-json-check.txt` — exit 0 — canonical queue still parsed.
-- Phase 04 repair pass: `python3 - <<'PY' ...` canonical queue count reconciliation — exit 0 — counted 1 executable now, 79 executable later, 12 blocked, 18 overlays, 6 conditional, 30 historical; next remains `PK14 Durable Command/Event Ledger`.
+- Post-PK14 reconciliation pass: `python3 - <<'PY' ...` canonical queue count reconciliation — exit 0 — counted 1 executable now, 78 executable later, 12 blocked, 18 overlays, 6 conditional, 31 historical; next is `PK15 Receipt Backend`.
 - Phase 04 repair pass: `scripts/ambitions-prompt-audit.sh` — exit 0 — Yellow classification only; no active runnable prompt missing metadata.
 - Phase 04 repair pass: `scripts/ambitions-codex-train.sh --self-check` — exit 0 — Green self-check; did not invoke Codex phases, commit, push, or mutate app source.
 

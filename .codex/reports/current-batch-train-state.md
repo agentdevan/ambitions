@@ -1,11 +1,24 @@
 # Current Batch Train State
 
-Date: 2026-05-09
+Date: 2026-05-10
 Active train: Global full-stack execution
-Current batch: FET01-FET12 FAANG Frontend Excellence Train / Green.
+Current batch: PK14 Durable Command/Event Ledger / Green.
 Next recommended implementation pass: IR-01 Big Frontend Recovery Implementation before further visible top-level feature expansion.
-Next eligible non-UI platform batch remains: PK14 Durable Command/Event Ledger after the frontend recovery stop/Yellow owner is resolved.
-Scope: FET01-FET12 added Codex OS/frontend quality-system gates only. It did not implement live UI recovery, mutate app UI behavior, change route/raw values, persistence/schema, signing, workflows, dependencies, generated project files, or claim release/readiness/accessibility/device/legal proof.
+Next eligible non-UI platform batch: PK15 Receipt Backend.
+Scope: PK14 added a local durable command execution ledger seam and focused domain/persistence/service tests. It did not implement release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+
+## PK14 Durable Command/Event Ledger Closeout
+
+- PK14 prompt: `prompts/batches/PK14.md`.
+- PK14 proof: `.codex/runs/PK14/20260510T134429Z/final/03-review.final.md`.
+- Commit: `e923189db05914ee69d7f4ddc3aa493689daa565` (`Add durable command execution ledger`), pushed to `main`.
+- Durable command execution record contract: `Native/Ambitions/Domain/AmbitionsCommandModels.swift`.
+- Persistence integration: `Native/Ambitions/Persistence/PersistenceContracts.swift`, `Native/Ambitions/Persistence/SwiftDataModels.swift`, `Native/Ambitions/Persistence/SwiftDataRepositories.swift`, `Native/Ambitions/Persistence/SwiftDataStore.swift`, and `Native/Ambitions/Persistence/StorageSchemaVersionLedger.swift`.
+- Executor integration: `Native/Ambitions/Services/AmbitionsCommandExecutor.swift` persists command execution records, including validation-blocked attempts, without adding external side effects.
+- Focused proof: `xcodegen generate` passed and focused `xcodebuild test` passed with 36 selected tests, 0 failures.
+- EFC applicability: invoked for local durable command/event evidence; privacy/local-only/no external side effects stayed bounded.
+- Canonical queue now marks PK14 complete/do-not-run and PK15 executable now.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, or global-train-completion claim is made.
 
 ## FET01-FET12 FAANG Frontend Excellence Train Closeout
 
@@ -23,7 +36,7 @@ Scope: PK13 adds a storage-local portable restore rollback wrapper that prefligh
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
 
 ## PK13 Restore Rollback Closeout
 
@@ -85,7 +98,7 @@ PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete /
 ## Global Sequence Optimization After PK07
 
 - Optimization report: `docs/audits/global-batch-train-sequence-optimization-report.md`.
-- The global order now prioritizes PK11-PK13 storage data safety, PK14-PK16 events/receipts/trust, PK17-PK21 service extraction, PK22-PK28 side effects/privacy/data controls, PK29-PK31 sync/merge, PK32-PK34 intelligence boundaries, and PK35-PK41 performance/package work before dependent cross-train tails.
+- The global order now prioritizes PK11-PK14 storage/data-safety/event evidence, PK15-PK16 receipts/trust, PK17-PK21 service extraction, PK22-PK28 side effects/privacy/data controls, PK29-PK31 sync/merge, PK32-PK34 intelligence boundaries, and PK35-PK41 performance/package work before dependent cross-train tails.
 - No new train, runtime behavior, UI behavior, hosted AI, sync, or release/readiness claim is made.
 
 ## AIR Ambitions Intelligence Runtime Fold-In Overlay

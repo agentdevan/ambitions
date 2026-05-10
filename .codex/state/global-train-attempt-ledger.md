@@ -24,9 +24,9 @@
 - parent_batch_id: PK14-CONDUCTOR-REPAIR-01
   parent_run_id: 20260510T132524Z
   child_batch_id: PK14
-  attempt_count: 0
-  status: prepared_clean_attempt
-  proof_path: prompts/batches/PK14.md
-  next_action: run_once_after_repair_commit
-  retry_allowed: true
-  note: one clean future PK14 attempt is allowed through the PK14 runner prompt only; do not run the global conductor first
+  attempt_count: 1
+  status: consumed_clean_attempt_green
+  proof_path: .codex/runs/PK14/20260510T134429Z/final/03-review.final.md
+  next_action: global_conductor_allowed_after_pk14_state_reconciliation
+  retry_allowed: false
+  note: clean PK14 attempt completed Green and commit e923189db05914ee69d7f4ddc3aa493689daa565 was pushed; do not rerun PK14 from the global conductor

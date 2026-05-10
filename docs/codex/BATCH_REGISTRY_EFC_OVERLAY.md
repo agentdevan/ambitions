@@ -28,8 +28,8 @@ the active train, and current live state must be read from `.codex/state/
 active-batch.yml`, `.codex/reports/current-batch-train-state.md`, and
 `docs/codex/BATCH_REGISTRY.md`.
 
-As of the PK13 closeout, PK14 Durable Command/Event Ledger is the next eligible
-global batch. EFC attached to PK12-PK13 as a data-safety proof overlay and
+As of the PK14 closeout, PK15 Receipt Backend is the next eligible global
+batch. EFC attached to PK12-PK14 as a data-safety/proof overlay and
 continues to attach to later surface/accessibility batches through their
 existing owners.
 
