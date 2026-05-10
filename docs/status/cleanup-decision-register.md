@@ -7,6 +7,11 @@ Date: 2026-05-09
 
 Active repo authority starts in `docs/truth/README.md`. Historical cleanup policy is `docs/truth/HISTORICAL_POLICY.md`. If this register conflicts with `docs/truth/*`, the truth files win.
 
+Phase 11 reconciliation note, 2026-05-10: this register remains supporting
+cleanup context. For current repo map and stale/archive decisions, inspect
+`.codex/REPO_INVENTORY.md` and
+`docs/status/archive-and-stale-material-ledger.md` after `docs/truth/*`.
+
 ## Scope
 
 Cleanup classification/status only. No Swift source changes, app implementation changes, app feature work, build/test/device validation, or release/readiness claims.

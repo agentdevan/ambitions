@@ -3,6 +3,11 @@
 Status: Yellow for T05 targeted header pass  
 Date: 2026-05-09
 
+Phase 11 reconciliation note, 2026-05-10: this audit remains supporting
+history. Current historical/stale routing lives in
+`docs/truth/HISTORICAL_POLICY.md` and
+`docs/status/archive-and-stale-material-ledger.md`.
+
 ## Scope
 
 Docs/control-plane labeling only. No Swift source changes, app implementation changes, deletes, moves, archive operations, or release/readiness claims.

@@ -7,6 +7,11 @@ Date: 2026-05-09
 
 Active repo authority starts in `docs/truth/README.md`. If this plan conflicts with `docs/truth/*`, the truth files win.
 
+Phase 11 reconciliation note, 2026-05-10: this plan remains proposed
+quarantine/archive structure only. It does not authorize moves by itself.
+Current archive/delete gates live in
+`docs/status/archive-and-stale-material-ledger.md`.
+
 ## Scope
 
 T07b is a planning-only pass.

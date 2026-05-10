@@ -7,6 +7,11 @@ Date: 2026-05-09
 
 Active repo authority starts in `docs/truth/README.md`. If this file conflicts with `docs/truth/*`, the truth files win.
 
+Phase 11 reconciliation note, 2026-05-10: these overrides remain active for
+large-file classification. Use `.codex/BATCH_TRAIN_REGISTRY.md` for train
+family status and `docs/status/archive-and-stale-material-ledger.md` before any
+archive/delete decision.
+
 This file exists because several retained large historical/control-plane docs cannot be safely edited through the current GitHub connector: connector reads return truncated content, while `update_file` performs whole-file replacement.
 
 These overrides are therefore the active classification labels for the files listed below until a local checkout or patch-capable tool can prepend equivalent headers directly to those files.

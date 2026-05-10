@@ -7,6 +7,11 @@ Date: 2026-05-09
 
 Active repo authority starts in `docs/truth/README.md`. If this plan conflicts with `docs/truth/*`, the truth files win.
 
+Phase 11 reconciliation note, 2026-05-10: this plan remains a non-destructive
+supporting scan. Current stale/archive/delete routing lives in
+`docs/status/archive-and-stale-material-ledger.md`; repo question routing lives
+in `.codex/REPO_INVENTORY.md`.
+
 ## Scope
 
 T06 is a non-destructive planning pass only.
