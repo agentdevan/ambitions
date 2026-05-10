@@ -1,14 +1,14 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 0B Green with accepted Yellow items
+Status: Phase 1 Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phase 0 and Phase 0B only
+Scope: Phases 0, 0B, and 1 only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-Phase 0B completed as operating-system component discovery and family-level classification. Later cleanup phases were not started in this checkpoint.
+Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
@@ -357,11 +357,39 @@ Accepted Yellow basis:
 - Provider deletion is complete in active paths, but stale inventory references remain.
 - MCP source-truth-stack freshness needs later repair.
 
+## Phase 1 Codex Operating System
+
+Created:
+
+- `.codex/OPERATING_SYSTEM.md`
+
+Updated:
+
+- `.codex/README.md`
+- `docs/codex/CODEX_OS_INDEX.md`
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+Phase 1 result: Green with accepted Yellow items carried forward.
+
+Green basis:
+
+- `.codex/OPERATING_SYSTEM.md` exists.
+- It is explicitly subordinate to `docs/truth/*`.
+- It routes rather than duplicates product/design canon.
+- It includes mandatory read order, conflict precedence, task modes, autonomous/approval/forbidden rules, stop conditions, Red repair loop, Yellow rules, evidence hierarchy, no-claim firewall, destructive change gate, batch-train authority, model-tier policy, tooling handoff, session bootstrap handoff, repo inventory handoff, and a current resume prompt.
+- `.codex/README.md` and `docs/codex/CODEX_OS_INDEX.md` now point to `.codex/OPERATING_SYSTEM.md`.
+
+Accepted Yellow basis:
+
+- Later target artifacts do not exist yet: `.codex/DEPARTMENT_REGISTRY.md`, `.codex/SKILL_GOVERNANCE.md`, `.codex/GLOBAL_BATCH_TRAIN.md`, `.codex/BATCH_TRAIN_REGISTRY.md`, `.codex/TOOLING_AND_VALIDATION.md`, `.codex/SESSION_BOOTSTRAP.md`, and `.codex/REPO_INVENTORY.md`.
+- Active-state next-batch reconciliation remains deferred to Phase 5.
+- Large train/control-plane files remain override-aware classification work.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 1 only.
-Use the current repo state after Phase 0B. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/OPERATING_SYSTEM.md as a router rather than a duplicate truth file.
-Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, and Repo MCP source-truth-stack freshness.
-Do not continue to Phase 2 unless Phase 1 is Green or accepted Yellow with reason.
+Continue the Ambitions repo-control-plane cleanup with Phase 2 only.
+Use the current repo state after Phase 1. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/DEPARTMENT_REGISTRY.md as one consolidated senior-department registry.
+Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, and missing later target artifacts.
+Do not continue to Phase 3 unless Phase 2 is Green or accepted Yellow with reason.
 ```

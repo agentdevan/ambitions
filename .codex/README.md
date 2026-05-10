@@ -2,6 +2,8 @@
 
 Active repo authority starts in [`../docs/truth/README.md`](../docs/truth/README.md). If this file conflicts with `docs/truth/*`, the truth files win.
 
+Current Codex OS router: [`OPERATING_SYSTEM.md`](OPERATING_SYSTEM.md). It routes `.codex` operating behavior and remains subordinate to `docs/truth/*`.
+
 ## Required read order
 
 1. [`../docs/truth/README.md`](../docs/truth/README.md)
