@@ -153,3 +153,12 @@ Accepted Yellow:
   into one implementation batch.
 - Large legacy train files remain unmodified.
 - Archive/delete candidates still require inbound-reference checks.
+
+## Release Evidence Firewall
+
+The global train sequences work; it does not prove shipped behavior or release
+state. Local validation is local only. Do not convert batch completion,
+docs-only plans, queue position, tool output, or inventory entries into release,
+device, accessibility, performance, legal/privacy, hosted CI, TestFlight, App
+Store submission, backend/provider, or implementation-complete claims without
+current raw evidence.

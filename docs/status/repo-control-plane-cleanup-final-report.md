@@ -1,14 +1,14 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 11 Green with accepted Yellow items
+Status: Phase 12 Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phases 0, 0B, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, and 11 only
+Scope: Phases 0, 0B, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12 only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Phase 5 created the cleaned global sequencing file at `.codex/GLOBAL_BATCH_TRAIN.md`. Phase 6 created the tooling and validation map at `.codex/TOOLING_AND_VALIDATION.md`. Phase 7 created the current session bootstrap at `.codex/SESSION_BOOTSTRAP.md`. Phase 8 created the repo inventory at `.codex/REPO_INVENTORY.md`. Phase 9 created the archive/stale material ledger at `docs/status/archive-and-stale-material-ledger.md`. Phase 10 performed a safe prune/archive/delete no-op because destructive gates were not fully satisfied. Phase 11 reconciled older cleanup docs as supporting context. Later cleanup phases were not started in this checkpoint.
+Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Phase 5 created the cleaned global sequencing file at `.codex/GLOBAL_BATCH_TRAIN.md`. Phase 6 created the tooling and validation map at `.codex/TOOLING_AND_VALIDATION.md`. Phase 7 created the current session bootstrap at `.codex/SESSION_BOOTSTRAP.md`. Phase 8 created the repo inventory at `.codex/REPO_INVENTORY.md`. Phase 9 created the archive/stale material ledger at `docs/status/archive-and-stale-material-ledger.md`. Phase 10 performed a safe prune/archive/delete no-op because destructive gates were not fully satisfied. Phase 11 reconciled older cleanup docs as supporting context. Phase 12 hardened the release/evidence firewall across active Codex OS artifacts. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
@@ -654,11 +654,37 @@ Accepted Yellow basis:
 - Older cleanup docs still exist because they preserve process history and candidate details.
 - No archive/delete action was attempted.
 
+## Phase 12 Evidence And Release Firewall
+
+Updated:
+
+- `.codex/OPERATING_SYSTEM.md`
+- `.codex/DEPARTMENT_REGISTRY.md`
+- `.codex/BATCH_TRAIN_REGISTRY.md`
+- `.codex/GLOBAL_BATCH_TRAIN.md`
+- `.codex/TOOLING_AND_VALIDATION.md`
+- `.codex/SESSION_BOOTSTRAP.md`
+- `.codex/REPO_INVENTORY.md`
+- `docs/status/release-evidence-packet.md`
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+Phase 12 result: Green with accepted Yellow items carried forward.
+
+Green basis:
+
+- Active Codex OS artifacts now state that local validation, docs-only plans, batch reports, train completion, tool maps, and repo inventory are not proof by themselves.
+- The release evidence packet has an explicit firewall note.
+- No release, implementation, device, accessibility, performance, legal/privacy, hosted CI, App Store, TestFlight, backend/provider, or completeness claim was introduced.
+
+Accepted Yellow basis:
+
+- Existing historical docs may still contain old claim language, but active routing now points through truth files and the firewall.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 12 only.
-Use the current repo state after Phase 11. Preserve docs/truth/* as the winning authority, do not implement app features, and harden the release/evidence firewall across active Codex OS artifacts and the final report.
-Carry forward accepted Yellow items: no destructive prune/archive/delete performed, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, separate PK14/IR-01 next-action lanes, advisory/noisy scripts, candidate MCPs, old prompt classification, and archive/delete candidates requiring inbound-reference checks.
-Do not continue to Phase 13 unless Phase 12 is Green or accepted Yellow with reason.
+Continue the Ambitions repo-control-plane cleanup with Phase 13 only.
+Use the current repo state after Phase 12. Preserve docs/truth/* as the winning authority, do not implement app features, and complete docs/status/repo-control-plane-cleanup-final-report.md with final audit sections, validation run/not run, hard claims not made, inventory freshness, remaining Yellow items, exact refresh prompt, and next exact prompt.
+Carry forward accepted Yellow items: no destructive prune/archive/delete performed, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, separate PK14/IR-01 next-action lanes, advisory/noisy scripts, candidate MCPs, old prompt classification, historical claim-language remnants, and archive/delete candidates requiring inbound-reference checks.
+Do not continue to Phase 14 unless Phase 13 is Green or accepted Yellow with reason.
 ```

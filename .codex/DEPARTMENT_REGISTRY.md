@@ -145,3 +145,12 @@ Next target artifact after this registry:
 ```
 
 Carry forward accepted Yellow items from Phase 0B and Phase 1. Do not implement app features during skill governance.
+
+## 10. Release Evidence Firewall
+
+Departments may use local validation, source evidence, and status reports only
+within their proven scope. No department may claim hosted CI proof,
+real-hardware validation, TestFlight or App Store submission readiness, public
+accessibility conformance, performance proof, legal/privacy signoff,
+backend/provider activation, or implementation completeness without current raw
+evidence and the required review board.

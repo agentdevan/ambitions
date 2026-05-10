@@ -211,3 +211,9 @@ Phase 8 commit.
 
 Phase 8 result: Green with accepted Yellow items. Large-file and stale-material
 details continue in the Phase 9 archive/stale ledger.
+
+## Release Evidence Firewall
+
+Inventory entries are routes to inspect, not proof. Always follow this map to
+the current truth files, source, logs, or proof packets before making any
+implementation or release claim.

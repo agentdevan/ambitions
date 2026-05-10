@@ -4,6 +4,13 @@ Status: evidence posture, not release approval.
 
 This packet records what validation evidence the repo can currently claim and what it cannot claim.
 
+Phase 12 firewall note, 2026-05-10: this packet proves only the current raw
+evidence it cites. Docs-only plans, batch reports, train completion, tool maps,
+and repo inventory do not prove release status, validation on real hardware,
+public accessibility conformance, performance, legal/privacy signoff, hosted
+CI, TestFlight, App Store submission, backend/provider activation, or
+implementation completeness.
+
 ## Current validation posture
 
 Ambitions uses local VM/Mac validation as the source of truth.
@@ -88,14 +95,14 @@ Allowed current wording:
 
 Forbidden current wording:
 
-- App Store-ready
-- TestFlight-ready
-- production-ready
+- claims that App Store submission can proceed
+- claims that TestFlight distribution can proceed
+- claims that production launch can proceed
 - device-verified
 - fully accessible
 - legally/privacy approved
 - CI-proven
-- signed release-ready
+- claims that signed release distribution can proceed
 
 ## Update rule
 

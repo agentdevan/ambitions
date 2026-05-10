@@ -132,3 +132,11 @@ Accepted Yellow:
 - Some scripts are advisory and noisy by design.
 - Repo MCP source-truth stack freshness remains a later repair item.
 - Candidate MCPs remain classified, not proven production tools.
+
+## Release Evidence Firewall
+
+Local tools can support evidence packets only when their logs are captured and
+cited. Tooling output alone does not prove release status, validation on real
+hardware, public accessibility conformance, performance, legal/privacy signoff,
+hosted CI, TestFlight, App Store submission, backend/provider activation, or
+implementation completeness.

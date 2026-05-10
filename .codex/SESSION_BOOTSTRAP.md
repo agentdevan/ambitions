@@ -139,3 +139,11 @@ Accepted Yellow:
 - Older prompt/resume docs remain in place and must be classified in the stale
   ledger before archive/move/delete decisions.
 - `.codex/REPO_INVENTORY.md` does not exist until Phase 8.
+
+## Release Evidence Firewall
+
+Every resumed session must preserve the no-claim boundary: local validation is
+local only; docs-only plans, batch closeouts, inventory files, and tool maps do
+not prove release status, real-hardware validation, public accessibility
+conformance, performance, legal/privacy signoff, hosted CI, TestFlight, App
+Store submission, backend/provider activation, or implementation completeness.

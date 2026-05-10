@@ -265,3 +265,12 @@ Preserve app runtime/source behavior unless an explicitly approved implementatio
 Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, and Repo MCP source-truth-stack freshness.
 Use Green/Yellow/Red gates, record evidence, and make no release/build/test/device/accessibility/performance/legal/privacy claims without current proof.
 ```
+
+## 21. Release Evidence Firewall
+
+Local validation is the only validation this OS may assume unless current raw
+evidence says otherwise. Hosted CI, real-hardware validation, TestFlight, App
+Store submission, public accessibility conformance, performance, legal/privacy,
+and backend/provider activation remain non-claims without current evidence.
+Batch reports, docs-only plans, train completion, and repo inventory are not
+release proof or implementation proof by themselves.

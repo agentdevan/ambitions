@@ -175,3 +175,10 @@ Accepted Yellow basis:
 - Active next-batch state still needs Phase 5 reconciliation between `PK14` and `IR-01`.
 - Some completed-train details remain summary-level until archive/stale ledger and inventory passes.
 - No inbound-reference checks were performed for archive/delete candidates in Phase 4.
+
+## Release Evidence Firewall
+
+Train completion is not release proof. Batch reports do not prove build, tests,
+real-hardware validation, public accessibility conformance, performance,
+legal/privacy signoff, TestFlight, App Store submission, hosted CI, or
+backend/provider activation unless current raw evidence is cited.
