@@ -1,14 +1,14 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 4 Green with accepted Yellow items
+Status: Phase 5 Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phases 0, 0B, 1, 2, 3, and 4 only
+Scope: Phases 0, 0B, 1, 2, 3, 4, and 5 only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Later cleanup phases were not started in this checkpoint.
+Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Phase 5 created the cleaned global sequencing file at `.codex/GLOBAL_BATCH_TRAIN.md`. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
@@ -18,6 +18,7 @@ Accepted Yellow items:
 - The local Ambitions Repo MCP still reports an older source-truth stack that does not include `docs/truth/*`; MCP output was treated as a repo-derived aid, not authority.
 - Active state files disagree on the next execution target: `.codex/state/active-batch.yml` and MCP output point to `PK14 Durable Command/Event Ledger`, while `.codex/reports/current-batch-train-state.md` also names `IR-01 Big Frontend Recovery Implementation` as the next recommended implementation pass before visible top-level feature expansion. This is classified as an active-state reconciliation item for Phase 5, not resolved in Phase 0B.
 - Phase 4 classified large train families from current registries, ledgers, state files, and headers rather than full line-review of every train prompt.
+- Phase 5 reconciled the next-action tension by keeping `PK14` as the next non-UI platform batch and `IR-01` as the UI recovery prerequisite before visible top-level expansion.
 
 ## Pull / Repo State
 
@@ -478,12 +479,36 @@ Accepted Yellow basis:
 - Active next-batch reconciliation remains open: PK14 is the next non-UI platform batch, while IR-01 is a recommended UI recovery pass before visible top-level expansion.
 - Archive/delete candidates were identified only as policy classes; no inbound-reference safety pass was run.
 
+## Phase 5 Global Batch Train
+
+Created:
+
+- `.codex/GLOBAL_BATCH_TRAIN.md`
+
+Updated:
+
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+Phase 5 result: Green with accepted Yellow items carried forward.
+
+Green basis:
+
+- The cleaned global sequencing file exists and is subordinate to `docs/truth/*`.
+- It distinguishes `PK14 Durable Command/Event Ledger` as the next non-UI platform batch from `IR-01 Big Frontend Recovery Implementation` as the prerequisite before visible top-level UI expansion.
+- It records the global sequence, completed work ledger, planned work, deferred work, obsolete/superseded work, hard stops, and a Phase 6 resume prompt.
+- It does not start implementation work or authorize app source changes in this cleanup pass.
+
+Accepted Yellow basis:
+
+- `PK14` and `IR-01` remain separate lanes to be selected by a future implementation prompt.
+- Large legacy train files remain unmodified.
+- Archive/delete candidates still require inbound-reference checks.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 5 only.
-Use the current repo state after Phase 4. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/GLOBAL_BATCH_TRAIN.md as the cleaned active sequencing file.
-Reconcile the accepted Yellow next-action tension by distinguishing PK14 Durable Command/Event Ledger as the next non-UI platform batch from IR-01 Big Frontend Recovery Implementation as the recommended UI recovery pass before visible top-level expansion.
-Carry forward accepted Yellow items: large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, and archive/delete candidates requiring inbound-reference checks.
-Do not continue to Phase 6 unless Phase 5 is Green or accepted Yellow with reason.
+Continue the Ambitions repo-control-plane cleanup with Phase 6 only.
+Use the current repo state after Phase 5. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/TOOLING_AND_VALIDATION.md as a tooling map, not app proof.
+Carry forward accepted Yellow items: large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, separate PK14/IR-01 next-action lanes, and archive/delete candidates requiring inbound-reference checks.
+Do not continue to Phase 7 unless Phase 6 is Green or accepted Yellow with reason.
 ```
