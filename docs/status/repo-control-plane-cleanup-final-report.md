@@ -1,14 +1,14 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 1 Green with accepted Yellow items
+Status: Phase 2 Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phases 0, 0B, and 1 only
+Scope: Phases 0, 0B, 1, and 2 only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Later cleanup phases were not started in this checkpoint.
+Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
@@ -385,11 +385,35 @@ Accepted Yellow basis:
 - Active-state next-batch reconciliation remains deferred to Phase 5.
 - Large train/control-plane files remain override-aware classification work.
 
+## Phase 2 Department Registry
+
+Created:
+
+- `.codex/DEPARTMENT_REGISTRY.md`
+
+Updated:
+
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+Phase 2 result: Green with accepted Yellow items carried forward.
+
+Green basis:
+
+- One consolidated department registry exists.
+- It includes department model, review board matrix, ownership map, file responsibility map, compatibility debt register, risk register, Yellow debt ledger, and cleanup rollback policy.
+- It is explicitly subordinate to `docs/truth/*` and `.codex/OPERATING_SYSTEM.md`.
+- It does not claim implementation, validation, release, device, accessibility, performance, legal/privacy, hosted CI, or App Store/TestFlight proof.
+
+Accepted Yellow basis:
+
+- Some ownership maps remain summary-level until `.codex/REPO_INVENTORY.md` and `.codex/BATCH_TRAIN_REGISTRY.md` exist.
+- Yellow debt items are recorded but not retired in Phase 2.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 2 only.
-Use the current repo state after Phase 1. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/DEPARTMENT_REGISTRY.md as one consolidated senior-department registry.
-Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, and missing later target artifacts.
-Do not continue to Phase 3 unless Phase 2 is Green or accepted Yellow with reason.
+Continue the Ambitions repo-control-plane cleanup with Phase 3 only.
+Use the current repo state after Phase 2. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/SKILL_GOVERNANCE.md without claiming every skill has been line-reviewed.
+Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, missing later target artifacts, and summary-level ownership maps.
+Do not continue to Phase 4 unless Phase 3 is Green or accepted Yellow with reason.
 ```
