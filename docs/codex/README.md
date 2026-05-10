@@ -25,6 +25,7 @@ EFC is the active peak-proof overlay for unfinished work. Use [EFC_FLAGSHIP_PROO
 
 ## Primary Codex Entry Points
 
+- [ambitions-hybrid-runner.md](ambitions-hybrid-runner.md) — canonical future batch runner workflow. Use `scripts/ambitions-codex-train.sh` or `make batch BATCH=<ID> PROMPT=<path>` instead of directly pasting implementation batch prompts, unless the user explicitly bypasses the runner.
 - [MASTER_AMBITIONS_3_0_CODEX_PROMPT.md](MASTER_AMBITIONS_3_0_CODEX_PROMPT.md) — concise canonical prompt for future Codex 5.5 sessions.
 - [AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md](AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md) — how to choose context packs, skills, operations, and validation.
 - [AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md](AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md) — repo-local skill catalog.

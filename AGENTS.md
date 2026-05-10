@@ -170,6 +170,21 @@ Local simulator evidence is not signed archive proof, TestFlight proof, App Stor
 - User-facing language should follow `docs/truth/PRODUCT_DESIGN_TRUTH.md` first, then compatible AmbitionsCanon support.
 - Avoid fake precision, fake certainty, AI theater, shame language, and silent automation.
 
+## Ambitions batch execution rule
+
+- The canonical batch runner is `scripts/ambitions-codex-train.sh`.
+- Ambitions implementation batches must not be executed directly from pasted prompts.
+- If the user asks to run/resume/continue/implement a batch, first route it through the runner.
+- If the prompt is pasted directly, save it under `prompts/batches/<BATCH_ID>.md` or `prompts/inbox/` if the ID is unclear.
+- Add the required runner header if missing.
+- Then execute: `make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>`.
+- Only bypass the runner if the user explicitly says: "bypass the Ambitions runner."
+- GPT-5.5 owns planning, source-truth, canon, review, repair, and final commit eligibility.
+- GPT-5.3-Codex-Spark owns only bounded implementation patches produced by the GPT-5.5 plan.
+- Final commits must come only after the GPT-5.5 final gate.
+- Spark must never decide architecture, canon, continuation, repo cleanup, or final commit eligibility.
+- Preserve Ambitions quality rules: world-class native iPhone-first product quality; Today / Goals / Capture / Plan / You; Start Here / DayTimelineRail / LifeShape / Capture composer / You settings-style direction where relevant; local-first/on-device-first posture unless active truth says otherwise; no generic productivity-app thinking; no card-stack/dashboard/task-list fallback; no false release, accessibility, privacy, performance, or production claims.
+
 ## Batch train rule
 
 For multi-batch execution, use `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, the EFC overlay files, and the selected manifest under `docs/codex/batch-trains/`.

@@ -5,6 +5,7 @@
 # Profiles influence defaults such as planning intensity and service tier; planning gates, retries, stop conditions, and validation honesty are enforced by AGENTS and skills, not by config alone.
 
 personality = "pragmatic"
+model = "gpt-5.5"
 model_reasoning_effort = "medium"
 project_doc_max_bytes = 49152
 project_root_markers = [".git", "project.yml", "Package.swift"]

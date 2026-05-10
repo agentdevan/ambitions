@@ -1,0 +1,90 @@
+<!-- AMBITIONS_RUNNER_REQUIRED: true -->
+<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+
+# Batch ID
+
+`<BATCH_ID>`
+
+This prompt is intended to be run through
+`scripts/ambitions-codex-train.sh`, not pasted as a direct implementation
+prompt.
+
+## Objective
+
+Describe the bounded batch outcome. Do not include unrelated cleanup,
+architecture expansion, release claims, or future batch work.
+
+## Active Source Truth To Inspect
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `.codex/VALIDATION_HARNESS.md`
+- `.codex/REVIEW_BOARD.md`
+- `.codex/PR_PROTOCOL.md`
+- relevant source owner files
+- relevant tests
+
+## Allowed Scope
+
+- List exact files or directories the batch may change.
+- List exact tests or validation scripts the batch may run.
+- Keep implementation bounded to the GPT-5.5 plan handoff.
+
+## Forbidden Scope
+
+- No app feature outside this batch.
+- No SwiftUI redesign outside the named owner seam.
+- No production source outside allowed files.
+- No dependency, hosted CI, provider/backend, signing, entitlement, or project
+  mutation unless explicitly scoped and approved.
+- No canon rewrite.
+- No release, accessibility, privacy, performance, or production claims without
+  current evidence.
+
+## Validation Expectations
+
+- `git diff --check`
+- `scripts/codex-forbidden-claim-scan.sh <changed files>`
+- focused build/test commands selected by GPT-5.5 planning
+- review-board lanes selected from `.codex/REVIEW_BOARD.md`
+- exact commands, exit codes, and not-run checks recorded
+
+## Visual Proof Expectations If UI Changes
+
+- Capture current screenshot/preview/simulator evidence when visual quality is
+  claimed.
+- Include default and non-ideal states when practical.
+- Record Dynamic Type, Reduce Motion, and accessibility proof or explicitly
+  state they were not run.
+- Do not claim visual approval from docs alone.
+
+## Hard Red Stop Conditions
+
+- Source mutation outside allowed scope.
+- Spark makes architecture, canon, continuation, cleanup, or final commit
+  decisions.
+- False implementation, release, accessibility, privacy, performance, device,
+  hosted CI, or production claim.
+- Blocked backend/provider/cloud/external LLM reintroduction.
+- Obsolete authority path overrides `docs/truth/*`.
+- Validation contradiction or missing rollback.
+
+## Rollback Expectations
+
+- Record the starting commit.
+- Save changed-file summary and patch.
+- On Red, leave changes uncommitted unless the runner is explicitly configured
+  with `AUTO_ROLLBACK_ON_RED=1`.
+- If a commit is created, the runner pushes the current batch branch by default;
+  set `AUTO_PUSH=0` to keep the commit local.
+- Use the runner-provided rollback command if the batch must be discarded.
+
+## Runner Command
+
+```bash
+make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>
+```
