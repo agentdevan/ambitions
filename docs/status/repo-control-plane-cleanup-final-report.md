@@ -1,14 +1,14 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 3 Green with accepted Yellow items
+Status: Phase 4 Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phases 0, 0B, 1, 2, and 3 only
+Scope: Phases 0, 0B, 1, 2, 3, and 4 only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Later cleanup phases were not started in this checkpoint.
+Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Phase 4 created batch train governance at `.codex/BATCH_TRAIN_REGISTRY.md`. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
@@ -17,6 +17,7 @@ Accepted Yellow items:
 - Large train/control-plane files exist and should be classified through existing override policy before any rewrite, move, archive, or delete action.
 - The local Ambitions Repo MCP still reports an older source-truth stack that does not include `docs/truth/*`; MCP output was treated as a repo-derived aid, not authority.
 - Active state files disagree on the next execution target: `.codex/state/active-batch.yml` and MCP output point to `PK14 Durable Command/Event Ledger`, while `.codex/reports/current-batch-train-state.md` also names `IR-01 Big Frontend Recovery Implementation` as the next recommended implementation pass before visible top-level feature expansion. This is classified as an active-state reconciliation item for Phase 5, not resolved in Phase 0B.
+- Phase 4 classified large train families from current registries, ledgers, state files, and headers rather than full line-review of every train prompt.
 
 ## Pull / Repo State
 
@@ -270,6 +271,13 @@ Not run in Phase 0B:
 - source/build/test validation
 - MCP self-tests
 
+Not run in Phase 4:
+
+- archive/delete/move operations
+- full line-review of every large train prompt
+- inbound-reference checks for archive/delete candidates
+- Phase 5 global batch train cleanup
+
 ## Validation Run
 
 Commands/tools run:
@@ -293,16 +301,21 @@ Commands/tools run:
 - Ambitions Repo MCP: `summarize_repo_posture`
 - Ambitions Repo MCP: `get_efc_overlay_status`
 - Ambitions Repo MCP: `get_active_batch`
+- batch-train evidence search with `rg` across global queue, EFC overlay, current state, and batch registry files
+- batch-train manifest listing with `find docs/codex/batch-trains`
+- Ambitions Repo MCP: `check_efc_applicability` for Phase 4 changed files
+- Ambitions Repo MCP: `changed_file_impact` for Phase 4 changed files
+- Ambitions Repo MCP: `detect_forbidden_claims` for Phase 4 changed files; finding count was `0`
+- `scripts/run-doc-qa.sh`; exit code `0`, with advisory stale-guidance, deprecated-language, markdownlint, and one redirect finding recorded under `docs/audits/doc-qa/20260510-004419-*`
 
 ## Validation Not Run
 
-- `scripts/run-doc-qa.sh`
-- markdown link check
 - Xcode build/test
 - simulator validation
 - archive validation
 - MCP self-tests
 - app accessibility/performance/privacy validation
+- strict docs QA clean pass
 
 ## Hard Claims Not Made
 
@@ -435,11 +448,42 @@ Accepted Yellow basis:
 - No skills were moved or rewritten in Phase 3.
 - Stale provider references remain in `docs/audits/tracked-files.txt`.
 
+## Phase 4 Batch Train Registry
+
+Created:
+
+- `.codex/BATCH_TRAIN_REGISTRY.md`
+
+Updated:
+
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+Phase 4 result: Green with accepted Yellow items carried forward.
+
+EFC applicability: invoked. The changed files are Codex governance and evidence-status docs, and the required proof families are release-claim boundary and continuation proof.
+
+Green basis:
+
+- Every discovered train family has a current registry classification.
+- The registry is explicitly subordinate to `docs/truth/*` and `.codex/OPERATING_SYSTEM.md`.
+- Originating trains are classified as active, planned, completed, supporting, historical, deferred, blocked, or do-not-rerun where current repo evidence supports that classification.
+- The registry records that batch reports and train closeouts are not implementation or release proof by themselves.
+- Ambitions Repo MCP forbidden-claim scan found `0` findings for `.codex/BATCH_TRAIN_REGISTRY.md` and `docs/status/repo-control-plane-cleanup-final-report.md`.
+- `scripts/run-doc-qa.sh` completed with exit code `0`; broad advisory findings remain in existing docs and are not treated as Phase 4 release or implementation proof.
+- No archive, move, delete, source edit, SwiftUI refactor, dependency addition, CI change, or app behavior mutation was performed.
+
+Accepted Yellow basis:
+
+- Large train files were classified from current registry/state/ledger/header evidence, not full line-review.
+- Active next-batch reconciliation remains open: PK14 is the next non-UI platform batch, while IR-01 is a recommended UI recovery pass before visible top-level expansion.
+- Archive/delete candidates were identified only as policy classes; no inbound-reference safety pass was run.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 4 only.
-Use the current repo state after Phase 3. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/BATCH_TRAIN_REGISTRY.md by classifying discovered train families without treating originating trains as active authority.
-Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, and unreviewed skill metadata.
-Do not continue to Phase 5 unless Phase 4 is Green or accepted Yellow with reason.
+Continue the Ambitions repo-control-plane cleanup with Phase 5 only.
+Use the current repo state after Phase 4. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/GLOBAL_BATCH_TRAIN.md as the cleaned active sequencing file.
+Reconcile the accepted Yellow next-action tension by distinguishing PK14 Durable Command/Event Ledger as the next non-UI platform batch from IR-01 Big Frontend Recovery Implementation as the recommended UI recovery pass before visible top-level expansion.
+Carry forward accepted Yellow items: large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, and archive/delete candidates requiring inbound-reference checks.
+Do not continue to Phase 6 unless Phase 5 is Green or accepted Yellow with reason.
 ```
