@@ -1,8 +1,8 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 12 Green with accepted Yellow items
+Status: Phase 13 Yellow with safe closeout
 Date: 2026-05-10
-Scope: Phases 0, 0B, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12 only
+Scope: Phases 0, 0B, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, and 13 only
 
 ## Executive Status
 
@@ -687,4 +687,276 @@ Continue the Ambitions repo-control-plane cleanup with Phase 13 only.
 Use the current repo state after Phase 12. Preserve docs/truth/* as the winning authority, do not implement app features, and complete docs/status/repo-control-plane-cleanup-final-report.md with final audit sections, validation run/not run, hard claims not made, inventory freshness, remaining Yellow items, exact refresh prompt, and next exact prompt.
 Carry forward accepted Yellow items: no destructive prune/archive/delete performed, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, unreviewed skill metadata, separate PK14/IR-01 next-action lanes, advisory/noisy scripts, candidate MCPs, old prompt classification, historical claim-language remnants, and archive/delete candidates requiring inbound-reference checks.
 Do not continue to Phase 14 unless Phase 13 is Green or accepted Yellow with reason.
+```
+
+## Phase 13 Final Audit
+
+### 1. Executive Status
+
+Status: Yellow with safe closeout.
+
+Reason: Phases 0-9 and 11-12 completed Green or accepted Yellow. Phase 10
+correctly stayed Yellow as a safe no-op because destructive archive/delete
+gates were not fully satisfied.
+
+### 2. What Changed
+
+The repo now has a consolidated Codex control plane:
+
+- active OS router
+- department/review registry
+- skill governance
+- batch train registry
+- cleaned global batch train
+- tooling/validation map
+- session bootstrap
+- repo inventory
+- archive/stale material ledger
+- hardened release/evidence firewall
+
+### 3. Files Created
+
+- `.codex/OPERATING_SYSTEM.md`
+- `.codex/DEPARTMENT_REGISTRY.md`
+- `.codex/SKILL_GOVERNANCE.md`
+- `.codex/BATCH_TRAIN_REGISTRY.md`
+- `.codex/GLOBAL_BATCH_TRAIN.md`
+- `.codex/TOOLING_AND_VALIDATION.md`
+- `.codex/SESSION_BOOTSTRAP.md`
+- `.codex/REPO_INVENTORY.md`
+- `.codex/templates/current-resume-prompt.md`
+- `docs/status/archive-and-stale-material-ledger.md`
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+### 4. Files Updated
+
+- `.codex/README.md`
+- `AGENTS.md`
+- `docs/codex/CODEX_OS_INDEX.md`
+- `docs/status/cleanup-decision-register.md`
+- `docs/status/reference-dependency-scan-cleanup-plan.md`
+- `docs/status/quarantine-archive-folder-plan.md`
+- `docs/status/large-doc-classification-overrides.md`
+- `docs/status/historical-header-pass-audit.md`
+- `docs/status/release-evidence-packet.md`
+
+### 5. Files Moved
+
+None.
+
+### 6. Files Deleted
+
+None during committed phases. Pre-existing uncommitted worktree material not
+from this active prompt was removed before Phase 0B by owner instruction.
+
+### 7. Files Intentionally Not Touched
+
+- `Native/`
+- `Sources/`
+- `AppUI/`
+- `project.yml`
+- `Package.swift`
+- tests
+- app resources
+- entitlements
+- privacy manifests
+- extension targets
+- app runtime files
+
+### 8. Current Authority Hierarchy
+
+1. `docs/truth/*`
+2. live source/tests/project evidence for implementation questions
+3. current raw validation/proof logs for proof questions
+4. `AGENTS.md`
+5. active `.codex/*` OS artifacts
+6. supporting docs/status, docs/codex, docs/canon, docs/audits history
+
+### 9. Codex Operating System Status
+
+`.codex/OPERATING_SYSTEM.md` exists and routes authority, task modes, gates,
+evidence hierarchy, destructive-change policy, model-tier rules, and no-claim
+firewall.
+
+### 10. Department Registry Status
+
+`.codex/DEPARTMENT_REGISTRY.md` exists and maps Product, Design, iOS
+Engineering, QA, Accessibility, Privacy/Trust, Release, Build Systems, Repo
+Hygiene, and Codex Process responsibilities.
+
+### 11. Skill Governance Status
+
+`.codex/SKILL_GOVERNANCE.md` exists. It records that not every skill has been
+line-reviewed and keeps deleted provider skill roots forbidden.
+
+### 12. Batch Train Registry Status
+
+`.codex/BATCH_TRAIN_REGISTRY.md` exists. Every discovered train family is
+classified at family level.
+
+### 13. Global Batch Train Status
+
+`.codex/GLOBAL_BATCH_TRAIN.md` exists. It distinguishes `PK14` as the next
+non-UI platform batch from `IR-01` as the UI recovery prerequisite before
+visible top-level expansion.
+
+### 14. Tooling And Validation Status
+
+`.codex/TOOLING_AND_VALIDATION.md` exists. It classifies MCPs, scripts,
+workflow-template posture, safe commands, dangerous commands, and validation by
+task type.
+
+### 15. Session Bootstrap Status
+
+`.codex/SESSION_BOOTSTRAP.md` and
+`.codex/templates/current-resume-prompt.md` exist. Future sessions have one
+truth-first start/resume/recovery path.
+
+### 16. Repo Inventory Status
+
+`.codex/REPO_INVENTORY.md` exists and is routed from `.codex/README.md`,
+`docs/codex/CODEX_OS_INDEX.md`, and `AGENTS.md`.
+
+### 17. Operating System Component Discovery Status
+
+Phase 0B classified authority, state, skills, trains, gates, tools, evidence,
+resume/templates, GitHub/CI posture, privacy/security policy, visual/accessibility
+QA, context packs, and nested `AGENTS.md` overlays.
+
+### 18. Repo Inventory Created
+
+Yes.
+
+### 19. Front Door Repo Inventory Routing
+
+Yes. `.codex/README.md`, `docs/codex/CODEX_OS_INDEX.md`, and `AGENTS.md` point
+future repo-map questions to `.codex/REPO_INVENTORY.md`.
+
+### 20. Completed Trains
+
+Completed trains were classified from current registry/state evidence only.
+Completion does not prove release or implementation completeness by itself.
+
+### 21. Obsolete Trains Removed / Archived
+
+None. Phase 10 remained a safe no-op because destructive gates were not fully
+satisfied.
+
+### 22. Planned Work Remaining
+
+- Phase 5 next implementation selection remains future work: `PK14` or `IR-01`
+  depending on requested lane.
+- Future skill metadata header pass.
+- Future inbound-reference pass before archive/delete.
+- Future Repo MCP source-truth-stack freshness repair.
+
+### 23. Provider / Backend Cleanup Status
+
+Provider skill roots are absent from active paths. Stale provider references
+remain classified as docs-only historical/stale inventory and forbidden routing
+evidence.
+
+### 24. Historical / Stale Material Status
+
+Stale and historical material is classified through
+`docs/status/archive-and-stale-material-ledger.md`. No obsolete file is approved
+for deletion yet.
+
+### 25. Evidence / Release Firewall Status
+
+Active Codex OS artifacts and `docs/status/release-evidence-packet.md` state
+that docs-only plans, train completion, tool maps, inventory entries, and batch
+reports are not proof by themselves.
+
+### 26. Known Gaps In Inventory Freshness
+
+- Large historical/train files were not fully line-reviewed.
+- Inventory freshness is current to this cleanup pass.
+- Generated/local output may change outside git.
+
+### 27. Remaining Yellow Items
+
+- No destructive prune/archive/delete performed.
+- Large-file override-aware classification remains active.
+- Stale provider inventory references remain.
+- Repo MCP source-truth-stack output lags `docs/truth/*`.
+- Ownership maps and skill review remain summary-level.
+- `PK14` and `IR-01` remain separate next-action lanes.
+- Some scripts are advisory/noisy.
+- Candidate MCPs are classified but not promoted.
+- Historical prompt/archive candidates require inbound-reference checks.
+
+### 28. Validation Run
+
+- `git status --short --branch`
+- `git fetch origin --prune`
+- `git pull --ff-only`
+- required-file existence checks
+- front-door truth-routing checks
+- provider-path checks
+- `find` / `rg` inventory scans
+- Ambitions Repo MCP active batch, posture, EFC, changed-file impact, and
+  claim-scan checks
+- `git diff --check` on phase changes
+- `scripts/run-doc-qa.sh` during Phase 4, exit code `0` with advisory findings
+- Ambitions Repo MCP `detect_forbidden_claims` after Phase 13 final audit,
+  finding count `0`
+- `scripts/run-doc-qa.sh` after Phase 13 final audit, exit code `0`, with
+  advisory stale-guidance, deprecated-language, markdownlint, and one redirect
+  finding recorded under `docs/audits/doc-qa/20260510-010031-*`
+
+### 29. Validation Not Run
+
+- Xcode build/test
+- simulator validation
+- archive validation
+- MCP self-tests
+- strict docs QA clean pass
+- real-hardware validation
+- public accessibility conformance review
+- performance measurement
+- legal/privacy review
+
+### 30. Hard Claims Not Made
+
+This pass does not claim:
+
+- app implementation completion
+- build success
+- test success
+- release status
+- TestFlight distribution status
+- App Store submission status
+- real-hardware validation
+- public accessibility conformance
+- performance proof
+- legal/privacy approval
+- hosted CI proof
+- backend/provider activation
+
+### 31. Exact Prompt To Refresh Inventory Later
+
+```text
+Refresh .codex/REPO_INVENTORY.md from current repo evidence only.
+Start with git status, branch, HEAD, docs/truth/README.md, AGENTS.md,
+.codex/SESSION_BOOTSTRAP.md, and .codex/REPO_INVENTORY.md.
+Run the regeneration commands listed in .codex/REPO_INVENTORY.md, update only
+the inventory and directly related routing notes if needed, and do not claim
+build, test, release, device, accessibility, performance, or legal/privacy
+proof unless current raw evidence exists.
+```
+
+### 32. Next Exact Prompt
+
+```text
+Continue Ambitions repo-control-plane cleanup with a focused archive/delete
+safety pass only.
+Read docs/truth/README.md, docs/truth/HISTORICAL_POLICY.md,
+.codex/SESSION_BOOTSTRAP.md, .codex/REPO_INVENTORY.md, and
+docs/status/archive-and-stale-material-ledger.md first.
+Pick one candidate family, run inbound-reference checks, identify replacement
+authority and rollback, then either archive in a small path-limited commit or
+record Yellow with no destructive action.
+Do not modify app source, add dependencies, add hosted CI, activate providers,
+or make release/accessibility/performance/device/legal/privacy claims.
 ```
