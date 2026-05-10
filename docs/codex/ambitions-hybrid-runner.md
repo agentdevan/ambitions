@@ -74,6 +74,11 @@ stops before creating a branch unless the owner explicitly sets
 
 Conductor safety rule:
 
+- Codex phase subprocesses export an active runner context, and nested
+  `make batch` / `scripts/ambitions-codex-train.sh` invocations are blocked by
+  default. Use a top-level operator loop to launch the next child batch after
+  the parent run closes, unless a bounded owner-approved exception explicitly
+  sets `ALLOW_NESTED_BATCH=1`.
 - Do not emit parent prompts that instruct a batch to invoke itself or to invoke
   the global conductor recursively.
 - A parent should record one child attempt in ledger state for the current

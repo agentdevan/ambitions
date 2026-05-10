@@ -34,6 +34,12 @@ bash -n "$RUNNER"
 
 grep -q 'AUTO_PUSH="${AUTO_PUSH:-0}"' "$RUNNER" \
   || die "runner AUTO_PUSH default is not 0"
+grep -q 'ALLOW_NESTED_BATCH="${ALLOW_NESTED_BATCH:-0}"' "$RUNNER" \
+  || die "runner nested-batch default is not explicit"
+grep -q 'AMBITIONS_RUNNER_ACTIVE=1' "$RUNNER" \
+  || die "runner does not mark Codex phases as active runner contexts"
+grep -q 'nested Ambitions batch runner invocation blocked' "$RUNNER" \
+  || die "runner nested-batch guard is missing"
 grep -q 'ALLOW_RUNNER_BRANCH_EXCEPTION="${ALLOW_RUNNER_BRANCH_EXCEPTION:-0}"' "$RUNNER" \
   || die "runner branch exception default is not explicit"
 grep -q 'AUTO_BRANCH="${AUTO_BRANCH:-1}"' "$RUNNER" \
@@ -98,6 +104,7 @@ echo "- run directory derivation: $run_dir"
 echo "- access flags: ${flags_output//$'\n'/ }"
 echo "- status parser samples: Green/Yellow/Red/Unknown ok"
 echo "- explicit staging helper: present"
+echo "- nested batch guard: present"
 echo "- codex exec invoked: no"
 echo "- app source mutation: no"
 echo "- commit: no"

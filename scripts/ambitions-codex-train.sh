@@ -22,6 +22,7 @@ ACCESS_MODE="${ACCESS_MODE:-full}"
 AUTO_BRANCH="${AUTO_BRANCH:-1}"
 AUTO_COMMIT="${AUTO_COMMIT:-1}"
 AUTO_PUSH="${AUTO_PUSH:-0}"
+ALLOW_NESTED_BATCH="${ALLOW_NESTED_BATCH:-0}"
 ALLOW_RUNNER_BRANCH_EXCEPTION="${ALLOW_RUNNER_BRANCH_EXCEPTION:-0}"
 ALLOW_DIRTY="${ALLOW_DIRTY:-0}"
 MAX_REPAIR_PASSES="${MAX_REPAIR_PASSES:-1}"
@@ -48,6 +49,7 @@ Environment defaults:
   AUTO_BRANCH=1
   AUTO_COMMIT=1
   AUTO_PUSH=0
+  ALLOW_NESTED_BATCH=0
   ALLOW_RUNNER_BRANCH_EXCEPTION=0
   ALLOW_DIRTY=0
   MAX_REPAIR_PASSES=1
@@ -80,6 +82,10 @@ fi
 BATCH_ID="$1"
 PROMPT_ARG="$2"
 ORIGINAL_CWD="$(pwd -P)"
+
+if [[ "${AMBITIONS_RUNNER_ACTIVE:-0}" == "1" && "$ALLOW_NESTED_BATCH" != "1" ]]; then
+  die "nested Ambitions batch runner invocation blocked during ${AMBITIONS_RUNNER_PHASE:-unknown} for parent ${AMBITIONS_RUNNER_PARENT_BATCH:-unknown}; rerun the child batch from the top-level operator loop or set ALLOW_NESTED_BATCH=1 only for an explicitly approved bounded exception"
+fi
 
 command -v git >/dev/null 2>&1 || die "git is unavailable"
 command -v codex >/dev/null 2>&1 || die "codex CLI is unavailable"
@@ -170,6 +176,7 @@ ACCESS_MODE=$ACCESS_MODE
 AUTO_BRANCH=$AUTO_BRANCH
 AUTO_COMMIT=$AUTO_COMMIT
 AUTO_PUSH=$AUTO_PUSH
+ALLOW_NESTED_BATCH=$ALLOW_NESTED_BATCH
 ALLOW_DIRTY=$ALLOW_DIRTY
 ALLOW_RUNNER_BRANCH_EXCEPTION=$ALLOW_RUNNER_BRANCH_EXCEPTION
 MAX_REPAIR_PASSES=$MAX_REPAIR_PASSES
@@ -441,6 +448,10 @@ run_codex_phase() {
   save_git_snapshot "${phase}.before"
 
   set +e
+  AMBITIONS_RUNNER_ACTIVE=1 \
+  AMBITIONS_RUNNER_PHASE="$phase" \
+  AMBITIONS_RUNNER_PARENT_BATCH="$BATCH_ID" \
+  AMBITIONS_RUNNER_PARENT_RUN_DIR="$RUN_DIR" \
   codex exec \
     --model "$model" \
     "${flags[@]}" \
