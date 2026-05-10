@@ -8,15 +8,23 @@ VERBOSE="${VERBOSE:-0}"
 
 has_runner_metadata() {
   local file="$1"
-  grep -q 'AMBITIONS_RUNNER_REQUIRED: true' "$file" \
-    && grep -q 'RUN_WITH: scripts/ambitions-codex-train.sh' "$file" \
-    && grep -q 'DIRECT_CODEX_EXECUTION:' "$file"
+  grep -Eq '^[[:space:]]*<!--[[:space:]]*AMBITIONS_RUNNER_REQUIRED:[[:space:]]*true[[:space:]]*-->' "$file" \
+    && grep -Eq '^[[:space:]]*<!--[[:space:]]*RUN_WITH:[[:space:]]*scripts/ambitions-codex-train\.sh[[:space:]]*-->' "$file" \
+    && grep -Eq '^[[:space:]]*<!--[[:space:]]*DIRECT_CODEX_EXECUTION:[[:space:]]*forbidden_unless_user_explicitly_bypasses_runner[[:space:]]*-->' "$file"
+}
+
+looks_like_batch_prompt() {
+  local file="$1"
+  grep -Eq '^#[[:space:]]*Batch ID|^##[[:space:]]*Batch ID|make batch BATCH=' "$file"
 }
 
 is_historical_path() {
   local file="$1"
-  case "$file" in
-    *"/archive/"*|*"/archives/"*|*"/archived/"*|*"/historical/"*|*"HISTORICAL"*|*"history"*)
+  local lower_path
+  lower_path="$(printf '%s' "$file" | tr '[:upper:]' '[:lower:]')"
+
+  case "$lower_path" in
+    *"/archive/"*|*"/archives/"*|*"/archived/"*|*"/historical/"*|*"/history/"*|*"/archive.md"*)
       return 0
       ;;
     *)
@@ -54,21 +62,25 @@ looks_runnable() {
 
   case "$file" in
     docs/codex/*)
-      grep -Eq 'AMBITIONS_RUNNER_REQUIRED|RUN_WITH:[[:space:]]*scripts/ambitions-codex-train.sh|DIRECT_CODEX_EXECUTION:' "$file"
+      has_runner_metadata "$file" && looks_like_batch_prompt "$file"
       return
       ;;
   esac
 
   case "$file" in
     prompts/batches/*.md)
-      return 0
+      has_runner_metadata "$file" && looks_like_batch_prompt "$file"
       ;;
+    *)
+      if is_template_path "$file" || is_eval_path "$file" || is_historical_path "$file"; then
+        return 1
+      fi
+
+      has_runner_metadata "$file" && looks_like_batch_prompt "$file"
+      return
   esac
 
-  grep -Eq 'AMBITIONS_RUNNER_REQUIRED|RUN_WITH:[[:space:]]*scripts/ambitions-codex-train.sh|DIRECT_CODEX_EXECUTION:' "$file" \
-    && return 0
-
-  grep -Eq '^#[[:space:]]*Batch ID|^##[[:space:]]*Batch ID|make batch BATCH=|scripts/ambitions-codex-train\.sh [A-Za-z0-9._-]+ ' "$file"
+  return
 }
 
 classification_for() {

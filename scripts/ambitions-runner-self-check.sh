@@ -5,6 +5,8 @@ ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 cd "$ROOT"
 
 RUNNER="scripts/ambitions-codex-train.sh"
+RUNNER_HEADER="prompts/_RUNNER_REQUIRED_HEADER.md"
+BATCH_TEMPLATE="prompts/_BATCH_TEMPLATE.md"
 
 die() {
   echo "RED: $*" >&2
@@ -34,10 +36,28 @@ grep -q 'AUTO_PUSH="${AUTO_PUSH:-0}"' "$RUNNER" \
   || die "runner AUTO_PUSH default is not 0"
 grep -q 'ALLOW_RUNNER_BRANCH_EXCEPTION="${ALLOW_RUNNER_BRANCH_EXCEPTION:-0}"' "$RUNNER" \
   || die "runner branch exception default is not explicit"
+grep -q 'AUTO_BRANCH="${AUTO_BRANCH:-1}"' "$RUNNER" \
+  || die "runner AUTO_BRANCH default is not explicit"
 grep -q 'stage_changed_files()' "$RUNNER" \
   || die "runner staging helper missing"
 grep -q 'done < <(changed_files)' "$RUNNER" \
   || die "runner does not compute an explicit stage set"
+grep -Eq '^[[:space:]]*<!--[[:space:]]*AMBITIONS_RUNNER_REQUIRED:[[:space:]]*true[[:space:]]*-->' "$RUNNER_HEADER" \
+  || die "runner header missing required AMBITIONS marker"
+grep -Eq '^[[:space:]]*<!--[[:space:]]*RUN_WITH:[[:space:]]*scripts/ambitions-codex-train\.sh[[:space:]]*-->' "$RUNNER_HEADER" \
+  || die "runner header missing required RUN_WITH marker"
+grep -Eq '^[[:space:]]*<!--[[:space:]]*DIRECT_CODEX_EXECUTION:[[:space:]]*forbidden_unless_user_explicitly_bypasses_runner[[:space:]]*-->' "$RUNNER_HEADER" \
+  || die "runner header missing required DIRECT_CODEX_EXECUTION marker"
+grep -Eq '^[[:space:]]*<!--[[:space:]]*AMBITIONS_RUNNER_REQUIRED:[[:space:]]*true[[:space:]]*-->' "$BATCH_TEMPLATE" \
+  || die "batch template missing required AMBITIONS marker"
+grep -Eq '^[[:space:]]*<!--[[:space:]]*RUN_WITH:[[:space:]]*scripts/ambitions-codex-train\.sh[[:space:]]*-->' "$BATCH_TEMPLATE" \
+  || die "batch template missing required RUN_WITH marker"
+grep -Eq '^[[:space:]]*<!--[[:space:]]*DIRECT_CODEX_EXECUTION:[[:space:]]*forbidden_unless_user_explicitly_bypasses_runner[[:space:]]*-->' "$BATCH_TEMPLATE" \
+  || die "batch template missing required DIRECT_CODEX_EXECUTION marker"
+grep -Fq 'Today / Goals / Capture / Time / You' "$BATCH_TEMPLATE" \
+  || die "batch template IA is not the canonical top-level active IA"
+grep -Fq 'Today / Goals / Capture / Time / You' docs/codex/ambitions-hybrid-runner.md \
+  || die "hybrid runner docs do not match canonical top-level IA"
 
 if grep -Eq '^[[:space:]]*git add (-A|\.)([[:space:]]|$)|^[[:space:]]*git commit -a([[:space:]]|$)' "$RUNNER"; then
   die "runner still contains broad staging or commit shortcuts"
@@ -45,13 +65,13 @@ fi
 
 flags_output="$(ACCESS_MODE=full bash -c '
   case "${ACCESS_MODE:-full}" in
-    full) printf "%s\n" --sandbox danger-full-access --ask-for-approval never ;;
-    workspace) printf "%s\n" --sandbox workspace-write --ask-for-approval never ;;
+    full) printf "%s\n" --sandbox danger-full-access ;;
+    workspace) printf "%s\n" --sandbox workspace-write ;;
     bypass) printf "%s\n" --dangerously-bypass-approvals-and-sandbox ;;
     *) exit 9 ;;
   esac
 ')"
-[[ "$flags_output" == $'--sandbox\ndanger-full-access\n--ask-for-approval\nnever' ]] \
+[[ "$flags_output" == $'--sandbox\ndanger-full-access' ]] \
   || die "full access flag construction failed"
 
 [[ "$(check_status_parser_sample 'STATUS: GREEN')" == "GREEN" ]] \

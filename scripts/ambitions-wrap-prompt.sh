@@ -16,6 +16,13 @@ die() {
   exit 1
 }
 
+has_runner_metadata() {
+  local file="$1"
+  grep -Eq '^[[:space:]]*<!--[[:space:]]*AMBITIONS_RUNNER_REQUIRED:[[:space:]]*true[[:space:]]*-->' "$file" \
+    && grep -Eq '^[[:space:]]*<!--[[:space:]]*RUN_WITH:[[:space:]]*scripts/ambitions-codex-train\.sh[[:space:]]*-->' "$file" \
+    && grep -Eq '^[[:space:]]*<!--[[:space:]]*DIRECT_CODEX_EXECUTION:[[:space:]]*forbidden_unless_user_explicitly_bypasses_runner[[:space:]]*-->' "$file"
+}
+
 [[ "${1:-}" != "-h" && "${1:-}" != "--help" ]] || {
   usage
   exit 0
@@ -37,6 +44,7 @@ HEADER="prompts/_RUNNER_REQUIRED_HEADER.md"
 mkdir -p "$(dirname "$OUTPUT")"
 
 if grep -q 'AMBITIONS_RUNNER_REQUIRED' "$INPUT"; then
+  has_runner_metadata "$INPUT" || die "input contains incomplete runner metadata; use $HEADER at minimum"
   cp "$INPUT" "$OUTPUT"
 else
   {

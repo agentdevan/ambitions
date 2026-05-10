@@ -3,8 +3,8 @@ set -Eeuo pipefail
 
 # Ambitions hybrid Codex batch runner.
 #
-# Default access uses explicit full-access/no-approval flags:
-#   --sandbox danger-full-access --ask-for-approval never
+# Default access uses explicit full-access sandbox flags:
+#   --sandbox danger-full-access
 #
 # If an older installed Codex CLI rejects those flags, set ACCESS_MODE=bypass
 # to use:
@@ -210,10 +210,10 @@ EOF
 access_flags() {
   case "$ACCESS_MODE" in
     full)
-      printf '%s\n' --sandbox danger-full-access --ask-for-approval never
+      printf '%s\n' --sandbox danger-full-access
       ;;
     workspace)
-      printf '%s\n' --sandbox workspace-write --ask-for-approval never
+      printf '%s\n' --sandbox workspace-write
       ;;
     bypass)
       printf '%s\n' --dangerously-bypass-approvals-and-sandbox

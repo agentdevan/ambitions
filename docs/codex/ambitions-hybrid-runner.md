@@ -6,11 +6,17 @@ Status: Active workflow note
 Authority: Subordinate to `docs/truth/*` and `AGENTS.md`
 
 Future ChatGPT-generated prompts should be saved to a file first. Wrap raw
-prompts with:
+prompts with required metadata using:
 
 ```bash
 scripts/ambitions-wrap-prompt.sh <BATCH_ID> <raw-prompt.md>
 ```
+
+The required wrapper header is defined in `prompts/_RUNNER_REQUIRED_HEADER.md` and
+must include all three fields:
+
+`AMBITIONS_RUNNER_REQUIRED`, `RUN_WITH: scripts/ambitions-codex-train.sh`, and
+`DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner`.
 
 Create a future prompt by copying `prompts/_BATCH_TEMPLATE.md` and filling in
 the batch ID, objective, allowed scope, forbidden scope, validation, visual
@@ -37,6 +43,10 @@ make batch-self-check
 The runner is `scripts/ambitions-codex-train.sh`. It performs model phasing:
 GPT-5.5 plans, GPT-5.3-Codex-Spark applies only the bounded patch, and GPT-5.5
 reviews, repairs, validates, and decides final commit eligibility.
+
+Local CLI compatibility note: the current Codex CLI supports full-access runner
+execution with `--sandbox danger-full-access`. It does not require an
+`--ask-for-approval` flag for this local runner path.
 
 Direct pasted Codex implementation is forbidden unless the user explicitly says
 "bypass the Ambitions runner."
