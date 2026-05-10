@@ -43,6 +43,11 @@ This patch implemented the bounded Phase 02 output set for `QUEUE-INTEL-CODEXOS-
 - `scripts/batch-train-gate-check.sh || true` completed with expected `YELLOW_HINT` for the current uncommitted worktree.
 - `make prompt-audit || true` completed with `YELLOW`: active runnable prompts audited, support/eval/template files classified.
 - `make batch-self-check || true` passed `GREEN`.
+- Final-gate repair validation passed `git diff --check`,
+  `python3 -m json.tool docs/codex/AMB_REMAINING_BATCH_REFERENCE.json >/dev/null`,
+  and JSON integrity checks again after the active-batch mirror repair.
+- After the final repair commit, `scripts/batch-train-gate-check.sh || true`
+  reported only untracked `.codex/runs/` runner evidence as a `YELLOW_HINT`.
 - Run-state and status mirrors were cross-checked against:
   - `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`
   - `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md`
