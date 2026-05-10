@@ -1,9 +1,14 @@
+> Historical note: This file is retained for traceability only.
+> It is not active product, implementation, release, or Codex process authority.
+> Current authority begins in `docs/truth/`; see `docs/status/cleanup-decision-register.md`.
+
 # Ambitions 3.0 As Current Baseline Policy
 
-Status: Active Ambitions 3.0 repository baseline canon
+Status: Historical retained policy; superseded as active authority by `docs/truth/*`
 Parent doc: [Ambitions 3.0 Source Of Truth Override](./Ambitions_3_0_Source_Of_Truth_Override.md)
 Companion docs: [Human-Made Codebase Standard](./Ambitions_3_0_Human_Made_Codebase_Standard.md), [Active History Archive Policy](./Ambitions_3_0_Active_History_Archive_Policy.md)
 Created: 2026-05-01
+T05 classification: Historical
 
 ---
 
