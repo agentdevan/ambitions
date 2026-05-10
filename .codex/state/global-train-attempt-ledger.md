@@ -7,16 +7,16 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 
 ## Current Active Attempt
 - parent batch: RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION
-- selected child batch: PK15
-- child prompt: prompts/batches/PK15.md
-- child run dir: .codex/runs/PK15/20260510T151222Z
+- selected child batch: PK16
+- child prompt: prompts/batches/PK16.md
+- child run dir: .codex/runs/PK16/20260510T175745Z
 - child attempt number: 1
-- status: accepted-yellow
-- started: 2026-05-10T15:12:22Z
-- completed: 2026-05-10T17:35:20Z
+- status: green
+- started: 2026-05-10T17:57:45Z
+- completed: 2026-05-10T18:28:20Z
 - next action: `make global-train-until-complete`
 - retry allowed: false
-- reason: PK15 stopped Yellow after Spark with bounded uncommitted persistence/test work; continuation must inspect and finalize the existing diff instead of rerunning PK15 or the global conductor.
+- reason: PK16 completed after GPT-5.5 review repaired the proof-reference presence filter and focused trust-history repository validation passed.
 
 ## State Rules
 - A batch cannot be launched if the ledger already has the same batch active with status `running`, `unknown-unresolved`, `yellow-unresolved`, `red-unresolved`, `repair-required`, `finalization-required`, or `blocked`.
@@ -36,3 +36,4 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 | 2026-05-10T14:58:52Z | RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION | PK15 | 2 | red-unresolved | .codex/runs/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION/20260510T145852Z/ | Parent conductor loop guard stopped nested PK15 churn; do not launch another nested child attempt. |
 | 2026-05-10T15:12:22Z | top-level-runner | PK15 | 1 | finalization-required | .codex/runs/PK15/20260510T151222Z/final-summary.md | Run PK15-FINALIZE-01 to inspect existing diff/artifacts; do not rerun Spark. |
 | 2026-05-10T17:35:20Z | top-level-runner | PK15 | 1 | accepted-yellow | docs/audits/pk15-receipt-backend-report.md | PK15 focused receipt tests passed; one pre-existing external-surface expectation mismatch remains in `ExternalSurfaceVerificationChecklistTests` and is owned by QA / External Surface for follow-up. |
+| 2026-05-10T18:28:20Z | top-level-runner | PK16 | 1 | green | docs/audits/pk16-trust-history-query-report.md | PK16 focused trust-history query tests passed; PK17 is next eligible. |

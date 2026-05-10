@@ -2,10 +2,23 @@
 
 Date: 2026-05-10
 Active train: Global full-stack execution
-Current batch: PK15 Receipt Backend / Accepted Yellow.
-Next recommended implementation pass: PK16 Trust History Query.
-Next eligible non-UI platform batch: PK16 Trust History Query.
-Scope: PK15 adds local Action Receipt persistence and query contracts with focused repository coverage; it does not implement release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+Current batch: PK16 Trust History Query / Green.
+Next recommended implementation pass: PK17 Today Read Model Extraction.
+Next eligible non-UI platform batch: PK17 Today Read Model Extraction.
+Scope: PK16 adds a local read-only trust-history query path over existing Action Receipt history and Event Ledger truth with focused repository coverage; it does not implement UI, release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+
+## PK16 Trust History Query Closeout
+
+- PK16 report: `docs/audits/pk16-trust-history-query-report.md`.
+- Focused proof: `xcodegen generate` passed; focused `TrustHistoryQueryRepositoryTests` passed with 3 tests, 0 failures.
+- PK16 focused source/test scope:
+  - `Native/Ambitions/Persistence/PersistenceContracts.swift`
+  - `Native/Ambitions/Persistence/SwiftDataRepositories.swift`
+  - `Native/AmbitionsTests/Persistence/TrustHistoryQueryRepositoryTests.swift`.
+- GPT-5.5 review repaired the event `requiresProofReferences` filter and added focused proof for proof-reference presence.
+- EFC/AIR applicability: EFC01, EFC11, EFC12, AIR04, AIR10, AIR18, and AIR33 invoked through local proof/trust-history query metadata; EFC05 and EFC13 not applicable because recommendation trust evidence and cadence/signal history were not touched.
+- Canonical queue now marks PK16 Green and PK17 executable now.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK14 Durable Command/Event Ledger Closeout
 
@@ -51,7 +64,7 @@ Scope: PK13 adds a storage-local portable restore rollback wrapper that prefligh
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is complete / accepted Yellow.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is complete / accepted Yellow. PK16 Trust History Query is complete / Green.
 
 ## PK13 Restore Rollback Closeout
 

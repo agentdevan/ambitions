@@ -1326,6 +1326,128 @@ actor InMemoryAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecuti
     }
 }
 
+struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
+    let store: AmbitionsPersistenceStore
+
+    func fetch(_ query: TrustHistoryQuery) async throws -> TrustHistoryQueryProjection {
+        try await store.read { context in
+            var items: [TrustHistoryQueryResult] = []
+
+            if query.includeReceiptHistory {
+                let receiptItems = try context
+                    .fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>())
+                    .compactMap { persistedRecord in
+                        try? RepositoryMapping.actionReceiptHistoryRecord(from: persistedRecord)
+                    }
+                    .filter { self.matches($0, query: query) }
+                    .map(self.makeResult(from:))
+                items.append(contentsOf: receiptItems)
+            }
+
+            if query.includeEventLedger {
+                let eventItems = try context
+                    .fetch(FetchDescriptor<EventLedgerRecord>())
+                    .compactMap { persistedRecord in
+                        try? RepositoryMapping.eventLedgerEntry(from: persistedRecord)
+                    }
+                    .filter { self.matches($0, query: query) }
+                    .map(self.makeResult(from:))
+                items.append(contentsOf: eventItems)
+            }
+
+            let sorted = items
+                .sorted {
+                    if $0.occurredAt != $1.occurredAt { return $0.occurredAt > $1.occurredAt }
+                    if $0.kind != $1.kind {
+                        return $0.kind == .actionReceipt && $1.kind == .eventLedger
+                    }
+                    return $0.id < $1.id
+                }
+
+            let bounded = max(0, query.limit ?? sorted.count)
+            let results = Array(sorted.prefix(min(bounded, sorted.count)))
+            let localOnly = results.allSatisfy { $0.localOnly }
+
+            return TrustHistoryQueryProjection(
+                query: query,
+                results: results,
+                totalMatchCount: sorted.count,
+                emptyTitle: "Nothing matched",
+                emptyDetail: "Try a different query or relax review and proof filters.",
+                localOnly: localOnly
+            )
+        }
+    }
+
+    private func makeResult(from record: ActionReceiptHistoryRecord) -> TrustHistoryQueryResult {
+        TrustHistoryQueryResult(
+            id: "receipt.\(record.receipt.id)",
+            kind: .actionReceipt,
+            source: record.receipt.sourceDomain.rawValue,
+            occurredAt: record.receipt.occurredAt,
+            privacy: record.privacyLevel.rawValue,
+            proofRelevance: record.proofRelevance,
+            trustStatus: record.trustStatus,
+            requiresReview: nil,
+            userConfirmed: nil,
+            proofReferenceKinds: [],
+            localOnly: record.localOnly,
+            title: record.receipt.title,
+            summary: record.receipt.summary
+        )
+    }
+
+    private func makeResult(from event: EventLedgerEntry) -> TrustHistoryQueryResult {
+        TrustHistoryQueryResult(
+            id: "event.\(event.id)",
+            kind: .eventLedger,
+            source: event.source.rawValue,
+            occurredAt: event.occurredAt,
+            privacy: event.privacy.rawValue,
+            proofRelevance: nil,
+            trustStatus: nil,
+            requiresReview: event.trust.requiresReview,
+            userConfirmed: event.trust.isUserConfirmed,
+            proofReferenceKinds: event.evidenceReferences
+                .map { $0.kind }
+                .sorted { lhs, rhs in
+                    lhs.rawValue < rhs.rawValue
+                },
+            localOnly: event.localOnly,
+            title: event.title,
+            summary: event.summary ?? ""
+        )
+    }
+
+    private func matches(_ record: ActionReceiptHistoryRecord, query: TrustHistoryQuery) -> Bool {
+        if query.includeReceiptHistory == false { return false }
+        if let startDate = query.startDate, record.receipt.occurredAt < startDate { return false }
+        if let endDate = query.endDate, record.receipt.occurredAt > endDate { return false }
+        if query.receiptSourceDomains.isEmpty == false && query.receiptSourceDomains.contains(record.receipt.sourceDomain) == false { return false }
+        if query.receiptPrivacyLevels.isEmpty == false && query.receiptPrivacyLevels.contains(record.privacyLevel) == false { return false }
+        if query.receiptProofRelevance.isEmpty == false && query.receiptProofRelevance.contains(record.proofRelevance) == false { return false }
+        if query.receiptTrustStatuses.isEmpty == false && query.receiptTrustStatuses.contains(record.trustStatus) == false { return false }
+        return true
+    }
+
+    private func matches(_ event: EventLedgerEntry, query: TrustHistoryQuery) -> Bool {
+        if query.includeEventLedger == false { return false }
+        if let startDate = query.startDate, event.occurredAt < startDate { return false }
+        if let endDate = query.endDate, event.occurredAt > endDate { return false }
+        if query.eventSources.isEmpty == false && query.eventSources.contains(event.source) == false { return false }
+        if query.eventPrivacyLevels.isEmpty == false && query.eventPrivacyLevels.contains(event.privacy) == false { return false }
+        if let requiresReview = query.requiresReview, event.trust.requiresReview != requiresReview { return false }
+        if let userConfirmed = query.userConfirmed, event.trust.isUserConfirmed != userConfirmed { return false }
+        if let requiresProofReferences = query.requiresProofReferences {
+            if event.evidenceReferences.isEmpty == requiresProofReferences { return false }
+        }
+        if query.proofReferenceKinds.isEmpty == false {
+            if event.evidenceReferences.map({ $0.kind }).contains(where: { query.proofReferenceKinds.contains($0) }) == false { return false }
+        }
+        return true
+    }
+}
+
 struct SwiftDataEventLedgerRepository: EventLedgerRepository {
     let store: AmbitionsPersistenceStore
 

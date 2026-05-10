@@ -306,6 +306,96 @@ protocol ActionReceiptHistoryRepository: Sendable {
     func fetch(_ query: ActionReceiptSearchQuery) async throws -> ActionReceiptSearchProjection
 }
 
+enum TrustHistoryQueryItemKind: String, Sendable, Codable, Equatable {
+    case actionReceipt = "action_receipt"
+    case eventLedger = "event_ledger"
+}
+
+struct TrustHistoryQuery: Sendable, Equatable {
+    let startDate: String?
+    let endDate: String?
+    let receiptSourceDomains: Set<ActionReceiptSourceDomain>
+    let receiptPrivacyLevels: Set<ActionReceiptPrivacyLevel>
+    let receiptProofRelevance: Set<ActionReceiptProofRelevance>
+    let receiptTrustStatuses: Set<ActionReceiptTrustStatus>
+    let eventSources: Set<EventLedgerSource>
+    let eventPrivacyLevels: Set<EventLedgerPrivacyClassification>
+    let requiresReview: Bool?
+    let userConfirmed: Bool?
+    let proofReferenceKinds: Set<EventLedgerEvidenceKind>
+    let requiresProofReferences: Bool?
+    let includeReceiptHistory: Bool
+    let includeEventLedger: Bool
+    let limit: Int?
+
+    init(
+        startDate: String? = nil,
+        endDate: String? = nil,
+        receiptSourceDomains: Set<ActionReceiptSourceDomain> = [],
+        receiptPrivacyLevels: Set<ActionReceiptPrivacyLevel> = [],
+        receiptProofRelevance: Set<ActionReceiptProofRelevance> = [],
+        receiptTrustStatuses: Set<ActionReceiptTrustStatus> = [],
+        eventSources: Set<EventLedgerSource> = [],
+        eventPrivacyLevels: Set<EventLedgerPrivacyClassification> = [],
+        requiresReview: Bool? = nil,
+        userConfirmed: Bool? = nil,
+        proofReferenceKinds: Set<EventLedgerEvidenceKind> = [],
+        requiresProofReferences: Bool? = nil,
+        includeReceiptHistory: Bool = true,
+        includeEventLedger: Bool = true,
+        limit: Int? = nil
+    ) {
+        self.startDate = startDate?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.endDate = endDate?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.receiptSourceDomains = receiptSourceDomains
+        self.receiptPrivacyLevels = receiptPrivacyLevels
+        self.receiptProofRelevance = receiptProofRelevance
+        self.receiptTrustStatuses = receiptTrustStatuses
+        self.eventSources = eventSources
+        self.eventPrivacyLevels = eventPrivacyLevels
+        self.requiresReview = requiresReview
+        self.userConfirmed = userConfirmed
+        self.proofReferenceKinds = proofReferenceKinds
+        self.requiresProofReferences = requiresProofReferences
+        self.includeReceiptHistory = includeReceiptHistory
+        self.includeEventLedger = includeEventLedger
+        self.limit = limit
+    }
+}
+
+struct TrustHistoryQueryResult: Sendable, Equatable, Identifiable {
+    let id: String
+    let kind: TrustHistoryQueryItemKind
+    let source: String
+    let occurredAt: String
+    let privacy: String
+    let proofRelevance: ActionReceiptProofRelevance?
+    let trustStatus: ActionReceiptTrustStatus?
+    let requiresReview: Bool?
+    let userConfirmed: Bool?
+    let proofReferenceKinds: [EventLedgerEvidenceKind]
+    let localOnly: Bool
+    let title: String
+    let summary: String
+}
+
+struct TrustHistoryQueryProjection: Sendable, Equatable {
+    let query: TrustHistoryQuery
+    let results: [TrustHistoryQueryResult]
+    let totalMatchCount: Int
+    let emptyTitle: String
+    let emptyDetail: String
+    let localOnly: Bool
+
+    var isEmpty: Bool {
+        results.isEmpty
+    }
+}
+
+protocol TrustHistoryQueryRepository: Sendable {
+    func fetch(_ query: TrustHistoryQuery) async throws -> TrustHistoryQueryProjection
+}
+
 protocol CaptureRepository: Sendable {
     func listCaptures() async throws -> [Capture]
     func capture(id: String) async throws -> Capture?
