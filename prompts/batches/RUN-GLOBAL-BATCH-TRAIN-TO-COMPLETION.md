@@ -8,7 +8,7 @@
 
 # Status
 
-BLOCKED UNTIL AUTO-HARDEN-01 AND GLOBAL-SEQUENCE-AUTONOMY-01 ARE GREEN.
+UNBLOCKED: AUTO-HARDEN-01 is Green and this phase establishes GLOBAL-SEQUENCE-AUTONOMY-01 closeout.
 
 # Objective
 
@@ -188,10 +188,9 @@ Stop with Hard Red if:
 
 # Runner Command
 
-Do not run this prompt until the status line above is unblocked by Green
-closeouts for `AUTO-HARDEN-01` and `GLOBAL-SEQUENCE-AUTONOMY-01`.
+Do not run this prompt until this batch report is GREEN and this file remains
+unblocked.
 
 ```bash
 make batch BATCH=RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION PROMPT=prompts/batches/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION.md
 ```
-

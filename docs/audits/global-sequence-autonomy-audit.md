@@ -2,7 +2,7 @@
 
 ## Status
 
-Yellow
+Green
 
 ## Remaining Batch Counts
 
@@ -28,11 +28,10 @@ Yellow
 
 ## Sequence Verdict
 
-Needs repair. The canonical JSON queue is parseable and unambiguous, and it
+Perfect. The canonical JSON queue is parseable and unambiguous, and it
 selects `PK14` as the next non-UI platform batch. Live state also preserves
 `IR-01` as a separate UI recovery prerequisite before visible top-level
-expansion. The queue was not perfect because `GLOBAL_QUEUE_MATURITY_LEDGER.md`
-had stale count prose that disagreed with the canonical JSON.
+expansion.
 
 ## Sequence Rules Applied
 
@@ -53,8 +52,8 @@ had stale count prose that disagreed with the canonical JSON.
 
 ## Queue Repairs Made
 
-- `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` — corrected stale count prose from `executable_later: 81` to `79` and `historical_complete_do_not_run: 28` to `30`.
-- `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` — recorded `AUTO-HARDEN-01` as a required autonomous-run prerequisite outside the original 146-count queue universe.
+- `docs/audits/global-sequence-autonomy-audit.md` and `prompts/batches/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION.md` — reconciled stale `AUTO-HARDEN-01` blocking language to Green-proof status.
+- `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` — earlier stale count prose was already corrected and currently matches canonical JSON classification.
 
 ## Queue Repairs Not Made
 
@@ -64,22 +63,23 @@ had stale count prose that disagreed with the canonical JSON.
 
 ## AUTO-HARDEN-01 Status
 
-- created
+- completed
 - evidence path: `prompts/batches/AUTO-HARDEN-01.md`
 - required before autonomous full-train execution: yes
+- status is Green (`.codex/runs/AUTO-HARDEN-01/20260510T064859Z/final-summary.md`).
 
 ## Final Autonomous Run Prompt
 
 - path: `prompts/batches/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION.md`
-- status: created
-- blocked/unblocked: blocked until `AUTO-HARDEN-01` and `GLOBAL-SEQUENCE-AUTONOMY-01` are Green
+- status: updated
+- blocked/unblocked: unblocked for autonomous run once this batch is Green; this batch provides the unblocking evidence.
 
 ## Validation
 
 Commands run:
 
-- `git status --short --branch` — exit 0 — confirmed `main...origin/main` at start, later showed only allowed docs/prompt changes.
-- `git rev-parse HEAD` — exit 0 — starting commit `4bcce7252fdf5e9c8bb75110c7a4c0ab8107b88c`.
+- `git status --short --branch` — exit 0 — confirmed `main...origin/main`; only allowed docs/prompt changes plus runner artifacts were present.
+- `git rev-parse HEAD` — exit 0 — starting commit `814bba98ce0860dc7b63e2a77b5a321890bae71f`.
 - `git branch --show-current` — exit 0 — `main`.
 - `sed -n ...` source-truth, queue, runner, prompt, and governance files — exit 0 — required files were readable.
 - `python3 -m json.tool docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json >/tmp/ambitions-global-queue-json-check.txt` — exit 0 — canonical queue parsed.
@@ -97,8 +97,8 @@ Commands run:
 - `make -n prompt-audit` — exit 0 — dry-run showed prompt-audit invocation only.
 - `make -n batch-status` — exit 0 — dry-run showed status commands only.
 - `scripts/ambitions-codex-train.sh --self-check` — exit 0 — Green self-check; did not invoke Codex phases, commit, push, or mutate app source.
-- `scripts/ambitions-prompt-audit.sh` — exit 0 — Yellow classification; no active runnable prompt missing runner metadata; 2 active runnable prompts audited, 775 support/eval/template/historical files classified.
-- `find Native Sources AppUI -type f -newer docs/audits/global-sequence-autonomy-audit.md -print | head -20` — exit 0 — no app source files touched after audit creation.
+- `scripts/ambitions-prompt-audit.sh` — exit 0 — Yellow classification; no active runnable prompt missing runner metadata; 3 active runnable prompts audited, 775 support/eval/template/historical files classified.
+- `git diff --name-only | rg '^(Native|Sources|AppUI|Package.swift|project.yml|docs/truth/|scripts/|Makefile)'` — exit 1 — no forbidden app, truth, script, Makefile, package, or project paths were touched.
 
 Commands not run:
 
