@@ -1,5 +1,7 @@
 # Ambitions
 
+> Active repo authority starts in [`docs/truth/README.md`](docs/truth/README.md). If this README conflicts with `docs/truth/*`, the truth files win. This README is orientation, not implementation proof, validation proof, or release proof.
+
 Ambitions is a native iPhone app for turning long-term goals into grounded daily execution.
 
 It helps you capture what is on your mind, place it into goals or time-shaping, choose what matters today, and close the loop with proof.
@@ -29,7 +31,7 @@ The active flagship product model has five top-level surfaces:
 - Time — capacity and shaping
 - You — preferences, trust, privacy, and control
 
-The active product and design source truth starts in [`docs/AmbitionsCanon/README.md`](docs/AmbitionsCanon/README.md).
+The active product and design truth starts in [`docs/truth/PRODUCT_DESIGN_TRUTH.md`](docs/truth/PRODUCT_DESIGN_TRUTH.md). Supporting canon lives under [`docs/AmbitionsCanon/README.md`](docs/AmbitionsCanon/README.md) where compatible with `docs/truth/*`.
 
 Compatibility note: some internal source paths, route raw values, tests, and historical docs still use `Plan` / `.plan` naming. Those are compatibility seams, not active user-facing IA. The active top-level destination is `Time`.
 
@@ -46,7 +48,7 @@ The repo currently contains:
 - local build and validation scripts
 - unit and UI test targets
 
-See [`docs/status/current-implementation-map.md`](docs/status/current-implementation-map.md) for the current evidence-based implementation map.
+See [`docs/truth/IMPLEMENTATION_TRUTH.md`](docs/truth/IMPLEMENTATION_TRUTH.md) for implementation authority and [`docs/status/current-implementation-map.md`](docs/status/current-implementation-map.md) for the current evidence-based implementation map.
 
 ## What is not claimed yet
 
@@ -63,7 +65,7 @@ This repo does not currently claim:
 - legal/privacy compliance signoff
 - human release approval
 
-See [`docs/status/release-evidence-packet.md`](docs/status/release-evidence-packet.md) for the current release evidence posture.
+See [`docs/truth/RELEASE_TRUTH.md`](docs/truth/RELEASE_TRUTH.md) for release/proof authority and [`docs/status/release-evidence-packet.md`](docs/status/release-evidence-packet.md) for the current release evidence posture.
 
 ## Run locally
 
@@ -117,8 +119,9 @@ Local simulator validation is useful engineering evidence. It is not signed arch
 - `AppUI/Sources/` — `AmbitionsWidgetUI` Swift package target
 - `project.yml` — XcodeGen source of truth
 - `scripts/` — local setup/build/validation helpers
-- `docs/AmbitionsCanon/` — active product and design canon
-- `docs/status/` — current implementation, cleanup, and release evidence status
+- `docs/truth/` — active repo authority for product/design, implementation/source, release/proof, Codex process, and historical policy
+- `docs/AmbitionsCanon/` — supporting product and design canon retained below `docs/truth/*`
+- `docs/status/` — supporting implementation, cleanup, and release evidence status
 - `docs/` — full documentation index, historical context, release docs, audits, and Codex operating material
 - `.codex/` and `.agents/` — AI/Codex operating material and retained automation context, not product source truth
 
@@ -126,16 +129,21 @@ Local simulator validation is useful engineering evidence. It is not signed arch
 
 Start here:
 
-1. [`docs/AmbitionsCanon/README.md`](docs/AmbitionsCanon/README.md) — active product/design source truth
-2. [`docs/status/current-implementation-map.md`](docs/status/current-implementation-map.md) — what is implemented, scaffolded, planned, or historical
-3. [`docs/status/repo-cleanup-index.md`](docs/status/repo-cleanup-index.md) — cleanup and quarantine policy
-4. [`docs/status/release-evidence-packet.md`](docs/status/release-evidence-packet.md) — build/test/release evidence posture
-5. [`docs/native-build-and-release.md`](docs/native-build-and-release.md) — local validation workflow
-6. [`AGENTS.md`](AGENTS.md) — AI/Codex contributor rules
-7. [`docs/README.md`](docs/README.md) — full docs map
+1. [`docs/truth/README.md`](docs/truth/README.md) — active authority index and conflict rules
+2. [`docs/truth/PRODUCT_DESIGN_TRUTH.md`](docs/truth/PRODUCT_DESIGN_TRUTH.md) — product/design authority
+3. [`docs/truth/IMPLEMENTATION_TRUTH.md`](docs/truth/IMPLEMENTATION_TRUTH.md) — implementation/source authority
+4. [`docs/truth/RELEASE_TRUTH.md`](docs/truth/RELEASE_TRUTH.md) — release/proof authority
+5. [`docs/truth/CODEX_PROCESS_TRUTH.md`](docs/truth/CODEX_PROCESS_TRUTH.md) — Codex operating authority
+6. [`docs/truth/HISTORICAL_POLICY.md`](docs/truth/HISTORICAL_POLICY.md) — historical cleanup policy
+7. [`docs/status/current-implementation-map.md`](docs/status/current-implementation-map.md) — what is implemented, scaffolded, planned, or historical
+8. [`docs/status/repo-cleanup-index.md`](docs/status/repo-cleanup-index.md) — cleanup and quarantine support index
+9. [`docs/status/release-evidence-packet.md`](docs/status/release-evidence-packet.md) — build/test/release evidence posture
+10. [`docs/native-build-and-release.md`](docs/native-build-and-release.md) — local validation workflow
+11. [`AGENTS.md`](AGENTS.md) — AI/Codex contributor rules, subordinate to `docs/truth/*`
+12. [`docs/README.md`](docs/README.md) — full docs map
 
 ## Contributor boundary
 
 Production app work belongs in `Native/Ambitions/`, `Sources/`, `AppUI/Sources/`, native extension folders, tests, scripts, or `project.yml` as appropriate.
 
-Historical docs, future-canon docs, batch-train records, audit reports, and Codex control-plane material are retained for traceability. They do not override the active canon or current implementation map unless an active source-truth document explicitly says so.
+Historical docs, future-canon docs, batch-train records, audit reports, and Codex control-plane material are retained for traceability. They do not override `docs/truth/*` unless an active truth file explicitly says so.
