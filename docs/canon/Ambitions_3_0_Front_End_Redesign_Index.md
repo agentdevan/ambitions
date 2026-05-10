@@ -1,3 +1,7 @@
+> T05b classification: Historical / supporting product-design context.
+> This file is not current product, implementation, release, or Codex process authority.
+> Current authority begins in `docs/truth/`; if any wording below says “Active,” read it as preserved Ambitions 3.0 context unless re-approved by `docs/truth/*`.
+
 # Ambitions 3.0 Front-End Redesign Index
 
 Status: Active Ambitions 3.0 parent canon  
