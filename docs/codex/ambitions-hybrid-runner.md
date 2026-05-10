@@ -63,6 +63,10 @@ The runner stages only explicit eligible changed paths, excludes
 `.codex/runs/**`, saves staged and unstaged path lists, and does not use broad
 staging shortcuts.
 
+If the final GPT-5.5 gate has already created an eligible commit and the
+worktree is clean outside `.codex/runs/**`, the runner records that `HEAD` commit
+as the batch commit instead of re-staging paths already committed by the gate.
+
 When `.codex/state/active-batch.yml` clearly forbids branch creation, the runner
 stops before creating a branch unless the owner explicitly sets
 `ALLOW_RUNNER_BRANCH_EXCEPTION=1` or disables runner branch creation with

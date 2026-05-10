@@ -248,6 +248,13 @@ changed_files() {
   } | awk 'NF' | sort -u
 }
 
+uncommitted_changed_files() {
+  {
+    git diff --name-only HEAD -- . ':(exclude).codex/runs/**' 2>/dev/null || true
+    git ls-files --others --exclude-standard -- . ':(exclude).codex/runs/**' 2>/dev/null || true
+  } | awk 'NF' | sort -u
+}
+
 latest_gate_file() {
   if [[ -s "$RUN_DIR/final/05-finalize.final.md" ]]; then
     printf '%s\n' "$RUN_DIR/final/05-finalize.final.md"
@@ -316,7 +323,7 @@ stage_changed_files() {
   local candidate
   while IFS= read -r candidate; do
     files_to_stage+=("$candidate")
-  done < <(changed_files)
+  done < <(uncommitted_changed_files)
 
   printf '%s\n' "${files_to_stage[@]}" >"$RUN_DIR/status/files-to-stage.txt"
   validate_stage_set "$gate_file" "${files_to_stage[@]}"
@@ -524,8 +531,14 @@ commit_if_eligible() {
   git diff HEAD --stat >"$RUN_DIR/diff/pre-commit.diffstat.txt" || true
   git diff HEAD >"$RUN_DIR/diff/pre-commit.patch" || true
 
-  if [[ -z "$(changed_files)" ]]; then
-    log "no changed files outside .codex/runs; skipping commit"
+  if [[ -z "$(uncommitted_changed_files)" ]]; then
+    if [[ "$(git rev-parse HEAD)" != "$START_SHA" ]]; then
+      COMMIT_SHA="$(git rev-parse HEAD)"
+      printf '%s\n' "$COMMIT_SHA" >"$RUN_DIR/status/commit-sha.txt"
+      log "final gate already created commit $COMMIT_SHA; skipping runner commit"
+    else
+      log "no changed files outside .codex/runs; skipping commit"
+    fi
     return 0
   fi
 

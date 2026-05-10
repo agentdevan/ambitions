@@ -40,8 +40,10 @@ grep -q 'AUTO_BRANCH="${AUTO_BRANCH:-1}"' "$RUNNER" \
   || die "runner AUTO_BRANCH default is not explicit"
 grep -q 'stage_changed_files()' "$RUNNER" \
   || die "runner staging helper missing"
-grep -q 'done < <(changed_files)' "$RUNNER" \
+grep -q 'done < <(uncommitted_changed_files)' "$RUNNER" \
   || die "runner does not compute an explicit stage set"
+grep -q 'final gate already created commit' "$RUNNER" \
+  || die "runner does not record phase-created commits"
 grep -Eq '^[[:space:]]*<!--[[:space:]]*AMBITIONS_RUNNER_REQUIRED:[[:space:]]*true[[:space:]]*-->' "$RUNNER_HEADER" \
   || die "runner header missing required AMBITIONS marker"
 grep -Eq '^[[:space:]]*<!--[[:space:]]*RUN_WITH:[[:space:]]*scripts/ambitions-codex-train\.sh[[:space:]]*-->' "$RUNNER_HEADER" \
