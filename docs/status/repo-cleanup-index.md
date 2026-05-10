@@ -27,11 +27,11 @@ These files are allowed to define the current repo posture:
 | File | Purpose |
 | --- | --- |
 | `README.md` | Public/developer landing page |
-| `docs/AmbitionsCanon/README.md` | Active product/design source truth |
+| `AGENTS.md` | AI/Codex operational guidance |
+| `docs/truth/PRODUCT_DESIGN_TRUTH.md` | Active product/design source truth |
 | `docs/status/current-implementation-map.md` | Evidence-based implementation status |
 | `docs/status/release-evidence-packet.md` | Release and validation evidence posture |
 | `docs/native-build-and-release.md` | Local validation procedure |
-| `AGENTS.md` | AI/Codex contributor rules |
 | `docs/README.md` | Full docs map |
 
 ## Quarantined but retained material

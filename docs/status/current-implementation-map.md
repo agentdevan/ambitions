@@ -8,11 +8,11 @@ This document separates what the repo currently contains from what is scaffolded
 
 For product and design intent, use:
 
-1. `docs/AmbitionsCanon/README.md`
-2. `docs/AmbitionsCanon/10_Ambitions_Flagship_Interface_Canon.md`
-3. `docs/AmbitionsCanon/01A_Product_Canon_Flagship_Amendment.md`
-4. `docs/AmbitionsCanon/01_Product_Canon.md` where not superseded by AFI / amendment source truth
-5. `docs/AmbitionsCanon/*` supporting canon files
+1. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+2. `docs/truth/README.md`
+3. `docs/README.md` for current documentation index
+4. `docs/AmbitionsCanon/*` only as supporting or historical canon where compatible
+5. `docs/AmbitionsCanon/README.md` only when explicitly referenced for archival/design context
 
 For current implementation evidence, use this document plus the live source tree.
 

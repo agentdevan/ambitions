@@ -21,7 +21,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     static var caseDisplayRepresentations: [AmbitionsAppShortcutDestination: DisplayRepresentation] {
         [
             .today: DisplayRepresentation(title: "Today"),
-            .plan: DisplayRepresentation(title: "Plan"),
+            .plan: DisplayRepresentation(title: "Time"),
             .captureInbox: DisplayRepresentation(title: "Capture"),
             .command: DisplayRepresentation(title: "Add something"),
             .memoryLens: DisplayRepresentation(title: "What Ambitions Knows"),
@@ -31,7 +31,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             .saveTheDay: DisplayRepresentation(title: "Make today doable"),
             .quickRecovery: DisplayRepresentation(title: "Make today doable"),
             .quickFocus: DisplayRepresentation(title: "Start now"),
-            .quickPlanPatch: DisplayRepresentation(title: "Adjust Plan"),
+            .quickPlanPatch: DisplayRepresentation(title: "Shape Time"),
         ]
     }
 
@@ -69,7 +69,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .today:
             return "Today"
         case .plan:
-            return "Plan"
+            return "Time"
         case .captureInbox:
             return "Capture"
         case .command:
@@ -89,7 +89,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .quickFocus:
             return "Start now"
         case .quickPlanPatch:
-            return "Adjust Plan"
+            return "Shape Time"
         }
     }
 
@@ -145,7 +145,7 @@ extension AmbitionsAppShortcutDestination {
         case .plan, .quickPlanPatch:
             return descriptor(
                 title: displayTitle,
-                dialog: "Opening Plan in Ambitions.",
+                dialog: "Opening Time in Ambitions.",
                 commandKind: .openDestination,
                 actionName: .open,
                 routeURL: routeURL
@@ -258,7 +258,7 @@ extension AmbitionsAppShortcutDestination {
 
 struct OpenAmbitionsDestinationIntent: AppIntent {
     static let title: LocalizedStringResource = "Open Ambitions"
-    static let description = IntentDescription("Open Today, Plan, Capture, or another Ambitions surface.")
+    static let description = IntentDescription("Open Today, Time, Capture, or another Ambitions surface.")
     static let openAppWhenRun = true
 
     @Parameter(title: "Destination")
@@ -358,7 +358,7 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             intent: OpenAmbitionsDestinationIntent(destination: .plan),
             phrases: [
                 "Open Time in \(.applicationName)",
-                "Show Plan in \(.applicationName)",
+                "Show Time in \(.applicationName)",
             ],
             shortTitle: "Open Time",
             systemImageName: "calendar.badge.clock"

@@ -25,7 +25,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         switch self {
         case .quickCapture: "Capture"
         case .newGoal: "New goal"
-        case .quickPlanPatch: "Patch plan"
+        case .quickPlanPatch: "Patch Time"
         case .quickRecovery: "Recover"
         case .quickFocus: "Focus"
         case .openGoal: "Open goal"
@@ -39,7 +39,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         switch self {
         case .quickCapture: "Save what needs a place with a suggested route and a receipt you can change."
         case .newGoal: "Open the existing create-goal flow inside the shell-owned compose path."
-        case .quickPlanPatch: "Land in Plan to reshape the current week."
+        case .quickPlanPatch: "Land in Time to reshape the current week."
         case .quickRecovery: "Return to Today with recovery posture in view."
         case .quickFocus: "Return to Today and center the next step."
         case .openGoal: "Find and open one goal in its canonical destination."
@@ -101,8 +101,8 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
                 intent: self,
                 commandKind: .openDestination,
                 destination: .tab(.plan),
-                sourceOfTruth: "Plan",
-                safetySummary: "Routes to Plan without writing calendar or reshaping the week.",
+                sourceOfTruth: "Time",
+                safetySummary: "Routes to Time without writing calendar or reshaping the week.",
                 fallbackSummary: "If route context is missing, open Time root."
             )
         case .quickRecovery, .quickFocus:

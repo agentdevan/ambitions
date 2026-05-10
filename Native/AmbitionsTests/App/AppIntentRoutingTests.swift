@@ -69,7 +69,10 @@ final class AppIntentRoutingTests: XCTestCase {
         ]
         let descriptors = activeShortcutDestinations.map(\.d25CommandDescriptor)
 
-        XCTAssertEqual(Set(descriptors.map(\.title)), ["Start here", "Capture", "Make today doable", "Close the loop", "Plan"])
+        XCTAssertEqual(
+            Set(descriptors.map(\.title)),
+            ["Start here", "Capture", "Make today doable", "Close the loop", "Time"]
+        )
         XCTAssertTrue(descriptors.filter(\.requiresConfirmation).allSatisfy { descriptor in
             descriptor.commandKind == .completeAction || descriptor.commandKind == .recoverAction
         })
@@ -80,16 +83,19 @@ final class AppIntentRoutingTests: XCTestCase {
             AmbitionsAppShortcutDestination.allCases.filter(\.isPFC18PublicLaunchCandidate)
         )
 
-        XCTAssertEqual(publicCandidates, [
-            .today,
-            .plan,
-            .captureInbox,
-            .command,
-            .memoryLens,
-            .startNextStep,
-            .markDone,
-            .saveTheDay,
-        ])
+        XCTAssertEqual(
+            publicCandidates,
+            [
+                .today,
+                .plan,
+                .captureInbox,
+                .command,
+                .memoryLens,
+                .startNextStep,
+                .markDone,
+                .saveTheDay,
+            ]
+        )
         XCTAssertFalse(publicCandidates.contains(.quickCapture))
         XCTAssertFalse(publicCandidates.contains(.quickFocus))
         XCTAssertFalse(publicCandidates.contains(.quickRecovery))
