@@ -15,6 +15,10 @@ prompt.
 Describe the bounded batch outcome. Do not include unrelated cleanup,
 architecture expansion, release claims, or future batch work.
 
+Active user-facing IA is `Today / Goals / Capture / Time / You`.
+Plan remains an internal compatibility seam only where current source/truth
+allows it.
+
 ## Active Source Truth To Inspect
 
 - `docs/truth/README.md`
@@ -79,8 +83,15 @@ architecture expansion, release claims, or future batch work.
 - Save changed-file summary and patch.
 - On Red, leave changes uncommitted unless the runner is explicitly configured
   with `AUTO_ROLLBACK_ON_RED=1`.
-- If a commit is created, the runner pushes the current batch branch by default;
-  set `AUTO_PUSH=0` to keep the commit local.
+- If a commit is created, the runner does not push by default. Enable push only
+  with explicit owner intent:
+
+```bash
+AUTO_PUSH=1 make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>
+```
+
+- No release, build, accessibility, performance, visual, device, TestFlight, or
+  App Store proof is implied by the runner.
 - Use the runner-provided rollback command if the batch must be discarded.
 
 ## Runner Command

@@ -1,4 +1,4 @@
-.PHONY: batch batch-full batch-workspace batch-no-commit batch-status prompt-wrap prompt-audit check-batch-input check-wrap-input
+.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status prompt-wrap prompt-audit check-batch-input check-wrap-input
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
@@ -19,6 +19,12 @@ batch-workspace: check-batch-input
 
 batch-no-commit: check-batch-input
 	ACCESS_MODE=full AUTO_COMMIT=0 "$(RUNNER)" "$(BATCH)" "$(PROMPT)"
+
+batch-push: check-batch-input
+	AUTO_PUSH=1 ACCESS_MODE=full AUTO_COMMIT=1 "$(RUNNER)" "$(BATCH)" "$(PROMPT)"
+
+batch-self-check:
+	"$(RUNNER)" --self-check
 
 batch-status:
 	@echo "Recent Codex batch runs:"

@@ -28,6 +28,12 @@ Audit active prompt files with:
 make prompt-audit
 ```
 
+Run the runner self-check without invoking Codex phases with:
+
+```bash
+make batch-self-check
+```
+
 The runner is `scripts/ambitions-codex-train.sh`. It performs model phasing:
 GPT-5.5 plans, GPT-5.3-Codex-Spark applies only the bounded patch, and GPT-5.5
 reviews, repairs, validates, and decides final commit eligibility.
@@ -36,9 +42,27 @@ Direct pasted Codex implementation is forbidden unless the user explicitly says
 "bypass the Ambitions runner."
 
 Auto-commit means the runner may commit only after the final GPT-5.5 gate says
-the result is eligible. By default, a created commit is pushed to the current
-batch branch with a normal `git push -u origin <branch>`. It never force-pushes.
-Disable this with `AUTO_PUSH=0`.
+the result is eligible. Auto-push is default-off. Push requires explicit owner
+intent:
+
+```bash
+AUTO_PUSH=1 make batch BATCH=<BATCH_ID> PROMPT=prompts/batches/<BATCH_ID>.md
+```
+
+The runner stages only explicit eligible changed paths, excludes
+`.codex/runs/**`, saves staged and unstaged path lists, and does not use broad
+staging shortcuts.
+
+When `.codex/state/active-batch.yml` clearly forbids branch creation, the runner
+stops before creating a branch unless the owner explicitly sets
+`ALLOW_RUNNER_BRANCH_EXCEPTION=1` or disables runner branch creation with
+`AUTO_BRANCH=0`.
+
+Active user-facing IA is `Today / Goals / Capture / Time / You`. `Plan` remains
+an internal compatibility seam only where current source/truth allows it.
+
+The runner does not imply release, build, test, accessibility, performance,
+visual, device, TestFlight, or App Store proof.
 
 Hard Red means stop immediately, leave changes uncommitted for inspection by
 default, and use the rollback command saved under `.codex/runs/<BATCH>/<time>/`

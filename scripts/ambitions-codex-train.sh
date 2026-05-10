@@ -21,7 +21,8 @@ REPAIR_MODEL="${REPAIR_MODEL:-gpt-5.5}"
 ACCESS_MODE="${ACCESS_MODE:-full}"
 AUTO_BRANCH="${AUTO_BRANCH:-1}"
 AUTO_COMMIT="${AUTO_COMMIT:-1}"
-AUTO_PUSH="${AUTO_PUSH:-1}"
+AUTO_PUSH="${AUTO_PUSH:-0}"
+ALLOW_RUNNER_BRANCH_EXCEPTION="${ALLOW_RUNNER_BRANCH_EXCEPTION:-0}"
 ALLOW_DIRTY="${ALLOW_DIRTY:-0}"
 MAX_REPAIR_PASSES="${MAX_REPAIR_PASSES:-1}"
 KEEP_GOING_ON_YELLOW="${KEEP_GOING_ON_YELLOW:-0}"
@@ -33,6 +34,7 @@ usage() {
   cat <<'EOF'
 Usage:
   scripts/ambitions-codex-train.sh BATCH_ID path/to/prompt.md
+  scripts/ambitions-codex-train.sh --self-check
 
 Example:
   scripts/ambitions-codex-train.sh SI07 prompts/SI07.md
@@ -45,7 +47,8 @@ Environment defaults:
   ACCESS_MODE=full
   AUTO_BRANCH=1
   AUTO_COMMIT=1
-  AUTO_PUSH=1
+  AUTO_PUSH=0
+  ALLOW_RUNNER_BRANCH_EXCEPTION=0
   ALLOW_DIRTY=0
   MAX_REPAIR_PASSES=1
   KEEP_GOING_ON_YELLOW=0
@@ -63,6 +66,10 @@ die() {
 if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
   usage
   exit 0
+fi
+
+if [[ "${1:-}" == "--self-check" ]]; then
+  exec "$(dirname "$0")/ambitions-runner-self-check.sh"
 fi
 
 [[ "$#" -eq 2 ]] || {
@@ -120,7 +127,15 @@ if [[ "$ALLOW_DIRTY" != "1" ]]; then
   fi
 fi
 
+branch_creation_forbidden_by_active_state() {
+  [[ -f ".codex/state/active-batch.yml" ]] \
+    && grep -Eq '^[[:space:]]*branch_creation_allowed:[[:space:]]*false[[:space:]]*$' ".codex/state/active-batch.yml"
+}
+
 if [[ "$AUTO_BRANCH" == "1" ]]; then
+  if branch_creation_forbidden_by_active_state && [[ "$ALLOW_RUNNER_BRANCH_EXCEPTION" != "1" ]]; then
+    die "active batch state forbids branch creation; set AUTO_BRANCH=0 to stay on $START_BRANCH or ALLOW_RUNNER_BRANCH_EXCEPTION=1 to use the runner branch exception"
+  fi
   if [[ "$START_BRANCH" =~ ^codex/${SAFE_BATCH_ID}/ ]]; then
     BRANCH="$START_BRANCH"
   else
@@ -156,6 +171,7 @@ AUTO_BRANCH=$AUTO_BRANCH
 AUTO_COMMIT=$AUTO_COMMIT
 AUTO_PUSH=$AUTO_PUSH
 ALLOW_DIRTY=$ALLOW_DIRTY
+ALLOW_RUNNER_BRANCH_EXCEPTION=$ALLOW_RUNNER_BRANCH_EXCEPTION
 MAX_REPAIR_PASSES=$MAX_REPAIR_PASSES
 KEEP_GOING_ON_YELLOW=$KEEP_GOING_ON_YELLOW
 ALLOW_YELLOW_COMMIT=$ALLOW_YELLOW_COMMIT
@@ -221,13 +237,102 @@ parse_status() {
   elif grep -Eiq 'STATUS:[[:space:]]*GREEN' "$file"; then
     printf 'GREEN\n'
   else
-    printf 'RED\n'
+    printf 'UNKNOWN\n'
   fi
 }
 
 changed_files() {
-  git diff --name-only "$START_SHA" -- . ':(exclude).codex/runs/**' \
-    2>/dev/null || true
+  {
+    git diff --name-only "$START_SHA" -- . ':(exclude).codex/runs/**' 2>/dev/null || true
+    git ls-files --others --exclude-standard -- . ':(exclude).codex/runs/**' 2>/dev/null || true
+  } | awk 'NF' | sort -u
+}
+
+latest_gate_file() {
+  if [[ -s "$RUN_DIR/final/05-finalize.final.md" ]]; then
+    printf '%s\n' "$RUN_DIR/final/05-finalize.final.md"
+  else
+    printf '%s\n' "$RUN_DIR/final/03-review.final.md"
+  fi
+}
+
+phase_or_gate_mentions_path() {
+  local path="$1"
+  local gate_file="$2"
+  grep -Fq -- "$path" "$RUN_DIR/final/01-plan.final.md" 2>/dev/null \
+    || grep -Fq -- "$path" "$gate_file" 2>/dev/null
+}
+
+expected_tooling_governance_path() {
+  local path="$1"
+  case "$path" in
+    AGENTS.md|Makefile|scripts/ambitions-codex-train.sh|scripts/ambitions-wrap-prompt.sh|scripts/ambitions-prompt-audit.sh|scripts/ambitions-runner-self-check.sh|prompts/_RUNNER_REQUIRED_HEADER.md|prompts/_BATCH_TEMPLATE.md|docs/codex/ambitions-hybrid-runner.md|docs/codex/README.md|.codex/TOOLING_AND_VALIDATION.md|.codex/PR_PROTOCOL.md|.codex/VALIDATION_HARNESS.md|.codex/REVIEW_BOARD.md|.codex/DEPARTMENT_REGISTRY.md)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+gate_allows_tooling_governance_changes() {
+  local gate_file="$1"
+  grep -Eiq 'expected tooling/governance changes|expected tooling governance changes|tooling/governance changes for this batch' "$gate_file" 2>/dev/null
+}
+
+validate_stage_set() {
+  local gate_file="$1"
+  shift
+  local file
+
+  [[ "$#" -gt 0 ]] || die "refusing to stage: no changed files outside .codex/runs"
+  [[ -s "$gate_file" ]] || die "refusing to stage: final gate file missing or empty"
+
+  for file in "$@"; do
+    [[ -n "$file" ]] || die "refusing to stage: empty path in changed-file set"
+    case "$file" in
+      .codex/runs/*)
+        die "refusing to stage run artifact: $file"
+        ;;
+    esac
+
+    if phase_or_gate_mentions_path "$file" "$gate_file"; then
+      continue
+    fi
+
+    if expected_tooling_governance_path "$file" && gate_allows_tooling_governance_changes "$gate_file"; then
+      continue
+    fi
+
+    die "refusing to stage unapproved path not named by Phase 01 or final gate: $file"
+  done
+}
+
+stage_changed_files() {
+  local gate_file
+  gate_file="$(latest_gate_file)"
+
+  local -a files_to_stage=()
+  local candidate
+  while IFS= read -r candidate; do
+    files_to_stage+=("$candidate")
+  done < <(changed_files)
+
+  printf '%s\n' "${files_to_stage[@]}" >"$RUN_DIR/status/files-to-stage.txt"
+  validate_stage_set "$gate_file" "${files_to_stage[@]}"
+
+  local file
+  for file in "${files_to_stage[@]}"; do
+    git add -- "$file"
+  done
+
+  git diff --cached --name-only >"$RUN_DIR/status/staged-files.txt"
+  git diff --name-only >"$RUN_DIR/status/unstaged-files.txt" || true
+  git ls-files --others --exclude-standard -- . ':(exclude).codex/runs/**' >>"$RUN_DIR/status/unstaged-files.txt" 2>/dev/null || true
+
+  if [[ ! -s "$RUN_DIR/status/staged-files.txt" ]]; then
+    die "refusing to commit: nothing staged after explicit path staging"
+  fi
 }
 
 standard_ambitions_quality_bar() {
@@ -235,9 +340,10 @@ standard_ambitions_quality_bar() {
 Ambitions quality bar:
 - Target is a world-class native iPhone-first product.
 - Treat Ambitions as a premium native iPhone life operating system.
-- Preserve top-level tabs: Today, Goals, Capture, Plan, You.
-- Preserve the locked Start Here / DayTimelineRail / LifeShape / Capture composer / You settings-style direction where relevant.
-- Preserve 70% Apple quiet luxury, 20% OpenAI intelligence, 10% executive command surface.
+- Preserve active user-facing top-level IA: Today, Goals, Capture, Time, You.
+- Treat Plan only as an internal compatibility seam or contextual/action noun where current source/truth allows it.
+- Preserve the locked Start Here / Reality Meridian / LifeShape Field / Capture composer / You settings-style direction where relevant.
+- Preserve 70% Apple quiet luxury, 20% local on-device intelligence, 10% executive command clarity.
 - Preserve local-first / on-device-first posture unless active truth files say otherwise.
 - No generic productivity-app thinking.
 - No card-stack/dashboard/task-list fallback.
@@ -270,7 +376,8 @@ Runner defaults:
 - Auto commit enabled by default, but only after final GPT-5.5 eligible status.
 - Dirty repo protection enabled by default.
 - Hard Red stop discipline.
-- Auto-push after commit by default.
+- Auto-push disabled by default; set AUTO_PUSH=1 only with explicit owner intent.
+- Active branch-creation policy is checked before runner branch creation.
 - One bounded repair pass by default.
 - Spark never owns architecture, canon, continuation, cleanup, or final decisions.
 
@@ -317,8 +424,11 @@ run_codex_phase() {
   local stderr_log="$RUN_DIR/jsonl/$phase.stderr.log"
   local exit_file="$RUN_DIR/status/$phase.exit-code.txt"
   local status_file="$RUN_DIR/status/$phase.status.txt"
-  local -a flags
-  mapfile -t flags < <(access_flags)
+  local -a flags=()
+  local flag
+  while IFS= read -r flag; do
+    flags+=("$flag")
+  done < <(access_flags)
 
   log "starting $phase with model $model"
   save_git_snapshot "${phase}.before"
@@ -341,7 +451,7 @@ run_codex_phase() {
 
   local status
   status="$(parse_status "$final")"
-  if [[ "$codex_exit" -ne 0 ]]; then
+  if [[ "$codex_exit" -ne 0 || "$status" == "UNKNOWN" ]]; then
     status="RED"
   fi
   printf '%s\n' "$status" >"$status_file"
@@ -419,10 +529,10 @@ commit_if_eligible() {
     return 0
   fi
 
-  git add -A -- . ':(exclude).codex/runs/**'
+  stage_changed_files
 
   if git diff --cached --quiet; then
-    log "nothing staged after excluding .codex/runs; skipping commit"
+    log "nothing staged after explicit path staging; skipping commit"
     return 0
   fi
 
@@ -443,6 +553,8 @@ Changed file summary:
 $changed_summary
 
 Auto-push: $AUTO_PUSH
+Staged files:
+$(cat "$RUN_DIR/status/staged-files.txt" 2>/dev/null || true)
 EOF
 )"
 
