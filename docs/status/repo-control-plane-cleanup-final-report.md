@@ -1,14 +1,14 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 2 Green with accepted Yellow items
+Status: Phase 3 Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phases 0, 0B, 1, and 2 only
+Scope: Phases 0, 0B, 1, 2, and 3 only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Later cleanup phases were not started in this checkpoint.
+Phase 0B completed as operating-system component discovery and family-level classification. Phase 1 created the consolidated Codex OS router at `.codex/OPERATING_SYSTEM.md`. Phase 2 created the consolidated senior-department registry at `.codex/DEPARTMENT_REGISTRY.md`. Phase 3 created skill governance at `.codex/SKILL_GOVERNANCE.md`. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
@@ -409,11 +409,37 @@ Accepted Yellow basis:
 - Some ownership maps remain summary-level until `.codex/REPO_INVENTORY.md` and `.codex/BATCH_TRAIN_REGISTRY.md` exist.
 - Yellow debt items are recorded but not retired in Phase 2.
 
+## Phase 3 Skill Governance
+
+Created:
+
+- `.codex/SKILL_GOVERNANCE.md`
+
+Updated:
+
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+
+Phase 3 result: Green with accepted Yellow items carried forward.
+
+Green basis:
+
+- Skill governance exists.
+- It includes classification model, metadata schema, current inventory summary, auto-load policy, explicit-batch-selection policy, must-not-use list, deleted provider skill record, line-review tracker, future metadata header pass plan, and future folder split plan.
+- It explicitly says not every `.codex/skills` file has been line-reviewed.
+- It keeps provider skills deleted from active paths and forbidden unless explicitly approved.
+
+Accepted Yellow basis:
+
+- Skill inventory remains summary-level.
+- Full skill metadata headers are future work.
+- No skills were moved or rewritten in Phase 3.
+- Stale provider references remain in `docs/audits/tracked-files.txt`.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 3 only.
-Use the current repo state after Phase 2. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/SKILL_GOVERNANCE.md without claiming every skill has been line-reviewed.
-Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, missing later target artifacts, and summary-level ownership maps.
-Do not continue to Phase 4 unless Phase 3 is Green or accepted Yellow with reason.
+Continue the Ambitions repo-control-plane cleanup with Phase 4 only.
+Use the current repo state after Phase 3. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/BATCH_TRAIN_REGISTRY.md by classifying discovered train families without treating originating trains as active authority.
+Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, Repo MCP source-truth-stack freshness, summary-level ownership maps, and unreviewed skill metadata.
+Do not continue to Phase 5 unless Phase 4 is Green or accepted Yellow with reason.
 ```
