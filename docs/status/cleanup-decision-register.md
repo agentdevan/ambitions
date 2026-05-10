@@ -1,6 +1,6 @@
 # Cleanup Decision Register
 
-Status: Green for T04 classification-only pass  
+Status: Green through T07c-closeout provider skill deletion state  
 Date: 2026-05-09
 
 ## Authority
@@ -9,7 +9,7 @@ Active repo authority starts in `docs/truth/README.md`. Historical cleanup polic
 
 ## Scope
 
-Classification only. No Swift source changes, app implementation changes, deletes, moves, archive operations, or release/readiness claims.
+Cleanup classification/status only. No Swift source changes, app implementation changes, app feature work, build/test/device validation, or release/readiness claims.
 
 ## Classification Legend
 
@@ -17,14 +17,15 @@ Classification only. No Swift source changes, app implementation changes, delete
 - Supporting: useful operating, implementation, or traceability material that does not override truth files.
 - Historical: retained for traceability, not current authority.
 - Quarantine: retained but blocked from default use because it can cause drift.
-- Deletion-candidate: do not delete yet; candidate for a later approved extract/link-check/delete pass.
+- Deleted from active path: removed from active repo path; do not recreate without explicit approval.
+- Deletion-candidate: candidate for a later approved extract/link-check/delete pass.
 
 ## Active
 
 | Area | Decision | Reason |
 | --- | --- | --- |
 | `docs/truth/` | Active | Current authority layer for product/design, implementation/source, release/proof, Codex process, and historical policy. |
-| `README.md`, `docs/README.md`, `AGENTS.md` | Active front doors | Now route through `docs/truth/*` first. |
+| `README.md`, `docs/README.md`, `AGENTS.md` | Active front doors | Route through `docs/truth/*` first. |
 | `docs/status/current-implementation-map.md` | Active supporting implementation map | Evidence-based implementation posture. |
 | `docs/status/release-evidence-packet.md` | Active supporting release/proof posture | Release and validation non-claim boundary. |
 | `docs/native-build-and-release.md` | Active supporting validation workflow | Local VM/Mac validation procedure. |
@@ -37,7 +38,7 @@ Classification only. No Swift source changes, app implementation changes, delete
 | `docs/AmbitionsCanon/` | Supporting product/design canon | Use only where compatible with `docs/truth/*`. |
 | `docs/codex/` | Supporting Codex process material | Operating support only; not product source truth or release proof. |
 | `.codex/README.md` | Supporting Codex entry | Truth-first routing point. |
-| `.codex/manifests/skills-routing-map.yml` | Supporting route map | Version 2 routing support; truth files win conflicts. |
+| `.codex/manifests/skills-routing-map.yml` | Supporting route map | Routing support; truth files win conflicts. |
 | `.codex/skills/` | Supporting operating skill library | Active only as scoped support; builder skills remain candidate until selected by active batch. |
 | `.codex/checklists/`, `.codex/operations/`, `.codex/playbooks/`, `.codex/templates/`, `.codex/validation/` | Supporting control-plane material | Keep for now; consolidate later if duplicate or stale. |
 | Native subfolder `AGENTS.md` files | Supporting local contributor guidance | Must remain subordinate to root `AGENTS.md` and `docs/truth/*`. |
@@ -52,12 +53,17 @@ Classification only. No Swift source changes, app implementation changes, delete
 | old batch-train reports and closeouts | Historical/process history | Batch Green does not prove current source or release readiness. |
 | one-off prompts and old implementation plans | Historical | Candidate for extract-then-delete if no durable current value remains. |
 
+## Deleted From Active Paths
+
+| Area | Decision | Reason |
+| --- | --- | --- |
+| `.agents/skills/supabase/` | Deleted from active skills path | Hosted provider workflow is not active Ambitions core architecture. Do not recreate without explicit approval. |
+| `.agents/skills/supabase-postgres-best-practices/` | Deleted from active skills path | External database/provider reference is not active Ambitions architecture. Do not recreate without explicit approval. |
+
 ## Quarantine
 
 | Area | Decision | Reason |
 | --- | --- | --- |
-| `.agents/skills/supabase/` | Quarantine | Hosted provider workflow is not active Ambitions core architecture. |
-| `.agents/skills/supabase-postgres-best-practices/` | Quarantine / candidate reference | Not active unless a future approved database/backend task exists. |
 | provider/backend/cloud assumption docs | Quarantine | Must not imply active user-data backend, account sync, or provider architecture. |
 | old release-readiness/App Store/TestFlight/device-proof reports without current proof | Quarantine | Release claims require current evidence. |
 | stale context packs that revive old Plan/Profile/Captures/PXOS/ACUI language | Quarantine until reconciled | Can cause Codex drift. |
@@ -70,14 +76,13 @@ Classification only. No Swift source changes, app implementation changes, delete
 | obsolete one-off prompts | Extract durable decisions, then delete | Link search, useful-content extraction, owner approval. |
 | duplicate closeout reports with no unique current value | Extract final decision, then archive/delete | Confirm no release/proof dependency. |
 | duplicate `.codex` checklists/templates that restate truth files | Consolidate then delete duplicates | Map replacement authority and update links. |
-| provider-specific `.agents` material | Extract generic database safety lessons if useful, then archive/delete | Explicit owner approval and rollback path. |
 
 ## Hard Stops
 
 Do not delete or move production Swift, tests, project config, package manifests, scripts, resources, entitlements, privacy manifests, current proof logs, or active truth files as part of docs cleanup.
 
-Do not delete `.codex`, `.agents`, or batch-train material opportunistically. Classify first, extract value, update links, get approval, then perform a dedicated cleanup pass.
+Do not delete `.codex` or batch-train material opportunistically. Classify first, extract value, update links, get approval, then perform a dedicated cleanup pass.
 
 ## Next Recommended Step
 
-T05 — add lightweight historical/supporting/quarantine headers to the highest-risk retained docs without moving or deleting files.
+Retire or regenerate stale inventory files such as `docs/audits/tracked-files.txt`, then continue with approved historical prompt/canon archive planning.
