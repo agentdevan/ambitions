@@ -1,21 +1,22 @@
 # Repo Control-Plane Cleanup Final Report
 
-Status: Phase 0 Green with accepted Yellow items
+Status: Phase 0B Green with accepted Yellow items
 Date: 2026-05-10
-Scope: Phase 0 preflight only
+Scope: Phase 0 and Phase 0B only
 
 ## Executive Status
 
 Phase 0 completed after pulling the latest `origin/main` state.
 
-The repo now contains the required `docs/truth/*` authority package, and the primary front doors route through it. Phase 0B and later cleanup phases were not started because the requested run said to begin with Phase 0 only.
+Phase 0B completed as operating-system component discovery and family-level classification. Later cleanup phases were not started in this checkpoint.
 
 Accepted Yellow items:
 
-- The worktree was already dirty before this pass, including modified app/source files and untracked screenshot audit material. This pass did not touch app runtime/source files.
+- The worktree was already dirty before this pass, including modified app/source files and untracked screenshot audit material. After explicit owner instruction, those uncommitted pre-existing worktree changes were removed before Phase 0B.
 - `docs/audits/tracked-files.txt` still contains historical paths for deleted provider skills. Current status docs already record the provider deletion, so this is a stale inventory item for a later cleanup ledger pass.
 - Large train/control-plane files exist and should be classified through existing override policy before any rewrite, move, archive, or delete action.
 - The local Ambitions Repo MCP still reports an older source-truth stack that does not include `docs/truth/*`; MCP output was treated as a repo-derived aid, not authority.
+- Active state files disagree on the next execution target: `.codex/state/active-batch.yml` and MCP output point to `PK14 Durable Command/Event Ledger`, while `.codex/reports/current-batch-train-state.md` also names `IR-01 Big Frontend Recovery Implementation` as the next recommended implementation pass before visible top-level feature expansion. This is classified as an active-state reconciliation item for Phase 5, not resolved in Phase 0B.
 
 ## Pull / Repo State
 
@@ -25,8 +26,9 @@ Accepted Yellow items:
 - Upstream status after pull: `0 0` for `HEAD...origin/main`
 - Pull result: fast-forward from `origin/main`
 - Working tree after pull: dirty from pre-existing app/source changes and untracked audit/report paths
+- Worktree cleanup after owner instruction: removed uncommitted pre-existing app/source modifications and `docs/audits/screenshots/`
 
-Pre-existing dirty paths observed and intentionally not touched:
+Pre-existing dirty paths observed during Phase 0 and removed before Phase 0B after owner instruction:
 
 - `Native/Ambitions/App/AmbitionsRootView.swift`
 - `Native/Ambitions/App/AppShellView.swift`
@@ -39,6 +41,10 @@ Pre-existing dirty paths observed and intentionally not touched:
 - `Native/Ambitions/Features/Today/TodayScreen.swift`
 - `Sources/Components/PersonalSystemCenterPrimitives.swift`
 - `docs/audits/screenshots/`
+
+Post-cleanup worktree state:
+
+- Clean except for local commits ahead of `origin/main`.
 
 ## Mandatory Read-Order Files
 
@@ -158,6 +164,76 @@ Additional global/model/tooling train/control-plane files are visible under `doc
 
 No train family was fully classified in Phase 0. That belongs to Phase 0B and Phase 4.
 
+## Phase 0B Operating-System Component Discovery
+
+Phase 0B classified Codex OS component families at the family/path level. It did not line-review every large file, batch prompt, skill, script, or historical report. Large files and long train registries remain subject to override-aware classification in later phases.
+
+Codex OS mental model used:
+
+```text
+Authority + State + Skills + Trains + Gates + Tools + Evidence + Resume
+```
+
+### Component Family Classification
+
+| Family | Active files | Supporting files | Historical / stale / obsolete findings | Replacement / target authority | Target artifact |
+| --- | --- | --- | --- | --- | --- |
+| Authority router | `docs/truth/*`, `README.md`, `docs/README.md`, `AGENTS.md`, `.codex/README.md`, `docs/codex/CODEX_OS_INDEX.md` | `docs/status/current-implementation-map.md`, `docs/status/release-evidence-packet.md`, `docs/native-build-and-release.md` | Older front-door references remain in historical docs and are subordinate | `docs/truth/README.md` and truth files | `.codex/OPERATING_SYSTEM.md`, `.codex/SESSION_BOOTSTRAP.md`, `.codex/REPO_INVENTORY.md` |
+| Active state | `.codex/state/active-batch.yml`, `.codex/reports/current-batch-train-state.md`, `.codex/reports/current-run-state.md` | `.codex/state/recent-changes.md`, `.codex/state/recent-validation.md`, `.codex/state/proof-cache.json`, repair/yellow/hard-red ledgers | Next-batch tension between PK14 and IR-01/FET recovery language | Phase 5 global train reconciliation | `.codex/GLOBAL_BATCH_TRAIN.md`, `.codex/BATCH_TRAIN_REGISTRY.md` |
+| Batch trains | `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`, EFC overlay files, `.codex/state/active-batch.yml`, current run/state reports | `docs/codex/BATCH_REGISTRY.md`, `docs/codex/batch-trains/*`, global queue ledgers, prompt files | Many originating trains and prompts are supporting or historical, not automatically active | Clean global train and registry | `.codex/GLOBAL_BATCH_TRAIN.md`, `.codex/BATCH_TRAIN_REGISTRY.md` |
+| Skills and routing | `.codex/manifests/skills-routing-map.yml`, `.codex/skills/README.md`, active `.codex/skills/*` | `docs/status/codex-agents-skill-inventory.md` | Not every skill has been line-reviewed; provider skill roots are deleted but still referenced by stale inventories | Skill governance and metadata pass | `.codex/SKILL_GOVERNANCE.md`, `.codex/REPO_INVENTORY.md` |
+| Model-tier policy | `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, resume docs | `AGENTS.md` model-tier sections | Older model references and prompt docs are supporting only | Truth-first model routing in bootstrap | `.codex/OPERATING_SYSTEM.md`, `.codex/SESSION_BOOTSTRAP.md` |
+| MCP tooling | `tools/mcp/ambitions_repo_mcp`, `tools/mcp/ambitions_proof_mcp`, MCP setup/plans under `docs/codex/*MCP*` | visual/accessibility/source-atlas/release-truth/fixture MCP folders and plans | Repo MCP source-truth stack lags `docs/truth/*`; planned MCPs are not app dependencies | Tooling classification and MCP freshness repair | `.codex/TOOLING_AND_VALIDATION.md` |
+| Validation scripts | `scripts/run-doc-qa.sh`, `scripts/build-local.sh`, `scripts/test-local.sh`, gate/scan scripts, validation manifests | `scripts/ai/*`, focused scan scripts by train family | Scripts vary in proof strength; running a script is not proof unless output is captured | Task-type validation map | `.codex/TOOLING_AND_VALIDATION.md` |
+| Reports and closeout templates | `.codex/templates/*`, `.codex/reports/current-*`, docs report templates | `docs/codex/*REPORT*`, `docs/codex/*CLOSEOUT*`, handoff docs | Old prompt/report templates can impersonate current process if not routed | Bootstrap and template cleanup | `.codex/SESSION_BOOTSTRAP.md`, `.codex/OPERATING_SYSTEM.md` |
+| GitHub / CI / infrastructure policy | `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md`, `docs/codex/workflow-templates/*.example` | `scripts/ci-local-parity.sh` | `.github/` is absent; hosted workflow templates are examples only | No hosted CI without approval | `.codex/TOOLING_AND_VALIDATION.md` |
+| Dependency / security / privacy policy | `DEPENDENCY_RISK_LEDGER`, privacy/security gate docs, provider cleanup status docs | relevant skills and scripts | Provider/backend material remains forbidden unless explicitly approved | Dependency/security/privacy gates | `.codex/DEPARTMENT_REGISTRY.md`, `.codex/TOOLING_AND_VALIDATION.md` |
+| Release / proof / claim firewalls | `docs/truth/RELEASE_TRUTH.md`, `docs/status/release-evidence-packet.md`, release-claim scan docs/scripts | release/handoff history | Old release/App Store/TestFlight docs are not current proof | Release evidence firewall | `.codex/OPERATING_SYSTEM.md`, `.codex/TOOLING_AND_VALIDATION.md` |
+| Visual / accessibility / copy QA gates | FET/SI/SIG/PXEQ/Accessibility gate docs and scripts | visual/copy/accessibility skills | Some evidence docs are historical or advisory and do not prove public conformance | QA gate map | `.codex/DEPARTMENT_REGISTRY.md`, `.codex/TOOLING_AND_VALIDATION.md` |
+| Nested AGENTS overlays | `AGENTS.md`, `docs/AGENTS.md`, `Native/Ambitions/App/AGENTS.md`, `Native/Ambitions/Domain/AGENTS.md`, `Native/Ambitions/Features/AGENTS.md` | none discovered beyond these | Native overlays are source-area guidance; not modified in this pass | Overlay map | `.codex/REPO_INVENTORY.md`, `.codex/SESSION_BOOTSTRAP.md` |
+| Context packs | `.codex/context-packs/*`, `docs/codex/CONTEXT_INDEX.md` | route/context docs | Context packs are supporting, not truth; some old context references need stale prompt cleanup | Context classification | `.codex/REPO_INVENTORY.md`, `.codex/SESSION_BOOTSTRAP.md` |
+| Prompt and resume templates | `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `RESUME_MINI`, `RESUME_SENIOR`, `.codex/templates/global-batch-resume-prompt.md` | many old batch prompt docs | Old copy/paste prompts are historical unless updated and truth-first | Current resume prompt template | `.codex/SESSION_BOOTSTRAP.md` |
+| Archive / cleanup / historical policy | `docs/truth/HISTORICAL_POLICY.md`, cleanup/status docs | `docs/status/large-doc-classification-overrides.md`, cleanup plans | `docs/audits/tracked-files.txt` stale provider paths; many historical docs require inbound-reference checks | Archive/stale ledger | `docs/status/archive-and-stale-material-ledger.md` |
+
+### Batch Train Families Discovered
+
+Discovered train families remain classified at family level only:
+
+| Family | Current Phase 0B classification |
+| --- | --- |
+| Global | Active sequencing/supporting authority, pending cleanup into `.codex/GLOBAL_BATCH_TRAIN.md`. |
+| PK | Active/planned implementation train family; next active-state source points to PK14, but must reconcile IR-01 note. |
+| EFC | Active proof overlay; not app behavior, release proof, or parallel feature train. |
+| FET | Recently completed Codex/frontend quality-system gates; supporting gates, with IR-01 follow-up note. |
+| AOS, LDI, SA, PFC, FCP, PD, SI, SIG, DAV, EB, PX, FL, HPS, CQS, CS, ME, REC, RHC, F03.5/F04-F30 | Supporting/planned/completed/historical mix; must be classified per train in Phase 4 before archive/delete decisions. |
+
+### Tooling Discovery Notes
+
+- `.github/` is absent.
+- `docs/codex/workflow-templates/` contains example workflow files only.
+- `tools/mcp/` contains repo, proof, release-truth, visual, accessibility, source-atlas, and fixture MCP folders.
+- `scripts/` contains build/test scripts plus many local scan/gate scripts.
+- No write-capable MCP expansion, hosted CI, dependency addition, or app-source validation was performed.
+
+### Phase 0B Gate Result
+
+Phase 0B result: Green with accepted Yellow items.
+
+Green basis:
+
+- Every required OS component family from the prompt was located at least at directory/file-family level.
+- Each family has an active/supporting/historical/stale/delete-candidate direction.
+- No app source, project, package, tests, resources, entitlements, or privacy manifests were modified.
+- No archive/delete/move operation was performed.
+
+Accepted Yellow basis:
+
+- Large train registries and long prompt files were not fully line-reviewed.
+- Active-state files need reconciliation before declaring one next batch.
+- The Repo MCP source-truth-stack output lags the new truth hierarchy.
+- Stale provider paths remain inside `docs/audits/tracked-files.txt`.
+- Skill inventory is not a full line-review of every skill.
+
 ## Nested AGENTS Visibility
 
 Visible `AGENTS.md` overlays:
@@ -185,6 +261,15 @@ Not run in Phase 0:
 - markdown/link checker
 - docs QA script
 
+Not run in Phase 0B:
+
+- full per-file train classification
+- full skill line-review
+- archive/delete/move operations
+- docs QA or link checking
+- source/build/test validation
+- MCP self-tests
+
 ## Validation Run
 
 Commands/tools run:
@@ -201,6 +286,9 @@ Commands/tools run:
 - provider stale-reference checks in `docs/audits/tracked-files.txt`
 - train/control-plane file listing with `find` and `rg`
 - nested `AGENTS.md` discovery with `find`
+- OS family discovery with `find` across `docs/truth`, `docs/status`, `docs/codex`, `.codex`, `tools/mcp`, `scripts`, and workflow-template paths
+- model-tier / resume / validation / gate / tooling text searches with `rg`
+- owner-directed worktree cleanup using `git restore` for pre-existing modified app/source files and `rm -rf docs/audits/screenshots`
 - Ambitions Repo MCP: `get_source_truth_stack`
 - Ambitions Repo MCP: `summarize_repo_posture`
 - Ambitions Repo MCP: `get_efc_overlay_status`
@@ -251,12 +339,29 @@ Accepted Yellow basis:
 - Large control-plane/train files require later override-aware classification.
 - MCP source-truth-stack output lags the new `docs/truth/*` hierarchy.
 
+## Phase 0B Gate Result
+
+Phase 0B result: Green with accepted Yellow items.
+
+Green basis:
+
+- Codex OS component families were discovered and classified.
+- Active, supporting, historical/stale, and later-target-artifact roles were recorded.
+- No source/runtime behavior was changed.
+- No destructive archive/delete pass was attempted.
+
+Accepted Yellow basis:
+
+- Active state needs a later reconciliation decision between PK14 and IR-01/FET recovery guidance.
+- Large files remain classified by family and existing override policy rather than full line-review.
+- Provider deletion is complete in active paths, but stale inventory references remain.
+- MCP source-truth-stack freshness needs later repair.
+
 ## Next Exact Prompt
 
 ```text
-Continue the Ambitions repo-control-plane cleanup with Phase 0B only.
-Use the post-pull repo state at HEAD 3b8fdc3d38a5cdce3001c8d6f1af9f2b5b317128.
-Preserve the pre-existing dirty app/source files and do not implement app features.
-Classify Codex OS component families across authority, state, skills, trains, gates, tools, evidence, and resume material.
-Do not continue to Phase 1 unless Phase 0B is Green or accepted Yellow with reason.
+Continue the Ambitions repo-control-plane cleanup with Phase 1 only.
+Use the current repo state after Phase 0B. Preserve docs/truth/* as the winning authority, do not implement app features, and create/update .codex/OPERATING_SYSTEM.md as a router rather than a duplicate truth file.
+Carry forward accepted Yellow items: active-state next-batch reconciliation, large-file override-aware classification, stale provider inventory references, and Repo MCP source-truth-stack freshness.
+Do not continue to Phase 2 unless Phase 1 is Green or accepted Yellow with reason.
 ```
