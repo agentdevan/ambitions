@@ -48,6 +48,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         let fetchedGoal = try await repositories.goals.goal(id: goalID)
         let goal = try XCTUnwrap(fetchedGoal)
         let step = try XCTUnwrap(goal.plan?.sections.first?.steps.first)
+        let priorEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
 
         _ = try await todayService.performAction(
             TodayInlineAction(
@@ -60,11 +61,49 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
             now: fixedNow
         )
         let captures = try await repositories.captures.listCaptures()
+        let evidence = try await repositories.evidence.listEvidence(goalID: goalID)
 
         XCTAssertEqual(captures.count, 1)
         XCTAssertEqual(captures.first?.status, .actionable)
         XCTAssertEqual(captures.first?.sourceType, .todayQuickCapture)
         XCTAssertEqual(captures.first?.linkedGoalID, goalID)
+        XCTAssertEqual(evidence.count, priorEvidence.count + 1)
+        XCTAssertTrue(evidence.contains(where: { $0.evidenceKind == .sessionLogged }))
+        XCTAssertTrue(evidence.contains(where: { $0.goalID == goalID && $0.stepID == step.id && $0.source == .manual }))
+    }
+
+    func testNavigationOnlyActionsDoNotCreateMutationsInTodayData() async throws {
+        let repositories = try await makeRepositories()
+        let goalsService = RepositoryBackedGoalsService(repositories: repositories)
+        let todayService = RepositoryBackedTodayService(repositories: repositories)
+
+        let created = try await goalsService.createGoal(
+            CreateGoalRequest(title: "Protect the day from noisy state changes"),
+            now: fixedNow
+        )
+        let goalID = try XCTUnwrap(created.target.goalID)
+        let initialCaptures = try await repositories.captures.listCaptures()
+        let initialFeedback = try await repositories.feedback.listEvents(goalID: goalID)
+        let initialEvidence = try await repositories.evidence.listEvidence(goalID: nil)
+
+        let response = try await todayService.performAction(
+            TodayInlineAction(
+                kind: .openPlan,
+                title: "Open Time",
+                systemImage: "calendar",
+                state: .default,
+                target: TodayActionTarget()
+            ),
+            now: fixedNow
+        )
+        let finalCaptures = try await repositories.captures.listCaptures()
+        let finalFeedback = try await repositories.feedback.listEvents(goalID: goalID)
+        let finalEvidence = try await repositories.evidence.listEvidence(goalID: nil)
+
+        XCTAssertNil(response.message)
+        XCTAssertEqual(initialCaptures.count, finalCaptures.count)
+        XCTAssertEqual(initialFeedback.count, finalFeedback.count)
+        XCTAssertEqual(initialEvidence.count, finalEvidence.count)
     }
 
     func testAskWhyThisMattersUsesMetadataBackedProjectionWhenDraftMetadataExists() async throws {

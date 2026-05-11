@@ -53,35 +53,10 @@ struct RepositoryBackedTodayService: TodayServicing {
     }
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
-        switch action.kind {
-        case .startStepSession, .pauseStepSession, .stopStepSession:
-            return TodayActionResponse(message: nil)
-        case .openDetail:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Opening plan context",
-                    body: "Today is handing off to the same goal context used for replanning, evidence, and support decisions.",
-                    state: .selected
-                )
-            )
-        case .openPlan, .protectLater:
-            return TodayActionResponse(message: nil)
-        case .askForHelp:
-            if action.target.goalID != nil, action.target.stepID != nil {
-                return try await performFeedbackAction(action, now: now)
-            }
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Support context captured",
-                    body: "Ambitions will keep the blocked or heavy step visible so the next pass can shrink it, explain it, or route you into the fuller goal context.",
-                    state: .warning
-                )
-            )
-        case .dismissCelebration:
-            return TodayActionResponse(message: nil)
-        default:
-            return try await performFeedbackAction(action, now: now)
+        let handler = TodayCommandHandler { action, now in
+            try await self.performFeedbackAction(action, now: now)
         }
+        return try await handler.performAction(action, now: now)
     }
 }
 
