@@ -192,3 +192,12 @@ For multi-batch execution, use `docs/truth/README.md`, `docs/truth/CODEX_PROCESS
 Continue automatically through Green and accepted Yellow only when owner, safety reason, no-claim boundary, and applicable post-batch gates are recorded. Hard Red stops. Mini may additionally defer non-blocking senior-only batches to `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`; Senior must resolve blocking deferrals before closeout.
 
 After EFC00, continuation also requires an EFC applicability note for every batch that touches user-facing behavior, user data, intelligence, source/freshness, side effects, accessibility, performance, release posture, or public claims.
+
+## Ambitions Codex OS Local Control Plane
+
+The Codex OS control plane for this repo is local-first and no-cost by default.
+
+- Ambitions prompts that modify repo control-plane or implementation behavior must include the runner header `<!-- AMBITIONS_RUNNER_REQUIRED: true -->` and run through `scripts/ambitions-codex-train.sh` unless the user explicitly says `bypass the Ambitions runner`.
+- Use required truth files before edits.
+- No claims of completion/release/accessibility/privacy without verified evidence.
+- Keep scope within approved files for this batch.

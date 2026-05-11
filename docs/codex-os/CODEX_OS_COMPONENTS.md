@@ -1,0 +1,11 @@
+# Ambitions Codex OS Components
+
+| Component | File paths | Purpose | How it helps | Cost posture | Validation command | Failure mode | Rollback |
+| --- | --- | --- | --- | --- | --- | --- |
+| Authority | `AGENTS.md`, `scripts/AGENTS.md`, `docs/AGENTS.md`, `.codex/AGENTS.md`, `.agents/AGENTS.md` | Local governance policy and scope rules | Anchors runner-first, evidence-first behavior and cost restrictions | Local only | `python3 scripts/ambitions-codex-os-validate.py` | Missing/partial policy statements | `git checkout -- AGENTS.md docs/AGENTS.md .codex/AGENTS.md .agents/AGENTS.md scripts/AGENTS.md`
+| Skills | `.agents/skills/*/SKILL.md` | Reusable Codex execution checklists | Keeps future actions bounded and reusable | Local only | `python3 scripts/ambitions-codex-os-validate.py` | malformed SKILL front matter | remove `.agents/skills/ambitions-*` |
+| Rules | `.codex/rules/ambitions-no-cost.rules` | Command allow/forbid baseline | Prevents accidental cost/risk and destructive commands | Local only | `codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git status` | Rule syntax mismatch | recreate or restore file
+| Hooks | `.codex/hooks.json`, `.codex/hooks/*.py` | Runtime pre/post tool and stop protections | Intercept risky commands/prompts and enforce report shape | Local only | `python3 -m py_compile .codex/hooks/*.py` | JSON/Python error or false-positive blocks | remove hook files and revert `.codex/config.toml` hook feature flag |
+| Validator | `scripts/ambitions-codex-os-validate.py` | Enforce file/schema/forbidden-cost policy | Fast local truth and hardening audit | Local only | `python3 scripts/ambitions-codex-os-validate.py` | false positives or parser mismatch | `git checkout -- scripts/ambitions-codex-os-validate.py` |
+| Doctor | `scripts/ambitions-codex-os-doctor.py` | Publish current Codex OS status | Gives activation checklist and cost boundary | Local only | `python3 scripts/ambitions-codex-os-doctor.py` | missing paths or stale status | `git checkout -- scripts/ambitions-codex-os-doctor.py` |
+| Schema/docs | `.codex/schemas/*`, `docs/codex-os/*` | Structured reporting and operational clarity | Stable reporting without external APIs | Local only | `cat docs/codex-os/STRUCTURED_OUTPUT.md` | missing docs/schema consistency | `git checkout -- docs/codex-os .codex/schemas/*`

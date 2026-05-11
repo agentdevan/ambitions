@@ -10,3 +10,9 @@
 - Multi-file docs truth reconciliation should begin with a brief plan so active and historical docs stay consistent together.
 - Clean docs in bounded groups and re-check each claim against source before moving to the next file set.
 - If repo truth is still uncertain after inspection, stop and report the ambiguity instead of normalizing a guessed claim.
+
+## Ambitions Codex OS local docs policy
+
+- Use `docs/codex-os` for control-plane documentation and avoid appending external dependency claims.
+- Classify documents as active/supported/historical and avoid claiming obsolete patterns as shipped behavior.
+- Do not claim release/readiness/accessibility/privacy without evidence in `docs/status/release-evidence-packet.md`.

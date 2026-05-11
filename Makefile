@@ -189,3 +189,9 @@ xcode-build-for-testing:
 
 xcode-test-plan:
 	./scripts/ambitions-xcode-validate.sh --batch $(BATCH) --lane test-plan --test-plan $(TEST_PLAN)
+
+ambitions-codex-os-validate:
+	python3 scripts/ambitions-codex-os-validate.py
+
+ambitions-codex-os-doctor:
+	python3 scripts/ambitions-codex-os-doctor.py
