@@ -22,4 +22,12 @@ Active repo authority starts in [`truth/README.md`](truth/README.md). If this in
 - `codex/`, `.codex/`, and `.agents/` support AI/Codex operation where compatible.
 - Historical docs do not override `docs/truth/*`.
 
+## Visual canon + moat control-plane
+
+- `docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md`
+- `docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md`
+- `docs/codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md`
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md`
+- `docs/status/visual-canon-moat-installation-report.md`
+
 This file is navigation only. It is not implementation proof, validation proof, or release proof.

@@ -39,6 +39,12 @@ Ambitions compounds private ambition context into proof-backed execution decisio
 
 The active product and design truth starts in [`docs/truth/PRODUCT_DESIGN_TRUTH.md`](docs/truth/PRODUCT_DESIGN_TRUTH.md). Supporting canon lives under [`docs/AmbitionsCanon/README.md`](docs/AmbitionsCanon/README.md) where compatible with `docs/truth/*`.
 
+Visual authority for the full flagship surface install is currently tracked in:
+
+- [`docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md`](docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md)
+- `docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md`
+- `docs/codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md`
+
 Compatibility note: some internal source paths, route raw values, tests, and historical docs still use `Plan` / `.plan` naming. Those are compatibility seams, not active user-facing IA. The active top-level destination is `Time`.
 
 ## What is implemented today

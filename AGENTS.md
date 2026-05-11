@@ -203,3 +203,11 @@ The Codex OS control plane for this repo is local-first and no-cost by default.
 - Use required truth files before edits.
 - No claims of completion/release/accessibility/privacy without verified evidence.
 - Keep scope within approved files for this batch.
+
+## Visual Canon + Moat control-plane references
+
+- `docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md` is the active visual authority addendum.
+- `docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md` is the control-plane sequencing overlay.
+- `docs/codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md` is the visual front-end sequence and owner mapping.
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md` is the global-order overlay for this lane.
+- `docs/status/visual-canon-moat-installation-report.md` tracks this phase’s status, commands, and boundary proof notes.

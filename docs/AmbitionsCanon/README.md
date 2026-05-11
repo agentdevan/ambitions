@@ -22,6 +22,7 @@ The active flagship interface canon is now installed through:
 - [16_Surface_Identity_And_Signature_Moments.md](16_Surface_Identity_And_Signature_Moments.md)
 - [17_Ambitions_Product_Grammar.md](17_Ambitions_Product_Grammar.md)
 - [18_Trust_Receipts_And_Closure_Language.md](18_Trust_Receipts_And_Closure_Language.md)
+- [20_Visual_Canon_Moat_Implementation_Spec.md](20_Visual_Canon_Moat_Implementation_Spec.md)
 
 AFI means Ambitions Flagship Interface. AFI supersedes ACUI as the active flagship UI implementation lane. If older run-state or overlay files still reference ACUI, continue under AFI requirements without restarting already-proven work.
 
@@ -50,8 +51,9 @@ Use this hierarchy for future Ambitions work:
 19. [07_Native_Shell_Tokens_Materials.md](07_Native_Shell_Tokens_Materials.md)
 20. [08_Implementation_Codex_Repo_Integration.md](08_Implementation_Codex_Repo_Integration.md)
 21. [09_Flagship_Interface_Preservation_Ledger.md](09_Flagship_Interface_Preservation_Ledger.md)
-22. Visual references
-23. Existing repo convenience
+22. [20_Visual_Canon_Moat_Implementation_Spec.md](20_Visual_Canon_Moat_Implementation_Spec.md)
+23. Visual references
+24. Existing repo convenience
 
 Existing repo convenience, older prompts, older implementation plans, generated images, screenshots, and prior visual direction do not override this canon pack.
 
@@ -78,6 +80,7 @@ Existing repo convenience, older prompts, older implementation plans, generated 
 19. `07_Native_Shell_Tokens_Materials.md`
 20. `08_Implementation_Codex_Repo_Integration.md`
 21. `09_Flagship_Interface_Preservation_Ledger.md`
+22. `20_Visual_Canon_Moat_Implementation_Spec.md`
 
 ## Active IA Update
 
