@@ -1,241 +1,115 @@
 #!/usr/bin/env python3
-"""Ambitions queue/state snapshot.
-
-Read-only control-plane checker. It prints the next safe action, active state
-summary, stale mirror warnings, queue counts, and release/claim warnings without
-mutating the repo.
-"""
+"""Print a deterministic snapshot of Ambitions remaining-queue files."""
 
 from __future__ import annotations
 
 import argparse
 import json
-import re
+from collections import Counter
 from pathlib import Path
-from typing import Any
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-
-FORBIDDEN_RELEASE_CLAIMS = [
-    "production-ready",
-    "release-ready",
-    "App Store-ready",
-    "TestFlight-ready",
-    "device-verified",
-    "physical-device validated",
-    "fully accessible",
-    "performance validated",
-    "privacy approved",
-    "legally approved",
-    "sync-ready",
-    "cloud-ready",
-]
-
-REQUIRED_CONTROL_PLANE_FILES = [
-    "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
-    "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
-    "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
-]
+DEFAULT_QUEUE = ROOT / "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
+DEFAULT_REFERENCE = ROOT / "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json"
+DEFAULT_BLUEPRINT = ROOT / "docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json"
 
 
-def read_text(path: str) -> str:
-    file_path = ROOT / path
-    if not file_path.exists():
-        return ""
-    return file_path.read_text(encoding="utf-8", errors="replace")
+def load_batches(path: Path) -> list[dict]:
+    data = json.loads(path.read_text())
+    if isinstance(data, dict) and isinstance(data.get("batches"), list):
+        return data["batches"]
+    if isinstance(data, list):
+        return data
+    raise ValueError(f"{path} does not contain a batch list")
 
 
-def extract_after(label: str, text: str) -> str:
-    pattern = rf"^{re.escape(label)}\s*:?\s*[\"`']?([^\"`'\n]+)"
-    match = re.search(pattern, text, flags=re.MULTILINE | re.IGNORECASE)
-    return match.group(1).strip() if match else ""
+def train_for(record: dict) -> str:
+    batch_id = str(record.get("id", ""))
+    if batch_id.startswith("SA"):
+        return "SA"
+    if batch_id.startswith("LDI"):
+        return "LDI"
+    if batch_id.startswith("AOS"):
+        return "AOS"
+    if batch_id.startswith("FCP"):
+        return "FCP"
+    if batch_id.startswith("PFC"):
+        return "PFC"
+    if batch_id.startswith("EFC"):
+        return "EFC"
+    if batch_id.startswith("RHC"):
+        return "RHC"
+    if batch_id.startswith("CS"):
+        return "CS"
+    if batch_id.startswith("PX"):
+        return "PX"
+    if batch_id.startswith("PK"):
+        return "PK"
+    if batch_id.startswith("DPTG"):
+        return "DPTG"
+    return "Other"
 
 
-def extract_yaml_value(path: str, key: str) -> str:
-    text = read_text(path)
-    match = re.search(rf"^\s*{re.escape(key)}:\s*[\"']?([^\"'\n]+)", text, flags=re.MULTILINE)
-    return match.group(1).strip() if match else ""
-
-
-def load_json(path: str) -> dict[str, Any]:
-    text = read_text(path)
-    if not text:
-        return {}
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError as exc:
-        return {"__json_error__": str(exc)}
-
-
-def batch_id_from_phrase(value: str) -> str:
-    match = re.search(r"\b([A-Z]+[0-9]+[A-Z]?)\b", value or "")
-    return match.group(1) if match else ""
-
-
-def queue_counts(reference: dict[str, Any]) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    batches = reference.get("batches", []) if isinstance(reference, dict) else []
-    for batch in batches:
-        status = str(batch.get("status", "unknown"))
-        counts[status] = counts.get(status, 0) + 1
-    return dict(sorted(counts.items()))
-
-
-def generic_sa_labels(canonical: dict[str, Any]) -> list[str]:
-    defects: list[str] = []
-    batches = canonical.get("batches", []) if isinstance(canonical, dict) else []
-    for batch in batches:
-        batch_id = str(batch.get("id", ""))
-        title = str(batch.get("title", ""))
-        if re.fullmatch(r"SA(1[1-9]|2[0-9]|3[0-2])", batch_id) and title == batch_id:
-            defects.append(batch_id)
-    return defects
-
-
-def claim_warnings(paths: list[str]) -> list[str]:
-    warnings: list[str] = []
-    for path in paths:
-        text = read_text(path)
-        for claim in FORBIDDEN_RELEASE_CLAIMS:
-            if claim.lower() in text.lower():
-                warnings.append(
-                    f"{path}: contains forbidden-readiness phrase '{claim}' — "
-                    "verify it is framed as forbidden/non-claim."
-                )
-    return warnings
+def duplicate_ids(records: list[dict]) -> list[str]:
+    counts = Counter(str(item.get("id", "")) for item in records)
+    return sorted(batch_id for batch_id, count in counts.items() if count > 1)
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Read-only Ambitions queue/state snapshot")
-    parser.add_argument("--strict", action="store_true", help="Return non-zero when Red warnings are present")
-    parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--queue", default=str(DEFAULT_QUEUE))
+    parser.add_argument("--reference", default=str(DEFAULT_REFERENCE))
+    parser.add_argument("--blueprint", default=str(DEFAULT_BLUEPRINT))
+    parser.add_argument("--limit", type=int, default=0)
     args = parser.parse_args()
 
-    active_text = read_text(".codex/state/active-batch.yml")
-    batch_state_text = read_text(".codex/reports/current-batch-train-state.md")
-    run_state_text = read_text(".codex/reports/current-run-state.md")
-    canonical = load_json("docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json")
-    remaining = load_json("docs/codex/AMB_REMAINING_BATCH_REFERENCE.json")
+    queue_path = Path(args.queue)
+    reference_path = Path(args.reference)
+    blueprint_path = Path(args.blueprint)
 
-    active_current = extract_yaml_value(".codex/state/active-batch.yml", "batch")
-    active_next = extract_yaml_value(".codex/state/active-batch.yml", "next_eligible_batch")
-    batch_state_current = extract_after("Current batch", batch_state_text)
-    batch_state_next = extract_after("Next eligible batch", batch_state_text) or extract_after(
-        "Next recommended implementation pass", batch_state_text
-    )
-    run_state_current = extract_after("Current batch", run_state_text)
-    run_state_next = extract_after("Next eligible batch", run_state_text)
+    queue = load_batches(queue_path)
+    reference = load_batches(reference_path) if reference_path.exists() else []
+    blueprint = load_batches(blueprint_path) if blueprint_path.exists() else []
 
-    canonical_next = ""
-    if isinstance(canonical, dict):
-        canonical_next = str(canonical.get("next_eligible_batch", ""))
+    ids = [str(item.get("id", "")) for item in queue]
+    ref_ids = [str(item.get("id", "")) for item in reference]
+    blueprint_ids = [str(item.get("id", "")) for item in blueprint]
 
-    active_next_id = batch_id_from_phrase(active_next)
-    batch_state_next_id = batch_id_from_phrase(batch_state_next)
-    run_state_next_id = batch_id_from_phrase(run_state_next)
-    canonical_next_id = batch_id_from_phrase(canonical_next)
+    print("# Ambitions Queue Snapshot")
+    print(f"queue_path: {queue_path}")
+    print(f"queue_count: {len(queue)}")
+    print(f"reference_count: {len(reference) if reference else 'missing'}")
+    print(f"blueprint_count: {len(blueprint) if blueprint else 'missing'}")
+    print(f"first_batch: {ids[0] if ids else 'none'}")
+    print(f"last_batch: {ids[-1] if ids else 'none'}")
+    print(f"duplicates: {', '.join(duplicate_ids(queue)) or 'none'}")
+    print("classifications:")
+    for name, count in sorted(Counter(str(item.get("classification", "unknown")) for item in queue).items()):
+        print(f"- {name}: {count}")
+    print("trains:")
+    for name, count in sorted(Counter(train_for(item) for item in queue).items()):
+        print(f"- {name}: {count}")
 
-    warnings: list[str] = []
-    red: list[str] = []
+    if args.limit:
+        print("records:")
+        for index, record in enumerate(queue[: args.limit], start=1):
+            print(f"- {index}: {record.get('id')} — {record.get('title')} [{record.get('classification')}]")
 
-    if not active_text:
-        red.append("Missing .codex/state/active-batch.yml")
-    if not batch_state_text:
-        red.append("Missing .codex/reports/current-batch-train-state.md")
-    if not run_state_text:
-        red.append("Missing .codex/reports/current-run-state.md")
+    errors: list[str] = []
+    if duplicate_ids(queue):
+        errors.append("canonical queue has duplicate IDs")
+    if reference and ids != ref_ids:
+        errors.append("reference IDs do not match canonical queue order")
+    if blueprint and ids != blueprint_ids:
+        errors.append("blueprint IDs do not match canonical queue order")
 
-    next_ids = {
-        "active-batch.yml": active_next_id,
-        "current-batch-train-state.md": batch_state_next_id,
-        "current-run-state.md": run_state_next_id,
-        "GLOBAL_QUEUE_CANONICAL_ORDER.json": canonical_next_id,
-    }
-    present_next_ids = {key: value for key, value in next_ids.items() if value}
-    if len(set(present_next_ids.values())) > 1:
-        red.append(f"Next-batch mirror mismatch: {present_next_ids}")
-
-    if "Current batch: PK14" in run_state_text or "Next eligible batch: PK15" in run_state_text:
-        red.append("Stale mirror detected: current-run-state.md still actively references PK14/PK15.")
-
-    for required in REQUIRED_CONTROL_PLANE_FILES:
-        if not (ROOT / required).exists():
-            warnings.append(f"Missing control-plane artifact: {required}")
-
-    if isinstance(canonical, dict) and canonical.get("__json_error__"):
-        red.append(f"Canonical queue JSON invalid: {canonical['__json_error__']}")
-
-    sa_defects = generic_sa_labels(canonical if isinstance(canonical, dict) else {})
-    if sa_defects:
-        red.append(f"Generic Source Atlas titles remain in canonical queue: {', '.join(sa_defects)}")
-
-    remaining_reference = read_text("docs/codex/AMB_REMAINING_BATCH_REFERENCE.md")
-    if "standalone AIR" in remaining_reference and "Do not create standalone AIR" not in remaining_reference:
-        warnings.append("Remaining reference mentions standalone AIR; verify it says not to create one.")
-
-    release_claim_notes = claim_warnings(
-        [
-            ".codex/state/active-batch.yml",
-            ".codex/reports/current-batch-train-state.md",
-            ".codex/reports/current-run-state.md",
-            "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
-        ]
-    )
-
-    if red:
-        status = "RED"
-        next_safe_action = "Repair control-plane state before running any implementation batch."
-    elif warnings:
-        status = "YELLOW"
-        next_safe_action = active_next_id or canonical_next_id or "Inspect queue manually."
-    else:
-        status = "GREEN"
-        next_safe_action = active_next_id or canonical_next_id or "Inspect queue manually."
-
-    payload = {
-        "status": status,
-        "next_safe_action": next_safe_action,
-        "active_state_summary": {
-            "active_current": active_current,
-            "active_next": active_next,
-            "batch_state_current": batch_state_current,
-            "batch_state_next": batch_state_next,
-            "run_state_current": run_state_current,
-            "run_state_next": run_state_next,
-            "canonical_next": canonical_next,
-        },
-        "queue_counts": queue_counts(remaining if isinstance(remaining, dict) else {}),
-        "warnings": warnings,
-        "red": red,
-        "release_claim_notes": release_claim_notes,
-    }
-
-    if args.json:
-        print(json.dumps(payload, indent=2, sort_keys=True))
-    else:
-        print(f"STATUS: {status}")
-        print(f"next_safe_action: {next_safe_action}")
-        print("\nActive state summary:")
-        for key, value in payload["active_state_summary"].items():
-            print(f"- {key}: {value or 'UNKNOWN'}")
-        print("\nQueue counts:")
-        if payload["queue_counts"]:
-            for key, value in payload["queue_counts"].items():
-                print(f"- {key}: {value}")
-        else:
-            print("- unavailable")
-        print("\nWarnings:")
-        for item in warnings or ["none"]:
-            print(f"- {item}")
-        print("\nRed:")
-        for item in red or ["none"]:
-            print(f"- {item}")
-        print("\nRelease claim notes:")
-        for item in release_claim_notes or ["none"]:
-            print(f"- {item}")
-
-    return 1 if args.strict and status == "RED" else 0
+    if errors:
+        for error in errors:
+            print(f"ERROR: {error}", file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":

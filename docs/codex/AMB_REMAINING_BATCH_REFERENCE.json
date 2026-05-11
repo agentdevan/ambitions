@@ -640,7 +640,7 @@
     },
     {
       "id": "SA11",
-      "title": "SA11",
+      "title": "Source Atlas Store",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -654,7 +654,7 @@
     },
     {
       "id": "SA12",
-      "title": "SA12",
+      "title": "Source Atlas Query Engine",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -668,7 +668,7 @@
     },
     {
       "id": "SA13",
-      "title": "SA13",
+      "title": "Source Needed Mode",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -682,7 +682,7 @@
     },
     {
       "id": "SA14",
-      "title": "SA14",
+      "title": "Local Impact Matcher",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -696,7 +696,7 @@
     },
     {
       "id": "SA15",
-      "title": "SA15",
+      "title": "Offline Fallback Runtime",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -710,7 +710,7 @@
     },
     {
       "id": "SA16",
-      "title": "SA16",
+      "title": "Source Container Model",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -724,7 +724,7 @@
     },
     {
       "id": "SA17",
-      "title": "SA17",
+      "title": "URL Source Importer",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -738,7 +738,7 @@
     },
     {
       "id": "SA18",
-      "title": "SA18",
+      "title": "Plain Text Importer",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -752,7 +752,7 @@
     },
     {
       "id": "SA19",
-      "title": "SA19",
+      "title": "PDF Import Boundary",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -766,7 +766,7 @@
     },
     {
       "id": "SA20",
-      "title": "SA20",
+      "title": "PDFKit Text Extraction",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -780,7 +780,7 @@
     },
     {
       "id": "SA21",
-      "title": "SA21",
+      "title": "Vision OCR Fallback",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -794,7 +794,7 @@
     },
     {
       "id": "SA22",
-      "title": "SA22",
+      "title": "Image / Screenshot Importer",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -808,7 +808,7 @@
     },
     {
       "id": "SA23",
-      "title": "SA23",
+      "title": "Document Type Classifier",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -822,7 +822,7 @@
     },
     {
       "id": "SA24",
-      "title": "SA24",
+      "title": "Claim Candidate Extractor",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -836,7 +836,7 @@
     },
     {
       "id": "SA25",
-      "title": "SA25",
+      "title": "Source Review Sheet / Claim Review Drawer",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -850,7 +850,7 @@
     },
     {
       "id": "SA26",
-      "title": "SA26",
+      "title": "User Mini-Pack Builder",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -864,7 +864,7 @@
     },
     {
       "id": "SA27",
-      "title": "SA27",
+      "title": "Pack Factory Lite",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -878,7 +878,7 @@
     },
     {
       "id": "SA28",
-      "title": "SA28",
+      "title": "Pack Diff / Changed Claim Tooling",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -892,7 +892,7 @@
     },
     {
       "id": "SA29",
-      "title": "SA29",
+      "title": "Hash / Signature / Revocation Tooling",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -906,7 +906,7 @@
     },
     {
       "id": "SA30",
-      "title": "SA30",
+      "title": "Freshness Broker Manifest Contract",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -920,7 +920,7 @@
     },
     {
       "id": "SA31",
-      "title": "SA31",
+      "title": "Official Source Adapter Contracts",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",
@@ -934,7 +934,7 @@
     },
     {
       "id": "SA32",
-      "title": "SA32",
+      "title": "Source Atlas UI Primitives / QA / Handoff",
       "classification": "executable_later",
       "status_class": "queued",
       "owner_train": "SA / Source Atlas",

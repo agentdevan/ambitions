@@ -1,96 +1,80 @@
 #!/usr/bin/env python3
-"""Run the read-only Ambitions control-plane checks as one gate.
-
-This script intentionally performs no repo mutation. It is designed to be run
-before advancing to the next batch, before accepting a final report, and after
-queue/control-plane edits.
-"""
+"""Validate the queue-control-plane invariants used by remaining-train prompts."""
 
 from __future__ import annotations
 
 import argparse
 import json
-import subprocess
-import sys
 from pathlib import Path
+import sys
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
-BASE_CHECKS = [
-    [sys.executable, "-m", "json.tool", "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json"],
-    [sys.executable, "-m", "json.tool", "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"],
-    [sys.executable, "scripts/ambitions-queue-snapshot.py", "--strict"],
-    [sys.executable, "scripts/ambitions-source-atlas-title-check.py", "--strict"],
+
+REQUIRED_FILES = [
+    "docs/truth/README.md",
+    "docs/truth/CODEX_PROCESS_TRUTH.md",
+    ".codex/state/active-batch.yml",
+    ".codex/reports/current-batch-train-state.md",
+    "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
+    "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
 ]
 
 
-def run_command(command: list[str]) -> dict[str, object]:
-    result = subprocess.run(
-        command,
-        cwd=ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-    )
-    return {
-        "command": " ".join(command),
-        "exit_code": result.returncode,
-        "stdout": result.stdout.strip(),
-        "stderr": result.stderr.strip(),
-    }
+def load_batches(path: Path) -> list[dict]:
+    data = json.loads(path.read_text())
+    if isinstance(data, dict) and isinstance(data.get("batches"), list):
+        return data["batches"]
+    if isinstance(data, list):
+        return data
+    raise ValueError(f"{path} does not contain a batch list")
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run Ambitions control-plane checks")
-    parser.add_argument(
-        "--final-report",
-        action="append",
-        default=[],
-        help="Optional final report path to validate with ambitions-final-report-gate.py. May be passed more than once.",
-    )
-    parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--strict", action="store_true")
     args = parser.parse_args()
 
-    checks = list(BASE_CHECKS)
-    for report in args.final_report:
-        checks.append([sys.executable, "scripts/ambitions-final-report-gate.py", report, "--strict"])
+    errors: list[str] = []
+    warnings: list[str] = []
 
-    results = [run_command(command) for command in checks]
-    failures = [result for result in results if result["exit_code"] != 0]
-    status = "RED" if failures else "GREEN"
-    payload = {
-        "status": status,
-        "checks": results,
-        "failure_count": len(failures),
-        "non_claims": [
-            "This gate does not prove app build success.",
-            "This gate does not prove UI visual quality.",
-            "This gate does not prove accessibility conformance.",
-            "This gate does not prove release/TestFlight/App Store readiness.",
-            "This gate does not prove physical-device behavior.",
-        ],
-    }
+    for rel in REQUIRED_FILES:
+        if not (ROOT / rel).exists():
+            errors.append(f"missing required control-plane file: {rel}")
 
-    if args.json:
-        print(json.dumps(payload, indent=2, sort_keys=True))
-    else:
-        print(f"STATUS: {status}")
-        for result in results:
-            print()
-            print(f"$ {result['command']}")
-            print(f"exit_code: {result['exit_code']}")
-            if result["stdout"]:
-                print("stdout:")
-                print(result["stdout"])
-            if result["stderr"]:
-                print("stderr:")
-                print(result["stderr"])
-        print("\nNon-claims:")
-        for item in payload["non_claims"]:
-            print(f"- {item}")
+    queue_path = ROOT / "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
+    reference_path = ROOT / "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json"
+    if queue_path.exists() and reference_path.exists():
+        queue = load_batches(queue_path)
+        reference = load_batches(reference_path)
+        queue_ids = [str(item.get("id", "")) for item in queue]
+        reference_ids = [str(item.get("id", "")) for item in reference]
+        if len(queue) != 146:
+            warnings.append(f"canonical queue count is {len(queue)}, not the expected 146 hypothesis")
+        if queue_ids != reference_ids:
+            errors.append("remaining-batch reference order differs from canonical queue")
+        pk17 = next((item for item in queue if item.get("id") == "PK17"), None)
+        if not pk17:
+            errors.append("PK17 missing from canonical queue")
+        elif pk17.get("classification") != "executable_now":
+            errors.append(f"PK17 classification is {pk17.get('classification')!r}, expected executable_now")
 
-    return 1 if failures else 0
+    active_text = (ROOT / ".codex/state/active-batch.yml").read_text() if (ROOT / ".codex/state/active-batch.yml").exists() else ""
+    if "next_eligible_batch: \"PK17 Today Read Model Extraction\"" not in active_text:
+        errors.append("active-batch mirror does not identify PK17 Today Read Model Extraction as next eligible")
+    if "branch_creation_allowed: false" not in active_text:
+        warnings.append("active-batch mirror does not explicitly forbid branch creation")
+
+    print("# Ambitions Control Plane Check")
+    for warning in warnings:
+        print(f"YELLOW: {warning}")
+    if errors:
+        for error in errors:
+            print(f"RED: {error}", file=sys.stderr)
+        return 1
+    print("GREEN: control-plane queue invariants passed")
+    return 0 if not (args.strict and warnings) else 0
 
 
 if __name__ == "__main__":

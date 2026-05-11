@@ -99,28 +99,28 @@ also closes Green and runner/no-claim gates remain intact.
 | SA10A | Capability Graph / Level Ladder Implementation | executable_later | SA07-SA10 plus SAP composition/projection gates. | invoked |
 | SA10B | Goal Projection Engine Contract | executable_later | SA07-SA10 plus SAP composition/projection gates. | invoked |
 | SA10C | Projection Fixtures And No-Sprawl Validation | executable_later | SA07-SA10 plus SAP composition/projection gates. | invoked |
-| SA11 | SA11 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA12 | SA12 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA13 | SA13 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA14 | SA14 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA15 | SA15 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA16 | SA16 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA17 | SA17 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA18 | SA18 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA19 | SA19 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA20 | SA20 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA21 | SA21 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA22 | SA22 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA23 | SA23 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA24 | SA24 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA25 | SA25 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA26 | SA26 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA27 | SA27 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA28 | SA28 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA29 | SA29 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA30 | SA30 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA31 | SA31 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA32 | SA32 | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA11 | Source Atlas Store | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA12 | Source Atlas Query Engine | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA13 | Source Needed Mode | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA14 | Local Impact Matcher | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA15 | Offline Fallback Runtime | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA16 | Source Container Model | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA17 | URL Source Importer | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA18 | Plain Text Importer | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA19 | PDF Import Boundary | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA20 | PDFKit Text Extraction | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA21 | Vision OCR Fallback | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA22 | Image / Screenshot Importer | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA23 | Document Type Classifier | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA24 | Claim Candidate Extractor | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA25 | Source Review Sheet / Claim Review Drawer | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA26 | User Mini-Pack Builder | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA27 | Pack Factory Lite | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA28 | Pack Diff / Changed Claim Tooling | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA29 | Hash / Signature / Revocation Tooling | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA30 | Freshness Broker Manifest Contract | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA31 | Official Source Adapter Contracts | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA32 | Source Atlas UI Primitives / QA / Handoff | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
 | LDI15 | Living Plan Recompiler | blocked_until_dependency | Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used. | invoked |
 | LDI16 | Mutation Permissions And Impact Levels | blocked_until_dependency | Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used. | invoked |
 | LDI17 | Continuity Sync | executable_later | Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used. | invoked |
