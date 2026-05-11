@@ -63,6 +63,12 @@ Approved terms:
 - Needs a Place
 - Ready to Place
 - Grow into Goal
+- Ambition
+- Commitment
+- Constraint
+- Recovery Thread
+- Recommendation Trace
+- Reflection
 - Trust & Automation
 - Privacy
 - Receipt
@@ -123,7 +129,9 @@ Rule: users should not need internal object names to understand Ambitions.
 | capacity surface | Time | replaces Plan as top-level tab |
 | capacity action | Shape | Shape week, Shape Time |
 | proof | Receipt | not notification/feed |
+| proof continuity | Proof Trail | proof transfer and retention |
 | explanation | Why this? | source-aware |
+| recommendation path | Recommendation Trace | includes source, reason, control |
 | partial completion | Still counts | validates real progress |
 | raw input | Capture | singular label |
 | unplaced input | Needs a Place | safe, non-shaming |

@@ -39,6 +39,7 @@ usage() {
 Usage:
   scripts/ambitions-codex-train.sh BATCH_ID path/to/prompt.md
   scripts/ambitions-codex-train.sh --self-check
+  scripts/ambitions-codex-train.sh --quote-self-check
 
 Example:
   scripts/ambitions-codex-train.sh SI07 prompts/SI07.md
@@ -94,6 +95,10 @@ EOF
   rm -f "$mock_preflight"
   trap - EXIT
   exec "$(dirname "$0")/ambitions-runner-self-check.sh"
+fi
+
+if [[ "${1:-}" == "--quote-self-check" ]]; then
+  exec bash "$(dirname "$0")/ambitions-runner-quote-self-check.sh"
 fi
 
 [[ "$#" -eq 2 ]] || {

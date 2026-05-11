@@ -9,23 +9,25 @@ Applies to: Humans, Codex, and any AI agent working in the Ambitions repo
 ## Mandatory read order
 
 1. `PRODUCT_DESIGN_TRUTH.md` — product/design authority.
-2. `IMPLEMENTATION_TRUTH.md` — implementation/source authority.
-3. `RELEASE_TRUTH.md` — validation, proof, release, and claim authority.
-4. `CODEX_PROCESS_TRUTH.md` — Codex operating authority.
-5. `HISTORICAL_POLICY.md` — historical extraction, quarantine, archive, and deletion policy.
-6. `AGENTS.md`.
-7. `README.md`.
-8. `docs/README.md`.
-9. `project.yml`.
-10. `Package.swift`.
-11. Relevant source, tests, scripts, release/build docs.
-12. Relevant `.codex` / `.agents` files only after the truth files.
+2. `PRODUCT_MOAT_TRUTH.md` — moat strategy and anti-commodity guardrails (subordinate to active product/design truth).
+3. `IMPLEMENTATION_TRUTH.md` — implementation/source authority.
+4. `RELEASE_TRUTH.md` — validation, proof, release, and claim authority.
+5. `CODEX_PROCESS_TRUTH.md` — Codex operating authority.
+6. `HISTORICAL_POLICY.md` — historical extraction, quarantine, archive, and deletion policy.
+7. `AGENTS.md`.
+8. `README.md`.
+9. `docs/README.md`.
+10. `project.yml`.
+11. `Package.swift`.
+12. Relevant source, tests, scripts, release/build docs.
+13. Relevant `.codex` / `.agents` files only after the truth files.
 
 ## Conflict resolution
 
 | Conflict Type | Winner |
 |---|---|
 | Product/design direction | `PRODUCT_DESIGN_TRUTH.md` |
+| Moat strategy and anti-commodity claims | `PRODUCT_MOAT_TRUTH.md` |
 | Implementation/source status | Live source/project/test/script evidence, read through `IMPLEMENTATION_TRUTH.md` |
 | Release/readiness/proof claim | Current proof/log evidence, read through `RELEASE_TRUTH.md` |
 | Codex process behavior | `CODEX_PROCESS_TRUTH.md` |

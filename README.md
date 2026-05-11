@@ -31,6 +31,12 @@ The active flagship product model has five top-level surfaces:
 - Time — capacity and shaping
 - You — preferences, trust, privacy, and control
 
+Moat thesis anchor:
+
+```text
+Ambitions compounds private ambition context into proof-backed execution decisions.
+```
+
 The active product and design truth starts in [`docs/truth/PRODUCT_DESIGN_TRUTH.md`](docs/truth/PRODUCT_DESIGN_TRUTH.md). Supporting canon lives under [`docs/AmbitionsCanon/README.md`](docs/AmbitionsCanon/README.md) where compatible with `docs/truth/*`.
 
 Compatibility note: some internal source paths, route raw values, tests, and historical docs still use `Plan` / `.plan` naming. Those are compatibility seams, not active user-facing IA. The active top-level destination is `Time`.
@@ -131,16 +137,17 @@ Start here:
 
 1. [`docs/truth/README.md`](docs/truth/README.md) — active authority index and conflict rules
 2. [`docs/truth/PRODUCT_DESIGN_TRUTH.md`](docs/truth/PRODUCT_DESIGN_TRUTH.md) — product/design authority
-3. [`docs/truth/IMPLEMENTATION_TRUTH.md`](docs/truth/IMPLEMENTATION_TRUTH.md) — implementation/source authority
-4. [`docs/truth/RELEASE_TRUTH.md`](docs/truth/RELEASE_TRUTH.md) — release/proof authority
-5. [`docs/truth/CODEX_PROCESS_TRUTH.md`](docs/truth/CODEX_PROCESS_TRUTH.md) — Codex operating authority
-6. [`docs/truth/HISTORICAL_POLICY.md`](docs/truth/HISTORICAL_POLICY.md) — historical cleanup policy
-7. [`docs/status/current-implementation-map.md`](docs/status/current-implementation-map.md) — what is implemented, scaffolded, planned, or historical
-8. [`docs/status/repo-cleanup-index.md`](docs/status/repo-cleanup-index.md) — cleanup and quarantine support index
-9. [`docs/status/release-evidence-packet.md`](docs/status/release-evidence-packet.md) — build/test/release evidence posture
-10. [`docs/native-build-and-release.md`](docs/native-build-and-release.md) — local validation workflow
-11. [`AGENTS.md`](AGENTS.md) — AI/Codex contributor rules, subordinate to `docs/truth/*`
-12. [`docs/README.md`](docs/README.md) — full docs map
+3. [`docs/truth/PRODUCT_MOAT_TRUTH.md`](docs/truth/PRODUCT_MOAT_TRUTH.md) — moat strategy and anti-commodity guardrails
+4. [`docs/truth/IMPLEMENTATION_TRUTH.md`](docs/truth/IMPLEMENTATION_TRUTH.md) — implementation/source authority
+5. [`docs/truth/RELEASE_TRUTH.md`](docs/truth/RELEASE_TRUTH.md) — release/proof authority
+6. [`docs/truth/CODEX_PROCESS_TRUTH.md`](docs/truth/CODEX_PROCESS_TRUTH.md) — Codex operating authority
+7. [`docs/truth/HISTORICAL_POLICY.md`](docs/truth/HISTORICAL_POLICY.md) — historical cleanup policy
+8. [`docs/status/current-implementation-map.md`](docs/status/current-implementation-map.md) — what is implemented, scaffolded, planned, or historical
+9. [`docs/status/repo-cleanup-index.md`](docs/status/repo-cleanup-index.md) — cleanup and quarantine support index
+10. [`docs/status/release-evidence-packet.md`](docs/status/release-evidence-packet.md) — build/test/release evidence posture
+11. [`docs/native-build-and-release.md`](docs/native-build-and-release.md) — local validation workflow
+12. [`AGENTS.md`](AGENTS.md) — AI/Codex contributor rules, subordinate to `docs/truth/*`
+13. [`docs/README.md`](docs/README.md) — full docs map
 
 ## Contributor boundary
 

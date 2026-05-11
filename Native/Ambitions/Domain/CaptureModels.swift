@@ -165,6 +165,8 @@ enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable 
     case goalSeed = "goal_seed"
     case goalAttachment = "goal_attachment"
     case deliverableSeed = "deliverable_seed"
+    case proofItem = "proof_item"
+    case constraintItem = "constraint_item"
     case waiting
     case optionalSomeday = "optional_someday"
     case archive
@@ -176,6 +178,8 @@ enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable 
         case .goalSeed: "Goal seed"
         case .goalAttachment: "Attach to goal"
         case .deliverableSeed: "Deliverable seed"
+        case .proofItem: "Proof"
+        case .constraintItem: "Constraint"
         case .waiting: "Waiting"
         case .optionalSomeday: "Optional / Someday"
         case .archive: "Archive"
@@ -189,6 +193,7 @@ enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable 
         case .goalSeed: .turnIntoGoal
         case .goalAttachment: .attachToGoal
         case .deliverableSeed: .deliverableSeed
+        case .proofItem, .constraintItem: .deliverableSeed
         case .waiting: .waiting
         case .optionalSomeday: .optionalSomeday
         case .archive: .archive

@@ -624,6 +624,8 @@ private extension DefaultCaptureService {
             .goalBound
         case .deliverableSeed:
             .seed
+        case .proofItem, .constraintItem:
+            .seed
         case .waiting:
             .waiting
         case .optionalSomeday:

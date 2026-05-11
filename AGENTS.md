@@ -8,6 +8,7 @@ Current repo posture:
 
 - `docs/truth/README.md` is the active authority index.
 - `docs/truth/PRODUCT_DESIGN_TRUTH.md` is current product/design truth.
+- `docs/truth/PRODUCT_MOAT_TRUTH.md` is current product moat strategy and anti-commodity alignment authority.
 - `docs/truth/IMPLEMENTATION_TRUTH.md` is current implementation/source truth.
 - `docs/truth/RELEASE_TRUTH.md` is current validation/release/proof truth.
 - `docs/truth/CODEX_PROCESS_TRUTH.md` is current Codex operating truth.
@@ -28,18 +29,19 @@ For normal repo work, read in this order:
 
 1. `docs/truth/README.md`
 2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-3. `docs/truth/IMPLEMENTATION_TRUTH.md`
-4. `docs/truth/RELEASE_TRUTH.md`
-5. `docs/truth/CODEX_PROCESS_TRUTH.md`
-6. `docs/truth/HISTORICAL_POLICY.md`
-7. `README.md`
-8. `docs/README.md`
-9. `docs/status/current-implementation-map.md`
-10. `docs/status/repo-cleanup-index.md`
-11. `docs/status/release-evidence-packet.md`
-12. `docs/native-build-and-release.md`
-13. the target source files and tests
-14. relevant `.codex` / `.agents` files only after the truth files
+3. `docs/truth/PRODUCT_MOAT_TRUTH.md`
+4. `docs/truth/IMPLEMENTATION_TRUTH.md`
+5. `docs/truth/RELEASE_TRUTH.md`
+6. `docs/truth/CODEX_PROCESS_TRUTH.md`
+7. `docs/truth/HISTORICAL_POLICY.md`
+8. `README.md`
+9. `docs/README.md`
+10. `docs/status/current-implementation-map.md`
+11. `docs/status/repo-cleanup-index.md`
+12. `docs/status/release-evidence-packet.md`
+13. `docs/native-build-and-release.md`
+14. the target source files and tests
+15. relevant `.codex` / `.agents` files only after the truth files
 
 For repo structure, status-location, or "where should I inspect first" questions, inspect `.codex/REPO_INVENTORY.md` after the truth files.
 

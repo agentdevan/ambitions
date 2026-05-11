@@ -15,10 +15,15 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = [
     "docs/truth/README.md",
     "docs/truth/CODEX_PROCESS_TRUTH.md",
+    "docs/truth/PRODUCT_MOAT_TRUTH.md",
     ".codex/state/active-batch.yml",
     ".codex/reports/current-batch-train-state.md",
     "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
     "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
+    "scripts/ambitions-moat-drift-scan.py",
+    "scripts/ambitions-vocabulary-drift-scan.py",
+    "scripts/ambitions-local-first-boundary-scan.py",
+    "scripts/ambitions-signature-object-gate.py",
 ]
 
 

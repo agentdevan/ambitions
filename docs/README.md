@@ -6,13 +6,14 @@ Active repo authority starts in [`truth/README.md`](truth/README.md). If this in
 
 1. [`truth/README.md`](truth/README.md)
 2. [`truth/PRODUCT_DESIGN_TRUTH.md`](truth/PRODUCT_DESIGN_TRUTH.md)
-3. [`truth/IMPLEMENTATION_TRUTH.md`](truth/IMPLEMENTATION_TRUTH.md)
-4. [`truth/RELEASE_TRUTH.md`](truth/RELEASE_TRUTH.md)
-5. [`truth/CODEX_PROCESS_TRUTH.md`](truth/CODEX_PROCESS_TRUTH.md)
-6. [`truth/HISTORICAL_POLICY.md`](truth/HISTORICAL_POLICY.md)
-7. [`../README.md`](../README.md)
-8. [`../AGENTS.md`](../AGENTS.md)
-9. Current source, tests, scripts, build/release docs, and supporting docs as needed.
+3. [`truth/PRODUCT_MOAT_TRUTH.md`](truth/PRODUCT_MOAT_TRUTH.md)
+4. [`truth/IMPLEMENTATION_TRUTH.md`](truth/IMPLEMENTATION_TRUTH.md)
+5. [`truth/RELEASE_TRUTH.md`](truth/RELEASE_TRUTH.md)
+6. [`truth/CODEX_PROCESS_TRUTH.md`](truth/CODEX_PROCESS_TRUTH.md)
+7. [`truth/HISTORICAL_POLICY.md`](truth/HISTORICAL_POLICY.md)
+8. [`../README.md`](../README.md)
+9. [`../AGENTS.md`](../AGENTS.md)
+10. Current source, tests, scripts, build/release docs, and supporting docs as needed.
 
 ## Supporting areas
 

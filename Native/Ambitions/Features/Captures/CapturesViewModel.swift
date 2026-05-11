@@ -342,6 +342,10 @@ final class CapturesViewModel {
             return "Saved as Goal · Creative"
         case .goalAttachment:
             return "Attached as Proof"
+        case .proofItem:
+            return "Saved as Proof"
+        case .constraintItem:
+            return "Saved as Constraint"
         case .waiting:
             return "Saved as Waiting"
         case .deliverableSeed:

@@ -194,6 +194,24 @@ This ladder must be visible in UI behavior, not just marketing copy.
 
 ## Surface-Specific Product Grammar
 
+### Ambition Graph Contract
+
+The full graph includes:
+
+```text
+Ambition → Goal Thread → Commitment → Step → Closure Event → Proof → Reflection → Recovery / Pivot
+```
+
+This graph underpins recommendations, continuity, and closure logic.
+
+Every recommendation path should be explainable through:
+
+- source
+- fit/proof basis
+- user control
+- receipt
+- recovery handoff if needed
+
 ### Today
 
 Grammar:

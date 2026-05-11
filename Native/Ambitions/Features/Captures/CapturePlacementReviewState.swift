@@ -133,6 +133,10 @@ extension Capture {
             "Goal proof"
         case .deliverableSeed:
             "Idea"
+        case .proofItem:
+            "Proof"
+        case .constraintItem:
+            "Constraint"
         case .waiting:
             "Waiting"
         case .optionalSomeday:
@@ -154,6 +158,10 @@ extension Capture {
             "Attaches as proof only after you choose a goal."
         case .deliverableSeed:
             "Keeps this as an idea without scheduling it."
+        case .proofItem:
+            "Preserves this as proof without changing Today."
+        case .constraintItem:
+            "Keeps this as a constraint Ambitions can surface for review."
         case .waiting:
             "Parks this as waiting without changing Today."
         case .optionalSomeday:

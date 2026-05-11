@@ -959,6 +959,27 @@ You should follow native grouped navigation semantics. VoiceOver must announce g
 
 User System Profile passes only if it feels like premium iOS settings, exposes trust/automation clearly, avoids social/profile/dashboard drift, gives users control over adaptive behavior, and supports object-local Trust Seam routes into global controls.
 
+### 03.1 Moat Object Contract Addendum
+
+The moat contract requires these source objects to remain first-class:
+
+- Ambition
+- Commitment
+- Proof
+- Constraint
+- RecoveryThread
+- RecommendationTrace
+- Reflection
+- Adaptation/Pivot
+
+Each contract requires:
+
+- durable identifiers
+- source visibility
+- inspectable closure/recovery logic
+- user control on adaptive recommendations
+- proof or receipt path for meaningful state changes
+
 Hard Red:
 
 - You becomes social profile

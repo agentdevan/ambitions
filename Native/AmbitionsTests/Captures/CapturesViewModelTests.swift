@@ -636,7 +636,7 @@ private actor MutableCaptureService: CaptureServicing {
             .actionable
         case .planSeed:
             .scheduled
-        case .goalSeed, .deliverableSeed:
+        case .goalSeed, .deliverableSeed, .proofItem, .constraintItem:
             .seed
         case .goalAttachment:
             .goalBound

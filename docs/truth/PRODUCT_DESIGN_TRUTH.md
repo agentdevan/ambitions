@@ -219,6 +219,42 @@ Canonical product sentence:
 Ambitions is a premium iPhone-first, local-first external brain and personal life operating system for organizing life, shaping time, grounding goals in daily reality, adapting plans when life changes, and helping the user make meaningful progress through calm, personalized, inspectable, non-shaming support.
 ```
 
+## 3b. Moat Strategy Alignment
+
+Ambitions’ moat is a durable local graph, not a general productivity workflow.
+
+Canonical moat hierarchy:
+
+```text
+Identity Direction
+  -> Life Area
+    -> Ambition
+      -> Outcome
+        -> Goal Thread
+          -> Commitment
+            -> Step
+              -> Closure Event
+                -> Proof
+                  -> Reflection
+                    -> Adaptation / Recovery
+```
+
+Proof is the retention engine.
+
+- Progress should be validated by proof, not just completion.
+- Recovery is a normal, first-class path.
+- Recommendation explainability must include source, reason, uncertainty, control options, and receipt behavior.
+- User control is explicit in You through Trust & Automation, Privacy, Receipts & History, and Planning Setup.
+
+Hard Red moat failures:
+
+- Plan as a top-level tab.
+- User-facing sixth tab.
+- task app/card-stack/dashboard/task-list or calendar-clone behavior.
+- Shame language in closure (`overdue`, `failed`, `streak broken`, `productivity dropped`).
+- hidden recommendation behavior without source and control.
+- explicit external/cloud LLM or custom hosted personal-data backend as a core core dependency.
+
 Short product thesis:
 
 ```text
