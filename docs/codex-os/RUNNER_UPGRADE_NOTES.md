@@ -1,13 +1,9 @@
 # Runner upgrade notes
 
-Runner integration was reviewed but left unchanged in this batch for safety.
+Batch `AMB-CODEX-OS-NO-COST-HARDENING-002` added a no-cost, opt-in local structured summary path:
 
-Recommended minimal safe upgrade (future batch):
-
-1. Preserve existing `scripts/ambitions-codex-train.sh` behavior.
-2. Add optional `--output-schema` and `--report-dir` support.
-3. Keep default command execution paths unchanged.
-4. Avoid API-key, CI, or signing paths.
-5. Validate with local smoke run and keep fallback to current non-schema mode.
-
-Do not patch now unless command-shape and backward compatibility tests are explicit and green.
+- Added `STRUCTURED_OUTPUT=1|0` support to `scripts/ambitions-codex-train.sh`.
+- Added optional `OUTPUT_SCHEMA` and `OUTPUT_REPORT_DIR` inputs with backward-compatible defaults.
+- Kept default behavior unchanged when `STRUCTURED_OUTPUT` is unset or `0`.
+- Runner summary writes local JSON under `OUTPUT_REPORT_DIR` only when opt-in is enabled.
+- No CLI `--output-schema` enforcement was added; structured output remains local and schema compliant.

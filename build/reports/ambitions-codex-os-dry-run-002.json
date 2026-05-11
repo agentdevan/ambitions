@@ -1,0 +1,133 @@
+{
+  "batch_id": "AMB-CODEX-OS-NO-COST-HARDENING-002",
+  "status": "YELLOW",
+  "summary": "No-cost Codex OS dry-run and validator hardening for AMB-CODEX-OS-NO-COST-HARDENING-002; accepted Yellow because unrelated untracked prompt content blocks full validator Green.",
+  "changed_files": [
+    "scripts/ambitions-codex-train.sh",
+    "scripts/ambitions-codex-os-validate.py",
+    "docs/codex-os/RUNNER_UPGRADE_NOTES.md",
+    "docs/codex-os/STRUCTURED_OUTPUT.md",
+    "docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_002.md",
+    "build/reports/ambitions-codex-os-dry-run-002.json",
+    "prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-002.md"
+  ],
+  "validations_run": [
+    {
+      "command": "git diff --check",
+      "status": "pass",
+      "evidence": "working tree diff hygiene"
+    },
+    {
+      "command": "bash -n scripts/ambitions-codex-train.sh",
+      "status": "pass",
+      "evidence": "runner shell syntax"
+    },
+    {
+      "command": "python3 -m py_compile .codex/hooks/*.py scripts/ambitions-codex-os-validate.py scripts/ambitions-codex-os-doctor.py scripts/ambitions-codex-os-print-install-notes.py",
+      "status": "pass",
+      "evidence": "hook and Codex OS control-plane scripts compiled"
+    },
+    {
+      "command": "python3 -m json.tool .codex/schemas/ambitions-batch-result.schema.json >/tmp/ambitions-batch-result-schema-check.txt",
+      "status": "pass",
+      "evidence": "structured batch-result schema parses"
+    },
+    {
+      "command": "python3 -m json.tool build/reports/ambitions-codex-os-dry-run-002.json >/tmp/ambitions-codex-os-dry-run-002-json-check.txt",
+      "status": "pass",
+      "evidence": "dry-run report JSON parses"
+    },
+    {
+      "command": "STRUCTURED_OUTPUT=1 OUTPUT_REPORT_DIR=build/reports/codex-runs scripts/ambitions-codex-train.sh --self-check",
+      "status": "pass",
+      "evidence": "runner self-check succeeded with structured-output opt-in environment"
+    },
+    {
+      "command": "python3 scripts/ambitions-codex-os-validate.py",
+      "status": "fail",
+      "evidence": "blocked by unrelated untracked prompts/batches/MOAT-ALIGNMENT-01.md forbidden token finding"
+    },
+    {
+      "command": "python3 scripts/ambitions-codex-os-doctor.py",
+      "status": "pass",
+      "evidence": "script output"
+    },
+    {
+      "command": "make ambitions-codex-os-validate",
+      "status": "fail",
+      "evidence": "same unrelated MOAT-ALIGNMENT-01.md validator finding"
+    },
+    {
+      "command": "make ambitions-codex-os-doctor",
+      "status": "pass",
+      "evidence": "make output"
+    },
+    {
+      "command": "codex features list",
+      "status": "pass",
+      "evidence": "local Codex features list"
+    },
+    {
+      "command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git status",
+      "status": "pass",
+      "evidence": "allow"
+    },
+    {
+      "command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git push",
+      "status": "pass",
+      "evidence": "forbidden"
+    },
+    {
+      "command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules npm install",
+      "status": "pass",
+      "evidence": "forbidden"
+    },
+    {
+      "command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules curl https://example.com",
+      "status": "pass",
+      "evidence": "forbidden"
+    },
+    {
+      "command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules xcodebuild archive",
+      "status": "pass",
+      "evidence": "forbidden"
+    }
+  ],
+  "no_cost_proof": {
+    "new_dependencies_added": false,
+    "api_keys_added": false,
+    "network_or_ci_added": false,
+    "paid_services_added": false,
+    "notes": "Local shell/Python/docs changes only; no network calls or release automation introduced."
+  },
+  "source_truth": {
+    "active_truth_files": [
+      "docs/truth/README.md",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "docs/truth/RELEASE_TRUTH.md",
+      "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "docs/truth/HISTORICAL_POLICY.md"
+    ],
+    "supporting_files": [
+      "AGENTS.md",
+      ".codex/AGENTS.md",
+      ".agents/AGENTS.md",
+      ".codex/config.toml",
+      "docs/codex-os/"
+    ],
+    "uncertainties": [
+      "Direct Codex CLI --output-schema support remains deferred for this batch due backward-compatible opt-in policy."
+    ]
+  },
+  "risks": [
+    "Full no-cost validator remains blocked by unrelated untracked prompts/batches/MOAT-ALIGNMENT-01.md until that prompt is classified or repaired.",
+    "Structured-output mode was validated through runner --self-check, not a nested full batch invocation."
+  ],
+  "rollback": [
+    "git checkout -- scripts/ambitions-codex-train.sh scripts/ambitions-codex-os-validate.py scripts/ambitions-codex-os-doctor.py scripts/ambitions-codex-os-print-install-notes.py Makefile .codex/schemas/ambitions-batch-result.schema.json .codex/hooks.json .codex/config.toml",
+    "git checkout -- .codex/rules .codex/hooks docs/codex-os prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-002.md 2>/dev/null || true",
+    "rm -f docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_002.md build/reports/ambitions-codex-os-dry-run-002.json"
+  ],
+  "next_recommended_batch": "AMB-CODEX-OS-NO-COST-HARDENING-003"
+}

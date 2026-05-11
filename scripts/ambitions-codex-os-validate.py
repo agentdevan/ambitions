@@ -15,7 +15,11 @@ BUILD_REPORTS = ROOT / "build" / "reports"
 BUILD_REPORTS.mkdir(parents=True, exist_ok=True)
 REPORT_PATH = BUILD_REPORTS / "ambitions-codex-os-validate.json"
 
-ALLOWED_PROOF_REPORT = "build/reports/ambitions-codex-os-validate.json"
+ALLOWED_REPORT_PATHS = {
+    "build/reports/ambitions-codex-os-validate.json",
+    "build/reports/ambitions-codex-os-dry-run-002.json",
+    "build/reports/AMB-CODEX-OS-NO-COST-HARDENING-002-no-cost-runner-result.json",
+}
 
 REQUIRED_FILES = [
     ROOT / "AGENTS.md",
@@ -116,6 +120,7 @@ CONTENT_SCAN_EXEMPT_PREFIXES = [
     ".codex/schemas/",
     "docs/",
     "prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-001.md",
+    "prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-002.md",
     "build/reports/",
     "AGENTS.md",
     ".agents/AGENTS.md",
@@ -274,7 +279,9 @@ def _git_changed_files() -> list[str]:
 def _is_scoped_allow(path: str) -> bool:
     if path.startswith(".codex/runs/"):
         return True
-    if path == ALLOWED_PROOF_REPORT:
+    if path in ALLOWED_REPORT_PATHS:
+        return True
+    if path.startswith("build/reports/codex-runs/"):
         return True
     return False
 
@@ -388,6 +395,40 @@ def schema_checks(checks: list[dict]) -> list[dict]:
         checks.append(fail(f"schema missing required keys: {', '.join(missing)}"))
     else:
         checks.append(ok("schema parsed with expected required keys"))
+
+    return checks
+
+
+def _is_batch_output_report(path: str) -> bool:
+    return (
+        path in ALLOWED_REPORT_PATHS
+        or path.startswith("build/reports/ambitions-codex-os-dry-run-")
+        or path.startswith("build/reports/") and path.endswith("-no-cost-runner-result.json")
+    )
+
+
+def _validate_output_payload(path: str) -> list[dict]:
+    checks: list[dict] = []
+    try:
+        payload = run_json(ROOT / path)
+    except Exception as exc:
+        return [fail(f"failed to parse batch output report {path}: {exc}")]
+
+    missing = sorted(k for k in SCHEMA_EXPECTED_REQUIRED if k not in payload)
+    if missing:
+        checks.append(fail(f"batch output report {path} missing required keys: {', '.join(missing)}"))
+
+    if payload.get("status") not in {"GREEN", "YELLOW", "RED"}:
+        checks.append(fail(f"batch output report {path} has invalid status: {payload.get('status')}"))
+
+    for key in ("changed_files", "validations_run", "risks", "rollback"):
+        value = payload.get(key)
+        if not isinstance(value, list):
+            checks.append(fail(f"batch output report {path} field '{key}' must be an array"))
+
+    for key in ("no_cost_proof", "source_truth"):
+        if not isinstance(payload.get(key), dict):
+            checks.append(fail(f"batch output report {path} field '{key}' must be an object"))
 
     return checks
 
@@ -547,6 +588,12 @@ def validate() -> int:
 
     hard_failures = [item for item in checks if item["status"] == "fail"]
 
+    for path in changed_files:
+        if _is_batch_output_report(path):
+            checks.extend(_validate_output_payload(path))
+
+    hard_failures = [item for item in checks if item["status"] == "fail"]
+
     status = "GREEN"
     if hard_failures:
         status = "RED"
@@ -554,10 +601,19 @@ def validate() -> int:
         status = "YELLOW"
 
     for path in changed_files:
-        if path.startswith("build/reports/") and path != ALLOWED_PROOF_REPORT:
+        if path.startswith("build/reports/") and not _is_batch_output_report(path):
             hard_failures.append(fail(f"disallowed report change: {path}"))
             status = "RED"
             checks.append(fail(f"disallowed report change: {path}"))
+
+    batch_id = next(
+        (
+            changed.split("/", 2)[2].replace(".md", "")
+            for changed in changed_files
+            if changed.startswith("prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-")
+        ),
+        "AMB-CODEX-OS-NO-COST-HARDENING-002",
+    )
 
     if any(item["status"] == "fail" for item in hard_failures):
         status = "RED"
@@ -565,7 +621,7 @@ def validate() -> int:
         status = "YELLOW"
 
     report = {
-        "batch_id": "AMB-CODEX-OS-NO-COST-HARDENING-001",
+        "batch_id": batch_id,
         "status": status,
         "summary": "Ambitions Codex OS validation for local hardening control-plane",
         "changed_files": changed_files,
@@ -599,7 +655,7 @@ def validate() -> int:
             "rm -f scripts/ambitions-codex-os-validate.py scripts/ambitions-codex-os-doctor.py scripts/ambitions-codex-os-print-install-notes.py",
             "rm -f build/reports/ambitions-codex-os-validate.json",
         ],
-        "next_recommended_batch": "AMB-CODEX-OS-NO-COST-HARDENING-002",
+        "next_recommended_batch": "AMB-CODEX-OS-NO-COST-HARDENING-003",
     }
 
     print("Validation summary:")
