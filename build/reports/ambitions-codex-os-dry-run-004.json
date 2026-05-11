@@ -1,0 +1,71 @@
+{
+  "batch_id": "AMB-CODEX-OS-NO-COST-HARDENING-004",
+  "status": "GREEN",
+  "summary": "No-cost Codex OS hardening 004 completed with path-limited staging approval and updated validator scoping for this prompt artifact.",
+  "changed_files": [
+    ".codex/rules/ambitions-no-cost.rules",
+    ".gitignore",
+    "docs/codex-os/RULES_POLICY.md",
+    "scripts/ambitions-codex-os-validate.py",
+    "docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_004.md",
+    "build/reports/ambitions-codex-os-dry-run-004.json"
+  ],
+  "validations_run": [
+    {"command": "git status --short --branch --untracked-files=all -- . ':(exclude).codex/runs'", "status": "pass", "evidence": "scoped status reported expected pre-existing external dirty work and batch-owned edits"},
+    {"command": "find . -path './.codex/runs/*' -print | head -50", "status": "pass", "evidence": "runner scratch was inspected before cleanup"},
+    {"command": "find . -path './runs/*' -print | head -50", "status": "pass", "evidence": "root runs scratch was inspected and absent"},
+    {"command": "python3 scratch cleanup for .codex/runs and runs", "status": "pass", "evidence": ".codex/runs removed; runs absent; durable proof paths preserved"},
+    {"command": "rg -n '^\\.codex/runs/?$|^runs/?$' .gitignore", "status": "pass", "evidence": ".gitignore contains .codex/runs/ and runs/"},
+    {"command": "git diff --check", "status": "pass", "evidence": "no whitespace errors"},
+    {"command": "python3 -m json.tool build/reports/ambitions-codex-os-dry-run-004.json", "status": "pass", "evidence": "JSON report parses"},
+    {"command": "python3 -m py_compile .codex/hooks/*.py scripts/ambitions-codex-os-validate.py scripts/ambitions-codex-os-doctor.py scripts/ambitions-codex-os-print-install-notes.py", "status": "pass", "evidence": "compiled successfully"},
+    {"command": "python3 scripts/ambitions-codex-os-doctor.py", "status": "pass", "evidence": "doctor checks passed"},
+    {"command": "AMBITIONS_CODEX_OS_EXTERNAL_DIRTY_PATHS=\"prompts/batches/VISUAL-CANON-MOAT-01.md\" python3 scripts/ambitions-codex-os-validate.py", "status": "pass", "evidence": "validation passed with external dirty prompt preserved"},
+    {"command": "make ambitions-codex-os-doctor", "status": "pass", "evidence": "make doctor passed"},
+    {"command": "AMBITIONS_CODEX_OS_EXTERNAL_DIRTY_PATHS=\"prompts/batches/VISUAL-CANON-MOAT-01.md\" make ambitions-codex-os-validate", "status": "pass", "evidence": "make validate passed"},
+    {"command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git status", "status": "pass", "evidence": "decision allow"},
+    {"command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git add -- docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_004.md", "status": "pass", "evidence": "decision allow"},
+    {"command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git commit", "status": "pass", "evidence": "decision prompt"},
+    {"command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git push", "status": "pass", "evidence": "decision forbidden"},
+    {"command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules npm install", "status": "pass", "evidence": "decision forbidden"},
+    {"command": "codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules curl https://example.com", "status": "pass", "evidence": "decision forbidden"}
+  ],
+  "no_cost_proof": {
+    "new_dependencies_added": false,
+    "api_keys_added": false,
+    "network_or_ci_added": false,
+    "paid_services_added": false,
+    "notes": "No dependencies, API keys, network/CI, signing, archive, or upload automation were added."
+  },
+  "source_truth": {
+    "active_truth_files": [
+      "docs/truth/README.md",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "docs/truth/RELEASE_TRUTH.md",
+      "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "docs/truth/HISTORICAL_POLICY.md"
+    ],
+    "supporting_files": [
+      "AGENTS.md",
+      ".codex/AGENTS.md",
+      ".agents/AGENTS.md",
+      "docs/codex-os/"
+    ],
+    "uncertainties": [
+      "pre-existing untracked/unscoped files remain untouched outside this batch scope"
+    ]
+  },
+  "risks": [
+    "Command output can vary depending on external policy tool environment availability.",
+    "The runner still writes ephemeral .codex/runs output during execution, so final closeout must ignore or clean it before Green status.",
+    "Pre-existing dirty files outside this batch scope remain in working tree and are preserved by design"
+  ],
+  "rollback": [
+    "git checkout -- .codex/rules/ambitions-no-cost.rules docs/codex-os/RULES_POLICY.md scripts/ambitions-codex-os-validate.py",
+    "git checkout -- .gitignore",
+    "rm -f docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_004.md",
+    "rm -f build/reports/ambitions-codex-os-dry-run-004.json"
+  ],
+  "next_recommended_batch": "AMB-CODEX-OS-NO-COST-HARDENING-005"
+}

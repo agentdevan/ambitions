@@ -71,3 +71,7 @@ docs/audits/build-logs/*.log
 .codex/xcode-logs/
 .codex/xcode-summaries/
 .codex/build-cache/
+
+# Ambitions / Codex ephemeral run scratch
+.codex/runs/
+runs/

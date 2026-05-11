@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 from fnmatch import fnmatch
@@ -18,6 +19,8 @@ REPORT_PATH = BUILD_REPORTS / "ambitions-codex-os-validate.json"
 ALLOWED_REPORT_PATHS = {
     "build/reports/ambitions-codex-os-validate.json",
     "build/reports/ambitions-codex-os-dry-run-002.json",
+    "build/reports/ambitions-codex-os-dry-run-003.json",
+    "build/reports/ambitions-codex-os-dry-run-004.json",
     "build/reports/AMB-CODEX-OS-NO-COST-HARDENING-002-no-cost-runner-result.json",
 }
 
@@ -94,6 +97,10 @@ FORBIDDEN_SCOPE_PATTERNS = [
     ".github/workflows/**",
 ]
 
+DEFAULT_EXTERNAL_DIRTY_CONTROL_WORK = {
+    "prompts/batches/MOAT-ALIGNMENT-01.md",
+}
+
 FORBIDDEN_CONTENT_PATTERNS = [
     "openai_api",
     "openai-sdk",
@@ -121,6 +128,8 @@ CONTENT_SCAN_EXEMPT_PREFIXES = [
     "docs/",
     "prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-001.md",
     "prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-002.md",
+    "prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-003.md",
+    "prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-004.md",
     "build/reports/",
     "AGENTS.md",
     ".agents/AGENTS.md",
@@ -243,6 +252,17 @@ def normalize(paths: list[object]) -> list[str]:
     return out
 
 
+def external_dirty_paths() -> set[str]:
+    """Return exact paths for unrelated in-flight work the operator classified."""
+    raw = os.environ.get("AMBITIONS_CODEX_OS_EXTERNAL_DIRTY_PATHS", "")
+    requested: list[str] = []
+    for part in raw.replace(",", "\n").splitlines():
+        part = part.strip()
+        if part:
+            requested.append(part)
+    return set(normalize([*DEFAULT_EXTERNAL_DIRTY_CONTROL_WORK, *requested]))
+
+
 def _parse_status_lines(raw: str) -> list[str]:
     paths: list[str] = []
     for line in raw.splitlines():
@@ -288,7 +308,12 @@ def _is_scoped_allow(path: str) -> bool:
 
 def scope_gate(changed_files: list[str]) -> list[dict]:
     issues: list[dict] = []
+    external_dirty = external_dirty_paths()
     for path in changed_files:
+        if path in external_dirty:
+            issues.append(ok(f"external dirty work excluded from batch-owned scope checks: {path}"))
+            continue
+
         if _is_scoped_allow(path):
             continue
 
@@ -321,10 +346,15 @@ def scope_gate(changed_files: list[str]) -> list[dict]:
 
 def forbidden_content_scan() -> list[dict]:
     issues: list[dict] = []
+    external_dirty = external_dirty_paths()
 
     for path in normalize([*CONTROL_FILES, *_git_changed_files()]):
         absolute = ROOT / path
         if not absolute.exists() or not absolute.is_file():
+            continue
+
+        if path in external_dirty:
+            issues.append(ok(f"external dirty prompt content intentionally excluded: {path}"))
             continue
 
         if any(path.startswith(prefix) for prefix in CONTENT_SCAN_EXEMPT_PREFIXES):
@@ -574,6 +604,7 @@ def hook_semantic_checks() -> list[dict]:
 
 def validate() -> int:
     changed_files = _git_changed_files()
+    external_dirty = sorted(path for path in changed_files if path in external_dirty_paths())
 
     checks: list[dict] = []
     checks.extend(git_diff_report())
@@ -637,7 +668,12 @@ def validate() -> int:
             "active_truth_files": SOURCE_TRUTH_ACTIVE_FILES,
             "supporting_files": SOURCE_TRUTH_SUPPORTING_FILES,
             "uncertainties": [
-                "Validate final execpolicy behavior for allow/forbid outcomes after local CLI semantics are confirmed."
+                "Validate final execpolicy behavior for allow/forbid outcomes after local CLI semantics are confirmed.",
+                *(
+                    [f"External dirty work was operator-classified and excluded from Codex OS scope: {', '.join(external_dirty)}"]
+                    if external_dirty
+                    else []
+                ),
             ],
         },
         "risks": [

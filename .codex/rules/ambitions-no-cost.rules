@@ -35,7 +35,11 @@ prefix_rule(pattern=["make", "ambitions-codex-os-validate"], decision="allow")
 prefix_rule(pattern=["make", "ambitions-codex-os-doctor"], decision="allow")
 
 # Prompt families
-prefix_rule(pattern=["git", "add"], decision="prompt")
+prefix_rule(pattern=["git", "add", "."], decision="forbidden")
+prefix_rule(pattern=["git", "add", "-A"], decision="forbidden")
+prefix_rule(pattern=["git", "add", "-a"], decision="forbidden")
+prefix_rule(pattern=["git", "add", "--"], decision="allow")
+prefix_rule(pattern=["git", "commit", "-a"], decision="forbidden")
 prefix_rule(pattern=["git", "commit"], decision="prompt")
 prefix_rule(pattern=["chmod"], decision="prompt")
 prefix_rule(pattern=["make", "batch"], decision="prompt")

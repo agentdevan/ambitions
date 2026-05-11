@@ -12,6 +12,15 @@ This file documents local Codex command policy in `.codex/rules/ambitions-no-cos
 
 - Networked or package-install commands such as `curl`, `wget`, `npm/pnpm/yarn install`, `pip install`, `brew install`.
 - Cost/policy-sensitive commands such as `git push`, `gh workflow`, `xcodebuild archive`, signing helpers, and destructive resets.
+- Staging for Codex OS closeout is allowed only when path-limited:
+  - `git add -- <owned-path>` (for example: `git add -- docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_004.md`).
+- Broad staging patterns remain blocked:
+  - `git add .`
+  - `git add -A`
+  - `git add -a`
+  - `git commit -a`
+- Commit remains prompt-level approval: `git commit`.
+- `git push` and network/package/signing/archive/upload commands remain forbidden.
 - The rules are guardrails only and do not replace validator checks.
 
 ## Usage
