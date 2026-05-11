@@ -317,3 +317,64 @@ Original Phase 03 validation context retained below:
 ## Next eligible implementation batch
 
 - `PK18 Today Command Handler Extraction`
+
+## Repair: XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01
+
+### Scope
+
+- Allowed files only: `scripts/ambitions-xcode-validate.sh`, `Makefile`, `docs/audits/xcode-build-system-max-report.md`.
+- No product behavior, queue, release, signing, app source, or hosted CI changes were introduced in this repair.
+
+### Exact code changes
+
+1. `scripts/ambitions-xcode-validate.sh`
+   - Artifact root variables were changed to batch-agnostic bases:
+     - `RESULT_BASE=".codex/xcode-results"`
+     - `LOG_BASE=".codex/xcode-logs"`
+     - `SUMMARY_BASE=".codex/xcode-summaries"`
+   - `SUMMARY_FILE` moved to `SUMMARY_BASE/$BATCH/$TS/validate-summary.json`.
+   - Child wrapper handoff flags now pass base roots for batch+timestamp expansion at wrapper level:
+     - `--results-dir "$RESULT_BASE"`
+     - `--logs-dir "$LOG_BASE"`
+     - `--summaries-dir "$SUMMARY_BASE"`
+   - Direct `build` lane writes were aligned to batch/timestamp roots under each base:
+     - `$RESULT_BASE/$BATCH/$TS/*.xcresult`
+     - `$LOG_BASE/$BATCH/$TS/*.log`
+
+2. `Makefile`
+   - Xcode targets now honor `BATCH` and `ARGS` for execution-time overrides:
+     - `xcode-validate` -> `--batch $(BATCH) --lane $(LANE) $(ARGS)`
+     - `xcode-focused-test` -> `--batch $(BATCH) --lane focused-test --test $(TEST)`
+     - `xcode-build-for-testing` -> `--batch $(BATCH) --lane build-for-testing`
+     - `xcode-test-plan` -> `--batch $(BATCH) --lane test-plan --test-plan $(TEST_PLAN)`
+
+### Validation run and outputs
+
+- `git diff --check` exit `0`
+- `bash -n scripts/ambitions-xcode-validate.sh` exit `0`
+- `bash -n scripts/ambitions-xcode-build-for-testing.sh` exit `0`
+- `bash -n scripts/ambitions-xcode-test-focused.sh` exit `0`
+- `bash -n scripts/ambitions-xcode-test-plan.sh` exit `0`
+- `python3 -m py_compile scripts/ambitions-xcode-failure-classifier.py` exit `0`
+- `make batch-self-check || true` exit `0` (`GREEN: runner self-check passed`)
+- `make prompt-audit || true` exit `0`
+- `python3 scripts/ambitions-control-plane-check.py || true` exit `0`
+- `python3 scripts/ambitions-final-report-gate.py docs/audits/xcode-build-system-max-report.md --strict || true` exit `0`
+- `scripts/ambitions-xcode-validate.sh --batch XCODE-BUILD-SYSTEM-MAX-01 --lane none` exit `10` (`no_validation_required` behavior)
+
+### Artifact handoff verification
+
+- Verified child-wrapper handoff uses base roots and does not pass timestamped nested artifact roots:
+  - `rg -n -F '--results-dir "$RESULT_BASE"' scripts/ambitions-xcode-validate.sh`
+    - Matches at lines 199, 218, 241
+  - `rg -n -F '--logs-dir "$LOG_BASE"' scripts/ambitions-xcode-validate.sh`
+    - Matches at lines 200, 219, 242
+  - `rg -n -F '--summaries-dir "$SUMMARY_BASE"' scripts/ambitions-xcode-validate.sh`
+    - Matches at lines 201, 220, 243
+- Verified no legacy nested path handoff literal remained:
+  - `rg -n -F '$RESULT_BASE/$TS' scripts/ambitions-xcode-validate.sh scripts/ambitions-xcode-build-for-testing.sh scripts/ambitions-xcode-test-focused.sh scripts/ambitions-xcode-test-plan.sh`
+    - no matches
+
+### Claims constrained for this repair
+
+- No claim of app behavior changes, release readiness, accessibility, privacy/legal signoff, or full-suite validation was made.

@@ -38,15 +38,15 @@ done
 [[ -n "$BATCH" ]] || { echo "--batch is required" >&2; exit 1; }
 [[ -n "$LANE" ]] || { echo "--lane is required" >&2; exit 1; }
 
-RESULT_BASE=".codex/xcode-results/$BATCH"
-LOG_BASE=".codex/xcode-logs/$BATCH"
-SUMMARY_BASE=".codex/xcode-summaries/$BATCH"
+RESULT_BASE=".codex/xcode-results"
+LOG_BASE=".codex/xcode-logs"
+SUMMARY_BASE=".codex/xcode-summaries"
 DERIVED_DATA_DIR=".codex/DerivedData/Ambitions"
 mkdir -p "$RESULT_BASE" "$LOG_BASE" "$SUMMARY_BASE"
 
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
-SUMMARY_FILE="$SUMMARY_BASE/$TS/validate-summary.json"
-mkdir -p "$SUMMARY_BASE/$TS"
+SUMMARY_FILE="$SUMMARY_BASE/$BATCH/$TS/validate-summary.json"
+mkdir -p "$SUMMARY_BASE/$BATCH/$TS"
 
 map_exit_code() {
   local class="$1"
@@ -178,8 +178,8 @@ case "$LANE" in
       fi
     fi
     if [[ "$status" -eq 0 ]]; then
-      result_file="$RESULT_BASE/$TS/build.xcresult"
-      log_file="$LOG_BASE/$TS/build.log"
+      result_file="$RESULT_BASE/$BATCH/$TS/build.xcresult"
+      log_file="$LOG_BASE/$BATCH/$TS/build.log"
       run_status_and_class="$(run_xcodebuild_build "$log_file" "$result_file")"
       status="${run_status_and_class%%:*}"
       failure_class="${run_status_and_class#*:}"
@@ -193,12 +193,12 @@ case "$LANE" in
       failure_class="simulator_boot_failure"
     fi
     if [[ "$status" -eq 0 ]]; then
-      mkdir -p "$RESULT_BASE/$TS" "$LOG_BASE/$TS" "$SUMMARY_BASE/$TS"
+      mkdir -p "$RESULT_BASE/$BATCH/$TS" "$LOG_BASE/$BATCH/$TS" "$SUMMARY_BASE/$BATCH/$TS"
       run_status_and_class="$(run_validation_command 0 scripts/ambitions-xcode-build-for-testing.sh \
         --batch "$BATCH" \
-        --results-dir "$RESULT_BASE/$TS" \
-        --logs-dir "$LOG_BASE/$TS" \
-        --summaries-dir "$SUMMARY_BASE/$TS")"
+        --results-dir "$RESULT_BASE" \
+        --logs-dir "$LOG_BASE" \
+        --summaries-dir "$SUMMARY_BASE")"
       status="${run_status_and_class%%:*}"
       failure_class="${run_status_and_class#*:}"
       failure_class="${failure_class%%:*}"
@@ -211,13 +211,13 @@ case "$LANE" in
       status=22
       failure_class="simulator_boot_failure"
     else
-      mkdir -p "$RESULT_BASE/$TS" "$LOG_BASE/$TS" "$SUMMARY_BASE/$TS"
+      mkdir -p "$RESULT_BASE/$BATCH/$TS" "$LOG_BASE/$BATCH/$TS" "$SUMMARY_BASE/$BATCH/$TS"
       run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-focused.sh \
         --batch "$BATCH" \
         --test "$TEST" \
-        --results-dir "$RESULT_BASE/$TS" \
-        --logs-dir "$LOG_BASE/$TS" \
-        --summaries-dir "$SUMMARY_BASE/$TS")"
+        --results-dir "$RESULT_BASE" \
+        --logs-dir "$LOG_BASE" \
+        --summaries-dir "$SUMMARY_BASE")"
       status="${run_status_and_class%%:*}"
       failure_class="${run_status_and_class#*:}"
       failure_class="${failure_class%%:*}"
@@ -234,13 +234,13 @@ case "$LANE" in
         ui-proof) TEST_PLAN="Ambitions-UI" ;;
         terminal-device-proof) TEST_PLAN="Ambitions-ReleaseProof" ;;
       esac
-      mkdir -p "$RESULT_BASE/$TS" "$LOG_BASE/$TS" "$SUMMARY_BASE/$TS"
+      mkdir -p "$RESULT_BASE/$BATCH/$TS" "$LOG_BASE/$BATCH/$TS" "$SUMMARY_BASE/$BATCH/$TS"
       run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-plan.sh \
         --batch "$BATCH" \
         --test-plan "$TEST_PLAN" \
-        --results-dir "$RESULT_BASE/$TS" \
-        --logs-dir "$LOG_BASE/$TS" \
-        --summaries-dir "$SUMMARY_BASE/$TS")"
+        --results-dir "$RESULT_BASE" \
+        --logs-dir "$LOG_BASE" \
+        --summaries-dir "$SUMMARY_BASE")"
       status="${run_status_and_class%%:*}"
       failure_class="${run_status_and_class#*:}"
       failure_class="${failure_class%%:*}"
@@ -274,8 +274,8 @@ cat > "$SUMMARY_FILE" <<JSON
   "failure_category": "$failure_class",
   "test": "$TEST",
   "test_plan": "$TEST_PLAN",
-  "result_root": "$RESULT_BASE/$TS",
-  "log_root": "$LOG_BASE/$TS",
+  "result_root": "$RESULT_BASE/$BATCH/$TS",
+  "log_root": "$LOG_BASE/$BATCH/$TS",
   "derived_data": "$DERIVED_DATA_DIR"
 }
 JSON

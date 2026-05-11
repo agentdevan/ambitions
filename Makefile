@@ -179,13 +179,13 @@ build-lab-doctor:
 	./scripts/ambitions-build-lab-doctor.sh
 
 xcode-validate:
-	./scripts/ambitions-xcode-validate.sh --batch $(XCODE_BATCH) --lane $(LANE) $(RUN_ARGS)
+	./scripts/ambitions-xcode-validate.sh --batch $(BATCH) --lane $(LANE) $(ARGS)
 
 xcode-focused-test:
-	./scripts/ambitions-xcode-validate.sh --batch $(XCODE_BATCH) --lane focused-test --test $(TEST)
+	./scripts/ambitions-xcode-validate.sh --batch $(BATCH) --lane focused-test --test $(TEST)
 
 xcode-build-for-testing:
-	./scripts/ambitions-xcode-validate.sh --batch $(XCODE_BATCH) --lane build-for-testing
+	./scripts/ambitions-xcode-validate.sh --batch $(BATCH) --lane build-for-testing
 
 xcode-test-plan:
-	./scripts/ambitions-xcode-validate.sh --batch $(XCODE_BATCH) --lane test-plan --test-plan $(TEST_PLAN)
+	./scripts/ambitions-xcode-validate.sh --batch $(BATCH) --lane test-plan --test-plan $(TEST_PLAN)
