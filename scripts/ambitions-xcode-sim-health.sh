@@ -59,8 +59,11 @@ find_sim_udid() {
     return 1
   fi
   udid="$(echo "$DEVICES" | awk -v needle="$needle" 'index($0, needle) && /[0-9A-Fa-f-]{36}/ {
-      match($0,/\([0-9A-Fa-f-]{36}\)/,a);
-      if (a[0] != "") { print substr(a[0],2,length(a[0])-2); exit }
+      for (i = 1; i <= NF; i++) {
+        value=$i;
+        gsub(/[()]/, "", value);
+        if (value ~ /^[0-9A-Fa-f-]{36}$/) { print value; exit }
+      }
     }')"
   [[ -n "$udid" ]] && { echo "$udid"; return 0; }
   return 1
@@ -87,8 +90,11 @@ fi
 
 if [[ -z "$select_udid" ]]; then
   select_udid="$(echo "$DEVICES" | awk '/iPhone/ && /[0-9A-Fa-f-]{36}/ {
-      match($0,/\([0-9A-Fa-f-]{36}\)/,a);
-      if (a[0] != "") {print substr(a[0],2,length(a[0])-2); exit}
+      for (i = 1; i <= NF; i++) {
+        value=$i;
+        gsub(/[()]/, "", value);
+        if (value ~ /^[0-9A-Fa-f-]{36}$/) {print value; exit}
+      }
     }')"
   select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {sub(/^ *(.*) \\(.*/, "\\1"); print $0; exit}')"
 fi
@@ -99,7 +105,8 @@ if [[ -z "$select_udid" ]]; then
 fi
 
 state="$(xcrun simctl list devices | awk -v udid="$select_udid" 'index($0,udid){
-  if (match($0,/\((Booted|Shutdown)\)/,a)) print a[1];
+  if (index($0, "(Booted)") > 0) print "Booted";
+  else if (index($0, "(Shutdown)") > 0) print "Shutdown";
   else print "Unknown";
   exit
 }')"
@@ -112,7 +119,8 @@ fi
 if [[ "$state" != "Booted" && "$REPAIR" -eq 1 ]]; then
   xcrun simctl boot "$select_udid" >/dev/null 2>&1 || true
   state="$(xcrun simctl list devices | awk -v udid="$select_udid" 'index($0,udid){
-    if (match($0,/\((Booted|Shutdown)\)/,a)) print a[1];
+    if (index($0, "(Booted)") > 0) print "Booted";
+    else if (index($0, "(Shutdown)") > 0) print "Shutdown";
     else print "Unknown";
     exit
   }')"

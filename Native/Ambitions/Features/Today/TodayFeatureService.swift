@@ -53,14 +53,300 @@ struct RepositoryBackedTodayService: TodayServicing {
     }
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
-        let handler = TodayCommandHandler { action, now in
-            try await self.performFeedbackAction(action, now: now)
-        }
+        let handler = TodayCommandHandler(
+            feedbackActionHandler: { action, now in
+                try await self.performFeedbackAction(action, now: now)
+            },
+            commandActionHandler: { action, command, now in
+                try await self.performCommandAction(action, command: command, now: now)
+            }
+        )
         return try await handler.performAction(action, now: now)
     }
 }
 
 private extension RepositoryBackedTodayService {
+    func performCommandAction(
+        _ action: TodayInlineAction,
+        command: AmbitionsCommand,
+        now: Date
+    ) async throws -> TodayActionResponse {
+        let validator = AmbitionsCommandValidator()
+        let validation = validator.validate(command)
+
+        let goalID = action.target.goalID
+        let beforeFeedback = try await preFeedbackEvents(for: goalID)
+        let beforeEvidence = try await preEvidenceRecords(goalID: goalID)
+        let beforeCaptures = try await repositories.captures.listCaptures()
+
+        let response = try await performFeedbackAction(action, now: now)
+
+        let afterFeedback = try await preFeedbackEvents(for: goalID)
+        let afterEvidence = try await preEvidenceRecords(goalID: goalID)
+        let afterCaptures = try await repositories.captures.listCaptures()
+        let newCaptures = newCaptures(before: beforeCaptures, after: afterCaptures)
+
+        let eventLedgerEntryIDs = await emitTodayCommandEvidence(
+            for: action,
+            command: command,
+            now: now,
+            goalID: goalID,
+            beforeFeedback: beforeFeedback,
+            afterFeedback: afterFeedback,
+            beforeEvidence: beforeEvidence,
+            afterEvidence: afterEvidence,
+            beforeCaptures: beforeCaptures,
+            afterCaptures: afterCaptures
+        )
+        let result = makeCommandExecutionResult(
+            validation: validation,
+            command: command,
+            action: action,
+            eventLedgerEntryIDs: eventLedgerEntryIDs,
+            resultTarget: commandResultTarget(
+                command: command,
+                action: action,
+                newCaptures: newCaptures
+            )
+        )
+        await persistCommandExecution(command: command, result: result, at: now)
+
+        return response
+    }
+
+    func preFeedbackEvents(for goalID: String?) async throws -> [GoalFeedbackEvent] {
+        guard let goalID else { return [] }
+        return try await repositories.feedback.listEvents(goalID: goalID)
+    }
+
+    func preEvidenceRecords(goalID: String?) async throws -> [ProgressEvidence] {
+        try await repositories.evidence.listEvidence(goalID: goalID)
+    }
+
+    func persistCommandExecution(
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        at timestamp: Date
+    ) async {
+        guard let commandExecutionRecords = repositories.commandExecutionRecords else { return }
+        let record = AmbitionsCommandExecutionRecord(
+            command: command,
+            result: result,
+            recordedAt: Self.iso.string(from: timestamp)
+        )
+        try? await commandExecutionRecords.append(record)
+    }
+
+    func makeCommandExecutionResult(
+        validation: AmbitionsCommandValidationState,
+        command: AmbitionsCommand,
+        action: TodayInlineAction,
+        eventLedgerEntryIDs: [String],
+        resultTarget: AmbitionsCommandTarget
+    ) -> AmbitionsCommandExecutionResult {
+        if validation != .valid {
+            return blockedCommandResult(for: validation, command: command)
+        }
+
+        let status: AmbitionsCommandExecutionStatus = eventLedgerEntryIDs.isEmpty ? .noOp : .succeeded
+        return AmbitionsCommandExecutionResult(
+            status: status,
+            summary: status == .succeeded ? "Today command completed." : "Today command changed nothing.",
+            target: resultTarget,
+            eventLedgerEntryIDs: eventLedgerEntryIDs,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: [
+                "commandSource": command.source.rawValue,
+                "todayAction": action.kind.rawValue,
+                "validation": validation.rawValue
+            ]
+        )
+    }
+
+    func commandResultTarget(
+        command: AmbitionsCommand,
+        action: TodayInlineAction,
+        newCaptures: [Capture]
+    ) -> AmbitionsCommandTarget {
+        guard command.kind == .quickCapture || action.kind == .quickLog,
+              let capture = newCaptures.first else {
+            return command.target
+        }
+        return AmbitionsCommandTarget(
+            goalID: command.target.goalID ?? capture.linkedGoalID,
+            captureID: capture.id,
+            stepID: command.target.stepID,
+            destination: command.target.destination
+        )
+    }
+
+    func blockedCommandResult(
+        for validation: AmbitionsCommandValidationState,
+        command: AmbitionsCommand
+    ) -> AmbitionsCommandExecutionResult {
+        let status: AmbitionsCommandExecutionStatus
+        let summary: String
+        switch validation {
+        case .valid:
+            status = .noOp
+            summary = "Command is valid."
+        case .invalid:
+            status = .failed
+            summary = "Command payload is invalid."
+        case .needsConfirmation:
+            status = .requiresConfirmation
+            summary = "Command needs confirmation before it can execute."
+        case .needsMissingTarget:
+            status = .blocked
+            summary = "Command is missing the target needed for safe execution."
+        case .unsupportedInThisBuild:
+            status = .unsupported
+            summary = "Command is unsupported in this build."
+        case .blockedByMissingFoundation:
+            status = .blocked
+            summary = "Command is blocked by missing foundation work."
+        }
+
+        return AmbitionsCommandExecutionResult(
+            status: status,
+            summary: summary,
+            target: command.target,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: ["validation": validation.rawValue]
+        )
+    }
+
+    func emitTodayCommandEvidence(
+        for action: TodayInlineAction,
+        command: AmbitionsCommand,
+        now: Date,
+        goalID: String?,
+        beforeFeedback: [GoalFeedbackEvent],
+        afterFeedback: [GoalFeedbackEvent],
+        beforeEvidence: [ProgressEvidence],
+        afterEvidence: [ProgressEvidence],
+        beforeCaptures: [Capture],
+        afterCaptures: [Capture]
+    ) async -> [String] {
+        let beforeFeedbackIDs = Set(beforeFeedback.map(\.base.id))
+        let beforeEvidenceIDs = Set(beforeEvidence.map(\.id))
+        let newFeedback = afterFeedback.filter { beforeFeedbackIDs.contains($0.base.id) == false }
+        let newEvidence = afterEvidence.filter { beforeEvidenceIDs.contains($0.id) == false }
+        let newCaptures = newCaptures(before: beforeCaptures, after: afterCaptures)
+
+        guard !newFeedback.isEmpty || !newEvidence.isEmpty || !newCaptures.isEmpty else {
+            return []
+        }
+        guard let goalID else { return [] }
+
+        var eventLedgerEntryIDs: [String] = []
+
+        for event in newFeedback {
+            let entry = EventLedgerEntry.fromFeedbackEvent(event, goalID: goalID, source: .today)
+            do {
+                try await repositories.eventLedger.append(entry)
+                eventLedgerEntryIDs.append(entry.id)
+            } catch {
+                // Keep command behavior alive even if ledger emission fails.
+            }
+        }
+
+        for evidence in newEvidence {
+            let entry = EventLedgerEntry.fromProgressEvidence(evidence, source: .today)
+            do {
+                try await repositories.eventLedger.append(entry)
+                eventLedgerEntryIDs.append(entry.id)
+            } catch {
+                // Keep command behavior alive even if ledger emission fails.
+            }
+        }
+
+        for capture in newCaptures where action.kind == .quickLog {
+            let entry = commandCaptureCreatedEntry(
+                capture: capture,
+                command: command,
+                occurredAt: Self.iso.string(from: now)
+            )
+            do {
+                try await repositories.eventLedger.append(entry)
+                eventLedgerEntryIDs.append(entry.id)
+            } catch {
+                // Keep command behavior alive even if ledger emission fails.
+            }
+        }
+
+        return eventLedgerEntryIDs
+    }
+
+    func newCaptures(before: [Capture], after: [Capture]) -> [Capture] {
+        let beforeCaptureIDs = Set(before.map(\.id))
+        return after.filter { beforeCaptureIDs.contains($0.id) == false }
+    }
+
+    func commandCaptureCreatedEntry(
+        capture: Capture,
+        command: AmbitionsCommand,
+        occurredAt: String
+    ) -> EventLedgerEntry {
+        EventLedgerEntry(
+            id: "ledger.command.\(command.id)",
+            kind: .captureCreated,
+            occurredAt: occurredAt,
+            source: eventLedgerSource(for: command.source),
+            goalID: command.target.goalID,
+            captureID: capture.id,
+            title: "Capture created",
+            summary: nil,
+            semanticState: command.kind.rawValue,
+            tone: .neutral,
+            trust: EventLedgerTrustMetadata(isUserConfirmed: command.actor == .user),
+            evidenceReferences: [
+                EventLedgerEvidenceReference(
+                    id: command.id,
+                    kind: .externalCommand,
+                    occurredAt: command.requestedAt,
+                    summary: command.kind.rawValue
+                ),
+                EventLedgerEvidenceReference(
+                    id: capture.id,
+                    kind: .capture,
+                    occurredAt: capture.createdAt,
+                    summary: "quick_capture"
+                )
+            ],
+            metadata: [
+                "commandKind": command.kind.rawValue,
+                "commandSource": command.source.rawValue,
+                "sourceSurface": command.sourceSurface ?? ""
+            ].filter { $0.value.isEmpty == false },
+            payload: [
+                "captureID": capture.id,
+                "contextLens": command.payload.contextLens?.rawValue ?? "",
+                "commitmentKind": command.payload.commitmentKind?.rawValue ?? ""
+            ].filter { $0.value.isEmpty == false },
+            privacy: .privateUserText
+        )
+    }
+
+    func eventLedgerSource(for source: AmbitionsCommandSource) -> EventLedgerSource {
+        switch source {
+        case .today:
+            return .today
+        case .goals, .goalDetail:
+            return .goals
+        case .capture:
+            return .capture
+        case .plan:
+            return .plan
+        case .you:
+            return .you
+        case .reviews:
+            return .you
+        case .widget, .liveActivity, .appIntent, .notification, .deepLink, .system:
+            return .system
+        }
+    }
+
     func makeExperience(snapshot: Snapshot, userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
         let learningSnapshot = learningService.buildSnapshot(
