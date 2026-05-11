@@ -12,6 +12,7 @@ project_root_markers = [".git", "project.yml", "Package.swift"]
 
 approval_policy = "never"
 
+sandbox_mode = "danger-full-access"
 [features]
 hooks = true
 

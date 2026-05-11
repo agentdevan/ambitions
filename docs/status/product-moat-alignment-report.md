@@ -96,3 +96,19 @@ Ambitions compounds private ambition context into proof-backed execution decisio
 2. `sign-off: Moat vocabulary and recommendation explainability regression tests in runtime surfaces`
 3. `sign-off: Capture proof/constraint route UI and routing fixtures`
 4. `sign-off: Local-first boundary and release-claim assertions in implementation gate scripts`
+
+## Phase 02 Addendum — Visual Canon + Moat Control-Plane Install
+
+- Batch context: `GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01` (docs/control-plane pass only)
+- New files installed in this phase:
+  - `docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md` (created)
+  - `docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md` (created)
+  - `docs/codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md` (created)
+  - `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md` (created)
+  - `docs/status/visual-canon-moat-installation-report.md` (created)
+  - `prompts/batches/` runbook prompts for the visual front-end lane (new IDs)
+- Evidence status:
+  - `Time` remains the active top-level capacity surface as defined in `docs/truth/PRODUCT_DESIGN_TRUTH.md`.
+  - `Plan` remains only a compatibility/context seam where current source truth allows it.
+  - Visual/object authority is documented and cross-linked in index/docs but has not been implemented in runtime UI in this phase.
+  - `Plan` is not installed as a top-level tab in this phase; `Time` remains the active compatibility-correct capacity owner.

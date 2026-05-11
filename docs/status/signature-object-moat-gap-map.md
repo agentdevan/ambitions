@@ -67,3 +67,18 @@ This map tracks moat alignment gaps by surface and next implementation sequence.
 2. Add proof continuity and reflection paths in Goals and Time services.
 3. Add capture routing for proof/constraint to explicit persistence adapters.
 4. Add Personal Runtime control surfaces for learning, trust, and reset/delete/read actions.
+
+## Visual Canon / Moat Front-End Gaps
+
+- Visual moat implementation is control-plane installed in this phase only; UI behavior remains unimplemented.
+- Required front-end lanes remaining in queue are:
+  - `Today / Reality Meridian`
+  - `Goals / Constellation Atlas`
+  - `Capture / Atmosphere Composer`
+  - `Time / LifeShape Field`
+  - `You / User System Profile`
+  - `Shell / Continuity Dock` and shared primitives
+  - `Ambition Graph` and `RecommendationTrace / Why this?`
+  - `Personal Runtime` local trust controls
+  - `Accessibility + visual proof` fixtures and accessibility equivalent gates
+- Required visual prompts have been prepared under `prompts/batches/` with matching IDs.
