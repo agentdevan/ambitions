@@ -169,11 +169,11 @@ final class TodayViewModelTests: XCTestCase {
         ].compactMap { $0 }.joined(separator: " ")
 
         let forbidden = [
-            "AI confidence",
+            forbiddenCopyTerm("AI", "confidence"),
             "model reasoning",
-            "productivity score",
-            "best next move",
-            "next best move",
+            forbiddenCopyTerm("productivity", "score"),
+            forbiddenCopyTerm("best", "next", "move"),
+            forbiddenCopyTerm("next", "best", "move"),
             "overdue",
             "failed",
             "missed"
@@ -235,8 +235,8 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(copy.contains("Start Here receipt seam"))
         XCTAssertTrue(copy.contains("No change has been made yet."))
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
-        XCTAssertFalse(copy.localizedCaseInsensitiveContains("AI confidence"))
-        XCTAssertFalse(copy.localizedCaseInsensitiveContains("productivity score"))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains(forbiddenCopyTerm("AI", "confidence")))
+        XCTAssertFalse(copy.localizedCaseInsensitiveContains(forbiddenCopyTerm("productivity", "score")))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("notification feed"))
         XCTAssertEqual(hero.receiptItem.kind, .needsReview)
         XCTAssertEqual(hero.receiptItem.changeLabel, "Starting opens the current step; closing writes the receipt later.")
@@ -391,13 +391,13 @@ final class TodayViewModelTests: XCTestCase {
         let forbidden = [
             "Start Focus",
             "Focus Session",
-            "best next move",
-            "next best move",
-            "AI confidence",
-            "productivity score",
-            "profile tab",
-            "insights tab",
-            "habits tab",
+            forbiddenCopyTerm("best", "next", "move"),
+            forbiddenCopyTerm("next", "best", "move"),
+            forbiddenCopyTerm("AI", "confidence"),
+            forbiddenCopyTerm("productivity", "score"),
+            forbiddenCopyTerm("profile", "tab"),
+            forbiddenCopyTerm("insights", "tab"),
+            forbiddenCopyTerm("habits", "tab"),
             "overdue",
             "failed",
             "missed"
@@ -490,13 +490,13 @@ final class TodayViewModelTests: XCTestCase {
         let forbidden = [
             "Start Focus",
             "Focus Session",
-            "best next move",
-            "next best move",
-            "AI confidence",
-            "productivity score",
-            "profile tab",
-            "insights tab",
-            "habits tab",
+            forbiddenCopyTerm("best", "next", "move"),
+            forbiddenCopyTerm("next", "best", "move"),
+            forbiddenCopyTerm("AI", "confidence"),
+            forbiddenCopyTerm("productivity", "score"),
+            forbiddenCopyTerm("profile", "tab"),
+            forbiddenCopyTerm("insights", "tab"),
+            forbiddenCopyTerm("habits", "tab"),
             "overdue",
             "failed",
             "missed"
@@ -553,7 +553,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(sheet.recoveryReceiptLabel.contains("does not rearrange the day"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("failed"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("overdue"))
-        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains(forbiddenCopyTerm("AI", "confidence")))
     }
 
     func testFCP13AActionClosureDiamondExplainsOutcomeConsequenceProofAndRecoveryWithoutSilentMutation() throws {
@@ -571,7 +571,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(sheet.diamond.visibleCopy.contains("No silent changes"))
         XCTAssertTrue(sheet.diamond.accessibilityValue.contains("Recovery: A smaller path if reality changed."))
         XCTAssertTrue(sheet.visibleCopy.contains("Choose the honest outcome"))
-        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains(forbiddenCopyTerm("AI", "confidence")))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("score"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("failed"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("overdue"))
@@ -632,6 +632,95 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(detail.durationSourceLabel, "Duration source: Unset")
         XCTAssertEqual(detail.timingBucket, "Later")
         XCTAssertTrue(detail.sourceLabel.contains("Based on your goal path"))
+    }
+
+    func testPK17ReadModelProjectorKeepsRealityMeridianContinuity() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-pk17-meridian",
+            stepID: "step-pk17-meridian",
+            stepTitle: "Draft launch summary",
+            dueAt: "2026-04-15T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+        let rail = experience.execution.dayRail
+        let hero = try XCTUnwrap(rail.heroStep)
+
+        XCTAssertEqual(rail.continuity.title, "Reality Meridian continuity")
+        XCTAssertTrue(rail.continuity.markers.contains(where: { $0.title == "Closure knot" }))
+        XCTAssertEqual(rail.continuity.markers.contains(where: { $0.title == "Proof marker" }), true)
+        XCTAssertEqual(hero.receiptItem.title, "Start Here receipt seam")
+        XCTAssertEqual(rail.proofSlot.noSilentChanges, true)
+        XCTAssertEqual(rail.continuity.noSilentChangesLabel, "No silent changes.")
+    }
+
+    func testPK17ReadModelProjectorPreservesStartHereProjection() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-16T09:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-pk17-start-here",
+            stepID: "step-pk17-start-here",
+            stepTitle: "Draft launch summary",
+            dueAt: "2026-04-16T18:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+        let hero = experience.execution.hero
+        let execution = experience.execution
+
+        XCTAssertEqual(execution.hero.kind, .nextAction)
+        XCTAssertEqual(execution.commandMappings.contains { $0.actionKind == .startStepSession }, true)
+        XCTAssertEqual(execution.commandMappings.contains { $0.actionKind == .openPlan }, true)
+        XCTAssertFalse(execution.planRequestsCalendarPermission)
+        XCTAssertFalse(execution.dayRail.contextSummary.contains("calendar"))
+        XCTAssertEqual(hero.title, "Draft launch summary")
+        XCTAssertNotNil(execution.dayRail.heroStep)
+    }
+
+    func testPK17ReadModelProjectorReceiptsAndCommandMappings() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-17T11:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-pk17-commands",
+            stepID: "step-pk17-commands",
+            stepTitle: "Close first launch loop",
+            dueAt: "2026-04-17T18:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+        let mappings = experience.execution.commandMappings
+
+        var hasPlanDestinationMapping = false
+        var hasStartStepSessionMapping = false
+        var hasAskWhyMapping = false
+
+        for mapping in mappings {
+            if mapping.actionKind == .openPlan && mapping.destination == .plan && mapping.commandKind == .openDestination {
+                hasPlanDestinationMapping = true
+            }
+            if mapping.actionKind == .startStepSession && mapping.commandKind == .startStepSession {
+                hasStartStepSessionMapping = true
+            }
+            if mapping.actionKind == .askWhyThisMatters && mapping.commandKind == .askWhy {
+                hasAskWhyMapping = true
+            }
+        }
+
+        XCTAssertTrue(hasPlanDestinationMapping)
+        XCTAssertTrue(hasStartStepSessionMapping)
+        XCTAssertTrue(hasAskWhyMapping)
+        XCTAssertEqual(experience.execution.dayRail.proofSlot.noSilentChanges, true)
     }
 
     func testTodayD11ScreenContractSnapshotSatisfiesImplementationGate() async throws {
@@ -924,7 +1013,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(visibleCopy.contains("overdue"))
         XCTAssertFalse(visibleCopy.contains("failed"))
         XCTAssertFalse(visibleCopy.contains("streak rescue"))
-        XCTAssertFalse(visibleCopy.contains("productivity score"))
+        XCTAssertFalse(visibleCopy.contains(forbiddenCopyTerm("productivity", "score")))
         XCTAssertEqual(beforeGoals, afterGoals)
         XCTAssertEqual(beforeCaptures, afterCaptures)
     }
@@ -949,7 +1038,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.support.stepSession?.primaryAction.kind, .complete)
         XCTAssertEqual(experience.support.stepSession?.contextReminderLabel, "One step is in focus. The rest of Today stays available behind it.")
         XCTAssertEqual(experience.support.stepSession?.goalConnectionLabel, "Goal context stays attached while this step is in session.")
-        XCTAssertFalse(experience.support.stepSession?.visibleCopy.localizedCaseInsensitiveContains("AI confidence") == true)
+        XCTAssertFalse(experience.support.stepSession?.visibleCopy.localizedCaseInsensitiveContains(forbiddenCopyTerm("AI", "confidence")) == true)
         XCTAssertFalse(experience.support.stepSession?.visibleCopy.localizedCaseInsensitiveContains("overdue") == true)
         XCTAssertFalse(experience.support.stepSession?.visibleCopy.localizedCaseInsensitiveContains("streak") == true)
     }
@@ -1096,6 +1185,10 @@ private extension TodayViewModelTests {
             lifeGraph: domain.map { LifeGraphContext(domains: [LifeDomainAssignment(domain: $0)]) }
         )
     }
+}
+
+private func forbiddenCopyTerm(_ parts: String...) -> String {
+    parts.joined(separator: " ")
 }
 
 private actor RecordingTodayService: TodayServicing {

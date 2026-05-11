@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-10T21:41:56Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "PK17",
-    "next_eligible_title": "Today Read Model Extraction",
+    "next_eligible_batch": "PK18",
+    "next_eligible_title": "Today Command Handler Extraction",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -193,30 +193,30 @@
     {
       "id": "PK17",
       "title": "Today Read Model Extraction",
-      "classification": "executable_now",
-      "status_class": "active-now",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "complete-green",
       "owner_train": "PK / Platform Kernel",
       "source_path": "docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md",
-      "dependency_gate": "Complete prior PK batch PK16 and any data-safety proof named by the PK train.",
+      "dependency_gate": "Complete / Green; do not rerun through normal fallback.",
       "risk_class": "high",
       "proof_class": "runtime-focused proof + receipt/privacy/side-effect gates before green",
       "efc_air_surface_inheritance": "EFC overlay (proof obligations), AIR where applicable, Surface Encapsulation / Signature Language",
-      "consolidation_posture": "active-anchor / immediate next",
-      "next_action": "Priority executable batch; next in active queue."
+      "consolidation_posture": "historical complete / do not rerun",
+      "next_action": "Preserve as completed PK17 evidence; do not reactivate."
     },
     {
       "id": "PK18",
       "title": "Today Command Handler Extraction",
-      "classification": "executable_later",
-      "status_class": "queued",
+      "classification": "executable_now",
+      "status_class": "active-now",
       "owner_train": "PK / Platform Kernel",
       "source_path": "docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md",
       "dependency_gate": "Complete prior PK batch PK17 and any data-safety proof named by the PK train.",
       "risk_class": "high",
       "proof_class": "runtime-focused proof + receipt/privacy/side-effect gates before green",
       "efc_air_surface_inheritance": "EFC overlay (proof obligations), AIR where applicable, Surface Encapsulation / Signature Language",
-      "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "consolidation_posture": "active-anchor / immediate next",
+      "next_action": "Priority executable batch; next in active queue."
     },
     {
       "id": "PK19",

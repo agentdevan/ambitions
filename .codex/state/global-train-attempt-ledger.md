@@ -6,17 +6,30 @@ Prevent recursive child-runner loops, repeated same-root retries, ambiguous cont
 This ledger is committed source-state. `.codex/runs/**` remains local run evidence and must not be committed.
 
 ## Current Active Attempt
-- parent batch: RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION
-- selected child batch: PK16
-- child prompt: prompts/batches/PK16.md
-- child run dir: .codex/runs/PK16/20260510T175745Z
+- parent batch: GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01
+- selected child batch: PK17
+- child prompt: prompts/batches/PK17.md
+- child run dir: .codex/runs/PK17/20260511T131817Z
 - child attempt number: 1
 - status: green
-- started: 2026-05-10T17:57:45Z
-- completed: 2026-05-10T18:28:20Z
-- next action: `make global-train-until-complete`
+- started: 2026-05-11T13:18:17Z
+- completed: 2026-05-11T14:00:21Z
+- next action: PK18 Today Command Handler Extraction
 - retry allowed: false
-- reason: PK16 completed after GPT-5.5 review repaired the proof-reference presence filter and focused trust-history repository validation passed.
+- reason: PK17 extracted Today read-model projection into a Today-owned projector with focused TodayViewModelTests PK17 proof passing 3 tests and no forbidden-claim scan blockers.
+
+## Latest Closed Attempt
+- parent batch: GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01
+- selected child batch: PK17
+- child prompt: prompts/batches/PK17.md
+- child run dir: .codex/runs/PK17/20260511T131817Z
+- child attempt number: 1
+- status: green
+- started: 2026-05-11T13:18:17Z
+- completed: 2026-05-11T14:00:21Z
+- next action: PK18 Today Command Handler Extraction
+- retry allowed: false
+- reason: PK17 extracted Today read-model projection into a Today-owned projector with focused TodayViewModelTests PK17 proof passing 3 tests and no forbidden-claim scan blockers.
 
 ## State Rules
 - A batch cannot be launched if the ledger already has the same batch active with status `running`, `unknown-unresolved`, `yellow-unresolved`, `red-unresolved`, `repair-required`, `finalization-required`, or `blocked`.
@@ -37,3 +50,4 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 | 2026-05-10T15:12:22Z | top-level-runner | PK15 | 1 | finalization-required | .codex/runs/PK15/20260510T151222Z/final-summary.md | Run PK15-FINALIZE-01 to inspect existing diff/artifacts; do not rerun Spark. |
 | 2026-05-10T17:35:20Z | top-level-runner | PK15 | 1 | accepted-yellow | docs/audits/pk15-receipt-backend-report.md | PK15 focused receipt tests passed; one pre-existing external-surface expectation mismatch remains in `ExternalSurfaceVerificationChecklistTests` and is owned by QA / External Surface for follow-up. |
 | 2026-05-10T18:28:20Z | top-level-runner | PK16 | 1 | green | docs/audits/pk16-trust-history-query-report.md | PK16 focused trust-history query tests passed; PK17 is next eligible. |
+| 2026-05-11T14:00:21Z | GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01 | PK17 | 1 | green | docs/audits/pk17-batch-closeout-report.md | PK17 focused Today read-model tests passed; PK18 is next eligible. |

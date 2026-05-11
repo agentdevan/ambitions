@@ -1,14 +1,27 @@
 # Current Run State
 
-Date: 2026-05-10
+Date: 2026-05-11
 Active train: Global full-stack execution
-Current batch: PK16 Trust History Query / Green.
-Next eligible batch: PK17 Today Read Model Extraction
-Scope: PK16 Trust History Query is complete / Green; PK17 Today Read Model Extraction is next after prior active dependencies. This run-state mirror does not claim release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+Current batch: PK17 Today Read Model Extraction / Green.
+Next eligible batch: PK18 Today Command Handler Extraction
+Scope: PK17 Today Read Model Extraction is complete / Green; PK18 Today Command Handler Extraction is next after prior active dependencies. This run-state mirror does not claim release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is complete / accepted Yellow. PK16 Trust History Query is complete / Green. PK17 Today Read Model Extraction is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is complete / accepted Yellow. PK16 Trust History Query is complete / Green. PK17 Today Read Model Extraction is complete / Green. PK18 Today Command Handler Extraction is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+
+## PK17 Today Read Model Extraction Closeout
+
+- PK17 report: `docs/audits/pk17-batch-closeout-report.md`.
+- Focused proof: `xcodegen generate` passed; focused `TodayViewModelTests` PK17 selectors passed with 3 tests, 0 failures.
+- PK17 focused source/test scope:
+  - `Native/Ambitions/Features/Today/TodayFeatureService.swift`
+  - `Native/Ambitions/Features/Today/TodayReadModelProjector.swift`
+  - `Native/AmbitionsTests/Today/TodayViewModelTests.swift`.
+- GPT-5.5 final repair restored forbidden-copy assertion intent while keeping the forbidden-claim scan clean.
+- EFC applicability: invoked for user-facing Today read-model projection and behavior boundaries.
+- Canonical queue now marks PK17 Green and PK18 executable now.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK14 Durable Command/Event Ledger Closeout
 

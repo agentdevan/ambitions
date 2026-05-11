@@ -1,11 +1,24 @@
 # Current Batch Train State
 
-Date: 2026-05-10
+Date: 2026-05-11
 Active train: Global full-stack execution
-Current batch: PK16 Trust History Query / Green.
-Next recommended implementation pass: PK17 Today Read Model Extraction.
-Next eligible non-UI platform batch: PK17 Today Read Model Extraction.
-Scope: PK16 adds a local read-only trust-history query path over existing Action Receipt history and Event Ledger truth with focused repository coverage; it does not implement UI, release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+Current batch: PK17 Today Read Model Extraction / Green.
+Next recommended implementation pass: PK18 Today Command Handler Extraction.
+Next eligible non-UI platform batch: PK18 Today Command Handler Extraction.
+Scope: PK17 extracts Today execution read-model projection into a Today-owned projector with focused Today coverage; it does not implement UI redesign, command handling extraction, release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+
+## PK17 Today Read Model Extraction Closeout
+
+- PK17 report: `docs/audits/pk17-batch-closeout-report.md`.
+- Focused proof: `xcodegen generate` passed; focused `TodayViewModelTests` PK17 selectors passed with 3 tests, 0 failures.
+- PK17 focused source/test scope:
+  - `Native/Ambitions/Features/Today/TodayFeatureService.swift`
+  - `Native/Ambitions/Features/Today/TodayReadModelProjector.swift`
+  - `Native/AmbitionsTests/Today/TodayViewModelTests.swift`.
+- GPT-5.5 final repair restored forbidden-copy assertion intent while keeping the forbidden-claim scan clean.
+- EFC applicability: invoked for user-facing Today read-model projection and behavior boundaries.
+- Canonical queue now marks PK17 Green and PK18 executable now.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK16 Trust History Query Closeout
 
