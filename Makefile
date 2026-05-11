@@ -1,11 +1,17 @@
 .PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 
+
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
 AUDIT := scripts/ambitions-prompt-audit.sh
 GLOBAL_SUPERVISOR := scripts/ambitions-global-train-supervisor.sh
 AUTONOMOUS_TRAINER := scripts/ambitions-autonomous-train.sh
+XCODE_BATCH ?= PK18
+LANE ?= none
+TEST ?=
+TEST_PLAN ?=
+RUN_ARGS ?=
 
 check-batch-input:
 	@test -n "$(BATCH)" || (echo "BATCH is required. Example: make batch BATCH=SI07 PROMPT=prompts/SI07.md" >&2; exit 2)
@@ -166,3 +172,20 @@ throughput-prep:
 throughput-known-yellow:
 	@echo "Throughput known-yellow scan"
 	@bash scripts/ambitions-known-yellow-scan.sh
+
+.PHONY: build-lab-doctor xcode-validate xcode-focused-test xcode-build-for-testing xcode-test-plan
+
+build-lab-doctor:
+	./scripts/ambitions-build-lab-doctor.sh
+
+xcode-validate:
+	./scripts/ambitions-xcode-validate.sh --batch $(XCODE_BATCH) --lane $(LANE) $(RUN_ARGS)
+
+xcode-focused-test:
+	./scripts/ambitions-xcode-validate.sh --batch $(XCODE_BATCH) --lane focused-test --test $(TEST)
+
+xcode-build-for-testing:
+	./scripts/ambitions-xcode-validate.sh --batch $(XCODE_BATCH) --lane build-for-testing
+
+xcode-test-plan:
+	./scripts/ambitions-xcode-validate.sh --batch $(XCODE_BATCH) --lane test-plan --test-plan $(TEST_PLAN)

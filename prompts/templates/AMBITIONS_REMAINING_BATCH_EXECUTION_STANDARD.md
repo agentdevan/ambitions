@@ -27,3 +27,10 @@ Every remaining executable batch prompt must preserve:
 
 Prompts generated from this standard are implementation-ready only when their
 own dependency gate and active source-truth checks pass inside the runner.
+
+Use Xcode wrapper-first validation:
+
+- `scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane <none|build|build-for-testing|focused-test|test-plan|ui-proof|terminal-device-proof> [--test <TEST_ID>] [--test-plan <PLAN_NAME>]`
+- Prefer `focused-test` lanes for owner-seam test coverage.
+- Use `build-for-testing` or `test-plan` only for documented segment proof or
+  explicit batch lane instructions.

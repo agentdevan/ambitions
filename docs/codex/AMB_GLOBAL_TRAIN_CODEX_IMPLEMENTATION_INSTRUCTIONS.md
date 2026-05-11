@@ -9,6 +9,14 @@ Scope: Prompt-system and execution guidance only; not app implementation proof
 make batch BATCH=PK17 PROMPT=prompts/batches/PK17.md
 ```
 
+## Batch-level validation entrypoint
+
+- Use wrapper-first validation for all executable batches:
+
+  `scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane <none|build|build-for-testing|focused-test|test-plan|ui-proof|terminal-device-proof> [--test <TEST_ID>] [--test-plan <PLAN_NAME>]`
+
+Raw `xcodebuild` examples in historical batches are retained as historical context only.
+
 Current next batch: PK17 Today Read Model Extraction
 
 ## Queue Order
@@ -424,9 +432,9 @@ Files forbidden:
 Tests/proof required:
 - `focused Today unit tests or snapshots for the extracted read model`
 - `xcodegen generate only if project/source wiring changes`
-- `focused xcodebuild test for Today-owned tests when local simulator tooling is available`
+- `wrapper focused-test lane for Today-owned tests when local simulator tooling is available`
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk17-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -461,7 +469,7 @@ Tests/proof required:
 - `focused command executor/unit tests for Today commands`
 - `receipt/ledger tests for side-effect boundaries`
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk18-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -496,7 +504,7 @@ Tests/proof required:
 - `focused Goals projector/query tests`
 - `focused build/test for Goals owner seam`
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk19-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -531,7 +539,7 @@ Tests/proof required:
 - `focused Capture service/routing tests`
 - `focused Capture compile/build validation`
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk20-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -566,7 +574,7 @@ Tests/proof required:
 - `focused Plan/Time service tests`
 - `route/shell smoke only if call sites change`
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk21-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -594,7 +602,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk22-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -625,7 +633,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk23-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -656,7 +664,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk24-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -687,7 +695,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk25-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -718,7 +726,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk26-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -749,7 +757,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk27-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -779,7 +787,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk28-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -807,7 +815,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk29-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -838,7 +846,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk30-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -869,7 +877,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk31-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -897,7 +905,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk32-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -928,7 +936,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk33-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -956,7 +964,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk34-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -984,7 +992,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk35-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -1015,7 +1023,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk36-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -1046,7 +1054,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk37-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -1076,7 +1084,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk38-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -1106,7 +1114,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk39-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -1136,7 +1144,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk40-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -1167,7 +1175,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/pk41-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2021,9 +2029,9 @@ Files forbidden:
 Tests/proof required:
 - `recompiler preview/rollback unit tests`
 - `receipt tests for mutation permissions`
-- `focused Plan/Planning xcodebuild tests`
+- `wrapper focused-test lane for Plan/Planning tests`
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/ldi15-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2051,7 +2059,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/ldi16-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2079,7 +2087,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/ldi17-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2107,7 +2115,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/ldi18-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2135,7 +2143,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/ldi19-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2163,7 +2171,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/ldi20-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2191,7 +2199,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/ldi21-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2219,7 +2227,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/ldi22-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2247,7 +2255,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/aos24-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2275,7 +2283,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/aos25-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2303,7 +2311,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/aos26-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2334,7 +2342,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/aos27-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2362,7 +2370,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/aos28-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2390,7 +2398,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/aos29-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2418,7 +2426,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `xcodegen generate if source/project wiring requires it`
-- `focused xcodebuild unit tests for touched owner seam`
+- `wrapper focused-test lane for touched owner seam`
 Final report path: docs/audits/aos30-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2447,7 +2455,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/fcp27-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2476,7 +2484,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/fcp28-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2506,7 +2514,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/fcp29-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2535,7 +2543,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/fcp30-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2564,7 +2572,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc31-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2593,7 +2601,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc32-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2622,7 +2630,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc33-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2655,7 +2663,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc34-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2684,7 +2692,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc35-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2715,7 +2723,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc36-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2746,7 +2754,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc37-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2776,7 +2784,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc38-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2805,7 +2813,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc39-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.
@@ -2834,7 +2842,7 @@ Files forbidden:
 - hosted backend or external/cloud LLM core paths
 Tests/proof required:
 - `local proof command named by docs/native-build-and-release.md or release packet`
-- `focused xcodebuild/UI/accessibility proof only when source/UI is touched`
+- `wrapper ui-proof lane only when source/UI is touched`
 Final report path: docs/audits/pfc40-batch-closeout-report.md
 Green definition: owned source/docs changes pass focused validation, proof is current, and no forbidden claims or scope drift remain.
 Accepted Yellow allowance: environment/proof blocker only, with owner, no-claim boundary, and next proof path; not allowed for queue corruption or release overclaim.

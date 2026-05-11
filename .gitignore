@@ -64,3 +64,10 @@ output/logs/
 output/manual-audit/
 docs/audits/doc-qa/*.log
 docs/audits/build-logs/*.log
+
+# Build-lab artifacts
+.codex/DerivedData/
+.codex/xcode-results/
+.codex/xcode-logs/
+.codex/xcode-summaries/
+.codex/build-cache/
