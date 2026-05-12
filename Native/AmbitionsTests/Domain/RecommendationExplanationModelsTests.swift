@@ -291,4 +291,110 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         XCTAssertEqual(boundary.citedSourceIDs, [entry.id])
         XCTAssertTrue(boundary.requiresSensitiveReview)
     }
+
+    func testRecommendationEvidenceModelSummarizesLocalCitedEvidence() {
+        let entry = EventLedgerEntry(
+            id: "ledger-priority-1",
+            kind: .priorityChanged,
+            occurredAt: "2026-05-12T12:00:00Z",
+            source: .goalEngine,
+            title: "Priority changed",
+            summary: "The goal became time-sensitive.",
+            trust: EventLedgerTrustMetadata(confidence: 0.76)
+        )
+        let explanation = RecommendationExplanation(
+            id: "explanation-evidence-model",
+            type: .whyPrioritized,
+            title: "Why this rose",
+            summary: "Local records show priority and deadline pressure.",
+            recommendationTitle: "Finish the grant packet",
+            evidence: [
+                RecommendationExplanationEvidence.fromEventLedgerEntry(entry),
+                RecommendationExplanationEvidence(
+                    id: "deadline",
+                    category: .deadline,
+                    title: "Deadline",
+                    sourceID: "deadline-1"
+                )
+            ],
+            assumptions: [
+                RecommendationExplanationAssumption(
+                    id: "assumption-energy",
+                    summary: "I assumed this fits an afternoon work block.",
+                    fieldKey: "energy_fit"
+                )
+            ],
+            uncertainty: [
+                RecommendationExplanationUncertainty(
+                    id: "uncertainty-duration",
+                    summary: "The exact duration is unclear."
+                )
+            ],
+            userCorrectableFields: ["duration"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-energy",
+                    kind: .changeImportance,
+                    title: "Change fit",
+                    targetFieldKey: "energy_fit"
+                )
+            ],
+            lastUpdatedAt: "2026-05-12T12:01:00Z",
+            source: .recommendation,
+            relations: RecommendationExplanationRelations(eventLedgerEntryIDs: [entry.id])
+        )
+
+        let model = explanation.recommendationEvidenceModel
+
+        XCTAssertEqual(model.explanationID, explanation.id)
+        XCTAssertEqual(model.strength, .citedLocalRecords)
+        XCTAssertEqual(model.categories, [.deadline, .priority])
+        XCTAssertEqual(model.categoryCounts[.deadline], 1)
+        XCTAssertEqual(model.categoryCounts[.priority], 1)
+        XCTAssertEqual(model.citedSourceIDs, ["deadline-1", entry.id])
+        XCTAssertEqual(model.eventLedgerEntryIDs, [entry.id])
+        XCTAssertEqual(model.assumptionIDs, ["assumption-energy"])
+        XCTAssertEqual(model.uncertaintyIDs, ["uncertainty-duration"])
+        XCTAssertEqual(model.correctableFieldKeys, ["duration", "energy_fit"])
+        XCTAssertTrue(model.usesDeadlineEvidence)
+        XCTAssertTrue(model.usesPriorityRealityEvidence)
+        XCTAssertFalse(model.requiresSensitiveReview)
+        XCTAssertTrue(model.canDriveRecommendation)
+    }
+
+    func testRecommendationEvidenceModelBlocksEvidenceLightAndSensitiveRecommendations() {
+        let evidenceLight = RecommendationExplanation(
+            id: "explanation-evidence-light-model",
+            type: .whyThis,
+            title: "Why this",
+            summary: "A default suggestion.",
+            recommendationTitle: "Start small",
+            lastUpdatedAt: "2026-05-12T12:02:00Z",
+            source: .system
+        ).recommendationEvidenceModel
+
+        let calendarDerived = RecommendationExplanation(
+            id: "explanation-calendar-model",
+            type: .whyCalendarAware,
+            title: "Why calendar-aware",
+            summary: "Calendar pressure changed the suggestion.",
+            recommendationTitle: "Move deep work",
+            evidence: [
+                RecommendationExplanationEvidence(
+                    id: "calendar",
+                    category: .calendarDerived,
+                    title: "Calendar pressure"
+                )
+            ],
+            lastUpdatedAt: "2026-05-12T12:03:00Z",
+            source: .calendar,
+            privacy: .calendarDerived
+        ).recommendationEvidenceModel
+
+        XCTAssertEqual(evidenceLight.strength, .evidenceLight)
+        XCTAssertFalse(evidenceLight.canDriveRecommendation)
+        XCTAssertEqual(calendarDerived.strength, .reviewRequired)
+        XCTAssertTrue(calendarDerived.requiresSensitiveReview)
+        XCTAssertFalse(calendarDerived.canDriveRecommendation)
+    }
 }

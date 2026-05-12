@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK32 Knowledge Claim Boundary Hardening / Green.
-Next recommended implementation pass: PK33 Recommendation Evidence Model.
-Next eligible non-UI platform batch: PK33 Recommendation Evidence Model.
-Scope: PK32 adds local claim-boundary hardening and registry degradation wiring; it does not execute external/cloud LLM behavior, hosted backend behavior, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK33 Recommendation Evidence Model / Green.
+Next recommended implementation pass: PK34 Intelligence Quarantine.
+Next eligible non-UI platform batch: PK34 Intelligence Quarantine.
+Scope: PK33 adds a deterministic local recommendation evidence model derived from existing explanation evidence and boundary state; it does not execute external/cloud LLM behavior, hosted backend behavior, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK33 Recommendation Evidence Model Closeout
+
+- PK33 report: `docs/audits/pk33-batch-closeout-report.md`.
+- Scope: deterministic local recommendation evidence model derived from existing recommendation explanation evidence, assumptions, uncertainty, privacy, and correction boundaries.
+- Commit: same closeout commit (`PK33: install recommendation evidence model`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `RecommendationExplanationModelsTests` passed.
+- Canonical queue now marks PK33 Green and PK34 executable now.
+- EFC applicability: invoked for recommendation evidence and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, or global-train-completion claim is made.
 
 ## PK32 Knowledge Claim Boundary Hardening Closeout
 

@@ -287,6 +287,78 @@ struct RecommendationEvidenceBoundarySummary: Sendable, Equatable, Hashable {
     let requiresSensitiveReview: Bool
 }
 
+enum RecommendationEvidenceStrength: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case evidenceLight = "evidence_light"
+    case localEvidence = "local_evidence"
+    case citedLocalRecords = "cited_local_records"
+    case reviewRequired = "review_required"
+}
+
+struct RecommendationEvidenceModel: Codable, Sendable, Equatable, Hashable {
+    let explanationID: String
+    let source: RecommendationExplanationSource
+    let categories: [RecommendationExplanationEvidenceCategory]
+    let categoryCounts: [RecommendationExplanationEvidenceCategory: Int]
+    let citedSourceIDs: [String]
+    let eventLedgerEntryIDs: [String]
+    let assumptionIDs: [String]
+    let uncertaintyIDs: [String]
+    let correctableFieldKeys: [String]
+    let strength: RecommendationEvidenceStrength
+    let usesCalendarDerivedEvidence: Bool
+    let usesContextLensEvidence: Bool
+    let usesPriorityRealityEvidence: Bool
+    let usesDeadlineEvidence: Bool
+    let usesGoalScopeEvidence: Bool
+    let requiresSensitiveReview: Bool
+    let canDriveRecommendation: Bool
+    let schemaVersion: String
+
+    init(explanation: RecommendationExplanation) {
+        let boundary = explanation.evidenceBoundarySummary
+        let categoryCounts = Dictionary(grouping: explanation.evidence, by: \.category)
+            .mapValues(\.count)
+        let eventLedgerEntryIDs = Array(
+            Set(explanation.relations.eventLedgerEntryIDs + explanation.evidence.compactMap(\.eventLedgerEntryID))
+        ).sorted()
+        let correctableFieldKeys = Array(
+            Set(explanation.userCorrectableFields + explanation.correctionActions.compactMap(\.targetFieldKey))
+        ).filter { $0.isEmpty == false }.sorted()
+        let hasReviewableInference = explanation.assumptions.isEmpty == false || explanation.uncertainty.isEmpty == false
+
+        self.explanationID = explanation.id
+        self.source = explanation.source
+        self.categories = categoryCounts.keys.sorted { $0.rawValue < $1.rawValue }
+        self.categoryCounts = categoryCounts
+        self.citedSourceIDs = boundary.citedSourceIDs
+        self.eventLedgerEntryIDs = eventLedgerEntryIDs
+        self.assumptionIDs = explanation.assumptions.map(\.id).sorted()
+        self.uncertaintyIDs = explanation.uncertainty.map(\.id).sorted()
+        self.correctableFieldKeys = correctableFieldKeys
+        self.usesCalendarDerivedEvidence = explanation.containsCalendarDerivedEvidence
+        self.usesContextLensEvidence = explanation.containsContextLensEvidence
+        self.usesPriorityRealityEvidence = explanation.containsPriorityRealityEvidence
+        self.usesDeadlineEvidence = explanation.containsDeadlineEvidence
+        self.usesGoalScopeEvidence = explanation.containsGoalScopeOrDeliverableEvidence
+        self.requiresSensitiveReview = boundary.requiresSensitiveReview
+        self.canDriveRecommendation = boundary.isEvidenceLight == false &&
+            explanation.localOnly &&
+            boundary.requiresSensitiveReview == false &&
+            (hasReviewableInference == false || boundary.hasCorrectableInference)
+        self.schemaVersion = recommendationExplanationSchemaVersion
+
+        if boundary.requiresSensitiveReview {
+            self.strength = .reviewRequired
+        } else if eventLedgerEntryIDs.isEmpty == false || explanation.referencesEventLedger {
+            self.strength = .citedLocalRecords
+        } else if boundary.isEvidenceLight {
+            self.strength = .evidenceLight
+        } else {
+            self.strength = .localEvidence
+        }
+    }
+}
+
 struct RecommendationExplanation: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let type: RecommendationExplanationType
@@ -437,5 +509,9 @@ struct RecommendationExplanation: Codable, Sendable, Equatable, Hashable, Identi
             hasCorrectableInference: hasCorrectableAssumption || hasCorrectiveAction,
             requiresSensitiveReview: localOnly == false || privacy != .standard || containsCalendarDerivedEvidence
         )
+    }
+
+    var recommendationEvidenceModel: RecommendationEvidenceModel {
+        RecommendationEvidenceModel(explanation: self)
     }
 }
