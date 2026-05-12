@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-10T21:41:56Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "PK18",
-    "next_eligible_title": "Today Command Handler Extraction",
+    "next_eligible_batch": "PK27",
+    "next_eligible_title": "Diagnostic Ledger",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -319,21 +319,21 @@
     {
       "id": "PK26",
       "title": "Privacy Classification System",
-      "classification": "executable_later",
-      "status_class": "queued",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete",
       "owner_train": "PK / Platform Kernel",
       "source_path": "docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md",
-      "dependency_gate": "Complete prior PK batch PK25 and any data-safety proof named by the PK train.",
+      "dependency_gate": "Complete / Green; do not rerun through normal fallback.",
       "risk_class": "high",
       "proof_class": "runtime-focused proof + receipt/privacy/side-effect gates before green",
       "efc_air_surface_inheritance": "EFC overlay (proof obligations), AIR where applicable, Surface Encapsulation / Signature Language",
-      "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "consolidation_posture": "historical-complete do-not-run",
+      "next_action": "Do not rerun; preserved as historical-complete evidence."
     },
     {
       "id": "PK27",
       "title": "Diagnostic Ledger",
-      "classification": "executable_later",
+      "classification": "executable_now",
       "status_class": "queued",
       "owner_train": "PK / Platform Kernel",
       "source_path": "docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md",

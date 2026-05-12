@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK25 External Snapshots Through SideEffectLedger / Green.
-Next recommended implementation pass: PK26 Privacy Classification System.
-Next eligible non-UI platform batch: PK26 Privacy Classification System.
-Scope: PK25 adds bounded external snapshot success/failure recording through the SideEffectLedger; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+Current batch: PK26 Privacy Classification System / Green.
+Next recommended implementation pass: PK27 Diagnostic Ledger.
+Next eligible non-UI platform batch: PK27 Diagnostic Ledger.
+Scope: PK26 adds deterministic local privacy/safety classification across privacy class, receipt privacy, event-ledger privacy, side-effect boundaries, projection policy, redaction requirements, and user-review requirements; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK26 Privacy Classification System Closeout
+
+- PK26 report: `docs/audits/pk26-batch-closeout-report.md`.
+- Scope: deterministic local privacy/safety classification now bridges progress privacy, receipt privacy, event-ledger privacy, side-effect boundaries, projection policy, redaction requirements, and user-review requirements without adding new collection, network behavior, telemetry, hosted AI, or release claims.
+- Commit: `461f3c60dcbdbf0f1409c50b6119203a7ac99a31` (`PK26: complete hybrid Codex batch`), pushed to `main`.
+- Proof: `git diff --check`, `make batch-self-check`, `make prompt-audit`, forbidden-claim scan, MCP closeout-shape check, MCP self-test, and focused `AmbitionsOSPrivacySafetyModelsTests` passed. Prompt audit remains the expected non-blocking Yellow classification for support/eval/template files.
+- Canonical queue now marks PK26 Green and PK27 executable now.
+- EFC applicability: invoked for privacy/data-control behavior, user-review/redaction boundaries, and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK25 External Snapshots Through SideEffectLedger Closeout
 

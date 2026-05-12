@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK25 External Snapshots Through SideEffectLedger"
-  previous_batch: "PK24 EventKit Through SideEffectLedger"
+  batch: "PK26 Privacy Classification System"
+  previous_batch: "PK25 External Snapshots Through SideEffectLedger"
   previous_result: "green"
-  next_eligible_batch: "PK26 Privacy Classification System"
+  next_eligible_batch: "PK27 Diagnostic Ledger"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true
