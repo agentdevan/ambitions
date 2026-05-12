@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-12",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA09",
-  "next_eligible_title": "Proof Map Implementation",
+  "next_eligible_batch": "SA10",
+  "next_eligible_title": "Freshness And Risk Model Implementation",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -348,17 +348,17 @@
     {
       "id": "SA09",
       "title": "Proof Map Implementation",
-      "classification": "executable_now",
-      "reason": "SA08 is complete / accepted yellow. SA09 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA08.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA09 Proof Map Implementation is complete / Accepted Yellow with closeout in docs/audits/sa09-batch-closeout-report.md and commit a2d3e6c74fdb40ea2da584bf3a6f92f04c6b151a pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA10",
       "title": "Freshness And Risk Model Implementation",
-      "classification": "executable_later",
-      "reason": "Source Atlas is now visible to the autonomous queue, but runs after PK safety prerequisites or when selected as a hard dependency for source/freshness work.",
-      "blocking_prerequisites": "PK source/storage prerequisites and SA06 completion evidence; do not skip SA in fallback order.",
+      "classification": "executable_now",
+      "reason": "SA09 is complete / accepted yellow. SA10 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA09.",
       "efc_applicability": "invoked"
     },
     {
