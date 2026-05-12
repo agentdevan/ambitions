@@ -343,11 +343,21 @@ struct SourceAtlasClaim: Codable, Sendable, Equatable, Hashable, Identifiable {
     }
 
     var canDriveCurrentRecommendation: Bool {
+        canDriveCurrentRecommendation(
+            using: .conservativeFreshness,
+            riskPolicy: .conservative
+        )
+    }
+
+    func canDriveCurrentRecommendation(
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> Bool {
         state == .official &&
             sourceIDs.isEmpty == false &&
-            freshness == .current &&
             reviewRequired == false &&
-            riskClass.requiresStrictReview == false
+            freshnessPolicy.canSupportCurrentRecommendation(freshness: freshness, riskClass: riskClass) &&
+            riskPolicy.allowsCurrentRecommendation(riskClass)
     }
 
     var hasProvenanceEvidence: Bool {
@@ -590,10 +600,41 @@ struct SourceAtlasProofMapEntry: Codable, Sendable, Equatable, Hashable, Identif
 struct SourceAtlasFreshnessPolicy: Codable, Sendable, Equatable, Hashable {
     let reviewIntervalDays: Int
     let staleBlocksHighRiskUse: Bool
+
+    static let conservativeFreshness = SourceAtlasFreshnessPolicy(
+        reviewIntervalDays: 180,
+        staleBlocksHighRiskUse: true
+    )
+
+    func canSupportCurrentRecommendation(
+        freshness: SourceAtlasFreshnessState,
+        riskClass: SourceAtlasRiskClass
+    ) -> Bool {
+        switch freshness {
+        case .current:
+            return true
+        case .aging:
+            return staleBlocksHighRiskUse == false ||
+                riskClass.requiresStrictReview == false &&
+                reviewIntervalDays >= 0
+        case .stale, .staleCritical, .sourceChanged, .disputed, .revoked, .unknown:
+            return false
+        case .userProvided, .needsReview:
+            return false
+        }
+    }
 }
 
 struct SourceAtlasRiskPolicy: Codable, Sendable, Equatable, Hashable {
     let strictReviewRiskClasses: [SourceAtlasRiskClass]
+
+    static let conservative = SourceAtlasRiskPolicy(
+        strictReviewRiskClasses: SourceAtlasRiskClass.allCases.filter(\.requiresStrictReview)
+    )
+
+    func allowsCurrentRecommendation(_ riskClass: SourceAtlasRiskClass) -> Bool {
+        strictReviewRiskClasses.contains(riskClass) == false && riskClass.requiresStrictReview == false
+    }
 }
 
 struct SourceAtlasDisclosureCopy: Codable, Sendable, Equatable, Hashable {

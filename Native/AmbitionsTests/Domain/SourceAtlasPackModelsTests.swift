@@ -241,6 +241,68 @@ final class SourceAtlasPackModelsTests: XCTestCase {
             sourceIDs: ["source-official"],
             reviewRequired: false
         ).canDriveCurrentRecommendation)
+        XCTAssertFalse(SourceAtlasClaim(
+            id: "claim-contradicted",
+            text: "Contradicted",
+            state: .contradicted,
+            freshness: .current,
+            riskClass: .hobby,
+            sourceIDs: ["source-official"],
+            reviewRequired: false
+        ).canDriveCurrentRecommendation)
+        XCTAssertFalse(SourceAtlasClaim(
+            id: "claim-source-changed",
+            text: "Source changed",
+            state: .sourceChanged,
+            freshness: .current,
+            riskClass: .hobby,
+            sourceIDs: ["source-official"],
+            reviewRequired: false
+        ).canDriveCurrentRecommendation)
+    }
+
+    func testStaleOrUnknownHighRiskClaimsDoNotDriveCurrentRecommendation() {
+        let staleCriticalHighRisk = SourceAtlasClaim(
+            id: "claim-stale-critical-risk",
+            text: "Expired certification requirement",
+            state: .official,
+            freshness: .staleCritical,
+            riskClass: .certificationEligibility,
+            sourceIDs: ["source-official"],
+            reviewRequired: false
+        )
+        let unknownHighRisk = SourceAtlasClaim(
+            id: "claim-unknown-risk",
+            text: "Unknown claim",
+            state: .official,
+            freshness: .unknown,
+            riskClass: .certificationEligibility,
+            sourceIDs: ["source-official"],
+            reviewRequired: false
+        )
+        let stalePolicy = SourceAtlasFreshnessPolicy(reviewIntervalDays: 14, staleBlocksHighRiskUse: true)
+        let riskPolicy = SourceAtlasRiskPolicy(
+            strictReviewRiskClasses: SourceAtlasRiskClass.allCases.filter(\.requiresStrictReview)
+        )
+
+        XCTAssertFalse(staleCriticalHighRisk.canDriveCurrentRecommendation(using: stalePolicy, riskPolicy: riskPolicy))
+        XCTAssertFalse(unknownHighRisk.canDriveCurrentRecommendation(using: stalePolicy, riskPolicy: riskPolicy))
+    }
+
+    func testDisclosureCopyDoesNotImplyReleaseOrCertificationClaims() {
+        let pack = Self.validPack()
+        let disclosureCopy = pack.disclosureCopy
+        let allCopy = [
+            disclosureCopy.sourceNeeded,
+            disclosureCopy.reviewRequired,
+            disclosureCopy.notProfessionalAdvice
+        ]
+
+        for phrase in allCopy {
+            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("release"))
+            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("certification"))
+            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("official certification"))
+        }
     }
 
     func testCanonIntegrationIsRequired() {

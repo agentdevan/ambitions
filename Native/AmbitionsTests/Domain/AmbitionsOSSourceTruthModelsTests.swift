@@ -127,6 +127,16 @@ final class AmbitionsOSSourceTruthModelsTests: XCTestCase {
             state: .disputed,
             reviewState: .ready
         )
+        let sourceChanged = validClaim(
+            id: "claim-source-changed",
+            state: .changed,
+            reviewState: .ready
+        )
+        let conflicting = validClaim(
+            id: "claim-conflicting",
+            state: .conflicting,
+            reviewState: .ready
+        )
         let revoked = validClaim(
             id: "claim-revoked",
             state: .revoked,
@@ -135,6 +145,32 @@ final class AmbitionsOSSourceTruthModelsTests: XCTestCase {
 
         XCTAssertFalse(disputed.canDriveSourceSensitiveRecommendation)
         XCTAssertFalse(revoked.canDriveSourceSensitiveRecommendation)
+        XCTAssertFalse(sourceChanged.canDriveSourceSensitiveRecommendation)
+        XCTAssertFalse(conflicting.canDriveSourceSensitiveRecommendation)
+    }
+
+    func testUnknownOrStaleCriticalClaimsCannotDriveSourceSensitiveRecommendations() {
+        let staleCritical = validClaim(
+            id: "claim-stale-critical",
+            state: .officialSourceBacked,
+            freshnessState: .staleCritical,
+            sourceQualityState: .official,
+            riskClass: .certificationEligibility
+        )
+        let unknown = validClaim(
+            id: "claim-unknown",
+            state: .sourceNeeded,
+            freshnessState: .unknown,
+            sourceQualityState: .secondaryReference,
+            riskClass: .certificationEligibility
+        )
+
+        let ledger = AmbitionsOSSourceTruthLedger(claims: [staleCritical, unknown], sources: [officialSource()])
+        let issues = validator.validate(ledger)
+
+        XCTAssertFalse(staleCritical.canDriveSourceSensitiveRecommendation)
+        XCTAssertFalse(unknown.canDriveSourceSensitiveRecommendation)
+        XCTAssertTrue(issues.contains(.staleHighRiskClaim))
     }
 
     func testSensitiveClaimIsBlockedFromExternalProjectionWithoutRedaction() {
