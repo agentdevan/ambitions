@@ -12,16 +12,7 @@ mri-validate-overlay:
 
 mri-status:
 	@echo "MRI overlay: docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json"
-	@python3 - <<'PY'
-import json
-from pathlib import Path
-p=Path('docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json')
-data=json.loads(p.read_text())
-print('status:', data.get('status'))
-print('batches:', len(data.get('batches', [])))
-print('first:', data.get('batches', [{}])[0].get('id'))
-print('last:', data.get('batches', [{}])[-1].get('id'))
-PY
+	@python3 -c "import json; from pathlib import Path; data=json.loads(Path('docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json').read_text()); batches=data.get('batches', []); print('status:', data.get('status')); print('batches:', len(batches)); print('first:', (batches or [{}])[0].get('id')); print('last:', (batches or [{}])[-1].get('id'))"
 
 mri-router-json:
 	python3 scripts/ambitions-mri-autonomous-router.py --json
