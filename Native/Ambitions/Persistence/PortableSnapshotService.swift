@@ -10,6 +10,7 @@ protocol PortableSnapshotServicing: Sendable {
 struct PortableSnapshotService: PortableSnapshotServicing {
     let repositories: AppRepositories
     let resetStore: @Sendable () async throws -> Void
+    private let conflictPolicyEngine = LocalConflictPolicyEngine()
 
     init(
         repositories: AppRepositories,
@@ -374,24 +375,23 @@ private extension PortableSnapshotService {
                 continue
             }
 
-            if item == localItem { continue }
-            if item.revision > localItem.revision {
-                accepted.append(item)
+            let decision = conflictPolicyEngine.decide(
+                ConflictPolicyCandidate(
+                    entityKind: PortableConflictEntityKind.goal.rawValue,
+                    localRevision: localItem.revision,
+                    incomingRevision: item.revision,
+                    localUpdatedAt: localItem.updatedAt,
+                    incomingUpdatedAt: item.updatedAt,
+                    valuesAreEqual: item == localItem
+                )
+            )
+            switch decision.signal {
+            case .noConflict:
                 continue
-            }
-            if item.revision < localItem.revision {
-                conflicts.append(makeConflict(kind: .goal, entityID: item.id, localMarker: "\(localItem.revision)", incomingMarker: "\(item.revision)", recommendation: .keepLocal, reason: "Local goal revision is newer than the incoming snapshot."))
-                continue
-            }
-
-            let comparison = compareTimestamp(local: localItem.updatedAt, incoming: item.updatedAt)
-            switch comparison {
             case .acceptIncoming:
                 accepted.append(item)
-            case .keepLocal:
-                conflicts.append(makeConflict(kind: .goal, entityID: item.id, localMarker: localItem.updatedAt, incomingMarker: item.updatedAt, recommendation: .keepLocal, reason: "Local goal timestamp is newer than the incoming snapshot."))
-            case .requiresDecision:
-                conflicts.append(makeConflict(kind: .goal, entityID: item.id, localMarker: "\(localItem.revision)|\(localItem.updatedAt)", incomingMarker: "\(item.revision)|\(item.updatedAt)", recommendation: .requiresUserDecision, reason: "Goal data differs without a safe automatic merge signal."))
+            case .keepLocal, .requiresUserDecision:
+                conflicts.append(makeConflict(kind: .goal, entityID: item.id, decision: decision))
             }
         }
 
@@ -452,22 +452,19 @@ private extension PortableSnapshotService {
         if local == .default {
             return (true, [])
         }
-        if incoming == local {
+        let decision = conflictPolicyEngine.decide(
+            ConflictPolicyCandidate(
+                entityKind: PortableConflictEntityKind.appState.rawValue,
+                localUpdatedAt: appStateMarker(local),
+                incomingUpdatedAt: appStateMarker(incoming),
+                valuesAreEqual: incoming == local,
+                safeAutomaticMergeAllowed: false
+            )
+        )
+        guard decision.signal != .noConflict else {
             return (false, [])
         }
-        return (
-            false,
-            [
-                makeConflict(
-                    kind: .appState,
-                    entityID: local.id,
-                    localMarker: appStateMarker(local),
-                    incomingMarker: appStateMarker(incoming),
-                    recommendation: .requiresUserDecision,
-                    reason: "App state does not have uniform revision markers for safe automatic merge."
-                )
-            ]
-        )
+        return (false, [makeConflict(kind: .appState, entityID: local.id, decision: decision)])
     }
 
     func compareByUpdatedAt<Item: Equatable>(
@@ -488,19 +485,49 @@ private extension PortableSnapshotService {
                 continue
             }
 
-            if item == localItem { continue }
-            let comparison = compareTimestamp(local: localItem[keyPath: updatedAt], incoming: item[keyPath: updatedAt])
-            switch comparison {
+            let decision = conflictPolicyEngine.decide(
+                ConflictPolicyCandidate(
+                    entityKind: kind.rawValue,
+                    localUpdatedAt: localItem[keyPath: updatedAt],
+                    incomingUpdatedAt: item[keyPath: updatedAt],
+                    valuesAreEqual: item == localItem
+                )
+            )
+            switch decision.signal {
+            case .noConflict:
+                continue
             case .acceptIncoming:
                 accepted.append(item)
-            case .keepLocal:
-                conflicts.append(makeConflict(kind: kind, entityID: itemID, localMarker: localItem[keyPath: updatedAt], incomingMarker: item[keyPath: updatedAt], recommendation: .keepLocal, reason: "Local \(kind.rawValue) data is newer than the incoming snapshot."))
-            case .requiresDecision:
-                conflicts.append(makeConflict(kind: kind, entityID: itemID, localMarker: localItem[keyPath: updatedAt], incomingMarker: item[keyPath: updatedAt], recommendation: .requiresUserDecision, reason: "\(kind.rawValue.capitalized) data differs without a safe automatic merge signal."))
+            case .keepLocal, .requiresUserDecision:
+                conflicts.append(makeConflict(kind: kind, entityID: itemID, decision: decision))
             }
         }
 
         return (accepted, conflicts)
+    }
+
+    func makeConflict(
+        kind: PortableConflictEntityKind,
+        entityID: String,
+        decision: ConflictPolicyDecision
+    ) -> PortableConflict {
+        let recommendation: PortableConflictResolutionRecommendation
+        switch decision.signal {
+        case .acceptIncoming:
+            recommendation = .acceptIncoming
+        case .keepLocal:
+            recommendation = .keepLocal
+        case .requiresUserDecision, .noConflict:
+            recommendation = .requiresUserDecision
+        }
+        return makeConflict(
+            kind: kind,
+            entityID: entityID,
+            localMarker: decision.localMarker,
+            incomingMarker: decision.incomingMarker,
+            recommendation: recommendation,
+            reason: decision.reason
+        )
     }
 
     func makeConflict(
@@ -534,22 +561,4 @@ private extension PortableSnapshotService {
         .joined(separator: "|")
     }
 
-    enum TimestampComparison {
-        case acceptIncoming
-        case keepLocal
-        case requiresDecision
-    }
-
-    func compareTimestamp(local: String?, incoming: String?) -> TimestampComparison {
-        switch (local, incoming) {
-        case let (local?, incoming?) where incoming > local:
-            return .acceptIncoming
-        case let (local?, incoming?) where incoming < local:
-            return .keepLocal
-        case let (local?, incoming?) where incoming == local:
-            return .requiresDecision
-        default:
-            return .requiresDecision
-        }
-    }
 }
