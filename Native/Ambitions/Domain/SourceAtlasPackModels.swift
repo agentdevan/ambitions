@@ -597,6 +597,663 @@ struct SourceAtlasProofMapEntry: Codable, Sendable, Equatable, Hashable, Identif
     }
 }
 
+enum SourceAtlasCapabilityEdgeKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case prerequisite
+    case unlocks
+    case reinforces
+    case blocks
+}
+
+struct SourceAtlasDomainPack: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let domainID: String
+    let capabilityGraphIDs: [String]
+    let specificDomainPackIDs: [String]
+    let reusableNodeIDs: [String]
+    let sourceSliceIDs: [String]
+    let state: SourceAtlasClaimState
+    let freshness: SourceAtlasFreshnessState
+    let riskClass: SourceAtlasRiskClass
+    let reviewRequired: Bool
+
+    init(
+        id: String,
+        title: String,
+        domainID: String,
+        capabilityGraphIDs: [String],
+        specificDomainPackIDs: [String] = [],
+        reusableNodeIDs: [String] = [],
+        sourceSliceIDs: [String] = [],
+        state: SourceAtlasClaimState,
+        freshness: SourceAtlasFreshnessState,
+        riskClass: SourceAtlasRiskClass,
+        reviewRequired: Bool = false
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.domainID = domainID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.capabilityGraphIDs = Self.orderedUnique(capabilityGraphIDs)
+        self.specificDomainPackIDs = Self.orderedUnique(specificDomainPackIDs)
+        self.reusableNodeIDs = Self.orderedUnique(reusableNodeIDs)
+        self.sourceSliceIDs = Self.orderedUnique(sourceSliceIDs)
+        self.state = state
+        self.freshness = freshness
+        self.riskClass = riskClass
+        self.reviewRequired = reviewRequired
+    }
+
+    var hasProvenanceEvidence: Bool {
+        sourceSliceIDs.isEmpty == false
+    }
+
+    func supports(skillSliceID: String) -> Bool {
+        sourceSliceIDs.isEmpty || sourceSliceIDs.contains(skillSliceID)
+    }
+
+    func canDriveCurrentProjection(
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> Bool {
+        state == .official &&
+            hasProvenanceEvidence &&
+            reviewRequired == false &&
+            state.isBlockingState == false &&
+            freshnessPolicy.canSupportCurrentRecommendation(freshness: freshness, riskClass: riskClass) &&
+            riskPolicy.allowsCurrentRecommendation(riskClass)
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasSpecificDomainPack: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let domainPackID: String
+    let capabilityGraphID: String
+    let skillSliceIDs: [String]
+    let roleOverlayIDs: [String]
+    let pathOverlayIDs: [String]
+    let state: SourceAtlasClaimState
+    let freshness: SourceAtlasFreshnessState
+    let riskClass: SourceAtlasRiskClass
+    let reviewRequired: Bool
+    let sourceSliceIDs: [String]
+
+    init(
+        id: String,
+        title: String,
+        domainPackID: String,
+        capabilityGraphID: String,
+        skillSliceIDs: [String],
+        roleOverlayIDs: [String] = [],
+        pathOverlayIDs: [String] = [],
+        state: SourceAtlasClaimState,
+        freshness: SourceAtlasFreshnessState,
+        riskClass: SourceAtlasRiskClass,
+        reviewRequired: Bool = false,
+        sourceSliceIDs: [String] = []
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.domainPackID = domainPackID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.capabilityGraphID = capabilityGraphID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.skillSliceIDs = Self.orderedUnique(skillSliceIDs)
+        self.roleOverlayIDs = Self.orderedUnique(roleOverlayIDs)
+        self.pathOverlayIDs = Self.orderedUnique(pathOverlayIDs)
+        self.state = state
+        self.freshness = freshness
+        self.riskClass = riskClass
+        self.reviewRequired = reviewRequired
+        self.sourceSliceIDs = Self.orderedUnique(sourceSliceIDs)
+    }
+
+    var hasProvenanceEvidence: Bool {
+        sourceSliceIDs.isEmpty == false
+    }
+
+    func supports(skillSliceID: String) -> Bool {
+        guard skillSliceIDs.isEmpty == false else {
+            return false
+        }
+        return skillSliceIDs.contains(where: { supported in
+            supported == skillSliceID ||
+            skillSliceID.hasPrefix(supported + ".")
+        })
+    }
+
+    func canDriveCurrentProjection(
+        for skillSliceID: String,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> Bool {
+        supports(skillSliceID: skillSliceID) &&
+            state == .official &&
+            hasProvenanceEvidence &&
+            reviewRequired == false &&
+            freshnessPolicy.canSupportCurrentRecommendation(freshness: freshness, riskClass: riskClass) &&
+            riskPolicy.allowsCurrentRecommendation(riskClass) &&
+            state.isBlockingState == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasRoleOverlay: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let roleID: String
+    let skillSliceID: String
+    let reusableNodeIDs: [String]
+    let state: SourceAtlasClaimState
+    let freshness: SourceAtlasFreshnessState
+    let riskClass: SourceAtlasRiskClass
+    let sourceIDs: [String]
+    let reviewRequired: Bool
+
+    init(
+        id: String,
+        roleID: String,
+        skillSliceID: String,
+        reusableNodeIDs: [String] = [],
+        state: SourceAtlasClaimState,
+        freshness: SourceAtlasFreshnessState,
+        riskClass: SourceAtlasRiskClass,
+        sourceIDs: [String] = [],
+        reviewRequired: Bool = false
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.roleID = roleID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.skillSliceID = skillSliceID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.reusableNodeIDs = Self.orderedUnique(reusableNodeIDs)
+        self.state = state
+        self.freshness = freshness
+        self.riskClass = riskClass
+        self.sourceIDs = Self.orderedUnique(sourceIDs)
+        self.reviewRequired = reviewRequired
+    }
+
+    var hasProvenanceEvidence: Bool {
+        sourceIDs.isEmpty == false
+    }
+
+    func supports(skillSliceID: String) -> Bool {
+        skillSliceID == self.skillSliceID ||
+            skillSliceID.hasPrefix(self.skillSliceID + ".")
+    }
+
+    func canDriveCurrentProjection(
+        for skillSliceID: String,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> Bool {
+        supports(skillSliceID: skillSliceID) &&
+            state == .official &&
+            hasProvenanceEvidence &&
+            reviewRequired == false &&
+            freshnessPolicy.canSupportCurrentRecommendation(freshness: freshness, riskClass: riskClass) &&
+            riskPolicy.allowsCurrentRecommendation(riskClass) &&
+            state.isBlockingState == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasPathOverlay: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let skillSliceID: String
+    let capabilityNodeIDs: [String]
+    let pathPriority: Int
+    let roleID: String?
+    let claimIDs: [String]
+    let sourceRecordIDs: [String]
+    let state: SourceAtlasClaimState
+    let freshness: SourceAtlasFreshnessState
+    let riskClass: SourceAtlasRiskClass
+    let reviewRequired: Bool
+
+    init(
+        id: String,
+        title: String,
+        skillSliceID: String,
+        capabilityNodeIDs: [String] = [],
+        pathPriority: Int,
+        roleID: String? = nil,
+        claimIDs: [String] = [],
+        sourceRecordIDs: [String] = [],
+        state: SourceAtlasClaimState,
+        freshness: SourceAtlasFreshnessState,
+        riskClass: SourceAtlasRiskClass,
+        reviewRequired: Bool = false
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.skillSliceID = skillSliceID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.capabilityNodeIDs = Self.orderedUnique(capabilityNodeIDs)
+        self.pathPriority = pathPriority
+        self.roleID = roleID?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.claimIDs = Self.orderedUnique(claimIDs)
+        self.sourceRecordIDs = Self.orderedUnique(sourceRecordIDs)
+        self.state = state
+        self.freshness = freshness
+        self.riskClass = riskClass
+        self.reviewRequired = reviewRequired
+    }
+
+    var hasProvenanceEvidence: Bool {
+        sourceRecordIDs.isEmpty == false
+    }
+
+    func matches(skillSliceID: String, roleID: String?) -> Bool {
+        let supportsSkillSlice = skillSliceID.isEmpty == false ? (
+            self.skillSliceID == skillSliceID ||
+            skillSliceID.hasPrefix(self.skillSliceID + ".")
+        ) : false
+
+        let roleIsMatched = self.roleID == nil || self.roleID == roleID
+        return supportsSkillSlice && roleIsMatched
+    }
+
+    func specificityScore(for skillSliceID: String, roleID: String? = nil) -> Int {
+        guard matches(skillSliceID: skillSliceID, roleID: roleID) else {
+            return -1
+        }
+        let requestedDepth = skillSliceID.split(separator: ".").count
+        let overlayDepth = self.skillSliceID.split(separator: ".").count
+        if self.skillSliceID == skillSliceID {
+            return max(requestedDepth, overlayDepth) + 1
+        }
+        if skillSliceID.hasPrefix(self.skillSliceID + ".") {
+            return overlayDepth
+        }
+        return -1
+    }
+
+    func canDriveCurrentProjection(
+        for skillSliceID: String,
+        roleID: String?,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> Bool {
+        matches(skillSliceID: skillSliceID, roleID: roleID) &&
+            state == .official &&
+            hasProvenanceEvidence &&
+            reviewRequired == false &&
+            freshnessPolicy.canSupportCurrentRecommendation(freshness: freshness, riskClass: riskClass) &&
+            riskPolicy.allowsCurrentRecommendation(riskClass) &&
+            state.isBlockingState == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasLevelLadder: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let capabilityGraphID: String
+    let pathOverlays: [SourceAtlasPathOverlay]
+    let levelLabels: [String]
+
+    init(
+        id: String,
+        title: String,
+        capabilityGraphID: String,
+        pathOverlays: [SourceAtlasPathOverlay],
+        levelLabels: [String] = []
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.capabilityGraphID = capabilityGraphID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.pathOverlays = pathOverlays
+        self.levelLabels = Self.orderedUnique(levelLabels)
+    }
+
+    func canReusePathOverlay(_ pathID: String) -> Bool {
+        pathOverlays.contains { $0.id == pathID }
+    }
+
+    func highestReusablePathID(
+        for skillSliceID: String,
+        roleID: String? = nil,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy = .conservativeFreshness,
+        riskPolicy: SourceAtlasRiskPolicy = .conservative
+    ) -> String? {
+        bestReusablePath(
+            for: skillSliceID,
+            roleID: roleID,
+            using: freshnessPolicy,
+            riskPolicy: riskPolicy
+        )?.id
+    }
+
+    func bestReusablePath(
+        for skillSliceID: String,
+        roleID: String? = nil,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> SourceAtlasPathOverlay? {
+        reusablePaths(for: skillSliceID, roleID: roleID, using: freshnessPolicy, riskPolicy: riskPolicy)
+            .max {
+                if $0.pathPriority != $1.pathPriority {
+                    return $0.pathPriority < $1.pathPriority
+                }
+                let lhsSpecificity = $0.specificityScore(for: skillSliceID, roleID: roleID)
+                let rhsSpecificity = $1.specificityScore(for: skillSliceID, roleID: roleID)
+                if lhsSpecificity != rhsSpecificity {
+                    return lhsSpecificity < rhsSpecificity
+                }
+                return $0.id < $1.id
+            }
+    }
+
+    func reusablePaths(
+        for skillSliceID: String,
+        roleID: String? = nil,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> [SourceAtlasPathOverlay] {
+        pathOverlays.filter {
+            $0.canDriveCurrentProjection(
+                for: skillSliceID,
+                roleID: roleID,
+                using: freshnessPolicy,
+                riskPolicy: riskPolicy
+            )
+        }
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasCapabilityNode: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let capabilityGraphID: String
+    let title: String
+    let summary: String
+    let sourceRecordIDs: [String]
+    let state: SourceAtlasClaimState
+    let freshness: SourceAtlasFreshnessState
+    let riskClass: SourceAtlasRiskClass
+    let reviewRequired: Bool
+    let linkedClaimIDs: [String]
+
+    init(
+        id: String,
+        capabilityGraphID: String,
+        title: String,
+        summary: String,
+        sourceRecordIDs: [String] = [],
+        state: SourceAtlasClaimState,
+        freshness: SourceAtlasFreshnessState,
+        riskClass: SourceAtlasRiskClass,
+        reviewRequired: Bool = false,
+        linkedClaimIDs: [String] = []
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.capabilityGraphID = capabilityGraphID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.summary = summary.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceRecordIDs = Self.orderedUnique(sourceRecordIDs)
+        self.state = state
+        self.freshness = freshness
+        self.riskClass = riskClass
+        self.reviewRequired = reviewRequired
+        self.linkedClaimIDs = Self.orderedUnique(linkedClaimIDs)
+    }
+
+    var hasProvenanceEvidence: Bool {
+        sourceRecordIDs.isEmpty == false
+    }
+
+    func canDriveCurrentProjection(
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> Bool {
+        state == .official &&
+            hasProvenanceEvidence &&
+            reviewRequired == false &&
+            freshnessPolicy.canSupportCurrentRecommendation(freshness: freshness, riskClass: riskClass) &&
+            riskPolicy.allowsCurrentRecommendation(riskClass) &&
+            state.isBlockingState == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasCapabilityEdge: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let capabilityGraphID: String
+    let sourceNodeID: String
+    let targetNodeID: String
+    let kind: SourceAtlasCapabilityEdgeKind
+    let state: SourceAtlasClaimState
+    let freshness: SourceAtlasFreshnessState
+    let riskClass: SourceAtlasRiskClass
+    let reviewRequired: Bool
+    let roleOverlayIDs: [String]
+    let pathOverlayIDs: [String]
+    let sourceRecordIDs: [String]
+
+    init(
+        id: String,
+        capabilityGraphID: String,
+        sourceNodeID: String,
+        targetNodeID: String,
+        kind: SourceAtlasCapabilityEdgeKind,
+        state: SourceAtlasClaimState,
+        freshness: SourceAtlasFreshnessState,
+        riskClass: SourceAtlasRiskClass,
+        reviewRequired: Bool = false,
+        roleOverlayIDs: [String] = [],
+        pathOverlayIDs: [String] = [],
+        sourceRecordIDs: [String] = []
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.capabilityGraphID = capabilityGraphID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceNodeID = sourceNodeID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.targetNodeID = targetNodeID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.kind = kind
+        self.state = state
+        self.freshness = freshness
+        self.riskClass = riskClass
+        self.reviewRequired = reviewRequired
+        self.roleOverlayIDs = Self.orderedUnique(roleOverlayIDs)
+        self.pathOverlayIDs = Self.orderedUnique(pathOverlayIDs)
+        self.sourceRecordIDs = Self.orderedUnique(sourceRecordIDs)
+    }
+
+    var hasProvenanceEvidence: Bool {
+        sourceRecordIDs.isEmpty == false
+    }
+
+    func canTraverse(
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> Bool {
+        state == .official &&
+            hasProvenanceEvidence &&
+            reviewRequired == false &&
+            freshnessPolicy.canSupportCurrentRecommendation(freshness: freshness, riskClass: riskClass) &&
+            riskPolicy.allowsCurrentRecommendation(riskClass) &&
+            state.isBlockingState == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasCapabilityGraph: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let domainPackID: String
+    let capabilityNodeIDs: [String]
+    let capabilityEdgeIDs: [String]
+    let levelLadderIDs: [String]
+    let roleOverlayIDs: [String]
+    let nodes: [SourceAtlasCapabilityNode]
+    let edges: [SourceAtlasCapabilityEdge]
+    let ladders: [SourceAtlasLevelLadder]
+    let roleOverlays: [SourceAtlasRoleOverlay]
+    let state: SourceAtlasClaimState
+    let freshness: SourceAtlasFreshnessState
+    let riskClass: SourceAtlasRiskClass
+    let reviewRequired: Bool
+
+    init(
+        id: String,
+        title: String,
+        domainPackID: String,
+        capabilityNodeIDs: [String],
+        capabilityEdgeIDs: [String],
+        levelLadderIDs: [String],
+        roleOverlayIDs: [String],
+        nodes: [SourceAtlasCapabilityNode],
+        edges: [SourceAtlasCapabilityEdge],
+        ladders: [SourceAtlasLevelLadder],
+        roleOverlays: [SourceAtlasRoleOverlay],
+        state: SourceAtlasClaimState,
+        freshness: SourceAtlasFreshnessState,
+        riskClass: SourceAtlasRiskClass,
+        reviewRequired: Bool = false
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.domainPackID = domainPackID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.capabilityNodeIDs = Self.orderedUnique(capabilityNodeIDs)
+        self.capabilityEdgeIDs = Self.orderedUnique(capabilityEdgeIDs)
+        self.levelLadderIDs = Self.orderedUnique(levelLadderIDs)
+        self.roleOverlayIDs = Self.orderedUnique(roleOverlayIDs)
+        self.nodes = nodes
+        self.edges = edges
+        self.ladders = ladders
+        self.roleOverlays = roleOverlays
+        self.state = state
+        self.freshness = freshness
+        self.riskClass = riskClass
+        self.reviewRequired = reviewRequired
+    }
+
+    var hasProvenanceEvidence: Bool {
+        nodes.contains(where: { $0.hasProvenanceEvidence }) ||
+        edges.contains(where: { $0.hasProvenanceEvidence })
+    }
+
+    func highestReusablePathID(
+        for skillSliceID: String,
+        roleID: String? = nil,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy = .conservativeFreshness,
+        riskPolicy: SourceAtlasRiskPolicy = .conservative
+    ) -> String? {
+        bestReusablePath(
+            for: skillSliceID,
+            roleID: roleID,
+            using: freshnessPolicy,
+            riskPolicy: riskPolicy
+        )?.id
+    }
+
+    func bestReusablePath(
+        for skillSliceID: String,
+        roleID: String? = nil,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> SourceAtlasPathOverlay? {
+        ladders
+            .flatMap { $0.reusablePaths(for: skillSliceID, roleID: roleID, using: freshnessPolicy, riskPolicy: riskPolicy) }
+            .max {
+                if $0.pathPriority != $1.pathPriority {
+                    return $0.pathPriority < $1.pathPriority
+                }
+                let lhsSpecificity = $0.specificityScore(for: skillSliceID, roleID: roleID)
+                let rhsSpecificity = $1.specificityScore(for: skillSliceID, roleID: roleID)
+                if lhsSpecificity != rhsSpecificity {
+                    return lhsSpecificity < rhsSpecificity
+                }
+                return $0.id < $1.id
+            }
+    }
+
+    func canDriveCurrentProjection(
+        for skillSliceID: String,
+        roleID: String? = nil,
+        using freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy
+    ) -> Bool {
+        bestReusablePath(for: skillSliceID, roleID: roleID, using: freshnessPolicy, riskPolicy: riskPolicy) != nil &&
+            state == .official &&
+            hasProvenanceEvidence &&
+            reviewRequired == false &&
+            freshnessPolicy.canSupportCurrentRecommendation(freshness: freshness, riskClass: riskClass) &&
+            riskPolicy.allowsCurrentRecommendation(riskClass) &&
+            state.isBlockingState == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
 struct SourceAtlasFreshnessPolicy: Codable, Sendable, Equatable, Hashable {
     let reviewIntervalDays: Int
     let staleBlocksHighRiskUse: Bool
@@ -729,6 +1386,43 @@ struct SourceAtlasPack: Codable, Sendable, Equatable, Hashable, Identifiable {
     let disclosureCopy: SourceAtlasDisclosureCopy
     let runtimeBoundary: SourceAtlasRuntimeBoundary
     let composition: SourceAtlasCompositionContract
+    let domainPacks: [SourceAtlasDomainPack]
+    let specificDomainPacks: [SourceAtlasSpecificDomainPack]
+    let capabilityGraphs: [SourceAtlasCapabilityGraph]
+
+    init(
+        manifest: SourceAtlasPackManifest,
+        sources: [SourceAtlasSourceRecord],
+        claims: [SourceAtlasClaim],
+        requirements: [SourceAtlasRequirement],
+        starterItems: [SourceAtlasStarterItem],
+        proofMap: [SourceAtlasProofMapEntry],
+        projectionRecipes: [SourceAtlasProjectionRecipe],
+        freshnessPolicy: SourceAtlasFreshnessPolicy,
+        riskPolicy: SourceAtlasRiskPolicy,
+        disclosureCopy: SourceAtlasDisclosureCopy,
+        runtimeBoundary: SourceAtlasRuntimeBoundary,
+        composition: SourceAtlasCompositionContract,
+        domainPacks: [SourceAtlasDomainPack] = [],
+        specificDomainPacks: [SourceAtlasSpecificDomainPack] = [],
+        capabilityGraphs: [SourceAtlasCapabilityGraph] = []
+    ) {
+        self.manifest = manifest
+        self.sources = sources
+        self.claims = claims
+        self.requirements = requirements
+        self.starterItems = starterItems
+        self.proofMap = proofMap
+        self.projectionRecipes = projectionRecipes
+        self.freshnessPolicy = freshnessPolicy
+        self.riskPolicy = riskPolicy
+        self.disclosureCopy = disclosureCopy
+        self.runtimeBoundary = runtimeBoundary
+        self.composition = composition
+        self.domainPacks = domainPacks
+        self.specificDomainPacks = specificDomainPacks
+        self.capabilityGraphs = capabilityGraphs
+    }
 
     var validationIssues: [SourceAtlasValidationIssue] {
         SourceAtlasPackValidator().validate(self)

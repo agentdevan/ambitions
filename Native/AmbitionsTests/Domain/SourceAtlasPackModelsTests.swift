@@ -675,4 +675,268 @@ extension SourceAtlasPackModelsTests {
         XCTAssertFalse(localProof.canCertifySourceTruth)
         XCTAssertFalse(localProof.canSupportCurrentRequirement(["claim-serve": sourceClaim]))
     }
+
+    func testNarrowSkillSliceReusesSpecificPathOverlay() {
+        let levelLadder = SourceAtlasLevelLadder(
+            id: "ladder-serve",
+            title: "Serve ladder",
+            capabilityGraphID: "graph-serve",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-broad",
+                    title: "Broad serve path",
+                    skillSliceID: "sports.pickleball",
+                    pathPriority: 3,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-narrow",
+                    title: "Narrow serve path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 3,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(
+                for: "sports.pickleball.serve",
+                roleID: "athlete"
+            ),
+            "path-narrow"
+        )
+    }
+
+    func testHighestPriorityPathOverlayIsSelectedForReuse() {
+        let levelLadder = SourceAtlasLevelLadder(
+            id: "ladder-serve",
+            title: "Serve ladder",
+            capabilityGraphID: "graph-serve",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-low",
+                    title: "Lower priority path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 1,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-high",
+                    title: "Higher priority path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 9,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(
+                for: "sports.pickleball.serve",
+                roleID: "athlete"
+            ),
+            "path-high"
+        )
+    }
+
+    func testRoleSpecificPathOverlayDoesNotReuseWithoutRoleContext() {
+        let levelLadder = SourceAtlasLevelLadder(
+            id: "ladder-role",
+            title: "Role ladder",
+            capabilityGraphID: "graph-serve",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-generic",
+                    title: "Generic serve path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 2,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-coach",
+                    title: "Coach serve path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 9,
+                    roleID: "coach",
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(for: "sports.pickleball.serve"),
+            "path-generic"
+        )
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(
+                for: "sports.pickleball.serve",
+                roleID: "coach"
+            ),
+            "path-coach"
+        )
+    }
+
+    func testNarrowPathOverlayDoesNotReuseForBroaderSkillSlice() {
+        let levelLadder = SourceAtlasLevelLadder(
+            id: "ladder-broad",
+            title: "Broad ladder",
+            capabilityGraphID: "graph-serve",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-serve-only",
+                    title: "Serve-only path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 9,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                )
+            ]
+        )
+
+        XCTAssertNil(
+            levelLadder.highestReusablePathID(
+                for: "sports.pickleball",
+                roleID: "athlete"
+            )
+        )
+    }
+
+    func testStaleOrUnknownProjectionStatesBlockCurrentReuse() {
+        let levelLadder = SourceAtlasLevelLadder(
+            id: "ladder-stale",
+            title: "Stale ladder",
+            capabilityGraphID: "graph-serve",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-stale",
+                    title: "Stale path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 10,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .stale,
+                    riskClass: .hobby
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-unknown",
+                    title: "Unknown path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 10,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .unknown,
+                    riskClass: .hobby
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-revoked",
+                    title: "Revoked path",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 10,
+                    sourceRecordIDs: ["source-official"],
+                    state: .revoked,
+                    freshness: .current,
+                    riskClass: .hobby
+                )
+            ]
+        )
+
+        XCTAssertNil(
+            levelLadder.highestReusablePathID(
+                for: "sports.pickleball.serve",
+                roleID: "athlete"
+            )
+        )
+    }
+
+    func testProjectionPathsRequireProvenanceForCurrentRecommendation() {
+        let pathMissingProvenance = SourceAtlasPathOverlay(
+            id: "path-no-source",
+            title: "No source path",
+            skillSliceID: "sports.pickleball.serve",
+            pathPriority: 10,
+            state: .official,
+            freshness: .current,
+            riskClass: .hobby
+        )
+        let pathWithSource = SourceAtlasPathOverlay(
+            id: "path-with-source",
+            title: "With source path",
+            skillSliceID: "sports.pickleball.serve",
+            pathPriority: 10,
+            sourceRecordIDs: ["source-official"],
+            state: .official,
+            freshness: .current,
+            riskClass: .hobby
+        )
+        let pathWithNoProvenance = SourceAtlasPathOverlay(
+            id: "path-user",
+            title: "User provided path",
+            skillSliceID: "sports.pickleball.serve",
+            pathPriority: 8,
+            sourceRecordIDs: ["source-official"],
+            state: .userProvided,
+            freshness: .current,
+            riskClass: .hobby
+        )
+
+        XCTAssertFalse(
+            pathMissingProvenance.canDriveCurrentProjection(
+                for: "sports.pickleball.serve",
+                roleID: "athlete",
+                using: .conservativeFreshness,
+                riskPolicy: .conservative
+            )
+        )
+        XCTAssertTrue(
+            pathWithSource.canDriveCurrentProjection(
+                for: "sports.pickleball.serve",
+                roleID: "athlete",
+                using: .conservativeFreshness,
+                riskPolicy: .conservative
+            )
+        )
+        XCTAssertFalse(
+            pathWithNoProvenance.canDriveCurrentProjection(
+                for: "sports.pickleball.serve",
+                roleID: "athlete",
+                using: .conservativeFreshness,
+                riskPolicy: .conservative
+            )
+        )
+    }
+
+    func testCapabilityProjectionModelsRemainValueModelOnly() {
+        let pack = Self.validPack()
+        XCTAssertTrue(pack.runtimeBoundary.isValueModelOnly)
+        XCTAssertTrue(
+            SourceAtlasRuntimeBoundary(
+                storesUserData: false,
+                performsNetworkFetches: false,
+                mutatesPlans: false,
+                writesPersistence: false
+            ).isValueModelOnly
+        )
+        XCTAssertEqual(pack.validationIssues.contains(.runtimeStoreBehavior), false)
+    }
 }
