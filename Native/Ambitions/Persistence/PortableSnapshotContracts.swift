@@ -421,6 +421,51 @@ struct PortableImportDryRunReport: Codable, Sendable, Equatable {
     }
 }
 
+enum PortableManualMergeAction: String, Codable, Sendable, Equatable {
+    case keepLocal = "keep_local"
+    case needsReview = "needs_review"
+}
+
+struct PortableManualMergeItem: Codable, Sendable, Equatable, Identifiable {
+    let id: String
+    let entityKind: PortableConflictEntityKind
+    let entityID: String
+    let action: PortableManualMergeAction
+    let localRevisionMarker: String?
+    let incomingRevisionMarker: String?
+    let reason: String
+}
+
+struct PortableManualMergePlan: Codable, Sendable, Equatable {
+    let mode: PortableImportMode
+    let safeImportItemCount: Int
+    let reviewItemCount: Int
+    let warningMessages: [String]
+    let items: [PortableManualMergeItem]
+    let durableMutationAllowed: Bool
+    let userDecisionRequired: Bool
+
+    init(dryRunReport: PortableImportDryRunReport) {
+        self.mode = .mergeWithConflictReport
+        self.safeImportItemCount = dryRunReport.safetySummary.wouldImportItemCount
+        self.reviewItemCount = dryRunReport.conflicts.count
+        self.warningMessages = dryRunReport.warnings.map(\.message)
+        self.items = dryRunReport.conflicts.map { conflict in
+            PortableManualMergeItem(
+                id: "manual_merge.\(conflict.id)",
+                entityKind: conflict.entityKind,
+                entityID: conflict.entityID,
+                action: conflict.recommendation == .keepLocal ? .keepLocal : .needsReview,
+                localRevisionMarker: conflict.localRevisionMarker,
+                incomingRevisionMarker: conflict.incomingRevisionMarker,
+                reason: conflict.reason
+            )
+        }
+        self.durableMutationAllowed = false
+        self.userDecisionRequired = items.contains { $0.action == .needsReview }
+    }
+}
+
 struct PortableImportReport: Codable, Sendable, Equatable {
     let mode: PortableImportMode
     let importedGoalCount: Int

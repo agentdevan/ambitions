@@ -3,6 +3,7 @@ import Foundation
 protocol PortableSnapshotServicing: Sendable {
     func exportSnapshot() async throws -> PortableAppSnapshot
     func exportSnapshot(selection: PortableExportSelection) async throws -> PortableAppSnapshot
+    func manualMergePlan(for snapshot: PortableAppSnapshot) async throws -> PortableManualMergePlan
     func dryRunImportSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportDryRunReport
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport
 }
@@ -97,6 +98,11 @@ struct PortableSnapshotService: PortableSnapshotServicing {
         case .mergeWithConflictReport:
             return try await dryRunMergeWithConflictReport(snapshot, warnings: warnings)
         }
+    }
+
+    func manualMergePlan(for snapshot: PortableAppSnapshot) async throws -> PortableManualMergePlan {
+        let dryRun = try await dryRunImportSnapshot(snapshot, mode: .mergeWithConflictReport)
+        return PortableManualMergePlan(dryRunReport: dryRun)
     }
 
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {

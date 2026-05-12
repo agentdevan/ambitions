@@ -473,6 +473,50 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(loadedGoal?.title, localGoal.title)
     }
 
+    func testManualMergePlanTurnsDryRunConflictsIntoReviewActionsWithoutSaving() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let localGoal = try XCTUnwrap(sampleGoal(id: "goal-manual-merge", revision: 3, updatedAt: "2026-04-19T10:00:00Z"))
+        let incomingGoal = try XCTUnwrap(sampleGoal(id: "goal-manual-merge", revision: 3, updatedAt: "2026-04-19T10:00:00Z", title: "Incoming manual merge conflict"))
+        let incomingDraft = sampleDraft(id: "draft-manual-merge-new", plannedGoalID: incomingGoal.id, updatedAt: "2026-04-19T11:00:00Z")
+
+        try await repositories.goals.saveGoals([localGoal])
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+        let snapshot = PortableAppSnapshot(
+            metadata: PortableAppSnapshotMetadata(
+                schemaVersion: .v1,
+                exportedAt: "2026-04-19T15:00:00Z",
+                source: "native.local.repositories",
+                trustPosture: .localOnly
+            ),
+            goals: [incomingGoal],
+            drafts: [incomingDraft],
+            evidence: [],
+            feedback: [],
+            captures: [],
+            teachingSignals: [],
+            appState: .default
+        )
+
+        let plan = try await service.manualMergePlan(for: snapshot)
+        let loadedDrafts = try await repositories.drafts.listDrafts()
+        let loadedGoal = try await repositories.goals.goal(id: localGoal.id)
+
+        XCTAssertEqual(plan.mode, .mergeWithConflictReport)
+        XCTAssertEqual(plan.safeImportItemCount, 2)
+        XCTAssertEqual(plan.reviewItemCount, 1)
+        XCTAssertFalse(plan.durableMutationAllowed)
+        XCTAssertTrue(plan.userDecisionRequired)
+        XCTAssertEqual(plan.items.map(\.action), [.needsReview])
+        XCTAssertEqual(plan.items.first?.entityID, localGoal.id)
+        XCTAssertTrue(loadedDrafts.isEmpty)
+        XCTAssertEqual(loadedGoal?.title, localGoal.title)
+    }
+
     func testNewPhoneDisasterDrillRestoresEncodedPackageIntoFreshStore() async throws {
         let sourceStore = try AmbitionsPersistenceStore(inMemory: true)
         let sourceRepositories = makeRepositories(store: sourceStore)
