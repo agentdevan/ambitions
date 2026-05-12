@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA09 Proof Map Implementation"
-  previous_batch: "SA09 Proof Map Implementation"
+  batch: "SA10 Freshness And Risk Model Implementation"
+  previous_batch: "SA10 Freshness And Risk Model Implementation"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "SA10 Freshness And Risk Model Implementation"
+  next_eligible_batch: "SA10A Capability Graph / Level Ladder Implementation"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
