@@ -1,6 +1,7 @@
 .PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status runner-access-check prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
+.PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
@@ -218,3 +219,24 @@ ambitions-codex-os-validate:
 
 ambitions-codex-os-doctor:
 	python3 scripts/ambitions-codex-os-doctor.py
+
+openai-build-suite-validate:
+	python3 scripts/openai-build-suite-validate.py
+
+openai-build-suite-dry-run:
+	python3 scripts/openai-build-suite-dry-run.py
+
+openai-repo-brain-index:
+	python3 tools/openai/repo_brain/build_repo_manifest.py
+
+openai-evals-dry-run:
+	python3 tools/openai/evals/run_evals.py --dry-run
+
+openai-batch-report-dry-run:
+	python3 tools/openai/batch_report/classify_batch_result.py --help >/dev/null
+
+openai-visual-critique-dry-run:
+	python3 tools/openai/visual_critique/critique_visual_packet.py --rubric tools/openai/visual_critique/rubrics/ambitions_visual_canon.json --dry-run
+
+openai-launch-docs-dry-run:
+	python3 tools/openai/launch_docs/generate_launch_packet.py --dry-run

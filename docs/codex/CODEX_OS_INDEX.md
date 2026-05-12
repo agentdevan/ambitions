@@ -46,6 +46,30 @@ make speed-final-gate
 - [`BATCH_TEST_ROUTER.md`](./BATCH_TEST_ROUTER.md)
 - [`KNOWN_YELLOW_QUARANTINE_LEDGER.md`](./KNOWN_YELLOW_QUARANTINE_LEDGER.md)
 
+## OpenAI Build Suite (docs/tooling-only, non-runtime)
+
+- [`OPENAI_BUILD_SUITE_USAGE_POLICY.md`](./OPENAI_BUILD_SUITE_USAGE_POLICY.md)
+- [`OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md`](./OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md)
+- [`CODEX_MULTI_AGENT_BUILD_SYSTEM.md`](./CODEX_MULTI_AGENT_BUILD_SYSTEM.md)
+- [`REPO_INTELLIGENCE_LAYER.md`](./REPO_INTELLIGENCE_LAYER.md)
+- [`OPENAI_EVAL_QA_LAYER.md`](./OPENAI_EVAL_QA_LAYER.md)
+- [`PROMPT_REPAIR_LAYER.md`](./PROMPT_REPAIR_LAYER.md)
+- [`BATCH_REPORT_LAYER.md`](./BATCH_REPORT_LAYER.md)
+- [`VISUAL_CRITIQUE_LAYER.md`](./VISUAL_CRITIQUE_LAYER.md)
+- [`LAUNCH_DOCUMENTATION_LAYER.md`](./LAUNCH_DOCUMENTATION_LAYER.md)
+
+Tooling targets:
+
+```bash
+make openai-build-suite-validate
+make openai-build-suite-dry-run
+make openai-repo-brain-index
+make openai-evals-dry-run
+make openai-batch-report-dry-run
+make openai-visual-critique-dry-run
+make openai-launch-docs-dry-run
+```
+
 ## Boundary
 
 Codex OS files are operating context. They are not product source truth, shipped behavior proof, validation proof, release proof, or approval to change app behavior.

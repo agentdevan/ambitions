@@ -260,16 +260,17 @@ access_flags() {
 
 parse_status() {
   local file="$1"
+  local status
   if [[ ! -s "$file" ]]; then
     printf 'RED\n'
     return
   fi
-  if grep -Eiq 'STATUS:[[:space:]]*RED|Hard Red|HARD RED|RED[[:space:]]*/[[:space:]]*STOP' "$file"; then
-    printf 'RED\n'
-  elif grep -Eiq 'STATUS:[[:space:]]*YELLOW' "$file"; then
-    printf 'YELLOW\n'
-  elif grep -Eiq 'STATUS:[[:space:]]*GREEN' "$file"; then
-    printf 'GREEN\n'
+  status="$(
+    sed -nE 's/.*STATUS:[[:space:]]*(GREEN|YELLOW|RED)([^A-Za-z].*)?$/\1/p' "$file" \
+      | tail -1
+  )"
+  if [[ -n "$status" ]]; then
+    printf '%s\n' "$status"
   else
     printf 'UNKNOWN\n'
   fi
