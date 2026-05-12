@@ -1,4 +1,4 @@
-.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
+.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status runner-access-check prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
 
@@ -18,6 +18,7 @@ check-batch-input:
 	@test -n "$(BATCH)" || (echo "BATCH is required. Example: make batch BATCH=SI07 PROMPT=prompts/SI07.md" >&2; exit 2)
 	@test -n "$(PROMPT)" || (echo "PROMPT is required. Example: make batch BATCH=SI07 PROMPT=prompts/SI07.md" >&2; exit 2)
 	@test -x "$(RUNNER)" || (echo "$(RUNNER) is missing or not executable" >&2; exit 2)
+	@python3 scripts/ambitions-runner-access-guard.py
 
 batch: batch-full
 
@@ -35,6 +36,9 @@ batch-push: check-batch-input
 
 batch-self-check:
 	"$(RUNNER)" --self-check
+
+runner-access-check:
+	@python3 scripts/ambitions-runner-access-guard.py
 
 batch-status:
 	@echo "Recent Codex batch runs:"
