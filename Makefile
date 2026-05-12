@@ -1,12 +1,13 @@
 .PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
-
+.PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
 AUDIT := scripts/ambitions-prompt-audit.sh
 GLOBAL_SUPERVISOR := scripts/ambitions-global-train-supervisor.sh
 AUTONOMOUS_TRAINER := scripts/ambitions-autonomous-train.sh
+SPEED_TRAINER := scripts/ambitions-speed-train.sh
 XCODE_BATCH ?= PK18
 LANE ?= none
 TEST ?=
@@ -172,6 +173,24 @@ throughput-prep:
 throughput-known-yellow:
 	@echo "Throughput known-yellow scan"
 	@bash scripts/ambitions-known-yellow-scan.sh
+
+speed-status:
+	@bash "$(SPEED_TRAINER)" --status
+
+speed-next:
+	@bash "$(SPEED_TRAINER)" --next
+
+speed-once:
+	@bash "$(SPEED_TRAINER)" --once
+
+speed-train:
+	@bash "$(SPEED_TRAINER)" --until-blocked
+
+speed-train-until-blocked:
+	@bash "$(SPEED_TRAINER)" --until-blocked
+
+speed-final-gate:
+	@bash "$(SPEED_TRAINER)" --final-gate
 
 .PHONY: build-lab-doctor xcode-validate xcode-focused-test xcode-build-for-testing xcode-test-plan
 
