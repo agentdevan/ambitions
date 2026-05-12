@@ -5,6 +5,7 @@ REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)"
 cd "$REPO_ROOT"
 
 AUTONOMOUS="scripts/ambitions-autonomous-train.sh"
+ACCESS_GUARD="scripts/ambitions-runner-access-guard.py"
 STALE_CHECK="scripts/ambitions-stale-state-check.py"
 QUEUE_GUARD="scripts/ambitions-speed-queue-guard.py"
 LANE_POLICY="scripts/ambitions-speed-lane-policy.py"
@@ -55,6 +56,7 @@ require_file() {
 
 require_base_files() {
   require_file "$AUTONOMOUS"
+  require_file "$ACCESS_GUARD"
   require_file "$STALE_CHECK"
   require_file "$QUEUE_GUARD"
   require_file "$CLAIM_SCAN"
@@ -73,6 +75,7 @@ next_prompt() {
 
 speed_preflight() {
   require_base_files
+  python3 "$ACCESS_GUARD"
   local batch
   batch="$(next_batch)"
   [[ -n "$batch" ]] || fail "no next batch found"
@@ -91,6 +94,7 @@ speed_preflight() {
 }
 
 speed_postflight() {
+  python3 "$ACCESS_GUARD"
   python3 "$STALE_CHECK"
   local batch
   batch="$(next_batch || true)"
@@ -105,6 +109,7 @@ status() {
   log "status"
   git status --short --branch
   echo
+  python3 "$ACCESS_GUARD" || true
   "$AUTONOMOUS" --status
   echo
   python3 "$STALE_CHECK" || true
@@ -148,6 +153,7 @@ run_until_blocked() {
     prompt="$(next_prompt)"
     [[ -n "$batch" ]] || { log "no next batch found; stopping"; return 0; }
     [[ -f "$prompt" ]] || fail "next prompt missing: $prompt"
+    python3 "$ACCESS_GUARD"
     python3 "$QUEUE_GUARD" "$batch"
     case " $seen " in
       *" $batch "*) fail "same-batch loop detected: $batch" ;;
@@ -173,6 +179,7 @@ final_gate() {
   require_base_files
   log "final heavy gate start"
   git diff --check
+  python3 "$ACCESS_GUARD"
   python3 "$STALE_CHECK"
   batch="$(next_batch || true)"
   if [[ -n "$batch" ]]; then
@@ -199,6 +206,7 @@ case "$MODE" in
     ;;
   --next)
     require_base_files
+    python3 "$ACCESS_GUARD"
     "$AUTONOMOUS" --next
     ;;
   --once)
