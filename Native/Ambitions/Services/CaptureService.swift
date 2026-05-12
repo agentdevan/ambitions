@@ -207,6 +207,247 @@ struct CaptureGoalBinding: Sendable, Equatable {
     }
 }
 
+struct CaptureDraftRouteChoice: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let routeType: SmartAttachmentRouteType
+    let isSelected: Bool
+}
+
+struct CaptureDraftRoutePreview: Sendable, Equatable {
+    let originalText: String
+    let placementShelfTitle: String
+    let postInputStateTitle: String
+    let receiptTitle: String
+    let summary: String
+    let routeProofTitle: String
+    let routeProofDetail: String
+    let destinationLabel: String
+    let objectTypeLabel: String
+    let appearanceLabel: String
+    let consequenceLabel: String
+    let privacyLabel: String
+    let localSourceLabel: String
+    let correctionLabel: String
+    let receiptSeamLabel: String
+    let resolverFoldTitle: String
+    let resolverWhyLabel: String
+    let correctionReceiptLabel: String
+    let correctionControlLabels: [String]
+    let primaryActionTitle: String
+    let changeActionTitle: String
+    let safeActionTitle: String
+    let semanticState: String
+    let clarificationQuestion: String?
+    let choices: [CaptureDraftRouteChoice]
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String?
+
+    var visibleCopy: String {
+        ([
+            originalText,
+            placementShelfTitle,
+            postInputStateTitle,
+            receiptTitle,
+            summary,
+            routeProofTitle,
+            routeProofDetail,
+            destinationLabel,
+            objectTypeLabel,
+            appearanceLabel,
+            consequenceLabel,
+            privacyLabel,
+            localSourceLabel,
+            correctionLabel,
+            receiptSeamLabel,
+            resolverFoldTitle,
+            resolverWhyLabel,
+            correctionReceiptLabel,
+            primaryActionTitle,
+            changeActionTitle,
+            safeActionTitle,
+            clarificationQuestion
+        ].compactMap { $0 } + correctionControlLabels + choices.map(\.title)).joined(separator: " ")
+    }
+}
+
+struct CaptureDraftRouteService: Sendable {
+    private let smartAttachmentAdapter: SmartAttachmentCaptureAdapter
+
+    init(smartAttachmentAdapter: SmartAttachmentCaptureAdapter = SmartAttachmentCaptureAdapter()) {
+        self.smartAttachmentAdapter = smartAttachmentAdapter
+    }
+
+    func draftRouteDecision(
+        for rawText: String,
+        sourceType: CaptureSourceType,
+        sourceSurface: String,
+        selectedDraftRouteType: SmartAttachmentRouteType?,
+        candidates: [SmartAttachmentDestinationCandidate] = []
+    ) -> SmartAttachmentCaptureDecision {
+        smartAttachmentAdapter.decision(
+            rawText: rawText,
+            sourceType: sourceType,
+            sourceSurface: sourceSurface,
+            selectedRouteType: selectedDraftRouteType,
+            candidates: candidates
+        ) ?? SmartAttachmentCaptureDecision(
+            result: DefaultSmartAttachmentService().route(
+                SmartAttachmentInput(
+                    rawText: rawText,
+                    sourceContext: SmartAttachmentSourceContext(
+                        sourceType: sourceType,
+                        sourceSurface: sourceSurface
+                    )
+                ),
+                candidates: candidates,
+                maxCandidateCount: 5
+            ),
+            selectedRouteType: nil
+        )
+    }
+
+    func makeDraftRoutePreview(
+        for rawText: String,
+        sourceType: CaptureSourceType,
+        sourceSurface: String,
+        selectedDraftRouteType: SmartAttachmentRouteType?,
+        candidates: [SmartAttachmentDestinationCandidate] = [],
+        localSourceLabel: String
+    ) -> CaptureDraftRoutePreview? {
+        let trimmed = rawText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.isEmpty == false else {
+            return nil
+        }
+        let decision = draftRouteDecision(
+            for: trimmed,
+            sourceType: sourceType,
+            sourceSurface: sourceSurface,
+            selectedDraftRouteType: selectedDraftRouteType,
+            candidates: candidates
+        )
+        return makeDraftRoutePreview(from: decision, localSourceLabel: localSourceLabel)
+    }
+
+    private func makeDraftRoutePreview(from decision: SmartAttachmentCaptureDecision, localSourceLabel: String) -> CaptureDraftRoutePreview {
+        let choices = clarificationChoices(from: decision)
+        let placementPreview = decision.placementPreview
+        return CaptureDraftRoutePreview(
+            originalText: placementPreview.originalText,
+            placementShelfTitle: "Atmosphere Composer",
+            postInputStateTitle: placementPreview.postInputStateTitle,
+            receiptTitle: decision.receiptLine,
+            summary: decision.summary,
+            routeProofTitle: routeProofTitle(from: decision),
+            routeProofDetail: routeProofDetail(from: decision),
+            destinationLabel: placementPreview.suggestedDestination,
+            objectTypeLabel: placementPreview.objectTypeLabel,
+            appearanceLabel: placementPreview.appearanceLabel,
+            consequenceLabel: placementPreview.consequenceLabel,
+            privacyLabel: placementPreview.privacyLabel,
+            localSourceLabel: localSourceLabel,
+            correctionLabel: decision.selectedRouteType == nil ? "Correction: change the route before saving" : "Correction: route chosen by you",
+            receiptSeamLabel: "Receipt seam: save creates a local capture receipt",
+            resolverFoldTitle: "Resolver Fold",
+            resolverWhyLabel: resolverWhyLabel(from: decision),
+            correctionReceiptLabel: "Correction receipt: saved route changes are recorded locally and stay reviewable.",
+            correctionControlLabels: correctionControlLabels(from: decision),
+            primaryActionTitle: placementPreview.primaryActionTitle,
+            changeActionTitle: placementPreview.changeActionTitle,
+            safeActionTitle: placementPreview.safeActionTitle,
+            semanticState: decision.result.resultState.rawValue,
+            clarificationQuestion: decision.clarification?.question,
+            choices: choices,
+            accessibilityLabel: decision.accessibilityLabel,
+            accessibilityValue: decision.accessibilityValue,
+            accessibilityHint: decision.accessibilityHint
+        )
+    }
+
+    private func resolverWhyLabel(from decision: SmartAttachmentCaptureDecision) -> String {
+        if decision.selectedRouteType != nil {
+            return "What Ambitions thinks: use the route you chose."
+        }
+        return "What Ambitions thinks: \(decision.routeType.userFacingLabel) based on local text only."
+    }
+
+    private func routeProofTitle(from decision: SmartAttachmentCaptureDecision) -> String {
+        if decision.result.selectedCandidate?.target.isNeedsPlace == true {
+            return "Route needs your choice"
+        }
+        if decision.result.selectedCandidate?.isSuggestedAttachment == true {
+            return "Suggested attachment available"
+        }
+        if decision.selectedRouteType != nil {
+            return "Chosen by you"
+        }
+        return "Route evidence"
+    }
+
+    private func routeProofDetail(from decision: SmartAttachmentCaptureDecision) -> String {
+        if decision.result.selectedCandidate?.target.isNeedsPlace == true {
+            return "No safe destination yet; the capture stays private and editable."
+        }
+        if let labels = decision.result.selectedCandidate?.evidenceLabels,
+           labels.isEmpty == false {
+            return labels.prefix(3).joined(separator: ", ")
+        }
+        if decision.selectedRouteType != nil {
+            return "Manual route choice; you can still change it before saving."
+        }
+        return "Local text only; no calendar, network, account, or cloud route."
+    }
+
+    private func clarificationChoices(from decision: SmartAttachmentCaptureDecision) -> [CaptureDraftRouteChoice] {
+        let sourceChoices = decision.clarification?.choices.map(\.routeType) ?? fallbackRouteChoices(for: decision)
+        return Array(sourceChoices.prefix(3)).map { routeType in
+            CaptureDraftRouteChoice(
+                id: "draft-route.\(routeType.rawValue)",
+                title: routeChoiceTitle(for: routeType),
+                routeType: routeType,
+                isSelected: routeType == decision.selectedRouteType
+            )
+        }
+    }
+
+    private func fallbackRouteChoices(for decision: SmartAttachmentCaptureDecision) -> [SmartAttachmentRouteType] {
+        switch decision.result.resultState {
+        case .needsClarification, .savedToNeedsPlace:
+            return [.task, .goal, .idea]
+        case .attached, .savedStandalone, .failedSafely:
+            return [.task, .goal, .idea]
+        }
+    }
+
+    private func correctionControlLabels(from decision: SmartAttachmentCaptureDecision) -> [String] {
+        let notGoalLabel = decision.routeType == .goal
+            ? "Not a goal: choose Task or Needs a Place."
+            : "Not a goal: no Goal is created unless you choose Goal."
+        return [
+            "Place somewhere else: choose a route below.",
+            notGoalLabel,
+            "Not now: Decide later keeps it out of Today.",
+            "Decide later: save to Needs a Place.",
+            "Discard: clear the composer before saving.",
+            "Archive: after saving, move it out of active review."
+        ]
+    }
+
+    private func routeChoiceTitle(for routeType: SmartAttachmentRouteType) -> String {
+        switch routeType {
+        case .task:
+            return "Task"
+        case .goal:
+            return "Goal"
+        case .idea:
+            return "Needs a Place"
+        default:
+            return routeType.userFacingLabel
+        }
+    }
+}
+
 struct DefaultCaptureService: CaptureServicing {
     private let repository: any CaptureRepository
     private let goalRepository: (any GoalRepository)?

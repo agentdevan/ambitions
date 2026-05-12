@@ -2,10 +2,24 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK19 Goals Query/Projector Extraction / Green.
-Next recommended implementation pass: PK20 Goals Projector Completion.
-Next eligible non-UI platform batch: PK20 Goals Projector Completion.
-Scope: PK19 extracts Goals query/projector boundaries while preserving existing goal semantics, board ordering, mission-control hierarchy, and non-score product language; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+Current batch: PK20 Capture Service Extraction / Green.
+Next recommended implementation pass: PK21 Time Service Extraction.
+Next eligible non-UI platform batch: PK21 Time Service Extraction.
+Scope: PK20 extracts Capture draft-routing service boundaries while preserving Capture composer intake, local-only route handling, placement-review behavior, and correction/proof language; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+
+## PK20 Capture Service Extraction Closeout
+
+- PK20 report: `docs/audits/pk20-batch-closeout-report.md`.
+- Scope: behavior-preserving Capture draft-route decision and preview composition extraction from `CapturesViewModel` into `CaptureDraftRouteService`.
+- Focused proof and source scope:
+  - `Native/Ambitions/Features/Captures/CapturesViewModel.swift`
+  - `Native/Ambitions/Services/CaptureService.swift`
+  - `Native/AmbitionsTests/Captures/CapturesViewModelTests.swift`
+  - `Native/AmbitionsTests/Persistence/CaptureServiceTests.swift`
+  - `Native/AmbitionsTests/Domain/CaptureModelsTests.swift`
+- Canonical queue now marks PK20 Green.
+- EFC applicability: invoked for Capture route/proof/correction behavior because the extraction preserves local-first placement and receipt boundaries without adding side effects.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK19 Goals Query/Projector Extraction Closeout
 
