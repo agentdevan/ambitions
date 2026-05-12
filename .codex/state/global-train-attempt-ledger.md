@@ -58,3 +58,4 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 | 2026-05-12T16:52:00Z | fast-install-direct | PK31 | 1 | green | docs/audits/pk31-batch-closeout-report.md | PK31 focused portable snapshot test passed and commit `c3d2b246ab84caf031b2a48188eabbdc13c267cc` was pushed; PK32 is next eligible. |
 | 2026-05-12T17:05:00Z | fast-install-direct | PK32 | 1 | green | docs/audits/pk32-batch-closeout-report.md | PK32 focused knowledge provider boundary test passed and commit `b618afe6f56980f7781d46f352455c92b809fc02` was pushed; PK33 is next eligible. |
 | 2026-05-12T17:22:00Z | fast-install-direct | PK33 | 1 | green | docs/audits/pk33-batch-closeout-report.md | PK33 focused recommendation explanation model test passed; PK34 is next eligible. |
+| 2026-05-12T17:36:00Z | fast-install-direct | PK34 | 1 | green | docs/audits/pk34-batch-closeout-report.md | PK34 focused runtime goal-intelligence service test passed; PK35 is next eligible. |

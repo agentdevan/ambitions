@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK33 Recommendation Evidence Model / Green.
-Next recommended implementation pass: PK34 Intelligence Quarantine.
-Next eligible non-UI platform batch: PK34 Intelligence Quarantine.
-Scope: PK33 adds a deterministic local recommendation evidence model derived from existing explanation evidence and boundary state; it does not execute external/cloud LLM behavior, hosted backend behavior, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK34 Intelligence Quarantine / Green.
+Next recommended implementation pass: PK35 Large-Store Fixture Generator.
+Next eligible non-UI platform batch: PK35 Large-Store Fixture Generator.
+Scope: PK34 adds deterministic local runtime-intelligence quarantine assessment; it does not execute external/cloud LLM behavior, hosted backend behavior, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK34 Intelligence Quarantine Closeout
+
+- PK34 report: `docs/audits/pk34-batch-closeout-report.md`.
+- Scope: deterministic local runtime-intelligence quarantine assessment carried on existing runtime goal-intelligence contexts.
+- Commit: same closeout commit (`PK34: install intelligence quarantine`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `AmbitionsRuntimeGoalIntelligenceServiceTests` passed.
+- Canonical queue now marks PK34 Green and PK35 executable now.
+- EFC applicability: invoked for runtime-intelligence boundary proof integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, or global-train-completion claim is made.
 
 ## PK33 Recommendation Evidence Model Closeout
 

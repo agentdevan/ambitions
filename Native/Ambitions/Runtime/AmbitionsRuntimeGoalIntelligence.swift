@@ -29,6 +29,86 @@ struct RuntimeGoalIntelligenceContext: Sendable {
     let applicableSignals: GoalTeachingApplicableSet?
     let explainability: GoalExplainabilityState
     let whyNow: WhyNowExplanationMetadata?
+    let quarantine: RuntimeIntelligenceQuarantineAssessment
+}
+
+enum RuntimeIntelligenceQuarantineIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case missingSourceAudit = "missing_source_audit"
+    case staleOrUnavailableFreshness = "stale_or_unavailable_freshness"
+    case lowConfidence = "low_confidence"
+    case unresolvedContradiction = "unresolved_contradiction"
+    case missingCorrectionControl = "missing_correction_control"
+    case remoteIntelligenceBackend = "remote_intelligence_backend"
+}
+
+struct RuntimeIntelligenceQuarantineAssessment: Codable, Sendable, Equatable, Hashable {
+    let issues: [RuntimeIntelligenceQuarantineIssue]
+    let canDriveRecommendation: Bool
+    let disclosureSummary: String
+
+    static let clear = RuntimeIntelligenceQuarantineAssessment(
+        issues: [],
+        canDriveRecommendation: true,
+        disclosureSummary: "Runtime intelligence is local, source-audited, and reviewable."
+    )
+
+    init(
+        issues: [RuntimeIntelligenceQuarantineIssue],
+        canDriveRecommendation: Bool? = nil,
+        disclosureSummary: String? = nil
+    ) {
+        let stableIssues = Self.stableUnique(issues)
+        self.issues = stableIssues
+        self.canDriveRecommendation = canDriveRecommendation ?? stableIssues.isEmpty
+        self.disclosureSummary = disclosureSummary ?? (
+            stableIssues.isEmpty
+                ? "Runtime intelligence is local, source-audited, and reviewable."
+                : "Runtime intelligence is quarantined for review before it can drive recommendations."
+        )
+    }
+
+    var isQuarantined: Bool {
+        issues.isEmpty == false || canDriveRecommendation == false
+    }
+
+    private static func stableUnique<T: Hashable>(_ values: [T]) -> [T] {
+        var seen: Set<T> = []
+        var result: [T] = []
+        for value in values where seen.insert(value).inserted {
+            result.append(value)
+        }
+        return result
+    }
+}
+
+struct RuntimeIntelligenceQuarantinePolicy: Sendable {
+    func assess(
+        explainability: GoalExplainabilityState,
+        capabilities: AmbitionsRuntimeCapabilities = .currentLocalRuntime
+    ) -> RuntimeIntelligenceQuarantineAssessment {
+        var issues: [RuntimeIntelligenceQuarantineIssue] = []
+
+        if explainability.sourceAudit.rows.isEmpty {
+            issues.append(.missingSourceAudit)
+        }
+        if [.stale, .expired, .blockedMissingEvidence, .providerUnavailable].contains(explainability.freshness.posture) {
+            issues.append(.staleOrUnavailableFreshness)
+        }
+        if explainability.confidence.understandingConfidence == .low || explainability.confidence.pathConfidence == .low {
+            issues.append(.lowConfidence)
+        }
+        if explainability.contradictions.isEmpty == false {
+            issues.append(.unresolvedContradiction)
+        }
+        if explainability.correctionControls.isEmpty {
+            issues.append(.missingCorrectionControl)
+        }
+        if capabilities.hasRemoteIntelligenceBackend {
+            issues.append(.remoteIntelligenceBackend)
+        }
+
+        return RuntimeIntelligenceQuarantineAssessment(issues: issues)
+    }
 }
 
 protocol RuntimeGoalIntelligenceServicing: Sendable {
@@ -47,13 +127,15 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
     let teachingReader: any GoalTeachingSignalReading
     let teachingCaptureService: any GoalTeachingSignalCapturing
     let learningService: LearningAnticipationService
+    let quarantinePolicy: RuntimeIntelligenceQuarantinePolicy
 
     init(
         repositories: AppRepositories,
         explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
         teachingReader: (any GoalTeachingSignalReading)? = nil,
         teachingCaptureService: (any GoalTeachingSignalCapturing)? = nil,
-        learningService: LearningAnticipationService = LearningAnticipationService()
+        learningService: LearningAnticipationService = LearningAnticipationService(),
+        quarantinePolicy: RuntimeIntelligenceQuarantinePolicy = RuntimeIntelligenceQuarantinePolicy()
     ) {
         let sharedTeachingService = DefaultGoalTeachingSignalService(repository: repositories.teaching)
         self.repositories = repositories
@@ -61,6 +143,7 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
         self.teachingReader = teachingReader ?? sharedTeachingService
         self.teachingCaptureService = teachingCaptureService ?? sharedTeachingService
         self.learningService = learningService
+        self.quarantinePolicy = quarantinePolicy
     }
 
     func loadContext(_ request: RuntimeGoalIntelligenceRequest, now: Date) async throws -> RuntimeGoalIntelligenceContext? {
@@ -87,6 +170,7 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
             primaryStepID: request.primaryStepID,
             whyNow: whyNow
         )
+        let quarantine = quarantinePolicy.assess(explainability: explainability)
 
         return RuntimeGoalIntelligenceContext(
             goalID: goalID,
@@ -95,7 +179,8 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
             metadata: metadata,
             applicableSignals: applicableSignals,
             explainability: explainability,
-            whyNow: whyNow
+            whyNow: whyNow,
+            quarantine: quarantine
         )
     }
 

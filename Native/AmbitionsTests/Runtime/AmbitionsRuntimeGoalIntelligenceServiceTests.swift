@@ -54,6 +54,7 @@ final class AmbitionsRuntimeGoalIntelligenceServiceTests: XCTestCase {
         XCTAssertEqual(runtimeContext?.draftID, draftID)
         XCTAssertEqual(runtimeContext?.whyNow, directWhyNow)
         XCTAssertEqual(runtimeContext?.applicableSignals, directSignals)
+        XCTAssertEqual(runtimeContext?.quarantine, .clear)
         assertExplainabilityParity(runtimeContext?.explainability, directExplainability)
     }
 
@@ -132,6 +133,57 @@ final class AmbitionsRuntimeGoalIntelligenceServiceTests: XCTestCase {
         assertRuntimeContextParity(batch[0], firstSingle)
         XCTAssertNil(batch[1])
         assertRuntimeContextParity(batch[2], secondSingle)
+    }
+
+    func testRuntimeIntelligenceQuarantineMarksUnsafeContextForReview() async throws {
+        let setup = try await createGoalContext(
+            repositories: try await makeRepositories(),
+            title: "Submit my conference talk proposal by 2026-05-15"
+        )
+        let base = try XCTUnwrap(setup.context?.explainability)
+        let unsafe = GoalExplainabilityState(
+            whisper: base.whisper,
+            whyThis: base.whyThis,
+            sourceAudit: GoalSourceAuditSectionState(rows: []),
+            freshness: GoalFreshnessState(
+                posture: .stale,
+                postureLabel: "Needs review",
+                severityLabel: "Stale",
+                detailLabels: ["Source needs review"]
+            ),
+            confidence: GoalConfidenceState(
+                understandingConfidence: .low,
+                pathConfidence: .low,
+                detailLabels: ["Unclear source support"]
+            ),
+            contradictions: [
+                GoalContradictionSummaryState(
+                    id: "contradiction-source",
+                    code: .requiredKnowledgeClaimConflict,
+                    title: "Source conflict",
+                    summary: "Required knowledge is not settled.",
+                    severityLabel: "Review",
+                    state: .warning
+                )
+            ],
+            correctionControls: [],
+            appliedTeachingBadges: base.appliedTeachingBadges
+        )
+
+        let assessment = RuntimeIntelligenceQuarantinePolicy().assess(explainability: unsafe)
+
+        XCTAssertTrue(assessment.isQuarantined)
+        XCTAssertFalse(assessment.canDriveRecommendation)
+        XCTAssertEqual(
+            assessment.issues,
+            [
+                .missingSourceAudit,
+                .staleOrUnavailableFreshness,
+                .lowConfidence,
+                .unresolvedContradiction,
+                .missingCorrectionControl
+            ]
+        )
     }
 }
 
@@ -253,6 +305,7 @@ private extension AmbitionsRuntimeGoalIntelligenceServiceTests {
         XCTAssertEqual(lhs?.primaryStepID, rhs?.primaryStepID, file: file, line: line)
         XCTAssertEqual(lhs?.whyNow, rhs?.whyNow, file: file, line: line)
         XCTAssertEqual(lhs?.applicableSignals, rhs?.applicableSignals, file: file, line: line)
+        XCTAssertEqual(lhs?.quarantine, rhs?.quarantine, file: file, line: line)
         assertExplainabilityParity(lhs?.explainability, rhs?.explainability, file: file, line: line)
     }
 }
