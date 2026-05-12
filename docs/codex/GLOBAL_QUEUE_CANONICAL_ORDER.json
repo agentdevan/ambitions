@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-08",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PK35",
-  "next_eligible_title": "Large-Store Fixture Generator",
+  "next_eligible_batch": "PK36",
+  "next_eligible_title": "Performance Budgets",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -276,16 +276,16 @@
     {
       "id": "PK35",
       "title": "Large-Store Fixture Generator",
-      "classification": "executable_now",
-      "reason": "PK34 Intelligence Quarantine is complete / Green with bounded proof. PK35 is the current implementation batch; later PK stays serial/dependency gated.",
-      "blocking_prerequisites": "Complete prior PK batch PK34 and any data-safety proof named by the PK train.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK35 Large-Store Fixture Generator is complete / Green with proof in docs/audits/pk35-batch-closeout-report.md and the same closeout commit pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK36",
       "title": "Performance Budgets",
-      "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK22; PK23 is the current implementation batch, later PK stays serial/dependency gated.",
+      "classification": "executable_now",
+      "reason": "PK35 Large-Store Fixture Generator is complete / Green with bounded proof. PK36 is the current implementation batch; later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK35 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },

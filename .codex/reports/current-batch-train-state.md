@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK34 Intelligence Quarantine / Green.
-Next recommended implementation pass: PK35 Large-Store Fixture Generator.
-Next eligible non-UI platform batch: PK35 Large-Store Fixture Generator.
-Scope: PK34 adds deterministic local runtime-intelligence quarantine assessment; it does not execute external/cloud LLM behavior, hosted backend behavior, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK35 Large-Store Fixture Generator / Green.
+Next recommended implementation pass: PK36 Performance Budgets.
+Next eligible non-UI platform batch: PK36 Performance Budgets.
+Scope: PK35 adds deterministic local in-memory large-store fixture generation; it does not execute external/cloud LLM behavior, hosted backend behavior, persistence writes, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK35 Large-Store Fixture Generator Closeout
+
+- PK35 report: `docs/audits/pk35-batch-closeout-report.md`.
+- Scope: deterministic local in-memory fixture generator for goals, captures, progress evidence, and feedback events.
+- Commit: same closeout commit (`PK35: install large-store fixture generator`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `LargeStoreFixtureGeneratorTests` passed.
+- Canonical queue now marks PK35 Green and PK36 executable now.
+- EFC applicability: invoked for scale fixture data and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, production-data, persistence-write, or global-train-completion claim is made.
 
 ## PK34 Intelligence Quarantine Closeout
 
