@@ -236,6 +236,7 @@ enum SourceAtlasValidationIssue: String, Codable, Sendable, Equatable, Hashable,
     case universalScheduledStep = "universal_scheduled_step"
     case projectionRecipeMissingReceipt = "projection_recipe_missing_receipt"
     case runtimeStoreBehavior = "runtime_store_behavior"
+    case invalidRequirementOverlay = "invalid_requirement_overlay"
 }
 
 struct SourceAtlasPackManifest: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -371,8 +372,90 @@ struct SourceAtlasRequirement: Codable, Sendable, Equatable, Hashable, Identifia
     let id: String
     let claimID: String
     let title: String
-    let kind: String
+    let kind: SourceAtlasRequirementKind
     let required: Bool
+    let sourceState: SourceAtlasRequirementSourceState
+    let freshnessState: SourceAtlasRequirementFreshnessState
+    let riskState: SourceAtlasRequirementRiskState
+    let reviewState: SourceAtlasRequirementReviewState
+
+    init(
+        id: String,
+        claimID: String,
+        title: String,
+        kind: SourceAtlasRequirementKind,
+        required: Bool,
+        sourceState: SourceAtlasRequirementSourceState = .unknown,
+        freshnessState: SourceAtlasRequirementFreshnessState = .unknown,
+        riskState: SourceAtlasRequirementRiskState = .unknown,
+        reviewState: SourceAtlasRequirementReviewState = .required
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.claimID = claimID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.kind = kind
+        self.required = required
+        self.sourceState = sourceState
+        self.freshnessState = freshnessState
+        self.riskState = riskState
+        self.reviewState = reviewState
+    }
+}
+
+enum SourceAtlasRequirementKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case hard
+    case soft
+    case prerequisite
+    case equipment
+    case skill
+    case proof
+    case deadline
+    case blocker
+    case accelerator
+    case reviewRequired = "review-required"
+}
+
+enum SourceAtlasRequirementSourceState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case unknown
+    case sourceNeeded = "source-needed"
+    case stale
+    case contradicted
+    case revoked
+    case locallyProven = "locally-proven"
+    case official
+    case officialCurrent = "official_current"
+    case current
+}
+
+enum SourceAtlasRequirementFreshnessState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case current
+    case stale
+    case unknown
+}
+
+enum SourceAtlasRequirementRiskState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case low
+    case medium
+    case high
+    case unknown
+}
+
+enum SourceAtlasRequirementReviewState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case none
+    case requested
+    case required
+    case approved
+    case blocked
+}
+
+extension SourceAtlasRequirement {
+    var canDriveCurrentRecommendation: Bool {
+        (sourceState == .officialCurrent || sourceState == .current)
+            && freshnessState == .current
+            && reviewState == .approved
+            && riskState != .high
+            && riskState != .unknown
+    }
 }
 
 struct SourceAtlasStarterItem: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -431,6 +514,40 @@ struct SourceAtlasCompositionContract: Codable, Sendable, Equatable, Hashable {
     let overlayDependencyIDs: [String]
     let projectionRecipeIDs: [String]
     let ownsIndividualGoalPhrase: Bool
+    let requirementOverlays: [SourceAtlasRequirementOverlay]
+
+    init(
+        dependencyPackIDs: [String],
+        reusableNodeIDs: [String],
+        overlayDependencyIDs: [String],
+        projectionRecipeIDs: [String],
+        ownsIndividualGoalPhrase: Bool,
+        requirementOverlays: [SourceAtlasRequirementOverlay] = []
+    ) {
+        self.dependencyPackIDs = dependencyPackIDs
+        self.reusableNodeIDs = reusableNodeIDs
+        self.overlayDependencyIDs = overlayDependencyIDs
+        self.projectionRecipeIDs = projectionRecipeIDs
+        self.ownsIndividualGoalPhrase = ownsIndividualGoalPhrase
+        self.requirementOverlays = requirementOverlays
+    }
+}
+
+struct SourceAtlasRequirementOverlay: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let sourceAtlasRequirementID: String
+    let requirementIDs: [String]
+    let summary: String
+    let sourceState: SourceAtlasRequirementSourceState
+    let freshnessState: SourceAtlasRequirementFreshnessState
+    let riskState: SourceAtlasRequirementRiskState
+    let reviewState: SourceAtlasRequirementReviewState
+
+    var isWellFormed: Bool {
+        id.isEmpty == false &&
+            sourceAtlasRequirementID.isEmpty == false &&
+            summary.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+    }
 }
 
 struct SourceAtlasProjectionRecipe: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -510,6 +627,50 @@ struct SourceAtlasPackValidator: Sendable, Equatable, Hashable {
             }
             if claim.riskClass.requiresStrictReview && claim.reviewRequired == false {
                 issues.insert(.highRiskClaimWithoutReview)
+            }
+        }
+
+        let claimsByID = Dictionary(uniqueKeysWithValues: pack.claims.map { ($0.id, $0) })
+        let requirementIDs = Set(pack.requirements.map(\.id))
+        for requirement in pack.requirements {
+            guard let claim = claimsByID[requirement.claimID] else {
+                issues.insert(.invalidRequirementOverlay)
+                continue
+            }
+            if requirement.canDriveCurrentRecommendation && claim.canDriveCurrentRecommendation == false {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if [
+                .unknown, .sourceNeeded, .stale, .contradicted, .revoked, .locallyProven
+            ].contains(requirement.sourceState) {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if requirement.freshnessState == .stale || requirement.freshnessState == .unknown {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if requirement.reviewState == .required || requirement.reviewState == .blocked || requirement.reviewState == .requested {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if requirement.riskState == .unknown || requirement.riskState == .high {
+                issues.insert(.invalidRequirementOverlay)
+            }
+        }
+
+        for overlay in pack.composition.requirementOverlays {
+            if overlay.isWellFormed == false {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if requirementIDs.contains(overlay.sourceAtlasRequirementID) == false {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if overlay.requirementIDs.contains(where: { requirementIDs.contains($0) == false }) {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if overlay.sourceState == .unknown || overlay.sourceState == .sourceNeeded || overlay.sourceState == .stale ||
+                overlay.freshnessState == .stale || overlay.freshnessState == .unknown ||
+                overlay.reviewState == .required || overlay.reviewState == .blocked || overlay.reviewState == .requested ||
+                overlay.riskState == .unknown || overlay.riskState == .high {
+                issues.insert(.invalidRequirementOverlay)
             }
         }
 

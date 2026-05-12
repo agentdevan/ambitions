@@ -6,10 +6,58 @@ enum AmbitionsOSLivingDreamRequirementKind: String, Codable, Sendable, Equatable
     case hard
     case soft
     case blocker
+    case prerequisite
+    case equipment
+    case skill
+    case proof
+    case deadline
     case dependency
+    case accelerator
+    case reviewRequired = "review_required"
     case proofNeeded = "proof_needed"
     case sourceNeeded = "source_needed"
     case review
+}
+
+struct AmbitionsOSLivingDreamRequirementEdge: Codable, Sendable, Equatable, Hashable {
+    let kind: AmbitionsOSLivingDreamRequirementKind
+    let targetRequirementID: String
+    let sourceState: SourceAtlasRequirementSourceState
+    let freshnessState: SourceAtlasRequirementFreshnessState
+    let riskState: SourceAtlasRequirementRiskState
+    let reviewState: SourceAtlasRequirementReviewState
+
+    init(
+        kind: AmbitionsOSLivingDreamRequirementKind,
+        targetRequirementID: String,
+        sourceState: SourceAtlasRequirementSourceState = .current,
+        freshnessState: SourceAtlasRequirementFreshnessState = .current,
+        riskState: SourceAtlasRequirementRiskState = .low,
+        reviewState: SourceAtlasRequirementReviewState = .approved
+    ) {
+        self.kind = kind
+        self.targetRequirementID = targetRequirementID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceState = sourceState
+        self.freshnessState = freshnessState
+        self.riskState = riskState
+        self.reviewState = reviewState
+    }
+
+    var isWellFormed: Bool {
+        targetRequirementID.isEmpty == false
+    }
+
+    var blocksPlanning: Bool {
+        sourceState == .unknown ||
+            sourceState == .stale ||
+            sourceState == .contradicted ||
+            sourceState == .revoked ||
+            sourceState == .sourceNeeded ||
+            freshnessState == .stale ||
+            riskState == .high ||
+            reviewState == .requested ||
+            reviewState == .required
+    }
 }
 
 enum AmbitionsOSLivingDreamRequirementState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -56,7 +104,7 @@ struct AmbitionsOSLivingDreamRequirementNode: Codable, Sendable, Equatable, Hash
     let kind: AmbitionsOSLivingDreamRequirementKind
     let state: AmbitionsOSLivingDreamRequirementState
     let sourceClaimIDs: [String]
-    let dependencyIDs: [String]
+    let dependencies: [AmbitionsOSLivingDreamRequirementEdge]
     let proofIDs: [String]
     let professionalBoundary: Bool
     let reviewState: HumanProgressReviewState
@@ -67,7 +115,7 @@ struct AmbitionsOSLivingDreamRequirementNode: Codable, Sendable, Equatable, Hash
         kind: AmbitionsOSLivingDreamRequirementKind,
         state: AmbitionsOSLivingDreamRequirementState,
         sourceClaimIDs: [String] = [],
-        dependencyIDs: [String] = [],
+        dependencies: [AmbitionsOSLivingDreamRequirementEdge] = [],
         proofIDs: [String] = [],
         professionalBoundary: Bool = false,
         reviewState: HumanProgressReviewState
@@ -77,7 +125,7 @@ struct AmbitionsOSLivingDreamRequirementNode: Codable, Sendable, Equatable, Hash
         self.kind = kind
         self.state = state
         self.sourceClaimIDs = Self.orderedUnique(sourceClaimIDs)
-        self.dependencyIDs = Self.orderedUnique(dependencyIDs)
+        self.dependencies = dependencies
         self.proofIDs = Self.orderedUnique(proofIDs)
         self.professionalBoundary = professionalBoundary
         self.reviewState = reviewState
@@ -97,12 +145,12 @@ struct AmbitionsOSLivingDreamRequirementNode: Codable, Sendable, Equatable, Hash
             return state.isSatisfiedForPlanning == false
         case .blocker:
             return state != .satisfied
+        case .prerequisite, .proof, .dependency, .reviewRequired, .sourceNeeded:
+            return dependencies.contains(where: { $0.blocksPlanning }) || state == .blocked || state == .conflict || state == .stale
         case .proofNeeded:
             return needsProofButHasNone || state.isSatisfiedForPlanning == false
-        case .dependency, .sourceNeeded, .review:
+        case .equipment, .skill, .deadline, .accelerator, .review, .soft:
             return state == .blocked || state == .conflict || state == .stale
-        case .soft:
-            return false
         }
     }
 
@@ -200,12 +248,21 @@ struct AmbitionsOSLivingDreamRequirementGraphValidator: Sendable, Equatable, Has
                 issues.insert(.missingSourceClaim)
             }
 
-            for dependencyID in requirement.dependencyIDs where requirementIDs.contains(dependencyID) == false {
+            for dependency in requirement.dependencies where requirementIDs.contains(dependency.targetRequirementID) == false {
                 issues.insert(.missingDependency)
             }
 
-            let dependencies = graph.requirements.filter { requirement.dependencyIDs.contains($0.id) }
-            if dependencies.contains(where: { $0.state.isSatisfiedForPlanning == false }) {
+            let dependencyRequirements = graph.requirements.filter { dependencyRequirement in
+                requirement.dependencies.contains(where: { $0.targetRequirementID == dependencyRequirement.id })
+            }
+            if dependencyRequirements.contains(where: { $0.state.isSatisfiedForPlanning == false }) {
+                issues.insert(.dependencyUnsatisfied)
+            }
+
+            if requirement.dependencies.contains(where: { $0.isWellFormed == false }) {
+                issues.insert(.missingDependency)
+            }
+            if requirement.dependencies.contains(where: \.blocksPlanning) {
                 issues.insert(.dependencyUnsatisfied)
             }
 

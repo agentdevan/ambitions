@@ -41,7 +41,16 @@ final class AmbitionsOSLivingDreamRequirementGraphModelsTests: XCTestCase {
             id: "requirement.training.proof",
             kind: .proofNeeded,
             state: .needsProof,
-            dependencyIDs: ["requirement.training.blocker"],
+            dependencies: [
+                AmbitionsOSLivingDreamRequirementEdge(
+                    kind: .hard,
+                    targetRequirementID: "requirement.training.blocker",
+                    sourceState: .officialCurrent,
+                    freshnessState: .current,
+                    riskState: .low,
+                    reviewState: .approved
+                )
+            ],
             proofIDs: []
         )
         let graph = validGraph(requirements: [blocker, proof])
@@ -102,6 +111,35 @@ final class AmbitionsOSLivingDreamRequirementGraphModelsTests: XCTestCase {
         XCTAssertTrue(graph.validationIssues.contains(.activationForbidden))
         XCTAssertTrue(graph.validationIssues.contains(.userDataServerBoundaryBroken))
     }
+
+    func testTypedEdgesCaptureSourceFreshnessRiskAndReviewState() {
+        let graph = validGraph(
+            requirements: [
+                requirement(
+                    id: "requirement.training.precheck",
+                    kind: .prerequisite,
+                    state: .satisfied,
+                    dependencies: [
+                        AmbitionsOSLivingDreamRequirementEdge(
+                            kind: .dependency,
+                            targetRequirementID: "requirement.training.age",
+                            sourceState: .revoked,
+                            freshnessState: .stale,
+                            riskState: .high,
+                            reviewState: .required
+                        )
+                    ]
+                ),
+                requirement(
+                    id: "requirement.training.age",
+                    kind: .hard,
+                    state: .satisfied
+                )
+            ]
+        )
+
+        XCTAssertTrue(graph.validationIssues.contains(.dependencyUnsatisfied))
+    }
 }
 
 private extension AmbitionsOSLivingDreamRequirementGraphModelsTests {
@@ -137,7 +175,7 @@ private extension AmbitionsOSLivingDreamRequirementGraphModelsTests {
         kind: AmbitionsOSLivingDreamRequirementKind = .hard,
         state: AmbitionsOSLivingDreamRequirementState = .satisfied,
         sourceClaimIDs: [String] = ["claim-training-age"],
-        dependencyIDs: [String] = [],
+        dependencies: [AmbitionsOSLivingDreamRequirementEdge] = [],
         proofIDs: [String] = [],
         professionalBoundary: Bool = false,
         reviewState: HumanProgressReviewState = .ready
@@ -148,7 +186,7 @@ private extension AmbitionsOSLivingDreamRequirementGraphModelsTests {
             kind: kind,
             state: state,
             sourceClaimIDs: sourceClaimIDs,
-            dependencyIDs: dependencyIDs,
+            dependencies: dependencies,
             proofIDs: proofIDs,
             professionalBoundary: professionalBoundary,
             reviewState: reviewState

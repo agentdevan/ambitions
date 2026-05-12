@@ -264,6 +264,7 @@ private extension SourceAtlasPackModelsTests {
         manifest: SourceAtlasPackManifest? = nil,
         sources: [SourceAtlasSourceRecord]? = nil,
         claims: [SourceAtlasClaim]? = nil,
+        requirements: [SourceAtlasRequirement]? = nil,
         starterItems: [SourceAtlasStarterItem]? = nil,
         projectionRecipes: [SourceAtlasProjectionRecipe]? = nil,
         runtimeBoundary: SourceAtlasRuntimeBoundary = .valueModelOnly,
@@ -299,13 +300,17 @@ private extension SourceAtlasPackModelsTests {
                     reviewRequired: false
                 )
             ],
-            requirements: [
+            requirements: requirements ?? [
                 SourceAtlasRequirement(
                     id: "requirement-serve",
                     claimID: "claim-serve",
                     title: "Understand serve rule",
-                    kind: "rule",
-                    required: true
+                    kind: .hard,
+                    required: true,
+                    sourceState: .officialCurrent,
+                    freshnessState: .current,
+                    riskState: .low,
+                    reviewState: .approved
                 )
             ],
             starterItems: starterItems ?? [
@@ -351,8 +356,81 @@ private extension SourceAtlasPackModelsTests {
                 reusableNodeIDs: ["pickleball.serve", "pickleball.rules"],
                 overlayDependencyIDs: ["sports.pickleball.rules"],
                 projectionRecipeIDs: ["recipe-pickleball-starter"],
-                ownsIndividualGoalPhrase: false
+                ownsIndividualGoalPhrase: false,
+                requirementOverlays: []
             )
         )
+    }
+}
+
+extension SourceAtlasPackModelsTests {
+    func testRequirementKindMetadataBlocksWeakOfficialStatesFromRecommendationDrive() {
+        let requirement = SourceAtlasRequirement(
+            id: "requirement-weak",
+            claimID: "claim-serve",
+            title: "Weakly sourced requirement",
+            kind: .proof,
+            required: true,
+            sourceState: .sourceNeeded,
+            freshnessState: .stale,
+            riskState: .high,
+            reviewState: .required
+        )
+        let weakPack = Self.validPack(
+            requirements: [requirement],
+            composition: SourceAtlasCompositionContract(
+                dependencyPackIDs: [],
+                reusableNodeIDs: ["pickleball.serve", "pickleball.rules"],
+                overlayDependencyIDs: ["sports.pickleball.rules"],
+                projectionRecipeIDs: ["recipe-pickleball-starter"],
+                ownsIndividualGoalPhrase: false,
+                requirementOverlays: [
+                    SourceAtlasRequirementOverlay(
+                        id: "overlay-weak-requirement",
+                        sourceAtlasRequirementID: requirement.id,
+                        requirementIDs: ["requirement-weak"],
+                        summary: "Proof-first requirement",
+                        sourceState: .sourceNeeded,
+                        freshnessState: .stale,
+                        riskState: .high,
+                        reviewState: .required
+                    )
+                ]
+            )
+        )
+
+        XCTAssertFalse(requirement.canDriveCurrentRecommendation)
+        XCTAssertTrue(weakPack.validationIssues.contains(.invalidRequirementOverlay))
+    }
+
+    func testRequirementCannotUseOfficialCurrentStateWithoutClaimEvidence() {
+        let sourceFreeClaim = SourceAtlasClaim(
+            id: "claim-source-free",
+            text: "Official requirement without source evidence.",
+            state: .official,
+            freshness: .current,
+            riskClass: .sportRules,
+            sourceIDs: [],
+            reviewRequired: false
+        )
+        let requirement = SourceAtlasRequirement(
+            id: "requirement-source-free",
+            claimID: sourceFreeClaim.id,
+            title: "Source-free official requirement",
+            kind: .hard,
+            required: true,
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            riskState: .low,
+            reviewState: .approved
+        )
+        let pack = Self.validPack(
+            claims: [sourceFreeClaim],
+            requirements: [requirement]
+        )
+
+        XCTAssertTrue(requirement.canDriveCurrentRecommendation)
+        XCTAssertTrue(pack.validationIssues.contains(.officialClaimWithoutApprovedSource))
+        XCTAssertTrue(pack.validationIssues.contains(.invalidRequirementOverlay))
     }
 }
