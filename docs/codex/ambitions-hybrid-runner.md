@@ -36,6 +36,31 @@ make autonomous-train
 
 That command uses `scripts/ambitions-autonomous-train.sh` (status / next / one-child-run / until-complete mode) so the conductor path remains top-level and non-recursive.
 
+For maximum-throughput continuation, use Speed Train mode:
+
+```bash
+make speed-train
+```
+
+Speed Train uses `scripts/ambitions-speed-train.sh` as an aggressive top-level operator loop over `scripts/ambitions-autonomous-train.sh`. It keeps the canonical runner, but defaults to no runner-created branches, main commits, auto-push, accepted-Yellow continuation, one repair pass, stale-state checks, queue-guard checks, unsupported-claim scans, and final heavy validation as a separate gate.
+
+Useful Speed Train commands:
+
+```bash
+make speed-status
+make speed-next
+make speed-once
+MAX_BATCHES=10 make speed-train
+make speed-final-gate
+SPEED_RUN_HEAVY_FINAL_GATE=1 make speed-final-gate
+```
+
+Speed Train authority and usage are documented in:
+
+- `docs/codex/SPEED_TRAIN_OPERATING_MODEL.md`
+- `docs/codex/SPEED_TRAIN_QUICKSTART.md`
+- `docs/codex/SPEED_TRAIN_LANE_POLICY.json`
+
 Audit active prompt files with:
 
 ```bash
@@ -60,8 +85,7 @@ Direct pasted Codex implementation is forbidden unless the user explicitly says
 "bypass the Ambitions runner."
 
 Auto-commit means the runner may commit only after the final GPT-5.5 gate says
-the result is eligible. Auto-push is default-off. Push requires explicit owner
-intent:
+the result is eligible. Auto-push is default-off for normal batches. Speed Train intentionally sets auto-push on by default for throughput.
 
 ```bash
 AUTO_PUSH=1 make batch BATCH=<BATCH_ID> PROMPT=prompts/batches/<BATCH_ID>.md
@@ -78,7 +102,7 @@ as the batch commit instead of re-staging paths already committed by the gate.
 When `.codex/state/active-batch.yml` clearly forbids branch creation, the runner
 stops before creating a branch unless the owner explicitly sets
 `ALLOW_RUNNER_BRANCH_EXCEPTION=1` or disables runner branch creation with
-`AUTO_BRANCH=0`.
+`AUTO_BRANCH=0`. Speed Train intentionally uses `AUTO_BRANCH=0`.
 
 Conductor safety rule:
 
@@ -101,7 +125,7 @@ Active user-facing IA is `Today / Goals / Capture / Time / You`. `Plan` remains
 an internal compatibility seam only where current source/truth allows it.
 
 The runner does not imply release, build, test, accessibility, performance,
-visual, device, TestFlight, or App Store proof.
+visual, device, TestFlight, or App Store proof. Speed Train also does not imply those proofs; it only increases batch throughput.
 
 Hard Red means stop immediately, leave changes uncommitted for inspection by
 default, and use the rollback command saved under `.codex/runs/<BATCH>/<time>/`
