@@ -297,6 +297,122 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.returnActionTitle, "Return to Time")
     }
 
+    func testPK21TimeFeatureServiceMirrorsPlanLifeShapeDashboardSemantics() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "pk21-life-1", title: "Life one"),
+            makeWeekVisibleGoal(id: "pk21-life-2", title: "Life two"),
+            makeWeekVisibleGoal(id: "pk21-life-3", title: "Life three")
+        ])
+        _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
+            CreateCaptureRequest(rawText: "Prepare review packet", sourceType: .todayQuickCapture),
+            now: fixedDate
+        )
+        let service = RepositoryBackedPlanService(repositories: repositories)
+        let snapshot = try await service.loadSnapshot()
+
+        let baseline = try await service.loadPlanDashboard(now: fixedDate)
+        let extracted = try await TimeFeatureService().makeDashboard(
+            from: service,
+            now: fixedDate,
+            permission: .unavailable,
+            snapshot: snapshot
+        )
+
+        XCTAssertEqual(baseline.hero.title, extracted.hero.title)
+        XCTAssertEqual(baseline.hero.subtitle, extracted.hero.subtitle)
+        XCTAssertEqual(baseline.lifeSuite.title, extracted.lifeSuite.title)
+        XCTAssertEqual(baseline.lifeSuite.subtitle, extracted.lifeSuite.subtitle)
+        XCTAssertEqual(baseline.lifeSuite.shapes.map(\.title), extracted.lifeSuite.shapes.map(\.title))
+        XCTAssertEqual(
+            baseline.lifeSuite.shapes.map(\.boundaryLabel),
+            extracted.lifeSuite.shapes.map(\.boundaryLabel)
+        )
+        XCTAssertEqual(baseline.treaty.title, extracted.treaty.title)
+        XCTAssertEqual(baseline.capacityEnvelope.label, extracted.capacityEnvelope.label)
+    }
+
+    func testPK21TimeFeatureServiceMirrorsRecoveryReflowSemanticsWithoutMutation() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "pk21-reflow-\($0)", title: "PK21 overloaded \($0)") })
+        let service = RepositoryBackedPlanService(repositories: repositories)
+        let snapshot = try await service.loadSnapshot()
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+
+        let baseline = try await service.loadPlanDashboard(now: fixedDate)
+        let extracted = try await TimeFeatureService().makeDashboard(
+            from: service,
+            now: fixedDate,
+            permission: .denied,
+            snapshot: snapshot
+        )
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+
+        XCTAssertEqual(baseline.realityReflow.reasonKind, extracted.realityReflow.reasonKind)
+        XCTAssertEqual(baseline.realityReflow.suggestions.map(\.kind), extracted.realityReflow.suggestions.map(\.kind))
+        XCTAssertEqual(baseline.realityReflow.title, extracted.realityReflow.title)
+        XCTAssertEqual(extracted.calendarAwareness.status, .denied)
+        XCTAssertTrue(extracted.recoveryMaturity.calendarBoundary.contains("Manual planning works") || extracted.recoveryMaturity.calendarBoundary.contains("does not write calendar changes silently"))
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+    }
+
+    func testPK21TimeFeatureServicePreservesWeeklyReviewOutputAndNoCalendarCloneLanguage() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "pk21-weekly", title: "Weekly review pressure")
+        ])
+        let service = RepositoryBackedPlanService(repositories: repositories)
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+
+        let baseline = try await service.loadWeeklyReviewDashboard(now: fixedDate)
+        let extracted = try await TimeFeatureService().makeWeeklyReviewDashboard(from: service, now: fixedDate)
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+
+        XCTAssertEqual(baseline.hero.eyebrow, extracted.hero.eyebrow)
+        XCTAssertEqual(baseline.hero.title, extracted.hero.title)
+        XCTAssertEqual(baseline.carryForwardItems.map(\.title), extracted.carryForwardItems.map(\.title))
+        XCTAssertEqual(baseline.returnActionTitle, extracted.returnActionTitle)
+
+        let snapshotCopy = [
+            baseline.hero.subtitle,
+            baseline.summaryDetail,
+            baseline.summaryTitle,
+            baseline.continuityLabel
+        ]
+        let copiedText = snapshotCopy.joined(separator: " ").lowercased()
+        XCTAssertFalse(copiedText.contains("calendar grid"))
+        XCTAssertFalse(copiedText.contains("calendar clone"))
+        XCTAssertFalse(copiedText.contains("score"))
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+    }
+
+    func testPK21TimeFeatureServiceMakesCalendarAwareDashboardFromInjectedPermission() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal(id: "pk21-calendar", title: "Calendar-boundary check")])
+        let service = RepositoryBackedPlanService(repositories: repositories)
+        let snapshot = try await service.loadSnapshot()
+        let extracted = try await TimeFeatureService().makeDashboard(
+            from: service,
+            now: fixedDate,
+            permission: .notDetermined,
+            openWindowCount: 2,
+            snapshot: snapshot
+        )
+
+        XCTAssertEqual(extracted.calendarAwareness.status, .notDetermined)
+        XCTAssertEqual(extracted.calendarBoundary.permissionLabel, "Optional")
+        XCTAssertTrue(extracted.calendarBoundary.detail.lowercased().contains("open window"))
+        XCTAssertEqual(extracted.calendarBoundary.canRequestCalendarRead, true)
+        XCTAssertFalse(extracted.calendarBoundary.writeBoundary.contains("sync"))
+        XCTAssertTrue(extracted.calendarBoundary.writeBoundary.contains("silently writes") == false)
+    }
+
     func testDemoPlanProtectActionRemainsActionable() async throws {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)

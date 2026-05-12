@@ -23,7 +23,8 @@ struct RepositoryBackedPlanService: PlanServicing {
             from: self,
             now: now,
             permission: permission,
-            openWindowCount: nil
+            openWindowCount: nil,
+            snapshot: snapshot
         )
     }
 
@@ -38,7 +39,8 @@ struct RepositoryBackedPlanService: PlanServicing {
                 from: self,
                 now: now,
                 permission: .unavailable,
-                openWindowCount: nil
+                openWindowCount: nil,
+                snapshot: snapshot
             )
         }
         let result = await calendarRealityService.findOpenWindows(
