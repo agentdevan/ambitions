@@ -1,0 +1,23 @@
+.PHONY: mri-materialize-prompts mri-materialize-prompts-dry-run mri-validate-overlay mri-status
+
+mri-materialize-prompts:
+	python3 scripts/ambitions-mri-materialize-prompts.py
+
+mri-materialize-prompts-dry-run:
+	python3 scripts/ambitions-mri-materialize-prompts.py --dry-run
+
+mri-validate-overlay:
+	python3 -m json.tool docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json >/tmp/mri-batch-overlay-check.json
+
+mri-status:
+	@echo "MRI overlay: docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json"
+	@python3 - <<'PY'
+import json
+from pathlib import Path
+p=Path('docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json')
+data=json.loads(p.read_text())
+print('status:', data.get('status'))
+print('batches:', len(data.get('batches', [])))
+print('first:', data.get('batches', [{}])[0].get('id'))
+print('last:', data.get('batches', [{}])[-1].get('id'))
+PY
