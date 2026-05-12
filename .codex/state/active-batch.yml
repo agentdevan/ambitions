@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK27 Diagnostic Ledger"
-  previous_batch: "PK26 Privacy Classification System"
+  batch: "PK28 Data Control Commands"
+  previous_batch: "PK27 Diagnostic Ledger"
   previous_result: "green"
-  next_eligible_batch: "PK28 Data Control Commands"
+  next_eligible_batch: "PK29 Entity Revision And Tombstones"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true

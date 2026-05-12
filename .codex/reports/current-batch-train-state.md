@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK27 Diagnostic Ledger / Green.
-Next recommended implementation pass: PK28 Data Control Commands.
-Next eligible non-UI platform batch: PK28 Data Control Commands.
-Scope: PK27 adds deterministic local diagnostic ledger models and snapshot derivation from EventLedger, SideEffectLedger, and privacy-safety classifications; it does not introduce persistence schema, project wiring, release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK28 Data Control Commands / Green.
+Next recommended implementation pass: PK29 Entity Revision And Tombstones.
+Next eligible non-UI platform batch: PK29 Entity Revision And Tombstones.
+Scope: PK28 adds data-control command representation and safe-automation policy mapping for export, deletion, and memory-forgetting command kinds; it does not execute export, deletion, memory erase, persistence schema changes, project wiring, release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK28 Data Control Commands Closeout
+
+- PK28 report: `docs/audits/pk28-batch-closeout-report.md`.
+- Scope: command representation now covers `prepareExport`, `performExport`, `deleteObject`, and `forgetMemory`, with validation and safe-automation policy mapping that keeps execution guarded and non-mutating in this batch.
+- Commit: `1a5b758db2f08fcd06b59f3637ea38cd92b08854` (`PK28: complete hybrid Codex batch`), pushed to `main`.
+- Proof: `git diff --check`, `make batch-self-check`, `make prompt-audit`, forbidden-claim scan, and focused `AmbitionsCommandModelsTests`, `SafeAutomationPolicyModelsTests`, `PolicyGuardedCommandExecutorTests`, and `AmbitionsCommandExecutorTests` passed. Prompt audit remains the expected non-blocking Yellow classification for support/eval/template files.
+- Canonical queue now marks PK28 Green and PK29 executable now.
+- EFC applicability: invoked for data-control command boundaries and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, sync/cloud, hosted AI, export/deletion/memory-erase execution, or global-train-completion claim is made.
 
 ## PK27 Diagnostic Ledger Closeout
 

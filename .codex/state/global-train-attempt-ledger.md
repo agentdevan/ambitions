@@ -52,3 +52,4 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 | 2026-05-10T18:28:20Z | top-level-runner | PK16 | 1 | green | docs/audits/pk16-trust-history-query-report.md | PK16 focused trust-history query tests passed; PK17 is next eligible. |
 | 2026-05-11T14:00:21Z | GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01 | PK17 | 1 | green | docs/audits/pk17-batch-closeout-report.md | PK17 focused Today read-model tests passed; PK18 is next eligible. |
 | 2026-05-12T04:11:51Z | GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01 | PK21 | 1 | green | docs/audits/pk21-batch-closeout-report.md | PK21 focused PlanFeatureServiceTests validation passed; PK22 is next eligible. |
+| 2026-05-12T15:28:44Z | autonomous-train | PK28 | 1 | green | docs/audits/pk28-batch-closeout-report.md | PK28 focused command/policy tests passed and commit `1a5b758db2f08fcd06b59f3637ea38cd92b08854` was pushed; PK29 is next eligible. |
