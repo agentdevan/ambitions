@@ -16,6 +16,111 @@ final class AmbitionsOSPrivacySafetyModelsTests: XCTestCase {
         XCTAssertEqual(validator.validate(decoded), [])
     }
 
+    func testPrivatePolicyClassifiesAsLocalRedactedSafeReceiptCompatible() {
+        let policy = privacyPolicy()
+
+        let classification = validator.classify(policy)
+
+        XCTAssertEqual(classification.classification, .localRedacted)
+        XCTAssertEqual(classification.actionReceiptPrivacyLevel, .redacted)
+        XCTAssertEqual(classification.eventLedgerPrivacyClassification, .privateUserText)
+        XCTAssertEqual(classification.sideEffectLedgerBoundary, .localOnly)
+        XCTAssertTrue(classification.localProjectionOnly)
+        XCTAssertFalse(classification.externallyProjectable)
+        XCTAssertFalse(classification.requiresUserReview)
+        XCTAssertTrue(classification.requiresRedaction)
+        XCTAssertTrue(classification.receiptCompatible)
+        XCTAssertTrue(classification.isGreen)
+    }
+
+    func testSensitiveExternalProjectionRequiresRedactionAndReview() {
+        let policy = privacyPolicy(
+            surface: .externalProjection,
+            privacyClass: .sensitive,
+            sensitiveAreas: [.medical, .financial],
+            reviewState: .needsPrivacyReview,
+            projectionPolicy: .externalRedacted,
+            redactionSummary: "Redacted content",
+            receipts: [receipt(id: "ext-2"), receipt(id: "ext-1")]
+        )
+
+        let classification = validator.classify(policy)
+
+        XCTAssertEqual(classification.classification, .externalRedacted)
+        XCTAssertTrue(classification.externallyProjectable)
+        XCTAssertTrue(classification.requiresRedaction)
+        XCTAssertTrue(classification.requiresUserReview)
+        XCTAssertEqual(classification.actionReceiptPrivacyLevel, .redacted)
+        XCTAssertEqual(classification.eventLedgerPrivacyClassification, .sensitive)
+        XCTAssertEqual(classification.sideEffectLedgerBoundary, .privacySensitive)
+        XCTAssertFalse(classification.isGreen)
+    }
+
+    func testDeletePendingOrBlockedPermissionsAreHiddenAndNotExternallyProjectable() {
+        let deletePendingPolicy = privacyPolicy(
+            permissionState: .deletePending,
+            privacyClass: .deletePending,
+            projectionPolicy: .fullLocal
+        )
+        let blockedPolicy = privacyPolicy(
+            permissionState: .externalBlocked,
+            surface: .externalProjection,
+            projectionPolicy: .externalBlocked
+        )
+
+        let deletePendingClassification = validator.classify(deletePendingPolicy)
+        let blockedClassification = validator.classify(blockedPolicy)
+
+        XCTAssertEqual(deletePendingClassification.classification, .blocked)
+        XCTAssertFalse(deletePendingClassification.externallyProjectable)
+        XCTAssertTrue(deletePendingClassification.receiptCompatible)
+        XCTAssertEqual(blockedClassification.classification, .blocked)
+        XCTAssertFalse(blockedClassification.externallyProjectable)
+        XCTAssertTrue(blockedClassification.receiptCompatible)
+    }
+
+    func testRuntimeMutationOrExternalBoundaryClassifiesAsUnsafe() {
+        let policy = privacyPolicy(
+            toolIntent: .mutateGraph,
+            toolApprovalState: .requiresPrivacyReview,
+            deterministicFallbackAvailable: false,
+            receipts: [receipt()],
+            changesAppState: true,
+            runtimeBoundary: SourceAtlasRuntimeBoundary(
+                storesUserData: true,
+                performsNetworkFetches: true,
+                mutatesPlans: true,
+                writesPersistence: true
+            )
+        )
+
+        let classification = validator.classify(policy)
+
+        XCTAssertEqual(classification.classification, .unsafe)
+        XCTAssertEqual(classification.sideEffectLedgerBoundary, .destructive)
+        XCTAssertFalse(classification.isGreen)
+        XCTAssertFalse(classification.externallyProjectable)
+        XCTAssertTrue(classification.issues.contains(.runtimeStoreBehavior))
+        XCTAssertTrue(classification.issues.contains(.hiddenMutationRisk))
+    }
+
+    func testClassificationIsDeterministicAcrossUnorderedSensitiveAreasAndReceipts() {
+        let firstPolicy = privacyPolicy(
+            sensitiveAreas: [.medical, .financial],
+            receipts: [receipt(id: "r-2"), receipt(id: "r-1")]
+        )
+        let secondPolicy = privacyPolicy(
+            sensitiveAreas: [.financial, .medical],
+            receipts: [receipt(id: "r-1"), receipt(id: "r-2")]
+        )
+
+        let firstClassification = validator.classify(firstPolicy)
+        let secondClassification = validator.classify(secondPolicy)
+
+        XCTAssertEqual(firstClassification.issueFingerprint, secondClassification.issueFingerprint)
+        XCTAssertEqual(firstClassification, secondClassification)
+    }
+
     func testInvalidSchemaMalformedPolicyAndBadReceiptAreRejected() {
         let policy = privacyPolicy(
             id: "",
