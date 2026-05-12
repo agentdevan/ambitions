@@ -1,4 +1,5 @@
 .PHONY: mri-materialize-prompts mri-materialize-prompts-dry-run mri-validate-overlay mri-status
+.PHONY: mri-autonomous-status mri-autonomous-next mri-autonomous-once mri-autonomous-train mri-router-json
 
 mri-materialize-prompts:
 	python3 scripts/ambitions-mri-materialize-prompts.py
@@ -21,3 +22,18 @@ print('batches:', len(data.get('batches', [])))
 print('first:', data.get('batches', [{}])[0].get('id'))
 print('last:', data.get('batches', [{}])[-1].get('id'))
 PY
+
+mri-router-json:
+	python3 scripts/ambitions-mri-autonomous-router.py --json
+
+mri-autonomous-status:
+	bash scripts/ambitions-mri-autonomous-train.sh --status
+
+mri-autonomous-next:
+	bash scripts/ambitions-mri-autonomous-train.sh --next
+
+mri-autonomous-once:
+	bash scripts/ambitions-mri-autonomous-train.sh --once
+
+mri-autonomous-train:
+	bash scripts/ambitions-mri-autonomous-train.sh --until-blocked
