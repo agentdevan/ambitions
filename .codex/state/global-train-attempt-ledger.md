@@ -7,29 +7,29 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 
 ## Current Active Attempt
 - parent batch: GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01
-- selected child batch: PK17
-- child prompt: prompts/batches/PK17.md
-- child run dir: .codex/runs/PK17/20260511T131817Z
+- selected child batch: PK21
+- child prompt: prompts/batches/PK21.md
+- child run dir: .codex/runs/PK21/20260512T035041Z
 - child attempt number: 1
 - status: green
-- started: 2026-05-11T13:18:17Z
-- completed: 2026-05-11T14:00:21Z
-- next action: PK18 Today Command Handler Extraction
+- started: 2026-05-12T03:50:41Z
+- completed: 2026-05-12T04:11:51Z
+- next action: PK22 SideEffectLedger Foundation
 - retry allowed: false
-- reason: PK17 extracted Today read-model projection into a Today-owned projector with focused TodayViewModelTests PK17 proof passing 3 tests and no forbidden-claim scan blockers.
+- reason: PK21 extracted the Time projection seam while preserving Plan as the internal compatibility owner; focused PlanFeatureServiceTests validation passed and no forbidden-claim scan blockers were recorded.
 
 ## Latest Closed Attempt
 - parent batch: GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01
-- selected child batch: PK17
-- child prompt: prompts/batches/PK17.md
-- child run dir: .codex/runs/PK17/20260511T131817Z
+- selected child batch: PK21
+- child prompt: prompts/batches/PK21.md
+- child run dir: .codex/runs/PK21/20260512T035041Z
 - child attempt number: 1
 - status: green
-- started: 2026-05-11T13:18:17Z
-- completed: 2026-05-11T14:00:21Z
-- next action: PK18 Today Command Handler Extraction
+- started: 2026-05-12T03:50:41Z
+- completed: 2026-05-12T04:11:51Z
+- next action: PK22 SideEffectLedger Foundation
 - retry allowed: false
-- reason: PK17 extracted Today read-model projection into a Today-owned projector with focused TodayViewModelTests PK17 proof passing 3 tests and no forbidden-claim scan blockers.
+- reason: PK21 extracted the Time projection seam while preserving Plan as the internal compatibility owner; focused PlanFeatureServiceTests validation passed and no forbidden-claim scan blockers were recorded.
 
 ## State Rules
 - A batch cannot be launched if the ledger already has the same batch active with status `running`, `unknown-unresolved`, `yellow-unresolved`, `red-unresolved`, `repair-required`, `finalization-required`, or `blocked`.
@@ -51,3 +51,4 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 | 2026-05-10T17:35:20Z | top-level-runner | PK15 | 1 | accepted-yellow | docs/audits/pk15-receipt-backend-report.md | PK15 focused receipt tests passed; one pre-existing external-surface expectation mismatch remains in `ExternalSurfaceVerificationChecklistTests` and is owned by QA / External Surface for follow-up. |
 | 2026-05-10T18:28:20Z | top-level-runner | PK16 | 1 | green | docs/audits/pk16-trust-history-query-report.md | PK16 focused trust-history query tests passed; PK17 is next eligible. |
 | 2026-05-11T14:00:21Z | GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01 | PK17 | 1 | green | docs/audits/pk17-batch-closeout-report.md | PK17 focused Today read-model tests passed; PK18 is next eligible. |
+| 2026-05-12T04:11:51Z | GLOBAL-TRAIN-EXECUTE-FROM-PK17-TO-COMPLETE-01 | PK21 | 1 | green | docs/audits/pk21-batch-closeout-report.md | PK21 focused PlanFeatureServiceTests validation passed; PK22 is next eligible. |

@@ -1,5 +1,5 @@
 status: compact-mirror
-date: "2026-05-11"
+date: "2026-05-12"
 source_of_truth:
   - ".codex/reports/current-batch-train-state.md"
   - "docs/codex/BATCH_REGISTRY.md"
@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK20 Capture Service Extraction"
-  previous_batch: "PK19 Goals Query/Projector Extraction"
+  batch: "PK21 Time Service Extraction"
+  previous_batch: "PK20 Capture Service Extraction"
   previous_result: "green"
-  next_eligible_batch: "PK21 Time Service Extraction"
+  next_eligible_batch: "PK22 SideEffectLedger Foundation"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true

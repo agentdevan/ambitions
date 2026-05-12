@@ -2,10 +2,24 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK20 Capture Service Extraction / Green.
-Next recommended implementation pass: PK21 Time Service Extraction.
-Next eligible non-UI platform batch: PK21 Time Service Extraction.
-Scope: PK20 extracts Capture draft-routing service boundaries while preserving Capture composer intake, local-only route handling, placement-review behavior, and correction/proof language; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+Current batch: PK21 Time Service Extraction / Green.
+Next recommended implementation pass: PK22 SideEffectLedger Foundation.
+Next eligible non-UI platform batch: PK22 SideEffectLedger Foundation.
+Scope: PK21 extracts the Time projection seam while preserving Plan as the internal compatibility owner, Time dashboard output, local-only projection behavior, and no-mutation calendar awareness; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+
+## PK21 Time Service Extraction Closeout
+
+- PK21 report: `docs/audits/pk21-batch-closeout-report.md`.
+- Scope: behavior-preserving Time projection seam extraction from the repository-backed Plan service into `TimeFeatureProjectionSource`, keeping `RepositoryBackedPlanService` as the internal compatibility source.
+- Focused proof and source scope:
+  - `Native/Ambitions/Features/Plan/TimeFeatureService.swift`
+  - `Native/Ambitions/Features/Plan/PlanFeatureService.swift`
+  - `Native/Ambitions/Features/Plan/PlanFeatureSnapshot.swift`
+  - `Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift`
+- Commit: `0820bdf4859b064d235db299aa266b235ce0c17a` (`PK21: complete hybrid Codex batch`), pushed to `main`.
+- Canonical queue now marks PK21 Green and PK22 executable now.
+- EFC applicability: invoked for Time/LifeShape user-facing behavior and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK20 Capture Service Extraction Closeout
 
