@@ -188,16 +188,16 @@
     {
       "id": "PK24",
       "title": "EventKit Through SideEffectLedger",
-      "classification": "executable_now",
-      "reason": "PK23 Notifications Through SideEffectLedger is complete / Accepted Yellow with bounded proof-path advisories. PK24 is the current implementation batch; later PK stays serial/dependency gated.",
-      "blocking_prerequisites": "Complete prior PK batch PK23 and any data-safety proof named by the PK train.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK24 EventKit Through SideEffectLedger is complete / Accepted Yellow with proof-path advisories in docs/audits/pk24-batch-closeout-report.md. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK25",
       "title": "External Snapshots Through SideEffectLedger",
-      "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK22; PK23 is the current implementation batch, later PK stays serial/dependency gated.",
+      "classification": "executable_now",
+      "reason": "PK24 EventKit Through SideEffectLedger is complete / Accepted Yellow with bounded proof-path advisories. PK25 is the current implementation batch; later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK24 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },

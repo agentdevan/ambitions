@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK23 Notifications Through SideEffectLedger / Accepted Yellow.
-Next recommended implementation pass: PK24 EventKit Through SideEffectLedger.
-Next eligible non-UI platform batch: PK24 EventKit Through SideEffectLedger.
-Scope: PK23 adds bounded local notification schedule refresh recording through the SideEffectLedger; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+Current batch: PK24 EventKit Through SideEffectLedger / Accepted Yellow.
+Next recommended implementation pass: PK25 External Snapshots Through SideEffectLedger.
+Next eligible non-UI platform batch: PK25 External Snapshots Through SideEffectLedger.
+Scope: PK24 adds bounded EventKit read/write outcome recording through the SideEffectLedger; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+
+## PK24 EventKit Through SideEffectLedger Closeout
+
+- PK24 report: `docs/audits/pk24-batch-closeout-report.md`.
+- Scope: EventKit read/write paths now record bounded local side-effect ledger outcomes for permission blocks, safe failures, saves, and open-window reads without changing top-level IA or release posture.
+- Commit: `95ecc8f39299593be5e80bddafd052b55d03c664` (`PK24: complete hybrid Codex batch`), pushed to `main`.
+- Proof: `git diff --check`, `make batch-self-check`, `make prompt-audit`, forbidden-claim scan, focused `EventKitIntegrationServiceTests`, and focused `CalendarRealityServiceTests` passed. Prompt audit remains the expected non-blocking Yellow classification for support/eval/template files; broad build-for-testing remains accepted Yellow for out-of-scope compile blockers recorded in the report.
+- Canonical queue now marks PK24 Accepted Yellow and PK25 executable now.
+- EFC applicability: invoked for side-effect/calendar behavior and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK23 Notifications Through SideEffectLedger Closeout
 
