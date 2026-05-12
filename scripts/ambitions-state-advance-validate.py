@@ -24,8 +24,16 @@ def active_value(key: str) -> str:
 
 def report_current(path: Path) -> str:
     text = path.read_text(encoding="utf-8")
-    match = re.search(r"^Current batch:\s*(.+?)\s*/", text, re.M)
-    return match.group(1).strip() if match else ""
+    match = re.search(r"^Current batch:\s*(.+?)\s*$", text, re.M)
+    if not match:
+        return ""
+    current = match.group(1).strip().rstrip(".")
+    return re.sub(
+        r"\s+/\s+(Accepted Yellow|Green|Yellow|Red|Complete|Completed|Partial|Blocked)$",
+        "",
+        current,
+        flags=re.I,
+    ).strip()
 
 
 def report_next(path: Path) -> str:
