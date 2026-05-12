@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK37 Derived Read-Model Cache / Green.
-Next recommended implementation pass: PK38 Move Domain To Package.
-Next eligible non-UI platform batch: PK38 Move Domain To Package.
-Scope: PK37 adds local in-memory Today read-model caching; it does not execute external/cloud LLM behavior, hosted backend behavior, disk-cache behavior, telemetry, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK38 Move Domain To Package / Green.
+Next recommended implementation pass: PK39 Move Storage To Package.
+Next eligible non-UI platform batch: PK39 Move Storage To Package.
+Scope: PK38 adds a Domain package-boundary manifest and validator; it does not execute external/cloud LLM behavior, hosted backend behavior, Package.swift/project.yml wiring, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK38 Move Domain To Package Closeout
+
+- PK38 report: `docs/audits/pk38-batch-closeout-report.md`.
+- Scope: Domain package-boundary manifest and validator, with explicit package/project wiring non-claim.
+- Commit: same closeout commit (`PK38: install domain package boundary`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `DomainPackageBoundaryModelsTests` passed.
+- Canonical queue now marks PK38 Green and PK39 executable now.
+- EFC applicability: invoked for modularization boundary proof integrity.
+- No full-suite, device, accessibility, performance validation, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, Package.swift/project.yml wiring, or global-train-completion claim is made.
 
 ## PK37 Derived Read-Model Cache Closeout
 
