@@ -194,6 +194,106 @@ final class LocalNotificationFoundationTests: XCTestCase {
         XCTAssertFalse(request?.body.contains("advisor") == true)
         XCTAssertFalse(request?.body.contains("account") == true)
     }
+
+    func testAuthorizedRefreshRecordsScheduledNotificationInSideEffectLedger() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T12:00:00Z",
+            nextAction: ExternalSurfaceNextAction(
+                goalID: "goal-123",
+                stepID: "step-456",
+                display: ExternalSurfaceDisplayMetadata(
+                    templateKey: "next_tiny_step",
+                    goalMode: .project,
+                    stepState: .planned,
+                    urgency: .soon,
+                    timing: .deadline
+                )
+            )
+        )
+        let scheduleDate = Date(timeIntervalSince1970: 1_712_779_200)
+        let now = DomainTimestamp.string(from: scheduleDate)
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: snapshot),
+            sideEffectLedger: sideEffectLedger
+        )
+
+        await foundation.refreshSchedule(now: scheduleDate)
+
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.id, "notification.scheduled.1712779200")
+        XCTAssertEqual(record?.effectKind, .notification)
+        XCTAssertEqual(record?.status, .recordedLocalOnly)
+        XCTAssertEqual(record?.boundary, .localOnly)
+        XCTAssertEqual(record?.sourceDomain, .system)
+        XCTAssertEqual(record?.occurredAt, now)
+    }
+
+    func testDeniedAuthorizationRefreshRecordsBlockedNotificationOutcome() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.denied)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: nil),
+            sideEffectLedger: sideEffectLedger
+        )
+
+        await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
+
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.id, "notification.authorizationMissing.1712779200")
+        XCTAssertEqual(record?.status, .blocked)
+        XCTAssertEqual(record?.requiresConfirmation, true)
+        XCTAssertEqual(record?.blockedFacts, ["Notification authorization is required to refresh local reminders."])
+    }
+
+    func testSnapshotLoadFailureRefreshRecordsFailedNotificationOutcome() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: ThrowingSnapshotReader(),
+            sideEffectLedger: sideEffectLedger
+        )
+        let scheduleDate = Date(timeIntervalSince1970: 1_712_779_200)
+        let now = DomainTimestamp.string(from: scheduleDate)
+
+        await foundation.refreshSchedule(now: scheduleDate)
+
+        let request = await center.replacedRequest
+        XCTAssertNil(request)
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.id, "notification.refreshFailed.1712779200")
+        XCTAssertEqual(record?.status, .failedSafely)
+        XCTAssertEqual(record?.degradedFacts, ["Notification snapshot could not be loaded; no schedule refresh was applied."])
+        XCTAssertEqual(record?.occurredAt, now)
+    }
+
+    func testNoNextActionRecordsNotificationCleared() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nil)),
+            sideEffectLedger: sideEffectLedger
+        )
+        let scheduleDate = Date(timeIntervalSince1970: 1_712_779_200)
+        let now = DomainTimestamp.string(from: scheduleDate)
+
+        await foundation.refreshSchedule(now: scheduleDate)
+
+        XCTAssertNil(await center.replacedRequest)
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.id, "notification.cleared.1712779200")
+        XCTAssertEqual(record?.status, .recordedLocalOnly)
+        XCTAssertEqual(record?.occurredAt, now)
+    }
 }
 
 private actor RecordingNotificationCenterClient: LocalNotificationCenterClient {
@@ -228,5 +328,45 @@ private struct StaticSnapshotReader: ExternalSurfaceSnapshotReading {
 
     func loadSnapshot() async throws -> ExternalSurfaceSnapshot? {
         snapshot
+    }
+}
+
+private struct ThrowingSnapshotReader: ExternalSurfaceSnapshotReading {
+    struct SnapshotLoadError: Error {}
+
+    func loadSnapshot() async throws -> ExternalSurfaceSnapshot? {
+        throw SnapshotLoadError()
+    }
+}
+
+private actor RecordingSideEffectLedgerRepository: SideEffectLedgerRepository {
+    private(set) var records: [SideEffectLedgerRecord] = []
+
+    var lastRecord: SideEffectLedgerRecord? {
+        records.first
+    }
+
+    func append(_ record: SideEffectLedgerRecord) async throws {
+        records.removeAll { $0.id == record.id }
+        records.append(record)
+    }
+
+    func fetchRecent(limit: Int) async throws -> [SideEffectLedgerRecord] {
+        Array(records.sorted(by: Self.sort).prefix(max(0, limit)))
+    }
+
+    func fetchRecords(status: SideEffectLedgerStatus) async throws -> [SideEffectLedgerRecord] {
+        records.filter { $0.status == status }.sorted(by: Self.sort)
+    }
+
+    func fetchRecord(id: String) async throws -> SideEffectLedgerRecord? {
+        records.first { $0.id == id }
+    }
+
+    private static func sort(_ lhs: SideEffectLedgerRecord, _ rhs: SideEffectLedgerRecord) -> Bool {
+        if lhs.occurredAt != rhs.occurredAt {
+            return lhs.occurredAt > rhs.occurredAt
+        }
+        return lhs.id < rhs.id
     }
 }

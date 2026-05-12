@@ -52,17 +52,20 @@ actor LocalNotificationFoundation: NotificationServicing {
     private let snapshotReader: any ExternalSurfaceSnapshotReading
     private let planner: NextStepLocalNotificationPlanner
     private let liveActivityService: any NextStepLiveActivityServicing
+    private let sideEffectLedger: (any SideEffectLedgerRepository)?
 
     init(
         centerClient: any LocalNotificationCenterClient = UNUserNotificationCenterClient(),
         snapshotReader: any ExternalSurfaceSnapshotReading = FileExternalSurfaceSnapshotReader(),
         planner: NextStepLocalNotificationPlanner = NextStepLocalNotificationPlanner(),
-        liveActivityService: any NextStepLiveActivityServicing = NextStepLiveActivityService()
+        liveActivityService: any NextStepLiveActivityServicing = NextStepLiveActivityService(),
+        sideEffectLedger: (any SideEffectLedgerRepository)? = nil
     ) {
         self.centerClient = centerClient
         self.snapshotReader = snapshotReader
         self.planner = planner
         self.liveActivityService = liveActivityService
+        self.sideEffectLedger = sideEffectLedger
     }
 
     func currentAuthorizationState() async -> NotificationAuthorizationState {
@@ -84,16 +87,108 @@ actor LocalNotificationFoundation: NotificationServicing {
 
     func refreshSchedule(now: Date) async {
         let state = await centerClient.currentAuthorizationState()
-        guard state == .authorized || state == .provisional || state == .ephemeral else { return }
+        guard state == .authorized || state == .provisional || state == .ephemeral else {
+            await logNotificationSideEffect(outcome: .authorizationMissing, now: now)
+            return
+        }
 
         do {
             let snapshot = try await snapshotReader.loadSnapshot()
             let request = planner.makeRequest(snapshot: snapshot, now: now)
             await centerClient.replacePendingRequest(request)
             await liveActivityService.refresh(from: snapshot, now: now)
+            await logNotificationSideEffect(
+                outcome: request == nil ? .cleared : .scheduled,
+                now: now,
+                request: request
+            )
         } catch {
             await centerClient.replacePendingRequest(nil)
             await liveActivityService.refresh(from: nil, now: now)
+            await logNotificationSideEffect(
+                outcome: .refreshFailed,
+                now: now
+            )
+        }
+    }
+
+    private func logNotificationSideEffect(
+        outcome: NotificationSideEffectOutcome,
+        now: Date,
+        request: LocalNotificationScheduleRequest? = nil
+    ) async {
+        guard let sideEffectLedger else { return }
+
+        let occurredAt = DomainTimestamp.string(from: now)
+        let record = SideEffectLedgerRecord(
+            id: "notification.\(outcome.rawValue).\(Int(now.timeIntervalSince1970))",
+            effectKind: .notification,
+            status: outcome.status,
+            boundary: .localOnly,
+            actionKind: .noOp,
+            sourceDomain: .system,
+            commandID: nil,
+            occurredAt: occurredAt,
+            localOnly: true,
+            requiresConfirmation: outcome.requiresConfirmation,
+            externalEffect: false,
+            reasons: outcome.reasons(request: request),
+            blockedFacts: outcome.blockedFacts,
+            degradedFacts: outcome.degradedFacts
+        )
+        do {
+            try await sideEffectLedger.append(record)
+        } catch {}
+    }
+
+    private enum NotificationSideEffectOutcome: String {
+        case authorizationMissing
+        case scheduled
+        case cleared
+        case refreshFailed
+
+        var status: SideEffectLedgerStatus {
+            switch self {
+            case .scheduled, .cleared:
+                .recordedLocalOnly
+            case .authorizationMissing:
+                .blocked
+            case .refreshFailed:
+                .failedSafely
+            }
+        }
+
+        var requiresConfirmation: Bool {
+            self == .authorizationMissing
+        }
+
+        func reasons(request: LocalNotificationScheduleRequest?) -> [SafeAutomationPolicyReason] {
+            guard self == .scheduled || self == .cleared else {
+                return self == .authorizationMissing ? [] : [.noChangeNeeded]
+            }
+
+            if request == nil {
+                return [.noChangeNeeded]
+            }
+            return []
+        }
+
+        var blockedFacts: [String] {
+            switch self {
+            case .authorizationMissing:
+                ["Notification authorization is required to refresh local reminders."]
+            default:
+                []
+            }
+        }
+
+        var degradedFacts: [String] {
+            switch self {
+            case .refreshFailed:
+                ["Notification snapshot could not be loaded; no schedule refresh was applied."]
+            default:
+                []
+            }
         }
     }
 

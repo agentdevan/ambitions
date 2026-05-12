@@ -50,7 +50,7 @@ enum AppContainerFactory {
     @MainActor
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
         let repositories = try await prepareRepositories(for: configuration)
-        let notificationService = LocalNotificationFoundation()
+        let notificationService = LocalNotificationFoundation(sideEffectLedger: repositories.sideEffectLedger)
         let calendarRemindersService = EventKitIntegrationService()
         let runtime = AmbitionsRuntimeFactory.make(
             repositories: repositories,

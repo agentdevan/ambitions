@@ -129,6 +129,33 @@ final class SideEffectLedgerModelsTests: XCTestCase {
         XCTAssertEqual(confirmationRequired.map(\.id), ["side-effect.blocked"])
         XCTAssertEqual(try await repository.fetchRecord(id: "side-effect.local")?.id, "side-effect.local")
     }
+
+    func testNotificationEffectKindIsPersistableAsAWellFormedRecord() {
+        let record = SideEffectLedgerRecord(
+            id: "notification.scheduled.1700000000",
+            effectKind: .notification,
+            status: .recordedLocalOnly,
+            boundary: .localOnly,
+            actionKind: .noOp,
+            sourceDomain: .system,
+            commandID: nil,
+            occurredAt: "2026-06-01T10:00:00Z",
+            localOnly: true,
+            requiresConfirmation: false,
+            externalEffect: false,
+            reasons: [.noChangeNeeded],
+            blockedFacts: [],
+            degradedFacts: [],
+            receiptID: nil
+        )
+
+        XCTAssertEqual(record.id, "notification.scheduled.1700000000")
+        XCTAssertEqual(record.effectKind, .notification)
+        XCTAssertEqual(record.status, .recordedLocalOnly)
+        XCTAssertEqual(record.boundary, .localOnly)
+        XCTAssertEqual(record.sourceDomain, .system)
+        XCTAssertTrue(record.isWellFormed)
+    }
 }
 
 private extension SideEffectLedgerModelsTests {
