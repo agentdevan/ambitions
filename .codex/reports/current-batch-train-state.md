@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK29 Entity Revision And Tombstones / Green.
-Next recommended implementation pass: PK30 Conflict Policy Engine.
-Next eligible non-UI platform batch: PK30 Conflict Policy Engine.
-Scope: PK29 adds local-only entity revision/tombstone models plus SwiftData repository/schema/ledger coverage; it does not execute sync/cloud conflict resolution, migration, export, deletion, memory erase, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK30 Conflict Policy Engine / Green.
+Next recommended implementation pass: PK31 Manual Portable Sync Merge.
+Next eligible non-UI platform batch: PK31 Manual Portable Sync Merge.
+Scope: PK30 adds deterministic local conflict-policy models and portable snapshot merge comparison wiring; it does not execute sync/cloud behavior, hosted backend behavior, automatic multi-device merge execution, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK30 Conflict Policy Engine Closeout
+
+- PK30 report: `docs/audits/pk30-batch-closeout-report.md`.
+- Scope: deterministic local conflict-policy models and portable snapshot merge comparison wiring.
+- Commit: `3316296c5930341f4e9f1937e277826a419eaea7` (`PK30: install conflict policy engine`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `ConflictPolicyModelsTests` passed.
+- Canonical queue now marks PK30 Green and PK31 executable now.
+- EFC applicability: invoked for conflict-policy proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, sync/cloud, hosted AI, automatic multi-device merge execution, or global-train-completion claim is made.
 
 ## PK29 Entity Revision And Tombstones Closeout
 

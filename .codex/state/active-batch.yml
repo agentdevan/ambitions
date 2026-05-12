@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK29 Entity Revision And Tombstones"
-  previous_batch: "PK28 Data Control Commands"
+  batch: "PK30 Conflict Policy Engine"
+  previous_batch: "PK29 Entity Revision And Tombstones"
   previous_result: "green"
-  next_eligible_batch: "PK30 Conflict Policy Engine"
+  next_eligible_batch: "PK31 Manual Portable Sync Merge"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true
