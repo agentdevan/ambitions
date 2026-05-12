@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK21 Time Service Extraction"
-  previous_batch: "PK20 Capture Service Extraction"
-  previous_result: "green"
-  next_eligible_batch: "PK22 SideEffectLedger Foundation"
+  batch: "PK22 SideEffectLedger Foundation"
+  previous_batch: "PK21 Time Service Extraction"
+  previous_result: "accepted_yellow"
+  next_eligible_batch: "PK23 Notifications Through SideEffectLedger"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true

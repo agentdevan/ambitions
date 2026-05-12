@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK21 Time Service Extraction / Green.
-Next recommended implementation pass: PK22 SideEffectLedger Foundation.
-Next eligible non-UI platform batch: PK22 SideEffectLedger Foundation.
-Scope: PK21 extracts the Time projection seam while preserving Plan as the internal compatibility owner, Time dashboard output, local-only projection behavior, and no-mutation calendar awareness; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+Current batch: PK22 SideEffectLedger Foundation / Accepted Yellow.
+Next recommended implementation pass: PK23 Notifications Through SideEffectLedger.
+Next eligible non-UI platform batch: PK23 Notifications Through SideEffectLedger.
+Scope: PK22 adds bounded SideEffectLedger persistence/storage integration on top of upstream safe-automation SideEffectLedger source truth; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+
+## PK22 SideEffectLedger Foundation Closeout
+
+- PK22 report: `docs/audits/pk22-batch-closeout-report.md`.
+- Scope: SideEffectLedger persistence/storage integration rebased onto upstream safe-automation SideEffectLedger source truth.
+- Commit: `b70a8268aee20f248683daf53d3e63d78383c620` (`PK22: complete hybrid Codex batch`), pushed to `main`.
+- Proof: `xcodegen generate`, `make batch-self-check`, `make prompt-audit`, `git diff --check`, and forbidden-claim scan passed. Build-for-testing remains accepted Yellow because current local build proof is blocked by out-of-scope `GoalsOverviewProjector.swift` compile errors after PK22 source compiled.
+- Canonical queue now marks PK22 Accepted Yellow and PK23 executable now.
+- EFC applicability: invoked for side-effect/data-bound persistence behavior.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK21 Time Service Extraction Closeout
 
