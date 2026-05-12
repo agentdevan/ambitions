@@ -8,6 +8,10 @@ extension RepositoryBackedPlanService {
         let evidence: [ProgressEvidence]
         let feedback: [GoalFeedbackEvent]
         let captures: [Capture]
+
+        static var empty: Self {
+            Self(goals: [], drafts: [], evidence: [], feedback: [], captures: [])
+        }
     }
 
     struct StepContext {

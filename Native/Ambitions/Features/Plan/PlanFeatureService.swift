@@ -76,6 +76,8 @@ struct RepositoryBackedPlanService: PlanServicing {
     }
 }
 
+extension RepositoryBackedPlanService: TimeFeatureProjectionSource {}
+
 extension RepositoryBackedPlanService {
     func makeDashboard(snapshot: Snapshot, now: Date, calendarAwareness: PlanCalendarAwarenessState) -> PlanDashboard {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }

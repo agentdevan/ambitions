@@ -1,9 +1,16 @@
 import AmbitionsDesignSystem
 import Foundation
 
+protocol TimeFeatureProjectionSource {
+    func loadSnapshot() async throws -> RepositoryBackedPlanService.Snapshot
+    func makeDashboard(snapshot: RepositoryBackedPlanService.Snapshot, now: Date, calendarAwareness: PlanCalendarAwarenessState) -> PlanDashboard
+    func makeWeeklyReviewDashboard(snapshot: RepositoryBackedPlanService.Snapshot, now: Date) -> WeeklyReviewDashboard
+    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> PlanCalendarAwarenessState
+}
+
 struct TimeFeatureService {
     func makeDashboard(
-        from source: RepositoryBackedPlanService,
+        from source: any TimeFeatureProjectionSource,
         now: Date,
         permission: CalendarPermissionState,
         openWindowCount: Int? = nil,
@@ -23,7 +30,7 @@ struct TimeFeatureService {
         )
     }
 
-    func makeWeeklyReviewDashboard(from source: RepositoryBackedPlanService, now: Date) async throws -> WeeklyReviewDashboard {
+    func makeWeeklyReviewDashboard(from source: any TimeFeatureProjectionSource, now: Date) async throws -> WeeklyReviewDashboard {
         let snapshot = try await source.loadSnapshot()
         return source.makeWeeklyReviewDashboard(snapshot: snapshot, now: now)
     }

@@ -413,6 +413,32 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertTrue(extracted.calendarBoundary.writeBoundary.contains("silently writes") == false)
     }
 
+    func testPK21TimeFeatureServiceCanReuseInjectedSnapshotWithoutReloadingSource() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal(id: "pk21-snapshot", title: "Snapshot reuse")])
+        let service = RepositoryBackedPlanService(repositories: repositories)
+        let snapshot = try await service.loadSnapshot()
+        let source = PK21TrackingTimeFeatureProjectionSource(service: service)
+        let timeService = TimeFeatureService()
+
+        _ = try await timeService.makeDashboard(
+            from: source,
+            now: fixedDate,
+            permission: .unavailable,
+            snapshot: snapshot
+        )
+
+        XCTAssertEqual(source.loadSnapshotCount, 0)
+
+        _ = try await timeService.makeDashboard(
+            from: source,
+            now: fixedDate,
+            permission: .unavailable
+        )
+
+        XCTAssertEqual(source.loadSnapshotCount, 1)
+    }
+
     func testDemoPlanProtectActionRemainsActionable() async throws {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
@@ -1063,6 +1089,32 @@ private extension PlanFeatureServiceTests {
             triageStatus: .routed,
             commitmentKind: .oneTime
         )
+    }
+}
+
+private final class PK21TrackingTimeFeatureProjectionSource: TimeFeatureProjectionSource {
+    private let service: RepositoryBackedPlanService
+    private(set) var loadSnapshotCount = 0
+
+    init(service: RepositoryBackedPlanService) {
+        self.service = service
+    }
+
+    func loadSnapshot() async throws -> RepositoryBackedPlanService.Snapshot {
+        loadSnapshotCount += 1
+        return try await service.loadSnapshot()
+    }
+
+    func makeDashboard(snapshot: RepositoryBackedPlanService.Snapshot, now: Date, calendarAwareness: PlanCalendarAwarenessState) -> PlanDashboard {
+        service.makeDashboard(snapshot: snapshot, now: now, calendarAwareness: calendarAwareness)
+    }
+
+    func makeWeeklyReviewDashboard(snapshot: RepositoryBackedPlanService.Snapshot, now: Date) -> WeeklyReviewDashboard {
+        service.makeWeeklyReviewDashboard(snapshot: snapshot, now: now)
+    }
+
+    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> PlanCalendarAwarenessState {
+        service.makeCalendarAwarenessState(permission: permission, openWindowCount: openWindowCount)
     }
 }
 
