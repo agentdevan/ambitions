@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA10B Goal Projection Engine Contract"
-  previous_batch: "SA10B Goal Projection Engine Contract"
+  batch: "SA10C Projection Fixtures And No-Sprawl Validation"
+  previous_batch: "SA10C Projection Fixtures And No-Sprawl Validation"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "SA10C Projection Fixtures And No-Sprawl Validation"
+  next_eligible_batch: "SA11 Source Atlas Store"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

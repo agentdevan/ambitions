@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-12",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA10C",
-  "next_eligible_title": "Projection Fixtures And No-Sprawl Validation",
+  "next_eligible_batch": "SA11",
+  "next_eligible_title": "Source Atlas Store",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -380,17 +380,17 @@
     {
       "id": "SA10C",
       "title": "Projection Fixtures And No-Sprawl Validation",
-      "classification": "executable_now",
-      "reason": "SA10B is complete / accepted yellow. SA10C is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA10B.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA10C Projection Fixtures And No-Sprawl Validation is complete / Accepted Yellow with closeout in docs/audits/sa10c-batch-closeout-report.md and commit e71836f251bfa1422045c2b6e598bc3777996668 pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA11",
       "title": "Source Atlas Store",
-      "classification": "executable_later",
-      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
-      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "classification": "executable_now",
+      "reason": "SA10C is complete / accepted yellow. SA11 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA10C.",
       "efc_applicability": "invoked"
     },
     {
