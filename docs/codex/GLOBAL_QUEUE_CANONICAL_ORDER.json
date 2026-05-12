@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-12",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA08",
-  "next_eligible_title": "Requirement Graph Implementation",
+  "next_eligible_batch": "SA09",
+  "next_eligible_title": "Proof Map Implementation",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -340,17 +340,17 @@
     {
       "id": "SA08",
       "title": "Requirement Graph Implementation",
-      "classification": "executable_now",
-      "reason": "SA07 is complete / accepted yellow. SA08 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA07.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA08 Requirement Graph Implementation is complete / Accepted Yellow with closeout in docs/audits/sa08-batch-closeout-report.md and commit 47f6c4cb6189f7e6be1b1ccaf15c63f17fbc0e12 pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA09",
       "title": "Proof Map Implementation",
-      "classification": "executable_later",
-      "reason": "Source Atlas is now visible to the autonomous queue, but runs after PK safety prerequisites or when selected as a hard dependency for source/freshness work.",
-      "blocking_prerequisites": "PK source/storage prerequisites and SA06 completion evidence; do not skip SA in fallback order.",
+      "classification": "executable_now",
+      "reason": "SA08 is complete / accepted yellow. SA09 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA08.",
       "efc_applicability": "invoked"
     },
     {
