@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK39 Move Storage To Package / Green.
-Next recommended implementation pass: PK40 Move Runtime To Package.
-Next eligible non-UI platform batch: PK40 Move Runtime To Package.
-Scope: PK39 adds a storage package-boundary manifest and validator; it does not execute external/cloud LLM behavior, hosted backend behavior, Package.swift/project.yml wiring, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK40 Move Runtime To Package / Green.
+Next recommended implementation pass: PK41 Move Feature Engines To Package.
+Next eligible non-UI platform batch: PK41 Move Feature Engines To Package.
+Scope: PK40 adds a runtime package-boundary manifest and validator; it does not execute external/cloud LLM behavior, hosted backend behavior, Package.swift/project.yml wiring, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK40 Move Runtime To Package Closeout
+
+- PK40 report: `docs/audits/pk40-batch-closeout-report.md`.
+- Scope: Runtime package-boundary manifest and validator, with explicit package/project wiring and remote-intelligence-backend non-claims.
+- Commit: same closeout commit (`PK40: install runtime package boundary`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `RuntimePackageBoundaryModelsTests` passed.
+- Canonical queue now marks PK40 Green and PK41 executable now.
+- EFC applicability: invoked for modularization boundary and local runtime proof integrity.
+- No full-suite, device, accessibility, performance validation, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, Package.swift/project.yml wiring, or global-train-completion claim is made.
 
 ## PK39 Move Storage To Package Closeout
 

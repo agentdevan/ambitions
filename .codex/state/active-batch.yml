@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK39 Move Storage To Package"
-  previous_batch: "PK38 Move Domain To Package"
+  batch: "PK40 Move Runtime To Package"
+  previous_batch: "PK39 Move Storage To Package"
   previous_result: "green"
-  next_eligible_batch: "PK40 Move Runtime To Package"
+  next_eligible_batch: "PK41 Move Feature Engines To Package"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true

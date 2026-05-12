@@ -64,3 +64,4 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 | 2026-05-12T18:18:00Z | fast-install-direct | PK37 | 1 | green | docs/audits/pk37-batch-closeout-report.md | PK37 focused Today derived read-model cache test passed; PK38 is next eligible. |
 | 2026-05-12T18:32:00Z | fast-install-direct | PK38 | 1 | green | docs/audits/pk38-batch-closeout-report.md | PK38 focused Domain package-boundary model test passed; PK39 is next eligible. |
 | 2026-05-12T18:46:00Z | fast-install-direct | PK39 | 1 | green | docs/audits/pk39-batch-closeout-report.md | PK39 focused Storage package-boundary model test passed; PK40 is next eligible. |
+| 2026-05-12T19:00:00Z | fast-install-direct | PK40 | 1 | green | docs/audits/pk40-batch-closeout-report.md | PK40 focused Runtime package-boundary model test passed; PK41 is next eligible. |
