@@ -644,6 +644,14 @@ extension SafeAutomationActionKind {
             self = .routeCapture
         case .scheduleItem:
             self = command.payload.metadata["calendarWriteIntent"] == "true" ? .writeCalendarBlock : .prepareCalendarBlock
+        case .prepareExport:
+            self = .prepareExport
+        case .performExport:
+            self = .performExport
+        case .deleteObject:
+            self = .deleteObject
+        case .forgetMemory:
+            self = .forgetMemory
         case .startStepSession:
             self = .noOp
         case .completeAction:

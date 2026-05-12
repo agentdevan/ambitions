@@ -136,6 +136,18 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
         XCTAssertEqual(exportDecision.degradedFacts, ["No export file is written by this policy."])
     }
 
+    func testPerformExportRequiresConfirmationBeforeAnyExternalEffect() {
+        let decision = SafeAutomationPolicyEvaluator().evaluate(
+            SafeAutomationProposedAction(kind: .performExport, sourceDomain: .you)
+        )
+
+        XCTAssertEqual(decision.permissionLevel, .requiresConfirmation)
+        XCTAssertEqual(decision.confirmationRequirement, .requiredForExternalEffect)
+        XCTAssertEqual(decision.undoRule, .externalUndoUnavailable)
+        XCTAssertEqual(decision.receiptRecommendation.resultState, .needsConfirmation)
+        XCTAssertEqual(decision.blockedFacts, ["No export was performed."])
+    }
+
     func testUnsafeAndUnsupportedActionsNeverAutomateOrFailSafely() {
         let deleteDecision = SafeAutomationPolicyEvaluator().evaluate(
             SafeAutomationProposedAction(
@@ -219,7 +231,11 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
             (.delayAction, AmbitionsCommandTarget(goalID: "goal-1", stepID: "step-1"), AmbitionsCommandPayload(), .moveActionLater),
             (.splitAction, AmbitionsCommandTarget(goalID: "goal-1", stepID: "step-1"), AmbitionsCommandPayload(), .splitAction),
             (.dismissRecommendation, AmbitionsCommandTarget(recommendationID: "rec-1"), AmbitionsCommandPayload(), .dismissSuggestion),
-            (.scheduleItem, AmbitionsCommandTarget(planID: "plan-1"), AmbitionsCommandPayload(metadata: ["calendarWriteIntent": "true"]), .writeCalendarBlock)
+            (.scheduleItem, AmbitionsCommandTarget(planID: "plan-1"), AmbitionsCommandPayload(metadata: ["calendarWriteIntent": "true"]), .writeCalendarBlock),
+            (.prepareExport, AmbitionsCommandTarget(), AmbitionsCommandPayload(), .prepareExport),
+            (.performExport, AmbitionsCommandTarget(), AmbitionsCommandPayload(), .performExport),
+            (.deleteObject, AmbitionsCommandTarget(goalID: "goal-1"), AmbitionsCommandPayload(), .deleteObject),
+            (.forgetMemory, AmbitionsCommandTarget(reviewID: "memory-1"), AmbitionsCommandPayload(), .forgetMemory)
         ]
 
         for (kind, target, payload, expectedAction) in cases {
@@ -234,6 +250,42 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
 
             XCTAssertEqual(SafeAutomationProposedAction.fromCommand(command).kind, expectedAction)
         }
+    }
+
+    func testDataControlPolicyDecisionsFromCommandsAreAsConfigured() {
+        let decisionForCommand: (AmbitionsCommandKind, AmbitionsCommandTarget) -> SafeAutomationPolicyDecision = { kind, target in
+            SafeAutomationPolicyEvaluator().evaluate(
+                SafeAutomationProposedAction(
+                    kind: SafeAutomationActionKind(command: AmbitionsCommand(
+                        id: "command-\(kind.rawValue)",
+                        kind: kind,
+                        source: .you,
+                        target: target,
+                        createdAt: "2026-04-26T12:00:00Z"
+                    )),
+                    sourceDomain: .you,
+                    targetObjects: LifeGraphObjectReference.commandTargets(
+                        AmbitionsCommand(
+                            id: "command-\(kind.rawValue)",
+                            kind: kind,
+                            source: .you,
+                            target: target,
+                            createdAt: "2026-04-26T12:00:00Z"
+                        )
+                    )
+                )
+            )
+        }
+
+        let prepareDecision = decisionForCommand(.prepareExport, AmbitionsCommandTarget())
+        let performDecision = decisionForCommand(.performExport, AmbitionsCommandTarget())
+        let deleteDecision = decisionForCommand(.deleteObject, AmbitionsCommandTarget(goalID: "goal-1"))
+        let forgetDecision = decisionForCommand(.forgetMemory, AmbitionsCommandTarget(reviewID: "memory-1"))
+
+        XCTAssertEqual(prepareDecision.permissionLevel, .prepareDraft)
+        XCTAssertEqual(performDecision.permissionLevel, .requiresConfirmation)
+        XCTAssertEqual(deleteDecision.permissionLevel, .neverAutomate)
+        XCTAssertEqual(forgetDecision.permissionLevel, .neverAutomate)
     }
 
     func testPolicyDecisionIDsAreDeterministicAndTargetsAreSorted() {

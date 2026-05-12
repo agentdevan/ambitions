@@ -18,6 +18,10 @@ enum AmbitionsCommandKind: String, Codable, Sendable, Equatable, Hashable, CaseI
     case recoverAction = "recover_action"
     case markWaiting = "mark_waiting"
     case archiveItem = "archive_item"
+    case prepareExport = "prepare_export"
+    case performExport = "perform_export"
+    case deleteObject = "delete_object"
+    case forgetMemory = "forget_memory"
     case setPriority = "set_priority"
     case setUrgency = "set_urgency"
     case setDeadline = "set_deadline"
@@ -422,6 +426,12 @@ struct AmbitionsCommandValidator: Sendable {
             return command.payload.priorityHints.hasAnySignal == false ? .invalid : targetBacked(command)
         case .setUrgency:
             return command.payload.priorityHints.urgency == nil ? .invalid : targetBacked(command)
+        case .prepareExport, .performExport:
+            return .valid
+        case .deleteObject:
+            return command.target.goalID == nil && command.target.captureID == nil && command.target.planID == nil && command.target.reviewID == nil ? .needsMissingTarget : .valid
+        case .forgetMemory:
+            return command.target.goalID == nil && command.target.captureID == nil && command.target.planID == nil && command.target.reviewID == nil ? .needsMissingTarget : .valid
         case .setDeadline:
             return command.payload.deadlineText == nil && command.payload.priorityHints.deadline == nil ? .invalid : targetBacked(command)
         case .setContextLens:

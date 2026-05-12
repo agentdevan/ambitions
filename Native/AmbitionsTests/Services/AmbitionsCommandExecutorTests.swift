@@ -397,4 +397,47 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertEqual(result.metadata["calendarWriteIntent"], "true")
         XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
     }
+
+    func testDataControlCommandsRemainInPolicyDomainWithoutExecution() async {
+        let executor = AmbitionsCommandExecutor()
+        let commands = [
+            AmbitionsCommand(
+                id: "command-prepare-export",
+                kind: .prepareExport,
+                source: .you,
+                createdAt: "2026-05-12T12:00:00Z"
+            ),
+            AmbitionsCommand(
+                id: "command-perform-export",
+                kind: .performExport,
+                source: .you,
+                createdAt: "2026-05-12T12:00:00Z"
+            ),
+            AmbitionsCommand(
+                id: "command-delete-object",
+                kind: .deleteObject,
+                source: .capture,
+                target: AmbitionsCommandTarget(goalID: "goal-1"),
+                createdAt: "2026-05-12T12:00:00Z"
+            ),
+            AmbitionsCommand(
+                id: "command-forget-memory",
+                kind: .forgetMemory,
+                source: .you,
+                target: AmbitionsCommandTarget(reviewID: "memory-1"),
+                createdAt: "2026-05-12T12:00:00Z"
+            )
+        ]
+
+        for command in commands {
+            let result = await executor.execute(
+                command,
+                context: CommandExecutionContext(now: Date(timeIntervalSince1970: 1_778_100_000))
+            )
+            XCTAssertEqual(result.status, .unsupported)
+            XCTAssertEqual(result.target?.goalID, command.target.goalID)
+            XCTAssertEqual(result.target?.reviewID, command.target.reviewID)
+            XCTAssertEqual(result.metadata["blockedBy"], "owning_system_not_implemented")
+        }
+    }
 }

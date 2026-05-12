@@ -10,7 +10,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         XCTAssertEqual(SmartAttachmentResultState.failedSafely.rawValue, "failed_safely")
     }
 
-    func testCommandKindTaxonomyCoversBatch68Foundation() {
+    func testCommandKindTaxonomyCoversBatch68FoundationAndDataControlExtension() {
         XCTAssertEqual(
             Set(AmbitionsCommandKind.allCases),
             [
@@ -28,6 +28,10 @@ final class AmbitionsCommandModelsTests: XCTestCase {
                 .recoverAction,
                 .markWaiting,
                 .archiveItem,
+                .prepareExport,
+                .performExport,
+                .deleteObject,
+                .forgetMemory,
                 .setPriority,
                 .setUrgency,
                 .setDeadline,
@@ -42,6 +46,19 @@ final class AmbitionsCommandModelsTests: XCTestCase {
                 .dismissRecommendation
             ]
         )
+    }
+
+    func testDataControlCommandsValidateThroughCommandSchema() {
+        let validator = AmbitionsCommandValidator()
+        let prepareExport = command(kind: .prepareExport)
+        let performExport = command(kind: .performExport)
+        let deleteObject = command(kind: .deleteObject, target: AmbitionsCommandTarget(goalID: "goal-1"))
+        let forgetMemory = command(kind: .forgetMemory, target: AmbitionsCommandTarget(reviewID: "memory-1"))
+
+        XCTAssertEqual(validator.validate(prepareExport), .valid)
+        XCTAssertEqual(validator.validate(performExport), .valid)
+        XCTAssertEqual(validator.validate(deleteObject), .valid)
+        XCTAssertEqual(validator.validate(forgetMemory), .valid)
     }
 
     func testCommandSourceTaxonomyCoversInternalAndFutureExternalSurfaces() {
