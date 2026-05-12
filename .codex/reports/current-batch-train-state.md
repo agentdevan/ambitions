@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK38 Move Domain To Package / Green.
-Next recommended implementation pass: PK39 Move Storage To Package.
-Next eligible non-UI platform batch: PK39 Move Storage To Package.
-Scope: PK38 adds a Domain package-boundary manifest and validator; it does not execute external/cloud LLM behavior, hosted backend behavior, Package.swift/project.yml wiring, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK39 Move Storage To Package / Green.
+Next recommended implementation pass: PK40 Move Runtime To Package.
+Next eligible non-UI platform batch: PK40 Move Runtime To Package.
+Scope: PK39 adds a storage package-boundary manifest and validator; it does not execute external/cloud LLM behavior, hosted backend behavior, Package.swift/project.yml wiring, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK39 Move Storage To Package Closeout
+
+- PK39 report: `docs/audits/pk39-batch-closeout-report.md`.
+- Scope: Persistence package-boundary manifest and validator, with explicit package/project wiring non-claim.
+- Commit: same closeout commit (`PK39: install storage package boundary`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `StoragePackageBoundaryModelsTests` passed.
+- Canonical queue now marks PK39 Green and PK40 executable now.
+- EFC applicability: invoked for modularization boundary and local-first storage proof integrity.
+- No full-suite, device, accessibility, performance validation, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, Package.swift/project.yml wiring, or global-train-completion claim is made.
 
 ## PK38 Move Domain To Package Closeout
 
