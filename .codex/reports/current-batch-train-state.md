@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK31 Manual Portable Sync Merge / Green.
-Next recommended implementation pass: PK32 Knowledge Claim Boundary Hardening.
-Next eligible non-UI platform batch: PK32 Knowledge Claim Boundary Hardening.
-Scope: PK31 adds local manual portable merge plan models and service contract proof; it does not execute sync/cloud behavior, hosted backend behavior, automatic multi-device merge execution, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK32 Knowledge Claim Boundary Hardening / Green.
+Next recommended implementation pass: PK33 Recommendation Evidence Model.
+Next eligible non-UI platform batch: PK33 Recommendation Evidence Model.
+Scope: PK32 adds local claim-boundary hardening and registry degradation wiring; it does not execute external/cloud LLM behavior, hosted backend behavior, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK32 Knowledge Claim Boundary Hardening Closeout
+
+- PK32 report: `docs/audits/pk32-batch-closeout-report.md`.
+- Scope: local claim-boundary hardening service, registry degradation wiring, and focused boundary test.
+- Commit: `b618afe6f56980f7781d46f352455c92b809fc02` (`PK32: install knowledge claim boundary hardening`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `KnowledgeProviderBoundaryTests` passed.
+- Canonical queue now marks PK32 Green and PK33 executable now.
+- EFC applicability: invoked for knowledge-claim boundary proof integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, or global-train-completion claim is made.
 
 ## PK31 Manual Portable Sync Merge Closeout
 

@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK31 Manual Portable Sync Merge"
-  previous_batch: "PK30 Conflict Policy Engine"
+  batch: "PK32 Knowledge Claim Boundary Hardening"
+  previous_batch: "PK31 Manual Portable Sync Merge"
   previous_result: "green"
-  next_eligible_batch: "PK32 Knowledge Claim Boundary Hardening"
+  next_eligible_batch: "PK33 Recommendation Evidence Model"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true
