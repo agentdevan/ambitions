@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK26 Privacy Classification System / Green.
-Next recommended implementation pass: PK27 Diagnostic Ledger.
-Next eligible non-UI platform batch: PK27 Diagnostic Ledger.
-Scope: PK26 adds deterministic local privacy/safety classification across privacy class, receipt privacy, event-ledger privacy, side-effect boundaries, projection policy, redaction requirements, and user-review requirements; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK27 Diagnostic Ledger / Green.
+Next recommended implementation pass: PK28 Data Control Commands.
+Next eligible non-UI platform batch: PK28 Data Control Commands.
+Scope: PK27 adds deterministic local diagnostic ledger models and snapshot derivation from EventLedger, SideEffectLedger, and privacy-safety classifications; it does not introduce persistence schema, project wiring, release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK27 Diagnostic Ledger Closeout
+
+- PK27 report: `docs/audits/pk27-batch-closeout-report.md`.
+- Scope: deterministic local diagnostic ledger models now derive local-only diagnostic entries and snapshots from EventLedger entries, SideEffectLedger records, and privacy-safety classifications without adding persistence schema, project wiring, network behavior, telemetry, hosted AI, or release claims.
+- Commit: `b918efcff560c614f66c90c787d5338650650e17` (`PK27: complete hybrid Codex batch`), pushed to `main`.
+- Proof: `git diff --check`, `make batch-self-check`, `make prompt-audit`, forbidden-claim scan, and focused `EventLedgerModelsTests`, `SideEffectLedgerModelsTests`, and `AmbitionsOSPrivacySafetyModelsTests` passed. Prompt audit remains the expected non-blocking Yellow classification for support/eval/template files.
+- Canonical queue now marks PK27 Green and PK28 executable now.
+- EFC applicability: invoked for diagnostic/privacy/data-control behavior and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK26 Privacy Classification System Closeout
 

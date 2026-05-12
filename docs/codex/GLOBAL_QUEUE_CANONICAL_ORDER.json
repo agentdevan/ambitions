@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-08",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PK27",
-  "next_eligible_title": "Diagnostic Ledger",
+  "next_eligible_batch": "PK28",
+  "next_eligible_title": "Data Control Commands",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -212,16 +212,16 @@
     {
       "id": "PK27",
       "title": "Diagnostic Ledger",
-      "classification": "executable_now",
-      "reason": "PK26 Privacy Classification System is complete / Green with bounded proof. PK27 is the current implementation batch; later PK stays serial/dependency gated.",
-      "blocking_prerequisites": "Complete prior PK batch PK26 and any data-safety proof named by the PK train.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK27 Diagnostic Ledger is complete / Green with proof in docs/audits/pk27-batch-closeout-report.md. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK28",
       "title": "Data Control Commands",
-      "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK22; PK23 is the current implementation batch, later PK stays serial/dependency gated.",
+      "classification": "executable_now",
+      "reason": "PK27 Diagnostic Ledger is complete / Green with bounded proof. PK28 is the current implementation batch; later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK27 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
