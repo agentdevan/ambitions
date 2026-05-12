@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK28 Data Control Commands / Green.
-Next recommended implementation pass: PK29 Entity Revision And Tombstones.
-Next eligible non-UI platform batch: PK29 Entity Revision And Tombstones.
-Scope: PK28 adds data-control command representation and safe-automation policy mapping for export, deletion, and memory-forgetting command kinds; it does not execute export, deletion, memory erase, persistence schema changes, project wiring, release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK29 Entity Revision And Tombstones / Green.
+Next recommended implementation pass: PK30 Conflict Policy Engine.
+Next eligible non-UI platform batch: PK30 Conflict Policy Engine.
+Scope: PK29 adds local-only entity revision/tombstone models plus SwiftData repository/schema/ledger coverage; it does not execute sync/cloud conflict resolution, migration, export, deletion, memory erase, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK29 Entity Revision And Tombstones Closeout
+
+- PK29 report: `docs/audits/pk29-batch-closeout-report.md`.
+- Scope: local-only entity revision/tombstone domain model, SwiftData record/repository wiring, storage schema ledger coverage, and focused tests.
+- Commit: `cd5388c65ccceeeb3f8149e1ac792c60c0d63eb6` (`PK29: install entity revision tombstones`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, `make batch-self-check`, `make prompt-audit`, forbidden-claim scan, and focused `EntityRevisionTombstoneModelsTests`, `EntityRevisionTombstoneRepositoryTests`, and `StorageSchemaVersionLedgerTests` passed. Prompt audit remains the expected non-blocking Yellow classification for support/eval/template files.
+- Canonical queue now marks PK29 Green and PK30 executable now.
+- EFC applicability: invoked for local revision-tombstone and schema-ledger proof integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, sync/cloud, hosted AI, migration execution, conflict-resolution execution, deletion/export execution, or global-train-completion claim is made.
 
 ## PK28 Data Control Commands Closeout
 
