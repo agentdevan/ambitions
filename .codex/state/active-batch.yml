@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA10A Capability Graph / Level Ladder Implementation"
-  previous_batch: "SA10A Capability Graph / Level Ladder Implementation"
+  batch: "SA10B Goal Projection Engine Contract"
+  previous_batch: "SA10B Goal Projection Engine Contract"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "SA10B Goal Projection Engine Contract"
+  next_eligible_batch: "SA10C Projection Fixtures And No-Sprawl Validation"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

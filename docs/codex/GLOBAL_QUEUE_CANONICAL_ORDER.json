@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-12",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA10B",
-  "next_eligible_title": "Goal Projection Engine Contract",
+  "next_eligible_batch": "SA10C",
+  "next_eligible_title": "Projection Fixtures And No-Sprawl Validation",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -372,17 +372,17 @@
     {
       "id": "SA10B",
       "title": "Goal Projection Engine Contract",
-      "classification": "executable_now",
-      "reason": "SA10A is complete / accepted yellow. SA10B is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA10A.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA10B Goal Projection Engine Contract is complete / Accepted Yellow with closeout in docs/audits/sa10b-batch-closeout-report.md and commit 4b2770dcc761931d89da50ebe133d0925ecb2b08 pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA10C",
       "title": "Projection Fixtures And No-Sprawl Validation",
-      "classification": "executable_later",
-      "reason": "Source Atlas composition/projection runtime must be visible and must not be hidden behind AOS/LDI continuation.",
-      "blocking_prerequisites": "SA07-SA10 plus SAP composition/projection gates.",
+      "classification": "executable_now",
+      "reason": "SA10B is complete / accepted yellow. SA10C is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA10B.",
       "efc_applicability": "invoked"
     },
     {
