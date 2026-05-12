@@ -1,11 +1,34 @@
 # Current Batch Train State
 
-Date: 2026-05-11
+Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK17 Today Read Model Extraction / Green.
-Next recommended implementation pass: PK18 Today Command Handler Extraction.
-Next eligible non-UI platform batch: PK18 Today Command Handler Extraction.
-Scope: PK17 extracts Today execution read-model projection into a Today-owned projector with focused Today coverage; it does not implement UI redesign, command handling extraction, release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+Current batch: PK19 Goals Query/Projector Extraction / Green.
+Next recommended implementation pass: PK20 Goals Projector Completion.
+Next eligible non-UI platform batch: PK20 Goals Projector Completion.
+Scope: PK19 extracts Goals query/projector boundaries while preserving existing goal semantics, board ordering, mission-control hierarchy, and non-score product language; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+
+## PK19 Goals Query/Projector Extraction Closeout
+
+- PK19 report: `docs/audits/pk19-batch-closeout-report.md`.
+- Scope: behavior-preserving query/projector extraction for Goals overview state assembly from repository/domain data; no mission-control or language framing changes.
+- Focused proof and source scope:
+  - `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`
+  - `Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift`
+  - `Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift`
+- Canonical queue now marks PK19 Green.
+- EFC applicability: invoked for Goals user-facing board/proof path because it preserves proof/receipt ordering behavior without changing mutation boundaries.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
+
+## PK18 Today Command Handler Extraction Closeout
+
+- PK18 report: `docs/audits/pk18-batch-closeout-report.md`.
+- Scope: behavior-preserving extraction for Today-owned mutation command-handler seams, command execution records, and event-ledger evidence.
+- Focused proof and source scope:
+  - `Native/Ambitions/Features/Today/TodayCommandHandler.swift`
+  - `Native/AmbitionsTests/TodayCommandHandlerTests.swift`
+  - `Native/AmbitionsTests/TodayFreshGoalVisibilityTests.swift`
+- Canonical queue now marks PK18 Green.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK17 Today Read Model Extraction Closeout
 

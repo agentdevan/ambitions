@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK17 Today Read Model Extraction"
-  previous_batch: "PK16 Trust History Query"
+  batch: "PK19 Goals Query/Projector Extraction"
+  previous_batch: "PK18 Today Command Handler Extraction"
   previous_result: "green"
-  next_eligible_batch: "PK18 Today Command Handler Extraction"
+  next_eligible_batch: "PK20 Goals Projector Completion"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true
