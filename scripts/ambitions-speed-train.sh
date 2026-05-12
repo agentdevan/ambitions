@@ -6,6 +6,8 @@ cd "$REPO_ROOT"
 
 AUTONOMOUS="scripts/ambitions-autonomous-train.sh"
 STALE_CHECK="scripts/ambitions-stale-state-check.py"
+QUEUE_GUARD="scripts/ambitions-speed-queue-guard.py"
+LANE_POLICY="scripts/ambitions-speed-lane-policy.py"
 CLAIM_SCAN="scripts/ambitions-unsupported-claim-scan.py"
 PROMPT_AUDIT="scripts/ambitions-prompt-audit.sh"
 PROCESS_PREFLIGHT="scripts/ambitions-process-preflight.sh"
@@ -54,6 +56,7 @@ require_file() {
 require_base_files() {
   require_file "$AUTONOMOUS"
   require_file "$STALE_CHECK"
+  require_file "$QUEUE_GUARD"
   require_file "$CLAIM_SCAN"
   require_file "$PROMPT_AUDIT"
   require_file "$PROCESS_PREFLIGHT"
@@ -70,8 +73,15 @@ next_prompt() {
 
 speed_preflight() {
   require_base_files
+  local batch
+  batch="$(next_batch)"
+  [[ -n "$batch" ]] || fail "no next batch found"
   python3 "$STALE_CHECK"
+  python3 "$QUEUE_GUARD" "$batch"
   python3 "$CLAIM_SCAN" docs prompts .codex
+  if [[ -f "$LANE_POLICY" ]]; then
+    python3 "$LANE_POLICY" "$batch" || true
+  fi
   "$PROMPT_AUDIT" >/dev/null
   if [[ "$SPEED_ALLOW_DIRTY" != "1" ]]; then
     "$PROCESS_PREFLIGHT" --assert-clear
@@ -82,6 +92,11 @@ speed_preflight() {
 
 speed_postflight() {
   python3 "$STALE_CHECK"
+  local batch
+  batch="$(next_batch || true)"
+  if [[ -n "$batch" ]]; then
+    python3 "$QUEUE_GUARD" "$batch"
+  fi
   python3 "$CLAIM_SCAN" docs prompts .codex
 }
 
@@ -93,6 +108,13 @@ status() {
   "$AUTONOMOUS" --status
   echo
   python3 "$STALE_CHECK" || true
+  batch="$(next_batch || true)"
+  if [[ -n "$batch" ]]; then
+    python3 "$QUEUE_GUARD" "$batch" || true
+    if [[ -f "$LANE_POLICY" ]]; then
+      python3 "$LANE_POLICY" "$batch" || true
+    fi
+  fi
   python3 "$CLAIM_SCAN" docs prompts .codex || true
 }
 
@@ -126,6 +148,7 @@ run_until_blocked() {
     prompt="$(next_prompt)"
     [[ -n "$batch" ]] || { log "no next batch found; stopping"; return 0; }
     [[ -f "$prompt" ]] || fail "next prompt missing: $prompt"
+    python3 "$QUEUE_GUARD" "$batch"
     case " $seen " in
       *" $batch "*) fail "same-batch loop detected: $batch" ;;
     esac
@@ -151,6 +174,10 @@ final_gate() {
   log "final heavy gate start"
   git diff --check
   python3 "$STALE_CHECK"
+  batch="$(next_batch || true)"
+  if [[ -n "$batch" ]]; then
+    python3 "$QUEUE_GUARD" "$batch"
+  fi
   python3 "$CLAIM_SCAN" docs prompts .codex
   make batch-self-check
   make prompt-audit
