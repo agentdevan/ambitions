@@ -97,6 +97,46 @@ final class AmbitionsOSSourceTruthModelsTests: XCTestCase {
         XCTAssertTrue(validator.validate(ledger).contains(.silentClaimMutation))
     }
 
+    func testClaimTransitionToOfficialSourceBackedRequiresProvenanceOrSourceEvidence() {
+        let claim = validClaim(
+            id: "claim-no-provenance",
+            state: .sourceNeeded,
+            sourceIDs: [],
+            sourceQualityState: .secondaryReference
+        )
+        let transition = AmbitionsOSSourceTruthTransition(
+            claimID: "claim-no-provenance",
+            fromState: .sourceNeeded,
+            toState: .officialSourceBacked,
+            reason: "Promoted without source bridge",
+            receiptIDs: ["receipt-1"],
+            userReviewed: true
+        )
+        let ledger = AmbitionsOSSourceTruthLedger(
+            claims: [claim],
+            sources: [officialSource()],
+            transitions: [transition]
+        )
+
+        XCTAssertTrue(validator.validate(ledger).contains(.invalidClaimTransition))
+    }
+
+    func testDisputedOrRevokedClaimsDoNotDriveRecommendation() {
+        let disputed = validClaim(
+            id: "claim-disputed",
+            state: .disputed,
+            reviewState: .ready
+        )
+        let revoked = validClaim(
+            id: "claim-revoked",
+            state: .revoked,
+            reviewState: .ready
+        )
+
+        XCTAssertFalse(disputed.canDriveSourceSensitiveRecommendation)
+        XCTAssertFalse(revoked.canDriveSourceSensitiveRecommendation)
+    }
+
     func testSensitiveClaimIsBlockedFromExternalProjectionWithoutRedaction() {
         let sensitive = validClaim(privacyClass: .sensitive)
         let redacted = validClaim(id: "claim-redacted", privacyClass: .externalRedacted)

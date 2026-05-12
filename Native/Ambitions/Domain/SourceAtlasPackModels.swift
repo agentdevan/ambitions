@@ -34,19 +34,154 @@ enum SourceAtlasClaimState: String, Codable, Sendable, Equatable, Hashable, Case
     case expert
     case community
     case maintainerCurated = "maintainer_curated"
+    case sourceNeeded = "source_needed"
+    case sourced
     case userProvided = "user_provided"
     case userConfirmed = "user_confirmed"
     case imported
     case inferred
     case ocrDerived = "ocr_derived"
+    case verifiedByLocalProof = "verified_by_local_proof"
     case stale
     case staleCritical = "stale_critical"
     case sourceChanged = "source_changed"
     case disputed
+    case contradicted
     case revoked
     case unsupported
     case privateClaim = "private"
     case unknown
+
+    var isSourceBackedConfidenceState: Bool {
+        switch self {
+        case .official, .semiOfficial, .expert, .community, .maintainerCurated:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var isBlockingState: Bool {
+        switch self {
+        case .disputed, .contradicted, .revoked, .sourceChanged, .stale, .staleCritical, .unsupported, .unknown:
+            return true
+        case .sourceNeeded, .sourced:
+            return false
+        default:
+            return false
+        }
+    }
+
+    func canTransition(
+        to target: SourceAtlasClaimState,
+        hasProvenanceEvidence: Bool,
+        hasLocalProofEvidence: Bool
+    ) -> Bool {
+        if self == target {
+            return true
+        }
+
+        let baselineTargets: Set<SourceAtlasClaimState>
+        switch self {
+        case .sourceNeeded:
+            baselineTargets = [
+                .sourceNeeded,
+                .sourced,
+                .unknown,
+                .unsupported,
+                .userProvided,
+                .imported,
+                .inferred,
+                .ocrDerived,
+                .stale,
+                .staleCritical,
+                .disputed,
+                .contradicted,
+                .revoked
+            ]
+        case .sourced:
+            baselineTargets = [
+                .official, .semiOfficial, .expert, .community, .maintainerCurated,
+                .verifiedByLocalProof,
+                .sourceNeeded,
+                .unknown,
+                .unsupported,
+                .stale,
+                .staleCritical,
+                .disputed,
+                .contradicted,
+                .revoked
+            ]
+        case .official, .semiOfficial, .expert, .community, .maintainerCurated:
+            baselineTargets = [
+                .official, .semiOfficial, .expert, .community, .maintainerCurated,
+                .sourceNeeded,
+                .sourced,
+                .disputed,
+                .contradicted,
+                .revoked,
+                .stale,
+                .staleCritical,
+                .unsupported,
+                .unknown,
+                .verifiedByLocalProof
+            ]
+        case .stale, .staleCritical, .disputed, .contradicted, .revoked, .unsupported, .unknown:
+            baselineTargets = [
+                .sourceNeeded,
+                .unknown,
+                .unsupported,
+                .disputed,
+                .contradicted,
+                .revoked
+            ]
+        case .userConfirmed, .imported, .inferred, .ocrDerived:
+            baselineTargets = [
+                .sourceNeeded,
+                .disputed,
+                .contradicted,
+                .revoked,
+                .stale,
+                .sourced,
+                .verifiedByLocalProof
+            ]
+        case .userProvided:
+            baselineTargets = [
+                .sourceNeeded,
+                .userProvided,
+                .imported,
+                .inferred,
+                .ocrDerived,
+                .disputed,
+                .contradicted,
+                .revoked,
+                .sourced
+            ]
+        case .verifiedByLocalProof:
+            baselineTargets = [
+                .official, .semiOfficial, .expert, .community, .maintainerCurated,
+                .stale,
+                .disputed,
+                .contradicted,
+                .revoked,
+                .sourceNeeded
+            ]
+        case .privateClaim, .sourceChanged:
+            baselineTargets = [.sourceNeeded, .revoked, .unknown, .unsupported]
+        }
+
+        guard baselineTargets.contains(target) else {
+            return false
+        }
+
+        if target.isSourceBackedConfidenceState && hasProvenanceEvidence == false {
+            return false
+        }
+        if target == .verifiedByLocalProof && hasLocalProofEvidence == false {
+            return false
+        }
+        return true
+    }
 }
 
 enum SourceAtlasFreshnessState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -205,9 +340,26 @@ struct SourceAtlasClaim: Codable, Sendable, Equatable, Hashable, Identifiable {
 
     var canDriveCurrentRecommendation: Bool {
         state == .official &&
+            sourceIDs.isEmpty == false &&
             freshness == .current &&
             reviewRequired == false &&
             riskClass.requiresStrictReview == false
+    }
+
+    var hasProvenanceEvidence: Bool {
+        sourceIDs.isEmpty == false
+    }
+
+    func canTransition(
+        to target: SourceAtlasClaimState,
+        hasProvenanceEvidence: Bool? = nil,
+        hasLocalProofEvidence: Bool = false
+    ) -> Bool {
+        state.canTransition(
+            to: target,
+            hasProvenanceEvidence: hasProvenanceEvidence ?? self.hasProvenanceEvidence,
+            hasLocalProofEvidence: hasLocalProofEvidence
+        )
     }
 
     private static func orderedUnique(_ values: [String]) -> [String] {

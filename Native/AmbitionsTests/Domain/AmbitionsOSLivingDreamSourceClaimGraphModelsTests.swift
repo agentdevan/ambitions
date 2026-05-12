@@ -117,6 +117,26 @@ final class AmbitionsOSLivingDreamSourceClaimGraphModelsTests: XCTestCase {
         XCTAssertTrue(issues.contains(.userDataServerBoundaryBroken))
         XCTAssertTrue(issues.contains(.runtimeBoundaryBroken))
     }
+
+    func testLivingDreamQualityStateTransitionsRejectInvalidUpgrade() {
+        let inferred = validClaim(
+            id: "claim-inferred",
+            claimQualityState: .sourceAttached,
+            sourceState: .inferred
+        )
+        XCTAssertFalse(
+            AmbitionsOSLivingDreamClaimQualityState.sourceAttached.canTransition(to: .officialSourceBacked, hasProvenanceEvidence: false, hasLocalProofEvidence: false)
+        )
+        XCTAssertTrue(
+            AmbitionsOSLivingDreamClaimQualityState.reviewed.canTransition(
+                to: .officialSourceBacked,
+                hasProvenanceEvidence: true,
+                hasLocalProofEvidence: false
+            )
+        )
+        XCTAssertFalse(inferred.canDriveConsequentialRecommendation)
+        XCTAssertTrue(AmbitionsOSLivingDreamSourceConflictState.confirmed.blocksConsequentialUse)
+    }
 }
 
 private extension AmbitionsOSLivingDreamSourceClaimGraphModelsTests {

@@ -146,6 +146,103 @@ final class SourceAtlasPackModelsTests: XCTestCase {
         XCTAssertFalse(pack.isValidForRuntimeUse)
     }
 
+    func testTransitionToConfidenceStateRequiresProvenanceAndLocalProofEvidence() {
+        let claim = SourceAtlasClaim(
+            id: "claim-locked",
+            text: "Candidate claim waiting for source.",
+            state: .sourceNeeded,
+            freshness: .current,
+            riskClass: .hobby,
+            sourceIDs: []
+        )
+
+        XCTAssertFalse(claim.canTransition(to: .official))
+        XCTAssertTrue(claim.canTransition(to: .sourced))
+        XCTAssertFalse(claim.canTransition(to: .verifiedByLocalProof))
+
+        let claimWithEvidence = SourceAtlasClaim(
+            id: "claim-upgraded",
+            text: "Candidate claim waiting for source.",
+            state: .sourced,
+            freshness: .current,
+            riskClass: .hobby,
+            sourceIDs: ["source-official"]
+        )
+        XCTAssertTrue(claimWithEvidence.canTransition(to: .official))
+        XCTAssertTrue(
+            claimWithEvidence.canTransition(
+                to: .verifiedByLocalProof,
+                hasProvenanceEvidence: true,
+                hasLocalProofEvidence: true
+            )
+        )
+    }
+
+    func testStaleAndDefaultStatesDoNotDriveCurrentRecommendation() {
+        let staleClaim = SourceAtlasClaim(
+            id: "claim-stale",
+            text: "Outdated",
+            state: .stale,
+            freshness: .stale,
+            riskClass: .hobby
+        )
+        let unknownClaim = SourceAtlasClaim(
+            id: "claim-unknown",
+            text: "Needs evidence",
+            state: .unknown,
+            freshness: .unknown,
+            riskClass: .hobby
+        )
+        let userProvided = SourceAtlasClaim(
+            id: "claim-user",
+            text: "User provided.",
+            state: .userProvided,
+            freshness: .current,
+            riskClass: .hobby,
+            reviewRequired: false
+        )
+        let inferred = SourceAtlasClaim(
+            id: "claim-inferred",
+            text: "Inferred",
+            state: .inferred,
+            freshness: .current,
+            riskClass: .hobby,
+            reviewRequired: false
+        )
+        let ocrDerived = SourceAtlasClaim(
+            id: "claim-ocr",
+            text: "OCR derived",
+            state: .ocrDerived,
+            freshness: .current,
+            riskClass: .hobby,
+            reviewRequired: false
+        )
+
+        XCTAssertFalse(staleClaim.canDriveCurrentRecommendation)
+        XCTAssertFalse(unknownClaim.canDriveCurrentRecommendation)
+        XCTAssertFalse(userProvided.canDriveCurrentRecommendation)
+        XCTAssertFalse(inferred.canDriveCurrentRecommendation)
+        XCTAssertFalse(ocrDerived.canDriveCurrentRecommendation)
+        XCTAssertFalse(SourceAtlasClaim(
+            id: "claim-revoked",
+            text: "Revoked",
+            state: .revoked,
+            freshness: .current,
+            riskClass: .hobby,
+            sourceIDs: ["source-official"],
+            reviewRequired: false
+        ).canDriveCurrentRecommendation)
+        XCTAssertFalse(SourceAtlasClaim(
+            id: "claim-disputed",
+            text: "Disputed",
+            state: .disputed,
+            freshness: .current,
+            riskClass: .hobby,
+            sourceIDs: ["source-official"],
+            reviewRequired: false
+        ).canDriveCurrentRecommendation)
+    }
+
     func testCanonIntegrationIsRequired() {
         let pack = Self.validPack(
             manifest: SourceAtlasPackManifest(

@@ -7,18 +7,148 @@ enum AmbitionsOSSourceTruthClaimState: String, Codable, Sendable, Equatable, Has
     case semiOfficialSourceBacked = "semi_official_source_backed"
     case expertSourceBacked = "expert_source_backed"
     case communitySourceBacked = "community_source_backed"
+    case sourcedSourceBacked = "sourced_source_backed"
     case userConfirmed = "user_confirmed"
     case userStated = "user_stated"
     case importedNeedsReview = "imported_needs_review"
     case inferredNeedsReview = "inferred_needs_review"
+    case verifiedByLocalProof = "verified_by_local_proof"
     case sourceNeeded = "source_needed"
     case stale
+    case contradicted
     case changed
     case conflicting
     case disputed
     case unsupported
     case revoked
     case unknown
+
+    var isSourceBacked: Bool {
+        switch self {
+        case .officialSourceBacked, .semiOfficialSourceBacked, .expertSourceBacked, .communitySourceBacked, .sourcedSourceBacked:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var isFormalRecommendationCandidate: Bool {
+        switch self {
+        case .officialSourceBacked, .semiOfficialSourceBacked, .expertSourceBacked, .communitySourceBacked:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var isBlockingState: Bool {
+        switch self {
+        case .changed, .conflicting, .disputed, .contradicted, .unsupported, .revoked, .sourceNeeded, .stale, .unknown:
+            return true
+        default:
+            return false
+        }
+    }
+
+    func canTransition(
+        to target: AmbitionsOSSourceTruthClaimState,
+        hasProvenanceEvidence: Bool,
+        hasLocalProofEvidence: Bool
+    ) -> Bool {
+        if self == target {
+            return true
+        }
+
+        let legalTargets: Set<AmbitionsOSSourceTruthClaimState>
+        switch self {
+        case .sourceNeeded:
+            legalTargets = [
+                .sourceNeeded,
+                .sourcedSourceBacked,
+                .importedNeedsReview,
+                .inferredNeedsReview,
+                .userStated,
+                .userConfirmed,
+                .unknown,
+                .unsupported,
+                .stale,
+                .disputed,
+                .contradicted,
+                .revoked
+            ]
+        case .sourcedSourceBacked:
+            legalTargets = [
+                .verifiedByLocalProof,
+                .officialSourceBacked,
+                .semiOfficialSourceBacked,
+                .expertSourceBacked,
+                .communitySourceBacked,
+                .sourceNeeded,
+                .unknown,
+                .unsupported,
+                .stale,
+                .disputed,
+                .contradicted,
+                .revoked
+            ]
+        case .verifiedByLocalProof:
+            legalTargets = [
+                .officialSourceBacked,
+                .semiOfficialSourceBacked,
+                .expertSourceBacked,
+                .communitySourceBacked,
+                .sourceNeeded,
+                .unknown,
+                .unsupported,
+                .stale,
+                .disputed,
+                .contradicted,
+                .revoked
+            ]
+        case .officialSourceBacked, .semiOfficialSourceBacked, .expertSourceBacked, .communitySourceBacked:
+            legalTargets = [
+                .officialSourceBacked,
+                .semiOfficialSourceBacked,
+                .expertSourceBacked,
+                .communitySourceBacked,
+                .sourcedSourceBacked,
+                .verifiedByLocalProof,
+                .sourceNeeded,
+                .unknown,
+                .unsupported,
+                .changed,
+                .disputed,
+                .revoked
+            ]
+        case .userConfirmed, .importedNeedsReview, .inferredNeedsReview, .userStated:
+            legalTargets = [
+                .sourceNeeded,
+                .sourcedSourceBacked,
+                .verifiedByLocalProof,
+                .disputed,
+                .contradicted,
+                .revoked
+            ]
+        case .changed, .conflicting, .disputed, .contradicted, .unsupported, .unknown, .stale:
+            legalTargets = [.sourceNeeded, .unknown, .unsupported, .disputed, .contradicted, .revoked]
+        case .revoked:
+            legalTargets = [.sourceNeeded, .unknown, .unsupported]
+        }
+
+        guard legalTargets.contains(target) else {
+            return false
+        }
+        if target == .verifiedByLocalProof && hasLocalProofEvidence == false {
+            return false
+        }
+        if target.isSourceBacked && hasProvenanceEvidence == false {
+            return false
+        }
+        if target.isFormalRecommendationCandidate && hasProvenanceEvidence == false {
+            return false
+        }
+        return true
+    }
 }
 
 enum AmbitionsOSSourceQualityState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -58,6 +188,7 @@ enum AmbitionsOSSourceTruthIssue: String, Codable, Sendable, Equatable, Hashable
     case sourceCertificationOverclaim = "source_certification_overclaim"
     case privateExternalProjectionRisk = "private_external_projection_risk"
     case runtimeStoreBehavior = "runtime_store_behavior"
+    case invalidClaimTransition = "invalid_claim_transition"
 }
 
 struct AmbitionsOSSourceReference: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -148,8 +279,11 @@ struct AmbitionsOSSourceTruthClaim: Codable, Sendable, Equatable, Hashable, Iden
             state == .sourceNeeded ||
             state == .importedNeedsReview ||
             state == .inferredNeedsReview ||
+            state == .sourcedSourceBacked ||
+            state == .verifiedByLocalProof ||
             state == .conflicting ||
             state == .disputed ||
+            state == .contradicted ||
             state == .unknown ||
             freshnessState.blocksHighRiskUse
     }
@@ -167,10 +301,12 @@ struct AmbitionsOSSourceTruthClaim: Codable, Sendable, Equatable, Hashable, Iden
         case .officialSourceBacked, .semiOfficialSourceBacked, .expertSourceBacked, .userConfirmed:
             return freshnessState.blocksHighRiskUse == false &&
                 reviewState == .ready &&
-                privacyClass != .deletePending
+                privacyClass != .deletePending &&
+                (state == .userConfirmed || sourceIDs.isEmpty == false)
         case .communitySourceBacked, .userStated, .importedNeedsReview,
              .inferredNeedsReview, .sourceNeeded, .stale, .changed, .conflicting,
-             .disputed, .unsupported, .revoked, .unknown:
+             .disputed, .unsupported, .revoked, .unknown, .sourcedSourceBacked,
+             .verifiedByLocalProof, .contradicted:
             return false
         }
     }
@@ -193,6 +329,7 @@ struct AmbitionsOSSourceTruthTransition: Codable, Sendable, Equatable, Hashable,
     let receiptIDs: [String]
     let changedSourceIDs: [String]
     let userReviewed: Bool
+    let localProofEvidenceIDs: [String]
 
     init(
         claimID: String,
@@ -202,6 +339,7 @@ struct AmbitionsOSSourceTruthTransition: Codable, Sendable, Equatable, Hashable,
         receiptIDs: [String] = [],
         changedSourceIDs: [String] = [],
         userReviewed: Bool,
+        localProofEvidenceIDs: [String] = [],
         id: String? = nil
     ) {
         self.claimID = claimID.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -211,14 +349,23 @@ struct AmbitionsOSSourceTruthTransition: Codable, Sendable, Equatable, Hashable,
         self.receiptIDs = Self.orderedUnique(receiptIDs)
         self.changedSourceIDs = Self.orderedUnique(changedSourceIDs)
         self.userReviewed = userReviewed
+        self.localProofEvidenceIDs = Self.orderedUnique(localProofEvidenceIDs)
         self.id = id ?? "\(self.claimID):\(fromState.rawValue):\(toState.rawValue)"
     }
 
     var isReviewable: Bool {
         claimID.isEmpty == false &&
             reason.isEmpty == false &&
-            receiptIDs.isEmpty == false &&
+            ((receiptIDs.isEmpty == false) || (localProofEvidenceIDs.isEmpty == false)) &&
             userReviewed
+    }
+
+    var hasProvenanceEvidence: Bool {
+        changedSourceIDs.isEmpty == false
+    }
+
+    var hasLocalProofEvidence: Bool {
+        localProofEvidenceIDs.isEmpty == false
     }
 
     private static func orderedUnique(_ values: [String]) -> [String] {
@@ -271,6 +418,10 @@ struct AmbitionsOSSourceTruthValidator: Sendable, Equatable, Hashable {
         if Set(claimIDs).count != claimIDs.count {
             issues.insert(.duplicateClaimID)
         }
+        let claimsByID = ledger.claims.reduce(into: [String: AmbitionsOSSourceTruthClaim]()) { result, claim in
+            guard result[claim.id] == nil else { return }
+            result[claim.id] = claim
+        }
 
         let officialSourceIDs = Set(
             ledger.sources
@@ -282,8 +433,26 @@ struct AmbitionsOSSourceTruthValidator: Sendable, Equatable, Hashable {
             validate(claim: claim, officialSourceIDs: officialSourceIDs, issues: &issues)
         }
 
-        for transition in ledger.transitions where transition.isReviewable == false {
-            issues.insert(.silentClaimMutation)
+        for transition in ledger.transitions {
+            guard let claim = claimsByID[transition.claimID] else {
+                issues.insert(.silentClaimMutation)
+                continue
+            }
+            if transition.fromState != claim.state {
+                issues.insert(.invalidClaimTransition)
+                continue
+            }
+            guard transition.isReviewable else {
+                issues.insert(.silentClaimMutation)
+                continue
+            }
+            if transition.fromState.canTransition(
+                to: transition.toState,
+                hasProvenanceEvidence: transition.hasProvenanceEvidence || claim.sourceIDs.isEmpty == false,
+                hasLocalProofEvidence: transition.hasLocalProofEvidence
+            ) == false {
+                issues.insert(.invalidClaimTransition)
+            }
         }
 
         return issues.sorted { $0.rawValue < $1.rawValue }

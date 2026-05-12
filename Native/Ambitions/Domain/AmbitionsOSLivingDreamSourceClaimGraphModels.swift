@@ -64,13 +64,76 @@ enum AmbitionsOSLivingDreamClaimQualityState: String, Codable, Sendable, Equatab
     case withdrawn
     case professionalReviewRequired = "professional_review_required"
     case localOnly = "local_only"
+    case verifiedByLocalProof = "verified_by_local_proof"
+
+    var isSourceBacked: Bool {
+        switch self {
+        case .officialSourceBacked, .reviewed:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var allowsConsequentialUse: Bool {
+        switch self {
+        case .officialSourceBacked, .reviewed:
+            return true
+        case .draft, .sourceAttached, .schemaValid, .stale, .conflict,
+             .withdrawn, .professionalReviewRequired, .localOnly, .verifiedByLocalProof:
+            return false
+        }
+    }
+
+    func canTransition(to target: AmbitionsOSLivingDreamClaimQualityState, hasProvenanceEvidence: Bool, hasLocalProofEvidence: Bool) -> Bool {
+        if self == target {
+            return true
+        }
+
+        let legalTargets: Set<AmbitionsOSLivingDreamClaimQualityState>
+        switch self {
+        case .draft:
+            legalTargets = [.sourceAttached, .schemaValid, .localOnly, .withdrawn]
+        case .sourceAttached:
+            legalTargets = [.schemaValid, .stale, .conflict, .withdrawn, .localOnly]
+        case .schemaValid:
+            legalTargets = [.reviewed, .conflict, .withdrawn, .stale, .verifiedByLocalProof]
+        case .reviewed:
+            legalTargets = [.officialSourceBacked, .withdrawn, .professionalReviewRequired, .conflict]
+        case .officialSourceBacked:
+            legalTargets = [.officialSourceBacked, .stale, .conflict, .withdrawn]
+        case .stale:
+            legalTargets = [.conflict, .withdrawn]
+        case .conflict:
+            legalTargets = [.withdrawn, .verifiedByLocalProof]
+        case .withdrawn:
+            legalTargets = [.verifiedByLocalProof, .professionalReviewRequired, .draft]
+        case .professionalReviewRequired:
+            legalTargets = [.withdrawn, .verifiedByLocalProof]
+        case .localOnly:
+            legalTargets = [.draft, .withdrawn, .verifiedByLocalProof]
+        case .verifiedByLocalProof:
+            legalTargets = [.officialSourceBacked, .withdrawn, .conflict]
+        }
+
+        guard legalTargets.contains(target) else {
+            return false
+        }
+        if target == .verifiedByLocalProof && hasLocalProofEvidence == false {
+            return false
+        }
+        if target == .officialSourceBacked && hasProvenanceEvidence == false {
+            return false
+        }
+        return true
+    }
 
     var isReviewedEnoughForConsequentialUse: Bool {
         switch self {
         case .reviewed, .officialSourceBacked:
             return true
         case .draft, .sourceAttached, .schemaValid, .stale, .conflict,
-             .withdrawn, .professionalReviewRequired, .localOnly:
+             .withdrawn, .professionalReviewRequired, .localOnly, .verifiedByLocalProof:
             return false
         }
     }
