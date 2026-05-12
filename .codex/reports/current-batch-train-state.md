@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK24 EventKit Through SideEffectLedger / Accepted Yellow.
-Next recommended implementation pass: PK25 External Snapshots Through SideEffectLedger.
-Next eligible non-UI platform batch: PK25 External Snapshots Through SideEffectLedger.
-Scope: PK24 adds bounded EventKit read/write outcome recording through the SideEffectLedger; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+Current batch: PK25 External Snapshots Through SideEffectLedger / Green.
+Next recommended implementation pass: PK26 Privacy Classification System.
+Next eligible non-UI platform batch: PK26 Privacy Classification System.
+Scope: PK25 adds bounded external snapshot success/failure recording through the SideEffectLedger; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+
+## PK25 External Snapshots Through SideEffectLedger Closeout
+
+- PK25 report: `docs/audits/pk25-batch-closeout-report.md`.
+- Scope: External snapshot refresh now records local-only success and failed-safe outcomes in the SideEffectLedger while preserving best-effort/non-blocking snapshot behavior.
+- Commit: `2f27ef1a5fc921db6d00f999797972f5b6cea3eb` (`PK25: complete hybrid Codex batch`), pushed to `main`.
+- Proof: `git diff --check`, `make batch-self-check`, `make prompt-audit`, forbidden-claim scan, and focused `ExternalSurfaceSnapshotTests` passed. Prompt audit remains the expected non-blocking Yellow classification for support/eval/template files.
+- Canonical queue now marks PK25 Green and PK26 executable now.
+- EFC applicability: invoked for side-effect/external-snapshot behavior and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK24 EventKit Through SideEffectLedger Closeout
 

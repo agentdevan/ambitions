@@ -196,16 +196,16 @@
     {
       "id": "PK25",
       "title": "External Snapshots Through SideEffectLedger",
-      "classification": "executable_now",
-      "reason": "PK24 EventKit Through SideEffectLedger is complete / Accepted Yellow with bounded proof-path advisories. PK25 is the current implementation batch; later PK stays serial/dependency gated.",
-      "blocking_prerequisites": "Complete prior PK batch PK24 and any data-safety proof named by the PK train.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK25 External Snapshots Through SideEffectLedger is complete / Green with proof in docs/audits/pk25-batch-closeout-report.md. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK26",
       "title": "Privacy Classification System",
-      "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK22; PK23 is the current implementation batch, later PK stays serial/dependency gated.",
+      "classification": "executable_now",
+      "reason": "PK25 External Snapshots Through SideEffectLedger is complete / Green with bounded proof. PK26 is the current implementation batch; later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK25 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },
