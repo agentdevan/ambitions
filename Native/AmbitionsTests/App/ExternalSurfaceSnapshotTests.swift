@@ -455,6 +455,234 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         let refreshCount = await writer.refreshCount
         XCTAssertEqual(refreshCount, 4)
     }
+
+    func testSnapshotWriterRecordsExternalSnapshotSuccessInSideEffectLedger() async {
+        let goal = makeGoal(
+            goalID: "goal-success",
+            goalTitle: "System title",
+            stepID: "step-success",
+            stepTitle: "Complete task",
+            dueAt: "2026-04-16T09:00:00Z"
+        )
+        let sideEffectLedger = InMemorySideEffectLedgerRepository()
+        let repositories = StaticSnapshotWriterRepositories(goals: [goal])
+        let now = Date(timeIntervalSince1970: 1_712_779_200)
+        let writer = ExternalSurfaceSnapshotWriter(
+            repositories: AppRepositories(
+                goals: repositories,
+                drafts: repositories,
+                evidence: repositories,
+                feedback: repositories,
+                captures: repositories,
+                teaching: repositories,
+                eventLedger: InMemoryEventLedgerRepository(),
+                sideEffectLedger: sideEffectLedger,
+                appState: repositories
+            ),
+            sink: NoopExternalSurfaceSnapshotDataSink()
+        )
+
+        await writer.refresh(now: now)
+
+        let record = try? await sideEffectLedger.fetchRecord(id: "externalSnapshot.recorded_local_only.1712779200")
+
+        XCTAssertEqual(record?.effectKind, .externalSnapshot)
+        XCTAssertEqual(record?.status, .recordedLocalOnly)
+        XCTAssertEqual(record?.boundary, .localOnly)
+        XCTAssertEqual(record?.sourceDomain, .system)
+        XCTAssertEqual(record?.actionKind, .noOp)
+        XCTAssertEqual(record?.occurredAt, DomainTimestamp.string(from: now))
+    }
+
+    func testSnapshotWriterRecordsFailedWriteFailureInSideEffectLedger() async {
+        let sideEffectLedger = InMemorySideEffectLedgerRepository()
+        let repositories = StaticSnapshotWriterRepositories()
+        let now = Date(timeIntervalSince1970: 1_712_779_200)
+        let writer = ExternalSurfaceSnapshotWriter(
+            repositories: AppRepositories(
+                goals: repositories,
+                drafts: repositories,
+                evidence: repositories,
+                feedback: repositories,
+                captures: repositories,
+                teaching: repositories,
+                eventLedger: InMemoryEventLedgerRepository(),
+                sideEffectLedger: sideEffectLedger,
+                appState: repositories
+            ),
+            sink: ThrowingExternalSurfaceSnapshotDataSink()
+        )
+
+        await writer.refresh(now: now)
+
+        let record = try? await sideEffectLedger.fetchRecord(id: "externalSnapshot.failed_safely.1712779200")
+
+        XCTAssertEqual(record?.effectKind, .externalSnapshot)
+        XCTAssertEqual(record?.status, .failedSafely)
+        XCTAssertEqual(record?.boundary, .localOnly)
+        XCTAssertEqual(record?.sourceDomain, .system)
+        XCTAssertTrue(record?.degradedFacts.contains("External snapshot refresh/write did not complete.") ?? false)
+    }
+}
+
+private actor StaticSnapshotWriterRepositories: GoalRepository, GoalDraftRepository, ProgressEvidenceRepository, FeedbackEventRepository, CaptureRepository, GoalTeachingSignalRepository, EventLedgerRepository, AppStateRepository {
+    private let goals: [Goal]
+
+    init(goals: [Goal] = []) {
+        self.goals = goals
+    }
+
+    func listGoals() async throws -> [Goal] {
+        goals
+    }
+
+    func listHabitGoals() async throws -> [Goal] {
+        goals
+    }
+
+    func goal(id: String) async throws -> Goal? {
+        goals.first { $0.id == id }
+    }
+
+    func saveGoals(_ goals: [Goal]) async throws {
+        _ = goals
+    }
+
+    func deleteGoal(id: String) async throws {
+        _ = id
+    }
+
+    func listActionableSteps() async throws -> [Step] {
+        goals.flatMap { $0.plan.sections.flatMap { $0.steps } }
+    }
+
+    func listSteps(goalID: String) async throws -> [Step] {
+        goals
+            .first(where: { $0.id == goalID })?
+            .plan
+            .sections
+            .flatMap { $0.steps } ?? []
+    }
+
+    func listDrafts() async throws -> [PersistedGoalDraft] {
+        []
+    }
+
+    func draft(id: String) async throws -> PersistedGoalDraft? {
+        _ = id
+        return nil
+    }
+
+    func saveDrafts(_ drafts: [PersistedGoalDraft]) async throws {
+        _ = drafts
+    }
+
+    func deleteDraft(id: String) async throws {
+        _ = id
+    }
+
+    func listEvidence(goalID: String?) async throws -> [ProgressEvidence] {
+        _ = goalID
+        return []
+    }
+
+    func saveEvidence(_ evidence: [ProgressEvidence]) async throws {
+        _ = evidence
+    }
+
+    func listEvents(goalID: String?) async throws -> [GoalFeedbackEvent] {
+        _ = goalID
+        return []
+    }
+
+    func saveEvents(_ events: [GoalFeedbackEvent], goalID: String) async throws {
+        _ = events
+        _ = goalID
+    }
+
+    func listSignals(goalID: String?) async throws -> [GoalTeachingSignal] {
+        _ = goalID
+        return []
+    }
+
+    func saveSignals(_ signals: [GoalTeachingSignal]) async throws {
+        _ = signals
+    }
+
+    func listCaptures() async throws -> [Capture] {
+        []
+    }
+
+    func capture(id: String) async throws -> Capture? {
+        _ = id
+        return nil
+    }
+
+    func saveCaptures(_ captures: [Capture]) async throws {
+        _ = captures
+    }
+
+    func append(_ event: EventLedgerEntry) async throws {
+        _ = event
+    }
+
+    func fetchRecent(limit: Int) async throws -> [EventLedgerEntry] {
+        _ = limit
+        return []
+    }
+
+    func fetchEvents(goalID: String) async throws -> [EventLedgerEntry] {
+        _ = goalID
+        return []
+    }
+
+    func fetchEvents(captureID: String) async throws -> [EventLedgerEntry] {
+        _ = captureID
+        return []
+    }
+
+    func fetchEvents(kind: EventLedgerKind) async throws -> [EventLedgerEntry] {
+        _ = kind
+        return []
+    }
+
+    func fetchEvents(from start: String, through end: String) async throws -> [EventLedgerEntry] {
+        _ = start
+        _ = end
+        return []
+    }
+
+    func redactEvent(id: String, at timestamp: String) async throws {
+        _ = id
+        _ = timestamp
+    }
+
+    func deleteEvent(id: String) async throws {
+        _ = id
+    }
+
+    func loadState() async throws -> AppStateSnapshot {
+        .default
+    }
+
+    func saveState(_ state: AppStateSnapshot) async throws {
+        _ = state
+    }
+}
+
+private struct NoopExternalSurfaceSnapshotDataSink: ExternalSurfaceSnapshotDataSink {
+    func write(_ data: Data) throws {
+        _ = data
+    }
+}
+
+private struct ThrowingExternalSurfaceSnapshotDataSink: ExternalSurfaceSnapshotDataSink {
+    struct SnapshotWriteError: Error {}
+
+    func write(_ data: Data) throws {
+        _ = data
+        throw SnapshotWriteError()
+    }
 }
 
 private extension ExternalSurfaceSnapshotTests {
