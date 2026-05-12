@@ -10,7 +10,7 @@ model_reasoning_effort = "medium"
 project_doc_max_bytes = 49152
 project_root_markers = [".git", "project.yml", "Package.swift"]
 
-approval_policy = "on-failure"
+approval_policy = "never"
 
 sandbox_mode = "danger-full-access"
 [features]
