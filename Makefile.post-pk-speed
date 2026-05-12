@@ -1,0 +1,30 @@
+.PHONY: post-pk-speed-status post-pk-speed-next post-pk-speed-once post-pk-speed-train post-pk-speed-final-gate post-pk-bundles post-pk-router-help post-pk-advance-help post-pk-repair-help
+
+POST_PK_SPEED_TRAINER := scripts/ambitions-post-pk-speed-train.sh
+
+post-pk-speed-status:
+	bash "$(POST_PK_SPEED_TRAINER)" --status
+
+post-pk-speed-next:
+	bash "$(POST_PK_SPEED_TRAINER)" --next
+
+post-pk-speed-once:
+	bash "$(POST_PK_SPEED_TRAINER)" --once
+
+post-pk-speed-train:
+	bash "$(POST_PK_SPEED_TRAINER)" --until-blocked
+
+post-pk-speed-final-gate:
+	bash "$(POST_PK_SPEED_TRAINER)" --final-gate
+
+post-pk-bundles:
+	python3 scripts/ambitions-bundle-next-batches.py
+
+post-pk-router-help:
+	python3 scripts/ambitions-post-pk-speed-router.py --help
+
+post-pk-advance-help:
+	python3 scripts/ambitions-advance-batch-state.py --help
+
+post-pk-repair-help:
+	python3 scripts/ambitions-repair-classifier.py --help
