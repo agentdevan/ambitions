@@ -266,6 +266,7 @@ private extension SourceAtlasPackModelsTests {
         claims: [SourceAtlasClaim]? = nil,
         requirements: [SourceAtlasRequirement]? = nil,
         starterItems: [SourceAtlasStarterItem]? = nil,
+        proofMap: [SourceAtlasProofMapEntry]? = nil,
         projectionRecipes: [SourceAtlasProjectionRecipe]? = nil,
         runtimeBoundary: SourceAtlasRuntimeBoundary = .valueModelOnly,
         composition: SourceAtlasCompositionContract? = nil
@@ -321,12 +322,20 @@ private extension SourceAtlasPackModelsTests {
                     storesFinalSchedule: false
                 )
             ],
-            proofMap: [
+            proofMap: proofMap ?? [
                 SourceAtlasProofMapEntry(
                     id: "proof-serve",
                     requirementID: "requirement-serve",
                     proofDescription: "Video or self-reviewed practice note.",
-                    privacyClass: .privateLife
+                    privacyClass: .privateLife,
+                    proofCandidate: .sourceEvidence,
+                    proofStrength: .officialCertified,
+                    capabilityNodeID: "capability-serve",
+                    sourceRecordIDs: ["source-official"],
+                    sourceClaimIDs: ["claim-serve"],
+                    correctionHookIDs: ["hook-correct-proof-serve"],
+                    revocationHookIDs: ["hook-revoke-proof-serve"],
+                    evidenceLedgerBridgeIDs: ["ledger-proof-serve"]
                 )
             ],
             projectionRecipes: projectionRecipes ?? [
@@ -432,5 +441,176 @@ extension SourceAtlasPackModelsTests {
         XCTAssertTrue(requirement.canDriveCurrentRecommendation)
         XCTAssertTrue(pack.validationIssues.contains(.officialClaimWithoutApprovedSource))
         XCTAssertTrue(pack.validationIssues.contains(.invalidRequirementOverlay))
+    }
+
+    func testProofWithoutSourceOrClaimBindingCannotCertifyCurrentRequirement() {
+        let pack = Self.validPack(
+            proofMap: [
+                SourceAtlasProofMapEntry(
+                    id: "proof-local-only",
+                    requirementID: "requirement-serve",
+                    proofDescription: "Local observation captured from user note.",
+                    privacyClass: .privateLife,
+                    proofCandidate: .localObservation,
+                    proofStrength: .localOnly,
+                    sourceRecordIDs: [],
+                    sourceClaimIDs: []
+                )
+            ]
+        )
+
+        XCTAssertTrue(pack.validationIssues.contains(.proofCannotSupportCurrentRequirement))
+    }
+
+    func testRevokedClaimBlocksProofSupportForCurrentRequirement() {
+        let revokedClaim = SourceAtlasClaim(
+            id: "claim-revoked-proof",
+            text: "This claim was revoked.",
+            state: .revoked,
+            freshness: .current,
+            riskClass: .sportRules,
+            sourceIDs: ["source-official"],
+            reviewRequired: false
+        )
+        let claimBoundRequirement = SourceAtlasRequirement(
+            id: "requirement-revoked-proof",
+            claimID: revokedClaim.id,
+            title: "Use revoked proof",
+            kind: .hard,
+            required: true,
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            riskState: .low,
+            reviewState: .approved
+        )
+        let stalePack = Self.validPack(
+            claims: [revokedClaim],
+            requirements: [claimBoundRequirement],
+            composition: SourceAtlasCompositionContract(
+                dependencyPackIDs: [],
+                reusableNodeIDs: ["pickleball.serve", "pickleball.rules"],
+                overlayDependencyIDs: ["sports.pickleball.rules"],
+                projectionRecipeIDs: ["recipe-pickleball-starter"],
+                ownsIndividualGoalPhrase: false,
+                requirementOverlays: []
+            ),
+            proofMap: [
+                SourceAtlasProofMapEntry(
+                    id: "proof-revoked",
+                    requirementID: claimBoundRequirement.id,
+                    proofDescription: "Revoked claim proof candidate.",
+                    privacyClass: .privateLife,
+                    proofCandidate: .sourceEvidence,
+                    proofStrength: .officialCertified,
+                    sourceRecordIDs: ["source-official"],
+                    sourceClaimIDs: [revokedClaim.id]
+                )
+            ]
+        )
+
+        XCTAssertEqual(stalePack.validationIssues.contains(.proofCannotSupportCurrentRequirement), true)
+        XCTAssertEqual(stalePack.validationIssues.contains(.proofRequiresSourceOrClaimBinding), false)
+        XCTAssertEqual(stalePack.validationIssues.contains(.invalidRequirementOverlay), true)
+    }
+
+    func testSourceNeededClaimCannotSupportCurrentRequirementProof() {
+        let sourceNeededClaim = SourceAtlasClaim(
+            id: "claim-source-needed-proof",
+            text: "This claim still needs a source.",
+            state: .sourceNeeded,
+            freshness: .unknown,
+            riskClass: .sportRules,
+            sourceIDs: ["source-official"],
+            reviewRequired: true
+        )
+        let proof = SourceAtlasProofMapEntry(
+            id: "proof-source-needed",
+            requirementID: "requirement-serve",
+            proofDescription: "Candidate proof before source review.",
+            privacyClass: .privateLife,
+            proofCandidate: .sourceEvidence,
+            proofStrength: .high,
+            sourceRecordIDs: ["source-official"],
+            sourceClaimIDs: [sourceNeededClaim.id]
+        )
+
+        XCTAssertFalse(proof.canSupportCurrentRequirement([sourceNeededClaim.id: sourceNeededClaim]))
+    }
+
+    func testSensitiveProofEntriesAreNotExternallyProjectable() {
+        let sensitiveProof = SourceAtlasProofMapEntry(
+            id: "proof-sensitive",
+            requirementID: "requirement-serve",
+            proofDescription: "Private source sensitive proof.",
+            privacyClass: .sensitive,
+            proofCandidate: .sourceEvidence,
+            proofStrength: .officialCertified,
+            sourceRecordIDs: ["source-official"],
+            sourceClaimIDs: ["claim-serve"]
+        )
+
+        XCTAssertFalse(sensitiveProof.isExternalProjectionSafe)
+        XCTAssertTrue(sensitiveProof.canSupportCurrentRequirement(
+            [ "claim-serve": SourceAtlasClaim(
+                id: "claim-serve",
+                text: "Claimed serve rule.",
+                state: .official,
+                freshness: .current,
+                riskClass: .sportRules,
+                sourceIDs: ["source-official"],
+                reviewRequired: false
+            ) ]
+        ))
+    }
+
+    func testCorrectionAndRevocationProofEntriesRequireBridgeHooks() {
+        let pack = Self.validPack(
+            proofMap: [
+                SourceAtlasProofMapEntry(
+                    id: "proof-requires-correction-hook",
+                    requirementID: "requirement-serve",
+                    proofDescription: "Correction artifact with missing hook.",
+                    proofCandidate: .correctionArtifact,
+                    proofStrength: .high,
+                    sourceRecordIDs: ["source-official"],
+                    sourceClaimIDs: ["claim-serve"]
+                ),
+                SourceAtlasProofMapEntry(
+                    id: "proof-requires-revocation-hook",
+                    requirementID: "requirement-serve",
+                    proofDescription: "Revocation artifact with missing hook.",
+                    proofCandidate: .revocationArtifact,
+                    proofStrength: .high,
+                    sourceRecordIDs: ["source-official"],
+                    sourceClaimIDs: ["claim-serve"]
+                )
+            ]
+        )
+
+        XCTAssertTrue(pack.validationIssues.contains(.invalidRequirementOverlay))
+    }
+
+    func testLocalProofCannotCertifyExternalSourceTruth() {
+        let sourceClaim = SourceAtlasClaim(
+            id: "claim-serve",
+            text: "Verified source-backed claim.",
+            state: .official,
+            freshness: .current,
+            riskClass: .sportRules,
+            sourceIDs: ["source-official"],
+            reviewRequired: false
+        )
+        let localProof = SourceAtlasProofMapEntry(
+            id: "proof-local-cert",
+            requirementID: "requirement-serve",
+            proofDescription: "User provided note.",
+            privacyClass: .privateLife,
+            proofCandidate: .localObservation,
+            proofStrength: .localOnly,
+            sourceRecordIDs: ["source-official"],
+            sourceClaimIDs: [sourceClaim.id]
+        )
+        XCTAssertFalse(localProof.canCertifySourceTruth)
+        XCTAssertFalse(localProof.canSupportCurrentRequirement(["claim-serve": sourceClaim]))
     }
 }

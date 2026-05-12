@@ -236,6 +236,9 @@ enum SourceAtlasValidationIssue: String, Codable, Sendable, Equatable, Hashable,
     case universalScheduledStep = "universal_scheduled_step"
     case projectionRecipeMissingReceipt = "projection_recipe_missing_receipt"
     case runtimeStoreBehavior = "runtime_store_behavior"
+    case proofRequiresSourceOrClaimBinding = "proof_requires_source_or_claim_binding"
+    case proofCannotSupportCurrentRequirement = "proof_cannot_support_current_requirement"
+    case sensitiveProofProjectionRisk = "sensitive_proof_projection_risk"
     case invalidRequirementOverlay = "invalid_requirement_overlay"
 }
 
@@ -465,11 +468,123 @@ struct SourceAtlasStarterItem: Codable, Sendable, Equatable, Hashable, Identifia
     let storesFinalSchedule: Bool
 }
 
+enum SourceAtlasProofCandidate: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case sourceEvidence = "source_evidence"
+    case localObservation = "local_observation"
+    case userProvided = "user_provided"
+    case correctionArtifact = "correction_artifact"
+    case revocationArtifact = "revocation_artifact"
+    case unknown
+}
+
+enum SourceAtlasProofStrength: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case low
+    case moderate
+    case high
+    case officialCertified = "official_certified"
+    case localOnly = "local_only"
+}
+
 struct SourceAtlasProofMapEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let proofCandidate: SourceAtlasProofCandidate
+    let proofStrength: SourceAtlasProofStrength
     let id: String
     let requirementID: String
+    let capabilityNodeID: String?
+    let sourceRecordIDs: [String]
+    let sourceClaimIDs: [String]
     let proofDescription: String
+    let correctionHookIDs: [String]
+    let revocationHookIDs: [String]
     let privacyClass: HumanProgressPrivacyClass
+    let evidenceLedgerBridgeIDs: [String]
+
+    init(
+        id: String,
+        requirementID: String,
+        proofDescription: String,
+        privacyClass: HumanProgressPrivacyClass = .privateLife,
+        proofCandidate: SourceAtlasProofCandidate = .sourceEvidence,
+        proofStrength: SourceAtlasProofStrength = .moderate,
+        capabilityNodeID: String? = nil,
+        sourceRecordIDs: [String] = [],
+        sourceClaimIDs: [String] = [],
+        correctionHookIDs: [String] = [],
+        revocationHookIDs: [String] = [],
+        evidenceLedgerBridgeIDs: [String] = []
+    ) {
+        self.proofCandidate = proofCandidate
+        self.proofStrength = proofStrength
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.requirementID = requirementID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.capabilityNodeID = capabilityNodeID?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceRecordIDs = Self.orderedUnique(sourceRecordIDs)
+        self.sourceClaimIDs = Self.orderedUnique(sourceClaimIDs)
+        self.proofDescription = proofDescription.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.correctionHookIDs = Self.orderedUnique(correctionHookIDs)
+        self.revocationHookIDs = Self.orderedUnique(revocationHookIDs)
+        self.privacyClass = privacyClass
+        self.evidenceLedgerBridgeIDs = Self.orderedUnique(evidenceLedgerBridgeIDs)
+    }
+
+    var isSourceBound: Bool {
+        sourceRecordIDs.isEmpty == false
+    }
+
+    var isClaimBound: Bool {
+        sourceClaimIDs.isEmpty == false
+    }
+
+    var isLocalProofOnly: Bool {
+        proofCandidate == .localObservation && proofStrength == .localOnly
+    }
+
+    var isSourceProofEligible: Bool {
+        isSourceBound && isClaimBound
+    }
+
+    var isExternalProjectionSafe: Bool {
+        privacyClass == .externalRedacted || privacyClass == .shareableByUser
+    }
+
+    var canCertifySourceTruth: Bool {
+        proofCandidate == .sourceEvidence &&
+            proofStrength == .officialCertified &&
+            isSourceProofEligible
+    }
+
+    func canSupportCurrentRequirement(_ claimsByID: [String: SourceAtlasClaim]) -> Bool {
+        let boundClaims = sourceClaimIDs.compactMap { claimsByID[$0] }
+        guard boundClaims.isEmpty == false else {
+            return false
+        }
+        guard boundClaims.count == sourceClaimIDs.count else {
+            return false
+        }
+        if boundClaims.contains(where: { $0.canDriveCurrentRecommendation == false }) {
+            return false
+        }
+        if boundClaims.contains(where: \.state.isBlockingState) {
+            return false
+        }
+        if boundClaims.contains(where: { $0.freshness == .stale || $0.freshness == .staleCritical }) {
+            return false
+        }
+        if isLocalProofOnly {
+            return false
+        }
+        return isSourceProofEligible && (proofStrength == .officialCertified || proofStrength == .high || proofStrength == .moderate)
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
 }
 
 struct SourceAtlasFreshnessPolicy: Codable, Sendable, Equatable, Hashable {
@@ -630,8 +745,38 @@ struct SourceAtlasPackValidator: Sendable, Equatable, Hashable {
             }
         }
 
-        let claimsByID = Dictionary(uniqueKeysWithValues: pack.claims.map { ($0.id, $0) })
         let requirementIDs = Set(pack.requirements.map(\.id))
+        let claimsByID = Dictionary(uniqueKeysWithValues: pack.claims.map { ($0.id, $0) })
+        let requirementsByID = Dictionary(uniqueKeysWithValues: pack.requirements.map { ($0.id, $0) })
+        var requirementSupportsCurrentProof: [String: Bool] = [:]
+        var requirementHasProofEntries: [String: Bool] = [:]
+
+        for entry in pack.proofMap {
+            if entry.requirementID.isEmpty || requirementsByID[entry.requirementID] == nil {
+                issues.insert(.proofCannotSupportCurrentRequirement)
+                continue
+            }
+            if entry.capabilityNodeID == "" {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if entry.proofStrength == .officialCertified && entry.isSourceProofEligible == false {
+                issues.insert(.proofRequiresSourceOrClaimBinding)
+            }
+            if entry.privacyClass == .sensitive && entry.isExternalProjectionSafe == false {
+                issues.insert(.sensitiveProofProjectionRisk)
+            }
+            if entry.proofCandidate == .correctionArtifact && entry.correctionHookIDs.isEmpty {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if entry.proofCandidate == .revocationArtifact && entry.revocationHookIDs.isEmpty {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if entry.canSupportCurrentRequirement(claimsByID) {
+                requirementSupportsCurrentProof[entry.requirementID] = true
+            }
+            requirementHasProofEntries[entry.requirementID] = true
+        }
+
         for requirement in pack.requirements {
             guard let claim = claimsByID[requirement.claimID] else {
                 issues.insert(.invalidRequirementOverlay)
@@ -653,6 +798,10 @@ struct SourceAtlasPackValidator: Sendable, Equatable, Hashable {
             }
             if requirement.riskState == .unknown || requirement.riskState == .high {
                 issues.insert(.invalidRequirementOverlay)
+            }
+            if requirement.canDriveCurrentRecommendation && (requirementHasProofEntries[requirement.id] == false ||
+                requirementSupportsCurrentProof[requirement.id] == false) {
+                issues.insert(.proofCannotSupportCurrentRequirement)
             }
         }
 
