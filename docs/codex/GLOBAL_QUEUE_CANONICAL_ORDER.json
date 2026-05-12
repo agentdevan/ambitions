@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-08",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PK31",
-  "next_eligible_title": "Manual Portable Sync Merge",
+  "next_eligible_batch": "PK32",
+  "next_eligible_title": "Knowledge Claim Boundary Hardening",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -244,16 +244,16 @@
     {
       "id": "PK31",
       "title": "Manual Portable Sync Merge",
-      "classification": "executable_now",
-      "reason": "PK30 Conflict Policy Engine is complete / Green with bounded proof. PK31 is the current implementation batch; later PK stays serial/dependency gated.",
-      "blocking_prerequisites": "Complete prior PK batch PK30 and any data-safety proof named by the PK train.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK31 Manual Portable Sync Merge is complete / Green with proof in docs/audits/pk31-batch-closeout-report.md and commit c3d2b246ab84caf031b2a48188eabbdc13c267cc pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PK32",
       "title": "Knowledge Claim Boundary Hardening",
-      "classification": "executable_later",
-      "reason": "Active Platform Kernel work after PK22; PK23 is the current implementation batch, later PK stays serial/dependency gated.",
+      "classification": "executable_now",
+      "reason": "PK31 Manual Portable Sync Merge is complete / Green with bounded proof. PK32 is the current implementation batch; later PK stays serial/dependency gated.",
       "blocking_prerequisites": "Complete prior PK batch PK31 and any data-safety proof named by the PK train.",
       "efc_applicability": "invoked"
     },

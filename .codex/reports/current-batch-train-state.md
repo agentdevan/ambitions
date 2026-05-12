@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK30 Conflict Policy Engine / Green.
-Next recommended implementation pass: PK31 Manual Portable Sync Merge.
-Next eligible non-UI platform batch: PK31 Manual Portable Sync Merge.
-Scope: PK30 adds deterministic local conflict-policy models and portable snapshot merge comparison wiring; it does not execute sync/cloud behavior, hosted backend behavior, automatic multi-device merge execution, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK31 Manual Portable Sync Merge / Green.
+Next recommended implementation pass: PK32 Knowledge Claim Boundary Hardening.
+Next eligible non-UI platform batch: PK32 Knowledge Claim Boundary Hardening.
+Scope: PK31 adds local manual portable merge plan models and service contract proof; it does not execute sync/cloud behavior, hosted backend behavior, automatic multi-device merge execution, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK31 Manual Portable Sync Merge Closeout
+
+- PK31 report: `docs/audits/pk31-batch-closeout-report.md`.
+- Scope: local manual portable merge plan models, service contract, and focused portable snapshot test.
+- Commit: `c3d2b246ab84caf031b2a48188eabbdc13c267cc` (`PK31: install manual portable merge plan`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `PortableSnapshotServiceTests` passed.
+- Canonical queue now marks PK31 Green and PK32 executable now.
+- EFC applicability: invoked for manual portable merge proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy approval, release-readiness, sync/cloud, hosted AI, automatic multi-device merge execution, or global-train-completion claim is made.
 
 ## PK30 Conflict Policy Engine Closeout
 
