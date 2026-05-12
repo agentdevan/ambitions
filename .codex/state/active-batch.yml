@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK35 Large-Store Fixture Generator"
-  previous_batch: "PK34 Intelligence Quarantine"
+  batch: "PK36 Performance Budgets"
+  previous_batch: "PK35 Large-Store Fixture Generator"
   previous_result: "green"
-  next_eligible_batch: "PK36 Performance Budgets"
+  next_eligible_batch: "PK37 Derived Read-Model Cache"
 codex_os_override:
   active_pass: "platform kernel implementation"
   app_feature_implementation_allowed: true

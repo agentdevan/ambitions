@@ -52,6 +52,14 @@ enum AmbitionsOSPerformanceEnergyIssue: String, Codable, Sendable, Equatable, Ha
     case runtimeStoreBehavior = "runtime_store_behavior"
 }
 
+enum AmbitionsOSPerformanceBudgetMetric: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case interactiveLatency = "interactive_latency"
+    case backgroundDuration = "background_duration"
+    case memory = "memory"
+    case traversalItems = "traversal_items"
+    case wakeups = "wakeups"
+}
+
 struct AmbitionsOSPerformanceBudgetEnvelope: Codable, Sendable, Equatable, Hashable {
     let maxInteractiveLatencyMilliseconds: Int
     let maxBackgroundDurationSeconds: Int
@@ -82,6 +90,46 @@ struct AmbitionsOSPerformanceBudgetEnvelope: Codable, Sendable, Equatable, Hasha
             maxMemoryMegabytes > 0 &&
             maxTraversalItems > 0 &&
             maxWakeupsPerHour >= 0
+    }
+}
+
+struct AmbitionsOSPerformanceWorkloadEstimate: Codable, Sendable, Equatable, Hashable {
+    let interactiveLatencyMilliseconds: Int
+    let backgroundDurationSeconds: Int
+    let memoryMegabytes: Int
+    let traversalItems: Int
+    let wakeupsPerHour: Int
+    let evidenceLevel: AmbitionsOSPerformanceEvidenceLevel
+    let fixtureGroup: String
+
+    init(
+        interactiveLatencyMilliseconds: Int,
+        backgroundDurationSeconds: Int,
+        memoryMegabytes: Int,
+        traversalItems: Int,
+        wakeupsPerHour: Int,
+        evidenceLevel: AmbitionsOSPerformanceEvidenceLevel = .contractOnly,
+        fixtureGroup: String
+    ) {
+        self.interactiveLatencyMilliseconds = max(0, interactiveLatencyMilliseconds)
+        self.backgroundDurationSeconds = max(0, backgroundDurationSeconds)
+        self.memoryMegabytes = max(0, memoryMegabytes)
+        self.traversalItems = max(0, traversalItems)
+        self.wakeupsPerHour = max(0, wakeupsPerHour)
+        self.evidenceLevel = evidenceLevel
+        self.fixtureGroup = fixtureGroup.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+
+struct AmbitionsOSPerformanceBudgetAssessment: Codable, Sendable, Equatable, Hashable {
+    let budgetID: String
+    let estimate: AmbitionsOSPerformanceWorkloadEstimate
+    let exceededMetrics: [AmbitionsOSPerformanceBudgetMetric]
+    let canSupportPerformanceClaim: Bool
+    let disclosureSummary: String
+
+    var isWithinBudget: Bool {
+        exceededMetrics.isEmpty
     }
 }
 
@@ -306,5 +354,47 @@ struct AmbitionsOSPerformanceEnergyValidator: Sendable, Equatable, Hashable {
         if budget.changesAppState || budget.runtimeBoundary.isValueModelOnly == false {
             issues.insert(.runtimeStoreBehavior)
         }
+    }
+}
+
+struct AmbitionsOSPerformanceBudgetEvaluator: Sendable, Equatable, Hashable {
+    func assess(
+        budget: AmbitionsOSPerformanceEnergyBudget,
+        estimate: AmbitionsOSPerformanceWorkloadEstimate
+    ) -> AmbitionsOSPerformanceBudgetAssessment {
+        var exceeded: [AmbitionsOSPerformanceBudgetMetric] = []
+        if estimate.interactiveLatencyMilliseconds > budget.envelope.maxInteractiveLatencyMilliseconds {
+            exceeded.append(.interactiveLatency)
+        }
+        if estimate.backgroundDurationSeconds > budget.envelope.maxBackgroundDurationSeconds {
+            exceeded.append(.backgroundDuration)
+        }
+        if estimate.memoryMegabytes > budget.envelope.maxMemoryMegabytes {
+            exceeded.append(.memory)
+        }
+        if estimate.traversalItems > budget.envelope.maxTraversalItems {
+            exceeded.append(.traversalItems)
+        }
+        if estimate.wakeupsPerHour > budget.envelope.maxWakeupsPerHour {
+            exceeded.append(.wakeups)
+        }
+
+        let measuredEvidence =
+            estimate.evidenceLevel == .deviceMeasured ||
+            estimate.evidenceLevel == .instrumentsMeasured
+        let canSupportPerformanceClaim =
+            exceeded.isEmpty &&
+            measuredEvidence &&
+            budget.measurementPlan.canSupportReleaseClaim
+
+        return AmbitionsOSPerformanceBudgetAssessment(
+            budgetID: budget.id,
+            estimate: estimate,
+            exceededMetrics: exceeded,
+            canSupportPerformanceClaim: canSupportPerformanceClaim,
+            disclosureSummary: exceeded.isEmpty
+                ? "Workload fits the contract budget; measured device performance is still a separate proof gate unless evidence is device or Instruments measured."
+                : "Workload exceeds the contract budget and must degrade, defer, or be reduced before performance claims."
+        )
     }
 }

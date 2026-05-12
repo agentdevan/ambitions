@@ -118,6 +118,76 @@ final class AmbitionsOSPerformanceEnergyModelsTests: XCTestCase {
         XCTAssertTrue(issues.contains(.hiddenMutationRisk))
         XCTAssertTrue(issues.contains(.runtimeStoreBehavior))
     }
+
+    func testPerformanceBudgetEvaluatorKeepsContractAndClaimBoundariesSeparate() {
+        let budget = performanceBudget(
+            measurementPlan: measurementPlan(
+                evidenceLevel: .contractOnly,
+                requiresInstrumentsBeforeReleaseClaim: true
+            )
+        )
+        let estimate = AmbitionsOSPerformanceWorkloadEstimate(
+            interactiveLatencyMilliseconds: 180,
+            backgroundDurationSeconds: 4,
+            memoryMegabytes: 48,
+            traversalItems: 120,
+            wakeupsPerHour: 0,
+            evidenceLevel: .contractOnly,
+            fixtureGroup: "PK35 large-store fixture"
+        )
+
+        let assessment = AmbitionsOSPerformanceBudgetEvaluator().assess(budget: budget, estimate: estimate)
+
+        XCTAssertTrue(assessment.isWithinBudget)
+        XCTAssertEqual(assessment.exceededMetrics, [])
+        XCTAssertFalse(assessment.canSupportPerformanceClaim)
+        XCTAssertTrue(assessment.disclosureSummary.contains("separate proof gate"))
+    }
+
+    func testPerformanceBudgetEvaluatorFlagsExceededMetrics() {
+        let budget = performanceBudget()
+        let estimate = AmbitionsOSPerformanceWorkloadEstimate(
+            interactiveLatencyMilliseconds: 251,
+            backgroundDurationSeconds: 11,
+            memoryMegabytes: 65,
+            traversalItems: 251,
+            wakeupsPerHour: 1,
+            evidenceLevel: .simulatorMeasured,
+            fixtureGroup: "Over-budget fixture"
+        )
+
+        let assessment = AmbitionsOSPerformanceBudgetEvaluator().assess(budget: budget, estimate: estimate)
+
+        XCTAssertFalse(assessment.isWithinBudget)
+        XCTAssertEqual(
+            assessment.exceededMetrics,
+            [.interactiveLatency, .backgroundDuration, .memory, .traversalItems, .wakeups]
+        )
+        XCTAssertFalse(assessment.canSupportPerformanceClaim)
+    }
+
+    func testPerformanceBudgetEvaluatorAllowsClaimOnlyWithMeasuredEvidenceAndCleanBudget() {
+        let budget = performanceBudget(
+            measurementPlan: measurementPlan(
+                evidenceLevel: .instrumentsMeasured,
+                requiresInstrumentsBeforeReleaseClaim: true
+            )
+        )
+        let estimate = AmbitionsOSPerformanceWorkloadEstimate(
+            interactiveLatencyMilliseconds: 180,
+            backgroundDurationSeconds: 4,
+            memoryMegabytes: 48,
+            traversalItems: 120,
+            wakeupsPerHour: 0,
+            evidenceLevel: .instrumentsMeasured,
+            fixtureGroup: "Measured large-store fixture"
+        )
+
+        let assessment = AmbitionsOSPerformanceBudgetEvaluator().assess(budget: budget, estimate: estimate)
+
+        XCTAssertTrue(assessment.isWithinBudget)
+        XCTAssertTrue(assessment.canSupportPerformanceClaim)
+    }
 }
 
 private extension AmbitionsOSPerformanceEnergyModelsTests {

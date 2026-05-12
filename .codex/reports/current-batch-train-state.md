@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK35 Large-Store Fixture Generator / Green.
-Next recommended implementation pass: PK36 Performance Budgets.
-Next eligible non-UI platform batch: PK36 Performance Budgets.
-Scope: PK35 adds deterministic local in-memory large-store fixture generation; it does not execute external/cloud LLM behavior, hosted backend behavior, persistence writes, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK36 Performance Budgets / Green.
+Next recommended implementation pass: PK37 Derived Read-Model Cache.
+Next eligible non-UI platform batch: PK37 Derived Read-Model Cache.
+Scope: PK36 adds deterministic performance-budget assessment; it does not execute external/cloud LLM behavior, hosted backend behavior, telemetry, profiling automation, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK36 Performance Budgets Closeout
+
+- PK36 report: `docs/audits/pk36-batch-closeout-report.md`.
+- Scope: deterministic performance-budget workload estimates and assessment against the existing AmbitionsOS performance-energy budget contract.
+- Commit: same closeout commit (`PK36: install performance budget assessment`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `AmbitionsOSPerformanceEnergyModelsTests` passed.
+- Canonical queue now marks PK36 Green and PK37 executable now.
+- EFC applicability: invoked for performance budget and claim-boundary proof integrity.
+- No full-suite, device, accessibility, performance validation, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, telemetry, profiling automation, or global-train-completion claim is made.
 
 ## PK35 Large-Store Fixture Generator Closeout
 
