@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK40 Move Runtime To Package / Green.
-Next recommended implementation pass: PK41 Move Feature Engines To Package.
-Next eligible non-UI platform batch: PK41 Move Feature Engines To Package.
-Scope: PK40 adds a runtime package-boundary manifest and validator; it does not execute external/cloud LLM behavior, hosted backend behavior, Package.swift/project.yml wiring, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK41 Move Feature Engines To Package / Green.
+Next recommended implementation pass: SA07 Claim State Machine.
+Next eligible non-UI platform batch: SA07 Claim State Machine.
+Scope: PK41 adds a feature-engine package-boundary manifest and validator; it does not execute external/cloud LLM behavior, hosted backend behavior, Package.swift/project.yml wiring, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, visual runtime completion, or global train completion claims.
+
+## PK41 Move Feature Engines To Package Closeout
+
+- PK41 report: `docs/audits/pk41-batch-closeout-report.md`.
+- Scope: Feature-engine package-boundary manifest and validator, with explicit package/project wiring, visual-runtime-completion, and top-level IA non-claims.
+- Commit: same closeout commit (`PK41: install feature engine package boundary`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `FeatureEnginePackageBoundaryModelsTests` passed.
+- Canonical queue now marks PK41 Green and SA07 executable now.
+- EFC applicability: invoked for modularization boundary and IA-root preservation proof integrity.
+- No full-suite, device, accessibility, performance validation, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, Package.swift/project.yml wiring, visual-runtime-completion, or global-train-completion claim is made.
 
 ## PK40 Move Runtime To Package Closeout
 

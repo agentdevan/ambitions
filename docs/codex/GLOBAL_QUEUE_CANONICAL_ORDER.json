@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-08",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PK41",
-  "next_eligible_title": "Move Feature Engines To Package",
+  "next_eligible_batch": "SA07",
+  "next_eligible_title": "Claim State Machine",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -324,17 +324,17 @@
     {
       "id": "PK41",
       "title": "Move Feature Engines To Package",
-      "classification": "executable_now",
-      "reason": "PK40 Move Runtime To Package is complete / Green with bounded proof. PK41 is the current implementation batch; later PK stays serial/dependency gated.",
-      "blocking_prerequisites": "Complete prior PK batch PK40 and any data-safety proof named by the PK train.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PK41 Move Feature Engines To Package is complete / Green with proof in docs/audits/pk41-batch-closeout-report.md and the same closeout commit pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA07",
       "title": "Claim State Machine",
-      "classification": "executable_later",
-      "reason": "Source Atlas is now visible to the autonomous queue, but runs after PK safety prerequisites or when selected as a hard dependency for source/freshness work.",
-      "blocking_prerequisites": "PK source/storage prerequisites and SA06 completion evidence; do not skip SA in fallback order.",
+      "classification": "executable_now",
+      "reason": "PK41 Move Feature Engines To Package is complete / Green with bounded proof. SA07 is the current implementation batch for post-PK speed-layer continuation.",
+      "blocking_prerequisites": "Complete prior PK41 batch and any SA06 source-claim prerequisites named by Source Atlas.",
       "efc_applicability": "invoked"
     },
     {
