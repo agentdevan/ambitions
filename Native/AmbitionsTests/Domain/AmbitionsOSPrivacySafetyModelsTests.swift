@@ -210,6 +210,25 @@ final class AmbitionsOSPrivacySafetyModelsTests: XCTestCase {
         XCTAssertTrue(issues.contains(.hiddenMutationRisk))
         XCTAssertTrue(issues.contains(.runtimeStoreBehavior))
     }
+
+    func testPrivacyClassificationDerivesDeterministicDiagnosticLedgerEntry() {
+        let policy = privacyPolicy(
+            sensitiveAreas: [.medical],
+            receipts: [receipt(id: "r-2"), receipt(id: "r-1")]
+        )
+        let classification = validator.classify(policy)
+
+        let diagnostic = classification.toDiagnosticLedgerEntry(occurredAt: "2026-05-12T12:45:00Z")
+
+        XCTAssertEqual(diagnostic.signal, .privacySafety)
+        XCTAssertEqual(diagnostic.sourceRecordID, classification.id)
+        XCTAssertEqual(diagnostic.severity, .caution)
+        XCTAssertEqual(diagnostic.localOnly, true)
+        XCTAssertTrue(diagnostic.requiresReview)
+        XCTAssertEqual(diagnostic.metadata["policyID"], policy.id)
+        XCTAssertEqual(diagnostic.metadata["humanProgressPrivacyClass"], HumanProgressPrivacyClass.privateLife.rawValue)
+        XCTAssertFalse(diagnostic.isAttentionRequired == false)
+    }
 }
 
 private extension AmbitionsOSPrivacySafetyModelsTests {

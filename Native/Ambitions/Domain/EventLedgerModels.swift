@@ -375,3 +375,302 @@ extension EventLedgerEntry {
         )
     }
 }
+
+let diagnosticLedgerSchemaVersion = "diagnostic_ledger.native.v1"
+
+enum DiagnosticLedgerSignal: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case eventLedger = "event_ledger"
+    case sideEffectLedger = "side_effect_ledger"
+    case privacySafety = "privacy_safety"
+}
+
+enum DiagnosticLedgerSeverity: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case info
+    case caution
+    case warning
+    case blocked
+    case critical
+
+    var requiresAttention: Bool {
+        switch self {
+        case .info:
+            false
+        case .caution, .warning, .blocked, .critical:
+            true
+        }
+    }
+}
+
+struct DiagnosticLedgerEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let signal: DiagnosticLedgerSignal
+    let sourceRecordID: String
+    let occurredAt: String
+    let title: String
+    let summary: String
+    let severity: DiagnosticLedgerSeverity
+    let localOnly: Bool
+    let requiresReview: Bool
+    let privacy: EventLedgerPrivacyClassification
+    let sideEffectBoundary: SideEffectLedgerBoundary?
+    let schemaVersion: String
+    let metadata: [String: String]
+    let payload: [String: String]
+    let createdAt: String
+    let issueFingerprint: String
+
+    init(
+        signal: DiagnosticLedgerSignal,
+        sourceRecordID: String,
+        occurredAt: String,
+        title: String,
+        summary: String,
+        severity: DiagnosticLedgerSeverity,
+        localOnly: Bool = true,
+        requiresReview: Bool = false,
+        privacy: EventLedgerPrivacyClassification = .standard,
+        sideEffectBoundary: SideEffectLedgerBoundary? = nil,
+        schemaVersion: String = diagnosticLedgerSchemaVersion,
+        metadata: [String: String] = [:],
+        payload: [String: String] = [:],
+        createdAt: String? = nil
+    ) {
+        self.id = "diag.\(signal.rawValue).\(sourceRecordID)"
+        self.signal = signal
+        self.sourceRecordID = sourceRecordID
+        self.occurredAt = occurredAt.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.title = title
+        self.summary = summary.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.severity = severity
+        self.localOnly = localOnly
+        self.requiresReview = requiresReview
+        self.privacy = privacy
+        self.sideEffectBoundary = sideEffectBoundary
+        self.schemaVersion = schemaVersion
+        self.metadata = metadata
+        self.payload = payload
+        self.createdAt = createdAt?.trimmingCharacters(in: .whitespacesAndNewlines) ?? occurredAt
+        self.issueFingerprint = "\(signal.rawValue)|\(sourceRecordID)|\(severity.rawValue)|\(privacy.rawValue)|\(summary)"
+    }
+
+    var isAttentionRequired: Bool {
+        requiresReview || severity.requiresAttention
+    }
+}
+
+extension EventLedgerEntry {
+    func toDiagnosticLedgerEntry() -> DiagnosticLedgerEntry {
+        let isSensitive = privacy == .sensitive || privacy == .privateUserText
+        let severity: DiagnosticLedgerSeverity = {
+            switch tone {
+            case .positive, .neutral:
+                return isSensitive ? .caution : .info
+            case .recovering, .caution:
+                return .warning
+            case .correction:
+                return .caution
+            }
+        }()
+
+        return DiagnosticLedgerEntry(
+            signal: .eventLedger,
+            sourceRecordID: id,
+            occurredAt: occurredAt,
+            title: "EventLedger \(kind.rawValue)",
+            summary: title,
+            severity: severity,
+            localOnly: localOnly,
+            requiresReview: trust.requiresReview || isSensitive,
+            privacy: privacy,
+            metadata: [
+                "goalID": goalID ?? "",
+                "captureID": captureID ?? "",
+                "planID": planID ?? "",
+                "planScope": planScope ?? "",
+                "reviewID": reviewID ?? "",
+                "source": source.rawValue,
+                "kind": kind.rawValue,
+                "tone": tone.rawValue,
+                "sourceConfirmed": String(trust.isUserConfirmed)
+            ].filter { $0.value.isEmpty == false },
+            payload: payload
+        )
+    }
+}
+
+extension SideEffectLedgerRecord {
+    func toDiagnosticLedgerEntry() -> DiagnosticLedgerEntry {
+        let severity: DiagnosticLedgerSeverity = {
+            switch boundary {
+            case .destructive:
+                return .critical
+            case .privacySensitive, .externalEffect, .confirmationGate:
+                return .warning
+            case .unsupported:
+                return .blocked
+            case .localOnly:
+                return .info
+            }
+        }()
+        let summary = "SideEffect \(effectKind.rawValue) from \(actionKind.rawValue)"
+
+        return DiagnosticLedgerEntry(
+            signal: .sideEffectLedger,
+            sourceRecordID: id,
+            occurredAt: occurredAt,
+            title: "SideEffect \(effectKind.rawValue)",
+            summary: summary,
+            severity: severity,
+            localOnly: localOnly,
+            requiresReview: boundary != .localOnly || requiresConfirmation || status != .recordedLocalOnly,
+            privacy: boundary == .localOnly ? .standard : .privateUserText,
+            sideEffectBoundary: boundary,
+            metadata: [
+                "actionKind": actionKind.rawValue,
+                "status": status.rawValue,
+                "boundary": boundary.rawValue,
+                "sourceDomain": sourceDomain.rawValue,
+                "requiresConfirmation": String(requiresConfirmation),
+                "externalEffect": String(externalEffect)
+            ],
+            payload: [
+                "blockedFacts": blockedFacts.joined(separator: "|"),
+                "degradedFacts": degradedFacts.joined(separator: "|"),
+                "receiptID": receiptID ?? ""
+            ].filter { $0.value.isEmpty == false }
+        )
+    }
+}
+
+extension AmbitionsOSPrivacySafetyClassification {
+    func toDiagnosticLedgerEntry(occurredAt: String) -> DiagnosticLedgerEntry {
+        let severity: DiagnosticLedgerSeverity = {
+            switch classification {
+            case .local:
+                return .info
+            case .localRedacted:
+                return .caution
+            case .externalRedacted:
+                return .warning
+            case .blocked:
+                return .warning
+            case .unsafe:
+                return .critical
+            }
+        }()
+
+        return DiagnosticLedgerEntry(
+            signal: .privacySafety,
+            sourceRecordID: id,
+            occurredAt: occurredAt,
+            title: "PrivacySafety \(classification.rawValue)",
+            summary: "Policy \(policyID) -> \(humanProgressPrivacyClass.rawValue)",
+            severity: severity,
+            localOnly: true,
+            requiresReview: requiresUserReview || classification != .local,
+            privacy: eventLedgerPrivacyClassification,
+            sideEffectBoundary: sideEffectLedgerBoundary,
+            metadata: [
+                "policyID": policyID,
+                "humanProgressPrivacyClass": humanProgressPrivacyClass.rawValue,
+                "projectionPolicy": projectionPolicy.rawValue,
+                "localProjectionOnly": String(localProjectionOnly),
+                "externallyProjectable": String(externallyProjectable),
+                "requiresRedaction": String(requiresRedaction),
+                "receiptCompatible": String(receiptCompatible),
+                "classification": classification.rawValue
+            ],
+            payload: [
+                "issues": issues.map(\.rawValue).joined(separator: "|"),
+                "actionReceiptPrivacyLevel": actionReceiptPrivacyLevel.rawValue,
+                "issueFingerprint": issueFingerprint
+            ].filter { $0.value.isEmpty == false },
+            createdAt: occurredAt
+        )
+    }
+}
+
+struct DiagnosticLedgerSnapshot: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let generatedAt: String
+    let schemaVersion: String
+    let entries: [DiagnosticLedgerEntry]
+    let entryFingerprint: String
+    let requiresAttention: Bool
+
+    init(
+        eventLedger: [EventLedgerEntry],
+        sideEffectLedger: [SideEffectLedgerRecord],
+        privacyClassifications: [AmbitionsOSPrivacySafetyClassification],
+        generatedAt: String
+    ) {
+        let eventDiagnostics = eventLedger.map { $0.toDiagnosticLedgerEntry() }
+        let sideEffectDiagnostics = sideEffectLedger.map { $0.toDiagnosticLedgerEntry() }
+        let privacyDiagnostics = privacyClassifications.map {
+            $0.toDiagnosticLedgerEntry(occurredAt: generatedAt)
+        }
+        let orderedEntries = Self.orderedUniqueDiagnostics(
+            entries: eventDiagnostics + sideEffectDiagnostics + privacyDiagnostics
+        )
+        self.generatedAt = generatedAt.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.schemaVersion = diagnosticLedgerSchemaVersion
+        self.entries = orderedEntries
+        self.requiresAttention = orderedEntries.contains(where: \.isAttentionRequired)
+        self.entryFingerprint = Self.fingerprint(orderedEntries)
+        self.id = "diagnostic.snapshot.\(self.generatedAt).\(self.entryFingerprint.count)"
+    }
+
+    private static func orderedUniqueDiagnostics(entries: [DiagnosticLedgerEntry]) -> [DiagnosticLedgerEntry] {
+        var seen = Set<String>()
+        return entries
+            .sorted { lhs, rhs in
+                if lhs.occurredAt != rhs.occurredAt {
+                    return lhs.occurredAt < rhs.occurredAt
+                }
+                if lhs.signal != rhs.signal {
+                    return lhs.signal.rawValue < rhs.signal.rawValue
+                }
+                return lhs.id < rhs.id
+            }
+            .filter { seen.insert($0.id).inserted }
+    }
+
+    private static func fingerprint(_ entries: [DiagnosticLedgerEntry]) -> String {
+        entries
+            .map(\.issueFingerprint)
+            .sorted()
+            .joined(separator: "|")
+    }
+}
+
+protocol DiagnosticLedgerSnapshotRepository: Sendable {
+    func append(_ snapshot: DiagnosticLedgerSnapshot) async throws
+    func fetchRecent(limit: Int) async throws -> [DiagnosticLedgerSnapshot]
+    func fetchSnapshot(id: String) async throws -> DiagnosticLedgerSnapshot?
+}
+
+actor InMemoryDiagnosticLedgerSnapshotRepository: DiagnosticLedgerSnapshotRepository {
+    private var snapshots: [DiagnosticLedgerSnapshot] = []
+
+    func append(_ snapshot: DiagnosticLedgerSnapshot) async throws {
+        snapshots.removeAll { $0.id == snapshot.id }
+        snapshots.append(snapshot)
+    }
+
+    func fetchRecent(limit: Int) async throws -> [DiagnosticLedgerSnapshot] {
+        Array(
+            snapshots
+                .sorted { lhs, rhs in
+                    if lhs.generatedAt != rhs.generatedAt {
+                        return lhs.generatedAt > rhs.generatedAt
+                    }
+                    return lhs.id < rhs.id
+                }
+                .prefix(max(0, limit))
+        )
+    }
+
+    func fetchSnapshot(id: String) async throws -> DiagnosticLedgerSnapshot? {
+        snapshots.first { $0.id == id }
+    }
+}

@@ -139,4 +139,41 @@ final class EventLedgerModelsTests: XCTestCase {
         XCTAssertEqual(teachingEvent.evidenceReferences.first?.id, teaching.id)
         XCTAssertEqual(teachingEvent.trust.isUserConfirmed, true)
     }
+
+    func testDiagnosticLedgerDerivesFromEventLedgerInputDeterministically() {
+        let unsortedEventLedger: [EventLedgerEntry] = [
+            EventLedgerEntry(
+                id: "ledger.goal.updated",
+                kind: .goalUpdated,
+                occurredAt: "2026-05-12T12:10:00Z",
+                source: .goals,
+                goalID: "goal-1",
+                title: "Goal updated"
+            ),
+            EventLedgerEntry(
+                id: "ledger.goal.created",
+                kind: .goalCreated,
+                occurredAt: "2026-05-12T12:00:00Z",
+                source: .goals,
+                goalID: "goal-1",
+                title: "Goal created"
+            )
+        ]
+
+        let snapshot = DiagnosticLedgerSnapshot(
+            eventLedger: unsortedEventLedger,
+            sideEffectLedger: [],
+            privacyClassifications: [],
+            generatedAt: "2026-05-12T12:30:00Z"
+        )
+
+        XCTAssertEqual(snapshot.schemaVersion, diagnosticLedgerSchemaVersion)
+        XCTAssertEqual(snapshot.entries.map(\.sourceRecordID), [
+            "ledger.goal.created",
+            "ledger.goal.updated"
+        ])
+        XCTAssertEqual(snapshot.entries.first?.signal, .eventLedger)
+        XCTAssertEqual(snapshot.entries.first?.isAttentionRequired, false)
+        XCTAssertTrue(snapshot.requiresAttention == false)
+    }
 }

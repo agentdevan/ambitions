@@ -156,6 +156,35 @@ final class SideEffectLedgerModelsTests: XCTestCase {
         XCTAssertEqual(record.sourceDomain, .system)
         XCTAssertTrue(record.isWellFormed)
     }
+
+    func testSideEffectLedgerRecordCanProduceDeterministicDiagnosticLedgerEntry() {
+        let blockedRecord = SideEffectLedgerRecord(
+            id: "side-effect.destructive.blocked",
+            effectKind: .destructiveDataChange,
+            status: .blocked,
+            boundary: .destructive,
+            actionKind: .deleteObject,
+            sourceDomain: .goals,
+            occurredAt: "2026-05-12T12:00:00Z",
+            requiresConfirmation: true,
+            externalEffect: true,
+            reasons: [.userBlockedByPolicy],
+            blockedFacts: ["No destructive change applied."],
+            degradedFacts: ["Action was not executed."],
+            receiptID: "receipt-1"
+        )
+
+        let diagnostic = blockedRecord.toDiagnosticLedgerEntry()
+
+        XCTAssertEqual(diagnostic.signal, .sideEffectLedger)
+        XCTAssertEqual(diagnostic.sourceRecordID, blockedRecord.id)
+        XCTAssertEqual(diagnostic.severity, .critical)
+        XCTAssertEqual(diagnostic.localOnly, true)
+        XCTAssertTrue(diagnostic.requiresReview)
+        XCTAssertEqual(diagnostic.sideEffectBoundary, .destructive)
+        XCTAssertEqual(diagnostic.privacy, .privateUserText)
+        XCTAssertEqual(diagnostic.payload["blockedFacts"], "No destructive change applied.")
+    }
 }
 
 private extension SideEffectLedgerModelsTests {
