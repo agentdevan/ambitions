@@ -1025,6 +1025,234 @@ extension SourceAtlasPackModelsTests {
         )
     }
 
+    func testPickleballSkillAndProPathsReuseMostSpecificProjection() {
+        let levelLadder = SourceAtlasLevelLadder(
+            id: "ladder-pickleball",
+            title: "Pickleball ladder",
+            capabilityGraphID: "graph-pickleball",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-pickleball-broad",
+                    title: "Pickleball baseline",
+                    skillSliceID: "sports.pickleball",
+                    pathPriority: 1,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-pickleball-serve",
+                    title: "Pickleball serve",
+                    skillSliceID: "sports.pickleball.serve",
+                    pathPriority: 3,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-pickleball-pro",
+                    title: "Pickleball pro serve",
+                    skillSliceID: "sports.pickleball.serve.pro",
+                    pathPriority: 9,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .hobby
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(for: "sports.pickleball"),
+            "path-pickleball-broad"
+        )
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(for: "sports.pickleball.serve"),
+            "path-pickleball-serve"
+        )
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(for: "sports.pickleball.serve.pro"),
+            "path-pickleball-pro"
+        )
+    }
+
+    func testFootballVarsityNflAndCommentatorPathsSelectBySpecificityAndRole() {
+        let levelLadder = SourceAtlasLevelLadder(
+            id: "ladder-football",
+            title: "Football ladder",
+            capabilityGraphID: "graph-football",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-football-varsity",
+                    title: "Make varsity football",
+                    skillSliceID: "sports.football",
+                    pathPriority: 4,
+                    roleID: "athlete",
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .careerContext
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-football-nfl",
+                    title: "Make it to the NFL",
+                    skillSliceID: "sports.football.nfl",
+                    pathPriority: 9,
+                    roleID: "athlete",
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .careerContext
+                ),
+                SourceAtlasPathOverlay(
+                    id: "path-football-commentator",
+                    title: "Become football commentator",
+                    skillSliceID: "sports.football",
+                    pathPriority: 6,
+                    roleID: "commentator",
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .careerContext
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(
+                for: "sports.football.athlete",
+                roleID: "athlete"
+            ),
+            "path-football-varsity"
+        )
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(
+                for: "sports.football.nfl",
+                roleID: "athlete"
+            ),
+            "path-football-nfl"
+        )
+        XCTAssertEqual(
+            levelLadder.highestReusablePathID(
+                for: "sports.football",
+                roleID: "commentator"
+            ),
+            "path-football-commentator"
+        )
+        XCTAssertNil(
+            levelLadder.highestReusablePathID(
+                for: "sports.pickleball.coach",
+                roleID: "coach"
+            )
+        )
+    }
+
+    func testUSPresidentProjectionRequiresStrictSourceOverlay() {
+        let levelLadderWithoutSource = SourceAtlasLevelLadder(
+            id: "ladder-president",
+            title: "President ladder",
+            capabilityGraphID: "graph-president",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-president-official",
+                    title: "President path requires source",
+                    skillSliceID: "career.politics.president",
+                    pathPriority: 10,
+                    sourceRecordIDs: [],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .careerContext
+                )
+            ]
+        )
+
+        XCTAssertNil(levelLadderWithoutSource.highestReusablePathID(for: "career.politics.president"))
+
+        let levelLadderWithSource = SourceAtlasLevelLadder(
+            id: "ladder-president",
+            title: "President ladder",
+            capabilityGraphID: "graph-president",
+            pathOverlays: [
+                SourceAtlasPathOverlay(
+                    id: "path-president-official",
+                    title: "President path requires source",
+                    skillSliceID: "career.politics.president",
+                    pathPriority: 10,
+                    sourceRecordIDs: ["source-official"],
+                    state: .official,
+                    freshness: .current,
+                    riskClass: .careerContext
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            levelLadderWithSource.highestReusablePathID(for: "career.politics.president"),
+            "path-president-official"
+        )
+    }
+
+    func testJobPostingProjectionStaysExampleOnlyUntilSourceGatesClear() {
+        let jobPostingProjection = SourceAtlasGoalProjection(
+            id: "projection-job-posting",
+            goalIntent: "job_posting",
+            requiredPackIDs: ["school.job.posting"],
+            projectionProfiles: [
+                Self.makeProjectionProfile(
+                    id: "profile-job-posting-example-only",
+                    goalIntent: "job_posting",
+                    sourceState: .sourceNeeded,
+                    reviewState: .required,
+                    pathInstanceID: "path-job-posting-example",
+                    optionValueMapValues: ["mode": "example-only"]
+                )
+            ]
+        )
+
+        XCTAssertFalse(jobPostingProjection.canDriveCurrentProjection)
+    }
+
+    func testSchoolProgramProjectionRequiresReviewBeforeCurrentUse() {
+        let pack = Self.validPack(
+            requirements: [
+                SourceAtlasRequirement(
+                    id: "requirement-school-program",
+                    claimID: "claim-serve",
+                    title: "Review school program requirements",
+                    kind: .hard,
+                    required: true,
+                    sourceState: .officialCurrent,
+                    freshnessState: .current,
+                    riskState: .low,
+                    reviewState: .approved
+                )
+            ],
+            composition: SourceAtlasCompositionContract(
+                dependencyPackIDs: [],
+                reusableNodeIDs: ["school.programs", "education.transfer"],
+                overlayDependencyIDs: ["education.requirements"],
+                projectionRecipeIDs: ["recipe-pickleball-starter"],
+                ownsIndividualGoalPhrase: false,
+                requirementOverlays: [
+                    SourceAtlasRequirementOverlay(
+                        id: "overlay-school-program-review",
+                        sourceAtlasRequirementID: "requirement-school-program",
+                        requirementIDs: ["requirement-school-program"],
+                        summary: "School program path requires strict review before use.",
+                        sourceState: .officialCurrent,
+                        freshnessState: .current,
+                        riskState: .low,
+                        reviewState: .required
+                    )
+                ]
+            )
+        )
+
+        XCTAssertTrue(pack.validationIssues.contains(.invalidRequirementOverlay))
+    }
+
     func testStaleOrUnknownProjectionStatesBlockCurrentReuse() {
         let levelLadder = SourceAtlasLevelLadder(
             id: "ladder-stale",
