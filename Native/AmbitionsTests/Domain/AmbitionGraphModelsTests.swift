@@ -1,3 +1,4 @@
+import Foundation
 import XCTest
 @testable import Ambitions
 
@@ -53,6 +54,45 @@ final class AmbitionGraphModelsTests: XCTestCase {
             updatedAt: "2026-01-01T09:00:00Z"
         )
 
+        let identityDirection = IdentityDirection(
+            id: "identity-direction-1",
+            ambitionID: ambitionID,
+            title: "Steadily present",
+            statement: "Show up consistently in high-leverage routines.",
+            priority: .primary,
+            createdAt: "2026-01-01T08:30:00Z",
+            updatedAt: "2026-01-01T08:30:00Z"
+        )
+
+        let outcome = Outcome(
+            id: "outcome-1",
+            ambitionID: ambitionID,
+            identityDirectionID: "identity-direction-1",
+            goalThreadID: threadID,
+            title: "Weekly continuity proof",
+            detail: "Complete one continuity anchor each week.",
+            targetAt: "2026-01-07T00:00:00Z",
+            kind: .capacity,
+            isPrimary: true,
+            metric: "frequency: 4/4 weeks",
+            createdAt: "2026-01-01T08:45:00Z",
+            updatedAt: "2026-01-01T08:45:00Z"
+        )
+
+        let step = AmbitionGraphStep(
+            id: "step-1",
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            outcomeID: "outcome-1",
+            name: "Open capture",
+            description: "Record a short proof intent at beginning of day.",
+            targetOrder: 1,
+            expectedEffortMinutes: 10,
+            isMilestone: true,
+            createdAt: "2026-01-01T08:50:00Z",
+            updatedAt: "2026-01-01T08:50:00Z"
+        )
+
         let proof = Proof(
             id: proofID,
             ambitionID: ambitionID,
@@ -64,6 +104,19 @@ final class AmbitionGraphModelsTests: XCTestCase {
             text: "Saved a proof reflection note.",
             source: "Today capture",
             createdAt: "2026-01-01T09:30:00Z"
+        )
+
+        let closureEvent = ClosureEvent(
+            id: "closure-1",
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            ambitionGraphStepID: "step-1",
+            commitmentID: commitmentID,
+            proofID: proofID,
+            closureState: .stillCounts,
+            reason: "Moved from a broader weekly plan to a smaller continuation.",
+            followUpPlan: "Hold continuity check next session.",
+            createdAt: "2026-01-01T10:00:00Z"
         )
 
         let constraint = Constraint(
@@ -132,7 +185,11 @@ final class AmbitionGraphModelsTests: XCTestCase {
             proofs: [proof],
             constraints: [constraint],
             recoveryThreads: [recovery],
-            recommendationTraces: [trace]
+            recommendationTraces: [trace],
+            identityDirections: [identityDirection],
+            outcomes: [outcome],
+            steps: [step],
+            closureEvents: [closureEvent]
         )
 
         XCTAssertEqual(snapshot.ambition.id, ambitionID)
@@ -140,10 +197,51 @@ final class AmbitionGraphModelsTests: XCTestCase {
         XCTAssertEqual(snapshot.proofs.first?.proofType, .text)
         XCTAssertEqual(snapshot.constraints.first?.patternType, .environment)
         XCTAssertTrue(snapshot.recoveryThreads.first?.isRecoverable ?? false)
+        XCTAssertEqual(snapshot.identityDirections.map(\.priority), [.primary])
+        XCTAssertEqual(snapshot.outcomes.map(\.kind), [.capacity])
+        XCTAssertEqual(snapshot.steps.map(\.targetOrder), [1])
+        XCTAssertEqual(snapshot.closureEvents.map(\.closureState), [.stillCounts])
         XCTAssertEqual(recovery.status, .active)
         XCTAssertEqual(reflection.learnedSignal, "Smaller commitments improve continuity.")
         XCTAssertTrue(adaptation.proposedChange.contains("20-minute"))
         XCTAssertEqual(thread.goalIDs, ["goal-1"])
+    }
+
+    func testAmbitionGraphSnapshotDecodesLegacyPayloadWithNewGraphFieldsAsDefaults() throws {
+        let payload = """
+        {
+          "id": "snapshot-legacy",
+          "ambition": {
+            "id": "ambition-legacy",
+            "title": "Legacy ambition contract",
+            "identityStatement": "Ground continuity through daily proof.",
+            "lifeAreaID": "life-legacy",
+            "desiredOutcome": "Maintain continuity.",
+            "desiredProofDescription": "One proof each day.",
+            "activeGoalThreadID": "thread-legacy",
+            "activeCommitmentID": "commitment-legacy",
+            "knownConstraintIDs": [],
+            "privacyClass": "private_user_text",
+            "createdAt": "2026-01-01T00:00:00Z",
+            "updatedAt": "2026-01-01T00:00:00Z"
+          },
+          "commitments": [],
+          "proofs": [],
+          "constraints": [],
+          "recoveryThreads": [],
+          "recommendationTraces": []
+        }
+        """
+
+        let snapshot = try JSONDecoder().decode(AmbitionGraphSnapshot.self, from: Data(payload.utf8))
+
+        XCTAssertEqual(snapshot.id, "snapshot-legacy")
+        XCTAssertEqual(snapshot.ambition.id, "ambition-legacy")
+        XCTAssertTrue(snapshot.identityDirections.isEmpty)
+        XCTAssertTrue(snapshot.outcomes.isEmpty)
+        XCTAssertTrue(snapshot.steps.isEmpty)
+        XCTAssertTrue(snapshot.closureEvents.isEmpty)
+        XCTAssertEqual(snapshot.schemaVersion, ambitionGraphSchemaVersion)
     }
 
     func testRecommendationTraceEnforcesExplainabilityAndNoAiCopyDefaults() {

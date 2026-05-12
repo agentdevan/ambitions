@@ -126,6 +126,97 @@ enum AmbitionClosureState: String, Codable, Sendable, Equatable, Hashable, CaseI
     }
 }
 
+enum AmbitionIdentityPriority: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case primary = "primary"
+    case supporting = "supporting"
+    case experimental = "experimental"
+}
+
+enum AmbitionOutcomeKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case behavior
+    case state
+    case identity
+    case capacity
+    case relationship
+    case financial
+    case wellBeing = "well_being"
+    case custom
+}
+
+struct IdentityDirection: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let ambitionID: String
+    let title: String
+    let statement: String?
+    let priority: AmbitionIdentityPriority
+    let isActive: Bool
+    let createdAt: String
+    let updatedAt: String
+
+    init(
+        id: String,
+        ambitionID: String,
+        title: String,
+        statement: String? = nil,
+        priority: AmbitionIdentityPriority = .supporting,
+        isActive: Bool = true,
+        createdAt: String,
+        updatedAt: String
+    ) {
+        self.id = id
+        self.ambitionID = ambitionID
+        self.title = title
+        self.statement = statement
+        self.priority = priority
+        self.isActive = isActive
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+}
+
+struct Outcome: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let ambitionID: String
+    let identityDirectionID: String?
+    let goalThreadID: String?
+    let title: String
+    let detail: String?
+    let targetAt: String?
+    let kind: AmbitionOutcomeKind
+    let isPrimary: Bool
+    let metric: String?
+    let createdAt: String
+    let updatedAt: String
+
+    init(
+        id: String,
+        ambitionID: String,
+        identityDirectionID: String? = nil,
+        goalThreadID: String? = nil,
+        title: String,
+        detail: String? = nil,
+        targetAt: String? = nil,
+        kind: AmbitionOutcomeKind = .custom,
+        isPrimary: Bool = false,
+        metric: String? = nil,
+        createdAt: String,
+        updatedAt: String
+    ) {
+        self.id = id
+        self.ambitionID = ambitionID
+        self.identityDirectionID = identityDirectionID
+        self.goalThreadID = goalThreadID
+        self.title = title
+        self.detail = detail
+        self.targetAt = targetAt
+        self.kind = kind
+        self.isPrimary = isPrimary
+        self.metric = metric
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+}
+
 struct Ambition: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let title: String
@@ -290,6 +381,86 @@ struct Commitment: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.status = status
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+    }
+}
+
+struct AmbitionGraphStep: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let ambitionID: String
+    let goalThreadID: String?
+    let outcomeID: String?
+    let name: String
+    let description: String?
+    let targetOrder: Int
+    let expectedEffortMinutes: Int?
+    let isMilestone: Bool
+    let isCompleted: Bool
+    let createdAt: String
+    let updatedAt: String
+
+    init(
+        id: String,
+        ambitionID: String,
+        goalThreadID: String? = nil,
+        outcomeID: String? = nil,
+        name: String,
+        description: String? = nil,
+        targetOrder: Int = 0,
+        expectedEffortMinutes: Int? = nil,
+        isMilestone: Bool = false,
+        isCompleted: Bool = false,
+        createdAt: String,
+        updatedAt: String
+    ) {
+        self.id = id
+        self.ambitionID = ambitionID
+        self.goalThreadID = goalThreadID
+        self.outcomeID = outcomeID
+        self.name = name
+        self.description = description
+        self.targetOrder = targetOrder
+        self.expectedEffortMinutes = expectedEffortMinutes.map { max(0, $0) }
+        self.isMilestone = isMilestone
+        self.isCompleted = isCompleted
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+}
+
+struct ClosureEvent: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let ambitionID: String
+    let goalThreadID: String?
+    let ambitionGraphStepID: String?
+    let commitmentID: String?
+    let proofID: String?
+    let closureState: AmbitionClosureState
+    let reason: String?
+    let followUpPlan: String?
+    let createdAt: String
+
+    init(
+        id: String,
+        ambitionID: String,
+        goalThreadID: String? = nil,
+        ambitionGraphStepID: String? = nil,
+        commitmentID: String? = nil,
+        proofID: String? = nil,
+        closureState: AmbitionClosureState,
+        reason: String? = nil,
+        followUpPlan: String? = nil,
+        createdAt: String
+    ) {
+        self.id = id
+        self.ambitionID = ambitionID
+        self.goalThreadID = goalThreadID
+        self.ambitionGraphStepID = ambitionGraphStepID
+        self.commitmentID = commitmentID
+        self.proofID = proofID
+        self.closureState = closureState
+        self.reason = reason
+        self.followUpPlan = followUpPlan
+        self.createdAt = createdAt
     }
 }
 
@@ -500,7 +671,26 @@ struct AmbitionGraphSnapshot: Codable, Sendable, Equatable, Hashable, Identifiab
     let constraints: [Constraint]
     let recoveryThreads: [RecoveryThread]
     let recommendationTraces: [RecommendationTrace]
+    let identityDirections: [IdentityDirection]
+    let outcomes: [Outcome]
+    let steps: [AmbitionGraphStep]
+    let closureEvents: [ClosureEvent]
     let schemaVersion: String
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case ambition
+        case commitments
+        case proofs
+        case constraints
+        case recoveryThreads
+        case recommendationTraces
+        case identityDirections
+        case outcomes
+        case steps
+        case closureEvents
+        case schemaVersion
+    }
 
     init(
         id: String,
@@ -510,6 +700,10 @@ struct AmbitionGraphSnapshot: Codable, Sendable, Equatable, Hashable, Identifiab
         constraints: [Constraint] = [],
         recoveryThreads: [RecoveryThread] = [],
         recommendationTraces: [RecommendationTrace] = [],
+        identityDirections: [IdentityDirection] = [],
+        outcomes: [Outcome] = [],
+        steps: [AmbitionGraphStep] = [],
+        closureEvents: [ClosureEvent] = [],
         schemaVersion: String = ambitionGraphSchemaVersion
     ) {
         self.id = id
@@ -519,6 +713,26 @@ struct AmbitionGraphSnapshot: Codable, Sendable, Equatable, Hashable, Identifiab
         self.constraints = constraints
         self.recoveryThreads = recoveryThreads
         self.recommendationTraces = recommendationTraces
+        self.identityDirections = identityDirections
+        self.outcomes = outcomes
+        self.steps = steps
+        self.closureEvents = closureEvents
         self.schemaVersion = schemaVersion
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.ambition = try container.decode(Ambition.self, forKey: .ambition)
+        self.commitments = try container.decodeIfPresent([Commitment].self, forKey: .commitments) ?? []
+        self.proofs = try container.decodeIfPresent([Proof].self, forKey: .proofs) ?? []
+        self.constraints = try container.decodeIfPresent([Constraint].self, forKey: .constraints) ?? []
+        self.recoveryThreads = try container.decodeIfPresent([RecoveryThread].self, forKey: .recoveryThreads) ?? []
+        self.recommendationTraces = try container.decodeIfPresent([RecommendationTrace].self, forKey: .recommendationTraces) ?? []
+        self.identityDirections = try container.decodeIfPresent([IdentityDirection].self, forKey: .identityDirections) ?? []
+        self.outcomes = try container.decodeIfPresent([Outcome].self, forKey: .outcomes) ?? []
+        self.steps = try container.decodeIfPresent([AmbitionGraphStep].self, forKey: .steps) ?? []
+        self.closureEvents = try container.decodeIfPresent([ClosureEvent].self, forKey: .closureEvents) ?? []
+        self.schemaVersion = try container.decodeIfPresent(String.self, forKey: .schemaVersion) ?? ambitionGraphSchemaVersion
     }
 }
