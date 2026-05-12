@@ -3,6 +3,7 @@
 Date: 2026-05-12
 Active train: Global full-stack execution
 Current batch: PK41 Move Feature Engines To Package / Green.
+Next eligible batch: SA07 Claim State Machine
 Next recommended implementation pass: SA07 Claim State Machine.
 Next eligible non-UI platform batch: SA07 Claim State Machine.
 Scope: PK41 adds a feature-engine package-boundary manifest and validator; it does not execute external/cloud LLM behavior, hosted backend behavior, Package.swift/project.yml wiring, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, visual runtime completion, or global train completion claims.
