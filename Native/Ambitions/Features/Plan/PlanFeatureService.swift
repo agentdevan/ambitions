@@ -4,30 +4,42 @@ import Foundation
 struct RepositoryBackedPlanService: PlanServicing {
     let repositories: AppRepositories
     let calendarRealityService: (any CalendarRealityServicing)?
+    let timeFeatureService: TimeFeatureService
 
     init(
         repositories: AppRepositories,
-        calendarRealityService: (any CalendarRealityServicing)? = nil
+        calendarRealityService: (any CalendarRealityServicing)? = nil,
+        timeFeatureService: TimeFeatureService = .init()
     ) {
         self.repositories = repositories
         self.calendarRealityService = calendarRealityService
+        self.timeFeatureService = timeFeatureService
     }
 
     func loadPlanDashboard(now: Date) async throws -> PlanDashboard {
         let snapshot = try await loadSnapshot()
         let permission = await calendarRealityService?.calendarPermissionState() ?? .unavailable
-        return makeDashboard(snapshot: snapshot, now: now, calendarAwareness: makeCalendarAwarenessState(permission: permission, openWindowCount: nil))
+        return try await timeFeatureService.makeDashboard(
+            from: self,
+            now: now,
+            permission: permission,
+            openWindowCount: nil
+        )
     }
 
     func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard {
-        let snapshot = try await loadSnapshot()
-        return makeWeeklyReviewDashboard(snapshot: snapshot, now: now)
+        return try await timeFeatureService.makeWeeklyReviewDashboard(from: self, now: now)
     }
 
     func makePlanCalendarAware(now: Date) async throws -> PlanDashboard {
         let snapshot = try await loadSnapshot()
         guard let calendarRealityService else {
-            return makeDashboard(snapshot: snapshot, now: now, calendarAwareness: makeCalendarAwarenessState(permission: .unavailable, openWindowCount: nil))
+            return try await timeFeatureService.makeDashboard(
+                from: self,
+                now: now,
+                permission: .unavailable,
+                openWindowCount: nil
+            )
         }
         let result = await calendarRealityService.findOpenWindows(
             request: CalendarRealityReadRequest(
@@ -52,18 +64,17 @@ struct RepositoryBackedPlanService: PlanServicing {
             actionName: "Make Time calendar-aware"
         )
         try? await repositories.eventLedger.append(event)
-        return makeDashboard(
-            snapshot: snapshot,
+        return try await timeFeatureService.makeDashboard(
+            from: self,
             now: now,
-            calendarAwareness: makeCalendarAwarenessState(
-                permission: result.permissionState,
-                openWindowCount: result.openWindowCandidates.count
-            )
+            permission: result.permissionState,
+            openWindowCount: result.openWindowCandidates.count,
+            snapshot: snapshot
         )
     }
 }
 
-private extension RepositoryBackedPlanService {
+extension RepositoryBackedPlanService {
     func makeDashboard(snapshot: Snapshot, now: Date, calendarAwareness: PlanCalendarAwarenessState) -> PlanDashboard {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
         let openCaptures = snapshot.captures.filter { $0.status != .archived }
