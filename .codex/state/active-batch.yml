@@ -11,12 +11,12 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PK41 Move Feature Engines To Package"
-  previous_batch: "PK40 Move Runtime To Package"
-  previous_result: "green"
-  next_eligible_batch: "SA07 Claim State Machine"
+  batch: "SA07 Claim State Machine"
+  previous_batch: "SA07 Claim State Machine"
+  previous_result: "accepted_yellow"
+  next_eligible_batch: "SA08 Requirement Graph Implementation"
 codex_os_override:
-  active_pass: "platform kernel implementation"
+  active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
   production_swift_allowed: true
   branch_creation_allowed: false
