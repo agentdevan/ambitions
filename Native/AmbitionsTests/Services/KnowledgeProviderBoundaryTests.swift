@@ -154,6 +154,60 @@ final class KnowledgeProviderBoundaryTests: XCTestCase {
         XCTAssertEqual(response.claimSet.claims, [claim])
         XCTAssertEqual(response.providerInputs, [])
     }
+
+    func testRegistryHardensKnowledgeClaimsWithBoundaryDegradation() async throws {
+        let provider = StubKnowledgeProvider(
+            descriptor: KnowledgeProviderDescriptor(id: "provider-1", type: .webIndex, displayName: "Web Index"),
+            statusValue: KnowledgeProviderStatus(
+                provider: KnowledgeProviderDescriptor(id: "provider-1", type: .webIndex, displayName: "Web Index"),
+                availability: .available,
+                detail: "Provider is available.",
+                runtimeTrustPosture: .localOnly
+            ),
+            response: KnowledgeProviderResponse(
+                claimSet: KnowledgeClaimSet(claims: [], conflictState: .none, degradationSummary: nil),
+                providerInputs: [
+                    KnowledgeProviderClaimInput(
+                        providerClaimKey: "claim-weak",
+                        providerID: "provider-1",
+                        subject: "deadline",
+                        summary: "A deadline might exist.",
+                        detail: nil,
+                        source: KnowledgeProviderSourceInput(
+                            providerSourceKey: "source-weak",
+                            entityTitle: "Unverified page",
+                            publisher: nil,
+                            locator: nil,
+                            provenanceKind: .inferred,
+                            isOfficial: false
+                        ),
+                        freshness: KnowledgeFreshnessMetadata(
+                            retrievedAt: "2026-04-19T12:00:00Z",
+                            publishedAt: nil,
+                            staleAfter: nil,
+                            expiresAt: nil,
+                            state: .unknown
+                        ),
+                        trustLevel: .low,
+                        confidence: .low,
+                        uncertaintyFlags: []
+                    )
+                ],
+                providerStatuses: []
+            )
+        )
+        let registry = KnowledgeProviderRegistry(providers: [provider])
+
+        let response = try await registry.fetch(
+            query: KnowledgeQuery(topic: "deadline", subject: "deadline"),
+            now: Date(timeIntervalSince1970: 1_776_600_000)
+        )
+
+        let claim = try XCTUnwrap(response.claimSet.claims.first)
+        XCTAssertTrue(claim.uncertaintyFlags.contains(.inferred))
+        XCTAssertTrue(claim.uncertaintyFlags.contains(.lowConfidence))
+        XCTAssertTrue((response.claimSet.degradationSummary ?? "").contains(KnowledgeDegradationState.lowTrustInformation.rawValue))
+    }
 }
 
 private extension KnowledgeProviderBoundaryTests {

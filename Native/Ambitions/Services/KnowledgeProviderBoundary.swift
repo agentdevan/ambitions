@@ -67,13 +67,16 @@ struct LocalOnlyKnowledgeProvider: KnowledgeProviding {
 struct KnowledgeProviderRegistry: KnowledgeProviding {
     let providers: [any KnowledgeProviding]
     let ingestionService: any KnowledgeIngesting
+    let boundaryHardener: KnowledgeClaimBoundaryHardener
 
     init(
         providers: [any KnowledgeProviding],
-        ingestionService: any KnowledgeIngesting = DefaultKnowledgeIngestionService()
+        ingestionService: any KnowledgeIngesting = DefaultKnowledgeIngestionService(),
+        boundaryHardener: KnowledgeClaimBoundaryHardener = KnowledgeClaimBoundaryHardener()
     ) {
         self.providers = providers
         self.ingestionService = ingestionService
+        self.boundaryHardener = boundaryHardener
     }
 
     var descriptor: KnowledgeProviderDescriptor {
@@ -143,12 +146,17 @@ struct KnowledgeProviderRegistry: KnowledgeProviding {
             ),
             fallbackStatuses: allStatuses
         )
+        let boundaryReport = boundaryHardener.assess(
+            claims: normalized.claimSet.claims,
+            providerStatuses: normalized.providerStatuses,
+            existingDegradationStates: normalized.degradationStates
+        )
 
         return KnowledgeProviderResponse(
             claimSet: KnowledgeClaimSet(
                 claims: normalized.claimSet.claims,
                 conflictState: normalized.claimSet.conflictState,
-                degradationSummary: normalized.claimSet.degradationSummary
+                degradationSummary: boundaryReport.degradationSummary ?? normalized.claimSet.degradationSummary
             ),
             providerInputs: allProviderInputs,
             providerStatuses: normalized.providerStatuses
