@@ -1,13 +1,19 @@
 {
   "schema_version": 1,
   "completed_batches": [
-    "MRI01"
+    "MRI01",
+    "MRI02"
   ],
   "history": [
     {
       "batch": "MRI01",
       "prompt": "prompts/batches/MRI01-AMBITION-GRAPH-RUNTIME-OBJECTS.md",
       "marked_complete_at": "2026-05-12T23:31:59Z"
+    },
+    {
+      "batch": "MRI02",
+      "prompt": "prompts/batches/MRI02-AMBITION-GRAPH-PROJECTION-STORE.md",
+      "marked_complete_at": "2026-05-12T23:59:04Z"
     }
   ]
 }
