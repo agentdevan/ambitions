@@ -28,6 +28,15 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
         XCTAssertEqual(commandEntry?.rollbackRequirement, .rollbackPlanRequired)
     }
 
+    func testCurrentLedgerIncludesSideEffectLedgerSchemaType() {
+        let ledger = StorageSchemaVersionLedger.current
+        let sideEffectEntry = ledger.swiftDataEntries.first(where: { $0.id == "swiftdata.side_effect_ledger_record" })
+
+        XCTAssertNotNil(sideEffectEntry)
+        XCTAssertEqual(sideEffectEntry?.storedTypeName, "SideEffectLedgerStorageRecord")
+        XCTAssertEqual(sideEffectEntry?.currentVersion, sideEffectLedgerSchemaVersion)
+    }
+
     func testCurrentLedgerBlocksMigrationExecutionUntilFutureMigrationProofExists() {
         let ledger = StorageSchemaVersionLedger.current
 

@@ -549,6 +549,68 @@ final class CommandExecutionRecord {
 }
 
 @Model
+final class SideEffectLedgerStorageRecord {
+    @Attribute(.unique) var id: String
+    var effectKindRaw: String
+    var statusRaw: String
+    var boundaryRaw: String
+    var actionKindRaw: String
+    var sourceDomainRaw: String
+    var commandID: String?
+    var targetObjectsData: Data
+    var requiresConfirmation: Bool
+    var externalEffect: Bool
+    var reasonsData: Data
+    var blockedFactsData: Data
+    var degradedFactsData: Data
+    var receiptID: String?
+    var schemaVersion: String
+    var localOnly: Bool
+    var occurredAt: String
+    var snapshotData: Data
+
+    init(
+        id: String,
+        effectKindRaw: String,
+        statusRaw: String,
+        boundaryRaw: String,
+        actionKindRaw: String,
+        sourceDomainRaw: String,
+        commandID: String?,
+        targetObjectsData: Data,
+        requiresConfirmation: Bool,
+        externalEffect: Bool,
+        reasonsData: Data,
+        blockedFactsData: Data,
+        degradedFactsData: Data,
+        receiptID: String?,
+        schemaVersion: String,
+        localOnly: Bool,
+        occurredAt: String,
+        snapshotData: Data
+    ) {
+        self.id = id
+        self.effectKindRaw = effectKindRaw
+        self.statusRaw = statusRaw
+        self.boundaryRaw = boundaryRaw
+        self.actionKindRaw = actionKindRaw
+        self.sourceDomainRaw = sourceDomainRaw
+        self.commandID = commandID
+        self.targetObjectsData = targetObjectsData
+        self.requiresConfirmation = requiresConfirmation
+        self.externalEffect = externalEffect
+        self.reasonsData = reasonsData
+        self.blockedFactsData = blockedFactsData
+        self.degradedFactsData = degradedFactsData
+        self.receiptID = receiptID
+        self.schemaVersion = schemaVersion
+        self.localOnly = localOnly
+        self.occurredAt = occurredAt
+        self.snapshotData = snapshotData
+    }
+}
+
+@Model
 final class AppStateRecord {
     @Attribute(.unique) var id: String
     var preferredTabRaw: String

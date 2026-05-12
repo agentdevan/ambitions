@@ -92,6 +92,7 @@ struct StorageInvariantChecker: Sendable {
         let captures = try context.fetch(FetchDescriptor<CaptureRecord>())
         let teaching = try context.fetch(FetchDescriptor<TeachingSignalRecord>())
         let events = try context.fetch(FetchDescriptor<EventLedgerRecord>())
+        let sideEffects = try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
         let appStates = try context.fetch(FetchDescriptor<AppStateRecord>())
 
         let goalIDs = Set(goals.map(\.id))
@@ -195,6 +196,20 @@ struct StorageInvariantChecker: Sendable {
             appendRaw(EventLedgerTone.self, record.toneRaw, .neutral, "EventLedgerRecord", record.id, "toneRaw", to: &issues)
             appendRaw(EventLedgerPrivacyClassification.self, record.privacyRaw, .standard, "EventLedgerRecord", record.id, "privacyRaw", to: &issues)
             appendJSON(record.snapshotData, "EventLedgerRecord", record.id, "snapshotData", to: &issues)
+        }
+
+        for record in sideEffects {
+            appendRequired(record.id, "SideEffectLedgerStorageRecord", record.id, "id", to: &issues)
+            appendRaw(SideEffectLedgerEffectKind.self, record.effectKindRaw, .unknown, "SideEffectLedgerStorageRecord", record.id, "effectKindRaw", to: &issues)
+            appendRaw(SideEffectLedgerStatus.self, record.statusRaw, .blocked, "SideEffectLedgerStorageRecord", record.id, "statusRaw", to: &issues)
+            appendRaw(SideEffectLedgerBoundary.self, record.boundaryRaw, .unsupported, "SideEffectLedgerStorageRecord", record.id, "boundaryRaw", to: &issues)
+            appendRaw(SafeAutomationActionKind.self, record.actionKindRaw, .noOp, "SideEffectLedgerStorageRecord", record.id, "actionKindRaw", to: &issues)
+            appendRaw(ActionReceiptSourceDomain.self, record.sourceDomainRaw, .today, "SideEffectLedgerStorageRecord", record.id, "sourceDomainRaw", to: &issues)
+            appendDecodable([LifeGraphObjectReference].self, record.targetObjectsData, "SideEffectLedgerStorageRecord", record.id, "targetObjectsData", to: &issues)
+            appendDecodable([SafeAutomationPolicyReason].self, record.reasonsData, "SideEffectLedgerStorageRecord", record.id, "reasonsData", to: &issues)
+            appendDecodable([String].self, record.blockedFactsData, "SideEffectLedgerStorageRecord", record.id, "blockedFactsData", to: &issues)
+            appendDecodable([String].self, record.degradedFactsData, "SideEffectLedgerStorageRecord", record.id, "degradedFactsData", to: &issues)
+            appendJSON(record.snapshotData, "SideEffectLedgerStorageRecord", record.id, "snapshotData", to: &issues)
         }
 
         for record in appStates {

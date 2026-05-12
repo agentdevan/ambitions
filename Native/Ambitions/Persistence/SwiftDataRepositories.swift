@@ -611,6 +611,75 @@ private enum RepositoryMapping {
         )
     }
 
+    static func sideEffectLedgerStorageRecord(from record: SideEffectLedgerRecord) throws -> SideEffectLedgerStorageRecord {
+        SideEffectLedgerStorageRecord(
+            id: record.id,
+            effectKindRaw: record.effectKind.rawValue,
+            statusRaw: record.status.rawValue,
+            boundaryRaw: record.boundary.rawValue,
+            actionKindRaw: record.actionKind.rawValue,
+            sourceDomainRaw: record.sourceDomain.rawValue,
+            commandID: record.commandID,
+            targetObjectsData: try PersistenceCoding.encode(record.targetObjects),
+            requiresConfirmation: record.requiresConfirmation,
+            externalEffect: record.externalEffect,
+            reasonsData: try PersistenceCoding.encode(record.reasons),
+            blockedFactsData: try PersistenceCoding.encode(record.blockedFacts),
+            degradedFactsData: try PersistenceCoding.encode(record.degradedFacts),
+            receiptID: record.receiptID,
+            schemaVersion: record.schemaVersion,
+            localOnly: record.localOnly,
+            occurredAt: record.occurredAt,
+            snapshotData: try PersistenceCoding.encode(record)
+        )
+    }
+
+    static func apply(_ record: SideEffectLedgerRecord, to storage: SideEffectLedgerStorageRecord) throws {
+        storage.effectKindRaw = record.effectKind.rawValue
+        storage.statusRaw = record.status.rawValue
+        storage.boundaryRaw = record.boundary.rawValue
+        storage.actionKindRaw = record.actionKind.rawValue
+        storage.sourceDomainRaw = record.sourceDomain.rawValue
+        storage.commandID = record.commandID
+        storage.targetObjectsData = try PersistenceCoding.encode(record.targetObjects)
+        storage.requiresConfirmation = record.requiresConfirmation
+        storage.externalEffect = record.externalEffect
+        storage.reasonsData = try PersistenceCoding.encode(record.reasons)
+        storage.blockedFactsData = try PersistenceCoding.encode(record.blockedFacts)
+        storage.degradedFactsData = try PersistenceCoding.encode(record.degradedFacts)
+        storage.receiptID = record.receiptID
+        storage.schemaVersion = record.schemaVersion
+        storage.localOnly = record.localOnly
+        storage.occurredAt = record.occurredAt
+        storage.snapshotData = try PersistenceCoding.encode(record)
+    }
+
+    static func sideEffectLedgerRecord(from storage: SideEffectLedgerStorageRecord) throws -> SideEffectLedgerRecord {
+        if let snapshot = try? PersistenceCoding.decode(SideEffectLedgerRecord.self, from: storage.snapshotData) {
+            return snapshot
+        }
+
+        return SideEffectLedgerRecord(
+            id: storage.id,
+            effectKind: persisted(SideEffectLedgerEffectKind.self, rawValue: storage.effectKindRaw, fallback: .unknown, storedTypeName: "SideEffectLedgerStorageRecord", fieldName: "effectKindRaw"),
+            status: persisted(SideEffectLedgerStatus.self, rawValue: storage.statusRaw, fallback: .blocked, storedTypeName: "SideEffectLedgerStorageRecord", fieldName: "statusRaw"),
+            boundary: persisted(SideEffectLedgerBoundary.self, rawValue: storage.boundaryRaw, fallback: .unsupported, storedTypeName: "SideEffectLedgerStorageRecord", fieldName: "boundaryRaw"),
+            actionKind: persisted(SafeAutomationActionKind.self, rawValue: storage.actionKindRaw, fallback: .noOp, storedTypeName: "SideEffectLedgerStorageRecord", fieldName: "actionKindRaw"),
+            sourceDomain: persisted(ActionReceiptSourceDomain.self, rawValue: storage.sourceDomainRaw, fallback: .today, storedTypeName: "SideEffectLedgerStorageRecord", fieldName: "sourceDomainRaw"),
+            commandID: storage.commandID,
+            targetObjects: (try? PersistenceCoding.decode([LifeGraphObjectReference].self, from: storage.targetObjectsData)) ?? [],
+            occurredAt: storage.occurredAt,
+            localOnly: storage.localOnly,
+            requiresConfirmation: storage.requiresConfirmation,
+            externalEffect: storage.externalEffect,
+            reasons: (try? PersistenceCoding.decode([SafeAutomationPolicyReason].self, from: storage.reasonsData)) ?? [],
+            blockedFacts: (try? PersistenceCoding.decode([String].self, from: storage.blockedFactsData)) ?? [],
+            degradedFacts: (try? PersistenceCoding.decode([String].self, from: storage.degradedFactsData)) ?? [],
+            receiptID: storage.receiptID,
+            schemaVersion: storage.schemaVersion
+        )
+    }
+
     static func captureStatus(from rawValue: String) -> CaptureStatus {
         persisted(
             CaptureStatus.self,
@@ -1323,6 +1392,52 @@ actor InMemoryAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecuti
                 return $0.recordedAt > $1.recordedAt
             }
             .first(where: { $0.command.id == commandID })
+    }
+}
+
+struct SwiftDataSideEffectLedgerRepository: SideEffectLedgerRepository {
+    let store: AmbitionsPersistenceStore
+
+    func append(_ record: SideEffectLedgerRecord) async throws {
+        guard record.isWellFormed else { return }
+        try await store.write { context in
+            if let storage = try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
+                .first(where: { $0.id == record.id }) {
+                try RepositoryMapping.apply(record, to: storage)
+            } else {
+                context.insert(try RepositoryMapping.sideEffectLedgerStorageRecord(from: record))
+            }
+        }
+    }
+
+    func fetchRecent(limit: Int) async throws -> [SideEffectLedgerRecord] {
+        Array(try await fetchAll { _ in true }.prefix(max(0, limit)))
+    }
+
+    func fetchRecords(status: SideEffectLedgerStatus) async throws -> [SideEffectLedgerRecord] {
+        try await fetchAll { $0.statusRaw == status.rawValue }
+    }
+
+    func fetchRecord(id: String) async throws -> SideEffectLedgerRecord? {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
+                .first(where: { $0.id == id })
+                .map(RepositoryMapping.sideEffectLedgerRecord(from:))
+        }
+    }
+
+    private func fetchAll(where isIncluded: @escaping (SideEffectLedgerStorageRecord) -> Bool) async throws -> [SideEffectLedgerRecord] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
+                .filter(isIncluded)
+                .sorted {
+                    if $0.occurredAt != $1.occurredAt {
+                        return $0.occurredAt > $1.occurredAt
+                    }
+                    return $0.id > $1.id
+                }
+                .map(RepositoryMapping.sideEffectLedgerRecord(from:))
+        }
     }
 }
 

@@ -503,6 +503,7 @@ struct AppRepositories: Sendable {
     let captures: any CaptureRepository
     let teaching: any GoalTeachingSignalRepository
     let eventLedger: any EventLedgerRepository
+    let sideEffectLedger: (any SideEffectLedgerRepository)?
     let actionReceiptHistory: (any ActionReceiptHistoryRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)?
@@ -517,6 +518,7 @@ struct AppRepositories: Sendable {
         captures: any CaptureRepository,
         teaching: any GoalTeachingSignalRepository = InMemoryGoalTeachingSignalRepository(),
         eventLedger: any EventLedgerRepository = InMemoryEventLedgerRepository(),
+        sideEffectLedger: (any SideEffectLedgerRepository)? = nil,
         actionReceiptHistory: (any ActionReceiptHistoryRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)? = nil,
@@ -530,6 +532,7 @@ struct AppRepositories: Sendable {
         self.captures = captures
         self.teaching = teaching
         self.eventLedger = eventLedger
+        self.sideEffectLedger = sideEffectLedger
         self.actionReceiptHistory = actionReceiptHistory
         self.commandExecutionRecords = commandExecutionRecords
         self.goalCreationUnitOfWork = goalCreationUnitOfWork

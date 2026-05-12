@@ -172,6 +172,13 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Durable command execution attempts and results for local-only replay/reconciliation."
         ),
         .swiftData(
+            id: "swiftdata.side_effect_ledger_record",
+            storedTypeName: "SideEffectLedgerStorageRecord",
+            currentVersion: sideEffectLedgerSchemaVersion,
+            versionEvidence: "SideEffectLedgerStorageRecord.schemaVersion persists SideEffectLedgerRecord.schemaVersion and snapshot metadata.",
+            notes: "Local-only side-effect policy decision and result ledger for external-effect, confirmation, blocked, and local-only attempts."
+        ),
+        .swiftData(
             id: "swiftdata.app_state_record",
             storedTypeName: "AppStateRecord",
             currentVersion: "app_state_record.swiftdata.v1",
@@ -215,6 +222,7 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "TeachingSignalRecord",
         "EventLedgerRecord",
         "ActionReceiptHistoryRecordModel",
+        "SideEffectLedgerStorageRecord",
         "AppStateRecord",
     ]
 
