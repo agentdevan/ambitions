@@ -13,6 +13,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let selector: PlanningNextStepSelector
     let explainabilityProjector: any GoalExplainabilityProjecting
     let goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)?
+    let derivedReadModelCache: TodayDerivedReadModelCache
 
     init(
         repositories: AppRepositories,
@@ -27,7 +28,8 @@ struct RepositoryBackedTodayService: TodayServicing {
         energyLearningService: any GoalEnergyLearning = DefaultGoalEnergyLearningService(),
         selector: PlanningNextStepSelector? = nil,
         explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
-        goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil
+        goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil,
+        derivedReadModelCache: TodayDerivedReadModelCache = TodayDerivedReadModelCache()
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
@@ -45,6 +47,7 @@ struct RepositoryBackedTodayService: TodayServicing {
         )
         self.explainabilityProjector = explainabilityProjector
         self.goalIntelligenceService = goalIntelligenceService
+        self.derivedReadModelCache = derivedReadModelCache
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
@@ -220,15 +223,29 @@ private extension RepositoryBackedTodayService {
             completedToday: completedToday,
             shellSummary: focus.shellSummary ?? milestone.shellSummary
         )
-        let execution = TodayReadModelProjector(selector: selector).project(
+        let cacheKey = TodayDerivedReadModelCacheKey(
             mode: mode,
             snapshot: snapshot,
-            activeGoals: activeGoals,
             hero: hero,
             support: support,
             now: now,
             entryContext: entryContext
         )
+        let execution: TodayExecutionViewState
+        if let cached = derivedReadModelCache.value(for: cacheKey) {
+            execution = cached
+        } else {
+            execution = TodayReadModelProjector(selector: selector).project(
+                mode: mode,
+                snapshot: snapshot,
+                activeGoals: activeGoals,
+                hero: hero,
+                support: support,
+                now: now,
+                entryContext: entryContext
+            )
+            derivedReadModelCache.store(execution, for: cacheKey)
+        }
 
         return TodayExperience(
             mode: mode,

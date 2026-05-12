@@ -1,6 +1,93 @@
 import AmbitionsDesignSystem
 import Foundation
 
+struct TodayDerivedReadModelCacheKey: Hashable, Sendable {
+    let mode: TodayExperienceMode
+    let entryContext: TodayEntryContext
+    let now: String
+    let goalFingerprint: String
+    let draftFingerprint: String
+    let captureFingerprint: String
+    let evidenceFingerprint: String
+    let feedbackFingerprint: String
+    let eventLedgerFingerprint: String
+    let heroFingerprint: String
+    let supportFingerprint: String
+    let appStateID: String
+
+    init(
+        mode: TodayExperienceMode,
+        snapshot: RepositoryBackedTodayService.Snapshot,
+        hero: TodayHeroState,
+        support: TodaySupportLayerState,
+        now: Date,
+        entryContext: TodayEntryContext
+    ) {
+        self.mode = mode
+        self.entryContext = entryContext.normalized
+        self.now = DomainTimestamp.string(from: now)
+        self.goalFingerprint = Self.fingerprint(snapshot.goals.map { "\($0.id):\($0.revision):\($0.updatedAt):\($0.state.rawValue)" })
+        self.draftFingerprint = Self.fingerprint(snapshot.drafts.map { "\($0.id):\($0.updatedAt):\($0.latestResultKind?.rawValue ?? "none")" })
+        self.captureFingerprint = Self.fingerprint(snapshot.captures.map { "\($0.id):\($0.updatedAt):\($0.status.rawValue):\($0.route.rawValue)" })
+        self.evidenceFingerprint = Self.fingerprint(snapshot.evidence.map { "\($0.id):\($0.capturedAt)" })
+        self.feedbackFingerprint = Self.fingerprint(snapshot.feedback.map { "\($0.base.id):\($0.base.occurredAt):\($0.kind.rawValue)" })
+        self.eventLedgerFingerprint = Self.fingerprint(snapshot.eventLedger.map { "\($0.id):\($0.occurredAt):\($0.kind.rawValue)" })
+        self.heroFingerprint = Self.fingerprint([
+            hero.truth.greeting,
+            hero.truth.dominantText,
+            hero.truth.supportingText,
+            hero.primaryAction.title,
+            hero.primaryAction.subtitle
+        ])
+        self.supportFingerprint = Self.fingerprint([
+            support.timeAperture.title,
+            support.timeAperture.summary,
+            support.fixedCommitments.summary,
+            support.flexibleRoom.summary,
+            support.momentum.summary,
+            support.quickCaptureTitle,
+            support.quickCaptureDetail
+        ])
+        self.appStateID = snapshot.appState.id
+    }
+
+    private static func fingerprint(_ values: [String]) -> String {
+        "\(values.count)::\(values.sorted().joined(separator: "|"))"
+    }
+}
+
+final class TodayDerivedReadModelCache: @unchecked Sendable {
+    private var storage: [TodayDerivedReadModelCacheKey: TodayExecutionViewState] = [:]
+    private(set) var hitCount: Int = 0
+    private(set) var missCount: Int = 0
+    private let lock = NSLock()
+
+    func value(for key: TodayDerivedReadModelCacheKey) -> TodayExecutionViewState? {
+        lock.lock()
+        defer { lock.unlock() }
+        if let value = storage[key] {
+            hitCount += 1
+            return value
+        }
+        missCount += 1
+        return nil
+    }
+
+    func store(_ value: TodayExecutionViewState, for key: TodayDerivedReadModelCacheKey) {
+        lock.lock()
+        defer { lock.unlock() }
+        storage[key] = value
+    }
+
+    func removeAll() {
+        lock.lock()
+        defer { lock.unlock() }
+        storage.removeAll()
+        hitCount = 0
+        missCount = 0
+    }
+}
+
 struct TodayReadModelProjector {
     let selector: PlanningNextStepSelector
 

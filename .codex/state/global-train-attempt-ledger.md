@@ -61,3 +61,4 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 | 2026-05-12T17:36:00Z | fast-install-direct | PK34 | 1 | green | docs/audits/pk34-batch-closeout-report.md | PK34 focused runtime goal-intelligence service test passed; PK35 is next eligible. |
 | 2026-05-12T17:50:00Z | fast-install-direct | PK35 | 1 | green | docs/audits/pk35-batch-closeout-report.md | PK35 focused large-store fixture generator test passed; PK36 is next eligible. |
 | 2026-05-12T18:03:00Z | fast-install-direct | PK36 | 1 | green | docs/audits/pk36-batch-closeout-report.md | PK36 focused performance energy model test passed; PK37 is next eligible. |
+| 2026-05-12T18:18:00Z | fast-install-direct | PK37 | 1 | green | docs/audits/pk37-batch-closeout-report.md | PK37 focused Today derived read-model cache test passed; PK38 is next eligible. |

@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK36 Performance Budgets / Green.
-Next recommended implementation pass: PK37 Derived Read-Model Cache.
-Next eligible non-UI platform batch: PK37 Derived Read-Model Cache.
-Scope: PK36 adds deterministic performance-budget assessment; it does not execute external/cloud LLM behavior, hosted backend behavior, telemetry, profiling automation, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+Current batch: PK37 Derived Read-Model Cache / Green.
+Next recommended implementation pass: PK38 Move Domain To Package.
+Next eligible non-UI platform batch: PK38 Move Domain To Package.
+Scope: PK37 adds local in-memory Today read-model caching; it does not execute external/cloud LLM behavior, hosted backend behavior, disk-cache behavior, telemetry, release readiness, device validation, accessibility conformance claims, performance validation, hosted AI, TestFlight/App Store readiness, privacy/legal approval, or global train completion claims.
+
+## PK37 Derived Read-Model Cache Closeout
+
+- PK37 report: `docs/audits/pk37-batch-closeout-report.md`.
+- Scope: local in-memory Today execution read-model cache keyed by local snapshot, hero/support, timestamp, entry context, and app-state fingerprints.
+- Commit: same closeout commit (`PK37: install derived read-model cache`), pushed to `main`.
+- Proof: `git diff --check`, `xcodegen generate`, forbidden-claim scan, and focused `TodayDerivedReadModelCacheTests` passed.
+- Canonical queue now marks PK37 Green and PK38 executable now.
+- EFC applicability: invoked for read-model cache and local data-boundary proof integrity.
+- No full-suite, device, accessibility, performance validation, TestFlight/App Store, legal/privacy approval, release-readiness, external/cloud LLM, hosted AI/backend, disk-cache, telemetry, or global-train-completion claim is made.
 
 ## PK36 Performance Budgets Closeout
 
