@@ -461,6 +461,44 @@ enum SourceAtlasRequirementReviewState: String, Codable, Sendable, Equatable, Ha
     case blocked
 }
 
+extension SourceAtlasRequirementSourceState {
+    var blocksCurrentProjection: Bool {
+        switch self {
+        case .unknown, .sourceNeeded, .stale, .contradicted, .revoked:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var hasExplicitProvenanceSignal: Bool {
+        switch self {
+        case .official, .officialCurrent, .current, .locallyProven:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+extension SourceAtlasRequirementFreshnessState {
+    var blocksCurrentProjection: Bool {
+        self == .stale || self == .unknown
+    }
+}
+
+extension SourceAtlasRequirementRiskState {
+    var blocksCurrentProjection: Bool {
+        self == .high || self == .unknown
+    }
+}
+
+extension SourceAtlasRequirementReviewState {
+    var blocksCurrentProjection: Bool {
+        self == .required || self == .blocked || self == .requested
+    }
+}
+
 extension SourceAtlasRequirement {
     var canDriveCurrentRecommendation: Bool {
         (sourceState == .officialCurrent || sourceState == .current)
@@ -1363,12 +1401,238 @@ struct SourceAtlasRequirementOverlay: Codable, Sendable, Equatable, Hashable, Id
     }
 }
 
-struct SourceAtlasProjectionRecipe: Codable, Sendable, Equatable, Hashable, Identifiable {
+struct SourceAtlasGoalProjection: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let goalIntent: String
     let requiredPackIDs: [String]
+    let projectionProfiles: [SourceAtlasProjectionProfile]
+
+    init(
+        id: String,
+        goalIntent: String,
+        requiredPackIDs: [String],
+        projectionProfiles: [SourceAtlasProjectionProfile] = []
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.goalIntent = goalIntent.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.requiredPackIDs = Self.orderedUnique(requiredPackIDs)
+        self.projectionProfiles = projectionProfiles
+    }
+
+    var canDriveCurrentProjection: Bool {
+        projectionProfiles.contains(where: { $0.canDriveCurrentProjection })
+    }
+
+    var hasProjectionReceipts: Bool {
+        projectionProfiles.isEmpty == false &&
+            projectionProfiles.allSatisfy(\.producesProjectionReceipt)
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasProjectionProfile: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let profileTitle: String
+    let sourceState: SourceAtlasRequirementSourceState
+    let freshnessState: SourceAtlasRequirementFreshnessState
+    let riskState: SourceAtlasRequirementRiskState
+    let reviewState: SourceAtlasRequirementReviewState
     let producesPersonalPathInstance: Bool
     let producesProjectionReceipt: Bool
+    let optionValueMap: SourceAtlasOptionValueMap
+    let personalPathInstances: [SourceAtlasPersonalPathInstance]
+    let alternativePathSet: SourceAtlasAlternativePathSet?
+
+    init(
+        id: String,
+        profileTitle: String,
+        sourceState: SourceAtlasRequirementSourceState,
+        freshnessState: SourceAtlasRequirementFreshnessState,
+        riskState: SourceAtlasRequirementRiskState,
+        reviewState: SourceAtlasRequirementReviewState,
+        producesPersonalPathInstance: Bool,
+        producesProjectionReceipt: Bool,
+        optionValueMap: SourceAtlasOptionValueMap,
+        personalPathInstances: [SourceAtlasPersonalPathInstance] = [],
+        alternativePathSet: SourceAtlasAlternativePathSet? = nil
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.profileTitle = profileTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceState = sourceState
+        self.freshnessState = freshnessState
+        self.riskState = riskState
+        self.reviewState = reviewState
+        self.producesPersonalPathInstance = producesPersonalPathInstance
+        self.producesProjectionReceipt = producesProjectionReceipt
+        self.optionValueMap = optionValueMap
+        self.personalPathInstances = personalPathInstances
+        self.alternativePathSet = alternativePathSet
+    }
+
+    var canDriveCurrentProjection: Bool {
+        sourceState.blocksCurrentProjection == false &&
+            freshnessState.blocksCurrentProjection == false &&
+            reviewState.blocksCurrentProjection == false &&
+            riskState.blocksCurrentProjection == false &&
+            producesProjectionReceipt &&
+            producesPersonalPathInstance &&
+            optionValueMap.canDriveCurrentProjection &&
+            personalPathInstances.contains(where: { $0.canDriveCurrentProjection }) &&
+            alternativePathSet?.canDriveCurrentProjection != false
+    }
+}
+
+struct SourceAtlasPersonalPathInstance: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let personalPathTemplateID: String
+    let stepCandidateSeeds: [SourceAtlasStepCandidateSeed]
+    let sourceState: SourceAtlasRequirementSourceState
+    let freshnessState: SourceAtlasRequirementFreshnessState
+    let reviewState: SourceAtlasRequirementReviewState
+    let riskState: SourceAtlasRequirementRiskState
+    let sourceRecordIDs: [String]
+
+    init(
+        id: String,
+        personalPathTemplateID: String,
+        stepCandidateSeeds: [SourceAtlasStepCandidateSeed] = [],
+        sourceState: SourceAtlasRequirementSourceState,
+        freshnessState: SourceAtlasRequirementFreshnessState,
+        reviewState: SourceAtlasRequirementReviewState,
+        riskState: SourceAtlasRequirementRiskState,
+        sourceRecordIDs: [String]
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.personalPathTemplateID = personalPathTemplateID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.stepCandidateSeeds = stepCandidateSeeds
+        self.sourceState = sourceState
+        self.freshnessState = freshnessState
+        self.reviewState = reviewState
+        self.riskState = riskState
+        self.sourceRecordIDs = Self.orderedUnique(sourceRecordIDs)
+    }
+
+    var hasProvenanceEvidence: Bool {
+        sourceRecordIDs.isEmpty == false
+    }
+
+    var canDriveCurrentProjection: Bool {
+        sourceState.blocksCurrentProjection == false &&
+            freshnessState.blocksCurrentProjection == false &&
+            reviewState.blocksCurrentProjection == false &&
+            riskState.blocksCurrentProjection == false &&
+            hasProvenanceEvidence
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasStepCandidateSeed: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let stepCandidate: String
+    let storesFinalSchedule: Bool
+
+    init(
+        id: String,
+        stepCandidate: String,
+        storesFinalSchedule: Bool = false
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.stepCandidate = stepCandidate.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.storesFinalSchedule = storesFinalSchedule
+    }
+}
+
+struct SourceAtlasAlternativePathSet: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let personalPathInstanceIDs: [String]
+    let sourceState: SourceAtlasRequirementSourceState
+    let freshnessState: SourceAtlasRequirementFreshnessState
+    let reviewState: SourceAtlasRequirementReviewState
+    let riskState: SourceAtlasRequirementRiskState
+
+    init(
+        id: String,
+        personalPathInstanceIDs: [String],
+        sourceState: SourceAtlasRequirementSourceState,
+        freshnessState: SourceAtlasRequirementFreshnessState,
+        reviewState: SourceAtlasRequirementReviewState,
+        riskState: SourceAtlasRequirementRiskState
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.personalPathInstanceIDs = Self.orderedUnique(personalPathInstanceIDs)
+        self.sourceState = sourceState
+        self.freshnessState = freshnessState
+        self.reviewState = reviewState
+        self.riskState = riskState
+    }
+
+    var canDriveCurrentProjection: Bool {
+        personalPathInstanceIDs.isEmpty == false &&
+            sourceState.blocksCurrentProjection == false &&
+            freshnessState.blocksCurrentProjection == false &&
+            reviewState.blocksCurrentProjection == false &&
+            riskState.blocksCurrentProjection == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(
+            Set(
+                values
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.isEmpty == false }
+            )
+        ).sorted()
+    }
+}
+
+struct SourceAtlasOptionValueMap: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let values: [String: String]
+    let sourceState: SourceAtlasRequirementSourceState
+    let freshnessState: SourceAtlasRequirementFreshnessState
+    let reviewState: SourceAtlasRequirementReviewState
+    let riskState: SourceAtlasRequirementRiskState
+
+    init(
+        id: String,
+        values: [String: String],
+        sourceState: SourceAtlasRequirementSourceState,
+        freshnessState: SourceAtlasRequirementFreshnessState,
+        reviewState: SourceAtlasRequirementReviewState,
+        riskState: SourceAtlasRequirementRiskState
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.values = values
+        self.sourceState = sourceState
+        self.freshnessState = freshnessState
+        self.reviewState = reviewState
+        self.riskState = riskState
+    }
+
+    var canDriveCurrentProjection: Bool {
+        sourceState.blocksCurrentProjection == false &&
+            freshnessState.blocksCurrentProjection == false &&
+            reviewState.blocksCurrentProjection == false &&
+            riskState.blocksCurrentProjection == false
+    }
 }
 
 struct SourceAtlasPack: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -1380,7 +1644,7 @@ struct SourceAtlasPack: Codable, Sendable, Equatable, Hashable, Identifiable {
     let requirements: [SourceAtlasRequirement]
     let starterItems: [SourceAtlasStarterItem]
     let proofMap: [SourceAtlasProofMapEntry]
-    let projectionRecipes: [SourceAtlasProjectionRecipe]
+    let projections: [SourceAtlasGoalProjection]
     let freshnessPolicy: SourceAtlasFreshnessPolicy
     let riskPolicy: SourceAtlasRiskPolicy
     let disclosureCopy: SourceAtlasDisclosureCopy
@@ -1397,7 +1661,7 @@ struct SourceAtlasPack: Codable, Sendable, Equatable, Hashable, Identifiable {
         requirements: [SourceAtlasRequirement],
         starterItems: [SourceAtlasStarterItem],
         proofMap: [SourceAtlasProofMapEntry],
-        projectionRecipes: [SourceAtlasProjectionRecipe],
+        projections: [SourceAtlasGoalProjection],
         freshnessPolicy: SourceAtlasFreshnessPolicy,
         riskPolicy: SourceAtlasRiskPolicy,
         disclosureCopy: SourceAtlasDisclosureCopy,
@@ -1413,7 +1677,7 @@ struct SourceAtlasPack: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.requirements = requirements
         self.starterItems = starterItems
         self.proofMap = proofMap
-        self.projectionRecipes = projectionRecipes
+        self.projections = projections
         self.freshnessPolicy = freshnessPolicy
         self.riskPolicy = riskPolicy
         self.disclosureCopy = disclosureCopy
@@ -1562,8 +1826,13 @@ struct SourceAtlasPackValidator: Sendable, Equatable, Hashable {
             issues.insert(.universalScheduledStep)
         }
 
-        if pack.projectionRecipes.contains(where: { $0.producesProjectionReceipt == false }) {
-            issues.insert(.projectionRecipeMissingReceipt)
+        for projection in pack.projections {
+            if projection.projectionProfiles.isEmpty || projection.projectionProfiles.contains(where: { $0.personalPathInstances.isEmpty }) {
+                issues.insert(.invalidRequirementOverlay)
+            }
+            if projection.hasProjectionReceipts == false {
+                issues.insert(.projectionRecipeMissingReceipt)
+            }
         }
 
         return issues.sorted { $0.rawValue < $1.rawValue }

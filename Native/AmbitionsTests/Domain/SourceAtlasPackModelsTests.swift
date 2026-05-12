@@ -29,7 +29,7 @@ final class SourceAtlasPackModelsTests: XCTestCase {
             requirements: pack.requirements,
             starterItems: pack.starterItems,
             proofMap: pack.proofMap,
-            projectionRecipes: pack.projectionRecipes,
+            projections: pack.projections,
             freshnessPolicy: pack.freshnessPolicy,
             riskPolicy: pack.riskPolicy,
             disclosureCopy: pack.disclosureCopy,
@@ -116,15 +116,76 @@ final class SourceAtlasPackModelsTests: XCTestCase {
         XCTAssertTrue(pack.validationIssues.contains(.universalScheduledStep))
     }
 
-    func testProjectionRecipesMustProduceReceipts() {
+    func testProjectionProfilesMustProduceReceipts() {
         let pack = Self.validPack(
-            projectionRecipes: [
-                SourceAtlasProjectionRecipe(
-                    id: "recipe-no-receipt",
+            projections: [
+                SourceAtlasGoalProjection(
+                    id: "projection-no-receipt",
                     goalIntent: "starter_goal",
                     requiredPackIDs: ["sports.pickleball.domain"],
-                    producesPersonalPathInstance: true,
-                    producesProjectionReceipt: false
+                    projectionProfiles: [
+                        SourceAtlasProjectionProfile(
+                            id: "profile-no-receipt",
+                            profileTitle: "No receipt",
+                            sourceState: .officialCurrent,
+                            freshnessState: .current,
+                            riskState: .low,
+                            reviewState: .approved,
+                            producesPersonalPathInstance: true,
+                            producesProjectionReceipt: false,
+                            optionValueMap: SourceAtlasOptionValueMap(
+                                id: "no-receipt-map",
+                                values: ["pace": "steady"],
+                                sourceState: .officialCurrent,
+                                freshnessState: .current,
+                                reviewState: .approved,
+                                riskState: .low
+                            ),
+                            personalPathInstances: [
+                                SourceAtlasPersonalPathInstance(
+                                    id: "path-no-receipt",
+                                    personalPathTemplateID: "template-no-receipt",
+                                    stepCandidateSeeds: [
+                                        SourceAtlasStepCandidateSeed(
+                                            id: "seed-no-receipt",
+                                            stepCandidate: "Rehearse first serve."
+                                        )
+                                    ],
+                                    sourceState: .officialCurrent,
+                                    freshnessState: .current,
+                                    reviewState: .approved,
+                                    riskState: .low,
+                                    sourceRecordIDs: ["source-official"]
+                                )
+                            ]
+                        )
+                    ]
+                )
+            ]
+        )
+
+        XCTAssertTrue(pack.validationIssues.contains(.projectionRecipeMissingReceipt))
+    }
+
+    func testMixedProjectionProfilesStillRequireEveryReceipt() {
+        let pack = Self.validPack(
+            projections: [
+                SourceAtlasGoalProjection(
+                    id: "projection-mixed-receipts",
+                    goalIntent: "starter_goal",
+                    requiredPackIDs: ["sports.pickleball.domain"],
+                    projectionProfiles: [
+                        Self.makeProjectionProfile(
+                            id: "profile-with-receipt",
+                            goalIntent: "starter_goal",
+                            producesProjectionReceipt: true
+                        ),
+                        Self.makeProjectionProfile(
+                            id: "profile-missing-receipt",
+                            goalIntent: "starter_goal",
+                            producesProjectionReceipt: false
+                        )
+                    ]
                 )
             ]
         )
@@ -319,6 +380,75 @@ final class SourceAtlasPackModelsTests: XCTestCase {
 
         XCTAssertTrue(pack.validationIssues.contains(.missingCanonIntegration))
     }
+
+    func testDifferentProfilesCanProduceDifferentPersonalPathInstancesFromSameGraph() {
+        let graphProjection = Self.makeSharedGoalProjection(
+            id: "projection-shared-graph",
+            goalIntent: "fitness_start",
+            profileIDs: ["profile-fast", "profile-deliberate"],
+            pathInstanceIDs: ["path-fast", "path-deliberate"]
+        )
+
+        let profilePathIDs = Set(graphProjection.projectionProfiles.map { $0.personalPathInstances.map(\.id) }.flatMap { $0 })
+
+        XCTAssertEqual(profilePathIDs.count, 2)
+        XCTAssertTrue(graphProjection.canDriveCurrentProjection)
+    }
+
+    func testSourceNeededAndStaleAndRevokedProjectionStatesBlockCurrentProjection() {
+        let optionMap = SourceAtlasOptionValueMap(
+            id: "state-map",
+            values: ["focus": "core"],
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            reviewState: .approved,
+            riskState: .low
+        )
+        let blockedSources: [SourceAtlasRequirementSourceState] = [.sourceNeeded, .stale, .revoked]
+
+        for sourceState in blockedSources {
+            let profile = SourceAtlasProjectionProfile(
+                id: "profile-\(sourceState.rawValue)",
+                profileTitle: "Blocked profile",
+                sourceState: sourceState,
+                freshnessState: .current,
+                riskState: .low,
+                reviewState: .approved,
+                producesPersonalPathInstance: true,
+                producesProjectionReceipt: true,
+                optionValueMap: optionMap,
+                personalPathInstances: [
+                    SourceAtlasPersonalPathInstance(
+                        id: "path-\(sourceState.rawValue)",
+                        personalPathTemplateID: "template-\(sourceState.rawValue)",
+                        stepCandidateSeeds: [
+                            SourceAtlasStepCandidateSeed(
+                                id: "seed-\(sourceState.rawValue)",
+                                stepCandidate: "Hold a steady baseline."
+                            )
+                        ],
+                        sourceState: sourceState,
+                        freshnessState: .current,
+                        reviewState: .approved,
+                        riskState: .low,
+                        sourceRecordIDs: ["source-official"]
+                    )
+                ]
+            )
+
+            XCTAssertFalse(profile.canDriveCurrentProjection)
+        }
+    }
+
+    func testProjectionOutputRemainsValueModelOnlyWithConservativeBoundaries() {
+        let pack = Self.validPack()
+
+        XCTAssertTrue(pack.runtimeBoundary.isValueModelOnly)
+        XCTAssertEqual(pack.validationIssues.contains(.runtimeStoreBehavior), false)
+        XCTAssertFalse(
+            pack.projections.contains(where: { $0.canDriveCurrentProjection == false })
+        )
+    }
 }
 
 private extension SourceAtlasPackModelsTests {
@@ -329,7 +459,7 @@ private extension SourceAtlasPackModelsTests {
         requirements: [SourceAtlasRequirement]? = nil,
         starterItems: [SourceAtlasStarterItem]? = nil,
         proofMap: [SourceAtlasProofMapEntry]? = nil,
-        projectionRecipes: [SourceAtlasProjectionRecipe]? = nil,
+        projections: [SourceAtlasGoalProjection]? = nil,
         runtimeBoundary: SourceAtlasRuntimeBoundary = .valueModelOnly,
         composition: SourceAtlasCompositionContract? = nil
     ) -> SourceAtlasPack {
@@ -400,13 +530,17 @@ private extension SourceAtlasPackModelsTests {
                     evidenceLedgerBridgeIDs: ["ledger-proof-serve"]
                 )
             ],
-            projectionRecipes: projectionRecipes ?? [
-                SourceAtlasProjectionRecipe(
+            projections: projections ?? [
+                SourceAtlasGoalProjection(
                     id: "recipe-pickleball-starter",
                     goalIntent: "starter_goal",
                     requiredPackIDs: ["sports.pickleball.domain"],
-                    producesPersonalPathInstance: true,
-                    producesProjectionReceipt: true
+                    projectionProfiles: [
+                        Self.makeProjectionProfile(
+                            id: "profile-pickleball-starter",
+                            goalIntent: "starter_goal"
+                        )
+                    ]
                 )
             ],
             freshnessPolicy: SourceAtlasFreshnessPolicy(
@@ -430,6 +564,75 @@ private extension SourceAtlasPackModelsTests {
                 ownsIndividualGoalPhrase: false,
                 requirementOverlays: []
             )
+        )
+    }
+
+    static func makeProjectionProfile(
+        id: String,
+        goalIntent: String,
+        sourceState: SourceAtlasRequirementSourceState = .officialCurrent,
+        freshnessState: SourceAtlasRequirementFreshnessState = .current,
+        reviewState: SourceAtlasRequirementReviewState = .approved,
+        riskState: SourceAtlasRequirementRiskState = .low,
+        producesPersonalPathInstance: Bool = true,
+        producesProjectionReceipt: Bool = true,
+        pathInstanceID: String? = nil,
+        optionValueMapValues: [String: String] = ["cadence": "steady"]
+    ) -> SourceAtlasProjectionProfile {
+        SourceAtlasProjectionProfile(
+            id: id,
+            profileTitle: "\(goalIntent)-\(id)",
+            sourceState: sourceState,
+            freshnessState: freshnessState,
+            riskState: riskState,
+            reviewState: reviewState,
+            producesPersonalPathInstance: producesPersonalPathInstance,
+            producesProjectionReceipt: producesProjectionReceipt,
+            optionValueMap: SourceAtlasOptionValueMap(
+                id: "map-\(id)",
+                values: optionValueMapValues,
+                sourceState: sourceState,
+                freshnessState: freshnessState,
+                reviewState: reviewState,
+                riskState: riskState
+            ),
+            personalPathInstances: [
+                SourceAtlasPersonalPathInstance(
+                    id: pathInstanceID ?? "path-\(id)",
+                    personalPathTemplateID: "template-\(id)",
+                    stepCandidateSeeds: [
+                        SourceAtlasStepCandidateSeed(
+                            id: "seed-\(id)",
+                            stepCandidate: "Practice a goal-aligned path for \(goalIntent)."
+                        )
+                    ],
+                    sourceState: sourceState,
+                    freshnessState: freshnessState,
+                    reviewState: reviewState,
+                    riskState: riskState,
+                    sourceRecordIDs: ["source-official"]
+                )
+            ]
+        )
+    }
+
+    static func makeSharedGoalProjection(
+        id: String,
+        goalIntent: String,
+        profileIDs: [String],
+        pathInstanceIDs: [String]
+    ) -> SourceAtlasGoalProjection {
+        SourceAtlasGoalProjection(
+            id: id,
+            goalIntent: goalIntent,
+            requiredPackIDs: ["sports.pickleball.domain"],
+            projectionProfiles: zip(profileIDs, pathInstanceIDs).map { profileID, pathInstanceID in
+                makeProjectionProfile(
+                    id: profileID,
+                    goalIntent: goalIntent,
+                    pathInstanceID: pathInstanceID
+                )
+            }
         )
     }
 }
