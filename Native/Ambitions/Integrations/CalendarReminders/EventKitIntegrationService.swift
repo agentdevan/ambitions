@@ -315,11 +315,14 @@ extension StubCalendarRemindersService: CalendarRealityServicing, CalendarBlockW
 
 actor EventKitIntegrationService: CalendarRemindersServicing {
     private let storeClient: any EventKitStoreClient
+    private let sideEffectLedger: (any SideEffectLedgerRepository)?
 
     init(
-        storeClient: any EventKitStoreClient = EventKitStoreClientLive()
+        storeClient: any EventKitStoreClient = EventKitStoreClientLive(),
+        sideEffectLedger: (any SideEffectLedgerRepository)? = nil
     ) {
         self.storeClient = storeClient
+        self.sideEffectLedger = sideEffectLedger
     }
 
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
@@ -356,10 +359,26 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord {
         let state = await requestAuthorizationIfNeeded(for: .calendarEvents)
         guard state.canWrite else {
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .blocked,
+                boundary: .externalEffect,
+                requiresConfirmation: true,
+                externalEffect: true,
+                blockedFacts: ["Calendar write permission was not available for this requested calendar event."]
+            )
             throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
         }
 
         guard let interval = proposedInterval(for: selection, durationMinutes: durationMinutes, now: now) else {
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .failedSafely,
+                boundary: .localOnly,
+                requiresConfirmation: false,
+                externalEffect: false,
+                degradedFacts: ["Calendar event write request lacked a concrete time."]
+            )
             throw CalendarRemindersError.missingEventStartDate
         }
 
@@ -371,6 +390,14 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         )
         do {
             let identifier = try await storeClient.saveEvent(payload)
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .recordedLocalOnly,
+                boundary: .externalEffect,
+                requiresConfirmation: false,
+                externalEffect: true,
+                reasons: [.externalSideEffect]
+            )
             return CreatedCalendarEventRecord(
                 identifier: identifier,
                 title: selection.stepTitle,
@@ -378,8 +405,24 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 endDate: interval.end
             )
         } catch let error as CalendarRemindersError {
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .failedSafely,
+                boundary: .externalEffect,
+                requiresConfirmation: false,
+                externalEffect: true,
+                degradedFacts: ["Calendar event write could not be completed safely."]
+            )
             throw error
         } catch {
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .failedSafely,
+                boundary: .externalEffect,
+                requiresConfirmation: false,
+                externalEffect: true,
+                degradedFacts: ["Calendar event write could not be completed safely."]
+            )
             throw CalendarRemindersError.saveFailed(error.localizedDescription)
         }
     }
@@ -560,6 +603,14 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
         if permission.canRead {
             busy = await fetchDerivedBusyWindows(for: request.horizon)
         } else {
+            await recordCalendarSideEffect(
+                actionKind: .prepareCalendarBlock,
+                status: .blocked,
+                boundary: .localOnly,
+                requiresConfirmation: false,
+                externalEffect: false,
+                blockedFacts: ["Calendar read access was not available for this open-window request."]
+            )
             busy = []
         }
         let context = CalendarDerivedContext(
@@ -581,6 +632,16 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
                 minimumWindowMinutes: request.minimumWindowMinutes
             )
         )
+        if permission.canRead {
+            await recordCalendarSideEffect(
+                actionKind: .prepareCalendarBlock,
+                status: .recordedLocalOnly,
+                boundary: .localOnly,
+                requiresConfirmation: false,
+                externalEffect: false,
+                reasons: [.noChangeNeeded]
+            )
+        }
         return CalendarRealityReadResult(
             permissionState: permission,
             derivedBusyWindows: busy,
@@ -591,10 +652,26 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
 
     func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock {
         guard intent.isExecutable else {
-            throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .blocked,
+                boundary: .externalEffect,
+                requiresConfirmation: true,
+                externalEffect: true,
+                blockedFacts: ["Calendar block write request was missing required timing details."]
+            )
+            throw CalendarRemindersError.missingEventStartDate
         }
         let permission = await requestCalendarWriteAccessForConfirmedBlock(intent: intent)
         guard permission.canWrite else {
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .blocked,
+                boundary: .externalEffect,
+                requiresConfirmation: true,
+                externalEffect: true,
+                blockedFacts: ["Calendar write permission was not available for the confirmed block."]
+            )
             throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
         }
         let payload = EventKitEventPayload(
@@ -603,19 +680,75 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
             startDate: intent.block.start,
             endDate: intent.block.end
         )
-        let identifier = try await storeClient.saveEvent(payload)
-        return ScheduledAmbitionsBlock(
-            id: intent.block.id,
-            title: intent.block.title,
-            start: intent.block.start,
-            end: intent.block.end,
-            contextLens: intent.block.contextLens,
-            relatedGoalID: intent.block.relatedGoalID,
-            relatedCaptureID: intent.block.relatedCaptureID,
-            relatedPlanID: intent.block.relatedPlanID,
-            isUserConfirmed: true,
-            calendarEventIdentifier: identifier
+        do {
+            let identifier = try await storeClient.saveEvent(payload)
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .recordedLocalOnly,
+                boundary: .externalEffect,
+                requiresConfirmation: true,
+                externalEffect: true,
+                reasons: [.externalSideEffect]
+            )
+            return ScheduledAmbitionsBlock(
+                id: intent.block.id,
+                title: intent.block.title,
+                start: intent.block.start,
+                end: intent.block.end,
+                contextLens: intent.block.contextLens,
+                relatedGoalID: intent.block.relatedGoalID,
+                relatedCaptureID: intent.block.relatedCaptureID,
+                relatedPlanID: intent.block.relatedPlanID,
+                isUserConfirmed: true,
+                calendarEventIdentifier: identifier
+            )
+        } catch {
+            await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .failedSafely,
+                boundary: .externalEffect,
+                requiresConfirmation: true,
+                externalEffect: true,
+                degradedFacts: ["Calendar block write did not complete."]
+            )
+            throw error
+        }
+    }
+
+    private func recordCalendarSideEffect(
+        actionKind: SafeAutomationActionKind,
+        status: SideEffectLedgerStatus,
+        boundary: SideEffectLedgerBoundary,
+        requiresConfirmation: Bool,
+        externalEffect: Bool,
+        reasons: [SafeAutomationPolicyReason] = [],
+        blockedFacts: [String] = [],
+        degradedFacts: [String] = []
+    ) async {
+        guard let sideEffectLedger else {
+            return
+        }
+
+        let now = Date()
+        let record = SideEffectLedgerRecord(
+            id: "calendar.\(actionKind.rawValue).\(status.rawValue).\(UUID().uuidString.lowercased())",
+            effectKind: .calendar,
+            status: status,
+            boundary: boundary,
+            actionKind: actionKind,
+            sourceDomain: .plan,
+            occurredAt: DomainTimestamp.string(from: now),
+            localOnly: boundary == .localOnly,
+            requiresConfirmation: requiresConfirmation,
+            externalEffect: externalEffect,
+            reasons: reasons,
+            blockedFacts: blockedFacts,
+            degradedFacts: degradedFacts
         )
+
+        do {
+            try await sideEffectLedger.append(record)
+        } catch {}
     }
 }
 

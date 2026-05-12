@@ -99,7 +99,8 @@ final class EventKitIntegrationServiceTests: XCTestCase {
     func testCreateCalendarEventFailsWhenStepHasNoSuggestedDate() async {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
-        let service = EventKitIntegrationService(storeClient: store)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
         let selection = NextStepSchedulingSelection(
             goalID: "goal-1",
             goalTitle: "Ship CFP proposal",
@@ -117,6 +118,52 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
+
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.status, .failedSafely)
+        XCTAssertEqual(record?.boundary, .localOnly)
+        XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
+        XCTAssertTrue(record?.degradedFacts.contains("Calendar event write request lacked a concrete time.") == true)
+        XCTAssertFalse(record?.blockedFacts.contains("Draft conference abstract") == true)
+    }
+
+    func testCreateCalendarEventSuccessRecordsCalendarSideEffect() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+
+        let record = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+
+        let sideEffect = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record.identifier, "event-1")
+        XCTAssertEqual(sideEffect?.effectKind, .calendar)
+        XCTAssertEqual(sideEffect?.status, .recordedLocalOnly)
+        XCTAssertEqual(sideEffect?.boundary, .externalEffect)
+        XCTAssertEqual(sideEffect?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(sideEffect?.sourceDomain, .plan)
+        XCTAssertEqual(sideEffect?.requiresConfirmation, false)
+        XCTAssertEqual(sideEffect?.externalEffect, true)
+        XCTAssertTrue(sideEffect?.reasons.contains(.externalSideEffect) == true)
+        XCTAssertFalse(sideEffect?.blockedFacts.contains("Draft conference abstract") == true)
+    }
+
+    func testRepeatedCalendarEventSuccessesRecordDistinctLedgerEntries() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+
+        _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+        _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+
+        let records = await sideEffectLedger.records
+        XCTAssertEqual(records.count, 2)
+        XCTAssertEqual(Set(records.map(\.id)).count, 2)
+        XCTAssertTrue(records.allSatisfy { $0.effectKind == .calendar })
+        XCTAssertTrue(records.allSatisfy { $0.status == .recordedLocalOnly })
+        XCTAssertTrue(records.allSatisfy { $0.externalEffect })
     }
 }
 
@@ -197,5 +244,37 @@ private actor RecordingEventKitStoreClient: EventKitStoreClient {
         case .calendarEvents:
             return "calendar-events"
         }
+    }
+}
+
+private actor RecordingSideEffectLedgerRepository: SideEffectLedgerRepository {
+    private(set) var records: [SideEffectLedgerRecord] = []
+
+    var lastRecord: SideEffectLedgerRecord? {
+        records.first
+    }
+
+    func append(_ record: SideEffectLedgerRecord) async throws {
+        records.removeAll { $0.id == record.id }
+        records.append(record)
+    }
+
+    func fetchRecent(limit: Int) async throws -> [SideEffectLedgerRecord] {
+        Array(records.sorted(by: Self.sort).prefix(max(0, limit)))
+    }
+
+    func fetchRecords(status: SideEffectLedgerStatus) async throws -> [SideEffectLedgerRecord] {
+        records.filter { $0.status == status }.sorted(by: Self.sort)
+    }
+
+    func fetchRecord(id: String) async throws -> SideEffectLedgerRecord? {
+        records.first { $0.id == id }
+    }
+
+    private static func sort(_ lhs: SideEffectLedgerRecord, _ rhs: SideEffectLedgerRecord) -> Bool {
+        if lhs.occurredAt != rhs.occurredAt {
+            return lhs.occurredAt > rhs.occurredAt
+        }
+        return lhs.id < rhs.id
     }
 }

@@ -15,7 +15,8 @@ final class CalendarRealityServiceTests: XCTestCase {
                 isAllDay: false
             )
         ])
-        let service = EventKitIntegrationService(storeClient: store)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
 
         let result = await service.findOpenWindows(
             request: CalendarRealityReadRequest(
@@ -33,13 +34,22 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertTrue(result.calendarContext.localOnly)
         XCTAssertEqual(result.calendarContext.privacy, .calendarDerived)
         XCTAssertFalse(result.openWindowCandidates.isEmpty)
+
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.status, .recordedLocalOnly)
+        XCTAssertEqual(record?.actionKind, .prepareCalendarBlock)
+        XCTAssertEqual(record?.boundary, .localOnly)
+        XCTAssertEqual(record?.requiresConfirmation, false)
+        XCTAssertFalse(record?.blockedFacts.contains("Sensitive") == true)
     }
 
     func testDeniedCalendarAccessDegradesWithoutFetchingEvents() async {
         let store = RecordingRealityEventKitStoreClient()
         let now = Date(timeIntervalSince1970: 1_714_000_000)
         await store.setAuthorization(state: .denied, for: .calendarEvents)
-        let service = EventKitIntegrationService(storeClient: store)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
 
         let result = await service.findOpenWindows(
             request: CalendarRealityReadRequest(
@@ -53,6 +63,15 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertTrue(result.calendarContext.explanation.contains("Time still works without calendar access"))
         let fetchCount = await store.currentFetchCount()
         XCTAssertEqual(fetchCount, 0)
+
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.status, .blocked)
+        XCTAssertEqual(record?.actionKind, .prepareCalendarBlock)
+        XCTAssertEqual(record?.boundary, .localOnly)
+        XCTAssertEqual(record?.requiresConfirmation, false)
+        XCTAssertEqual(record?.externalEffect, false)
+        XCTAssertTrue(record?.blockedFacts.contains("Calendar read access was not available for this open-window request.") == true)
     }
 
     func testConfirmedBlockWriteRequestsWriteAndCreatesAmbitionsBlock() async throws {
@@ -60,7 +79,8 @@ final class CalendarRealityServiceTests: XCTestCase {
         let now = Date(timeIntervalSince1970: 1_714_000_000)
         await store.setAuthorization(state: .notDetermined, for: .calendarEvents)
         await store.setWriteOnlyAuthorizationResponse(state: .writeOnly)
-        let service = EventKitIntegrationService(storeClient: store)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
         let block = ScheduledAmbitionsBlock(
             id: "block-1",
             title: "Draft proposal",
@@ -82,6 +102,13 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertEqual(writeOnlyRequestCount, 1)
         XCTAssertEqual(payload?.title, "Draft proposal")
         XCTAssertEqual(payload?.notes, "Created by Ambitions after explicit Time confirmation.")
+
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.status, .recordedLocalOnly)
+        XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(record?.requiresConfirmation, true)
+        XCTAssertEqual(record?.externalEffect, true)
     }
 }
 
@@ -158,5 +185,37 @@ private actor RecordingRealityEventKitStoreClient: EventKitStoreClient {
         case .calendarEvents:
             return "calendarEvents"
         }
+    }
+}
+
+private actor RecordingSideEffectLedgerRepository: SideEffectLedgerRepository {
+    private(set) var records: [SideEffectLedgerRecord] = []
+
+    var lastRecord: SideEffectLedgerRecord? {
+        records.first
+    }
+
+    func append(_ record: SideEffectLedgerRecord) async throws {
+        records.removeAll { $0.id == record.id }
+        records.append(record)
+    }
+
+    func fetchRecent(limit: Int) async throws -> [SideEffectLedgerRecord] {
+        Array(records.sorted(by: Self.sort).prefix(max(0, limit)))
+    }
+
+    func fetchRecords(status: SideEffectLedgerStatus) async throws -> [SideEffectLedgerRecord] {
+        records.filter { $0.status == status }.sorted(by: Self.sort)
+    }
+
+    func fetchRecord(id: String) async throws -> SideEffectLedgerRecord? {
+        records.first { $0.id == id }
+    }
+
+    private static func sort(_ lhs: SideEffectLedgerRecord, _ rhs: SideEffectLedgerRecord) -> Bool {
+        if lhs.occurredAt != rhs.occurredAt {
+            return lhs.occurredAt > rhs.occurredAt
+        }
+        return lhs.id < rhs.id
     }
 }
