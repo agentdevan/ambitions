@@ -2,13 +2,23 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK22 SideEffectLedger Foundation / Accepted Yellow.
-Next eligible batch: PK23 Notifications Through SideEffectLedger
-Scope: PK22 SideEffectLedger Foundation is complete / Accepted Yellow with bounded persistence integration and proof-path advisories recorded in `docs/audits/pk22-batch-closeout-report.md`; PK23 Notifications Through SideEffectLedger is next after prior active dependencies. This run-state mirror does not claim release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
+Current batch: PK23 Notifications Through SideEffectLedger / Accepted Yellow.
+Next eligible batch: PK24 EventKit Through SideEffectLedger
+Scope: PK23 Notifications Through SideEffectLedger is complete / Accepted Yellow with bounded local notification side-effect ledger recording and proof-path advisories recorded in `docs/audits/pk23-batch-closeout-report.md`; PK24 EventKit Through SideEffectLedger is next after prior active dependencies. This run-state mirror does not claim release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
 AFI source truth is active for product/IA/UI/visual/copy decisions.
 The active flagship top-level IA is Today / Goals / Capture / Time / You.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
-PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is complete / accepted Yellow. PK16 Trust History Query is complete / Green. PK17 Today Read Model Extraction is complete / Green. PK18 Today Command Handler Extraction is complete / Green. PK19 Goals Query/Projector Extraction is complete / Green. PK20 Capture Service Extraction is complete / Green. PK21 Time Service Extraction is complete / Green. PK22 SideEffectLedger Foundation is complete / accepted Yellow. PK23 Notifications Through SideEffectLedger is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+PK03 AppUnitOfWork Foundation is complete / Green and pushed. GQ01 is complete / accepted Yellow for historical-doc prune breadth, remaining Plan compatibility seams, and scan noise. PK04 Atomic Goal Creation is complete / Green. PK05 Atomic Clarification / Materialization is complete / Green. PK06 Atomic Capture Promotion is complete / Green. PK07 Storage Schema Version Ledger is complete / Green. PK08 Migration Plan Scaffold is complete / Green. PK09 Unknown Persisted Value Degradation is complete / Green. PK10 Storage Invariant Checker is complete / Green. PK11 Pre-Migration Backup is complete / Green. PK12 Staged Portable Import Dry Run is complete / Green. PK13 Restore Rollback is complete / Green. PK14 Durable Command/Event Ledger is complete / Green. PK15 Receipt Backend is complete / accepted Yellow. PK16 Trust History Query is complete / Green. PK17 Today Read Model Extraction is complete / Green. PK18 Today Command Handler Extraction is complete / Green. PK19 Goals Query/Projector Extraction is complete / Green. PK20 Capture Service Extraction is complete / Green. PK21 Time Service Extraction is complete / Green. PK22 SideEffectLedger Foundation is complete / accepted Yellow. PK23 Notifications Through SideEffectLedger is complete / accepted Yellow. PK24 EventKit Through SideEffectLedger is the next implementation batch unless fresh repo evidence shows a dirty or half-complete active batch.
+
+## PK23 Notifications Through SideEffectLedger Closeout
+
+- PK23 report: `docs/audits/pk23-batch-closeout-report.md`.
+- Commit: `be833e25d0c66e7faf7d1f2d63bf455e19f35bce` (`PK23: complete hybrid Codex batch`), pushed to `main`.
+- Scope: Local notification schedule refresh now records local-only, blocked, cleared, and failed-safe outcomes in the SideEffectLedger through app construction wiring; the late async runtime mutation path is absent.
+- Proof: `git diff --check`, `make batch-self-check`, `make prompt-audit`, forbidden-claim scan, focused `LocalNotificationFoundationTests`, and focused `SideEffectLedgerModelsTests` passed. Prompt audit remains the expected non-blocking Yellow classification for support/eval/template files.
+- EFC applicability: invoked for side-effect/local notification behavior and proof boundary integrity.
+- Canonical queue now marks PK23 Accepted Yellow and PK24 executable now.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK22 SideEffectLedger Foundation Closeout
 

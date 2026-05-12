@@ -2,10 +2,20 @@
 
 Date: 2026-05-12
 Active train: Global full-stack execution
-Current batch: PK22 SideEffectLedger Foundation / Accepted Yellow.
-Next recommended implementation pass: PK23 Notifications Through SideEffectLedger.
-Next eligible non-UI platform batch: PK23 Notifications Through SideEffectLedger.
-Scope: PK22 adds bounded SideEffectLedger persistence/storage integration on top of upstream safe-automation SideEffectLedger source truth; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+Current batch: PK23 Notifications Through SideEffectLedger / Accepted Yellow.
+Next recommended implementation pass: PK24 EventKit Through SideEffectLedger.
+Next eligible non-UI platform batch: PK24 EventKit Through SideEffectLedger.
+Scope: PK23 adds bounded local notification schedule refresh recording through the SideEffectLedger; it does not introduce release readiness, device validation, accessibility conformance claims, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion claims.
+
+## PK23 Notifications Through SideEffectLedger Closeout
+
+- PK23 report: `docs/audits/pk23-batch-closeout-report.md`.
+- Scope: Local notification schedule refresh now records local-only, blocked, cleared, and failed-safe outcomes in the SideEffectLedger through app construction wiring; the late async runtime mutation path is absent.
+- Commit: `be833e25d0c66e7faf7d1f2d63bf455e19f35bce` (`PK23: complete hybrid Codex batch`), pushed to `main`.
+- Proof: `git diff --check`, `make batch-self-check`, `make prompt-audit`, forbidden-claim scan, focused `LocalNotificationFoundationTests`, and focused `SideEffectLedgerModelsTests` passed. Prompt audit remains the expected non-blocking Yellow classification for support/eval/template files.
+- Canonical queue now marks PK23 Accepted Yellow and PK24 executable now.
+- EFC applicability: invoked for side-effect/local notification behavior and proof boundary integrity.
+- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
 
 ## PK22 SideEffectLedger Foundation Closeout
 
