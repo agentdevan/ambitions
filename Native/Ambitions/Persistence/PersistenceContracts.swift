@@ -418,6 +418,12 @@ protocol EventLedgerRepository: Sendable {
     func deleteEvent(id: String) async throws
 }
 
+protocol EntityRevisionTombstoneRepository: Sendable {
+    func append(_ tombstone: EntityRevisionTombstone) async throws
+    func fetchRecent(limit: Int) async throws -> [EntityRevisionTombstone]
+    func fetch(for entityID: String) async throws -> [EntityRevisionTombstone]
+}
+
 protocol AmbitionsCommandExecutionRecordRepository: Sendable {
     func append(_ record: AmbitionsCommandExecutionRecord) async throws
     func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord]
@@ -505,6 +511,7 @@ struct AppRepositories: Sendable {
     let eventLedger: any EventLedgerRepository
     let sideEffectLedger: (any SideEffectLedgerRepository)?
     let actionReceiptHistory: (any ActionReceiptHistoryRepository)?
+    let entityRevisionTombstones: (any EntityRevisionTombstoneRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)?
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
@@ -520,6 +527,7 @@ struct AppRepositories: Sendable {
         eventLedger: any EventLedgerRepository = InMemoryEventLedgerRepository(),
         sideEffectLedger: (any SideEffectLedgerRepository)? = nil,
         actionReceiptHistory: (any ActionReceiptHistoryRepository)? = nil,
+        entityRevisionTombstones: (any EntityRevisionTombstoneRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)? = nil,
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
@@ -534,6 +542,7 @@ struct AppRepositories: Sendable {
         self.eventLedger = eventLedger
         self.sideEffectLedger = sideEffectLedger
         self.actionReceiptHistory = actionReceiptHistory
+        self.entityRevisionTombstones = entityRevisionTombstones
         self.commandExecutionRecords = commandExecutionRecords
         self.goalCreationUnitOfWork = goalCreationUnitOfWork
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork

@@ -611,6 +611,41 @@ final class SideEffectLedgerStorageRecord {
 }
 
 @Model
+final class EntityRevisionTombstoneRecord {
+    @Attribute(.unique) var id: String
+    var entityKindRaw: String
+    var entityID: String
+    var revisionMarker: String
+    var reasonRaw: String
+    var recordedAt: String
+    var localOnly: Bool
+    var schemaVersion: String
+    var snapshotData: Data
+
+    init(
+        id: String,
+        entityKindRaw: String,
+        entityID: String,
+        revisionMarker: String,
+        reasonRaw: String,
+        recordedAt: String,
+        localOnly: Bool,
+        schemaVersion: String,
+        snapshotData: Data
+    ) {
+        self.id = id
+        self.entityKindRaw = entityKindRaw
+        self.entityID = entityID
+        self.revisionMarker = revisionMarker
+        self.reasonRaw = reasonRaw
+        self.recordedAt = recordedAt
+        self.localOnly = localOnly
+        self.schemaVersion = schemaVersion
+        self.snapshotData = snapshotData
+    }
+}
+
+@Model
 final class AppStateRecord {
     @Attribute(.unique) var id: String
     var preferredTabRaw: String

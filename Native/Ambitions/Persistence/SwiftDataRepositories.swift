@@ -819,6 +819,60 @@ private enum RepositoryMapping {
             requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse
         )
     }
+
+    static func entityRevisionTombstoneRecord(from record: EntityRevisionTombstone) throws -> EntityRevisionTombstoneRecord {
+        EntityRevisionTombstoneRecord(
+            id: record.id,
+            entityKindRaw: record.entityKind.rawValue,
+            entityID: record.entityID,
+            revisionMarker: record.revisionMarker,
+            reasonRaw: record.reason.rawValue,
+            recordedAt: record.recordedAt,
+            localOnly: record.localOnly,
+            schemaVersion: record.schemaVersion,
+            snapshotData: try PersistenceCoding.encode(record)
+        )
+    }
+
+    static func apply(_ record: EntityRevisionTombstone, to storage: EntityRevisionTombstoneRecord) throws {
+        storage.entityKindRaw = record.entityKind.rawValue
+        storage.entityID = record.entityID
+        storage.revisionMarker = record.revisionMarker
+        storage.reasonRaw = record.reason.rawValue
+        storage.recordedAt = record.recordedAt
+        storage.localOnly = record.localOnly
+        storage.schemaVersion = record.schemaVersion
+        storage.snapshotData = try PersistenceCoding.encode(record)
+    }
+
+    static func entityRevisionTombstone(from storage: EntityRevisionTombstoneRecord) throws -> EntityRevisionTombstone {
+        if let snapshot = try? PersistenceCoding.decode(EntityRevisionTombstone.self, from: storage.snapshotData) {
+            return snapshot
+        }
+
+        return EntityRevisionTombstone(
+            id: storage.id,
+            entityKind: persisted(
+                EntityRevisionTombstoneEntityKind.self,
+                rawValue: storage.entityKindRaw,
+                fallback: .unknown,
+                storedTypeName: "EntityRevisionTombstoneRecord",
+                fieldName: "entityKindRaw"
+            ),
+            entityID: storage.entityID,
+            revisionMarker: storage.revisionMarker,
+            reason: persisted(
+                EntityRevisionTombstoneReason.self,
+                rawValue: storage.reasonRaw,
+                fallback: .unknown,
+                storedTypeName: "EntityRevisionTombstoneRecord",
+                fieldName: "reasonRaw"
+            ),
+            recordedAt: storage.recordedAt,
+            localOnly: storage.localOnly,
+            schemaVersion: storage.schemaVersion
+        )
+    }
 }
 
 private extension Array where Element == Step {
@@ -1437,6 +1491,50 @@ struct SwiftDataSideEffectLedgerRepository: SideEffectLedgerRepository {
                     return $0.id > $1.id
                 }
                 .map(RepositoryMapping.sideEffectLedgerRecord(from:))
+        }
+    }
+}
+
+struct SwiftDataEntityRevisionTombstoneRepository: EntityRevisionTombstoneRepository {
+    let store: AmbitionsPersistenceStore
+
+    func append(_ tombstone: EntityRevisionTombstone) async throws {
+        guard tombstone.isWellFormed else { return }
+        try await store.write { context in
+            if let storage = try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .first(where: { $0.id == tombstone.id }) {
+                try RepositoryMapping.apply(tombstone, to: storage)
+            } else {
+                context.insert(try RepositoryMapping.entityRevisionTombstoneRecord(from: tombstone))
+            }
+        }
+    }
+
+    func fetchRecent(limit: Int) async throws -> [EntityRevisionTombstone] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .sorted {
+                    if $0.recordedAt != $1.recordedAt {
+                        return $0.recordedAt > $1.recordedAt
+                    }
+                    return $0.id > $1.id
+                }
+                .prefix(max(0, limit))
+                .map(RepositoryMapping.entityRevisionTombstone(from:))
+        }
+    }
+
+    func fetch(for entityID: String) async throws -> [EntityRevisionTombstone] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .filter { $0.entityID == entityID }
+                .sorted {
+                    if $0.recordedAt != $1.recordedAt {
+                        return $0.recordedAt > $1.recordedAt
+                    }
+                    return $0.id > $1.id
+                }
+                .map(RepositoryMapping.entityRevisionTombstone(from:))
         }
     }
 }

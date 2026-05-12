@@ -179,6 +179,13 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Local-only side-effect policy decision and result ledger for external-effect, confirmation, blocked, and local-only attempts."
         ),
         .swiftData(
+            id: "swiftdata.entity_revision_tombstone_record",
+            storedTypeName: "EntityRevisionTombstoneRecord",
+            currentVersion: entityRevisionTombstoneSchemaVersion,
+            versionEvidence: "EntityRevisionTombstoneRecord.schemaVersion persists EntityRevisionTombstone.schemaVersion.",
+            notes: "Deterministic local revision-tombstone markers for conflict recovery and replacement ordering."
+        ),
+        .swiftData(
             id: "swiftdata.app_state_record",
             storedTypeName: "AppStateRecord",
             currentVersion: "app_state_record.swiftdata.v1",
@@ -223,6 +230,7 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "EventLedgerRecord",
         "ActionReceiptHistoryRecordModel",
         "SideEffectLedgerStorageRecord",
+        "EntityRevisionTombstoneRecord",
         "AppStateRecord",
     ]
 

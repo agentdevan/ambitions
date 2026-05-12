@@ -37,6 +37,17 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
         XCTAssertEqual(sideEffectEntry?.currentVersion, sideEffectLedgerSchemaVersion)
     }
 
+    func testCurrentLedgerIncludesEntityRevisionTombstoneSchemaType() {
+        let ledger = StorageSchemaVersionLedger.current
+        let tombstoneEntry = ledger.swiftDataEntries.first(where: { $0.id == "swiftdata.entity_revision_tombstone_record" })
+
+        XCTAssertNotNil(tombstoneEntry)
+        XCTAssertEqual(tombstoneEntry?.storedTypeName, "EntityRevisionTombstoneRecord")
+        XCTAssertEqual(tombstoneEntry?.currentVersion, entityRevisionTombstoneSchemaVersion)
+        XCTAssertEqual(tombstoneEntry?.migrationReadiness, .migrationPlanRequired)
+        XCTAssertEqual(tombstoneEntry?.rollbackRequirement, .rollbackPlanRequired)
+    }
+
     func testCurrentLedgerBlocksMigrationExecutionUntilFutureMigrationProofExists() {
         let ledger = StorageSchemaVersionLedger.current
 

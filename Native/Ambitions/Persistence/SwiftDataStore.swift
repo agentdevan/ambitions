@@ -33,6 +33,7 @@ actor AmbitionsPersistenceStore {
         EventLedgerRecord.self,
         CommandExecutionRecord.self,
         SideEffectLedgerStorageRecord.self,
+        EntityRevisionTombstoneRecord.self,
         AppStateRecord.self,
         ActionReceiptHistoryRecordModel.self
     ])
@@ -107,6 +108,7 @@ actor AmbitionsPersistenceStore {
         try context.fetch(FetchDescriptor<EventLedgerRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<CommandExecutionRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<AppStateRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>()).forEach(context.delete)
 
