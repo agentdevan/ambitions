@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-13",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA12",
-  "next_eligible_title": "Source Atlas Query Engine",
+  "next_eligible_batch": "SA13",
+  "next_eligible_title": "Source Needed Mode",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -396,17 +396,17 @@
     {
       "id": "SA12",
       "title": "Source Atlas Query Engine",
-      "classification": "executable_now",
-      "reason": "SA11 is complete / accepted yellow. SA12 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA11.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA12 Source Atlas Query Engine is complete / Accepted Yellow with closeout in docs/audits/sa12-batch-closeout-report.md and commit b22b9761976d78522b9cb69fa9693b0f11583069 pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA13",
       "title": "Source Needed Mode",
-      "classification": "executable_later",
-      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
-      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "classification": "executable_now",
+      "reason": "SA12 is complete / accepted yellow. SA13 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA12.",
       "efc_applicability": "invoked"
     },
     {
