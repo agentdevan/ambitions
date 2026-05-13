@@ -8,23 +8,44 @@ Base: `main` at `23dae46663b720fe4f082acdec481ceb0555c562`
 
 ## Summary
 
-This batch migrated Ambitions' repo-level Swift posture from Swift 5.10 to Swift 6 and installed the first architecture guardrails required to keep the native app aligned with the modern Ambitions standard.
+This branch moves Ambitions to a Swift 6 modernization foundation and adds repo-enforced guardrails for the highest-value pre-TestFlight modernization work.
 
-The migration is intentionally Accepted Yellow, not Green, because this remote GitHub edit path cannot run XcodeGen, Xcode build, iOS simulator tests, or device validation. The branch contains the actual repo changes and the exact validation commands that must be run locally or in CI before merge.
+It is Accepted Yellow, not Green, because these changes were made through the connected GitHub repository interface. This path can update files and open the PR, but it cannot run XcodeGen, xcodebuild, simulator tests, or device validation. Swift 6 compile repair and strict concurrency repair are therefore wired and gated, but not truthfully complete until the new final gate runs and captures compiler output.
+
+## User-requested modernization scope status
+
+| Requested item | Branch status | Proof boundary |
+| --- | --- | --- |
+| Swift 6 compile repair | Foundation and build gate installed | Actual compiler repair requires XcodeGen/xcodebuild output from local/CI. |
+| Strict concurrency repair | `SWIFT_STRICT_CONCURRENCY: complete` installed and architecture gates added | Any actual Sendable/actor fixes must be driven by compiler output. |
+| Architecture scanner CI/final-gate integration | Implemented | Scanner, scanner tests, CI workflow, and local final-gate script added. |
+| Module boundary split guided by Swift 6 compiler errors | Guardrails implemented, full split not performed | Blind file movement was avoided; scanner now blocks known Domain/Feature/DesignSystem/WidgetUI boundary leaks. |
+| SwiftData migration hardening | Implemented | Added execution-readiness proof evaluator for migration plans. |
+| Swift Testing for deterministic domain/kernel/persistence tests | Implemented seed | Added Swift Testing coverage for storage migration execution readiness. |
+| App Intents / App Shortcuts maturity | Implemented seed | Added system-control App Intent and shortcut exposure for Start Now, Still Counts, and Add Proof. |
+| WidgetKit controls for highest-value actions | Contract layer implemented | Added shared system-control contracts and widget-extension source inclusion; actual `ControlWidget` UI implementation remains compiler-verified follow-up. |
 
 ## Files changed
 
+- `.github/workflows/swift6-modernization.yml`
 - `project.yml`
 - `Package.swift`
 - `scripts/ambitions-swift6-modernization-scan.py`
+- `scripts/ambitions-swift6-final-gate.sh`
 - `tools/tests/test_ambitions_swift6_modernization_scan.py`
 - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
 - `docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md`
 - `docs/audits/swift6-modernization-foundation-01-report.md`
+- `Native/Ambitions/Persistence/StorageMigrationExecutionReadiness.swift`
+- `Native/AmbitionsTests/Persistence/StorageMigrationExecutionReadinessTestingTests.swift`
+- `Native/Ambitions/ExternalSnapshots/ExternalSurfaceControlContracts.swift`
+- `Native/Ambitions/AppIntents/AmbitionsSystemControlIntent.swift`
+- `Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift`
+- `Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift`
 
 ## Implemented changes
 
-### 1. Swift 6 project setting
+### 1. Swift 6 project and package posture
 
 `project.yml` now declares:
 
@@ -33,19 +54,15 @@ SWIFT_VERSION: 6.0
 SWIFT_STRICT_CONCURRENCY: complete
 ```
 
-This makes Swift 6 language mode and complete strict concurrency the target posture for generated Xcode projects.
-
-### 2. Swift 6 package tools version
-
 `Package.swift` now declares:
 
 ```swift
 // swift-tools-version: 6.0
 ```
 
-This aligns the design-system/widget package layer with the Swift 6 migration foundation.
+The iOS deployment target remains `17.0`. No deployment-target increase was made without product/API proof.
 
-### 3. Architecture standard document
+### 2. Architecture standard document
 
 Added:
 
@@ -53,7 +70,7 @@ Added:
 docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md
 ```
 
-The document defines the active Ambitions native architecture as:
+The active standard is:
 
 ```text
 Swift 6 + SwiftUI + Observation + structured concurrency + strict concurrency + actor-isolated local-first SwiftData + Swift Testing for new deterministic tests + App Intents / WidgetKit / ActivityKit external surfaces + protocol-based feature services + deterministic command routing + local-first Private Life Runtime / Intelligence Kernel.
@@ -68,7 +85,7 @@ It explicitly rejects:
 - broad unchecked Sendable escapes
 - unproven release/readiness claims
 
-### 4. Swift 6 modernization scanner
+### 3. Architecture scanner and module-boundary gates
 
 Added:
 
@@ -84,39 +101,133 @@ The scanner verifies Swift 6 settings and detects regressions:
 - `AnyCancellable`
 - `@unchecked Sendable`
 - VIPER naming
-- Hummingbird dependency leakage into native settings/package files
+- Hummingbird dependency leakage
+- Domain importing SwiftUI or SwiftData
+- Features importing SwiftData
+- Design-system package importing SwiftData
+- Widget UI package importing SwiftData
 
-Default mode is advisory. Strict mode is available through:
+Strict mode:
 
 ```bash
 python3 scripts/ambitions-swift6-modernization-scan.py . --strict
 AMBITIONS_SWIFT6_SCAN_STRICT=1 python3 scripts/ambitions-swift6-modernization-scan.py .
 ```
 
-### 5. Scanner tests
+### 4. Scanner tests
 
-Added:
+Added and expanded:
 
 ```text
 tools/tests/test_ambitions_swift6_modernization_scan.py
 ```
 
-The test file covers:
+Coverage includes:
 
 - clean Swift 6 fixture pass
 - Swift 5.10 settings failure
 - Combine-owned `ObservableObject` failure
+- module-boundary leaks failure
 - explicit allow-marker escape hatch behavior
 
-### 6. CQS script map registration
+### 5. Final gate and CI wiring
+
+Added:
+
+```text
+scripts/ambitions-swift6-final-gate.sh
+.github/workflows/swift6-modernization.yml
+```
+
+The local final gate runs:
+
+- scanner self-test
+- scanner unit tests
+- strict repo scan
+- XcodeGen generation
+- Swift 6 app build
+- focused deterministic tests
+
+Focused tests currently targeted by the local final gate:
+
+```text
+AmbitionsTests/StorageMigrationPlanScaffoldTests
+AmbitionsTests/StorageMigrationExecutionReadinessTestingTests
+AmbitionsTests/AppIntentRoutingTests
+AmbitionsTests/ExternalActionCommandServiceTests
+AmbitionsTests/ExternalSurfaceControlContractsTests
+```
+
+Note: The GitHub Actions workflow was added and includes the scanner, XcodeGen, build, and an initial focused-test set. A later attempt to update the workflow with the expanded test list was blocked by the connector safety layer, so the local final-gate script is currently the most complete proof command.
+
+### 6. SwiftData migration hardening
+
+Added:
+
+```text
+Native/Ambitions/Persistence/StorageMigrationExecutionReadiness.swift
+```
+
+This introduces:
+
+- `StorageMigrationProofKind`
+- `StorageMigrationProof`
+- `StorageMigrationExecutionReadinessIssue`
+- `StorageMigrationExecutionReadiness`
+- `StorageMigrationExecutionReadinessEvaluator`
+
+The evaluator prevents migration execution from being considered Green until each mutation entry has proof for required gates such as storage invariant check, pre-migration backup, staged dry run, restore rollback plan, user review, and release-claim blocker acknowledgement.
+
+### 7. Swift Testing seed coverage
+
+Added:
+
+```text
+Native/AmbitionsTests/Persistence/StorageMigrationExecutionReadinessTestingTests.swift
+```
+
+This is the first Swift Testing seed in the modernization branch for deterministic persistence/migration behavior. It does not replace XCTest wholesale.
+
+### 8. App Intents and App Shortcuts maturity
+
+Added:
+
+```text
+Native/Ambitions/AppIntents/AmbitionsSystemControlIntent.swift
+```
 
 Updated:
 
 ```text
-docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift
 ```
 
-The script map now includes the Swift 6 modernization scanner and strict-mode usage.
+The branch adds a system-control App Intent and exposes high-value shortcuts for:
+
+- Start Now
+- Still Counts
+- Add Proof
+
+Mutation-capable controls route to in-app confirmation and receipt-producing flows instead of silently mutating state from system surfaces.
+
+### 9. WidgetKit/system-control contract layer
+
+Added:
+
+```text
+Native/Ambitions/ExternalSnapshots/ExternalSurfaceControlContracts.swift
+Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift
+```
+
+The contract layer defines the highest-value system controls:
+
+- Start now
+- Capture
+- Still counts
+- Add proof
+- Open current step
+
+It also encodes privacy summaries, execution modes, receipt requirements, availability requirements, canonical payloads, and deep-link fallbacks. The file is included in the widget extension target source list through `project.yml`.
 
 ## Required validation before Green
 
@@ -126,12 +237,10 @@ Run from repo root after checking out the branch:
 python3 scripts/ambitions-swift6-modernization-scan.py --self-test
 python3 tools/tests/test_ambitions_swift6_modernization_scan.py
 python3 scripts/ambitions-swift6-modernization-scan.py . --strict
-xcodegen generate
-xcodebuild build -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17'
-xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17'
+scripts/ambitions-swift6-final-gate.sh
 ```
 
-If `iPhone 17` is not available locally, use an available current iPhone simulator and record the exact destination.
+The final gate will run XcodeGen, build, and focused deterministic tests when macOS/Xcode/simulator tooling is available.
 
 ## Validation performed in this session
 
@@ -140,7 +249,8 @@ Performed:
 - GitHub repository branch creation.
 - Direct file writes to branch through the connected GitHub repository interface.
 - Repo content inspection before and during migration.
-- Documentation and guardrail creation.
+- Documentation, scanner, final gate, CI workflow, SwiftData migration hardening, Swift Testing seed, App Intent/control contract additions.
+- Branch diff comparison against `main`.
 
 Not performed:
 
@@ -160,19 +270,19 @@ Not performed:
 
 Swift 6 with complete strict concurrency may expose compiler errors in existing production or test code. That is expected and is the point of the migration. Do not silence those errors with broad `@unchecked Sendable`, broad `@MainActor`, or unstructured concurrency. Repair with explicit actor boundaries, Sendable value models, or module/service seam corrections.
 
+A full module split is not complete in this branch. The branch installs scanner-enforced boundary gates first so the next split can be guided by compiler output rather than blind file movement.
+
+Actual WidgetKit `ControlWidget` rendering is not complete in this branch. The shared control contract and App Intent surface are installed first to prevent duplicate routing logic and keep system controls privacy-safe; the concrete `ControlWidget` UI should be added only with compiler-verified API usage.
+
 ## Merge gate
 
-Do not merge until at least these pass or the PR is explicitly accepted as Yellow with blockers documented:
+Do not merge as Green until this passes:
 
 ```bash
-python3 scripts/ambitions-swift6-modernization-scan.py --self-test
-python3 tools/tests/test_ambitions_swift6_modernization_scan.py
-python3 scripts/ambitions-swift6-modernization-scan.py . --strict
-xcodegen generate
-xcodebuild build -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17'
+scripts/ambitions-swift6-final-gate.sh
 ```
 
-Full Green additionally requires focused/full test proof.
+The PR may be accepted as Yellow only if all remaining compiler/test blockers are documented with exact command output and no release-readiness claims.
 
 ## Rollback
 
@@ -180,16 +290,14 @@ Rollback is clean:
 
 1. Close the PR without merge, or
 2. Revert the branch commits, or
-3. Restore `project.yml` to `SWIFT_VERSION: 5.10` and remove `SWIFT_STRICT_CONCURRENCY: complete`, restore `Package.swift` to `swift-tools-version: 5.10`, and remove the new scanner/test/doc files.
+3. Restore `project.yml` to `SWIFT_VERSION: 5.10`, remove `SWIFT_STRICT_CONCURRENCY: complete`, restore `Package.swift` to `swift-tools-version: 5.10`, and remove the added scanner/final-gate/doc/control/migration/test files.
 
-## Next recommended batch
+## Next required repair loop
 
-`AMB-SWIFT6-STRICT-CONCURRENCY-REPAIR-02`
+Run:
 
-Objective:
+```bash
+scripts/ambitions-swift6-final-gate.sh
+```
 
-- Run XcodeGen and Xcode build locally/CI.
-- Capture all Swift 6 strict concurrency compiler failures.
-- Repair only real isolation/Sendable issues.
-- Avoid broad suppressions.
-- Produce Green/Yellow proof with exact compiler output and remaining blocker list.
+Then repair the first actual compiler/test failures, starting with Swift 6 strict-concurrency issues. Do not perform additional speculative rewrites before the compiler produces the failure list.
