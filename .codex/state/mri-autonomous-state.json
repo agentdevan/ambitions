@@ -4,7 +4,8 @@
     "MRI01",
     "MRI02",
     "MRI03",
-    "MRI04"
+    "MRI04",
+    "MRI05"
   ],
   "history": [
     {
@@ -26,6 +27,11 @@
       "batch": "MRI04",
       "prompt": "prompts/batches/MRI04-PROOF-CAPITAL-MODEL.md",
       "marked_complete_at": "2026-05-13T00:52:54Z"
+    },
+    {
+      "batch": "MRI05",
+      "prompt": "prompts/batches/MRI05-RECOVERY-THREAD-RUNTIME.md",
+      "marked_complete_at": "2026-05-13T01:23:47Z"
     }
   ]
 }
