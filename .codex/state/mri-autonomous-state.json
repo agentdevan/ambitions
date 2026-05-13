@@ -9,7 +9,8 @@
     "MRI06",
     "MRI07",
     "MRI08",
-    "MRI09"
+    "MRI09",
+    "MRI10"
   ],
   "history": [
     {
@@ -56,6 +57,11 @@
       "batch": "MRI09",
       "prompt": "prompts/batches/MRI09-SOURCE-TO-RECOMMENDATION-BRIDGE.md",
       "marked_complete_at": "2026-05-13T06:58:48Z"
+    },
+    {
+      "batch": "MRI10",
+      "prompt": "prompts/batches/MRI10-RECOMMENDATION-TRACE-RUNTIME.md",
+      "marked_complete_at": "2026-05-13T07:38:31Z"
     }
   ]
 }
