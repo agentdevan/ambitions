@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA12 Source Atlas Query Engine"
-  previous_batch: "SA12 Source Atlas Query Engine"
+  batch: "SA13 Source Needed Mode"
+  previous_batch: "SA13 Source Needed Mode"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "SA13 Source Needed Mode"
+  next_eligible_batch: "SA14 Local Impact Matcher"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

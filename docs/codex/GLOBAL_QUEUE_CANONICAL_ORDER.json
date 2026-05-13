@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-13",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA13",
-  "next_eligible_title": "Source Needed Mode",
+  "next_eligible_batch": "SA14",
+  "next_eligible_title": "Local Impact Matcher",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -404,17 +404,17 @@
     {
       "id": "SA13",
       "title": "Source Needed Mode",
-      "classification": "executable_now",
-      "reason": "SA12 is complete / accepted yellow. SA13 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA12.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA13 Source Needed Mode is complete / Accepted Yellow with closeout in docs/audits/sa13-batch-closeout-report.md and commit 756e681b2877f05ecf9a80bc2519a16cbc4810af pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA14",
       "title": "Local Impact Matcher",
-      "classification": "executable_later",
-      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
-      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "classification": "executable_now",
+      "reason": "SA13 is complete / accepted yellow. SA14 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA13.",
       "efc_applicability": "invoked"
     },
     {
