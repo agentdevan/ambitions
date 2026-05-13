@@ -54,6 +54,22 @@ enum AmbitionRecoveryStatus: String, Codable, Sendable, Equatable, Hashable, Cas
     case interruptedButStillUseful = "interrupted_but_still_useful"
 }
 
+enum AmbitionRecoveryReceiptBehavior: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case preserveExistingReceipt = "preserve_existing_receipt"
+    case createOnReentry = "create_on_reentry"
+    case receiptAlreadyRecorded = "receipt_already_recorded"
+    case receiptNotNeeded = "receipt_not_needed"
+
+    var isReceiptReady: Bool {
+        switch self {
+        case .preserveExistingReceipt, .createOnReentry, .receiptAlreadyRecorded:
+            return true
+        case .receiptNotNeeded:
+            return false
+        }
+    }
+}
+
 enum AmbitionCommitmentStatus: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case open
     case promised
@@ -591,6 +607,10 @@ struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
     let ambitionID: String
     let trigger: String
     let priorProofRefs: [String]
+    let lastHonestPoint: RecoveryLastHonestPoint?
+    let preservedProofRefs: [String]
+    let reentryStep: RecoveryReentryStep?
+    let receiptBehavior: AmbitionRecoveryReceiptBehavior
     let whatChanged: String?
     let newSmallestCommitment: String?
     let status: AmbitionRecoveryStatus
@@ -598,11 +618,32 @@ struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
     let createdAt: String
     let updatedAt: String
 
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case ambitionID
+        case trigger
+        case priorProofRefs
+        case lastHonestPoint
+        case preservedProofRefs
+        case reentryStep
+        case receiptBehavior
+        case whatChanged
+        case newSmallestCommitment
+        case status
+        case receiptID
+        case createdAt
+        case updatedAt
+    }
+
     init(
         id: String,
         ambitionID: String,
         trigger: String,
         priorProofRefs: [String] = [],
+        lastHonestPoint: RecoveryLastHonestPoint? = nil,
+        preservedProofRefs: [String]? = nil,
+        reentryStep: RecoveryReentryStep? = nil,
+        receiptBehavior: AmbitionRecoveryReceiptBehavior = .createOnReentry,
         whatChanged: String? = nil,
         newSmallestCommitment: String? = nil,
         status: AmbitionRecoveryStatus = .active,
@@ -613,7 +654,12 @@ struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.id = id
         self.ambitionID = ambitionID
         self.trigger = trigger
-        self.priorProofRefs = ambitionGraphStableUnique(priorProofRefs)
+        let stablePriorProofRefs = ambitionGraphStableUnique(priorProofRefs)
+        self.priorProofRefs = stablePriorProofRefs
+        self.lastHonestPoint = lastHonestPoint
+        self.preservedProofRefs = ambitionGraphStableUnique(preservedProofRefs ?? stablePriorProofRefs)
+        self.reentryStep = reentryStep
+        self.receiptBehavior = receiptBehavior
         self.whatChanged = whatChanged
         self.newSmallestCommitment = newSmallestCommitment
         self.status = status
@@ -622,8 +668,98 @@ struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.updatedAt = updatedAt
     }
 
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        ambitionID = try container.decode(String.self, forKey: .ambitionID)
+        trigger = try container.decode(String.self, forKey: .trigger)
+        let decodedPriorProofRefs = ambitionGraphStableUnique(
+            try container.decodeIfPresent([String].self, forKey: .priorProofRefs) ?? []
+        )
+        priorProofRefs = decodedPriorProofRefs
+        lastHonestPoint = try container.decodeIfPresent(RecoveryLastHonestPoint.self, forKey: .lastHonestPoint)
+        preservedProofRefs = ambitionGraphStableUnique(
+            try container.decodeIfPresent([String].self, forKey: .preservedProofRefs) ?? decodedPriorProofRefs
+        )
+        reentryStep = try container.decodeIfPresent(RecoveryReentryStep.self, forKey: .reentryStep)
+        receiptBehavior = try container.decodeIfPresent(
+            AmbitionRecoveryReceiptBehavior.self,
+            forKey: .receiptBehavior
+        ) ?? .createOnReentry
+        whatChanged = try container.decodeIfPresent(String.self, forKey: .whatChanged)
+        newSmallestCommitment = try container.decodeIfPresent(String.self, forKey: .newSmallestCommitment)
+        status = try container.decodeIfPresent(AmbitionRecoveryStatus.self, forKey: .status) ?? .active
+        receiptID = try container.decodeIfPresent(String.self, forKey: .receiptID)
+        createdAt = try container.decode(String.self, forKey: .createdAt)
+        updatedAt = try container.decode(String.self, forKey: .updatedAt)
+    }
+
     var isRecoverable: Bool {
-        status == .active || status == .held
+        switch status {
+        case .active, .held, .paused, .stalled, .interruptedButStillUseful:
+            return true
+        case .notNeeded, .complete:
+            return false
+        }
+    }
+
+    var effectiveProofRefs: [String] {
+        ambitionGraphStableUnique(priorProofRefs + preservedProofRefs)
+    }
+
+    var hasReentryStep: Bool {
+        reentryStep != nil || newSmallestCommitment != nil
+    }
+
+    var isReceiptReady: Bool {
+        receiptID != nil || receiptBehavior.isReceiptReady
+    }
+}
+
+struct RecoveryLastHonestPoint: Codable, Sendable, Equatable, Hashable {
+    let commitmentID: String?
+    let closureEventID: String?
+    let stepID: String?
+    let summary: String
+    let capturedAt: String
+
+    init(
+        commitmentID: String? = nil,
+        closureEventID: String? = nil,
+        stepID: String? = nil,
+        summary: String,
+        capturedAt: String
+    ) {
+        self.commitmentID = commitmentID
+        self.closureEventID = closureEventID
+        self.stepID = stepID
+        self.summary = summary
+        self.capturedAt = capturedAt
+    }
+}
+
+struct RecoveryReentryStep: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let commitmentID: String?
+    let stepID: String?
+    let title: String
+    let reason: String?
+    let estimatedEffortMinutes: Int?
+
+    init(
+        id: String,
+        commitmentID: String? = nil,
+        stepID: String? = nil,
+        title: String,
+        reason: String? = nil,
+        estimatedEffortMinutes: Int? = nil
+    ) {
+        self.id = id
+        self.commitmentID = commitmentID
+        self.stepID = stepID
+        self.title = title
+        self.reason = reason
+        self.estimatedEffortMinutes = estimatedEffortMinutes
     }
 }
 

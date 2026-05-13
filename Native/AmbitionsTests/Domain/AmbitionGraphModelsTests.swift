@@ -361,4 +361,137 @@ final class AmbitionGraphModelsTests: XCTestCase {
         XCTAssertTrue(transition.shouldCreateRecoveryThread)
         XCTAssertTrue(transition.allowsReentry)
     }
+
+    func testRecoveryThreadPreservesLastHonestPointProofAndReentryStep() {
+        let lastHonestPoint = RecoveryLastHonestPoint(
+            commitmentID: "commitment-1",
+            closureEventID: "closure-1",
+            stepID: "step-1",
+            summary: "Work paused after the evidence note was saved.",
+            capturedAt: "2026-05-13T00:10:00Z"
+        )
+        let reentryStep = RecoveryReentryStep(
+            id: "reentry-1",
+            commitmentID: "commitment-1",
+            stepID: "step-2",
+            title: "Restart with the smallest useful next step",
+            reason: "Keeps the proof and lowers the commitment size.",
+            estimatedEffortMinutes: 10
+        )
+
+        let thread = RecoveryThread(
+            id: "recovery-1",
+            ambitionID: "ambition-1",
+            trigger: "Blocked by a dependency",
+            priorProofRefs: ["proof-1", "proof-1", "proof-2"],
+            lastHonestPoint: lastHonestPoint,
+            preservedProofRefs: ["proof-2", "proof-3", "proof-3"],
+            reentryStep: reentryStep,
+            receiptBehavior: .createOnReentry,
+            whatChanged: "The next commitment became smaller.",
+            newSmallestCommitment: "commitment-1-small",
+            status: .active,
+            createdAt: "2026-05-13T00:12:00Z",
+            updatedAt: "2026-05-13T00:12:00Z"
+        )
+
+        XCTAssertEqual(thread.priorProofRefs, ["proof-1", "proof-2"])
+        XCTAssertEqual(thread.preservedProofRefs, ["proof-2", "proof-3"])
+        XCTAssertEqual(thread.effectiveProofRefs, ["proof-1", "proof-2", "proof-3"])
+        XCTAssertEqual(thread.lastHonestPoint, lastHonestPoint)
+        XCTAssertEqual(thread.reentryStep, reentryStep)
+        XCTAssertTrue(thread.hasReentryStep)
+        XCTAssertTrue(thread.isReceiptReady)
+    }
+
+    func testRecoveryThreadRecoverableStatesAreExplicit() {
+        let recoverableStatuses: [AmbitionRecoveryStatus] = [
+            .active,
+            .held,
+            .paused,
+            .stalled,
+            .interruptedButStillUseful
+        ]
+        let closedStatuses: [AmbitionRecoveryStatus] = [.notNeeded, .complete]
+
+        for status in recoverableStatuses {
+            let thread = RecoveryThread(
+                id: "recovery-\(status.rawValue)",
+                ambitionID: "ambition-1",
+                trigger: "Reality changed",
+                status: status,
+                createdAt: "2026-05-13T00:20:00Z",
+                updatedAt: "2026-05-13T00:20:00Z"
+            )
+            XCTAssertTrue(thread.isRecoverable, "\(status.rawValue) should allow recovery")
+        }
+
+        for status in closedStatuses {
+            let thread = RecoveryThread(
+                id: "recovery-\(status.rawValue)",
+                ambitionID: "ambition-1",
+                trigger: "No re-entry needed",
+                status: status,
+                createdAt: "2026-05-13T00:20:00Z",
+                updatedAt: "2026-05-13T00:20:00Z"
+            )
+            XCTAssertFalse(thread.isRecoverable, "\(status.rawValue) should not allow recovery")
+        }
+    }
+
+    func testRecoveryThreadDefaultsPreservedProofRefsFromPriorProofRefs() {
+        let thread = RecoveryThread(
+            id: "recovery-default-proof",
+            ambitionID: "ambition-1",
+            trigger: "Blocked by a dependency",
+            priorProofRefs: ["proof-1", "proof-1", "proof-2"],
+            createdAt: "2026-05-13T00:22:00Z",
+            updatedAt: "2026-05-13T00:22:00Z"
+        )
+
+        XCTAssertEqual(thread.priorProofRefs, ["proof-1", "proof-2"])
+        XCTAssertEqual(thread.preservedProofRefs, ["proof-1", "proof-2"])
+        XCTAssertEqual(thread.effectiveProofRefs, ["proof-1", "proof-2"])
+    }
+
+    func testRecoveryThreadReceiptBehaviorIsExplicitAndNonShaming() {
+        XCTAssertTrue(AmbitionRecoveryReceiptBehavior.createOnReentry.isReceiptReady)
+        XCTAssertTrue(AmbitionRecoveryReceiptBehavior.preserveExistingReceipt.isReceiptReady)
+        XCTAssertTrue(AmbitionRecoveryReceiptBehavior.receiptAlreadyRecorded.isReceiptReady)
+        XCTAssertFalse(AmbitionRecoveryReceiptBehavior.receiptNotNeeded.isReceiptReady)
+
+        let labels = AmbitionRecoveryReceiptBehavior.allCases.map(\.rawValue).joined(separator: " ")
+        XCTAssertFalse(labels.localizedCaseInsensitiveContains("overdue"))
+        XCTAssertFalse(labels.localizedCaseInsensitiveContains("failed"))
+        XCTAssertFalse(labels.localizedCaseInsensitiveContains("streak"))
+        XCTAssertFalse(labels.localizedCaseInsensitiveContains("productivity"))
+    }
+
+    func testRecoveryThreadDecodesLegacyPayloadWithRuntimeDefaults() throws {
+        let payload = """
+        {
+          "id": "recovery-legacy",
+          "ambitionID": "ambition-legacy",
+          "trigger": "Blocked by a dependency",
+          "priorProofRefs": ["proof-1", "proof-1", "proof-2"],
+          "whatChanged": "Use a smaller restart.",
+          "newSmallestCommitment": "commitment-small",
+          "status": "active",
+          "receiptID": "receipt-1",
+          "createdAt": "2026-05-13T00:30:00Z",
+          "updatedAt": "2026-05-13T00:30:00Z"
+        }
+        """
+
+        let thread = try JSONDecoder().decode(RecoveryThread.self, from: Data(payload.utf8))
+
+        XCTAssertEqual(thread.id, "recovery-legacy")
+        XCTAssertEqual(thread.priorProofRefs, ["proof-1", "proof-2"])
+        XCTAssertEqual(thread.preservedProofRefs, ["proof-1", "proof-2"])
+        XCTAssertNil(thread.lastHonestPoint)
+        XCTAssertNil(thread.reentryStep)
+        XCTAssertEqual(thread.receiptBehavior, .createOnReentry)
+        XCTAssertTrue(thread.hasReentryStep)
+        XCTAssertTrue(thread.isReceiptReady)
+    }
 }
