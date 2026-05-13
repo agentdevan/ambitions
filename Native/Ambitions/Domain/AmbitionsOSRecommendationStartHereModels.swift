@@ -18,6 +18,7 @@ enum AmbitionsOSStartHereControlAction: String, Codable, Sendable, Equatable, Ha
     case open
     case adjust
     case makeSmaller = "make_smaller"
+    case reject
     case reviewLater = "review_later"
     case notNow = "not_now"
     case explainMore = "explain_more"
@@ -147,6 +148,24 @@ struct AmbitionsOSStartHereRecommendation: Codable, Sendable, Equatable, Hashabl
 
     var isExternalProjectionSafe: Bool {
         privacyClass == .externalRedacted || privacyClass == .shareableByUser
+    }
+
+    func rejectionCorrection(
+        id: String,
+        reason: CorrectionFoldRecommendationValue,
+        note: String,
+        occurredAt: String,
+        allowsFutureLearning: Bool = true
+    ) -> CorrectionFoldRecord {
+        CorrectionFoldRecord.recommendation(
+            id: id,
+            recommendationID: self.id,
+            from: .stillUseful,
+            to: reason,
+            reason: note,
+            occurredAt: occurredAt,
+            allowsFutureLearning: allowsFutureLearning
+        )
     }
 
     static func sourceClaim(

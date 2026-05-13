@@ -578,6 +578,161 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         XCTAssertEqual(blockedTrace.receiptBehavior.state, .receiptMissing)
     }
 
+    func testRecommendationTraceAppliesInspectableRejectionLearningToFutureRanking() throws {
+        let correction = CorrectionFoldRecord.recommendation(
+            id: "recommendation-correction-low-energy",
+            recommendationID: "recommendation-previous",
+            from: .stillUseful,
+            to: .rejectedLowEnergyContext,
+            reason: "This kind of step does not fit low-energy context.",
+            occurredAt: "2026-05-13T10:30:43Z"
+        )
+        let influence = try XCTUnwrap(
+            CorrectionFoldRecommendationLearningInfluence(
+                correction: correction,
+                similarRecommendationSignalKeys: ["capacity", "energy_fit"]
+            )
+        )
+        let trace = RecommendationTrace(
+            id: "trace-low-energy-learning",
+            recommendationID: "recommendation-future",
+            source: RecommendationTraceSource(
+                citedSourceIDs: ["source-current"],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.capacity],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-low-energy-learning",
+                summary: "Local source context supports reviewing this step.",
+                evidenceCategoryIDs: ["capacity"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty-energy"],
+                summaries: ["Energy fit may need review."]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct-energy"],
+                controlActionIDs: ["reject"],
+                correctableFieldKeys: ["energy_fit"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .available(actionReceiptIDs: ["action-receipt-1"]),
+            rejectionLearningInfluences: [influence]
+        )
+
+        XCTAssertTrue(trace.isComplete)
+        XCTAssertTrue(trace.hasInspectableRejectionLearning)
+        XCTAssertEqual(
+            trace.rejectionLearningRankAdjustment,
+            CorrectionFoldRecommendationLearningAdjustment.downrankLowEnergyContext.baseRankAdjustment
+        )
+        XCTAssertFalse(trace.isSuppressedByRejectionLearning)
+        XCTAssertTrue(trace.canDriveRecommendationBehavior)
+    }
+
+    func testRecommendationTraceSuppressesExactPreviouslyRejectedRecommendation() throws {
+        let correction = CorrectionFoldRecord.recommendation(
+            id: "recommendation-correction-already-done",
+            recommendationID: "recommendation-previous",
+            from: .stillUseful,
+            to: .rejectedAlreadyDone,
+            reason: "This was already handled.",
+            occurredAt: "2026-05-13T10:30:43Z"
+        )
+        let influence = try XCTUnwrap(CorrectionFoldRecommendationLearningInfluence(correction: correction))
+        let trace = RecommendationTrace(
+            id: "trace-exact-rejection",
+            recommendationID: "recommendation-previous",
+            source: RecommendationTraceSource(
+                citedSourceIDs: ["source-current"],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.sourceTruth],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-exact-rejection",
+                summary: "This exact recommendation has already been rejected as handled.",
+                evidenceCategoryIDs: ["source_truth"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty-rejection"],
+                summaries: ["Rejection learning suppresses this exact item."]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct-rejection"],
+                controlActionIDs: ["reject"],
+                correctableFieldKeys: ["rejection_learning"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .available(actionReceiptIDs: ["action-receipt-1"]),
+            rejectionLearningInfluences: [influence]
+        )
+
+        XCTAssertTrue(trace.hasInspectableRejectionLearning)
+        XCTAssertEqual(
+            trace.rejectionLearningRankAdjustment,
+            CorrectionFoldRecommendationLearningAdjustment.suppressExactRecommendation.baseRankAdjustment
+        )
+        XCTAssertTrue(trace.isSuppressedByRejectionLearning)
+        XCTAssertFalse(trace.canDriveRecommendationBehavior)
+    }
+
+    func testRecommendationTraceDecodesLegacyPayloadWithoutRejectionLearningInfluences() throws {
+        let trace = RecommendationTrace(
+            id: "trace-legacy-compatible",
+            recommendationID: "recommendation-legacy-compatible",
+            source: RecommendationTraceSource(
+                citedSourceIDs: ["source-current"],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.sourceTruth],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-legacy-compatible",
+                summary: "Local source context supports this recommendation.",
+                evidenceCategoryIDs: ["source_truth"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty-legacy"],
+                summaries: ["Legacy payload has no rejection learning key."]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct-source"],
+                controlActionIDs: ["reject"],
+                correctableFieldKeys: ["source_truth"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .available(actionReceiptIDs: ["action-receipt-1"])
+        )
+        let data = try JSONEncoder().encode(trace)
+        var payload = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        payload.removeValue(forKey: "rejectionLearningInfluences")
+        let legacyData = try JSONSerialization.data(withJSONObject: payload)
+
+        let decoded = try JSONDecoder().decode(RecommendationTrace.self, from: legacyData)
+
+        XCTAssertEqual(decoded.rejectionLearningInfluences, [])
+        XCTAssertEqual(decoded.rejectionLearningRankAdjustment, 0)
+        XCTAssertFalse(decoded.hasInspectableRejectionLearning)
+        XCTAssertTrue(decoded.canDriveRecommendationBehavior)
+    }
+
     func testRecommendationTrustSeamProjectsCompleteTraceIntoVisibleSections() {
         let trace = RecommendationTrace(
             id: "trace-complete",

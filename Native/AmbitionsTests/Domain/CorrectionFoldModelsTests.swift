@@ -62,6 +62,67 @@ final class CorrectionFoldModelsTests: XCTestCase {
         XCTAssertTrue(correction.requiresUserVisibleReceipt)
     }
 
+    func testRejectedRecommendationCreatesInspectableLocalLearningInfluence() throws {
+        let correction = CorrectionFoldRecord.recommendation(
+            id: "recommendation-correction-wrong-time",
+            recommendationID: "recommendation-1",
+            from: .stillUseful,
+            to: .rejectedWrongTime,
+            reason: "The recommendation is the wrong kind of work for the open time.",
+            occurredAt: "2026-05-13T10:30:43Z"
+        )
+
+        let influence = try XCTUnwrap(
+            CorrectionFoldRecommendationLearningInfluence(
+                correction: correction,
+                similarRecommendationSignalKeys: ["capacity", "wrong_time", "capacity"]
+            )
+        )
+
+        XCTAssertTrue(influence.isInspectableAndControllable)
+        XCTAssertEqual(influence.correctionRecordID, correction.id)
+        XCTAssertEqual(influence.recommendationID, "recommendation-1")
+        XCTAssertEqual(influence.rejectionReason, .rejectedWrongTime)
+        XCTAssertEqual(influence.adjustment, .downrankWrongTime)
+        XCTAssertEqual(influence.similarRecommendationSignalKeys, ["capacity", "wrong_time"])
+        XCTAssertEqual(influence.receiptID, correction.receipt.id)
+        XCTAssertTrue(influence.localOnly)
+        XCTAssertTrue(influence.resetDeleteCompatible)
+        XCTAssertFalse(influence.permitsSilentMutation)
+        XCTAssertEqual(
+            influence.rankAdjustment(for: "recommendation-1"),
+            CorrectionFoldRecommendationLearningAdjustment.suppressExactRecommendation.baseRankAdjustment
+        )
+        XCTAssertEqual(
+            influence.rankAdjustment(for: "recommendation-2", candidateSignalKeys: ["wrong_time"]),
+            CorrectionFoldRecommendationLearningAdjustment.downrankWrongTime.baseRankAdjustment
+        )
+        XCTAssertEqual(influence.rankAdjustment(for: "recommendation-3", candidateSignalKeys: ["source_truth"]), 0)
+    }
+
+    func testRejectedRecommendationLearningInfluenceRequiresLocalFutureLearningPermission() {
+        let noLearning = CorrectionFoldRecord.recommendation(
+            id: "recommendation-correction-no-learning",
+            recommendationID: "recommendation-1",
+            from: .stillUseful,
+            to: .rejectedWrongGoal,
+            reason: "Do not learn from this rejection.",
+            occurredAt: "2026-05-13T10:30:43Z",
+            allowsFutureLearning: false
+        )
+        let stillUseful = CorrectionFoldRecord.recommendation(
+            id: "recommendation-correction-still-useful",
+            recommendationID: "recommendation-2",
+            from: .stillUseful,
+            to: .stillUseful,
+            reason: "Keep this recommendation available.",
+            occurredAt: "2026-05-13T10:30:43Z"
+        )
+
+        XCTAssertNil(CorrectionFoldRecommendationLearningInfluence(correction: noLearning))
+        XCTAssertNil(CorrectionFoldRecommendationLearningInfluence(correction: stillUseful))
+    }
+
     func testWrongTimeFitDecisionRequiresReviewWithoutSilentScheduleMutation() {
         let correction = CorrectionFoldRecord.timeFitDecision(
             id: "time-fit-correction-1",

@@ -461,7 +461,21 @@ struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable
     let uncertainty: RecommendationTraceUncertainty
     let control: RecommendationTraceControl
     let receiptBehavior: RecommendationTraceReceiptBehavior
+    let rejectionLearningInfluences: [CorrectionFoldRecommendationLearningInfluence]
     let schemaVersion: String
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case recommendationID
+        case source
+        case reason
+        case fit
+        case uncertainty
+        case control
+        case receiptBehavior
+        case rejectionLearningInfluences
+        case schemaVersion
+    }
 
     init(
         id: String,
@@ -472,6 +486,7 @@ struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable
         uncertainty: RecommendationTraceUncertainty,
         control: RecommendationTraceControl,
         receiptBehavior: RecommendationTraceReceiptBehavior,
+        rejectionLearningInfluences: [CorrectionFoldRecommendationLearningInfluence] = [],
         schemaVersion: String = recommendationTraceSchemaVersion
     ) {
         self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -482,6 +497,7 @@ struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable
         self.uncertainty = uncertainty
         self.control = control
         self.receiptBehavior = receiptBehavior
+        self.rejectionLearningInfluences = rejectionLearningInfluences.sorted { $0.id < $1.id }
         self.schemaVersion = schemaVersion
     }
 
@@ -524,6 +540,39 @@ struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable
         )
     }
 
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            id: try container.decode(String.self, forKey: .id),
+            recommendationID: try container.decode(String.self, forKey: .recommendationID),
+            source: try container.decode(RecommendationTraceSource.self, forKey: .source),
+            reason: try container.decode(RecommendationTraceReason.self, forKey: .reason),
+            fit: try container.decode(RecommendationTraceFit.self, forKey: .fit),
+            uncertainty: try container.decode(RecommendationTraceUncertainty.self, forKey: .uncertainty),
+            control: try container.decode(RecommendationTraceControl.self, forKey: .control),
+            receiptBehavior: try container.decode(RecommendationTraceReceiptBehavior.self, forKey: .receiptBehavior),
+            rejectionLearningInfluences: try container.decodeIfPresent(
+                [CorrectionFoldRecommendationLearningInfluence].self,
+                forKey: .rejectionLearningInfluences
+            ) ?? [],
+            schemaVersion: try container.decode(String.self, forKey: .schemaVersion)
+        )
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(recommendationID, forKey: .recommendationID)
+        try container.encode(source, forKey: .source)
+        try container.encode(reason, forKey: .reason)
+        try container.encode(fit, forKey: .fit)
+        try container.encode(uncertainty, forKey: .uncertainty)
+        try container.encode(control, forKey: .control)
+        try container.encode(receiptBehavior, forKey: .receiptBehavior)
+        try container.encode(rejectionLearningInfluences, forKey: .rejectionLearningInfluences)
+        try container.encode(schemaVersion, forKey: .schemaVersion)
+    }
+
     var isComplete: Bool {
         schemaVersion == recommendationTraceSchemaVersion &&
             id.isEmpty == false &&
@@ -539,7 +588,47 @@ struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable
         isComplete &&
             source.canSupportRecommendation &&
             fit.canDriveRecommendation &&
-            receiptBehavior.state != .receiptMissing
+            receiptBehavior.state != .receiptMissing &&
+            isSuppressedByRejectionLearning == false
+    }
+
+    var rejectionLearningRankAdjustment: Int {
+        rejectionLearningInfluences
+            .map { influence in
+                influence.rankAdjustment(
+                    for: recommendationID,
+                    candidateSignalKeys: rejectionLearningCandidateSignalKeys
+                )
+            }
+            .min() ?? 0
+    }
+
+    var isSuppressedByRejectionLearning: Bool {
+        rejectionLearningInfluences.contains { influence in
+            influence.suppresses(
+                candidateRecommendationID: recommendationID,
+                candidateSignalKeys: rejectionLearningCandidateSignalKeys
+            )
+        }
+    }
+
+    var hasInspectableRejectionLearning: Bool {
+        rejectionLearningInfluences.isEmpty == false &&
+            rejectionLearningInfluences.allSatisfy(\.isInspectableAndControllable)
+    }
+
+    private var rejectionLearningCandidateSignalKeys: [String] {
+        Self.orderedUnique(
+            source.localEvidenceCategories.map(\.rawValue) +
+                source.sourceAtlasBlockReasons +
+                reason.evidenceCategoryIDs +
+                fit.blockReasons +
+                control.correctableFieldKeys
+        )
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
     }
 }
 

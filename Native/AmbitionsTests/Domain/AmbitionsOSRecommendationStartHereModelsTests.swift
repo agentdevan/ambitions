@@ -77,6 +77,38 @@ final class AmbitionsOSRecommendationStartHereModelsTests: XCTestCase {
         XCTAssertTrue(issues.contains(.missingUserControl))
     }
 
+    func testStartHereRecommendationCanCreateStructuredRejectCorrectionWithoutMutation() throws {
+        let recommendation = startHere(
+            controlActions: [.adjust, .explainMore, .reject, .start],
+            surfaceLanguageSamples: ["Start here", "Not this"]
+        )
+
+        let correction = recommendation.rejectionCorrection(
+            id: "start-here-rejection-1",
+            reason: .rejectedTooLarge,
+            note: "This is too large for the available time.",
+            occurredAt: "2026-05-13T10:30:43Z"
+        )
+        let influence = try XCTUnwrap(
+            CorrectionFoldRecommendationLearningInfluence(
+                correction: correction,
+                similarRecommendationSignalKeys: ["capacity", "scope"]
+            )
+        )
+
+        XCTAssertTrue(recommendation.controlActions.contains(.reject))
+        XCTAssertEqual(validator.validate(recommendation), [])
+        XCTAssertTrue(correction.isWellFormed)
+        XCTAssertEqual(correction.sourceObjectID, recommendation.id)
+        XCTAssertEqual(correction.correctedRecommendation, .rejectedTooLarge)
+        XCTAssertEqual(correction.effect, .suppressRecommendation)
+        XCTAssertTrue(correction.allowsFutureLearning)
+        XCTAssertFalse(correction.permitsSilentMutation)
+        XCTAssertTrue(influence.isInspectableAndControllable)
+        XCTAssertEqual(influence.adjustment, .downrankTooLarge)
+        XCTAssertEqual(influence.similarRecommendationSignalKeys, ["capacity", "scope"])
+    }
+
     func testReceiptBehaviorIsRequiredForTraceableRecommendation() {
         let recommendation = startHere(proofTrustReceipts: [])
 

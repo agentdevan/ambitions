@@ -48,6 +48,164 @@ enum CorrectionFoldRecommendationValue: String, Codable, Sendable, Equatable, Ha
     var isRejection: Bool {
         self != .stillUseful
     }
+
+    var localLearningAdjustment: CorrectionFoldRecommendationLearningAdjustment {
+        switch self {
+        case .stillUseful:
+            return .noAdjustment
+        case .rejectedWrongGoal:
+            return .downrankWrongGoal
+        case .rejectedWrongTime:
+            return .downrankWrongTime
+        case .rejectedTooLarge:
+            return .downrankTooLarge
+        case .rejectedAlreadyDone:
+            return .suppressCompleted
+        case .rejectedWrongSource:
+            return .requireSourceReview
+        case .rejectedLowEnergyContext:
+            return .downrankLowEnergyContext
+        }
+    }
+}
+
+enum CorrectionFoldRecommendationLearningAdjustment: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case noAdjustment = "no_adjustment"
+    case suppressExactRecommendation = "suppress_exact_recommendation"
+    case downrankWrongGoal = "downrank_wrong_goal"
+    case downrankWrongTime = "downrank_wrong_time"
+    case downrankTooLarge = "downrank_too_large"
+    case suppressCompleted = "suppress_completed"
+    case requireSourceReview = "require_source_review"
+    case downrankLowEnergyContext = "downrank_low_energy_context"
+
+    var baseRankAdjustment: Int {
+        switch self {
+        case .noAdjustment:
+            return 0
+        case .suppressExactRecommendation, .suppressCompleted:
+            return -100
+        case .requireSourceReview:
+            return -75
+        case .downrankTooLarge:
+            return -40
+        case .downrankWrongGoal, .downrankWrongTime, .downrankLowEnergyContext:
+            return -30
+        }
+    }
+
+    var suppressesEligibleRecommendation: Bool {
+        switch self {
+        case .suppressExactRecommendation, .suppressCompleted:
+            return true
+        case .noAdjustment, .downrankWrongGoal, .downrankWrongTime, .downrankTooLarge, .requireSourceReview, .downrankLowEnergyContext:
+            return false
+        }
+    }
+}
+
+struct CorrectionFoldRecommendationLearningInfluence: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let correctionRecordID: String
+    let recommendationID: String
+    let rejectionReason: CorrectionFoldRecommendationValue
+    let adjustment: CorrectionFoldRecommendationLearningAdjustment
+    let similarRecommendationSignalKeys: [String]
+    let explanation: String
+    let receiptID: String
+    let localOnly: Bool
+    let resetDeleteCompatible: Bool
+    let permitsSilentMutation: Bool
+    let schemaVersion: String
+
+    init?(
+        correction: CorrectionFoldRecord,
+        similarRecommendationSignalKeys: [String] = [],
+        schemaVersion: String = correctionFoldSchemaVersion
+    ) {
+        guard correction.target == .recommendation,
+              correction.allowsFutureLearning,
+              correction.effect == .suppressRecommendation,
+              let reason = correction.correctedRecommendation,
+              reason.isRejection
+        else {
+            return nil
+        }
+
+        self.id = "learning.\(correction.id)"
+        self.correctionRecordID = correction.id
+        self.recommendationID = correction.sourceObjectID
+        self.rejectionReason = reason
+        self.adjustment = reason.localLearningAdjustment
+        self.similarRecommendationSignalKeys = Self.orderedUnique(similarRecommendationSignalKeys)
+        self.explanation = Self.explanation(for: reason)
+        self.receiptID = correction.receipt.id
+        self.localOnly = correction.receipt.localOnly
+        self.resetDeleteCompatible = true
+        self.permitsSilentMutation = false
+        self.schemaVersion = schemaVersion
+    }
+
+    var isInspectableAndControllable: Bool {
+        correctionRecordID.isEmpty == false &&
+            recommendationID.isEmpty == false &&
+            explanation.isEmpty == false &&
+            receiptID.isEmpty == false &&
+            localOnly &&
+            resetDeleteCompatible &&
+            permitsSilentMutation == false &&
+            schemaVersion == correctionFoldSchemaVersion
+    }
+
+    func rankAdjustment(
+        for candidateRecommendationID: String,
+        candidateSignalKeys: [String] = []
+    ) -> Int {
+        if candidateRecommendationID == recommendationID {
+            return CorrectionFoldRecommendationLearningAdjustment.suppressExactRecommendation.baseRankAdjustment
+        }
+
+        let candidateSignals = Set(Self.orderedUnique(candidateSignalKeys))
+        let rejectedSignals = Set(similarRecommendationSignalKeys)
+        if candidateSignals.isEmpty == false && rejectedSignals.isDisjoint(with: candidateSignals) == false {
+            return adjustment.baseRankAdjustment
+        }
+
+        return 0
+    }
+
+    func suppresses(
+        candidateRecommendationID: String,
+        candidateSignalKeys: [String] = []
+    ) -> Bool {
+        rankAdjustment(for: candidateRecommendationID, candidateSignalKeys: candidateSignalKeys) <=
+            CorrectionFoldRecommendationLearningAdjustment.suppressExactRecommendation.baseRankAdjustment ||
+            (adjustment.suppressesEligibleRecommendation &&
+                rankAdjustment(for: candidateRecommendationID, candidateSignalKeys: candidateSignalKeys) < 0)
+    }
+
+    private static func explanation(for reason: CorrectionFoldRecommendationValue) -> String {
+        switch reason {
+        case .stillUseful:
+            return "No rejection learning is applied."
+        case .rejectedWrongGoal:
+            return "Similar recommendations should be lower until the goal fit is reviewed."
+        case .rejectedWrongTime:
+            return "Similar recommendations should be lower when the time fit looks the same."
+        case .rejectedTooLarge:
+            return "Similar recommendations should be smaller before they rise again."
+        case .rejectedAlreadyDone:
+            return "The rejected recommendation should stay suppressed as already handled."
+        case .rejectedWrongSource:
+            return "Similar recommendations should wait for source review before they guide behavior."
+        case .rejectedLowEnergyContext:
+            return "Similar recommendations should be lower when the energy or context fit looks the same."
+        }
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
 }
 
 enum CorrectionFoldTimeFitValue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
