@@ -160,6 +160,195 @@ final class ProofResourceGraphModelsTests: XCTestCase {
         XCTAssertEqual(Set(actionRelationships.relationships.map(\.missionControlLane)), [.proof, .resources])
     }
 
+    func testPivotPreservationPreservesReviewableAndNonTransferableProofCapital() {
+        let goal = object(.goal, "goal-1", label: "Launch app")
+        let oldAction = object(.action, "action-old", parent: goal.id, label: "Ship release")
+        let newAction = object(.action, "action-new", parent: goal.id, label: "Prepare rollout")
+
+        let preservedProof = ProofReference(
+            id: "preserved-proof",
+            kind: .completedAction,
+            title: "Release validated",
+            attachedObject: oldAction,
+            occurredAt: "2026-04-26T10:00:00Z",
+            capitalProfile: ProofCapitalProfile(
+                sourceKind: .actionReceipt,
+                sourceState: .sourceBacked,
+                freshnessState: .current,
+                contradictionState: .none,
+                evidence: .init(
+                    anchorObjectIDs: [newAction.stableKey],
+                    proofReferenceIDs: ["proof-input-1"],
+                    sourceReceiptIDs: ["receipt-1"]
+                )
+            )
+        )
+
+        let reviewProof = ProofReference(
+            id: "review-proof",
+            kind: .completedAction,
+            title: "Review-needed milestone",
+            attachedObject: oldAction,
+            occurredAt: "2026-04-26T11:00:00Z",
+            capitalProfile: ProofCapitalProfile(
+                sourceKind: .manual,
+                sourceState: .userConfirmed,
+                freshnessState: .stale,
+                contradictionState: .none,
+                evidence: .init(
+                    anchorObjectIDs: [newAction.stableKey],
+                    sourceReceiptIDs: ["receipt-stale"]
+                )
+            )
+        )
+
+        let contradictedProof = ProofReference(
+            id: "contradicted-proof",
+            kind: .decision,
+            title: "Contradicted proof",
+            attachedObject: oldAction,
+            capitalProfile: ProofCapitalProfile(
+                sourceKind: .correction,
+                sourceState: .sourceBacked,
+                freshnessState: .current,
+                contradictionState: .confirmed,
+                evidence: .init(
+                    anchorObjectIDs: [newAction.stableKey],
+                    proofReferenceIDs: ["proof-input-3"]
+                )
+            )
+        )
+
+        let noOverlapProof = ProofReference(
+            id: "no-overlap-proof",
+            kind: .decision,
+            title: "No-overlap proof",
+            attachedObject: oldAction,
+            capitalProfile: ProofCapitalProfile(
+                sourceKind: .manual,
+                sourceState: .sourceBacked,
+                freshnessState: .current,
+                contradictionState: .none,
+                evidence: .init(
+                    anchorObjectIDs: [goal.stableKey],
+                    sourceReceiptIDs: ["receipt-overlap"]
+                )
+            )
+        )
+
+        let missingEvidenceProof = ProofReference(
+            id: "missing-evidence-proof",
+            kind: .link,
+            title: "Missing evidence proof",
+            attachedObject: oldAction,
+            capitalProfile: ProofCapitalProfile(
+                sourceKind: .manual,
+                sourceState: .sourceBacked,
+                freshnessState: .current,
+                contradictionState: .none,
+                evidence: .init(
+                    anchorObjectIDs: [newAction.stableKey]
+                )
+            )
+        )
+
+        let targetMismatchProof = ProofReference(
+            id: "target-mismatch-proof",
+            kind: .link,
+            title: "Wrong target proof",
+            attachedObject: object(.action, "other-action", parent: goal.id, label: "Ignored"),
+            capitalProfile: ProofCapitalProfile(
+                sourceKind: .manual,
+                sourceState: .sourceBacked,
+                freshnessState: .current,
+                contradictionState: .none,
+                evidence: .init(
+                    anchorObjectIDs: [oldAction.stableKey, newAction.stableKey],
+                    proofReferenceIDs: ["proof-input-4"],
+                    sourceReceiptIDs: ["receipt-4"]
+                )
+            )
+        )
+
+        let projection = ProofResourceGraphProjection(
+            proofReferences: [preservedProof, reviewProof, contradictedProof, noOverlapProof, missingEvidenceProof, targetMismatchProof]
+        )
+
+        let report = projection.evaluatePivotPreservation(from: oldAction, to: newAction)
+
+        XCTAssertEqual(Set(report.preservedProofIDs), ["preserved-proof"])
+        XCTAssertEqual(Set(report.reviewRequiredProofIDs), ["review-proof"])
+        XCTAssertEqual(Set(report.nonTransferableProofIDs), ["contradicted-proof", "missing-evidence-proof", "no-overlap-proof"])
+        XCTAssertEqual(report.transferRecords.count, 5)
+        XCTAssertEqual(report.transferRecords.first(where: { $0.proofID == "no-overlap-proof" })?.issues.contains(.missingOverlap), true)
+        XCTAssertEqual(report.transferRecords.first(where: { $0.proofID == "contradicted-proof" })?.issues.contains(.contradictionConfirmed), true)
+        XCTAssertEqual(report.transferRecords.first(where: { $0.proofID == "missing-evidence-proof" })?.outcome, .nonTransferable)
+    }
+
+    func testPivotTransferRequiresOverlapAndTrustEvidence() {
+        let goal = object(.goal, "goal-2", label: "Goal with pivot")
+        let sourceAction = object(.action, "source-action", parent: goal.id, label: "Pivot source")
+        let destinationAction = object(.action, "destination-action", parent: goal.id, label: "Pivot destination")
+
+        let proof = ProofReference(
+            id: "pivot-proof",
+            kind: .completedAction,
+            title: "Pivot evidence proof",
+            attachedObject: sourceAction,
+            capitalProfile: ProofCapitalProfile(
+                sourceKind: .actionReceipt,
+                sourceState: .sourceBacked,
+                freshnessState: .current,
+                contradictionState: .none,
+                evidence: .init(
+                    anchorObjectIDs: [destinationAction.stableKey],
+                    sourceReceiptIDs: ["proof-receipt-1"],
+                    proofReferenceIDs: ["proof-reference-1"]
+                )
+            )
+        )
+
+        let projection = ProofResourceGraphProjection(proofReferences: [proof])
+
+        let report = projection.evaluatePivotPreservation(from: sourceAction, to: destinationAction)
+        let record = report.transferRecords.first
+
+        XCTAssertEqual(report.preservedProofIDs, ["pivot-proof"])
+        XCTAssertNotNil(record)
+        XCTAssertEqual(record?.issues.contains(.missingOverlap), false)
+        XCTAssertEqual(record?.issues.contains(.missingTrustEvidence), false)
+        XCTAssertEqual(record?.issues.contains(.sourceNeedReview), false)
+    }
+
+    func testLegacyProofReferenceDecodesWithDefaultProofCapitalProfile() throws {
+        let data = Data(
+            """
+            {
+              "id": "legacy-proof",
+              "kind": "completed_action",
+              "title": "Legacy proof",
+              "attachedObject": {
+                "kind": "action",
+                "id": "legacy-action",
+                "parentContextID": "legacy-goal",
+                "label": "Legacy action",
+                "sourceDomain": "goals"
+              },
+              "schemaVersion": "proof_resource_graph.native.v1"
+            }
+            """.utf8
+        )
+
+        let proof = try JSONDecoder().decode(ProofReference.self, from: data)
+
+        XCTAssertEqual(proof.id, "legacy-proof")
+        XCTAssertEqual(proof.capitalProfile.sourceKind, .manual)
+        XCTAssertEqual(proof.capitalProfile.sourceState, .userStated)
+        XCTAssertEqual(proof.capitalProfile.freshnessState, .notApplicable)
+        XCTAssertEqual(proof.capitalProfile.contradictionState, .none)
+        XCTAssertEqual(proof.capitalProfile.evidence, ProofCapitalEvidence())
+    }
+
     func testReferenceOnlyPlaceholdersStayLifeGraphObjectsWithoutProviderBehavior() {
         let milestone = object(.milestone, "milestone-1", label: "Beta ready")
         let blocker = object(.blocker, "blocker-1", label: "Certificate blocked")

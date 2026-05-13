@@ -37,6 +37,155 @@ enum ResourceReferenceKind: String, Codable, Sendable, Equatable, Hashable, Case
     case calendarReference = "calendar_reference"
 }
 
+enum ProofCapitalSourceKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case manual
+    case actionReceipt = "action_receipt"
+    case sourceClaim = "source_claim"
+    case correction
+    case transfer
+    case externalVerification = "external_verification"
+}
+
+enum ProofCapitalContradictionState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case none
+    case suspected
+    case confirmed
+}
+
+enum ProofCapitalTransferOutcome: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case preserved
+    case review
+    case nonTransferable = "non_transferable"
+}
+
+enum ProofCapitalTransferIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case missingOverlap
+    case missingTrustEvidence = "missing_trust_evidence"
+    case sourceNeedReview = "source_need_review"
+    case staleNeedsReview = "stale_needs_review"
+    case staleHighRisk = "stale_high_risk"
+    case contradictionSuspected = "contradiction_suspected"
+    case contradictionConfirmed = "contradiction_confirmed"
+}
+
+struct ProofCapitalEvidence: Codable, Sendable, Equatable, Hashable {
+    let anchorObjectIDs: [String]
+    let proofReferenceIDs: [String]
+    let sourceReceiptIDs: [String]
+    let sourceClaimIDs: [String]
+
+    init(
+        anchorObjectIDs: [String] = [],
+        proofReferenceIDs: [String] = [],
+        sourceReceiptIDs: [String] = [],
+        sourceClaimIDs: [String] = []
+    ) {
+        self.anchorObjectIDs = Self.orderedUnique(anchorObjectIDs)
+        self.proofReferenceIDs = Self.orderedUnique(proofReferenceIDs)
+        self.sourceReceiptIDs = Self.orderedUnique(sourceReceiptIDs)
+        self.sourceClaimIDs = Self.orderedUnique(sourceClaimIDs)
+    }
+
+    var hasTrustEvidence: Bool {
+        proofReferenceIDs.isEmpty == false ||
+            sourceReceiptIDs.isEmpty == false ||
+            sourceClaimIDs.isEmpty == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+}
+
+struct ProofCapitalProfile: Codable, Sendable, Equatable, Hashable {
+    let sourceKind: ProofCapitalSourceKind
+    let sourceState: HumanProgressSourceState
+    let freshnessState: HumanProgressFreshnessState
+    let contradictionState: ProofCapitalContradictionState
+    let evidence: ProofCapitalEvidence
+
+    init(
+        sourceKind: ProofCapitalSourceKind = .manual,
+        sourceState: HumanProgressSourceState = .userStated,
+        freshnessState: HumanProgressFreshnessState = .notApplicable,
+        contradictionState: ProofCapitalContradictionState = .none,
+        evidence: ProofCapitalEvidence = .init()
+    ) {
+        self.sourceKind = sourceKind
+        self.sourceState = sourceState
+        self.freshnessState = freshnessState
+        self.contradictionState = contradictionState
+        self.evidence = evidence
+    }
+
+    func evaluateTransfer(
+        proofID: String,
+        overlapObjectIDs: [String]
+    ) -> ProofCapitalTransferRecord {
+        var transferIssues: Set<ProofCapitalTransferIssue> = []
+
+        let normalizedOverlap = Set(
+            overlapObjectIDs.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                .filter { $0.isEmpty == false }
+        )
+        let evidenceOverlap = Set(evidence.anchorObjectIDs).intersection(normalizedOverlap)
+        if evidenceOverlap.isEmpty {
+            transferIssues.insert(.missingOverlap)
+        }
+        if evidence.hasTrustEvidence == false {
+            transferIssues.insert(.missingTrustEvidence)
+        }
+        if sourceState.canDriveSourceSensitiveRecommendation == false {
+            transferIssues.insert(.sourceNeedReview)
+        }
+        switch freshnessState {
+        case .stale:
+            transferIssues.insert(.staleNeedsReview)
+        case .staleCritical, .sourceChanged, .unknown:
+            transferIssues.insert(.staleHighRisk)
+        case .current, .reviewSoon, .notApplicable:
+            break
+        }
+        if contradictionState == .suspected {
+            transferIssues.insert(.contradictionSuspected)
+        }
+        if contradictionState == .confirmed {
+            transferIssues.insert(.contradictionConfirmed)
+        }
+
+        let nonTransferableIssue: Set<ProofCapitalTransferIssue> = [.missingOverlap, .missingTrustEvidence, .staleHighRisk, .contradictionConfirmed]
+        let reviewOnlyIssue: Set<ProofCapitalTransferIssue> = [.sourceNeedReview, .staleNeedsReview, .contradictionSuspected]
+        let outcome: ProofCapitalTransferOutcome
+
+        if transferIssues.intersection(nonTransferableIssue).isEmpty == false {
+            outcome = .nonTransferable
+        } else if transferIssues.intersection(reviewOnlyIssue).isEmpty == false {
+            outcome = .review
+        } else {
+            outcome = .preserved
+        }
+
+        return ProofCapitalTransferRecord(
+            proofID: proofID,
+            outcome: outcome,
+            issues: transferIssues.sorted { $0.rawValue < $1.rawValue }
+        )
+    }
+}
+
+struct ProofCapitalTransferRecord: Codable, Sendable, Equatable, Hashable {
+    let proofID: String
+    let outcome: ProofCapitalTransferOutcome
+    let issues: [ProofCapitalTransferIssue]
+}
+
+struct ProofPivotPreservationReport: Sendable, Equatable {
+    let preservedProofIDs: [String]
+    let reviewRequiredProofIDs: [String]
+    let nonTransferableProofIDs: [String]
+    let transferRecords: [ProofCapitalTransferRecord]
+}
+
 struct ProofReference: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let kind: ProofReferenceKind
@@ -48,6 +197,7 @@ struct ProofReference: Codable, Sendable, Equatable, Hashable, Identifiable {
     let createdAt: String?
     let strength: ProofStrength?
     let sourceDomain: LifeGraphSourceDomain?
+    let capitalProfile: ProofCapitalProfile
     let schemaVersion: String
 
     init(
@@ -61,6 +211,7 @@ struct ProofReference: Codable, Sendable, Equatable, Hashable, Identifiable {
         createdAt: String? = nil,
         strength: ProofStrength? = nil,
         sourceDomain: LifeGraphSourceDomain? = nil,
+        capitalProfile: ProofCapitalProfile = .init(),
         schemaVersion: String = proofResourceGraphSchemaVersion
     ) {
         self.id = Self.normalizedRequired(id)
@@ -73,7 +224,26 @@ struct ProofReference: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.createdAt = Self.normalizedOptional(createdAt)
         self.strength = strength
         self.sourceDomain = sourceDomain
+        self.capitalProfile = capitalProfile
         self.schemaVersion = schemaVersion
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            id: try container.decode(String.self, forKey: .id),
+            kind: try container.decode(ProofReferenceKind.self, forKey: .kind),
+            title: try container.decode(String.self, forKey: .title),
+            summary: try container.decodeIfPresent(String.self, forKey: .summary),
+            sourceObject: try container.decodeIfPresent(LifeGraphObjectReference.self, forKey: .sourceObject),
+            attachedObject: try container.decode(LifeGraphObjectReference.self, forKey: .attachedObject),
+            occurredAt: try container.decodeIfPresent(String.self, forKey: .occurredAt),
+            createdAt: try container.decodeIfPresent(String.self, forKey: .createdAt),
+            strength: try container.decodeIfPresent(ProofStrength.self, forKey: .strength),
+            sourceDomain: try container.decodeIfPresent(LifeGraphSourceDomain.self, forKey: .sourceDomain),
+            capitalProfile: try container.decodeIfPresent(ProofCapitalProfile.self, forKey: .capitalProfile) ?? .init(),
+            schemaVersion: try container.decodeIfPresent(String.self, forKey: .schemaVersion) ?? proofResourceGraphSchemaVersion
+        )
     }
 
     var isWellFormed: Bool {
@@ -110,6 +280,21 @@ struct ProofReference: Codable, Sendable, Equatable, Hashable, Identifiable {
             return nil
         }
         return trimmed
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case kind
+        case title
+        case summary
+        case sourceObject
+        case attachedObject
+        case occurredAt
+        case createdAt
+        case strength
+        case sourceDomain
+        case capitalProfile
+        case schemaVersion
     }
 }
 
@@ -203,6 +388,32 @@ struct ProofResourceGraphProjection: Sendable, Equatable {
         )
     }
 
+    func evaluatePivotPreservation(
+        from source: LifeGraphObjectReference,
+        to destination: LifeGraphObjectReference
+    ) -> ProofPivotPreservationReport {
+        let sourceProofs = proofReferences.filter { $0.attachedObject.stableKey == source.stableKey }
+        let records = sourceProofs.map { proof in
+            proof.evaluatePivotTransfer(to: destination)
+        }
+        let preserved = records
+            .filter { $0.outcome == .preserved }
+            .map(\.proofID)
+        let reviewRequired = records
+            .filter { $0.outcome == .review }
+            .map(\.proofID)
+        let nonTransferable = records
+            .filter { $0.outcome == .nonTransferable }
+            .map(\.proofID)
+
+        return ProofPivotPreservationReport(
+            preservedProofIDs: preserved,
+            reviewRequiredProofIDs: reviewRequired,
+            nonTransferableProofIDs: nonTransferable,
+            transferRecords: records
+        )
+    }
+
     static func attachProof(
         _ proof: ProofReference,
         to relationships: LifeGraphRelationshipProjection = LifeGraphRelationshipProjection()
@@ -286,6 +497,13 @@ struct ProofResourceGraphProjection: Sendable, Equatable {
 }
 
 private extension ProofReference {
+    func evaluatePivotTransfer(to destination: LifeGraphObjectReference) -> ProofCapitalTransferRecord {
+        return capitalProfile.evaluateTransfer(
+            proofID: id,
+            overlapObjectIDs: [destination.stableKey]
+        )
+    }
+
     var dedupeKey: String {
         [
             id,
