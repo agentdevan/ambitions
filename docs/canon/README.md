@@ -10,6 +10,8 @@ Ambitions 3.0 is the completed implementation baseline and remains important sou
 
 ## Start here
 
+- [frontend/](frontend/README.md) - active front-end architecture atlas, visual encyclopedia, and final-state surface recipe system; subordinate to `docs/truth/*` and the maintained home for visual-direction changes. Start recipe work at [frontend/SURFACE_RECIPE_INDEX.md](frontend/SURFACE_RECIPE_INDEX.md).
+
 For Ambitions 3.0 work, start with:
 
 1. [Ambitions_3_0_Source_Of_Truth_Override.md](Ambitions_3_0_Source_Of_Truth_Override.md)
@@ -207,3 +209,5 @@ These docs are future canon in the Ambitions 4.0 Execution Program. They do not 
 ## Living Dream Architecture Cross-Link
 
 - `docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md` is future implementation source truth and train governance for LDI01-LDI22. It does not claim runtime Living Dream behavior.
+
+Recipe system: [frontend/SURFACE_RECIPE_INDEX.md](frontend/SURFACE_RECIPE_INDEX.md).

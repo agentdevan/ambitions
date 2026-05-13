@@ -1,0 +1,36 @@
+{
+  "batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+  "phase": "04 GPT-5.5 Repair Pass 1",
+  "status": "GREEN",
+  "active_ia": "Today / Goals / Capture / Time / You",
+  "doctrine": "Atlas is intended final-state visual recipe canon, not implementation tracker, screenshot proof, current-state audit, or release proof.",
+  "source_precedence": "docs/truth/* wins; planned not-yet-implemented frontend direction informs final-state visual canon only when compatible; current source does not prove implementation.",
+  "planned_batch_inventory_count": 273,
+  "planned_frontend_affecting_batch_count": 273,
+  "surface_recipe_inventory_count": 159,
+  "recipe_files_count": 159,
+  "registry_item_count": 174,
+  "unresolved_intended_direction_gaps": 5,
+  "mri_status": "Documented as intended visual-direction input only, not runtime proof.",
+  "hbi_status": "Documented as intended visual-direction input only, not runtime proof.",
+  "repair_summary": [
+    "Replaced repeated generic recipe bodies with destination/object/type-specific recipe regions and state models.",
+    "Replaced planned-batch placeholder direction rows with conservative extracted direction decisions.",
+    "Recorded Phase 04 specificity correction in the source precedence ledger.",
+    "Removed explicit banned gambling vocabulary from tray recipe forbidden-drift lists after validator failure."
+  ],
+  "validation": {
+    "py_compile": "pass",
+    "frontend_architecture_atlas_check": "pass",
+    "visual_item_registry_check": "pass",
+    "visual_direction_change_protocol_check": "pass",
+    "visual_reference_ledger_check": "pass",
+    "frontend_obsolete_term_scan": "pass",
+    "surface_recipe_inventory_check": "pass",
+    "surface_recipe_coverage_check": "pass",
+    "git_diff_check_scoped": "pass"
+  },
+  "no_screenshots_required": true,
+  "no_production_ui_implementation": true,
+  "recommended_next_batch": "FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001"
+}
