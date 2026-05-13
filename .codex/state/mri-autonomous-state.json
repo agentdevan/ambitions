@@ -5,7 +5,8 @@
     "MRI02",
     "MRI03",
     "MRI04",
-    "MRI05"
+    "MRI05",
+    "MRI06"
   ],
   "history": [
     {
@@ -32,6 +33,11 @@
       "batch": "MRI05",
       "prompt": "prompts/batches/MRI05-RECOVERY-THREAD-RUNTIME.md",
       "marked_complete_at": "2026-05-13T01:23:47Z"
+    },
+    {
+      "batch": "MRI06",
+      "prompt": "prompts/batches/MRI06-REFLECTION-ADAPTATION-RUNTIME.md",
+      "marked_complete_at": "2026-05-13T01:52:16Z"
     }
   ]
 }
