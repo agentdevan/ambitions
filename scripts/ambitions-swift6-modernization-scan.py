@@ -13,7 +13,6 @@ from __future__ import annotations
 import argparse
 import os
 import re
-import subprocess
 import sys
 import tempfile
 from dataclasses import dataclass
@@ -114,6 +113,39 @@ DEPENDENCY_RULES: tuple[Rule, ...] = (
     ),
 )
 
+MODULE_BOUNDARY_RULES: tuple[tuple[str, str, re.Pattern[str], str], ...] = (
+    (
+        "domain-imports-swiftui",
+        "Native/Ambitions/Domain",
+        re.compile(r"^\s*import\s+SwiftUI\b"),
+        "Domain must remain UI-free. Move presentation concerns into Features/App or extract pure values.",
+    ),
+    (
+        "domain-imports-swiftdata",
+        "Native/Ambitions/Domain",
+        re.compile(r"^\s*import\s+SwiftData\b"),
+        "Domain must not own persistence implementation. Move records/mapping into Persistence.",
+    ),
+    (
+        "features-own-swiftdata",
+        "Native/Ambitions/Features",
+        re.compile(r"^\s*import\s+SwiftData\b"),
+        "Features should use services/read models instead of owning raw SwiftData contexts.",
+    ),
+    (
+        "design-system-imports-swiftdata",
+        "Sources",
+        re.compile(r"^\s*import\s+SwiftData\b"),
+        "Design system packages must not depend on persistence.",
+    ),
+    (
+        "widget-ui-imports-swiftdata",
+        "AppUI/Sources",
+        re.compile(r"^\s*import\s+SwiftData\b"),
+        "Widget UI package must consume snapshots/contracts, not persistence records.",
+    ),
+)
+
 
 def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Scan Ambitions Swift 6 modernization guardrails.")
@@ -146,6 +178,17 @@ def iter_source_files(root: Path) -> Iterable[Path]:
             yield path
 
 
+def iter_files_under(root: Path, relative_root: str) -> Iterable[Path]:
+    source_root = root / relative_root
+    if not source_root.exists():
+        return []
+    return (
+        path
+        for path in source_root.rglob("*.swift")
+        if not any(part in EXCLUDED_DIR_NAMES for part in path.parts)
+    )
+
+
 def iter_settings_files(root: Path) -> Iterable[Path]:
     for relative in SETTINGS_FILES:
         path = root / relative
@@ -170,6 +213,26 @@ def scan_rules(paths: Iterable[Path], rules: Sequence[Rule]) -> list[Finding]:
                             message=rule.message,
                             text=line.strip(),
                             allowed=allowed,
+                        )
+                    )
+    return findings
+
+
+def scan_module_boundaries(root: Path) -> list[Finding]:
+    findings: list[Finding] = []
+    for code, relative_root, pattern, message in MODULE_BOUNDARY_RULES:
+        for path in iter_files_under(root, relative_root):
+            for index, line in enumerate(read_text(path).splitlines(), start=1):
+                if pattern.search(line):
+                    findings.append(
+                        Finding(
+                            severity="error",
+                            code=code,
+                            path=path,
+                            line=index,
+                            message=message,
+                            text=line.strip(),
+                            allowed=has_allow_marker(line),
                         )
                     )
     return findings
@@ -208,7 +271,8 @@ def scan_settings(root: Path) -> list[Finding]:
             Finding("error", "missing-package-swift", package, 0, "Package.swift is required for package/toolchain proof.", "", False)
         )
     else:
-        first_line = read_text(package).splitlines()[0] if read_text(package).splitlines() else ""
+        package_lines = read_text(package).splitlines()
+        first_line = package_lines[0] if package_lines else ""
         if "swift-tools-version: 6.0" not in first_line:
             findings.append(
                 Finding("error", "package-tools-not-6", package, 1, "Package.swift must declare swift-tools-version: 6.0.", first_line, False)
@@ -220,7 +284,8 @@ def scan_settings(root: Path) -> list[Finding]:
 def all_findings(root: Path) -> list[Finding]:
     source_findings = scan_rules(iter_source_files(root), ARCHITECTURE_RULES)
     settings_dependency_findings = scan_rules(iter_settings_files(root), DEPENDENCY_RULES)
-    return scan_settings(root) + source_findings + settings_dependency_findings
+    module_findings = scan_module_boundaries(root)
+    return scan_settings(root) + source_findings + settings_dependency_findings + module_findings
 
 
 def render(root: Path, findings: Sequence[Finding]) -> str:
@@ -248,6 +313,7 @@ def render(root: Path, findings: Sequence[Finding]) -> str:
 
 def write_fixture(root: Path, project_swift_version: str = "6.0", strict: str = "complete", package_tools: str = "6.0") -> None:
     (root / "Native/Ambitions/Features/Today").mkdir(parents=True)
+    (root / "Native/Ambitions/Domain").mkdir(parents=True)
     (root / "Sources").mkdir(parents=True)
     (root / "project.yml").write_text(
         f"settings:\n  base:\n    SWIFT_VERSION: {project_swift_version}\n    SWIFT_STRICT_CONCURRENCY: {strict}\n",
@@ -256,6 +322,10 @@ def write_fixture(root: Path, project_swift_version: str = "6.0", strict: str = 
     (root / "Package.swift").write_text(f"// swift-tools-version: {package_tools}\n", encoding="utf-8")
     (root / "Native/Ambitions/Features/Today/TodayViewModel.swift").write_text(
         "import Observation\n\n@MainActor @Observable final class TodayViewModel {}\n",
+        encoding="utf-8",
+    )
+    (root / "Native/Ambitions/Domain/PureModel.swift").write_text(
+        "import Foundation\n\nstruct PureModel: Sendable {}\n",
         encoding="utf-8",
     )
 
@@ -283,6 +353,16 @@ def run_self_test() -> int:
         if not expected_codes.issubset(actual_codes):
             print(render(root, findings))
             print("SELF_TEST legacy fixture missed expected blocking codes", file=sys.stderr)
+            return 1
+
+        legacy.unlink()
+        domain_leak = root / "Native/Ambitions/Domain/LeakyDomainModel.swift"
+        domain_leak.write_text("import SwiftUI\nimport SwiftData\n", encoding="utf-8")
+        boundary_findings = all_findings(root)
+        boundary_codes = {finding.code for finding in boundary_findings if not finding.allowed}
+        if {"domain-imports-swiftui", "domain-imports-swiftdata"}.issubset(boundary_codes) is False:
+            print(render(root, boundary_findings))
+            print("SELF_TEST boundary fixture missed expected module boundary codes", file=sys.stderr)
             return 1
 
     print("SELF_TEST_STATUS=GREEN")
