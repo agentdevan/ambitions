@@ -272,9 +272,11 @@ final class AmbitionGraphModelsTests: XCTestCase {
             "completed",
             "held",
             "in_flight",
+            "blocked",
             "moved",
             "not_needed",
             "open",
+            "shortened",
             "promised",
             "still_counts",
             "stalled",
@@ -287,5 +289,76 @@ final class AmbitionGraphModelsTests: XCTestCase {
         XCTAssertEqual(AmbitionClosureState.stillCounts.displayLabel, "Still Counts")
         XCTAssertEqual(AmbitionClosureState.noLongerTrue.isClosureForRecovery, true)
         XCTAssertEqual(AmbitionClosureState.completed.isClosureForRecovery, false)
+    }
+
+    func testCommitmentLifecycleTransitionCompletedPreservesProofAndClosesWithoutRecovery() {
+        let transition = AmbitionClosureState.completed.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .completed)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionWaitingHoldsCommitmentAndStartsRecovery() {
+        let transition = AmbitionClosureState.waiting.transition(hasProof: false)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .waiting)
+        XCTAssertFalse(transition.preservesProof)
+        XCTAssertTrue(transition.shouldCreateRecoveryThread)
+        XCTAssertTrue(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionBlockedCreatesRecoveryThreadAndReentryPath() {
+        let transition = AmbitionClosureState.blocked.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .blocked)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertTrue(transition.shouldCreateRecoveryThread)
+        XCTAssertTrue(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionMovedKeepsTraceableStatusWithoutRecovery() {
+        let transition = AmbitionClosureState.moved.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .moved)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionShortenedKeepsTraceableStatus() {
+        let transition = AmbitionClosureState.shortened.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .shortened)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionStillCountsPreservesProofWithoutRecovery() {
+        let transition = AmbitionClosureState.stillCounts.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .stillCounts)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionNotNeededDoesNotPreserveProofOrRecover() {
+        let transition = AmbitionClosureState.notNeeded.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .notNeeded)
+        XCTAssertFalse(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionNeedsRecoveryMapCreatesRecoveryThreadAndReentry() {
+        let transition = AmbitionClosureState.needsRecovery.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .waiting)
+        XCTAssertTrue(transition.shouldCreateRecoveryThread)
+        XCTAssertTrue(transition.allowsReentry)
     }
 }

@@ -59,10 +59,12 @@ enum AmbitionCommitmentStatus: String, Codable, Sendable, Equatable, Hashable, C
     case promised
     case inFlight = "in_flight"
     case waiting
+    case blocked
     case held
     case stalled
     case completed
     case moved
+    case shortened
     case notNeeded = "not_needed"
     case stillCounts = "still_counts"
 }
@@ -123,6 +125,80 @@ enum AmbitionClosureState: String, Codable, Sendable, Equatable, Hashable, CaseI
         case .completed, .stillCounts, .moved, .readyToRestart:
             return false
         }
+    }
+
+    var preservesProof: Bool {
+        switch self {
+        case .waiting, .blocked, .needsRecovery, .needsReview, .held, .paused, .stalled, .tooLarge:
+            return true
+        case .completed, .stillCounts, .moved, .shortened, .readyToRestart:
+            return true
+        case .notNeeded, .noLongerTrue:
+            return false
+        }
+    }
+
+    var shouldCreateRecoveryThread: Bool {
+        switch self {
+        case .completed, .stillCounts, .moved, .shortened, .notNeeded:
+            return false
+        case .waiting, .blocked, .needsRecovery, .needsReview, .held, .paused, .stalled, .tooLarge, .noLongerTrue, .readyToRestart:
+            return true
+        }
+    }
+
+    var nextCommitmentStatus: AmbitionCommitmentStatus {
+        switch self {
+        case .completed:
+            return .completed
+        case .stillCounts:
+            return .stillCounts
+        case .moved:
+            return .moved
+        case .shortened, .tooLarge:
+            return .shortened
+        case .waiting, .needsRecovery, .readyToRestart:
+            return .waiting
+        case .blocked, .needsReview:
+            return .blocked
+        case .held:
+            return .held
+        case .paused:
+            return .held
+        case .stalled:
+            return .stalled
+        case .noLongerTrue, .notNeeded:
+            return .notNeeded
+        }
+    }
+
+    var allowsReentry: Bool {
+        switch self {
+        case .completed, .stillCounts, .moved, .shortened, .notNeeded:
+            return false
+        case .waiting, .blocked, .needsRecovery, .needsReview, .held, .paused, .stalled, .tooLarge, .noLongerTrue, .readyToRestart:
+            return true
+        }
+    }
+
+    func transition(hasProof: Bool) -> CommitmentLifecycleTransition {
+        .init(closureState: self, hasProof: hasProof)
+    }
+}
+
+struct CommitmentLifecycleTransition: Sendable, Equatable {
+    let closureState: AmbitionClosureState
+    let nextCommitmentStatus: AmbitionCommitmentStatus
+    let preservesProof: Bool
+    let shouldCreateRecoveryThread: Bool
+    let allowsReentry: Bool
+
+    init(closureState: AmbitionClosureState, hasProof: Bool) {
+        self.closureState = closureState
+        nextCommitmentStatus = closureState.nextCommitmentStatus
+        preservesProof = closureState.preservesProof && hasProof
+        shouldCreateRecoveryThread = closureState.shouldCreateRecoveryThread
+        allowsReentry = closureState.allowsReentry
     }
 }
 
