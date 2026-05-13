@@ -577,6 +577,193 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         XCTAssertEqual(blockedTrace.fit.state, .sourceNeeded)
         XCTAssertEqual(blockedTrace.receiptBehavior.state, .receiptMissing)
     }
+
+    func testRecommendationTrustSeamProjectsCompleteTraceIntoVisibleSections() {
+        let trace = RecommendationTrace(
+            id: "trace-complete",
+            recommendationID: "recommendation-1",
+            source: RecommendationTraceSource(
+                citedSourceIDs: ["source-current"],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.sourceTruth, .priority],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-1",
+                summary: "A current source and local priority context support this recommendation.",
+                evidenceCategoryIDs: ["source_truth", "priority"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty-duration"],
+                summaries: ["Duration still needs review."]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct-duration"],
+                controlActionIDs: ["review-source"],
+                correctableFieldKeys: ["duration"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .available(actionReceiptIDs: ["action-receipt-1"], proofReferenceIDs: ["proof-1"])
+        )
+
+        let seam = RecommendationTrustSeamState(trace: trace)
+
+        XCTAssertEqual(
+            seam.sectionKinds,
+            [.source, .reason, .fit, .uncertainty, .controls, .receiptBehavior]
+        )
+        XCTAssertTrue(seam.canProceed)
+        XCTAssertTrue(seam.needsReview)
+        XCTAssertEqual(seam.localOnlyLabel, "Local-only")
+        XCTAssertEqual(seam.section(.source)?.state, .ready)
+        XCTAssertEqual(seam.section(.reason)?.state, .ready)
+        XCTAssertEqual(seam.section(.fit)?.state, .ready)
+        XCTAssertEqual(seam.section(.uncertainty)?.state, .reviewNeeded)
+        XCTAssertEqual(seam.section(.controls)?.state, .ready)
+        XCTAssertEqual(seam.section(.receiptBehavior)?.state, .ready)
+        XCTAssertEqual(seam.section(.source)?.referenceIDs, ["priority", "source-current", "source_truth"])
+        XCTAssertFalse(seam.hasVisibleCopyGuardrailViolation)
+    }
+
+    func testRecommendationTrustSeamSurfacesSourceNeededStaleAndBlockedStates() {
+        let blockedReasons = ["source_needed", "stale"]
+        let trace = RecommendationTrace(
+            id: "trace-source-needed",
+            recommendationID: "recommendation-source-needed",
+            source: RecommendationTraceSource(
+                citedSourceIDs: [],
+                sourceAtlasBlockReasons: blockedReasons,
+                localEvidenceCategories: [.sourceTruth],
+                canSupportRecommendation: false
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-source-needed",
+                summary: "The source state needs review before this recommendation can guide behavior.",
+                evidenceCategoryIDs: ["source_truth"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .sourceNeeded,
+                blockReasons: blockedReasons,
+                canDriveRecommendation: false
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty-source"],
+                summaries: ["Source freshness needs review."]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct-source"],
+                controlActionIDs: [],
+                correctableFieldKeys: ["source"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .required()
+        )
+
+        let seam = RecommendationTrustSeamState(trace: trace)
+
+        XCTAssertFalse(seam.canProceed)
+        XCTAssertTrue(seam.needsReview)
+        XCTAssertEqual(seam.section(.source)?.state, .blocked)
+        XCTAssertEqual(seam.section(.fit)?.state, .missing)
+        XCTAssertEqual(seam.section(.receiptBehavior)?.state, .reviewNeeded)
+        XCTAssertEqual(seam.section(.fit)?.referenceIDs, blockedReasons)
+        XCTAssertEqual(seam.section(.source)?.summary, "Needs source review before this can guide behavior.")
+        XCTAssertFalse(seam.hasVisibleCopyGuardrailViolation)
+    }
+
+    func testRecommendationTrustSeamBlocksMissingReceiptAndControlBehavior() {
+        let trace = RecommendationTrace(
+            id: "trace-missing-control-receipt",
+            recommendationID: "recommendation-missing-control-receipt",
+            source: RecommendationTraceSource(
+                citedSourceIDs: ["source-current"],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.sourceTruth],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-missing-control-receipt",
+                summary: "A current source supports review, but controls and receipt proof are missing.",
+                evidenceCategoryIDs: ["source_truth"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty-receipt"],
+                summaries: ["Receipt behavior needs review."]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: [],
+                controlActionIDs: [],
+                correctableFieldKeys: [],
+                hasRequiredControl: false
+            ),
+            receiptBehavior: .missing()
+        )
+
+        let seam = RecommendationTrustSeamState(trace: trace)
+
+        XCTAssertFalse(trace.isComplete)
+        XCTAssertFalse(seam.canProceed)
+        XCTAssertTrue(seam.needsReview)
+        XCTAssertEqual(seam.section(.controls)?.state, .missing)
+        XCTAssertEqual(seam.section(.controls)?.summary, "Needs a correction or review control.")
+        XCTAssertEqual(seam.section(.receiptBehavior)?.state, .missing)
+        XCTAssertEqual(seam.section(.receiptBehavior)?.summary, "Needs a receipt before behavior changes.")
+        XCTAssertFalse(seam.hasVisibleCopyGuardrailViolation)
+    }
+
+    func testRecommendationTrustSeamVisibleCopyAvoidsGuardrailLanguage() {
+        let trace = RecommendationTrace(
+            id: "trace-copy-guardrails",
+            recommendationID: "recommendation-copy-guardrails",
+            source: RecommendationTraceSource(
+                citedSourceIDs: ["source-current"],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.sourceTruth],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-copy-guardrails",
+                summary: "Local source context supports reviewing this step.",
+                evidenceCategoryIDs: ["source_truth"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: [],
+                summaries: []
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct-source"],
+                controlActionIDs: [],
+                correctableFieldKeys: ["source"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .notApplicable()
+        )
+
+        let seam = RecommendationTrustSeamState(trace: trace)
+        let visibleCopy = seam.visibleCopy.joined(separator: " ")
+
+        XCTAssertFalse(seam.hasVisibleCopyGuardrailViolation)
+        XCTAssertFalse(visibleCopy.contains("%"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("assistant"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("best next move"))
+    }
 }
 
 private extension RecommendationExplanationModelsTests {
