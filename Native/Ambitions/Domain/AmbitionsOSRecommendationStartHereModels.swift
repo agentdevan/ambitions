@@ -148,8 +148,92 @@ struct AmbitionsOSStartHereRecommendation: Codable, Sendable, Equatable, Hashabl
         privacyClass == .externalRedacted || privacyClass == .shareableByUser
     }
 
+    static func sourceClaim(
+        from result: SourceAtlasQueryResult,
+        text: String,
+        lastReviewedAt: String? = nil
+    ) -> AmbitionsOSSourceTruthClaim {
+        AmbitionsOSSourceTruthClaim(
+            id: "source-atlas.\(result.id)",
+            text: text,
+            scopeID: result.requirementID ?? result.claimID ?? result.domainID,
+            state: sourceTruthClaimState(for: result),
+            sourceQualityState: sourceQualityState(for: result),
+            freshnessState: freshnessState(for: result),
+            riskClass: result.riskClass ?? .careerContext,
+            sourceIDs: result.provenanceSourceIDs,
+            sourcePackIDs: [result.packID],
+            reviewState: reviewState(for: result),
+            lastReviewedAt: lastReviewedAt
+        )
+    }
+
+    static func fitState(for result: SourceAtlasQueryResult) -> AmbitionsOSRecommendationFitState {
+        if result.canSupportCurrentUse {
+            return .fits
+        }
+
+        switch result.fallbackReason {
+        case .sourceNeeded, .provenanceMissing, .noLoadedPacks, .noMatchingCandidate, .noCurrentCandidate:
+            return .sourceNeeded
+        case .stale, .reviewRequired, .unknown:
+            return .reviewable
+        case .contradicted, .revoked:
+            return .blocked
+        case .none:
+            return .reviewable
+        }
+    }
+
     private static func orderedUnique(_ values: [String]) -> [String] {
         Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+
+    private static func sourceTruthClaimState(for result: SourceAtlasQueryResult) -> AmbitionsOSSourceTruthClaimState {
+        switch result.sourceState {
+        case .officialCurrent:
+            return result.canSupportCurrentUse ? .officialSourceBacked : .sourcedSourceBacked
+        case .current, .official:
+            return .sourcedSourceBacked
+        case .locallyProven:
+            return .verifiedByLocalProof
+        case .sourceNeeded:
+            return .sourceNeeded
+        case .stale:
+            return .stale
+        case .contradicted:
+            return .contradicted
+        case .revoked:
+            return .revoked
+        case .unknown:
+            return .unknown
+        }
+    }
+
+    private static func sourceQualityState(for result: SourceAtlasQueryResult) -> AmbitionsOSSourceQualityState {
+        result.sourceState == .officialCurrent ? .official : .unknown
+    }
+
+    private static func freshnessState(for result: SourceAtlasQueryResult) -> HumanProgressFreshnessState {
+        switch result.freshnessState {
+        case .current:
+            return result.fallbackReason == .stale ? .staleCritical : .current
+        case .stale:
+            return .staleCritical
+        case .unknown:
+            return .unknown
+        }
+    }
+
+    private static func reviewState(for result: SourceAtlasQueryResult) -> HumanProgressReviewState {
+        switch result.reviewState {
+        case .approved:
+            return result.canSupportCurrentUse ? .ready : .needsSourceReview
+        case .none, .requested, .required:
+            return .needsSourceReview
+        case .blocked:
+            return .needsCorrection
+        }
     }
 }
 

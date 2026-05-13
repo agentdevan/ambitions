@@ -26,6 +26,7 @@ enum RecommendationExplanationEvidenceCategory: String, Codable, Sendable, Equat
     case goalState = "goal_state"
     case captureState = "capture_state"
     case planState = "plan_state"
+    case sourceTruth = "source_truth"
     case calendarDerived = "calendar_derived"
     case deadline
     case priority
@@ -164,6 +165,45 @@ struct RecommendationExplanationEvidence: Codable, Sendable, Equatable, Hashable
                 "ledgerSource": entry.source.rawValue,
                 "occurredAt": entry.occurredAt
             ]
+        )
+    }
+
+    static func fromSourceAtlasQueryResult(
+        _ result: SourceAtlasQueryResult,
+        title: String = "Source Atlas evidence",
+        summary: String? = nil
+    ) -> RecommendationExplanationEvidence {
+        var metadata = [
+            "sourceAtlasPackID": result.packID,
+            "sourceAtlasDomainID": result.domainID,
+            "sourceAtlasSourceState": result.sourceState.rawValue,
+            "sourceAtlasFreshnessState": result.freshnessState.rawValue,
+            "sourceAtlasRiskState": result.riskState.rawValue,
+            "sourceAtlasReviewState": result.reviewState.rawValue,
+            "sourceAtlasFallbackReason": result.fallbackReason.rawValue,
+            "sourceAtlasCanSupportCurrentUse": result.canSupportCurrentUse ? "true" : "false"
+        ]
+        if let claimID = result.claimID {
+            metadata["sourceAtlasClaimID"] = claimID
+        }
+        if let requirementID = result.requirementID {
+            metadata["sourceAtlasRequirementID"] = requirementID
+        }
+        if let riskClass = result.riskClass {
+            metadata["sourceAtlasRiskClass"] = riskClass.rawValue
+        }
+        if result.canSupportCurrentUse == false {
+            metadata["sourceAtlasRecommendationBlockReason"] = result.fallbackReason.rawValue
+        }
+
+        return RecommendationExplanationEvidence(
+            id: "evidence.source-atlas.\(result.id)",
+            category: .sourceTruth,
+            title: title,
+            summary: summary,
+            sourceID: result.provenanceSourceIDs.first ?? result.requirementID ?? result.claimID ?? result.id,
+            confidence: result.canSupportCurrentUse ? .high : .low,
+            metadata: metadata
         )
     }
 
@@ -310,6 +350,8 @@ struct RecommendationEvidenceModel: Codable, Sendable, Equatable, Hashable {
     let usesPriorityRealityEvidence: Bool
     let usesDeadlineEvidence: Bool
     let usesGoalScopeEvidence: Bool
+    let usesSourceAtlasEvidence: Bool
+    let sourceAtlasBlockReasons: [String]
     let requiresSensitiveReview: Bool
     let canDriveRecommendation: Bool
     let schemaVersion: String
@@ -325,6 +367,9 @@ struct RecommendationEvidenceModel: Codable, Sendable, Equatable, Hashable {
             Set(explanation.userCorrectableFields + explanation.correctionActions.compactMap(\.targetFieldKey))
         ).filter { $0.isEmpty == false }.sorted()
         let hasReviewableInference = explanation.assumptions.isEmpty == false || explanation.uncertainty.isEmpty == false
+        let sourceAtlasBlockReasons = Array(
+            Set(explanation.evidence.compactMap { $0.metadata["sourceAtlasRecommendationBlockReason"] })
+        ).sorted()
 
         self.explanationID = explanation.id
         self.source = explanation.source
@@ -340,10 +385,13 @@ struct RecommendationEvidenceModel: Codable, Sendable, Equatable, Hashable {
         self.usesPriorityRealityEvidence = explanation.containsPriorityRealityEvidence
         self.usesDeadlineEvidence = explanation.containsDeadlineEvidence
         self.usesGoalScopeEvidence = explanation.containsGoalScopeOrDeliverableEvidence
+        self.usesSourceAtlasEvidence = explanation.containsSourceTruthEvidence
+        self.sourceAtlasBlockReasons = sourceAtlasBlockReasons
         self.requiresSensitiveReview = boundary.requiresSensitiveReview
         self.canDriveRecommendation = boundary.isEvidenceLight == false &&
             explanation.localOnly &&
             boundary.requiresSensitiveReview == false &&
+            sourceAtlasBlockReasons.isEmpty &&
             (hasReviewableInference == false || boundary.hasCorrectableInference)
         self.schemaVersion = recommendationExplanationSchemaVersion
 
@@ -453,6 +501,10 @@ struct RecommendationExplanation: Codable, Sendable, Equatable, Hashable, Identi
 
     var containsGoalScopeOrDeliverableEvidence: Bool {
         evidence.contains { $0.isGoalScopeRelevant }
+    }
+
+    var containsSourceTruthEvidence: Bool {
+        evidence.contains { $0.category == .sourceTruth }
     }
 
     var evidenceBoundarySummary: RecommendationEvidenceBoundarySummary {

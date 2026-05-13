@@ -34,6 +34,7 @@ final class RecommendationExplanationModelsTests: XCTestCase {
                 .goalState,
                 .captureState,
                 .planState,
+                .sourceTruth,
                 .calendarDerived,
                 .deadline,
                 .priority,
@@ -396,5 +397,96 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         XCTAssertEqual(calendarDerived.strength, .reviewRequired)
         XCTAssertTrue(calendarDerived.requiresSensitiveReview)
         XCTAssertFalse(calendarDerived.canDriveRecommendation)
+    }
+
+    func testSourceAtlasCurrentResultCanSupportRecommendationEvidence() {
+        let result = Self.sourceAtlasResult(
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            riskState: .low,
+            reviewState: .approved,
+            provenanceSourceIDs: ["source-official"],
+            fallbackReason: .none
+        )
+        let evidence = RecommendationExplanationEvidence.fromSourceAtlasQueryResult(result)
+        let explanation = RecommendationExplanation(
+            id: "explanation-source-atlas-current",
+            type: .whyThis,
+            title: "Why this source supports the step",
+            summary: "The source is current and approved.",
+            recommendationTitle: "Review the sourced step",
+            evidence: [evidence],
+            lastUpdatedAt: "2026-05-13T06:30:00Z",
+            source: .recommendation
+        )
+
+        let model = explanation.recommendationEvidenceModel
+
+        XCTAssertEqual(evidence.category, .sourceTruth)
+        XCTAssertEqual(evidence.metadata["sourceAtlasCanSupportCurrentUse"], "true")
+        XCTAssertNil(evidence.metadata["sourceAtlasRecommendationBlockReason"])
+        XCTAssertTrue(model.usesSourceAtlasEvidence)
+        XCTAssertEqual(model.sourceAtlasBlockReasons, [])
+        XCTAssertTrue(model.canDriveRecommendation)
+    }
+
+    func testSourceAtlasBlockedStatesCannotDriveRecommendationEvidence() {
+        let blockedResults = [
+            Self.sourceAtlasResult(sourceState: .sourceNeeded, freshnessState: .unknown, fallbackReason: .sourceNeeded),
+            Self.sourceAtlasResult(sourceState: .stale, freshnessState: .stale, fallbackReason: .stale),
+            Self.sourceAtlasResult(sourceState: .contradicted, fallbackReason: .contradicted),
+            Self.sourceAtlasResult(sourceState: .revoked, freshnessState: .stale, fallbackReason: .revoked),
+            Self.sourceAtlasResult(sourceState: .officialCurrent, riskState: .high, reviewState: .required, fallbackReason: .reviewRequired)
+        ]
+
+        for result in blockedResults {
+            let evidence = RecommendationExplanationEvidence.fromSourceAtlasQueryResult(result)
+            let explanation = RecommendationExplanation(
+                id: "explanation-source-atlas-\(result.fallbackReason.rawValue)",
+                type: .whyThis,
+                title: "Why this source needs review",
+                summary: "The source state is not current support.",
+                recommendationTitle: "Review the sourced step",
+                evidence: [evidence],
+                lastUpdatedAt: "2026-05-13T06:31:00Z",
+                source: .recommendation
+            )
+
+            let model = explanation.recommendationEvidenceModel
+
+            XCTAssertEqual(evidence.metadata["sourceAtlasCanSupportCurrentUse"], "false")
+            XCTAssertEqual(evidence.metadata["sourceAtlasRecommendationBlockReason"], result.fallbackReason.rawValue)
+            XCTAssertEqual(model.sourceAtlasBlockReasons, [result.fallbackReason.rawValue])
+            XCTAssertFalse(model.canDriveRecommendation)
+        }
+    }
+}
+
+private extension RecommendationExplanationModelsTests {
+    static func sourceAtlasResult(
+        sourceState: SourceAtlasRequirementSourceState,
+        freshnessState: SourceAtlasRequirementFreshnessState = .current,
+        riskState: SourceAtlasRequirementRiskState = .low,
+        reviewState: SourceAtlasRequirementReviewState = .approved,
+        provenanceSourceIDs: [String] = ["source-official"],
+        fallbackReason: SourceAtlasQueryFallbackReason
+    ) -> SourceAtlasQueryResult {
+        SourceAtlasQueryResult(
+            id: "result-\(fallbackReason.rawValue)-\(sourceState.rawValue)",
+            packID: "source-pack-1",
+            domainID: "career",
+            goalIntent: "starter_goal",
+            claimID: "claim-1",
+            requirementID: "requirement-1",
+            sourceState: sourceState,
+            freshnessState: freshnessState,
+            riskState: riskState,
+            riskClass: .careerContext,
+            reviewState: reviewState,
+            provenanceSourceIDs: provenanceSourceIDs,
+            proofEntryIDs: ["proof-1"],
+            fallbackReason: fallbackReason,
+            sourceNeededDetail: nil
+        )
     }
 }

@@ -113,6 +113,78 @@ final class AmbitionsOSRecommendationStartHereModelsTests: XCTestCase {
         XCTAssertTrue(issues.contains(.privateExternalProjectionRisk))
         XCTAssertTrue(issues.contains(.runtimeStoreBehavior))
     }
+
+    func testSourceAtlasCurrentResultCanBridgeIntoStartHereSourceClaim() {
+        let result = Self.sourceAtlasResult(
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            riskState: .low,
+            reviewState: .approved,
+            provenanceSourceIDs: ["source-official"],
+            fallbackReason: .none
+        )
+        let claim = AmbitionsOSStartHereRecommendation.sourceClaim(
+            from: result,
+            text: "The recommended step is grounded in an approved current source.",
+            lastReviewedAt: "2026-05-13T06:32:00Z"
+        )
+        let recommendation = startHere(
+            sourceLabel: "Source Atlas current source",
+            sourceClaims: [claim],
+            fitState: AmbitionsOSStartHereRecommendation.fitState(for: result)
+        )
+
+        XCTAssertEqual(claim.state, .officialSourceBacked)
+        XCTAssertEqual(claim.freshnessState, .current)
+        XCTAssertEqual(claim.reviewState, .ready)
+        XCTAssertTrue(claim.canDriveSourceSensitiveRecommendation)
+        XCTAssertEqual(recommendation.fitState, .fits)
+        XCTAssertEqual(validator.validate(recommendation), [])
+    }
+
+    func testSourceAtlasBlockedResultsBridgeToReviewOrBlockedStartHereEvidence() {
+        let cases: [(SourceAtlasQueryResult, AmbitionsOSRecommendationFitState)] = [
+            (
+                Self.sourceAtlasResult(sourceState: .sourceNeeded, freshnessState: .unknown, provenanceSourceIDs: [], fallbackReason: .sourceNeeded),
+                .sourceNeeded
+            ),
+            (
+                Self.sourceAtlasResult(sourceState: .stale, freshnessState: .stale, fallbackReason: .stale),
+                .reviewable
+            ),
+            (
+                Self.sourceAtlasResult(sourceState: .contradicted, fallbackReason: .contradicted),
+                .blocked
+            ),
+            (
+                Self.sourceAtlasResult(sourceState: .revoked, freshnessState: .stale, fallbackReason: .revoked),
+                .blocked
+            ),
+            (
+                Self.sourceAtlasResult(sourceState: .officialCurrent, riskState: .high, reviewState: .required, fallbackReason: .reviewRequired),
+                .reviewable
+            )
+        ]
+
+        for (result, expectedFitState) in cases {
+            let claim = AmbitionsOSStartHereRecommendation.sourceClaim(
+                from: result,
+                text: "The source needs review before recommendation support."
+            )
+            let recommendation = startHere(
+                sourceClaims: [claim],
+                fitState: AmbitionsOSStartHereRecommendation.fitState(for: result)
+            )
+            let issues = validator.validate(recommendation)
+
+            XCTAssertEqual(recommendation.fitState, expectedFitState)
+            XCTAssertFalse(claim.canDriveSourceSensitiveRecommendation)
+            XCTAssertTrue(issues.contains(.sourceReviewRequired))
+            if result.freshnessState != .current {
+                XCTAssertTrue(issues.contains(.staleSourceReviewRequired))
+            }
+        }
+    }
 }
 
 private extension AmbitionsOSRecommendationStartHereModelsTests {
@@ -124,6 +196,7 @@ private extension AmbitionsOSRecommendationStartHereModelsTests {
         sourceClaims: [AmbitionsOSSourceTruthClaim]? = nil,
         proofTrustReceipts: [AmbitionsOSProofTrustReceipt]? = nil,
         controlClassification: AmbitionsOSControlPlaneClassification? = nil,
+        fitState: AmbitionsOSRecommendationFitState = .fits,
         whyNow: [String] = ["You have a ready step."],
         advances: [String] = ["Moves the goal forward."],
         protects: [String] = ["Keeps protected time intact."],
@@ -148,7 +221,7 @@ private extension AmbitionsOSRecommendationStartHereModelsTests {
             sourceClaims: sourceClaims ?? [sourceClaim()],
             proofTrustReceipts: proofTrustReceipts ?? [proofReceipt()],
             controlClassification: controlClassification ?? self.controlClassification(),
-            fitState: .fits,
+            fitState: fitState,
             whyNow: whyNow,
             advances: advances,
             protects: protects,
@@ -218,6 +291,33 @@ private extension AmbitionsOSRecommendationStartHereModelsTests {
             requiredGates: gates,
             allowedOutputs: [.recommendation, .reviewRequest],
             rationaleIDs: ["ready_start_here"]
+        )
+    }
+
+    static func sourceAtlasResult(
+        sourceState: SourceAtlasRequirementSourceState,
+        freshnessState: SourceAtlasRequirementFreshnessState = .current,
+        riskState: SourceAtlasRequirementRiskState = .low,
+        reviewState: SourceAtlasRequirementReviewState = .approved,
+        provenanceSourceIDs: [String] = ["source-official"],
+        fallbackReason: SourceAtlasQueryFallbackReason
+    ) -> SourceAtlasQueryResult {
+        SourceAtlasQueryResult(
+            id: "result-\(fallbackReason.rawValue)-\(sourceState.rawValue)",
+            packID: "source-pack-1",
+            domainID: "career",
+            goalIntent: "starter_goal",
+            claimID: "claim-1",
+            requirementID: "requirement-1",
+            sourceState: sourceState,
+            freshnessState: freshnessState,
+            riskState: riskState,
+            riskClass: .careerContext,
+            reviewState: reviewState,
+            provenanceSourceIDs: provenanceSourceIDs,
+            proofEntryIDs: ["proof-1"],
+            fallbackReason: fallbackReason,
+            sourceNeededDetail: nil
         )
     }
 }
