@@ -2,7 +2,8 @@
   "schema_version": 1,
   "completed_batches": [
     "MRI01",
-    "MRI02"
+    "MRI02",
+    "MRI03"
   ],
   "history": [
     {
@@ -14,6 +15,11 @@
       "batch": "MRI02",
       "prompt": "prompts/batches/MRI02-AMBITION-GRAPH-PROJECTION-STORE.md",
       "marked_complete_at": "2026-05-12T23:59:04Z"
+    },
+    {
+      "batch": "MRI03",
+      "prompt": "prompts/batches/MRI03-COMMITMENT-LIFECYCLE.md",
+      "marked_complete_at": "2026-05-13T00:22:56Z"
     }
   ]
 }
