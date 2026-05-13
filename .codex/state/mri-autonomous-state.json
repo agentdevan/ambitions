@@ -8,7 +8,8 @@
     "MRI05",
     "MRI06",
     "MRI07",
-    "MRI08"
+    "MRI08",
+    "MRI09"
   ],
   "history": [
     {
@@ -50,6 +51,11 @@
       "batch": "MRI08",
       "prompt": "prompts/batches/MRI08-AMBITION-LIFECYCLE-GOLDEN-TESTS.md",
       "marked_complete_at": "2026-05-13T02:49:46Z"
+    },
+    {
+      "batch": "MRI09",
+      "prompt": "prompts/batches/MRI09-SOURCE-TO-RECOMMENDATION-BRIDGE.md",
+      "marked_complete_at": "2026-05-13T06:58:48Z"
     }
   ]
 }
