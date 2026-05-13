@@ -33,6 +33,23 @@ jobs:
           fi
           xcodegen --version
 
+      - name: Resolve iPhone simulator destination
+        run: |
+          set -euo pipefail
+          REQUESTED_NAME="${AMBITIONS_CI_SIMULATOR_NAME:-iPhone 17}"
+          if xcrun simctl list devices available | grep -q "${REQUESTED_NAME}"; then
+            RESOLVED_NAME="${REQUESTED_NAME}"
+          else
+            RESOLVED_NAME="$(xcrun simctl list devices available | awk -F '[()]' '/iPhone/ { gsub(/^[[:space:]]+|[[:space:]]+$/, "", $1); print $1; exit }')"
+          fi
+          if [[ -z "${RESOLVED_NAME}" ]]; then
+            echo "No available iPhone simulator found."
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "SIM_DESTINATION=platform=iOS Simulator,name=${RESOLVED_NAME}" >> "$GITHUB_ENV"
+          echo "Resolved simulator: ${RESOLVED_NAME}"
+
       - name: Run Swift 6 modernization scanner self-test
         run: python3 scripts/ambitions-swift6-modernization-scan.py --self-test
 
@@ -51,7 +68,7 @@ jobs:
           xcodebuild build \
             -project Ambitions.xcodeproj \
             -scheme Ambitions \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -destination "$SIM_DESTINATION" \
             CODE_SIGNING_ALLOWED=NO
 
       - name: Run focused deterministic tests
@@ -60,7 +77,7 @@ jobs:
           xcodebuild test \
             -project Ambitions.xcodeproj \
             -scheme Ambitions \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -destination "$SIM_DESTINATION" \
             -only-testing:AmbitionsTests/StorageMigrationPlanScaffoldTests \
             -only-testing:AmbitionsTests/AppIntentRoutingTests \
             -only-testing:AmbitionsTests/ExternalActionCommandServiceTests \
