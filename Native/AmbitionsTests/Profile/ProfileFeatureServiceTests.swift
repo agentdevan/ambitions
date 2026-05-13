@@ -844,6 +844,152 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("delete now"))
     }
 
+    func testMRI13LocalLearningControlsExposeResetDisableDeleteAndExportBoundaries() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "proof-mri13",
+                goalID: "goal-mri13",
+                stepID: "step-mri13",
+                evidenceKind: .stepCompleted,
+                source: .manual,
+                capturedAt: "2026-05-13T09:00:00Z",
+                progressDelta: nil,
+                confidenceDelta: nil,
+                minutesInvested: 20,
+                note: "One proof point for local learning controls."
+            )
+        ])
+        try await repositories.captures.saveCaptures([
+            Capture(
+                id: "capture-mri13",
+                createdAt: "2026-05-13T09:01:00Z",
+                updatedAt: "2026-05-13T09:01:00Z",
+                rawText: "Hold this until I place it",
+                sourceType: nil,
+                status: .needsTriage,
+                linkedGoalID: nil
+            )
+        ])
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-mri13",
+                goalID: "goal-mri13",
+                createdAt: "2026-05-13T09:02:00Z",
+                updatedAt: "2026-05-13T09:02:00Z",
+                source: .explicitManualCorrection,
+                kind: .energyFitCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .energyEvaluation,
+                    canonicalField: nil,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: "step-mri13",
+                    targetFingerprint: "energy::step-mri13",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+                applicationKey: "goal##energy##step",
+                userNote: "Use a lighter version"
+            )
+        ])
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-mri13",
+                kind: .userCorrectionAdded,
+                occurredAt: "2026-05-13T09:03:00Z",
+                source: .you,
+                goalID: "goal-mri13",
+                title: "Correction recorded",
+                summary: "Use a lighter version.",
+                tone: .correction,
+                trust: EventLedgerTrustMetadata(isUserConfirmed: true),
+                privacy: .standard,
+                localOnly: true
+            )
+        )
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let controls = dashboard.memoryControls.localLearningControls
+        let visibleCopy = controls.flatMap {
+            [
+                $0.title,
+                $0.summary,
+                $0.sourceLabel,
+                $0.availabilityLabel,
+                $0.receiptLabel,
+                $0.boundaryLabel,
+                $0.accessibilityLabel,
+                $0.accessibilityValue,
+                $0.accessibilityHint
+            ]
+        }.joined(separator: " ")
+
+        XCTAssertEqual(controls.map(\.id), [
+            "local-learning-reset",
+            "local-learning-disable",
+            "local-learning-delete",
+            "local-learning-export"
+        ])
+        XCTAssertTrue(controls.contains(where: {
+            $0.id == "local-learning-reset" &&
+            $0.title == "Reset learned corrections" &&
+            $0.availabilityLabel == "Confirmation required" &&
+            $0.receiptLabel.contains("Receipt required") &&
+            $0.boundaryLabel.contains("Does not erase proof")
+        }))
+        XCTAssertTrue(controls.contains(where: {
+            $0.id == "local-learning-disable" &&
+            $0.title == "Disable learning from this signal" &&
+            $0.sourceLabel == "Source-tied learning" &&
+            $0.boundaryLabel == "Local-only; no silent sync or hidden profile update"
+        }))
+        XCTAssertTrue(controls.contains(where: {
+            $0.id == "local-learning-delete" &&
+            $0.title == "Delete a learning signal" &&
+            $0.availabilityLabel == "Needs confirmation" &&
+            $0.receiptLabel == "Deletion receipt required" &&
+            $0.boundaryLabel == "No broad destructive delete claim"
+        }))
+        XCTAssertTrue(controls.contains(where: {
+            $0.id == "local-learning-export" &&
+            $0.title == "Export learning summary" &&
+            $0.availabilityLabel == "Summary only" &&
+            $0.boundaryLabel == "No raw private text, sync payload, or external memory" &&
+            $0.summary.contains("4 local signals")
+        }))
+        XCTAssertTrue(dashboard.memoryControls.footer.contains("export-bounded"))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("local-only"))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("receipt"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI recommends"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud memory"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("delete all"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("export everything"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release-ready"))
+    }
+
+    func testMRI13ExportBoundaryStaysSummaryOnlyWhenNoLearningSignalsExist() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let export = try XCTUnwrap(dashboard.memoryControls.localLearningControls.first(where: { $0.id == "local-learning-export" }))
+        let reset = try XCTUnwrap(dashboard.memoryControls.localLearningControls.first(where: { $0.id == "local-learning-reset" }))
+
+        XCTAssertEqual(export.availabilityLabel, "Summary only")
+        XCTAssertTrue(export.summary.contains("no local learning signals are active"))
+        XCTAssertTrue(export.boundaryLabel.contains("No raw private text"))
+        XCTAssertEqual(reset.availabilityLabel, "Available when present")
+        XCTAssertTrue(reset.summary.contains("No correction learning is active yet"))
+        XCTAssertFalse(export.summary.localizedCaseInsensitiveContains("cloud profile"))
+        XCTAssertFalse(export.summary.localizedCaseInsensitiveContains("raw private text"))
+        XCTAssertFalse(export.summary.localizedCaseInsensitiveContains("synced"))
+    }
+
     func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {
         let repositories = try await makeRepositories()
         try await repositories.teaching.saveSignals([

@@ -599,6 +599,21 @@ private struct ProfileMemoryControlsCard: View {
                     .accessibilityIdentifier("profile.runtime-inspection-section")
                 }
 
+                if memoryControls.localLearningControls.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Local learning controls",
+                            title: "Reset, disable, delete, export",
+                            subtitle: "Controls stay source-tied, local-only, confirmation-aware, and receipt-aware."
+                        )
+
+                        ForEach(memoryControls.localLearningControls) { control in
+                            ProfileLocalLearningControlRow(control: control)
+                        }
+                    }
+                    .accessibilityIdentifier("profile.local-learning-controls-section")
+                }
+
                 MemoryConstellation(
                     title: "Visible memory states",
                     subtitle: "A bounded map of current, stale, sensitive, corrected, and empty states. It is not a hidden inference graph.",
@@ -817,6 +832,71 @@ private struct ProfileRuntimeInspectionItemRow: View {
             return "xmark.seal"
         case .changed:
             return "arrow.triangle.2.circlepath"
+        }
+    }
+}
+
+private struct ProfileLocalLearningControlRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let control: ProfileLocalLearningControl
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: iconName)
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentWarm)
+                    .frame(width: 28)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(control.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(control.summary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+
+                TagPill(control.availabilityLabel, state: control.state)
+            }
+
+            LazyVGrid(
+                columns: [GridItem(.adaptive(minimum: 220), spacing: theme.spacing.xs, alignment: .leading)],
+                alignment: .leading,
+                spacing: theme.spacing.xs
+            ) {
+                TagPill(control.sourceLabel, icon: "doc.text.magnifyingglass", state: .default)
+                TagPill(control.receiptLabel, icon: "checkmark.seal", state: control.state)
+                TagPill(control.boundaryLabel, icon: "lock.shield", state: .default)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: control.accessibilityLabel,
+            value: control.accessibilityValue,
+            hint: control.accessibilityHint
+        )
+    }
+
+    private var iconName: String {
+        switch control.id {
+        case "local-learning-reset":
+            return "arrow.counterclockwise.circle"
+        case "local-learning-disable":
+            return "pause.circle"
+        case "local-learning-delete":
+            return "trash.slash"
+        case "local-learning-export":
+            return "square.and.arrow.up"
+        default:
+            return "slider.horizontal.3"
         }
     }
 }

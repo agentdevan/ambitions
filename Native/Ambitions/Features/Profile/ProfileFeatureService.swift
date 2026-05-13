@@ -1137,6 +1137,12 @@ private extension RepositoryBackedProfileService {
             correctionCount: correctionCount,
             openCaptures: openCaptures
         )
+        let localLearningControls = makeLocalLearningControls(
+            eventCount: eventCount,
+            proofFeedbackCount: proofFeedbackCount,
+            correctionCount: correctionCount,
+            openCaptures: openCaptures
+        )
         return ProfileMemoryControlState(
             title: "What Ambitions Knows",
             subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
@@ -1316,9 +1322,93 @@ private extension RepositoryBackedProfileService {
             conservativePatterns: conservativePatterns,
             memoryLensItems: memoryLensItems,
             runtimeInspectionItems: runtimeInspectionItems,
+            localLearningControls: localLearningControls,
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
-            footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and durable rejected-memory rules remain manual/future until the safe boundary can prove the result."
+            footer: "What Ambitions Knows is local, inspectable, export-bounded, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and durable rejected-memory rules remain confirmation-gated or manual/future until the safe boundary can prove the result."
         )
+    }
+
+    func makeLocalLearningControls(
+        eventCount: Int,
+        proofFeedbackCount: Int,
+        correctionCount: Int,
+        openCaptures: Int
+    ) -> [ProfileLocalLearningControl] {
+        [
+            ProfileLocalLearningControl(
+                id: "local-learning-reset",
+                title: "Reset learned corrections",
+                summary: correctionCount == 0
+                    ? "No correction learning is active yet; reset stays available as a review path when local teaching signals exist."
+                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can be reset from the owning correction path after confirmation.",
+                sourceLabel: "Manual corrections",
+                availabilityLabel: correctionCount == 0 ? "Available when present" : "Confirmation required",
+                receiptLabel: "Receipt required before future reuse changes",
+                boundaryLabel: "Does not erase proof, captures, or raw Event Ledger history",
+                state: correctionCount == 0 ? .default : .warning,
+                accessibilityLabel: "Reset learned corrections",
+                accessibilityValue: correctionCount == 0 ? "No active correction learning. Local only." : "\(correctionCount) correction signals. Confirmation required.",
+                accessibilityHint: "Explains the reset boundary for local correction learning without claiming broad deletion."
+            ),
+            ProfileLocalLearningControl(
+                id: "local-learning-disable",
+                title: "Disable learning from this signal",
+                summary: "Learning reuse can be disabled only at the source-tied signal boundary; Ambitions keeps manual planning and correction available.",
+                sourceLabel: "Source-tied learning",
+                availabilityLabel: "Review first",
+                receiptLabel: "Receipt records disabled reuse",
+                boundaryLabel: "Local-only; no silent sync or hidden profile update",
+                state: .warning,
+                accessibilityLabel: "Disable learning from this signal",
+                accessibilityValue: "Review first. Local-only.",
+                accessibilityHint: "Explains that disabling learning is source-tied and confirmation-aware."
+            ),
+            ProfileLocalLearningControl(
+                id: "local-learning-delete",
+                title: "Delete a learning signal",
+                summary: "Single-signal deletion remains confirmation-gated and receipt-aware. Broad destructive deletion is not claimed from this surface.",
+                sourceLabel: "Correction or learning source",
+                availabilityLabel: "Needs confirmation",
+                receiptLabel: "Deletion receipt required",
+                boundaryLabel: "No broad destructive delete claim",
+                state: .warning,
+                accessibilityLabel: "Delete a learning signal",
+                accessibilityValue: "Needs confirmation. No broad destructive delete claim.",
+                accessibilityHint: "Explains that deletion is bounded to a source-tied learning signal and does not claim full memory erasure."
+            ),
+            ProfileLocalLearningControl(
+                id: "local-learning-export",
+                title: "Export learning summary",
+                summary: exportSummary(
+                    eventCount: eventCount,
+                    proofFeedbackCount: proofFeedbackCount,
+                    correctionCount: correctionCount,
+                    openCaptures: openCaptures
+                ),
+                sourceLabel: "Local summary",
+                availabilityLabel: "Summary only",
+                receiptLabel: "Export boundary shown before use",
+                boundaryLabel: "No raw private text, sync payload, or external memory",
+                state: .success,
+                accessibilityLabel: "Export learning summary",
+                accessibilityValue: "Summary only. No raw private text or external memory.",
+                accessibilityHint: "Explains the export boundary for local learning summaries."
+            )
+        ]
+    }
+
+    func exportSummary(
+        eventCount: Int,
+        proofFeedbackCount: Int,
+        correctionCount: Int,
+        openCaptures: Int
+    ) -> String {
+        let signalCount = eventCount + proofFeedbackCount + correctionCount + openCaptures
+        if signalCount == 0 {
+            return "Export can summarize that no local learning signals are active, without creating sync or an external profile."
+        }
+
+        return "Export can summarize \(signalCount) local signal\(signalCount == 1 ? "" : "s") by category and boundary, without raw private text or broad account data."
     }
 
     func makeMemoryLensItems(

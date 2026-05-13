@@ -301,6 +301,20 @@ struct ProfileRuntimeInspectionItem: Identifiable, Sendable, Equatable {
     let accessibilityHint: String
 }
 
+struct ProfileLocalLearningControl: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let availabilityLabel: String
+    let receiptLabel: String
+    let boundaryLabel: String
+    let state: AmbitionVisualState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
 struct ProfilePersonalizationConsentState: Sendable, Equatable {
     let title: String
     let summary: String
@@ -331,6 +345,7 @@ struct ProfileMemoryControlState: Sendable, Equatable {
     let conservativePatterns: [ProfileMemoryPattern]
     let memoryLensItems: [ProfileMemoryLensItem]
     let runtimeInspectionItems: [ProfileRuntimeInspectionItem]
+    let localLearningControls: [ProfileLocalLearningControl]
     let recoverySummary: String
     let footer: String
 
@@ -345,6 +360,7 @@ struct ProfileMemoryControlState: Sendable, Equatable {
         conservativePatterns: [ProfileMemoryPattern],
         memoryLensItems: [ProfileMemoryLensItem],
         runtimeInspectionItems: [ProfileRuntimeInspectionItem] = [],
+        localLearningControls: [ProfileLocalLearningControl] = [],
         recoverySummary: String,
         footer: String
     ) {
@@ -358,6 +374,7 @@ struct ProfileMemoryControlState: Sendable, Equatable {
         self.conservativePatterns = conservativePatterns
         self.memoryLensItems = memoryLensItems
         self.runtimeInspectionItems = runtimeInspectionItems
+        self.localLearningControls = localLearningControls
         self.recoverySummary = recoverySummary
         self.footer = footer
     }
