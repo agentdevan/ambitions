@@ -44,6 +44,19 @@ EXCLUDED_DIR_NAMES = {
     ".swiftpm",
 }
 
+# Explicit allowlist entries must be narrow and backed by tests/proof.
+# TodayDerivedReadModelCache is a private, NSLock-protected cache. Its storage and
+# hit/miss counters are accessed only while the lock is held, and
+# TodayDerivedReadModelCacheTests cover reuse and reset behavior. Keeping the
+# allowlist in this scanner makes the exception visible during every strict run.
+EXPLICIT_ALLOWLISTS: tuple[tuple[str, str, str], ...] = (
+    (
+        "unchecked-sendable",
+        "Native/Ambitions/Features/Today/TodayReadModelProjector.swift",
+        "final class TodayDerivedReadModelCache: @unchecked Sendable",
+    ),
+)
+
 
 @dataclass(frozen=True)
 class Rule:
@@ -167,6 +180,15 @@ def has_allow_marker(line: str) -> bool:
     return ALLOW_MARKER in line
 
 
+def is_explicitly_allowlisted(path: Path, code: str, line: str) -> bool:
+    normalized_path = str(path).replace("\\", "/")
+    stripped = line.strip()
+    for allowed_code, allowed_path, allowed_fragment in EXPLICIT_ALLOWLISTS:
+        if code == allowed_code and normalized_path.endswith(allowed_path) and allowed_fragment in stripped:
+            return True
+    return False
+
+
 def iter_source_files(root: Path) -> Iterable[Path]:
     for relative_root in SOURCE_ROOTS:
         source_root = root / relative_root
@@ -203,7 +225,9 @@ def scan_rules(paths: Iterable[Path], rules: Sequence[Rule]) -> list[Finding]:
         for index, line in enumerate(lines, start=1):
             for rule in rules:
                 if rule.pattern.search(line):
-                    allowed = rule.allowable and has_allow_marker(line)
+                    allowed = rule.allowable and (
+                        has_allow_marker(line) or is_explicitly_allowlisted(path, rule.code, line)
+                    )
                     findings.append(
                         Finding(
                             severity=rule.severity,
@@ -232,7 +256,7 @@ def scan_module_boundaries(root: Path) -> list[Finding]:
                             line=index,
                             message=message,
                             text=line.strip(),
-                            allowed=has_allow_marker(line),
+                            allowed=has_allow_marker(line) or is_explicitly_allowlisted(path, code, line),
                         )
                     )
     return findings
