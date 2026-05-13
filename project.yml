@@ -4,7 +4,8 @@ options:
   createIntermediateGroups: true
 settings:
   base:
-    SWIFT_VERSION: 5.10
+    SWIFT_VERSION: 6.0
+    SWIFT_STRICT_CONCURRENCY: complete
     IPHONEOS_DEPLOYMENT_TARGET: 17.0
 packages:
   AmbitionsPackages:
@@ -58,6 +59,7 @@ targets:
       - path: Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift
       - path: Native/Ambitions/ExternalSnapshots/SharedExternalSnapshotStore.swift
       - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
+      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceControlContracts.swift
       - path: Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift
     settings:
       base:
