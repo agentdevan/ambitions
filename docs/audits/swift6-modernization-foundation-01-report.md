@@ -3,31 +3,32 @@
 
 Status: Accepted Yellow  
 Date: 2026-05-13  
-Branch: `ambitions/swift6-modernization-foundation-01`  
-Base: `main` at `23dae46663b720fe4f082acdec481ceb0555c562`
+Mainline merge: `cb15fd8e0b96e65f0bbd15ea797a9fda7a17a045`  
+Automatic Actions workflow removal: `334696428a372f97b288915f328ecae2638ca916`
 
 ## Summary
 
-This branch moves Ambitions to a Swift 6 modernization foundation and adds repo-enforced guardrails for the highest-value pre-TestFlight modernization work.
+This work moved Ambitions to a Swift 6 modernization foundation and added repo-enforced guardrails for the highest-value pre-TestFlight modernization work.
 
-It is Accepted Yellow, not Green, because these changes were made through the connected GitHub repository interface. This path can update files and open the PR, but it cannot run XcodeGen, xcodebuild, simulator tests, or device validation. Swift 6 compile repair and strict concurrency repair are therefore wired and gated, but not truthfully complete until the new final gate runs and captures compiler output.
+It is Accepted Yellow, not Green, because these changes were made through the connected GitHub repository interface. This path can update files and merge the PR, but it cannot run XcodeGen, xcodebuild, simulator tests, or device validation. Swift 6 compile repair and strict concurrency repair are therefore wired and gated, but not truthfully complete until the local final gate runs and captures compiler output.
+
+Automatic GitHub Actions execution was intentionally removed after merge to avoid billed Actions usage. Validation is now local/manual through `scripts/ambitions-swift6-final-gate.sh` unless a future user request explicitly restores a workflow.
 
 ## User-requested modernization scope status
 
-| Requested item | Branch status | Proof boundary |
+| Requested item | Main status | Proof boundary |
 | --- | --- | --- |
-| Swift 6 compile repair | Foundation and build gate installed | Actual compiler repair requires XcodeGen/xcodebuild output from local/CI. |
+| Swift 6 compile repair | Foundation and local build gate installed | Actual compiler repair requires XcodeGen/xcodebuild output from local validation. |
 | Strict concurrency repair | `SWIFT_STRICT_CONCURRENCY: complete` installed and architecture gates added | Any actual Sendable/actor fixes must be driven by compiler output. |
-| Architecture scanner CI/final-gate integration | Implemented | Scanner, scanner tests, CI workflow, and local final-gate script added. |
-| Module boundary split guided by Swift 6 compiler errors | Guardrails implemented, full split not performed | Blind file movement was avoided; scanner now blocks known Domain/Feature/DesignSystem/WidgetUI boundary leaks. |
+| Architecture scanner CI/final-gate integration | Local final-gate implemented; automatic CI removed for cost control | Scanner, scanner tests, and local final-gate script remain. Automatic GitHub Actions was removed. |
+| Module boundary split guided by Swift 6 compiler errors | Guardrails implemented, full split not performed | Blind file movement was avoided; scanner blocks known Domain/Feature/DesignSystem/WidgetUI boundary leaks. |
 | SwiftData migration hardening | Implemented | Added execution-readiness proof evaluator for migration plans. |
 | Swift Testing for deterministic domain/kernel/persistence tests | Implemented seed | Added Swift Testing coverage for storage migration execution readiness. |
 | App Intents / App Shortcuts maturity | Implemented seed | Added system-control App Intent and shortcut exposure for Start Now, Still Counts, and Add Proof. |
 | WidgetKit controls for highest-value actions | Contract layer implemented | Added shared system-control contracts and widget-extension source inclusion; actual `ControlWidget` UI implementation remains compiler-verified follow-up. |
 
-## Files changed
+## Files changed by Swift 6 modernization
 
-- `.github/workflows/swift6-modernization.yml`
 - `project.yml`
 - `Package.swift`
 - `scripts/ambitions-swift6-modernization-scan.py`
@@ -42,6 +43,12 @@ It is Accepted Yellow, not Green, because these changes were made through the co
 - `Native/Ambitions/AppIntents/AmbitionsSystemControlIntent.swift`
 - `Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift`
 - `Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift`
+
+## Files intentionally removed after merge
+
+- `.github/workflows/swift6-modernization.yml`
+
+Reason: avoid automatic GitHub Actions usage and cost exposure. Local validation remains available.
 
 ## Implemented changes
 
@@ -130,13 +137,12 @@ Coverage includes:
 - module-boundary leaks failure
 - explicit allow-marker escape hatch behavior
 
-### 5. Final gate and CI wiring
+### 5. Local final gate
 
 Added:
 
 ```text
 scripts/ambitions-swift6-final-gate.sh
-.github/workflows/swift6-modernization.yml
 ```
 
 The local final gate runs:
@@ -157,8 +163,6 @@ AmbitionsTests/AppIntentRoutingTests
 AmbitionsTests/ExternalActionCommandServiceTests
 AmbitionsTests/ExternalSurfaceControlContractsTests
 ```
-
-Note: The GitHub Actions workflow was added and includes the scanner, XcodeGen, build, and an initial focused-test set. A later attempt to update the workflow with the expanded test list was blocked by the connector safety layer, so the local final-gate script is currently the most complete proof command.
 
 ### 6. SwiftData migration hardening
 
@@ -202,7 +206,7 @@ Updated:
 Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift
 ```
 
-The branch adds a system-control App Intent and exposes high-value shortcuts for:
+This adds a system-control App Intent and exposes high-value shortcuts for:
 
 - Start Now
 - Still Counts
@@ -231,7 +235,7 @@ It also encodes privacy summaries, execution modes, receipt requirements, availa
 
 ## Required validation before Green
 
-Run from repo root after checking out the branch:
+Run from repo root:
 
 ```bash
 python3 scripts/ambitions-swift6-modernization-scan.py --self-test
@@ -242,15 +246,16 @@ scripts/ambitions-swift6-final-gate.sh
 
 The final gate will run XcodeGen, build, and focused deterministic tests when macOS/Xcode/simulator tooling is available.
 
-## Validation performed in this session
+## Validation performed in ChatGPT session
 
 Performed:
 
 - GitHub repository branch creation.
-- Direct file writes to branch through the connected GitHub repository interface.
-- Repo content inspection before and during migration.
-- Documentation, scanner, final gate, CI workflow, SwiftData migration hardening, Swift Testing seed, App Intent/control contract additions.
-- Branch diff comparison against `main`.
+- Direct file writes through the connected GitHub repository interface.
+- PR creation and Accepted Yellow mainline merge.
+- Automatic workflow removal from `main` after user cost-control request.
+- Documentation, scanner, local final gate, SwiftData migration hardening, Swift Testing seed, App Intent/control contract additions.
+- Branch/PR state verification.
 
 Not performed:
 
@@ -270,27 +275,26 @@ Not performed:
 
 Swift 6 with complete strict concurrency may expose compiler errors in existing production or test code. That is expected and is the point of the migration. Do not silence those errors with broad `@unchecked Sendable`, broad `@MainActor`, or unstructured concurrency. Repair with explicit actor boundaries, Sendable value models, or module/service seam corrections.
 
-A full module split is not complete in this branch. The branch installs scanner-enforced boundary gates first so the next split can be guided by compiler output rather than blind file movement.
+A full module split is not complete. The scanner-enforced boundary gates should guide the next split after compiler output rather than blind file movement.
 
-Actual WidgetKit `ControlWidget` rendering is not complete in this branch. The shared control contract and App Intent surface are installed first to prevent duplicate routing logic and keep system controls privacy-safe; the concrete `ControlWidget` UI should be added only with compiler-verified API usage.
+Actual WidgetKit `ControlWidget` rendering is not complete. The shared control contract and App Intent surface are installed first to prevent duplicate routing logic and keep system controls privacy-safe; the concrete `ControlWidget` UI should be added only with compiler-verified API usage.
 
-## Merge gate
+## Mainline gate
 
-Do not merge as Green until this passes:
+Do not claim Green until this passes:
 
 ```bash
 scripts/ambitions-swift6-final-gate.sh
 ```
 
-The PR may be accepted as Yellow only if all remaining compiler/test blockers are documented with exact command output and no release-readiness claims.
+Accepted Yellow is allowed only if all remaining compiler/test blockers are documented with exact command output and no release-readiness claims.
 
 ## Rollback
 
-Rollback is clean:
+Rollback options:
 
-1. Close the PR without merge, or
-2. Revert the branch commits, or
-3. Restore `project.yml` to `SWIFT_VERSION: 5.10`, remove `SWIFT_STRICT_CONCURRENCY: complete`, restore `Package.swift` to `swift-tools-version: 5.10`, and remove the added scanner/final-gate/doc/control/migration/test files.
+1. Revert `cb15fd8e0b96e65f0bbd15ea797a9fda7a17a045`, or
+2. Restore `project.yml` to `SWIFT_VERSION: 5.10`, remove `SWIFT_STRICT_CONCURRENCY: complete`, restore `Package.swift` to `swift-tools-version: 5.10`, and remove the added scanner/final-gate/doc/control/migration/test files.
 
 ## Next required repair loop
 
