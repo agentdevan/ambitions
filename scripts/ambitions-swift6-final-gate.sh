@@ -55,8 +55,10 @@ xcodebuild test \
   -scheme Ambitions \
   -destination "${SIM_DESTINATION}" \
   -only-testing:AmbitionsTests/StorageMigrationPlanScaffoldTests \
+  -only-testing:AmbitionsTests/StorageMigrationExecutionReadinessTestingTests \
   -only-testing:AmbitionsTests/AppIntentRoutingTests \
   -only-testing:AmbitionsTests/ExternalActionCommandServiceTests \
+  -only-testing:AmbitionsTests/ExternalSurfaceControlContractsTests \
   CODE_SIGNING_ALLOWED=NO
 
 echo "AMBITIONS_SWIFT6_FINAL_GATE_STATUS=GREEN"
