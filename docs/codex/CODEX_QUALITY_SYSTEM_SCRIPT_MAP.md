@@ -10,7 +10,8 @@ All CQS scripts are advisory by default. Set `CQS_STRICT=1` or each script's doc
 | --- | --- |
 | `scripts/cqs-prompt-built-smell-scan.sh` | Generic names, TODO/FIXME/stub residue, unsupported AI copy, overused helpers/managers/coordinators. |
 | `scripts/cqs-architecture-boundary-scan.sh` | Domain/view/service dependency direction, preview leakage, mega-files, shared primitive sprawl. |
-| `scripts/ambitions-swift6-modernization-scan.py` | Swift 6 settings proof plus native architecture regression guardrails for Combine-owned state, ObservableObject/@Published, AnyCancellable, VIPER naming, Hummingbird native-app leakage, and unchecked Sendable. Use `--strict` or `AMBITIONS_SWIFT6_SCAN_STRICT=1` to fail on blocking findings. |
+| `scripts/ambitions-swift6-modernization-scan.py` | Swift 6 settings proof plus native architecture regression guardrails for Combine-owned state, ObservableObject/@Published, AnyCancellable, VIPER naming, Hummingbird native-app leakage, unchecked Sendable, and Domain/Feature/DesignSystem/WidgetUI boundary leaks. Use `--strict` or `AMBITIONS_SWIFT6_SCAN_STRICT=1` to fail on blocking findings. |
+| `scripts/ambitions-swift6-final-gate.sh` | Local Swift 6 final gate: scanner self-test, scanner unit tests, strict repo scan, XcodeGen, Swift 6 app build, and focused deterministic tests for migration readiness, App Intent routing, external actions, and system-control contracts. Requires macOS/Xcode. |
 | `scripts/cqs-product-drift-scan.sh` | Dashboard, habit, streak, inbox, notes, chatbot, AI confidence, calendar clone, productivity score. |
 | `scripts/cqs-privacy-security-claim-scan.sh` | Secrets, sensitive logging, unsupported privacy/legal/release claims, required-reason and manifest references. |
 | `scripts/cqs-accessibility-motion-scan.sh` | Accessibility labels, color-only states, motion-only states, Reduce Motion gaps. |
