@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA14 Local Impact Matcher"
-  previous_batch: "SA14 Local Impact Matcher"
+  batch: "SA15 Offline Fallback Runtime"
+  previous_batch: "SA15 Offline Fallback Runtime"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "SA15 Offline Fallback Runtime"
+  next_eligible_batch: "SA16 Source Container Model"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
