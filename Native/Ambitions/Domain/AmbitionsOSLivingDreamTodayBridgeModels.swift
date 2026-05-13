@@ -398,7 +398,7 @@ struct AmbitionsOSLivingDreamTodayBridgeValidator: Sendable, Equatable, Hashable
             return .sourceReviewRequired
         case .staleSourceReviewRequired:
             return .staleSourceReviewRequired
-        case .proofTrustReviewRequired:
+        case .proofTrustReviewRequired, .missingReceiptBehavior:
             return .proofTrustReviewRequired
         case .missingUserControl:
             return .missingUserControl
