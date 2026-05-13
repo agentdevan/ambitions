@@ -53,6 +53,33 @@ enum SourceAtlasQueryFallbackReason: String, Codable, Sendable, Equatable, Hasha
     case noCurrentCandidate = "no_current_candidate"
 }
 
+enum SourceAtlasSourceNeededMode: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case noLoadedPacks = "no_loaded_packs"
+    case noMatchingCandidate = "no_matching_candidate"
+    case noCurrentCandidate = "no_current_candidate"
+    case provenanceMissing = "provenance_missing"
+    case starterGuidanceOnly = "starter_guidance_only"
+}
+
+struct SourceAtlasSourceNeededStarterGuidance: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let packID: String
+    let domainID: String
+    let starterItemID: String
+    let title: String
+    let stepCandidateSeed: String
+    let storesFinalSchedule: Bool
+    let canSupportOfficialCurrentUse: Bool
+}
+
+struct SourceAtlasSourceNeededDetail: Codable, Sendable, Equatable, Hashable {
+    let mode: SourceAtlasSourceNeededMode
+    let fallbackReason: SourceAtlasQueryFallbackReason
+    let starterGuidance: [SourceAtlasSourceNeededStarterGuidance]
+    let blocksOfficialCurrentClaims: Bool
+    let blocksCurrentUse: Bool
+}
+
 struct SourceAtlasQueryResult: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let packID: String
@@ -68,6 +95,7 @@ struct SourceAtlasQueryResult: Codable, Sendable, Equatable, Hashable, Identifia
     let provenanceSourceIDs: [String]
     let proofEntryIDs: [String]
     let fallbackReason: SourceAtlasQueryFallbackReason
+    let sourceNeededDetail: SourceAtlasSourceNeededDetail?
 
     var canSupportCurrentUse: Bool {
         fallbackReason == .none &&
@@ -102,7 +130,11 @@ struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
             ?? candidates.first
             ?? Self.fallbackResult(
                 for: query,
-                reason: packs.isEmpty ? .noLoadedPacks : .noMatchingCandidate
+                reason: packs.isEmpty ? .noLoadedPacks : .noMatchingCandidate,
+                sourceNeededDetail: sourceNeededDetail(
+                    for: query,
+                    reason: packs.isEmpty ? .noLoadedPacks : .noMatchingCandidate
+                )
             )
 
         return SourceAtlasQueryResponse(
@@ -172,6 +204,13 @@ struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
             let freshnessState = normalizedFreshnessState(requirement: requirement, claim: claim)
             let reviewState = normalizedReviewState(requirement: requirement, claim: claim)
             let riskState = normalizedRiskState(requirement: requirement, claim: claim)
+            let fallbackReason = fallbackReason(
+                sourceState: sourceState,
+                freshnessState: freshnessState,
+                riskState: riskState,
+                reviewState: reviewState,
+                provenanceSourceIDs: provenanceSourceIDs
+            )
 
             guard query.sourceState == nil || query.sourceState == sourceState else {
                 return nil
@@ -194,12 +233,11 @@ struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
                 reviewState: reviewState,
                 provenanceSourceIDs: provenanceSourceIDs,
                 proofEntryIDs: proofEntries.map(\.id).sorted(),
-                fallbackReason: fallbackReason(
-                    sourceState: sourceState,
-                    freshnessState: freshnessState,
-                    riskState: riskState,
-                    reviewState: reviewState,
-                    provenanceSourceIDs: provenanceSourceIDs
+                fallbackReason: fallbackReason,
+                sourceNeededDetail: sourceNeededDetail(
+                    in: pack,
+                    for: query,
+                    fallbackReason: fallbackReason
                 )
             )
         }
@@ -397,7 +435,8 @@ struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
 
     private static func fallbackResult(
         for query: SourceAtlasQuery,
-        reason: SourceAtlasQueryFallbackReason
+        reason: SourceAtlasQueryFallbackReason,
+        sourceNeededDetail: SourceAtlasSourceNeededDetail?
     ) -> SourceAtlasQueryResult {
         SourceAtlasQueryResult(
             id: "source-atlas-query-fallback",
@@ -413,8 +452,93 @@ struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
             reviewState: .required,
             provenanceSourceIDs: [],
             proofEntryIDs: [],
-            fallbackReason: reason == .noLoadedPacks ? .noLoadedPacks : .sourceNeeded
+            fallbackReason: reason == .noLoadedPacks ? .noLoadedPacks : .sourceNeeded,
+            sourceNeededDetail: sourceNeededDetail
         )
+    }
+
+    private func sourceNeededDetail(
+        in pack: SourceAtlasPack,
+        for query: SourceAtlasQuery,
+        fallbackReason: SourceAtlasQueryFallbackReason
+    ) -> SourceAtlasSourceNeededDetail? {
+        guard fallbackReason != .none else {
+            return nil
+        }
+
+        switch fallbackReason {
+        case .sourceNeeded, .provenanceMissing, .noCurrentCandidate:
+            return SourceAtlasSourceNeededDetail(
+                mode: sourceNeededMode(for: fallbackReason, hasStarterGuidance: pack.starterItems.isEmpty == false),
+                fallbackReason: fallbackReason,
+                starterGuidance: starterGuidance(in: pack, matching: query),
+                blocksOfficialCurrentClaims: true,
+                blocksCurrentUse: true
+            )
+        case .none, .unknown, .stale, .contradicted, .revoked, .reviewRequired, .noLoadedPacks, .noMatchingCandidate:
+            return nil
+        }
+    }
+
+    private func sourceNeededDetail(
+        for query: SourceAtlasQuery,
+        reason: SourceAtlasQueryFallbackReason
+    ) -> SourceAtlasSourceNeededDetail {
+        let guidance = packs
+            .filter { query.domainID == nil || $0.manifest.domainID == query.domainID }
+            .flatMap { starterGuidance(in: $0, matching: query) }
+
+        return SourceAtlasSourceNeededDetail(
+            mode: sourceNeededMode(for: reason, hasStarterGuidance: guidance.isEmpty == false),
+            fallbackReason: reason == .noLoadedPacks ? .noLoadedPacks : .sourceNeeded,
+            starterGuidance: guidance,
+            blocksOfficialCurrentClaims: true,
+            blocksCurrentUse: true
+        )
+    }
+
+    private func sourceNeededMode(
+        for reason: SourceAtlasQueryFallbackReason,
+        hasStarterGuidance: Bool
+    ) -> SourceAtlasSourceNeededMode {
+        if hasStarterGuidance {
+            return .starterGuidanceOnly
+        }
+
+        switch reason {
+        case .noLoadedPacks:
+            return .noLoadedPacks
+        case .noMatchingCandidate, .sourceNeeded:
+            return .noMatchingCandidate
+        case .provenanceMissing:
+            return .provenanceMissing
+        case .noCurrentCandidate:
+            return .noCurrentCandidate
+        case .none, .unknown, .stale, .contradicted, .revoked, .reviewRequired:
+            return .noCurrentCandidate
+        }
+    }
+
+    private func starterGuidance(
+        in pack: SourceAtlasPack,
+        matching query: SourceAtlasQuery
+    ) -> [SourceAtlasSourceNeededStarterGuidance] {
+        guard query.domainID == nil || query.domainID == pack.manifest.domainID else {
+            return []
+        }
+
+        return pack.starterItems.map { starterItem in
+            SourceAtlasSourceNeededStarterGuidance(
+                id: "\(pack.id)::\(starterItem.id)",
+                packID: pack.id,
+                domainID: pack.manifest.domainID,
+                starterItemID: starterItem.id,
+                title: starterItem.title,
+                stepCandidateSeed: starterItem.stepCandidateSeed,
+                storesFinalSchedule: starterItem.storesFinalSchedule,
+                canSupportOfficialCurrentUse: false
+            )
+        }
     }
 
     private static func orderedUnique(_ values: [String]) -> [String] {

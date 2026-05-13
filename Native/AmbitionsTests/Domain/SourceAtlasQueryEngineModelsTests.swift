@@ -60,7 +60,15 @@ final class SourceAtlasQueryEngineModelsTests: XCTestCase {
         XCTAssertEqual(resultsByRequirement["requirement-revoked"]?.sourceState, .revoked)
         XCTAssertEqual(resultsByRequirement["requirement-local"]?.sourceState, .locallyProven)
         XCTAssertEqual(resultsByRequirement["requirement-needed"]?.fallbackReason, .sourceNeeded)
+        XCTAssertEqual(resultsByRequirement["requirement-unknown"]?.fallbackReason, .unknown)
+        XCTAssertEqual(resultsByRequirement["requirement-stale"]?.fallbackReason, .stale)
+        XCTAssertEqual(resultsByRequirement["requirement-contradicted"]?.fallbackReason, .contradicted)
         XCTAssertEqual(resultsByRequirement["requirement-revoked"]?.fallbackReason, .revoked)
+        XCTAssertEqual(resultsByRequirement["requirement-local"]?.fallbackReason, .none)
+        XCTAssertNil(resultsByRequirement["requirement-unknown"]?.sourceNeededDetail)
+        XCTAssertNil(resultsByRequirement["requirement-stale"]?.sourceNeededDetail)
+        XCTAssertNil(resultsByRequirement["requirement-contradicted"]?.sourceNeededDetail)
+        XCTAssertNil(resultsByRequirement["requirement-revoked"]?.sourceNeededDetail)
     }
 
     func testOfficialCurrentRequiresApprovedSourceFreshnessAndReviewSupport() throws {
@@ -92,11 +100,15 @@ final class SourceAtlasQueryEngineModelsTests: XCTestCase {
         XCTAssertNotEqual(result.sourceState, .officialCurrent)
         XCTAssertEqual(result.fallbackReason, .noCurrentCandidate)
         XCTAssertEqual(result.provenanceSourceIDs, ["source-candidate"])
+        XCTAssertEqual(result.sourceNeededDetail?.mode, .starterGuidanceOnly)
+        XCTAssertEqual(result.sourceNeededDetail?.fallbackReason, .noCurrentCandidate)
+        XCTAssertEqual(result.sourceNeededDetail?.blocksOfficialCurrentClaims, true)
+        XCTAssertEqual(result.sourceNeededDetail?.blocksCurrentUse, true)
     }
 
-    func testSourceNeededFallbackWhenNoCurrentCandidateExists() {
-        let response = SourceAtlasQueryEngine(packs: [Self.pack()]).query(
-            SourceAtlasQuery(goalIntent: "missing_goal", domainID: "sports")
+    func testSourceNeededModeWhenNoLoadedPacksExist() {
+        let response = SourceAtlasQueryEngine(packs: []).query(
+            SourceAtlasQuery(goalIntent: "starter_goal", domainID: "sports")
         )
 
         XCTAssertTrue(response.results.isEmpty)
@@ -104,7 +116,63 @@ final class SourceAtlasQueryEngineModelsTests: XCTestCase {
         XCTAssertEqual(response.selectedResult.freshnessState, .unknown)
         XCTAssertEqual(response.selectedResult.reviewState, .required)
         XCTAssertEqual(response.selectedResult.provenanceSourceIDs, [])
+        XCTAssertEqual(response.fallbackReason, .noLoadedPacks)
+        XCTAssertEqual(response.selectedResult.sourceNeededDetail?.mode, .noLoadedPacks)
+        XCTAssertEqual(response.selectedResult.sourceNeededDetail?.starterGuidance, [])
+        XCTAssertEqual(response.selectedResult.sourceNeededDetail?.blocksOfficialCurrentClaims, true)
+        XCTAssertEqual(response.selectedResult.sourceNeededDetail?.blocksCurrentUse, true)
+        XCTAssertFalse(response.selectedResult.canSupportCurrentUse)
+    }
+
+    func testSourceNeededFallbackWhenNoMatchingCandidateExistsIncludesStarterGuidanceOnly() throws {
+        let response = SourceAtlasQueryEngine(packs: [Self.pack()]).query(
+            SourceAtlasQuery(goalIntent: "missing_goal", domainID: "sports")
+        )
+        let detail = try XCTUnwrap(response.selectedResult.sourceNeededDetail)
+
+        XCTAssertTrue(response.results.isEmpty)
+        XCTAssertEqual(response.selectedResult.sourceState, .sourceNeeded)
+        XCTAssertEqual(response.selectedResult.freshnessState, .unknown)
+        XCTAssertEqual(response.selectedResult.reviewState, .required)
+        XCTAssertEqual(response.selectedResult.provenanceSourceIDs, [])
         XCTAssertEqual(response.fallbackReason, .sourceNeeded)
+        XCTAssertEqual(detail.mode, .starterGuidanceOnly)
+        XCTAssertEqual(detail.fallbackReason, .sourceNeeded)
+        XCTAssertEqual(detail.blocksOfficialCurrentClaims, true)
+        XCTAssertEqual(detail.blocksCurrentUse, true)
+        XCTAssertEqual(detail.starterGuidance.count, 1)
+        XCTAssertEqual(detail.starterGuidance.first?.starterItemID, "starter")
+        XCTAssertEqual(detail.starterGuidance.first?.title, "Start")
+        XCTAssertEqual(detail.starterGuidance.first?.stepCandidateSeed, "Practice the sourced step.")
+        XCTAssertEqual(detail.starterGuidance.first?.storesFinalSchedule, false)
+        XCTAssertEqual(detail.starterGuidance.first?.canSupportOfficialCurrentUse, false)
+        XCTAssertFalse(response.selectedResult.canSupportCurrentUse)
+    }
+
+    func testOfficialCurrentClaimsRemainBlockedWhenProvenanceIsMissing() throws {
+        let pack = Self.pack(
+            claims: [
+                Self.claim(id: "claim-official", state: .official, freshness: .current, reviewRequired: false)
+            ],
+            requirements: [
+                Self.requirement(id: "requirement-official", claimID: "claim-official", sourceState: .officialCurrent, freshnessState: .current, reviewState: .approved)
+            ]
+        )
+
+        let result = try XCTUnwrap(
+            SourceAtlasQueryEngine(packs: [pack])
+                .results(matching: SourceAtlasQuery(requirementID: "requirement-official"))
+                .first
+        )
+        let detail = try XCTUnwrap(result.sourceNeededDetail)
+
+        XCTAssertEqual(result.sourceState, .official)
+        XCTAssertEqual(result.fallbackReason, .provenanceMissing)
+        XCTAssertEqual(result.provenanceSourceIDs, [])
+        XCTAssertEqual(detail.mode, .starterGuidanceOnly)
+        XCTAssertEqual(detail.blocksOfficialCurrentClaims, true)
+        XCTAssertEqual(detail.blocksCurrentUse, true)
+        XCTAssertFalse(result.canSupportCurrentUse)
     }
 
     func testSupportsSourceRiskClaimAndRequirementQueryDimensions() {
