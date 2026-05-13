@@ -2,16 +2,15 @@
 <!-- markdownlint-disable MD013 -->
 
 Status: Active CQS script map  
-Date: 2026-05-08
+Date: 2026-05-13
 
-All CQS scripts are advisory by default. Set `CQS_STRICT=1` to make a matching
-scan exit nonzero. Scripts must not delete, rewrite, stage, commit, or mutate
-production files.
+All CQS scripts are advisory by default. Set `CQS_STRICT=1` or each script's documented strict-mode environment variable to make a matching scan exit nonzero. Scripts must not delete, rewrite, stage, commit, or mutate production files.
 
 | Script | Purpose |
 | --- | --- |
 | `scripts/cqs-prompt-built-smell-scan.sh` | Generic names, TODO/FIXME/stub residue, unsupported AI copy, overused helpers/managers/coordinators. |
 | `scripts/cqs-architecture-boundary-scan.sh` | Domain/view/service dependency direction, preview leakage, mega-files, shared primitive sprawl. |
+| `scripts/ambitions-swift6-modernization-scan.py` | Swift 6 settings proof plus native architecture regression guardrails for Combine-owned state, ObservableObject/@Published, AnyCancellable, VIPER naming, Hummingbird native-app leakage, and unchecked Sendable. Use `--strict` or `AMBITIONS_SWIFT6_SCAN_STRICT=1` to fail on blocking findings. |
 | `scripts/cqs-product-drift-scan.sh` | Dashboard, habit, streak, inbox, notes, chatbot, AI confidence, calendar clone, productivity score. |
 | `scripts/cqs-privacy-security-claim-scan.sh` | Secrets, sensitive logging, unsupported privacy/legal/release claims, required-reason and manifest references. |
 | `scripts/cqs-accessibility-motion-scan.sh` | Accessibility labels, color-only states, motion-only states, Reduce Motion gaps. |
@@ -27,5 +26,4 @@ production files.
 | `scripts/ai/acx_visual_packet.py` | Visual QA packet template generator for UI-affecting work. |
 | `scripts/ai/acx_accessibility_packet.py` | Accessibility proof packet template generator for UI-affecting work. |
 
-Run relevant scripts after focused build/test validation and before commit for
-implementation batches. Docs-only batches may run the docs-relevant subset.
+Run relevant scripts after focused build/test validation and before commit for implementation batches. Docs-only batches may run the docs-relevant subset.
