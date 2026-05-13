@@ -254,27 +254,14 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
 
     func testDataControlPolicyDecisionsFromCommandsAreAsConfigured() {
         let decisionForCommand: (AmbitionsCommandKind, AmbitionsCommandTarget) -> SafeAutomationPolicyDecision = { kind, target in
-            SafeAutomationPolicyEvaluator().evaluate(
-                SafeAutomationProposedAction(
-                    kind: SafeAutomationActionKind(command: AmbitionsCommand(
-                        id: "command-\(kind.rawValue)",
-                        kind: kind,
-                        source: .you,
-                        target: target,
-                        createdAt: "2026-04-26T12:00:00Z"
-                    )),
-                    sourceDomain: .you,
-                    targetObjects: LifeGraphObjectReference.commandTargets(
-                        AmbitionsCommand(
-                            id: "command-\(kind.rawValue)",
-                            kind: kind,
-                            source: .you,
-                            target: target,
-                            createdAt: "2026-04-26T12:00:00Z"
-                        )
-                    )
-                )
+            let command = AmbitionsCommand(
+                id: "command-\(kind.rawValue)",
+                kind: kind,
+                source: .you,
+                target: target,
+                createdAt: "2026-04-26T12:00:00Z"
             )
+            return SafeAutomationPolicyEvaluator().evaluate(SafeAutomationProposedAction.fromCommand(command))
         }
 
         let prepareDecision = decisionForCommand(.prepareExport, AmbitionsCommandTarget())

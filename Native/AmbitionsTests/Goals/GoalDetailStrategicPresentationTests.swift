@@ -3,11 +3,11 @@ import XCTest
 
 final class GoalDetailStrategicPresentationTests: XCTestCase {
     func testRepositoryBackedDetailProjectsStrategicFirstLayerForActiveGoal() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Submit my conference talk proposal by 2026-05-15"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -23,11 +23,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testMissionControlLanesExistForNormalActiveGoal() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Submit my conference talk proposal by 2026-05-15"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -50,11 +50,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testMissionControlLanePrimitivePreservesGoalDetailLaneContract() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Ship the family emergency plan"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -72,11 +72,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
 
     @MainActor
     func testFCP10MissionControlTimeSpinePreservesOrderAndInspection() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Ship a proof-backed mission spine"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -103,11 +103,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testM07PathBuilderConnectsRoadmapForkProofAndTodayWithoutNewTab() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Build a family emergency fund by 2026-12-01"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -146,18 +146,18 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testFCP13BDecisionSpineFoldsAlternatePathsAndHistoryWithoutAutomatedReroute() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Build a family emergency fund by 2026-12-01"),
-            now: fixedNow
+            now: Self.fixedNow
         )
         let initialDetail = try await service.loadDetail(target: created.target)
         let primaryStepID = try XCTUnwrap(initialDetail.primaryStepID)
 
         _ = try await service.performAction(
             GoalDetailActionRequest(target: created.target, kind: .delay, stepID: primaryStepID),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -202,11 +202,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testFCP11LifePathThreadPreservesOrderPrimitivesAndPrivateRedaction() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Build a family emergency fund by 2026-12-01"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -253,11 +253,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testD14GoalDetailScreenContractSnapshotSatisfiesImplementationGate() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Align the Goal Detail lanes"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -271,11 +271,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testProofRailShowsProofSummaryAndEmptyStateTruthfully() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Create a public demo"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         var emptyDetail = try await service.loadDetail(target: created.target)
@@ -306,11 +306,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testFCP12ProofSpineCarriesSourceFreshnessPrivacyCorrectionAndStaleBoundary() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Keep launch evidence honest"),
-            now: fixedNow
+            now: Self.fixedNow
         )
         let goalID = try XCTUnwrap(created.target.goalID)
 
@@ -360,11 +360,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testMissionControlDegradesWhenGoalHasNoNextStep() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Publish a tiny field guide"),
-            now: fixedNow
+            now: Self.fixedNow
         )
         let goals = try await repositories.goals.listGoals()
         var goal = try XCTUnwrap(goals.first)
@@ -439,7 +439,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testBlockedGoalSurfacesRiskLaneAndDistinctState() throws {
-        let detail = tryUnwrapScenario(PreviewGoalsScenarios.blockedTarget.id)
+        let detail = Self.tryUnwrapScenario(PreviewGoalsScenarios.blockedTarget.id)
         let missionControl = try XCTUnwrap(detail.missionControl)
 
         XCTAssertEqual(detail.headline.renderState, .blocked)
@@ -449,9 +449,9 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testCompletedCancelledAndParkedTimelineStatesStayDistinct() throws {
-        let completed = tryUnwrapScenario(PreviewGoalsScenarios.completedTarget.id)
-        let parked = tryUnwrapScenario(PreviewGoalsScenarios.parkedTarget.id)
-        let cancelled = tryUnwrapScenario(PreviewGoalsScenarios.cancelledTarget.id)
+        let completed = Self.tryUnwrapScenario(PreviewGoalsScenarios.completedTarget.id)
+        let parked = Self.tryUnwrapScenario(PreviewGoalsScenarios.parkedTarget.id)
+        let cancelled = Self.tryUnwrapScenario(PreviewGoalsScenarios.cancelledTarget.id)
 
         XCTAssertTrue(completed.missionControl?.timeline.items.contains(where: { $0.kind == .completed }) == true)
         XCTAssertTrue(parked.missionControl?.timeline.items.contains(where: { $0.kind == .parked }) == true)
@@ -459,11 +459,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testBreadcrumbTimelineAssumptionsAndReceiptsStayTruthful() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Build a calm portfolio sample"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -482,11 +482,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testMissionControlCopyAvoidsTechnicalEngineNames() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Build a proof-backed launch note"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -506,7 +506,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testStarterPreviewKeepsFirstLayerStrategicReadVisible() {
-        let detail = tryUnwrapScenario(PreviewGoalsScenarios.starterTarget.id)
+        let detail = Self.tryUnwrapScenario(PreviewGoalsScenarios.starterTarget.id)
 
         XCTAssertEqual(detail.strategicStatus.title, "Starter path is taking shape")
         XCTAssertEqual(detail.pathStages.first?.position, .current)
@@ -515,7 +515,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testMakePathStagesFallsBackToSectionDerivedFilmstrip() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let section = PlanSection(
             id: "section-1",
@@ -561,7 +561,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testMakePathStagesSynthesizesFilmstripWhenNoPathOrSectionsExist() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
 
         let blockedStages = service.makePathStagesForTesting(pathSummary: nil, sections: [], renderState: .blocked)
@@ -578,19 +578,19 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testClarificationAndBlockedScenariosKeepTruthFirstMovement() {
-        let clarification = tryUnwrapScenario(PreviewGoalsScenarios.clarificationTarget.id)
+        let clarification = Self.tryUnwrapScenario(PreviewGoalsScenarios.clarificationTarget.id)
         XCTAssertEqual(clarification.strategicStatus.title, "Clarification is the real work right now")
         XCTAssertEqual(clarification.nextMovement?.state, .warning)
         XCTAssertEqual(clarification.nextMovement?.title, "Answer the missing question")
 
-        let blocked = tryUnwrapScenario(PreviewGoalsScenarios.blockedTarget.id)
+        let blocked = Self.tryUnwrapScenario(PreviewGoalsScenarios.blockedTarget.id)
         XCTAssertEqual(blocked.strategicStatus.title, "The path is waiting on a real blocker")
         XCTAssertEqual(blocked.nextMovement?.state, .warning)
         XCTAssertEqual(blocked.nextMovement?.title, "Resolve the blocker")
     }
 
     func testExplainabilityRemainsAvailableWithoutOwningFirstLayer() async throws {
-        let repositories = try await makeRepositories()
+        let repositories = try await Self.makeRepositories()
         let runtime = RepositoryBackedRuntimeGoalIntelligenceService(repositories: repositories)
         let service = RepositoryBackedGoalsService(
             repositories: repositories,
@@ -598,7 +598,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         )
         let created = try await service.createGoal(
             CreateGoalRequest(title: "Launch my business"),
-            now: fixedNow
+            now: Self.fixedNow
         )
 
         let detail = try await service.loadDetail(target: created.target)
@@ -610,7 +610,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
     }
 
     func testPreviewTrustHeavyScenarioKeepsTrustSecondAndMemoryAvailable() {
-        let detail = tryUnwrapScenario(PreviewGoalsScenarios.activeTarget.id)
+        let detail = Self.tryUnwrapScenario(PreviewGoalsScenarios.activeTarget.id)
 
         XCTAssertNotNil(detail.explainability)
         XCTAssertEqual(detail.strategicStatus.title, "Path is in motion")
@@ -621,11 +621,11 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
 }
 
 private extension GoalDetailStrategicPresentationTests {
-    var fixedNow: Date {
+    static var fixedNow: Date {
         Date(timeIntervalSince1970: 1_712_692_800)
     }
 
-    func makeRepositories() async throws -> AppRepositories {
+    static func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
@@ -638,7 +638,7 @@ private extension GoalDetailStrategicPresentationTests {
         )
     }
 
-    func tryUnwrapScenario(_ key: String, file: StaticString = #filePath, line: UInt = #line) -> GoalDetailPresentation {
+    static func tryUnwrapScenario(_ key: String, file: StaticString = #filePath, line: UInt = #line) -> GoalDetailPresentation {
         guard let detail = PreviewGoalsScenarios.detailScenarios[key] else {
             XCTFail("Missing preview scenario \(key)", file: file, line: line)
             return PreviewGoalsScenarios.detailScenarios.values.first!

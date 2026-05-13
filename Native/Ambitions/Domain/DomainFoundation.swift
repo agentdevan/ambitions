@@ -60,17 +60,17 @@ enum DomainTimestamp {
         formatter.date(from: value) ?? fallbackFormatter.date(from: value)
     }
 
-    private static let formatter: ISO8601DateFormatter = {
+    private static var formatter: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter
-    }()
+    }
 
-    private static let fallbackFormatter: ISO8601DateFormatter = {
+    private static var fallbackFormatter: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
         return formatter
-    }()
+    }
 }
 
 protocol GoalRescheduling: Sendable {

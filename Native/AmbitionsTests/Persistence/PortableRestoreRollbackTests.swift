@@ -152,6 +152,11 @@ private actor ScriptedRollbackSnapshotService: PortableSnapshotServicing {
         )
     }
 
+    func manualMergePlan(for snapshot: PortableAppSnapshot) async throws -> PortableManualMergePlan {
+        let dryRun = try await dryRunImportSnapshot(snapshot, mode: .mergeWithConflictReport)
+        return PortableManualMergePlan(dryRunReport: dryRun)
+    }
+
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
         imports += 1
         if snapshot.appState.userDisplayName == failingImportDisplayName {

@@ -25,7 +25,8 @@ final class PolicyGuardedCommandExecutorTests: XCTestCase {
         XCTAssertEqual(result.status, .requiresConfirmation)
         XCTAssertEqual(result.metadata["guardedBy"], "side_effect_policy")
         XCTAssertEqual(result.metadata["permissionLevel"], SafeAutomationPermissionLevel.requiresConfirmation.rawValue)
-        XCTAssertEqual(await counter.value(), 0)
+        let executionCount = await counter.value()
+        XCTAssertEqual(executionCount, 0)
 
         let records = try await ledger.fetchRecent(limit: 10)
         XCTAssertEqual(records.count, 1)
@@ -54,7 +55,8 @@ final class PolicyGuardedCommandExecutorTests: XCTestCase {
 
         XCTAssertEqual(result.status, .succeeded)
         XCTAssertEqual(result.metadata["delegated"], "true")
-        XCTAssertEqual(await counter.value(), 1)
+        let executionCount = await counter.value()
+        XCTAssertEqual(executionCount, 1)
 
         let records = try await ledger.fetchRecent(limit: 10)
         XCTAssertEqual(records.first?.status, .recordedLocalOnly)
@@ -121,7 +123,8 @@ final class PolicyGuardedCommandExecutorTests: XCTestCase {
         XCTAssertEqual(performResult.status, .requiresConfirmation)
         XCTAssertEqual(deleteResult.status, .blocked)
         XCTAssertEqual(forgetResult.status, .blocked)
-        XCTAssertEqual(await counter.value(), 0)
+        let executionCount = await counter.value()
+        XCTAssertEqual(executionCount, 0)
         XCTAssertEqual(records.count, 4)
         XCTAssertEqual(prepareRecord?.status, .preparedDraft)
         XCTAssertEqual(performRecord?.status, .confirmationRequired)

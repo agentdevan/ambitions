@@ -288,7 +288,8 @@ final class LocalNotificationFoundationTests: XCTestCase {
 
         await foundation.refreshSchedule(now: scheduleDate)
 
-        XCTAssertNil(await center.replacedRequest)
+        let replacedRequest = await center.replacedRequest
+        XCTAssertNil(replacedRequest)
         let record = await sideEffectLedger.lastRecord
         XCTAssertEqual(record?.id, "notification.cleared.1712779200")
         XCTAssertEqual(record?.status, .recordedLocalOnly)

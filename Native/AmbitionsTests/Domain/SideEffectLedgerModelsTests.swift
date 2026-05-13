@@ -127,7 +127,8 @@ final class SideEffectLedgerModelsTests: XCTestCase {
         XCTAssertEqual(recent.map(\.id), ["side-effect.blocked", "side-effect.local"])
         let confirmationRequired = try await repository.fetchRecords(status: .confirmationRequired)
         XCTAssertEqual(confirmationRequired.map(\.id), ["side-effect.blocked"])
-        XCTAssertEqual(try await repository.fetchRecord(id: "side-effect.local")?.id, "side-effect.local")
+        let storedLocal = try await repository.fetchRecord(id: "side-effect.local")
+        XCTAssertEqual(storedLocal?.id, "side-effect.local")
     }
 
     func testNotificationEffectKindIsPersistableAsAWellFormedRecord() {
@@ -168,7 +169,7 @@ final class SideEffectLedgerModelsTests: XCTestCase {
             occurredAt: "2026-05-12T12:00:00Z",
             requiresConfirmation: true,
             externalEffect: true,
-            reasons: [.userBlockedByPolicy],
+            reasons: [.destructiveAction],
             blockedFacts: ["No destructive change applied."],
             degradedFacts: ["Action was not executed."],
             receiptID: "receipt-1"
@@ -176,13 +177,13 @@ final class SideEffectLedgerModelsTests: XCTestCase {
 
         let diagnostic = blockedRecord.toDiagnosticLedgerEntry()
 
-        XCTAssertEqual(diagnostic.signal, .sideEffectLedger)
+        XCTAssertEqual(diagnostic.signal, DiagnosticLedgerSignal.sideEffectLedger)
         XCTAssertEqual(diagnostic.sourceRecordID, blockedRecord.id)
-        XCTAssertEqual(diagnostic.severity, .critical)
+        XCTAssertEqual(diagnostic.severity, DiagnosticLedgerSeverity.critical)
         XCTAssertEqual(diagnostic.localOnly, true)
         XCTAssertTrue(diagnostic.requiresReview)
-        XCTAssertEqual(diagnostic.sideEffectBoundary, .destructive)
-        XCTAssertEqual(diagnostic.privacy, .privateUserText)
+        XCTAssertEqual(diagnostic.sideEffectBoundary, SideEffectLedgerBoundary.destructive)
+        XCTAssertEqual(diagnostic.privacy, EventLedgerPrivacyClassification.privateUserText)
         XCTAssertEqual(diagnostic.payload["blockedFacts"], "No destructive change applied.")
     }
 }

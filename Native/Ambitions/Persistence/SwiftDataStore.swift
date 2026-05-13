@@ -48,13 +48,13 @@ actor AmbitionsPersistenceStore {
         container = try ModelContainer(for: Self.schema, configurations: configuration)
     }
 
-    func read<Value>(_ block: (ModelContext) throws -> Value) throws -> Value {
+    func read<Value>(_ block: @Sendable (ModelContext) throws -> Value) throws -> Value {
         let context = ModelContext(container)
         context.autosaveEnabled = false
         return try block(context)
     }
 
-    func write<Value>(_ block: (ModelContext) throws -> Value) throws -> Value {
+    func write<Value>(_ block: @Sendable (ModelContext) throws -> Value) throws -> Value {
         let context = ModelContext(container)
         context.autosaveEnabled = false
         let value = try block(context)
@@ -67,8 +67,8 @@ actor AmbitionsPersistenceStore {
     func transaction<Value: Sendable>(
         id: String = UUID().uuidString,
         writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext,
-        timestampProvider: () -> String = { ISO8601DateFormatter().string(from: .now) },
-        _ block: (ModelContext) throws -> Value
+        timestampProvider: @Sendable () -> String = { ISO8601DateFormatter().string(from: .now) },
+        _ block: @Sendable (ModelContext) throws -> Value
     ) throws -> AppUnitOfWorkResult<Value> {
         let startedAt = timestampProvider()
         let context = ModelContext(container)
@@ -124,8 +124,8 @@ struct SwiftDataAppUnitOfWork: Sendable {
     func perform<Value: Sendable>(
         id: String = UUID().uuidString,
         writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext,
-        timestampProvider: () -> String = { ISO8601DateFormatter().string(from: .now) },
-        _ operation: (ModelContext) throws -> Value
+        timestampProvider: @Sendable () -> String = { ISO8601DateFormatter().string(from: .now) },
+        _ operation: @Sendable (ModelContext) throws -> Value
     ) async throws -> AppUnitOfWorkResult<Value> {
         try await store.transaction(
             id: id,

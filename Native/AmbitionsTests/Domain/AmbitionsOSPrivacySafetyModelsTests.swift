@@ -63,18 +63,18 @@ final class AmbitionsOSPrivacySafetyModelsTests: XCTestCase {
             projectionPolicy: .fullLocal
         )
         let blockedPolicy = privacyPolicy(
-            permissionState: .externalBlocked,
             surface: .externalProjection,
+            permissionState: .externalBlocked,
             projectionPolicy: .externalBlocked
         )
 
         let deletePendingClassification = validator.classify(deletePendingPolicy)
         let blockedClassification = validator.classify(blockedPolicy)
 
-        XCTAssertEqual(deletePendingClassification.classification, .blocked)
+        XCTAssertEqual(deletePendingClassification.classification, AmbitionsOSPrivacySafetyClassificationKind.blocked)
         XCTAssertFalse(deletePendingClassification.externallyProjectable)
         XCTAssertTrue(deletePendingClassification.receiptCompatible)
-        XCTAssertEqual(blockedClassification.classification, .blocked)
+        XCTAssertEqual(blockedClassification.classification, AmbitionsOSPrivacySafetyClassificationKind.blocked)
         XCTAssertFalse(blockedClassification.externallyProjectable)
         XCTAssertTrue(blockedClassification.receiptCompatible)
     }

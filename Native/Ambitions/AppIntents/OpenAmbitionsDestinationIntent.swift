@@ -15,8 +15,8 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     case quickFocus = "quick_focus"
     case quickPlanPatch = "quick_plan_patch"
 
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Destination"
-    static var typeDisplayName: LocalizedStringResource = "Destination"
+    static let typeDisplayRepresentation: TypeDisplayRepresentation = "Destination"
+    static let typeDisplayName: LocalizedStringResource = "Destination"
 
     static var caseDisplayRepresentations: [AmbitionsAppShortcutDestination: DisplayRepresentation] {
         [
@@ -416,33 +416,6 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             ],
             shortTitle: "Make Doable",
             systemImageName: "arrow.uturn.left.circle"
-        )
-        AppShortcut(
-            intent: OpenAmbitionsSystemControlIntent(control: .startNow),
-            phrases: [
-                "Start now in \(.applicationName)",
-                "Open my current step in \(.applicationName)",
-            ],
-            shortTitle: "Start Now",
-            systemImageName: "play.circle"
-        )
-        AppShortcut(
-            intent: OpenAmbitionsSystemControlIntent(control: .stillCounts),
-            phrases: [
-                "Mark still counts in \(.applicationName)",
-                "Close the loop in \(.applicationName)",
-            ],
-            shortTitle: "Still Counts",
-            systemImageName: "checkmark.seal"
-        )
-        AppShortcut(
-            intent: OpenAmbitionsSystemControlIntent(control: .addProof),
-            phrases: [
-                "Add proof in \(.applicationName)",
-                "Open proof in \(.applicationName)",
-            ],
-            shortTitle: "Add Proof",
-            systemImageName: "doc.badge.plus"
         )
     }
 

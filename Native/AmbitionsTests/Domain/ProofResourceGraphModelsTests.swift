@@ -302,8 +302,8 @@ final class ProofResourceGraphModelsTests: XCTestCase {
                 contradictionState: .none,
                 evidence: .init(
                     anchorObjectIDs: [destinationAction.stableKey],
-                    sourceReceiptIDs: ["proof-receipt-1"],
-                    proofReferenceIDs: ["proof-reference-1"]
+                    proofReferenceIDs: ["proof-reference-1"],
+                    sourceReceiptIDs: ["proof-receipt-1"]
                 )
             )
         )
@@ -315,9 +315,9 @@ final class ProofResourceGraphModelsTests: XCTestCase {
 
         XCTAssertEqual(report.preservedProofIDs, ["pivot-proof"])
         XCTAssertNotNil(record)
-        XCTAssertEqual(record?.issues.contains(.missingOverlap), false)
-        XCTAssertEqual(record?.issues.contains(.missingTrustEvidence), false)
-        XCTAssertEqual(record?.issues.contains(.sourceNeedReview), false)
+        XCTAssertEqual(record?.issues.contains(ProofCapitalTransferIssue.missingOverlap), false)
+        XCTAssertEqual(record?.issues.contains(ProofCapitalTransferIssue.missingTrustEvidence), false)
+        XCTAssertEqual(record?.issues.contains(ProofCapitalTransferIssue.sourceNeedReview), false)
     }
 
     func testLegacyProofReferenceDecodesWithDefaultProofCapitalProfile() throws {

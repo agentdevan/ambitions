@@ -121,8 +121,8 @@ final class AmbitionsOSLivingDreamSourceClaimGraphModelsTests: XCTestCase {
     func testLivingDreamQualityStateTransitionsRejectInvalidUpgrade() {
         let inferred = validClaim(
             id: "claim-inferred",
-            claimQualityState: .sourceAttached,
-            sourceState: .inferred
+            sourceState: .inferredReviewRequired,
+            claimQualityState: .sourceAttached
         )
         XCTAssertFalse(
             AmbitionsOSLivingDreamClaimQualityState.sourceAttached.canTransition(to: .officialSourceBacked, hasProvenanceEvidence: false, hasLocalProofEvidence: false)

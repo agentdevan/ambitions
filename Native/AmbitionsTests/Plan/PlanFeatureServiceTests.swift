@@ -382,7 +382,7 @@ final class PlanFeatureServiceTests: XCTestCase {
             baseline.hero.subtitle,
             baseline.summaryDetail,
             baseline.summaryTitle,
-            baseline.continuityLabel
+            baseline.hero.continuityLabel
         ]
         let copiedText = snapshotCopy.joined(separator: " ").lowercased()
         XCTAssertFalse(copiedText.contains("calendar grid"))
@@ -405,7 +405,7 @@ final class PlanFeatureServiceTests: XCTestCase {
             snapshot: snapshot
         )
 
-        XCTAssertEqual(extracted.calendarAwareness.status, .notDetermined)
+        XCTAssertEqual(extracted.calendarAwareness.status, .baseline)
         XCTAssertEqual(extracted.calendarBoundary.permissionLabel, "Optional")
         XCTAssertTrue(extracted.calendarBoundary.detail.lowercased().contains("open window"))
         XCTAssertEqual(extracted.calendarBoundary.canRequestCalendarRead, true)

@@ -8,8 +8,8 @@ enum AmbitionsSystemControlShortcut: String, CaseIterable, AppEnum {
     case addProof = "add_proof"
     case openCurrentStep = "open_current_step"
 
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "System Control"
-    static var typeDisplayName: LocalizedStringResource = "System Control"
+    static let typeDisplayRepresentation: TypeDisplayRepresentation = "System Control"
+    static let typeDisplayName: LocalizedStringResource = "System Control"
 
     static var caseDisplayRepresentations: [AmbitionsSystemControlShortcut: DisplayRepresentation] {
         [

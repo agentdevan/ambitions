@@ -105,7 +105,7 @@ private extension SideEffectLedgerRepositoryTests {
             actionKind: actionKind,
             sourceDomain: sourceDomain,
             commandID: "command-\(id)",
-            targetObjects: [LifeGraphObjectReference(kind: .action, id: "target-\(id)", sourceDomain: sourceDomain)],
+            targetObjects: [LifeGraphObjectReference(kind: .action, id: "target-\(id)", sourceDomain: sourceDomain.lifeGraphSourceDomain)],
             occurredAt: occurredAt,
             requiresConfirmation: status == .confirmationRequired,
             externalEffect: status == .confirmationRequired,

@@ -713,7 +713,7 @@ final class AmbitionsUITests: XCTestCase {
             }
         }
 
-        return candidates.contains(where: \.exists)
+        return candidates.contains(where: { $0.exists })
     }
 
     private func waitForCreatedGoalAcknowledgement(title: String, in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
@@ -759,7 +759,7 @@ final class AmbitionsUITests: XCTestCase {
             }
         }
 
-        return candidates.contains(where: \.exists)
+        return candidates.contains(where: { $0.exists })
     }
 
     private func tapGoalsHeroPrimaryAction(in app: XCUIApplication) {
@@ -928,7 +928,7 @@ final class AmbitionsUITests: XCTestCase {
             }
         }
 
-        return todayScreen.exists && readinessCandidates.contains(where: \.exists)
+        return todayScreen.exists && readinessCandidates.contains(where: { $0.exists })
     }
 
     private func waitForShellReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {

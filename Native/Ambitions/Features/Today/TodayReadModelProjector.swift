@@ -41,7 +41,7 @@ struct TodayDerivedReadModelCacheKey: Hashable, Sendable {
         ])
         self.supportFingerprint = Self.fingerprint([
             support.timeAperture.title,
-            support.timeAperture.summary,
+            support.timeAperture.subtitle,
             support.fixedCommitments.summary,
             support.flexibleRoom.summary,
             support.momentum.summary,

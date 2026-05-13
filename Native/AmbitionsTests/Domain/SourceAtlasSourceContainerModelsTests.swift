@@ -28,7 +28,7 @@ final class SourceAtlasSourceContainerModelsTests: XCTestCase {
             Self.container(kind: .userMiniPack, provenanceState: .userMiniPack, reviewState: .ready)
         ]
 
-        XCTAssertTrue(containers.allSatisfy(\.requiresReview))
+        XCTAssertTrue(containers.allSatisfy { $0.requiresReview })
         XCTAssertTrue(containers.allSatisfy { $0.reviewState == .needsSourceReview })
         XCTAssertTrue(containers.allSatisfy { $0.canSupportOfficialCurrentClaim == false })
         XCTAssertTrue(containers.allSatisfy(\.blocksCurrentUse))
@@ -82,14 +82,14 @@ final class SourceAtlasSourceContainerModelsTests: XCTestCase {
             Self.container(kind: .plainText, locator: nil),
             Self.container(kind: .localFile, locator: "file://source.txt"),
             Self.container(kind: .officialPack, locator: "ambitions://source-atlas/official"),
-            Self.container(kind: .userMiniPack, provenanceState: .userMiniPack, locator: "ambitions://source-atlas/user-mini")
+            Self.container(kind: .userMiniPack, locator: "ambitions://source-atlas/user-mini", provenanceState: .userMiniPack)
         ]
 
         let data = try JSONEncoder().encode(containers)
         let decoded = try JSONDecoder().decode([SourceAtlasSourceContainer].self, from: data)
 
         XCTAssertEqual(decoded, containers)
-        XCTAssertEqual(Set(decoded.map(\.kind)), Set(SourceAtlasSourceContainerKind.allCases))
+        XCTAssertEqual(Set(decoded.map { $0.kind }), Set(SourceAtlasSourceContainerKind.allCases))
     }
 
     func testStaleContradictedAndRevokedFreshnessAreConservative() {
@@ -118,7 +118,7 @@ final class SourceAtlasSourceContainerModelsTests: XCTestCase {
         XCTAssertEqual(stale.conservativeRequirementSourceState, .stale)
         XCTAssertEqual(contradicted.conservativeRequirementSourceState, .contradicted)
         XCTAssertEqual(revoked.conservativeRequirementSourceState, .revoked)
-        XCTAssertTrue([stale, contradicted, revoked].allSatisfy(\.blocksCurrentUse))
+        XCTAssertTrue([stale, contradicted, revoked].allSatisfy { $0.blocksCurrentUse })
     }
 }
 

@@ -553,13 +553,13 @@ private actor StaticSnapshotWriterRepositories: GoalRepository, GoalDraftReposit
     }
 
     func listActionableSteps() async throws -> [Step] {
-        goals.flatMap { $0.plan.sections.flatMap { $0.steps } }
+        goals.flatMap { $0.plan?.sections.flatMap { $0.steps } ?? [] }
     }
 
     func listSteps(goalID: String) async throws -> [Step] {
         goals
             .first(where: { $0.id == goalID })?
-            .plan
+            .plan?
             .sections
             .flatMap { $0.steps } ?? []
     }

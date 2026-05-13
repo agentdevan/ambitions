@@ -345,15 +345,15 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
         return Self.iso.date(from: value) ?? Self.isoFallback.date(from: value)
     }
 
-    private static let iso: ISO8601DateFormatter = {
+    private static var iso: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter
-    }()
+    }
 
-    private static let isoFallback: ISO8601DateFormatter = {
+    private static var isoFallback: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
         return formatter
-    }()
+    }
 }

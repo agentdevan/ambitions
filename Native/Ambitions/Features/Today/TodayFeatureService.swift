@@ -2409,37 +2409,37 @@ private extension RepositoryBackedTodayService {
         return step.dependencyStepIDs.filter { completedStepIDs.contains($0) == false }.count
     }
 
-    static let iso: ISO8601DateFormatter = {
+    static var iso: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter
-    }()
+    }
 
-    static let isoFallback: ISO8601DateFormatter = {
+    static var isoFallback: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
         return formatter
-    }()
+    }
 
     func parseDate(_ value: String) -> Date? {
         Self.iso.date(from: value) ?? Self.isoFallback.date(from: value) ?? Self.dateOnly.date(from: value)
     }
 
-    static let dateOnly: DateFormatter = {
+    static var dateOnly: DateFormatter {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .gregorian)
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
-    }()
+    }
 
-    static let shortTime: DateFormatter = {
+    static var shortTime: DateFormatter {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .none
         return formatter
-    }()
+    }
 
     func calendarEventMessageBody(for title: String, report: CalendarConflictReport?) -> String {
         guard let report else {

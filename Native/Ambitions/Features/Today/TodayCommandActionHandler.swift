@@ -295,9 +295,9 @@ struct TodayCommandActionHandler {
         }
     }
 
-    private static let iso: ISO8601DateFormatter = {
+    private static var iso: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter
-    }()
+    }
 }

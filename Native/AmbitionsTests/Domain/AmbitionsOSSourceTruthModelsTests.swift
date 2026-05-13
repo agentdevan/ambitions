@@ -101,8 +101,8 @@ final class AmbitionsOSSourceTruthModelsTests: XCTestCase {
         let claim = validClaim(
             id: "claim-no-provenance",
             state: .sourceNeeded,
-            sourceIDs: [],
-            sourceQualityState: .secondaryReference
+            sourceQualityState: .secondaryReference,
+            sourceIDs: []
         )
         let transition = AmbitionsOSSourceTruthTransition(
             claimID: "claim-no-provenance",
@@ -153,15 +153,15 @@ final class AmbitionsOSSourceTruthModelsTests: XCTestCase {
         let staleCritical = validClaim(
             id: "claim-stale-critical",
             state: .officialSourceBacked,
-            freshnessState: .staleCritical,
             sourceQualityState: .official,
+            freshnessState: .staleCritical,
             riskClass: .certificationEligibility
         )
         let unknown = validClaim(
             id: "claim-unknown",
             state: .sourceNeeded,
-            freshnessState: .unknown,
             sourceQualityState: .secondaryReference,
+            freshnessState: .unknown,
             riskClass: .certificationEligibility
         )
 

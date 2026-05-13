@@ -659,15 +659,15 @@ private extension RepositoryBackedHabitsService {
     static let quickLogNote = "Quick log from Rituals."
     static let minimumNotePrefix = "Minimum version from Rituals: "
 
-    static let iso: ISO8601DateFormatter = {
+    static var iso: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter
-    }()
+    }
 
-    static let isoFallback: ISO8601DateFormatter = {
+    static var isoFallback: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
         return formatter
-    }()
+    }
 }

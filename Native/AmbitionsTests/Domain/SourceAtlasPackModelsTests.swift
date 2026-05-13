@@ -751,14 +751,6 @@ extension SourceAtlasPackModelsTests {
         let stalePack = Self.validPack(
             claims: [revokedClaim],
             requirements: [claimBoundRequirement],
-            composition: SourceAtlasCompositionContract(
-                dependencyPackIDs: [],
-                reusableNodeIDs: ["pickleball.serve", "pickleball.rules"],
-                overlayDependencyIDs: ["sports.pickleball.rules"],
-                projectionRecipeIDs: ["recipe-pickleball-starter"],
-                ownsIndividualGoalPhrase: false,
-                requirementOverlays: []
-            ),
             proofMap: [
                 SourceAtlasProofMapEntry(
                     id: "proof-revoked",
@@ -770,12 +762,20 @@ extension SourceAtlasPackModelsTests {
                     sourceRecordIDs: ["source-official"],
                     sourceClaimIDs: [revokedClaim.id]
                 )
-            ]
+            ],
+            composition: SourceAtlasCompositionContract(
+                dependencyPackIDs: [],
+                reusableNodeIDs: ["pickleball.serve", "pickleball.rules"],
+                overlayDependencyIDs: ["sports.pickleball.rules"],
+                projectionRecipeIDs: ["recipe-pickleball-starter"],
+                ownsIndividualGoalPhrase: false,
+                requirementOverlays: []
+            )
         )
 
-        XCTAssertEqual(stalePack.validationIssues.contains(.proofCannotSupportCurrentRequirement), true)
-        XCTAssertEqual(stalePack.validationIssues.contains(.proofRequiresSourceOrClaimBinding), false)
-        XCTAssertEqual(stalePack.validationIssues.contains(.invalidRequirementOverlay), true)
+        XCTAssertEqual(stalePack.validationIssues.contains(SourceAtlasValidationIssue.proofCannotSupportCurrentRequirement), true)
+        XCTAssertEqual(stalePack.validationIssues.contains(SourceAtlasValidationIssue.proofRequiresSourceOrClaimBinding), false)
+        XCTAssertEqual(stalePack.validationIssues.contains(SourceAtlasValidationIssue.invalidRequirementOverlay), true)
     }
 
     func testSourceNeededClaimCannotSupportCurrentRequirementProof() {

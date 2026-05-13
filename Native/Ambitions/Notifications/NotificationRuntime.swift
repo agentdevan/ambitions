@@ -34,25 +34,26 @@ final class NotificationRuntime: NSObject, UNUserNotificationCenterDelegate {
     static let shared = NotificationRuntime()
 
     weak var bootstrapper: AppBootstrapper?
-    private let parser = NotificationResponsePayloadParser()
 
-    func activate() {
+    nonisolated func activate() {
         UNUserNotificationCenter.current().delegate = self
     }
 
-    func userNotificationCenter(
+    nonisolated func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse
     ) async {
         _ = center
-        guard let payload = parser.payload(
+        guard let payload = NotificationResponsePayloadParser().payload(
             actionIdentifier: response.actionIdentifier,
             userInfo: response.notification.request.content.userInfo
         ) else { return }
-        bootstrapper?.handleNotificationPayload(payload)
+        await MainActor.run {
+            Self.shared.bootstrapper?.handleNotificationPayload(payload)
+        }
     }
 
-    func userNotificationCenter(
+    nonisolated func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification
     ) async -> UNNotificationPresentationOptions {

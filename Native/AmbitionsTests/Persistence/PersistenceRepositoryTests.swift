@@ -419,10 +419,10 @@ final class PersistenceRepositoryTests: XCTestCase {
 
         let result = try await unitOfWork.perform(
             id: "uow-commit",
-            timestampProvider: unitOfWorkTimestampProvider()
+            timestampProvider: Self.unitOfWorkTimestampProvider()
         ) { context in
-            context.insert(try captureRecord(id: "uow-capture", rawText: "Unit of work capture"))
-            context.insert(try appStateRecord(userDisplayName: "Unit Worker"))
+            context.insert(try Self.captureRecord(id: "uow-capture", rawText: "Unit of work capture"))
+            context.insert(try Self.appStateRecord(userDisplayName: "Unit Worker"))
             return "committed"
         }
 
@@ -431,7 +431,7 @@ final class PersistenceRepositoryTests: XCTestCase {
 
         XCTAssertEqual(result.value, "committed")
         XCTAssertEqual(result.receipt.id, "uow-commit")
-        XCTAssertEqual(result.receipt.writeScope, .localSwiftDataSingleContext)
+        XCTAssertEqual(result.receipt.writeScope, AppUnitOfWorkWriteScope.localSwiftDataSingleContext)
         XCTAssertTrue(result.receipt.didCommitChanges)
         XCTAssertEqual(result.receipt.rollbackBehavior, AppUnitOfWorkReceipt.rollbackOnThrownError)
         XCTAssertEqual(result.receipt.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
@@ -447,9 +447,9 @@ final class PersistenceRepositoryTests: XCTestCase {
         do {
             _ = try await unitOfWork.perform(
                 id: "uow-rollback",
-                timestampProvider: unitOfWorkTimestampProvider()
+                timestampProvider: Self.unitOfWorkTimestampProvider()
             ) { context in
-                context.insert(try captureRecord(id: "uow-rollback-capture", rawText: "Should not persist"))
+                context.insert(try Self.captureRecord(id: "uow-rollback-capture", rawText: "Should not persist"))
                 throw UnitOfWorkProbeError.intentionalRollback
             }
             XCTFail("Expected unit of work to throw before save.")
@@ -502,19 +502,13 @@ private extension PersistenceRepositoryTests {
         }
     }
 
-    func unitOfWorkTimestampProvider() -> () -> String {
-        var index = 0
-        let timestamps = [
-            "2026-05-08T12:00:00Z",
-            "2026-05-08T12:00:01Z",
-        ]
-        return {
-            defer { index += 1 }
-            return timestamps[min(index, timestamps.count - 1)]
+    static func unitOfWorkTimestampProvider() -> @Sendable () -> String {
+        {
+            "2026-05-08T12:00:00Z"
         }
     }
 
-    func captureRecord(id: String, rawText: String) throws -> CaptureRecord {
+    static func captureRecord(id: String, rawText: String) throws -> CaptureRecord {
         let capture = Capture(
             id: id,
             createdAt: "2026-05-08T12:00:00Z",
@@ -536,7 +530,7 @@ private extension PersistenceRepositoryTests {
         )
     }
 
-    func appStateRecord(userDisplayName: String) throws -> AppStateRecord {
+    static func appStateRecord(userDisplayName: String) throws -> AppStateRecord {
         var state = AppStateSnapshot.default
         state.userDisplayName = userDisplayName
         return AppStateRecord(

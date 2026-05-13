@@ -6,8 +6,8 @@ final class SourceAtlasLocalImpactMatcherModelsTests: XCTestCase {
         let response = SourceAtlasLocalImpactMatcher().match(
             changedClaims: SourceAtlasChangedPublicClaimSet(changedClaimIDs: ["claim-b", "claim-a", "claim-a"]),
             localBindings: [
-                binding(id: "binding-1", localGoalID: "goal-1", sourceClaimIDs: ["claim-a", "claim-c"]),
-                binding(id: "binding-2", localGoalID: "goal-2", sourceClaimIDs: ["claim-x"])
+                Self.binding(id: "binding-1", localGoalID: "goal-1", sourceClaimIDs: ["claim-a", "claim-c"]),
+                Self.binding(id: "binding-2", localGoalID: "goal-2", sourceClaimIDs: ["claim-x"])
             ]
         )
 
@@ -33,7 +33,7 @@ final class SourceAtlasLocalImpactMatcherModelsTests: XCTestCase {
         let response = SourceAtlasLocalImpactMatcher().match(
             changedClaims: SourceAtlasChangedPublicClaimSet(changedClaimIDs: states.map { "claim-\($0.rawValue)" }),
             localBindings: states.map {
-                binding(
+                Self.binding(
                     id: "binding-\($0.rawValue)",
                     localGoalID: "goal-\($0.rawValue)",
                     sourceClaimIDs: ["claim-\($0.rawValue)"],
@@ -43,7 +43,7 @@ final class SourceAtlasLocalImpactMatcherModelsTests: XCTestCase {
             }
         )
 
-        let sourceStates = Set(response.matches.map(\.sourceState))
+        let sourceStates = Set(response.matches.map { $0.sourceState })
         XCTAssertEqual(sourceStates, Set(states))
         XCTAssertEqual(response.matches.first(where: { $0.sourceState == .unknown })?.receiptPreview.claimBoundary, .sourceNeeded)
         XCTAssertEqual(response.matches.first(where: { $0.sourceState == .sourceNeeded })?.receiptPreview.claimBoundary, .sourceNeeded)
@@ -57,7 +57,7 @@ final class SourceAtlasLocalImpactMatcherModelsTests: XCTestCase {
         let response = SourceAtlasLocalImpactMatcher().match(
             changedClaims: SourceAtlasChangedPublicClaimSet(changedClaimIDs: ["claim-deadline"]),
             localBindings: [
-                binding(
+                Self.binding(
                     id: "binding-deadline",
                     localGoalID: "goal-certification",
                     sourceClaimIDs: ["claim-deadline"],
@@ -85,7 +85,7 @@ final class SourceAtlasLocalImpactMatcherModelsTests: XCTestCase {
         let response = SourceAtlasLocalImpactMatcher().match(
             changedClaims: SourceAtlasChangedPublicClaimSet(changedClaimIDs: ["claim-a"]),
             localBindings: [
-                binding(id: "binding-1", localGoalID: "goal-1", sourceClaimIDs: ["claim-a"])
+                Self.binding(id: "binding-1", localGoalID: "goal-1", sourceClaimIDs: ["claim-a"])
             ]
         )
         let encoded = String(data: try JSONEncoder().encode(response), encoding: .utf8) ?? ""

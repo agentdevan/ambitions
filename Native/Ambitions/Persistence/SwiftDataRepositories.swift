@@ -1056,7 +1056,7 @@ struct SwiftDataGoalCreationUnitOfWork: GoalCreationUnitOfWorking {
     func saveGoalCreation(
         _ payload: GoalCreationUnitOfWorkPayload,
         id: String = UUID().uuidString,
-        timestampProvider: () -> String = { ISO8601DateFormatter().string(from: .now) }
+        timestampProvider: @Sendable () -> String = { ISO8601DateFormatter().string(from: .now) }
     ) async throws -> AppUnitOfWorkResult<GoalCreationUnitOfWorkCommit> {
         try await store.transaction(
             id: id,
@@ -1105,7 +1105,7 @@ struct SwiftDataCapturePromotionUnitOfWork: CapturePromotionUnitOfWorking {
     func saveCapturePromotion(
         _ payload: CapturePromotionUnitOfWorkPayload,
         id: String = UUID().uuidString,
-        timestampProvider: () -> String = { ISO8601DateFormatter().string(from: .now) }
+        timestampProvider: @Sendable () -> String = { ISO8601DateFormatter().string(from: .now) }
     ) async throws -> AppUnitOfWorkResult<CapturePromotionUnitOfWorkCommit> {
         try await store.transaction(
             id: id,
@@ -1480,7 +1480,7 @@ struct SwiftDataSideEffectLedgerRepository: SideEffectLedgerRepository {
         }
     }
 
-    private func fetchAll(where isIncluded: @escaping (SideEffectLedgerStorageRecord) -> Bool) async throws -> [SideEffectLedgerRecord] {
+    private func fetchAll(where isIncluded: @escaping @Sendable (SideEffectLedgerStorageRecord) -> Bool) async throws -> [SideEffectLedgerRecord] {
         try await store.read { context in
             try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
                 .filter(isIncluded)
@@ -1714,7 +1714,7 @@ struct SwiftDataEventLedgerRepository: EventLedgerRepository {
         }
     }
 
-    private func fetchAll(where isIncluded: @escaping (EventLedgerRecord) -> Bool) async throws -> [EventLedgerEntry] {
+    private func fetchAll(where isIncluded: @escaping @Sendable (EventLedgerRecord) -> Bool) async throws -> [EventLedgerEntry] {
         try await store.read { context in
             try context.fetch(FetchDescriptor<EventLedgerRecord>())
                 .filter(isIncluded)

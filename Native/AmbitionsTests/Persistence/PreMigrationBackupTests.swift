@@ -133,6 +133,11 @@ private struct FixedSnapshotService: PortableSnapshotServicing {
         )
     }
 
+    func manualMergePlan(for snapshot: PortableAppSnapshot) async throws -> PortableManualMergePlan {
+        let dryRun = try await dryRunImportSnapshot(snapshot, mode: .mergeWithConflictReport)
+        return PortableManualMergePlan(dryRunReport: dryRun)
+    }
+
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
         PortableImportReport(
             mode: mode,

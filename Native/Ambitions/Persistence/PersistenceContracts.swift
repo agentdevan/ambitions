@@ -472,7 +472,7 @@ protocol GoalCreationUnitOfWorking: Sendable {
     func saveGoalCreation(
         _ payload: GoalCreationUnitOfWorkPayload,
         id: String,
-        timestampProvider: () -> String
+        timestampProvider: @Sendable () -> String
     ) async throws -> AppUnitOfWorkResult<GoalCreationUnitOfWorkCommit>
 }
 
@@ -493,7 +493,7 @@ protocol CapturePromotionUnitOfWorking: Sendable {
     func saveCapturePromotion(
         _ payload: CapturePromotionUnitOfWorkPayload,
         id: String,
-        timestampProvider: () -> String
+        timestampProvider: @Sendable () -> String
     ) async throws -> AppUnitOfWorkResult<CapturePromotionUnitOfWorkCommit>
 }
 

@@ -387,8 +387,8 @@ private extension AmbitionGraphProjectionStoreTests {
         let outcomeSecondary = Outcome(
             id: "outcome-capture",
             ambitionID: "ambition-graphql",
-            title: "Capture quality",
             goalThreadID: "thread-capture",
+            title: "Capture quality",
             kind: .capacity,
             isPrimary: false,
             createdAt: "2026-05-12T07:26:00Z",
@@ -423,8 +423,8 @@ private extension AmbitionGraphProjectionStoreTests {
             sourceRefs: ["source-ref"],
             reasonCodes: ["capture"],
             userAction: .openStep,
-            sourceLabels: ["source-label"],
-            createdAt: "2026-05-12T07:29:00Z"
+            createdAt: "2026-05-12T07:29:00Z",
+            sourceLabels: ["source-label"]
         )
 
         let goalsTrace = AmbitionGraphRecommendationTrace(
