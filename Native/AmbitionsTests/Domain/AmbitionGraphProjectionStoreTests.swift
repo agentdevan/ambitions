@@ -2,6 +2,48 @@ import XCTest
 @testable import Ambitions
 
 final class AmbitionGraphProjectionStoreTests: XCTestCase {
+    func testCrossSurfaceLoopCarriesGoalToLifeDirectionContext() {
+        let snapshot = makeSnapshot()
+        let store = AmbitionGraphProjectionStore(snapshots: [snapshot])
+
+        guard let loop = store.crossSurfaceLoop(
+            for: snapshot.id,
+            generatedAt: "2026-05-13T01:52:18Z",
+            id: "mri07-goal-to-life-direction-loop",
+            projectionIDPrefix: "mri07"
+        ) else {
+            return XCTFail("Cross-surface loop should exist")
+        }
+
+        XCTAssertTrue(loop.localProjectionOnly)
+        XCTAssertTrue(loop.connectsEveryCanonicalSurface)
+        XCTAssertTrue(loop.carriesGoalToLifeDirectionContext)
+        XCTAssertEqual(loop.coveredSurfaces, [.today, .goals, .capture, .time, .you])
+        XCTAssertEqual(
+            loop.surfaceProjectionIDs,
+            ["mri07-capture", "mri07-goals", "mri07-time", "mri07-today", "mri07-you"]
+        )
+        XCTAssertEqual(loop.identityDirectionIDs, ["identity-direction-1"])
+        XCTAssertEqual(loop.outcomeIDs, ["outcome-capture", "outcome-primary"])
+        XCTAssertEqual(
+            loop.commitmentIDs,
+            ["commitment-capture", "commitment-complete", "commitment-goal", "commitment-promised", "commitment-today"]
+        )
+        XCTAssertEqual(loop.stepIDs, ["step-capture", "step-complete", "step-goal", "step-time", "step-today"])
+        XCTAssertEqual(loop.closureEventIDs, ["closure-today"])
+        XCTAssertEqual(loop.proofIDs, ["proof-capture", "proof-goal", "proof-today"])
+        XCTAssertEqual(loop.recoveryThreadIDs, ["recovery-active"])
+        XCTAssertEqual(loop.recommendationTraceIDs, ["trace-capture", "trace-goals"])
+        XCTAssertEqual(
+            loop.privacyClasses,
+            [.privateConstraint, .privateProof, .privateUserText, .systemOwned]
+        )
+        XCTAssertEqual(
+            loop.sourceFields,
+            ["capture app", "goals-source", "source-label", "source-ref"]
+        )
+    }
+
     func testProjectionFiltersSurfaceOutputsForAmbitionGraphContext() {
         let snapshot = makeSnapshot()
         let store = AmbitionGraphProjectionStore(snapshots: [snapshot])
