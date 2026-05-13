@@ -10,7 +10,8 @@
     "MRI07",
     "MRI08",
     "MRI09",
-    "MRI10"
+    "MRI10",
+    "MRI11"
   ],
   "history": [
     {
@@ -62,6 +63,11 @@
       "batch": "MRI10",
       "prompt": "prompts/batches/MRI10-RECOMMENDATION-TRACE-RUNTIME.md",
       "marked_complete_at": "2026-05-13T07:38:31Z"
+    },
+    {
+      "batch": "MRI11",
+      "prompt": "prompts/batches/MRI11-WHY-THIS-TRUST-SEAM-RUNTIME.md",
+      "marked_complete_at": "2026-05-13T08:00:18Z"
     }
   ]
 }
