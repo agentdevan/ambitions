@@ -460,6 +460,123 @@ final class RecommendationExplanationModelsTests: XCTestCase {
             XCTAssertFalse(model.canDriveRecommendation)
         }
     }
+
+    func testCompleteRecommendationTraceCarriesSourceReasonFitUncertaintyControlAndReceipt() {
+        let result = Self.sourceAtlasResult(
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            riskState: .low,
+            reviewState: .approved,
+            provenanceSourceIDs: ["source-official"],
+            fallbackReason: .none
+        )
+        let evidence = RecommendationExplanationEvidence.fromSourceAtlasQueryResult(
+            result,
+            title: "Current source"
+        )
+        let explanation = RecommendationExplanation(
+            id: "explanation-trace-complete",
+            type: .whyThis,
+            title: "Why this",
+            summary: "A current source and local correction history support this recommendation.",
+            recommendationTitle: "Review the sourced step",
+            evidence: [evidence],
+            uncertainty: [
+                RecommendationExplanationUncertainty(
+                    id: "uncertainty-duration",
+                    summary: "The exact duration still needs review."
+                )
+            ],
+            userCorrectableFields: ["duration"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-duration",
+                    kind: .changeUrgency,
+                    title: "Adjust duration",
+                    targetFieldKey: "duration"
+                )
+            ],
+            lastUpdatedAt: "2026-05-13T06:40:00Z",
+            source: .recommendation
+        )
+
+        let trace = RecommendationTrace(
+            explanation: explanation,
+            fitState: .fits,
+            receiptBehavior: .available(actionReceiptIDs: ["action-receipt-1"], proofReferenceIDs: ["proof-1"])
+        )
+
+        XCTAssertTrue(trace.isComplete)
+        XCTAssertTrue(trace.canDriveRecommendationBehavior)
+        XCTAssertEqual(trace.source.citedSourceIDs, ["source-official"])
+        XCTAssertEqual(trace.reason.explanationID, explanation.id)
+        XCTAssertEqual(trace.reason.evidenceCategoryIDs, ["source_truth"])
+        XCTAssertEqual(trace.fit.state, .fits)
+        XCTAssertEqual(trace.uncertainty.uncertaintyIDs, ["uncertainty-duration"])
+        XCTAssertEqual(trace.control.correctableFieldKeys, ["duration"])
+        XCTAssertEqual(trace.receiptBehavior.state, .receiptAvailable)
+    }
+
+    func testRecommendationTraceBlocksEvidenceLightSourceBlockedMissingControlAndMissingReceipt() {
+        let evidenceLight = RecommendationExplanation(
+            id: "explanation-trace-light",
+            type: .whyThis,
+            title: "Why this",
+            summary: "A default suggestion.",
+            recommendationTitle: "Start small",
+            lastUpdatedAt: "2026-05-13T06:41:00Z",
+            source: .system
+        )
+        let evidenceLightTrace = RecommendationTrace(
+            explanation: evidenceLight,
+            fitState: .fits,
+            receiptBehavior: .available(actionReceiptIDs: ["action-receipt-1"])
+        )
+
+        let blockedResult = Self.sourceAtlasResult(
+            sourceState: .sourceNeeded,
+            freshnessState: .unknown,
+            provenanceSourceIDs: [],
+            fallbackReason: .sourceNeeded
+        )
+        let blockedExplanation = RecommendationExplanation(
+            id: "explanation-trace-source-needed",
+            type: .whyThis,
+            title: "Why this needs source review",
+            summary: "The source state does not support recommendation behavior yet.",
+            recommendationTitle: "Review source first",
+            evidence: [.fromSourceAtlasQueryResult(blockedResult)],
+            uncertainty: [
+                RecommendationExplanationUncertainty(
+                    id: "uncertainty-source",
+                    summary: "The required source is missing."
+                )
+            ],
+            userCorrectableFields: ["source"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-source",
+                    kind: .changeRoute,
+                    title: "Add or review source",
+                    targetFieldKey: "source"
+                )
+            ],
+            lastUpdatedAt: "2026-05-13T06:42:00Z",
+            source: .recommendation
+        )
+        let blockedTrace = RecommendationTrace(
+            explanation: blockedExplanation,
+            fitState: .sourceNeeded,
+            receiptBehavior: .missing()
+        )
+
+        XCTAssertFalse(evidenceLightTrace.isComplete)
+        XCTAssertFalse(evidenceLightTrace.canDriveRecommendationBehavior)
+        XCTAssertFalse(blockedTrace.canDriveRecommendationBehavior)
+        XCTAssertEqual(blockedTrace.source.sourceAtlasBlockReasons, ["source_needed"])
+        XCTAssertEqual(blockedTrace.fit.state, .sourceNeeded)
+        XCTAssertEqual(blockedTrace.receiptBehavior.state, .receiptMissing)
+    }
 }
 
 private extension RecommendationExplanationModelsTests {

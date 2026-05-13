@@ -41,6 +41,7 @@ enum AmbitionsOSRecommendationStartHereIssue: String, Codable, Sendable, Equatab
     case controlPlaneBlocksRecommendation = "control_plane_blocks_recommendation"
     case missingExplanation = "missing_explanation"
     case missingUserControl = "missing_user_control"
+    case missingReceiptBehavior = "missing_receipt_behavior"
     case genericPriorityOnly = "generic_priority_only"
     case confidenceScoreExposed = "confidence_score_exposed"
     case guaranteedOutcomeLanguage = "guaranteed_outcome_language"
@@ -284,6 +285,11 @@ struct AmbitionsOSStartHereRecommendationValidator: Sendable, Equatable, Hashabl
         _ receipts: [AmbitionsOSProofTrustReceipt],
         issues: inout Set<AmbitionsOSRecommendationStartHereIssue>
     ) {
+        if receipts.isEmpty {
+            issues.insert(.missingReceiptBehavior)
+            return
+        }
+
         let proofValidator = AmbitionsOSProofTrustValidator()
         for receipt in receipts {
             if proofValidator.validate(receipt: receipt).isEmpty == false {
@@ -351,6 +357,127 @@ struct AmbitionsOSStartHereRecommendationValidator: Sendable, Equatable, Hashabl
             return blocked.contains(where: normalized.contains)
         }) {
             issues.insert(.harmfulRecommendationLanguage)
+        }
+    }
+}
+
+extension RecommendationTrace {
+    init(
+        startHere recommendation: AmbitionsOSStartHereRecommendation,
+        explanation: RecommendationExplanation
+    ) {
+        let evidenceModel = explanation.recommendationEvidenceModel
+        let receiptBehavior = Self.receiptBehavior(for: recommendation.proofTrustReceipts)
+        let sourceIDs = Self.sourceIDs(
+            from: recommendation.sourceClaims,
+            evidenceModel: evidenceModel
+        )
+        let blockReasons = Self.blockReasons(
+            from: recommendation.sourceClaims,
+            evidenceModel: evidenceModel
+        )
+
+        self.init(
+            id: "trace.\(recommendation.id)",
+            recommendationID: recommendation.id,
+            source: RecommendationTraceSource(
+                citedSourceIDs: sourceIDs,
+                sourceAtlasBlockReasons: blockReasons,
+                localEvidenceCategories: evidenceModel.categories,
+                canSupportRecommendation: evidenceModel.canDriveRecommendation &&
+                    recommendation.sourceClaims.allSatisfy(\.canDriveSourceSensitiveRecommendation)
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: explanation.id,
+                summary: explanation.summary,
+                evidenceCategoryIDs: evidenceModel.categories.map(\.rawValue)
+            ),
+            fit: RecommendationTraceFit(
+                state: RecommendationTraceFitState(recommendation.fitState),
+                blockReasons: blockReasons,
+                canDriveRecommendation: recommendation.fitState == .fits &&
+                    evidenceModel.canDriveRecommendation &&
+                    recommendation.sourceClaims.allSatisfy(\.canDriveSourceSensitiveRecommendation)
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: explanation.uncertainty.map(\.id).sorted(),
+                summaries: explanation.uncertainty.map(\.summary).sorted()
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: explanation.correctionActions.map(\.id).sorted(),
+                controlActionIDs: recommendation.controlActions.map(\.rawValue).sorted(),
+                correctableFieldKeys: evidenceModel.correctableFieldKeys,
+                hasRequiredControl: recommendation.controlActions.isEmpty == false &&
+                    (explanation.correctionActions.isEmpty == false || evidenceModel.correctableFieldKeys.isEmpty == false)
+            ),
+            receiptBehavior: receiptBehavior
+        )
+    }
+
+    private static func sourceIDs(
+        from claims: [AmbitionsOSSourceTruthClaim],
+        evidenceModel: RecommendationEvidenceModel
+    ) -> [String] {
+        orderedUnique(
+            evidenceModel.citedSourceIDs +
+                claims.map(\.id) +
+                claims.flatMap(\.sourceIDs) +
+                claims.flatMap(\.sourcePackIDs)
+        )
+    }
+
+    private static func blockReasons(
+        from claims: [AmbitionsOSSourceTruthClaim],
+        evidenceModel: RecommendationEvidenceModel
+    ) -> [String] {
+        orderedUnique(
+            evidenceModel.sourceAtlasBlockReasons +
+                claims.filter { $0.canDriveSourceSensitiveRecommendation == false }.map(\.state.rawValue) +
+                claims.filter { $0.freshnessState.blocksHighRiskUse }.map(\.freshnessState.rawValue) +
+                claims.filter { $0.reviewState.blocksAutomaticMutation }.map(\.reviewState.rawValue)
+        )
+    }
+
+    private static func receiptBehavior(
+        for receipts: [AmbitionsOSProofTrustReceipt]
+    ) -> RecommendationTraceReceiptBehavior {
+        if receipts.isEmpty {
+            return .missing()
+        }
+
+        let receiptIDs = orderedUnique(receipts.map(\.id))
+        let actionReceiptIDs = orderedUnique(receipts.flatMap(\.actionReceiptIDs))
+        let proofReferenceIDs = orderedUnique(receipts.flatMap(\.proofReferenceIDs))
+
+        if actionReceiptIDs.isEmpty && proofReferenceIDs.isEmpty {
+            return .required()
+        }
+
+        return .available(
+            receiptIDs: receiptIDs,
+            actionReceiptIDs: actionReceiptIDs,
+            proofReferenceIDs: proofReferenceIDs
+        )
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+}
+
+private extension RecommendationTraceFitState {
+    init(_ fitState: AmbitionsOSRecommendationFitState) {
+        switch fitState {
+        case .fits:
+            self = .fits
+        case .reviewable:
+            self = .reviewable
+        case .sourceNeeded:
+            self = .sourceNeeded
+        case .proofNeeded:
+            self = .proofNeeded
+        case .blocked:
+            self = .blocked
         }
     }
 }

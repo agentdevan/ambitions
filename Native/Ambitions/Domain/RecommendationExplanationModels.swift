@@ -1,6 +1,7 @@
 import Foundation
 
 let recommendationExplanationSchemaVersion = "recommendation_explanation.native.v1"
+let recommendationTraceSchemaVersion = "recommendation_trace.native.v1"
 
 enum RecommendationExplanationType: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case whyThis = "why_this"
@@ -332,6 +333,225 @@ enum RecommendationEvidenceStrength: String, Codable, Sendable, Equatable, Hasha
     case localEvidence = "local_evidence"
     case citedLocalRecords = "cited_local_records"
     case reviewRequired = "review_required"
+}
+
+enum RecommendationTraceFitState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case fits
+    case reviewable
+    case sourceNeeded = "source_needed"
+    case proofNeeded = "proof_needed"
+    case blocked
+}
+
+enum RecommendationTraceReceiptBehaviorState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case receiptAvailable = "receipt_available"
+    case receiptRequired = "receipt_required"
+    case receiptMissing = "receipt_missing"
+    case notApplicable = "not_applicable"
+}
+
+struct RecommendationTraceSource: Codable, Sendable, Equatable, Hashable {
+    let citedSourceIDs: [String]
+    let sourceAtlasBlockReasons: [String]
+    let localEvidenceCategories: [RecommendationExplanationEvidenceCategory]
+    let canSupportRecommendation: Bool
+}
+
+struct RecommendationTraceReason: Codable, Sendable, Equatable, Hashable {
+    let explanationID: String
+    let summary: String
+    let evidenceCategoryIDs: [String]
+}
+
+struct RecommendationTraceFit: Codable, Sendable, Equatable, Hashable {
+    let state: RecommendationTraceFitState
+    let blockReasons: [String]
+    let canDriveRecommendation: Bool
+}
+
+struct RecommendationTraceUncertainty: Codable, Sendable, Equatable, Hashable {
+    let uncertaintyIDs: [String]
+    let summaries: [String]
+}
+
+struct RecommendationTraceControl: Codable, Sendable, Equatable, Hashable {
+    let correctionActionIDs: [String]
+    let controlActionIDs: [String]
+    let correctableFieldKeys: [String]
+    let hasRequiredControl: Bool
+}
+
+struct RecommendationTraceReceiptBehavior: Codable, Sendable, Equatable, Hashable {
+    let state: RecommendationTraceReceiptBehaviorState
+    let receiptIDs: [String]
+    let actionReceiptIDs: [String]
+    let proofReferenceIDs: [String]
+    let requiresReceiptBeforeBehaviorChange: Bool
+
+    var satisfiesTraceContract: Bool {
+        switch state {
+        case .receiptAvailable:
+            return receiptIDs.isEmpty == false ||
+                actionReceiptIDs.isEmpty == false ||
+                proofReferenceIDs.isEmpty == false
+        case .receiptRequired:
+            return requiresReceiptBeforeBehaviorChange
+        case .notApplicable:
+            return requiresReceiptBeforeBehaviorChange == false
+        case .receiptMissing:
+            return false
+        }
+    }
+
+    static func available(
+        receiptIDs: [String] = [],
+        actionReceiptIDs: [String] = [],
+        proofReferenceIDs: [String] = []
+    ) -> RecommendationTraceReceiptBehavior {
+        RecommendationTraceReceiptBehavior(
+            state: .receiptAvailable,
+            receiptIDs: orderedUnique(receiptIDs),
+            actionReceiptIDs: orderedUnique(actionReceiptIDs),
+            proofReferenceIDs: orderedUnique(proofReferenceIDs),
+            requiresReceiptBeforeBehaviorChange: false
+        )
+    }
+
+    static func required() -> RecommendationTraceReceiptBehavior {
+        RecommendationTraceReceiptBehavior(
+            state: .receiptRequired,
+            receiptIDs: [],
+            actionReceiptIDs: [],
+            proofReferenceIDs: [],
+            requiresReceiptBeforeBehaviorChange: true
+        )
+    }
+
+    static func missing() -> RecommendationTraceReceiptBehavior {
+        RecommendationTraceReceiptBehavior(
+            state: .receiptMissing,
+            receiptIDs: [],
+            actionReceiptIDs: [],
+            proofReferenceIDs: [],
+            requiresReceiptBeforeBehaviorChange: true
+        )
+    }
+
+    static func notApplicable() -> RecommendationTraceReceiptBehavior {
+        RecommendationTraceReceiptBehavior(
+            state: .notApplicable,
+            receiptIDs: [],
+            actionReceiptIDs: [],
+            proofReferenceIDs: [],
+            requiresReceiptBeforeBehaviorChange: false
+        )
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+}
+
+struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let recommendationID: String
+    let source: RecommendationTraceSource
+    let reason: RecommendationTraceReason
+    let fit: RecommendationTraceFit
+    let uncertainty: RecommendationTraceUncertainty
+    let control: RecommendationTraceControl
+    let receiptBehavior: RecommendationTraceReceiptBehavior
+    let schemaVersion: String
+
+    init(
+        id: String,
+        recommendationID: String,
+        source: RecommendationTraceSource,
+        reason: RecommendationTraceReason,
+        fit: RecommendationTraceFit,
+        uncertainty: RecommendationTraceUncertainty,
+        control: RecommendationTraceControl,
+        receiptBehavior: RecommendationTraceReceiptBehavior,
+        schemaVersion: String = recommendationTraceSchemaVersion
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.recommendationID = recommendationID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.source = source
+        self.reason = reason
+        self.fit = fit
+        self.uncertainty = uncertainty
+        self.control = control
+        self.receiptBehavior = receiptBehavior
+        self.schemaVersion = schemaVersion
+    }
+
+    init(
+        explanation: RecommendationExplanation,
+        fitState: RecommendationTraceFitState = .reviewable,
+        receiptBehavior: RecommendationTraceReceiptBehavior = .required()
+    ) {
+        let evidenceModel = explanation.recommendationEvidenceModel
+        self.init(
+            id: "trace.\(explanation.id)",
+            recommendationID: explanation.id,
+            source: RecommendationTraceSource(
+                citedSourceIDs: evidenceModel.citedSourceIDs,
+                sourceAtlasBlockReasons: evidenceModel.sourceAtlasBlockReasons,
+                localEvidenceCategories: evidenceModel.categories,
+                canSupportRecommendation: evidenceModel.canDriveRecommendation
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: explanation.id,
+                summary: explanation.summary,
+                evidenceCategoryIDs: evidenceModel.categories.map(\.rawValue)
+            ),
+            fit: RecommendationTraceFit(
+                state: fitState,
+                blockReasons: evidenceModel.sourceAtlasBlockReasons,
+                canDriveRecommendation: evidenceModel.canDriveRecommendation && fitState.canDriveRecommendation
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: explanation.uncertainty.map(\.id).sorted(),
+                summaries: explanation.uncertainty.map(\.summary).sorted()
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: explanation.correctionActions.map(\.id).sorted(),
+                controlActionIDs: [],
+                correctableFieldKeys: evidenceModel.correctableFieldKeys,
+                hasRequiredControl: explanation.correctionActions.isEmpty == false || evidenceModel.correctableFieldKeys.isEmpty == false
+            ),
+            receiptBehavior: receiptBehavior
+        )
+    }
+
+    var isComplete: Bool {
+        schemaVersion == recommendationTraceSchemaVersion &&
+            id.isEmpty == false &&
+            recommendationID.isEmpty == false &&
+            reason.summary.isEmpty == false &&
+            source.localEvidenceCategories.isEmpty == false &&
+            uncertainty.uncertaintyIDs.isEmpty == false &&
+            control.hasRequiredControl &&
+            receiptBehavior.satisfiesTraceContract
+    }
+
+    var canDriveRecommendationBehavior: Bool {
+        isComplete &&
+            source.canSupportRecommendation &&
+            fit.canDriveRecommendation &&
+            receiptBehavior.state != .receiptMissing
+    }
+}
+
+private extension RecommendationTraceFitState {
+    var canDriveRecommendation: Bool {
+        switch self {
+        case .fits:
+            return true
+        case .reviewable, .sourceNeeded, .proofNeeded, .blocked:
+            return false
+        }
+    }
 }
 
 struct RecommendationEvidenceModel: Codable, Sendable, Equatable, Hashable {

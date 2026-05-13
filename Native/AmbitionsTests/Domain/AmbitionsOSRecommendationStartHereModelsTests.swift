@@ -77,6 +77,14 @@ final class AmbitionsOSRecommendationStartHereModelsTests: XCTestCase {
         XCTAssertTrue(issues.contains(.missingUserControl))
     }
 
+    func testReceiptBehaviorIsRequiredForTraceableRecommendation() {
+        let recommendation = startHere(proofTrustReceipts: [])
+
+        let issues = validator.validate(recommendation)
+
+        XCTAssertTrue(issues.contains(.missingReceiptBehavior))
+    }
+
     func testConfidenceScoreGenericPriorityGuaranteeAndBadLanguageAreBlocked() {
         let recommendation = startHere(
             exposesConfidenceScore: true,
@@ -185,6 +193,69 @@ final class AmbitionsOSRecommendationStartHereModelsTests: XCTestCase {
             }
         }
     }
+
+    func testStartHereRecommendationProducesCompleteTrace() {
+        let result = Self.sourceAtlasResult(
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            riskState: .low,
+            reviewState: .approved,
+            provenanceSourceIDs: ["source-official"],
+            fallbackReason: .none
+        )
+        let claim = AmbitionsOSStartHereRecommendation.sourceClaim(
+            from: result,
+            text: "The recommended step is grounded in an approved current source."
+        )
+        let explanation = traceExplanation(
+            evidence: [.fromSourceAtlasQueryResult(result)]
+        )
+        let recommendation = startHere(
+            sourceLabel: "Source Atlas current source",
+            sourceClaims: [claim],
+            fitState: .fits,
+            controlActions: [.adjust, .explainMore, .start]
+        )
+
+        let trace = RecommendationTrace(startHere: recommendation, explanation: explanation)
+
+        XCTAssertTrue(trace.isComplete)
+        XCTAssertTrue(trace.canDriveRecommendationBehavior)
+        XCTAssertEqual(trace.source.citedSourceIDs, ["source-atlas.result-none-official_current", "source-official", "source-pack-1"])
+        XCTAssertEqual(trace.fit.state, .fits)
+        XCTAssertEqual(trace.control.controlActionIDs, ["adjust", "explain_more", "start"])
+        XCTAssertEqual(trace.receiptBehavior.state, .receiptAvailable)
+        XCTAssertEqual(trace.receiptBehavior.actionReceiptIDs, ["action-receipt-1"])
+        XCTAssertEqual(trace.receiptBehavior.proofReferenceIDs, ["proof-1"])
+    }
+
+    func testSourceBlockedStartHereTraceCannotDriveRecommendationBehavior() {
+        let result = Self.sourceAtlasResult(
+            sourceState: .sourceNeeded,
+            freshnessState: .unknown,
+            provenanceSourceIDs: [],
+            fallbackReason: .sourceNeeded
+        )
+        let claim = AmbitionsOSStartHereRecommendation.sourceClaim(
+            from: result,
+            text: "A source is needed before this recommendation can drive behavior."
+        )
+        let explanation = traceExplanation(
+            evidence: [.fromSourceAtlasQueryResult(result)]
+        )
+        let recommendation = startHere(
+            sourceClaims: [claim],
+            proofTrustReceipts: [],
+            fitState: AmbitionsOSStartHereRecommendation.fitState(for: result)
+        )
+
+        let trace = RecommendationTrace(startHere: recommendation, explanation: explanation)
+
+        XCTAssertFalse(trace.canDriveRecommendationBehavior)
+        XCTAssertEqual(trace.fit.state, .sourceNeeded)
+        XCTAssertEqual(trace.source.sourceAtlasBlockReasons, ["needs_source_review", "source_needed", "unknown"])
+        XCTAssertEqual(trace.receiptBehavior.state, .receiptMissing)
+    }
 }
 
 private extension AmbitionsOSRecommendationStartHereModelsTests {
@@ -291,6 +362,36 @@ private extension AmbitionsOSRecommendationStartHereModelsTests {
             requiredGates: gates,
             allowedOutputs: [.recommendation, .reviewRequest],
             rationaleIDs: ["ready_start_here"]
+        )
+    }
+
+    func traceExplanation(
+        evidence: [RecommendationExplanationEvidence]
+    ) -> RecommendationExplanation {
+        RecommendationExplanation(
+            id: "explanation-trace-start-here",
+            type: .whyThis,
+            title: "Why this",
+            summary: "Current source evidence and local controls explain this recommendation.",
+            recommendationTitle: "Review the sourced step",
+            evidence: evidence,
+            uncertainty: [
+                RecommendationExplanationUncertainty(
+                    id: "uncertainty-duration",
+                    summary: "The exact duration still needs review."
+                )
+            ],
+            userCorrectableFields: ["duration"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-duration",
+                    kind: .changeUrgency,
+                    title: "Adjust duration",
+                    targetFieldKey: "duration"
+                )
+            ],
+            lastUpdatedAt: "2026-05-13T06:45:00Z",
+            source: .recommendation
         )
     }
 
