@@ -14,7 +14,8 @@
     "MRI11",
     "MRI12",
     "MRI13",
-    "MRI14"
+    "MRI14",
+    "MRI15"
   ],
   "history": [
     {
@@ -86,6 +87,11 @@
       "batch": "MRI14",
       "prompt": "prompts/batches/MRI14-GLOBAL-CORRECTION-FOLD.md",
       "marked_complete_at": "2026-05-13T10:30:40Z"
+    },
+    {
+      "batch": "MRI15",
+      "prompt": "prompts/batches/MRI15-RECOMMENDATION-REJECTION-LEARNING.md",
+      "marked_complete_at": "2026-05-13T11:34:31Z"
     }
   ]
 }
