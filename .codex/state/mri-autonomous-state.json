@@ -12,7 +12,8 @@
     "MRI09",
     "MRI10",
     "MRI11",
-    "MRI12"
+    "MRI12",
+    "MRI13"
   ],
   "history": [
     {
@@ -74,6 +75,11 @@
       "batch": "MRI12",
       "prompt": "prompts/batches/MRI12-PERSONAL-RUNTIME-INSPECTION.md",
       "marked_complete_at": "2026-05-13T09:05:25Z"
+    },
+    {
+      "batch": "MRI13",
+      "prompt": "prompts/batches/MRI13-LOCAL-LEARNING-CONTROLS.md",
+      "marked_complete_at": "2026-05-13T09:54:49Z"
     }
   ]
 }
