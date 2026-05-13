@@ -91,8 +91,8 @@ Reality Meridian
 
 ### Region 3: Start Here or active Step object
 
-- Purpose: Show how Start Here or active Step object behaves and explains state inside Today Reality Meridian Rail.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Anchor the rail around the active Start Here node so the user can see where the current Step sits on the Reality Meridian without reading a chronological list.
+- Contains: Active Step node, Start Here label, fit reason, source freshness badge, proof-trail link, closure affordance, and current receipt shelf attachment.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -109,8 +109,8 @@ Reality Meridian
 
 ### Region 4: Now / Next / Later continuity
 
-- Purpose: Show how Now / Next / Later continuity behaves and explains state inside Today Reality Meridian Rail.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Make continuity visible as attachment along the Meridian: Now is strongest, Next is prepared, Later is parked without becoming a backlog.
+- Contains: Now / Next / Later markers, LuminousTrace attachment, waiting or blocked state labels, disclosure chevrons, and recommendation-source indicators.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -127,8 +127,8 @@ Reality Meridian
 
 ### Region 5: Commitments and protected-time edge
 
-- Purpose: Show how Commitments and protected-time edge behaves and explains state inside Today Reality Meridian Rail.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Show boundaries that shape the rail, including protected time, immovable commitments, overloaded pressure, and any reflow preview the user can inspect.
+- Contains: Protected-time lock marker, commitment edge marker, pressure or recovery label, reflow preview disclosure, undo/cancel route, and receipt shelf status.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -242,7 +242,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Reality Meridian rails keep source freshness, proof, and recovery attached to the current-day object.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

@@ -4,4 +4,4 @@ Status: Superseded intended source-family input map
 
 This matrix is retained for compatibility only. Use `TRAIN_FAMILY_TO_SURFACE_MATRIX.md`, `TRAIN_FAMILY_TO_OBJECT_MATRIX.md`, and `TRAIN_FAMILY_TO_PRIMITIVE_MATRIX.md` for the broader all-train extraction.
 
-MRI and HBI remain entries in the broader planned train/source-family system; they are not the only source-family overlays.
+MRI and HBI remain entries in the broader planned train/source-family system; they are source-family overlays, not frontend objects, and they do not override active truth.

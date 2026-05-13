@@ -671,7 +671,7 @@
     "affected_surfaces": [
       "Global App Shell",
       "All surface recipes",
-      "All object bibles"
+      "All source-family overlays"
     ],
     "affected_objects": [
       "Reality Meridian",
@@ -751,7 +751,7 @@
       "planning language should remain contextual, not top-level IA"
     ],
     "conflicts": [
-      "Plan as top-level is not allowed"
+      "Plan remains contextual/internal compatibility language"
     ],
     "precedence_rank": 1,
     "recency_evidence": "Planning appears in current canon, recipes, and batch paths.",

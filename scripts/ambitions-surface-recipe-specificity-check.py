@@ -30,6 +30,21 @@ GENERIC_FILLER_PHRASES = [
     'it exists so ambitions has an explicit final-state visual recipe',
     'express the specific visual meaning',
 ]
+PRIORITY_RECIPE_NAMES = {
+    'today_root_reality_meridian.md',
+    'today_start_here_region.md',
+    'today_reality_meridian_rail.md',
+    'goals_root_constellation_atlas.md',
+    'goals_proof_trail.md',
+    'capture_root_atmosphere_composer.md',
+    'time_root_lifeshape_field.md',
+    'you_root_user_system_profile.md',
+    'commitment_staging_tray.md',
+    'reflow_preview_tray.md',
+    'recommendation_source_system.md',
+    'receipt_system.md',
+    'proof_trail_system.md',
+}
 
 def fail(msgs):
     if msgs:
@@ -67,6 +82,28 @@ for item in items:
     for phrase in GENERIC_FILLER_PHRASES:
         if phrase in lowered:
             msgs.append(f"{item.get('name')} still contains filler phrase: {phrase}")
+
+    priority_phrase_map = {
+        'today_root_reality_meridian.md': ['reality meridian', 'source freshness badge', 'receipt system', 'proof trail'],
+        'today_start_here_region.md': ['start here', 'now / next / later', 'closure system', 'source freshness badge'],
+        'today_reality_meridian_rail.md': ['reality meridian', 'receipt shelf', 'protected-time', 'source freshness badge'],
+        'goals_root_constellation_atlas.md': ['constellation atlas', 'proof trail', 'life area', 'goal thread'],
+        'goals_proof_trail.md': ['proof trail', 'proof gap', 'receipt system', 'recovery'],
+        'capture_root_atmosphere_composer.md': ['atmosphere composer', 'route reveal', 'receipt confirmation', 'proof trail'],
+        'time_root_lifeshape_field.md': ['lifeshape field', 'protected time', 'pressure', 'best-fit'],
+        'you_root_user_system_profile.md': ['user system profile', 'local runtime', 'privacy', 'reset'],
+        'commitment_staging_tray.md': ['commitment staging tray', 'confirm', 'cancel', 'undo', 'protected'],
+        'reflow_preview_tray.md': ['reflow preview tray', 'before/after', 'best-fit', 'undo'],
+        'recommendation_source_system.md': ['recommendation source system', 'source', 'correction', 'why this'],
+        'receipt_system.md': ['receipt system', 'receipt-confirmed', 'undo', 'source'],
+        'proof_trail_system.md': ['proof trail system', 'proof', 'receipt', 'source'],
+    }
+    if recipe_path.name in PRIORITY_RECIPE_NAMES:
+        if 'purpose: show how ' in lowered:
+            msgs.append(f"{item.get('name')} priority recipe still contains generated purpose phrasing")
+        for phrase in priority_phrase_map.get(recipe_path.name, []):
+            if phrase not in lowered:
+                msgs.append(f"{item.get('name')} is missing priority specificity phrase: {phrase}")
 
     specificity = item.get('specificity_status')
     if specificity not in {'high_specificity', 'medium_specificity', 'low_specificity', 'unresolved_direction'}:

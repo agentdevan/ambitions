@@ -29,7 +29,7 @@ A cross-surface primitive or system that standardizes receipts, proof, source, d
 The user should understand the surface’s object, state, and affordance without generic productivity chrome or decorative ambiguity.
 
 ## Why This Surface Exists
-This recipe defines the intended final-state visual contract for Proof Trail System: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
+This surface recipe records the final-state visual intent for Proof Trail System.
 
 ## Primary Object
 Shared object system
@@ -51,8 +51,8 @@ Shared object system
 
 ### Region 1: Semantic label
 
-- Purpose: Show how Semantic label changes the visible hierarchy, source/proof meaning, and available action for Proof Trail System.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Name proof as preserved progress tied to a real Step, Goal Thread, pivot, receipt, or closure rather than a decorative history marker.
+- Contains: Proof Trail System label, proof type, owning object, source freshness, proof gap marker, and disclosure affordance.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -69,8 +69,8 @@ Shared object system
 
 ### Region 2: Object/state body
 
-- Purpose: Show how Object/state body changes the visible hierarchy, source/proof meaning, and available action for Proof Trail System.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Show what the proof changes for the owning object: confidence, continuity, pivot transfer, closure memory, or unresolved proof gap.
+- Contains: Proof body, owning object state, receipt link, source basis, proof-transfer note, recovery context, and unresolved gap explanation.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -105,8 +105,8 @@ Shared object system
 
 ### Region 4: Disclosure or command affordance
 
-- Purpose: Show how Disclosure or command affordance changes the visible hierarchy, source/proof meaning, and available action for Proof Trail System.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Offer proof inspection, proof attachment, correction, or gap resolution without turning proof into social feed, score, or generic progress badge.
+- Contains: View proof, Add proof, Correct source, Resolve gap, related receipt, undo where valid, and object-origin return path.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -123,8 +123,8 @@ Shared object system
 
 ### Region 5: Accessibility state text
 
-- Purpose: Show how Accessibility state text changes the visible hierarchy, source/proof meaning, and available action for Proof Trail System.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Preserve proof meaning for nonvisual and high-text-scale use by naming owner, proof type, state, source, and available control in order.
+- Contains: VoiceOver proof summary, proof gap state, source/proof availability, related receipt, action consequence, and Reduce Motion static equivalent.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -216,7 +216,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Proof trail rows keep evidence, source, and recovery attached to the real object they explain.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

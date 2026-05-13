@@ -51,6 +51,8 @@ for item in items:
         msgs.append(f"{item.get('name')} missing train_family_influence")
     if 'color' not in str(item.get('accessibility_intent', '')).lower():
         msgs.append(f"{item.get('name')} missing non-color accessibility intent")
+    if 'object bible' in str(item).lower() or 'frontend object bible' in str(item).lower():
+        msgs.append(f"{item.get('name')} still contains object-bible framing")
     for field in ['visual_id', 'name', 'object_family', 'intended_role']:
         value = str(item.get(field, ''))
         if ('MRI' in value or 'HBI' in value) and not any(fam in [s.lower() for s in item.get('train_family_sources', [])] for fam in ['mri', 'hbi']):

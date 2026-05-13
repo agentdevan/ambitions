@@ -93,8 +93,8 @@ Reality Meridian
 
 ### Region 3: Start Here or active Step object
 
-- Purpose: Show how Start Here or active Step object behaves and explains state inside Today Start Here Region.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Keep Start Here as the current-action aperture, with the active Step, fit reason, and closure path stronger than any surrounding Today metadata.
+- Contains: Start Here label, active Step title, time-fit or energy-fit reason, source freshness badge, proof attachment affordance, Still Counts path, and receipt expectation.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -111,8 +111,8 @@ Reality Meridian
 
 ### Region 4: Now / Next / Later continuity
 
-- Purpose: Show how Now / Next / Later continuity behaves and explains state inside Today Start Here Region.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Let the user understand what follows without splitting attention; Now remains primary while Next and Later stay compact and inspectable.
+- Contains: Now / Next / Later sequence labels, current state markers, one-line order reason, waiting or blocked disclosure, and source/proof attachment for recommendation order.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -129,8 +129,8 @@ Reality Meridian
 
 ### Region 5: Commitments and protected-time edge
 
-- Purpose: Show how Commitments and protected-time edge behaves and explains state inside Today Start Here Region.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Make protected time and commitments act as visible boundaries around Start Here instead of hidden scheduling pressure.
+- Contains: Protected-time lock line, commitment conflict note, recovery or reflow entry, cancel path, and receipt preview before any adjustment is committed.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -244,7 +244,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Start Here stays attached to Reality Meridian, with source and recovery visible before any action.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

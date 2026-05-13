@@ -93,8 +93,8 @@ Reality Meridian
 
 ### Region 3: Start Here or active Step object
 
-- Purpose: Show how Start Here or active Step object behaves and explains state inside Today Root / Reality Meridian.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Make Start Here the single executable node on the Reality Meridian, with the current Step, fit reason, source freshness, proof path, and closure route visibly attached before secondary continuity appears.
+- Contains: Recommended Step title, current fit reason, source freshness badge, protected-time note, proof-trail link, closure system entry point, and receipt expectation for any commit or adjustment.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -111,8 +111,8 @@ Reality Meridian
 
 ### Region 4: Now / Next / Later continuity
 
-- Purpose: Show how Now / Next / Later continuity behaves and explains state inside Today Root / Reality Meridian.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Preserve sequence without turning Today into a task list by showing Now as dominant, Next as ready context, and Later as a quiet continuity edge tied to the same current-day object.
+- Contains: Now / Next / Later labels, one-line reason for order, waiting or blocked markers where present, disclosure into Step detail, and source/proof indicators for recommendation order.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -129,8 +129,8 @@ Reality Meridian
 
 ### Region 5: Commitments and protected-time edge
 
-- Purpose: Show how Commitments and protected-time edge behaves and explains state inside Today Root / Reality Meridian.
-- Contains: Reality Meridian; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to today.
+- Purpose: Show what today must respect before the user commits, so protected time, immovable commitments, and overloaded pressure are visible as constraints rather than interruptions.
+- Contains: Protected-time lock line, upcoming commitment edge, pressure or recovery marker, reflow preview entry, cancellation path, and receipt preview for any proposed move.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -244,7 +244,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Reality Meridian stays first, source freshness and proof stay attached, and recovery reads as part of the current-day object.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

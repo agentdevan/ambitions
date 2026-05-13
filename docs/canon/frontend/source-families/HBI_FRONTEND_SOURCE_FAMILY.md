@@ -6,11 +6,11 @@ Destination: Cross-surface
 
 ## What It Is
 
-HBI is a source family and overlay input, not a frontend object. It exists to capture historical-baseline direction from `docs/codex/HISTORICAL_BASELINE_*`, then map that direction onto real Ambitions surfaces, states, receipts, and recovery comparisons.
+HBI is a source family and overlay input, not a frontend object or visual object family. It exists to capture historical-baseline direction from `docs/codex/HISTORICAL_BASELINE_*`, then map that direction onto real Ambitions surfaces, states, receipts, and recovery comparisons.
 
 ## What It Is Not
 
-HBI is not an object bible, not a visual object family, not implementation proof, and not release proof.
+HBI is not a visual object family, not implementation proof, and not release proof.
 
 ## Where It Appears
 

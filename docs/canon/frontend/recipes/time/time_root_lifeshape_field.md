@@ -73,8 +73,8 @@ LifeShape Field
 
 ### Region 2: Open/protected/pressure/best-fit field
 
-- Purpose: Show how Open/protected/pressure/best-fit field behaves and explains state inside Time Root / LifeShape Field.
-- Contains: LifeShape Field; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to time.
+- Purpose: Make the LifeShape Field read as capacity, not a calendar grid, by showing open time, protected time, pressure, and best-fit opportunities as semantic regions.
+- Contains: Open/protected/pressure/best-fit markers, selected horizon label, source freshness line, protected-time lock, pressure explanation, and route to best-fit detail.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -91,8 +91,8 @@ LifeShape Field
 
 ### Region 3: Selected horizon detail
 
-- Purpose: Show how Selected horizon detail behaves and explains state inside Time Root / LifeShape Field.
-- Contains: LifeShape Field; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to time.
+- Purpose: Let the user inspect day, week, month, year, or life-range detail without widening root IA or flattening Time into a schedule table.
+- Contains: Horizon scope control, selected horizon summary, capacity and protection labels, unavailable/stale source state, disclosure into detail, and VoiceOver horizon summary.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -109,8 +109,8 @@ LifeShape Field
 
 ### Region 4: Reflow or explanation affordance
 
-- Purpose: Show how Reflow or explanation affordance behaves and explains state inside Time Root / LifeShape Field.
-- Contains: LifeShape Field; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to time.
+- Purpose: Make reflow consentful and explainable by previewing movement, preserved proof, protected blocks, source basis, and receipt before any schedule-shaped change.
+- Contains: Reflow preview entry, Why this? affordance, protected-time lock line, best-fit reason, cancel path, undo expectation, and expected receipt.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -241,7 +241,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: LifeShape Field stays capacity-first, with protected time, pressure, and best-fit read as field states.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

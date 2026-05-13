@@ -5,8 +5,8 @@ Status: Active intended final-state train-family matrix
 | Train Family | Display Name | Representative Primitives | Representative States | Frontend Relevance | Canon Impact |
 |---|---|---|---|---|---|
 | `pk` | PK | Source Freshness Badge, Receipt rows, Proof rows | fresh, stale, protected | surface_behavior | PK shapes source-backed state and recovery language. |
-| `mri` | MRI | Source Freshness Badge, Why This Sheet, Receipt System | fresh, stale, uncertain | privacy_trust | MRI shapes inspectable source and correction language. |
-| `hbi` | HBI | Historical comparison labels, Receipt rows, Proof rows | proven, gap, recovered | surface_behavior | HBI shapes recovery and comparison language. |
+| `mri` | MRI | Source Freshness Badge, Why This Sheet, Receipt System | fresh, stale, uncertain | privacy_trust | MRI shapes inspectable source and correction language as a source-family overlay. |
+| `hbi` | HBI | Historical comparison labels, Receipt rows, Proof rows | proven, gap, recovered | surface_behavior | HBI shapes recovery and comparison language as a source-family overlay. |
 | `lid` | LID | source freshness badge, reason rows, correction rows | fresh, stale, local-only | runtime_source | LID supports inspectable local intelligence and freshness language. |
 | `aos` | AOS | trust controls, reason rows, local runtime summaries | local-only, trusted, paused | runtime_source | AOS shapes runtime trust and execution posture. |
 | `rec` | REC | receipt row, proof row, source row | receipt-confirmed, recovered, unresolved | surface_behavior | REC keeps changes inspectable and reversible. |

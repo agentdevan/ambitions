@@ -53,8 +53,8 @@ Atmosphere Composer
 
 ### Region 1: Composer atmosphere field
 
-- Purpose: Show how Composer atmosphere field behaves and explains state inside Capture Root / Atmosphere Composer.
-- Contains: Atmosphere Composer; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to capture.
+- Purpose: Establish the Atmosphere Composer as a quiet input field with enough context to capture anything without turning the root into a notes feed or chat transcript.
+- Contains: Composer field, local-only state label, optional attachment/proof indicators, source availability marker, and a compact route-reveal anchor that appears only after input.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -71,8 +71,8 @@ Atmosphere Composer
 
 ### Region 2: Input affordance
 
-- Purpose: Show how Input affordance behaves and explains state inside Capture Root / Atmosphere Composer.
-- Contains: Atmosphere Composer; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to capture.
+- Purpose: Make the input affordance immediate, native, and low-friction while preserving visible alternatives for text, voice, attachment, and correction.
+- Contains: Primary capture input, attachment affordance, correction/clear control, local storage reassurance, and accessible labels for input mode and current draft state.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -89,8 +89,8 @@ Atmosphere Composer
 
 ### Region 3: Route reveal or placement options
 
-- Purpose: Show how Route reveal or placement options behaves and explains state inside Capture Root / Atmosphere Composer.
-- Contains: Atmosphere Composer; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to capture.
+- Purpose: Reveal placement after capture as concrete routes into Today, Goals, Time, or Held, with each option showing consequence, source basis, and receipt behavior.
+- Contains: Route reveal options, Needs a Place state, proposed Step/Goal/Held labels, source or confidence caveat, confirmation command, cancel path, and expected receipt.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -125,8 +125,8 @@ Atmosphere Composer
 
 ### Region 5: Local-only/error state
 
-- Purpose: Show how Local-only/error state behaves and explains state inside Capture Root / Atmosphere Composer.
-- Contains: Atmosphere Composer; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to capture.
+- Purpose: Keep local-only, offline, parse-uncertain, and error states calm and recoverable so capture never implies cloud dependency or silent loss.
+- Contains: Local-only badge, saved draft status, retry or edit route, parse uncertainty label, no-data-loss reassurance, and receipt or no-receipt explanation.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -239,7 +239,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Atmosphere Composer stays quiet and immediate, with route reveal and proof attached after input.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

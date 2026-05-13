@@ -72,8 +72,8 @@ User System Profile
 
 ### Region 2: Settings-style section body
 
-- Purpose: Show how Settings-style section body behaves and explains state inside You Root / User System Profile.
-- Contains: User System Profile; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to you.
+- Purpose: Organize You as a native settings-style control surface for the user's system, with privacy, planning defaults, runtime learning, and reset controls grouped by consequence.
+- Contains: Settings-style sections, Trust & Automation row, Personal Runtime row, Privacy row, Planning Defaults row, reset/forget controls, and receipt/source indicators.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -90,8 +90,8 @@ User System Profile
 
 ### Region 3: Trust/local runtime explanation
 
-- Purpose: Show how Trust/local runtime explanation behaves and explains state inside You Root / User System Profile.
-- Contains: User System Profile; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to you.
+- Purpose: Explain local runtime behavior as inspectable rules, sources, corrections, and resets rather than AI model language or social profile attributes.
+- Contains: Local runtime summary, learned defaults, source freshness, correction history, reset control, privacy boundary, and receipt expectation for changed settings.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -144,8 +144,8 @@ User System Profile
 
 ### Region 6: Warning/offline/first-run state
 
-- Purpose: Show how Warning/offline/first-run state behaves and explains state inside You Root / User System Profile.
-- Contains: User System Profile; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to you.
+- Purpose: Keep warning, offline, and first-run states actionable and non-alarming while preserving local-first privacy and clear setup deferral.
+- Contains: Offline/local-only label, first-run setup prompt, warning explanation, setup-later control, reset/forget route, source state, and VoiceOver consequence summary.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -237,7 +237,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: User System Profile stays settings-like, with local runtime, privacy, reset, and trust controls visible.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

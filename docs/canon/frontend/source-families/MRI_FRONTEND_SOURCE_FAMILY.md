@@ -6,11 +6,11 @@ Destination: Cross-surface
 
 ## What It Is
 
-MRI is a source family and overlay input, not a frontend object. It exists to collect Moat Runtime Integration direction from `docs/codex/MOAT_RUNTIME_*`, then map that direction onto real Ambitions surfaces, states, receipts, and trust affordances.
+MRI is a source family and overlay input, not a frontend object or visual object family. It exists to collect Moat Runtime Integration direction from `docs/codex/MOAT_RUNTIME_*`, then map that direction onto real Ambitions surfaces, states, receipts, and trust affordances.
 
 ## What It Is Not
 
-MRI is not an object bible, not a visual object family, not implementation proof, and not release proof.
+MRI is not a visual object family, not implementation proof, and not release proof.
 
 ## Where It Appears
 

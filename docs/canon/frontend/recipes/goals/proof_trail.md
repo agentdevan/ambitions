@@ -72,7 +72,7 @@ Constellation Atlas
 
 ### Region 2: Life area or goal-thread focus
 
-- Purpose: Show how Life area or goal-thread focus behaves and explains state inside Proof Trail.
+- Purpose: Keep Proof Trail attached to the life area or goal thread that earned it, so proof reads as preserved progress rather than decorative history.
 - Contains: Constellation Atlas; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to goals.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
@@ -108,7 +108,7 @@ Constellation Atlas
 
 ### Region 4: Recommended step or blocker path
 
-- Purpose: Show how Recommended step or blocker path behaves and explains state inside Proof Trail.
+- Purpose: Show whether a recommendation, blocker, or recovery path is backed by proof, missing proof, or a receipt that needs inspection.
 - Contains: Constellation Atlas; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to goals.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
@@ -144,7 +144,7 @@ Constellation Atlas
 
 ### Region 6: Review/recovery/archive state
 
-- Purpose: Show how Review/recovery/archive state behaves and explains state inside Proof Trail.
+- Purpose: Make review, recovery, and archive states preserve proof continuity, including proof gaps and non-shaming paths back into action.
 - Contains: Constellation Atlas; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to goals.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
@@ -239,7 +239,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: proof trail rows read as evidence continuity, not dashboard metrics, and keep recovery visible.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

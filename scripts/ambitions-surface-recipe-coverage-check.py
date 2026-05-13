@@ -27,6 +27,21 @@ SCALABLE_PATTERNS = [
     'implementation mapping required', 'release-ready', 'testflight-ready',
     'app store-ready',
 ]
+PRIORITY_RECIPE_NAMES = {
+    'today_root_reality_meridian.md',
+    'today_start_here_region.md',
+    'today_reality_meridian_rail.md',
+    'goals_root_constellation_atlas.md',
+    'goals_proof_trail.md',
+    'capture_root_atmosphere_composer.md',
+    'time_root_lifeshape_field.md',
+    'you_root_user_system_profile.md',
+    'commitment_staging_tray.md',
+    'reflow_preview_tray.md',
+    'recommendation_source_system.md',
+    'receipt_system.md',
+    'proof_trail_system.md',
+}
 
 def fail(msgs):
     if msgs:
@@ -68,6 +83,14 @@ for item in items:
     for phrase in SCALABLE_PATTERNS:
         if phrase in lowered:
             msgs.append(f"{item.get('name')} contains forbidden proof/release phrase: {phrase}")
+    if recipe.name in PRIORITY_RECIPE_NAMES:
+        for phrase in [
+            'this recipe defines the intended final-state visual contract',
+            'it remains design canon only; it is not swiftui instruction, screenshot proof, implementation status, or release evidence',
+            'visual canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift',
+        ]:
+            if phrase in lowered:
+                msgs.append(f"{item.get('name')} still contains scaffold phrase: {phrase}")
     if 'plan as top-level' in lowered or 'plan tab' in lowered:
         msgs.append(f"{item.get('name')} revives Plan as top-level")
 

@@ -29,7 +29,7 @@ The Time-specific preview tray for schedule/capacity changes. It shows before/af
 The user should see a calm transaction preview: what will change, what will not change, why, and how to confirm or back out.
 
 ## Why This Surface Exists
-This recipe defines the intended final-state visual contract for Reflow Preview Tray: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
+This surface recipe records the final-state visual intent for Reflow Preview Tray.
 
 ## Primary Object
 Shared object system
@@ -52,8 +52,8 @@ Shared object system
 
 ### Region 1: Before/after LifeShape summary
 
-- Purpose: Show how Before/after LifeShape summary changes the visible hierarchy, source/proof meaning, and available action for Reflow Preview Tray.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Compare before/after capacity as a cross-surface consequence preview, keeping LifeShape change, proof preservation, and expected receipt visible above controls.
+- Contains: Before/after LifeShape summary, source freshness badge, proof-transfer note, pressure/protection delta, affected object count, and expected receipt.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -70,8 +70,8 @@ Shared object system
 
 ### Region 2: Proposed movement list
 
-- Purpose: Show how Proposed movement list changes the visible hierarchy, source/proof meaning, and available action for Reflow Preview Tray.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Present proposed movements as inspectable object changes rather than a schedule spreadsheet, with origin, destination, reason, and undoability per row.
+- Contains: Movement rows, origin/destination labels, fit reason, conflict or stale-source marker, remove-from-preview control, and disclosure to affected object.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -88,8 +88,8 @@ Shared object system
 
 ### Region 3: Protected time lock line
 
-- Purpose: Show how Protected time lock line changes the visible hierarchy, source/proof meaning, and available action for Reflow Preview Tray.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Keep protected time and unchanged commitments visibly locked so the preview proves its boundary before the user commits.
+- Contains: Protected-time lock line, unchanged commitment labels, proof-preserved note, source owner, no-change explanation, and accessible unchanged-state summary.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -106,8 +106,8 @@ Shared object system
 
 ### Region 4: Best-fit explanation
 
-- Purpose: Show how Best-fit explanation changes the visible hierarchy, source/proof meaning, and available action for Reflow Preview Tray.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Explain best-fit as inspectable local reasoning, including source basis, uncertainty, correction route, and why the proposed movement respects protected constraints.
+- Contains: Best-fit reason, Why this? disclosure, source freshness badge, uncertainty marker, correction control, and receipt preview.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -236,7 +236,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Reflow preview reads as before/after fit, protected time, and undoable movement, with no betting, sportsbook, or urgency framing.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

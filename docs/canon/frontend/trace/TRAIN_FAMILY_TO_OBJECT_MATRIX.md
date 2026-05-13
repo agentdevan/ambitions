@@ -5,8 +5,8 @@ Status: Active intended final-state train-family matrix
 | Train Family | Display Name | Representative Objects | Direction Decisions | Conflicts | Status |
 |---|---|---|---|---|---|
 | `pk` | PK | Reality Meridian, Constellation Atlas, Atmosphere Composer | source/proof/receipt continuity stays visible, Plan never returns as a top-level destination | current implementation never outranks intended final-state direction | active_planned |
-| `mri` | MRI | Reality Meridian, Atmosphere Composer, User System Profile | source basis and correction paths remain inspectable | MRI is one entry in the broader all-train map, not the only overlay lane | supporting |
-| `hbi` | HBI | Proof Trail, LifeShape Field, User System Profile | historical comparison stays inspectable, proof continuity stays attached to the object | HBI is one entry inside the broader source-family system | supporting |
+| `mri` | MRI | Reality Meridian, Atmosphere Composer, User System Profile | source basis and correction paths remain inspectable | MRI is a source-family overlay, not a frontend object or bible | supporting |
+| `hbi` | HBI | Proof Trail, LifeShape Field, User System Profile | historical comparison stays inspectable, proof continuity stays attached to the object | HBI is a source-family overlay, not a frontend object or bible | supporting |
 | `lid` | LID | Reality Meridian, Atmosphere Composer, User System Profile | source freshness and local intelligence should be inspectable | LID stays subordinate to local-first privacy rules | active_planned |
 | `aos` | AOS | Local Runtime Trust Panel, Personal Runtime, User System Profile | AOS may inform runtime-source language but never hidden inference | AOS does not authorize hosted AI or chatbot posture | active_planned |
 | `rec` | REC | Receipt System, Proof Trail, Closure System | meaningful change should expose a receipt or a no-receipt reason | receipt/proof language should not become generic transaction or gambling language | active_planned |

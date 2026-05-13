@@ -55,8 +55,8 @@ LifeShape Field
 
 ### Region 1: Before/after LifeShape summary
 
-- Purpose: Show how Before/after LifeShape summary behaves and explains state inside Reflow Preview Tray.
-- Contains: LifeShape Field; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to time.
+- Purpose: Compare the current and proposed LifeShape Field as before/after capacity, protection, and pressure so the user sees consequence before committing.
+- Contains: Before/after LifeShape summaries, moved Step count, protected-time preservation, pressure delta, source freshness badge, and receipt expectation.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -73,8 +73,8 @@ LifeShape Field
 
 ### Region 2: Proposed movement list
 
-- Purpose: Show how Proposed movement list behaves and explains state inside Reflow Preview Tray.
-- Contains: LifeShape Field; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to time.
+- Purpose: List proposed moves as inspectable time changes with origin, destination, fit reason, and proof preservation attached to each row.
+- Contains: Proposed movement rows, source reason, proof-transfer note, conflict marker, remove-from-preview control, and disclosure to affected Step or Time detail.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -91,8 +91,8 @@ LifeShape Field
 
 ### Region 3: Protected time lock line
 
-- Purpose: Show how Protected time lock line behaves and explains state inside Reflow Preview Tray.
-- Contains: LifeShape Field; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to time.
+- Purpose: Make unchanged protected time explicit so reflow feels consentful and bounded rather than silently rearranging the user's day.
+- Contains: Protected-time lock line, unchanged blocks, owner/source label, no-change explanation, and VoiceOver state that names what remains protected.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -109,8 +109,8 @@ LifeShape Field
 
 ### Region 4: Best-fit explanation
 
-- Purpose: Show how Best-fit explanation behaves and explains state inside Reflow Preview Tray.
-- Contains: LifeShape Field; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to time.
+- Purpose: Explain best-fit as deterministic capacity reasoning: why the proposed slot fits, what sources were used, and what uncertainty remains.
+- Contains: Best-fit reason, source freshness, uncertainty or stale-source marker, Why this? disclosure, correction route, and no-claim language for missing data.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -242,7 +242,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Reflow preview reads as before/after fit, protected time, and undoable movement, with no betting, sportsbook, or urgency framing.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

@@ -29,7 +29,7 @@ A cross-surface primitive or system that standardizes receipts, proof, source, d
 The user should understand the surface’s object, state, and affordance without generic productivity chrome or decorative ambiguity.
 
 ## Why This Surface Exists
-This recipe defines the intended final-state visual contract for Recommendation Source System: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
+This surface recipe records the final-state visual intent for Recommendation Source System.
 
 ## Primary Object
 Shared object system
@@ -51,8 +51,8 @@ Shared object system
 
 ### Region 1: Semantic label
 
-- Purpose: Show how Semantic label changes the visible hierarchy, source/proof meaning, and available action for Recommendation Source System.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Name the recommendation's source class plainly so the user sees whether the suggestion came from goal proof, time fit, closure history, source freshness, or manual choice.
+- Contains: Source label, freshness state, recommendation source system object name, local-runtime note, uncertainty marker, and disclosure affordance.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -69,8 +69,8 @@ Shared object system
 
 ### Region 2: Object/state body
 
-- Purpose: Show how Object/state body changes the visible hierarchy, source/proof meaning, and available action for Recommendation Source System.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Attach the recommendation body to its real object and state so it explains fit without generic AI confidence or black-box assistant copy.
+- Contains: Recommended object, state reason, capacity/proof basis, correction route, stale or missing source message, and receipt behavior for accepted changes.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -105,8 +105,8 @@ Shared object system
 
 ### Region 4: Disclosure or command affordance
 
-- Purpose: Show how Disclosure or command affordance changes the visible hierarchy, source/proof meaning, and available action for Recommendation Source System.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Offer Why this?, correction, decline, or accept paths with clear consequence and no silent learning or mutation.
+- Contains: Why this? disclosure, correction command, accept/decline controls, reset-learning route where relevant, and expected receipt or no-receipt reason.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -123,8 +123,8 @@ Shared object system
 
 ### Region 5: Accessibility state text
 
-- Purpose: Show how Accessibility state text changes the visible hierarchy, source/proof meaning, and available action for Recommendation Source System.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Give VoiceOver and Dynamic Type users the same source, reason, uncertainty, correction, and action consequence available visually.
+- Contains: VoiceOver source summary, reason text, uncertainty label, current action state, correction affordance, and receipt expectation.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -216,7 +216,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Recommendation source is inspectable, correction-aware, and tied to a real object rather than a model claim.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

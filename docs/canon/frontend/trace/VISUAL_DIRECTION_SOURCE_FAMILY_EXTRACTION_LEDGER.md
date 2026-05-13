@@ -64,7 +64,7 @@ This ledger records source-family and overlay inputs that informed final-state f
 - Affected real surface(s): Today Recommended Step Object, Capture Post-Input Route Reveal, Local Runtime Trust Panel, Recommendation Source System
 - Affected real object(s): Reality Meridian, Atmosphere Composer, User System Profile, Recommendation Source System, Source Freshness Badge
 - Affected primitive/state/accessibility behavior: inspectable source labels, correction states, explicit return path, Dynamic Type and VoiceOver summaries
-- Source precedence: MRI is a source family, not an object bible
+- Source precedence: MRI is a source family input, not an object or visual bible
 - Conflict resolution: only truth-compatible direction is extracted
 - Unresolved extraction gaps: runtime/source projection detail remains unresolved
 - Ledger update target: source-family integration map and priority recipes
@@ -77,7 +77,7 @@ This ledger records source-family and overlay inputs that informed final-state f
 - Affected real surface(s): Proof Trail, Pressure Region, Local Runtime Trust Panel, receipt and recovery states
 - Affected real object(s): Proof Trail, LifeShape Field, User System Profile, Receipt System
 - Affected primitive/state/accessibility behavior: visible history, source comparison, non-score framing, accessibility-preserved state labels
-- Source precedence: HBI is a source family, not an object bible
+- Source precedence: HBI is a source family input, not an object or visual bible
 - Conflict resolution: only truth-compatible direction is extracted
 - Unresolved extraction gaps: baseline detail is direction-only and not screenshot-proven
 - Ledger update target: source-family integration map and priority recipes

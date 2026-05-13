@@ -70,8 +70,8 @@ Commitment Staging Tray
 
 ### Region 2: Proposed commitment stack
 
-- Purpose: Show how Proposed commitment stack behaves and explains state inside Commitment Staging Tray.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Stage proposed commitments as a calm change set, with each row showing what will be created, moved, shortened, held, or closed before the user confirms.
+- Contains: Proposed commitment rows, origin surface, affected object label, source/proof basis, expected receipt, remove-from-stage control, and consequence summary.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -88,8 +88,8 @@ Commitment Staging Tray
 
 ### Region 3: Protected/unchanged line
 
-- Purpose: Show how Protected/unchanged line behaves and explains state inside Commitment Staging Tray.
-- Contains: Shared object system; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to cross surface.
+- Purpose: Show what will not change, especially protected time, existing proof, and untouched commitments, so the tray never borrows urgency from market-transaction patterns.
+- Contains: Protected/unchanged label, lock icon with text, affected object count, proof-preserved note, source freshness badge, and VoiceOver summary of unchanged state.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
 - Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
@@ -236,7 +236,7 @@ Keep one dominant decision or one state explanation visible. Use short labels at
 
 ## Relationship to Planned Train / Source Families
 
-- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- Visual Canon: Commitment staging reads as a calm confirmation tray with protected items, source basis, and undo at the center.
 - SI: shared chrome, reusable primitives, and the object-first interface language.
 - Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
 - QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.

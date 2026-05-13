@@ -2,7 +2,7 @@
 
 Status: Active intended final-state visual recipe inventory
 
-This inventory is the markdown mirror of the JSON/YAML surface recipe source of truth. It now carries `train_family_sources`, `train_family_influence`, and `specificity_status` so the atlas can represent all planned frontend-relevant train/source families rather than only MRI/HBI.
+This inventory is the markdown mirror of the JSON/YAML surface recipe source of truth. It now carries `train_family_sources`, `train_family_influence`, and `specificity_status` so the atlas can represent all planned frontend-relevant train/source families rather than only MRI/HBI source-family inputs.
 
 - `global_app_shell` - Global App Shell - intended_canon - Cross-surface - high_specificity - visual_canon, si, accessibility, qa_validation, moat_runtime
 - `destination_dock` - Destination Dock - intended_canon - Cross-surface - high_specificity - visual_canon, si, accessibility, qa_validation, moat_runtime
