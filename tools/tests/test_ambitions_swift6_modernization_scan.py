@@ -18,6 +18,9 @@ SCANNER = REPO_ROOT / "scripts" / "ambitions-swift6-modernization-scan.py"
 
 def write_base_fixture(root: Path, swift_version: str = "6.0", strict: str = "complete", package_tools: str = "6.0") -> None:
     (root / "Native/Ambitions/Features/Today").mkdir(parents=True)
+    (root / "Native/Ambitions/Domain").mkdir(parents=True)
+    (root / "Sources").mkdir(parents=True)
+    (root / "AppUI/Sources").mkdir(parents=True)
     (root / "project.yml").write_text(
         f"settings:\n  base:\n    SWIFT_VERSION: {swift_version}\n    SWIFT_STRICT_CONCURRENCY: {strict}\n",
         encoding="utf-8",
@@ -25,6 +28,10 @@ def write_base_fixture(root: Path, swift_version: str = "6.0", strict: str = "co
     (root / "Package.swift").write_text(f"// swift-tools-version: {package_tools}\n", encoding="utf-8")
     (root / "Native/Ambitions/Features/Today/TodayViewModel.swift").write_text(
         "import Observation\n\n@MainActor @Observable final class TodayViewModel {}\n",
+        encoding="utf-8",
+    )
+    (root / "Native/Ambitions/Domain/PureDomainModel.swift").write_text(
+        "import Foundation\n\nstruct PureDomainModel: Sendable {}\n",
         encoding="utf-8",
     )
 
@@ -76,6 +83,36 @@ class Swift6ModernizationScanTests(unittest.TestCase):
             self.assertIn("observable-object", result.stdout)
             self.assertIn("published-wrapper", result.stdout)
             self.assertIn("any-cancellable", result.stdout)
+
+    def test_module_boundary_leaks_fail(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            write_base_fixture(root)
+            (root / "Native/Ambitions/Domain/LeakyDomainModel.swift").write_text(
+                "import SwiftUI\nimport SwiftData\n",
+                encoding="utf-8",
+            )
+            (root / "Native/Ambitions/Features/Today/LeakyFeature.swift").write_text(
+                "import SwiftData\n",
+                encoding="utf-8",
+            )
+            (root / "Sources/LeakyDesignSystemPrimitive.swift").write_text(
+                "import SwiftData\n",
+                encoding="utf-8",
+            )
+            (root / "AppUI/Sources/LeakyWidgetUI.swift").write_text(
+                "import SwiftData\n",
+                encoding="utf-8",
+            )
+
+            result = run_scanner(root)
+
+            self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("domain-imports-swiftui", result.stdout)
+            self.assertIn("domain-imports-swiftdata", result.stdout)
+            self.assertIn("features-own-swiftdata", result.stdout)
+            self.assertIn("design-system-imports-swiftdata", result.stdout)
+            self.assertIn("widget-ui-imports-swiftdata", result.stdout)
 
     def test_allow_marker_keeps_adapter_escape_hatch_reviewable(self) -> None:
         with tempfile.TemporaryDirectory() as raw:
