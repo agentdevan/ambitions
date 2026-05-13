@@ -3,7 +3,8 @@
   "completed_batches": [
     "MRI01",
     "MRI02",
-    "MRI03"
+    "MRI03",
+    "MRI04"
   ],
   "history": [
     {
@@ -20,6 +21,11 @@
       "batch": "MRI03",
       "prompt": "prompts/batches/MRI03-COMMITMENT-LIFECYCLE.md",
       "marked_complete_at": "2026-05-13T00:22:56Z"
+    },
+    {
+      "batch": "MRI04",
+      "prompt": "prompts/batches/MRI04-PROOF-CAPITAL-MODEL.md",
+      "marked_complete_at": "2026-05-13T00:52:54Z"
     }
   ]
 }
