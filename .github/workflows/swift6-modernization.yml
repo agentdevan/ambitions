@@ -1,0 +1,67 @@
+name: Swift 6 Modernization
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - ambitions/swift6-modernization-foundation-01
+
+concurrency:
+  group: swift6-modernization-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  modernization-gates:
+    name: Modernization gates
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          swift --version
+
+      - name: Install XcodeGen
+        run: |
+          set -euo pipefail
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+          xcodegen --version
+
+      - name: Run Swift 6 modernization scanner self-test
+        run: python3 scripts/ambitions-swift6-modernization-scan.py --self-test
+
+      - name: Run Swift 6 modernization scanner tests
+        run: python3 tools/tests/test_ambitions_swift6_modernization_scan.py
+
+      - name: Run Swift 6 modernization scanner strict repo gate
+        run: python3 scripts/ambitions-swift6-modernization-scan.py . --strict
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build Swift 6 app target
+        run: |
+          set -euo pipefail
+          xcodebuild build \
+            -project Ambitions.xcodeproj \
+            -scheme Ambitions \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Run focused deterministic tests
+        run: |
+          set -euo pipefail
+          xcodebuild test \
+            -project Ambitions.xcodeproj \
+            -scheme Ambitions \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -only-testing:AmbitionsTests/StorageMigrationPlanScaffoldTests \
+            -only-testing:AmbitionsTests/AppIntentRoutingTests \
+            -only-testing:AmbitionsTests/ExternalActionCommandServiceTests \
+            CODE_SIGNING_ALLOWED=NO
