@@ -117,6 +117,94 @@ struct SourceAtlasQueryResponse: Codable, Sendable, Equatable, Hashable {
     }
 }
 
+struct SourceAtlasOfflineFallbackRuntimeResult: Codable, Sendable, Equatable, Hashable {
+    let availability: SourceAtlasOfflineFallbackAvailability
+    let conditions: [SourceAtlasOfflineFallbackCondition]
+    let hasLoadedPack: Bool
+    let selectedStoreSource: SourceAtlasStorePayloadSource?
+    let storeSourceState: SourceAtlasStoreSourceState
+    let queryFallbackReason: SourceAtlasQueryFallbackReason
+    let selectedSourceState: SourceAtlasRequirementSourceState
+    let selectedFreshnessState: SourceAtlasRequirementFreshnessState
+    let selectedReviewState: SourceAtlasRequirementReviewState
+    let selectedProvenanceSourceIDs: [String]
+    let blocksOfficialCurrentClaims: Bool
+    let blocksCurrentUse: Bool
+
+    init(
+        loadResult: SourceAtlasStoreLoadResult,
+        queryResponse: SourceAtlasQueryResponse,
+        availability: SourceAtlasOfflineFallbackAvailability = SourceAtlasOfflineFallbackAvailability()
+    ) {
+        let conditions = Self.conditions(loadResult: loadResult, availability: availability)
+        let selectedResult = queryResponse.selectedResult
+        let selectedBlocksOfficialCurrent = selectedResult.sourceState != .officialCurrent ||
+            selectedResult.freshnessState != .current ||
+            selectedResult.reviewState != .approved ||
+            selectedResult.provenanceSourceIDs.isEmpty
+        let selectedBlocksCurrentUse = selectedResult.canSupportCurrentUse == false
+
+        self.availability = availability
+        self.conditions = conditions
+        self.hasLoadedPack = loadResult.hasPack
+        self.selectedStoreSource = loadResult.selectedSource
+        self.storeSourceState = loadResult.sourceState
+        self.queryFallbackReason = queryResponse.fallbackReason
+        self.selectedSourceState = selectedResult.sourceState
+        self.selectedFreshnessState = selectedResult.freshnessState
+        self.selectedReviewState = selectedResult.reviewState
+        self.selectedProvenanceSourceIDs = selectedResult.provenanceSourceIDs
+        self.blocksOfficialCurrentClaims = conditions.isEmpty == false || selectedBlocksOfficialCurrent
+        self.blocksCurrentUse = conditions.isEmpty == false || selectedBlocksCurrentUse
+    }
+
+    private static func conditions(
+        loadResult: SourceAtlasStoreLoadResult,
+        availability: SourceAtlasOfflineFallbackAvailability
+    ) -> [SourceAtlasOfflineFallbackCondition] {
+        var conditions: [SourceAtlasOfflineFallbackCondition] = []
+
+        if availability.internetAvailable == false {
+            conditions.append(.noInternet)
+        }
+        if availability.manifestReachable == false {
+            conditions.append(.unreachableManifest)
+        }
+        if availability.downloadSucceeded == false {
+            conditions.append(.failedDownload)
+        }
+        if loadResult.selectedSource == .lastKnownGood || loadResult.sourceState == .stale {
+            conditions.append(.staleCache)
+        }
+        if loadResult.hasPack == false {
+            conditions.append(.missingPack)
+        }
+        if loadResult.quarantines.contains(where: \.isCorruptOrInvalidPack) {
+            conditions.append(.corruptInvalidPack)
+        }
+
+        return orderedUniqueConditions(conditions)
+    }
+
+    private static func orderedUniqueConditions(
+        _ conditions: [SourceAtlasOfflineFallbackCondition]
+    ) -> [SourceAtlasOfflineFallbackCondition] {
+        var seen: Set<SourceAtlasOfflineFallbackCondition> = []
+        return conditions.filter { seen.insert($0).inserted }
+    }
+}
+
+private extension SourceAtlasStoreQuarantine {
+    var isCorruptOrInvalidPack: Bool {
+        switch reason {
+        case .corruptJSON, .unsupportedSchema, .hashMismatch, .invalidPack:
+            return true
+        case .missingPayload, .contradicted, .revoked:
+            return false
+        }
+    }
+}
+
 struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
     let packs: [SourceAtlasPack]
 

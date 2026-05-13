@@ -29,6 +29,31 @@ enum SourceAtlasStoreQuarantineReason: String, Codable, Sendable, Equatable, Has
     case revoked
 }
 
+enum SourceAtlasOfflineFallbackCondition: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case noInternet = "no_internet"
+    case unreachableManifest = "unreachable_manifest"
+    case failedDownload = "failed_download"
+    case staleCache = "stale_cache"
+    case missingPack = "missing_pack"
+    case corruptInvalidPack = "corrupt_invalid_pack"
+}
+
+struct SourceAtlasOfflineFallbackAvailability: Codable, Sendable, Equatable, Hashable {
+    let internetAvailable: Bool
+    let manifestReachable: Bool
+    let downloadSucceeded: Bool
+
+    init(
+        internetAvailable: Bool = true,
+        manifestReachable: Bool = true,
+        downloadSucceeded: Bool = true
+    ) {
+        self.internetAvailable = internetAvailable
+        self.manifestReachable = manifestReachable
+        self.downloadSucceeded = downloadSucceeded
+    }
+}
+
 struct SourceAtlasStorePayload: Sendable, Equatable, Hashable {
     let source: SourceAtlasStorePayloadSource
     let data: Data
