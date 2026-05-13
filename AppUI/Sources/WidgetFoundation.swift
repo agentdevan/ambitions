@@ -184,7 +184,7 @@ public struct WidgetSnapshot<Content: Sendable>: Sendable {
 /// App-side widget adapters should expose one snapshot per widget family and
 /// accept dependencies through initializers rather than reaching into global
 /// persistence or engines from inside SwiftUI view code.
-public protocol AmbitionsWidgetViewModeling {
+public protocol AmbitionsWidgetViewModeling: Sendable {
     associatedtype Content: Sendable
 
     var snapshot: WidgetSnapshot<Content> { get }
