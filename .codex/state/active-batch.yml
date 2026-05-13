@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA15 Offline Fallback Runtime"
-  previous_batch: "SA15 Offline Fallback Runtime"
+  batch: "SA16 Source Container Model"
+  previous_batch: "SA16 Source Container Model"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "SA16 Source Container Model"
+  next_eligible_batch: "SA17 URL Source Importer"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
