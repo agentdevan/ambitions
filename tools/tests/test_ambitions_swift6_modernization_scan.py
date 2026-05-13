@@ -127,6 +127,23 @@ class Swift6ModernizationScanTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertIn("Allowed: 1", result.stdout)
 
+    def test_explicit_sendable_allowlist_is_narrow_and_reviewable(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            write_base_fixture(root)
+            projector = root / "Native/Ambitions/Features/Today/TodayReadModelProjector.swift"
+            projector.write_text(
+                "import Foundation\n\n"
+                "final class TodayDerivedReadModelCache: @unchecked Sendable {}\n",
+                encoding="utf-8",
+            )
+
+            result = run_scanner(root)
+
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("unchecked-sendable", result.stdout)
+            self.assertIn("Allowed: 1", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()
