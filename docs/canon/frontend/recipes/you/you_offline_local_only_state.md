@@ -57,8 +57,8 @@ User System Profile
 - Purpose: Orient the user to the current object, destination, and state before any action is offered.
 - Contains: User System Profile header; current User System Profile state; origin context when this is a drill-down or transient surface.
 - Primitives: Compact Surface Header, Context Crown, LuminousTrace, semantic labels.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, User System Profile title or state label, source/proof caption, and readable action text. Emphasis stays on the active User System Profile decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to User System Profile, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -68,51 +68,51 @@ User System Profile
 - Interaction meaning: Tap or back/close controls preserve origin and do not mutate data.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 2: Settings-style section body
 
 - Purpose: Show how Settings-style section body changes the visible hierarchy, source/proof meaning, and available action for You Offline Local-Only State.
-- Contains: User System Profile; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to you.
+- Contains: User System Profile; visible ingredients include User System Profile setting or runtime object, local data boundary, privacy/control state, receipt/history link, export/reset disclosure, and source or proof context. Supporting objects: Receipt System, Source Freshness Badge, Why This Sheet, Closure System. Region context: orientation, primary object, source/proof line.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, User System Profile title or state label, source/proof caption, and readable action text. Emphasis stays on the active User System Profile decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to User System Profile, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Settings-style control, local runtime inspection, reset/forget clarity, no social/profile/admin framing.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes User System Profile; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 3: Trust/local runtime explanation
 
 - Purpose: Show how Trust/local runtime explanation changes the visible hierarchy, source/proof meaning, and available action for You Offline Local-Only State.
-- Contains: User System Profile; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to you.
+- Contains: User System Profile; visible ingredients include User System Profile setting or runtime object, local data boundary, privacy/control state, receipt/history link, export/reset disclosure, and source or proof context. Supporting objects: Receipt System, Source Freshness Badge, Why This Sheet, Closure System. Region context: orientation, primary object, source/proof line.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, User System Profile title or state label, source/proof caption, and readable action text. Emphasis stays on the active User System Profile decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to User System Profile, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Settings-style control, local runtime inspection, reset/forget clarity, no social/profile/admin framing.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes User System Profile; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 4: Control row or disclosure
 
 - Purpose: Let the user commit, cancel, undo, or disclose detail with clear consequence.
 - Contains: Primary and secondary commands for You Offline Local-Only State; disabled/destructive states when applicable; cancel and undo where reversible.
 - Primitives: Primary CTA, Secondary CTA, Destructive CTA, Disabled CTA, native button styling, haptic confirmation intent.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, User System Profile title or state label, source/proof caption, and readable action text. Emphasis stays on the active User System Profile decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to User System Profile, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -122,15 +122,15 @@ User System Profile
 - Interaction meaning: Confirms, cancels, opens detail, or restores the previous state; no silent mutation.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 5: Receipt/reset/source line
 
 - Purpose: Make trust inspectable at rest and deeper on demand.
 - Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for User System Profile.
 - Primitives: Source Freshness Badge, Receipt System, Proof Trail, Why This Sheet, QuietGlass for sheet depth.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, User System Profile title or state label, source/proof caption, and readable action text. Emphasis stays on the active User System Profile decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to User System Profile, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -140,25 +140,25 @@ User System Profile
 - Interaction meaning: Opens source/proof/receipt detail or a reversible explanation surface.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 6: Warning/offline/first-run state
 
 - Purpose: Show how Warning/offline/first-run state changes the visible hierarchy, source/proof meaning, and available action for You Offline Local-Only State.
-- Contains: User System Profile; related commitments, proof, source, state markers, labels, and disclosure paths appropriate to you.
+- Contains: User System Profile; visible ingredients include User System Profile setting or runtime object, local data boundary, privacy/control state, receipt/history link, export/reset disclosure, and source or proof context. Supporting objects: Receipt System, Source Freshness Badge, Why This Sheet, Closure System. Region context: orientation, primary object, source/proof line.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, User System Profile title or state label, source/proof caption, and readable action text. Emphasis stays on the active User System Profile decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to User System Profile, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Settings-style control, local runtime inspection, reset/forget clarity, no social/profile/admin framing.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes User System Profile; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ## Primitive Inventory
 GraphiteRecess, QuietGlass, LuminousTrace, CelestialField when semantic orientation is needed, Context Crown where orientation matters, Source Freshness Badge, Receipt System, Proof Trail, chevrons/disclosure rows, SF Symbols, semantic labels, primary/secondary/destructive/disabled CTA treatments.
@@ -167,10 +167,10 @@ GraphiteRecess, QuietGlass, LuminousTrace, CelestialField when semantic orientat
 User System Profile, plus any visible Receipt System, Closure System, Recommendation Source System, Proof Trail System, Commitment Staging Tray, Reflow Preview Tray, Personal Runtime, or source/proof objects referenced by this surface.
 
 ## Typography Recipe
-SF-first semantic type. The dominant object or decision owns the strongest weight; explanatory source/proof text remains compact but readable. Dynamic Type must preserve User System Profile, the source/proof line, the primary command, and the recovery or cancel path.
+Native iPhone semantic typography. The User System Profile title or active decision owns the strongest weight; explanatory source/proof text remains compact but readable. Dynamic Type must preserve User System Profile, the source/proof line, the primary command, and the recovery or cancel path.
 
 ## Spacing Recipe
-Use a dense native iPhone rhythm: object-attached spacing, grouped rows only where they represent the same object, and no equal-weight dashboard/card stack. Primary controls remain thumb-zone aware with at least 44 pt touch intent.
+Use a compact native iPhone rhythm: object-attached spacing, grouped rows only where they represent the same object, and no equal-weight dashboard/card stack. Primary controls remain thumb-zone aware with at least 44 pt touch intent.
 
 ## Material Recipe
 GraphiteRecess is the ground. QuietGlass is reserved for sheets, trays, overlays, and inspectable transient layers. LuminousTrace expresses origin, attachment, source freshness, protection, pressure, or continuity. CelestialField appears only when it carries orientation or relationship meaning.

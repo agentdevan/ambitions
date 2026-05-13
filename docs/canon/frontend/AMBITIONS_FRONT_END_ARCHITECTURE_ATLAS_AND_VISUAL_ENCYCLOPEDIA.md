@@ -11,11 +11,11 @@ This document is not an implementation tracker. This document is not screenshot 
 
 ## Doctrine
 
-Every visible surface must appear in the Surface Recipe Inventory. Every visible surface must have a recipe or an explicit unresolved-direction entry. Planned not-yet-implemented batches may outrank existing implementation when defining intended final frontend direction, while `docs/truth/*` remains higher authority. Most recent planned batch creation data breaks conflicts among planned batches using registry metadata, prompt metadata, ordered queue evidence, git introduction history, and filesystem metadata only as a low-confidence fallback. The atlas now extracts all planned frontend-relevant train/source families, not just MRI/HBI, and records MRI/HBI as source-family inputs that must be remapped onto real Ambitions surfaces, objects, primitives, states, and trust affordances.
+Every visible surface must appear in the Surface Recipe Inventory. Every visible surface must have a recipe or an explicit unresolved-direction entry. Planned not-yet-implemented batches may outrank existing implementation when defining intended final frontend direction, while `docs/truth/*` remains higher authority. Most recent planned batch creation data breaks conflicts among planned batches using registry metadata, prompt metadata, ordered queue evidence, git introduction history, and filesystem metadata only as a low-confidence fallback. The atlas now extracts all planned frontend-relevant train/source families, not just MRI/HBI, and records MRI/HBI as source-family inputs that must be remapped onto real Ambitions surfaces, objects, primitives, states, and trust affordances. The final specificity review ledger records the formerly medium recipes as high specificity and leaves only the five locked unresolved direction gaps visible.
 
 If a visible surface, object, primitive, state, label, CTA, chevron, material, wrapper, receipt, source affordance, or visible behavior is absent from this atlas, it is not authorized final visual canon and must be treated as a documentation gap before implementation proceeds.
 
-Recipes must be specific enough to tell a designer or reviewer exactly what visible ingredients belong on the surface.
+Recipes must be specific enough to tell a designer or reviewer exactly what visible ingredients belong on the surface. The current final pass leaves no medium-specificity recipes and only the five explicitly unresolved direction gaps.
 
 ## Active IA Map
 
@@ -38,6 +38,7 @@ The atlas is final intended visual canon, subordinate to active truth files and 
 - [Planned Train Frontend Direction Inventory](trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md)
 - [Source Precedence Ledger](trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md)
 - [Source Family Extraction Ledger](trace/VISUAL_DIRECTION_SOURCE_FAMILY_EXTRACTION_LEDGER.md)
+- [Surface Recipe Specificity Review Ledger](trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md)
 - [Intended State Coverage Matrix](trace/INTENDED_STATE_COVERAGE_MATRIX.md)
 - [Unmapped Intended Surface Gaps](trace/UNMAPPED_INTENDED_SURFACE_GAPS.md)
 - [Train Family To Surface Matrix](trace/TRAIN_FAMILY_TO_SURFACE_MATRIX.md)

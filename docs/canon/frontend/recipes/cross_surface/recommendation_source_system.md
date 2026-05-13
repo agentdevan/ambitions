@@ -32,7 +32,7 @@ The user should understand the surface’s object, state, and affordance without
 This surface recipe records the final-state visual intent for Recommendation Source System.
 
 ## Primary Object
-Shared object system
+Recommendation Source System
 
 ## Supporting Objects
 - Receipt System
@@ -54,44 +54,44 @@ Shared object system
 - Purpose: Name the recommendation's source class plainly so the user sees whether the suggestion came from goal proof, time fit, closure history, source freshness, or manual choice.
 - Contains: Source label, freshness state, recommendation source system object name, local-runtime note, uncertainty marker, and disclosure affordance.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Recommendation Source System title or state label, source/proof caption, and readable action text. Emphasis stays on the active Recommendation Source System decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Recommendation Source System, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Cross-surface consistency, native disclosure, receipt/source/proof continuity, and forbidden-drift protection.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes Recommendation Source System; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 2: Object/state body
 
 - Purpose: Attach the recommendation body to its real object and state so it explains fit without generic AI confidence or black-box assistant copy.
 - Contains: Recommended object, state reason, capacity/proof basis, correction route, stale or missing source message, and receipt behavior for accepted changes.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Recommendation Source System title or state label, source/proof caption, and readable action text. Emphasis stays on the active Recommendation Source System decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Recommendation Source System, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Cross-surface consistency, native disclosure, receipt/source/proof continuity, and forbidden-drift protection.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes Recommendation Source System; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 3: Source/proof/receipt line
 
 - Purpose: Make trust inspectable at rest and deeper on demand.
-- Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for Shared object system.
+- Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for Recommendation Source System.
 - Primitives: Source Freshness Badge, Receipt System, Proof Trail, Why This Sheet, QuietGlass for sheet depth.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Recommendation Source System title or state label, source/proof caption, and readable action text. Emphasis stays on the active Recommendation Source System decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Recommendation Source System, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -101,55 +101,55 @@ Shared object system
 - Interaction meaning: Opens source/proof/receipt detail or a reversible explanation surface.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 4: Disclosure or command affordance
 
 - Purpose: Offer Why this?, correction, decline, or accept paths with clear consequence and no silent learning or mutation.
 - Contains: Why this? disclosure, correction command, accept/decline controls, reset-learning route where relevant, and expected receipt or no-receipt reason.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Recommendation Source System title or state label, source/proof caption, and readable action text. Emphasis stays on the active Recommendation Source System decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Recommendation Source System, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Cross-surface consistency, native disclosure, receipt/source/proof continuity, and forbidden-drift protection.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes Recommendation Source System; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 5: Accessibility state text
 
 - Purpose: Give VoiceOver and Dynamic Type users the same source, reason, uncertainty, correction, and action consequence available visually.
 - Contains: VoiceOver source summary, reason text, uncertainty label, current action state, correction affordance, and receipt expectation.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Recommendation Source System title or state label, source/proof caption, and readable action text. Emphasis stays on the active Recommendation Source System decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Recommendation Source System, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Cross-surface consistency, native disclosure, receipt/source/proof continuity, and forbidden-drift protection.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes Recommendation Source System; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ## Primitive Inventory
 GraphiteRecess, QuietGlass, LuminousTrace, CelestialField when semantic orientation is needed, Context Crown where orientation matters, Source Freshness Badge, Receipt System, Proof Trail, chevrons/disclosure rows, SF Symbols, semantic labels, primary/secondary/destructive/disabled CTA treatments.
 
 ## Object Inventory
-Shared object system, plus any visible Receipt System, Closure System, Recommendation Source System, Proof Trail System, Commitment Staging Tray, Reflow Preview Tray, Personal Runtime, or source/proof objects referenced by this surface.
+Recommendation Source System, plus any visible Receipt System, Closure System, Recommendation Source System, Proof Trail System, Commitment Staging Tray, Reflow Preview Tray, Personal Runtime, or source/proof objects referenced by this surface.
 
 ## Typography Recipe
-SF-first semantic type. The dominant object or decision owns the strongest weight; explanatory source/proof text remains compact but readable. Dynamic Type must preserve Shared object system, the source/proof line, the primary command, and the recovery or cancel path.
+Native iPhone semantic typography. The Recommendation Source System title or active decision owns the strongest weight; explanatory source/proof text remains compact but readable. Dynamic Type must preserve Recommendation Source System, the source/proof line, the primary command, and the recovery or cancel path.
 
 ## Spacing Recipe
-Use a dense native iPhone rhythm: object-attached spacing, grouped rows only where they represent the same object, and no equal-weight dashboard/card stack. Primary controls remain thumb-zone aware with at least 44 pt touch intent.
+Use a compact native iPhone rhythm: object-attached spacing, grouped rows only where they represent the same object, and no equal-weight dashboard/card stack. Primary controls remain thumb-zone aware with at least 44 pt touch intent.
 
 ## Material Recipe
 GraphiteRecess is the ground. QuietGlass is reserved for sheets, trays, overlays, and inspectable transient layers. LuminousTrace expresses origin, attachment, source freshness, protection, pressure, or continuity. CelestialField appears only when it carries orientation or relationship meaning.

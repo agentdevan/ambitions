@@ -7,6 +7,7 @@ msgs=[]
 if not (BASE/'VISUAL_REFERENCE_LEDGER.md').exists(): msgs.append('missing VISUAL_REFERENCE_LEDGER.md')
 if not (BASE/'OBSOLETE_AND_EXCLUDED_VISUAL_REFERENCE_LEDGER.md').exists(): msgs.append('missing OBSOLETE_AND_EXCLUDED_VISUAL_REFERENCE_LEDGER.md')
 if not (BASE/'trace/VISUAL_DIRECTION_SOURCE_FAMILY_EXTRACTION_LEDGER.md').exists(): msgs.append('missing trace/VISUAL_DIRECTION_SOURCE_FAMILY_EXTRACTION_LEDGER.md')
+if not (BASE/'trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md').exists(): msgs.append('missing trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md')
 if not (BASE/'trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md').exists(): msgs.append('missing trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md')
 for p in (BASE/'recipes').glob('**/*.md'):
     t=p.read_text().lower()

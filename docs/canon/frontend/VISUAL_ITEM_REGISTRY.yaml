@@ -2926,7 +2926,7 @@
       "specific planning detail and fit language",
       "intake, route reveal, and placement choices"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "adjust_plan_reflow_preview_entry",
@@ -4053,7 +4053,7 @@
       "specific planning detail and fit language",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "today_protected_time_state",
@@ -6764,7 +6764,7 @@
       "intake, placement, and route reveal",
       "local-first capture and no hosted data backend"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "capture_attachment_proof_picker",
@@ -6873,7 +6873,7 @@
       "local-first capture and no hosted data backend",
       "local-intelligence freshness and source explanation"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "capture_post_input_route_reveal",
@@ -7951,7 +7951,7 @@
       "intake, placement, and route reveal",
       "local-first capture and no hosted data backend"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "capture_error_failed_attachment_state",
@@ -8059,7 +8059,7 @@
       "local-first capture and no hosted data backend",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "capture_empty_first_use_state",
@@ -8704,7 +8704,7 @@
       "LifeShape Field, day/week/month depth, and horizon controls",
       "time horizon specificity and planning depth"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "open_time_region",
@@ -10755,7 +10755,7 @@
       "time horizon specificity and planning depth",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "time_no_calendar_data_state",
@@ -11187,7 +11187,7 @@
       "time horizon specificity and planning depth",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "time_stale_source_state",
@@ -12065,7 +12065,7 @@
       "settings-style control language and personal defaults",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "automation_and_trust",
@@ -13373,7 +13373,7 @@
       "User System Profile and personal control-plane language",
       "settings-style control language and personal defaults"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "commitment_staging_tray",
@@ -13383,11 +13383,11 @@
     "hierarchy_level": "transient_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Commitment Staging Tray",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Commitment Staging Tray.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -13479,7 +13479,7 @@
       "intake, route reveal, and placement choices",
       "shared chrome, motion restraint, and accessibility-safe disclosure"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "reflow_preview_tray",
@@ -13489,11 +13489,11 @@
     "hierarchy_level": "transient_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Reflow Preview Tray",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Reflow Preview Tray.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -13587,7 +13587,7 @@
       "specific planning detail and fit language",
       "shared chrome, motion restraint, and accessibility-safe disclosure"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "receipt_system",
@@ -13597,11 +13597,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Receipt System",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Receipt System.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -13694,7 +13694,7 @@
       "inspectable source basis and correction routing",
       "local-intelligence freshness and source explanation"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "closure_system",
@@ -13704,11 +13704,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Closure System",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Closure System.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -13797,7 +13797,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "proof_trail_system",
@@ -13807,11 +13807,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Proof Trail System",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Proof Trail System.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -13904,7 +13904,7 @@
       "inspectable source basis and correction routing",
       "local-intelligence freshness and source explanation"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "recommendation_source_system",
@@ -13914,11 +13914,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Recommendation Source System",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Recommendation Source System.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14011,7 +14011,7 @@
       "inspectable source basis and correction routing",
       "local-intelligence freshness and source explanation"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "why_this_sheet",
@@ -14021,11 +14021,11 @@
     "hierarchy_level": "transient_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Why This Sheet",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Why This Sheet.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14115,7 +14115,7 @@
       "receipt/proof surfaces and acknowledgements",
       "shared chrome, motion restraint, and accessibility-safe disclosure"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "source_freshness_badge",
@@ -14125,11 +14125,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Source Freshness Badge",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Source Freshness Badge.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14222,7 +14222,7 @@
       "inspectable source basis and correction routing",
       "local-intelligence freshness and source explanation"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "still_counts_state",
@@ -14232,11 +14232,11 @@
     "hierarchy_level": "state_variant",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Still Counts State",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Still Counts State.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14326,7 +14326,7 @@
       "receipt/proof surfaces and acknowledgements",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "moved_state",
@@ -14336,11 +14336,11 @@
     "hierarchy_level": "state_variant",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Moved State",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Moved State.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14430,7 +14430,7 @@
       "receipt/proof surfaces and acknowledgements",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "skipped_not_needed_state",
@@ -14440,11 +14440,11 @@
     "hierarchy_level": "state_variant",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Skipped / Not Needed State",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Skipped / Not Needed State.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14534,7 +14534,7 @@
       "receipt/proof surfaces and acknowledgements",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "blocked_state",
@@ -14544,11 +14544,11 @@
     "hierarchy_level": "state_variant",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Blocked State",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Blocked State.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14640,7 +14640,7 @@
       "historical comparison, recovery continuity, and archive context",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "waiting_state",
@@ -14650,11 +14650,11 @@
     "hierarchy_level": "state_variant",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Waiting State",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Waiting State.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14746,7 +14746,7 @@
       "historical comparison, recovery continuity, and archive context",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "needs_recovery_state",
@@ -14756,11 +14756,11 @@
     "hierarchy_level": "state_variant",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Needs Recovery State",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Needs Recovery State.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14852,7 +14852,7 @@
       "historical comparison, recovery continuity, and archive context",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "needs_review_state",
@@ -14862,11 +14862,11 @@
     "hierarchy_level": "state_variant",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Needs Review State",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Needs Review State.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -14956,7 +14956,7 @@
       "receipt/proof surfaces and acknowledgements",
       "state vocabulary, visible alternatives, and no color-only meaning"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "protected_marker",
@@ -14966,11 +14966,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Protected Marker",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Protected Marker.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15063,7 +15063,7 @@
       "planning depth and time-shape specificity",
       "specific planning detail and fit language"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "pressure_marker",
@@ -15073,11 +15073,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Pressure Marker",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Pressure Marker.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15170,7 +15170,7 @@
       "planning depth and time-shape specificity",
       "specific planning detail and fit language"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "best_fit_marker",
@@ -15180,11 +15180,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Best Fit Marker",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Best Fit Marker.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15273,7 +15273,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "open_marker",
@@ -15283,11 +15283,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Open Marker",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Open Marker.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15376,7 +15376,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "primary_cta",
@@ -15386,11 +15386,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Primary CTA",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Primary CTA.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15479,7 +15479,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "secondary_cta",
@@ -15489,11 +15489,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Secondary CTA",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Secondary CTA.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15582,7 +15582,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "destructive_cta",
@@ -15592,11 +15592,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Destructive CTA",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Destructive CTA.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15685,7 +15685,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "disabled_cta",
@@ -15695,11 +15695,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Disabled CTA",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Disabled CTA.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15788,7 +15788,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "chevron_disclosure_row",
@@ -15798,11 +15798,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "Chevron / Disclosure Row",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for Chevron / Disclosure Row.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15891,7 +15891,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "quietglass_wrapper",
@@ -15901,11 +15901,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "QuietGlass Wrapper",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for QuietGlass Wrapper.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -15994,7 +15994,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "graphiterecess_base",
@@ -16004,11 +16004,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "GraphiteRecess Base",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for GraphiteRecess Base.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -16097,7 +16097,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "luminoustrace_state_line",
@@ -16107,11 +16107,11 @@
     "hierarchy_level": "state_variant",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "LuminousTrace State Line",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for LuminousTrace State Line.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -16200,7 +16200,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "celestialfield_semantic_layer",
@@ -16210,11 +16210,11 @@
     "hierarchy_level": "component_surface",
     "destination": "Cross-surface",
     "surface_owner": "Cross-surface",
-    "object_family": "Shared object system",
+    "object_family": "CelestialField Semantic Layer",
     "appears_on": [
       "Cross-surface"
     ],
-    "intended_role": "Final-state recipe surface for Shared object system.",
+    "intended_role": "Final-state recipe surface for CelestialField Semantic Layer.",
     "user_value": "Makes state, source, proof, recovery, and action visible without generic productivity drift.",
     "visual_description": "GraphiteRecess ground, restrained QuietGlass layers, LuminousTrace continuity, semantic labels, and native disclosure behavior.",
     "hierarchy_behavior": "Primary object first, source/proof second, action/disclosure third.",
@@ -16303,7 +16303,7 @@
       "local execution, receipts, and explainable state",
       "receipt/proof surfaces and acknowledgements"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "first_run_root",
@@ -16404,7 +16404,7 @@
       "calm first-use guidance and setup sequencing",
       "local runtime explanation and trust"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "schedule_setup_prompt",
@@ -16505,7 +16505,7 @@
       "calm first-use guidance and setup sequencing",
       "local runtime explanation and trust"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "planning_defaults_prompt",
@@ -16610,7 +16610,7 @@
       "planning depth and time-shape specificity",
       "specific planning detail and fit language"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "privacy_local_runtime_explanation",
@@ -16721,7 +16721,7 @@
       "planning depth and time-shape specificity",
       "specific planning detail and fit language"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "capture_first_use_prompt",
@@ -16824,7 +16824,7 @@
       "local runtime explanation and trust",
       "intake, route reveal, and placement choices"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "goals_first_use_prompt",
@@ -16927,7 +16927,7 @@
       "local runtime explanation and trust",
       "goal direction, proof trail, and object depth"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "time_first_use_prompt",
@@ -17028,7 +17028,7 @@
       "calm first-use guidance and setup sequencing",
       "local runtime explanation and trust"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "today_first_use_state",
@@ -17135,7 +17135,7 @@
       "specific planning detail and fit language",
       "current-day orientation and one-dominant-object logic"
     ],
-    "specificity_status": "medium_specificity"
+    "specificity_status": "high_specificity"
   },
   {
     "visual_id": "graphiterecess",

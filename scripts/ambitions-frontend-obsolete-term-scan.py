@@ -20,7 +20,7 @@ for p in scan_paths:
     t=p.read_text().lower()
     if 'plan tab' in t or 'plan as top-level' in t:
         msgs.append(f'{p} revives Plan as top-level')
-    if 'object bible' in t or 'frontend object bible' in t or 'mri/hbi are objects' in t:
+    if 'object bible' in t or 'frontend object bible' in t or 'mri/hbi are objects' in t or 'shared object system' in t:
         msgs.append(f'{p} treats MRI/HBI as object framing')
     if p.name in {'commitment_staging_tray.md','reflow_preview_tray.md'}:
         for bad in ['odds','stake','bet slip','parlay','cash-out','cash out','wager','line movement','boost']:

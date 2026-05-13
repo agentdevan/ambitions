@@ -21,7 +21,7 @@ allowed = {
     'intended_canon', 'planned_canon', 'directional_candidate',
     'unresolved_direction', 'historical_reference', 'obsolete', 'excluded',
 }
-allowed_specificity = {'high_specificity', 'medium_specificity', 'low_specificity', 'unresolved_direction'}
+allowed_specificity = {'high_specificity', 'unresolved_direction'}
 
 msgs = []
 try:
@@ -36,7 +36,10 @@ if len(items) != 174:
     msgs.append(f'registry count mismatch: {len(items)}')
 if (BASE / 'objects/MRI_FRONTEND_OBJECTS.md').exists() or (BASE / 'objects/HBI_FRONTEND_OBJECTS.md').exists():
     msgs.append('MRI/HBI must not be present as active object files')
+if not (BASE / 'trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md').exists():
+    msgs.append('missing specificity review ledger')
 
+specificity_counts = {'high_specificity': 0, 'medium_specificity': 0, 'low_specificity': 0, 'unresolved_direction': 0}
 for item in items:
     for field in required:
         if field not in item:
@@ -45,6 +48,7 @@ for item in items:
         msgs.append(f"{item.get('name')} invalid canon_status")
     if item.get('specificity_status') not in allowed_specificity:
         msgs.append(f"{item.get('name')} invalid specificity_status")
+    specificity_counts[item.get('specificity_status')] = specificity_counts.get(item.get('specificity_status'), 0) + 1
     if not isinstance(item.get('train_family_sources'), list) or not item.get('train_family_sources'):
         msgs.append(f"{item.get('name')} missing train_family_sources")
     if not isinstance(item.get('train_family_influence'), list) or not item.get('train_family_influence'):
@@ -57,6 +61,11 @@ for item in items:
         value = str(item.get(field, ''))
         if ('MRI' in value or 'HBI' in value) and not any(fam in [s.lower() for s in item.get('train_family_sources', [])] for fam in ['mri', 'hbi']):
             msgs.append(f"{item.get('name')} still treats source-family text as object framing in {field}")
+
+if specificity_counts['medium_specificity']:
+    msgs.append(f"registry still has medium specificity items: {specificity_counts['medium_specificity']}")
+if specificity_counts['low_specificity']:
+    msgs.append(f"registry still has low specificity items: {specificity_counts['low_specificity']}")
 
 ids = {i.get('visual_id') for i in items}
 for s in json.loads((BASE / 'SURFACE_RECIPE_INVENTORY.yaml').read_text()):

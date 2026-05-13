@@ -54,6 +54,7 @@ msgs = []
 for rel in [
     'SURFACE_RECIPE_INDEX.md', 'SURFACE_RECIPE_INVENTORY.yaml',
     'SURFACE_RECIPE_INVENTORY.md', 'FRONTEND_SURFACE_COVERAGE_MAP.md',
+    'trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md',
     'trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md',
     'trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.yaml',
     'trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md',
@@ -65,6 +66,43 @@ try:
     items = json.loads(INV.read_text())
 except Exception as exc:
     fail([f'inventory parse failed: {exc}'])
+
+counts = {'high_specificity': 0, 'medium_specificity': 0, 'low_specificity': 0, 'unresolved_direction': 0}
+by_destination = {}
+for item in items:
+    status = item.get('specificity_status')
+    counts[status] = counts.get(status, 0) + 1
+    dest = item.get('destination')
+    by_destination.setdefault(dest, {'total': 0, 'high_specificity': 0, 'medium_specificity': 0, 'low_specificity': 0, 'unresolved_direction': 0})
+    by_destination[dest]['total'] += 1
+    by_destination[dest][status] += 1
+
+if counts['medium_specificity']:
+    msgs.append(f'coverage inventory still has medium specificity recipes: {counts["medium_specificity"]}')
+if counts['low_specificity']:
+    msgs.append(f'coverage inventory still has low specificity recipes: {counts["low_specificity"]}')
+if counts['unresolved_direction'] != 5:
+    msgs.append(f'coverage inventory unresolved count mismatch: {counts["unresolved_direction"]}')
+
+coverage_lines = (BASE / 'FRONTEND_SURFACE_COVERAGE_MAP.md').read_text().splitlines() if (BASE / 'FRONTEND_SURFACE_COVERAGE_MAP.md').exists() else []
+for dest, expected in by_destination.items():
+    row = next((line for line in coverage_lines if line.startswith(f'| {dest} |')), None)
+    if row is None:
+        msgs.append(f'coverage map missing destination row: {dest}')
+        continue
+    pieces = [piece.strip() for piece in row.strip('|').split('|')]
+    if len(pieces) < 7:
+        msgs.append(f'coverage map row malformed for {dest}')
+        continue
+    actual = {
+        'total': int(pieces[1]),
+        'high_specificity': int(pieces[2]),
+        'medium_specificity': int(pieces[3]),
+        'low_specificity': int(pieces[4]),
+        'unresolved_direction': int(pieces[5]),
+    }
+    if actual != expected:
+        msgs.append(f'coverage map mismatch for {dest}: {actual} != {expected}')
 
 for item in items:
     recipe = ROOT / item.get('recipe_file', '')

@@ -58,80 +58,80 @@ LifeShape Field
 - Purpose: Compare the current and proposed LifeShape Field as before/after capacity, protection, and pressure so the user sees consequence before committing.
 - Contains: Before/after LifeShape summaries, moved Step count, protected-time preservation, pressure delta, source freshness badge, and receipt expectation.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, LifeShape Field title or state label, source/proof caption, and readable action text. Emphasis stays on the active LifeShape Field decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to LifeShape Field, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for LifeShape capacity semantics, open/protected/pressure/best-fit markers, consentful reflow, no calendar-grid primacy.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes LifeShape Field; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 2: Proposed movement list
 
 - Purpose: List proposed moves as inspectable time changes with origin, destination, fit reason, and proof preservation attached to each row.
 - Contains: Proposed movement rows, source reason, proof-transfer note, conflict marker, remove-from-preview control, and disclosure to affected Step or Time detail.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, LifeShape Field title or state label, source/proof caption, and readable action text. Emphasis stays on the active LifeShape Field decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to LifeShape Field, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for LifeShape capacity semantics, open/protected/pressure/best-fit markers, consentful reflow, no calendar-grid primacy.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes LifeShape Field; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 3: Protected time lock line
 
 - Purpose: Make unchanged protected time explicit so reflow feels consentful and bounded rather than silently rearranging the user's day.
 - Contains: Protected-time lock line, unchanged blocks, owner/source label, no-change explanation, and VoiceOver state that names what remains protected.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, LifeShape Field title or state label, source/proof caption, and readable action text. Emphasis stays on the active LifeShape Field decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to LifeShape Field, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for LifeShape capacity semantics, open/protected/pressure/best-fit markers, consentful reflow, no calendar-grid primacy.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes LifeShape Field; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 4: Best-fit explanation
 
 - Purpose: Explain best-fit as deterministic capacity reasoning: why the proposed slot fits, what sources were used, and what uncertainty remains.
 - Contains: Best-fit reason, source freshness, uncertainty or stale-source marker, Why this? disclosure, correction route, and no-claim language for missing data.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, LifeShape Field title or state label, source/proof caption, and readable action text. Emphasis stays on the active LifeShape Field decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to LifeShape Field, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for LifeShape capacity semantics, open/protected/pressure/best-fit markers, consentful reflow, no calendar-grid primacy.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes LifeShape Field; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 5: Source freshness and expected receipt
 
 - Purpose: Make trust inspectable at rest and deeper on demand.
 - Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for LifeShape Field.
 - Primitives: Source Freshness Badge, Receipt System, Proof Trail, Why This Sheet, QuietGlass for sheet depth.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, LifeShape Field title or state label, source/proof caption, and readable action text. Emphasis stays on the active LifeShape Field decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to LifeShape Field, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -141,15 +141,15 @@ LifeShape Field
 - Interaction meaning: Opens source/proof/receipt detail or a reversible explanation surface.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 6: Confirm/cancel/undo controls
 
 - Purpose: Let the user commit, cancel, undo, or disclose detail with clear consequence.
 - Contains: Primary and secondary commands for Reflow Preview Tray; disabled/destructive states when applicable; cancel and undo where reversible.
 - Primitives: Primary CTA, Secondary CTA, Destructive CTA, Disabled CTA, native button styling, haptic confirmation intent.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, LifeShape Field title or state label, source/proof caption, and readable action text. Emphasis stays on the active LifeShape Field decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to LifeShape Field, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -159,7 +159,7 @@ LifeShape Field
 - Interaction meaning: Confirms, cancels, opens detail, or restores the previous state; no silent mutation.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ## Primitive Inventory
 GraphiteRecess, QuietGlass, LuminousTrace, CelestialField when semantic orientation is needed, Context Crown where orientation matters, Source Freshness Badge, Receipt System, Proof Trail, chevrons/disclosure rows, SF Symbols, semantic labels, primary/secondary/destructive/disabled CTA treatments.
@@ -168,10 +168,10 @@ GraphiteRecess, QuietGlass, LuminousTrace, CelestialField when semantic orientat
 LifeShape Field, plus any visible Receipt System, Closure System, Recommendation Source System, Proof Trail System, Commitment Staging Tray, Reflow Preview Tray, Personal Runtime, or source/proof objects referenced by this surface.
 
 ## Typography Recipe
-SF-first semantic type. The dominant object or decision owns the strongest weight; explanatory source/proof text remains compact but readable. Dynamic Type must preserve LifeShape Field, the source/proof line, the primary command, and the recovery or cancel path.
+Native iPhone semantic typography. The LifeShape Field title or active decision owns the strongest weight; explanatory source/proof text remains compact but readable. Dynamic Type must preserve LifeShape Field, the source/proof line, the primary command, and the recovery or cancel path.
 
 ## Spacing Recipe
-Use a dense native iPhone rhythm: object-attached spacing, grouped rows only where they represent the same object, and no equal-weight dashboard/card stack. Primary controls remain thumb-zone aware with at least 44 pt touch intent.
+Use a compact native iPhone rhythm: object-attached spacing, grouped rows only where they represent the same object, and no equal-weight dashboard/card stack. Primary controls remain thumb-zone aware with at least 44 pt touch intent.
 
 ## Material Recipe
 GraphiteRecess is the ground. QuietGlass is reserved for sheets, trays, overlays, and inspectable transient layers. LuminousTrace expresses origin, attachment, source freshness, protection, pressure, or continuity. CelestialField appears only when it carries orientation or relationship meaning.

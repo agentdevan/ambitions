@@ -14,4 +14,4 @@ All required minimum surfaces are represented. The entries below are not unmappe
 
 ## Phase 04 Repair Pass 1 note
 
-The recipe inventory remains complete for the required minimum visible surfaces. Remaining unresolved intended-direction gaps are explicitly tracked as future canon clarification inputs rather than hidden missing recipe files.
+The recipe inventory remains complete for the required minimum visible surfaces. The final specificity review ledger keeps these five gaps visible as future canon clarification inputs rather than hidden missing recipe files.

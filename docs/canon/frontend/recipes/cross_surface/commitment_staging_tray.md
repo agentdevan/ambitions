@@ -53,10 +53,10 @@ Commitment Staging Tray
 ### Region 1: Change summary header
 
 - Purpose: Orient the user to the current object, destination, and state before any action is offered.
-- Contains: Change summary header; current Shared object system state; origin context when this is a drill-down or transient surface.
+- Contains: Change summary header; current Commitment Staging Tray state; origin context when this is a drill-down or transient surface.
 - Primitives: Compact Surface Header, Context Crown, LuminousTrace, semantic labels.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Commitment Staging Tray title or state label, source/proof caption, and readable action text. Emphasis stays on the active Commitment Staging Tray decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Commitment Staging Tray, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -66,51 +66,51 @@ Commitment Staging Tray
 - Interaction meaning: Tap or back/close controls preserve origin and do not mutate data.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 2: Proposed commitment stack
 
 - Purpose: Stage proposed commitments as a calm change set, with each row showing what will be created, moved, shortened, held, or closed before the user confirms.
 - Contains: Proposed commitment rows, origin surface, affected object label, source/proof basis, expected receipt, remove-from-stage control, and consequence summary.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Commitment Staging Tray title or state label, source/proof caption, and readable action text. Emphasis stays on the active Commitment Staging Tray decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Commitment Staging Tray, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Cross-surface consistency, native disclosure, receipt/source/proof continuity, and forbidden-drift protection.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes Commitment Staging Tray; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 3: Protected/unchanged line
 
 - Purpose: Show what will not change, especially protected time, existing proof, and untouched commitments, so the tray never borrows urgency from market-transaction patterns.
 - Contains: Protected/unchanged label, lock icon with text, affected object count, proof-preserved note, source freshness badge, and VoiceOver summary of unchanged state.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Commitment Staging Tray title or state label, source/proof caption, and readable action text. Emphasis stays on the active Commitment Staging Tray decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Commitment Staging Tray, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Cross-surface consistency, native disclosure, receipt/source/proof continuity, and forbidden-drift protection.
-- CTAs: Only if the region owns the current decision; otherwise use disclosure rows.
+- CTAs: Use a visible primary command only when this region changes Commitment Staging Tray; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 4: Why/source/proof basis
 
 - Purpose: Make trust inspectable at rest and deeper on demand.
-- Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for Shared object system.
+- Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for Commitment Staging Tray.
 - Primitives: Source Freshness Badge, Receipt System, Proof Trail, Why This Sheet, QuietGlass for sheet depth.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Commitment Staging Tray title or state label, source/proof caption, and readable action text. Emphasis stays on the active Commitment Staging Tray decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Commitment Staging Tray, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -120,15 +120,15 @@ Commitment Staging Tray
 - Interaction meaning: Opens source/proof/receipt detail or a reversible explanation surface.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 5: Receipt expectation
 
 - Purpose: Make trust inspectable at rest and deeper on demand.
-- Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for Shared object system.
+- Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for Commitment Staging Tray.
 - Primitives: Source Freshness Badge, Receipt System, Proof Trail, Why This Sheet, QuietGlass for sheet depth.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Commitment Staging Tray title or state label, source/proof caption, and readable action text. Emphasis stays on the active Commitment Staging Tray decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Commitment Staging Tray, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -138,15 +138,15 @@ Commitment Staging Tray
 - Interaction meaning: Opens source/proof/receipt detail or a reversible explanation surface.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ### Region 6: Confirm/cancel/undo controls
 
 - Purpose: Let the user commit, cancel, undo, or disclose detail with clear consequence.
 - Contains: Primary and secondary commands for Commitment Staging Tray; disabled/destructive states when applicable; cancel and undo where reversible.
 - Primitives: Primary CTA, Secondary CTA, Destructive CTA, Disabled CTA, native button styling, haptic confirmation intent.
-- Typography: SF-first semantic type; region label stays compact, object/action text gets hierarchy only when it owns the current decision.
-- Spacing: Attached to the object it explains; dense native rhythm with enough separation to avoid card-stack equivalence.
+- Typography: Use native iPhone semantic text hierarchy: compact region label, Commitment Staging Tray title or state label, source/proof caption, and readable action text. Emphasis stays on the active Commitment Staging Tray decision or inspected state.
+- Spacing: Keep source, proof, CTA, and state notes visually attached to Commitment Staging Tray, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
 - Materials: GraphiteRecess as default ground; QuietGlass only for transient inspectable layers; LuminousTrace only where state or origin attachment needs to be visible.
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
@@ -156,19 +156,19 @@ Commitment Staging Tray
 - Interaction meaning: Confirms, cancels, opens detail, or restores the previous state; no silent mutation.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
 - ADHD usability intent: The region reduces choice load by keeping one decision or one state explanation dominant.
-- Forbidden treatments: Generic dashboard modules, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
+- Forbidden treatments: Unowned dashboard panes, equal card stack, decorative celestial effects, chatbot framing, shame/score/streak language, color-only state, or retired top-level destination language.
 
 ## Primitive Inventory
 GraphiteRecess, QuietGlass, LuminousTrace, CelestialField when semantic orientation is needed, Context Crown where orientation matters, Source Freshness Badge, Receipt System, Proof Trail, chevrons/disclosure rows, SF Symbols, semantic labels, primary/secondary/destructive/disabled CTA treatments.
 
 ## Object Inventory
-Shared object system, plus any visible Receipt System, Closure System, Recommendation Source System, Proof Trail System, Commitment Staging Tray, Reflow Preview Tray, Personal Runtime, or source/proof objects referenced by this surface.
+Commitment Staging Tray, plus any visible Receipt System, Closure System, Recommendation Source System, Proof Trail System, Commitment Staging Tray, Reflow Preview Tray, Personal Runtime, or source/proof objects referenced by this surface.
 
 ## Typography Recipe
-SF-first semantic type. The dominant object or decision owns the strongest weight; explanatory source/proof text remains compact but readable. Dynamic Type must preserve Shared object system, the source/proof line, the primary command, and the recovery or cancel path.
+Native iPhone semantic typography. The Commitment Staging Tray title or active decision owns the strongest weight; explanatory source/proof text remains compact but readable. Dynamic Type must preserve Commitment Staging Tray, the source/proof line, the primary command, and the recovery or cancel path.
 
 ## Spacing Recipe
-Use a dense native iPhone rhythm: object-attached spacing, grouped rows only where they represent the same object, and no equal-weight dashboard/card stack. Primary controls remain thumb-zone aware with at least 44 pt touch intent.
+Use a compact native iPhone rhythm: object-attached spacing, grouped rows only where they represent the same object, and no equal-weight dashboard/card stack. Primary controls remain thumb-zone aware with at least 44 pt touch intent.
 
 ## Material Recipe
 GraphiteRecess is the ground. QuietGlass is reserved for sheets, trays, overlays, and inspectable transient layers. LuminousTrace expresses origin, attachment, source freshness, protection, pressure, or continuity. CelestialField appears only when it carries orientation or relationship meaning.

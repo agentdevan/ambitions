@@ -29,7 +29,7 @@ ALLOWED_LEVELS = {
     'global', 'destination_root', 'primary_surface', 'secondary_surface',
     'tertiary_surface', 'transient_surface', 'component_surface', 'state_variant',
 }
-ALLOWED_SPECIFICITY = {'high_specificity', 'medium_specificity', 'low_specificity', 'unresolved_direction'}
+ALLOWED_SPECIFICITY = {'high_specificity', 'unresolved_direction'}
 MINIMUM_SURFACES = {
     'Global App Shell', 'Destination Dock', 'Destination Tab Item',
     'Compact Surface Header', 'Context Crown', 'Back Navigation',
@@ -104,6 +104,7 @@ msgs = []
 for rel in [
     'SURFACE_RECIPE_INDEX.md', 'SURFACE_RECIPE_INVENTORY.yaml',
     'SURFACE_RECIPE_INVENTORY.md', 'FRONTEND_SURFACE_COVERAGE_MAP.md',
+    'trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md',
     'trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md',
     'trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.yaml',
     'trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md',
@@ -128,6 +129,7 @@ if len(items) != 159:
     msgs.append(f'inventory count mismatch: {len(items)}')
 
 seen = {}
+specificity_counts = {'high_specificity': 0, 'medium_specificity': 0, 'low_specificity': 0, 'unresolved_direction': 0}
 for item in items:
     for field in REQUIRED_FIELDS:
         if field not in item:
@@ -144,6 +146,7 @@ for item in items:
         msgs.append(f"{item.get('name')} missing train_family_sources")
     if not isinstance(item.get('train_family_influence'), list) or not item.get('train_family_influence'):
         msgs.append(f"{item.get('name')} missing train_family_influence")
+    specificity_counts[item.get('specificity_status')] = specificity_counts.get(item.get('specificity_status'), 0) + 1
     seen[item.get('name')] = item
     recipe = ROOT / item.get('recipe_file', '')
     if not recipe.exists():
@@ -153,12 +156,25 @@ for item in items:
         msgs.append(f"{item.get('name')} missing planned-train relationship section")
     if '## Relationship to MRI' in text or '## Relationship to HBI' in text:
         msgs.append(f"{item.get('name')} still uses MRI/HBI-only relationship headings")
+    if 'shared object system' in text.lower():
+        msgs.append(f"{item.get('name')} still uses shared object system filler")
     if 'plan as top-level' in text.lower() or 'plan tab' in text.lower():
         msgs.append(f"{item.get('name')} revives Plan as top-level")
     if item.get('specificity_status') == 'unresolved_direction':
         unresolved_name = item.get('name', '').lower()
         if unresolved_name not in (BASE / 'trace/UNMAPPED_INTENDED_SURFACE_GAPS.md').read_text().lower() and unresolved_name not in (BASE / 'trace/TRAIN_FAMILY_UNRESOLVED_DIRECTION_GAPS.md').read_text().lower():
             msgs.append(f"{item.get('name')} unresolved direction not listed in gap docs")
+
+if specificity_counts['medium_specificity']:
+    msgs.append(f"inventory still has medium specificity recipes: {specificity_counts['medium_specificity']}")
+if specificity_counts['low_specificity']:
+    msgs.append(f"inventory still has low specificity recipes: {specificity_counts['low_specificity']}")
+ledger = (BASE / 'trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md').read_text().lower() if (BASE / 'trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md').exists() else ''
+if 'remaining medium recipes: 0' not in ledger:
+    msgs.append('specificity review ledger must record zero remaining medium recipes')
+for unresolved_name in ['local runtime source detail from today', 'review pressure surface', 'month detail', 'shape month flow', 'time stale source state']:
+    if unresolved_name not in ledger:
+        msgs.append(f'specificity review ledger missing unresolved surface: {unresolved_name}')
 
 for name in MINIMUM_SURFACES:
     if name not in seen:
@@ -170,5 +186,7 @@ for root_name in ['Today Root / Reality Meridian', 'Goals Root / Constellation A
 ledger = (BASE / 'trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md').read_text() if (BASE / 'trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md').exists() else ''
 if 'ranking uses explicit registry metadata' not in ledger.lower():
     msgs.append('source precedence ledger missing planned-batch recency doctrine')
+if 'surface recipe specificity review ledger' not in (BASE / 'AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md').read_text().lower():
+    msgs.append('atlas missing specificity review ledger link')
 
 fail(msgs)
