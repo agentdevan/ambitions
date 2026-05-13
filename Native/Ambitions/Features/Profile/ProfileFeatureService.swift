@@ -1131,6 +1131,12 @@ private extension RepositoryBackedProfileService {
             correctionCount: correctionCount,
             openCaptures: openCaptures
         )
+        let runtimeInspectionItems = makeRuntimeInspectionItems(
+            eventCount: eventCount,
+            proofFeedbackCount: proofFeedbackCount,
+            correctionCount: correctionCount,
+            openCaptures: openCaptures
+        )
         return ProfileMemoryControlState(
             title: "What Ambitions Knows",
             subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
@@ -1309,6 +1315,7 @@ private extension RepositoryBackedProfileService {
             narrativeMemories: narrativeMemories,
             conservativePatterns: conservativePatterns,
             memoryLensItems: memoryLensItems,
+            runtimeInspectionItems: runtimeInspectionItems,
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
             footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and durable rejected-memory rules remain manual/future until the safe boundary can prove the result."
         )
@@ -1374,6 +1381,76 @@ private extension RepositoryBackedProfileService {
                 accessibilityLabel: "Memory Lens open capture context",
                 accessibilityValue: openCaptures == 0 ? "Current. Stored on this device." : "May need review. Stored on this device.",
                 accessibilityHint: "Shows source age, privacy boundary, and placement controls for open capture recall."
+            )
+        ]
+    }
+
+    func makeRuntimeInspectionItems(
+        eventCount: Int,
+        proofFeedbackCount: Int,
+        correctionCount: Int,
+        openCaptures: Int
+    ) -> [ProfileRuntimeInspectionItem] {
+        [
+            ProfileRuntimeInspectionItem(
+                id: "runtime-inspection-learned",
+                kind: .learned,
+                title: "What Ambitions learned",
+                summary: correctionCount == 0
+                    ? "No user-confirmed learning is saved yet."
+                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can teach future explanation language.",
+                sourceLabel: "Manual corrections",
+                controlLabel: correctionCount == 0 ? "Available when present" : "Correct or reject reuse",
+                privacyLabel: "Local and source-tied",
+                state: correctionCount == 0 ? .default : .success,
+                accessibilityLabel: "What Ambitions learned",
+                accessibilityValue: correctionCount == 0 ? "No user-confirmed learning saved yet. Local and source-tied." : "\(correctionCount) correction signals. Local and source-tied.",
+                accessibilityHint: "Shows learned local correction state and where reuse can be corrected or rejected."
+            ),
+            ProfileRuntimeInspectionItem(
+                id: "runtime-inspection-used",
+                kind: .used,
+                title: "What Ambitions used",
+                summary: proofFeedbackCount + eventCount == 0
+                    ? "No proof, feedback, or recent event records are available for current explanations."
+                    : "\(proofFeedbackCount + eventCount) proof, feedback, or event record\(proofFeedbackCount + eventCount == 1 ? "" : "s") can ground reviews, receipts, and Why Changed.",
+                sourceLabel: "Proof, feedback, Event Ledger",
+                controlLabel: "Inspect in owning surfaces",
+                privacyLabel: "Summary first",
+                state: proofFeedbackCount + eventCount == 0 ? .warning : .success,
+                accessibilityLabel: "What Ambitions used",
+                accessibilityValue: proofFeedbackCount + eventCount == 0 ? "No current proof, feedback, or recent event records. Summary first." : "\(proofFeedbackCount + eventCount) local records. Summary first.",
+                accessibilityHint: "Shows the local records used for review and change explanations."
+            ),
+            ProfileRuntimeInspectionItem(
+                id: "runtime-inspection-ignored",
+                kind: .ignored,
+                title: "What Ambitions ignored or rejected",
+                summary: openCaptures == 0
+                    ? "No open captures are being held back from stronger memory use right now."
+                    : "\(openCaptures) open capture\(openCaptures == 1 ? "" : "s") stay held until you place, edit, or archive them.",
+                sourceLabel: "Capture review boundary",
+                controlLabel: "Place, edit, archive, or reject reuse",
+                privacyLabel: "No hidden work",
+                state: openCaptures == 0 ? .success : .warning,
+                accessibilityLabel: "What Ambitions ignored or rejected",
+                accessibilityValue: openCaptures == 0 ? "No held open captures. No hidden work." : "\(openCaptures) open captures held for review. No hidden work.",
+                accessibilityHint: "Shows what local context is being held back or rejected before stronger memory use."
+            ),
+            ProfileRuntimeInspectionItem(
+                id: "runtime-inspection-changed",
+                kind: .changed,
+                title: "What Ambitions changed",
+                summary: eventCount == 0
+                    ? "No recent local change events are available yet."
+                    : "\(eventCount) recent event\(eventCount == 1 ? "" : "s") can explain what changed without exposing raw history here.",
+                sourceLabel: "Event Ledger",
+                controlLabel: "Review receipt or owning surface",
+                privacyLabel: "Private by default",
+                state: eventCount == 0 ? .default : .success,
+                accessibilityLabel: "What Ambitions changed",
+                accessibilityValue: eventCount == 0 ? "No recent local change events. Private by default." : "\(eventCount) recent local change events. Private by default.",
+                accessibilityHint: "Shows recent change state and keeps destructive controls outside this inspection row."
             )
         ]
     }

@@ -584,6 +584,21 @@ private struct ProfileMemoryControlsCard: View {
                 )
                 .accessibilityIdentifier("profile.context-recall-card")
 
+                if memoryControls.runtimeInspectionItems.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Runtime inspection",
+                            title: "Learned, used, ignored, changed",
+                            subtitle: "A local readout of what shaped memory, what stayed held back, and what changed."
+                        )
+
+                        ForEach(memoryControls.runtimeInspectionItems) { item in
+                            ProfileRuntimeInspectionItemRow(item: item)
+                        }
+                    }
+                    .accessibilityIdentifier("profile.runtime-inspection-section")
+                }
+
                 MemoryConstellation(
                     title: "Visible memory states",
                     subtitle: "A bounded map of current, stale, sensitive, corrected, and empty states. It is not a hidden inference graph.",
@@ -740,6 +755,69 @@ private struct ProfileMemoryControlsCard: View {
         }
 
         return nodes
+    }
+}
+
+private struct ProfileRuntimeInspectionItemRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: ProfileRuntimeInspectionItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: iconName)
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                    .frame(width: 28)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.summary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+
+                TagPill(item.kind.label, state: item.state)
+            }
+
+            LazyVGrid(
+                columns: [GridItem(.adaptive(minimum: 220), spacing: theme.spacing.xs, alignment: .leading)],
+                alignment: .leading,
+                spacing: theme.spacing.xs
+            ) {
+                TagPill(item.sourceLabel, icon: "doc.text.magnifyingglass", state: .default)
+                TagPill(item.controlLabel, icon: "hand.tap", state: item.state)
+                TagPill(item.privacyLabel, icon: "lock.shield", state: .default)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: item.accessibilityLabel,
+            value: item.accessibilityValue,
+            hint: item.accessibilityHint
+        )
+    }
+
+    private var iconName: String {
+        switch item.kind {
+        case .learned:
+            return "checkmark.seal"
+        case .used:
+            return "doc.text.magnifyingglass"
+        case .ignored:
+            return "xmark.seal"
+        case .changed:
+            return "arrow.triangle.2.circlepath"
+        }
     }
 }
 

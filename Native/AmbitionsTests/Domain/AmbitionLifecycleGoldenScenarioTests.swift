@@ -203,7 +203,7 @@ private extension AmbitionLifecycleGoldenScenarioTests {
         let reflection: Reflection
         let adaptation: AdaptationPivot
         let recovery: RecoveryThread
-        let recommendationTrace: RecommendationTrace
+        let recommendationTrace: AmbitionGraphRecommendationTrace
         let snapshot: AmbitionGraphSnapshot
     }
 
@@ -368,7 +368,7 @@ private extension AmbitionLifecycleGoldenScenarioTests {
             createdAt: "2026-05-13T02:12:00Z",
             updatedAt: "2026-05-13T02:12:00Z"
         )
-        let recommendationTrace = RecommendationTrace(
+        let recommendationTrace = AmbitionGraphRecommendationTrace(
             id: "trace-reentry",
             recommendedObjectID: blockedCommitment.id,
             sourceRefs: [proof.id, reflection.id],

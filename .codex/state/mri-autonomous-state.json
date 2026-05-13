@@ -11,7 +11,8 @@
     "MRI08",
     "MRI09",
     "MRI10",
-    "MRI11"
+    "MRI11",
+    "MRI12"
   ],
   "history": [
     {
@@ -68,6 +69,11 @@
       "batch": "MRI11",
       "prompt": "prompts/batches/MRI11-WHY-THIS-TRUST-SEAM-RUNTIME.md",
       "marked_complete_at": "2026-05-13T08:00:18Z"
+    },
+    {
+      "batch": "MRI12",
+      "prompt": "prompts/batches/MRI12-PERSONAL-RUNTIME-INSPECTION.md",
+      "marked_complete_at": "2026-05-13T09:05:25Z"
     }
   ]
 }

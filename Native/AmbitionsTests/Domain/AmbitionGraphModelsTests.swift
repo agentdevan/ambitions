@@ -146,7 +146,7 @@ final class AmbitionGraphModelsTests: XCTestCase {
             updatedAt: "2026-01-01T10:15:00Z"
         )
 
-        let trace = RecommendationTrace(
+        let trace = AmbitionGraphRecommendationTrace(
             id: traceID,
             recommendedObjectID: commitmentID,
             sourceRefs: ["source-1", "source-2"],
@@ -245,7 +245,7 @@ final class AmbitionGraphModelsTests: XCTestCase {
     }
 
     func testRecommendationTraceEnforcesExplainabilityAndNoAiCopyDefaults() {
-        let trace = RecommendationTrace(
+        let trace = AmbitionGraphRecommendationTrace(
             id: "trace-1",
             recommendedObjectID: "obj-1",
             sourceRefs: ["source-1", "source-1", "source-2"],

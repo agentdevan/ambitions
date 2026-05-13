@@ -271,6 +271,36 @@ struct ProfileMemoryLensItem: Identifiable, Sendable, Equatable {
     let accessibilityHint: String
 }
 
+enum ProfileRuntimeInspectionKind: String, Sendable, Equatable, CaseIterable {
+    case learned
+    case used
+    case ignored
+    case changed
+
+    var label: String {
+        switch self {
+        case .learned: "Learned"
+        case .used: "Used"
+        case .ignored: "Ignored"
+        case .changed: "Changed"
+        }
+    }
+}
+
+struct ProfileRuntimeInspectionItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let kind: ProfileRuntimeInspectionKind
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let controlLabel: String
+    let privacyLabel: String
+    let state: AmbitionVisualState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
 struct ProfilePersonalizationConsentState: Sendable, Equatable {
     let title: String
     let summary: String
@@ -300,8 +330,37 @@ struct ProfileMemoryControlState: Sendable, Equatable {
     let narrativeMemories: [ProfileNarrativeMemory]
     let conservativePatterns: [ProfileMemoryPattern]
     let memoryLensItems: [ProfileMemoryLensItem]
+    let runtimeInspectionItems: [ProfileRuntimeInspectionItem]
     let recoverySummary: String
     let footer: String
+
+    init(
+        title: String,
+        subtitle: String,
+        items: [SettingsItem],
+        consent: ProfilePersonalizationConsentState,
+        privateModeControls: [ProfilePrivateModeControl],
+        groups: [ProfileMemoryGroup],
+        narrativeMemories: [ProfileNarrativeMemory],
+        conservativePatterns: [ProfileMemoryPattern],
+        memoryLensItems: [ProfileMemoryLensItem],
+        runtimeInspectionItems: [ProfileRuntimeInspectionItem] = [],
+        recoverySummary: String,
+        footer: String
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.items = items
+        self.consent = consent
+        self.privateModeControls = privateModeControls
+        self.groups = groups
+        self.narrativeMemories = narrativeMemories
+        self.conservativePatterns = conservativePatterns
+        self.memoryLensItems = memoryLensItems
+        self.runtimeInspectionItems = runtimeInspectionItems
+        self.recoverySummary = recoverySummary
+        self.footer = footer
+    }
 }
 
 struct ProfileAssumptionCorrectionState: Sendable, Equatable {

@@ -86,7 +86,7 @@ private extension LargeStoreFixtureGenerator {
             case let .planned(result):
                 return result
             case let .starterPlanned(result):
-                return GoalPlannedResult(draft: result.draft, plan: result.plan, lint: result.lint)
+                return GoalPlannedResult(draft: result.draft, plan: result.plan, lint: result.lint, metadata: result.metadata)
             case .clarificationRequired, .blocked:
                 return nil
             }

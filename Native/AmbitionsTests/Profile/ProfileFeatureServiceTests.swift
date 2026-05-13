@@ -720,6 +720,130 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
     }
 
+    func testMRI12RuntimeInspectionDistinguishesLearnedUsedIgnoredAndChanged() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "proof-mri12",
+                goalID: "goal-mri12",
+                stepID: "step-mri12",
+                evidenceKind: .stepCompleted,
+                source: .manual,
+                capturedAt: "2026-05-13T08:00:00Z",
+                progressDelta: nil,
+                confidenceDelta: nil,
+                minutesInvested: 20,
+                note: "One proof point for runtime inspection."
+            )
+        ])
+        try await repositories.captures.saveCaptures([
+            Capture(
+                id: "capture-mri12",
+                createdAt: "2026-05-13T08:01:00Z",
+                updatedAt: "2026-05-13T08:01:00Z",
+                rawText: "Hold this until I place it",
+                sourceType: nil,
+                status: .needsTriage,
+                linkedGoalID: nil
+            )
+        ])
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-mri12",
+                goalID: "goal-mri12",
+                createdAt: "2026-05-13T08:02:00Z",
+                updatedAt: "2026-05-13T08:02:00Z",
+                source: .explicitManualCorrection,
+                kind: .energyFitCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .energyEvaluation,
+                    canonicalField: nil,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: "step-mri12",
+                    targetFingerprint: "energy::step-mri12",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+                applicationKey: "goal##energy##step",
+                userNote: "Use a lighter version"
+            )
+        ])
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-mri12",
+                kind: .goalUpdated,
+                occurredAt: "2026-05-13T08:03:00Z",
+                source: .goals,
+                goalID: "goal-mri12",
+                title: "Goal changed",
+                summary: "Goal changed after local review.",
+                tone: .positive,
+                trust: EventLedgerTrustMetadata(isUserConfirmed: true),
+                privacy: .standard,
+                localOnly: true
+            )
+        )
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let inspectionItems = dashboard.memoryControls.runtimeInspectionItems
+        let visibleCopy = inspectionItems.flatMap {
+            [
+                $0.kind.label,
+                $0.title,
+                $0.summary,
+                $0.sourceLabel,
+                $0.controlLabel,
+                $0.privacyLabel,
+                $0.accessibilityLabel,
+                $0.accessibilityValue,
+                $0.accessibilityHint
+            ]
+        }.joined(separator: " ")
+
+        XCTAssertEqual(inspectionItems.map(\.kind), [.learned, .used, .ignored, .changed])
+        XCTAssertEqual(inspectionItems.map(\.kind.label), ["Learned", "Used", "Ignored", "Changed"])
+        XCTAssertTrue(inspectionItems.contains(where: {
+            $0.id == "runtime-inspection-learned" &&
+            $0.summary.contains("1 correction signal") &&
+            $0.controlLabel == "Correct or reject reuse" &&
+            $0.privacyLabel == "Local and source-tied"
+        }))
+        XCTAssertTrue(inspectionItems.contains(where: {
+            $0.id == "runtime-inspection-used" &&
+            $0.summary.contains("2 proof, feedback, or event records") &&
+            $0.sourceLabel == "Proof, feedback, Event Ledger" &&
+            $0.privacyLabel == "Summary first"
+        }))
+        XCTAssertTrue(inspectionItems.contains(where: {
+            $0.id == "runtime-inspection-ignored" &&
+            $0.summary.contains("1 open capture") &&
+            $0.controlLabel.contains("reject reuse") &&
+            $0.privacyLabel == "No hidden work"
+        }))
+        XCTAssertTrue(inspectionItems.contains(where: {
+            $0.id == "runtime-inspection-changed" &&
+            $0.summary.contains("1 recent event") &&
+            $0.controlLabel == "Review receipt or owning surface" &&
+            $0.privacyLabel == "Private by default"
+        }))
+        XCTAssertTrue(dashboard.memoryControls.items.contains(where: {
+            $0.id == "profile-memory-forget" &&
+            $0.valueLabel == "Unavailable"
+        }))
+        XCTAssertTrue(dashboard.memoryControls.footer.contains("broad forgetting, deletion"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI recommends"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud memory"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("production-ready"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release-ready"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("delete now"))
+    }
+
     func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {
         let repositories = try await makeRepositories()
         try await repositories.teaching.saveSignals([

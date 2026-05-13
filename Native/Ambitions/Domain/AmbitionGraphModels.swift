@@ -763,7 +763,7 @@ struct RecoveryReentryStep: Codable, Sendable, Equatable, Hashable, Identifiable
     }
 }
 
-struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+struct AmbitionGraphRecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let recommendedObjectID: String
     let sourceRefs: [String]
@@ -882,7 +882,7 @@ struct AmbitionGraphSnapshot: Codable, Sendable, Equatable, Hashable, Identifiab
     let proofs: [Proof]
     let constraints: [Constraint]
     let recoveryThreads: [RecoveryThread]
-    let recommendationTraces: [RecommendationTrace]
+    let recommendationTraces: [AmbitionGraphRecommendationTrace]
     let identityDirections: [IdentityDirection]
     let outcomes: [Outcome]
     let steps: [AmbitionGraphStep]
@@ -911,7 +911,7 @@ struct AmbitionGraphSnapshot: Codable, Sendable, Equatable, Hashable, Identifiab
         proofs: [Proof] = [],
         constraints: [Constraint] = [],
         recoveryThreads: [RecoveryThread] = [],
-        recommendationTraces: [RecommendationTrace] = [],
+        recommendationTraces: [AmbitionGraphRecommendationTrace] = [],
         identityDirections: [IdentityDirection] = [],
         outcomes: [Outcome] = [],
         steps: [AmbitionGraphStep] = [],
@@ -940,7 +940,7 @@ struct AmbitionGraphSnapshot: Codable, Sendable, Equatable, Hashable, Identifiab
         self.proofs = try container.decodeIfPresent([Proof].self, forKey: .proofs) ?? []
         self.constraints = try container.decodeIfPresent([Constraint].self, forKey: .constraints) ?? []
         self.recoveryThreads = try container.decodeIfPresent([RecoveryThread].self, forKey: .recoveryThreads) ?? []
-        self.recommendationTraces = try container.decodeIfPresent([RecommendationTrace].self, forKey: .recommendationTraces) ?? []
+        self.recommendationTraces = try container.decodeIfPresent([AmbitionGraphRecommendationTrace].self, forKey: .recommendationTraces) ?? []
         self.identityDirections = try container.decodeIfPresent([IdentityDirection].self, forKey: .identityDirections) ?? []
         self.outcomes = try container.decodeIfPresent([Outcome].self, forKey: .outcomes) ?? []
         self.steps = try container.decodeIfPresent([AmbitionGraphStep].self, forKey: .steps) ?? []

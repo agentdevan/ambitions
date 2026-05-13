@@ -417,7 +417,7 @@ private extension AmbitionGraphProjectionStoreTests {
             updatedAt: "2026-05-12T07:28:00Z"
         )
 
-        let captureTrace = RecommendationTrace(
+        let captureTrace = AmbitionGraphRecommendationTrace(
             id: "trace-capture",
             recommendedObjectID: "commitment-capture",
             sourceRefs: ["source-ref"],
@@ -427,7 +427,7 @@ private extension AmbitionGraphProjectionStoreTests {
             createdAt: "2026-05-12T07:29:00Z"
         )
 
-        let goalsTrace = RecommendationTrace(
+        let goalsTrace = AmbitionGraphRecommendationTrace(
             id: "trace-goals",
             recommendedObjectID: "commitment-goal",
             sourceRefs: ["goals-source"],
