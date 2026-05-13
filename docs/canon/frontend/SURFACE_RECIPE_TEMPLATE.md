@@ -66,9 +66,7 @@
 
 ## ADHD Usability Intent
 
-## Relationship to MRI
-
-## Relationship to HBI
+## Relationship to Planned Train / Source Families
 
 ## Source Truth
 

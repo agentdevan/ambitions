@@ -16,7 +16,7 @@ Status: Active frontend canon index
 - Master: `AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
 - Registry: `VISUAL_ITEM_REGISTRY.yaml`
 - Surface bibles: `surfaces/*.md`
-- Source-family notes: `source-families/MRI_FRONTEND_SOURCE_FAMILY.md`, `source-families/HBI_FRONTEND_SOURCE_FAMILY.md`
+- Source-family notes: `PLANNED_TRAIN_FRONTEND_INTEGRATION_MAP.md`, `source-families/MRI_FRONTEND_SOURCE_FAMILY.md`, `source-families/HBI_FRONTEND_SOURCE_FAMILY.md`
 - Primitive bibles: `primitives/*.md`
 - Behavior bibles: `behavior/*.md`
 - Trace matrices: `trace/*.md`

@@ -48,7 +48,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "destination_dock",
@@ -99,7 +118,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "destination_tab_item",
@@ -150,7 +188,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "compact_surface_header",
@@ -201,7 +258,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "context_crown",
@@ -252,7 +328,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "back_navigation",
@@ -303,7 +398,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "sheet_chrome",
@@ -354,7 +468,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "tray_chrome",
@@ -405,7 +538,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "receipt_toast_inline_confirmation",
@@ -456,7 +608,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "global_empty_state_shell",
@@ -507,7 +682,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "global_error_fallback_shell",
@@ -558,7 +752,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_root_reality_meridian",
@@ -609,7 +822,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_current_context_header",
@@ -660,7 +900,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_start_here_region",
@@ -711,7 +978,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_reality_meridian_rail",
@@ -762,7 +1056,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_recommended_step_object",
@@ -813,7 +1134,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_now_next_later_sequence",
@@ -864,7 +1212,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_upcoming_commitments_region",
@@ -915,7 +1290,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd",
+      "capture"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language",
+      "intake, route reveal, and placement choices"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_closure_prompt_region",
@@ -966,7 +1370,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_receipt_shelf",
@@ -1017,7 +1448,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_source_freshness_indicator",
@@ -1068,7 +1526,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "step_detail",
@@ -1119,7 +1604,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "step_session",
@@ -1170,7 +1682,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "recommendation_source_sheet",
@@ -1221,7 +1760,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "closure_sheet",
@@ -1272,7 +1838,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "receipt_detail",
@@ -1323,7 +1916,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "proof_attachment_detail",
@@ -1374,7 +1994,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd",
+      "capture"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language",
+      "intake, route reveal, and placement choices"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "adjust_plan_reflow_preview_entry",
@@ -1427,7 +2076,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "blocked_detail",
@@ -1478,7 +2154,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "hbi",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "historical comparison, recovery continuity, and archive context",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "waiting_detail",
@@ -1529,7 +2234,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "hbi",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "historical comparison, recovery continuity, and archive context",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goal_thread_context_from_today",
@@ -1580,7 +2314,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd",
+      "goals"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language",
+      "goal direction, proof trail, and object depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "local_runtime_source_detail_from_today",
@@ -1633,7 +2396,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "unresolved_direction"
   },
   {
     "surface_id": "today_empty_state",
@@ -1684,7 +2474,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_no_schedule_data_state",
@@ -1735,7 +2552,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_overloaded_state",
@@ -1786,7 +2630,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_recovery_state",
@@ -1837,7 +2708,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "hbi",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "historical comparison, recovery continuity, and archive context",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_vacation_away_state",
@@ -1888,7 +2788,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "today_protected_time_state",
@@ -1939,7 +2866,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_stale_recommendation_state",
@@ -1990,7 +2944,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "lid",
+      "rec",
+      "today",
+      "hbi",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "source/proof/receipt continuity for the current-day object and recovery state",
+      "recommendation source, correction, and return-path clarity",
+      "inspectable local intelligence freshness and current-state explanation",
+      "receipt and proof continuity attached to the changed object",
+      "Reality Meridian, now/next/later sequencing, and current-day fit",
+      "historical comparison, recovery continuity, and archive context",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goals_root_constellation_atlas",
@@ -2041,7 +3024,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goals_life_area_map",
@@ -2092,7 +3098,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "selected_life_area_surface",
@@ -2143,7 +3172,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "ambition_graph",
@@ -2194,7 +3246,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goal_thread_detail",
@@ -2245,7 +3320,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goal_detail",
@@ -2296,7 +3394,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "commitment_detail",
@@ -2347,7 +3468,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd",
+      "capture"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language",
+      "intake, route reveal, and placement choices"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "proof_trail",
@@ -2398,7 +3544,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "proof_detail",
@@ -2449,7 +3622,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "proof_gap_state",
@@ -2500,7 +3700,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "blocker_detail",
@@ -2551,7 +3778,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "alternate_path_detail",
@@ -2602,7 +3852,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "milestone_detail",
@@ -2653,7 +3926,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "recommended_step_context_from_goals",
@@ -2704,7 +4000,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd",
+      "today"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language",
+      "current-day orientation and one-dominant-object logic"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "reflection_recovery_detail",
@@ -2755,7 +4076,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd",
+      "capture"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language",
+      "intake, route reveal, and placement choices"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goals_empty_state",
@@ -2806,7 +4152,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goals_review_state",
@@ -2857,7 +4226,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goals_blocked_state",
@@ -2908,7 +4300,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "goals_archive_historical_goal_state",
@@ -2959,7 +4374,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "rec",
+      "goals",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "goal-thread state, source/proof continuity, and path changes",
+      "historical proof continuity, comparison, and recovery context",
+      "receipt and proof continuity attached to goal changes",
+      "Constellation Atlas, proof trail, and life-area direction",
+      "goal detail depth and path/planning language"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_root_atmosphere_composer",
@@ -3010,7 +4448,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_idle_composer",
@@ -3061,7 +4522,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_active_text_entry",
@@ -3112,7 +4596,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_dictation_state",
@@ -3163,7 +4670,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "capture_attachment_proof_picker",
@@ -3214,7 +4744,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "capture_post_input_route_reveal",
@@ -3265,7 +4820,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_save_as_proof_route",
@@ -3316,7 +4894,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_make_commitment_route",
@@ -3367,7 +4970,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_grow_into_goal_route",
@@ -3418,7 +5044,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy",
+      "goals"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend",
+      "goal direction, proof trail, and object depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_mark_constraint_route",
@@ -3469,7 +5120,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_reflect_route",
@@ -3520,7 +5194,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_hold_needs_a_place_route",
@@ -3571,7 +5268,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_receipt",
@@ -3622,7 +5342,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_parse_uncertain_state",
@@ -3673,7 +5418,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_offline_local_only_state",
@@ -3724,7 +5492,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "capture_error_failed_attachment_state",
@@ -3775,7 +5566,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "capture_empty_first_use_state",
@@ -3826,7 +5640,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "mri",
+      "rec",
+      "capture",
+      "privacy",
+      "onboarding_first_run"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "route reveal, placement, correction, and local trust",
+      "source basis, correction visibility, and return path",
+      "receipt and proof continuity for capture outcomes",
+      "intake, placement, and route reveal",
+      "local-first capture and no hosted data backend",
+      "first-use guidance and setup sequencing"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "time_root_lifeshape_field",
@@ -3877,7 +5716,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "time_scope_control",
@@ -3928,7 +5790,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "day_lifeshape_surface",
@@ -3979,7 +5864,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "week_lifeshape_surface",
@@ -4030,7 +5938,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "month_lifeshape_surface",
@@ -4081,7 +6012,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "open_time_region",
@@ -4132,7 +6086,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "protected_time_region",
@@ -4183,7 +6160,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "pressure_region",
@@ -4234,7 +6234,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "best_fit_region",
@@ -4285,7 +6308,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "recovery_flex_region",
@@ -4336,7 +6382,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "review_pressure_surface",
@@ -4389,7 +6458,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "unresolved_direction"
   },
   {
     "surface_id": "best_fit_explanation_sheet",
@@ -4440,7 +6532,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "protected_time_detail",
@@ -4491,7 +6606,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "day_detail",
@@ -4542,7 +6680,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "week_detail",
@@ -4593,7 +6754,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "month_detail",
@@ -4646,7 +6830,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "unresolved_direction"
   },
   {
     "surface_id": "reflow_preview_tray",
@@ -4697,7 +6904,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "shape_day_flow",
@@ -4748,7 +6978,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "reflow_week_flow",
@@ -4799,7 +7052,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "shape_month_flow",
@@ -4852,7 +7128,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "unresolved_direction"
   },
   {
     "surface_id": "time_receipt_detail",
@@ -4903,7 +7202,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth",
+      "receipt, proof, source, and correction visibility",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "schedule_and_availability_entry",
@@ -4954,7 +7282,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "planning_defaults_entry",
@@ -5007,7 +7358,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "vacation_away_time_entry",
@@ -5058,7 +7432,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "time_no_calendar_data_state",
@@ -5109,7 +7506,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "time_overloaded_state",
@@ -5160,7 +7580,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "time_protected_block_state",
@@ -5211,7 +7654,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "time_vacation_away_state",
@@ -5262,7 +7728,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "time_stale_source_state",
@@ -5315,7 +7804,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "pk",
+      "hbi",
+      "planning",
+      "time",
+      "pd",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "life-shape field, protected time, pressure, and recovery",
+      "historical comparison for reflow and protected-state context",
+      "planning defaults, availability, and schedule shape",
+      "LifeShape Field, day/week/month depth, and horizon controls",
+      "time horizon specificity and planning depth",
+      "receipt, proof, source, and correction visibility",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "unresolved_direction"
   },
   {
     "surface_id": "you_root_user_system_profile",
@@ -5366,7 +7884,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "user_profile_header",
@@ -5417,7 +7958,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "local_runtime_trust_panel",
@@ -5468,7 +8032,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "receipt, proof, source, and correction visibility",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "planning_setup_section",
@@ -5521,7 +8114,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "planning"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "planning depth and time-shape specificity"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "schedule_and_availability",
@@ -5572,7 +8190,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "planning"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "planning depth and time-shape specificity"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "planning_defaults",
@@ -5625,7 +8268,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "planning"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "planning depth and time-shape specificity"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "vacation_away_time",
@@ -5676,7 +8344,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "automation_and_trust",
@@ -5727,7 +8418,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "receipt, proof, source, and correction visibility",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "notifications",
@@ -5778,7 +8498,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "capture_preferences",
@@ -5829,7 +8572,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "capture"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "intake, route reveal, and placement choices"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "focus_session_defaults",
@@ -5880,7 +8648,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "privacy",
@@ -5931,7 +8722,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "personal_runtime",
@@ -5982,7 +8796,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "receipt, proof, source, and correction visibility",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "local_data_reset_forget",
@@ -6033,7 +8876,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "help",
@@ -6084,7 +8950,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "about_ambitions",
@@ -6135,7 +9024,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "you_empty_first_run_state",
@@ -6186,7 +9098,32 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "onboarding_first_run"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "first-use guidance and setup sequencing"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "you_trust_warning_state",
@@ -6237,7 +9174,36 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults",
+      "receipt, proof, source, and correction visibility",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "you_offline_local_only_state",
@@ -6288,7 +9254,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "aos",
+      "privacy",
+      "runtime",
+      "you",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "local runtime trust controls, inspectable reasoning, and no hidden inference",
+      "memory, reset, delete, export, and local control",
+      "on-device runtime posture and correction paths",
+      "User System Profile and personal control-plane language",
+      "settings-style control language and personal defaults"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "commitment_staging_tray",
@@ -6339,7 +9328,28 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "capture"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "intake, route reveal, and placement choices"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "reflow_preview_tray",
@@ -6390,7 +9400,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "receipt_system",
@@ -6441,7 +9474,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "closure_system",
@@ -6492,7 +9548,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "proof_trail_system",
@@ -6543,7 +9618,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "recommendation_source_system",
@@ -6594,7 +9692,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "why_this_sheet",
@@ -6645,7 +9766,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "source_freshness_badge",
@@ -6696,7 +9836,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "mri",
+      "lid"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "still_counts_state",
@@ -6747,7 +9910,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "moved_state",
@@ -6798,7 +9980,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "skipped_not_needed_state",
@@ -6849,7 +10050,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "blocked_state",
@@ -6900,7 +10120,28 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "hbi"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "historical comparison, recovery continuity, and archive context"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "waiting_state",
@@ -6951,7 +10192,28 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "hbi"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "historical comparison, recovery continuity, and archive context"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "needs_recovery_state",
@@ -7002,7 +10264,28 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "hbi"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "historical comparison, recovery continuity, and archive context"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "needs_review_state",
@@ -7053,7 +10336,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "protected_marker",
@@ -7104,7 +10406,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "pressure_marker",
@@ -7155,7 +10480,30 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "best_fit_marker",
@@ -7206,7 +10554,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "open_marker",
@@ -7257,7 +10624,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "primary_cta",
@@ -7308,7 +10694,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "secondary_cta",
@@ -7359,7 +10764,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "destructive_cta",
@@ -7410,7 +10834,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "disabled_cta",
@@ -7461,7 +10904,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "chevron_disclosure_row",
@@ -7512,7 +10974,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "quietglass_wrapper",
@@ -7563,7 +11044,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "graphiterecess_base",
@@ -7614,7 +11114,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "luminoustrace_state_line",
@@ -7665,7 +11184,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "celestialfield_semantic_layer",
@@ -7716,7 +11254,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "moat_runtime",
+      "runtime",
+      "rec"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "proof, recovery, trust, and anti-commodity guardrails",
+      "local execution, receipts, and explainable state",
+      "receipt/proof surfaces and acknowledgements"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "first_run_root",
@@ -7767,7 +11324,24 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "schedule_setup_prompt",
@@ -7818,7 +11392,24 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "planning_defaults_prompt",
@@ -7871,7 +11462,28 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "privacy_local_runtime_explanation",
@@ -7922,7 +11534,34 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy",
+      "rec",
+      "mri",
+      "lid",
+      "planning",
+      "pd"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust",
+      "receipt, proof, source, and correction visibility",
+      "inspectable source basis and correction routing",
+      "local-intelligence freshness and source explanation",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "capture_first_use_prompt",
@@ -7973,7 +11612,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy",
+      "capture"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust",
+      "intake, route reveal, and placement choices"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "goals_first_use_prompt",
@@ -8024,7 +11682,26 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy",
+      "goals"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust",
+      "goal direction, proof trail, and object depth"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "time_first_use_prompt",
@@ -8075,7 +11752,24 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust"
+    ],
+    "specificity_status": "medium_specificity"
   },
   {
     "surface_id": "today_first_use_state",
@@ -8126,6 +11820,29 @@
       "sportsbook or gambling language",
       "color-only state meaning",
       "shame language"
-    ]
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy",
+      "planning",
+      "pd",
+      "today"
+    ],
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust",
+      "planning depth and time-shape specificity",
+      "specific planning detail and fit language",
+      "current-day orientation and one-dominant-object logic"
+    ],
+    "specificity_status": "medium_specificity"
   }
 ]

@@ -32,7 +32,7 @@ A horizon surface that changes scale while preserving LifeShape meaning, source 
 The user should see capacity, protection, pressure, and fit as a living field, not a calendar clone or schedule spreadsheet.
 
 ## Why This Surface Exists
-This recipe fixes the intended final-state visual contract for Shape Day Flow: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
+This recipe defines the intended final-state visual contract for Shape Day Flow: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
 
 ## Primary Object
 LifeShape Field
@@ -239,11 +239,17 @@ Replace animated continuity with static before/after labels, attachment lines, o
 ## ADHD Usability Intent
 Keep one dominant decision or one state explanation visible. Use short labels at rest, progressive disclosure for reasons, stable placement for cancel/undo/recovery, and no competing CTAs.
 
-## Relationship to MRI
-MRI influences this surface through local fit, pressure, protected-time, source freshness, and consentful reflow recommendations. This is intended visual direction only, not MRI runtime proof.
+## Relationship to Planned Train / Source Families
 
-## Relationship to HBI
-HBI influences this surface through baseline capacity, recurring pressure, recovery patterns, and source freshness comparison. This is intended visual direction only, not HBI runtime proof.
+- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- SI: shared chrome, reusable primitives, and the object-first interface language.
+- Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
+- QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.
+- PK: life-shape field, protected time, pressure, and recovery.
+- HBI: historical comparison for reflow and protected-state context.
+- Planning: planning defaults, availability, and schedule shape.
+- Time: LifeShape Field, day/week/month depth, and horizon controls.
+- PD: time horizon specificity and planning depth.
 
 ## Source Truth
 - docs/truth/PRODUCT_DESIGN_TRUTH.md

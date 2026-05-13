@@ -95,9 +95,9 @@ This ledger records source-family and overlay inputs that informed final-state f
 - Unresolved extraction gaps: current batch state can change independently of older queue snapshots
 - Ledger update target: planned-batch inventory and source precedence ledger
 
-## Planned Frontend Batch Prompts
+## Planned Train / Source Families
 
-- Source paths inspected: `prompts/batches/FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001.md`, `prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md`
+- Source paths inspected: `docs/canon/frontend/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md`, `docs/canon/frontend/trace/TRAIN_FAMILY_TO_SURFACE_MATRIX.md`, `docs/canon/frontend/trace/TRAIN_FAMILY_TO_OBJECT_MATRIX.md`, `docs/canon/frontend/trace/TRAIN_FAMILY_TO_PRIMITIVE_MATRIX.md`, plus prompt, queue, and registry evidence
 - Visual-direction content found: top-level IA, source-freshness, proof/receipt, tray, trust, and accessibility direction
 - Affected destination(s): Today, Goals, Capture, Time, You, cross-surface proof areas
 - Affected real surface(s): priority root surfaces, commitment and reflow trays, source/proof surfaces
@@ -106,7 +106,7 @@ This ledger records source-family and overlay inputs that informed final-state f
 - Source precedence: prompts are scoped intent only
 - Conflict resolution: active truth and current source override prompt wording
 - Unresolved extraction gaps: prompts can overstate completeness; that claim remains unproven
-- Ledger update target: priority recipes and planned-batch inventory
+- Ledger update target: all-train inventory, family matrices, priority recipes, and unresolved-gap entries
 
 ## Previous Atlas / Surface Recipe Docs
 

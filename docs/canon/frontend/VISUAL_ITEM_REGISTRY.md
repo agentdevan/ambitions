@@ -2,179 +2,181 @@
 
 Status: Active intended final-state registry
 
-The registry aligns with surface recipes and excludes implementation/proof-required fields from the previous atlas phase.
+The registry now carries all-train source-family fields and specificity status in addition to the existing surface/object metadata.
 
-- `global_app_shell` - Global App Shell - intended_canon - app_shell
-- `destination_dock` - Destination Dock - intended_canon - navigation_chrome
-- `destination_tab_item` - Destination Tab Item - intended_canon - navigation_chrome
-- `compact_surface_header` - Compact Surface Header - intended_canon - navigation_chrome
-- `context_crown` - Context Crown - intended_canon - navigation_chrome
-- `back_navigation` - Back Navigation - intended_canon - navigation_chrome
-- `sheet_chrome` - Sheet Chrome - intended_canon - navigation_chrome
-- `tray_chrome` - Tray Chrome - intended_canon - navigation_chrome
-- `receipt_toast_inline_confirmation` - Receipt Toast / Inline Confirmation - intended_canon - overlay
-- `global_empty_state_shell` - Global Empty State Shell - intended_canon - empty_state
-- `global_error_fallback_shell` - Global Error / Fallback Shell - intended_canon - error_state
-- `today_root_reality_meridian` - Today Root / Reality Meridian - intended_canon - top_level_surface
-- `today_current_context_header` - Today Current Context Header - intended_canon - drill_down
-- `today_start_here_region` - Today Start Here Region - intended_canon - drill_down
-- `today_reality_meridian_rail` - Today Reality Meridian Rail - intended_canon - drill_down
-- `today_recommended_step_object` - Today Recommended Step Object - intended_canon - drill_down
-- `today_now_next_later_sequence` - Today Now / Next / Later Sequence - intended_canon - drill_down
-- `today_upcoming_commitments_region` - Today Upcoming Commitments Region - intended_canon - drill_down
-- `today_closure_prompt_region` - Today Closure Prompt Region - intended_canon - drill_down
-- `today_receipt_shelf` - Today Receipt Shelf - intended_canon - drill_down
-- `today_source_freshness_indicator` - Today Source Freshness Indicator - intended_canon - drill_down
-- `step_detail` - Step Detail - intended_canon - drill_down
-- `step_session` - Step Session - intended_canon - drill_down
-- `recommendation_source_sheet` - Recommendation Source Sheet - intended_canon - sheet
-- `closure_sheet` - Closure Sheet - intended_canon - sheet
-- `receipt_detail` - Receipt Detail - intended_canon - drill_down
-- `proof_attachment_detail` - Proof Attachment Detail - planned_canon - drill_down
-- `adjust_plan_reflow_preview_entry` - Adjust Plan / Reflow Preview Entry - intended_canon - drill_down
-- `blocked_detail` - Blocked Detail - intended_canon - state_surface
-- `waiting_detail` - Waiting Detail - intended_canon - state_surface
-- `goal_thread_context_from_today` - Goal Thread Context from Today - intended_canon - drill_down
-- `local_runtime_source_detail_from_today` - Local Runtime Source Detail from Today - unresolved_direction - drill_down
-- `today_empty_state` - Today Empty State - intended_canon - empty_state
-- `today_no_schedule_data_state` - Today No Schedule Data State - intended_canon - empty_state
-- `today_overloaded_state` - Today Overloaded State - intended_canon - state_surface
-- `today_recovery_state` - Today Recovery State - intended_canon - state_surface
-- `today_vacation_away_state` - Today Vacation / Away State - planned_canon - state_surface
-- `today_protected_time_state` - Today Protected Time State - intended_canon - state_surface
-- `today_stale_recommendation_state` - Today Stale Recommendation State - intended_canon - state_surface
-- `goals_root_constellation_atlas` - Goals Root / Constellation Atlas - intended_canon - top_level_surface
-- `goals_life_area_map` - Goals Life Area Map - intended_canon - drill_down
-- `selected_life_area_surface` - Selected Life Area Surface - intended_canon - drill_down
-- `ambition_graph` - Ambition Graph - intended_canon - drill_down
-- `goal_thread_detail` - Goal Thread Detail - intended_canon - drill_down
-- `goal_detail` - Goal Detail - intended_canon - drill_down
-- `commitment_detail` - Commitment Detail - intended_canon - drill_down
-- `proof_trail` - Proof Trail - intended_canon - drill_down
-- `proof_detail` - Proof Detail - intended_canon - drill_down
-- `proof_gap_state` - Proof Gap State - intended_canon - state_surface
-- `blocker_detail` - Blocker Detail - intended_canon - drill_down
-- `alternate_path_detail` - Alternate Path Detail - intended_canon - drill_down
-- `milestone_detail` - Milestone Detail - intended_canon - drill_down
-- `recommended_step_context_from_goals` - Recommended Step Context from Goals - intended_canon - drill_down
-- `reflection_recovery_detail` - Reflection / Recovery Detail - intended_canon - state_surface
-- `goals_empty_state` - Goals Empty State - intended_canon - empty_state
-- `goals_review_state` - Goals Review State - intended_canon - state_surface
-- `goals_blocked_state` - Goals Blocked State - intended_canon - state_surface
-- `goals_archive_historical_goal_state` - Goals Archive / Historical Goal State - intended_canon - state_surface
-- `capture_root_atmosphere_composer` - Capture Root / Atmosphere Composer - intended_canon - top_level_surface
-- `capture_idle_composer` - Capture Idle Composer - intended_canon - composer_state
-- `capture_active_text_entry` - Capture Active Text Entry - intended_canon - drill_down
-- `capture_dictation_state` - Capture Dictation State - planned_canon - row
-- `capture_attachment_proof_picker` - Capture Attachment / Proof Picker - planned_canon - drill_down
-- `capture_post_input_route_reveal` - Capture Post-Input Route Reveal - intended_canon - drill_down
-- `capture_save_as_proof_route` - Capture Save as Proof Route - intended_canon - drill_down
-- `capture_make_commitment_route` - Capture Make Commitment Route - intended_canon - drill_down
-- `capture_grow_into_goal_route` - Capture Grow into Goal Route - intended_canon - row
-- `capture_mark_constraint_route` - Capture Mark Constraint Route - intended_canon - drill_down
-- `capture_reflect_route` - Capture Reflect Route - intended_canon - drill_down
-- `capture_hold_needs_a_place_route` - Capture Hold / Needs a Place Route - intended_canon - state_surface
-- `capture_receipt` - Capture Receipt - intended_canon - drill_down
-- `capture_parse_uncertain_state` - Capture Parse Uncertain State - intended_canon - state_surface
-- `capture_offline_local_only_state` - Capture Offline Local-Only State - planned_canon - row
-- `capture_error_failed_attachment_state` - Capture Error / Failed Attachment State - planned_canon - error_state
-- `capture_empty_first_use_state` - Capture Empty First-Use State - intended_canon - empty_state
-- `time_root_lifeshape_field` - Time Root / LifeShape Field - intended_canon - top_level_surface
-- `time_scope_control` - Time Scope Control - intended_canon - drill_down
-- `day_lifeshape_surface` - Day LifeShape Surface - intended_canon - drill_down
-- `week_lifeshape_surface` - Week LifeShape Surface - intended_canon - drill_down
-- `month_lifeshape_surface` - Month LifeShape Surface - planned_canon - drill_down
-- `open_time_region` - Open Time Region - intended_canon - drill_down
-- `protected_time_region` - Protected Time Region - intended_canon - state_surface
-- `pressure_region` - Pressure Region - intended_canon - drill_down
-- `best_fit_region` - Best Fit Region - intended_canon - drill_down
-- `recovery_flex_region` - Recovery / Flex Region - intended_canon - state_surface
-- `review_pressure_surface` - Review Pressure Surface - unresolved_direction - drill_down
-- `best_fit_explanation_sheet` - Best Fit Explanation Sheet - intended_canon - sheet
-- `protected_time_detail` - Protected Time Detail - intended_canon - state_surface
-- `day_detail` - Day Detail - intended_canon - drill_down
-- `week_detail` - Week Detail - intended_canon - drill_down
-- `month_detail` - Month Detail - unresolved_direction - drill_down
-- `reflow_preview_tray` - Reflow Preview Tray - intended_canon - tray
-- `shape_day_flow` - Shape Day Flow - intended_canon - drill_down
-- `reflow_week_flow` - Reflow Week Flow - intended_canon - drill_down
-- `shape_month_flow` - Shape Month Flow - unresolved_direction - drill_down
-- `time_receipt_detail` - Time Receipt Detail - intended_canon - drill_down
-- `schedule_and_availability_entry` - Schedule & Availability Entry - intended_canon - drill_down
-- `planning_defaults_entry` - Planning Defaults Entry - intended_canon - drill_down
-- `vacation_away_time_entry` - Vacation / Away Time Entry - planned_canon - state_surface
-- `time_no_calendar_data_state` - Time No Calendar Data State - intended_canon - empty_state
-- `time_overloaded_state` - Time Overloaded State - intended_canon - state_surface
-- `time_protected_block_state` - Time Protected Block State - intended_canon - state_surface
-- `time_vacation_away_state` - Time Vacation / Away State - planned_canon - state_surface
-- `time_stale_source_state` - Time Stale Source State - unresolved_direction - state_surface
-- `you_root_user_system_profile` - You Root / User System Profile - intended_canon - top_level_surface
-- `user_profile_header` - User Profile Header - intended_canon - drill_down
-- `local_runtime_trust_panel` - Local Runtime Trust Panel - intended_canon - drill_down
-- `planning_setup_section` - Planning Setup Section - intended_canon - drill_down
-- `schedule_and_availability` - Schedule & Availability - intended_canon - drill_down
-- `planning_defaults` - Planning Defaults - intended_canon - drill_down
-- `vacation_away_time` - Vacation / Away Time - planned_canon - state_surface
-- `automation_and_trust` - Automation & Trust - intended_canon - drill_down
-- `notifications` - Notifications - intended_canon - drill_down
-- `capture_preferences` - Capture Preferences - intended_canon - drill_down
-- `focus_session_defaults` - Focus / Session Defaults - intended_canon - drill_down
-- `privacy` - Privacy - intended_canon - drill_down
-- `personal_runtime` - Personal Runtime - intended_canon - drill_down
-- `local_data_reset_forget` - Local Data / Reset / Forget - intended_canon - drill_down
-- `help` - Help - intended_canon - drill_down
-- `about_ambitions` - About Ambitions - intended_canon - drill_down
-- `you_empty_first_run_state` - You Empty / First-Run State - intended_canon - empty_state
-- `you_trust_warning_state` - You Trust Warning State - intended_canon - state_surface
-- `you_offline_local_only_state` - You Offline Local-Only State - planned_canon - row
-- `commitment_staging_tray` - Commitment Staging Tray - planned_canon - tray
-- `reflow_preview_tray` - Reflow Preview Tray - planned_canon - tray
-- `receipt_system` - Receipt System - planned_canon - drill_down
-- `closure_system` - Closure System - planned_canon - drill_down
-- `proof_trail_system` - Proof Trail System - planned_canon - drill_down
-- `recommendation_source_system` - Recommendation Source System - planned_canon - drill_down
-- `why_this_sheet` - Why This Sheet - planned_canon - sheet
-- `source_freshness_badge` - Source Freshness Badge - planned_canon - row
-- `still_counts_state` - Still Counts State - planned_canon - state_surface
-- `moved_state` - Moved State - planned_canon - state_surface
-- `skipped_not_needed_state` - Skipped / Not Needed State - planned_canon - state_surface
-- `blocked_state` - Blocked State - planned_canon - state_surface
-- `waiting_state` - Waiting State - planned_canon - state_surface
-- `needs_recovery_state` - Needs Recovery State - planned_canon - state_surface
-- `needs_review_state` - Needs Review State - planned_canon - state_surface
-- `protected_marker` - Protected Marker - planned_canon - row
-- `pressure_marker` - Pressure Marker - planned_canon - row
-- `best_fit_marker` - Best Fit Marker - planned_canon - row
-- `open_marker` - Open Marker - planned_canon - row
-- `primary_cta` - Primary CTA - planned_canon - row
-- `secondary_cta` - Secondary CTA - planned_canon - row
-- `destructive_cta` - Destructive CTA - planned_canon - row
-- `disabled_cta` - Disabled CTA - planned_canon - row
-- `chevron_disclosure_row` - Chevron / Disclosure Row - planned_canon - row
-- `quietglass_wrapper` - QuietGlass Wrapper - planned_canon - row
-- `graphiterecess_base` - GraphiteRecess Base - planned_canon - row
-- `luminoustrace_state_line` - LuminousTrace State Line - planned_canon - row
-- `celestialfield_semantic_layer` - CelestialField Semantic Layer - planned_canon - row
-- `first_run_root` - First Run Root - planned_canon - onboarding
-- `schedule_setup_prompt` - Schedule Setup Prompt - planned_canon - onboarding
-- `planning_defaults_prompt` - Planning Defaults Prompt - planned_canon - onboarding
-- `privacy_local_runtime_explanation` - Privacy / Local Runtime Explanation - planned_canon - onboarding
-- `capture_first_use_prompt` - Capture First-Use Prompt - planned_canon - onboarding
-- `goals_first_use_prompt` - Goals First-Use Prompt - planned_canon - onboarding
-- `time_first_use_prompt` - Time First-Use Prompt - planned_canon - onboarding
-- `today_first_use_state` - Today First-Use State - planned_canon - onboarding
-- `graphiterecess` - GraphiteRecess - intended_canon - primitive
-- `quietglass` - QuietGlass - intended_canon - primitive
-- `luminoustrace` - LuminousTrace - intended_canon - primitive
-- `celestialfield` - CelestialField - intended_canon - primitive
-- `receipt_system` - Receipt System - intended_canon - supporting_object
-- `closure_system` - Closure System - intended_canon - supporting_object
-- `recommendation_source_system` - Recommendation Source System - intended_canon - supporting_object
-- `proof_trail_system` - Proof Trail System - intended_canon - supporting_object
-- `reality_meridian` - Reality Meridian - intended_canon - primary_object
-- `constellation_atlas` - Constellation Atlas - intended_canon - primary_object
-- `atmosphere_composer` - Atmosphere Composer - intended_canon - primary_object
-- `lifeshape_field` - LifeShape Field - intended_canon - primary_object
-- `user_system_profile` - User System Profile - intended_canon - primary_object
-- `commitment_staging_tray` - Commitment Staging Tray - intended_canon - tray
-- `reflow_preview_tray` - Reflow Preview Tray - intended_canon - tray
+| Visual ID | Name | Status | Kind | Specificity | Train Families |
+|---|---|---|---|---|---|
+| `global_app_shell` | Global App Shell | intended_canon | app_shell | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `destination_dock` | Destination Dock | intended_canon | navigation_chrome | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `destination_tab_item` | Destination Tab Item | intended_canon | navigation_chrome | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `compact_surface_header` | Compact Surface Header | intended_canon | navigation_chrome | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `context_crown` | Context Crown | intended_canon | navigation_chrome | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `back_navigation` | Back Navigation | intended_canon | navigation_chrome | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `sheet_chrome` | Sheet Chrome | intended_canon | navigation_chrome | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `tray_chrome` | Tray Chrome | intended_canon | navigation_chrome | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `receipt_toast_inline_confirmation` | Receipt Toast / Inline Confirmation | intended_canon | overlay | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `global_empty_state_shell` | Global Empty State Shell | intended_canon | empty_state | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `global_error_fallback_shell` | Global Error / Fallback Shell | intended_canon | error_state | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `today_root_reality_meridian` | Today Root / Reality Meridian | intended_canon | top_level_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_current_context_header` | Today Current Context Header | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_start_here_region` | Today Start Here Region | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_reality_meridian_rail` | Today Reality Meridian Rail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_recommended_step_object` | Today Recommended Step Object | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_now_next_later_sequence` | Today Now / Next / Later Sequence | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_upcoming_commitments_region` | Today Upcoming Commitments Region | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_closure_prompt_region` | Today Closure Prompt Region | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_receipt_shelf` | Today Receipt Shelf | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_source_freshness_indicator` | Today Source Freshness Indicator | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `step_detail` | Step Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `step_session` | Step Session | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `recommendation_source_sheet` | Recommendation Source Sheet | intended_canon | sheet | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `closure_sheet` | Closure Sheet | intended_canon | sheet | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `receipt_detail` | Receipt Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `proof_attachment_detail` | Proof Attachment Detail | planned_canon | drill_down | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `adjust_plan_reflow_preview_entry` | Adjust Plan / Reflow Preview Entry | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `blocked_detail` | Blocked Detail | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `waiting_detail` | Waiting Detail | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goal_thread_context_from_today` | Goal Thread Context from Today | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `local_runtime_source_detail_from_today` | Local Runtime Source Detail from Today | unresolved_direction | drill_down | unresolved_direction | visual_canon, si, accessibility, qa_validation, pk |
+| `today_empty_state` | Today Empty State | intended_canon | empty_state | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_no_schedule_data_state` | Today No Schedule Data State | intended_canon | empty_state | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_overloaded_state` | Today Overloaded State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_recovery_state` | Today Recovery State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_vacation_away_state` | Today Vacation / Away State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_protected_time_state` | Today Protected Time State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `today_stale_recommendation_state` | Today Stale Recommendation State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goals_root_constellation_atlas` | Goals Root / Constellation Atlas | intended_canon | top_level_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goals_life_area_map` | Goals Life Area Map | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `selected_life_area_surface` | Selected Life Area Surface | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `ambition_graph` | Ambition Graph | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goal_thread_detail` | Goal Thread Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goal_detail` | Goal Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `commitment_detail` | Commitment Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `proof_trail` | Proof Trail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `proof_detail` | Proof Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `proof_gap_state` | Proof Gap State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `blocker_detail` | Blocker Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `alternate_path_detail` | Alternate Path Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `milestone_detail` | Milestone Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `recommended_step_context_from_goals` | Recommended Step Context from Goals | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `reflection_recovery_detail` | Reflection / Recovery Detail | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goals_empty_state` | Goals Empty State | intended_canon | empty_state | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goals_review_state` | Goals Review State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goals_blocked_state` | Goals Blocked State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `goals_archive_historical_goal_state` | Goals Archive / Historical Goal State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_root_atmosphere_composer` | Capture Root / Atmosphere Composer | intended_canon | top_level_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_idle_composer` | Capture Idle Composer | intended_canon | composer_state | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_active_text_entry` | Capture Active Text Entry | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_dictation_state` | Capture Dictation State | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_attachment_proof_picker` | Capture Attachment / Proof Picker | planned_canon | drill_down | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_post_input_route_reveal` | Capture Post-Input Route Reveal | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_save_as_proof_route` | Capture Save as Proof Route | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_make_commitment_route` | Capture Make Commitment Route | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_grow_into_goal_route` | Capture Grow into Goal Route | intended_canon | row | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_mark_constraint_route` | Capture Mark Constraint Route | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_reflect_route` | Capture Reflect Route | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_hold_needs_a_place_route` | Capture Hold / Needs a Place Route | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_receipt` | Capture Receipt | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_parse_uncertain_state` | Capture Parse Uncertain State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_offline_local_only_state` | Capture Offline Local-Only State | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_error_failed_attachment_state` | Capture Error / Failed Attachment State | planned_canon | error_state | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `capture_empty_first_use_state` | Capture Empty First-Use State | intended_canon | empty_state | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `time_root_lifeshape_field` | Time Root / LifeShape Field | intended_canon | top_level_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `time_scope_control` | Time Scope Control | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `day_lifeshape_surface` | Day LifeShape Surface | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `week_lifeshape_surface` | Week LifeShape Surface | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `month_lifeshape_surface` | Month LifeShape Surface | planned_canon | drill_down | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `open_time_region` | Open Time Region | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `protected_time_region` | Protected Time Region | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `pressure_region` | Pressure Region | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `best_fit_region` | Best Fit Region | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `recovery_flex_region` | Recovery / Flex Region | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `review_pressure_surface` | Review Pressure Surface | unresolved_direction | drill_down | unresolved_direction | visual_canon, si, accessibility, qa_validation, pk |
+| `best_fit_explanation_sheet` | Best Fit Explanation Sheet | intended_canon | sheet | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `protected_time_detail` | Protected Time Detail | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `day_detail` | Day Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `week_detail` | Week Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `month_detail` | Month Detail | unresolved_direction | drill_down | unresolved_direction | visual_canon, si, accessibility, qa_validation, pk |
+| `reflow_preview_tray` | Reflow Preview Tray | intended_canon | tray | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `shape_day_flow` | Shape Day Flow | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `reflow_week_flow` | Reflow Week Flow | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `shape_month_flow` | Shape Month Flow | unresolved_direction | drill_down | unresolved_direction | visual_canon, si, accessibility, qa_validation, pk |
+| `time_receipt_detail` | Time Receipt Detail | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `schedule_and_availability_entry` | Schedule & Availability Entry | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `planning_defaults_entry` | Planning Defaults Entry | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `vacation_away_time_entry` | Vacation / Away Time Entry | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `time_no_calendar_data_state` | Time No Calendar Data State | intended_canon | empty_state | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `time_overloaded_state` | Time Overloaded State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `time_protected_block_state` | Time Protected Block State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `time_vacation_away_state` | Time Vacation / Away State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, pk |
+| `time_stale_source_state` | Time Stale Source State | unresolved_direction | state_surface | unresolved_direction | visual_canon, si, accessibility, qa_validation, pk |
+| `you_root_user_system_profile` | You Root / User System Profile | intended_canon | top_level_surface | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `user_profile_header` | User Profile Header | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `local_runtime_trust_panel` | Local Runtime Trust Panel | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `planning_setup_section` | Planning Setup Section | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `schedule_and_availability` | Schedule & Availability | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `planning_defaults` | Planning Defaults | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `vacation_away_time` | Vacation / Away Time | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `automation_and_trust` | Automation & Trust | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `notifications` | Notifications | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `capture_preferences` | Capture Preferences | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `focus_session_defaults` | Focus / Session Defaults | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `privacy` | Privacy | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `personal_runtime` | Personal Runtime | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `local_data_reset_forget` | Local Data / Reset / Forget | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `help` | Help | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `about_ambitions` | About Ambitions | intended_canon | drill_down | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `you_empty_first_run_state` | You Empty / First-Run State | intended_canon | empty_state | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `you_trust_warning_state` | You Trust Warning State | intended_canon | state_surface | high_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `you_offline_local_only_state` | You Offline Local-Only State | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, aos |
+| `commitment_staging_tray` | Commitment Staging Tray | planned_canon | tray | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `reflow_preview_tray` | Reflow Preview Tray | planned_canon | tray | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `receipt_system` | Receipt System | planned_canon | drill_down | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `closure_system` | Closure System | planned_canon | drill_down | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `proof_trail_system` | Proof Trail System | planned_canon | drill_down | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `recommendation_source_system` | Recommendation Source System | planned_canon | drill_down | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `why_this_sheet` | Why This Sheet | planned_canon | sheet | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `source_freshness_badge` | Source Freshness Badge | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `still_counts_state` | Still Counts State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `moved_state` | Moved State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `skipped_not_needed_state` | Skipped / Not Needed State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `blocked_state` | Blocked State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `waiting_state` | Waiting State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `needs_recovery_state` | Needs Recovery State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `needs_review_state` | Needs Review State | planned_canon | state_surface | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `protected_marker` | Protected Marker | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `pressure_marker` | Pressure Marker | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `best_fit_marker` | Best Fit Marker | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `open_marker` | Open Marker | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `primary_cta` | Primary CTA | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `secondary_cta` | Secondary CTA | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `destructive_cta` | Destructive CTA | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `disabled_cta` | Disabled CTA | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `chevron_disclosure_row` | Chevron / Disclosure Row | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `quietglass_wrapper` | QuietGlass Wrapper | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `graphiterecess_base` | GraphiteRecess Base | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `luminoustrace_state_line` | LuminousTrace State Line | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `celestialfield_semantic_layer` | CelestialField Semantic Layer | planned_canon | row | medium_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `first_run_root` | First Run Root | planned_canon | onboarding | medium_specificity | visual_canon, si, accessibility, qa_validation, onboarding_first_run |
+| `schedule_setup_prompt` | Schedule Setup Prompt | planned_canon | onboarding | medium_specificity | visual_canon, si, accessibility, qa_validation, onboarding_first_run |
+| `planning_defaults_prompt` | Planning Defaults Prompt | planned_canon | onboarding | medium_specificity | visual_canon, si, accessibility, qa_validation, onboarding_first_run |
+| `privacy_local_runtime_explanation` | Privacy / Local Runtime Explanation | planned_canon | onboarding | medium_specificity | visual_canon, si, accessibility, qa_validation, onboarding_first_run |
+| `capture_first_use_prompt` | Capture First-Use Prompt | planned_canon | onboarding | medium_specificity | visual_canon, si, accessibility, qa_validation, onboarding_first_run |
+| `goals_first_use_prompt` | Goals First-Use Prompt | planned_canon | onboarding | medium_specificity | visual_canon, si, accessibility, qa_validation, onboarding_first_run |
+| `time_first_use_prompt` | Time First-Use Prompt | planned_canon | onboarding | medium_specificity | visual_canon, si, accessibility, qa_validation, onboarding_first_run |
+| `today_first_use_state` | Today First-Use State | planned_canon | onboarding | medium_specificity | visual_canon, si, accessibility, qa_validation, onboarding_first_run |
+| `graphiterecess` | GraphiteRecess | intended_canon | primitive | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `quietglass` | QuietGlass | intended_canon | primitive | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `luminoustrace` | LuminousTrace | intended_canon | primitive | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `celestialfield` | CelestialField | intended_canon | primitive | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `receipt_system` | Receipt System | intended_canon | supporting_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `closure_system` | Closure System | intended_canon | supporting_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `recommendation_source_system` | Recommendation Source System | intended_canon | supporting_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `proof_trail_system` | Proof Trail System | intended_canon | supporting_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `reality_meridian` | Reality Meridian | intended_canon | primary_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `constellation_atlas` | Constellation Atlas | intended_canon | primary_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `atmosphere_composer` | Atmosphere Composer | intended_canon | primary_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `lifeshape_field` | LifeShape Field | intended_canon | primary_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `user_system_profile` | User System Profile | intended_canon | primary_object | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `commitment_staging_tray` | Commitment Staging Tray | intended_canon | tray | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |
+| `reflow_preview_tray` | Reflow Preview Tray | intended_canon | tray | high_specificity | visual_canon, si, accessibility, qa_validation, moat_runtime |

@@ -1,189 +1,165 @@
 # Surface Recipe Index
 
-Status: Active intended final-state visual recipe index
-Batch: FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001
+Status: Active intended final-state surface recipe index
 
-This index points to every recipe file represented in `SURFACE_RECIPE_INVENTORY.yaml`. The atlas is intended final-state visual canon, not implementation status, screenshot proof, or current-state audit.
+Each entry now shows `specificity_status` and the leading `train_family_sources` so reviewers can see which planned trains shape each surface.
 
-## Shell
-
-- [Global App Shell](recipes/shell/global_app_shell.md) - `intended_canon`
-- [Destination Dock](recipes/shell/destination_dock.md) - `intended_canon`
-- [Destination Tab Item](recipes/shell/destination_tab_item.md) - `intended_canon`
-- [Compact Surface Header](recipes/shell/compact_surface_header.md) - `intended_canon`
-- [Context Crown](recipes/shell/context_crown.md) - `intended_canon`
-- [Back Navigation](recipes/shell/back_navigation.md) - `intended_canon`
-- [Sheet Chrome](recipes/shell/sheet_chrome.md) - `intended_canon`
-- [Tray Chrome](recipes/shell/tray_chrome.md) - `intended_canon`
-- [Receipt Toast / Inline Confirmation](recipes/shell/receipt_toast_inline_confirmation.md) - `intended_canon`
-- [Global Empty State Shell](recipes/shell/global_empty_state_shell.md) - `intended_canon`
-- [Global Error / Fallback Shell](recipes/shell/global_error_fallback_shell.md) - `intended_canon`
-
-## Today
-
-- [Today Root / Reality Meridian](recipes/today/today_root_reality_meridian.md) - `intended_canon`
-- [Today Current Context Header](recipes/today/today_current_context_header.md) - `intended_canon`
-- [Today Start Here Region](recipes/today/today_start_here_region.md) - `intended_canon`
-- [Today Reality Meridian Rail](recipes/today/today_reality_meridian_rail.md) - `intended_canon`
-- [Today Recommended Step Object](recipes/today/today_recommended_step_object.md) - `intended_canon`
-- [Today Now / Next / Later Sequence](recipes/today/today_now_next_later_sequence.md) - `intended_canon`
-- [Today Upcoming Commitments Region](recipes/today/today_upcoming_commitments_region.md) - `intended_canon`
-- [Today Closure Prompt Region](recipes/today/today_closure_prompt_region.md) - `intended_canon`
-- [Today Receipt Shelf](recipes/today/today_receipt_shelf.md) - `intended_canon`
-- [Today Source Freshness Indicator](recipes/today/today_source_freshness_indicator.md) - `intended_canon`
-- [Step Detail](recipes/today/step_detail.md) - `intended_canon`
-- [Step Session](recipes/today/step_session.md) - `intended_canon`
-- [Recommendation Source Sheet](recipes/today/recommendation_source_sheet.md) - `intended_canon`
-- [Closure Sheet](recipes/today/closure_sheet.md) - `intended_canon`
-- [Receipt Detail](recipes/today/receipt_detail.md) - `intended_canon`
-- [Proof Attachment Detail](recipes/today/proof_attachment_detail.md) - `planned_canon`
-- [Adjust Plan / Reflow Preview Entry](recipes/today/adjust_plan_reflow_preview_entry.md) - `intended_canon`
-- [Blocked Detail](recipes/today/blocked_detail.md) - `intended_canon`
-- [Waiting Detail](recipes/today/waiting_detail.md) - `intended_canon`
-- [Goal Thread Context from Today](recipes/today/goal_thread_context_from_today.md) - `intended_canon`
-- [Local Runtime Source Detail from Today](recipes/today/local_runtime_source_detail_from_today.md) - `unresolved_direction`
-- [Today Empty State](recipes/today/today_empty_state.md) - `intended_canon`
-- [Today No Schedule Data State](recipes/today/today_no_schedule_data_state.md) - `intended_canon`
-- [Today Overloaded State](recipes/today/today_overloaded_state.md) - `intended_canon`
-- [Today Recovery State](recipes/today/today_recovery_state.md) - `intended_canon`
-- [Today Vacation / Away State](recipes/today/today_vacation_away_state.md) - `planned_canon`
-- [Today Protected Time State](recipes/today/today_protected_time_state.md) - `intended_canon`
-- [Today Stale Recommendation State](recipes/today/today_stale_recommendation_state.md) - `intended_canon`
-
-## Goals
-
-- [Goals Root / Constellation Atlas](recipes/goals/goals_root_constellation_atlas.md) - `intended_canon`
-- [Goals Life Area Map](recipes/goals/goals_life_area_map.md) - `intended_canon`
-- [Selected Life Area Surface](recipes/goals/selected_life_area_surface.md) - `intended_canon`
-- [Ambition Graph](recipes/goals/ambition_graph.md) - `intended_canon`
-- [Goal Thread Detail](recipes/goals/goal_thread_detail.md) - `intended_canon`
-- [Goal Detail](recipes/goals/goal_detail.md) - `intended_canon`
-- [Commitment Detail](recipes/goals/commitment_detail.md) - `intended_canon`
-- [Proof Trail](recipes/goals/proof_trail.md) - `intended_canon`
-- [Proof Detail](recipes/goals/proof_detail.md) - `intended_canon`
-- [Proof Gap State](recipes/goals/proof_gap_state.md) - `intended_canon`
-- [Blocker Detail](recipes/goals/blocker_detail.md) - `intended_canon`
-- [Alternate Path Detail](recipes/goals/alternate_path_detail.md) - `intended_canon`
-- [Milestone Detail](recipes/goals/milestone_detail.md) - `intended_canon`
-- [Recommended Step Context from Goals](recipes/goals/recommended_step_context_from_goals.md) - `intended_canon`
-- [Reflection / Recovery Detail](recipes/goals/reflection_recovery_detail.md) - `intended_canon`
-- [Goals Empty State](recipes/goals/goals_empty_state.md) - `intended_canon`
-- [Goals Review State](recipes/goals/goals_review_state.md) - `intended_canon`
-- [Goals Blocked State](recipes/goals/goals_blocked_state.md) - `intended_canon`
-- [Goals Archive / Historical Goal State](recipes/goals/goals_archive_historical_goal_state.md) - `intended_canon`
-
-## Capture
-
-- [Capture Root / Atmosphere Composer](recipes/capture/capture_root_atmosphere_composer.md) - `intended_canon`
-- [Capture Idle Composer](recipes/capture/capture_idle_composer.md) - `intended_canon`
-- [Capture Active Text Entry](recipes/capture/capture_active_text_entry.md) - `intended_canon`
-- [Capture Dictation State](recipes/capture/capture_dictation_state.md) - `planned_canon`
-- [Capture Attachment / Proof Picker](recipes/capture/capture_attachment_proof_picker.md) - `planned_canon`
-- [Capture Post-Input Route Reveal](recipes/capture/capture_post_input_route_reveal.md) - `intended_canon`
-- [Capture Save as Proof Route](recipes/capture/capture_save_as_proof_route.md) - `intended_canon`
-- [Capture Make Commitment Route](recipes/capture/capture_make_commitment_route.md) - `intended_canon`
-- [Capture Grow into Goal Route](recipes/capture/capture_grow_into_goal_route.md) - `intended_canon`
-- [Capture Mark Constraint Route](recipes/capture/capture_mark_constraint_route.md) - `intended_canon`
-- [Capture Reflect Route](recipes/capture/capture_reflect_route.md) - `intended_canon`
-- [Capture Hold / Needs a Place Route](recipes/capture/capture_hold_needs_a_place_route.md) - `intended_canon`
-- [Capture Receipt](recipes/capture/capture_receipt.md) - `intended_canon`
-- [Capture Parse Uncertain State](recipes/capture/capture_parse_uncertain_state.md) - `intended_canon`
-- [Capture Offline Local-Only State](recipes/capture/capture_offline_local_only_state.md) - `planned_canon`
-- [Capture Error / Failed Attachment State](recipes/capture/capture_error_failed_attachment_state.md) - `planned_canon`
-- [Capture Empty First-Use State](recipes/capture/capture_empty_first_use_state.md) - `intended_canon`
-
-## Time
-
-- [Time Root / LifeShape Field](recipes/time/time_root_lifeshape_field.md) - `intended_canon`
-- [Time Scope Control](recipes/time/time_scope_control.md) - `intended_canon`
-- [Day LifeShape Surface](recipes/time/day_lifeshape_surface.md) - `intended_canon`
-- [Week LifeShape Surface](recipes/time/week_lifeshape_surface.md) - `intended_canon`
-- [Month LifeShape Surface](recipes/time/month_lifeshape_surface.md) - `planned_canon`
-- [Open Time Region](recipes/time/open_time_region.md) - `intended_canon`
-- [Protected Time Region](recipes/time/protected_time_region.md) - `intended_canon`
-- [Pressure Region](recipes/time/pressure_region.md) - `intended_canon`
-- [Best Fit Region](recipes/time/best_fit_region.md) - `intended_canon`
-- [Recovery / Flex Region](recipes/time/recovery_flex_region.md) - `intended_canon`
-- [Review Pressure Surface](recipes/time/review_pressure_surface.md) - `unresolved_direction`
-- [Best Fit Explanation Sheet](recipes/time/best_fit_explanation_sheet.md) - `intended_canon`
-- [Protected Time Detail](recipes/time/protected_time_detail.md) - `intended_canon`
-- [Day Detail](recipes/time/day_detail.md) - `intended_canon`
-- [Week Detail](recipes/time/week_detail.md) - `intended_canon`
-- [Month Detail](recipes/time/month_detail.md) - `unresolved_direction`
-- [Reflow Preview Tray](recipes/time/reflow_preview_tray.md) - `intended_canon`
-- [Shape Day Flow](recipes/time/shape_day_flow.md) - `intended_canon`
-- [Reflow Week Flow](recipes/time/reflow_week_flow.md) - `intended_canon`
-- [Shape Month Flow](recipes/time/shape_month_flow.md) - `unresolved_direction`
-- [Time Receipt Detail](recipes/time/time_receipt_detail.md) - `intended_canon`
-- [Schedule & Availability Entry](recipes/time/schedule_and_availability_entry.md) - `intended_canon`
-- [Planning Defaults Entry](recipes/time/planning_defaults_entry.md) - `intended_canon`
-- [Vacation / Away Time Entry](recipes/time/vacation_away_time_entry.md) - `planned_canon`
-- [Time No Calendar Data State](recipes/time/time_no_calendar_data_state.md) - `intended_canon`
-- [Time Overloaded State](recipes/time/time_overloaded_state.md) - `intended_canon`
-- [Time Protected Block State](recipes/time/time_protected_block_state.md) - `intended_canon`
-- [Time Vacation / Away State](recipes/time/time_vacation_away_state.md) - `planned_canon`
-- [Time Stale Source State](recipes/time/time_stale_source_state.md) - `unresolved_direction`
-
-## You
-
-- [You Root / User System Profile](recipes/you/you_root_user_system_profile.md) - `intended_canon`
-- [User Profile Header](recipes/you/user_profile_header.md) - `intended_canon`
-- [Local Runtime Trust Panel](recipes/you/local_runtime_trust_panel.md) - `intended_canon`
-- [Planning Setup Section](recipes/you/planning_setup_section.md) - `intended_canon`
-- [Schedule & Availability](recipes/you/schedule_and_availability.md) - `intended_canon`
-- [Planning Defaults](recipes/you/planning_defaults.md) - `intended_canon`
-- [Vacation / Away Time](recipes/you/vacation_away_time.md) - `planned_canon`
-- [Automation & Trust](recipes/you/automation_and_trust.md) - `intended_canon`
-- [Notifications](recipes/you/notifications.md) - `intended_canon`
-- [Capture Preferences](recipes/you/capture_preferences.md) - `intended_canon`
-- [Focus / Session Defaults](recipes/you/focus_session_defaults.md) - `intended_canon`
-- [Privacy](recipes/you/privacy.md) - `intended_canon`
-- [Personal Runtime](recipes/you/personal_runtime.md) - `intended_canon`
-- [Local Data / Reset / Forget](recipes/you/local_data_reset_forget.md) - `intended_canon`
-- [Help](recipes/you/help.md) - `intended_canon`
-- [About Ambitions](recipes/you/about_ambitions.md) - `intended_canon`
-- [You Empty / First-Run State](recipes/you/you_empty_first_run_state.md) - `intended_canon`
-- [You Trust Warning State](recipes/you/you_trust_warning_state.md) - `intended_canon`
-- [You Offline Local-Only State](recipes/you/you_offline_local_only_state.md) - `planned_canon`
-
-## Cross Surface
-
-- [Commitment Staging Tray](recipes/cross_surface/commitment_staging_tray.md) - `planned_canon`
-- [Reflow Preview Tray](recipes/cross_surface/reflow_preview_tray.md) - `planned_canon`
-- [Receipt System](recipes/cross_surface/receipt_system.md) - `planned_canon`
-- [Closure System](recipes/cross_surface/closure_system.md) - `planned_canon`
-- [Proof Trail System](recipes/cross_surface/proof_trail_system.md) - `planned_canon`
-- [Recommendation Source System](recipes/cross_surface/recommendation_source_system.md) - `planned_canon`
-- [Why This Sheet](recipes/cross_surface/why_this_sheet.md) - `planned_canon`
-- [Source Freshness Badge](recipes/cross_surface/source_freshness_badge.md) - `planned_canon`
-- [Still Counts State](recipes/cross_surface/still_counts_state.md) - `planned_canon`
-- [Moved State](recipes/cross_surface/moved_state.md) - `planned_canon`
-- [Skipped / Not Needed State](recipes/cross_surface/skipped_not_needed_state.md) - `planned_canon`
-- [Blocked State](recipes/cross_surface/blocked_state.md) - `planned_canon`
-- [Waiting State](recipes/cross_surface/waiting_state.md) - `planned_canon`
-- [Needs Recovery State](recipes/cross_surface/needs_recovery_state.md) - `planned_canon`
-- [Needs Review State](recipes/cross_surface/needs_review_state.md) - `planned_canon`
-- [Protected Marker](recipes/cross_surface/protected_marker.md) - `planned_canon`
-- [Pressure Marker](recipes/cross_surface/pressure_marker.md) - `planned_canon`
-- [Best Fit Marker](recipes/cross_surface/best_fit_marker.md) - `planned_canon`
-- [Open Marker](recipes/cross_surface/open_marker.md) - `planned_canon`
-- [Primary CTA](recipes/cross_surface/primary_cta.md) - `planned_canon`
-- [Secondary CTA](recipes/cross_surface/secondary_cta.md) - `planned_canon`
-- [Destructive CTA](recipes/cross_surface/destructive_cta.md) - `planned_canon`
-- [Disabled CTA](recipes/cross_surface/disabled_cta.md) - `planned_canon`
-- [Chevron / Disclosure Row](recipes/cross_surface/chevron_disclosure_row.md) - `planned_canon`
-- [QuietGlass Wrapper](recipes/cross_surface/quietglass_wrapper.md) - `planned_canon`
-- [GraphiteRecess Base](recipes/cross_surface/graphiterecess_base.md) - `planned_canon`
-- [LuminousTrace State Line](recipes/cross_surface/luminoustrace_state_line.md) - `planned_canon`
-- [CelestialField Semantic Layer](recipes/cross_surface/celestialfield_semantic_layer.md) - `planned_canon`
-
-## Onboarding
-
-- [First Run Root](recipes/onboarding/first_run_root.md) - `planned_canon`
-- [Schedule Setup Prompt](recipes/onboarding/schedule_setup_prompt.md) - `planned_canon`
-- [Planning Defaults Prompt](recipes/onboarding/planning_defaults_prompt.md) - `planned_canon`
-- [Privacy / Local Runtime Explanation](recipes/onboarding/privacy_local_runtime_explanation.md) - `planned_canon`
-- [Capture First-Use Prompt](recipes/onboarding/capture_first_use_prompt.md) - `planned_canon`
-- [Goals First-Use Prompt](recipes/onboarding/goals_first_use_prompt.md) - `planned_canon`
-- [Time First-Use Prompt](recipes/onboarding/time_first_use_prompt.md) - `planned_canon`
-- [Today First-Use State](recipes/onboarding/today_first_use_state.md) - `planned_canon`
+- `global_app_shell` — Global App Shell — intended_canon — high_specificity — [global_app_shell.md](docs/canon/frontend/recipes/shell/global_app_shell.md)
+- `destination_dock` — Destination Dock — intended_canon — high_specificity — [destination_dock.md](docs/canon/frontend/recipes/shell/destination_dock.md)
+- `destination_tab_item` — Destination Tab Item — intended_canon — high_specificity — [destination_tab_item.md](docs/canon/frontend/recipes/shell/destination_tab_item.md)
+- `compact_surface_header` — Compact Surface Header — intended_canon — high_specificity — [compact_surface_header.md](docs/canon/frontend/recipes/shell/compact_surface_header.md)
+- `context_crown` — Context Crown — intended_canon — high_specificity — [context_crown.md](docs/canon/frontend/recipes/shell/context_crown.md)
+- `back_navigation` — Back Navigation — intended_canon — high_specificity — [back_navigation.md](docs/canon/frontend/recipes/shell/back_navigation.md)
+- `sheet_chrome` — Sheet Chrome — intended_canon — high_specificity — [sheet_chrome.md](docs/canon/frontend/recipes/shell/sheet_chrome.md)
+- `tray_chrome` — Tray Chrome — intended_canon — high_specificity — [tray_chrome.md](docs/canon/frontend/recipes/shell/tray_chrome.md)
+- `receipt_toast_inline_confirmation` — Receipt Toast / Inline Confirmation — intended_canon — high_specificity — [receipt_toast_inline_confirmation.md](docs/canon/frontend/recipes/shell/receipt_toast_inline_confirmation.md)
+- `global_empty_state_shell` — Global Empty State Shell — intended_canon — high_specificity — [global_empty_state_shell.md](docs/canon/frontend/recipes/shell/global_empty_state_shell.md)
+- `global_error_fallback_shell` — Global Error / Fallback Shell — intended_canon — high_specificity — [global_error_fallback_shell.md](docs/canon/frontend/recipes/shell/global_error_fallback_shell.md)
+- `today_root_reality_meridian` — Today Root / Reality Meridian — intended_canon — high_specificity — [today_root_reality_meridian.md](docs/canon/frontend/recipes/today/today_root_reality_meridian.md)
+- `today_current_context_header` — Today Current Context Header — intended_canon — high_specificity — [today_current_context_header.md](docs/canon/frontend/recipes/today/today_current_context_header.md)
+- `today_start_here_region` — Today Start Here Region — intended_canon — high_specificity — [today_start_here_region.md](docs/canon/frontend/recipes/today/today_start_here_region.md)
+- `today_reality_meridian_rail` — Today Reality Meridian Rail — intended_canon — high_specificity — [today_reality_meridian_rail.md](docs/canon/frontend/recipes/today/today_reality_meridian_rail.md)
+- `today_recommended_step_object` — Today Recommended Step Object — intended_canon — high_specificity — [today_recommended_step_object.md](docs/canon/frontend/recipes/today/today_recommended_step_object.md)
+- `today_now_next_later_sequence` — Today Now / Next / Later Sequence — intended_canon — high_specificity — [today_now_next_later_sequence.md](docs/canon/frontend/recipes/today/today_now_next_later_sequence.md)
+- `today_upcoming_commitments_region` — Today Upcoming Commitments Region — intended_canon — high_specificity — [today_upcoming_commitments_region.md](docs/canon/frontend/recipes/today/today_upcoming_commitments_region.md)
+- `today_closure_prompt_region` — Today Closure Prompt Region — intended_canon — high_specificity — [today_closure_prompt_region.md](docs/canon/frontend/recipes/today/today_closure_prompt_region.md)
+- `today_receipt_shelf` — Today Receipt Shelf — intended_canon — high_specificity — [today_receipt_shelf.md](docs/canon/frontend/recipes/today/today_receipt_shelf.md)
+- `today_source_freshness_indicator` — Today Source Freshness Indicator — intended_canon — high_specificity — [today_source_freshness_indicator.md](docs/canon/frontend/recipes/today/today_source_freshness_indicator.md)
+- `step_detail` — Step Detail — intended_canon — high_specificity — [step_detail.md](docs/canon/frontend/recipes/today/step_detail.md)
+- `step_session` — Step Session — intended_canon — high_specificity — [step_session.md](docs/canon/frontend/recipes/today/step_session.md)
+- `recommendation_source_sheet` — Recommendation Source Sheet — intended_canon — high_specificity — [recommendation_source_sheet.md](docs/canon/frontend/recipes/today/recommendation_source_sheet.md)
+- `closure_sheet` — Closure Sheet — intended_canon — high_specificity — [closure_sheet.md](docs/canon/frontend/recipes/today/closure_sheet.md)
+- `receipt_detail` — Receipt Detail — intended_canon — high_specificity — [receipt_detail.md](docs/canon/frontend/recipes/today/receipt_detail.md)
+- `proof_attachment_detail` — Proof Attachment Detail — planned_canon — medium_specificity — [proof_attachment_detail.md](docs/canon/frontend/recipes/today/proof_attachment_detail.md)
+- `adjust_plan_reflow_preview_entry` — Adjust Plan / Reflow Preview Entry — intended_canon — high_specificity — [adjust_plan_reflow_preview_entry.md](docs/canon/frontend/recipes/today/adjust_plan_reflow_preview_entry.md)
+- `blocked_detail` — Blocked Detail — intended_canon — high_specificity — [blocked_detail.md](docs/canon/frontend/recipes/today/blocked_detail.md)
+- `waiting_detail` — Waiting Detail — intended_canon — high_specificity — [waiting_detail.md](docs/canon/frontend/recipes/today/waiting_detail.md)
+- `goal_thread_context_from_today` — Goal Thread Context from Today — intended_canon — high_specificity — [goal_thread_context_from_today.md](docs/canon/frontend/recipes/today/goal_thread_context_from_today.md)
+- `local_runtime_source_detail_from_today` — Local Runtime Source Detail from Today — unresolved_direction — unresolved_direction — [local_runtime_source_detail_from_today.md](docs/canon/frontend/recipes/today/local_runtime_source_detail_from_today.md)
+- `today_empty_state` — Today Empty State — intended_canon — high_specificity — [today_empty_state.md](docs/canon/frontend/recipes/today/today_empty_state.md)
+- `today_no_schedule_data_state` — Today No Schedule Data State — intended_canon — high_specificity — [today_no_schedule_data_state.md](docs/canon/frontend/recipes/today/today_no_schedule_data_state.md)
+- `today_overloaded_state` — Today Overloaded State — intended_canon — high_specificity — [today_overloaded_state.md](docs/canon/frontend/recipes/today/today_overloaded_state.md)
+- `today_recovery_state` — Today Recovery State — intended_canon — high_specificity — [today_recovery_state.md](docs/canon/frontend/recipes/today/today_recovery_state.md)
+- `today_vacation_away_state` — Today Vacation / Away State — planned_canon — medium_specificity — [today_vacation_away_state.md](docs/canon/frontend/recipes/today/today_vacation_away_state.md)
+- `today_protected_time_state` — Today Protected Time State — intended_canon — high_specificity — [today_protected_time_state.md](docs/canon/frontend/recipes/today/today_protected_time_state.md)
+- `today_stale_recommendation_state` — Today Stale Recommendation State — intended_canon — high_specificity — [today_stale_recommendation_state.md](docs/canon/frontend/recipes/today/today_stale_recommendation_state.md)
+- `goals_root_constellation_atlas` — Goals Root / Constellation Atlas — intended_canon — high_specificity — [goals_root_constellation_atlas.md](docs/canon/frontend/recipes/goals/goals_root_constellation_atlas.md)
+- `goals_life_area_map` — Goals Life Area Map — intended_canon — high_specificity — [goals_life_area_map.md](docs/canon/frontend/recipes/goals/goals_life_area_map.md)
+- `selected_life_area_surface` — Selected Life Area Surface — intended_canon — high_specificity — [selected_life_area_surface.md](docs/canon/frontend/recipes/goals/selected_life_area_surface.md)
+- `ambition_graph` — Ambition Graph — intended_canon — high_specificity — [ambition_graph.md](docs/canon/frontend/recipes/goals/ambition_graph.md)
+- `goal_thread_detail` — Goal Thread Detail — intended_canon — high_specificity — [goal_thread_detail.md](docs/canon/frontend/recipes/goals/goal_thread_detail.md)
+- `goal_detail` — Goal Detail — intended_canon — high_specificity — [goal_detail.md](docs/canon/frontend/recipes/goals/goal_detail.md)
+- `commitment_detail` — Commitment Detail — intended_canon — high_specificity — [commitment_detail.md](docs/canon/frontend/recipes/goals/commitment_detail.md)
+- `proof_trail` — Proof Trail — intended_canon — high_specificity — [proof_trail.md](docs/canon/frontend/recipes/goals/proof_trail.md)
+- `proof_detail` — Proof Detail — intended_canon — high_specificity — [proof_detail.md](docs/canon/frontend/recipes/goals/proof_detail.md)
+- `proof_gap_state` — Proof Gap State — intended_canon — high_specificity — [proof_gap_state.md](docs/canon/frontend/recipes/goals/proof_gap_state.md)
+- `blocker_detail` — Blocker Detail — intended_canon — high_specificity — [blocker_detail.md](docs/canon/frontend/recipes/goals/blocker_detail.md)
+- `alternate_path_detail` — Alternate Path Detail — intended_canon — high_specificity — [alternate_path_detail.md](docs/canon/frontend/recipes/goals/alternate_path_detail.md)
+- `milestone_detail` — Milestone Detail — intended_canon — high_specificity — [milestone_detail.md](docs/canon/frontend/recipes/goals/milestone_detail.md)
+- `recommended_step_context_from_goals` — Recommended Step Context from Goals — intended_canon — high_specificity — [recommended_step_context_from_goals.md](docs/canon/frontend/recipes/goals/recommended_step_context_from_goals.md)
+- `reflection_recovery_detail` — Reflection / Recovery Detail — intended_canon — high_specificity — [reflection_recovery_detail.md](docs/canon/frontend/recipes/goals/reflection_recovery_detail.md)
+- `goals_empty_state` — Goals Empty State — intended_canon — high_specificity — [goals_empty_state.md](docs/canon/frontend/recipes/goals/goals_empty_state.md)
+- `goals_review_state` — Goals Review State — intended_canon — high_specificity — [goals_review_state.md](docs/canon/frontend/recipes/goals/goals_review_state.md)
+- `goals_blocked_state` — Goals Blocked State — intended_canon — high_specificity — [goals_blocked_state.md](docs/canon/frontend/recipes/goals/goals_blocked_state.md)
+- `goals_archive_historical_goal_state` — Goals Archive / Historical Goal State — intended_canon — high_specificity — [goals_archive_historical_goal_state.md](docs/canon/frontend/recipes/goals/goals_archive_historical_goal_state.md)
+- `capture_root_atmosphere_composer` — Capture Root / Atmosphere Composer — intended_canon — high_specificity — [capture_root_atmosphere_composer.md](docs/canon/frontend/recipes/capture/capture_root_atmosphere_composer.md)
+- `capture_idle_composer` — Capture Idle Composer — intended_canon — high_specificity — [capture_idle_composer.md](docs/canon/frontend/recipes/capture/capture_idle_composer.md)
+- `capture_active_text_entry` — Capture Active Text Entry — intended_canon — high_specificity — [capture_active_text_entry.md](docs/canon/frontend/recipes/capture/capture_active_text_entry.md)
+- `capture_dictation_state` — Capture Dictation State — planned_canon — medium_specificity — [capture_dictation_state.md](docs/canon/frontend/recipes/capture/capture_dictation_state.md)
+- `capture_attachment_proof_picker` — Capture Attachment / Proof Picker — planned_canon — medium_specificity — [capture_attachment_proof_picker.md](docs/canon/frontend/recipes/capture/capture_attachment_proof_picker.md)
+- `capture_post_input_route_reveal` — Capture Post-Input Route Reveal — intended_canon — high_specificity — [capture_post_input_route_reveal.md](docs/canon/frontend/recipes/capture/capture_post_input_route_reveal.md)
+- `capture_save_as_proof_route` — Capture Save as Proof Route — intended_canon — high_specificity — [capture_save_as_proof_route.md](docs/canon/frontend/recipes/capture/capture_save_as_proof_route.md)
+- `capture_make_commitment_route` — Capture Make Commitment Route — intended_canon — high_specificity — [capture_make_commitment_route.md](docs/canon/frontend/recipes/capture/capture_make_commitment_route.md)
+- `capture_grow_into_goal_route` — Capture Grow into Goal Route — intended_canon — high_specificity — [capture_grow_into_goal_route.md](docs/canon/frontend/recipes/capture/capture_grow_into_goal_route.md)
+- `capture_mark_constraint_route` — Capture Mark Constraint Route — intended_canon — high_specificity — [capture_mark_constraint_route.md](docs/canon/frontend/recipes/capture/capture_mark_constraint_route.md)
+- `capture_reflect_route` — Capture Reflect Route — intended_canon — high_specificity — [capture_reflect_route.md](docs/canon/frontend/recipes/capture/capture_reflect_route.md)
+- `capture_hold_needs_a_place_route` — Capture Hold / Needs a Place Route — intended_canon — high_specificity — [capture_hold_needs_a_place_route.md](docs/canon/frontend/recipes/capture/capture_hold_needs_a_place_route.md)
+- `capture_receipt` — Capture Receipt — intended_canon — high_specificity — [capture_receipt.md](docs/canon/frontend/recipes/capture/capture_receipt.md)
+- `capture_parse_uncertain_state` — Capture Parse Uncertain State — intended_canon — high_specificity — [capture_parse_uncertain_state.md](docs/canon/frontend/recipes/capture/capture_parse_uncertain_state.md)
+- `capture_offline_local_only_state` — Capture Offline Local-Only State — planned_canon — medium_specificity — [capture_offline_local_only_state.md](docs/canon/frontend/recipes/capture/capture_offline_local_only_state.md)
+- `capture_error_failed_attachment_state` — Capture Error / Failed Attachment State — planned_canon — medium_specificity — [capture_error_failed_attachment_state.md](docs/canon/frontend/recipes/capture/capture_error_failed_attachment_state.md)
+- `capture_empty_first_use_state` — Capture Empty First-Use State — intended_canon — high_specificity — [capture_empty_first_use_state.md](docs/canon/frontend/recipes/capture/capture_empty_first_use_state.md)
+- `time_root_lifeshape_field` — Time Root / LifeShape Field — intended_canon — high_specificity — [time_root_lifeshape_field.md](docs/canon/frontend/recipes/time/time_root_lifeshape_field.md)
+- `time_scope_control` — Time Scope Control — intended_canon — high_specificity — [time_scope_control.md](docs/canon/frontend/recipes/time/time_scope_control.md)
+- `day_lifeshape_surface` — Day LifeShape Surface — intended_canon — high_specificity — [day_lifeshape_surface.md](docs/canon/frontend/recipes/time/day_lifeshape_surface.md)
+- `week_lifeshape_surface` — Week LifeShape Surface — intended_canon — high_specificity — [week_lifeshape_surface.md](docs/canon/frontend/recipes/time/week_lifeshape_surface.md)
+- `month_lifeshape_surface` — Month LifeShape Surface — planned_canon — medium_specificity — [month_lifeshape_surface.md](docs/canon/frontend/recipes/time/month_lifeshape_surface.md)
+- `open_time_region` — Open Time Region — intended_canon — high_specificity — [open_time_region.md](docs/canon/frontend/recipes/time/open_time_region.md)
+- `protected_time_region` — Protected Time Region — intended_canon — high_specificity — [protected_time_region.md](docs/canon/frontend/recipes/time/protected_time_region.md)
+- `pressure_region` — Pressure Region — intended_canon — high_specificity — [pressure_region.md](docs/canon/frontend/recipes/time/pressure_region.md)
+- `best_fit_region` — Best Fit Region — intended_canon — high_specificity — [best_fit_region.md](docs/canon/frontend/recipes/time/best_fit_region.md)
+- `recovery_flex_region` — Recovery / Flex Region — intended_canon — high_specificity — [recovery_flex_region.md](docs/canon/frontend/recipes/time/recovery_flex_region.md)
+- `review_pressure_surface` — Review Pressure Surface — unresolved_direction — unresolved_direction — [review_pressure_surface.md](docs/canon/frontend/recipes/time/review_pressure_surface.md)
+- `best_fit_explanation_sheet` — Best Fit Explanation Sheet — intended_canon — high_specificity — [best_fit_explanation_sheet.md](docs/canon/frontend/recipes/time/best_fit_explanation_sheet.md)
+- `protected_time_detail` — Protected Time Detail — intended_canon — high_specificity — [protected_time_detail.md](docs/canon/frontend/recipes/time/protected_time_detail.md)
+- `day_detail` — Day Detail — intended_canon — high_specificity — [day_detail.md](docs/canon/frontend/recipes/time/day_detail.md)
+- `week_detail` — Week Detail — intended_canon — high_specificity — [week_detail.md](docs/canon/frontend/recipes/time/week_detail.md)
+- `month_detail` — Month Detail — unresolved_direction — unresolved_direction — [month_detail.md](docs/canon/frontend/recipes/time/month_detail.md)
+- `reflow_preview_tray` — Reflow Preview Tray — intended_canon — high_specificity — [reflow_preview_tray.md](docs/canon/frontend/recipes/time/reflow_preview_tray.md)
+- `shape_day_flow` — Shape Day Flow — intended_canon — high_specificity — [shape_day_flow.md](docs/canon/frontend/recipes/time/shape_day_flow.md)
+- `reflow_week_flow` — Reflow Week Flow — intended_canon — high_specificity — [reflow_week_flow.md](docs/canon/frontend/recipes/time/reflow_week_flow.md)
+- `shape_month_flow` — Shape Month Flow — unresolved_direction — unresolved_direction — [shape_month_flow.md](docs/canon/frontend/recipes/time/shape_month_flow.md)
+- `time_receipt_detail` — Time Receipt Detail — intended_canon — high_specificity — [time_receipt_detail.md](docs/canon/frontend/recipes/time/time_receipt_detail.md)
+- `schedule_and_availability_entry` — Schedule & Availability Entry — intended_canon — high_specificity — [schedule_and_availability_entry.md](docs/canon/frontend/recipes/time/schedule_and_availability_entry.md)
+- `planning_defaults_entry` — Planning Defaults Entry — intended_canon — high_specificity — [planning_defaults_entry.md](docs/canon/frontend/recipes/time/planning_defaults_entry.md)
+- `vacation_away_time_entry` — Vacation / Away Time Entry — planned_canon — medium_specificity — [vacation_away_time_entry.md](docs/canon/frontend/recipes/time/vacation_away_time_entry.md)
+- `time_no_calendar_data_state` — Time No Calendar Data State — intended_canon — high_specificity — [time_no_calendar_data_state.md](docs/canon/frontend/recipes/time/time_no_calendar_data_state.md)
+- `time_overloaded_state` — Time Overloaded State — intended_canon — high_specificity — [time_overloaded_state.md](docs/canon/frontend/recipes/time/time_overloaded_state.md)
+- `time_protected_block_state` — Time Protected Block State — intended_canon — high_specificity — [time_protected_block_state.md](docs/canon/frontend/recipes/time/time_protected_block_state.md)
+- `time_vacation_away_state` — Time Vacation / Away State — planned_canon — medium_specificity — [time_vacation_away_state.md](docs/canon/frontend/recipes/time/time_vacation_away_state.md)
+- `time_stale_source_state` — Time Stale Source State — unresolved_direction — unresolved_direction — [time_stale_source_state.md](docs/canon/frontend/recipes/time/time_stale_source_state.md)
+- `you_root_user_system_profile` — You Root / User System Profile — intended_canon — high_specificity — [you_root_user_system_profile.md](docs/canon/frontend/recipes/you/you_root_user_system_profile.md)
+- `user_profile_header` — User Profile Header — intended_canon — high_specificity — [user_profile_header.md](docs/canon/frontend/recipes/you/user_profile_header.md)
+- `local_runtime_trust_panel` — Local Runtime Trust Panel — intended_canon — high_specificity — [local_runtime_trust_panel.md](docs/canon/frontend/recipes/you/local_runtime_trust_panel.md)
+- `planning_setup_section` — Planning Setup Section — intended_canon — high_specificity — [planning_setup_section.md](docs/canon/frontend/recipes/you/planning_setup_section.md)
+- `schedule_and_availability` — Schedule & Availability — intended_canon — high_specificity — [schedule_and_availability.md](docs/canon/frontend/recipes/you/schedule_and_availability.md)
+- `planning_defaults` — Planning Defaults — intended_canon — high_specificity — [planning_defaults.md](docs/canon/frontend/recipes/you/planning_defaults.md)
+- `vacation_away_time` — Vacation / Away Time — planned_canon — medium_specificity — [vacation_away_time.md](docs/canon/frontend/recipes/you/vacation_away_time.md)
+- `automation_and_trust` — Automation & Trust — intended_canon — high_specificity — [automation_and_trust.md](docs/canon/frontend/recipes/you/automation_and_trust.md)
+- `notifications` — Notifications — intended_canon — high_specificity — [notifications.md](docs/canon/frontend/recipes/you/notifications.md)
+- `capture_preferences` — Capture Preferences — intended_canon — high_specificity — [capture_preferences.md](docs/canon/frontend/recipes/you/capture_preferences.md)
+- `focus_session_defaults` — Focus / Session Defaults — intended_canon — high_specificity — [focus_session_defaults.md](docs/canon/frontend/recipes/you/focus_session_defaults.md)
+- `privacy` — Privacy — intended_canon — high_specificity — [privacy.md](docs/canon/frontend/recipes/you/privacy.md)
+- `personal_runtime` — Personal Runtime — intended_canon — high_specificity — [personal_runtime.md](docs/canon/frontend/recipes/you/personal_runtime.md)
+- `local_data_reset_forget` — Local Data / Reset / Forget — intended_canon — high_specificity — [local_data_reset_forget.md](docs/canon/frontend/recipes/you/local_data_reset_forget.md)
+- `help` — Help — intended_canon — high_specificity — [help.md](docs/canon/frontend/recipes/you/help.md)
+- `about_ambitions` — About Ambitions — intended_canon — high_specificity — [about_ambitions.md](docs/canon/frontend/recipes/you/about_ambitions.md)
+- `you_empty_first_run_state` — You Empty / First-Run State — intended_canon — high_specificity — [you_empty_first_run_state.md](docs/canon/frontend/recipes/you/you_empty_first_run_state.md)
+- `you_trust_warning_state` — You Trust Warning State — intended_canon — high_specificity — [you_trust_warning_state.md](docs/canon/frontend/recipes/you/you_trust_warning_state.md)
+- `you_offline_local_only_state` — You Offline Local-Only State — planned_canon — medium_specificity — [you_offline_local_only_state.md](docs/canon/frontend/recipes/you/you_offline_local_only_state.md)
+- `commitment_staging_tray` — Commitment Staging Tray — planned_canon — medium_specificity — [commitment_staging_tray.md](docs/canon/frontend/recipes/cross_surface/commitment_staging_tray.md)
+- `reflow_preview_tray` — Reflow Preview Tray — planned_canon — medium_specificity — [reflow_preview_tray.md](docs/canon/frontend/recipes/cross_surface/reflow_preview_tray.md)
+- `receipt_system` — Receipt System — planned_canon — medium_specificity — [receipt_system.md](docs/canon/frontend/recipes/cross_surface/receipt_system.md)
+- `closure_system` — Closure System — planned_canon — medium_specificity — [closure_system.md](docs/canon/frontend/recipes/cross_surface/closure_system.md)
+- `proof_trail_system` — Proof Trail System — planned_canon — medium_specificity — [proof_trail_system.md](docs/canon/frontend/recipes/cross_surface/proof_trail_system.md)
+- `recommendation_source_system` — Recommendation Source System — planned_canon — medium_specificity — [recommendation_source_system.md](docs/canon/frontend/recipes/cross_surface/recommendation_source_system.md)
+- `why_this_sheet` — Why This Sheet — planned_canon — medium_specificity — [why_this_sheet.md](docs/canon/frontend/recipes/cross_surface/why_this_sheet.md)
+- `source_freshness_badge` — Source Freshness Badge — planned_canon — medium_specificity — [source_freshness_badge.md](docs/canon/frontend/recipes/cross_surface/source_freshness_badge.md)
+- `still_counts_state` — Still Counts State — planned_canon — medium_specificity — [still_counts_state.md](docs/canon/frontend/recipes/cross_surface/still_counts_state.md)
+- `moved_state` — Moved State — planned_canon — medium_specificity — [moved_state.md](docs/canon/frontend/recipes/cross_surface/moved_state.md)
+- `skipped_not_needed_state` — Skipped / Not Needed State — planned_canon — medium_specificity — [skipped_not_needed_state.md](docs/canon/frontend/recipes/cross_surface/skipped_not_needed_state.md)
+- `blocked_state` — Blocked State — planned_canon — medium_specificity — [blocked_state.md](docs/canon/frontend/recipes/cross_surface/blocked_state.md)
+- `waiting_state` — Waiting State — planned_canon — medium_specificity — [waiting_state.md](docs/canon/frontend/recipes/cross_surface/waiting_state.md)
+- `needs_recovery_state` — Needs Recovery State — planned_canon — medium_specificity — [needs_recovery_state.md](docs/canon/frontend/recipes/cross_surface/needs_recovery_state.md)
+- `needs_review_state` — Needs Review State — planned_canon — medium_specificity — [needs_review_state.md](docs/canon/frontend/recipes/cross_surface/needs_review_state.md)
+- `protected_marker` — Protected Marker — planned_canon — medium_specificity — [protected_marker.md](docs/canon/frontend/recipes/cross_surface/protected_marker.md)
+- `pressure_marker` — Pressure Marker — planned_canon — medium_specificity — [pressure_marker.md](docs/canon/frontend/recipes/cross_surface/pressure_marker.md)
+- `best_fit_marker` — Best Fit Marker — planned_canon — medium_specificity — [best_fit_marker.md](docs/canon/frontend/recipes/cross_surface/best_fit_marker.md)
+- `open_marker` — Open Marker — planned_canon — medium_specificity — [open_marker.md](docs/canon/frontend/recipes/cross_surface/open_marker.md)
+- `primary_cta` — Primary CTA — planned_canon — medium_specificity — [primary_cta.md](docs/canon/frontend/recipes/cross_surface/primary_cta.md)
+- `secondary_cta` — Secondary CTA — planned_canon — medium_specificity — [secondary_cta.md](docs/canon/frontend/recipes/cross_surface/secondary_cta.md)
+- `destructive_cta` — Destructive CTA — planned_canon — medium_specificity — [destructive_cta.md](docs/canon/frontend/recipes/cross_surface/destructive_cta.md)
+- `disabled_cta` — Disabled CTA — planned_canon — medium_specificity — [disabled_cta.md](docs/canon/frontend/recipes/cross_surface/disabled_cta.md)
+- `chevron_disclosure_row` — Chevron / Disclosure Row — planned_canon — medium_specificity — [chevron_disclosure_row.md](docs/canon/frontend/recipes/cross_surface/chevron_disclosure_row.md)
+- `quietglass_wrapper` — QuietGlass Wrapper — planned_canon — medium_specificity — [quietglass_wrapper.md](docs/canon/frontend/recipes/cross_surface/quietglass_wrapper.md)
+- `graphiterecess_base` — GraphiteRecess Base — planned_canon — medium_specificity — [graphiterecess_base.md](docs/canon/frontend/recipes/cross_surface/graphiterecess_base.md)
+- `luminoustrace_state_line` — LuminousTrace State Line — planned_canon — medium_specificity — [luminoustrace_state_line.md](docs/canon/frontend/recipes/cross_surface/luminoustrace_state_line.md)
+- `celestialfield_semantic_layer` — CelestialField Semantic Layer — planned_canon — medium_specificity — [celestialfield_semantic_layer.md](docs/canon/frontend/recipes/cross_surface/celestialfield_semantic_layer.md)
+- `first_run_root` — First Run Root — planned_canon — medium_specificity — [first_run_root.md](docs/canon/frontend/recipes/onboarding/first_run_root.md)
+- `schedule_setup_prompt` — Schedule Setup Prompt — planned_canon — medium_specificity — [schedule_setup_prompt.md](docs/canon/frontend/recipes/onboarding/schedule_setup_prompt.md)
+- `planning_defaults_prompt` — Planning Defaults Prompt — planned_canon — medium_specificity — [planning_defaults_prompt.md](docs/canon/frontend/recipes/onboarding/planning_defaults_prompt.md)
+- `privacy_local_runtime_explanation` — Privacy / Local Runtime Explanation — planned_canon — medium_specificity — [privacy_local_runtime_explanation.md](docs/canon/frontend/recipes/onboarding/privacy_local_runtime_explanation.md)
+- `capture_first_use_prompt` — Capture First-Use Prompt — planned_canon — medium_specificity — [capture_first_use_prompt.md](docs/canon/frontend/recipes/onboarding/capture_first_use_prompt.md)
+- `goals_first_use_prompt` — Goals First-Use Prompt — planned_canon — medium_specificity — [goals_first_use_prompt.md](docs/canon/frontend/recipes/onboarding/goals_first_use_prompt.md)
+- `time_first_use_prompt` — Time First-Use Prompt — planned_canon — medium_specificity — [time_first_use_prompt.md](docs/canon/frontend/recipes/onboarding/time_first_use_prompt.md)
+- `today_first_use_state` — Today First-Use State — planned_canon — medium_specificity — [today_first_use_state.md](docs/canon/frontend/recipes/onboarding/today_first_use_state.md)

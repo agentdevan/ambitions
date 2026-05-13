@@ -234,11 +234,16 @@ Replace animated continuity with static before/after labels, attachment lines, o
 ## ADHD Usability Intent
 Keep one dominant decision or one state explanation visible. Use short labels at rest, progressive disclosure for reasons, stable placement for cancel/undo/recovery, and no competing CTAs.
 
-## Relationship to MRI
-MRI influences this surface through local runtime meaning, recommendation source, proof, receipt, and correction visibility. This recipe does not claim MRI runtime implementation.
+## Relationship to Planned Train / Source Families
 
-## Relationship to HBI
-HBI influences this surface through historical baseline, proof continuity, recovery context, and source freshness comparison. This recipe does not claim HBI runtime implementation.
+- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- SI: shared chrome, reusable primitives, and the object-first interface language.
+- Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
+- QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.
+- Moat Runtime: proof, recovery, trust, and anti-commodity guardrails.
+- Runtime: local execution, receipts, and explainable state.
+- REC: receipt/proof surfaces and acknowledgements.
+- Capture: intake, route reveal, and placement choices.
 
 ## Source Truth
 - docs/truth/PRODUCT_DESIGN_TRUTH.md

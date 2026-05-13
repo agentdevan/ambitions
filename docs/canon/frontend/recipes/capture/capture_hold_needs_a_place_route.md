@@ -30,7 +30,7 @@ A routing surface that transforms raw capture into proof, commitment, goal growt
 The user should feel they can put something down fast, then choose a clear route when Ambitions has enough context.
 
 ## Why This Surface Exists
-This recipe fixes the intended final-state visual contract for Capture Hold / Needs a Place Route: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
+This recipe defines the intended final-state visual contract for Capture Hold / Needs a Place Route: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
 
 ## Primary Object
 Atmosphere Composer
@@ -237,11 +237,17 @@ Replace animated continuity with static before/after labels, attachment lines, o
 ## ADHD Usability Intent
 Keep one dominant decision or one state explanation visible. Use short labels at rest, progressive disclosure for reasons, stable placement for cancel/undo/recovery, and no competing CTAs.
 
-## Relationship to MRI
-MRI influences this surface through route reveal, parsing uncertainty, local correction, and placement suggestions. This is intended visual direction only, not MRI runtime proof.
+## Relationship to Planned Train / Source Families
 
-## Relationship to HBI
-HBI influences this surface through historical baseline, proof continuity, recovery context, and source freshness comparison. This recipe does not claim HBI runtime implementation.
+- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- SI: shared chrome, reusable primitives, and the object-first interface language.
+- Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
+- QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.
+- PK: route reveal, placement, correction, and local trust.
+- MRI: source basis, correction visibility, and return path.
+- REC: receipt and proof continuity for capture outcomes.
+- Capture: intake, placement, and route reveal.
+- Privacy: local-first capture and no hosted data backend.
 
 ## Source Truth
 - docs/truth/PRODUCT_DESIGN_TRUTH.md

@@ -29,7 +29,7 @@ A first-run surface that introduces one setup decision at a time, avoids calenda
 The user should understand one setup choice and its local trust implication without being pushed through permissions or assistant setup.
 
 ## Why This Surface Exists
-This recipe fixes the intended final-state visual contract for Planning Defaults Prompt: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
+This recipe defines the intended final-state visual contract for Planning Defaults Prompt: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
 
 ## Primary Object
 First Run Root
@@ -233,11 +233,16 @@ Replace animated continuity with static before/after labels, attachment lines, o
 ## ADHD Usability Intent
 Keep one dominant decision or one state explanation visible. Use short labels at rest, progressive disclosure for reasons, stable placement for cancel/undo/recovery, and no competing CTAs.
 
-## Relationship to MRI
-MRI influences this surface through local runtime meaning, recommendation source, proof, receipt, and correction visibility. This recipe does not claim MRI runtime implementation.
+## Relationship to Planned Train / Source Families
 
-## Relationship to HBI
-HBI influences this surface through historical baseline, proof continuity, recovery context, and source freshness comparison. This recipe does not claim HBI runtime implementation.
+- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- SI: shared chrome, reusable primitives, and the object-first interface language.
+- Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
+- QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.
+- Onboarding / First Run: calm first-use guidance and setup sequencing.
+- Privacy: local runtime explanation and trust.
+- Planning: planning depth and time-shape specificity.
+- PD: specific planning detail and fit language.
 
 ## Source Truth
 - docs/truth/PRODUCT_DESIGN_TRUTH.md

@@ -1,6 +1,6 @@
 # Constellation Atlas
 
-Status: Active frontend object bible
+Status: Active frontend object reference
 Kind: primary_object
 Destination: Goals
 
@@ -18,7 +18,7 @@ Hierarchy level: primary_object. User job: understand current state, act with co
 
 ## State, Data, Proof, And Source
 
-The object must declare state in words and structure, not color alone. Source truth can come from live Swift source, local runtime/projectors, receipt/proof models, MRI/HBI overlays, or planned canon explicitly labeled planned. Implementation is not claimed unless source evidence is mapped.
+The object must declare state in words and structure, not color alone. Source truth can come from live Swift source, local runtime/projectors, receipt/proof models, planned train/source-family overlays, or planned canon explicitly labeled planned. Implementation is not claimed unless source evidence is mapped.
 
 ## Visual Tokens
 

@@ -18,8 +18,8 @@ Highest active repo truth is `docs/truth/*`. This Phase 02 recipe encyclopedia t
 ## Planned Batch Recency Ranking
 
 Ranking uses explicit registry metadata first, prompt metadata second, ordered queue evidence third, git introduction history fourth, and filesystem metadata only as a low-confidence fallback. Where exact creation metadata is absent, this ledger records medium or low confidence instead of silently sorting by filename.
-## Phase 04 Repair Pass 1 Specificity Correction
+## Phase 04 Repair Pass 2 Specificity Correction
 
-Phase 03 found that the first encyclopedia pass had valid structure but too much repeated generic recipe language and broad planned-batch inventory placeholders. Repair Pass 1 resolves that by making each recipe family and surface type carry explicit final-state visual ingredients: destination-specific regions, object-specific roles, source/proof/receipt behavior, state vocabulary, MRI/HBI influence, accessibility intent, and forbidden drift.
+Phase 03 found that the first encyclopedia pass had valid structure but too much repeated generic recipe language and broad planned-batch inventory placeholders. Repair Pass 2 resolves that by making each recipe family and surface type carry explicit final-state visual ingredients: destination-specific regions, object-specific roles, source/proof/receipt behavior, state vocabulary, broader train-family influence, accessibility intent, and forbidden drift.
 
 The planned-batch inventory now records conservative extracted direction decisions per row. Rows still use medium confidence where explicit creation metadata is mixed, but they no longer certify placeholder text as complete source-precedence extraction. Any future implementation must treat unresolved or low-specificity rows as review inputs, not shipped proof.

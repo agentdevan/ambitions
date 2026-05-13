@@ -1,6 +1,6 @@
 # Reflow Preview Tray
 
-Status: Active frontend object bible
+Status: Active frontend object reference
 Kind: tray
 Destination: Time
 

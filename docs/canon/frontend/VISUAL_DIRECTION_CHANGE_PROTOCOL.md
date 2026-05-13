@@ -16,8 +16,8 @@ Required updates:
 - New reference image: update `VISUAL_REFERENCE_LEDGER.md`.
 - Obsolete reference: classify it in the obsolete/excluded ledger.
 - New visual decision: add a decision record to `VISUAL_DECISION_RECORDS.md`.
-- MRI/HBI source-family extraction: update `trace/VISUAL_DIRECTION_SOURCE_FAMILY_EXTRACTION_LEDGER.md` and the source-family integration map.
-- Every change must state affected areas: Today, Goals, Capture, Time, You, shell, primitives, behavior, accessibility, MRI, HBI.
+- Planned train / source-family extraction: update `trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md`, `trace/TRAIN_FAMILY_TO_SURFACE_MATRIX.md`, `trace/TRAIN_FAMILY_TO_OBJECT_MATRIX.md`, `trace/TRAIN_FAMILY_TO_PRIMITIVE_MATRIX.md`, `trace/TRAIN_FAMILY_PRECEDENCE_LEDGER.md`, `trace/TRAIN_FAMILY_UNRESOLVED_DIRECTION_GAPS.md`, and the source-family integration map.
+- Every change must state affected areas: Today, Goals, Capture, Time, You, shell, primitives, behavior, accessibility, and any relevant planned train/source families.
 - Visual updates must include accessibility and ADHD review notes.
 - Visual updates must not revive Plan as a top-level tab.
 - Celestial visuals must be semantic: orientation, continuity, state, proof, source freshness, or object meaning.

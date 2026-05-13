@@ -1,0 +1,250 @@
+# Frontend Surface Recipe Specificity And Train Extraction 001
+
+Status: GREEN
+Active IA: Today / Goals / Capture / Time / You
+Doctrine: The atlas is intended final-state visual recipe canon; it extracts all planned frontend-relevant train/source families, and MRI/HBI are entries in the broader planned train/source-family system, not the only overlays.
+
+## Train / Source Families
+- Discovered count: 23
+- Frontend-relevant count: 22
+- Excluded families: none explicit
+- MRI/HBI handling: MRI and HBI are part of the broader all-train extraction, not the only overlays.
+
+## Recipe Specificity
+- Recipe count: 159
+- High specificity: 107
+- Medium specificity: 47
+- Low specificity: 0
+- Unresolved direction: 5
+- Unresolved gaps: Local Runtime Source Detail from Today, Review Pressure Surface, Month Detail, Shape Month Flow, Time Stale Source State
+
+## Files Updated
+- docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md
+- docs/canon/frontend/FRONTEND_AUTHORITY_INDEX.md
+- docs/canon/frontend/FRONTEND_SURFACE_COVERAGE_MAP.md
+- docs/canon/frontend/MRI_HBI_FRONTEND_INTEGRATION_MAP.md
+- docs/canon/frontend/README.md
+- docs/canon/frontend/SURFACE_RECIPE_INDEX.md
+- docs/canon/frontend/SURFACE_RECIPE_INVENTORY.md
+- docs/canon/frontend/SURFACE_RECIPE_INVENTORY.yaml
+- docs/canon/frontend/SURFACE_RECIPE_TEMPLATE.md
+- docs/canon/frontend/VISUAL_DIRECTION_CHANGE_PROTOCOL.md
+- docs/canon/frontend/VISUAL_ITEM_REGISTRY.md
+- docs/canon/frontend/VISUAL_ITEM_REGISTRY.yaml
+- docs/canon/frontend/objects/AMBITION_GRAPH.md
+- docs/canon/frontend/objects/ATMOSPHERE_COMPOSER.md
+- docs/canon/frontend/objects/CLOSURE_SYSTEM.md
+- docs/canon/frontend/objects/COMMITMENT_STAGING_TRAY.md
+- docs/canon/frontend/objects/CONSTELLATION_ATLAS.md
+- docs/canon/frontend/objects/LIFESHAPE_FIELD.md
+- docs/canon/frontend/objects/LOCAL_RUNTIME_TRUST_PANEL.md
+- docs/canon/frontend/objects/PROOF_TRAIL.md
+- docs/canon/frontend/objects/REALITY_MERIDIAN.md
+- docs/canon/frontend/objects/RECEIPT_SYSTEM.md
+- docs/canon/frontend/objects/RECOMMENDATION_SOURCE_SYSTEM.md
+- docs/canon/frontend/objects/REFLOW_PREVIEW_TRAY.md
+- docs/canon/frontend/objects/USER_SYSTEM_PROFILE.md
+- docs/canon/frontend/recipes/capture/capture_active_text_entry.md
+- docs/canon/frontend/recipes/capture/capture_attachment_proof_picker.md
+- docs/canon/frontend/recipes/capture/capture_dictation_state.md
+- docs/canon/frontend/recipes/capture/capture_empty_first_use_state.md
+- docs/canon/frontend/recipes/capture/capture_error_failed_attachment_state.md
+- docs/canon/frontend/recipes/capture/capture_grow_into_goal_route.md
+- docs/canon/frontend/recipes/capture/capture_hold_needs_a_place_route.md
+- docs/canon/frontend/recipes/capture/capture_idle_composer.md
+- docs/canon/frontend/recipes/capture/capture_make_commitment_route.md
+- docs/canon/frontend/recipes/capture/capture_mark_constraint_route.md
+- docs/canon/frontend/recipes/capture/capture_offline_local_only_state.md
+- docs/canon/frontend/recipes/capture/capture_parse_uncertain_state.md
+- docs/canon/frontend/recipes/capture/capture_post_input_route_reveal.md
+- docs/canon/frontend/recipes/capture/capture_receipt.md
+- docs/canon/frontend/recipes/capture/capture_reflect_route.md
+- docs/canon/frontend/recipes/capture/capture_root_atmosphere_composer.md
+- docs/canon/frontend/recipes/capture/capture_save_as_proof_route.md
+- docs/canon/frontend/recipes/cross_surface/best_fit_marker.md
+- docs/canon/frontend/recipes/cross_surface/blocked_state.md
+- docs/canon/frontend/recipes/cross_surface/celestialfield_semantic_layer.md
+- docs/canon/frontend/recipes/cross_surface/chevron_disclosure_row.md
+- docs/canon/frontend/recipes/cross_surface/closure_system.md
+- docs/canon/frontend/recipes/cross_surface/commitment_staging_tray.md
+- docs/canon/frontend/recipes/cross_surface/destructive_cta.md
+- docs/canon/frontend/recipes/cross_surface/disabled_cta.md
+- docs/canon/frontend/recipes/cross_surface/graphiterecess_base.md
+- docs/canon/frontend/recipes/cross_surface/luminoustrace_state_line.md
+- docs/canon/frontend/recipes/cross_surface/moved_state.md
+- docs/canon/frontend/recipes/cross_surface/needs_recovery_state.md
+- docs/canon/frontend/recipes/cross_surface/needs_review_state.md
+- docs/canon/frontend/recipes/cross_surface/open_marker.md
+- docs/canon/frontend/recipes/cross_surface/pressure_marker.md
+- docs/canon/frontend/recipes/cross_surface/primary_cta.md
+- docs/canon/frontend/recipes/cross_surface/proof_trail_system.md
+- docs/canon/frontend/recipes/cross_surface/protected_marker.md
+- docs/canon/frontend/recipes/cross_surface/quietglass_wrapper.md
+- docs/canon/frontend/recipes/cross_surface/receipt_system.md
+- docs/canon/frontend/recipes/cross_surface/recommendation_source_system.md
+- docs/canon/frontend/recipes/cross_surface/reflow_preview_tray.md
+- docs/canon/frontend/recipes/cross_surface/secondary_cta.md
+- docs/canon/frontend/recipes/cross_surface/skipped_not_needed_state.md
+- docs/canon/frontend/recipes/cross_surface/source_freshness_badge.md
+- docs/canon/frontend/recipes/cross_surface/still_counts_state.md
+- docs/canon/frontend/recipes/cross_surface/waiting_state.md
+- docs/canon/frontend/recipes/cross_surface/why_this_sheet.md
+- docs/canon/frontend/recipes/goals/alternate_path_detail.md
+- docs/canon/frontend/recipes/goals/ambition_graph.md
+- docs/canon/frontend/recipes/goals/blocker_detail.md
+- docs/canon/frontend/recipes/goals/commitment_detail.md
+- docs/canon/frontend/recipes/goals/goal_detail.md
+- docs/canon/frontend/recipes/goals/goal_thread_detail.md
+- docs/canon/frontend/recipes/goals/goals_archive_historical_goal_state.md
+- docs/canon/frontend/recipes/goals/goals_blocked_state.md
+- docs/canon/frontend/recipes/goals/goals_empty_state.md
+- docs/canon/frontend/recipes/goals/goals_life_area_map.md
+- docs/canon/frontend/recipes/goals/goals_review_state.md
+- docs/canon/frontend/recipes/goals/goals_root_constellation_atlas.md
+- docs/canon/frontend/recipes/goals/milestone_detail.md
+- docs/canon/frontend/recipes/goals/proof_detail.md
+- docs/canon/frontend/recipes/goals/proof_gap_state.md
+- docs/canon/frontend/recipes/goals/proof_trail.md
+- docs/canon/frontend/recipes/goals/recommended_step_context_from_goals.md
+- docs/canon/frontend/recipes/goals/reflection_recovery_detail.md
+- docs/canon/frontend/recipes/goals/selected_life_area_surface.md
+- docs/canon/frontend/recipes/onboarding/capture_first_use_prompt.md
+- docs/canon/frontend/recipes/onboarding/first_run_root.md
+- docs/canon/frontend/recipes/onboarding/goals_first_use_prompt.md
+- docs/canon/frontend/recipes/onboarding/planning_defaults_prompt.md
+- docs/canon/frontend/recipes/onboarding/privacy_local_runtime_explanation.md
+- docs/canon/frontend/recipes/onboarding/schedule_setup_prompt.md
+- docs/canon/frontend/recipes/onboarding/time_first_use_prompt.md
+- docs/canon/frontend/recipes/onboarding/today_first_use_state.md
+- docs/canon/frontend/recipes/shell/back_navigation.md
+- docs/canon/frontend/recipes/shell/compact_surface_header.md
+- docs/canon/frontend/recipes/shell/context_crown.md
+- docs/canon/frontend/recipes/shell/destination_dock.md
+- docs/canon/frontend/recipes/shell/destination_tab_item.md
+- docs/canon/frontend/recipes/shell/global_app_shell.md
+- docs/canon/frontend/recipes/shell/global_empty_state_shell.md
+- docs/canon/frontend/recipes/shell/global_error_fallback_shell.md
+- docs/canon/frontend/recipes/shell/receipt_toast_inline_confirmation.md
+- docs/canon/frontend/recipes/shell/sheet_chrome.md
+- docs/canon/frontend/recipes/shell/tray_chrome.md
+- docs/canon/frontend/recipes/time/best_fit_explanation_sheet.md
+- docs/canon/frontend/recipes/time/best_fit_region.md
+- docs/canon/frontend/recipes/time/day_detail.md
+- docs/canon/frontend/recipes/time/day_lifeshape_surface.md
+- docs/canon/frontend/recipes/time/month_detail.md
+- docs/canon/frontend/recipes/time/month_lifeshape_surface.md
+- docs/canon/frontend/recipes/time/open_time_region.md
+- docs/canon/frontend/recipes/time/planning_defaults_entry.md
+- docs/canon/frontend/recipes/time/pressure_region.md
+- docs/canon/frontend/recipes/time/protected_time_detail.md
+- docs/canon/frontend/recipes/time/protected_time_region.md
+- docs/canon/frontend/recipes/time/recovery_flex_region.md
+- docs/canon/frontend/recipes/time/reflow_preview_tray.md
+- docs/canon/frontend/recipes/time/reflow_week_flow.md
+- docs/canon/frontend/recipes/time/review_pressure_surface.md
+- docs/canon/frontend/recipes/time/schedule_and_availability_entry.md
+- docs/canon/frontend/recipes/time/shape_day_flow.md
+- docs/canon/frontend/recipes/time/shape_month_flow.md
+- docs/canon/frontend/recipes/time/time_no_calendar_data_state.md
+- docs/canon/frontend/recipes/time/time_overloaded_state.md
+- docs/canon/frontend/recipes/time/time_protected_block_state.md
+- docs/canon/frontend/recipes/time/time_receipt_detail.md
+- docs/canon/frontend/recipes/time/time_root_lifeshape_field.md
+- docs/canon/frontend/recipes/time/time_scope_control.md
+- docs/canon/frontend/recipes/time/time_stale_source_state.md
+- docs/canon/frontend/recipes/time/time_vacation_away_state.md
+- docs/canon/frontend/recipes/time/vacation_away_time_entry.md
+- docs/canon/frontend/recipes/time/week_detail.md
+- docs/canon/frontend/recipes/time/week_lifeshape_surface.md
+- docs/canon/frontend/recipes/today/adjust_plan_reflow_preview_entry.md
+- docs/canon/frontend/recipes/today/blocked_detail.md
+- docs/canon/frontend/recipes/today/closure_sheet.md
+- docs/canon/frontend/recipes/today/goal_thread_context_from_today.md
+- docs/canon/frontend/recipes/today/local_runtime_source_detail_from_today.md
+- docs/canon/frontend/recipes/today/proof_attachment_detail.md
+- docs/canon/frontend/recipes/today/receipt_detail.md
+- docs/canon/frontend/recipes/today/recommendation_source_sheet.md
+- docs/canon/frontend/recipes/today/step_detail.md
+- docs/canon/frontend/recipes/today/step_session.md
+- docs/canon/frontend/recipes/today/today_closure_prompt_region.md
+- docs/canon/frontend/recipes/today/today_current_context_header.md
+- docs/canon/frontend/recipes/today/today_empty_state.md
+- docs/canon/frontend/recipes/today/today_no_schedule_data_state.md
+- docs/canon/frontend/recipes/today/today_now_next_later_sequence.md
+- docs/canon/frontend/recipes/today/today_overloaded_state.md
+- docs/canon/frontend/recipes/today/today_protected_time_state.md
+- docs/canon/frontend/recipes/today/today_reality_meridian_rail.md
+- docs/canon/frontend/recipes/today/today_receipt_shelf.md
+- docs/canon/frontend/recipes/today/today_recommended_step_object.md
+- docs/canon/frontend/recipes/today/today_recovery_state.md
+- docs/canon/frontend/recipes/today/today_root_reality_meridian.md
+- docs/canon/frontend/recipes/today/today_source_freshness_indicator.md
+- docs/canon/frontend/recipes/today/today_stale_recommendation_state.md
+- docs/canon/frontend/recipes/today/today_start_here_region.md
+- docs/canon/frontend/recipes/today/today_upcoming_commitments_region.md
+- docs/canon/frontend/recipes/today/today_vacation_away_state.md
+- docs/canon/frontend/recipes/today/waiting_detail.md
+- docs/canon/frontend/recipes/you/about_ambitions.md
+- docs/canon/frontend/recipes/you/automation_and_trust.md
+- docs/canon/frontend/recipes/you/capture_preferences.md
+- docs/canon/frontend/recipes/you/focus_session_defaults.md
+- docs/canon/frontend/recipes/you/help.md
+- docs/canon/frontend/recipes/you/local_data_reset_forget.md
+- docs/canon/frontend/recipes/you/local_runtime_trust_panel.md
+- docs/canon/frontend/recipes/you/notifications.md
+- docs/canon/frontend/recipes/you/personal_runtime.md
+- docs/canon/frontend/recipes/you/planning_defaults.md
+- docs/canon/frontend/recipes/you/planning_setup_section.md
+- docs/canon/frontend/recipes/you/privacy.md
+- docs/canon/frontend/recipes/you/schedule_and_availability.md
+- docs/canon/frontend/recipes/you/user_profile_header.md
+- docs/canon/frontend/recipes/you/vacation_away_time.md
+- docs/canon/frontend/recipes/you/you_empty_first_run_state.md
+- docs/canon/frontend/recipes/you/you_offline_local_only_state.md
+- docs/canon/frontend/recipes/you/you_root_user_system_profile.md
+- docs/canon/frontend/recipes/you/you_trust_warning_state.md
+- docs/canon/frontend/trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md
+- docs/canon/frontend/trace/MRI_HBI_TO_FRONTEND_SURFACE_MATRIX.md
+- docs/canon/frontend/trace/UNMAPPED_INTENDED_SURFACE_GAPS.md
+- docs/canon/frontend/trace/UNRESOLVED_FRONTEND_GAPS.md
+- docs/canon/frontend/trace/VISUAL_DIRECTION_SOURCE_FAMILY_EXTRACTION_LEDGER.md
+- scripts/ambitions-frontend-architecture-atlas-check.py
+- scripts/ambitions-frontend-obsolete-term-scan.py
+- scripts/ambitions-surface-recipe-coverage-check.py
+- scripts/ambitions-surface-recipe-inventory-check.py
+- scripts/ambitions-visual-direction-change-protocol-check.py
+- scripts/ambitions-visual-item-registry-check.py
+- scripts/ambitions-visual-reference-ledger-check.py
+
+## Files Created
+- docs/canon/frontend/PLANNED_TRAIN_FRONTEND_INTEGRATION_MAP.md
+- docs/canon/frontend/objects/PLANNED_TRAIN_FRONTEND_INFLUENCE_OBJECTS.md
+- docs/canon/frontend/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md
+- docs/canon/frontend/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.yaml
+- docs/canon/frontend/trace/TRAIN_FAMILY_PRECEDENCE_LEDGER.md
+- docs/canon/frontend/trace/TRAIN_FAMILY_TO_OBJECT_MATRIX.md
+- docs/canon/frontend/trace/TRAIN_FAMILY_TO_PRIMITIVE_MATRIX.md
+- docs/canon/frontend/trace/TRAIN_FAMILY_TO_SURFACE_MATRIX.md
+- docs/canon/frontend/trace/TRAIN_FAMILY_UNRESOLVED_DIRECTION_GAPS.md
+- scripts/ambitions-surface-recipe-specificity-check.py
+- scripts/ambitions-train-family-frontend-extraction-check.py
+
+## Validation
+- py_compile: PASS
+- architecture_atlas_check: PASS after atlas wording fix
+- visual_item_registry_check: PASS
+- visual_direction_change_protocol_check: PASS
+- visual_reference_ledger_check: PASS
+- frontend_obsolete_term_scan: PASS
+- surface_recipe_inventory_check: PASS
+- surface_recipe_coverage_check: PASS
+- train_family_frontend_extraction_check: PASS
+- surface_recipe_specificity_check: PASS
+- git_diff_check: PASS
+
+## Notes
+- No screenshots were required.
+- No production UI implementation occurred.
+- The atlas wording was corrected once during validation to match the batch doctrine exactly.
+
+Recommended next batch: `FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001`

@@ -237,11 +237,19 @@ Replace animated continuity with static before/after labels, attachment lines, o
 ## ADHD Usability Intent
 Keep one dominant decision or one state explanation visible. Use short labels at rest, progressive disclosure for reasons, stable placement for cancel/undo/recovery, and no competing CTAs.
 
-## Relationship to MRI
-MRI influences this surface through recommendation source, proof-aware next steps, and correction visibility. This is source-family direction only, not MRI runtime proof.
+## Relationship to Planned Train / Source Families
 
-## Relationship to HBI
-HBI influences this surface through historical proof continuity, recovery comparison, and archive context. This is source-family direction only, not HBI runtime proof.
+- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- SI: shared chrome, reusable primitives, and the object-first interface language.
+- Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
+- QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.
+- PK: goal-thread state, source/proof continuity, and path changes.
+- HBI: historical proof continuity, comparison, and recovery context.
+- REC: receipt and proof continuity attached to goal changes.
+- Goals: Constellation Atlas, proof trail, and life-area direction.
+- PD: goal detail depth and path/planning language.
+- MRI: inspectable source basis and correction routing.
+- LID: local-intelligence freshness and source explanation.
 
 ## Source Truth
 - docs/truth/PRODUCT_DESIGN_TRUTH.md

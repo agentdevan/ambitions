@@ -31,7 +31,7 @@ A Goals support surface that preserves Constellation Atlas orientation and proof
 The user should feel oriented in long-range direction, seeing relationships and proof continuity rather than a ranked goal dashboard.
 
 ## Why This Surface Exists
-This recipe fixes the intended final-state visual contract for Commitment Detail: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
+This recipe defines the intended final-state visual contract for Commitment Detail: what the user sees first, which Ambitions object owns the surface, how source/proof/receipt meaning appears, and which accessibility and anti-drift constraints govern future implementation. It remains design canon only; it is not SwiftUI instruction, screenshot proof, implementation status, or release evidence.
 
 ## Primary Object
 Constellation Atlas
@@ -237,11 +237,18 @@ Replace animated continuity with static before/after labels, attachment lines, o
 ## ADHD Usability Intent
 Keep one dominant decision or one state explanation visible. Use short labels at rest, progressive disclosure for reasons, stable placement for cancel/undo/recovery, and no competing CTAs.
 
-## Relationship to MRI
-MRI influences this surface through recommendation traces, commitment fit, proof-aware next steps, and correction visibility. This is intended visual direction only, not MRI runtime proof.
+## Relationship to Planned Train / Source Families
 
-## Relationship to HBI
-HBI influences this surface through historical proof, goal-thread continuity, recovery comparison, and archive context. This is intended visual direction only, not HBI runtime proof.
+- Visual Canon: quiet-luxury hierarchy, native primitives, and no generic dashboard drift.
+- SI: shared chrome, reusable primitives, and the object-first interface language.
+- Accessibility: Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives.
+- QA / validation: declared validation scope, explicit gaps, and no screenshot or implementation proof claims.
+- PK: goal-thread state, source/proof continuity, and path changes.
+- HBI: historical proof continuity, comparison, and recovery context.
+- REC: receipt and proof continuity attached to goal changes.
+- Goals: Constellation Atlas, proof trail, and life-area direction.
+- PD: goal detail depth and path/planning language.
+- Capture: intake, route reveal, and placement choices.
 
 ## Source Truth
 - docs/truth/PRODUCT_DESIGN_TRUTH.md

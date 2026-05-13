@@ -1,6 +1,6 @@
 # Commitment Staging Tray
 
-Status: Active frontend object bible
+Status: Active frontend object reference
 Kind: tray
 Destination: Cross-surface
 

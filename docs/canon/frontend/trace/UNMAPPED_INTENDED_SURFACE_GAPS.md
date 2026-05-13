@@ -2,7 +2,7 @@
 
 Status: Active unresolved-direction list
 
-All required minimum surfaces are represented. The entries below are not unmapped; they are mapped as `unresolved_direction` because final runtime/detail direction needs later canon review.
+All required minimum surfaces are represented. The entries below are not unmapped; they are mapped as `unresolved_direction` because final runtime/detail direction needs later canon review. The all-train source-family pass does not change these gaps; it only broadens the source-family lens.
 
 | Name | Source | Likely Destination | Likely Surface Type | Why It Matters | What Must Be Clarified | Recommended Canon Status |
 |---|---|---|---|---|---|---|
