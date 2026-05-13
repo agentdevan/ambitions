@@ -84,6 +84,18 @@ def first_existing_prompt(candidates: list[str]) -> str | None:
 
 def next_from_files() -> str | None:
     queue = load_json(QUEUE_PATH)
+    if isinstance(queue, dict):
+        top_level_next = queue.get("next_eligible_batch")
+        if isinstance(top_level_next, str) and (ROOT / "prompts/batches" / f"{top_level_next}.md").exists():
+            return top_level_next
+        for record in queue.get("batches", []):
+            if not isinstance(record, dict):
+                continue
+            if str(record.get("classification", "")) != "executable_now":
+                continue
+            batch_id = record.get("id")
+            if isinstance(batch_id, str) and (ROOT / "prompts/batches" / f"{batch_id}.md").exists():
+                return batch_id
     candidates = flatten_batches(queue)
     # Preserve order while de-duping.
     ordered = list(dict.fromkeys(candidates))
