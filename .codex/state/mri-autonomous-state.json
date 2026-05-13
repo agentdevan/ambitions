@@ -13,7 +13,8 @@
     "MRI10",
     "MRI11",
     "MRI12",
-    "MRI13"
+    "MRI13",
+    "MRI14"
   ],
   "history": [
     {
@@ -80,6 +81,11 @@
       "batch": "MRI13",
       "prompt": "prompts/batches/MRI13-LOCAL-LEARNING-CONTROLS.md",
       "marked_complete_at": "2026-05-13T09:54:49Z"
+    },
+    {
+      "batch": "MRI14",
+      "prompt": "prompts/batches/MRI14-GLOBAL-CORRECTION-FOLD.md",
+      "marked_complete_at": "2026-05-13T10:30:40Z"
     }
   ]
 }
