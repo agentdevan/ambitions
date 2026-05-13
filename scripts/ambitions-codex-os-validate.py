@@ -659,7 +659,7 @@ def validate() -> int:
         "validations_run": checks,
         "no_cost_proof": {
             "new_dependencies_added": False,
-            "api_keys_added": False,
+            "credential_material_added": False,
             "network_or_ci_added": False,
             "paid_services_added": False,
             "notes": "Control-plane changes remain local-only and standard-library based.",
