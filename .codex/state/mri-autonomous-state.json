@@ -15,7 +15,8 @@
     "MRI12",
     "MRI13",
     "MRI14",
-    "MRI15"
+    "MRI15",
+    "MRI16"
   ],
   "history": [
     {
@@ -92,6 +93,11 @@
       "batch": "MRI15",
       "prompt": "prompts/batches/MRI15-RECOMMENDATION-REJECTION-LEARNING.md",
       "marked_complete_at": "2026-05-13T11:34:31Z"
+    },
+    {
+      "batch": "MRI16",
+      "prompt": "prompts/batches/MRI16-INSPECTABLE-INTELLIGENCE-GOLDEN-TESTS.md",
+      "marked_complete_at": "2026-05-13T12:05:04Z"
     }
   ]
 }
