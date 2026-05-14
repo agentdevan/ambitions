@@ -12,5 +12,12 @@
 - P2 count: 0
 - Source-link distribution: {'historical_only': 0, 'intended_only': 153, 'linked': 6, 'missing': 0, 'needs_direction': 0, 'obsolete': 0, 'weak_link': 0}
 - Intended-only debt visible: 24
+- Schema pass/fail: {'recipe_contract_missing': 0, 'recipe_contract_depth_failures': 0, 'object_depth_missing': 0, 'object_depth_duplicates': 0, 'label_off_pass': 7, 'label_off_missing': 0}
+- Vocabulary violations: 0
+- Native believability warnings: 0
+- Local-first trust warnings: 0
+- No false momentum warnings: 201
+- Hidden automation warnings: 46
 - False-green risks: []
 - Remaining red flags: []
+- Final 100/100 eligibility: True

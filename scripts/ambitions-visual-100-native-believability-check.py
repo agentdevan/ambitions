@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-from ambitions_visual_100_common import p0_registry_entries, recipe_text_by_entry, write_json, REPORT_DIR
+from ambitions_visual_100_common import p0_registry_entries, recipe_text_by_entry, section_text, write_json, REPORT_DIR
 
 
 REPORT = REPORT_DIR / "visual-100-native-believability.json"
@@ -11,11 +11,18 @@ def main() -> int:
     missing = []
     for entry in p0_registry_entries():
         text = recipe_text_by_entry(entry).lower()
+        native = section_text(recipe_text_by_entry(entry), "Native iPhone Believability Requirements")
+        surface_id = entry.get("surface_id")
         for marker in ["thumb", "iphone", "native", "sheet", "tray", "sf symbols"]:
             if marker not in text:
-                missing.append({"surface_id": entry.get("surface_id"), "marker": marker})
+                missing.append({"surface_id": surface_id, "marker": marker})
+        if not native:
+            missing.append({"surface_id": surface_id, "marker": "native section depth"})
+        for marker in ["thumb", "sheet", "tray", "sf symbols", "native"]:
+            if marker not in native.lower():
+                missing.append({"surface_id": surface_id, "marker": f"native:{marker}"})
     status = "green" if not missing else "red"
-    write_json(REPORT, {"missing": missing, "status": status})
+    write_json(REPORT, {"missing": missing, "status": status, "p0_count": len(p0_registry_entries())})
     print("PASS" if status == "green" else "FAIL")
     return 0 if status == "green" else 1
 

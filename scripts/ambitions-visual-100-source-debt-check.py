@@ -29,12 +29,18 @@ def main() -> int:
             for candidate in entry.get("source_file_candidates", []):
                 if not (ROOT / candidate).exists():
                     missing_files.append(candidate)
+            if not entry.get("source_file_candidates"):
+                invalid.append({"recipe_id": entry.get("recipe_id"), "issue": "missing source_file_candidates"})
+        if status in {"linked", "weak_link", "intended_only"} and not entry.get("notes"):
+            invalid.append({"recipe_id": entry.get("recipe_id"), "issue": "missing notes"})
 
     p0_visible = []
     for entry in registry.get("priority_recipes", []):
         status = entry.get("source_link_status")
         if status in {"intended_only", "weak_link", "missing", "needs_direction"}:
             p0_visible.append({"surface_id": entry.get("surface_id"), "status": status})
+        if status == "linked" and not entry.get("notes"):
+            invalid.append({"surface_id": entry.get("surface_id"), "issue": "linked row missing caveat note"})
 
     visible_intended_only = [
         item for item in p0_visible if item.get("status") == "intended_only"

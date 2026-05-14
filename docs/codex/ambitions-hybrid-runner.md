@@ -74,7 +74,7 @@ make batch-self-check
 ```
 
 The runner is `scripts/ambitions-codex-train.sh`. It performs model phasing:
-GPT-5.5 plans, GPT-5.3-Codex-Spark applies only the bounded patch, and GPT-5.5
+GPT-5.5 plans, GPT-5.4-mini applies only the bounded patch, and GPT-5.5
 reviews, repairs, validates, and decides final commit eligibility.
 
 Local CLI compatibility note: the current Codex CLI supports full-access runner

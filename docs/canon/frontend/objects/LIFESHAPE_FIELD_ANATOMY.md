@@ -31,16 +31,19 @@ LifeShape Field
 - protected space reads as carved negative space
 - pressure reads as compression
 - reflow appears as a before/after shape change
+- day/week/month grammar stays field-like instead of schedule-table-like
+- no calendar clone language or behavior
 
 ## Required Zones
 
 - non-calendar capacity geometry
-- day / week / month grammar
+- day/week/month grammar
 - hard context first
 - protected time as carved space
 - pressure as compression
 - open capacity after commitments
 - reflow before/after geometry
+- vacation/away override
 
 ## Zone Order
 

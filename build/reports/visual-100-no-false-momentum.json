@@ -17,6 +17,7 @@
     "canon/frontend/behavior/REDUCE_MOTION.md",
     "canon/frontend/behavior/STATE_TRANSITIONS.md",
     "canon/frontend/behavior/VOICEOVER_GROUPING.md",
+    "canon/frontend/gates/NORTH_STAR_100_ACCEPTANCE_GATE.md",
     "canon/frontend/objects/CLOSURE_SYSTEM.md",
     "canon/frontend/objects/CONSTELLATION_ATLAS_ANATOMY.md",
     "canon/frontend/objects/PRIMARY_OBJECT_ANATOMY_CANON.md",
@@ -201,5 +202,15 @@
     "docs/canon/frontend/VISUAL_SOURCE_LINKS.yaml",
     "canon/frontend/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.yaml"
   ],
-  "status": "green"
+  "status": "green",
+  "terms": [
+    "Still Counts",
+    "Waiting",
+    "Blocked",
+    "Captured but unplaced",
+    "No False Momentum",
+    "Moved is not progress",
+    "Skipped is not failure",
+    "Blocked is not user fault"
+  ]
 }

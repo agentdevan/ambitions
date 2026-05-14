@@ -5,7 +5,7 @@
 This prompt must be run through `scripts/ambitions-codex-train.sh` so execution
 uses:
 
-GPT-5.5 plan -> GPT-5.3-Codex-Spark bounded patch -> GPT-5.5
+GPT-5.5 plan -> GPT-5.4-mini bounded patch -> GPT-5.5
 review/repair/final commit.
 
 Direct pasted implementation remains forbidden unless the user explicitly says

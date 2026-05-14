@@ -1,5 +1,8 @@
 {
+  "duplicate_surface_ids": [],
+  "gate_mismatches": [],
   "generated_from_batch": "VISUAL-ENCYCLOPEDIA-100-FINAL-PROOF-AUTHORITY-04",
+  "invalid_source_link_statuses": [],
   "missing_fields": [],
   "p0_count": 29,
   "p1_count": 0,

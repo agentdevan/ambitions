@@ -4,14 +4,16 @@ Status: Canon template for high-specificity surface recipes
 
 Use this template for each priority recipe.
 
-Each section must include:
+Each section below must be written in object-specific language and must include:
 
-- what the surface does
+- what the section must contain
 - the minimum acceptable specificity
 - one bad example
 - one good example
 - a validator hint
-- a tier requirement
+- the tier requirement level
+
+If a section cannot satisfy those six fields, the recipe is too generic for final-proof authority and the validator must fail it.
 
 ## Purpose
 State the user job and why this surface exists.

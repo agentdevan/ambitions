@@ -150,6 +150,41 @@ def text_contains_any(text: str, terms: Iterable[str]) -> bool:
     return any(term.lower() in lowered for term in terms)
 
 
+def section_map(text: str) -> dict[str, str]:
+    sections: dict[str, list[str]] = {}
+    current = None
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("#"):
+            if stripped.startswith("##"):
+                heading = normalize_line(stripped.lstrip("#").strip())
+                current = heading
+                sections.setdefault(current, [])
+            else:
+                current = None
+            continue
+        if current is not None:
+            sections.setdefault(current, []).append(line)
+    return {key: "\n".join(value).strip() for key, value in sections.items()}
+
+
+def section_text(text: str, heading: str) -> str:
+    return section_map(text).get(normalize_line(heading), "")
+
+
+def section_has_depth(text: str, heading: str, min_nonempty_lines: int = 2, min_words: int = 20) -> bool:
+    body = section_text(text, heading)
+    if not body:
+        return False
+    lines = [line for line in body.splitlines() if line.strip()]
+    words = re.findall(r"\b\w+\b", body)
+    return len(lines) >= min_nonempty_lines and len(words) >= min_words
+
+
+def bullet_items(text: str) -> list[str]:
+    return [line.strip() for line in text.splitlines() if line.strip().startswith(("-", "*"))]
+
+
 def count_file_hits(paths: Iterable[Path], predicate) -> int:
     count = 0
     for path in paths:

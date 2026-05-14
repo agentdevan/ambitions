@@ -1,5 +1,7 @@
 # Measurable Gate Matrix
 measurable_gate_matrix: true
+visual_proof_dashboard: scripts/ambitions-visual-100-proof-dashboard.py
+# visual proof dashboard: build/reports/visual-100-proof-dashboard.json
 gates:
   ia_correctness:
     validator: scripts/ambitions-visual-100-gate-check.py
@@ -10,7 +12,19 @@ gates:
   object_depth:
     validator: scripts/ambitions-visual-100-object-depth-check.py
     proof_output: build/reports/visual-100-object-depth.json
+  object_uniqueness:
+    validator: scripts/ambitions-visual-100-object-depth-check.py
+    proof_output: build/reports/visual-100-object-depth.json
+  label_off_recognizability:
+    validator: scripts/ambitions-visual-100-object-depth-check.py
+    proof_output: build/reports/visual-100-object-depth.json
+  recipe_schema_depth:
+    validator: scripts/ambitions-visual-100-recipe-contract-check.py
+    proof_output: build/reports/visual-100-recipe-contract.json
   source_truth:
+    validator: scripts/ambitions-visual-100-source-debt-check.py
+    proof_output: build/reports/visual-100-source-debt.json
+  intended_only_debt_visibility:
     validator: scripts/ambitions-visual-100-source-debt-check.py
     proof_output: build/reports/visual-100-source-debt.json
   anti_generic:
@@ -43,3 +57,18 @@ gates:
   hidden_automation:
     validator: scripts/ambitions-visual-100-hidden-automation-check.py
     proof_output: build/reports/visual-100-hidden-automation.json
+  microcopy_boundaries:
+    validator: scripts/ambitions-visual-100-vocabulary-full-corpus-check.py
+    proof_output: build/reports/visual-100-vocabulary-full-corpus.json
+  full_corpus_vocabulary_boundary:
+    validator: scripts/ambitions-visual-100-vocabulary-full-corpus-check.py
+    proof_output: build/reports/visual-100-vocabulary-full-corpus.json
+  dashboard_proof_separation:
+    validator: scripts/ambitions-visual-100-proof-dashboard.py
+    proof_output: build/reports/visual-100-proof-dashboard.json
+  implementation_proof_boundary:
+    validator: scripts/ambitions-visual-100-gate-check.py
+    proof_output: build/reports/visual-100-gate.json
+  release_accessibility_device_proof_boundary:
+    validator: scripts/ambitions-visual-100-gate-check.py
+    proof_output: build/reports/visual-100-gate.json

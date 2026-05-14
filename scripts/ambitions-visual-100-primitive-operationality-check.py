@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-from ambitions_visual_100_common import BASE, read_text, write_json, REPORT_DIR
+from ambitions_visual_100_common import BASE, read_text, section_text, write_json, REPORT_DIR
 
 
 REPORT = REPORT_DIR / "visual-100-primitive-operationality.json"
@@ -27,10 +27,14 @@ def main() -> int:
     for rel in PRIMITIVE_DOCS:
         text = read_text(BASE / rel)
         hits = [marker for marker in REQUIRED if marker not in text]
+        for marker in REQUIRED:
+            if marker in {"Purpose", "Allowed Use", "Forbidden Use", "Canonical Anatomy", "State Variants", "Accessibility Fallback", "Misuse Examples", "Recipe Examples", "Validator Hooks"}:
+                if not section_text(text, marker):
+                    hits.append(f"{marker} depth")
         if hits:
             missing[rel] = hits
     status = "green" if not missing else "red"
-    write_json(REPORT, {"missing": missing, "status": status})
+    write_json(REPORT, {"missing": missing, "status": status, "checked_docs": len(PRIMITIVE_DOCS)})
     print("PASS" if status == "green" else "FAIL")
     return 0 if status == "green" else 1
 

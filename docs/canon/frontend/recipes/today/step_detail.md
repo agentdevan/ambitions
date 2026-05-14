@@ -404,3 +404,184 @@ Today remains local-first unless the active truth explicitly says otherwise.
 - user-set, learned, and suggested states are distinguishable
 - reset and forget are previewed
 - automation remains inspectable
+
+<!-- VISUAL_100_FINAL_PROOF_CONTRACT_BEGIN -->
+
+# Visual 100 Final Proof Contract
+
+## Purpose
+Step Detail exists to make Today understandable through the Reality Meridian, not through a generic productivity screen.
+Minimum specificity: the recipe must name step_detail, the user job, and the reason this surface owns that job.
+
+## Surface Hierarchy
+Step Detail sits inside Today and is subordinate to the Reality Meridian; supporting surfaces must not outrank it.
+Minimum specificity: parent, child, and return-path behavior must remain attached to Reality Meridian rather than becoming separate navigation chrome.
+
+## Primary Object Dependency
+The governing object is Reality Meridian; source, proof, receipt, correction, and recovery behavior must stay attached to that object.
+Minimum specificity: if Step Detail cannot show what Reality Meridian owns, the surface is not final-proof eligible.
+
+## Label-Off Signature
+With labels blurred, Step Detail must still read as Reality Meridian through orientation rail, current state seam, source/proof edge, primary action shelf, and recovery return path.
+Minimum specificity: the signature must be structural, not a title, icon label, color wash, or decorative mark.
+
+## Canonical Anatomy
+The anatomy is orientation rail, current state seam, source/proof edge, primary action shelf, and recovery return path; those regions appear in stable order and preserve one dominant object at rest.
+Minimum specificity: each region must name its role and must not become an interchangeable card in Today.
+
+## Visible Regions
+Visible regions for Step Detail: orientation rail, current state seam, source/proof edge, primary action shelf, and recovery return path.
+Minimum specificity: each visible region must declare allowed state, allowed proof/source content, and its correction affordance.
+
+## Dominant Object
+The dominant object at rest is Reality Meridian, and all secondary content must explain or act on that object.
+Minimum specificity: no equal-weight list, feed, grid, score, or decorative panel may compete with Reality Meridian.
+
+## Supporting Objects
+Supporting objects may include source freshness, proof trail, receipt, correction, and recovery affordances for Reality Meridian.
+Minimum specificity: supporting objects stay visibly subordinate and cannot become independent destinations or hidden automation.
+
+## Primitive Usage
+Allowed primitives are object hierarchy, trust seam, source freshness, proof/receipt, disclosure, correction, and recovery for Reality Meridian.
+Minimum specificity: primitives must communicate Ambitions state and never become generic decoration or model-confidence theater.
+
+## Typography Roles
+Typography gives Reality Meridian the strongest weight, source/proof compact weight, and correction or recovery an always-readable command weight.
+Minimum specificity: large text must preserve object, state, action, and recovery before secondary metadata.
+
+## Spacing Rules
+Spacing groups content by relationship to Reality Meridian; source/proof, action, and recovery stay object-attached with native touch intent.
+Minimum specificity: the surface must avoid equal card spacing that makes every panel look equally important.
+
+## Material Rules
+Ground, layer, and transient material must clarify Reality Meridian, source/proof inspection, and correction depth.
+Minimum specificity: glass or texture is allowed only when it communicates hierarchy, source, proof, or reversible action.
+
+## Color / State Rules
+Color may reinforce fresh, stale, blocked, protected, local-only, receipt-confirmed, or recovery state for Reality Meridian.
+Minimum specificity: every state must also use words, shape, placement, or structure so color never carries meaning alone.
+
+## Iconography
+Icons may identify source, proof, receipt, disclosure, warning, protected state, or recovery for Reality Meridian.
+Minimum specificity: an icon must never replace the visible state or become the only explanation of consequence.
+
+## Chevron / Disclosure Rules
+Disclosure opens deeper source, proof, consequence, or correction detail for Step Detail; it is never decorative navigation noise.
+Minimum specificity: every chevron must have a visible label or accessibility meaning tied to Reality Meridian.
+
+## Source / Trust Behavior
+Source Link Status: intended_only. Step Detail must show whether source is linked, intended-only, stale, unavailable, or local-only.
+Minimum specificity: trust behavior must expose source basis and correction path without implying implementation proof.
+
+## Proof / Receipt Behavior
+Proof and Receipt behavior stays attached to Reality Meridian; receipts confirm meaningful changes and proof explains what changed or why.
+Minimum specificity: proof cannot be a detached feed, generic toast, or release claim for Step Detail.
+
+## Transaction Behavior
+Transactions on Step Detail require visible intent, preview when consequence matters, explicit commit, receipt, and undo or recovery.
+Minimum specificity: the surface must block silent mutation and show the consequence of acting on Reality Meridian.
+
+## Primary Action
+Primary Action: one dominant action at rest acts on Reality Meridian and explains why it is available now.
+Minimum specificity: competing CTAs must collapse behind disclosure or become secondary correction paths.
+
+## Secondary Correction Path
+Secondary correction path lets the user inspect, undo, re-place, reset, recover, or choose a safer route for Reality Meridian.
+Minimum specificity: correction must be visible without blame and cannot be hidden behind model-like explanation copy.
+
+## Empty State
+No day object is ready yet; keep Start Here, source state, and a safe capture or recovery path visible.
+Minimum specificity: empty state must preserve destination purpose and avoid motivational filler or fake completion.
+
+## Loading / Unknown State
+If source state is unresolved, label it as local, stale, unavailable, or still reading instead of guessing.
+Minimum specificity: unknown state must be explicit and must not present guessed source, proof, or readiness.
+
+## Error / Conflict State
+When recommendation, proof, or current-day fit conflicts, show the source mismatch and the correction path.
+Minimum specificity: conflict state must identify source/proof/fit conflict without shame or hidden mutation.
+
+## Recovery State
+Recovery keeps one safe next step, proof context, and a visible way back without shame language.
+Minimum specificity: recovery must include a visible correction path and no blame-oriented language.
+
+## VoiceOver Order
+VoiceOver Order: Today, Step Detail, Reality Meridian, state, source status, proof or receipt status, primary action, correction path.
+Minimum specificity: announcement order must preserve object, state, source/proof, action, and recovery without relying on layout.
+
+## Dynamic Type Behavior
+Dynamic Type keeps Reality Meridian, current state, source/proof line, primary action, and correction path visible before secondary details.
+Minimum specificity: large text may collapse metadata but must not hide action, receipt, source, or recovery meaning.
+
+## Reduce Motion Behavior
+Reduce Motion replaces movement in Step Detail with static before/after labels, source summaries, receipt state, and recovery labels.
+Minimum specificity: no meaning may depend only on animation, haptics, parallax, or moving continuity.
+
+## Reduce Transparency Behavior
+Reduce Transparency turns transient layers for Reality Meridian into opaque native surfaces while preserving state, hierarchy, and disclosure.
+Minimum specificity: blur removal must not erase source/proof separation or correction affordances.
+
+## Increase Contrast Behavior
+Increase Contrast strengthens boundaries around Reality Meridian, state labels, proof/source seams, destructive choices, and recovery controls.
+Minimum specificity: contrast changes must add stronger borders, clearer boundaries, or reinforced separation without introducing color-only meaning.
+
+## Differentiate Without Color Behavior
+Differentiate Without Color uses labels, shape, placement, icons with text, and hierarchy to distinguish Reality Meridian states.
+Minimum specificity: fresh/stale/blocked/protected/recovery states must remain legible without hue differences.
+
+## ADHD Density Law
+ADHD Density Law: one dominant Reality Meridian decision at rest, one primary action, and one safe correction or recovery path.
+Minimum specificity: supporting details must progressively disclose rather than competing for first attention.
+
+## Native iPhone Believability Requirements
+Step Detail must feel like a restrained native iPhone surface with thumb-reachable actions, semantic rows, sheets, and stable safe areas.
+Minimum specificity: include sheet and tray behavior, SF Symbols with labels, thumb reach, safe-area respect, and native iPhone controls while avoiding web-dashboard density, custom novelty chrome, hidden gestures, and unlabelled visual state.
+
+## Train / Source-Family Influence
+Source-family influence for Step Detail: visual canon, accessibility, source/proof receipts, local trust, transaction, and Today object depth.
+Minimum specificity: train references must explain behavior, not imply shipped SwiftUI implementation.
+
+## Source Linkage
+Source Link Status: intended_only. Implementation Proof Boundary: Not In Scope. Required gates: object_depth, transaction, proof_source_receipt, accessibility.
+Minimum specificity: linked and intended-only debt must remain visible in reports and cannot be converted into implementation claims.
+
+## Implementation Proof Boundary
+Implementation Proof Boundary: this recipe is final-state design canon for Step Detail; it does not prove SwiftUI, device, release, or accessibility implementation.
+Minimum specificity: proof requires source inspection, local validation, and release evidence outside this recipe.
+
+## Unresolved Direction
+Unresolved direction for Step Detail: any missing implementation source remains intended_only debt and must stay visible until a scoped implementation batch lands.
+Minimum specificity: unresolved work must be named as debt, not hidden behind Green language.
+
+## Anti-Generic Red Flags
+Bad example: an equal stack of tasks, metrics, and recommendations with no clear daily orientation object.
+Validator hint: fail Step Detail if Reality Meridian can be replaced by a generic list, calendar, chat, settings, score, or dashboard surface.
+
+## Forbidden Interpretations
+Forbidden interpretations: implementation proof, release proof, device proof, accessibility conformance proof, hosted automation, or top-level IA changes.
+Minimum specificity: Step Detail may define design canon only and must not claim production readiness.
+
+## Acceptance Checklist
+Good example: one current-day object with source, proof, action, and recovery visibly attached.
+Acceptance requires source linkage, proof boundary, VoiceOver/Dynamic Type/Reduce Motion coverage, primary action, correction path, and anti-generic checks for Step Detail.
+
+## P0 Proof Appendix
+- Source Link Status: intended_only; Step Detail must keep source status inspectable, including local-only and stale source states, and must not hide intended-only debt.
+- Implementation Proof Boundary: Not In Scope; this recipe does not prove shipped SwiftUI, device behavior, release readiness, or accessibility conformance.
+- Good / Bad Example: good is one current-day object with source, proof, action, and recovery visibly attached; bad is an equal stack of tasks, metrics, and recommendations with no clear daily orientation object.
+- Acceptance Checklist: source status visible, implementation boundary named, primary action visible, correction path visible, and proof/receipt behavior attached to Reality Meridian.
+The proof appendix exists to prevent a false Green for Step Detail. It records what can be claimed as design canon and what remains outside implementation proof.
+A reviewer should be able to inspect Today, locate Reality Meridian, identify the source/proof seam, and see why implementation proof remains Not In Scope.
+Evidence note: Step Detail must keep generated reports, source-link status, and Not In Scope implementation proof aligned before any Green claim.
+If any report upgrades Step Detail without this boundary, the validator must fail rather than convert intended canon into shipped behavior.
+
+## P0 Canon Appendix
+VoiceOver must announce Today, Step Detail, Reality Meridian, state, Source, Proof, Receipt, Primary Action, and recovery in that order.
+Dynamic Type must preserve the dominant object, source/proof line, primary action, and correction path before secondary metadata.
+Reduce Motion must replace animated meaning with static source, proof, before/after, and receipt labels.
+Reduce Transparency must preserve hierarchy with opaque native layers when blur or glass is reduced.
+Increase Contrast and Differentiate Without Color must keep state, warning, protected, blocked, receipt, and recovery meanings visible without hue alone.
+Proof, Receipt, and Source remain attached to Reality Meridian; Primary Action stays singular and correction remains visible without shame language.
+This appendix is canon authority for Step Detail, not implementation proof, release proof, or an approval to alter top-level IA.
+
+<!-- VISUAL_100_FINAL_PROOF_CONTRACT_END -->

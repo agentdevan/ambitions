@@ -24,6 +24,7 @@ Constellation Atlas
 - proof trail
 - alternate path visibility
 - recovery without shame
+- life-area equality rather than ranked life-area scoring
 
 ## Label-Off Visual Signature
 
@@ -31,6 +32,7 @@ Constellation Atlas
 - proof and blocker seams
 - visible thread thickness or density logic
 - a central goal graph rather than KPI tiles
+- thread-to-Today feed stays relational instead of becoming a KPI board
 
 ## Required Zones
 

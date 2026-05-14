@@ -30,6 +30,8 @@ User System Profile
 - settings-like density is not enough
 - the runtime and trust panel must be obvious
 - privacy and reset must read as serious control, not admin clutter
+- privacy plain language must beat settings-clone jargon
+- no settings clone
 
 ## Required Zones
 

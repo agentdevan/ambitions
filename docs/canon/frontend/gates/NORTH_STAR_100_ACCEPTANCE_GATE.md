@@ -6,27 +6,31 @@ Status: Active acceptance gate
 
 - IA correctness
 - prompt / queue authority
-- object anatomy completeness
+- object anatomy depth
 - object uniqueness
-- label-off signature coverage
-- anti-generic kill switch pass
+- label-off recognizability
+- recipe schema depth
+- source-link truth
+- intended-only debt visibility
+- anti-generic kill switches
+- accessibility / ADHD surface coverage
+- proof / source / receipt coverage
+- transaction-model coverage
+- primitive operationality
+- native iPhone believability
+- local-first trust visibility
+- no false momentum
+- hidden automation
+- microcopy boundaries
+- full-corpus vocabulary boundary
+- dashboard proof separation
+- implementation-proof boundary
+- release / accessibility / device proof boundary
 - Time not calendar clone
 - Capture not chatbot
 - Today not task list
 - Goals not dashboard
 - You not settings clone
-- proof / receipt / source coverage
-- transaction model coverage
-- local runtime visibility
-- accessibility fallback coverage
-- ADHD density law coverage
-- native iPhone believability
-- visual primitive clarity
-- recipe index completeness
-- inventory consistency
-- source-linkage consistency
-- validator coverage
-- source-link debt visibility
 - false-Green prevention
 - unresolved contradictions
 - implementation red flags

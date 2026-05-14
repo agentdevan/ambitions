@@ -14,7 +14,7 @@ set -Eeuo pipefail
 # release readiness, accessibility conformance, or batch completion by itself.
 
 CONDUCTOR_MODEL="${CONDUCTOR_MODEL:-gpt-5.5}"
-PATCH_MODEL="${PATCH_MODEL:-gpt-5.3-codex-spark}"
+PATCH_MODEL="${PATCH_MODEL:-gpt-5.4-mini}"
 REVIEW_MODEL="${REVIEW_MODEL:-gpt-5.5}"
 REPAIR_MODEL="${REPAIR_MODEL:-gpt-5.5}"
 
@@ -46,7 +46,7 @@ Example:
 
 Environment defaults:
   CONDUCTOR_MODEL=gpt-5.5
-  PATCH_MODEL=gpt-5.3-codex-spark
+  PATCH_MODEL=gpt-5.4-mini
   REVIEW_MODEL=gpt-5.5
   REPAIR_MODEL=gpt-5.5
   ACCESS_MODE=full
@@ -421,7 +421,7 @@ Runner defaults:
 - Auto-push disabled by default; set AUTO_PUSH=1 only with explicit owner intent.
 - Active branch-creation policy is checked before runner branch creation.
 - One bounded repair pass by default.
-- Spark never owns architecture, canon, continuation, cleanup, or final decisions.
+- GPT-5.4-mini never owns architecture, canon, continuation, cleanup, or final decisions.
 
 $(standard_ambitions_quality_bar)
 
@@ -801,7 +801,7 @@ write_phase_prompt "01-plan" "$PHASE01_PROMPT" \
   "- define forbidden files" \
   "- define validation commands" \
   "- define rollback command" \
-  "- produce Spark handoff" \
+  "- produce GPT-5.4-mini bounded patch handoff" \
   "" \
   "Rules:" \
   "- Must not edit app source." \
@@ -821,9 +821,9 @@ if [[ "$PHASE01_STATUS" == "YELLOW" && "$KEEP_GOING_ON_YELLOW" != "1" ]]; then
   exit 0
 fi
 
-PHASE02_PROMPT="$RUN_DIR/prompts/02-spark-bounded-patch.prompt.md"
-write_phase_prompt "02-spark-bounded-patch" "$PHASE02_PROMPT" \
-  "Phase 02 — Spark Bounded Patch" \
+PHASE02_PROMPT="$RUN_DIR/prompts/02-bounded-patch.prompt.md"
+write_phase_prompt "02-bounded-patch" "$PHASE02_PROMPT" \
+  "Phase 02 — GPT-5.4-mini Bounded Patch" \
   "" \
   "Purpose:" \
   "- implement only the approved bounded patch from Phase 01" \
@@ -831,7 +831,7 @@ write_phase_prompt "02-spark-bounded-patch" "$PHASE02_PROMPT" \
   "Phase 01 final message:" \
   "$(sed -n '1,240p' "$RUN_DIR/final/01-plan.final.md")" \
   "" \
-  "Spark rules:" \
+  "GPT-5.4-mini bounded patch rules:" \
   "- Modify only allowed files from Phase 01." \
   "- No architecture decisions." \
   "- No canon decisions." \
@@ -842,7 +842,7 @@ write_phase_prompt "02-spark-bounded-patch" "$PHASE02_PROMPT" \
   "- Run Phase 01 validation commands where possible." \
   "- Must output STATUS: GREEN | YELLOW | RED."
 
-PHASE02_STATUS="$(run_codex_phase "02-spark-bounded-patch" "$PATCH_MODEL" "$PHASE02_PROMPT")"
+PHASE02_STATUS="$(run_codex_phase "02-bounded-patch" "$PATCH_MODEL" "$PHASE02_PROMPT")"
 [[ "$PHASE02_STATUS" != "RED" ]] || stop_red "Phase 02 returned RED or UNKNOWN"
 if [[ "$PHASE02_STATUS" == "YELLOW" && "$KEEP_GOING_ON_YELLOW" != "1" ]]; then
   FINAL_STATUS="YELLOW"
@@ -869,10 +869,10 @@ write_phase_prompt "03-review" "$PHASE03_PROMPT" \
   "$(sed -n '1,240p' "$RUN_DIR/final/01-plan.final.md")" \
   "" \
   "Phase 02 final message:" \
-  "$(sed -n '1,240p' "$RUN_DIR/final/02-spark-bounded-patch.final.md")" \
+  "$(sed -n '1,240p' "$RUN_DIR/final/02-bounded-patch.final.md")" \
   "" \
   "Rules:" \
-  "- Spark does not decide continuation." \
+  "- GPT-5.4-mini does not decide continuation." \
   "- Commit eligibility belongs to this GPT-5.5 review/final gate." \
   "- Must output STATUS: GREEN | YELLOW | RED." \
   "- If repair is required, include REPAIR REQUIRED."

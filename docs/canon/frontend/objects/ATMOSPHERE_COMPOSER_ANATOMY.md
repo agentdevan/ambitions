@@ -28,9 +28,10 @@ Atmosphere Composer
 ## Label-Off Visual Signature
 
 - one dominant composer
-- no chatbot bubbles
+- no chat bubbles and no chatbot persona
 - route choices appear only after input
 - proof or receipt appears as a compact state seam
+- Held With Dignity remains the fallback when the item cannot be placed yet
 
 ## Required Zones
 
@@ -40,6 +41,7 @@ Atmosphere Composer
 - three-route cap
 - held-with-dignity state
 - proof attachment and recovery path
+- re-place wrong-route recovery
 
 ## Zone Order
 

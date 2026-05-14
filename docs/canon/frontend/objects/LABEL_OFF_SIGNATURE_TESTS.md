@@ -81,6 +81,12 @@ label-off test
 - trust seam remains visible
 - recovery path remains obvious
 
+## Label-Off Visual Signature
+
+The label-off signature is the structural fingerprint that remains after exact labels, body copy, and decorative emphasis are removed. A passing Ambitions object must still expose its dominant object, zone order, trust seam, proof/receipt layer, and recovery path through layout, spacing, hierarchy, and state grammar.
+
+Minimum specificity: the tester must be able to distinguish Reality Meridian, Constellation Atlas, Atmosphere Composer, LifeShape Field, and User System Profile without relying on title text, color alone, or generic productivity-screen patterns.
+
 ## Review Note
 
 Label-off recognizability is a canonical requirement, not a screenshot claim.

@@ -30,7 +30,8 @@ Reality Meridian
 - One dominant current-state band.
 - A visible Start Here region.
 - A closure or recovery seam.
-- A source/proof line that is not decorative.
+- A source / proof seam that is not decorative.
+- The task-list failure is impossible to miss because the current-day object stays attached to the current-day decision.
 
 ## Required Zones
 

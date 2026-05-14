@@ -3,7 +3,9 @@
     "docs/canon/frontend/SURFACE_RECIPE_INDEX.md",
     "docs/canon/frontend/SURFACE_RECIPE_INVENTORY.md",
     "docs/canon/frontend/VISUAL_ITEM_REGISTRY.md",
+    "canon/frontend/behavior/AMBITIONS_TRANSACTION_MODEL.md",
     "canon/frontend/behavior/PREVIEW_CONFIRM_UNDO_BEHAVIOR.md",
+    "canon/frontend/gates/LOCAL_FIRST_RUNTIME_TRUST_GATE.md",
     "canon/frontend/objects/USER_SYSTEM_PROFILE_ANATOMY.md",
     "canon/frontend/primitives/TRANSACTION_PRIMITIVES.md",
     "frontend/recipes/capture/capture_hold_needs_a_place_route.md",
@@ -36,8 +38,26 @@
     "frontend/recipes/you/local_data_reset_forget.md",
     "frontend/recipes/you/local_runtime_trust_panel.md",
     "frontend/recipes/you/you_root_user_system_profile.md",
+    "canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+    "canon/frontend/trace/PREVIEW_MATRIX.md",
     "docs/canon/frontend/SURFACE_RECIPE_INVENTORY.yaml",
-    "docs/canon/frontend/VISUAL_ITEM_REGISTRY.yaml"
+    "docs/canon/frontend/VISUAL_ITEM_REGISTRY.yaml",
+    "docs/canon/frontend/VISUAL_SOURCE_LINKS.yaml",
+    "canon/frontend/trace/LOCAL_FIRST_RUNTIME_TRUST_MATRIX.yaml",
+    "canon/frontend/trace/PREVIEW_MATRIX.yaml",
+    "canon/frontend/trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml"
   ],
-  "status": "green"
+  "status": "green",
+  "terms": [
+    "preview",
+    "automation",
+    "user control",
+    "inspectable",
+    "stale source",
+    "learned pattern",
+    "user-set",
+    "suggested",
+    "reset",
+    "forget"
+  ]
 }

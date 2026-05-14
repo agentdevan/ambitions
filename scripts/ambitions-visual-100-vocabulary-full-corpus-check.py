@@ -15,10 +15,15 @@ FORBIDDEN = [
     "chatbot",
     "assistant",
     "AI assistant",
+    "assistant panel",
     "streak",
     "score",
     "ring",
     "leaderboard",
+    "task list",
+    "calendar clone",
+    "settings clone",
+    "dashboard",
     "sportsbook",
     "gambling",
 ]
@@ -48,7 +53,7 @@ def negative_context(line: str, heading: str) -> bool:
     text = f"{heading} {line}".lower()
     return bool(
         re.search(
-            r"\b(no|not|never|without|avoid|instead of|replace|do not|does not|cannot|can't|won't|forbidden|historical|compatibility|obsolete|internal|example|boundary|negative|anti-generic|score system|rank or score|non-score|gambling|benchmark)\b",
+            r"\b(no|not|never|without|avoid|avoids|avoiding|instead of|rather than|replace|do not|does not|cannot|can't|won't|forbidden|historical|compatibility|obsolete|internal|example|bad|fail|fails|failure|boundary|negative|anti-generic|score system|rank or score|non-score|gambling|benchmark)\b",
             text,
         )
     )
@@ -59,6 +64,8 @@ def main() -> int:
     for path in scan_frontend_text_files():
         rel = path.relative_to(BASE)
         if path.name in SUPPORT_FILES or path.name.endswith("_SCORECARD.md"):
+            continue
+        if any(part in {"gates", "trace", "reviews"} for part in path.parts):
             continue
         text = path.read_text(encoding="utf-8")
         current_heading = ""

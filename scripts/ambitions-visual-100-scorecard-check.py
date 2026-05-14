@@ -15,14 +15,19 @@ SCORECARD_DOCS = [
 
 def main() -> int:
     missing = []
+    score_100_violations = []
     rows = {}
     for rel in SCORECARD_DOCS:
         text = read_text(BASE / rel)
-        rows[rel] = text.count("|")
+        rows[rel] = {"table_rows": text.count("|"), "has_evidence": "Evidence" in text}
         if "provisional" not in text.lower():
             missing.append(rel)
-    status = "green" if not missing else "red"
-    write_json(REPORT, {"rows": rows, "missing": missing, "status": status})
+        if "| 100 |" in text or "|100|" in text:
+            score_100_violations.append(rel)
+        if "Evidence" not in text or "Score" not in text:
+            missing.append(f"{rel}:structure")
+    status = "green" if not missing and not score_100_violations else "red"
+    write_json(REPORT, {"rows": rows, "missing": missing, "score_100_violations": score_100_violations, "status": status})
     print("PASS" if status == "green" else "FAIL")
     return 0 if status == "green" else 1
 
