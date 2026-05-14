@@ -1,5 +1,8 @@
 {
-  "exact_duplicate_paragraphs": {},
+  "exact_duplicate_paragraphs": {
+    "- decorative divider - generic card border - hidden model-confidence cue": 2,
+    "- today - goals - capture - time - you": 2
+  },
   "file_count": 29,
   "forbidden_phrase_hits": {},
   "generic_phrase_hits": {},
@@ -58,6 +61,16 @@
       "a": "docs/canon/frontend/objects/LIFESHAPE_FIELD_ANATOMY.md",
       "b": "docs/canon/frontend/objects/USER_SYSTEM_PROFILE_ANATOMY.md",
       "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/primitives/TRUST_SEAM.md",
+      "b": "docs/canon/frontend/primitives/PROOF_PRIMITIVES.md",
+      "score": 1.0
+    },
+    {
+      "a": "docs/canon/frontend/primitives/TRUST_SEAM.md",
+      "b": "docs/canon/frontend/primitives/TRUST_SEAM.md",
+      "score": 1.0
     },
     {
       "a": "docs/canon/frontend/trace/VISUAL_SOURCE_LINKAGE_LEDGER.md",

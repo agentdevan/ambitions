@@ -22,6 +22,10 @@ This file classifies the most important frontend terms so active canon, historic
 | Time | user-facing allowed | Active top-level destination and LifeShape Field surface. |
 | You | user-facing allowed | Active top-level destination and local runtime surface. |
 | Plan | historical/supporting | Compatibility seam or contextual noun only; not top-level IA. |
+| best next move | forbidden | Do not use as active canon. |
+| next best move | forbidden | Do not use as active canon. |
+| Begin Focus | forbidden | Do not use as active canon. |
+| Start Focus | forbidden | Do not use as active canon. |
 | Start here | user-facing allowed | Preferred Today anchor. |
 | Recommended step | user-facing allowed | Supporting Today copy. |
 | Start now | user-facing allowed | Primary launch CTA when a step is ready. |
@@ -50,6 +54,7 @@ This file classifies the most important frontend terms so active canon, historic
 | AI | forbidden | Do not use as core UX label for the native product. |
 | assistant | forbidden | Do not frame the product as an assistant tab or assistant persona. |
 | chatbot | forbidden | No chatbot UI as core product canon. |
+| AI assistant | forbidden | No assistant framing as active canon. |
 | streak | forbidden | No streak mechanics or streak pressure. |
 | score | forbidden | No productivity score / self-scoring canon. |
 | ring | forbidden | No gamified rings as product canon. |

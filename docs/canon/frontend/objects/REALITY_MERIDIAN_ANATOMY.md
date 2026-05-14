@@ -7,6 +7,17 @@ Destination: Today
 
 Reality Meridian is the Today object that shows what fits now, what needs closure, and what source or proof explains the current state.
 
+## ASCII Anatomy
+
+```text
+Reality Meridian
+  ├─ Start Here region
+  ├─ Now / Next / Later sequence
+  ├─ closure prompt seam
+  ├─ source / proof seam
+  └─ recovery / undo path
+```
+
 ## Product Meaning
 
 - Current-state orientation.
@@ -20,6 +31,29 @@ Reality Meridian is the Today object that shows what fits now, what needs closur
 - A visible Start Here region.
 - A closure or recovery seam.
 - A source/proof line that is not decorative.
+
+## Required Zones
+
+- orientation header
+- Start Here region attached to Meridian
+- Now / Next / Later state bands
+- closure prompt placement
+- proof/source seam
+- recovery or undo path
+
+## Zone Order
+
+1. Orientation
+2. Start Here
+3. Now / Next / Later
+4. Proof / source
+5. Closure / recovery
+
+## Density Budget
+
+- One dominant action at rest.
+- One unresolved question above the fold.
+- Metadata collapses before the dominant object.
 
 ## Canonical Structure
 
@@ -96,6 +130,13 @@ Reality Meridian may refine the way it groups current state, but it must never s
 - stale recommendation treated as fact
 - no obvious recovery path
 
+## Anti-Generic Failure Examples
+
+- task list pretending to be Today
+- card stack with a recommended item
+- dashboard tiles instead of current state
+- calendar clone with labels pasted on top
+
 ## Recovery Behavior
 
 - reduce density
@@ -161,3 +202,16 @@ Linked through the live Today source candidates in `VISUAL_SOURCE_LINKS.yaml`.
 
 - Good: "what fits now, why, and how to close or recover it."
 - Bad: "a prettier task list with a recommended item."
+
+## Source-Link Status Summary
+
+- linked at the Today root seam
+- intended_only for most subordinate Today recipes
+- recovery and source seams must remain explicit
+
+## Label-Off Recognition Criteria
+
+- the Start Here region is visible without reading labels
+- the current-state band stays dominant under blur
+- the proof/source seam reads as trust, not decoration
+- the closure path is obvious even with text reduced

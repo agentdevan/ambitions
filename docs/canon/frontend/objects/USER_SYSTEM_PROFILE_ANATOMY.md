@@ -7,6 +7,17 @@ Destination: You
 
 User System Profile exposes the local runtime, planning setup, trust controls, privacy, defaults, and reset/forget actions.
 
+## ASCII Anatomy
+
+```text
+User System Profile
+  ├─ personal runtime root
+  ├─ trust panel
+  ├─ defaults / planning setup
+  ├─ privacy / local-only boundary
+  └─ reset / forget path
+```
+
 ## Product Meaning
 
 - personal runtime
@@ -19,6 +30,29 @@ User System Profile exposes the local runtime, planning setup, trust controls, p
 - settings-like density is not enough
 - the runtime and trust panel must be obvious
 - privacy and reset must read as serious control, not admin clutter
+
+## Required Zones
+
+- Personal Runtime hero
+- local runtime trust panel
+- what Ambitions knows / guesses / never accesses
+- user-set vs learned vs suggested
+- automation ladder
+- reset / forget preview
+- schedule availability consequence preview
+
+## Zone Order
+
+1. Personal Runtime hero
+2. local runtime trust panel
+3. trust / privacy / defaults
+4. automation ladder
+5. reset / forget preview
+
+## Density Budget
+
+- one control question at a time
+- one recovery path always visible
 
 ## Canonical Structure
 
@@ -93,6 +127,13 @@ The runtime can learn, but every learned pattern must remain editable and reject
 - privacy wording that is too vague
 - no preview for destructive reset
 
+## Anti-Generic Failure Examples
+
+- generic settings page
+- account profile
+- admin console
+- hidden automation defaults
+
 ## Recovery Behavior
 
 - show what will be lost
@@ -158,3 +199,15 @@ Linked through the live You source candidates in `VISUAL_SOURCE_LINKS.yaml`.
 
 - Good: "a visible local runtime profile with inspectable learning, privacy, and control."
 - Bad: "a settings page with nicer typography."
+
+## Source-Link Status Summary
+
+- linked at the You root seam
+- intended_only for subordinate control rows
+- trust and privacy must remain inspectable
+
+## Label-Off Recognition Criteria
+
+- the runtime control room is obvious without labels
+- user-set, learned, and suggested are distinguishable
+- reset / forget reads as high-consequence control

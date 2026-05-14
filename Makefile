@@ -3,6 +3,7 @@
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
 .PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
 .PHONY: visual-compile visual-validators visual-linkage visual-prose visual-vocabulary visual-surface-graph visual-dashboard visual-all
+.PHONY: visual-100-priority visual-100-recipes visual-100-objects visual-100-source-debt visual-100-vocabulary visual-100-anti-generic visual-100-accessibility visual-100-proof-source-receipt visual-100-transaction visual-100-primitives visual-100-scorecards visual-100-prompt-authority visual-100-atlas visual-100-native visual-100-local-first visual-100-no-false-momentum visual-100-hidden-automation visual-100-false-green visual-100-gate visual-100-dashboard visual-100-all
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
@@ -272,3 +273,92 @@ visual-dashboard:
 visual-validators: visual-linkage visual-prose visual-vocabulary visual-surface-graph
 
 visual-all: visual-compile visual-validators visual-dashboard
+
+visual-100-priority:
+	python3 scripts/ambitions-visual-100-priority-registry-check.py
+
+visual-100-recipes:
+	python3 scripts/ambitions-visual-100-recipe-contract-check.py
+
+visual-100-objects:
+	python3 scripts/ambitions-visual-100-object-depth-check.py
+
+visual-100-source-debt:
+	python3 scripts/ambitions-visual-100-source-debt-check.py
+
+visual-100-vocabulary:
+	python3 scripts/ambitions-visual-100-vocabulary-full-corpus-check.py
+
+visual-100-anti-generic:
+	python3 scripts/ambitions-visual-100-anti-generic-check.py
+
+visual-100-accessibility:
+	python3 scripts/ambitions-visual-100-accessibility-adhd-check.py
+
+visual-100-proof-source-receipt:
+	python3 scripts/ambitions-visual-100-proof-source-receipt-check.py
+
+visual-100-transaction:
+	python3 scripts/ambitions-visual-100-transaction-check.py
+
+visual-100-primitives:
+	python3 scripts/ambitions-visual-100-primitive-operationality-check.py
+
+visual-100-scorecards:
+	python3 scripts/ambitions-visual-100-scorecard-check.py
+
+visual-100-prompt-authority:
+	python3 scripts/ambitions-visual-100-prompt-authority-check.py
+
+visual-100-atlas:
+	python3 scripts/ambitions-visual-100-atlas-subordination-check.py
+
+visual-100-native:
+	python3 scripts/ambitions-visual-100-native-believability-check.py
+
+visual-100-local-first:
+	python3 scripts/ambitions-visual-100-local-first-trust-check.py
+
+visual-100-no-false-momentum:
+	python3 scripts/ambitions-visual-100-no-false-momentum-check.py
+
+visual-100-hidden-automation:
+	python3 scripts/ambitions-visual-100-hidden-automation-check.py
+
+visual-100-false-green:
+	python3 scripts/ambitions-visual-100-false-green-check.py
+
+visual-100-gate:
+	python3 scripts/ambitions-visual-100-gate-check.py
+
+visual-100-dashboard:
+	python3 scripts/ambitions-visual-100-proof-dashboard.py
+
+visual-100-all:
+	python3 scripts/ambitions-surface-recipe-inventory-check.py
+	python3 scripts/ambitions-surface-recipe-coverage-check.py
+	python3 scripts/ambitions-surface-recipe-specificity-check.py
+	python3 scripts/ambitions-train-family-frontend-extraction-check.py
+	$(MAKE) visual-compile
+	$(MAKE) visual-validators
+	$(MAKE) visual-dashboard
+	$(MAKE) visual-100-priority
+	$(MAKE) visual-100-recipes
+	$(MAKE) visual-100-objects
+	$(MAKE) visual-100-source-debt
+	$(MAKE) visual-100-vocabulary
+	$(MAKE) visual-100-anti-generic
+	$(MAKE) visual-100-accessibility
+	$(MAKE) visual-100-proof-source-receipt
+	$(MAKE) visual-100-transaction
+	$(MAKE) visual-100-primitives
+	$(MAKE) visual-100-scorecards
+	$(MAKE) visual-100-prompt-authority
+	$(MAKE) visual-100-atlas
+	$(MAKE) visual-100-native
+	$(MAKE) visual-100-local-first
+	$(MAKE) visual-100-no-false-momentum
+	$(MAKE) visual-100-hidden-automation
+	$(MAKE) visual-100-false-green
+	$(MAKE) visual-100-gate
+	$(MAKE) visual-100-dashboard

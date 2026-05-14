@@ -5,7 +5,9 @@ Status: Active acceptance gate
 ## Gate Areas
 
 - IA correctness
+- prompt / queue authority
 - object anatomy completeness
+- object uniqueness
 - label-off signature coverage
 - anti-generic kill switch pass
 - Time not calendar clone
@@ -14,6 +16,7 @@ Status: Active acceptance gate
 - Goals not dashboard
 - You not settings clone
 - proof / receipt / source coverage
+- transaction model coverage
 - local runtime visibility
 - accessibility fallback coverage
 - ADHD density law coverage
@@ -23,6 +26,8 @@ Status: Active acceptance gate
 - inventory consistency
 - source-linkage consistency
 - validator coverage
+- source-link debt visibility
+- false-Green prevention
 - unresolved contradictions
 - implementation red flags
 

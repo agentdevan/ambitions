@@ -6,12 +6,15 @@ Status: Active anti-generic control plane
 
 - Generic "premium" language without visible anatomy.
 - Repeated "semantic hierarchy" phrasing without concrete structure.
+- Recipe labels without tiered requirements, bad examples, and validator hints.
 - Accessibility boilerplate that does not name the actual fallback.
 - "Support source trust" without naming the source, freshness, or correction path.
 - Object names without anatomy.
 - Implementation-status leakage.
 - "AI confidence" or model-jargon framing.
 - Score, streak, ring, dashboard, or card-stack drift.
+- File-exists-as-proof drift.
+- Hidden `intended_only` debt.
 
 ## Pseudo-Specificity Checks
 
@@ -42,6 +45,7 @@ Whenever one of the red-flag phrases appears, replace it with:
 - the allowed states
 - the source/receipt behavior
 - the accessibility fallback
+- the implementation boundary
 
 ## Enforcement Goal
 

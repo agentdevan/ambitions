@@ -7,6 +7,17 @@ Destination: Time
 
 LifeShape Field shows capacity, protected time, pressure, reflow, and fit.
 
+## ASCII Anatomy
+
+```text
+LifeShape Field
+  ├─ day / week / month horizons
+  ├─ open capacity
+  ├─ protected time
+  ├─ pressure clusters
+  └─ best-fit / reflow path
+```
+
 ## Product Meaning
 
 - capacity truth
@@ -20,6 +31,31 @@ LifeShape Field shows capacity, protected time, pressure, reflow, and fit.
 - protected space reads as carved negative space
 - pressure reads as compression
 - reflow appears as a before/after shape change
+
+## Required Zones
+
+- non-calendar capacity geometry
+- day / week / month grammar
+- hard context first
+- protected time as carved space
+- pressure as compression
+- open capacity after commitments
+- reflow before/after geometry
+
+## Zone Order
+
+1. horizon
+2. hard commitments
+3. open capacity
+4. protected time
+5. pressure / best fit
+6. reflow / recovery
+
+## Density Budget
+
+- hard context first
+- one dominant capacity question at rest
+- schedule detail collapses before the field
 
 ## Canonical Structure
 
@@ -95,6 +131,13 @@ The field can become richer, but it must stay a capacity object, not a calendar 
 - pressure becomes color only
 - source freshness disappears
 
+## Anti-Generic Failure Examples
+
+- calendar clone
+- schedule spreadsheet
+- event grid with different labels
+- urgency dashboard
+
 ## Recovery Behavior
 
 - preserve protected time
@@ -160,3 +203,15 @@ Linked through the live Time source candidates in `VISUAL_SOURCE_LINKS.yaml`.
 
 - Good: "a capacity field where events are inputs, not the main object."
 - Bad: "a prettier calendar."
+
+## Source-Link Status Summary
+
+- linked at the Time root seam
+- intended_only for most horizon recipes
+- reflow and protected-time seams remain explicit
+
+## Label-Off Recognition Criteria
+
+- protected blocks read as carved space
+- pressure reads as compression without labels
+- the field still feels like capacity when text is blurred

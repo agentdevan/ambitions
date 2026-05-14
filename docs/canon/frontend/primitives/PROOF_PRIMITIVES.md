@@ -8,6 +8,63 @@ Status: Active primitive role set
 - allowed: receipts, attachments, confirmations
 - forbidden: generic badge decoration
 
+## Purpose
+
+Represent evidence in a way that keeps proof attached to the state that created it.
+
+## Allowed Use
+
+- receipts
+- attachments
+- confirmations
+
+## Forbidden Use
+
+- generic badge decoration
+- ranking ladder
+- score theatrics
+
+## Canonical Anatomy
+
+- chip
+- ladder
+- transfer thread
+- gap marker
+
+## Allowed Surfaces
+
+- Today
+- Goals
+- Capture
+- Time
+- You
+
+## Forbidden Surfaces
+
+- scoreboards
+- streak widgets
+- leaderboard chrome
+
+## State Variants
+
+- attached
+- transferred
+- missing
+- weak
+- strong
+
+## Source / Proof / Receipt Behavior
+
+Proof must read as evidence, not gamification.
+
+## Accessibility Fallback
+
+Proof must be readable as text and structure, not color alone.
+
+## ADHD Safety Note
+
+Proof should reassure or correct, not shame.
+
 ## Proof Ladder
 
 - stepwise proof chain
@@ -32,6 +89,20 @@ Status: Active primitive role set
 - allowed: recovery prompts
 - forbidden: shame language
 
-## Accessibility Concern
+## Misuse Examples
 
-Proof must be readable as text and structure, not color alone.
+- badge farm
+- score ladder
+- opaque progress icon
+
+## Recipe Examples
+
+- receipt detail
+- proof trail
+- closure sheet
+
+## Validator Hooks
+
+- proof behavior
+- receipt behavior
+- transaction behavior

@@ -1,6 +1,6 @@
 # Visual Encyclopedia Dashboard
 
-Status: GREEN
+Status: YELLOW
 
 ## Counts
 
@@ -10,8 +10,8 @@ Status: GREEN
 - Unresolved direction count: 0
 - Source links: linked 6, weak 0, missing 0
 - Inventory unlinked count: 0
-- Residue count: 0
-- Advisory near-duplicate count: 12
+- Residue count: 2
+- Advisory near-duplicate count: 14
 - Vocabulary violations: 0
 - Surface graph violations: 0
 

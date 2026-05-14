@@ -1,0 +1,45 @@
+# Measurable Gate Matrix
+measurable_gate_matrix: true
+gates:
+  ia_correctness:
+    validator: scripts/ambitions-visual-100-gate-check.py
+    proof_output: build/reports/visual-100-gate.json
+  prompt_queue_authority:
+    validator: scripts/ambitions-visual-100-prompt-authority-check.py
+    proof_output: build/reports/visual-100-prompt-authority.json
+  object_depth:
+    validator: scripts/ambitions-visual-100-object-depth-check.py
+    proof_output: build/reports/visual-100-object-depth.json
+  source_truth:
+    validator: scripts/ambitions-visual-100-source-debt-check.py
+    proof_output: build/reports/visual-100-source-debt.json
+  anti_generic:
+    validator: scripts/ambitions-visual-100-anti-generic-check.py
+    proof_output: build/reports/visual-100-anti-generic.json
+  accessibility_adhd:
+    validator: scripts/ambitions-visual-100-accessibility-adhd-check.py
+    proof_output: build/reports/visual-100-accessibility-adhd.json
+  proof_source_receipt:
+    validator: scripts/ambitions-visual-100-proof-source-receipt-check.py
+    proof_output: build/reports/visual-100-proof-source-receipt.json
+  transaction:
+    validator: scripts/ambitions-visual-100-transaction-check.py
+    proof_output: build/reports/visual-100-transaction.json
+  primitive_operationality:
+    validator: scripts/ambitions-visual-100-primitive-operationality-check.py
+    proof_output: build/reports/visual-100-primitive-operationality.json
+  false_green:
+    validator: scripts/ambitions-visual-100-false-green-check.py
+    proof_output: build/reports/visual-100-false-green.json
+  native_believability:
+    validator: scripts/ambitions-visual-100-native-believability-check.py
+    proof_output: build/reports/visual-100-native-believability.json
+  local_first_trust:
+    validator: scripts/ambitions-visual-100-local-first-trust-check.py
+    proof_output: build/reports/visual-100-local-first-trust.json
+  no_false_momentum:
+    validator: scripts/ambitions-visual-100-no-false-momentum-check.py
+    proof_output: build/reports/visual-100-no-false-momentum.json
+  hidden_automation:
+    validator: scripts/ambitions-visual-100-hidden-automation-check.py
+    proof_output: build/reports/visual-100-hidden-automation.json

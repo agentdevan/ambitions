@@ -8,6 +8,57 @@ Status: Active material-role canon
 - allowed: base layer, stable support, calm depth
 - forbidden: generic card background, cheap dark tile
 
+## Purpose
+
+Define the semantic role of each visual material so it cannot degrade into decorative chrome.
+
+## Canonical Anatomy
+
+- GraphiteRecess
+- QuietGlass
+- LuminousTrace
+- CelestialField
+
+## Allowed Use
+
+- show semantic support
+- show depth
+- show inspectable continuity
+
+## Forbidden Use
+
+- decorative sheen
+- fake premium blur
+- fantasy skybox
+
+## Allowed Surfaces
+
+- all active frontend canon surfaces when semantically warranted
+
+## Forbidden Surfaces
+
+- generic dashboard chrome
+- card-stack wallpaper
+
+## State Variants
+
+- grounded
+- elevated
+- continuous
+- semantic background
+
+## Source / Proof / Receipt Behavior
+
+Material must never be the only carrier of meaning.
+
+## Accessibility Fallback
+
+Opaque layers must preserve meaning when transparency is reduced.
+
+## ADHD Safety Note
+
+Materials should calm, not distract.
+
 ## QuietGlass
 
 - role: elevated inspectable layer
@@ -26,6 +77,20 @@ Status: Active material-role canon
 - allowed: relationship, continuity, meaning field
 - forbidden: stars, particles, fantasy skybox
 
-## Accessibility Concern
+## Misuse Examples
 
-Material must never be the only carrier of meaning.
+- glow for glow's sake
+- particles as decoration
+- blurred card stack
+
+## Recipe Examples
+
+- quietglass wrapper
+- luminoustrace state line
+- celestialfield semantic layer
+
+## Validator Hooks
+
+- anti-generic
+- native believability
+- reduce transparency

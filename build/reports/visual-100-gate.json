@@ -1,0 +1,29 @@
+{
+  "Accessibility Implementation Proof Status": "Not In Scope",
+  "Canon Content Status": "green",
+  "Control-Plane Status": "green",
+  "Implementation Proof Status": "Not In Scope",
+  "Prompt / Queue Authority Status": "green",
+  "Release / Device Proof Status": "Not In Scope",
+  "Source-Linkage Status": "green",
+  "checks": {
+    "accessibility": "green",
+    "anti_generic": "green",
+    "atlas_subordination": "green",
+    "false_green": "green",
+    "hidden_automation": "green",
+    "local_first_trust": "green",
+    "native_believability": "green",
+    "no_false_momentum": "green",
+    "object_depth": "green",
+    "primitive_operationality": "green",
+    "priority_registry": "green",
+    "prompt_authority": "green",
+    "proof_source_receipt": "green",
+    "recipe_contract": "green",
+    "source_debt": "green",
+    "transaction": "green",
+    "vocabulary": "green"
+  },
+  "status": "green"
+}

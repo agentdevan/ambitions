@@ -1,0 +1,115 @@
+{
+  "distribution": {
+    "historical_only": 0,
+    "intended_only": 153,
+    "linked": 6,
+    "missing": 0,
+    "needs_direction": 0,
+    "obsolete": 0,
+    "weak_link": 0
+  },
+  "invalid_entries": [],
+  "missing_files": [],
+  "p0_hidden_intended_only": false,
+  "p0_intended_only_count": 24,
+  "p0_visible_debt": [
+    {
+      "status": "intended_only",
+      "surface_id": "today_start_here_region"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "today_reality_meridian_rail"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "today_recommended_step_object"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "today_now_next_later_sequence"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "closure_sheet"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "step_detail"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "step_session"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "recommendation_source_sheet"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "receipt_detail"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "day_lifeshape_surface"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "week_lifeshape_surface"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "month_lifeshape_surface"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "reflow_preview_tray"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "best_fit_explanation_sheet"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "protected_time_detail"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "capture_post_input_route_reveal"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "capture_hold_needs_a_place_route"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "capture_receipt"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "proof_trail"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "goal_thread_detail"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "reflection_recovery_detail"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "local_runtime_trust_panel"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "automation_and_trust"
+    },
+    {
+      "status": "intended_only",
+      "surface_id": "local_data_reset_forget"
+    }
+  ],
+  "p0_visible_intended_only_count": 24,
+  "status": "green"
+}

@@ -1,0 +1,58 @@
+{
+  "Accessibility Implementation Proof Status": "Not In Scope",
+  "Canon Content Status": "green",
+  "Control-Plane Status": "green",
+  "Implementation Proof Status": "Not In Scope",
+  "Prompt / Queue Authority Status": "green",
+  "Release / Device Proof Status": "Not In Scope",
+  "Source-Linkage Status": "green",
+  "accessibility": {
+    "missing": [],
+    "status": "green"
+  },
+  "anti_generic": {
+    "hits": {},
+    "status": "green"
+  },
+  "counts": {
+    "P0": 29,
+    "P1": 0,
+    "P2": 0
+  },
+  "object_depth": {
+    "missing_markers": {},
+    "near_duplicates": [],
+    "status": "green"
+  },
+  "primitive_operationality": {
+    "missing": {},
+    "status": "green"
+  },
+  "prompt_authority": {
+    "missing": [],
+    "status": "green"
+  },
+  "proof_source_receipt": {
+    "missing": [],
+    "status": "green"
+  },
+  "recipe_contract": {
+    "missing_markers": [],
+    "p0_count": 29,
+    "status": "green"
+  },
+  "source_link_distribution": {
+    "historical_only": 0,
+    "intended_only": 153,
+    "linked": 6,
+    "missing": 0,
+    "needs_direction": 0,
+    "obsolete": 0,
+    "weak_link": 0
+  },
+  "status": "green",
+  "transaction": {
+    "missing": [],
+    "status": "green"
+  }
+}

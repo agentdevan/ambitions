@@ -7,6 +7,17 @@ Destination: Capture
 
 Atmosphere Composer captures input first, then reveals route options without becoming a chat surface.
 
+## ASCII Anatomy
+
+```text
+Atmosphere Composer
+  ├─ idle composer
+  ├─ input field
+  ├─ post-input route reveal
+  ├─ hold / needs a place path
+  └─ receipt / proof seam
+```
+
 ## Product Meaning
 
 - free capture
@@ -20,6 +31,29 @@ Atmosphere Composer captures input first, then reveals route options without bec
 - no chatbot bubbles
 - route choices appear only after input
 - proof or receipt appears as a compact state seam
+
+## Required Zones
+
+- bottom-native composer
+- no feed at rest
+- route reveal after input
+- three-route cap
+- held-with-dignity state
+- proof attachment and recovery path
+
+## Zone Order
+
+1. idle / empty composer
+2. input
+3. post-input routes
+4. hold / save / proof
+5. recovery
+
+## Density Budget
+
+- the composer stays quiet at rest
+- route choices are capped
+- the user never has to classify before saving
 
 ## Canonical Structure
 
@@ -94,6 +128,13 @@ Capture may gain better route logic, but it must stay capture-first.
 - too many route choices
 - hold is framed as failure
 
+## Anti-Generic Failure Examples
+
+- chatbot transcript
+- inbox clone
+- notes app with an input box
+- feed with a composer stapled on top
+
 ## Recovery Behavior
 
 - keep the saved capture safe
@@ -159,3 +200,15 @@ Linked through the live Capture source candidates in `VISUAL_SOURCE_LINKS.yaml`.
 
 - Good: "a local capture field with route reveal and receipts."
 - Bad: "a chat box where the app replies."
+
+## Source-Link Status Summary
+
+- linked at the Capture root seam
+- intended_only for several subordinate routes
+- proof and placement must remain explicit
+
+## Label-Off Recognition Criteria
+
+- the composer reads as input-first before routes appear
+- the route reveal only appears after user input
+- hold remains a safe place, not a shame state

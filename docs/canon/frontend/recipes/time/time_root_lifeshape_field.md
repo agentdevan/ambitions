@@ -281,3 +281,123 @@ Final intended visual direction uses current truth files first, then planned fro
 
 ## Open Direction Gaps
 - None for final visual intent in this recipe pass.
+
+## P0 Proof Appendix
+
+### Source Link Status
+
+linked
+
+### Implementation Proof Boundary
+
+This recipe is final-state design canon for Time Root / LifeShape Field in Time. It does not prove implementation or release readiness.
+
+### Good / Bad Example
+
+- Good: Time Root / LifeShape Field stays attached to LifeShape Field, with trust, proof, receipt, and recovery visible.
+- Bad: Time Root / LifeShape Field turns into a generic productivity pattern or hides its trust seam.
+
+### Acceptance Checklist
+
+- the surface stays anchored to LifeShape Field
+- the source or trust seam is explicit
+- the proof or receipt path is explicit
+- the correction or recovery path is explicit
+- the surface does not read as a generic dashboard, task list, or calendar clone
+
+### Notes
+
+- recipe path: docs/canon/frontend/recipes/time/time_root_lifeshape_field.md
+- source-link debt class: linked
+
+## P0 Canon Appendix
+
+### Source / Trust Behavior
+
+Time Root / LifeShape Field keeps its trust seam attached to LifeShape Field and Time.
+
+### Proof / Receipt Behavior
+
+The surface keeps proof and receipt visible at the object edge instead of hiding them in a generic toast or feed.
+
+### Transaction Behavior
+
+Meaningful changes must be previewed, committed, receipted, and recoverable.
+
+### VoiceOver Order
+
+Object, state, source, proof, action, recovery.
+
+### Dynamic Type Behavior
+
+The dominant object and primary action must survive large text.
+
+### Reduce Motion Behavior
+
+Static before / after summaries replace motion meaning.
+
+### Reduce Transparency Behavior
+
+Opaque graphite layers must preserve state when blur is reduced.
+
+### Increase Contrast Behavior
+
+State boundaries and recovery affordances strengthen.
+
+### Differentiate Without Color Behavior
+
+Shape, label, spacing, and structure carry meaning without color.
+
+### ADHD Density Law
+
+One dominant action at rest. One safe recovery path always visible.
+
+### Native iPhone Believability Requirements
+
+The surface stays thumb-reachable, restrained, and native rather than dashboard-like.
+
+### Anti-Generic Red Flags
+
+- generic dashboard
+- task list clone
+- calendar clone
+- chatbot persona
+
+### Forbidden Interpretations
+
+- implementation proof
+- release proof
+- screenshot proof
+- production readiness
+
+### Acceptance Checklist
+
+- the object is still recognizable without labels
+- the source / proof seam is visible
+- the recovery path is visible
+- the surface still reads as the named object, not a generic productivity app
+
+## P0 Local Runtime Appendix
+
+### Local Runtime
+
+Time Root / LifeShape Field exposes local runtime behavior as inspectable state, not hidden automation.
+
+### User-Set / Learned / Suggested
+
+The surface distinguishes user-set truth, learned guidance, and suggested defaults before any commitment.
+
+### Reset / Forget
+
+Time Root / LifeShape Field previews local reset or forget consequences before the user commits to them.
+
+### Trust Boundary
+
+Time remains local-first unless the active truth explicitly says otherwise.
+
+### Acceptance Checklist
+
+- local runtime is visible
+- user-set, learned, and suggested states are distinguishable
+- reset and forget are previewed
+- automation remains inspectable

@@ -7,6 +7,17 @@ Destination: Goals
 
 Constellation Atlas organizes life areas, goal threads, proof, blockers, pivots, and recovery without turning Goals into a dashboard.
 
+## ASCII Anatomy
+
+```text
+Constellation Atlas
+  ├─ life area map
+  ├─ active goal thread
+  ├─ proof trail
+  ├─ blocker / waiting seam
+  └─ pivot / recovery path
+```
+
 ## Product Meaning
 
 - direction map
@@ -20,6 +31,29 @@ Constellation Atlas organizes life areas, goal threads, proof, blockers, pivots,
 - proof and blocker seams
 - visible thread thickness or density logic
 - a central goal graph rather than KPI tiles
+
+## Required Zones
+
+- relational goal field
+- life area equality
+- thread-to-Today feed
+- proof density region
+- blocker / waiting semantics
+- pivot / proof transfer path
+
+## Zone Order
+
+1. life areas
+2. active thread
+3. proof trail
+4. blockers
+5. pivot / recovery
+
+## Density Budget
+
+- one dominant active thread
+- no KPI grid at rest
+- proof grows with relationship depth, not tile count
 
 ## Canonical Structure
 
@@ -95,6 +129,13 @@ The atlas can deepen, but it must remain a relational map.
 - pivot destroys legitimate proof
 - too many equal-weight tiles
 
+## Anti-Generic Failure Examples
+
+- KPI dashboard
+- planetary map with decorative nodes
+- scoreboard
+- generic card feed
+
 ## Recovery Behavior
 
 - expose recovery
@@ -161,3 +202,15 @@ Linked through the live Goals source candidates in `VISUAL_SOURCE_LINKS.yaml`.
 
 - Good: "a relational atlas of life threads, proof, blockers, and pivots."
 - Bad: "a polished goal dashboard."
+
+## Source-Link Status Summary
+
+- linked at the Goals root seam
+- intended_only for most drill-down recipes
+- proof and blocker seams remain explicit
+
+## Label-Off Recognition Criteria
+
+- the goal field reads as relational before textual
+- proof and blocker seams are visually distinct
+- pivot and recovery remain obvious without color

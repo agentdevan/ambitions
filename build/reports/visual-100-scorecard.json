@@ -1,0 +1,10 @@
+{
+  "missing": [],
+  "rows": {
+    "reviews/VISUAL_100_DESTINATION_SCORECARD.md": 28,
+    "reviews/VISUAL_100_OBJECT_SCORECARD.md": 28,
+    "reviews/VISUAL_100_PRIMITIVE_SCORECARD.md": 28,
+    "reviews/VISUAL_100_RECIPE_SCORECARD.md": 20
+  },
+  "status": "green"
+}
