@@ -307,7 +307,7 @@ struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
 
         return GoalDetailActionResponse(
             message: GoalDetailInlineMessage(
-                title: updatedDraft.draft.latestResultKind == .clarificationRequired ? "Clarification saved" : "Plan refreshed",
+                title: updatedDraft.draft.latestResultKind == .clarificationRequired ? "Clarification saved" : "Goal refreshed",
                 body: updatedDraft.message,
                 state: updatedDraft.draft.latestResultKind == .clarificationRequired ? .selected : .success
             ),

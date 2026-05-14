@@ -60,7 +60,7 @@ struct ProfileCrossSurfaceProofReviewProjector {
     private func planReflowReceipt(_ input: Input) -> ProfileCrossSurfaceProofReviewItem {
         ProfileCrossSurfaceProofReviewItem(
             id: "cross-review-plan-reflow-receipt",
-            title: "Plan reflow to receipt",
+            title: "Time reflow to receipt",
             summary: input.planReceiptCount == 0
                 ? "Plan changes stay quiet until an owning Plan action records review context."
                 : "\(input.planReceiptCount) Plan ledger entries can explain what changed and why.",

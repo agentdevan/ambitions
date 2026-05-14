@@ -158,7 +158,7 @@ struct RepositoryBackedHabitsService: HabitsServicing {
             )
             try await repositories.goals.saveGoals([goal])
             message = HabitInlineMessage(
-                title: "Plan flagged for review",
+                title: "Routine flagged for review",
                 body: "This routine has been softened out of the active loop until the ritual plan is corrected.",
                 state: .warning
             )
@@ -322,7 +322,7 @@ private extension RepositoryBackedHabitsService {
             HabitActionState(kind: .delay, title: "Delay", systemImage: "clock.arrow.circlepath", state: .default, target: target),
             HabitActionState(kind: .skip, title: "Skip", systemImage: "forward.fill", state: .warning, target: target),
             HabitActionState(kind: .needsEasierVersion, title: "Need easier version", systemImage: "scissors", state: .selected, target: target),
-            HabitActionState(kind: .markNotRelevant, title: "Plan is wrong", systemImage: "nosign", state: .warning, target: target),
+            HabitActionState(kind: .markNotRelevant, title: "Routine is wrong", systemImage: "nosign", state: .warning, target: target),
             HabitActionState(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
         ]
 

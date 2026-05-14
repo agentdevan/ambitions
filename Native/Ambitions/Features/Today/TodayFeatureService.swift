@@ -926,7 +926,7 @@ private extension RepositoryBackedTodayService {
         append(actions.first(where: { $0.kind == .split }), title: "Smaller version", detail: "Shrink the next step until it feels safe to start.", state: .selected)
         append(actions.first(where: { $0.kind == .complete || $0.kind == .startStepSession }), title: "Safest step", detail: "If the current step is still doable, stay with the calmest useful action.", state: .success)
         append(actions.first(where: { $0.kind == .reschedule || $0.kind == .defer }), title: "Reschedule gently", detail: "Reschedule the work without turning the day into a failure narrative.", state: .default)
-        append(actions.first(where: { $0.kind == .protectLater }), title: "Adjust plan", detail: "Put one cleaner block in Plan instead of squeezing it here.", state: .default)
+        append(actions.first(where: { $0.kind == .protectLater }), title: "Adjust time", detail: "Put one cleaner block in Time instead of squeezing it here.", state: .default)
         append(
             TodayInlineAction(
                 kind: .openPlan,

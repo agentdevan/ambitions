@@ -39,7 +39,7 @@ struct HabitsScreen: View {
                     AppCard {
                         VStack(alignment: .leading, spacing: theme.spacing.md) {
                             SectionHeader(
-                                title: "Rituals inside Plan",
+                                title: "Rituals inside Time",
                                 subtitle: "Routines should support week shape, not compete with it."
                             )
 

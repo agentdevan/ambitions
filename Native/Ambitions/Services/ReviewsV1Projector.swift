@@ -110,7 +110,7 @@ private extension ReviewsV1Projector {
                 id: "review.cadence.monthly",
                 cadence: .monthly,
                 title: "Monthly Review",
-                detail: "Summarizes direction and proof without adding analytics dashboards or scores.",
+                detail: "Summarizes direction and proof without adding dashboards or scores.",
                 statusLabel: input.proofEvidence.isEmpty ? "Needs proof over time" : "Proof-aware summary",
                 contextLabel: "You and Goals",
                 state: input.proofEvidence.isEmpty ? .default : .success
@@ -141,7 +141,7 @@ private extension ReviewsV1Projector {
 
         if signalCount == 0 {
             title = "Nothing to review yet"
-            dominantTruth = "After more local activity, Reviews will summarize what happened without turning it into an analytics dashboard."
+            dominantTruth = "After more local activity, Reviews will summarize what happened without turning it into a dashboard."
             state = .default
         } else if recoveryCount > 0 {
             title = "Ready to review"

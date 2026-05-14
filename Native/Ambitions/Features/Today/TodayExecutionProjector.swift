@@ -392,7 +392,7 @@ private extension TodayExecutionProjector {
             id: "today2.contract.fallback",
             kind: .recoveryFallback,
             title: "Fallback",
-            subtitle: (input.resilienceAssessment.smallestUsefulNextStep ?? option?.summary ?? "Make the step smaller or protect it in Plan.").todayShortSentence,
+            subtitle: (input.resilienceAssessment.smallestUsefulNextStep ?? option?.summary ?? "Make the step smaller or protect it in Time.").todayShortSentence,
             value: option == nil ? "Smaller" : "Recovery ready",
             semanticState: option == nil ? .trust : .recovery,
             action: action,
@@ -540,7 +540,7 @@ private extension TodayExecutionProjector {
             target: hero.primaryAction.target
         )
         return TodayPlanLayerState(
-            title: "Today Plan",
+            title: "Today schedule",
             subtitle: items.isEmpty ? "Start with one real step." : "The planned day stays visible.",
             compactTimelineLabel: compactTimeline,
             openWindowLabel: openWindow,
@@ -549,7 +549,7 @@ private extension TodayExecutionProjector {
             moveAction: moveAction,
             parkAction: parkAction,
             markDoneAction: markDoneAction,
-            accessibilityLabel: "Today Plan",
+            accessibilityLabel: "Today schedule",
             accessibilityValue: items.isEmpty
                 ? "No fixed plan yet. \(source). \(openWindow)."
                 : "\(items.count) planned item\(items.count == 1 ? "" : "s"). \(compactTimeline). \(source). \(openWindow).",

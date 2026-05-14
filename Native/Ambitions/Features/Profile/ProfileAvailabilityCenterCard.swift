@@ -50,7 +50,7 @@ struct ProfileAvailabilityCenterCard: View {
         .ambitionPanelAccessibility(
             label: center.title,
             value: "Hard context, protected pockets, defaults, automation, duration, and away behavior",
-            hint: "Explains the availability rules that Plan and Today must respect."
+            hint: "Explains the availability rules that Time and Today must respect."
         )
     }
 }

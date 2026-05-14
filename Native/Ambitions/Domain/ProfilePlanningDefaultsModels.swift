@@ -60,7 +60,7 @@ struct ProfileAvailabilityCenterState: Sendable, Equatable {
 
     static let empty = ProfileAvailabilityCenterState(
         title: "Availability Center",
-        subtitle: "Hard context, protected pockets, defaults, automation trust, durations, and away behavior stay reviewable before Plan uses them.",
+        subtitle: "Hard context, protected pockets, defaults, automation trust, durations, and away behavior stay reviewable before Time uses them.",
         hardContextStack: [],
         protectedPocketMap: [],
         planningDefaults: [],

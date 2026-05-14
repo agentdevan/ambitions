@@ -112,7 +112,7 @@ extension TodayExecutionViewState {
         let planPanel = TodayExecutionPanelState(
             id: "today2.plan",
             kind: .plan,
-            title: "Plan guidance",
+            title: "Schedule guidance",
             subtitle: support.timeAperture.pressure.detail.todayShortSentence,
             value: support.timeAperture.pressure.label,
             semanticState: .calendarDerived,
@@ -144,16 +144,16 @@ extension TodayExecutionViewState {
             ? "No fixed plan yet"
             : planItems.map(\.timingLabel).prefix(3).joined(separator: " / ")
         let todayPlanLayer = TodayPlanLayerState(
-            title: "Today Plan",
+            title: "Today schedule",
             subtitle: planItems.isEmpty ? "Start with one real step." : "The planned day stays visible.",
             compactTimelineLabel: timeline,
             openWindowLabel: support.timeAperture.bestUseTitle,
             calendarSourceLabel: "Based on your plan",
             items: Array(planItems),
-            moveAction: TodayInlineAction(kind: .openPlan, title: "Adjust plan", systemImage: "arrow.right.arrow.left", state: .default, target: primary.target),
+            moveAction: TodayInlineAction(kind: .openPlan, title: "Adjust time", systemImage: "arrow.right.arrow.left", state: .default, target: primary.target),
             parkAction: TodayInlineAction(kind: .defer, title: "Park / Not Today", systemImage: "pause.circle", state: .default, target: primary.target),
             markDoneAction: primary.kind == .complete ? primary : TodayInlineAction(kind: .complete, title: "Mark Done", systemImage: "checkmark.circle", state: .success, target: primary.target),
-            accessibilityLabel: "Today Plan",
+            accessibilityLabel: "Today schedule",
             accessibilityValue: planItems.isEmpty ? "No fixed plan yet." : "\(planItems.count) planned item\(planItems.count == 1 ? "" : "s"). \(timeline).",
             accessibilityHint: "Shows the planned day without requesting calendar access here."
         )

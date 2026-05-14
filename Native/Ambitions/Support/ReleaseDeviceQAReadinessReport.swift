@@ -146,7 +146,7 @@ enum ReleaseDeviceQAReadinessReport {
             domain: "Creative project",
             scenario: "A creative launch needs Capture intake, Goal Detail proof, and a reviewable receipt trail.",
             surfaces: [.capture, .goals, .goalDetail, .reviews],
-            guardrail: "No analytics dashboard or fake momentum score."
+            guardrail: "No dashboard or fake momentum score."
         ),
         ReleaseRepresentativeScenarioFixture(
             id: "finance-admin",

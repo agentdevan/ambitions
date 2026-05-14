@@ -69,9 +69,9 @@ struct NextStepProvider: TimelineProvider {
                     plan: ExternalSurfaceVariantState(
                         kind: .plan,
                         title: "Week looks doable",
-                        detail: "Open Plan to adjust the week from your latest local state.",
+                        detail: "Open Time to adjust the week from your latest local state.",
                         privacySummary: "Plan detail opens in app",
-                        action: ExternalSurfaceVariantAction(title: "Open Plan", surface: .tab, tab: "plan"),
+                        action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
                         prominence: .standard
                     )

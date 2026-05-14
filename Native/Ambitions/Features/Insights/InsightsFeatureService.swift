@@ -240,7 +240,7 @@ private extension RepositoryBackedInsightsService {
         return InsightsHeroState(
             eyebrow: "What you are learning",
             title: posture.title,
-            subtitle: "Reflection stays calm, specific, and close to the work instead of drifting into analytics theater.",
+            subtitle: "Reflection stays calm, specific, and close to the work instead of drifting into dashboard theater.",
             dominantTruth: dominantTruth,
             editorialSummary: editorialSummary,
             trustWhisper: trustWhisper,
@@ -573,7 +573,7 @@ private extension RepositoryBackedInsightsService {
         [
             InsightsChangeSummary(
                 id: "insights-change-adaptation",
-                title: "Plan changes",
+                title: "Time changes",
                 detail: adaptationCount == 0
                     ? "No recent adaptation signal is changing the plan right now."
                     : "Feedback is actively changing how the plan is being carried this week.",
@@ -896,7 +896,7 @@ private extension RepositoryBackedInsightsService {
     func stepTitle(for stepID: String, goals: [Goal]) -> String {
         goals
             .flatMap { $0.plan?.sections.flatMap(\.steps) ?? [] }
-            .first(where: { $0.id == stepID })?.title ?? "Plan correction"
+            .first(where: { $0.id == stepID })?.title ?? "Goal correction"
     }
 
     func evidenceTitle(for evidence: ProgressEvidence) -> String {

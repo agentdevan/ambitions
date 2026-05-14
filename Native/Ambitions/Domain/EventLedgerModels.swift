@@ -268,7 +268,7 @@ extension EventLedgerEntry {
             tone = .recovering
         case .edited:
             kind = .planUpdated
-            title = "Plan wording updated"
+            title = "Schedule wording updated"
             tone = .neutral
         case .confused:
             kind = .userCorrectionAdded

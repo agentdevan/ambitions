@@ -87,7 +87,7 @@ run_xcodebuild_build() {
     build \
     CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
     -resultBundlePath "$result_file" \
-    2>&1 | tee "$log_file"
+    2>&1 | tee "$log_file" >&2
   run_status=$?
   set -e
 

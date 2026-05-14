@@ -625,7 +625,7 @@ private extension GoalBelievabilityProjector {
         case .believable:
             return [.init(id: "recommend.keep", title: "Keep current plan", summary: "No capacity correction is needed right now.")]
         case .tight:
-            return [.init(id: "recommend.protect-window", title: "Protect a work window", summary: "Use Plan later to place a user-confirmed block if this still matters.", correctionAction: .changeUrgency)]
+            return [.init(id: "recommend.protect-window", title: "Protect a work window", summary: "Use Time later to place a user-confirmed block if this still matters.", correctionAction: .changeUrgency)]
         case .atRisk, .unrealistic:
             return [.init(id: "recommend.correct-scope", title: "Correct deadline, effort, or scope", summary: "Change the deadline, effort, consequence, or scope before treating this as stable.", correctionAction: .changeDeadline)]
         case .blocked, .waiting:

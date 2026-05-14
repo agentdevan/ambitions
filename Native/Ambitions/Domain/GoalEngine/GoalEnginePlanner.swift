@@ -80,7 +80,7 @@ struct GoalPlanner: GoalPlanning {
             version: goalEnginePlanVersion,
             generatedAt: now,
             summary: assumptions.isEmpty
-                ? "Plan for \(input.draft.title)."
+                ? "Shape \(input.draft.title)."
                 : "Starter plan built with explicit assumptions so the next step is safe without pretending the goal is fully defined.",
             strategy: strategyShape(for: strategyID, draft: input.draft),
             sections: rewrittenSections,

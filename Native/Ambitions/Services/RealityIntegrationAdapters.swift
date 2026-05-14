@@ -97,7 +97,7 @@ enum RealityIntegrationAdapter {
         return RecommendationExplanation(
             id: "explanation.reality.calendar.\(snapshot.id)",
             type: snapshot.openWindowCandidates.isEmpty ? .whyNotBelievable : .whyCalendarAware,
-            title: snapshot.openWindowCandidates.isEmpty ? "Why time looks tight" : "Why Plan is calendar-aware",
+            title: snapshot.openWindowCandidates.isEmpty ? "Why time looks tight" : "Why Time is calendar-aware",
             summary: snapshot.calendarContext?.explanation ?? snapshot.availability.summary,
             recommendationTitle: snapshot.openWindowCandidates.isEmpty ? "Keep this unscheduled until there is room" : "Use the visible open windows",
             recommendationSummary: snapshot.availability.summary,

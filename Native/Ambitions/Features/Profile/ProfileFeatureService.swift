@@ -258,7 +258,7 @@ private extension RepositoryBackedProfileService {
                     SettingsItem(
                         id: "profile-trust-calendar",
                         title: "Calendar boundary",
-                        subtitle: "Plan may request calendar awareness after a clear action. Ambitions does not silently write calendar changes.",
+                        subtitle: "Time may request calendar awareness after a clear action. Ambitions does not silently write calendar changes.",
                         icon: "calendar.badge.clock",
                         valueLabel: calendarAuthorizationLabel(calendarAuthorization)
                     ),
@@ -426,7 +426,7 @@ private extension RepositoryBackedProfileService {
                     SettingsItem(
                         id: "profile-default-rituals",
                         title: "Rituals",
-                        subtitle: "Recurring support lives under Plan, Today, Goal Detail, and Reviews instead of a standalone area.",
+                        subtitle: "Recurring support lives under Time, Today, Goal Detail, and Reviews instead of a standalone area.",
                         icon: "repeat",
                         valueLabel: "Plan-owned"
                     ),
@@ -555,7 +555,7 @@ private extension RepositoryBackedProfileService {
                     ProfileTrustCenterRoute(
                         id: "trust-route-calendar",
                         title: "Calendar boundary",
-                        subtitle: "Calendar awareness is Plan-owned. Writes require confirmation and are never silent.",
+                        subtitle: "Calendar awareness is Time-owned. Writes require confirmation and are never silent.",
                         icon: "calendar.badge.clock",
                         statusLabel: calendarAuthorizationLabel(calendarAuthorization),
                         semanticState: .calendarDerived,
@@ -1798,19 +1798,19 @@ private extension RepositoryBackedProfileService {
     ) -> ProfilePlanningDefaultsCenterState {
         ProfilePlanningDefaultsCenterState(
             title: "Planning setup that earns its place",
-            subtitle: "These defaults explain how Ambitions shapes Plan suggestions without treating setup as homework.",
+            subtitle: "These defaults explain how Ambitions shapes Time suggestions without treating setup as homework.",
             sections: [
                 ProfilePlanningDefaultsSection(
                     id: "schedule-availability",
                     title: "Schedule & Availability",
-                    subtitle: "Time boundaries help Plan avoid treating committed or protected time as available.",
+                    subtitle: "Time boundaries help the scheduling surface avoid treating committed or protected time as available.",
                     preferences: [
                         ProfilePlanningDefaultsPreference(
                             id: "schedule-anchors",
                             title: "Work, school, and anchors",
                             whyItMatters: "Plan can keep committed blocks, transitions, sleep, care, and recovery from being mistaken for open capacity.",
                             statusLabel: calendarAuthorizationLabel(calendarAuthorization),
-                            privacyLabel: "Calendar awareness is Plan-owned and requested only after a clear Plan action.",
+                            privacyLabel: "Calendar awareness is Time-owned and requested only after a clear Time action.",
                             defaultLabel: "Optional",
                             accessibilityHint: "Explains why schedule anchors improve planning fit.",
                             state: .default
@@ -1831,7 +1831,7 @@ private extension RepositoryBackedProfileService {
                 ProfilePlanningDefaultsSection(
                     id: "planning-defaults",
                     title: "Planning Defaults",
-                    subtitle: "Defaults keep Plan useful without making hidden changes.",
+                    subtitle: "Defaults keep Time useful without making hidden changes.",
                     preferences: [
                         ProfilePlanningDefaultsPreference(
                             id: "planning-open-time",
@@ -1924,7 +1924,7 @@ private extension RepositoryBackedProfileService {
     ) -> ProfileAvailabilityCenterState {
         ProfileAvailabilityCenterState(
             title: "Availability Center",
-            subtitle: "The rules Plan must respect before it suggests where work fits.",
+            subtitle: "The rules Time must respect before it suggests where work fits.",
             hardContextStack: [
                 ProfileAvailabilityCenterItem(
                     id: "hard-context-work-school",

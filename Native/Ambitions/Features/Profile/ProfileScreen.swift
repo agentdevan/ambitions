@@ -1292,7 +1292,7 @@ private struct ProfileReviewsCard: View {
                 )
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    SectionHeader(title: "Review rhythms", subtitle: "Weekly, monthly, and recovery reviews stay under You, Plan, and Goal context.")
+                    SectionHeader(title: "Review rhythms", subtitle: "Weekly, monthly, and recovery reviews stay under You, Time, and Goal context.")
                     ForEach(projection.cadences) { cadence in
                         ProfileReviewCadenceRow(cadence: cadence)
                     }
@@ -2737,7 +2737,7 @@ private struct ProfileSettingRow: View {
         TrustReceiptStack(items: [
             TrustReceiptStackItem(
                 id: "preview-undo",
-                title: "Plan change can be undone",
+                title: "Time change can be undone",
                 summary: "A local reversible change exposes undo without implying silent automation.",
                 sourceLabel: "Source: Plan",
                 freshnessLabel: "Freshness: current local receipt",

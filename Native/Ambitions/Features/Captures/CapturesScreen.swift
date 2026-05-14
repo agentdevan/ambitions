@@ -152,7 +152,7 @@ struct CapturesScreen: View {
                 Button {
                     container.navigation.resetPlanPath()
                 } label: {
-                    Label("Plan", systemImage: "calendar")
+                    Label("Time", systemImage: "calendar")
                 }
                 .buttonStyle(.bordered)
                 .accessibilityIdentifier("captures.return-to-plan")
@@ -266,7 +266,7 @@ struct CapturesScreen: View {
         let parked = captures.filter { [.waiting, .optionalSomeday, .archived].contains($0.status) }
         return [
             CaptureGroup(title: "Needs a Place", subtitle: "Raw thoughts and assumptions that should stay correctable.", captures: active),
-            CaptureGroup(title: "Placed", subtitle: "Items with a visible destination but no Plan scheduling here.", captures: routed),
+            CaptureGroup(title: "Placed", subtitle: "Items with a visible destination but no Time scheduling here.", captures: routed),
             CaptureGroup(title: "Parked", subtitle: "Waiting, someday, and archived items stay findable without crowding the day.", captures: parked)
         ].filter { $0.captures.isEmpty == false }
     }

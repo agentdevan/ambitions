@@ -387,7 +387,7 @@ private extension DefaultMemoryLensService {
                 title = "Delay recorded"
                 explanation = "Timing changed, so the safest next step may be gentler or later."
             case .edited:
-                title = "Plan edited"
+                title = "Schedule edited"
                 explanation = "A step or plan phrase changed, so recall returns to the current plan shape rather than the old wording."
             case .confused:
                 title = "Clarify next step"

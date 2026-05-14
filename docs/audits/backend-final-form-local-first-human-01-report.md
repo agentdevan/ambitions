@@ -1,6 +1,8 @@
 # BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01
 
-Status: YELLOW
+Status: SUPERSEDED by `docs/audits/backend-final-form-green-repair-01-report.md`
+
+Supersession note: this historical phase closed Yellow. It is no longer the final backend final-form verdict. `BACKEND-FINAL-FORM-GREEN-REPAIR-01` repairs the remaining gate-contract findings and records the current final status.
 
 ## Summary
 
@@ -171,4 +173,4 @@ rm -f docs/architecture/APPLE_NATIVE_SYNC_CLOUDKIT_READINESS_GATE.md scripts/amb
 
 SA19 PDF Import Boundary
 
-STATUS: YELLOW
+STATUS: SUPERSEDED_BY_BACKEND_FINAL_FORM_GREEN_REPAIR_01
