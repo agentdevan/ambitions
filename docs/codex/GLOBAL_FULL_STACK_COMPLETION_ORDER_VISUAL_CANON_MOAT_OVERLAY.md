@@ -50,7 +50,7 @@ Phase position:
   `PROOF-RECOVERY-LIFECYCLE-01` where compatibility depends on domain clarity.
 - `visual-proof-required`: `VISUAL-QA-PREVIEW-FIXTURES-01`.
 - `senior-review-required`: final integration batch.
-- `spark-safe`: all lane batches are bounded by prompt/control-plane scope.
+- `gpt-5.4-mini-safe`: all lane batches are bounded by prompt/control-plane scope.
 
 ## Evidence and proof posture
 

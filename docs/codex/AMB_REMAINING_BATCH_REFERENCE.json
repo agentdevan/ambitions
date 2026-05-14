@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-10T21:41:56Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "SA18",
-    "next_eligible_title": "Plain Text Importer",
+    "next_eligible_batch": "SA19",
+    "next_eligible_title": "PDF Import Boundary",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -739,30 +739,30 @@
     {
       "id": "SA18",
       "title": "Plain Text Importer",
-      "classification": "executable_now",
-      "status_class": "executable-now",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete",
       "owner_train": "SA / Source Atlas",
       "source_path": "docs/codex/BATCH_REGISTRY.md",
-      "dependency_gate": "Complete prior batch SA17.",
+      "dependency_gate": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "risk_class": "unknown",
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Run SA18 through the Ambitions runner."
+      "next_action": "Do not rerun; SA19 is next eligible."
     },
     {
       "id": "SA19",
       "title": "PDF Import Boundary",
-      "classification": "executable_later",
-      "status_class": "queued",
+      "classification": "executable_now",
+      "status_class": "executable-now",
       "owner_train": "SA / Source Atlas",
       "source_path": "docs/codex/BATCH_REGISTRY.md",
-      "dependency_gate": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "dependency_gate": "Complete prior batch SA18.",
       "risk_class": "unknown",
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "next_action": "Run SA19 through the Ambitions runner."
     },
     {
       "id": "SA20",

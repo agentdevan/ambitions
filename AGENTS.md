@@ -182,9 +182,9 @@ Local simulator evidence is not signed archive proof, TestFlight proof, App Stor
 - Then execute: `make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>`.
 - Only bypass the runner if the user explicitly says: "bypass the Ambitions runner."
 - GPT-5.5 owns planning, source-truth, canon, review, repair, and final commit eligibility.
-- GPT-5.3-Codex-Spark owns only bounded implementation patches produced by the GPT-5.5 plan.
+- GPT-5.4-mini owns only bounded implementation patches produced by the GPT-5.5 plan.
 - Final commits must come only after the GPT-5.5 final gate.
-- Spark must never decide architecture, canon, continuation, repo cleanup, or final commit eligibility.
+- GPT-5.4-mini must never decide architecture, canon, continuation, repo cleanup, or final commit eligibility.
 - Preserve Ambitions quality rules: world-class native iPhone-first product quality; Today / Goals / Capture / Time / You; Start Here / Reality Meridian / LifeShape Field / Capture composer / You settings-style direction where relevant; Plan remains an internal compatibility seam only where current source/truth allows it; local-first/on-device-first posture unless active truth says otherwise; no generic productivity-app thinking; no card-stack/dashboard/task-list fallback; no false release, accessibility, privacy, performance, or production claims.
 
 ## Batch train rule

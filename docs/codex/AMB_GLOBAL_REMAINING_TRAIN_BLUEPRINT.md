@@ -72,9 +72,9 @@ Required proof gates: current local evidence, EFC applicability, no-claim bounda
 | 49 | SA14 | Local Impact Matcher | executable_later | `prompts/batches/SA14.md` | create_missing | SA15 |
 | 50 | SA15 | Offline Fallback Runtime | executable_later | `prompts/batches/SA15.md` | create_missing | SA16 |
 | 51 | SA16 | Source Container Model | executable_later | `prompts/batches/SA16.md` | create_missing | SA17 |
-| 52 | SA17 | URL Source Importer | executable_later | `prompts/batches/SA17.md` | create_missing | SA18 |
-| 53 | SA18 | Plain Text Importer | executable_later | `prompts/batches/SA18.md` | create_missing | SA19 |
-| 54 | SA19 | PDF Import Boundary | executable_later | `prompts/batches/SA19.md` | create_missing | SA20 |
+| 52 | SA17 | URL Source Importer | historical_complete_do_not_run | `prompts/batches/SA17.md` | do_not_run_header_only | SA18 |
+| 53 | SA18 | Plain Text Importer | historical_complete_do_not_run | `prompts/batches/SA18.md` | do_not_run_header_only | SA19 |
+| 54 | SA19 | PDF Import Boundary | executable_now | `prompts/batches/SA19.md` | create_missing | SA20 |
 | 55 | SA20 | PDFKit Text Extraction | executable_later | `prompts/batches/SA20.md` | create_missing | SA21 |
 | 56 | SA21 | Vision OCR Fallback | executable_later | `prompts/batches/SA21.md` | create_missing | SA22 |
 | 57 | SA22 | Image / Screenshot Importer | executable_later | `prompts/batches/SA22.md` | create_missing | SA23 |

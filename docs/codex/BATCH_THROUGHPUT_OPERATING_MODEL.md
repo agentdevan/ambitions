@@ -10,9 +10,9 @@ source-truth discipline and proof honesty. It exists for non-product batch infra
 1. **One canonical write lane**
    - `GPT-5.5` (plan/decision/review/final gate) executes through `make batch`.
 2. **Many read-only prep lanes**
-   - Spark/mini/unknown-tier model work is limited to prep notes, classification,
+   - GPT-5.4-mini/unknown-tier model work is limited to prep notes, classification,
      validation routing, and deterministic script-assisted reporting.
-3. **Spark bounded execution**
+3. **GPT-5.4-mini bounded execution**
    - `GPT-5.5` approves every hard decision.
 4. **Repair desk ownership**
    - Non-Green outcomes route to repair/finalization as repair prompts only.
@@ -51,7 +51,7 @@ new unresolved continuation gates in active state.
 
 - GPT-5.5 owns planning, source-truth judgment, canonical proof interpretation,
   and final commit eligibility.
-- Spark implements only the bounded patch requested by an approved Phase 01 boundary.
+- GPT-5.4-mini implements only the bounded patch requested by an approved Phase 01 boundary.
 - All runners, autonomous commands, repair lanes, and queue tooling remain read-only
   unless in the approved batch command lane.
 - EFC, queue truth, and current-state posture are never relaxed to improve throughput.
@@ -62,4 +62,3 @@ new unresolved continuation gates in active state.
   train state (not stale memoized status).
 - If PK/other command files are missing or stale, prep notes must remain candidate-only
   and cannot be used for implementation decisions.
-

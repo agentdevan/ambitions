@@ -152,7 +152,7 @@ private extension DefaultGoalClarificationService {
                     id: "ambiguity-multi-interpretation",
                     type: classification.draft.lifeGraph?.domains.isEmpty == false ? .scope : .domain,
                     summary: "Multiple plausible interpretations are still in play.",
-                    detail: "The current intake can support more than one structural reading of the goal, so Batch 22 should preserve those readings instead of collapsing them.",
+                    detail: "The current intake can support more than one structural reading of the goal, so Ambitions preserves those readings instead of collapsing them.",
                     severity: .important,
                     relatedField: .goalShape,
                     candidateIDs: candidates.map(\.id)
@@ -254,7 +254,7 @@ private extension DefaultGoalClarificationService {
                 GoalClarificationAssumption(
                     id: "assumption-primary-interpretation",
                     summary: "Use the current primary interpretation as starter scaffolding while keeping alternate interpretations visible.",
-                    rationale: "Batch 22 should preserve multiple readings structurally, but starter planning can still use the leading interpretation when no blocking ambiguity remains.",
+                    rationale: "Ambitions preserves multiple readings structurally, but starter planning can still use the leading interpretation when no blocking ambiguity remains.",
                     confidence: .medium,
                     source: .derivedContract,
                     relatedField: primary.modeHint == .exploration ? .goalShape : .successDefinition,

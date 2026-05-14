@@ -373,7 +373,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         }))
         XCTAssertTrue(dataMap.contains(where: {
             $0.id == "trust-data-map-future-owned" &&
-            $0.controlLabel == "Blocked until owner batch proves safety" &&
+            $0.controlLabel == "Blocked until owner proof confirms safety" &&
             $0.privacyLabel == "No hidden account or cloud claim"
         }))
         XCTAssertFalse(dataMap.map(\.sourceLabel).joined(separator: " ").localizedCaseInsensitiveContains("synced everywhere"))

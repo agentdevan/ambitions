@@ -4,7 +4,7 @@ This directory stores read-only prep notes used by throughput lanes.
 
 ## Purpose
 
-Prep notes support Spark/mini/unknown-tier preparation lanes by capturing candidate
+Prep notes support GPT-5.4-mini/unknown-tier preparation lanes by capturing candidate
 scope, evidence pointers, risks, and fast-lane validation hints without implementation.
 
 ## Current seeded notes
@@ -22,7 +22,7 @@ scope, evidence pointers, risks, and fast-lane validation hints without implemen
 
 ## How to use
 
-- Spark/mini/unknown-tier models should read these notes before bounded patch generation.
+- GPT-5.4-mini/unknown-tier models should read these notes before bounded patch generation.
 - Missing prompt files are valid; they must be marked `Prompt availability: missing` and kept candidate-only.
 - Candidates do not authorize implementation.
 - Route to the canonical runner lane for execution through:

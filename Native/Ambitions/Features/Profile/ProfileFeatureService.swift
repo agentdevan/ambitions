@@ -518,7 +518,7 @@ private extension RepositoryBackedProfileService {
                 title: "Future-owned edges",
                 dataTypes: "Sync, export proof, destructive delete, broad memory controls",
                 sourceLabel: syncStatus.detail,
-                controlLabel: "Blocked until owner batch proves safety",
+                controlLabel: "Blocked until owner proof confirms safety",
                 privacyLabel: "No hidden account or cloud claim",
                 statusLabel: "Future-owned",
                 semanticState: .caution

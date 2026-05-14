@@ -115,6 +115,7 @@ Current repo posture from inspected evidence:
 - The checked-in package manifest defines shared Swift packages.
 - The app is SwiftUI-first.
 - The configured deployment target is iOS 17.0.
+- The configured Swift language version is 6.0.
 - The repo has source for app, widget extension, share extension, unit tests, UI tests, design system package, widget UI package, scripts, and substantial docs/Codex material.
 - The app has local SwiftData persistence source.
 - The app has App Group entitlement source.
@@ -212,7 +213,7 @@ Implementation truth:
 - `Ambitions.xcodeproj` is generated and should not be treated as checked-in source truth.
 - The configured app platform is iOS.
 - The deployment target in `project.yml` is iOS 17.0.
-- Swift version in `project.yml` is 5.10.
+- Swift version in `project.yml` is 6.0.
 - The app target is named `Ambitions`.
 - Native app source is under `Native/Ambitions`.
 - Resources are under `Native/Ambitions/Resources`.

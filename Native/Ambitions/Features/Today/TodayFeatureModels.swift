@@ -237,7 +237,7 @@ struct TodayExperience: Sendable {
     }
 }
 
-// Legacy internal projection scaffolding retained to avoid widening Batch 43
+// Legacy internal projection scaffolding retained to avoid widening this compatibility seam.
 // into planner or service rewrites beyond Today presentation composition.
 
 struct TodayHeaderState: Sendable {

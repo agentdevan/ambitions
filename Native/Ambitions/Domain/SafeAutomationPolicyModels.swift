@@ -285,7 +285,7 @@ struct SafeAutomationPolicyDecision: Codable, Sendable, Equatable, Hashable, Ide
         if receiptRecommendation.resultState == .noOp {
             return "No change was needed."
         }
-        return "This action is allowed by local policy, but Batch 81 does not execute it."
+        return "This action is allowed by local policy, but the current runtime keeps it as a receipt-only outcome."
     }
 
     private var changedFactKind: ActionReceiptChangedFactKind {
@@ -422,7 +422,7 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 undo: .confirmationRequiredUndo,
                 safety: .broadPlanMutation,
                 reasons: [.broadReflowMustBeConfirmed],
-                degradedFacts: ["Plan changes are represented by policy only in this batch."],
+                degradedFacts: ["Plan changes are represented by policy only until a confirmed execution path exists."],
                 nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan),
                 receiptState: .needsConfirmation,
                 receiptSafety: .confirmationRequired

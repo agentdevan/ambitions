@@ -18,16 +18,16 @@ This policy defines deterministic lane behavior for the throughput factory.
 
 ### parallel_readonly_prep
 - **Purpose:** Preflight, docs-only prep, candidate mapping, and deterministic routing.
-- **Allowed model tier:** Spark / mini / unknown tier after runner authorization.
+- **Allowed model tier:** GPT-5.4-mini / unknown tier after runner authorization.
 - **Allowed actions:** read-only prep notes, queue classification, test-router lookup, lane mapping.
 - **Forbidden actions:** implementation, source mutation, architecture/canon rewrites, claims ownership of commit.
 - **Proof requirements:** file read-only audit trail and deterministic script output.
 - **Continuation rule:** may run in parallel for multiple queued candidates.
 - **Escalation rule:** escalate to GPT-5.5 on any conflict with active truth or stale state.
 
-### spark_bounded_patch_candidate
-- **Purpose:** Spark-safe implementation patch scope when explicitly approved by Phase01 / runner.
-- **Allowed model tier:** Spark with parent-approved boundary and no architecture or canon ownership.
+### gpt_5_4_mini_bounded_patch_candidate
+- **Purpose:** GPT-5.4-mini-safe implementation patch scope when explicitly approved by Phase01 / runner.
+- **Allowed model tier:** GPT-5.4-mini with parent-approved boundary and no architecture or canon ownership.
 - **Allowed actions:** modify only approved files in the patch boundary, run required local checks.
 - **Forbidden actions:** production Swift source, route/raw-value edits, dependency/signing/workflow edits,
   release/readiness claims.
@@ -40,7 +40,7 @@ This policy defines deterministic lane behavior for the throughput factory.
   lane ownership.
 - **Allowed model tier:** GPT-5.5 only.
 - **Allowed actions:** final validation judgment, truth-order enforcement, gate interpretation.
-- **Forbidden actions:** Spark/mini/unknown-tier deciding acceptance, final-status semantics, or
+- **Forbidden actions:** GPT-5.4-mini/unknown-tier deciding acceptance, final-status semantics, or
   queue reorder without evidence.
 - **Proof requirements:** source truth and state evidence with explicit no-claim boundaries.
 - **Continuation rule:** only GPT-5.5 may authorize resume/continue.
@@ -66,7 +66,7 @@ This policy defines deterministic lane behavior for the throughput factory.
 
 ### defer_with_ledger
 - **Purpose:** track known yellow/repeated, non-blocking risks outside the current child batch.
-- **Allowed model tier:** Spark/mini/unknown-tier may log and propose quarantine entries.
+- **Allowed model tier:** GPT-5.4-mini/unknown-tier may log and propose quarantine entries.
 - **Allowed actions:** classify and route known caveats to ledger; avoid repeat investigation.
 - **Forbidden actions:** declaring resolved status without proof or masking unresolved caveats.
 - **Proof requirements:** ledger + next-batch relevance check.
@@ -75,9 +75,8 @@ This policy defines deterministic lane behavior for the throughput factory.
 
 ## Governance constraints
 
-- Spark/mini/unknown-tier models may prepare, classify, summarize, map tests, and execute bounded patches
+- GPT-5.4-mini/unknown-tier models may prepare, classify, summarize, map tests, and execute bounded patches
   only after runner authorization.
-- Spark/mini/unknown-tier models may not decide source truth, architecture, privacy/legal posture,
+- GPT-5.4-mini/unknown-tier models may not decide source truth, architecture, privacy/legal posture,
   release posture, cleanup authority, deletion strategy, or final commit eligibility.
 - GPT-5.5 is required for senior-only gates and any final commit path decisions.
-

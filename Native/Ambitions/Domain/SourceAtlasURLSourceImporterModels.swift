@@ -230,12 +230,14 @@ struct SourceAtlasURLSourceImporter: Sendable, Equatable, Hashable {
             return .emptyURL
         }
         guard let components = URLComponents(string: trimmedURL),
-              let scheme = components.scheme?.lowercased(),
-              components.host?.isEmpty == false else {
+              let scheme = components.scheme?.lowercased() else {
             return .invalidURL
         }
         guard scheme == "https" || scheme == "http" else {
             return .unsupportedScheme
+        }
+        guard components.host?.isEmpty == false else {
+            return .invalidURL
         }
         return nil
     }

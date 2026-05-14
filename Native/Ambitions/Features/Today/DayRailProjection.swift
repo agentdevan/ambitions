@@ -121,7 +121,7 @@ extension DayRailDetailTargetState {
                 goalID: nil,
                 stepID: nil,
                 draftID: nil,
-                placeholderLabel: "Detail opens in a later F-series batch."
+                placeholderLabel: "Detail opens when the focused step surface is available."
             )
         }
         let kind: DayRailDetailTargetKind

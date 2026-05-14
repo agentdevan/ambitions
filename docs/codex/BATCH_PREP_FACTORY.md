@@ -19,7 +19,7 @@ Each prep note must follow:
 - **EFC applicability:**
 - **Known yellow caveats:**
 - **Senior-only risks:**
-- **Spark-safe work:**
+- **GPT-5.4-mini-safe work:**
 - **Hard Red triggers:**
 - **Rollback notes:**
 - **Non-claims:**

@@ -24,7 +24,7 @@ This is a read-only preparation note and does **not** authorize implementation.
 - **EFC applicability:**
 - **Known yellow caveats:**
 - **Senior-only risks:**
-- **Spark-safe work:**
+- **GPT-5.4-mini-safe work:**
 - **Hard Red triggers:**
 - **Rollback notes:**
 - **Non-claims:**
@@ -36,4 +36,3 @@ This is a read-only preparation note and does **not** authorize implementation.
 - No production behavior decisions.
 - No branching, commit, push, or app behavior change claims.
 - No implementation path is derived from this note alone.
-

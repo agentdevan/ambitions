@@ -59,7 +59,7 @@ No existing runner-compatible prompts were found for these exact IDs in this pha
 - `must-run-after-domain`: Proof recovery and Recommendation batches depend on domain
   consistency already represented in queue and run context.
 - `visual-proof-required`: `VISUAL-QA-PREVIEW-FIXTURES-01`.
-- `spark-safe`: all 14 batches are bounded and control-plane-safe.
+- `gpt-5.4-mini-safe`: all 14 batches are bounded and control-plane-safe.
 - `senior-review-required`: `FINAL-VISUAL-CANON-INTEGRATION-01` requires human review for
   global handoff assumptions.
 

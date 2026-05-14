@@ -93,7 +93,7 @@ The supervisor does not kill processes automatically. It reports process IDs and
 
 ## Finalization Prompts
 
-Use `prompts/_BATCH_FINALIZE_TEMPLATE.md` to create finalization prompts. A finalization prompt reviews existing diff/artifacts and must not rerun Spark implementation or the original batch from scratch.
+Use `prompts/_BATCH_FINALIZE_TEMPLATE.md` to create finalization prompts. A finalization prompt reviews existing diff/artifacts and must not rerun the GPT-5.4-mini bounded implementation phase or the original batch from scratch.
 
 Current unresolved PK15 work is routed through:
 

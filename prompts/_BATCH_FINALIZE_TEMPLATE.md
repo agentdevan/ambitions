@@ -16,7 +16,7 @@ This is a review/finalization attempt, not an implementation restart. Inspect th
 
 - Inspect the existing diff before editing.
 - Inspect the latest `.codex/runs/<BATCH_ID>/*/final-summary.md` and phase finals.
-- Do not rerun Spark implementation.
+- Do not rerun the GPT-5.4-mini bounded implementation phase.
 - Do not rerun the original batch from scratch.
 - Do not invoke the global conductor.
 - Do not invoke nested `make batch`.

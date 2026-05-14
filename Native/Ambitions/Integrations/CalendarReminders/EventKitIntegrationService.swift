@@ -158,7 +158,7 @@ protocol CalendarRemindersServicing: Sendable {
     func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func createReminder(for selection: NextStepSchedulingSelection, now: Date) async throws -> CreatedReminderRecord
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord
-    // Reserved for Canon Batch 5B. Batch 5A keeps this hook only to avoid broad churn.
+    // Reserved for the next calendar read-path pass. The current hook avoids broad churn.
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport?
 }
 
@@ -778,7 +778,7 @@ protocol EventKitStoreClient: Sendable {
     func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState
     func saveReminder(_ payload: EventKitReminderPayload) async throws -> String
     func saveEvent(_ payload: EventKitEventPayload) async throws -> String
-    // Reserved for Canon Batch 5B read-path work. Batch 5A does not call this.
+    // Reserved for future calendar read-path work. The current integration does not call this.
     func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot]
 }
 

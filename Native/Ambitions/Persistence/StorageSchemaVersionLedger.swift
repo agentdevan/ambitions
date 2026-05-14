@@ -99,7 +99,7 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             storedTypeName: "GoalDraftRecord",
             currentVersion: "goal_draft_record.swiftdata.v1",
             versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
-            notes: "Capture-to-goal draft holding area; no migration runner is authorized."
+            notes: "Capture-to-goal draft holding area; no migration execution path is authorized."
         ),
         .swiftData(
             id: "swiftdata.goal_plan_record",

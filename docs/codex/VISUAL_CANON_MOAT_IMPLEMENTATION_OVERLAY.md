@@ -40,19 +40,19 @@ translation rules. New lane batches are assigned one or more classes:
 
 ```text
 Batch ID                               Overlay Class(es)
-AMBITION-GRAPH-FOUNDATION-01           active, supporting, spark-safe, must-run-before-ui, must-run-after-domain
-PROOF-RECOVERY-LIFECYCLE-01            active, supporting, spark-safe
-RECOMMENDATION-TRACE-TRUST-SEAM-01     active, supporting, spark-safe
-PERSONAL-RUNTIME-LOCAL-TRUST-01        active, supporting, spark-safe
-SHELL-CONTINUITY-DOCK-MATERIALS-01     active, supporting, spark-safe
-TODAY-REALITY-MERIDIAN-VISUAL-01       active, supporting, spark-safe, must-run-before-ui
-CAPTURE-ATMOSPHERE-COMPOSER-VISUAL-01  active, supporting, spark-safe
-TIME-PRESSURE-LEDGER-VISUAL-01         active, supporting, spark-safe
-GOALS-CONSTELLATION-ATLAS-VISUAL-01    active, supporting, spark-safe
-YOU-USER-SYSTEM-PROFILE-VISUAL-01      active, supporting, spark-safe
-MOAT-ADDENDUM-STATE-SCREENS-01         active, supporting, spark-safe
-ACCESSIBILITY-VISUAL-CANON-01          active, supporting, spark-safe, blocked-until-clean (if no accessibility audit available)
-VISUAL-QA-PREVIEW-FIXTURES-01          active, visual-proof-required, spark-safe
+AMBITION-GRAPH-FOUNDATION-01           active, supporting, gpt-5.4-mini-safe, must-run-before-ui, must-run-after-domain
+PROOF-RECOVERY-LIFECYCLE-01            active, supporting, gpt-5.4-mini-safe
+RECOMMENDATION-TRACE-TRUST-SEAM-01     active, supporting, gpt-5.4-mini-safe
+PERSONAL-RUNTIME-LOCAL-TRUST-01        active, supporting, gpt-5.4-mini-safe
+SHELL-CONTINUITY-DOCK-MATERIALS-01     active, supporting, gpt-5.4-mini-safe
+TODAY-REALITY-MERIDIAN-VISUAL-01       active, supporting, gpt-5.4-mini-safe, must-run-before-ui
+CAPTURE-ATMOSPHERE-COMPOSER-VISUAL-01  active, supporting, gpt-5.4-mini-safe
+TIME-PRESSURE-LEDGER-VISUAL-01         active, supporting, gpt-5.4-mini-safe
+GOALS-CONSTELLATION-ATLAS-VISUAL-01    active, supporting, gpt-5.4-mini-safe
+YOU-USER-SYSTEM-PROFILE-VISUAL-01      active, supporting, gpt-5.4-mini-safe
+MOAT-ADDENDUM-STATE-SCREENS-01         active, supporting, gpt-5.4-mini-safe
+ACCESSIBILITY-VISUAL-CANON-01          active, supporting, gpt-5.4-mini-safe, blocked-until-clean (if no accessibility audit available)
+VISUAL-QA-PREVIEW-FIXTURES-01          active, visual-proof-required, gpt-5.4-mini-safe
 FINAL-VISUAL-CANON-INTEGRATION-01      active, supporting, senior-review-required
 ```
 
@@ -61,7 +61,7 @@ FINAL-VISUAL-CANON-INTEGRATION-01      active, supporting, senior-review-require
 - `archive-candidate`, `delete-candidate`, `consolidate`, and `split` are explicitly not
   assigned in this phase for this lane.
 - `active`, `supporting`, `historical`, `blocked-until-clean`,
-  `must-run-before-ui`, `must-run-after-domain`, `visual-proof-required`, `spark-safe`,
+  `must-run-before-ui`, `must-run-after-domain`, `visual-proof-required`, `gpt-5.4-mini-safe`,
   `senior-review-required` are used as needed above.
 - `supported` and `unsupported` are not used by this lane schema.
 

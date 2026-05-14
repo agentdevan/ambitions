@@ -377,7 +377,7 @@ private extension AmbitionsCommandExecutor {
             guard let capture = try await captureService.routeToPlanSeed(id: captureID, now: context.now) else {
                 return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for Plan idea routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
             }
-            return captureResult(command: command, capture: capture, summary: "Capture represented as a Plan idea. Scheduling is not implemented in this batch.")
+            return captureResult(command: command, capture: capture, summary: "Capture represented as a Plan idea. Scheduling is not implemented in this build.")
         } catch {
             return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
         }

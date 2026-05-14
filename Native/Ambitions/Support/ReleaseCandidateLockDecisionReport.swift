@@ -61,7 +61,7 @@ enum ReleaseCandidateLockDecisionReport {
         ReleaseCandidateDecisionItem(
             id: "human-approval",
             title: "Human approval is required before RC lock.",
-            evidence: "Codex cannot capture final human approval inside repo evidence.",
+            evidence: "Repo evidence cannot capture final human approval by itself.",
             state: .blockedByMissingHumanOrDeviceProof,
             nextAction: "Record explicit human approval before changing the RC status from candidate prepared."
         ),

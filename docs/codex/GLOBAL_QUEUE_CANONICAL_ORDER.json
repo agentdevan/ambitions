@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-13",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA18",
-  "next_eligible_title": "Plain Text Importer",
+  "next_eligible_batch": "SA19",
+  "next_eligible_title": "PDF Import Boundary",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -444,17 +444,17 @@
     {
       "id": "SA18",
       "title": "Plain Text Importer",
-      "classification": "executable_now",
-      "reason": "SA17 is complete / accepted yellow. SA18 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA17.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA18 Plain Text Importer is complete / Accepted Yellow with closeout in docs/audits/sa18-batch-closeout-report.md. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA19",
       "title": "PDF Import Boundary",
-      "classification": "executable_later",
-      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
-      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "classification": "executable_now",
+      "reason": "SA18 is complete / accepted yellow. SA19 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA18.",
       "efc_applicability": "invoked"
     },
     {
