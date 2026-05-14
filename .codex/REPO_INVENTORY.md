@@ -3,7 +3,7 @@
 # Codex Repo Inventory
 
 Status: Active repo map and routing index
-Date updated: 2026-05-10
+Date updated: 2026-05-14
 Branch: main
 HEAD: 661206bd
 Scan method: `find`, `rg`, `git status`, active truth docs, Codex OS files, current state files, and Phase 0-8 cleanup evidence.
@@ -46,12 +46,18 @@ performance, privacy/legal signoff, or completeness.
 | `docs/truth/` | truth | Active authority | active | Codex Process, Product, Release | any conflict |
 | `README.md` | front door | public repo routing | active | Repo Hygiene | repo entry |
 | `docs/README.md` | docs front door | docs routing | active | Repo Hygiene | docs entry |
+| `frontend/` | front door | active frontend portal | active | Product/Design | visual canon |
+| `backend/` | front door | backend-equivalent portal | active | iOS Engineering | backend posture |
+| `codex-os/` | front door | human Codex OS portal | active | Codex Process | control-plane routing |
+| `product-canon/` | front door | supporting product canon portal | active | Product/Design | product canon |
+| `validation/` | front door | proof and local validation portal | active | Release/QA | validation routing |
+| `history/` | front door | historical archive portal | active | Repo Hygiene | historical routing |
 | `AGENTS.md` | contributor guidance | Codex/developer rules | active | Codex Process | any Codex work |
 | `.codex/` | operating system | state, skills, tools, registries | active/supporting | Codex Process | Codex operation |
 | `docs/status/` | evidence/status | current maps, reports, ledgers | active/supporting | Repo Hygiene, Release | status/proof |
 | `docs/codex/` | historical/supporting OS docs | batch/train/gates/prompts | mixed | Codex Process | train history |
 | `docs/AmbitionsCanon/` | product/design canon | compatible supporting canon | supporting | Product/Design | product/design work |
-| `docs/canon/` | older/future canon | historical/supporting | mixed | Product/Design | historical context |
+| `docs/canon/` | legacy canon | historical/supporting only | mixed | Product/Design | historical context |
 | `docs/audits/` | audit/proof history | logs, reports, visual evidence | supporting | QA/Release | evidence lookup |
 | `docs/archive/` | archive | retained superseded material | historical | Repo Hygiene | history |
 | `Native/` | app source | native app, tests, extensions | source | iOS Engineering | implementation |
@@ -84,6 +90,7 @@ performance, privacy/legal signoff, or completeness.
 - `docs/truth`: active authority.
 - `docs/status`: current implementation, release evidence, cleanup reports, ledgers.
 - `docs/AmbitionsCanon`: compatible product/design canon.
+- `frontend`: active frontend visual canon portal.
 - `docs/codex`: batch/train/process history and supporting operating docs.
 - `docs/canon`: older/future canon and supporting policy material.
 - `docs/audits`: proof reports, logs, visual evidence, doc QA logs.
@@ -130,8 +137,8 @@ Use `.codex/BATCH_TRAIN_REGISTRY.md` for details.
 - Active operating skills: use only when `.codex/SKILL_GOVERNANCE.md` allows.
 - Candidate skills: require explicit batch selection.
 - Historical/deprecated skills: context only.
-- Deleted provider skills: `.agents/skills/supabase/` and
-  `.agents/skills/supabase-postgres-best-practices/`.
+- Deleted provider skills: `.agents/skills/supabase/` and the deleted
+  provider skill path for the legacy database best-practices pack.
 - Line-review status: not every `.codex/skills` file has been line-reviewed.
 
 ## Tooling And Validation Map
@@ -162,6 +169,7 @@ Use `.codex/TOOLING_AND_VALIDATION.md` for details.
 | If asked... | Inspect first |
 | --- | --- |
 | What is current product truth? | `docs/truth/README.md` |
+| What is the active frontend front door? | `frontend/README.md` |
 | What is implemented? | `docs/status/current-implementation-map.md` + live source |
 | What batch is next? | `.codex/GLOBAL_BATCH_TRAIN.md` |
 | What trains are obsolete? | `.codex/BATCH_TRAIN_REGISTRY.md` + `docs/status/archive-and-stale-material-ledger.md` |

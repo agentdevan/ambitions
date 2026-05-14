@@ -1,0 +1,3320 @@
+{
+  "batch": "VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04",
+  "debt_surface_count": 0,
+  "documented_surface_count": 29,
+  "generated_from_batch": "VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04",
+  "grammar_totals": {
+    "documented": 551
+  },
+  "missing_surfaces": [],
+  "status": "green",
+  "surface_count": 29,
+  "surfaces": [
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Today Root / Reality Meridian makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Today Root / Reality Meridian requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Today Root / Reality Meridian collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Today Root / Reality Meridian moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Today Root / Reality Meridian supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Today Root / Reality Meridian uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Today Root / Reality Meridian keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Today Root / Reality Meridian treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Today Root / Reality Meridian keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Today Root / Reality Meridian uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Today Root / Reality Meridian enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Today Root / Reality Meridian keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Today Root / Reality Meridian replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Today Root / Reality Meridian replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Today Root / Reality Meridian respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Today Root / Reality Meridian scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Today Root / Reality Meridian uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Today Root / Reality Meridian provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Today Root / Reality Meridian reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md",
+      "source_link_status": "linked",
+      "status": "documented",
+      "surface_id": "today_root_reality_meridian",
+      "surface_name": "Today Root / Reality Meridian"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Today Start Here Region makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Today Start Here Region requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Today Start Here Region collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Today Start Here Region moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Today Start Here Region supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Today Start Here Region uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Today Start Here Region keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Today Start Here Region treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Today Start Here Region keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Today Start Here Region uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Today Start Here Region enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Today Start Here Region keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Today Start Here Region replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Today Start Here Region replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Today Start Here Region respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Today Start Here Region scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Today Start Here Region uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Today Start Here Region provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Today Start Here Region reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/today_start_here_region.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_start_here_region.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "today_start_here_region",
+      "surface_name": "Today Start Here Region"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Today Reality Meridian Rail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Today Reality Meridian Rail requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Today Reality Meridian Rail collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Today Reality Meridian Rail moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Today Reality Meridian Rail supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Today Reality Meridian Rail uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Today Reality Meridian Rail keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Today Reality Meridian Rail treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Today Reality Meridian Rail keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Today Reality Meridian Rail uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Today Reality Meridian Rail enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Today Reality Meridian Rail keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Today Reality Meridian Rail replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Today Reality Meridian Rail replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Today Reality Meridian Rail respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Today Reality Meridian Rail scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Today Reality Meridian Rail uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Today Reality Meridian Rail provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Today Reality Meridian Rail reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_rail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_rail.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "today_reality_meridian_rail",
+      "surface_name": "Today Reality Meridian Rail"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Today Recommended Step Object makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Today Recommended Step Object requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Today Recommended Step Object collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Today Recommended Step Object moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Today Recommended Step Object supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Today Recommended Step Object uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Today Recommended Step Object keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Today Recommended Step Object treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Today Recommended Step Object keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Today Recommended Step Object uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Today Recommended Step Object enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Today Recommended Step Object keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Today Recommended Step Object replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Today Recommended Step Object replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Today Recommended Step Object respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Today Recommended Step Object scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Today Recommended Step Object uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Today Recommended Step Object provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Today Recommended Step Object reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/today_recommended_step_object.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_recommended_step_object.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "today_recommended_step_object",
+      "surface_name": "Today Recommended Step Object"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Today Now / Next / Later Sequence makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Today Now / Next / Later Sequence requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Today Now / Next / Later Sequence collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Today Now / Next / Later Sequence moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Today Now / Next / Later Sequence supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Today Now / Next / Later Sequence uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Today Now / Next / Later Sequence keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Today Now / Next / Later Sequence treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Today Now / Next / Later Sequence keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Today Now / Next / Later Sequence uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Today Now / Next / Later Sequence enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Today Now / Next / Later Sequence keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Today Now / Next / Later Sequence replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Today Now / Next / Later Sequence replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Today Now / Next / Later Sequence respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Today Now / Next / Later Sequence scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Today Now / Next / Later Sequence uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Today Now / Next / Later Sequence provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Today Now / Next / Later Sequence reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/today_now_next_later_sequence.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_now_next_later_sequence.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "today_now_next_later_sequence",
+      "surface_name": "Today Now / Next / Later Sequence"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Closure Sheet makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Closure Sheet requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Closure Sheet collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Closure Sheet moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Closure Sheet supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Closure Sheet uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Closure Sheet keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Closure Sheet treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Closure Sheet keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Closure Sheet uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Closure Sheet enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Closure Sheet keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Closure Sheet replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Closure Sheet replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Closure Sheet respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Closure Sheet scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Closure Sheet uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Closure Sheet provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Closure Sheet reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/closure_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/closure_sheet.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "closure_sheet",
+      "surface_name": "Closure Sheet"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Step Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Step Detail requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Step Detail collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Step Detail moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Step Detail supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Step Detail uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Step Detail keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Step Detail treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Step Detail keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Step Detail uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Step Detail enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Step Detail keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Step Detail replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Step Detail replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Step Detail respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Step Detail scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Step Detail uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Step Detail provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Step Detail reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/step_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/step_detail.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "step_detail",
+      "surface_name": "Step Detail"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Step Session makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Step Session requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Step Session collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Step Session moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Step Session supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Step Session uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Step Session keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Step Session treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Step Session keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Step Session uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Step Session enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Step Session keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Step Session replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Step Session replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Step Session respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Step Session scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Step Session uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Step Session provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Step Session reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/step_session.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/step_session.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "step_session",
+      "surface_name": "Step Session"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Recommendation Source Sheet makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Recommendation Source Sheet requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Recommendation Source Sheet collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Recommendation Source Sheet moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Recommendation Source Sheet supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Recommendation Source Sheet uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Recommendation Source Sheet keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Recommendation Source Sheet treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Recommendation Source Sheet keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Recommendation Source Sheet uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Recommendation Source Sheet enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Recommendation Source Sheet keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Recommendation Source Sheet replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Recommendation Source Sheet replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Recommendation Source Sheet respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Recommendation Source Sheet scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Recommendation Source Sheet uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Recommendation Source Sheet provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Recommendation Source Sheet reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/recommendation_source_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/recommendation_source_sheet.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "recommendation_source_sheet",
+      "surface_name": "Recommendation Source Sheet"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Receipt Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Receipt Detail requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Receipt Detail collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Receipt Detail moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Receipt Detail supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Receipt Detail uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Receipt Detail keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Receipt Detail treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Receipt Detail keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Receipt Detail uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Receipt Detail enters from the Today hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Receipt Detail keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Receipt Detail replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Receipt Detail replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Receipt Detail respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Receipt Detail scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Receipt Detail uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Receipt Detail provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Receipt Detail reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/today/receipt_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/receipt_detail.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "receipt_detail",
+      "surface_name": "Receipt Detail"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Time Root / LifeShape Field makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Time Root / LifeShape Field requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Time Root / LifeShape Field collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Time Root / LifeShape Field moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Time Root / LifeShape Field supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Time Root / LifeShape Field uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Time Root / LifeShape Field keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Time Root / LifeShape Field treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Time Root / LifeShape Field keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Time Root / LifeShape Field uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Time Root / LifeShape Field enters from the Time hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Time Root / LifeShape Field keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Time Root / LifeShape Field replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Time Root / LifeShape Field replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Time Root / LifeShape Field respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Time Root / LifeShape Field scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Time Root / LifeShape Field uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Time Root / LifeShape Field provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Time Root / LifeShape Field reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md",
+      "source_link_status": "linked",
+      "status": "documented",
+      "surface_id": "time_root_lifeshape_field",
+      "surface_name": "Time Root / LifeShape Field"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Day LifeShape Surface makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Day LifeShape Surface requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Day LifeShape Surface collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Day LifeShape Surface moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Day LifeShape Surface supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Day LifeShape Surface uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Day LifeShape Surface keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Day LifeShape Surface treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Day LifeShape Surface keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Day LifeShape Surface uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Day LifeShape Surface enters from the Time hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Day LifeShape Surface keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Day LifeShape Surface replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Day LifeShape Surface replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Day LifeShape Surface respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Day LifeShape Surface scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Day LifeShape Surface uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Day LifeShape Surface provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Day LifeShape Surface reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/time/day_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/day_lifeshape_surface.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "day_lifeshape_surface",
+      "surface_name": "Day LifeShape Surface"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Week LifeShape Surface makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Week LifeShape Surface requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Week LifeShape Surface collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Week LifeShape Surface moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Week LifeShape Surface supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Week LifeShape Surface uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Week LifeShape Surface keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Week LifeShape Surface treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Week LifeShape Surface keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Week LifeShape Surface uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Week LifeShape Surface enters from the Time hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Week LifeShape Surface keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Week LifeShape Surface replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Week LifeShape Surface replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Week LifeShape Surface respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Week LifeShape Surface scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Week LifeShape Surface uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Week LifeShape Surface provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Week LifeShape Surface reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/time/week_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/week_lifeshape_surface.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "week_lifeshape_surface",
+      "surface_name": "Week LifeShape Surface"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Month LifeShape Surface makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Month LifeShape Surface requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Month LifeShape Surface collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Month LifeShape Surface moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Month LifeShape Surface supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Month LifeShape Surface uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Month LifeShape Surface keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Month LifeShape Surface treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Month LifeShape Surface keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Month LifeShape Surface uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Month LifeShape Surface enters from the Time hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Month LifeShape Surface keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Month LifeShape Surface replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Month LifeShape Surface replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Month LifeShape Surface respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Month LifeShape Surface scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Month LifeShape Surface uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Month LifeShape Surface provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Month LifeShape Surface reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/time/month_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/month_lifeshape_surface.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "month_lifeshape_surface",
+      "surface_name": "Month LifeShape Surface"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Reflow Preview Tray makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Reflow Preview Tray requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Reflow Preview Tray collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Reflow Preview Tray moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Reflow Preview Tray supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Reflow Preview Tray uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Reflow Preview Tray keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Reflow Preview Tray treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Reflow Preview Tray keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Reflow Preview Tray uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Reflow Preview Tray enters from the Time hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Reflow Preview Tray keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Reflow Preview Tray replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Reflow Preview Tray replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Reflow Preview Tray respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Reflow Preview Tray scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Reflow Preview Tray uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Reflow Preview Tray provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Reflow Preview Tray reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/time/reflow_preview_tray.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/reflow_preview_tray.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "reflow_preview_tray",
+      "surface_name": "Reflow Preview Tray"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Best Fit Explanation Sheet makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Best Fit Explanation Sheet requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Best Fit Explanation Sheet collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Best Fit Explanation Sheet moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Best Fit Explanation Sheet supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Best Fit Explanation Sheet uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Best Fit Explanation Sheet keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Best Fit Explanation Sheet treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Best Fit Explanation Sheet keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Best Fit Explanation Sheet uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Best Fit Explanation Sheet enters from the Time hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Best Fit Explanation Sheet keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Best Fit Explanation Sheet replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Best Fit Explanation Sheet replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Best Fit Explanation Sheet respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Best Fit Explanation Sheet scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Best Fit Explanation Sheet uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Best Fit Explanation Sheet provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Best Fit Explanation Sheet reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/time/best_fit_explanation_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/best_fit_explanation_sheet.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "best_fit_explanation_sheet",
+      "surface_name": "Best Fit Explanation Sheet"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Protected Time Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Protected Time Detail requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Protected Time Detail collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Protected Time Detail moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Protected Time Detail supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Protected Time Detail uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Protected Time Detail keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Protected Time Detail treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Protected Time Detail keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Protected Time Detail uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Protected Time Detail enters from the Time hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Protected Time Detail keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Protected Time Detail replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Protected Time Detail replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Protected Time Detail respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Protected Time Detail scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Protected Time Detail uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Protected Time Detail provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Protected Time Detail reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/time/protected_time_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/protected_time_detail.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "protected_time_detail",
+      "surface_name": "Protected Time Detail"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Capture Root / Atmosphere Composer makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Capture Root / Atmosphere Composer requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Capture Root / Atmosphere Composer collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Capture Root / Atmosphere Composer moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Capture Root / Atmosphere Composer supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Capture Root / Atmosphere Composer uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Capture Root / Atmosphere Composer keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Capture Root / Atmosphere Composer treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Capture Root / Atmosphere Composer keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Capture Root / Atmosphere Composer uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Capture Root / Atmosphere Composer enters from the Capture hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Capture Root / Atmosphere Composer keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Capture Root / Atmosphere Composer replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Capture Root / Atmosphere Composer replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Capture Root / Atmosphere Composer respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Capture Root / Atmosphere Composer scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Capture Root / Atmosphere Composer uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Capture Root / Atmosphere Composer provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Capture Root / Atmosphere Composer reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/capture/capture_root_atmosphere_composer.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_root_atmosphere_composer.md",
+      "source_link_status": "linked",
+      "status": "documented",
+      "surface_id": "capture_root_atmosphere_composer",
+      "surface_name": "Capture Root / Atmosphere Composer"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Capture Post-Input Route Reveal makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Capture Post-Input Route Reveal requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Capture Post-Input Route Reveal collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Capture Post-Input Route Reveal moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Capture Post-Input Route Reveal supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Capture Post-Input Route Reveal uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Capture Post-Input Route Reveal keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Capture Post-Input Route Reveal treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Capture Post-Input Route Reveal keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Capture Post-Input Route Reveal uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Capture Post-Input Route Reveal enters from the Capture hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Capture Post-Input Route Reveal keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Capture Post-Input Route Reveal replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Capture Post-Input Route Reveal replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Capture Post-Input Route Reveal respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Capture Post-Input Route Reveal scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Capture Post-Input Route Reveal uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Capture Post-Input Route Reveal provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Capture Post-Input Route Reveal reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/capture/capture_post_input_route_reveal.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_post_input_route_reveal.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "capture_post_input_route_reveal",
+      "surface_name": "Capture Post-Input Route Reveal"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Capture Hold / Needs a Place Route makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Capture Hold / Needs a Place Route requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Capture Hold / Needs a Place Route collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Capture Hold / Needs a Place Route moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Capture Hold / Needs a Place Route supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Capture Hold / Needs a Place Route uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Capture Hold / Needs a Place Route keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Capture Hold / Needs a Place Route treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Capture Hold / Needs a Place Route keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Capture Hold / Needs a Place Route uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Capture Hold / Needs a Place Route enters from the Capture hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Capture Hold / Needs a Place Route keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Capture Hold / Needs a Place Route replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Capture Hold / Needs a Place Route replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Capture Hold / Needs a Place Route respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Capture Hold / Needs a Place Route scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Capture Hold / Needs a Place Route uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Capture Hold / Needs a Place Route provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Capture Hold / Needs a Place Route reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/capture/capture_hold_needs_a_place_route.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_hold_needs_a_place_route.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "capture_hold_needs_a_place_route",
+      "surface_name": "Capture Hold / Needs a Place Route"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Capture Receipt makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Capture Receipt requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Capture Receipt collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Capture Receipt moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Capture Receipt supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Capture Receipt uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Capture Receipt keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Capture Receipt treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Capture Receipt keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Capture Receipt uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Capture Receipt enters from the Capture hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Capture Receipt keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Capture Receipt replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Capture Receipt replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Capture Receipt respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Capture Receipt scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Capture Receipt uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Capture Receipt provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Capture Receipt reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/capture/capture_receipt.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_receipt.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "capture_receipt",
+      "surface_name": "Capture Receipt"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Goals Root / Constellation Atlas makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Goals Root / Constellation Atlas requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Goals Root / Constellation Atlas collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Goals Root / Constellation Atlas moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Goals Root / Constellation Atlas supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Goals Root / Constellation Atlas uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Goals Root / Constellation Atlas keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Goals Root / Constellation Atlas treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Goals Root / Constellation Atlas keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Goals Root / Constellation Atlas uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Goals Root / Constellation Atlas enters from the Goals hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Goals Root / Constellation Atlas keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Goals Root / Constellation Atlas replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Goals Root / Constellation Atlas replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Goals Root / Constellation Atlas respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Goals Root / Constellation Atlas scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Goals Root / Constellation Atlas uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Goals Root / Constellation Atlas provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Goals Root / Constellation Atlas reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/goals/goals_root_constellation_atlas.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/goals_root_constellation_atlas.md",
+      "source_link_status": "linked",
+      "status": "documented",
+      "surface_id": "goals_root_constellation_atlas",
+      "surface_name": "Goals Root / Constellation Atlas"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Proof Trail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Proof Trail requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Proof Trail collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Proof Trail moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Proof Trail supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Proof Trail uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Proof Trail keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Proof Trail treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Proof Trail keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Proof Trail uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Proof Trail enters from the Goals hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Proof Trail keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Proof Trail replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Proof Trail replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Proof Trail respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Proof Trail scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Proof Trail uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Proof Trail provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Proof Trail reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/goals/proof_trail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/proof_trail.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "proof_trail",
+      "surface_name": "Proof Trail"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Goal Thread Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Goal Thread Detail requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Goal Thread Detail collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Goal Thread Detail moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Goal Thread Detail supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Goal Thread Detail uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Goal Thread Detail keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Goal Thread Detail treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Goal Thread Detail keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Goal Thread Detail uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Goal Thread Detail enters from the Goals hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Goal Thread Detail keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Goal Thread Detail replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Goal Thread Detail replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Goal Thread Detail respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Goal Thread Detail scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Goal Thread Detail uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Goal Thread Detail provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Goal Thread Detail reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/goals/goal_thread_detail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/goal_thread_detail.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "goal_thread_detail",
+      "surface_name": "Goal Thread Detail"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Reflection / Recovery Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Reflection / Recovery Detail requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Reflection / Recovery Detail collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Reflection / Recovery Detail moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Reflection / Recovery Detail supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Reflection / Recovery Detail uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Reflection / Recovery Detail keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Reflection / Recovery Detail treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Reflection / Recovery Detail keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Reflection / Recovery Detail uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Reflection / Recovery Detail enters from the Goals hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Reflection / Recovery Detail keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Reflection / Recovery Detail replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Reflection / Recovery Detail replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Reflection / Recovery Detail respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Reflection / Recovery Detail scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Reflection / Recovery Detail uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Reflection / Recovery Detail provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Reflection / Recovery Detail reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/goals/reflection_recovery_detail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/reflection_recovery_detail.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "reflection_recovery_detail",
+      "surface_name": "Reflection / Recovery Detail"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "You Root / User System Profile makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "You Root / User System Profile requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "You Root / User System Profile collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "You Root / User System Profile moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "You Root / User System Profile supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "You Root / User System Profile uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "You Root / User System Profile keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "You Root / User System Profile treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "You Root / User System Profile keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "You Root / User System Profile uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "You Root / User System Profile enters from the You hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "You Root / User System Profile keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "You Root / User System Profile replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "You Root / User System Profile replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "You Root / User System Profile respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "You Root / User System Profile scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "You Root / User System Profile uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "You Root / User System Profile provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "You Root / User System Profile reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md",
+      "source_link_status": "linked",
+      "status": "documented",
+      "surface_id": "you_root_user_system_profile",
+      "surface_name": "You Root / User System Profile"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Local Runtime Trust Panel makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Local Runtime Trust Panel requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Local Runtime Trust Panel collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Local Runtime Trust Panel moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Local Runtime Trust Panel supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Local Runtime Trust Panel uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Local Runtime Trust Panel keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Local Runtime Trust Panel treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Local Runtime Trust Panel keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Local Runtime Trust Panel uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Local Runtime Trust Panel enters from the You hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Local Runtime Trust Panel keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Local Runtime Trust Panel replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Local Runtime Trust Panel replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Local Runtime Trust Panel respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Local Runtime Trust Panel scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Local Runtime Trust Panel uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Local Runtime Trust Panel provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Local Runtime Trust Panel reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/you/local_runtime_trust_panel.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/local_runtime_trust_panel.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "local_runtime_trust_panel",
+      "surface_name": "Local Runtime Trust Panel"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Automation & Trust makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Automation & Trust requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Automation & Trust collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Automation & Trust moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Automation & Trust supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Automation & Trust uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Automation & Trust keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Automation & Trust treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Automation & Trust keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Automation & Trust uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Automation & Trust enters from the You hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Automation & Trust keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Automation & Trust replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Automation & Trust replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Automation & Trust respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Automation & Trust scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Automation & Trust uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Automation & Trust provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Automation & Trust reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/you/automation_and_trust.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/automation_and_trust.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "automation_and_trust",
+      "surface_name": "Automation & Trust"
+    },
+    {
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "grammar": {
+        "back_cancel_behavior": {
+          "definition": "Local Data / Reset / Forget makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "destructive_confirmation_behavior": {
+          "definition": "Local Data / Reset / Forget requires explicit confirmation for destructive or irreversible actions and names the consequence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "dynamic_type_collapse_behavior": {
+          "definition": "Local Data / Reset / Forget collapses dense content into stacked rows and preserves action labels at large text sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "focus_behavior": {
+          "definition": "Local Data / Reset / Forget moves focus predictably after navigation, sheet presentation, validation errors, and receipt creation.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "gesture_affordances": {
+          "definition": "Local Data / Reset / Forget supports taps and direct controls first, with gestures as accelerators rather than the only path.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "haptic_behavior": {
+          "definition": "Local Data / Reset / Forget uses restrained selection, warning, or completion feedback only when it clarifies a user action.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "hit_target_requirements": {
+          "definition": "Local Data / Reset / Forget keeps interactive controls at 44 pt minimum or supplies an equivalent accessible target.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "input_behavior": {
+          "definition": "Local Data / Reset / Forget treats typed or selected input as user-owned and exposes correction before committing side effects.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "keyboard_behavior": {
+          "definition": "Local Data / Reset / Forget keeps keyboard entry stable, avoids hiding primary actions, and supports text/dictation where input is expected.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "motion_behavior": {
+          "definition": "Local Data / Reset / Forget uses motion to clarify continuity and state changes, not as decorative proof of intelligence.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "navigation_behavior": {
+          "definition": "Local Data / Reset / Forget enters from the You hierarchy and preserves a clear return path to the originating surface.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "one_handed_ergonomics": {
+          "definition": "Local Data / Reset / Forget keeps primary actions reachable in the lower thumb zone or provides an equivalent visible control.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_motion_fallback": {
+          "definition": "Local Data / Reset / Forget replaces motion with static state, labels, and hierarchy when Reduce Motion is active.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "reduce_transparency_fallback": {
+          "definition": "Local Data / Reset / Forget replaces translucent chrome with solid material, contrast-safe separators, and readable labels.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "safe_area_behavior": {
+          "definition": "Local Data / Reset / Forget respects top and bottom safe areas, the destination dock, and sheet detents on modern iPhone sizes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "scroll_behavior": {
+          "definition": "Local Data / Reset / Forget scrolls only the content region that needs it and keeps persistent controls stable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "sheet_tray_drawer_behavior": {
+          "definition": "Local Data / Reset / Forget uses sheets, trays, or drawers only for bounded secondary work and keeps the primary surface context visible or restorable.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "undo_recovery_behavior": {
+          "definition": "Local Data / Reset / Forget provides undo, recovery, or receipt-backed correction for user-affecting changes.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        },
+        "voiceover_order": {
+          "definition": "Local Data / Reset / Forget reads identity, state, source/proof context, primary action, secondary actions, and warnings in that order.",
+          "evidence": "defined_by_final_form_matrix",
+          "status": "documented"
+        }
+      },
+      "grammar_source_basis": [
+        "frontend/visual-encyclopedia/recipes/you/local_data_reset_forget.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+      ],
+      "implementation_proof_status": "Not In Scope",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/local_data_reset_forget.md",
+      "source_link_status": "intended_only",
+      "status": "documented",
+      "surface_id": "local_data_reset_forget",
+      "surface_name": "Local Data / Reset / Forget"
+    }
+  ]
+}

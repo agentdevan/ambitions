@@ -1,8 +1,9 @@
 # Docs Guidance
 
-- Follow `docs/codex/CONTEXT_INDEX.md` for precedence before editing docs.
-- The canonical planning docs live under `docs/canon/` and outrank older roadmap, backlog, audit, release, and implementation notes when conflicts appear.
-- `docs/codex/BATCH_REGISTRY.md` is the active queue only; it does not override the active Ambitions 2.0 canon listed in `docs/canon/README.md`.
+- Follow `docs/truth/README.md` before editing any docs.
+- `frontend/README.md` is the active visual canon portal.
+- `docs/canon/README.md` is legacy/supporting only.
+- `docs/codex/BATCH_REGISTRY.md` is the active queue only; it does not override active truth.
 - Docs must reflect actual shipped repo truth, not historical architecture or planned features.
 - Clearly label historical or reference-only material when it is retained for context.
 - Do not leave stale references to removed runtime paths or deleted files in active docs.
@@ -13,6 +14,6 @@
 
 ## Ambitions Codex OS local docs policy
 
-- Use `docs/codex-os` for control-plane documentation and avoid appending external dependency claims.
-- Classify documents as active/supported/historical and avoid claiming obsolete patterns as shipped behavior.
+- Use `docs/codex-os` for control-plane documentation and keep the human portal at `codex-os/README.md`.
+- Classify documents as active/supporting/historical and avoid claiming obsolete patterns as shipped behavior.
 - Do not claim release/readiness/accessibility/privacy without evidence in `docs/status/release-evidence-packet.md`.

@@ -3,7 +3,7 @@
 Status: Active skill governance router  
 Scope: Skill classification, metadata expectations, allowed loading, review status, deleted provider-skill record, and future skill cleanup plan  
 Authority: Subordinate to `docs/truth/*`, `.codex/OPERATING_SYSTEM.md`, and `.codex/DEPARTMENT_REGISTRY.md`  
-Updated: 2026-05-10
+Updated: 2026-05-14
 
 This file makes skills operable without pretending every skill has been line-reviewed. Skills are support tools, not product truth, implementation proof, validation proof, release proof, or approval to change app behavior.
 
@@ -82,7 +82,7 @@ These require an active batch or explicit owner instruction:
 - persistence/build target writers
 - platform extension builders
 - release readiness gate runners
-- visual implementation or screenshot proof workflows that mutate source
+- visual implementation or screenshot proof runs that mutate source
 - any skill whose allowed paths include production source
 
 ## 6. Skills That Must Not Be Used
@@ -100,7 +100,7 @@ Do not use:
 Deleted from active skill paths:
 
 - `.agents/skills/supabase/`
-- `.agents/skills/supabase-postgres-best-practices/`
+- the deleted provider skill path for the legacy database best-practices pack
 
 Current rule:
 
@@ -108,6 +108,7 @@ Current rule:
 - Do not auto-load provider material for Ambitions core work.
 - Do not infer backend/Supabase/Postgres architecture from stale docs or memory.
 - Reintroduction requires explicit owner approval, architecture review, privacy/security review, and truth-file compatibility.
+- `skills-lock.json` is not active architecture. If it contains provider residue, treat that residue as historical cleanup material only.
 
 Resolved provider-inventory item:
 

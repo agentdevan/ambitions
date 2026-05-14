@@ -2,8 +2,8 @@
 
 Active repo authority starts in [`../truth/README.md`](../truth/README.md). If this file conflicts with `docs/truth/*`, the truth files win.
 
-Current consolidated Codex OS router: [`../../.codex/OPERATING_SYSTEM.md`](../../.codex/OPERATING_SYSTEM.md). This index remains supporting navigation.
-
+Human Codex OS portal: [`../../codex-os/README.md`](../../codex-os/README.md).
+Machine authority: [`../../.codex/OPERATING_SYSTEM.md`](../../.codex/OPERATING_SYSTEM.md).
 Current repo map for future ChatGPT/Codex questions: [`../../.codex/REPO_INVENTORY.md`](../../.codex/REPO_INVENTORY.md). It is a routing index, not product truth or proof.
 
 ## Required read order
@@ -76,4 +76,4 @@ Codex OS files are operating context. They are not product source truth, shipped
 
 Speed Train increases throughput. It does not imply release, build, visual, device, accessibility, performance, privacy/legal, App Store, TestFlight, or global completion proof.
 
-Historical Ambitions 3.0 / 4.0 / batch-train material remains supporting context only where compatible with `docs/truth/*`.
+Historical legacy batch-train material remains supporting context only where compatible with `docs/truth/*`.
