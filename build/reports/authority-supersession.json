@@ -6,7 +6,7 @@
     "archive_candidate": 15,
     "generated_output": 3,
     "historical": 1,
-    "report_only": 180,
+    "report_only": 197,
     "supporting_authority": 9
   },
   "entries": [
@@ -75,6 +75,13 @@
     },
     {
       "classification": "report_only",
+      "path": "docs/canon/frontend/DESIGN_SYSTEM_TO_VISUAL_ENCYCLOPEDIA_BRIDGE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
       "path": "docs/canon/frontend/FRONTEND_AUTHORITY_INDEX.md",
       "reason": "supporting control-plane file",
       "superseded_by": "",
@@ -83,6 +90,20 @@
     {
       "classification": "report_only",
       "path": "docs/canon/frontend/FRONTEND_SURFACE_COVERAGE_MAP.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.yaml",
       "reason": "supporting control-plane file",
       "superseded_by": "",
       "supersedes": ""
@@ -180,6 +201,13 @@
     },
     {
       "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_DESIGN_FINAL_FORM_LOCK_REPAIR_05.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
       "path": "docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md",
       "reason": "supporting control-plane file",
       "superseded_by": "",
@@ -258,6 +286,20 @@
     {
       "classification": "report_only",
       "path": "docs/canon/frontend/VISUAL_SOURCE_LINKS.yaml",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.yaml",
       "reason": "supporting control-plane file",
       "superseded_by": "",
       "supersedes": ""
@@ -2112,6 +2154,20 @@
     },
     {
       "classification": "report_only",
+      "path": "docs/canon/frontend/trace/FINAL_FORM_LOCK_REPAIR_05_AUTHORITY_STATUS.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/FINAL_FORM_LOCK_REPAIR_05_GAP_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
       "path": "docs/canon/frontend/trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md",
       "reason": "trace output or supporting ledger",
       "superseded_by": "",
@@ -2574,6 +2630,13 @@
     },
     {
       "classification": "report_only",
+      "path": "build/reports/active-authority-residue-zero.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
       "path": "build/reports/adr-check.json",
       "reason": "validation output only",
       "superseded_by": "",
@@ -2624,6 +2687,13 @@
     {
       "classification": "report_only",
       "path": "build/reports/component-contract-check.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/dashboard-conflict-authority.json",
       "reason": "validation output only",
       "superseded_by": "",
       "supersedes": ""
@@ -2687,6 +2757,13 @@
     {
       "classification": "report_only",
       "path": "build/reports/design-token-generation.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/faang-red-team-evidence.json",
       "reason": "validation output only",
       "superseded_by": "",
       "supersedes": ""
@@ -2784,6 +2861,13 @@
     },
     {
       "classification": "report_only",
+      "path": "build/reports/mature-app-surface-universe-complete.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
       "path": "build/reports/native-iphone-interaction-grammar.json",
       "reason": "validation output only",
       "superseded_by": "",
@@ -2806,6 +2890,13 @@
     {
       "classification": "report_only",
       "path": "build/reports/source-proof-receipt-coverage.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/source-provenance-batch-linkage-complete.json",
       "reason": "validation output only",
       "superseded_by": "",
       "supersedes": ""
@@ -2995,6 +3086,34 @@
     {
       "classification": "report_only",
       "path": "build/reports/visual-design-authority-lock-prep-03-install.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-design-final-form-lock-repair-05-install.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-design-final-form-lock-repair-05.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-design-final-form-lock-repair-05.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-design-lock-repair-05-final-gate.json",
       "reason": "validation output only",
       "superseded_by": "",
       "supersedes": ""

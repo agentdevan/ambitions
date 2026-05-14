@@ -19,17 +19,15 @@ Show the user where trust changes and how to correct it.
 
 ## Allowed Surfaces
 
-- Today
-- Goals
-- Capture
-- Time
-- You
+- the five active top-level destinations
+- their compatible drill-down seams
+- the shared shell when trust must be visible
 
 ## Forbidden Surfaces
 
-- decorative divider
+- ornamental separator with no state meaning
 - generic card border
-- hidden model-confidence cue
+- hidden confidence cue
 
 ## State Variants
 
@@ -60,9 +58,9 @@ The seam should reduce uncertainty, not add another choice.
 
 ## Forbidden Use
 
-- decorative divider
+- ornamental separator
 - generic card border
-- hidden model-confidence cue
+- hidden confidence cue
 
 ## Visual Ingredients
 
@@ -92,4 +90,4 @@ The seam should reduce uncertainty, not add another choice.
 
 ## Source Linkage
 
-The seam is source-present across Today, Goals, Capture, Time, and You.
+The seam is source-present across the active destinations and should always point to an explicit correction path.

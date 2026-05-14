@@ -4,28 +4,21 @@ Status: Active linkage ledger for the frontend canon
 
 ## Summary
 
-- Priority recipes linked: complete for the six root surfaces
-- Weak links: none
-- Missing links: none for priority entries
-- Intended-only entries: accepted when the live source is not yet final-state
+- Priority recipes are linked for the six root seams, while the broader mature universe is now tracked in the provenance layer.
+- Weak links are not being invented where the repo only proves compatibility seams.
+- Non-priority entries remain honest as intended-only until stronger source evidence exists.
 
-## Priority Surfaces Linked
+## What This Ledger Covers
 
-- Global App Shell
-- Today / Reality Meridian
-- Goals / Constellation Atlas
-- Capture / Atmosphere Composer
-- Time / LifeShape Field
-- You / User System Profile
+- root source linkage
+- compatibility seams
+- supported-by-source navigation paths
 
-## Weak Links
+## What This Ledger Does Not Cover
 
-- None. Time is source-linked to the current `Plan` compatibility seam as source-location reality, not active IA language or final route proof.
-
-## Missing Links
-
-- None for priority entries.
-- Non-priority recipes are manifest-represented as `intended_only` unless live source evidence supports a stronger linkage.
+- complete mature universe inventory
+- batch provenance for every recipe row
+- implementation proof
 
 ## Source / Canon Mismatch Risks
 
@@ -35,7 +28,7 @@ Status: Active linkage ledger for the frontend canon
 
 ## Active Remediation Priorities
 
-1. Keep priority surfaces linked.
-2. Keep intended-only entries honest until source evidence supports stronger linkage.
-3. Expand source linkage only when the live source is actually clearer.
+1. Keep the six root seams explicitly linked.
+2. Keep intended-only entries honest until stronger source evidence exists.
+3. Use the mature provenance layer for all-159 lineage.
 4. Keep compatibility seams visible without promoting them to active IA language.

@@ -9,7 +9,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 - active_authority: 246
 - supporting_authority: 9
 - generated_output: 3
-- report_only: 180
+- report_only: 197
 - historical: 1
 - obsolete: 0
 - archive_candidate: 15
@@ -28,8 +28,11 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | docs/truth/RELEASE_TRUTH.md | active_authority | current repo truth | — | — |
 | docs/canon/frontend/ACTIVE_IA_AND_SURFACE_MAP.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md | report_only | supporting control-plane file | — | — |
+| docs/canon/frontend/DESIGN_SYSTEM_TO_VISUAL_ENCYCLOPEDIA_BRIDGE.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/FRONTEND_AUTHORITY_INDEX.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/FRONTEND_SURFACE_COVERAGE_MAP.md | report_only | supporting control-plane file | — | — |
+| docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.md | report_only | supporting control-plane file | — | — |
+| docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.yaml | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/MRI_HBI_FRONTEND_INTEGRATION_MAP.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/OBSOLETE_AND_EXCLUDED_VISUAL_REFERENCE_LEDGER.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/PLANNED_TRAIN_FRONTEND_INTEGRATION_MAP.md | report_only | supporting control-plane file | — | — |
@@ -43,6 +46,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | docs/canon/frontend/VISUAL_ANTI_SLOP_RULES.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/VISUAL_DECISION_RECORDS.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/VISUAL_DESIGN_AUTHORITY_LOCK_PREP_03.md | report_only | supporting control-plane file | — | — |
+| docs/canon/frontend/VISUAL_DESIGN_FINAL_FORM_LOCK_REPAIR_05.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/VISUAL_DIRECTION_CHANGE_PROTOCOL.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md | report_only | supporting control-plane file | — | — |
@@ -55,6 +59,8 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | docs/canon/frontend/VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/VISUAL_REFERENCE_LEDGER.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/VISUAL_SOURCE_LINKS.yaml | report_only | supporting control-plane file | — | — |
+| docs/canon/frontend/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.md | report_only | supporting control-plane file | — | — |
+| docs/canon/frontend/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.yaml | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/VISUAL_VOCABULARY_BOUNDARY.md | report_only | supporting control-plane file | — | — |
 | docs/canon/frontend/behavior/ACCESSIBILITY_AND_ADHD_LAWS.md | active_authority | active frontend canon | — | — |
 | docs/canon/frontend/behavior/ADHD_USABILITY_RULES.md | active_authority | active frontend canon | — | — |
@@ -319,6 +325,8 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | docs/canon/frontend/trace/DESIGN_TO_SOURCE_TRACEABILITY.md | report_only | trace output or supporting ledger | — | — |
 | docs/canon/frontend/trace/DESIGN_TO_SOURCE_TRACEABILITY.yaml | supporting_authority | current visual control plane | — | — |
 | docs/canon/frontend/trace/FAANG_FLAGSHIP_RED_TEAM_REVIEW.md | report_only | trace output or supporting ledger | — | — |
+| docs/canon/frontend/trace/FINAL_FORM_LOCK_REPAIR_05_AUTHORITY_STATUS.md | report_only | trace output or supporting ledger | — | — |
+| docs/canon/frontend/trace/FINAL_FORM_LOCK_REPAIR_05_GAP_LEDGER.md | report_only | trace output or supporting ledger | — | — |
 | docs/canon/frontend/trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md | report_only | trace output or supporting ledger | — | — |
 | docs/canon/frontend/trace/INTENDED_STATE_COVERAGE_MATRIX.md | report_only | trace output or supporting ledger | — | — |
 | docs/canon/frontend/trace/LOCAL_FIRST_RUNTIME_TRUST_MATRIX.yaml | report_only | trace output or supporting ledger | — | — |
@@ -385,6 +393,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | Sources/Theme/AmbitionTokens.generated.swift | generated_output | generated from DesignTokens | — | — |
 | Sources/Theme/PanelDensitySize.swift | report_only | supporting control-plane file | — | — |
 | build/reports/accessibility-contract.json | report_only | validation output only | — | — |
+| build/reports/active-authority-residue-zero.json | report_only | validation output only | — | — |
 | build/reports/adr-check.json | report_only | validation output only | — | — |
 | build/reports/ambitions-codex-os-dry-run-002.json | report_only | validation output only | — | — |
 | build/reports/ambitions-codex-os-dry-run-003.json | report_only | validation output only | — | — |
@@ -393,6 +402,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | build/reports/authority-ledger.json | report_only | validation output only | — | — |
 | build/reports/authority-supersession.json | report_only | validation output only | — | — |
 | build/reports/component-contract-check.json | report_only | validation output only | — | — |
+| build/reports/dashboard-conflict-authority.json | report_only | validation output only | — | — |
 | build/reports/dependency-boundary.json | report_only | validation output only | — | — |
 | build/reports/design-system-15-systems-dashboard.json | report_only | validation output only | — | — |
 | build/reports/design-system-15-systems-dashboard.md | report_only | validation output only | — | — |
@@ -402,6 +412,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | build/reports/design-token-contract.json | report_only | validation output only | — | — |
 | build/reports/design-token-drift.json | report_only | validation output only | — | — |
 | build/reports/design-token-generation.json | report_only | validation output only | — | — |
+| build/reports/faang-red-team-evidence.json | report_only | validation output only | — | — |
 | build/reports/faang-red-team-review.json | report_only | validation output only | — | — |
 | build/reports/feature-service-boundary.json | report_only | validation output only | — | — |
 | build/reports/frontend-architecture-atlas-visual-encyclopedia-001.json | report_only | validation output only | — | — |
@@ -415,10 +426,12 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | build/reports/frontend-visual-recipe-canon-finalization-001.json | report_only | validation output only | — | — |
 | build/reports/frontend-visual-recipe-canon-finalization-001.md | report_only | validation output only | — | — |
 | build/reports/local-first-runtime-trust.json | report_only | validation output only | — | — |
+| build/reports/mature-app-surface-universe-complete.json | report_only | validation output only | — | — |
 | build/reports/native-iphone-interaction-grammar.json | report_only | validation output only | — | — |
 | build/reports/performance-budget.json | report_only | validation output only | — | — |
 | build/reports/preview-matrix.json | report_only | validation output only | — | — |
 | build/reports/source-proof-receipt-coverage.json | report_only | validation output only | — | — |
+| build/reports/source-provenance-batch-linkage-complete.json | report_only | validation output only | — | — |
 | build/reports/state-machine-contract.json | report_only | validation output only | — | — |
 | build/reports/surface-scenario-coverage.json | report_only | validation output only | — | — |
 | build/reports/visual-100-accessibility-adhd.json | report_only | validation output only | — | — |
@@ -446,6 +459,10 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | build/reports/visual-100-vocabulary-full-corpus.json | report_only | validation output only | — | — |
 | build/reports/visual-design-authority-final-form-04.md | report_only | validation output only | — | — |
 | build/reports/visual-design-authority-lock-prep-03-install.md | report_only | validation output only | — | — |
+| build/reports/visual-design-final-form-lock-repair-05-install.md | report_only | validation output only | — | — |
+| build/reports/visual-design-final-form-lock-repair-05.json | report_only | validation output only | — | — |
+| build/reports/visual-design-final-form-lock-repair-05.md | report_only | validation output only | — | — |
+| build/reports/visual-design-lock-repair-05-final-gate.json | report_only | validation output only | — | — |
 | build/reports/visual-encyclopedia-100-final-proof-authority-04.md | report_only | validation output only | — | — |
 | build/reports/visual-encyclopedia-100-perfection-install-001.md | report_only | validation output only | — | — |
 | build/reports/visual-encyclopedia-dashboard.json | report_only | validation output only | — | — |

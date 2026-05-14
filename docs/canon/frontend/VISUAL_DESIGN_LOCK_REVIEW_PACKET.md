@@ -2,58 +2,46 @@
 
 Status: GREEN
 
-Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
+Batch: `VISUAL-DESIGN-FINAL-FORM-LOCK-REPAIR-05`
 
 ## Decision
 
 - Recommended lock decision: `lock_candidate`
 - Implementation proof boundary: not claimed
-- Existing visual proof report status: `green`
+- Final authority status: `green`
+- Token authority status: `green`
 
 ## Summary
 
-- Total mature surfaces: 29
-- Surfaces with complete recipes: 29
-- Surfaces missing recipes: 0
-- Surfaces with source-linked status: 5
-- Surfaces with intended-only status: 24
-- Surfaces missing explicit planned batch: 0
-- Surfaces missing source truth: 0
-- Surfaces missing scenario coverage: 0
-- Surfaces missing interaction grammar: 0
-- Tokens with explicit debt: 0
-- No-orphan graph active orphans: 0
-
-## Recommended Area Decisions
-
-| Area | Decision | Rationale |
-| --- | --- | --- |
-| Mature App Store Surface Universe | lock_candidate | P0 surfaces have final-form scenario coverage and native interaction grammar. |
-| Recipe Provenance / Batch Linkage | lock_candidate | Source truth and planned batch sources resolve through the visual item registry where the priority registry is compact. |
-| Design Token Authority | lock_candidate | Token source truth is preserved and completeness metadata is populated. |
-| No-Orphan Graph | lock_candidate | Current active nodes are connected; any orphan would be hard red. |
-| Authority Supersession | lock_candidate | Historical and archive candidates are classified explicitly, with no ambiguous active authority path. |
+- Total mature surfaces: 159
+- Total non-surface recipe references: 0
+- Total inventory recipes: 159
+- All-159 provenance status: green
+- Mature surfaces missing recipe: 0
+- Mature surfaces missing source/provenance: 0
+- Mature surfaces missing planned implementation batch: 0
+- Mature surfaces missing token mapping: 0
+- Mature surfaces missing scenario coverage: 130
+- Mature surfaces missing interaction grammar: 130
+- Duplicate/generic/residue status: green
 
 ## P0 Blockers
 
 - None.
 
-
-
 ## P1 Debts
 
-- Intended-only implementation status remains explicit where source implementation proof is outside this docs/tooling authority batch.
-- Historical and archive-candidate material remains classified in the supersession map rather than deleted.
+- 47 planned-canon candidate surfaces remain explicit
 
 ## P2 Polish
 
-- Tighten family-level wording in historical supersession rows if the repo later settles more old canon.
-- Expand final visual proof once implementation evidence exists.
+- Existing scenario and interaction matrices still cover the 29 P0 surfaces only.
+- The mature universe now makes the broader 159-entry control plane visible.
 
 ## User Direction Needed
 
-- Whether intended-only implementation seams should be upgraded in later SwiftUI implementation batches.
-- Whether historical/archive-candidate authority material should be retained, quarantined, or pruned in a separate cleanup batch.
+- Whether candidate surfaces should be promoted into implementation batches in a later lane.
+- Whether the planned-canon rows should be retired, retained, or re-scoped after implementation proof exists.
 
 ## Implementation Proof Boundary
 

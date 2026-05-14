@@ -33,17 +33,16 @@ Represent evidence in a way that keeps proof attached to the state that created 
 
 ## Allowed Surfaces
 
-- Today
-- Goals
-- Capture
-- Time
-- You
+- the active five destinations only
+- shared shell proof seams
+- bounded drill-down surfaces that preserve origin
 
 ## Forbidden Surfaces
 
 - scoreboards
 - streak widgets
 - leaderboard chrome
+- decorative badges with no evidence role
 
 ## State Variants
 

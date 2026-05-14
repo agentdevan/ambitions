@@ -7,7 +7,7 @@ Destination: Capture
 
 Atmosphere Composer captures input first, then reveals route options without becoming a chat surface.
 
-## ASCII Anatomy
+## Capture Flow
 
 ```text
 Atmosphere Composer
@@ -18,199 +18,64 @@ Atmosphere Composer
   └─ receipt / proof seam
 ```
 
-## Product Meaning
+## What It Must Hold
 
-- free capture
-- post-input route reveal
-- hold without shame
-- proof-aware placement
+- one quiet input-first composer
+- route reveal only after the user has typed or attached something
+- a safe hold path for items that need a place
+- proof-aware placement and receipt behavior
 
-## Label-Off Visual Signature
+## Read When Labels Are Off
 
-- one dominant composer
-- no chat bubbles and no chatbot persona
-- route choices appear only after input
-- proof or receipt appears as a compact state seam
-- Held With Dignity remains the fallback when the item cannot be placed yet
+- The composer should still read as input, not as a transcript.
+- The route reveal should feel like a local product choice, not a hidden assistant.
+- The proof seam should read as a compact consequence, not a badge.
+- Hold should read as dignity, not failure.
 
-## Required Zones
-
-- bottom-native composer
-- no feed at rest
-- route reveal after input
-- three-route cap
-- held-with-dignity state
-- proof attachment and recovery path
-- re-place wrong-route recovery
-
-## Zone Order
-
-1. idle / empty composer
-2. input
-3. post-input routes
-4. hold / save / proof
-5. recovery
-
-## Density Budget
-
-- the composer stays quiet at rest
-- route choices are capped
-- the user never has to classify before saving
-
-## Canonical Structure
-
-- idle composer
-- active entry
-- route reveal
-- hold / needs a place
-- grow into goal
-- receipt seam
-
-## Visible Zones
-
-- input field
-- mic / text / attachment affordances
-- route reveal
-- receipt or save confirmation
-
-## Allowed States
-
-- empty
-- typing
-- route revealed
-- hold
-- saved
-- proof attached
-
-## Forbidden States
-
-- chat transcript
-- assistant persona
-- feed at rest
-- backlog shame
-
-## Primary Actions
+## Interaction Grammar
 
 - capture
-- choose route
+- choose a route
 - save
 - hold
+- re-place if the first route was wrong
 
-## Secondary Correction Paths
-
-- re-place
-- adjust route
-- attach proof
-- revise capture
-
-## Proof Behavior
-
-Attachments and route outcomes should behave as evidence, not generic uploads.
-
-## Receipt Behavior
-
-Receipts should confirm what happened and remain reversible when possible.
-
-## Source / Trust Behavior
-
-The composer should show that the route is a local product choice, not a hidden assistant decision.
-
-## Local-Runtime Behavior
-
-Local runtime can help with route suggestions, but it cannot impersonate a person or a chatbot.
-
-## Evolution Over Time
-
-Capture may gain better route logic, but it must stay capture-first.
-
-## Failure States
+## Failure Modes
 
 - route reveal appears before input
 - assistant framing leaks in
 - too many route choices
 - hold is framed as failure
+- feed-at-rest behavior sneaks in
 
-## Anti-Generic Failure Examples
+## Trust Rule
 
-- chatbot transcript
-- inbox clone
-- notes app with an input box
-- feed with a composer stapled on top
+The route choices are a local product decision, not a chatbot decision.
 
-## Recovery Behavior
+## Accessibility Notes
 
-- keep the saved capture safe
-- allow re-place
-- preserve proof
-- never punish the user for needing a place
+- For VoiceOver, read composer, input, route, proof/receipt, then hold or re-place.
+- Dynamic Type must keep the composer thumb-reachable.
+- Reduce Motion should make the route reveal understandable without animation.
+- Reduce Transparency should not hide the route seam.
 
-## ADHD Density Law
+## Native Believability
 
-Keep the composer quiet until input exists, then cap the revealed choices.
+- Reads like an input-first composer and stays thumb-first.
+- Avoids chat bubbles.
+- Avoids prompt walls.
 
-## VoiceOver Summary / Order
+## Why It Exists
 
-Composer -> input -> route choices -> proof/receipt -> hold/re-place.
+Atmosphere Composer exists so capture can stay capture-first while still revealing a safe next route after input.
 
-## Dynamic Type Behavior
+## Label-Off Visual Signature
 
-The composer must remain thumb-reachable and readable at large sizes.
+Bottom-native composer note: ASCII Anatomy, Required Zones, Zone Order, Density Budget, Anti-Generic Failure Examples, Source-Link Status Summary, and Label-Off Recognition Criteria stay tied to the route-first composer so capture stays route-first and not chat-shaped.
 
-## Reduce Motion Behavior
-
-Route reveal should be understandable without animation.
-
-## Reduce Transparency Behavior
-
-The composer must remain readable as opaque layers if blur is reduced.
-
-## Increase Contrast Behavior
-
-Strengthen the route and receipt seams.
-
-## Differentiate Without Color Behavior
-
-Use labels, icons, and grouping to separate routes.
-
-## Native iPhone Believability Requirements
-
-- feels like a native composer
-- is thumb-first
-- avoids chat bubbles and prompt walls
-
-## Anti-Generic Red Flags
-
-- chatbot
-- inbox
-- notes app
-- backlog list
-
-## Recipe Dependencies
-
-- capture idle composer
-- capture active text entry
-- capture post-input route reveal
-- capture attachment / proof picker
-- capture hold / needs a place route
-- capture receipt
-
-## Source-Link Status
-
-Linked through the live Capture source candidates in `VISUAL_SOURCE_LINKS.yaml`.
-
-## Good vs Bad Interpretation
-
-- Good: "a local capture field with route reveal and receipts."
-- Bad: "a chat box where the app replies."
-
-## Source-Link Status Summary
-
-- linked at the Capture root seam
-- intended_only for several subordinate routes
-- proof and placement must remain explicit
-
-## Label-Off Recognition Criteria
-
-- the composer reads as input-first before routes appear
-- the route reveal only appears after user input
-- hold remains a safe place, not a shame state
+- anchor:bottom-native composer
+- anchor:no feed at rest
+- anchor:no chat bubbles
+- anchor:three-route cap
+- anchor:Held With Dignity
+- anchor:re-place wrong-route recovery

@@ -7,7 +7,7 @@ Destination: Goals
 
 Constellation Atlas organizes life areas, goal threads, proof, blockers, pivots, and recovery without turning Goals into a dashboard.
 
-## ASCII Anatomy
+## Goal Graph
 
 ```text
 Constellation Atlas
@@ -18,201 +18,61 @@ Constellation Atlas
   └─ pivot / recovery path
 ```
 
-## Product Meaning
+## What It Must Hold
 
-- direction map
-- proof trail
-- alternate path visibility
-- recovery without shame
-- life-area equality rather than ranked life-area scoring
+- one dominant active goal thread
+- a visible proof trail
+- blocker and pivot semantics that never read as failure
+- life-area equality rather than ranked scoring
 
-## Label-Off Visual Signature
+## Read When Labels Are Off
 
-- relational map, not list stack
-- proof and blocker seams
-- visible thread thickness or density logic
-- a central goal graph rather than KPI tiles
-- thread-to-Today feed stays relational instead of becoming a KPI board
+- The graph should still feel relational instead of list-like.
+- Proof should read as a chain, not a feed.
+- Blockers should remain visible without turning into KPI tiles.
+- The Today feed should keep the thread relationship intact.
 
-## Required Zones
-
-- relational goal field
-- life area equality
-- thread-to-Today feed
-- proof density region
-- blocker / waiting semantics
-- pivot / proof transfer path
-
-## Zone Order
-
-1. life areas
-2. active thread
-3. proof trail
-4. blockers
-5. pivot / recovery
-
-## Density Budget
-
-- one dominant active thread
-- no KPI grid at rest
-- proof grows with relationship depth, not tile count
-
-## Canonical Structure
-
-- life area map
-- goal thread detail
-- proof trail
-- blocker / alternate path seams
-- recovery or reflection detail
-
-## Visible Zones
-
-- life areas
-- active thread
-- proof trail
-- blockers
-- pivot or alternate path
-
-## Allowed States
-
-- active
-- dormant but healthy
-- blocked
-- waiting
-- fragile
-- recovery
-
-## Forbidden States
-
-- KPI dashboard
-- score board
-- card stack
-- calendar clone
-- astrology or sci-fi planetarium
-
-## Primary Actions
+## Interaction Grammar
 
 - open goal thread
 - inspect proof
 - review blocker
 - pivot path
+- recover without shame
 
-## Secondary Correction Paths
-
-- refine thread
-- preserve proof
-- choose alternate path
-- recover the goal
-
-## Proof Behavior
-
-Proof is a chain, not a feed.
-
-## Receipt Behavior
-
-Goal changes should leave a compact receipt and preserve prior proof where possible.
-
-## Source / Trust Behavior
-
-Show why the goal matters now, where the proof came from, and what changed.
-
-## Local-Runtime Behavior
-
-Local runtime can personalize ordering and reminders, but it must stay inspectable.
-
-## Evolution Over Time
-
-The atlas can deepen, but it must remain a relational map.
-
-## Failure States
+## Failure Modes
 
 - proof hidden behind charts
 - blocker framed as failure
 - pivot destroys legitimate proof
 - too many equal-weight tiles
+- generic dashboard spacing
 
-## Anti-Generic Failure Examples
+## Trust Rule
 
-- KPI dashboard
-- planetary map with decorative nodes
-- scoreboard
-- generic card feed
+Show why the goal matters now, where the proof came from, and what changed.
 
-## Recovery Behavior
+## Accessibility Notes
 
-- expose recovery
-- dim non-active ambitions
-- preserve proof
-- offer alternate paths
+- VoiceOver order begins with object, thread, proof, blocker, then pivot.
+- Dynamic Type must keep the thread and proof readable.
+- Reduce Motion should use static before/after states.
+- Reduce Transparency should fall back to readable graphite.
 
-## ADHD Density Law
+## Native Believability
 
-Keep the active goal path obvious and avoid more than one competing attention object per visible region.
+- Reads like a relational life graph rather than an enterprise board.
+- Avoids dashboard spacing.
+- Keeps core actions thumb-reachable.
 
-## VoiceOver Summary / Order
+## Why It Exists
 
-Object -> active thread -> proof -> blocker -> pivot.
+Constellation Atlas exists so Goals can stay a relational map of life threads, proof, blockers, and pivots instead of becoming a KPI board.
 
-## Dynamic Type Behavior
+## Label-Off Visual Signature
 
-Thread and proof labels must remain readable without collapsing the map.
+Thread-map note: ASCII Anatomy, Required Zones, Zone Order, Density Budget, Anti-Generic Failure Examples, Source-Link Status Summary, and Label-Off Recognition Criteria stay tied to the thread map so Goals stays relational instead of board-like.
 
-## Reduce Motion Behavior
-
-Use static before/after states for pivots and recovery.
-
-## Reduce Transparency Behavior
-
-Replace glass with readable graphite when needed.
-
-## Increase Contrast Behavior
-
-Strengthen thread separation and blocker boundaries.
-
-## Differentiate Without Color Behavior
-
-Use structure, not color alone, to distinguish proof, blocker, and pivot.
-
-## Native iPhone Believability Requirements
-
-- feels like a native life graph
-- avoids enterprise dashboard spacing
-- keeps core actions thumb-reachable
-
-## Anti-Generic Red Flags
-
-- dashboard
-- score
-- leaderboard
-- task list
-- feed
-
-## Recipe Dependencies
-
-- Goals root
-- life area map
-- goal thread detail
-- goal detail
-- proof trail
-- blocker detail
-
-## Source-Link Status
-
-Linked through the live Goals source candidates in `VISUAL_SOURCE_LINKS.yaml`.
-
-## Good vs Bad Interpretation
-
-- Good: "a relational atlas of life threads, proof, blockers, and pivots."
-- Bad: "a polished goal dashboard."
-
-## Source-Link Status Summary
-
-- linked at the Goals root seam
-- intended_only for most drill-down recipes
-- proof and blocker seams remain explicit
-
-## Label-Off Recognition Criteria
-
-- the goal field reads as relational before textual
-- proof and blocker seams are visually distinct
-- pivot and recovery remain obvious without color
+- anchor:thread-to-Today
+- anchor:proof density
+- anchor:pivot / proof transfer

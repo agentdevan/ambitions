@@ -25,7 +25,7 @@ The batch must produce or repair:
 - complete mature App Store surface universe at `docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.yaml` and `.md`
 - all-159 recipe/source/provenance/batch linkage at `docs/canon/frontend/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.yaml` and `.md`
 - design-system-to-Visual-Encyclopedia bridge at `docs/canon/frontend/DESIGN_SYSTEM_TO_VISUAL_ENCYCLOPEDIA_BRIDGE.md`
-- canonical dashboard authority status that resolves old Visual Encyclopedia Yellow vs final-form Green conflicts
+- canonical authority status that resolves old Visual Encyclopedia Yellow vs final-form Green conflicts
 - active authority residue zero gate
 - evidence-backed FAANG red-team review
 - repaired lock review packet whose decision matches the evidence

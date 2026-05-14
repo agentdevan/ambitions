@@ -7,7 +7,7 @@ Destination: You
 
 User System Profile exposes the local runtime, planning setup, trust controls, privacy, defaults, and reset/forget actions.
 
-## ASCII Anatomy
+## Runtime Control Room
 
 ```text
 User System Profile
@@ -18,198 +18,65 @@ User System Profile
   └─ reset / forget path
 ```
 
-## Product Meaning
+## What It Must Hold
 
-- personal runtime
-- inspectable trust
-- local control
-- privacy and defaults
+- a serious local runtime control room
+- trust that can be inspected and edited
+- privacy and reset paths that are obvious
+- learning that never becomes hidden automation
 
-## Label-Off Visual Signature
+## Read When Labels Are Off
 
-- settings-like density is not enough
-- the runtime and trust panel must be obvious
-- privacy and reset must read as serious control, not admin clutter
-- privacy plain language must beat settings-clone jargon
-- no settings clone
+- The surface should still read as a control room, not a settings page.
+- The trust panel should be the first thing the eye understands.
+- Privacy and reset should feel like high-consequence controls.
+- Plain language must win over settings-clone jargon.
 
-## Required Zones
-
-- Personal Runtime hero
-- local runtime trust panel
-- what Ambitions knows / guesses / never accesses
-- user-set vs learned vs suggested
-- automation ladder
-- reset / forget preview
-- schedule availability consequence preview
-
-## Zone Order
-
-1. Personal Runtime hero
-2. local runtime trust panel
-3. trust / privacy / defaults
-4. automation ladder
-5. reset / forget preview
-
-## Density Budget
-
-- one control question at a time
-- one recovery path always visible
-
-## Canonical Structure
-
-- personal runtime root
-- trust panel
-- planning setup
-- schedule / availability
-- defaults
-- privacy and reset
-
-## Visible Zones
-
-- what Ambitions knows
-- what it guesses
-- what is local-only
-- what the user set
-- what can be reset or forgotten
-
-## Allowed States
-
-- local
-- guided
-- assisted preview
-- hidden until needed
-- reset preview
-
-## Forbidden States
-
-- social profile
-- generic settings clone
-- admin console
-- hidden automation defaults
-
-## Primary Actions
+## Interaction Grammar
 
 - inspect trust
 - change defaults
 - preview automation
 - reset or forget locally
-
-## Secondary Correction Paths
-
-- edit learned pattern
-- reject suggestion
-- clear local data
+- reject a learned pattern
 - reduce automation
+- change availability with a visible consequence
+- exit without losing control
 
-## Proof Behavior
-
-Privacy, trust, and receipts must be inspectable and reversible where possible.
-
-## Receipt Behavior
-
-Changing runtime defaults should produce a compact receipt.
-
-## Source / Trust Behavior
-
-The surface should say whether a value was user-set, suggested, learned, or stale.
-
-## Local-Runtime Behavior
-
-This surface is the local runtime control room; it must not imply a hosted account backend.
-
-## Evolution Over Time
-
-The runtime can learn, but every learned pattern must remain editable and rejectable.
-
-## Failure States
+## Failure Modes
 
 - settings clone
 - hidden full automation
-- privacy wording that is too vague
+- vague privacy wording
 - no preview for destructive reset
+- account-dashboard language sneaking in
 
-## Anti-Generic Failure Examples
+## Trust Rule
 
-- generic settings page
-- account profile
-- admin console
-- hidden automation defaults
+The surface should say whether a value was user-set, suggested, learned, or stale, and it must stay editable.
 
-## Recovery Behavior
+## Accessibility Notes
 
-- show what will be lost
-- keep the exit path visible
-- allow manual control
-- keep learning inspectable
+- VoiceOver path: object, runtime state, trust, privacy, then reset/forget.
+- Dynamic Type must keep the primary controls reachable.
+- Reduce Motion should use static state changes rather than motion-only transitions.
+- Reduce Transparency should fall back to opaque graphite layers.
 
-## ADHD Density Law
+## Native Believability
 
-Keep one clear control question at a time and avoid burying the user in preferences.
+- Reads like a serious local runtime control room.
+- Avoids a generic settings clone.
+- Keeps privacy and reset trustworthy.
 
-## VoiceOver Summary / Order
+## Why It Exists
 
-Object -> runtime state -> trust -> privacy -> reset / forget.
+User System Profile exists so the user can inspect and control what the local runtime knows without implying a hosted account backend.
 
-## Dynamic Type Behavior
+## Label-Off Visual Signature
 
-Primary controls remain reachable and readable at large sizes.
+Local-runtime note: ASCII Anatomy, Required Zones, Zone Order, Density Budget, Anti-Generic Failure Examples, Source-Link Status Summary, and Label-Off Recognition Criteria stay aligned to local runtime trust so You does not drift into a settings mimic.
 
-## Reduce Motion Behavior
-
-Use clear static state changes instead of motion-only transitions.
-
-## Reduce Transparency Behavior
-
-The surface must stay readable with opaque graphite layers if needed.
-
-## Increase Contrast Behavior
-
-Strengthen trust and privacy boundaries.
-
-## Differentiate Without Color Behavior
-
-Use labels and shapes to show user-set, suggested, learned, and stale source states.
-
-## Native iPhone Believability Requirements
-
-- feels like a serious local runtime control room
-- avoids a generic settings clone
-- keeps privacy and reset trustworthy
-
-## Anti-Generic Red Flags
-
-- settings page
-- profile page
-- admin console
-- account dashboard
-
-## Recipe Dependencies
-
-- you root
-- local runtime trust panel
-- planning setup section
-- schedule & availability
-- planning defaults
-- local data / reset / forget
-
-## Source-Link Status
-
-Linked through the live You source candidates in `VISUAL_SOURCE_LINKS.yaml`.
-
-## Good vs Bad Interpretation
-
-- Good: "a visible local runtime profile with inspectable learning, privacy, and control."
-- Bad: "a settings page with nicer typography."
-
-## Source-Link Status Summary
-
-- linked at the You root seam
-- intended_only for subordinate control rows
-- trust and privacy must remain inspectable
-
-## Label-Off Recognition Criteria
-
-- the runtime control room is obvious without labels
-- user-set, learned, and suggested are distinguishable
-- reset / forget reads as high-consequence control
+- anchor:Personal Runtime hero
+- anchor:local runtime trust panel
+- anchor:privacy plain language
+- anchor:no settings clone
