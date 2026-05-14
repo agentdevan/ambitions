@@ -4,6 +4,7 @@
 .PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
 .PHONY: visual-compile visual-validators visual-linkage visual-prose visual-vocabulary visual-surface-graph visual-dashboard visual-all
 .PHONY: visual-100-priority visual-100-recipes visual-100-objects visual-100-source-debt visual-100-vocabulary visual-100-anti-generic visual-100-accessibility visual-100-proof-source-receipt visual-100-transaction visual-100-primitives visual-100-scorecards visual-100-prompt-authority visual-100-atlas visual-100-native visual-100-local-first visual-100-no-false-momentum visual-100-hidden-automation visual-100-false-green visual-100-gate visual-100-dashboard visual-100-all
+.PHONY: design-system-tokens design-system-token-check design-system-contracts design-system-preview-matrix design-system-accessibility-contracts design-system-state-machines design-system-dependencies design-system-feature-services design-system-adrs design-system-proof-receipts design-system-local-trust design-system-performance design-system-authority design-system-traceability design-system-dashboard design-system-15-all
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
@@ -362,3 +363,72 @@ visual-100-all:
 	$(MAKE) visual-100-false-green
 	$(MAKE) visual-100-gate
 	$(MAKE) visual-100-dashboard
+
+design-system-tokens:
+	python3 scripts/ambitions-token-generate.py
+
+design-system-token-check:
+	python3 scripts/ambitions-token-generate.py
+	python3 scripts/ambitions-token-contract-check.py
+	python3 scripts/ambitions-token-drift-check.py
+
+design-system-contracts:
+	python3 scripts/ambitions-component-contract-check.py
+
+design-system-preview-matrix:
+	python3 scripts/ambitions-preview-matrix-check.py
+
+design-system-accessibility-contracts:
+	python3 scripts/ambitions-accessibility-contract-check.py
+
+design-system-state-machines:
+	python3 scripts/ambitions-state-machine-contract-check.py
+
+design-system-dependencies:
+	python3 scripts/ambitions-dependency-boundary-check.py
+
+design-system-feature-services:
+	python3 scripts/ambitions-feature-service-boundary-check.py
+
+design-system-adrs:
+	python3 scripts/ambitions-adr-check.py
+
+design-system-proof-receipts:
+	python3 scripts/ambitions-source-proof-receipt-coverage-check.py
+
+design-system-local-trust:
+	python3 scripts/ambitions-local-first-runtime-trust-check.py
+
+design-system-performance:
+	python3 scripts/ambitions-performance-budget-check.py
+
+design-system-authority:
+	python3 scripts/ambitions-authority-ledger-check.py
+
+design-system-traceability:
+	python3 scripts/ambitions-design-to-source-trace-check.py
+
+design-system-dashboard:
+	python3 scripts/ambitions-design-system-dashboard.py
+
+design-system-15-all:
+	python3 scripts/ambitions-token-generate.py
+	python3 scripts/ambitions-token-contract-check.py
+	python3 scripts/ambitions-token-drift-check.py
+	python3 scripts/ambitions-component-contract-check.py
+	python3 scripts/ambitions-preview-matrix-check.py
+	python3 scripts/ambitions-visual-regression-readiness-check.py
+	python3 scripts/ambitions-accessibility-contract-check.py
+	python3 scripts/ambitions-state-machine-contract-check.py
+	python3 scripts/ambitions-dependency-boundary-check.py
+	python3 scripts/ambitions-feature-service-boundary-check.py
+	python3 scripts/ambitions-adr-check.py
+	python3 scripts/ambitions-source-proof-receipt-coverage-check.py
+	python3 scripts/ambitions-local-first-runtime-trust-check.py
+	python3 scripts/ambitions-performance-budget-check.py
+	python3 scripts/ambitions-authority-ledger-check.py
+	python3 scripts/ambitions-design-to-source-trace-check.py
+	python3 scripts/ambitions-design-system-dashboard.py
+	grep -R "StyleDictionary\\|design-tokens\\|DesignTokens" -n DesignTokens Sources docs scripts || true
+	grep -R "external.*LLM\\|cloud.*LLM" docs/canon/frontend docs/truth docs/architecture Sources Native -n || true
+	grep -R "Plan" docs/canon/frontend DesignTokens docs/architecture -n || true

@@ -1,0 +1,38 @@
+{
+  "category": "foundation",
+  "items": {
+    "celestialField": {
+      "hex": "#141A24",
+      "meaning": "deep field surface"
+    },
+    "graphiteInk": {
+      "hex": "#0F1114",
+      "meaning": "quiet luxury base surface"
+    },
+    "graphiteRise": {
+      "hex": "#171A1F",
+      "meaning": "resting elevated surface"
+    },
+    "luminousTrace": {
+      "hex": "#C8A96B",
+      "meaning": "live trace and receipt highlight"
+    },
+    "quietGlass": {
+      "hex": "#202838",
+      "meaning": "overlay surface with restraint"
+    },
+    "recoveryMint": {
+      "hex": "#8BC6A8",
+      "meaning": "recovery and repaired state"
+    },
+    "warmMist": {
+      "hex": "#F3EEE8",
+      "meaning": "light elevated canvas"
+    },
+    "warmPaper": {
+      "hex": "#E8E3DB",
+      "meaning": "light canvas"
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

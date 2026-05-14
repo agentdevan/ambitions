@@ -1,0 +1,19 @@
+{
+  "category": "object",
+  "items": {
+    "constellationAtlas": {
+      "primary_token": "goalThread",
+      "proof": "goal-thread and proof-gap traceability",
+      "states": [
+        "empty",
+        "active threads",
+        "proof gap",
+        "blocker",
+        "pivot",
+        "recovery"
+      ],
+      "surface": "Goals"
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

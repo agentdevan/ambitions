@@ -1,0 +1,58 @@
+# Local First Runtime Trust Matrix
+
+status: scaffold
+sections:
+  - name: Today
+    states:
+      - key: local_only
+        value: required
+      - key: inspectable
+        value: required
+      - key: source_authority
+        value: required
+      - key: no_hidden_automation
+        value: required
+  - name: Goals
+    states:
+      - key: local_only
+        value: required
+      - key: inspectable
+        value: required
+      - key: source_authority
+        value: required
+      - key: no_hidden_automation
+        value: required
+  - name: Capture
+    states:
+      - key: local_only
+        value: required
+      - key: inspectable
+        value: required
+      - key: source_authority
+        value: required
+      - key: no_hidden_automation
+        value: required
+  - name: Time
+    states:
+      - key: local_only
+        value: required
+      - key: inspectable
+        value: required
+      - key: source_authority
+        value: required
+      - key: no_hidden_automation
+        value: required
+  - name: You
+    states:
+      - key: local_only
+        value: required
+      - key: inspectable
+        value: required
+      - key: reset_forget_preview
+        value: required
+      - key: source_authority
+        value: required
+      - key: no_hidden_automation
+        value: required
+
+The matrix is a control-plane contract only.

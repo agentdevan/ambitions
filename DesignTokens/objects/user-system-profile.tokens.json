@@ -1,0 +1,18 @@
+{
+  "category": "object",
+  "items": {
+    "userSystemProfile": {
+      "primary_token": "youTrust",
+      "proof": "local learning and trust controls",
+      "states": [
+        "runtime trust",
+        "automation ladder",
+        "learned pattern",
+        "privacy",
+        "reset / forget preview"
+      ],
+      "surface": "You"
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

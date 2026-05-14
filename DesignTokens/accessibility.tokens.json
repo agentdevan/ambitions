@@ -1,0 +1,30 @@
+{
+  "category": "accessibility",
+  "items": {
+    "contrastFallback": {
+      "meaning": "contrast fallback",
+      "value": "elevated stroke"
+    },
+    "differentiationFallback": {
+      "meaning": "color-independent meaning",
+      "value": "icon plus label"
+    },
+    "minimumTapTarget": {
+      "meaning": "minimum tap target",
+      "value": 44
+    },
+    "reduceMotionFallback": {
+      "meaning": "motion fallback",
+      "value": "fade"
+    },
+    "textScaleFloor": {
+      "meaning": "supports dynamic type",
+      "value": "Large"
+    },
+    "voiceOverOrder": {
+      "meaning": "reading order",
+      "value": "surface, source, proof, receipt, action"
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

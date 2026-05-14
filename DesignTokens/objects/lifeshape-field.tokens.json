@@ -1,0 +1,20 @@
+{
+  "category": "object",
+  "items": {
+    "lifeshapeField": {
+      "primary_token": "timeCapacity",
+      "proof": "capacity and protected-time semantics",
+      "states": [
+        "day capacity",
+        "week pressure",
+        "month life shape",
+        "protected conflict",
+        "reflow preview",
+        "stale source",
+        "away / vacation"
+      ],
+      "surface": "Time"
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}
