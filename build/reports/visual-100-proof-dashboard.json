@@ -140,12 +140,17 @@
       "frontend/recipes/you/you_root_user_system_profile.md",
       "canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "canon/frontend/trace/PREVIEW_MATRIX.md",
+      "canon/frontend/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md",
       "docs/canon/frontend/SURFACE_RECIPE_INVENTORY.yaml",
       "docs/canon/frontend/VISUAL_ITEM_REGISTRY.yaml",
       "docs/canon/frontend/VISUAL_SOURCE_LINKS.yaml",
+      "canon/frontend/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml",
       "canon/frontend/trace/LOCAL_FIRST_RUNTIME_TRUST_MATRIX.yaml",
+      "canon/frontend/trace/NATIVE_IPHONE_INTERACTION_GRAMMAR_MATRIX.yaml",
       "canon/frontend/trace/PREVIEW_MATRIX.yaml",
-      "canon/frontend/trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml"
+      "canon/frontend/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
+      "canon/frontend/trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml",
+      "canon/frontend/trace/VISUAL_NO_ORPHAN_GRAPH.yaml"
     ],
     "local_first_trust": [],
     "native_believability": [],
@@ -347,10 +352,14 @@
       "canon/frontend/trace/SCREENSHOT_PROOF_MATRIX.md",
       "canon/frontend/trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md",
       "canon/frontend/trace/TRAIN_FAMILY_TO_PRIMITIVE_MATRIX.md",
+      "canon/frontend/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md",
       "docs/canon/frontend/SURFACE_RECIPE_INVENTORY.yaml",
       "docs/canon/frontend/VISUAL_ITEM_REGISTRY.yaml",
       "docs/canon/frontend/VISUAL_SOURCE_LINKS.yaml",
-      "canon/frontend/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.yaml"
+      "canon/frontend/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml",
+      "canon/frontend/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.yaml",
+      "canon/frontend/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
+      "canon/frontend/trace/VISUAL_NO_ORPHAN_GRAPH.yaml"
     ],
     "vocabulary": []
   }

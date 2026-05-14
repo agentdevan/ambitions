@@ -2,7 +2,7 @@
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
 .PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
-.PHONY: visual-compile visual-validators visual-linkage visual-prose visual-vocabulary visual-surface-graph visual-dashboard visual-all
+.PHONY: visual-compile visual-validators visual-linkage visual-prose visual-vocabulary visual-surface-graph visual-dashboard visual-all visual-design-authority-all visual-no-orphan-graph surface-scenario-coverage native-iphone-interaction-grammar design-token-completeness authority-supersession faang-red-team-review visual-design-final-form-all
 .PHONY: visual-100-priority visual-100-recipes visual-100-objects visual-100-source-debt visual-100-vocabulary visual-100-anti-generic visual-100-accessibility visual-100-proof-source-receipt visual-100-transaction visual-100-primitives visual-100-scorecards visual-100-prompt-authority visual-100-atlas visual-100-native visual-100-local-first visual-100-no-false-momentum visual-100-hidden-automation visual-100-false-green visual-100-gate visual-100-dashboard visual-100-all
 .PHONY: design-system-tokens design-system-token-check design-system-contracts design-system-preview-matrix design-system-accessibility-contracts design-system-state-machines design-system-dependencies design-system-feature-services design-system-adrs design-system-proof-receipts design-system-local-trust design-system-performance design-system-authority design-system-traceability design-system-dashboard design-system-15-all
 
@@ -274,6 +274,35 @@ visual-dashboard:
 visual-validators: visual-linkage visual-prose visual-vocabulary visual-surface-graph
 
 visual-all: visual-compile visual-validators visual-dashboard
+
+visual-design-authority-all: visual-100-all design-system-15-all
+
+visual-no-orphan-graph:
+	python3 scripts/ambitions-visual-no-orphan-graph-check.py
+
+surface-scenario-coverage:
+	python3 scripts/ambitions-surface-scenario-coverage-check.py
+
+native-iphone-interaction-grammar:
+	python3 scripts/ambitions-native-iphone-interaction-grammar-check.py
+
+design-token-completeness:
+	python3 scripts/ambitions-design-token-completeness-check.py
+
+authority-supersession:
+	python3 scripts/ambitions-authority-supersession-check.py
+
+faang-red-team-review:
+	python3 scripts/ambitions-faang-red-team-review-check.py
+
+visual-design-final-form-all:
+	$(MAKE) visual-design-authority-all
+	$(MAKE) visual-no-orphan-graph
+	$(MAKE) surface-scenario-coverage
+	$(MAKE) native-iphone-interaction-grammar
+	$(MAKE) design-token-completeness
+	$(MAKE) authority-supersession
+	$(MAKE) faang-red-team-review
 
 visual-100-priority:
 	python3 scripts/ambitions-visual-100-priority-registry-check.py
