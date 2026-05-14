@@ -81,7 +81,7 @@ if counts['medium_specificity']:
     msgs.append(f'coverage inventory still has medium specificity recipes: {counts["medium_specificity"]}')
 if counts['low_specificity']:
     msgs.append(f'coverage inventory still has low specificity recipes: {counts["low_specificity"]}')
-if counts['unresolved_direction'] != 5:
+if counts['unresolved_direction'] != 0:
     msgs.append(f'coverage inventory unresolved count mismatch: {counts["unresolved_direction"]}')
 
 coverage_lines = (BASE / 'FRONTEND_SURFACE_COVERAGE_MAP.md').read_text().splitlines() if (BASE / 'FRONTEND_SURFACE_COVERAGE_MAP.md').exists() else []

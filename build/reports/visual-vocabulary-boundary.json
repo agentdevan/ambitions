@@ -1,0 +1,20 @@
+{
+  "files_scanned": [
+    "docs/canon/frontend/README.md",
+    "docs/canon/frontend/FRONTEND_AUTHORITY_INDEX.md",
+    "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
+    "docs/canon/frontend/VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md",
+    "docs/canon/frontend/VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md",
+    "docs/canon/frontend/VISUAL_OBJECT_FIRST_REVIEW_RUBRIC.md",
+    "docs/canon/frontend/VISUAL_ACCESSIBILITY_ADHD_REQUIREMENTS.md",
+    "docs/canon/frontend/VISUAL_ANTI_SLOP_RULES.md",
+    "docs/canon/frontend/VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md",
+    "docs/canon/frontend/trace/VISUAL_CONFLICT_LEDGER.md",
+    "docs/canon/frontend/trace/VISUAL_SOURCE_LINKAGE_LEDGER.md",
+    "docs/canon/frontend/trace/VISUAL_SURFACE_GRAPH_LEDGER.md",
+    "docs/canon/frontend/gates/NORTH_STAR_100_ACCEPTANCE_GATE.md"
+  ],
+  "missing_boundary_terms": [],
+  "status": "green",
+  "violations": []
+}

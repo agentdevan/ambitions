@@ -2348,7 +2348,7 @@
   {
     "surface_id": "local_runtime_source_detail_from_today",
     "name": "Local Runtime Source Detail from Today",
-    "canon_status": "unresolved_direction",
+    "canon_status": "intended_canon",
     "destination": "Today",
     "surface_type": "drill_down",
     "hierarchy_level": "secondary_surface",
@@ -2362,11 +2362,11 @@
       "Closure System"
     ],
     "visible_regions": [
-      "orientation",
-      "primary object",
-      "source/proof line",
-      "action or disclosure",
-      "state recovery"
+      "runtime basis summary",
+      "source authority row",
+      "freshness and local-only mark",
+      "correction path",
+      "receipt/proof attachment"
     ],
     "recipe_file": "docs/canon/frontend/recipes/today/local_runtime_source_detail_from_today.md",
     "source_truth": [
@@ -2381,11 +2381,9 @@
       "prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md",
       "prompts/batches/MOAT-ALIGNMENT-01.md"
     ],
-    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented.",
+    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented. Green repair locks this as intended visual canon only; current source still does not prove implementation.",
     "direction_conflicts": [],
-    "open_direction_questions": [
-      "Exact runtime/source data projection remains unresolved; recipe locks visible intent only."
-    ],
+    "open_direction_questions": [],
     "forbidden_patterns": [
       "generic dashboard",
       "card-stack fallback",
@@ -2423,7 +2421,7 @@
       "planning depth and time-shape specificity",
       "specific planning detail and fit language"
     ],
-    "specificity_status": "unresolved_direction"
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "today_empty_state",
@@ -6410,7 +6408,7 @@
   {
     "surface_id": "review_pressure_surface",
     "name": "Review Pressure Surface",
-    "canon_status": "unresolved_direction",
+    "canon_status": "intended_canon",
     "destination": "Time",
     "surface_type": "drill_down",
     "hierarchy_level": "primary_surface",
@@ -6424,11 +6422,11 @@
       "Closure System"
     ],
     "visible_regions": [
-      "orientation",
-      "primary object",
-      "source/proof line",
-      "action or disclosure",
-      "state recovery"
+      "pressure source stack",
+      "protected-time integrity readout",
+      "capacity compression field",
+      "one relief option",
+      "source/freshness explanation"
     ],
     "recipe_file": "docs/canon/frontend/recipes/time/review_pressure_surface.md",
     "source_truth": [
@@ -6443,11 +6441,9 @@
       "prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md",
       "prompts/batches/MOAT-ALIGNMENT-01.md"
     ],
-    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented.",
+    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented. Green repair locks this as intended visual canon only; current source still does not prove implementation.",
     "direction_conflicts": [],
-    "open_direction_questions": [
-      "Exact runtime/source data projection remains unresolved; recipe locks visible intent only."
-    ],
+    "open_direction_questions": [],
     "forbidden_patterns": [
       "generic dashboard",
       "card-stack fallback",
@@ -6481,7 +6477,7 @@
       "LifeShape Field, day/week/month depth, and horizon controls",
       "time horizon specificity and planning depth"
     ],
-    "specificity_status": "unresolved_direction"
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "best_fit_explanation_sheet",
@@ -6782,7 +6778,7 @@
   {
     "surface_id": "month_detail",
     "name": "Month Detail",
-    "canon_status": "unresolved_direction",
+    "canon_status": "intended_canon",
     "destination": "Time",
     "surface_type": "drill_down",
     "hierarchy_level": "secondary_surface",
@@ -6796,11 +6792,11 @@
       "Closure System"
     ],
     "visible_regions": [
-      "orientation",
-      "primary object",
-      "source/proof line",
-      "action or disclosure",
-      "state recovery"
+      "month LifeShape horizon",
+      "protected span map",
+      "pressure cluster summary",
+      "open-capacity basin",
+      "source/freshness strip"
     ],
     "recipe_file": "docs/canon/frontend/recipes/time/month_detail.md",
     "source_truth": [
@@ -6815,11 +6811,9 @@
       "prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md",
       "prompts/batches/MOAT-ALIGNMENT-01.md"
     ],
-    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented.",
+    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented. Green repair locks this as intended visual canon only; current source still does not prove implementation.",
     "direction_conflicts": [],
-    "open_direction_questions": [
-      "Exact runtime/source data projection remains unresolved; recipe locks visible intent only."
-    ],
+    "open_direction_questions": [],
     "forbidden_patterns": [
       "generic dashboard",
       "card-stack fallback",
@@ -6853,7 +6847,7 @@
       "LifeShape Field, day/week/month depth, and horizon controls",
       "time horizon specificity and planning depth"
     ],
-    "specificity_status": "unresolved_direction"
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "reflow_preview_tray",
@@ -7080,7 +7074,7 @@
   {
     "surface_id": "shape_month_flow",
     "name": "Shape Month Flow",
-    "canon_status": "unresolved_direction",
+    "canon_status": "intended_canon",
     "destination": "Time",
     "surface_type": "drill_down",
     "hierarchy_level": "secondary_surface",
@@ -7094,11 +7088,11 @@
       "Closure System"
     ],
     "visible_regions": [
-      "orientation",
-      "primary object",
-      "source/proof line",
-      "action or disclosure",
-      "state recovery"
+      "before month shape",
+      "after month shape",
+      "protected-time invariants",
+      "affected step summary",
+      "commitment staging tray"
     ],
     "recipe_file": "docs/canon/frontend/recipes/time/shape_month_flow.md",
     "source_truth": [
@@ -7113,11 +7107,9 @@
       "prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md",
       "prompts/batches/MOAT-ALIGNMENT-01.md"
     ],
-    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented.",
+    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented. Green repair locks this as intended visual canon only; current source still does not prove implementation.",
     "direction_conflicts": [],
-    "open_direction_questions": [
-      "Exact runtime/source data projection remains unresolved; recipe locks visible intent only."
-    ],
+    "open_direction_questions": [],
     "forbidden_patterns": [
       "generic dashboard",
       "card-stack fallback",
@@ -7151,7 +7143,7 @@
       "LifeShape Field, day/week/month depth, and horizon controls",
       "time horizon specificity and planning depth"
     ],
-    "specificity_status": "unresolved_direction"
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "time_receipt_detail",
@@ -7756,7 +7748,7 @@
   {
     "surface_id": "time_stale_source_state",
     "name": "Time Stale Source State",
-    "canon_status": "unresolved_direction",
+    "canon_status": "intended_canon",
     "destination": "Time",
     "surface_type": "state_surface",
     "hierarchy_level": "state_variant",
@@ -7770,11 +7762,11 @@
       "Closure System"
     ],
     "visible_regions": [
-      "orientation",
-      "primary object",
-      "source/proof line",
-      "action or disclosure",
-      "state recovery"
+      "stale source notice",
+      "last trusted shape",
+      "affected assumptions",
+      "refresh/reconnect action",
+      "safe local fallback"
     ],
     "recipe_file": "docs/canon/frontend/recipes/time/time_stale_source_state.md",
     "source_truth": [
@@ -7789,11 +7781,9 @@
       "prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md",
       "prompts/batches/MOAT-ALIGNMENT-01.md"
     ],
-    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented.",
+    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented. Green repair locks this as intended visual canon only; current source still does not prove implementation.",
     "direction_conflicts": [],
-    "open_direction_questions": [
-      "Exact runtime/source data projection remains unresolved; recipe locks visible intent only."
-    ],
+    "open_direction_questions": [],
     "forbidden_patterns": [
       "generic dashboard",
       "card-stack fallback",
@@ -7833,7 +7823,7 @@
       "inspectable source basis and correction routing",
       "local-intelligence freshness and source explanation"
     ],
-    "specificity_status": "unresolved_direction"
+    "specificity_status": "high_specificity"
   },
   {
     "surface_id": "you_root_user_system_profile",

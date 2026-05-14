@@ -9,7 +9,7 @@ The final pass promoted every previously medium-specific recipe to `high_specifi
 - Promoted from medium to high: 47
 - Remaining medium recipes: 0
 - Remaining low recipes: 0
-- Remaining unresolved-direction recipes: 5
+- Remaining unresolved-direction recipes: 0
 
 ## Former Medium Surfaces Promoted To High Specificity
 
@@ -24,13 +24,17 @@ The final pass promoted every previously medium-specific recipe to `high_specifi
 
 ## Remaining Unresolved Direction Gaps
 
-| Surface | Why It Remains Unresolved |
+None. The Green repair pass resolved the five formerly open surfaces into intended-canon recipes without claiming SwiftUI implementation proof.
+
+## Resolved Former Gaps
+
+| Surface | Canon Resolution |
 |---|---|
-| Local Runtime Source Detail from Today | Final runtime/source projection remains a later canon decision; the recipe locks visible intent only. |
-| Review Pressure Surface | Final pressure/projection detail still needs later canon review before implementation can invent the data layout. |
-| Month Detail | The final month-detail projection is still not safely canonicalized from source truth. |
-| Shape Month Flow | The final month-shape flow direction still needs a later canon decision. |
-| Time Stale Source State | The stale-source presentation for Time still needs later canon review before implementation. |
+| Local Runtime Source Detail from Today | Intended canon now specifies runtime basis, authority, freshness, local-only boundary, correction, and receipt/proof attachment. |
+| Review Pressure Surface | Intended canon now specifies pressure source stack, protected-time integrity, compression field, relief option, and source/freshness explanation. |
+| Month Detail | Intended canon now specifies month LifeShape horizon, protected spans, pressure clusters, open capacity, and source/freshness strip. |
+| Shape Month Flow | Intended canon now specifies before/after geometry, protected invariants, affected steps, source authority, staging, receipt, and undo. |
+| Time Stale Source State | Intended canon now specifies stale notice, last trusted shape, affected assumptions, refresh/reconnect, and safe local fallback. |
 
 ## Review Notes
 

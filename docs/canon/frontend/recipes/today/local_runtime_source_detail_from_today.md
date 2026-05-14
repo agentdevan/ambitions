@@ -1,7 +1,7 @@
 # Surface Recipe: Local Runtime Source Detail from Today
 
 ## Canon Status
-unresolved_direction
+intended_canon
 
 ## Surface ID
 local_runtime_source_detail_from_today
@@ -74,7 +74,7 @@ Reality Meridian
 ### Region 2: Current context/source strip
 
 - Purpose: Make trust inspectable at rest and deeper on demand.
-- Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for Reality Meridian.
+- Contains: Source freshness, proof basis, receipt expectation, resolved source/trust note, or Why this? affordance for Reality Meridian.
 - Primitives: Source Freshness Badge, Receipt System, Proof Trail, Why This Sheet, QuietGlass for sheet depth.
 - Typography: Use native iPhone semantic text hierarchy: compact region label, Reality Meridian title or state label, source/proof caption, and readable action text. Emphasis stays on the active Reality Meridian decision or inspected state.
 - Spacing: Keep source, proof, CTA, and state notes visually attached to Reality Meridian, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
@@ -146,7 +146,7 @@ Reality Meridian
 ### Region 6: Closure/recovery/receipt shelf
 
 - Purpose: Make trust inspectable at rest and deeper on demand.
-- Contains: Source freshness, proof basis, receipt expectation, unresolved-direction note, or Why this? affordance for Reality Meridian.
+- Contains: Source freshness, proof basis, receipt expectation, resolved source/trust note, or Why this? affordance for Reality Meridian.
 - Primitives: Source Freshness Badge, Receipt System, Proof Trail, Why This Sheet, QuietGlass for sheet depth.
 - Typography: Use native iPhone semantic text hierarchy: compact region label, Reality Meridian title or state label, source/proof caption, and readable action text. Emphasis stays on the active Reality Meridian decision or inspected state.
 - Spacing: Keep source, proof, CTA, and state notes visually attached to Reality Meridian, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
@@ -177,7 +177,7 @@ Use a compact native iPhone rhythm: object-attached spacing, grouped rows only w
 GraphiteRecess is the ground. QuietGlass is reserved for sheets, trays, overlays, and inspectable transient layers. LuminousTrace expresses origin, attachment, source freshness, protection, pressure, or continuity. CelestialField appears only when it carries orientation or relationship meaning.
 
 ## Color and State Recipe
-Color reinforces semantic state but never owns it. Fresh, stale, protected, pressure, blocked, waiting, recovery, local-only, disabled, receipt-confirmed, and unresolved states require visible labels, shape/placement, and accessibility text.
+Color reinforces semantic state but never owns it. Fresh, stale, protected, pressure, blocked, waiting, recovery, local-only, disabled, receipt-confirmed, and unknown states require visible labels, shape/placement, and accessibility text.
 
 ## Icon, Chevron, and Disclosure Recipe
 Use SF Symbols where possible. Chevron means deeper inspection or navigation, not decoration. Icons must be paired with visible text or accessibility labels, especially for source, proof, protected, pressure, warning, receipt, and recovery meanings.
@@ -189,10 +189,10 @@ One primary CTA maximum at rest. Secondary actions are quieter, cancel remains r
 Use plain Ambitions language: Start here, Shape Time, Still counts, Source, Why this?, Receipt, Needs a Place, Protected, Waiting, Blocked, Needs recovery, and local trust terms where relevant. Avoid AI confidence, model language, productivity scores, overdue/failure copy, motivational filler, and retired top-level destination phrasing.
 
 ## Receipt / Proof / Source Recipe
-Meaningful changes expose an expected receipt, existing receipt, proof link, source basis, or an explicit no-receipt reason. Proof is object-linked evidence, not decoration. Source freshness can be fresh, stale, unavailable, local-only, or unresolved and must be inspectable.
+Meaningful changes expose an expected receipt, existing receipt, proof link, source basis, or an explicit no-receipt reason. Proof is object-linked evidence, not decoration. Source freshness can be fresh, stale, unavailable, local-only, or unavailable and must be inspectable.
 
 ## State Model
-default, active, empty, local-only, source unavailable, stale source, disabled, receipt-confirmed, unresolved direction, now, next, later, protected time, waiting, blocked, recovery, overloaded, away.
+default, active, empty, local-only, source unavailable, stale source, disabled, receipt-confirmed, now, next, later, protected time, waiting, blocked, recovery, overloaded, away.
 
 ## Allowed States
 - default
@@ -203,7 +203,6 @@ default, active, empty, local-only, source unavailable, stale source, disabled, 
 - stale source
 - disabled
 - receipt-confirmed
-- unresolved direction
 - now
 - next
 - later
@@ -283,4 +282,8 @@ Final intended visual direction uses current truth files first, then planned fro
 - Reality Meridian reduced to task list
 
 ## Open Direction Gaps
-- Exact runtime/source data projection remains unresolved; recipe locks visible intent only.
+- None. Green repair locks this as intended visual canon only; source implementation remains non-proof unless separately verified.
+
+## Green Repair Source/Trust Lock
+Resolved by VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01 Green repair: the surface shows the on-device basis, source authority, freshness, local-only boundary, and correction path without exposing model jargon or hidden automation.
+This repair resolves recipe direction, not SwiftUI implementation. Any future implementation must keep source/freshness visible, preserve user authority, and avoid silent mutation.

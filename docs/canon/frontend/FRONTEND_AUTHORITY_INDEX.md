@@ -14,12 +14,20 @@ Status: Active frontend canon index
 ## Active Files
 
 - Master: `AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
+- Audit: `VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md`
+- Perfection plan: `VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md`
+- Vocabulary boundary: `VISUAL_VOCABULARY_BOUNDARY.md`
+- Source-link manifest: `VISUAL_SOURCE_LINKS.yaml`
+- Recipe short-form template: `VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md`
+- Object-first review rubric: `VISUAL_OBJECT_FIRST_REVIEW_RUBRIC.md`
+- Accessibility/ADHD requirements: `VISUAL_ACCESSIBILITY_ADHD_REQUIREMENTS.md`
+- Anti-slop rules: `VISUAL_ANTI_SLOP_RULES.md`
 - Registry: `VISUAL_ITEM_REGISTRY.yaml`
 - Surface bibles: `surfaces/*.md`
 - Source-family notes: `PLANNED_TRAIN_FRONTEND_INTEGRATION_MAP.md`, `source-families/MRI_FRONTEND_SOURCE_FAMILY.md`, `source-families/HBI_FRONTEND_SOURCE_FAMILY.md`
 - Primitive bibles: `primitives/*.md`
 - Behavior bibles: `behavior/*.md`
-- Trace matrices: `trace/*.md`
+- Trace matrices and ledgers: `trace/*.md`, `trace/VISUAL_CONFLICT_LEDGER.md`, `trace/VISUAL_SOURCE_LINKAGE_LEDGER.md`, `trace/VISUAL_SURFACE_GRAPH_LEDGER.md`
 
 ## Source Truth Inspected
 
@@ -48,7 +56,7 @@ Status: Active frontend canon index
 - `Native/Ambitions/Features/Today/*`
 - `Native/Ambitions/Features/Goals/*`
 - `Native/Ambitions/Features/Captures/*`
-- `Native/Ambitions/Features/Plan/*`
+- `Native/Ambitions/Features/Plan/*` (internal compatibility seam)
 - `Native/Ambitions/Features/Profile/*`
 - `Sources/Theme/AmbitionTheme.swift`
 - `Sources/Accessibility/AccessibilityNutrition.swift`

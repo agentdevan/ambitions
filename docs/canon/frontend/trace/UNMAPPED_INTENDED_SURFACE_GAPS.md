@@ -1,17 +1,15 @@
 # Unmapped Intended Surface Gaps
 
-Status: Active unresolved-direction list
+Status: Green - no active unresolved-direction surfaces
 
-All required minimum surfaces are represented. The entries below are not unmapped; they are mapped as `unresolved_direction` because final runtime/detail direction needs later canon review. The all-train source-family pass does not change these gaps; it only broadens the source-family lens.
+All required minimum surfaces are represented in `SURFACE_RECIPE_INVENTORY.yaml` and all formerly unresolved surfaces now have intended-canon recipes. This does not claim SwiftUI implementation proof; it means the design canon no longer leaves these surfaces open for Codex invention.
 
-| Name | Source | Likely Destination | Likely Surface Type | Why It Matters | What Must Be Clarified | Recommended Canon Status |
-|---|---|---|---|---|---|---|
-| Local Runtime Source Detail from Today | scoped minimum inventory plus planned frontend direction | Today | drill_down | Prevents future implementation from inventing missing detail. | Exact data/source/detail projection and owner behavior. | unresolved_direction |
-| Review Pressure Surface | scoped minimum inventory plus planned frontend direction | Time | drill_down | Prevents future implementation from inventing missing detail. | Exact data/source/detail projection and owner behavior. | unresolved_direction |
-| Month Detail | scoped minimum inventory plus planned frontend direction | Time | drill_down | Prevents future implementation from inventing missing detail. | Exact data/source/detail projection and owner behavior. | unresolved_direction |
-| Shape Month Flow | scoped minimum inventory plus planned frontend direction | Time | drill_down | Prevents future implementation from inventing missing detail. | Exact data/source/detail projection and owner behavior. | unresolved_direction |
-| Time Stale Source State | scoped minimum inventory plus planned frontend direction | Time | state_surface | Prevents future implementation from inventing missing detail. | Exact data/source/detail projection and owner behavior. | unresolved_direction |
+## Resolved In VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01 Green Repair
 
-## Phase 04 Repair Pass 1 note
-
-The recipe inventory remains complete for the required minimum visible surfaces. The final specificity review ledger keeps these five gaps visible as future canon clarification inputs rather than hidden missing recipe files.
+| Name | Destination | Resolution | Implementation Claim |
+|---|---|---|---|
+| Local Runtime Source Detail from Today | Today | On-device source basis, authority, freshness, local-only boundary, correction, and receipt/proof attachment are now locked as intended canon. | No implementation claim. |
+| Review Pressure Surface | Time | Pressure source stack, protected-time integrity, capacity compression, one relief option, and source/freshness explanation are now locked as intended canon. | No implementation claim. |
+| Month Detail | Time | Month LifeShape horizon, protected span map, pressure cluster summary, open-capacity basin, and source/freshness strip are now locked as intended canon. | No implementation claim. |
+| Shape Month Flow | Time | Before/after month shape, protected-time invariants, affected steps, source authority, commitment staging, receipt, and undo are now locked as intended canon. | No implementation claim. |
+| Time Stale Source State | Time | Stale source notice, last trusted shape, affected assumptions, refresh/reconnect action, and safe local fallback are now locked as intended canon. | No implementation claim. |

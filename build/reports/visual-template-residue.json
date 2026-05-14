@@ -1,0 +1,73 @@
+{
+  "exact_duplicate_paragraphs": {},
+  "file_count": 29,
+  "forbidden_phrase_hits": {},
+  "generic_phrase_hits": {},
+  "near_duplicate_pairs": [
+    {
+      "a": "docs/canon/frontend/VISUAL_ACCESSIBILITY_ADHD_REQUIREMENTS.md",
+      "b": "docs/canon/frontend/behavior/ACCESSIBILITY_AND_ADHD_LAWS.md",
+      "score": 0.83
+    },
+    {
+      "a": "docs/canon/frontend/objects/REALITY_MERIDIAN_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/CONSTELLATION_ATLAS_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/REALITY_MERIDIAN_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/ATMOSPHERE_COMPOSER_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/REALITY_MERIDIAN_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/LIFESHAPE_FIELD_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/REALITY_MERIDIAN_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/USER_SYSTEM_PROFILE_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/CONSTELLATION_ATLAS_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/ATMOSPHERE_COMPOSER_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/CONSTELLATION_ATLAS_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/LIFESHAPE_FIELD_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/CONSTELLATION_ATLAS_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/USER_SYSTEM_PROFILE_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/ATMOSPHERE_COMPOSER_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/LIFESHAPE_FIELD_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/ATMOSPHERE_COMPOSER_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/USER_SYSTEM_PROFILE_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/objects/LIFESHAPE_FIELD_ANATOMY.md",
+      "b": "docs/canon/frontend/objects/USER_SYSTEM_PROFILE_ANATOMY.md",
+      "score": 0.833
+    },
+    {
+      "a": "docs/canon/frontend/trace/VISUAL_SOURCE_LINKAGE_LEDGER.md",
+      "b": "docs/canon/frontend/trace/VISUAL_SURFACE_GRAPH_LEDGER.md",
+      "score": 0.842
+    }
+  ],
+  "repeated_sentence_openers": {
+    "feels like a native": 4,
+    "linked through the live": 5
+  },
+  "status": "green"
+}

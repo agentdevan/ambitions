@@ -11,11 +11,11 @@ This document is not an implementation tracker. This document is not screenshot 
 
 ## Doctrine
 
-Every visible surface must appear in the Surface Recipe Inventory. Every visible surface must have a recipe or an explicit unresolved-direction entry. Planned not-yet-implemented batches may outrank existing implementation when defining intended final frontend direction, while `docs/truth/*` remains higher authority. Most recent planned batch creation data breaks conflicts among planned batches using registry metadata, prompt metadata, ordered queue evidence, git introduction history, and filesystem metadata only as a low-confidence fallback. The atlas now extracts all planned frontend-relevant train/source families, not just MRI/HBI, and records MRI/HBI as source-family inputs that must be remapped onto real Ambitions surfaces, objects, primitives, states, and trust affordances. The final specificity review ledger records the formerly medium recipes as high specificity and leaves only the five locked unresolved direction gaps visible.
+Every visible surface must appear in the Surface Recipe Inventory. Every visible surface must have a recipe or a deliberately recorded future gap before implementation proceeds. Planned not-yet-implemented batches may outrank existing implementation when defining intended final frontend direction, while `docs/truth/*` remains higher authority. Most recent planned batch creation data breaks conflicts among planned batches using registry metadata, prompt metadata, ordered queue evidence, git introduction history, and filesystem metadata only as a low-confidence fallback. The atlas now extracts all planned frontend-relevant train/source families, not just MRI/HBI, and records MRI/HBI as source-family inputs that must be remapped onto real Ambitions surfaces, objects, primitives, states, and trust affordances. The final specificity review ledger records all 159 recipes as high specificity and leaves no active surface-direction gaps.
 
 If a visible surface, object, primitive, state, label, CTA, chevron, material, wrapper, receipt, source affordance, or visible behavior is absent from this atlas, it is not authorized final visual canon and must be treated as a documentation gap before implementation proceeds.
 
-Recipes must be specific enough to tell a designer or reviewer exactly what visible ingredients belong on the surface. The current final pass leaves no medium-specificity recipes and only the five explicitly unresolved direction gaps.
+Recipes must be specific enough to tell a designer or reviewer exactly what visible ingredients belong on the surface. The current final pass leaves no medium-specificity recipes and no active unresolved surface-direction gaps.
 
 ## Active IA Map
 
@@ -31,10 +31,19 @@ The atlas is final intended visual canon, subordinate to active truth files and 
 - [Surface Recipe Inventory](SURFACE_RECIPE_INVENTORY.md)
 - [Surface Recipe Inventory YAML](SURFACE_RECIPE_INVENTORY.yaml)
 - [Surface Recipe Template](SURFACE_RECIPE_TEMPLATE.md)
+- [Visual Recipe Short Form Template](VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md)
 - [Surface Coverage Map](FRONTEND_SURFACE_COVERAGE_MAP.md)
 
 ## Trace And Precedence
 
+- [Visual Conflict Ledger](trace/VISUAL_CONFLICT_LEDGER.md)
+- [Visual Source Linkage Ledger](trace/VISUAL_SOURCE_LINKAGE_LEDGER.md)
+- [Visual Surface Graph Ledger](trace/VISUAL_SURFACE_GRAPH_LEDGER.md)
+- [Visual Encyclopedia Ruthless Audit](VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md)
+- [Visual Vocabulary Boundary](VISUAL_VOCABULARY_BOUNDARY.md)
+- [Visual Source Links](VISUAL_SOURCE_LINKS.yaml)
+- [Visual Accessibility And ADHD Requirements](VISUAL_ACCESSIBILITY_ADHD_REQUIREMENTS.md)
+- [Visual Anti-Slop Rules](VISUAL_ANTI_SLOP_RULES.md)
 - [Planned Train Frontend Direction Inventory](trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md)
 - [Source Precedence Ledger](trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md)
 - [Source Family Extraction Ledger](trace/VISUAL_DIRECTION_SOURCE_FAMILY_EXTRACTION_LEDGER.md)
@@ -67,4 +76,4 @@ Plan is not a top-level destination. Dashboard, chatbot, assistant, task-list cl
 
 ## Open Questions And Unresolved Source Gaps
 
-See [Unmapped Intended Surface Gaps](trace/UNMAPPED_INTENDED_SURFACE_GAPS.md). Unresolved entries remain visible so future work cannot silently invent missing direction.
+See [Unmapped Intended Surface Gaps](trace/UNMAPPED_INTENDED_SURFACE_GAPS.md). The current ledger is Green; any future gap must be added explicitly so future work cannot silently invent missing direction.

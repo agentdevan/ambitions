@@ -2,6 +2,7 @@
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
 .PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
+.PHONY: visual-compile visual-validators visual-linkage visual-prose visual-vocabulary visual-surface-graph visual-dashboard visual-all
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
@@ -240,3 +241,34 @@ openai-visual-critique-dry-run:
 
 openai-launch-docs-dry-run:
 	python3 tools/openai/launch_docs/generate_launch_packet.py --dry-run
+
+visual-compile:
+	python3 -m py_compile \
+		scripts/ambitions-surface-recipe-inventory-check.py \
+		scripts/ambitions-surface-recipe-coverage-check.py \
+		scripts/ambitions-surface-recipe-specificity-check.py \
+		scripts/ambitions-train-family-frontend-extraction-check.py \
+		scripts/ambitions-visual-source-linkage-check.py \
+		scripts/ambitions-visual-template-residue-check.py \
+		scripts/ambitions-visual-vocabulary-boundary-check.py \
+		scripts/ambitions-visual-surface-graph-check.py \
+		scripts/ambitions-visual-dashboard.py
+
+visual-linkage:
+	python3 scripts/ambitions-visual-source-linkage-check.py
+
+visual-prose:
+	python3 scripts/ambitions-visual-template-residue-check.py
+
+visual-vocabulary:
+	python3 scripts/ambitions-visual-vocabulary-boundary-check.py
+
+visual-surface-graph:
+	python3 scripts/ambitions-visual-surface-graph-check.py
+
+visual-dashboard:
+	python3 scripts/ambitions-visual-dashboard.py
+
+visual-validators: visual-linkage visual-prose visual-vocabulary visual-surface-graph
+
+visual-all: visual-compile visual-validators visual-dashboard
