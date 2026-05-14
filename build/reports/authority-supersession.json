@@ -1,0 +1,3194 @@
+{
+  "ambiguous_paths": [],
+  "batch": "VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04",
+  "counts": {
+    "active_authority": 246,
+    "archive_candidate": 15,
+    "generated_output": 3,
+    "historical": 1,
+    "report_only": 180,
+    "supporting_authority": 9
+  },
+  "entries": [
+    {
+      "classification": "active_authority",
+      "path": "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "reason": "current repo truth",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/truth/HISTORICAL_POLICY.md",
+      "reason": "current repo truth",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "reason": "current repo truth",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "reason": "current repo truth",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "reason": "current repo truth",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/truth/README.md",
+      "reason": "current repo truth",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/truth/RELEASE_TRUTH.md",
+      "reason": "current repo truth",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/ACTIVE_IA_AND_SURFACE_MAP.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/FRONTEND_AUTHORITY_INDEX.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/FRONTEND_SURFACE_COVERAGE_MAP.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/MRI_HBI_FRONTEND_INTEGRATION_MAP.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/OBSOLETE_AND_EXCLUDED_VISUAL_REFERENCE_LEDGER.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/PLANNED_TRAIN_FRONTEND_INTEGRATION_MAP.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/README.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/SURFACE_RECIPE_INDEX.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/SURFACE_RECIPE_INVENTORY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/SURFACE_RECIPE_INVENTORY.yaml",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/SURFACE_RECIPE_TEMPLATE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/TERM_ALIAS_AND_DEPRECATION_REGISTRY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_ACCESSIBILITY_ADHD_REQUIREMENTS.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_ANTI_SLOP_RULES.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_DECISION_RECORDS.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_DESIGN_AUTHORITY_LOCK_PREP_03.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_DIRECTION_CHANGE_PROTOCOL.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_ITEM_REGISTRY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_ITEM_REGISTRY.yaml",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_OBJECT_FIRST_REVIEW_RUBRIC.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_RECIPE_SCHEMA_CONTRACT.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_RECIPE_SCHEMA_CONTRACT.yaml",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_REFERENCE_LEDGER.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_SOURCE_LINKS.yaml",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/VISUAL_VOCABULARY_BOUNDARY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/ACCESSIBILITY_AND_ADHD_LAWS.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/ADHD_USABILITY_RULES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/AMBITIONS_TRANSACTION_MODEL.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/ANTI_GENERIC_KILL_SWITCHES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/CROSS_SURFACE_STATE_GRAMMAR.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/DYNAMIC_TYPE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/LOCAL_FIRST_TRUST_BEHAVIOR.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/NO_FALSE_MOMENTUM.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/PREVIEW_CONFIRM_UNDO_BEHAVIOR.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/RECOMMENDATION_INSPECTION_BEHAVIOR.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/RECOVERY_MODE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/REDUCE_MOTION.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/STATE_TRANSITIONS.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/behavior/VOICEOVER_GROUPING.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/COMPONENT_CONTRACT_INDEX.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/DIFFERENTIATE_WITHOUT_COLOR_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/DISCLOSURE_ROW_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/DYNAMIC_TYPE_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/PROOF_CHIP_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/RECEIPT_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/REDUCE_MOTION_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/REDUCE_TRANSPARENCY_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/TRUST_SEAM_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/contracts/VOICEOVER_ORDER_CONTRACT.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/gates/FALSE_GREEN_PREVENTION.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/gates/LOCAL_FIRST_RUNTIME_TRUST_GATE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/gates/NORTH_STAR_100_ACCEPTANCE_GATE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/gates/NORTH_STAR_100_GATE_RESULTS.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/gates/NORTH_STAR_100_MEASURABLE_GATE_MATRIX.yaml",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/gates/SOURCE_PROOF_RECEIPT_COVERAGE_GATE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/gates/VISUAL_REGRESSION_READINESS.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/AMBITION_GRAPH.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/ATMOSPHERE_COMPOSER.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/ATMOSPHERE_COMPOSER_ANATOMY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/CLOSURE_SYSTEM.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/COMMITMENT_STAGING_TRAY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/CONSTELLATION_ATLAS.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/CONSTELLATION_ATLAS_ANATOMY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/LABEL_OFF_SIGNATURE_TESTS.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/LIFESHAPE_FIELD.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/LIFESHAPE_FIELD_ANATOMY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/LOCAL_RUNTIME_TRUST_PANEL.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/PLANNED_TRAIN_FRONTEND_INFLUENCE_OBJECTS.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/PRIMARY_OBJECT_ANATOMY_CANON.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/PROOF_TRAIL.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/REALITY_MERIDIAN.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/REALITY_MERIDIAN_ANATOMY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/RECEIPT_SYSTEM.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/RECOMMENDATION_SOURCE_SYSTEM.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/REFLOW_PREVIEW_TRAY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/USER_SYSTEM_PROFILE.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/objects/USER_SYSTEM_PROFILE_ANATOMY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/ADHD_DENSITY_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/BADGES_MARKERS_AND_STATE_GLYPHS.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/CHEVRONS_AND_DISCLOSURE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/CHROME_AND_NAVIGATION.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/CTA_SYSTEM.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/DIVIDERS_SEPARATORS_AND_BOUNDARIES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/DYNAMIC_TYPE_COLLAPSE_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/EMPTY_STATE_COPY_AND_AFFORDANCES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/ICONOGRAPHY.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/LABEL_SYSTEM.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/LOCAL_RUNTIME_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/MATERIALS.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/MATERIAL_PRIMITIVE_ROLES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/PROOF_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/PROTECTED_TIME_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/RECEIPT_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/RECEIPT_ROWS_AND_EVENT_ROWS.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/SOURCE_FRESHNESS_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/SPACING_AND_LAYOUT_RHYTHM.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/TRANSACTION_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/TRUST_SEAM.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/TYPOGRAPHY.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/VOICEOVER_ORDER_PRIMITIVES.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_active_text_entry.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_attachment_proof_picker.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_dictation_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_empty_first_use_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_error_failed_attachment_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_grow_into_goal_route.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_hold_needs_a_place_route.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_idle_composer.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_make_commitment_route.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_mark_constraint_route.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_offline_local_only_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_parse_uncertain_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_post_input_route_reveal.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_receipt.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_reflect_route.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_root_atmosphere_composer.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/capture/capture_save_as_proof_route.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/best_fit_marker.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/blocked_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/celestialfield_semantic_layer.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/chevron_disclosure_row.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/closure_system.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/commitment_staging_tray.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/destructive_cta.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/disabled_cta.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/graphiterecess_base.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/luminoustrace_state_line.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/moved_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/needs_recovery_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/needs_review_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/open_marker.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/pressure_marker.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/primary_cta.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/proof_trail_system.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/protected_marker.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/quietglass_wrapper.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/receipt_system.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/recommendation_source_system.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/reflow_preview_tray.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/secondary_cta.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/skipped_not_needed_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/source_freshness_badge.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/still_counts_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/waiting_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/cross_surface/why_this_sheet.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/alternate_path_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/ambition_graph.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/blocker_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/commitment_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/goal_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/goal_thread_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/goals_archive_historical_goal_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/goals_blocked_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/goals_empty_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/goals_life_area_map.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/goals_review_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/goals_root_constellation_atlas.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/milestone_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/proof_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/proof_gap_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/proof_trail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/recommended_step_context_from_goals.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/reflection_recovery_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/goals/selected_life_area_surface.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/onboarding/capture_first_use_prompt.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/onboarding/first_run_root.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/onboarding/goals_first_use_prompt.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/onboarding/planning_defaults_prompt.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/onboarding/privacy_local_runtime_explanation.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/onboarding/schedule_setup_prompt.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/onboarding/time_first_use_prompt.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/onboarding/today_first_use_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/back_navigation.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/compact_surface_header.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/context_crown.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/destination_dock.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/destination_tab_item.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/global_app_shell.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/global_empty_state_shell.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/global_error_fallback_shell.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/receipt_toast_inline_confirmation.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/sheet_chrome.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/shell/tray_chrome.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/best_fit_explanation_sheet.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/best_fit_region.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/day_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/day_lifeshape_surface.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/month_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/month_lifeshape_surface.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/open_time_region.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/planning_defaults_entry.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/pressure_region.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/protected_time_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/protected_time_region.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/recovery_flex_region.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/reflow_preview_tray.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/reflow_week_flow.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/review_pressure_surface.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/schedule_and_availability_entry.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/shape_day_flow.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/shape_month_flow.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/time_no_calendar_data_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/time_overloaded_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/time_protected_block_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/time_receipt_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/time_root_lifeshape_field.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/time_scope_control.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/time_stale_source_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/time_vacation_away_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/vacation_away_time_entry.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/week_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/time/week_lifeshape_surface.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/adjust_plan_reflow_preview_entry.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/blocked_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/closure_sheet.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/goal_thread_context_from_today.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/local_runtime_source_detail_from_today.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/proof_attachment_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/receipt_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/recommendation_source_sheet.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/step_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/step_session.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_closure_prompt_region.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_current_context_header.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_empty_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_no_schedule_data_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_now_next_later_sequence.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_overloaded_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_protected_time_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_reality_meridian_rail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_receipt_shelf.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_recommended_step_object.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_recovery_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_root_reality_meridian.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_source_freshness_indicator.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_stale_recommendation_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_start_here_region.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_upcoming_commitments_region.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/today_vacation_away_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/today/waiting_detail.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/about_ambitions.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/automation_and_trust.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/capture_preferences.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/focus_session_defaults.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/help.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/local_data_reset_forget.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/local_runtime_trust_panel.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/notifications.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/personal_runtime.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/planning_defaults.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/planning_setup_section.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/privacy.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/schedule_and_availability.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/user_profile_header.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/vacation_away_time.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/you_empty_first_run_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/you_offline_local_only_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/you_root_user_system_profile.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/recipes/you/you_trust_warning_state.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/reviews/VISUAL_100_DESTINATION_SCORECARD.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/reviews/VISUAL_100_OBJECT_SCORECARD.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/reviews/VISUAL_100_PRIMITIVE_SCORECARD.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/reviews/VISUAL_100_RECIPE_SCORECARD.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/source-families/HBI_FRONTEND_SOURCE_FAMILY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/source-families/MRI_FRONTEND_SOURCE_FAMILY.md",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/EMPTY_STATES_AND_RECOVERY_STATES_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/EXTERNAL_SURFACES_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/GLOBAL_SHELL_AND_CHROME_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/ONBOARDING_AND_FIRST_RUN_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "reason": "active frontend canon",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/COMPONENT_CONTRACT_AUTHORITY_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/COMPONENT_TO_CANON_TRACE_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/DESIGN_SYSTEM_AUTHORITY_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/DESIGN_TO_SOURCE_TRACEABILITY.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/DESIGN_TO_SOURCE_TRACEABILITY.yaml",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/FAANG_FLAGSHIP_RED_TEAM_REVIEW.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/INTENDED_STATE_COVERAGE_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/LOCAL_FIRST_RUNTIME_TRUST_MATRIX.yaml",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/MRI_HBI_TO_FRONTEND_SURFACE_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/NATIVE_IPHONE_INTERACTION_GRAMMAR_MATRIX.yaml",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/OBJECT_TO_PRIMITIVE_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/PLANNED_BATCH_FRONTEND_DIRECTION_INVENTORY.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.yaml",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/PREVIEW_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/PROMPT_SOURCE_CANON_AUTHORITY_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/SCREENSHOT_PROOF_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/SCREEN_TO_DRILLDOWN_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/SNAPSHOT_TEST_TARGET_PLAN.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/SOURCE_PROOF_RECEIPT_COVERAGE_MATRIX.yaml",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/SOURCE_TRUTH_TO_FRONTEND_CANON_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/STATE_TO_VISUAL_ENCODING_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/SURFACE_RECIPE_SPECIFICITY_REVIEW_LEDGER.md",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/SURFACE_TO_OBJECT_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/TOKEN_SOURCE_AUTHORITY_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/TRAIN_FAMILY_PRECEDENCE_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/TRAIN_FAMILY_TO_OBJECT_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/TRAIN_FAMILY_TO_PRIMITIVE_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/TRAIN_FAMILY_TO_SURFACE_MATRIX.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/TRAIN_FAMILY_UNRESOLVED_DIRECTION_GAPS.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/UNMAPPED_INTENDED_SURFACE_GAPS.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/UNRESOLVED_FRONTEND_GAPS.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_100_FLAG_RESOLUTION_MATRIX.yaml",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_100_RED_YELLOW_FLAG_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/VISUAL_100_SOURCE_DEBT_LEDGER.md",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_100_SOURCE_LINK_DISTRIBUTION.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_100_VOCABULARY_SCAN_SCOPE.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_CONFLICT_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_DIRECTION_SOURCE_FAMILY_EXTRACTION_LEDGER.md",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "docs/canon/frontend/trace/VISUAL_NO_ORPHAN_GRAPH.yaml",
+      "reason": "trace output or supporting ledger",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/VISUAL_SOURCE_LINKAGE_LEDGER.md",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "supporting_authority",
+      "path": "docs/canon/frontend/trace/VISUAL_SURFACE_GRAPH_LEDGER.md",
+      "reason": "current visual control plane",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/README.md",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/accessibility.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/component.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/foundations.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/haptics.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/motion.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/objects/atmosphere-composer.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/objects/constellation-atlas.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/objects/lifeshape-field.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/objects/reality-meridian.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/objects/user-system-profile.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/semantic.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/states/closure.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/states/proof.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/states/protected-time.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/states/recovery.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "active_authority",
+      "path": "DesignTokens/states/source-freshness.tokens.json",
+      "reason": "token source tree",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "generated_output",
+      "path": "Sources/Theme/AmbitionObjectTokens.generated.swift",
+      "reason": "generated from DesignTokens",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "generated_output",
+      "path": "Sources/Theme/AmbitionStateTokens.generated.swift",
+      "reason": "generated from DesignTokens",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "Sources/Theme/AmbitionTheme.swift",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "generated_output",
+      "path": "Sources/Theme/AmbitionTokens.generated.swift",
+      "reason": "generated from DesignTokens",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "Sources/Theme/PanelDensitySize.swift",
+      "reason": "supporting control-plane file",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/accessibility-contract.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/adr-check.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/ambitions-codex-os-dry-run-002.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/ambitions-codex-os-dry-run-003.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/ambitions-codex-os-dry-run-004.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/ambitions-codex-os-validate.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/authority-ledger.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/authority-supersession.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/component-contract-check.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/dependency-boundary.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/design-system-15-systems-dashboard.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/design-system-15-systems-dashboard.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/design-system-15-systems-install-01.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/design-to-source-trace.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/design-token-completeness.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/design-token-contract.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/design-token-drift.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/design-token-generation.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/faang-red-team-review.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/feature-service-boundary.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-architecture-atlas-visual-encyclopedia-001.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-architecture-atlas-visual-encyclopedia-001.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-surface-recipe-completeness-review-001.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-surface-recipe-completeness-review-001.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-surface-recipe-encyclopedia-001.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-surface-recipe-encyclopedia-001.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-surface-recipe-specificity-and-train-extraction-001.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-surface-recipe-specificity-and-train-extraction-001.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-visual-recipe-canon-finalization-001.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/frontend-visual-recipe-canon-finalization-001.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/local-first-runtime-trust.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/native-iphone-interaction-grammar.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/performance-budget.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/preview-matrix.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/source-proof-receipt-coverage.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/state-machine-contract.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/surface-scenario-coverage.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-accessibility-adhd.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-anti-generic.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-atlas-subordination.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-false-green.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-gate.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-gate.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-hidden-automation.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-local-first-trust.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-native-believability.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-no-false-momentum.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-object-depth.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-p0-recipe-upgrade.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-primitive-operationality.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-priority-registry.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-prompt-authority.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-proof-dashboard.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-proof-dashboard.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-proof-source-receipt.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-recipe-contract.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-scorecard.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-source-debt.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-transaction.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-100-vocabulary-full-corpus.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-design-authority-final-form-04.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-design-authority-lock-prep-03-install.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-encyclopedia-100-final-proof-authority-04.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-encyclopedia-100-perfection-install-001.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-encyclopedia-dashboard.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-encyclopedia-dashboard.md",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-no-orphan-graph.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-regression-readiness.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-source-linkage.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-surface-graph.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-template-residue.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "build/reports/visual-vocabulary-boundary.json",
+      "reason": "validation output only",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/README.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/copy-state-language-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/cross-device-surface-roles-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/design-system-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/external-surface-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/motion-microinteraction-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/novel-interaction-systems-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/screen-architecture-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/shell-ia-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/transformation-terminology-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/transformation-validation-standard.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/design/trust-explainability-correction-spec.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/presentations/frontend-transformation-investor-deck/narrative_plan.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "archive_candidate",
+      "path": "docs/archive/superseded-design-canon/rc1-native-finish-pass.md",
+      "reason": "explicitly archived history",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "report_only",
+      "path": "prompts/batches/VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04.md",
+      "reason": "current execution prompt, not authority",
+      "superseded_by": "",
+      "supersedes": ""
+    },
+    {
+      "classification": "historical",
+      "path": "prompts/batches/VISUAL-DESIGN-AUTHORITY-LOCK-PREP-03.md",
+      "reason": "superseded by final-form prompt",
+      "superseded_by": "",
+      "supersedes": "VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04"
+    }
+  ],
+  "generated_from_batch": "VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04",
+  "status": "green"
+}

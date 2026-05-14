@@ -36,4 +36,4 @@ UI implementation changed: no
 Hosted CI activated: no
 Release/accessibility/App Store claims: not claimed
 Rollback notes: restore docs/canon/frontend, build/reports, Makefile, scripts/ambitions-visual-100-*.py
-Commit: created by GPT-5.5 review gate; final commit is repository HEAD after closeout
+Commit: not yet created

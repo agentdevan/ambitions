@@ -28,7 +28,7 @@ Use this execution path:
 2. GPT-5.4-mini bounded patch
 3. GPT-5.5 review / repair / final readiness
 
-Do not use Spark terminology in this batch, generated reports, or successor docs.
+Use GPT-5.4-mini for the bounded patch lane; do not refer to the retired patch-model alias in this batch, generated reports, or successor docs.
 
 ## Objective
 
