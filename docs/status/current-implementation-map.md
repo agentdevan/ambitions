@@ -6,15 +6,18 @@ This document separates what the repo currently contains from what is scaffolded
 
 ## Source hierarchy
 
-For product and design intent, use:
+For product, design, and moat intent, use:
 
 1. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-2. `docs/truth/README.md`
-3. `docs/README.md` for current documentation index
-4. `docs/AmbitionsCanon/*` only as supporting or historical canon where compatible
-5. `docs/AmbitionsCanon/README.md` only when explicitly referenced for archival/design context
+2. `docs/truth/PRODUCT_MOAT_TRUTH.md`
+3. `docs/truth/README.md`
+4. `docs/README.md` for current documentation index
+5. `docs/AmbitionsCanon/*` only as supporting or historical canon where compatible
+6. `docs/AmbitionsCanon/README.md` only when explicitly referenced for archival/design context
 
 For current implementation evidence, use this document plus the live source tree.
+
+For Private Life Runtime proof target, use `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md`. That file defines proof requirements only; it is not implementation proof, test proof, device proof, or release proof.
 
 For build and validation procedure, use `docs/native-build-and-release.md`.
 
@@ -81,6 +84,7 @@ These capabilities appear as native foundations in code, but each still needs be
 
 | Area | Posture |
 | --- | --- |
+| Private Life Runtime proof target | Specification exists in `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md`; implementation and validation remain unproven until source/tests/logs demonstrate the scenario set. |
 | Widgets | Foundation exists. Production behavior and rendered surfaces require manual validation. |
 | Live Activities | Foundation exists. Production behavior and device behavior require manual validation. |
 | Share Extension | Target/foundation exists. End-to-end behavior requires manual validation. |
@@ -106,6 +110,8 @@ The repo does not currently prove:
 - production cloud sync
 - account/auth backend
 - human release approval
+- Private Life Runtime moat behavior is implemented or validated
+- same-intent/different-local-context adaptive plan behavior is proven
 
 ## Historical/supporting material
 
