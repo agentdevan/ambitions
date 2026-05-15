@@ -1,16 +1,15 @@
 # Cleanup Decision Register
 
-Status: Green through T07c-closeout provider skill deletion state  
-Date: 2026-05-09
+Status: Green through 2026-05-15 direct GitHub API source-truth repair  
+Date: 2026-05-15
 
 ## Authority
 
 Active repo authority starts in `docs/truth/README.md`. Historical cleanup policy is `docs/truth/HISTORICAL_POLICY.md`. If this register conflicts with `docs/truth/*`, the truth files win.
 
-Phase 11 reconciliation note, 2026-05-10: this register remains supporting
-cleanup context. For current repo map and stale/archive decisions, inspect
-`.codex/REPO_INVENTORY.md` and
-`docs/status/archive-and-stale-material-ledger.md` after `docs/truth/*`.
+Phase 11 reconciliation note, 2026-05-10: this register remains supporting cleanup context. For current repo map and stale/archive decisions, inspect `.codex/REPO_INVENTORY.md` and `docs/status/archive-and-stale-material-ledger.md` after `docs/truth/*`.
+
+2026-05-15 direct GitHub API note: `docs/canon/SOURCE_OF_TRUTH_MAP.md` was repaired directly on `main` to route through `docs/truth/*`, restore `Today / Goals / Capture / Time / You`, and demote older Ambitions 2.0 / 3.0 / PXOS / ACUI material to historical or supporting status unless extracted into current truth.
 
 ## Scope
 
@@ -29,8 +28,10 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 
 | Area | Decision | Reason |
 | --- | --- | --- |
-| `docs/truth/` | Active | Current authority layer for product/design, implementation/source, release/proof, Codex process, and historical policy. |
+| `docs/truth/` | Active | Current authority layer for product/design, moat, implementation/source, release/proof, Codex process, and historical policy. |
 | `README.md`, `docs/README.md`, `AGENTS.md` | Active front doors | Route through `docs/truth/*` first. |
+| `frontend/README.md` | Active frontend portal | Routes to installed/intended frontend canon and locks `Today / Goals / Capture / Time / You`. |
+| `.github/README.md` | Active GitHub automation policy | States no tracked hosted workflow should run on `push` by default; any restored workflow must be manual by default. |
 | `docs/status/current-implementation-map.md` | Active supporting implementation map | Evidence-based implementation posture. |
 | `docs/status/release-evidence-packet.md` | Active supporting release/proof posture | Release and validation non-claim boundary. |
 | `docs/native-build-and-release.md` | Active supporting validation workflow | Local VM/Mac validation procedure. |
@@ -40,6 +41,7 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 
 | Area | Decision | Rule |
 | --- | --- | --- |
+| `docs/canon/SOURCE_OF_TRUTH_MAP.md` | Supporting routing map | Subordinate to `docs/truth/*`; repaired 2026-05-15 to stop promoting older canon as active authority. |
 | `docs/AmbitionsCanon/` | Supporting product/design canon | Use only where compatible with `docs/truth/*`. |
 | `docs/codex/` | Supporting Codex process material | Operating support only; not product source truth or release proof. |
 | `.codex/README.md` | Supporting Codex entry | Truth-first routing point. |
@@ -72,6 +74,7 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 | provider/backend/cloud assumption docs | Quarantine | Must not imply active user-data backend, account sync, or provider architecture. |
 | old release-readiness/App Store/TestFlight/device-proof reports without current proof | Quarantine | Release claims require current evidence. |
 | stale context packs that revive old Plan/Profile/Captures/PXOS/ACUI language | Quarantine until reconciled | Can cause Codex drift. |
+| active-looking docs that still promote `Plan` as a top-level destination | Quarantine until repaired | Current IA is `Today / Goals / Capture / Time / You`. |
 
 ## Deletion Candidates — No Deletion Approved Yet
 
@@ -82,12 +85,30 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 | duplicate closeout reports with no unique current value | Extract final decision, then archive/delete | Confirm no release/proof dependency. |
 | duplicate `.codex` checklists/templates that restate truth files | Consolidate then delete duplicates | Map replacement authority and update links. |
 
+## 2026-05-15 Direct GitHub API Audit Findings
+
+| Finding | Classification | Direct action taken |
+| --- | --- | --- |
+| `README.md` correctly points to `docs/truth/README.md` as active authority. | Active | No change required. |
+| `docs/truth/README.md` correctly establishes mandatory truth-first read order. | Active | No change required. |
+| `frontend/README.md` correctly states current IA is `Today / Goals / Capture / Time / You` and Plan is compatibility-only. | Active | No change required. |
+| `.github/README.md` states hosted GitHub Actions should not auto-run on `push` by default. | Active | No change required. |
+| `docs/canon/SOURCE_OF_TRUTH_MAP.md` still promoted older canon and Plan-era ordering. | Supporting map with active drift | Repaired directly on `main` in commit `386185bd15d29151fa46262dfb9871af124b26c3`. |
+| Search surfaced many `docs/canon/Ambitions_2_0*` and `docs/canon/Ambitions_3_0*` files. | Historical by policy | No deletion performed; extraction/quarantine pass required before movement. |
+| Search surfaced `Native/Ambitions/Features/Plan/*`. | Needs inspection | No source change performed; may be internal compatibility naming or real active drift. |
+| Search surfaced old `Hero Step Panel`, `Start Focus`, and `next best move` references. | Mixed: drift rules, historical prompts, and possible active copy risk | No blanket replacement; active path audit still required. |
+
 ## Hard Stops
 
 Do not delete or move production Swift, tests, project config, package manifests, scripts, resources, entitlements, privacy manifests, current proof logs, or active truth files as part of docs cleanup.
 
 Do not delete `.codex` or batch-train material opportunistically. Classify first, extract value, update links, get approval, then perform a dedicated cleanup pass.
 
-## Next Recommended Step
+## Next Recommended Direct Cleanup Step
 
-Retire or regenerate stale inventory files such as `docs/audits/tracked-files.txt`, then continue with approved historical prompt/canon archive planning.
+Continue with a focused active-index pass:
+
+1. inspect `docs/README.md`, `history/README.md`, `codex-os/README.md`, `backend/README.md`, and `validation/README.md`
+2. repair any front-door link that exposes obsolete canon as active authority
+3. add historical/supporting headers to retained high-risk old canon files only after confirming they remain linked
+4. inspect `Native/Ambitions/Features/Plan/*` for user-visible Plan drift versus internal compatibility naming
