@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "LDI16 Mutation Permissions And Impact Levels"
-  previous_batch: "LDI16 Mutation Permissions And Impact Levels"
+  batch: "LDI17 Continuity Sync"
+  previous_batch: "LDI17 Continuity Sync"
   previous_result: "green"
-  next_eligible_batch: "LDI17 Continuity Sync"
+  next_eligible_batch: "LDI18 Archive And Schema Migration"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
