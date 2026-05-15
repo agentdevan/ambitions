@@ -14,6 +14,7 @@ enum SourceAtlasPackKind: String, Codable, Sendable, Equatable, Hashable, CaseIt
     case optionValueMap = "option_value_map"
     case projectionRecipe = "projection_recipe"
     case starterKit = "starter_kit"
+    case userMiniPack = "user_mini_pack"
 }
 
 enum SourceAtlasSourceKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
