@@ -33,7 +33,7 @@ final class PlanViewModel {
         do {
             state = .loaded(try await service.loadPlanDashboard(now: now))
         } catch {
-            state = .failed("Unable to load Plan: \(error.localizedDescription)")
+            state = .failed("Unable to load Time: \(error.localizedDescription)")
         }
     }
 
@@ -41,7 +41,7 @@ final class PlanViewModel {
         do {
             state = .loaded(try await service.makePlanCalendarAware(now: now))
         } catch {
-            state = .failed("Unable to make Plan calendar-aware: \(error.localizedDescription)")
+            state = .failed("Unable to make Time calendar-aware: \(error.localizedDescription)")
         }
     }
 }
