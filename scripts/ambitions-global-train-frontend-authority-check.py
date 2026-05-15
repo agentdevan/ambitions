@@ -38,7 +38,7 @@ FRONTEND_BATCH_PREFIXES = (
 )
 
 FRONTEND_CONTENT_RE = re.compile(
-    r"\b(SwiftUI|frontend|front-end|screen|screenshot|preview|rendered|rendering|first-viewport|bottom chrome|surface recipe|surface ID|surface_id|Reality Meridian|LifeShape Field|Constellation Atlas|Atmosphere Composer|User System Profile)\b",
+    r"\b(SwiftUI|frontend|front-end|screen|preview|rendered|rendering|first-viewport|bottom chrome|surface recipe|surface ID|surface_id|Reality Meridian|LifeShape Field|Constellation Atlas|Atmosphere Composer|User System Profile)\b",
     re.IGNORECASE,
 )
 
