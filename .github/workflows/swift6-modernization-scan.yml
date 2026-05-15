@@ -1,0 +1,17 @@
+name: Swift 6 Modernization Scan
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/ambitions-swift6-modernization-scan.py . --strict
