@@ -82,8 +82,8 @@ Required proof gates: current local evidence, EFC applicability, no-claim bounda
 | 59 | SA24 | Claim Candidate Extractor | historical_complete_do_not_run | `prompts/batches/SA24.md` | do_not_run_header_only | SA25 |
 | 60 | SA25 | Source Review Sheet / Claim Review Drawer | historical_complete_do_not_run | `prompts/batches/SA25.md` | do_not_run_header_only | SA26 |
 | 61 | SA26 | User Mini-Pack Builder | historical_complete_do_not_run | `prompts/batches/SA26.md` | do_not_run_header_only | SA27 |
-| 62 | SA27 | Pack Factory Lite | executable_now | `prompts/batches/SA27.md` | create_missing | SA28 |
-| 63 | SA28 | Pack Diff / Changed Claim Tooling | executable_later | `prompts/batches/SA28.md` | create_missing | SA29 |
+| 62 | SA27 | Pack Factory Lite | historical_complete_do_not_run | `prompts/batches/SA27.md` | do_not_run_header_only | SA28 |
+| 63 | SA28 | Pack Diff / Changed Claim Tooling | executable_now | `prompts/batches/SA28.md` | create_missing | SA29 |
 | 64 | SA29 | Hash / Signature / Revocation Tooling | executable_later | `prompts/batches/SA29.md` | create_missing | SA30 |
 | 65 | SA30 | Freshness Broker Manifest Contract | executable_later | `prompts/batches/SA30.md` | create_missing | SA31 |
 | 66 | SA31 | Official Source Adapter Contracts | executable_later | `prompts/batches/SA31.md` | create_missing | SA32 |

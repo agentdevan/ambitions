@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA26 User Mini-Pack Builder"
-  previous_batch: "SA26 User Mini-Pack Builder"
+  batch: "SA27 Pack Factory Lite"
+  previous_batch: "SA27 Pack Factory Lite"
   previous_result: "green"
-  next_eligible_batch: "SA27 Pack Factory Lite"
+  next_eligible_batch: "SA28 Pack Diff / Changed Claim Tooling"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
