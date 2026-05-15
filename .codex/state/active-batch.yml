@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA19 PDF Import Boundary"
-  previous_batch: "SA19 PDF Import Boundary"
+  batch: "SA20 PDFKit Text Extraction"
+  previous_batch: "SA20 PDFKit Text Extraction"
   previous_result: "green"
-  next_eligible_batch: "SA20 PDFKit Text Extraction"
+  next_eligible_batch: "SA21 Vision OCR Fallback"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

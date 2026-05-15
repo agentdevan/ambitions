@@ -170,3 +170,11 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 - commit: 8a9237e40aaba9add82d09e70d9272aa79117bfe
 - next batch: SA17
 - mode: deterministic state advancement helper
+
+## Post-PK State Advancement — 2026-05-15T02:47:40Z
+
+- completed batch: SA20
+- status: green
+- commit: 76c8bc4191b8cdfe0910336c8908d01a0b4a4aa3
+- next batch: SA21
+- mode: deterministic state advancement helper

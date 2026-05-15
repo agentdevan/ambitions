@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-15T02:10:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "SA20",
-    "next_eligible_title": "PDFKit Text Extraction",
+    "next_eligible_batch": "SA21",
+    "next_eligible_title": "Vision OCR Fallback",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -762,30 +762,30 @@
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Do not rerun; SA20 is next eligible."
+      "next_action": "Do not rerun; SA21 is next eligible."
     },
     {
       "id": "SA20",
       "title": "PDFKit Text Extraction",
-      "classification": "executable_now",
-      "status_class": "executable-now",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical",
       "owner_train": "SA / Source Atlas",
       "source_path": "docs/codex/BATCH_REGISTRY.md",
-      "dependency_gate": "Complete prior batch SA19.",
+      "dependency_gate": "Complete / Green; preserve SA20 proof and do not reactivate.",
       "risk_class": "unknown",
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Run SA20 through the Ambitions runner."
+      "next_action": "Do not rerun; SA21 is next eligible."
     },
     {
       "id": "SA21",
       "title": "Vision OCR Fallback",
-      "classification": "executable_later",
-      "status_class": "queued",
+      "classification": "executable_now",
+      "status_class": "executable-now",
       "owner_train": "SA / Source Atlas",
       "source_path": "docs/codex/BATCH_REGISTRY.md",
-      "dependency_gate": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "dependency_gate": "Complete prior batch SA20.",
       "risk_class": "unknown",
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
