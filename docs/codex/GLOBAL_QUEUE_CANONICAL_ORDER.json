@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "AOS28",
-  "next_eligible_title": "AmbitionsOS Experience Tail Gate",
+  "next_eligible_batch": "AOS29",
+  "next_eligible_title": "AmbitionsOS Handoff Tail Gate",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -660,17 +660,17 @@
     {
       "id": "AOS28",
       "title": "AmbitionsOS Experience Tail Gate",
-      "classification": "executable_now",
-      "reason": "AOS27 is complete / green. AOS28 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch AOS27.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "AOS28 AmbitionsOS Experience Tail Gate is complete / Green with closeout in docs/audits/aos28-batch-closeout-report.md and commit 2ccf7a1e55e5843b8252b89bf085ee23c4245069 pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "AOS29",
       "title": "AmbitionsOS Handoff Tail Gate",
-      "classification": "blocked_until_dependency",
-      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
-      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "classification": "executable_now",
+      "reason": "AOS28 is complete / green. AOS29 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch AOS28.",
       "efc_applicability": "invoked"
     },
     {
