@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA23 Document Type Classifier"
-  previous_batch: "SA23 Document Type Classifier"
+  batch: "SA24 Claim Candidate Extractor"
+  previous_batch: "SA24 Claim Candidate Extractor"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "SA24 Claim Candidate Extractor"
+  next_eligible_batch: "SA25 Source Review Sheet / Claim Review Drawer"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

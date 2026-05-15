@@ -513,12 +513,12 @@
     "id": "PK19",
     "title": "Goals Query/Projector Extraction",
     "train": "PK",
-    "status": "executable_later",
+    "status": "historical_complete_do_not_run",
     "queue_position": 16,
     "canonical_order_source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
     "prompt_path": "prompts/batches/PK19.md",
     "prompt_exists": true,
-    "prompt_action": "create_missing",
+    "prompt_action": "do_not_run_header_only",
     "owner_scope": "PK",
     "batch_type": "implementation",
     "dependency_gate": "Complete prior PK batch PK18 and any data-safety proof named by the PK train.",
@@ -1541,9 +1541,9 @@
     "prompt_action": "create_missing",
     "owner_scope": "SA",
     "batch_type": "implementation",
-    "dependency_gate": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+    "dependency_gate": "Complete / Accepted Yellow; preserve SA24 proof and do not reactivate.",
     "hard_preconditions": [
-      "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed."
+      "Complete / Accepted Yellow; preserve SA24 proof and do not reactivate."
     ],
     "allowed_scope_summary": "Only files named by the live batch prompt after source-truth inspection. Do not touch app source outside the owning seam. Do not touch Package.swift, project.yml, .github, signing, entitlements, generated Xcode projects, or unrelated train files.",
     "forbidden_scope_summary": "Native/AppUI/Sources outside owner seam, Package.swift, project.yml, .github, signing, entitlements, generated Xcode, release automation, hosted backend/LLM core.",
@@ -1567,7 +1567,7 @@
     "id": "SA12",
     "title": "Source Atlas Query Engine",
     "train": "SA",
-    "status": "executable_later",
+    "status": "executable_now",
     "queue_position": 47,
     "canonical_order_source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
     "prompt_path": "prompts/batches/SA12.md",
@@ -1575,9 +1575,9 @@
     "prompt_action": "create_missing",
     "owner_scope": "SA",
     "batch_type": "implementation",
-    "dependency_gate": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+    "dependency_gate": "Complete prior batch SA24.",
     "hard_preconditions": [
-      "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed."
+      "Complete prior batch SA24."
     ],
     "allowed_scope_summary": "Only files named by the live batch prompt after source-truth inspection. Do not touch app source outside the owning seam. Do not touch Package.swift, project.yml, .github, signing, entitlements, generated Xcode projects, or unrelated train files.",
     "forbidden_scope_summary": "Native/AppUI/Sources outside owner seam, Package.swift, project.yml, .github, signing, entitlements, generated Xcode, release automation, hosted backend/LLM core.",
