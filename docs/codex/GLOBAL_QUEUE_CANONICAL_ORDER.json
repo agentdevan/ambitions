@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "LDI22",
-  "next_eligible_title": "Governance And Maintenance Console",
+  "next_eligible_batch": "AOS24",
+  "next_eligible_title": "AmbitionsOS Runtime Tail Gate",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -620,17 +620,17 @@
     {
       "id": "LDI22",
       "title": "Governance And Maintenance Console",
-      "classification": "executable_now",
-      "reason": "LDI21 is complete / green. LDI22 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch LDI21.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "LDI22 Governance And Maintenance Console is complete / Green with closeout in docs/audits/ldi22-batch-closeout-report.md and commit dc9fe9c25d88fcc4f33e9ca4d497da6c540532bb pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "AOS24",
       "title": "AmbitionsOS Runtime Tail Gate",
-      "classification": "blocked_until_dependency",
-      "reason": "AOS user-facing intelligence tail waits for relevant SA, PK, LDI, EFC, privacy, performance, and proof prerequisites.",
-      "blocking_prerequisites": "Complete source/freshness dependencies, PK intelligence/data-control gates, and owner-specific LDI proof where applicable.",
+      "classification": "executable_now",
+      "reason": "LDI22 is complete / green. AOS24 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch LDI22.",
       "efc_applicability": "invoked"
     },
     {

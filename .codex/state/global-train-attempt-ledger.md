@@ -330,3 +330,11 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 - commit: 12a5fabeda711f579baef38f1aae5a38c85849ee
 - next batch: LDI22
 - mode: deterministic state advancement helper
+
+## Post-PK State Advancement — 2026-05-15T23:02:10Z
+
+- completed batch: LDI22
+- status: green
+- commit: dc9fe9c25d88fcc4f33e9ca4d497da6c540532bb
+- next batch: AOS24
+- mode: deterministic state advancement helper
