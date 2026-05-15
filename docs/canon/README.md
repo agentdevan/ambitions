@@ -25,7 +25,8 @@ This directory is retained for supporting and historical material only. It must 
 
 - [`../../frontend/README.md`](../../frontend/README.md)
 - [`../truth/README.md`](../truth/README.md)
+- [`../status/old-canon-classification-index.md`](../status/old-canon-classification-index.md)
 - [`../AmbitionsCanon/README.md`](../AmbitionsCanon/README.md)
 - [`../archive/README.md`](../archive/README.md)
 
-If you need older canon for traceability, inspect the historical files in this directory only as supporting context and always reconcile against `docs/truth/*`.
+If you need older canon for traceability, inspect the historical files in this directory only as supporting context and always reconcile against `docs/truth/*` and the old canon classification index.
