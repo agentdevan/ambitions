@@ -19,6 +19,7 @@ from ambitions_frontend_authority_common import (
     write_json_like_yaml,
     write_text,
 )
+from ambitions_signature_visual_instruments import enrich_packet_with_instrument, instrument_counts, missing_top_level_instruments
 
 
 def generated_swift_case_name(surface_id: str) -> str:
@@ -45,7 +46,8 @@ def swift_string(value: Any) -> str:
 
 
 def build_binding(surface_id: str) -> dict[str, Any]:
-    packet = combined_surface_payload(surface_id)
+    packet = enrich_packet_with_instrument(combined_surface_payload(surface_id))
+    instrument = packet.get("signature_visual_instrument", {}) if isinstance(packet.get("signature_visual_instrument"), dict) else {}
     proof_status = proof_binding_status(str(packet.get("proof_status")))
     implementation_status = str(packet.get("implementation_status"))
     last_receipt = None
@@ -54,6 +56,9 @@ def build_binding(surface_id: str) -> dict[str, Any]:
         for candidate in sorted(receipt_dir.glob(f"{surface_id}*.json")):
             last_receipt = str(candidate.relative_to(Path.cwd()))
             break
+    future_visual_files = list(instrument.get("future_visual_object_source_files", []) or [])
+    declared_files = list(packet.get("source_candidates", []) or [])
+    visual_object_file = next((path for path in declared_files if surface_id.split("_")[0].lower() in path.lower()), None)
     return {
         "surface_id": surface_id,
         "recipe_id": packet.get("recipe_id"),
@@ -61,9 +66,17 @@ def build_binding(surface_id: str) -> dict[str, Any]:
         "primary_object": packet.get("primary_object"),
         "maturity_tier": packet.get("maturity_tier"),
         "source_relationship": packet.get("source_relationship"),
-        "source_candidates": packet.get("source_candidates", []),
-        "declared_implementation_files": packet.get("source_candidates", []),
+        "source_candidates": declared_files,
+        "declared_implementation_files": declared_files,
         "generated_swift_identifier": f"AmbitionsSurfaceID.{generated_swift_case_name(surface_id)}",
+        "signature_instrument_id": instrument.get("signature_instrument_id"),
+        "signature_instrument_name": instrument.get("signature_instrument_name"),
+        "shared_instrument_primitives": instrument.get("shared_instrument_primitives", []),
+        "visual_object_source_file": visual_object_file,
+        "future_visual_object_source_file": future_visual_files[0] if future_visual_files else None,
+        "future_visual_object_source_files": future_visual_files,
+        "instrument_implementation_status": instrument.get("instrument_implementation_status"),
+        "instrument_required": instrument.get("instrument_required"),
         "preview_targets": packet.get("performance_preview_requirements", {}).get("preview_targets", []),
         "test_targets": ["AmbitionsTests", "AmbitionsUITests"],
         "implementation_status": implementation_status,
@@ -118,6 +131,8 @@ def write_generated_swift_files(bindings: list[dict[str, Any]]) -> list[str]:
             "    public let maturityTier: String",
             "    public let sourceRelationship: String",
             "    public let proofStatus: String",
+            "    public let signatureInstrumentID: String?",
+            "    public let instrumentImplementationStatus: String",
             "}",
             "",
             "public enum AmbitionsFrontendAuthority {",
@@ -127,10 +142,12 @@ def write_generated_swift_files(bindings: list[dict[str, Any]]) -> list[str]:
     record_lines: list[str] = []
     for binding in unique_bindings:
         destination_case = generated_destination_case_name(str(binding["destination"]))
-        surface_lines_case = str(binding["surface_id"])
+        surface_case = str(binding["surface_id"])
         recipe_case = str(binding["recipe_id"])
+        instrument_id = binding.get("signature_instrument_id")
+        instrument_expr = "nil" if not instrument_id else swift_string(instrument_id)
         record_lines.append(
-            f"        .{surface_lines_case}: AmbitionsFrontendAuthorityRecord(surfaceID: .{surface_lines_case}, recipeID: .{recipe_case}, destination: .{destination_case}, primaryObject: {swift_string(binding['primary_object'])}, maturityTier: {swift_string(binding['maturity_tier'])}, sourceRelationship: {swift_string(binding['source_relationship'])}, proofStatus: {swift_string(binding['proof_status'])})"
+            f"        .{surface_case}: AmbitionsFrontendAuthorityRecord(surfaceID: .{surface_case}, recipeID: .{recipe_case}, destination: .{destination_case}, primaryObject: {swift_string(binding['primary_object'])}, maturityTier: {swift_string(binding['maturity_tier'])}, sourceRelationship: {swift_string(binding['source_relationship'])}, proofStatus: {swift_string(binding['proof_status'])}, signatureInstrumentID: {instrument_expr}, instrumentImplementationStatus: {swift_string(binding.get('instrument_implementation_status'))})"
         )
     destination_lines.extend(f"{line}{',' if index < len(record_lines) - 1 else ''}" for index, line in enumerate(record_lines))
     destination_lines.extend(["    ]", "}", ""])
@@ -158,9 +175,13 @@ def render_md(report: dict[str, Any]) -> str:
         f"- implementation status: {report['implementation_status_counts']}",
         f"- proof status: {report['proof_status_counts']}",
         f"- destination counts: {report['destination_counts']}",
+        f"- signature instruments: {report['signature_instrument_counts']}",
         "",
-        "## Missing Receipts",
+        "## Missing Top-Level Instruments",
     ]
+    for surface_id in report["missing_top_level_instruments"] or ["None"]:
+        lines.append(f"- `{surface_id}`")
+    lines.extend(["", "## Missing Receipts"])
     for surface_id in report["surfaces_missing_receipts"]:
         lines.append(f"- `{surface_id}`")
     lines.extend(["", "## Top Gaps"])
@@ -187,6 +208,8 @@ def main() -> int:
         "destination_counts": surface_counts_by("destination"),
         "implementation_status_counts": dict(sorted(Counter(binding["implementation_status"] for binding in bindings).items())),
         "proof_status_counts": dict(sorted(Counter(binding["proof_status"] for binding in bindings).items())),
+        "signature_instrument_counts": instrument_counts([{"surface_id": binding["surface_id"], "signature_visual_instrument": {"signature_instrument_id": binding.get("signature_instrument_id")}} for binding in bindings]),
+        "missing_top_level_instruments": missing_top_level_instruments([{"surface_id": binding["surface_id"], "signature_visual_instrument": {"signature_instrument_id": binding.get("signature_instrument_id")}} for binding in bindings]),
         "source_linked_surfaces": [binding["surface_id"] for binding in bindings if binding["source_relationship"] == "implemented_source_present"],
         "canon_only_pending_lock_surfaces": [binding["surface_id"] for binding in bindings if binding["implementation_status"] == "canon_only_pending_lock"],
         "source_approximation_surfaces": [binding["surface_id"] for binding in bindings if binding["implementation_status"] == "source_approximation_present"],
