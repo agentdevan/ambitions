@@ -56,7 +56,7 @@ struct TodayDerivedReadModelCacheKey: Hashable, Sendable {
     }
 }
 
-final class TodayDerivedReadModelCache: @unchecked Sendable {
+final class TodayDerivedReadModelCache {
     private var storage: [TodayDerivedReadModelCacheKey: TodayExecutionViewState] = [:]
     private(set) var hitCount: Int = 0
     private(set) var missCount: Int = 0
