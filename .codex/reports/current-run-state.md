@@ -1,19 +1,22 @@
 # Current Run State
 
 Date: 2026-05-15
-Active train: Global full-stack execution
-Current batch: AOS30 AmbitionsOS Closeout / Green.
-Next eligible batch: FCP27 App-Wide Flagship Audit And Remediation
-Scope: AOS30 AmbitionsOS Closeout is complete / Green with AOS30 Green: Implemented AOS Closeout Tail Gate with explicit receipts.; FCP27 App-Wide Flagship Audit And Remediation is next after prior active dependencies. This state mirror does not claim release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
-AFI source truth is active for product/IA/UI/visual/copy decisions.
-The active flagship top-level IA is Today / Goals / Capture / Time / You.
-Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
+Active train: Manifest-faithful rerun reconciliation
+Current batch: SA28-LDI15-AOS24 Manifest Rerun Directive / Active
+Next eligible batch: SA28 Manifest-Faithful Rerun
 
-## AOS30 AmbitionsOS Closeout Closeout
+FCP27 is blocked.
 
-- Commit: `3f129bb558511995b1591563bc5d6bf977a918a5` pushed to `main`.
-- Report: `docs/audits/aos30-batch-closeout-report.md`.
-- Status: Green.
-- Proof: AOS30 Green: Implemented AOS Closeout Tail Gate with explicit receipts..
-- Canonical queue now marks AOS30 complete/do-not-run and FCP27 executable now.
-- No full-suite, device, accessibility, performance, TestFlight/App Store, legal/privacy, release-readiness, sync/cloud, hosted AI, or global-train-completion claim is made.
+Read first:
+
+```text
+docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md
+```
+
+SA28-SA32, LDI15-LDI22, and AOS24-AOS30 must be rerun or truthfully reclassified against their manifests before FCP27 or later global queue work can proceed.
+
+Existing commits are retained as historical/supporting evidence. They are not reverted by default and are not sufficient Green proof unless the manifest criteria are satisfied.
+
+Frontend-touching rerun work must inherit the frontend encyclopedia from `frontend/README.md`.
+
+No release, device, accessibility, performance, sync/cloud, hosted AI, TestFlight/App Store, or global train completion claim is made.
