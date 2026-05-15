@@ -2043,17 +2043,17 @@
     "id": "SA26",
     "title": "User Mini-Pack Builder",
     "train": "SA",
-    "status": "executable_now",
+    "status": "historical_complete_do_not_run",
     "queue_position": 61,
     "canonical_order_source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
     "prompt_path": "prompts/batches/SA26.md",
     "prompt_exists": true,
-    "prompt_action": "create_missing",
+    "prompt_action": "do_not_run_header_only",
     "owner_scope": "SA",
     "batch_type": "implementation",
-    "dependency_gate": "Complete prior batch SA25.",
+    "dependency_gate": "Complete / Green; preserve SA26 proof and do not reactivate.",
     "hard_preconditions": [
-      "Complete prior batch SA25."
+      "Complete / Green; preserve SA26 proof and do not reactivate."
     ],
     "allowed_scope_summary": "Only files named by the live batch prompt after source-truth inspection. Do not touch app source outside the owning seam. Do not touch Package.swift, project.yml, .github, signing, entitlements, generated Xcode projects, or unrelated train files.",
     "forbidden_scope_summary": "Native/AppUI/Sources outside owner seam, Package.swift, project.yml, .github, signing, entitlements, generated Xcode, release automation, hosted backend/LLM core.",
@@ -2068,7 +2068,7 @@
     "dptg_applicability": "not-applicable; terminal proof remains later",
     "consolidation_recommendation": "Keep shared standards/templates only; preserve canonical ID as separate record.",
     "modification_recommendation": "Implement the Source Atlas batch-specific work for User Mini-Pack Builder with source, freshness, provenance, and claim-state proof boundaries.",
-    "removal_recommendation": "Do not delete in this batch; mark do-not-run where historical/overlay/conditional.",
+    "removal_recommendation": "Do not delete; preserve proof and do not rerun as an implementation batch.",
     "exact_codex_instruction_summary": "Implement User Mini-Pack Builder in the Source Atlas owner seam with explicit source, provenance, freshness, stale/unknown states, and conservative claim boundaries.",
     "final_report_path": "docs/audits/sa26-batch-closeout-report.md",
     "next_handoff": "SA27"
@@ -2077,7 +2077,7 @@
     "id": "SA27",
     "title": "Pack Factory Lite",
     "train": "SA",
-    "status": "executable_later",
+    "status": "executable_now",
     "queue_position": 62,
     "canonical_order_source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
     "prompt_path": "prompts/batches/SA27.md",
@@ -2085,9 +2085,9 @@
     "prompt_action": "create_missing",
     "owner_scope": "SA",
     "batch_type": "implementation",
-    "dependency_gate": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+    "dependency_gate": "Complete prior batch SA26, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
     "hard_preconditions": [
-      "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed."
+      "Complete prior batch SA26, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed."
     ],
     "allowed_scope_summary": "Only files named by the live batch prompt after source-truth inspection. Do not touch app source outside the owning seam. Do not touch Package.swift, project.yml, .github, signing, entitlements, generated Xcode projects, or unrelated train files.",
     "forbidden_scope_summary": "Native/AppUI/Sources outside owner seam, Package.swift, project.yml, .github, signing, entitlements, generated Xcode, release automation, hosted backend/LLM core.",

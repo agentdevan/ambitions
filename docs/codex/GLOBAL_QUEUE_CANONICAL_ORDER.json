@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA26",
-  "next_eligible_title": "User Mini-Pack Builder",
+  "next_eligible_batch": "SA27",
+  "next_eligible_title": "Pack Factory Lite",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -508,17 +508,17 @@
     {
       "id": "SA26",
       "title": "User Mini-Pack Builder",
-      "classification": "executable_now",
-      "reason": "SA25 is complete / green. SA26 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA25.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA26 User Mini-Pack Builder is complete / Green with closeout in docs/audits/sa26-batch-closeout-report.md and local commit 6dff2f3e7. Push was blocked by the outer command policy and has not completed in this run. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA27",
       "title": "Pack Factory Lite",
-      "classification": "executable_later",
-      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
-      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "classification": "executable_now",
+      "reason": "SA26 is complete / green. SA27 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA26.",
       "efc_applicability": "invoked"
     },
     {
@@ -1193,5 +1193,6 @@
       "blocking_prerequisites": "Only a new explicitly approved PXOS implementation train can create runnable PX work.",
       "efc_applicability": "not applicable"
     }
-  ]
+  ],
+  "current_batch": "SA26"
 }

@@ -846,35 +846,38 @@
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Do not rerun; SA26 is next eligible."
+      "next_action": "Do not rerun; SA26 was the next eligible Source Atlas handoff.",
+      "status": "historical_complete_do_not_run",
+      "runner_classification": "historical-complete",
+      "dependency_status": "queued successor"
     },
     {
       "id": "SA26",
       "title": "User Mini-Pack Builder",
-      "classification": "executable_now",
-      "status_class": "executable-now",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete",
       "owner_train": "SA / Source Atlas",
       "source_path": "docs/codex/BATCH_REGISTRY.md",
-      "dependency_gate": "Complete prior batch SA25.",
+      "dependency_gate": "Complete / Green; preserve SA26 proof and do not reactivate.",
       "risk_class": "unknown",
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Run SA26 through the Ambitions runner."
+      "next_action": "Do not rerun; SA27 is next eligible."
     },
     {
       "id": "SA27",
       "title": "Pack Factory Lite",
-      "classification": "executable_later",
-      "status_class": "queued",
+      "classification": "executable_now",
+      "status_class": "executable-now",
       "owner_train": "SA / Source Atlas",
       "source_path": "docs/codex/BATCH_REGISTRY.md",
-      "dependency_gate": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "dependency_gate": "Complete prior batch SA26, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
       "risk_class": "unknown",
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "next_action": "Run SA27 through the Ambitions runner."
     },
     {
       "id": "SA28",
