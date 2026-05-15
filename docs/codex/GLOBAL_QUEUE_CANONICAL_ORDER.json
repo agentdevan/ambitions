@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "LDI16",
-  "next_eligible_title": "Mutation Permissions And Impact Levels",
+  "next_eligible_batch": "LDI17",
+  "next_eligible_title": "Continuity Sync",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -572,17 +572,17 @@
     {
       "id": "LDI16",
       "title": "Mutation Permissions And Impact Levels",
-      "classification": "executable_now",
-      "reason": "LDI15 is complete / green. LDI16 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch LDI15.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "LDI16 Mutation Permissions And Impact Levels is complete / Green with closeout in docs/audits/ldi16-batch-closeout-report.md and commit c8598b6aa467d1709d432e37376f7339d4c55e5f pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "LDI17",
       "title": "Continuity Sync",
-      "classification": "executable_later",
-      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
-      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "classification": "executable_now",
+      "reason": "LDI16 is complete / green. LDI17 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch LDI16.",
       "efc_applicability": "invoked"
     },
     {
