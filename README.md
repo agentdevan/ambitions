@@ -17,10 +17,18 @@ Ambitions is a premium native iPhone life operating system.
 ## Truth
 
 - Product/design: [`docs/truth/PRODUCT_DESIGN_TRUTH.md`](docs/truth/PRODUCT_DESIGN_TRUTH.md)
+- Product moat: [`docs/truth/PRODUCT_MOAT_TRUTH.md`](docs/truth/PRODUCT_MOAT_TRUTH.md)
 - Implementation/source: [`docs/truth/IMPLEMENTATION_TRUTH.md`](docs/truth/IMPLEMENTATION_TRUTH.md)
 - Release/proof: [`docs/truth/RELEASE_TRUTH.md`](docs/truth/RELEASE_TRUTH.md)
 - Codex process: [`docs/truth/CODEX_PROCESS_TRUTH.md`](docs/truth/CODEX_PROCESS_TRUTH.md)
 - Historical policy: [`docs/truth/HISTORICAL_POLICY.md`](docs/truth/HISTORICAL_POLICY.md)
+
+## Runtime and cleanup status
+
+- Private Life Runtime proof target: [`docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md`](docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md)
+- Cleanup decisions: [`docs/status/cleanup-decision-register.md`](docs/status/cleanup-decision-register.md)
+- Repo governance cleanup tracker: [`docs/status/repo-governance-master-cleanup-plan.md`](docs/status/repo-governance-master-cleanup-plan.md)
+- Status ledger index: [`docs/status/README.md`](docs/status/README.md)
 
 ## Local posture
 
