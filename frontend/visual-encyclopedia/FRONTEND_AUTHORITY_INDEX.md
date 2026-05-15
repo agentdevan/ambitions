@@ -31,6 +31,7 @@ For frontend/UI/design implementation work:
 
 - Encyclopedia to frontend OS: `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
 - Master: `AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
+- Today flagship visual lock: `recipes/today/today_reality_meridian_flagship_surface.md`
 - Audit: `VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md`
 - Perfection plan: `VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md`
 - Final proof authority: `trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md`, `trace/VISUAL_100_RED_YELLOW_FLAG_LEDGER.md`, `trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.md`, `trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml`, `trace/VISUAL_100_SOURCE_DEBT_LEDGER.md`, `trace/VISUAL_100_SOURCE_LINK_DISTRIBUTION.md`
@@ -50,6 +51,24 @@ For frontend/UI/design implementation work:
 - Primitive bibles: `primitives/*.md`
 - Behavior bibles: `behavior/*.md`
 - Trace matrices and ledgers: `trace/*.md`, `trace/VISUAL_CONFLICT_LEDGER.md`, `trace/VISUAL_SOURCE_LINKAGE_LEDGER.md`, `trace/VISUAL_SURFACE_GRAPH_LEDGER.md`
+
+## Today Flagship Visual Lock
+
+For Today visual review or implementation planning, start with `recipes/today/today_reality_meridian_flagship_surface.md` before lower-level Today recipes. It owns the default Today viewport composition when older Today recipe language conflicts with the new North Star direction.
+
+The locked Today viewport is:
+
+- a living temporal surface, not a productivity dashboard
+- Reality Meridian as the primary object
+- scheduled step node and live current-time cursor as separate visual objects
+- exact current-time label aligned to the live cursor
+- Start Here integrated into the temporal field
+- one-handable `Start now →` CTA on the right half at or below vertical center
+- compact `Local · Ambitions` top-right chrome
+- sparse proof/recovery via one compact receipt surface
+- bottom IA exactly `Today / Goals / Capture / Time / You`
+
+This lock is design canon only. It does not prove SwiftUI implementation, simulator/device behavior, screenshot parity, accessibility conformance, or release readiness.
 
 ## Source Truth Inspected
 
@@ -73,6 +92,7 @@ For frontend/UI/design implementation work:
 - `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md`
 - `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json`
 - `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md`
+- `frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md`
 - `Native/Ambitions/App/AppTab.swift`
 - `Native/Ambitions/App/AmbitionsRootView.swift`
 - `Native/Ambitions/Features/Today/*`
