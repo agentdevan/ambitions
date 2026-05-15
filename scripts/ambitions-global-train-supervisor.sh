@@ -8,6 +8,7 @@ QUEUE="docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
 RUNNER="scripts/ambitions-codex-train.sh"
 AUDIT="scripts/ambitions-prompt-audit.sh"
 PREFLIGHT="scripts/ambitions-process-preflight.sh"
+FRONTEND_AUTHORITY_CHECK="scripts/ambitions-global-train-frontend-authority-check.py"
 
 die() {
   echo "ERROR: $*" >&2
@@ -36,6 +37,7 @@ require_base_files() {
   [[ -x "$RUNNER" ]] || die "$RUNNER is missing or not executable"
   [[ -x "$AUDIT" ]] || die "$AUDIT is missing or not executable"
   [[ -x "$PREFLIGHT" ]] || die "$PREFLIGHT is missing or not executable"
+  [[ -f "$FRONTEND_AUTHORITY_CHECK" ]] || die "$FRONTEND_AUTHORITY_CHECK is missing"
   [[ -f "$QUEUE" ]] || die "$QUEUE is missing"
   [[ -f "$LEDGER" ]] || die "$LEDGER is missing"
 }
@@ -169,6 +171,8 @@ print_status() {
   echo "Tracked dirty files:"
   tracked_dirty || true
   echo
+  echo "Frontend authority hook: $FRONTEND_AUTHORITY_CHECK"
+  echo
   echo "Process conflicts:"
   active_conflicts || true
   echo
@@ -198,6 +202,12 @@ audit_prompts() {
   die "prompt audit failed with exit code $exit_code"
 }
 
+run_frontend_authority_hook() {
+  local batch="$1"
+  local prompt="$2"
+  python3 "$FRONTEND_AUTHORITY_CHECK" --batch "$batch" --prompt "$prompt"
+}
+
 run_once() {
   require_base_files
   python3 -m json.tool "$QUEUE" >/dev/null
@@ -212,6 +222,8 @@ run_once() {
   [[ "$batch" != "RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION" ]] || die "refusing to run the global conductor prompt as a child batch"
   prompt="$(next_prompt "$batch")"
   [[ -f "$prompt" ]] || die "prompt missing: $prompt"
+
+  run_frontend_authority_hook "$batch" "$prompt"
 
   write_lock "$batch"
   echo "Running one global-train batch through canonical runner: $batch"
