@@ -56,7 +56,11 @@ struct TodayDerivedReadModelCacheKey: Hashable, Sendable {
     }
 }
 
-final class TodayDerivedReadModelCache {
+/// Swift 6 Sendable invariant: this cache is a private reference-backed cache for
+/// `RepositoryBackedTodayService`, which conforms to `TodayServicing: Sendable`.
+/// Every read/write of `storage`, `hitCount`, and `missCount` is protected by
+/// `lock`; focused coverage lives in `TodayDerivedReadModelCacheTests`.
+final class TodayDerivedReadModelCache: @unchecked Sendable { // AMB_SWIFT6_ALLOW: NSLock-protected cache; see TodayDerivedReadModelCacheTests.
     private var storage: [TodayDerivedReadModelCacheKey: TodayExecutionViewState] = [:]
     private(set) var hitCount: Int = 0
     private(set) var missCount: Int = 0
