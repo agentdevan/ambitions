@@ -3,6 +3,7 @@
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
 .PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
 .PHONY: visual-compile visual-validators visual-linkage visual-prose visual-vocabulary visual-surface-graph visual-dashboard visual-all visual-design-authority-all visual-no-orphan-graph surface-scenario-coverage native-iphone-interaction-grammar design-token-completeness authority-supersession faang-red-team-review visual-design-final-form-all mature-app-surface-universe-complete source-provenance-batch-linkage-complete dashboard-conflict-authority active-authority-residue-zero faang-red-team-evidence visual-design-lock-repair-05-final-gate visual-design-lock-repair-05-all
+.PHONY: frontend-authority-packet frontend-authority-packets-p0 frontend-authority-packets-all frontend-authority-preflight frontend-implementation-prompt frontend-source-bindings frontend-drift-check frontend-implementation-dashboard frontend-next-surface-queue frontend-receipt-check frontend-proof-contract-check encyclopedia-to-frontend-os-final-gate encyclopedia-to-frontend-os-all
 .PHONY: visual-100-priority visual-100-recipes visual-100-objects visual-100-source-debt visual-100-vocabulary visual-100-anti-generic visual-100-accessibility visual-100-proof-source-receipt visual-100-transaction visual-100-primitives visual-100-scorecards visual-100-prompt-authority visual-100-atlas visual-100-native visual-100-local-first visual-100-no-false-momentum visual-100-hidden-automation visual-100-false-green visual-100-gate visual-100-dashboard visual-100-all
 .PHONY: design-system-tokens design-system-token-check design-system-contracts design-system-preview-matrix design-system-accessibility-contracts design-system-state-machines design-system-dependencies design-system-feature-services design-system-adrs design-system-proof-receipts design-system-local-trust design-system-performance design-system-authority design-system-traceability design-system-dashboard design-system-15-all
 
@@ -333,6 +334,59 @@ visual-design-lock-repair-05-all:
 	$(MAKE) active-authority-residue-zero
 	$(MAKE) faang-red-team-evidence
 	$(MAKE) visual-design-lock-repair-05-final-gate
+
+frontend-authority-packet:
+	@python3 scripts/ambitions-frontend-authority-packet.py $(if $(ALL),--all) $(if $(TIER),--tier $(TIER)) $(if $(SURFACE),--surface $(SURFACE)) $(if $(FORMAT),--format $(FORMAT))
+
+frontend-authority-packets-p0:
+	@python3 scripts/ambitions-frontend-authority-packet.py --tier P0
+
+frontend-authority-packets-all:
+	@python3 scripts/ambitions-frontend-authority-packet.py --all
+
+frontend-authority-preflight:
+	@python3 scripts/ambitions-frontend-authority-preflight.py --surface $(SURFACE) $(if $(SOURCE),--source $(SOURCE)) $(if $(BATCH),--batch $(BATCH)) $(if $(ALLOW_EXTENSION_REASON),--allow-extension-reason $(ALLOW_EXTENSION_REASON))
+
+frontend-implementation-prompt:
+	@python3 scripts/ambitions-frontend-implementation-prompt.py --surface $(SURFACE) --batch $(BATCH)
+
+frontend-source-bindings:
+	@python3 scripts/ambitions-frontend-source-bindings.py
+
+frontend-drift-check:
+	@python3 scripts/ambitions-frontend-drift-check.py $(if $(SURFACE),--surface $(SURFACE)) $(if $(STRICT),--strict)
+
+frontend-implementation-dashboard:
+	@python3 scripts/ambitions-frontend-implementation-dashboard.py
+
+frontend-next-surface-queue:
+	@python3 scripts/ambitions-frontend-next-surface-queue.py
+
+frontend-receipt-check:
+	@python3 scripts/ambitions-frontend-receipt-check.py
+
+frontend-proof-contract-check:
+	@python3 scripts/ambitions-frontend-proof-contract-check.py
+
+encyclopedia-to-frontend-os-final-gate:
+	@python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py
+
+encyclopedia-to-frontend-os-all:
+	$(MAKE) frontend-authority-packets-p0
+	$(MAKE) frontend-authority-packets-all
+	$(MAKE) frontend-authority-preflight SURFACE=today_root_reality_meridian
+	$(MAKE) frontend-authority-preflight SURFACE=goals_root_constellation_atlas
+	$(MAKE) frontend-authority-preflight SURFACE=capture_root_atmosphere_composer
+	$(MAKE) frontend-authority-preflight SURFACE=time_root_lifeshape_field
+	$(MAKE) frontend-authority-preflight SURFACE=you_root_user_system_profile
+	$(MAKE) frontend-implementation-prompt SURFACE=today_root_reality_meridian BATCH=TODAY-REALITY-MERIDIAN-FLAGSHIP-IMPLEMENTATION-01
+	$(MAKE) frontend-source-bindings
+	$(MAKE) frontend-drift-check
+	$(MAKE) frontend-implementation-dashboard
+	$(MAKE) frontend-next-surface-queue
+	$(MAKE) frontend-receipt-check
+	$(MAKE) frontend-proof-contract-check
+	$(MAKE) encyclopedia-to-frontend-os-final-gate
 
 visual-100-priority:
 	python3 scripts/ambitions-visual-100-priority-registry-check.py

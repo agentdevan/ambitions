@@ -1,0 +1,3870 @@
+{
+  "bindings": [
+    {
+      "declared_implementation_files": [
+        "Native/Ambitions/App/AppShellView.swift",
+        "Native/Ambitions/App/AmbitionsRootView.swift",
+        "Native/Ambitions/App/AppTab.swift"
+      ],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.global_app_shell",
+      "implementation_status": "implemented_unproven",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "global_app_shell",
+      "source_candidates": [
+        "Native/Ambitions/App/AppShellView.swift",
+        "Native/Ambitions/App/AmbitionsRootView.swift",
+        "Native/Ambitions/App/AppTab.swift"
+      ],
+      "source_relationship": "implemented_source_present",
+      "surface_id": "global_app_shell",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.destination_dock",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "destination_dock",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "destination_dock",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.destination_tab_item",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "destination_tab_item",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "destination_tab_item",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.compact_surface_header",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "compact_surface_header",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "compact_surface_header",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.context_crown",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "context_crown",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "context_crown",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.back_navigation",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "back_navigation",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "back_navigation",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.sheet_chrome",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "sheet_chrome",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "sheet_chrome",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.tray_chrome",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "tray_chrome",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "tray_chrome",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.receipt_toast_inline_confirmation",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P1",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "receipt_toast_inline_confirmation",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "receipt_toast_inline_confirmation",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.global_empty_state_shell",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "global_empty_state_shell",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "global_empty_state_shell",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.global_error_fallback_shell",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Global App Shell",
+      "proof_status": "not_in_scope",
+      "recipe_id": "global_error_fallback_shell",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "global_error_fallback_shell",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [
+        "Native/Ambitions/Features/Today/TodayScreen.swift",
+        "Native/Ambitions/Features/Today/TodayViewModel.swift",
+        "Native/Ambitions/Features/Today/TodayExecutionViewState.swift"
+      ],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_root_reality_meridian",
+      "implementation_status": "implemented_unproven",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_root_reality_meridian",
+      "source_candidates": [
+        "Native/Ambitions/Features/Today/TodayScreen.swift",
+        "Native/Ambitions/Features/Today/TodayViewModel.swift",
+        "Native/Ambitions/Features/Today/TodayExecutionViewState.swift"
+      ],
+      "source_relationship": "implemented_source_present",
+      "surface_id": "today_root_reality_meridian",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_current_context_header",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_current_context_header",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_current_context_header",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_start_here_region",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_start_here_region",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_start_here_region",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_reality_meridian_rail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_reality_meridian_rail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_reality_meridian_rail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_recommended_step_object",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_recommended_step_object",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_recommended_step_object",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_now_next_later_sequence",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_now_next_later_sequence",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_now_next_later_sequence",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_upcoming_commitments_region",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_upcoming_commitments_region",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_upcoming_commitments_region",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_closure_prompt_region",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_closure_prompt_region",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_closure_prompt_region",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_receipt_shelf",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_receipt_shelf",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_receipt_shelf",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_source_freshness_indicator",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_source_freshness_indicator",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_source_freshness_indicator",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.step_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "step_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "step_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.step_session",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "step_session",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "step_session",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.recommendation_source_sheet",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "recommendation_source_sheet",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "recommendation_source_sheet",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.closure_sheet",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "closure_sheet",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "closure_sheet",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.receipt_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "receipt_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "receipt_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.proof_attachment_detail",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "proof_attachment_detail",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "proof_attachment_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.adjust_plan_reflow_preview_entry",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "adjust_plan_reflow_preview_entry",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "adjust_plan_reflow_preview_entry",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.blocked_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "blocked_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "blocked_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.waiting_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "waiting_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "waiting_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goal_thread_context_from_today",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goal_thread_context_from_today",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goal_thread_context_from_today",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.local_runtime_source_detail_from_today",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "local_runtime_source_detail_from_today",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "local_runtime_source_detail_from_today",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_empty_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_empty_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_empty_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_no_schedule_data_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_no_schedule_data_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_no_schedule_data_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_overloaded_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_overloaded_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_overloaded_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_recovery_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_recovery_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_recovery_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_vacation_away_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_vacation_away_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "today_vacation_away_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_protected_time_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_protected_time_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_protected_time_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Today",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_stale_recommendation_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Reality Meridian",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_stale_recommendation_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_stale_recommendation_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [
+        "Native/Ambitions/Features/Goals/GoalsScreen.swift",
+        "Native/Ambitions/Features/Goals/GoalsViewModels.swift",
+        "Native/Ambitions/Features/Goals/GoalDetailScreen.swift"
+      ],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goals_root_constellation_atlas",
+      "implementation_status": "implemented_unproven",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goals_root_constellation_atlas",
+      "source_candidates": [
+        "Native/Ambitions/Features/Goals/GoalsScreen.swift",
+        "Native/Ambitions/Features/Goals/GoalsViewModels.swift",
+        "Native/Ambitions/Features/Goals/GoalDetailScreen.swift"
+      ],
+      "source_relationship": "implemented_source_present",
+      "surface_id": "goals_root_constellation_atlas",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goals_life_area_map",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goals_life_area_map",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_life_area_map",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.selected_life_area_surface",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "selected_life_area_surface",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "selected_life_area_surface",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.ambition_graph",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "ambition_graph",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "ambition_graph",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goal_thread_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goal_thread_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goal_thread_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goal_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goal_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goal_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.commitment_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "commitment_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "commitment_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.proof_trail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "proof_trail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "proof_trail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.proof_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "proof_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "proof_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.proof_gap_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "proof_gap_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "proof_gap_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.blocker_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "blocker_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "blocker_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.alternate_path_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "alternate_path_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "alternate_path_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.milestone_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "milestone_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "milestone_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.recommended_step_context_from_goals",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "recommended_step_context_from_goals",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "recommended_step_context_from_goals",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.reflection_recovery_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "reflection_recovery_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "reflection_recovery_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goals_empty_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goals_empty_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_empty_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goals_review_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goals_review_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_review_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goals_blocked_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goals_blocked_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_blocked_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Goals",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goals_archive_historical_goal_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Constellation Atlas",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goals_archive_historical_goal_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_archive_historical_goal_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [
+        "Native/Ambitions/Features/Captures/CapturesScreen.swift",
+        "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+      ],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_root_atmosphere_composer",
+      "implementation_status": "implemented_unproven",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_root_atmosphere_composer",
+      "source_candidates": [
+        "Native/Ambitions/Features/Captures/CapturesScreen.swift",
+        "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+      ],
+      "source_relationship": "implemented_source_present",
+      "surface_id": "capture_root_atmosphere_composer",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_idle_composer",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_idle_composer",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_idle_composer",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_active_text_entry",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_active_text_entry",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_active_text_entry",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_dictation_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_dictation_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_dictation_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_attachment_proof_picker",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_attachment_proof_picker",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_attachment_proof_picker",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_post_input_route_reveal",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_post_input_route_reveal",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_post_input_route_reveal",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_save_as_proof_route",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_save_as_proof_route",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_save_as_proof_route",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_make_commitment_route",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_make_commitment_route",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_make_commitment_route",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_grow_into_goal_route",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_grow_into_goal_route",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_grow_into_goal_route",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_mark_constraint_route",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_mark_constraint_route",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_mark_constraint_route",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_reflect_route",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_reflect_route",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_reflect_route",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_hold_needs_a_place_route",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_hold_needs_a_place_route",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_hold_needs_a_place_route",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_receipt",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_receipt",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_receipt",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_parse_uncertain_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_parse_uncertain_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_parse_uncertain_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_offline_local_only_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_offline_local_only_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_offline_local_only_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_error_failed_attachment_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_error_failed_attachment_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_error_failed_attachment_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Capture",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_empty_first_use_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "Atmosphere Composer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_empty_first_use_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_empty_first_use_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [
+        "Native/Ambitions/Features/Plan/PlanScreen.swift",
+        "Native/Ambitions/Features/Plan/PlanViewModel.swift",
+        "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      ],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_root_lifeshape_field",
+      "implementation_status": "implemented_unproven",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_root_lifeshape_field",
+      "source_candidates": [
+        "Native/Ambitions/Features/Plan/PlanScreen.swift",
+        "Native/Ambitions/Features/Plan/PlanViewModel.swift",
+        "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      ],
+      "source_relationship": "implemented_source_present",
+      "surface_id": "time_root_lifeshape_field",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_scope_control",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_scope_control",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_scope_control",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.day_lifeshape_surface",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "day_lifeshape_surface",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "day_lifeshape_surface",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.week_lifeshape_surface",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "week_lifeshape_surface",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "week_lifeshape_surface",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.month_lifeshape_surface",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "month_lifeshape_surface",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "month_lifeshape_surface",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.open_time_region",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "open_time_region",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "open_time_region",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.protected_time_region",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "protected_time_region",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "protected_time_region",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.pressure_region",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "pressure_region",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "pressure_region",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.best_fit_region",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "best_fit_region",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "best_fit_region",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.recovery_flex_region",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "recovery_flex_region",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "recovery_flex_region",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.review_pressure_surface",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "review_pressure_surface",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "review_pressure_surface",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.best_fit_explanation_sheet",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "best_fit_explanation_sheet",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "best_fit_explanation_sheet",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.protected_time_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "protected_time_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "protected_time_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.day_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "day_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "day_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.week_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "week_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "week_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.month_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "month_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "month_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.reflow_preview_tray",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reflow Preview Tray",
+      "proof_status": "not_in_scope",
+      "recipe_id": "reflow_preview_tray",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "reflow_preview_tray",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.shape_day_flow",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "shape_day_flow",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "shape_day_flow",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.reflow_week_flow",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "reflow_week_flow",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "reflow_week_flow",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.shape_month_flow",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "shape_month_flow",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "shape_month_flow",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_receipt_detail",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_receipt_detail",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_receipt_detail",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.schedule_and_availability_entry",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "schedule_and_availability_entry",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "schedule_and_availability_entry",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.planning_defaults_entry",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "planning_defaults_entry",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "planning_defaults_entry",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.vacation_away_time_entry",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "vacation_away_time_entry",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "vacation_away_time_entry",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_no_calendar_data_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_no_calendar_data_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_no_calendar_data_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_overloaded_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_overloaded_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_overloaded_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_protected_block_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_protected_block_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_protected_block_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_vacation_away_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_vacation_away_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "time_vacation_away_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Time",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_stale_source_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "LifeShape Field",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_stale_source_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_stale_source_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [
+        "Native/Ambitions/Features/Profile/ProfileScreen.swift",
+        "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
+        "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      ],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.you_root_user_system_profile",
+      "implementation_status": "implemented_unproven",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "you_root_user_system_profile",
+      "source_candidates": [
+        "Native/Ambitions/Features/Profile/ProfileScreen.swift",
+        "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
+        "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      ],
+      "source_relationship": "implemented_source_present",
+      "surface_id": "you_root_user_system_profile",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.user_profile_header",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "user_profile_header",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "user_profile_header",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.local_runtime_trust_panel",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "local_runtime_trust_panel",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "local_runtime_trust_panel",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.planning_setup_section",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "planning_setup_section",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "planning_setup_section",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.schedule_and_availability",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "schedule_and_availability",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "schedule_and_availability",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.planning_defaults",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "planning_defaults",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "planning_defaults",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.vacation_away_time",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "vacation_away_time",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "vacation_away_time",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.automation_and_trust",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "automation_and_trust",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "automation_and_trust",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.notifications",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "notifications",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "notifications",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_preferences",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_preferences",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_preferences",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.focus_session_defaults",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "focus_session_defaults",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "focus_session_defaults",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.privacy",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "privacy",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "privacy",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.personal_runtime",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "personal_runtime",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "personal_runtime",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.local_data_reset_forget",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "local_data_reset_forget",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "local_data_reset_forget",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.help",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "help",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "help",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.about_ambitions",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "about_ambitions",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "about_ambitions",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.you_empty_first_run_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "you_empty_first_run_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "you_empty_first_run_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.you_trust_warning_state",
+      "implementation_status": "canon_only_pending_lock",
+      "known_gaps": [
+        "no active gap in the mature universe",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P2",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "you_trust_warning_state",
+      "source_candidates": [],
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "you_trust_warning_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "You",
+      "generated_swift_identifier": "AmbitionsSurfaceID.you_offline_local_only_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "User System Profile",
+      "proof_status": "not_in_scope",
+      "recipe_id": "you_offline_local_only_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "you_offline_local_only_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.commitment_staging_tray",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Commitment Staging Tray",
+      "proof_status": "not_in_scope",
+      "recipe_id": "commitment_staging_tray",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "commitment_staging_tray",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.reflow_preview_tray",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "P0",
+      "preview_targets": [],
+      "primary_object": "Reflow Preview Tray",
+      "proof_status": "not_in_scope",
+      "recipe_id": "reflow_preview_tray",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "reflow_preview_tray",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.receipt_system",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Receipt System",
+      "proof_status": "not_in_scope",
+      "recipe_id": "receipt_system",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "receipt_system",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.closure_system",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Closure System",
+      "proof_status": "not_in_scope",
+      "recipe_id": "closure_system",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "closure_system",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.proof_trail_system",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Proof Trail System",
+      "proof_status": "not_in_scope",
+      "recipe_id": "proof_trail_system",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "proof_trail_system",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.recommendation_source_system",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Recommendation Source System",
+      "proof_status": "not_in_scope",
+      "recipe_id": "recommendation_source_system",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "recommendation_source_system",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.why_this_sheet",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Why This Sheet",
+      "proof_status": "not_in_scope",
+      "recipe_id": "why_this_sheet",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "why_this_sheet",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.source_freshness_badge",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Source Freshness Badge",
+      "proof_status": "not_in_scope",
+      "recipe_id": "source_freshness_badge",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "source_freshness_badge",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.still_counts_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Still Counts State",
+      "proof_status": "not_in_scope",
+      "recipe_id": "still_counts_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "still_counts_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.moved_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Moved State",
+      "proof_status": "not_in_scope",
+      "recipe_id": "moved_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "moved_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.skipped_not_needed_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Skipped / Not Needed State",
+      "proof_status": "not_in_scope",
+      "recipe_id": "skipped_not_needed_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "skipped_not_needed_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.blocked_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Blocked State",
+      "proof_status": "not_in_scope",
+      "recipe_id": "blocked_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "blocked_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.waiting_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Waiting State",
+      "proof_status": "not_in_scope",
+      "recipe_id": "waiting_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "waiting_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.needs_recovery_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Needs Recovery State",
+      "proof_status": "not_in_scope",
+      "recipe_id": "needs_recovery_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "needs_recovery_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.needs_review_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Needs Review State",
+      "proof_status": "not_in_scope",
+      "recipe_id": "needs_review_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "needs_review_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.protected_marker",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Protected Marker",
+      "proof_status": "not_in_scope",
+      "recipe_id": "protected_marker",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "protected_marker",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.pressure_marker",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Pressure Marker",
+      "proof_status": "not_in_scope",
+      "recipe_id": "pressure_marker",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "pressure_marker",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.best_fit_marker",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Best Fit Marker",
+      "proof_status": "not_in_scope",
+      "recipe_id": "best_fit_marker",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "best_fit_marker",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.open_marker",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Open Marker",
+      "proof_status": "not_in_scope",
+      "recipe_id": "open_marker",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "open_marker",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.primary_cta",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Primary CTA",
+      "proof_status": "not_in_scope",
+      "recipe_id": "primary_cta",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "primary_cta",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.secondary_cta",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Secondary CTA",
+      "proof_status": "not_in_scope",
+      "recipe_id": "secondary_cta",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "secondary_cta",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.destructive_cta",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Destructive CTA",
+      "proof_status": "not_in_scope",
+      "recipe_id": "destructive_cta",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "destructive_cta",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.disabled_cta",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Disabled CTA",
+      "proof_status": "not_in_scope",
+      "recipe_id": "disabled_cta",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "disabled_cta",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.chevron_disclosure_row",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "Chevron / Disclosure Row",
+      "proof_status": "not_in_scope",
+      "recipe_id": "chevron_disclosure_row",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "chevron_disclosure_row",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.quietglass_wrapper",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "QuietGlass Wrapper",
+      "proof_status": "not_in_scope",
+      "recipe_id": "quietglass_wrapper",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "quietglass_wrapper",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.graphiterecess_base",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "GraphiteRecess Base",
+      "proof_status": "not_in_scope",
+      "recipe_id": "graphiterecess_base",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "graphiterecess_base",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.luminoustrace_state_line",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "LuminousTrace State Line",
+      "proof_status": "not_in_scope",
+      "recipe_id": "luminoustrace_state_line",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "luminoustrace_state_line",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Cross-surface",
+      "generated_swift_identifier": "AmbitionsSurfaceID.celestialfield_semantic_layer",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "CelestialField Semantic Layer",
+      "proof_status": "not_in_scope",
+      "recipe_id": "celestialfield_semantic_layer",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "celestialfield_semantic_layer",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Onboarding",
+      "generated_swift_identifier": "AmbitionsSurfaceID.first_run_root",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "First Run Root",
+      "proof_status": "not_in_scope",
+      "recipe_id": "first_run_root",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "first_run_root",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Onboarding",
+      "generated_swift_identifier": "AmbitionsSurfaceID.schedule_setup_prompt",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "First Run Root",
+      "proof_status": "not_in_scope",
+      "recipe_id": "schedule_setup_prompt",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "schedule_setup_prompt",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Onboarding",
+      "generated_swift_identifier": "AmbitionsSurfaceID.planning_defaults_prompt",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "First Run Root",
+      "proof_status": "not_in_scope",
+      "recipe_id": "planning_defaults_prompt",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "planning_defaults_prompt",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Onboarding",
+      "generated_swift_identifier": "AmbitionsSurfaceID.privacy_local_runtime_explanation",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "First Run Root",
+      "proof_status": "not_in_scope",
+      "recipe_id": "privacy_local_runtime_explanation",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "privacy_local_runtime_explanation",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Onboarding",
+      "generated_swift_identifier": "AmbitionsSurfaceID.capture_first_use_prompt",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "First Run Root",
+      "proof_status": "not_in_scope",
+      "recipe_id": "capture_first_use_prompt",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_first_use_prompt",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Onboarding",
+      "generated_swift_identifier": "AmbitionsSurfaceID.goals_first_use_prompt",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "First Run Root",
+      "proof_status": "not_in_scope",
+      "recipe_id": "goals_first_use_prompt",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "goals_first_use_prompt",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Onboarding",
+      "generated_swift_identifier": "AmbitionsSurfaceID.time_first_use_prompt",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "First Run Root",
+      "proof_status": "not_in_scope",
+      "recipe_id": "time_first_use_prompt",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "time_first_use_prompt",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    },
+    {
+      "declared_implementation_files": [],
+      "destination": "Onboarding",
+      "generated_swift_identifier": "AmbitionsSurfaceID.today_first_use_state",
+      "implementation_status": "planned",
+      "known_gaps": [
+        "planned canon retained as explicit future surface",
+        "not_in_scope",
+        "proof status is no_proof_required"
+      ],
+      "last_receipt": null,
+      "maturity_tier": "candidate",
+      "preview_targets": [],
+      "primary_object": "First Run Root",
+      "proof_status": "not_in_scope",
+      "recipe_id": "today_first_use_state",
+      "source_candidates": [],
+      "source_relationship": "planned_source_target",
+      "surface_id": "today_first_use_state",
+      "test_targets": [
+        "AmbitionsTests",
+        "AmbitionsUITests"
+      ]
+    }
+  ],
+  "generated_from_batch": "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06",
+  "schema_version": 1
+}

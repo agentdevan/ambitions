@@ -2,6 +2,18 @@
 
 Status: Active frontend canon index
 
+## Frontend Authority Workflow
+
+For frontend/UI/design implementation work:
+
+1. Pick a surface ID from `MATURE_APP_SURFACE_UNIVERSE.yaml`.
+2. Generate the surface packet.
+3. Run frontend preflight.
+4. Generate the implementation prompt.
+5. Implement only within the declared source scope.
+6. Produce proof and a receipt after code changes land.
+7. Run drift check, source bindings, dashboard, and next-surface queue.
+
 ## Authority Order
 
 1. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
@@ -10,9 +22,14 @@ Status: Active frontend canon index
 4. `docs/truth/RELEASE_TRUTH.md`
 5. This frontend atlas directory
 6. Compatible AmbitionsCanon, docs/codex, audits, previews, prompts, and historical docs
+7. `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
+8. `trace/FRONTEND_SOURCE_BINDINGS.yaml`
+9. `trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml`
+10. `trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml`
 
 ## Active Files
 
+- Encyclopedia to frontend OS: `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
 - Master: `AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
 - Audit: `VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md`
 - Perfection plan: `VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md`
@@ -21,6 +38,9 @@ Status: Active frontend canon index
 - Source-link manifest: `VISUAL_SOURCE_LINKS.yaml`
 - Recipe short-form template: `VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md`
 - Recipe schema contract: `VISUAL_RECIPE_SCHEMA_CONTRACT.md`, `VISUAL_RECIPE_SCHEMA_CONTRACT.yaml`
+- Source binding trace: `trace/FRONTEND_SOURCE_BINDINGS.yaml`
+- Receipt schema: `trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml`
+- Proof contract schema: `trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml`
 - Object-first review rubric: `VISUAL_OBJECT_FIRST_REVIEW_RUBRIC.md`
 - Accessibility/ADHD requirements: `VISUAL_ACCESSIBILITY_ADHD_REQUIREMENTS.md`
 - Anti-slop rules: `VISUAL_ANTI_SLOP_RULES.md`
@@ -63,3 +83,15 @@ Status: Active frontend canon index
 - `Sources/Theme/AmbitionTheme.swift`
 - `Sources/Accessibility/AccessibilityNutrition.swift`
 - `Sources/Previews/*`
+
+## Generated Frontend Control Plane
+
+- `build/reports/frontend-authority-packets/*`
+- `build/reports/frontend-authority-preflight/*`
+- `build/reports/frontend-implementation-prompts/*`
+- `build/reports/frontend-source-bindings.json`
+- `build/reports/frontend-implementation-dashboard.json`
+- `build/reports/frontend-next-surface-queue.json`
+- `build/reports/frontend-drift-check.json`
+- `build/reports/frontend-receipt-check.json`
+- `build/reports/frontend-proof-contract-check.json`

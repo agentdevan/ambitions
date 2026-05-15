@@ -1,0 +1,1458 @@
+{
+  "batch_id": "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06",
+  "destination_counts": {
+    "Capture": 17,
+    "Cross-surface": 40,
+    "Goals": 19,
+    "Onboarding": 8,
+    "Time": 28,
+    "Today": 28,
+    "You": 19
+  },
+  "generated_from_batch": "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06",
+  "packets": [
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/global_app_shell.json",
+      "packet_md": "build/reports/frontend-authority-packets/global_app_shell.md",
+      "source_relationship": "implemented_source_present",
+      "surface_id": "global_app_shell",
+      "surface_name": "Global App Shell"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/destination_dock.json",
+      "packet_md": "build/reports/frontend-authority-packets/destination_dock.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "destination_dock",
+      "surface_name": "Destination Dock"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/destination_tab_item.json",
+      "packet_md": "build/reports/frontend-authority-packets/destination_tab_item.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "destination_tab_item",
+      "surface_name": "Destination Tab Item"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/compact_surface_header.json",
+      "packet_md": "build/reports/frontend-authority-packets/compact_surface_header.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "compact_surface_header",
+      "surface_name": "Compact Surface Header"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/context_crown.json",
+      "packet_md": "build/reports/frontend-authority-packets/context_crown.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "context_crown",
+      "surface_name": "Context Crown"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/back_navigation.json",
+      "packet_md": "build/reports/frontend-authority-packets/back_navigation.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "back_navigation",
+      "surface_name": "Back Navigation"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/sheet_chrome.json",
+      "packet_md": "build/reports/frontend-authority-packets/sheet_chrome.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "sheet_chrome",
+      "surface_name": "Sheet Chrome"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/tray_chrome.json",
+      "packet_md": "build/reports/frontend-authority-packets/tray_chrome.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "tray_chrome",
+      "surface_name": "Tray Chrome"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P1",
+      "packet_json": "build/reports/frontend-authority-packets/receipt_toast_inline_confirmation.json",
+      "packet_md": "build/reports/frontend-authority-packets/receipt_toast_inline_confirmation.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "receipt_toast_inline_confirmation",
+      "surface_name": "Receipt Toast / Inline Confirmation"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/global_empty_state_shell.json",
+      "packet_md": "build/reports/frontend-authority-packets/global_empty_state_shell.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "global_empty_state_shell",
+      "surface_name": "Global Empty State Shell"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/global_error_fallback_shell.json",
+      "packet_md": "build/reports/frontend-authority-packets/global_error_fallback_shell.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "global_error_fallback_shell",
+      "surface_name": "Global Error / Fallback Shell"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/today_root_reality_meridian.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_root_reality_meridian.md",
+      "source_relationship": "implemented_source_present",
+      "surface_id": "today_root_reality_meridian",
+      "surface_name": "Today Root / Reality Meridian"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_current_context_header.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_current_context_header.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_current_context_header",
+      "surface_name": "Today Current Context Header"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/today_start_here_region.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_start_here_region.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_start_here_region",
+      "surface_name": "Today Start Here Region"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/today_reality_meridian_rail.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_reality_meridian_rail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_reality_meridian_rail",
+      "surface_name": "Today Reality Meridian Rail"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/today_recommended_step_object.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_recommended_step_object.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_recommended_step_object",
+      "surface_name": "Today Recommended Step Object"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/today_now_next_later_sequence.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_now_next_later_sequence.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_now_next_later_sequence",
+      "surface_name": "Today Now / Next / Later Sequence"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_upcoming_commitments_region.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_upcoming_commitments_region.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_upcoming_commitments_region",
+      "surface_name": "Today Upcoming Commitments Region"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_closure_prompt_region.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_closure_prompt_region.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_closure_prompt_region",
+      "surface_name": "Today Closure Prompt Region"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_receipt_shelf.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_receipt_shelf.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_receipt_shelf",
+      "surface_name": "Today Receipt Shelf"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_source_freshness_indicator.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_source_freshness_indicator.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_source_freshness_indicator",
+      "surface_name": "Today Source Freshness Indicator"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/step_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/step_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "step_detail",
+      "surface_name": "Step Detail"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/step_session.json",
+      "packet_md": "build/reports/frontend-authority-packets/step_session.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "step_session",
+      "surface_name": "Step Session"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/recommendation_source_sheet.json",
+      "packet_md": "build/reports/frontend-authority-packets/recommendation_source_sheet.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "recommendation_source_sheet",
+      "surface_name": "Recommendation Source Sheet"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/closure_sheet.json",
+      "packet_md": "build/reports/frontend-authority-packets/closure_sheet.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "closure_sheet",
+      "surface_name": "Closure Sheet"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/receipt_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/receipt_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "receipt_detail",
+      "surface_name": "Receipt Detail"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/proof_attachment_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/proof_attachment_detail.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "proof_attachment_detail",
+      "surface_name": "Proof Attachment Detail"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/adjust_plan_reflow_preview_entry.json",
+      "packet_md": "build/reports/frontend-authority-packets/adjust_plan_reflow_preview_entry.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "adjust_plan_reflow_preview_entry",
+      "surface_name": "Adjust Plan / Reflow Preview Entry"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/blocked_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/blocked_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "blocked_detail",
+      "surface_name": "Blocked Detail"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/waiting_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/waiting_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "waiting_detail",
+      "surface_name": "Waiting Detail"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/goal_thread_context_from_today.json",
+      "packet_md": "build/reports/frontend-authority-packets/goal_thread_context_from_today.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goal_thread_context_from_today",
+      "surface_name": "Goal Thread Context from Today"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/local_runtime_source_detail_from_today.json",
+      "packet_md": "build/reports/frontend-authority-packets/local_runtime_source_detail_from_today.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "local_runtime_source_detail_from_today",
+      "surface_name": "Local Runtime Source Detail from Today"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_empty_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_empty_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_empty_state",
+      "surface_name": "Today Empty State"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_no_schedule_data_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_no_schedule_data_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_no_schedule_data_state",
+      "surface_name": "Today No Schedule Data State"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_overloaded_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_overloaded_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_overloaded_state",
+      "surface_name": "Today Overloaded State"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_recovery_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_recovery_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_recovery_state",
+      "surface_name": "Today Recovery State"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/today_vacation_away_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_vacation_away_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "today_vacation_away_state",
+      "surface_name": "Today Vacation / Away State"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_protected_time_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_protected_time_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_protected_time_state",
+      "surface_name": "Today Protected Time State"
+    },
+    {
+      "destination": "Today",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/today_stale_recommendation_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_stale_recommendation_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "today_stale_recommendation_state",
+      "surface_name": "Today Stale Recommendation State"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/goals_root_constellation_atlas.json",
+      "packet_md": "build/reports/frontend-authority-packets/goals_root_constellation_atlas.md",
+      "source_relationship": "implemented_source_present",
+      "surface_id": "goals_root_constellation_atlas",
+      "surface_name": "Goals Root / Constellation Atlas"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/goals_life_area_map.json",
+      "packet_md": "build/reports/frontend-authority-packets/goals_life_area_map.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_life_area_map",
+      "surface_name": "Goals Life Area Map"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/selected_life_area_surface.json",
+      "packet_md": "build/reports/frontend-authority-packets/selected_life_area_surface.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "selected_life_area_surface",
+      "surface_name": "Selected Life Area Surface"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/ambition_graph.json",
+      "packet_md": "build/reports/frontend-authority-packets/ambition_graph.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "ambition_graph",
+      "surface_name": "Ambition Graph"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/goal_thread_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/goal_thread_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goal_thread_detail",
+      "surface_name": "Goal Thread Detail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/goal_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/goal_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goal_detail",
+      "surface_name": "Goal Detail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/commitment_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/commitment_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "commitment_detail",
+      "surface_name": "Commitment Detail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/proof_trail.json",
+      "packet_md": "build/reports/frontend-authority-packets/proof_trail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "proof_trail",
+      "surface_name": "Proof Trail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/proof_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/proof_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "proof_detail",
+      "surface_name": "Proof Detail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/proof_gap_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/proof_gap_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "proof_gap_state",
+      "surface_name": "Proof Gap State"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/blocker_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/blocker_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "blocker_detail",
+      "surface_name": "Blocker Detail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/alternate_path_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/alternate_path_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "alternate_path_detail",
+      "surface_name": "Alternate Path Detail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/milestone_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/milestone_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "milestone_detail",
+      "surface_name": "Milestone Detail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/recommended_step_context_from_goals.json",
+      "packet_md": "build/reports/frontend-authority-packets/recommended_step_context_from_goals.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "recommended_step_context_from_goals",
+      "surface_name": "Recommended Step Context from Goals"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/reflection_recovery_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/reflection_recovery_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "reflection_recovery_detail",
+      "surface_name": "Reflection / Recovery Detail"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/goals_empty_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/goals_empty_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_empty_state",
+      "surface_name": "Goals Empty State"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/goals_review_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/goals_review_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_review_state",
+      "surface_name": "Goals Review State"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/goals_blocked_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/goals_blocked_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_blocked_state",
+      "surface_name": "Goals Blocked State"
+    },
+    {
+      "destination": "Goals",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/goals_archive_historical_goal_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/goals_archive_historical_goal_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "goals_archive_historical_goal_state",
+      "surface_name": "Goals Archive / Historical Goal State"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/capture_root_atmosphere_composer.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_root_atmosphere_composer.md",
+      "source_relationship": "implemented_source_present",
+      "surface_id": "capture_root_atmosphere_composer",
+      "surface_name": "Capture Root / Atmosphere Composer"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_idle_composer.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_idle_composer.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_idle_composer",
+      "surface_name": "Capture Idle Composer"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_active_text_entry.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_active_text_entry.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_active_text_entry",
+      "surface_name": "Capture Active Text Entry"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/capture_dictation_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_dictation_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_dictation_state",
+      "surface_name": "Capture Dictation State"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/capture_attachment_proof_picker.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_attachment_proof_picker.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_attachment_proof_picker",
+      "surface_name": "Capture Attachment / Proof Picker"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/capture_post_input_route_reveal.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_post_input_route_reveal.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_post_input_route_reveal",
+      "surface_name": "Capture Post-Input Route Reveal"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_save_as_proof_route.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_save_as_proof_route.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_save_as_proof_route",
+      "surface_name": "Capture Save as Proof Route"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_make_commitment_route.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_make_commitment_route.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_make_commitment_route",
+      "surface_name": "Capture Make Commitment Route"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_grow_into_goal_route.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_grow_into_goal_route.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_grow_into_goal_route",
+      "surface_name": "Capture Grow into Goal Route"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_mark_constraint_route.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_mark_constraint_route.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_mark_constraint_route",
+      "surface_name": "Capture Mark Constraint Route"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_reflect_route.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_reflect_route.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_reflect_route",
+      "surface_name": "Capture Reflect Route"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/capture_hold_needs_a_place_route.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_hold_needs_a_place_route.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_hold_needs_a_place_route",
+      "surface_name": "Capture Hold / Needs a Place Route"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/capture_receipt.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_receipt.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_receipt",
+      "surface_name": "Capture Receipt"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_parse_uncertain_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_parse_uncertain_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_parse_uncertain_state",
+      "surface_name": "Capture Parse Uncertain State"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/capture_offline_local_only_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_offline_local_only_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_offline_local_only_state",
+      "surface_name": "Capture Offline Local-Only State"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/capture_error_failed_attachment_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_error_failed_attachment_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_error_failed_attachment_state",
+      "surface_name": "Capture Error / Failed Attachment State"
+    },
+    {
+      "destination": "Capture",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_empty_first_use_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_empty_first_use_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_empty_first_use_state",
+      "surface_name": "Capture Empty First-Use State"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/time_root_lifeshape_field.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_root_lifeshape_field.md",
+      "source_relationship": "implemented_source_present",
+      "surface_id": "time_root_lifeshape_field",
+      "surface_name": "Time Root / LifeShape Field"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/time_scope_control.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_scope_control.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_scope_control",
+      "surface_name": "Time Scope Control"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/day_lifeshape_surface.json",
+      "packet_md": "build/reports/frontend-authority-packets/day_lifeshape_surface.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "day_lifeshape_surface",
+      "surface_name": "Day LifeShape Surface"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/week_lifeshape_surface.json",
+      "packet_md": "build/reports/frontend-authority-packets/week_lifeshape_surface.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "week_lifeshape_surface",
+      "surface_name": "Week LifeShape Surface"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/month_lifeshape_surface.json",
+      "packet_md": "build/reports/frontend-authority-packets/month_lifeshape_surface.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "month_lifeshape_surface",
+      "surface_name": "Month LifeShape Surface"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/open_time_region.json",
+      "packet_md": "build/reports/frontend-authority-packets/open_time_region.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "open_time_region",
+      "surface_name": "Open Time Region"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/protected_time_region.json",
+      "packet_md": "build/reports/frontend-authority-packets/protected_time_region.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "protected_time_region",
+      "surface_name": "Protected Time Region"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/pressure_region.json",
+      "packet_md": "build/reports/frontend-authority-packets/pressure_region.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "pressure_region",
+      "surface_name": "Pressure Region"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/best_fit_region.json",
+      "packet_md": "build/reports/frontend-authority-packets/best_fit_region.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "best_fit_region",
+      "surface_name": "Best Fit Region"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/recovery_flex_region.json",
+      "packet_md": "build/reports/frontend-authority-packets/recovery_flex_region.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "recovery_flex_region",
+      "surface_name": "Recovery / Flex Region"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/review_pressure_surface.json",
+      "packet_md": "build/reports/frontend-authority-packets/review_pressure_surface.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "review_pressure_surface",
+      "surface_name": "Review Pressure Surface"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/best_fit_explanation_sheet.json",
+      "packet_md": "build/reports/frontend-authority-packets/best_fit_explanation_sheet.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "best_fit_explanation_sheet",
+      "surface_name": "Best Fit Explanation Sheet"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/protected_time_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/protected_time_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "protected_time_detail",
+      "surface_name": "Protected Time Detail"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/day_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/day_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "day_detail",
+      "surface_name": "Day Detail"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/week_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/week_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "week_detail",
+      "surface_name": "Week Detail"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/month_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/month_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "month_detail",
+      "surface_name": "Month Detail"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/reflow_preview_tray.json",
+      "packet_md": "build/reports/frontend-authority-packets/reflow_preview_tray.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "reflow_preview_tray",
+      "surface_name": "Reflow Preview Tray"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/shape_day_flow.json",
+      "packet_md": "build/reports/frontend-authority-packets/shape_day_flow.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "shape_day_flow",
+      "surface_name": "Shape Day Flow"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/reflow_week_flow.json",
+      "packet_md": "build/reports/frontend-authority-packets/reflow_week_flow.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "reflow_week_flow",
+      "surface_name": "Reflow Week Flow"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/shape_month_flow.json",
+      "packet_md": "build/reports/frontend-authority-packets/shape_month_flow.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "shape_month_flow",
+      "surface_name": "Shape Month Flow"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/time_receipt_detail.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_receipt_detail.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_receipt_detail",
+      "surface_name": "Time Receipt Detail"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/schedule_and_availability_entry.json",
+      "packet_md": "build/reports/frontend-authority-packets/schedule_and_availability_entry.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "schedule_and_availability_entry",
+      "surface_name": "Schedule & Availability Entry"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/planning_defaults_entry.json",
+      "packet_md": "build/reports/frontend-authority-packets/planning_defaults_entry.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "planning_defaults_entry",
+      "surface_name": "Planning Defaults Entry"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/vacation_away_time_entry.json",
+      "packet_md": "build/reports/frontend-authority-packets/vacation_away_time_entry.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "vacation_away_time_entry",
+      "surface_name": "Vacation / Away Time Entry"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/time_no_calendar_data_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_no_calendar_data_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_no_calendar_data_state",
+      "surface_name": "Time No Calendar Data State"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/time_overloaded_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_overloaded_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_overloaded_state",
+      "surface_name": "Time Overloaded State"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/time_protected_block_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_protected_block_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_protected_block_state",
+      "surface_name": "Time Protected Block State"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/time_vacation_away_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_vacation_away_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "time_vacation_away_state",
+      "surface_name": "Time Vacation / Away State"
+    },
+    {
+      "destination": "Time",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/time_stale_source_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_stale_source_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "time_stale_source_state",
+      "surface_name": "Time Stale Source State"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/you_root_user_system_profile.json",
+      "packet_md": "build/reports/frontend-authority-packets/you_root_user_system_profile.md",
+      "source_relationship": "implemented_source_present",
+      "surface_id": "you_root_user_system_profile",
+      "surface_name": "You Root / User System Profile"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/user_profile_header.json",
+      "packet_md": "build/reports/frontend-authority-packets/user_profile_header.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "user_profile_header",
+      "surface_name": "User Profile Header"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/local_runtime_trust_panel.json",
+      "packet_md": "build/reports/frontend-authority-packets/local_runtime_trust_panel.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "local_runtime_trust_panel",
+      "surface_name": "Local Runtime Trust Panel"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/planning_setup_section.json",
+      "packet_md": "build/reports/frontend-authority-packets/planning_setup_section.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "planning_setup_section",
+      "surface_name": "Planning Setup Section"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/schedule_and_availability.json",
+      "packet_md": "build/reports/frontend-authority-packets/schedule_and_availability.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "schedule_and_availability",
+      "surface_name": "Schedule & Availability"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/planning_defaults.json",
+      "packet_md": "build/reports/frontend-authority-packets/planning_defaults.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "planning_defaults",
+      "surface_name": "Planning Defaults"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/vacation_away_time.json",
+      "packet_md": "build/reports/frontend-authority-packets/vacation_away_time.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "vacation_away_time",
+      "surface_name": "Vacation / Away Time"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/automation_and_trust.json",
+      "packet_md": "build/reports/frontend-authority-packets/automation_and_trust.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "automation_and_trust",
+      "surface_name": "Automation & Trust"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/notifications.json",
+      "packet_md": "build/reports/frontend-authority-packets/notifications.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "notifications",
+      "surface_name": "Notifications"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/capture_preferences.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_preferences.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "capture_preferences",
+      "surface_name": "Capture Preferences"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/focus_session_defaults.json",
+      "packet_md": "build/reports/frontend-authority-packets/focus_session_defaults.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "focus_session_defaults",
+      "surface_name": "Focus / Session Defaults"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/privacy.json",
+      "packet_md": "build/reports/frontend-authority-packets/privacy.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "privacy",
+      "surface_name": "Privacy"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/personal_runtime.json",
+      "packet_md": "build/reports/frontend-authority-packets/personal_runtime.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "personal_runtime",
+      "surface_name": "Personal Runtime"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/local_data_reset_forget.json",
+      "packet_md": "build/reports/frontend-authority-packets/local_data_reset_forget.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "local_data_reset_forget",
+      "surface_name": "Local Data / Reset / Forget"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/help.json",
+      "packet_md": "build/reports/frontend-authority-packets/help.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "help",
+      "surface_name": "Help"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/about_ambitions.json",
+      "packet_md": "build/reports/frontend-authority-packets/about_ambitions.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "about_ambitions",
+      "surface_name": "About Ambitions"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/you_empty_first_run_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/you_empty_first_run_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "you_empty_first_run_state",
+      "surface_name": "You Empty / First-Run State"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "P2",
+      "packet_json": "build/reports/frontend-authority-packets/you_trust_warning_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/you_trust_warning_state.md",
+      "source_relationship": "canon_only_pending_lock",
+      "surface_id": "you_trust_warning_state",
+      "surface_name": "You Trust Warning State"
+    },
+    {
+      "destination": "You",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/you_offline_local_only_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/you_offline_local_only_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "you_offline_local_only_state",
+      "surface_name": "You Offline Local-Only State"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/commitment_staging_tray.json",
+      "packet_md": "build/reports/frontend-authority-packets/commitment_staging_tray.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "commitment_staging_tray",
+      "surface_name": "Commitment Staging Tray"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "P0",
+      "packet_json": "build/reports/frontend-authority-packets/reflow_preview_tray.json",
+      "packet_md": "build/reports/frontend-authority-packets/reflow_preview_tray.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "reflow_preview_tray",
+      "surface_name": "Reflow Preview Tray"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/receipt_system.json",
+      "packet_md": "build/reports/frontend-authority-packets/receipt_system.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "receipt_system",
+      "surface_name": "Receipt System"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/closure_system.json",
+      "packet_md": "build/reports/frontend-authority-packets/closure_system.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "closure_system",
+      "surface_name": "Closure System"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/proof_trail_system.json",
+      "packet_md": "build/reports/frontend-authority-packets/proof_trail_system.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "proof_trail_system",
+      "surface_name": "Proof Trail System"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/recommendation_source_system.json",
+      "packet_md": "build/reports/frontend-authority-packets/recommendation_source_system.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "recommendation_source_system",
+      "surface_name": "Recommendation Source System"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/why_this_sheet.json",
+      "packet_md": "build/reports/frontend-authority-packets/why_this_sheet.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "why_this_sheet",
+      "surface_name": "Why This Sheet"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/source_freshness_badge.json",
+      "packet_md": "build/reports/frontend-authority-packets/source_freshness_badge.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "source_freshness_badge",
+      "surface_name": "Source Freshness Badge"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/still_counts_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/still_counts_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "still_counts_state",
+      "surface_name": "Still Counts State"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/moved_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/moved_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "moved_state",
+      "surface_name": "Moved State"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/skipped_not_needed_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/skipped_not_needed_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "skipped_not_needed_state",
+      "surface_name": "Skipped / Not Needed State"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/blocked_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/blocked_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "blocked_state",
+      "surface_name": "Blocked State"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/waiting_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/waiting_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "waiting_state",
+      "surface_name": "Waiting State"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/needs_recovery_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/needs_recovery_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "needs_recovery_state",
+      "surface_name": "Needs Recovery State"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/needs_review_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/needs_review_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "needs_review_state",
+      "surface_name": "Needs Review State"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/protected_marker.json",
+      "packet_md": "build/reports/frontend-authority-packets/protected_marker.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "protected_marker",
+      "surface_name": "Protected Marker"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/pressure_marker.json",
+      "packet_md": "build/reports/frontend-authority-packets/pressure_marker.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "pressure_marker",
+      "surface_name": "Pressure Marker"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/best_fit_marker.json",
+      "packet_md": "build/reports/frontend-authority-packets/best_fit_marker.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "best_fit_marker",
+      "surface_name": "Best Fit Marker"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/open_marker.json",
+      "packet_md": "build/reports/frontend-authority-packets/open_marker.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "open_marker",
+      "surface_name": "Open Marker"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/primary_cta.json",
+      "packet_md": "build/reports/frontend-authority-packets/primary_cta.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "primary_cta",
+      "surface_name": "Primary CTA"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/secondary_cta.json",
+      "packet_md": "build/reports/frontend-authority-packets/secondary_cta.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "secondary_cta",
+      "surface_name": "Secondary CTA"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/destructive_cta.json",
+      "packet_md": "build/reports/frontend-authority-packets/destructive_cta.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "destructive_cta",
+      "surface_name": "Destructive CTA"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/disabled_cta.json",
+      "packet_md": "build/reports/frontend-authority-packets/disabled_cta.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "disabled_cta",
+      "surface_name": "Disabled CTA"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/chevron_disclosure_row.json",
+      "packet_md": "build/reports/frontend-authority-packets/chevron_disclosure_row.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "chevron_disclosure_row",
+      "surface_name": "Chevron / Disclosure Row"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/quietglass_wrapper.json",
+      "packet_md": "build/reports/frontend-authority-packets/quietglass_wrapper.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "quietglass_wrapper",
+      "surface_name": "QuietGlass Wrapper"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/graphiterecess_base.json",
+      "packet_md": "build/reports/frontend-authority-packets/graphiterecess_base.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "graphiterecess_base",
+      "surface_name": "GraphiteRecess Base"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/luminoustrace_state_line.json",
+      "packet_md": "build/reports/frontend-authority-packets/luminoustrace_state_line.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "luminoustrace_state_line",
+      "surface_name": "LuminousTrace State Line"
+    },
+    {
+      "destination": "Cross-surface",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/celestialfield_semantic_layer.json",
+      "packet_md": "build/reports/frontend-authority-packets/celestialfield_semantic_layer.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "celestialfield_semantic_layer",
+      "surface_name": "CelestialField Semantic Layer"
+    },
+    {
+      "destination": "Onboarding",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/first_run_root.json",
+      "packet_md": "build/reports/frontend-authority-packets/first_run_root.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "first_run_root",
+      "surface_name": "First Run Root"
+    },
+    {
+      "destination": "Onboarding",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/schedule_setup_prompt.json",
+      "packet_md": "build/reports/frontend-authority-packets/schedule_setup_prompt.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "schedule_setup_prompt",
+      "surface_name": "Schedule Setup Prompt"
+    },
+    {
+      "destination": "Onboarding",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/planning_defaults_prompt.json",
+      "packet_md": "build/reports/frontend-authority-packets/planning_defaults_prompt.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "planning_defaults_prompt",
+      "surface_name": "Planning Defaults Prompt"
+    },
+    {
+      "destination": "Onboarding",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/privacy_local_runtime_explanation.json",
+      "packet_md": "build/reports/frontend-authority-packets/privacy_local_runtime_explanation.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "privacy_local_runtime_explanation",
+      "surface_name": "Privacy / Local Runtime Explanation"
+    },
+    {
+      "destination": "Onboarding",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/capture_first_use_prompt.json",
+      "packet_md": "build/reports/frontend-authority-packets/capture_first_use_prompt.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "capture_first_use_prompt",
+      "surface_name": "Capture First-Use Prompt"
+    },
+    {
+      "destination": "Onboarding",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/goals_first_use_prompt.json",
+      "packet_md": "build/reports/frontend-authority-packets/goals_first_use_prompt.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "goals_first_use_prompt",
+      "surface_name": "Goals First-Use Prompt"
+    },
+    {
+      "destination": "Onboarding",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/time_first_use_prompt.json",
+      "packet_md": "build/reports/frontend-authority-packets/time_first_use_prompt.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "time_first_use_prompt",
+      "surface_name": "Time First-Use Prompt"
+    },
+    {
+      "destination": "Onboarding",
+      "maturity_tier": "candidate",
+      "packet_json": "build/reports/frontend-authority-packets/today_first_use_state.json",
+      "packet_md": "build/reports/frontend-authority-packets/today_first_use_state.md",
+      "source_relationship": "planned_source_target",
+      "surface_id": "today_first_use_state",
+      "surface_name": "Today First-Use State"
+    }
+  ],
+  "source_relationship_counts": {
+    "canon_only_pending_lock": 105,
+    "implemented_source_present": 6,
+    "planned_source_target": 48
+  },
+  "surface_count": 159,
+  "tier_counts": {
+    "P0": 30,
+    "P1": 9,
+    "P2": 75,
+    "candidate": 45
+  }
+}

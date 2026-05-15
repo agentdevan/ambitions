@@ -7,6 +7,7 @@ Ambitions is a premium native iPhone life operating system.
 ## Portals
 
 - Frontend / Visual Encyclopedia: [`frontend/README.md`](frontend/README.md)
+- Frontend authority workflow: [`frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md`](frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md)
 - Backend: [`backend/README.md`](backend/README.md)
 - Codex OS: [`codex-os/README.md`](codex-os/README.md)
 - Product canon: [`product-canon/README.md`](product-canon/README.md)

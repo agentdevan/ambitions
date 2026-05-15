@@ -1,0 +1,421 @@
+{
+  "accessibility_adhd_requirements": {
+    "accessibility_status": "candidate",
+    "adhd_status": "candidate",
+    "contrast": "required",
+    "dynamic_type": "required",
+    "reduce_motion": "required",
+    "tap_targets": "44pt minimum",
+    "voiceover": "required"
+  },
+  "allowed_scope": {
+    "docs": [
+      "frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md",
+      "frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md",
+      "frontend/visual-encyclopedia/trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml",
+      "frontend/visual-encyclopedia/trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml"
+    ],
+    "generated_artifacts": [
+      "build/reports/frontend-authority-packets/first_run_root.md",
+      "build/reports/frontend-authority-packets/first_run_root.json"
+    ],
+    "source_targets": []
+  },
+  "batch_id": "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06",
+  "contracts": [
+    "frontend/visual-encyclopedia/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
+    "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md"
+  ],
+  "destination": "Onboarding",
+  "forbidden_drift": {
+    "forbidden_patterns": [
+      "generic dashboard",
+      "card-stack fallback",
+      "task-list clone",
+      "calendar clone",
+      "chatbot UI",
+      "AI confidence or model jargon",
+      "sportsbook or gambling language",
+      "color-only state meaning",
+      "shame language"
+    ],
+    "hard_red": [
+      "Plan as a top-level destination",
+      "chatbot UI",
+      "generic dashboard",
+      "card-stack fallback",
+      "task-list clone",
+      "release/device/accessibility proof claims"
+    ]
+  },
+  "forbidden_scope": {
+    "native_swiftui_ui": "forbidden",
+    "persistence_changes": "forbidden",
+    "release_claims": "forbidden",
+    "routing_changes": "forbidden",
+    "ui_claims": "forbidden"
+  },
+  "implementation_claim_boundary": "implementation proof not claimed",
+  "implementation_proof_status": "not_in_scope",
+  "implementation_status": "planned",
+  "interaction_grammar_requirements": {
+    "forbidden_patterns": [
+      "generic dashboard",
+      "card-stack fallback",
+      "task-list clone",
+      "calendar clone",
+      "chatbot UI",
+      "AI confidence or model jargon",
+      "sportsbook or gambling language",
+      "color-only state meaning",
+      "shame language"
+    ],
+    "supporting_objects": [
+      "Receipt System",
+      "Source Freshness Badge",
+      "Why This Sheet",
+      "Closure System"
+    ],
+    "surface_family": "onboarding",
+    "surface_kind": "onboarding",
+    "user_perception": null
+  },
+  "known_gaps": [
+    "planned canon retained as explicit future surface",
+    "not_in_scope",
+    "proof status is no_proof_required"
+  ],
+  "maturity_tier": "candidate",
+  "patch_target_batch": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+  "performance_preview_requirements": {
+    "no_release_claims": true,
+    "performance_budget_status": "candidate",
+    "preview_matrix_relationship": [
+      "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml"
+    ],
+    "preview_targets": []
+  },
+  "planned_implementation_batch": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+  "primary_object": "First Run Root",
+  "privacy_local_first_requirements": {
+    "hosted_backend": "forbidden",
+    "local_first": "required",
+    "privacy_local_first_status": "candidate",
+    "source_freshness_visible": true
+  },
+  "proof_source_receipt_requirements": {
+    "implementation_proof_status": "not_in_scope",
+    "proof_source_receipt_status": "candidate",
+    "proof_status": "no_proof_required",
+    "receipt_expected_for_code_changes": true
+  },
+  "proof_status": "no_proof_required",
+  "provenance_row": {
+    "contract_candidates": [
+      "frontend/visual-encyclopedia/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
+      "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md"
+    ],
+    "design_token_candidates": [
+      "Sources/Theme/AmbitionTokens.generated.swift",
+      "frontend/visual-encyclopedia/primitives/EMPTY_STATE_COPY_AND_AFFORDANCES.md",
+      "frontend/visual-encyclopedia/behavior/RECOVERY_MODE.md"
+    ],
+    "destination": "Onboarding",
+    "entity_id": "first_run_root",
+    "entity_type": "mature_surface",
+    "evidence_files": [
+      "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+      "frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.yaml",
+      "frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+    ],
+    "gap_reason": "planned canon retained as explicit future surface",
+    "gap_status": "needs_direction",
+    "implementation_proof_status": "not_in_scope",
+    "lock_status": "review_ready",
+    "name": "First Run Root",
+    "origin_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "origin_evidence": [
+      "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+      "frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.yaml",
+      "frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+    ],
+    "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "patch_target_reason": "planned batch prompt evidence extracted from FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "planned_implementation_batch_confidence": "inferred_medium",
+    "planned_implementation_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "preview_candidates": [
+      "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml"
+    ],
+    "primary_object": "First Run Root",
+    "proof_status": "no_proof_required",
+    "recipe_file": "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+    "source_file_candidates": [],
+    "source_origin": "planned_future_surface",
+    "source_relationship": "planned_source_target",
+    "source_relationship_reason": "planned canon is retained explicitly as a future surface target.",
+    "state_machine_candidates": [
+      "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+      "frontend/visual-encyclopedia/trace/UNMAPPED_INTENDED_SURFACE_GAPS.md"
+    ]
+  },
+  "receipt_requirements": [
+    "batch_id",
+    "surface_ids",
+    "recipe_ids",
+    "source_files_changed",
+    "generated_packet_paths",
+    "tokens_used",
+    "contracts_used",
+    "scenario_proof",
+    "interaction_proof",
+    "accessibility_proof",
+    "dynamic_type_proof",
+    "reduce_motion_proof",
+    "visual_proof",
+    "preview_targets",
+    "screenshots",
+    "tests_run",
+    "drift_check_result",
+    "known_gaps",
+    "implementation_status",
+    "proof_status",
+    "rollback_notes"
+  ],
+  "recipe_id": "first_run_root",
+  "recipe_inventory_row": {
+    "canon_status": "planned_canon",
+    "child_surfaces": [],
+    "destination": "Onboarding",
+    "direction_conflicts": [],
+    "forbidden_patterns": [
+      "generic dashboard",
+      "card-stack fallback",
+      "task-list clone",
+      "calendar clone",
+      "chatbot UI",
+      "AI confidence or model jargon",
+      "sportsbook or gambling language",
+      "color-only state meaning",
+      "shame language"
+    ],
+    "hierarchy_level": "destination_root",
+    "name": "First Run Root",
+    "open_direction_questions": [],
+    "parent_surface": "Global App Shell",
+    "planned_batch_sources": [
+      "prompts/batches/FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001.md",
+      "prompts/batches/VISUAL-CANON-MOAT-01.md",
+      "prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md",
+      "prompts/batches/MOAT-ALIGNMENT-01.md"
+    ],
+    "precedence_notes": "Final intended visual direction uses current truth files first, then planned frontend batch direction for future-state details; current source does not prove this recipe is implemented.",
+    "primary_object": "First Run Root",
+    "recipe_file": "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+    "source_truth": [
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+    ],
+    "specificity_status": "high_specificity",
+    "supporting_objects": [
+      "Receipt System",
+      "Source Freshness Badge",
+      "Why This Sheet",
+      "Closure System"
+    ],
+    "surface_id": "first_run_root",
+    "surface_type": "onboarding",
+    "train_family_influence": [
+      "quiet-luxury hierarchy, native primitives, and no generic dashboard drift",
+      "shared chrome, reusable primitives, and the object-first interface language",
+      "Dynamic Type, VoiceOver, Reduce Motion, contrast, and visible alternatives",
+      "declared validation scope, explicit gaps, and no screenshot or implementation proof claims",
+      "calm first-use guidance and setup sequencing",
+      "local runtime explanation and trust"
+    ],
+    "train_family_sources": [
+      "visual_canon",
+      "si",
+      "accessibility",
+      "qa_validation",
+      "onboarding_first_run",
+      "privacy"
+    ],
+    "visible_regions": [
+      "orientation",
+      "primary object",
+      "source/proof line",
+      "action or disclosure",
+      "state recovery"
+    ]
+  },
+  "recipe_path": "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+  "required_proof": [
+    "generated authority packets",
+    "generated implementation prompt",
+    "preflight report",
+    "source bindings report",
+    "drift check report",
+    "implementation dashboard",
+    "next-surface queue",
+    "final gate report",
+    "validation command log"
+  ],
+  "required_validation": [
+    "git diff --check",
+    "python3 -m py_compile scripts/ambitions_frontend_authority_common.py scripts/ambitions-frontend-authority-packet.py scripts/ambitions-frontend-authority-preflight.py scripts/ambitions-frontend-implementation-prompt.py scripts/ambitions-frontend-source-bindings.py scripts/ambitions-frontend-drift-check.py scripts/ambitions-frontend-implementation-dashboard.py scripts/ambitions-frontend-next-surface-queue.py scripts/ambitions-frontend-receipt-check.py scripts/ambitions-frontend-proof-contract-check.py scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py",
+    "python3 scripts/ambitions-frontend-authority-packet.py --tier P0",
+    "python3 scripts/ambitions-frontend-authority-preflight.py --surface first_run_root",
+    "python3 scripts/ambitions-frontend-implementation-prompt.py --surface first_run_root --batch FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "python3 scripts/ambitions-frontend-source-bindings.py",
+    "python3 scripts/ambitions-frontend-drift-check.py",
+    "python3 scripts/ambitions-frontend-implementation-dashboard.py",
+    "python3 scripts/ambitions-frontend-next-surface-queue.py",
+    "python3 scripts/ambitions-frontend-receipt-check.py",
+    "python3 scripts/ambitions-frontend-proof-contract-check.py",
+    "python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py"
+  ],
+  "source_candidates": [],
+  "source_link_row": {
+    "destination": "Onboarding",
+    "last_verified": "2026-05-14",
+    "notes": "Recipe is source-link represented as intended canon only in this control-plane pass; no precise SwiftUI implementation match is claimed.",
+    "primary_object": "First Run Root",
+    "recipe_id": "first_run_root",
+    "recipe_path": "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+    "shared_components": [],
+    "source_file_candidates": [],
+    "source_link_confidence": "intended_only"
+  },
+  "source_origin": "planned_future_surface",
+  "source_relationship": "planned_source_target",
+  "source_relationship_reason": "planned canon is retained explicitly as a future surface target.",
+  "state_scenario_requirements": {
+    "forbidden_patterns": [
+      "generic dashboard",
+      "card-stack fallback",
+      "task-list clone",
+      "calendar clone",
+      "chatbot UI",
+      "AI confidence or model jargon",
+      "sportsbook or gambling language",
+      "color-only state meaning",
+      "shame language"
+    ],
+    "preview_matrix_relationship": [
+      "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml"
+    ],
+    "scenarios": [],
+    "state_coverage_status": "candidate",
+    "state_machine_relationship": [
+      "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+      "frontend/visual-encyclopedia/trace/UNMAPPED_INTENDED_SURFACE_GAPS.md"
+    ],
+    "visible_regions": [
+      "orientation",
+      "primary object",
+      "source/proof line",
+      "action or disclosure",
+      "state recovery"
+    ]
+  },
+  "surface_bible_path": null,
+  "surface_id": "first_run_root",
+  "surface_name": "First Run Root",
+  "surface_type": "onboarding",
+  "tokens": {
+    "design_tokens": [
+      "Sources/Theme/AmbitionTokens.generated.swift",
+      "frontend/visual-encyclopedia/primitives/EMPTY_STATE_COPY_AND_AFFORDANCES.md",
+      "frontend/visual-encyclopedia/behavior/RECOVERY_MODE.md"
+    ],
+    "surface_support_tokens": [
+      "Sources/Theme/AmbitionTokens.generated.swift",
+      "frontend/visual-encyclopedia/primitives/EMPTY_STATE_COPY_AND_AFFORDANCES.md",
+      "frontend/visual-encyclopedia/behavior/RECOVERY_MODE.md"
+    ]
+  },
+  "universe_row": {
+    "accessibility_status": "candidate",
+    "adhd_status": "candidate",
+    "app_store_maturity_required": true,
+    "canon_status": "planned_canon",
+    "child_surfaces": [],
+    "component_contract_relationship": [
+      "frontend/visual-encyclopedia/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
+      "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md"
+    ],
+    "design_token_relationship": [
+      "Sources/Theme/AmbitionTokens.generated.swift",
+      "frontend/visual-encyclopedia/primitives/EMPTY_STATE_COPY_AND_AFFORDANCES.md",
+      "frontend/visual-encyclopedia/behavior/RECOVERY_MODE.md"
+    ],
+    "destination": "Onboarding",
+    "evidence_files": [
+      "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+      "frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.yaml",
+      "frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+    ],
+    "gap_reason": "planned canon retained as explicit future surface",
+    "gap_status": "needs_direction",
+    "implementation_proof_status": "not_in_scope",
+    "lock_status": "review_ready",
+    "maturity_tier": "candidate",
+    "must_exist_reason": "The Onboarding family must exist because it is part of the active IA and the mature object loop.",
+    "must_not_be_generic_because": "would turn first-run guidance into a generic setup funnel.",
+    "name": "First Run Root",
+    "origin_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "origin_evidence": [
+      "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+      "frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.yaml",
+      "frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+    ],
+    "parent_surface": "Global App Shell",
+    "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "patch_target_reason": "planned batch prompt evidence extracted from FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "performance_budget_status": "candidate",
+    "planned_implementation_batch_confidence": "inferred_medium",
+    "planned_implementation_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+    "preview_matrix_relationship": [
+      "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml"
+    ],
+    "primary_object": "First Run Root",
+    "privacy_local_first_status": "candidate",
+    "proof_source_receipt_status": "candidate",
+    "proof_status": "no_proof_required",
+    "recipe_file": "frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md",
+    "recipe_inventory_id": "first_run_root",
+    "recipe_status": "planned_canon",
+    "source_file_candidates": [],
+    "source_origin": "planned_future_surface",
+    "source_relationship": "planned_source_target",
+    "source_relationship_reason": "planned canon is retained explicitly as a future surface target.",
+    "state_coverage_status": "candidate",
+    "state_machine_relationship": [
+      "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+      "frontend/visual-encyclopedia/trace/UNMAPPED_INTENDED_SURFACE_GAPS.md"
+    ],
+    "surface_family": "onboarding",
+    "surface_type": "onboarding",
+    "surface_universe_id": "first_run_root",
+    "transaction_status": "candidate",
+    "visual_design_status": "review_ready"
+  }
+}

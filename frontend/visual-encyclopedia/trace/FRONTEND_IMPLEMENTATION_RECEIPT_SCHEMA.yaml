@@ -1,0 +1,31 @@
+{
+  "receipt_schema_version": 1,
+  "required_fields": [
+    "batch_id",
+    "surface_ids",
+    "recipe_ids",
+    "source_files_changed",
+    "generated_packet_paths",
+    "tokens_used",
+    "contracts_used",
+    "scenario_proof",
+    "interaction_proof",
+    "accessibility_proof",
+    "dynamic_type_proof",
+    "reduce_motion_proof",
+    "visual_proof",
+    "preview_targets",
+    "screenshots",
+    "tests_run",
+    "drift_check_result",
+    "known_gaps",
+    "implementation_status",
+    "proof_status",
+    "rollback_notes"
+  ],
+  "required_notes": [
+    "Receipts are implementation records, not release proof.",
+    "A receipt cannot claim proof for files that were not inspected.",
+    "A receipt must name any remaining gaps plainly."
+  ]
+}

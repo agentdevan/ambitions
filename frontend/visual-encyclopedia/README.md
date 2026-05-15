@@ -13,3 +13,7 @@ Start here:
 - [`../intended-canon.md`](../intended-canon.md)
 
 This family is visual canon only. It is not implementation proof, screenshot proof, release proof, accessibility conformance proof, or a current-state audit.
+
+## Implementation Workflow
+
+For frontend implementation work, start with [`ENCYCLOPEDIA_TO_FRONTEND_OS.md`](ENCYCLOPEDIA_TO_FRONTEND_OS.md) and then use [`FRONTEND_AUTHORITY_INDEX.md`](FRONTEND_AUTHORITY_INDEX.md) as the human front door into the control plane.

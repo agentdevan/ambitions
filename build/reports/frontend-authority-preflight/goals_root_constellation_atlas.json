@@ -1,0 +1,35 @@
+{
+  "allowed_sources": [
+    "Native/Ambitions/Features/Goals/GoalsScreen.swift",
+    "Native/Ambitions/Features/Goals/GoalsViewModels.swift",
+    "Native/Ambitions/Features/Goals/GoalDetailScreen.swift"
+  ],
+  "batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+  "checks": {
+    "active_ia_valid": true,
+    "contracts_known": true,
+    "packet_exists_or_generated": true,
+    "plan_not_active_top_level": true,
+    "proof_contract_generatable": true,
+    "proof_status_known": true,
+    "provenance_exists": true,
+    "recipe_exists": true,
+    "source_candidates_or_gap": true,
+    "source_relationship_explicit": true,
+    "source_targets_allowed_or_extensible": true,
+    "surface_exists": true,
+    "surface_not_obsolete": true,
+    "tokens_known": true
+  },
+  "destination": "Goals",
+  "generated_from_batch": "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06",
+  "issues": [],
+  "primary_object": "Constellation Atlas",
+  "recipe_path": "frontend/visual-encyclopedia/recipes/goals/goals_root_constellation_atlas.md",
+  "source_targets": [],
+  "status": "green",
+  "surface_bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+  "surface_id": "goals_root_constellation_atlas",
+  "surface_name": "Goals Root / Constellation Atlas",
+  "warnings": []
+}

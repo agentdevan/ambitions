@@ -1,0 +1,35 @@
+{
+  "allowed_sources": [
+    "Native/Ambitions/Features/Today/TodayScreen.swift",
+    "Native/Ambitions/Features/Today/TodayViewModel.swift",
+    "Native/Ambitions/Features/Today/TodayExecutionViewState.swift"
+  ],
+  "batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
+  "checks": {
+    "active_ia_valid": true,
+    "contracts_known": true,
+    "packet_exists_or_generated": true,
+    "plan_not_active_top_level": true,
+    "proof_contract_generatable": true,
+    "proof_status_known": true,
+    "provenance_exists": true,
+    "recipe_exists": true,
+    "source_candidates_or_gap": true,
+    "source_relationship_explicit": true,
+    "source_targets_allowed_or_extensible": true,
+    "surface_exists": true,
+    "surface_not_obsolete": true,
+    "tokens_known": true
+  },
+  "destination": "Today",
+  "generated_from_batch": "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06",
+  "issues": [],
+  "primary_object": "Reality Meridian",
+  "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md",
+  "source_targets": [],
+  "status": "green",
+  "surface_bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+  "surface_id": "today_root_reality_meridian",
+  "surface_name": "Today Root / Reality Meridian",
+  "warnings": []
+}
