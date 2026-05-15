@@ -95,7 +95,7 @@ struct PlanCapacityEnvelopeCard: View {
                     TagPill(envelope.availableCapacity, icon: "calendar", state: envelope.visualState)
                 }
 
-                PressureGlow(level: pressureLevel, context: .plan, label: "Plan pressure")
+                PressureGlow(level: pressureLevel, context: .plan, label: "Time pressure")
 
                 EvidenceLabel(
                     envelope.label,
@@ -233,7 +233,7 @@ struct PlanTimelineStripCard: View {
                 SectionHeader(title: strip.title, subtitle: strip.subtitle)
 
                 if strip.items.isEmpty {
-                    Text("Goal movement will appear here when this plan has real pressure to carry.")
+                    Text("Goal movement will appear here when this week has real pressure to carry.")
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                 } else {
