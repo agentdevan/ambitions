@@ -11,6 +11,36 @@ Ambitions compounds private ambition context into proof-backed execution decisio
 
 The moat is not a feature list. It is an anti-commodity alignment: the repo must make it clear that Ambitions competes on durable local intelligence, proof, retention, recovery, and inspectable recommendations, not on generic task management.
 
+## Private Life Runtime Proof Target
+
+The Private Life Runtime moat is not proven by having goals, tasks, calendar views, or recommendation-shaped UI. It is proven when Ambitions can demonstrate this behavior locally and inspectably:
+
+```text
+same intent
++ different local user context
+= different inspectable daily execution plan
++ relaunch replay
++ closure/recovery adaptation
++ proof/receipt continuity
+```
+
+Minimum proof target:
+
+- same goal or intent produces meaningfully different daily execution steps for users with different schedules, capacity, protected time, and recovery state
+- each recommended step exposes why this step, why now, source context used, what the user can change, and what receipt exists when behavior changes
+- missed or unclosed execution routes through closure/recovery before stale carryover
+- early completion creates optional user-controlled reflow, not silent rearrangement
+- relaunch restores the same local recommendation and receipt unless source data changed
+- user corrections affect later behavior and remain inspectable/resettable
+
+Supporting proof spec:
+
+```text
+docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md
+```
+
+That spec is a proof target only. It does not prove implementation, tests, device behavior, or release readiness.
+
 ## Canonical Moat Pyramid
 
 ```text
@@ -195,6 +225,7 @@ Before closing this batch family:
 3. Are recommendation reasons/explainability paths scaffolded and non-AI-branded?
 4. Is `You` language clearly about trust/control rather than account/settings/admin?
 5. Are forbidden terms and top-level legacy names absent from active user-facing layers?
+6. Does the work move Ambitions closer to proving same intent + different local context = different inspectable daily execution?
 
 ## Hard Red Conditions
 
