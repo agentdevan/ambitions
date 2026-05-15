@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "LDI21",
-  "next_eligible_title": "Red-Team Evaluation Suite",
+  "next_eligible_batch": "LDI22",
+  "next_eligible_title": "Governance And Maintenance Console",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -612,17 +612,17 @@
     {
       "id": "LDI21",
       "title": "Red-Team Evaluation Suite",
-      "classification": "executable_now",
-      "reason": "LDI20 is complete / green. LDI21 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch LDI20.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "LDI21 Red-Team Evaluation Suite is complete / Green with closeout in docs/audits/ldi21-batch-closeout-report.md and commit 12a5fabeda711f579baef38f1aae5a38c85849ee pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "LDI22",
       "title": "Governance And Maintenance Console",
-      "classification": "blocked_until_dependency",
-      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
-      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "classification": "executable_now",
+      "reason": "LDI21 is complete / green. LDI22 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch LDI21.",
       "efc_applicability": "invoked"
     },
     {

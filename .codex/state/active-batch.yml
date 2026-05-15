@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "LDI20 Freshness Broker"
-  previous_batch: "LDI20 Freshness Broker"
+  batch: "LDI21 Red-Team Evaluation Suite"
+  previous_batch: "LDI21 Red-Team Evaluation Suite"
   previous_result: "green"
-  next_eligible_batch: "LDI21 Red-Team Evaluation Suite"
+  next_eligible_batch: "LDI22 Governance And Maintenance Console"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
