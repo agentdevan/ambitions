@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "AOS28 AmbitionsOS Experience Tail Gate"
-  previous_batch: "AOS28 AmbitionsOS Experience Tail Gate"
+  batch: "AOS29 AmbitionsOS Handoff Tail Gate"
+  previous_batch: "AOS29 AmbitionsOS Handoff Tail Gate"
   previous_result: "green"
-  next_eligible_batch: "AOS29 AmbitionsOS Handoff Tail Gate"
+  next_eligible_batch: "AOS30 AmbitionsOS Closeout"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
