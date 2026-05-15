@@ -16,7 +16,7 @@ final class ShareViewController: UIViewController {
                     self?.save(text: text, landing: landing)
                 },
                 onCancel: { [weak self] in
-                    self?.extensionContext?.cancelRequest(withError: ShareExtensionError.cancelled)
+                    self?.cancelShareRequest()
                 }
             )
         )
@@ -44,7 +44,7 @@ final class ShareViewController: UIViewController {
                     self?.save(text: text, landing: landing)
                 },
                 onCancel: { [weak self] in
-                    self?.extensionContext?.cancelRequest(withError: ShareExtensionError.cancelled)
+                    self?.cancelShareRequest()
                 }
             )
         }
@@ -93,13 +93,23 @@ final class ShareViewController: UIViewController {
         }()
 
         guard let url else {
-            extensionContext?.completeRequest(returningItems: nil)
+            completeShareRequest()
             return
         }
 
         extensionContext?.open(url) { [weak self] _ in
-            self?.extensionContext?.completeRequest(returningItems: nil)
+            Task { @MainActor in
+                self?.completeShareRequest()
+            }
         }
+    }
+
+    private func cancelShareRequest() {
+        extensionContext?.cancelRequest(withError: ShareExtensionError.cancelled)
+    }
+
+    private func completeShareRequest() {
+        extensionContext?.completeRequest(returningItems: nil)
     }
 }
 
