@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "LDI19",
-  "next_eligible_title": "Multi-Device Merge Ledger",
+  "next_eligible_batch": "LDI20",
+  "next_eligible_title": "Freshness Broker",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -596,17 +596,17 @@
     {
       "id": "LDI19",
       "title": "Multi-Device Merge Ledger",
-      "classification": "executable_now",
-      "reason": "LDI18 is complete / green. LDI19 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch LDI18.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "LDI19 Multi-Device Merge Ledger is complete / Green with closeout in docs/audits/ldi19-batch-closeout-report.md and commit f91575a8e9debf98ead1c2da2f41761a472a39cf pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "LDI20",
       "title": "Freshness Broker",
-      "classification": "blocked_until_dependency",
-      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
-      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "classification": "executable_now",
+      "reason": "LDI19 is complete / green. LDI20 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch LDI19.",
       "efc_applicability": "invoked"
     },
     {
