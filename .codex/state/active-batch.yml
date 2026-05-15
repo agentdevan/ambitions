@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA24 Claim Candidate Extractor"
-  previous_batch: "SA24 Claim Candidate Extractor"
-  previous_result: "accepted_yellow"
-  next_eligible_batch: "SA25 Source Review Sheet / Claim Review Drawer"
+  batch: "SA25 Source Review Sheet / Claim Review Drawer"
+  previous_batch: "SA25 Source Review Sheet / Claim Review Drawer"
+  previous_result: "green"
+  next_eligible_batch: "SA26 User Mini-Pack Builder"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

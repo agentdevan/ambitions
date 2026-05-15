@@ -80,8 +80,8 @@ Required proof gates: current local evidence, EFC applicability, no-claim bounda
 | 57 | SA22 | Image / Screenshot Importer | historical_complete_do_not_run | `prompts/batches/SA22.md` | do_not_run_header_only | SA23 |
 | 58 | SA23 | Document Type Classifier | historical_complete_do_not_run | `prompts/batches/SA23.md` | do_not_run_header_only | SA24 |
 | 59 | SA24 | Claim Candidate Extractor | historical_complete_do_not_run | `prompts/batches/SA24.md` | do_not_run_header_only | SA25 |
-| 60 | SA25 | Source Review Sheet / Claim Review Drawer | executable_now | `prompts/batches/SA25.md` | create_missing | SA26 |
-| 61 | SA26 | User Mini-Pack Builder | executable_later | `prompts/batches/SA26.md` | create_missing | SA27 |
+| 60 | SA25 | Source Review Sheet / Claim Review Drawer | historical_complete_do_not_run | `prompts/batches/SA25.md` | do_not_run_header_only | SA26 |
+| 61 | SA26 | User Mini-Pack Builder | executable_now | `prompts/batches/SA26.md` | create_missing | SA27 |
 | 62 | SA27 | Pack Factory Lite | executable_later | `prompts/batches/SA27.md` | create_missing | SA28 |
 | 63 | SA28 | Pack Diff / Changed Claim Tooling | executable_later | `prompts/batches/SA28.md` | create_missing | SA29 |
 | 64 | SA29 | Hash / Signature / Revocation Tooling | executable_later | `prompts/batches/SA29.md` | create_missing | SA30 |
