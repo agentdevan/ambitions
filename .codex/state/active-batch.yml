@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA30 Freshness Broker Manifest Contract"
-  previous_batch: "SA30 Freshness Broker Manifest Contract"
+  batch: "SA31 Official Source Adapter Contracts"
+  previous_batch: "SA31 Official Source Adapter Contracts"
   previous_result: "green"
-  next_eligible_batch: "SA31 Official Source Adapter Contracts"
+  next_eligible_batch: "SA32 Source Atlas UI Primitives / QA / Handoff"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
