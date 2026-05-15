@@ -7,6 +7,7 @@ Use this portal for the detailed visual encyclopedia, recipe system, trace ledge
 
 Start here:
 
+- [`recipes/today/today_reality_meridian_flagship_surface.md`](recipes/today/today_reality_meridian_flagship_surface.md) for the locked Today flagship viewport: Reality Meridian, exact current-time cursor, one-handable Start now CTA, compact proof/recovery, and `Local · Ambitions` chrome.
 - [`SIGNATURE_VISUAL_INSTRUMENTS.md`](SIGNATURE_VISUAL_INSTRUMENTS.md) for the top-level instrument doctrine that prevents generic card/list surfaces.
 - [`trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`](trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml) for the machine-readable instrument-to-surface map.
 - [`ENCYCLOPEDIA_TO_FRONTEND_OS.md`](ENCYCLOPEDIA_TO_FRONTEND_OS.md) for the implementation workflow.
@@ -14,6 +15,27 @@ Start here:
 - [`AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`](AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md) for the broad atlas.
 - [`../installed-canon.md`](../installed-canon.md) for source-backed current installation.
 - [`../intended-canon.md`](../intended-canon.md) for truth-backed intended direction.
+
+## Today Flagship Lock
+
+Today's active flagship viewport canon is [`recipes/today/today_reality_meridian_flagship_surface.md`](recipes/today/today_reality_meridian_flagship_surface.md).
+
+It supersedes older Today readings wherever they would produce a dense dashboard, top hero card, generic task list, high/left primary CTA, merged scheduled/current time marker, expanded receipt drawer, or standalone unbranded `On-device` badge.
+
+The locked Today viewport requires:
+
+- Reality Meridian as the dominant visual object
+- a scrollable vertical day spine, with continuation above and below the visible viewport
+- separate scheduled step node and live current-time cursor
+- exact current-time label aligned to the live cursor, for example `12:15 PM`
+- sparse Start Here content integrated into the temporal field
+- one-handable `Start now →` CTA on the right half, at or below vertical center
+- compact top-right `Local · Ambitions` lockup
+- lightweight future moments, not boxed task rows
+- one compact receipt/recovery surface above the tab bar
+- bottom IA exactly `Today / Goals / Capture / Time / You`
+
+This is visual canon only. It is not SwiftUI proof, screenshot proof, device proof, accessibility conformance proof, hosted-CI proof, or release readiness.
 
 ## Signature Instrument Rule
 
