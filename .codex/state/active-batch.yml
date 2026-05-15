@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA27 Pack Factory Lite"
-  previous_batch: "SA27 Pack Factory Lite"
+  batch: "SA28 Pack Diff / Changed Claim Tooling"
+  previous_batch: "SA28 Pack Diff / Changed Claim Tooling"
   previous_result: "green"
-  next_eligible_batch: "SA28 Pack Diff / Changed Claim Tooling"
+  next_eligible_batch: "SA29 Hash / Signature / Revocation Tooling"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
