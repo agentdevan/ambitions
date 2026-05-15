@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "SA28 Pack Diff / Changed Claim Tooling"
-  previous_batch: "SA28 Pack Diff / Changed Claim Tooling"
+  batch: "SA29 Hash / Signature / Revocation Tooling"
+  previous_batch: "SA29 Hash / Signature / Revocation Tooling"
   previous_result: "green"
-  next_eligible_batch: "SA29 Hash / Signature / Revocation Tooling"
+  next_eligible_batch: "SA30 Freshness Broker Manifest Contract"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
