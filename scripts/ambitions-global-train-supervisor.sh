@@ -227,7 +227,9 @@ run_once() {
 
   write_lock "$batch"
   echo "Running one global-train batch through canonical runner: $batch"
-  AUTO_BRANCH=0 ALLOW_MAIN_COMMIT=1 make batch BATCH="$batch" PROMPT="$prompt"
+  # The supervisor writes its own lock before launching the child runner; tracked
+  # dirt is already rejected above, so allow that supervisor-owned untracked lock.
+  ALLOW_DIRTY=1 AUTO_BRANCH=0 ALLOW_MAIN_COMMIT=1 make batch BATCH="$batch" PROMPT="$prompt"
 }
 
 run_until_complete() {
