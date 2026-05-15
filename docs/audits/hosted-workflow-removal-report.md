@@ -11,6 +11,9 @@ Deleted tracked workflow files:
 
 - `.github/workflows/ios-validate.yml`
 - `.github/workflows/cqs-advisory-gates.yml`
+- `.github/workflows/swift6-modernization-scan.yml` (removed on
+  2026-05-14 after it was found reintroduced as a push-triggered hosted
+  workflow)
 
 The tracked workflow directory is expected to be absent after these deletions because no workflow files remain.
 
