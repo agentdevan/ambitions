@@ -1,10 +1,16 @@
 # Ambitions 2.0 Accessibility Nutrition
 
+> Supporting note: This file may contain compatible durable accessibility decisions.
+> It does not override `docs/truth/*`, live source, or current proof evidence.
+> Treat it as an Ambitions 2.0 historical/supporting reference until extracted into active truth/status files.
+
+Status: Historical/supporting Ambitions 2.0 accessibility reference.
+
 ## Purpose
 
-Accessibility is product trust infrastructure for Ambitions 2.0. Batch 64 establishes the internal checklist, audit model, documentation, and code-backed support needed to verify accessibility consistently before any user-facing Accessibility Nutrition Facts appear.
+Accessibility is product trust infrastructure for Ambitions. This Ambitions 2.0 reference records an internal checklist, audit model, documentation, and code-backed support pattern that may remain useful when reconciled against active truth.
 
-This document is not a public claim. It is the internal source of truth for what must be checked, how claim status is recorded, and what Batch 115 must prove before `You -> Accessibility` can publish a summary.
+This document is not a public claim. It is not current release proof, current accessibility proof, or a user-facing Accessibility Nutrition claim.
 
 ## Batch 64 Current Status
 
