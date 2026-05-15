@@ -43,8 +43,8 @@ also closes Green and runner/no-claim gates remain intact.
 
 | Classification | Batches | Reason |
 | --- | --- | --- |
-| executable_now | SA18 | SA17 is complete / Accepted Yellow; SA18 is the next implementation batch. |
-| executable_later | PK19, PK20, PK21, PK22, PK23, PK24, PK25, PK26, PK27, PK28, PK29, PK30, PK31, PK32, PK33, PK34, PK35, PK36, PK37, PK38, PK39, PK40, PK41, SA07, SA08, SA09, SA10, SA10A, SA10B, SA10C, SA11, SA12, SA13, SA14, SA15, SA16, SA19, SA20, SA21, SA22, SA23, SA24, SA25, SA26, SA27, SA28, SA29, SA30, SA31, SA32, LDI17, LDI18, LDI19, FCP27, FCP28, FCP29, FCP30, PFC31, PFC32, PFC33, PFC34, PFC35, PFC36, PFC37, PFC38, PFC39, PFC40, RHC01, RHC02, RHC03, RHC04, RHC05, RHC06 | Later queued records remain dependency-gated and must not bypass the active executable_now record. |
+| executable_now | SA20 | SA19 is complete / Green; SA20 is the next implementation batch. |
+| executable_later | PK19, PK20, PK21, PK22, PK23, PK24, PK25, PK26, PK27, PK28, PK29, PK30, PK31, PK32, PK33, PK34, PK35, PK36, PK37, PK38, PK39, PK40, PK41, SA07, SA08, SA09, SA10, SA10A, SA10B, SA10C, SA11, SA12, SA13, SA14, SA15, SA16, SA21, SA22, SA23, SA24, SA25, SA26, SA27, SA28, SA29, SA30, SA31, SA32, LDI17, LDI18, LDI19, FCP27, FCP28, FCP29, FCP30, PFC31, PFC32, PFC33, PFC34, PFC35, PFC36, PFC37, PFC38, PFC39, PFC40, RHC01, RHC02, RHC03, RHC04, RHC05, RHC06 | Later queued records remain dependency-gated and must not bypass the active executable_now record. |
 | blocked_until_dependency | LDI15, LDI16, LDI20, LDI21, LDI22, AOS24, AOS25, AOS26, AOS27, AOS28, AOS29, AOS30 | LDI tail is dependency-split; it must not blindly run before or after all AOS. |
 | absorbed_as_overlay | EFC01, EFC02, EFC03, EFC04, EFC05, EFC06, EFC07, EFC08, EFC09, EFC10, EFC11, EFC12, EFC13, EFC14, EFC15, EFC16, EFC17, EFC18 | EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof. |
 | conditional_trigger_only | CS02C, CS03C, CS04C, CS05C, CS06C, CS09C | Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target. |
@@ -107,8 +107,8 @@ also closes Green and runner/no-claim gates remain intact.
 | SA16 | Source Container Model | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
 | SA17 | URL Source Importer | historical_complete_do_not_run | Complete / Accepted Yellow; do not rerun through normal fallback. | invoked |
 | SA18 | Plain Text Importer | executable_now | Complete prior batch SA17. | invoked |
-| SA19 | PDF Import Boundary | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
-| SA20 | PDFKit Text Extraction | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
+| SA19 | PDF Import Boundary | historical_complete_do_not_run | Complete / Green; closeout in `docs/audits/sa19-batch-closeout-report.md`. | invoked |
+| SA20 | PDFKit Text Extraction | executable_now | Complete prior batch SA19. | invoked |
 | SA21 | Vision OCR Fallback | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
 | SA22 | Image / Screenshot Importer | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
 | SA23 | Document Type Classifier | executable_later | Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed. | invoked |
