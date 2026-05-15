@@ -12,12 +12,12 @@ from ambitions_frontend_authority_common import (
     PACKET_DIR,
     ROOT,
     combined_surface_payload,
-    dedupe,
     load_json,
     surface_record,
     write_json,
     write_text,
 )
+from ambitions_signature_visual_instruments import enrich_packet_with_instrument
 
 
 def render_packet_md(packet: dict[str, Any]) -> str:
@@ -40,6 +40,7 @@ def render_packet_md(packet: dict[str, Any]) -> str:
             return f"## {title}\n{bullets(value)}"
         return f"## {title}\n{value}"
 
+    instrument = packet.get("signature_visual_instrument", {}) if isinstance(packet.get("signature_visual_instrument"), dict) else {}
     parts = [
         f"# Frontend Authority Packet: {packet['surface_name']}",
         "",
@@ -53,6 +54,27 @@ def render_packet_md(packet: dict[str, Any]) -> str:
         f"Source relationship: `{packet['source_relationship']}`",
         f"Implementation status: `{packet['implementation_status']}`",
         f"Proof status: `{packet['proof_status']}`",
+        "",
+        "## Signature Visual Instrument",
+        f"- instrument id: `{instrument.get('signature_instrument_id') or 'shared_or_none'}`",
+        f"- instrument name: `{instrument.get('signature_instrument_name') or 'Shared primitive / no owning instrument'}`",
+        f"- instrument required: `{instrument.get('instrument_required')}`",
+        f"- implementation status: `{instrument.get('instrument_implementation_status')}`",
+        f"- doctrine: `{instrument.get('doctrine_path')}`",
+        f"- matrix: `{instrument.get('matrix_path')}`",
+        f"- guidance: {instrument.get('dedicated_visual_object_guidance')}",
+        "",
+        "### Shared Instrument Primitives",
+        bullets(instrument.get("shared_instrument_primitives", [])),
+        "",
+        "### Future Visual Object Source Files",
+        bullets(instrument.get("future_visual_object_source_files", [])),
+        "",
+        "### Native SwiftUI Technique Candidates",
+        bullets(instrument.get("swiftui_technique_candidates", [])),
+        "",
+        "### Forbidden Visual Regressions",
+        bullets(instrument.get("forbidden_visual_regressions", [])),
         "",
         "## Source Candidates",
         bullets(packet.get("source_candidates", [])),
@@ -109,6 +131,10 @@ def build_index(packets: list[dict[str, Any]]) -> dict[str, Any]:
     destination_counts = Counter(packet["destination"] for packet in packets)
     tier_counts = Counter(packet["maturity_tier"] for packet in packets)
     relationship_counts = Counter(packet["source_relationship"] for packet in packets)
+    instrument_counts = Counter(
+        (packet.get("signature_visual_instrument", {}) or {}).get("signature_instrument_id") or "shared_or_none"
+        for packet in packets
+    )
     return {
         "batch_id": BATCH_ID,
         "generated_from_batch": BATCH_ID,
@@ -116,6 +142,7 @@ def build_index(packets: list[dict[str, Any]]) -> dict[str, Any]:
         "destination_counts": dict(sorted(destination_counts.items())),
         "tier_counts": dict(sorted(tier_counts.items())),
         "source_relationship_counts": dict(sorted(relationship_counts.items())),
+        "signature_instrument_counts": dict(sorted(instrument_counts.items())),
         "packets": [
             {
                 "surface_id": packet["surface_id"],
@@ -123,6 +150,8 @@ def build_index(packets: list[dict[str, Any]]) -> dict[str, Any]:
                 "destination": packet["destination"],
                 "maturity_tier": packet["maturity_tier"],
                 "source_relationship": packet["source_relationship"],
+                "signature_instrument_id": (packet.get("signature_visual_instrument", {}) or {}).get("signature_instrument_id"),
+                "shared_instrument_primitives": (packet.get("signature_visual_instrument", {}) or {}).get("shared_instrument_primitives", []),
                 "packet_md": str((PACKET_DIR / f"{packet['surface_id']}.md").relative_to(ROOT)),
                 "packet_json": str((PACKET_DIR / f"{packet['surface_id']}.json").relative_to(ROOT)),
             }
@@ -142,20 +171,22 @@ def render_index_md(index: dict[str, Any]) -> str:
         f"- Destinations: {index['destination_counts']}",
         f"- Tiers: {index['tier_counts']}",
         f"- Source relationships: {index['source_relationship_counts']}",
+        f"- Signature instruments: {index.get('signature_instrument_counts', {})}",
         "",
         "## Packets",
     ]
     for packet in index["packets"]:
         lines.append(
-            f"- `{packet['surface_id']}` - {packet['surface_name']} - {packet['destination']} - {packet['maturity_tier']} - {packet['source_relationship']}"
+            f"- `{packet['surface_id']}` - {packet['surface_name']} - {packet['destination']} - {packet['maturity_tier']} - {packet['source_relationship']} - instrument `{packet.get('signature_instrument_id') or 'shared_or_none'}`"
         )
+        lines.append(f"  - primitives: `{', '.join(packet.get('shared_instrument_primitives', [])) or 'none'}`")
         lines.append(f"  - md: `{packet['packet_md']}`")
         lines.append(f"  - json: `{packet['packet_json']}`")
     return "\n".join(lines).rstrip() + "\n"
 
 
 def generate_packet(surface_id: str) -> dict[str, Any]:
-    packet = combined_surface_payload(surface_id)
+    packet = enrich_packet_with_instrument(combined_surface_payload(surface_id))
     md_path, json_path = (
         PACKET_DIR / f"{surface_id}.md",
         PACKET_DIR / f"{surface_id}.json",
@@ -186,7 +217,7 @@ def main() -> int:
 
     selected = sorted(selected, key=packet_sort_key)
     packets = [generate_packet(surface_id) for surface_id in selected]
-    index = build_index([combined_surface_payload(surface_id) for surface_id in surface_ids])
+    index = build_index([enrich_packet_with_instrument(combined_surface_payload(surface_id)) for surface_id in surface_ids])
     write_json(PACKET_DIR / "index.json", index)
     write_text(PACKET_DIR / "index.md", render_index_md(index))
     if args.surface and args.format == "json":
