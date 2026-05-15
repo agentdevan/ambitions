@@ -1,0 +1,97 @@
+name: Signature Visual Instruments Encyclopedia 07
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/signature-visual-instruments-07.yml'
+      - 'scripts/ambitions_signature_visual_instruments.py'
+      - 'scripts/ambitions-install-signature-visual-instruments-07.py'
+      - 'scripts/ambitions-signature-visual-instruments-check.py'
+      - 'scripts/ambitions-frontend-authority-packet.py'
+      - 'scripts/ambitions-frontend-implementation-prompt.py'
+      - 'scripts/ambitions-frontend-source-bindings.py'
+      - 'scripts/ambitions-frontend-drift-check.py'
+      - 'scripts/ambitions-frontend-implementation-dashboard.py'
+      - 'scripts/ambitions-frontend-next-surface-queue.py'
+      - 'frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md'
+      - 'frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml'
+      - 'prompts/batches/SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07.md'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signature-visual-instruments-07
+  cancel-in-progress: false
+
+jobs:
+  validate-and-materialize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Signature Visual Instruments 07 outputs
+        run: python3 scripts/ambitions-install-signature-visual-instruments-07.py
+
+      - name: Show final report
+        if: always()
+        run: |
+          echo '--- signature visual instruments report ---'
+          cat build/reports/signature-visual-instruments-encyclopedia-07.md || true
+          echo '--- signature visual instruments check ---'
+          cat build/reports/signature-visual-instruments-check.md || true
+          echo '--- git status ---'
+          git status --short
+
+      - name: Commit generated outputs
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Makefile \
+            build/reports/frontend-authority-packets/ \
+            build/reports/frontend-authority-preflight/ \
+            build/reports/frontend-implementation-prompts/ \
+            build/reports/frontend-source-bindings.json \
+            build/reports/frontend-source-bindings.md \
+            build/reports/frontend-drift-check.json \
+            build/reports/frontend-drift-check.md \
+            build/reports/frontend-implementation-dashboard.json \
+            build/reports/frontend-implementation-dashboard.md \
+            build/reports/frontend-next-surface-queue.json \
+            build/reports/frontend-next-surface-queue.md \
+            build/reports/frontend-receipt-check.json \
+            build/reports/frontend-receipt-check.md \
+            build/reports/frontend-proof-contract-check.json \
+            build/reports/frontend-proof-contract-check.md \
+            build/reports/signature-visual-instruments-check.json \
+            build/reports/signature-visual-instruments-check.md \
+            build/reports/signature-visual-instruments-encyclopedia-07.json \
+            build/reports/signature-visual-instruments-encyclopedia-07.md \
+            build/reports/encyclopedia-to-frontend-os-final-gate.json \
+            build/reports/encyclopedia-to-frontend-os-final-gate.md \
+            build/reports/encyclopedia-to-frontend-operating-system-06.json \
+            build/reports/encyclopedia-to-frontend-operating-system-06.md \
+            frontend/visual-encyclopedia/trace/FRONTEND_SOURCE_BINDINGS.yaml \
+            prompts/generated/frontend/ \
+            Sources/Theme/AmbitionsSurfaceID.generated.swift \
+            Sources/Theme/AmbitionsRecipeID.generated.swift \
+            Sources/Theme/AmbitionsFrontendAuthority.generated.swift
+          if git diff --cached --quiet; then
+            echo 'No generated changes to commit.'
+          else
+            git commit -m 'Materialize signature visual instruments encyclopedia outputs'
+            git push
+          fi
