@@ -1,27 +1,27 @@
 status: compact-mirror
 date: "2026-05-15"
 source_of_truth:
+  - "docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md"
   - ".codex/reports/current-batch-train-state.md"
   - "docs/codex/BATCH_REGISTRY.md"
-  - "docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md"
   - "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
-  - "docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md"
-  - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md"
-  - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
-  - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
-  train: "Global full-stack execution"
-  batch: "AOS30 AmbitionsOS Closeout"
+  train: "Manifest-faithful rerun reconciliation"
+  batch: "SA28-LDI15-AOS24 Manifest Rerun Directive"
   previous_batch: "AOS30 AmbitionsOS Closeout"
-  previous_result: "green"
-  next_eligible_batch: "FCP27 App-Wide Flagship Audit And Remediation"
+  previous_result: "blocked_pending_manifest_rerun"
+  next_eligible_batch: "SA28 Manifest-Faithful Rerun"
+blocked_forward_queue:
+  blocked_batch: "FCP27 App-Wide Flagship Audit And Remediation"
+  reason: "SA28-SA32, LDI15-LDI22, and AOS24-AOS30 must be rerun or truthfully reclassified against their manifests before FCP27 can proceed."
+rerun_directive:
+  required: true
+  path: "docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md"
+frontend_authority:
+  encyclopedia_required_for_frontend_touching_batches: true
+  entrypoint: "frontend/README.md"
 codex_os_override:
-  active_pass: "post-PK accelerated implementation"
+  active_pass: "manifest-rerun-reconciliation"
   app_feature_implementation_allowed: true
   production_swift_allowed: true
-  branch_creation_allowed: false
-efc_overlay:
-  status: "active proof overlay wired into canonical queue"
-  current_batch_preserved: true
-  next_batch_must_inherit_efc: true
-  peak_optimized_sequence_owner: "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+  branch_creation_allowed: true
