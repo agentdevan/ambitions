@@ -19,6 +19,8 @@ Direct main-branch changes completed:
 | `9620493ce4ce67e4acef497e6400fa32858a6385` | `Native/Ambitions/Features/Plan/PlanViewModel.swift` | Replaced isolated user-facing Plan error copy with Time copy. |
 | `a435032bc9d68316bf8f4260178310fad21caa0f` | `Native/Ambitions/Features/Plan/PlanFoundationCards.swift` | Replaced isolated Plan pressure copy with Time/week copy. |
 | `7aac76481c9ef6ad816a8c6113d31a8eaca4ba18` | `docs/canon/PLAN_CALENDAR_BELIEVABILITY.md` | Converted active Plan-era canon into supporting Time/calendar/believability compatibility canon. |
+| `e469a85d9da80fb0898ca9376fbfedf2661866d1` | `docs/status/codex-free-github-api-audit-2026-05-15.md` | Added this Codex-free GitHub API audit receipt. |
+| `10c8ec753c6b5f3e95429d1ba62f8873d17b547d` | `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md` | Added compact Private Life Runtime proof spec for same-intent/different-context moat validation. |
 
 ## Current Authority Classification
 
@@ -28,6 +30,7 @@ Direct main-branch changes completed:
 | `README.md`, `docs/README.md` | Active front doors | Route readers through `docs/truth/*` first. |
 | `frontend/README.md` | Active frontend portal | Current IA is `Today / Goals / Capture / Time / You`; Plan is compatibility-only. |
 | `frontend/visual-encyclopedia/**` | Active/supporting frontend visual canon | Use after truth files; design canon only unless implementation proof exists. |
+| `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md` | Active supporting runtime proof spec | Defines moat proof expectations; not implementation proof. |
 | `docs/AmbitionsCanon/**` | Supporting product/design canon | Useful material only where compatible with `docs/truth/*`; no longer source-truth package. |
 | `docs/canon/SOURCE_OF_TRUTH_MAP.md` | Supporting routing map | Repaired to route through truth files; does not override them. |
 | `docs/canon/PLAN_CALENDAR_BELIEVABILITY.md` | Supporting Time compatibility canon | Preserves calendar/believability rules without restoring Plan as top-level IA. |
@@ -59,6 +62,7 @@ chatbot
 Hero Step Panel
 Plan pressure
 Unable to load Plan
+Private Life Runtime
 ```
 
 ## Findings
@@ -70,6 +74,7 @@ Unable to load Plan
 - `docs/canon/PLAN_CALENDAR_BELIEVABILITY.md` called itself an active canon consolidation layer and owned Plan/calendar/believability. It now preserves useful rules as Time compatibility canon.
 - `Native/Ambitions/Features/Plan/PlanViewModel.swift` contained isolated user-facing Plan error copy. It now says Time.
 - `Native/Ambitions/Features/Plan/PlanFoundationCards.swift` contained isolated user-facing Plan pressure copy. It now says Time pressure / this week.
+- `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md` now defines a compact direct proof spec for same-intent/different-local-context runtime validation.
 
 ### Left open intentionally
 
@@ -102,14 +107,12 @@ on:
 
 ## GitHub Issues Created / Updated
 
-Created during the audit:
-
 | Issue | Status | Purpose |
 |---|---|---|
 | `#3` | Closed completed | Source truth map repair. Completed by direct main commits. |
 | `#4` | Closed completed | Hosted workflow manual-only proof. Completed by inspection. |
 | `#5` | Open | Visual encyclopedia stale-language sweep. |
-| `#6` | Open | Private Life Runtime proof scenarios. |
+| `#6` | Closed completed | Private Life Runtime proof spec installed as `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md`. |
 | `#7` | Open | Historical quarantine / obsolete canon demotion. |
 
 Note: Issue bodies may still mention runner commands because they were initially created before the operation switched fully to direct-main mode. Treat the actual direct-main commits and this audit as the current operational record.
@@ -119,8 +122,7 @@ Note: Issue bodies may still mention runner commands because they were initially
 1. Audit active frontend authority files under `frontend/visual-encyclopedia/**` for stale visible language.
 2. Add explicit historical/supporting headers to high-risk old canon files that remain linked from active paths.
 3. Inspect `Native/Ambitions/Features/Plan/**` for user-visible Plan copy and patch only isolated strings that do not require type/folder renames.
-4. Create a Private Life Runtime proof spec in docs, not a prompt, covering same intent, different users, different daily plans, local-only execution, closure/recovery adaptation, replay after relaunch, and inspectable Start Here receipts.
-5. Do not delete or move large doc families until extraction and link checks are done.
+4. Do not delete or move large doc families until extraction and link checks are done.
 
 ## Red Lines
 
