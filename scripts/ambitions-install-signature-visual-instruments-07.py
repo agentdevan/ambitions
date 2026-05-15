@@ -38,7 +38,7 @@ def patch_makefile() -> bool:
 
     phony_line = ".PHONY: frontend-authority-packet frontend-authority-packets-p0 frontend-authority-packets-all frontend-authority-preflight frontend-implementation-prompt frontend-source-bindings frontend-drift-check frontend-implementation-dashboard frontend-next-surface-queue frontend-receipt-check frontend-proof-contract-check encyclopedia-to-frontend-os-final-gate encyclopedia-to-frontend-os-all"
     phony_replacement = ".PHONY: frontend-authority-packet frontend-authority-packets-p0 frontend-authority-packets-all frontend-authority-preflight frontend-implementation-prompt frontend-source-bindings frontend-drift-check frontend-implementation-dashboard frontend-next-surface-queue frontend-receipt-check frontend-proof-contract-check signature-visual-instruments-check encyclopedia-to-frontend-os-final-gate encyclopedia-to-frontend-os-all"
-    if phony_line in text and "signature-visual-instruments-check" not in text.split("\n", 8)[4]:
+    if phony_line in text:
         text = text.replace(phony_line, phony_replacement)
 
     target = "signature-visual-instruments-check:\n\t@python3 scripts/ambitions-signature-visual-instruments-check.py\n\n"
@@ -80,6 +80,13 @@ def render_md(report: dict[str, Any]) -> str:
     ])
     for result in report["validation_run"]:
         lines.append(f"- `{result['command']}` -> {result['exit_code']}")
+        if result["exit_code"] != 0:
+            if result.get("stdout"):
+                lines.append("  - stdout tail:")
+                lines.extend(f"    {line}" for line in result["stdout"].splitlines()[-20:])
+            if result.get("stderr"):
+                lines.append("  - stderr tail:")
+                lines.extend(f"    {line}" for line in result["stderr"].splitlines()[-20:])
     lines.extend([
         f"Remaining gaps: {', '.join(report['remaining_gaps']) if report['remaining_gaps'] else 'None'}",
         f"Implementation proof: {report['implementation_proof']}",
@@ -87,6 +94,22 @@ def render_md(report: dict[str, Any]) -> str:
         f"Commit: {report['commit']}",
     ])
     return "\n".join(lines).rstrip() + "\n"
+
+
+def print_failure_summary(failures: list[dict[str, Any]]) -> None:
+    if not failures:
+        return
+    print("\nFAILED INTERNAL VALIDATION COMMANDS")
+    print("===================================")
+    for result in failures:
+        print(f"\nCOMMAND: {result['command']}")
+        print(f"EXIT: {result['exit_code']}")
+        if result.get("stdout"):
+            print("STDOUT TAIL:")
+            print(result["stdout"][-4000:])
+        if result.get("stderr"):
+            print("STDERR TAIL:")
+            print(result["stderr"][-4000:])
 
 
 def main() -> int:
@@ -148,6 +171,7 @@ def main() -> int:
     write_json(REPORT_DIR / "signature-visual-instruments-encyclopedia-07.json", report)
     write_text(REPORT_DIR / "signature-visual-instruments-encyclopedia-07.md", render_md(report))
     print(status.upper())
+    print_failure_summary(command_failures)
     return 0 if status == "green" else 1
 
 
