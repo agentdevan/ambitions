@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "LDI18",
-  "next_eligible_title": "Archive And Schema Migration",
+  "next_eligible_batch": "LDI19",
+  "next_eligible_title": "Multi-Device Merge Ledger",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -588,17 +588,17 @@
     {
       "id": "LDI18",
       "title": "Archive And Schema Migration",
-      "classification": "executable_now",
-      "reason": "LDI17 is complete / green. LDI18 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch LDI17.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "LDI18 Archive And Schema Migration is complete / Green with closeout in docs/audits/ldi18-batch-closeout-report.md and commit 80aa869304ca2c9dd3c9119db6fbb86a99d1f599 pushed to main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "LDI19",
       "title": "Multi-Device Merge Ledger",
-      "classification": "executable_later",
-      "reason": "LDI tail is dependency-split; it must not blindly run before or after all AOS.",
-      "blocking_prerequisites": "Relevant PK transaction/storage/side-effect/privacy proof plus Source Atlas SA07-SA32 where source/freshness or changed claims are used.",
+      "classification": "executable_now",
+      "reason": "LDI18 is complete / green. LDI19 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch LDI18.",
       "efc_applicability": "invoked"
     },
     {

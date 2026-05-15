@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "LDI17 Continuity Sync"
-  previous_batch: "LDI17 Continuity Sync"
+  batch: "LDI18 Archive And Schema Migration"
+  previous_batch: "LDI18 Archive And Schema Migration"
   previous_result: "green"
-  next_eligible_batch: "LDI18 Archive And Schema Migration"
+  next_eligible_batch: "LDI19 Multi-Device Merge Ledger"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
