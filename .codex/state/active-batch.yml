@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "AOS26 AmbitionsOS Evaluation Tail Gate"
-  previous_batch: "AOS26 AmbitionsOS Evaluation Tail Gate"
+  batch: "AOS27 AmbitionsOS Privacy Safety Tail Gate"
+  previous_batch: "AOS27 AmbitionsOS Privacy Safety Tail Gate"
   previous_result: "green"
-  next_eligible_batch: "AOS27 AmbitionsOS Privacy Safety Tail Gate"
+  next_eligible_batch: "AOS28 AmbitionsOS Experience Tail Gate"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
