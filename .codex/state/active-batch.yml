@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "LDI19 Multi-Device Merge Ledger"
-  previous_batch: "LDI19 Multi-Device Merge Ledger"
+  batch: "LDI20 Freshness Broker"
+  previous_batch: "LDI20 Freshness Broker"
   previous_result: "green"
-  next_eligible_batch: "LDI20 Freshness Broker"
+  next_eligible_batch: "LDI21 Red-Team Evaluation Suite"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
