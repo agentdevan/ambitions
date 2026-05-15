@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA23",
-  "next_eligible_title": "Document Type Classifier",
+  "next_eligible_batch": "SA24",
+  "next_eligible_title": "Claim Candidate Extractor",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -484,17 +484,17 @@
     {
       "id": "SA23",
       "title": "Document Type Classifier",
-      "classification": "executable_now",
-      "reason": "SA22 is complete / accepted yellow. SA23 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA22.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA23 Document Type Classifier is complete / Accepted Yellow with closeout in docs/audits/sa23-batch-closeout-report.md and local commit b5ff63d6fb1de37728b51bfda37cc3710b9d2ee2. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA24",
       "title": "Claim Candidate Extractor",
-      "classification": "executable_later",
-      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
-      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "classification": "executable_now",
+      "reason": "SA23 is complete / accepted yellow. SA24 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA23.",
       "efc_applicability": "invoked"
     },
     {

@@ -804,35 +804,35 @@
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Do not rerun; SA23 is next eligible."
+      "next_action": "Do not rerun; SA23 was the next eligible Source Atlas handoff."
     },
     {
       "id": "SA23",
       "title": "Document Type Classifier",
-      "classification": "executable_now",
-      "status_class": "executable-now",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete",
       "owner_train": "SA / Source Atlas",
       "source_path": "docs/codex/BATCH_REGISTRY.md",
-      "dependency_gate": "Complete prior batch SA22.",
+      "dependency_gate": "Complete / Accepted Yellow; preserve SA23 proof and do not reactivate.",
       "risk_class": "unknown",
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Run SA23 through the Ambitions runner."
+      "next_action": "Do not rerun; SA24 is next eligible."
     },
     {
       "id": "SA24",
       "title": "Claim Candidate Extractor",
-      "classification": "executable_later",
-      "status_class": "queued",
+      "classification": "executable_now",
+      "status_class": "executable-now",
       "owner_train": "SA / Source Atlas",
       "source_path": "docs/codex/BATCH_REGISTRY.md",
-      "dependency_gate": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "dependency_gate": "Complete prior batch SA23.",
       "risk_class": "unknown",
       "proof_class": "evidence required when behavior is changed",
       "efc_air_surface_inheritance": "not defined in current mapping",
       "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "next_action": "Run SA24 through the Ambitions runner."
     },
     {
       "id": "SA25",
