@@ -76,8 +76,8 @@ Required proof gates: current local evidence, EFC applicability, no-claim bounda
 | 53 | SA18 | Plain Text Importer | historical_complete_do_not_run | `prompts/batches/SA18.md` | do_not_run_header_only | SA19 |
 | 54 | SA19 | PDF Import Boundary | historical_complete_do_not_run | `prompts/batches/SA19.md` | do_not_run_header_only | SA20 |
 | 55 | SA20 | PDFKit Text Extraction | historical_complete_do_not_run | `prompts/batches/SA20.md` | do_not_run_header_only | SA21 |
-| 56 | SA21 | Vision OCR Fallback | executable_now | `prompts/batches/SA21.md` | create_missing | SA22 |
-| 57 | SA22 | Image / Screenshot Importer | executable_later | `prompts/batches/SA22.md` | create_missing | SA23 |
+| 56 | SA21 | Vision OCR Fallback | historical_complete_do_not_run | `prompts/batches/SA21.md` | do_not_run_header_only | SA22 |
+| 57 | SA22 | Image / Screenshot Importer | executable_now | `prompts/batches/SA22.md` | create_missing | SA23 |
 | 58 | SA23 | Document Type Classifier | executable_later | `prompts/batches/SA23.md` | create_missing | SA24 |
 | 59 | SA24 | Claim Candidate Extractor | executable_later | `prompts/batches/SA24.md` | create_missing | SA25 |
 | 60 | SA25 | Source Review Sheet / Claim Review Drawer | executable_later | `prompts/batches/SA25.md` | create_missing | SA26 |

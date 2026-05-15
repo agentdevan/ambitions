@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "SA21",
-  "next_eligible_title": "Vision OCR Fallback",
+  "next_eligible_batch": "SA22",
+  "next_eligible_title": "Image / Screenshot Importer",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -468,17 +468,17 @@
     {
       "id": "SA21",
       "title": "Vision OCR Fallback",
-      "classification": "executable_now",
-      "reason": "SA20 is complete / green. SA21 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch SA20.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "SA21 Vision OCR Fallback is complete / Green with closeout in docs/audits/sa21-batch-closeout-report.md and local commit b4a536be04d7605678417b85387f1749fcc21e71. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "SA22",
       "title": "Image / Screenshot Importer",
-      "classification": "executable_later",
-      "reason": "Source Atlas implementation/freshness/binder/runtime work is executable later and must precede source-dependent AOS/LDI claims.",
-      "blocking_prerequisites": "Prior SA batch, PK storage/privacy prerequisites where touched, and EFC08 where freshness is claimed.",
+      "classification": "executable_now",
+      "reason": "SA21 is complete / green. SA22 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch SA21.",
       "efc_applicability": "invoked"
     },
     {
