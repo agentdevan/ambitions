@@ -1,6 +1,11 @@
 # Ambitions 3.0 — Privacy Threat Model
 
-Status: Active Ambitions 3.0 privacy/security canon  
+> Historical/supporting note: This file is retained for traceability and may still contain useful privacy/security planning concepts.
+> It is not active product, implementation, release, or Codex process authority.
+> Current authority starts in `docs/truth/README.md`; active privacy, release, and implementation claims must reconcile through `docs/truth/*`, `docs/status/*`, and current source evidence.
+> Use this only after reconciling against `docs/status/old-canon-classification-index.md`.
+
+Status: Supporting historical Ambitions 3.0 privacy/security reference  
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Related docs: [Trust / Privacy / Memory](./TRUST_PRIVACY_MEMORY.md), [Personalization Consent Model](./Ambitions_3_0_Personalization_Consent_Model.md)  
 Last updated: 2026-04-30
