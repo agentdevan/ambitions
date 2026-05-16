@@ -1,7 +1,7 @@
 # Cleanup Decision Register
 
-Status: Green through 2026-05-15 direct GitHub API source-truth repair  
-Date: 2026-05-15
+Status: Yellow through 2026-05-16 Train B physical header quarantine  
+Date: 2026-05-16
 
 ## Authority
 
@@ -10,6 +10,8 @@ Active repo authority starts in `docs/truth/README.md`. Historical cleanup polic
 Phase 11 reconciliation note, 2026-05-10: this register remains supporting cleanup context. For current repo map and stale/archive decisions, inspect `.codex/REPO_INVENTORY.md` and `docs/status/archive-and-stale-material-ledger.md` after `docs/truth/*`.
 
 2026-05-15 direct GitHub API note: `docs/canon/SOURCE_OF_TRUTH_MAP.md` was repaired directly on `main` to route through `docs/truth/*`, restore `Today / Goals / Capture / Time / You`, and demote older Ambitions 2.0 / 3.0 / PXOS / ACUI material to historical or supporting status unless extracted into current truth.
+
+2026-05-16 Train B note: historical/supporting headers were added directly on `main` to selected high-risk Ambitions 2.0, Ambitions 3.0, and PXOS files. Train B is Yellow, not Green, because several full-preservation updates were blocked by the connector safety layer and broad legacy-family coverage remains incomplete. Receipt: `docs/status/train-b-historical-header-quarantine-receipt-2026-05-16.md`.
 
 ## Scope
 
@@ -75,6 +77,7 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 | old release-readiness/App Store/TestFlight/device-proof reports without current proof | Quarantine | Release claims require current evidence. |
 | stale context packs that revive old Plan/Profile/Captures/PXOS/ACUI language | Quarantine until reconciled | Can cause Codex drift. |
 | active-looking docs that still promote `Plan` as a top-level destination | Quarantine until repaired | Current IA is `Today / Goals / Capture / Time / You`. |
+| Train B connector-blocked old canon files | Quarantine until locally patched or archived | Full-preservation header updates were blocked by the connector safety layer; do not truncate these files. |
 
 ## Deletion Candidates — No Deletion Approved Yet
 
@@ -98,6 +101,16 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 | Search surfaced `Native/Ambitions/Features/Plan/*`. | Needs inspection | No source change performed; may be internal compatibility naming or real active drift. |
 | Search surfaced old `Hero Step Panel`, `Start Focus`, and `next best move` references. | Mixed: drift rules, historical prompts, and possible active copy risk | No blanket replacement; active path audit still required. |
 
+## 2026-05-16 Train B Header Quarantine Findings
+
+| Finding | Classification | Direct action taken |
+| --- | --- | --- |
+| Selected Ambitions 2.0 files physically received historical headers. | Partial historical quarantine | Patched `Ambitions_2_0_Codex_Execution_Guide.md`, `Ambitions_2_0_Master_Plan.md`, and `Ambitions_2_0_Product_Architecture.md`. |
+| Selected Ambitions 3.0 files physically received historical/supporting headers and status demotions. | Partial historical quarantine | Patched `Ambitions_3_0_Copy_QA_Protocol.md`, `Ambitions_3_0_Privacy_Threat_Model.md`, and `Ambitions_3_0_Flake_Management_Protocol.md`. |
+| Selected PXOS file physically received supporting historical header and status demotion. | Partial historical quarantine | Patched `PXOS_Empty_Edge_And_Degraded_States.md`. |
+| Several large/blocked files could not be safely replaced through connector. | Connector-blocked quarantine | Do not truncate. Patch locally or via safer edit path. See Train B receipt. |
+| ACUI direct family files were not confirmed. | Not found in direct family scan | Keep ACUI classified as historical/quarantine only if direct files are later found. |
+
 ## Hard Stops
 
 Do not delete or move production Swift, tests, project config, package manifests, scripts, resources, entitlements, privacy manifests, current proof logs, or active truth files as part of docs cleanup.
@@ -106,9 +119,9 @@ Do not delete `.codex` or batch-train material opportunistically. Classify first
 
 ## Next Recommended Direct Cleanup Step
 
-Continue with a focused active-index pass:
+Continue with either:
 
-1. inspect `docs/README.md`, `history/README.md`, `codex-os/README.md`, `backend/README.md`, and `validation/README.md`
-2. repair any front-door link that exposes obsolete canon as active authority
-3. add historical/supporting headers to retained high-risk old canon files only after confirming they remain linked
-4. inspect `Native/Ambitions/Features/Plan/*` for user-visible Plan drift versus internal compatibility naming
+1. a local safer bulk-header pass for the remaining Train B legacy files; or
+2. Train C with Train B YELLOW status accepted.
+
+Train C should focus on active frontend/visual encyclopedia stale-language sweep, generated report classification, Swift visible-copy scan, repo authority/workflow validation scripts, and audit/prompt routing READMEs.
