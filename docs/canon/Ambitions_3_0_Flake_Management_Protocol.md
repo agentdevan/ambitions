@@ -1,6 +1,11 @@
 # Ambitions 3.0 Flake Management Protocol
 
-Status: Active QA governance
+> Historical/supporting note: This file is retained for traceability and may still contain useful QA-governance concepts.
+> It is not active product, implementation, release, or Codex process authority.
+> Current authority starts in `docs/truth/README.md`; active release/proof claims must reconcile through `docs/truth/RELEASE_TRUTH.md`, current validation evidence, and `docs/status/*`.
+> Use this only after reconciling against `docs/status/old-canon-classification-index.md`.
+
+Status: Supporting historical QA governance reference
 
 ## Purpose
 
