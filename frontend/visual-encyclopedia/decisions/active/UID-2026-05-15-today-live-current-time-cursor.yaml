@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "id": "UID-2026-05-15-today-live-current-time-cursor",
+  "status": "active",
+  "decision_type": "reality_meridian_behavior",
+  "decision": "Today separates scheduled step nodes from the live current-time cursor, with the exact current time label aligned to the live cursor.",
+  "reason": "The Reality Meridian must show both scheduled intent and present reality so the user can see what was planned, what is current, and where action should begin.",
+  "replaces": ["merged scheduled/current marker", "approximate now dot without exact time label"],
+  "owner_surface_ids": ["today_root_reality_meridian"],
+  "affected_encyclopedia_files": ["frontend/visual-encyclopedia/README.md", "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md", "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md"],
+  "affected_design_system_primitives": [
+    {"name": "RealityMeridianCurrentTimeCursor", "status": "missing", "expected_home": "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift"},
+    {"name": "RealityMeridianScheduledNode", "status": "missing", "expected_home": "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift"}
+  ],
+  "affected_swift_candidates": ["Sources/Components/TopLevelSurfaceCompositionPrimitives.swift", "Native/Ambitions/Features/Today/*"],
+  "proof_required": ["visual_recipe_updated_or_confirmed", "scheduled_node_and_live_cursor_contract_declared", "exact_time_label_accessibility_contract_declared", "implementation_receipt_after_code_changes_land"],
+  "hard_reds": ["Do not merge scheduled node and live current-time cursor into one ambiguous marker.", "No implementation or release claim from this decision alone."],
+  "rollback_expectations": ["Supersede or remove this decision file.", "Regenerate UI decision matrices and reports."],
+  "implementation_proof_status": "not_proven"
+}
