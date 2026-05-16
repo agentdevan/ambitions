@@ -56,26 +56,26 @@
     {
       "affected_design_system_primitives": [
         {
-          "expected_home": "Sources/Components/ShellChromePrimitives.swift",
+          "expected_home": "Sources/Components/ShellChromeTrustPrimitives.swift",
           "name": "LocalAmbitionsLockup",
-          "status": "missing"
+          "status": "existing"
         },
         {
-          "expected_home": "Sources/Components/ShellChromePrimitives.swift",
+          "expected_home": "Sources/Components/ShellChromeTrustPrimitives.swift",
           "name": "SourceTrustChrome",
-          "status": "missing"
+          "status": "existing"
         }
       ],
       "affected_swift_candidates": [
-        "Sources/Components/ShellChromePrimitives.swift",
-        "Native/Ambitions/Features/Today/*",
-        "Native/Ambitions/App/AppMeridianShell.swift"
+        "Sources/Components/ShellChromeTrustPrimitives.swift",
+        "Native/Ambitions/Features/Today/TodayScreen.swift"
       ],
       "id": "UID-2026-05-15-today-local-ambitions-lockup",
       "proof_required": [
         "visual_recipe_updated_or_confirmed",
         "design_system_primitive_exists_or_gap_recorded",
-        "implementation_receipt_after_code_changes_land"
+        "implementation_receipt_after_code_changes_land",
+        "compile_or_xcode_validation_required_before_green_release_claim"
       ],
       "status": "active"
     }
