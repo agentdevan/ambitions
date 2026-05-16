@@ -1,0 +1,86 @@
+{
+  "decisions": [
+    {
+      "affected_design_system_primitives": [
+        {
+          "expected_home": "Sources/Components/NavigationPrimitives.swift",
+          "name": "RootDestinationIdentity",
+          "status": "missing"
+        },
+        {
+          "expected_home": "Sources/Components/NavigationPrimitives.swift",
+          "name": "BottomNavigationContract",
+          "status": "missing"
+        }
+      ],
+      "affected_swift_candidates": [
+        "Native/Ambitions/App/AppTab.swift",
+        "Native/Ambitions/App/AmbitionsRootView.swift",
+        "Sources/Components/NavigationPrimitives.swift"
+      ],
+      "id": "UID-2026-05-15-bottom-ia-five-tabs",
+      "proof_required": [
+        "frontend_authority_index_confirms_bottom_ia",
+        "app_tab_contract_checked_if_code_changes_land",
+        "visual_recipe_updated_or_confirmed",
+        "implementation_receipt_after_code_changes_land"
+      ],
+      "status": "active"
+    },
+    {
+      "affected_design_system_primitives": [
+        {
+          "expected_home": "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
+          "name": "RealityMeridianCurrentTimeCursor",
+          "status": "missing"
+        },
+        {
+          "expected_home": "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
+          "name": "RealityMeridianScheduledNode",
+          "status": "missing"
+        }
+      ],
+      "affected_swift_candidates": [
+        "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
+        "Native/Ambitions/Features/Today/*"
+      ],
+      "id": "UID-2026-05-15-today-live-current-time-cursor",
+      "proof_required": [
+        "visual_recipe_updated_or_confirmed",
+        "scheduled_node_and_live_cursor_contract_declared",
+        "exact_time_label_accessibility_contract_declared",
+        "implementation_receipt_after_code_changes_land"
+      ],
+      "status": "active"
+    },
+    {
+      "affected_design_system_primitives": [
+        {
+          "expected_home": "Sources/Components/ShellChromePrimitives.swift",
+          "name": "LocalAmbitionsLockup",
+          "status": "missing"
+        },
+        {
+          "expected_home": "Sources/Components/ShellChromePrimitives.swift",
+          "name": "SourceTrustChrome",
+          "status": "missing"
+        }
+      ],
+      "affected_swift_candidates": [
+        "Sources/Components/ShellChromePrimitives.swift",
+        "Native/Ambitions/Features/Today/*",
+        "Native/Ambitions/App/AppMeridianShell.swift"
+      ],
+      "id": "UID-2026-05-15-today-local-ambitions-lockup",
+      "proof_required": [
+        "visual_recipe_updated_or_confirmed",
+        "design_system_primitive_exists_or_gap_recorded",
+        "implementation_receipt_after_code_changes_land"
+      ],
+      "status": "active"
+    }
+  ],
+  "description": "Generated map from active UI decisions to AmbitionsDesignSystem primitive expectations and source candidates.",
+  "schema_version": 1,
+  "status": "generated"
+}
