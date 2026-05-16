@@ -4,6 +4,7 @@
     "decision_count": 3,
     "design_system_matrix_exists": true,
     "ledger_exists": true,
+    "source_installed_decision_count": 3,
     "surface_matrix_exists": true
   },
   "errors": [],
