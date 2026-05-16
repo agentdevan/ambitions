@@ -1,6 +1,102 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
+public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiable, Sendable {
+    case today
+    case goals
+    case capture
+    case time
+    case you
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .today: "Today"
+        case .goals: "Goals"
+        case .capture: "Capture"
+        case .time: "Time"
+        case .you: "You"
+        }
+    }
+
+    public var primaryObject: String {
+        switch self {
+        case .today: "Reality Meridian"
+        case .goals: "Constellation Atlas"
+        case .capture: "Atmosphere Composer"
+        case .time: "LifeShape Field"
+        case .you: "User System Profile"
+        }
+    }
+
+    public var systemImage: String {
+        switch self {
+        case .today: "sun.max"
+        case .goals: "target"
+        case .capture: "tray.full"
+        case .time: "clock.badge"
+        case .you: "person.crop.circle"
+        }
+    }
+
+    public var accessibilitySummary: String {
+        "\(title). \(primaryObject)."
+    }
+}
+
+public enum BottomNavigationContract {
+    public static let requiredDestinations: [RootDestinationIdentity] = [.today, .goals, .capture, .time, .you]
+    public static let requiredTitles: [String] = requiredDestinations.map(\.title)
+    public static let requiredTitleSequence = "Today / Goals / Capture / Time / You"
+
+    public static func isValidTitleSequence(_ titles: [String]) -> Bool {
+        titles == requiredTitles
+    }
+
+    public static func isValidDestinationSequence(_ destinations: [RootDestinationIdentity]) -> Bool {
+        destinations == requiredDestinations
+    }
+}
+
+public struct RootDestinationIdentityRail: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    private let selected: RootDestinationIdentity
+
+    public init(selected: RootDestinationIdentity = .today) {
+        self.selected = selected
+    }
+
+    public var body: some View {
+        HStack(spacing: theme.spacing.xs) {
+            ForEach(BottomNavigationContract.requiredDestinations) { destination in
+                VStack(spacing: theme.spacing.xxxs) {
+                    Image(systemName: destination.systemImage)
+                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                        .accessibilityHidden(true)
+                    Text(destination.title)
+                        .font(theme.typography.micro)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.82)
+                }
+                .foregroundStyle(destination == selected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground)
+                .frame(maxWidth: .infinity, minHeight: theme.panel.minimumTapTarget)
+                .background(Capsule().fill(destination == selected ? theme.shell.activeTabBackground : .clear))
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(destination.accessibilitySummary)
+                .accessibilityValue(destination == selected ? "Selected" : "Not selected")
+            }
+        }
+        .padding(theme.spacing.xxs)
+        .background(Capsule(style: .continuous).fill(theme.shell.bottomBarMaterial))
+        .overlay(Capsule(style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Bottom navigation")
+        .accessibilityValue(BottomNavigationContract.requiredTitleSequence)
+    }
+}
+
 /// Compact segmented selection bar for switching timeframes or modes.
 public struct SegmentedFilterBar<Item: Hashable>: View {
     @Environment(\.ambitionTheme) private var theme
