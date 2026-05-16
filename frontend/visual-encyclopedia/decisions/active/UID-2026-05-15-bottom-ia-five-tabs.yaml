@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "id": "UID-2026-05-15-bottom-ia-five-tabs",
+  "status": "active",
+  "decision_type": "top_level_ia",
+  "decision": "Bottom navigation remains exactly `Today / Goals / Capture / Time / You`.",
+  "reason": "The product needs a narrow native root IA that maps one dominant object to each destination and prevents frontend drift into extra destinations.",
+  "replaces": ["sixth top-level destination", "generic calendar tab", "generic profile tab", "inbox tab"],
+  "owner_surface_ids": ["today_root_reality_meridian", "goals_root_constellation_atlas", "capture_root_atmosphere_composer", "time_root_lifeshape_field", "you_root_user_system_profile"],
+  "affected_encyclopedia_files": ["frontend/visual-encyclopedia/README.md", "frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md", "frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md"],
+  "affected_design_system_primitives": [
+    {"name": "RootDestinationIdentity", "status": "missing", "expected_home": "Sources/Components/NavigationPrimitives.swift"},
+    {"name": "BottomNavigationContract", "status": "missing", "expected_home": "Sources/Components/NavigationPrimitives.swift"}
+  ],
+  "affected_swift_candidates": ["Native/Ambitions/App/AppTab.swift", "Native/Ambitions/App/AmbitionsRootView.swift", "Sources/Components/NavigationPrimitives.swift"],
+  "proof_required": ["frontend_authority_index_confirms_bottom_ia", "app_tab_contract_checked_if_code_changes_land", "visual_recipe_updated_or_confirmed", "implementation_receipt_after_code_changes_land"],
+  "hard_reds": ["Do not add Assistant, Dashboard, Inbox, Calendar, History, Rituals, or Profile as active bottom navigation destinations.", "Do not reintroduce Plan as an active top-level destination.", "No implementation or release claim from this decision alone."],
+  "rollback_expectations": ["Supersede or remove this decision file.", "Regenerate UI decision matrices and reports."],
+  "implementation_proof_status": "not_proven"
+}
