@@ -1,5 +1,12 @@
 # Ambitions 2.0 Product Architecture
 
+> Historical note: This file is retained for traceability only.
+> It is not active product, implementation, release, or Codex process authority.
+> Current authority starts in `docs/truth/README.md`.
+> Use this only after reconciling against `docs/truth/*`, `docs/status/*`, and `docs/status/old-canon-classification-index.md`.
+
+---
+
 ## Purpose
 
 This document defines the product architecture for Ambitions 2.0. It governs surface responsibilities, drill-down rules, flow ownership, Insights demotion, Habits absorption, Life Areas / North Stars, One-Step Goals, Smart Attachment, calendar permission behavior, and local-first calendar insight policy.
