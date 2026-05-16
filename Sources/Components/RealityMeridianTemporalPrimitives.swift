@@ -33,6 +33,46 @@ public struct RealityMeridianTemporalWindow: Equatable, Sendable {
     }
 }
 
+public enum RealityMeridianCurrentTimeCursorPresentation: String, Sendable {
+    case standalone
+    case railOverlay
+
+    var minimumHeight: CGFloat {
+        switch self {
+        case .standalone: 168
+        case .railOverlay: 128
+        }
+    }
+
+    var horizontalPadding: CGFloat {
+        switch self {
+        case .standalone: 0
+        case .railOverlay: 0
+        }
+    }
+
+    var surfaceOpacity: Double {
+        switch self {
+        case .standalone: 1.0
+        case .railOverlay: 0.18
+        }
+    }
+
+    var strokeOpacity: Double {
+        switch self {
+        case .standalone: 1.0
+        case .railOverlay: 0.32
+        }
+    }
+
+    var spineOpacity: Double {
+        switch self {
+        case .standalone: 0.74
+        case .railOverlay: 0.42
+        }
+    }
+}
+
 public struct RealityMeridianCurrentTimeCursor: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -41,18 +81,21 @@ public struct RealityMeridianCurrentTimeCursor: View {
     private let date: Date?
     private let showsPulse: Bool
     private let temporalWindow: RealityMeridianTemporalWindow
+    private let presentation: RealityMeridianCurrentTimeCursorPresentation
 
     public init(
         title: String = "Current time",
         date: Date? = nil,
         showsPulse: Bool = true,
         dayStartHour: Int = 6,
-        dayEndHour: Int = 22
+        dayEndHour: Int = 22,
+        presentation: RealityMeridianCurrentTimeCursorPresentation = .standalone
     ) {
         self.title = title
         self.date = date
         self.showsPulse = showsPulse
         self.temporalWindow = RealityMeridianTemporalWindow(dayStartHour: dayStartHour, dayEndHour: dayEndHour)
+        self.presentation = presentation
     }
 
     public var body: some View {
@@ -67,7 +110,7 @@ public struct RealityMeridianCurrentTimeCursor: View {
 
     private func proportionalSpine(for date: Date) -> some View {
         GeometryReader { proxy in
-            let availableHeight = max(proxy.size.height, CGFloat(168))
+            let availableHeight = max(proxy.size.height, presentation.minimumHeight)
             let cursorY = cursorOffset(for: date, height: availableHeight)
 
             ZStack(alignment: .topLeading) {
@@ -83,7 +126,7 @@ public struct RealityMeridianCurrentTimeCursor: View {
                 .frame(width: 54, height: availableHeight, alignment: .leading)
 
                 Rectangle()
-                    .fill(theme.colors.strokeSubtle.opacity(0.74))
+                    .fill(theme.colors.strokeSubtle.opacity(presentation.spineOpacity))
                     .frame(width: 1, height: availableHeight)
                     .padding(.leading, 70)
                     .accessibilityHidden(true)
@@ -124,11 +167,11 @@ public struct RealityMeridianCurrentTimeCursor: View {
             }
             .frame(width: proxy.size.width, height: availableHeight, alignment: .topLeading)
         }
-        .frame(minHeight: 168)
-        .padding(.horizontal, theme.spacing.sm)
+        .frame(minHeight: presentation.minimumHeight)
+        .padding(.horizontal, theme.spacing.sm + presentation.horizontalPadding)
         .padding(.vertical, theme.spacing.xs)
-        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.shell.controlBackground))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.shell.controlBackground.opacity(presentation.surfaceOpacity)))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider.opacity(presentation.strokeOpacity), lineWidth: 1))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Current time on Reality Meridian")
         .accessibilityValue("\(timeLabel(for: date)). Window \(hourLabel(temporalWindow.dayStartHour)) to \(hourLabel(temporalWindow.dayEndHour)).")
