@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "id": "UID-2026-05-15-today-local-ambitions-lockup",
+  "status": "active",
+  "decision_type": "surface_chrome",
+  "decision": "Today uses a compact top-right `Local · Ambitions` lockup as branded local-first trust chrome.",
+  "reason": "The flagship Today viewport needs visible Ambitions identity and local-first trust without adding a standalone badge or heavy header.",
+  "replaces": ["standalone On-device badge", "unbranded local-only chrome"],
+  "owner_surface_ids": ["today_root_reality_meridian"],
+  "affected_encyclopedia_files": ["frontend/visual-encyclopedia/README.md", "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md"],
+  "affected_design_system_primitives": [
+    {"name": "LocalAmbitionsLockup", "status": "missing", "expected_home": "Sources/Components/ShellChromePrimitives.swift"},
+    {"name": "SourceTrustChrome", "status": "missing", "expected_home": "Sources/Components/ShellChromePrimitives.swift"}
+  ],
+  "affected_swift_candidates": ["Sources/Components/ShellChromePrimitives.swift", "Native/Ambitions/Features/Today/*", "Native/Ambitions/App/AppMeridianShell.swift"],
+  "proof_required": ["visual_recipe_updated_or_confirmed", "design_system_primitive_exists_or_gap_recorded", "implementation_receipt_after_code_changes_land"],
+  "hard_reds": ["No implementation or release claim from this decision alone.", "Do not reintroduce Plan as an active top-level destination."],
+  "rollback_expectations": ["Supersede or remove this decision file.", "Regenerate UI decision matrices and reports."],
+  "implementation_proof_status": "not_proven"
+}
