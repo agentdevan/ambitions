@@ -8,13 +8,15 @@ Source-installed:
 
 - `Sources/Components/RealityMeridianTemporalPrimitives.swift`
 - `Sources/Previews/RealityMeridianTemporalPreviews.swift`
+- `Native/Ambitions/Features/Today/TodayRealityMeridianFusedRail.swift`
 - `Native/Ambitions/Features/Today/TodayScreen.swift`
 
 ## Proof Added
 
 - `RealityMeridianCurrentTimeCursor` now renders a proportional 6 AM to 10 PM mini-spine with exact current-time label and minute-level refresh.
 - `RealityMeridianScheduledNode` exists as the paired scheduled-node primitive.
-- `TodayScreen` fuses the current-time cursor onto the `DayTimelineRail` composition using a top-leading overlay.
+- `TodayRealityMeridianFusedRail` owns the rail/cursor fusion by wrapping `DayTimelineRail` and overlaying `RealityMeridianCurrentTimeCursor()` at the rail layer.
+- `TodayScreen` delegates to `TodayRealityMeridianFusedRail` instead of owning the cursor overlay inline.
 - The fused composition exposes `TodayRealityMeridianFusedRail` and `TodayRealityMeridianCurrentTimeCursor` identifiers.
 
 ## Required Remaining Evidence
