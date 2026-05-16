@@ -1,7 +1,12 @@
 # Empty Edge And Degraded States
 <!-- markdownlint-disable MD013 -->
 
-Status: PXOS future canon; PX13 complete; not current app implementation truth
+> Historical/supporting note: This PXOS file is retained for traceability and may still contain compatible degraded-state concepts.
+> It is not active product, implementation, release, or Codex process authority.
+> Current authority starts in `docs/truth/README.md`; active frontend/product authority must reconcile through `docs/truth/*`, `frontend/README.md`, and `docs/status/*`.
+> Use this only after reconciling against `docs/status/old-canon-classification-index.md`.
+
+Status: Supporting historical PXOS degraded-state reference; not current app implementation truth
 Date: 2026-05-02
 
 ## Purpose
