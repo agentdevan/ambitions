@@ -4,12 +4,13 @@ Decision ID: `UID-2026-05-15-today-live-current-time-cursor`
 
 ## Primitive Status
 
-- `RealityMeridianCurrentTimeCursor` in `Sources/Components/RealityMeridianTemporalPrimitives.swift` — source-installed
+- `RealityMeridianCurrentTimeCursor` in `Sources/Components/RealityMeridianTemporalPrimitives.swift` — source-installed as a proportional mini-spine cursor
 - `RealityMeridianScheduledNode` in `Sources/Components/RealityMeridianTemporalPrimitives.swift` — source-installed
 
 ## App Usage
 
-- `Native/Ambitions/Features/Today/TodayScreen.swift` now places `RealityMeridianCurrentTimeCursor()` above the existing Today Reality Meridian rail as a safe first-pass current-time object.
+- `Native/Ambitions/Features/Today/TodayScreen.swift` places `RealityMeridianCurrentTimeCursor()` above the existing Today Reality Meridian rail.
+- The cursor primitive now renders a proportional 6 AM to 10 PM vertical mini-spine with an exact current-time label and minute-level TimelineView refresh.
 
 ## Preview Fixture
 
@@ -19,8 +20,8 @@ Decision ID: `UID-2026-05-15-today-live-current-time-cursor`
 
 - local Swift/Xcode compile proof
 - rendered preview or simulator screenshot proof
-- accessibility review for exact-time label, Dynamic Type, and VoiceOver order
-- future rail-spine integration if the cursor needs to align to a proportional vertical day spine instead of the current safe first-pass placement
+- accessibility review for exact-time label, Dynamic Type, contrast, and VoiceOver order
+- optional future full in-rail fusion if the current-time cursor should be embedded into the existing rail spine beside scheduled nodes rather than rendered as the mini-spine above it
 
 ## Boundary
 
