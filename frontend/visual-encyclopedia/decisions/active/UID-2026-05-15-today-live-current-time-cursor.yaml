@@ -12,9 +12,9 @@
     {"name": "RealityMeridianCurrentTimeCursor", "status": "existing", "expected_home": "Sources/Components/RealityMeridianTemporalPrimitives.swift"},
     {"name": "RealityMeridianScheduledNode", "status": "existing", "expected_home": "Sources/Components/RealityMeridianTemporalPrimitives.swift"}
   ],
-  "affected_swift_candidates": ["Sources/Components/RealityMeridianTemporalPrimitives.swift", "Sources/Previews/RealityMeridianTemporalPreviews.swift", "Native/Ambitions/Features/Today/*"],
+  "affected_swift_candidates": ["Sources/Components/RealityMeridianTemporalPrimitives.swift", "Sources/Previews/RealityMeridianTemporalPreviews.swift", "Native/Ambitions/Features/Today/TodayRealityMeridianFusedRail.swift", "Native/Ambitions/Features/Today/TodayScreen.swift"],
   "proof_required": ["visual_recipe_updated_or_confirmed", "scheduled_node_and_live_cursor_contract_declared", "exact_time_label_accessibility_contract_declared", "implementation_receipt_after_code_changes_land", "compile_or_xcode_validation_required_before_green_release_claim"],
   "hard_reds": ["Do not merge scheduled node and live current-time cursor into one ambiguous marker.", "No release claim from this decision alone."],
-  "rollback_expectations": ["Supersede or remove this decision file.", "Regenerate UI decision matrices and reports.", "Revert Sources/Components/RealityMeridianTemporalPrimitives.swift and its preview if implementation is rolled back."],
+  "rollback_expectations": ["Supersede or remove this decision file.", "Regenerate UI decision matrices and reports.", "Revert Sources/Components/RealityMeridianTemporalPrimitives.swift, Sources/Previews/RealityMeridianTemporalPreviews.swift, Native/Ambitions/Features/Today/TodayRealityMeridianFusedRail.swift, and TodayScreen usage if implementation is rolled back."],
   "implementation_proof_status": "proof_required_after_implementation"
 }
