@@ -14,9 +14,9 @@ final class AppContainer {
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
     let habitsService: any HabitsServicing
-    let planService: any PlanServicing
+    let timeService: any PlanServicing
     let insightsService: any InsightsServicing
-    let profileService: any ProfileServicing
+    let youService: any ProfileServicing
     let notificationService: any NotificationServicing
     let calendarRemindersService: any CalendarRemindersServicing
     let actionRouter: any AppActionRouting
@@ -37,9 +37,9 @@ final class AppContainer {
         captureService: any CaptureServicing,
         goalsService: any GoalsServicing,
         habitsService: any HabitsServicing,
-        planService: any PlanServicing,
+        timeService: any PlanServicing,
         insightsService: any InsightsServicing,
-        profileService: any ProfileServicing,
+        youService: any ProfileServicing,
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
         actionRouter: any AppActionRouting,
@@ -59,9 +59,9 @@ final class AppContainer {
         self.captureService = captureService
         self.goalsService = goalsService
         self.habitsService = habitsService
-        self.planService = planService
+        self.timeService = timeService
         self.insightsService = insightsService
-        self.profileService = profileService
+        self.youService = youService
         self.notificationService = notificationService
         self.calendarRemindersService = calendarRemindersService
         self.actionRouter = actionRouter

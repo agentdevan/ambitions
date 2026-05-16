@@ -1,27 +1,27 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-enum CapturesScreenShellMode: Equatable {
+enum CaptureScreenShellMode: Equatable {
     case planSupport
     case topLevelCapture
 }
 
-struct CapturesScreen: View {
+struct CaptureScreen: View {
     @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var viewModel: CapturesViewModel
-    private let shellMode: CapturesScreenShellMode
+    @State private var viewModel: CaptureViewModel
+    private let shellMode: CaptureScreenShellMode
 
     @MainActor
-    init(shellMode: CapturesScreenShellMode = .planSupport) {
+    init(shellMode: CaptureScreenShellMode = .planSupport) {
         self.shellMode = shellMode
-        _viewModel = State(initialValue: CapturesViewModel())
+        _viewModel = State(initialValue: CaptureViewModel())
     }
 
     init(
-        shellMode: CapturesScreenShellMode,
-        viewModel: CapturesViewModel
+        shellMode: CaptureScreenShellMode,
+        viewModel: CaptureViewModel
     ) {
         self.shellMode = shellMode
         _viewModel = State(initialValue: viewModel)
@@ -43,7 +43,7 @@ struct CapturesScreen: View {
                     case .failed:
                         DegradedStateCard(
                             state: DegradedStateOrchestrator.objectUnavailable(.capturePlacementShelf),
-                            primaryAccessibilityIdentifier: "captures.retry-button",
+                            primaryAccessibilityIdentifier: "capture.retry-button",
                             onPrimaryAction: {
                                 Task { await load() }
                             }
@@ -89,7 +89,7 @@ struct CapturesScreen: View {
         .refreshable {
             await load()
         }
-        .accessibilityIdentifier("captures.screen")
+        .accessibilityIdentifier("capture.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
             guard case .loading = viewModel.state else { return }
@@ -155,11 +155,11 @@ struct CapturesScreen: View {
                     Label("Time", systemImage: "calendar")
                 }
                 .buttonStyle(.bordered)
-                .accessibilityIdentifier("captures.return-to-plan")
+                .accessibilityIdentifier("capture.return-to-plan")
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityIdentifier("captures.prompt")
+        .accessibilityIdentifier("capture.prompt")
     }
 
     private var promptSubtitle: String {
@@ -171,7 +171,7 @@ struct CapturesScreen: View {
     }
 
     @ViewBuilder
-    private func loadedContent(_ viewState: CapturesViewState) -> some View {
+    private func loadedContent(_ viewState: CaptureViewState) -> some View {
         if let routePreview = viewModel.draftRoutePreview {
             draftRoutePreviewCard(routePreview)
         }
@@ -206,7 +206,7 @@ struct CapturesScreen: View {
                 .foregroundStyle(theme.colors.textSecondary)
         }
         .padding(.vertical, theme.spacing.sm)
-        .accessibilityIdentifier("captures.empty")
+        .accessibilityIdentifier("capture.empty")
     }
 
     private func captureReceiptPreview(_ message: CaptureActionMessage) -> some View {
@@ -233,7 +233,7 @@ struct CapturesScreen: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .accessibilityIdentifier("captures.receipt-preview")
+        .accessibilityIdentifier("capture.receipt-preview")
     }
 
     private func draftRoutePreviewCard(_ preview: CaptureDraftRoutePreview) -> some View {
@@ -283,7 +283,7 @@ struct CapturesScreen: View {
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .accessibilityIdentifier("captures.metadata.\(capture.id)")
+                    .accessibilityIdentifier("capture.metadata.\(capture.id)")
 
                 if let assumption = capture.assumptionSummary {
                     Text(assumption)
@@ -337,7 +337,7 @@ struct CapturesScreen: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(review.title)
         .accessibilityValue([review.accessibilityValue, correction.accessibilityValue].joined(separator: ". "))
-        .accessibilityIdentifier("captures.placement-review.\(review.id)")
+        .accessibilityIdentifier("capture.placement-review.\(review.id)")
     }
 
     private func goalSeedIncubator(_ state: CaptureGoalSeedIncubatorState) -> some View {
@@ -364,7 +364,7 @@ struct CapturesScreen: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(state.title)
         .accessibilityValue(state.accessibilityValue)
-        .accessibilityIdentifier("captures.goal-seed-incubator.\(state.id)")
+        .accessibilityIdentifier("capture.goal-seed-incubator.\(state.id)")
     }
 
     private func state(for capture: Capture) -> AmbitionVisualState {
@@ -402,7 +402,7 @@ struct CapturesScreen: View {
 
                 Button {
                     container.commandRouter.presentCreateGoal(
-                        source: .capturesScreen,
+                        source: .captureScreen,
                         seedText: capture.rawText,
                         captureID: capture.id
                     )
@@ -411,7 +411,7 @@ struct CapturesScreen: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(canPromoteCaptureToGoal(capture) == false)
-                .accessibilityIdentifier("captures.new-goal.\(capture.id)")
+                .accessibilityIdentifier("capture.new-goal.\(capture.id)")
             }
 
             HStack(spacing: theme.spacing.sm) {
@@ -562,7 +562,7 @@ private extension NowContextLens {
     }
 }
 
-private extension CapturesScreenShellMode {
+private extension CaptureScreenShellMode {
     var eyebrow: String {
         switch self {
         case .planSupport: "Plan support"
@@ -590,7 +590,7 @@ private extension CapturesScreenShellMode {
 #if DEBUG
 #Preview("Capture Empty") {
     NavigationStack {
-        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.empty())
+        CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.empty())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -599,7 +599,7 @@ private extension CapturesScreenShellMode {
 
 #Preview("Capture Route Suggestions") {
     NavigationStack {
-        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
+        CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -608,7 +608,7 @@ private extension CapturesScreenShellMode {
 
 #Preview("Capture Needs a Place") {
     NavigationStack {
-        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.needsPlace())
+        CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.needsPlace())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -617,7 +617,7 @@ private extension CapturesScreenShellMode {
 
 #Preview("Capture Manual Route") {
     NavigationStack {
-        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.manualRoute())
+        CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.manualRoute())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -626,7 +626,7 @@ private extension CapturesScreenShellMode {
 
 #Preview("Capture Dynamic Type") {
     NavigationStack {
-        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
+        CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -636,7 +636,7 @@ private extension CapturesScreenShellMode {
 
 #Preview("Capture Reduce Motion") {
     NavigationStack {
-        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
+        CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -645,7 +645,7 @@ private extension CapturesScreenShellMode {
 
 #Preview("Capture Receipt") {
     NavigationStack {
-        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.receipt())
+        CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.receipt())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -654,7 +654,7 @@ private extension CapturesScreenShellMode {
 
 #Preview("Capture Light") {
     NavigationStack {
-        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
+        CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.light)
@@ -663,33 +663,33 @@ private extension CapturesScreenShellMode {
 
 @MainActor
 private enum CapturePreviewFactory {
-    static func empty() -> CapturesViewModel {
-        CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [])))
+    static func empty() -> CaptureViewModel {
+        CaptureViewModel(state: .loaded(CaptureViewState(captures: [], activeGoalOptions: [])))
     }
 
-    static func routeSuggestions() -> CapturesViewModel {
-        let viewModel = CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [
+    static func routeSuggestions() -> CaptureViewModel {
+        let viewModel = CaptureViewModel(state: .loaded(CaptureViewState(captures: [], activeGoalOptions: [
             CaptureGoalOption(id: "goal-music", title: "Music Goal", subtitle: "Creative")
         ])))
         viewModel.updateDraftText("Finish lyrics before rehearsal")
         return viewModel
     }
 
-    static func needsPlace() -> CapturesViewModel {
-        let viewModel = CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [])))
+    static func needsPlace() -> CaptureViewModel {
+        let viewModel = CaptureViewModel(state: .loaded(CaptureViewState(captures: [], activeGoalOptions: [])))
         viewModel.updateDraftText("NASA")
         return viewModel
     }
 
-    static func manualRoute() -> CapturesViewModel {
-        let viewModel = CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [])))
+    static func manualRoute() -> CaptureViewModel {
+        let viewModel = CaptureViewModel(state: .loaded(CaptureViewState(captures: [], activeGoalOptions: [])))
         viewModel.updateDraftText("NASA")
         viewModel.selectDraftRoute(.task)
         return viewModel
     }
 
-    static func receipt() -> CapturesViewModel {
-        let viewModel = CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [])))
+    static func receipt() -> CaptureViewModel {
+        let viewModel = CaptureViewModel(state: .loaded(CaptureViewState(captures: [], activeGoalOptions: [])))
         viewModel.actionMessage = CaptureActionMessage(
             title: "Saved as Task · Today",
             body: "This can become plan work later; no calendar event was created."

@@ -247,24 +247,24 @@ struct AppExternalRouteTranslator {
             case .captureInbox:
                 return ExternalSurfaceActionPayload.routePayload(
                     surface: .captureInbox,
-                    tab: AppTab.captures.rawValue
+                    tab: AppTab.capture.rawValue
                 )
             case .habits:
                 return [
                     ExternalSurfaceActionPayload.Key.surface: ExternalSurfacePayloadSurface.tab.rawValue,
-                    ExternalSurfaceActionPayload.Key.tab: AppTab.plan.rawValue,
+                    ExternalSurfaceActionPayload.Key.tab: AppTab.time.rawValue,
                     "subroute": target.rawValue
                 ]
             case .weeklyReview:
                 return [
                     ExternalSurfaceActionPayload.Key.surface: "weekly-review",
-                    ExternalSurfaceActionPayload.Key.tab: AppTab.plan.rawValue
+                    ExternalSurfaceActionPayload.Key.tab: AppTab.time.rawValue
                 ]
             }
         case let .openInsightsRoute(target):
             return [
                 ExternalSurfaceActionPayload.Key.surface: target.rawValue,
-                ExternalSurfaceActionPayload.Key.tab: AppTab.profile.rawValue
+                ExternalSurfaceActionPayload.Key.tab: AppTab.you.rawValue
             ]
         case let .presentOverlay(route):
             var values: [String: String] = [
@@ -319,7 +319,7 @@ struct AppExternalRouteTranslator {
                 return ExternalSurfaceActionPayload.commandPayload(
                     action: actionName,
                     surface: .captureInbox,
-                    tab: AppTab.captures.rawValue
+                    tab: AppTab.capture.rawValue
                 )
             case .habits:
                 var values = routePayload(for: route)

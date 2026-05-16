@@ -1,6 +1,7 @@
 import json
 import subprocess
 import tempfile
+import sys
 from pathlib import Path
 import unittest
 
@@ -36,7 +37,7 @@ class TestPackDiff(unittest.TestCase):
             new_path.write_text(json.dumps(new_pack))
             
             script = Path(__file__).parent.parent / "ambitions-pack-diff.py"
-            result = subprocess.run([str(script), str(old_path), str(new_path)], capture_output=True, text=True, check=True)
+            result = subprocess.run([sys.executable, str(script), str(old_path), str(new_path)], capture_output=True, text=True, check=True)
             
             output = json.loads(result.stdout)
             

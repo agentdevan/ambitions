@@ -3,7 +3,7 @@ import Observation
 
 @MainActor
 @Observable
-final class PlanViewModel {
+final class TimeViewModel {
     var state: AsyncViewState<PlanDashboard>
 
     private var hasLoaded = false

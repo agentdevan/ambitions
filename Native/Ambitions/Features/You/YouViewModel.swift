@@ -4,7 +4,7 @@ import Observation
 
 @MainActor
 @Observable
-final class ProfileViewModel {
+final class YouViewModel {
     var state: AsyncViewState<ProfileDashboard>
     var preferredTab: AppTab
     var appearancePreference: AppAppearancePreference

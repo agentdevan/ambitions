@@ -4,17 +4,17 @@ import SwiftUI
 import UIKit
 #endif
 
-struct ProfileScreen: View {
+struct YouScreen: View {
     @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var viewModel: ProfileViewModel
+    @State private var viewModel: YouViewModel
     @State private var activeDetail: ProfileRootDetail?
     private let showsNavigationChrome: Bool
 
     @MainActor
-    init(viewModel: ProfileViewModel? = nil, showsNavigationChrome: Bool = true) {
-        _viewModel = State(initialValue: viewModel ?? ProfileViewModel())
+    init(viewModel: YouViewModel? = nil, showsNavigationChrome: Bool = true) {
+        _viewModel = State(initialValue: viewModel ?? YouViewModel())
         self.showsNavigationChrome = showsNavigationChrome
     }
 
@@ -28,7 +28,7 @@ struct ProfileScreen: View {
                 case let .failed(message):
                     DegradedStateCard(
                         state: DegradedStateOrchestrator.objectUnavailable(.personalSystemCenter),
-                        primaryAccessibilityIdentifier: "profile.retry-button",
+                        primaryAccessibilityIdentifier: "you.retry-button",
                         onPrimaryAction: {
                             _ = message
                             Task { await refresh() }
@@ -54,7 +54,7 @@ struct ProfileScreen: View {
         .refreshable {
             await refresh()
         }
-        .accessibilityIdentifier("profile.screen")
+        .accessibilityIdentifier("you.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .sheet(item: $activeDetail) { detail in
             ProfileRootDetailSheet(
@@ -75,19 +75,19 @@ struct ProfileScreen: View {
             .presentationDragIndicator(.visible)
         }
         .task {
-            await viewModel.load(using: container.profileService)
+            await viewModel.load(using: container.youService)
             syncAppearanceFromLoadedDashboard()
         }
     }
 
     private func refresh() async {
-        await viewModel.refresh(using: container.profileService)
+        await viewModel.refresh(using: container.youService)
         syncAppearanceFromLoadedDashboard()
     }
 
     private func savePreferences() {
         Task {
-            await viewModel.save(using: container.profileService)
+            await viewModel.save(using: container.youService)
             syncAppearanceFromLoadedDashboard()
         }
     }
@@ -184,7 +184,7 @@ private struct ProfileRootDetailSheet: View {
                 preferredTab: $preferredTab,
                 reviewCadenceDays: $reviewCadenceDays
             )
-            ProfileSectionCard(eyebrow: "About you", section: dashboard.accountSection, accessibilityIdentifier: "profile.account-card")
+            ProfileSectionCard(eyebrow: "About you", section: dashboard.accountSection, accessibilityIdentifier: "you.account-card")
         case .personalization:
             ProfileConstitutionCard(constitution: dashboard.constitution)
         case .appearance:
@@ -217,7 +217,7 @@ private struct ProfileRootDetailSheet: View {
                     items: dashboard.receiptAudit.items,
                     footer: dashboard.receiptAudit.footer
                 ),
-                accessibilityIdentifier: "profile.receipts-card"
+                accessibilityIdentifier: "you.receipts-card"
             )
         case .corrections:
             ProfileSectionCard(
@@ -228,7 +228,7 @@ private struct ProfileRootDetailSheet: View {
                     items: dashboard.assumptionCorrections.items,
                     footer: dashboard.assumptionCorrections.footer
                 ),
-                accessibilityIdentifier: "profile.corrections-card"
+                accessibilityIdentifier: "you.corrections-card"
             )
         case .reviews:
             ProfileReviewsCard(reviews: dashboard.reviews)
@@ -243,26 +243,26 @@ private struct ProfileRootDetailSheet: View {
                     },
                     footer: "Proof remains reviewable before it is reused."
                 ),
-                accessibilityIdentifier: "profile.proof-card"
+                accessibilityIdentifier: "you.proof-card"
             )
         case .archive:
-            ProfileSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "profile.archive-card")
+            ProfileSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "you.archive-card")
         case .scheduleAvailability:
             ProfileAvailabilityCenterCard(center: dashboard.availabilityCenter)
             if let section = dashboard.planningDefaultsCenter.section(id: "schedule-availability") {
-                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.schedule-availability-card")
+                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.schedule-availability-card")
             }
         case .planBehavior:
             if let section = dashboard.planningDefaultsCenter.section(id: "planning-defaults") {
-                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.plan-behavior-card")
+                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.plan-behavior-card")
             }
         case .automationTrust:
             if let section = dashboard.planningDefaultsCenter.section(id: "automation-trust") {
-                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.automation-trust-card")
+                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.automation-trust-card")
             }
         case .vacationAwayTime:
             if let section = dashboard.planningDefaultsCenter.section(id: "vacation-away-time") {
-                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.vacation-away-card")
+                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.vacation-away-card")
             }
         case .durations:
             ProfileSectionCard(
@@ -275,21 +275,21 @@ private struct ProfileRootDetailSheet: View {
                     },
                     footer: "Examples: 30 min planned, Suggested: 15-20 min, Usually 10-30 min, Duration not set."
                 ),
-                accessibilityIdentifier: "profile.durations-card"
+                accessibilityIdentifier: "you.durations-card"
             )
         case .notifications:
             if let notificationPermissionState {
                 DegradedStateCard(
                     state: notificationPermissionState,
-                    primaryAccessibilityIdentifier: "profile.notification-permission.primary",
-                    secondaryAccessibilityIdentifier: "profile.notification-permission.secondary",
+                    primaryAccessibilityIdentifier: "you.notification-permission.primary",
+                    secondaryAccessibilityIdentifier: "you.notification-permission.secondary",
                     onPrimaryAction: onEnableNotifications,
                     onSecondaryAction: onOpenSystemSettings
                 )
             }
-            ProfileSectionCard(eyebrow: "Notifications", section: dashboard.integrationsSection, accessibilityIdentifier: "profile.notifications-card")
+            ProfileSectionCard(eyebrow: "Notifications", section: dashboard.integrationsSection, accessibilityIdentifier: "you.notifications-card")
         case .integrations, .widgets, .exportImport:
-            ProfileSectionCard(eyebrow: "System configuration", section: dashboard.integrationsSection, accessibilityIdentifier: "profile.integrations-card")
+            ProfileSectionCard(eyebrow: "System configuration", section: dashboard.integrationsSection, accessibilityIdentifier: "you.integrations-card")
         case .accessibility:
             ProfileSectionCard(
                 eyebrow: "Accessibility",
@@ -299,12 +299,12 @@ private struct ProfileRootDetailSheet: View {
                     items: dashboard.trustCenter.items.filter { $0.title.localizedCaseInsensitiveContains("Accessibility") },
                     footer: "This is an internal evidence status, not a public accessibility claim."
                 ),
-                accessibilityIdentifier: "profile.accessibility-card"
+                accessibilityIdentifier: "you.accessibility-card"
             )
         case .support:
-            ProfileSectionCard(eyebrow: "Help", section: dashboard.accountSection, accessibilityIdentifier: "profile.support-card")
+            ProfileSectionCard(eyebrow: "Help", section: dashboard.accountSection, accessibilityIdentifier: "you.support-card")
         case .about:
-            ProfileSectionCard(eyebrow: "About", section: dashboard.accountSection, accessibilityIdentifier: "profile.about-card")
+            ProfileSectionCard(eyebrow: "About", section: dashboard.accountSection, accessibilityIdentifier: "you.about-card")
         }
     }
 
@@ -394,7 +394,7 @@ private struct ProfileHeroCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("profile.hero-card")
+        .accessibilityIdentifier("you.hero-card")
         .ambitionPanelAccessibility()
     }
 }
@@ -446,7 +446,7 @@ private struct ProfileControlRoomCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.control-room-card")
+        .accessibilityIdentifier("you.control-room-card")
         .ambitionPanelAccessibility()
     }
 }
@@ -490,7 +490,7 @@ private struct ProfileSystemCenterCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.system-center-card")
+        .accessibilityIdentifier("you.system-center-card")
         .ambitionPanelAccessibility(
             label: systemCenter.title,
             value: "\(systemCenter.sections.flatMap(\.items).count) grouped areas",
@@ -539,7 +539,7 @@ private struct ProfileConstitutionCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.constitution-card")
+        .accessibilityIdentifier("you.constitution-card")
         .ambitionPanelAccessibility()
     }
 }
@@ -570,7 +570,7 @@ private struct ProfileMemoryControlsCard: View {
                             ProfileMemoryLensItemRow(item: item)
                         }
                     }
-                    .accessibilityIdentifier("profile.memory-lens-visual-layer")
+                    .accessibilityIdentifier("you.memory-lens-visual-layer")
                 }
 
                 ContextRecallCard(
@@ -582,7 +582,7 @@ private struct ProfileMemoryControlsCard: View {
                     context: .memory,
                     controls: memoryControls.items.prefix(3).map(\.title)
                 )
-                .accessibilityIdentifier("profile.context-recall-card")
+                .accessibilityIdentifier("you.context-recall-card")
 
                 if memoryControls.runtimeInspectionItems.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -596,7 +596,7 @@ private struct ProfileMemoryControlsCard: View {
                             ProfileRuntimeInspectionItemRow(item: item)
                         }
                     }
-                    .accessibilityIdentifier("profile.runtime-inspection-section")
+                    .accessibilityIdentifier("you.runtime-inspection-section")
                 }
 
                 if memoryControls.localLearningControls.isEmpty == false {
@@ -611,7 +611,7 @@ private struct ProfileMemoryControlsCard: View {
                             ProfileLocalLearningControlRow(control: control)
                         }
                     }
-                    .accessibilityIdentifier("profile.local-learning-controls-section")
+                    .accessibilityIdentifier("you.local-learning-controls-section")
                 }
 
                 MemoryConstellation(
@@ -619,7 +619,7 @@ private struct ProfileMemoryControlsCard: View {
                     subtitle: "A bounded map of current, stale, sensitive, corrected, and empty states. It is not a hidden inference graph.",
                     nodes: constellationNodes
                 )
-                .accessibilityIdentifier("profile.memory-constellation")
+                .accessibilityIdentifier("you.memory-constellation")
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(memoryControls.items) { item in
@@ -641,7 +641,7 @@ private struct ProfileMemoryControlsCard: View {
                             ProfilePrivateModeControlRow(control: control)
                         }
                     }
-                    .accessibilityIdentifier("profile.private-mode-controls")
+                    .accessibilityIdentifier("you.private-mode-controls")
                 }
 
                 ForEach(memoryControls.groups) { group in
@@ -677,7 +677,7 @@ private struct ProfileMemoryControlsCard: View {
                             ProfileNarrativeMemoryRow(memory: memory)
                         }
                     }
-                    .accessibilityIdentifier("profile.narrative-memory-section")
+                    .accessibilityIdentifier("you.narrative-memory-section")
                 }
 
                 if memoryControls.conservativePatterns.isEmpty == false {
@@ -692,7 +692,7 @@ private struct ProfileMemoryControlsCard: View {
                             ProfileMemoryPatternRow(pattern: pattern)
                         }
                     }
-                    .accessibilityIdentifier("profile.memory-pattern-section")
+                    .accessibilityIdentifier("you.memory-pattern-section")
                 }
 
                 Text(memoryControls.recoverySummary)
@@ -706,7 +706,7 @@ private struct ProfileMemoryControlsCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.memory-controls-card")
+        .accessibilityIdentifier("you.memory-controls-card")
         .ambitionPanelAccessibility(
             label: memoryControls.title,
             value: "Local memory groups, freshness labels, and safe correction controls.",
@@ -2531,7 +2531,7 @@ private struct ProfileSettingRow: View {
 #if DEBUG
 #Preview("You Light") {
     NavigationStack {
-        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.light)
@@ -2540,7 +2540,7 @@ private struct ProfileSettingRow: View {
 
 #Preview("You Dark") {
     NavigationStack {
-        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -2549,7 +2549,7 @@ private struct ProfileSettingRow: View {
 
 #Preview("You System Center Setup Incomplete") {
     NavigationStack {
-        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -2558,7 +2558,7 @@ private struct ProfileSettingRow: View {
 
 #Preview("You Trust Privacy Focused") {
     NavigationStack {
-        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -2567,7 +2567,7 @@ private struct ProfileSettingRow: View {
 
 #Preview("You High Dynamic Type") {
     NavigationStack {
-        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -2577,7 +2577,7 @@ private struct ProfileSettingRow: View {
 
 #Preview("You Reduce Motion") {
     NavigationStack {
-        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -2586,7 +2586,7 @@ private struct ProfileSettingRow: View {
 
 #Preview("You Minimal State") {
     NavigationStack {
-        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)

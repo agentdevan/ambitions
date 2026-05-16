@@ -2,28 +2,28 @@ import Foundation
 
 enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     case today
-    case captures
+    case capture
     case goals
     case habits
-    case plan
+    case time
     case insights
-    case profile
+    case you
 
     static var allCases: [AppTab] {
-        [.today, .goals, .captures, .plan, .profile]
+        [.today, .goals, .capture, .time, .you]
     }
 
     var id: String { rawValue }
 
     var canonicalTopLevelTab: AppTab {
         switch self {
-        case .captures:
-            return .captures
+        case .capture:
+            return .capture
         case .habits:
-            return .plan
+            return .time
         case .insights:
-            return .profile
-        case .today, .goals, .plan, .profile:
+            return .you
+        case .today, .goals, .time, .you:
             return self
         }
     }
@@ -35,24 +35,24 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     var title: String {
         switch self {
         case .today: "Today"
-        case .captures: "Capture"
+        case .capture: "Capture"
         case .goals: "Goals"
         case .habits: "Rituals"
-        case .plan: "Time"
+        case .time: "Time"
         case .insights: "History"
-        case .profile: "You"
+        case .you: "You"
         }
     }
 
     var systemImage: String {
         switch self {
         case .today: "sun.max"
-        case .captures: "tray.full"
+        case .capture: "tray.full"
         case .goals: "target"
         case .habits: "repeat"
-        case .plan: "clock.badge"
+        case .time: "clock.badge"
         case .insights: "chart.line.uptrend.xyaxis"
-        case .profile: "person.crop.circle"
+        case .you: "person.crop.circle"
         }
     }
 }

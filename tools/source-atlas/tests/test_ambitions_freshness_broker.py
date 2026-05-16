@@ -27,7 +27,9 @@ class TestFreshnessBroker(unittest.TestCase):
             
             out_path = Path(tmpdir) / "freshness.json"
             
+            import sys
             res = subprocess.run([
+                sys.executable,
                 str(self.script), 
                 "--version-id", "v1.0.0", 
                 "--diff-files", str(diff_path),

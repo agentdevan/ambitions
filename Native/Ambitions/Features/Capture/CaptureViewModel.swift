@@ -1,7 +1,7 @@
 import Foundation
 import Observation
 
-struct CapturesViewState: Sendable {
+struct CaptureViewState: Sendable {
     let captures: [Capture]
     let activeGoalOptions: [CaptureGoalOption]
 
@@ -60,8 +60,8 @@ struct CaptureActionMessage: Sendable, Equatable {
 
 @MainActor
 @Observable
-final class CapturesViewModel {
-    var state: AsyncViewState<CapturesViewState>
+final class CaptureViewModel {
+    var state: AsyncViewState<CaptureViewState>
     var actionMessage: CaptureActionMessage?
     var draftText = ""
     var draftError: String?
@@ -70,7 +70,7 @@ final class CapturesViewModel {
     private let draftRouteService: CaptureDraftRouteService
 
     init(
-        state: AsyncViewState<CapturesViewState> = .loading,
+        state: AsyncViewState<CaptureViewState> = .loading,
         actionMessage: CaptureActionMessage? = nil,
         draftRouteService: CaptureDraftRouteService = CaptureDraftRouteService()
     ) {
@@ -93,14 +93,14 @@ final class CapturesViewModel {
     func load(captureService: any CaptureServicing, goalsService: any GoalsServicing) async {
         do {
             state = .loaded(
-                CapturesViewState(
+                CaptureViewState(
                     captures: try await captureService.listCaptures(),
                     activeGoalOptions: try await activeGoalOptions(from: goalsService)
                 )
             )
             refreshDraftRoutingPreview()
         } catch {
-            state = .failed("Unable to load captures: \(error.localizedDescription)")
+            state = .failed("Unable to load Capture: \(error.localizedDescription)")
         }
     }
 

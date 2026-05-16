@@ -7,10 +7,10 @@ source_of_truth:
   - "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
 current:
   train: "Manifest-faithful rerun reconciliation"
-  batch: "SA28-LDI15-AOS24 Manifest Rerun Directive"
-  previous_batch: "AOS30 AmbitionsOS Closeout"
-  previous_result: "blocked_pending_manifest_rerun"
-  next_eligible_batch: "SA28 Manifest-Faithful Rerun"
+  batch: "SA30 Freshness Broker Manifest Contract"
+  previous_batch: "SA29 Hash / Signature / Revocation Tooling"
+  previous_result: "green"
+  next_eligible_batch: "SA31 Official Source Adapter Contracts"
 blocked_forward_queue:
   blocked_batch: "FCP27 App-Wide Flagship Audit And Remediation"
   reason: "SA28-SA32, LDI15-LDI22, and AOS24-AOS30 must be rerun or truthfully reclassified against their manifests before FCP27 can proceed."

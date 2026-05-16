@@ -36,8 +36,8 @@ struct AmbitionsRootView: View {
                 todayNavigation()
                 goalsNavigation()
                 captureNavigation()
-                planNavigation()
-                profileNavigation()
+                timeNavigation()
+                youNavigation()
             }
             .tint(resolvedTheme.shell.activeTabForeground)
             .toolbarBackground(resolvedTheme.shell.bottomBarMaterial, for: .tabBar)
@@ -173,15 +173,15 @@ struct AmbitionsRootView: View {
         }
     }
 
-    private func planNavigation() -> some View {
+    private func timeNavigation() -> some View {
         NavigationStack(path: $navigation.planPath) {
             AppShellScaffold(
                 title: "Time",
                 subtitle: "Shape Time",
                 posture: .shaping,
-                trailingButtons: shellUtilityButtons(for: .plan)
+                trailingButtons: shellUtilityButtons(for: .time)
             ) {
-                PlanScreen(showsNavigationChrome: false)
+                TimeScreen(showsNavigationChrome: false)
             }
             .navigationDestination(for: PlanRouteTarget.self) { target in
                 switch target {
@@ -192,9 +192,9 @@ struct AmbitionsRootView: View {
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
                         onBack: { navigation.resetPlanPath() },
-                        trailingButtons: shellUtilityButtons(for: .plan)
+                        trailingButtons: shellUtilityButtons(for: .time)
                     ) {
-                        CapturesScreen()
+                        CaptureScreen()
                     }
                 case .habits:
                     AppShellScaffold(
@@ -203,7 +203,7 @@ struct AmbitionsRootView: View {
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
                         onBack: { navigation.resetPlanPath() },
-                        trailingButtons: shellUtilityButtons(for: .plan)
+                        trailingButtons: shellUtilityButtons(for: .time)
                     ) {
                         HabitsScreen()
                     }
@@ -214,7 +214,7 @@ struct AmbitionsRootView: View {
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
                         onBack: { navigation.resetPlanPath() },
-                        trailingButtons: shellUtilityButtons(for: .plan)
+                        trailingButtons: shellUtilityButtons(for: .time)
                     ) {
                         WeeklyReviewScreen()
                     }
@@ -224,9 +224,9 @@ struct AmbitionsRootView: View {
                 GoalDetailScreen(target: target)
             }
         }
-        .tag(AppTab.plan)
+        .tag(AppTab.time)
         .tabItem {
-            Label(AppTab.plan.title, systemImage: AppTab.plan.systemImage)
+            Label(AppTab.time.title, systemImage: AppTab.time.systemImage)
         }
     }
 
@@ -236,26 +236,26 @@ struct AmbitionsRootView: View {
                 title: "Capture",
                 subtitle: "Intake",
                 posture: .shaping,
-                trailingButtons: shellUtilityButtons(for: .captures)
+                trailingButtons: shellUtilityButtons(for: .capture)
             ) {
-                CapturesScreen(shellMode: .topLevelCapture)
+                CaptureScreen(shellMode: .topLevelCapture)
             }
         }
-        .tag(AppTab.captures)
+        .tag(AppTab.capture)
         .tabItem {
-            Label(AppTab.captures.title, systemImage: AppTab.captures.systemImage)
+            Label(AppTab.capture.title, systemImage: AppTab.capture.systemImage)
         }
     }
 
-    private func profileNavigation() -> some View {
+    private func youNavigation() -> some View {
         NavigationStack(path: $navigation.insightsPath) {
             AppShellScaffold(
                 title: "You",
                 subtitle: "Control",
                 posture: .utility,
-                trailingButtons: shellUtilityButtons(for: .profile)
+                trailingButtons: shellUtilityButtons(for: .you)
             ) {
-                ProfileScreen(showsNavigationChrome: false)
+                YouScreen(showsNavigationChrome: false)
             }
             .navigationDestination(for: InsightsRouteTarget.self) { target in
                 switch target {
@@ -266,7 +266,7 @@ struct AmbitionsRootView: View {
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
                         onBack: { navigation.resetInsightsPath() },
-                        trailingButtons: shellUtilityButtons(for: .profile)
+                        trailingButtons: shellUtilityButtons(for: .you)
                     ) {
                         InsightsMonthlyReviewScreen()
                     }
@@ -277,16 +277,16 @@ struct AmbitionsRootView: View {
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
                         onBack: { navigation.resetInsightsPath() },
-                        trailingButtons: shellUtilityButtons(for: .profile)
+                        trailingButtons: shellUtilityButtons(for: .you)
                     ) {
                         InsightsHistoryScreen()
                     }
                 }
             }
         }
-        .tag(AppTab.profile)
+        .tag(AppTab.you)
         .tabItem {
-            Label(AppTab.profile.title, systemImage: AppTab.profile.systemImage)
+            Label(AppTab.you.title, systemImage: AppTab.you.systemImage)
         }
     }
 

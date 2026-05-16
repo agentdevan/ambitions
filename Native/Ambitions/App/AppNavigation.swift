@@ -53,8 +53,8 @@ final class AppNavigationModel {
 
     var selectedTab: AppTab
     var goalsPath: [GoalRouteTarget]
-    var planPath: [PlanRouteTarget]
-    var insightsPath: [InsightsRouteTarget]
+    var timePath: [PlanRouteTarget]
+    var youPath: [InsightsRouteTarget]
     var todayEntryContext: TodayEntryContext
     var pendingTodayEntryContext: TodayEntryContext?
     var activeOverlay: ShellOverlayState?
@@ -68,8 +68,8 @@ final class AppNavigationModel {
     init(selectedTab: AppTab) {
         self.selectedTab = selectedTab.canonicalTopLevelTab
         goalsPath = []
-        planPath = []
-        insightsPath = []
+        timePath = []
+        youPath = []
         todayEntryContext = .standard
         pendingTodayEntryContext = nil
         activeOverlay = nil
@@ -82,10 +82,10 @@ final class AppNavigationModel {
 
         switch selectedTab {
         case .habits:
-            planPath = [.habits]
+            timePath = [.habits]
         case .insights:
-            insightsPath = [.history]
-        case .today, .captures, .goals, .plan, .profile:
+            youPath = [.history]
+        case .today, .capture, .goals, .time, .you:
             break
         }
     }
@@ -147,49 +147,49 @@ final class AppNavigationModel {
         goalsPath = []
     }
 
-    func openPlanRoute(_ target: PlanRouteTarget) {
+    func openTimeRoute(_ target: PlanRouteTarget) {
         dismissOverlay()
         if target == .captureInbox {
-            selectedTab = .captures
-            planPath = []
+            selectedTab = .capture
+            timePath = []
             return
         }
-        selectedTab = .plan
-        planPath = [target]
+        selectedTab = .time
+        timePath = [target]
     }
 
-    func resetPlanPath() {
-        planPath = []
+    func resetTimePath() {
+        timePath = []
     }
 
-    func openInsightsRoute(_ target: InsightsRouteTarget) {
+    func openYouRoute(_ target: InsightsRouteTarget) {
         dismissOverlay()
-        selectedTab = .profile
-        insightsPath = [target]
+        selectedTab = .you
+        youPath = [target]
     }
 
-    func resetInsightsPath() {
-        insightsPath = []
+    func resetYouPath() {
+        youPath = []
     }
 
     func openCapturesInbox() {
-        openPlanRoute(.captureInbox)
+        openTimeRoute(.captureInbox)
     }
 
     func openHabits() {
-        openPlanRoute(.habits)
+        openTimeRoute(.habits)
     }
 
     func openWeeklyReview() {
-        openPlanRoute(.weeklyReview)
+        openTimeRoute(.weeklyReview)
     }
 
     func openMonthlyReview() {
-        openInsightsRoute(.monthlyReview)
+        openYouRoute(.monthlyReview)
     }
 
     func openHistory() {
-        openInsightsRoute(.history)
+        openYouRoute(.history)
     }
 
     func presentOverlay(_ route: ShellOverlayState) {
@@ -347,12 +347,12 @@ final class AppNavigationModel {
             todayEntryContext = .standard
         case .goals:
             goalsPath = []
-        case .captures:
+        case .capture:
             break
-        case .plan:
-            planPath = []
-        case .profile:
-            insightsPath = []
+        case .time:
+            timePath = []
+        case .you:
+            youPath = []
         case .habits, .insights:
             break
         }

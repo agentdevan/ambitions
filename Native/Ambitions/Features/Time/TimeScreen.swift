@@ -1,24 +1,24 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct PlanScreen: View {
+struct TimeScreen: View {
     @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var viewModel: PlanViewModel
+    @State private var viewModel: TimeViewModel
     @State private var selectedDayID: String?
     @State private var selectedActionKind: PlanShapingActionKind = .patch
     private let showsNavigationChrome: Bool
 
     @MainActor
-    init(viewModel: PlanViewModel? = nil, showsNavigationChrome: Bool = true) {
-        _viewModel = State(initialValue: viewModel ?? PlanViewModel())
+    init(viewModel: TimeViewModel? = nil, showsNavigationChrome: Bool = true) {
+        _viewModel = State(initialValue: viewModel ?? TimeViewModel())
         self.showsNavigationChrome = showsNavigationChrome
     }
 
     var body: some View {
         ZStack {
-            LivingSurfaceBackground(context: .plan, state: planLivingState, intensity: 0.64)
+            LivingSurfaceBackground(context: .time, state: planLivingState, intensity: 0.64)
                 .ignoresSafeArea()
 
             ScrollView {
@@ -30,9 +30,9 @@ struct PlanScreen: View {
                     case .failed:
                         DegradedStateCard(
                             state: DegradedStateOrchestrator.objectUnavailable(.lifeShapeContourMap),
-                            primaryAccessibilityIdentifier: "plan.retry-button",
+                            primaryAccessibilityIdentifier: "time.retry-button",
                             onPrimaryAction: {
-                                Task { await viewModel.refresh(using: container.planService) }
+                                Task { await viewModel.refresh(using: container.timeService) }
                             }
                         )
                         .transition(.ambitionPanel)
@@ -56,8 +56,8 @@ struct PlanScreen: View {
                         if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
                             DegradedStateCard(
                                 state: DegradedStateOrchestrator.planEmpty(),
-                                primaryAccessibilityIdentifier: "plan.empty.create-goal",
-                                secondaryAccessibilityIdentifier: "plan.empty.open-captures",
+                                primaryAccessibilityIdentifier: "time.empty.create-goal",
+                                secondaryAccessibilityIdentifier: "time.empty.open-captures",
                                 onPrimaryAction: {
                                     _ = emptyTitle
                                     _ = emptyMessage
@@ -111,7 +111,7 @@ struct PlanScreen: View {
                             emptyTitle: "No decision needed",
                             emptyDetail: "The current plan is not asking for another decision right now.",
                             items: dashboard.decisionDebt.items,
-                            accessibilityIdentifier: "plan.decision-debt",
+                            accessibilityIdentifier: "time.decision-debt",
                             onActivate: handleDecisionItem
                         )
 
@@ -121,7 +121,7 @@ struct PlanScreen: View {
                             emptyTitle: "No conflict to negotiate",
                             emptyDetail: "Nothing visible is competing hard enough to need attention.",
                             items: dashboard.conflictCourt.conflicts,
-                            accessibilityIdentifier: "plan.conflict-court",
+                            accessibilityIdentifier: "time.conflict-court",
                             onActivate: handleDecisionItem
                         )
 
@@ -174,20 +174,20 @@ struct PlanScreen: View {
                     } label: {
                         Label("Rituals", systemImage: AppTab.habits.systemImage)
                     }
-                    .accessibilityIdentifier("plan.open-habits-button")
+                    .accessibilityIdentifier("time.open-habits-button")
                 }
             }
         }
         .refreshable {
-            await viewModel.refresh(using: container.planService)
+            await viewModel.refresh(using: container.timeService)
         }
-        .accessibilityIdentifier("plan.screen")
+        .accessibilityIdentifier("time.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .onChange(of: viewModel.stateKey) { _, _ in
             syncSelection()
         }
         .task {
-            await viewModel.load(using: container.planService)
+            await viewModel.load(using: container.timeService)
             syncSelection()
         }
     }
@@ -264,7 +264,7 @@ struct PlanScreen: View {
     private func handleCalendarAwarenessAction(_ state: PlanCalendarAwarenessState) {
         guard state.canRequestCalendarRead else { return }
         Task {
-            await viewModel.makeCalendarAware(using: container.planService)
+            await viewModel.makeCalendarAware(using: container.timeService)
         }
     }
 
@@ -337,7 +337,7 @@ private struct PlanScopeChipStrip: View {
                 )
             }
         }
-        .accessibilityIdentifier("plan.scope-chip-strip")
+        .accessibilityIdentifier("time.scope-chip-strip")
     }
 }
 
@@ -377,13 +377,13 @@ private struct PlanCalendarAwarenessCard: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .disabled(state.canRequestCalendarRead == false)
-                    .accessibilityIdentifier("plan.calendar-aware.primary")
+                    .accessibilityIdentifier("time.calendar-aware.primary")
                 }
             }
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(state.title). \(state.detail)")
-        .accessibilityIdentifier("plan.calendar-awareness")
+        .accessibilityIdentifier("time.calendar-awareness")
     }
 
     private var semanticState: AmbitionSemanticState {
@@ -456,7 +456,7 @@ private struct PlanOpportunityWindowsCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.opportunity-windows")
+        .accessibilityIdentifier("time.opportunity-windows")
         .ambitionPanelAccessibility()
     }
 }
@@ -593,7 +593,7 @@ private struct PlanCalendarBoundaryContractCard: View {
                 .accessibilityIdentifier("plan.calendar-boundary.primary")
             }
         }
-        .accessibilityIdentifier("plan.calendar-boundary")
+        .accessibilityIdentifier("time.calendar-boundary")
         .ambitionPanelAccessibility()
     }
 }
@@ -626,7 +626,7 @@ private struct PlanRecoveryEntryCard: View {
                     .foregroundStyle(theme.colors.textTertiary)
             }
         }
-        .accessibilityIdentifier("plan.recovery-entry")
+        .accessibilityIdentifier("time.recovery-entry")
         .ambitionPanelAccessibility()
     }
 }
@@ -670,7 +670,7 @@ private struct PlanRealityReflowCard: View {
                     .foregroundStyle(theme.colors.textTertiary)
             }
         }
-        .accessibilityIdentifier("plan.reality-reflow")
+        .accessibilityIdentifier("time.reality-reflow")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
     }
@@ -769,7 +769,7 @@ private struct PlanRecoveryGradientCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.recovery-gradient")
+        .accessibilityIdentifier("time.recovery-gradient")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
     }
@@ -1858,17 +1858,17 @@ private struct PlanSecondaryDestinationsCard: View {
 }
 
 #if DEBUG
-#Preview("Plan Seeded") {
+#Preview("Time Seeded") {
     NavigationStack {
-        PlanScreen(viewModel: PlanViewModel(state: .loaded(PreviewPlanScenarios.seeded)))
+        TimeScreen(viewModel: TimeViewModel(state: .loaded(PreviewPlanScenarios.seeded)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
 }
 
-#Preview("Plan Empty") {
+#Preview("Time Empty") {
     NavigationStack {
-        PlanScreen(viewModel: PlanViewModel(state: .loaded(PreviewPlanScenarios.empty)))
+        TimeScreen(viewModel: TimeViewModel(state: .loaded(PreviewPlanScenarios.empty)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
