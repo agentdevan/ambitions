@@ -2,17 +2,27 @@
 
 Decision ID: `UID-2026-05-15-bottom-ia-five-tabs`
 
-## Expected primitives
+## Primitive Status
 
-- `RootDestinationIdentity` in `Sources/Components/NavigationPrimitives.swift` — missing
-- `BottomNavigationContract` in `Sources/Components/NavigationPrimitives.swift` — missing
+- `RootDestinationIdentity` in `Sources/Components/NavigationPrimitives.swift` — source-installed
+- `BottomNavigationContract` in `Sources/Components/NavigationPrimitives.swift` — source-installed
+- `RootDestinationIdentityRail` in `Sources/Components/NavigationPrimitives.swift` — source-installed
 
-## Candidate app files
+## Preview Fixture
+
+- `Sources/Previews/RootDestinationIdentityPreviews.swift`
+
+## App Source Candidates
 
 - `Native/Ambitions/App/AppTab.swift`
 - `Native/Ambitions/App/AmbitionsRootView.swift`
-- `Sources/Components/NavigationPrimitives.swift`
+
+## Remaining Proof Needed
+
+- local Swift/Xcode compile proof
+- rendered preview or simulator screenshot proof
+- app tab contract test or source assertion comparing active tab titles to `BottomNavigationContract.requiredTitles`
 
 ## Boundary
 
-This report identifies product-kit gaps. It does not implement them.
+This report records source installation. It does not claim release readiness.
