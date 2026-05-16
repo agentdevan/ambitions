@@ -1,6 +1,6 @@
 # Cleanup Decision Register
 
-Status: Yellow through 2026-05-16 Train C active surface hygiene  
+Status: Yellow through 2026-05-16 Train D reference-dependency scan  
 Date: 2026-05-16
 
 ## Authority
@@ -14,6 +14,8 @@ Phase 11 reconciliation note, 2026-05-10: this register remains supporting clean
 2026-05-16 Train B note: historical/supporting headers were added directly on `main` to selected high-risk Ambitions 2.0, Ambitions 3.0, and PXOS files. Train B is Yellow, not Green, because several full-preservation updates were blocked by the connector safety layer and broad legacy-family coverage remains incomplete. Receipt: `docs/status/train-b-historical-header-quarantine-receipt-2026-05-16.md`.
 
 2026-05-16 Train C note: active-surface hygiene/routing artifacts were added directly on `main`. Train C is Yellow, not Green, because scanners were installed but not run locally, no Swift patches were made without concrete evidence, and generated artifacts were classified but not moved/deleted. Receipt: `docs/status/train-c-active-surface-hygiene-receipt-2026-05-16.md`.
+
+2026-05-16 Train D Phase 11 note: reference-dependency scan planning was refreshed and an archive/delete candidate register was created. Train D Phase 11 is Yellow, not Green, because connector search is not a full static link graph and no local `rg`/markdown-link scan was run. No archive moves and no deletions are approved. Receipt: `docs/status/train-d-reference-dependency-scan-receipt-2026-05-16.md`.
 
 ## Scope
 
@@ -54,6 +56,7 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 | `.codex/checklists/`, `.codex/operations/`, `.codex/playbooks/`, `.codex/templates/`, `.codex/validation/` | Supporting control-plane material | Keep for now; consolidate later if duplicate or stale. |
 | Native subfolder `AGENTS.md` files | Supporting local contributor guidance | Must remain subordinate to root `AGENTS.md` and `docs/truth/*`. |
 | generated-report classification and scanner scripts | Supporting cleanup/validation aids | Useful for local validation and cleanup planning only; not source proof. |
+| archive/delete candidate register and reference-dependency plan | Supporting cleanup safety ledgers | Required before any archive/delete/move decision; not approval by themselves. |
 
 ## Historical
 
@@ -127,6 +130,16 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 | Direct Swift visible-copy searches did not prove a safe source patch target. | Needs local validation | No Swift source was changed. |
 | Active frontend stale-language search did not prove a safe direct patch target. | Needs local validation | Issue #5 remains open pending local scanner/full sweep. |
 
+## 2026-05-16 Train D Reference Dependency Findings
+
+| Finding | Classification | Direct action taken |
+| --- | --- | --- |
+| Archive/delete candidates lacked a current Phase 11 candidate register. | Supporting cleanup gap | Created `docs/status/archive-delete-candidate-register.md`. |
+| Reference-dependency plan still used older T06/T07 framing. | Supporting cleanup drift | Refreshed `docs/status/reference-dependency-scan-cleanup-plan.md` for Train D / Phase 11. |
+| Representative old-canon and prompt files still have inbound references. | Destructive-action blocker | No archive moves or deletions approved. |
+| Generated reports need regeneration/owner proof before cleanup. | Destructive-action blocker | No generated-report deletion approved. |
+| Phase 12/13/14 require local/Antigravity reference scans and stubs. | Blocked pending local proof | Master tracker marks migration/cleanup phases blocked. |
+
 ## Hard Stops
 
 Do not delete or move production Swift, tests, project config, package manifests, scripts, resources, entitlements, privacy manifests, current proof logs, or active truth files as part of docs cleanup.
@@ -135,4 +148,4 @@ Do not delete `.codex` or batch-train material opportunistically. Classify first
 
 ## Next Recommended Direct Cleanup Step
 
-Train D should start with Phase 11: reference-dependency scan before any archive/delete/move work. No archive migration should happen until inbound references, replacement authority, stubs, and rollback paths are recorded.
+Do not run archive migration through connector-only evidence. Run a local/Antigravity inbound-reference scan for one family at a time, starting with Ambitions 2.0. Prepare stubs, replacement authority, and rollback paths before Phase 12.
