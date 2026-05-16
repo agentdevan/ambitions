@@ -2,6 +2,37 @@
 import Foundation
 import SwiftUI
 
+public struct RealityMeridianTemporalWindow: Equatable, Sendable {
+    public let dayStartHour: Int
+    public let dayEndHour: Int
+
+    public init(dayStartHour: Int = 6, dayEndHour: Int = 22) {
+        let clampedStart = min(23, max(0, dayStartHour))
+        let clampedEnd = min(24, max(clampedStart + 1, dayEndHour))
+        self.dayStartHour = clampedStart
+        self.dayEndHour = clampedEnd
+    }
+
+    public var startMinutes: Int { dayStartHour * 60 }
+    public var endMinutes: Int { dayEndHour * 60 }
+    public var durationMinutes: Int { max(1, endMinutes - startMinutes) }
+
+    public func progress(hour: Int, minute: Int) -> Double {
+        let clampedHour = min(23, max(0, hour))
+        let clampedMinute = min(59, max(0, minute))
+        let currentMinutes = clampedHour * 60 + clampedMinute
+        let raw = Double(currentMinutes - startMinutes) / Double(durationMinutes)
+        return min(1, max(0, raw))
+    }
+
+    public func progress(for date: Date, calendar: Calendar = .current) -> Double {
+        progress(
+            hour: calendar.component(.hour, from: date),
+            minute: calendar.component(.minute, from: date)
+        )
+    }
+}
+
 public struct RealityMeridianCurrentTimeCursor: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -9,8 +40,7 @@ public struct RealityMeridianCurrentTimeCursor: View {
     private let title: String
     private let date: Date?
     private let showsPulse: Bool
-    private let dayStartHour: Int
-    private let dayEndHour: Int
+    private let temporalWindow: RealityMeridianTemporalWindow
 
     public init(
         title: String = "Current time",
@@ -22,8 +52,7 @@ public struct RealityMeridianCurrentTimeCursor: View {
         self.title = title
         self.date = date
         self.showsPulse = showsPulse
-        self.dayStartHour = dayStartHour
-        self.dayEndHour = dayEndHour
+        self.temporalWindow = RealityMeridianTemporalWindow(dayStartHour: dayStartHour, dayEndHour: dayEndHour)
     }
 
     public var body: some View {
@@ -43,11 +72,11 @@ public struct RealityMeridianCurrentTimeCursor: View {
 
             ZStack(alignment: .topLeading) {
                 VStack(alignment: .leading) {
-                    Text(hourLabel(dayStartHour))
+                    Text(hourLabel(temporalWindow.dayStartHour))
                         .font(theme.typography.micro.monospacedDigit())
                         .foregroundStyle(theme.colors.textTertiary)
                     Spacer(minLength: 0)
-                    Text(hourLabel(dayEndHour))
+                    Text(hourLabel(temporalWindow.dayEndHour))
                         .font(theme.typography.micro.monospacedDigit())
                         .foregroundStyle(theme.colors.textTertiary)
                 }
@@ -102,20 +131,12 @@ public struct RealityMeridianCurrentTimeCursor: View {
         .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Current time on Reality Meridian")
-        .accessibilityValue("\(timeLabel(for: date)). Window \(hourLabel(dayStartHour)) to \(hourLabel(dayEndHour)).")
+        .accessibilityValue("\(timeLabel(for: date)). Window \(hourLabel(temporalWindow.dayStartHour)) to \(hourLabel(temporalWindow.dayEndHour)).")
         .accessibilityIdentifier("reality-meridian-current-time-cursor")
     }
 
     private func cursorOffset(for date: Date, height: CGFloat) -> CGFloat {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        let minute = calendar.component(.minute, from: date)
-        let currentMinutes = hour * 60 + minute
-        let startMinutes = dayStartHour * 60
-        let endMinutes = max(dayEndHour * 60, startMinutes + 1)
-        let ratio = Double(currentMinutes - startMinutes) / Double(endMinutes - startMinutes)
-        let clamped = min(1, max(0, ratio))
-        return CGFloat(clamped) * height
+        CGFloat(temporalWindow.progress(for: date)) * height
     }
 
     private func timeLabel(for date: Date) -> String {
