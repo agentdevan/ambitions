@@ -1,7 +1,7 @@
 # Repo Governance Master Cleanup Plan
 
 Status: Active cleanup control plane  
-Last updated: 2026-05-16 Train B YELLOW closeout  
+Last updated: 2026-05-16 Train C YELLOW closeout  
 Execution mode: Direct GitHub API / local branch work only  
 Authority: Subordinate to `docs/truth/*`
 
@@ -49,11 +49,11 @@ If this file conflicts with `docs/truth/*`, the truth files win.
 | 3 | Old Canon Classification Index | Complete |
 | 4 | Ambitions 2.0 historical headers | YELLOW partial |
 | 5 | Ambitions 3.0 / 4.0 / PXOS / ACUI headers | YELLOW partial |
-| 6 | Frontend visual encyclopedia sweep | Not started |
-| 7 | Generated report classification | Not started |
-| 8 | Swift visible-copy sweep + scan script | Not started |
-| 9 | Authority/workflow validation scripts | Not started |
-| 10 | Audit/prompt routing READMEs | Not started |
+| 6 | Frontend visual encyclopedia sweep | YELLOW partial |
+| 7 | Generated report classification | Complete |
+| 8 | Swift visible-copy sweep + scan script | YELLOW partial |
+| 9 | Authority/workflow validation scripts | Complete, not locally run |
+| 10 | Audit/prompt routing READMEs | Complete |
 | 11 | Reference dependency scan | Not started |
 | 12 | Ambitions 2.0 archive migration | Not started |
 | 13 | Ambitions 3.0 / 4.0 / PXOS archive migration | Not started |
@@ -104,6 +104,30 @@ Connector-blocked full-preservation updates:
 
 Remaining broad legacy families still need either local safer patching or later archive/reference-scan work. No file movement or deletion occurred in Train B.
 
+## Train C closeout
+
+Train C is YELLOW, not Green.
+
+Receipt: `docs/status/train-c-active-surface-hygiene-receipt-2026-05-16.md`
+
+Completed artifacts:
+
+- `docs/status/generated-report-classification.md`
+- `scripts/ambitions-visible-copy-drift-scan.py`
+- `scripts/validate-repo-authority.sh`
+- `scripts/validate-github-workflow-policy.sh`
+- `docs/audits/README.md`
+- `prompts/README.md`
+- `docs/codex/batches/README.md`
+- `docs/codex/batch-trains/README.md`
+
+Yellow boundaries:
+
+- scanner scripts were installed but not run locally;
+- no Swift source was patched because direct search did not prove a safe visible-copy target;
+- active frontend stale-language sweep did not find a clear direct patch target, but issue #5 remains open until local scanner validation is performed;
+- generated reports were classified, not moved or deleted.
+
 ## Next train
 
-Train C should perform Phases 6-10 only after accepting the Train B YELLOW status or running a local safer bulk-header pass for the remaining legacy files.
+Train D should start with Phase 11: reference-dependency scan before any archive/delete/move work. No archive migration should happen until inbound references, replacement authority, stubs, and rollback paths are recorded.
