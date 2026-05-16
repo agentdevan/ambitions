@@ -1,8 +1,26 @@
 # Codex Batch Prompts
 
-Most files in this folder are preserved as implementation history and evidence. They do not override Ambitions 3.0 source docs.
+Status: Historical/supporting prompt artifact index  
+Authority: Subordinate to `docs/truth/*`, `docs/status/README.md`, direct user instruction, and current source/proof evidence.
 
-Active Ambitions 3.0 completion-train prompts:
+Most files in this folder are preserved as implementation history and evidence. They do not override current Ambitions truth files, current direct-execution instructions, current source evidence, or release/proof boundaries.
+
+## Current reading rule
+
+For current Ambitions work, start from:
+
+1. `README.md`
+2. `docs/README.md`
+3. `docs/truth/README.md`
+4. `docs/truth/*`
+5. `docs/status/README.md`
+6. the relevant active source/status/frontend/runtime portal
+
+Then inspect this folder only if the current task explicitly needs historical prompt context.
+
+## Historical prompt families
+
+The F-series and older batch prompts below are retained as historical/supporting execution artifacts. They are not active instructions by themselves:
 
 - `F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
 - `F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
@@ -23,19 +41,12 @@ Active Ambitions 3.0 completion-train prompts:
 - `F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt.md`
 - `F30_Beyond_3_0_Continuation_Plan_Prompt.md`
 
-Use them only through `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`.
+Older batch prompts may be mined for evidence, tests, and historical decisions, but must be reconciled against current `docs/truth/*` and current status before use.
 
-For active Ambitions 3.0 work, start from:
+## Hard stops
 
-1. `README.md`
-2. `docs/README.md`
-3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
-4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
-5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
-6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
-7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
-8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
-9. target 3.0 docs
-10. `docs/codex/BATCH_REGISTRY.md` for implementation status only
-
-Older batch prompts may be mined for evidence, tests, and historical decisions, but must be reconciled against Ambitions 3.0 before use.
+- Do not treat a prompt file as product truth.
+- Do not treat a prompt file as implementation proof.
+- Do not treat a prompt file as release, accessibility, visual, or device proof.
+- Do not run historical prompts without refreshing scope, authority, and validation expectations.
+- Do not use this directory to bypass direct user instructions.
