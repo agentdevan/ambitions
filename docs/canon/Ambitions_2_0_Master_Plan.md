@@ -1,5 +1,12 @@
 # Ambitions 2.0 Master Plan
 
+> Historical note: This file is retained for traceability only.
+> It is not active product, implementation, release, or Codex process authority.
+> Current authority starts in `docs/truth/README.md`.
+> Use this only after reconciling against `docs/truth/*`, `docs/status/*`, and `docs/status/old-canon-classification-index.md`.
+
+---
+
 Adoption date: 2026-04-24
 
 ## Executive Summary
