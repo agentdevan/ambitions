@@ -1,144 +1,120 @@
 # Reference Dependency Scan And Cleanup Execution Plan
 
-Status: Green for T06 non-destructive scan / Yellow for exhaustive certainty  
-Date: 2026-05-09
+Status: Train D / Phase 11 YELLOW non-destructive scan  
+Date: 2026-05-16  
+Authority: Subordinate to `docs/truth/*`, `docs/status/README.md`, `docs/status/archive-and-stale-material-ledger.md`, and `docs/status/archive-delete-candidate-register.md`.
 
-## Authority
-
-Active repo authority starts in `docs/truth/README.md`. If this plan conflicts with `docs/truth/*`, the truth files win.
-
-Phase 11 reconciliation note, 2026-05-10: this plan remains a non-destructive
-supporting scan. Current stale/archive/delete routing lives in
-`docs/status/archive-and-stale-material-ledger.md`; repo question routing lives
-in `.codex/REPO_INVENTORY.md`.
+This plan governs archive/delete/move preparation after Trains A-C. It replaces older T06/T07 wording with the current repo-governance cleanup train state.
 
 ## Scope
 
-T06 is a non-destructive planning pass only.
+Phase 11 is a non-destructive dependency and cleanup planning pass only.
 
-No Swift source changes, app implementation changes, deletes, file moves, archive operations, build/test/device validation, or release/readiness claims were made.
+No Swift source changes, app implementation changes, deletes, file moves, archive operations, build/test/device validation, or release/readiness claims are made by this plan.
 
-## Scan Inputs
+## Current prerequisites
 
-- `docs/truth/*`
-- `docs/status/cleanup-decision-register.md`
-- `docs/status/codex-agents-skill-inventory.md`
-- `docs/status/large-doc-classification-overrides.md`
-- GitHub search for stale authority phrases and provider/backend references.
-- High-risk large-doc behavior observed through connector reads.
+Completed before this pass:
 
-## Search Findings
+- Train A: authority foundation and old-canon classification index.
+- Train B: partial historical header quarantine, accepted Yellow.
+- Train C: active surface hygiene routing, generated-report classification, scanner scripts, accepted Yellow.
 
-### Stale 3.0-active phrasing still exists
+Relevant current docs:
 
-Search for `"Ambitions 3.0 is the active"` found retained references in:
+- `docs/status/repo-governance-master-cleanup-plan.md`
+- `docs/status/old-canon-classification-index.md`
+- `docs/status/train-b-historical-header-quarantine-receipt-2026-05-16.md`
+- `docs/status/train-c-active-surface-hygiene-receipt-2026-05-16.md`
+- `docs/status/generated-report-classification.md`
+- `docs/audits/README.md`
+- `prompts/README.md`
+- `docs/codex/batches/README.md`
+- `docs/codex/batch-trains/README.md`
 
-- `docs/codex/FREE_WORKFLOW_OPERATING_SYSTEM.md`
-- `docs/codex/MASTER_CODEX_SYSTEM.md`
-- `docs/codex/README.md`
-- `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`
-- `docs/codex/CONTEXT_INDEX.md`
-- `docs/codex/BATCH_REGISTRY.md`
-- `docs/audits/faang-handoff-internal-identifier-scan.txt`
-- `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`
-- `docs/codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md`
+## Search inputs inspected in Train D
 
-Decision: keep as historical/supporting context until a safe rewrite/archive pass. Do not treat these references as active authority.
+Representative targeted searches were run for:
 
-### Older AmbitionsCanon-first routing still exists in supporting/history areas
+- `Ambitions_2_0_Master_Plan.md`
+- `MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`
+- `PXOS_Empty_Edge_And_Degraded_States.md`
 
-Search for AmbitionsCanon/source-truth routing found retained references in:
+These searches showed inbound references from active/supporting ledgers, historical inventories, audits, old canon files, Codex routing docs, and Train B receipts. This confirms candidate families are not safe for broad deletion or archive movement yet.
 
-- `docs/status/repo-cleanup-index.md`
-- `docs/status/repo-wide-cleanup-report.md`
-- `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
-- `docs/audits/gq01-global-queue-maturity-report.md`
-- `docs/audits/ambitions-canon-pack-repo-phase-0-orientation-audit.md`
-- `docs/AmbitionsCanon/Archive/README.md`
-- `docs/status/current-implementation-map.md`
+## Dependency findings
 
-Decision: front doors have already been rewired to `docs/truth/*`; retained supporting/history references are not deletion-safe until link and purpose checks run.
+| Area | Dependency status | Current decision |
+|---|---|---|
+| `docs/canon/Ambitions_2_0_*` | Representative inbound refs remain. | Retain; no archive/delete in Phase 11. |
+| `docs/codex/Ambitions_2_0_*` | Representative inbound refs remain. | Retain; no archive/delete in Phase 11. |
+| `docs/canon/Ambitions_3_0_*` | Useful copy/privacy/QA/design decisions and inbound refs remain. | Retain; continue header/extraction before movement. |
+| `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md` | Inbound refs remain from status/Codex/audit contexts. | Retain; archive only after stubs/routing updates. |
+| `docs/canon/Ambitions_4_0_*` | Train B connector-blocked files and External Brain references remain. | Retain; local safer patch/extraction first. |
+| `docs/canon/PXOS_*` | Representative inbound refs remain from PXOS handoff/index/audits/status. | Retain; archive only after PXOS family stubs/routing. |
+| `docs/codex/batches/*`, `prompts/batches/*` | Prompt routing installed, but family refs likely remain. | Retain pending prompt-family scan. |
+| `docs/codex/batch-trains/*` | README demoted, but train files likely retain references. | Retain pending family-specific scan. |
+| `docs/audits/*` | Audit routing installed; receipts remain proof-adjacent/historical. | Retain pending evidence-retention pass. |
+| `docs/handoff/*` | Likely historical references remain. | Retain pending handoff-family scan. |
+| `build/reports/*` | Generated report classification installed, but safe delete requires ownership/regeneration proof. | Retain pending generated-artifact scan. |
 
-### Provider/backend references are contained but quarantined
+## Archive/delete candidate register
 
-Search for Supabase/Postgres/backend/provider wording found the expected quarantined provider skill roots plus truth/status files that explicitly classify them:
+The current candidate register is:
 
-- `.agents/skills/supabase/`
-- `.agents/skills/supabase-postgres-best-practices/`
-- `docs/truth/HISTORICAL_POLICY.md`
-- `docs/truth/IMPLEMENTATION_TRUTH.md`
-- `docs/status/cleanup-decision-register.md`
+- `docs/status/archive-delete-candidate-register.md`
 
-Decision: provider skill roots remain quarantine. Do not delete until durable generic safety lessons are extracted or owner approves removal.
+It is the current Phase 11 candidate table. It records that no deletions and no archive moves are approved yet.
 
-## Dependency Decisions
+## Required sequence before any archive movement
 
-| Area | Dependency Status | Cleanup Decision |
-| --- | --- | --- |
-| `docs/truth/` | Active authority | Keep. Never archive/delete in cleanup pass. |
-| `README.md`, `docs/README.md`, `AGENTS.md` | Active front doors | Keep. Already truth-first. |
-| `docs/status/current-implementation-map.md` | Active supporting implementation map | Keep. |
-| `docs/status/release-evidence-packet.md` | Active supporting proof/release posture | Keep. |
-| `docs/status/cleanup-decision-register.md` | Active cleanup classifier | Keep. |
-| `docs/status/large-doc-classification-overrides.md` | Active override for large files | Keep until physical headers are safely applied. |
-| `docs/AmbitionsCanon/` | Supporting product/design canon | Keep; not an archive target as a whole. |
-| `docs/codex/` current operating files | Supporting Codex operating system | Keep; targeted stale-file cleanup only. |
-| `.codex/skills/` | Supporting operating skill library | Keep; active/candidate classification already recorded. |
-| `.agents/skills/supabase*` | Quarantine | Retain for now; T07 may move to quarantine/archive only with owner approval. |
-| old `docs/canon/Ambitions_3_0*` / 4.0 / PXOS / ACUI / SI material | Historical/supporting | Archive candidates after link checks and extraction. |
-| `docs/audits/` and `docs/handoff/` | Historical/supporting evidence | Keep until an evidence-retention pass identifies duplicates. |
-| stale tracked inventories / one-off prompts / duplicate closeouts | Deletion candidates | No deletion until replacement authority and inbound links are proven. |
+1. Select one family only.
+2. Run local `rg` inbound-reference scan.
+3. Record replacement authority.
+4. Extract durable decisions into active truth/status docs or explicitly retain them as historical.
+5. Prepare stubs/redirects for referenced paths.
+6. Record rollback path.
+7. Move only that family.
+8. Re-run reference scan and update ledgers.
 
-## T07 Proposed Safe Execution Order
+## Required sequence before any deletion
 
-T07 should not be a mass delete. Run as small PR-sized passes:
+1. Confirm the file has no active/supporting inbound references.
+2. Confirm durable value has already been extracted or intentionally discarded with approval.
+3. Confirm release/proof/audit value is not needed.
+4. Confirm regeneration path if generated.
+5. Record rollback method.
+6. Delete only after owner approval.
 
-1. **T07a — Link Map And Inbound Reference Ledger**
-   - Create a generated or manually curated table of inbound links to historical/quarantine candidates.
-   - No moves/deletes.
-
-2. **T07b — Quarantine Folder Plan**
-   - Propose target folders only, for example `docs/archive/`, `docs/archive/codex-history/`, `docs/archive/handoff-history/`, `docs/archive/legacy-canon/`, and `.agents/quarantine/`.
-   - No moves/deletes without approval.
-
-3. **T07c — Provider Skill Quarantine Move**
-   - Move `.agents/skills/supabase*` only if the owner approves.
-   - Update references to point to `docs/status/codex-agents-skill-inventory.md` and the new quarantine path.
-   - No app/source changes.
-
-4. **T07d — Historical Prompt Archive Move**
-   - Move old copy/paste prompt files after extracting durable process rules.
-   - High priority candidates: `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`, old workflow prompts, one-off FAANG cleanup prompts.
-
-5. **T07e — Legacy Canon Archive Move**
-   - Move only Ambitions 3.0/4.0/PXOS/ACUI/SI files with no current inbound authority dependency.
-   - Do not move `docs/AmbitionsCanon/` active/supporting canon.
-
-6. **T07f — Duplicate Report Cleanup Plan**
-   - Compare closeout reports/audits for unique evidence.
-   - Mark deletion candidates only after extracting unique decisions and preserving proof links.
-
-## Hard Red Blocks For Cleanup
+## Hard Red blocks
 
 Stop immediately if a cleanup pass would:
 
-- touch Swift/source files
-- touch `project.yml`, `Package.swift`, entitlements, app resources, privacy manifests, or scripts without explicit implementation scope
-- delete or move `docs/truth/*`
-- delete current implementation/release evidence docs
-- break root front-door routing
-- remove batch history without an extraction record
-- remove raw proof/evidence logs
-- make release/readiness/accessibility/device claims
-- imply Supabase/backend/provider architecture is active
+- touch Swift/source files;
+- touch `project.yml`, `Package.swift`, entitlements, app resources, privacy manifests, or scripts without explicit implementation scope;
+- delete or move `docs/truth/*`;
+- delete current implementation/release evidence docs;
+- break root front-door routing;
+- remove batch history without an extraction record;
+- remove raw proof/evidence logs;
+- make release/readiness/accessibility/device claims;
+- imply Supabase/backend/provider architecture is active;
+- move/delete generated reports without regeneration/ownership proof.
 
-## Accepted Yellow Limitations
+## Accepted Yellow limitations
 
-- GitHub search is useful but not a full static link graph.
-- Some large files return truncated connector contents, so physical header edits remain unsafe through this connector.
+- GitHub connector search is not a full static link graph.
+- No local `rg` output was captured here.
 - No markdown link checker was run.
-- No build/test validation was run because this is docs/control-plane only.
+- No scripts were run locally.
+- No build/test validation was run.
 
-## Next Recommended Step
+## Current Phase 11 result
 
-T07a — create an inbound reference ledger for proposed archive/quarantine candidates. No files should be moved or deleted until T07a proves which candidates are still referenced and what replacement authority exists.
+Phase 11 is Yellow complete for direct GitHub API purposes.
+
+It provides a non-destructive candidate register and updated reference plan. It does not authorize archive migration, deletion, or final cleanup closeout.
+
+## Next recommended train step
+
+Before Phase 12 archive migration, run a local/Antigravity reference pass for the Ambitions 2.0 family and prepare stubs. If local proof is unavailable, keep Phase 12 blocked and do not move files.
