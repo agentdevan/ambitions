@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "active_decision_count": 3,
+    "decision_count": 3,
+    "design_system_matrix_exists": true,
+    "ledger_exists": true,
+    "surface_matrix_exists": true
+  },
+  "errors": [],
+  "status": "green"
+}
