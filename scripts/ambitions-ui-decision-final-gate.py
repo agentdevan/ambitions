@@ -27,10 +27,19 @@ REQUIRED_PROMPT_MARKERS = [
     "<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->",
     "<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->",
 ]
+CURRENT_TIME_DECISION_ID = "UID-2026-05-15-today-live-current-time-cursor"
+CURRENT_TIME_FUSION = ROOT / "Native" / "Ambitions" / "Features" / "Today" / "TodayDayRailCurrentTimeFusion.swift"
+OBSOLETE_FUSED_WRAPPER = ROOT / "Native" / "Ambitions" / "Features" / "Today" / "TodayRealityMeridianFusedRail.swift"
+TODAY_SCREEN = ROOT / "Native" / "Ambitions" / "Features" / "Today" / "TodayScreen.swift"
+TEMPORAL_TESTS = ROOT / "Native" / "AmbitionsTests" / "DesignSystem" / "RealityMeridianTemporalWindowTests.swift"
 
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8") if path.exists() else ""
 
 
 def decision_rows() -> list[dict]:
@@ -51,6 +60,31 @@ def write(path: Path, text: str) -> None:
 
 def is_source_installed(row: dict) -> bool:
     return row.get("implementation_proof_status") == "proof_required_after_implementation"
+
+
+def validate_current_time_cursor_lane(errors: list[str], checks: dict[str, object]) -> None:
+    fusion_text = read_text(CURRENT_TIME_FUSION)
+    today_text = read_text(TODAY_SCREEN)
+    test_text = read_text(TEMPORAL_TESTS)
+
+    checks["current_time_fusion_exists"] = CURRENT_TIME_FUSION.exists()
+    checks["current_time_obsolete_wrapper_absent"] = not OBSOLETE_FUSED_WRAPPER.exists()
+    checks["current_time_temporal_tests_exist"] = TEMPORAL_TESTS.exists()
+
+    if not CURRENT_TIME_FUSION.exists():
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: missing rail-layer fusion file")
+    if OBSOLETE_FUSED_WRAPPER.exists():
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: obsolete fused wrapper still exists")
+    if ".fusedCurrentTimeCursor()" not in today_text:
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: TodayScreen is not using DayTimelineRail.fusedCurrentTimeCursor()")
+    if "extension DayTimelineRail" not in fusion_text:
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: fusion file does not extend DayTimelineRail")
+    if "allowsHitTesting(false)" not in fusion_text:
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: fusion cursor must not block rail taps")
+    if "RealityMeridianTemporalWindowTests" not in test_text:
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: missing temporal window tests")
+    if "testProgressMapsExactMinutePosition" not in test_text:
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: missing exact minute-position test")
 
 
 def main() -> int:
@@ -97,6 +131,8 @@ def main() -> int:
             for marker in REQUIRED_PROMPT_MARKERS:
                 if marker not in text:
                     errors.append(f"{decision_id}: generated prompt missing runner marker {marker}")
+    if CURRENT_TIME_DECISION_ID in active_ids:
+        validate_current_time_cursor_lane(errors, checks)
     status = "green" if not errors else "red"
     payload = {"status": status, "checks": checks, "errors": errors}
     write(OUT_JSON, json.dumps(payload, indent=2, sort_keys=True) + "\n")
@@ -105,7 +141,7 @@ def main() -> int:
         lines.append(f"- {key}: {value}")
     lines.extend(["", "## Errors"])
     lines.extend(f"- {error}" for error in (errors or ["None"]))
-    lines.extend(["", "## Boundary", "", "This gate checks the UI-decision control plane and source-install receipts. It does not prove compile, simulator, device, accessibility, release, or App Store readiness."])
+    lines.extend(["", "## Boundary", "", "This gate checks the UI-decision control plane, source-install receipts, and selected source-shape guards. It does not prove compile, simulator, device, accessibility, release, or App Store readiness."])
     write(OUT_MD, "\n".join(lines).rstrip() + "\n")
     print(status.upper())
     return 0 if status == "green" else 1
