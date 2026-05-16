@@ -24,7 +24,7 @@ enum NowContextLensSource: String, Codable, Sendable, Equatable, Hashable, CaseI
 }
 
 enum NowPosture: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
-    case noPlan = "no_plan"
+    case noTime = "no_time"
     case open
     case steady
     case tight
@@ -48,7 +48,7 @@ enum NowActionKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable
     case focus
     case completeAction = "complete_action"
     case openGoal = "open_goal"
-    case openPlan = "open_plan"
+    case openTime = "open_time"
     case capture
     case schedule
     case recover
@@ -100,20 +100,20 @@ struct NowActionReference: Codable, Sendable, Equatable, Hashable {
     let goalID: String?
     let stepID: String?
     let captureID: String?
-    let planID: String?
+    let timeID: String?
     let reviewID: String?
 
     init(
         goalID: String? = nil,
         stepID: String? = nil,
         captureID: String? = nil,
-        planID: String? = nil,
+        timeID: String? = nil,
         reviewID: String? = nil
     ) {
         self.goalID = goalID
         self.stepID = stepID
         self.captureID = captureID
-        self.planID = planID
+        self.timeID = timeID
         self.reviewID = reviewID
     }
 }
@@ -416,7 +416,7 @@ struct CanonicalNowState: Codable, Sendable, Equatable, Identifiable {
             lensSource: lensSource,
             availableContextLenses: availableContextLenses,
             isManualLensOverrideActive: isManualLensOverrideActive,
-            todayPosture: .noPlan,
+            todayPosture: .noTime,
             schedulePressure: NowPressureSummary(level: .none, summary: "No local schedule pressure is visible."),
             priorityPressure: NowPriorityRealitySummary(
                 overallPressure: .none,

@@ -34,7 +34,7 @@ struct TodayCommandHandler {
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
         switch action.kind {
-        case .startStepSession, .pauseStepSession, .stopStepSession, .openPlan, .protectLater, .dismissCelebration:
+        case .startStepSession, .pauseStepSession, .stopStepSession, .openTime, .protectLater, .dismissCelebration:
             return TodayActionResponse(message: nil)
         case .askForHelp:
             if action.target.goalID == nil || action.target.stepID == nil {
@@ -50,7 +50,7 @@ struct TodayCommandHandler {
         case .openDetail:
             return TodayActionResponse(
                 message: TodayInlineMessage(
-                    title: "Opening plan context",
+                    title: "Opening Goal context",
                     body: "Today is handing off to the same goal context used for replanning, evidence, and support decisions.",
                     state: .selected
                 )

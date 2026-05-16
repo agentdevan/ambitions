@@ -19,13 +19,13 @@ final class WeeklyReviewViewModel {
         }
     }
 
-    func load(using service: any PlanServicing, now: Date = .now) async {
+    func load(using service: any TimeServicing, now: Date = .now) async {
         guard hasLoaded == false else { return }
         hasLoaded = true
         await refresh(using: service, now: now)
     }
 
-    func refresh(using service: any PlanServicing, now: Date = .now) async {
+    func refresh(using service: any TimeServicing, now: Date = .now) async {
         do {
             state = .loaded(try await service.loadWeeklyReviewDashboard(now: now))
         } catch {
@@ -51,7 +51,7 @@ struct WeeklyReviewScreen: View {
                         state: DegradedStateOrchestrator.unavailable(surface: "Weekly Review"),
                         primaryAccessibilityIdentifier: "weekly-review.retry-button",
                         onPrimaryAction: {
-                            Task { await viewModel.refresh(using: container.planService) }
+                            Task { await viewModel.refresh(using: container.timeService) }
                         }
                     )
                 case let .loaded(dashboard):
@@ -63,7 +63,7 @@ struct WeeklyReviewScreen: View {
                             state: DegradedStateOrchestrator.weeklyReviewEmpty(),
                             primaryAccessibilityIdentifier: "weekly-review.empty.return-plan",
                             onPrimaryAction: {
-                                container.navigation.resetPlanPath()
+                                container.navigation.resetTimePath()
                             }
                         )
                     } else {
@@ -98,7 +98,7 @@ struct WeeklyReviewScreen: View {
                     }
 
                     Button {
-                        container.navigation.resetPlanPath()
+                        container.navigation.resetTimePath()
                     } label: {
                         HStack(alignment: .center, spacing: theme.spacing.sm) {
                             Image(systemName: "arrow.left")
@@ -115,7 +115,7 @@ struct WeeklyReviewScreen: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .buttonStyle(AmbitionButtonStyle(tier: .hero, state: .selected))
-                    .accessibilityIdentifier("weekly-review.return-to-plan")
+                    .accessibilityIdentifier("weekly-review.return-to-time")
                 }
             }
             .padding(.horizontal, theme.spacing.lg)
@@ -124,12 +124,12 @@ struct WeeklyReviewScreen: View {
         .scrollIndicators(.hidden)
         .navigationTitle("Weekly Review")
         .refreshable {
-            await viewModel.refresh(using: container.planService)
+            await viewModel.refresh(using: container.timeService)
         }
         .accessibilityIdentifier("weekly-review.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
-            await viewModel.load(using: container.planService)
+            await viewModel.load(using: container.timeService)
         }
     }
 

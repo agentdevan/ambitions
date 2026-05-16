@@ -21,7 +21,7 @@ struct TodayExecutionProjector {
         let hero = heroState(input)
         let contract = contractEntries(input, hero: hero)
         let friction = frictionSignal(input)
-        let todayPlan = todayPlanLayer(input, hero: hero)
+        let todayTime = todayTimeLayer(input, hero: hero)
         let oneStepGoals = oneStepGoalsPanel(input)
         let saveTheDay = saveTheDayAction(input, hero: hero)
         let support = supportingPanels(input)
@@ -36,10 +36,10 @@ struct TodayExecutionProjector {
             saveTheDay,
             friction.action,
         ].compactMap { $0 }
-        let planActions = todayPlan.items.compactMap(\.action) + [
-            todayPlan.moveAction,
-            todayPlan.parkAction,
-            todayPlan.markDoneAction,
+        let planActions = todayTime.items.compactMap(\.action) + [
+            todayTime.moveAction,
+            todayTime.parkAction,
+            todayTime.markDoneAction,
         ].compactMap { $0 }
         let oneStepGoalActions = oneStepGoals.previews.compactMap(\.action)
         let supportActions = support.compactMap(\.action)
@@ -57,7 +57,7 @@ struct TodayExecutionProjector {
                 input,
                 hero: hero,
                 contract: contract,
-                todayPlan: todayPlan,
+                todayTime: todayTime,
                 friction: friction
             ),
             activeLens: activeLens,
@@ -74,7 +74,7 @@ struct TodayExecutionProjector {
             saveTheDayAction: saveTheDay,
             frictionSignal: friction,
             hero: hero,
-            todayPlanLayer: todayPlan,
+            todayTimeLayer: todayTime,
             oneStepGoalsPanel: oneStepGoals,
             supportingPanels: [friction] + Array(support.filter { $0.id != friction.id }.prefix(1)),
             deeperSections: deeper,
@@ -83,7 +83,7 @@ struct TodayExecutionProjector {
                 explanations: input.explanations,
                 recoveryOptionID: input.resilienceAssessment.recommendedRecoveryOptionID
             ),
-            planRequestsCalendarPermission: false,
+            timeRequestsCalendarPermission: false,
             emptyGuidance: input.mode == .empty ? emptyGuidance(input) : nil
         )
     }
@@ -94,12 +94,12 @@ private extension TodayExecutionProjector {
         _ input: TodayExecutionProjectionInput,
         hero: TodayExecutionHeroState,
         contract: ContractEntries,
-        todayPlan: TodayPlanLayerState,
+        todayTime: TodayTimeLayerState,
         friction: TodayExecutionPanelState
     ) -> AmbitionsDayRailViewState {
         let privacy = DayRailPrivacyProjectionState(classification: input.nowState.privacy)
         let sourceLabels = dayRailSourceLabels(input, source: todayPlan.calendarSourceLabel)
-        let publicSource = sourceLabels.first ?? DayRailSourceLabelState(id: "source.plan", label: "Based on your plan", source: .standard)
+        let publicSource = sourceLabels.first ?? DayRailSourceLabelState(id: "source.time", label: "Based on your Time", source: .standard)
         let heroAction = hero.primaryAction
         let detailTarget = DayRailDetailTargetState.from(heroAction)
         let duration = DayRailDurationState.placeholder(for: heroAction)
@@ -119,13 +119,13 @@ private extension TodayExecutionProjector {
             becauseLine: "Because \(heroBecause)",
             contextEdge: StartHereContextEdgeState(
                 title: "Context edge",
-                summary: privacy.visibleSubtitle("\(lensSummary(input.nowState)) \(todayPlan.openWindowLabel)"),
+                summary: privacy.visibleSubtitle("\(lensSummary(input.nowState)) \(todayTime.openWindowLabel)"),
                 sourceLabel: sourceSummary
             ),
             timeFitProof: StartHereTimeFitProofState(
                 title: "Time fit",
                 summary: duration.label,
-                detail: "\(fitLabel(for: hero)) from the current plan shape."
+                detail: "\(fitLabel(for: hero)) from the current Time shape."
             ),
             goalThread: StartHereGoalThreadState(
                 title: "Goal thread",
@@ -147,7 +147,7 @@ private extension TodayExecutionProjector {
         )
 
         let rows = DayRailRowState.rows(
-            from: todayPlan.items,
+            from: todayTime.items,
             fallbackHero: heroStep,
             privacy: privacy,
             source: publicSource
@@ -171,7 +171,7 @@ private extension TodayExecutionProjector {
             id: "day-rail.\(input.nowState.id)",
             mode: mode,
             dateTitle: "Today",
-            contextSummary: privacy.visibleSubtitle("\(lensSummary(input.nowState)) \(todayPlan.openWindowLabel)"),
+            contextSummary: privacy.visibleSubtitle("\(lensSummary(input.nowState)) \(todayTime.openWindowLabel)"),
             heroStep: heroStep,
             rows: rows,
             primaryAction: input.mode == .empty ? nil : heroAction,
@@ -203,7 +203,7 @@ private extension TodayExecutionProjector {
 
     func dayRailSourceLabels(_ input: TodayExecutionProjectionInput, source: String) -> [DayRailSourceLabelState] {
         var labels = [
-            DayRailSourceLabelState(id: "source.plan", label: source, source: input.nowState.privacy),
+            DayRailSourceLabelState(id: "source.time", label: source, source: input.nowState.privacy),
             DayRailSourceLabelState(id: "source.lens", label: input.nowState.activeContextLens.displayTitle, source: .standard),
         ]
         if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
@@ -220,12 +220,12 @@ private extension TodayExecutionProjector {
             return "Private source"
         }
         if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
-            return "Plan source with calendar awareness"
+            return "Time source with calendar awareness"
         }
         if input.nowState.localOnly {
             return "Local source on this device"
         }
-        return sourceSummary.isEmpty ? "Source needs review" : "Source-backed by current plan"
+        return sourceSummary.isEmpty ? "Source needs review" : "Source-backed by current Time"
     }
 
     func fitLabel(for hero: TodayExecutionHeroState) -> String {
@@ -259,8 +259,8 @@ private extension TodayExecutionProjector {
                 semanticState: .capture,
                 confidenceLabel: "Low data",
                 primaryAction: action,
-                secondaryActions: [openPlanAction()],
-                explanation: TodayExplanationAffordanceState(id: "today2.empty.why", title: "Why?", summary: "There is not enough local goal or capture data to choose a recommended step yet.", explanationID: nil, state: .default),
+                secondaryActions: [openTimeAction()],
+                explanation: TodayExplanationAffordanceState(id: "today2.empty.why", title: "Why?", summary: "There is not enough local goal or capture data to choose a recommended Time yet.", explanationID: nil, state: .default),
                 smallestUsefulNextStep: "Capture one thing.",
                 accessibilityLabel: "Today daily contract. Start with one real thing.",
                 accessibilityValue: "Empty state"
@@ -324,7 +324,7 @@ private extension TodayExecutionProjector {
             value: protectedSummary == nil && input.mode == .empty ? "No must-do yet" : "Kept on today",
             semanticState: .protected,
             action: protectedSummary?.relatedGoalID.map {
-                TodayInlineAction(kind: .openPlan, title: "Open Time", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: $0))
+                TodayInlineAction(kind: .openTime, title: "Open Time", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: $0))
             } ?? hero.primaryAction,
             explanation: explanation(input, preferred: input.nowState.nextActionExplanationID, fallbackTitle: "Why this?")
         )
@@ -387,7 +387,7 @@ private extension TodayExecutionProjector {
 
     func recoveryFallbackEntry(_ input: TodayExecutionProjectionInput, hero: TodayExecutionHeroState) -> TodayContractEntryState {
         let option = input.resilienceAssessment.recommendedRecoveryOption
-        let action = option.map { self.action(for: $0, fallback: hero.primaryAction) } ?? openPlanAction(title: "Make smaller")
+        let action = option.map { self.action(for: $0, fallback: hero.primaryAction) } ?? openTimeAction(title: "Make smaller")
         return TodayContractEntryState(
             id: "today2.contract.fallback",
             kind: .recoveryFallback,
@@ -406,7 +406,7 @@ private extension TodayExecutionProjector {
             let action = action(for: option, fallback: hero.primaryAction)
             return TodayInlineAction(kind: action.kind, title: "Save the day", systemImage: "arrow.uturn.backward.circle", state: .selected, target: action.target)
         }
-        return TodayInlineAction(kind: .openPlan, title: "Save the day", systemImage: "arrow.uturn.backward.circle", state: .default, target: TodayActionTarget())
+        return TodayInlineAction(kind: .openTime, title: "Save the day", systemImage: "arrow.uturn.backward.circle", state: .default, target: TodayActionTarget())
     }
 
     func frictionSignal(_ input: TodayExecutionProjectionInput) -> TodayExecutionPanelState {
@@ -418,7 +418,7 @@ private extension TodayExecutionProjector {
                 subtitle: input.resilienceAssessment.recommendedRecoveryOption?.summary.todayShortSentence ?? "Recovery is the dominant signal.",
                 value: recoveryLabel(input.resilienceAssessment.status),
                 semanticState: .recovery,
-                action: openPlanAction(),
+                action: openTimeAction(),
                 explanation: explanation(input, preferred: input.resilienceAssessment.recommendedRecoveryOption?.relatedExplanationID, fallbackTitle: "Why recover?")
             )
         }
@@ -430,7 +430,7 @@ private extension TodayExecutionProjector {
                 subtitle: input.nowState.urgentOutsideLens.summary.todayShortSentence,
                 value: "\(input.nowState.urgentOutsideLens.count) outside",
                 semanticState: .caution,
-                action: openPlanAction(title: "View all"),
+                action: openTimeAction(title: "View all"),
                 explanation: nil
             )
         }
@@ -454,7 +454,7 @@ private extension TodayExecutionProjector {
                 subtitle: input.nowState.schedulePressure.summary.todayShortSentence,
                 value: pressureLabel(input.nowState.schedulePressure.level),
                 semanticState: .protected,
-                action: openPlanAction(),
+                action: openTimeAction(),
                 explanation: nil
             )
         }
@@ -470,10 +470,10 @@ private extension TodayExecutionProjector {
         )
     }
 
-    func todayPlanLayer(_ input: TodayExecutionProjectionInput, hero: TodayExecutionHeroState) -> TodayPlanLayerState {
-        var items: [TodayPlanLayerItemState] = input.legacySupport.fixedCommitments.items.prefix(3).map {
-            TodayPlanLayerItemState(
-                id: "today2.plan.fixed.\($0.id)",
+    func todayTimeLayer(_ input: TodayExecutionProjectionInput, hero: TodayExecutionHeroState) -> TodayTimeLayerState {
+        var items: [TodayTimeLayerItemState] = input.legacySupport.fixedCommitments.items.prefix(3).map {
+            TodayTimeLayerItemState(
+                id: "today2.time.fixed.\($0.id)",
                 title: $0.title.shortened(maxLength: 48),
                 subtitle: $0.subtitle.todayShortSentence,
                 timingLabel: $0.label,
@@ -485,12 +485,12 @@ private extension TodayExecutionProjector {
 
         if items.count < 3 {
             let flexibleItems = input.legacySupport.flexibleRoom.items.prefix(3 - items.count).map {
-                TodayPlanLayerItemState(
-                    id: "today2.plan.flexible.\($0.id)",
+                TodayTimeLayerItemState(
+                    id: "today2.time.flexible.\($0.id)",
                     title: $0.title.shortened(maxLength: 48),
                     subtitle: $0.subtitle.todayShortSentence,
                     timingLabel: $0.label,
-                    sourceLabel: "Based on your plan",
+                    sourceLabel: "Based on your Time",
                     semanticState: .trust,
                     action: $0.action
                 )
@@ -500,12 +500,12 @@ private extension TodayExecutionProjector {
 
         if items.isEmpty, input.mode != .empty {
             items.append(
-                TodayPlanLayerItemState(
-                    id: "today2.plan.best-next",
+                TodayTimeLayerItemState(
+                    id: "today2.time.best-next",
                     title: hero.smallestUsefulNextStep?.shortened(maxLength: 48) ?? hero.title,
                     subtitle: hero.subtitle.todayShortSentence,
                     timingLabel: "Now",
-                    sourceLabel: "Based on your plan",
+                    sourceLabel: "Based on your Time",
                     semanticState: hero.semanticState,
                     action: hero.primaryAction
                 )
@@ -513,14 +513,14 @@ private extension TodayExecutionProjector {
         }
 
         let compactTimeline = items.isEmpty
-            ? "No fixed plan yet"
+            ? "No fixed Time yet"
             : items.map(\.timingLabel).prefix(3).joined(separator: " / ")
         let openWindow = input.realitySnapshot?.openWindowCandidates.first?.fitSummary.todayShortSentence
             ?? input.legacySupport.timeAperture.bestUseTitle
         let source = calendarSourceLabel(input)
         let moveAction = TodayInlineAction(
-            kind: .openPlan,
-            title: "Adjust plan",
+            kind: .openTime,
+            title: "Adjust Time",
             systemImage: "arrow.right.arrow.left",
             state: .default,
             target: hero.primaryAction.target
@@ -539,7 +539,7 @@ private extension TodayExecutionProjector {
             state: .success,
             target: hero.primaryAction.target
         )
-        return TodayPlanLayerState(
+        return TodayTimeLayerState(
             title: "Today schedule",
             subtitle: items.isEmpty ? "Start with one real step." : "The planned day stays visible.",
             compactTimelineLabel: compactTimeline,
@@ -551,7 +551,7 @@ private extension TodayExecutionProjector {
             markDoneAction: markDoneAction,
             accessibilityLabel: "Today schedule",
             accessibilityValue: items.isEmpty
-                ? "No fixed plan yet. \(source). \(openWindow)."
+                ? "No fixed Time yet. \(source). \(openWindow)."
                 : "\(items.count) planned item\(items.count == 1 ? "" : "s"). \(compactTimeline). \(source). \(openWindow).",
             accessibilityHint: "Shows the planned day and visible buttons to start, adjust, park, or mark done without requesting calendar access here."
         )
@@ -569,7 +569,7 @@ private extension TodayExecutionProjector {
                 statusLabel: summary.status.displayName,
                 semanticState: oneStepGoalSemanticState(summary.status),
                 action: TodayInlineAction(
-                    kind: .openPlan,
+                    kind: .openTime,
                     title: "Review",
                     systemImage: "arrow.right.circle",
                     state: .default,
@@ -586,7 +586,7 @@ private extension TodayExecutionProjector {
             emptyMessage: "No One-Step Goals on Today",
             accessibilityLabel: "One-Step Goals",
             accessibilityValue: total == 0 ? "No standalone task is pulling on Today." : "\(total) open standalone task\(total == 1 ? "" : "s").",
-            accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Plans."
+            accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Time."
         )
     }
 
@@ -649,13 +649,13 @@ private extension TodayExecutionProjector {
                     subtitle: input.nowState.urgentOutsideLens.summary.todayShortSentence,
                     value: "\(input.nowState.urgentOutsideLens.count) item\(input.nowState.urgentOutsideLens.count == 1 ? "" : "s")",
                     semanticState: .caution,
-                    action: TodayInlineAction(kind: .openPlan, title: "View all", systemImage: "square.grid.2x2", state: .default, target: TodayActionTarget()),
+                    action: TodayInlineAction(kind: .openTime, title: "View all", systemImage: "square.grid.2x2", state: .default, target: TodayActionTarget()),
                     explanation: nil
                 )
             )
         }
         panels.append(capturePanel(input))
-        panels.append(planPanel(input))
+        panels.append(timePanel(input))
         if panels.count < 2 {
             panels.append(priorityPanel(input))
         }
@@ -688,19 +688,19 @@ private extension TodayExecutionProjector {
         )
     }
 
-    func planPanel(_ input: TodayExecutionProjectionInput) -> TodayExecutionPanelState {
+    func timePanel(_ input: TodayExecutionProjectionInput) -> TodayExecutionPanelState {
         let summary = input.realitySnapshot?.availability.summary ?? input.nowState.schedulePressure.summary
         let calendarLine = input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true
             ? "Calendar-aware and local."
-            : "Plan works without calendar access."
+            : "Time works without calendar access."
         return TodayExecutionPanelState(
-            id: "today2.plan",
-            kind: .plan,
-            title: planTitle(input.nowState.schedulePressure.level),
+            id: "today2.time",
+            kind: .time,
+            title: timeTitle(input.nowState.schedulePressure.level),
             subtitle: "\(summary.todayShortSentence) \(calendarLine)",
             value: pressureLabel(input.nowState.schedulePressure.level),
             semanticState: .calendarDerived,
-            action: openPlanAction(),
+            action: openTimeAction(),
             explanation: nil
         )
     }
@@ -712,7 +712,7 @@ private extension TodayExecutionProjector {
         if input.realitySnapshot?.scheduledBlocks.isEmpty == false {
             return "Created in Ambitions"
         }
-        return "Based on your plan"
+        return "Based on your Time"
     }
 
     func oneStepGoalSubtitle(_ summary: OneStepGoalSummary) -> String {
@@ -770,7 +770,7 @@ private extension TodayExecutionProjector {
 
     func recoveryDetailPanels(_ input: TodayExecutionProjectionInput) -> [TodayExecutionPanelState] {
         var protected = input.resilienceAssessment.protectedHighPriorityWork.prefix(1).map {
-            TodayExecutionPanelState(id: "today2.protected.\($0.id)", kind: .recovery, title: "Kept in view", subtitle: $0.summary.todayShortSentence, value: $0.title.shortened(maxLength: 24), semanticState: .protected, action: openPlanAction(), explanation: nil)
+            TodayExecutionPanelState(id: "today2.protected.\($0.id)", kind: .recovery, title: "Kept in view", subtitle: $0.summary.todayShortSentence, value: $0.title.shortened(maxLength: 24), semanticState: .protected, action: openTimeAction(), explanation: nil)
         }
         if protected.isEmpty, input.nowState.deadlinePressure.level != .none {
             protected = [
@@ -781,7 +781,7 @@ private extension TodayExecutionProjector {
                     subtitle: input.nowState.deadlinePressure.summary.todayShortSentence,
                     value: pressureLabel(input.nowState.deadlinePressure.level),
                     semanticState: .protected,
-                    action: openPlanAction(),
+                    action: openTimeAction(),
                     explanation: nil
                 ),
             ]
@@ -820,8 +820,8 @@ private extension TodayExecutionProjector {
             return TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target)
         case .openGoal:
             return TodayInlineAction(kind: .openDetail, title: "Open Goal", systemImage: "arrow.right.circle", state: .default, target: target)
-        case .openPlan, .schedule:
-            return openPlanAction()
+        case .openTime, .schedule:
+            return openTimeAction()
         case .capture, .routeCommitment:
             return TodayInlineAction(kind: .quickLog, title: "Open Capture", systemImage: "tray.and.arrow.down", state: .selected, target: target)
         case .recover:
@@ -829,7 +829,7 @@ private extension TodayExecutionProjector {
         case .explain:
             return TodayInlineAction(kind: .askWhyThisMatters, title: "Why this?", systemImage: "questionmark.circle", state: .default, target: target)
         case .wait:
-            return TodayInlineAction(kind: .openPlan, title: "View waiting", systemImage: "hourglass", state: .default, target: target)
+            return TodayInlineAction(kind: .openTime, title: "View waiting", systemImage: "hourglass", state: .default, target: target)
         case .review, .none:
             return nil
         }
@@ -839,8 +839,8 @@ private extension TodayExecutionProjector {
         guard let option else { return fallback }
         let target = TodayActionTarget(goalID: option.relatedGoalID, draftID: nil)
         switch option.strategy {
-        case .openPlan, .protectDeadlineWork, .rescheduleLater, .acceptSlip:
-            return TodayInlineAction(kind: .openPlan, title: "Open Time", systemImage: "calendar", state: .selected, target: target)
+        case .openTime, .protectDeadlineWork, .rescheduleLater, .acceptSlip:
+            return TodayInlineAction(kind: .openTime, title: "Open Time", systemImage: "calendar", state: .selected, target: target)
         case .openCapture, .clarifyNextStep, .askForDecision:
             return TodayInlineAction(kind: .quickLog, title: "Open Capture", systemImage: "tray.and.arrow.down", state: .selected, target: target)
         case .openGoal, .reduceScope:
@@ -850,19 +850,19 @@ private extension TodayExecutionProjector {
         case .deferPassiveWork, .keepAsSomeday:
             return TodayInlineAction(kind: .defer, title: "Let it wait", systemImage: "clock", state: .default, target: target)
         case .moveToWaiting:
-            return TodayInlineAction(kind: .openPlan, title: "Keep waiting", systemImage: "hourglass", state: .default, target: target)
+            return TodayInlineAction(kind: .openTime, title: "Keep waiting", systemImage: "hourglass", state: .default, target: target)
         }
     }
 
     func secondaryRecoveryActions(_ input: TodayExecutionProjectionInput, primary: TodayInlineAction) -> [TodayInlineAction] {
         let optionActions = input.resilienceAssessment.recoveryOptions.map { action(for: $0, fallback: primary) }
-        return unique(optionActions + [openPlanAction(), TodayInlineAction(kind: .askWhyThisMatters, title: "Why recover?", systemImage: "questionmark.circle", state: .default, target: primary.target)], excluding: primary)
+        return unique(optionActions + [openTimeAction(), TodayInlineAction(kind: .askWhyThisMatters, title: "Why recover?", systemImage: "questionmark.circle", state: .default, target: primary.target)], excluding: primary)
     }
 
     func secondaryStableActions(_ input: TodayExecutionProjectionInput, primary: TodayInlineAction) -> [TodayInlineAction] {
         unique([
             TodayInlineAction(kind: .askWhyThisMatters, title: "Why this?", systemImage: "questionmark.circle", state: .default, target: primary.target),
-            openPlanAction(),
+            openTimeAction(),
             input.legacySupport.quickCaptureAction,
         ].compactMap { $0 }, excluding: primary)
     }
@@ -872,8 +872,8 @@ private extension TodayExecutionProjector {
         return actions.filter { seen.insert($0.id).inserted }.prefix(3).map { $0 }
     }
 
-    func openPlanAction(title: String = "Open Time") -> TodayInlineAction {
-        TodayInlineAction(kind: .openPlan, title: title, systemImage: "calendar", state: .default, target: TodayActionTarget())
+    func openTimeAction(title: String = "Open Time") -> TodayInlineAction {
+        TodayInlineAction(kind: .openTime, title: title, systemImage: "calendar", state: .default, target: TodayActionTarget())
     }
 
     func explanation(_ input: TodayExecutionProjectionInput, preferred: String?, fallbackTitle: String) -> TodayExplanationAffordanceState? {
@@ -933,14 +933,14 @@ private extension TodayExecutionProjector {
         }
     }
 
-    func planTitle(_ level: NowPressureLevel) -> String {
+    func timeTitle(_ level: NowPressureLevel) -> String {
         switch level {
         case .none, .low:
-            "Plan has room"
+            "Time has room"
         case .moderate:
-            "Plan is getting tight"
+            "Time is getting tight"
         case .elevated, .high, .critical:
-            "Plan needs attention"
+            "Time needs attention"
         }
     }
 }

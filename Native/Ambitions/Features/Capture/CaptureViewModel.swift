@@ -183,10 +183,10 @@ final class CaptureViewModel {
         }
     }
 
-    func routeToPlan(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
+    func routeToTime(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
         _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            _ = try await captureService.routeToPlanSeed(id: id, now: now)
-            actionMessage = CaptureActionMessage(title: "Saved as Task · Today", body: "This can become plan work later; no calendar event was created.")
+            _ = try await captureService.routeToTimeSeed(id: id, now: now)
+            actionMessage = CaptureActionMessage(title: "Saved as Task · Today", body: "This can become time work later; no calendar event was created.")
             return nil
         }
     }

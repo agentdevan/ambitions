@@ -109,14 +109,14 @@ extension TodayExecutionViewState {
             action: support.quickCaptureAction,
             explanation: nil
         )
-        let planPanel = TodayExecutionPanelState(
-            id: "today2.plan",
-            kind: .plan,
+        let timePanel = TodayExecutionPanelState(
+            id: "today2.time",
+            kind: .time,
             title: "Schedule guidance",
             subtitle: support.timeAperture.pressure.detail.todayShortSentence,
             value: support.timeAperture.pressure.label,
             semanticState: .calendarDerived,
-            action: support.planAction,
+            action: support.timeAction,
             explanation: nil
         )
         let friction = TodayExecutionPanelState(
@@ -126,35 +126,35 @@ extension TodayExecutionViewState {
             subtitle: support.timeAperture.pressure.detail.todayShortSentence,
             value: support.timeAperture.pressure.label,
             semanticState: semanticState(for: hero.truth.posture),
-            action: support.planAction,
+            action: support.timeAction,
             explanation: nil
         )
         let planItems = support.fixedCommitments.items.prefix(3).map {
-            TodayPlanLayerItemState(
-                id: "today2.plan.compat.\($0.id)",
+            TodayTimeLayerItemState(
+                id: "today2.time.compat.\($0.id)",
                 title: $0.title.shortened(maxLength: 48),
                 subtitle: $0.subtitle.todayShortSentence,
                 timingLabel: $0.label,
-                sourceLabel: "Based on your plan",
+                sourceLabel: "Based on your Time",
                 semanticState: semanticState(for: hero.truth.posture),
                 action: $0.action ?? primary
             )
         }
         let timeline = planItems.isEmpty
-            ? "No fixed plan yet"
+            ? "No fixed Time yet"
             : planItems.map(\.timingLabel).prefix(3).joined(separator: " / ")
-        let todayPlanLayer = TodayPlanLayerState(
+        let todayTimeLayer = TodayTimeLayerState(
             title: "Today schedule",
             subtitle: planItems.isEmpty ? "Start with one real step." : "The planned day stays visible.",
             compactTimelineLabel: timeline,
             openWindowLabel: support.timeAperture.bestUseTitle,
-            calendarSourceLabel: "Based on your plan",
+            calendarSourceLabel: "Based on your Time",
             items: Array(planItems),
-            moveAction: TodayInlineAction(kind: .openPlan, title: "Adjust time", systemImage: "arrow.right.arrow.left", state: .default, target: primary.target),
+            moveAction: TodayInlineAction(kind: .openTime, title: "Adjust time", systemImage: "arrow.right.arrow.left", state: .default, target: primary.target),
             parkAction: TodayInlineAction(kind: .defer, title: "Park / Not Today", systemImage: "pause.circle", state: .default, target: primary.target),
             markDoneAction: primary.kind == .complete ? primary : TodayInlineAction(kind: .complete, title: "Mark Done", systemImage: "checkmark.circle", state: .success, target: primary.target),
             accessibilityLabel: "Today schedule",
-            accessibilityValue: planItems.isEmpty ? "No fixed plan yet." : "\(planItems.count) planned item\(planItems.count == 1 ? "" : "s"). \(timeline).",
+            accessibilityValue: planItems.isEmpty ? "No fixed Time yet." : "\(planItems.count) planned item\(planItems.count == 1 ? "" : "s"). \(timeline).",
             accessibilityHint: "Shows the planned day without requesting calendar access here."
         )
         let oneStepGoalsPanel = TodayOneStepGoalsPanelState(
@@ -165,14 +165,14 @@ extension TodayExecutionViewState {
             emptyMessage: "No One-Step Goals on Today",
             accessibilityLabel: "One-Step Goals",
             accessibilityValue: "No standalone task is pulling on Today.",
-            accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Plans."
+            accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Time."
         )
         let dayRail = AmbitionsDayRailViewState.compatibility(
             mode: mode,
             hero: executionHero,
-            todayPlanLayer: todayPlanLayer,
+            todayTimeLayer: todayTimeLayer,
             closure: closure,
-            sourceLabel: "Based on your plan"
+            sourceLabel: "Based on your Time"
         )
         return TodayExecutionViewState(
             dayRail: dayRail,
@@ -187,15 +187,15 @@ extension TodayExecutionViewState {
             recoveryFallback: fallback,
             whyThisMatters: why,
             actionClosureEntry: closure,
-            saveTheDayAction: support.recoveryBloom?.options.first?.action ?? support.planAction,
+            saveTheDayAction: support.recoveryBloom?.options.first?.action ?? support.timeAction,
             frictionSignal: friction,
             hero: executionHero,
-            todayPlanLayer: todayPlanLayer,
+            todayTimeLayer: todayTimeLayer,
             oneStepGoalsPanel: oneStepGoalsPanel,
-            supportingPanels: [capturePanel, planPanel],
+            supportingPanels: [capturePanel, timePanel],
             deeperSections: [],
-            commandMappings: commandMappings(for: [primary] + hero.primaryAction.supportingActions + [support.quickCaptureAction, support.planAction].compactMap { $0 }, explanations: [], recoveryOptionID: nil),
-            planRequestsCalendarPermission: false,
+            commandMappings: commandMappings(for: [primary] + hero.primaryAction.supportingActions + [support.quickCaptureAction, support.timeAction].compactMap { $0 }, explanations: [], recoveryOptionID: nil),
+            timeRequestsCalendarPermission: false,
             emptyGuidance: mode == .empty ? capturePanel : nil
         )
     }
@@ -212,7 +212,7 @@ extension TodayExecutionViewState {
             .caution
         case .lowData:
             .trust
-        case .noPlan:
+        case .noTime:
             .capture
         }
     }
@@ -229,7 +229,7 @@ extension TodayExecutionViewState {
             .recovered
         case .overloaded:
             .atRisk
-        case .lowData, .noPlan:
+        case .lowData, .noTime:
             .clear
         }
     }
@@ -253,12 +253,12 @@ extension TodayExecutionViewState {
             saveTheDayAction: saveTheDayAction,
             frictionSignal: frictionSignal,
             hero: hero,
-            todayPlanLayer: todayPlanLayer,
+            todayTimeLayer: todayTimeLayer,
             oneStepGoalsPanel: oneStepGoalsPanel,
             supportingPanels: supportingPanels,
             deeperSections: deeperSections,
             commandMappings: commandMappings,
-            planRequestsCalendarPermission: planRequestsCalendarPermission,
+            timeRequestsCalendarPermission: timeRequestsCalendarPermission,
             emptyGuidance: emptyGuidance
         )
     }
@@ -302,9 +302,9 @@ extension TodayExecutionViewState {
         let destination: AmbitionsCommandDestination?
         let kind: AmbitionsCommandKind
         switch action.kind {
-        case .openPlan, .protectLater:
+        case .openTime, .protectLater:
             kind = .openDestination
-            destination = .plan
+            destination = .time
         case .quickLog:
             kind = .openDestination
             destination = .capture

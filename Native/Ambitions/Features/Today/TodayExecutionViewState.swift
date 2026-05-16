@@ -10,8 +10,8 @@ enum TodayExecutionHeroKind: String, Equatable {
 enum TodayExecutionPanelKind: String, Equatable {
     case contextLens
     case capture
-    case plan
-    case todayPlan
+    case time
+    case todayTime
     case oneStepGoals
     case priority
     case recovery
@@ -109,7 +109,7 @@ struct TodayExecutionDeepDiveState: Identifiable, Equatable {
     let rows: [TodayExecutionPanelState]
 }
 
-struct TodayPlanLayerItemState: Identifiable, Equatable {
+struct TodayTimeLayerItemState: Identifiable, Equatable {
     let id: String
     let title: String
     let subtitle: String
@@ -119,13 +119,13 @@ struct TodayPlanLayerItemState: Identifiable, Equatable {
     let action: TodayInlineAction?
 }
 
-struct TodayPlanLayerState: Equatable {
+struct TodayTimeLayerState: Equatable {
     let title: String
     let subtitle: String
     let compactTimelineLabel: String
     let openWindowLabel: String
     let calendarSourceLabel: String
-    let items: [TodayPlanLayerItemState]
+    let items: [TodayTimeLayerItemState]
     let moveAction: TodayInlineAction
     let parkAction: TodayInlineAction
     let markDoneAction: TodayInlineAction?
@@ -171,11 +171,11 @@ struct TodayExecutionViewState: Equatable {
     let saveTheDayAction: TodayInlineAction?
     let frictionSignal: TodayExecutionPanelState
     let hero: TodayExecutionHeroState
-    let todayPlanLayer: TodayPlanLayerState
+    let todayTimeLayer: TodayTimeLayerState
     let oneStepGoalsPanel: TodayOneStepGoalsPanelState
     let supportingPanels: [TodayExecutionPanelState]
     let deeperSections: [TodayExecutionDeepDiveState]
     let commandMappings: [TodayCommandMappingState]
-    let planRequestsCalendarPermission: Bool
+    let timeRequestsCalendarPermission: Bool
     let emptyGuidance: TodayExecutionPanelState?
 }

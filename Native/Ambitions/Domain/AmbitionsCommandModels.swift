@@ -9,7 +9,7 @@ enum AmbitionsCommandKind: String, Codable, Sendable, Equatable, Hashable, CaseI
     case createGoal = "create_goal"
     case updateGoal = "update_goal"
     case attachToGoal = "attach_to_goal"
-    case createPlanItem = "create_plan_item"
+    case createTimeItem = "create_time_item"
     case scheduleItem = "schedule_item"
     case startStepSession = "start_focus"
     case completeAction = "complete_action"
@@ -40,7 +40,7 @@ enum AmbitionsCommandSource: String, Codable, Sendable, Equatable, Hashable, Cas
     case today
     case goals
     case capture
-    case plan
+    case time
     case you
     case reviews
     case goalDetail = "goal_detail"
@@ -62,7 +62,7 @@ enum AmbitionsCommandDestination: String, Codable, Sendable, Equatable, Hashable
     case today
     case goals
     case capture
-    case plan
+    case time
     case you
     case reviews
     case goalDetail = "goal_detail"
@@ -75,7 +75,7 @@ enum AmbitionsCommandDestination: String, Codable, Sendable, Equatable, Hashable
 struct AmbitionsCommandRelations: Codable, Sendable, Equatable, Hashable {
     let goalIDs: [String]
     let captureIDs: [String]
-    let planIDs: [String]
+    let timeIDs: [String]
     let reviewIDs: [String]
     let eventLedgerEntryIDs: [String]
     let recommendationExplanationIDs: [String]
@@ -83,14 +83,14 @@ struct AmbitionsCommandRelations: Codable, Sendable, Equatable, Hashable {
     init(
         goalIDs: [String] = [],
         captureIDs: [String] = [],
-        planIDs: [String] = [],
+        timeIDs: [String] = [],
         reviewIDs: [String] = [],
         eventLedgerEntryIDs: [String] = [],
         recommendationExplanationIDs: [String] = []
     ) {
         self.goalIDs = Self.normalized(goalIDs)
         self.captureIDs = Self.normalized(captureIDs)
-        self.planIDs = Self.normalized(planIDs)
+        self.timeIDs = Self.normalized(timeIDs)
         self.reviewIDs = Self.normalized(reviewIDs)
         self.eventLedgerEntryIDs = Self.normalized(eventLedgerEntryIDs)
         self.recommendationExplanationIDs = Self.normalized(recommendationExplanationIDs)
@@ -104,7 +104,7 @@ struct AmbitionsCommandRelations: Codable, Sendable, Equatable, Hashable {
 struct AmbitionsCommandTarget: Codable, Sendable, Equatable, Hashable {
     let goalID: String?
     let captureID: String?
-    let planID: String?
+    let timeID: String?
     let reviewID: String?
     let stepID: String?
     let deliverableID: String?
@@ -116,7 +116,7 @@ struct AmbitionsCommandTarget: Codable, Sendable, Equatable, Hashable {
     init(
         goalID: String? = nil,
         captureID: String? = nil,
-        planID: String? = nil,
+        timeID: String? = nil,
         reviewID: String? = nil,
         stepID: String? = nil,
         deliverableID: String? = nil,
@@ -127,7 +127,7 @@ struct AmbitionsCommandTarget: Codable, Sendable, Equatable, Hashable {
     ) {
         self.goalID = Self.nonEmpty(goalID)
         self.captureID = Self.nonEmpty(captureID)
-        self.planID = Self.nonEmpty(planID)
+        self.timeID = Self.nonEmpty(timeID)
         self.reviewID = Self.nonEmpty(reviewID)
         self.stepID = Self.nonEmpty(stepID)
         self.deliverableID = Self.nonEmpty(deliverableID)
@@ -408,20 +408,20 @@ struct AmbitionsCommandValidator: Sendable {
             return command.target.goalID == nil ? .needsMissingTarget : .valid
         case .attachToGoal:
             return command.target.goalID == nil || command.target.captureID == nil ? .needsMissingTarget : .valid
-        case .createPlanItem:
+        case .createTimeItem:
             return command.payload.primaryText == nil ? .needsConfirmation : .valid
         case .scheduleItem:
             if command.payload.metadata["calendarWriteIntent"] == "true",
                command.payload.metadata["userConfirmed"] != "true" {
                 return .needsConfirmation
             }
-            return command.target.captureID == nil && command.target.planID == nil && command.payload.primaryText == nil ? .needsMissingTarget : .valid
+            return command.target.captureID == nil && command.target.timeID == nil && command.payload.primaryText == nil ? .needsMissingTarget : .valid
         case .startStepSession, .completeAction, .delayAction, .splitAction:
             return command.target.goalID == nil || command.target.stepID == nil ? .needsMissingTarget : .valid
         case .recoverAction:
-            return command.target.goalID == nil && command.target.captureID == nil && command.target.planID == nil ? .needsMissingTarget : .valid
+            return command.target.goalID == nil && command.target.captureID == nil && command.target.timeID == nil ? .needsMissingTarget : .valid
         case .markWaiting, .archiveItem:
-            return command.target.captureID == nil && command.target.goalID == nil && command.target.planID == nil ? .needsMissingTarget : .valid
+            return command.target.captureID == nil && command.target.goalID == nil && command.target.timeID == nil ? .needsMissingTarget : .valid
         case .setPriority:
             return command.payload.priorityHints.hasAnySignal == false ? .invalid : targetBacked(command)
         case .setUrgency:
@@ -429,9 +429,9 @@ struct AmbitionsCommandValidator: Sendable {
         case .prepareExport, .performExport:
             return .valid
         case .deleteObject:
-            return command.target.goalID == nil && command.target.captureID == nil && command.target.planID == nil && command.target.reviewID == nil ? .needsMissingTarget : .valid
+            return command.target.goalID == nil && command.target.captureID == nil && command.target.timeID == nil && command.target.reviewID == nil ? .needsMissingTarget : .valid
         case .forgetMemory:
-            return command.target.goalID == nil && command.target.captureID == nil && command.target.planID == nil && command.target.reviewID == nil ? .needsMissingTarget : .valid
+            return command.target.goalID == nil && command.target.captureID == nil && command.target.timeID == nil && command.target.reviewID == nil ? .needsMissingTarget : .valid
         case .setDeadline:
             return command.payload.deadlineText == nil && command.payload.priorityHints.deadline == nil ? .invalid : targetBacked(command)
         case .setContextLens:
@@ -456,7 +456,7 @@ struct AmbitionsCommandValidator: Sendable {
     }
 
     private func targetBacked(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
-        command.target.goalID == nil && command.target.captureID == nil && command.target.planID == nil
+        command.target.goalID == nil && command.target.captureID == nil && command.target.timeID == nil
             ? .needsMissingTarget
             : .valid
     }
@@ -486,7 +486,7 @@ extension AmbitionsCommand {
             destination = .goalDetail
         case .openPlan, .schedule:
             kind = .openDestination
-            destination = .plan
+            destination = .time
         case .capture:
             kind = .openDestination
             destination = .capture
@@ -514,7 +514,7 @@ extension AmbitionsCommand {
             target: AmbitionsCommandTarget(
                 goalID: action.reference?.goalID,
                 captureID: action.reference?.captureID,
-                planID: action.reference?.planID,
+                timeID: action.reference?.timeID,
                 reviewID: action.reference?.reviewID,
                 stepID: action.reference?.stepID,
                 explanationID: action.explanationID,
@@ -531,7 +531,7 @@ extension AmbitionsCommand {
             relations: AmbitionsCommandRelations(
                 goalIDs: [action.reference?.goalID].compactMap { $0 },
                 captureIDs: [action.reference?.captureID].compactMap { $0 },
-                planIDs: [action.reference?.planID].compactMap { $0 },
+                timeIDs: [action.reference?.timeID].compactMap { $0 },
                 reviewIDs: [action.reference?.reviewID].compactMap { $0 },
                 eventLedgerEntryIDs: action.eventLedgerEntryIDs,
                 recommendationExplanationIDs: [action.explanationID].compactMap { $0 }

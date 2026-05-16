@@ -264,7 +264,7 @@ private extension RepositoryBackedTodayService {
         actionableCount: Int
     ) -> TodayDayPosture {
         if mode == .empty {
-            return .noPlan
+            return .noTime
         }
         switch entryContext.normalized {
         case .recovery:
@@ -409,8 +409,8 @@ private extension RepositoryBackedTodayService {
             quickCaptureAction: quickCapture.actions.first,
             quickCaptureTitle: quickCapture.title,
             quickCaptureDetail: quickCapture.helpText,
-            planAction: TodayInlineAction(
-                kind: .openPlan,
+            timeAction: TodayInlineAction(
+                kind: .openTime,
                 title: "Open Time",
                 systemImage: "calendar",
                 state: .default,
@@ -542,7 +542,7 @@ private extension RepositoryBackedTodayService {
             actions.insert(
                 TodayInlineAction(
                     kind: .protectLater,
-                    title: "Adjust plan",
+                    title: "Adjust Time",
                     systemImage: "calendar.badge.clock",
                     state: .selected,
                     target: TodayActionTarget()
@@ -564,7 +564,7 @@ private extension RepositoryBackedTodayService {
         case .stable:
             return "One clear step matters more than another stack of cards."
         case .tight:
-            return action.kind == .protectLater ? "Adjust this in Plan before pressure turns noisy." : "Keep the day doable without widening scope."
+            return action.kind == .protectLater ? "Adjust this in Time before pressure turns noisy." : "Keep the day doable without widening scope."
         case .drifted:
             return "Use the calmest next step to get traction back."
         case .overloaded:
@@ -573,7 +573,7 @@ private extension RepositoryBackedTodayService {
             return "Come back through one safer lane, not a full reset."
         case .lowData:
             return "Clarify the next step before pretending certainty."
-        case .noPlan:
+        case .noTime:
             return "Start with one bounded step and let the shell own the bigger reshaping."
         }
     }
@@ -592,7 +592,7 @@ private extension RepositoryBackedTodayService {
             return "Recover through one believable step"
         case .lowData:
             return "Clarify the next step first"
-        case .noPlan:
+        case .noTime:
             return "Build today from one real step"
         }
     }
@@ -611,7 +611,7 @@ private extension RepositoryBackedTodayService {
             return heroDetail.isEmpty ? ritual.subtitle : heroDetail
         case .lowData:
             return heroDetail
-        case .noPlan:
+        case .noTime:
             return ritual.thesis
         }
     }
@@ -692,7 +692,7 @@ private extension RepositoryBackedTodayService {
             TodayTrustWhisperState(
                 title: pressure.label == "Needs confirmation" ? "May need confirmation" : "Based on",
                 detail: pressure.label == "Needs confirmation"
-                    ? "Time pressure is being inferred from current plan shape and may change as newer input lands."
+                    ? "Time pressure is being inferred from current Time shape and may change as newer input lands."
                     : summary.pathSummary,
                 state: pressure.state
             )
@@ -735,7 +735,7 @@ private extension RepositoryBackedTodayService {
             )
         case .drifted:
             return TodayDayPressureState(
-                title: "The day drifted off its first plan",
+                title: "The day drifted off its first Time",
                 detail: "Pressure is less about time volume and more about getting back to one believable step.",
                 label: "Needs recovery",
                 state: .warning
@@ -761,7 +761,7 @@ private extension RepositoryBackedTodayService {
                 label: "Needs confirmation",
                 state: .warning
             )
-        case .noPlan:
+        case .noTime:
             return TodayDayPressureState(
                 title: "Today has open room",
                 detail: fixedCount == 0
@@ -929,7 +929,7 @@ private extension RepositoryBackedTodayService {
         append(actions.first(where: { $0.kind == .protectLater }), title: "Adjust time", detail: "Put one cleaner block in Time instead of squeezing it here.", state: .default)
         append(
             TodayInlineAction(
-                kind: .openPlan,
+                kind: .openTime,
                 title: "Accept today's shape",
                 systemImage: "calendar",
                 state: .default,

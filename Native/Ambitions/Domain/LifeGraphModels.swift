@@ -350,7 +350,7 @@ enum LifeGraphSourceDomain: String, Codable, Sendable, Equatable, Hashable, Case
     case goals
     case goalEngine = "goal_engine"
     case capture
-    case plan
+    case time
     case today
     case you
     case eventLedger = "event_ledger"

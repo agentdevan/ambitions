@@ -65,7 +65,7 @@ enum ActionReceiptSourceDomain: String, Codable, Sendable, Equatable, Hashable, 
     case today
     case goals
     case capture
-    case plan
+    case time
     case you
     case reviews
     case goalDetail = "goal_detail"
@@ -87,8 +87,8 @@ enum ActionReceiptSourceDomain: String, Codable, Sendable, Equatable, Hashable, 
             return .goals
         case .capture:
             return .capture
-        case .plan:
-            return .plan
+        case .time:
+            return .time
         case .you, .reviews:
             return .you
         case .commandPipeline:
@@ -183,7 +183,7 @@ struct ActionReceiptChangedFact: Codable, Sendable, Equatable, Hashable, Identif
 
 enum ActionReceiptNextActionKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case openToday = "open_today"
-    case openPlan = "open_plan"
+    case openTime = "open_time"
     case reviewGoal = "review_goal"
     case correctAssumption = "correct_assumption"
     case undoIfAvailable = "undo_if_available"
@@ -1079,7 +1079,7 @@ extension ClosureState {
         case .awaitingClosure, .needsReview:
             ActionReceiptNextAction(kind: .openToday, title: "Close the loop", destination: .today)
         case .needsRecovery, .blocked:
-            ActionReceiptNextAction(kind: .openPlan, title: "Adjust plan", destination: .plan)
+            ActionReceiptNextAction(kind: .openTime, title: "Adjust plan", destination: .timeRoute(.captureInbox))
         case .completed, .stillCounts, .moved, .skippedIntentionally, .notNeeded, .waiting, .now, .next, .later:
             nil
         }
@@ -1447,8 +1447,8 @@ extension ActionReceipt {
         switch result.route {
         case .today:
             return ActionReceiptNextAction(kind: .openToday, title: "Open Today", destination: .today)
-        case .plan:
-            return ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan)
+        case .time:
+            return ActionReceiptNextAction(kind: .openTime, title: "Open Time", destination: .timeRoute(.captureInbox))
         case .goalDetail, .goals:
             return ActionReceiptNextAction(kind: .reviewGoal, title: "Review goal", destination: result.route)
         case .capture, .captureInbox:
@@ -1486,7 +1486,7 @@ extension ActionReceipt {
         case .capture:
             return .capture
         case .plan:
-            return .plan
+            return .time
         case .you:
             return .you
         case .reviews:

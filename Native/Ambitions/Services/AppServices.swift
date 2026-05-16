@@ -83,7 +83,7 @@ protocol CaptureServicing: Sendable {
     func markAsDeliverableSeed(id: String, deliverableHint: String?, now: Date) async throws -> Capture?
     func markAsWaiting(id: String, waitingMetadata: CaptureWaitingMetadata?, now: Date) async throws -> Capture?
     func markAsOptionalSomeday(id: String, now: Date) async throws -> Capture?
-    func routeToPlanSeed(id: String, now: Date) async throws -> Capture?
+    func routeToTimeSeed(id: String, now: Date) async throws -> Capture?
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding?
     func turnCaptureIntoGoal(_ request: TurnCaptureIntoGoalRequest, now: Date) async throws -> CaptureGoalBinding?
     func markCaptureProcessed(id: String, now: Date) async throws -> Capture?
@@ -291,7 +291,7 @@ struct StubCaptureService: CaptureServicing {
         return captures.first(where: { $0.id == id })
     }
 
-    func routeToPlanSeed(id: String, now: Date) async throws -> Capture? {
+    func routeToTimeSeed(id: String, now: Date) async throws -> Capture? {
         _ = now
         return captures.first(where: { $0.id == id })
     }

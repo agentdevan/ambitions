@@ -80,7 +80,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
             ShellExternalBrainCommandContract(
                 intent: self,
                 commandKind: .quickCapture,
-                destination: .planRoute(.captureInbox),
+                destination: .timeRoute(.captureInbox),
                 sourceOfTruth: "Capture",
                 safetySummary: "Creates a local capture with source context and a receipt.",
                 fallbackSummary: "If capture persistence is unavailable, leave the command blocked.",
@@ -100,7 +100,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
             ShellExternalBrainCommandContract(
                 intent: self,
                 commandKind: .openDestination,
-                destination: .tab(.plan),
+                destination: .tab(.time),
                 sourceOfTruth: "Time",
                 safetySummary: "Routes to Time without writing calendar or reshaping the week.",
                 fallbackSummary: "If route context is missing, open Time root."
@@ -127,7 +127,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
             ShellExternalBrainCommandContract(
                 intent: self,
                 commandKind: .openDestination,
-                destination: .planRoute(.captureInbox),
+                destination: .timeRoute(.captureInbox),
                 sourceOfTruth: "Capture",
                 safetySummary: "Opens Capture without mutating saved captures.",
                 fallbackSummary: "If capture context is missing, open Capture root."
@@ -224,7 +224,7 @@ enum ShellCommandPresentationContext: String, Hashable, Sendable, Codable {
     case recall
     case recovery
     case focus
-    case plan
+    case time
 }
 
 struct ShellOverlayState: Hashable, Identifiable, Sendable, Codable {
@@ -371,7 +371,7 @@ struct ShellContinuityReceipt: Hashable, Identifiable, Sendable, Codable {
 enum ShellCommandDestination: Hashable, Sendable {
     case tab(AppTab)
     case goal(String)
-    case planRoute(PlanRouteTarget)
+    case timeRoute(TimeRouteTarget)
     case insightsRoute(InsightsRouteTarget)
     case overlay(ShellOverlayState)
 
@@ -381,7 +381,7 @@ enum ShellCommandDestination: Hashable, Sendable {
             tab.title
         case .goal:
             "Goal Detail"
-        case let .planRoute(target):
+        case let .timeRoute(target):
             switch target {
             case .captureInbox: "Capture"
             case .habits: "Rituals"

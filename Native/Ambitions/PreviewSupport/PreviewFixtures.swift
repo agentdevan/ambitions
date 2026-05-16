@@ -131,7 +131,7 @@ struct PreviewFixtures: Sendable {
                     systemImage: "clock.arrow.circlepath",
                     visualState: .selected,
                     goalTarget: nil,
-                    planRoute: nil,
+                    timeRoute: nil,
                     insightsRoute: .history
                 )
             ),
@@ -141,7 +141,7 @@ struct PreviewFixtures: Sendable {
                 icon: "leaf.fill",
                 visualState: .selected,
                 goalTarget: nil,
-                planRoute: .weeklyReview,
+                timeRoute: .weeklyReview,
                 insightsRoute: nil
             ),
             stats: [
@@ -180,7 +180,7 @@ struct PreviewFixtures: Sendable {
                     TrendPoint(id: "pm5", label: "F", value: 0.79),
                     TrendPoint(id: "pm6", label: "S", value: 0.48),
                     TrendPoint(id: "pm7", label: "S", value: 0.73)
-                ], goalTarget: GoalRouteTarget(goalID: "goal-native"), planRoute: nil),
+                ], goalTarget: GoalRouteTarget(goalID: "goal-native"), timeRoute: nil),
                 InsightsPatternCluster(id: "preview-pattern-2", title: "Drift", summary: "Drift is showing up as friction around one active area, not as a full portfolio collapse.", emphasisLabel: "Needs room", deltaLabel: "1 lighter than last week", visualState: .warning, points: [
                     TrendPoint(id: "pd1", label: "M", value: 0.62),
                     TrendPoint(id: "pd2", label: "T", value: 0.44),
@@ -189,7 +189,7 @@ struct PreviewFixtures: Sendable {
                     TrendPoint(id: "pd5", label: "F", value: 0.41),
                     TrendPoint(id: "pd6", label: "S", value: 0.26),
                     TrendPoint(id: "pd7", label: "S", value: 0.29)
-                ], goalTarget: GoalRouteTarget(goalID: "goal-growth"), planRoute: .weeklyReview),
+                ], goalTarget: GoalRouteTarget(goalID: "goal-growth"), timeRoute: .weeklyReview),
                 InsightsPatternCluster(id: "preview-pattern-3", title: "Adaptation", summary: "The plan is learning through lighter versions rather than pretending the first draft was perfect.", emphasisLabel: "Adapting", deltaLabel: "1 more active than last week", visualState: .selected, points: [
                     TrendPoint(id: "pa1", label: "M", value: 0.18),
                     TrendPoint(id: "pa2", label: "T", value: 0.24),
@@ -198,15 +198,15 @@ struct PreviewFixtures: Sendable {
                     TrendPoint(id: "pa5", label: "F", value: 0.66),
                     TrendPoint(id: "pa6", label: "S", value: 0.49),
                     TrendPoint(id: "pa7", label: "S", value: 0.62)
-                ], goalTarget: nil, planRoute: .weeklyReview)
+                ], goalTarget: nil, timeRoute: .weeklyReview)
             ],
             reviewConstellation: InsightsReviewConstellationState(
                 title: "Review constellation",
                 subtitle: "A small set of signals worth carrying across review, goal detail, and plan.",
                 items: [
-                    InsightsReviewConstellationItem(id: "preview-constellation-1", title: "Close the hardening pass", summary: "This goal has visible evidence this week, which keeps its current path grounded in real follow-through.", signalLabel: "Believable", visualState: .success, goalTarget: GoalRouteTarget(goalID: "goal-native"), planRoute: nil),
-                    InsightsReviewConstellationItem(id: "preview-constellation-2", title: "Retention loop", summary: "Recent friction suggests the current version of the work needs a smaller or clearer next step.", signalLabel: "Adjusting", visualState: .selected, goalTarget: GoalRouteTarget(goalID: "goal-growth"), planRoute: nil),
-                    InsightsReviewConstellationItem(id: "preview-constellation-3", title: "The week needs a calmer shape", summary: "Open Time to remove pressure, protect what still fits, and keep reflection attached to the real week.", signalLabel: "Shape next", visualState: .warning, goalTarget: nil, planRoute: .weeklyReview)
+                    InsightsReviewConstellationItem(id: "preview-constellation-1", title: "Close the hardening pass", summary: "This goal has visible evidence this week, which keeps its current path grounded in real follow-through.", signalLabel: "Believable", visualState: .success, goalTarget: GoalRouteTarget(goalID: "goal-native"), timeRoute: nil),
+                    InsightsReviewConstellationItem(id: "preview-constellation-2", title: "Retention loop", summary: "Recent friction suggests the current version of the work needs a smaller or clearer next step.", signalLabel: "Adjusting", visualState: .selected, goalTarget: GoalRouteTarget(goalID: "goal-growth"), timeRoute: nil),
+                    InsightsReviewConstellationItem(id: "preview-constellation-3", title: "The week needs a calmer shape", summary: "Open Time to remove pressure, protect what still fits, and keep reflection attached to the real week.", signalLabel: "Shape next", visualState: .warning, goalTarget: nil, timeRoute: .weeklyReview)
                 ]
             ),
             historyLayer: InsightsHistoryLayerState(
@@ -215,15 +215,15 @@ struct PreviewFixtures: Sendable {
                 summaryTitle: "Recent history is carrying the current read",
                 summaryDetail: "The system is seeing steadier proof than last week without a matching rise in friction.",
                 previewItems: [
-                    InsightsTimelineItem(id: "preview-timeline-1", title: "Completed deep work block", subtitle: "Close the hardening pass", timestamp: "40 min ago", icon: "checkmark.circle.fill", badge: "Win", visualState: .success, goalTarget: GoalRouteTarget(goalID: "goal-native"), planRoute: nil),
-                    InsightsTimelineItem(id: "preview-timeline-2", title: "Step was shrunk", subtitle: "Retention loop", timestamp: "Yesterday", icon: "arrow.triangle.branch", badge: "Adapted", visualState: .selected, goalTarget: GoalRouteTarget(goalID: "goal-growth"), planRoute: .weeklyReview),
-                    InsightsTimelineItem(id: "preview-timeline-3", title: "Help requested", subtitle: "Retention loop", timestamp: "2 days ago", icon: "lifepreserver", badge: "Help", visualState: .warning, goalTarget: GoalRouteTarget(goalID: "goal-growth"), planRoute: .weeklyReview)
+                    InsightsTimelineItem(id: "preview-timeline-1", title: "Completed deep work block", subtitle: "Close the hardening pass", timestamp: "40 min ago", icon: "checkmark.circle.fill", badge: "Win", visualState: .success, goalTarget: GoalRouteTarget(goalID: "goal-native"), timeRoute: nil),
+                    InsightsTimelineItem(id: "preview-timeline-2", title: "Step was shrunk", subtitle: "Retention loop", timestamp: "Yesterday", icon: "arrow.triangle.branch", badge: "Adapted", visualState: .selected, goalTarget: GoalRouteTarget(goalID: "goal-growth"), timeRoute: .weeklyReview),
+                    InsightsTimelineItem(id: "preview-timeline-3", title: "Help requested", subtitle: "Retention loop", timestamp: "2 days ago", icon: "lifepreserver", badge: "Help", visualState: .warning, goalTarget: GoalRouteTarget(goalID: "goal-growth"), timeRoute: .weeklyReview)
                 ],
                 timelineItems: [
-                    InsightsTimelineItem(id: "preview-timeline-1", title: "Completed deep work block", subtitle: "Close the hardening pass", timestamp: "40 min ago", icon: "checkmark.circle.fill", badge: "Win", visualState: .success, goalTarget: GoalRouteTarget(goalID: "goal-native"), planRoute: nil),
-                    InsightsTimelineItem(id: "preview-timeline-2", title: "Step was shrunk", subtitle: "Retention loop", timestamp: "Yesterday", icon: "arrow.triangle.branch", badge: "Adapted", visualState: .selected, goalTarget: GoalRouteTarget(goalID: "goal-growth"), planRoute: .weeklyReview),
-                    InsightsTimelineItem(id: "preview-timeline-3", title: "Help requested", subtitle: "Retention loop", timestamp: "2 days ago", icon: "lifepreserver", badge: "Help", visualState: .warning, goalTarget: GoalRouteTarget(goalID: "goal-growth"), planRoute: .weeklyReview),
-                    InsightsTimelineItem(id: "preview-timeline-4", title: "Updated release validation notes", subtitle: "Close the hardening pass", timestamp: "3 days ago", icon: "sparkles", badge: nil, visualState: .default, goalTarget: GoalRouteTarget(goalID: "goal-native"), planRoute: nil)
+                    InsightsTimelineItem(id: "preview-timeline-1", title: "Completed deep work block", subtitle: "Close the hardening pass", timestamp: "40 min ago", icon: "checkmark.circle.fill", badge: "Win", visualState: .success, goalTarget: GoalRouteTarget(goalID: "goal-native"), timeRoute: nil),
+                    InsightsTimelineItem(id: "preview-timeline-2", title: "Step was shrunk", subtitle: "Retention loop", timestamp: "Yesterday", icon: "arrow.triangle.branch", badge: "Adapted", visualState: .selected, goalTarget: GoalRouteTarget(goalID: "goal-growth"), timeRoute: .weeklyReview),
+                    InsightsTimelineItem(id: "preview-timeline-3", title: "Help requested", subtitle: "Retention loop", timestamp: "2 days ago", icon: "lifepreserver", badge: "Help", visualState: .warning, goalTarget: GoalRouteTarget(goalID: "goal-growth"), timeRoute: .weeklyReview),
+                    InsightsTimelineItem(id: "preview-timeline-4", title: "Updated release validation notes", subtitle: "Close the hardening pass", timestamp: "3 days ago", icon: "sparkles", badge: nil, visualState: .default, goalTarget: GoalRouteTarget(goalID: "goal-native"), timeRoute: nil)
                 ]
             ),
             trendTitle: "Pattern truth",
@@ -573,7 +573,7 @@ struct PreviewFixtures: Sendable {
                                 id: "preview-review-recovery",
                                 kind: .recoveryAccepted,
                                 occurredAt: "2026-04-27T10:00:00Z",
-                                source: .plan,
+                                source: .time,
                                 title: "Recovery path accepted",
                                 summary: "A smaller next step was selected without changing Calendar.",
                                 tone: .recovering
@@ -677,7 +677,7 @@ struct PreviewFixtures: Sendable {
                     )
                 ],
                 receiptSummaries: [
-                    ActionReceiptDisplaySummary(id: "preview-receipt-calendar", title: "Calendar write blocked", summary: "No calendar change happened because confirmation is required.", resultState: .needsConfirmation, occurredAt: "2026-04-27T12:10:00Z", sourceDomain: .plan, undoAvailability: .requiresConfirmation, correctionAvailability: .availableWithReason, nextActionTitle: "Review in Plan", safetyState: .confirmationRequired),
+                    ActionReceiptDisplaySummary(id: "preview-receipt-calendar", title: "Calendar write blocked", summary: "No calendar change happened because confirmation is required.", resultState: .needsConfirmation, occurredAt: "2026-04-27T12:10:00Z", sourceDomain: .time, undoAvailability: .requiresConfirmation, correctionAvailability: .availableWithReason, nextActionTitle: "Review in Time", safetyState: .confirmationRequired),
                     ActionReceiptDisplaySummary(id: "preview-receipt-memory", title: "Memory deletion blocked", summary: "No memory was forgotten because safe review and undo are incomplete.", resultState: .failedSafely, occurredAt: "2026-04-27T12:09:00Z", sourceDomain: .you, undoAvailability: .unsafe, correctionAvailability: .unavailable, nextActionTitle: nil, safetyState: .safeFailure)
                 ],
                 footer: "This establishes the trust framing layer only. Deeper continuity and sync-trust productization remain future-owned, so this surface stays truthful about what exists today."

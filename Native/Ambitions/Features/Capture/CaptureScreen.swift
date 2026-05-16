@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 enum CaptureScreenShellMode: Equatable {
-    case planSupport
+    case timeSupport
     case topLevelCapture
 }
 
@@ -14,7 +14,7 @@ struct CaptureScreen: View {
     private let shellMode: CaptureScreenShellMode
 
     @MainActor
-    init(shellMode: CaptureScreenShellMode = .planSupport) {
+    init(shellMode: CaptureScreenShellMode = .timeSupport) {
         self.shellMode = shellMode
         _viewModel = State(initialValue: CaptureViewModel())
     }
@@ -148,14 +148,14 @@ struct CaptureScreen: View {
                 context: .capture
             )
 
-            if shellMode == .planSupport {
+            if shellMode == .timeSupport {
                 Button {
-                    container.navigation.resetPlanPath()
+                    container.navigation.resetTimePath()
                 } label: {
                     Label("Time", systemImage: "calendar")
                 }
                 .buttonStyle(.bordered)
-                .accessibilityIdentifier("capture.return-to-plan")
+                .accessibilityIdentifier("capture.return-to-time")
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -388,7 +388,7 @@ struct CaptureScreen: View {
             HStack(spacing: theme.spacing.sm) {
                 Button {
                     Task {
-                        await viewModel.routeToPlan(
+                        await viewModel.routeToTime(
                             id: capture.id,
                             captureService: container.captureService,
                             goalsService: container.goalsService
@@ -565,21 +565,21 @@ private extension NowContextLens {
 private extension CaptureScreenShellMode {
     var eyebrow: String {
         switch self {
-        case .planSupport: "Plan support"
+        case .timeSupport: "Time support"
         case .topLevelCapture: "Top-level intake"
         }
     }
 
     var title: String {
         switch self {
-        case .planSupport: "Capture"
+        case .timeSupport: "Capture"
         case .topLevelCapture: "Capture"
         }
     }
 
     var subtitle: String {
         switch self {
-        case .planSupport:
+        case .timeSupport:
             "Absorb raw inputs into the current week without turning Capture into a feed, inbox, or category board."
         case .topLevelCapture:
             "Capture Anything stays calm until a thought is ready to place, grow into a goal, or hold as Needs a Place."

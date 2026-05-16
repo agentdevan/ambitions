@@ -62,7 +62,7 @@ enum TodayActionKind: String, Sendable {
     case reschedule
     case protectLater
     case openDetail
-    case openPlan
+    case openTime
     case quickLog
     case askForHelp
     case askWhyThisMatters
@@ -209,7 +209,7 @@ struct TodaySupportLayerState: Sendable {
     let quickCaptureAction: TodayInlineAction?
     let quickCaptureTitle: String
     let quickCaptureDetail: String
-    let planAction: TodayInlineAction?
+    let timeAction: TodayInlineAction?
     let reflectionPrompt: String?
     let reflectionHighlights: [String]
 }

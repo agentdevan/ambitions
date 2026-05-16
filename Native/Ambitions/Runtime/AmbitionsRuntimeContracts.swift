@@ -136,7 +136,7 @@ final class AmbitionsRuntime {
     let goalsService: any GoalsServicing
     let captureService: any CaptureServicing
     let habitsService: any HabitsServicing
-    let planService: any PlanServicing
+    let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing
     let notificationService: any NotificationServicing
@@ -158,7 +158,7 @@ final class AmbitionsRuntime {
         goalsService: any GoalsServicing,
         captureService: any CaptureServicing,
         habitsService: any HabitsServicing,
-        planService: any PlanServicing,
+        timeService: any TimeServicing,
         insightsService: any InsightsServicing,
         youService: any YouServicing,
         notificationService: any NotificationServicing,
@@ -179,7 +179,7 @@ final class AmbitionsRuntime {
         self.goalsService = goalsService
         self.captureService = captureService
         self.habitsService = habitsService
-        self.planService = planService
+        self.timeService = timeService
         self.insightsService = insightsService
         self.youService = youService
         self.notificationService = notificationService

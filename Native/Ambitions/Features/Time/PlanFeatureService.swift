@@ -1677,7 +1677,7 @@ extension RepositoryBackedTimeService {
             impact: String,
             state: AmbitionVisualState,
             target: GoalRouteTarget? = targetGoal.map { GoalRouteTarget(goalID: $0.id) },
-            planRoute: PlanRouteTarget? = nil
+            timeRoute: TimeRouteTarget? = nil
         ) {
             suggestions.append(PlanReflowSuggestionState(
                 id: "reflow-\(kind.rawValue)-\(suggestions.count)",

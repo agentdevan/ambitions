@@ -77,7 +77,7 @@ enum CaptureStatus: String, Codable, Sendable, Equatable, CaseIterable {
 
 enum CaptureTriageDestination: String, Codable, Sendable, Equatable, CaseIterable {
     case needsTriage = "needs_triage"
-    case planSeed = "plan_seed"
+    case timeSeed = "time_seed"
     case doSoon = "do_soon"
     case turnIntoGoal = "turn_into_goal"
     case attachToGoal = "attach_to_goal"
@@ -91,8 +91,8 @@ enum CaptureTriageDestination: String, Codable, Sendable, Equatable, CaseIterabl
         switch self {
         case .needsTriage:
             return "Needs triage"
-        case .planSeed:
-            return "Plan idea"
+        case .timeSeed:
+            return "Time idea"
         case .doSoon:
             return "Do soon"
         case .turnIntoGoal:
@@ -161,7 +161,7 @@ enum CaptureTriageStatus: String, Codable, Sendable, Equatable, Hashable, CaseIt
 
 enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case captureInbox = "capture_inbox"
-    case planSeed = "plan_seed"
+    case timeSeed = "time_seed"
     case goalSeed = "goal_seed"
     case goalAttachment = "goal_attachment"
     case deliverableSeed = "deliverable_seed"
@@ -174,7 +174,7 @@ enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable 
     var title: String {
         switch self {
         case .captureInbox: "Capture"
-        case .planSeed: "Plan idea"
+        case .timeSeed: "Time idea"
         case .goalSeed: "Goal seed"
         case .goalAttachment: "Attach to goal"
         case .deliverableSeed: "Deliverable seed"
@@ -189,7 +189,7 @@ enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable 
     var triageDestination: CaptureTriageDestination {
         switch self {
         case .captureInbox: .needsTriage
-        case .planSeed: .planSeed
+        case .timeSeed: .timeSeed
         case .goalSeed: .turnIntoGoal
         case .goalAttachment: .attachToGoal
         case .deliverableSeed: .deliverableSeed
@@ -476,7 +476,7 @@ extension Capture {
         if let destination = triage?.destination {
             switch destination {
             case .needsTriage: return .captureInbox
-            case .doSoon, .planSeed: return .planSeed
+            case .doSoon, .timeSeed: return .timeSeed
             case .turnIntoGoal: return .goalSeed
             case .attachToGoal: return .goalAttachment
             case .saveAsSeed: return .captureInbox
@@ -493,7 +493,7 @@ extension Capture {
         case .goalBound:
             return .goalAttachment
         case .scheduled:
-            return .planSeed
+            return .timeSeed
         case .delegated, .waiting:
             return .waiting
         case .optionalSomeday:

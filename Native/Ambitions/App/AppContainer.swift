@@ -14,7 +14,7 @@ final class AppContainer {
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
     let habitsService: any HabitsServicing
-    let timeService: any PlanServicing
+    let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing
     let notificationService: any NotificationServicing
@@ -37,7 +37,7 @@ final class AppContainer {
         captureService: any CaptureServicing,
         goalsService: any GoalsServicing,
         habitsService: any HabitsServicing,
-        timeService: any PlanServicing,
+        timeService: any TimeServicing,
         insightsService: any InsightsServicing,
         youService: any YouServicing,
         notificationService: any NotificationServicing,

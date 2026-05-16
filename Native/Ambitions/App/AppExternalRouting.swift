@@ -4,7 +4,7 @@ enum AppExternalRoute: Equatable, Sendable {
     case openTab(AppTab)
     case openToday(TodayEntryContext)
     case openGoalDetail(goalID: String)
-    case openPlanRoute(PlanRouteTarget)
+    case openTimeRoute(TimeRouteTarget)
     case openInsightsRoute(InsightsRouteTarget)
     case presentOverlay(ShellOverlayState)
     case genericExternalEntry(kind: String, payload: [String: String])
@@ -84,7 +84,7 @@ struct AppExternalRouteTranslator {
 
         if host == "captures" || host == "inbox" {
             if pathSegments.isEmpty || pathSegments.first == "inbox" {
-                return .openPlanRoute(.captureInbox)
+                return .openTimeRoute(.captureInbox)
             }
         }
 
@@ -93,9 +93,9 @@ struct AppExternalRouteTranslator {
             case "captures":
                 return .openPlanRoute(.captureInbox)
             case "habits":
-                return .openPlanRoute(.habits)
+                return .openTimeRoute(.habits)
             case "weekly-review":
-                return .openPlanRoute(.weeklyReview)
+                return .openTimeRoute(.weeklyReview)
             default:
                 break
             }
@@ -171,14 +171,14 @@ struct AppExternalRouteTranslator {
             return components.url
         case let .openGoalDetail(goalID):
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
-        case let .openPlanRoute(target):
+        case let .openTimeRoute(target):
             switch target {
             case .captureInbox:
                 return ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox)
             case .habits:
-                return URL(string: "ambitions://plan/habits")
+                return URL(string: "ambitions://time/habits")
             case .weeklyReview:
-                return URL(string: "ambitions://plan/weekly-review")
+                return URL(string: "ambitions://time/weekly-review")
             }
         case let .openInsightsRoute(target):
             switch target {
@@ -242,7 +242,7 @@ struct AppExternalRouteTranslator {
                 goalID: goalID,
                 tab: AppTab.goals.rawValue
             )
-        case let .openPlanRoute(target):
+        case let .openTimeRoute(target):
             switch target {
             case .captureInbox:
                 return ExternalSurfaceActionPayload.routePayload(
@@ -313,7 +313,7 @@ struct AppExternalRouteTranslator {
                 goalID: goalID,
                 tab: AppTab.goals.rawValue
             )
-        case let .openPlanRoute(target):
+        case let .openTimeRoute(target):
             switch target {
             case .captureInbox:
                 return ExternalSurfaceActionPayload.commandPayload(
@@ -515,14 +515,14 @@ final class DefaultAppExternalRouter: AppExternalRouting {
                 destination: .goal(goalID),
                 receiptBody: receiptBody(for: .goal(goalID), source: entrySource)
             )
-        case let .openPlanRoute(target):
-            navigation.openPlanRoute(target)
+        case let .openTimeRoute(target):
+            navigation.openTimeRoute(target)
             navigation.recordRoute(
-                title: "Open \(ShellCommandDestination.planRoute(target).displayLabel)",
+                title: "Open \(ShellCommandDestination.timeRoute(target).displayLabel)",
                 source: entrySource,
                 presentationContext: .plan,
-                destination: .planRoute(target),
-                receiptBody: receiptBody(for: .planRoute(target), source: entrySource)
+                destination: .timeRoute(target),
+                receiptBody: receiptBody(for: .timeRoute(target), source: entrySource)
             )
         case let .openInsightsRoute(target):
             navigation.openInsightsRoute(target)

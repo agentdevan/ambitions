@@ -42,7 +42,7 @@ struct InsightsScreen: View {
                                 container.navigation.selectTab(.today)
                             },
                             onSecondaryAction: {
-                                container.navigation.selectTab(.plan)
+                                container.navigation.selectTab(.time)
                             }
                         )
                         .transition(.ambitionPanel)
@@ -54,9 +54,9 @@ struct InsightsScreen: View {
 
                     InsightsComparePeriodCard(compare: dashboard.comparePeriod)
 
-                    InsightsPatternTruthCard(items: dashboard.patternClusters, onOpenGoal: openGoal, onOpenPlanRoute: openPlanRoute)
+                    InsightsPatternTruthCard(items: dashboard.patternClusters, onOpenGoal: openGoal, onOpenTimeRoute: openTimeRoute)
 
-                    InsightsReviewConstellationCard(state: dashboard.reviewConstellation, onOpenGoal: openGoal, onOpenPlanRoute: openPlanRoute)
+                    InsightsReviewConstellationCard(state: dashboard.reviewConstellation, onOpenGoal: openGoal, onOpenTimeRoute: openTimeRoute)
 
                     InsightsHistoryLayerCard(
                         history: dashboard.historyLayer,
@@ -86,8 +86,8 @@ struct InsightsScreen: View {
             openGoal(goalTarget)
             return
         }
-        if let planRoute = action.planRoute {
-            openPlanRoute(planRoute)
+        if let timeRoute = action.timeRoute {
+            openTimeRoute(timeRoute)
             return
         }
         if let route = action.insightsRoute {
@@ -100,8 +100,8 @@ struct InsightsScreen: View {
             openGoal(goalTarget)
             return
         }
-        if let planRoute = ribbon.planRoute {
-            openPlanRoute(planRoute)
+        if let timeRoute = ribbon.timeRoute {
+            openTimeRoute(timeRoute)
             return
         }
         if let route = ribbon.insightsRoute {
@@ -113,8 +113,8 @@ struct InsightsScreen: View {
         container.navigation.openGoalDetail(target)
     }
 
-    private func openPlanRoute(_ route: PlanRouteTarget) {
-        container.navigation.openPlanRoute(route)
+    private func openTimeRoute(_ route: TimeRouteTarget) {
+        container.navigation.openTimeRoute(route)
     }
 
     private func openInsightsRoute(_ route: InsightsRouteTarget) {
@@ -126,8 +126,8 @@ struct InsightsScreen: View {
             openGoal(goalTarget)
             return
         }
-        if let planRoute = item.planRoute {
-            openPlanRoute(planRoute)
+        if let timeRoute = item.timeRoute {
+            openTimeRoute(timeRoute)
         }
     }
 
@@ -157,7 +157,7 @@ struct InsightsMonthlyReviewScreen: View {
                 InsightsReviewConstellationCard(
                     state: dashboard.reviewConstellation,
                     onOpenGoal: actions.openGoal,
-                    onOpenPlanRoute: actions.openPlanRoute
+                    onOpenTimeRoute: actions.openTimeRoute
                 )
 
                 AppCard {
@@ -172,7 +172,7 @@ struct InsightsMonthlyReviewScreen: View {
 
                         VStack(alignment: .leading, spacing: actions.theme.spacing.sm) {
                             Button {
-                                actions.openPlanRoute(.weeklyReview)
+                                actions.openTimeRoute(.weeklyReview)
                             } label: {
                                 InsightsRouteActionRow(
                                     title: "Open weekly review",
@@ -231,7 +231,7 @@ struct InsightsHistoryScreen: View {
                             subtitle: "History should lead somewhere useful, not strand you in recall."
                         )
                         Button {
-                            actions.openPlanRoute(.weeklyReview)
+                            actions.openTimeRoute(.weeklyReview)
                         } label: {
                             InsightsRouteActionRow(
                                 title: "Open weekly review",
@@ -299,12 +299,12 @@ private struct InsightsReflectionRouteScreen: View {
         RouteActions(
             theme: theme,
             openGoal: { container.navigation.openGoalDetail($0) },
-            openPlanRoute: { container.navigation.openPlanRoute($0) },
+            openTimeRoute: { container.navigation.openTimeRoute($0) },
             openTimelineItem: { item in
                 if let goalTarget = item.goalTarget {
                     container.navigation.openGoalDetail(goalTarget)
-                } else if let planRoute = item.planRoute {
-                    container.navigation.openPlanRoute(planRoute)
+                } else if let timeRoute = item.timeRoute {
+                    container.navigation.openTimeRoute(timeRoute)
                 }
             }
         )
@@ -320,7 +320,7 @@ private struct InsightsReflectionRouteScreen: View {
     struct RouteActions {
         let theme: AmbitionTheme
         let openGoal: (GoalRouteTarget) -> Void
-        let openPlanRoute: (PlanRouteTarget) -> Void
+        let openTimeRoute: (TimeRouteTarget) -> Void
         let openTimelineItem: (InsightsTimelineItem) -> Void
     }
 }
@@ -490,7 +490,7 @@ private struct InsightsPatternTruthCard: View {
 
     let items: [InsightsPatternCluster]
     let onOpenGoal: (GoalRouteTarget) -> Void
-    let onOpenPlanRoute: (PlanRouteTarget) -> Void
+    let onOpenTimeRoute: (TimeRouteTarget) -> Void
 
     var body: some View {
         AppCard {
@@ -505,8 +505,8 @@ private struct InsightsPatternTruthCard: View {
                         Button {
                             if let goalTarget = item.goalTarget {
                                 onOpenGoal(goalTarget)
-                            } else if let planRoute = item.planRoute {
-                                onOpenPlanRoute(planRoute)
+                            } else if let timeRoute = item.timeRoute {
+                                onOpenTimeRoute(timeRoute)
                             }
                         } label: {
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -528,7 +528,7 @@ private struct InsightsPatternTruthCard: View {
                                     }
 
                                     Spacer(minLength: theme.spacing.sm)
-                                    if item.goalTarget != nil || item.planRoute != nil {
+                                    if item.goalTarget != nil || item.timeRoute != nil {
                                         Image(systemName: "arrow.right")
                                             .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                                             .foregroundStyle(theme.colors.textTertiary)
@@ -542,7 +542,7 @@ private struct InsightsPatternTruthCard: View {
                             .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
                         }
                         .buttonStyle(.plain)
-                        .disabled(item.goalTarget == nil && item.planRoute == nil)
+                        .disabled(item.goalTarget == nil && item.timeRoute == nil)
                     }
                 }
             }
@@ -557,7 +557,7 @@ private struct InsightsReviewConstellationCard: View {
 
     let state: InsightsReviewConstellationState
     let onOpenGoal: (GoalRouteTarget) -> Void
-    let onOpenPlanRoute: (PlanRouteTarget) -> Void
+    let onOpenTimeRoute: (TimeRouteTarget) -> Void
 
     var body: some View {
         AppCard {
@@ -569,8 +569,8 @@ private struct InsightsReviewConstellationCard: View {
                         Button {
                             if let goalTarget = item.goalTarget {
                                 onOpenGoal(goalTarget)
-                            } else if let planRoute = item.planRoute {
-                                onOpenPlanRoute(planRoute)
+                            } else if let timeRoute = item.timeRoute {
+                                onOpenTimeRoute(timeRoute)
                             }
                         } label: {
                             HStack(alignment: .top, spacing: theme.spacing.sm) {
@@ -585,7 +585,7 @@ private struct InsightsReviewConstellationCard: View {
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                                 Spacer(minLength: theme.spacing.sm)
-                                if item.goalTarget != nil || item.planRoute != nil {
+                                if item.goalTarget != nil || item.timeRoute != nil {
                                     Image(systemName: "arrow.right")
                                         .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                                         .foregroundStyle(theme.colors.textTertiary)
@@ -596,7 +596,7 @@ private struct InsightsReviewConstellationCard: View {
                             .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
                         }
                         .buttonStyle(.plain)
-                        .disabled(item.goalTarget == nil && item.planRoute == nil)
+                        .disabled(item.goalTarget == nil && item.timeRoute == nil)
                         .accessibilityIdentifier(reviewConstellationIdentifier(item: item, index: index))
                     }
                 }
@@ -607,7 +607,7 @@ private struct InsightsReviewConstellationCard: View {
     }
 
     private func reviewConstellationIdentifier(item: InsightsReviewConstellationItem, index: Int) -> String {
-        if item.planRoute != nil && item.goalTarget == nil {
+        if item.timeRoute != nil && item.goalTarget == nil {
             return "insights.review-constellation.constellation-plan"
         }
         if item.goalTarget != nil && index == state.items.firstIndex(where: { $0.goalTarget != nil }) {
@@ -704,7 +704,7 @@ private struct InsightsTimelineCard: View {
                             }
 
                             Spacer(minLength: theme.spacing.sm)
-                            if item.goalTarget != nil || item.planRoute != nil {
+                            if item.goalTarget != nil || item.timeRoute != nil {
                                 Image(systemName: "arrow.right")
                                     .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                                     .foregroundStyle(theme.colors.textTertiary)
@@ -715,7 +715,7 @@ private struct InsightsTimelineCard: View {
                         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
                     }
                     .buttonStyle(.plain)
-                    .disabled(item.goalTarget == nil && item.planRoute == nil)
+                    .disabled(item.goalTarget == nil && item.timeRoute == nil)
                 }
             }
         }

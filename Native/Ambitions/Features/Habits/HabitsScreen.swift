@@ -49,10 +49,10 @@ struct HabitsScreen: View {
 
                             HStack(spacing: theme.spacing.sm) {
                                 Button("Return to Time") {
-                                    container.navigation.resetPlanPath()
+                                    container.navigation.resetTimePath()
                                 }
                                 .buttonStyle(.bordered)
-                                .accessibilityIdentifier("habits.return-to-plan")
+                                .accessibilityIdentifier("habits.return-to-time")
 
                                 Button("Weekly Review") {
                                     container.navigation.openWeeklyReview()
@@ -76,11 +76,11 @@ struct HabitsScreen: View {
                     if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
                         DegradedStateCard(
                             state: DegradedStateOrchestrator.habitsEmpty(),
-                            primaryAccessibilityIdentifier: "habits.empty.return-plan",
+                            primaryAccessibilityIdentifier: "habits.empty.return-time",
                             onPrimaryAction: {
                                 _ = emptyTitle
                                 _ = emptyMessage
-                                container.navigation.resetPlanPath()
+                                container.navigation.resetTimePath()
                             }
                         )
                     } else {

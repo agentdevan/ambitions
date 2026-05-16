@@ -39,7 +39,7 @@ struct InsightsHeroAction: Sendable {
     let systemImage: String
     let visualState: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
     let insightsRoute: InsightsRouteTarget?
 }
 
@@ -62,7 +62,7 @@ struct InsightsContinuityRibbon: Sendable {
     let icon: String
     let visualState: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
     let insightsRoute: InsightsRouteTarget?
 }
 
@@ -91,7 +91,7 @@ struct InsightsPatternCluster: Identifiable, Sendable {
     let visualState: AmbitionVisualState
     let points: [TrendPoint]
     let goalTarget: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 }
 
 struct InsightsReviewConstellationItem: Identifiable, Sendable {
@@ -101,7 +101,7 @@ struct InsightsReviewConstellationItem: Identifiable, Sendable {
     let signalLabel: String
     let visualState: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 }
 
 struct InsightsReviewConstellationState: Sendable {
@@ -134,7 +134,7 @@ struct InsightsTimelineItem: Identifiable, Sendable {
     let badge: String?
     let visualState: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 }
 
 struct InsightsHistoryLayerState: Sendable {

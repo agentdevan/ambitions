@@ -33,7 +33,7 @@ enum ExecutionRecoveryStrategy: String, Codable, Sendable, Equatable, Hashable, 
     case acceptSlip = "accept_slip"
     case askForDecision = "ask_for_decision"
     case keepAsSomeday = "keep_as_someday"
-    case openPlan = "open_plan"
+    case openTime = "open_time"
     case openGoal = "open_goal"
     case openCapture = "open_capture"
 }
@@ -71,7 +71,7 @@ struct ExecutionDisruption: Codable, Sendable, Equatable, Hashable, Identifiable
     let severity: NowPressureLevel
     let relatedGoalID: String?
     let relatedCaptureID: String?
-    let relatedPlanID: String?
+    let relatedTimeID: String?
     let relatedAssessmentID: String?
     let evidenceReferenceIDs: [String]
 
@@ -83,7 +83,7 @@ struct ExecutionDisruption: Codable, Sendable, Equatable, Hashable, Identifiable
         severity: NowPressureLevel,
         relatedGoalID: String? = nil,
         relatedCaptureID: String? = nil,
-        relatedPlanID: String? = nil,
+        relatedTimeID: String? = nil,
         relatedAssessmentID: String? = nil,
         evidenceReferenceIDs: [String] = []
     ) {
@@ -94,7 +94,7 @@ struct ExecutionDisruption: Codable, Sendable, Equatable, Hashable, Identifiable
         self.severity = severity
         self.relatedGoalID = relatedGoalID
         self.relatedCaptureID = relatedCaptureID
-        self.relatedPlanID = relatedPlanID
+        self.relatedTimeID = relatedTimeID
         self.relatedAssessmentID = relatedAssessmentID
         self.evidenceReferenceIDs = Self.normalized(evidenceReferenceIDs)
     }
@@ -160,7 +160,7 @@ struct ExecutionRecoveryOption: Codable, Sendable, Equatable, Hashable, Identifi
     let relatedExplanationID: String?
     let relatedGoalID: String?
     let relatedCaptureID: String?
-    let relatedPlanID: String?
+    let relatedTimeID: String?
     let eventLedgerEntryIDs: [String]
     let recommendationExplanationIDs: [String]
 
@@ -181,7 +181,7 @@ struct ExecutionRecoveryOption: Codable, Sendable, Equatable, Hashable, Identifi
         relatedExplanationID: String? = nil,
         relatedGoalID: String? = nil,
         relatedCaptureID: String? = nil,
-        relatedPlanID: String? = nil,
+        relatedTimeID: String? = nil,
         eventLedgerEntryIDs: [String] = [],
         recommendationExplanationIDs: [String] = []
     ) {
@@ -201,7 +201,7 @@ struct ExecutionRecoveryOption: Codable, Sendable, Equatable, Hashable, Identifi
         self.relatedExplanationID = relatedExplanationID
         self.relatedGoalID = relatedGoalID
         self.relatedCaptureID = relatedCaptureID
-        self.relatedPlanID = relatedPlanID
+        self.relatedTimeID = relatedTimeID
         self.eventLedgerEntryIDs = Self.normalized(eventLedgerEntryIDs)
         self.recommendationExplanationIDs = Self.normalized(recommendationExplanationIDs + [relatedExplanationID].compactMap { $0 })
     }
@@ -222,7 +222,7 @@ struct ExecutionResilienceInput: Sendable, Equatable {
     let eventLedgerEntries: [EventLedgerEntry]
     let recommendationExplanations: [RecommendationExplanation]
     let commands: [AmbitionsCommand]
-    let planID: String?
+    let timeID: String?
     let reviewID: String?
 
     init(
@@ -236,7 +236,7 @@ struct ExecutionResilienceInput: Sendable, Equatable {
         eventLedgerEntries: [EventLedgerEntry] = [],
         recommendationExplanations: [RecommendationExplanation] = [],
         commands: [AmbitionsCommand] = [],
-        planID: String? = nil,
+        timeID: String? = nil,
         reviewID: String? = nil
     ) {
         self.generatedAt = generatedAt
@@ -249,7 +249,7 @@ struct ExecutionResilienceInput: Sendable, Equatable {
         self.eventLedgerEntries = eventLedgerEntries
         self.recommendationExplanations = recommendationExplanations
         self.commands = commands
-        self.planID = planID
+        self.timeID = timeID
         self.reviewID = reviewID
     }
 }
@@ -261,7 +261,7 @@ struct ExecutionResilienceAssessment: Codable, Sendable, Equatable, Hashable, Id
     let generatedAt: String
     let relatedGoalIDs: [String]
     let relatedCaptureIDs: [String]
-    let relatedPlanIDs: [String]
+    let relatedTimeIDs: [String]
     let relatedReviewIDs: [String]
     let relatedBelievabilityAssessmentIDs: [String]
     let relatedRealitySnapshotID: String?
@@ -289,7 +289,7 @@ struct ExecutionResilienceAssessment: Codable, Sendable, Equatable, Hashable, Id
         generatedAt: String,
         relatedGoalIDs: [String] = [],
         relatedCaptureIDs: [String] = [],
-        relatedPlanIDs: [String] = [],
+        relatedTimeIDs: [String] = [],
         relatedReviewIDs: [String] = [],
         relatedBelievabilityAssessmentIDs: [String] = [],
         relatedRealitySnapshotID: String? = nil,
@@ -316,7 +316,7 @@ struct ExecutionResilienceAssessment: Codable, Sendable, Equatable, Hashable, Id
         self.generatedAt = generatedAt
         self.relatedGoalIDs = Self.normalized(relatedGoalIDs)
         self.relatedCaptureIDs = Self.normalized(relatedCaptureIDs)
-        self.relatedPlanIDs = Self.normalized(relatedPlanIDs)
+        self.relatedTimeIDs = Self.normalized(relatedTimeIDs)
         self.relatedReviewIDs = Self.normalized(relatedReviewIDs)
         self.relatedBelievabilityAssessmentIDs = Self.normalized(relatedBelievabilityAssessmentIDs)
         self.relatedRealitySnapshotID = relatedRealitySnapshotID

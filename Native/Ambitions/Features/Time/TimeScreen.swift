@@ -1459,7 +1459,7 @@ private struct PlanExecutionResilienceCard: View {
 
     let resilience: PlanExecutionResilienceState
     let onOpenGoal: (GoalRouteTarget) -> Void
-    let onOpenPlanRoute: (PlanRouteTarget) -> Void
+    let onOpenTimeRoute: (TimeRouteTarget) -> Void
 
     var body: some View {
         AppCard {
@@ -1860,7 +1860,7 @@ private struct PlanSecondaryDestinationsCard: View {
 #if DEBUG
 #Preview("Time Seeded") {
     NavigationStack {
-        TimeScreen(viewModel: TimeViewModel(state: .loaded(PreviewPlanScenarios.seeded)))
+        TimeScreen(viewModel: TimeViewModel(state: .loaded(PreviewTimeScenarios.seeded)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -1868,7 +1868,7 @@ private struct PlanSecondaryDestinationsCard: View {
 
 #Preview("Time Empty") {
     NavigationStack {
-        TimeScreen(viewModel: TimeViewModel(state: .loaded(PreviewPlanScenarios.empty)))
+        TimeScreen(viewModel: TimeViewModel(state: .loaded(PreviewTimeScenarios.empty)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)

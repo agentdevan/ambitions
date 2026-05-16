@@ -82,7 +82,7 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
     let actions: [PlanReflowDecisionActionState]
     let visualState: AmbitionVisualState
     let target: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 
     init(
         id: String,
@@ -102,7 +102,7 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
         actions: [PlanReflowDecisionActionState] = PlanReflowDecisionOptionState.defaultActions,
         visualState: AmbitionVisualState,
         target: GoalRouteTarget?,
-        planRoute: PlanRouteTarget?
+        timeRoute: TimeRouteTarget?
     ) {
         self.id = id
         self.kind = kind
@@ -121,7 +121,7 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
         self.actions = actions
         self.visualState = visualState
         self.target = target
-        self.planRoute = planRoute
+        self.timeRoute = timeRoute
     }
 
     var accessibilityValue: String {
@@ -294,7 +294,7 @@ struct PlanReflowDecisionProjector: Sendable {
                 actions: actions(canNavigate: false),
                 visualState: .default,
                 target: nil,
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -309,7 +309,7 @@ struct PlanReflowDecisionProjector: Sendable {
         trustLabel: String
     ) -> PlanReflowDecisionOptionState {
         let kind = decisionKind(for: suggestion.kind)
-        let canNavigate = suggestion.target != nil || suggestion.planRoute != nil
+        let canNavigate = suggestion.target != nil || suggestion.timeRoute != nil
         return PlanReflowDecisionOptionState(
             id: "reflow-decision-\(kind.rawValue)-\(suggestion.id)",
             kind: kind,
@@ -331,7 +331,7 @@ struct PlanReflowDecisionProjector: Sendable {
             ),
             visualState: suggestion.visualState,
             target: suggestion.target,
-            planRoute: suggestion.planRoute
+            timeRoute: suggestion.timeRoute
         )
     }
 
