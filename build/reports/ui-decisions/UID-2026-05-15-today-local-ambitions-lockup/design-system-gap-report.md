@@ -2,16 +2,25 @@
 
 Decision ID: `UID-2026-05-15-today-local-ambitions-lockup`
 
-## Expected primitives
+## Primitive Status
 
-- `LocalAmbitionsLockup` in `Sources/Components/ShellChromePrimitives.swift` — missing
-- `SourceTrustChrome` in `Sources/Components/ShellChromePrimitives.swift` — missing
+- `LocalAmbitionsLockup` in `Sources/Components/ShellChromeTrustPrimitives.swift` — source-installed
+- `SourceTrustChrome` in `Sources/Components/ShellChromeTrustPrimitives.swift` — source-installed
 
-## Candidate app files
+## App Usage
 
-- `Native/Ambitions/Features/Today/*`
-- `Native/Ambitions/App/AppMeridianShell.swift`
+- `Native/Ambitions/Features/Today/TodayScreen.swift` now uses `LocalAmbitionsLockup()` as top-right Today chrome.
+
+## Preview Fixture
+
+- `Sources/Previews/ShellChromeTrustPreviews.swift`
+
+## Remaining Proof Needed
+
+- local Swift/Xcode compile proof
+- rendered preview or simulator screenshot proof
+- accessibility review for the new lockup placement
 
 ## Boundary
 
-This report identifies product-kit gaps. It does not implement them.
+This report records source installation. It does not claim release readiness.
