@@ -13,22 +13,23 @@ Status: source-installed, validation still required
 ## What Changed
 
 - Added `RealityMeridianCurrentTimeCursor` as a reusable AmbitionsDesignSystem primitive for exact current-time display.
-- Added `RealityMeridianScheduledNode` as a reusable AmbitionsDesignSystem primitive for scheduled node display.
+- Upgraded `RealityMeridianCurrentTimeCursor` to render a proportional 6 AM to 10 PM vertical mini-spine with an exact current-time label and minute-level refresh.
+- Added `RealityMeridianScheduledNode` as the paired reusable AmbitionsDesignSystem primitive for scheduled node display.
 - Added a design-system preview fixture for the temporal primitives.
-- Placed `RealityMeridianCurrentTimeCursor()` above the existing Today Reality Meridian rail as a safe first-pass app integration.
+- Placed `RealityMeridianCurrentTimeCursor()` above the existing Today Reality Meridian rail as the first app-level integration.
 
 ## Proof Collected
 
 - Source files are installed in the repo.
 - Decision file and design-system matrix now mark the primitives as existing.
-- Gap report and proof contract were updated to reflect source installation.
+- Gap report and proof contract were updated to reflect the proportional mini-spine source installation.
 
 ## Proof Still Required
 
 - local Swift/Xcode compile proof
 - rendered preview or simulator screenshot proof
 - accessibility review for VoiceOver order, contrast, and Dynamic Type behavior
-- future proportional rail-spine integration if exact minute-of-day placement is required inside the vertical rail itself
+- optional future full in-rail fusion if the current-time cursor should be embedded beside scheduled nodes in the existing rail component
 
 ## Boundary
 
