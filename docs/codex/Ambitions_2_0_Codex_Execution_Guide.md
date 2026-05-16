@@ -1,12 +1,13 @@
-# Historical Ambitions 2.0 note
+# Ambitions 2.0 Codex Execution Guide
 
-This file is preserved as implementation history/supporting context. It is not the active Codex read order for Ambitions 3.0. Use `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md` and `docs/codex/CONTEXT_INDEX.md` first.
+> Historical note: This file is retained for traceability only.
+> It is not active product, implementation, release, or Codex process authority.
+> Current authority starts in `docs/truth/README.md` and current Codex/process routing is governed by the active front-door docs.
+> Use this only as historical context after reconciling against `docs/truth/*`, `docs/status/*`, and `docs/status/old-canon-classification-index.md`.
 
 ---
 
-# Ambitions 2.0 Codex Execution Guide
-
-This file is the practical execution guide for Codex sessions. It should stay aligned with `CONTEXT_INDEX.md`, `MASTER_CODEX_SYSTEM.md`, `BATCH_REGISTRY.md`, and `FREE_WORKFLOW_OPERATING_SYSTEM.md`.
+This file was the practical execution guide for Ambitions 2.0 Codex sessions. The preserved content below may contain obsolete top-level IA, process, runner, or release language.
 
 ## Always Read Order
 
