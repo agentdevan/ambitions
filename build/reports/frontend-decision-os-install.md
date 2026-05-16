@@ -1,17 +1,18 @@
 # Frontend Decision OS Install Report
 
-Status: Yellow-Green
+Status: Green for control-plane install
 
 ## Summary
 
 Installed a frontend UI decision control plane for Ambitions.
 
-The system captures active UI decisions once, maps them to visual encyclopedia surfaces, exposes AmbitionsDesignSystem primitive gaps, and generates bounded Ambitions runner implementation prompts.
+The system captures active UI decisions once, maps them to visual encyclopedia surfaces, exposes AmbitionsDesignSystem primitive gaps, generates bounded Ambitions runner implementation prompts, and provides make entry points plus a final gate.
 
 This is not SwiftUI implementation proof, screenshot proof, simulator proof, device proof, accessibility conformance proof, hosted CI proof, release readiness, or App Store readiness.
 
 ## Installed Files
 
+- `GNUmakefile`
 - `frontend/visual-encyclopedia/decisions/README.md`
 - `frontend/visual-encyclopedia/decisions/UI_DECISION_LEDGER.yaml`
 - `frontend/visual-encyclopedia/decisions/active/UID-2026-05-15-today-local-ambitions-lockup.yaml`
@@ -21,9 +22,14 @@ This is not SwiftUI implementation proof, screenshot proof, simulator proof, dev
 - `frontend/visual-encyclopedia/trace/UI_DECISION_TO_DESIGN_SYSTEM_MATRIX.yaml`
 - `scripts/ambitions-ui-decision-new.py`
 - `scripts/ambitions-ui-decision-check.py`
+- `scripts/ambitions-ui-decision-recipe-link-check.py`
 - `scripts/ambitions-ui-decision-sync.py`
 - `scripts/ambitions-ui-decision-implementation-prompt.py`
+- `scripts/ambitions-ui-decision-final-gate.py`
 - `frontend/visual-encyclopedia/DESIGN_SYSTEM_TO_VISUAL_ENCYCLOPEDIA_BRIDGE.md`
+- `build/reports/ui-decision-final-gate.md`
+- `build/reports/ui-decision-final-gate.json`
+- generated seed reports under `build/reports/ui-decisions/`
 
 ## Seed Decisions
 
@@ -36,40 +42,53 @@ This is not SwiftUI implementation proof, screenshot proof, simulator proof, dev
 Validate decisions:
 
 ```bash
-python3 scripts/ambitions-ui-decision-check.py
+make ui-decision-check
+```
+
+Validate decision-to-surface and decision-to-design-system linkage:
+
+```bash
+make ui-decision-link-check
 ```
 
 Create a decision:
 
 ```bash
-python3 scripts/ambitions-ui-decision-new.py --id UID-YYYY-MM-DD-example --decision "Describe the UI decision" --surface today_root_reality_meridian
+make ui-decision-new ARGS='--id UID-YYYY-MM-DD-example --decision "Describe the UI decision" --surface today_root_reality_meridian'
 ```
 
 Sync generated reports:
 
 ```bash
-python3 scripts/ambitions-ui-decision-sync.py
+make ui-decision-sync
 ```
 
 Generate an implementation prompt:
 
 ```bash
-python3 scripts/ambitions-ui-decision-implementation-prompt.py --decision UID-2026-05-15-today-local-ambitions-lockup
+make ui-decision-prompt DECISION=UID-2026-05-15-today-local-ambitions-lockup
 ```
 
-## Validation Performed Before Install
+Run the UI decision final gate:
 
-A local dry run of the installed scripts was performed before writing the repo files:
+```bash
+make ui-decision-final-gate
+```
 
-- check script returned Green for 3 decisions
-- sync script generated decision reports locally
-- implementation-prompt script generated a runner-compatible prompt locally
+Run the whole UI decision control-plane lane:
 
-This report does not claim hosted CI execution.
+```bash
+make ui-decision-all
+```
+
+## Validation Notes
+
+- The installed UI decision final gate report is Green for the committed control-plane artifacts.
+- A local dry run of the installed script set was performed before writing the initial files.
+- This report does not claim hosted CI execution.
 
 ## Known Gaps
 
-- Makefile targets were not added in this pass; commands are available directly through scripts.
-- Generated decision report directories are produced by the sync script and are not all precommitted here.
 - Seed decisions identify missing AmbitionsDesignSystem primitives; they do not implement those primitives.
 - No SwiftUI frontend code was modified in this pass.
+- The root `GNUmakefile` includes the existing `Makefile` and adds UI-decision targets without replacing the large existing Makefile.
