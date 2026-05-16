@@ -8,6 +8,7 @@ Status: source-installed, validation still required
 
 - `Sources/Components/NavigationPrimitives.swift`
 - `Sources/Previews/RootDestinationIdentityPreviews.swift`
+- `Native/AmbitionsTests/App/AppShellChromeTests.swift`
 
 ## What Changed
 
@@ -15,18 +16,20 @@ Status: source-installed, validation still required
 - Added `BottomNavigationContract` with required destination/title sequence.
 - Added `RootDestinationIdentityRail` as a previewable design-system visualization of the five-destination contract.
 - Added a design-system preview fixture for selected Today and Time states.
+- Added an app-shell test assertion binding the real app tab titles to `BottomNavigationContract.requiredTitles`.
 
 ## Proof Collected
 
 - Source files are installed in the repo.
 - Decision file and design-system matrix now mark the primitives as existing.
 - Gap report and proof contract were updated to reflect source installation.
+- `AppShellChromeTests.testAppTabSequenceMatchesBottomNavigationContract()` now records the app/design-system contract assertion.
 
 ## Proof Still Required
 
 - local Swift/Xcode compile proof
 - rendered preview or simulator screenshot proof
-- app-level source/test assertion that `AppTab.allCases.map(\.title)` matches `BottomNavigationContract.requiredTitles`
+- local unit-test execution proof for `AppShellChromeTests`
 
 ## Boundary
 
