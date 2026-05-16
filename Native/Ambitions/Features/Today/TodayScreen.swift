@@ -41,13 +41,14 @@ struct TodayScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
-                        TodayRealityMeridianFusedRail(
+                        DayTimelineRail(
                             state: experience.execution.dayRail,
                             onAction: handleAction,
                             onOpenStepDetail: { detail in
                                 selectedStepDetail = detail
                             }
                         )
+                        .fusedCurrentTimeCursor()
                         .transition(.ambitionPanel)
 
                         if experience.mode == .empty {
