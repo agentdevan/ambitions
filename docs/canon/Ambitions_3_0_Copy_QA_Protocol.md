@@ -1,6 +1,11 @@
 # Ambitions 3.0 — Copy QA Protocol
 
-Status: Active content QA protocol
+> Historical/supporting note: This file is retained for traceability and may still contain useful copy-QA concepts.
+> It is not active product, implementation, release, or Codex process authority.
+> Current authority starts in `docs/truth/README.md` and active frontend language rules should be reconciled through `frontend/` and `docs/status/*`.
+> Use this only after reconciling against `docs/truth/*`, `docs/status/*`, and `docs/status/old-canon-classification-index.md`.
+
+Status: Supporting historical content QA protocol
 
 ## Triggers
 
