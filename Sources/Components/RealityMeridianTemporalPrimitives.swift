@@ -1,4 +1,5 @@
 #if canImport(SwiftUI)
+import Foundation
 import SwiftUI
 
 public struct RealityMeridianCurrentTimeCursor: View {
