@@ -41,9 +41,6 @@ struct TodayScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
-                        RealityMeridianCurrentTimeCursor()
-                            .accessibilityIdentifier("TodayRealityMeridianCurrentTimeCursor")
-
                         DayTimelineRail(
                             state: experience.execution.dayRail,
                             onAction: handleAction,
@@ -51,7 +48,16 @@ struct TodayScreen: View {
                                 selectedStepDetail = detail
                             }
                         )
-                            .transition(.ambitionPanel)
+                        .transition(.ambitionPanel)
+                        .overlay(alignment: .topLeading) {
+                            RealityMeridianCurrentTimeCursor()
+                                .frame(maxWidth: .infinity, minHeight: 168, alignment: .topLeading)
+                                .padding(.horizontal, theme.spacing.lg)
+                                .padding(.top, theme.spacing.lg)
+                                .allowsHitTesting(false)
+                                .accessibilityIdentifier("TodayRealityMeridianCurrentTimeCursor")
+                        }
+                        .accessibilityIdentifier("TodayRealityMeridianFusedRail")
 
                         if experience.mode == .empty {
                             DegradedStateCard(
