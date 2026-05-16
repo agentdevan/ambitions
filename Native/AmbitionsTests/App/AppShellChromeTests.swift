@@ -22,6 +22,13 @@ final class AppShellChromeTests: XCTestCase {
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
     }
 
+    func testAppTabSequenceMatchesBottomNavigationContract() {
+        XCTAssertEqual(BottomNavigationContract.requiredTitles, ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(BottomNavigationContract.requiredTitleSequence, "Today / Goals / Capture / Time / You")
+        XCTAssertTrue(BottomNavigationContract.isValidTitleSequence(AppTab.allCases.map(\.title)))
+        XCTAssertEqual(RootDestinationIdentity.allCases.map(\.title), AppTab.allCases.map(\.title))
+    }
+
     func testTrustBadgeCopyDoesNotClaimGlobalSyncByDefault() {
         XCTAssertEqual(AmbitionTrustBadgeState.localOnly.title, "Local only")
         XCTAssertEqual(AmbitionTrustBadgeState.calendarLocal.title, "From calendar")
