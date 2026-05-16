@@ -1,7 +1,7 @@
 # Repo Governance Master Cleanup Plan
 
 Status: Active cleanup control plane  
-Last updated: 2026-05-15 Train A closeout  
+Last updated: 2026-05-16 Train B YELLOW closeout  
 Execution mode: Direct GitHub API / local branch work only  
 Authority: Subordinate to `docs/truth/*`
 
@@ -30,6 +30,7 @@ If this file conflicts with `docs/truth/*`, the truth files win.
 - Do not create draft PRs unless a later high-risk file movement needs a safety branch.
 - Do not modify Swift, project config, scripts, resources, or workflows unless a later phase explicitly allows it.
 - Do not move historical files until reference-dependency classification is complete.
+- Do not truncate historical files to make connector writes easier.
 
 ## Open cleanup issues
 
@@ -46,8 +47,8 @@ If this file conflicts with `docs/truth/*`, the truth files win.
 | 1 | Issue cleanup + status ledger roles | Complete |
 | 2 | Truth/front-door integration | Complete |
 | 3 | Old Canon Classification Index | Complete |
-| 4 | Ambitions 2.0 historical headers | Not started |
-| 5 | Ambitions 3.0 / 4.0 / PXOS / ACUI headers | Not started |
+| 4 | Ambitions 2.0 historical headers | YELLOW partial |
+| 5 | Ambitions 3.0 / 4.0 / PXOS / ACUI headers | YELLOW partial |
 | 6 | Frontend visual encyclopedia sweep | Not started |
 | 7 | Generated report classification | Not started |
 | 8 | Swift visible-copy sweep + scan script | Not started |
@@ -79,6 +80,30 @@ Completed artifacts:
 
 Train A did not modify Swift, project config, scripts, resources, workflows, or generated build artifacts. It did not move historical files.
 
+## Train B closeout
+
+Train B is YELLOW, not Green.
+
+Receipt: `docs/status/train-b-historical-header-quarantine-receipt-2026-05-16.md`
+
+Completed physical headers:
+
+- `docs/codex/Ambitions_2_0_Codex_Execution_Guide.md`
+- `docs/canon/Ambitions_2_0_Master_Plan.md`
+- `docs/canon/Ambitions_2_0_Product_Architecture.md`
+- `docs/canon/Ambitions_3_0_Copy_QA_Protocol.md`
+- `docs/canon/Ambitions_3_0_Privacy_Threat_Model.md`
+- `docs/canon/Ambitions_3_0_Flake_Management_Protocol.md`
+- `docs/canon/PXOS_Empty_Edge_And_Degraded_States.md`
+
+Connector-blocked full-preservation updates:
+
+- `docs/canon/Ambitions_3_0_Design_System_Primitives.md`
+- `docs/canon/Ambitions_4_0_Signature_Experience_Layer.md`
+- `docs/canon/Ambitions_4_0_External_Brain_Privacy_Threat_Model.md`
+
+Remaining broad legacy families still need either local safer patching or later archive/reference-scan work. No file movement or deletion occurred in Train B.
+
 ## Next train
 
-Train B should perform Phase 4 and Phase 5: add historical/supporting/guardrail headers to old Ambitions 2.0, Ambitions 3.0, Ambitions 4.0, PXOS, and ACUI files. No file movement should happen in Train B.
+Train C should perform Phases 6-10 only after accepting the Train B YELLOW status or running a local safer bulk-header pass for the remaining legacy files.
