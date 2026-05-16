@@ -38,7 +38,7 @@ public struct RealityMeridianCurrentTimeCursor: View {
 
     private func proportionalSpine(for date: Date) -> some View {
         GeometryReader { proxy in
-            let availableHeight = max(proxy.size.height, 168)
+            let availableHeight = max(proxy.size.height, CGFloat(168))
             let cursorY = cursorOffset(for: date, height: availableHeight)
 
             ZStack(alignment: .topLeading) {
@@ -91,7 +91,7 @@ public struct RealityMeridianCurrentTimeCursor: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.82)
                 }
-                .offset(y: max(0, min(availableHeight - 30, cursorY - 15)))
+                .offset(y: max(CGFloat(0), min(availableHeight - CGFloat(30), cursorY - CGFloat(15))))
             }
             .frame(width: proxy.size.width, height: availableHeight, alignment: .topLeading)
         }
