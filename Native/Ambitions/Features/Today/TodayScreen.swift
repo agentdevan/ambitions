@@ -20,7 +20,7 @@ struct TodayScreen: View {
     }
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topTrailing) {
             TodayBackgroundView()
 
             ScrollView {
@@ -79,13 +79,19 @@ struct TodayScreen: View {
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)
-                .padding(.vertical, theme.spacing.md)
+                .padding(.top, theme.spacing.xl)
+                .padding(.bottom, theme.spacing.md)
             }
             .scrollIndicators(.hidden)
             .accessibilityIdentifier("today.screen")
             .refreshable {
                 await refresh()
             }
+
+            LocalAmbitionsLockup()
+                .padding(.top, theme.spacing.md)
+                .padding(.trailing, theme.spacing.lg)
+                .accessibilitySortPriority(2)
         }
         .navigationTitle(showsNavigationChrome ? "Today" : "")
         .toolbar {
