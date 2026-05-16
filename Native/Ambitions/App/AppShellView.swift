@@ -670,18 +670,4 @@ private struct MemoryLensOverlayView: View {
     }
 }
 
-struct AppShellPlaceholderRouteView: View {
-    let title: String
-    let subtitle: String
-    let message: String
 
-    var body: some View {
-        FeatureScaffoldView(eyebrow: "Owned route", title: title, subtitle: subtitle) {
-            AppCard {
-                Text(message)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }
-        .accessibilityIdentifier("shell.placeholder.\(title.lowercased().replacingOccurrences(of: " ", with: "-"))")
-    }
-}

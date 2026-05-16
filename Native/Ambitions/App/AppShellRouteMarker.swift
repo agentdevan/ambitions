@@ -16,8 +16,4 @@ struct AppShellRouteMarker: Sendable, Equatable {
     }
 }
 
-extension AppShellPlaceholderRouteView {
-    var routeMarker: AppShellRouteMarker {
-        AppShellRouteMarker(title: title)
-    }
-}
+

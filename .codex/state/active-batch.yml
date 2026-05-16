@@ -1,4 +1,4 @@
-status: compact-mirror
+status: completed
 date: "2026-05-16"
 source_of_truth:
   - "docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md"
@@ -6,19 +6,19 @@ source_of_truth:
   - "docs/codex/BATCH_REGISTRY.md"
   - "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
 current:
-  train: "Flagship Audit And Remediation"
-  batch: "ALIGN-01-NAMING Foundation Alignment"
-  previous_batch: "AOS30 AmbitionsOS Beyond Roadmap"
+  train: "Platform Framework Compliance & Repo Hygiene Closeout"
+  batch: "RHC06 Repo Hygiene Closeout And Handoff"
+  previous_batch: "PFC31-PFC40 and RHC01-RHC05"
   previous_result: "green"
-  next_eligible_batch: "FCP27 App-Wide Flagship Audit And Remediation"
+  next_eligible_batch: "macOS-Terminal-Validation"
 blocked_forward_queue:
   blocked_batch: none
-  reason: "Proceeding with naming alignment as part of the flagship remediation path."
+  reason: "All queued global batch trains (PFC31-40, RHC01-06) are fully processed, audited, and closed."
 frontend_authority:
-  encyclopedia_required_for_frontend_touching_batches: true
+  encyclopedia_required_for_frontend_touching_batches: false
   entrypoint: "frontend/README.md"
 codex_os_override:
-  active_pass: "flagship-audit-remediation"
-  app_feature_implementation_allowed: true
-  production_swift_allowed: true
-  branch_creation_allowed: true
+  active_pass: "completed"
+  app_feature_implementation_allowed: false
+  production_swift_allowed: false
+  branch_creation_allowed: false
