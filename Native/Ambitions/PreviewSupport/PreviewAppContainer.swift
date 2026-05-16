@@ -48,7 +48,7 @@ enum PreviewAppContainerFactory {
                 weeklyReviewDashboard: PreviewPlanScenarios.weeklyReview
             ),
             insightsService: StubInsightsService(fixtures: fixtures),
-            profileService: StubProfileService(fixtures: fixtures),
+            youService: StubYouService(fixtures: fixtures),
             notificationService: StubNotificationService(),
             calendarRemindersService: StubCalendarRemindersService(),
             actionRouter: DefaultAppActionRouter(navigation: navigation),

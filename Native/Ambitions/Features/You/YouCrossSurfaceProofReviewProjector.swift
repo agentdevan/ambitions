@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-struct ProfileCrossSurfaceProofReviewProjector {
+struct YouCrossSurfaceProofReviewProjector {
     struct Input: Sendable, Equatable {
         let captureSeedCount: Int
         let goalProofCount: Int
@@ -11,8 +11,8 @@ struct ProfileCrossSurfaceProofReviewProjector {
         let reviewPromptCount: Int
     }
 
-    func project(_ input: Input) -> ProfileCrossSurfaceProofReviewState {
-        ProfileCrossSurfaceProofReviewState(
+    func project(_ input: Input) -> YouCrossSurfaceProofReviewState {
+        YouCrossSurfaceProofReviewState(
             title: "Proof and review connections",
             subtitle: "A compact map of where proof, receipts, and review prompts already belong across Ambitions.",
             items: [
@@ -27,8 +27,8 @@ struct ProfileCrossSurfaceProofReviewProjector {
         )
     }
 
-    private func captureToGoalProof(_ input: Input) -> ProfileCrossSurfaceProofReviewItem {
-        ProfileCrossSurfaceProofReviewItem(
+    private func captureToGoalProof(_ input: Input) -> YouCrossSurfaceProofReviewItem {
+        YouCrossSurfaceProofReviewItem(
             id: "cross-review-capture-goal-proof",
             title: "Capture to Goal proof",
             summary: input.captureSeedCount == 0
@@ -42,8 +42,8 @@ struct ProfileCrossSurfaceProofReviewProjector {
         )
     }
 
-    private func todayToGoalProof(_ input: Input) -> ProfileCrossSurfaceProofReviewItem {
-        ProfileCrossSurfaceProofReviewItem(
+    private func todayToGoalProof(_ input: Input) -> YouCrossSurfaceProofReviewItem {
+        YouCrossSurfaceProofReviewItem(
             id: "cross-review-today-goal-proof",
             title: "Today completion to Goal proof",
             summary: input.todayCompletionProofCount == 0
@@ -57,8 +57,8 @@ struct ProfileCrossSurfaceProofReviewProjector {
         )
     }
 
-    private func planReflowReceipt(_ input: Input) -> ProfileCrossSurfaceProofReviewItem {
-        ProfileCrossSurfaceProofReviewItem(
+    private func planReflowReceipt(_ input: Input) -> YouCrossSurfaceProofReviewItem {
+        YouCrossSurfaceProofReviewItem(
             id: "cross-review-plan-reflow-receipt",
             title: "Time reflow to receipt",
             summary: input.planReceiptCount == 0
@@ -72,8 +72,8 @@ struct ProfileCrossSurfaceProofReviewProjector {
         )
     }
 
-    private func goalChangeToYouHistory(_ input: Input) -> ProfileCrossSurfaceProofReviewItem {
-        ProfileCrossSurfaceProofReviewItem(
+    private func goalChangeToYouHistory(_ input: Input) -> YouCrossSurfaceProofReviewItem {
+        YouCrossSurfaceProofReviewItem(
             id: "cross-review-goal-you-history",
             title: "Goal change to You history",
             summary: input.goalChangeCount == 0
@@ -87,8 +87,8 @@ struct ProfileCrossSurfaceProofReviewProjector {
         )
     }
 
-    private var receiptDetailNavigation: ProfileCrossSurfaceProofReviewItem {
-        ProfileCrossSurfaceProofReviewItem(
+    private var receiptDetailNavigation: YouCrossSurfaceProofReviewItem {
+        YouCrossSurfaceProofReviewItem(
             id: "cross-review-receipt-detail-navigation",
             title: "Receipt detail navigation",
             summary: "Receipt rows point back to their owning surface instead of opening a separate feed.",
@@ -100,8 +100,8 @@ struct ProfileCrossSurfaceProofReviewProjector {
         )
     }
 
-    private func sparseReviewPrompts(_ input: Input) -> ProfileCrossSurfaceProofReviewItem {
-        ProfileCrossSurfaceProofReviewItem(
+    private func sparseReviewPrompts(_ input: Input) -> YouCrossSurfaceProofReviewItem {
+        YouCrossSurfaceProofReviewItem(
             id: "cross-review-sparse-prompts",
             title: "Sparse review prompts",
             summary: input.reviewPromptCount == 0

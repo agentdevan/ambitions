@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-struct RepositoryBackedProfileService: ProfileServicing {
+struct RepositoryBackedYouService: YouServicing {
     let repositories: AppRepositories
     let syncCapability: any SyncCapability
     let notificationService: any NotificationServicing
@@ -19,7 +19,7 @@ struct RepositoryBackedProfileService: ProfileServicing {
         self.calendarRemindersService = calendarRemindersService
     }
 
-    func loadProfileDashboard() async throws -> ProfileDashboard {
+    func loadYouDashboard() async throws -> YouDashboard {
         let snapshot = try await loadSnapshot()
         let syncStatus = await syncCapability.status()
         let notificationAuthorization = await notificationService.currentAuthorizationState()
@@ -34,7 +34,7 @@ struct RepositoryBackedProfileService: ProfileServicing {
         )
     }
 
-    func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard {
+    func saveYouPreferences(_ preferences: YouPreferencesUpdate) async throws -> YouDashboard {
         var state = try await repositories.appState.loadState()
         state.preferredTab = preferences.preferredTab.canonicalTopLevelTab
         state.appearancePreference = preferences.appearancePreference
@@ -42,11 +42,11 @@ struct RepositoryBackedProfileService: ProfileServicing {
         state.reviewCadenceDays = max(1, preferences.reviewCadenceDays)
         state.localOnlyModeEnabled = true
         try await repositories.appState.saveState(state)
-        return try await loadProfileDashboard()
+        return try await loadYouDashboard()
     }
 }
 
-private extension RepositoryBackedProfileService {
+private extension RepositoryBackedYouService {
     struct Snapshot {
         let goals: [Goal]
         let drafts: [PersistedGoalDraft]
@@ -86,7 +86,7 @@ private extension RepositoryBackedProfileService {
         notificationAuthorization: NotificationAuthorizationState,
         remindersAuthorization: CalendarRemindersAuthorizationState,
         calendarAuthorization: CalendarRemindersAuthorizationState
-    ) -> ProfileDashboard {
+    ) -> YouDashboard {
         let activeGoals = snapshot.goals.filter { $0.state == .active }.count
         let clarificationCount = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }.count
         let blockedCount = snapshot.drafts.filter { $0.latestResultKind == .blocked }.count
@@ -106,8 +106,8 @@ private extension RepositoryBackedProfileService {
             calendarAuthorization: calendarAuthorization
         )
 
-        return ProfileDashboard(
-            hero: ProfileHeroState(
+        return YouDashboard(
+            hero: YouHeroState(
                 title: profileTitle,
                 subtitle: "Your System keeps trust, privacy, receipts, planning setup, and defaults visible.",
                 dominantTruth: dominantTruth(
@@ -119,20 +119,20 @@ private extension RepositoryBackedProfileService {
                 trustWhisper: "No silent calendar changes. No active cloud sync claim. No destructive memory deletion from this surface.",
                 status: syncState,
                 pills: [
-                    ProfileStatusPill(id: "profile-pill-appearance", title: appearanceSummary, icon: "paintpalette", state: .selected),
-                    ProfileStatusPill(id: "profile-pill-sync", title: syncStatus.detail, icon: "lock.shield", state: syncState),
-                    ProfileStatusPill(
-                        id: "profile-pill-context",
+                    YouStatusPill(id: "you-pill-appearance", title: appearanceSummary, icon: "paintpalette", state: .selected),
+                    YouStatusPill(id: "you-pill-sync", title: syncStatus.detail, icon: "lock.shield", state: syncState),
+                    YouStatusPill(
+                        id: "you-pill-context",
                         title: contextSignals == 0 ? "No local memory signals yet" : "\(contextSignals) local memory signals",
                         icon: "waveform.path.ecg",
                         state: contextSignals == 0 ? .default : .default
                     )
                 ],
                 stats: [
-                    MetricSummary(id: "profile-active-goals", title: "Open goals", value: "\(activeGoals)", detail: "Active native goals", icon: "target"),
-                    MetricSummary(id: "profile-confirmation", title: "Confirmation rules", value: "\(safetySamples.confirmationRequired)", detail: "Sampled risky actions", icon: "hand.raised"),
-                    MetricSummary(id: "profile-corrections", title: "Corrections", value: "\(snapshot.teachingSignals.count)", detail: "User teaching signals", icon: "checkmark.seal"),
-                    MetricSummary(id: "profile-context", title: "Memory areas", value: "\(contextSignals)", detail: "Evidence, feedback, teaching, ledger", icon: "sparkles")
+                    MetricSummary(id: "you-active-goals", title: "Open goals", value: "\(activeGoals)", detail: "Active native goals", icon: "target"),
+                    MetricSummary(id: "you-confirmation", title: "Confirmation rules", value: "\(safetySamples.confirmationRequired)", detail: "Sampled risky actions", icon: "hand.raised"),
+                    MetricSummary(id: "you-corrections", title: "Corrections", value: "\(snapshot.teachingSignals.count)", detail: "User teaching signals", icon: "checkmark.seal"),
+                    MetricSummary(id: "you-context", title: "Memory areas", value: "\(contextSignals)", detail: "Evidence, feedback, teaching, ledger", icon: "sparkles")
                 ]
             ),
             systemCenter: makeSystemCenter(
@@ -144,36 +144,36 @@ private extension RepositoryBackedProfileService {
                 contextSignals: contextSignals,
                 appearanceSummary: appearanceSummary
             ),
-            controlRoom: ProfileControlRoomState(
+            controlRoom: YouControlRoomState(
                 title: "Control room",
                 subtitle: "A short map of the trust areas you can inspect without turning You into a settings dump.",
                 entries: [
-                    ProfileControlRoomEntry(
-                        id: "profile-control-constitution",
+                    YouControlRoomEntry(
+                        id: "you-control-constitution",
                         title: "Personal Operating Constitution",
                         subtitle: "Recommendation posture, recovery tone, planning strictness, and confirmation rules.",
                         icon: "scroll",
                         statusLabel: "Local defaults",
                         state: .selected
                     ),
-                    ProfileControlRoomEntry(
-                        id: "profile-control-memory",
+                    YouControlRoomEntry(
+                        id: "you-control-memory",
                         title: "What Ambitions Knows",
                         subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions can explain and let you correct.",
                         icon: "brain.head.profile",
                         statusLabel: "Stored on this device",
                         state: .default
                     ),
-                    ProfileControlRoomEntry(
-                        id: "profile-control-corrections",
+                    YouControlRoomEntry(
+                        id: "you-control-corrections",
                         title: "Corrections and assumptions",
                         subtitle: "Assumptions can be corrected through existing teaching and explanation paths.",
                         icon: "checkmark.bubble",
                         statusLabel: snapshot.teachingSignals.isEmpty ? "Available when present" : "\(snapshot.teachingSignals.count) active",
                         state: snapshot.teachingSignals.isEmpty ? .default : .success
                     ),
-                    ProfileControlRoomEntry(
-                        id: "profile-control-receipts",
+                    YouControlRoomEntry(
+                        id: "you-control-receipts",
                         title: "Receipts and audit posture",
                         subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.",
                         icon: "doc.text.magnifyingglass",
@@ -212,12 +212,12 @@ private extension RepositoryBackedProfileService {
             ),
             crossSurfaceProofReview: makeCrossSurfaceProofReview(snapshot: snapshot),
             reviews: reviews,
-            appearanceStudio: ProfileAppearanceStudioState(
+            appearanceStudio: YouAppearanceStudioState(
                 title: "Appearance Studio",
                 subtitle: "Curated, authored control over mode and accent so the shell stays legible without turning into a palette catalog.",
                 previewSummary: "Preview the current palette against real Ambitions objects before you save.",
                 modeOptions: AppAppearancePreference.allCases.map { preference in
-                    ProfileAppearanceOption(
+                    YouAppearanceOption(
                         id: "appearance-\(preference.rawValue)",
                         title: preference.title,
                         subtitle: appearanceSubtitle(for: preference),
@@ -225,7 +225,7 @@ private extension RepositoryBackedProfileService {
                     )
                 },
                 accentOptions: AmbitionAccentFamily.allCases.map { family in
-                    ProfileAccentOption(
+                    YouAccentOption(
                         id: "accent-\(family.rawValue)",
                         title: family.title,
                         subtitle: accentSubtitle(for: family),
@@ -238,10 +238,10 @@ private extension RepositoryBackedProfileService {
                 ),
                 footer: "Appearance changes use the existing shared theme system. Save keeps the choice for the next launch; leaving without saving preserves the current persisted default."
             ),
-            trustCenter: ProfileTrustCenterState(
+            trustCenter: YouTrustCenterState(
                 title: "Trust Center",
                 subtitle: "Truthful status for local-first data, permissions, external surfaces, sync, automation, and recovery.",
-                pulse: ProfileTrustPulseState(
+                pulse: YouTrustPulseState(
                     title: "Local trust pulse",
                     subtitle: syncPulseTitle(for: syncStatus),
                     detail: "Stored on this device. Optional permissions are explicit. Future sync and external surfaces remain labeled until verified.",
@@ -249,42 +249,42 @@ private extension RepositoryBackedProfileService {
                 ),
                 items: [
                     SettingsItem(
-                        id: "profile-trust-sync",
+                        id: "you-trust-sync",
                         title: "System trust posture",
                         subtitle: "The current runtime uses on-device storage. Apple-first sync is future-owned and not currently connected.",
                         icon: "lock.shield",
                         valueLabel: syncStatus.detail
                     ),
                     SettingsItem(
-                        id: "profile-trust-calendar",
+                        id: "you-trust-calendar",
                         title: "Calendar boundary",
                         subtitle: "Time may request calendar awareness after a clear action. Ambitions does not silently write calendar changes.",
                         icon: "calendar.badge.clock",
                         valueLabel: calendarAuthorizationLabel(calendarAuthorization)
                     ),
                     SettingsItem(
-                        id: "profile-trust-notifications",
+                        id: "you-trust-notifications",
                         title: "Notification pulse",
                         subtitle: "Local reminder scheduling exists on the current runtime. Authorization stays explicit here so ambient trust never feels hidden.",
                         icon: "bell.badge",
                         valueLabel: notificationStatus.statusLabel
                     ),
                     SettingsItem(
-                        id: "profile-trust-routing",
+                        id: "you-trust-routing",
                         title: "System status",
                         subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and ambient surfaces preserve local-first continuity language.",
                         icon: "arrow.triangle.branch",
                         valueLabel: "Calm"
                     ),
                     SettingsItem(
-                        id: "profile-trust-accessibility",
+                        id: "you-trust-accessibility",
                         title: "Accessibility Nutrition",
                         subtitle: "Internal checklist infrastructure exists. Public claims are locked until manual verification is recorded.",
                         icon: "figure",
                         valueLabel: "Claims locked"
                     ),
                     SettingsItem(
-                        id: "profile-trust-export-import",
+                        id: "you-trust-export-import",
                         title: "Export and disaster recovery",
                         subtitle: "Portable snapshot foundations exist, but the proof drill is not complete. This surface does not claim export is production-ready.",
                         icon: "externaldrive.badge.icloud",
@@ -308,26 +308,26 @@ private extension RepositoryBackedProfileService {
                 receiptSummaries: ActionReceiptProjection(receipts: policyReceipts).displaySummaries(limit: 3),
                 footer: "Trust-sensitive features are labeled as available, manual, unavailable, or future planned. Ambitions does not claim live sync, account systems, or verified accessibility here."
             ),
-            contextVault: ProfileContextVaultState(
+            contextVault: YouContextVaultState(
                 title: "Local memory map",
                 subtitle: "A compact inventory of local signal types, not an automatic profile.",
                 items: [
-                    ProfileContextVaultItem(
-                        id: "profile-vault-signals",
+                    YouContextVaultItem(
+                        id: "you-vault-signals",
                         title: "Recommendation evidence",
                         subtitle: "These categories can explain recommendations without claiming cloud intelligence.",
                         icon: "tray.full",
                         detail: "\(snapshot.evidence.count) evidence records, \(snapshot.feedback.count) feedback events, \(snapshot.teachingSignals.count) teaching signals, \(eventLedgerCount) recent ledger events"
                     ),
-                    ProfileContextVaultItem(
-                        id: "profile-vault-planning",
+                    YouContextVaultItem(
+                        id: "you-vault-planning",
                         title: "Planning memory",
                         subtitle: "Clarifications, blocked drafts, and open captures stay visible so future intelligence work remains auditable.",
                         icon: "rectangle.stack.badge.person.crop",
                         detail: "\(clarificationCount + blockedCount) draft signals, \(openCaptures) open captures"
                     ),
-                    ProfileContextVaultItem(
-                        id: "profile-vault-identity",
+                    YouContextVaultItem(
+                        id: "you-vault-identity",
                         title: "Personal defaults",
                         subtitle: "Name, launch defaults, and appearance stay separate from the execution surfaces they influence.",
                         icon: "person.text.rectangle",
@@ -335,20 +335,20 @@ private extension RepositoryBackedProfileService {
                     )
                 ],
                 policyItems: [
-                    ProfileSignalPolicyItem(
-                        id: "profile-policy-optional",
+                    YouSignalPolicyItem(
+                        id: "you-policy-optional",
                         title: "Optional by design",
                         detail: "Context is there to improve fit and trust. It is not required to use the core planning system.",
                         state: .default
                     ),
-                    ProfileSignalPolicyItem(
-                        id: "profile-policy-local",
+                    YouSignalPolicyItem(
+                        id: "you-policy-local",
                         title: "Local-first posture",
                         detail: "Signals stay on device in this build and should remain inspectable before any future continuity expansion.",
                         state: .selected
                     ),
-                    ProfileSignalPolicyItem(
-                        id: "profile-policy-explicit",
+                    YouSignalPolicyItem(
+                        id: "you-policy-explicit",
                         title: "Inspectable and understandable",
                         detail: "The app should be able to explain what signal types exist without feeling invasive or technical.",
                         state: .default
@@ -356,47 +356,47 @@ private extension RepositoryBackedProfileService {
                 ],
                 footer: "This is a foundation layer, not a full privacy admin surface. It keeps current local context understandable without inventing account, sync, or export flows."
             ),
-            integrationsSection: ProfileSectionGroup(
+            integrationsSection: YouSectionGroup(
                 title: "Integrations and permissions",
                 subtitle: "Only the system edges that materially affect trust or routing belong here.",
                 items: [
                     SettingsItem(
-                        id: "profile-integration-notifications",
+                        id: "you-integration-notifications",
                         title: "Notifications",
                         subtitle: notificationAuthorizationSubtitle(for: notificationStatus),
                         icon: "bell.badge",
                         valueLabel: notificationStatus.statusLabel
                     ),
                     SettingsItem(
-                        id: "profile-integration-reminders",
+                        id: "you-integration-reminders",
                         title: "Reminders integration",
                         subtitle: "Reminder write paths exist on the current EventKit seam. Authorization stays explicit so scheduling trust is legible.",
                         icon: "checklist",
                         valueLabel: calendarAuthorizationLabel(remindersAuthorization)
                     ),
                     SettingsItem(
-                        id: "profile-integration-calendar",
+                        id: "you-integration-calendar",
                         title: "Calendar integration",
                         subtitle: "Calendar event creation and conflict detection exist on the shared EventKit seam. Read depth depends on authorization level.",
                         icon: "calendar.badge.clock",
                         valueLabel: calendarAuthorizationLabel(calendarAuthorization)
                     ),
                     SettingsItem(
-                        id: "profile-integration-widgets",
+                        id: "you-integration-widgets",
                         title: "Widgets and Live Activity",
                         subtitle: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Widgets and Live Activity read the shared external snapshot, Now State Lease, and local-first continuity posture.",
                         icon: "rectangle.3.group",
                         valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview
                     ),
                     SettingsItem(
-                        id: "profile-integration-shortcuts",
+                        id: "you-integration-shortcuts",
                         title: "Navigation shortcuts",
                         subtitle: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Shortcuts support quick capture, focus, recovery, plan, and canonical open routes through the shared external handoff path.",
                         icon: "sparkles.rectangle.stack",
                         valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview
                     ),
                     SettingsItem(
-                        id: "profile-integration-share",
+                        id: "you-integration-share",
                         title: "Share Extension",
                         subtitle: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Shared text and URLs enter local Ambitions captures first, then land in the normal review or goal-creation path.",
                         icon: "square.and.arrow.up",
@@ -405,33 +405,33 @@ private extension RepositoryBackedProfileService {
                 ],
                 footer: "Notification and integration status should answer whether anything important needs attention without turning You into an admin checklist."
             ),
-            defaultsSection: ProfileSectionGroup(
+            defaultsSection: YouSectionGroup(
                 title: "Personal defaults",
                 subtitle: "These choices shape the shell, not the truth of your goals or day.",
                 items: [
                     SettingsItem(
-                        id: "profile-default-tab",
+                        id: "you-default-tab",
                         title: "Default landing tab",
                         subtitle: "Used on the next cold launch so re-entry starts where you prefer.",
                         icon: "square.grid.2x2",
                         valueLabel: snapshot.appState.preferredTab.canonicalTopLevelTab.title
                     ),
                     SettingsItem(
-                        id: "profile-default-review",
+                        id: "you-default-review",
                         title: "Review cadence",
                         subtitle: "How often the app frames a planning reset using the current local planning loop.",
                         icon: "clock.arrow.circlepath",
                         valueLabel: reviewLabel(days: snapshot.appState.reviewCadenceDays)
                     ),
                     SettingsItem(
-                        id: "profile-default-rituals",
+                        id: "you-default-rituals",
                         title: "Rituals",
                         subtitle: "Recurring support lives under Time, Today, Goal Detail, and Reviews instead of a standalone area.",
                         icon: "repeat",
                         valueLabel: "Plan-owned"
                     ),
                     SettingsItem(
-                        id: "profile-default-storage",
+                        id: "you-default-storage",
                         title: "Storage mode",
                         subtitle: "Goals, captures, evidence, and teaching signals persist through the native on-device repositories.",
                         icon: "internaldrive",
@@ -440,19 +440,19 @@ private extension RepositoryBackedProfileService {
                 ],
                 footer: nil
             ),
-            accountSection: ProfileSectionGroup(
+            accountSection: YouSectionGroup(
                 title: "Local app status",
                 subtitle: "This build stays explicit about what is not configured yet so You never implies hidden account requirements.",
                 items: [
                     SettingsItem(
-                        id: "profile-account-mode",
+                        id: "you-account-mode",
                         title: "Local mode",
                         subtitle: "No sign-in or cloud account is required for the current shipping native experience.",
                         icon: "person.crop.circle",
                         valueLabel: "On-device only"
                     ),
                     SettingsItem(
-                        id: "profile-account-billing",
+                        id: "you-account-billing",
                         title: "Purchases",
                         subtitle: "Subscriptions, digital unlocks, and purchase flows are not active product scope in this build.",
                         icon: "creditcard",
@@ -462,7 +462,7 @@ private extension RepositoryBackedProfileService {
                 footer: "Future account or monetization work should land only when canon and release-compliance truth explicitly activate it."
             ),
             notificationAuthorization: notificationStatus,
-            preferences: ProfilePreferencesState(
+            preferences: YouPreferencesState(
                 preferredTab: snapshot.appState.preferredTab.canonicalTopLevelTab,
                 appearancePreference: snapshot.appState.appearancePreference,
                 accentFamily: snapshot.appState.accentFamily,
@@ -475,15 +475,15 @@ private extension RepositoryBackedProfileService {
     func makeTrustDataMap(
         snapshot: Snapshot,
         syncStatus: SyncCapabilityStatus,
-        notificationStatus: ProfileNotificationAuthorization,
+        notificationStatus: YouNotificationAuthorization,
         calendarAuthorization: CalendarRemindersAuthorizationState,
         receipts: [ActionReceipt]
-    ) -> [ProfileTrustDataMapItem] {
+    ) -> [YouTrustDataMapItem] {
         let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
         let receiptCount = ActionReceiptProjection(receipts: receipts).displaySummaries().count
         let localSignalCount = snapshot.evidence.count + snapshot.feedback.count + snapshot.teachingSignals.count + snapshot.eventLedger.count
         return [
-            ProfileTrustDataMapItem(
+            YouTrustDataMapItem(
                 id: "trust-data-map-local-context",
                 title: "Local context",
                 dataTypes: "Goals, captures, proof, corrections, receipts, reviews",
@@ -493,7 +493,7 @@ private extension RepositoryBackedProfileService {
                 statusLabel: "Stored on this device",
                 semanticState: .trust
             ),
-            ProfileTrustDataMapItem(
+            YouTrustDataMapItem(
                 id: "trust-data-map-permissions",
                 title: "Permission boundaries",
                 dataTypes: "Notifications and Plan-owned calendar awareness",
@@ -503,7 +503,7 @@ private extension RepositoryBackedProfileService {
                 statusLabel: "Permission-gated",
                 semanticState: .calendarDerived
             ),
-            ProfileTrustDataMapItem(
+            YouTrustDataMapItem(
                 id: "trust-data-map-receipts",
                 title: "Receipts and correction state",
                 dataTypes: "Action receipts, undo posture, correction availability",
@@ -513,7 +513,7 @@ private extension RepositoryBackedProfileService {
                 statusLabel: "Evidence-led",
                 semanticState: .review
             ),
-            ProfileTrustDataMapItem(
+            YouTrustDataMapItem(
                 id: "trust-data-map-future-owned",
                 title: "Future-owned edges",
                 dataTypes: "Sync, export proof, destructive delete, broad memory controls",
@@ -528,22 +528,22 @@ private extension RepositoryBackedProfileService {
 
     func makeTrustCenterSections(
         syncStatus: SyncCapabilityStatus,
-        notificationStatus: ProfileNotificationAuthorization,
+        notificationStatus: YouNotificationAuthorization,
         calendarAuthorization: CalendarRemindersAuthorizationState,
         receipts: [ActionReceipt],
         teachingSignalCount: Int
-    ) -> [ProfileTrustCenterSection] {
+    ) -> [YouTrustCenterSection] {
         let receiptProjection = ActionReceiptProjection(receipts: receipts)
         let undoCount = receiptProjection.undoAvailableReceipts().count
         let receiptCount = receiptProjection.displaySummaries().count
 
         return [
-            ProfileTrustCenterSection(
+            YouTrustCenterSection(
                 id: "trust-center-status",
                 title: "Status and boundaries",
                 footer: "These rows describe current runtime truth. They do not request permissions or enable future services by themselves.",
                 routes: [
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-local-data",
                         title: "Local data status",
                         subtitle: "Goals, captures, proof, corrections, receipts, and reviews read from this device in the current runtime.",
@@ -552,7 +552,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .trust,
                         accessibilityHint: "Shows local storage trust status."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-calendar",
                         title: "Calendar boundary",
                         subtitle: "Calendar awareness is Time-owned. Writes require confirmation and are never silent.",
@@ -561,7 +561,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .calendarDerived,
                         accessibilityHint: "Shows calendar permission and write boundary."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-notifications",
                         title: "Notification boundary",
                         subtitle: "Local reminders are optional and permission-gated. Ambitions still works without notification access.",
@@ -570,7 +570,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: notificationStatus.statusLabel == "Denied" ? .caution : .neutral,
                         accessibilityHint: "Shows notification permission status."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-external-surfaces",
                         title: "External surfaces",
                         subtitle: "Widgets, Live Activities, Shortcuts, and Share Extension must use privacy snapshots and fallback routes.",
@@ -581,12 +581,12 @@ private extension RepositoryBackedProfileService {
                     )
                 ]
             ),
-            ProfileTrustCenterSection(
+            YouTrustCenterSection(
                 id: "trust-center-receipts",
                 title: "Receipts, corrections, and explanations",
                 footer: "Receipt rows summarize policy and action history without exposing raw logs by default.",
                 routes: [
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-receipts",
                         title: "Receipts",
                         subtitle: "Receipts say what happened, what changed, why, and what can be corrected or undone.",
@@ -595,7 +595,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .review,
                         accessibilityHint: "Shows receipt history posture."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-why-this",
                         title: "Why This?",
                         subtitle: "Recommendations name the action, source, reason, uncertainty, user control, and receipt behavior before trust-sensitive action.",
@@ -604,7 +604,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .trust,
                         accessibilityHint: "Shows why this explanation posture."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-quiet-reflow",
                         title: "Quiet Reflow",
                         subtitle: "Meaningful time changes stay previewed before apply; manual planning remains available if a source is unavailable.",
@@ -613,7 +613,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .calendarDerived,
                         accessibilityHint: "Shows reflow preview and manual fallback posture."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-corrections",
                         title: "Correction routes",
                         subtitle: "Supported corrections stay tied to existing Goal Detail, Capture, teaching, and explanation seams.",
@@ -622,7 +622,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .trust,
                         accessibilityHint: "Shows correction availability."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-undo",
                         title: "Undo rules",
                         subtitle: "Local undo is shown only where safe. Broad, external, destructive, or unsupported changes stay blocked or confirmation-gated.",
@@ -631,7 +631,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .caution,
                         accessibilityHint: "Shows undo safety posture."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-explanations",
                         title: "Explanations",
                         subtitle: "Why This, Why Now, Why Changed, and What This Uses should cite local evidence or admit when detail is unavailable.",
@@ -642,12 +642,12 @@ private extension RepositoryBackedProfileService {
                     )
                 ]
             ),
-            ProfileTrustCenterSection(
+            YouTrustCenterSection(
                 id: "trust-center-privacy-future",
                 title: "Privacy and future-owned capabilities",
                 footer: "Unavailable states stay visible so this surface does not imply hidden accounts, cloud sync, or production-ready export.",
                 routes: [
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-privacy",
                         title: "Privacy defaults",
                         subtitle: "Sensitive details should be hidden on compact and external surfaces unless the user chooses otherwise.",
@@ -656,7 +656,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .protected,
                         accessibilityHint: "Shows privacy-safe display posture."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-sync-export",
                         title: "Sync / Export truth",
                         subtitle: "Sync is not connected. Export and import proof remain future-owned until the disaster drill passes.",
@@ -665,7 +665,7 @@ private extension RepositoryBackedProfileService {
                         semanticState: .caution,
                         accessibilityHint: "Shows sync and export truth."
                     ),
-                    ProfileTrustCenterRoute(
+                    YouTrustCenterRoute(
                         id: "trust-route-accessibility-claims",
                         title: "Accessibility claims",
                         subtitle: "Internal evidence exists. Public claims stay locked until manual VoiceOver, Dynamic Type, Reduce Motion, contrast, and motor review is recorded.",
@@ -682,22 +682,22 @@ private extension RepositoryBackedProfileService {
     func makeSystemCenter(
         snapshot: Snapshot,
         syncStatus: SyncCapabilityStatus,
-        notificationStatus: ProfileNotificationAuthorization,
+        notificationStatus: YouNotificationAuthorization,
         calendarAuthorization: CalendarRemindersAuthorizationState,
-        reviews: ProfileReviewsState,
+        reviews: YouReviewsState,
         contextSignals: Int,
         appearanceSummary: String
-    ) -> ProfileSystemCenterState {
-        ProfileSystemCenterState(
+    ) -> YouSystemCenterState {
+        YouSystemCenterState(
             title: "Your System",
-            subtitle: "User System Profile keeps Planning Setup, Trust & Automation, Privacy, Receipts & History, and Defaults visible.",
+            subtitle: "User System You keeps Planning Setup, Trust & Automation, Privacy, Receipts & History, and Defaults visible.",
             sections: [
-                ProfileSystemCenterSection(
+                YouSystemCenterSection(
                     id: "planning-behavior",
                     title: "Planning Setup",
                     footer: "Guided automation is the default. Ambitions does not fill open time just because it exists.",
                     items: [
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "schedule-availability",
                             title: "Schedule & Availability",
                             subtitle: "Work, school, protected time, buffers, and anchors.",
@@ -706,7 +706,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .calendarDerived,
                             accessibilityHint: "Opens Schedule and Availability."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "plan-behavior",
                             title: "Time Behavior",
                             subtitle: "Open time, protected free time, buffers, and reflow rules.",
@@ -715,7 +715,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .protected,
                             accessibilityHint: "Opens Time Behavior."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "automation-trust",
                             title: "Trust & Automation",
                             subtitle: "Trust comes before automation. \(AutomationLevel.defaultLevel.explanation)",
@@ -724,7 +724,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .trust,
                             accessibilityHint: "Opens Trust and Automation."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "vacation-away-time",
                             title: "Vacation / Away Time",
                             subtitle: "Vacation is not free time unless you mark it open.",
@@ -733,7 +733,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .protected,
                             accessibilityHint: "Opens Vacation and Away Time."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "durations",
                             title: "Durations",
                             subtitle: "Planned, suggested, historical, actual, or unset.",
@@ -744,12 +744,12 @@ private extension RepositoryBackedProfileService {
                         )
                     ]
                 ),
-                ProfileSystemCenterSection(
+                YouSystemCenterSection(
                     id: "memory-and-trust",
                     title: "Memory and Trust",
                     footer: nil,
                     items: [
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "what-ambitions-knows",
                             title: "What Ambitions Knows",
                             subtitle: "Saved local context.",
@@ -758,7 +758,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: contextSignals == 0 ? .neutral : .trust,
                             accessibilityHint: "Opens local memory controls."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "trust-center",
                             title: "Trust Center",
                             subtitle: "Permissions, privacy, and boundaries.",
@@ -767,7 +767,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .trust,
                             accessibilityHint: "Opens Trust Center."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "receipts-history",
                             title: "Receipts & History",
                             subtitle: "What changed and why.",
@@ -776,7 +776,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .neutral,
                             accessibilityHint: "Opens receipt history."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "corrections",
                             title: "Corrections",
                             subtitle: "Fix assumptions and teaching signals.",
@@ -787,12 +787,12 @@ private extension RepositoryBackedProfileService {
                         )
                     ]
                 ),
-                ProfileSystemCenterSection(
+                YouSystemCenterSection(
                     id: "reviews-and-progress",
                     title: "Reviews and Progress",
                     footer: nil,
                     items: [
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "reviews",
                             title: "Reviews",
                             subtitle: "Recovery and progress check-ins.",
@@ -801,7 +801,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .review,
                             accessibilityHint: "Opens Reviews."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "proof",
                             title: "Proof",
                             subtitle: "Evidence and progress notes.",
@@ -810,7 +810,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .success,
                             accessibilityHint: "Opens proof summary."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "archive-completed",
                             title: "Archive / Completed",
                             subtitle: "Saved learning from finished work.",
@@ -821,12 +821,12 @@ private extension RepositoryBackedProfileService {
                         )
                     ]
                 ),
-                ProfileSystemCenterSection(
+                YouSystemCenterSection(
                     id: "personal-defaults",
                     title: "Defaults",
                     footer: nil,
                     items: [
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "profile",
                             title: "About You",
                             subtitle: "Name and default landing tab.",
@@ -835,7 +835,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .neutral,
                             accessibilityHint: "Opens About You settings."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "personalization",
                             title: "Personalization",
                             subtitle: "Tone and planning defaults.",
@@ -844,7 +844,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .trust,
                             accessibilityHint: "Opens personalization settings."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "appearance",
                             title: "Appearance",
                             subtitle: "Mode and accent.",
@@ -855,12 +855,12 @@ private extension RepositoryBackedProfileService {
                         )
                     ]
                 ),
-                ProfileSystemCenterSection(
+                YouSystemCenterSection(
                     id: "system-edges",
                     title: "System Edges",
                     footer: nil,
                     items: [
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "notifications",
                             title: "Notifications",
                             subtitle: "Reminder permission.",
@@ -869,7 +869,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: notificationStatus.statusLabel == "Denied" ? .caution : .neutral,
                             accessibilityHint: "Opens notification settings."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "integrations",
                             title: "Integrations",
                             subtitle: "Calendar and reminders.",
@@ -878,7 +878,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .calendarDerived,
                             accessibilityHint: "Opens integrations."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "widgets-live-activities-shortcuts",
                             title: "Widgets / Live Activities / Shortcuts",
                             subtitle: "External surface status.",
@@ -887,7 +887,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .neutral,
                             accessibilityHint: "Opens external surface status."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "export-import",
                             title: "Export / Import",
                             subtitle: "Local backup and restore posture.",
@@ -898,12 +898,12 @@ private extension RepositoryBackedProfileService {
                         )
                     ]
                 ),
-                ProfileSystemCenterSection(
+                YouSystemCenterSection(
                     id: "accessibility-and-support",
                     title: "Accessibility and Support",
                     footer: "Rows open details; nothing here changes plans silently.",
                     items: [
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "accessibility",
                             title: "Accessibility",
                             subtitle: "Claims and manual review status.",
@@ -912,7 +912,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .accessibilityUnverified,
                             accessibilityHint: "Opens accessibility status."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "help-support",
                             title: "Help / Support",
                             subtitle: "Guidance and support posture.",
@@ -921,7 +921,7 @@ private extension RepositoryBackedProfileService {
                             semanticState: .neutral,
                             accessibilityHint: "Opens help and support."
                         ),
-                        ProfileSystemCenterItem(
+                        YouSystemCenterItem(
                             id: "about",
                             title: "About",
                             subtitle: "Local-first app status.",
@@ -940,9 +940,9 @@ private extension RepositoryBackedProfileService {
     func makePreviewSwatches(
         selectedAppearance: AppAppearancePreference,
         selectedAccent: AmbitionAccentFamily
-    ) -> [ProfilePreviewSwatch] {
+    ) -> [YouPreviewSwatch] {
         [
-            ProfilePreviewSwatch(
+            YouPreviewSwatch(
                 id: "preview-now",
                 title: "Start Here",
                 subtitle: "Primary decision surface with one calm action and source proof.",
@@ -953,7 +953,7 @@ private extension RepositoryBackedProfileService {
                 state: .selected,
                 accessibilityLabel: "Appearance preview for Start Here decision surface"
             ),
-            ProfilePreviewSwatch(
+            YouPreviewSwatch(
                 id: "preview-rail",
                 title: "Reality Meridian",
                 subtitle: "Now, Next, and Later stay readable without status clutter.",
@@ -964,7 +964,7 @@ private extension RepositoryBackedProfileService {
                 state: .default,
                 accessibilityLabel: "Appearance preview for Reality Meridian continuity spine"
             ),
-            ProfilePreviewSwatch(
+            YouPreviewSwatch(
                 id: "preview-lifeshape",
                 title: "LifeShape",
                 subtitle: "Capacity contour keeps pressure visible without becoming a calendar.",
@@ -975,7 +975,7 @@ private extension RepositoryBackedProfileService {
                 state: .default,
                 accessibilityLabel: "Appearance preview for LifeShape capacity contour"
             ),
-            ProfilePreviewSwatch(
+            YouPreviewSwatch(
                 id: "preview-receipt",
                 title: "Receipt Drawer",
                 subtitle: "Proof and source folds keep trust quieter than primary action.",
@@ -1037,76 +1037,76 @@ private extension RepositoryBackedProfileService {
     func makeConstitution(
         snapshot: Snapshot,
         calendarAuthorization: CalendarRemindersAuthorizationState,
-        notificationStatus: ProfileNotificationAuthorization,
+        notificationStatus: YouNotificationAuthorization,
         safetySamples: SafetyBoundarySamples
-    ) -> ProfileConstitutionState {
-        ProfileConstitutionState(
+    ) -> YouConstitutionState {
+        YouConstitutionState(
             title: "Personal Operating Constitution",
             subtitle: "The local rules Ambitions uses to stay useful without becoming pushy or silent.",
             postureSummary: "Calm, conservative, correction-aware, and local-first by default.",
             rules: [
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "constitution-local-first",
                     title: "Start from local truth",
                     detail: "Goals, captures, evidence, corrections, and recent ledger events are read from this device. Sync is not currently connected.",
                     statusLabel: "Stored on this device",
                     state: .selected
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "constitution-recommendation-posture",
                     title: "Suggest one doable step",
                     detail: "Suggestions should be explainable by goal, plan, evidence, or recent feedback, not vague intelligence claims.",
                     statusLabel: snapshot.eventLedger.isEmpty ? "Evidence-light" : "Uses local evidence",
                     state: .default
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "constitution-recovery-tone",
                     title: "Recover without shame",
                     detail: "Delays, skips, and smaller-version requests are treated as recovery context, not blame.",
                     statusLabel: "Calm recovery",
                     state: .success
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "constitution-low-risk-preferences",
                     title: "Make low-risk preferences visible",
                     detail: "Display, density, recovery, and repeated routing preferences may be remembered only when they stay visible, source-tied, and correctable.",
                     statusLabel: "Receipt first",
                     state: .default
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "constitution-sensitive-memory",
                     title: "Ask before sensitive memory",
                     detail: "Health, relationship, financial, location, calendar-derived, and sensitive Life Area context requires user review before stronger memory use.",
                     statusLabel: "Approval required",
                     state: .warning
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "constitution-operating-manual-evidence",
                     title: "Do not invent an operating manual",
                     detail: "The personal operating manual can summarize explicit local choices and evidence, but it must admit when context is thin.",
                     statusLabel: snapshot.eventLedger.isEmpty && snapshot.teachingSignals.isEmpty ? "Evidence-light" : "Evidence-led",
                     state: snapshot.eventLedger.isEmpty && snapshot.teachingSignals.isEmpty ? .default : .success
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "constitution-calendar",
                     title: "Ask before calendar writes",
                     detail: "Calendar access is explicit and Plan-owned. Calendar writes require confirmation and are never silent.",
                     statusLabel: calendarAuthorizationLabel(calendarAuthorization),
                     state: safetySamples.calendarWrite.mustNeverBeSilent ? .warning : .default
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "constitution-interruptions",
                     title: "Interruptions stay optional",
                     detail: "Notifications can support reminders, but Ambitions still works when notification access is denied or not requested.",
                     statusLabel: notificationStatus.statusLabel,
-                    state: notificationStatus.statusLabel == "Denied" ? .warning : .default
+                    state: notificationStatus.canRequestAuthorization ? .default : .caution
                 )
             ],
-            footer: "These are current local defaults, not a broad account/preferences system. Deeper Constitution maturity remains future-owned."
+            footer: "The Constitution is a local boundary, not a sync policy."
         )
     }
 
-    func makeMemoryControls(snapshot: Snapshot) -> ProfileMemoryControlState {
+    func makeMemoryControls(snapshot: Snapshot) -> YouMemoryControlState {
         let correctionCount = snapshot.teachingSignals.count
         let correctionStatus = correctionCount == 0 ? "None yet" : "\(correctionCount) local"
         let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
@@ -1143,7 +1143,7 @@ private extension RepositoryBackedProfileService {
             correctionCount: correctionCount,
             openCaptures: openCaptures
         )
-        return ProfileMemoryControlState(
+        return YouMemoryControlState(
             title: "What Ambitions Knows",
             subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
             items: [
@@ -1190,7 +1190,7 @@ private extension RepositoryBackedProfileService {
                     valueLabel: "Review first"
                 )
             ],
-            consent: ProfilePersonalizationConsentState(
+            consent: YouPersonalizationConsentState(
                 title: "Personalization consent",
                 summary: "Ambitions can use current local memory to explain and suggest, but stronger memory changes stay reviewable.",
                 sourceLabel: "Based on local records",
@@ -1199,7 +1199,7 @@ private extension RepositoryBackedProfileService {
                 controlLabel: "You are in control"
             ),
             privateModeControls: [
-                ProfilePrivateModeControl(
+                YouPrivateModeControl(
                     id: "private-mode-compact-detail",
                     title: "Compact private detail",
                     summary: "Proof, feedback, and narrative memory stay summarized before any detailed review.",
@@ -1208,7 +1208,7 @@ private extension RepositoryBackedProfileService {
                     controlLabel: "Open owning surface",
                     state: .success
                 ),
-                ProfilePrivateModeControl(
+                YouPrivateModeControl(
                     id: "private-mode-external-surfaces",
                     title: "External surfaces",
                     summary: "Widgets, Live Activities, Shortcuts, and Share Extension must use privacy snapshots or fallback routes.",
@@ -1217,7 +1217,7 @@ private extension RepositoryBackedProfileService {
                     controlLabel: "No raw memory",
                     state: .warning
                 ),
-                ProfilePrivateModeControl(
+                YouPrivateModeControl(
                     id: "private-mode-sensitive-memory",
                     title: "Sensitive memory",
                     summary: "Sensitive categories are not inferred here and require explicit approval before stronger use.",
@@ -1226,7 +1226,7 @@ private extension RepositoryBackedProfileService {
                     controlLabel: "Review first",
                     state: .warning
                 ),
-                ProfilePrivateModeControl(
+                YouPrivateModeControl(
                     id: "private-mode-destructive-controls",
                     title: "Destructive controls",
                     summary: "Forget, delete, and broad pause remain blocked until confirmation, receipt, and undo coverage are proven.",
@@ -1237,13 +1237,13 @@ private extension RepositoryBackedProfileService {
                 )
             ],
             groups: [
-                ProfileMemoryGroup(
+                YouMemoryGroup(
                     id: "memory-group-current",
                     title: "Current local memory",
                     subtitle: "Used only from local Ambitions records available in this runtime.",
                     footer: "Current does not mean permanent. It means the source is active in the local app right now.",
                     items: [
-                        ProfileMemoryItem(
+                        YouMemoryItem(
                             id: "memory-item-ledger",
                             title: "Recent actions and changes",
                             detail: eventCount == 0 ? "No recent local events are available yet." : "\(eventCount) recent local events are available for explanation and review context.",
@@ -1259,7 +1259,7 @@ private extension RepositoryBackedProfileService {
                             accessibilityValue: eventCount == 0 ? "Based on older context. Private by default." : "Current. Private by default.",
                             accessibilityHint: "Shows what the event ledger is used for and why deletion is not exposed here."
                         ),
-                        ProfileMemoryItem(
+                        YouMemoryItem(
                             id: "memory-item-proof-feedback",
                             title: "Proof and feedback",
                             detail: proofFeedbackCount == 0 ? "No proof or feedback records are available yet." : "\(proofFeedbackCount) proof or feedback records can ground progress and review language.",
@@ -1272,10 +1272,10 @@ private extension RepositoryBackedProfileService {
                                 memoryAction(id: "pause-proof", title: "Pause use", statusLabel: "Review later", detail: "Pause is represented as a review need here until a safe preference exists.", state: .warning)
                             ],
                             accessibilityLabel: "Proof and feedback memory",
-                            accessibilityValue: "\(proofFeedbackCount == 0 ? ProfileMemoryFreshness.mayNeedReview.label : ProfileMemoryFreshness.current.label). Detail hidden in compact views.",
+                            accessibilityValue: "\(proofFeedbackCount == 0 ? YouMemoryFreshness.mayNeedReview.label : YouMemoryFreshness.current.label). Detail hidden in compact views.",
                             accessibilityHint: "Shows what proof and feedback memory is used for and where it can be corrected."
                         ),
-                        ProfileMemoryItem(
+                        YouMemoryItem(
                             id: "memory-item-captures",
                             title: "Open captures",
                             detail: openCaptures == 0 ? "No open captures need placement." : "\(openCaptures) open captures may still need routing, review, or archiving.",
@@ -1292,13 +1292,13 @@ private extension RepositoryBackedProfileService {
                         )
                     ]
                 ),
-                ProfileMemoryGroup(
+                YouMemoryGroup(
                     id: "memory-group-corrections",
                     title: "Corrections and review signals",
                     subtitle: "User-corrected context is kept explicit and source-tied.",
                     footer: "No sensitive identity categories are inferred here. Correction signals stay bounded to the artifacts that created them.",
                     items: [
-                        ProfileMemoryItem(
+                        YouMemoryItem(
                             id: "memory-item-corrections",
                             title: "Corrections and teaching",
                             detail: correctionCount == 0 ? "No active teaching signals are saved yet." : "\(correctionCount) local teaching signals can influence future explanation language.",
@@ -1324,7 +1324,7 @@ private extension RepositoryBackedProfileService {
             runtimeInspectionItems: runtimeInspectionItems,
             localLearningControls: localLearningControls,
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
-            footer: "What Ambitions Knows is local, inspectable, export-bounded, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and durable rejected-memory rules remain confirmation-gated or manual/future until the safe boundary can prove the result."
+            footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and durable rejected-memory rules remain confirmation-gated or manual/future until the safe boundary can prove the result."
         )
     }
 
@@ -1333,9 +1333,9 @@ private extension RepositoryBackedProfileService {
         proofFeedbackCount: Int,
         correctionCount: Int,
         openCaptures: Int
-    ) -> [ProfileLocalLearningControl] {
+    ) -> [YouLocalLearningControl] {
         [
-            ProfileLocalLearningControl(
+            YouLocalLearningControl(
                 id: "local-learning-reset",
                 title: "Reset learned corrections",
                 summary: correctionCount == 0
@@ -1350,7 +1350,7 @@ private extension RepositoryBackedProfileService {
                 accessibilityValue: correctionCount == 0 ? "No active correction learning. Local only." : "\(correctionCount) correction signals. Confirmation required.",
                 accessibilityHint: "Explains the reset boundary for local correction learning without claiming broad deletion."
             ),
-            ProfileLocalLearningControl(
+            YouLocalLearningControl(
                 id: "local-learning-disable",
                 title: "Disable learning from this signal",
                 summary: "Learning reuse can be disabled only at the source-tied signal boundary; Ambitions keeps manual planning and correction available.",
@@ -1363,7 +1363,7 @@ private extension RepositoryBackedProfileService {
                 accessibilityValue: "Review first. Local-only.",
                 accessibilityHint: "Explains that disabling learning is source-tied and confirmation-aware."
             ),
-            ProfileLocalLearningControl(
+            YouLocalLearningControl(
                 id: "local-learning-delete",
                 title: "Delete a learning signal",
                 summary: "Single-signal deletion remains confirmation-gated and receipt-aware. Broad destructive deletion is not claimed from this surface.",
@@ -1376,7 +1376,7 @@ private extension RepositoryBackedProfileService {
                 accessibilityValue: "Needs confirmation. No broad destructive delete claim.",
                 accessibilityHint: "Explains that deletion is bounded to a source-tied learning signal and does not claim full memory erasure."
             ),
-            ProfileLocalLearningControl(
+            YouLocalLearningControl(
                 id: "local-learning-export",
                 title: "Export learning summary",
                 summary: exportSummary(
@@ -1416,9 +1416,9 @@ private extension RepositoryBackedProfileService {
         proofFeedbackCount: Int,
         correctionCount: Int,
         openCaptures: Int
-    ) -> [ProfileMemoryLensItem] {
+    ) -> [YouMemoryLensItem] {
         [
-            ProfileMemoryLensItem(
+            YouMemoryLensItem(
                 id: "memory-lens-current-plan",
                 title: "Current plan context",
                 summary: proofFeedbackCount == 0
@@ -1436,7 +1436,7 @@ private extension RepositoryBackedProfileService {
                 accessibilityValue: proofFeedbackCount == 0 ? "May need review. Summary only." : "Current. Summary only.",
                 accessibilityHint: "Shows source age, why remembered, privacy boundary, and correction posture for current plan recall."
             ),
-            ProfileMemoryLensItem(
+            YouMemoryLensItem(
                 id: "memory-lens-corrections",
                 title: "Correction memory",
                 summary: correctionCount == 0
@@ -1454,7 +1454,7 @@ private extension RepositoryBackedProfileService {
                 accessibilityValue: correctionCount == 0 ? "Based on older context. No sensitive inference." : "Current. Review before durable memory.",
                 accessibilityHint: "Shows correction, rejection, and deletion boundaries for correction memory."
             ),
-            ProfileMemoryLensItem(
+            YouMemoryLensItem(
                 id: "memory-lens-open-captures",
                 title: "Open capture context",
                 summary: openCaptures == 0
@@ -1480,9 +1480,9 @@ private extension RepositoryBackedProfileService {
         proofFeedbackCount: Int,
         correctionCount: Int,
         openCaptures: Int
-    ) -> [ProfileRuntimeInspectionItem] {
+    ) -> [YouRuntimeInspectionItem] {
         [
-            ProfileRuntimeInspectionItem(
+            YouRuntimeInspectionItem(
                 id: "runtime-inspection-learned",
                 kind: .learned,
                 title: "What Ambitions learned",
@@ -1497,7 +1497,7 @@ private extension RepositoryBackedProfileService {
                 accessibilityValue: correctionCount == 0 ? "No user-confirmed learning saved yet. Local and source-tied." : "\(correctionCount) correction signals. Local and source-tied.",
                 accessibilityHint: "Shows learned local correction state and where reuse can be corrected or rejected."
             ),
-            ProfileRuntimeInspectionItem(
+            YouRuntimeInspectionItem(
                 id: "runtime-inspection-used",
                 kind: .used,
                 title: "What Ambitions used",
@@ -1512,7 +1512,7 @@ private extension RepositoryBackedProfileService {
                 accessibilityValue: proofFeedbackCount + eventCount == 0 ? "No current proof, feedback, or recent event records. Summary first." : "\(proofFeedbackCount + eventCount) local records. Summary first.",
                 accessibilityHint: "Shows the local records used for review and change explanations."
             ),
-            ProfileRuntimeInspectionItem(
+            YouRuntimeInspectionItem(
                 id: "runtime-inspection-ignored",
                 kind: .ignored,
                 title: "What Ambitions ignored or rejected",
@@ -1527,7 +1527,7 @@ private extension RepositoryBackedProfileService {
                 accessibilityValue: openCaptures == 0 ? "No held open captures. No hidden work." : "\(openCaptures) open captures held for review. No hidden work.",
                 accessibilityHint: "Shows what local context is being held back or rejected before stronger memory use."
             ),
-            ProfileRuntimeInspectionItem(
+            YouRuntimeInspectionItem(
                 id: "runtime-inspection-changed",
                 kind: .changed,
                 title: "What Ambitions changed",
@@ -1550,12 +1550,12 @@ private extension RepositoryBackedProfileService {
         proofFeedbackCount: Int,
         correctionCount: Int,
         openCaptures: Int
-    ) -> [ProfileNarrativeMemory] {
-        var memories: [ProfileNarrativeMemory] = []
+    ) -> [YouNarrativeMemory] {
+        var memories: [YouNarrativeMemory] = []
 
         if correctionCount > 0 {
             memories.append(
-                ProfileNarrativeMemory(
+                YouNarrativeMemory(
                     id: "narrative-memory-corrections",
                     title: "You corrected how Ambitions reads something",
                     summary: "\(correctionCount) manual correction\(correctionCount == 1 ? "" : "s") can change future explanation language where the original artifact still exists.",
@@ -1578,7 +1578,7 @@ private extension RepositoryBackedProfileService {
 
         if proofFeedbackCount > 0 {
             memories.append(
-                ProfileNarrativeMemory(
+                YouNarrativeMemory(
                     id: "narrative-memory-proof",
                     title: "Recent proof can ground progress",
                     summary: "\(proofFeedbackCount) proof or feedback record\(proofFeedbackCount == 1 ? "" : "s") can make review language less intention-only.",
@@ -1599,7 +1599,7 @@ private extension RepositoryBackedProfileService {
 
         if eventCount > 0 {
             memories.append(
-                ProfileNarrativeMemory(
+                YouNarrativeMemory(
                     id: "narrative-memory-events",
                     title: "Recent actions can explain what changed",
                     summary: "\(eventCount) recent local event\(eventCount == 1 ? "" : "s") can support calm change explanations and recovery summaries.",
@@ -1620,7 +1620,7 @@ private extension RepositoryBackedProfileService {
 
         if memories.isEmpty {
             memories.append(
-                ProfileNarrativeMemory(
+                YouNarrativeMemory(
                     id: "narrative-memory-empty",
                     title: "No narrative memory yet",
                     summary: openCaptures > 0 ? "Open captures may become reviewable memory after you place or archive them." : "Ambitions should stay evidence-light until local records, receipts, corrections, or reviews exist.",
@@ -1646,12 +1646,12 @@ private extension RepositoryBackedProfileService {
         proofFeedbackCount: Int,
         correctionCount: Int,
         openCaptures: Int
-    ) -> [ProfileMemoryPattern] {
-        var patterns: [ProfileMemoryPattern] = []
+    ) -> [YouMemoryPattern] {
+        var patterns: [YouMemoryPattern] = []
 
         if correctionCount > 0 {
             patterns.append(
-                ProfileMemoryPattern(
+                YouMemoryPattern(
                     id: "memory-pattern-corrections",
                     title: "Correction-shaped learning",
                     summary: "Only user-confirmed correction signals are treated as learning here.",
@@ -1664,7 +1664,7 @@ private extension RepositoryBackedProfileService {
 
         if openCaptures > 0 {
             patterns.append(
-                ProfileMemoryPattern(
+                YouMemoryPattern(
                     id: "memory-pattern-open-captures",
                     title: "Loose items need a place",
                     summary: "Open captures may need routing before Ambitions should use them as context.",
@@ -1677,7 +1677,7 @@ private extension RepositoryBackedProfileService {
 
         if proofFeedbackCount + eventCount > 0 {
             patterns.append(
-                ProfileMemoryPattern(
+                YouMemoryPattern(
                     id: "memory-pattern-local-evidence",
                     title: "Local evidence exists",
                     summary: "Receipts, proof, feedback, or events can ground review language without becoming an automatic recommendation.",
@@ -1690,7 +1690,7 @@ private extension RepositoryBackedProfileService {
 
         if patterns.isEmpty {
             patterns.append(
-                ProfileMemoryPattern(
+                YouMemoryPattern(
                     id: "memory-pattern-none",
                     title: "No pattern detected",
                     summary: "Ambitions should not invent a pattern when local evidence is thin.",
@@ -1710,8 +1710,8 @@ private extension RepositoryBackedProfileService {
         statusLabel: String,
         detail: String,
         state: AmbitionVisualState
-    ) -> ProfileMemoryAction {
-        ProfileMemoryAction(
+    ) -> YouMemoryAction {
+        YouMemoryAction(
             id: id,
             title: title,
             statusLabel: statusLabel,
@@ -1720,10 +1720,10 @@ private extension RepositoryBackedProfileService {
         )
     }
 
-    func makeAssumptionCorrections(snapshot: Snapshot) -> ProfileAssumptionCorrectionState {
+    func makeAssumptionCorrections(snapshot: Snapshot) -> YouAssumptionCorrectionState {
         let activeSignals = snapshot.teachingSignals.filter { $0.disposition == .active }
         let correctionEvents = snapshot.eventLedger.filter { $0.kind == .userCorrectionAdded }
-        return ProfileAssumptionCorrectionState(
+        return YouAssumptionCorrectionState(
             title: "Corrections and assumptions",
             subtitle: "Ambitions should be teachable without asking you to understand its internals.",
             items: [
@@ -1753,33 +1753,33 @@ private extension RepositoryBackedProfileService {
         )
     }
 
-    func makeAutomationBoundary(safetySamples: SafetyBoundarySamples) -> ProfileAutomationBoundaryState {
-        ProfileAutomationBoundaryState(
+    func makeAutomationBoundary(safetySamples: SafetyBoundarySamples) -> YouAutomationBoundaryState {
+        YouAutomationBoundaryState(
             title: "What Ambitions will not do silently",
             subtitle: "The safe automation policy keeps external, broad, destructive, and unsupported changes confirmation-gated or blocked.",
             rules: [
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "automation-calendar",
                     title: "No silent calendar changes",
                     detail: safetySamples.calendarWrite.reasons.map(\.userFacingSummary).joined(separator: " "),
                     statusLabel: "Requires confirmation",
                     state: .warning
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "automation-reflow",
                     title: "No silent broad reflow",
                     detail: safetySamples.broadReflow.reasons.map(\.userFacingSummary).joined(separator: " "),
                     statusLabel: "Requires confirmation",
                     state: .warning
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "automation-memory",
                     title: "No unsupported forgetting",
                     detail: safetySamples.forgetMemory.blockedFacts.first ?? "No memory was forgotten.",
                     statusLabel: safetySamples.destructiveBlocked ? "Blocked safely" : "Unavailable",
                     state: .warning
                 ),
-                ProfileConstitutionRule(
+                YouConstitutionRule(
                     id: "automation-correction",
                     title: "Corrections stay user-directed",
                     detail: "Correcting a recommendation is a local policy-recognized action when tied to an existing target.",
@@ -1795,17 +1795,17 @@ private extension RepositoryBackedProfileService {
         calendarAuthorization: CalendarRemindersAuthorizationState,
         remindersAuthorization: CalendarRemindersAuthorizationState,
         safetySamples: SafetyBoundarySamples
-    ) -> ProfilePlanningDefaultsCenterState {
-        ProfilePlanningDefaultsCenterState(
+    ) -> YouPlanningDefaultsCenterState {
+        YouPlanningDefaultsCenterState(
             title: "Planning setup that earns its place",
             subtitle: "These defaults explain how Ambitions shapes Time suggestions without treating setup as homework.",
             sections: [
-                ProfilePlanningDefaultsSection(
+                YouPlanningDefaultsSection(
                     id: "schedule-availability",
                     title: "Schedule & Availability",
                     subtitle: "Time boundaries help the scheduling surface avoid treating committed or protected time as available.",
                     preferences: [
-                        ProfilePlanningDefaultsPreference(
+                        YouPlanningDefaultsPreference(
                             id: "schedule-anchors",
                             title: "Work, school, and anchors",
                             whyItMatters: "Plan can keep committed blocks, transitions, sleep, care, and recovery from being mistaken for open capacity.",
@@ -1815,7 +1815,7 @@ private extension RepositoryBackedProfileService {
                             accessibilityHint: "Explains why schedule anchors improve planning fit.",
                             state: .default
                         ),
-                        ProfilePlanningDefaultsPreference(
+                        YouPlanningDefaultsPreference(
                             id: "schedule-buffers",
                             title: "Buffers and protected time",
                             whyItMatters: "Buffers and protected free time create breathing room before Ambitions suggests where work can fit.",
@@ -1828,12 +1828,12 @@ private extension RepositoryBackedProfileService {
                     ],
                     footer: "Setup remains optional. Ambitions should ask for clearer boundaries only when planning quality depends on them."
                 ),
-                ProfilePlanningDefaultsSection(
+                YouPlanningDefaultsSection(
                     id: "planning-defaults",
                     title: "Planning Defaults",
                     subtitle: "Defaults keep Time useful without making hidden changes.",
                     preferences: [
-                        ProfilePlanningDefaultsPreference(
+                        YouPlanningDefaultsPreference(
                             id: "planning-open-time",
                             title: "Open time behavior",
                             whyItMatters: "Open windows are capacity signals, not an invitation to pack the day.",
@@ -1843,7 +1843,7 @@ private extension RepositoryBackedProfileService {
                             accessibilityHint: "Explains the open time default.",
                             state: .success
                         ),
-                        ProfilePlanningDefaultsPreference(
+                        YouPlanningDefaultsPreference(
                             id: "planning-reflow",
                             title: "Reflow permission",
                             whyItMatters: "Meaningful day changes stay reviewable so Plan can recover without taking over.",
@@ -1856,12 +1856,12 @@ private extension RepositoryBackedProfileService {
                     ],
                     footer: "Day, Week, and Month remain capacity lenses. They are not calendar modes."
                 ),
-                ProfilePlanningDefaultsSection(
+                YouPlanningDefaultsSection(
                     id: "vacation-away-time",
                     title: "Vacation / Away Time",
                     subtitle: "Away time protects recovery unless you explicitly mark a window open.",
                     preferences: [
-                        ProfilePlanningDefaultsPreference(
+                        YouPlanningDefaultsPreference(
                             id: "vacation-default",
                             title: "Away time default",
                             whyItMatters: "Vacation is not free time by default, so Plan does not turn recovery into a work queue.",
@@ -1871,7 +1871,7 @@ private extension RepositoryBackedProfileService {
                             accessibilityHint: "Explains the away time default.",
                             state: .success
                         ),
-                        ProfilePlanningDefaultsPreference(
+                        YouPlanningDefaultsPreference(
                             id: "vacation-override",
                             title: "Per-vacation override",
                             whyItMatters: "A specific trip can be open, protected, or mixed without changing future away-time defaults unless you choose to.",
@@ -1884,12 +1884,12 @@ private extension RepositoryBackedProfileService {
                     ],
                     footer: "Away-time behavior is a planning boundary, not a judgment about how time should be spent."
                 ),
-                ProfilePlanningDefaultsSection(
+                YouPlanningDefaultsSection(
                     id: "automation-trust",
                     title: "Trust & Automation",
                     subtitle: "Trust comes before automation; automation remains permission posture, not silent control.",
                     preferences: [
-                        ProfilePlanningDefaultsPreference(
+                        YouPlanningDefaultsPreference(
                             id: "automation-guided",
                             title: "Guided automation",
                             whyItMatters: AutomationLevel.defaultLevel.explanation,
@@ -1899,7 +1899,7 @@ private extension RepositoryBackedProfileService {
                             accessibilityHint: "Explains the Guided automation default.",
                             state: .selected
                         ),
-                        ProfilePlanningDefaultsPreference(
+                        YouPlanningDefaultsPreference(
                             id: "automation-confirmation",
                             title: "Confirmation boundary",
                             whyItMatters: safetySamples.calendarWrite.reasons.map(\.userFacingSummary).joined(separator: " "),
@@ -1921,12 +1921,12 @@ private extension RepositoryBackedProfileService {
         calendarAuthorization: CalendarRemindersAuthorizationState,
         remindersAuthorization: CalendarRemindersAuthorizationState,
         safetySamples: SafetyBoundarySamples
-    ) -> ProfileAvailabilityCenterState {
-        ProfileAvailabilityCenterState(
+    ) -> YouAvailabilityCenterState {
+        YouAvailabilityCenterState(
             title: "Availability Center",
             subtitle: "The rules Time must respect before it suggests where work fits.",
             hardContextStack: [
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "hard-context-work-school",
                     title: "Work, school, and fixed anchors",
                     summary: "Committed blocks, sleep, care, commute, and buffers win before any planning suggestion.",
@@ -1934,7 +1934,7 @@ private extension RepositoryBackedProfileService {
                     sourceLabel: "Source: Plan-owned calendar boundary",
                     state: .default
                 ),
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "hard-context-protected-time",
                     title: "Protected time",
                     summary: "Protected pockets are treated as real commitments, not open capacity.",
@@ -1944,7 +1944,7 @@ private extension RepositoryBackedProfileService {
                 )
             ],
             protectedPocketMap: [
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "protected-pocket-open-time",
                     title: "Open time is not auto-filled",
                     summary: "Open windows can help Plan see possibility, but Ambitions must not pack them by default.",
@@ -1952,7 +1952,7 @@ private extension RepositoryBackedProfileService {
                     sourceLabel: "Source: Planning default",
                     state: .success
                 ),
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "protected-pocket-buffers",
                     title: "Buffers create breathing room",
                     summary: "Transitions, rest, and family/context margins stay visible before a day is reshaped.",
@@ -1962,7 +1962,7 @@ private extension RepositoryBackedProfileService {
                 )
             ],
             planningDefaults: [
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "planning-defaults-capacity-lenses",
                     title: "Day, Week, and Month are capacity lenses",
                     summary: "They are not calendar modes and should not become dense event grids.",
@@ -1970,7 +1970,7 @@ private extension RepositoryBackedProfileService {
                     sourceLabel: "Source: Product canon",
                     state: .default
                 ),
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "planning-defaults-reflow-review",
                     title: "Reflow stays reviewable",
                     summary: "Meaningful rearrangement needs a visible review boundary and receipt posture.",
@@ -1980,7 +1980,7 @@ private extension RepositoryBackedProfileService {
                 )
             ],
             automationTrustControls: [
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "automation-guided-default",
                     title: "Guided automation is default",
                     summary: AutomationLevel.defaultLevel.explanation,
@@ -1988,7 +1988,7 @@ private extension RepositoryBackedProfileService {
                     sourceLabel: "Source: Automation policy",
                     state: .selected
                 ),
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "automation-calendar-confirmation",
                     title: "Calendar writes require confirmation",
                     summary: safetySamples.calendarWrite.reasons.map(\.userFacingSummary).joined(separator: " "),
@@ -1998,7 +1998,7 @@ private extension RepositoryBackedProfileService {
                 )
             ],
             durationSourceProof: DurationSource.allCases.map { source in
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "duration-source-\(source.rawValue)",
                     title: durationTitle(for: source),
                     summary: durationSubtitle(for: source),
@@ -2008,7 +2008,7 @@ private extension RepositoryBackedProfileService {
                 )
             },
             vacationAwayBehavior: [
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "away-default",
                     title: "Vacation is not free time by default",
                     summary: "Away time protects recovery unless the user explicitly marks part of it available.",
@@ -2016,7 +2016,7 @@ private extension RepositoryBackedProfileService {
                     sourceLabel: "Source: Away behavior default",
                     state: .success
                 ),
-                ProfileAvailabilityCenterItem(
+                YouAvailabilityCenterItem(
                     id: "away-override",
                     title: "Per-away override",
                     summary: "A specific away block can be open, protected, or mixed without changing future defaults.",
@@ -2059,9 +2059,9 @@ private extension RepositoryBackedProfileService {
         ]
     }
 
-    func makeReceiptAudit(snapshot: Snapshot, receipts: [ActionReceipt]) -> ProfileReceiptAuditState {
+    func makeReceiptAudit(snapshot: Snapshot, receipts: [ActionReceipt]) -> YouReceiptAuditState {
         let projection = ActionReceiptProjection(receipts: receipts)
-        return ProfileReceiptAuditState(
+        return YouReceiptAuditState(
             title: "Receipts and audit posture",
             subtitle: "A compact trust summary of what can explain actions today. Reviews now turns these signals into a calm receipt layer.",
             items: [
@@ -2103,10 +2103,10 @@ private extension RepositoryBackedProfileService {
         receipts: [ActionReceipt],
         safetySamples: SafetyBoundarySamples,
         calendarAuthorization: CalendarRemindersAuthorizationState,
-        notificationStatus: ProfileNotificationAuthorization
-    ) -> ProfileTrustHistoryCenterState {
-        ProfileTrustHistoryProjector().project(
-            ProfileTrustHistoryProjector.Input(
+        notificationStatus: YouNotificationAuthorization
+    ) -> YouTrustHistoryCenterState {
+        YouTrustHistoryProjector().project(
+            YouTrustHistoryProjector.Input(
                 receipts: ActionReceiptProjection(receipts: receipts).displaySummaries(limit: 2),
                 recentEvents: Array(snapshot.eventLedger.prefix(2)),
                 proofCount: snapshot.evidence.count,
@@ -2117,7 +2117,7 @@ private extension RepositoryBackedProfileService {
         )
     }
 
-    func makeCrossSurfaceProofReview(snapshot: Snapshot) -> ProfileCrossSurfaceProofReviewState {
+    func makeCrossSurfaceProofReview(snapshot: Snapshot) -> YouCrossSurfaceProofReviewState {
         let captureSeedCount = snapshot.captures.filter { $0.status != .archived }.count +
             snapshot.drafts.filter { draft in
                 draft.latestResultKind == .planned ||
@@ -2146,8 +2146,8 @@ private extension RepositoryBackedProfileService {
         let reviewPromptCount = snapshot.eventLedger.filter(\.trust.requiresReview).count +
             snapshot.teachingSignals.count
 
-        return ProfileCrossSurfaceProofReviewProjector().project(
-            ProfileCrossSurfaceProofReviewProjector.Input(
+        return YouCrossSurfaceProofReviewProjector().project(
+            YouCrossSurfaceProofReviewProjector.Input(
                 captureSeedCount: captureSeedCount,
                 goalProofCount: goalProofCount,
                 todayCompletionProofCount: todayCompletionProofCount,
@@ -2162,7 +2162,7 @@ private extension RepositoryBackedProfileService {
         snapshot: Snapshot,
         receipts: [ActionReceipt],
         calendarAuthorization: CalendarRemindersAuthorizationState
-    ) -> ProfileReviewsState {
+    ) -> YouReviewsState {
         let projection = ReviewsV1Projector().project(
             ReviewsV1ProjectionInput(
                 generatedAt: DomainTimestamp.string(from: .now),
@@ -2175,7 +2175,7 @@ private extension RepositoryBackedProfileService {
             )
         )
 
-        return ProfileReviewsState(
+        return YouReviewsState(
             projection: projection,
             title: "Reviews",
             subtitle: "Recovery Review and Life OS Receipt for what happened, what changed, and what should carry forward.",
@@ -2185,7 +2185,7 @@ private extension RepositoryBackedProfileService {
 
     func dominantTruth(
         syncStatus: SyncCapabilityStatus,
-        notificationStatus: ProfileNotificationAuthorization,
+        notificationStatus: YouNotificationAuthorization,
         appearanceSummary: String
     ) -> String {
         if notificationStatus.statusLabel == "Denied" {
@@ -2234,7 +2234,7 @@ private extension RepositoryBackedProfileService {
         }
     }
 
-    func notificationAuthorizationSubtitle(for status: ProfileNotificationAuthorization) -> String {
+    func notificationAuthorizationSubtitle(for status: YouNotificationAuthorization) -> String {
         if status.statusLabel == "Denied" {
             return "Denied in system settings. Local reminders exist, but trust is clearer when notification delivery is enabled or intentionally left off."
         }
@@ -2277,38 +2277,38 @@ private extension RepositoryBackedProfileService {
         return "Every \(days) days"
     }
 
-    func notificationAuthorizationStatus(_ state: NotificationAuthorizationState) -> ProfileNotificationAuthorization {
+    func notificationAuthorizationStatus(_ state: NotificationAuthorizationState) -> YouNotificationAuthorization {
         switch state {
         case .notDetermined:
-            return ProfileNotificationAuthorization(
+            return YouNotificationAuthorization(
                 statusLabel: "Not requested",
                 detail: "Not requested yet.",
                 canRequestAuthorization: true,
                 actionTitle: "Enable notifications"
             )
         case .denied:
-            return ProfileNotificationAuthorization(
+            return YouNotificationAuthorization(
                 statusLabel: "Denied",
                 detail: "Denied in system settings.",
                 canRequestAuthorization: false,
                 actionTitle: nil
             )
         case .authorized:
-            return ProfileNotificationAuthorization(
+            return YouNotificationAuthorization(
                 statusLabel: "Allowed",
                 detail: "Allowed for local reminders.",
                 canRequestAuthorization: false,
                 actionTitle: nil
             )
         case .provisional:
-            return ProfileNotificationAuthorization(
+            return YouNotificationAuthorization(
                 statusLabel: "Allowed",
                 detail: "Provisionally allowed for local reminders.",
                 canRequestAuthorization: false,
                 actionTitle: nil
             )
         case .ephemeral:
-            return ProfileNotificationAuthorization(
+            return YouNotificationAuthorization(
                 statusLabel: "Allowed",
                 detail: "Temporarily allowed for local reminders.",
                 canRequestAuthorization: false,

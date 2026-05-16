@@ -1,10 +1,10 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct ProfilePlanningDefaultsSectionCard: View {
+struct YouPlanningDefaultsSectionCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let section: ProfilePlanningDefaultsSection
+    let section: YouPlanningDefaultsSection
     let accessibilityIdentifier: String
 
     var body: some View {
@@ -17,7 +17,7 @@ struct ProfilePlanningDefaultsSectionCard: View {
                 )
 
                 ForEach(section.preferences) { preference in
-                    ProfilePlanningDefaultsPreferenceRow(preference: preference)
+                    YouPlanningDefaultsPreferenceRow(preference: preference)
                 }
 
                 Text(section.footer)
@@ -35,10 +35,10 @@ struct ProfilePlanningDefaultsSectionCard: View {
     }
 }
 
-private struct ProfilePlanningDefaultsPreferenceRow: View {
+private struct YouPlanningDefaultsPreferenceRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let preference: ProfilePlanningDefaultsPreference
+    let preference: YouPlanningDefaultsPreference
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {

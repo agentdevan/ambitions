@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-struct ProfileCrossSurfaceProofReviewItem: Identifiable, Sendable, Equatable {
+struct YouCrossSurfaceProofReviewItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let summary: String
@@ -12,13 +12,13 @@ struct ProfileCrossSurfaceProofReviewItem: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfileCrossSurfaceProofReviewState: Sendable, Equatable {
+struct YouCrossSurfaceProofReviewState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let items: [ProfileCrossSurfaceProofReviewItem]
+    let items: [YouCrossSurfaceProofReviewItem]
     let footer: String
 
-    static let empty = ProfileCrossSurfaceProofReviewState(
+    static let empty = YouCrossSurfaceProofReviewState(
         title: "Proof and Review",
         subtitle: "Cross-surface proof and review stay behind owning surfaces.",
         items: [],

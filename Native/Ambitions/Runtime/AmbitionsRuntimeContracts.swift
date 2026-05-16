@@ -138,7 +138,7 @@ final class AmbitionsRuntime {
     let habitsService: any HabitsServicing
     let planService: any PlanServicing
     let insightsService: any InsightsServicing
-    let profileService: any ProfileServicing
+    let youService: any YouServicing
     let notificationService: any NotificationServicing
     let calendarRemindersService: any CalendarRemindersServicing
     let dedicatedDevicePrototypeRuntime: DedicatedDevicePrototypeRuntime
@@ -160,7 +160,7 @@ final class AmbitionsRuntime {
         habitsService: any HabitsServicing,
         planService: any PlanServicing,
         insightsService: any InsightsServicing,
-        profileService: any ProfileServicing,
+        youService: any YouServicing,
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
         dedicatedDevicePrototypeRuntime: DedicatedDevicePrototypeRuntime
@@ -181,7 +181,7 @@ final class AmbitionsRuntime {
         self.habitsService = habitsService
         self.planService = planService
         self.insightsService = insightsService
-        self.profileService = profileService
+        self.youService = youService
         self.notificationService = notificationService
         self.calendarRemindersService = calendarRemindersService
         self.dedicatedDevicePrototypeRuntime = dedicatedDevicePrototypeRuntime

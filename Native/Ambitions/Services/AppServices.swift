@@ -50,15 +50,15 @@ protocol HabitsServicing: Sendable {
     func performAction(_ request: HabitActionRequest, now: Date) async throws -> HabitActionResponse
 }
 
-protocol PlanServicing: Sendable {
-    func loadPlanDashboard(now: Date) async throws -> PlanDashboard
+protocol TimeServicing: Sendable {
+    func loadTimeDashboard(now: Date) async throws -> TimeDashboard
     func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard
-    func makePlanCalendarAware(now: Date) async throws -> PlanDashboard
+    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard
 }
 
-extension PlanServicing {
-    func makePlanCalendarAware(now: Date) async throws -> PlanDashboard {
-        try await loadPlanDashboard(now: now)
+extension TimeServicing {
+    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
+        try await loadTimeDashboard(now: now)
     }
 }
 
@@ -66,9 +66,9 @@ protocol InsightsServicing: Sendable {
     func loadInsightsDashboard() async throws -> InsightsDashboard
 }
 
-protocol ProfileServicing: Sendable {
-    func loadProfileDashboard() async throws -> ProfileDashboard
-    func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard
+protocol YouServicing: Sendable {
+    func loadYouDashboard() async throws -> YouDashboard
+    func saveYouPreferences(_ preferences: YouPreferencesUpdate) async throws -> YouDashboard
 }
 
 protocol CaptureServicing: Sendable {
@@ -159,11 +159,11 @@ struct StubHabitsService: HabitsServicing {
     }
 }
 
-struct StubPlanService: PlanServicing {
-    let dashboard: PlanDashboard
+struct StubTimeService: TimeServicing {
+    let dashboard: TimeDashboard
     let weeklyReviewDashboard: WeeklyReviewDashboard
 
-    func loadPlanDashboard(now: Date) async throws -> PlanDashboard {
+    func loadTimeDashboard(now: Date) async throws -> TimeDashboard {
         _ = now
         return dashboard
     }
@@ -173,7 +173,7 @@ struct StubPlanService: PlanServicing {
         return weeklyReviewDashboard
     }
 
-    func makePlanCalendarAware(now: Date) async throws -> PlanDashboard {
+    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
         _ = now
         return dashboard
     }
@@ -185,12 +185,12 @@ struct StubInsightsService: InsightsServicing {
     func loadInsightsDashboard() async throws -> InsightsDashboard { fixtures.insightsDashboard }
 }
 
-struct StubProfileService: ProfileServicing {
+struct StubYouService: YouServicing {
     let fixtures: PreviewFixtures
-    func loadProfileDashboard() async throws -> ProfileDashboard { fixtures.profileDashboard }
-    func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard {
+    func loadYouDashboard() async throws -> YouDashboard { fixtures.youDashboard }
+    func saveYouPreferences(_ preferences: YouPreferencesUpdate) async throws -> YouDashboard {
         _ = preferences
-        return fixtures.profileDashboard
+        return fixtures.youDashboard
     }
 }
 #endif
@@ -320,9 +320,9 @@ struct DefaultAppActionRouter: AppActionRouting {
     func handle(_ action: WidgetAction) async {
         switch action.identity.family {
         case .insightStats, .weeklyTrend, .recentActivity:
-            navigation.selectTab(.insights)
+            navigation.selectTab(.you) // Insights/History is now part of the You domain or a sibling, but usually You for profile/settings
         case .profileSummary, .settingsGroup:
-            navigation.selectTab(.profile)
+            navigation.selectTab(.you)
         case .habitSummary, .streak:
             navigation.openHabits()
         case .dailyTargets, .focusNow, .freeTime, .milestonePrompt, .goalsList, .celebration:

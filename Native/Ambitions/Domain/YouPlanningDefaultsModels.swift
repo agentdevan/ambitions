@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-struct ProfilePlanningDefaultsPreference: Identifiable, Sendable, Equatable {
+struct YouPlanningDefaultsPreference: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let whyItMatters: String
@@ -12,33 +12,33 @@ struct ProfilePlanningDefaultsPreference: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfilePlanningDefaultsSection: Identifiable, Sendable, Equatable {
+struct YouPlanningDefaultsSection: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
-    let preferences: [ProfilePlanningDefaultsPreference]
+    let preferences: [YouPlanningDefaultsPreference]
     let footer: String
 }
 
-struct ProfilePlanningDefaultsCenterState: Sendable, Equatable {
+struct YouPlanningDefaultsCenterState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let sections: [ProfilePlanningDefaultsSection]
+    let sections: [YouPlanningDefaultsSection]
     let footer: String
 
-    static let empty = ProfilePlanningDefaultsCenterState(
+    static let empty = YouPlanningDefaultsCenterState(
         title: "Planning setup",
         subtitle: "Schedule, availability, defaults, away time, and automation boundaries stay user-owned.",
         sections: [],
         footer: "Planning setup is optional and does not request permissions by itself."
     )
 
-    func section(id: String) -> ProfilePlanningDefaultsSection? {
+    func section(id: String) -> YouPlanningDefaultsSection? {
         sections.first { $0.id == id }
     }
 }
 
-struct ProfileAvailabilityCenterItem: Identifiable, Sendable, Equatable {
+struct YouAvailabilityCenterItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let summary: String
@@ -47,18 +47,18 @@ struct ProfileAvailabilityCenterItem: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfileAvailabilityCenterState: Sendable, Equatable {
+struct YouAvailabilityCenterState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let hardContextStack: [ProfileAvailabilityCenterItem]
-    let protectedPocketMap: [ProfileAvailabilityCenterItem]
-    let planningDefaults: [ProfileAvailabilityCenterItem]
-    let automationTrustControls: [ProfileAvailabilityCenterItem]
-    let durationSourceProof: [ProfileAvailabilityCenterItem]
-    let vacationAwayBehavior: [ProfileAvailabilityCenterItem]
+    let hardContextStack: [YouAvailabilityCenterItem]
+    let protectedPocketMap: [YouAvailabilityCenterItem]
+    let planningDefaults: [YouAvailabilityCenterItem]
+    let automationTrustControls: [YouAvailabilityCenterItem]
+    let durationSourceProof: [YouAvailabilityCenterItem]
+    let vacationAwayBehavior: [YouAvailabilityCenterItem]
     let footer: String
 
-    static let empty = ProfileAvailabilityCenterState(
+    static let empty = YouAvailabilityCenterState(
         title: "Availability Center",
         subtitle: "Hard context, protected pockets, defaults, automation trust, durations, and away behavior stay reviewable before Time uses them.",
         hardContextStack: [],

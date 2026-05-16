@@ -9,7 +9,7 @@ struct YouScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: YouViewModel
-    @State private var activeDetail: ProfileRootDetail?
+    @State private var activeDetail: YouRootDetail?
     private let showsNavigationChrome: Bool
 
     @MainActor
@@ -57,7 +57,7 @@ struct YouScreen: View {
         .accessibilityIdentifier("you.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .sheet(item: $activeDetail) { detail in
-            ProfileRootDetailSheet(
+            YouRootDetailSheet(
                 detail: detail,
                 dashboard: viewModel.loadedDashboard,
                 appearancePreference: $viewModel.appearancePreference,
@@ -102,7 +102,7 @@ struct YouScreen: View {
         }
     }
 
-    private func notificationPermissionState(for dashboard: ProfileDashboard) -> DegradedStatePresentation? {
+    private func notificationPermissionState(for dashboard: YouDashboard) -> DegradedStatePresentation? {
         if dashboard.notificationAuthorization.statusLabel == "Denied" {
             return DegradedStateOrchestrator.permissionDeniedNotifications()
         }
@@ -133,12 +133,12 @@ struct YouScreen: View {
     }
 }
 
-private struct ProfileRootDetailSheet: View {
+private struct YouRootDetailSheet: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dismiss) private var dismiss
 
-    let detail: ProfileRootDetail
-    let dashboard: ProfileDashboard?
+    let detail: YouRootDetail
+    let dashboard: YouDashboard?
     @Binding var appearancePreference: AppAppearancePreference
     @Binding var accentFamily: AmbitionAccentFamily
     @Binding var preferredTab: AppTab
@@ -176,19 +176,19 @@ private struct ProfileRootDetailSheet: View {
     }
 
     @ViewBuilder
-    private func detailContent(for dashboard: ProfileDashboard) -> some View {
+    private func detailContent(for dashboard: YouDashboard) -> some View {
         switch detail {
-        case .profile:
-            ProfileDefaultsCard(
+        case .you:
+            YouDefaultsCard(
                 section: dashboard.defaultsSection,
                 preferredTab: $preferredTab,
                 reviewCadenceDays: $reviewCadenceDays
             )
-            ProfileSectionCard(eyebrow: "About you", section: dashboard.accountSection, accessibilityIdentifier: "you.account-card")
+            YouSectionCard(eyebrow: "About you", section: dashboard.accountSection, accessibilityIdentifier: "you.account-card")
         case .personalization:
-            ProfileConstitutionCard(constitution: dashboard.constitution)
+            YouConstitutionCard(constitution: dashboard.constitution)
         case .appearance:
-            ProfileAppearanceStudioCard(
+            YouAppearanceStudioCard(
                 studio: dashboard.appearanceStudio,
                 appearancePreference: $appearancePreference,
                 accentFamily: $accentFamily,
@@ -197,21 +197,21 @@ private struct ProfileRootDetailSheet: View {
                 onSave: onSavePreferences
             )
         case .whatAmbitionsKnows:
-            ProfileMemoryControlsCard(memoryControls: dashboard.memoryControls)
-            ProfileContextVaultCard(contextVault: dashboard.contextVault)
+            YouMemoryControlsCard(memoryControls: dashboard.memoryControls)
+            YouContextVaultCard(contextVault: dashboard.contextVault)
         case .trustCenter:
-            ProfileTrustCenterCard(
+            YouTrustCenterCard(
                 trustCenter: dashboard.trustCenter,
                 notificationActionTitle: dashboard.notificationAuthorization.actionTitle,
                 onEnableNotifications: onEnableNotifications
             )
-            ProfileAutomationBoundaryCard(boundary: dashboard.automationBoundary)
+            YouAutomationBoundaryCard(boundary: dashboard.automationBoundary)
         case .receiptsHistory:
-            ProfileCrossSurfaceProofReviewCard(state: dashboard.crossSurfaceProofReview)
-            ProfileTrustHistoryCenterCard(history: dashboard.trustHistoryCenter)
-            ProfileSectionCard(
+            YouCrossSurfaceProofReviewCard(state: dashboard.crossSurfaceProofReview)
+            YouTrustHistoryCenterCard(history: dashboard.trustHistoryCenter)
+            YouSectionCard(
                 eyebrow: "Receipts",
-                section: ProfileSectionGroup(
+                section: YouSectionGroup(
                     title: dashboard.receiptAudit.title,
                     subtitle: dashboard.receiptAudit.subtitle,
                     items: dashboard.receiptAudit.items,
@@ -220,9 +220,9 @@ private struct ProfileRootDetailSheet: View {
                 accessibilityIdentifier: "you.receipts-card"
             )
         case .corrections:
-            ProfileSectionCard(
+            YouSectionCard(
                 eyebrow: "Corrections",
-                section: ProfileSectionGroup(
+                section: YouSectionGroup(
                     title: dashboard.assumptionCorrections.title,
                     subtitle: dashboard.assumptionCorrections.subtitle,
                     items: dashboard.assumptionCorrections.items,
@@ -231,11 +231,11 @@ private struct ProfileRootDetailSheet: View {
                 accessibilityIdentifier: "you.corrections-card"
             )
         case .reviews:
-            ProfileReviewsCard(reviews: dashboard.reviews)
+            YouReviewsCard(reviews: dashboard.reviews)
         case .proof:
-            ProfileSectionCard(
+            YouSectionCard(
                 eyebrow: "Proof",
-                section: ProfileSectionGroup(
+                section: YouSectionGroup(
                     title: "Proof",
                     subtitle: "Progress evidence stays local and feeds reviews.",
                     items: dashboard.reviews.projection.progressLines.map {
@@ -246,28 +246,28 @@ private struct ProfileRootDetailSheet: View {
                 accessibilityIdentifier: "you.proof-card"
             )
         case .archive:
-            ProfileSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "you.archive-card")
+            YouSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "you.archive-card")
         case .scheduleAvailability:
-            ProfileAvailabilityCenterCard(center: dashboard.availabilityCenter)
+            YouAvailabilityCenterCard(center: dashboard.availabilityCenter)
             if let section = dashboard.planningDefaultsCenter.section(id: "schedule-availability") {
-                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.schedule-availability-card")
+                YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.schedule-availability-card")
             }
         case .planBehavior:
             if let section = dashboard.planningDefaultsCenter.section(id: "planning-defaults") {
-                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.plan-behavior-card")
+                YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.plan-behavior-card")
             }
         case .automationTrust:
             if let section = dashboard.planningDefaultsCenter.section(id: "automation-trust") {
-                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.automation-trust-card")
+                YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.automation-trust-card")
             }
         case .vacationAwayTime:
             if let section = dashboard.planningDefaultsCenter.section(id: "vacation-away-time") {
-                ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.vacation-away-card")
+                YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.vacation-away-card")
             }
         case .durations:
-            ProfileSectionCard(
+            YouSectionCard(
                 eyebrow: "Planning Behavior",
-                section: ProfileSectionGroup(
+                section: YouSectionGroup(
                     title: "Durations",
                     subtitle: "Guessed durations are never presented as fact.",
                     items: DurationSource.allCases.map {
@@ -287,13 +287,13 @@ private struct ProfileRootDetailSheet: View {
                     onSecondaryAction: onOpenSystemSettings
                 )
             }
-            ProfileSectionCard(eyebrow: "Notifications", section: dashboard.integrationsSection, accessibilityIdentifier: "you.notifications-card")
+            YouSectionCard(eyebrow: "Notifications", section: dashboard.integrationsSection, accessibilityIdentifier: "you.notifications-card")
         case .integrations, .widgets, .exportImport:
-            ProfileSectionCard(eyebrow: "System configuration", section: dashboard.integrationsSection, accessibilityIdentifier: "you.integrations-card")
+            YouSectionCard(eyebrow: "System configuration", section: dashboard.integrationsSection, accessibilityIdentifier: "you.integrations-card")
         case .accessibility:
-            ProfileSectionCard(
+            YouSectionCard(
                 eyebrow: "Accessibility",
-                section: ProfileSectionGroup(
+                section: YouSectionGroup(
                     title: "Accessibility",
                     subtitle: "Claims stay locked until manual verification is recorded.",
                     items: dashboard.trustCenter.items.filter { $0.title.localizedCaseInsensitiveContains("Accessibility") },
@@ -302,9 +302,9 @@ private struct ProfileRootDetailSheet: View {
                 accessibilityIdentifier: "you.accessibility-card"
             )
         case .support:
-            ProfileSectionCard(eyebrow: "Help", section: dashboard.accountSection, accessibilityIdentifier: "you.support-card")
+            YouSectionCard(eyebrow: "Help", section: dashboard.accountSection, accessibilityIdentifier: "you.support-card")
         case .about:
-            ProfileSectionCard(eyebrow: "About", section: dashboard.accountSection, accessibilityIdentifier: "you.about-card")
+            YouSectionCard(eyebrow: "About", section: dashboard.accountSection, accessibilityIdentifier: "you.about-card")
         }
     }
 
@@ -340,10 +340,10 @@ private struct ProfileRootDetailSheet: View {
     }
 }
 
-private struct ProfileHeroCard: View {
+private struct YouHeroCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let hero: ProfileHeroState
+    let hero: YouHeroState
 
     var body: some View {
         HeroCard(state: hero.status) {
@@ -379,7 +379,7 @@ private struct ProfileHeroCard: View {
 
                 LazyVGrid(columns: [GridItem(.flexible())], spacing: theme.spacing.sm) {
                     ForEach(hero.stats) { metric in
-                        ProfileMetricTile(metric: metric)
+                        YouMetricTile(metric: metric)
                     }
                 }
 
@@ -399,10 +399,10 @@ private struct ProfileHeroCard: View {
     }
 }
 
-private struct ProfileControlRoomCard: View {
+private struct YouControlRoomCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let controlRoom: ProfileControlRoomState
+    let controlRoom: YouControlRoomState
 
     var body: some View {
         AppCard {
@@ -451,10 +451,10 @@ private struct ProfileControlRoomCard: View {
     }
 }
 
-private struct ProfileSystemCenterCard: View {
+private struct YouSystemCenterCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let systemCenter: ProfileSystemCenterState
+    let systemCenter: YouSystemCenterState
 
     var body: some View {
         AppCard {
@@ -499,10 +499,10 @@ private struct ProfileSystemCenterCard: View {
     }
 }
 
-private struct ProfileConstitutionCard: View {
+private struct YouConstitutionCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let constitution: ProfileConstitutionState
+    let constitution: YouConstitutionState
 
     var body: some View {
         AppCard {
@@ -529,7 +529,7 @@ private struct ProfileConstitutionCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(constitution.rules) { rule in
-                        ProfileRuleRow(rule: rule)
+                        YouRuleRow(rule: rule)
                     }
                 }
 
@@ -544,10 +544,10 @@ private struct ProfileConstitutionCard: View {
     }
 }
 
-private struct ProfileMemoryControlsCard: View {
+private struct YouMemoryControlsCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let memoryControls: ProfileMemoryControlState
+    let memoryControls: YouMemoryControlState
 
     var body: some View {
         AppCard {
@@ -567,7 +567,7 @@ private struct ProfileMemoryControlsCard: View {
                         )
 
                         ForEach(memoryControls.memoryLensItems) { item in
-                            ProfileMemoryLensItemRow(item: item)
+                            YouMemoryLensItemRow(item: item)
                         }
                     }
                     .accessibilityIdentifier("you.memory-lens-visual-layer")
@@ -593,7 +593,7 @@ private struct ProfileMemoryControlsCard: View {
                         )
 
                         ForEach(memoryControls.runtimeInspectionItems) { item in
-                            ProfileRuntimeInspectionItemRow(item: item)
+                            YouRuntimeInspectionItemRow(item: item)
                         }
                     }
                     .accessibilityIdentifier("you.runtime-inspection-section")
@@ -608,7 +608,7 @@ private struct ProfileMemoryControlsCard: View {
                         )
 
                         ForEach(memoryControls.localLearningControls) { control in
-                            ProfileLocalLearningControlRow(control: control)
+                            YouLocalLearningControlRow(control: control)
                         }
                     }
                     .accessibilityIdentifier("you.local-learning-controls-section")
@@ -623,11 +623,11 @@ private struct ProfileMemoryControlsCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(memoryControls.items) { item in
-                        ProfileSettingRow(item: item)
+                        YouSettingRow(item: item)
                     }
                 }
 
-                ProfilePersonalizationConsentPanel(consent: memoryControls.consent)
+                YouPersonalizationConsentPanel(consent: memoryControls.consent)
 
                 if memoryControls.privateModeControls.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -638,7 +638,7 @@ private struct ProfileMemoryControlsCard: View {
                         )
 
                         ForEach(memoryControls.privateModeControls) { control in
-                            ProfilePrivateModeControlRow(control: control)
+                            YouPrivateModeControlRow(control: control)
                         }
                     }
                     .accessibilityIdentifier("you.private-mode-controls")
@@ -653,7 +653,7 @@ private struct ProfileMemoryControlsCard: View {
                         )
 
                         ForEach(group.items) { item in
-                            ProfileMemoryItemRow(item: item)
+                            YouMemoryItemRow(item: item)
                         }
 
                         if let footer = group.footer {
@@ -674,7 +674,7 @@ private struct ProfileMemoryControlsCard: View {
                         )
 
                         ForEach(memoryControls.narrativeMemories) { memory in
-                            ProfileNarrativeMemoryRow(memory: memory)
+                            YouNarrativeMemoryRow(memory: memory)
                         }
                     }
                     .accessibilityIdentifier("you.narrative-memory-section")
@@ -689,7 +689,7 @@ private struct ProfileMemoryControlsCard: View {
                         )
 
                         ForEach(memoryControls.conservativePatterns) { pattern in
-                            ProfileMemoryPatternRow(pattern: pattern)
+                            YouMemoryPatternRow(pattern: pattern)
                         }
                     }
                     .accessibilityIdentifier("you.memory-pattern-section")
@@ -773,10 +773,10 @@ private struct ProfileMemoryControlsCard: View {
     }
 }
 
-private struct ProfileRuntimeInspectionItemRow: View {
+private struct YouRuntimeInspectionItemRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: ProfileRuntimeInspectionItem
+    let item: YouRuntimeInspectionItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -836,10 +836,10 @@ private struct ProfileRuntimeInspectionItemRow: View {
     }
 }
 
-private struct ProfileLocalLearningControlRow: View {
+private struct YouLocalLearningControlRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let control: ProfileLocalLearningControl
+    let control: YouLocalLearningControl
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -901,10 +901,10 @@ private struct ProfileLocalLearningControlRow: View {
     }
 }
 
-private struct ProfileMemoryLensItemRow: View {
+private struct YouMemoryLensItemRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: ProfileMemoryLensItem
+    let item: YouMemoryLensItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -955,7 +955,7 @@ private struct ProfileMemoryLensItemRow: View {
     }
 }
 
-private extension ProfileMemoryFreshness {
+private extension YouMemoryFreshness {
     var contextRecallState: ContextRecallState {
         switch self {
         case .current:
@@ -968,10 +968,10 @@ private extension ProfileMemoryFreshness {
     }
 }
 
-private struct ProfilePersonalizationConsentPanel: View {
+private struct YouPersonalizationConsentPanel: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let consent: ProfilePersonalizationConsentState
+    let consent: YouPersonalizationConsentState
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -1000,15 +1000,15 @@ private struct ProfilePersonalizationConsentPanel: View {
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("profile.personalization-consent")
+        .accessibilityIdentifier("you.personalization-consent")
         .accessibilityLabel("\(consent.title). \(consent.summary). \(consent.controlLabel).")
     }
 }
 
-private struct ProfilePrivateModeControlRow: View {
+private struct YouPrivateModeControlRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let control: ProfilePrivateModeControl
+    let control: YouPrivateModeControl
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -1047,10 +1047,10 @@ private struct ProfilePrivateModeControlRow: View {
     }
 }
 
-private struct ProfileMemoryItemRow: View {
+private struct YouMemoryItemRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: ProfileMemoryItem
+    let item: YouMemoryItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -1109,10 +1109,10 @@ private struct ProfileMemoryItemRow: View {
     }
 }
 
-private struct ProfileNarrativeMemoryRow: View {
+private struct YouNarrativeMemoryRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let memory: ProfileNarrativeMemory
+    let memory: YouNarrativeMemory
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -1171,10 +1171,10 @@ private struct ProfileNarrativeMemoryRow: View {
     }
 }
 
-private struct ProfileMemoryPatternRow: View {
+private struct YouMemoryPatternRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let pattern: ProfileMemoryPattern
+    let pattern: YouMemoryPattern
 
     var body: some View {
         WidgetCard(state: pattern.state) {
@@ -1198,10 +1198,10 @@ private struct ProfileMemoryPatternRow: View {
     }
 }
 
-private struct ProfileAutomationBoundaryCard: View {
+private struct YouAutomationBoundaryCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let boundary: ProfileAutomationBoundaryState
+    let boundary: YouAutomationBoundaryState
 
     var body: some View {
         AppCard {
@@ -1214,7 +1214,7 @@ private struct ProfileAutomationBoundaryCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(boundary.rules) { rule in
-                        ProfileRuleRow(rule: rule)
+                        YouRuleRow(rule: rule)
                     }
                 }
 
@@ -1224,15 +1224,15 @@ private struct ProfileAutomationBoundaryCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.automation-boundary-card")
+        .accessibilityIdentifier("you.automation-boundary-card")
         .ambitionPanelAccessibility()
     }
 }
 
-private struct ProfileReviewsCard: View {
+private struct YouReviewsCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let reviews: ProfileReviewsState
+    let reviews: YouReviewsState
 
     var body: some View {
         let projection = reviews.projection
@@ -1275,7 +1275,7 @@ private struct ProfileReviewsCard: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                ProfileReviewCluster(
+                YouReviewCluster(
                     title: projection.recovery.title,
                     subtitle: projection.recovery.subtitle,
                     emptyTitle: projection.recovery.emptyStateTitle,
@@ -1283,7 +1283,7 @@ private struct ProfileReviewsCard: View {
                     items: Array((projection.recovery.whatRecovered + projection.recovery.whatWasProtected + projection.recovery.needsReview).prefix(4))
                 )
 
-                ProfileReviewCluster(
+                YouReviewCluster(
                     title: projection.lifeOSReceipt.title,
                     subtitle: projection.lifeOSReceipt.subtitle,
                     emptyTitle: projection.lifeOSReceipt.emptyStateTitle,
@@ -1294,26 +1294,26 @@ private struct ProfileReviewsCard: View {
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     SectionHeader(title: "Review rhythms", subtitle: "Weekly, monthly, and recovery reviews stay under You, Time, and Goal context.")
                     ForEach(projection.cadences) { cadence in
-                        ProfileReviewCadenceRow(cadence: cadence)
+                        YouReviewCadenceRow(cadence: cadence)
                     }
                 }
-                .accessibilityIdentifier("profile.review-cadences-section")
+                .accessibilityIdentifier("you.review-cadences-section")
 
                 if projection.progressLines.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         SectionHeader(title: "Progress receipt", subtitle: "A plain record of what changed, what has proof, and what should carry forward.")
                         ForEach(projection.progressLines) { line in
-                            ProfileProgressReceiptLineRow(line: line)
+                            YouProgressReceiptLineRow(line: line)
                         }
                     }
-                    .accessibilityIdentifier("profile.progress-receipt-section")
+                    .accessibilityIdentifier("you.progress-receipt-section")
                 }
 
                 if projection.proofHighlights.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         SectionHeader(title: "Proof highlights", subtitle: "Recent evidence that can make the next review more grounded.")
                         ForEach(projection.proofHighlights) { proof in
-                            ProfileReviewProofRow(proof: proof)
+                            YouReviewProofRow(proof: proof)
                         }
                     }
                 }
@@ -1321,23 +1321,23 @@ private struct ProfileReviewsCard: View {
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     SectionHeader(title: "Carry forward", subtitle: "The smallest useful thing to keep visible after this review.")
                     ForEach(projection.carryForward) { item in
-                        ProfileCarryForwardRow(item: item)
+                        YouCarryForwardRow(item: item)
                     }
                 }
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     SectionHeader(title: "Planning handoff", subtitle: "Review can suggest where to go next, but it does not change the plan silently.")
                     ForEach(projection.planningHandoffs) { handoff in
-                        ProfilePlanningHandoffRow(handoff: handoff)
+                        YouPlanningHandoffRow(handoff: handoff)
                     }
                 }
-                .accessibilityIdentifier("profile.review-planning-handoff-section")
+                .accessibilityIdentifier("you.review-planning-handoff-section")
 
                 if projection.correctionPrompts.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         SectionHeader(title: "Corrections", subtitle: "Existing correction paths stay user-directed.")
                         ForEach(projection.correctionPrompts.prefix(2)) { prompt in
-                            ProfileCorrectionPromptRow(prompt: prompt)
+                            YouCorrectionPromptRow(prompt: prompt)
                         }
                     }
                 }
@@ -1345,7 +1345,7 @@ private struct ProfileReviewsCard: View {
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     SectionHeader(title: "Unavailable here", subtitle: "Trust notes for what this review does not claim.")
                     ForEach(projection.unavailableNotes.prefix(3)) { note in
-                        ProfileReviewSignalRow(item: note)
+                        YouReviewSignalRow(item: note)
                     }
                 }
 
@@ -1355,12 +1355,12 @@ private struct ProfileReviewsCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.reviews-card")
+        .accessibilityIdentifier("you.reviews-card")
         .ambitionPanelAccessibility()
     }
 }
 
-private struct ProfileReviewCluster: View {
+private struct YouReviewCluster: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String
@@ -1390,14 +1390,14 @@ private struct ProfileReviewCluster: View {
                 .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
             } else {
                 ForEach(items) { item in
-                    ProfileReviewSignalRow(item: item)
+                    YouReviewSignalRow(item: item)
                 }
             }
         }
     }
 }
 
-private struct ProfileReviewCadenceRow: View {
+private struct YouReviewCadenceRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let cadence: ReviewCadenceSummary
@@ -1444,7 +1444,7 @@ private struct ProfileReviewCadenceRow: View {
     }
 }
 
-private struct ProfileProgressReceiptLineRow: View {
+private struct YouProgressReceiptLineRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let line: LifeOSReceiptProgressLine
@@ -1477,7 +1477,7 @@ private struct ProfileProgressReceiptLineRow: View {
     }
 }
 
-private struct ProfileReviewSignalRow: View {
+private struct YouReviewSignalRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let item: ReviewSignalItem
@@ -1506,7 +1506,7 @@ private struct ProfileReviewSignalRow: View {
     }
 }
 
-private struct ProfileReviewProofRow: View {
+private struct YouReviewProofRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let proof: ReviewProofHighlight
@@ -1534,7 +1534,7 @@ private struct ProfileReviewProofRow: View {
     }
 }
 
-private struct ProfileCarryForwardRow: View {
+private struct YouCarryForwardRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let item: ReviewCarryForwardItem
@@ -1557,7 +1557,7 @@ private struct ProfileCarryForwardRow: View {
     }
 }
 
-private struct ProfilePlanningHandoffRow: View {
+private struct YouPlanningHandoffRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let handoff: ReviewPlanningHandoff
@@ -1593,7 +1593,7 @@ private struct ProfilePlanningHandoffRow: View {
     }
 }
 
-private struct ProfileCorrectionPromptRow: View {
+private struct YouCorrectionPromptRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let prompt: ReviewCorrectionPrompt
@@ -1621,10 +1621,10 @@ private struct ProfileCorrectionPromptRow: View {
     }
 }
 
-private struct ProfileRuleRow: View {
+private struct YouRuleRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let rule: ProfileConstitutionRule
+    let rule: YouConstitutionRule
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -1647,7 +1647,7 @@ private struct ProfileRuleRow: View {
     }
 }
 
-private struct ProfileMetricTile: View {
+private struct YouMetricTile: View {
     @Environment(\.ambitionTheme) private var theme
 
     let metric: MetricSummary
@@ -1673,10 +1673,10 @@ private struct ProfileMetricTile: View {
     }
 }
 
-private struct ProfileAppearanceStudioCard: View {
+private struct YouAppearanceStudioCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let studio: ProfileAppearanceStudioState
+    let studio: YouAppearanceStudioState
     @Binding var appearancePreference: AppAppearancePreference
     @Binding var accentFamily: AmbitionAccentFamily
     let isSaving: Bool
@@ -1705,11 +1705,11 @@ private struct ProfileAppearanceStudioCard: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .accessibilityIdentifier("profile.appearance-picker")
+                    .accessibilityIdentifier("you.appearance-picker")
 
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
                         ForEach(studio.modeOptions) { option in
-                            ProfileSelectableRow(
+                            YouSelectableRow(
                                 title: option.title,
                                 subtitle: option.subtitle,
                                 state: appearancePreference == option.preference ? .selected : .default
@@ -1735,11 +1735,11 @@ private struct ProfileAppearanceStudioCard: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .accessibilityIdentifier("profile.accent-family-picker")
+                    .accessibilityIdentifier("you.accent-family-picker")
 
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: theme.spacing.sm) {
                         ForEach(studio.accentOptions) { option in
-                            ProfileAccentTile(
+                            YouAccentTile(
                                 option: option,
                                 isSelected: accentFamily == option.family
                             ) {
@@ -1757,7 +1757,7 @@ private struct ProfileAppearanceStudioCard: View {
 
                     LazyVGrid(columns: previewColumns, spacing: theme.spacing.sm) {
                         ForEach(studio.previewSwatches) { swatch in
-                            ProfilePreviewSwatchCard(
+                            YouPreviewSwatchCard(
                                 swatch: swatch,
                                 appearancePreference: appearancePreference,
                                 accentFamily: accentFamily
@@ -1787,14 +1787,14 @@ private struct ProfileAppearanceStudioCard: View {
                 }
                 .buttonStyle(AmbitionButtonStyle(tier: .hero, state: hasUnsavedChanges ? .selected : .default))
                 .disabled(hasUnsavedChanges == false || isSaving)
-                .accessibilityIdentifier("profile.save-preferences-button")
+                .accessibilityIdentifier("you.save-preferences-button")
             }
         }
-        .accessibilityIdentifier("profile.appearance-studio-card")
+        .accessibilityIdentifier("you.appearance-studio-card")
     }
 }
 
-private struct ProfileSelectableRow: View {
+private struct YouSelectableRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String
@@ -1835,10 +1835,10 @@ private struct ProfileSelectableRow: View {
     }
 }
 
-private struct ProfileAccentTile: View {
+private struct YouAccentTile: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let option: ProfileAccentOption
+    let option: YouAccentOption
     let isSelected: Bool
     let action: () -> Void
 
@@ -1884,8 +1884,8 @@ private struct ProfileAccentTile: View {
     }
 }
 
-private struct ProfilePreviewSwatchCard: View {
-    let swatch: ProfilePreviewSwatch
+private struct YouPreviewSwatchCard: View {
+    let swatch: YouPreviewSwatch
     let appearancePreference: AppAppearancePreference
     let accentFamily: AmbitionAccentFamily
 
@@ -1904,7 +1904,7 @@ private struct ProfilePreviewSwatchCard: View {
                 .foregroundStyle(selectedTheme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            ProfileObjectPreviewMiniature(kind: swatch.objectKind, previewTheme: selectedTheme)
+            YouObjectPreviewMiniature(kind: swatch.objectKind, previewTheme: selectedTheme)
 
             TagPill(
                 appearancePreference.title,
@@ -1930,8 +1930,8 @@ private struct ProfilePreviewSwatchCard: View {
     }
 }
 
-private struct ProfileObjectPreviewMiniature: View {
-    let kind: ProfileAppearanceObjectPreviewKind
+private struct YouObjectPreviewMiniature: View {
+    let kind: YouAppearanceObjectPreviewKind
     let previewTheme: AmbitionTheme
 
     var body: some View {
@@ -2000,10 +2000,10 @@ private struct ProfileObjectPreviewMiniature: View {
     }
 }
 
-private struct ProfileTrustCenterCard: View {
+private struct YouTrustCenterCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let trustCenter: ProfileTrustCenterState
+    let trustCenter: YouTrustCenterState
     let notificationActionTitle: String?
     let onEnableNotifications: () -> Void
 
@@ -2033,7 +2033,7 @@ private struct ProfileTrustCenterCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(trustCenter.items) { item in
-                        ProfileSettingRow(item: item)
+                        YouSettingRow(item: item)
                     }
                 }
 
@@ -2045,10 +2045,10 @@ private struct ProfileTrustCenterCard: View {
                     )
 
                     ForEach(trustCenter.dataMap) { item in
-                        ProfileTrustDataMapRow(item: item)
+                        YouTrustDataMapRow(item: item)
                     }
                 }
-                .accessibilityIdentifier("profile.trust-data-map")
+                .accessibilityIdentifier("you.trust-data-map")
 
                 GroupedNavigationList {
                     ForEach(trustCenter.sections) { section in
@@ -2078,7 +2078,7 @@ private struct ProfileTrustCenterCard: View {
                 if let notificationActionTitle {
                     Button(notificationActionTitle, action: onEnableNotifications)
                         .buttonStyle(AmbitionButtonStyle(tier: .secondary, state: .default))
-                        .accessibilityIdentifier("profile.enable-notifications-button")
+                        .accessibilityIdentifier("you.enable-notifications-button")
                 }
 
                 Text(trustCenter.footer)
@@ -2087,7 +2087,7 @@ private struct ProfileTrustCenterCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.trust-center-card")
+        .accessibilityIdentifier("you.trust-center-card")
     }
 
     private var trustReceiptStackItems: [TrustReceiptStackItem] {
@@ -2107,10 +2107,10 @@ private struct ProfileTrustCenterCard: View {
     }
 }
 
-private struct ProfileTrustDataMapRow: View {
+private struct YouTrustDataMapRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: ProfileTrustDataMapItem
+    let item: YouTrustDataMapItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -2148,7 +2148,7 @@ private struct ProfileTrustDataMapRow: View {
     }
 }
 
-private struct ProfileTrustReceiptRow: View {
+private struct YouTrustReceiptRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let receipt: ActionReceiptDisplaySummary
@@ -2338,10 +2338,10 @@ private extension ActionReceiptCorrectionAvailability {
     }
 }
 
-private struct ProfileContextVaultCard: View {
+private struct YouContextVaultCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let contextVault: ProfileContextVaultState
+    let contextVault: YouContextVaultState
 
     var body: some View {
         AppCard {
@@ -2401,14 +2401,14 @@ private struct ProfileContextVaultCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.context-vault-card")
+        .accessibilityIdentifier("you.context-vault-card")
     }
 }
 
-private struct ProfileDefaultsCard: View {
+private struct YouDefaultsCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let section: ProfileSectionGroup
+    let section: YouSectionGroup
     @Binding var preferredTab: AppTab
     @Binding var reviewCadenceDays: Int
 
@@ -2423,7 +2423,7 @@ private struct ProfileDefaultsCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(section.items) { item in
-                        ProfileSettingRow(item: item)
+                        YouSettingRow(item: item)
                     }
                 }
 
@@ -2438,9 +2438,9 @@ private struct ProfileDefaultsCard: View {
                             }
                         }
                         .pickerStyle(.segmented)
-                        .accessibilityIdentifier("profile.default-tab-picker")
+                        .accessibilityIdentifier("you.default-tab-picker")
                     }
-                    .accessibilityIdentifier("profile.default-tab-section")
+                    .accessibilityIdentifier("you.default-tab-section")
 
                     VStack(alignment: .leading, spacing: theme.spacing.xxs) {
                         Text("Review cadence")
@@ -2452,21 +2452,21 @@ private struct ProfileDefaultsCard: View {
                             Text("Weekly").tag(7)
                         }
                         .pickerStyle(.segmented)
-                        .accessibilityIdentifier("profile.review-cadence-picker")
+                        .accessibilityIdentifier("you.review-cadence-picker")
                     }
-                    .accessibilityIdentifier("profile.review-cadence-section")
+                    .accessibilityIdentifier("you.review-cadence-section")
                 }
             }
         }
-        .accessibilityIdentifier("profile.defaults-card")
+        .accessibilityIdentifier("you.defaults-card")
     }
 }
 
-private struct ProfileSectionCard: View {
+private struct YouSectionCard: View {
     @Environment(\.ambitionTheme) private var theme
 
     let eyebrow: String
-    let section: ProfileSectionGroup
+    let section: YouSectionGroup
     let accessibilityIdentifier: String
 
     var body: some View {
@@ -2476,7 +2476,7 @@ private struct ProfileSectionCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(section.items) { item in
-                        ProfileSettingRow(item: item)
+                        YouSettingRow(item: item)
                     }
                 }
 
@@ -2492,7 +2492,7 @@ private struct ProfileSectionCard: View {
     }
 }
 
-private struct ProfileSettingRow: View {
+private struct YouSettingRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let item: SettingsItem
@@ -2528,65 +2528,9 @@ private struct ProfileSettingRow: View {
     }
 }
 
-#if DEBUG
-#Preview("You Light") {
-    NavigationStack {
-        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
-    }
-    .appContainer(PreviewAppContainerFactory.preview)
-    .ambitionTheme(.light)
-    .preferredColorScheme(.light)
-}
-
-#Preview("You Dark") {
-    NavigationStack {
-        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
-    }
-    .appContainer(PreviewAppContainerFactory.preview)
-    .ambitionTheme(.dark)
-    .preferredColorScheme(.dark)
-}
-
-#Preview("You System Center Setup Incomplete") {
-    NavigationStack {
-        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
-    }
-    .appContainer(PreviewAppContainerFactory.preview)
-    .ambitionTheme(.dark)
-    .preferredColorScheme(.dark)
-}
-
-#Preview("You Trust Privacy Focused") {
-    NavigationStack {
-        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
-    }
-    .appContainer(PreviewAppContainerFactory.preview)
-    .ambitionTheme(.dark)
-    .preferredColorScheme(.dark)
-}
-
-#Preview("You High Dynamic Type") {
-    NavigationStack {
-        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
-    }
-    .appContainer(PreviewAppContainerFactory.preview)
-    .ambitionTheme(.dark)
-    .preferredColorScheme(.dark)
-    .environment(\.dynamicTypeSize, .accessibility3)
-}
-
-#Preview("You Reduce Motion") {
-    NavigationStack {
-        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
-    }
-    .appContainer(PreviewAppContainerFactory.preview)
-    .ambitionTheme(.dark)
-    .preferredColorScheme(.dark)
-}
-
 #Preview("You Minimal State") {
     NavigationStack {
-        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.youDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)

@@ -174,7 +174,7 @@ struct AmbitionsRootView: View {
     }
 
     private func timeNavigation() -> some View {
-        NavigationStack(path: $navigation.planPath) {
+        NavigationStack(path: $navigation.timePath) {
             AppShellScaffold(
                 title: "Time",
                 subtitle: "Shape Time",
@@ -183,7 +183,7 @@ struct AmbitionsRootView: View {
             ) {
                 TimeScreen(showsNavigationChrome: false)
             }
-            .navigationDestination(for: PlanRouteTarget.self) { target in
+            .navigationDestination(for: TimeRouteTarget.self) { target in
                 switch target {
                 case .captureInbox:
                     AppShellScaffold(
@@ -191,7 +191,7 @@ struct AmbitionsRootView: View {
                         subtitle: "Time support route",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
-                        onBack: { navigation.resetPlanPath() },
+                        onBack: { navigation.resetTimePath() },
                         trailingButtons: shellUtilityButtons(for: .time)
                     ) {
                         CaptureScreen()
@@ -202,7 +202,7 @@ struct AmbitionsRootView: View {
                         subtitle: "Time-owned loop view",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
-                        onBack: { navigation.resetPlanPath() },
+                        onBack: { navigation.resetTimePath() },
                         trailingButtons: shellUtilityButtons(for: .time)
                     ) {
                         HabitsScreen()
@@ -213,7 +213,7 @@ struct AmbitionsRootView: View {
                         subtitle: "Time shaping continuation",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
-                        onBack: { navigation.resetPlanPath() },
+                        onBack: { navigation.resetTimePath() },
                         trailingButtons: shellUtilityButtons(for: .time)
                     ) {
                         WeeklyReviewScreen()
@@ -248,7 +248,7 @@ struct AmbitionsRootView: View {
     }
 
     private func youNavigation() -> some View {
-        NavigationStack(path: $navigation.insightsPath) {
+        NavigationStack(path: $navigation.youPath) {
             AppShellScaffold(
                 title: "You",
                 subtitle: "Control",
@@ -257,7 +257,7 @@ struct AmbitionsRootView: View {
             ) {
                 YouScreen(showsNavigationChrome: false)
             }
-            .navigationDestination(for: InsightsRouteTarget.self) { target in
+            .navigationDestination(for: YouRouteTarget.self) { target in
                 switch target {
                 case .monthlyReview:
                     AppShellScaffold(
@@ -265,7 +265,7 @@ struct AmbitionsRootView: View {
                         subtitle: "Reflection",
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
-                        onBack: { navigation.resetInsightsPath() },
+                        onBack: { navigation.resetYouPath() },
                         trailingButtons: shellUtilityButtons(for: .you)
                     ) {
                         InsightsMonthlyReviewScreen()
@@ -276,7 +276,7 @@ struct AmbitionsRootView: View {
                         subtitle: "Reflection",
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
-                        onBack: { navigation.resetInsightsPath() },
+                        onBack: { navigation.resetYouPath() },
                         trailingButtons: shellUtilityButtons(for: .you)
                     ) {
                         InsightsHistoryScreen()

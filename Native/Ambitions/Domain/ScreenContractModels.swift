@@ -268,7 +268,7 @@ enum ScreenContractValidator {
         "Insights",
         "Habits",
         "Calendar",
-        "Profile"
+        "You"
     ]
 
     static let forbiddenCopyFragments = [
@@ -278,7 +278,7 @@ enum ScreenContractValidator {
         "Confidence score",
         "Fix AI",
         "Mission Control",
-        "User System Profile",
+        "User System You",
         "Action Closure",
         "Proof Rail",
         "Believability hero",
@@ -582,7 +582,7 @@ enum ScreenContractRegistry {
     private static let you = ScreenContract(
         id: .you,
         dominantQuestion: "How does Ambitions work for me?",
-        requiredFirstScreenContent: ["Your System", "User System Profile", "Planning Setup", "Trust & Automation", "Privacy", "Receipts & History", "Defaults", "Grouped Navigation Lists"],
+        requiredFirstScreenContent: ["Your System", "User System You", "Planning Setup", "Trust & Automation", "Privacy", "Receipts & History", "Defaults", "Grouped Navigation Lists"],
         requiredPanels: [.trust, .review, .settingsPreference, .groupedNavigationList],
         optionalPanels: [.progress, .receipt],
         forbiddenFirstScreenContent: ["Primary execution UI", "Top-level Insights clone", "Social profile", "Admin console", "Account hub", "AI settings wall"],
@@ -599,9 +599,9 @@ enum ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Profile/ProfileScreen.swift", note: "Current You surface"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Features/Profile/ProfileFeatureService.swift", note: "You projection source"),
-            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Profile/ProfileFeatureServiceTests.swift", note: "Focused You tests")
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/You/YouScreen.swift", note: "Current You surface"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Features/You/YouFeatureService.swift", note: "You projection source"),
+            .init(kind: .testCoverage, path: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", note: "Focused You tests")
         ]
     )
 
@@ -729,9 +729,9 @@ enum ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Profile/ProfileScreen.swift", note: "Current You-hosted trust entry"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Features/Profile/ProfileFeatureService.swift", note: "Trust projection source"),
-            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Profile/ProfileFeatureServiceTests.swift", note: "Trust and profile tests")
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/You/YouScreen.swift", note: "Current You-hosted trust entry"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Features/You/YouFeatureService.swift", note: "Trust projection source"),
+            .init(kind: .testCoverage, path: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", note: "Trust and profile tests")
         ]
     )
 
@@ -756,8 +756,8 @@ enum ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceService, path: "Native/Ambitions/Services/MemoryLensService.swift", note: "Memory lens foundation"),
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Profile/ProfileScreen.swift", note: "Current You-hosted memory entry"),
-            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Profile/ProfileFeatureServiceTests.swift", note: "Memory and You tests")
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/You/YouScreen.swift", note: "Current You-hosted memory entry"),
+            .init(kind: .testCoverage, path: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", note: "Memory and You tests")
         ]
     )
 

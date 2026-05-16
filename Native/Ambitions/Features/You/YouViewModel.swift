@@ -5,7 +5,7 @@ import Observation
 @MainActor
 @Observable
 final class YouViewModel {
-    var state: AsyncViewState<ProfileDashboard>
+    var state: AsyncViewState<YouDashboard>
     var preferredTab: AppTab
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
@@ -25,12 +25,12 @@ final class YouViewModel {
         }
     }
 
-    var loadedDashboard: ProfileDashboard? {
+    var loadedDashboard: YouDashboard? {
         guard case let .loaded(dashboard) = state else { return nil }
         return dashboard
     }
 
-    init(state: AsyncViewState<ProfileDashboard> = .loading) {
+    init(state: AsyncViewState<YouDashboard> = .loading) {
         self.state = state
         preferredTab = .today
         appearancePreference = .system
@@ -46,15 +46,15 @@ final class YouViewModel {
             reviewCadenceDays != dashboard.preferences.reviewCadenceDays
     }
 
-    func load(using service: any ProfileServicing) async {
+    func load(using service: any YouServicing) async {
         guard hasLoaded == false else { return }
         hasLoaded = true
         await refresh(using: service)
     }
 
-    func refresh(using service: any ProfileServicing) async {
+    func refresh(using service: any YouServicing) async {
         do {
-            let dashboard = try await service.loadProfileDashboard()
+            let dashboard = try await service.loadYouDashboard()
             syncEditor(with: dashboard)
             state = .loaded(dashboard)
         } catch {
@@ -62,13 +62,13 @@ final class YouViewModel {
         }
     }
 
-    func save(using service: any ProfileServicing) async {
+    func save(using service: any YouServicing) async {
         guard hasUnsavedChanges else { return }
         isSaving = true
         defer { isSaving = false }
         do {
-            let dashboard = try await service.saveProfilePreferences(
-                ProfilePreferencesUpdate(
+            let dashboard = try await service.saveYouPreferences(
+                YouPreferencesUpdate(
                     preferredTab: preferredTab,
                     appearancePreference: appearancePreference,
                     accentFamily: accentFamily,
@@ -83,7 +83,7 @@ final class YouViewModel {
         }
     }
 
-    private func syncEditor(with dashboard: ProfileDashboard) {
+    private func syncEditor(with dashboard: YouDashboard) {
         preferredTab = dashboard.preferences.preferredTab
         appearancePreference = dashboard.preferences.appearancePreference
         accentFamily = dashboard.preferences.accentFamily

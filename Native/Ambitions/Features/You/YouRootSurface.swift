@@ -1,8 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-enum ProfileRootDetail: String, Identifiable {
-    case profile
+enum YouRootDetail: String, Identifiable {
+    case you
     case personalization
     case appearance
     case whatAmbitionsKnows
@@ -29,7 +29,7 @@ enum ProfileRootDetail: String, Identifiable {
 
     var title: String {
         switch self {
-        case .profile: "About You"
+        case .you: "About You"
         case .personalization: "Personalization"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "What Ambitions Knows"
@@ -59,8 +59,8 @@ struct PersonalSystemCenterRootView: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var selectedRowHapticToken = ""
 
-    let dashboard: ProfileDashboard
-    let onOpenDetail: (ProfileRootDetail) -> Void
+    let dashboard: YouDashboard
+    let onOpenDetail: (YouRootDetail) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
@@ -110,7 +110,7 @@ struct PersonalSystemCenterRootView: View {
                 id: "personal-defaults",
                 title: "Defaults",
                 subtitle: "Identity, preference, and appearance controls stay separate from trust-critical choices.",
-                itemIDs: ["profile", "personalization", "appearance"]
+                itemIDs: ["you", "personalization", "appearance"]
             ),
             groupedSection(
                 id: "privacy-accessibility",
@@ -158,9 +158,9 @@ struct PersonalSystemCenterRootView: View {
         )
     }
 
-    private func normalizedTitle(for item: ProfileSystemCenterItem) -> String {
+    private func normalizedTitle(for item: YouSystemCenterItem) -> String {
         switch item.id {
-        case "profile": "About You"
+        case "you": "About You"
         case "personalization": "Planning Defaults"
         case "what-ambitions-knows": "Memory"
         case "receipts-history": "Receipts / History"
@@ -181,9 +181,9 @@ struct PersonalSystemCenterRootView: View {
         }
     }
 
-    private func detail(for itemID: String) -> ProfileRootDetail {
+    private func detail(for itemID: String) -> YouRootDetail {
         switch itemID {
-        case "profile": .profile
+        case "you": .you
         case "personalization": .personalization
         case "appearance": .appearance
         case "what-ambitions-knows": .whatAmbitionsKnows
@@ -205,7 +205,7 @@ struct PersonalSystemCenterRootView: View {
         case "accessibility": .accessibility
         case "help-support": .support
         case "about": .about
-        default: .profile
+        default: .you
         }
     }
 

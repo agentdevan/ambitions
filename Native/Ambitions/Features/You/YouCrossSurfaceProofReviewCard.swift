@@ -1,10 +1,10 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct ProfileCrossSurfaceProofReviewCard: View {
+struct YouCrossSurfaceProofReviewCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let state: ProfileCrossSurfaceProofReviewState
+    let state: YouCrossSurfaceProofReviewState
 
     var body: some View {
         AppCard {
@@ -16,7 +16,7 @@ struct ProfileCrossSurfaceProofReviewCard: View {
                 )
 
                 ForEach(state.items) { item in
-                    ProfileCrossSurfaceProofReviewRow(item: item)
+                    YouCrossSurfaceProofReviewRow(item: item)
                 }
 
                 Text(state.footer)
@@ -25,7 +25,7 @@ struct ProfileCrossSurfaceProofReviewCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.cross-surface-proof-review-card")
+        .accessibilityIdentifier("you.cross-surface-proof-review-card")
         .ambitionPanelAccessibility(
             label: state.title,
             value: "\(state.items.count) proof and review connections",
@@ -34,10 +34,10 @@ struct ProfileCrossSurfaceProofReviewCard: View {
     }
 }
 
-private struct ProfileCrossSurfaceProofReviewRow: View {
+private struct YouCrossSurfaceProofReviewRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: ProfileCrossSurfaceProofReviewItem
+    let item: YouCrossSurfaceProofReviewItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {

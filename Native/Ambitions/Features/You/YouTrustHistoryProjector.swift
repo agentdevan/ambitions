@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-struct ProfileTrustHistoryProjector {
+struct YouTrustHistoryProjector {
     struct Input: Sendable, Equatable {
         let receipts: [ActionReceiptDisplaySummary]
         let recentEvents: [EventLedgerEntry]
@@ -11,9 +11,9 @@ struct ProfileTrustHistoryProjector {
         let permissionSummary: String
     }
 
-    func project(_ input: Input) -> ProfileTrustHistoryCenterState {
+    func project(_ input: Input) -> YouTrustHistoryCenterState {
         var items = input.receipts.map { receipt in
-            ProfileTrustHistoryItem(
+            YouTrustHistoryItem(
                 id: "trust-history-receipt-\(receipt.id)",
                 category: .receipts,
                 title: receipt.title,
@@ -32,7 +32,7 @@ struct ProfileTrustHistoryProjector {
         items.append(privacyItem)
         items.append(automationItem(automationReviewCount: input.automationReviewCount))
 
-        return ProfileTrustHistoryCenterState(
+        return YouTrustHistoryCenterState(
             title: "Trust History",
             subtitle: "Receipts, proof, source review, changes, privacy, and automation boundaries in one local review center.",
             items: items,
@@ -40,8 +40,8 @@ struct ProfileTrustHistoryProjector {
         )
     }
 
-    private func proofItem(proofCount: Int) -> ProfileTrustHistoryItem {
-        ProfileTrustHistoryItem(
+    private func proofItem(proofCount: Int) -> YouTrustHistoryItem {
+        YouTrustHistoryItem(
             id: "trust-history-proof",
             category: .proof,
             title: proofCount == 0 ? "No local proof yet" : "Local proof available",
@@ -56,8 +56,8 @@ struct ProfileTrustHistoryProjector {
         )
     }
 
-    private func changeItem(_ event: EventLedgerEntry) -> ProfileTrustHistoryItem {
-        ProfileTrustHistoryItem(
+    private func changeItem(_ event: EventLedgerEntry) -> YouTrustHistoryItem {
+        YouTrustHistoryItem(
             id: "trust-history-change-\(event.id)",
             category: .changes,
             title: event.title,
@@ -70,8 +70,8 @@ struct ProfileTrustHistoryProjector {
         )
     }
 
-    private func sourceReviewItem(sourceReviewCount: Int) -> ProfileTrustHistoryItem {
-        ProfileTrustHistoryItem(
+    private func sourceReviewItem(sourceReviewCount: Int) -> YouTrustHistoryItem {
+        YouTrustHistoryItem(
             id: "trust-history-source-review",
             category: .sourceReview,
             title: sourceReviewCount == 0 ? "Source review is quiet" : "Source review available",
@@ -86,8 +86,8 @@ struct ProfileTrustHistoryProjector {
         )
     }
 
-    private var privacyItem: ProfileTrustHistoryItem {
-        ProfileTrustHistoryItem(
+    private var privacyItem: YouTrustHistoryItem {
+        YouTrustHistoryItem(
             id: "trust-history-privacy",
             category: .privacy,
             title: "Privacy labels",
@@ -100,8 +100,8 @@ struct ProfileTrustHistoryProjector {
         )
     }
 
-    private func automationItem(automationReviewCount: Int) -> ProfileTrustHistoryItem {
-        ProfileTrustHistoryItem(
+    private func automationItem(automationReviewCount: Int) -> YouTrustHistoryItem {
+        YouTrustHistoryItem(
             id: "trust-history-automation",
             category: .automation,
             title: "Automation history posture",

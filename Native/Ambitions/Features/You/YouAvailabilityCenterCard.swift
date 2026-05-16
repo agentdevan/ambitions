@@ -1,10 +1,10 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct ProfileAvailabilityCenterCard: View {
+struct YouAvailabilityCenterCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let center: ProfileAvailabilityCenterState
+    let center: YouAvailabilityCenterState
 
     var body: some View {
         AppCard {
@@ -15,27 +15,27 @@ struct ProfileAvailabilityCenterCard: View {
                     subtitle: center.subtitle
                 )
 
-                ProfileAvailabilityCenterGroup(
+                YouAvailabilityCenterGroup(
                     title: "Hard Context Stack",
                     items: center.hardContextStack
                 )
-                ProfileAvailabilityCenterGroup(
+                YouAvailabilityCenterGroup(
                     title: "Protected Pocket Map",
                     items: center.protectedPocketMap
                 )
-                ProfileAvailabilityCenterGroup(
+                YouAvailabilityCenterGroup(
                     title: "Planning Defaults",
                     items: center.planningDefaults
                 )
-                ProfileAvailabilityCenterGroup(
+                YouAvailabilityCenterGroup(
                     title: "Automation Trust Control",
                     items: center.automationTrustControls
                 )
-                ProfileAvailabilityCenterGroup(
+                YouAvailabilityCenterGroup(
                     title: "Duration Source Proof",
                     items: center.durationSourceProof
                 )
-                ProfileAvailabilityCenterGroup(
+                YouAvailabilityCenterGroup(
                     title: "Vacation / Away Behavior",
                     items: center.vacationAwayBehavior
                 )
@@ -46,7 +46,7 @@ struct ProfileAvailabilityCenterCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.availability-center-card")
+        .accessibilityIdentifier("you.availability-center-card")
         .ambitionPanelAccessibility(
             label: center.title,
             value: "Hard context, protected pockets, defaults, automation, duration, and away behavior",
@@ -55,11 +55,11 @@ struct ProfileAvailabilityCenterCard: View {
     }
 }
 
-private struct ProfileAvailabilityCenterGroup: View {
+private struct YouAvailabilityCenterGroup: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String
-    let items: [ProfileAvailabilityCenterItem]
+    let items: [YouAvailabilityCenterItem]
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -68,16 +68,16 @@ private struct ProfileAvailabilityCenterGroup: View {
                 .foregroundStyle(theme.colors.textPrimary)
 
             ForEach(items) { item in
-                ProfileAvailabilityCenterRow(item: item)
+                YouAvailabilityCenterRow(item: item)
             }
         }
     }
 }
 
-private struct ProfileAvailabilityCenterRow: View {
+private struct YouAvailabilityCenterRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: ProfileAvailabilityCenterItem
+    let item: YouAvailabilityCenterItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {

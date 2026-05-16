@@ -1,12 +1,12 @@
 import AmbitionsDesignSystem
 import Foundation
 
-enum PlanDashboardMode: Sendable {
+enum TimeDashboardMode: Sendable {
     case empty
     case active
 }
 
-enum PlanWeekPressureLevel: String, Sendable, CaseIterable {
+enum TimeWeekPressureLevel: String, Sendable, CaseIterable {
     case open
     case steady
     case tight
@@ -44,7 +44,7 @@ enum PlanWeekPressureLevel: String, Sendable, CaseIterable {
     }
 }
 
-enum PlanWeekBlockKind: String, Sendable {
+enum TimeWeekBlockKind: String, Sendable {
     case fixed
     case flexible
     case protected
@@ -66,14 +66,14 @@ enum PlanWeekBlockKind: String, Sendable {
     }
 }
 
-enum PlanWeekPrimaryActionKind: String, Sendable {
+enum TimeWeekPrimaryActionKind: String, Sendable {
     case shapeWeek = "shape_week"
     case lightenWeek = "lighten_week"
     case useRoom = "use_room"
     case resolveCarryover = "resolve_carryover"
 }
 
-enum PlanShapingActionKind: String, Sendable, CaseIterable {
+enum TimeShapingActionKind: String, Sendable, CaseIterable {
     case edit
     case patch
     case protect
@@ -98,7 +98,7 @@ enum PlanShapingActionKind: String, Sendable, CaseIterable {
     }
 }
 
-enum PlanCalendarAwarenessStatus: String, Sendable {
+enum TimeCalendarAwarenessStatus: String, Sendable {
     case unavailable
     case baseline
     case calendarAware
@@ -106,8 +106,8 @@ enum PlanCalendarAwarenessStatus: String, Sendable {
     case writeOnly
 }
 
-struct PlanCalendarAwarenessState: Sendable {
-    let status: PlanCalendarAwarenessStatus
+struct TimeCalendarAwarenessState: Sendable {
+    let status: TimeCalendarAwarenessStatus
     let title: String
     let detail: String
     let primaryActionTitle: String
@@ -118,7 +118,7 @@ struct PlanCalendarAwarenessState: Sendable {
     let canRequestCalendarRead: Bool
 }
 
-struct PlanHeroPillState: Identifiable, Sendable, Hashable {
+struct TimeHeroPillState: Identifiable, Sendable, Hashable {
     let title: String
     let icon: String?
     let state: AmbitionVisualState
@@ -126,56 +126,56 @@ struct PlanHeroPillState: Identifiable, Sendable, Hashable {
     var id: String { [title, icon ?? "", state.rawValue].joined(separator: "|") }
 }
 
-struct PlanRealityHeroState: Sendable {
+struct TimeRealityHeroState: Sendable {
     let eyebrow: String
     let title: String
     let subtitle: String
     let dominantTruth: String
     let roomSummary: String
     let pressureSummary: String
-    let contextPills: [PlanHeroPillState]
+    let contextPills: [TimeHeroPillState]
     let trustWhisper: String
 }
 
-struct PlanWeekPrimaryAction: Sendable {
-    let kind: PlanWeekPrimaryActionKind
+struct TimeWeekPrimaryAction: Sendable {
+    let kind: TimeWeekPrimaryActionKind
     let title: String
     let subtitle: String
     let systemImage: String
     let state: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 }
 
-struct PlanPressureScrubberPoint: Identifiable, Sendable {
+struct TimePressureScrubberPoint: Identifiable, Sendable {
     let id: String
     let weekdayLabel: String
     let dateLabel: String
-    let level: PlanWeekPressureLevel
+    let level: TimeWeekPressureLevel
     let pressureValue: Double
     let roomLabel: String
     let summary: String
 }
 
-struct PlanPressureScrubberState: Sendable {
+struct TimePressureScrubberState: Sendable {
     let title: String
     let subtitle: String
     let defaultDayID: String
-    let points: [PlanPressureScrubberPoint]
+    let points: [TimePressureScrubberPoint]
 }
 
-struct PlanWeekBlockState: Identifiable, Sendable {
+struct TimeWeekBlockState: Identifiable, Sendable {
     let id: String
     let target: GoalRouteTarget?
     let title: String
     let detail: String
     let goalLabel: String
     let timingLabel: String
-    let kind: PlanWeekBlockKind
+    let kind: TimeWeekBlockKind
     let visualState: AmbitionVisualState
 }
 
-struct PlanOpenWindowState: Sendable {
+struct TimeOpenWindowState: Sendable {
     let title: String
     let detail: String
     let suggestionLabel: String?
@@ -183,7 +183,7 @@ struct PlanOpenWindowState: Sendable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanWindowMagnetismState: Sendable {
+struct TimeWindowMagnetismState: Sendable {
     let title: String
     let detail: String
     let dayLabel: String
@@ -193,21 +193,21 @@ struct PlanWindowMagnetismState: Sendable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanElasticWeekDayState: Identifiable, Sendable {
+struct TimeElasticWeekDayState: Identifiable, Sendable {
     let id: String
     let weekdayLabel: String
     let dateLabel: String
-    let level: PlanWeekPressureLevel
+    let level: TimeWeekPressureLevel
     let intensity: Double
     let roomLabel: String
     let capacityLabel: String
     let highlight: String
-    let blocks: [PlanWeekBlockState]
+    let blocks: [TimeWeekBlockState]
     let overflowCount: Int
-    let openWindow: PlanOpenWindowState?
+    let openWindow: TimeOpenWindowState?
 }
 
-struct PlanBelievabilityState: Sendable {
+struct TimeBelievabilityState: Sendable {
     let title: String
     let detail: String
     let label: String
@@ -215,27 +215,27 @@ struct PlanBelievabilityState: Sendable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanExecutionResilienceLane: Identifiable, Sendable {
+struct TimeExecutionResilienceLane: Identifiable, Sendable {
     let id: String
     let title: String
     let detail: String
     let recommendation: String
     let state: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 }
 
-struct PlanExecutionResilienceState: Sendable {
+struct TimeExecutionResilienceState: Sendable {
     let title: String
     let subtitle: String
     let calmExplanation: String
     let focusProtection: String
     let tradeoffFraming: String
-    let lanes: [PlanExecutionResilienceLane]
-    let windowMagnetism: PlanWindowMagnetismState?
+    let lanes: [TimeExecutionResilienceLane]
+    let windowMagnetism: TimeWindowMagnetismState?
 }
 
-struct PlanGoalShapingItem: Identifiable, Sendable {
+struct TimeGoalShapingItem: Identifiable, Sendable {
     let id: String
     let target: GoalRouteTarget?
     let goalTitle: String
@@ -246,20 +246,20 @@ struct PlanGoalShapingItem: Identifiable, Sendable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanShapingActionState: Identifiable, Sendable {
-    let kind: PlanShapingActionKind
+struct TimeShapingActionState: Identifiable, Sendable {
+    let kind: TimeShapingActionKind
     let title: String
     let subtitle: String
     let recommendation: String
     let systemImage: String
     let state: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 
     var id: String { kind.rawValue }
 }
 
-struct PlanTreatyState: Sendable {
+struct TimeTreatyState: Sendable {
     let title: String
     let summary: String
     let protectedWork: String
@@ -272,7 +272,7 @@ struct PlanTreatyState: Sendable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanCapacityEnvelopeState: Sendable {
+struct TimeCapacityEnvelopeState: Sendable {
     let title: String
     let detail: String
     let label: String
@@ -283,7 +283,7 @@ struct PlanCapacityEnvelopeState: Sendable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanPressureRecoverySignalState: Identifiable, Sendable, Hashable {
+struct TimePressureRecoverySignalState: Identifiable, Sendable, Hashable {
     let id: String
     let title: String
     let detail: String
@@ -292,7 +292,7 @@ struct PlanPressureRecoverySignalState: Identifiable, Sendable, Hashable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanPressureRecoveryReviewState: Sendable {
+struct TimePressureRecoveryReviewState: Sendable {
     let title: String
     let detail: String
     let pressureFieldLabel: String
@@ -306,10 +306,10 @@ struct PlanPressureRecoveryReviewState: Sendable {
     let recoveryDayReviewLabel: String
     let recoveryReceiptPreviewLabel: String
     let capacityReviewLabel: String
-    let signals: [PlanPressureRecoverySignalState]
+    let signals: [TimePressureRecoverySignalState]
     let visualState: AmbitionVisualState
 
-    static let baseline = PlanPressureRecoveryReviewState(
+    static let baseline = TimePressureRecoveryReviewState(
         title: "Pressure and recovery review",
         detail: "Pressure gets explained before the week changes.",
         pressureFieldLabel: "Pressure field: no relief needed.",
@@ -346,7 +346,7 @@ struct PlanPressureRecoveryReviewState: Sendable {
     }
 }
 
-struct PlanGoalLifecycleRailSegment: Identifiable, Sendable, Hashable {
+struct TimeGoalLifecycleRailSegment: Identifiable, Sendable, Hashable {
     let lifecycleState: GoalPortfolioLifecycleState
     let count: Int
     let subtitle: String
@@ -354,13 +354,13 @@ struct PlanGoalLifecycleRailSegment: Identifiable, Sendable, Hashable {
     var id: String { lifecycleState.rawValue }
 }
 
-struct PlanGoalLifecycleRailState: Sendable {
+struct TimeGoalLifecycleRailState: Sendable {
     let title: String
     let subtitle: String
-    let segments: [PlanGoalLifecycleRailSegment]
+    let segments: [TimeGoalLifecycleRailSegment]
 }
 
-enum PlanTimelineItemKind: String, Sendable, Hashable {
+enum TimeTimelineItemKind: String, Sendable, Hashable {
     case previous
     case active
     case future
@@ -376,24 +376,24 @@ enum PlanTimelineItemKind: String, Sendable, Hashable {
     }
 }
 
-struct PlanTimelineItemState: Identifiable, Sendable, Hashable {
+struct TimeTimelineItemState: Identifiable, Sendable, Hashable {
     let id: String
     let title: String
     let detail: String
     let timingLabel: String
     let sourceLabel: String
-    let kind: PlanTimelineItemKind
+    let kind: TimeTimelineItemKind
     let visualState: AmbitionVisualState
     let target: GoalRouteTarget?
 }
 
-struct PlanTimelineStripState: Sendable {
+struct TimeTimelineStripState: Sendable {
     let title: String
     let subtitle: String
-    let items: [PlanTimelineItemState]
+    let items: [TimeTimelineItemState]
 }
 
-struct PlanOpportunityWindowItem: Identifiable, Sendable, Hashable {
+struct TimeOpportunityWindowItem: Identifiable, Sendable, Hashable {
     let id: String
     let title: String
     let detail: String
@@ -403,35 +403,35 @@ struct PlanOpportunityWindowItem: Identifiable, Sendable, Hashable {
     let target: GoalRouteTarget?
 }
 
-struct PlanOpportunityWindowsState: Sendable {
+struct TimeOpportunityWindowsState: Sendable {
     let title: String
     let subtitle: String
-    let windows: [PlanOpportunityWindowItem]
+    let windows: [TimeOpportunityWindowItem]
 }
 
-struct PlanDecisionItemState: Identifiable, Sendable, Hashable {
+struct TimeDecisionItemState: Identifiable, Sendable, Hashable {
     let id: String
     let title: String
     let detail: String
     let suggestion: String
     let visualState: AmbitionVisualState
     let target: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 }
 
-struct PlanDecisionDebtState: Sendable {
+struct TimeDecisionDebtState: Sendable {
     let title: String
     let subtitle: String
-    let items: [PlanDecisionItemState]
+    let items: [TimeDecisionItemState]
 }
 
-struct PlanConflictCourtState: Sendable {
+struct TimeConflictCourtState: Sendable {
     let title: String
     let subtitle: String
-    let conflicts: [PlanDecisionItemState]
+    let conflicts: [TimeDecisionItemState]
 }
 
-struct PlanCalendarBoundaryContractState: Sendable {
+struct TimeCalendarBoundaryContractState: Sendable {
     let title: String
     let detail: String
     let permissionLabel: String
@@ -442,14 +442,14 @@ struct PlanCalendarBoundaryContractState: Sendable {
     let canRequestCalendarRead: Bool
 }
 
-struct PlanRecoveryEntryState: Sendable {
+struct TimeRecoveryEntryState: Sendable {
     let title: String
     let detail: String
-    let suggestions: [PlanDecisionItemState]
+    let suggestions: [TimeDecisionItemState]
     let boundary: String
 }
 
-enum PlanRealityBreakReasonKind: String, Sendable, CaseIterable {
+enum TimeRealityBreakReasonKind: String, Sendable, CaseIterable {
     case missedDay = "missed_day"
     case overloadedPlan = "overloaded_plan"
     case noRecoveryMargin = "no_recovery_margin"
@@ -483,7 +483,7 @@ enum PlanRealityBreakReasonKind: String, Sendable, CaseIterable {
     }
 }
 
-enum PlanReflowSuggestionKind: String, Sendable, CaseIterable {
+enum TimeReflowSuggestionKind: String, Sendable, CaseIterable {
     case protectOneItem = "protect_one_item"
     case shrinkAction = "shrink_action"
     case splitAction = "split_action"
@@ -545,7 +545,7 @@ enum PlanReflowSuggestionKind: String, Sendable, CaseIterable {
     }
 }
 
-struct PlanReflowBoundaryState: Sendable, Hashable {
+struct TimeReflowBoundaryState: Sendable, Hashable {
     let actionKind: SafeAutomationActionKind
     let confirmationRequirement: SafeAutomationConfirmationRequirement
     let undoAvailability: ActionReceiptUndoAvailability
@@ -573,46 +573,46 @@ struct PlanReflowBoundaryState: Sendable, Hashable {
     }
 }
 
-struct PlanReflowSuggestionState: Identifiable, Sendable, Hashable {
+struct TimeReflowSuggestionState: Identifiable, Sendable, Hashable {
     let id: String
-    let kind: PlanReflowSuggestionKind
+    let kind: TimeReflowSuggestionKind
     let title: String
     let detail: String
     let impactLabel: String
-    let boundary: PlanReflowBoundaryState
+    let boundary: TimeReflowBoundaryState
     let visualState: AmbitionVisualState
     let target: GoalRouteTarget?
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 }
 
-struct PlanRealityReflowState: Sendable {
+struct TimeRealityReflowState: Sendable {
     let title: String
     let detail: String
-    let reasonKind: PlanRealityBreakReasonKind
+    let reasonKind: TimeRealityBreakReasonKind
     let reasonDetail: String
     let recommendedAdjustment: String
     let noChangeCopy: String
-    let suggestions: [PlanReflowSuggestionState]
+    let suggestions: [TimeReflowSuggestionState]
     let visualState: AmbitionVisualState
 }
 
-struct PlanRecoveryGradientOptionState: Identifiable, Sendable, Hashable {
+struct TimeRecoveryGradientOptionState: Identifiable, Sendable, Hashable {
     let id: String
     let order: Int
-    let kind: PlanReflowSuggestionKind
+    let kind: TimeReflowSuggestionKind
     let title: String
     let detail: String
-    let boundary: PlanReflowBoundaryState
+    let boundary: TimeReflowBoundaryState
     let visualState: AmbitionVisualState
 }
 
-struct PlanRecoveryGradientState: Sendable {
+struct TimeRecoveryGradientState: Sendable {
     let title: String
     let detail: String
-    let options: [PlanRecoveryGradientOptionState]
+    let options: [TimeRecoveryGradientOptionState]
 }
 
-struct PlanSaveTheDayState: Sendable {
+struct TimeSaveTheDayState: Sendable {
     let title: String
     let detail: String
     let oneQuestion: String?
@@ -623,7 +623,7 @@ struct PlanSaveTheDayState: Sendable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanReflowReceiptPreviewState: Sendable {
+struct TimeReflowReceiptPreviewState: Sendable {
     let title: String
     let detail: String
     let whatChanged: [String]
@@ -634,7 +634,7 @@ struct PlanReflowReceiptPreviewState: Sendable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanRecoveryMaturitySignalState: Identifiable, Sendable, Hashable {
+struct TimeRecoveryMaturitySignalState: Identifiable, Sendable, Hashable {
     let id: String
     let title: String
     let detail: String
@@ -643,7 +643,7 @@ struct PlanRecoveryMaturitySignalState: Identifiable, Sendable, Hashable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanRecoveryMaturityState: Sendable {
+struct TimeRecoveryMaturityState: Sendable {
     let title: String
     let detail: String
     let planFitLabel: String
@@ -651,17 +651,17 @@ struct PlanRecoveryMaturityState: Sendable {
     let calendarBoundary: String
     let socialBoundary: String
     let receiptBoundary: String
-    let signals: [PlanRecoveryMaturitySignalState]
+    let signals: [TimeRecoveryMaturitySignalState]
 }
 
-struct PlanSecondaryDestination: Identifiable, Sendable {
+struct TimeSecondaryDestination: Identifiable, Sendable {
     let id: String
     let title: String
     let detail: String
     let valueLabel: String
     let icon: String
     let visualState: AmbitionVisualState
-    let planRoute: PlanRouteTarget?
+    let timeRoute: TimeRouteTarget?
 }
 
 struct WeeklyReviewHeroState: Sendable {
@@ -670,7 +670,7 @@ struct WeeklyReviewHeroState: Sendable {
     let subtitle: String
     let dominantTruth: String
     let continuityLabel: String
-    let contextPills: [PlanHeroPillState]
+    let contextPills: [TimeHeroPillState]
 }
 
 struct WeeklyReviewCarryForwardItem: Identifiable, Sendable {
@@ -692,73 +692,73 @@ struct WeeklyReviewDashboard: Sendable {
     let habitSummary: String
     let returnActionTitle: String
     let returnActionSubtitle: String
-    let returnPlanRoute: PlanRouteTarget?
-    let splitPaneContext: PlanWindowMagnetismState?
+    let returnTimeRoute: TimeRouteTarget?
+    let splitPaneContext: TimeWindowMagnetismState?
 }
 
-struct PlanDashboard: Sendable {
-    let mode: PlanDashboardMode
+struct TimeDashboard: Sendable {
+    let mode: TimeDashboardMode
     let timeframeLabel: String
-    let hero: PlanRealityHeroState
-    let lifeSuite: PlanLifeSuiteState
-    let primaryAction: PlanWeekPrimaryAction
-    let treaty: PlanTreatyState
-    let capacityEnvelope: PlanCapacityEnvelopeState
-    let pressureRecoveryReview: PlanPressureRecoveryReviewState
-    let lifecycleRail: PlanGoalLifecycleRailState
-    let timelineStrip: PlanTimelineStripState
-    let opportunityWindows: PlanOpportunityWindowsState
-    let decisionDebt: PlanDecisionDebtState
-    let conflictCourt: PlanConflictCourtState
-    let calendarBoundary: PlanCalendarBoundaryContractState
-    let recoveryEntry: PlanRecoveryEntryState
-    let realityReflow: PlanRealityReflowState
-    let reflowDecision: PlanReflowDecisionState
-    let recoveryGradient: PlanRecoveryGradientState
-    let saveTheDay: PlanSaveTheDayState
-    let reflowReceiptPreview: PlanReflowReceiptPreviewState
-    let recoveryMaturity: PlanRecoveryMaturityState
-    let pressureScrubber: PlanPressureScrubberState
-    let weekDays: [PlanElasticWeekDayState]
-    let believability: PlanBelievabilityState
-    let calendarAwareness: PlanCalendarAwarenessState
-    let resilience: PlanExecutionResilienceState
-    let goalShapingItems: [PlanGoalShapingItem]
-    let shapingActions: [PlanShapingActionState]
-    let secondaryDestinations: [PlanSecondaryDestination]
+    let hero: TimeRealityHeroState
+    let lifeSuite: TimeLifeSuiteState
+    let primaryAction: TimeWeekPrimaryAction
+    let treaty: TimeTreatyState
+    let capacityEnvelope: TimeCapacityEnvelopeState
+    let pressureRecoveryReview: TimePressureRecoveryReviewState
+    let lifecycleRail: TimeGoalLifecycleRailState
+    let timelineStrip: TimeTimelineStripState
+    let opportunityWindows: TimeOpportunityWindowsState
+    let decisionDebt: TimeDecisionDebtState
+    let conflictCourt: TimeConflictCourtState
+    let calendarBoundary: TimeCalendarBoundaryContractState
+    let recoveryEntry: TimeRecoveryEntryState
+    let realityReflow: TimeRealityReflowState
+    let reflowDecision: TimeReflowDecisionState
+    let recoveryGradient: TimeRecoveryGradientState
+    let saveTheDay: TimeSaveTheDayState
+    let reflowReceiptPreview: TimeReflowReceiptPreviewState
+    let recoveryMaturity: TimeRecoveryMaturityState
+    let pressureScrubber: TimePressureScrubberState
+    let weekDays: [TimeElasticWeekDayState]
+    let believability: TimeBelievabilityState
+    let calendarAwareness: TimeCalendarAwarenessState
+    let resilience: TimeExecutionResilienceState
+    let goalShapingItems: [TimeGoalShapingItem]
+    let shapingActions: [TimeShapingActionState]
+    let secondaryDestinations: [TimeSecondaryDestination]
     let emptyTitle: String?
     let emptyMessage: String?
 
     init(
-        mode: PlanDashboardMode,
+        mode: TimeDashboardMode,
         timeframeLabel: String,
-        hero: PlanRealityHeroState,
-        lifeSuite: PlanLifeSuiteState,
-        primaryAction: PlanWeekPrimaryAction,
-        treaty: PlanTreatyState,
-        capacityEnvelope: PlanCapacityEnvelopeState,
-        pressureRecoveryReview: PlanPressureRecoveryReviewState = .baseline,
-        lifecycleRail: PlanGoalLifecycleRailState,
-        timelineStrip: PlanTimelineStripState,
-        opportunityWindows: PlanOpportunityWindowsState,
-        decisionDebt: PlanDecisionDebtState,
-        conflictCourt: PlanConflictCourtState,
-        calendarBoundary: PlanCalendarBoundaryContractState,
-        recoveryEntry: PlanRecoveryEntryState,
-        realityReflow: PlanRealityReflowState,
-        reflowDecision: PlanReflowDecisionState,
-        recoveryGradient: PlanRecoveryGradientState,
-        saveTheDay: PlanSaveTheDayState,
-        reflowReceiptPreview: PlanReflowReceiptPreviewState,
-        recoveryMaturity: PlanRecoveryMaturityState,
-        pressureScrubber: PlanPressureScrubberState,
-        weekDays: [PlanElasticWeekDayState],
-        believability: PlanBelievabilityState,
-        calendarAwareness: PlanCalendarAwarenessState,
-        resilience: PlanExecutionResilienceState,
-        goalShapingItems: [PlanGoalShapingItem],
-        shapingActions: [PlanShapingActionState],
-        secondaryDestinations: [PlanSecondaryDestination],
+        hero: TimeRealityHeroState,
+        lifeSuite: TimeLifeSuiteState,
+        primaryAction: TimeWeekPrimaryAction,
+        treaty: TimeTreatyState,
+        capacityEnvelope: TimeCapacityEnvelopeState,
+        pressureRecoveryReview: TimePressureRecoveryReviewState = .baseline,
+        lifecycleRail: TimeGoalLifecycleRailState,
+        timelineStrip: TimeTimelineStripState,
+        opportunityWindows: TimeOpportunityWindowsState,
+        decisionDebt: TimeDecisionDebtState,
+        conflictCourt: TimeConflictCourtState,
+        calendarBoundary: TimeCalendarBoundaryContractState,
+        recoveryEntry: TimeRecoveryEntryState,
+        realityReflow: TimeRealityReflowState,
+        reflowDecision: TimeReflowDecisionState,
+        recoveryGradient: TimeRecoveryGradientState,
+        saveTheDay: TimeSaveTheDayState,
+        reflowReceiptPreview: TimeReflowReceiptPreviewState,
+        recoveryMaturity: TimeRecoveryMaturityState,
+        pressureScrubber: TimePressureScrubberState,
+        weekDays: [TimeElasticWeekDayState],
+        believability: TimeBelievabilityState,
+        calendarAwareness: TimeCalendarAwarenessState,
+        resilience: TimeExecutionResilienceState,
+        goalShapingItems: [TimeGoalShapingItem],
+        shapingActions: [TimeShapingActionState],
+        secondaryDestinations: [TimeSecondaryDestination],
         emptyTitle: String?,
         emptyMessage: String?
     ) {

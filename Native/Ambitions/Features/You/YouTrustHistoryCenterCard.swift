@@ -1,10 +1,10 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct ProfileTrustHistoryCenterCard: View {
+struct YouTrustHistoryCenterCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let history: ProfileTrustHistoryCenterState
+    let history: YouTrustHistoryCenterState
 
     var body: some View {
         AppCard {
@@ -15,7 +15,7 @@ struct ProfileTrustHistoryCenterCard: View {
                     subtitle: history.subtitle
                 )
 
-                ForEach(ProfileTrustHistoryCategory.allCases, id: \.rawValue) { category in
+                ForEach(YouTrustHistoryCategory.allCases, id: \.rawValue) { category in
                     let categoryItems = history.items.filter { $0.category == category }
                     if !categoryItems.isEmpty {
                         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -25,7 +25,7 @@ struct ProfileTrustHistoryCenterCard: View {
                                 .accessibilityAddTraits(.isHeader)
 
                             ForEach(categoryItems) { item in
-                                ProfileTrustHistoryItemRow(item: item)
+                                YouTrustHistoryItemRow(item: item)
                             }
                         }
                     }
@@ -37,14 +37,14 @@ struct ProfileTrustHistoryCenterCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.trust-history-center-card")
+        .accessibilityIdentifier("you.trust-history-center-card")
     }
 }
 
-private struct ProfileTrustHistoryItemRow: View {
+private struct YouTrustHistoryItemRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: ProfileTrustHistoryItem
+    let item: YouTrustHistoryItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {

@@ -16,7 +16,7 @@ final class AppContainer {
     let habitsService: any HabitsServicing
     let timeService: any PlanServicing
     let insightsService: any InsightsServicing
-    let youService: any ProfileServicing
+    let youService: any YouServicing
     let notificationService: any NotificationServicing
     let calendarRemindersService: any CalendarRemindersServicing
     let actionRouter: any AppActionRouting
@@ -39,7 +39,7 @@ final class AppContainer {
         habitsService: any HabitsServicing,
         timeService: any PlanServicing,
         insightsService: any InsightsServicing,
-        youService: any ProfileServicing,
+        youService: any YouServicing,
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
         actionRouter: any AppActionRouting,

@@ -9,82 +9,82 @@ struct SettingsItem: Identifiable, Sendable, Equatable {
     let valueLabel: String?
 }
 
-struct ProfileNotificationAuthorization: Sendable, Equatable {
+struct YouNotificationAuthorization: Sendable, Equatable {
     let statusLabel: String
     let detail: String
     let canRequestAuthorization: Bool
     let actionTitle: String?
 }
 
-struct ProfileStatusPill: Identifiable, Sendable, Equatable {
+struct YouStatusPill: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let icon: String?
     let state: AmbitionVisualState
 }
 
-struct ProfileHeroState: Sendable, Equatable {
+struct YouHeroState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let dominantTruth: String
     let supportingTruth: String
     let trustWhisper: String
     let status: AmbitionVisualState
-    let pills: [ProfileStatusPill]
+    let pills: [YouStatusPill]
     let stats: [MetricSummary]
 }
 
-struct ProfileAppearanceOption: Identifiable, Sendable, Equatable {
+struct YouAppearanceOption: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
     let preference: AppAppearancePreference
 }
 
-struct ProfileAccentOption: Identifiable, Sendable, Equatable {
+struct YouAccentOption: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
     let family: AmbitionAccentFamily
 }
 
-enum ProfileAppearanceObjectPreviewKind: String, Sendable, Equatable {
+enum YouAppearanceObjectPreviewKind: String, Sendable, Equatable {
     case startHere
     case realityRail
     case lifeShape
     case receiptDrawer
 }
 
-struct ProfilePreviewSwatch: Identifiable, Sendable, Equatable {
+struct YouPreviewSwatch: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
     let eyebrow: String
-    let objectKind: ProfileAppearanceObjectPreviewKind
+    let objectKind: YouAppearanceObjectPreviewKind
     let accentFamily: AmbitionAccentFamily
     let appearancePreference: AppAppearancePreference
     let state: AmbitionVisualState
     let accessibilityLabel: String
 }
 
-struct ProfileAppearanceStudioState: Sendable, Equatable {
+struct YouAppearanceStudioState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let previewSummary: String
-    let modeOptions: [ProfileAppearanceOption]
-    let accentOptions: [ProfileAccentOption]
-    let previewSwatches: [ProfilePreviewSwatch]
+    let modeOptions: [YouAppearanceOption]
+    let accentOptions: [YouAccentOption]
+    let previewSwatches: [YouPreviewSwatch]
     let footer: String
 }
 
-struct ProfileTrustPulseState: Sendable, Equatable {
+struct YouTrustPulseState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let detail: String
     let state: AmbitionVisualState
 }
 
-struct ProfileTrustDataMapItem: Identifiable, Sendable, Equatable {
+struct YouTrustDataMapItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let dataTypes: String
@@ -95,18 +95,18 @@ struct ProfileTrustDataMapItem: Identifiable, Sendable, Equatable {
     let semanticState: AmbitionSemanticState
 }
 
-struct ProfileTrustCenterState: Sendable, Equatable {
+struct YouTrustCenterState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let pulse: ProfileTrustPulseState
+    let pulse: YouTrustPulseState
     let items: [SettingsItem]
-    let dataMap: [ProfileTrustDataMapItem]
-    let sections: [ProfileTrustCenterSection]
+    let dataMap: [YouTrustDataMapItem]
+    let sections: [YouTrustCenterSection]
     let receiptSummaries: [ActionReceiptDisplaySummary]
     let footer: String
 }
 
-struct ProfileTrustCenterRoute: Identifiable, Sendable, Equatable {
+struct YouTrustCenterRoute: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
@@ -116,14 +116,14 @@ struct ProfileTrustCenterRoute: Identifiable, Sendable, Equatable {
     let accessibilityHint: String
 }
 
-struct ProfileTrustCenterSection: Identifiable, Sendable, Equatable {
+struct YouTrustCenterSection: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let footer: String?
-    let routes: [ProfileTrustCenterRoute]
+    let routes: [YouTrustCenterRoute]
 }
 
-struct ProfileControlRoomEntry: Identifiable, Sendable, Equatable {
+struct YouControlRoomEntry: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
@@ -132,14 +132,14 @@ struct ProfileControlRoomEntry: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfileControlRoomState: Sendable, Equatable {
+struct YouControlRoomState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let entries: [ProfileControlRoomEntry]
+    let entries: [YouControlRoomEntry]
     let footer: String
 }
 
-struct ProfileSystemCenterItem: Identifiable, Sendable, Equatable {
+struct YouSystemCenterItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
@@ -149,21 +149,21 @@ struct ProfileSystemCenterItem: Identifiable, Sendable, Equatable {
     let accessibilityHint: String
 }
 
-struct ProfileSystemCenterSection: Identifiable, Sendable, Equatable {
+struct YouSystemCenterSection: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let footer: String?
-    let items: [ProfileSystemCenterItem]
+    let items: [YouSystemCenterItem]
 }
 
-struct ProfileSystemCenterState: Sendable, Equatable {
+struct YouSystemCenterState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let sections: [ProfileSystemCenterSection]
+    let sections: [YouSystemCenterSection]
     let footer: String
 }
 
-struct ProfileConstitutionRule: Identifiable, Sendable, Equatable {
+struct YouConstitutionRule: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let detail: String
@@ -171,15 +171,15 @@ struct ProfileConstitutionRule: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfileConstitutionState: Sendable, Equatable {
+struct YouConstitutionState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let postureSummary: String
-    let rules: [ProfileConstitutionRule]
+    let rules: [YouConstitutionRule]
     let footer: String
 }
 
-enum ProfileMemoryFreshness: String, Sendable, Equatable {
+enum YouMemoryFreshness: String, Sendable, Equatable {
     case current
     case mayNeedReview
     case basedOnOlderContext
@@ -201,7 +201,7 @@ enum ProfileMemoryFreshness: String, Sendable, Equatable {
     }
 }
 
-struct ProfileMemoryAction: Identifiable, Sendable, Equatable {
+struct YouMemoryAction: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let statusLabel: String
@@ -209,43 +209,43 @@ struct ProfileMemoryAction: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfileMemoryItem: Identifiable, Sendable, Equatable {
+struct YouMemoryItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let detail: String
     let sourceLabel: String
-    let freshness: ProfileMemoryFreshness
+    let freshness: YouMemoryFreshness
     let usedFor: String
     let privacyLabel: String
-    let actions: [ProfileMemoryAction]
+    let actions: [YouMemoryAction]
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String
 }
 
-struct ProfileMemoryGroup: Identifiable, Sendable, Equatable {
+struct YouMemoryGroup: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
     let footer: String?
-    let items: [ProfileMemoryItem]
+    let items: [YouMemoryItem]
 }
 
-struct ProfileNarrativeMemory: Identifiable, Sendable, Equatable {
+struct YouNarrativeMemory: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let summary: String
     let sourceLabel: String
-    let freshness: ProfileMemoryFreshness
+    let freshness: YouMemoryFreshness
     let usedFor: String
     let sensitiveStatusLabel: String
-    let actions: [ProfileMemoryAction]
+    let actions: [YouMemoryAction]
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String
 }
 
-struct ProfileMemoryPattern: Identifiable, Sendable, Equatable {
+struct YouMemoryPattern: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let summary: String
@@ -254,7 +254,7 @@ struct ProfileMemoryPattern: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfileMemoryLensItem: Identifiable, Sendable, Equatable {
+struct YouMemoryLensItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let summary: String
@@ -271,7 +271,7 @@ struct ProfileMemoryLensItem: Identifiable, Sendable, Equatable {
     let accessibilityHint: String
 }
 
-enum ProfileRuntimeInspectionKind: String, Sendable, Equatable, CaseIterable {
+enum YouRuntimeInspectionKind: String, Sendable, Equatable, CaseIterable {
     case learned
     case used
     case ignored
@@ -287,9 +287,9 @@ enum ProfileRuntimeInspectionKind: String, Sendable, Equatable, CaseIterable {
     }
 }
 
-struct ProfileRuntimeInspectionItem: Identifiable, Sendable, Equatable {
+struct YouRuntimeInspectionItem: Identifiable, Sendable, Equatable {
     let id: String
-    let kind: ProfileRuntimeInspectionKind
+    let kind: YouRuntimeInspectionKind
     let title: String
     let summary: String
     let sourceLabel: String
@@ -301,7 +301,7 @@ struct ProfileRuntimeInspectionItem: Identifiable, Sendable, Equatable {
     let accessibilityHint: String
 }
 
-struct ProfileLocalLearningControl: Identifiable, Sendable, Equatable {
+struct YouLocalLearningControl: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let summary: String
@@ -315,7 +315,7 @@ struct ProfileLocalLearningControl: Identifiable, Sendable, Equatable {
     let accessibilityHint: String
 }
 
-struct ProfilePersonalizationConsentState: Sendable, Equatable {
+struct YouPersonalizationConsentState: Sendable, Equatable {
     let title: String
     let summary: String
     let sourceLabel: String
@@ -324,7 +324,7 @@ struct ProfilePersonalizationConsentState: Sendable, Equatable {
     let controlLabel: String
 }
 
-struct ProfilePrivateModeControl: Identifiable, Sendable, Equatable {
+struct YouPrivateModeControl: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let summary: String
@@ -334,18 +334,18 @@ struct ProfilePrivateModeControl: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfileMemoryControlState: Sendable, Equatable {
+struct YouMemoryControlState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
-    let consent: ProfilePersonalizationConsentState
-    let privateModeControls: [ProfilePrivateModeControl]
-    let groups: [ProfileMemoryGroup]
-    let narrativeMemories: [ProfileNarrativeMemory]
-    let conservativePatterns: [ProfileMemoryPattern]
-    let memoryLensItems: [ProfileMemoryLensItem]
-    let runtimeInspectionItems: [ProfileRuntimeInspectionItem]
-    let localLearningControls: [ProfileLocalLearningControl]
+    let consent: YouPersonalizationConsentState
+    let privateModeControls: [YouPrivateModeControl]
+    let groups: [YouMemoryGroup]
+    let narrativeMemories: [YouNarrativeMemory]
+    let conservativePatterns: [YouMemoryPattern]
+    let memoryLensItems: [YouMemoryLensItem]
+    let runtimeInspectionItems: [YouRuntimeInspectionItem]
+    let localLearningControls: [YouLocalLearningControl]
     let recoverySummary: String
     let footer: String
 
@@ -353,14 +353,14 @@ struct ProfileMemoryControlState: Sendable, Equatable {
         title: String,
         subtitle: String,
         items: [SettingsItem],
-        consent: ProfilePersonalizationConsentState,
-        privateModeControls: [ProfilePrivateModeControl],
-        groups: [ProfileMemoryGroup],
-        narrativeMemories: [ProfileNarrativeMemory],
-        conservativePatterns: [ProfileMemoryPattern],
-        memoryLensItems: [ProfileMemoryLensItem],
-        runtimeInspectionItems: [ProfileRuntimeInspectionItem] = [],
-        localLearningControls: [ProfileLocalLearningControl] = [],
+        consent: YouPersonalizationConsentState,
+        privateModeControls: [YouPrivateModeControl],
+        groups: [YouMemoryGroup],
+        narrativeMemories: [YouNarrativeMemory],
+        conservativePatterns: [YouMemoryPattern],
+        memoryLensItems: [YouMemoryLensItem],
+        runtimeInspectionItems: [YouRuntimeInspectionItem] = [],
+        localLearningControls: [YouLocalLearningControl] = [],
         recoverySummary: String,
         footer: String
     ) {
@@ -380,28 +380,28 @@ struct ProfileMemoryControlState: Sendable, Equatable {
     }
 }
 
-struct ProfileAssumptionCorrectionState: Sendable, Equatable {
+struct YouAssumptionCorrectionState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
     let footer: String
 }
 
-struct ProfileAutomationBoundaryState: Sendable, Equatable {
+struct YouAutomationBoundaryState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let rules: [ProfileConstitutionRule]
+    let rules: [YouConstitutionRule]
     let footer: String
 }
 
-struct ProfileReceiptAuditState: Sendable, Equatable {
+struct YouReceiptAuditState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
     let footer: String
 }
 
-enum ProfileTrustHistoryCategory: String, Sendable, Equatable, CaseIterable {
+enum YouTrustHistoryCategory: String, Sendable, Equatable, CaseIterable {
     case receipts
     case proof
     case changes
@@ -421,9 +421,9 @@ enum ProfileTrustHistoryCategory: String, Sendable, Equatable, CaseIterable {
     }
 }
 
-struct ProfileTrustHistoryItem: Identifiable, Sendable, Equatable {
+struct YouTrustHistoryItem: Identifiable, Sendable, Equatable {
     let id: String
-    let category: ProfileTrustHistoryCategory
+    let category: YouTrustHistoryCategory
     let title: String
     let summary: String
     let sourceLabel: String
@@ -433,13 +433,13 @@ struct ProfileTrustHistoryItem: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
-struct ProfileTrustHistoryCenterState: Sendable, Equatable {
+struct YouTrustHistoryCenterState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let items: [ProfileTrustHistoryItem]
+    let items: [YouTrustHistoryItem]
     let footer: String
 
-    static let empty = ProfileTrustHistoryCenterState(
+    static let empty = YouTrustHistoryCenterState(
         title: "Trust History",
         subtitle: "Receipts, proof, source review, changes, privacy, and automation boundaries stay reviewable from You.",
         items: [],
@@ -447,14 +447,14 @@ struct ProfileTrustHistoryCenterState: Sendable, Equatable {
     )
 }
 
-struct ProfileReviewsState: Sendable, Equatable {
+struct YouReviewsState: Sendable, Equatable {
     let projection: ReviewsV1Projection
     let title: String
     let subtitle: String
     let footer: String
 }
 
-struct ProfileContextVaultItem: Identifiable, Sendable, Equatable {
+struct YouContextVaultItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
@@ -462,29 +462,29 @@ struct ProfileContextVaultItem: Identifiable, Sendable, Equatable {
     let detail: String
 }
 
-struct ProfileSignalPolicyItem: Identifiable, Sendable, Equatable {
+struct YouSignalPolicyItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let detail: String
     let state: AmbitionVisualState
 }
 
-struct ProfileContextVaultState: Sendable, Equatable {
+struct YouContextVaultState: Sendable, Equatable {
     let title: String
     let subtitle: String
-    let items: [ProfileContextVaultItem]
-    let policyItems: [ProfileSignalPolicyItem]
+    let items: [YouContextVaultItem]
+    let policyItems: [YouSignalPolicyItem]
     let footer: String
 }
 
-struct ProfileSectionGroup: Sendable, Equatable {
+struct YouSectionGroup: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
     let footer: String?
 }
 
-struct ProfilePreferencesState: Sendable, Equatable {
+struct YouPreferencesState: Sendable, Equatable {
     let preferredTab: AppTab
     let appearancePreference: AppAppearancePreference
     let accentFamily: AmbitionAccentFamily
@@ -492,7 +492,7 @@ struct ProfilePreferencesState: Sendable, Equatable {
     let localOnlyModeEnabled: Bool
 }
 
-struct ProfilePreferencesUpdate: Sendable, Equatable {
+struct YouPreferencesUpdate: Sendable, Equatable {
     let preferredTab: AppTab
     let appearancePreference: AppAppearancePreference
     let accentFamily: AmbitionAccentFamily
@@ -500,51 +500,51 @@ struct ProfilePreferencesUpdate: Sendable, Equatable {
     let localOnlyModeEnabled: Bool
 }
 
-struct ProfileDashboard: Sendable, Equatable {
-    let hero: ProfileHeroState
-    let systemCenter: ProfileSystemCenterState
-    let controlRoom: ProfileControlRoomState
-    let constitution: ProfileConstitutionState
-    let memoryControls: ProfileMemoryControlState
-    let assumptionCorrections: ProfileAssumptionCorrectionState
-    let automationBoundary: ProfileAutomationBoundaryState
-    let planningDefaultsCenter: ProfilePlanningDefaultsCenterState
-    let availabilityCenter: ProfileAvailabilityCenterState
-    let receiptAudit: ProfileReceiptAuditState
-    let trustHistoryCenter: ProfileTrustHistoryCenterState
-    let crossSurfaceProofReview: ProfileCrossSurfaceProofReviewState
-    let reviews: ProfileReviewsState
-    let appearanceStudio: ProfileAppearanceStudioState
-    let trustCenter: ProfileTrustCenterState
-    let contextVault: ProfileContextVaultState
-    let integrationsSection: ProfileSectionGroup
-    let defaultsSection: ProfileSectionGroup
-    let accountSection: ProfileSectionGroup
-    let notificationAuthorization: ProfileNotificationAuthorization
-    let preferences: ProfilePreferencesState
+struct YouDashboard: Sendable, Equatable {
+    let hero: YouHeroState
+    let systemCenter: YouSystemCenterState
+    let controlRoom: YouControlRoomState
+    let constitution: YouConstitutionState
+    let memoryControls: YouMemoryControlState
+    let assumptionCorrections: YouAssumptionCorrectionState
+    let automationBoundary: YouAutomationBoundaryState
+    let planningDefaultsCenter: YouPlanningDefaultsCenterState
+    let availabilityCenter: YouAvailabilityCenterState
+    let receiptAudit: YouReceiptAuditState
+    let trustHistoryCenter: YouTrustHistoryCenterState
+    let crossSurfaceProofReview: YouCrossSurfaceProofReviewState
+    let reviews: YouReviewsState
+    let appearanceStudio: YouAppearanceStudioState
+    let trustCenter: YouTrustCenterState
+    let contextVault: YouContextVaultState
+    let integrationsSection: YouSectionGroup
+    let defaultsSection: YouSectionGroup
+    let accountSection: YouSectionGroup
+    let notificationAuthorization: YouNotificationAuthorization
+    let preferences: YouPreferencesState
 
     init(
-        hero: ProfileHeroState,
-        systemCenter: ProfileSystemCenterState,
-        controlRoom: ProfileControlRoomState,
-        constitution: ProfileConstitutionState,
-        memoryControls: ProfileMemoryControlState,
-        assumptionCorrections: ProfileAssumptionCorrectionState,
-        automationBoundary: ProfileAutomationBoundaryState,
-        planningDefaultsCenter: ProfilePlanningDefaultsCenterState = .empty,
-        availabilityCenter: ProfileAvailabilityCenterState = .empty,
-        receiptAudit: ProfileReceiptAuditState,
-        trustHistoryCenter: ProfileTrustHistoryCenterState = .empty,
-        crossSurfaceProofReview: ProfileCrossSurfaceProofReviewState = .empty,
-        reviews: ProfileReviewsState,
-        appearanceStudio: ProfileAppearanceStudioState,
-        trustCenter: ProfileTrustCenterState,
-        contextVault: ProfileContextVaultState,
-        integrationsSection: ProfileSectionGroup,
-        defaultsSection: ProfileSectionGroup,
-        accountSection: ProfileSectionGroup,
-        notificationAuthorization: ProfileNotificationAuthorization,
-        preferences: ProfilePreferencesState
+        hero: YouHeroState,
+        systemCenter: YouSystemCenterState,
+        controlRoom: YouControlRoomState,
+        constitution: YouConstitutionState,
+        memoryControls: YouMemoryControlState,
+        assumptionCorrections: YouAssumptionCorrectionState,
+        automationBoundary: YouAutomationBoundaryState,
+        planningDefaultsCenter: YouPlanningDefaultsCenterState = .empty,
+        availabilityCenter: YouAvailabilityCenterState = .empty,
+        receiptAudit: YouReceiptAuditState,
+        trustHistoryCenter: YouTrustHistoryCenterState = .empty,
+        crossSurfaceProofReview: YouCrossSurfaceProofReviewState = .empty,
+        reviews: YouReviewsState,
+        appearanceStudio: YouAppearanceStudioState,
+        trustCenter: YouTrustCenterState,
+        contextVault: YouContextVaultState,
+        integrationsSection: YouSectionGroup,
+        defaultsSection: YouSectionGroup,
+        accountSection: YouSectionGroup,
+        notificationAuthorization: YouNotificationAuthorization,
+        preferences: YouPreferencesState
     ) {
         self.hero = hero
         self.systemCenter = systemCenter

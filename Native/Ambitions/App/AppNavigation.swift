@@ -26,7 +26,7 @@ struct GoalRouteTarget: Hashable, Identifiable, Sendable {
     var hasAddressableContent: Bool { goalID != nil || draftID != nil }
 }
 
-enum PlanRouteTarget: String, Hashable, Identifiable, Sendable {
+enum TimeRouteTarget: String, Hashable, Identifiable, Sendable {
     case captureInbox
     case habits
     case weeklyReview
@@ -34,7 +34,7 @@ enum PlanRouteTarget: String, Hashable, Identifiable, Sendable {
     var id: String { rawValue }
 }
 
-enum InsightsRouteTarget: String, Hashable, Identifiable, Sendable {
+enum YouRouteTarget: String, Hashable, Identifiable, Sendable {
     case monthlyReview
     case history
 
@@ -53,8 +53,8 @@ final class AppNavigationModel {
 
     var selectedTab: AppTab
     var goalsPath: [GoalRouteTarget]
-    var timePath: [PlanRouteTarget]
-    var youPath: [InsightsRouteTarget]
+    var timePath: [TimeRouteTarget]
+    var youPath: [YouRouteTarget]
     var todayEntryContext: TodayEntryContext
     var pendingTodayEntryContext: TodayEntryContext?
     var activeOverlay: ShellOverlayState?
@@ -147,7 +147,7 @@ final class AppNavigationModel {
         goalsPath = []
     }
 
-    func openTimeRoute(_ target: PlanRouteTarget) {
+    func openTimeRoute(_ target: TimeRouteTarget) {
         dismissOverlay()
         if target == .captureInbox {
             selectedTab = .capture
@@ -162,7 +162,7 @@ final class AppNavigationModel {
         timePath = []
     }
 
-    func openYouRoute(_ target: InsightsRouteTarget) {
+    func openYouRoute(_ target: YouRouteTarget) {
         dismissOverlay()
         selectedTab = .you
         youPath = [target]

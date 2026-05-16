@@ -31,7 +31,7 @@ Expanded thesis:
 
 Active product language: Ambitions is an intelligent product, not an AI product. It should not sound like a chat-first AI wrapper.
 
-Active shell: `Today / Goals / Capture / Plan / You`.
+Active shell: `Today / Goals / Capture / Time / You`.
 
 `You` is the Personal System Center. `Profile` may remain in compatibility code, but user-facing active canon uses `You`.
 
@@ -57,7 +57,7 @@ Ambitions 2.0 is not merely a planner, habit tracker, goal app, calendar wrapper
 
 Locked 2.0 direction:
 
-- top-level tabs are Today, Goals, Capture, Plan, and You
+- top-level tabs are Today, Goals, Capture, Time, and You
 - Insights is demoted from top-level navigation
 - Habits is absorbed into Plan, rituals, Today execution, and Reviews/pattern reflection
 - Life Areas and North Stars are first-class organization lenses inside Goals and You, not extra tabs
@@ -305,7 +305,7 @@ The primary information architecture is:
 1. Today
 2. Goals
 3. Capture
-4. Plan
+4. Time
 5. You
 
 The tab bar must be polished, simple, and strong enough to support daily repeated use.
@@ -317,7 +317,7 @@ Each top-level surface must answer one dominant question:
 - `Today`: What matters now?
 - `Goals`: Where am I headed?
 - `Capture`: What needs a place?
-- `Plan`: Does this hold together?
+- `Time`: Does this hold together?
 - `You`: How is my system working for me?
 
 This is product doctrine, not sample copy.

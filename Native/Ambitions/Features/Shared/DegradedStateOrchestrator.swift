@@ -113,7 +113,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .proofSpine: "Proof Spine"
         case .capturePlacementShelf: "Atmosphere Composer"
         case .lifeShapeContourMap: "LifeShape Field"
-        case .personalSystemCenter: "User System Profile"
+        case .personalSystemCenter: "User System You"
         case .memoryLens: "Memory Lens"
         }
     }

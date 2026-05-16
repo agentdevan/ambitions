@@ -1,12 +1,12 @@
 import XCTest
 @testable import Ambitions
 
-final class ProfileFeatureServiceTests: XCTestCase {
+final class YouFeatureServiceTests: XCTestCase {
     func testDashboardCopyStatesCurrentNativeTruthWithoutOverclaimingExternalSurfaces() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertTrue(dashboard.hero.subtitle.contains("Your System"))
         XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
@@ -24,10 +24,10 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testSavingPreferencesKeepsStorageOnDeviceOnly() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        _ = try await service.saveProfilePreferences(
-            ProfilePreferencesUpdate(
+        _ = try await service.saveYouPreferences(
+            YouPreferencesUpdate(
                 preferredTab: .goals,
                 appearancePreference: .dark,
                 accentFamily: .copper,
@@ -46,13 +46,13 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testDashboardUsesNeutralIdentityWhenDisplayNameIsBlank() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
         var state = try await repositories.appState.loadState()
         state.userDisplayName = "   "
         try await repositories.appState.saveState(state)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertEqual(dashboard.hero.title, "Your System")
         XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
@@ -63,9 +63,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testDashboardUsesInjectedRuntimeSyncCapabilityStatus() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(
+        let service = RepositoryBackedYouService(
             repositories: repositories,
-            syncCapability: StaticProfileSyncCapability(
+            syncCapability: StaticYouSyncCapability(
                 status: SyncCapabilityStatus(
                     backendKind: .localOnly,
                     trustPosture: .localOnly,
@@ -75,19 +75,19 @@ final class ProfileFeatureServiceTests: XCTestCase {
             )
         )
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-sync" && $0.valueLabel == "Injected runtime trust posture." }))
     }
 
     func testDashboardMapsNotificationAuthorizationIntoNarrowTrustSurface() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(
+        let service = RepositoryBackedYouService(
             repositories: repositories,
-            notificationService: StaticProfileNotificationService(state: .authorized)
+            notificationService: StaticYouNotificationService(state: .authorized)
         )
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertEqual(dashboard.notificationAuthorization.statusLabel, "Allowed")
         XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
@@ -98,12 +98,12 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testDashboardMapsDeniedNotificationAuthorizationIntoConservativeTrustSurface() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(
+        let service = RepositoryBackedYouService(
             repositories: repositories,
-            notificationService: StaticProfileNotificationService(state: .denied)
+            notificationService: StaticYouNotificationService(state: .denied)
         )
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertEqual(dashboard.notificationAuthorization.statusLabel, "Denied")
         XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
@@ -115,11 +115,11 @@ final class ProfileFeatureServiceTests: XCTestCase {
         }))
     }
 
-    func testDashboardAddsContextVaultAndDefaultsWithoutTurningProfileIntoWorkflow() async throws {
+    func testDashboardAddsContextVaultAndDefaultsWithoutTurningYouIntoWorkflow() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertEqual(dashboard.contextVault.title, "Local memory map")
         XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-planning" }))
@@ -131,9 +131,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testFCP24AppearanceStudioPreviewsRealAmbitionsObjectsWithoutThemeShopClaims() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let studio = dashboard.appearanceStudio
 
         XCTAssertEqual(studio.previewSwatches.map(\.id), [
@@ -166,9 +166,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testYouControlRoomProjectsBatch87TrustAreasWithoutFutureBatchClaims() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertEqual(dashboard.controlRoom.entries.map(\.id), [
             "profile-control-constitution",
@@ -184,9 +184,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testEB10PersonalOperatingManualNamesPreferenceMemoryBoundaries() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let rules = dashboard.constitution.rules
 
         XCTAssertTrue(rules.contains(where: {
@@ -211,14 +211,14 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testD17SystemCenterGroupsYouWithoutAddingTopLevelTabsOrOverclaiming() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let items = dashboard.systemCenter.sections.flatMap(\.items)
         let titles = items.map(\.title)
 
         XCTAssertEqual(dashboard.systemCenter.title, "Your System")
-        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("User System Profile"))
+        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("User System You"))
         XCTAssertEqual(titles, [
             "Schedule & Availability",
             "Time Behavior",
@@ -274,16 +274,16 @@ final class ProfileFeatureServiceTests: XCTestCase {
             $0.id == "vacation-away-time" &&
             $0.statusLabel == "Unavailable"
         }))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("You"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
     }
 
     func testD18TrustCenterIsNavigableReceiptAwareAndPrivacySafe() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let routes = dashboard.trustCenter.sections.flatMap(\.routes)
 
         XCTAssertEqual(dashboard.trustCenter.sections.map(\.id), [
@@ -350,9 +350,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 localOnly: true
             )
         )
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let dataMap = dashboard.trustCenter.dataMap
 
         XCTAssertEqual(dataMap.map(\.id), [
@@ -392,9 +392,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 tone: .positive
             )
         )
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertEqual(dashboard.reviews.title, "Reviews")
         XCTAssertEqual(dashboard.reviews.projection.lifeOSReceipt.statusLabel, "Based on recent actions")
@@ -408,9 +408,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testMemoryControlsDoNotExposeUnsupportedDestructiveDeletion() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         let forget = try XCTUnwrap(dashboard.memoryControls.items.first(where: { $0.id == "profile-memory-forget" }))
         XCTAssertEqual(forget.valueLabel, "Unavailable")
@@ -448,9 +448,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 userNote: "Use a lighter version"
             )
         ])
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let groups = dashboard.memoryControls.groups
         let items = groups.flatMap(\.items)
         let actions = items.flatMap(\.actions)
@@ -554,9 +554,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 localOnly: true
             )
         )
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let narrative = try XCTUnwrap(dashboard.memoryControls.narrativeMemories.first(where: { $0.id == "narrative-memory-corrections" }))
         let pattern = try XCTUnwrap(dashboard.memoryControls.conservativePatterns.first(where: { $0.id == "memory-pattern-corrections" }))
 
@@ -578,9 +578,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testEB11MemoryControlsExposeCorrectionDeletionAndRejectionBoundaries() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let rejected = try XCTUnwrap(dashboard.memoryControls.items.first(where: { $0.id == "profile-memory-rejected" }))
         let correctionActions = dashboard.memoryControls.groups
             .flatMap(\.items)
@@ -608,9 +608,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testEB12MemoryReceiptsExplainWhyRememberedThisWithoutDurableReceiptClaims() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let memoryReceipt = try XCTUnwrap(dashboard.receiptAudit.items.first(where: { $0.id == "profile-receipts-memory" }))
 
         XCTAssertEqual(memoryReceipt.title, "Memory receipts")
@@ -673,9 +673,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 userNote: "Use a lighter version"
             )
         ])
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let lensItems = dashboard.memoryControls.memoryLensItems
         let visibleCopy = lensItems.map {
             [
@@ -786,9 +786,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 localOnly: true
             )
         )
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let inspectionItems = dashboard.memoryControls.runtimeInspectionItems
         let visibleCopy = inspectionItems.flatMap {
             [
@@ -910,9 +910,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 localOnly: true
             )
         )
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let controls = dashboard.memoryControls.localLearningControls
         let visibleCopy = controls.flatMap {
             [
@@ -974,9 +974,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testMRI13ExportBoundaryStaysSummaryOnlyWhenNoLearningSignalsExist() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let export = try XCTUnwrap(dashboard.memoryControls.localLearningControls.first(where: { $0.id == "local-learning-export" }))
         let reset = try XCTUnwrap(dashboard.memoryControls.localLearningControls.first(where: { $0.id == "local-learning-reset" }))
 
@@ -1029,9 +1029,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 localOnly: true
             )
         )
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
 
         XCTAssertTrue(dashboard.memoryControls.items.contains(where: { $0.id == "profile-memory-corrections" && $0.valueLabel == "1 local" }))
         XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "profile-correction-active" && $0.valueLabel == "1 active" }))
@@ -1069,9 +1069,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 localOnly: true
             )
         )
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let history = dashboard.trustHistoryCenter
         let categories = Set(history.items.map(\.category))
         let visibleCopy = ([history.title, history.subtitle, history.footer] + history.items.flatMap {
@@ -1079,7 +1079,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         }).joined(separator: " ")
 
         XCTAssertEqual(history.title, "Trust History")
-        XCTAssertTrue(categories.isSuperset(of: Set(ProfileTrustHistoryCategory.allCases)))
+        XCTAssertTrue(categories.isSuperset(of: Set(YouTrustHistoryCategory.allCases)))
         XCTAssertTrue(history.items.contains(where: {
             $0.category == .receipts &&
             $0.sourceLabel.hasPrefix("Source:") &&
@@ -1124,9 +1124,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testPD16PlanningDefaultsCenterExplainsWhySetupMattersWithoutPressure() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let center = dashboard.planningDefaultsCenter
         let sectionIDs = center.sections.map(\.id)
         let visibleCopy = ([center.title, center.subtitle, center.footer] + center.sections.flatMap { section in
@@ -1159,9 +1159,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
     func testFCP17AvailabilityCenterProtectsHardContextAndTrustDefaults() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let center = dashboard.availabilityCenter
         let visibleCopy = (
             [center.title, center.subtitle, center.footer] +
@@ -1234,9 +1234,9 @@ final class ProfileFeatureServiceTests: XCTestCase {
                 localOnly: true
             )
         )
-        let service = RepositoryBackedProfileService(repositories: repositories)
+        let service = RepositoryBackedYouService(repositories: repositories)
 
-        let dashboard = try await service.loadProfileDashboard()
+        let dashboard = try await service.loadYouDashboard()
         let state = dashboard.crossSurfaceProofReview
         let itemIDs = state.items.map(\.id)
         let visibleCopy = ([state.title, state.subtitle, state.footer] + state.items.flatMap {
@@ -1266,16 +1266,17 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI verified"))
     }
 
-    func testTopLevelShellStillExcludesLegacyProfileInsightsAndHabitsTabs() {
+    func testTopLevelShellStillExcludesLegacyYouInsightsAndHabitsTabs() {
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertTrue(AppTab.allCases.map(\.title).contains("You"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
     }
 }
 
-private extension ProfileFeatureServiceTests {
-    func itemCopy(_ item: ProfileAvailabilityCenterItem) -> [String] {
+private extension YouFeatureServiceTests {
+    func itemCopy(_ item: YouAvailabilityCenterItem) -> [String] {
         [item.title, item.summary, item.statusLabel, item.sourceLabel]
     }
 
@@ -1292,7 +1293,7 @@ private extension ProfileFeatureServiceTests {
     }
 }
 
-private struct StaticProfileSyncCapability: SyncCapability {
+private struct StaticYouSyncCapability: SyncCapability {
     let status: SyncCapabilityStatus
 
     func status() async -> SyncCapabilityStatus {
@@ -1300,7 +1301,7 @@ private struct StaticProfileSyncCapability: SyncCapability {
     }
 }
 
-private struct StaticProfileNotificationService: NotificationServicing {
+private struct StaticYouNotificationService: NotificationServicing {
     let state: NotificationAuthorizationState
 
     func currentAuthorizationState() async -> NotificationAuthorizationState {

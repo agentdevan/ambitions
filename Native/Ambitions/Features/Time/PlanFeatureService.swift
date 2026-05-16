@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-struct RepositoryBackedPlanService: PlanServicing {
+struct RepositoryBackedTimeService: TimeServicing {
     let repositories: AppRepositories
     let calendarRealityService: (any CalendarRealityServicing)?
     let timeFeatureService: TimeFeatureService
@@ -16,7 +16,7 @@ struct RepositoryBackedPlanService: PlanServicing {
         self.timeFeatureService = timeFeatureService
     }
 
-    func loadPlanDashboard(now: Date) async throws -> PlanDashboard {
+    func loadTimeDashboard(now: Date) async throws -> TimeDashboard {
         let snapshot = try await loadSnapshot()
         let permission = await calendarRealityService?.calendarPermissionState() ?? .unavailable
         return try await timeFeatureService.makeDashboard(
@@ -32,7 +32,7 @@ struct RepositoryBackedPlanService: PlanServicing {
         return try await timeFeatureService.makeWeeklyReviewDashboard(from: self, now: now)
     }
 
-    func makePlanCalendarAware(now: Date) async throws -> PlanDashboard {
+    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
         let snapshot = try await loadSnapshot()
         guard let calendarRealityService else {
             return try await timeFeatureService.makeDashboard(
@@ -76,10 +76,10 @@ struct RepositoryBackedPlanService: PlanServicing {
     }
 }
 
-extension RepositoryBackedPlanService: TimeFeatureProjectionSource {}
+extension RepositoryBackedTimeService: TimeFeatureProjectionSource {}
 
-extension RepositoryBackedPlanService {
-    func makeDashboard(snapshot: Snapshot, now: Date, calendarAwareness: PlanCalendarAwarenessState) -> PlanDashboard {
+extension RepositoryBackedTimeService {
+    func makeDashboard(snapshot: Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
         let openCaptures = snapshot.captures.filter { $0.status != .archived }
         let blockedDrafts = snapshot.drafts.filter { $0.latestResultKind == .blocked }
@@ -91,7 +91,7 @@ extension RepositoryBackedPlanService {
             guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
             return goal.mode == .habit || HabitGoalSemantics.isHabitLike(goal: goal, step: step)
         }
-        let mode: PlanDashboardMode = activeGoals.isEmpty && snapshot.drafts.isEmpty && openCaptures.isEmpty ? .empty : .active
+        let mode: TimeDashboardMode = activeGoals.isEmpty && snapshot.drafts.isEmpty && openCaptures.isEmpty ? .empty : .active
         let missingGoalSummaries = activeGoalSummaries.filter { $0.contexts.isEmpty }
         let mostPressuredGoal = pressuredGoalSummary(from: activeGoalSummaries)
         let weekDays = makeWeekDays(
@@ -117,7 +117,7 @@ extension RepositoryBackedPlanService {
             missingGoalCount: missingGoalSummaries.count,
             activeGoalCount: activeGoals.count
         )
-        let lifeSuite = PlanLifeSuiteProjector().project(
+        let lifeSuite = TimeLifeSuiteProjector().project(
             weekDays: weekDays,
             calendarAwareness: calendarAwareness,
             openCaptureCount: openCaptures.count,
@@ -214,7 +214,7 @@ extension RepositoryBackedPlanService {
             openCaptures: openCaptures
         )
         let reflowReceiptPreview = makeReflowReceiptPreview(reflow: realityReflow, saveTheDay: saveTheDay)
-        let reflowDecision = PlanReflowDecisionProjector().project(
+        let reflowDecision = TimeReflowDecisionProjector().project(
             reflow: realityReflow,
             recoveryEntry: recoveryEntry,
             saveTheDay: saveTheDay,
@@ -248,7 +248,7 @@ extension RepositoryBackedPlanService {
             primaryAction: primaryAction
         )
 
-        return PlanDashboard(
+        return TimeDashboard(
             mode: mode,
             timeframeLabel: timeframeLabel(now: now),
             hero: hero,
@@ -284,8 +284,8 @@ extension RepositoryBackedPlanService {
                 weekDays: weekDays
             ),
             secondaryDestinations: [
-                PlanSecondaryDestination(
-                    id: "plan-habits",
+                TimeSecondaryDestination(
+                    id: "time-habits",
                     title: "Rituals",
                     detail: habitGoals.isEmpty
                         ? "No repeatable loops are shaping the week yet."
@@ -293,27 +293,27 @@ extension RepositoryBackedPlanService {
                     valueLabel: "\(habitGoals.count)",
                     icon: AppTab.habits.systemImage,
                     visualState: habitGoals.isEmpty ? .default : .selected,
-                    planRoute: .habits
+                    timeRoute: .habits
                 ),
-                PlanSecondaryDestination(
-                    id: "plan-captures",
+                TimeSecondaryDestination(
+                    id: "time-capture",
                     title: "Capture into the week",
                     detail: openCaptures.isEmpty
                         ? "No open captures are pushing on the week right now."
                         : "\(openCaptures.count) capture\(openCaptures.count == 1 ? "" : "s") still need to be absorbed, attached, or intentionally parked.",
                     valueLabel: "\(openCaptures.count)",
-                    icon: AppTab.captures.systemImage,
+                    icon: AppTab.capture.systemImage,
                     visualState: openCaptures.isEmpty ? .default : .warning,
-                    planRoute: .captureInbox
+                    timeRoute: .captureInbox
                 ),
-                PlanSecondaryDestination(
-                    id: "plan-weekly-review",
+                TimeSecondaryDestination(
+                    id: "time-weekly-review",
                     title: "Weekly review",
                     detail: "Close the current week by shaping carry-forward, ritual pressure, and unresolved captures without leaving Time.",
                     valueLabel: posture.label,
                     icon: "arrow.triangle.branch",
                     visualState: posture.visualState,
-                    planRoute: .weeklyReview
+                    timeRoute: .weeklyReview
                 )
             ],
             emptyTitle: mode == .empty ? "No weekly pressure yet" : nil,

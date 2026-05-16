@@ -85,7 +85,7 @@ enum AmbitionsRuntimeFactory {
             capturePromotionUnitOfWork: repositories.capturePromotionUnitOfWork,
             eventLedger: repositories.eventLedger
         )
-        let profileService = RepositoryBackedProfileService(
+        let youService = RepositoryBackedYouService(
             repositories: repositories,
             syncCapability: syncCapability,
             notificationService: notificationService,
@@ -117,7 +117,7 @@ enum AmbitionsRuntimeFactory {
                 calendarRealityService: calendarRemindersService as? any CalendarRealityServicing
             ),
             insightsService: RepositoryBackedInsightsService(repositories: repositories),
-            profileService: profileService,
+            youService: youService,
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
             dedicatedDevicePrototypeRuntime: dedicatedDevicePrototypeRuntime
