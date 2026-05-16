@@ -41,6 +41,9 @@ struct TodayScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
+                        RealityMeridianCurrentTimeCursor()
+                            .accessibilityIdentifier("TodayRealityMeridianCurrentTimeCursor")
+
                         DayTimelineRail(
                             state: experience.execution.dayRail,
                             onAction: handleAction,
