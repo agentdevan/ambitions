@@ -50,6 +50,7 @@
       "affected_swift_candidates": [
         "Sources/Components/RealityMeridianTemporalPrimitives.swift",
         "Sources/Previews/RealityMeridianTemporalPreviews.swift",
+        "Native/Ambitions/Features/Today/TodayRealityMeridianFusedRail.swift",
         "Native/Ambitions/Features/Today/TodayScreen.swift"
       ],
       "id": "UID-2026-05-15-today-live-current-time-cursor",
