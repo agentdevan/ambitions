@@ -9,12 +9,12 @@
   "owner_surface_ids": ["today_root_reality_meridian"],
   "affected_encyclopedia_files": ["frontend/visual-encyclopedia/README.md", "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md"],
   "affected_design_system_primitives": [
-    {"name": "LocalAmbitionsLockup", "status": "missing", "expected_home": "Sources/Components/ShellChromePrimitives.swift"},
-    {"name": "SourceTrustChrome", "status": "missing", "expected_home": "Sources/Components/ShellChromePrimitives.swift"}
+    {"name": "LocalAmbitionsLockup", "status": "existing", "expected_home": "Sources/Components/ShellChromeTrustPrimitives.swift"},
+    {"name": "SourceTrustChrome", "status": "existing", "expected_home": "Sources/Components/ShellChromeTrustPrimitives.swift"}
   ],
-  "affected_swift_candidates": ["Sources/Components/ShellChromePrimitives.swift", "Native/Ambitions/Features/Today/*", "Native/Ambitions/App/AppMeridianShell.swift"],
-  "proof_required": ["visual_recipe_updated_or_confirmed", "design_system_primitive_exists_or_gap_recorded", "implementation_receipt_after_code_changes_land"],
-  "hard_reds": ["No implementation or release claim from this decision alone.", "Do not reintroduce Plan as an active top-level destination."],
-  "rollback_expectations": ["Supersede or remove this decision file.", "Regenerate UI decision matrices and reports."],
-  "implementation_proof_status": "not_proven"
+  "affected_swift_candidates": ["Sources/Components/ShellChromeTrustPrimitives.swift", "Native/Ambitions/Features/Today/TodayScreen.swift"],
+  "proof_required": ["visual_recipe_updated_or_confirmed", "design_system_primitive_exists_or_gap_recorded", "implementation_receipt_after_code_changes_land", "compile_or_xcode_validation_required_before_green_release_claim"],
+  "hard_reds": ["No release claim from this decision alone.", "Do not reintroduce Plan as an active top-level destination."],
+  "rollback_expectations": ["Supersede or remove this decision file.", "Regenerate UI decision matrices and reports.", "Revert Sources/Components/ShellChromeTrustPrimitives.swift and the TodayScreen overlay if implementation is rolled back."],
+  "implementation_proof_status": "proof_required_after_implementation"
 }
