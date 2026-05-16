@@ -1,73 +1,70 @@
 import Foundation
 
-public enum LivingPlanMergeConflictResolution: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
-    case keepLocal = "keep_local"
-    case takeRemote = "take_remote"
-    case manualMerge = "manual_merge"
-}
-
-public struct LivingPlanMergeLedgerEntry: Codable, Sendable, Equatable, Hashable {
+/// Audit log infrastructure for living plans, providing an immutable-style event ledger.
+public struct LivingPlanAuditLedgerEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
     public let id: String
     public let timestamp: Date
-    public let resolution: LivingPlanMergeConflictResolution
-    public let affectedGoalIDs: [String]
+    public let kind: AuditEntryKind
+    public let summary: String
     public let receiptID: String?
+    public let metadata: [String: String]
     
-    public init(
-        id: String = UUID().uuidString,
-        timestamp: Date = Date(),
-        resolution: LivingPlanMergeConflictResolution,
-        affectedGoalIDs: [String],
-        receiptID: String? = nil
-    ) {
-        self.id = id
-        self.timestamp = timestamp
-        self.resolution = resolution
-        self.affectedGoalIDs = affectedGoalIDs
-        self.receiptID = receiptID
+    public enum AuditEntryKind: String, Codable, Sendable {
+        case mergeResolution = "merge_resolution"
+        case schemaMigration = "schema_migration"
+        case receiptPin = "receipt_pin"
+        case proofExport = "proof_export"
     }
 }
 
-public struct LivingPlanMergeLedger: Sendable, Equatable {
-    public private(set) var entries: [LivingPlanMergeLedgerEntry]
+public struct LivingPlanAuditLedger: Sendable, Equatable {
+    public private(set) var entries: [LivingPlanAuditLedgerEntry]
     
-    public init(entries: [LivingPlanMergeLedgerEntry] = []) {
+    public init(entries: [LivingPlanAuditLedgerEntry] = []) {
         self.entries = entries
     }
     
-    public mutating func recordMerge(
-        resolution: LivingPlanMergeConflictResolution,
-        affectedGoalIDs: [String]
-    ) -> ActionReceipt {
-        let needsConfirmation = resolution == .manualMerge
-        
-        let receipt = ActionReceipt(
+    /// Records an entry in the audit ledger.
+    public mutating func recordEntry(
+        kind: LivingPlanAuditLedgerEntry.AuditEntryKind,
+        summary: String,
+        receiptID: String? = nil,
+        metadata: [String: String] = [:]
+    ) {
+        let entry = LivingPlanAuditLedgerEntry(
             id: UUID().uuidString,
-            resultState: needsConfirmation ? .needsConfirmation : .completed,
-            title: "Multi-Device Merge",
-            summary: "Recorded plan merge resolution: \(resolution.rawValue)",
-            sourceDomain: .plan,
-            occurredAt: "2026-05-15T00:00:00Z",
+            timestamp: Date(),
+            kind: kind,
+            summary: summary,
+            receiptID: receiptID,
+            metadata: metadata
+        )
+        entries.append(entry)
+    }
+    
+    /// Pins a receipt to the audit ledger with a specific note, as per LDI19 manifest.
+    public mutating func pinReceipt(receiptID: String, note: String) -> ActionReceipt {
+        let summary = "Pinned receipt \(receiptID): \(note)"
+        recordEntry(kind: .receiptPin, summary: summary, receiptID: receiptID)
+        
+        return ActionReceipt(
+            id: UUID().uuidString,
+            resultState: .completed,
+            title: "Receipt Pinned",
+            summary: summary,
+            sourceDomain: .proof,
+            occurredAt: "2026-05-16T00:00:00Z",
             affectedObjects: [],
             changedFacts: [
                 ActionReceiptChangedFact(
                     id: UUID().uuidString,
-                    kind: needsConfirmation ? .needsConfirmation : .changedField,
-                    summary: "Merge recorded."
+                    kind: .attachedCaptureToGoal, // closest match or generic
+                    summary: "Receipt \(receiptID) pinned to ledger."
                 )
             ],
             correctionAvailability: .available,
             undoAvailability: .availableLocal,
-            safetyState: needsConfirmation ? .confirmationRequired : .normal
+            safetyState: .normal
         )
-        
-        let entry = LivingPlanMergeLedgerEntry(
-            resolution: resolution,
-            affectedGoalIDs: affectedGoalIDs,
-            receiptID: receipt.id
-        )
-        entries.append(entry)
-        
-        return receipt
     }
 }

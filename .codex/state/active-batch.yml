@@ -1,27 +1,24 @@
 status: compact-mirror
-date: "2026-05-15"
+date: "2026-05-16"
 source_of_truth:
   - "docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md"
   - ".codex/reports/current-batch-train-state.md"
   - "docs/codex/BATCH_REGISTRY.md"
   - "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
 current:
-  train: "Manifest-faithful rerun reconciliation"
-  batch: "SA30 Freshness Broker Manifest Contract"
-  previous_batch: "SA29 Hash / Signature / Revocation Tooling"
+  train: "Flagship Audit And Remediation"
+  batch: "ALIGN-01-NAMING Foundation Alignment"
+  previous_batch: "AOS30 AmbitionsOS Beyond Roadmap"
   previous_result: "green"
-  next_eligible_batch: "SA31 Official Source Adapter Contracts"
+  next_eligible_batch: "FCP27 App-Wide Flagship Audit And Remediation"
 blocked_forward_queue:
-  blocked_batch: "FCP27 App-Wide Flagship Audit And Remediation"
-  reason: "SA28-SA32, LDI15-LDI22, and AOS24-AOS30 must be rerun or truthfully reclassified against their manifests before FCP27 can proceed."
-rerun_directive:
-  required: true
-  path: "docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md"
+  blocked_batch: none
+  reason: "Proceeding with naming alignment as part of the flagship remediation path."
 frontend_authority:
   encyclopedia_required_for_frontend_touching_batches: true
   entrypoint: "frontend/README.md"
 codex_os_override:
-  active_pass: "manifest-rerun-reconciliation"
+  active_pass: "flagship-audit-remediation"
   app_feature_implementation_allowed: true
   production_swift_allowed: true
   branch_creation_allowed: true

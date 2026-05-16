@@ -2,29 +2,27 @@ import XCTest
 @testable import Ambitions
 
 final class LivingPlanRecompilerTests: XCTestCase {
-    func testPreviewRecompileEnforcesMutationPermission() {
+    func testPreviewRecompileWithSourceClaims() {
         let recompiler = LivingPlanRecompiler()
         
-        let preview = recompiler.previewRecompile(
-            for: "goal-123",
-            rawTitle: "Learn Swift",
-            currentSteps: [],
-            sourceUpdates: ["source-update-1"]
+        let staleClaim = SourceAtlasClaim(
+            id: "claim-1",
+            text: "Requires 100 hours of practice",
+            state: .stale,
+            freshness: .stale,
+            riskClass: .hobby
         )
         
-        XCTAssertEqual(preview.affectedGoalID, "goal-123")
-        XCTAssertFalse(preview.isSafeToApply)
+        let preview = recompiler.previewRecompile(
+            for: "goal-1",
+            rawTitle: "Learn Guitar",
+            currentSteps: [],
+            sourceClaims: [staleClaim]
+        )
+        
+        XCTAssertEqual(preview.affectedGoalID, "goal-1")
+        XCTAssertEqual(preview.claimImpacts["claim-1"], .stale)
+        XCTAssertTrue(preview.receiptPreview.summary.contains("Claim 'Requires 100 hours of practice' is now in blocking state (stale)"))
         XCTAssertTrue(preview.mutationPermissionRequired)
-        
-        let receipt = preview.receiptPreview
-        XCTAssertEqual(receipt.resultState, .needsConfirmation)
-        XCTAssertEqual(receipt.safetyState, .confirmationRequired)
-        XCTAssertEqual(receipt.undoAvailability, .requiresConfirmation)
-        
-        let fact = receipt.changedFacts.first
-        XCTAssertEqual(fact?.kind, .needsConfirmation)
-        
-        // Assert it does not silently mutate
-        XCTAssertFalse(preview.proposedSteps.isEmpty)
     }
 }

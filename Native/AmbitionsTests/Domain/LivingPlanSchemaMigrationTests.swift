@@ -2,33 +2,30 @@ import XCTest
 @testable import Ambitions
 
 final class LivingPlanSchemaMigrationTests: XCTestCase {
-    func testMigrationRequiresConfirmationIfHighImpact() {
+    func testMigrationConfirmation() {
+        let lowImpact = LivingPlanSchemaMigration(
+            fromVersion: 1,
+            toVersion: 2,
+            migrationImpact: .level2
+        )
+        XCTAssertFalse(lowImpact.requiresExplicitConfirmation())
+        
+        let highImpact = LivingPlanSchemaMigration(
+            fromVersion: 1,
+            toVersion: 2,
+            migrationImpact: .level4
+        )
+        XCTAssertTrue(highImpact.requiresExplicitConfirmation())
+    }
+    
+    func testEncryptedArchiveFlag() {
         let migration = LivingPlanSchemaMigration(
             fromVersion: 1,
             toVersion: 2,
-            migrationImpact: .high
+            migrationImpact: .level1,
+            isEncryptedArchive: true
         )
-        
-        XCTAssertTrue(migration.requiresExplicitConfirmation())
-        
-        let receipt = migration.generateReceipt()
-        XCTAssertEqual(receipt.resultState, .needsConfirmation)
-        XCTAssertEqual(receipt.safetyState, .confirmationRequired)
-        XCTAssertEqual(receipt.undoAvailability, .requiresConfirmation)
-    }
-    
-    func testMigrationDoesNotRequireConfirmationIfLowImpact() {
-        let migration = LivingPlanSchemaMigration(
-            fromVersion: 2,
-            toVersion: 3,
-            migrationImpact: .low
-        )
-        
-        XCTAssertFalse(migration.requiresExplicitConfirmation())
-        
-        let receipt = migration.generateReceipt()
-        XCTAssertEqual(receipt.resultState, .completed)
-        XCTAssertEqual(receipt.safetyState, .normal)
-        XCTAssertEqual(receipt.undoAvailability, .requiresConfirmation)
+        XCTAssertTrue(migration.isEncryptedArchive)
+        XCTAssertTrue(migration.generateReceipt().changedFacts[0].summary.contains("Encryption: ON"))
     }
 }

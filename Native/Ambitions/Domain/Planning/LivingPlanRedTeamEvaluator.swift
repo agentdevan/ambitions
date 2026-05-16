@@ -1,5 +1,29 @@
 import Foundation
 
+/// Dashboard models for Living Dream Intelligence, as per LDI21 manifest.
+public struct LivingDreamDashboardState: Codable, Sendable, Equatable {
+    /// Trust indicator from 0.0 to 1.0 based on source freshness and proof density.
+    public let trustIndicator: Double
+    /// Count of goals requiring a plan recompile due to source updates.
+    public let recompileNeededCount: Int
+    /// Current synchronization state label (e.g., "Synced", "Local Only", "Sync Paused").
+    public let syncState: String
+    /// Count of active red-team structural issues.
+    public let redTeamIssueCount: Int
+    
+    public init(
+        trustIndicator: Double,
+        recompileNeededCount: Int,
+        syncState: String,
+        redTeamIssueCount: Int
+    ) {
+        self.trustIndicator = trustIndicator
+        self.recompileNeededCount = recompileNeededCount
+        self.syncState = syncState
+        self.redTeamIssueCount = redTeamIssueCount
+    }
+}
+
 public struct LivingPlanRedTeamIssue: Sendable, Equatable, Identifiable {
     public let id: String
     public let goalID: String
@@ -22,39 +46,32 @@ public struct LivingPlanRedTeamEvaluator: Sendable, Equatable {
     public func evaluate(goalIDs: [String]) -> [LivingPlanRedTeamIssue] {
         guard !goalIDs.isEmpty else { return [] }
         
-        // Mock deterministic structural evaluation returning a generic "Vague Scope" warning
-        // In real execution, this evaluates exact plan shape and signals missing boundaries
         return goalIDs.map { goalID in
             LivingPlanRedTeamIssue(
                 goalID: goalID,
                 title: "Vague Scope",
                 summary: "Goal lacks explicitly defined completion boundaries.",
-                impactLevel: .medium
+                impactLevel: .level3
             )
         }
     }
     
-    public func generateReceipt(for issues: [LivingPlanRedTeamIssue]) -> ActionReceipt {
-        let needsConfirmation = !issues.isEmpty
+    public func generateDashboardState(
+        recompileCount: Int,
+        syncState: String,
+        issues: [LivingPlanRedTeamIssue]
+    ) -> LivingDreamDashboardState {
+        // Calculate trust indicator based on issues and recompile needs
+        let baseTrust = 1.0
+        let penaltyPerIssue = 0.1
+        let penaltyPerRecompile = 0.05
+        let calculatedTrust = max(0.0, baseTrust - (Double(issues.count) * penaltyPerIssue) - (Double(recompileCount) * penaltyPerRecompile))
         
-        return ActionReceipt(
-            id: UUID().uuidString,
-            resultState: needsConfirmation ? .needsConfirmation : .noOp,
-            title: "Red-Team Evaluation",
-            summary: "Evaluated plans for structural weaknesses and vague bounds.",
-            sourceDomain: .plan,
-            occurredAt: "2026-05-15T00:00:00Z",
-            affectedObjects: [],
-            changedFacts: [
-                ActionReceiptChangedFact(
-                    id: UUID().uuidString,
-                    kind: needsConfirmation ? .needsConfirmation : .noChange,
-                    summary: needsConfirmation ? "Found \(issues.count) potential plan weaknesses." : "No structural issues found."
-                )
-            ],
-            correctionAvailability: .available,
-            undoAvailability: .availableLocal,
-            safetyState: needsConfirmation ? .confirmationRequired : .normal
+        return LivingDreamDashboardState(
+            trustIndicator: calculatedTrust,
+            recompileNeededCount: recompileCount,
+            syncState: syncState,
+            redTeamIssueCount: issues.count
         )
     }
 }

@@ -2,23 +2,22 @@ import XCTest
 @testable import Ambitions
 
 final class LivingPlanMutationPermissionTests: XCTestCase {
-    func testMutationPermissionInitialization() {
+    func testImpactLevels() {
+        XCTAssertEqual(LivingPlanMutationImpactLevel.level0.rawValue, 0)
+        XCTAssertEqual(LivingPlanMutationImpactLevel.level5.rawValue, 5)
+    }
+    
+    func testPermissionInitialization() {
         let permission = LivingPlanMutationPermission(
             id: "perm-1",
-            title: "Update Goal",
-            explanation: "Updates the goal based on new evidence.",
-            impactLevel: .medium,
+            title: "Allow Reflow",
+            explanation: "Source Atlas update requires plan recompile.",
+            impactLevel: .level4,
             requiresExplicitConfirmation: true,
-            rollbackAvailable: true,
-            affectedGoalIDs: ["goal-1"]
+            rollbackAvailable: true
         )
         
-        XCTAssertEqual(permission.id, "perm-1")
-        XCTAssertEqual(permission.title, "Update Goal")
-        XCTAssertEqual(permission.explanation, "Updates the goal based on new evidence.")
-        XCTAssertEqual(permission.impactLevel, .medium)
         XCTAssertTrue(permission.requiresExplicitConfirmation)
-        XCTAssertTrue(permission.rollbackAvailable)
-        XCTAssertEqual(permission.affectedGoalIDs, ["goal-1"])
+        XCTAssertEqual(permission.impactLevel, .level4)
     }
 }

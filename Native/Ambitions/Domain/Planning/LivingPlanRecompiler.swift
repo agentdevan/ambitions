@@ -7,6 +7,7 @@ public struct LivingPlanRecompilePreview: Sendable, Equatable {
     public let receiptPreview: ActionReceipt
     public let isSafeToApply: Bool
     public let mutationPermissionRequired: Bool
+    public let claimImpacts: [String: SourceAtlasClaimState]
     
     public init(
         affectedGoalID: String,
@@ -14,7 +15,8 @@ public struct LivingPlanRecompilePreview: Sendable, Equatable {
         removedSteps: [String],
         receiptPreview: ActionReceipt,
         isSafeToApply: Bool,
-        mutationPermissionRequired: Bool
+        mutationPermissionRequired: Bool,
+        claimImpacts: [String: SourceAtlasClaimState] = [:]
     ) {
         self.affectedGoalID = affectedGoalID
         self.proposedSteps = proposedSteps
@@ -22,6 +24,7 @@ public struct LivingPlanRecompilePreview: Sendable, Equatable {
         self.receiptPreview = receiptPreview
         self.isSafeToApply = isSafeToApply
         self.mutationPermissionRequired = mutationPermissionRequired
+        self.claimImpacts = claimImpacts
     }
 }
 
@@ -32,21 +35,33 @@ public struct LivingPlanRecompiler {
         self.determinism = determinism
     }
     
+    /// Previews a plan recompile based on goal title and potentially updated source claims.
     public func previewRecompile(
         for goalID: String,
         rawTitle: String,
         currentSteps: [PlanStep],
-        sourceUpdates: [String]
+        sourceClaims: [SourceAtlasClaim] = []
     ) -> LivingPlanRecompilePreview {
         let proposed = determinism.plan(for: rawTitle)
+        
+        // Detect blast radius from source claims
+        var impacts: [String: SourceAtlasClaimState] = [:]
+        var blastRadiusSummary = ""
+        
+        for claim in sourceClaims {
+            impacts[claim.id] = claim.state
+            if claim.state.isBlockingState {
+                blastRadiusSummary += "Claim '\(claim.text)' is now in blocking state (\(claim.state.rawValue)). "
+            }
+        }
         
         let receipt = ActionReceipt(
             id: UUID().uuidString,
             resultState: .needsConfirmation,
-            title: "Recompile Preview",
-            summary: "Preview plan changes from source updates",
+            title: "Plan Recompile Preview",
+            summary: blastRadiusSummary.isEmpty ? "Preview plan changes for '\(rawTitle)'" : "Source updates detected: \(blastRadiusSummary)",
             sourceDomain: .plan,
-            occurredAt: "2026-05-15T00:00:00Z", // Using a fixed or generated date string
+            occurredAt: "2026-05-16T00:00:00Z",
             affectedObjects: [
                 LifeGraphObjectReference(kind: .goal, id: goalID, label: rawTitle)
             ],
@@ -54,7 +69,7 @@ public struct LivingPlanRecompiler {
                 ActionReceiptChangedFact(
                     id: UUID().uuidString,
                     kind: .needsConfirmation,
-                    summary: "Requires explicit mutation permission to apply plan updates."
+                    summary: "Plan recompile required due to \(sourceClaims.count) source claim updates."
                 )
             ],
             correctionAvailability: .available,
@@ -62,13 +77,18 @@ public struct LivingPlanRecompiler {
             safetyState: .confirmationRequired
         )
         
+        // Detect removed steps (naive ID-based check for this manifest contract)
+        let proposedIDs = Set(proposed.steps.map(\.id))
+        let removedIDs = currentSteps.map(\.id).filter { !proposedIDs.contains($0) }
+        
         return LivingPlanRecompilePreview(
             affectedGoalID: goalID,
             proposedSteps: proposed.steps,
-            removedSteps: [], // In a full diff, we would calculate this against currentSteps
+            removedSteps: removedIDs,
             receiptPreview: receipt,
-            isSafeToApply: false, // Enforcing explicit UI mutation permission
-            mutationPermissionRequired: true
+            isSafeToApply: false,
+            mutationPermissionRequired: true,
+            claimImpacts: impacts
         )
     }
 }

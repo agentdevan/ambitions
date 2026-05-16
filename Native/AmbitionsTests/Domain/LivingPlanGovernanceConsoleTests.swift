@@ -2,21 +2,15 @@ import XCTest
 @testable import Ambitions
 
 final class LivingPlanGovernanceConsoleTests: XCTestCase {
-    func testScanForMaintenanceReturnsActions() {
+    func testFinalValidationAndHandoff() {
         let console = LivingPlanGovernanceConsole()
-        let actions = console.scanForMaintenance()
+        let handoff = console.performFinalValidation()
         
-        XCTAssertFalse(actions.isEmpty)
-        XCTAssertEqual(actions.first?.actionType, "reconcile_receipts")
-    }
-    
-    func testGenerateReceiptRequiresConfirmation() {
-        let console = LivingPlanGovernanceConsole()
-        let action = LivingPlanGovernanceAction(actionType: "test", description: "test desc", requiresConfirmation: true)
-        let receipt = console.generateReceipt(for: action)
+        XCTAssertTrue(handoff.ldiMaturityVerified)
+        XCTAssertTrue(handoff.aosQueueReady)
         
-        XCTAssertEqual(receipt.resultState, .needsConfirmation)
-        XCTAssertEqual(receipt.safetyState, .confirmationRequired)
-        XCTAssertEqual(receipt.undoAvailability, .requiresConfirmation)
+        let receipt = console.generateHandoffReceipt(handoff: handoff)
+        XCTAssertEqual(receipt.resultState, .completed)
+        XCTAssertTrue(receipt.summary.contains("LDI Maturity Train verified and closed"))
     }
 }

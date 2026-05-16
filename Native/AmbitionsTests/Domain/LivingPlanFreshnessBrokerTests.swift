@@ -2,25 +2,19 @@ import XCTest
 @testable import Ambitions
 
 final class LivingPlanFreshnessBrokerTests: XCTestCase {
-    func testEvaluateFreshnessIdentifiesNewStaleGoals() {
+    func testContextInjection() {
         let broker = LivingPlanFreshnessBroker()
-        let result = broker.evaluateFreshness(for: ["goal-1"], against: 3600)
+        let hint = PlanContextHint(key: "preference", value: "high-tempo")
         
-        XCTAssertEqual(result.staleGoalIDs, ["goal-1"])
+        let updated = broker.withInjectedContext([hint])
         
-        let receipt = broker.generateReceipt(for: ["goal-1"])
-        XCTAssertEqual(receipt.resultState, .needsConfirmation)
-        XCTAssertEqual(receipt.safetyState, .confirmationRequired)
+        XCTAssertEqual(updated.injectedHints.count, 1)
+        XCTAssertEqual(updated.injectedHints[0].value, "high-tempo")
     }
     
-    func testEvaluateFreshnessReturnsNoOpWhenNoNewStaleGoals() {
-        let broker = LivingPlanFreshnessBroker(staleGoalIDs: ["goal-1"])
-        let result = broker.evaluateFreshness(for: ["goal-1"], against: 3600)
-        
-        XCTAssertEqual(result.staleGoalIDs, ["goal-1"])
-        
-        let receipt = broker.generateReceipt(for: [])
-        XCTAssertEqual(receipt.resultState, .noOp)
-        XCTAssertEqual(receipt.safetyState, .normal)
+    func testFreshnessEvaluation() {
+        let broker = LivingPlanFreshnessBroker()
+        let updated = broker.evaluateFreshness(for: ["g1"], against: 3600)
+        XCTAssertEqual(updated.staleGoalIDs, ["g1"])
     }
 }

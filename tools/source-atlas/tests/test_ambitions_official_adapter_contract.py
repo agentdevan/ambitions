@@ -9,7 +9,8 @@ class TestOfficialAdapterContract(unittest.TestCase):
         self.script = Path(__file__).parent.parent / "ambitions-official-adapter-contract.py"
         
     def test_mock_adapter_output(self):
-        res = subprocess.run([str(self.script)], capture_output=True, text=True, check=True)
+        import sys
+        res = subprocess.run([sys.executable, str(self.script)], capture_output=True, text=True, check=True)
         claims = json.loads(res.stdout)
         
         self.assertEqual(len(claims), 1)
