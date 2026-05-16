@@ -5,25 +5,32 @@
         {
           "expected_home": "Sources/Components/NavigationPrimitives.swift",
           "name": "RootDestinationIdentity",
-          "status": "missing"
+          "status": "existing"
         },
         {
           "expected_home": "Sources/Components/NavigationPrimitives.swift",
           "name": "BottomNavigationContract",
-          "status": "missing"
+          "status": "existing"
+        },
+        {
+          "expected_home": "Sources/Components/NavigationPrimitives.swift",
+          "name": "RootDestinationIdentityRail",
+          "status": "existing"
         }
       ],
       "affected_swift_candidates": [
+        "Sources/Components/NavigationPrimitives.swift",
+        "Sources/Previews/RootDestinationIdentityPreviews.swift",
         "Native/Ambitions/App/AppTab.swift",
-        "Native/Ambitions/App/AmbitionsRootView.swift",
-        "Sources/Components/NavigationPrimitives.swift"
+        "Native/Ambitions/App/AmbitionsRootView.swift"
       ],
       "id": "UID-2026-05-15-bottom-ia-five-tabs",
       "proof_required": [
         "frontend_authority_index_confirms_bottom_ia",
         "app_tab_contract_checked_if_code_changes_land",
         "visual_recipe_updated_or_confirmed",
-        "implementation_receipt_after_code_changes_land"
+        "implementation_receipt_after_code_changes_land",
+        "compile_or_xcode_validation_required_before_green_release_claim"
       ],
       "status": "active"
     },
