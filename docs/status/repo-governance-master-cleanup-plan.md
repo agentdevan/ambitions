@@ -1,7 +1,7 @@
 # Repo Governance Master Cleanup Plan
 
 Status: Active cleanup control plane  
-Last updated: 2026-05-16 Train C YELLOW closeout  
+Last updated: 2026-05-16 Train D Phase 11 YELLOW closeout  
 Execution mode: Direct GitHub API / local branch work only  
 Authority: Subordinate to `docs/truth/*`
 
@@ -54,10 +54,10 @@ If this file conflicts with `docs/truth/*`, the truth files win.
 | 8 | Swift visible-copy sweep + scan script | YELLOW partial |
 | 9 | Authority/workflow validation scripts | Complete, not locally run |
 | 10 | Audit/prompt routing READMEs | Complete |
-| 11 | Reference dependency scan | Not started |
-| 12 | Ambitions 2.0 archive migration | Not started |
-| 13 | Ambitions 3.0 / 4.0 / PXOS archive migration | Not started |
-| 14 | Historical prompt/generated-report cleanup | Not started |
+| 11 | Reference dependency scan | YELLOW complete, non-destructive |
+| 12 | Ambitions 2.0 archive migration | Blocked pending local reference scan/stubs |
+| 13 | Ambitions 3.0 / 4.0 / PXOS archive migration | Blocked pending local reference scan/stubs |
+| 14 | Historical prompt/generated-report cleanup | Blocked pending local reference scan/regeneration proof |
 | 15 | Final verification and closeout | Not started |
 
 ## Train A closeout
@@ -128,6 +128,24 @@ Yellow boundaries:
 - active frontend stale-language sweep did not find a clear direct patch target, but issue #5 remains open until local scanner validation is performed;
 - generated reports were classified, not moved or deleted.
 
-## Next train
+## Train D Phase 11 closeout
 
-Train D should start with Phase 11: reference-dependency scan before any archive/delete/move work. No archive migration should happen until inbound references, replacement authority, stubs, and rollback paths are recorded.
+Train D Phase 11 is YELLOW complete and non-destructive.
+
+Receipt: `docs/status/train-d-reference-dependency-scan-receipt-2026-05-16.md`
+
+Completed artifacts:
+
+- `docs/status/archive-delete-candidate-register.md`
+- refreshed `docs/status/reference-dependency-scan-cleanup-plan.md`
+
+Phase 11 result:
+
+- Representative inbound-reference searches confirmed old canon/prompt/PXOS files still have active/supporting/historical references.
+- No archive moves are approved.
+- No deletions are approved.
+- Phase 12, Phase 13, and Phase 14 remain blocked until local/Antigravity reference scans, stubs, replacement authority, and rollback paths are prepared.
+
+## Next step
+
+Before any archive migration, run a local/Antigravity reference scan for the Ambitions 2.0 family and prepare stubs. If local proof is unavailable, keep Phase 12 blocked and do not move files.
