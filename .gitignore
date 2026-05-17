@@ -75,3 +75,8 @@ docs/audits/build-logs/*.log
 # Ambitions / Codex ephemeral run scratch
 .codex/runs/
 runs/
+
+# Python runtime caches
+__pycache__/
+*.pyc
+

@@ -576,12 +576,14 @@ def execpolicy_checks() -> list[dict]:
 def hook_semantic_checks() -> list[dict]:
     checks: list[dict] = []
     hooks_dir = ROOT / ".codex" / "hooks"
+    import sys
+    python_exe = "python" if sys.platform == "win32" else ("python3" if shutil.which("python3") else "python")
 
     for hook_name, payload, expected in HOOK_SEMANTIC_CASES:
         hook_path = hooks_dir / hook_name
         try:
             raw = subprocess.check_output(
-                ["python3", str(hook_path)],
+                [python_exe, str(hook_path)],
                 cwd=str(ROOT),
                 input=json.dumps(payload),
                 text=True,

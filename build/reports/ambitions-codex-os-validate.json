@@ -1,109 +1,114 @@
 {
   "batch_id": "AMB-CODEX-OS-NO-COST-HARDENING-002",
-  "status": "GREEN",
+  "status": "YELLOW",
   "summary": "Ambitions Codex OS validation for local hardening control-plane",
   "changed_files": [
-    "build/reports/ambitions-codex-os-dry-run-002.json",
+    ".codex/hooks/__pycache__",
+    ".codex/hooks/__pycache__/permission_request_guard.cpython-314.pyc",
+    ".codex/hooks/__pycache__/post_tool_use_review.cpython-314.pyc",
+    ".codex/hooks/__pycache__/pre_tool_use_policy.cpython-314.pyc",
+    ".codex/hooks/__pycache__/session_start_context.cpython-314.pyc",
+    ".codex/hooks/__pycache__/stop_gate.cpython-314.pyc",
+    ".codex/hooks/__pycache__/user_prompt_submit_guard.cpython-314.pyc",
     "build/reports/ambitions-codex-os-validate.json",
-    "docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_002.md",
     "scripts/ambitions-codex-os-validate.py"
   ],
   "validations_run": [
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/AGENTS.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\AGENTS.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/AGENTS.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\AGENTS.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.agents/AGENTS.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.agents\\AGENTS.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/config.toml"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\config.toml"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/hooks.json"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\hooks.json"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\rules\\ambitions-no-cost.rules"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/schemas/ambitions-batch-result.schema.json"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\schemas\\ambitions-batch-result.schema.json"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/AUTHORITY_HIERARCHY.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\AUTHORITY_HIERARCHY.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/RUNNER_UPGRADE_NOTES.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\RUNNER_UPGRADE_NOTES.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/RULES_POLICY.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\RULES_POLICY.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/HOOKS_POLICY.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\HOOKS_POLICY.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/STRUCTURED_OUTPUT.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\STRUCTURED_OUTPUT.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/NO_COST_CODEX_OS.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\NO_COST_CODEX_OS.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/CODEX_OS_COMPONENTS.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\CODEX_OS_COMPONENTS.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/EXCLUDED_FOR_COST_OR_SCOPE.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\EXCLUDED_FOR_COST_OR_SCOPE.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/ROLLBACK.md"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\docs\\codex-os\\ROLLBACK.md"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/scripts/ambitions-codex-os-validate.py"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\scripts\\ambitions-codex-os-validate.py"
     },
     {
       "status": "pass",
-      "message": "exists: /Users/devan/Documents/GitHub/ambitions/scripts/ambitions-codex-os-doctor.py"
+      "message": "exists: C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\scripts\\ambitions-codex-os-doctor.py"
     },
     {
       "status": "pass",
-      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/session_start_context.py"
+      "message": "compiled C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\hooks\\session_start_context.py"
     },
     {
       "status": "pass",
-      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/user_prompt_submit_guard.py"
+      "message": "compiled C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\hooks\\user_prompt_submit_guard.py"
     },
     {
       "status": "pass",
-      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py"
+      "message": "compiled C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\hooks\\pre_tool_use_policy.py"
     },
     {
       "status": "pass",
-      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/permission_request_guard.py"
+      "message": "compiled C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\hooks\\permission_request_guard.py"
     },
     {
       "status": "pass",
-      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/post_tool_use_review.py"
+      "message": "compiled C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\hooks\\post_tool_use_review.py"
     },
     {
       "status": "pass",
-      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/stop_gate.py"
+      "message": "compiled C:\\Users\\Devan\\Documents\\GitHub\\ambitions\\.codex\\hooks\\stop_gate.py"
     },
     {
       "status": "pass",
@@ -150,32 +155,8 @@
       "message": "hooks.json references .codex/hooks/stop_gate.py"
     },
     {
-      "status": "pass",
-      "message": "execpolicy git status: allow"
-    },
-    {
-      "status": "pass",
-      "message": "execpolicy make ambitions-codex-os-validate: allow"
-    },
-    {
-      "status": "pass",
-      "message": "execpolicy make ambitions-codex-os-doctor: allow"
-    },
-    {
-      "status": "pass",
-      "message": "execpolicy git push: forbidden"
-    },
-    {
-      "status": "pass",
-      "message": "execpolicy npm install: forbidden"
-    },
-    {
-      "status": "pass",
-      "message": "execpolicy curl https://example.com: forbidden"
-    },
-    {
-      "status": "pass",
-      "message": "execpolicy xcodebuild archive: forbidden"
+      "status": "warn",
+      "message": "codex execpolicy unavailable; rule semantics not verified"
     },
     {
       "status": "pass",
