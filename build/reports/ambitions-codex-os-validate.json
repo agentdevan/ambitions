@@ -3,7 +3,7 @@
   "status": "YELLOW",
   "summary": "Ambitions Codex OS validation for local hardening control-plane",
   "changed_files": [
-    "Native/Ambitions/Features/Capture/CaptureScreen.swift"
+    "Sources/Components/AmbitionsExtendedTactileKit.swift"
   ],
   "validations_run": [
     {
@@ -108,11 +108,11 @@
     },
     {
       "status": "pass",
-      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Features/Capture/CaptureScreen.swift"
+      "message": "external dirty work excluded from batch-owned scope checks: Sources/Components/AmbitionsExtendedTactileKit.swift"
     },
     {
       "status": "pass",
-      "message": "external dirty prompt content intentionally excluded: Native/Ambitions/Features/Capture/CaptureScreen.swift"
+      "message": "external dirty prompt content intentionally excluded: Sources/Components/AmbitionsExtendedTactileKit.swift"
     },
     {
       "status": "pass",
@@ -222,7 +222,7 @@
     ],
     "uncertainties": [
       "Validate final execpolicy behavior for allow/forbid outcomes after local CLI semantics are confirmed.",
-      "External dirty work was operator-classified and excluded from Codex OS scope: Native/Ambitions/Features/Capture/CaptureScreen.swift"
+      "External dirty work was operator-classified and excluded from Codex OS scope: Sources/Components/AmbitionsExtendedTactileKit.swift"
     ]
   },
   "risks": [
