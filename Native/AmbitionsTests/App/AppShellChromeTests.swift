@@ -20,6 +20,8 @@ final class AppShellChromeTests: XCTestCase {
     func testMissionControlLaneLabelsDoNotCreateTopLevelTabs() {
         XCTAssertEqual(AmbitionMissionLane.allCases.map(\.title), ["Overview", "Path", "Steps", "Proof", "Decisions", "Risks", "Archive"])
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("plan"))
     }
 
     func testAppTabSequenceMatchesBottomNavigationContract() {
@@ -27,6 +29,7 @@ final class AppShellChromeTests: XCTestCase {
         XCTAssertEqual(BottomNavigationContract.requiredTitleSequence, "Today / Goals / Capture / Time / You")
         XCTAssertTrue(BottomNavigationContract.isValidTitleSequence(AppTab.allCases.map(\.title)))
         XCTAssertEqual(RootDestinationIdentity.allCases.map(\.title), AppTab.allCases.map(\.title))
+        XCTAssertEqual(RootDestinationIdentity.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
     }
 
     func testTrustBadgeCopyDoesNotClaimGlobalSyncByDefault() {
@@ -76,7 +79,7 @@ final class AppShellChromeTests: XCTestCase {
     func testM12ContinuityMaturityReportCoversRequiredSurfacesAndLayer3Blockers() {
         XCTAssertEqual(
             CrossSurfaceContinuityMaturityReport.handoffs.map(\.surface),
-            [.today, .capture, .goals, .plan, .you, .reviews, .externalSurfaces, .goalDetail]
+            [.today, .capture, .goals, .time, .you, .reviews, .externalSurfaces, .goalDetail]
         )
         XCTAssertTrue(CrossSurfaceContinuityMaturityReport.handoffs.contains { $0.id == "path-builder" })
         XCTAssertTrue(CrossSurfaceContinuityMaturityReport.handoffs.allSatisfy { $0.owningRoute.isEmpty == false })
@@ -105,5 +108,17 @@ final class AppShellChromeTests: XCTestCase {
         }
 
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(AppMeridianDestination.all.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(
+            AppMeridianDestination.all.map(\.accessibilityIdentifier),
+            [
+                "shell.meridian.destination.today",
+                "shell.meridian.destination.goals",
+                "shell.meridian.destination.capture",
+                "shell.meridian.destination.time",
+                "shell.meridian.destination.you"
+            ]
+        )
+        XCTAssertFalse(AppMeridianDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
     }
 }

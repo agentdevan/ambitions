@@ -50,7 +50,7 @@ The GitHub API audit searched for the following high-risk terms and patterns:
 ```text
 Ambitions_2_0
 Ambitions_3_0
-Today / Goals / Capture / Plan / You
+historical search-term example: Today / Goals / Capture / Plan / You
 Begin Focus
 Start Focus
 Recommended next step

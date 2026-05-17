@@ -3,27 +3,37 @@ import XCTest
 
 final class AppShellNavigationTests: XCTestCase {
     func testCanonicalTopLevelTabsMatchProductSpec() {
-        XCTAssertEqual(AppTab.allCases, [.today, .goals, .captures, .plan, .profile])
+        XCTAssertEqual(AppTab.allCases, [.today, .goals, .capture, .time, .you])
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.contains(.insights))
+        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "capture", "time", "you"])
         XCTAssertFalse(AppTab.allCases.contains(.habits))
+        XCTAssertFalse(AppTab.allCases.contains(.insights))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
     }
 
     func testLegacyTabRawValuesRemainDecodableAndNormalizeSafely() {
-        XCTAssertEqual(AppTab(rawValue: "captures"), .captures)
-        XCTAssertEqual(AppTab(rawValue: "profile"), .profile)
+        XCTAssertEqual(AppTab(rawValue: "capture"), .capture)
+        XCTAssertEqual(AppTab(rawValue: "captures"), .capture)
+        XCTAssertEqual(AppTab(rawValue: "time"), .time)
+        XCTAssertEqual(AppTab(rawValue: "plan"), .time)
+        XCTAssertEqual(AppTab(rawValue: "you"), .you)
+        XCTAssertEqual(AppTab(rawValue: "profile"), .you)
         XCTAssertEqual(AppTab(rawValue: "habits"), .habits)
         XCTAssertEqual(AppTab(rawValue: "insights"), .insights)
-        XCTAssertEqual(AppTab.captures.canonicalTopLevelTab, .captures)
-        XCTAssertEqual(AppTab.profile.canonicalTopLevelTab, .profile)
-        XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
-        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
-        XCTAssertEqual(AppTab.profile.rawValue, "you")
-        XCTAssertEqual(AppTab.profile.title, "You")
+        XCTAssertEqual(AppTab.capture.canonicalTopLevelTab, .capture)
+        XCTAssertEqual(AppTab.time.canonicalTopLevelTab, .time)
+        XCTAssertEqual(AppTab.you.canonicalTopLevelTab, .you)
+        XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .time)
+        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .you)
+        XCTAssertEqual(AppTab.time.rawValue, "time")
+        XCTAssertEqual(AppTab.time.title, "Time")
+        XCTAssertEqual(AppTab.you.rawValue, "you")
+        XCTAssertEqual(AppTab.you.title, "You")
         XCTAssertEqual(AppTab.habits.title, "Rituals")
         XCTAssertEqual(AppTab.insights.title, "History")
-        XCTAssertTrue(AppTab.captures.isCanonicalTopLevel)
-        XCTAssertTrue(AppTab.profile.isCanonicalTopLevel)
+        XCTAssertTrue(AppTab.capture.isCanonicalTopLevel)
+        XCTAssertTrue(AppTab.time.isCanonicalTopLevel)
+        XCTAssertTrue(AppTab.you.isCanonicalTopLevel)
         XCTAssertFalse(AppTab.habits.isCanonicalTopLevel)
         XCTAssertFalse(AppTab.insights.isCanonicalTopLevel)
     }
@@ -91,11 +101,13 @@ final class AppShellNavigationTests: XCTestCase {
             [
                 "shell.meridian.destination.today",
                 "shell.meridian.destination.goals",
-                "shell.meridian.destination.captures",
-                "shell.meridian.destination.plan",
-                "shell.meridian.destination.profile"
+                "shell.meridian.destination.capture",
+                "shell.meridian.destination.time",
+                "shell.meridian.destination.you"
             ]
         )
+        XCTAssertFalse(destinations.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
+        XCTAssertFalse(destinations.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
     }
 
     func testFCP08MeridianShellChromeContractPreservesFiveTabsAndReceiptZone() {
@@ -124,8 +136,8 @@ final class AppShellNavigationTests: XCTestCase {
             XCTAssertEqual(navigation.selectedTab, destination.tab)
             XCTAssertNil(navigation.activeOverlay)
             XCTAssertTrue(navigation.goalsPath.isEmpty)
-            XCTAssertTrue(navigation.planPath.isEmpty)
-            XCTAssertTrue(navigation.insightsPath.isEmpty)
+            XCTAssertTrue(navigation.timePath.isEmpty)
+            XCTAssertTrue(navigation.youPath.isEmpty)
         }
     }
 
@@ -154,20 +166,20 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testNavigationInitializesCapturePreferenceIntoTopLevelCaptureRoute() {
-        let navigation = AppNavigationModel(selectedTab: .captures)
+        let navigation = AppNavigationModel(selectedTab: .capture)
 
-        XCTAssertEqual(navigation.selectedTab, .captures)
-        XCTAssertTrue(navigation.planPath.isEmpty)
-        XCTAssertTrue(navigation.insightsPath.isEmpty)
+        XCTAssertEqual(navigation.selectedTab, .capture)
+        XCTAssertTrue(navigation.timePath.isEmpty)
+        XCTAssertTrue(navigation.youPath.isEmpty)
     }
 
     @MainActor
     func testNavigationInitializesLegacyHabitsPreferenceIntoPlanHabitsRoute() {
         let navigation = AppNavigationModel(selectedTab: .habits)
 
-        XCTAssertEqual(navigation.selectedTab, .plan)
-        XCTAssertEqual(navigation.planPath, [.habits])
-        XCTAssertTrue(navigation.insightsPath.isEmpty)
+        XCTAssertEqual(navigation.selectedTab, .time)
+        XCTAssertEqual(navigation.timePath, [.habits])
+        XCTAssertTrue(navigation.youPath.isEmpty)
     }
 
     @MainActor
@@ -176,24 +188,25 @@ final class AppShellNavigationTests: XCTestCase {
 
         navigation.selectTab(.habits)
 
-        XCTAssertEqual(navigation.selectedTab, .plan)
-        XCTAssertEqual(navigation.planPath, [.habits])
-        XCTAssertTrue(navigation.insightsPath.isEmpty)
+        XCTAssertEqual(navigation.selectedTab, .time)
+        XCTAssertEqual(navigation.timePath, [.habits])
+        XCTAssertTrue(navigation.youPath.isEmpty)
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.contains(.habits))
-        XCTAssertEqual(AppTab.habits.rawValue, "habits")
+        XCTAssertEqual(AppTab(rawValue: "plan"), .time)
+        XCTAssertEqual(AppTab.time.rawValue, "time")
+        XCTAssertEqual(AppTab.time.title, "Time")
         XCTAssertEqual(AppTab.habits.title, "Rituals")
-        XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
+        XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .time)
     }
 
     @MainActor
     func testNavigationInitializesLegacyInsightsPreferenceIntoYouSupportRoute() {
         let navigation = AppNavigationModel(selectedTab: .insights)
 
-        XCTAssertEqual(navigation.selectedTab, .profile)
-        XCTAssertEqual(navigation.insightsPath, [.history])
-        XCTAssertTrue(navigation.planPath.isEmpty)
-        XCTAssertEqual(AppTab.plan.title, "Time")
+        XCTAssertEqual(navigation.selectedTab, .you)
+        XCTAssertEqual(navigation.youPath, [.history])
+        XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(AppTab.insights.rawValue, "insights")
         XCTAssertEqual(AppTab.insights.title, "History")
         XCTAssertFalse(AppTab.allCases.contains(.insights))
@@ -205,13 +218,13 @@ final class AppShellNavigationTests: XCTestCase {
 
         navigation.selectTab(.insights)
 
-        XCTAssertEqual(navigation.selectedTab, .profile)
-        XCTAssertEqual(navigation.insightsPath, [.history])
-        XCTAssertTrue(navigation.planPath.isEmpty)
+        XCTAssertEqual(navigation.selectedTab, .you)
+        XCTAssertEqual(navigation.youPath, [.history])
+        XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.contains(.insights))
-        XCTAssertEqual(AppTab.plan.title, "Time")
-        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
+        XCTAssertEqual(AppTab.time.title, "Time")
+        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .you)
     }
 
     @MainActor
@@ -244,18 +257,18 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testCurrentTabReselectionFirstTapRequestsScrollThenSecondTapReturnsToRoot() {
-        let navigation = AppNavigationModel(selectedTab: .plan)
+        let navigation = AppNavigationModel(selectedTab: .time)
         navigation.openHabits()
 
         let firstTap = navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100))
         XCTAssertEqual(firstTap, .scrollToTop)
-        XCTAssertEqual(navigation.selectedTab, .plan)
-        XCTAssertEqual(navigation.planPath, [.habits])
+        XCTAssertEqual(navigation.selectedTab, .time)
+        XCTAssertEqual(navigation.timePath, [.habits])
 
         let secondTap = navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100.4))
         XCTAssertEqual(secondTap, .returnToRoot)
-        XCTAssertEqual(navigation.selectedTab, .plan)
-        XCTAssertTrue(navigation.planPath.isEmpty)
+        XCTAssertEqual(navigation.selectedTab, .time)
+        XCTAssertTrue(navigation.timePath.isEmpty)
     }
 
     @MainActor
@@ -270,7 +283,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testTodayReentryContextCanBeCarriedAndConsumed() {
-        let navigation = AppNavigationModel(selectedTab: .plan)
+        let navigation = AppNavigationModel(selectedTab: .time)
 
         navigation.selectToday(entryContext: .recovery)
 
@@ -288,7 +301,7 @@ final class AppShellNavigationTests: XCTestCase {
 
         let preferences = try await RepositoryBackedAppPreferencesStore(appStateRepository: appState).loadPreferences()
 
-        XCTAssertEqual(preferences.preferredTab, .plan)
+        XCTAssertEqual(preferences.preferredTab, .time)
     }
 
     func testStoredProfilePreferredTabLoadsIntoYouSurfaceCompatibility() async throws {
