@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "purpose": "Manual governance overrides for edge cases where generated reconciliation inference is insufficient.",
+  "overrides": {
+    "AFI01": {
+      "state": "DOCS_ONLY_COMPLETE",
+      "reason": "Governance/source-truth language purge batch; not intended to imply runtime implementation."
+    },
+    "AFI02": {
+      "state": "DOCS_ONLY_COMPLETE"
+    },
+    "AFI03": {
+      "state": "DOCS_ONLY_COMPLETE"
+    },
+    "PFC01": {
+      "state": "DOCS_ONLY_COMPLETE",
+      "reason": "Inventory/repair-map evidence batch."
+    },
+    "CS02C": {
+      "state": "BLOCKED",
+      "reason": "Compatibility retirement intentionally deferred."
+    },
+    "CS03C": {
+      "state": "BLOCKED"
+    },
+    "CS04C": {
+      "state": "BLOCKED"
+    },
+    "CS05C": {
+      "state": "BLOCKED"
+    },
+    "CS06C": {
+      "state": "BLOCKED"
+    },
+    "CS09C": {
+      "state": "BLOCKED"
+    }
+  }
+}
