@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "purpose": "Suppress known acceptable governance scanner findings without weakening hard gates globally.",
+  "allowlist": [
+    {
+      "kind": "plan_top_level_language",
+      "path_contains": "docs/archive/",
+      "reason": "Archived historical material may preserve old Plan language."
+    },
+    {
+      "kind": "plan_top_level_language",
+      "path_contains": "docs/history/",
+      "reason": "Historical material may preserve old Plan language."
+    },
+    {
+      "kind": "release_ready_claim",
+      "path_contains": "release-claim",
+      "reason": "Release-claim safety documents discuss forbidden claims explicitly."
+    }
+  ]
+}
