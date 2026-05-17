@@ -3,13 +3,8 @@
   "status": "YELLOW",
   "summary": "Ambitions Codex OS validation for local hardening control-plane",
   "changed_files": [
-    ".codex/state/active-batch.yml",
-    "Sources/Components/AmbitionsPremiumMaterials.swift",
-    "Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
-    "Sources/Components/StartHereProductPrimitives.swift",
-    "Sources/Components/SurfacePrimitives.swift",
-    "build/reports/ambitions-codex-os-validate.json",
-    "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json"
+    "Sources/Components/AmbitionsFlagshipTactilePrimitives.swift",
+    "build/reports/ambitions-codex-os-validate.json"
   ],
   "validations_run": [
     {
@@ -114,35 +109,11 @@
     },
     {
       "status": "pass",
-      "message": "external dirty work excluded from batch-owned scope checks: Sources/Components/AmbitionsPremiumMaterials.swift"
+      "message": "external dirty work excluded from batch-owned scope checks: Sources/Components/AmbitionsFlagshipTactilePrimitives.swift"
     },
     {
       "status": "pass",
-      "message": "external dirty work excluded from batch-owned scope checks: Sources/Components/DynamicAdaptiveVisualPrimitives.swift"
-    },
-    {
-      "status": "pass",
-      "message": "external dirty work excluded from batch-owned scope checks: Sources/Components/StartHereProductPrimitives.swift"
-    },
-    {
-      "status": "pass",
-      "message": "external dirty work excluded from batch-owned scope checks: Sources/Components/SurfacePrimitives.swift"
-    },
-    {
-      "status": "pass",
-      "message": "external dirty prompt content intentionally excluded: Sources/Components/AmbitionsPremiumMaterials.swift"
-    },
-    {
-      "status": "pass",
-      "message": "external dirty prompt content intentionally excluded: Sources/Components/DynamicAdaptiveVisualPrimitives.swift"
-    },
-    {
-      "status": "pass",
-      "message": "external dirty prompt content intentionally excluded: Sources/Components/StartHereProductPrimitives.swift"
-    },
-    {
-      "status": "pass",
-      "message": "external dirty prompt content intentionally excluded: Sources/Components/SurfacePrimitives.swift"
+      "message": "external dirty prompt content intentionally excluded: Sources/Components/AmbitionsFlagshipTactilePrimitives.swift"
     },
     {
       "status": "pass",
@@ -252,7 +223,7 @@
     ],
     "uncertainties": [
       "Validate final execpolicy behavior for allow/forbid outcomes after local CLI semantics are confirmed.",
-      "External dirty work was operator-classified and excluded from Codex OS scope: Sources/Components/AmbitionsPremiumMaterials.swift, Sources/Components/DynamicAdaptiveVisualPrimitives.swift, Sources/Components/StartHereProductPrimitives.swift, Sources/Components/SurfacePrimitives.swift"
+      "External dirty work was operator-classified and excluded from Codex OS scope: Sources/Components/AmbitionsFlagshipTactilePrimitives.swift"
     ]
   },
   "risks": [
