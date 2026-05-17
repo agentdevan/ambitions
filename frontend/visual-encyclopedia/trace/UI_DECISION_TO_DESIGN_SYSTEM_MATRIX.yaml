@@ -14,11 +14,13 @@
     {
       "affected_design_system_primitives": [
         {"expected_home": "Sources/Components/RealityMeridianTemporalPrimitives.swift", "name": "RealityMeridianCurrentTimeCursor", "status": "existing"},
-        {"expected_home": "Sources/Components/RealityMeridianTemporalPrimitives.swift", "name": "RealityMeridianScheduledNode", "status": "existing"}
+        {"expected_home": "Sources/Components/RealityMeridianTemporalPrimitives.swift", "name": "RealityMeridianScheduledNode", "status": "existing"},
+        {"expected_home": "Sources/Components/RealityMeridianTimeBand.swift", "name": "RealityMeridianTimeBand", "status": "existing"},
+        {"expected_home": "Sources/Components/RealityMeridianTimeBand.swift", "name": "RealityMeridianTimeBandZone", "status": "existing"}
       ],
-      "affected_swift_candidates": ["Sources/Components/RealityMeridianTemporalPrimitives.swift", "Sources/Previews/RealityMeridianTemporalPreviews.swift", "Native/Ambitions/Features/Today/TodayDayRailCurrentTimeFusion.swift", "Native/Ambitions/Features/Today/TodayScreen.swift"],
+      "affected_swift_candidates": ["Sources/Components/RealityMeridianTemporalPrimitives.swift", "Sources/Components/RealityMeridianTimeBand.swift", "Sources/Previews/RealityMeridianTemporalPreviews.swift", "Sources/Previews/RealityMeridianRichnessPreviews.swift", "Native/Ambitions/Features/Today/TodayDayRailCurrentTimeFusion.swift", "Native/Ambitions/Features/Today/TodayScreen.swift", "Native/Ambitions/Features/Today/TodayMasthead.swift"],
       "id": "UID-2026-05-15-today-live-current-time-cursor",
-      "proof_required": ["visual_recipe_updated_or_confirmed", "scheduled_node_and_live_cursor_contract_declared", "exact_time_label_accessibility_contract_declared", "implementation_receipt_after_code_changes_land", "compile_or_xcode_validation_required_before_green_release_claim"],
+      "proof_required": ["visual_recipe_updated_or_confirmed", "scheduled_node_and_live_cursor_contract_declared", "exact_time_label_accessibility_contract_declared", "premium_time_band_source_installed", "implementation_receipt_after_code_changes_land", "compile_or_xcode_validation_required_before_green_release_claim"],
       "status": "active"
     },
     {
