@@ -61,7 +61,7 @@ The repo currently contains these native foundations:
 | --- | --- | --- |
 | Today | `Native/Ambitions/Features/Today/` | Runtime surface exists. Latest Signature Object maturity must still be validated against current canon. |
 | Goals | `Native/Ambitions/Features/Goals/` | Runtime surface exists. Some internal names and objects may still reflect older Mission Control-era implementation language. |
-| Capture | `Native/Ambitions/Features/Captures/` | User-facing destination is Capture. Internal folder/name compatibility remains. Composer-first foundation exists. |
+| Capture | `Native/Ambitions/Features/Capture/` | User-facing destination is Capture. Internal folder/name compatibility remains. Composer-first foundation exists. |
 | Time | User-facing shell through `AppTab.title`, `AmbitionsRootView`, and `TimeScreen` | Runtime surface exists. Internal Plan folder naming has been fully migrated to Time. Current implementation is broader than the latest LifeShape Field ideal and should be treated as foundation, not final visual maturity. |
 | You | `Native/Ambitions/Features/You/` | User-facing destination is You. Internal Profile folder naming has been fully migrated to You, while some internal route wiring remains profile compatibility debt. |
 

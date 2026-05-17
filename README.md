@@ -10,7 +10,7 @@
 ***
 
 > [!IMPORTANT]
-> **Active Authority Index Notice**: Repository authority starts in [docs/truth/README.md](file:///c:/Users/Devan/Documents/GitHub/ambitions/docs/truth/README.md). If this README conflicts with `docs/truth/*`, the active truth files win. This file serves as architectural orientation and engineering guidelines.
+> **Active Authority Index Notice**: Repository authority starts in [docs/truth/README.md](docs/truth/README.md). If this README conflicts with `docs/truth/*`, the active truth files win. This file serves as architectural orientation and engineering guidelines.
 
 Ambitions is a premium, native iOS **personal life operating system and external brain**. Designed to organize intent, ground long-term goals in daily constraints, and adapt elegantly to changing life realities, Ambitions rejects standard task lists, calendar clones, and cloud-first telemetry in favor of an elegant, local-first product experience.
 
@@ -18,7 +18,7 @@ Ambitions is a premium, native iOS **personal life operating system and external
 
 ## 🗺️ Architectural Topology
 
-Ambitions utilizes a strict unidirectional dependency graph and modular packages to enforce complete decoupling of feature views, business rules, and database engines.
+Ambitions uses XcodeGen-driven native modules and package boundaries to separate app routing, feature views, business rules, services, and persistence concerns.
 
 ```mermaid
 graph TD
@@ -64,19 +64,19 @@ graph TD
 
 For any FAANG engineer starting in this repository, here is the clean map of the core zones:
 
-*   **[`Native/Ambitions/App/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/App)**: App entry, application container dependencies, unified shell composition, and deep-link/Widget intake routing.
-*   **[`Native/Ambitions/Domain/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Domain)**: Pure business models, capacity limits, freshness brokers, non-shaming closure invariants, and planning horizon calculations.
-*   **[`Native/Ambitions/Services/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Services)**: Core coordination service boundaries, protocol contracts, and mock/stub registries.
-*   **[`Native/Ambitions/Persistence/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Persistence)**: On-device SQLite/SwiftData repository configurations.
-*   **[`Native/Ambitions/Features/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Features)**: Rich feature layouts organized into five domain portals:
-    *   **[`Today/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Features/Today)**: Focus & execution (`Start Here` & `Reality Meridian`).
-    *   **[`Goals/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Features/Goals)**: Directed outcomes (`Constellation Atlas`).
-    *   **[`Capture/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Features/Capture)**: Quiet incoming intake (`Atmosphere Composer`).
-    *   **[`Time/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Features/Time)**: Capacity orientation (`LifeShape Field`).
-    *   **[`You/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Native/Ambitions/Features/You)**: Permission & Trust center (`Your System`).
-*   **[`Sources/AmbitionsDesignSystem/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/Sources/AmbitionsDesignSystem)**: Local Swift Package providing premium Dark Mode visual tokens (Graphite Recess, Luminous Trace, Quiet Glass) and high-polish interface widgets.
-*   **[`AppUI/Sources/AmbitionsWidgetUI/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/AppUI/Sources/AmbitionsWidgetUI)**: Encapsulated widget view primitives sharing design metrics.
-*   **[`scripts/`](file:///c:/Users/Devan/Documents/GitHub/ambitions/scripts)**: Rich automation suite for accessibility compliance, memory safety scans, dynamic type verification, and visual regression gating.
+*   **[`Native/Ambitions/App/`](Native/Ambitions/App)**: App entry, application container dependencies, unified shell composition, and deep-link/Widget intake routing.
+*   **[`Native/Ambitions/Domain/`](Native/Ambitions/Domain)**: Pure business models, capacity limits, freshness brokers, non-shaming closure invariants, and planning horizon calculations.
+*   **[`Native/Ambitions/Services/`](Native/Ambitions/Services)**: Core coordination service boundaries, protocol contracts, and mock/stub registries.
+*   **[`Native/Ambitions/Persistence/`](Native/Ambitions/Persistence)**: On-device SQLite/SwiftData repository configurations.
+*   **[`Native/Ambitions/Features/`](Native/Ambitions/Features)**: Feature layouts organized into five domain portals:
+    *   **[`Today/`](Native/Ambitions/Features/Today)**: Focus and execution.
+    *   **[`Goals/`](Native/Ambitions/Features/Goals)**: Directed outcomes.
+    *   **[`Capture/`](Native/Ambitions/Features/Capture)**: Quiet incoming intake.
+    *   **[`Time/`](Native/Ambitions/Features/Time)**: Capacity orientation.
+    *   **[`You/`](Native/Ambitions/Features/You)**: Permission and trust center.
+*   **[`Sources/AmbitionsDesignSystem/`](Sources/AmbitionsDesignSystem)**: Local Swift package for shared design tokens and interface widgets.
+*   **[`AppUI/Sources/AmbitionsWidgetUI/`](AppUI/Sources/AmbitionsWidgetUI)**: Encapsulated widget view primitives sharing design metrics.
+*   **[`scripts/`](scripts)**: Local automation scripts for build, validation, and repo checks.
 
 ---
 
@@ -122,10 +122,10 @@ Ambitions enforces a series of strict structural invariants designed to ensure w
 
 ## 🔍 Codebase Health Scans
 
-Engineers must execute the localized quality checks under `scripts/` before proposing changes to the codebase. The gate checks inspect critical metrics:
-*   `accessibility-cognitive-load-scan.sh`: Validates touch-target constraints and Dynamic Type scalability.
-*   `cqs-architecture-boundary-scan.sh`: Audits target boundaries to prevent circular dependencies between Services and Features.
-*   `codex-forbidden-claim-scan.sh`: Prevents making false validation claims in the absence of verified local simulator/hardware proof.
+Engineers should use the localized checks under `scripts/` before proposing changes to the codebase. These helpers support local review of key areas:
+*   `accessibility-cognitive-load-scan.sh`: Checks touch-target constraints and Dynamic Type behavior.
+*   `cqs-architecture-boundary-scan.sh`: Reviews target boundaries between Services and Features.
+*   `codex-forbidden-claim-scan.sh`: Flags validation claims that are not backed by current local proof.
 
 ---
 
