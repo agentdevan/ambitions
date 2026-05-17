@@ -3,15 +3,11 @@
   "status": "YELLOW",
   "summary": "Ambitions Codex OS validation for local hardening control-plane",
   "changed_files": [
-    ".codex/hooks/__pycache__",
-    ".codex/hooks/__pycache__/permission_request_guard.cpython-314.pyc",
-    ".codex/hooks/__pycache__/post_tool_use_review.cpython-314.pyc",
-    ".codex/hooks/__pycache__/pre_tool_use_policy.cpython-314.pyc",
-    ".codex/hooks/__pycache__/session_start_context.cpython-314.pyc",
-    ".codex/hooks/__pycache__/stop_gate.cpython-314.pyc",
-    ".codex/hooks/__pycache__/user_prompt_submit_guard.cpython-314.pyc",
-    "build/reports/ambitions-codex-os-validate.json",
-    "scripts/ambitions-codex-os-validate.py"
+    "Native/Ambitions/App/AppTab.swift",
+    "Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift",
+    "Native/Ambitions/Features/Today/TodayScreen.swift",
+    "Native/AmbitionsTests/App/AppShellNavigationTests.swift",
+    "build/reports/ambitions-codex-os-validate.json"
   ],
   "validations_run": [
     {
@@ -113,6 +109,38 @@
     {
       "status": "pass",
       "message": "schema loaded"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/App/AppTab.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Features/Today/TodayScreen.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/AmbitionsTests/App/AppShellNavigationTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty prompt content intentionally excluded: Native/Ambitions/App/AppTab.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty prompt content intentionally excluded: Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty prompt content intentionally excluded: Native/Ambitions/Features/Today/TodayScreen.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty prompt content intentionally excluded: Native/AmbitionsTests/App/AppShellNavigationTests.swift"
     },
     {
       "status": "pass",
@@ -221,7 +249,8 @@
       "docs/codex-os/"
     ],
     "uncertainties": [
-      "Validate final execpolicy behavior for allow/forbid outcomes after local CLI semantics are confirmed."
+      "Validate final execpolicy behavior for allow/forbid outcomes after local CLI semantics are confirmed.",
+      "External dirty work was operator-classified and excluded from Codex OS scope: Native/Ambitions/App/AppTab.swift, Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift, Native/Ambitions/Features/Today/TodayScreen.swift, Native/AmbitionsTests/App/AppShellNavigationTests.swift"
     ]
   },
   "risks": [

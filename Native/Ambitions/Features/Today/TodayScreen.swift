@@ -196,9 +196,9 @@ struct TodayScreen: View {
                 presentationContext: .quickCapture
             )
         case .openPlan:
-            container.commandRouter.route(to: .tab(.plan), source: .shellUtility)
+            container.commandRouter.route(to: .tab(.time), source: .shellUtility)
         case .protectLater:
-            container.commandRouter.route(to: .tab(.plan), source: .shellUtility)
+            container.commandRouter.route(to: .tab(.time), source: .shellUtility)
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Opened Time",
                 body: "Today handed this off to the canonical planning surface instead of creating a second recovery system here.",

@@ -40,7 +40,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .today:
             return .openTab(.today)
         case .plan:
-            return .openTab(.plan)
+            return .openTab(.time)
         case .captureInbox:
             return .openPlanRoute(.captureInbox)
         case .command:
@@ -60,7 +60,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .quickFocus:
             return .openToday(.focus)
         case .quickPlanPatch:
-            return .openTab(.plan)
+            return .openTab(.time)
         }
     }
 

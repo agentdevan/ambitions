@@ -1,6 +1,8 @@
 import Foundation
 
-enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
+enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
+    typealias RawValue = String
+
     case today
     case capture
     case goals
@@ -9,11 +11,41 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     case insights
     case you
 
+    // Legacy compatibility aliases
+    static let captures = AppTab.capture
+    static let plan = AppTab.time
+    static let profile = AppTab.you
+
     static var allCases: [AppTab] {
         [.today, .goals, .capture, .time, .you]
     }
 
     var id: String { rawValue }
+
+    init?(rawValue: String) {
+        switch rawValue.lowercased() {
+        case "today": self = .today
+        case "capture", "captures": self = .capture
+        case "goals": self = .goals
+        case "habits": self = .habits
+        case "time", "plan": self = .time
+        case "insights": self = .insights
+        case "you", "profile": self = .you
+        default: return nil
+        }
+    }
+
+    var rawValue: String {
+        switch self {
+        case .today: return "today"
+        case .capture: return "capture"
+        case .goals: return "goals"
+        case .habits: return "habits"
+        case .time: return "time"
+        case .insights: return "insights"
+        case .you: return "you"
+        }
+    }
 
     var canonicalTopLevelTab: AppTab {
         switch self {

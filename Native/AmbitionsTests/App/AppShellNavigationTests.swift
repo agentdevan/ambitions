@@ -18,7 +18,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(AppTab.profile.canonicalTopLevelTab, .profile)
         XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
         XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
-        XCTAssertEqual(AppTab.profile.rawValue, "profile")
+        XCTAssertEqual(AppTab.profile.rawValue, "you")
         XCTAssertEqual(AppTab.profile.title, "You")
         XCTAssertEqual(AppTab.habits.title, "Rituals")
         XCTAssertEqual(AppTab.insights.title, "History")
