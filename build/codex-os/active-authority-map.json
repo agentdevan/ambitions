@@ -1,0 +1,343 @@
+{
+  "active_batch_state": {
+    "blocked_forward_queue": {
+      "blocked_batch": "none",
+      "reason": "none"
+    },
+    "codex_os_override": {
+      "active_pass": "completed",
+      "app_feature_implementation_allowed": true,
+      "branch_creation_allowed": false,
+      "production_swift_allowed": true
+    },
+    "current": {
+      "batch": "FCP27 App-Wide Flagship Audit And Remediation",
+      "next_eligible_batch": "FCP27 App-Wide Flagship Audit And Remediation",
+      "previous_batch": "AOS30",
+      "previous_result": "green",
+      "train": "Flagship Completion"
+    },
+    "date": "2026-05-17",
+    "frontend_authority": {
+      "encyclopedia_required_for_frontend_touching_batches": false,
+      "entrypoint": "frontend/README.md"
+    },
+    "source_of_truth": [
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      ".codex/state/active-batch.yml",
+      "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
+    ],
+    "status": "in_progress"
+  },
+  "active_truth_files": [
+    {
+      "exists": true,
+      "path": "docs/truth/README.md",
+      "sha256": "bf0ac50c3e28c7ced743057b4a6dfe7870ffdefd771707142b931ae5387589c4",
+      "size": 2510
+    },
+    {
+      "exists": true,
+      "path": "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "sha256": "526a334402954d35495a44f6adcc1da35a3d011a82c18dc17e8b7bf506cc4aa2",
+      "size": 78957
+    },
+    {
+      "exists": true,
+      "path": "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "sha256": "525e93c0e946da78461ce7853e65901809d5c7b7ddcb71fa32746d119202464e",
+      "size": 7981
+    },
+    {
+      "exists": true,
+      "path": "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "sha256": "d56c824cf3ef6c80a9d15616113e91c824a562b7aed017102e7e0e3fe19a99e5",
+      "size": 37405
+    },
+    {
+      "exists": true,
+      "path": "docs/truth/RELEASE_TRUTH.md",
+      "sha256": "badc6ad2ce9b43eff86b49c149952a929ac1687168764fd49019bbfab74e6047",
+      "size": 24217
+    },
+    {
+      "exists": true,
+      "path": "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "sha256": "3bb651b4a47e7deaf31655265415c675d4e1425517befd24d5b73803ce4e0408",
+      "size": 29953
+    },
+    {
+      "exists": true,
+      "path": "docs/truth/HISTORICAL_POLICY.md",
+      "sha256": "8f27ce0dd349ba8a87fbbd5839360dc4fbbf72be73cc503e04f765f0df5ab082",
+      "size": 24209
+    }
+  ],
+  "authority_order": [
+    "docs/truth",
+    "docs/governance",
+    ".codex/os",
+    "docs/governance/generated",
+    "build/codex-os"
+  ],
+  "branch": "main",
+  "codex_os_docs": [
+    {
+      "exists": true,
+      "path": ".codex/os/AMBITIONS_OPERATING_CONTEXT.md",
+      "sha256": "1e76d10446c283736875a3baa18b0a9922213461138a6450094888dedbe82af8",
+      "size": 939
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/ACTIVE_AUTHORITY_MAP.md",
+      "sha256": "15702210723ca96769b741f3eddd0d4e08da802627cb9ae77e64e0803e29aed2",
+      "size": 961
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/CODEX_DECISION_POLICY.md",
+      "sha256": "e1bf1a259d58278130d98d9c5527cbc0e6be7d3ce1c8900e954c65697201f8d3",
+      "size": 1029
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/AUTONOMY_RULES.md",
+      "sha256": "ac814f3796707d4bf55db85a872e71e46930ab954cc16a47c760940081d47817",
+      "size": 890
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/FAILURE_RECOVERY_POLICY.md",
+      "sha256": "4e68c3dbc9463d4917ae6cfa4dd7958397887ddedde1de2412071846dc47b8bb",
+      "size": 930
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/TOOL_USE_POLICY.md",
+      "sha256": "87d1972b25c80a17512d960569574b9bc973ae18f8367788ed9df44c11a42297",
+      "size": 843
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/BATCH_SELECTION_POLICY.md",
+      "sha256": "fca44f07406bf850304c293dffdaa08989442fc09bb0993eeec431d3606be1fc",
+      "size": 795
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/GOVERNANCE_INPUTS.md",
+      "sha256": "d4c74baaa2d9c141996c1ba387ab785b16e2cc481aca98909094b5b6208f78df",
+      "size": 706
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/PERFORMANCE_PROFILE.md",
+      "sha256": "46212d9f97e8fb2ef54de73ee0a9e4a84879fdd3dde1d07a7d17b9cba06e21d4",
+      "size": 622
+    },
+    {
+      "exists": true,
+      "path": ".codex/os/AGENT_ROLES.md",
+      "sha256": "60976028e385d3f5d163b76269de3dfdb0bec7def7652f9eda696303ac7d86d9",
+      "size": 797
+    }
+  ],
+  "codex_os_outputs": [
+    {
+      "exists": true,
+      "path": "build/codex-os/active-authority-map.json",
+      "sha256": "f2843e5f8f19d00a5a9f8163da2f78f941e94455e9b1c1a47ce66390e816f90a",
+      "size": 10718
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/ambitions-context-pack.md",
+      "sha256": "8c5b4dd44412a0c82a9657aba090ceff85bc5036be3a693ffe7c13513400feff",
+      "size": 752503
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/next-action.json",
+      "sha256": "eff44954546878de3ceefdcd1219d08d930fecc0a4ec31a60494866922a3f174",
+      "size": 61646
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/next-action.md",
+      "sha256": "74a08b88ebc4dae976dd53cfceab743628a11c0da96cf8959f900412cc5eee84",
+      "size": 559
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/batch-selection.json",
+      "sha256": "8bca2ed1a639de2b33a1d23b481060c204eb0c0233f79f37395ea344f4e995cb",
+      "size": 693
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/batch-selection.md",
+      "sha256": "d9ea697f40d1a1a1c70617232e03b83ca678de2bd3fa0d51c5303210c50e26c9",
+      "size": 668
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/repair-plan.json",
+      "sha256": "c6447069dfccfe52d779cb67a8ec839600f2a55d5cdf2e194b4c5b6440d65dd5",
+      "size": 2146
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/repair-plan.md",
+      "sha256": "391f1423a92180b35f5e5bfb0cf32804a100b7b36a4263caeda4beb44ea6a56c",
+      "size": 1628
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/performance-check.json",
+      "sha256": "4774f5f4d933790d9d0f21e1d862c846507be7b56726c3d6d50109735b352cc1",
+      "size": 745
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/performance-check.md",
+      "sha256": "cb4b52c1db39eecf32fa9cd1402d2be7b4524eb7915abada4dfac97521c2776a",
+      "size": 381
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/sync-report.json",
+      "sha256": "d91d75730f416b7d5a43f6e7bf9925ab7a470036977f5f4bae8d8f9d737e5855",
+      "size": 11763
+    },
+    {
+      "exists": true,
+      "path": "build/codex-os/sync-report.md",
+      "sha256": "9a73e385ff1e20ea232d2472f499fa4c04e61929d923f6084ea53ce93628fa7a",
+      "size": 722
+    }
+  ],
+  "compatibility_seams": [
+    "Plan"
+  ],
+  "generated_at": "2026-05-17T13:05:46-04:00",
+  "governance_outputs": [
+    {
+      "exists": true,
+      "path": "docs/governance/GOVERNANCE_DASHBOARD.md",
+      "sha256": "0fda1dbabdfcd38205f9ace3f554c56f355541ad83850b0df66a171c4382be6f",
+      "size": 2426
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/repo_doctor_summary.md",
+      "sha256": "bbf77f659ad92864870d37f6d57941fa2f2252d576ae926a131a269d3960b915",
+      "size": 3555
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/repo_doctor_summary.json",
+      "sha256": "061fbcc70743d15707731de219dd6bdc83d3ecf499e1072ada00501dce004057",
+      "size": 17424
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/canon_impact_plan.md",
+      "sha256": "df8cd1965ac78d7a5cda5684b6cbe5fc7a12dff9995985bd7215cb19edd13fd5",
+      "size": 33021
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/canon_impact_map.json",
+      "sha256": "690c83dcabfa6f831625dac37172cf1d0f1d6cf70e9a362c8bda6537ade68633",
+      "size": 829488
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/implementation_expectation_map.json",
+      "sha256": "e455df34cf37b8405572d7fee69c062ec8019914cd8eadf0ecb77c0bb9c13c09",
+      "size": 26836
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/global_train_resequence.json",
+      "sha256": "85c3701cd2d9cb31981e98ff6377b3c56944c69700a440e4d086b543c752439b",
+      "size": 423
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/mature_spec_synthesis.md",
+      "sha256": "2186085725776a0a7fc216eed081a4c315a53249acfcdd1c32d131818d1e2300",
+      "size": 18695
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/prompt_rewrite_plan.md",
+      "sha256": "42e2bd6ef98757ee0c8abaf1a72ca5f7370590d20741740cb031d86a73f465eb",
+      "size": 13731
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/supersession_rewrite_plan.md",
+      "sha256": "346fa7ed9fc576d3960cbded7a4ccc4bdc4696ee92c770434a9ad412e27772c7",
+      "size": 86997
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/cleanup_action_plan.md",
+      "sha256": "ba1a73e12a894f17c0c1f64eec08f51f15f8f08593fb1cf4ab48ede97043c350",
+      "size": 8273
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/orphan_prompt_audit.md",
+      "sha256": "413cd39d4313ff23e909739617182371e0f70110c05eebb29d4f518cba911eff",
+      "size": 15372
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/stale_overlay_audit.md",
+      "sha256": "1ebafa0fd6650cf70b8f7f6b1e02d8d459cfe28625923bb1c66baedf8c97d39a",
+      "size": 103167
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/architecture_debt_score.json",
+      "sha256": "a55416ad049c298878925c1cae5098bbc9c6a162c1bdf04744e14e52f217f394",
+      "size": 130
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/governance_reconciliation_summary.json",
+      "sha256": "73810e94b410397e7cb076419c8c9a321683a1e02146d6a65bbd43075bf38454",
+      "size": 4922
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/train_lineage_graph.json",
+      "sha256": "e2c80d3d200e18ac01086fd2e1393d685dd1a8e3a1ce5fced07cc454453bc294",
+      "size": 6399597
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/proof_linkage_graph.json",
+      "sha256": "d61c751d0ca15fab536aebb0580daa8846ed475bda0dbc8b1e3b00396d790b24",
+      "size": 1596579
+    },
+    {
+      "exists": true,
+      "path": "docs/governance/generated/train_to_implementation_map.json",
+      "sha256": "335b8b8f6c558a3a3b6076cd6ae10052f7e31f5843920dd1ab4a2b2d47cd2bdc",
+      "size": 1382133
+    }
+  ],
+  "head_sha": "e4d680e6f84537d7dfb796f7a89435e255fd78c0",
+  "repo_root": "/Users/devan/Documents/GitHub/ambitions",
+  "top_level_ia": [
+    "Today",
+    "Goals",
+    "Capture",
+    "Time",
+    "You"
+  ]
+}

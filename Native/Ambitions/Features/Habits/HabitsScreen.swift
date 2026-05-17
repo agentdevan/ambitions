@@ -52,7 +52,7 @@ struct HabitsScreen: View {
                                     container.navigation.resetTimePath()
                                 }
                                 .buttonStyle(.bordered)
-                                .accessibilityIdentifier("habits.return-to-time")
+                                .accessibilityIdentifier("habits.return-to-plan")
 
                                 Button("Weekly Review") {
                                     container.navigation.openWeeklyReview()

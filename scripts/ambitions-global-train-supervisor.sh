@@ -9,6 +9,8 @@ RUNNER="scripts/ambitions-codex-train.sh"
 AUDIT="scripts/ambitions-prompt-audit.sh"
 PREFLIGHT="scripts/ambitions-process-preflight.sh"
 FRONTEND_AUTHORITY_CHECK="scripts/ambitions-global-train-frontend-authority-check.py"
+CODEX_OS_SELECTION="build/codex-os/batch-selection.json"
+CODEX_OS_NEXT_ACTION="build/codex-os/next-action.json"
 
 die() {
   echo "ERROR: $*" >&2
@@ -145,6 +147,25 @@ prompt_for_batch() {
 }
 
 next_batch() {
+  if [[ -f "$CODEX_OS_SELECTION" ]]; then
+    local codex_os_batch
+    codex_os_batch="$(python3 - "$CODEX_OS_SELECTION" <<'PY'
+import json, sys
+path = sys.argv[1]
+try:
+    with open(path, "r", encoding="utf-8") as fh:
+        data = json.load(fh)
+except Exception:
+    print("")
+    raise SystemExit(0)
+print(data.get("selected_batch", ""))
+PY
+    )"
+    if [[ -n "$codex_os_batch" ]]; then
+      printf '%s\n' "$codex_os_batch"
+      return 0
+    fi
+  fi
   local finalize_child
   finalize_child="$(ledger_requires_finalization)"
   if [[ -n "$finalize_child" ]]; then
@@ -183,6 +204,11 @@ print_status() {
 print_next() {
   require_base_files
   python3 -m json.tool "$QUEUE" >/dev/null
+  if [[ -f "$CODEX_OS_NEXT_ACTION" ]]; then
+    echo "Codex OS next action:"
+    python3 -m json.tool "$CODEX_OS_NEXT_ACTION"
+    echo
+  fi
   local batch prompt
   batch="$(next_batch)"
   [[ -n "$batch" ]] || die "no executable next batch found"

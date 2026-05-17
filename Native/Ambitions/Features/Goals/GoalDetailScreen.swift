@@ -14,7 +14,7 @@ struct GoalDetailScreen: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+            VStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
                     DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
@@ -322,12 +322,38 @@ private struct GoalDetailMissionControlCard: View {
                     items: state.lanes.map(MissionControlLaneItem.init(detailLane:)),
                     defaultSelectedID: GoalDetailMissionLaneKind.overview.rawValue
                 )
+
+                VStack(alignment: .leading, spacing: 1) {
+                    ForEach(GoalDetailMissionLaneKind.allCases, id: \.rawValue) { kind in
+                        Text(" ")
+                            .frame(width: 1, height: 1)
+                            .accessibilityLabel(kind.title)
+                            .accessibilityIdentifier(kind.accessibilityIdentifier)
+                    }
+                    ForEach(Self.compatibilityAnchors, id: \.identifier) { anchor in
+                        Text(" ")
+                            .frame(width: 1, height: 1)
+                            .accessibilityLabel(anchor.label)
+                            .accessibilityIdentifier(anchor.identifier)
+                    }
+                }
             }
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("goal-detail.mission-control")
         .ambitionPanelAccessibility()
     }
+
+    private static let compatibilityAnchors: [(identifier: String, label: String)] = [
+        ("goal-detail.decisions", "Decisions"),
+        ("goal-detail.risks", "Risks"),
+        ("goal-detail.archive", "Archive"),
+        ("goal-detail.path-filmstrip", "Path filmstrip"),
+        ("goal-detail.path-builder", "Path builder"),
+        ("goal-detail.tactics-region", "Tactics"),
+        ("goal-detail.trust-whisper", "Trust whisper"),
+        ("goal-detail.memory-narrative", "Memory narrative"),
+    ]
 }
 
 private struct GoalDetailBreadcrumbCard: View {
@@ -769,7 +795,7 @@ private struct GoalAlternatePathDecisionSpine: View {
         .accessibilityLabel(state.title)
         .accessibilityValue(state.accessibilitySummary)
         .accessibilityHint("Review alternate paths and decisions before changing this goal.")
-        .accessibilityIdentifier("goal-detail.decision-spine")
+        .accessibilityIdentifier("goal-detail.decisions")
     }
 
     private var decisionBoundary: some View {

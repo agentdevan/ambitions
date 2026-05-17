@@ -9,6 +9,8 @@ REQUIRED = [
     Path("docs/governance/generated/governance_reconciliation_summary.json"),
     Path("docs/governance/generated/orphan_prompt_audit.md"),
     Path("docs/governance/generated/stale_overlay_audit.md"),
+    Path("docs/governance/generated/accepted_yellow_governance_debt.json"),
+    Path("docs/governance/generated/accepted_yellow_governance_debt.md"),
 ]
 
 

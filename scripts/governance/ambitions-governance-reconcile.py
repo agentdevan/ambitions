@@ -123,6 +123,11 @@ def run_git(repo: Path, args: list[str], allow_fail: bool = False) -> str:
     return proc.stdout
 
 
+def git_commit_iso(repo: Path) -> str:
+    raw = run_git(repo, ["show", "-s", "--format=%cI", "HEAD"], allow_fail=True).strip()
+    return raw or "unknown"
+
+
 def rel(path: Path, repo: Path) -> str:
     return path.relative_to(repo).as_posix()
 
@@ -289,7 +294,7 @@ def infer_states(records: dict[str, TrainRecord]) -> None:
             rec.warnings.append("Prompt/completion present but no proof artifact was linked.")
 
 
-def generate_registry_projection(records: dict[str, TrainRecord]) -> str:
+def generate_registry_projection(repo: Path, records: dict[str, TrainRecord]) -> str:
     families: dict[str, list[TrainRecord]] = defaultdict(list)
     for rec in records.values():
         families[rec.family].append(rec)
@@ -297,7 +302,7 @@ def generate_registry_projection(records: dict[str, TrainRecord]) -> str:
     lines = [
         "# Generated Ambitions Reconciled Registry Projection",
         "",
-        f"Generated: {datetime.now(timezone.utc).isoformat()}",
+        f"Generated: {git_commit_iso(repo)}",
         "",
         "This file is generated from local repository data by `scripts/governance/ambitions-governance-reconcile.py`.",
         "Do not hand-edit generated output; update source files or governance rules and regenerate.",
@@ -314,9 +319,9 @@ def generate_registry_projection(records: dict[str, TrainRecord]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def generate_orphan_prompt_report(records: dict[str, TrainRecord]) -> str:
+def generate_orphan_prompt_report(repo: Path, records: dict[str, TrainRecord]) -> str:
     orphaned = [r for r in records.values() if r.prompt_files and not r.commits]
-    lines = ["# Generated Orphan Prompt Audit", "", f"Generated: {datetime.now(timezone.utc).isoformat()}", ""]
+    lines = ["# Generated Orphan Prompt Audit", "", f"Generated: {git_commit_iso(repo)}", ""]
     lines += ["| Train | Prompt Files | State | Warning |", "|---|---:|---|---|"]
     for rec in sorted(orphaned, key=lambda r: r.train_id):
         lines.append(f"| {rec.train_id} | {len(rec.prompt_files)} | {rec.inferred_state} | {'; '.join(rec.warnings)} |")
@@ -325,8 +330,8 @@ def generate_orphan_prompt_report(records: dict[str, TrainRecord]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def generate_stale_overlay_report(stale_findings: list[dict]) -> str:
-    lines = ["# Generated Stale Overlay Audit", "", f"Generated: {datetime.now(timezone.utc).isoformat()}", ""]
+def generate_stale_overlay_report(repo: Path, stale_findings: list[dict]) -> str:
+    lines = ["# Generated Stale Overlay Audit", "", f"Generated: {git_commit_iso(repo)}", ""]
     lines += ["| Kind | Path | Line | Text |", "|---|---|---:|---|"]
     for item in stale_findings[:500]:
         safe = item["text"].replace("|", "\\|")
@@ -336,17 +341,104 @@ def generate_stale_overlay_report(stale_findings: list[dict]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def accepted_yellow_debt(
+    repo: Path, records: dict[str, TrainRecord], stale_findings: list[dict]
+) -> tuple[dict[str, object], str]:
+    unresolved = [
+        rec
+        for rec in records.values()
+        if rec.inferred_state in {"NEEDS_RECONCILIATION", "COMPLETION_CLAIM_UNPROVEN"}
+    ]
+    orphaned = [rec for rec in records.values() if rec.prompt_files and not rec.commits]
+    data = {
+        "generated_at": git_commit_iso(repo),
+        "status": "ACCEPTED_YELLOW",
+        "owner": "Governance Reconciliation lane",
+        "reason": "Historical registry normalization remains incomplete, but generated evidence is present and no product or release claim is made.",
+        "no_claim_boundary": [
+            "does not claim full registry normalization",
+            "does not claim release readiness",
+            "does not claim implementation proof for unresolved trains",
+            "does not authorize product feature work",
+        ],
+        "required_green_proof": [
+            "resolve every NEEDS_RECONCILIATION and COMPLETION_CLAIM_UNPROVEN train in registry_projection.md",
+            "reduce stale_overlay_audit.md findings to zero or move them under explicit historical policy",
+            "link orphan prompts to commits, proof artifacts, or explicit queued/deferred states",
+        ],
+        "evidence": {
+            "registry_projection": "docs/governance/generated/registry_projection.md",
+            "orphan_prompt_audit": "docs/governance/generated/orphan_prompt_audit.md",
+            "stale_overlay_audit": "docs/governance/generated/stale_overlay_audit.md",
+            "proof_linkage_graph": "docs/governance/generated/proof_linkage_graph.json",
+            "train_to_implementation_map": "docs/governance/generated/train_to_implementation_map.json",
+        },
+        "counts": {
+            "unresolved_reconciliation_count": len(unresolved),
+            "stale_overlay_count": len(stale_findings),
+            "orphan_prompt_count": len(orphaned),
+            "train_count": len(records),
+        },
+        "sample_unresolved_trains": [
+            {
+                "train_id": rec.train_id,
+                "state": rec.inferred_state,
+                "warnings": rec.warnings,
+            }
+            for rec in sorted(unresolved, key=lambda r: r.train_id)[:25]
+        ],
+    }
+
+    lines = [
+        "# Generated Accepted-Yellow Governance Debt",
+        "",
+        f"Generated: {data['generated_at']}",
+        "",
+        "Status: ACCEPTED_YELLOW",
+        "Owner: Governance Reconciliation lane",
+        "",
+        "## Why Yellow, Not Red",
+        "",
+        str(data["reason"]),
+        "",
+        "## Counts",
+        "",
+        f"- Unresolved reconciliation count: {len(unresolved)}",
+        f"- Stale overlay count: {len(stale_findings)}",
+        f"- Orphan prompt count: {len(orphaned)}",
+        f"- Train count: {len(records)}",
+        "",
+        "## No-Claim Boundary",
+        "",
+    ]
+    lines.extend(f"- {item}" for item in data["no_claim_boundary"])
+    lines += [
+        "",
+        "## Required Green Proof",
+        "",
+    ]
+    lines.extend(f"- {item}" for item in data["required_green_proof"])
+    lines += [
+        "",
+        "## Evidence",
+        "",
+    ]
+    for label, path in data["evidence"].items():
+        lines.append(f"- {label}: `{path}`")
+    return data, "\n".join(lines).rstrip() + "\n"
+
+
 def write_outputs(repo: Path, out_dir: Path, records: dict[str, TrainRecord], stale_findings: list[dict], strict: bool) -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     data = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": git_commit_iso(repo),
         "train_count": len(records),
         "records": {tid: rec.to_json() for tid, rec in sorted(records.items())},
     }
     (out_dir / "train_lineage_graph.json").write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
-    (out_dir / "registry_projection.md").write_text(generate_registry_projection(records))
-    (out_dir / "orphan_prompt_audit.md").write_text(generate_orphan_prompt_report(records))
-    (out_dir / "stale_overlay_audit.md").write_text(generate_stale_overlay_report(stale_findings))
+    (out_dir / "registry_projection.md").write_text(generate_registry_projection(repo, records))
+    (out_dir / "orphan_prompt_audit.md").write_text(generate_orphan_prompt_report(repo, records))
+    (out_dir / "stale_overlay_audit.md").write_text(generate_stale_overlay_report(repo, stale_findings))
 
     proof_linkage = {
         tid: {
@@ -370,11 +462,18 @@ def write_outputs(repo: Path, out_dir: Path, records: dict[str, TrainRecord], st
     (out_dir / "train_to_implementation_map.json").write_text(json.dumps(implementation_map, indent=2, sort_keys=True) + "\n")
 
     failures = [r for r in records.values() if r.inferred_state in {"NEEDS_RECONCILIATION", "COMPLETION_CLAIM_UNPROVEN"}]
+    accepted_yellow, accepted_yellow_md = accepted_yellow_debt(repo, records, stale_findings)
+    (out_dir / "accepted_yellow_governance_debt.json").write_text(
+        json.dumps(accepted_yellow, indent=2, sort_keys=True) + "\n"
+    )
+    (out_dir / "accepted_yellow_governance_debt.md").write_text(accepted_yellow_md)
     summary = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": git_commit_iso(repo),
         "train_count": len(records),
         "needs_reconciliation_count": len(failures),
         "stale_overlay_count": len(stale_findings),
+        "accepted_yellow": accepted_yellow,
+        "accepted_yellow_count": len(failures) + len(stale_findings),
         "strict_passed": not strict or not failures,
     }
     (out_dir / "governance_reconciliation_summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")

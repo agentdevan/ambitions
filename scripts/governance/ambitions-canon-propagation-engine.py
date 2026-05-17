@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from datetime import datetime, timezone
+import subprocess
 
 OUT_DIR = Path("docs/governance/generated")
 OUT = OUT_DIR / "canon_propagation_plan.md"
@@ -17,9 +17,21 @@ RULES = [
 SCAN_ROOTS = [Path("docs"), Path("prompts"), Path("Sources"), Path("Native"), Path("scripts")]
 
 
+def git_commit_iso() -> str:
+    proc = subprocess.run(
+        ["git", "show", "-s", "--format=%cI", "HEAD"],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    return proc.stdout.strip() or "unknown"
+
+
 def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    lines = ["# Canon Propagation Plan", "", f"Generated: {datetime.now(timezone.utc).isoformat()}", ""]
+    lines = ["# Canon Propagation Plan", "", f"Generated: {git_commit_iso()}", ""]
 
     for old, new in RULES:
         lines += [f"## {old} → {new}", ""]

@@ -1,0 +1,417 @@
+# Canon Impact Plan
+
+Generated: 2026-05-17T13:05:46-04:00
+
+## Changed Canon Files
+
+- None currently dirty
+
+## Likely Affected Files
+
+- DesignTokens/objects/atmosphere-composer.tokens.json
+- DesignTokens/objects/constellation-atlas.tokens.json
+- DesignTokens/objects/lifeshape-field.tokens.json
+- DesignTokens/objects/reality-meridian.tokens.json
+- DesignTokens/objects/user-system-profile.tokens.json
+- DesignTokens/semantic.tokens.json
+- DesignTokens/states/protected-time.tokens.json
+- Native/Ambitions/App/AmbitionsRootView.swift
+- Native/Ambitions/App/AppBootstrapper.swift
+- Native/Ambitions/App/AppContainer.swift
+- Native/Ambitions/App/AppContainerFactory.swift
+- Native/Ambitions/App/AppExternalRouting.swift
+- Native/Ambitions/App/AppNavigation.swift
+- Native/Ambitions/App/AppShellPresentationMode.swift
+- Native/Ambitions/App/AppShellView.swift
+- Native/Ambitions/App/AppTab.swift
+- Native/Ambitions/App/ShellCommandModels.swift
+- Native/Ambitions/App/ShellCommandRouter.swift
+- Native/Ambitions/AppIntents/AmbitionsSystemControlIntent.swift
+- Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift
+- Native/Ambitions/Domain/AGENTS.md
+- Native/Ambitions/Domain/ActionClosureReceiptModels.swift
+- Native/Ambitions/Domain/AmbitionGraphModels.swift
+- Native/Ambitions/Domain/AmbitionGraphProjectionStore.swift
+- Native/Ambitions/Domain/AmbitionsCommandModels.swift
+- Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift
+- Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift
+- Native/Ambitions/Domain/AmbitionsOSCloseoutTailGate.swift
+- Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift
+- Native/Ambitions/Domain/AmbitionsOSControlPlaneModels.swift
+- Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift
+- Native/Ambitions/Domain/AmbitionsOSEvaluationTailGate.swift
+- Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift
+- Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift
+- Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift
+- Native/Ambitions/Domain/AmbitionsOSHandoffTailGate.swift
+- Native/Ambitions/Domain/AmbitionsOSIntegrationTailGate.swift
+- Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamEligibilityDeadlineModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamHandlingModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamNorthStarModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamPackRegistryModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamRequirementGraphModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLocalLanguageModels.swift
+- Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift
+- Native/Ambitions/Domain/AmbitionsOSOptionValueModels.swift
+- Native/Ambitions/Domain/AmbitionsOSPerformanceEnergyModels.swift
+- Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift
+- Native/Ambitions/Domain/AmbitionsOSPrivacySafetyTailGate.swift
+- Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift
+- Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift
+- Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift
+- Native/Ambitions/Domain/AmbitionsOSRuntimeTailGate.swift
+- Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift
+- Native/Ambitions/Domain/AmbitionsOSStartingPositionModels.swift
+- Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift
+- Native/Ambitions/Domain/CanonicalNowStateModels.swift
+- Native/Ambitions/Domain/CaptureModels.swift
+- Native/Ambitions/Domain/CaptureRouteCommandMapping.swift
+- Native/Ambitions/Domain/CommitmentWaitingModels.swift
+- Native/Ambitions/Domain/ConflictPolicyModels.swift
+- Native/Ambitions/Domain/CorrectionFoldModels.swift
+- Native/Ambitions/Domain/DomainFoundation.swift
+- Native/Ambitions/Domain/EventLedgerModels.swift
+- Native/Ambitions/Domain/ExecutionResilienceModels.swift
+- Native/Ambitions/Domain/GoalBelievabilityModels.swift
+- Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEnergyFitModels.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEnergyLearningModels.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEngineFeedbackAnalyzer.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEnginePlannerLinter.swift
+- Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift
+- Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift
+- Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift
+- Native/Ambitions/Domain/GoalEngine/TypeScriptParityNotes.md
+- Native/Ambitions/Domain/GoalsModels.swift
+- Native/Ambitions/Domain/HabitsModels.swift
+- Native/Ambitions/Domain/InsightsModels.swift
+- Native/Ambitions/Domain/LearningAnticipationModels.swift
+- Native/Ambitions/Domain/LifeAreaModels.swift
+- Native/Ambitions/Domain/LifeGraphModels.swift
+- Native/Ambitions/Domain/OneStepGoalModels.swift
+- Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift
+- Native/Ambitions/Domain/Planning/LivingPlanContinuitySync.swift
+- Native/Ambitions/Domain/Planning/LivingPlanFreshnessBroker.swift
+- Native/Ambitions/Domain/Planning/LivingPlanGovernanceConsole.swift
+- Native/Ambitions/Domain/Planning/LivingPlanMergeLedger.swift
+- Native/Ambitions/Domain/Planning/LivingPlanMutationPermission.swift
+- Native/Ambitions/Domain/Planning/LivingPlanRecompiler.swift
+- Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift
+- Native/Ambitions/Domain/Planning/LivingPlanSchemaMigration.swift
+- Native/Ambitions/Domain/Planning/PlanningDomainModels.swift
+- Native/Ambitions/Domain/Planning/PlanningEvaluation.swift
+- Native/Ambitions/Domain/RealityModels.swift
+- Native/Ambitions/Domain/RecommendationExplanationModels.swift
+- Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift
+- Native/Ambitions/Domain/ReviewsModels.swift
+- Native/Ambitions/Domain/RitualModels.swift
+- Native/Ambitions/Domain/SafeAutomationPolicyModels.swift
+- Native/Ambitions/Domain/ScreenContractModels.swift
+- Native/Ambitions/Domain/SideEffectLedgerModels.swift
+- Native/Ambitions/Domain/SmartAttachmentModels.swift
+- Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift
+- Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift
+- Native/Ambitions/Domain/SourceAtlasPackModels.swift
+- Native/Ambitions/Domain/TodayModels.swift
+- Native/Ambitions/Domain/YouCrossSurfaceProofReviewModels.swift
+- Native/Ambitions/Domain/YouModels.swift
+- Native/Ambitions/Domain/YouPlanningDefaultsModels.swift
+- Native/Ambitions/ExternalSnapshots/ExternalCreationContracts.swift
+- Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
+- Native/Ambitions/ExternalSnapshots/ExternalSurfaceContractModels.swift
+- Native/Ambitions/ExternalSnapshots/ExternalSurfaceControlContracts.swift
+- Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift
+- Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
+- Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift
+- Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift
+- Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift
+- Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift
+- Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift
+- Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift
+- Native/Ambitions/Features/Capture/CaptureScreen.swift
+- Native/Ambitions/Features/Capture/CaptureViewModel.swift
+- Native/Ambitions/Features/FeatureEnginePackageBoundaryModels.swift
+- Native/Ambitions/Features/Goals/CreateGoalScreen.swift
+- Native/Ambitions/Features/Goals/CreateGoalViewModel.swift
+- Native/Ambitions/Features/Goals/GoalComponents.swift
+- Native/Ambitions/Features/Goals/GoalDetailScreen.swift
+- Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift
+- Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift
+- Native/Ambitions/Features/Goals/GoalsFeatureModels.swift
+- Native/Ambitions/Features/Goals/GoalsFeatureService.swift
+- Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift
+- Native/Ambitions/Features/Goals/GoalsScreen.swift
+- Native/Ambitions/Features/Goals/GoalsViewModels.swift
+- Native/Ambitions/Features/Goals/StubGoalsService.swift
+- Native/Ambitions/Features/Habits/HabitComponents.swift
+- Native/Ambitions/Features/Habits/HabitsFeatureService.swift
+- Native/Ambitions/Features/Habits/HabitsScreen.swift
+- Native/Ambitions/Features/Insights/InsightsFeatureService.swift
+- Native/Ambitions/Features/Insights/InsightsScreen.swift
+- Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift
+- Native/Ambitions/Features/Shared/ActivationContract.swift
+- Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift
+- Native/Ambitions/Features/Shared/HabitGoalSemantics.swift
+- Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift
+- Native/Ambitions/Features/Time/TimeFeatureModels.swift
+- Native/Ambitions/Features/Time/TimeFeatureService.swift
+- Native/Ambitions/Features/Time/TimeFeatureSnapshot.swift
+- Native/Ambitions/Features/Time/TimeFoundationCards.swift
+- Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift
+- Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift
+- Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift
+- Native/Ambitions/Features/Time/TimeLifeSuiteState.swift
+- Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift
+- Native/Ambitions/Features/Time/TimeReflowDecisionState.swift
+- Native/Ambitions/Features/Time/TimeScreen.swift
+- Native/Ambitions/Features/Time/TimeScreenContractSnapshot.swift
+- Native/Ambitions/Features/Time/TimeViewModel.swift
+- Native/Ambitions/Features/Time/WeeklyReviewScreen.swift
+- Native/Ambitions/Features/Today/DayRailProjection.swift
+- Native/Ambitions/Features/Today/DayRailStepDetailState.swift
+- Native/Ambitions/Features/Today/DayRailViewState.swift
+- Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift
+- Native/Ambitions/Features/Today/StubTodayService.swift
+- Native/Ambitions/Features/Today/TodayActionClosureSheet.swift
+- Native/Ambitions/Features/Today/TodayActionClosureSheetState.swift
+- Native/Ambitions/Features/Today/TodayBackground.swift
+- Native/Ambitions/Features/Today/TodayCommandActionHandler.swift
+- Native/Ambitions/Features/Today/TodayCommandHandler.swift
+- Native/Ambitions/Features/Today/TodayDayRailCurrentTimeFusion.swift
+- Native/Ambitions/Features/Today/TodayDayRailPanels.swift
+- Native/Ambitions/Features/Today/TodayDayRailSignaturePrimitives.swift
+- Native/Ambitions/Features/Today/TodayExecutionCompatibility.swift
+- Native/Ambitions/Features/Today/TodayExecutionProjector.swift
+- Native/Ambitions/Features/Today/TodayExecutionViewState.swift
+- Native/Ambitions/Features/Today/TodayFeatureModels.swift
+- Native/Ambitions/Features/Today/TodayFeatureService.swift
+- Native/Ambitions/Features/Today/TodayFeatureSnapshot.swift
+- Native/Ambitions/Features/Today/TodayHeroStepSignaturePrimitives.swift
+- Native/Ambitions/Features/Today/TodayMasthead.swift
+- Native/Ambitions/Features/Today/TodayPanels.swift
+- Native/Ambitions/Features/Today/TodayProofReceiptLedgerState.swift
+- Native/Ambitions/Features/Today/TodayReadModelProjector.swift
+- Native/Ambitions/Features/Today/TodayScreen.swift
+
+## Retired Canon Signals
+
+- Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift: possible active Plan top-level residue
+- Native/Ambitions/Domain/HabitsModels.swift: possible active Plan top-level residue
+- Native/Ambitions/Domain/Planning/LivingPlanRecompiler.swift: possible active Plan top-level residue
+- Native/Ambitions/Domain/Planning/PlanningEvaluation.swift: possible active Plan top-level residue
+- Native/Ambitions/Domain/SafeAutomationPolicyModels.swift: possible active Plan top-level residue
+- Native/Ambitions/Domain/SmartAttachmentModels.swift: possible active Plan top-level residue
+- Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift: possible active Plan top-level residue
+- Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift: possible active Plan top-level residue
+- Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift: possible active Plan top-level residue
+- Native/Ambitions/Features/Goals/GoalsFeatureModels.swift: possible active Plan top-level residue
+- Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift: possible active Plan top-level residue
+- Native/Ambitions/Features/Today/TodayScreenContractSnapshot.swift: possible active Plan top-level residue
+- Native/Ambitions/Features/You/YouCrossSurfaceProofReviewProjector.swift: possible active Plan top-level residue
+- Native/Ambitions/Features/You/YouTrustHistoryProjector.swift: possible active Plan top-level residue
+- Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift: possible active Plan top-level residue
+- Native/Ambitions/PreviewSupport/PreviewFixtures.swift: possible active Plan top-level residue
+- Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift: possible active Plan top-level residue
+- Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift: possible active Plan top-level residue
+- Native/Ambitions/Services/AmbitionsCommandExecutor.swift: possible active Plan top-level residue
+- Native/Ambitions/Services/MemoryLensService.swift: possible active Plan top-level residue
+- Native/Ambitions/Services/RealityIntegrationAdapters.swift: possible active Plan top-level residue
+- Native/Ambitions/Services/ReviewsV1Projector.swift: possible active Plan top-level residue
+- Native/Ambitions/Services/SmartAttachmentService.swift: possible active Plan top-level residue
+- Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift: possible active Plan top-level residue
+- Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift: possible active Plan top-level residue
+- Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift: possible active Plan top-level residue
+- Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift: possible active Plan top-level residue
+- Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/AppShellChromeTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/ExternalRoutingTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/ScreenContractRegistryTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Captures/CapturePlacementReviewStateTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Domain/FoundationPerformancePersistenceBudgetTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Domain/LifeGraphModelsTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Domain/SharedLifeCoordinationServiceTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Persistence/ActionReceiptHistoryRepositoryTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Persistence/CaptureServiceTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Persistence/EventLedgerRepositoryTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Persistence/TrustHistoryQueryRepositoryTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/You/YouFeatureServiceTests.swift: possible active Plan top-level residue
+- Native/AmbitionsWidgetExtension/NextStepWidget.swift: possible active Plan top-level residue
+- Sources/Accessibility/AccessibilityNutrition.swift: possible active Plan top-level residue
+- Sources/Components/ShellChromePrimitives.swift: possible active Plan top-level residue
+- Sources/Components/TopLevelSurfaceCompositionPrimitives.swift: possible active Plan top-level residue
+- Sources/Previews/ComponentPreviews.swift: possible active Plan top-level residue
+- Sources/Previews/SI03ShellNavigationPreviews.swift: possible active Plan top-level residue
+- docs/AmbitionsCanon/05_Accessibility_Motion_Performance.md: possible active Plan top-level residue
+- docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md: possible active Plan top-level residue
+- docs/AmbitionsCanon/17_Ambitions_Product_Grammar.md: possible active Plan top-level residue
+- docs/AmbitionsCanon/README.md: possible Hero Step Panel without Start Here binding
+- docs/audits/FLAGSHIP_OBJECT_SYSTEM_INSTALL_REPORT.md: possible active Plan top-level residue
+- docs/audits/START_HERE_REALITY_RECOGNITION_INSTALL_REPORT.md: possible active Plan top-level residue
+- docs/audits/afi02-ia-hierarchy-lock-report.md: possible active Plan top-level residue
+- docs/audits/afi03-flagship-object-silhouettes-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f06-proof-receipt-ledger-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f07-capture-composer-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f08-placement-resolver-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f09-capture-to-goal-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f10-plan-life-suite-foundation-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f11-day-week-shape-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f12-architecture-clarity-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f12-reflow-recovery-decisions-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f16-5-swiftui-architecture-state-contract-hardening-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f17-f30-faang-handoff-completion-train-setup-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f17-repair-and-handoff-train-resume-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f18-feature-flagged-meridian-shell-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f21-5-ui-flake-reliability-hardening-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f25-device-performance-edge-case-qa-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f26-app-store-demo-truth-report.md: possible active Plan top-level residue
+- docs/audits/ambitions-3-0-f28-faang-handoff-repair-report.md: possible active Plan top-level residue
+- docs/audits/aos19-experience-kernel-celestial-cognitive-load-report.md: possible active Plan top-level residue
+- docs/audits/aos20-adaptation-kernel-local-personalization-report.md: possible active Plan top-level residue
+- docs/audits/cqs-source-truth-and-global-order-integration-report.md: possible active Plan top-level residue
+- docs/audits/dav01-dynamic-visual-source-truth-and-surface-map-report.md: possible active Plan top-level residue
+- docs/audits/dav02-reusable-living-visual-primitives-report.md: possible active Plan top-level residue
+- docs/audits/dav10-adaptive-motion-reduce-motion-state-transitions-report.md: possible active Plan top-level residue
+- docs/audits/eb03-universal-capture-composer-routing-blocked-report.md: possible active Plan top-level residue
+- docs/audits/eb30-overloaded-day-low-cognitive-load-flows-report.md: possible active Plan top-level residue
+- docs/audits/eb38-accessibility-evidence-closeout-report.md: possible active Plan top-level residue
+- docs/audits/fcp05-start-here-surface-report.md: possible active Plan top-level residue
+- docs/audits/fcp06-receipt-drawer-trust-layer-report.md: possible active Plan top-level residue
+- docs/audits/fcp07-reality-rail-continuity-report.md: possible active Plan top-level residue
+- docs/audits/fcp09-motion-haptics-reduced-motion-proof-report.md: possible active Plan top-level residue
+- docs/audits/fcp12-proof-spine-evidence-ledger-report.md: possible active Plan top-level residue
+- docs/audits/fcp14-lifeshape-contour-map-report.md: possible active Plan top-level residue
+- docs/audits/fcp15-reflow-decision-fold-report.md: possible active Plan top-level residue
+- docs/audits/fcp16-pressure-field-recovery-loop-report.md: possible active Plan top-level residue
+- docs/audits/fcp25-loading-empty-degraded-state-objectization-report.md: possible active Plan top-level residue
+- docs/audits/fl06-weekly-life-sweep-ritual-report.md: possible active Plan top-level residue
+- docs/audits/flagship-completion-plan-source-truth-report.md: possible active Plan top-level residue
+- docs/audits/fvq-visual-excellence-layer-insertion-report.md: possible active Plan top-level residue
+- docs/audits/fvq02-top-level-surface-visual-sweep-report.md: possible active Plan top-level residue
+- docs/audits/fvq04-recurring-ui-batch-rendered-proof-protocol-report.md: possible active Plan top-level residue
+- docs/audits/fvq05-final-visual-proof-packet-integration-report.md: possible active Plan top-level residue
+- docs/audits/global-batch-train-sequence-optimization-report.md: possible active Plan top-level residue
+- docs/audits/hps-source-truth-and-global-order-integration-report.md: possible active Plan top-level residue
+- docs/audits/hps01-verified-human-progress-os-category-lock-report.md: possible active Plan top-level residue
+- docs/audits/hps02-human-progress-graph-api-architecture-report.md: possible active Plan top-level residue
+- docs/audits/hps03-verified-proof-ledger-proof-portability-architecture-report.md: possible active Plan top-level residue
+- docs/audits/hps04-source-truth-requirement-graph-architecture-report.md: possible active Plan top-level residue
+- docs/audits/hps05-commitment-memory-searchable-life-recall-architecture-report.md: possible active Plan top-level residue
+- docs/audits/hps06-recommendation-quality-start-here-brain-architecture-report.md: possible active Plan top-level residue
+- docs/audits/hps07-option-value-pivot-preservation-architecture-report.md: possible active Plan top-level residue
+- docs/audits/hps08-living-dream-compiler-upgrade-report.md: possible active Plan top-level residue
+- docs/audits/hps09-privacy-memory-permission-local-intelligence-adapter-report.md: possible active Plan top-level residue
+- docs/audits/hps10-ai-governance-evaluation-assurance-lab-report.md: possible active Plan top-level residue
+- docs/audits/hps11-vertical-expansion-revenue-architecture-report.md: possible active Plan top-level residue
+- docs/audits/hps12-singular-experience-acquisition-readiness-lock-report.md: possible active Plan top-level residue
+- docs/audits/ldi14-trust-review-and-dream-handling-receipts-report.md: possible active Plan top-level residue
+- docs/audits/ldi15-batch-closeout-report.md: possible active Plan top-level residue
+- docs/audits/meg01-advanced-rendering-eligibility-report.md: possible active Plan top-level residue
+- docs/audits/mri03-commitment-lifecycle-report.md: possible active Plan top-level residue
+- docs/audits/mri13-local-learning-controls-report.md: possible active Plan top-level residue
+- docs/audits/pd03-today-step-session-depth-report.md: possible active Plan top-level residue
+- docs/audits/pd07-goal-proof-decision-history-depth-report.md: possible active Plan top-level residue
+- docs/audits/pd13-plan-recovery-pressure-review-report.md: possible active Plan top-level residue
+- docs/audits/pfc13-widgetkit-strategy-object-map-report.md: possible active Plan top-level residue
+- docs/audits/pfc20-notifications-calendar-reminders-implementation-proof-report.md: possible active Plan top-level residue
+- docs/audits/pfc21-storekit-monetization-strategy-report.md: possible active Plan top-level residue
+- docs/audits/pfc24-privacy-data-map-app-privacy-labels-report.md: possible active Plan top-level residue
+- docs/audits/pfc27-safety-professional-boundary-crisis-policy-report.md: possible active Plan top-level residue
+- docs/audits/pfc28-security-threat-model-and-secrets-audit-report.md: possible active Plan top-level residue
+- docs/audits/pfc29-logging-analytics-observability-policy-report.md: possible active Plan top-level residue
+- docs/audits/pfc30-performance-budget-instruments-plan-report.md: possible active Plan top-level residue
+- docs/audits/pk07-storage-schema-version-ledger-report.md: possible active Plan top-level residue
+- docs/audits/pk08-migration-plan-scaffold-report.md: possible active Plan top-level residue
+- docs/audits/pk19-batch-closeout-report.md: possible active Plan top-level residue
+- docs/audits/pk22-batch-closeout-report.md: possible active Plan top-level residue
+- docs/audits/platform-framework-compliance-plan-and-order-report.md: possible active Plan top-level residue
+- docs/audits/sa17-batch-closeout-report.md: possible active Plan top-level residue
+- docs/audits/sap01-composable-pack-architecture-lock-report.md: possible active Plan top-level residue
+- docs/audits/si04-daytimeline-rail-2-0-report.md: possible active Plan top-level residue
+- docs/audits/si04-daytimeline-rail-2-0-report.md: possible Hero Step Panel without Start Here binding
+- docs/audits/si05-hero-step-panel-system-report.md: possible active Plan top-level residue
+- docs/audits/si05-hero-step-panel-system-report.md: possible Hero Step Panel without Start Here binding
+- docs/audits/si07-mission-control-lane-components-report.md: possible active Plan top-level residue
+- docs/audits/si08-lifeshape-time-capacity-map-report.md: possible active Plan top-level residue
+- docs/audits/si12-interaction-motion-haptics-system-report.md: possible active Plan top-level residue
+- docs/audits/si13-loading-empty-degraded-state-primitives-report.md: possible active Plan top-level residue
+- docs/audits/si16-preview-fixture-visual-qa-infrastructure-report.md: possible active Plan top-level residue
+- docs/audits/si17-top-level-surface-composition-report.md: possible active Plan top-level residue
+- docs/audits/si18-signature-interface-handoff-readiness-report.md: possible active Plan top-level residue
+- docs/audits/visual-evidence/fvq02/top-level-reduce-motion.md: possible active Plan top-level residue
+- docs/audits/visual-evidence/fvq02/visual-scorecard.md: possible active Plan top-level residue
+- docs/audits/visual-evidence/fvq03/visual-scorecard.md: possible active Plan top-level residue
+- docs/canon/ACCESSIBILITY_FOCUS_SUPPORT.md: possible active Plan top-level residue
+- docs/canon/AmbitionsOS_Continuity_Sync_Archive_And_Merge.md: possible active Plan top-level residue
+- docs/canon/AmbitionsOS_Experience_Kernel.md: possible active Plan top-level residue
+- docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md: possible active Plan top-level residue
+- docs/canon/AmbitionsOS_Living_Dream_System_Map.md: possible active Plan top-level residue
+- docs/canon/AmbitionsOS_Living_Plan_Recompiler.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_Batch_Plan.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_Intelligence_Standards.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_Master_Plan.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_RC_Maturity_Plan.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_Roadmap.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_Systems_Architecture.md: possible active Plan top-level residue
+- docs/canon/Ambitions_2_0_Visual_System.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Accessibility_Conformance_Plan.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Ambitions_Operating_Shell.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Competitive_Positioning_And_Language_Research.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Data_Event_Taxonomy.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Design_System_Primitives.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Evidence_Hierarchy.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_First_60_Seconds_Spec.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md: possible Hero Step Panel without Start Here binding
+- docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md: possible Hero Step Panel without Start Here binding
+- docs/canon/Ambitions_3_0_Information_Architecture_And_Routing_Model.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Microcopy_Pattern_Library.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Placement_Resolver_Spec.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Primitive_Architecture.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Product_Strategy_Brief.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md: possible Hero Step Panel without Start Here binding
+- docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Surface_State_Matrix.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md: possible active Plan top-level residue
+
+## Required Codex Behavior
+
+When canon changes, Codex must update affected specs, prompts, manifests, generated governance outputs, and archive retired canon before feature work continues.

@@ -90,6 +90,7 @@ struct GoalMissionControlLanes: View {
 
                 GoalsHeroPrimaryActionButton(
                     action: overview.heroPrimaryAction,
+                    accessibilityIdentifier: "goals.hero-card",
                     handler: onPrimaryAction
                 )
             }
@@ -245,6 +246,7 @@ private struct GoalsHeroPrimaryActionButton: View {
     @Environment(\.ambitionTheme) private var theme
 
     let action: GoalsBoardPrimaryAction
+    var accessibilityIdentifier = "goals.hero.primary-action"
     let handler: (GoalsBoardPrimaryAction) -> Void
 
     var body: some View {
@@ -269,7 +271,7 @@ private struct GoalsHeroPrimaryActionButton: View {
         }
         .buttonStyle(AmbitionButtonStyle(tier: .hero, state: action.state))
         .accessibilityHint(action.subtitle)
-        .accessibilityIdentifier("goals.hero.primary-action")
+        .accessibilityIdentifier(accessibilityIdentifier)
     }
 }
 

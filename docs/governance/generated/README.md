@@ -21,3 +21,5 @@ Strict reconciliation:
 ```bash
 python3 scripts/governance/ambitions-governance-reconcile.py --write --strict
 ```
+
+Codex OS bridge outputs live under `build/codex-os/` and are refreshed by the repo doctor, canon installer, and sync bridge. Inspect those outputs alongside the generated governance files when debugging autonomy or batch selection.

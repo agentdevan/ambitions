@@ -2,12 +2,24 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+import subprocess
 from pathlib import Path
 
 GENERATED = Path("docs/governance/generated")
 OUT = GENERATED / "governance_trend_report.json"
 HISTORY = GENERATED / "governance_trend_history.json"
+
+
+def git_commit_iso() -> str:
+    proc = subprocess.run(
+        ["git", "show", "-s", "--format=%cI", "HEAD"],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    return proc.stdout.strip() or "unknown"
 
 
 def main() -> int:
@@ -19,7 +31,7 @@ def main() -> int:
     summary = json.loads(summary_path.read_text())
 
     point = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": git_commit_iso(),
         "train_count": summary.get("train_count", 0),
         "needs_reconciliation_count": summary.get("needs_reconciliation_count", 0),
         "stale_overlay_count": summary.get("stale_overlay_count", 0),
@@ -29,7 +41,8 @@ def main() -> int:
     if HISTORY.exists():
         history = json.loads(HISTORY.read_text())
 
-    history.append(point)
+    if not history or history[-1] != point:
+        history.append(point)
 
     HISTORY.write_text(json.dumps(history[-200:], indent=2) + "\n")
     OUT.write_text(json.dumps(point, indent=2) + "\n")

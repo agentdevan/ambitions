@@ -1,0 +1,8 @@
+[
+  {
+    "timestamp": "2026-05-17T13:05:46-04:00",
+    "train_count": 690,
+    "needs_reconciliation_count": 151,
+    "stale_overlay_count": 1370
+  }
+]

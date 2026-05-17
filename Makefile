@@ -1,4 +1,5 @@
 .PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-read-only-audit batch-self-check batch-status runner-access-check prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
+.PHONY: repo-doctor repo-doctor-strict canon-install codex-os-context codex-os-next codex-os-sync codex-os-performance codex-os-repair-route codex-os-batch-select authorized-batch autonomy-loop
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
 .PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
@@ -161,6 +162,44 @@ repair-current:
 	printf 'Running repair/finalization command:\\n'; \
 	printf 'ALLOW_DIRTY=1 ALLOW_MAIN_COMMIT=1 AUTO_BRANCH=0 make batch BATCH=%s PROMPT=%s\\n' "$$target" "$$prompt"; \
 	ALLOW_DIRTY=1 ALLOW_MAIN_COMMIT=1 AUTO_BRANCH=0 make batch BATCH="$$target" PROMPT="$$prompt"
+
+repo-doctor:
+	python3 scripts/governance/ambitions-repo-doctor.py
+
+repo-doctor-strict:
+	python3 scripts/governance/ambitions-repo-doctor.py --strict
+
+canon-install:
+	python3 scripts/governance/ambitions-canon-installer.py
+
+codex-os-context:
+	python3 scripts/codex-os/ambitions-codex-os-context-pack.py
+
+codex-os-next:
+	python3 scripts/codex-os/ambitions-codex-os-next-action.py
+
+codex-os-sync:
+	python3 scripts/codex-os/ambitions-codex-os-sync-governance.py
+
+codex-os-performance:
+	python3 scripts/codex-os/ambitions-codex-os-performance-check.py
+
+codex-os-repair-route:
+	python3 scripts/codex-os/ambitions-codex-os-repair-router.py
+
+codex-os-batch-select:
+	python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
+
+authorized-batch:
+	@test -n "$(BATCH)" || (echo "BATCH is required. Example: make authorized-batch BATCH=FCP27 PROMPT=prompts/batches/FCP27.md" >&2; exit 2)
+	@test -n "$(PROMPT)" || (echo "PROMPT is required. Example: make authorized-batch BATCH=FCP27 PROMPT=prompts/batches/FCP27.md" >&2; exit 2)
+	@bash scripts/ambitions-authorized-batch.sh "$(BATCH)" "$(PROMPT)"
+
+autonomy-loop:
+	@python3 scripts/governance/ambitions-canon-installer.py && \
+	python3 scripts/governance/ambitions-repo-doctor.py && \
+	python3 scripts/codex-os/ambitions-codex-os-sync-governance.py && \
+	python3 scripts/codex-os/ambitions-codex-os-next-action.py
 
 throughput-status:
 	@echo "Throughput status snapshot"

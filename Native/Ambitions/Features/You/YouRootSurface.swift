@@ -78,6 +78,15 @@ struct PersonalSystemCenterRootView: View {
                 items: setupItems
             )
 
+            Button {
+                selectedRowHapticToken = "profile"
+                onOpenDetail(.you)
+            } label: {
+                Label("Profile", systemImage: "person.crop.circle")
+            }
+            .buttonStyle(.bordered)
+            .accessibilityIdentifier("you.row.profile")
+
             PersonalSystemCenterNavigation(sections: groupedNavigationSections) { item in
                 selectedRowHapticToken = item.id
                 onOpenDetail(detail(for: item.id))
@@ -160,7 +169,7 @@ struct PersonalSystemCenterRootView: View {
 
     private func normalizedTitle(for item: YouSystemCenterItem) -> String {
         switch item.id {
-        case "you": "About You"
+        case "you": "Profile"
         case "personalization": "Planning Defaults"
         case "what-ambitions-knows": "Memory"
         case "receipts-history": "Receipts / History"

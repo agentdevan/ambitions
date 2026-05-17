@@ -1,0 +1,107 @@
+# Governance Cleanup Action Plan
+
+## Unresolved Reconciliation Actions
+
+- `AOS01`: reconcile registry state, proof linkage, and implementation ownership
+- `AOS02`: reconcile registry state, proof linkage, and implementation ownership
+- `AOS23`: reconcile registry state, proof linkage, and implementation ownership
+- `AOS24`: reconcile registry state, proof linkage, and implementation ownership
+- `AOS30`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS01`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS02`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS03`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS04`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS05`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS06`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS07`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS08`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS09`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS10`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS11`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS12`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS13`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS14`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS15`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS16`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS17`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS18`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS19`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS20`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS21`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS22`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS23`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS24`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS25`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS26`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS27`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS28`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS29`: reconcile registry state, proof linkage, and implementation ownership
+- `AQOS30`: reconcile registry state, proof linkage, and implementation ownership
+- `BLE01`: reconcile registry state, proof linkage, and implementation ownership
+- `CQS01`: reconcile registry state, proof linkage, and implementation ownership
+- `CQS24`: reconcile registry state, proof linkage, and implementation ownership
+- `CQS25`: reconcile registry state, proof linkage, and implementation ownership
+- `CS02`: reconcile registry state, proof linkage, and implementation ownership
+- `CS02C`: reconcile registry state, proof linkage, and implementation ownership
+- `CS03`: reconcile registry state, proof linkage, and implementation ownership
+- `CS03C`: reconcile registry state, proof linkage, and implementation ownership
+- `CS04`: reconcile registry state, proof linkage, and implementation ownership
+- `CS04C`: reconcile registry state, proof linkage, and implementation ownership
+- `CS05`: reconcile registry state, proof linkage, and implementation ownership
+- `CS05C`: reconcile registry state, proof linkage, and implementation ownership
+- `CS06`: reconcile registry state, proof linkage, and implementation ownership
+- `CS06C`: reconcile registry state, proof linkage, and implementation ownership
+- `CS09`: reconcile registry state, proof linkage, and implementation ownership
+
+## Orphan Prompt Actions
+
+- `AIR01`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR02`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR03`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR04`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR05`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR06`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR07`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR08`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR09`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR10`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR11`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR12`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR13`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR14`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR15`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR16`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR17`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR18`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR19`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR20`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR21`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR22`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR23`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR24`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR25`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR26`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR27`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR28`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR29`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR30`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR31`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR32`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR33`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR34`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR35`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR36`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR37`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR38`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR39`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR40`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR41`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR42`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR43`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR44`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR45`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR46`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR47`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR48`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR49`: determine whether prompt is historical, superseded, or missing lineage
+- `AIR50`: determine whether prompt is historical, superseded, or missing lineage

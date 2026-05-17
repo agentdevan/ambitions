@@ -285,7 +285,7 @@ extension RepositoryBackedTimeService {
             ),
             secondaryDestinations: [
                 TimeSecondaryDestination(
-                    id: "time-habits",
+                    id: "plan-habits",
                     title: "Rituals",
                     detail: habitGoals.isEmpty
                         ? "No repeatable loops are shaping the week yet."
@@ -296,7 +296,7 @@ extension RepositoryBackedTimeService {
                     timeRoute: .habits
                 ),
                 TimeSecondaryDestination(
-                    id: "time-capture",
+                    id: "plan-captures",
                     title: "Capture into the week",
                     detail: openCaptures.isEmpty
                         ? "No open captures are pushing on the week right now."
@@ -307,7 +307,7 @@ extension RepositoryBackedTimeService {
                     timeRoute: .captureInbox
                 ),
                 TimeSecondaryDestination(
-                    id: "time-weekly-review",
+                    id: "plan-weekly-review",
                     title: "Weekly review",
                     detail: "Close the current week by shaping carry-forward, ritual pressure, and unresolved captures without leaving Time.",
                     valueLabel: posture.label,

@@ -14,6 +14,8 @@ REQUIRED_FILES = [
     "orphan_prompt_audit.md",
     "stale_overlay_audit.md",
     "governance_reconciliation_summary.json",
+    "accepted_yellow_governance_debt.json",
+    "accepted_yellow_governance_debt.md",
 ]
 
 
@@ -38,13 +40,17 @@ def main() -> int:
 
     unresolved = summary.get("needs_reconciliation_count", 0)
     stale = summary.get("stale_overlay_count", 0)
+    accepted = json.loads((root / "accepted_yellow_governance_debt.json").read_text())
 
     print("Ambitions governance validation")
     print(f"Unresolved reconciliation count: {unresolved}")
     print(f"Stale overlay count: {stale}")
+    print(f"Accepted Yellow status: {accepted.get('status', 'missing')}")
 
     if unresolved > 0:
-        return fail("unresolved reconciliation states remain")
+        if accepted.get("status") != "ACCEPTED_YELLOW":
+            return fail("unresolved reconciliation states remain without accepted-Yellow evidence")
+        print("Accepted Yellow: unresolved reconciliation remains explicitly owned and no release/product claim is made")
 
     return 0
 

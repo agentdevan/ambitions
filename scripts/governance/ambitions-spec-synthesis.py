@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
-from datetime import datetime, timezone
 
 OUT = Path("docs/governance/generated/mature_spec_synthesis.md")
 ROOTS = [Path("docs/canon"), Path("docs/governance")]
@@ -12,6 +12,18 @@ KEYS = [
     "Reality Meridian", "Constellation Atlas", "Atmosphere Composer", "LifeShape Field",
     "Start Here", "local-first", "on-device"
 ]
+
+
+def git_commit_iso() -> str:
+    proc = subprocess.run(
+        ["git", "show", "-s", "--format=%cI", "HEAD"],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    return proc.stdout.strip() or "unknown"
 
 
 def main() -> int:
@@ -26,7 +38,7 @@ def main() -> int:
                 if key in text:
                     sections[key].append(path.as_posix())
 
-    lines = ["# Mature Spec Synthesis", "", f"Generated: {datetime.now(timezone.utc).isoformat()}", ""]
+    lines = ["# Mature Spec Synthesis", "", f"Generated: {git_commit_iso()}", ""]
 
     for key, refs in sections.items():
         lines += [f"## {key}", ""]

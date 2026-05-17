@@ -5,7 +5,6 @@ import json
 import re
 import subprocess
 from pathlib import Path
-from datetime import datetime, timezone
 
 OUT_DIR = Path("docs/governance/generated")
 OUT_JSON = OUT_DIR / "canon_impact_map.json"
@@ -38,6 +37,11 @@ def changed_canon_files() -> list[str]:
     return [f for f in files if f.startswith(("docs/canon/", "docs/truth/"))]
 
 
+def git_commit_iso() -> str:
+    raw = git(["show", "-s", "--format=%cI", "HEAD"]).strip()
+    return raw or "unknown"
+
+
 def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     changed = changed_canon_files()
@@ -64,7 +68,7 @@ def main() -> int:
             retired_signals.append({"path": path, "signal": "possible Hero Step Panel without Start Here binding"})
 
     data = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": git_commit_iso(),
         "changed_canon_files": changed,
         "key_term_hits": {k: sorted(v) for k, v in corpus_hits.items() if v},
         "likely_affected_files": likely_affected,

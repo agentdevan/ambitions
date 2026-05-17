@@ -194,6 +194,9 @@ struct CaptureScreen: View {
 
     private var emptyCaptureState: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text("What needs a place?")
+                .font(theme.typography.section)
+                .foregroundStyle(theme.colors.textPrimary)
             Label("Ready when something needs a place", systemImage: "tray.and.arrow.down")
                 .font(theme.typography.bodyEmphasized)
                 .foregroundStyle(theme.colors.textPrimary)

@@ -65,7 +65,7 @@ struct DayRailRhythmStrip: View {
     private func detail(for slot: DayRailRowSlot) -> String {
         switch slot {
         case .now:
-            state.heroStep == nil ? "Nothing urgent" : "Start here"
+            state.heroStep == nil ? "Nothing urgent" : "Current focus"
         case .next:
             rows(for: slot).isEmpty ? "No pull forward" : "Ready after now"
         case .later:

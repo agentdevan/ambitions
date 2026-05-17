@@ -3,13 +3,18 @@ import SwiftUI
 
 struct TimeLifeShapeDrillDownPanel: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let drillDown: TimeLifeShapeDrillDownState
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             header
-            itemGrid
+            if dynamicTypeSize.isAccessibilitySize {
+                compactItemSummary
+            } else {
+                itemGrid
+            }
             summaryLabels
         }
         .padding(theme.spacing.sm)
@@ -42,6 +47,17 @@ struct TimeLifeShapeDrillDownPanel: View {
         ) {
             ForEach(drillDown.items) { item in
                 PlanLifeShapeDrillDownItemCard(item: item)
+            }
+        }
+    }
+
+    private var compactItemSummary: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            ForEach(drillDown.items) { item in
+                Text("\(item.title): \(item.value). \(item.detail)")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }

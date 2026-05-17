@@ -1,0 +1,3452 @@
+{
+  "AFI01": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI02": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "AFI03": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "AFI04": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "AFI05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI14": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AFI15": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "AFI16": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "AIR01": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR02": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR03": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR04": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR05": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR06": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR07": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR08": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR09": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR10": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR11": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR12": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR13": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR14": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR15": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR16": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR17": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR18": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR19": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR20": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR21": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR22": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR23": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR24": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR25": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR26": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR27": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR28": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR29": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR30": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR31": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR32": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR33": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR34": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR35": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR36": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR37": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR38": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR39": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR40": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR41": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR42": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR43": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR44": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR45": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR46": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR47": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR48": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR49": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AIR50": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "AOS01": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AOS02": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AOS03": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS14": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS15": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS16": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS17": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS18": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS19": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS20": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS21": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS22": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS23": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AOS24": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AOS25": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS26": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "AOS27": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "AOS28": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "AOS29": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "AOS30": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS01": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS02": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS03": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS04": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS05": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS06": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS07": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS08": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS09": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS10": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS11": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS12": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS13": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS14": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS15": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS16": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS17": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS18": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS19": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS20": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS21": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS22": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS23": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS24": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS25": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS26": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS27": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS28": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS29": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "AQOS30": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "BLE01": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CQS01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "CQS02": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS03": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS04": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS05": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS06": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS07": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS08": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS09": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS10": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS11": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS12": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS13": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS14": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS15": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS16": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS17": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS18": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS19": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS20": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS21": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS22": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS23": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CQS24": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "CQS25": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "CS01": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS02": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS02A": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS02B": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS02C": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS03": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS03A": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS03B": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS03C": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS04": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS04A": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS04B": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS04C": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS05": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS05A": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS05B": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS05C": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS06": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS06A": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS06B": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS06C": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS07": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS08": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "CS09": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS09A": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "CS09B": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "CS09C": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CS10": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "CSCS02C": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CSCS03C": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CSCS04C": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CSCS05C": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CSCS06C": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "CSCS09C": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "DAV00": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "DAV01": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "DAV02": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "DAV03": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "DAV04": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "DAV05": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "DAV06": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "DAV07": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "DAV08": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "DAV09": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "DAV10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "DAV11": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "DAV12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "DAV13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "DAV14": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "DAV15": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "DPTG00": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "DPTG01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EB00": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EB01": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EB02": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "EB03": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EB03A": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB03B": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB03C": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EB04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB07": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "EB08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB14": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB15": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB16": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB17": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB18": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB19": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "EB20": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB21": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB22": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB23": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB24": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "EB25": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "EB26": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB27": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB28": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB29": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB30": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB31": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "EB32": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "EB33": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB34": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB35": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EB36": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB37": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB38": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB39": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "EB40": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC00": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "EFC01": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC02": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC03": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC04": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC05": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC06": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC07": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC08": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC09": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC10": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC11": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC12": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC13": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC14": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC15": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC16": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC17": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "EFC18": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC19": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC20": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC21": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC22": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC23": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC24": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC25": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC26": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC27": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC28": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC29": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "EFC30": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "FCP01": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "FCP02": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FCP03": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FCP04": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FCP05": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "FCP06": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "FCP07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP13": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "FCP13A": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP13B": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP14": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP15": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP16": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP17": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP18": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP19": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP20": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP21": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP22": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP23": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP24": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP25": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP26": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP27": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP28": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP29": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FCP30": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "FET00": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "FET01": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FET02": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET03": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET04": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET05": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET06": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET07": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET08": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET09": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET10": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET11": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FET12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FINAL01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "FIO01": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "FL01": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FL02": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FL03": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "FL04": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FL05": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FL06": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FVQ01": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FVQ02": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "FVQ03": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FVQ04": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FVQ05": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "FVQ06": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "GH01": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "GH02": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "GH03": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "GH04": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "GH05": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "GQ01": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "HBI00": {
+    "confidence": "MEDIUM",
+    "score": 45,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "HBI01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "HBI02": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "HBI03": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "HBI04": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "HPS01": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "HPS02": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "HPS03": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS04": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS05": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS06": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS07": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS08": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS09": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS10": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS11": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "HPS12": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "IR01": {
+    "confidence": "MEDIUM",
+    "score": 45,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "IRQ01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "LDI01": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "LDI02": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI03": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI07": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "LDI08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI14": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "LDI15": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "LDI16": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "LDI17": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "LDI18": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "LDI19": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "LDI20": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "LDI21": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "LDI22": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "MCP01": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MCP02": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "MCP03": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "MCP04": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "MCP05": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "MCP06": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "MCP07": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "MD12": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "MD13": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "MD32": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "ME01": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "ME02": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "ME03": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "ME04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "ME05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "ME06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "ME07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "ME08": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "ME09": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "ME10": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "ME11": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "COMPLETION_CLAIM_UNPROVEN"
+  },
+  "ME12": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "MEG01": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "MGP01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "MRI00": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI01": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI02": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI03": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI04": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI05": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI06": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI07": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI08": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI09": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI10": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI11": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI12": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI13": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI14": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI15": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI16": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI17": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI18": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI19": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI20": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI21": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI22": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI23": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI24": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI25": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI26": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI27": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI28": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI29": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI30": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI31": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI32": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI33": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI34": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI35": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI36": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI37": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI38": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI39": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI40": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI41": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI42": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI43": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI44": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI45": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI46": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI47": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI48": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI49": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "MRI50": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "OBS00": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "OBS01": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "OBS02": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "OBS03": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "OBS04": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "OBS05": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "OBS06": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "PD01": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PD02": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD03": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD14": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PD15": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PD16": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PD17": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PD18": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PFC01": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PFC02": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC03": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC04": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PFC05A": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "PFC06": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC07": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC08": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC09": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC10": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC11": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC12": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC13": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC14": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PFC15": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC16": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PFC17": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC18": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PFC19": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC20": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PFC21": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC22": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC23": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC24": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC25": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC26": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC27": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC28": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC29": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC30": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "PFC31": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PFC32": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "PFC33": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "PFC34": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "PFC35": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "PFC36": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "PFC37": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "PFC38": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "PFC39": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PFC40": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK00": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK01": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK02": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK03": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK14": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK15": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK16": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK17": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK18": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK19": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK20": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK21": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK22": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK23": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK24": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK25": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK26": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK27": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK28": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PK29": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK30": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK31": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK32": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK33": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK34": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK35": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK36": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK37": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK38": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK39": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK40": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PK41": {
+    "confidence": "LOW",
+    "score": 90,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PLR02": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "PPL01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "PRI01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "PX01": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX02": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX03": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX14": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX15": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX16": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX17": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX18": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX19": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "PX20": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "RC01": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RC02": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "REC01": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "REC02": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "REC03": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "REC04": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "REC05": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "REC06": {
+    "confidence": "LOW",
+    "score": 65,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RELEASE01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RFM01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RFM02": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RFM03": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RFM04": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RFM05": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RFM06": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "RHC01": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "RHC02": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "RHC03": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "RHC04": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "RHC05": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "RHC06": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "RHE01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "RRE01": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SA01": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SA02": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SA03": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SA04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA05": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SA06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA08": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA09": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA10": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA10A": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA10B": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA10C": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA11": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA12": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA13": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA14": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA15": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA16": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA17": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA18": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA19": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA20": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA21": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA22": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA23": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA24": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA25": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA26": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA27": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA28": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SA29": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA30": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA31": {
+    "confidence": "MEDIUM",
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "SA32": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SAP01": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SAP02": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SAP03": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SAP04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SAP05": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SHA256": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  },
+  "SI01": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI02": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI03": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI04": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI05": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI06": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI07": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI08": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI09": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI10": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI11": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI12": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI13": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI14": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI15": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI16": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI17": {
+    "confidence": "HIGH",
+    "score": 90,
+    "state": "COMPLETE_PROOF_LINKED"
+  },
+  "SI18": {
+    "confidence": "MEDIUM",
+    "score": 65,
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
+  },
+  "SIG01": {
+    "confidence": "MEDIUM",
+    "score": 20,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "SIG02": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG03": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG04": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG05": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG06": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG07": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG08": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG09": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG10": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG11": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG12": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG13": {
+    "confidence": "LOW",
+    "score": 20,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG14": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG15": {
+    "confidence": "LOW",
+    "score": 40,
+    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+  },
+  "SIG16": {
+    "confidence": "MEDIUM",
+    "score": 20,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "UTF08": {
+    "confidence": "LOW",
+    "score": 0,
+    "state": "NEEDS_RECONCILIATION"
+  }
+}

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from datetime import datetime, timezone
+import subprocess
 
 OUT = Path("docs/governance/generated/global_train_resequence.json")
 
@@ -18,9 +18,21 @@ LANES = [
 ]
 
 
+def git_commit_iso() -> str:
+    proc = subprocess.run(
+        ["git", "show", "-s", "--format=%cI", "HEAD"],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    return proc.stdout.strip() or "unknown"
+
+
 def main() -> int:
     data = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": git_commit_iso(),
         "lanes": LANES,
         "rules": [
             "governance_red_before_feature_work",

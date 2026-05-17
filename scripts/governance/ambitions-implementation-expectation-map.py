@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from datetime import datetime, timezone
+import subprocess
 
 OUT = Path("docs/governance/generated/implementation_expectation_map.json")
 ROOTS = [Path("docs/canon"), Path("docs/governance")]
@@ -12,6 +12,18 @@ KEYS = [
     "Reality Meridian", "Constellation Atlas", "Atmosphere Composer", "LifeShape Field",
     "Start Here"
 ]
+
+
+def git_commit_iso() -> str:
+    proc = subprocess.run(
+        ["git", "show", "-s", "--format=%cI", "HEAD"],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    return proc.stdout.strip() or "unknown"
 
 
 def main() -> int:
@@ -28,7 +40,7 @@ def main() -> int:
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": git_commit_iso(),
         "expectations": expectations
     }, indent=2, sort_keys=True) + "\n")
     print(f"wrote {OUT}")

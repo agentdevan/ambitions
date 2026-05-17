@@ -1,0 +1,19 @@
+{
+  "blockers": [],
+  "classification": "unknown",
+  "generated_at": "2026-05-17T13:05:46-04:00",
+  "lane": "flagship",
+  "next_action_command": "",
+  "postflight_commands": [
+    "python3 scripts/governance/ambitions-repo-doctor.py",
+    "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
+  ],
+  "preflight_commands": [
+    "python3 scripts/governance/ambitions-repo-doctor.py",
+    "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
+  ],
+  "prompt_file": "",
+  "reason": "Selected the safest live batch from current state: FCP27 App-Wide Flagship Audit And Remediation.",
+  "run_command": "",
+  "selected_batch": "FCP27 App-Wide Flagship Audit And Remediation"
+}

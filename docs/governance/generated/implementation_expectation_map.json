@@ -1,0 +1,1217 @@
+{
+  "expectations": {
+    "docs/canon/ACCESSIBILITY_FOCUS_SUPPORT.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/AMBITION_CANON_COMPLETION_REPORT.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/AmbitionsOS_Commitment_Time_Kernel.md": [
+      "Time"
+    ],
+    "docs/canon/AmbitionsOS_Continuity_Sync_Archive_And_Merge.md": [
+      "Capture"
+    ],
+    "docs/canon/AmbitionsOS_Dream_Handling_Lanes_And_Ladder.md": [
+      "Capture",
+      "Time"
+    ],
+    "docs/canon/AmbitionsOS_Experience_Kernel.md": [
+      "Today",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/AmbitionsOS_Goal_Path_Kernel.md": [
+      "Time"
+    ],
+    "docs/canon/AmbitionsOS_Index.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/AmbitionsOS_Life_Graph_Kernel.md": [
+      "Time"
+    ],
+    "docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/AmbitionsOS_Living_Dream_System_Map.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/AmbitionsOS_Local_Language_Kernel.md": [
+      "Capture"
+    ],
+    "docs/canon/AmbitionsOS_Performance_Energy_Kernel.md": [
+      "Today"
+    ],
+    "docs/canon/AmbitionsOS_Reality_Drift_Kernel.md": [
+      "Today",
+      "Time"
+    ],
+    "docs/canon/AmbitionsOS_Recommendation_Kernel.md": [
+      "Start Here"
+    ],
+    "docs/canon/AmbitionsOS_Runtime_Contract.md": [
+      "Start Here"
+    ],
+    "docs/canon/AmbitionsOS_Strategy_SWOT_And_Risk_Register.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/AmbitionsOS_Surface_Encapsulation_And_Signature_Language.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Reality Meridian",
+      "LifeShape Field",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_10_10_Flagship_Completion_Plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Atmosphere Composer",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_2_0_Accessibility_Nutrition.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Batch_Plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Capability_Matrix.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Decision_Log.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md": [
+      "Today"
+    ],
+    "docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Intelligence_Standards.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Master_Plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Object_Terminology.md": [
+      "Today",
+      "Goals",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Product_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_RC_Maturity_Plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Roadmap.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Systems_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_2_0_Visual_System.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md": [
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Accessibility_Conformance_Plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md": [
+      "Today",
+      "Goals",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Ambitions_Operating_Shell.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Build_Failure_Triage_Protocol.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_Codex_Value_Maximization_System.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_Competitive_Positioning_And_Language_Research.md": [
+      "Today",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md": [
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Data_Event_Taxonomy.md": [
+      "Today",
+      "Goals",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_3_0_Design_System_Primitives.md": [
+      "Today",
+      "Goals",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Documentation_System_Index.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_First_60_Seconds_Spec.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Flake_Management_Protocol.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_3_0_Information_Architecture_And_Routing_Model.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Microcopy_Pattern_Library.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md": [
+      "Today",
+      "Goals",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Placement_Resolver_Spec.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md": [
+      "Today",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Primitive_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_3_0_Privacy_Threat_Model.md": [
+      "Today"
+    ],
+    "docs/canon/Ambitions_3_0_Product_Language_System.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Product_Strategy_Brief.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md": [
+      "Today"
+    ],
+    "docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md": [
+      "Goals"
+    ],
+    "docs/canon/Ambitions_3_0_Recommendation_Contract.md": [
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md": [
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md": [
+      "Today",
+      "Goals",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md": [
+      "Today",
+      "Capture",
+      "Time"
+    ],
+    "docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_Surface_State_Matrix.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md": [
+      "Today"
+    ],
+    "docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_Test_Ownership_Matrix.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_Top_Level_Surface_Density_Constitution.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_3_0_UI_Invention_Evaluation_Framework.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_3_0_UX_Research_Plan.md": [
+      "Today",
+      "Capture",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_Execution_Program.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_External_Brain_Cross_Kernel_Primitives_And_Dependencies.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_4_0_External_Brain_Foundation_Index.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_External_Brain_Maintenance_Complexity_Value_Matrix.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_External_Brain_Privacy_Threat_Model.md": [
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_Life_Memory_Graph_Kernel.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_Matched_Geometry_Transition_Map.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_Product_Maturity_And_Onboarding_Kernel.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_Reduce_Motion_Transformation_Equivalents.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_4_0_State_Transformation_Motion_Primitives.md": [
+      "Today",
+      "Goals",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_4_0_Transformative_Motion_System.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_4_0_Trust_Privacy_And_User_Control_Kernel.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_4_0_Universal_Capture_Kernel.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md": [
+      "Today",
+      "Goals",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_App_Intents_Shortcuts_Spotlight_Strategy.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Beyond_3_0_Compatibility_Seam_Retirement_Plan.md": [
+      "Today",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Beyond_3_0_Continuity_Rules.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Beyond_3_0_Maintainability_Extraction_Plan.md": [
+      "Today",
+      "Goals",
+      "You"
+    ],
+    "docs/canon/Ambitions_Beyond_3_0_Roadmap.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_CloudKit_Schema_Zone_Conflict_Model.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Codex_Batch_Plan.md": [
+      "You"
+    ],
+    "docs/canon/Ambitions_Codex_Quality_System.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Commitment_Memory_Searchable_Life_Recall_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Found_Life_Layer.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_Full_Frontend_Transformation_Program.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time"
+    ],
+    "docs/canon/Ambitions_Human_Progress_Graph_API_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_Human_Progress_Systems_Upgrade.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_Intelligence_Runtime.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_Launch_Master_Checklist.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_Live_Activities_ActivityKit_Strategy.md": [
+      "Today"
+    ],
+    "docs/canon/Ambitions_Living_Dream_Compiler_Upgrade_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Logging_Analytics_Observability_Policy.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_Notifications_Focus_Calendar_Reminders_Strategy.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_OS_Master_Roadmap.md": [
+      "Goals"
+    ],
+    "docs/canon/Ambitions_Option_Value_Pivot_Preservation_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Performance_Budget_And_Benchmark_Readiness.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_Privacy_Data_Map_And_App_Privacy_Labels.md": [
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Privacy_Manifest_Required_Reason_API_Audit.md": [
+      "Time"
+    ],
+    "docs/canon/Ambitions_Privacy_Memory_Permission_Local_Intelligence_Adapter_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md": [
+      "Today",
+      "Goals"
+    ],
+    "docs/canon/Ambitions_Product_Depth_Canon_Inventory_And_Ownership_Map.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Atmosphere Composer"
+    ],
+    "docs/canon/Ambitions_Product_Depth_Plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_Product_Experience_OS_Index.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_Recommendation_Quality_Start_Here_Brain_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_Safety_Professional_Boundary_Crisis_Policy.md": [
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Security_Threat_Model_And_Secrets_Audit.md": [
+      "You"
+    ],
+    "docs/canon/Ambitions_Signature_Interface_System.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Atmosphere Composer"
+    ],
+    "docs/canon/Ambitions_Singular_Experience_Acquisition_Readiness_Lock.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_Source_Atlas.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_Source_Truth_Requirement_Graph_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/Ambitions_State_Continuity_Mesh.md": [
+      "Today",
+      "Goals",
+      "Capture"
+    ],
+    "docs/canon/Ambitions_StoreKit_Monetization_Strategy.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Terms_Privacy_Policy_Legal_Review_Packet.md": [
+      "Capture"
+    ],
+    "docs/canon/Ambitions_Verified_Proof_Ledger_Portability_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Vertical_Expansion_Revenue_Architecture.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Ambitions_Visual_QA_Red_Team_Audit.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/Ambitions_WidgetKit_Strategy_And_Object_Map.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/canon/CANON_CONSOLIDATION_GAP_AUDIT.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/CAPTURE_SMART_ATTACHMENT.md": [
+      "Today",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/DATA_LOCAL_SYNC_EXPORT.md": [
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/DOCS_RECONCILIATION_REVIEW.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/DOMAIN_MODEL.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/Documentation_Cleanup_Audit.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/EMPTY_ERROR_RECOVERY_STATES.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/GOALS_GOAL_DETAIL.md": [
+      "Today",
+      "Goals",
+      "Capture"
+    ],
+    "docs/canon/GOAL_PLAN_TASK_LIFECYCLE.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/GOLDEN_LAUNCH_LOOP.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/HUMAN_LANGUAGE_REVIEW.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/IA_NAVIGATION_DRILLDOWN.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/IMPLEMENTATION_ACCEPTANCE_GATES.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/MONETIZATION_PRICING_BUSINESS_MODEL.md": [
+      "You"
+    ],
+    "docs/canon/ONBOARDING_SPEC.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PLAN_CALENDAR_BELIEVABILITY.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/POST_D26_MATURITY_ROADMAP.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PRODUCT_DECISIONS.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Accessibility_Cognitive_Load_And_Emotional_Safety.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Action_Closure_Recovery_Canon.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Capture_Experience_Canon.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Copy_Language_And_Explanation_System.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/PXOS_Cross_Surface_Continuity_System.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Empty_Edge_And_Degraded_States.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Goals_Mission_Control_Canon.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Onboarding_Setup_And_Personalization.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Plan_Life_Shape_Canon.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Product_Depth_And_Drilldown_Rules.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Product_Promise_And_Experience_Principles.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Release_Safe_Product_Messaging.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Surface_Hierarchy_And_Navigation.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Today_Experience_Canon.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Trust_Proof_Receipts_Canon.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_User_Facing_AI_Trust_And_Recommendation_Expression.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_Visual_Interaction_System.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/PXOS_You_Personal_System_Center_Canon.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/ROADMAP_BATCH_CLASSIFICATION.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/ROADMAP_BATCH_GOVERNANCE.md": [
+      "Today"
+    ],
+    "docs/canon/SOURCE_OF_TRUTH_MAP.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Reality Meridian",
+      "Constellation Atlas",
+      "Atmosphere Composer",
+      "LifeShape Field"
+    ],
+    "docs/canon/TODAY_NOW_STATE.md": [
+      "Today",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/TRUST_PRIVACY_MEMORY.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/YOU_PROFILE_REVIEWS.md": [
+      "Goals",
+      "You"
+    ],
+    "docs/canon/design/Ambitions_Design_Constitution.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/design/README.md": [
+      "Today",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/design/accessibility-nutrition-screen-matrix.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/design/component-contract-matrix.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/design/external-surfaces-contract.md": [
+      "Capture"
+    ],
+    "docs/canon/design/grouped-navigation-list-spec.md": [
+      "Today",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/design/panel-density-size-spec.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ],
+    "docs/canon/design/screen-contract-matrix.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/canon/design/smart-attachment-spec.md": [
+      "Today",
+      "Capture"
+    ],
+    "docs/canon/design/ux-writing-state-language-matrix.md": [
+      "Today",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/governance/ACTIVE_EXECUTION_GRAPH.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md": [
+      "Goals",
+      "Time",
+      "Constellation Atlas",
+      "Start Here"
+    ],
+    "docs/governance/IMPLEMENTATION_OWNER_MATRIX.md": [
+      "Start Here"
+    ],
+    "docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md": [
+      "Goals",
+      "Time",
+      "Constellation Atlas",
+      "Start Here"
+    ],
+    "docs/governance/generated/authority_diff_report.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "docs/governance/generated/canon_impact_plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Start Here"
+    ],
+    "docs/governance/generated/canon_propagation_plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Constellation Atlas",
+      "Start Here"
+    ],
+    "docs/governance/generated/mature_spec_synthesis.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Reality Meridian",
+      "Constellation Atlas",
+      "Atmosphere Composer",
+      "LifeShape Field",
+      "Start Here"
+    ],
+    "docs/governance/generated/prompt_rewrite_plan.md": [
+      "Time",
+      "Start Here"
+    ],
+    "docs/governance/generated/stale_overlay_audit.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You",
+      "Reality Meridian",
+      "Constellation Atlas",
+      "Start Here"
+    ],
+    "docs/governance/generated/supersession_rewrite_plan.md": [
+      "Today",
+      "Goals",
+      "Capture",
+      "You"
+    ]
+  },
+  "generated_at": "2026-05-17T13:05:46-04:00"
+}

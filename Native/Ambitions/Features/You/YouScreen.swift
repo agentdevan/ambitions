@@ -1751,7 +1751,7 @@ private struct YouAppearanceStudioCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     SectionHeader(
-                        title: "Object previews",
+                        title: "Live preview",
                         subtitle: "See the selected appearance against real Ambitions surfaces before you commit it."
                     )
 
@@ -2087,7 +2087,7 @@ private struct YouTrustCenterCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("you.trust-center-card")
+        .accessibilityIdentifier("profile.trust-center-card")
     }
 
     private var trustReceiptStackItems: [TrustReceiptStackItem] {

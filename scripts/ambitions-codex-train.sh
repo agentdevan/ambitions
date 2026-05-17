@@ -683,6 +683,9 @@ Changed files: ${files:-none}
 Validation summary: see $RUN_DIR/final/*.final.md and $RUN_DIR/final-summary.md
 Rollback command: $ROLLBACK_COMMAND
 Pushed: $([[ "$PUSHED" == "1" ]] && printf 'yes' || printf 'no')
+
+Governance closeout:
+- The authorized batch wrapper is responsible for repo doctor and Codex OS sync around batch execution.
 EOF
 }
 

@@ -22,7 +22,7 @@ struct TimeScreen: View {
                 .ignoresSafeArea()
 
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
                     switch viewModel.state {
                     case .loading:
                         DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.lifeShapeContourMap))
@@ -46,10 +46,6 @@ struct TimeScreen: View {
                         TimeCapacityEnvelopeCard(envelope: dashboard.capacityEnvelope)
 
                         TimePressureRecoveryReviewCard(review: dashboard.pressureRecoveryReview)
-
-                        TimeLifeSuiteCard(suite: dashboard.lifeSuite)
-
-                        TimeGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
 
                         TimeTimelineStripCard(strip: dashboard.timelineStrip, onOpenGoal: openGoal)
 
@@ -119,6 +115,19 @@ struct TimeScreen: View {
                             }
                         )
 
+                        TimeExecutionResilienceCard(
+                            resilience: dashboard.resilience,
+                            onOpenGoal: openGoal,
+                            onOpenTimeRoute: openTimeRoute
+                        )
+
+                        TimeShapingActionsCard(
+                            actions: dashboard.shapingActions,
+                            selectedKind: $selectedActionKind,
+                            selectedDay: selectedDay(in: dashboard),
+                            onActivate: handleShapingAction
+                        )
+
                         // Recovery composite — renders nothing when recovery is not active
                         TimeRecoveryCompositeSection(
                             recoveryEntry: dashboard.recoveryEntry,
@@ -133,18 +142,9 @@ struct TimeScreen: View {
                             onActivateReflowDecision: handleReflowDecision
                         )
 
-                        TimeExecutionResilienceCard(
-                            resilience: dashboard.resilience,
-                            onOpenGoal: openGoal,
-                            onOpenTimeRoute: openTimeRoute
-                        )
+                        TimeLifeSuiteCard(suite: dashboard.lifeSuite)
 
-                        TimeShapingActionsCard(
-                            actions: dashboard.shapingActions,
-                            selectedKind: $selectedActionKind,
-                            selectedDay: selectedDay(in: dashboard),
-                            onActivate: handleShapingAction
-                        )
+                        TimeGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)
@@ -162,7 +162,7 @@ struct TimeScreen: View {
                     } label: {
                         Label("Rituals", systemImage: AppTab.habits.systemImage)
                     }
-                    .accessibilityIdentifier("time.open-habits-button")
+                    .accessibilityIdentifier("plan.open-plan-habits-button")
                 }
             }
         }
@@ -356,6 +356,7 @@ private struct TimeCalendarAwarenessCard: View {
                         TagPill(state.sourceLabel, icon: state.status == .calendarAware ? "calendar" : "iphone", state: .default)
                         TagPill("Time action", icon: "hand.tap", state: .default)
                     }
+                    .accessibilityIdentifier("time.calendar-awareness")
 
                     Button {
                         onPrimaryAction(state)
@@ -371,7 +372,7 @@ private struct TimeCalendarAwarenessCard: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(state.title). \(state.detail)")
-        .accessibilityIdentifier("time.calendar-awareness")
+        .accessibilityIdentifier("plan.calendar-awareness")
     }
 
     private var semanticState: AmbitionSemanticState {
@@ -583,7 +584,7 @@ private struct TimeCalendarBoundaryContractCard: View {
             }
         }
         .ambitionPanelAccessibility()
-        .accessibilityIdentifier("time.calendar-boundary")
+        .accessibilityIdentifier("plan.calendar-boundary")
     }
 }
 
@@ -1921,11 +1922,21 @@ private struct TimeSecondaryDestinationsCard: View {
                             )
                         }
                         .buttonStyle(.plain)
-                        .accessibilityIdentifier("plan.open-\(destination.id)-button")
+                        .accessibilityIdentifier(accessibilityIdentifier(for: destination))
                     }
                 }
             }
         }
+    }
+
+    private func accessibilityIdentifier(for destination: TimeSecondaryDestination) -> String {
+        if destination.timeRoute == .habits {
+            return "plan.open-plan-habits-button"
+        }
+        if destination.timeRoute == .weeklyReview {
+            return "plan.open-plan-weekly-review-button"
+        }
+        return "plan.open-\(destination.id)-button"
     }
 }
 
