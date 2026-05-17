@@ -32,9 +32,11 @@ For frontend/UI/design implementation work:
 - Encyclopedia to frontend OS: `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
 - Master: `AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
 - Chrome enrichment doctrine: `CHROME_ENRICHMENT_DOCTRINE.md`
+- Start Here reality recognition doctrine: `START_HERE_REALITY_RECOGNITION_DOCTRINE.md`
 - Chrome primitive contract: `CHROME_PRIMITIVES.md`
 - Chrome install ledger: `trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md`
 - Today flagship visual lock: `recipes/today/today_reality_meridian_flagship_surface.md`
+- Today Start Here recipe: `recipes/today/today_start_here_region.md`
 - Audit: `VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md`
 - Perfection plan: `VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md`
 - Final proof authority: `trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md`, `trace/VISUAL_100_RED_YELLOW_FLAG_LEDGER.md`, `trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.md`, `trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml`, `trace/VISUAL_100_SOURCE_DEBT_LEDGER.md`, `trace/VISUAL_100_SOURCE_LINK_DISTRIBUTION.md`
@@ -57,11 +59,27 @@ For frontend/UI/design implementation work:
 
 ## Chrome Enrichment Lock
 
-For chrome or app-shell review, inspect `CHROME_ENRICHMENT_DOCTRINE.md` and `CHROME_PRIMITIVES.md` before lower-level recipes. These files lock the cross-surface shell standard: persistent reality context, one privileged action, inspectable local proof, contextual overlays, bottom-reachable primary controls, compact contextual top chrome, and one dominant object per top-level destination. This lock is design canon only and does not prove implementation, screenshots, accessibility conformance, or release readiness.
+For chrome or app-shell review, inspect `CHROME_ENRICHMENT_DOCTRINE.md`, `START_HERE_REALITY_RECOGNITION_DOCTRINE.md`, and `CHROME_PRIMITIVES.md` before lower-level recipes. These files lock the cross-surface shell standard: persistent reality context, one privileged action, inspectable local proof, contextual overlays, bottom-reachable primary controls, compact contextual top chrome, one dominant object per top-level destination, and state-accurate Start Here labeling. This lock is design canon only and does not prove implementation, screenshots, accessibility conformance, or release readiness.
+
+## Start Here Reality Recognition Lock
+
+For Today Start Here review or implementation planning, inspect `START_HERE_REALITY_RECOGNITION_DOCTRINE.md` before any recipe that calls the Start Here region a generic recommendation surface.
+
+Locked rule:
+
+- `Recommended step` is only valid when Ambitions selects from unscheduled possible work.
+- `Active step` is required when a scheduled step is currently inside its scheduled time window.
+- `In progress` is reserved for a user-started step/session.
+- `Up next` is used for an upcoming scheduled item.
+- `best next step`, `next best move`, `optimal move`, and shame-based `overdue/failed/behind` language are forbidden.
+- Receipt source must match authority: scheduled-current work uses `Scheduled step`, not `Local recommendation`.
+- The Reality Meridian must visually prove the Start Here state through exact-time current marker, scheduled block position, and attachment to the Start Here Aperture.
+
+This lock is design canon only. It does not prove SwiftUI resolver implementation, preview parity, accessibility conformance, or release readiness.
 
 ## Today Flagship Visual Lock
 
-For Today visual review or implementation planning, start with `recipes/today/today_reality_meridian_flagship_surface.md` before lower-level Today recipes. It owns the default Today viewport composition when older Today recipe language conflicts with the new North Star direction.
+For Today visual review or implementation planning, start with `recipes/today/today_reality_meridian_flagship_surface.md`, then `START_HERE_REALITY_RECOGNITION_DOCTRINE.md`, before lower-level Today recipes. The flagship file owns the default Today viewport composition when older Today recipe language conflicts with the new North Star direction; the reality-recognition doctrine owns Start Here state labels and scheduled-vs-recommended copy.
 
 The locked Today viewport is:
 
@@ -70,7 +88,8 @@ The locked Today viewport is:
 - scheduled step node and live current-time cursor as separate visual objects
 - exact current-time label aligned to the live cursor
 - Start Here integrated into the temporal field
-- one-handable `Start now →` CTA on the right half at or below vertical center
+- Start Here state label derived from resolver truth, not generic recommendation copy
+- one-handable `Start now →` CTA on the right half at or below vertical center when the current state supports execution
 - compact `Local · Ambitions` top-right chrome
 - sparse proof/recovery via one compact receipt surface
 - bottom IA exactly `Today / Goals / Capture / Time / You`
@@ -100,9 +119,11 @@ This lock is design canon only. It does not prove SwiftUI implementation, simula
 - `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json`
 - `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md`
 - `frontend/visual-encyclopedia/CHROME_ENRICHMENT_DOCTRINE.md`
+- `frontend/visual-encyclopedia/START_HERE_REALITY_RECOGNITION_DOCTRINE.md`
 - `frontend/visual-encyclopedia/CHROME_PRIMITIVES.md`
 - `frontend/visual-encyclopedia/trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md`
 - `frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md`
+- `frontend/visual-encyclopedia/recipes/today/today_start_here_region.md`
 - `Native/Ambitions/App/AppTab.swift`
 - `Native/Ambitions/App/AmbitionsRootView.swift`
 - `Native/Ambitions/Features/Today/*`
