@@ -45,7 +45,10 @@ def main() -> int:
         orphan_count = max(0, sum(1 for line in orphan_report.read_text(encoding="utf-8", errors="replace").splitlines() if line.startswith("| ")) - 2)
     arch = architecture_debt_snapshot()
     repo_doctor = repo_doctor_summary_snapshot()
-    next_action = load_json_from_generated("next-action.json", {})
+    next_action_path = BUILD_ROOT / "next-action.json"
+    next_action = {}
+    if next_action_path.exists():
+        next_action = json.loads(next_action_path.read_text(encoding="utf-8"))
 
     data = {
         "generated_at": git_head_commit_iso(),

@@ -1,11 +1,11 @@
 # Codex OS Sync Report
 
-Generated: 2026-05-17T13:05:46-04:00
+Generated: 2026-05-17T19:24:47-04:00
 
 - Repo doctor status: YELLOW
 - Repo doctor missing: False
-- Next action decision: missing
-- Selected batch: none
+- Next action decision: repair_governance
+- Selected batch: FCP27 App-Wide Flagship Audit And Remediation
 - Performance missing outputs: 0
 - Freshness missing outputs: 0
 
@@ -20,8 +20,8 @@ Generated: 2026-05-17T13:05:46-04:00
 
 ## Next Action
 
-No next action recorded.
+Repo doctor or governance reconciliation still reports unresolved work.
 
 ```bash
-
+python3 scripts/codex-os/ambitions-codex-os-repair-router.py
 ```

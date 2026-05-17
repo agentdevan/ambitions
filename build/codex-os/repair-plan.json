@@ -34,7 +34,7 @@
       "signals": [
         "repo_doctor_failures:0",
         "unresolved:151",
-        "stale:1370"
+        "stale:1369"
       ]
     }
   },
@@ -44,8 +44,8 @@
     "global train sequencing repair": "python3 scripts/governance/ambitions-global-train-resequencer.py",
     "governance repair": "python3 scripts/governance/ambitions-repo-doctor.py --strict"
   },
-  "generated_at": "2026-05-17T13:05:46-04:00",
-  "governance_stale_overlays": 1370,
+  "generated_at": "2026-05-17T19:24:47-04:00",
+  "governance_stale_overlays": 1369,
   "governance_unresolved": 151,
   "repo_doctor_overall_status": "YELLOW"
 }

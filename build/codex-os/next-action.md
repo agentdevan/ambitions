@@ -1,6 +1,6 @@
 # Codex OS Next Action
 
-Generated: 2026-05-17T13:05:46-04:00
+Generated: 2026-05-17T19:24:47-04:00
 
 Decision: repair_governance
 Reason: Repo doctor or governance reconciliation still reports unresolved work.
@@ -9,7 +9,7 @@ Reason: Repo doctor or governance reconciliation still reports unresolved work.
 
 - repo_doctor:YELLOW
 - unresolved:151
-- stale:1370
+- stale:1369
 
 ## Blocked Reason
 
@@ -25,6 +25,6 @@ python3 scripts/codex-os/ambitions-codex-os-repair-router.py
 
 - repo doctor status: YELLOW
 - governance unresolved: 151
-- stale overlays: 1370
+- stale overlays: 1369
 - architecture debt score: 0
-- implementation expectations: 214
+- implementation expectations: 213

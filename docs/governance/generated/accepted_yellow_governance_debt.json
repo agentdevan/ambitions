@@ -1,7 +1,7 @@
 {
   "counts": {
     "orphan_prompt_count": 132,
-    "stale_overlay_count": 1370,
+    "stale_overlay_count": 1369,
     "train_count": 690,
     "unresolved_reconciliation_count": 151
   },
@@ -12,7 +12,7 @@
     "stale_overlay_audit": "docs/governance/generated/stale_overlay_audit.md",
     "train_to_implementation_map": "docs/governance/generated/train_to_implementation_map.json"
   },
-  "generated_at": "2026-05-17T13:05:46-04:00",
+  "generated_at": "2026-05-17T19:24:47-04:00",
   "no_claim_boundary": [
     "does not claim full registry normalization",
     "does not claim release readiness",

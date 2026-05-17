@@ -15,7 +15,6 @@ from ambitions_codex_os_common import (  # noqa: E402
     ensure_dir,
     generated_freshness_state,
     git_head_commit_iso,
-    load_json_from_generated,
     read_text,
     repo_doctor_summary_snapshot,
     write_json,
@@ -60,10 +59,10 @@ def main() -> int:
         results.append(run(cmd))
 
     repo_doctor = repo_doctor_summary_snapshot()
-    next_action = load_json_from_generated("next-action.json", {})
-    batch_selection = load_json_from_generated("batch-selection.json", {})
-    repair_plan = load_json_from_generated("repair-plan.json", {})
-    perf = load_json_from_generated("performance-check.json", {})
+    next_action = load_build_json("next-action.json")
+    batch_selection = load_build_json("batch-selection.json")
+    repair_plan = load_build_json("repair-plan.json")
+    perf = load_build_json("performance-check.json")
     freshness = generated_freshness_state()
 
     data = {
@@ -109,6 +108,13 @@ def main() -> int:
     write_text("build/codex-os/sync-report.md", "\n".join(lines).rstrip() + "\n")
     print(json.dumps(data, indent=2, sort_keys=True))
     return 0
+
+
+def load_build_json(name: str) -> dict[str, object]:
+    path = BUILD_ROOT / name
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

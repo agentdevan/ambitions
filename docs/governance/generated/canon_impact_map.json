@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-17T13:05:46-04:00",
+  "generated_at": "2026-05-17T19:24:47-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -676,7 +676,6 @@
       "docs/governance/AUTHORITY_HIERARCHY.md",
       "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md",
       "docs/governance/REMAINING_WORK_GRAPH.md",
-      "docs/governance/generated/authority_diff_report.md",
       "docs/governance/generated/canon_impact_map.json",
       "docs/governance/generated/canon_impact_plan.md",
       "docs/governance/generated/canon_propagation_plan.md",
@@ -1833,7 +1832,6 @@
       "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md",
       "docs/codex/visual-quality/MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE.md",
       "docs/governance/ACTIVE_EXECUTION_GRAPH.md",
-      "docs/governance/generated/authority_diff_report.md",
       "docs/governance/generated/canon_impact_map.json",
       "docs/governance/generated/canon_impact_plan.md",
       "docs/governance/generated/canon_propagation_plan.md",
@@ -3422,7 +3420,6 @@
       "docs/governance/ACTIVE_EXECUTION_GRAPH.md",
       "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md",
       "docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md",
-      "docs/governance/generated/authority_diff_report.md",
       "docs/governance/generated/canon_impact_map.json",
       "docs/governance/generated/canon_impact_plan.md",
       "docs/governance/generated/canon_propagation_plan.md",
@@ -5271,7 +5268,6 @@
       "docs/governance/NORMALIZED_REGISTRY_REWRITE_PLAN.md",
       "docs/governance/SELF_IMPROVEMENT_BACKLOG.md",
       "docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md",
-      "docs/governance/generated/authority_diff_report.md",
       "docs/governance/generated/canon_impact_map.json",
       "docs/governance/generated/canon_impact_plan.md",
       "docs/governance/generated/canon_propagation_plan.md",
@@ -6650,7 +6646,6 @@
       "docs/governance/ACTIVE_EXECUTION_GRAPH.md",
       "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md",
       "docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md",
-      "docs/governance/generated/authority_diff_report.md",
       "docs/governance/generated/canon_impact_map.json",
       "docs/governance/generated/canon_impact_plan.md",
       "docs/governance/generated/canon_propagation_plan.md",
@@ -7908,7 +7903,6 @@
       "docs/codex/visual-quality/MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE.md",
       "docs/external-surface-snapshot-contract.md",
       "docs/governance/ACTIVE_EXECUTION_GRAPH.md",
-      "docs/governance/generated/authority_diff_report.md",
       "docs/governance/generated/canon_impact_map.json",
       "docs/governance/generated/canon_impact_plan.md",
       "docs/governance/generated/canon_propagation_plan.md",
@@ -9147,7 +9141,6 @@
       "docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md",
       "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md",
       "docs/governance/ACTIVE_EXECUTION_GRAPH.md",
-      "docs/governance/generated/authority_diff_report.md",
       "docs/governance/generated/canon_impact_map.json",
       "docs/governance/generated/canon_impact_plan.md",
       "docs/governance/generated/canon_propagation_plan.md",
@@ -11722,7 +11715,6 @@
     "docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md",
     "docs/governance/VERIFIED_COMPLETED_BATCHES.md",
     "docs/governance/execution_graph.json",
-    "docs/governance/generated/authority_diff_report.md",
     "docs/governance/generated/canon_impact_map.json",
     "docs/governance/generated/canon_impact_plan.md",
     "docs/governance/generated/canon_propagation_plan.md",
@@ -13646,10 +13638,6 @@
     },
     {
       "path": "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
-      "path": "docs/governance/generated/authority_diff_report.md",
       "signal": "possible active Plan top-level residue"
     },
     {

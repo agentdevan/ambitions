@@ -3,21 +3,21 @@
   "context_pack_freshness": {
     "exists": true,
     "path": "build/codex-os/ambitions-context-pack.md",
-    "sha256": "eb96601e2d1fa4656e42447af23ee83669f313ec47fac12ece0da6d486a732ee"
+    "sha256": "ba89d0383ca15726b02887963eeb9a4919b897c122dec684a75cfdf834ec7369"
   },
-  "generated_at": "2026-05-17T13:05:46-04:00",
+  "generated_at": "2026-05-17T19:24:47-04:00",
   "missing_output_count": 0,
   "missing_outputs": [],
-  "next_action_decision": "missing",
+  "next_action_decision": "repair_governance",
   "next_action_freshness": {
     "exists": true,
     "path": "build/codex-os/next-action.md",
-    "sha256": "74a08b88ebc4dae976dd53cfceab743628a11c0da96cf8959f900412cc5eee84"
+    "sha256": "66539a4a5dad945f476823ee5f516a2172cffb39304158cd6608af4ddbeb60c3"
   },
   "orphan_prompt_count": 131,
   "present_output_count": 6,
   "repo_doctor_command_status": "YELLOW",
   "required_output_count": 6,
-  "stale_overlay_count": 1370,
+  "stale_overlay_count": 1369,
   "unresolved_governance_count": 151
 }

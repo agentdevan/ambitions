@@ -4,16 +4,16 @@
   "blockers": [
     "repo_doctor:YELLOW",
     "unresolved:151",
-    "stale:1370"
+    "stale:1369"
   ],
   "changed_canon_files": [],
   "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
   "decision": "repair_governance",
-  "generated_at": "2026-05-17T13:05:46-04:00",
+  "generated_at": "2026-05-17T19:24:47-04:00",
   "generated_outputs_missing": [],
-  "governance_stale_overlays": 1370,
+  "governance_stale_overlays": 1369,
   "governance_unresolved": 151,
-  "implementation_expectation_count": 214,
+  "implementation_expectation_count": 213,
   "reason": "Repo doctor or governance reconciliation still reports unresolved work.",
   "repo_doctor_overall_status": "YELLOW",
   "retired_canon_signals": [
@@ -1451,10 +1451,6 @@
     },
     {
       "path": "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
-      "path": "docs/governance/generated/authority_diff_report.md",
       "signal": "possible active Plan top-level residue"
     },
     {

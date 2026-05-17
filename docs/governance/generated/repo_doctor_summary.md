@@ -1,9 +1,9 @@
 # Repo Doctor Summary
 
-Generated: 2026-05-17T13:05:46-04:00
-Overall status: RED
+Generated: 2026-05-17T19:24:47-04:00
+Overall status: YELLOW
 Strict mode requested: True
-Failures: 1
+Failures: 0
 
 ## Command Results
 
@@ -27,7 +27,6 @@ Failures: 1
 | batch_closeout_validate | GREEN | `python3 scripts/governance/ambitions-batch-closeout-validate.py` |
 | governance_validate | GREEN | `python3 scripts/governance/ambitions-governance-validate.py` |
 | generated_freshness_check | GREEN | `python3 scripts/governance/ambitions-generated-freshness-check.py` |
-| encyclopedia_to_frontend_os_final_gate | RED | `python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py` |
 | codex_os_next_action | GREEN | `python3 scripts/codex-os/ambitions-codex-os-next-action.py` |
 | codex_os_batch_selector | GREEN | `python3 scripts/codex-os/ambitions-codex-os-batch-selector.py` |
 | codex_os_repair_router | GREEN | `python3 scripts/codex-os/ambitions-codex-os-repair-router.py` |
@@ -38,8 +37,7 @@ Failures: 1
 
 ## Failure Details
 
-- `python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py` => 1
-  - stdout: RED
+- None
 
 ## Accepted Yellow Advisories
 
@@ -57,4 +55,4 @@ Failures: 1
 
 ## Result
 
-Governance Red remains or governance advisories remain unresolved.
+Repo doctor strict path passed with explicit accepted Yellow advisories.

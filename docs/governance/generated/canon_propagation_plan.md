@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-17T13:05:46-04:00
+Generated: 2026-05-17T19:24:47-04:00
 
 ## Plan → Time
 
@@ -950,7 +950,6 @@ Generated: 2026-05-17T13:05:46-04:00
 - docs/governance/SELF_IMPROVEMENT_BACKLOG.md
 - docs/governance/NORMALIZED_REGISTRY_REWRITE_PLAN.md
 - docs/governance/generated/train_to_implementation_map.json
-- docs/governance/generated/authority_diff_report.md
 - docs/governance/generated/stale_overlay_audit.md
 - docs/governance/generated/implementation_expectation_map.json
 - docs/governance/generated/mature_spec_synthesis.md
@@ -1136,6 +1135,7 @@ Generated: 2026-05-17T13:05:46-04:00
 - prompts/batches/THROUGHPUT-ACCELERATION-01.md
 - prompts/batches/PK37.md
 - prompts/batches/MRI10-RECOMMENDATION-TRACE-RUNTIME.md
+- prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03-MERGED.md
 - prompts/batches/PFC33.md
 - prompts/batches/SA13.md
 - prompts/batches/LDI16.md

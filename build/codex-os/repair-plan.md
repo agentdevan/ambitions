@@ -1,6 +1,6 @@
 # Codex OS Repair Plan
 
-Generated: 2026-05-17T13:05:46-04:00
+Generated: 2026-05-17T19:24:47-04:00
 
 ## governance repair
 
@@ -10,7 +10,7 @@ Governance outputs are not fully reconciled.
 
 - repo_doctor_failures:0
 - unresolved:151
-- stale:1370
+- stale:1369
 
 ### Command
 

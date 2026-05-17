@@ -1,6 +1,6 @@
 # Ambitions Governance Dashboard
 
-Generated: 2026-05-17T13:05:46-04:00
+Generated: 2026-05-17T19:24:47-04:00
 
 ## Snapshot
 
@@ -8,7 +8,7 @@ Generated: 2026-05-17T13:05:46-04:00
 - Unresolved reconciliation states: 151
 - Orphan prompt candidates: 132
 - Completion proof gaps: 0
-- Stale overlay findings: 1370
+- Stale overlay findings: 1369
 
 ## Codex OS Bridge
 
