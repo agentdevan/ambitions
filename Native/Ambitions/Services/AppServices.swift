@@ -66,10 +66,29 @@ protocol InsightsServicing: Sendable {
     func loadInsightsDashboard() async throws -> InsightsDashboard
 }
 
+/// A service protocol that acts as the coordinator and model producer for the 'You' (system settings & trust center) domain.
+///
+/// `YouServicing` consolidates all on-device configurations, local preference states, calendar boundaries,
+/// notification schedules, and trust-sensitive parameters into a single unified `YouDashboard` view model.
+///
+/// Conforms to `Sendable` to guarantee safe thread execution across Swift 6 concurrency boundaries.
 protocol YouServicing: Sendable {
+    
+    /// Compiles and returns a complete, immutable snapshot of the user's local operating system settings,
+    /// trust center metrics, data map boundaries, and visual appearance preferences.
+    ///
+    /// - Returns: A complete, structured `YouDashboard` containing active state and visual configuration metrics.
+    /// - Throws: An error if persistence retrieval fails or system permissions cannot be resolved.
     func loadYouDashboard() async throws -> YouDashboard
+    
+    /// Persists visual accent and functional preference updates to on-device storage and returns the updated dashboard model.
+    ///
+    /// - Parameter preferences: The preference patch containing requested changes to appearance, cadence, and tab configurations.
+    /// - Returns: The updated, immutable `YouDashboard` reflecting the newly applied preferences.
+    /// - Throws: An error if storage persistence fails.
     func saveYouPreferences(_ preferences: YouPreferencesUpdate) async throws -> YouDashboard
 }
+
 
 protocol CaptureServicing: Sendable {
     func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture

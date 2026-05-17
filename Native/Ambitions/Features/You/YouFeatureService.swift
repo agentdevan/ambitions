@@ -1,12 +1,24 @@
 import AmbitionsDesignSystem
 import Foundation
 
+/// A production-grade implementation of `YouServicing` that aggregates and orchestrates settings,
+/// system preferences, trust parameters, and external service permissions.
+///
+/// `RepositoryBackedYouService` is responsible for querying local repositories concurrently to load active database state,
+/// resolving on-device security policies, and compiling them into a thread-safe `YouDashboard`.
 struct RepositoryBackedYouService: YouServicing {
     let repositories: AppRepositories
     let syncCapability: any SyncCapability
     let notificationService: any NotificationServicing
     let calendarRemindersService: any CalendarRemindersServicing
 
+    /// Initializes the service with designated repositories and integration dependencies.
+    ///
+    /// - Parameters:
+    ///   - repositories: The container holding references to all on-device data repositories.
+    ///   - syncCapability: The sync capability engine, defaulting to local-only sync.
+    ///   - notificationService: The system-level notification coordinator, defaulting to a stub implementation.
+    ///   - calendarRemindersService: The coordination agent for EventKit boundaries, defaulting to a stub implementation.
     init(
         repositories: AppRepositories,
         syncCapability: any SyncCapability = LocalOnlySyncCapability(),
@@ -19,6 +31,10 @@ struct RepositoryBackedYouService: YouServicing {
         self.calendarRemindersService = calendarRemindersService
     }
 
+    /// Compiles a thread-safe dashboard representation by reading user data models and authorization parameters concurrently.
+    ///
+    /// - Returns: A `YouDashboard` projection suited for rendering in visual and non-visual surfaces.
+    /// - Throws: An error if loading data snapshot fails.
     func loadYouDashboard() async throws -> YouDashboard {
         let snapshot = try await loadSnapshot()
         let syncStatus = await syncCapability.status()
