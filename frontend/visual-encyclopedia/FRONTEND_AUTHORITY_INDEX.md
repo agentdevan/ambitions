@@ -31,6 +31,10 @@ For frontend/UI/design implementation work:
 
 - Encyclopedia to frontend OS: `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
 - Master: `AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
+- Flagship object system doctrine: `FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md`
+- Object graph architecture: `OBJECT_GRAPH_ARCHITECTURE.md`
+- Flagship object surface matrix: `trace/FLAGSHIP_OBJECT_SURFACE_MATRIX.md`
+- Flagship object maturity gates: `trace/FLAGSHIP_OBJECT_MATURITY_GATES.md`
 - Chrome enrichment doctrine: `CHROME_ENRICHMENT_DOCTRINE.md`
 - Start Here reality recognition doctrine: `START_HERE_REALITY_RECOGNITION_DOCTRINE.md`
 - Chrome primitive contract: `CHROME_PRIMITIVES.md`
@@ -56,6 +60,21 @@ For frontend/UI/design implementation work:
 - Primitive bibles: `primitives/*.md`
 - Behavior bibles: `behavior/*.md`
 - Trace matrices and ledgers: `trace/*.md`, `trace/VISUAL_CONFLICT_LEDGER.md`, `trace/VISUAL_SOURCE_LINKAGE_LEDGER.md`, `trace/VISUAL_SURFACE_GRAPH_LEDGER.md`
+
+## Flagship Object System Lock
+
+For any object, surface, SwiftUI renderer, design-system primitive, preview, or implementation prompt, inspect `FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md`, `OBJECT_GRAPH_ARCHITECTURE.md`, `trace/FLAGSHIP_OBJECT_SURFACE_MATRIX.md`, and `trace/FLAGSHIP_OBJECT_MATURITY_GATES.md` after active truth files and before lower-level implementation planning.
+
+The locked object model is:
+
+- every visible object should be treated as a semantic product unit, not a decorated view
+- primary objects must be flagship quality across Today, Goals, Capture, Time, and You
+- object graph must connect truth, surface recipe, object kernel, state machine, motion, accessibility, proof, renderer, previews, tests, and receipts
+- shallow `title/subtitle/icon/color` components are insufficient unless subordinate to a semantic object kernel
+- world-class production value requires state depth, proof, accessibility, motion intent, visual distinctiveness, and edge-case polish
+- no object may claim implementation, release readiness, or award readiness without proof
+
+This lock is design/architecture canon only. It does not prove SwiftUI implementation, simulator/device behavior, screenshot parity, accessibility conformance, performance, release readiness, or award readiness.
 
 ## Chrome Enrichment Lock
 
@@ -118,6 +137,10 @@ This lock is design canon only. It does not prove SwiftUI implementation, simula
 - `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md`
 - `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json`
 - `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md`
+- `frontend/visual-encyclopedia/FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md`
+- `frontend/visual-encyclopedia/OBJECT_GRAPH_ARCHITECTURE.md`
+- `frontend/visual-encyclopedia/trace/FLAGSHIP_OBJECT_SURFACE_MATRIX.md`
+- `frontend/visual-encyclopedia/trace/FLAGSHIP_OBJECT_MATURITY_GATES.md`
 - `frontend/visual-encyclopedia/CHROME_ENRICHMENT_DOCTRINE.md`
 - `frontend/visual-encyclopedia/START_HERE_REALITY_RECOGNITION_DOCTRINE.md`
 - `frontend/visual-encyclopedia/CHROME_PRIMITIVES.md`
