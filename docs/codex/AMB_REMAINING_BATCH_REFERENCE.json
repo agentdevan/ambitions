@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at_utc": "2026-05-15T02:10:00Z",
+    "generated_at_utc": "2026-05-17T01:27:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "SA23",
-    "next_eligible_title": "Document Type Classifier",
+    "next_eligible_batch": "FCP27",
+    "next_eligible_title": "App-Wide Flagship Audit And Remediation",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },

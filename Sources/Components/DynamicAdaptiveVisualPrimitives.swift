@@ -392,22 +392,17 @@ public struct StateDrivenMaterialPanel<Content: View>: View {
 
     public var body: some View {
         let accent = context.accent(in: theme)
-        let shape = RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
 
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            content
+        QuietGlass(cornerRadius: theme.radius.lg) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                content
+            }
+            .padding(theme.spacing.lg)
         }
-        .padding(theme.spacing.lg)
-        .background {
-            shape.fill(theme.surfaces.elevatedGradient)
-        }
-        .overlay(alignment: .topLeading) {
-            shape
-                .strokeBorder(accent.opacity(state == .active ? 0.42 : 0.22), lineWidth: 1)
-        }
+        .luminousTrace(isShimmering: state == .active, accentColor: accent)
         .overlay(alignment: .topTrailing) {
             Circle()
-                .fill(accent.opacity(0.18))
+                .fill(accent.opacity(0.14))
                 .frame(width: 74, height: 74)
                 .blur(radius: 24)
                 .offset(x: 18, y: -18)

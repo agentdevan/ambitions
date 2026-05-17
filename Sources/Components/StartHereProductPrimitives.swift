@@ -118,6 +118,7 @@ public enum StartHereProductKernelAudit {
 
 public struct StartHereProductProofStack: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let kernel: StartHereProductKernel
 
@@ -126,55 +127,138 @@ public struct StartHereProductProofStack: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
-            Text(kernel.label)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-            Text(kernel.title)
-                .font(theme.typography.titleCompact)
-                .foregroundStyle(theme.colors.textPrimary)
-                .fixedSize(horizontal: false, vertical: true)
-            Text(kernel.subtitle)
-                .font(theme.typography.body)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-            Text(kernel.becauseLine)
-                .font(theme.typography.bodySecondary)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-            HStack(spacing: theme.spacing.xs) {
-                Text(kernel.durationLabel)
-                Text(kernel.fitLabel)
-                Text(kernel.sourceQualityLabel)
+        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+            // Header Area
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack {
+                    Text(kernel.label.uppercased())
+                        .font(theme.typography.micro.weight(.semibold))
+                        .foregroundStyle(theme.colors.accentSecondary)
+                        .padding(.horizontal, theme.spacing.xs)
+                        .padding(.vertical, theme.spacing.xxs)
+                        .background {
+                            Capsule(style: .continuous)
+                                .fill(theme.colors.accentSecondary.opacity(0.12))
+                        }
+                    
+                    Spacer()
+                    
+                    Circle()
+                        .fill(theme.colors.accentSecondary)
+                        .frame(width: 6, height: 6)
+                        .opacity(0.8)
+                }
+                
+                Text(kernel.title)
+                    .font(theme.typography.titleCompact)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Text(kernel.subtitle)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Text(kernel.becauseLine)
+                    .font(theme.typography.bodySecondary)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .font(theme.typography.micro.weight(.semibold))
-            .foregroundStyle(theme.colors.textSecondary)
+            
+            // Metadata Badges Row
+            HStack(spacing: theme.spacing.xs) {
+                badgeView(text: kernel.durationLabel, icon: "hourglass")
+                badgeView(text: kernel.fitLabel, icon: "clock")
+                badgeView(text: kernel.sourceQualityLabel, icon: "checkmark.shield")
+            }
             .lineLimit(1)
             .minimumScaleFactor(0.82)
-
-            ForEach(kernel.proofFacts) { fact in
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text(fact.title)
-                        .font(theme.typography.micro)
-                        .foregroundStyle(theme.colors.textTertiary)
-                    Text(fact.summary)
-                        .font(theme.typography.bodySecondary)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(fact.detail)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
+            
+            // Sub-modules: Proof Facts
+            VStack(spacing: theme.spacing.sm) {
+                ForEach(Array(kernel.proofFacts.enumerated()), id: \.element.id) { index, fact in
+                    QuietGlass(cornerRadius: theme.radius.md) {
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: factIcon(for: index))
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(theme.colors.accentSecondary)
+                                .frame(width: 22, height: 22)
+                                .background {
+                                    Circle()
+                                        .fill(theme.colors.accentSecondary.opacity(0.10))
+                                }
+                                .padding(.top, 2)
+                            
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(fact.title)
+                                    .font(theme.typography.micro.weight(.semibold))
+                                    .foregroundStyle(theme.colors.textTertiary)
+                                Text(fact.summary)
+                                    .font(theme.typography.bodySecondary.weight(.medium))
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(fact.detail)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                            }
+                        }
+                        .padding(theme.spacing.md)
+                    }
                 }
-                .fixedSize(horizontal: false, vertical: true)
             }
-
-            Text(kernel.receiptSummary)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
+            
+            // Bottom Trust Receipt Area
+            GraphiteRecess(cornerRadius: theme.radius.md) {
+                HStack(spacing: theme.spacing.xs) {
+                    Image(systemName: "lock.shield")
+                        .font(.system(size: 12))
+                        .foregroundStyle(theme.colors.accentWarm)
+                    Text(kernel.receiptSummary)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(theme.spacing.sm)
+            }
         }
+        .padding(theme.spacing.lg)
+        .background {
+            QuietGlass(cornerRadius: theme.radius.lg) {
+                CelestialField()
+            }
+        }
+        .luminousTrace(isShimmering: true)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(kernel.accessibilitySummary)
         .accessibilityIdentifier("StartHereProductProofStack")
+    }
+    
+    private func badgeView(text: String, icon: String) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: icon)
+                .font(.system(size: 10))
+            Text(text)
+                .font(theme.typography.micro.weight(.semibold))
+        }
+        .foregroundStyle(theme.colors.textSecondary)
+        .padding(.horizontal, theme.spacing.sm)
+        .padding(.vertical, theme.spacing.xs)
+        .background {
+            Capsule(style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(0.24))
+        }
+        .overlay {
+            Capsule(style: .continuous)
+                .strokeBorder(theme.colors.strokeSubtle.opacity(0.15), lineWidth: 0.5)
+        }
+    }
+    
+    private func factIcon(for index: Int) -> String {
+        switch index {
+        case 0: "doc.text.magnifyingglass"
+        case 1: "clock.badge.checkmark"
+        case 2: "sparkles"
+        default: "circle.badge.checkmark"
+        }
     }
 }
 #endif

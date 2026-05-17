@@ -1,24 +1,23 @@
-status: completed
-date: "2026-05-16"
+status: in_progress
+date: "2026-05-17"
 source_of_truth:
-  - "docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md"
-  - ".codex/reports/current-batch-train-state.md"
-  - "docs/codex/BATCH_REGISTRY.md"
+  - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
+  - ".codex/state/active-batch.yml"
   - "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
 current:
-  train: "Platform Framework Compliance & Repo Hygiene Closeout"
-  batch: "RHC06 Repo Hygiene Closeout And Handoff"
-  previous_batch: "PFC31-PFC40 and RHC01-RHC05"
+  train: "Flagship Completion"
+  batch: "FCP27 App-Wide Flagship Audit And Remediation"
+  previous_batch: "AOS30"
   previous_result: "green"
-  next_eligible_batch: "macOS-Terminal-Validation"
+  next_eligible_batch: "FCP27 App-Wide Flagship Audit And Remediation"
 blocked_forward_queue:
   blocked_batch: none
-  reason: "All queued global batch trains (PFC31-40, RHC01-06) are fully processed, audited, and closed."
+  reason: "none"
 frontend_authority:
   encyclopedia_required_for_frontend_touching_batches: false
   entrypoint: "frontend/README.md"
 codex_os_override:
   active_pass: "completed"
-  app_feature_implementation_allowed: false
-  production_swift_allowed: false
+  app_feature_implementation_allowed: true
+  production_swift_allowed: true
   branch_creation_allowed: false

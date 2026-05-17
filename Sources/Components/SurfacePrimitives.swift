@@ -26,39 +26,33 @@ public struct AmbitionSurfaceModifier: ViewModifier {
         let resolved = theme.stateStyle(for: state, accent: accent)
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
 
-        content
-            .padding(contentPadding)
-            .background {
-                shape.fill(background)
-            }
-            .overlay {
-                shape
-                    .strokeBorder(resolved.stroke.opacity(theme.surfaces.topStrokeOpacity), lineWidth: 1)
-            }
-            .overlay(alignment: .top) {
-                shape
-                    .strokeBorder(.white.opacity(theme.surfaces.bottomStrokeOpacity), lineWidth: 0.5)
-                    .blur(radius: 0.4)
-            }
-            .shadow(color: shadow.color.opacity(state == .selected ? 1.05 : 1), radius: shadow.radius, x: shadow.x, y: shadow.y)
-            .overlay {
-                if state == .selected || state == .celebration {
-                    shape
-                        .stroke(resolved.glow.opacity(theme.glow.ringOpacity), lineWidth: 1.2)
-                        .blur(radius: 0.4)
+        Group {
+            switch style {
+            case .app, .widget, .hero:
+                QuietGlass(cornerRadius: cornerRadius) {
+                    content
+                        .padding(contentPadding)
+                }
+                .luminousTrace(isShimmering: state == .selected || state == .celebration, accentColor: accent)
+            case .band:
+                GraphiteRecess(cornerRadius: cornerRadius) {
+                    content
+                        .padding(contentPadding)
                 }
             }
-            .overlay {
-                if state == .selected || state == .celebration {
-                    shape
-                        .fill(resolved.glow.opacity(theme.glow.opacity))
-                        .blur(radius: theme.glow.radius)
-                        .allowsHitTesting(false)
-                }
+        }
+        .shadow(color: shadow.color.opacity(state == .selected ? 1.05 : 1), radius: shadow.radius, x: shadow.x, y: shadow.y)
+        .overlay {
+            if (state == .selected || state == .celebration) && style != .band {
+                shape
+                    .fill(resolved.glow.opacity(theme.glow.opacity))
+                    .blur(radius: theme.glow.radius)
+                    .allowsHitTesting(false)
             }
-            .scaleEffect(resolved.scale)
-            .opacity(resolved.opacity)
-            .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: style == .hero), value: state)
+        }
+        .scaleEffect(resolved.scale)
+        .opacity(resolved.opacity)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: style == .hero), value: state)
     }
 
     private var cornerRadius: CGFloat {
