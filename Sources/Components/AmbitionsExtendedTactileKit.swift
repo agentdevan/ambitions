@@ -305,13 +305,13 @@ public struct ProofPulseBadge: View {
     public var body: some View {
         HStack(spacing: theme.spacing.xs) {
             Circle()
-                .fill(theme.semanticColors.success)
+                .fill(theme.semanticColors.accessibilityVerified)
                 .frame(width: 8, height: 8)
                 .scaleEffect(scale)
             
             Text("VERIFIED")
                 .font(theme.typography.caption.bold())
-                .foregroundStyle(theme.semanticColors.success)
+                .foregroundStyle(theme.semanticColors.accessibilityVerified)
         }
         .onAppear {
             withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {

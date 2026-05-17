@@ -208,6 +208,67 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         }
     }
 
+    func testAFI12SurfaceProofsSpellOutFallbacksAndReceiptsForActiveSurfaces() {
+        let proofsBySurface = Dictionary(uniqueKeysWithValues: AFI12AccessibilityStateProof.surfaceProofs.map { ($0.surface, $0) })
+
+        XCTAssertEqual(Set(proofsBySurface.keys), Set(AFI12AccessibilityStateProof.activeTopLevelSurfaces))
+
+        assertAFI12Proof(
+            proofsBySurface["Today"],
+            surface: "Today",
+            primaryObject: "Reality Meridian",
+            voiceOverSnippets: ["Reality Meridian", "Now", "Next", "Later", "receipt availability"],
+            dynamicTypeSnippets: ["active decision", "source", "recovery path", "primary action"],
+            reduceMotionSnippets: ["static", "Now", "Next", "Later"],
+            nonColorSnippets: ["Now", "protected", "waiting", "blocked", "recovery"],
+            receiptSnippets: ["Why This?", "closure receipts"]
+        )
+
+        assertAFI12Proof(
+            proofsBySurface["Goals"],
+            surface: "Goals",
+            primaryObject: "Constellation Atlas",
+            voiceOverSnippets: ["Constellation Atlas", "life areas", "goal threads", "Today connection", "source path"],
+            dynamicTypeSnippets: ["decorative geometry", "selected area", "thread", "next meaningful action"],
+            reduceMotionSnippets: ["static", "selected state", "native drill-down"],
+            nonColorSnippets: ["Pinned", "selected", "stale", "blocked", "Today-linked"],
+            receiptSnippets: ["Goal thread proof", "decision receipts"]
+        )
+
+        assertAFI12Proof(
+            proofsBySurface["Capture"],
+            surface: "Capture",
+            primaryObject: "Atmosphere Composer",
+            voiceOverSnippets: ["Atmosphere Composer", "input purpose", "text or voice action", "route result", "correction path"],
+            dynamicTypeSnippets: ["composer", "add action", "route result", "correction choices"],
+            reduceMotionSnippets: ["static", "Needs a Place", "Ready to Place", "Grow into Goal"],
+            nonColorSnippets: ["Route confidence", "private item", "needs-place", "correction"],
+            receiptSnippets: ["placement", "correction receipts", "undo"]
+        )
+
+        assertAFI12Proof(
+            proofsBySurface["Time"],
+            surface: "Time",
+            primaryObject: "LifeShape Field",
+            voiceOverSnippets: ["LifeShape Field", "horizon", "open time", "goal time", "protected time", "pressure", "manual mode"],
+            dynamicTypeSnippets: ["horizon", "pressure source", "protected time", "Shape week", "Review pressure"],
+            reduceMotionSnippets: ["static", "before/after summary", "explicit confirmation"],
+            nonColorSnippets: ["Pressure", "protected", "open", "unavailable", "source-review"],
+            receiptSnippets: ["Quiet Reflow", "preview", "source", "confirmation", "receipt"]
+        )
+
+        assertAFI12Proof(
+            proofsBySurface["You"],
+            surface: "You",
+            primaryObject: "User System Profile",
+            voiceOverSnippets: ["User System Profile", "Planning Setup", "Trust & Automation", "Privacy", "Receipts & History", "Defaults"],
+            dynamicTypeSnippets: ["grouped-navigation behavior", "large text sizes", "trust", "privacy", "receipts", "setup", "defaults"],
+            reduceMotionSnippets: ["disclosure state"],
+            nonColorSnippets: ["Trust", "private", "unavailable", "manual", "review", "future-owned"],
+            receiptSnippets: ["Trust Center", "What Ambitions Knows", "Receipts & History"]
+        )
+    }
+
     func testEB28PlainLanguageEvidenceCoversCopyRecoveryAndScreenExplanation() {
         let requirements = EB28PlainLanguageExplanationEvidence.requirements
 
@@ -270,7 +331,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
 
         XCTAssertTrue(requirements.contains {
             $0.axis == .voiceFirstCapture &&
-                $0.ownerFile == "Native/Ambitions/Features/Captures/CapturesScreen.swift" &&
+                $0.ownerFile == "Native/Ambitions/Features/Capture/CaptureScreen.swift" &&
                 $0.requiredAlternative.localizedCaseInsensitiveContains("review") &&
                 $0.privacyBoundary.localizedCaseInsensitiveContains("without user-visible review")
         })
@@ -342,4 +403,43 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         "quiet-command-sheet-smart-attachment",
         "external-surfaces"
     ]
+
+    private func assertAFI12Proof(
+        _ proof: AFI12AccessibilitySurfaceProof?,
+        surface: String,
+        primaryObject: String,
+        voiceOverSnippets: [String],
+        dynamicTypeSnippets: [String],
+        reduceMotionSnippets: [String],
+        nonColorSnippets: [String],
+        receiptSnippets: [String],
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        XCTAssertNotNil(proof, "Missing AFI12 proof for \(surface).", file: file, line: line)
+
+        guard let proof else { return }
+
+        XCTAssertEqual(proof.surface, surface, file: file, line: line)
+        XCTAssertEqual(proof.primaryObject, primaryObject, file: file, line: line)
+        XCTAssertFalse(proof.publicAccessibilityClaimAllowed, file: file, line: line)
+
+        assertContains(proof.voiceOverSummary, snippets: voiceOverSnippets, file: file, line: line)
+        assertContains(proof.dynamicTypeFallback, snippets: dynamicTypeSnippets, file: file, line: line)
+        assertContains(proof.reduceMotionFallback, snippets: reduceMotionSnippets, file: file, line: line)
+        assertContains(proof.nonColorStateSupport, snippets: nonColorSnippets, file: file, line: line)
+        assertContains(proof.trustReceiptPath, snippets: receiptSnippets, file: file, line: line)
+        assertContains(proof.manualProofStillRequired, snippets: ["Manual VoiceOver", "Dynamic Type", "Reduce Motion"], file: file, line: line)
+    }
+
+    private func assertContains(
+        _ text: String,
+        snippets: [String],
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        for snippet in snippets {
+            XCTAssertTrue(text.localizedCaseInsensitiveContains(snippet), "Expected '\(text)' to contain '\(snippet)'.", file: file, line: line)
+        }
+    }
 }

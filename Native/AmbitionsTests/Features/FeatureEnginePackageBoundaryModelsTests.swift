@@ -25,7 +25,7 @@ final class FeatureEnginePackageBoundaryModelsTests: XCTestCase {
         let files = [
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Today/TodayFeatureService.swift", imports: ["AmbitionsDesignSystem", "Foundation"]),
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Goals/GoalsFeatureService.swift", imports: ["AmbitionsDesignSystem", "Foundation"]),
-            FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Captures/CapturesScreen.swift", imports: ["AmbitionsDesignSystem", "SwiftUI"]),
+            FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Capture/CaptureScreen.swift", imports: ["AmbitionsDesignSystem", "SwiftUI"]),
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Time/TimeFeatureService.swift", imports: ["AmbitionsDesignSystem", "Foundation"]),
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/You/YouScreen.swift", imports: ["AmbitionsDesignSystem", "SwiftUI", "UIKit"]),
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Shared/FeatureScaffoldView.swift", imports: ["AmbitionsDesignSystem", "SwiftUI"]),
@@ -45,7 +45,7 @@ final class FeatureEnginePackageBoundaryModelsTests: XCTestCase {
         let files = [
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Today/TodayScreen.swift", imports: ["AmbitionsDesignSystem", "SwiftUI"]),
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Goals/GoalsScreen.swift", imports: ["AmbitionsDesignSystem", "SwiftUI"]),
-            FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Captures/CapturesScreen.swift", imports: ["AmbitionsDesignSystem", "SwiftUI"]),
+            FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Capture/CaptureScreen.swift", imports: ["AmbitionsDesignSystem", "SwiftUI"]),
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Time/TimeFeatureService.swift", imports: ["Foundation"]),
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/You/YouScreen.swift", imports: ["SwiftUI", "UIKit"]),
             FeatureEngineSourceFileBoundary(path: "Native/Ambitions/Features/Tasks/TasksScreen.swift", imports: ["SwiftUI"]),

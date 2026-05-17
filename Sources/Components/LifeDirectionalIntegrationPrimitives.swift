@@ -44,7 +44,7 @@ public struct LDITokens {
 public struct TemporalMomentumGauge: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     private let value: Double // Range 0.0 to 1.0
     private let title: String
@@ -75,7 +75,7 @@ public struct TemporalMomentumGauge: View {
                         .padding(theme.spacing.sm + 6)
                     
                     // Active glow tracer track
-                    if !increaseContrast {
+                    if colorSchemeContrast != .increased {
                         Circle()
                             .trim(from: 0.12, to: 0.12 + 0.76 * animatedValue)
                             .stroke(
@@ -214,7 +214,7 @@ private struct CircleDialTicks: Shape {
 /// daily capacity (Reality Meridian, bottom) and planned aspirations (Aspirational, top).
 public struct RealityMeridianHorizon<TopContent: View, BottomContent: View>: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     private let realityLevel: CGFloat // 0.0 to 1.0
     private let topContent: TopContent
@@ -278,7 +278,7 @@ public struct RealityMeridianHorizon<TopContent: View, BottomContent: View>: Vie
                     ),
                     lineWidth: 2.0
                 )
-                .shadow(color: theme.colors.accentWarm.opacity(increaseContrast ? 0.0 : 0.4), radius: 3)
+                .shadow(color: theme.colors.accentWarm.opacity(colorSchemeContrast == .increased ? 0.0 : 0.4), radius: 3)
             }
         }
         .frame(minHeight: 300)
@@ -295,7 +295,7 @@ public struct RealityMeridianHorizon<TopContent: View, BottomContent: View>: Vie
 public struct LifeShapeField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     public struct VectorNode: Identifiable {
         public let id: Int
@@ -454,7 +454,7 @@ public struct LifeShapeField: View {
                 let sizeVal = (isSelected ? 14.0 : 8.0) + CGFloat(pulse * 0.4)
                 let rect = CGRect(x: center.x - sizeVal/2, y: center.y - sizeVal/2, width: sizeVal, height: sizeVal)
                 
-                if isSelected && !increaseContrast {
+                if isSelected && colorSchemeContrast != .increased {
                     // Outer glow tracer
                     context.opacity = 0.3
                     context.fill(Path(ellipseIn: rect.insetBy(dx: -4, dy: -4)), with: .color(theme.colors.accentWarm))
@@ -477,7 +477,7 @@ public struct LifeShapeField: View {
 public struct FocusDensitySphere: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     private let levels: [Double] // allocation ratio for: sage (0), blueGray (1), warmGold (2)
     
@@ -492,7 +492,7 @@ public struct FocusDensitySphere: View {
             HStack(spacing: theme.spacing.lg) {
                 // Premium 3D-simulated sphere canvas
                 ZStack {
-                    if increaseContrast {
+                    if colorSchemeContrast == .increased {
                         // High Legibility Circle Flat Representation
                         Circle()
                             .fill(theme.colors.canvasElevated)

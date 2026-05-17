@@ -3,11 +3,11 @@ import SwiftUI
 
 /// A gravity-drift spatial micro-particle background reacting to device tilt,
 /// touch ripples, and deep ambient midnight glow.
-/// Pauses motion in `reduceMotion` mode and falls back to a clean canvas in `increaseContrast` mode.
+/// Pauses motion in `reduceMotion` mode and falls back to a clean canvas in increased contrast mode.
 public struct CelestialField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     public struct Particle: Hashable, Identifiable {
         public let id: Int
@@ -23,7 +23,7 @@ public struct CelestialField: View {
     
     public var body: some View {
         GeometryReader { geo in
-            if increaseContrast {
+            if colorSchemeContrast == .increased {
                 // High contrast fallback: Solid quiet baseline canvas
                 theme.colors.canvas
                     .ignoresSafeArea()
@@ -123,7 +123,7 @@ public struct CelestialField: View {
 /// via a shifting 0.5pt radial border gradient shifting from warm gold to icy silver.
 public struct QuietGlass<Content: View>: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     private let cornerRadius: CGFloat
     private let content: Content
@@ -134,7 +134,7 @@ public struct QuietGlass<Content: View>: View {
     }
     
     public var body: some View {
-        if increaseContrast {
+        if colorSchemeContrast == .increased {
             VStack(alignment: .leading, spacing: 0) {
                 content
             }
@@ -185,7 +185,7 @@ public struct QuietGlass<Content: View>: View {
 /// graphite-recessed settings, and physical quiet depth.
 public struct GraphiteRecess<Content: View>: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     private let cornerRadius: CGFloat
     private let content: Content
@@ -201,13 +201,13 @@ public struct GraphiteRecess<Content: View>: View {
         }
         .background {
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                .fill(theme.colors.canvasElevated.opacity(increaseContrast ? 1.0 : 0.85))
+                .fill(theme.colors.canvasElevated.opacity(colorSchemeContrast == .increased ? 1.0 : 0.85))
         }
         .overlay {
             // Recessed subtle border mimicking mechanical depth
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .strokeBorder(
-                    theme.colors.strokeSubtle.opacity(increaseContrast ? 0.70 : 0.28),
+                    theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.70 : 0.28),
                     lineWidth: 1.0
                 )
         }

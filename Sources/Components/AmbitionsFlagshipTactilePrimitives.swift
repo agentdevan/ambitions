@@ -8,7 +8,7 @@ import SwiftUI
 /// Adheres strictly to the "one-primary-object" layout guidelines in `PRODUCT_DESIGN_TRUTH.md`.
 public struct ContextCrownHeader: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     
     private let title: String
@@ -67,7 +67,7 @@ public struct ContextCrownHeader: View {
                     Circle()
                         .fill(theme.colors.accentPrimary)
                         .frame(width: 5, height: 5)
-                        .opacity(increaseContrast ? 1.0 : (0.45 + 0.55 * sin(ambientGlowPhase)))
+                        .opacity(colorSchemeContrast == .increased ? 1.0 : (0.45 + 0.55 * sin(ambientGlowPhase)))
                         .shadow(color: theme.colors.accentPrimary.opacity(0.6), radius: 2)
                     
                     Image(systemName: syncState.systemImage)
@@ -94,7 +94,7 @@ public struct ContextCrownHeader: View {
             .padding(.horizontal, theme.spacing.lg)
             .padding(.vertical, theme.spacing.xs)
             .background {
-                if increaseContrast {
+                if colorSchemeContrast == .increased {
                     theme.colors.canvas
                 } else {
                     theme.shell.headerMaterial
@@ -143,7 +143,7 @@ public struct ContextCrownHeader: View {
 public struct AtmosphereComposerCanvas: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     @Binding private var inputText: String
     private let placeholder: String
@@ -179,7 +179,7 @@ public struct AtmosphereComposerCanvas: View {
             VStack(spacing: theme.spacing.md) {
                 // Interactive Tactical Particle Field
                 ZStack {
-                    if !increaseContrast {
+                    if colorSchemeContrast != .increased {
                         // Deep celestial background recessed block
                         RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                             .fill(theme.colors.canvas.opacity(0.45))
@@ -244,7 +244,7 @@ public struct AtmosphereComposerCanvas: View {
                                     endPoint: .bottomTrailing
                                 )
                             )
-                            .shadow(color: theme.colors.accentSecondary.opacity(increaseContrast ? 0 : 0.45), radius: 8)
+                            .shadow(color: theme.colors.accentSecondary.opacity(colorSchemeContrast == .increased ? 0 : 0.45), radius: 8)
                             .scaleEffect(thoughtBubbleScale)
                         
                         Text(inputText.isEmpty ? "Composer Empty" : "\(inputText.count) thought fragments")
@@ -299,7 +299,7 @@ public struct AtmosphereComposerCanvas: View {
                     .padding(theme.spacing.sm)
                     .background {
                         RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                            .fill(theme.colors.canvasElevated.opacity(increaseContrast ? 1.0 : 0.85))
+                            .fill(theme.colors.canvasElevated.opacity(colorSchemeContrast == .increased ? 1.0 : 0.85))
                     }
                     .overlay {
                         RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
@@ -410,7 +410,7 @@ public struct AtmosphereComposerCanvas: View {
 /// algorithm confidence, details clear data sources, and allows instant overrides.
 public struct TrustSeamExplainer: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityAccessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     private let title: String
     private let reason: String
@@ -513,7 +513,7 @@ public struct TrustSeamExplainer: View {
                 .padding(theme.spacing.sm)
                 .background {
                     RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .fill(theme.colors.canvasElevated.opacity(increaseContrast ? 1.0 : 0.65))
+                        .fill(theme.colors.canvasElevated.opacity(colorSchemeContrast == .increased ? 1.0 : 0.65))
                 }
                 
                 // Expandable explanation fold-out

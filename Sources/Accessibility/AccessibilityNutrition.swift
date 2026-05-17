@@ -435,13 +435,13 @@ public enum EB29InputAlternativeEvidence {
         "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md",
         "docs/codex/batches/EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt.md",
         "docs/canon/PXOS_Accessibility_Cognitive_Load_And_Emotional_Safety.md",
-        "Native/Ambitions/Features/Captures/CapturesScreen.swift"
+        "Native/Ambitions/Features/Capture/CaptureScreen.swift"
     ]
 
     public static let requirements: [AccessibilityInputAlternativeRequirement] = [
         AccessibilityInputAlternativeRequirement(
             axis: .voiceFirstCapture,
-            ownerFile: "Native/Ambitions/Features/Captures/CapturesScreen.swift",
+            ownerFile: "Native/Ambitions/Features/Capture/CaptureScreen.swift",
             automatedProofTarget: "Native/AmbitionsTests/Captures/CapturesViewModelTests.swift",
             requiredAlternative: "Voice capture must have visible review, edit, place, and cancel controls before any routing or memory effect.",
             privacyBoundary: "No transcript, recording, or sensitive capture is stored or routed without user-visible review."
@@ -635,7 +635,7 @@ public enum AccessibilityNutritionChecklist {
             screenAudit("today", "Today", "tab.today", "Today", source: "Native/Ambitions/Features/Today/TodayScreen.swift", tests: "Native/AmbitionsTests/Today"),
             screenAudit("goals", "Goals", "tab.goals", "Goals", source: "Native/Ambitions/Features/Goals/GoalsScreen.swift", tests: "Native/AmbitionsTests/Goals"),
             screenAudit("goal-detail", "Goal Detail", "goals.detail", "Goals", source: "Native/Ambitions/Features/Goals/GoalDetailScreen.swift", tests: "Native/AmbitionsTests/Goals"),
-            screenAudit("capture", "Capture", "tab.capture", "Capture", source: "Native/Ambitions/Features/Captures/CapturesScreen.swift", tests: "Native/AmbitionsTests/Captures"),
+            screenAudit("capture", "Capture", "tab.capture", "Capture", source: "Native/Ambitions/Features/Capture/CaptureScreen.swift", tests: "Native/AmbitionsTests/Captures"),
             screenAudit("time", "Time", "tab.time", "Time", source: "Native/Ambitions/Features/Time/TimeScreen.swift", tests: "Native/AmbitionsTests/Time"),
             screenAudit("you", "You", "tab.you", "You", source: "Native/Ambitions/Features/You/YouScreen.swift", tests: "Native/AmbitionsTests/You"),
             screenAudit("life-areas-north-stars", "Life Areas / North Stars", "goals.life-areas", "Goals", source: "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift", tests: "Native/AmbitionsTests/Goals"),
