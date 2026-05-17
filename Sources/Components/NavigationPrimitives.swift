@@ -97,7 +97,6 @@ public struct RootDestinationIdentityRail: View {
     }
 }
 
-/// Compact segmented selection bar for switching timeframes or modes.
 public struct SegmentedFilterBar<Item: Hashable>: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -106,11 +105,7 @@ public struct SegmentedFilterBar<Item: Hashable>: View {
     @Binding private var selection: Item
     private let title: (Item) -> String
 
-    public init(
-        items: [Item],
-        selection: Binding<Item>,
-        title: @escaping (Item) -> String
-    ) {
+    public init(items: [Item], selection: Binding<Item>, title: @escaping (Item) -> String) {
         self.items = items
         self._selection = selection
         self.title = title
@@ -143,7 +138,6 @@ public struct SegmentedFilterBar<Item: Hashable>: View {
     }
 }
 
-/// Chevron row shell for navigation lists and drill-in settings groups.
 public struct ListChevronRow<Leading: View, Trailing: View>: View {
     @Environment(\.ambitionTheme) private var theme
 
@@ -187,7 +181,6 @@ public struct ListChevronRow<Leading: View, Trailing: View>: View {
     }
 }
 
-/// Reusable bottom navigation shell for future screen modules.
 public struct BottomNavShell<Item: Hashable>: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -197,12 +190,7 @@ public struct BottomNavShell<Item: Hashable>: View {
     private let title: (Item) -> String
     private let icon: (Item) -> String
 
-    public init(
-        items: [Item],
-        selection: Binding<Item>,
-        title: @escaping (Item) -> String,
-        icon: @escaping (Item) -> String
-    ) {
+    public init(items: [Item], selection: Binding<Item>, title: @escaping (Item) -> String, icon: @escaping (Item) -> String) {
         self.items = items
         self._selection = selection
         self.title = title
@@ -267,23 +255,53 @@ public struct AmbitionPressableButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         let effectiveState: AmbitionVisualState = configuration.isPressed ? .pressed : state
         let resolved = theme.stateStyle(for: effectiveState, accent: accent)
+        let chromeAccent = accent ?? resolved.accent
+        let isPressed = configuration.isPressed && reduceMotion == false
+        let shape = Capsule(style: .continuous)
 
         return configuration.label
             .font(theme.typography.bodyEmphasized)
             .foregroundStyle(resolved.foreground)
-            .contentShape(Capsule(style: .continuous))
-            .background(Capsule(style: .continuous).fill(resolved.fill))
-            .overlay(Capsule(style: .continuous).stroke(resolved.stroke, lineWidth: 1))
-            .shadow(
-                color: configuration.isPressed
-                    ? theme.elevation.resting.color.opacity(0.12)
-                    : theme.elevation.resting.color.opacity(0.28),
-                radius: configuration.isPressed ? 6 : 10,
-                x: 0,
-                y: configuration.isPressed ? 2 : 5
-            )
-            .offset(y: configuration.isPressed && reduceMotion == false ? 1 : 0)
-            .scaleEffect(resolved.scale)
+            .contentShape(shape)
+            .background {
+                ZStack {
+                    shape.fill(
+                        LinearGradient(
+                            colors: [
+                                chromeAccent.opacity(0.30),
+                                resolved.fill.opacity(theme.mode == .dark ? 0.88 : 0.72),
+                                theme.shell.controlBackground.opacity(0.58)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    shape.fill(
+                        LinearGradient(
+                            colors: [Color.white.opacity(isPressed ? 0.10 : 0.30), Color.clear],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                }
+            }
+            .overlay {
+                shape.stroke(
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.36), resolved.stroke.opacity(0.86), chromeAccent.opacity(0.30)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 1
+                )
+            }
+            .overlay(alignment: .bottom) {
+                shape.stroke(theme.colors.canvas.opacity(0.42), lineWidth: 1)
+            }
+            .shadow(color: chromeAccent.opacity(isPressed ? 0.12 : 0.24), radius: isPressed ? 7 : 16, x: 0, y: isPressed ? 3 : 10)
+            .shadow(color: Color.black.opacity(theme.mode == .dark ? 0.24 : 0.10), radius: isPressed ? 6 : 14, x: 0, y: isPressed ? 2 : 8)
+            .offset(y: isPressed ? 1 : 0)
+            .scaleEffect(isPressed ? 0.982 : resolved.scale)
             .opacity(resolved.opacity)
             .animation(theme.motion.settleAnimation(reduceMotion: reduceMotion), value: configuration.isPressed)
     }
