@@ -28,13 +28,28 @@ struct CaptureScreen: View {
     }
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             LivingSurfaceBackground(context: .capture, state: captureLivingState, intensity: 0.68)
                 .ignoresSafeArea()
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    capturePrompt
+                    Spacer()
+                        .frame(height: 60)
+
+                    AtmosphereComposerCanvas(
+                        inputText: Binding(
+                            get: { viewModel.draftText },
+                            set: { viewModel.updateDraftText($0) }
+                        )
+                    ) { text in
+                        Task {
+                            await viewModel.createQuickCapture(
+                                captureService: container.captureService,
+                                goalsService: container.goalsService
+                            )
+                        }
+                    }
 
                     switch viewModel.state {
                     case .loading:
@@ -59,33 +74,14 @@ struct CaptureScreen: View {
                 .padding(.bottom, theme.spacing.xl)
             }
             .scrollIndicators(.hidden)
-        }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            CaptureAtmosphereComposer(
-                text: Binding(
-                    get: { viewModel.draftText },
-                    set: { viewModel.updateDraftText($0) }
-                ),
-                routePreview: viewModel.draftRoutePreview,
-                error: viewModel.draftError,
-                isSubmitEnabled: canSubmitDraft,
-                onSubmit: {
-                    Task {
-                        await viewModel.createQuickCapture(
-                            captureService: container.captureService,
-                            goalsService: container.goalsService
-                        )
-                    }
-                },
-                onMicrophone: {
-                    viewModel.draftError = "Voice capture is not connected yet. Type it here for now."
-                },
-                onRouteChoice: { routeType in
-                    viewModel.selectDraftRoute(routeType)
-                }
+
+            ContextCrownHeader(
+                title: "Capture",
+                contextPhrase: promptSubtitle
             )
+            .ignoresSafeArea(edges: .top)
         }
-        .navigationTitle(shellMode.title)
+        .navigationTitle("")
         .refreshable {
             await load()
         }
@@ -286,10 +282,18 @@ struct CaptureScreen: View {
                     .accessibilityIdentifier("capture.metadata.\(capture.id)")
 
                 if let assumption = capture.assumptionSummary {
-                    Text(assumption)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    TrustSeamExplainer(
+                        title: "Suggested Route Alignment",
+                        reason: assumption,
+                        confidence: 0.86,
+                        source: capture.sourceType?.title ?? "Local System",
+                        onOverride: {
+                            // Custom override action hook
+                        },
+                        onAccept: {
+                            // Confirm recommendation action hook
+                        }
+                    )
                 }
 
                 placementReview(capture.placementReviewState, correction: capture.correctionReviewState)
