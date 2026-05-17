@@ -3,7 +3,7 @@
 Status: Active intended final-state visual recipe encyclopedia
 Batch: FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001
 Authority: subordinate to `docs/truth/*`, authoritative for intended final-state frontend visual documentation where compatible.
-Implementation claim: Docs-only; this file does not prove shipped UI, accessibility conformance, performance, release readiness, or screenshots.
+Implementation claim: Docs-only; this file does not prove shipped UI, accessibility conformance, performance, release readiness, screenshots, or award readiness.
 
 This is The intended final-state visual recipe encyclopedia for Ambitions after all active planned frontend work is complete.
 
@@ -21,11 +21,34 @@ Recipes must be specific enough to tell a designer or reviewer exactly what visi
 
 Active IA is `Today / Goals / Capture / Time / You`. Plan is excluded as a top-level destination and remains only contextual/internal compatibility language.
 
+## Flagship Object System
+
+The active flagship object system overlay is installed at:
+
+- [Flagship Object System Doctrine](FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md)
+- [Object Graph Architecture](OBJECT_GRAPH_ARCHITECTURE.md)
+- [Flagship Object Surface Matrix](trace/FLAGSHIP_OBJECT_SURFACE_MATRIX.md)
+- [Flagship Object Maturity Gates](trace/FLAGSHIP_OBJECT_MATURITY_GATES.md)
+
+The Flagship Object System defines how Ambitions turns final visual canon into executable, world-class, native iPhone product objects. It requires objects to be semantic, stateful, adaptive, inspectable, accessible, animated with purpose, proof-backed, locally grounded, visually distinctive, and production-grade.
+
+The locked object model is:
+
+- every visible object is a semantic product unit, not a decorated view
+- every primary destination object must be flagship quality
+- object graph connects truth, surface recipe, object kernel, state machine, motion, accessibility, proof, renderer, previews, tests, and receipts
+- shallow `title/subtitle/icon/color` components are insufficient unless subordinate to a semantic object kernel
+- world-class production value requires state depth, proof, accessibility, motion intent, visual distinctiveness, edge-case polish, and rollback honesty
+- no object may claim implementation, release readiness, or award readiness without proof
+
+This overlay is design/architecture canon only. It does not prove SwiftUI implementation, simulator/device behavior, screenshot parity, accessibility conformance, performance, release readiness, or award readiness.
+
 ## Chrome Enrichment
 
 The active chrome enrichment overlay is installed at:
 
 - [Chrome Enrichment Doctrine](CHROME_ENRICHMENT_DOCTRINE.md)
+- [Start Here Reality Recognition Doctrine](START_HERE_REALITY_RECOGNITION_DOCTRINE.md)
 - [Chrome Primitives](CHROME_PRIMITIVES.md)
 - [Chrome Enrichment Install Ledger](trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md)
 
@@ -42,6 +65,7 @@ The chrome enrichment lock is:
 - inspectable receipt/proof/source affordances for local intelligence
 - contextual sheets for closure, recovery, reflow, conflict, and proof
 - conditional continuity strip for active execution or adaptation state
+- state-accurate Start Here labeling
 - accessibility-preserving state labels beyond color, glow, or motion
 
 This overlay is design canon only. It does not prove SwiftUI implementation, simulator/device behavior, screenshot parity, accessibility conformance, or release readiness.
@@ -61,7 +85,12 @@ The atlas is final intended visual canon, subordinate to active truth files and 
 
 ## Trace And Precedence
 
+- [Flagship Object System Doctrine](FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md)
+- [Object Graph Architecture](OBJECT_GRAPH_ARCHITECTURE.md)
+- [Flagship Object Surface Matrix](trace/FLAGSHIP_OBJECT_SURFACE_MATRIX.md)
+- [Flagship Object Maturity Gates](trace/FLAGSHIP_OBJECT_MATURITY_GATES.md)
 - [Chrome Enrichment Doctrine](CHROME_ENRICHMENT_DOCTRINE.md)
+- [Start Here Reality Recognition Doctrine](START_HERE_REALITY_RECOGNITION_DOCTRINE.md)
 - [Chrome Primitives](CHROME_PRIMITIVES.md)
 - [Chrome Enrichment Install Ledger](trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md)
 - [Visual Conflict Ledger](trace/VISUAL_CONFLICT_LEDGER.md)
@@ -100,7 +129,7 @@ See [Planned Train Frontend Integration Map](PLANNED_TRAIN_FRONTEND_INTEGRATION_
 
 ## Obsolete/Deprecated Terms And Excluded References
 
-Plan is not a top-level destination. Dashboard, chatbot, assistant, task-list clone, calendar clone, productivity score, streak, shame language, and forbidden transaction-language are excluded from active recipe canon.
+Plan is not a top-level destination. Dashboard, chatbot, assistant, task-list clone, calendar clone, productivity score, streak, shame language, shallow decorated view objects, award-readiness claims without proof, and forbidden transaction-language are excluded from active recipe canon.
 
 ## Open Questions And Unresolved Source Gaps
 
