@@ -8,6 +8,7 @@ from pathlib import Path
 
 COMMANDS = [
     ["python3", "scripts/governance/ambitions-governance-reconcile.py", "--write"],
+    ["python3", "scripts/governance/ambitions-canon-impact-map.py"],
     ["python3", "scripts/governance/ambitions-governance-dashboard.py"],
     ["python3", "scripts/governance/ambitions-lineage-confidence-score.py"],
     ["python3", "scripts/governance/ambitions-cleanup-action-plan.py"],
@@ -19,6 +20,7 @@ COMMANDS = [
     ["python3", "scripts/governance/ambitions-governance-validate.py"],
     ["python3", "scripts/governance/ambitions-no-orphan-file-gate.py"],
     ["python3", "scripts/governance/ambitions-sprawl-budget-check.py"],
+    ["make", "encyclopedia-to-frontend-os-all"],
 ]
 
 SUMMARY = Path("docs/governance/generated/repo_doctor_summary.md")
