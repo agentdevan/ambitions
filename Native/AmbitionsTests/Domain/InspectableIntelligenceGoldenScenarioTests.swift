@@ -141,6 +141,316 @@ final class InspectableIntelligenceGoldenScenarioTests: XCTestCase {
         XCTAssertTrue(futureTrace.canDriveRecommendationBehavior)
     }
 
+    func testSameIntentProducesDifferentPlansAcrossBusyProtectedAndOpenCapacityContexts() {
+        let goalID = "goal-same-intent"
+
+        let busyExplanation = makePrivateLifeExplanation(
+            id: "explanation.private-life.busy",
+            type: .whyPrioritized,
+            title: "Why this gets protected",
+            summary: "Same intent, but the protected window is small so the next step stays smaller and safer.",
+            recommendationTitle: "Take the smallest safe next step",
+            recommendationSummary: "Protect the window and keep the change local.",
+            goalID: goalID,
+            contextID: "context-busy",
+            evidence: [
+                RecommendationExplanationEvidence(
+                    id: "evidence.intent.busy",
+                    category: .sourceTruth,
+                    title: "Same intent",
+                    summary: "The same goal still matters.",
+                    sourceID: goalID
+                ),
+                RecommendationExplanationEvidence(
+                    id: "evidence.capacity.busy",
+                    category: .capacity,
+                    title: "Busy capacity",
+                    summary: "Only a small protected window is open.",
+                    sourceID: "reality-busy"
+                ),
+                RecommendationExplanationEvidence(
+                    id: "evidence.context.busy",
+                    category: .contextLens,
+                    title: "Protected context",
+                    summary: "The local context is busy and protected.",
+                    sourceID: "context-busy"
+                ),
+                RecommendationExplanationEvidence(
+                    id: "evidence.recovery.busy",
+                    category: .recovery,
+                    title: "Safer path",
+                    summary: "The next step should stay smaller.",
+                    sourceID: "recovery-busy"
+                )
+            ],
+            uncertaintySummary: "The exact duration still needs review.",
+            correctableFieldKeys: ["capacity", "context", "urgency"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-busy-context",
+                    kind: .changeDomainContext,
+                    title: "Adjust context",
+                    targetFieldKey: "context"
+                ),
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-busy-urgency",
+                    kind: .changeUrgency,
+                    title: "Adjust urgency",
+                    targetFieldKey: "urgency"
+                )
+            ]
+        )
+        let busyTrace = makePrivateLifeTrace(
+            explanation: busyExplanation,
+            receiptIDs: ["receipt-busy"],
+            actionReceiptIDs: ["action-receipt-busy"],
+            proofReferenceIDs: ["proof-busy"]
+        )
+
+        let openExplanation = makePrivateLifeExplanation(
+            id: "explanation.private-life.open",
+            type: .whyScheduled,
+            title: "Why this goes deeper",
+            summary: "Same intent, and the open window supports a fuller follow-through step.",
+            recommendationTitle: "Do the deeper follow-through step",
+            recommendationSummary: "Use the open window to move farther into the same goal instead of shrinking it.",
+            goalID: goalID,
+            contextID: "context-open",
+            evidence: [
+                RecommendationExplanationEvidence(
+                    id: "evidence.intent.open",
+                    category: .sourceTruth,
+                    title: "Same intent",
+                    summary: "The same goal still matters.",
+                    sourceID: goalID
+                ),
+                RecommendationExplanationEvidence(
+                    id: "evidence.capacity.open",
+                    category: .capacity,
+                    title: "Open capacity",
+                    summary: "A longer useful work window is open.",
+                    sourceID: "reality-open"
+                ),
+                RecommendationExplanationEvidence(
+                    id: "evidence.goal.open",
+                    category: .goalState,
+                    title: "Goal state",
+                    summary: "The goal can absorb more follow-through now.",
+                    sourceID: goalID
+                ),
+                RecommendationExplanationEvidence(
+                    id: "evidence.priority.open",
+                    category: .priority,
+                    title: "Priority fit",
+                    summary: "The larger step still fits the current priority picture.",
+                    sourceID: "priority-open"
+                )
+            ],
+            uncertaintySummary: "The exact ordering still benefits from review.",
+            correctableFieldKeys: ["importance", "scope", "timing"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-open-importance",
+                    kind: .changeImportance,
+                    title: "Adjust importance",
+                    targetFieldKey: "importance"
+                ),
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-open-support",
+                    kind: .markGoalSupporting,
+                    title: "Mark goal-supporting",
+                    targetFieldKey: "goalRelationship"
+                )
+            ]
+        )
+        let openTrace = makePrivateLifeTrace(
+            explanation: openExplanation,
+            receiptIDs: ["receipt-open"],
+            actionReceiptIDs: ["action-receipt-open"],
+            proofReferenceIDs: ["proof-open"]
+        )
+
+        XCTAssertEqual(busyExplanation.relations.goalIDs, [goalID])
+        XCTAssertEqual(openExplanation.relations.goalIDs, [goalID])
+        XCTAssertEqual(busyExplanation.recommendationTitle, "Take the smallest safe next step")
+        XCTAssertEqual(openExplanation.recommendationTitle, "Do the deeper follow-through step")
+
+        XCTAssertEqual(busyTrace.source.localEvidenceCategories, [.capacity, .contextLens, .recovery, .sourceTruth])
+        XCTAssertEqual(openTrace.source.localEvidenceCategories, [.capacity, .goalState, .priority, .sourceTruth])
+        XCTAssertEqual(busyTrace.source.citedSourceIDs, ["context-busy", "goal-same-intent", "reality-busy", "recovery-busy"])
+        XCTAssertEqual(openTrace.source.citedSourceIDs, ["goal-same-intent", "priority-open", "reality-open"])
+        XCTAssertEqual(busyTrace.reason.evidenceCategoryIDs, ["capacity", "context_lens", "recovery", "source_truth"])
+        XCTAssertEqual(openTrace.reason.evidenceCategoryIDs, ["capacity", "goal_state", "priority", "source_truth"])
+        XCTAssertEqual(busyTrace.source.sourceAtlasBlockReasons, [])
+        XCTAssertEqual(busyTrace.fit.blockReasons, [])
+        XCTAssertEqual(openTrace.source.sourceAtlasBlockReasons, [])
+        XCTAssertEqual(openTrace.fit.blockReasons, [])
+        XCTAssertTrue(busyTrace.isComplete)
+        XCTAssertTrue(openTrace.isComplete)
+        XCTAssertTrue(busyTrace.canDriveRecommendationBehavior)
+        XCTAssertTrue(openTrace.canDriveRecommendationBehavior)
+        XCTAssertNotEqual(busyTrace.id, openTrace.id)
+        XCTAssertNotEqual(busyTrace.recommendationID, openTrace.recommendationID)
+    }
+
+    func testReplayBoundaryKeepsDeterministicTraceIdentityAndReceiptReferencesWithoutPersistenceOverclaim() {
+        let explanation = makePrivateLifeExplanation(
+            id: "explanation.private-life.replay",
+            type: .whyScheduled,
+            title: "Why this stays stable",
+            summary: "The same local inputs should rebuild the same recommendation trace.",
+            recommendationTitle: "Keep the same local plan",
+            recommendationSummary: "This only proves deterministic reconstruction, not persistence storage.",
+            goalID: "goal-replay",
+            contextID: "context-replay",
+            evidence: [
+                RecommendationExplanationEvidence(
+                    id: "evidence.intent.replay",
+                    category: .sourceTruth,
+                    title: "Same intent",
+                    summary: "The intent remains the same across relaunch.",
+                    sourceID: "goal-replay"
+                ),
+                RecommendationExplanationEvidence(
+                    id: "evidence.capacity.replay",
+                    category: .capacity,
+                    title: "Replay capacity",
+                    summary: "The same local capacity facts rebuild the same step.",
+                    sourceID: "reality-replay"
+                )
+            ],
+            uncertaintySummary: "The trace remains inspectable after replay.",
+            correctableFieldKeys: ["capacity"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-replay-capacity",
+                    kind: .changeUrgency,
+                    title: "Adjust urgency",
+                    targetFieldKey: "capacity"
+                )
+            ]
+        )
+
+        let replayA = makePrivateLifeTrace(
+            explanation: explanation,
+            receiptIDs: ["receipt-replay"],
+            actionReceiptIDs: ["action-receipt-replay"],
+            proofReferenceIDs: ["proof-replay"]
+        )
+        let replayB = makePrivateLifeTrace(
+            explanation: explanation,
+            receiptIDs: ["receipt-replay"],
+            actionReceiptIDs: ["action-receipt-replay"],
+            proofReferenceIDs: ["proof-replay"]
+        )
+
+        XCTAssertEqual(replayA, replayB)
+        XCTAssertEqual(replayA.id, "trace.\(explanation.id)")
+        XCTAssertEqual(replayA.receiptBehavior.receiptIDs, ["receipt-replay"])
+        XCTAssertEqual(replayA.receiptBehavior.actionReceiptIDs, ["action-receipt-replay"])
+        XCTAssertEqual(replayA.receiptBehavior.proofReferenceIDs, ["proof-replay"])
+        XCTAssertTrue(replayA.canDriveRecommendationBehavior)
+    }
+
+    func testCorrectionInfluenceStaysLocalInspectableAndResetDeleteCompatible() throws {
+        let correction = CorrectionFoldRecord.recommendation(
+            id: "recommendation-correction-private-life",
+            recommendationID: "recommendation.private-life.future",
+            from: .stillUseful,
+            to: .rejectedLowEnergyContext,
+            reason: "This should stay smaller when the same low-energy context appears again.",
+            occurredAt: "2026-05-17T05:12:17Z"
+        )
+        let influence = try XCTUnwrap(
+            CorrectionFoldRecommendationLearningInfluence(
+                correction: correction,
+                similarRecommendationSignalKeys: ["capacity", "context", "capacity"]
+            )
+        )
+        let futureExplanation = makePrivateLifeExplanation(
+            id: "explanation.private-life.future",
+            type: .whyThis,
+            title: "Why this remains reviewable",
+            summary: "Future recommendations should stay inspectable and local after correction.",
+            recommendationTitle: "Keep the future recommendation local",
+            recommendationSummary: "The correction should influence later behavior without mutating plans silently.",
+            goalID: "goal-future",
+            contextID: "context-future",
+            evidence: [
+                RecommendationExplanationEvidence(
+                    id: "evidence.intent.future",
+                    category: .sourceTruth,
+                    title: "Same intent",
+                    summary: "The same goal remains the anchor.",
+                    sourceID: "goal-future"
+                ),
+                RecommendationExplanationEvidence(
+                    id: "evidence.capacity.future",
+                    category: .capacity,
+                    title: "Corrected capacity",
+                    summary: "The local correction keeps this grounded in the same capacity pattern.",
+                    sourceID: "reality-future"
+                )
+            ],
+            uncertaintySummary: "The correction can still be reviewed or reset.",
+            correctableFieldKeys: ["capacity"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-future-capacity",
+                    kind: .changeUrgency,
+                    title: "Adjust urgency",
+                    targetFieldKey: "capacity"
+                )
+            ]
+        )
+        let futureTrace = RecommendationTrace(
+            id: "trace.\(futureExplanation.id)",
+            recommendationID: futureExplanation.id,
+            source: RecommendationTraceSource(
+                citedSourceIDs: futureExplanation.recommendationEvidenceModel.citedSourceIDs,
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: futureExplanation.recommendationEvidenceModel.categories,
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: futureExplanation.id,
+                summary: futureExplanation.summary,
+                evidenceCategoryIDs: futureExplanation.recommendationEvidenceModel.categories.map(\.rawValue)
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: futureExplanation.uncertainty.map(\.id).sorted(),
+                summaries: futureExplanation.uncertainty.map(\.summary).sorted()
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: futureExplanation.correctionActions.map(\.id).sorted(),
+                controlActionIDs: [],
+                correctableFieldKeys: futureExplanation.userCorrectableFields,
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .available(
+                receiptIDs: ["receipt-future"],
+                actionReceiptIDs: ["action-receipt-future"],
+                proofReferenceIDs: ["proof-future"]
+            ),
+            rejectionLearningInfluences: [influence]
+        )
+
+        XCTAssertTrue(influence.isInspectableAndControllable)
+        XCTAssertTrue(influence.localOnly)
+        XCTAssertTrue(influence.resetDeleteCompatible)
+        XCTAssertFalse(influence.permitsSilentMutation)
+        XCTAssertEqual(influence.adjustment, .downrankLowEnergyContext)
+        XCTAssertEqual(influence.similarRecommendationSignalKeys, ["capacity", "context"])
+        XCTAssertEqual(futureTrace.rejectionLearningRankAdjustment, influence.adjustment.baseRankAdjustment)
+        XCTAssertFalse(futureTrace.isSuppressedByRejectionLearning)
+        XCTAssertTrue(futureTrace.canDriveRecommendationBehavior)
+    }
+
     func testResetDeleteAndDisableLearningInputsRemoveFutureLearningUseAndCreateLocalReceipts() {
         let reset = learningInputCorrection(id: "learning-reset", learningInputID: "input-reset", to: .reset)
         let delete = learningInputCorrection(id: "learning-delete", learningInputID: "input-delete", to: .delete)
@@ -306,6 +616,103 @@ private extension InspectableIntelligenceGoldenScenarioTests {
             occurredAt: "2026-05-13T11:35:35Z"
         )
     }
+
+    func makePrivateLifeExplanation(
+        id: String,
+        type: RecommendationExplanationType,
+        title: String,
+        summary: String,
+        recommendationTitle: String,
+        recommendationSummary: String? = nil,
+        goalID: String,
+        contextID: String,
+        evidence: [RecommendationExplanationEvidence],
+        uncertaintySummary: String,
+        correctableFieldKeys: [String],
+        correctionActions: [RecommendationExplanationCorrectionAction],
+        lastUpdatedAt: String = "2026-05-17T05:12:17Z"
+    ) -> RecommendationExplanation {
+        RecommendationExplanation(
+            id: id,
+            type: type,
+            title: title,
+            summary: summary,
+            recommendationTitle: recommendationTitle,
+            recommendationSummary: recommendationSummary,
+            evidence: evidence,
+            assumptions: [
+                RecommendationExplanationAssumption(
+                    id: "\(id).assumption",
+                    summary: "The same intent stays grounded in local context.",
+                    fieldKey: "context"
+                )
+            ],
+            uncertainty: [
+                RecommendationExplanationUncertainty(
+                    id: "\(id).uncertainty",
+                    summary: uncertaintySummary
+                )
+            ],
+            userCorrectableFields: correctableFieldKeys,
+            correctionActions: correctionActions,
+            lastUpdatedAt: lastUpdatedAt,
+            source: .recommendation,
+            relations: RecommendationExplanationRelations(goalIDs: [goalID]),
+            privacy: .standard,
+            localOnly: true,
+            metadata: [
+                "goalID": goalID,
+                "contextID": contextID
+            ]
+        )
+    }
+
+    func makePrivateLifeTrace(
+        explanation: RecommendationExplanation,
+        receiptIDs: [String],
+        actionReceiptIDs: [String],
+        proofReferenceIDs: [String],
+        rejectionLearningInfluences: [CorrectionFoldRecommendationLearningInfluence] = []
+    ) -> RecommendationTrace {
+        let evidenceModel = explanation.recommendationEvidenceModel
+        return RecommendationTrace(
+            id: "trace.\(explanation.id)",
+            recommendationID: explanation.id,
+            source: RecommendationTraceSource(
+                citedSourceIDs: evidenceModel.citedSourceIDs,
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: evidenceModel.categories,
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: explanation.id,
+                summary: explanation.summary,
+                evidenceCategoryIDs: evidenceModel.categories.map(\.rawValue)
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: explanation.uncertainty.map(\.id).sorted(),
+                summaries: explanation.uncertainty.map(\.summary).sorted()
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: explanation.correctionActions.map(\.id).sorted(),
+                controlActionIDs: [],
+                correctableFieldKeys: explanation.userCorrectableFields,
+                hasRequiredControl: explanation.correctionActions.isEmpty == false || explanation.userCorrectableFields.isEmpty == false
+            ),
+            receiptBehavior: .available(
+                receiptIDs: receiptIDs,
+                actionReceiptIDs: actionReceiptIDs,
+                proofReferenceIDs: proofReferenceIDs
+            ),
+            rejectionLearningInfluences: rejectionLearningInfluences
+        )
+    }
+
 }
 
 private extension InspectableIntelligenceGoldenScenarioTests {
