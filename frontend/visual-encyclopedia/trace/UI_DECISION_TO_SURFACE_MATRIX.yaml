@@ -38,6 +38,19 @@
         "today_root_reality_meridian"
       ],
       "status": "active"
+    },
+    {
+      "affected_encyclopedia_files": [
+        "frontend/visual-encyclopedia/README.md",
+        "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md"
+      ],
+      "id": "UID-2026-05-16-start-here-product-kernel",
+      "owner_surface_ids": [
+        "today_root_reality_meridian",
+        "today_start_here_surface"
+      ],
+      "status": "active"
     }
   ],
   "description": "Generated map from active UI decisions to affected frontend surfaces and encyclopedia files.",
