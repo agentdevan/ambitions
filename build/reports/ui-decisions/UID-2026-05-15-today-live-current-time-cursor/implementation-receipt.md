@@ -7,28 +7,29 @@ Status: source-installed, validation still required
 ## Current Source Files
 
 - `Sources/Components/RealityMeridianTemporalPrimitives.swift`
+- `Sources/Components/RealityMeridianTimeBand.swift`
 - `Sources/Previews/RealityMeridianTemporalPreviews.swift`
+- `Sources/Previews/RealityMeridianRichnessPreviews.swift`
 - `Native/Ambitions/Features/Today/TodayDayRailCurrentTimeFusion.swift`
 - `Native/Ambitions/Features/Today/TodayScreen.swift`
+- `Native/Ambitions/Features/Today/TodayMasthead.swift`
 - `Native/AmbitionsTests/DesignSystem/RealityMeridianTemporalWindowTests.swift`
 - `scripts/ambitions-ui-decision-final-gate.py`
 
 ## What Changed
 
-- `RealityMeridianTemporalWindow` now owns proportional time-position math for the Reality Meridian cursor.
-- `RealityMeridianCurrentTimeCursor` uses that model to render a proportional 6 AM to 10 PM mini-spine with exact current-time label and minute refresh.
-- `RealityMeridianScheduledNode` remains the paired scheduled-node primitive.
-- `DayTimelineRail.fusedCurrentTimeCursor()` owns the current-time fusion at the rail layer.
-- `TodayScreen` renders `DayTimelineRail(...).fusedCurrentTimeCursor()`.
-- `RealityMeridianTemporalWindowTests` covers start, middle, end, clamping, exact-minute position, invalid-window normalization, and calendar-driven date progress.
-- The UI decision final gate now checks the current-time cursor lane for the rail-layer fusion file, absent obsolete wrapper, non-blocking hit testing, Today usage, and temporal tests.
+- `RealityMeridianTemporalWindow` owns proportional time-position math for the Reality Meridian cursor.
+- `RealityMeridianTimeBand` adds a richer Start Here / Now / Next / Later visual time instrument.
+- `DayTimelineRail.fusedCurrentTimeCursor()` now renders `RealityMeridianTimeBand()` before the rail and keeps the rail-overlay current-time cursor.
+- `RealityMeridianCurrentTimeCursor` still renders the exact current-time marker with `presentation: .railOverlay` in the rail path.
+- `TodayMasthead` was added as source-installed future masthead chrome, but it is not yet active in `TodayScreen`.
+- `RealityMeridianRichnessPreviews` was added for the richer time-band and cursor preview.
 
 ## Proof Collected
 
 - Source files are installed in the repo.
 - Decision file and design-system matrix point to the rail-layer fusion source.
-- Gap report and proof contract were updated for the `DayTimelineRail.fusedCurrentTimeCursor()` path.
-- Source-shape gate logic was tightened for this lane.
+- Final-gate source-shape logic checks the current-time lane.
 
 ## Proof Still Required
 
@@ -36,6 +37,7 @@ Status: source-installed, validation still required
 - local XCTest execution proof
 - rendered preview or simulator screenshot proof
 - accessibility review for VoiceOver order, contrast, and Dynamic Type behavior
+- optional safe activation of `TodayMasthead` once local compile feedback is available
 
 ## Boundary
 
