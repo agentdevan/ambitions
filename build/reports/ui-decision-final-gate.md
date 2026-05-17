@@ -14,6 +14,9 @@ Status: `green`
 - current_time_obsolete_wrapper_absent: true
 - current_time_temporal_tests_exist: true
 - current_time_uses_rail_overlay_presentation: true
+- reality_meridian_time_band_exists: true
+- reality_meridian_time_band_preview_exists: true
+- rail_fusion_uses_time_band: true
 - start_here_primitives_exist: true
 - start_here_kernel_tests_exist: true
 - start_here_projection_exists: true
