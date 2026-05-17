@@ -1,0 +1,40 @@
+{
+  "status": "RECONCILIATION_ACTIVE",
+  "generated_from": "INITIAL_GOVERNANCE_RECONCILIATION",
+  "active_programs": [
+    {
+      "id": "GOVERNANCE_RECONCILIATION",
+      "state": "ACTIVE",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "AFI",
+      "state": "ACTIVE_CANON"
+    },
+    {
+      "id": "FCP",
+      "state": "ACTIVE_PARTIAL"
+    },
+    {
+      "id": "PK",
+      "state": "ACTIVE_PARTIAL",
+      "next_eligible": "PK28"
+    },
+    {
+      "id": "PFC",
+      "state": "MOSTLY_QUEUED"
+    },
+    {
+      "id": "AIR",
+      "state": "CANON_OVERLAY_ONLY"
+    },
+    {
+      "id": "CQS",
+      "state": "COMPLETE_GREEN"
+    },
+    {
+      "id": "FET",
+      "state": "COMPLETE_GREEN"
+    }
+  ]
+}
