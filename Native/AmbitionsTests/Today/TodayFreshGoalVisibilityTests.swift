@@ -88,7 +88,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
 
         let response = try await todayService.performAction(
             TodayInlineAction(
-                kind: .openPlan,
+                kind: .openTime,
                 title: "Open Time",
                 systemImage: "calendar",
                 state: .default,

@@ -1,13 +1,13 @@
 import Foundation
 
 /// Maturity train closure and handoff contracts for LDI, as per LDI22 manifest.
-public struct LivingDreamMaturityHandoff: Codable, Sendable, Equatable {
-    public let sourceAtlasMaturityVerified: Bool
-    public let ldiMaturityVerified: Bool
-    public let aosQueueReady: Bool
-    public let handoffDate: Date
+struct LivingDreamMaturityHandoff: Codable, Sendable, Equatable {
+    let sourceAtlasMaturityVerified: Bool
+    let ldiMaturityVerified: Bool
+    let aosQueueReady: Bool
+    let handoffDate: Date
     
-    public init(
+    init(
         sourceAtlasMaturityVerified: Bool,
         ldiMaturityVerified: Bool,
         aosQueueReady: Bool,
@@ -20,13 +20,13 @@ public struct LivingDreamMaturityHandoff: Codable, Sendable, Equatable {
     }
 }
 
-public struct LivingPlanGovernanceAction: Sendable, Equatable, Identifiable {
-    public let id: String
-    public let actionType: String
-    public let description: String
-    public let requiresConfirmation: Bool
+struct LivingPlanGovernanceAction: Sendable, Equatable, Identifiable {
+    let id: String
+    let actionType: String
+    let description: String
+    let requiresConfirmation: Bool
     
-    public init(id: String = UUID().uuidString, actionType: String, description: String, requiresConfirmation: Bool) {
+    init(id: String = UUID().uuidString, actionType: String, description: String, requiresConfirmation: Bool) {
         self.id = id
         self.actionType = actionType
         self.description = description
@@ -34,10 +34,10 @@ public struct LivingPlanGovernanceAction: Sendable, Equatable, Identifiable {
     }
 }
 
-public struct LivingPlanGovernanceConsole: Sendable, Equatable {
-    public init() {}
+struct LivingPlanGovernanceConsole: Sendable, Equatable {
+    init() {}
     
-    public func performFinalValidation() -> LivingDreamMaturityHandoff {
+    func performFinalValidation() -> LivingDreamMaturityHandoff {
         // Deterministic validation check for LDI maturity train closure
         return LivingDreamMaturityHandoff(
             sourceAtlasMaturityVerified: true,
@@ -46,7 +46,7 @@ public struct LivingPlanGovernanceConsole: Sendable, Equatable {
         )
     }
     
-    public func scanForMaintenance() -> [LivingPlanGovernanceAction] {
+    func scanForMaintenance() -> [LivingPlanGovernanceAction] {
         return [
             LivingPlanGovernanceAction(
                 actionType: "reconcile_receipts",
@@ -61,7 +61,7 @@ public struct LivingPlanGovernanceConsole: Sendable, Equatable {
         ]
     }
     
-    public func generateHandoffReceipt(handoff: LivingDreamMaturityHandoff) -> ActionReceipt {
+    func generateHandoffReceipt(handoff: LivingDreamMaturityHandoff) -> ActionReceipt {
         return ActionReceipt(
             id: UUID().uuidString,
             resultState: .completed,

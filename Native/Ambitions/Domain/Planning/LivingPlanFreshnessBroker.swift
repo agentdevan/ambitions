@@ -1,22 +1,22 @@
 import Foundation
 
 /// Context injection protocol for living plans, as per LDI20 manifest.
-public struct PlanContextHint: Codable, Sendable, Equatable {
-    public let key: String
-    public let value: String
+struct PlanContextHint: Codable, Sendable, Equatable {
+    let key: String
+    let value: String
     
-    public init(key: String, value: String) {
+    init(key: String, value: String) {
         self.key = key
         self.value = value
     }
 }
 
-public struct LivingPlanFreshnessBroker: Sendable, Equatable {
-    public let lastEvaluatedAt: Date
-    public let staleGoalIDs: [String]
-    public let injectedHints: [PlanContextHint]
+struct LivingPlanFreshnessBroker: Sendable, Equatable {
+    let lastEvaluatedAt: Date
+    let staleGoalIDs: [String]
+    let injectedHints: [PlanContextHint]
     
-    public init(
+    init(
         lastEvaluatedAt: Date = Date(),
         staleGoalIDs: [String] = [],
         injectedHints: [PlanContextHint] = []
@@ -27,7 +27,7 @@ public struct LivingPlanFreshnessBroker: Sendable, Equatable {
     }
     
     /// Injects dynamic context hints to influence plan recompilation logic.
-    public func withInjectedContext(_ hints: [PlanContextHint]) -> LivingPlanFreshnessBroker {
+    func withInjectedContext(_ hints: [PlanContextHint]) -> LivingPlanFreshnessBroker {
         var newHints = injectedHints
         for hint in hints {
             if let index = newHints.firstIndex(where: { $0.key == hint.key }) {
@@ -43,7 +43,7 @@ public struct LivingPlanFreshnessBroker: Sendable, Equatable {
         )
     }
     
-    public func evaluateFreshness(for goalIDs: [String], against threshold: TimeInterval) -> LivingPlanFreshnessBroker {
+    func evaluateFreshness(for goalIDs: [String], against threshold: TimeInterval) -> LivingPlanFreshnessBroker {
         let newlyStale = goalIDs.filter { !staleGoalIDs.contains($0) }
         
         return LivingPlanFreshnessBroker(
@@ -53,7 +53,7 @@ public struct LivingPlanFreshnessBroker: Sendable, Equatable {
         )
     }
     
-    public func generateReceipt(for newlyStaleIDs: [String]) -> ActionReceipt {
+    func generateReceipt(for newlyStaleIDs: [String]) -> ActionReceipt {
         let needsConfirmation = !newlyStaleIDs.isEmpty
         
         return ActionReceipt(
@@ -61,7 +61,7 @@ public struct LivingPlanFreshnessBroker: Sendable, Equatable {
             resultState: needsConfirmation ? .needsConfirmation : .noOp,
             title: "Freshness & Context Evaluation",
             summary: "Evaluated plan freshness and \(injectedHints.count) context hints.",
-            sourceDomain: .plan,
+            sourceDomain: .time,
             occurredAt: "2026-05-16T00:00:00Z",
             affectedObjects: [],
             changedFacts: [

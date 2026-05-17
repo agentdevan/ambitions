@@ -601,18 +601,18 @@ struct DefaultCaptureService: CaptureServicing {
         if request.userCorrection {
             try await appendCaptureEvent(.userCorrectionAdded, capture: updated, occurredAt: timestamp)
         }
-        if request.route == .planSeed {
+        if request.route == .timeSeed {
             try await appendCaptureEvent(.commitmentRouted, capture: updated, occurredAt: timestamp)
         }
         return updated
     }
 
     func markAsOneTimeCommitment(id: String, deadlineText: String?, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
-        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .planSeed, deadlineText: deadlineText, contextLensHint: contextLensHint, assumptionSummary: "I treated this as a one-time commitment."), now: now)
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .timeSeed, deadlineText: deadlineText, contextLensHint: contextLensHint, assumptionSummary: "I treated this as a one-time commitment."), now: now)
     }
 
     func markAsDeadlineTask(id: String, deadlineText: String, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
-        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .deadlineTask, route: .planSeed, deadlineText: deadlineText, contextLensHint: contextLensHint, priorityHints: CapturePriorityHints(urgency: .elevated, deadline: .high), assumptionSummary: "I treated this as deadline-bound work."), now: now)
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .deadlineTask, route: .timeSeed, deadlineText: deadlineText, contextLensHint: contextLensHint, priorityHints: CapturePriorityHints(urgency: .elevated, deadline: .high), assumptionSummary: "I treated this as deadline-bound work."), now: now)
     }
 
     func markAsGoalSeed(id: String, now: Date) async throws -> Capture? {
@@ -636,7 +636,11 @@ struct DefaultCaptureService: CaptureServicing {
     }
 
     func routeToPlanSeed(id: String, now: Date) async throws -> Capture? {
-        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .planSeed, assumptionSummary: "I routed this as a Plan idea. Scheduling is still deferred to Plan."), now: now)
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .timeSeed, assumptionSummary: "I routed this as a Time idea. Scheduling is still deferred to Time."), now: now)
+    }
+
+    func routeToTimeSeed(id: String, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .timeSeed, assumptionSummary: "I routed this as a Time idea. Scheduling is still deferred to Time."), now: now)
     }
 
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
@@ -857,7 +861,7 @@ private extension DefaultCaptureService {
         switch route {
         case .captureInbox:
             kind == .raw ? .needsTriage : .actionable
-        case .planSeed:
+        case .timeSeed:
             .scheduled
         case .goalSeed:
             .seed
@@ -1037,13 +1041,13 @@ private enum CaptureClassifier {
             inferredRoute = .deliverableSeed
         } else if hasDeadline, looksCommitment {
             inferredKind = .oneTimeCommitment
-            inferredRoute = .planSeed
+            inferredRoute = .timeSeed
         } else if hasDeadline {
             inferredKind = .deadlineTask
-            inferredRoute = .planSeed
+            inferredRoute = .timeSeed
         } else if looksCommitment {
             inferredKind = .oneTimeCommitment
-            inferredRoute = .planSeed
+            inferredRoute = .timeSeed
         } else {
             inferredKind = .raw
             inferredRoute = .captureInbox
@@ -1080,7 +1084,7 @@ private enum CaptureClassifier {
     private static func route(for kind: CaptureKind) -> CaptureRoute {
         switch kind {
         case .raw: .captureInbox
-        case .oneTimeCommitment, .deadlineTask: .planSeed
+        case .oneTimeCommitment, .deadlineTask: .timeSeed
         case .goalSeed: .goalSeed
         case .goalSupportingTask: .goalAttachment
         case .deliverableSeed: .deliverableSeed

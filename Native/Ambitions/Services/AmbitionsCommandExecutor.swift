@@ -100,7 +100,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
                     "calendarWriteIntent": "true"
                 ]
             )
-        case .createPlanItem, .scheduleItem:
+        case .createTimeItem, .scheduleItem:
             result = await executePlanSeedRepresentation(command, context: context)
         default:
             result = AmbitionsCommandExecutionResult(
@@ -258,7 +258,7 @@ private extension AmbitionsCommandExecutor {
                         rawText: text,
                         sourceType: captureSourceType(for: command.source),
                         kind: .oneTimeCommitment,
-                        route: .planSeed,
+                        route: .timeSeed,
                         commitmentKind: .oneTime,
                         deadlineText: command.payload.deadlineText ?? command.payload.dueText,
                         deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
@@ -356,7 +356,7 @@ private extension AmbitionsCommandExecutor {
         guard command.target.captureID != nil else {
             return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Deadline changes are executable for captures only in this build.", target: command.target, metadata: ["blockedBy": "owning_system_not_implemented"])
         }
-        return await executeCaptureRoute(command, context: context, kind: command.payload.commitmentKind == .oneTime ? .deadlineTask : .raw, route: .planSeed)
+        return await executeCaptureRoute(command, context: context, kind: command.payload.commitmentKind == .oneTime ? .deadlineTask : .raw, route: .timeSeed)
     }
 
     func executePriorityChange(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
@@ -374,7 +374,7 @@ private extension AmbitionsCommandExecutor {
             return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Creating new Plan items is represented through Capture 2.0 only when a capture target exists.", target: command.target, metadata: ["blockedBy": "plan_2_not_implemented"])
         }
         do {
-            guard let capture = try await captureService.routeToPlanSeed(id: captureID, now: context.now) else {
+            guard let capture = try await captureService.routeToTimeSeed(id: captureID, now: context.now) else {
                 return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for Plan idea routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
             }
             return captureResult(command: command, capture: capture, summary: "Capture represented as a Plan idea. Scheduling is not implemented in this build.")
@@ -475,8 +475,8 @@ private extension AmbitionsCommandExecutor {
     func route(for destinationRoute: String?) -> CaptureRoute? {
         guard let destinationRoute else { return nil }
         switch destinationRoute {
-        case "plan", CaptureRoute.planSeed.rawValue:
-            return .planSeed
+        case "plan", "time", CaptureRoute.timeSeed.rawValue:
+            return .timeSeed
         case "goal", CaptureRoute.goalSeed.rawValue:
             return .goalSeed
         case CaptureRoute.goalAttachment.rawValue:
@@ -561,7 +561,7 @@ private extension EventLedgerEntry {
             return .goals
         case .capture:
             return .capture
-        case .plan:
+        case .time:
             return .plan
         case .you:
             return .you

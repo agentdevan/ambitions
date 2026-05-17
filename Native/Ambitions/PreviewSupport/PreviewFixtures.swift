@@ -573,7 +573,7 @@ struct PreviewFixtures: Sendable {
                                 id: "preview-review-recovery",
                                 kind: .recoveryAccepted,
                                 occurredAt: "2026-04-27T10:00:00Z",
-                                source: .time,
+                                source: .plan,
                                 title: "Recovery path accepted",
                                 summary: "A smaller next step was selected without changing Calendar.",
                                 tone: .recovering

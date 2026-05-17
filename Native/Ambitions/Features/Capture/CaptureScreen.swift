@@ -406,7 +406,7 @@ struct CaptureScreen: View {
 
                 Button {
                     container.commandRouter.presentCreateGoal(
-                        source: .captureScreen,
+                        source: .capturesScreen,
                         seedText: capture.rawText,
                         captureID: capture.id
                     )

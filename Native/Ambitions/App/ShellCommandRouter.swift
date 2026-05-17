@@ -105,8 +105,8 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             navigation.selectTab(tab)
         case let .goal(goalID):
             navigation.openGoalDetail(goalID: goalID)
-        case let .planRoute(target):
-            navigation.openPlanRoute(target)
+        case let .timeRoute(target), let .planRoute(target):
+            navigation.openTimeRoute(target)
         case let .insightsRoute(target):
             navigation.openInsightsRoute(target)
         case let .overlay(overlay):
@@ -164,12 +164,12 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
                     source: source,
                     presentationContext: .quickCapture,
-                    destination: .planRoute(.captureInbox),
+                    destination: .timeRoute(.captureInbox),
                     receiptBody: "Saved locally with a receipt you can change in Capture."
                 )
                 return ShellCommandExecutionResult(
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
-                    destination: .planRoute(.captureInbox),
+                    destination: .timeRoute(.captureInbox),
                     createdCaptureID: capture.id
                 )
             } catch {
@@ -179,15 +179,15 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             presentCreateGoal(source: source)
             return ShellCommandExecutionResult(destination: .overlay(.createGoal(entrySource: source)))
         case .quickPlanPatch, .openWeek:
-            navigation.selectTab(.plan)
+            navigation.selectTab(.time)
             navigation.recordRoute(
                 title: intent.title,
                 source: source,
-                presentationContext: .plan,
-                destination: .tab(.plan),
-                receiptBody: "Returned to Plan from \(source.displayTitle)."
+                presentationContext: .time,
+                destination: .tab(.time),
+                receiptBody: "Returned to Time from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: .tab(.plan))
+            return ShellCommandExecutionResult(destination: .tab(.time))
         case .quickRecovery:
             navigation.selectToday(entryContext: .recovery)
             navigation.recordRoute(
@@ -233,10 +233,10 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 title: "Open capture",
                 source: source,
                 presentationContext: .recall,
-                destination: .planRoute(.captureInbox),
+                destination: .timeRoute(.captureInbox),
                 receiptBody: "Opened Capture from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: .planRoute(.captureInbox))
+            return ShellCommandExecutionResult(destination: .timeRoute(.captureInbox))
         case .memoryLens:
             presentMemoryLens(
                 intent: .memoryLens,

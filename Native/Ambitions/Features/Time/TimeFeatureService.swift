@@ -385,7 +385,7 @@ extension RepositoryBackedTimeService {
                 : "\(habitGoals.count) routine\(habitGoals.count == 1 ? "" : "s") should support the next week without crowding it.",
             returnActionTitle: "Return to Time",
             returnActionSubtitle: "Use the reshaped week, then adjust one goal or support route only if it still needs help.",
-            returnPlanRoute: nil,
+            returnTimeRoute: nil,
             splitPaneContext: splitPaneContext
         )
     }
@@ -732,7 +732,7 @@ extension RepositoryBackedTimeService {
                     recommendation: missingGoalSummaries.first.map { "\($0.goal.title) is the cleanest carry-forward candidate." } ?? "Carry only what the next week can explain calmly.",
                     state: missingGoalSummaries.isEmpty ? .success : .warning,
                     goalTarget: missingGoalSummaries.first.map { GoalRouteTarget(goalID: $0.goal.id) },
-                    planRoute: nil
+                    timeRoute: nil
                 ),
                 TimeExecutionResilienceLane(
                     id: "overload",
@@ -743,7 +743,7 @@ extension RepositoryBackedTimeService {
                     recommendation: pressuredGoalSummary.map { "Lighten \($0.goal.title) before adding anything new." } ?? "Lighten the loudest lane first.",
                     state: overloadedDays == 0 ? .selected : .warning,
                     goalTarget: pressuredGoalSummary.map { GoalRouteTarget(goalID: $0.goal.id) },
-                    planRoute: nil
+                    timeRoute: nil
                 ),
                 TimeExecutionResilienceLane(
                     id: "habits",
@@ -756,7 +756,7 @@ extension RepositoryBackedTimeService {
                         : "Use the routines route to soften or trim loops that are crowding the week.",
                     state: habitGoals.isEmpty ? .default : .selected,
                     goalTarget: nil,
-                    planRoute: .habits
+                    timeRoute: .habits
                 ),
                 TimeExecutionResilienceLane(
                     id: "captures",
@@ -769,7 +769,7 @@ extension RepositoryBackedTimeService {
                         : "Attach or park capture pressure before trying to polish the schedule.",
                     state: openCaptures.isEmpty ? .default : .warning,
                     goalTarget: nil,
-                    planRoute: .captureInbox
+                    timeRoute: .captureInbox
                 ),
                 TimeExecutionResilienceLane(
                     id: "review",
@@ -778,7 +778,7 @@ extension RepositoryBackedTimeService {
                     recommendation: "Close the week by shaping what should continue, not by creating more admin.",
                     state: laneState,
                     goalTarget: nil,
-                    planRoute: .weeklyReview
+                    timeRoute: .weeklyReview
                 )
             ],
             windowMagnetism: makeWindowMagnetism(
@@ -923,7 +923,7 @@ extension RepositoryBackedTimeService {
                 systemImage: "sparkles",
                 state: .success,
                 goalTarget: nil,
-                planRoute: nil
+                timeRoute: nil
             )
         }
 
@@ -937,7 +937,7 @@ extension RepositoryBackedTimeService {
                 systemImage: "sun.max",
                 state: .warning,
                 goalTarget: openCaptureCount > 0 ? nil : pressuredGoalSummary.map { GoalRouteTarget(goalID: $0.goal.id) },
-                planRoute: openCaptureCount > 0 ? .captureInbox : nil
+                timeRoute: openCaptureCount > 0 ? .captureInbox : nil
             )
         }
 
@@ -949,7 +949,7 @@ extension RepositoryBackedTimeService {
                 systemImage: "arrow.down.left.and.arrow.up.right",
                 state: .success,
                 goalTarget: GoalRouteTarget(goalID: missingGoalSummary.goal.id),
-                planRoute: nil
+                timeRoute: nil
             )
         }
 
@@ -961,7 +961,7 @@ extension RepositoryBackedTimeService {
                 systemImage: "arrow.triangle.branch",
                 state: .selected,
                 goalTarget: GoalRouteTarget(goalID: missingGoalSummary.goal.id),
-                planRoute: nil
+                timeRoute: nil
             )
         }
 
@@ -972,7 +972,7 @@ extension RepositoryBackedTimeService {
             systemImage: "wand.and.stars",
             state: posture.visualState == .warning ? .selected : posture.visualState,
             goalTarget: pressuredGoalSummary.map { GoalRouteTarget(goalID: $0.goal.id) } ?? weekDays.flatMap(\.blocks).first?.target,
-            planRoute: nil
+            timeRoute: nil
         )
     }
 
@@ -1000,7 +1000,7 @@ extension RepositoryBackedTimeService {
                 systemImage: TimeShapingActionKind.edit.systemImage,
                 state: firstVisibleBlock == nil ? .default : .selected,
                 goalTarget: firstVisibleBlock?.target,
-                planRoute: nil
+                timeRoute: nil
             ),
             TimeShapingActionState(
                 kind: .patch,
@@ -1014,7 +1014,7 @@ extension RepositoryBackedTimeService {
                 systemImage: TimeShapingActionKind.patch.systemImage,
                 state: missingGoalSummaries.isEmpty ? .selected : .warning,
                 goalTarget: missingGoalTarget ?? firstOpenWindow?.target,
-                planRoute: nil
+                timeRoute: nil
             ),
             TimeShapingActionState(
                 kind: .protect,
@@ -1026,7 +1026,7 @@ extension RepositoryBackedTimeService {
                 systemImage: TimeShapingActionKind.protect.systemImage,
                 state: firstOpenWindow == nil ? .default : .success,
                 goalTarget: firstOpenWindow?.target ?? firstVisibleBlock?.target ?? pressuredTarget,
-                planRoute: nil
+                timeRoute: nil
             ),
             TimeShapingActionState(
                 kind: .lighten,
@@ -1038,7 +1038,7 @@ extension RepositoryBackedTimeService {
                 systemImage: TimeShapingActionKind.lighten.systemImage,
                 state: noisyDay == nil ? .default : .warning,
                 goalTarget: openCaptureCount > 0 ? nil : pressuredTarget,
-                planRoute: openCaptureCount > 0 ? .captureInbox : nil
+                timeRoute: openCaptureCount > 0 ? .captureInbox : nil
             )
         ]
     }
@@ -1301,7 +1301,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Give it one next step, park it, or leave it intentionally outside today.",
                 visualState: .warning,
                 target: GoalRouteTarget(goalID: summary.goal.id),
-                planRoute: nil
+                timeRoute: nil
             )
         }
 
@@ -1313,7 +1313,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Protect the few that matter now and park the rest.",
                 visualState: .warning,
                 target: nil,
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1325,7 +1325,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Follow up, attach it, or keep it outside the plan.",
                 visualState: .warning,
                 target: nil,
-                planRoute: .captureInbox
+                timeRoute: .captureInbox
             ))
         }
 
@@ -1337,7 +1337,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Resolve the smallest missing answer first.",
                 visualState: .warning,
                 target: nil,
-                planRoute: .captureInbox
+                timeRoute: .captureInbox
             ))
         }
 
@@ -1349,7 +1349,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Keep the next step small enough to leave evidence.",
                 visualState: .default,
                 target: GoalRouteTarget(goalID: noProof.goal.id),
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1361,7 +1361,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Use manual availability or ask Plan to find local open windows.",
                 visualState: .default,
                 target: nil,
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1373,7 +1373,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Adjust one thing, not everything.",
                 visualState: .warning,
                 target: nil,
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1405,7 +1405,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Choose the one that must stay protected and let the other flex.",
                 visualState: .warning,
                 target: GoalRouteTarget(goalID: first.goal.id),
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1417,7 +1417,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Treat this as waiting or unblock it before protecting more time.",
                 visualState: .warning,
                 target: GoalRouteTarget(goalID: blocked.goal.id),
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1429,7 +1429,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Protect fewer goals so the plan remains believable.",
                 visualState: .warning,
                 target: nil,
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1441,7 +1441,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Follow up first if it unlocks the step; otherwise keep it outside today.",
                 visualState: .warning,
                 target: nil,
-                planRoute: .captureInbox
+                timeRoute: .captureInbox
             ))
         }
 
@@ -1453,7 +1453,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Make the next step receipt-friendly.",
                 visualState: .default,
                 target: GoalRouteTarget(goalID: thinProof.goal.id),
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1465,7 +1465,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Protect one pocket as recovery room.",
                 visualState: .warning,
                 target: nil,
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1508,7 +1508,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Make the next step smaller before moving anything else.",
                 visualState: .warning,
                 target: GoalRouteTarget(goalID: pressuredGoalSummary.goal.id),
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1520,7 +1520,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Leave it not today unless a real open window appears.",
                 visualState: .default,
                 target: GoalRouteTarget(goalID: missing.goal.id),
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1532,7 +1532,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Attach, park, or archive only after reviewing the inbox.",
                 visualState: .warning,
                 target: nil,
-                planRoute: .captureInbox
+                timeRoute: .captureInbox
             ))
         }
 
@@ -1544,7 +1544,7 @@ extension RepositoryBackedTimeService {
                 suggestion: "Recovery room is part of the plan, not a failure to optimize.",
                 visualState: .success,
                 target: nil,
-                planRoute: nil
+                timeRoute: nil
             ))
         }
 
@@ -1688,7 +1688,7 @@ extension RepositoryBackedTimeService {
                 boundary: reflowBoundary(for: kind, calendarAwareness: calendarAwareness),
                 visualState: state,
                 target: target,
-                planRoute: planRoute
+                timeRoute: timeRoute
             ))
         }
 
@@ -1701,8 +1701,8 @@ extension RepositoryBackedTimeService {
             append(.markWaiting, detail: "Keep the blocked work visible as waiting instead of adding more pressure.", impact: "Waiting state only after confirmation", state: .warning)
             append(.protectOneItem, detail: "Protect the one unblocked step that still matters.", impact: "Protects one item", state: .selected)
         case .waitingOnPersonOrResource:
-            append(.markWaiting, detail: "Treat the dependency as waiting and keep the rest of the plan calm.", impact: "Keeps follow-up explicit", state: .warning, target: nil, planRoute: .captureInbox)
-            append(.moveLocalActionLater, detail: "Reschedule only the local follow-up later if it is not the protected item.", impact: "Local suggestion only", state: .default, target: nil, planRoute: .captureInbox)
+            append(.markWaiting, detail: "Treat the dependency as waiting and keep the rest of the plan calm.", impact: "Keeps follow-up explicit", state: .warning, target: nil, timeRoute: .captureInbox)
+            append(.moveLocalActionLater, detail: "Reschedule only the local follow-up later if it is not the protected item.", impact: "Local suggestion only", state: .default, target: nil, timeRoute: .captureInbox)
         case .noNextStep:
             append(.protectOneItem, detail: "Choose one must-do and leave the rest outside today.", impact: "Protects one item", state: .selected)
             append(.parkGoal, detail: "Park the goal that has no believable next step yet.", impact: "Broad change needs confirmation", state: .warning)
@@ -1716,8 +1716,8 @@ extension RepositoryBackedTimeService {
             append(.shrinkAction, detail: "Make the next step small enough to leave proof.", impact: "Receipt-ready adjustment", state: .default)
             append(.splitAction, detail: "Split the work so the first part can close cleanly.", impact: "Local draft suggestion", state: .default)
         case .urgentOutsideItem:
-            append(.deferGoalOrItem, detail: "Defer the item that does not belong in this plan window.", impact: "Needs confirmation", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .captureInbox)
-            append(.dropOptionalWork, detail: "Drop optional work only after you confirm it is not needed.", impact: "Destructive choice gated", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .captureInbox)
+            append(.deferGoalOrItem, detail: "Defer the item that does not belong in this plan window.", impact: "Needs confirmation", state: .warning, target: nil, timeRoute: openCaptures.isEmpty ? nil : .captureInbox)
+            append(.dropOptionalWork, detail: "Drop optional work only after you confirm it is not needed.", impact: "Destructive choice gated", state: .warning, target: nil, timeRoute: openCaptures.isEmpty ? nil : .captureInbox)
         case .missedDay, .overloadedPlan, .noRecoveryMargin, .lowCapacityFragileDay:
             append(.protectOneItem, detail: "Keep one must-do defended before changing the rest.", impact: "Smallest useful adjustment", state: .selected)
             append(.shrinkAction, detail: targetGoal.map { "Make \($0.title)'s next step smaller." } ?? "Make the next step smaller.", impact: "Local suggestion only", state: .warning)

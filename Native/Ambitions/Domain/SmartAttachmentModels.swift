@@ -68,7 +68,7 @@ enum SmartAttachmentRouteType: String, Codable, Sendable, Equatable, Hashable, C
     var captureRoute: CaptureRoute {
         switch self {
         case .task, .plan, .reminder:
-            return .planSeed
+            return .timeSeed
         case .goal:
             return .goalSeed
         case .idea, .contextualNote:
@@ -297,7 +297,7 @@ struct SmartAttachmentRouteTarget: Codable, Sendable, Equatable, Hashable, Ident
         case .existingGoal, .lifeArea, .ambitionNorthStar, .path, .milestone:
             return .goals
         case .existingPlan, .step:
-            return .plan
+            return .time
         case .existingProofItem:
             return .proof
         case .existingWaitingItem:

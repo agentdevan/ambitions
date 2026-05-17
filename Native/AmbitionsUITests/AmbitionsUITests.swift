@@ -1,5 +1,6 @@
 import XCTest
 
+@MainActor
 final class AmbitionsUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -109,10 +110,10 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["shell.floating-control-lane"].waitForExistence(timeout: 10))
         assertShellFloatingButtonDoesNotCoverTabBar(in: app)
 
-        XCTAssertTrue(openCanonicalDestination("Capture", screenIdentifier: "captures.screen", in: app))
+        XCTAssertTrue(openCanonicalDestination("Capture", screenIdentifier: "capture.screen", in: app))
         XCTAssertFalse(app.buttons["captures.return-to-plan"].exists)
 
-        XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "plan.screen", in: app))
+        XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(
             scrollUntilElementExists("plan.goal-relationship-card", in: app, maxAttempts: 60)
@@ -129,7 +130,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["weekly-review.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["weekly-review.hero-card"].waitForExistence(timeout: 10))
         app.buttons["shell.plan.back-button"].tap()
-        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
@@ -191,7 +192,7 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.buttons["Time"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.tabBars.buttons["Time"].isSelected)
-        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
     func testLaunchURLCanLandOnTopLevelCapture() throws {
@@ -200,7 +201,7 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.tabBars.buttons["Capture"].isSelected)
-        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["capture.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["What needs a place?"].waitForExistence(timeout: 10))
     }
 
@@ -218,7 +219,7 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.buttons["Time"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.tabBars.buttons["Time"].isSelected)
-        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
     func testShellCommandSheetSupportsQuickCaptureFlow() throws {
@@ -246,7 +247,7 @@ final class AmbitionsUITests: XCTestCase {
         submit.tap()
 
         XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["capture.screen"].waitForExistence(timeout: 10))
     }
 
     func testShellOwnedCreateGoalFlowWorksFromCommandSheet() throws {
@@ -416,9 +417,9 @@ final class AmbitionsUITests: XCTestCase {
         )
         app.launch()
 
-        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["capture.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Review the notification handoff copy before the next hardening pass.", in: app))
-        tapFirstHittableButton(identifier: "captures.new-goal.preview-capture-2", named: "New goal", in: app, timeout: 30)
+        tapFirstHittableButton(identifier: "capture.new-goal.preview-capture-2", named: "Grow into Goal", in: app, timeout: 30)
 
         XCTAssertTrue(waitForCreateGoalComposer(in: app))
         let titleField = goalTitleInput(in: app)
@@ -503,8 +504,8 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForTodayScreenReady(in: app))
-        XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "plan.screen", in: app))
-        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
     func testDemoPlanWorkspaceShowsBatch49CoreModules() throws {
@@ -512,20 +513,21 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
-        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(
             scrollUntilElementExists("plan.hero-card", in: app, maxAttempts: 24)
             || scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 24)
         )
-        XCTAssertTrue(scrollUntilElementExists("time.timeline-strip", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.weekly-plan-strip", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.calendar-awareness", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.calendar-boundary", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.recovery-maturity", in: app))
-        XCTAssertTrue(scrollUntilElementExists("time.execution-resilience", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app))
+        XCTAssertTrue(scrollUntilElementExists("time.timeline-strip", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("plan.weekly-plan-strip", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("plan.calendar-awareness", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("plan.calendar-boundary", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("plan.recovery-maturity", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("time.execution-resilience", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app, maxAttempts: 40))
     }
 
     func testDemoPlanPressureScrubberUpdatesSelectedDayAndReflowDecision() throws {
@@ -533,17 +535,15 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
-        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
-        XCTAssertTrue(
-            scrollUntilElementExists("time.timeline-strip", in: app)
-            || scrollUntilElementExists("time.pressure-scrubber", in: app)
-        )
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 40))
         let scrubPoint = app.buttons["plan.scrubber.point.day-2"]
         XCTAssertTrue(scrubPoint.waitForExistence(timeout: 10))
         scrubPoint.tap()
         XCTAssertEqual(scrubPoint.value as? String, "selected")
 
-        XCTAssertTrue(scrollUntilElementExists("plan.reality-reflow", in: app, maxAttempts: 20))
+        XCTAssertTrue(scrollUntilElementExists("time.reality-reflow", in: app, maxAttempts: 20))
         XCTAssertTrue(scrollUntilElementExists("time.reflow-decision", in: app, maxAttempts: 20))
     }
 
@@ -556,6 +556,7 @@ final class AmbitionsUITests: XCTestCase {
         app.launchEnvironment["AMBITIONS_BOOTSTRAP_MODE"] = bootstrapMode
         app.launchEnvironment["AMBITIONS_SHELL_PRESENTATION"] = "native"
         app.launchArguments += ["-AMBITIONS_BOOTSTRAP_MODE", bootstrapMode]
+        app.launchArguments += ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryM"]
         app.launchArguments += ["--ambitions-shell", "native"]
         if let launchURL {
             app.launchEnvironment["AMBITIONS_LAUNCH_URL"] = launchURL
@@ -668,7 +669,8 @@ final class AmbitionsUITests: XCTestCase {
         while Date() < deadline {
             let controls: [XCUIElement]
             if let identifier {
-                controls = app.buttons.matching(identifier: identifier).allElementsBoundByIndex
+                controls = app.descendants(matching: .any).matching(identifier: identifier).allElementsBoundByIndex
+                    + app.buttons.matching(identifier: identifier).allElementsBoundByIndex
                     + app.buttons.matching(NSPredicate(format: "label == %@", label)).allElementsBoundByIndex
             } else {
                 controls = app.buttons.matching(NSPredicate(format: "label == %@", label)).allElementsBoundByIndex
@@ -976,14 +978,14 @@ final class AmbitionsUITests: XCTestCase {
             for candidate in candidates() where candidate.waitForExistence(timeout: 1) && candidate.isHittable {
                 return candidate
             }
-            app.swipeUp()
+            scrollPageUp(in: app)
         }
 
         for _ in 0..<maxAttempts {
             for candidate in candidates() where candidate.isHittable {
                 return candidate
             }
-            app.swipeDown()
+            scrollPageDown(in: app)
         }
 
         if let fallbackAny, fallbackAny.exists {
@@ -997,10 +999,17 @@ final class AmbitionsUITests: XCTestCase {
         let element = app.descendants(matching: .any)[identifier]
 
         for _ in 0..<maxAttempts {
-            if element.waitForExistence(timeout: 2) {
+            if element.exists || element.waitForExistence(timeout: 0.25) {
                 return true
             }
-            app.swipeUp()
+            scrollPageUp(in: app)
+        }
+
+        for _ in 0..<maxAttempts {
+            if element.exists || element.waitForExistence(timeout: 0.25) {
+                return true
+            }
+            scrollPageDown(in: app)
         }
 
         return element.exists
@@ -1010,10 +1019,17 @@ final class AmbitionsUITests: XCTestCase {
         let element = app.staticTexts[label]
 
         for _ in 0..<maxAttempts {
-            if element.waitForExistence(timeout: 2) {
+            if element.exists || element.waitForExistence(timeout: 0.25) {
                 return true
             }
-            app.swipeUp()
+            scrollPageUp(in: app)
+        }
+
+        for _ in 0..<maxAttempts {
+            if element.exists || element.waitForExistence(timeout: 0.25) {
+                return true
+            }
+            scrollPageDown(in: app)
         }
 
         return element.exists
@@ -1030,6 +1046,39 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return element.exists
+    }
+
+    private func scrollPageUp(in app: XCUIApplication) {
+        app.swipeUp(velocity: .fast)
+    }
+
+    private func scrollPageDown(in app: XCUIApplication) {
+        app.swipeDown(velocity: .fast)
+    }
+
+    private func dismissContinuityReceiptIfPresent(in app: XCUIApplication, timeout: TimeInterval = 4) {
+        let shellDismissButton = app.buttons["action-closure-tray.dismiss-button"]
+        if shellDismissButton.waitForExistence(timeout: timeout), shellDismissButton.isHittable {
+            shellDismissButton.tap()
+            return
+        }
+
+        let identifiedButton = app.buttons["trust.receipt-toast.dismiss-button"]
+        if identifiedButton.waitForExistence(timeout: 0.5), identifiedButton.isHittable {
+            identifiedButton.tap()
+            return
+        }
+
+        let shellLabeledButton = app.buttons["Dismiss result"]
+        if shellLabeledButton.waitForExistence(timeout: 0.5), shellLabeledButton.isHittable {
+            shellLabeledButton.tap()
+            return
+        }
+
+        let labeledButton = app.buttons["Dismiss receipt"]
+        if labeledButton.waitForExistence(timeout: 0.5), labeledButton.isHittable {
+            labeledButton.tap()
+        }
     }
 
 }

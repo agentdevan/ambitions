@@ -53,7 +53,7 @@ final class InsightsFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.historyLayer.previewItems.isEmpty)
         XCTAssertFalse(dashboard.goalStatuses.isEmpty)
         XCTAssertEqual(dashboard.goalStatuses.first?.target?.goalID, goal.id)
-        XCTAssertEqual(dashboard.continuityRibbon?.planRoute, .weeklyReview)
+        XCTAssertEqual(dashboard.continuityRibbon?.timeRoute, .weeklyReview)
     }
 
     func testSparseEvidenceDoesNotOverclaimGoalStatus() async throws {

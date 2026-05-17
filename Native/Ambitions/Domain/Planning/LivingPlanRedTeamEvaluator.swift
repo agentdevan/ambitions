@@ -1,17 +1,17 @@
 import Foundation
 
 /// Dashboard models for Living Dream Intelligence, as per LDI21 manifest.
-public struct LivingDreamDashboardState: Codable, Sendable, Equatable {
+struct LivingDreamDashboardState: Codable, Sendable, Equatable {
     /// Trust indicator from 0.0 to 1.0 based on source freshness and proof density.
-    public let trustIndicator: Double
+    let trustIndicator: Double
     /// Count of goals requiring a plan recompile due to source updates.
-    public let recompileNeededCount: Int
+    let recompileNeededCount: Int
     /// Current synchronization state label (e.g., "Synced", "Local Only", "Sync Paused").
-    public let syncState: String
+    let syncState: String
     /// Count of active red-team structural issues.
-    public let redTeamIssueCount: Int
+    let redTeamIssueCount: Int
     
-    public init(
+    init(
         trustIndicator: Double,
         recompileNeededCount: Int,
         syncState: String,
@@ -24,14 +24,14 @@ public struct LivingDreamDashboardState: Codable, Sendable, Equatable {
     }
 }
 
-public struct LivingPlanRedTeamIssue: Sendable, Equatable, Identifiable {
-    public let id: String
-    public let goalID: String
-    public let title: String
-    public let summary: String
-    public let impactLevel: LivingPlanMutationImpactLevel
+struct LivingPlanRedTeamIssue: Sendable, Equatable, Identifiable {
+    let id: String
+    let goalID: String
+    let title: String
+    let summary: String
+    let impactLevel: LivingPlanMutationImpactLevel
     
-    public init(id: String = UUID().uuidString, goalID: String, title: String, summary: String, impactLevel: LivingPlanMutationImpactLevel) {
+    init(id: String = UUID().uuidString, goalID: String, title: String, summary: String, impactLevel: LivingPlanMutationImpactLevel) {
         self.id = id
         self.goalID = goalID
         self.title = title
@@ -40,10 +40,10 @@ public struct LivingPlanRedTeamIssue: Sendable, Equatable, Identifiable {
     }
 }
 
-public struct LivingPlanRedTeamEvaluator: Sendable, Equatable {
-    public init() {}
+struct LivingPlanRedTeamEvaluator: Sendable, Equatable {
+    init() {}
     
-    public func evaluate(goalIDs: [String]) -> [LivingPlanRedTeamIssue] {
+    func evaluate(goalIDs: [String]) -> [LivingPlanRedTeamIssue] {
         guard !goalIDs.isEmpty else { return [] }
         
         return goalIDs.map { goalID in
@@ -56,7 +56,7 @@ public struct LivingPlanRedTeamEvaluator: Sendable, Equatable {
         }
     }
     
-    public func generateDashboardState(
+    func generateDashboardState(
         recompileCount: Int,
         syncState: String,
         issues: [LivingPlanRedTeamIssue]

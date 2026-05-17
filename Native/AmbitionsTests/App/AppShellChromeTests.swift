@@ -79,7 +79,7 @@ final class AppShellChromeTests: XCTestCase {
     func testM12ContinuityMaturityReportCoversRequiredSurfacesAndLayer3Blockers() {
         XCTAssertEqual(
             CrossSurfaceContinuityMaturityReport.handoffs.map(\.surface),
-            [.today, .capture, .goals, .time, .you, .reviews, .externalSurfaces, .goalDetail]
+            [.today, .capture, .goals, .plan, .you, .reviews, .externalSurfaces, .goalDetail]
         )
         XCTAssertTrue(CrossSurfaceContinuityMaturityReport.handoffs.contains { $0.id == "path-builder" })
         XCTAssertTrue(CrossSurfaceContinuityMaturityReport.handoffs.allSatisfy { $0.owningRoute.isEmpty == false })

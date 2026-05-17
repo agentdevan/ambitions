@@ -18,7 +18,7 @@ final class SideEffectLedgerRepositoryTests: XCTestCase {
             status: .confirmationRequired,
             actionKind: .writeCalendarBlock,
             occurredAt: "2026-06-01T10:10:00Z",
-            sourceDomain: .plan
+            sourceDomain: .time
         )
 
         try await repository.append(older)
@@ -32,7 +32,7 @@ final class SideEffectLedgerRepositoryTests: XCTestCase {
     func testSwiftDataRepositoryFiltersByStatusAndFetchesByID() async throws {
         let repository = try await makeRepository()
         try await repository.append(sideEffect(id: "local", effectKind: .localOnly, status: .recordedLocalOnly, actionKind: .archiveItem, occurredAt: "2026-06-01T10:00:00Z", sourceDomain: .capture))
-        try await repository.append(sideEffect(id: "blocked", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T10:05:00Z", sourceDomain: .plan))
+        try await repository.append(sideEffect(id: "blocked", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T10:05:00Z", sourceDomain: .time))
         try await repository.append(sideEffect(id: "failed", effectKind: .sync, status: .failedSafely, actionKind: .applySyncResolution, occurredAt: "2026-06-01T10:10:00Z", sourceDomain: .you))
 
         let confirmationRequired = try await repository.fetchRecords(status: .confirmationRequired)
@@ -58,7 +58,7 @@ final class SideEffectLedgerRepositoryTests: XCTestCase {
             status: .confirmationRequired,
             actionKind: .writeCalendarBlock,
             occurredAt: "2026-06-01T10:01:00Z",
-            sourceDomain: .plan
+            sourceDomain: .time
         )
 
         try await repository.append(original)
@@ -75,7 +75,7 @@ final class SideEffectLedgerRepositoryTests: XCTestCase {
         let repository = InMemorySideEffectLedgerRepository()
 
         try await repository.append(sideEffect(id: "a", effectKind: .localOnly, status: .recordedLocalOnly, actionKind: .archiveItem, occurredAt: "2026-06-01T11:00:00Z", sourceDomain: .capture))
-        try await repository.append(sideEffect(id: "b", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T11:00:00Z", sourceDomain: .plan))
+        try await repository.append(sideEffect(id: "b", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T11:00:00Z", sourceDomain: .time))
 
         let recent = try await repository.fetchRecent(limit: 2)
 

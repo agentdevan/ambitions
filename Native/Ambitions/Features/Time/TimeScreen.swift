@@ -18,7 +18,7 @@ struct TimeScreen: View {
 
     var body: some View {
         ZStack {
-            LivingSurfaceBackground(context: .time, state: timeLivingState, intensity: 0.64)
+            LivingSurfaceBackground(context: .plan, state: timeLivingState, intensity: 0.64)
                 .ignoresSafeArea()
 
             ScrollView {
@@ -150,6 +150,7 @@ struct TimeScreen: View {
                 .padding(.horizontal, theme.spacing.lg)
                 .padding(.vertical, theme.spacing.md)
             }
+            .accessibilityIdentifier("time.content-scroll")
             .scrollIndicators(.hidden)
         }
         .navigationTitle(showsNavigationChrome ? "Time" : "")
@@ -304,7 +305,7 @@ private struct TimeScopeChipStrip: View {
     let timeframeLabel: String
 
     var body: some View {
-        StateDrivenMaterialPanel(context: .time, state: .active) {
+        StateDrivenMaterialPanel(context: .plan, state: .active) {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(spacing: theme.spacing.xs) {
                     AmbitionChip("Day", role: .time, semanticState: .calendarDerived)
@@ -320,7 +321,7 @@ private struct TimeScopeChipStrip: View {
                     detail: timeframeLabel,
                     source: "Time",
                     state: .active,
-                    context: .time
+                    context: .plan
                 )
             }
         }
@@ -554,6 +555,7 @@ private struct TimeCalendarBoundaryContractCard: View {
         AppCard(state: boundary.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: boundary.title, subtitle: boundary.detail)
+                    .accessibilityIdentifier("time.calendar-boundary")
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     HStack(spacing: theme.spacing.xs) {
@@ -580,8 +582,8 @@ private struct TimeCalendarBoundaryContractCard: View {
                 .accessibilityIdentifier("time.calendar-boundary.primary")
             }
         }
-        .accessibilityIdentifier("time.calendar-boundary")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("time.calendar-boundary")
     }
 }
 
@@ -628,6 +630,7 @@ private struct TimeRealityReflowCard: View {
         AppCard(state: reflow.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: reflow.title, subtitle: reflow.detail)
+                    .accessibilityIdentifier("time.reality-reflow")
 
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     TagPill(reflow.reasonKind.title, icon: reflow.reasonKind == .stillBelievable ? "checkmark.seal" : "waveform.path.ecg", state: reflow.visualState)
@@ -995,6 +998,7 @@ private struct TimeRecoveryMaturityCard: View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: maturity.title, subtitle: maturity.detail)
+                    .accessibilityIdentifier("plan.recovery-maturity")
 
                 HStack(spacing: theme.spacing.xs) {
                     TagPill(maturity.planFitLabel, icon: "gauge", state: .selected)
@@ -1051,11 +1055,11 @@ private struct TimeRecoveryMaturityCard: View {
                 .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("plan.recovery-maturity")
         .accessibilityElement(children: .contain)
         .accessibilityLabel("\(maturity.title). \(maturity.detail). \(maturity.confirmationBoundary). \(maturity.calendarBoundary). \(maturity.socialBoundary).")
         .accessibilityHint("Review Plan recovery boundaries before confirming any broad change.")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("plan.recovery-maturity")
     }
 
     private func iconName(for signalID: String) -> String {
@@ -1186,6 +1190,7 @@ private struct TimePressureScrubberCard: View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: scrubber.title, subtitle: scrubber.subtitle)
+                    .accessibilityIdentifier("time.pressure-scrubber")
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: theme.spacing.sm) {
@@ -1234,8 +1239,8 @@ private struct TimePressureScrubberCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("time.pressure-scrubber")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("time.pressure-scrubber")
     }
 }
 
@@ -1252,6 +1257,7 @@ private struct TimeElasticWeekCard: View {
                     title: "Weekly Plan Strip",
                     subtitle: "Dense days expand, quiet days compress, and open room stays visible instead of disappearing into a calendar grid."
                 )
+                .accessibilityIdentifier("plan.weekly-plan-strip")
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .bottom, spacing: theme.spacing.sm) {
@@ -1269,8 +1275,8 @@ private struct TimeElasticWeekCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.weekly-plan-strip")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("plan.weekly-plan-strip")
     }
 }
 
@@ -1372,6 +1378,7 @@ private struct TimeBelievabilityCard: View {
                     title: "Week believability",
                     subtitle: "Plan explains why the week looks doable, tight, or overloaded before it asks you to intervene."
                 )
+                .accessibilityIdentifier("plan.believability-card")
 
                 HStack(spacing: theme.spacing.xs) {
                     TagPill(believability.label, icon: "scope", state: believability.visualState)
@@ -1469,8 +1476,8 @@ private struct TimeBelievabilityCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.believability-card")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("plan.believability-card")
     }
 }
 
@@ -1530,6 +1537,7 @@ private struct TimeExecutionResilienceCard: View {
                     title: resilience.title,
                     subtitle: resilience.subtitle
                 )
+                .accessibilityIdentifier("time.execution-resilience")
 
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     Text(resilience.calmExplanation)
@@ -1548,8 +1556,8 @@ private struct TimeExecutionResilienceCard: View {
                         Button {
                             if let goalTarget = lane.goalTarget {
                                 onOpenGoal(goalTarget)
-                            } else if let planRoute = lane.planRoute {
-                                onOpenPlanRoute(planRoute)
+                            } else if let timeRoute = lane.timeRoute {
+                                onOpenTimeRoute(timeRoute)
                             }
                         } label: {
                             HStack(alignment: .top, spacing: theme.spacing.sm) {
@@ -1569,7 +1577,7 @@ private struct TimeExecutionResilienceCard: View {
 
                                 Spacer(minLength: theme.spacing.sm)
 
-                                if lane.goalTarget != nil || lane.planRoute != nil {
+                                if lane.goalTarget != nil || lane.timeRoute != nil {
                                     Image(systemName: "arrow.right")
                                         .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                                         .foregroundStyle(theme.colors.textTertiary)
@@ -1586,7 +1594,7 @@ private struct TimeExecutionResilienceCard: View {
                             )
                         }
                         .buttonStyle(.plain)
-                        .disabled(lane.goalTarget == nil && lane.planRoute == nil)
+                        .disabled(lane.goalTarget == nil && lane.timeRoute == nil)
                         .accessibilityIdentifier("plan.resilience.\(lane.id)")
                     }
                 }
@@ -1610,8 +1618,8 @@ private struct TimeExecutionResilienceCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("time.execution-resilience")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("time.execution-resilience")
     }
 }
 
@@ -1690,6 +1698,7 @@ private struct TimeShapingActionsCard: View {
                     title: "Week-shaping actions",
                     subtitle: "Keep one shaping lane obvious: edit, patch, adjust later, or lighten."
                 )
+                .accessibilityIdentifier("plan.action-lane")
 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: theme.spacing.sm), GridItem(.flexible(), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
                     ForEach(actions) { action in
@@ -1754,7 +1763,7 @@ private struct TimeShapingActionsCard: View {
                             .accessibilityIdentifier("plan.action.cta")
                         }
                         .buttonStyle(AmbitionButtonStyle(tier: .hero, state: selectedAction.state))
-                        .disabled(selectedAction.goalTarget == nil && selectedAction.planRoute == nil)
+                        .disabled(selectedAction.goalTarget == nil && selectedAction.timeRoute == nil)
                         .accessibilityLabel(callToActionTitle(for: selectedAction))
                         .accessibilityHint(selectedAction.recommendation)
                         .accessibilityIdentifier("plan.action.cta")
@@ -1762,12 +1771,12 @@ private struct TimeShapingActionsCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.action-lane")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("plan.action-lane")
     }
 
     private func callToActionTitle(for action: TimeShapingActionState) -> String {
-        if action.planRoute == .captureInbox {
+        if action.timeRoute == .captureInbox {
             return "Open Capture"
         }
         if action.goalTarget != nil {
@@ -1792,6 +1801,7 @@ private struct TimeGoalRelationshipCard: View {
                         ? "No active goals are asking the week for structure yet."
                         : "Plan stays tied to active goals instead of turning into a disconnected scheduler."
                 )
+                .accessibilityIdentifier("plan.goal-relationship-card")
 
                 if items.isEmpty {
                     Text("Once active goals carry real work, they will show up here with their week relationship and next doable step.")
@@ -1814,8 +1824,8 @@ private struct TimeGoalRelationshipCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.goal-relationship-card")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("plan.goal-relationship-card")
     }
 }
 

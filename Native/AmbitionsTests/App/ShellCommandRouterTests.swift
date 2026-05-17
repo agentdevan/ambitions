@@ -23,9 +23,9 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(captures.first?.route, .captureInbox)
         XCTAssertEqual(captures.first?.assumptionSummary, "Saved as an Idea so it stays findable without becoming scheduled work.")
         XCTAssertEqual(navigation.selectedTab, .captures)
-        XCTAssertTrue(navigation.planPath.isEmpty)
+        XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(result.title, "Saved as Idea")
-        XCTAssertEqual(result.destination, .planRoute(.captureInbox))
+        XCTAssertEqual(result.destination, .timeRoute(.captureInbox))
         XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Saved as Idea")
     }
 
@@ -117,7 +117,7 @@ final class ShellCommandRouterTests: XCTestCase {
 
         let quickCapture = ShellCommandIntent.quickCapture.externalBrainCommandContract
         XCTAssertEqual(quickCapture.commandKind, .quickCapture)
-        XCTAssertEqual(quickCapture.destination, .planRoute(.captureInbox))
+        XCTAssertEqual(quickCapture.destination, .timeRoute(.captureInbox))
         XCTAssertTrue(quickCapture.touchesUserText)
         XCTAssertTrue(quickCapture.safetySummary.contains("local capture"))
 

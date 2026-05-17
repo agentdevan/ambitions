@@ -127,7 +127,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
 
         XCTAssertEqual(decision?.receiptLine, "Saved as Task · Today")
         XCTAssertEqual(request?.kind, .oneTimeCommitment)
-        XCTAssertEqual(request?.route, .planSeed)
+        XCTAssertEqual(request?.route, .timeSeed)
         XCTAssertEqual(request?.triageStatus, .assumedRoute)
     }
 
@@ -174,7 +174,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(bundle.clusters.first?.evidenceLabels, ["contacts", "nasa"])
         XCTAssertEqual(bundle.openLoopSignals.map(\.title), ["Suggested attachment available"])
         XCTAssertEqual(bundle.actionTitles, ["Attach", "Change", "Keep Standalone"])
-        XCTAssertEqual(result.captureRoute, .planSeed)
+        XCTAssertEqual(result.captureRoute, .timeSeed)
         XCTAssertEqual(result.triageStatus, .assumedRoute)
     }
 
@@ -270,7 +270,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(result.resultState, .savedStandalone)
         XCTAssertEqual(result.confidence, .high)
         XCTAssertEqual(result.receiptLine, "Saved as Plan · This Week")
-        XCTAssertEqual(result.captureRoute, .planSeed)
+        XCTAssertEqual(result.captureRoute, .timeSeed)
         XCTAssertEqual(result.captureAssumptionSummary, "Saved as a Plan item without scheduling or calendar changes.")
     }
 
@@ -327,7 +327,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
 
         XCTAssertEqual(decision?.receiptLine, "Saved as Task · Today")
         XCTAssertEqual(request?.kind, .oneTimeCommitment)
-        XCTAssertEqual(request?.route, .planSeed)
+        XCTAssertEqual(request?.route, .timeSeed)
         XCTAssertEqual(request?.triageStatus, .assumedRoute)
         XCTAssertEqual(request?.assumptionSummary, "Saved as a standalone Task because no existing local destination was reliable enough.")
     }

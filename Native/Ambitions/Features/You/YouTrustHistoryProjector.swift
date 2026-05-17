@@ -133,7 +133,7 @@ private extension ActionReceiptSourceDomain {
         case .today: "Source: Today"
         case .goals: "Source: Goals"
         case .capture: "Source: Capture"
-        case .plan: "Source: Plan"
+        case .time: "Source: Time"
         case .you: "Source: You"
         case .reviews: "Source: Reviews"
         case .goalDetail: "Source: Goal Detail"

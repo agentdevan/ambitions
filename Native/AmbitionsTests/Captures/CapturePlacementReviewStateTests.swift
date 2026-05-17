@@ -24,7 +24,7 @@ final class CapturePlacementReviewStateTests: XCTestCase {
     func testReadyToPlaceReviewNamesDestinationAndConsequenceBeforeChange() {
         let capture = makeCapture(
             status: .actionable,
-            route: .planSeed,
+            route: .timeSeed,
             kind: .oneTimeCommitment,
             privacy: .standard
         )

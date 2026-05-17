@@ -34,7 +34,7 @@ struct ExecutionResilienceProjector: ExecutionResilienceAssessing {
         let recommended = recommendedOption(from: options, status: status)
         let relatedGoalIDs = assessments.compactMap(\.goalID) + protected.compactMap(\.relatedGoalID) + displaced.compactMap(\.relatedGoalID)
         let relatedCaptureIDs = assessments.compactMap(\.captureID) + input.captures.map(\.id)
-        let relatedPlanIDs = assessments.compactMap(\.planID) + [input.planID].compactMap { $0 }
+        let relatedTimeIDs = assessments.compactMap(\.planID) + [input.timeID].compactMap { $0 }
         let eventIDs = normalized(
             input.eventLedgerEntries.map(\.id) +
             assessments.flatMap(\.eventLedgerEntryIDs) +
@@ -56,7 +56,7 @@ struct ExecutionResilienceProjector: ExecutionResilienceAssessing {
             generatedAt: generatedAt,
             relatedGoalIDs: relatedGoalIDs,
             relatedCaptureIDs: relatedCaptureIDs,
-            relatedPlanIDs: relatedPlanIDs,
+            relatedTimeIDs: relatedTimeIDs,
             relatedReviewIDs: [input.reviewID].compactMap { $0 },
             relatedBelievabilityAssessmentIDs: assessments.map(\.id),
             relatedRealitySnapshotID: input.realitySnapshot?.id ?? input.believabilitySnapshot?.relatedRealitySnapshotID,
@@ -111,7 +111,7 @@ struct ExecutionResilienceProjector: ExecutionResilienceAssessing {
             relations: RecommendationExplanationRelations(
                 goalIDs: assessment.relatedGoalIDs,
                 captureIDs: assessment.relatedCaptureIDs,
-                planIDs: assessment.relatedPlanIDs,
+                planIDs: assessment.relatedTimeIDs,
                 reviewIDs: assessment.relatedReviewIDs,
                 eventLedgerEntryIDs: assessment.eventLedgerEntryIDs
             ),
@@ -156,8 +156,8 @@ extension ExecutionResilienceProjector {
         guard let kind = option.relatedCommandKind else { return nil }
         let destination: AmbitionsCommandDestination?
         switch option.strategy {
-        case .openPlan:
-            destination = .plan
+        case .openTime:
+            destination = .time
         case .openGoal:
             destination = .goalDetail
         case .openCapture:
@@ -172,7 +172,7 @@ extension ExecutionResilienceProjector {
             target: AmbitionsCommandTarget(
                 goalID: option.relatedGoalID,
                 captureID: option.relatedCaptureID,
-                planID: option.relatedPlanID,
+                timeID: option.relatedTimeID,
                 recommendationID: option.id,
                 explanationID: option.relatedExplanationID,
                 destination: destination
@@ -195,7 +195,7 @@ extension ExecutionResilienceProjector {
             relations: AmbitionsCommandRelations(
                 goalIDs: assessment.relatedGoalIDs,
                 captureIDs: assessment.relatedCaptureIDs,
-                planIDs: assessment.relatedPlanIDs,
+                timeIDs: assessment.relatedTimeIDs,
                 reviewIDs: assessment.relatedReviewIDs,
                 eventLedgerEntryIDs: option.eventLedgerEntryIDs,
                 recommendationExplanationIDs: option.recommendationExplanationIDs
@@ -233,7 +233,7 @@ private extension ExecutionResilienceProjector {
                         severity: severity(for: kind, assessment: assessment),
                         relatedGoalID: assessment.goalID,
                         relatedCaptureID: assessment.captureID,
-                        relatedPlanID: assessment.planID,
+                        relatedTimeID: assessment.planID,
                         relatedAssessmentID: assessment.id,
                         evidenceReferenceIDs: assessment.eventLedgerEntryIDs + assessment.recommendationExplanationIDs
                     )
@@ -255,7 +255,7 @@ private extension ExecutionResilienceProjector {
                     title: "Day is overloaded",
                     summary: input.realitySnapshot?.availability.summary ?? "Capacity pressure is high.",
                     severity: input.realitySnapshot?.availability.schedulePressure ?? .high,
-                    relatedPlanID: input.planID,
+                    relatedTimeID: input.timeID,
                     evidenceReferenceIDs: input.realitySnapshot?.eventLedgerEntryIDs ?? []
                 )
             )
@@ -268,7 +268,7 @@ private extension ExecutionResilienceProjector {
                     title: "Calendar conflict",
                     summary: input.realitySnapshot?.conflictSummary.summary ?? "Calendar-derived context shows a conflict.",
                     severity: .high,
-                    relatedPlanID: input.planID,
+                    relatedTimeID: input.timeID,
                     evidenceReferenceIDs: input.realitySnapshot?.eventLedgerEntryIDs ?? []
                 )
             )
@@ -347,7 +347,7 @@ private extension ExecutionResilienceProjector {
                     relatedExplanationID: explanationID(type: .whyPrioritized, explanations: explanations),
                     relatedGoalID: protectedFirst.relatedGoalID,
                     relatedCaptureID: protectedFirst.relatedCaptureID,
-                    relatedPlanID: input.planID,
+                    relatedTimeID: input.timeID,
                     eventLedgerEntryIDs: input.eventLedgerEntries.map(\.id),
                     recommendationExplanationIDs: explanations.map(\.id)
                 )
@@ -371,7 +371,7 @@ private extension ExecutionResilienceProjector {
                     relatedExplanationID: explanationID(type: .whyDeferred, explanations: explanations),
                     relatedGoalID: waitingFirst.relatedGoalID,
                     relatedCaptureID: waitingFirst.relatedCaptureID,
-                    relatedPlanID: input.planID
+                    relatedTimeID: input.timeID
                 )
             )
         }
@@ -393,7 +393,7 @@ private extension ExecutionResilienceProjector {
                     relatedExplanationID: explanationID(type: .whyDeferred, explanations: explanations),
                     relatedGoalID: passive.first?.relatedGoalID,
                     relatedCaptureID: passive.first?.relatedCaptureID,
-                    relatedPlanID: input.planID
+                    relatedTimeID: input.timeID
                 )
             )
         }
@@ -415,7 +415,7 @@ private extension ExecutionResilienceProjector {
                     relatedExplanationID: explanationID(type: .whyRecovered, explanations: explanations),
                     relatedGoalID: anchor?.goalID,
                     relatedCaptureID: anchor?.captureID,
-                    relatedPlanID: anchor?.planID ?? input.planID,
+                    relatedTimeID: anchor?.planID ?? input.timeID,
                     eventLedgerEntryIDs: anchor?.eventLedgerEntryIDs ?? [],
                     recommendationExplanationIDs: anchor?.recommendationExplanationIDs ?? []
                 )
@@ -437,7 +437,7 @@ private extension ExecutionResilienceProjector {
                     relatedExplanationID: explanationID(type: .whyGoalChanged, explanations: explanations),
                     relatedGoalID: anchor?.goalID,
                     relatedCaptureID: anchor?.captureID,
-                    relatedPlanID: anchor?.planID ?? input.planID
+                    relatedTimeID: anchor?.planID ?? input.timeID
                 )
             )
         }
@@ -447,8 +447,8 @@ private extension ExecutionResilienceProjector {
                     id: "option.open.plan",
                     title: "Open Time",
                     summary: "Plan can inspect the real week, but this assessment will not schedule or write calendar blocks.",
-                    strategy: .openPlan,
-                    expectedEffect: "Moves the decision to the Plan workspace without automatic scheduling.",
+                    strategy: .openTime,
+                    expectedEffect: "Moves the decision to Time without automatic scheduling.",
                     tradeoff: RecoveryTradeoff(summary: "The user chooses the change.", protectsHighPriorityWork: protected.isEmpty == false, defersPassiveOrFlexibleWork: passive.isEmpty == false, displacesLowerPriorityWork: displaced.isEmpty == false, requiresUserDecision: true),
                     urgencyBasis: "Capacity or calendar conflict needs a planning decision.",
                     capacityBasis: input.realitySnapshot?.capacityEstimate.summary ?? "Baseline capacity is all that is available.",
@@ -456,7 +456,7 @@ private extension ExecutionResilienceProjector {
                     defersPassiveOrFlexibleWork: passive.isEmpty == false,
                     relatedCommandKind: .openDestination,
                     relatedExplanationID: explanationID(type: .whyCalendarAware, explanations: explanations),
-                    relatedPlanID: input.planID
+                    relatedTimeID: input.timeID
                 )
             )
         }
@@ -682,7 +682,7 @@ private extension ExecutionResilienceProjector {
             severity: .moderate,
             relatedGoalID: assessment.goalID,
             relatedCaptureID: assessment.captureID,
-            relatedPlanID: assessment.planID,
+            relatedTimeID: assessment.planID,
             relatedAssessmentID: assessment.id
         )
     }
@@ -696,7 +696,7 @@ private extension ExecutionResilienceProjector {
             severity: assessment.deadlineRisk.level,
             relatedGoalID: assessment.goalID,
             relatedCaptureID: assessment.captureID,
-            relatedPlanID: assessment.planID,
+            relatedTimeID: assessment.planID,
             relatedAssessmentID: assessment.id,
             evidenceReferenceIDs: assessment.eventLedgerEntryIDs
         )

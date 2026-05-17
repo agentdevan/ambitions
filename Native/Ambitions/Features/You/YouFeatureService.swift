@@ -1039,17 +1039,17 @@ private extension RepositoryBackedYouService {
 
     func safetyBoundarySamples() -> SafetyBoundarySamples {
         let evaluator = SafeAutomationPolicyEvaluator()
-        let planBlock = LifeGraphObjectReference(kind: .action, id: "you-policy-calendar-write", sourceDomain: .plan)
-        let planStep = LifeGraphObjectReference(kind: .step, id: "you-policy-reflow", sourceDomain: .plan)
+        let planBlock = LifeGraphObjectReference(kind: .action, id: "you-policy-calendar-write", sourceDomain: .time)
+        let planStep = LifeGraphObjectReference(kind: .step, id: "you-policy-reflow", sourceDomain: .time)
         let memoryObject = LifeGraphObjectReference(kind: .correction, id: "you-policy-memory", sourceDomain: .you)
         let correctionObject = LifeGraphObjectReference(kind: .correction, id: "you-policy-correction", sourceDomain: .you)
 
         return SafetyBoundarySamples(
             calendarWrite: evaluator.evaluate(
-                SafeAutomationProposedAction(kind: .writeCalendarBlock, sourceDomain: .plan, targetObjects: [planBlock])
+                SafeAutomationProposedAction(kind: .writeCalendarBlock, sourceDomain: .time, targetObjects: [planBlock])
             ),
             broadReflow: evaluator.evaluate(
-                SafeAutomationProposedAction(kind: .splitAction, sourceDomain: .plan, targetObjects: [planStep])
+                SafeAutomationProposedAction(kind: .splitAction, sourceDomain: .time, targetObjects: [planStep])
             ),
             forgetMemory: evaluator.evaluate(
                 SafeAutomationProposedAction(kind: .forgetMemory, sourceDomain: .you, targetObjects: [memoryObject])
@@ -1128,7 +1128,7 @@ private extension RepositoryBackedYouService {
                     title: "Interruptions stay optional",
                     detail: "Notifications can support reminders, but Ambitions still works when notification access is denied or not requested.",
                     statusLabel: notificationStatus.statusLabel,
-                    state: notificationStatus.canRequestAuthorization ? .default : .caution
+                    state: notificationStatus.canRequestAuthorization ? .default : .warning
                 )
             ],
             footer: "The Constitution is a local boundary, not a sync policy."

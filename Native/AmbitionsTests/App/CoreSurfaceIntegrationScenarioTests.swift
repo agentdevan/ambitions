@@ -1,6 +1,7 @@
 import XCTest
 @testable import Ambitions
 
+@MainActor
 final class CoreSurfaceIntegrationScenarioTests: XCTestCase {
     func testM01CatalogCoversRequiredIndispensabilityScenarios() {
         let ids = Set(CoreSurfaceIntegrationScenarioCatalog.scenarios.map(\.id))
@@ -94,7 +95,8 @@ final class CoreSurfaceIntegrationScenarioTests: XCTestCase {
             in: harness,
             captureText: "Complete the surfaced goal"
         )
-        let goal = try XCTUnwrap(try await harness.repositories.goals.goal(id: context.goalID))
+        let loadedGoal = try await harness.repositories.goals.goal(id: context.goalID)
+        let goal = try XCTUnwrap(loadedGoal)
         let baselineFeedback = try await harness.repositories.feedback.listEvents(goalID: context.goalID)
         let baselineEvidence = try await harness.repositories.evidence.listEvidence(goalID: context.goalID)
         let action = TodayInlineAction(
@@ -207,14 +209,14 @@ private extension CoreSurfaceIntegrationScenarioTests {
             CreateCaptureRequest(rawText: captureText),
             now: fixedNow
         )
-        let binding = try XCTUnwrap(
-            try await harness.captureService.turnCaptureIntoGoal(
-                TurnCaptureIntoGoalRequest(captureID: capture.id),
-                now: fixedNow.addingTimeInterval(60)
-            )
+        let createdBinding = try await harness.captureService.turnCaptureIntoGoal(
+            TurnCaptureIntoGoalRequest(captureID: capture.id),
+            now: fixedNow.addingTimeInterval(60)
         )
+        let binding = try XCTUnwrap(createdBinding)
         let goalID = try XCTUnwrap(binding.target.goalID)
-        let goal = try XCTUnwrap(try await harness.repositories.goals.goal(id: goalID))
+        let loadedGoal = try await harness.repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(loadedGoal)
         let stepID = try XCTUnwrap(goal.plan?.sections.first?.steps.first?.id)
 
         return PromotedGoalContext(

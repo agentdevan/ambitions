@@ -125,7 +125,7 @@ extension Capture {
         switch route {
         case .captureInbox:
             "Needs a Place"
-        case .planSeed:
+        case .timeSeed:
             "Task / Plan"
         case .goalSeed:
             "Goal seed"
@@ -150,7 +150,7 @@ extension Capture {
         switch route {
         case .captureInbox:
             "Keeps this capture correctable until you choose a route."
-        case .planSeed:
+        case .timeSeed:
             "Creates plan work only after you choose Task."
         case .goalSeed:
             "Starts a goal seed only after you choose Grow into Goal."

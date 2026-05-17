@@ -64,7 +64,7 @@ final class SourceAtlasQueryEngineModelsTests: XCTestCase {
         XCTAssertEqual(resultsByRequirement["requirement-stale"]?.fallbackReason, .stale)
         XCTAssertEqual(resultsByRequirement["requirement-contradicted"]?.fallbackReason, .contradicted)
         XCTAssertEqual(resultsByRequirement["requirement-revoked"]?.fallbackReason, .revoked)
-        XCTAssertEqual(resultsByRequirement["requirement-local"]?.fallbackReason, .none)
+        XCTAssertNil(resultsByRequirement["requirement-local"]?.fallbackReason)
         XCTAssertNil(resultsByRequirement["requirement-unknown"]?.sourceNeededDetail)
         XCTAssertNil(resultsByRequirement["requirement-stale"]?.sourceNeededDetail)
         XCTAssertNil(resultsByRequirement["requirement-contradicted"]?.sourceNeededDetail)

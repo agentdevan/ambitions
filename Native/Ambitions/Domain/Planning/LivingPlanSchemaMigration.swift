@@ -1,15 +1,15 @@
 import Foundation
 
 /// Schema migration logic for living plans, ensuring deterministic upgrades.
-public struct LivingPlanSchemaMigration: Sendable, Equatable {
-    public let fromVersion: Int
-    public let toVersion: Int
-    public let migrationImpact: LivingPlanMutationImpactLevel
-    public let affectedGoalIDs: [String]
+struct LivingPlanSchemaMigration: Sendable, Equatable {
+    let fromVersion: Int
+    let toVersion: Int
+    let migrationImpact: LivingPlanMutationImpactLevel
+    let affectedGoalIDs: [String]
     /// Indicates if the archive is encrypted as per LDI18 manifest.
-    public let isEncryptedArchive: Bool
+    let isEncryptedArchive: Bool
     
-    public init(
+    init(
         fromVersion: Int,
         toVersion: Int,
         migrationImpact: LivingPlanMutationImpactLevel,
@@ -23,12 +23,12 @@ public struct LivingPlanSchemaMigration: Sendable, Equatable {
         self.isEncryptedArchive = isEncryptedArchive
     }
     
-    public func requiresExplicitConfirmation() -> Bool {
+    func requiresExplicitConfirmation() -> Bool {
         // Impact Level 4 (Destructive) or Level 5 (Critical) require explicit user confirmation.
         migrationImpact.rawValue >= LivingPlanMutationImpactLevel.level4.rawValue
     }
     
-    public func generateReceipt() -> ActionReceipt {
+    func generateReceipt() -> ActionReceipt {
         let confirmationNeeded = requiresExplicitConfirmation()
         
         return ActionReceipt(

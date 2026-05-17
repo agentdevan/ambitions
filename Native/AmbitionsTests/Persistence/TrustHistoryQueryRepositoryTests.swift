@@ -24,7 +24,7 @@ final class TrustHistoryQueryRepositoryTests: XCTestCase {
                         summary: "Plan completion"
                     )
                 ],
-                sourceDomain: .plan
+                sourceDomain: .time
             ),
             privacyLevel: .safeToShow,
             proofRelevance: .countsAsProof,
@@ -85,7 +85,7 @@ final class TrustHistoryQueryRepositoryTests: XCTestCase {
 
         let projection = try await repository.fetch(
             TrustHistoryQuery(
-                receiptSourceDomains: [.plan],
+                receiptSourceDomains: [.time],
                 receiptPrivacyLevels: [.safeToShow],
                 receiptProofRelevance: [.countsAsProof],
                 eventSources: [.capture],
@@ -132,7 +132,7 @@ final class TrustHistoryQueryRepositoryTests: XCTestCase {
                             summary: "Completed"
                         )
                     ],
-                    sourceDomain: .plan
+                    sourceDomain: .time
                 )
             )
         ])

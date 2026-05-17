@@ -1,11 +1,11 @@
 import Foundation
 
-public struct AmbitionsOSHandoffTailGateProof: Sendable, Equatable {
-    public let sourceAtlasDependenciesProven: Bool
-    public let intelligenceDataControlProven: Bool
-    public let crossTrainGatesProven: Bool
+struct AmbitionsOSHandoffTailGateProof: Sendable, Equatable {
+    let sourceAtlasDependenciesProven: Bool
+    let intelligenceDataControlProven: Bool
+    let crossTrainGatesProven: Bool
     
-    public init(
+    init(
         sourceAtlasDependenciesProven: Bool = false,
         intelligenceDataControlProven: Bool = false,
         crossTrainGatesProven: Bool = false
@@ -15,15 +15,15 @@ public struct AmbitionsOSHandoffTailGateProof: Sendable, Equatable {
         self.crossTrainGatesProven = crossTrainGatesProven
     }
     
-    public var isFullyProven: Bool {
+    var isFullyProven: Bool {
         sourceAtlasDependenciesProven && intelligenceDataControlProven && crossTrainGatesProven
     }
 }
 
-public struct AmbitionsOSHandoffTailGate: Sendable, Equatable {
-    public init() {}
+struct AmbitionsOSHandoffTailGate: Sendable, Equatable {
+    init() {}
     
-    public func evaluateHandoff(proof: AmbitionsOSHandoffTailGateProof) -> ActionReceipt {
+    func evaluateHandoff(proof: AmbitionsOSHandoffTailGateProof) -> ActionReceipt {
         let isProven = proof.isFullyProven
         
         return ActionReceipt(

@@ -8,7 +8,7 @@ final class CaptureRouteCommandMappingTests: XCTestCase {
     }
 
     func testCommandDestinationRoutePreservesKnownLegacyAliasesAndSafeFallback() {
-        XCTAssertEqual(CaptureRoute.commandDestinationRoute("plan"), .planSeed)
+        XCTAssertEqual(CaptureRoute.commandDestinationRoute("plan"), .timeSeed)
         XCTAssertEqual(CaptureRoute.commandDestinationRoute("goal"), .goalSeed)
         XCTAssertEqual(CaptureRoute.commandDestinationRoute(CaptureRoute.goalAttachment.rawValue), .goalAttachment)
         XCTAssertEqual(CaptureRoute.commandDestinationRoute(CaptureRoute.deliverableSeed.rawValue), .deliverableSeed)

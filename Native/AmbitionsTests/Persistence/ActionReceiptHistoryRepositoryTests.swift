@@ -5,7 +5,7 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
     func testSwiftDataReceiptHistoryRepositorySavesAndQueriesByFilters() async throws {
         let repository = try await makeRepository()
         let goal = object(.goal, "goal-1", label: "Launch app")
-        let planItem = object(.action, "plan-item-1", label: "Draft announcement", sourceDomain: .plan)
+        let planItem = object(.action, "plan-item-1", label: "Draft announcement", sourceDomain: .time)
         let capture = object(.capture, "capture-1", label: "Launch checklist", sourceDomain: .capture)
 
         let completed = ActionReceiptHistoryRecord(
@@ -23,7 +23,7 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
                         summary: "Task completed."
                     )
                 ],
-                sourceDomain: .plan
+                sourceDomain: .time
             ),
             privacyLevel: .safeToShow,
             localOnly: true
@@ -54,7 +54,7 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
             actionKinds: [.completedTask],
             resultStates: [.completed],
             relatedGoalID: "goal-1",
-            sourceDomains: [.plan],
+            sourceDomains: [.time],
             limit: 10,
             projectionDetail: .fullDetail
         )
@@ -216,7 +216,7 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
                             summary: "Task completed."
                         )
                     ],
-                    sourceDomain: .plan
+                    sourceDomain: .time
                 ),
                 proofRelevance: .countsAsProof
             )
@@ -226,7 +226,7 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
             ActionReceiptSearchQuery(
                 startDate: "2026-04-27T08:00:00Z",
                 endDate: "2026-04-27T10:00:00Z",
-                sourceDomains: [.plan],
+                sourceDomains: [.time],
                 proofRelevance: [.countsAsProof],
                 limit: 1,
                 projectionDetail: .fullDetail

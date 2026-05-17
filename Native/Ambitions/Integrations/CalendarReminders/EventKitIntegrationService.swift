@@ -736,7 +736,7 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
             status: status,
             boundary: boundary,
             actionKind: actionKind,
-            sourceDomain: .plan,
+            sourceDomain: .time,
             occurredAt: DomainTimestamp.string(from: now),
             localOnly: boundary == .localOnly,
             requiresConfirmation: requiresConfirmation,

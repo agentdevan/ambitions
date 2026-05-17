@@ -1,11 +1,11 @@
 import Foundation
 
-public struct AmbitionsOSEvaluationTailGateProof: Sendable, Equatable {
-    public let goldenScenariosProven: Bool
-    public let fixtureCoverageProven: Bool
-    public let privacyPerformanceProven: Bool
+struct AmbitionsOSEvaluationTailGateProof: Sendable, Equatable {
+    let goldenScenariosProven: Bool
+    let fixtureCoverageProven: Bool
+    let privacyPerformanceProven: Bool
     
-    public init(
+    init(
         goldenScenariosProven: Bool = false,
         fixtureCoverageProven: Bool = false,
         privacyPerformanceProven: Bool = false
@@ -15,15 +15,15 @@ public struct AmbitionsOSEvaluationTailGateProof: Sendable, Equatable {
         self.privacyPerformanceProven = privacyPerformanceProven
     }
     
-    public var isFullyProven: Bool {
+    var isFullyProven: Bool {
         goldenScenariosProven && fixtureCoverageProven && privacyPerformanceProven
     }
 }
 
-public struct AmbitionsOSEvaluationTailGate: Sendable, Equatable {
-    public init() {}
+struct AmbitionsOSEvaluationTailGate: Sendable, Equatable {
+    init() {}
     
-    public func evaluateCoverage(proof: AmbitionsOSEvaluationTailGateProof) -> ActionReceipt {
+    func evaluateCoverage(proof: AmbitionsOSEvaluationTailGateProof) -> ActionReceipt {
         let isProven = proof.isFullyProven
         
         return ActionReceipt(

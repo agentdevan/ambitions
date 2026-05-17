@@ -277,7 +277,7 @@ final class CaptureViewModel {
         switch capture.route {
         case .captureInbox:
             return "Saved to Needs a Place"
-        case .planSeed:
+        case .timeSeed:
             return "Saved as Task · Today"
         case .goalSeed:
             return "Saved as Goal · Creative"

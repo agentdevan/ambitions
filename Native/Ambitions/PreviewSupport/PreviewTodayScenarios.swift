@@ -110,7 +110,7 @@ enum PreviewTodayScenarios {
         nowSubtitle: "Nothing here is faking urgency.",
         nextTitle: nil,
         nextSubtitle: nil,
-        primaryAction: TodayInlineAction(kind: .openPlan, title: "Build today", systemImage: "calendar.badge.plus", state: .selected, target: TodayActionTarget()),
+        primaryAction: TodayInlineAction(kind: .openTime, title: "Build today", systemImage: "calendar.badge.plus", state: .selected, target: TodayActionTarget()),
         supportingActions: [],
         reentry: nil,
         celebrationLine: nil,
@@ -443,7 +443,7 @@ enum PreviewTodayScenarios {
                             subtitle: posture == .overloaded ? "Protect one clean lane before adding more to today." : "A bounded near-term block is still available.",
                             timingLabel: "Afternoon room",
                             state: posture == .overloaded ? .warning : .default,
-                            action: primaryAction.kind == .openPlan ? nil : primaryAction
+                            action: primaryAction.kind == .openTime ? nil : primaryAction
                         ),
                         TodayOpenWindowState(
                             id: "window-2",
@@ -534,7 +534,7 @@ enum PreviewTodayScenarios {
                 quickCaptureAction: mode == .empty ? nil : TodayInlineAction(kind: .quickLog, title: "Quick log", systemImage: "plus.bubble", state: .success, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
                 quickCaptureTitle: "Quick capture",
                 quickCaptureDetail: "Capture and ask-for-help stay bounded and shell-owned.",
-                planAction: TodayInlineAction(kind: .openPlan, title: "Open Time", systemImage: "calendar", state: .default, target: TodayActionTarget()),
+                timeAction: TodayInlineAction(kind: .openTime, title: "Open Time", systemImage: "calendar", state: .default, target: TodayActionTarget()),
                 reflectionPrompt: "When tonight arrives, what do you want to feel good about?",
                 reflectionHighlights: mode == .empty ? [] : ["Captured one completed session", "Kept the day from turning into dashboard noise"]
             )

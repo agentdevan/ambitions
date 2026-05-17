@@ -372,6 +372,7 @@ enum ShellCommandDestination: Hashable, Sendable {
     case tab(AppTab)
     case goal(String)
     case timeRoute(TimeRouteTarget)
+    case planRoute(TimeRouteTarget)
     case insightsRoute(InsightsRouteTarget)
     case overlay(ShellOverlayState)
 
@@ -381,7 +382,7 @@ enum ShellCommandDestination: Hashable, Sendable {
             tab.title
         case .goal:
             "Goal Detail"
-        case let .timeRoute(target):
+        case let .timeRoute(target), let .planRoute(target):
             switch target {
             case .captureInbox: "Capture"
             case .habits: "Rituals"

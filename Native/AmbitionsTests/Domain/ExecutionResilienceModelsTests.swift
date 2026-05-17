@@ -41,7 +41,7 @@ final class ExecutionResilienceModelsTests: XCTestCase {
                 .acceptSlip,
                 .askForDecision,
                 .keepAsSomeday,
-                .openPlan,
+                .openTime,
                 .openGoal,
                 .openCapture
             ]
@@ -77,7 +77,7 @@ final class ExecutionResilienceModelsTests: XCTestCase {
             generatedAt: "2026-04-25T12:00:00Z",
             relatedGoalIDs: ["goal-b", "goal-a", "goal-a"],
             relatedCaptureIDs: ["capture-a"],
-            relatedPlanIDs: ["plan-a"],
+            relatedTimeIDs: ["time-a"],
             relatedBelievabilityAssessmentIDs: ["believability-b", "believability-a"],
             status: .blocked,
             disruptions: [disruption],
@@ -96,6 +96,7 @@ final class ExecutionResilienceModelsTests: XCTestCase {
 
         XCTAssertEqual(assessment.schemaVersion, executionResilienceSchemaVersion)
         XCTAssertEqual(assessment.relatedGoalIDs, ["goal-a", "goal-b"])
+        XCTAssertEqual(assessment.relatedTimeIDs, ["time-a"])
         XCTAssertEqual(assessment.relatedBelievabilityAssessmentIDs, ["believability-a", "believability-b"])
         XCTAssertEqual(assessment.reasons, [.waitingOrBlocked])
         XCTAssertEqual(assessment.assumptions.map(\.id), ["a", "b"])
@@ -118,4 +119,3 @@ final class ExecutionResilienceModelsTests: XCTestCase {
         XCTAssertTrue(snapshot.localOnly)
     }
 }
-

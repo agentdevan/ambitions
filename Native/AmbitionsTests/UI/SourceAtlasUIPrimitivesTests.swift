@@ -2,6 +2,7 @@ import XCTest
 import SwiftUI
 @testable import Ambitions
 
+@MainActor
 final class SourceAtlasUIPrimitivesTests: XCTestCase {
     func testSourceBadge() {
         let badge = SourceBadge(state: .official)

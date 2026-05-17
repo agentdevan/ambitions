@@ -75,10 +75,10 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.execution.dayState, .steady)
         XCTAssertEqual(experience.execution.frictionSignal.kind, .friction)
         XCTAssertEqual(experience.execution.supportingPanels.count, 2)
-        XCTAssertEqual(experience.execution.todayPlanLayer.title, "Today Plan")
-        XCTAssertFalse(experience.execution.todayPlanLayer.items.isEmpty)
-        XCTAssertEqual(experience.execution.todayPlanLayer.calendarSourceLabel, "Based on your plan")
-        XCTAssertFalse(experience.execution.todayPlanLayer.openWindowLabel.isEmpty)
+        XCTAssertEqual(experience.execution.todayTimeLayer.title, "Today schedule")
+        XCTAssertFalse(experience.execution.todayTimeLayer.items.isEmpty)
+        XCTAssertEqual(experience.execution.todayTimeLayer.calendarSourceLabel, "Based on your Time")
+        XCTAssertFalse(experience.execution.todayTimeLayer.openWindowLabel.isEmpty)
         XCTAssertNotNil(experience.execution.hero.explanation)
         XCTAssertNotNil(experience.execution.saveTheDayAction)
         XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startStepSession && $0.commandKind == .startStepSession })
@@ -107,7 +107,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.kind, .stepDetail)
         XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.placeholderLabel, "Open Step Detail.")
         XCTAssertEqual(rail.rows.map(\.slot), [.now, .next, .later])
-        XCTAssertTrue(rail.contextLabels.contains { $0.label == "Based on your plan" })
+        XCTAssertTrue(rail.contextLabels.contains { $0.label == "Based on your Time" })
         XCTAssertTrue(rail.contextLabels.contains { $0.label == "Stored on this device" })
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
@@ -453,11 +453,11 @@ final class TodayViewModelTests: XCTestCase {
 
         XCTAssertTrue(copy.contains("Why this?"))
         XCTAssertTrue(copy.contains("Recommended because"))
-        XCTAssertTrue(copy.contains("Based on your plan"))
+        XCTAssertTrue(copy.contains("Based on your Time"))
         XCTAssertTrue(copy.contains("Duration source: Suggested duration"))
         XCTAssertTrue(copy.contains("Start now"))
         XCTAssertTrue(copy.contains("Close the loop"))
-        XCTAssertTrue(copy.contains("Adjust plan"))
+        XCTAssertTrue(copy.contains("Adjust time"))
         XCTAssertTrue(copy.contains("Review later"))
         XCTAssertTrue(copy.contains("Proof and receipts stay attached to this step"))
         XCTAssertTrue(copy.contains("No silent changes"))
@@ -520,7 +520,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(detail.primaryAction.kind, .startStepSession)
         XCTAssertEqual(detail.closureAction.kind, .closeActionClosure)
         XCTAssertEqual(detail.closureAction.title, "Close the loop")
-        XCTAssertEqual(detail.secondaryActions.map(\.title), ["Adjust plan", "Review later"])
+        XCTAssertEqual(detail.secondaryActions.map(\.title), ["Adjust time", "Review later"])
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Closure knot"))
@@ -678,8 +678,8 @@ final class TodayViewModelTests: XCTestCase {
 
         XCTAssertEqual(execution.hero.kind, .nextAction)
         XCTAssertEqual(execution.commandMappings.contains { $0.actionKind == .startStepSession }, true)
-        XCTAssertEqual(execution.commandMappings.contains { $0.actionKind == .openPlan }, true)
-        XCTAssertFalse(execution.planRequestsCalendarPermission)
+        XCTAssertEqual(execution.commandMappings.contains { $0.actionKind == .openTime }, true)
+        XCTAssertFalse(execution.timeRequestsCalendarPermission)
         XCTAssertFalse(execution.dayRail.contextSummary.contains("calendar"))
         XCTAssertEqual(hero.title, "Draft launch summary")
         XCTAssertNotNil(execution.dayRail.heroStep)
@@ -706,7 +706,7 @@ final class TodayViewModelTests: XCTestCase {
         var hasAskWhyMapping = false
 
         for mapping in mappings {
-            if mapping.actionKind == .openPlan && mapping.destination == .plan && mapping.commandKind == .openDestination {
+            if mapping.actionKind == .openTime && mapping.destination == .time && mapping.commandKind == .openDestination {
                 hasPlanDestinationMapping = true
             }
             if mapping.actionKind == .startStepSession && mapping.commandKind == .startStepSession {
@@ -760,7 +760,7 @@ final class TodayViewModelTests: XCTestCase {
                 status: .actionable,
                 linkedGoalID: nil,
                 kind: .oneTimeCommitment,
-                route: .planSeed,
+                route: .timeSeed,
                 triageStatus: .assumedRoute,
                 commitmentKind: .oneTime
             )
@@ -865,7 +865,7 @@ final class TodayViewModelTests: XCTestCase {
         let service = RepositoryBackedTodayService(repositories: repositories)
         let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
         try await repositories.captures.saveCaptures([
-            Capture(id: "capture-1", createdAt: DomainTimestamp.string(from: now), updatedAt: DomainTimestamp.string(from: now), rawText: "Create spreadsheet and send it to Kaylee by EOD Tuesday", sourceType: .todayQuickCapture, status: .actionable, linkedGoalID: nil, kind: .oneTimeCommitment, route: .planSeed, triageStatus: .assumedRoute, commitmentKind: .oneTime, deadlineText: "EOD Tuesday", deadlineKind: .hard, contextLensHint: .work),
+            Capture(id: "capture-1", createdAt: DomainTimestamp.string(from: now), updatedAt: DomainTimestamp.string(from: now), rawText: "Create spreadsheet and send it to Kaylee by EOD Tuesday", sourceType: .todayQuickCapture, status: .actionable, linkedGoalID: nil, kind: .oneTimeCommitment, route: .timeSeed, triageStatus: .assumedRoute, commitmentKind: .oneTime, deadlineText: "EOD Tuesday", deadlineKind: .hard, contextLensHint: .work),
             Capture(id: "capture-2", createdAt: DomainTimestamp.string(from: now), updatedAt: DomainTimestamp.string(from: now), rawText: "Book dentist", sourceType: .todayQuickCapture, status: .actionable, linkedGoalID: nil),
         ])
 
@@ -873,8 +873,8 @@ final class TodayViewModelTests: XCTestCase {
         let capturePanel = try XCTUnwrap(experience.execution.supportingPanels.first { $0.kind == .capture })
 
         XCTAssertNotEqual(capturePanel.value, "No pressure")
-        XCTAssertFalse(experience.execution.planRequestsCalendarPermission)
-        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .openPlan && $0.destination == .plan })
+        XCTAssertFalse(experience.execution.timeRequestsCalendarPermission)
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .openTime && $0.destination == .time })
     }
 
     func testToday2EmptyStateDoesNotBecomeBlankDashboard() async throws {
@@ -892,7 +892,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertNil(experience.execution.saveTheDayAction)
         XCTAssertNotNil(experience.execution.emptyGuidance)
         XCTAssertFalse(experience.execution.supportingPanels.isEmpty)
-        XCTAssertFalse(experience.execution.planRequestsCalendarPermission)
+        XCTAssertFalse(experience.execution.timeRequestsCalendarPermission)
     }
 
     func testRepositoryBackedServiceCanSurfaceSharedResponsibilityRitualThesis() async throws {

@@ -39,10 +39,12 @@ final class CaptureServiceTests: XCTestCase {
             CaptureRoute.allCases.map(\.rawValue),
             [
                 "capture_inbox",
-                "plan_seed",
+                "time_seed",
                 "goal_seed",
                 "goal_attachment",
                 "deliverable_seed",
+                "proof_item",
+                "constraint_item",
                 "waiting",
                 "optional_someday",
                 "archive"
@@ -95,7 +97,7 @@ final class CaptureServiceTests: XCTestCase {
 
         XCTAssertEqual(created.status, .scheduled)
         XCTAssertEqual(created.kind, .oneTimeCommitment)
-        XCTAssertEqual(created.route, .planSeed)
+        XCTAssertEqual(created.route, .timeSeed)
         XCTAssertEqual(created.triageStatus, .assumedRoute)
         XCTAssertEqual(created.commitmentKind, .oneTime)
         XCTAssertEqual(created.deadlineText, "EOD Tuesday")
@@ -172,7 +174,7 @@ final class CaptureServiceTests: XCTestCase {
         let optional = try await optionalService.createCapture(CreateCaptureRequest(rawText: "Maybe learn piano someday"), now: fixedNow)
         let deliverable = try await deliverableService.createCapture(CreateCaptureRequest(rawText: "Add another song to the album"), now: fixedNow)
 
-        let planSeed = try await timeService.routeToPlanSeed(id: plan.id, now: fixedNow.addingTimeInterval(60))
+        let planSeed = try await timeService.routeToTimeSeed(id: plan.id, now: fixedNow.addingTimeInterval(60))
         let waitingItem = try await waitingService.markAsWaiting(
             id: waiting.id,
             waitingMetadata: CaptureWaitingMetadata(waitingOn: "Kaylee"),
@@ -183,7 +185,7 @@ final class CaptureServiceTests: XCTestCase {
         let events = try await ledger.fetchRecent(limit: 40)
 
         XCTAssertEqual(planSeed?.kind, .oneTimeCommitment)
-        XCTAssertEqual(planSeed?.route, .planSeed)
+        XCTAssertEqual(planSeed?.route, .timeSeed)
         XCTAssertEqual(planSeed?.status, .scheduled)
         XCTAssertEqual(waitingItem?.kind, .waitingItem)
         XCTAssertEqual(waitingItem?.route, .waiting)
@@ -209,7 +211,7 @@ final class CaptureServiceTests: XCTestCase {
                 id: "capture-priority",
                 status: .actionable,
                 kind: .deadlineTask,
-                route: .planSeed,
+                route: .timeSeed,
                 triageStatus: .userCorrected,
                 deadlineText: "Friday",
                 deadlineKind: .hard,

@@ -2,6 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 import XCTest
 
+@MainActor
 final class GroupedNavigationListDesignSystemTests: XCTestCase {
     func testD03RowKindsCoverCanonicalGroupedNavigationVariants() {
         XCTAssertEqual(Set(GroupedNavigationRowKind.allCases), [

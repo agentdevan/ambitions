@@ -264,7 +264,7 @@ private extension RepositoryBackedTodayService {
         actionableCount: Int
     ) -> TodayDayPosture {
         if mode == .empty {
-            return .noTime
+            return .noPlan
         }
         switch entryContext.normalized {
         case .recovery:
@@ -459,7 +459,7 @@ private extension RepositoryBackedTodayService {
             freeTime: freeTime
         )
         let primary = available.first ?? TodayInlineAction(
-            kind: .openPlan,
+            kind: .openTime,
             title: "Build today",
             systemImage: "calendar.badge.plus",
             state: .selected,
@@ -573,7 +573,7 @@ private extension RepositoryBackedTodayService {
             return "Come back through one safer lane, not a full reset."
         case .lowData:
             return "Clarify the next step before pretending certainty."
-        case .noTime:
+        case .noPlan:
             return "Start with one bounded step and let the shell own the bigger reshaping."
         }
     }
@@ -592,7 +592,7 @@ private extension RepositoryBackedTodayService {
             return "Recover through one believable step"
         case .lowData:
             return "Clarify the next step first"
-        case .noTime:
+        case .noPlan:
             return "Build today from one real step"
         }
     }
@@ -611,7 +611,7 @@ private extension RepositoryBackedTodayService {
             return heroDetail.isEmpty ? ritual.subtitle : heroDetail
         case .lowData:
             return heroDetail
-        case .noTime:
+        case .noPlan:
             return ritual.thesis
         }
     }
@@ -761,7 +761,7 @@ private extension RepositoryBackedTodayService {
                 label: "Needs confirmation",
                 state: .warning
             )
-        case .noTime:
+        case .noPlan:
             return TodayDayPressureState(
                 title: "Today has open room",
                 detail: fixedCount == 0
@@ -949,7 +949,7 @@ private extension RepositoryBackedTodayService {
     ) -> TodayStepSessionState? {
         guard entryContext.normalized == .stepSession else { return nil }
         let fallbackAction = TodayInlineAction(
-            kind: .openPlan,
+            kind: .openTime,
             title: "Open Time",
             systemImage: "calendar",
             state: .selected,
@@ -1624,7 +1624,7 @@ private extension RepositoryBackedTodayService {
                 body: explanation,
                 state: .selected
             )
-        case .startStepSession, .pauseStepSession, .stopStepSession, .closeActionClosure, .openDetail, .openPlan, .protectLater, .dismissCelebration:
+        case .startStepSession, .pauseStepSession, .stopStepSession, .closeActionClosure, .openDetail, .openTime, .protectLater, .dismissCelebration:
             break
         }
 
@@ -2259,7 +2259,7 @@ private extension RepositoryBackedTodayService {
             return .askForSmallerStep
         case .askForHelp:
             return .stuck
-        case .complete, .closeActionClosure, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .openDetail, .openPlan, .protectLater, .quickLog, .dismissCelebration:
+        case .complete, .closeActionClosure, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .openDetail, .openTime, .protectLater, .quickLog, .dismissCelebration:
             return nil
         }
     }
@@ -2294,7 +2294,7 @@ private extension RepositoryBackedTodayService {
             return "Marked not relevant from Today."
         case .closeActionClosure:
             return "Closed the loop from Today."
-        case .openDetail, .openPlan, .askForHelp, .dismissCelebration:
+        case .openDetail, .openTime, .askForHelp, .dismissCelebration:
             return step.title
         }
     }

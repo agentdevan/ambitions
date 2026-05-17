@@ -259,7 +259,7 @@ private extension RepositoryBackedInsightsService {
                 systemImage: "arrow.triangle.branch",
                 visualState: .warning,
                 goalTarget: nil,
-                planRoute: .weeklyReview,
+                timeRoute: .weeklyReview,
                 insightsRoute: nil
             )
         }
@@ -270,7 +270,7 @@ private extension RepositoryBackedInsightsService {
                 systemImage: "target",
                 visualState: firstAdjustingGoal.visualState,
                 goalTarget: target,
-                planRoute: nil,
+                timeRoute: nil,
                 insightsRoute: nil
             )
         }
@@ -280,7 +280,7 @@ private extension RepositoryBackedInsightsService {
             systemImage: "clock.arrow.circlepath",
             visualState: .selected,
             goalTarget: nil,
-            planRoute: nil,
+            timeRoute: nil,
             insightsRoute: .history
         )
     }
@@ -297,7 +297,7 @@ private extension RepositoryBackedInsightsService {
                 icon: "lifepreserver",
                 visualState: .warning,
                 goalTarget: target,
-                planRoute: nil,
+                timeRoute: nil,
                 insightsRoute: nil
             )
         }
@@ -308,7 +308,7 @@ private extension RepositoryBackedInsightsService {
                 icon: "calendar.badge.exclamationmark",
                 visualState: .warning,
                 goalTarget: nil,
-                planRoute: .weeklyReview,
+                timeRoute: .weeklyReview,
                 insightsRoute: nil
             )
         }
@@ -319,7 +319,7 @@ private extension RepositoryBackedInsightsService {
                 icon: "leaf.fill",
                 visualState: .selected,
                 goalTarget: nil,
-                planRoute: .weeklyReview,
+                timeRoute: .weeklyReview,
                 insightsRoute: nil
             )
         }
@@ -395,7 +395,7 @@ private extension RepositoryBackedInsightsService {
                 visualState: current.visibleFollowThrough > 0 ? .success : .default,
                 points: momentumPoints.isEmpty ? trendPoints : momentumPoints,
                 goalTarget: current.visibleFollowThrough > 0 ? topGoalTarget : nil,
-                planRoute: nil
+                timeRoute: nil
             ),
             InsightsPatternCluster(
                 id: "pattern-drift",
@@ -408,7 +408,7 @@ private extension RepositoryBackedInsightsService {
                 visualState: current.frictionCount == 0 ? .selected : .warning,
                 points: driftPoints,
                 goalTarget: current.frictionCount > 0 ? topGoalTarget : nil,
-                planRoute: .weeklyReview
+                timeRoute: .weeklyReview
             ),
             InsightsPatternCluster(
                 id: "pattern-adaptation",
@@ -421,7 +421,7 @@ private extension RepositoryBackedInsightsService {
                 visualState: current.adaptationCount == 0 ? .default : .selected,
                 points: adaptationPoints,
                 goalTarget: nil,
-                planRoute: .weeklyReview
+                timeRoute: .weeklyReview
             )
         ]
     }
@@ -440,7 +440,7 @@ private extension RepositoryBackedInsightsService {
                 signalLabel: $0.statusLabel,
                 visualState: $0.visualState,
                 goalTarget: $0.target,
-                planRoute: nil
+                timeRoute: nil
             )
         }
 
@@ -453,7 +453,7 @@ private extension RepositoryBackedInsightsService {
             signalLabel: blockedCount > 0 || current.frictionCount > current.visibleFollowThrough ? "Shape next" : "Carry forward",
             visualState: blockedCount > 0 || current.frictionCount > current.visibleFollowThrough ? .warning : .selected,
             goalTarget: nil,
-            planRoute: .weeklyReview
+            timeRoute: .weeklyReview
         )
         items.append(planItem)
 
@@ -466,7 +466,7 @@ private extension RepositoryBackedInsightsService {
                     signalLabel: "Open goal",
                     visualState: .default,
                     goalTarget: topGoalTarget,
-                    planRoute: nil
+                    timeRoute: nil
                 )
             )
         }
@@ -792,7 +792,7 @@ private extension RepositoryBackedInsightsService {
                     badge: evidenceBadge(for: evidence),
                     visualState: evidenceState(for: evidence),
                     goalTarget: target.goalID == nil ? nil : target,
-                    planRoute: nil
+                    timeRoute: nil
                 )
             )
         }
@@ -812,7 +812,7 @@ private extension RepositoryBackedInsightsService {
                     badge: feedbackBadge(for: event),
                     visualState: feedbackState(for: event),
                     goalTarget: target,
-                    planRoute: isFriction(event) ? .weeklyReview : nil
+                    timeRoute: isFriction(event) ? .weeklyReview : nil
                 )
             )
         }

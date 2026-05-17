@@ -484,7 +484,7 @@ extension AmbitionsCommand {
         case .openGoal:
             kind = .openDestination
             destination = .goalDetail
-        case .openPlan, .schedule:
+        case .openTime, .schedule:
             kind = .openDestination
             destination = .time
         case .capture:

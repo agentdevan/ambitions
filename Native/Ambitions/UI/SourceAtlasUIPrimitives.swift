@@ -4,15 +4,15 @@ import AmbitionsDesignSystem
 // MARK: - Source Atlas UI Primitives
 
 /// Explicit badge for requirement source state.
-public struct SourceBadge: View {
+struct SourceBadge: View {
     let state: SourceAtlasRequirementSourceState
     @Environment(\.ambitionTheme) var theme
     
-    public init(state: SourceAtlasRequirementSourceState) {
+    init(state: SourceAtlasRequirementSourceState) {
         self.state = state
     }
     
-    public var body: some View {
+    var body: some View {
         HStack(spacing: theme.spacing.xxxs) {
             Image(systemName: iconName)
             Text(label)
@@ -58,7 +58,7 @@ public struct SourceBadge: View {
         switch state {
         case .official, .officialCurrent, .current: return theme.semanticColors.trust
         case .locallyProven: return theme.semanticColors.confidenceHigh
-        case .sourceNeeded: return theme.semanticColors.warning
+        case .sourceNeeded: return theme.semanticColors.confidenceMedium
         case .stale: return theme.semanticColors.confidenceMedium
         case .contradicted, .revoked: return theme.semanticColors.risk
         default: return theme.colors.textSecondary
@@ -67,15 +67,15 @@ public struct SourceBadge: View {
 }
 
 /// Explicit badge for requirement freshness.
-public struct FreshnessBadge: View {
+struct FreshnessBadge: View {
     let state: SourceAtlasRequirementFreshnessState
     @Environment(\.ambitionTheme) var theme
     
-    public init(state: SourceAtlasRequirementFreshnessState) {
+    init(state: SourceAtlasRequirementFreshnessState) {
         self.state = state
     }
     
-    public var body: some View {
+    var body: some View {
         HStack(spacing: theme.spacing.xxxs) {
             Image(systemName: state == .current ? "leaf.fill" : "clock.fill")
             Text(state.rawValue.capitalized)
@@ -98,19 +98,19 @@ public struct FreshnessBadge: View {
 }
 
 /// A fold indicating a missing source for a requirement.
-public struct SourceNeededFold: View {
+struct SourceNeededFold: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xxs) {
             HStack {
                 Image(systemName: "exclamationmark.triangle.fill")
                 Text("Source Needed")
                     .font(theme.typography.sectionTitle)
             }
-            .foregroundColor(theme.semanticColors.warning)
+            .foregroundColor(theme.semanticColors.confidenceMedium)
             
             Text("This requirement is missing an official source basis. Verification is required before it can drive recommendations.")
                 .font(theme.typography.bodySecondary)
@@ -123,15 +123,15 @@ public struct SourceNeededFold: View {
 }
 
 /// A fold displaying source information for a requirement.
-public struct RequirementSourceFold: View {
+struct RequirementSourceFold: View {
     let sourceState: SourceAtlasRequirementSourceState
     @Environment(\.ambitionTheme) var theme
     
-    public init(sourceState: SourceAtlasRequirementSourceState) {
+    init(sourceState: SourceAtlasRequirementSourceState) {
         self.sourceState = sourceState
     }
     
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xxs) {
             Text("Requirement Source")
                 .font(theme.typography.sectionTitle)
@@ -145,12 +145,12 @@ public struct RequirementSourceFold: View {
 }
 
 /// Drawer for reviewing claims.
-public struct ClaimReviewDrawer: View {
+struct ClaimReviewDrawer: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         VStack(spacing: theme.spacing.standard) {
             Capsule()
                 .frame(width: 40, height: 4)
@@ -174,12 +174,12 @@ public struct ClaimReviewDrawer: View {
 }
 
 /// Sheet for reviewing the source binder.
-public struct SourceBinderReviewSheet: View {
+struct SourceBinderReviewSheet: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         NavigationView {
             List {
                 Section("Official Sources") {
@@ -193,15 +193,15 @@ public struct SourceBinderReviewSheet: View {
 }
 
 /// Receipt for a pack update.
-public struct PackUpdateReceipt: View {
+struct PackUpdateReceipt: View {
     let packID: String
     @Environment(\.ambitionTheme) var theme
     
-    public init(packID: String) {
+    init(packID: String) {
         self.packID = packID
     }
     
-    public var body: some View {
+    var body: some View {
         HStack {
             Image(systemName: "arrow.down.doc.fill")
             VStack(alignment: .leading) {
@@ -218,12 +218,12 @@ public struct PackUpdateReceipt: View {
 }
 
 /// Shield for private sources.
-public struct PrivateSourceShield: View {
+struct PrivateSourceShield: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         HStack {
             Image(systemName: "lock.shield.fill")
             Text("Private Source")
@@ -238,31 +238,31 @@ public struct PrivateSourceShield: View {
 }
 
 /// Notice for OCR-derived content.
-public struct OCRReviewNotice: View {
+struct OCRReviewNotice: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         HStack {
             Image(systemName: "text.viewfinder")
             Text("OCR Review Needed")
                 .font(theme.typography.micro)
         }
-        .foregroundColor(theme.semanticColors.warning)
+        .foregroundColor(theme.semanticColors.confidenceMedium)
         .padding(theme.spacing.xxs)
-        .background(theme.semanticColors.warning.opacity(0.1))
+        .background(theme.semanticColors.confidenceMedium.opacity(0.1))
         .cornerRadius(theme.radius.sm)
     }
 }
 
 /// Receipt for source impact.
-public struct SourceImpactReceipt: View {
+struct SourceImpactReceipt: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         Text("Source Impact: Validated")
             .font(theme.typography.bodySecondary)
             .padding(theme.spacing.xxs)
@@ -272,12 +272,12 @@ public struct SourceImpactReceipt: View {
 }
 
 /// Fold for projection receipts.
-public struct ProjectionReceiptFold: View {
+struct ProjectionReceiptFold: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading) {
             Text("Projection Receipt")
                 .font(theme.typography.sectionTitle)
@@ -290,15 +290,15 @@ public struct ProjectionReceiptFold: View {
 }
 
 /// Indicator for skill slices.
-public struct SkillSliceIndicator: View {
+struct SkillSliceIndicator: View {
     let sliceName: String
     @Environment(\.ambitionTheme) var theme
     
-    public init(sliceName: String) {
+    init(sliceName: String) {
         self.sliceName = sliceName
     }
     
-    public var body: some View {
+    var body: some View {
         Text(sliceName)
             .font(theme.typography.micro)
             .padding(.horizontal, 6)
@@ -309,12 +309,12 @@ public struct SkillSliceIndicator: View {
 }
 
 /// Receipt for an alternative path.
-public struct AlternativePathReceipt: View {
+struct AlternativePathReceipt: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         HStack {
             Image(systemName: "arrow.triangle.branch")
             Text("Alternative Path Available")
@@ -327,12 +327,12 @@ public struct AlternativePathReceipt: View {
 }
 
 /// Fold for option value reservation.
-public struct OptionValueFold: View {
+struct OptionValueFold: View {
     @Environment(\.ambitionTheme) var theme
     
-    public init() {}
+    init() {}
     
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading) {
             Text("Option Value Reserved")
                 .font(theme.typography.sectionTitle)

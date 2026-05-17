@@ -284,7 +284,7 @@ struct TodayCommandActionHandler {
             return .goals
         case .capture:
             return .capture
-        case .plan:
+        case .time:
             return .plan
         case .you:
             return .you

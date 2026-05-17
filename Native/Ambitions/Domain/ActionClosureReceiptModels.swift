@@ -345,7 +345,7 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
 
     var relatedPlanItemIDs: [String] {
         receipt.affectedObjects.filter { object in
-            object.sourceDomain == .plan || object.kind == .step || object.kind == .action
+            object.sourceDomain == .time || object.kind == .step || object.kind == .action
         }.map(\.id).sorted()
     }
 
@@ -1079,7 +1079,7 @@ extension ClosureState {
         case .awaitingClosure, .needsReview:
             ActionReceiptNextAction(kind: .openToday, title: "Close the loop", destination: .today)
         case .needsRecovery, .blocked:
-            ActionReceiptNextAction(kind: .openTime, title: "Adjust plan", destination: .timeRoute(.captureInbox))
+            ActionReceiptNextAction(kind: .openTime, title: "Adjust time", destination: .time)
         case .completed, .stillCounts, .moved, .skippedIntentionally, .notNeeded, .waiting, .now, .next, .later:
             nil
         }
@@ -1308,8 +1308,8 @@ extension ActionReceipt {
         if let captureID = target.captureID {
             objects.append(LifeGraphObjectReference(kind: .capture, id: captureID, sourceDomain: .capture))
         }
-        if let planID = target.planID {
-            objects.append(LifeGraphObjectReference(kind: .action, id: planID, sourceDomain: .plan))
+        if let timeID = target.timeID {
+            objects.append(LifeGraphObjectReference(kind: .action, id: timeID, sourceDomain: .time))
         }
         if let stepID = target.stepID {
             objects.append(LifeGraphObjectReference(kind: .step, id: stepID, parentContextID: target.goalID, sourceDomain: .goalEngine))
@@ -1327,7 +1327,7 @@ extension ActionReceipt {
                 return .attached
             case .markWaiting:
                 return .changed
-            case .archiveItem, .setPriority, .setUrgency, .setDeadline, .routeCommitment, .createPlanItem:
+            case .archiveItem, .setPriority, .setUrgency, .setDeadline, .routeCommitment, .createTimeItem:
                 return .changed
             case .scheduleItem:
                 return .draftedPrepared
@@ -1448,7 +1448,7 @@ extension ActionReceipt {
         case .today:
             return ActionReceiptNextAction(kind: .openToday, title: "Open Today", destination: .today)
         case .time:
-            return ActionReceiptNextAction(kind: .openTime, title: "Open Time", destination: .timeRoute(.captureInbox))
+            return ActionReceiptNextAction(kind: .openTime, title: "Open Time", destination: .time)
         case .goalDetail, .goals:
             return ActionReceiptNextAction(kind: .reviewGoal, title: "Review goal", destination: result.route)
         case .capture, .captureInbox:
@@ -1485,7 +1485,7 @@ extension ActionReceipt {
             return .goals
         case .capture:
             return .capture
-        case .plan:
+        case .time:
             return .time
         case .you:
             return .you

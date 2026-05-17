@@ -9,7 +9,7 @@ final class FeatureEnginePackageBoundaryModelsTests: XCTestCase {
         XCTAssertEqual(manifest.sourceRoot, "Native/Ambitions/Features")
         XCTAssertEqual(manifest.plannedPackageProductName, "AmbitionsFeatureEngines")
         XCTAssertEqual(manifest.userFacingDestinationLabels, ["Capture", "Goals", "Time", "Today", "You"])
-        XCTAssertEqual(manifest.activeDestinationSourceRoots, ["Captures", "Goals", "Time", "Today", "You"])
+        XCTAssertEqual(manifest.activeDestinationSourceRoots, ["Capture", "Goals", "Time", "Today", "You"])
         XCTAssertTrue(manifest.compatibilityRoots.contains("Habits"))
         XCTAssertTrue(manifest.compatibilityRoots.contains("Insights"))
         XCTAssertTrue(manifest.sharedRoots.contains("Shared"))

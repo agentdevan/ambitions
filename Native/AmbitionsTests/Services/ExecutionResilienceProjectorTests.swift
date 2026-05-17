@@ -108,7 +108,7 @@ final class ExecutionResilienceProjectorTests: XCTestCase {
             status: .scheduled,
             linkedGoalID: nil,
             kind: .oneTimeCommitment,
-            route: .planSeed,
+            route: .timeSeed,
             triageStatus: .assumedRoute,
             commitmentKind: .oneTime,
             deadlineText: "EOD Tuesday",
@@ -136,14 +136,14 @@ final class ExecutionResilienceProjectorTests: XCTestCase {
                 believabilityAssessments: [believability],
                 realitySnapshot: snapshot,
                 captures: [capture],
-                planID: "plan-work"
+                timeID: "time-work"
             )
         )
 
         XCTAssertEqual(assessment.status, .atRisk)
         XCTAssertTrue(assessment.disruptions.contains { $0.kind == .noOpenWindow })
         XCTAssertTrue(assessment.disruptions.contains { $0.kind == .slippedDeadline })
-        XCTAssertTrue(assessment.recoveryOptions.contains { $0.strategy == .openPlan })
+        XCTAssertTrue(assessment.recoveryOptions.contains { $0.strategy == .openTime })
         XCTAssertTrue(assessment.recoveryOptions.allSatisfy { $0.relatedCommandKind != .scheduleItem })
     }
 
@@ -263,7 +263,7 @@ final class ExecutionResilienceProjectorTests: XCTestCase {
 
         XCTAssertTrue(assessment.disruptions.contains { $0.kind == .calendarConflict })
         XCTAssertEqual(assessment.privacy, .calendarDerived)
-        XCTAssertTrue(assessment.recoveryOptions.contains { $0.strategy == .openPlan })
+        XCTAssertTrue(assessment.recoveryOptions.contains { $0.strategy == .openTime })
         XCTAssertTrue(assessment.recoveryOptions.allSatisfy { $0.relatedCommandKind != .scheduleItem })
     }
 

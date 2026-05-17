@@ -2,14 +2,14 @@ import XCTest
 @testable import Ambitions
 
 @MainActor
-final class CapturesViewModelTests: XCTestCase {
+final class CaptureViewModelTests: XCTestCase {
     func testLoadFetchesCapturesAndActiveGoalOptions() async {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-1", rawText: "First")])
         let goalsService = StaticGoalsService(items: [
             goalItem(id: "goal-active", title: "Active goal", renderState: .active),
             goalItem(id: "goal-on-hold", title: "On hold goal", renderState: .onHold)
         ])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
 
@@ -25,7 +25,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testArchiveAndSaveToNeedsPlaceCallServiceAndRefresh() async {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-1", rawText: "First")])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.archive(id: "capture-1", captureService: captureService, goalsService: goalsService, now: fixedNow)
         var stored = await captureService.capture(id: "capture-1")
@@ -50,12 +50,12 @@ final class CapturesViewModelTests: XCTestCase {
             capture(id: "deliverable", rawText: "Add another song")
         ])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
-        await viewModel.routeToPlan(id: "plan", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        await viewModel.routeToTime(id: "plan", captureService: captureService, goalsService: goalsService, now: fixedNow)
         var stored = await captureService.capture(id: "plan")
         XCTAssertEqual(stored?.kind, .oneTimeCommitment)
-        XCTAssertEqual(stored?.route, .planSeed)
+        XCTAssertEqual(stored?.route, .timeSeed)
         XCTAssertEqual(stored?.status, .scheduled)
         XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Task · Today")
 
@@ -86,7 +86,7 @@ final class CapturesViewModelTests: XCTestCase {
         let goalsService = StaticGoalsService(items: [
             goalItem(id: "goal-music", title: "Music Goal", renderState: .active)
         ])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("NASA")
@@ -111,7 +111,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testAFI08DraftPreviewUsesApprovedAtmosphereComposerRouteStates() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Maybe start a guitar goal")
@@ -132,7 +132,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testF07ComposerPreviewUsesPlacementLanguageWithoutInboxFraming() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Book dentist")
@@ -177,7 +177,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testFCP19ManualRouteSelectionKeepsCorrectionFoldUserOwned() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Maybe start a guitar goal")
@@ -196,7 +196,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testSI09ComposerPresentationRevealsRouteWithoutSilentMutationCopy() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Book dentist")
@@ -222,7 +222,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testFCP21ComposerInputAlternativesKeepVoiceUnavailableAndMotorPathsHonest() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Book dentist")
@@ -270,7 +270,7 @@ final class CapturesViewModelTests: XCTestCase {
         let goalsService = StaticGoalsService(items: [
             goalItem(id: "goal-music", title: "Music Goal", renderState: .active)
         ])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Finished Music Goal proof")
@@ -286,7 +286,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testD12QuickCapturePersistsSmartAttachmentReceiptAndRoute() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Book dentist")
@@ -294,7 +294,7 @@ final class CapturesViewModelTests: XCTestCase {
 
         let stored = await captureService.capture(id: "capture-created-0")
         XCTAssertEqual(stored?.kind, .oneTimeCommitment)
-        XCTAssertEqual(stored?.route, .planSeed)
+        XCTAssertEqual(stored?.route, .timeSeed)
         XCTAssertEqual(stored?.status, .scheduled)
         XCTAssertEqual(stored?.assumptionSummary, "Saved as a standalone Task because no existing local destination was reliable enough.")
         XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Task · Today")
@@ -302,7 +302,7 @@ final class CapturesViewModelTests: XCTestCase {
     }
 
     func testD12CaptureScreenContractSnapshotSatisfiesImplementationGate() {
-        let snapshot = CapturesViewState(
+        let snapshot = CaptureViewState(
             captures: [],
             activeGoalOptions: []
         ).screenContractSnapshot()
@@ -315,7 +315,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testQuickCapturePreservesInputWhenCreateFails() async {
         let captureService = MutableCaptureService(captures: [], shouldThrow: true)
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
         viewModel.draftText = "  Keep this thought  "
 
         await viewModel.createQuickCapture(captureService: captureService, goalsService: goalsService, now: fixedNow)
@@ -327,7 +327,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testAttachReturnsGoalRouteTarget() async {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-attach", rawText: "Attach")])
         let goalsService = StaticGoalsService(items: [goalItem(id: "goal-active", title: "Active goal", renderState: .active)])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         let target = await viewModel.attachToGoal(
             captureID: "capture-attach",
@@ -348,7 +348,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testTurnIntoGoalReturnsCreatedGoalRouteTarget() async {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-goal", rawText: "Turn into goal")])
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         let target = await viewModel.turnIntoGoal(
             captureID: "capture-goal",
@@ -367,7 +367,7 @@ final class CapturesViewModelTests: XCTestCase {
     func testFailuresAreSurfacedWithoutChangingDomainRulesInViewModel() async {
         let captureService = MutableCaptureService(captures: [], shouldThrow: true)
         let goalsService = StaticGoalsService(items: [])
-        let viewModel = CapturesViewModel()
+        let viewModel = CaptureViewModel()
 
         let target = await viewModel.turnIntoGoal(
             captureID: "missing",
@@ -543,11 +543,11 @@ private actor MutableCaptureService: CaptureServicing {
     }
 
     func markAsOneTimeCommitment(id: String, deadlineText: String?, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
-        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .planSeed, deadlineText: deadlineText, contextLensHint: contextLensHint), now: now)
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .timeSeed, deadlineText: deadlineText, contextLensHint: contextLensHint), now: now)
     }
 
     func markAsDeadlineTask(id: String, deadlineText: String, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
-        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .deadlineTask, route: .planSeed, deadlineText: deadlineText, contextLensHint: contextLensHint), now: now)
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .deadlineTask, route: .timeSeed, deadlineText: deadlineText, contextLensHint: contextLensHint), now: now)
     }
 
     func markAsGoalSeed(id: String, now: Date) async throws -> Capture? {
@@ -570,8 +570,8 @@ private actor MutableCaptureService: CaptureServicing {
         try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .optionalSomeday, route: .optionalSomeday, priorityHints: CapturePriorityHints(optionalSomeday: true, passive: true)), now: now)
     }
 
-    func routeToPlanSeed(id: String, now: Date) async throws -> Capture? {
-        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .planSeed), now: now)
+    func routeToTimeSeed(id: String, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .timeSeed), now: now)
     }
 
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
@@ -634,7 +634,7 @@ private actor MutableCaptureService: CaptureServicing {
         switch route {
         case .captureInbox:
             .actionable
-        case .planSeed:
+        case .timeSeed:
             .scheduled
         case .goalSeed, .deliverableSeed, .proofItem, .constraintItem:
             .seed
@@ -719,25 +719,25 @@ private actor StaticGoalsService: GoalsServicing {
 
     func loadDetail(target: GoalRouteTarget) async throws -> GoalDetailPresentation {
         _ = target
-        fatalError("Not needed for CapturesViewModelTests")
+        fatalError("Not needed for CaptureViewModelTests")
     }
 
     func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse {
         _ = request
         _ = now
-        fatalError("Not needed for CapturesViewModelTests")
+        fatalError("Not needed for CaptureViewModelTests")
     }
 
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse {
         _ = request
         _ = now
-        fatalError("Not needed for CapturesViewModelTests")
+        fatalError("Not needed for CaptureViewModelTests")
     }
 
     func submitClarificationAnswer(_ request: GoalClarificationAnswerRequest, now: Date) async throws -> GoalDetailActionResponse {
         _ = request
         _ = now
-        fatalError("Not needed for CapturesViewModelTests")
+        fatalError("Not needed for CaptureViewModelTests")
     }
 }
 

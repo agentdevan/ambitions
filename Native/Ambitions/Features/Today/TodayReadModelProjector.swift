@@ -127,7 +127,7 @@ struct TodayReadModelProjector {
                 GoalBelievabilityInput(
                     subjectKind: .captureCommitment,
                     capture: capture,
-                    planID: capture.route == .planSeed ? "plan.today" : nil,
+                    planID: capture.route == .timeSeed ? "time.today" : nil,
                     generatedAt: now,
                     activeContextLens: activeLens,
                     realitySnapshot: reality,
@@ -163,7 +163,7 @@ struct TodayReadModelProjector {
                 captures: snapshot.captures,
                 eventLedgerEntries: snapshot.eventLedger,
                 recommendationExplanations: believabilityExplanations,
-                planID: "plan.today"
+                timeID: "time.today"
             )
         )
         let recoveryExplanation = resilienceProjector.makeExplanation(

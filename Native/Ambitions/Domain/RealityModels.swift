@@ -259,7 +259,7 @@ struct ScheduledBlockWriteIntent: Codable, Sendable, Equatable, Hashable, Identi
         id: String,
         block: ScheduledAmbitionsBlock,
         requestedAt: Date,
-        source: AmbitionsCommandSource = .plan,
+        source: AmbitionsCommandSource = .time,
         requiresExplicitUserConfirmation: Bool = true
     ) {
         self.id = id

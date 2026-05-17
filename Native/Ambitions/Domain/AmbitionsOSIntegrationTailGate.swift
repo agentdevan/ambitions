@@ -1,11 +1,11 @@
 import Foundation
 
-public struct AmbitionsOSIntegrationTailGateProof: Sendable, Equatable {
-    public let uiIntegrationProven: Bool
-    public let dataIntegrationProven: Bool
-    public let noSprawlProven: Bool
+struct AmbitionsOSIntegrationTailGateProof: Sendable, Equatable {
+    let uiIntegrationProven: Bool
+    let dataIntegrationProven: Bool
+    let noSprawlProven: Bool
     
-    public init(
+    init(
         uiIntegrationProven: Bool = false,
         dataIntegrationProven: Bool = false,
         noSprawlProven: Bool = false
@@ -15,15 +15,15 @@ public struct AmbitionsOSIntegrationTailGateProof: Sendable, Equatable {
         self.noSprawlProven = noSprawlProven
     }
     
-    public var isFullyProven: Bool {
+    var isFullyProven: Bool {
         uiIntegrationProven && dataIntegrationProven && noSprawlProven
     }
 }
 
-public struct AmbitionsOSIntegrationTailGate: Sendable, Equatable {
-    public init() {}
+struct AmbitionsOSIntegrationTailGate: Sendable, Equatable {
+    init() {}
     
-    public func evaluateIntegration(proof: AmbitionsOSIntegrationTailGateProof) -> ActionReceipt {
+    func evaluateIntegration(proof: AmbitionsOSIntegrationTailGateProof) -> ActionReceipt {
         let isProven = proof.isFullyProven
         
         return ActionReceipt(

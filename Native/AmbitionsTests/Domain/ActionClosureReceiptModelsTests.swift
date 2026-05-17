@@ -159,7 +159,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
             resultState: .failedSafely,
             title: "Action could not finish",
             summary: "Calendar write was not available.",
-            sourceDomain: .plan,
+            sourceDomain: .time,
             occurredAt: "2026-04-26T12:00:00Z",
             affectedObjects: [capture],
             safetyState: .safeFailure
@@ -169,7 +169,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
             resultState: .failedSafely,
             title: "Action did not change anything",
             summary: "Calendar write was not available.",
-            sourceDomain: .plan,
+            sourceDomain: .time,
             occurredAt: "2026-04-26T12:01:00Z",
             affectedObjects: [capture],
             changedFacts: [
@@ -187,7 +187,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
                 whatFailed: "Calendar write",
                 whyFailed: "Plan-owned writer was unavailable.",
                 unchangedFacts: ["No calendar data was changed.", "No plan item was moved."],
-                nextSafeAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan)
+                nextSafeAction: ActionReceiptNextAction(kind: .openTime, title: "Open Time", destination: .time)
             )
         )
 
@@ -236,7 +236,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         let command = AmbitionsCommand(
             id: "command-schedule",
             kind: .scheduleItem,
-            source: .plan,
+            source: .time,
             target: AmbitionsCommandTarget(captureID: "capture-1"),
             payload: AmbitionsCommandPayload(title: "Schedule work block", metadata: ["calendarWriteIntent": "true"]),
             createdAt: "2026-04-26T12:00:00Z"
@@ -267,7 +267,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
     func testReceiptHistorySearchFiltersSortsAndLimitsDeterministically() {
         let goal = object(.goal, "goal-1", label: "Launch app", sourceDomain: .goals)
         let capture = object(.capture, "capture-1", label: "Release checklist", sourceDomain: .capture)
-        let planItem = object(.action, "plan-item-1", label: "Finish proof", sourceDomain: .plan)
+        let planItem = object(.action, "plan-item-1", label: "Finish proof", sourceDomain: .time)
         let older = receipt(
             id: "receipt-older",
             resultState: .attached,
@@ -299,7 +299,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
                     summary: "Saved proof for launch."
                 )
             ],
-            sourceDomain: .plan,
+            sourceDomain: .time,
             undoAvailability: .requiresConfirmation
         )
         let matchingNewerA = receipt(
@@ -316,7 +316,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
                     summary: "Step done."
                 )
             ],
-            sourceDomain: .plan,
+            sourceDomain: .time,
             undoAvailability: .requiresConfirmation
         )
 
@@ -327,7 +327,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
                 actionKinds: [.completedAction],
                 relatedGoalID: "goal-1",
                 relatedPlanItemID: "plan-item-1",
-                sourceDomains: [.plan],
+                sourceDomains: [.time],
                 undoAvailability: [.requiresConfirmation],
                 searchText: "saved proof",
                 limit: 1,
@@ -565,7 +565,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
     }
 
     func testEB18SourceFreshnessPrivacySummaryDegradesUnsafeOrMissingReceipts() {
-        let planItem = object(.action, "plan-item-1", label: "Draft launch block", sourceDomain: .plan)
+        let planItem = object(.action, "plan-item-1", label: "Draft launch block", sourceDomain: .time)
         let safeFailure = ActionReceipt(
             id: "receipt-eb18-degraded",
             resultState: .failedSafely,
@@ -679,7 +679,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
     }
 
     func testEB17RecoveryAuditExportSummaryKeepsSafeFailuresNonMutating() {
-        let planItem = object(.action, "plan-item-1", label: "Draft launch block", sourceDomain: .plan)
+        let planItem = object(.action, "plan-item-1", label: "Draft launch block", sourceDomain: .time)
         let receipt = ActionReceipt(
             id: "receipt-eb17-safe-failure",
             resultState: .failedSafely,

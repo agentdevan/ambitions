@@ -331,7 +331,7 @@ private extension DefaultMemoryLensService {
             kind: .week,
             facet: .open,
             actionTitle: "Open Time",
-            destination: .tab(.plan)
+            destination: .tab(.time)
         )
     }
 
@@ -354,7 +354,7 @@ private extension DefaultMemoryLensService {
 
     func makeCaptureResults(_ captures: [Capture]) -> [MemoryLensResult] {
         captures.map { capture in
-            let destination: ShellCommandDestination = capture.linkedGoalID.map { .goal($0) } ?? .planRoute(.captureInbox)
+            let destination: ShellCommandDestination = capture.linkedGoalID.map { .goal($0) } ?? .timeRoute(.captureInbox)
             return MemoryLensResult(
                 id: "capture-\(capture.id)",
                 title: capture.rawText,

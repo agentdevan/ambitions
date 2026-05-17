@@ -41,6 +41,8 @@ enum YouRouteTarget: String, Hashable, Identifiable, Sendable {
     var id: String { rawValue }
 }
 
+typealias InsightsRouteTarget = YouRouteTarget
+
 enum TopLevelTabReselectionAction: Equatable, Sendable {
     case scrollToTop
     case returnToRoot
@@ -158,6 +160,10 @@ final class AppNavigationModel {
         timePath = [target]
     }
 
+    func openPlanRoute(_ target: TimeRouteTarget) {
+        openTimeRoute(target)
+    }
+
     func resetTimePath() {
         timePath = []
     }
@@ -166,6 +172,10 @@ final class AppNavigationModel {
         dismissOverlay()
         selectedTab = .you
         youPath = [target]
+    }
+
+    func openInsightsRoute(_ target: InsightsRouteTarget) {
+        openYouRoute(target)
     }
 
     func resetYouPath() {
@@ -368,7 +378,7 @@ private extension ShellCommandPresentationContext {
         case .recall: "Opened what Ambitions knows without showing raw history."
         case .recovery: "Returned to a calmer recovery posture."
         case .focus: "Returned to the current step session posture."
-        case .plan: "Opened the week-shaping context."
+        case .time: "Opened the week-shaping context."
         }
     }
 }

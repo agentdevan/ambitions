@@ -8,8 +8,8 @@ extension CaptureRoute {
         }
 
         switch destinationRoute {
-        case "plan", CaptureRoute.planSeed.rawValue:
-            return .planSeed
+        case "plan", "time", CaptureRoute.timeSeed.rawValue:
+            return .timeSeed
         case "goal", CaptureRoute.goalSeed.rawValue:
             return .goalSeed
         case CaptureRoute.goalAttachment.rawValue:

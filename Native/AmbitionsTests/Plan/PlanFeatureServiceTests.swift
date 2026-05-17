@@ -259,8 +259,8 @@ final class TimeFeatureServiceTests: XCTestCase {
         let service = RepositoryBackedTimeService(repositories: repositories)
 
         let dashboard = try await service.loadTimeDashboard(now: fixedDate)
-        let ritualDestination = try XCTUnwrap(dashboard.secondaryDestinations.first(where: { $0.planRoute == .habits }))
-        let ritualLane = try XCTUnwrap(dashboard.resilience.lanes.first(where: { $0.planRoute == .habits }))
+        let ritualDestination = try XCTUnwrap(dashboard.secondaryDestinations.first(where: { $0.timeRoute == .habits }))
+        let ritualLane = try XCTUnwrap(dashboard.resilience.lanes.first(where: { $0.timeRoute == .habits }))
         let planCopy = [
             ritualDestination.title,
             ritualDestination.detail,
@@ -448,7 +448,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let protectAction = try XCTUnwrap(dashboard.shapingActions.first(where: { $0.kind == .protect }))
 
-        XCTAssertTrue(protectAction.goalTarget != nil || protectAction.planRoute != nil)
+        XCTAssertTrue(protectAction.goalTarget != nil || protectAction.timeRoute != nil)
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif
@@ -1085,7 +1085,7 @@ private extension TimeFeatureServiceTests {
             status: .scheduled,
             linkedGoalID: nil,
             kind: .oneTimeCommitment,
-            route: .planSeed,
+            route: .timeSeed,
             triageStatus: .routed,
             commitmentKind: .oneTime
         )

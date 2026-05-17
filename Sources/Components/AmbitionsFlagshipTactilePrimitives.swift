@@ -305,9 +305,9 @@ public struct AtmosphereComposerCanvas: View {
                         RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                             .strokeBorder(isFieldFocused ? theme.colors.accentSecondary.opacity(0.8) : theme.colors.strokeSubtle.opacity(0.35), lineWidth: 1.0)
                     }
-                    .onChange(of: inputText) { newValue in
+                    .onChange(of: inputText) { oldValue, newValue in
                         // Typing text triggers micro particles!
-                        if newValue.count > inputText.count {
+                        if newValue.count > oldValue.count {
                             spawnParticle()
                         }
                     }

@@ -313,9 +313,9 @@ final class AppShellNavigationTests: XCTestCase {
 
         let preferences = try await RepositoryBackedAppPreferencesStore(appStateRepository: appState).loadPreferences()
 
-        XCTAssertEqual(preferences.preferredTab, .profile)
+        XCTAssertEqual(preferences.preferredTab, .you)
         XCTAssertEqual(preferences.preferredTab.title, "You")
-        XCTAssertEqual(preferences.preferredTab.rawValue, "profile")
+        XCTAssertEqual(preferences.preferredTab.rawValue, "you")
     }
 
     @MainActor

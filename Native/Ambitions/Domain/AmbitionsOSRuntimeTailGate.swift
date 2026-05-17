@@ -1,12 +1,12 @@
 import Foundation
 
-public struct AmbitionsOSRuntimeTailGateProof: Sendable, Equatable {
-    public let runtimeProven: Bool
-    public let privacyProven: Bool
-    public let evaluationProven: Bool
-    public let experienceProven: Bool
+struct AmbitionsOSRuntimeTailGateProof: Sendable, Equatable {
+    let runtimeProven: Bool
+    let privacyProven: Bool
+    let evaluationProven: Bool
+    let experienceProven: Bool
     
-    public init(
+    init(
         runtimeProven: Bool = false,
         privacyProven: Bool = false,
         evaluationProven: Bool = false,
@@ -18,15 +18,15 @@ public struct AmbitionsOSRuntimeTailGateProof: Sendable, Equatable {
         self.experienceProven = experienceProven
     }
     
-    public var isFullyProven: Bool {
+    var isFullyProven: Bool {
         runtimeProven && privacyProven && evaluationProven && experienceProven
     }
 }
 
-public struct AmbitionsOSRuntimeTailGate: Sendable, Equatable {
-    public init() {}
+struct AmbitionsOSRuntimeTailGate: Sendable, Equatable {
+    init() {}
     
-    public func evaluateObligations(proof: AmbitionsOSRuntimeTailGateProof) -> ActionReceipt {
+    func evaluateObligations(proof: AmbitionsOSRuntimeTailGateProof) -> ActionReceipt {
         let isProven = proof.isFullyProven
         
         return ActionReceipt(

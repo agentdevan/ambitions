@@ -94,7 +94,7 @@ extension DayRailStepDetailState {
 
     static func placeholderActions(target: TodayActionTarget) -> [TodayInlineAction] {
         [
-            TodayInlineAction(kind: .openPlan, title: "Adjust plan", systemImage: "arrow.right.arrow.left", state: .default, target: target),
+            TodayInlineAction(kind: .openTime, title: "Adjust time", systemImage: "arrow.right.arrow.left", state: .default, target: target),
             TodayInlineAction(kind: .defer, title: "Review later", systemImage: "clock", state: .default, target: target),
         ]
     }

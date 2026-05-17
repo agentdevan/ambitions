@@ -88,10 +88,10 @@ struct AppExternalRouteTranslator {
             }
         }
 
-        if host == "plan", let first = pathSegments.first {
+        if (host == "plan" || host == "time"), let first = pathSegments.first {
             switch first.lowercased() {
             case "captures":
-                return .openPlanRoute(.captureInbox)
+                return .openTimeRoute(.captureInbox)
             case "habits":
                 return .openTimeRoute(.habits)
             case "weekly-review":
@@ -133,7 +133,7 @@ struct AppExternalRouteTranslator {
             return .openTab(tab)
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
-            return .openPlanRoute(.captureInbox)
+            return .openTimeRoute(.captureInbox)
         }
         if let overlay = overlayRoute(values: payload.values, fallbackAction: payload.action, source: .notification) {
             return .presentOverlay(overlay)
@@ -150,7 +150,7 @@ struct AppExternalRouteTranslator {
             return .openTab(tab)
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
-            return .openPlanRoute(.captureInbox)
+            return .openTimeRoute(.captureInbox)
         }
         if let overlay = overlayRoute(values: payload.values, fallbackAction: payload.action, source: .widget) {
             return .presentOverlay(overlay)
@@ -520,7 +520,7 @@ final class DefaultAppExternalRouter: AppExternalRouting {
             navigation.recordRoute(
                 title: "Open \(ShellCommandDestination.timeRoute(target).displayLabel)",
                 source: entrySource,
-                presentationContext: .plan,
+                presentationContext: .time,
                 destination: .timeRoute(target),
                 receiptBody: receiptBody(for: .timeRoute(target), source: entrySource)
             )

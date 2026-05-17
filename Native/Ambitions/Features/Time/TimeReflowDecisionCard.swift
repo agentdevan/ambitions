@@ -11,6 +11,7 @@ struct TimeReflowDecisionCard: View {
         AppCard(state: decision.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: decision.title, subtitle: decision.subtitle)
+                    .accessibilityIdentifier("time.reflow-decision")
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: theme.spacing.xs) {

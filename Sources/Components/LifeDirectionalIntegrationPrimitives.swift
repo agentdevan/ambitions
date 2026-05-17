@@ -61,90 +61,7 @@ public struct TemporalMomentumGauge: View {
     public var body: some View {
         QuietGlass(cornerRadius: theme.radius.lg) {
             VStack(spacing: theme.spacing.sm) {
-                ZStack {
-                    // Microscopic circular dial ticks
-                    CircleDialTicks()
-                        .stroke(theme.colors.strokeSubtle.opacity(0.35), lineWidth: 1)
-                        .padding(theme.spacing.sm)
-                    
-                    // Track background
-                    Circle()
-                        .trim(from: 0.12, to: 0.88)
-                        .stroke(theme.colors.strokeSubtle.opacity(0.18), style: StrokeStyle(lineWidth: 12, lineCap: .round))
-                        .rotationEffect(.degrees(90))
-                        .padding(theme.spacing.sm + 6)
-                    
-                    // Active glow tracer track
-                    if colorSchemeContrast != .increased {
-                        Circle()
-                            .trim(from: 0.12, to: 0.12 + 0.76 * animatedValue)
-                            .stroke(
-                                LDITokens.sageMomentumGradient(in: theme),
-                                style: StrokeStyle(lineWidth: 12, lineCap: .round)
-                            )
-                            .rotationEffect(.degrees(90))
-                            .blur(radius: 2.5)
-                            .opacity(0.7)
-                            .padding(theme.spacing.sm + 6)
-                    }
-                    
-                    // Standard visual track
-                    Circle()
-                        .trim(from: 0.12, to: 0.12 + 0.76 * animatedValue)
-                        .stroke(
-                            LDITokens.sageMomentumGradient(in: theme),
-                            style: StrokeStyle(lineWidth: 12, lineCap: .round)
-                        )
-                        .rotationEffect(.degrees(90))
-                        .padding(theme.spacing.sm + 6)
-                    
-                    // Floating Needle / Core
-                    GeometryReader { geo in
-                        let center = CGPoint(x: geo.size.width / 2, y: geo.size.height / 2)
-                        let radius = min(geo.size.width, geo.size.height) / 2 - theme.spacing.sm - 12
-                        
-                        // Angle corresponding to the current value
-                        // Start angle is 0.12 * 360 = 43.2 degrees offset, rotated by 90 = 133.2 degrees
-                        let angleDegrees = 133.2 + (0.76 * animatedValue * 360.0)
-                        
-                        Path { path in
-                            path.move(to: center)
-                            let endX = center.x + radius * cos(angleDegrees * .pi / 180)
-                            let endY = center.y + radius * sin(angleDegrees * .pi / 180)
-                            path.addLine(to: CGPoint(x: endX, y: endY))
-                        }
-                        .stroke(theme.colors.accentWarm, style: StrokeStyle(lineWidth: 3, lineCap: .round))
-                        .shadow(color: theme.colors.accentWarm.opacity(0.4), radius: 3)
-                        
-                        // Center hub
-                        Circle()
-                            .fill(theme.colors.canvasElevated)
-                            .frame(width: 24, height: 24)
-                            .position(center)
-                            .shadow(radius: 2)
-                            .overlay {
-                                Circle()
-                                    .fill(theme.colors.accentWarm)
-                                    .frame(width: 8, height: 8)
-                                    .position(center)
-                            }
-                    }
-                    
-                    // Value Display
-                    VStack(spacing: 2) {
-                        Text(String(format: "%.0f%%", animatedValue * 100))
-                            .font(theme.typography.numeric.size(32))
-                            .foregroundStyle(theme.colors.textPrimary)
-                        
-                        Text(title)
-                            .font(theme.typography.micro.weight(.semibold))
-                            .foregroundStyle(theme.colors.accentSecondary)
-                            .tracking(1.5)
-                    }
-                    .offset(y: 8)
-                }
-                .aspectRatio(1, contentMode: .fit)
-                .frame(maxHeight: 210)
+                gaugeDial
                 
                 Text(subtitle)
                     .font(theme.typography.caption)
@@ -163,7 +80,7 @@ public struct TemporalMomentumGauge: View {
                 }
             }
         }
-        .onChange(of: value) { newValue in
+        .onChange(of: value) { _, newValue in
             if reduceMotion {
                 animatedValue = newValue
             } else {
@@ -175,6 +92,92 @@ public struct TemporalMomentumGauge: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(title) Momentum Gauge")
         .accessibilityValue(String(format: "%.0f percent progress", value * 100))
+    }
+
+    private var gaugeDial: some View {
+        ZStack {
+            dialTicks
+            trackBackground
+            if colorSchemeContrast != .increased {
+                activeTrack
+                    .blur(radius: 2.5)
+                    .opacity(0.7)
+            }
+            activeTrack
+            needle
+            valueDisplay
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .frame(maxHeight: 210)
+    }
+
+    private var dialTicks: some View {
+        CircleDialTicks()
+            .stroke(theme.colors.strokeSubtle.opacity(0.35), lineWidth: 1)
+            .padding(theme.spacing.sm)
+    }
+
+    private var trackBackground: some View {
+        Circle()
+            .trim(from: 0.12, to: 0.88)
+            .stroke(theme.colors.strokeSubtle.opacity(0.18), style: StrokeStyle(lineWidth: 12, lineCap: .round))
+            .rotationEffect(.degrees(90))
+            .padding(theme.spacing.sm + 6)
+    }
+
+    private var activeTrack: some View {
+        Circle()
+            .trim(from: 0.12, to: 0.12 + 0.76 * animatedValue)
+            .stroke(
+                LDITokens.sageMomentumGradient(in: theme),
+                style: StrokeStyle(lineWidth: 12, lineCap: .round)
+            )
+            .rotationEffect(.degrees(90))
+            .padding(theme.spacing.sm + 6)
+    }
+
+    private var needle: some View {
+        GeometryReader { geo in
+            let center = CGPoint(x: geo.size.width / 2, y: geo.size.height / 2)
+            let radius = min(geo.size.width, geo.size.height) / 2 - theme.spacing.sm - 12
+            let angleDegrees = 133.2 + (0.76 * animatedValue * 360.0)
+
+            ZStack {
+                Path { path in
+                    path.move(to: center)
+                    let endX = center.x + radius * cos(angleDegrees * .pi / 180)
+                    let endY = center.y + radius * sin(angleDegrees * .pi / 180)
+                    path.addLine(to: CGPoint(x: endX, y: endY))
+                }
+                .stroke(theme.colors.accentWarm, style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                .shadow(color: theme.colors.accentWarm.opacity(0.4), radius: 3)
+
+                Circle()
+                    .fill(theme.colors.canvasElevated)
+                    .frame(width: 24, height: 24)
+                    .position(center)
+                    .shadow(radius: 2)
+
+                Circle()
+                    .fill(theme.colors.accentWarm)
+                    .frame(width: 8, height: 8)
+                    .position(center)
+            }
+        }
+    }
+
+    private var valueDisplay: some View {
+        VStack(spacing: 2) {
+            Text(String(format: "%.0f%%", animatedValue * 100))
+                .font(.system(size: 32, weight: .bold, design: .rounded).monospacedDigit())
+                .foregroundStyle(theme.colors.textPrimary)
+
+            Text(title)
+                .font(theme.typography.micro.weight(.semibold))
+                .foregroundStyle(theme.colors.accentSecondary)
+                .tracking(1.5)
+        }
+        .offset(y: 8)
     }
 }
 
@@ -421,7 +424,6 @@ public struct LifeShapeField: View {
     private func animatedCanvas(size: CGSize, date: Double) -> some View {
         Canvas { context, sz in
             // Render connection vector traces
-            var path = Path()
             if nodes.count > 1 {
                 for i in 0..<nodes.count {
                     for j in (i + 1)..<nodes.count {

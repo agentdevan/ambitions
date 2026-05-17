@@ -8,10 +8,10 @@ final class ReviewsV1ProjectorTests: XCTestCase {
             resultState: .needsConfirmation,
             title: "Recovery prepared",
             summary: "Kept the must-do and left the plan unchanged until confirmation.",
-            sourceDomain: .plan,
+            sourceDomain: .time,
             occurredAt: "2026-04-27T10:10:00Z",
             affectedObjects: [
-                LifeGraphObjectReference(kind: .action, id: "plan-action", sourceDomain: .plan)
+                LifeGraphObjectReference(kind: .action, id: "plan-action", sourceDomain: .time)
             ],
             changedFacts: [
                 ActionReceiptChangedFact(
@@ -93,7 +93,7 @@ final class ReviewsV1ProjectorTests: XCTestCase {
             sourceDomain: .reviews,
             occurredAt: "2026-04-28T09:05:00Z",
             affectedObjects: [
-                LifeGraphObjectReference(kind: .review, id: "review-week", sourceDomain: .plan)
+                LifeGraphObjectReference(kind: .review, id: "review-week", sourceDomain: .time)
             ],
             changedFacts: [
                 ActionReceiptChangedFact(

@@ -98,7 +98,7 @@ private extension TodayExecutionProjector {
         friction: TodayExecutionPanelState
     ) -> AmbitionsDayRailViewState {
         let privacy = DayRailPrivacyProjectionState(classification: input.nowState.privacy)
-        let sourceLabels = dayRailSourceLabels(input, source: todayPlan.calendarSourceLabel)
+        let sourceLabels = dayRailSourceLabels(input, source: todayTime.calendarSourceLabel)
         let publicSource = sourceLabels.first ?? DayRailSourceLabelState(id: "source.time", label: "Based on your Time", source: .standard)
         let heroAction = hero.primaryAction
         let detailTarget = DayRailDetailTargetState.from(heroAction)
@@ -195,7 +195,7 @@ private extension TodayExecutionProjector {
     func dayRailMode(_ input: TodayExecutionProjectionInput, hero: TodayExecutionHeroState, friction: TodayExecutionPanelState) -> DayRailMode {
         if input.mode == .empty { return .empty }
         if hero.kind == .recovery { return .recovery }
-        if input.nowState.todayPosture == .noPlan { return .noSchedule }
+        if input.nowState.todayPosture == .noTime { return .noSchedule }
         if input.nowState.todayPosture == .overloaded || friction.semanticState == .caution { return .overloaded }
         if input.nowState.todayPosture == .tight { return .protected }
         return .normal
@@ -614,7 +614,7 @@ private extension TodayExecutionProjector {
             return .atRisk
         case .recovering:
             return .recovered
-        case .waiting, .lowData, .noPlan:
+        case .waiting, .lowData, .noTime:
             return .fragile
         }
     }

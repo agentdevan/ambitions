@@ -131,7 +131,7 @@ final class TodayCommandHandlerTests: XCTestCase {
 
         _ = try await goalsService.createGoal(CreateGoalRequest(title: "Keep navigation non-mutating"), now: fixedNow)
         let action = TodayInlineAction(
-            kind: .openPlan,
+            kind: .openTime,
             title: "Open Time",
             systemImage: "calendar",
             state: .default,

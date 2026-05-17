@@ -457,7 +457,7 @@ private extension CanonicalNowStateProjector {
         recovery: NowRecoveryState,
         bestAction: NowAction?
     ) -> NowPosture {
-        if activeGoals == 0 && openCaptureCount == 0 { return .noPlan }
+        if activeGoals == 0 && openCaptureCount == 0 { return .lowData }
         if recovery == .needsRecovery || recovery == .recovering { return .recovering }
         if blockedCount > 0 && bestAction == nil { return .waiting }
         if schedulePressure == .high || schedulePressure == .critical { return .overloaded }

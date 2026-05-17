@@ -231,6 +231,7 @@ struct TimeTimelineStripCard: View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: strip.title, subtitle: strip.subtitle)
+                    .accessibilityIdentifier("time.timeline-strip")
 
                 if strip.items.isEmpty {
                     Text("Goal movement will appear here when this week has real pressure to carry.")
@@ -280,7 +281,7 @@ struct TimeTimelineStripCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("time.timeline-strip")
         .ambitionPanelAccessibility()
+        .accessibilityIdentifier("time.timeline-strip")
     }
 }

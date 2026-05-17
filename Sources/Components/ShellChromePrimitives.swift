@@ -324,6 +324,7 @@ public struct AmbitionActionClosureTray: View {
                     }
                     .buttonStyle(.plain)
                     .foregroundStyle(theme.colors.textSecondary)
+                    .accessibilityIdentifier("action-closure-tray.dismiss-button")
                     .accessibilityLabel("Dismiss result")
                 }
             }
@@ -338,7 +339,7 @@ public struct AmbitionActionClosureTray: View {
         .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.shell.receiptMaterial))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
         .shadow(color: theme.depth.overlay.color, radius: theme.depth.overlay.radius, x: theme.depth.overlay.x, y: theme.depth.overlay.y)
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .contain)
         .accessibilityLabel("\(title). \(message)")
         .accessibilityValue(status.title)
     }

@@ -99,7 +99,7 @@ struct TodayScreen: View {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        container.commandRouter.route(to: .planRoute(.captureInbox), source: .shellUtility)
+                        container.commandRouter.route(to: .timeRoute(.captureInbox), source: .shellUtility)
                     } label: {
                         Label("Capture", systemImage: AppTab.captures.systemImage)
                     }
@@ -195,7 +195,7 @@ struct TodayScreen: View {
                 source: .todayQuickCapture,
                 presentationContext: .quickCapture
             )
-        case .openPlan:
+        case .openTime:
             container.commandRouter.route(to: .tab(.time), source: .shellUtility)
         case .protectLater:
             container.commandRouter.route(to: .tab(.time), source: .shellUtility)

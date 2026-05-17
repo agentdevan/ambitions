@@ -390,17 +390,17 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
 
     private static let d21ExpectedAuditOrder = [
         "today",
-        "goals",
+        "reviews-archive",
+        "rich-panels",
+        "you",
+        "grouped-navigation-list",
         "goal-detail",
         "capture",
-        "plan",
-        "you",
-        "life-areas-north-stars",
-        "reviews-archive",
+        "time",
         "trust-center-what-ambitions-knows",
-        "rich-panels",
-        "grouped-navigation-list",
         "quiet-command-sheet-smart-attachment",
+        "goals",
+        "life-areas-north-stars",
         "external-surfaces"
     ]
 

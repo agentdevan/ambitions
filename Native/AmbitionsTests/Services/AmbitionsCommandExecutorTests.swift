@@ -5,10 +5,10 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
     func testOpenDestinationExecutesAsRouteResultWithoutExternalDependency() async {
         let executor = AmbitionsCommandExecutor()
         let command = AmbitionsCommand(
-            id: "command-open-plan",
+            id: "command-open-time",
             kind: .openDestination,
             source: .widget,
-            target: AmbitionsCommandTarget(destination: .plan),
+            target: AmbitionsCommandTarget(destination: .time),
             createdAt: "2026-04-25T12:00:00Z",
             actor: .externalSurface,
             sourceSurface: "widget"
@@ -20,7 +20,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         )
 
         XCTAssertEqual(result.status, .succeeded)
-        XCTAssertEqual(result.route, .plan)
+        XCTAssertEqual(result.route, .time)
         XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
         XCTAssertEqual(result.summary, "Open destination command validated.")
     }
@@ -64,7 +64,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertEqual(captures.map(\.rawText), ["Create spreadsheet and send it to Kaylee by EOD Tuesday"])
         XCTAssertEqual(captures.first?.sourceType, .todayQuickCapture)
         XCTAssertEqual(captures.first?.kind, .oneTimeCommitment)
-        XCTAssertEqual(captures.first?.route, .planSeed)
+        XCTAssertEqual(captures.first?.route, .timeSeed)
         XCTAssertEqual(captures.first?.deadlineText, "EOD Tuesday")
         XCTAssertEqual(captures.first?.contextLensHint, .work)
         XCTAssertEqual(captures.first?.priorityHints.importance, .high)
@@ -164,7 +164,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let command = AmbitionsCommand(
             id: "command-unsupported",
             kind: .scheduleItem,
-            source: .plan,
+            source: .time,
             payload: AmbitionsCommandPayload(
                 title: "Schedule work block",
                 destinationRoute: "plan"
@@ -198,7 +198,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let command = AmbitionsCommand(
             id: "command-schedule",
             kind: .scheduleItem,
-            source: .plan,
+            source: .time,
             payload: AmbitionsCommandPayload(
                 title: "Schedule work block",
                 deadlineText: "Tuesday",
@@ -231,7 +231,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let command = AmbitionsCommand(
             id: "command-plan-seed",
             kind: .scheduleItem,
-            source: .plan,
+            source: .time,
             target: AmbitionsCommandTarget(captureID: "capture-plan-seed"),
             payload: AmbitionsCommandPayload(deadlineText: "Tuesday", contextLens: .work),
             createdAt: DomainTimestamp.string(from: now)
@@ -243,9 +243,9 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
 
         XCTAssertEqual(result.status, .succeeded)
         XCTAssertEqual(result.summary, "Capture represented as a Plan idea. Scheduling is not implemented in this build.")
-        XCTAssertEqual(result.metadata["captureRoute"], CaptureRoute.planSeed.rawValue)
+        XCTAssertEqual(result.metadata["captureRoute"], CaptureRoute.timeSeed.rawValue)
         XCTAssertEqual(captures.first?.kind, .oneTimeCommitment)
-        XCTAssertEqual(captures.first?.route, .planSeed)
+        XCTAssertEqual(captures.first?.route, .timeSeed)
         XCTAssertTrue(events.isEmpty)
     }
 
@@ -269,7 +269,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         var stored = try XCTUnwrap(committedCapture)
         XCTAssertEqual(commitmentResult.status, .succeeded)
         XCTAssertEqual(stored.kind, .oneTimeCommitment)
-        XCTAssertEqual(stored.route, .planSeed)
+        XCTAssertEqual(stored.route, .timeSeed)
         XCTAssertEqual(stored.deadlineText, "EOD Tuesday")
 
         let waiting = AmbitionsCommand(
@@ -365,8 +365,8 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let unconfirmed = AmbitionsCommand(
             id: "command-calendar-write",
             kind: .scheduleItem,
-            source: .plan,
-            target: AmbitionsCommandTarget(planID: "plan-1"),
+            source: .time,
+            target: AmbitionsCommandTarget(timeID: "time-1"),
             payload: AmbitionsCommandPayload(
                 title: "Draft proposal",
                 metadata: ["calendarWriteIntent": "true"]
@@ -379,8 +379,8 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let confirmed = AmbitionsCommand(
             id: "command-calendar-write-confirmed",
             kind: .scheduleItem,
-            source: .plan,
-            target: AmbitionsCommandTarget(planID: "plan-1"),
+            source: .time,
+            target: AmbitionsCommandTarget(timeID: "time-1"),
             payload: AmbitionsCommandPayload(
                 title: "Draft proposal",
                 metadata: ["calendarWriteIntent": "true", "userConfirmed": "true"]

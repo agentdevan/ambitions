@@ -38,7 +38,7 @@ struct TodayExecutionHeroPanel: View {
                 ], onAction: onAction)
                 .accessibilityIdentifier("today.daily-contract")
 
-                TodayPlanLayerStrip(state: state.todayPlanLayer, onAction: onAction)
+                TodayPlanLayerStrip(state: state.todayTimeLayer, onAction: onAction)
                     .accessibilityIdentifier("today.plan-layer")
 
                 TodayOneStepGoalsStrip(state: state.oneStepGoalsPanel, onAction: onAction)
@@ -83,10 +83,10 @@ struct TodayExecutionSupportPanels: View {
             "today.support.outside-lens"
         case .capture:
             "today.support.capture-pressure"
-        case .plan:
-            "today.support.plan-guidance"
-        case .todayPlan:
-            "today.support.today-plan"
+        case .time:
+            "today.support.time-guidance"
+        case .todayTime:
+            "today.support.today-time"
         case .oneStepGoals:
             "today.support.one-step-goals"
         case .priority:
@@ -113,14 +113,14 @@ struct TodayExecutionDeepDive: View {
         if state.deeperSections.isEmpty { return AnyView(EmptyView()) }
         return AnyView(
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                ForEach(state.deeperSections) { section in
+                ForEach(Array(state.deeperSections.enumerated()), id: \.element.id) { _, section in
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         SectionHeader(
                             eyebrow: "Detail",
                             title: section.title,
-                            subtitle: section.subtitle
+                            subtitle: section.rows.first?.subtitle ?? "More detail"
                         )
-                        ForEach(section.rows) { panel in
+                        ForEach(Array(section.rows.enumerated()), id: \.element.id) { _, panel in
                             TodayExecutionPanel(panel: panel, compact: true, onAction: onAction)
                         }
                     }
@@ -143,7 +143,7 @@ struct TodayExecutionDeepDive: View {
 private struct TodayPlanLayerStrip: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let state: TodayPlanLayerState
+    let state: TodayTimeLayerState
     let onAction: (TodayInlineAction) -> Void
 
     var body: some View {
@@ -215,7 +215,7 @@ private struct TodayPlanLayerStrip: View {
 private struct TodayPlanLayerItemRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: TodayPlanLayerItemState
+    let item: TodayTimeLayerItemState
     let onAction: (TodayInlineAction) -> Void
 
     var body: some View {
@@ -799,7 +799,7 @@ private struct TodayPanelVisual: View {
         switch panel.kind {
         case .capture:
             dotCluster
-        case .plan, .todayPlan:
+        case .time, .todayTime:
             timeRunway
         case .oneStepGoals:
             balanceStrip
@@ -987,7 +987,7 @@ private struct TodayExecutionPanel: View {
         switch panel.kind {
         case .capture:
             CapturePanel(configuration, visualSlot: { TodayPanelVisual(panel: panel) }, contentSlot: content)
-        case .plan, .todayPlan:
+        case .time, .todayTime:
             SchedulePanel(configuration, visualSlot: { TodayPanelVisual(panel: panel) }, contentSlot: content)
         case .oneStepGoals:
             ProgressPanel(configuration, visualSlot: { TodayPanelVisual(panel: panel) }, contentSlot: content)
@@ -1021,7 +1021,7 @@ private extension TodayExecutionPanelState {
         switch kind {
         case .capture:
             .capture
-        case .plan, .todayPlan:
+        case .time, .todayTime:
             .schedule
         case .priority, .oneStepGoals:
             .progress
@@ -1040,8 +1040,8 @@ private extension TodayExecutionPanelKind {
         switch self {
         case .contextLens: "Lens"
         case .capture: "Capture"
-        case .plan: "Plan"
-        case .todayPlan: "Today Plan"
+        case .time: "Time"
+        case .todayTime: "Today Time"
         case .oneStepGoals: "One-Step Goals"
         case .priority: "Priority"
         case .recovery: "Recovery"
@@ -1055,8 +1055,8 @@ private extension TodayExecutionPanelKind {
         switch self {
         case .contextLens: "viewfinder"
         case .capture: "tray.and.arrow.down.fill"
-        case .plan: "calendar.badge.clock"
-        case .todayPlan: "calendar"
+        case .time: "calendar.badge.clock"
+        case .todayTime: "calendar"
         case .oneStepGoals: "checkmark.circle.fill"
         case .priority: "scope"
         case .recovery: "arrow.uturn.backward.circle.fill"
@@ -1220,8 +1220,8 @@ struct TodaySupportCard: View {
                     title: "Time, recovery, and momentum",
                     subtitle: "These systems deepen the hero instead of competing with it."
                 ) {
-                    if let planAction = support.planAction {
-                        TodayActionChip(action: planAction, handler: onAction)
+                    if let timeAction = support.timeAction {
+                        TodayActionChip(action: timeAction, handler: onAction)
                     }
                 }
 

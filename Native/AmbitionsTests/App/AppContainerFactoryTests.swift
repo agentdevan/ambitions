@@ -98,7 +98,7 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertNotNil(container.todayService as? NotificationSchedulingTodayService)
         XCTAssertNotNil(container.goalsService as? NotificationSchedulingGoalsService)
         XCTAssertTrue(container.captureService is DefaultCaptureService)
-        XCTAssertTrue(container.profileService is RepositoryBackedProfileService)
+        XCTAssertTrue(container.youService is RepositoryBackedYouService)
     }
 }
 

@@ -159,7 +159,7 @@ final class AppBootstrapper {
             )
         case .captureInbox, .none:
             container.externalRouter.dispatch(
-                .openPlanRoute(.captureInbox),
+                .openTimeRoute(.captureInbox),
                 source: routeSource
             )
         }

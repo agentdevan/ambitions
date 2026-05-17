@@ -1,11 +1,11 @@
 import Foundation
 
-public struct AmbitionsOSPrivacySafetyTailGateProof: Sendable, Equatable {
-    public let localOnlyProcessingProven: Bool
-    public let sensitiveDataRedactionProven: Bool
-    public let noHiddenTelemetryProven: Bool
+struct AmbitionsOSPrivacySafetyTailGateProof: Sendable, Equatable {
+    let localOnlyProcessingProven: Bool
+    let sensitiveDataRedactionProven: Bool
+    let noHiddenTelemetryProven: Bool
     
-    public init(
+    init(
         localOnlyProcessingProven: Bool = false,
         sensitiveDataRedactionProven: Bool = false,
         noHiddenTelemetryProven: Bool = false
@@ -15,15 +15,15 @@ public struct AmbitionsOSPrivacySafetyTailGateProof: Sendable, Equatable {
         self.noHiddenTelemetryProven = noHiddenTelemetryProven
     }
     
-    public var isFullyProven: Bool {
+    var isFullyProven: Bool {
         localOnlyProcessingProven && sensitiveDataRedactionProven && noHiddenTelemetryProven
     }
 }
 
-public struct AmbitionsOSPrivacySafetyTailGate: Sendable, Equatable {
-    public init() {}
+struct AmbitionsOSPrivacySafetyTailGate: Sendable, Equatable {
+    init() {}
     
-    public func evaluatePrivacy(proof: AmbitionsOSPrivacySafetyTailGateProof) -> ActionReceipt {
+    func evaluatePrivacy(proof: AmbitionsOSPrivacySafetyTailGateProof) -> ActionReceipt {
         let isProven = proof.isFullyProven
         
         return ActionReceipt(

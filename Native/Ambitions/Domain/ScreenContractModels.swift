@@ -267,8 +267,7 @@ enum ScreenContractValidator {
         "Tasks",
         "Insights",
         "Habits",
-        "Calendar",
-        "You"
+        "Calendar"
     ]
 
     static let forbiddenCopyFragments = [

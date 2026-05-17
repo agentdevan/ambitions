@@ -6,8 +6,8 @@ final class SideEffectLedgerModelsTests: XCTestCase {
         let decision = SafeAutomationPolicyEvaluator().evaluate(
             SafeAutomationProposedAction(
                 kind: .writeCalendarBlock,
-                sourceDomain: .plan,
-                targetObjects: [object(.action, "plan-block-1", sourceDomain: .plan)]
+                sourceDomain: .time,
+                targetObjects: [object(.action, "plan-block-1", sourceDomain: .time)]
             )
         )
 
@@ -113,7 +113,7 @@ final class SideEffectLedgerModelsTests: XCTestCase {
             status: .confirmationRequired,
             boundary: .externalEffect,
             actionKind: .writeCalendarBlock,
-            sourceDomain: .plan,
+            sourceDomain: .time,
             occurredAt: "2026-05-12T12:05:00Z",
             requiresConfirmation: true,
             externalEffect: true

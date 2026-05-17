@@ -8,7 +8,7 @@ final class CanonicalNowStateProjectorTests: XCTestCase {
             input: NowStateProjectionInput(now: now)
         )
 
-        XCTAssertEqual(state.todayPosture, .noPlan)
+        XCTAssertEqual(state.todayPosture, .lowData)
         XCTAssertEqual(state.activeContextLens, .all)
         XCTAssertEqual(state.lensSource, .systemDefault)
         XCTAssertFalse(state.isManualLensOverrideActive)

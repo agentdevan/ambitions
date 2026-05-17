@@ -55,8 +55,8 @@ final class DailyLoopAlphaQATests: XCTestCase {
         XCTAssertEqual(experience.execution.recoveryFallback.title, "Fallback")
         XCTAssertEqual(experience.execution.whyThisMatters.title, "Why this matters")
         XCTAssertLessThanOrEqual(experience.execution.supportingPanels.count, 2)
-        XCTAssertFalse(experience.execution.planRequestsCalendarPermission)
-        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .openPlan && $0.destination == .plan })
+        XCTAssertFalse(experience.execution.timeRequestsCalendarPermission)
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .openTime && $0.destination == .time })
     }
 
     func testSaveTheDayRecoveryPathStaysNonPunitiveAndRouteOnly() async throws {
@@ -100,7 +100,7 @@ final class DailyLoopAlphaQATests: XCTestCase {
 
         XCTAssertEqual(experience.execution.hero.kind, .recovery)
         XCTAssertEqual(experience.execution.saveTheDayAction?.title, "Save the day")
-        XCTAssertFalse(experience.execution.planRequestsCalendarPermission)
+        XCTAssertFalse(experience.execution.timeRequestsCalendarPermission)
         XCTAssertFalse(recoveryCopy.localizedCaseInsensitiveContains("guilt"))
         XCTAssertFalse(recoveryCopy.localizedCaseInsensitiveContains("punish"))
         XCTAssertFalse(recoveryCopy.localizedCaseInsensitiveContains("automatically rescheduled"))

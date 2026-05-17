@@ -142,7 +142,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertEqual(sideEffect?.status, .recordedLocalOnly)
         XCTAssertEqual(sideEffect?.boundary, .externalEffect)
         XCTAssertEqual(sideEffect?.actionKind, .writeCalendarBlock)
-        XCTAssertEqual(sideEffect?.sourceDomain, .plan)
+        XCTAssertEqual(sideEffect?.sourceDomain, .time)
         XCTAssertEqual(sideEffect?.requiresConfirmation, false)
         XCTAssertEqual(sideEffect?.externalEffect, true)
         XCTAssertTrue(sideEffect?.reasons.contains(.externalSideEffect) == true)

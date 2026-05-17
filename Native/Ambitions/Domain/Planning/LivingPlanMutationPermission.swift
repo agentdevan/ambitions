@@ -1,7 +1,7 @@
 import Foundation
 
 /// Impact levels for plan mutations, strictly mapped to the manifest 0-5 hierarchy.
-public enum LivingPlanMutationImpactLevel: Int, Codable, Sendable, Equatable, Hashable, CaseIterable {
+enum LivingPlanMutationImpactLevel: Int, Codable, Sendable, Equatable, Hashable, CaseIterable {
     /// Level 0: No-op or purely visual/transient state update.
     case level0 = 0
     /// Level 1: Minor metadata or label update; non-functional.
@@ -16,16 +16,16 @@ public enum LivingPlanMutationImpactLevel: Int, Codable, Sendable, Equatable, Ha
     case level5 = 5
 }
 
-public struct LivingPlanMutationPermission: Codable, Sendable, Equatable, Hashable {
-    public let id: String
-    public let title: String
-    public let explanation: String
-    public let impactLevel: LivingPlanMutationImpactLevel
-    public let requiresExplicitConfirmation: Bool
-    public let rollbackAvailable: Bool
-    public let affectedGoalIDs: [String]
+struct LivingPlanMutationPermission: Codable, Sendable, Equatable, Hashable {
+    let id: String
+    let title: String
+    let explanation: String
+    let impactLevel: LivingPlanMutationImpactLevel
+    let requiresExplicitConfirmation: Bool
+    let rollbackAvailable: Bool
+    let affectedGoalIDs: [String]
     
-    public init(
+    init(
         id: String,
         title: String,
         explanation: String,

@@ -466,7 +466,9 @@ struct GoalsLifeAreasPanel: View {
                     items: state.availableZoomModes,
                     selection: Binding(
                         get: { zoomMode },
-                        set: onZoomModeChange
+                        set: { newZoomMode in
+                            onZoomModeChange(newZoomMode)
+                        }
                     )
                 ) { $0.title }
                 .accessibilityIdentifier("goals.semantic-zoom-mode")

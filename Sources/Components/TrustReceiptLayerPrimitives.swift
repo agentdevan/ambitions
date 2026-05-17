@@ -599,15 +599,15 @@ public struct ReceiptDrawer: View {
     private let title: String
     private let subtitle: String?
     private let sections: [ReceiptDrawerSection]
-    private let onReview: ((TrustReceiptLayerItem) -> Void)?
-    private let onUndo: ((TrustReceiptLayerItem) -> Void)?
+    private let onReview: (@MainActor @Sendable (TrustReceiptLayerItem) -> Void)?
+    private let onUndo: (@MainActor @Sendable (TrustReceiptLayerItem) -> Void)?
 
     public init(
         title: String = "Receipts",
         subtitle: String? = "What changed, why, and what you can review.",
         sections: [ReceiptDrawerSection],
-        onReview: ((TrustReceiptLayerItem) -> Void)? = nil,
-        onUndo: ((TrustReceiptLayerItem) -> Void)? = nil
+        onReview: (@MainActor @Sendable (TrustReceiptLayerItem) -> Void)? = nil,
+        onUndo: (@MainActor @Sendable (TrustReceiptLayerItem) -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -673,12 +673,22 @@ public struct ReceiptDrawer: View {
             ForEach(section.items) { item in
                 ReceiptDrawerRow(
                     item: item,
-                    onReview: onReview.map { action in { action(item) } },
-                    onUndo: onUndo.map { action in { action(item) } }
+                    onReview: reviewAction(for: item),
+                    onUndo: undoAction(for: item)
                 )
             }
         }
         .accessibilityIdentifier("trust.receipt-drawer.section.\(section.id)")
+    }
+
+    private func reviewAction(for item: TrustReceiptLayerItem) -> (@MainActor @Sendable () -> Void)? {
+        guard let onReview else { return nil }
+        return { onReview(item) }
+    }
+
+    private func undoAction(for item: TrustReceiptLayerItem) -> (@MainActor @Sendable () -> Void)? {
+        guard let onUndo else { return nil }
+        return { onUndo(item) }
     }
 }
 
@@ -686,8 +696,8 @@ private struct ReceiptDrawerRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let item: TrustReceiptLayerItem
-    let onReview: (() -> Void)?
-    let onUndo: (() -> Void)?
+    let onReview: (@MainActor @Sendable () -> Void)?
+    let onUndo: (@MainActor @Sendable () -> Void)?
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -736,13 +746,13 @@ public struct InlineTrustReceipt: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private let item: TrustReceiptLayerItem
-    private let onReview: (() -> Void)?
-    private let onUndo: (() -> Void)?
+    private let onReview: (@MainActor @Sendable () -> Void)?
+    private let onUndo: (@MainActor @Sendable () -> Void)?
 
     public init(
         item: TrustReceiptLayerItem,
-        onReview: (() -> Void)? = nil,
-        onUndo: (() -> Void)? = nil
+        onReview: (@MainActor @Sendable () -> Void)? = nil,
+        onUndo: (@MainActor @Sendable () -> Void)? = nil
     ) {
         self.item = item
         self.onReview = onReview
@@ -789,14 +799,14 @@ public struct TrustReceiptToast: View {
 
     private let item: TrustReceiptLayerItem
     private let isVisible: Bool
-    private let onDismiss: () -> Void
-    private let onReview: (() -> Void)?
+    private let onDismiss: @MainActor @Sendable () -> Void
+    private let onReview: (@MainActor @Sendable () -> Void)?
 
     public init(
         item: TrustReceiptLayerItem,
         isVisible: Bool,
-        onDismiss: @escaping () -> Void,
-        onReview: (() -> Void)? = nil
+        onDismiss: @escaping @MainActor @Sendable () -> Void,
+        onReview: (@MainActor @Sendable () -> Void)? = nil
     ) {
         self.item = item
         self.isVisible = isVisible
@@ -839,6 +849,7 @@ public struct TrustReceiptToast: View {
                     Image(systemName: "xmark")
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("trust.receipt-toast.dismiss-button")
                 .accessibilityLabel("Dismiss receipt")
             }
             .padding(theme.spacing.md)

@@ -1,15 +1,15 @@
 import Foundation
 
 /// Audit log infrastructure for living plans, providing an immutable-style event ledger.
-public struct LivingPlanAuditLedgerEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
-    public let id: String
-    public let timestamp: Date
-    public let kind: AuditEntryKind
-    public let summary: String
-    public let receiptID: String?
-    public let metadata: [String: String]
+struct LivingPlanAuditLedgerEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let timestamp: Date
+    let kind: AuditEntryKind
+    let summary: String
+    let receiptID: String?
+    let metadata: [String: String]
     
-    public enum AuditEntryKind: String, Codable, Sendable {
+    enum AuditEntryKind: String, Codable, Sendable {
         case mergeResolution = "merge_resolution"
         case schemaMigration = "schema_migration"
         case receiptPin = "receipt_pin"
@@ -17,15 +17,15 @@ public struct LivingPlanAuditLedgerEntry: Codable, Sendable, Equatable, Hashable
     }
 }
 
-public struct LivingPlanAuditLedger: Sendable, Equatable {
-    public private(set) var entries: [LivingPlanAuditLedgerEntry]
+struct LivingPlanAuditLedger: Sendable, Equatable {
+    private(set) var entries: [LivingPlanAuditLedgerEntry]
     
-    public init(entries: [LivingPlanAuditLedgerEntry] = []) {
+    init(entries: [LivingPlanAuditLedgerEntry] = []) {
         self.entries = entries
     }
     
     /// Records an entry in the audit ledger.
-    public mutating func recordEntry(
+    mutating func recordEntry(
         kind: LivingPlanAuditLedgerEntry.AuditEntryKind,
         summary: String,
         receiptID: String? = nil,
@@ -43,7 +43,7 @@ public struct LivingPlanAuditLedger: Sendable, Equatable {
     }
     
     /// Pins a receipt to the audit ledger with a specific note, as per LDI19 manifest.
-    public mutating func pinReceipt(receiptID: String, note: String) -> ActionReceipt {
+    mutating func pinReceipt(receiptID: String, note: String) -> ActionReceipt {
         let summary = "Pinned receipt \(receiptID): \(note)"
         recordEntry(kind: .receiptPin, summary: summary, receiptID: receiptID)
         

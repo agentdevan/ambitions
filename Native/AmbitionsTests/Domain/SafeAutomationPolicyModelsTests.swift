@@ -97,11 +97,11 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
     }
 
     func testCalendarWriteIsPlanOwnedConfirmationGatedAndNeverSilent() {
-        let block = object(.action, "plan-block-1", sourceDomain: .plan)
+        let block = object(.action, "plan-block-1", sourceDomain: .time)
         let decision = SafeAutomationPolicyEvaluator().evaluate(
             SafeAutomationProposedAction(
                 kind: .writeCalendarBlock,
-                sourceDomain: .plan,
+                sourceDomain: .time,
                 targetObjects: [block]
             )
         )
@@ -114,13 +114,13 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
         XCTAssertEqual(decision.receiptRecommendation.safetyState, .confirmationRequired)
         XCTAssertEqual(decision.reasons, [.calendarIsPlanOwned, .externalSideEffect, .confirmationRequired])
         XCTAssertEqual(decision.blockedFacts, ["No calendar data was changed."])
-        XCTAssertEqual(decision.suggestedNextSafeAction?.destination, .plan)
+        XCTAssertEqual(decision.suggestedNextSafeAction?.destination, .time)
         XCTAssertTrue(decision.mustNeverBeSilent)
     }
 
     func testPrepareCalendarBlockAndPrepareExportAreDraftOnly() {
         let calendarDecision = SafeAutomationPolicyEvaluator().evaluate(
-            SafeAutomationProposedAction(kind: .prepareCalendarBlock, sourceDomain: .plan)
+            SafeAutomationProposedAction(kind: .prepareCalendarBlock, sourceDomain: .time)
         )
         let exportDecision = SafeAutomationPolicyEvaluator().evaluate(
             SafeAutomationProposedAction(kind: .prepareExport, sourceDomain: .you)
@@ -231,7 +231,7 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
             (.delayAction, AmbitionsCommandTarget(goalID: "goal-1", stepID: "step-1"), AmbitionsCommandPayload(), .moveActionLater),
             (.splitAction, AmbitionsCommandTarget(goalID: "goal-1", stepID: "step-1"), AmbitionsCommandPayload(), .splitAction),
             (.dismissRecommendation, AmbitionsCommandTarget(recommendationID: "rec-1"), AmbitionsCommandPayload(), .dismissSuggestion),
-            (.scheduleItem, AmbitionsCommandTarget(planID: "plan-1"), AmbitionsCommandPayload(metadata: ["calendarWriteIntent": "true"]), .writeCalendarBlock),
+            (.scheduleItem, AmbitionsCommandTarget(timeID: "time-1"), AmbitionsCommandPayload(metadata: ["calendarWriteIntent": "true"]), .writeCalendarBlock),
             (.prepareExport, AmbitionsCommandTarget(), AmbitionsCommandPayload(), .prepareExport),
             (.performExport, AmbitionsCommandTarget(), AmbitionsCommandPayload(), .performExport),
             (.deleteObject, AmbitionsCommandTarget(goalID: "goal-1"), AmbitionsCommandPayload(), .deleteObject),
@@ -296,8 +296,8 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
         let decision = SafeAutomationPolicyEvaluator().evaluate(
             SafeAutomationProposedAction(
                 kind: .writeCalendarBlock,
-                sourceDomain: .plan,
-                targetObjects: [object(.action, "block-1", sourceDomain: .plan)]
+                sourceDomain: .time,
+                targetObjects: [object(.action, "block-1", sourceDomain: .time)]
             )
         )
 
@@ -309,7 +309,7 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
         XCTAssertEqual(receipt.undoAvailability, .requiresConfirmation)
         XCTAssertEqual(receipt.correctionAvailability, .availableWithReason)
         XCTAssertEqual(receipt.safetyState, .confirmationRequired)
-        XCTAssertEqual(receipt.sourceDomain, .plan)
+        XCTAssertEqual(receipt.sourceDomain, .time)
         XCTAssertEqual(receipt.affectedObjects.map(\.id), ["block-1"])
         XCTAssertEqual(receipt.changedFacts.map(\.kind), [.needsConfirmation])
         XCTAssertNil(receipt.safeFailure)

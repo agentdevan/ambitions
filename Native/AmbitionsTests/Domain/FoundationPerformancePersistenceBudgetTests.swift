@@ -135,7 +135,7 @@ final class FoundationPerformancePersistenceBudgetTests: XCTestCase {
     }
 
     func testSafeAutomationExportSyncCalendarAndExternalBoundariesDoNotClaimExecution() {
-        let action = object(.action, "action-1", label: "Plan block", sourceDomain: .plan)
+        let action = object(.action, "action-1", label: "Plan block", sourceDomain: .time)
         let evaluator = SafeAutomationPolicyEvaluator()
 
         let prepareExport = evaluator.evaluate(
@@ -160,7 +160,7 @@ final class FoundationPerformancePersistenceBudgetTests: XCTestCase {
         XCTAssertEqual(sync.blockedFacts, ["No sync conflict resolution was applied."])
 
         let calendar = evaluator.evaluate(
-            SafeAutomationProposedAction(kind: .writeCalendarBlock, sourceDomain: .plan, targetObjects: [action])
+            SafeAutomationProposedAction(kind: .writeCalendarBlock, sourceDomain: .time, targetObjects: [action])
         )
         XCTAssertEqual(calendar.confirmationRequirement, .requiredForExternalEffect)
         XCTAssertEqual(calendar.blockedFacts, ["No calendar data was changed."])

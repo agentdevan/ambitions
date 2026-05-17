@@ -423,7 +423,7 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 safety: .broadPlanMutation,
                 reasons: [.broadReflowMustBeConfirmed],
                 degradedFacts: ["Plan changes are represented by policy only until a confirmed execution path exists."],
-                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan),
+                nextAction: ActionReceiptNextAction(kind: .openTime, title: "Open Time", destination: .time),
                 receiptState: .needsConfirmation,
                 receiptSafety: .confirmationRequired
             )
@@ -436,7 +436,7 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 safety: .confirmationGated,
                 reasons: [.calendarIsPlanOwned, .localDraftOnly],
                 degradedFacts: ["No calendar block is written by this policy."],
-                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan),
+                nextAction: ActionReceiptNextAction(kind: .openTime, title: "Open Time", destination: .time),
                 receiptState: .draftedPrepared,
                 receiptSafety: .degraded
             )
@@ -449,7 +449,7 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 safety: .externalEffect,
                 reasons: [.calendarIsPlanOwned, .externalSideEffect, .confirmationRequired],
                 blockedFacts: ["No calendar data was changed."],
-                nextAction: ActionReceiptNextAction(kind: .openPlan, title: "Open Time", destination: .plan),
+                nextAction: ActionReceiptNextAction(kind: .openTime, title: "Open Time", destination: .time),
                 receiptState: .needsConfirmation,
                 receiptSafety: .confirmationRequired
             )
@@ -640,7 +640,7 @@ extension SafeAutomationActionKind {
             self = .editLocalNote
         case .attachToGoal:
             self = .attachToGoal
-        case .createPlanItem:
+        case .createTimeItem:
             self = .routeCapture
         case .scheduleItem:
             self = command.payload.metadata["calendarWriteIntent"] == "true" ? .writeCalendarBlock : .prepareCalendarBlock
@@ -693,8 +693,8 @@ private extension ActionReceiptSourceDomain {
             self = .goals
         case .capture:
             self = .capture
-        case .plan:
-            self = .plan
+        case .time:
+            self = .time
         case .you:
             self = .you
         case .reviews:
@@ -714,7 +714,7 @@ private extension AmbitionsCommandSource {
         switch self {
         case .widget, .liveActivity, .appIntent, .notification, .deepLink:
             return false
-        case .today, .goals, .capture, .plan, .you, .reviews, .goalDetail, .system:
+        case .today, .goals, .capture, .time, .you, .reviews, .goalDetail, .system:
             return true
         }
     }
@@ -729,8 +729,8 @@ private extension LifeGraphObjectReference {
         if let captureID = command.target.captureID {
             targets.append(LifeGraphObjectReference(kind: .capture, id: captureID, sourceDomain: .capture))
         }
-        if let planID = command.target.planID {
-            targets.append(LifeGraphObjectReference(kind: .action, id: planID, sourceDomain: .plan))
+        if let timeID = command.target.timeID {
+            targets.append(LifeGraphObjectReference(kind: .action, id: timeID, sourceDomain: .time))
         }
         if let stepID = command.target.stepID {
             targets.append(LifeGraphObjectReference(kind: .step, id: stepID, parentContextID: command.target.goalID, sourceDomain: .goalEngine))

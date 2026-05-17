@@ -204,26 +204,6 @@ struct SourceAtlasDocumentTypeClassifier: Sendable, Equatable, Hashable {
         case .current:
             return hasOfficialSourceProof && Self.hasCurrentSignal(corpus) ? .current : .needsReview
         }
-
-        if Self.hasRevokedSignal(corpus) {
-            return .revoked
-        }
-        if Self.hasStaleSignal(corpus) {
-            return .stale
-        }
-        if Self.hasContradictionSignal(corpus) {
-            return .disputed
-        }
-        if hasOfficialSourceProof && Self.hasCurrentSignal(corpus) {
-            return .current
-        }
-
-        switch documentType {
-        case .genericText:
-            return .unknown
-        case .rulebook, .schoolProgramPage, .jobPosting, .certificationHandbook, .officialPage, .legalCivicProfessionalSource:
-            return .needsReview
-        }
     }
 
     private static func requirementSourceState(

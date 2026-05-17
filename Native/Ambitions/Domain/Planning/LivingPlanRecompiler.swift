@@ -1,15 +1,15 @@
 import Foundation
 
-public struct LivingPlanRecompilePreview: Sendable, Equatable {
-    public let affectedGoalID: String
-    public let proposedSteps: [PlanStep]
-    public let removedSteps: [String]
-    public let receiptPreview: ActionReceipt
-    public let isSafeToApply: Bool
-    public let mutationPermissionRequired: Bool
-    public let claimImpacts: [String: SourceAtlasClaimState]
+struct LivingPlanRecompilePreview: Sendable, Equatable {
+    let affectedGoalID: String
+    let proposedSteps: [PlanStep]
+    let removedSteps: [String]
+    let receiptPreview: ActionReceipt
+    let isSafeToApply: Bool
+    let mutationPermissionRequired: Bool
+    let claimImpacts: [String: SourceAtlasClaimState]
     
-    public init(
+    init(
         affectedGoalID: String,
         proposedSteps: [PlanStep],
         removedSteps: [String],
@@ -28,15 +28,15 @@ public struct LivingPlanRecompilePreview: Sendable, Equatable {
     }
 }
 
-public struct LivingPlanRecompiler {
+struct LivingPlanRecompiler {
     let determinism: DeterministicGoalPlanner
     
-    public init(determinism: DeterministicGoalPlanner = DeterministicGoalPlanner()) {
+    init(determinism: DeterministicGoalPlanner = DeterministicGoalPlanner()) {
         self.determinism = determinism
     }
     
     /// Previews a plan recompile based on goal title and potentially updated source claims.
-    public func previewRecompile(
+    func previewRecompile(
         for goalID: String,
         rawTitle: String,
         currentSteps: [PlanStep],
@@ -60,7 +60,7 @@ public struct LivingPlanRecompiler {
             resultState: .needsConfirmation,
             title: "Plan Recompile Preview",
             summary: blastRadiusSummary.isEmpty ? "Preview plan changes for '\(rawTitle)'" : "Source updates detected: \(blastRadiusSummary)",
-            sourceDomain: .plan,
+            sourceDomain: .time,
             occurredAt: "2026-05-16T00:00:00Z",
             affectedObjects: [
                 LifeGraphObjectReference(kind: .goal, id: goalID, label: rawTitle)

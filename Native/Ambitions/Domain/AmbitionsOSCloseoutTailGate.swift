@@ -1,11 +1,11 @@
 import Foundation
 
-public struct AmbitionsOSCloseoutTailGateProof: Sendable, Equatable {
-    public let finalReviewProven: Bool
-    public let legacyDependenciesRetiredProven: Bool
-    public let completeSignoffProven: Bool
+struct AmbitionsOSCloseoutTailGateProof: Sendable, Equatable {
+    let finalReviewProven: Bool
+    let legacyDependenciesRetiredProven: Bool
+    let completeSignoffProven: Bool
     
-    public init(
+    init(
         finalReviewProven: Bool = false,
         legacyDependenciesRetiredProven: Bool = false,
         completeSignoffProven: Bool = false
@@ -15,15 +15,15 @@ public struct AmbitionsOSCloseoutTailGateProof: Sendable, Equatable {
         self.completeSignoffProven = completeSignoffProven
     }
     
-    public var isFullyProven: Bool {
+    var isFullyProven: Bool {
         finalReviewProven && legacyDependenciesRetiredProven && completeSignoffProven
     }
 }
 
-public struct AmbitionsOSCloseoutTailGate: Sendable, Equatable {
-    public init() {}
+struct AmbitionsOSCloseoutTailGate: Sendable, Equatable {
+    init() {}
     
-    public func evaluateCloseout(proof: AmbitionsOSCloseoutTailGateProof) -> ActionReceipt {
+    func evaluateCloseout(proof: AmbitionsOSCloseoutTailGateProof) -> ActionReceipt {
         let isProven = proof.isFullyProven
         
         return ActionReceipt(

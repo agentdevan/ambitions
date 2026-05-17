@@ -19,7 +19,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
                 .createGoal,
                 .updateGoal,
                 .attachToGoal,
-                .createPlanItem,
+                .createTimeItem,
                 .scheduleItem,
                 .startStepSession,
                 .completeAction,
@@ -68,7 +68,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
                 .today,
                 .goals,
                 .capture,
-                .plan,
+                .time,
                 .you,
                 .reviews,
                 .goalDetail,
@@ -86,7 +86,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         let result = AmbitionsCommandExecutionResult(
             status: .queued,
             summary: "Queued for confirmation.",
-            route: .plan,
+            route: .time,
             eventLedgerEntryIDs: ["ledger-1"],
             recommendationExplanationIDs: ["explanation-1"]
         )
@@ -94,7 +94,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
             id: "command-1",
             kind: .routeCommitment,
             source: .capture,
-            target: AmbitionsCommandTarget(captureID: "capture-1", destination: .plan),
+            target: AmbitionsCommandTarget(captureID: "capture-1", destination: .time),
             payload: AmbitionsCommandPayload(
                 rawText: "Create spreadsheet and send it to Kaylee by EOD Tuesday",
                 deadlineText: "EOD Tuesday",
@@ -122,7 +122,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         XCTAssertEqual(command.payload.commitmentKind, .oneTime)
         XCTAssertEqual(command.validationState, .needsConfirmation)
         XCTAssertEqual(command.executionStatus, .queued)
-        XCTAssertEqual(command.result?.route, .plan)
+        XCTAssertEqual(command.result?.route, .time)
         XCTAssertEqual(command.relations.captureIDs, ["capture-1"])
         XCTAssertEqual(command.relations.eventLedgerEntryIDs, ["ledger-1"])
         XCTAssertEqual(command.relations.recommendationExplanationIDs, ["explanation-1"])

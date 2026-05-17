@@ -1,7 +1,7 @@
 import Foundation
 
 /// Privacy policy for continuity sync, enforcing "most-restrictive-wins" as per LDI17 manifest.
-public enum SyncPrivacyPolicy: String, Codable, Sendable {
+enum SyncPrivacyPolicy: String, Codable, Sendable {
     /// Data never leaves the local device.
     case localOnly = "local_only"
     /// Data is synced to the user's private CloudKit container.
@@ -10,14 +10,14 @@ public enum SyncPrivacyPolicy: String, Codable, Sendable {
     case mostRestrictiveWins = "most_restrictive_wins"
 }
 
-public struct LivingPlanContinuitySync: Sendable, Equatable {
-    public let syncID: String
-    public let lastSyncedAt: Date
-    public let pendingChanges: [LivingPlanMutationPermission]
-    public let isSyncRequired: Bool
-    public let privacyPolicy: SyncPrivacyPolicy
+struct LivingPlanContinuitySync: Sendable, Equatable {
+    let syncID: String
+    let lastSyncedAt: Date
+    let pendingChanges: [LivingPlanMutationPermission]
+    let isSyncRequired: Bool
+    let privacyPolicy: SyncPrivacyPolicy
     
-    public init(
+    init(
         syncID: String = UUID().uuidString,
         lastSyncedAt: Date = Date(),
         pendingChanges: [LivingPlanMutationPermission] = [],
@@ -31,12 +31,12 @@ public struct LivingPlanContinuitySync: Sendable, Equatable {
         self.privacyPolicy = privacyPolicy
     }
     
-    public func requiresExplicitConfirmation() -> Bool {
+    func requiresExplicitConfirmation() -> Bool {
         // Enforce confirmation if any change requires it OR if policy is most-restrictive
         pendingChanges.contains(where: { $0.requiresExplicitConfirmation }) || privacyPolicy == .localOnly
     }
     
-    public func generateReceipt() -> ActionReceipt {
+    func generateReceipt() -> ActionReceipt {
         let confirmationNeeded = requiresExplicitConfirmation()
         
         return ActionReceipt(
@@ -44,7 +44,7 @@ public struct LivingPlanContinuitySync: Sendable, Equatable {
             resultState: confirmationNeeded ? .needsConfirmation : .noOp,
             title: "Continuity Sync",
             summary: confirmationNeeded ? "Sync paused: review required for privacy/mutation compliance." : "Synchronizing plan continuity across domains.",
-            sourceDomain: .plan,
+            sourceDomain: .time,
             occurredAt: "2026-05-16T00:00:00Z",
             affectedObjects: [],
             changedFacts: [

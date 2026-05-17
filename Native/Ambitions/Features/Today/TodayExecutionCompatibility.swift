@@ -70,7 +70,7 @@ extension TodayExecutionViewState {
             subtitle: support.recoveryBloom?.subtitle.todayShortSentence ?? "Make the step smaller before making the day louder.",
             value: support.recoveryBloom == nil ? "Smaller" : "Recovery ready",
             semanticState: support.recoveryBloom == nil ? .trust : .recovery,
-            action: support.recoveryBloom?.options.first?.action ?? support.planAction,
+            action: support.recoveryBloom?.options.first?.action ?? support.timeAction,
             explanation: nil
         )
         let why = TodayContractEntryState(
@@ -170,7 +170,7 @@ extension TodayExecutionViewState {
         let dayRail = AmbitionsDayRailViewState.compatibility(
             mode: mode,
             hero: executionHero,
-            todayTimeLayer: todayTimeLayer,
+            todayPlanLayer: todayTimeLayer,
             closure: closure,
             sourceLabel: "Based on your Time"
         )
@@ -212,7 +212,7 @@ extension TodayExecutionViewState {
             .caution
         case .lowData:
             .trust
-        case .noTime:
+        case .noPlan:
             .capture
         }
     }
@@ -229,7 +229,7 @@ extension TodayExecutionViewState {
             .recovered
         case .overloaded:
             .atRisk
-        case .lowData, .noTime:
+        case .lowData, .noPlan:
             .clear
         }
     }

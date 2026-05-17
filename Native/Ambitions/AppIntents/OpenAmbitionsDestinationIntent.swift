@@ -42,7 +42,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .plan:
             return .openTab(.time)
         case .captureInbox:
-            return .openPlanRoute(.captureInbox)
+            return .openTimeRoute(.captureInbox)
         case .command:
             return .presentOverlay(.commandSheet(entrySource: .appIntent))
         case .memoryLens:

@@ -5,7 +5,7 @@ extension AmbitionsDayRailViewState {
     static func compatibility(
         mode: TodayExperienceMode,
         hero: TodayExecutionHeroState,
-        todayPlanLayer: TodayPlanLayerState,
+        todayPlanLayer: TodayTimeLayerState,
         closure: TodayContractEntryState,
         sourceLabel: String
     ) -> AmbitionsDayRailViewState {
@@ -105,7 +105,7 @@ extension DayRailDurationState {
             return DayRailDurationState(minutes: 25, source: .suggested, label: "25 min suggested")
         case .complete:
             return DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set")
-        case .openPlan, .protectLater:
+        case .openTime, .protectLater:
             return DayRailDurationState(minutes: nil, source: .acceptedFromPlan, label: "Accepted from plan")
         default:
             return DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set")
@@ -128,7 +128,7 @@ extension DayRailDetailTargetState {
         switch action.kind {
         case .quickLog:
             kind = .captureContext
-        case .openPlan, .protectLater:
+        case .openTime, .protectLater:
             kind = .planContext
         default:
             kind = action.target.goalID != nil || action.target.stepID != nil || action.target.draftID != nil
@@ -246,7 +246,7 @@ extension DayRailPrivacyProjectionState {
 
 extension DayRailRowState {
     static func rows(
-        from items: [TodayPlanLayerItemState],
+        from items: [TodayTimeLayerItemState],
         fallbackHero: DayRailHeroStepState?,
         privacy: DayRailPrivacyProjectionState,
         source: DayRailSourceLabelState
@@ -258,7 +258,7 @@ extension DayRailRowState {
                 slot: slot,
                 title: privacy.visibleTitle(item.title),
                 subtitle: privacy.visibleSubtitle(item.subtitle),
-                duration: DayRailDurationState.placeholder(for: item.action ?? fallbackHero?.primaryAction ?? TodayInlineAction(kind: .openPlan, title: "Open Time", systemImage: "calendar", state: .default, target: TodayActionTarget())),
+                duration: DayRailDurationState.placeholder(for: item.action ?? fallbackHero?.primaryAction ?? TodayInlineAction(kind: .openTime, title: "Open Time", systemImage: "calendar", state: .default, target: TodayActionTarget())),
                 detailTarget: DayRailDetailTargetState.from(item.action ?? fallbackHero?.primaryAction),
                 sourceLabels: [source]
             )
