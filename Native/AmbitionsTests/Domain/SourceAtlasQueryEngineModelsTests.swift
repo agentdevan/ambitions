@@ -23,7 +23,7 @@ final class SourceAtlasQueryEngineModelsTests: XCTestCase {
         XCTAssertEqual(response.selectedResult.freshnessState, .current)
         XCTAssertEqual(response.selectedResult.reviewState, .approved)
         XCTAssertEqual(response.selectedResult.provenanceSourceIDs, ["source-official"])
-        XCTAssertEqual(response.selectedResult.fallbackReason, .none)
+        XCTAssertNil(response.selectedResult.fallbackReason)
         XCTAssertEqual(response.results.map(\.requirementID), ["requirement-current", "requirement-stale"])
     }
 
@@ -216,7 +216,7 @@ final class SourceAtlasQueryEngineModelsTests: XCTestCase {
         XCTAssertEqual(response.selectedResult.claimID, "claim-career")
         XCTAssertEqual(response.selectedResult.requirementID, "requirement-career")
         XCTAssertEqual(response.selectedResult.riskClass, .careerContext)
-        XCTAssertEqual(response.selectedResult.fallbackReason, .none)
+        XCTAssertNil(response.selectedResult.fallbackReason)
     }
 
     func testEncodedResultsDoNotExposePercentageLanguage() throws {

@@ -442,7 +442,7 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         for result in blockedResults {
             let evidence = RecommendationExplanationEvidence.fromSourceAtlasQueryResult(result)
             let explanation = RecommendationExplanation(
-                id: "explanation-source-atlas-\(result.fallbackReason.rawValue)",
+                id: "explanation-source-atlas-\((result.fallbackReason ?? .none).rawValue)",
                 type: .whyThis,
                 title: "Why this source needs review",
                 summary: "The source state is not current support.",
@@ -455,8 +455,8 @@ final class RecommendationExplanationModelsTests: XCTestCase {
             let model = explanation.recommendationEvidenceModel
 
             XCTAssertEqual(evidence.metadata["sourceAtlasCanSupportCurrentUse"], "false")
-            XCTAssertEqual(evidence.metadata["sourceAtlasRecommendationBlockReason"], result.fallbackReason.rawValue)
-            XCTAssertEqual(model.sourceAtlasBlockReasons, [result.fallbackReason.rawValue])
+            XCTAssertEqual(evidence.metadata["sourceAtlasRecommendationBlockReason"], (result.fallbackReason ?? .none).rawValue)
+            XCTAssertEqual(model.sourceAtlasBlockReasons, [(result.fallbackReason ?? .none).rawValue])
             XCTAssertFalse(model.canDriveRecommendation)
         }
     }

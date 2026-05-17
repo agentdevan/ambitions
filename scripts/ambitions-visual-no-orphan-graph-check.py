@@ -137,17 +137,17 @@ def main() -> int:
 
     # Contract and primitive nodes needed by the token layer.
     contract_paths = [
-        "docs/canon/frontend/contracts/TRUST_SEAM_CONTRACT.md",
-        "docs/canon/frontend/contracts/PROOF_CHIP_CONTRACT.md",
-        "docs/canon/frontend/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
-        "docs/canon/frontend/contracts/RECEIPT_CONTRACT.md",
-        "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
-        "docs/canon/frontend/contracts/DISCLOSURE_ROW_CONTRACT.md",
-        "docs/canon/frontend/contracts/REDUCE_MOTION_CONTRACT.md",
-        "docs/canon/frontend/contracts/DYNAMIC_TYPE_CONTRACT.md",
-        "docs/canon/frontend/contracts/VOICEOVER_ORDER_CONTRACT.md",
-        "docs/canon/frontend/contracts/REDUCE_TRANSPARENCY_CONTRACT.md",
-        "docs/canon/frontend/contracts/DIFFERENTIATE_WITHOUT_COLOR_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/PROOF_CHIP_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/RECEIPT_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/DISCLOSURE_ROW_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/REDUCE_MOTION_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/DYNAMIC_TYPE_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/VOICEOVER_ORDER_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/REDUCE_TRANSPARENCY_CONTRACT.md",
+        "frontend/visual-encyclopedia/contracts/DIFFERENTIATE_WITHOUT_COLOR_CONTRACT.md",
     ]
     for path in contract_paths:
         contract_node = f"contract:{path}"
@@ -156,17 +156,17 @@ def main() -> int:
         add_edge("truth:docs/truth/IMPLEMENTATION_TRUTH.md", "governs", contract_node)
 
     primitive_paths = [
-        "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
-        "docs/canon/frontend/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
-        "docs/canon/frontend/primitives/PROTECTED_TIME_PRIMITIVES.md",
-        "docs/canon/frontend/primitives/CTA_SYSTEM.md",
-        "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md",
-        "docs/canon/frontend/primitives/PROOF_PRIMITIVES.md",
-        "docs/canon/frontend/primitives/DYNAMIC_TYPE_COLLAPSE_PRIMITIVES.md",
-        "docs/canon/frontend/primitives/VOICEOVER_ORDER_PRIMITIVES.md",
-        "docs/canon/frontend/primitives/BADGES_MARKERS_AND_STATE_GLYPHS.md",
-        "docs/canon/frontend/primitives/TRANSACTION_PRIMITIVES.md",
-        "docs/canon/frontend/primitives/ADHD_DENSITY_PRIMITIVES.md",
+        "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
+        "frontend/visual-encyclopedia/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
+        "frontend/visual-encyclopedia/primitives/PROTECTED_TIME_PRIMITIVES.md",
+        "frontend/visual-encyclopedia/primitives/CTA_SYSTEM.md",
+        "frontend/visual-encyclopedia/primitives/WRAPPERS_AND_CONTAINERS.md",
+        "frontend/visual-encyclopedia/primitives/PROOF_PRIMITIVES.md",
+        "frontend/visual-encyclopedia/primitives/DYNAMIC_TYPE_COLLAPSE_PRIMITIVES.md",
+        "frontend/visual-encyclopedia/primitives/VOICEOVER_ORDER_PRIMITIVES.md",
+        "frontend/visual-encyclopedia/primitives/BADGES_MARKERS_AND_STATE_GLYPHS.md",
+        "frontend/visual-encyclopedia/primitives/TRANSACTION_PRIMITIVES.md",
+        "frontend/visual-encyclopedia/primitives/ADHD_DENSITY_PRIMITIVES.md",
     ]
     for path in primitive_paths:
         primitive_node = f"primitive:{path}"
@@ -174,8 +174,8 @@ def main() -> int:
         add_edge("truth:docs/truth/PRODUCT_DESIGN_TRUTH.md", "governs", primitive_node)
 
     behavior_paths = [
-        "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
-        "docs/canon/frontend/behavior/REDUCE_MOTION.md",
+        "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
+        "frontend/visual-encyclopedia/behavior/REDUCE_MOTION.md",
     ]
     for path in behavior_paths:
         behavior_node = f"behavior:{path}"
@@ -205,7 +205,7 @@ def main() -> int:
             )
             add_edge(token_id, "uses_contract", primitive_node)
         for recipe_id in entry["mapped_recipe_ids"]:
-            recipe_node = f"recipe:docs/canon/frontend/recipes/{recipe_id}.md"
+            recipe_node = f"recipe:frontend/visual-encyclopedia/recipes/{recipe_id}.md"
             add_node(recipe_node, "recipe", "active_authority", recipe_id, [recipe_id])
             add_edge(token_id, "uses_token", recipe_node)
         for surface_id in entry["mapped_surface_ids"]:

@@ -29,9 +29,9 @@ def classify(path: Path) -> tuple[str, str, str, str]:
         return "active_authority", "token source tree", "", ""
     if rel_str.startswith("Sources/Theme/") and rel_str.endswith(".generated.swift"):
         return "generated_output", "generated from DesignTokens", "", ""
-    if rel_str.startswith("docs/canon/frontend/recipes/") or rel_str.startswith("docs/canon/frontend/surfaces/") or rel_str.startswith("docs/canon/frontend/primitives/") or rel_str.startswith("docs/canon/frontend/contracts/") or rel_str.startswith("docs/canon/frontend/behavior/"):
+    if rel_str.startswith("frontend/visual-encyclopedia/recipes/") or rel_str.startswith("frontend/visual-encyclopedia/surfaces/") or rel_str.startswith("frontend/visual-encyclopedia/primitives/") or rel_str.startswith("frontend/visual-encyclopedia/contracts/") or rel_str.startswith("frontend/visual-encyclopedia/behavior/"):
         return "active_authority", "active frontend canon", "", ""
-    if rel_str.startswith("docs/canon/frontend/trace/"):
+    if rel_str.startswith("frontend/visual-encyclopedia/trace/"):
         if path.name in {
             "VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml",
             "VISUAL_SOURCE_LINKAGE_LEDGER.md",
@@ -70,7 +70,7 @@ def collect_entries() -> list[dict[str, str]]:
     files = []
     roots = [
         ROOT / "docs/truth",
-        ROOT / "docs/canon/frontend",
+        ROOT / "frontend/visual-encyclopedia",
         ROOT / "DesignTokens",
         ROOT / "Sources/Theme",
         ROOT / "build/reports",

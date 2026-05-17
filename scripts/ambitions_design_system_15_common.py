@@ -10,9 +10,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DESIGN_TOKENS_ROOT = ROOT / "DesignTokens"
 DOCS_ROOT = ROOT / "docs"
-CONTRACTS_ROOT = DOCS_ROOT / "canon/frontend/contracts"
-TRACE_ROOT = DOCS_ROOT / "canon/frontend/trace"
-GATES_ROOT = DOCS_ROOT / "canon/frontend/gates"
+FRONTEND_ROOT = ROOT / "frontend" / "visual-encyclopedia"
+CONTRACTS_ROOT = FRONTEND_ROOT / "contracts"
+TRACE_ROOT = FRONTEND_ROOT / "trace"
+GATES_ROOT = FRONTEND_ROOT / "gates"
 ARCH_ROOT = DOCS_ROOT / "architecture"
 STATE_MACHINES_ROOT = ARCH_ROOT / "state-machines"
 DECISIONS_ROOT = ARCH_ROOT / "decisions"
@@ -417,7 +418,7 @@ def generate_design_tokens() -> None:
 
             - `docs/truth/PRODUCT_DESIGN_TRUTH.md`
             - `Sources/Theme/AmbitionTheme.swift`
-            - `docs/canon/frontend/primitives/*`
+            - `frontend/visual-encyclopedia/primitives/*`
 
             ## Rule
 
@@ -439,7 +440,7 @@ def generate_design_tokens() -> None:
     write_text(SWIFT_THEME_ROOT / "AmbitionObjectTokens.generated.swift", render_object_swift_file())
     write_text(SWIFT_THEME_ROOT / "AmbitionStateTokens.generated.swift", render_state_swift_file())
     write_text(
-        DOCS_ROOT / "canon/frontend/contracts/COMPONENT_CONTRACT_INDEX.md",
+        FRONTEND_ROOT / "/contracts/COMPONENT_CONTRACT_INDEX.md",
         render_ledger_doc(
             "Component Contract Index",
             "This index maps the new contract scaffold files. It is design control, not implementation proof.",
@@ -527,7 +528,7 @@ def generate_design_tokens() -> None:
         )
 
     write_text(
-        DOCS_ROOT / "canon/frontend/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
+        FRONTEND_ROOT / "/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
         render_ledger_doc(
             "Accessibility Contract Index",
             "This index tracks the accessibility contract scaffold. It sets requirements and proof gaps only.",
@@ -605,7 +606,7 @@ def generate_design_tokens() -> None:
         )
 
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/PREVIEW_MATRIX.md",
+        FRONTEND_ROOT / "/trace/PREVIEW_MATRIX.md",
         render_ledger_doc(
             "Preview Matrix",
             "This matrix names required preview states and marks all missing previews as future implementation debt, not proof.",
@@ -621,7 +622,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/PREVIEW_MATRIX.yaml",
+        FRONTEND_ROOT / "/trace/PREVIEW_MATRIX.yaml",
         render_yaml_matrix(
             "Preview Matrix",
             [
@@ -635,7 +636,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/SNAPSHOT_TEST_TARGET_PLAN.md",
+        FRONTEND_ROOT / "/trace/SNAPSHOT_TEST_TARGET_PLAN.md",
         render_doc(
             "Snapshot Test Target Plan",
             "Active target plan scaffold",
@@ -805,7 +806,7 @@ def generate_design_tokens() -> None:
         write_text(DECISIONS_ROOT / f"ADR-{number:03d}-{title.lower().replace(' ', '-')}.md", render_adr_doc(number, title, decision, consequences))
 
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/DESIGN_SYSTEM_AUTHORITY_LEDGER.md",
+        FRONTEND_ROOT / "/trace/DESIGN_SYSTEM_AUTHORITY_LEDGER.md",
         render_ledger_doc(
             "Design System Authority Ledger",
             "This ledger classifies the new design-system control-plane materials.",
@@ -823,7 +824,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/TOKEN_SOURCE_AUTHORITY_LEDGER.md",
+        FRONTEND_ROOT / "/trace/TOKEN_SOURCE_AUTHORITY_LEDGER.md",
         render_ledger_doc(
             "Token Source Authority Ledger",
             "This ledger clarifies token provenance and generated output boundaries.",
@@ -839,13 +840,13 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/COMPONENT_CONTRACT_AUTHORITY_LEDGER.md",
+        FRONTEND_ROOT / "/trace/COMPONENT_CONTRACT_AUTHORITY_LEDGER.md",
         render_ledger_doc(
             "Component Contract Authority Ledger",
             "This ledger classifies the component contract scaffold and its dependency-free validator.",
             [
                 ["Item", "Classification"],
-                ["docs/canon/frontend/contracts/*.md", "intended canon"],
+                ["frontend/visual-encyclopedia/contracts/*.md", "intended canon"],
                 ["scripts/ambitions-component-contract-check.py", "report-only proof"],
                 ["build/reports/component-contract-check.json", "report-only proof"],
             ],
@@ -853,7 +854,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/PROMPT_SOURCE_CANON_AUTHORITY_LEDGER.md",
+        FRONTEND_ROOT / "/trace/PROMPT_SOURCE_CANON_AUTHORITY_LEDGER.md",
         render_ledger_doc(
             "Prompt Source Canon Authority Ledger",
             "This ledger records how the install batch prompt relates to source and canon.",
@@ -869,29 +870,29 @@ def generate_design_tokens() -> None:
     )
 
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/DESIGN_TO_SOURCE_TRACEABILITY.md",
+        FRONTEND_ROOT / "/trace/DESIGN_TO_SOURCE_TRACEABILITY.md",
         render_ledger_doc(
             "Design To Source Traceability",
             "This map is intentionally honest: intended-only entries are allowed and remain clearly marked.",
             [
                 ["Object / primitive", "Canon doc", "Token deps", "Contract", "Source candidates", "Status", "Preview", "Validator", "Known drift"],
-                ["Today / Reality Meridian", "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md", "todayFocus", "PRIMARY_CTA_CONTRACT.md", "Native/Ambitions/Features/Today/*", "source-present", "debt", "component-contract-check", "none"],
-                ["Goals / Constellation Atlas", "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md", "goalThread", "DISCLOSURE_ROW_CONTRACT.md", "Native/Ambitions/Features/Goals/*", "source-present", "debt", "component-contract-check", "none"],
-                ["Capture / Atmosphere Composer", "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md", "captureSignal", "PRIMARY_CTA_CONTRACT.md", "Native/Ambitions/Features/Captures/*", "source-present", "debt", "component-contract-check", "none"],
-                ["Time / LifeShape Field", "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md", "timeCapacity", "SOURCE_FRESHNESS_BADGE_CONTRACT.md", "Native/Ambitions/Features/Plan/*", "source-present", "debt", "component-contract-check", "none"],
-                ["You / User System Profile", "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md", "youTrust", "TRUST_SEAM_CONTRACT.md", "Native/Ambitions/Features/Profile/*", "source-present", "debt", "component-contract-check", "none"],
+                ["Today / Reality Meridian", "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md", "todayFocus", "PRIMARY_CTA_CONTRACT.md", "Native/Ambitions/Features/Today/*", "source-present", "debt", "component-contract-check", "none"],
+                ["Goals / Constellation Atlas", "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md", "goalThread", "DISCLOSURE_ROW_CONTRACT.md", "Native/Ambitions/Features/Goals/*", "source-present", "debt", "component-contract-check", "none"],
+                ["Capture / Atmosphere Composer", "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md", "captureSignal", "PRIMARY_CTA_CONTRACT.md", "Native/Ambitions/Features/Captures/*", "source-present", "debt", "component-contract-check", "none"],
+                ["Time / LifeShape Field", "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md", "timeCapacity", "SOURCE_FRESHNESS_BADGE_CONTRACT.md", "Native/Ambitions/Features/Plan/*", "source-present", "debt", "component-contract-check", "none"],
+                ["You / User System Profile", "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md", "youTrust", "TRUST_SEAM_CONTRACT.md", "Native/Ambitions/Features/Profile/*", "source-present", "debt", "component-contract-check", "none"],
             ],
             "All preview and implementation status values remain honest about the current proof boundary.",
         ),
     )
     write_text(
-        DOCS_ROOT / "canon/frontend/trace/DESIGN_TO_SOURCE_TRACEABILITY.yaml",
+        FRONTEND_ROOT / "/trace/DESIGN_TO_SOURCE_TRACEABILITY.yaml",
         "\n".join(
             [
                 "status: scaffold",
                 "items:",
                 "  - object: Today / Reality Meridian",
-                "    canon_doc: docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+                "    canon_doc: frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
                 "    token_dependencies: [todayFocus]",
                 "    contract: PRIMARY_CTA_CONTRACT.md",
                 "    source_link_status: source-present",
@@ -900,7 +901,7 @@ def generate_design_tokens() -> None:
                 "    validator_coverage: component-contract-check",
                 "    known_drift: none",
                 "  - object: Goals / Constellation Atlas",
-                "    canon_doc: docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+                "    canon_doc: frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
                 "    token_dependencies: [goalThread]",
                 "    contract: DISCLOSURE_ROW_CONTRACT.md",
                 "    source_link_status: source-present",
@@ -909,7 +910,7 @@ def generate_design_tokens() -> None:
                 "    validator_coverage: component-contract-check",
                 "    known_drift: none",
                 "  - object: Capture / Atmosphere Composer",
-                "    canon_doc: docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+                "    canon_doc: frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
                 "    token_dependencies: [captureSignal]",
                 "    contract: PRIMARY_CTA_CONTRACT.md",
                 "    source_link_status: source-present",
@@ -918,7 +919,7 @@ def generate_design_tokens() -> None:
                 "    validator_coverage: component-contract-check",
                 "    known_drift: none",
                 "  - object: Time / LifeShape Field",
-                "    canon_doc: docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+                "    canon_doc: frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
                 "    token_dependencies: [timeCapacity]",
                 "    contract: SOURCE_FRESHNESS_BADGE_CONTRACT.md",
                 "    source_link_status: source-present",
@@ -927,7 +928,7 @@ def generate_design_tokens() -> None:
                 "    validator_coverage: component-contract-check",
                 "    known_drift: none",
                 "  - object: You / User System Profile",
-                "    canon_doc: docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+                "    canon_doc: frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
                 "    token_dependencies: [youTrust]",
                 "    contract: TRUST_SEAM_CONTRACT.md",
                 "    source_link_status: source-present",

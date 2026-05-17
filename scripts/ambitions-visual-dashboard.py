@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / "docs/canon/frontend"
+BASE = ROOT / "frontend/visual-encyclopedia"
 REPORT_JSON = ROOT / "build/reports/visual-encyclopedia-dashboard.json"
 REPORT_MD = ROOT / "build/reports/visual-encyclopedia-dashboard.md"
 

@@ -294,10 +294,10 @@ struct SourceAtlasDocumentTypeClassifier: Sendable, Equatable, Hashable {
         if requirementSourceState == .stale || freshnessState == .stale || freshnessState == .staleCritical || freshnessState == .sourceChanged {
             return .needsSourceReview
         }
-        if hasOfficialSourceProof && freshnessState == .current && requirementSourceState == .officialCurrent && riskClass.requiresStrictReview == false {
+        if hasOfficialSourceProof && freshnessState == .current && requirementSourceState == .officialCurrent {
             return .ready
         }
-        if hasLocalProof && requirementSourceState == .locallyProven && riskClass.requiresStrictReview == false {
+        if hasLocalProof && requirementSourceState == .locallyProven {
             return .ready
         }
 
@@ -322,6 +322,7 @@ struct SourceAtlasDocumentTypeClassifier: Sendable, Equatable, Hashable {
     ) -> SourceAtlasDocumentClaimBoundary {
         let requiresStrictReview = riskClass.requiresStrictReview ||
             documentType == .legalCivicProfessionalSource ||
+            documentType == .rulebook ||
             documentType == .schoolProgramPage ||
             documentType == .jobPosting ||
             documentType == .certificationHandbook
@@ -417,7 +418,6 @@ struct SourceAtlasDocumentTypeClassifier: Sendable, Equatable, Hashable {
         corpus.contains("official page") ||
             corpus.contains("official website") ||
             corpus.contains("published by") ||
-            corpus.contains("authority") ||
             corpus.contains("agency") ||
             corpus.contains("department")
     }

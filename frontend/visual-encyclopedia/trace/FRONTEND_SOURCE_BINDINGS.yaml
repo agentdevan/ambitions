@@ -1418,9 +1418,9 @@
     },
     {
       "declared_implementation_files": [
-        "Native/Ambitions/Features/Captures/CapturesScreen.swift",
-        "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
-        "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+        "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+        "Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Features/Capture/CaptureViewModel.swift"
       ],
       "destination": "Capture",
       "generated_swift_identifier": "AmbitionsSurfaceID.capture_root_atmosphere_composer",
@@ -1437,9 +1437,9 @@
       "proof_status": "not_in_scope",
       "recipe_id": "capture_root_atmosphere_composer",
       "source_candidates": [
-        "Native/Ambitions/Features/Captures/CapturesScreen.swift",
-        "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
-        "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+        "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+        "Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Features/Capture/CaptureViewModel.swift"
       ],
       "source_relationship": "implemented_source_present",
       "surface_id": "capture_root_atmosphere_composer",
@@ -1834,9 +1834,9 @@
     },
     {
       "declared_implementation_files": [
-        "Native/Ambitions/Features/Plan/PlanScreen.swift",
-        "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-        "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeScreen.swift",
+        "Native/Ambitions/Features/Time/TimeViewModel.swift",
+        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
       ],
       "destination": "Time",
       "generated_swift_identifier": "AmbitionsSurfaceID.time_root_lifeshape_field",
@@ -1853,9 +1853,9 @@
       "proof_status": "not_in_scope",
       "recipe_id": "time_root_lifeshape_field",
       "source_candidates": [
-        "Native/Ambitions/Features/Plan/PlanScreen.swift",
-        "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-        "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeScreen.swift",
+        "Native/Ambitions/Features/Time/TimeViewModel.swift",
+        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
       ],
       "source_relationship": "implemented_source_present",
       "surface_id": "time_root_lifeshape_field",
@@ -2538,9 +2538,9 @@
     },
     {
       "declared_implementation_files": [
-        "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-        "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-        "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+        "Native/Ambitions/Features/You/YouScreen.swift",
+        "Native/Ambitions/Features/You/YouRootSurface.swift",
+        "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
       ],
       "destination": "You",
       "generated_swift_identifier": "AmbitionsSurfaceID.you_root_user_system_profile",
@@ -2557,9 +2557,9 @@
       "proof_status": "not_in_scope",
       "recipe_id": "you_root_user_system_profile",
       "source_candidates": [
-        "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-        "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-        "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+        "Native/Ambitions/Features/You/YouScreen.swift",
+        "Native/Ambitions/Features/You/YouRootSurface.swift",
+        "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
       ],
       "source_relationship": "implemented_source_present",
       "surface_id": "you_root_user_system_profile",

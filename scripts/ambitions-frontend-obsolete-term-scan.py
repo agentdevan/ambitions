@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1]
-BASE=ROOT/'docs/canon/frontend'
+BASE=ROOT/'frontend/visual-encyclopedia'
 msgs=[]
 if not (BASE/'SURFACE_RECIPE_INVENTORY.yaml').exists(): msgs.append('missing SURFACE_RECIPE_INVENTORY.yaml')
 scan_paths = list((BASE/'recipes').glob('**/*.md')) + [

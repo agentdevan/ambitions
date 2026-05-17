@@ -193,7 +193,7 @@ struct AmbitionsOSStartHereRecommendation: Codable, Sendable, Equatable, Hashabl
             return .fits
         }
 
-        switch result.fallbackReason {
+        switch result.fallbackReason ?? .none {
         case .sourceNeeded, .provenanceMissing, .noLoadedPacks, .noMatchingCandidate, .noCurrentCandidate:
             return .sourceNeeded
         case .stale, .reviewRequired, .unknown:

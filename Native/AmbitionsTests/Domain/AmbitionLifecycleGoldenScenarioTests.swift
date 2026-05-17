@@ -21,7 +21,7 @@ final class AmbitionLifecycleGoldenScenarioTests: XCTestCase {
         XCTAssertEqual(loop.identityDirectionIDs, [scenario.identityDirection.id])
         XCTAssertEqual(loop.outcomeIDs, [scenario.outcome.id])
         XCTAssertEqual(loop.commitmentIDs, [scenario.blockedCommitment.id, scenario.promiseCommitment.id])
-        XCTAssertEqual(loop.stepIDs, [scenario.reentryStep.id, scenario.step.id])
+        XCTAssertEqual(loop.stepIDs, [scenario.step.id, scenario.reentryStep.id])
         XCTAssertEqual(loop.closureEventIDs, [scenario.closure.id])
         XCTAssertEqual(loop.proofIDs, [scenario.proof.id])
         XCTAssertEqual(loop.recoveryThreadIDs, [scenario.recovery.id])

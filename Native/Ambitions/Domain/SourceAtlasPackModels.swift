@@ -1771,6 +1771,11 @@ struct SourceAtlasPackValidator: Sendable, Equatable, Hashable {
             if entry.proofCandidate == .revocationArtifact && entry.revocationHookIDs.isEmpty {
                 issues.insert(.invalidRequirementOverlay)
             }
+            if let requirement = requirementsByID[entry.requirementID],
+               requirement.canDriveCurrentRecommendation,
+               entry.canSupportCurrentRequirement(claimsByID) == false {
+                issues.insert(.proofCannotSupportCurrentRequirement)
+            }
             if entry.canSupportCurrentRequirement(claimsByID) {
                 requirementSupportsCurrentProof[entry.requirementID] = true
             }

@@ -181,7 +181,7 @@ struct RecommendationExplanationEvidence: Codable, Sendable, Equatable, Hashable
             "sourceAtlasFreshnessState": result.freshnessState.rawValue,
             "sourceAtlasRiskState": result.riskState.rawValue,
             "sourceAtlasReviewState": result.reviewState.rawValue,
-            "sourceAtlasFallbackReason": result.fallbackReason.rawValue,
+            "sourceAtlasFallbackReason": (result.fallbackReason ?? .none).rawValue,
             "sourceAtlasCanSupportCurrentUse": result.canSupportCurrentUse ? "true" : "false"
         ]
         if let claimID = result.claimID {
@@ -194,7 +194,7 @@ struct RecommendationExplanationEvidence: Codable, Sendable, Equatable, Hashable
             metadata["sourceAtlasRiskClass"] = riskClass.rawValue
         }
         if result.canSupportCurrentUse == false {
-            metadata["sourceAtlasRecommendationBlockReason"] = result.fallbackReason.rawValue
+            metadata["sourceAtlasRecommendationBlockReason"] = (result.fallbackReason ?? .none).rawValue
         }
 
         return RecommendationExplanationEvidence(

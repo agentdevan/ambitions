@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1]
-BASE=ROOT/'docs/canon/frontend'
+BASE=ROOT/'frontend/visual-encyclopedia'
 msgs=[]
 if not (BASE/'VISUAL_DIRECTION_CHANGE_PROTOCOL.md').exists(): msgs.append('missing VISUAL_DIRECTION_CHANGE_PROTOCOL.md')
 if not (BASE/'trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md').exists(): msgs.append('missing trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md')

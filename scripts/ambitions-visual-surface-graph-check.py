@@ -7,7 +7,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / "docs/canon/frontend"
+BASE = ROOT / "frontend/visual-encyclopedia"
 REPORT = ROOT / "build/reports/visual-surface-graph.json"
 
 REQUIRED_ROOTS = [

@@ -94,11 +94,11 @@ struct SourceAtlasQueryResult: Codable, Sendable, Equatable, Hashable, Identifia
     let reviewState: SourceAtlasRequirementReviewState
     let provenanceSourceIDs: [String]
     let proofEntryIDs: [String]
-    let fallbackReason: SourceAtlasQueryFallbackReason
+    let fallbackReason: SourceAtlasQueryFallbackReason?
     let sourceNeededDetail: SourceAtlasSourceNeededDetail?
 
     var canSupportCurrentUse: Bool {
-        fallbackReason == .none &&
+        (fallbackReason == nil || fallbackReason == SourceAtlasQueryFallbackReason.none) &&
             sourceState.blocksCurrentProjection == false &&
             freshnessState.blocksCurrentProjection == false &&
             riskState.blocksCurrentProjection == false &&
@@ -113,7 +113,7 @@ struct SourceAtlasQueryResponse: Codable, Sendable, Equatable, Hashable {
     let selectedResult: SourceAtlasQueryResult
 
     var fallbackReason: SourceAtlasQueryFallbackReason {
-        selectedResult.fallbackReason
+        selectedResult.fallbackReason ?? .none
     }
 }
 
@@ -449,7 +449,7 @@ struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
         riskState: SourceAtlasRequirementRiskState,
         reviewState: SourceAtlasRequirementReviewState,
         provenanceSourceIDs: [String]
-    ) -> SourceAtlasQueryFallbackReason {
+    ) -> SourceAtlasQueryFallbackReason? {
         switch sourceState {
         case .sourceNeeded:
             return .sourceNeeded
@@ -482,7 +482,7 @@ struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
         if provenanceSourceIDs.isEmpty {
             return .provenanceMissing
         }
-        return .none
+        return nil
     }
 
     private func rank(_ result: SourceAtlasQueryResult, query: SourceAtlasQuery) -> Int {
@@ -548,9 +548,9 @@ struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
     private func sourceNeededDetail(
         in pack: SourceAtlasPack,
         for query: SourceAtlasQuery,
-        fallbackReason: SourceAtlasQueryFallbackReason
+        fallbackReason: SourceAtlasQueryFallbackReason?
     ) -> SourceAtlasSourceNeededDetail? {
-        guard fallbackReason != .none else {
+        guard let fallbackReason else {
             return nil
         }
 

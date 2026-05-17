@@ -440,6 +440,9 @@ struct AmbitionsOSSourceTruthValidator: Sendable, Equatable, Hashable {
             }
             if transition.fromState != claim.state {
                 issues.insert(.invalidClaimTransition)
+                if transition.isReviewable == false {
+                    issues.insert(.silentClaimMutation)
+                }
                 continue
             }
             guard transition.isReviewable else {

@@ -1485,7 +1485,9 @@ extension RepositoryBackedTimeService {
             manualFallback: calendarAwareness.status == .calendarAware
                 ? "Plan can use derived busy time after your action."
                 : "Manual planning still works without calendar access.",
-            writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
+            writeBoundary: calendarAwareness.status == .baseline
+                ? "Plan writes or reschedules calendar blocks only after explicit confirmation."
+                : "Plan never silently writes or reschedules calendar blocks.",
             visualState: calendarAwareness.visualState,
             canRequestCalendarRead: calendarAwareness.canRequestCalendarRead
         )

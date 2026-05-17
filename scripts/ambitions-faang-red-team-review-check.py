@@ -19,7 +19,7 @@ from visual_final_form_common import (
 
 
 REPORT_JSON = REPORT_DIR / "faang-red-team-review.json"
-PACKET_MD = ROOT / "docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md"
+PACKET_MD = ROOT / "frontend/visual-encyclopedia/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md"
 REVIEW_MD = TRACE_ROOT / "FAANG_FLAGSHIP_RED_TEAM_REVIEW.md"
 FINAL_REPORT_MD = REPORT_DIR / "visual-design-authority-final-form-04.md"
 
@@ -215,13 +215,13 @@ def render_final_report(rating: int, debt_notes: list[str], surface_report: dict
         "Final-form docs and validators are installed. The control plane is explicit about source, proof, scenario coverage, native interaction grammar, and supersession. This phase does not prove app implementation.",
         "",
         "Files changed:",
-        f"- docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md",
-        f"- docs/canon/frontend/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md",
-        f"- docs/canon/frontend/trace/VISUAL_NO_ORPHAN_GRAPH.yaml",
-        f"- docs/canon/frontend/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
-        f"- docs/canon/frontend/trace/NATIVE_IPHONE_INTERACTION_GRAMMAR_MATRIX.yaml",
-        f"- docs/canon/frontend/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml",
-        f"- docs/canon/frontend/trace/FAANG_FLAGSHIP_RED_TEAM_REVIEW.md",
+        f"- frontend/visual-encyclopedia/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md",
+        f"- frontend/visual-encyclopedia/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md",
+        f"- frontend/visual-encyclopedia/trace/VISUAL_NO_ORPHAN_GRAPH.yaml",
+        f"- frontend/visual-encyclopedia/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
+        f"- frontend/visual-encyclopedia/trace/NATIVE_IPHONE_INTERACTION_GRAMMAR_MATRIX.yaml",
+        f"- frontend/visual-encyclopedia/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml",
+        f"- frontend/visual-encyclopedia/trace/FAANG_FLAGSHIP_RED_TEAM_REVIEW.md",
         f"- scripts/ambitions-visual-no-orphan-graph-check.py",
         f"- scripts/ambitions-surface-scenario-coverage-check.py",
         f"- scripts/ambitions-native-iphone-interaction-grammar-check.py",

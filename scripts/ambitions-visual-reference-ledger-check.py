@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1]
-BASE=ROOT/'docs/canon/frontend'
+BASE=ROOT/'frontend/visual-encyclopedia'
 msgs=[]
 if not (BASE/'VISUAL_REFERENCE_LEDGER.md').exists(): msgs.append('missing VISUAL_REFERENCE_LEDGER.md')
 if not (BASE/'OBSOLETE_AND_EXCLUDED_VISUAL_REFERENCE_LEDGER.md').exists(): msgs.append('missing OBSOLETE_AND_EXCLUDED_VISUAL_REFERENCE_LEDGER.md')

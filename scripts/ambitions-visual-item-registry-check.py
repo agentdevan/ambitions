@@ -4,7 +4,7 @@ import json
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / 'docs/canon/frontend'
+BASE = ROOT / 'frontend/visual-encyclopedia'
 
 required = [
     'visual_id', 'name', 'canon_status', 'kind', 'hierarchy_level', 'destination',

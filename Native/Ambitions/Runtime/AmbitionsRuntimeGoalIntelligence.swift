@@ -88,10 +88,17 @@ struct RuntimeIntelligenceQuarantinePolicy: Sendable {
     ) -> RuntimeIntelligenceQuarantineAssessment {
         var issues: [RuntimeIntelligenceQuarantineIssue] = []
 
-        if explainability.sourceAudit.rows.isEmpty {
+        let freshnessBlocksCurrentUse = [
+            GoalFreshnessPosture.stale,
+            .expired,
+            .blockedMissingEvidence,
+            .providerUnavailable
+        ].contains(explainability.freshness.posture)
+
+        if explainability.sourceAudit.rows.isEmpty && freshnessBlocksCurrentUse {
             issues.append(.missingSourceAudit)
         }
-        if [.stale, .expired, .blockedMissingEvidence, .providerUnavailable].contains(explainability.freshness.posture) {
+        if freshnessBlocksCurrentUse {
             issues.append(.staleOrUnavailableFreshness)
         }
         if explainability.confidence.understandingConfidence == .low || explainability.confidence.pathConfidence == .low {

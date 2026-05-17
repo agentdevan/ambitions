@@ -98,7 +98,7 @@ final class ExternalSurfaceVerificationChecklistTests: XCTestCase {
         XCTAssertEqual(widget.privacySummary, ExternalSurfacePrivacySnapshotPolicy.safeDefault.staleLabel)
         XCTAssertEqual(widget.primaryURL?.absoluteString, "ambitions://goal/goal-private?origin=widget")
         XCTAssertEqual(activity.privacyLabel, ExternalSurfacePrivacySnapshotPolicy.safeDefault.staleLabel)
-        XCTAssertEqual(activity.stateLabel, "May need refresh")
+        XCTAssertEqual(activity.stateLabel, "Open Ambitions to refresh")
 
         let missingWidget = ExternalWidgetProjection(snapshot: nil)
         XCTAssertEqual(missingWidget.primaryURL?.absoluteString, "ambitions://tab/today?origin=widget")

@@ -199,7 +199,7 @@ final class TodayCommandHandlerTests: XCTestCase {
         let todayService = RepositoryBackedTodayService(repositories: repositories)
 
         let created = try await goalsService.createGoal(
-            CreateGoalRequest(title: "Capture why this matters proof path"),
+            CreateGoalRequest(title: "Learn SwiftUI layout"),
             now: fixedNow
         )
         let goalID = try XCTUnwrap(created.target.goalID)

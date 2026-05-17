@@ -4,7 +4,7 @@ import json
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / 'docs/canon/frontend'
+BASE = ROOT / 'frontend/visual-encyclopedia'
 INV = BASE / 'SURFACE_RECIPE_INVENTORY.yaml'
 
 REQUIRED_HEADINGS = [

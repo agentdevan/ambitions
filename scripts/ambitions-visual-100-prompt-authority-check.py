@@ -26,7 +26,7 @@ def main() -> int:
         if marker not in text:
             missing.append(marker)
 
-    ledger = read_text(ROOT / "docs/canon/frontend/trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md")
+    ledger = read_text(ROOT / "frontend/visual-encyclopedia/trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md")
     if "VISUAL-ENCYCLOPEDIA-100-FINAL-PROOF-AUTHORITY-04" not in ledger:
         missing.append("ledger-active-prompt")
     if "VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-02" not in ledger or "VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03" not in ledger:
@@ -38,7 +38,7 @@ def main() -> int:
         ROOT / "prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md",
         ROOT / "prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03-MERGED.md",
         ROOT / "prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md",
-        ROOT / "docs/canon/frontend/trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md",
+        ROOT / "frontend/visual-encyclopedia/trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md",
     }
     for root_dir in (ROOT / "docs", ROOT / "prompts", ROOT / ".codex"):
         if root_dir == ROOT / ".codex":

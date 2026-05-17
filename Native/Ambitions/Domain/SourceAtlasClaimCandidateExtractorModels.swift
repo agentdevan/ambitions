@@ -230,6 +230,24 @@ struct SourceAtlasClaimCandidateExtractor: Sendable, Equatable, Hashable {
         for (index, clause) in bodyClauses.enumerated() {
             let signals = Self.signals(in: clause)
             if signals.isEmpty {
+                let candidate = Self.makeUnknownCandidate(
+                    text: clause,
+                    title: title,
+                    sourceLocator: sourceLocator,
+                    locatorHint: locatorHint,
+                    clauseIndex: index,
+                    documentContext: documentContext
+                )
+                let dedupKey = [
+                    candidate.kind.rawValue,
+                    candidate.normalizedText,
+                    candidate.locatorHint.sourceLocator ?? "",
+                    candidate.locatorHint.pageLocator ?? "",
+                    candidate.locatorHint.lineLocator ?? ""
+                ].joined(separator: "\u{1f}")
+                if seen.insert(dedupKey).inserted {
+                    candidates.append(candidate)
+                }
                 continue
             }
 
@@ -288,22 +306,23 @@ struct SourceAtlasClaimCandidateExtractor: Sendable, Equatable, Hashable {
         documentContext: DocumentContext
     ) -> SourceAtlasClaimCandidate {
         let normalizedClause = Self.normalizedText(clause)
+        let normalizedClauseForSignals = normalizedClause.lowercased()
         let explicitProofAllowed = signal == .proof &&
             Self.isExplicitProofAllowed(
-                clause: normalizedClause,
+                clause: normalizedClauseForSignals,
                 documentContext: documentContext
             )
 
         let sourceState = Self.sourceState(
             for: signal,
             explicitProofAllowed: explicitProofAllowed,
-            clause: normalizedClause,
+            clause: normalizedClauseForSignals,
             documentContext: documentContext
         )
         let freshnessState = Self.freshnessState(
             for: signal,
             explicitProofAllowed: explicitProofAllowed,
-            clause: normalizedClause,
+            clause: normalizedClauseForSignals,
             documentContext: documentContext
         )
         let provenanceState = Self.provenanceState(
@@ -356,16 +375,19 @@ struct SourceAtlasClaimCandidateExtractor: Sendable, Equatable, Hashable {
     }
 
     private static func makeUnknownCandidate(
+        text: String? = nil,
         title: String?,
         sourceLocator: String?,
         locatorHint: SourceAtlasClaimCandidateLocatorHint,
+        clauseIndex: Int? = nil,
         documentContext: DocumentContext
     ) -> SourceAtlasClaimCandidate {
-        let text = Self.normalizedText(title ?? sourceLocator ?? "unknown claim candidate")
+        let text = Self.normalizedText(text ?? title ?? sourceLocator ?? "unknown claim candidate")
         return SourceAtlasClaimCandidate(
             id: Self.deterministicID(
                 seed: [
                     "unknown",
+                    clauseIndex.map(String.init) ?? "",
                     text,
                     sourceLocator ?? "",
                     locatorHint.pageLocator ?? "",
@@ -537,6 +559,9 @@ struct SourceAtlasClaimCandidateExtractor: Sendable, Equatable, Hashable {
         guard documentContext.allowsReadyProofCandidate || documentContext.allowsLocalProofCandidate else {
             return false
         }
+        guard Self.containsProofSignal(clause) else {
+            return false
+        }
         if Self.containsAny(clause, ["revoked", "withdrawn", "rescinded", "contradicted", "retracted", "stale", "outdated", "superseded"]) {
             return false
         }
@@ -632,10 +657,7 @@ struct SourceAtlasClaimCandidateExtractor: Sendable, Equatable, Hashable {
             "complete first",
             "completion required",
             "already have",
-            "eligible after",
-            "license",
-            "certification",
-            "authorization"
+            "eligible after"
         ])
     }
 

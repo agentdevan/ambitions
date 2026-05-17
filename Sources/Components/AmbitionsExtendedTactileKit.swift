@@ -1,6 +1,5 @@
 #if canImport(SwiftUI)
 import SwiftUI
-import Combine
 
 // MARK: - 1. AfiFlowIndicator
 /// A micro-visualizer representing the current Active Focus Interval (AFI) flow density.

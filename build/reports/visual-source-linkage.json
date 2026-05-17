@@ -7,7 +7,53 @@
   "manifest_recipe_count": 159,
   "missing_priority_ids": [],
   "missing_recipe_files": [],
-  "missing_source_files": [],
+  "missing_source_files": [
+    {
+      "candidate": "Native/Ambitions/Features/Captures/CapturesScreen.swift",
+      "recipe_id": "capture_root_atmosphere_composer",
+      "status": "linked"
+    },
+    {
+      "candidate": "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
+      "recipe_id": "capture_root_atmosphere_composer",
+      "status": "linked"
+    },
+    {
+      "candidate": "Native/Ambitions/Features/Captures/CapturesViewModel.swift",
+      "recipe_id": "capture_root_atmosphere_composer",
+      "status": "linked"
+    },
+    {
+      "candidate": "Native/Ambitions/Features/Plan/PlanScreen.swift",
+      "recipe_id": "time_root_lifeshape_field",
+      "status": "linked"
+    },
+    {
+      "candidate": "Native/Ambitions/Features/Plan/PlanViewModel.swift",
+      "recipe_id": "time_root_lifeshape_field",
+      "status": "linked"
+    },
+    {
+      "candidate": "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift",
+      "recipe_id": "time_root_lifeshape_field",
+      "status": "linked"
+    },
+    {
+      "candidate": "Native/Ambitions/Features/Profile/ProfileScreen.swift",
+      "recipe_id": "you_root_user_system_profile",
+      "status": "linked"
+    },
+    {
+      "candidate": "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
+      "recipe_id": "you_root_user_system_profile",
+      "status": "linked"
+    },
+    {
+      "candidate": "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift",
+      "recipe_id": "you_root_user_system_profile",
+      "status": "linked"
+    }
+  ],
   "priority_recipe_count": 6,
   "priority_recipe_ids": [
     "global_app_shell",
@@ -17,6 +63,6 @@
     "time_root_lifeshape_field",
     "you_root_user_system_profile"
   ],
-  "status": "green",
+  "status": "red",
   "weak_priority_count": 0
 }

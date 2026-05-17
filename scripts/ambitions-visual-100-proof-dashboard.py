@@ -156,7 +156,7 @@ def main() -> int:
         "UI implementation changed: no\n"
         "Hosted CI activated: no\n"
         "Release/accessibility/App Store claims: not claimed\n"
-        "Rollback notes: restore docs/canon/frontend, build/reports, Makefile, scripts/ambitions-visual-100-*.py\n"
+        "Rollback notes: restore frontend/visual-encyclopedia, build/reports, Makefile, scripts/ambitions-visual-100-*.py\n"
         "Commit: not yet created\n",
         encoding="utf-8",
     )

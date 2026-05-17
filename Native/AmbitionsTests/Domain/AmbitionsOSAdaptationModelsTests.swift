@@ -116,7 +116,7 @@ final class AmbitionsOSAdaptationModelsTests: XCTestCase {
         XCTAssertEqual(decoded.schemaVersion, ambitionsOSAdaptationSchemaVersion)
         XCTAssertEqual(decoded.intent, .futureRecommendationInput)
         XCTAssertTrue(decoded.canInformFutureRecommendations)
-        XCTAssertEqual(decoded.controlActions, ["disable", "review", "reset"])
+        XCTAssertEqual(decoded.controlActions, ["disable", "reset", "review"])
         XCTAssertEqual(validator.validate(decoded), [])
     }
 

@@ -70,7 +70,7 @@ final class InspectableIntelligenceGoldenScenarioTests: XCTestCase {
         XCTAssertEqual(trace.receiptBehavior.proofReferenceIDs, ["proof-1"])
         XCTAssertEqual(trustSeam.sectionKinds, [.source, .reason, .fit, .uncertainty, .controls, .receiptBehavior])
         XCTAssertTrue(trustSeam.canProceed)
-        XCTAssertFalse(trustSeam.needsReview)
+        XCTAssertTrue(trustSeam.needsReview)
         XCTAssertFalse(trustSeam.hasVisibleCopyGuardrailViolation)
     }
 

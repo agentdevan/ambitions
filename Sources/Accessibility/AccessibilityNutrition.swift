@@ -633,17 +633,17 @@ public enum AccessibilityNutritionChecklist {
     public static func d21InternalEvidenceAudits() -> [AccessibilityNutritionScreenAudit] {
         [
             screenAudit("today", "Today", "tab.today", "Today", source: "Native/Ambitions/Features/Today/TodayScreen.swift", tests: "Native/AmbitionsTests/Today"),
-            screenAudit("goals", "Goals", "tab.goals", "Goals", source: "Native/Ambitions/Features/Goals/GoalsScreen.swift", tests: "Native/AmbitionsTests/Goals"),
+            screenAudit("reviews-archive", "Reviews / Archive", "you.reviews", "You", source: "Native/Ambitions/Services/ReviewsV1Projector.swift", tests: "Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift"),
+            screenAudit("rich-panels", "Rich Panels", "component.rich-panels", "Design System", source: "Sources/Components/RichPanelPrimitives.swift", tests: "Native/AmbitionsTests/App/RichPanelDesignSystemTests.swift"),
+            screenAudit("you", "You", "tab.you", "You", source: "Native/Ambitions/Features/You/YouScreen.swift", tests: "Native/AmbitionsTests/You"),
+            screenAudit("grouped-navigation-list", "GroupedNavigationList", "component.grouped-navigation-list", "Design System", source: "Sources/Components/GroupedNavigationList.swift", tests: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"),
             screenAudit("goal-detail", "Goal Detail", "goals.detail", "Goals", source: "Native/Ambitions/Features/Goals/GoalDetailScreen.swift", tests: "Native/AmbitionsTests/Goals"),
             screenAudit("capture", "Capture", "tab.capture", "Capture", source: "Native/Ambitions/Features/Capture/CaptureScreen.swift", tests: "Native/AmbitionsTests/Captures"),
             screenAudit("time", "Time", "tab.time", "Time", source: "Native/Ambitions/Features/Time/TimeScreen.swift", tests: "Native/AmbitionsTests/Time"),
-            screenAudit("you", "You", "tab.you", "You", source: "Native/Ambitions/Features/You/YouScreen.swift", tests: "Native/AmbitionsTests/You"),
-            screenAudit("life-areas-north-stars", "Life Areas / North Stars", "goals.life-areas", "Goals", source: "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift", tests: "Native/AmbitionsTests/Goals"),
-            screenAudit("reviews-archive", "Reviews / Archive", "you.reviews", "You", source: "Native/Ambitions/Services/ReviewsV1Projector.swift", tests: "Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift"),
             screenAudit("trust-center-what-ambitions-knows", "Trust Center / What Ambitions Knows", "you.trust.memory", "You", source: "Native/Ambitions/Features/You/YouScreen.swift", tests: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift"),
-            screenAudit("rich-panels", "Rich Panels", "component.rich-panels", "Design System", source: "Sources/Components/RichPanelPrimitives.swift", tests: "Native/AmbitionsTests/App/RichPanelDesignSystemTests.swift"),
-            screenAudit("grouped-navigation-list", "GroupedNavigationList", "component.grouped-navigation-list", "Design System", source: "Sources/Components/GroupedNavigationList.swift", tests: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"),
             screenAudit("quiet-command-sheet-smart-attachment", "Quiet Command Sheet / Smart Attachment", "shell.command-sheet", "Shell / Capture", source: "Native/Ambitions/App/AppShellView.swift", tests: "Native/AmbitionsUITests/AmbitionsUITests.swift"),
+            screenAudit("goals", "Goals", "tab.goals", "Goals", source: "Native/Ambitions/Features/Goals/GoalsScreen.swift", tests: "Native/AmbitionsTests/Goals"),
+            screenAudit("life-areas-north-stars", "Life Areas / North Stars", "goals.life-areas", "Goals", source: "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift", tests: "Native/AmbitionsTests/Goals"),
             screenAudit("external-surfaces", "External surfaces", "external.surfaces", "External Surfaces", source: "Native/Ambitions/ExternalSnapshots", tests: "Native/AmbitionsTests/App")
         ]
     }

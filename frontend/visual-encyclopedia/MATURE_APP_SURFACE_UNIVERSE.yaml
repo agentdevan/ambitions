@@ -4484,9 +4484,9 @@
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
         "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-        "Native/Ambitions/Features/Captures/CapturesScreen.swift",
-        "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
-        "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+        "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+        "Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Features/Capture/CaptureViewModel.swift"
       ],
       "gap_reason": "no active gap in the mature universe",
       "gap_status": "none",
@@ -4505,9 +4505,9 @@
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
         "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-        "Native/Ambitions/Features/Captures/CapturesScreen.swift",
-        "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
-        "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+        "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+        "Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Features/Capture/CaptureViewModel.swift"
       ],
       "parent_surface": "Capture Root",
       "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
@@ -4526,9 +4526,9 @@
       "recipe_inventory_id": "capture_root_atmosphere_composer",
       "recipe_status": "intended_canon",
       "source_file_candidates": [
-        "Native/Ambitions/Features/Captures/CapturesScreen.swift",
-        "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
-        "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+        "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+        "Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Features/Capture/CaptureViewModel.swift"
       ],
       "source_origin": "live_repo_source",
       "source_relationship": "implemented_source_present",
@@ -5752,9 +5752,9 @@
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
         "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-        "Native/Ambitions/Features/Plan/PlanScreen.swift",
-        "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-        "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeScreen.swift",
+        "Native/Ambitions/Features/Time/TimeViewModel.swift",
+        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
       ],
       "gap_reason": "no active gap in the mature universe",
       "gap_status": "none",
@@ -5773,9 +5773,9 @@
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
         "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-        "Native/Ambitions/Features/Plan/PlanScreen.swift",
-        "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-        "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeScreen.swift",
+        "Native/Ambitions/Features/Time/TimeViewModel.swift",
+        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
       ],
       "parent_surface": "Time Root",
       "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
@@ -5794,9 +5794,9 @@
       "recipe_inventory_id": "time_root_lifeshape_field",
       "recipe_status": "intended_canon",
       "source_file_candidates": [
-        "Native/Ambitions/Features/Plan/PlanScreen.swift",
-        "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-        "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeScreen.swift",
+        "Native/Ambitions/Features/Time/TimeViewModel.swift",
+        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
       ],
       "source_origin": "live_repo_source",
       "source_relationship": "implemented_source_present",
@@ -7908,9 +7908,9 @@
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
         "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-        "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-        "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-        "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+        "Native/Ambitions/Features/You/YouScreen.swift",
+        "Native/Ambitions/Features/You/YouRootSurface.swift",
+        "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
       ],
       "gap_reason": "no active gap in the mature universe",
       "gap_status": "none",
@@ -7929,9 +7929,9 @@
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
         "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-        "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-        "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-        "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+        "Native/Ambitions/Features/You/YouScreen.swift",
+        "Native/Ambitions/Features/You/YouRootSurface.swift",
+        "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
       ],
       "parent_surface": "You Root",
       "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
@@ -7950,9 +7950,9 @@
       "recipe_inventory_id": "you_root_user_system_profile",
       "recipe_status": "intended_canon",
       "source_file_candidates": [
-        "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-        "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-        "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+        "Native/Ambitions/Features/You/YouScreen.swift",
+        "Native/Ambitions/Features/You/YouRootSurface.swift",
+        "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
       ],
       "source_origin": "live_repo_source",
       "source_relationship": "implemented_source_present",

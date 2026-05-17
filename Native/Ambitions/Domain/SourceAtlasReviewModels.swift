@@ -169,7 +169,7 @@ struct SourceAtlasReviewSheetSummary: Codable, Sendable, Equatable, Hashable, Id
         self.freshnessState = queryResult.freshnessState
         self.reviewState = queryResult.reviewState
         self.riskClass = queryResult.riskClass
-        self.fallbackReason = queryResult.fallbackReason
+        self.fallbackReason = queryResult.fallbackReason ?? .none
         self.provenanceSourceIDs = Self.orderedUnique(queryResult.provenanceSourceIDs)
         self.proofEntryIDs = Self.orderedUnique(queryResult.proofEntryIDs)
 
@@ -200,7 +200,7 @@ struct SourceAtlasReviewSheetSummary: Codable, Sendable, Equatable, Hashable, Id
             sourceState: queryResult.sourceState,
             freshnessState: queryResult.freshnessState,
             reviewState: queryResult.reviewState,
-            fallbackReason: queryResult.fallbackReason,
+            fallbackReason: queryResult.fallbackReason ?? .none,
             provenanceSourceIDs: self.provenanceSourceIDs,
             blocksOfficialCurrentClaims: blocksOfficialCurrentClaims,
             blocksCurrentUse: blocksCurrentUse,
@@ -214,7 +214,7 @@ struct SourceAtlasReviewSheetSummary: Codable, Sendable, Equatable, Hashable, Id
             freshnessState: queryResult.freshnessState,
             reviewState: queryResult.reviewState,
             riskClass: queryResult.riskClass,
-            fallbackReason: queryResult.fallbackReason,
+            fallbackReason: queryResult.fallbackReason ?? .none,
             blocksOfficialCurrentClaims: blocksOfficialCurrentClaims,
             blocksCurrentUse: blocksCurrentUse,
             requiresHumanReview: requiresHumanReview
@@ -337,7 +337,7 @@ struct SourceAtlasReviewSheetSummary: Codable, Sendable, Equatable, Hashable, Id
         if requirement?.reviewState.blocksCurrentProjection == true {
             return true
         }
-        if queryResult.fallbackReason != .none {
+        if queryResult.fallbackReason != nil {
             return true
         }
         return false

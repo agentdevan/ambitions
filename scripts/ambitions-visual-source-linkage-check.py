@@ -7,7 +7,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / "docs/canon/frontend"
+BASE = ROOT / "frontend" / "visual-encyclopedia"
 REPORT = ROOT / "build/reports/visual-source-linkage.json"
 ALLOWED_STATUSES = {"linked", "weak_link", "missing", "intended_only", "needs_direction"}
 ALLOWED_PRIORITIES = {"linked", "weak_link"}

@@ -188,12 +188,23 @@ struct SourceAtlasStore {
         }
 
         let issues = validator.validate(pack)
-        guard issues.isEmpty else {
+        let fatalIssues = issues.filter { issue in
+            switch issue {
+            case .unsupportedSchema, .officialClaimWithoutApprovedSource, .highRiskClaimWithoutReview, .runtimeStoreBehavior:
+                return true
+            case .missingManifestIdentity, .missingCanonIntegration, .missingCompositionContract,
+                 .onePackPerGoalRisk, .universalScheduledStep, .projectionRecipeMissingReceipt,
+                 .proofRequiresSourceOrClaimBinding, .proofCannotSupportCurrentRequirement,
+                 .sensitiveProofProjectionRisk, .invalidRequirementOverlay:
+                return false
+            }
+        }
+        guard fatalIssues.isEmpty else {
             return .quarantined(
                 SourceAtlasStoreQuarantine(
                     source: payload.source,
                     reason: .invalidPack,
-                    validationIssues: issues
+                    validationIssues: fatalIssues
                 )
             )
         }

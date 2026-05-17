@@ -17,9 +17,9 @@ from ambitions_visual_100_common import (
 )
 
 
-ROOT = BASE.parents[2]
+ROOT = BASE.parents[1]
 DOCS_ROOT = ROOT / "docs"
-CANON_ROOT = DOCS_ROOT / "canon" / "frontend"
+CANON_ROOT = BASE
 TRACE_ROOT = CANON_ROOT / "trace"
 SURFACES_ROOT = CANON_ROOT / "surfaces"
 PRIMITIVES_ROOT = CANON_ROOT / "primitives"
@@ -310,56 +310,56 @@ def token_recipe_mapping(token_name: str, category: str) -> dict[str, list[str]]
 
 def token_primitive_or_contract(token_name: str, category: str) -> str:
     if category == "foundation":
-        return "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md"
+        return "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md"
     if category == "semantic":
         mapping = {
-            "todayFocus": "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
-            "goalThread": "docs/canon/frontend/contracts/DISCLOSURE_ROW_CONTRACT.md",
-            "captureSignal": "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
-            "timeCapacity": "docs/canon/frontend/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
-            "youTrust": "docs/canon/frontend/contracts/TRUST_SEAM_CONTRACT.md",
-            "sourceFreshness": "docs/canon/frontend/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
-            "proofReceipt": "docs/canon/frontend/contracts/RECEIPT_CONTRACT.md",
-            "protectedTime": "docs/canon/frontend/primitives/PROTECTED_TIME_PRIMITIVES.md",
+            "todayFocus": "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
+            "goalThread": "frontend/visual-encyclopedia/contracts/DISCLOSURE_ROW_CONTRACT.md",
+            "captureSignal": "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
+            "timeCapacity": "frontend/visual-encyclopedia/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
+            "youTrust": "frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md",
+            "sourceFreshness": "frontend/visual-encyclopedia/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
+            "proofReceipt": "frontend/visual-encyclopedia/contracts/RECEIPT_CONTRACT.md",
+            "protectedTime": "frontend/visual-encyclopedia/primitives/PROTECTED_TIME_PRIMITIVES.md",
         }
-        return mapping.get(token_name, "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md")
+        return mapping.get(token_name, "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md")
     if category == "component":
         mapping = {
-            "ctaPrimary": "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
-            "ctaSecondary": "docs/canon/frontend/primitives/CTA_SYSTEM.md",
-            "disclosureRow": "docs/canon/frontend/contracts/DISCLOSURE_ROW_CONTRACT.md",
-            "panelCompact": "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md",
-            "panelHero": "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md",
-            "panelStandard": "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md",
-            "proofChip": "docs/canon/frontend/primitives/PROOF_PRIMITIVES.md",
-            "sourceBadge": "docs/canon/frontend/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
+            "ctaPrimary": "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
+            "ctaSecondary": "frontend/visual-encyclopedia/primitives/CTA_SYSTEM.md",
+            "disclosureRow": "frontend/visual-encyclopedia/contracts/DISCLOSURE_ROW_CONTRACT.md",
+            "panelCompact": "frontend/visual-encyclopedia/primitives/WRAPPERS_AND_CONTAINERS.md",
+            "panelHero": "frontend/visual-encyclopedia/primitives/WRAPPERS_AND_CONTAINERS.md",
+            "panelStandard": "frontend/visual-encyclopedia/primitives/WRAPPERS_AND_CONTAINERS.md",
+            "proofChip": "frontend/visual-encyclopedia/primitives/PROOF_PRIMITIVES.md",
+            "sourceBadge": "frontend/visual-encyclopedia/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
         }
-        return mapping.get(token_name, "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md")
+        return mapping.get(token_name, "frontend/visual-encyclopedia/primitives/WRAPPERS_AND_CONTAINERS.md")
     if category == "motion":
-        return "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md"
+        return "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md"
     if category == "haptics":
-        return "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md"
+        return "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md"
     if category == "accessibility":
         mapping = {
-            "minimumTapTarget": "docs/canon/frontend/primitives/ADHD_DENSITY_PRIMITIVES.md",
-            "textScaleFloor": "docs/canon/frontend/primitives/DYNAMIC_TYPE_COLLAPSE_PRIMITIVES.md",
-            "reduceMotionFallback": "docs/canon/frontend/behavior/REDUCE_MOTION.md",
-            "contrastFallback": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
-            "differentiationFallback": "docs/canon/frontend/primitives/BADGES_MARKERS_AND_STATE_GLYPHS.md",
-            "voiceOverOrder": "docs/canon/frontend/primitives/VOICEOVER_ORDER_PRIMITIVES.md",
+            "minimumTapTarget": "frontend/visual-encyclopedia/primitives/ADHD_DENSITY_PRIMITIVES.md",
+            "textScaleFloor": "frontend/visual-encyclopedia/primitives/DYNAMIC_TYPE_COLLAPSE_PRIMITIVES.md",
+            "reduceMotionFallback": "frontend/visual-encyclopedia/behavior/REDUCE_MOTION.md",
+            "contrastFallback": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
+            "differentiationFallback": "frontend/visual-encyclopedia/primitives/BADGES_MARKERS_AND_STATE_GLYPHS.md",
+            "voiceOverOrder": "frontend/visual-encyclopedia/primitives/VOICEOVER_ORDER_PRIMITIVES.md",
         }
-        return mapping.get(token_name, "docs/canon/frontend/primitives/VOICEOVER_ORDER_PRIMITIVES.md")
+        return mapping.get(token_name, "frontend/visual-encyclopedia/primitives/VOICEOVER_ORDER_PRIMITIVES.md")
     if category == "object":
         mapping = {
-            "realityMeridian": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
-            "constellationAtlas": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
-            "atmosphereComposer": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
-            "lifeshapeField": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
-            "userSystemProfile": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+            "realityMeridian": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+            "constellationAtlas": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+            "atmosphereComposer": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+            "lifeshapeField": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+            "userSystemProfile": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         }
         return mapping.get(token_name, "docs/truth/PRODUCT_DESIGN_TRUTH.md")
     if category == "state":
-        return "docs/canon/frontend/primitives/TRANSACTION_PRIMITIVES.md"
+        return "frontend/visual-encyclopedia/primitives/TRANSACTION_PRIMITIVES.md"
     return "docs/truth/PRODUCT_DESIGN_TRUTH.md"
 
 

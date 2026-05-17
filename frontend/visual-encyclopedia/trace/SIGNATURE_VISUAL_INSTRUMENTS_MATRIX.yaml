@@ -123,8 +123,8 @@ signature_instruments:
       - ContextualDrilldownHeader
       - FloatingGlassNav
     likely_source_files:
-      - Native/Ambitions/Features/Plan/PlanScreen.swift
-      - Native/Ambitions/Features/Plan/PlanViewModel.swift
+      - Native/Ambitions/Features/Time/TimeScreen.swift
+      - Native/Ambitions/Features/Time/TimeViewModel.swift
       - Native/Ambitions/Features/Plan/PlanFeatureService.swift
     future_source_files:
       - Native/Ambitions/Features/Plan/LifeShapeFieldView.swift
@@ -211,7 +211,7 @@ signature_instruments:
       - CinematicObjectHero
       - LiveTelemetryPanel
     likely_source_files:
-      - Native/Ambitions/Features/Captures/CapturesScreen.swift
+      - Native/Ambitions/Features/Capture/CaptureScreen.swift
       - Native/Ambitions/Features/Captures/CaptureViewModel.swift
       - Native/Ambitions/Features/Captures/CaptureFeatureService.swift
     future_source_files:
@@ -254,7 +254,7 @@ signature_instruments:
       - FloatingGlassNav
       - MetricInstrumentChart
     likely_source_files:
-      - Native/Ambitions/Features/Profile/ProfileScreen.swift
+      - Native/Ambitions/Features/You/YouScreen.swift
       - Native/Ambitions/Features/Profile/ProfileViewModel.swift
       - Native/Ambitions/Features/Profile/ProfileFeatureService.swift
     future_source_files:

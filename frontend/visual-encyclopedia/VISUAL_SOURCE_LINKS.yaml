@@ -677,9 +677,9 @@
       "destination": "Capture",
       "primary_object": "Atmosphere Composer",
       "source_file_candidates": [
-        "Native/Ambitions/Features/Captures/CapturesScreen.swift",
-        "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
-        "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+        "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+        "Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Features/Capture/CaptureViewModel.swift"
       ],
       "shared_components": [
         "Native/Ambitions/Features/Captures/CaptureDraftRoutePreviewCard.swift",
@@ -871,9 +871,9 @@
       "destination": "Time",
       "primary_object": "LifeShape Field",
       "source_file_candidates": [
-        "Native/Ambitions/Features/Plan/PlanScreen.swift",
-        "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-        "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeScreen.swift",
+        "Native/Ambitions/Features/Time/TimeViewModel.swift",
+        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
       ],
       "shared_components": [
         "Native/Ambitions/Features/Plan/PlanLifeSuiteCard.swift",
@@ -1197,9 +1197,9 @@
       "destination": "You",
       "primary_object": "User System Profile",
       "source_file_candidates": [
-        "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-        "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-        "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+        "Native/Ambitions/Features/You/YouScreen.swift",
+        "Native/Ambitions/Features/You/YouRootSurface.swift",
+        "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
       ],
       "shared_components": [
         "Native/Ambitions/Features/Profile/ProfileAvailabilityCenterCard.swift",

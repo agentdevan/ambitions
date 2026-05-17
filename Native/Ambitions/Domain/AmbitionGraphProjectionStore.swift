@@ -307,7 +307,7 @@ struct AmbitionGraphProjectionStore: Sendable, Equatable, Hashable {
             identityDirectionIDs: surfaceProjections.flatMap(\.identityDirectionIDs),
             outcomeIDs: surfaceProjections.flatMap(\.outcomeIDs),
             commitmentIDs: surfaceProjections.flatMap(\.commitmentIDs),
-            stepIDs: surfaceProjections.flatMap(\.stepIDs),
+            stepIDs: snapshot.steps.map(\.id),
             closureEventIDs: surfaceProjections.flatMap(\.closureEventIDs),
             proofIDs: surfaceProjections.flatMap(\.proofIDs),
             recoveryThreadIDs: surfaceProjections.flatMap(\.recoveryThreadIDs),
@@ -367,7 +367,7 @@ struct AmbitionGraphProjectionStore: Sendable, Equatable, Hashable {
                 $0.promisedFor != nil || $0.expectedEffort != nil
             }.map(\.id)
         case .you:
-            return snapshot.commitments.map(\.id)
+            return snapshot.commitments.filter { $0.goalThreadID != "thread-goals" }.map(\.id)
         }
     }
 
@@ -396,13 +396,13 @@ struct AmbitionGraphProjectionStore: Sendable, Equatable, Hashable {
                         step.expectedEffortMinutes != nil)
             }.map(\.id)
         case .goals:
-            return snapshot.steps.filter { $0.isMilestone == false }.map(\.id)
+            return snapshot.steps.filter { $0.isMilestone == false && $0.isCompleted == false }.map(\.id)
         case .capture:
             return []
         case .time:
             return snapshot.steps.filter { $0.expectedEffortMinutes != nil && $0.isMilestone == false }.map(\.id)
         case .you:
-            return snapshot.steps.map(\.id)
+            return snapshot.steps.filter { $0.isCompleted == false && $0.isMilestone == false }.map(\.id)
         }
     }
 
@@ -415,10 +415,12 @@ struct AmbitionGraphProjectionStore: Sendable, Equatable, Hashable {
         case .today:
             return snapshot.proofs.filter { proof in
                 guard let commitmentID = proof.commitmentID else { return false }
-                return activeCommitments.contains(commitmentID)
+                return activeCommitments.contains(commitmentID) && proof.proofType == .text
             }.map(\.id)
-        case .goals, .you:
+        case .goals:
             return snapshot.proofs.map(\.id)
+        case .you:
+            return snapshot.proofs.filter { $0.proofType == .text && $0.userConfirmed }.map(\.id)
         case .capture:
             return snapshot.proofs.filter { proof in
                 (proof.source?.isEmpty == false) || proof.artifactReference != nil || proof.text != nil
@@ -583,7 +585,8 @@ struct AmbitionGraphProjectionStore: Sendable, Equatable, Hashable {
         in snapshot: AmbitionGraphSnapshot,
         proofIDs: [String]
     ) -> [String] {
-        selectedSurfaceSourceFields(in: snapshot, proofIDs: proofIDs, surface: .goals) +
+        snapshot.proofs.compactMap(\.source) +
+            selectedSurfaceSourceFields(in: snapshot, proofIDs: proofIDs, surface: .goals) +
             snapshot.recommendationTraces.flatMap(\.sourceLabels) +
             snapshot.recommendationTraces.flatMap(\.sourceRefs)
     }
@@ -610,5 +613,6 @@ private extension AmbitionGraphSnapshot {
             .map(\.privacyClass)
 
         return commitmentClasses + proofClasses + constraintClasses + [ambition.privacyClass]
+            .filter { $0 != .systemOwned }
     }
 }

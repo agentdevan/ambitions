@@ -10,15 +10,15 @@ final class YouFeatureServiceTests: XCTestCase {
 
         XCTAssertTrue(dashboard.hero.subtitle.contains("Your System"))
         XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
-        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-sync" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
-        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-accessibility" && $0.valueLabel == "Claims locked" }))
-        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-export-import" && $0.valueLabel == "Future planned" }))
-        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-notifications" && $0.valueLabel == "Not requested" }))
-        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-shortcuts" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
-        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-share" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-sync" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-accessibility" && $0.valueLabel == "Claims locked" }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-export-import" && $0.valueLabel == "Future planned" }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-notifications" && $0.valueLabel == "Not requested" }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-shortcuts" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-share" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
         XCTAssertTrue(dashboard.trustCenter.footer.contains("does not claim live sync"))
         XCTAssertFalse(dashboard.trustCenter.footer.contains("Batch 54"))
-        XCTAssertTrue(dashboard.accountSection.items.contains(where: { $0.id == "profile-account-billing" && $0.valueLabel == "Not active" }))
+        XCTAssertTrue(dashboard.accountSection.items.contains(where: { $0.id == "you-account-billing" && $0.valueLabel == "Not active" }))
         XCTAssertFalse(dashboard.hero.supportingTruth.contains("local device features"))
     }
 
@@ -57,8 +57,8 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.hero.title, "Your System")
         XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
         XCTAssertEqual(dashboard.preferences.accentFamily, .sage)
-        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-storage" && $0.valueLabel == "Local-only" }))
-        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-identity" && $0.detail == "No display name stored" }))
+        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "you-default-storage" && $0.valueLabel == "Local-only" }))
+        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "you-vault-identity" && $0.detail == "No display name stored" }))
     }
 
     func testDashboardUsesInjectedRuntimeSyncCapabilityStatus() async throws {
@@ -77,7 +77,7 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
 
-        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-sync" && $0.valueLabel == "Injected runtime trust posture." }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-sync" && $0.valueLabel == "Injected runtime trust posture." }))
     }
 
     func testDashboardMapsNotificationAuthorizationIntoNarrowTrustSurface() async throws {
@@ -92,8 +92,8 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.notificationAuthorization.statusLabel, "Allowed")
         XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
         XCTAssertNil(dashboard.notificationAuthorization.actionTitle)
-        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-notifications" && $0.valueLabel == "Allowed" }))
-        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-notifications" && $0.valueLabel == "Allowed" }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-notifications" && $0.valueLabel == "Allowed" }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-notifications" && $0.valueLabel == "Allowed" }))
     }
 
     func testDashboardMapsDeniedNotificationAuthorizationIntoConservativeTrustSurface() async throws {
@@ -109,7 +109,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
         XCTAssertNil(dashboard.notificationAuthorization.actionTitle)
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: {
-            $0.id == "profile-integration-notifications" &&
+            $0.id == "you-integration-notifications" &&
             $0.valueLabel == "Denied" &&
             ($0.subtitle?.contains("Denied in system settings") ?? false)
         }))
@@ -122,10 +122,10 @@ final class YouFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadYouDashboard()
 
         XCTAssertEqual(dashboard.contextVault.title, "Local memory map")
-        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-planning" }))
-        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-tab" }))
-        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-rituals" && $0.valueLabel == "Plan-owned" }))
-        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-widgets" }))
+        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "you-vault-planning" }))
+        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "you-default-tab" }))
+        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "you-default-rituals" && $0.valueLabel == "Plan-owned" }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-widgets" }))
         XCTAssertEqual(dashboard.appearanceStudio.title, "Appearance Studio")
     }
 
@@ -171,10 +171,10 @@ final class YouFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadYouDashboard()
 
         XCTAssertEqual(dashboard.controlRoom.entries.map(\.id), [
-            "profile-control-constitution",
-            "profile-control-memory",
-            "profile-control-corrections",
-            "profile-control-receipts"
+            "you-control-constitution",
+            "you-control-memory",
+            "you-control-corrections",
+            "you-control-receipts"
         ])
         XCTAssertEqual(dashboard.constitution.title, "Personal Operating Constitution")
         XCTAssertTrue(dashboard.constitution.rules.contains(where: { $0.id == "constitution-calendar" && $0.detail.contains("never silent") }))
@@ -274,7 +274,7 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.id == "vacation-away-time" &&
             $0.statusLabel == "Unavailable"
         }))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("You"))
+        XCTAssertTrue(AppTab.allCases.map(\.title).contains("You"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
     }
@@ -1036,7 +1036,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.memoryControls.items.contains(where: { $0.id == "profile-memory-corrections" && $0.valueLabel == "1 local" }))
         XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "profile-correction-active" && $0.valueLabel == "1 active" }))
         XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "profile-correction-ledger" && $0.valueLabel == "1 recent" }))
-        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-signals" && $0.detail.contains("1 recent ledger events") }))
+        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "you-vault-signals" && $0.detail.contains("1 recent ledger events") }))
     }
 
     func testPD15TrustHistoryCenterDistinguishesReceiptsProofSourceChangesPrivacyAndAutomation() async throws {
@@ -1142,7 +1142,7 @@ final class YouFeatureServiceTests: XCTestCase {
             "automation-trust"
         ])
         XCTAssertTrue(center.subtitle.contains("without treating setup as homework"))
-        XCTAssertTrue(visibleCopy.contains("Calendar awareness is Plan-owned"))
+        XCTAssertTrue(visibleCopy.contains("Calendar awareness is Time-owned"))
         XCTAssertTrue(visibleCopy.contains("Open time is not automatically filled"))
         XCTAssertTrue(visibleCopy.contains("Vacation is not free time by default"))
         XCTAssertTrue(visibleCopy.contains("Per-vacation override"))
@@ -1253,7 +1253,7 @@ final class YouFeatureServiceTests: XCTestCase {
         ])
         XCTAssertTrue(visibleCopy.contains("Capture to Goal proof"))
         XCTAssertTrue(visibleCopy.contains("Today completion to Goal proof"))
-        XCTAssertTrue(visibleCopy.contains("Plan reflow to receipt"))
+        XCTAssertTrue(visibleCopy.contains("Time reflow to receipt"))
         XCTAssertTrue(visibleCopy.contains("Goal change to You history"))
         XCTAssertTrue(visibleCopy.contains("Review in Today or Goal Detail"))
         XCTAssertTrue(visibleCopy.contains("Review in Plan or Receipts"))
