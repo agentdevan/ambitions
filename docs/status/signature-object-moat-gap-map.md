@@ -58,7 +58,7 @@ This map tracks moat alignment gaps by surface and next implementation sequence.
 
 ## Current Compatibility Seams
 
-- `Plan`, `PlanScreen`, `Profile`, `Captures` are compatibility terms retained as internal references.
+- `Plan`, `Profile`, `Captures` are compatibility terms retained as internal references.
 - This phase treats those terms as migration names only, not active user-facing truth.
 
 ## Next Implementation Sequence

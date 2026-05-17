@@ -1,10 +1,10 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct PlanTreatyCard: View {
+struct TimeTreatyCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let treaty: PlanTreatyState
+    let treaty: TimeTreatyState
 
     var body: some View {
         AppCard(state: treaty.visualState) {
@@ -38,7 +38,7 @@ struct PlanTreatyCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.treaty")
+        .accessibilityIdentifier("time.treaty")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
     }
@@ -80,10 +80,10 @@ private struct PlanTreatyTile: View {
     }
 }
 
-struct PlanCapacityEnvelopeCard: View {
+struct TimeCapacityEnvelopeCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let envelope: PlanCapacityEnvelopeState
+    let envelope: TimeCapacityEnvelopeState
 
     var body: some View {
         AppCard(state: envelope.visualState) {
@@ -106,13 +106,13 @@ struct PlanCapacityEnvelopeCard: View {
                 )
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    PlanKeyValueRow(label: "Pressure", value: envelope.pressure, state: envelope.visualState)
-                    PlanKeyValueRow(label: "Focus time", value: envelope.protectedFocus, state: .selected)
-                    PlanKeyValueRow(label: "Recovery margin", value: envelope.recoveryMargin, state: envelope.visualState)
+                    TimeKeyValueRow(label: "Pressure", value: envelope.pressure, state: envelope.visualState)
+                    TimeKeyValueRow(label: "Focus time", value: envelope.protectedFocus, state: .selected)
+                    TimeKeyValueRow(label: "Recovery margin", value: envelope.recoveryMargin, state: envelope.visualState)
                 }
             }
         }
-        .accessibilityIdentifier("plan.capacity-envelope")
+        .accessibilityIdentifier("time.capacity-envelope")
         .ambitionPanelAccessibility()
     }
 
@@ -145,7 +145,7 @@ struct PlanCapacityEnvelopeCard: View {
     }
 }
 
-struct PlanKeyValueRow: View {
+struct TimeKeyValueRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let label: String
@@ -171,10 +171,10 @@ struct PlanKeyValueRow: View {
     }
 }
 
-struct PlanGoalLifecycleRailCard: View {
+struct TimeGoalLifecycleRailCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let rail: PlanGoalLifecycleRailState
+    let rail: TimeGoalLifecycleRailState
 
     var body: some View {
         AppCard {
@@ -216,15 +216,15 @@ struct PlanGoalLifecycleRailCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.goal-lifecycle-rail")
+        .accessibilityIdentifier("time.goal-lifecycle-rail")
         .ambitionPanelAccessibility()
     }
 }
 
-struct PlanTimelineStripCard: View {
+struct TimeTimelineStripCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let strip: PlanTimelineStripState
+    let strip: TimeTimelineStripState
     let onOpenGoal: (GoalRouteTarget) -> Void
 
     var body: some View {
@@ -280,7 +280,7 @@ struct PlanTimelineStripCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.timeline-strip")
+        .accessibilityIdentifier("time.timeline-strip")
         .ambitionPanelAccessibility()
     }
 }

@@ -267,7 +267,7 @@ private struct WeeklyReviewCarryForwardCard: View {
 private struct WeeklyReviewContextCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let context: PlanWindowMagnetismState
+    let context: TimeWindowMagnetismState
 
     var body: some View {
         AppCard(state: context.visualState) {

@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
+struct TimeLifeShapeMapItem: Identifiable, Sendable, Hashable {
     let id: String
     let title: String
     let question: String
@@ -22,7 +22,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
     let symbolName: String
     let accessibilityIdentifier: String
 
-    init(shape: PlanLifeSuiteShapeState) {
+    init(shape: TimeLifeSuiteShapeState) {
         self.id = shape.id
         self.title = shape.title
         self.question = shape.question
@@ -64,7 +64,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         "Selects this LifeShape Field contour without changing Time or calendar."
     }
 
-    private static func pressureLevel(for shape: PlanLifeSuiteShapeState) -> Double {
+    private static func pressureLevel(for shape: TimeLifeSuiteShapeState) -> Double {
         switch (shape.kind, shape.visualState) {
         case (.week, .warning):
             return 0.84
@@ -81,7 +81,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    private static func capacityLabel(for shape: PlanLifeSuiteShapeState) -> String {
+    private static func capacityLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
             return shape.visualState == .warning ? "Tight day" : "Day can hold"
@@ -92,7 +92,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    private static func recoveryLabel(for shape: PlanLifeSuiteShapeState) -> String {
+    private static func recoveryLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
             return "Recovery: protect the clearest pocket."
@@ -103,7 +103,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    private static func protectedPocketLabel(for shape: PlanLifeSuiteShapeState) -> String {
+    private static func protectedPocketLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
             return "Protected pocket: keep the clearest opening guarded."
@@ -114,7 +114,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    private static func pressureFieldLabel(for shape: PlanLifeSuiteShapeState) -> String {
+    private static func pressureFieldLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.visualState {
         case .warning:
             return "Pressure field: visible and asking for review."
@@ -125,7 +125,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    private static func recoveryPocketLabel(for shape: PlanLifeSuiteShapeState) -> String {
+    private static func recoveryPocketLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
             return "Recovery pocket: space before the next ask."
@@ -136,7 +136,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    private static func milestoneRidgeLabel(for shape: PlanLifeSuiteShapeState) -> String {
+    private static func milestoneRidgeLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
             return "Milestone ridge: today's clearest plan edge."
@@ -147,7 +147,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    private static func commitmentLoadContourLabel(for shape: PlanLifeSuiteShapeState) -> String {
+    private static func commitmentLoadContourLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.visualState {
         case .warning:
             return "Commitment load contour: tight, qualitative only."
@@ -158,7 +158,7 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    private static func symbolName(for kind: PlanLifeSuiteShapeKind) -> String {
+    private static func symbolName(for kind: TimeLifeSuiteShapeKind) -> String {
         switch kind {
         case .day:
             return "sun.max"
@@ -170,21 +170,21 @@ struct PlanLifeShapeMapItem: Identifiable, Sendable, Hashable {
     }
 }
 
-struct PlanLifeShapeTimeCapacityMap: View {
+struct TimeLifeShapeTimeCapacityMap: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-    @State private var selectedItemID: PlanLifeShapeMapItem.ID?
+    @State private var selectedItemID: TimeLifeShapeMapItem.ID?
     @State private var revealsPressure = false
 
-    let suite: PlanLifeSuiteState
+    let suite: TimeLifeSuiteState
 
-    private var items: [PlanLifeShapeMapItem] {
-        suite.shapes.map(PlanLifeShapeMapItem.init(shape:))
+    private var items: [TimeLifeShapeMapItem] {
+        suite.shapes.map(TimeLifeShapeMapItem.init(shape:))
     }
 
-    private var selectedItem: PlanLifeShapeMapItem? {
+    private var selectedItem: TimeLifeShapeMapItem? {
         items.first { $0.id == selectedItemID } ?? items.first
     }
 
@@ -203,7 +203,7 @@ struct PlanLifeShapeTimeCapacityMap: View {
                     PlanLifeShapeSelectedContourPanel(item: selectedItem, revealsPressure: revealsPressure)
                 }
 
-                PlanLifeShapeDrillDownPanel(drillDown: suite.drillDown)
+                TimeLifeShapeDrillDownPanel(drillDown: suite.drillDown)
 
                 QuietActionButton(
                     revealsPressure ? "Hide pressure" : "Reveal pressure",
@@ -278,7 +278,7 @@ struct PlanLifeShapeTimeCapacityMap: View {
         }
     }
 
-    private func select(_ item: PlanLifeShapeMapItem) {
+    private func select(_ item: TimeLifeShapeMapItem) {
         withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) {
             selectedItemID = item.id
         }
@@ -288,7 +288,7 @@ struct PlanLifeShapeTimeCapacityMap: View {
 private struct PlanLifeShapeContourButton: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: PlanLifeShapeMapItem
+    let item: TimeLifeShapeMapItem
     let isSelected: Bool
     let revealsPressure: Bool
     let reduceMotion: Bool
@@ -440,7 +440,7 @@ private struct PlanLifeShapeContourButton: View {
 private struct PlanLifeShapeSelectedContourPanel: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: PlanLifeShapeMapItem
+    let item: TimeLifeShapeMapItem
     let revealsPressure: Bool
 
     var body: some View {
@@ -479,14 +479,14 @@ private struct PlanLifeShapeSelectedContourPanel: View {
 }
 
 #Preview("AFI09 Time LifeShape Field") {
-    PlanLifeShapeTimeCapacityMap(
-        suite: PlanLifeSuiteState(
+    TimeLifeShapeTimeCapacityMap(
+        suite: TimeLifeSuiteState(
             title: "Shape Time",
             subtitle: "LifeShape Field shows what the week can hold.",
             shapes: [
-                PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has a protected pocket and one planned block.", facts: ["Protected pocket visible."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .selected),
-                PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need lighter scope before the week feels believable.", facts: ["2 pressured days visible."], sourceLabel: "Based on goals and captures", boundaryLabel: "Confirm first", visualState: .warning),
-                PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included."], sourceLabel: "Based on active goals", boundaryLabel: "Broader than time slots", visualState: .default),
+                TimeLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has a protected pocket and one planned block.", facts: ["Protected pocket visible."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .selected),
+                TimeLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need lighter scope before the week feels believable.", facts: ["2 pressured days visible."], sourceLabel: "Based on goals and captures", boundaryLabel: "Confirm first", visualState: .warning),
+                TimeLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included."], sourceLabel: "Based on active goals", boundaryLabel: "Broader than time slots", visualState: .default),
             ],
             calendarBoundaryLabel: "Calendar stays optional",
             manualFallbackLabel: "Manual fallback available",

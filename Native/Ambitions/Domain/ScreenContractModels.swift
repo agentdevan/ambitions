@@ -574,8 +574,8 @@ enum ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Time/TimeScreen.swift", note: "Current Time surface"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Features/Plan/PlanFeatureService.swift", note: "Plan projection source"),
-            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift", note: "Focused Plan tests")
+            .init(kind: .sourceService, path: "Native/Ambitions/Features/Plan/TimeFeatureService.swift", note: "Plan projection source"),
+            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Plan/TimeFeatureServiceTests.swift", note: "Focused Plan tests")
         ]
     )
 

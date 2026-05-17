@@ -54,14 +54,16 @@ struct GoalsScreen: View {
                     GoalLifePathView(overview: overview)
                         .transition(.ambitionPanel)
 
-                    GoalsWeekPressureCard(summary: overview.weekPressureSummary)
-                        .transition(.ambitionPanel)
-                    GoalsPortfolioMaturityCard(summary: overview.maturitySummary)
-                        .transition(.ambitionPanel)
-                    GoalsLifecycleRailCard(segments: overview.lifecycleRail)
-                        .transition(.ambitionPanel)
-                    GoalStateChipsCard(chips: overview.stateChips)
-                        .transition(.ambitionPanel)
+                    if hasVisibleBoardContent(overview) {
+                        GoalsWeekPressureCard(summary: overview.weekPressureSummary)
+                            .transition(.ambitionPanel)
+                        GoalsPortfolioMaturityCard(summary: overview.maturitySummary)
+                            .transition(.ambitionPanel)
+                        GoalsLifecycleRailCard(segments: overview.lifecycleRail)
+                            .transition(.ambitionPanel)
+                        GoalStateChipsCard(chips: overview.stateChips)
+                            .transition(.ambitionPanel)
+                    }
 
                     if let activeCreationMessage {
                         AppCard(state: activeCreationMessage.state) {

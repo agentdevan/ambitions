@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-extension DayTimelineRail {
+extension RealityMeridianView {
     func fusedCurrentTimeCursor() -> some View {
         modifier(TodayRealityMeridianCurrentTimeFusionModifier())
             .accessibilityIdentifier("TodayRealityMeridianFusedRail")

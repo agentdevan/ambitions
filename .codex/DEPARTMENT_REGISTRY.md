@@ -89,7 +89,7 @@ This registry consolidates senior-department routing for Codex work. It is not p
 | Provider/backend assumptions | Deleted/quarantined | Privacy/Trust, Repo Hygiene | No active provider roots or backend architecture without approval. |
 | Large historical docs | Override-governed | Repo Hygiene | Header/ledger pass with patch-safe tooling. |
 | Old release/App Store/TestFlight language | Release-claim debt | Release | Current raw proof or demotion to historical/non-claim. |
-| `PlanScreen`, `.plan`, `planNavigation()`, `Native/Ambitions/Features/Plan/` | Internal compatibility seams | iOS Engineering | Scoped migration with tests and no user-facing IA regression. |
+| `.plan`, `planNavigation()` | Internal compatibility seams | iOS Engineering | Scoped migration with tests and no user-facing IA regression. |
 
 ## 6. Risk Register
 

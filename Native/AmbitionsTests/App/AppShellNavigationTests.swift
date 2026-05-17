@@ -337,7 +337,7 @@ final class AppShellNavigationTests: XCTestCase {
     @MainActor
     func testDemoPlanSurfaceProvidesGoalDetailRouteThatOpensInGoalsShell() async throws {
         let container = try await demoContainer()
-        let dashboard = try await container.planService.loadPlanDashboard(now: .now)
+        let dashboard = try await container.timeService.loadTimeDashboard(now: .now)
         let target = try XCTUnwrap(dashboard.goalShapingItems.first?.target)
 
         _ = try await container.goalsService.loadDetail(target: target)

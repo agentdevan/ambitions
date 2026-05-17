@@ -35,7 +35,7 @@ Today / Goals / Capture / Time / You
 - historical/supporting documentation language
 - an internal compatibility seam in current source code, tests, routes, or folder names
 
-Current implementation note: the live user-facing shell now exposes `Time` / `Shape Time`, while some internal owner names still use `Plan`, including `.plan`, `PlanScreen`, `planNavigation()`, and `Native/Ambitions/Features/Plan/`. Those internal names are compatibility debt, not active product language.
+Current implementation note: the live user-facing shell now exposes `Time` / `Shape Time`, while some internal owner names still use `Plan`, including `.plan` and `planNavigation()`. The features folder has been fully migrated from `Native/Ambitions/Features/Plan/` to `Native/Ambitions/Features/Time/` and `PlanScreen` to `TimeScreen` to align with the active top-level destination.
 
 ## Implemented repo foundations
 
@@ -46,7 +46,7 @@ The repo currently contains these native foundations:
 | Native app | `Native/Ambitions/`, `project.yml` app target | Implemented foundation |
 | SwiftUI shell | `Native/Ambitions/App/` | Implemented foundation |
 | Five user-facing destinations | Today, Goals, Capture, Time, You through app tab/shell code | Implemented foundation |
-| Time compatibility owner | `.plan`, `PlanScreen`, `planNavigation()`, `Native/Ambitions/Features/Plan/` | Internal compatibility seam |
+| Time compatibility owner | `.plan`, `planNavigation()` | Internal compatibility seam |
 | Persistence | SwiftData-backed repositories under `Native/Ambitions/Persistence/` | Implemented foundation where wired |
 | Design system package | `Sources/` / `AmbitionsDesignSystem` | Implemented foundation |
 | Widget UI package | `AppUI/Sources/` / `AmbitionsWidgetUI` | Implemented foundation |
@@ -62,8 +62,8 @@ The repo currently contains these native foundations:
 | Today | `Native/Ambitions/Features/Today/` | Runtime surface exists. Latest Signature Object maturity must still be validated against current canon. |
 | Goals | `Native/Ambitions/Features/Goals/` | Runtime surface exists. Some internal names and objects may still reflect older Mission Control-era implementation language. |
 | Capture | `Native/Ambitions/Features/Captures/` | User-facing destination is Capture. Internal folder/name compatibility remains. Composer-first foundation exists. |
-| Time | User-facing shell through `AppTab.title`, `AmbitionsRootView`, and `PlanScreen` compatibility owner | Runtime surface exists. Internal Plan naming remains compatibility debt. Current implementation is broader than the latest LifeShape Field ideal and should be treated as foundation, not final visual maturity. |
-| You | `Native/Ambitions/Features/Profile/` | User-facing destination is You. Internal Profile naming is compatibility debt, not active product language. |
+| Time | User-facing shell through `AppTab.title`, `AmbitionsRootView`, and `TimeScreen` | Runtime surface exists. Internal Plan folder naming has been fully migrated to Time. Current implementation is broader than the latest LifeShape Field ideal and should be treated as foundation, not final visual maturity. |
+| You | `Native/Ambitions/Features/You/` | User-facing destination is You. Internal Profile folder naming has been fully migrated to You, while some internal route wiring remains profile compatibility debt. |
 
 ## Implemented capability foundations
 

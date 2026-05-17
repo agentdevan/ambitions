@@ -64,13 +64,17 @@ struct TodayExecutionSupportPanels: View {
     let onAction: (TodayInlineAction) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
-            ForEach(state.supportingPanels) { panel in
-                TodayExecutionPanel(panel: panel, onAction: onAction)
-                    .accessibilityIdentifier(accessibilityID(for: panel))
+        if state.supportingPanels.isEmpty { return AnyView(EmptyView()) }
+        return AnyView(
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                ForEach(state.supportingPanels) { panel in
+                    TodayExecutionPanel(panel: panel, onAction: onAction)
+                        .accessibilityIdentifier(accessibilityID(for: panel))
+                }
             }
-        }
-        .accessibilityIdentifier("today.support-card")
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("today.support-panels")
+        )
     }
 
     private func accessibilityID(for panel: TodayExecutionPanelState) -> String {
@@ -106,30 +110,33 @@ struct TodayExecutionDeepDive: View {
     let onAction: (TodayInlineAction) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
-            ForEach(state.deeperSections) { section in
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    SectionHeader(
-                        eyebrow: "Detail",
-                        title: section.title,
-                        subtitle: "Available when needed."
-                    )
-                    ForEach(section.rows) { panel in
-                        TodayExecutionPanel(panel: panel, compact: true, onAction: onAction)
+        if state.deeperSections.isEmpty { return AnyView(EmptyView()) }
+        return AnyView(
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                ForEach(state.deeperSections) { section in
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Detail",
+                            title: section.title,
+                            subtitle: section.subtitle
+                        )
+                        ForEach(section.rows) { panel in
+                            TodayExecutionPanel(panel: panel, compact: true, onAction: onAction)
+                        }
                     }
+                    .padding(theme.spacing.md)
+                    .background(
+                        RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                            .fill(theme.colors.surfaceSecondary)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                            .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                    )
                 }
-                .padding(theme.spacing.md)
-                .background(
-                    RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                        .fill(theme.colors.surfaceSecondary)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-                )
             }
-        }
-        .accessibilityIdentifier("today.deep-dive")
+            .accessibilityIdentifier("today.deep-dive")
+        )
     }
 }
 

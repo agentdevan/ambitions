@@ -23,9 +23,9 @@ if [[ -z "$files" ]]; then
     Native/Ambitions/Features/Today/TodayDayRailPanels.swift \
     Native/Ambitions/Features/Goals/GoalsScreen.swift \
     Native/Ambitions/Features/Captures/CapturesScreen.swift \
-    Native/Ambitions/Features/Plan/PlanScreen.swift \
-    Native/Ambitions/Features/Profile/ProfileScreen.swift \
-    Native/Ambitions/Features/Profile/ProfileRootSurface.swift \
+    Native/Ambitions/Features/Time/TimeScreen.swift \
+    Native/Ambitions/Features/You/YouScreen.swift \
+    Native/Ambitions/Features/You/YouRootSurface.swift \
     Sources/Components/RichPanelPrimitives.swift)
   echo "No changed Swift UI files detected; scanning canonical top-level owner hints."
 fi

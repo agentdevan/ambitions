@@ -113,7 +113,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .proofSpine: "Proof Spine"
         case .capturePlacementShelf: "Atmosphere Composer"
         case .lifeShapeContourMap: "LifeShape Field"
-        case .personalSystemCenter: "User System You"
+        case .personalSystemCenter: "User System Profile"
         case .memoryLens: "Memory Lens"
         }
     }
@@ -285,6 +285,19 @@ enum DegradedStateOrchestrator {
             secondaryAction: rule.secondaryAction,
             tone: .selected,
             icon: rule.icon
+        )
+    }
+
+    static func timeEmpty() -> DegradedStatePresentation {
+        DegradedStatePresentation(
+            id: "degraded.time.empty",
+            kind: .empty,
+            title: "The LifeShape Field is open",
+            explanation: FlagshipObjectStateOwner.lifeShapeContourMap.emptyExplanation,
+            primaryAction: DegradedStateAction(title: "Create a goal", systemImage: AppTab.goals.systemImage, routingHint: .createGoal),
+            secondaryAction: DegradedStateAction(title: "Open Capture", systemImage: AppTab.captures.systemImage, routingHint: .captures),
+            tone: .selected,
+            icon: FlagshipObjectStateOwner.lifeShapeContourMap.icon
         )
     }
 

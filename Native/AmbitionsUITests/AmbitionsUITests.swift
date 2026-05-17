@@ -116,7 +116,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(
             scrollUntilElementExists("plan.goal-relationship-card", in: app, maxAttempts: 60)
-            || scrollUntilElementExists("plan.pressure-scrubber", in: app, maxAttempts: 60)
+            || scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 60)
         )
         XCTAssertTrue(scrollUntilElementExists("plan.goal-relationship-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.open-plan-habits-button", in: app))
@@ -516,15 +516,15 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(
             scrollUntilElementExists("plan.hero-card", in: app, maxAttempts: 24)
-            || scrollUntilElementExists("plan.pressure-scrubber", in: app, maxAttempts: 24)
+            || scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 24)
         )
-        XCTAssertTrue(scrollUntilElementExists("plan.timeline-strip", in: app))
+        XCTAssertTrue(scrollUntilElementExists("time.timeline-strip", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.weekly-plan-strip", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.calendar-awareness", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.calendar-boundary", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.recovery-maturity", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.execution-resilience", in: app))
+        XCTAssertTrue(scrollUntilElementExists("time.execution-resilience", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app))
     }
 
@@ -535,8 +535,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(
-            scrollUntilElementExists("plan.timeline-strip", in: app)
-            || scrollUntilElementExists("plan.pressure-scrubber", in: app)
+            scrollUntilElementExists("time.timeline-strip", in: app)
+            || scrollUntilElementExists("time.pressure-scrubber", in: app)
         )
         let scrubPoint = app.buttons["plan.scrubber.point.day-2"]
         XCTAssertTrue(scrubPoint.waitForExistence(timeout: 10))
@@ -544,7 +544,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertEqual(scrubPoint.value as? String, "selected")
 
         XCTAssertTrue(scrollUntilElementExists("plan.reality-reflow", in: app, maxAttempts: 20))
-        XCTAssertTrue(scrollUntilElementExists("plan.reflow-decision", in: app, maxAttempts: 20))
+        XCTAssertTrue(scrollUntilElementExists("time.reflow-decision", in: app, maxAttempts: 20))
     }
 
     private func makeApp(

@@ -1,12 +1,12 @@
 import XCTest
 @testable import Ambitions
 
-final class PlanFeatureServiceTests: XCTestCase {
+final class TimeFeatureServiceTests: XCTestCase {
     func testEmptyRepositoriesReturnOpenRealityModelWeek() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.mode, .empty)
         XCTAssertEqual(dashboard.emptyTitle, "No weekly pressure yet")
@@ -32,9 +32,9 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testActiveGoalsProduceElasticWeekAndGoalRelationshipSignals() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.mode, .active)
         XCTAssertEqual(dashboard.weekDays.count, 7)
@@ -60,9 +60,9 @@ final class PlanFeatureServiceTests: XCTestCase {
             CreateCaptureRequest(rawText: "Place workshop idea", sourceType: .todayQuickCapture),
             now: fixedDate
         )
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let shapes = Dictionary(uniqueKeysWithValues: dashboard.lifeSuite.shapes.map { ($0.kind, $0) })
 
         XCTAssertEqual(dashboard.lifeSuite.subtitle, "LifeShape Field shows what the week can hold.")
@@ -83,10 +83,10 @@ final class PlanFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "shape-tight-2", title: "Tight two"),
             makeWeekVisibleGoal(id: "shape-tight-3", title: "Tight three")
         ])
-        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
 
-        let items = dashboard.lifeSuite.shapes.map(PlanLifeShapeMapItem.init(shape:))
-        let weekItem = try XCTUnwrap(items.first { $0.id == PlanLifeSuiteShapeKind.week.rawValue })
+        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeMapItem.init(shape:))
+        let weekItem = try XCTUnwrap(items.first { $0.id == TimeLifeSuiteShapeKind.week.rawValue })
 
         XCTAssertEqual(items.map(\.accessibilityIdentifier), [
             "plan.life-shape-map.day_shape",
@@ -108,8 +108,8 @@ final class PlanFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "contour-tight-2", title: "Contour two"),
             makeWeekVisibleGoal(id: "contour-tight-3", title: "Contour three")
         ])
-        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
-        let items = dashboard.lifeSuite.shapes.map(PlanLifeShapeMapItem.init(shape:))
+        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeMapItem.init(shape:))
         let combined = items.map(\.accessibilityLabel).joined(separator: " ")
 
         XCTAssertEqual(items.count, 3)
@@ -135,7 +135,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         ])
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
-        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
         let drillDown = dashboard.lifeSuite.drillDown
@@ -188,9 +188,9 @@ final class PlanFeatureServiceTests: XCTestCase {
             CreateCaptureRequest(rawText: "Place dentist follow-up", sourceType: .todayQuickCapture),
             now: fixedDate
         )
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let shapes = Dictionary(uniqueKeysWithValues: dashboard.lifeSuite.shapes.map { ($0.kind, $0) })
 
         XCTAssertEqual(shapes[.day]?.title, "Day Shape")
@@ -226,9 +226,9 @@ final class PlanFeatureServiceTests: XCTestCase {
             CreateCaptureRequest(rawText: "Clarify the weekly commitment", sourceType: .todayQuickCapture),
             now: fixedDate
         )
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.believability.label, "Needs clarity")
         XCTAssertEqual(dashboard.believability.visualState, .warning)
@@ -241,9 +241,9 @@ final class PlanFeatureServiceTests: XCTestCase {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
         XCTAssertTrue(dashboard.secondaryDestinations.contains(where: { $0.id == "plan-habits" && $0.valueLabel != "0" }))
@@ -256,9 +256,9 @@ final class PlanFeatureServiceTests: XCTestCase {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let ritualDestination = try XCTUnwrap(dashboard.secondaryDestinations.first(where: { $0.planRoute == .habits }))
         let ritualLane = try XCTUnwrap(dashboard.resilience.lanes.first(where: { $0.planRoute == .habits }))
         let planCopy = [
@@ -287,7 +287,7 @@ final class PlanFeatureServiceTests: XCTestCase {
             CreateCaptureRequest(rawText: "Review the carry-forward tradeoff", sourceType: .todayQuickCapture),
             now: fixedDate
         )
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
         let dashboard = try await service.loadWeeklyReviewDashboard(now: fixedDate)
 
@@ -308,10 +308,10 @@ final class PlanFeatureServiceTests: XCTestCase {
             CreateCaptureRequest(rawText: "Prepare review packet", sourceType: .todayQuickCapture),
             now: fixedDate
         )
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
         let snapshot = try await service.loadSnapshot()
 
-        let baseline = try await service.loadPlanDashboard(now: fixedDate)
+        let baseline = try await service.loadTimeDashboard(now: fixedDate)
         let extracted = try await TimeFeatureService().makeDashboard(
             from: service,
             now: fixedDate,
@@ -335,12 +335,12 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testPK21TimeFeatureServiceMirrorsRecoveryReflowSemanticsWithoutMutation() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "pk21-reflow-\($0)", title: "PK21 overloaded \($0)") })
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
         let snapshot = try await service.loadSnapshot()
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
 
-        let baseline = try await service.loadPlanDashboard(now: fixedDate)
+        let baseline = try await service.loadTimeDashboard(now: fixedDate)
         let extracted = try await TimeFeatureService().makeDashboard(
             from: service,
             now: fixedDate,
@@ -364,7 +364,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals([
             makeWeekVisibleGoal(id: "pk21-weekly", title: "Weekly review pressure")
         ])
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
 
@@ -395,7 +395,7 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testPK21TimeFeatureServiceMakesCalendarAwareDashboardFromInjectedPermission() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal(id: "pk21-calendar", title: "Calendar-boundary check")])
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
         let snapshot = try await service.loadSnapshot()
         let extracted = try await TimeFeatureService().makeDashboard(
             from: service,
@@ -416,7 +416,7 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testPK21TimeFeatureServiceCanReuseInjectedSnapshotWithoutReloadingSource() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal(id: "pk21-snapshot", title: "Snapshot reuse")])
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
         let snapshot = try await service.loadSnapshot()
         let source = PK21TrackingTimeFeatureProjectionSource(service: service)
         let timeService = TimeFeatureService()
@@ -443,9 +443,9 @@ final class PlanFeatureServiceTests: XCTestCase {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let protectAction = try XCTUnwrap(dashboard.shapingActions.first(where: { $0.kind == .protect }))
 
         XCTAssertTrue(protectAction.goalTarget != nil || protectAction.planRoute != nil)
@@ -458,12 +458,12 @@ final class PlanFeatureServiceTests: XCTestCase {
         let ledger = InMemoryEventLedgerRepository()
         let repositories = try await makeRepositories(eventLedger: ledger)
         let calendar = RecordingPlanCalendarRealityService()
-        let service = RepositoryBackedPlanService(
+        let service = RepositoryBackedTimeService(
             repositories: repositories,
             calendarRealityService: calendar
         )
 
-        let dashboard = try await service.makePlanCalendarAware(now: fixedDate)
+        let dashboard = try await service.makeTimeCalendarAware(now: fixedDate)
         let events = try await ledger.fetchRecent(limit: 5)
 
         let requestedActionNames = await calendar.currentRequestedActionNames()
@@ -479,12 +479,12 @@ final class PlanFeatureServiceTests: XCTestCase {
 
     func testCalendarDeniedProducesManualFallbackWithoutFakeClaims() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedPlanService(
+        let service = RepositoryBackedTimeService(
             repositories: repositories,
             calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
         )
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.calendarAwareness.status, .denied)
         XCTAssertFalse(dashboard.calendarBoundary.canRequestCalendarRead)
@@ -506,9 +506,9 @@ final class PlanFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "goal-blocked", title: "Blocked goal", stepState: .blocked),
             makeWeekVisibleGoal(id: "goal-waiting", title: "Waiting goal", mode: .delegatedSupport, relationshipKind: .delegated)
         ])
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let counts = Dictionary(uniqueKeysWithValues: dashboard.lifecycleRail.segments.map { ($0.lifecycleState, $0.count) })
 
         XCTAssertGreaterThanOrEqual(counts[.active, default: 0], 1)
@@ -528,9 +528,9 @@ final class PlanFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "goal-future", title: "Future goal", state: .draft),
             makeWeekVisibleGoal(id: "goal-previous", title: "Previous goal", state: .archived, stepState: .completed)
         ])
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .active }))
         XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .future }))
@@ -543,12 +543,12 @@ final class PlanFeatureServiceTests: XCTestCase {
 
     func testCapacityEnvelopeUsesQualitativeStates() async throws {
         let lightRepositories = try await makeRepositories()
-        let lightDashboard = try await RepositoryBackedPlanService(repositories: lightRepositories).loadPlanDashboard(now: fixedDate)
+        let lightDashboard = try await RepositoryBackedTimeService(repositories: lightRepositories).loadTimeDashboard(now: fixedDate)
         XCTAssertEqual(lightDashboard.capacityEnvelope.label, "Light")
 
         let steadyRepositories = try await makeRepositories()
         try await steadyRepositories.goals.saveGoals([makeWeekVisibleGoal()])
-        let steadyDashboard = try await RepositoryBackedPlanService(repositories: steadyRepositories).loadPlanDashboard(now: fixedDate)
+        let steadyDashboard = try await RepositoryBackedTimeService(repositories: steadyRepositories).loadTimeDashboard(now: fixedDate)
         XCTAssertTrue(["Steady", "Tight"].contains(steadyDashboard.capacityEnvelope.label))
 
         let tightRepositories = try await makeRepositories()
@@ -557,12 +557,12 @@ final class PlanFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "tight-2", title: "Tight two"),
             makeWeekVisibleGoal(id: "tight-3", title: "Tight three")
         ])
-        let tightDashboard = try await RepositoryBackedPlanService(repositories: tightRepositories).loadPlanDashboard(now: fixedDate)
+        let tightDashboard = try await RepositoryBackedTimeService(repositories: tightRepositories).loadTimeDashboard(now: fixedDate)
         XCTAssertTrue(["Tight", "Overloaded"].contains(tightDashboard.capacityEnvelope.label))
 
         let overloadedRepositories = try await makeRepositories()
         try await overloadedRepositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "overloaded-\($0)", title: "Overloaded \($0)") })
-        let overloadedDashboard = try await RepositoryBackedPlanService(repositories: overloadedRepositories).loadPlanDashboard(now: fixedDate)
+        let overloadedDashboard = try await RepositoryBackedTimeService(repositories: overloadedRepositories).loadTimeDashboard(now: fixedDate)
         XCTAssertEqual(overloadedDashboard.capacityEnvelope.label, "Overloaded")
     }
 
@@ -571,9 +571,9 @@ final class PlanFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "pressure-\($0)", title: "Pressure \($0)") })
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
         let review = dashboard.pressureRecoveryReview
@@ -631,9 +631,9 @@ final class PlanFeatureServiceTests: XCTestCase {
             CreateCaptureRequest(rawText: "Waiting on partner response", sourceType: .todayQuickCapture),
             now: fixedDate
         )
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertFalse(dashboard.decisionDebt.items.isEmpty)
         XCTAssertFalse(dashboard.conflictCourt.conflicts.isEmpty)
@@ -645,9 +645,9 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testRealityReflowNoReflowNeededProducesCalmStillBelievableState() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.realityReflow.reasonKind, .stillBelievable)
         XCTAssertEqual(dashboard.realityReflow.title, "Plan is still believable")
@@ -660,9 +660,9 @@ final class PlanFeatureServiceTests: XCTestCase {
         let goals = (0..<6).map { makeWeekVisibleGoal(id: "reflow-overload-\($0)", title: "Reflow overload \($0)") }
         try await repositories.goals.saveGoals(goals)
         let before = try await repositories.goals.listGoals()
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let after = try await repositories.goals.listGoals()
 
         XCTAssertEqual(dashboard.realityReflow.reasonKind, .overloadedPlan)
@@ -675,9 +675,9 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testNoRecoveryMarginSuggestsSmallAdjustmentsBeforeBroadChanges() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "margin-\($0)", title: "Margin \($0)") })
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let orderedKinds = dashboard.recoveryGradient.options.map(\.kind)
 
         XCTAssertEqual(Array(orderedKinds.prefix(4)), [.protectOneItem, .shrinkAction, .splitAction, .moveLocalActionLater])
@@ -688,14 +688,14 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testBlockedAndWaitingPlanSurfacesAppropriateRealityReasons() async throws {
         let blockedRepositories = try await makeRepositories()
         try await blockedRepositories.goals.saveGoals([makeWeekVisibleGoal(id: "blocked-reflow", title: "Blocked reflow", stepState: .blocked)])
-        let blockedDashboard = try await RepositoryBackedPlanService(repositories: blockedRepositories).loadPlanDashboard(now: fixedDate)
+        let blockedDashboard = try await RepositoryBackedTimeService(repositories: blockedRepositories).loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(blockedDashboard.realityReflow.reasonKind, .blockedGoal)
         XCTAssertTrue(blockedDashboard.realityReflow.suggestions.contains(where: { $0.kind == .markWaiting }))
 
         let waitingRepositories = try await makeRepositories()
         try await waitingRepositories.captures.saveCaptures([makeWaitingCapture()])
-        let waitingDashboard = try await RepositoryBackedPlanService(repositories: waitingRepositories).loadPlanDashboard(now: fixedDate)
+        let waitingDashboard = try await RepositoryBackedTimeService(repositories: waitingRepositories).loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(waitingDashboard.realityReflow.reasonKind, .waitingOnPersonOrResource)
         XCTAssertTrue(waitingDashboard.realityReflow.suggestions.contains(where: { $0.kind == .markWaiting }))
@@ -704,12 +704,12 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testCalendarDeniedStillProducesManualRecoveryOptions() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
-        let service = RepositoryBackedPlanService(
+        let service = RepositoryBackedTimeService(
             repositories: repositories,
             calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
         )
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.calendarAwareness.status, .denied)
         XCTAssertTrue(dashboard.calendarBoundary.manualFallback.contains("Manual planning still works"))
@@ -720,9 +720,9 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testBroadReflowAndCalendarImpactingChangesRequireConfirmation() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "confirm-\($0)", title: "Confirm \($0)") })
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         let moveLater = try XCTUnwrap(dashboard.realityReflow.suggestions.first(where: { $0.kind == .moveLocalActionLater }))
         let drop = try XCTUnwrap(dashboard.realityReflow.suggestions.first(where: { $0.kind == .dropOptionalWork }))
@@ -737,9 +737,9 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testReceiptPreviewIncludesWouldChangeAndWouldNotChange() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "receipt-\($0)", title: "Receipt \($0)") })
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertFalse(dashboard.reflowReceiptPreview.whatChanged.isEmpty)
         XCTAssertFalse(dashboard.reflowReceiptPreview.whatWouldNotChange.isEmpty)
@@ -751,9 +751,9 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testSaveTheDayReturnsProtectedAdjustmentAndExplanation() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "save-\($0)", title: "Save \($0)") })
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
 
         XCTAssertFalse(dashboard.saveTheDay.protectedItem.isEmpty)
         XCTAssertFalse(dashboard.saveTheDay.adjustment.isEmpty)
@@ -770,9 +770,9 @@ final class PlanFeatureServiceTests: XCTestCase {
         ])
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
 
@@ -794,9 +794,9 @@ final class PlanFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "f12-\($0)", title: "F12 \($0)") })
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
 
@@ -835,7 +835,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
 
-        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
         let decision = dashboard.reflowDecision
@@ -862,7 +862,7 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testReflowCopyAvoidsFakeFutureSystemClaims() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "copy-\($0)", title: "Copy \($0)") })
-        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
 
         let copy = [
             dashboard.realityReflow.title,
@@ -895,9 +895,9 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testD15PlanScreenContractSnapshotSatisfiesImplementationGate() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
-        let service = RepositoryBackedPlanService(repositories: repositories)
+        let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let contract = ScreenContractRegistry.contract(for: .plan)
         let snapshot = dashboard.screenContractSnapshot()
 
@@ -913,7 +913,7 @@ final class PlanFeatureServiceTests: XCTestCase {
     }
 }
 
-private extension PlanFeatureServiceTests {
+private extension TimeFeatureServiceTests {
     var fixedDate: Date {
         ISO8601DateFormatter().date(from: GoalEngineFixtures.fixedNow) ?? Date(timeIntervalSince1970: 1_712_692_800)
     }
@@ -1093,27 +1093,27 @@ private extension PlanFeatureServiceTests {
 }
 
 private final class PK21TrackingTimeFeatureProjectionSource: TimeFeatureProjectionSource {
-    private let service: RepositoryBackedPlanService
+    private let service: RepositoryBackedTimeService
     private(set) var loadSnapshotCount = 0
 
-    init(service: RepositoryBackedPlanService) {
+    init(service: RepositoryBackedTimeService) {
         self.service = service
     }
 
-    func loadSnapshot() async throws -> RepositoryBackedPlanService.Snapshot {
+    func loadSnapshot() async throws -> RepositoryBackedTimeService.Snapshot {
         loadSnapshotCount += 1
         return try await service.loadSnapshot()
     }
 
-    func makeDashboard(snapshot: RepositoryBackedPlanService.Snapshot, now: Date, calendarAwareness: PlanCalendarAwarenessState) -> PlanDashboard {
+    func makeDashboard(snapshot: RepositoryBackedTimeService.Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard {
         service.makeDashboard(snapshot: snapshot, now: now, calendarAwareness: calendarAwareness)
     }
 
-    func makeWeeklyReviewDashboard(snapshot: RepositoryBackedPlanService.Snapshot, now: Date) -> WeeklyReviewDashboard {
+    func makeWeeklyReviewDashboard(snapshot: RepositoryBackedTimeService.Snapshot, now: Date) -> WeeklyReviewDashboard {
         service.makeWeeklyReviewDashboard(snapshot: snapshot, now: now)
     }
 
-    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> PlanCalendarAwarenessState {
+    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> TimeCalendarAwarenessState {
         service.makeCalendarAwarenessState(permission: permission, openWindowCount: openWindowCount)
     }
 }

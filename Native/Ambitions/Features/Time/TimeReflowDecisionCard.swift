@@ -1,11 +1,11 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct PlanReflowDecisionCard: View {
+struct TimeReflowDecisionCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let decision: PlanReflowDecisionState
-    let onActivate: (PlanReflowDecisionOptionState, PlanReflowDecisionActionKind) -> Void
+    let decision: TimeReflowDecisionState
+    let onActivate: (TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void
 
     var body: some View {
         AppCard(state: decision.visualState) {
@@ -33,7 +33,7 @@ struct PlanReflowDecisionCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(decision.options) { option in
-                        PlanReflowDecisionOptionRow(option: option, onActivate: onActivate)
+                        TimeReflowDecisionOptionRow(option: option, onActivate: onActivate)
                     }
                 }
 
@@ -43,17 +43,17 @@ struct PlanReflowDecisionCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("plan.reflow-decision")
+        .accessibilityIdentifier("time.reflow-decision")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
     }
 }
 
-private struct PlanReflowDecisionOptionRow: View {
+private struct TimeReflowDecisionOptionRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let option: PlanReflowDecisionOptionState
-    let onActivate: (PlanReflowDecisionOptionState, PlanReflowDecisionActionKind) -> Void
+    let option: TimeReflowDecisionOptionState
+    let onActivate: (TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -85,7 +85,7 @@ private struct PlanReflowDecisionOptionRow: View {
                 Spacer(minLength: theme.spacing.sm)
             }
 
-            PlanReflowBeforeAfterPreview(
+            TimeReflowBeforeAfterPreview(
                 preview: option.beforeAfterPreview,
                 visualState: option.visualState
             )
@@ -142,10 +142,10 @@ private struct PlanReflowDecisionOptionRow: View {
     }
 }
 
-private struct PlanReflowBeforeAfterPreview: View {
+private struct TimeReflowBeforeAfterPreview: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let preview: PlanReflowBeforeAfterShapePreviewState
+    let preview: TimeReflowBeforeAfterShapePreviewState
     let visualState: AmbitionVisualState
 
     var body: some View {

@@ -163,16 +163,16 @@ final class CaptureServiceTests: XCTestCase {
     func testRouteUpdatesCoverPlanWaitingOptionalDeliverableAndLedgerEvents() async throws {
         let repository = PreviewCaptureRepository()
         let ledger = InMemoryEventLedgerRepository()
-        let planService = DefaultCaptureService(repository: repository, eventLedger: ledger, idProvider: { "capture-route-plan" })
+        let timeService = DefaultCaptureService(repository: repository, eventLedger: ledger, idProvider: { "capture-route-plan" })
         let waitingService = DefaultCaptureService(repository: repository, eventLedger: ledger, idProvider: { "capture-route-waiting" })
         let optionalService = DefaultCaptureService(repository: repository, eventLedger: ledger, idProvider: { "capture-route-optional" })
         let deliverableService = DefaultCaptureService(repository: repository, eventLedger: ledger, idProvider: { "capture-route-deliverable" })
-        let plan = try await planService.createCapture(CreateCaptureRequest(rawText: "Plan this"), now: fixedNow)
+        let plan = try await timeService.createCapture(CreateCaptureRequest(rawText: "Plan this"), now: fixedNow)
         let waiting = try await waitingService.createCapture(CreateCaptureRequest(rawText: "Waiting on Kaylee"), now: fixedNow)
         let optional = try await optionalService.createCapture(CreateCaptureRequest(rawText: "Maybe learn piano someday"), now: fixedNow)
         let deliverable = try await deliverableService.createCapture(CreateCaptureRequest(rawText: "Add another song to the album"), now: fixedNow)
 
-        let planSeed = try await planService.routeToPlanSeed(id: plan.id, now: fixedNow.addingTimeInterval(60))
+        let planSeed = try await timeService.routeToPlanSeed(id: plan.id, now: fixedNow.addingTimeInterval(60))
         let waitingItem = try await waitingService.markAsWaiting(
             id: waiting.id,
             waitingMetadata: CaptureWaitingMetadata(waitingOn: "Kaylee"),

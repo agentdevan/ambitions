@@ -126,3 +126,15 @@ Engineers must execute the localized quality checks under `scripts/` before prop
 *   `accessibility-cognitive-load-scan.sh`: Validates touch-target constraints and Dynamic Type scalability.
 *   `cqs-architecture-boundary-scan.sh`: Audits target boundaries to prevent circular dependencies between Services and Features.
 *   `codex-forbidden-claim-scan.sh`: Prevents making false validation claims in the absence of verified local simulator/hardware proof.
+
+---
+
+## 🌐 Portals & Archives
+
+To navigate the historical, operational, and system layers of the Ambitions repository:
+*   [Frontend Portal](frontend/README.md): Active and historical UI canon.
+*   [Backend Portal](backend/README.md): Legacy cloud or database adapters.
+*   [Codex OS Portal](codex-os/README.md): AI/Codex developer workflow control plane.
+*   [Product Canon Portal](product-canon/README.md): Core design and canon artifacts.
+*   [Validation Portal](validation/README.md): Local simulator and accessibility checklist runs.
+*   [Historical Archive](history/README.md): Retained programs and batch-train records.

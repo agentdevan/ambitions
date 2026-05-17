@@ -1,6 +1,6 @@
 import Foundation
 
-extension RepositoryBackedPlanService {
+extension RepositoryBackedTimeService {
     func weekHorizon(now: Date) -> DateInterval {
         let calendar = Calendar.current
         let start = calendar.startOfDay(for: now)
@@ -8,10 +8,10 @@ extension RepositoryBackedPlanService {
         return DateInterval(start: start, end: end)
     }
 
-    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> PlanCalendarAwarenessState {
+    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> TimeCalendarAwarenessState {
         switch permission {
         case .readWrite:
-            return PlanCalendarAwarenessState(
+            return TimeCalendarAwarenessState(
                 status: .calendarAware,
                 title: "Calendar-aware planning",
                 detail: openWindowCount.map { "Time used calendar-derived busy time locally and found \($0) open window\($0 == 1 ? "" : "s")." }
@@ -24,7 +24,7 @@ extension RepositoryBackedPlanService {
                 canRequestCalendarRead: true
             )
         case .writeOnly:
-            return PlanCalendarAwarenessState(
+            return TimeCalendarAwarenessState(
                 status: .writeOnly,
                 title: "Calendar write is available",
                 detail: "Time can write confirmed blocks, but it cannot read availability until calendar read access is granted.",
@@ -36,7 +36,7 @@ extension RepositoryBackedPlanService {
                 canRequestCalendarRead: true
             )
         case .denied, .restricted:
-            return PlanCalendarAwarenessState(
+            return TimeCalendarAwarenessState(
                 status: .denied,
                 title: "Time works without Calendar",
                 detail: "Calendar access is unavailable, so Time uses Ambitions data and baseline windows without reading events.",
@@ -48,7 +48,7 @@ extension RepositoryBackedPlanService {
                 canRequestCalendarRead: false
             )
         case .notDetermined:
-            return PlanCalendarAwarenessState(
+            return TimeCalendarAwarenessState(
                 status: .baseline,
                 title: "Make Time calendar-aware",
                 detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
@@ -60,7 +60,7 @@ extension RepositoryBackedPlanService {
                 canRequestCalendarRead: true
             )
         case .unavailable:
-            return PlanCalendarAwarenessState(
+            return TimeCalendarAwarenessState(
                 status: .unavailable,
                 title: "Calendar-aware mode unavailable",
                 detail: "Time is using Ambitions data only in this runtime.",

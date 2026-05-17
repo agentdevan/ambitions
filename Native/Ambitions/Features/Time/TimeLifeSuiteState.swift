@@ -1,14 +1,14 @@
 import AmbitionsDesignSystem
 import Foundation
 
-enum PlanLifeSuiteShapeKind: String, Sendable, CaseIterable {
+enum TimeLifeSuiteShapeKind: String, Sendable, CaseIterable {
     case day = "day_shape"
     case week = "week_shape"
     case life = "life_shape"
 }
 
-struct PlanLifeSuiteShapeState: Identifiable, Sendable {
-    let kind: PlanLifeSuiteShapeKind
+struct TimeLifeSuiteShapeState: Identifiable, Sendable {
+    let kind: TimeLifeSuiteShapeKind
     let title: String
     let question: String
     let summary: String
@@ -20,11 +20,11 @@ struct PlanLifeSuiteShapeState: Identifiable, Sendable {
     var id: String { kind.rawValue }
 }
 
-struct PlanLifeSuiteState: Sendable {
+struct TimeLifeSuiteState: Sendable {
     let title: String
     let subtitle: String
-    let shapes: [PlanLifeSuiteShapeState]
-    let drillDown: PlanLifeShapeDrillDownState
+    let shapes: [TimeLifeSuiteShapeState]
+    let drillDown: TimeLifeShapeDrillDownState
     let calendarBoundaryLabel: String
     let manualFallbackLabel: String
     let trustLabel: String
@@ -32,8 +32,8 @@ struct PlanLifeSuiteState: Sendable {
     init(
         title: String,
         subtitle: String,
-        shapes: [PlanLifeSuiteShapeState],
-        drillDown: PlanLifeShapeDrillDownState = .baseline,
+        shapes: [TimeLifeSuiteShapeState],
+        drillDown: TimeLifeShapeDrillDownState = .baseline,
         calendarBoundaryLabel: String,
         manualFallbackLabel: String,
         trustLabel: String
@@ -48,7 +48,7 @@ struct PlanLifeSuiteState: Sendable {
     }
 }
 
-struct PlanLifeShapeDrillDownItemState: Identifiable, Sendable, Hashable {
+struct TimeLifeShapeDrillDownItemState: Identifiable, Sendable, Hashable {
     let id: String
     let title: String
     let value: String
@@ -56,7 +56,7 @@ struct PlanLifeShapeDrillDownItemState: Identifiable, Sendable, Hashable {
     let visualState: AmbitionVisualState
 }
 
-struct PlanLifeShapeDrillDownState: Sendable {
+struct TimeLifeShapeDrillDownState: Sendable {
     let title: String
     let subtitle: String
     let rhythmLabel: String
@@ -66,9 +66,9 @@ struct PlanLifeShapeDrillDownState: Sendable {
     let freeTimeLabel: String
     let recoverySpaceLabel: String
     let commitmentLoadLabel: String
-    let items: [PlanLifeShapeDrillDownItemState]
+    let items: [TimeLifeShapeDrillDownItemState]
 
-    static let baseline = PlanLifeShapeDrillDownState(
+    static let baseline = TimeLifeShapeDrillDownState(
         title: "LifeShape Field detail",
         subtitle: "Longer-range shape stays explanatory, not event-like.",
         rhythmLabel: "Rhythm: no pattern loaded yet.",
@@ -96,15 +96,15 @@ struct PlanLifeShapeDrillDownState: Sendable {
     }
 }
 
-struct PlanLifeSuiteProjector: Sendable {
+struct TimeLifeSuiteProjector: Sendable {
     func project(
-        weekDays: [PlanElasticWeekDayState],
-        calendarAwareness: PlanCalendarAwarenessState,
+        weekDays: [TimeElasticWeekDayState],
+        calendarAwareness: TimeCalendarAwarenessState,
         openCaptureCount: Int,
         activeGoalCount: Int,
-        mode: PlanDashboardMode
-    ) -> PlanLifeSuiteState {
-        PlanLifeSuiteState(
+        mode: TimeDashboardMode
+    ) -> TimeLifeSuiteState {
+        TimeLifeSuiteState(
             title: "Shape Time",
             subtitle: "LifeShape Field shows what the week can hold.",
             shapes: [
@@ -123,9 +123,9 @@ struct PlanLifeSuiteProjector: Sendable {
         )
     }
 
-    private func dayShape(weekDays: [PlanElasticWeekDayState]) -> PlanLifeSuiteShapeState {
+    private func dayShape(weekDays: [TimeElasticWeekDayState]) -> TimeLifeSuiteShapeState {
         let today = weekDays.first
-        return PlanLifeSuiteShapeState(
+        return TimeLifeSuiteShapeState(
             kind: .day,
             title: "Day Shape",
             question: "What can this day honestly hold?",
@@ -138,7 +138,7 @@ struct PlanLifeSuiteProjector: Sendable {
         )
     }
 
-    private func weekShape(weekDays: [PlanElasticWeekDayState], openCaptureCount: Int, mode: PlanDashboardMode) -> PlanLifeSuiteShapeState {
+    private func weekShape(weekDays: [TimeElasticWeekDayState], openCaptureCount: Int, mode: TimeDashboardMode) -> TimeLifeSuiteShapeState {
         let pressuredDays = weekDays.filter { [.tight, .fragile, .overloaded].contains($0.level) }.count
         let summary: String
         if mode == .empty {
@@ -149,7 +149,7 @@ struct PlanLifeSuiteProjector: Sendable {
             summary = "The week has visible room and no overloaded day in the current plan."
         }
 
-        return PlanLifeSuiteShapeState(
+        return TimeLifeSuiteShapeState(
             kind: .week,
             title: "Week Shape",
             question: "Does the week still fit?",
@@ -167,8 +167,8 @@ struct PlanLifeSuiteProjector: Sendable {
         )
     }
 
-    private func lifeShape(activeGoalCount: Int) -> PlanLifeSuiteShapeState {
-        PlanLifeSuiteShapeState(
+    private func lifeShape(activeGoalCount: Int) -> TimeLifeSuiteShapeState {
+        TimeLifeSuiteShapeState(
             kind: .life,
             title: "Life Shape",
             question: "Is Time still pointed at the life you are building?",
@@ -185,7 +185,7 @@ struct PlanLifeSuiteProjector: Sendable {
         )
     }
 
-    private func dayShapeFacts(_ today: PlanElasticWeekDayState?) -> [String] {
+    private func dayShapeFacts(_ today: TimeElasticWeekDayState?) -> [String] {
         guard let today else {
             return ["Manual shaping is available.", "Nothing moves without review."]
         }
@@ -197,7 +197,7 @@ struct PlanLifeSuiteProjector: Sendable {
     }
 
     private func weekShapeFacts(
-        weekDays: [PlanElasticWeekDayState],
+        weekDays: [TimeElasticWeekDayState],
         pressuredDays: Int,
         openCaptureCount: Int
     ) -> [String] {
@@ -209,10 +209,10 @@ struct PlanLifeSuiteProjector: Sendable {
     }
 
     private func lifeShapeDrillDown(
-        weekDays: [PlanElasticWeekDayState],
+        weekDays: [TimeElasticWeekDayState],
         activeGoalCount: Int,
         openCaptureCount: Int
-    ) -> PlanLifeShapeDrillDownState {
+    ) -> TimeLifeShapeDrillDownState {
         let pressuredDays = weekDays.filter { [.tight, .fragile, .overloaded].contains($0.level) }.count
         let openDays = weekDays.filter { $0.level == .open }.count
         let protectedBlocks = weekDays.flatMap(\.blocks).filter { $0.kind == .protected || $0.kind == .fixed }
@@ -226,7 +226,7 @@ struct PlanLifeSuiteProjector: Sendable {
             ? "Milestones: no active milestone needs a wider lane yet."
             : "Milestones: \(milestoneTitles.joined(separator: ", ")) shape the longer arc."
 
-        return PlanLifeShapeDrillDownState(
+        return TimeLifeShapeDrillDownState(
             title: "LifeShape Field detail",
             subtitle: "Longer-range planning explains rhythm, pressure, recovery, and milestones without becoming an event list.",
             rhythmLabel: rhythmLabel,
@@ -247,7 +247,7 @@ struct PlanLifeSuiteProjector: Sendable {
                 ? "Commitment load: no visible commitments are crowding the shape."
                 : "Commitment load: \(allBlocks.count) visible block\((allBlocks.count == 1) ? "" : "s") across active planning.",
             items: [
-                PlanLifeShapeDrillDownItemState(
+                TimeLifeShapeDrillDownItemState(
                     id: "life-areas",
                     title: "Life areas",
                     value: activeGoalCount == 0 ? "Quiet" : "\(activeGoalCount) active",
@@ -256,7 +256,7 @@ struct PlanLifeSuiteProjector: Sendable {
                         : "Active goals are the source for longer-range shape.",
                     visualState: activeGoalCount == 0 ? .default : .selected
                 ),
-                PlanLifeShapeDrillDownItemState(
+                TimeLifeShapeDrillDownItemState(
                     id: "pressure-weeks",
                     title: "Pressure weeks",
                     value: pressuredDays == 0 ? "Clear" : "\(pressuredDays) visible",
@@ -265,7 +265,7 @@ struct PlanLifeSuiteProjector: Sendable {
                         : "Pressure needs relief before the shape grows.",
                     visualState: pressureState
                 ),
-                PlanLifeShapeDrillDownItemState(
+                TimeLifeShapeDrillDownItemState(
                     id: "milestones",
                     title: "Milestones",
                     value: milestoneTitles.isEmpty ? "None visible" : "\(milestoneTitles.count) visible",
@@ -273,7 +273,7 @@ struct PlanLifeSuiteProjector: Sendable {
                         ?? "Milestones appear when active plans carry visible steps.",
                     visualState: milestoneTitles.isEmpty ? .default : .selected
                 ),
-                PlanLifeShapeDrillDownItemState(
+                TimeLifeShapeDrillDownItemState(
                     id: "protected-time",
                     title: "Protected time",
                     value: protectedBlocks.isEmpty ? "Clear" : "\(protectedBlocks.count) protected",
@@ -282,7 +282,7 @@ struct PlanLifeSuiteProjector: Sendable {
                         : "Protected time stays visible before any reflow.",
                     visualState: protectedBlocks.isEmpty ? .success : .warning
                 ),
-                PlanLifeShapeDrillDownItemState(
+                TimeLifeShapeDrillDownItemState(
                     id: "free-time",
                     title: "Free-time bands",
                     value: openDays == 0 ? "Tight" : "\(openDays) open",
@@ -291,7 +291,7 @@ struct PlanLifeSuiteProjector: Sendable {
                         : "Open room is recovery space, not automatic capacity.",
                     visualState: openDays == 0 ? .warning : .success
                 ),
-                PlanLifeShapeDrillDownItemState(
+                TimeLifeShapeDrillDownItemState(
                     id: "commitment-load",
                     title: "Commitment load",
                     value: allBlocks.isEmpty ? "Light" : "\(allBlocks.count) visible",

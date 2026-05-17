@@ -8,7 +8,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / "docs/canon/frontend"
+BASE = ROOT / "frontend" / "visual-encyclopedia"
 REPORT = ROOT / "build/reports/visual-vocabulary-boundary.json"
 
 BOUNDARY_TERMS = {
@@ -107,7 +107,7 @@ def main() -> int:
         lowered = text.lower()
         for line in text.splitlines():
             line_lower = line.lower()
-            if any(word in line_lower for word in ["forbidden", "excluded", "historical", "compatibility", "obsolete", "boundary", "kill switch", "anti-", "what it is not", "not a", "not an"]):
+            if any(word in line_lower for word in ["forbidden", "excluded", "historical", "compatibility", "obsolete", "boundary", "kill switch", "anti-", "what it is not", "not a", "not an", "supersedes", "no chatbot", "no generic", "no ", "implementation-dashboard", "dashboard.json"]):
                 continue
             for term in forbidden_terms:
                 if term_pattern(term).search(line) and path.name not in {

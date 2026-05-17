@@ -1,6 +1,6 @@
 import Foundation
 
-extension PlanDashboard {
+extension TimeDashboard {
     func screenContractSnapshot(
         topLevelTabTitles: [String] = ScreenContractValidator.canonicalTopLevelTabs
     ) -> ScreenContractImplementationSnapshot {

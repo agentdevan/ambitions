@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-enum PlanReflowDecisionOptionKind: String, Sendable, CaseIterable {
+enum TimeReflowDecisionOptionKind: String, Sendable, CaseIterable {
     case keepPlan = "keep_plan"
     case makeSmaller = "make_smaller"
     case moveLater = "move_later"
@@ -32,7 +32,7 @@ enum PlanReflowDecisionOptionKind: String, Sendable, CaseIterable {
     }
 }
 
-enum PlanReflowDecisionActionKind: String, Sendable, CaseIterable, Hashable {
+enum TimeReflowDecisionActionKind: String, Sendable, CaseIterable, Hashable {
     case accept
     case edit
     case decline
@@ -54,8 +54,8 @@ enum PlanReflowDecisionActionKind: String, Sendable, CaseIterable, Hashable {
     }
 }
 
-struct PlanReflowDecisionActionState: Identifiable, Sendable, Hashable {
-    let kind: PlanReflowDecisionActionKind
+struct TimeReflowDecisionActionState: Identifiable, Sendable, Hashable {
+    let kind: TimeReflowDecisionActionKind
     let title: String
     let detail: String
     let visualState: AmbitionVisualState
@@ -64,9 +64,9 @@ struct PlanReflowDecisionActionState: Identifiable, Sendable, Hashable {
     var id: String { kind.rawValue }
 }
 
-struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
+struct TimeReflowDecisionOptionState: Identifiable, Sendable, Hashable {
     let id: String
-    let kind: PlanReflowDecisionOptionKind
+    let kind: TimeReflowDecisionOptionKind
     let title: String
     let detail: String
     let whatChangedLabel: String
@@ -74,19 +74,19 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
     let impactedStepsLabel: String
     let capacityImpactLabel: String
     let protectedTimeImpactLabel: String
-    let beforeAfterPreview: PlanReflowBeforeAfterShapePreviewState
+    let beforeAfterPreview: TimeReflowBeforeAfterShapePreviewState
     let impactLabel: String
     let sourceLabel: String
     let trustLabel: String
     let boundaryLabel: String
-    let actions: [PlanReflowDecisionActionState]
+    let actions: [TimeReflowDecisionActionState]
     let visualState: AmbitionVisualState
     let target: GoalRouteTarget?
     let timeRoute: TimeRouteTarget?
 
     init(
         id: String,
-        kind: PlanReflowDecisionOptionKind,
+        kind: TimeReflowDecisionOptionKind,
         title: String,
         detail: String,
         whatChangedLabel: String = "What changed: review before changing the plan.",
@@ -94,12 +94,12 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
         impactedStepsLabel: String = "Impacted steps: review before anything moves.",
         capacityImpactLabel: String = "Capacity impact: reviewed before mutation.",
         protectedTimeImpactLabel: String = "Protected time impact: unchanged until you decide.",
-        beforeAfterPreview: PlanReflowBeforeAfterShapePreviewState = .unchanged,
+        beforeAfterPreview: TimeReflowBeforeAfterShapePreviewState = .unchanged,
         impactLabel: String,
         sourceLabel: String,
         trustLabel: String,
         boundaryLabel: String,
-        actions: [PlanReflowDecisionActionState] = PlanReflowDecisionOptionState.defaultActions,
+        actions: [TimeReflowDecisionActionState] = TimeReflowDecisionOptionState.defaultActions,
         visualState: AmbitionVisualState,
         target: GoalRouteTarget?,
         timeRoute: TimeRouteTarget?
@@ -139,23 +139,23 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
         ].joined(separator: ". ")
     }
 
-    private static var defaultActions: [PlanReflowDecisionActionState] {
+    private static var defaultActions: [TimeReflowDecisionActionState] {
         [
-            PlanReflowDecisionActionState(
+            TimeReflowDecisionActionState(
                 kind: .accept,
                 title: "Accept",
                 detail: "Review before applying",
                 visualState: .selected,
                 isEnabled: false
             ),
-            PlanReflowDecisionActionState(
+            TimeReflowDecisionActionState(
                 kind: .edit,
                 title: "Edit",
                 detail: "Review details first",
                 visualState: .default,
                 isEnabled: false
             ),
-            PlanReflowDecisionActionState(
+            TimeReflowDecisionActionState(
                 kind: .decline,
                 title: "Decline",
                 detail: "Keep plan as-is",
@@ -166,14 +166,14 @@ struct PlanReflowDecisionOptionState: Identifiable, Sendable, Hashable {
     }
 }
 
-struct PlanReflowBeforeAfterShapePreviewState: Sendable, Hashable {
+struct TimeReflowBeforeAfterShapePreviewState: Sendable, Hashable {
     let title: String
     let beforeLabel: String
     let afterLabel: String
     let shapeChangeLabel: String
     let receiptPreviewLabel: String
 
-    static let unchanged = PlanReflowBeforeAfterShapePreviewState(
+    static let unchanged = TimeReflowBeforeAfterShapePreviewState(
         title: "Before / after",
         beforeLabel: "Before: current plan stays visible.",
         afterLabel: "After: no plan shape changes until you choose.",
@@ -192,7 +192,7 @@ struct PlanReflowBeforeAfterShapePreviewState: Sendable, Hashable {
     }
 }
 
-struct PlanReflowDecisionState: Sendable {
+struct TimeReflowDecisionState: Sendable {
     let title: String
     let subtitle: String
     let sourceLabel: String
@@ -200,17 +200,17 @@ struct PlanReflowDecisionState: Sendable {
     let reasonLabel: String
     let recoveryLabel: String
     let receiptLabel: String
-    let options: [PlanReflowDecisionOptionState]
+    let options: [TimeReflowDecisionOptionState]
     let visualState: AmbitionVisualState
 }
 
-struct PlanReflowDecisionProjector: Sendable {
+struct TimeReflowDecisionProjector: Sendable {
     func project(
-        reflow: PlanRealityReflowState,
-        recoveryEntry: PlanRecoveryEntryState,
-        saveTheDay: PlanSaveTheDayState,
-        receiptPreview: PlanReflowReceiptPreviewState
-    ) -> PlanReflowDecisionState {
+        reflow: TimeRealityReflowState,
+        recoveryEntry: TimeRecoveryEntryState,
+        saveTheDay: TimeSaveTheDayState,
+        receiptPreview: TimeReflowReceiptPreviewState
+    ) -> TimeReflowDecisionState {
         let sourceLabel = "Based on Time"
         let trustLabel = "No silent changes"
         let options = preferredOptions(
@@ -221,7 +221,7 @@ struct PlanReflowDecisionProjector: Sendable {
             trustLabel: trustLabel
         )
 
-        return PlanReflowDecisionState(
+        return TimeReflowDecisionState(
             title: "Reflow decisions",
             subtitle: reflow.reasonKind == .stillBelievable
                 ? "Time still holds together. Keep the path visible unless you choose to adjust it."
@@ -237,12 +237,12 @@ struct PlanReflowDecisionProjector: Sendable {
     }
 
     private func preferredOptions(
-        from suggestions: [PlanReflowSuggestionState],
+        from suggestions: [TimeReflowSuggestionState],
         reasonLabel: String,
-        receiptPreview: PlanReflowReceiptPreviewState,
+        receiptPreview: TimeReflowReceiptPreviewState,
         sourceLabel: String,
         trustLabel: String
-    ) -> [PlanReflowDecisionOptionState] {
+    ) -> [TimeReflowDecisionOptionState] {
         let mapped = suggestions.map { suggestion in
             option(
                 from: suggestion,
@@ -252,7 +252,7 @@ struct PlanReflowDecisionProjector: Sendable {
                 trustLabel: trustLabel
             )
         }
-        let prioritizedKinds: [PlanReflowDecisionOptionKind] = [
+        let prioritizedKinds: [TimeReflowDecisionOptionKind] = [
             .keepPlan,
             .protectTime,
             .makeSmaller,
@@ -261,7 +261,7 @@ struct PlanReflowDecisionProjector: Sendable {
             .recover
         ]
 
-        var result: [PlanReflowDecisionOptionState] = []
+        var result: [TimeReflowDecisionOptionState] = []
         for kind in prioritizedKinds {
             if let option = mapped.first(where: { $0.kind == kind }),
                result.contains(where: { $0.kind == kind }) == false {
@@ -270,17 +270,17 @@ struct PlanReflowDecisionProjector: Sendable {
         }
 
         if result.isEmpty {
-            result.append(PlanReflowDecisionOptionState(
+            result.append(TimeReflowDecisionOptionState(
                 id: "reflow-decision-keep-plan",
                 kind: .keepPlan,
-                title: PlanReflowDecisionOptionKind.keepPlan.title,
+                title: TimeReflowDecisionOptionKind.keepPlan.title,
                 detail: "Leave the plan unchanged until there is enough evidence to adjust it.",
                 whatChangedLabel: "What changed: nothing yet.",
                 whyChangedLabel: "Why: the plan does not need a reflow decision.",
                 impactedStepsLabel: "Impacted steps: none.",
                 capacityImpactLabel: "Capacity impact: unchanged.",
                 protectedTimeImpactLabel: "Protected time impact: unchanged.",
-                beforeAfterPreview: PlanReflowBeforeAfterShapePreviewState(
+                beforeAfterPreview: TimeReflowBeforeAfterShapePreviewState(
                     title: "Before / after",
                     beforeLabel: "Before: current plan stays visible.",
                     afterLabel: "After: plan remains unchanged.",
@@ -302,15 +302,15 @@ struct PlanReflowDecisionProjector: Sendable {
     }
 
     private func option(
-        from suggestion: PlanReflowSuggestionState,
+        from suggestion: TimeReflowSuggestionState,
         reasonLabel: String,
-        receiptPreview: PlanReflowReceiptPreviewState,
+        receiptPreview: TimeReflowReceiptPreviewState,
         sourceLabel: String,
         trustLabel: String
-    ) -> PlanReflowDecisionOptionState {
+    ) -> TimeReflowDecisionOptionState {
         let kind = decisionKind(for: suggestion.kind)
         let canNavigate = suggestion.target != nil || suggestion.timeRoute != nil
-        return PlanReflowDecisionOptionState(
+        return TimeReflowDecisionOptionState(
             id: "reflow-decision-\(kind.rawValue)-\(suggestion.id)",
             kind: kind,
             title: kind.title,
@@ -335,7 +335,7 @@ struct PlanReflowDecisionProjector: Sendable {
         )
     }
 
-    private func decisionKind(for suggestionKind: PlanReflowSuggestionKind) -> PlanReflowDecisionOptionKind {
+    private func decisionKind(for suggestionKind: TimeReflowSuggestionKind) -> TimeReflowDecisionOptionKind {
         switch suggestionKind {
         case .keepPlanUnchanged:
             .keepPlan
@@ -355,23 +355,23 @@ struct PlanReflowDecisionProjector: Sendable {
     private func actions(
         canNavigate: Bool,
         confirmation: String = "Safe local suggestion"
-    ) -> [PlanReflowDecisionActionState] {
+    ) -> [TimeReflowDecisionActionState] {
         [
-            PlanReflowDecisionActionState(
+            TimeReflowDecisionActionState(
                 kind: .accept,
                 title: "Accept",
                 detail: confirmation,
                 visualState: .selected,
                 isEnabled: canNavigate
             ),
-            PlanReflowDecisionActionState(
+            TimeReflowDecisionActionState(
                 kind: .edit,
                 title: "Edit",
                 detail: "Review details first",
                 visualState: .default,
                 isEnabled: canNavigate
             ),
-            PlanReflowDecisionActionState(
+            TimeReflowDecisionActionState(
                 kind: .decline,
                 title: "Decline",
                 detail: "Keep plan as-is",
@@ -381,7 +381,7 @@ struct PlanReflowDecisionProjector: Sendable {
         ]
     }
 
-    private func whatChangedLabel(for suggestion: PlanReflowSuggestionState) -> String {
+    private func whatChangedLabel(for suggestion: TimeReflowSuggestionState) -> String {
         switch suggestion.kind {
         case .keepPlanUnchanged:
             return "What changed: nothing yet."
@@ -408,7 +408,7 @@ struct PlanReflowDecisionProjector: Sendable {
         }
     }
 
-    private func impactedStepsLabel(for suggestion: PlanReflowSuggestionState) -> String {
+    private func impactedStepsLabel(for suggestion: TimeReflowSuggestionState) -> String {
         switch suggestion.kind {
         case .keepPlanUnchanged, .askForConfirmation:
             return "Impacted steps: none yet."
@@ -425,7 +425,7 @@ struct PlanReflowDecisionProjector: Sendable {
         }
     }
 
-    private func capacityImpactLabel(for suggestion: PlanReflowSuggestionState) -> String {
+    private func capacityImpactLabel(for suggestion: TimeReflowSuggestionState) -> String {
         switch suggestion.kind {
         case .keepPlanUnchanged:
             return "Capacity impact: unchanged."
@@ -442,24 +442,24 @@ struct PlanReflowDecisionProjector: Sendable {
         }
     }
 
-    private func protectedTimeImpactLabel(for suggestion: PlanReflowSuggestionState) -> String {
+    private func protectedTimeImpactLabel(for suggestion: TimeReflowSuggestionState) -> String {
         switch suggestion.kind {
         case .protectOneItem, .recoverRest:
             return "Protected time impact: one protected pocket stays defended."
         case .moveLocalActionLater:
             return "Protected time impact: Calendar is untouched."
         case .keepPlanUnchanged, .askForConfirmation:
-            return "Protected time impact: unchanged."
+            return "Protected time impact: Calendar is untouched."
         default:
             return "Protected time impact: reviewed before anything moves."
         }
     }
 
     private func beforeAfterPreview(
-        for suggestion: PlanReflowSuggestionState,
-        receiptPreview: PlanReflowReceiptPreviewState
-    ) -> PlanReflowBeforeAfterShapePreviewState {
-        PlanReflowBeforeAfterShapePreviewState(
+        for suggestion: TimeReflowSuggestionState,
+        receiptPreview: TimeReflowReceiptPreviewState
+    ) -> TimeReflowBeforeAfterShapePreviewState {
+        TimeReflowBeforeAfterShapePreviewState(
             title: "Before / after",
             beforeLabel: beforeLabel(for: suggestion),
             afterLabel: afterLabel(for: suggestion),
@@ -468,7 +468,7 @@ struct PlanReflowDecisionProjector: Sendable {
         )
     }
 
-    private func beforeLabel(for suggestion: PlanReflowSuggestionState) -> String {
+    private func beforeLabel(for suggestion: TimeReflowSuggestionState) -> String {
         switch suggestion.kind {
         case .keepPlanUnchanged, .askForConfirmation:
             return "Before: current plan stays visible."
@@ -485,7 +485,7 @@ struct PlanReflowDecisionProjector: Sendable {
         }
     }
 
-    private func afterLabel(for suggestion: PlanReflowSuggestionState) -> String {
+    private func afterLabel(for suggestion: TimeReflowSuggestionState) -> String {
         switch suggestion.kind {
         case .keepPlanUnchanged:
             return "After: plan remains unchanged."

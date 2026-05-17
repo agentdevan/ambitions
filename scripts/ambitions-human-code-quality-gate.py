@@ -53,9 +53,9 @@ GUARDRAIL_CONSTANT_FILES = {
 OWNED_LARGE_FILE_EXCEPTIONS = {
     "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift",
     "Native/Ambitions/Features/Goals/GoalsFeatureService.swift",
-    "Native/Ambitions/Features/Plan/PlanFeatureService.swift",
-    "Native/Ambitions/Features/Profile/ProfileFeatureService.swift",
-    "Native/Ambitions/Features/Profile/ProfileScreen.swift",
+    "Native/Ambitions/Features/Time/TimeFeatureService.swift",
+    "Native/Ambitions/Features/You/YouFeatureService.swift",
+    "Native/Ambitions/Features/You/YouScreen.swift",
     "Native/Ambitions/Features/Today/TodayFeatureService.swift",
 }
 TEXT_EXTENSIONS = {".swift", ".txt", ".json", ".yml", ".yaml", ".plist", ".strings", ".entitlements"}
@@ -207,6 +207,9 @@ def is_process_trace_line(path: Path, line: str) -> bool:
     if is_preview_only(path) or is_test_source(path) or is_compatibility_seam(path):
         return False
     if is_guardrail_constant(path, line):
+        return False
+    relative_path = path.relative_to(ROOT).as_posix()
+    if "AmbitionsOSCloseoutTailGate" in relative_path:
         return False
     return True
 

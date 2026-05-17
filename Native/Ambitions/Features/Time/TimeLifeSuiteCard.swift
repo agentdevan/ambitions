@@ -1,17 +1,17 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct PlanLifeSuiteCard: View {
+struct TimeLifeSuiteCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let suite: PlanLifeSuiteState
+    let suite: TimeLifeSuiteState
 
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: suite.title, subtitle: suite.subtitle)
 
-                PlanLifeShapeTimeCapacityMap(suite: suite)
+                TimeLifeShapeTimeCapacityMap(suite: suite)
 
                 LazyVGrid(
                     columns: [
@@ -35,7 +35,7 @@ struct PlanLifeSuiteCard: View {
                     .foregroundStyle(theme.colors.textTertiary)
             }
         }
-        .accessibilityIdentifier("plan.life-suite")
+        .accessibilityIdentifier("time.life-suite")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
     }
@@ -44,7 +44,7 @@ struct PlanLifeSuiteCard: View {
 private struct PlanLifeSuiteShapeTile: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let shape: PlanLifeSuiteShapeState
+    let shape: TimeLifeSuiteShapeState
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {

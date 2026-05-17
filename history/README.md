@@ -11,4 +11,4 @@ Use this portal only for traceability and retained historical material.
 - [`../docs/archive/`](../docs/archive/)
 - [`../docs/canon/README.md`](../docs/canon/README.md)
 
-Historical material is retained for traceability only and is not active Ambitions canon. Use the old canon classification index before relying on any Ambitions 2.0, 3.0, 4.0, PXOS, ACUI, audit, handoff, or prompt material.
+Historical material is retained for traceability only and is not active Ambitions canon. Use the old canon classification index before relying on any Ambitions 2.x, 3.x, 4.x, PXOS, ACUI, audit, handoff, or prompt material.

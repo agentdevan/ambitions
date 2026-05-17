@@ -1,10 +1,10 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct PlanLifeShapeDrillDownPanel: View {
+struct TimeLifeShapeDrillDownPanel: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let drillDown: PlanLifeShapeDrillDownState
+    let drillDown: TimeLifeShapeDrillDownState
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -65,7 +65,7 @@ struct PlanLifeShapeDrillDownPanel: View {
 private struct PlanLifeShapeDrillDownItemCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: PlanLifeShapeDrillDownItemState
+    let item: TimeLifeShapeDrillDownItemState
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xxxs) {

@@ -105,23 +105,10 @@ struct TimeScreen: View {
 
                         TimeOpportunityWindowsCard(windows: dashboard.opportunityWindows, onOpenGoal: openGoal)
 
-                        TimeDecisionListCard(
-                            title: dashboard.decisionDebt.title,
-                            subtitle: dashboard.decisionDebt.subtitle,
-                            emptyTitle: "No decision needed",
-                            emptyDetail: "The current plan is not asking for another decision right now.",
-                            items: dashboard.decisionDebt.items,
-                            accessibilityIdentifier: "time.decision-debt",
-                            onActivate: handleDecisionItem
-                        )
-
-                        TimeDecisionListCard(
-                            title: dashboard.conflictCourt.title,
-                            subtitle: dashboard.conflictCourt.subtitle,
-                            emptyTitle: "No conflict to negotiate",
-                            emptyDetail: "Nothing visible is competing hard enough to need attention.",
-                            items: dashboard.conflictCourt.conflicts,
-                            accessibilityIdentifier: "time.conflict-court",
+                        // Decisions queue — renders nothing when both debt and conflict are empty
+                        TimeDecisionQueueCard(
+                            decisionDebt: dashboard.decisionDebt,
+                            conflictCourt: dashboard.conflictCourt,
                             onActivate: handleDecisionItem
                         )
 
@@ -132,19 +119,19 @@ struct TimeScreen: View {
                             }
                         )
 
-                        TimeRecoveryEntryCard(recovery: dashboard.recoveryEntry, onActivate: handleDecisionItem)
-
-                        TimeRealityReflowCard(reflow: dashboard.realityReflow, onActivate: handleReflowSuggestion)
-
-                        TimeReflowDecisionCard(decision: dashboard.reflowDecision, onActivate: handleReflowDecision)
-
-                        TimeRecoveryGradientCard(gradient: dashboard.recoveryGradient)
-
-                        TimeSaveTheDayCard(saveTheDay: dashboard.saveTheDay)
-
-                        TimeReflowReceiptPreviewCard(preview: dashboard.reflowReceiptPreview)
-
-                        TimeRecoveryMaturityCard(maturity: dashboard.recoveryMaturity)
+                        // Recovery composite — renders nothing when recovery is not active
+                        TimeRecoveryCompositeSection(
+                            recoveryEntry: dashboard.recoveryEntry,
+                            realityReflow: dashboard.realityReflow,
+                            reflowDecision: dashboard.reflowDecision,
+                            recoveryGradient: dashboard.recoveryGradient,
+                            saveTheDay: dashboard.saveTheDay,
+                            reflowReceiptPreview: dashboard.reflowReceiptPreview,
+                            recoveryMaturity: dashboard.recoveryMaturity,
+                            onActivateDecision: handleDecisionItem,
+                            onActivateReflow: handleReflowSuggestion,
+                            onActivateReflowDecision: handleReflowDecision
+                        )
 
                         TimeExecutionResilienceCard(
                             resilience: dashboard.resilience,
@@ -861,10 +848,85 @@ private struct TimePressureRecoveryReviewCard: View {
     }
 }
 
-private struct PlanSaveTheDayCard: View {
+private struct TimeDecisionQueueCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let saveTheDay: PlanSaveTheDayState
+    let decisionDebt: TimeDecisionDebtState
+    let conflictCourt: TimeConflictCourtState
+    let onActivate: (TimeDecisionItemState) -> Void
+
+    var body: some View {
+        if decisionDebt.items.isEmpty && conflictCourt.conflicts.isEmpty {
+            EmptyView()
+        } else {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                if !decisionDebt.items.isEmpty {
+                    TimeDecisionListCard(
+                        title: decisionDebt.title,
+                        subtitle: decisionDebt.subtitle,
+                        emptyTitle: "No decision needed",
+                        emptyDetail: "The current plan is not asking for another decision right now.",
+                        items: decisionDebt.items,
+                        accessibilityIdentifier: "time.decision-debt",
+                        onActivate: onActivate
+                    )
+                }
+
+                if !conflictCourt.conflicts.isEmpty {
+                    TimeDecisionListCard(
+                        title: conflictCourt.title,
+                        subtitle: conflictCourt.subtitle,
+                        emptyTitle: "No conflict to negotiate",
+                        emptyDetail: "Nothing visible is competing hard enough to need attention.",
+                        items: conflictCourt.conflicts,
+                        accessibilityIdentifier: "time.conflict-court",
+                        onActivate: onActivate
+                    )
+                }
+            }
+        }
+    }
+}
+
+private struct TimeRecoveryCompositeSection: View {
+    let recoveryEntry: TimeRecoveryEntryState
+    let realityReflow: TimeRealityReflowState
+    let reflowDecision: TimeReflowDecisionState
+    let recoveryGradient: TimeRecoveryGradientState
+    let saveTheDay: TimeSaveTheDayState
+    let reflowReceiptPreview: TimeReflowReceiptPreviewState
+    let recoveryMaturity: TimeRecoveryMaturityState
+    let onActivateDecision: (TimeDecisionItemState) -> Void
+    let onActivateReflow: (TimeReflowSuggestionState) -> Void
+    let onActivateReflowDecision: (TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void
+
+    var body: some View {
+        if realityReflow.reasonKind == .lowData || realityReflow.reasonKind == .stillBelievable {
+            EmptyView()
+        } else {
+            VStack(spacing: 16) {
+                TimeRecoveryEntryCard(recovery: recoveryEntry, onActivate: onActivateDecision)
+
+                TimeRealityReflowCard(reflow: realityReflow, onActivate: onActivateReflow)
+
+                TimeReflowDecisionCard(decision: reflowDecision, onActivate: onActivateReflowDecision)
+
+                TimeRecoveryGradientCard(gradient: recoveryGradient)
+
+                TimeSaveTheDayCard(saveTheDay: saveTheDay)
+
+                TimeReflowReceiptPreviewCard(preview: reflowReceiptPreview)
+
+                TimeRecoveryMaturityCard(maturity: recoveryMaturity)
+            }
+        }
+    }
+}
+
+private struct TimeSaveTheDayCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let saveTheDay: TimeSaveTheDayState
 
     var body: some View {
         AppCard(state: saveTheDay.visualState) {
@@ -878,9 +940,9 @@ private struct PlanSaveTheDayCard: View {
                 }
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    PlanKeyValueRow(label: "Keep", value: saveTheDay.protectedItem, state: .selected)
-                    PlanKeyValueRow(label: "Adjust", value: saveTheDay.adjustment, state: saveTheDay.visualState)
-                    PlanKeyValueRow(label: "Recover", value: saveTheDay.recoveryExplanation, state: .success)
+                    TimeKeyValueRow(label: "Keep", value: saveTheDay.protectedItem, state: .selected)
+                    TimeKeyValueRow(label: "Adjust", value: saveTheDay.adjustment, state: saveTheDay.visualState)
+                    TimeKeyValueRow(label: "Recover", value: saveTheDay.recoveryExplanation, state: .success)
                 }
 
                 Text(saveTheDay.boundary)
@@ -888,16 +950,16 @@ private struct PlanSaveTheDayCard: View {
                     .foregroundStyle(theme.colors.textTertiary)
             }
         }
-        .accessibilityIdentifier("plan.save-the-day")
+        .accessibilityIdentifier("time.save-the-day")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
     }
 }
 
-private struct PlanReflowReceiptPreviewCard: View {
+private struct TimeReflowReceiptPreviewCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let preview: PlanReflowReceiptPreviewState
+    let preview: TimeReflowReceiptPreviewState
 
     var body: some View {
         AppCard(state: preview.visualState) {
@@ -909,8 +971,8 @@ private struct PlanReflowReceiptPreviewCard: View {
                     TagPill(preview.undoAvailability, icon: "arrow.uturn.backward", state: .default)
                 }
 
-                PlanReceiptFactGroup(title: "Would change", facts: preview.whatChanged, state: preview.visualState)
-                PlanReceiptFactGroup(title: "Would not change", facts: preview.whatWouldNotChange, state: .default)
+                TimeReceiptFactGroup(title: "Would change", facts: preview.whatChanged, state: preview.visualState)
+                TimeReceiptFactGroup(title: "Would not change", facts: preview.whatWouldNotChange, state: .default)
 
                 Text(preview.safeFailureFallback)
                     .font(theme.typography.caption)
@@ -918,16 +980,16 @@ private struct PlanReflowReceiptPreviewCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("plan.reflow-receipt-preview")
+        .accessibilityIdentifier("time.reflow-receipt-preview")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
     }
 }
 
-private struct PlanRecoveryMaturityCard: View {
+private struct TimeRecoveryMaturityCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let maturity: PlanRecoveryMaturityState
+    let maturity: TimeRecoveryMaturityState
 
     var body: some View {
         AppCard {
@@ -1007,7 +1069,7 @@ private struct PlanRecoveryMaturityCard: View {
     }
 }
 
-private struct PlanReceiptFactGroup: View {
+private struct TimeReceiptFactGroup: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String
@@ -1034,12 +1096,12 @@ private struct PlanReceiptFactGroup: View {
     }
 }
 
-private struct PlanHeroCard: View {
+private struct TimeHeroCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let hero: PlanRealityHeroState
-    let action: PlanWeekPrimaryAction
-    let onPrimaryAction: (PlanWeekPrimaryAction) -> Void
+    let hero: TimeRealityHeroState
+    let action: TimeWeekPrimaryAction
+    let onPrimaryAction: (TimeWeekPrimaryAction) -> Void
 
     var body: some View {
         HeroCard(state: action.state) {
@@ -1114,10 +1176,10 @@ private struct PlanHeroCard: View {
     }
 }
 
-private struct PlanPressureScrubberCard: View {
+private struct TimePressureScrubberCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let scrubber: PlanPressureScrubberState
+    let scrubber: TimePressureScrubberState
     @Binding var selectedDayID: String
 
     var body: some View {
@@ -1172,15 +1234,15 @@ private struct PlanPressureScrubberCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.pressure-scrubber")
+        .accessibilityIdentifier("time.pressure-scrubber")
         .ambitionPanelAccessibility()
     }
 }
 
-private struct PlanElasticWeekCard: View {
+private struct TimeElasticWeekCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let days: [PlanElasticWeekDayState]
+    let days: [TimeElasticWeekDayState]
     @Binding var selectedDayID: String
 
     var body: some View {
@@ -1197,7 +1259,7 @@ private struct PlanElasticWeekCard: View {
                             Button {
                                 selectedDayID = day.id
                             } label: {
-                                PlanElasticWeekDayColumn(day: day, isSelected: selectedDayID == day.id)
+                                TimeElasticWeekDayColumn(day: day, isSelected: selectedDayID == day.id)
                             }
                             .buttonStyle(.plain)
                             .accessibilityIdentifier("plan.day.\(day.id)")
@@ -1212,10 +1274,10 @@ private struct PlanElasticWeekCard: View {
     }
 }
 
-private struct PlanElasticWeekDayColumn: View {
+private struct TimeElasticWeekDayColumn: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let day: PlanElasticWeekDayState
+    let day: TimeElasticWeekDayState
     let isSelected: Bool
 
     var body: some View {
@@ -1295,13 +1357,13 @@ private struct PlanElasticWeekDayColumn: View {
     }
 }
 
-private struct PlanBelievabilityCard: View {
+private struct TimeBelievabilityCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let believability: PlanBelievabilityState
-    let selectedDay: PlanElasticWeekDayState
+    let believability: TimeBelievabilityState
+    let selectedDay: TimeElasticWeekDayState
     let onOpenGoal: (GoalRouteTarget) -> Void
-    let onOpenWindow: (PlanOpenWindowState) -> Void
+    let onOpenWindow: (TimeOpenWindowState) -> Void
 
     var body: some View {
         AppCard(state: believability.visualState) {
@@ -1351,11 +1413,11 @@ private struct PlanBelievabilityCard: View {
                                     Button {
                                         onOpenGoal(target)
                                     } label: {
-                                        PlanBelievabilityBlockRow(block: block)
+                                        TimeBelievabilityBlockRow(block: block)
                                     }
                                     .buttonStyle(.plain)
                                 } else {
-                                    PlanBelievabilityBlockRow(block: block)
+                                    TimeBelievabilityBlockRow(block: block)
                                 }
                             }
                         }
@@ -1412,10 +1474,10 @@ private struct PlanBelievabilityCard: View {
     }
 }
 
-private struct PlanBelievabilityBlockRow: View {
+private struct TimeBelievabilityBlockRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let block: PlanWeekBlockState
+    let block: TimeWeekBlockState
 
     var body: some View {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
@@ -1454,10 +1516,10 @@ private struct PlanBelievabilityBlockRow: View {
     }
 }
 
-private struct PlanExecutionResilienceCard: View {
+private struct TimeExecutionResilienceCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let resilience: PlanExecutionResilienceState
+    let resilience: TimeExecutionResilienceState
     let onOpenGoal: (GoalRouteTarget) -> Void
     let onOpenTimeRoute: (TimeRouteTarget) -> Void
 
@@ -1534,7 +1596,7 @@ private struct PlanExecutionResilienceCard: View {
                         guard let target = windowMagnetism.target else { return }
                         onOpenGoal(target)
                     } label: {
-                        PlanCompactSplitPane(
+                        TimeCompactSplitPane(
                             dominantTitle: windowMagnetism.title,
                             dominantBody: windowMagnetism.detail,
                             contextTitle: windowMagnetism.dayLabel,
@@ -1548,12 +1610,12 @@ private struct PlanExecutionResilienceCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.execution-resilience")
+        .accessibilityIdentifier("time.execution-resilience")
         .ambitionPanelAccessibility()
     }
 }
 
-private struct PlanCompactSplitPane: View {
+private struct TimeCompactSplitPane: View {
     @Environment(\.ambitionTheme) private var theme
 
     let dominantTitle: String
@@ -1609,15 +1671,15 @@ private struct PlanCompactSplitPane: View {
     }
 }
 
-private struct PlanShapingActionsCard: View {
+private struct TimeShapingActionsCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let actions: [PlanShapingActionState]
-    @Binding var selectedKind: PlanShapingActionKind
-    let selectedDay: PlanElasticWeekDayState?
-    let onActivate: (PlanShapingActionState) -> Void
+    let actions: [TimeShapingActionState]
+    @Binding var selectedKind: TimeShapingActionKind
+    let selectedDay: TimeElasticWeekDayState?
+    let onActivate: (TimeShapingActionState) -> Void
 
-    private var selectedAction: PlanShapingActionState? {
+    private var selectedAction: TimeShapingActionState? {
         actions.first(where: { $0.kind == selectedKind }) ?? actions.first
     }
 
@@ -1669,7 +1731,7 @@ private struct PlanShapingActionsCard: View {
 
                 if let selectedAction {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        PlanCompactSplitPane(
+                        TimeCompactSplitPane(
                             dominantTitle: selectedAction.title,
                             dominantBody: selectedAction.recommendation,
                             contextTitle: selectedDay.map { "Current pressure focus: \($0.weekdayLabel) \($0.dateLabel)" } ?? "Current pressure focus",
@@ -1704,7 +1766,7 @@ private struct PlanShapingActionsCard: View {
         .ambitionPanelAccessibility()
     }
 
-    private func callToActionTitle(for action: PlanShapingActionState) -> String {
+    private func callToActionTitle(for action: TimeShapingActionState) -> String {
         if action.planRoute == .captureInbox {
             return "Open Capture"
         }
@@ -1715,10 +1777,10 @@ private struct PlanShapingActionsCard: View {
     }
 }
 
-private struct PlanGoalRelationshipCard: View {
+private struct TimeGoalRelationshipCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let items: [PlanGoalShapingItem]
+    let items: [TimeGoalShapingItem]
     let onOpenGoal: (GoalRouteTarget) -> Void
 
     var body: some View {
@@ -1742,7 +1804,7 @@ private struct PlanGoalRelationshipCard: View {
                                 guard let target = item.target else { return }
                                 onOpenGoal(target)
                             } label: {
-                                PlanGoalRelationshipRow(item: item)
+                                TimeGoalRelationshipRow(item: item)
                             }
                             .buttonStyle(.plain)
                             .disabled(item.target == nil)
@@ -1757,10 +1819,10 @@ private struct PlanGoalRelationshipCard: View {
     }
 }
 
-private struct PlanGoalRelationshipRow: View {
+private struct TimeGoalRelationshipRow: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: PlanGoalShapingItem
+    let item: TimeGoalShapingItem
 
     var body: some View {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
@@ -1803,11 +1865,11 @@ private struct PlanGoalRelationshipRow: View {
     }
 }
 
-private struct PlanSecondaryDestinationsCard: View {
+private struct TimeSecondaryDestinationsCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let destinations: [PlanSecondaryDestination]
-    let onOpen: (PlanSecondaryDestination) -> Void
+    let destinations: [TimeSecondaryDestination]
+    let onOpen: (TimeSecondaryDestination) -> Void
 
     var body: some View {
         AppCard {

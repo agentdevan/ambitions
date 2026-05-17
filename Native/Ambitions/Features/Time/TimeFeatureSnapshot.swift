@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-extension RepositoryBackedPlanService {
+extension RepositoryBackedTimeService {
     struct Snapshot {
         let goals: [Goal]
         let drafts: [PersistedGoalDraft]
@@ -20,7 +20,7 @@ extension RepositoryBackedPlanService {
         let date: Date
         let dayIndex: Int
         let timingLabel: String
-        let blockKind: PlanWeekBlockKind
+        let blockKind: TimeWeekBlockKind
         let visualState: AmbitionVisualState
         let frictionCount: Int
         let evaluation: PlanningEvaluation?

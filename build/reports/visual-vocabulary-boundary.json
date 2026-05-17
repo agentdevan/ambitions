@@ -1,20 +1,26 @@
 {
   "files_scanned": [
-    "docs/canon/frontend/README.md",
-    "docs/canon/frontend/FRONTEND_AUTHORITY_INDEX.md",
-    "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-    "docs/canon/frontend/VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md",
-    "docs/canon/frontend/VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md",
-    "docs/canon/frontend/VISUAL_OBJECT_FIRST_REVIEW_RUBRIC.md",
-    "docs/canon/frontend/VISUAL_ACCESSIBILITY_ADHD_REQUIREMENTS.md",
-    "docs/canon/frontend/VISUAL_ANTI_SLOP_RULES.md",
-    "docs/canon/frontend/VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md",
-    "docs/canon/frontend/trace/VISUAL_CONFLICT_LEDGER.md",
-    "docs/canon/frontend/trace/VISUAL_SOURCE_LINKAGE_LEDGER.md",
-    "docs/canon/frontend/trace/VISUAL_SURFACE_GRAPH_LEDGER.md",
-    "docs/canon/frontend/gates/NORTH_STAR_100_ACCEPTANCE_GATE.md"
+    "frontend\\visual-encyclopedia\\README.md",
+    "frontend\\visual-encyclopedia\\FRONTEND_AUTHORITY_INDEX.md",
+    "frontend\\visual-encyclopedia\\AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
+    "frontend\\visual-encyclopedia\\VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md",
+    "frontend\\visual-encyclopedia\\VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md",
+    "frontend\\visual-encyclopedia\\VISUAL_OBJECT_FIRST_REVIEW_RUBRIC.md",
+    "frontend\\visual-encyclopedia\\VISUAL_ACCESSIBILITY_ADHD_REQUIREMENTS.md",
+    "frontend\\visual-encyclopedia\\VISUAL_ANTI_SLOP_RULES.md",
+    "frontend\\visual-encyclopedia\\VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md",
+    "frontend\\visual-encyclopedia\\trace\\VISUAL_CONFLICT_LEDGER.md",
+    "frontend\\visual-encyclopedia\\trace\\VISUAL_SOURCE_LINKAGE_LEDGER.md",
+    "frontend\\visual-encyclopedia\\trace\\VISUAL_SURFACE_GRAPH_LEDGER.md",
+    "frontend\\visual-encyclopedia\\gates\\NORTH_STAR_100_ACCEPTANCE_GATE.md"
   ],
   "missing_boundary_terms": [],
-  "status": "green",
-  "violations": []
+  "status": "red",
+  "violations": [
+    {
+      "file": "frontend\\visual-encyclopedia\\FRONTEND_AUTHORITY_INDEX.md",
+      "line": "7. Run drift check, source bindings, dashboard, and next-surface queue.",
+      "term": "dashboard"
+    }
+  ]
 }

@@ -32,7 +32,7 @@ struct FeatureEnginePackageBoundaryManifest: Codable, Sendable, Equatable, Hasha
         sourceRoot: String = "Native/Ambitions/Features",
         plannedPackageProductName: String = "AmbitionsFeatureEngines",
         userFacingDestinationLabels: [String] = ["Capture", "Goals", "Time", "Today", "You"],
-        activeDestinationSourceRoots: [String] = ["Captures", "Goals", "Plan", "You", "Today"],
+        activeDestinationSourceRoots: [String] = ["Captures", "Goals", "Time", "You", "Today"],
         compatibilityRoots: [String] = ["Habits", "Insights", "Onboarding"],
         sharedRoots: [String] = ["Shared"],
         allowedImports: [String] = ["AmbitionsDesignSystem", "Foundation", "Observation", "SwiftUI", "UIKit"],
@@ -59,7 +59,7 @@ struct FeatureEnginePackageBoundaryManifest: Codable, Sendable, Equatable, Hasha
 
     var preservesActiveDestinationCanon: Bool {
         userFacingDestinationLabels == ["Capture", "Goals", "Time", "Today", "You"] &&
-            activeDestinationSourceRoots == ["Captures", "Goals", "Plan", "You", "Today"] &&
+            activeDestinationSourceRoots == ["Captures", "Goals", "Time", "Today", "You"] &&
             compatibilityRoots.contains("Habits") &&
             compatibilityRoots.contains("Insights") &&
             compatibilityRoots.contains("Onboarding")

@@ -814,19 +814,4 @@ enum PreviewTimeScenarios {
         visualState: .default
     )
 }
-                id: "preview-empty-decision-keep",
-                kind: .keepPlan,
-                title: "Keep plan",
-                detail: "Create or choose one plan item before reflowing anything.",
-                impactLabel: "No plan mutation",
-                sourceLabel: "Based on your plan",
-                trustLabel: "No silent changes",
-                boundaryLabel: "Safe local suggestion. Undo can be local.",
-                visualState: .default,
-                target: nil,
-                planRoute: nil
-            )
-        ],
-        visualState: .default
-    )
-}
+

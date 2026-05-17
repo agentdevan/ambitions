@@ -95,9 +95,9 @@ def validate_current_time_cursor_lane(errors: list[str], checks: dict[str, objec
     if OBSOLETE_FUSED_WRAPPER.exists():
         errors.append(f"{CURRENT_TIME_DECISION_ID}: obsolete fused wrapper still exists")
     if ".fusedCurrentTimeCursor()" not in today_text:
-        errors.append(f"{CURRENT_TIME_DECISION_ID}: TodayScreen is not using DayTimelineRail.fusedCurrentTimeCursor()")
-    if "extension DayTimelineRail" not in fusion_text:
-        errors.append(f"{CURRENT_TIME_DECISION_ID}: fusion file does not extend DayTimelineRail")
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: TodayScreen is not using RealityMeridianView.fusedCurrentTimeCursor()")
+    if "extension RealityMeridianView" not in fusion_text:
+        errors.append(f"{CURRENT_TIME_DECISION_ID}: fusion file does not extend RealityMeridianView")
     if "RealityMeridianTimeBand" not in fusion_text:
         errors.append(f"{CURRENT_TIME_DECISION_ID}: rail fusion is not rendering RealityMeridianTimeBand")
     if "presentation: .railOverlay" not in fusion_text:

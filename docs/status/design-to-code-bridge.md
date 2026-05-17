@@ -50,10 +50,8 @@ If any step is missing, Codex must stop or classify the gap before editing.
 
 Current implementation may contain compatibility names:
 
-- `PlanScreen`
 - `.plan`
 - `planNavigation()`
-- `ProfileScreen`
 - `profile`
 - `captures`
 

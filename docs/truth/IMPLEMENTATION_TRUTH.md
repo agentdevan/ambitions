@@ -147,8 +147,8 @@ Native/Ambitions/Persistence/SwiftDataModels.swift
 Native/Ambitions/Features/Today/TodayScreen.swift
 Native/Ambitions/Features/Goals/GoalsScreen.swift
 Native/Ambitions/Features/Captures/CapturesScreen.swift
-Native/Ambitions/Features/Plan/PlanScreen.swift
-Native/Ambitions/Features/Profile/ProfileScreen.swift
+Native/Ambitions/Features/Time/TimeScreen.swift
+Native/Ambitions/Features/You/YouScreen.swift
 Sources/Theme/AmbitionTheme.swift
 Native/AmbitionsUITests/AmbitionsUITests.swift
 scripts/build-local.sh
@@ -178,9 +178,7 @@ The current implementation is a native SwiftUI iOS app with:
   - You
 - Internal compatibility names remain:
   - `plan`
-  - `PlanScreen`
   - `profile`
-  - `ProfileScreen`
   - `captures`
   - `DayTimelineRail`
   - `GoalMissionControl`
@@ -572,8 +570,8 @@ Evidence:
 ```text
 Native/Ambitions/App/AmbitionsRootView.swift
 Native/Ambitions/App/AppTab.swift
-Native/Ambitions/Features/Plan/PlanScreen.swift
-Native/Ambitions/Features/Plan/
+Native/Ambitions/Features/Time/TimeScreen.swift
+Native/Ambitions/Features/Time/
 ```
 
 Source-present implementation:
@@ -581,7 +579,7 @@ Source-present implementation:
 - User-facing tab title is `Time` through `AppTab.plan.title`.
 - Navigation scaffold title is `Time`.
 - Internal route/source names remain `plan`.
-- `PlanScreen` source exists.
+- `TimeScreen` source exists.
 - Time/Plan source includes capacity envelope, pressure, recovery, Life Suite, lifecycle rail, timeline strip, pressure scrubber, relationship card, secondary destinations, elastic week, believability, calendar awareness, opportunity windows, decision debt, conflict court, boundary contracts, reflow, recovery, receipts, resilience, shaping actions.
 
 Compatibility/design debt:
@@ -589,7 +587,7 @@ Compatibility/design debt:
 - Product truth says final active top-level label is Time.
 - Product truth says Plan may appear only as contextual action/copy, not tab.
 - Product truth says Time primary object is LifeShape Field, not calendar grid or generic planning dashboard.
-- Current source still uses `PlanScreen`, `Plan*`, `plan.screen`, and many Plan identifiers.
+- Current source has been migrated to use `TimeScreen`, `Time*`, and Time-prefixed structures under Features/Time/, while the internal route enum case `plan` remains as compatibility wiring.
 - UI tests still contain `Plan` tab expectations, creating likely test/source naming drift.
 
 Implementation truth:
@@ -605,15 +603,15 @@ Evidence:
 ```text
 Native/Ambitions/App/AmbitionsRootView.swift
 Native/Ambitions/App/AppTab.swift
-Native/Ambitions/Features/Profile/ProfileScreen.swift
-Native/Ambitions/Features/Profile/
+Native/Ambitions/Features/You/YouScreen.swift
+Native/Ambitions/Features/You/
 ```
 
 Source-present implementation:
 
 - User-facing tab title is `You`.
 - Internal route/source names remain `profile`.
-- `ProfileScreen` source exists.
+- `YouScreen` source exists.
 - Source includes profile/defaults, personalization, appearance, memory controls, trust center, receipts history, corrections, reviews, proof, schedule availability, plan behavior, automation trust, vacation/away time, durations, notifications, integrations/widgets/export/accessibility/support/about areas.
 - Appearance preference and accent family are saveable through Profile/You source.
 
@@ -621,7 +619,7 @@ Compatibility/design debt:
 
 - Product truth says active object is User System Profile, not Profile.
 - Product truth says You is system control, not social profile/admin/AI settings wall.
-- Current source uses Profile terminology and must be migrated carefully.
+- Current source features folder has been migrated to `You/` and `YouScreen`, while some internal route symbols remain `profile` compatibility wiring.
 - Product truth says top-level You should be iOS Settings-like, static profile header, no search/family/social profile framing.
 
 Implementation truth:
@@ -636,16 +634,16 @@ You is source-present and wired through Profile compatibility code. Final User S
 
 | Object / System | Current Implementation Truth | Evidence |
 |---|---|---|
-| Reality Meridian | Product truth object exists as direction. Source still uses `DayTimelineRail`. | `PRODUCT_DESIGN_TRUTH.md`, `TodayScreen.swift` |
+| Reality Meridian | Product truth view is implemented as `RealityMeridianView` in `TodayDayRailPanels.swift`, presenting the daily execution rail. | `PRODUCT_DESIGN_TRUTH.md`, `TodayDayRailPanels.swift` |
 | Start Here Surface | Start Here-related source/previews exist; final non-card integrated surface not proven. | `TodayScreen.swift` |
 | Constellation Atlas | Product truth object exists as direction. Source has Goals atlas preview/life areas/north stars but not proven final atlas. | `PRODUCT_DESIGN_TRUTH.md`, `GoalsScreen.swift` |
 | Atmosphere Composer | Capture composer source exists. Final ultra-minimal top-level behavior not proven. | `CapturesScreen.swift` |
-| LifeShape Field | Product truth object exists as direction. Source has Plan/Time capacity/pressure modules; final LifeShape Field not proven. | `PRODUCT_DESIGN_TRUTH.md`, `PlanScreen.swift` |
-| User System Profile | Product truth object exists as direction. Source has Profile/You controls; final system profile not proven. | `PRODUCT_DESIGN_TRUTH.md`, `ProfileScreen.swift` |
-| Receipts | Event ledger/proof/capture receipt/trust UI source exists. Full lifecycle unproven. | `SwiftDataModels.swift`, `TodayScreen.swift`, `CapturesScreen.swift`, `ProfileScreen.swift` |
+| LifeShape Field | Product truth object exists as direction. Source has Plan/Time capacity/pressure modules; final LifeShape Field not proven. | `PRODUCT_DESIGN_TRUTH.md`, `TimeScreen.swift` |
+| User System Profile | Product truth object exists as direction. Source has Profile/You controls; final system profile not proven. | `PRODUCT_DESIGN_TRUTH.md`, `YouScreen.swift` |
+| Receipts | Event ledger/proof/capture receipt/trust UI source exists. Full lifecycle unproven. | `SwiftDataModels.swift`, `TodayScreen.swift`, `CapturesScreen.swift`, `YouScreen.swift` |
 | Action Closure | Today closure sheet and domain models source exist. Full cross-surface closure system unproven. | `TodayScreen.swift`, `Native/Ambitions/Domain/ActionClosureReceiptModels.swift` |
-| Proof | Progress evidence record and proof/trust UI source exists. Proof transfer/review lifecycle unproven. | `SwiftDataModels.swift`, `ProfileScreen.swift` |
-| Personal Context / Memory | Profile memory controls and event/teaching/app state records exist. Mature local learning unproven. | `SwiftDataModels.swift`, `ProfileScreen.swift` |
+| Proof | Progress evidence record and proof/trust UI source exists. Proof transfer/review lifecycle unproven. | `SwiftDataModels.swift`, `YouScreen.swift` |
+| Personal Context / Memory | Profile memory controls and event/teaching/app state records exist. Mature local learning unproven. | `SwiftDataModels.swift`, `YouScreen.swift` |
 | Recommendation / Start Here | Today service and recommendation-related domain source exists. Mature deterministic recommendation unproven. | `TodayScreen.swift`, `Native/Ambitions/Domain/RecommendationExplanationModels.swift` |
 
 ---
@@ -841,10 +839,10 @@ unless a current workflow file and current run evidence exist.
 
 | Debt | Evidence | Risk |
 |---|---|---|
-| Plan vs Time | `AppTab.plan.title` returns `Time`, but internal files/routes/tests still use Plan. | UI tests/docs/source can drift; blind rename may break routing. |
-| Profile vs You | User-facing title is You, internal files/routes still Profile. | Product language drift if Profile leaks into UI/docs. |
+| Plan vs Time | Folders and screen types migrated to `Time/` and `TimeScreen`, while some internal route symbols remain plan compatibility wiring. | UI tests/docs/source can drift; blind rename may break routing. |
+| Profile vs You | Folders and screen types migrated to `You/` and `YouScreen`, while some internal route symbols remain profile compatibility wiring. | Product language drift if Profile leaks into UI/docs. |
 | Captures vs Capture | User-facing title is Capture, internal enum/path uses captures/Captures. | Mostly source compatibility debt. |
-| DayTimelineRail vs Reality Meridian | Today source uses `DayTimelineRail`; Product Truth says Reality Meridian. | Product identity drift. |
+| DayTimelineRail vs Reality Meridian | SwiftUI view class is migrated to `RealityMeridianView` in `TodayDayRailPanels.swift`. | Product identity drift. |
 | Hero Step Panel / Start Here | Old terms may persist in source/previews/docs. | Detached-card/generic AI suggestion risk. |
 | Mission Control / board / KPI language | Goals source/docs use mission-control/board/maturity/pressure terms. | Dashboard drift risk against Product Truth. |
 | Provider/backend assumptions | Provider skill roots are absent from active paths and forbidden by skill governance. | Hosted backend/provider drift risk if stale docs are reused. |
@@ -886,10 +884,10 @@ Current source/internal compatibility names found:
 
 ```text
 plan
-PlanScreen
+TimeScreen
 PlanRouteTarget
 plan.screen
-ProfileScreen
+YouScreen
 profile
 captures
 DayTimelineRail
@@ -943,13 +941,13 @@ No deletion should happen until `HISTORICAL_POLICY.md` is applied in a dedicated
 
 | Product Truth Area | Current Source Evidence | Gap |
 |---|---|---|
-| Final IA Today/Goals/Capture/Time/You | Source maps user titles to Today/Goals/Capture/Time/You. | Internal Plan/Profile/Captures names remain. UI tests still expect Plan in places. |
-| Today / Reality Meridian | Today source uses `DayTimelineRail` and rail identifiers. | Rename/concept migration to Reality Meridian not complete. |
+| Final IA Today/Goals/Capture/Time/You | Source maps user titles and feature folders to Today/Goals/Capture/Time/You. | Internal lower-level route case/service symbols remain as compatibility seams. |
+| Today / Reality Meridian | Today source implements `RealityMeridianView` for the daily execution rail. | Completed concept migration to Reality Meridian view naming. |
 | Start Here Surface | Today source includes Start Here-like hero/step detail. | Final seamless non-card integrated Start Here Surface not proven. |
 | Goals / Constellation Atlas | Goals source includes mission-control/life-area/north-star/atlas preview parts. | Equal-weight Constellation Atlas and Orbital Lens are not proven final. |
 | Capture / Atmosphere Composer | Capture source has bottom composer and route preview. | Top-level still has scroll/grouped captures; may violate quiet composer-first design. |
-| Time / LifeShape Field | Plan source has capacity/pressure/reflow modules. | Final LifeShape Field as dominant primary object not proven; Plan naming remains. |
-| You / User System Profile | Profile source has trust/memory/settings-like controls. | User System Profile naming/static top-level/iOS Settings-like final model not proven. |
+| Time / LifeShape Field | Time features folder and screen migrated to `Time/` and `TimeScreen`. | Final LifeShape Field as dominant primary object not proven. |
+| You / User System Profile | You features folder and screen migrated to `You/` and `YouScreen`. | User System Profile naming/static top-level/iOS Settings-like final model not proven. |
 | Local-only intelligence | SwiftData + local services source exist; no LLM source found. | Mature deterministic intelligence/local learning not proven. |
 | Apple sync exception | No active sync source found. | Allowed future, not implemented. |
 | R2 freshness exception | No active R2 source found. | Allowed future, not implemented. |
