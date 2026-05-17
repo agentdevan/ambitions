@@ -21,6 +21,31 @@ Recipes must be specific enough to tell a designer or reviewer exactly what visi
 
 Active IA is `Today / Goals / Capture / Time / You`. Plan is excluded as a top-level destination and remains only contextual/internal compatibility language.
 
+## Chrome Enrichment
+
+The active chrome enrichment overlay is installed at:
+
+- [Chrome Enrichment Doctrine](CHROME_ENRICHMENT_DOCTRINE.md)
+- [Chrome Primitives](CHROME_PRIMITIVES.md)
+- [Chrome Enrichment Install Ledger](trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md)
+
+Chrome means Ambitions' persistent and semi-persistent app shell: top context edges, tab bars, composers, CTAs, rails, receipt handles, sheets, trays, continuity strips, source/proof affordances, gestures, and safe-area behavior.
+
+The chrome enrichment lock is:
+
+- persistent reality context plus one privileged action plus local proof plus contextual overlays
+- compact contextual top edge instead of thick static headers
+- bottom-reachable primary actions and five-destination navigation
+- one dominant object per top-level destination
+- no chatbot-first or AI-tab chrome
+- no generic dashboard/card-stack shell
+- inspectable receipt/proof/source affordances for local intelligence
+- contextual sheets for closure, recovery, reflow, conflict, and proof
+- conditional continuity strip for active execution or adaptation state
+- accessibility-preserving state labels beyond color, glow, or motion
+
+This overlay is design canon only. It does not prove SwiftUI implementation, simulator/device behavior, screenshot parity, accessibility conformance, or release readiness.
+
 ## Canon Status And Authority Level
 
 The atlas is final intended visual canon, subordinate to active truth files and separate from implementation proof. Current source can show compatibility seams, but it does not lower the intended frontend recipe bar.
@@ -36,6 +61,9 @@ The atlas is final intended visual canon, subordinate to active truth files and 
 
 ## Trace And Precedence
 
+- [Chrome Enrichment Doctrine](CHROME_ENRICHMENT_DOCTRINE.md)
+- [Chrome Primitives](CHROME_PRIMITIVES.md)
+- [Chrome Enrichment Install Ledger](trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md)
 - [Visual Conflict Ledger](trace/VISUAL_CONFLICT_LEDGER.md)
 - [Visual Source Linkage Ledger](trace/VISUAL_SOURCE_LINKAGE_LEDGER.md)
 - [Visual Surface Graph Ledger](trace/VISUAL_SURFACE_GRAPH_LEDGER.md)
