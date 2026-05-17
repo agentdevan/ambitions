@@ -328,7 +328,8 @@ def render(root: Path, findings: Sequence[Finding]) -> str:
     for finding in findings:
         relative = finding.path.relative_to(root) if finding.path.is_absolute() and root in finding.path.parents else finding.path
         allowance = "allowed" if finding.allowed else "blocking"
-        line = f"{finding.severity.upper()} {finding.code} {relative}:{finding.line} [{allowance}] - {finding.message}"
+        severity = "ALLOWED" if finding.allowed else finding.severity.upper()
+        line = f"{severity} {finding.code} {relative}:{finding.line} [{allowance}] - {finding.message}"
         lines.append(line)
         if finding.text:
             lines.append(f"  >> {finding.text}")

@@ -11,7 +11,7 @@
   "surface_count": 29,
   "surfaces": [
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Today Root / Reality Meridian makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -110,22 +110,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/today_root_reality_meridian.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_root_reality_meridian.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md",
       "source_link_status": "linked",
       "status": "documented",
       "surface_id": "today_root_reality_meridian",
       "surface_name": "Today Root / Reality Meridian"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Today Start Here Region makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -224,22 +224,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/today_start_here_region.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_start_here_region.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_start_here_region.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_start_here_region.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "today_start_here_region",
       "surface_name": "Today Start Here Region"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Today Reality Meridian Rail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -338,22 +338,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/today_reality_meridian_rail.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_rail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_reality_meridian_rail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_rail.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "today_reality_meridian_rail",
       "surface_name": "Today Reality Meridian Rail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Today Recommended Step Object makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -452,22 +452,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/today_recommended_step_object.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_recommended_step_object.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_recommended_step_object.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_recommended_step_object.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "today_recommended_step_object",
       "surface_name": "Today Recommended Step Object"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Today Now / Next / Later Sequence makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -566,22 +566,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/today_now_next_later_sequence.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_now_next_later_sequence.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_now_next_later_sequence.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_now_next_later_sequence.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "today_now_next_later_sequence",
       "surface_name": "Today Now / Next / Later Sequence"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Closure Sheet makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -680,22 +680,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/closure_sheet.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/closure_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/closure_sheet.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/closure_sheet.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "closure_sheet",
       "surface_name": "Closure Sheet"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Step Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -794,22 +794,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/step_detail.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/step_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/step_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/step_detail.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "step_detail",
       "surface_name": "Step Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Step Session makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -908,22 +908,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/step_session.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/step_session.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/step_session.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/step_session.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "step_session",
       "surface_name": "Step Session"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Recommendation Source Sheet makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1022,22 +1022,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/recommendation_source_sheet.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/recommendation_source_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/recommendation_source_sheet.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/recommendation_source_sheet.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "recommendation_source_sheet",
       "surface_name": "Recommendation Source Sheet"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Receipt Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1136,22 +1136,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/today/receipt_detail.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/receipt_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/receipt_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/receipt_detail.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "receipt_detail",
       "surface_name": "Receipt Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Time Root / LifeShape Field makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1250,22 +1250,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/time/time_root_lifeshape_field.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/time_root_lifeshape_field.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md",
       "source_link_status": "linked",
       "status": "documented",
       "surface_id": "time_root_lifeshape_field",
       "surface_name": "Time Root / LifeShape Field"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Day LifeShape Surface makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1364,22 +1364,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/time/day_lifeshape_surface.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/day_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/day_lifeshape_surface.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/day_lifeshape_surface.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "day_lifeshape_surface",
       "surface_name": "Day LifeShape Surface"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Week LifeShape Surface makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1478,22 +1478,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/time/week_lifeshape_surface.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/week_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/week_lifeshape_surface.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/week_lifeshape_surface.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "week_lifeshape_surface",
       "surface_name": "Week LifeShape Surface"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Month LifeShape Surface makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1592,22 +1592,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/time/month_lifeshape_surface.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/month_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/month_lifeshape_surface.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/month_lifeshape_surface.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "month_lifeshape_surface",
       "surface_name": "Month LifeShape Surface"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Reflow Preview Tray makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1706,22 +1706,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/time/reflow_preview_tray.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/reflow_preview_tray.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/reflow_preview_tray.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/reflow_preview_tray.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "reflow_preview_tray",
       "surface_name": "Reflow Preview Tray"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Best Fit Explanation Sheet makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1820,22 +1820,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/time/best_fit_explanation_sheet.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/best_fit_explanation_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/best_fit_explanation_sheet.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/best_fit_explanation_sheet.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "best_fit_explanation_sheet",
       "surface_name": "Best Fit Explanation Sheet"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Protected Time Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -1934,22 +1934,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/time/protected_time_detail.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/protected_time_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/protected_time_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/protected_time_detail.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "protected_time_detail",
       "surface_name": "Protected Time Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Capture Root / Atmosphere Composer makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2048,22 +2048,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/capture/capture_root_atmosphere_composer.md",
-        "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/capture/capture_root_atmosphere_composer.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/capture/capture_root_atmosphere_composer.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_root_atmosphere_composer.md",
       "source_link_status": "linked",
       "status": "documented",
       "surface_id": "capture_root_atmosphere_composer",
       "surface_name": "Capture Root / Atmosphere Composer"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Capture Post-Input Route Reveal makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2162,22 +2162,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/capture/capture_post_input_route_reveal.md",
-        "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/capture/capture_post_input_route_reveal.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/capture/capture_post_input_route_reveal.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_post_input_route_reveal.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "capture_post_input_route_reveal",
       "surface_name": "Capture Post-Input Route Reveal"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Capture Hold / Needs a Place Route makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2276,22 +2276,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/capture/capture_hold_needs_a_place_route.md",
-        "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/capture/capture_hold_needs_a_place_route.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/capture/capture_hold_needs_a_place_route.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_hold_needs_a_place_route.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "capture_hold_needs_a_place_route",
       "surface_name": "Capture Hold / Needs a Place Route"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Capture Receipt makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2390,22 +2390,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/capture/capture_receipt.md",
-        "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/capture/capture_receipt.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/capture/capture_receipt.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_receipt.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "capture_receipt",
       "surface_name": "Capture Receipt"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Goals Root / Constellation Atlas makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2504,22 +2504,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/goals/goals_root_constellation_atlas.md",
-        "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/goals/goals_root_constellation_atlas.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/goals/goals_root_constellation_atlas.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/goals_root_constellation_atlas.md",
       "source_link_status": "linked",
       "status": "documented",
       "surface_id": "goals_root_constellation_atlas",
       "surface_name": "Goals Root / Constellation Atlas"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Proof Trail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2618,22 +2618,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/goals/proof_trail.md",
-        "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/goals/proof_trail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/goals/proof_trail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/proof_trail.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "proof_trail",
       "surface_name": "Proof Trail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Goal Thread Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2732,22 +2732,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/goals/goal_thread_detail.md",
-        "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/goals/goal_thread_detail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/goals/goal_thread_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/goal_thread_detail.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "goal_thread_detail",
       "surface_name": "Goal Thread Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Reflection / Recovery Detail makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2846,22 +2846,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/goals/reflection_recovery_detail.md",
-        "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/goals/reflection_recovery_detail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/goals/reflection_recovery_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/reflection_recovery_detail.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "reflection_recovery_detail",
       "surface_name": "Reflection / Recovery Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "You Root / User System Profile makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -2960,22 +2960,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/you/you_root_user_system_profile.md",
-        "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/you/you_root_user_system_profile.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md",
       "source_link_status": "linked",
       "status": "documented",
       "surface_id": "you_root_user_system_profile",
       "surface_name": "You Root / User System Profile"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Local Runtime Trust Panel makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -3074,22 +3074,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/you/local_runtime_trust_panel.md",
-        "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/you/local_runtime_trust_panel.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/you/local_runtime_trust_panel.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/local_runtime_trust_panel.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "local_runtime_trust_panel",
       "surface_name": "Local Runtime Trust Panel"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Automation & Trust makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -3188,22 +3188,22 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/you/automation_and_trust.md",
-        "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/you/automation_and_trust.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/you/automation_and_trust.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/automation_and_trust.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "automation_and_trust",
       "surface_name": "Automation & Trust"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "grammar": {
         "back_cancel_behavior": {
           "definition": "Local Data / Reset / Forget makes back, cancel, and close behavior explicit and non-destructive unless the user confirms a destructive change.",
@@ -3302,15 +3302,15 @@
         }
       },
       "grammar_source_basis": [
-        "docs/canon/frontend/recipes/you/local_data_reset_forget.md",
-        "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/you/local_data_reset_forget.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/you/local_data_reset_forget.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/local_data_reset_forget.md",
       "source_link_status": "intended_only",
       "status": "documented",
       "surface_id": "local_data_reset_forget",

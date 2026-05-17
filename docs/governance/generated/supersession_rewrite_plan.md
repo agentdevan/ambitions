@@ -1090,6 +1090,5 @@
 - classify/archive/rewrite: prompts/batches/VISUAL-DESIGN-FINAL-FORM-LOCK-REPAIR-05.md
 - classify/archive/rewrite: prompts/batches/VISUAL-ENCYCLOPEDIA-100-FINAL-PROOF-AUTHORITY-04.md
 - classify/archive/rewrite: prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md
-- classify/archive/rewrite: prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03-MERGED.md
 - classify/archive/rewrite: prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md
 - classify/archive/rewrite: prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md

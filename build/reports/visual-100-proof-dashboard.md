@@ -16,8 +16,8 @@
 - Vocabulary violations: 0
 - Native believability warnings: 0
 - Local-first trust warnings: 0
-- No false momentum warnings: 206
-- Hidden automation warnings: 53
+- No false momentum warnings: 214
+- Hidden automation warnings: 60
 - False-green risks: []
 - Remaining red flags: []
 - Final 100/100 eligibility: True

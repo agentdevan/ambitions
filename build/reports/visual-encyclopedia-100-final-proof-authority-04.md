@@ -35,5 +35,5 @@ Reports: build/reports/visual-100-proof-dashboard.json and .md
 UI implementation changed: no
 Hosted CI activated: no
 Release/accessibility/App Store claims: not claimed
-Rollback notes: restore docs/canon/frontend, build/reports, Makefile, scripts/ambitions-visual-100-*.py
+Rollback notes: restore frontend/visual-encyclopedia, build/reports, Makefile, scripts/ambitions-visual-100-*.py
 Commit: not yet created

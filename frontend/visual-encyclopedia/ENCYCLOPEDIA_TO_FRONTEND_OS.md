@@ -18,7 +18,7 @@ Implementation starts from a surface ID, not from ad hoc repo browsing.
 4. Generate the implementation prompt.
 5. Implement only within the declared source scope.
 6. Produce proof and a receipt when code changes land.
-7. Run drift check, source bindings, dashboard, and next-surface queue.
+7. Run drift check, source bindings, proof summary, and next-surface queue.
 
 ## What Each Artifact Means
 
@@ -29,7 +29,7 @@ Implementation starts from a surface ID, not from ad hoc repo browsing.
 - Receipts record what changed and what proof was collected.
 - Proof contracts define the evidence needed for each tier.
 - Drift checks catch new mismatch between active truth and generated control-plane artifacts.
-- Dashboards summarize current implementation status without claiming shipped UI.
+- Proof summaries record current implementation status without claiming shipped UI.
 - Next-surface queues rank work by readiness and dependency.
 
 ## Hard Rules

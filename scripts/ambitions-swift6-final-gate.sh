@@ -21,6 +21,7 @@ fi
 echo "Ambitions Swift 6 final gate"
 echo "Root: ${ROOT}"
 echo "Simulator destination: ${SIM_DESTINATION:-unresolved}"
+echo "Code signing: simulator default"
 
 python3 scripts/ambitions-swift6-modernization-scan.py --self-test
 python3 tools/tests/test_ambitions_swift6_modernization_scan.py
@@ -47,8 +48,7 @@ xcodegen generate
 xcodebuild build \
   -project Ambitions.xcodeproj \
   -scheme Ambitions \
-  -destination "${SIM_DESTINATION}" \
-  CODE_SIGNING_ALLOWED=NO
+  -destination "${SIM_DESTINATION}"
 
 xcodebuild test \
   -project Ambitions.xcodeproj \
@@ -58,7 +58,6 @@ xcodebuild test \
   -only-testing:AmbitionsTests/StorageMigrationExecutionReadinessTestingTests \
   -only-testing:AmbitionsTests/AppIntentRoutingTests \
   -only-testing:AmbitionsTests/ExternalActionCommandServiceTests \
-  -only-testing:AmbitionsTests/ExternalSurfaceControlContractsTests \
-  CODE_SIGNING_ALLOWED=NO
+  -only-testing:AmbitionsTests/ExternalSurfaceControlContractsTests
 
 echo "AMBITIONS_SWIFT6_FINAL_GATE_STATUS=GREEN"

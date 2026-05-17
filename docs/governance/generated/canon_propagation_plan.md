@@ -1136,7 +1136,6 @@ Generated: 2026-05-17T13:05:46-04:00
 - prompts/batches/THROUGHPUT-ACCELERATION-01.md
 - prompts/batches/PK37.md
 - prompts/batches/MRI10-RECOMMENDATION-TRACE-RUNTIME.md
-- prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03-MERGED.md
 - prompts/batches/PFC33.md
 - prompts/batches/SA13.md
 - prompts/batches/LDI16.md

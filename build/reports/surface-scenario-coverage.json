@@ -11,17 +11,17 @@
   "surface_count": 29,
   "surfaces": [
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/today_root_reality_meridian.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_root_reality_meridian.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md",
       "scenarios": {
         "blocked": {
           "definition": "Today Root / Reality Meridian distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -150,17 +150,17 @@
       "surface_name": "Today Root / Reality Meridian"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/today_start_here_region.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_start_here_region.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_start_here_region.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_start_here_region.md",
       "scenarios": {
         "blocked": {
           "definition": "Today Start Here Region distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -289,17 +289,17 @@
       "surface_name": "Today Start Here Region"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/today_reality_meridian_rail.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_rail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_reality_meridian_rail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_reality_meridian_rail.md",
       "scenarios": {
         "blocked": {
           "definition": "Today Reality Meridian Rail distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -428,17 +428,17 @@
       "surface_name": "Today Reality Meridian Rail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/today_recommended_step_object.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_recommended_step_object.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_recommended_step_object.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_recommended_step_object.md",
       "scenarios": {
         "blocked": {
           "definition": "Today Recommended Step Object distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -567,17 +567,17 @@
       "surface_name": "Today Recommended Step Object"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/today_now_next_later_sequence.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/today_now_next_later_sequence.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/today_now_next_later_sequence.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/today_now_next_later_sequence.md",
       "scenarios": {
         "blocked": {
           "definition": "Today Now / Next / Later Sequence distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -706,17 +706,17 @@
       "surface_name": "Today Now / Next / Later Sequence"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/closure_sheet.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/closure_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/closure_sheet.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/closure_sheet.md",
       "scenarios": {
         "blocked": {
           "definition": "Closure Sheet distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -845,17 +845,17 @@
       "surface_name": "Closure Sheet"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/step_detail.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/step_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/step_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/step_detail.md",
       "scenarios": {
         "blocked": {
           "definition": "Step Detail distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -984,17 +984,17 @@
       "surface_name": "Step Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/step_session.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/step_session.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/step_session.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/step_session.md",
       "scenarios": {
         "blocked": {
           "definition": "Step Session distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -1123,17 +1123,17 @@
       "surface_name": "Step Session"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/recommendation_source_sheet.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/recommendation_source_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/recommendation_source_sheet.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/recommendation_source_sheet.md",
       "scenarios": {
         "blocked": {
           "definition": "Recommendation Source Sheet distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -1262,17 +1262,17 @@
       "surface_name": "Recommendation Source Sheet"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/today/receipt_detail.md",
-        "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/today/receipt_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/today/receipt_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/today/receipt_detail.md",
       "scenarios": {
         "blocked": {
           "definition": "Receipt Detail distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -1401,17 +1401,17 @@
       "surface_name": "Receipt Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/time/time_root_lifeshape_field.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/time_root_lifeshape_field.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md",
       "scenarios": {
         "blocked": {
           "definition": "Time Root / LifeShape Field distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -1540,17 +1540,17 @@
       "surface_name": "Time Root / LifeShape Field"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/time/day_lifeshape_surface.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/day_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/day_lifeshape_surface.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/day_lifeshape_surface.md",
       "scenarios": {
         "blocked": {
           "definition": "Day LifeShape Surface distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -1679,17 +1679,17 @@
       "surface_name": "Day LifeShape Surface"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/time/week_lifeshape_surface.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/week_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/week_lifeshape_surface.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/week_lifeshape_surface.md",
       "scenarios": {
         "blocked": {
           "definition": "Week LifeShape Surface distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -1818,17 +1818,17 @@
       "surface_name": "Week LifeShape Surface"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/time/month_lifeshape_surface.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/month_lifeshape_surface.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/month_lifeshape_surface.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/month_lifeshape_surface.md",
       "scenarios": {
         "blocked": {
           "definition": "Month LifeShape Surface distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -1957,17 +1957,17 @@
       "surface_name": "Month LifeShape Surface"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/time/reflow_preview_tray.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/reflow_preview_tray.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/reflow_preview_tray.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/reflow_preview_tray.md",
       "scenarios": {
         "blocked": {
           "definition": "Reflow Preview Tray distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -2096,17 +2096,17 @@
       "surface_name": "Reflow Preview Tray"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/time/best_fit_explanation_sheet.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/best_fit_explanation_sheet.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/best_fit_explanation_sheet.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/best_fit_explanation_sheet.md",
       "scenarios": {
         "blocked": {
           "definition": "Best Fit Explanation Sheet distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -2235,17 +2235,17 @@
       "surface_name": "Best Fit Explanation Sheet"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/time/protected_time_detail.md",
-        "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/time/protected_time_detail.md",
+        "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/time/protected_time_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/time/protected_time_detail.md",
       "scenarios": {
         "blocked": {
           "definition": "Protected Time Detail distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -2374,17 +2374,17 @@
       "surface_name": "Protected Time Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/capture/capture_root_atmosphere_composer.md",
-        "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/capture/capture_root_atmosphere_composer.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/capture/capture_root_atmosphere_composer.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_root_atmosphere_composer.md",
       "scenarios": {
         "blocked": {
           "definition": "Capture Root / Atmosphere Composer distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -2513,17 +2513,17 @@
       "surface_name": "Capture Root / Atmosphere Composer"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/capture/capture_post_input_route_reveal.md",
-        "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/capture/capture_post_input_route_reveal.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/capture/capture_post_input_route_reveal.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_post_input_route_reveal.md",
       "scenarios": {
         "blocked": {
           "definition": "Capture Post-Input Route Reveal distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -2652,17 +2652,17 @@
       "surface_name": "Capture Post-Input Route Reveal"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/capture/capture_hold_needs_a_place_route.md",
-        "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/capture/capture_hold_needs_a_place_route.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/capture/capture_hold_needs_a_place_route.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_hold_needs_a_place_route.md",
       "scenarios": {
         "blocked": {
           "definition": "Capture Hold / Needs a Place Route distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -2791,17 +2791,17 @@
       "surface_name": "Capture Hold / Needs a Place Route"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/capture/capture_receipt.md",
-        "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/capture/capture_receipt.md",
+        "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/capture/capture_receipt.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/capture/capture_receipt.md",
       "scenarios": {
         "blocked": {
           "definition": "Capture Receipt distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -2930,17 +2930,17 @@
       "surface_name": "Capture Receipt"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/goals/goals_root_constellation_atlas.md",
-        "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/goals/goals_root_constellation_atlas.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/goals/goals_root_constellation_atlas.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/goals_root_constellation_atlas.md",
       "scenarios": {
         "blocked": {
           "definition": "Goals Root / Constellation Atlas distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -3069,17 +3069,17 @@
       "surface_name": "Goals Root / Constellation Atlas"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/goals/proof_trail.md",
-        "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/goals/proof_trail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/goals/proof_trail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/proof_trail.md",
       "scenarios": {
         "blocked": {
           "definition": "Proof Trail distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -3208,17 +3208,17 @@
       "surface_name": "Proof Trail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/goals/goal_thread_detail.md",
-        "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/goals/goal_thread_detail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/goals/goal_thread_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/goal_thread_detail.md",
       "scenarios": {
         "blocked": {
           "definition": "Goal Thread Detail distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -3347,17 +3347,17 @@
       "surface_name": "Goal Thread Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/goals/reflection_recovery_detail.md",
-        "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/goals/reflection_recovery_detail.md",
+        "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/goals/reflection_recovery_detail.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/goals/reflection_recovery_detail.md",
       "scenarios": {
         "blocked": {
           "definition": "Reflection / Recovery Detail distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -3486,17 +3486,17 @@
       "surface_name": "Reflection / Recovery Detail"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/you/you_root_user_system_profile.md",
-        "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/you/you_root_user_system_profile.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md",
       "scenarios": {
         "blocked": {
           "definition": "You Root / User System Profile distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -3625,17 +3625,17 @@
       "surface_name": "You Root / User System Profile"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/you/local_runtime_trust_panel.md",
-        "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/you/local_runtime_trust_panel.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/you/local_runtime_trust_panel.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/local_runtime_trust_panel.md",
       "scenarios": {
         "blocked": {
           "definition": "Local Runtime Trust Panel distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -3764,17 +3764,17 @@
       "surface_name": "Local Runtime Trust Panel"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/you/automation_and_trust.md",
-        "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/you/automation_and_trust.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/you/automation_and_trust.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/automation_and_trust.md",
       "scenarios": {
         "blocked": {
           "definition": "Automation & Trust distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",
@@ -3903,17 +3903,17 @@
       "surface_name": "Automation & Trust"
     },
     {
-      "bible_path": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "bible_path": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "coverage_source_basis": [
-        "docs/canon/frontend/recipes/you/local_data_reset_forget.md",
-        "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+        "frontend/visual-encyclopedia/recipes/you/local_data_reset_forget.md",
+        "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
         "docs/truth/PRODUCT_DESIGN_TRUTH.md",
         "docs/truth/PRODUCT_MOAT_TRUTH.md",
         "docs/truth/IMPLEMENTATION_TRUTH.md",
-        "docs/canon/frontend/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
+        "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md"
       ],
       "implementation_proof_status": "Not In Scope",
-      "recipe_path": "docs/canon/frontend/recipes/you/local_data_reset_forget.md",
+      "recipe_path": "frontend/visual-encyclopedia/recipes/you/local_data_reset_forget.md",
       "scenarios": {
         "blocked": {
           "definition": "Local Data / Reset / Forget distinguishes blocked work from failure and offers unblock, defer, or recovery actions with receipt-safe language.",

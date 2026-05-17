@@ -6,13 +6,13 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 
 ## Summary
 
-- active_authority: 246
+- active_authority: 249
 - supporting_authority: 9
-- generated_output: 3
-- report_only: 197
+- generated_output: 6
+- report_only: 591
 - historical: 1
 - obsolete: 0
-- archive_candidate: 15
+- archive_candidate: 16
 - delete_candidate: 0
 
 ## File Classification
@@ -24,19 +24,27 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | docs/truth/IMPLEMENTATION_TRUTH.md | active_authority | current repo truth | — | — |
 | docs/truth/PRODUCT_DESIGN_TRUTH.md | active_authority | current repo truth | — | — |
 | docs/truth/PRODUCT_MOAT_TRUTH.md | active_authority | current repo truth | — | — |
+| docs/truth/PRODUCT_UPGRADES_VISION.md | active_authority | current repo truth | — | — |
 | docs/truth/README.md | active_authority | current repo truth | — | — |
 | docs/truth/RELEASE_TRUTH.md | active_authority | current repo truth | — | — |
 | frontend/visual-encyclopedia/ACTIVE_IA_AND_SURFACE_MAP.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/CHROME_ENRICHMENT_DOCTRINE.md | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/CHROME_PRIMITIVES.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/DESIGN_SYSTEM_TO_VISUAL_ENCYCLOPEDIA_BRIDGE.md | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/FRONTEND_SURFACE_COVERAGE_MAP.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/MRI_HBI_FRONTEND_INTEGRATION_MAP.md | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/OBJECT_GRAPH_ARCHITECTURE.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/OBSOLETE_AND_EXCLUDED_VISUAL_REFERENCE_LEDGER.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/PLANNED_TRAIN_FRONTEND_INTEGRATION_MAP.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/README.md | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/START_HERE_REALITY_RECOGNITION_DOCTRINE.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/SURFACE_RECIPE_INDEX.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.yaml | report_only | supporting control-plane file | — | — |
@@ -90,6 +98,11 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | frontend/visual-encyclopedia/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/contracts/VOICEOVER_ORDER_CONTRACT.md | active_authority | active frontend canon | — | — |
+| frontend/visual-encyclopedia/decisions/README.md | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/decisions/UI_DECISION_LEDGER.yaml | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/decisions/active/UID-2026-05-15-bottom-ia-five-tabs.yaml | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/decisions/active/UID-2026-05-15-today-live-current-time-cursor.yaml | report_only | supporting control-plane file | — | — |
+| frontend/visual-encyclopedia/decisions/active/UID-2026-05-15-today-local-ambitions-lockup.yaml | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/gates/FALSE_GREEN_PREVENTION.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/gates/LOCAL_FIRST_RUNTIME_TRUST_GATE.md | report_only | supporting control-plane file | — | — |
 | frontend/visual-encyclopedia/gates/NORTH_STAR_100_ACCEPTANCE_GATE.md | report_only | supporting control-plane file | — | — |
@@ -256,6 +269,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | frontend/visual-encyclopedia/recipes/time/vacation_away_time_entry.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/time/week_detail.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/time/week_lifeshape_surface.md | active_authority | active frontend canon | — | — |
+| frontend/visual-encyclopedia/recipes/today/README.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/today/adjust_plan_reflow_preview_entry.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/today/blocked_detail.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/today/closure_sheet.md | active_authority | active frontend canon | — | — |
@@ -273,6 +287,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | frontend/visual-encyclopedia/recipes/today/today_now_next_later_sequence.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/today/today_overloaded_state.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/today/today_protected_time_state.md | active_authority | active frontend canon | — | — |
+| frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/today/today_reality_meridian_rail.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/today/today_receipt_shelf.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/recipes/today/today_recommended_step_object.md | active_authority | active frontend canon | — | — |
@@ -318,6 +333,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md | active_authority | active frontend canon | — | — |
 | frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md | active_authority | active frontend canon | — | — |
+| frontend/visual-encyclopedia/trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/COMPONENT_CONTRACT_AUTHORITY_LEDGER.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/COMPONENT_TO_CANON_TRACE_MATRIX.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/DESIGN_SYSTEM_AUTHORITY_LEDGER.md | report_only | trace output or supporting ledger | — | — |
@@ -327,6 +343,11 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | frontend/visual-encyclopedia/trace/FAANG_FLAGSHIP_RED_TEAM_REVIEW.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/FINAL_FORM_LOCK_REPAIR_05_AUTHORITY_STATUS.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/FINAL_FORM_LOCK_REPAIR_05_GAP_LEDGER.md | report_only | trace output or supporting ledger | — | — |
+| frontend/visual-encyclopedia/trace/FLAGSHIP_OBJECT_MATURITY_GATES.md | report_only | trace output or supporting ledger | — | — |
+| frontend/visual-encyclopedia/trace/FLAGSHIP_OBJECT_SURFACE_MATRIX.md | report_only | trace output or supporting ledger | — | — |
+| frontend/visual-encyclopedia/trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml | report_only | trace output or supporting ledger | — | — |
+| frontend/visual-encyclopedia/trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml | report_only | trace output or supporting ledger | — | — |
+| frontend/visual-encyclopedia/trace/FRONTEND_SOURCE_BINDINGS.yaml | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/FRONTEND_SOURCE_PRECEDENCE_LEDGER.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/INTENDED_STATE_COVERAGE_MATRIX.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/LOCAL_FIRST_RUNTIME_TRUST_MATRIX.yaml | report_only | trace output or supporting ledger | — | — |
@@ -341,6 +362,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | frontend/visual-encyclopedia/trace/PROMPT_SOURCE_CANON_AUTHORITY_LEDGER.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/SCREENSHOT_PROOF_MATRIX.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/SCREEN_TO_DRILLDOWN_MATRIX.md | report_only | trace output or supporting ledger | — | — |
+| frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/SNAPSHOT_TEST_TARGET_PLAN.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/SOURCE_PROOF_RECEIPT_COVERAGE_MATRIX.yaml | supporting_authority | current visual control plane | — | — |
 | frontend/visual-encyclopedia/trace/SOURCE_TRUTH_TO_FRONTEND_CANON_MATRIX.md | report_only | trace output or supporting ledger | — | — |
@@ -354,6 +376,8 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | frontend/visual-encyclopedia/trace/TRAIN_FAMILY_TO_PRIMITIVE_MATRIX.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/TRAIN_FAMILY_TO_SURFACE_MATRIX.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/TRAIN_FAMILY_UNRESOLVED_DIRECTION_GAPS.md | report_only | trace output or supporting ledger | — | — |
+| frontend/visual-encyclopedia/trace/UI_DECISION_TO_DESIGN_SYSTEM_MATRIX.yaml | report_only | trace output or supporting ledger | — | — |
+| frontend/visual-encyclopedia/trace/UI_DECISION_TO_SURFACE_MATRIX.yaml | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/UNMAPPED_INTENDED_SURFACE_GAPS.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/UNRESOLVED_FRONTEND_GAPS.md | report_only | trace output or supporting ledger | — | — |
 | frontend/visual-encyclopedia/trace/VISUAL_100_FLAG_RESOLUTION_MATRIX.yaml | report_only | trace output or supporting ledger | — | — |
@@ -391,6 +415,9 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | Sources/Theme/AmbitionStateTokens.generated.swift | generated_output | generated from DesignTokens | — | — |
 | Sources/Theme/AmbitionTheme.swift | report_only | supporting control-plane file | — | — |
 | Sources/Theme/AmbitionTokens.generated.swift | generated_output | generated from DesignTokens | — | — |
+| Sources/Theme/AmbitionsFrontendAuthority.generated.swift | generated_output | generated from DesignTokens | — | — |
+| Sources/Theme/AmbitionsRecipeID.generated.swift | generated_output | generated from DesignTokens | — | — |
+| Sources/Theme/AmbitionsSurfaceID.generated.swift | generated_output | generated from DesignTokens | — | — |
 | Sources/Theme/PanelDensitySize.swift | report_only | supporting control-plane file | — | — |
 | build/reports/accessibility-contract.json | report_only | validation output only | — | — |
 | build/reports/active-authority-residue-zero.json | report_only | validation output only | — | — |
@@ -401,6 +428,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | build/reports/ambitions-codex-os-validate.json | report_only | validation output only | — | — |
 | build/reports/authority-ledger.json | report_only | validation output only | — | — |
 | build/reports/authority-supersession.json | report_only | validation output only | — | — |
+| build/reports/chrome-enrichment-install-report.json | report_only | validation output only | — | — |
 | build/reports/component-contract-check.json | report_only | validation output only | — | — |
 | build/reports/dashboard-conflict-authority.json | report_only | validation output only | — | — |
 | build/reports/dependency-boundary.json | report_only | validation output only | — | — |
@@ -412,11 +440,359 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | build/reports/design-token-contract.json | report_only | validation output only | — | — |
 | build/reports/design-token-drift.json | report_only | validation output only | — | — |
 | build/reports/design-token-generation.json | report_only | validation output only | — | — |
+| build/reports/encyclopedia-to-frontend-operating-system-06.json | report_only | validation output only | — | — |
+| build/reports/encyclopedia-to-frontend-operating-system-06.md | report_only | validation output only | — | — |
+| build/reports/encyclopedia-to-frontend-os-final-gate.json | report_only | validation output only | — | — |
+| build/reports/encyclopedia-to-frontend-os-final-gate.md | report_only | validation output only | — | — |
 | build/reports/faang-red-team-evidence.json | report_only | validation output only | — | — |
 | build/reports/faang-red-team-review.json | report_only | validation output only | — | — |
 | build/reports/feature-service-boundary.json | report_only | validation output only | — | — |
+| build/reports/flagship-object-system-install-report.json | report_only | validation output only | — | — |
 | build/reports/frontend-architecture-atlas-visual-encyclopedia-001.json | report_only | validation output only | — | — |
 | build/reports/frontend-architecture-atlas-visual-encyclopedia-001.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-global-train-hook-install.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/about_ambitions.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/about_ambitions.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/adjust_plan_reflow_preview_entry.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/adjust_plan_reflow_preview_entry.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/alternate_path_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/alternate_path_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/ambition_graph.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/ambition_graph.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/automation_and_trust.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/automation_and_trust.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/back_navigation.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/back_navigation.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/best_fit_explanation_sheet.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/best_fit_explanation_sheet.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/best_fit_marker.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/best_fit_marker.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/best_fit_region.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/best_fit_region.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/blocked_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/blocked_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/blocked_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/blocked_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/blocker_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/blocker_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_active_text_entry.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_active_text_entry.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_attachment_proof_picker.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_attachment_proof_picker.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_dictation_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_dictation_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_empty_first_use_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_empty_first_use_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_error_failed_attachment_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_error_failed_attachment_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_first_use_prompt.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_first_use_prompt.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_grow_into_goal_route.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_grow_into_goal_route.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_hold_needs_a_place_route.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_hold_needs_a_place_route.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_idle_composer.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_idle_composer.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_make_commitment_route.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_make_commitment_route.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_mark_constraint_route.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_mark_constraint_route.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_offline_local_only_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_offline_local_only_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_parse_uncertain_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_parse_uncertain_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_post_input_route_reveal.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_post_input_route_reveal.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_preferences.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_preferences.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_receipt.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_receipt.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_reflect_route.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_reflect_route.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_root_atmosphere_composer.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_root_atmosphere_composer.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_save_as_proof_route.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/capture_save_as_proof_route.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/celestialfield_semantic_layer.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/celestialfield_semantic_layer.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/chevron_disclosure_row.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/chevron_disclosure_row.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/closure_sheet.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/closure_sheet.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/closure_system.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/closure_system.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/commitment_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/commitment_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/commitment_staging_tray.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/commitment_staging_tray.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/compact_surface_header.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/compact_surface_header.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/context_crown.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/context_crown.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/day_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/day_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/day_lifeshape_surface.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/day_lifeshape_surface.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/destination_dock.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/destination_dock.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/destination_tab_item.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/destination_tab_item.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/destructive_cta.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/destructive_cta.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/disabled_cta.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/disabled_cta.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/first_run_root.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/first_run_root.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/focus_session_defaults.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/focus_session_defaults.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/global_app_shell.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/global_app_shell.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/global_empty_state_shell.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/global_empty_state_shell.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/global_error_fallback_shell.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/global_error_fallback_shell.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goal_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goal_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goal_thread_context_from_today.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goal_thread_context_from_today.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goal_thread_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goal_thread_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_archive_historical_goal_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_archive_historical_goal_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_blocked_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_blocked_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_empty_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_empty_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_first_use_prompt.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_first_use_prompt.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_life_area_map.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_life_area_map.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_review_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_review_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_root_constellation_atlas.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/goals_root_constellation_atlas.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/graphiterecess_base.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/graphiterecess_base.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/help.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/help.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/index.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/index.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/local_data_reset_forget.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/local_data_reset_forget.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/local_runtime_source_detail_from_today.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/local_runtime_source_detail_from_today.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/local_runtime_trust_panel.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/local_runtime_trust_panel.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/luminoustrace_state_line.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/luminoustrace_state_line.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/milestone_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/milestone_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/month_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/month_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/month_lifeshape_surface.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/month_lifeshape_surface.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/moved_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/moved_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/needs_recovery_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/needs_recovery_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/needs_review_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/needs_review_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/notifications.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/notifications.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/open_marker.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/open_marker.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/open_time_region.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/open_time_region.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/personal_runtime.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/personal_runtime.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/planning_defaults.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/planning_defaults.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/planning_defaults_entry.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/planning_defaults_entry.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/planning_defaults_prompt.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/planning_defaults_prompt.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/planning_setup_section.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/planning_setup_section.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/pressure_marker.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/pressure_marker.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/pressure_region.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/pressure_region.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/primary_cta.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/primary_cta.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/privacy.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/privacy.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/privacy_local_runtime_explanation.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/privacy_local_runtime_explanation.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_attachment_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_attachment_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_gap_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_gap_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_trail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_trail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_trail_system.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/proof_trail_system.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/protected_marker.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/protected_marker.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/protected_time_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/protected_time_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/protected_time_region.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/protected_time_region.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/quietglass_wrapper.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/quietglass_wrapper.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/receipt_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/receipt_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/receipt_system.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/receipt_system.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/receipt_toast_inline_confirmation.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/receipt_toast_inline_confirmation.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/recommendation_source_sheet.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/recommendation_source_sheet.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/recommendation_source_system.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/recommendation_source_system.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/recommended_step_context_from_goals.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/recommended_step_context_from_goals.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/recovery_flex_region.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/recovery_flex_region.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/reflection_recovery_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/reflection_recovery_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/reflow_preview_tray.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/reflow_preview_tray.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/reflow_week_flow.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/reflow_week_flow.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/review_pressure_surface.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/review_pressure_surface.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/schedule_and_availability.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/schedule_and_availability.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/schedule_and_availability_entry.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/schedule_and_availability_entry.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/schedule_setup_prompt.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/schedule_setup_prompt.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/secondary_cta.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/secondary_cta.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/selected_life_area_surface.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/selected_life_area_surface.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/shape_day_flow.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/shape_day_flow.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/shape_month_flow.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/shape_month_flow.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/sheet_chrome.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/sheet_chrome.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/skipped_not_needed_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/skipped_not_needed_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/source_freshness_badge.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/source_freshness_badge.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/step_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/step_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/step_session.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/step_session.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/still_counts_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/still_counts_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_first_use_prompt.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_first_use_prompt.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_no_calendar_data_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_no_calendar_data_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_overloaded_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_overloaded_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_protected_block_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_protected_block_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_receipt_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_receipt_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_root_lifeshape_field.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_root_lifeshape_field.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_scope_control.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_scope_control.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_stale_source_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_stale_source_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_vacation_away_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/time_vacation_away_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_closure_prompt_region.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_closure_prompt_region.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_current_context_header.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_current_context_header.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_empty_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_empty_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_first_use_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_first_use_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_no_schedule_data_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_no_schedule_data_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_now_next_later_sequence.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_now_next_later_sequence.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_overloaded_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_overloaded_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_protected_time_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_protected_time_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_reality_meridian_rail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_reality_meridian_rail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_receipt_shelf.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_receipt_shelf.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_recommended_step_object.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_recommended_step_object.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_recovery_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_recovery_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_root_reality_meridian.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_root_reality_meridian.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_source_freshness_indicator.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_source_freshness_indicator.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_stale_recommendation_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_stale_recommendation_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_start_here_region.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_start_here_region.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_upcoming_commitments_region.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_upcoming_commitments_region.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_vacation_away_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/today_vacation_away_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/tray_chrome.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/tray_chrome.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/user_profile_header.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/user_profile_header.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/vacation_away_time.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/vacation_away_time.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/vacation_away_time_entry.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/vacation_away_time_entry.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/waiting_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/waiting_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/waiting_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/waiting_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/week_detail.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/week_detail.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/week_lifeshape_surface.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/week_lifeshape_surface.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/why_this_sheet.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/why_this_sheet.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/you_empty_first_run_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/you_empty_first_run_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/you_offline_local_only_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/you_offline_local_only_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/you_root_user_system_profile.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/you_root_user_system_profile.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/you_trust_warning_state.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-packets/you_trust_warning_state.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/capture_root_atmosphere_composer.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/capture_root_atmosphere_composer.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/goals_root_constellation_atlas.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/goals_root_constellation_atlas.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/time_root_lifeshape_field.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/time_root_lifeshape_field.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/today_root_reality_meridian.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/today_root_reality_meridian.md | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/you_root_user_system_profile.json | report_only | validation output only | — | — |
+| build/reports/frontend-authority-preflight/you_root_user_system_profile.md | report_only | validation output only | — | — |
+| build/reports/frontend-decision-os-install.md | report_only | validation output only | — | — |
+| build/reports/frontend-drift-check.json | report_only | validation output only | — | — |
+| build/reports/frontend-drift-check.md | report_only | validation output only | — | — |
+| build/reports/frontend-implementation-dashboard.json | report_only | validation output only | — | — |
+| build/reports/frontend-implementation-dashboard.md | report_only | validation output only | — | — |
+| build/reports/frontend-implementation-prompts/TODAY-REALITY-MERIDIAN-FLAGSHIP-IMPLEMENTATION-01.json | report_only | validation output only | — | — |
+| build/reports/frontend-next-surface-queue.json | report_only | validation output only | — | — |
+| build/reports/frontend-next-surface-queue.md | report_only | validation output only | — | — |
+| build/reports/frontend-proof-contract-check.json | report_only | validation output only | — | — |
+| build/reports/frontend-proof-contract-check.md | report_only | validation output only | — | — |
+| build/reports/frontend-receipt-check.json | report_only | validation output only | — | — |
+| build/reports/frontend-receipt-check.md | report_only | validation output only | — | — |
+| build/reports/frontend-source-bindings.json | report_only | validation output only | — | — |
+| build/reports/frontend-source-bindings.md | report_only | validation output only | — | — |
 | build/reports/frontend-surface-recipe-completeness-review-001.json | report_only | validation output only | — | — |
 | build/reports/frontend-surface-recipe-completeness-review-001.md | report_only | validation output only | — | — |
 | build/reports/frontend-surface-recipe-encyclopedia-001.json | report_only | validation output only | — | — |
@@ -430,10 +806,34 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | build/reports/native-iphone-interaction-grammar.json | report_only | validation output only | — | — |
 | build/reports/performance-budget.json | report_only | validation output only | — | — |
 | build/reports/preview-matrix.json | report_only | validation output only | — | — |
+| build/reports/signature-visual-instruments-encyclopedia-07-api-install.md | report_only | validation output only | — | — |
+| build/reports/signature-visual-instruments-encyclopedia-07-install.md | report_only | validation output only | — | — |
 | build/reports/source-proof-receipt-coverage.json | report_only | validation output only | — | — |
 | build/reports/source-provenance-batch-linkage-complete.json | report_only | validation output only | — | — |
 | build/reports/state-machine-contract.json | report_only | validation output only | — | — |
 | build/reports/surface-scenario-coverage.json | report_only | validation output only | — | — |
+| build/reports/ui-decision-final-gate.json | report_only | validation output only | — | — |
+| build/reports/ui-decision-final-gate.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/decision-summary.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/design-system-gap-report.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/generated-implementation-prompt.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/implementation-receipt.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/proof-contract.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/decision-summary.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/design-system-gap-report.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/generated-implementation-prompt.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/implementation-receipt.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/proof-contract.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/world-class-richness-followup.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/decision-summary.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/design-system-gap-report.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/generated-implementation-prompt.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/implementation-receipt.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/proof-contract.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-16-start-here-product-kernel/design-system-gap-report.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-16-start-here-product-kernel/generated-implementation-prompt.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-16-start-here-product-kernel/implementation-receipt.md | report_only | validation output only | — | — |
+| build/reports/ui-decisions/UID-2026-05-16-start-here-product-kernel/proof-contract.md | report_only | validation output only | — | — |
 | build/reports/visual-100-accessibility-adhd.json | report_only | validation output only | — | — |
 | build/reports/visual-100-anti-generic.json | report_only | validation output only | — | — |
 | build/reports/visual-100-atlas-subordination.json | report_only | validation output only | — | — |
@@ -474,6 +874,7 @@ Batch: `VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04`
 | build/reports/visual-template-residue.json | report_only | validation output only | — | — |
 | build/reports/visual-vocabulary-boundary.json | report_only | validation output only | — | — |
 | docs/archive/README.md | archive_candidate | explicitly archived history | — | — |
+| docs/archive/generated/historical-registry-extract.md | archive_candidate | explicitly archived history | — | — |
 | docs/archive/superseded-design-canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md | archive_candidate | explicitly archived history | — | — |
 | docs/archive/superseded-design-canon/design/copy-state-language-spec.md | archive_candidate | explicitly archived history | — | — |
 | docs/archive/superseded-design-canon/design/cross-device-surface-roles-spec.md | archive_candidate | explicitly archived history | — | — |

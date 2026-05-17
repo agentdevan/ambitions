@@ -5,7 +5,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/objects/*.md"
+        "frontend/visual-encyclopedia/objects/*.md"
       ],
       "name": "Apple-native believability",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -16,7 +16,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md"
+        "frontend/visual-encyclopedia/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md"
       ],
       "name": "OpenAI-level intelligence clarity",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -27,7 +27,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.yaml"
+        "frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml"
       ],
       "name": "Meta-level interaction/system cohesion",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -38,7 +38,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/objects/*.md"
+        "frontend/visual-encyclopedia/objects/*.md"
       ],
       "name": "premium visual distinctiveness",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -71,7 +71,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/behavior/ACCESSIBILITY_AND_ADHD_LAWS.md"
+        "frontend/visual-encyclopedia/behavior/ACCESSIBILITY_AND_ADHD_LAWS.md"
       ],
       "name": "accessibility realism",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -82,7 +82,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/behavior/LOCAL_FIRST_TRUST_BEHAVIOR.md"
+        "frontend/visual-encyclopedia/behavior/LOCAL_FIRST_TRUST_BEHAVIOR.md"
       ],
       "name": "privacy/local-first trust",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -93,7 +93,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/behavior/NO_FALSE_MOMENTUM.md"
+        "frontend/visual-encyclopedia/behavior/NO_FALSE_MOMENTUM.md"
       ],
       "name": "emotional feel",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -104,7 +104,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "Screenshot proof remains out of scope.",
       "files_inspected": [
-        "docs/canon/frontend/trace/SCREENSHOT_PROOF_MATRIX.md"
+        "frontend/visual-encyclopedia/trace/SCREENSHOT_PROOF_MATRIX.md"
       ],
       "name": "App Store screenshot readiness after implementation",
       "objection_or_risk": "Screenshot proof remains out of scope.",
@@ -137,7 +137,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/objects/ATMOSPHERE_COMPOSER_ANATOMY.md"
+        "frontend/visual-encyclopedia/objects/ATMOSPHERE_COMPOSER_ANATOMY.md"
       ],
       "name": "visual system originality",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -170,7 +170,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "",
       "files_inspected": [
-        "docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md"
+        "frontend/visual-encyclopedia/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md"
       ],
       "name": "lock-review usability",
       "objection_or_risk": "No hard blocker; the batch remains a control-plane repair, not implementation proof.",
@@ -214,7 +214,7 @@
       "blocker_status": "No blocker",
       "downgrade_reason": "Planned-canon candidate surfaces remain explicit future work.",
       "files_inspected": [
-        "docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.yaml"
+        "frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml"
       ],
       "name": "mature-universe gap visibility",
       "objection_or_risk": "Planned-canon candidate surfaces remain explicit future work.",

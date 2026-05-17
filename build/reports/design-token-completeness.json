@@ -28,7 +28,7 @@
       "high_contrast_fallback": "contract-defined fallback",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -63,7 +63,7 @@
       "high_contrast_fallback": "contract-defined fallback",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/BADGES_MARKERS_AND_STATE_GLYPHS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/BADGES_MARKERS_AND_STATE_GLYPHS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -98,7 +98,7 @@
       "high_contrast_fallback": "contract-defined fallback",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/ADHD_DENSITY_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/ADHD_DENSITY_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -133,7 +133,7 @@
       "high_contrast_fallback": "contract-defined fallback",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/REDUCE_MOTION.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/REDUCE_MOTION.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -168,7 +168,7 @@
       "high_contrast_fallback": "contract-defined fallback",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/DYNAMIC_TYPE_COLLAPSE_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/DYNAMIC_TYPE_COLLAPSE_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -203,7 +203,7 @@
       "high_contrast_fallback": "contract-defined fallback",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/VOICEOVER_ORDER_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/VOICEOVER_ORDER_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -238,7 +238,7 @@
       "high_contrast_fallback": "label plus stroke",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "destination_dock",
@@ -280,7 +280,7 @@
       "high_contrast_fallback": "label plus stroke",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/CTA_SYSTEM.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/CTA_SYSTEM.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "destination_dock",
@@ -322,7 +322,7 @@
       "high_contrast_fallback": "label plus stroke",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/DISCLOSURE_ROW_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/DISCLOSURE_ROW_CONTRACT.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "destination_dock",
@@ -364,7 +364,7 @@
       "high_contrast_fallback": "label plus stroke",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/WRAPPERS_AND_CONTAINERS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "destination_dock",
@@ -406,7 +406,7 @@
       "high_contrast_fallback": "label plus stroke",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/WRAPPERS_AND_CONTAINERS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "destination_dock",
@@ -448,7 +448,7 @@
       "high_contrast_fallback": "label plus stroke",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/WRAPPERS_AND_CONTAINERS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/WRAPPERS_AND_CONTAINERS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "destination_dock",
@@ -490,7 +490,7 @@
       "high_contrast_fallback": "label plus stroke",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/PROOF_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/PROOF_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "destination_dock",
@@ -532,7 +532,7 @@
       "high_contrast_fallback": "label plus stroke",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "destination_dock",
@@ -574,7 +574,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -609,7 +609,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -644,7 +644,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -679,7 +679,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -714,7 +714,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -749,7 +749,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -784,7 +784,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -819,7 +819,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -854,7 +854,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -889,7 +889,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -924,7 +924,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -959,7 +959,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -994,7 +994,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -1029,7 +1029,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -1064,7 +1064,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -1099,7 +1099,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -1134,7 +1134,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -1169,7 +1169,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -1204,7 +1204,7 @@
       "high_contrast_fallback": "static state label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/behavior/MOTION_AND_HAPTICS.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/behavior/MOTION_AND_HAPTICS.md",
       "mapped_recipe_ids": [
         "global_app_shell",
         "today_root_reality_meridian",
@@ -1239,7 +1239,7 @@
       "high_contrast_fallback": "surface label plus source line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md",
       "mapped_recipe_ids": [
         "capture_root_atmosphere_composer",
         "capture_post_input_route_reveal",
@@ -1271,7 +1271,7 @@
       "high_contrast_fallback": "surface label plus source line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md",
       "mapped_recipe_ids": [
         "goals_root_constellation_atlas",
         "goal_thread_detail",
@@ -1304,7 +1304,7 @@
       "high_contrast_fallback": "surface label plus source line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md",
       "mapped_recipe_ids": [
         "time_root_lifeshape_field",
         "day_lifeshape_surface",
@@ -1337,7 +1337,7 @@
       "high_contrast_fallback": "surface label plus source line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md",
       "mapped_recipe_ids": [
         "today_root_reality_meridian",
         "today_start_here_region",
@@ -1371,7 +1371,7 @@
       "high_contrast_fallback": "surface label plus source line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md",
       "mapped_recipe_ids": [
         "you_root_user_system_profile",
         "privacy",
@@ -1403,7 +1403,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
       "mapped_recipe_ids": [
         "capture_root_atmosphere_composer",
         "capture_post_input_route_reveal",
@@ -1435,7 +1435,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/DISCLOSURE_ROW_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/DISCLOSURE_ROW_CONTRACT.md",
       "mapped_recipe_ids": [
         "goals_root_constellation_atlas",
         "goal_thread_detail",
@@ -1468,7 +1468,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/RECEIPT_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/RECEIPT_CONTRACT.md",
       "mapped_recipe_ids": [
         "receipt_detail",
         "receipt_system",
@@ -1503,7 +1503,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/PROTECTED_TIME_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/PROTECTED_TIME_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "protected_time_detail",
         "today_protected_time_state",
@@ -1532,7 +1532,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/SOURCE_FRESHNESS_BADGE_CONTRACT.md",
       "mapped_recipe_ids": [
         "today_source_freshness_indicator",
         "source_freshness_badge",
@@ -1563,7 +1563,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "time_root_lifeshape_field",
         "day_lifeshape_surface",
@@ -1596,7 +1596,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
       "mapped_recipe_ids": [
         "today_root_reality_meridian",
         "today_start_here_region",
@@ -1630,7 +1630,7 @@
       "high_contrast_fallback": "elevated stroke and label",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/contracts/TRUST_SEAM_CONTRACT.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md",
       "mapped_recipe_ids": [
         "you_root_user_system_profile",
         "privacy",
@@ -1662,7 +1662,7 @@
       "high_contrast_fallback": "state label plus receipt line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/TRANSACTION_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/TRANSACTION_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "closure_sheet",
         "receipt_detail",
@@ -1693,7 +1693,7 @@
       "high_contrast_fallback": "state label plus receipt line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/TRANSACTION_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/TRANSACTION_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "proof_trail",
         "proof_detail",
@@ -1724,7 +1724,7 @@
       "high_contrast_fallback": "state label plus receipt line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/TRANSACTION_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/TRANSACTION_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "protected_time_detail",
         "protected_time_region",
@@ -1754,7 +1754,7 @@
       "high_contrast_fallback": "state label plus receipt line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/TRANSACTION_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/TRANSACTION_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "today_recovery_state",
         "goals_reflection_recovery_detail",
@@ -1787,7 +1787,7 @@
       "high_contrast_fallback": "state label plus receipt line",
       "implementation_proof_status": "generated_output_present",
       "light_mode_value_or_no_light_mode_status": "no_light_mode_status",
-      "mapped_primitive_or_contract": "docs/canon/frontend/primitives/TRANSACTION_PRIMITIVES.md",
+      "mapped_primitive_or_contract": "frontend/visual-encyclopedia/primitives/TRANSACTION_PRIMITIVES.md",
       "mapped_recipe_ids": [
         "today_source_freshness_indicator",
         "source_freshness_badge",

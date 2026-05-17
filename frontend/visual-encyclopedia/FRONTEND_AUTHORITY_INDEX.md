@@ -12,7 +12,7 @@ For frontend/UI/design implementation work:
 4. Generate the implementation prompt.
 5. Implement only within the declared source scope.
 6. Produce proof and a receipt after code changes land.
-7. Run drift check, source bindings, dashboard, and next-surface queue.
+7. Run drift check, source bindings, proof summary, and next-surface queue.
 
 ## Authority Order
 
@@ -164,7 +164,7 @@ This lock is design canon only. It does not prove SwiftUI implementation, simula
 - `build/reports/frontend-authority-preflight/*`
 - `build/reports/frontend-implementation-prompts/*`
 - `build/reports/frontend-source-bindings.json`
-- `build/reports/frontend-implementation-dashboard.json`
+- `build/reports/frontend-implementation-dashboard.json` (legacy report filename; treat as proof summary, not product vocabulary)
 - `build/reports/frontend-next-surface-queue.json`
 - `build/reports/frontend-drift-check.json`
 - `build/reports/frontend-receipt-check.json`

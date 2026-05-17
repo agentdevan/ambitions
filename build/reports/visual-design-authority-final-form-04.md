@@ -7,13 +7,13 @@ Summary:
 Final-form docs and validators are installed. The control plane is explicit about source, proof, scenario coverage, native interaction grammar, and supersession. This phase does not prove app implementation.
 
 Files changed:
-- docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md
-- docs/canon/frontend/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md
-- docs/canon/frontend/trace/VISUAL_NO_ORPHAN_GRAPH.yaml
-- docs/canon/frontend/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml
-- docs/canon/frontend/trace/NATIVE_IPHONE_INTERACTION_GRAMMAR_MATRIX.yaml
-- docs/canon/frontend/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml
-- docs/canon/frontend/trace/FAANG_FLAGSHIP_RED_TEAM_REVIEW.md
+- frontend/visual-encyclopedia/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md
+- frontend/visual-encyclopedia/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md
+- frontend/visual-encyclopedia/trace/VISUAL_NO_ORPHAN_GRAPH.yaml
+- frontend/visual-encyclopedia/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml
+- frontend/visual-encyclopedia/trace/NATIVE_IPHONE_INTERACTION_GRAMMAR_MATRIX.yaml
+- frontend/visual-encyclopedia/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml
+- frontend/visual-encyclopedia/trace/FAANG_FLAGSHIP_RED_TEAM_REVIEW.md
 - scripts/ambitions-visual-no-orphan-graph-check.py
 - scripts/ambitions-surface-scenario-coverage-check.py
 - scripts/ambitions-native-iphone-interaction-grammar-check.py

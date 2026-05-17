@@ -8,7 +8,7 @@ DesignTokens is the formal token source tree for the design-system install.
 
     - `docs/truth/PRODUCT_DESIGN_TRUTH.md`
     - `Sources/Theme/AmbitionTheme.swift`
-    - `docs/canon/frontend/primitives/*`
+    - `frontend/visual-encyclopedia/primitives/*`
 
     ## Rule
 

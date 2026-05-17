@@ -53,7 +53,7 @@ def negative_context(line: str, heading: str) -> bool:
     text = f"{heading} {line}".lower()
     return bool(
         re.search(
-            r"\b(no|not|never|without|avoid|avoids|avoiding|instead of|rather than|replace|do not|does not|cannot|can't|won't|forbidden|historical|compatibility|obsolete|internal|example|bad|fail|fails|failure|boundary|negative|anti-generic|score system|rank or score|non-score|gambling|benchmark)\b",
+            r"\b(no|not|never|without|avoid|avoids|avoiding|instead of|rather than|replace|do not|does not|cannot|can't|won't|forbidden|historical|compatibility|obsolete|internal|example|bad|fail|fails|failure|boundary|negative|anti-generic|supersede|supersedes|score system|rank or score|non-score|gambling|benchmark)\b",
             text,
         )
     )
@@ -73,6 +73,9 @@ def main() -> int:
             stripped = line.strip()
             if stripped.startswith("#"):
                 current_heading = stripped.lstrip("#").strip().lower()
+                continue
+            if stripped.endswith(":"):
+                current_heading = stripped.rstrip(":").strip().lower()
                 continue
             if negative_context(line, current_heading):
                 continue

@@ -19,9 +19,10 @@ from visual_final_form_common import (
 
 
 BATCH_ID = "VISUAL-DESIGN-FINAL-FORM-LOCK-REPAIR-05"
-DOCS_ROOT = ROOT / "docs" / "canon" / "frontend"
-INVENTORY_PATH = DOCS_ROOT / "SURFACE_RECIPE_INVENTORY.yaml"
-SOURCE_LINKS_PATH = DOCS_ROOT / "VISUAL_SOURCE_LINKS.yaml"
+FRONTEND_ROOT = ROOT / "frontend" / "visual-encyclopedia"
+DOCS_ROOT = FRONTEND_ROOT
+INVENTORY_PATH = FRONTEND_ROOT / "SURFACE_RECIPE_INVENTORY.yaml"
+SOURCE_LINKS_PATH = FRONTEND_ROOT / "VISUAL_SOURCE_LINKS.yaml"
 PRIORITY_REGISTRY_PATH = TRACE_ROOT / "VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml"
 
 UNIVERSE_YAML = DOCS_ROOT / "MATURE_APP_SURFACE_UNIVERSE.yaml"
@@ -169,8 +170,8 @@ def evidence_files_for(entry: dict[str, Any], link: dict[str, Any]) -> list[str]
     recipe_path = entry.get("recipe_file")
     if isinstance(recipe_path, str) and recipe_path:
         files.append(recipe_path)
-    files.append("docs/canon/frontend/SURFACE_RECIPE_INVENTORY.yaml")
-    files.append("docs/canon/frontend/VISUAL_SOURCE_LINKS.yaml")
+    files.append("frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.yaml")
+    files.append("frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml")
     source_truth = entry.get("source_truth", [])
     if isinstance(source_truth, list):
         files.extend([item for item in source_truth if isinstance(item, str)])
@@ -192,37 +193,37 @@ def destination_tokens(destination: str) -> list[str]:
         "Today": [
             "Sources/Theme/AmbitionObjectTokens.generated.swift",
             "Sources/Theme/AmbitionStateTokens.generated.swift",
-            "docs/canon/frontend/primitives/RECEIPT_PRIMITIVES.md",
+            "frontend/visual-encyclopedia/primitives/RECEIPT_PRIMITIVES.md",
         ],
         "Goals": [
             "Sources/Theme/AmbitionObjectTokens.generated.swift",
-            "docs/canon/frontend/contracts/DISCLOSURE_ROW_CONTRACT.md",
-            "docs/canon/frontend/primitives/PROOF_PRIMITIVES.md",
+            "frontend/visual-encyclopedia/contracts/DISCLOSURE_ROW_CONTRACT.md",
+            "frontend/visual-encyclopedia/primitives/PROOF_PRIMITIVES.md",
         ],
         "Capture": [
             "Sources/Theme/AmbitionObjectTokens.generated.swift",
-            "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
-            "docs/canon/frontend/primitives/RECEIPT_PRIMITIVES.md",
+            "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
+            "frontend/visual-encyclopedia/primitives/RECEIPT_PRIMITIVES.md",
         ],
         "Time": [
             "Sources/Theme/AmbitionObjectTokens.generated.swift",
-            "docs/canon/frontend/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
-            "docs/canon/frontend/contracts/REDUCE_MOTION_CONTRACT.md",
+            "frontend/visual-encyclopedia/primitives/PRESSURE_AND_CAPACITY_PRIMITIVES.md",
+            "frontend/visual-encyclopedia/contracts/REDUCE_MOTION_CONTRACT.md",
         ],
         "You": [
             "Sources/Theme/AmbitionObjectTokens.generated.swift",
-            "docs/canon/frontend/contracts/TRUST_SEAM_CONTRACT.md",
-            "docs/canon/frontend/primitives/LOCAL_RUNTIME_PRIMITIVES.md",
+            "frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md",
+            "frontend/visual-encyclopedia/primitives/LOCAL_RUNTIME_PRIMITIVES.md",
         ],
         "Cross-surface": [
             "Sources/Theme/AmbitionTokens.generated.swift",
-            "docs/canon/frontend/primitives/COLOR_AND_STATE_TOKENS.md",
-            "docs/canon/frontend/primitives/TRUST_SEAM.md",
+            "frontend/visual-encyclopedia/primitives/COLOR_AND_STATE_TOKENS.md",
+            "frontend/visual-encyclopedia/primitives/TRUST_SEAM.md",
         ],
         "Onboarding": [
             "Sources/Theme/AmbitionTokens.generated.swift",
-            "docs/canon/frontend/primitives/EMPTY_STATE_COPY_AND_AFFORDANCES.md",
-            "docs/canon/frontend/behavior/RECOVERY_MODE.md",
+            "frontend/visual-encyclopedia/primitives/EMPTY_STATE_COPY_AND_AFFORDANCES.md",
+            "frontend/visual-encyclopedia/behavior/RECOVERY_MODE.md",
         ],
     }.get(destination, ["Sources/Theme/AmbitionTokens.generated.swift"])
 
@@ -230,33 +231,33 @@ def destination_tokens(destination: str) -> list[str]:
 def destination_contracts(destination: str) -> list[str]:
     return {
         "Today": [
-            "docs/canon/frontend/contracts/PROOF_CHIP_CONTRACT.md",
-            "docs/canon/frontend/contracts/RECEIPT_CONTRACT.md",
-            "docs/canon/frontend/contracts/TRUST_SEAM_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/PROOF_CHIP_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/RECEIPT_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md",
         ],
         "Goals": [
-            "docs/canon/frontend/contracts/DISCLOSURE_ROW_CONTRACT.md",
-            "docs/canon/frontend/contracts/RECEIPT_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/DISCLOSURE_ROW_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/RECEIPT_CONTRACT.md",
         ],
         "Capture": [
-            "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
-            "docs/canon/frontend/contracts/RECEIPT_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/RECEIPT_CONTRACT.md",
         ],
         "Time": [
-            "docs/canon/frontend/contracts/REDUCE_MOTION_CONTRACT.md",
-            "docs/canon/frontend/contracts/REDUCE_TRANSPARENCY_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/REDUCE_MOTION_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/REDUCE_TRANSPARENCY_CONTRACT.md",
         ],
         "You": [
-            "docs/canon/frontend/contracts/TRUST_SEAM_CONTRACT.md",
-            "docs/canon/frontend/contracts/DYNAMIC_TYPE_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/DYNAMIC_TYPE_CONTRACT.md",
         ],
         "Cross-surface": [
-            "docs/canon/frontend/contracts/TRUST_SEAM_CONTRACT.md",
-            "docs/canon/frontend/contracts/RECEIPT_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/RECEIPT_CONTRACT.md",
         ],
         "Onboarding": [
-            "docs/canon/frontend/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
-            "docs/canon/frontend/contracts/PRIMARY_CTA_CONTRACT.md",
+            "frontend/visual-encyclopedia/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
+            "frontend/visual-encyclopedia/contracts/PRIMARY_CTA_CONTRACT.md",
         ],
     }.get(destination, [])
 
@@ -264,33 +265,33 @@ def destination_contracts(destination: str) -> list[str]:
 def destination_state_machines(destination: str) -> list[str]:
     return {
         "Today": [
-            "docs/canon/frontend/behavior/STATE_TRANSITIONS.md",
-            "docs/canon/frontend/trace/STATE_TO_VISUAL_ENCODING_MATRIX.md",
-            "docs/canon/frontend/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
+            "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+            "frontend/visual-encyclopedia/trace/STATE_TO_VISUAL_ENCODING_MATRIX.md",
+            "frontend/visual-encyclopedia/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
         ],
         "Goals": [
-            "docs/canon/frontend/behavior/STATE_TRANSITIONS.md",
-            "docs/canon/frontend/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
+            "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+            "frontend/visual-encyclopedia/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
         ],
         "Capture": [
-            "docs/canon/frontend/behavior/STATE_TRANSITIONS.md",
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
         ],
         "Time": [
-            "docs/canon/frontend/behavior/STATE_TRANSITIONS.md",
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
         ],
         "You": [
-            "docs/canon/frontend/behavior/STATE_TRANSITIONS.md",
-            "docs/canon/frontend/trace/LOCAL_FIRST_RUNTIME_TRUST_MATRIX.yaml",
+            "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+            "frontend/visual-encyclopedia/trace/LOCAL_FIRST_RUNTIME_TRUST_MATRIX.yaml",
         ],
         "Cross-surface": [
-            "docs/canon/frontend/behavior/CROSS_SURFACE_STATE_GRAMMAR.md",
-            "docs/canon/frontend/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
+            "frontend/visual-encyclopedia/behavior/CROSS_SURFACE_STATE_GRAMMAR.md",
+            "frontend/visual-encyclopedia/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
         ],
         "Onboarding": [
-            "docs/canon/frontend/behavior/STATE_TRANSITIONS.md",
-            "docs/canon/frontend/trace/UNMAPPED_INTENDED_SURFACE_GAPS.md",
+            "frontend/visual-encyclopedia/behavior/STATE_TRANSITIONS.md",
+            "frontend/visual-encyclopedia/trace/UNMAPPED_INTENDED_SURFACE_GAPS.md",
         ],
     }.get(destination, [])
 
@@ -298,28 +299,28 @@ def destination_state_machines(destination: str) -> list[str]:
 def destination_preview_candidates(destination: str) -> list[str]:
     return {
         "Today": [
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
-            "docs/canon/frontend/trace/SCREEN_TO_DRILLDOWN_MATRIX.md",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/trace/SCREEN_TO_DRILLDOWN_MATRIX.md",
         ],
         "Goals": [
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
-            "docs/canon/frontend/trace/SCREEN_TO_DRILLDOWN_MATRIX.md",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/trace/SCREEN_TO_DRILLDOWN_MATRIX.md",
         ],
         "Capture": [
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
         ],
         "Time": [
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
         ],
         "You": [
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
         ],
         "Cross-surface": [
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
-            "docs/canon/frontend/trace/SCREENSHOT_PROOF_MATRIX.md",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/trace/SCREENSHOT_PROOF_MATRIX.md",
         ],
         "Onboarding": [
-            "docs/canon/frontend/trace/PREVIEW_MATRIX.yaml",
+            "frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.yaml",
         ],
     }.get(destination, [])
 
@@ -678,26 +679,26 @@ def build_red_team_payload() -> dict[str, Any]:
     conflict = load_json(CONFLICT_REPORT) if CONFLICT_REPORT.exists() else build_dashboard_conflict_payload()
 
     categories = [
-        ("Apple-native believability", "Quiet-luxury object surfaces remain more native than a dashboard or chat clone.", "docs/canon/frontend/objects/*.md", 5, "none", "No blocker", ""),
-        ("OpenAI-level intelligence clarity", "Source/proof/receipt boundaries remain explicit and inspectable.", "docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md", 5, "none", "No blocker", ""),
-        ("Meta-level interaction/system cohesion", "The universe, provenance, and authority layers line up.", "docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.yaml", 5, "none", "No blocker", ""),
-        ("premium visual distinctiveness", "The canon stays away from generic task, dashboard, or chatbot defaults.", "docs/canon/frontend/objects/*.md", 5, "none", "No blocker", ""),
+        ("Apple-native believability", "Quiet-luxury object surfaces remain more native than a dashboard or chat clone.", "frontend/visual-encyclopedia/objects/*.md", 5, "none", "No blocker", ""),
+        ("OpenAI-level intelligence clarity", "Source/proof/receipt boundaries remain explicit and inspectable.", "frontend/visual-encyclopedia/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md", 5, "none", "No blocker", ""),
+        ("Meta-level interaction/system cohesion", "The universe, provenance, and authority layers line up.", "frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml", 5, "none", "No blocker", ""),
+        ("premium visual distinctiveness", "The canon stays away from generic task, dashboard, or chatbot defaults.", "frontend/visual-encyclopedia/objects/*.md", 5, "none", "No blocker", ""),
         ("implementation safety", "Implementation proof is still out of scope and therefore not over-claimed.", "docs/truth/RELEASE_TRUTH.md", 4, "not_in_scope", "No blocker", "Implementation proof remains outside this batch."),
         ("non-generic product ownership", "The active IA remains Today / Goals / Capture / Time / You.", "docs/truth/PRODUCT_DESIGN_TRUTH.md", 5, "none", "No blocker", ""),
-        ("accessibility realism", "Accessibility is explicit in the canon, while conformance proof remains out of scope.", "docs/canon/frontend/behavior/ACCESSIBILITY_AND_ADHD_LAWS.md", 5, "none", "No blocker", ""),
-        ("privacy/local-first trust", "Local-first boundaries are preserved and inspectable.", "docs/canon/frontend/behavior/LOCAL_FIRST_TRUST_BEHAVIOR.md", 5, "none", "No blocker", ""),
-        ("emotional feel", "The tone stays calm and non-shaming.", "docs/canon/frontend/behavior/NO_FALSE_MOMENTUM.md", 5, "none", "No blocker", ""),
-        ("App Store screenshot readiness after implementation", "Screenshot readiness is explicit future work, not current proof.", "docs/canon/frontend/trace/SCREENSHOT_PROOF_MATRIX.md", 4, "not_in_scope", "No blocker", "Screenshot proof remains out of scope."),
+        ("accessibility realism", "Accessibility is explicit in the canon, while conformance proof remains out of scope.", "frontend/visual-encyclopedia/behavior/ACCESSIBILITY_AND_ADHD_LAWS.md", 5, "none", "No blocker", ""),
+        ("privacy/local-first trust", "Local-first boundaries are preserved and inspectable.", "frontend/visual-encyclopedia/behavior/LOCAL_FIRST_TRUST_BEHAVIOR.md", 5, "none", "No blocker", ""),
+        ("emotional feel", "The tone stays calm and non-shaming.", "frontend/visual-encyclopedia/behavior/NO_FALSE_MOMENTUM.md", 5, "none", "No blocker", ""),
+        ("App Store screenshot readiness after implementation", "Screenshot readiness is explicit future work, not current proof.", "frontend/visual-encyclopedia/trace/SCREENSHOT_PROOF_MATRIX.md", 4, "not_in_scope", "No blocker", "Screenshot proof remains out of scope."),
         ("Codex autonomy safety", "Runner-bound execution and scope limits remain explicit.", "docs/truth/CODEX_PROCESS_TRUTH.md", 5, "none", "No blocker", ""),
         ("no-bloat authority clarity", "The final gate and support reports are clearly separated.", "build/reports/dashboard-conflict-authority.json", 5, "none", "No blocker", ""),
-        ("visual system originality", "The object model is still far from a generic feed or card stack.", "docs/canon/frontend/objects/ATMOSPHERE_COMPOSER_ANATOMY.md", 5, "none", "No blocker", ""),
+        ("visual system originality", "The object model is still far from a generic feed or card stack.", "frontend/visual-encyclopedia/objects/ATMOSPHERE_COMPOSER_ANATOMY.md", 5, "none", "No blocker", ""),
         ("token-system maturity", "Design tokens remain source-truth and mapped through the control plane.", "build/reports/design-token-completeness.json", 5, "none", "No blocker", ""),
         ("mature surface completeness", "All 159 inventory entries are represented in the mature universe.", "build/reports/mature-app-surface-universe-complete.json", 5, "none", "No blocker", ""),
-        ("lock-review usability", "The packet is readable without opening the entire repo.", "docs/canon/frontend/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md", 5, "none", "No blocker", ""),
+        ("lock-review usability", "The packet is readable without opening the entire repo.", "frontend/visual-encyclopedia/VISUAL_DESIGN_LOCK_REVIEW_PACKET.md", 5, "none", "No blocker", ""),
         ("dashboard consistency", "The old dashboards are now subordinate to the canonical lock packet.", "build/reports/dashboard-conflict-authority.json", 5, "none", "No blocker", ""),
         ("active-residue cleanliness", "The residue scan is now zero for the active canonical set.", "build/reports/active-authority-residue-zero.json", 5, "none", "No blocker", ""),
         ("all-159 provenance completeness", "Every recipe inventory entry has provenance coverage.", "build/reports/source-provenance-batch-linkage-complete.json", 5, "none", "No blocker", ""),
-        ("mature-universe gap visibility", "The universe keeps planned-canon candidate rows explicit.", "docs/canon/frontend/MATURE_APP_SURFACE_UNIVERSE.yaml", 4, "needs_direction", "No blocker", "Planned-canon candidate surfaces remain explicit future work."),
+        ("mature-universe gap visibility", "The universe keeps planned-canon candidate rows explicit.", "frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml", 4, "needs_direction", "No blocker", "Planned-canon candidate surfaces remain explicit future work."),
     ]
 
     category_payloads = []

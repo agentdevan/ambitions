@@ -278,7 +278,7 @@ Codex must stop red if it would:
 - create a one-off view that bypasses the object graph
 - hide a local adaptation without receipt/undo/proof
 - use color, glow, or motion as the only state carrier
-- use generic productivity/card/dashboard/calendar/chat/settings patterns
+- use generic productivity/card-grid/calendar/chat/settings patterns
 - claim release or award readiness without proof
 
 ## Required Implementation Sequence

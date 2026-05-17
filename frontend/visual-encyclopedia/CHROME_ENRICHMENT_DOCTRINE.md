@@ -50,7 +50,7 @@ Ambitions should learn structurally from top-tier app chrome without copying the
 
 - Maps and ride/delivery apps preserve orientation while action controls float or sheet over the primary object.
 - Media apps preserve active session continuity while the user browses elsewhere.
-- AI assistants use one universal composer, but Ambitions must embed local intelligence into decisions instead of making chat the top-level destination.
+- Universal-composer products keep input reachable, but Ambitions must embed local intelligence into decisions instead of making chat the top-level destination.
 - Messaging and email apps keep triage and thread state visible without turning every action into a dashboard.
 - Finance and commerce apps make transaction or trust state explicit with receipts, confirmations, and status indicators.
 

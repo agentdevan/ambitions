@@ -11,7 +11,7 @@ if [ -z "$scope" ]; then
 fi
 
 pattern='screenshot verified|device verified|physical device passed|VoiceOver verified|manual VoiceOver passed|Instruments passed|battery safe|production ready|release ready|TestFlight ready|App Store ready|accessibility compliant|fully accessible'
-non_claim='not |no |without|unclaimed|absent|unless|forbidden|not run|not produced|does not claim|do not claim|not allowed|future|deferred|missing'
+non_claim='not |no |without|unclaimed|absent|unless|forbidden|not run|not produced|does not claim|do not claim|not allowed|future|deferred|missing|cannot infer|separately proven|claim boundary'
 
 hits="$(rg -n -i "$pattern" $scope 2>/dev/null || true)"
 if [ -z "$hits" ]; then
@@ -19,13 +19,14 @@ if [ -z "$hits" ]; then
   exit 0
 fi
 
-suspect="$(printf '%s\n' "$hits" | rg -v -i "$non_claim" || true)"
+# Claim-boundary policy docs intentionally enumerate forbidden terms as examples.
+allowlisted_docs='docs/codex/RELEASE_CLAIM_SAFETY_SEAL.md:|docs/codex/CODEX_EVIDENCE_STANDARD.md:'
+suspect="$(printf '%s\n' "$hits" | rg -v -i "$allowlisted_docs" | rg -v -i "$non_claim" || true)"
 if [ -z "$suspect" ]; then
   echo "GREEN proof-sensitive terms are framed as non-claims or future proof"
   exit 0
 fi
 
-echo "YELLOW potential unsupported proof claims need review"
+echo "RED potential unsupported proof claims need review"
 printf '%s\n' "$suspect" | head -80
-echo "YELLOW advisory complete; provide concrete evidence or rewrite as non-claim"
-exit 0
+exit 1

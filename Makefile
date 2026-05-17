@@ -585,5 +585,5 @@ design-system-15-all:
 	python3 scripts/ambitions-design-to-source-trace-check.py
 	python3 scripts/ambitions-design-system-dashboard.py
 	grep -R "StyleDictionary\\|design-tokens\\|DesignTokens" -n DesignTokens Sources docs scripts || true
-	grep -R "external.*LLM\\|cloud.*LLM" docs/canon/frontend docs/truth docs/architecture Sources Native -n || true
-	grep -R "Plan" docs/canon/frontend DesignTokens docs/architecture -n || true
+	grep -R "external.*LLM\\|cloud.*LLM" frontend/visual-encyclopedia docs/truth docs/architecture Sources Native -n || true
+	grep -R "Plan" frontend/visual-encyclopedia DesignTokens docs/architecture -n || true

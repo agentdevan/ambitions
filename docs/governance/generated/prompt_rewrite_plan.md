@@ -172,8 +172,7 @@
 - prompts/batches/RHC05.md: Plan -> Time
 - prompts/batches/THROUGHPUT-ACCELERATION-01.md: Plan -> Time
 - prompts/batches/PK37.md: Plan -> Time
-- prompts/batches/MRI10-RECOMMENDATION-TRACE-RUNTIME.md: Plan -> Time
-- prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03-MERGED.md: Plan -> Time
+- prompts/batches/MRI10-RECOMMENDATION-TRACE-RUNTIME.md: Plan -> Time: Plan -> Time
 - prompts/batches/PFC33.md: Plan -> Time
 - prompts/batches/SA13.md: Plan -> Time
 - prompts/batches/LDI16.md: Plan -> Time

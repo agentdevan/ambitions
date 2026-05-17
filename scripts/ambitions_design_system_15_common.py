@@ -440,7 +440,7 @@ def generate_design_tokens() -> None:
     write_text(SWIFT_THEME_ROOT / "AmbitionObjectTokens.generated.swift", render_object_swift_file())
     write_text(SWIFT_THEME_ROOT / "AmbitionStateTokens.generated.swift", render_state_swift_file())
     write_text(
-        FRONTEND_ROOT / "/contracts/COMPONENT_CONTRACT_INDEX.md",
+        FRONTEND_ROOT / "contracts/COMPONENT_CONTRACT_INDEX.md",
         render_ledger_doc(
             "Component Contract Index",
             "This index maps the new contract scaffold files. It is design control, not implementation proof.",
@@ -528,7 +528,7 @@ def generate_design_tokens() -> None:
         )
 
     write_text(
-        FRONTEND_ROOT / "/contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
+        FRONTEND_ROOT / "contracts/ACCESSIBILITY_CONTRACT_INDEX.md",
         render_ledger_doc(
             "Accessibility Contract Index",
             "This index tracks the accessibility contract scaffold. It sets requirements and proof gaps only.",
@@ -606,7 +606,7 @@ def generate_design_tokens() -> None:
         )
 
     write_text(
-        FRONTEND_ROOT / "/trace/PREVIEW_MATRIX.md",
+        FRONTEND_ROOT / "trace/PREVIEW_MATRIX.md",
         render_ledger_doc(
             "Preview Matrix",
             "This matrix names required preview states and marks all missing previews as future implementation debt, not proof.",
@@ -622,7 +622,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        FRONTEND_ROOT / "/trace/PREVIEW_MATRIX.yaml",
+        FRONTEND_ROOT / "trace/PREVIEW_MATRIX.yaml",
         render_yaml_matrix(
             "Preview Matrix",
             [
@@ -636,7 +636,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        FRONTEND_ROOT / "/trace/SNAPSHOT_TEST_TARGET_PLAN.md",
+        FRONTEND_ROOT / "trace/SNAPSHOT_TEST_TARGET_PLAN.md",
         render_doc(
             "Snapshot Test Target Plan",
             "Active target plan scaffold",
@@ -806,7 +806,7 @@ def generate_design_tokens() -> None:
         write_text(DECISIONS_ROOT / f"ADR-{number:03d}-{title.lower().replace(' ', '-')}.md", render_adr_doc(number, title, decision, consequences))
 
     write_text(
-        FRONTEND_ROOT / "/trace/DESIGN_SYSTEM_AUTHORITY_LEDGER.md",
+        FRONTEND_ROOT / "trace/DESIGN_SYSTEM_AUTHORITY_LEDGER.md",
         render_ledger_doc(
             "Design System Authority Ledger",
             "This ledger classifies the new design-system control-plane materials.",
@@ -824,7 +824,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        FRONTEND_ROOT / "/trace/TOKEN_SOURCE_AUTHORITY_LEDGER.md",
+        FRONTEND_ROOT / "trace/TOKEN_SOURCE_AUTHORITY_LEDGER.md",
         render_ledger_doc(
             "Token Source Authority Ledger",
             "This ledger clarifies token provenance and generated output boundaries.",
@@ -840,7 +840,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        FRONTEND_ROOT / "/trace/COMPONENT_CONTRACT_AUTHORITY_LEDGER.md",
+        FRONTEND_ROOT / "trace/COMPONENT_CONTRACT_AUTHORITY_LEDGER.md",
         render_ledger_doc(
             "Component Contract Authority Ledger",
             "This ledger classifies the component contract scaffold and its dependency-free validator.",
@@ -854,7 +854,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        FRONTEND_ROOT / "/trace/PROMPT_SOURCE_CANON_AUTHORITY_LEDGER.md",
+        FRONTEND_ROOT / "trace/PROMPT_SOURCE_CANON_AUTHORITY_LEDGER.md",
         render_ledger_doc(
             "Prompt Source Canon Authority Ledger",
             "This ledger records how the install batch prompt relates to source and canon.",
@@ -870,7 +870,7 @@ def generate_design_tokens() -> None:
     )
 
     write_text(
-        FRONTEND_ROOT / "/trace/DESIGN_TO_SOURCE_TRACEABILITY.md",
+        FRONTEND_ROOT / "trace/DESIGN_TO_SOURCE_TRACEABILITY.md",
         render_ledger_doc(
             "Design To Source Traceability",
             "This map is intentionally honest: intended-only entries are allowed and remain clearly marked.",
@@ -886,7 +886,7 @@ def generate_design_tokens() -> None:
         ),
     )
     write_text(
-        FRONTEND_ROOT / "/trace/DESIGN_TO_SOURCE_TRACEABILITY.yaml",
+        FRONTEND_ROOT / "trace/DESIGN_TO_SOURCE_TRACEABILITY.yaml",
         "\n".join(
             [
                 "status: scaffold",

@@ -122,7 +122,7 @@ Required visible chrome:
 - right-side local-first lockup: `Local · Ambitions`
 
 Preferred `Local · Ambitions` treatment:
-- small green local/privacy indicator ring
+- small green local/privacy indicator bead
 - text `Local · Ambitions`
 - aligned with the top-right chrome/status area
 - quiet native status treatment, not a marketing logo

@@ -249,7 +249,7 @@ scripts/ambitions-object-preview-matrix-check.py
 scripts/ambitions-object-accessibility-proof-check.py
 scripts/ambitions-object-motion-proof-check.py
 scripts/ambitions-object-source-binding-check.py
-scripts/ambitions-flagship-object-quality-score.py
+scripts/ambitions-flagship-object-quality-score.py (legacy validator filename; not product vocabulary)
 ```
 
 ## Proof Artifact Structure
@@ -322,7 +322,7 @@ Stop red if implementation would:
 - remove user control
 - rely on color/glow/motion only
 - reintroduce top-level Plan
-- add chatbot-first destination
+- add chat-first destination
 - use generic productivity patterns
 - claim release or award readiness without proof
 
