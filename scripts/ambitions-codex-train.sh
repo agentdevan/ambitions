@@ -22,6 +22,7 @@ ACCESS_MODE="${ACCESS_MODE:-full}"
 AUTO_BRANCH="${AUTO_BRANCH:-1}"
 AUTO_COMMIT="${AUTO_COMMIT:-1}"
 AUTO_PUSH="${AUTO_PUSH:-0}"
+READ_ONLY_AUDIT="${READ_ONLY_AUDIT:-0}"
 ALLOW_NESTED_BATCH="${ALLOW_NESTED_BATCH:-0}"
 ALLOW_RUNNER_BRANCH_EXCEPTION="${ALLOW_RUNNER_BRANCH_EXCEPTION:-0}"
 ALLOW_DIRTY="${ALLOW_DIRTY:-0}"
@@ -53,6 +54,7 @@ Environment defaults:
   AUTO_BRANCH=1
   AUTO_COMMIT=1
   AUTO_PUSH=0
+  READ_ONLY_AUDIT=0
   ALLOW_NESTED_BATCH=0
   ALLOW_RUNNER_BRANCH_EXCEPTION=0
   ALLOW_DIRTY=0
@@ -115,7 +117,6 @@ if [[ "${AMBITIONS_RUNNER_ACTIVE:-0}" == "1" && "$ALLOW_NESTED_BATCH" != "1" ]];
 fi
 
 command -v git >/dev/null 2>&1 || die "git is unavailable"
-command -v codex >/dev/null 2>&1 || die "codex CLI is unavailable"
 
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" \
   || die "not inside a git repo"
@@ -139,14 +140,49 @@ resolve_path() {
   printf '%s/%s\n' "$dir" "$base"
 }
 
+prompt_has_runner_metadata() {
+  local file="$1"
+  grep -Eq '^[[:space:]]*<!--[[:space:]]*AMBITIONS_RUNNER_REQUIRED:[[:space:]]*true[[:space:]]*-->' "$file" \
+    && grep -Eq '^[[:space:]]*<!--[[:space:]]*RUN_WITH:[[:space:]]*scripts/ambitions-codex-train\.sh[[:space:]]*-->' "$file" \
+    && grep -Eq '^[[:space:]]*<!--[[:space:]]*DIRECT_CODEX_EXECUTION:[[:space:]]*forbidden_unless_user_explicitly_bypasses_runner[[:space:]]*-->' "$file"
+}
+
 PROMPT_FILE="$(resolve_path "$PROMPT_ARG")" \
   || die "prompt file missing: $PROMPT_ARG"
 
+[[ -n "$BATCH_ID" ]] || die "batch id missing"
 SAFE_BATCH_ID="$(printf '%s' "$BATCH_ID" | tr -c 'A-Za-z0-9._-' '-')"
 [[ -n "$SAFE_BATCH_ID" ]] || die "empty batch id after sanitization"
 
 START_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 START_SHA="$(git rev-parse HEAD)"
+[[ -s "$PROMPT_FILE" ]] || die "prompt file is empty: $PROMPT_FILE"
+prompt_has_runner_metadata "$PROMPT_FILE" \
+  || die "prompt file is missing required runner metadata: $PROMPT_FILE"
+
+print_read_only_audit_summary() {
+  cat <<EOF
+Ambitions runner read-only audit summary
+Batch ID: $BATCH_ID
+Repo root: $REPO_ROOT
+Current branch: $START_BRANCH
+Current SHA: $START_SHA
+Prompt file: $PROMPT_FILE
+Posture: READ_ONLY_AUDIT=1, AUTO_BRANCH=0, AUTO_COMMIT=0, AUTO_PUSH=0
+Side effects: no branch creation, no run directory, no Codex phases, no commit, no push
+EOF
+}
+
+if [[ "$READ_ONLY_AUDIT" == "1" ]]; then
+  AUTO_BRANCH=0
+  AUTO_COMMIT=0
+  AUTO_PUSH=0
+  print_read_only_audit_summary
+  exit 0
+fi
+
+command -v codex >/dev/null 2>&1 || die "codex CLI is unavailable"
+
 TIMESTAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 RUN_DIR=".codex/runs/$SAFE_BATCH_ID/$TIMESTAMP"
 ROLLBACK_COMMAND="git reset --hard $START_SHA"

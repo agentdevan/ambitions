@@ -73,6 +73,13 @@ Run the runner self-check without invoking Codex phases with:
 make batch-self-check
 ```
 
+Run a deterministic read-only audit without creating a branch, run directory,
+commit, or push:
+
+```bash
+make batch-read-only-audit BATCH=<BATCH_ID> PROMPT=prompts/batches/<BATCH_ID>.md
+```
+
 The runner is `scripts/ambitions-codex-train.sh`. It performs model phasing:
 GPT-5.5 plans, GPT-5.4-mini applies only the bounded patch, and GPT-5.5
 reviews, repairs, validates, and decides final commit eligibility.

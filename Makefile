@@ -1,4 +1,4 @@
-.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-self-check batch-status runner-access-check prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
+.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-read-only-audit batch-self-check batch-status runner-access-check prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
 .PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
@@ -38,6 +38,9 @@ batch-no-commit: check-batch-input
 
 batch-push: check-batch-input
 	AUTO_PUSH=1 ACCESS_MODE=full AUTO_COMMIT=1 "$(RUNNER)" "$(BATCH)" "$(PROMPT)"
+
+batch-read-only-audit: check-batch-input
+	READ_ONLY_AUDIT=1 AUTO_BRANCH=0 AUTO_COMMIT=0 AUTO_PUSH=0 "$(RUNNER)" "$(BATCH)" "$(PROMPT)"
 
 batch-self-check:
 	"$(RUNNER)" --self-check

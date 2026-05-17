@@ -34,6 +34,8 @@ bash -n "$RUNNER"
 
 grep -q 'AUTO_PUSH="${AUTO_PUSH:-0}"' "$RUNNER" \
   || die "runner AUTO_PUSH default is not 0"
+grep -q 'READ_ONLY_AUDIT="${READ_ONLY_AUDIT:-0}"' "$RUNNER" \
+  || die "runner read-only audit default is not explicit"
 grep -q 'ALLOW_NESTED_BATCH="${ALLOW_NESTED_BATCH:-0}"' "$RUNNER" \
   || die "runner nested-batch default is not explicit"
 grep -q 'AMBITIONS_RUNNER_ACTIVE=1' "$RUNNER" \
@@ -44,6 +46,10 @@ grep -q 'ALLOW_RUNNER_BRANCH_EXCEPTION="${ALLOW_RUNNER_BRANCH_EXCEPTION:-0}"' "$
   || die "runner branch exception default is not explicit"
 grep -q 'AUTO_BRANCH="${AUTO_BRANCH:-1}"' "$RUNNER" \
   || die "runner AUTO_BRANCH default is not explicit"
+grep -q 'prompt_has_runner_metadata()' "$RUNNER" \
+  || die "runner prompt metadata helper missing"
+grep -q 'read-only audit summary' "$RUNNER" \
+  || die "runner read-only audit summary missing"
 grep -q 'stage_changed_files()' "$RUNNER" \
   || die "runner staging helper missing"
 grep -q 'done < <(uncommitted_changed_files)' "$RUNNER" \
@@ -97,6 +103,22 @@ run_dir=".codex/runs/$safe_batch_id/$timestamp"
 [[ "$run_dir" == .codex/runs/SELF-CHECK/* ]] \
   || die "run directory derivation failed"
 
+self_check_prompt="prompts/_BATCH_TEMPLATE.md"
+[[ -f "$self_check_prompt" ]] || die "self-check prompt missing: $self_check_prompt"
+read_only_output="$(env \
+  -u AMBITIONS_RUNNER_ACTIVE \
+  -u AMBITIONS_RUNNER_PHASE \
+  -u AMBITIONS_RUNNER_PARENT_BATCH \
+  -u AMBITIONS_RUNNER_PARENT_RUN_DIR \
+  READ_ONLY_AUDIT=1 \
+  bash "$RUNNER" SELF-CHECK "$self_check_prompt")"
+grep -Fq 'Ambitions runner read-only audit summary' <<<"$read_only_output" \
+  || die "read-only audit summary missing"
+grep -Fq 'Posture: READ_ONLY_AUDIT=1, AUTO_BRANCH=0, AUTO_COMMIT=0, AUTO_PUSH=0' <<<"$read_only_output" \
+  || die "read-only audit posture missing"
+grep -Fq 'Side effects: no branch creation, no run directory, no Codex phases, no commit, no push' <<<"$read_only_output" \
+  || die "read-only audit side-effect summary missing"
+
 echo "GREEN: runner self-check passed"
 echo "- bash syntax: ok"
 echo "- git repo detection: ok"
@@ -104,6 +126,7 @@ echo "- run directory derivation: $run_dir"
 echo "- access flags: ${flags_output//$'\n'/ }"
 echo "- status parser samples: Green/Yellow/Red/Unknown ok"
 echo "- explicit staging helper: present"
+echo "- read-only audit posture: present"
 echo "- nested batch guard: present"
 echo "- codex exec invoked: no"
 echo "- app source mutation: no"
