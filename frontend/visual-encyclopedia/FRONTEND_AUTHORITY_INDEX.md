@@ -31,6 +31,9 @@ For frontend/UI/design implementation work:
 
 - Encyclopedia to frontend OS: `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
 - Master: `AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
+- Chrome enrichment doctrine: `CHROME_ENRICHMENT_DOCTRINE.md`
+- Chrome primitive contract: `CHROME_PRIMITIVES.md`
+- Chrome install ledger: `trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md`
 - Today flagship visual lock: `recipes/today/today_reality_meridian_flagship_surface.md`
 - Audit: `VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md`
 - Perfection plan: `VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md`
@@ -51,6 +54,10 @@ For frontend/UI/design implementation work:
 - Primitive bibles: `primitives/*.md`
 - Behavior bibles: `behavior/*.md`
 - Trace matrices and ledgers: `trace/*.md`, `trace/VISUAL_CONFLICT_LEDGER.md`, `trace/VISUAL_SOURCE_LINKAGE_LEDGER.md`, `trace/VISUAL_SURFACE_GRAPH_LEDGER.md`
+
+## Chrome Enrichment Lock
+
+For chrome or app-shell review, inspect `CHROME_ENRICHMENT_DOCTRINE.md` and `CHROME_PRIMITIVES.md` before lower-level recipes. These files lock the cross-surface shell standard: persistent reality context, one privileged action, inspectable local proof, contextual overlays, bottom-reachable primary controls, compact contextual top chrome, and one dominant object per top-level destination. This lock is design canon only and does not prove implementation, screenshots, accessibility conformance, or release readiness.
 
 ## Today Flagship Visual Lock
 
@@ -92,6 +99,9 @@ This lock is design canon only. It does not prove SwiftUI implementation, simula
 - `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md`
 - `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json`
 - `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md`
+- `frontend/visual-encyclopedia/CHROME_ENRICHMENT_DOCTRINE.md`
+- `frontend/visual-encyclopedia/CHROME_PRIMITIVES.md`
+- `frontend/visual-encyclopedia/trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md`
 - `frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md`
 - `Native/Ambitions/App/AppTab.swift`
 - `Native/Ambitions/App/AmbitionsRootView.swift`
