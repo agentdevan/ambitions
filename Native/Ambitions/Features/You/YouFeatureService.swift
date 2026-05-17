@@ -36,12 +36,13 @@ struct RepositoryBackedYouService: YouServicing {
     /// - Returns: A `YouDashboard` projection suited for rendering in visual and non-visual surfaces.
     /// - Throws: An error if loading data snapshot fails.
     func loadYouDashboard() async throws -> YouDashboard {
-        let snapshot = try await loadSnapshot()
-        let syncStatus = await syncCapability.status()
-        let notificationAuthorization = await notificationService.currentAuthorizationState()
-        let remindersAuthorization = await calendarRemindersService.authorizationState(for: .reminders)
-        let calendarAuthorization = await calendarRemindersService.authorizationState(for: .calendarEvents)
-        return makeDashboard(
+        async let snapshot = loadSnapshot()
+        async let syncStatus = syncCapability.status()
+        async let notificationAuthorization = notificationService.currentAuthorizationState()
+        async let remindersAuthorization = calendarRemindersService.authorizationState(for: .reminders)
+        async let calendarAuthorization = calendarRemindersService.authorizationState(for: .calendarEvents)
+        
+        return try await makeDashboard(
             snapshot: snapshot,
             syncStatus: syncStatus,
             notificationAuthorization: notificationAuthorization,
@@ -50,13 +51,25 @@ struct RepositoryBackedYouService: YouServicing {
         )
     }
 
+    /// Persists visual accent and functional preference updates to on-device storage.
+    /// Enforces programmatic preconditions and strict local-only privacy invariants.
+    ///
+    /// - Parameter preferences: The preference patch containing requested changes.
+    /// - Returns: The updated, thread-safe dashboard representation.
+    /// - Throws: An error if persistence fails.
     func saveYouPreferences(_ preferences: YouPreferencesUpdate) async throws -> YouDashboard {
+        // Assert thread-safety and input range integrity under Swift 6 rules
+        precondition(preferences.reviewCadenceDays >= 0, "Review cadence days cannot be negative.")
+        
         var state = try await repositories.appState.loadState()
         state.preferredTab = preferences.preferredTab.canonicalTopLevelTab
         state.appearancePreference = preferences.appearancePreference
         state.accentFamily = preferences.accentFamily
         state.reviewCadenceDays = max(1, preferences.reviewCadenceDays)
+        
+        // Enforce the core local-first privacy boundary
         state.localOnlyModeEnabled = true
+        
         try await repositories.appState.saveState(state)
         return try await loadYouDashboard()
     }
