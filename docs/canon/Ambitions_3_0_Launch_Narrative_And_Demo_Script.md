@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Launch Narrative And Demo Script
 
-Status: Active Ambitions 3.0 launch narrative canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Related doc: [Screenshot Readiness Spec](./Ambitions_3_0_Screenshot_Readiness_Spec.md)  
 Last updated: 2026-04-30

@@ -1,6 +1,6 @@
 # Ambitions 3.0 — FAANG Rebuild Documentation Completeness Matrix
 
-Status: Active Ambitions 3.0 documentation completeness canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Rebuild model: [Ambitions 3.0 Rebuild Operating Model](./Ambitions_3_0_Rebuild_Operating_Model.md)  
 Last updated: 2026-04-30

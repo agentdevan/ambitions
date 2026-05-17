@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 External Brain privacy threat-model evidence; not implementation proof.
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Date: 2026-05-04
 
 Parent truth:

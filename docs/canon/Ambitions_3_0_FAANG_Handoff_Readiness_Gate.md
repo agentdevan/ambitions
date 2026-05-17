@@ -1,6 +1,6 @@
 # Ambitions 3.0 — FAANG Handoff Readiness Gate
 
-Status: Active Ambitions 3.0 release / handoff gate  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Documentation System Index](./Ambitions_3_0_Documentation_System_Index.md)  
 Repo hygiene policy: [Ambitions 3.0 Repo Hygiene And Active Canon Policy](./Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)  
 Last updated: 2026-04-30

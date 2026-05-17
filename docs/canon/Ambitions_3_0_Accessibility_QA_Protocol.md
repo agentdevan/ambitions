@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Accessibility QA Protocol
 
-Status: Active accessibility QA protocol
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Triggers
 

@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Documentation System Index
 
-Status: Active Ambitions 3.0 documentation map
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)
 Source override: [Ambitions 3.0 Source Of Truth Override](./Ambitions_3_0_Source_Of_Truth_Override.md)
 Rebuild model: [Ambitions 3.0 Rebuild Operating Model](./Ambitions_3_0_Rebuild_Operating_Model.md)

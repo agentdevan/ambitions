@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active planned Ambitions 4.0 planning matrix; not implementation evidence.
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 | Kernel | Maintenance Cost | Ease To Build | Production Value | Privacy Risk | Cognitive Load Risk |
 |---|---:|---:|---:|---:|---:|

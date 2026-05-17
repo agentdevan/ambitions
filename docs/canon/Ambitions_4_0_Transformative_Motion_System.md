@@ -1,6 +1,6 @@
 # Ambitions 4.0 Transformative Motion System
 
-Status: Active motion canon for future implementation; not app behavior by itself  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Date: 2026-05-03
 
 ## Principle

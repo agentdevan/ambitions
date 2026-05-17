@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Dependency Management Policy
 
-Status: Active dependency governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

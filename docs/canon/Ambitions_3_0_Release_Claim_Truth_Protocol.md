@@ -1,6 +1,6 @@
 # Ambitions 3.0 Release Claim Truth Protocol
 
-Status: Active release governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

@@ -1,6 +1,6 @@
 # Ambitions 3.0 Canon To Test Traceability Rules
 
-Status: Active QA governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

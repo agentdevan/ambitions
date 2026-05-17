@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Ambition Meridian Shell SwiftUI Build Spec
 
-Status: Active implementation-grade child doc  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent: [`Ambitions_3_0_Front_End_Redesign_Index.md`](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Supporting frontend history: [`Ambitions_Full_Frontend_Transformation_Program.md`](./Ambitions_Full_Frontend_Transformation_Program.md)  
 Surface ownership: System-wide shell across Today, Goals, Capture, Plan, and You  

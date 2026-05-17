@@ -1,6 +1,6 @@
 # Ambitions 4.0 Signature Experience Layer
 
-Status: Active Ambitions 4.0 experience-quality layer; not app behavior by itself  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Depends on: DAV/PXEQ/photo-matched visual target  
 Date: 2026-05-03
 

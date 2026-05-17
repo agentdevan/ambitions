@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Design System Primitives
 
-Status: Active Ambitions 3.0 design system canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Related doc: [Signature Objects And Rail Grammar](./Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md)  
 Last updated: 2026-04-30

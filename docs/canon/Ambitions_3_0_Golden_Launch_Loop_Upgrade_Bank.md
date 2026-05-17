@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Golden Launch Loop Upgrade Bank
 
-Status: Active Ambitions 3.0 front-end canon companion  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Related locked Today spec: [Ambitions 3.0 — Day Rail SwiftUI Build Spec](./Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md)  
 Last updated: 2026-04-30

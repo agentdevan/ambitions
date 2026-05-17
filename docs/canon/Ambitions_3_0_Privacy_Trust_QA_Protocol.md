@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Privacy Trust QA Protocol
 
-Status: Active privacy/trust QA protocol
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Triggers
 

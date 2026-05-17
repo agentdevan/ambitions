@@ -1,6 +1,6 @@
 # Ambitions 3.0 Roadmap To Code Traceability Rules
 
-Status: Active implementation governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

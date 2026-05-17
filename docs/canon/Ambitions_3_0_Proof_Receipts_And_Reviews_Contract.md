@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Proof, Receipts, And Reviews Contract
 
-Status: Active Ambitions 3.0 front-end canon contract  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Last updated: 2026-04-30
 

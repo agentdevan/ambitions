@@ -1,6 +1,6 @@
 # Ambitions 3.0 Active History Archive Policy
 
-Status: Active Ambitions 3.0 archive / historical evidence canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 As Current Baseline Policy](./Ambitions_3_0_As_Current_Baseline_Policy.md)
 Repo hygiene companion: [Repo Hygiene And Active Canon Policy](./Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
 Created: 2026-05-01

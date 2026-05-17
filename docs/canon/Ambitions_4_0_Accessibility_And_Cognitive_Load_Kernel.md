@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active planned Ambitions 4.0 scope; not implemented unless batch evidence proves implementation.
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 Source-truth relationship: this kernel is part of Ambitions 4.0 External Brain Foundation and obeys Ambitions 3.0 baseline truth, PXOS user-facing canon, AmbitionsOS internal architecture boundaries, Signature Interface gates, Product Depth drill-down rules, and release-claim truth.
 

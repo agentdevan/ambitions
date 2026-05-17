@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Definition Of Ready And Done
 
-Status: Active delivery gate
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Definition Of Ready
 

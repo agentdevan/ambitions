@@ -1,7 +1,7 @@
 # Ambitions 3.0 State Projection Extraction Rules
 
 Path: docs/canon/Ambitions_3_0_State_Projection_Extraction_Rules.md
-Status: Active architecture canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 
 ## Purpose

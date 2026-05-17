@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Recommendation Eligibility Engine
 
-Status: Active Ambitions 3.0 AI/personalization canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Related doc: [Ambitions 3.0 Recommendation Contract](./Ambitions_3_0_Recommendation_Contract.md)  
 Last updated: 2026-04-30

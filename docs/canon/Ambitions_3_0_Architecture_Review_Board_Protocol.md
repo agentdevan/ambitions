@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Architecture Review Board Protocol
 
-Status: Active review protocol
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

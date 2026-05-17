@@ -1,6 +1,6 @@
 # Ambitions 3.0 Build Failure Triage Protocol
 
-Status: Active engineering governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

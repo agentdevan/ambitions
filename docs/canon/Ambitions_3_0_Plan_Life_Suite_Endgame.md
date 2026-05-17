@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Plan Life Suite Endgame
 
-Status: Active Ambitions 3.0 Plan canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Primitive architecture: [Ambitions 3.0 Primitive Architecture](./Ambitions_3_0_Primitive_Architecture.md)  
 Last updated: 2026-04-30

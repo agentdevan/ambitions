@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Design QA Protocol
 
-Status: Active QA protocol
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Triggers
 

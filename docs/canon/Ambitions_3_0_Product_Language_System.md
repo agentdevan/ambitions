@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Product Language System
 
-Status: Active Ambitions 3.0 content design canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Last updated: 2026-04-30
 

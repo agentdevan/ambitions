@@ -1,6 +1,6 @@
 # Ambitions 3.0 — North Star And Product Metrics
 
-Status: Active Ambitions 3.0 product metrics canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Strategy brief: [Ambitions 3.0 Product Strategy Brief](./Ambitions_3_0_Product_Strategy_Brief.md)  
 Last updated: 2026-04-30

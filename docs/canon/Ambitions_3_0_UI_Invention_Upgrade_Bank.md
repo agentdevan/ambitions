@@ -1,6 +1,6 @@
 # Ambitions 3.0 — UI Invention Upgrade Bank
 
-Status: Active Ambitions 3.0 invention canon bank  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Evaluation framework: [Ambitions 3.0 UI Invention Evaluation Framework](./Ambitions_3_0_UI_Invention_Evaluation_Framework.md)  
 Last updated: 2026-04-30

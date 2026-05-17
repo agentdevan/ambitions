@@ -1,6 +1,6 @@
 # Ambitions 4.0 State Transformation Motion Primitives
 
-Status: Active specification
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Primitive Template
 

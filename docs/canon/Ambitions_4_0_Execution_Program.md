@@ -1,7 +1,7 @@
 # Ambitions 4.0 Execution Program
 <!-- markdownlint-disable MD013 -->
 
-Status: Active post-3.0 execution program; not a shipped product version; not release-proven
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Date: 2026-05-02
 
 ## Purpose

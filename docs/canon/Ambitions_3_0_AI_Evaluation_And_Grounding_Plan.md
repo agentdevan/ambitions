@@ -1,6 +1,6 @@
 # Ambitions 3.0 — AI Evaluation And Grounding Plan
 
-Status: Active Ambitions 3.0 AI/personalization evaluation canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Related docs: [Recommendation Eligibility Engine](./Ambitions_3_0_Recommendation_Eligibility_Engine.md), [Evidence Hierarchy](./Ambitions_3_0_Evidence_Hierarchy.md)  
 Last updated: 2026-04-30

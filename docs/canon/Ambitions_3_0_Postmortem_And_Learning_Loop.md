@@ -1,6 +1,6 @@
 # Ambitions 3.0 Postmortem And Learning Loop
 
-Status: Active operating governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

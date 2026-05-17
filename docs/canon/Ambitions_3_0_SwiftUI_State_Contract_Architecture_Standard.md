@@ -1,7 +1,7 @@
 # Ambitions 3.0 SwiftUI State Contract Architecture Standard
 
 Path: docs/canon/Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md
-Status: Active architecture canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 
 ## Standard

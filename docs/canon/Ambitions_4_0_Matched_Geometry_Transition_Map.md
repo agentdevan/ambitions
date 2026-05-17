@@ -1,6 +1,6 @@
 # Ambitions 4.0 Matched Geometry Transition Map
 
-Status: Active planning map
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 | Primitive | Source | Destination | Allowed surfaces | Forbidden surfaces |
 | --- | --- | --- | --- | --- |

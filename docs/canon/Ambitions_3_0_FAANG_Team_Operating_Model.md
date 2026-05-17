@@ -1,6 +1,6 @@
 # Ambitions 3.0 — FAANG Team Operating Model
 
-Status: Active Codex operating canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

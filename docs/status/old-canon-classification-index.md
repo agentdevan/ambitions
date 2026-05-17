@@ -1,6 +1,6 @@
 # Old Canon Classification Index
 
-Status: Active supporting cleanup index  
+Status: Supporting cleanup index
 Created: 2026-05-15  
 Last updated: 2026-05-16 Train B YELLOW status  
 Authority: Subordinate to `docs/truth/*` and `docs/status/README.md`
@@ -73,6 +73,7 @@ Physical headers/status demotions completed:
 - `docs/canon/Ambitions_3_0_Privacy_Threat_Model.md`
 - `docs/canon/Ambitions_3_0_Flake_Management_Protocol.md`
 - `docs/canon/PXOS_Empty_Edge_And_Degraded_States.md`
+- `REPO-AUTHORITY-LEGACY-ACTIVE-HEADER-CLEANUP-01` legacy canon header cleanup batch
 
 Connector-blocked full-preservation updates:
 

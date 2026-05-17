@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Codex Performance Operating System
 
-Status: Active Ambitions 3.0 Codex operating canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Last updated: 2026-04-30
 
 ## Purpose

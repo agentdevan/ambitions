@@ -1,6 +1,6 @@
 # Ambitions 3.0 Risk Register Protocol
 
-Status: Active program governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

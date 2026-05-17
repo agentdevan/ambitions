@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Competitive Positioning And Language Research
 
-Status: Active Ambitions 3.0 product marketing/content canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Last updated: 2026-04-30
 

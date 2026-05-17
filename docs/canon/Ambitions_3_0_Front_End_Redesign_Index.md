@@ -4,7 +4,7 @@
 
 # Ambitions 3.0 Front-End Redesign Index
 
-Status: Active Ambitions 3.0 parent canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Source override: [Ambitions 3.0 Source Of Truth Override](./Ambitions_3_0_Source_Of_Truth_Override.md)  
 Rebuild model: [Ambitions 3.0 Rebuild Operating Model](./Ambitions_3_0_Rebuild_Operating_Model.md)  
 Last updated: 2026-04-30

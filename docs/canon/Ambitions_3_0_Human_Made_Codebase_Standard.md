@@ -1,6 +1,6 @@
 # Ambitions 3.0 Human-Made Codebase Standard
 
-Status: Active Ambitions 3.0 engineering / handoff canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 As Current Baseline Policy](./Ambitions_3_0_As_Current_Baseline_Policy.md)
 Architecture companions: [SwiftUI State Contract Architecture Standard](./Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md), [Feature Boundary And File Size Constitution](./Ambitions_3_0_Feature_Boundary_And_File_Size_Constitution.md)
 Created: 2026-05-01

@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Build Skills And Dependency Management
 
-Status: Active Codex/build governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

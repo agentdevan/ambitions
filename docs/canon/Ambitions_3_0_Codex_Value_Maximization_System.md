@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Codex Value Maximization System
 
-Status: Active Codex/product value guide
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

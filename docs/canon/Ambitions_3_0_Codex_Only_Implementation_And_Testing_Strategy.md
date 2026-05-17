@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Codex-Only Implementation And Testing Strategy
 
-Status: Active Ambitions 3.0 implementation governance canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Implementation plan: [Ambitions 3.0 Front-End Implementation Batch Plan](./Ambitions_3_0_Front_End_Implementation_Batch_Plan.md)  
 Last updated: 2026-04-30

@@ -1,6 +1,6 @@
 # Ambitions 2.0 Implementation Gap Audit
 
-Status: Active implementation audit.
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Date: 2026-04-27.
 
 This audit compares the current repo and native app against [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md). It does not reopen, renumber, or erase completed historical batches. Completed batches remain completed for history; gaps created by the Design Constitution become future delta/alignment batches.

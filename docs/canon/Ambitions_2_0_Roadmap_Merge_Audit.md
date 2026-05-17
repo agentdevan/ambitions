@@ -1,6 +1,6 @@
 # Ambitions 2.0 Roadmap Merge Audit
 
-Status: Active roadmap merge audit.
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Date: 2026-04-27.
 
 This audit maps the original Ambitions 2.0 Batches 89-120 against the newer D01-D26 Design Constitution delta/alignment backlog. It is planning documentation only. It does not implement features, mark D batches complete, erase completed batch history, or delete Batches 89-120.

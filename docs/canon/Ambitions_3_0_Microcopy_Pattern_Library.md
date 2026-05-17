@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Microcopy Pattern Library
 
-Status: Active Ambitions 3.0 content pattern canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Language system: [Ambitions 3.0 Product Language System](./Ambitions_3_0_Product_Language_System.md)  
 Last updated: 2026-04-30

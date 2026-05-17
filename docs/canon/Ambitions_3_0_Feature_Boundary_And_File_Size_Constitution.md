@@ -1,7 +1,7 @@
 # Ambitions 3.0 Feature Boundary And File Size Constitution
 
 Path: docs/canon/Ambitions_3_0_Feature_Boundary_And_File_Size_Constitution.md
-Status: Active architecture canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 
 ## Constitution

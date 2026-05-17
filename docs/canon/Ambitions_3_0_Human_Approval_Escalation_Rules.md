@@ -1,6 +1,6 @@
 # Ambitions 3.0 Human Approval Escalation Rules
 
-Status: Active governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Human Approval Required
 

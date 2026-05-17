@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Day Rail SwiftUI Build Spec
 
-Status: Active implementation spec draft  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Surface: Today  
 Primary component: `AmbitionsDayRailView`  

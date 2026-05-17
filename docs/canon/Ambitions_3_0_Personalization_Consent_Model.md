@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Personalization Consent Model
 
-Status: Active Ambitions 3.0 trust/personalization canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Related docs: [Evidence Hierarchy](./Ambitions_3_0_Evidence_Hierarchy.md), [Trust / Privacy / Memory](./TRUST_PRIVACY_MEMORY.md)  
 Last updated: 2026-04-30

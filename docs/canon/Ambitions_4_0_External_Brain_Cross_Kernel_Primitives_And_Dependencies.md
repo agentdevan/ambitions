@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active planned Ambitions 4.0 scope; not implemented unless batch evidence proves implementation.
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Cross-Kernel Primitive Map
 

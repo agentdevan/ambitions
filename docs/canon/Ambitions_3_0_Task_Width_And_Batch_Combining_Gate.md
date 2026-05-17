@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Task Width And Batch Combining Gate
 
-Status: Active operating gate
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

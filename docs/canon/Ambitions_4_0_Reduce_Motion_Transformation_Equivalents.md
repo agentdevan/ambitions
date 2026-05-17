@@ -1,6 +1,6 @@
 # Ambitions 4.0 Reduce Motion Transformation Equivalents
 
-Status: Active
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Rule
 

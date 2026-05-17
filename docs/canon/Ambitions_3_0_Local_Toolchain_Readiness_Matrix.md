@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Local Toolchain Readiness Matrix
 
-Status: Active developer experience canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 

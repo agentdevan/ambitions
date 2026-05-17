@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Decision Record Protocol
 
-Status: Active architecture governance
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 Create ADRs for architectural changes, persistence changes, shell/routing
 changes, dependency additions, external surface changes, privacy/trust model

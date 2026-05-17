@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Repo Hygiene And Active Canon Policy
 
-Status: Active Ambitions 3.0 repository hygiene canon  
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
 Source override: [Ambitions 3.0 Source Of Truth Override](./Ambitions_3_0_Source_Of_Truth_Override.md)  
 Last updated: 2026-04-30

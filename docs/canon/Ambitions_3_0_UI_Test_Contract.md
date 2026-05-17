@@ -1,6 +1,6 @@
 # Ambitions 3.0 — UI Test Contract
 
-Status: Active QA canon
+Status: Historical supporting canon; subordinate to `docs/truth/*`
 
 ## Purpose
 
