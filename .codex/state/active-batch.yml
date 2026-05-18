@@ -1,18 +1,18 @@
 status: in_progress
-date: "2026-05-17"
+date: "2026-05-18"
 source_of_truth:
   - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
   - ".codex/state/active-batch.yml"
   - "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
 current:
-  train: "Flagship Completion"
-  batch: "FCP27 App-Wide Flagship Audit And Remediation"
-  previous_batch: "AOS30"
+  train: "Manifest-faithful rerun reconciliation"
+  batch: "SA29 Hash / Signature / Revocation Tooling"
+  previous_batch: "SA28"
   previous_result: "green"
-  next_eligible_batch: "FCP27 App-Wide Flagship Audit And Remediation"
+  next_eligible_batch: "SA30 Freshness Broker Manifest Contract"
 blocked_forward_queue:
-  blocked_batch: none
-  reason: "none"
+  blocked_batch: "FCP27 App-Wide Flagship Audit And Remediation"
+  reason: "Manifest-faithful rerun must continue through SA30 before FCP27"
 frontend_authority:
   encyclopedia_required_for_frontend_touching_batches: false
   entrypoint: "frontend/README.md"

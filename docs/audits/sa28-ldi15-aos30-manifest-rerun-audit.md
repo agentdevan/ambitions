@@ -95,13 +95,15 @@ bash -lc 'python3() { python "$@"; }; export -f python3; bash scripts/codex-forb
 ### Prior Evidence
 - `tools/source-atlas/ambitions-pack-crypto.py` (Basic hash/sign/check-revoked logic).
 - `tools/source-atlas/tests/test_ambitions_pack_crypto.py` (Basic coverage).
+- Prior SA29 rerun note in this audit section, retained as supporting evidence only.
 
 ### Classification of Prior Work
-- **Status:** **Partial/Supporting Evidence**. The prior work implemented basic crypto primitives but lacked the operational "quarantine" and "rollback" behavior required by the manifest.
+- **Status:** **Partial/Supporting Evidence**. The prior work implemented basic crypto primitives but lacked the operational quarantine, rollback-preservation, and explicit non-production signature-status behavior required by the manifest.
 
 ### Files Changed for This Rerun
-- `tools/source-atlas/ambitions-pack-crypto.py` (Added `validate_pack`, `quarantine`, and `rollback_pointer` logic).
-- `tools/source-atlas/tests/test_ambitions_pack_crypto.py` (Added tests for quarantine, corrupt JSON, and hash mismatch).
+- `tools/source-atlas/ambitions-pack-crypto.py` (Added explicit non-production signature status, last-known-good metadata output, deterministic hash validation, quarantine, and fallback availability verification).
+- `tools/source-atlas/tests/test_ambitions_pack_crypto.py` (Expanded coverage for rollback metadata preservation and explicit non-production signature claims).
+- `tools/source-atlas/tests/test_ambitions_pack_hash_signature_revocation.py` (New hash-named discovery module covering hash/signature/revocation/rollback lanes, including old-pack availability after failed replacement).
 
 ### Validation Attempted
 ```bash
@@ -112,14 +114,19 @@ bash -lc 'python3() { python "$@"; }; export -f python3; bash scripts/codex-forb
 ```
 
 ### Results
-- Pack-crypto unit test passed: `Ran 2 tests ... OK`.
+- `python --version` was unavailable in this shell because `python` is not on PATH.
+- `python3 -m unittest discover -s tools/source-atlas/tests -p "*hash*"` passed: `Ran 5 tests ... OK`.
+- `python3 -m unittest discover -s tools/source-atlas/tests` passed: `Ran 11 tests ... OK`.
 - Forbidden-claim scan passed: `no blocking hits`.
-- Quarantine behavior verified: Tests confirm corrupt JSON and hash mismatches move files to the quarantine directory.
-- Rollback support: `sign` output now includes `rollback_pointer` derived from pack metadata.
+- Title check passed: `GREEN: no generic Source Atlas titles found where canonical queue titles exist`.
+- Runner self-check passed: `GREEN: runner self-check passed`.
+- Quarantine behavior verified: tests confirm corrupt JSON, hash mismatches, and revoked packs move files to the quarantine directory.
+- Rollback support verified: `sign` output now includes `rollback_pointer` and `last_known_good_pack` from pack metadata; `validate` now resolves/verifies the real last-known-good pack before quarantining invalid candidates, and tests prove the old pack file remains available after hash-mismatched, corrupt, and revoked replacement failures.
+- Signature-status guard verified: `sign` output now includes `signature_status: mock-non-production` and an explicit `signature_claim` that refuses production-signing or official-source implications.
 
 ### Final Status
 - **Status:** **Green**
-- **Owner / Blocker:** None for SA29 rerun closeout. Operational quarantine and rollback logic is now implemented and verified.
+- **Owner / Blocker:** None for SA29 rerun closeout. Operational quarantine, rollback fallback availability, old-pack preservation, and explicit non-production signature-status logic are now implemented and verified.
 
 ## SA30 — Freshness Broker Manifest Contract
 
