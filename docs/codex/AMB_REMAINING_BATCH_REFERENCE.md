@@ -1,7 +1,7 @@
 # Ambitions Remaining Batch Reference
 
 Generated: 2026-05-18T08:31:00Z
-Next eligible: EFC02 - First Useful Object Onboarding
+Next eligible: EFC03 - First 30 Days Lifecycle And Retention Proof
 
 ## Summary
 - Total queue entries: 146
@@ -115,8 +115,8 @@ Next eligible: EFC02 - First Useful Object Onboarding
 | RHC05 | Validation Script Noise And Allowlist Hardening | historical_complete_do_not_run | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | historical-complete / Green | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | historical-complete do-not-run | Do not rerun; preserve RHC05 Green validation-report repair closeout and hand off to RHC06. |
 | RHC06 | Repo Hygiene Closeout And Handoff | historical_complete_do_not_run | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | historical-complete / accepted Yellow | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | historical-complete do-not-run | Do not rerun; preserve RHC06 accepted-Yellow report repair closeout and hand off to EFC01. |
 | EFC01 | Private Product Evidence Engine | historical_complete_do_not_run | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | historical-complete / accepted Yellow | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | historical-complete do-not-run | Do not rerun; preserve EFC01 overlay-only accepted-Yellow closeout and hand off to EFC02. |
-| EFC02 | First Useful Object Onboarding | executable_now | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | executable-now / overlay-only | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned / immediate next | Runnable now only as overlay-only/no-implementation queue coverage after EFC01 accepted-Yellow closeout. |
-| EFC03 | First 30 Days Lifecycle And Retention Proof | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
+| EFC02 | First Useful Object Onboarding | historical_complete_do_not_run | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | historical-complete / accepted Yellow | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | historical-complete do-not-run | Do not rerun; preserve EFC02 overlay-only accepted-Yellow closeout and hand off to EFC03. |
+| EFC03 | First 30 Days Lifecycle And Retention Proof | executable_now | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | executable-now / overlay-only | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned / immediate next | Runnable now only as overlay-only/no-implementation queue coverage after EFC02 accepted-Yellow closeout. |
 | EFC04 | Time Physics Edge Case Lab | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
 | EFC05 | Recommendation Court Integration Gate | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
 | EFC06 | Goal Thermodynamics And Drift Handling | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
@@ -269,8 +269,8 @@ Next eligible: EFC02 - First Useful Object Onboarding
 
 ## EFC train
 - **EFC01** · historical-complete / accepted Yellow · Private Product Evidence Engine · Do not rerun; preserve EFC01 overlay-only accepted-Yellow closeout and hand off to EFC02.
-- **EFC02** · executable-now / overlay-only · First Useful Object Onboarding · Runnable now only as overlay-only/no-implementation queue coverage after EFC01 accepted-Yellow closeout.
-- **EFC03** · absorbed overlay · First 30 Days Lifecycle And Retention Proof · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
+- **EFC02** · historical-complete / accepted Yellow · First Useful Object Onboarding · Do not rerun; preserve EFC02 overlay-only accepted-Yellow closeout and hand off to EFC03.
+- **EFC03** · executable-now / overlay-only · First 30 Days Lifecycle And Retention Proof · Runnable now only as overlay-only/no-implementation queue coverage after EFC02 accepted-Yellow closeout.
 - **EFC04** · absorbed overlay · Time Physics Edge Case Lab · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
 - **EFC05** · absorbed overlay · Recommendation Court Integration Gate · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
 - **EFC06** · absorbed overlay · Goal Thermodynamics And Drift Handling · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
@@ -297,7 +297,7 @@ Next eligible: EFC02 - First Useful Object Onboarding
 
 ## EFC overlay handoff
 
-- **EFC02** · executable-now / overlay-only · First Useful Object Onboarding · Runnable now only as overlay-only/no-implementation queue coverage after EFC01 accepted-Yellow closeout.
+- **EFC03** · executable-now / overlay-only · First 30 Days Lifecycle And Retention Proof · Runnable now only as overlay-only/no-implementation queue coverage after EFC02 accepted-Yellow closeout.
 
 ## CS conditional triggers
 - **CS02C** · conditional_trigger_only · CSCS02C · Run only when explicit trigger/research conditions are satisfied.
