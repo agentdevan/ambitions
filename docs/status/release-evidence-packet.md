@@ -78,6 +78,28 @@ PFC34 privacy/legal reconciliation, 2026-05-18:
   - targeted scans: `0`, no privacy-manifest mismatch or scope violation requiring source-support edits
 - Scope: docs/proof reconciliation only; no build, test, device, accessibility, privacy/legal approval, or release-readiness claim
 
+PFC35 security/threat-model reconciliation, 2026-05-18:
+
+- Branch: `main`
+- Commit: `826b3a1edcb97002ee091388563ddeb0ada32416`
+- Commands:
+  - `git status --short`
+  - `git diff --check`
+  - `make prompt-audit`
+  - `make batch-self-check`
+  - `bash scripts/codex-forbidden-claim-scan.sh docs/audits/pfc35-batch-closeout-report.md docs/status/release-evidence-packet.md 2>/dev/null || true`
+  - `bash scripts/cqs-privacy-security-claim-scan.sh docs/audits/pfc35-batch-closeout-report.md 2>/dev/null || true`
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`
+- Result:
+  - `git status --short`: `0`, with the pre-existing `?? .codex/state/global-train.lock`
+  - `git diff --check`: `0`
+  - `make prompt-audit`: `0`, `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`
+  - `make batch-self-check`: `0`, runner self-check passed
+  - `scripts/codex-forbidden-claim-scan.sh`: `0`, no blocking hits
+  - `scripts/cqs-privacy-security-claim-scan.sh`: `0`, no hits
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`: blocked by the session policy wrapper (`approval required by policy, but AskForApproval is set to Never`); no package-resolution proof was produced
+- Scope: docs-only proof reconciliation; no build/test/device/accessibility/privacy/legal/release-readiness claim
+
 ## Required local proof packet
 
 A serious local validation run should save or summarize:
