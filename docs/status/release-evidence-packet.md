@@ -140,6 +140,63 @@ PFC36 performance and observability reconciliation, 2026-05-18:
   - `scripts/codex-forbidden-claim-scan.sh`: `0`, context-only `top-level Plan drift` guard in source; no blocking hits
 - Scope: performance/observability source-support reconciliation only; no device, signing, TestFlight, App Store, accessibility, privacy/legal, or release-readiness claim
 
+PFC37 release-engineering evidence reconciliation, 2026-05-18:
+
+- Branch: `main`
+- Commit: `fb2f9ee9b20766fe1ba58d3a33bf61e89cf86913`
+- Environment:
+  - macOS `15.7.6` (`24G707`)
+  - Xcode `26.3` (`17C529`) at `/Applications/Xcode.app/Contents/Developer`
+  - XcodeGen `2.45.4`
+- Commands:
+  - `git status --short`
+  - `git diff --check`
+  - `make prompt-audit`
+  - `make batch-self-check`
+  - `xcodegen generate`
+  - `./scripts/build-local.sh`
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`
+  - `xcode-select -p`
+  - `plutil -p /Applications/Xcode.app/Contents/version.plist`
+  - `xcodegen version`
+- Verified proof:
+  - `git status --short`: pre-existing `?? .codex/state/global-train.lock` remained present and unstaged
+  - `git diff --check`: `0`
+  - `make prompt-audit`: `0`, yellow classification for support/eval/template files and no active runnable prompt missing metadata
+  - `make batch-self-check`: `0`, runner self-check passed
+  - `xcodegen generate`: `0`
+  - `./scripts/build-local.sh`: `0`, produced `Build Succeeded`
+  - `xcode-select -p`: `0`
+  - `plutil -p /Applications/Xcode.app/Contents/version.plist`: `0`
+  - `xcodegen version`: `0`
+  - Build log: `output/logs/build-local-20260518-033909.log`
+- Failed proof:
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`: blocked before shell execution by the session policy wrapper (`approval required by policy, but AskForApproval is set to Never`); no exit code produced
+- Skipped proof:
+  - Unit tests
+  - UI tests
+  - Unsigned archive sanity
+  - Physical-device proof
+  - Accessibility proof
+  - Privacy/legal proof
+  - Signing proof
+- Human follow-up:
+  - If separate package-resolution proof is required, rerun the `xcodebuild -resolvePackageDependencies` command in a session that permits it.
+- EFC applicability:
+  - Invoked
+  - Docs/evidence reconciliation only; no source, UI, or user-facing behavior repair required
+- Claims not made:
+  - release readiness
+  - TestFlight readiness
+  - App Store readiness
+  - signed archive readiness
+  - physical-device validation
+  - public accessibility conformance
+  - privacy/legal approval
+  - hosted CI proof
+  - production readiness
+  - global queue completion
+
 ## Required local proof packet
 
 A serious local validation run should save or summarize:
