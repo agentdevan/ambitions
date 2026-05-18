@@ -1,0 +1,5 @@
+pid: 92217
+command: scripts/ambitions-global-train-supervisor.sh --once
+batch: RHC03
+timestamp: 2026-05-18T09:46:36Z
+run_dir: pending
