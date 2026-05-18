@@ -965,7 +965,7 @@
       "id": "EFC16",
       "title": "Release Truth Machine",
       "classification": "historical_complete_do_not_run",
-      "reason": "EFC16 Release Truth Machine is complete / Green with closeout in docs/audits/efc16-batch-closeout-report.md and no implementation executed. Do not rerun as an implementation batch.",
+      "reason": "EFC16 Release Truth Machine is complete / Green with closeout in docs/audits/efc16-batch-closeout-report.md and commit 5e5b69bee824829d1095444ca3d340ed8da0ba3b committed on local main. Do not rerun as an implementation batch.",
       "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
@@ -973,8 +973,8 @@
       "id": "EFC17",
       "title": "App Store Creative And Reviewer Package",
       "classification": "executable_now",
-      "reason": "EFC16 is complete / Green. EFC17 is the next eligible batch.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "reason": "EFC16 is complete / green. EFC17 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC16.",
       "efc_applicability": "invoked"
     },
     {

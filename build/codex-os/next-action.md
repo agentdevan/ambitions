@@ -1,9 +1,9 @@
 # Codex OS Next Action
 
-Generated: 2026-05-18T11:07:53-04:00
+Generated: 2026-05-18T11:33:11-04:00
 
 Decision: select_next_batch
-Reason: No blockers remain; select the safest executable batch (EFC16).
+Reason: No blockers remain; select the safest executable batch (EFC17).
 
 ## Blockers
 

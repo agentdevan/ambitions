@@ -1,6 +1,6 @@
 # Canon Impact Plan
 
-Generated: 2026-05-18T11:07:53-04:00
+Generated: 2026-05-18T11:33:11-04:00
 
 ## Changed Canon Files
 
