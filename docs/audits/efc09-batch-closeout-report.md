@@ -15,6 +15,7 @@ This closeout records:
 - the fact that only the approved metadata surfaces were changed
 - the validation commands required for this phase
 - the accepted Yellow boundary, if any, after validation
+- the Phase 04 repair of stale generated top metadata
 - the next handoff target: `EFC10`
 
 ## Source Truth Inspected
@@ -55,7 +56,9 @@ No queue order, canonical batch ID, or top-level IA was changed.
 
 `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` now records EFC09 as absorbed-as-overlay/do-not-run metadata and advances the next eligible batch to EFC10.
 
-Resolution for this phase: preserve the canonical EFC09 ID and order position, mark no implementation as authorized from this prompt, and advance the next handoff to EFC10. This report treats the closeout as overlay-only queue coverage, not permission to mutate app, project, signing, release, hosted-service, or runtime files.
+`docs/codex/AMB_REMAINING_BATCH_REFERENCE.json` also records EFC10 as the top-level next eligible batch while preserving the EFC09 record as `absorbed_as_overlay`.
+
+Resolution for this phase: preserve the canonical EFC09 ID and order position, mark no implementation as authorized from this prompt, and advance the next handoff to EFC10 across the active metadata mirrors. This report treats the closeout as overlay-only queue coverage, not permission to mutate app, project, signing, release, hosted-service, or runtime files.
 
 ## Validation
 
@@ -64,7 +67,17 @@ Resolution for this phase: preserve the canonical EFC09 ID and order position, m
 - `jq empty docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json docs/codex/AMB_REMAINING_BATCH_REFERENCE.json docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json` - exit `0`.
 - `make prompt-audit` - exit `0`; returned `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`.
 - `make batch-self-check` - exit `0`; runner self-check passed.
-- `scripts/codex-forbidden-claim-scan.sh docs/audits/efc09-batch-closeout-report.md .codex/state/active-batch.yml .codex/reports/current-batch-train-state.md docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json 2>/dev/null || true` - exit `0`; no blocking hits.
+- `scripts/codex-forbidden-claim-scan.sh docs/audits/efc09-batch-closeout-report.md docs/codex/AMB_REMAINING_BATCH_REFERENCE.json 2>/dev/null || true` - exit `0`; no blocking hits.
+
+## Phase 04 Repair
+
+Phase 04 repaired the stale generated top metadata in `docs/codex/AMB_REMAINING_BATCH_REFERENCE.json`:
+
+- `metadata.next_eligible_batch`: `EFC09` -> `EFC10`
+- `metadata.next_eligible_title`: `Accessibility Shadow Surface System` -> `Real Device Proof Lab`
+- `metadata.generated_at_utc`: refreshed for the repair pass
+
+The EFC09 batch record remains `absorbed_as_overlay`, and the canonical queue order remains unchanged.
 
 ## EFC Applicability
 
@@ -74,7 +87,7 @@ This batch is the EFC09 proof-owner lane, but this phase only records overlay-on
 
 ## Accepted Yellow
 
-Accepted Yellow is recorded because `make prompt-audit` returned the known Yellow support/template/historical classification for non-active documentation surfaces, while the required structural checks passed.
+Accepted Yellow remains because `make prompt-audit` reports the known support/template/historical classification for non-active documentation surfaces while exiting `0`. Phase 04 repaired the stale generated next-eligible metadata, and no queue corruption, invalid JSON, forbidden file mutation, or release/accessibility/privacy/performance overclaim remains in the scoped diff.
 
 ## GPT-5.5 Review
 
@@ -115,6 +128,7 @@ Rollback is metadata-only for this phase:
 - restore `.codex/state/active-batch.yml`
 - restore `.codex/reports/current-batch-train-state.md`
 - restore `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`
+- restore `docs/codex/AMB_REMAINING_BATCH_REFERENCE.json`
 
 No source-code, project, signing, or release rollback is required.
 
