@@ -1,6 +1,6 @@
 # Generated Accepted-Yellow Governance Debt
 
-Generated: 2026-05-18T11:33:11-04:00
+Generated: 2026-05-18T11:51:43-04:00
 
 Status: GREEN
 Owner: Governance Reconciliation lane

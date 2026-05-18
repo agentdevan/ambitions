@@ -972,17 +972,17 @@
     {
       "id": "EFC17",
       "title": "App Store Creative And Reviewer Package",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC17 is canonical absorbed-as-overlay coverage only. Do not run this prompt as implementation work. EFC18 is the next fallback handoff.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC17 App Store Creative And Reviewer Package is complete / Green with closeout in docs/audits/efc17-batch-closeout-report.md and commit 73fa2dbd3188b92aab1f44bcd506f661d696c64b committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC18",
       "title": "Anti-Ceremony Compiler",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC17 is complete / green. EFC18 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC17.",
       "efc_applicability": "invoked"
     },
     {
