@@ -141,3 +141,24 @@ Validation rerun after repair:
 - `scripts/codex-forbidden-claim-scan.sh docs/audits/efc08-batch-closeout-report.md .codex/reports/current-batch-train-state.md .codex/state/active-batch.yml docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json docs/codex/AMB_REMAINING_BATCH_REFERENCE.json docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json 2>/dev/null || true` - exit `0`; context-only hits, no blocking hits.
 
 Final review decision: EFC08 remains Accepted Yellow as an overlay-only/no-implementation closeout with EFC invoked and EFC09 as next handoff.
+
+## Phase 04 GPT-5.5 Repair Pass 1
+
+Repair status: metadata repair completed.
+
+Repair performed:
+
+- Corrected `.codex/reports/current-batch-train-state.md` to reference the actual EFC08 metadata-only closeout commit, `455e126e24d75bac6d1766b55e5758722219a593`, instead of `N/A`.
+
+Validation rerun after repair:
+
+- `git status --short --branch` - exit `0`; repo is on `main`, ahead of `origin/main`, with this Phase 04 metadata/report repair plus the pre-existing untracked `.codex/state/global-train.lock`.
+- `git diff --check` - exit `0`.
+- `python3 -m json.tool docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json >/dev/null` - exit `0`.
+- `python3 -m json.tool docs/codex/AMB_REMAINING_BATCH_REFERENCE.json >/dev/null` - exit `0`.
+- `python3 -m json.tool docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json >/dev/null` - exit `0`.
+- `make prompt-audit` - exit `0`; returned the accepted Yellow support/eval/template/historical prompt classification.
+- `make batch-self-check` - exit `0`.
+- `scripts/codex-forbidden-claim-scan.sh docs/audits/efc08-batch-closeout-report.md .codex/reports/current-batch-train-state.md .codex/state/active-batch.yml docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json docs/codex/AMB_REMAINING_BATCH_REFERENCE.json docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json 2>/dev/null || true` - exit `0`; context-only hits, no blocking hits.
+
+Final repair decision: EFC08 remains Accepted Yellow as an overlay-only/no-implementation closeout with EFC invoked and EFC09 as next handoff.

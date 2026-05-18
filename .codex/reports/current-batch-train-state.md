@@ -11,7 +11,7 @@ Plan is superseded as a top-level destination and remains valid only as an actio
 
 ## EFC08 Source Freshness Commons And Operations Closeout
 
-- Commit: `N/A` no implementation commit; metadata-only closeout on local `main`.
+- Commit: `455e126e24d75bac6d1766b55e5758722219a593` metadata-only closeout on local `main`; no implementation commit or app-source behavior claim.
 - Report: `docs/audits/efc08-batch-closeout-report.md`.
 - Status: Accepted Yellow.
 - Proof: EFC08 accepted Yellow: overlay-only/no-implementation queue-coverage closeout; docs/audits/efc08-batch-closeout-report.md records absorbed-as-overlay boundary, EFC invoked, queue mirror conflict resolution, no app/source/project/signing/workflow/queue/release behavior changes, and validation; make prompt-audit exited 0 with known Yellow support/eval/template/historical prompt classifications; forbidden-claim scan had no blocking findings; no release/device/accessibility/privacy/legal/performance/production/global-completion claim..
