@@ -2077,7 +2077,7 @@
     "id": "SA27",
     "title": "Pack Factory Lite",
     "train": "SA",
-    "status": "executable_now",
+    "status": "historical_complete_do_not_run",
     "queue_position": 62,
     "canonical_order_source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
     "prompt_path": "prompts/batches/SA27.md",
@@ -2969,7 +2969,7 @@
     "prompt_action": "create_missing",
     "owner_scope": "PFC",
     "batch_type": "implementation",
-    "dependency_gate": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+    "dependency_gate": "Complete / Green; do not rerun through normal fallback.",
     "hard_preconditions": [
       "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named."
     ],
@@ -2985,8 +2985,8 @@
     "rhc_applicability": "not-applicable; do not pull RHC broad cleanup early",
     "dptg_applicability": "not-applicable; terminal proof remains later",
     "consolidation_recommendation": "Keep shared standards/templates only; preserve canonical ID as separate record.",
-    "modification_recommendation": "Implement the PFC batch-specific work for Build And Test Determinism Closeout with visual, product-experience, and release-proof gates where applicable.",
-    "removal_recommendation": "Do not delete in this batch; mark do-not-run where historical/overlay/conditional.",
+    "modification_recommendation": "Preserve the completed PFC32 Green closeout report and do not rerun this batch through normal fallback.",
+    "removal_recommendation": "Do not delete; preserve completed Green evidence as historical complete.",
     "exact_codex_instruction_summary": "Implement Build And Test Determinism Closeout as platform-framework compliance work with local validation evidence, proof packet updates, and no release/readiness overclaim.",
     "final_report_path": "docs/audits/pfc32-batch-closeout-report.md",
     "next_handoff": "PFC33"
@@ -2995,7 +2995,7 @@
     "id": "PFC33",
     "title": "External Surface Release Evidence",
     "train": "PFC",
-    "status": "executable_later",
+    "status": "executable_now",
     "queue_position": 89,
     "canonical_order_source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
     "prompt_path": "prompts/batches/PFC33.md",

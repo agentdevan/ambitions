@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PFC32",
-  "next_eligible_title": "Build And Test Determinism Closeout",
+  "next_eligible_batch": "PFC33",
+  "next_eligible_title": "External Surface Release Evidence",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -724,16 +724,16 @@
     {
       "id": "PFC32",
       "title": "Build And Test Determinism Closeout",
-      "classification": "executable_now",
-      "reason": "PFC31 is complete / Green. PFC32 is the next implementation batch.",
-      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PFC32 is complete / Green with closeout in docs/audits/pfc32-batch-closeout-report.md and commit fc8d321bcd9c123884580bb075dd8c98bef09e57 on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PFC33",
       "title": "External Surface Release Evidence",
-      "classification": "executable_later",
-      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "classification": "executable_now",
+      "reason": "PFC32 is complete / Green. PFC33 is the next implementation batch.",
       "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
       "efc_applicability": "invoked"
     },

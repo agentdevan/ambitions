@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-17T01:27:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "PFC32",
-    "next_eligible_title": "Build And Test Determinism Closeout",
+    "next_eligible_batch": "PFC33",
+    "next_eligible_title": "External Surface Release Evidence",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -1232,6 +1232,20 @@
     {
       "id": "PFC32",
       "title": "Build And Test Determinism Closeout",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete",
+      "owner_train": "PFC / Platform Framework Compliance",
+      "source_path": "docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md",
+      "dependency_gate": "Complete / Green; do not rerun through normal fallback.",
+      "risk_class": "high",
+      "proof_class": "release/legal/privacy/architecture evidence required before claim ownership",
+      "efc_air_surface_inheritance": "REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls",
+      "consolidation_posture": "historical-complete do-not-run",
+      "next_action": "Do not rerun; preserve PFC32 Green closeout and hand off to PFC33."
+    },
+    {
+      "id": "PFC33",
+      "title": "External Surface Release Evidence",
       "classification": "executable_now",
       "status_class": "executable-now",
       "owner_train": "PFC / Platform Framework Compliance",
@@ -1241,21 +1255,7 @@
       "proof_class": "release/legal/privacy/architecture evidence required before claim ownership",
       "efc_air_surface_inheritance": "REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls",
       "consolidation_posture": "queued successor",
-      "next_action": "Runnable now after PFC31 Green closeout."
-    },
-    {
-      "id": "PFC33",
-      "title": "External Surface Release Evidence",
-      "classification": "executable_later",
-      "status_class": "queued",
-      "owner_train": "PFC / Platform Framework Compliance",
-      "source_path": "docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md",
-      "dependency_gate": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
-      "risk_class": "high",
-      "proof_class": "release/legal/privacy/architecture evidence required before claim ownership",
-      "efc_air_surface_inheritance": "REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls",
-      "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "next_action": "Runnable now after PFC32 Green closeout."
     },
     {
       "id": "PFC34",

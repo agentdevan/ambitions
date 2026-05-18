@@ -2585,9 +2585,9 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "PFC32": {
-    "confidence": "MEDIUM",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PFC33": {
     "confidence": "MEDIUM",
