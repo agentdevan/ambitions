@@ -1,19 +1,20 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-17T20:32:15-04:00
+Generated: 2026-05-17T21:31:07-04:00
 
-Selected batch: FCP27 App-Wide Flagship Audit And Remediation
+Selected batch: SA29 Hash / Signature / Revocation Tooling
 Prompt file: none
-Lane: flagship
+Lane: source-atlas
 Queue classification: unknown
 
 ## Reason
 
-Selected the safest live batch from current state: FCP27 App-Wide Flagship Audit And Remediation.
+Selected the safest live batch from current state: SA29 Hash / Signature / Revocation Tooling.
 
 ## Blockers
 
-- None
+- blocked_forward_queue:FCP27 App-Wide Flagship Audit And Remediation
+- blocked_reason:Manifest-faithful rerun must continue through SA30 before FCP27
 
 ## Preflight Commands
 

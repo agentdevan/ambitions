@@ -184,6 +184,7 @@
 - prompts/batches/MRI36-START-HERE-QUALITY-EVALS.md: Plan -> Time
 - prompts/batches/MRI19-LIFESHAPE-RUNTIME-MODEL.md: Plan -> Time
 - prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md: Plan -> Time
+- prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md: Plan -> Time
 - prompts/batches/PK27.md: Plan -> Time
 - prompts/batches/PK13.md: Plan -> Time
 - prompts/batches/MRI05-RECOVERY-THREAD-RUNTIME.md: Plan -> Time

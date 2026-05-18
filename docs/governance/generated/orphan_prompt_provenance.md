@@ -1,6 +1,6 @@
 # Orphan Prompt Provenance
 
-Generated: 2026-05-18T00:52:21.944217+00:00
+Generated: 2026-05-18T01:41:26.469241+00:00
 
 ## Counts
 
@@ -494,7 +494,7 @@ Generated: 2026-05-18T00:52:21.944217+00:00
 | FCP24 | COMPLETE_PROOF_LINKED | 1 | 5 | 22 | 15 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP25 | COMPLETE_PROOF_LINKED | 1 | 8 | 21 | 15 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP26 | COMPLETE_PROOF_LINKED | 1 | 3 | 21 | 15 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| FCP27 | COMPLETE_PROOF_LINKED | 4 | 46 | 37 | 30 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| FCP27 | COMPLETE_PROOF_LINKED | 4 | 46 | 46 | 29 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP28 | COMPLETE_PROOF_LINKED | 2 | 4 | 34 | 30 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP29 | COMPLETE_PROOF_LINKED | 2 | 4 | 31 | 30 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP30 | COMPLETE_PROOF_LINKED | 2 | 4 | 31 | 27 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |

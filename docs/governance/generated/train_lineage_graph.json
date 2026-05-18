@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T20:32:15-04:00",
+  "generated_at": "2026-05-17T21:31:07-04:00",
   "records": {
     "AFI01": {
       "audit_files": [
@@ -9370,7 +9370,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/state/active-batch.yml",
         "docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
@@ -27894,7 +27893,6 @@
         "docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md",
         "docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md",
         "docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md",
-        "docs/governance/GOVERNANCE_DASHBOARD.md",
         "docs/governance/REMAINING_WORK_GRAPH.md"
       ],
       "implementation_files": [
@@ -27947,8 +27945,14 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
+        ".codex/reports/current-batch-train-state.md",
         ".codex/runs/FCP27/20260517T123556Z/prompts/01-plan.prompt.md",
         ".codex/runs/FCP27/20260517T123556Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
         ".codex/state/active-batch.yml",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
@@ -27975,6 +27979,16 @@
         ".codex/runs/FCP27/20260517T123556Z/prompts/01-plan.prompt.md",
         ".codex/runs/FCP27/20260517T123556Z/prompts/02-bounded-patch.prompt.md",
         ".codex/runs/FCP27/20260517T123556Z/rollback.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/01-plan.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/02-bounded-patch.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/03-review.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/04-repair-1.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/05-finalize.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
         ".codex/runs/PRIVATE-LIFE-RUNTIME-GOLDEN-SCENARIO-PROOF-01/20260517T051217Z/final/05-finalize.final.md",
         "docs/audits/aos30-batch-closeout-report.md",
         "docs/audits/fcp05-start-here-surface-report.md",
@@ -55264,7 +55278,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -55583,7 +55596,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -55880,7 +55892,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -56177,7 +56188,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -56474,7 +56484,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -56771,7 +56780,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -57070,7 +57078,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -57369,7 +57376,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -57676,7 +57682,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -57989,7 +57994,6 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -94060,7 +94064,6 @@
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
         ".codex/GLOBAL_BATCH_TRAIN.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -94335,7 +94338,6 @@
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
         ".codex/GLOBAL_BATCH_TRAIN.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -94591,7 +94593,6 @@
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
         ".codex/GLOBAL_BATCH_TRAIN.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -94846,7 +94847,6 @@
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
         ".codex/GLOBAL_BATCH_TRAIN.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -95101,7 +95101,6 @@
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
         ".codex/GLOBAL_BATCH_TRAIN.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -95356,7 +95355,6 @@
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
         ".codex/GLOBAL_BATCH_TRAIN.md",
-        ".codex/reports/current-batch-train-state.md",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -104550,12 +104548,18 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
         ".codex/runs/SA27/20260515T045357Z/prompts/01-plan.prompt.md",
         ".codex/runs/SA27/20260515T045357Z/prompts/02-bounded-patch.prompt.md",
         ".codex/runs/SA27/20260515T045357Z/prompts/03-review.prompt.md",
         ".codex/runs/SA27/20260515T045357Z/prompts/04-repair-1.prompt.md",
         ".codex/runs/SA28/20260515T223651Z/prompts/01-plan.prompt.md",
         ".codex/runs/SA28/20260515T223651Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/state/active-batch.yml",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -104580,6 +104584,11 @@
         "prompts/batches/SA28.md"
       ],
       "proof_files": [
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
         ".codex/runs/SA27/20260515T045357Z/prompts/01-plan.prompt.md",
         ".codex/runs/SA27/20260515T045357Z/prompts/02-bounded-patch.prompt.md",
         ".codex/runs/SA27/20260515T045357Z/prompts/03-review.prompt.md",
@@ -104902,7 +104911,8 @@
         "docs/codex/SOURCE_ATLAS_GATE_MATRIX.md",
         "docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md",
         "docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md",
-        "docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md"
+        "docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md",
+        "docs/governance/GOVERNANCE_DASHBOARD.md"
       ],
       "implementation_files": [
         "Native/Ambitions/App/AmbitionsRootView.swift",
@@ -104950,8 +104960,15 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
+        ".codex/reports/current-batch-train-state.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
         ".codex/runs/SA28/20260515T223651Z/prompts/01-plan.prompt.md",
         ".codex/runs/SA28/20260515T223651Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/state/active-batch.yml",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -104975,6 +104992,18 @@
         "prompts/batches/SA29.md"
       ],
       "proof_files": [
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final-summary.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/01-plan.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/02-bounded-patch.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/03-review.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/04-repair-1.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/05-finalize.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/rollback.md",
         ".codex/runs/SA28/20260515T223651Z/prompts/01-plan.prompt.md",
         ".codex/runs/SA28/20260515T223651Z/prompts/02-bounded-patch.prompt.md",
         "docs/audits/global-remaining-train-blueprint-report.md",
@@ -105244,6 +105273,13 @@
       ],
       "prompt_files": [
         ".codex/BATCH_TRAIN_REGISTRY.md",
+        ".codex/reports/current-batch-train-state.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
+        ".codex/state/active-batch.yml",
         "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
         "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -105267,6 +105303,16 @@
         "prompts/batches/SA30.md"
       ],
       "proof_files": [
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/01-plan.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/02-bounded-patch.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/03-review.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/04-repair-1.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/final/05-finalize.final.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+        ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
         "docs/audits/global-remaining-train-blueprint-report.md",
         "docs/audits/gq01-global-queue-maturity-report.md",
         "docs/audits/sa01-source-atlas-canon-lock-report.md",

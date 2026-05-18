@@ -1,6 +1,6 @@
 # Generated Ambitions Reconciled Registry Projection
 
-Generated: 2026-05-17T20:32:15-04:00
+Generated: 2026-05-17T21:31:07-04:00
 
 This file is generated from local repository data by `scripts/governance/ambitions-governance-reconcile.py`.
 Do not hand-edit generated output; update source files or governance rules and regenerate.
@@ -114,7 +114,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | AOS27 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 20 | 3 | 6 | 37 |  |
 | AOS28 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 18 | 3 | 6 | 34 |  |
 | AOS29 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 46 | 3 | 6 | 34 |  |
-| AOS30 | COMPLETE_PROOF_LINKED | HIGH | 43 | 3 | 6 | 34 | Historical queued language superseded by linked implementation and proof. |
+| AOS30 | COMPLETE_PROOF_LINKED | HIGH | 42 | 3 | 6 | 34 | Historical queued language superseded by linked implementation and proof. |
 
 ## AQOS
 
@@ -376,7 +376,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | FCP24 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 5 | 22 |  |
 | FCP25 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 8 | 21 |  |
 | FCP26 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 3 | 21 |  |
-| FCP27 | COMPLETE_PROOF_LINKED | HIGH | 21 | 4 | 46 | 37 |  |
+| FCP27 | COMPLETE_PROOF_LINKED | HIGH | 27 | 4 | 46 | 47 |  |
 | FCP28 | COMPLETE_PROOF_LINKED | HIGH | 19 | 2 | 4 | 34 |  |
 | FCP29 | COMPLETE_PROOF_LINKED | HIGH | 17 | 2 | 4 | 31 |  |
 | FCP30 | COMPLETE_PROOF_LINKED | HIGH | 16 | 2 | 4 | 31 | Historical queued language superseded by linked implementation and proof. |
@@ -690,16 +690,16 @@ Do not hand-edit generated output; update source files or governance rules and r
 | PFC28 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 18 |  |
 | PFC29 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 20 |  |
 | PFC30 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 18 |  |
-| PFC31 | COMPLETE_PROOF_LINKED | HIGH | 28 | 2 | 7 | 38 |  |
-| PFC32 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 21 |  |
-| PFC33 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 21 |  |
-| PFC34 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 21 |  |
-| PFC35 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 21 |  |
-| PFC36 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 21 |  |
-| PFC37 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 22 |  |
-| PFC38 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 21 |  |
-| PFC39 | COMPLETE_PROOF_LINKED | HIGH | 29 | 1 | 4 | 25 |  |
-| PFC40 | COMPLETE_PROOF_LINKED | HIGH | 29 | 1 | 4 | 24 | Historical queued language superseded by linked implementation and proof. |
+| PFC31 | COMPLETE_PROOF_LINKED | HIGH | 27 | 2 | 7 | 38 |  |
+| PFC32 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
+| PFC33 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
+| PFC34 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
+| PFC35 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
+| PFC36 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
+| PFC37 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 22 |  |
+| PFC38 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
+| PFC39 | COMPLETE_PROOF_LINKED | HIGH | 28 | 1 | 4 | 25 |  |
+| PFC40 | COMPLETE_PROOF_LINKED | HIGH | 28 | 1 | 4 | 24 | Historical queued language superseded by linked implementation and proof. |
 
 ## PK
 
@@ -830,12 +830,12 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| RHC01 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 19 | 3 | 7 | 21 |  |
-| RHC02 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 18 | 2 | 4 | 10 |  |
-| RHC03 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 18 | 2 | 4 | 7 |  |
-| RHC04 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 18 | 2 | 4 | 8 |  |
-| RHC05 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 18 | 2 | 4 | 8 |  |
-| RHC06 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 18 | 2 | 4 | 8 |  |
+| RHC01 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 18 | 3 | 7 | 21 |  |
+| RHC02 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 17 | 2 | 4 | 10 |  |
+| RHC03 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 17 | 2 | 4 | 7 |  |
+| RHC04 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 17 | 2 | 4 | 8 |  |
+| RHC05 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 17 | 2 | 4 | 8 |  |
+| RHC06 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 17 | 2 | 4 | 8 |  |
 
 ## RHE
 
@@ -883,9 +883,9 @@ Do not hand-edit generated output; update source files or governance rules and r
 | SA25 | COMPLETE_PROOF_LINKED | HIGH | 28 | 4 | 6 | 23 |  |
 | SA26 | COMPLETE_PROOF_LINKED | HIGH | 29 | 4 | 7 | 29 |  |
 | SA27 | COMPLETE_PROOF_LINKED | HIGH | 31 | 4 | 6 | 28 |  |
-| SA28 | COMPLETE_PROOF_LINKED | HIGH | 29 | 7 | 76 | 22 |  |
-| SA29 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 24 | 4 | 42 | 15 |  |
-| SA30 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 22 | 3 | 5 | 13 |  |
+| SA28 | COMPLETE_PROOF_LINKED | HIGH | 35 | 7 | 76 | 27 |  |
+| SA29 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 31 | 4 | 42 | 27 |  |
+| SA30 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 29 | 3 | 5 | 23 |  |
 | SA31 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 21 | 3 | 4 | 13 |  |
 | SA32 | COMPLETE_PROOF_LINKED | HIGH | 21 | 3 | 6 | 13 |  |
 

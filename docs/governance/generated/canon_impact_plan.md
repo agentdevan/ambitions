@@ -1,6 +1,6 @@
 # Canon Impact Plan
 
-Generated: 2026-05-17T20:32:15-04:00
+Generated: 2026-05-17T21:31:07-04:00
 
 ## Changed Canon Files
 
@@ -243,6 +243,7 @@ Generated: 2026-05-17T20:32:15-04:00
 - Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ExternalRoutingTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ScreenContractRegistryTests.swift: possible active Plan top-level residue
@@ -410,7 +411,6 @@ Generated: 2026-05-17T20:32:15-04:00
 - docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md: possible Hero Step Panel without Start Here binding
 - docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md: possible active Plan top-level residue
 - docs/canon/Ambitions_3_0_Surface_State_Matrix.md: possible active Plan top-level residue
-- docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md: possible active Plan top-level residue
 
 ## Required Codex Behavior
 

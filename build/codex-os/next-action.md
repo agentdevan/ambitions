@@ -1,9 +1,9 @@
 # Codex OS Next Action
 
-Generated: 2026-05-17T20:32:15-04:00
+Generated: 2026-05-17T21:31:07-04:00
 
 Decision: select_next_batch
-Reason: No blockers remain; select the safest executable batch (FCP27 App-Wide Flagship Audit And Remediation).
+Reason: No blockers remain; select the safest executable batch (SA29 Hash / Signature / Revocation Tooling).
 
 ## Blockers
 

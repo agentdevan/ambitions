@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-17T20:32:15-04:00
+Generated: 2026-05-17T21:31:07-04:00
 
 ## Plan → Time
 
@@ -1146,6 +1146,7 @@ Generated: 2026-05-17T20:32:15-04:00
 - prompts/batches/MRI36-START-HERE-QUALITY-EVALS.md
 - prompts/batches/MRI19-LIFESHAPE-RUNTIME-MODEL.md
 - prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md
+- prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md
 - prompts/batches/PK27.md
 - prompts/batches/PK13.md
 - prompts/batches/MRI05-RECOVERY-THREAD-RUNTIME.md
@@ -1237,6 +1238,7 @@ Generated: 2026-05-17T20:32:15-04:00
 - Native/AmbitionsTests/App/ShellCommandRouterTests.swift
 - Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift
 - Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift
+- Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift
 - Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift
 - Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift
 - Native/AmbitionsTests/App/AppIntentRoutingTests.swift
@@ -1727,7 +1729,6 @@ Generated: 2026-05-17T20:32:15-04:00
 - docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md
 - docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md
 - docs/codex/visual-quality/FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP.md
-- docs/status/current-implementation-map.md
 - docs/canon/AmbitionsOS_Surface_Encapsulation_And_Signature_Language.md
 - docs/canon/Ambitions_4_0_State_Transformation_Motion_Primitives.md
 - docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md

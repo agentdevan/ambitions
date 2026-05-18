@@ -7250,7 +7250,6 @@
         "implementation_file_count": 6,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/state/active-batch.yml",
           "docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
@@ -9137,12 +9136,18 @@
       {
         "commit_count": 4,
         "confidence": "HIGH",
-        "governance_file_count": 30,
+        "governance_file_count": 29,
         "implementation_file_count": 46,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
+          ".codex/reports/current-batch-train-state.md",
           ".codex/runs/FCP27/20260517T123556Z/prompts/01-plan.prompt.md",
           ".codex/runs/FCP27/20260517T123556Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
           ".codex/state/active-batch.yml",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
@@ -9162,7 +9167,7 @@
           "prompts/batches/MANIFEST-RERUN-SA28-01.md",
           "prompts/batches/MANIFEST-RERUN-SA29-01.md"
         ],
-        "proof_file_count": 37,
+        "proof_file_count": 46,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "FCP27"
@@ -11935,7 +11940,6 @@
         "implementation_file_count": 7,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -11975,7 +11979,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12014,7 +12017,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12053,7 +12055,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12092,7 +12093,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12131,7 +12131,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12170,7 +12169,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12209,7 +12207,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12248,7 +12245,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12289,7 +12285,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -21873,7 +21868,6 @@
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
           ".codex/GLOBAL_BATCH_TRAIN.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -21904,7 +21898,6 @@
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
           ".codex/GLOBAL_BATCH_TRAIN.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -21934,7 +21927,6 @@
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
           ".codex/GLOBAL_BATCH_TRAIN.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -21964,7 +21956,6 @@
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
           ".codex/GLOBAL_BATCH_TRAIN.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -21994,7 +21985,6 @@
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
           ".codex/GLOBAL_BATCH_TRAIN.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -22024,7 +22014,6 @@
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
           ".codex/GLOBAL_BATCH_TRAIN.md",
-          ".codex/reports/current-batch-train-state.md",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -23221,12 +23210,18 @@
         "implementation_file_count": 76,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
           ".codex/runs/SA27/20260515T045357Z/prompts/01-plan.prompt.md",
           ".codex/runs/SA27/20260515T045357Z/prompts/02-bounded-patch.prompt.md",
           ".codex/runs/SA27/20260515T045357Z/prompts/03-review.prompt.md",
           ".codex/runs/SA27/20260515T045357Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/SA28/20260515T223651Z/prompts/01-plan.prompt.md",
           ".codex/runs/SA28/20260515T223651Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/state/active-batch.yml",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -23250,7 +23245,7 @@
           "prompts/batches/SA27.md",
           "prompts/batches/SA28.md"
         ],
-        "proof_file_count": 22,
+        "proof_file_count": 27,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "SA28"
@@ -23258,12 +23253,19 @@
       {
         "commit_count": 4,
         "confidence": "MEDIUM",
-        "governance_file_count": 22,
+        "governance_file_count": 23,
         "implementation_file_count": 42,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
+          ".codex/reports/current-batch-train-state.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
           ".codex/runs/SA28/20260515T223651Z/prompts/01-plan.prompt.md",
           ".codex/runs/SA28/20260515T223651Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/state/active-batch.yml",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -23286,7 +23288,7 @@
           "prompts/batches/SA28.md",
           "prompts/batches/SA29.md"
         ],
-        "proof_file_count": 15,
+        "proof_file_count": 25,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
         "train_id": "SA29"
@@ -23298,6 +23300,13 @@
         "implementation_file_count": 5,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
+          ".codex/reports/current-batch-train-state.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/01-plan.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/03-review.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/MANIFEST-RERUN-SA29-01/20260518T012652Z/prompts/05-finalize.prompt.md",
+          ".codex/state/active-batch.yml",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -23320,7 +23329,7 @@
           "prompts/batches/SA29.md",
           "prompts/batches/SA30.md"
         ],
-        "proof_file_count": 13,
+        "proof_file_count": 22,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
         "train_id": "SA30"
@@ -24130,5 +24139,5 @@
     "proven_implemented": 341,
     "queued_prompt_backed": 8
   },
-  "generated_at": "2026-05-18T00:52:21.944217+00:00"
+  "generated_at": "2026-05-18T01:41:26.469241+00:00"
 }

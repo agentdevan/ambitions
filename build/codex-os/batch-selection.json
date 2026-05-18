@@ -1,8 +1,11 @@
 {
-  "blockers": [],
+  "blockers": [
+    "blocked_forward_queue:FCP27 App-Wide Flagship Audit And Remediation",
+    "blocked_reason:Manifest-faithful rerun must continue through SA30 before FCP27"
+  ],
   "classification": "unknown",
-  "generated_at": "2026-05-17T20:32:15-04:00",
-  "lane": "flagship",
+  "generated_at": "2026-05-17T21:31:07-04:00",
+  "lane": "source-atlas",
   "next_action_command": "",
   "postflight_commands": [
     "python3 scripts/governance/ambitions-repo-doctor.py",
@@ -13,7 +16,7 @@
     "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
   ],
   "prompt_file": "",
-  "reason": "Selected the safest live batch from current state: FCP27 App-Wide Flagship Audit And Remediation.",
+  "reason": "Selected the safest live batch from current state: SA29 Hash / Signature / Revocation Tooling.",
   "run_command": "",
-  "selected_batch": "FCP27 App-Wide Flagship Audit And Remediation"
+  "selected_batch": "SA29 Hash / Signature / Revocation Tooling"
 }

@@ -7400,7 +7400,6 @@
       "docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md",
       "docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md",
       "docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md",
-      "docs/governance/GOVERNANCE_DASHBOARD.md",
       "docs/governance/REMAINING_WORK_GRAPH.md"
     ],
     "implementation_files": [
@@ -20176,7 +20175,8 @@
       "docs/codex/SOURCE_ATLAS_GATE_MATRIX.md",
       "docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md",
       "docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md",
-      "docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md"
+      "docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md",
+      "docs/governance/GOVERNANCE_DASHBOARD.md"
     ],
     "implementation_files": [
       "Native/Ambitions/App/AmbitionsRootView.swift",

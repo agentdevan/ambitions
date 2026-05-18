@@ -5,12 +5,12 @@
   "changed_canon_files": [],
   "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
   "decision": "select_next_batch",
-  "generated_at": "2026-05-17T20:32:15-04:00",
+  "generated_at": "2026-05-17T21:31:07-04:00",
   "generated_outputs_missing": [],
   "governance_stale_overlays": 0,
   "governance_unresolved": 0,
   "implementation_expectation_count": 212,
-  "reason": "No blockers remain; select the safest executable batch (FCP27 App-Wide Flagship Audit And Remediation).",
+  "reason": "No blockers remain; select the safest executable batch (SA29 Hash / Signature / Revocation Tooling).",
   "repo_doctor_overall_status": "GREEN",
   "retired_canon_signals": [
     {
@@ -139,6 +139,10 @@
     },
     {
       "path": "Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
+      "path": "Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift",
       "signal": "possible active Plan top-level residue"
     },
     {
@@ -1540,6 +1544,10 @@
     {
       "path": "prompts/batches/GREEN-REPO-STANDARDS-01.md",
       "signal": "possible Hero Step Panel without Start Here binding"
+    },
+    {
+      "path": "prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md",
+      "signal": "possible active Plan top-level residue"
     },
     {
       "path": "prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md",

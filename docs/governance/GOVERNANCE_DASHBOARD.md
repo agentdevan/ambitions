@@ -1,6 +1,6 @@
 # Ambitions Governance Dashboard
 
-Generated: 2026-05-17T20:32:15-04:00
+Generated: 2026-05-17T21:31:07-04:00
 
 ## Snapshot
 
@@ -14,7 +14,7 @@ Generated: 2026-05-17T20:32:15-04:00
 
 - Next action: select_next_batch
 - Next command: python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
-- Selected batch: FCP27 App-Wide Flagship Audit And Remediation
+- Selected batch: SA29 Hash / Signature / Revocation Tooling
 - Performance missing outputs: 0
 
 ## Highest Priority Fixes

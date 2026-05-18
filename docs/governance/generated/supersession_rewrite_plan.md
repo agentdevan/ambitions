@@ -897,6 +897,7 @@
 - classify/archive/rewrite: prompts/batches/HBI-10.md
 - classify/archive/rewrite: prompts/batches/HBI-GLOBAL-TRAIN-HANDOFF-01.md
 - classify/archive/rewrite: prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md
+- classify/archive/rewrite: prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md
 - classify/archive/rewrite: prompts/batches/IRQ-01.md
 - classify/archive/rewrite: prompts/batches/IRQ-02.md
 - classify/archive/rewrite: prompts/batches/LDI15.md
