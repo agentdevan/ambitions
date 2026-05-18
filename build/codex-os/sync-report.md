@@ -1,11 +1,11 @@
 # Codex OS Sync Report
 
-Generated: 2026-05-18T06:26:08-04:00
+Generated: 2026-05-18T06:42:36-04:00
 
 - Repo doctor status: GREEN
 - Repo doctor missing: False
 - Next action decision: select_next_batch
-- Selected batch: RHC06
+- Selected batch: EFC01
 - Performance missing outputs: 0
 - Freshness missing outputs: 0
 
@@ -20,7 +20,7 @@ Generated: 2026-05-18T06:26:08-04:00
 
 ## Next Action
 
-No blockers remain; select the safest executable batch (RHC06).
+No blockers remain; select the safest executable batch (EFC01).
 
 ```bash
 python3 scripts/codex-os/ambitions-codex-os-batch-selector.py

@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "RHC05 Validation Script Noise And Allowlist Hardening"
-  previous_batch: "RHC05 Validation Script Noise And Allowlist Hardening"
-  previous_result: "green"
-  next_eligible_batch: "RHC06 Repo Hygiene Closeout And Handoff"
+  batch: "RHC06 Repo Hygiene Closeout And Handoff"
+  previous_batch: "RHC06 Repo Hygiene Closeout And Handoff"
+  previous_result: "accepted_yellow"
+  next_eligible_batch: "EFC01 Private Product Evidence Engine"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

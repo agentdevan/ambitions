@@ -382,6 +382,7 @@
 - classify/archive/rewrite: docs/audits/rhc01-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/rhc03-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/rhc04-batch-closeout-report.md
+- classify/archive/rewrite: docs/audits/rhc06-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/sa07-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/sa08-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/sa09-batch-closeout-report.md

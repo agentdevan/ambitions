@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T06:26:08-04:00",
+  "generated_at": "2026-05-18T06:42:36-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -2916,7 +2916,6 @@
       "docs/audits/pxos-future-canon-integration-codex-os-upgrade-and-global-reorder-report.md",
       "docs/audits/rhc01-batch-closeout-report.md",
       "docs/audits/rhc02-batch-closeout-report.md",
-      "docs/audits/rhc06-batch-closeout-report.md",
       "docs/audits/sa07-batch-closeout-report.md",
       "docs/audits/sa09-batch-closeout-report.md",
       "docs/audits/sa10-batch-closeout-report.md",
@@ -7417,7 +7416,6 @@
       "docs/audits/pxos-future-canon-integration-codex-os-upgrade-and-global-reorder-report.md",
       "docs/audits/queue-intel-codexos-upgrade-report.md",
       "docs/audits/rhc01-batch-closeout-report.md",
-      "docs/audits/rhc06-batch-closeout-report.md",
       "docs/audits/sa10-batch-closeout-report.md",
       "docs/audits/sa10a-batch-closeout-report.md",
       "docs/audits/sa14-batch-closeout-report.md",
@@ -10880,7 +10878,6 @@
     "docs/audits/rec06-release-evidence-closure-handoff-report.md",
     "docs/audits/rhc01-batch-closeout-report.md",
     "docs/audits/rhc02-batch-closeout-report.md",
-    "docs/audits/rhc06-batch-closeout-report.md",
     "docs/audits/sa01-source-atlas-canon-lock-report.md",
     "docs/audits/sa02-source-atlas-gate-matrix-report.md",
     "docs/audits/sa04-source-atlas-codex-os-upgrade-report.md",
