@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -22,6 +23,8 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 LOG_ROOT = REPO_ROOT / ".codex" / "logs"
 PROOF_ROOT = LOG_ROOT / "proof"
 MCP_LOG_ROOT = LOG_ROOT / "mcp"
+XCODE_SUMMARY_ROOT = REPO_ROOT / ".codex" / "xcode-summaries"
+XCODE_LOG_ROOT = REPO_ROOT / ".codex" / "xcode-logs"
 
 
 @dataclass(frozen=True)
@@ -33,6 +36,7 @@ class Validation:
     timeout_seconds: int = 120
     enabled_by_default: bool = True
     requires_explicit_args: bool = False
+    xcode_wrapper_lane: str | None = None
 
 
 VALIDATIONS: dict[str, Validation] = {
@@ -70,7 +74,7 @@ VALIDATIONS: dict[str, Validation] = {
     ),
     "build_local": Validation(
         "build_local",
-        "Run the existing local build script only when an app-source batch requires it.",
+        "Legacy fallback: run the existing local build script only when explicitly requested. Prefer xcode_validate_build.",
         ("./scripts/build-local.sh",),
         requires=("scripts/build-local.sh",),
         timeout_seconds=1800,
@@ -78,11 +82,51 @@ VALIDATIONS: dict[str, Validation] = {
     ),
     "focused_tests": Validation(
         "focused_tests",
-        "Run focused xcodebuild tests with explicit arguments only.",
+        "Deprecated fallback: raw focused xcodebuild tests with explicit arguments only. Prefer xcode_validate_focused_test.",
         ("xcodebuild", "test"),
         timeout_seconds=1800,
         enabled_by_default=False,
         requires_explicit_args=True,
+    ),
+    "xcode_validate_build": Validation(
+        "xcode_validate_build",
+        "Run Ambitions Xcode Build Lab build lane through the approved wrapper.",
+        ("scripts/ambitions-xcode-validate.sh", "--lane", "build", "--json"),
+        requires=("scripts/ambitions-xcode-validate.sh",),
+        timeout_seconds=1800,
+        enabled_by_default=False,
+        requires_explicit_args=True,
+        xcode_wrapper_lane="build",
+    ),
+    "xcode_validate_build_for_testing": Validation(
+        "xcode_validate_build_for_testing",
+        "Run Ambitions Xcode Build Lab build-for-testing lane through the approved wrapper.",
+        ("scripts/ambitions-xcode-validate.sh", "--lane", "build-for-testing", "--json"),
+        requires=("scripts/ambitions-xcode-validate.sh",),
+        timeout_seconds=1800,
+        enabled_by_default=False,
+        requires_explicit_args=True,
+        xcode_wrapper_lane="build-for-testing",
+    ),
+    "xcode_validate_focused_test": Validation(
+        "xcode_validate_focused_test",
+        "Run Ambitions Xcode Build Lab focused-test lane through the approved wrapper, with simulator-safe timeout.",
+        ("scripts/ambitions-xcode-validate.sh", "--lane", "focused-test", "--json"),
+        requires=("scripts/ambitions-xcode-validate.sh",),
+        timeout_seconds=1800,
+        enabled_by_default=False,
+        requires_explicit_args=True,
+        xcode_wrapper_lane="focused-test",
+    ),
+    "xcode_validate_test_plan": Validation(
+        "xcode_validate_test_plan",
+        "Run Ambitions Xcode Build Lab test-plan lane through the approved wrapper.",
+        ("scripts/ambitions-xcode-validate.sh", "--lane", "test-plan", "--json"),
+        requires=("scripts/ambitions-xcode-validate.sh",),
+        timeout_seconds=1800,
+        enabled_by_default=False,
+        requires_explicit_args=True,
+        xcode_wrapper_lane="test-plan",
     ),
 }
 
@@ -99,7 +143,15 @@ FORBIDDEN_EXTRA_TOKENS = {
     "xcrun altool",
     "notarytool",
     "fastlane",
+    "archive",
+    "-exportArchive",
+    "-allowProvisioningUpdates",
+    "codesign",
+    "productbuild",
 }
+
+XCODE_ALLOWED_EXTRA_FLAGS = {"--batch", "--test", "--test-plan"}
+BATCH_ID_RE = re.compile(r"^[A-Za-z0-9._-]{1,120}$")
 
 
 @dataclass(frozen=True)
@@ -143,6 +195,8 @@ def _validation_status(validation: Validation) -> JSON:
         "requires_explicit_args": validation.requires_explicit_args,
         "missing_paths": missing_paths,
         "command_available": available,
+        "timeout_seconds": validation.timeout_seconds,
+        "xcode_wrapper_lane": validation.xcode_wrapper_lane,
     }
 
 
@@ -152,6 +206,48 @@ def _assert_command_allowed(command: list[str]) -> None:
         raise ValueError(f"forbidden command token in validation command: {joined}")
 
 
+def _parse_flag_values(args: list[str]) -> dict[str, str]:
+    values: dict[str, str] = {}
+    index = 0
+    while index < len(args):
+        flag = args[index]
+        if flag not in XCODE_ALLOWED_EXTRA_FLAGS:
+            raise ValueError(f"unsupported xcode wrapper argument: {flag}")
+        if flag in values:
+            raise ValueError(f"duplicate xcode wrapper argument: {flag}")
+        if index + 1 >= len(args):
+            raise ValueError(f"missing value for xcode wrapper argument: {flag}")
+        value = args[index + 1]
+        if value.startswith("--") or "\x00" in value:
+            raise ValueError(f"invalid value for xcode wrapper argument: {flag}")
+        values[flag] = value
+        index += 2
+    return values
+
+
+def _validated_xcode_extra_args(validation: Validation, extra_args: list[str]) -> list[str]:
+    values = _parse_flag_values(extra_args)
+    batch_id = values.get("--batch")
+    if not batch_id or not BATCH_ID_RE.match(batch_id):
+        raise ValueError("xcode wrapper validations require --batch with a safe batch id")
+
+    lane = validation.xcode_wrapper_lane
+    if lane in {"build", "build-for-testing"}:
+        allowed = {"--batch"}
+    elif lane == "focused-test":
+        allowed = {"--batch", "--test"}
+    elif lane == "test-plan":
+        allowed = {"--batch", "--test-plan"}
+    else:
+        raise ValueError(f"unsupported xcode wrapper lane: {lane}")
+
+    unexpected = set(values) - allowed
+    if unexpected:
+        raise ValueError(f"unexpected argument(s) for {validation.name}: {', '.join(sorted(unexpected))}")
+
+    return extra_args
+
+
 def _run(validation: Validation, extra_args: list[str] | None = None) -> JSON:
     extra_args = extra_args or []
     if validation.requires_explicit_args and not extra_args:
@@ -159,6 +255,8 @@ def _run(validation: Validation, extra_args: list[str] | None = None) -> JSON:
     status = _validation_status(validation)
     if status["missing_paths"]:
         raise FileNotFoundError(f"missing required paths: {', '.join(status['missing_paths'])}")
+    if validation.xcode_wrapper_lane:
+        extra_args = _validated_xcode_extra_args(validation, extra_args)
     command = list(validation.command) + extra_args
     _assert_command_allowed(command)
     PROOF_ROOT.mkdir(parents=True, exist_ok=True)
@@ -178,14 +276,74 @@ def _run(validation: Validation, extra_args: list[str] | None = None) -> JSON:
         "command": command,
         "exit_code": proc.returncode,
         "passed": proc.returncode == 0,
+        "timeout_seconds": validation.timeout_seconds,
         "log_path": str(log_path.relative_to(REPO_ROOT)),
         "output_tail": proc.stdout[-4000:],
+        "xcode_summary": _latest_xcode_summary_for_command(command),
         "non_claims": [
             "not release proof",
             "not device proof",
             "not public accessibility proof",
             "not legal/privacy signoff",
         ],
+    }
+
+
+def _batch_from_command(command: list[str]) -> str | None:
+    if "--batch" not in command:
+        return None
+    index = command.index("--batch")
+    if index + 1 >= len(command):
+        return None
+    return command[index + 1]
+
+
+def _latest_xcode_summary_for_command(command: list[str]) -> JSON | None:
+    batch_id = _batch_from_command(command)
+    if not batch_id:
+        return None
+    try:
+        return _latest_xcode_summary(batch_id)
+    except Exception:
+        return None
+
+
+def _latest_xcode_summary(batch_id: str) -> JSON:
+    if not BATCH_ID_RE.match(batch_id):
+        raise ValueError("batch_id is invalid")
+    root = XCODE_SUMMARY_ROOT / batch_id
+    if not root.exists():
+        return {"found": False, "batch": batch_id, "summary": None}
+    summaries = sorted(root.rglob("validate-summary.json"), key=lambda path: path.stat().st_mtime, reverse=True)
+    if not summaries:
+        return {"found": False, "batch": batch_id, "summary": None}
+    latest = summaries[0]
+    data = json.loads(latest.read_text(encoding="utf-8"))
+    return {
+        "found": True,
+        "batch": batch_id,
+        "path": str(latest.relative_to(REPO_ROOT)),
+        "modified_unix": int(latest.stat().st_mtime),
+        "summary": data,
+    }
+
+
+def _latest_xcode_log(batch_id: str) -> JSON | None:
+    if not BATCH_ID_RE.match(batch_id):
+        raise ValueError("batch_id is invalid")
+    root = XCODE_LOG_ROOT / batch_id
+    if not root.exists():
+        return None
+    logs = sorted(root.rglob("*.log"), key=lambda path: path.stat().st_mtime, reverse=True)
+    if not logs:
+        return None
+    latest = logs[0]
+    text = latest.read_text(encoding="utf-8", errors="replace")
+    return {
+        "path": str(latest.relative_to(REPO_ROOT)),
+        "modified_unix": int(latest.stat().st_mtime),
+        "bytes": latest.stat().st_size,
+        "tail": text[-4000:],
     }
 
 
@@ -199,6 +357,7 @@ def tool_list_available_validations(_: JSON) -> JSON:
             "no destructive commands",
             "no signing or App Store upload",
             "no git push/merge/rebase/reset",
+            "wrapper-native Xcode validations use 1800-second timeout for simulator workflows",
         ],
     }
 
@@ -215,7 +374,7 @@ def tool_run_named_validation(args: JSON) -> JSON:
 
 def tool_collect_latest_logs(args: JSON) -> JSON:
     limit = int(args.get("limit", 10))
-    roots = [PROOF_ROOT, MCP_LOG_ROOT, REPO_ROOT / "output" / "logs"]
+    roots = [PROOF_ROOT, MCP_LOG_ROOT, REPO_ROOT / "output" / "logs", XCODE_LOG_ROOT, XCODE_SUMMARY_ROOT]
     logs: list[Path] = []
     for root in roots:
         if root.exists():
@@ -270,6 +429,13 @@ def tool_check_validation_policy(args: JSON) -> JSON:
     return {
         "allowed": True,
         "allowed_names": sorted(VALIDATIONS),
+        "preferred_xcode_validations": [
+            "xcode_validate_build",
+            "xcode_validate_build_for_testing",
+            "xcode_validate_focused_test",
+            "xcode_validate_test_plan",
+        ],
+        "deprecated_xcode_validations": ["build_local", "focused_tests"],
         "forbidden": [
             "arbitrary command",
             "network command",
@@ -279,6 +445,42 @@ def tool_check_validation_policy(args: JSON) -> JSON:
             "App Store upload",
             "hosted CI creation",
             "git push/merge/rebase/reset",
+        ],
+    }
+
+
+def tool_xcode_latest_summary(args: JSON) -> JSON:
+    batch_id = args.get("batch_id")
+    if not isinstance(batch_id, str):
+        raise ValueError("batch_id is required")
+    return _latest_xcode_summary(batch_id)
+
+
+def tool_xcode_failure_classification(args: JSON) -> JSON:
+    batch_id = args.get("batch_id")
+    if not isinstance(batch_id, str):
+        raise ValueError("batch_id is required")
+    summary = _latest_xcode_summary(batch_id)
+    classification = None
+    status = None
+    exit_code = None
+    if summary.get("found") and isinstance(summary.get("summary"), dict):
+        data = summary["summary"]
+        classification = data.get("failure_category")
+        status = data.get("status")
+        exit_code = data.get("exit_code")
+    return {
+        "batch": batch_id,
+        "summary": summary,
+        "status": status,
+        "exit_code": exit_code,
+        "failure_category": classification,
+        "latest_log": _latest_xcode_log(batch_id),
+        "non_claims": [
+            "classification is local engineering evidence only",
+            "not release proof",
+            "not device proof",
+            "not public accessibility proof",
         ],
     }
 
@@ -296,9 +498,11 @@ def _tool_schema(properties: JSON | None = None, required: list[str] | None = No
 
 _register(ToolDef("list_available_validations", "List allowlisted local validations.", _tool_schema(), tool_list_available_validations))
 _register(ToolDef("run_named_validation", "Run one allowlisted validation by name.", _tool_schema({"name": {"type": "string"}, "args": {"type": "array", "items": {"type": "string"}}}, ["name"]), tool_run_named_validation))
-_register(ToolDef("collect_latest_logs", "Collect latest local proof logs.", _tool_schema({"limit": {"type": "integer"}}), tool_collect_latest_logs))
+_register(ToolDef("collect_latest_logs", "Collect latest local proof and Xcode logs/summaries.", _tool_schema({"limit": {"type": "integer"}}), tool_collect_latest_logs))
 _register(ToolDef("generate_proof_packet", "Generate a local proof packet from latest logs.", _tool_schema({"title": {"type": "string"}, "validations": {"type": "array", "items": {"type": "string"}}}), tool_generate_proof_packet))
 _register(ToolDef("check_validation_policy", "Return validation policy and forbidden actions.", _tool_schema({"name": {"type": "string"}}), tool_check_validation_policy))
+_register(ToolDef("xcode_latest_summary", "Return the latest Xcode Build Lab validate-summary.json for a batch.", _tool_schema({"batch_id": {"type": "string"}}, ["batch_id"]), tool_xcode_latest_summary))
+_register(ToolDef("xcode_failure_classification", "Return latest Xcode Build Lab failure category and log tail for a batch.", _tool_schema({"batch_id": {"type": "string"}}, ["batch_id"]), tool_xcode_failure_classification))
 
 
 def _mcp_tools_list() -> JSON:
@@ -336,7 +540,7 @@ def _handle(message: JSON) -> JSON | None:
     is_notification = "id" not in message
     try:
         if method == "initialize":
-            return None if is_notification else _response(request_id, {"protocolVersion": "2025-03-26", "capabilities": {"tools": {}}, "serverInfo": {"name": "ambitions_proof_mcp", "version": "0.1.0"}})
+            return None if is_notification else _response(request_id, {"protocolVersion": "2025-03-26", "capabilities": {"tools": {}}, "serverInfo": {"name": "ambitions_proof_mcp", "version": "0.2.0"}})
         if method == "notifications/initialized":
             return None
         if method == "tools/list":
@@ -395,12 +599,41 @@ def _doc_link_scan_basic() -> int:
 
 def run_self_test() -> int:
     names = set(VALIDATIONS)
-    required = {"mcp01_self_test", "repo_claim_scan", "efc_applicability_scan", "doc_link_scan_basic", "git_status_summary", "xcodegen_check_dry_run", "build_local", "focused_tests"}
-    if not required.issubset(names):
-        print("ambitions_proof_mcp self-test failed; missing validation names")
+    required_validations = {
+        "mcp01_self_test",
+        "repo_claim_scan",
+        "efc_applicability_scan",
+        "doc_link_scan_basic",
+        "git_status_summary",
+        "xcodegen_check_dry_run",
+        "build_local",
+        "focused_tests",
+        "xcode_validate_build",
+        "xcode_validate_build_for_testing",
+        "xcode_validate_focused_test",
+        "xcode_validate_test_plan",
+    }
+    required_tools = {
+        "run_named_validation",
+        "xcode_latest_summary",
+        "xcode_failure_classification",
+    }
+    if not required_validations.issubset(names):
+        missing = sorted(required_validations - names)
+        print(f"ambitions_proof_mcp self-test failed; missing validation names: {', '.join(missing)}")
         return 1
-    if "run_named_validation" not in TOOLS:
-        print("ambitions_proof_mcp self-test failed; missing run tool")
+    if not required_tools.issubset(TOOLS):
+        missing = sorted(required_tools - set(TOOLS))
+        print(f"ambitions_proof_mcp self-test failed; missing tools: {', '.join(missing)}")
+        return 1
+    focused = VALIDATIONS["xcode_validate_focused_test"]
+    if focused.timeout_seconds < 1800 or focused.xcode_wrapper_lane != "focused-test":
+        print("ambitions_proof_mcp self-test failed; focused-test wrapper timeout/lane not installed")
+        return 1
+    try:
+        _validated_xcode_extra_args(focused, ["--batch", "MCP-SMOKE-01", "--test", "AmbitionsTests/Focused"])
+    except Exception as exc:
+        print(f"ambitions_proof_mcp self-test failed; focused-test args rejected: {exc}")
         return 1
     print("ambitions_proof_mcp self-test passed")
     return 0
