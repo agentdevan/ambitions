@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T09:46:47-04:00
+Generated: 2026-05-18T10:03:25-04:00
 
 ## Plan → Time
 
@@ -284,6 +284,7 @@ Generated: 2026-05-18T09:46:47-04:00
 - docs/audits/fcp07-reality-rail-continuity-report.md
 - docs/audits/faang-handoff-traceability-matrix.md
 - docs/audits/pd04-today-recovery-closure-depth-report.md
+- docs/audits/efc12-batch-closeout-report.md
 - docs/audits/backend-final-form-local-first-human-01-report.md
 - docs/audits/pk-train-integration-and-dirty-worktree-report.md
 - docs/audits/eb30-overloaded-day-low-cognitive-load-flows-report.md

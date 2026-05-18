@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC12",
-  "next_eligible_title": "Data Control And Proof Portability Vault",
+  "next_eligible_batch": "EFC13",
+  "next_eligible_title": "Notification Cadence Governor",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -932,17 +932,17 @@
     {
       "id": "EFC12",
       "title": "Data Control And Proof Portability Vault",
-      "classification": "executable_now",
-      "reason": "EFC11 is complete / green. EFC12 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC11.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC12 Data Control And Proof Portability Vault is complete / Green with closeout in docs/audits/efc12-batch-closeout-report.md and commit 66afc0a348c9201c7f67e09b4c8ba22a9f1ee3dd committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC13",
       "title": "Notification Cadence Governor",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC12 is complete / green. EFC13 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC12.",
       "efc_applicability": "invoked"
     },
     {

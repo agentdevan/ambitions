@@ -12,7 +12,7 @@
     "stale_overlay_audit": "docs/governance/generated/stale_overlay_audit.md",
     "train_to_implementation_map": "docs/governance/generated/train_to_implementation_map.json"
   },
-  "generated_at": "2026-05-18T09:46:47-04:00",
+  "generated_at": "2026-05-18T10:03:25-04:00",
   "no_claim_boundary": [
     "does not claim full registry normalization",
     "does not claim release readiness",
