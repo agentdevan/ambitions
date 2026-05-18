@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T00:42:41-04:00
+Generated: 2026-05-18T01:45:15-04:00
 
 ## Plan → Time
 
@@ -143,6 +143,7 @@ Generated: 2026-05-18T00:42:41-04:00
 - docs/audits/fvq-visual-excellence-layer-insertion-report.md
 - docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md
 - docs/audits/backend-final-form-human-code-review.md
+- docs/audits/pfc33-batch-closeout-report.md
 - docs/audits/ambitionsos-canon-integration-asset-manifest.md
 - docs/audits/eb38-accessibility-evidence-closeout-report.md
 - docs/audits/pd02-today-step-detail-depth-report.md
@@ -705,6 +706,7 @@ Generated: 2026-05-18T00:42:41-04:00
 - docs/status/ambition-graph-implementation-plan.md
 - docs/status/train-c-active-surface-hygiene-receipt-2026-05-16.md
 - docs/status/reference-dependency-scan-cleanup-plan.md
+- docs/status/release-evidence-packet.md
 - docs/status/yellow-to-green-reconciliation-plan.md
 - docs/status/train-b-historical-header-quarantine-receipt-2026-05-16.md
 - docs/status/cleanup-decision-register.md
@@ -1243,6 +1245,7 @@ Generated: 2026-05-18T00:42:41-04:00
 - Native/AmbitionsTests/App/AppIntentRoutingTests.swift
 - Native/AmbitionsTests/App/ExternalRoutingTests.swift
 - Native/AmbitionsTests/App/AppContainerFactoryTests.swift
+- Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift
 - Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift
 - Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift
 - Native/AmbitionsTests/App/ActivationContractTests.swift
@@ -1405,8 +1408,6 @@ Generated: 2026-05-18T00:42:41-04:00
 - Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift
 - Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift
 - Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift
-- Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift
-- Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift
 - Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift
 - Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift
 - Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift

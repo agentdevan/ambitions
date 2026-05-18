@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at_utc": "2026-05-17T01:27:00Z",
+    "generated_at_utc": "2026-05-18T05:45:15Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "PFC33",
-    "next_eligible_title": "External Surface Release Evidence",
+    "next_eligible_batch": "PFC34",
+    "next_eligible_title": "Privacy Legal Review Reconciliation",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -1204,8 +1204,8 @@
     {
       "id": "FCP30",
       "title": "Flagship Completion Handoff",
-      "classification": "executable_now",
-      "status_class": "executable-now",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete",
       "owner_train": "FCP / Flagship Completion",
       "source_path": "docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md",
       "dependency_gate": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
@@ -1254,14 +1254,14 @@
       "risk_class": "high",
       "proof_class": "release/legal/privacy/architecture evidence required before claim ownership",
       "efc_air_surface_inheritance": "REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls",
-      "consolidation_posture": "queued successor",
-      "next_action": "Runnable now after PFC32 Green closeout."
+      "consolidation_posture": "historical-complete do-not-run",
+      "next_action": "Do not rerun; preserve PFC33 Accepted Yellow closeout and hand off to PFC34."
     },
     {
       "id": "PFC34",
       "title": "Privacy Legal Review Reconciliation",
-      "classification": "executable_later",
-      "status_class": "queued",
+      "classification": "executable_now",
+      "status_class": "executable-now",
       "owner_train": "PFC / Platform Framework Compliance",
       "source_path": "docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md",
       "dependency_gate": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
@@ -1269,7 +1269,7 @@
       "proof_class": "release/legal/privacy/architecture evidence required before claim ownership",
       "efc_air_surface_inheritance": "REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls",
       "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "next_action": "Runnable now after PFC33 Accepted Yellow closeout."
     },
     {
       "id": "PFC35",

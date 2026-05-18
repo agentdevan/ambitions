@@ -1,6 +1,6 @@
 # Generated Ambitions Reconciled Registry Projection
 
-Generated: 2026-05-18T00:42:41-04:00
+Generated: 2026-05-18T01:45:15-04:00
 
 This file is generated from local repository data by `scripts/governance/ambitions-governance-reconcile.py`.
 Do not hand-edit generated output; update source files or governance rules and regenerate.
@@ -691,9 +691,9 @@ Do not hand-edit generated output; update source files or governance rules and r
 | PFC29 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 20 |  |
 | PFC30 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 18 |  |
 | PFC31 | COMPLETE_PROOF_LINKED | HIGH | 39 | 4 | 7 | 60 |  |
-| PFC32 | COMPLETE_PROOF_LINKED | HIGH | 38 | 4 | 4 | 40 |  |
-| PFC33 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 33 | 1 | 4 | 26 |  |
-| PFC34 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
+| PFC32 | COMPLETE_PROOF_LINKED | HIGH | 38 | 4 | 4 | 43 |  |
+| PFC33 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 38 | 4 | 8 | 37 |  |
+| PFC34 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 33 | 1 | 4 | 26 |  |
 | PFC35 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
 | PFC36 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 21 |  |
 | PFC37 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 26 | 1 | 4 | 22 |  |
@@ -722,31 +722,31 @@ Do not hand-edit generated output; update source files or governance rules and r
 | PK14 | COMPLETE_PROOF_LINKED | HIGH | 18 | 4 | 4 | 20 | Historical queued language superseded by linked implementation and proof. |
 | PK15 | COMPLETE_PROOF_LINKED | HIGH | 22 | 5 | 13 | 23 | Historical queued language superseded by linked implementation and proof. |
 | PK16 | COMPLETE_PROOF_LINKED | HIGH | 26 | 4 | 21 | 63 | Historical queued language superseded by linked implementation and proof. |
-| PK17 | COMPLETE_PROOF_LINKED | HIGH | 376 | 5 | 24 | 273 | Historical queued language superseded by linked implementation and proof. |
-| PK18 | COMPLETE_PROOF_LINKED | HIGH | 405 | 9 | 37 | 297 | Historical queued language superseded by linked implementation and proof. |
-| PK19 | COMPLETE_PROOF_LINKED | HIGH | 382 | 6 | 34 | 276 | Historical queued language superseded by linked implementation and proof. |
-| PK20 | COMPLETE_PROOF_LINKED | HIGH | 389 | 6 | 34 | 284 | Historical queued language superseded by linked implementation and proof. |
-| PK21 | COMPLETE_PROOF_LINKED | HIGH | 389 | 9 | 36 | 296 | Historical queued language superseded by linked implementation and proof. |
-| PK22 | COMPLETE_PROOF_LINKED | HIGH | 374 | 9 | 40 | 275 | Historical queued language superseded by linked implementation and proof. |
-| PK23 | COMPLETE_PROOF_LINKED | HIGH | 374 | 8 | 36 | 276 | Historical queued language superseded by linked implementation and proof. |
-| PK24 | COMPLETE_PROOF_LINKED | HIGH | 375 | 8 | 35 | 275 | Historical queued language superseded by linked implementation and proof. |
-| PK25 | COMPLETE_PROOF_LINKED | HIGH | 373 | 8 | 34 | 276 | Historical queued language superseded by linked implementation and proof. |
-| PK26 | COMPLETE_PROOF_LINKED | HIGH | 370 | 6 | 17 | 234 | Historical queued language superseded by linked implementation and proof. |
-| PK27 | COMPLETE_PROOF_LINKED | HIGH | 377 | 6 | 19 | 242 | Historical queued language superseded by linked implementation and proof. |
-| PK28 | COMPLETE_PROOF_LINKED | HIGH | 381 | 6 | 21 | 248 | Historical queued language superseded by linked implementation and proof. |
-| PK29 | COMPLETE_PROOF_LINKED | HIGH | 367 | 6 | 24 | 228 |  |
-| PK30 | COMPLETE_PROOF_LINKED | HIGH | 367 | 6 | 18 | 224 |  |
-| PK31 | COMPLETE_PROOF_LINKED | HIGH | 367 | 6 | 18 | 224 |  |
-| PK32 | COMPLETE_PROOF_LINKED | HIGH | 369 | 6 | 18 | 227 |  |
-| PK33 | COMPLETE_PROOF_LINKED | HIGH | 370 | 5 | 17 | 227 |  |
-| PK34 | COMPLETE_PROOF_LINKED | HIGH | 370 | 4 | 17 | 227 |  |
-| PK35 | COMPLETE_PROOF_LINKED | HIGH | 370 | 4 | 17 | 224 |  |
-| PK36 | COMPLETE_PROOF_LINKED | HIGH | 370 | 4 | 17 | 226 |  |
-| PK37 | COMPLETE_PROOF_LINKED | HIGH | 369 | 4 | 18 | 224 |  |
-| PK38 | COMPLETE_PROOF_LINKED | HIGH | 368 | 4 | 17 | 227 |  |
-| PK39 | COMPLETE_PROOF_LINKED | HIGH | 368 | 4 | 17 | 227 |  |
-| PK40 | COMPLETE_PROOF_LINKED | HIGH | 368 | 4 | 17 | 227 |  |
-| PK41 | COMPLETE_PROOF_LINKED | HIGH | 369 | 4 | 17 | 229 | Historical queued language superseded by linked implementation and proof. |
+| PK17 | COMPLETE_PROOF_LINKED | HIGH | 381 | 5 | 24 | 278 | Historical queued language superseded by linked implementation and proof. |
+| PK18 | COMPLETE_PROOF_LINKED | HIGH | 410 | 9 | 37 | 302 | Historical queued language superseded by linked implementation and proof. |
+| PK19 | COMPLETE_PROOF_LINKED | HIGH | 387 | 6 | 34 | 281 | Historical queued language superseded by linked implementation and proof. |
+| PK20 | COMPLETE_PROOF_LINKED | HIGH | 394 | 6 | 34 | 289 | Historical queued language superseded by linked implementation and proof. |
+| PK21 | COMPLETE_PROOF_LINKED | HIGH | 394 | 9 | 36 | 301 | Historical queued language superseded by linked implementation and proof. |
+| PK22 | COMPLETE_PROOF_LINKED | HIGH | 379 | 9 | 40 | 280 | Historical queued language superseded by linked implementation and proof. |
+| PK23 | COMPLETE_PROOF_LINKED | HIGH | 379 | 8 | 36 | 281 | Historical queued language superseded by linked implementation and proof. |
+| PK24 | COMPLETE_PROOF_LINKED | HIGH | 380 | 8 | 35 | 280 | Historical queued language superseded by linked implementation and proof. |
+| PK25 | COMPLETE_PROOF_LINKED | HIGH | 378 | 8 | 34 | 281 | Historical queued language superseded by linked implementation and proof. |
+| PK26 | COMPLETE_PROOF_LINKED | HIGH | 375 | 6 | 17 | 239 | Historical queued language superseded by linked implementation and proof. |
+| PK27 | COMPLETE_PROOF_LINKED | HIGH | 382 | 6 | 19 | 247 | Historical queued language superseded by linked implementation and proof. |
+| PK28 | COMPLETE_PROOF_LINKED | HIGH | 386 | 6 | 21 | 253 | Historical queued language superseded by linked implementation and proof. |
+| PK29 | COMPLETE_PROOF_LINKED | HIGH | 372 | 6 | 24 | 233 |  |
+| PK30 | COMPLETE_PROOF_LINKED | HIGH | 372 | 6 | 18 | 229 |  |
+| PK31 | COMPLETE_PROOF_LINKED | HIGH | 372 | 6 | 18 | 229 |  |
+| PK32 | COMPLETE_PROOF_LINKED | HIGH | 374 | 6 | 18 | 232 |  |
+| PK33 | COMPLETE_PROOF_LINKED | HIGH | 375 | 5 | 17 | 232 |  |
+| PK34 | COMPLETE_PROOF_LINKED | HIGH | 375 | 4 | 17 | 232 |  |
+| PK35 | COMPLETE_PROOF_LINKED | HIGH | 375 | 4 | 17 | 229 |  |
+| PK36 | COMPLETE_PROOF_LINKED | HIGH | 375 | 4 | 17 | 231 |  |
+| PK37 | COMPLETE_PROOF_LINKED | HIGH | 374 | 4 | 18 | 229 |  |
+| PK38 | COMPLETE_PROOF_LINKED | HIGH | 373 | 4 | 17 | 232 |  |
+| PK39 | COMPLETE_PROOF_LINKED | HIGH | 373 | 4 | 17 | 232 |  |
+| PK40 | COMPLETE_PROOF_LINKED | HIGH | 373 | 4 | 17 | 232 |  |
+| PK41 | COMPLETE_PROOF_LINKED | HIGH | 374 | 4 | 17 | 234 | Historical queued language superseded by linked implementation and proof. |
 
 ## PLR
 

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "date": "2026-05-15",
+  "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PFC33",
-  "next_eligible_title": "External Surface Release Evidence",
+  "next_eligible_batch": "PFC34",
+  "next_eligible_title": "Privacy Legal Review Reconciliation",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -732,17 +732,17 @@
     {
       "id": "PFC33",
       "title": "External Surface Release Evidence",
-      "classification": "executable_now",
-      "reason": "PFC32 is complete / Green. PFC33 is the next implementation batch.",
-      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PFC33 External Surface Release Evidence is complete / Accepted Yellow with closeout in docs/audits/pfc33-batch-closeout-report.md. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PFC34",
       "title": "Privacy Legal Review Reconciliation",
-      "classification": "executable_later",
-      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
-      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "classification": "executable_now",
+      "reason": "PFC33 is complete / accepted yellow. PFC34 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch PFC33.",
       "efc_applicability": "invoked"
     },
     {

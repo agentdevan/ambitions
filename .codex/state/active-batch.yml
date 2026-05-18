@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PFC32 Build And Test Determinism Closeout"
-  previous_batch: "PFC32 Build And Test Determinism Closeout"
-  previous_result: "green"
-  next_eligible_batch: "PFC33 External Surface Release Evidence"
+  batch: "PFC33 External Surface Release Evidence"
+  previous_batch: "PFC33 External Surface Release Evidence"
+  previous_result: "accepted_yellow"
+  next_eligible_batch: "PFC34 Privacy Legal Review Reconciliation"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

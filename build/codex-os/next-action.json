@@ -5,12 +5,12 @@
   "changed_canon_files": [],
   "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
   "decision": "select_next_batch",
-  "generated_at": "2026-05-18T00:42:41-04:00",
+  "generated_at": "2026-05-18T01:45:15-04:00",
   "generated_outputs_missing": [],
   "governance_stale_overlays": 0,
   "governance_unresolved": 0,
   "implementation_expectation_count": 212,
-  "reason": "No blockers remain; select the safest executable batch (PFC33).",
+  "reason": "No blockers remain; select the safest executable batch (PFC34).",
   "repo_doctor_overall_status": "GREEN",
   "retired_canon_signals": [
     {
@@ -114,15 +114,7 @@
       "signal": "possible active Plan top-level residue"
     },
     {
-      "path": "Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
       "path": "Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
-      "path": "Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift",
       "signal": "possible active Plan top-level residue"
     },
     {
@@ -135,6 +127,10 @@
     },
     {
       "path": "Native/AmbitionsTests/App/ExternalRoutingTests.swift",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
+      "path": "Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift",
       "signal": "possible active Plan top-level residue"
     },
     {
@@ -1508,6 +1504,10 @@
     {
       "path": "docs/status/codex-free-github-api-audit-2026-05-15.md",
       "signal": "possible Hero Step Panel without Start Here binding"
+    },
+    {
+      "path": "docs/status/release-evidence-packet.md",
+      "signal": "possible active Plan top-level residue"
     },
     {
       "path": "docs/status/train-c-active-surface-hygiene-receipt-2026-05-16.md",

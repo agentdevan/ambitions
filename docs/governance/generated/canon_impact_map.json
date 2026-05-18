@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T00:42:41-04:00",
+  "generated_at": "2026-05-18T01:45:15-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -2627,6 +2627,7 @@
       "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
       "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift",
       "Native/AmbitionsTests/App/MemoryLensServiceTests.swift",
+      "Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift",
       "Native/AmbitionsTests/App/ScreenContractRegistryTests.swift",
       "Native/AmbitionsTests/App/ShellCommandRouterTests.swift",
       "Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift",
@@ -4223,9 +4224,7 @@
       "Native/Ambitions/Services/SmartAttachmentService.swift",
       "Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift",
       "Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift",
-      "Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift",
       "Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift",
-      "Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift",
       "Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift",
       "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
       "Native/AmbitionsTests/App/ActivationContractTests.swift",
@@ -4238,6 +4237,7 @@
       "Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift",
       "Native/AmbitionsTests/App/ExternalRoutingTests.swift",
       "Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift",
+      "Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift",
       "Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift",
       "Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift",
       "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
@@ -4666,6 +4666,7 @@
       "docs/audits/pfc28-security-threat-model-and-secrets-audit-report.md",
       "docs/audits/pfc29-logging-analytics-observability-policy-report.md",
       "docs/audits/pfc30-performance-budget-instruments-plan-report.md",
+      "docs/audits/pfc33-batch-closeout-report.md",
       "docs/audits/pk-train-integration-and-dirty-worktree-report.md",
       "docs/audits/pk04-atomic-goal-creation-report.md",
       "docs/audits/pk07-storage-schema-version-ledger-report.md",
@@ -5312,6 +5313,7 @@
       "docs/status/product-moat-alignment-report.md",
       "docs/status/quarantine-archive-folder-plan.md",
       "docs/status/reference-dependency-scan-cleanup-plan.md",
+      "docs/status/release-evidence-packet.md",
       "docs/status/repo-authority-cleanup-green-gate-spec.md",
       "docs/status/repo-control-plane-cleanup-final-report.md",
       "docs/status/repo-governance-master-cleanup-plan.md",
@@ -6191,6 +6193,7 @@
       "Native/Ambitions/Services/SharedLifeCoordinationService.swift",
       "Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift",
       "Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift",
+      "Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift",
       "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
       "Native/AmbitionsTests/App/ActivationContractTests.swift",
       "Native/AmbitionsTests/App/AppIntentRoutingTests.swift",
@@ -6204,11 +6207,13 @@
       "Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift",
       "Native/AmbitionsTests/App/ExternalRoutingTests.swift",
       "Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift",
+      "Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift",
       "Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift",
       "Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift",
       "Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift",
       "Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift",
       "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift",
+      "Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift",
       "Native/AmbitionsTests/App/ScreenContractRegistryTests.swift",
       "Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift",
       "Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift",
@@ -6414,6 +6419,7 @@
       "docs/audits/pd17-cross-surface-proof-review-integration-report.md",
       "docs/audits/pd18-product-depth-handoff-next-lane-readiness-report.md",
       "docs/audits/pfc13-widgetkit-strategy-object-map-report.md",
+      "docs/audits/pfc33-batch-closeout-report.md",
       "docs/audits/pk-train-integration-and-dirty-worktree-report.md",
       "docs/audits/pk21-batch-closeout-report.md",
       "docs/audits/pk41-batch-closeout-report.md",
@@ -6678,6 +6684,7 @@
       "docs/status/green-repo-standards-01-proof-packet.md",
       "docs/status/performance-budgets.md",
       "docs/status/product-moat-alignment-report.md",
+      "docs/status/release-evidence-packet.md",
       "docs/status/signature-object-moat-gap-map.md",
       "docs/status/swiftui-primitive-contracts.md",
       "docs/status/train-c-active-surface-hygiene-receipt-2026-05-16.md",
@@ -10156,6 +10163,7 @@
     "Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift",
     "Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift",
     "Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift",
+    "Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift",
     "Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift",
     "Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift",
     "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
@@ -10787,6 +10795,7 @@
     "docs/audits/pfc28-security-threat-model-and-secrets-audit-report.md",
     "docs/audits/pfc29-logging-analytics-observability-policy-report.md",
     "docs/audits/pfc30-performance-budget-instruments-plan-report.md",
+    "docs/audits/pfc33-batch-closeout-report.md",
     "docs/audits/pk-train-integration-and-dirty-worktree-report.md",
     "docs/audits/pk00-current-backend-proof-baseline-report.md",
     "docs/audits/pk04-atomic-goal-creation-report.md",
@@ -12314,15 +12323,7 @@
       "signal": "possible active Plan top-level residue"
     },
     {
-      "path": "Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
       "path": "Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
-      "path": "Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift",
       "signal": "possible active Plan top-level residue"
     },
     {
@@ -12335,6 +12336,10 @@
     },
     {
       "path": "Native/AmbitionsTests/App/ExternalRoutingTests.swift",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
+      "path": "Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift",
       "signal": "possible active Plan top-level residue"
     },
     {
@@ -13708,6 +13713,10 @@
     {
       "path": "docs/status/codex-free-github-api-audit-2026-05-15.md",
       "signal": "possible Hero Step Panel without Start Here binding"
+    },
+    {
+      "path": "docs/status/release-evidence-packet.md",
+      "signal": "possible active Plan top-level residue"
     },
     {
       "path": "docs/status/train-c-active-surface-hygiene-receipt-2026-05-16.md",

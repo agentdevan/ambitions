@@ -314,6 +314,7 @@
 - classify/archive/rewrite: docs/audits/pfc30-performance-budget-instruments-plan-report.md
 - classify/archive/rewrite: docs/audits/pfc31-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/pfc32-batch-closeout-report.md
+- classify/archive/rewrite: docs/audits/pfc33-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/pk-train-integration-and-dirty-worktree-report.md
 - classify/archive/rewrite: docs/audits/pk00-current-backend-proof-baseline-report.md
 - classify/archive/rewrite: docs/audits/pk01-package-module-boundary-scaffold-report.md

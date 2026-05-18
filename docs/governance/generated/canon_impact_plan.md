@@ -1,6 +1,6 @@
 # Canon Impact Plan
 
-Generated: 2026-05-18T00:42:41-04:00
+Generated: 2026-05-18T01:45:15-04:00
 
 ## Changed Canon Files
 
@@ -236,12 +236,11 @@ Generated: 2026-05-18T00:42:41-04:00
 - Native/Ambitions/Services/SmartAttachmentService.swift: possible active Plan top-level residue
 - Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift: possible active Plan top-level residue
 - Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift: possible active Plan top-level residue
-- Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift: possible active Plan top-level residue
 - Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift: possible active Plan top-level residue
-- Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/AppShellChromeTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ExternalRoutingTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift: possible active Plan top-level residue
@@ -411,6 +410,7 @@ Generated: 2026-05-18T00:42:41-04:00
 - docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md: possible Hero Step Panel without Start Here binding
 - docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md: possible active Plan top-level residue
 - docs/canon/Ambitions_3_0_Surface_State_Matrix.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md: possible active Plan top-level residue
 
 ## Required Codex Behavior
 
