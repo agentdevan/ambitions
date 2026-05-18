@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC14",
-  "next_eligible_title": "Local Language Quality Benchmark",
+  "next_eligible_batch": "EFC15",
+  "next_eligible_title": "Localization And Globalization Readiness",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -948,9 +948,9 @@
     {
       "id": "EFC14",
       "title": "Local Language Quality Benchmark",
-      "classification": "executable_now",
-      "reason": "EFC13 is complete / green. EFC14 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC13.",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC14 is absorbed as overlay / do-not-run coverage. EFC15 is the next handoff.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
       "efc_applicability": "invoked"
     },
     {

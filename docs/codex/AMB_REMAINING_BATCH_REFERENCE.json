@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at_utc": "2026-05-18T14:04:00Z",
+    "generated_at_utc": "2026-05-18T14:37:18Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "EFC14",
-    "next_eligible_title": "Local Language Quality Benchmark",
+    "next_eligible_batch": "EFC15",
+    "next_eligible_title": "Localization And Globalization Readiness",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
