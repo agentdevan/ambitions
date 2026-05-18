@@ -1,11 +1,11 @@
 # Codex OS Sync Report
 
-Generated: 2026-05-17T21:31:07-04:00
+Generated: 2026-05-17T22:30:47-04:00
 
 - Repo doctor status: GREEN
 - Repo doctor missing: False
 - Next action decision: select_next_batch
-- Selected batch: SA29 Hash / Signature / Revocation Tooling
+- Selected batch: FCP28
 - Performance missing outputs: 0
 - Freshness missing outputs: 0
 
@@ -20,7 +20,7 @@ Generated: 2026-05-17T21:31:07-04:00
 
 ## Next Action
 
-No blockers remain; select the safest executable batch (SA29 Hash / Signature / Revocation Tooling).
+No blockers remain; select the safest executable batch (FCP28).
 
 ```bash
 python3 scripts/codex-os/ambitions-codex-os-batch-selector.py

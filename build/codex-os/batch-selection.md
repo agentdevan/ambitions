@@ -1,20 +1,19 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-17T21:31:07-04:00
+Generated: 2026-05-17T22:30:47-04:00
 
-Selected batch: SA29 Hash / Signature / Revocation Tooling
-Prompt file: none
-Lane: source-atlas
-Queue classification: unknown
+Selected batch: FCP28
+Prompt file: prompts/batches/FCP28.md
+Lane: flagship
+Queue classification: executable_now
 
 ## Reason
 
-Selected the safest live batch from current state: SA29 Hash / Signature / Revocation Tooling.
+Selected the safest live batch from current state: FCP28.
 
 ## Blockers
 
-- blocked_forward_queue:FCP27 App-Wide Flagship Audit And Remediation
-- blocked_reason:Manifest-faithful rerun must continue through SA30 before FCP27
+- queue_prerequisites:Complete prior batch FCP27 and preserve FVQ/accessibility/release-claim boundaries.
 
 ## Preflight Commands
 
@@ -28,4 +27,4 @@ Selected the safest live batch from current state: SA29 Hash / Signature / Revoc
 
 ## Run Command
 
-No executable batch is available.
+make authorized-batch BATCH=FCP28 PROMPT=prompts/batches/FCP28.md

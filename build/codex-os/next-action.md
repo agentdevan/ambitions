@@ -1,9 +1,9 @@
 # Codex OS Next Action
 
-Generated: 2026-05-17T21:31:07-04:00
+Generated: 2026-05-17T22:30:47-04:00
 
 Decision: select_next_batch
-Reason: No blockers remain; select the safest executable batch (SA29 Hash / Signature / Revocation Tooling).
+Reason: No blockers remain; select the safest executable batch (FCP28).
 
 ## Blockers
 

@@ -416,13 +416,20 @@ def prompt_file_for_batch(batch_id: str) -> str:
     return ""
 
 
+def batch_id_from_label(value: str) -> str:
+    candidate = value.strip().split(" ", 1)[0]
+    if re.fullmatch(r"[A-Z]+[0-9A-Z]+", candidate):
+        return candidate
+    return value.strip()
+
+
 def latest_active_batch_id() -> str:
     state = parse_active_batch_state()
     current = state.get("current", {})
     if isinstance(current, dict):
         batch = current.get("batch")
         if isinstance(batch, str):
-            return batch
+            return batch_id_from_label(batch)
     return ""
 
 
@@ -432,7 +439,7 @@ def next_eligible_queue_batch() -> str:
     if isinstance(current, dict):
         candidate = current.get("next_eligible_batch")
         if isinstance(candidate, str) and candidate:
-            return candidate
+            return batch_id_from_label(candidate)
 
     queue = queue_entries()
     for item in queue:
@@ -477,7 +484,7 @@ def batch_selection_candidates() -> dict[str, Any]:
     state = parse_active_batch_state()
     current = state.get("current", {})
     blocked = state.get("blocked_forward_queue", {})
-    candidate = latest_active_batch_id() or next_eligible_queue_batch()
+    candidate = next_eligible_queue_batch() or latest_active_batch_id()
     queue_entry = queue_entry_for_batch(candidate) if candidate else {}
     prompt = prompt_file_for_batch(candidate) if candidate else ""
     lane = batch_lane(candidate)

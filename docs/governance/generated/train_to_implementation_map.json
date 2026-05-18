@@ -7366,6 +7366,9 @@
   },
   "FCP27": {
     "commits": [
+      "29491c8901ac43227ff4711d07c46bfcd8522562",
+      "82d23f6a806de84df179e5eab1eb53ea73d8c6dd",
+      "0f85b5003f4b07bd7a7684d6b18ed98d14789a97",
       "1427a6f7fbf8b9302448271ca5dabc1ce6e79089",
       "dd59cf253ac5d5accb41e8cfde679c11934bed25",
       "034ae2047f9d76c4c7578a3dd15038d16efd87ba",
@@ -7486,6 +7489,7 @@
       "docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md",
       "docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md",
       "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md",
+      "docs/governance/GOVERNANCE_DASHBOARD.md",
       "docs/governance/REMAINING_WORK_GRAPH.md"
     ],
     "implementation_files": [
@@ -7497,6 +7501,7 @@
   },
   "FCP29": {
     "commits": [
+      "3d6761752cf7e9c6d962f487b73816a090851d80",
       "204ec85ca4ac2b68c60e30780aeaab8907392cb9",
       "b5a62a35e14d0646eb646741aafe982e15ea7ee1"
     ],
@@ -7530,7 +7535,33 @@
       "docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md",
       "docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md",
       "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md",
-      "docs/governance/REMAINING_WORK_GRAPH.md"
+      "docs/governance/GOVERNANCE_DASHBOARD.md",
+      "docs/governance/REMAINING_WORK_GRAPH.md",
+      "docs/governance/generated/accepted_yellow_governance_debt.json",
+      "docs/governance/generated/accepted_yellow_governance_debt.md",
+      "docs/governance/generated/architecture_debt_score.json",
+      "docs/governance/generated/authority_diff_report.md",
+      "docs/governance/generated/canon_impact_map.json",
+      "docs/governance/generated/canon_impact_plan.md",
+      "docs/governance/generated/canon_propagation_plan.md",
+      "docs/governance/generated/global_train_resequence.json",
+      "docs/governance/generated/governance_reconciliation_summary.json",
+      "docs/governance/generated/governance_trend_history.json",
+      "docs/governance/generated/governance_trend_report.json",
+      "docs/governance/generated/implementation_expectation_map.json",
+      "docs/governance/generated/mature_spec_synthesis.md",
+      "docs/governance/generated/orphan_prompt_audit.md",
+      "docs/governance/generated/orphan_prompt_provenance.json",
+      "docs/governance/generated/orphan_prompt_provenance.md",
+      "docs/governance/generated/prompt_rewrite_plan.md",
+      "docs/governance/generated/proof_linkage_graph.json",
+      "docs/governance/generated/registry_projection.md",
+      "docs/governance/generated/repo_doctor_summary.json",
+      "docs/governance/generated/repo_doctor_summary.md",
+      "docs/governance/generated/stale_overlay_audit.md",
+      "docs/governance/generated/supersession_rewrite_plan.md",
+      "docs/governance/generated/train_lineage_graph.json",
+      "docs/governance/generated/train_to_implementation_map.json"
     ],
     "implementation_files": [
       "scripts/ambitions-control-plane-check.py",
@@ -20148,6 +20179,7 @@
   },
   "SA29": {
     "commits": [
+      "556308d957d58525e82812d5ad0cf6185562eefd",
       "b9b1fc423134225629ac04ac954c8e81bcf54bc1",
       "83237708416235f0f979901030e9567dcfcc92c7",
       "8f2acb1f5c449aec3fee8bd2941f6e06f2c7c2fd",
@@ -20175,8 +20207,7 @@
       "docs/codex/SOURCE_ATLAS_GATE_MATRIX.md",
       "docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md",
       "docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md",
-      "docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md",
-      "docs/governance/GOVERNANCE_DASHBOARD.md"
+      "docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md"
     ],
     "implementation_files": [
       "Native/Ambitions/App/AmbitionsRootView.swift",
@@ -20225,6 +20256,7 @@
   },
   "SA30": {
     "commits": [
+      "e058ee049f4169d33661afd73e22f999c3e37bc2",
       "99ebb5b383a012a65186d3aafd6a3951107b25bc",
       "477827fc1174b5809b509ec43dffed2646ed7506",
       "b5a62a35e14d0646eb646741aafe982e15ea7ee1"

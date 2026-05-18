@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-17T21:31:07-04:00
+Generated: 2026-05-17T22:30:47-04:00
 
 ## Plan → Time
 
@@ -266,7 +266,6 @@ Generated: 2026-05-17T21:31:07-04:00
 - docs/audits/afi09-time-lifeshape-field-report.md
 - docs/audits/cs04-habits-ritual-plan-compatibility-proof-report.md
 - docs/audits/fvq03-drilldown-external-surface-visual-sweep-report.md
-- docs/audits/fcp27-batch-closeout-report.md
 - docs/audits/dav07-you-photo-matched-system-center-report.md
 - docs/audits/rec01-release-evidence-truth-inventory-report.md
 - docs/audits/ambitions-3-0-f19-shell-route-parity-fallback-safety-report.md

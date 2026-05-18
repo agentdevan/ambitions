@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "FCP27",
-  "next_eligible_title": "App-Wide Flagship Audit And Remediation",
+  "next_eligible_batch": "FCP28",
+  "next_eligible_title": "Final Visual Proof Packet",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -684,17 +684,17 @@
     {
       "id": "FCP27",
       "title": "App-Wide Flagship Audit And Remediation",
-      "classification": "executable_now",
-      "reason": "AOS30 is complete / green. FCP27 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch AOS30.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "FCP27 is complete / Green with closeout in docs/audits/fcp27-batch-closeout-report.md and commits 82d23f6a8 and 29491c890 on main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "FCP28",
       "title": "Final Visual Proof Packet",
-      "classification": "executable_later",
-      "reason": "Late final product proof remains after core platform/source/intelligence maturity.",
-      "blocking_prerequisites": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
+      "classification": "executable_now",
+      "reason": "FCP27 is complete / Green. FCP28 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch FCP27 and preserve FVQ/accessibility/release-claim boundaries.",
       "efc_applicability": "invoked"
     },
     {
