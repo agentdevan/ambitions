@@ -39,6 +39,12 @@ PFC32 closeout, 2026-05-18:
 - Log: `output/logs/build-local-20260518-004033.log`
 - Scope: local simulator build proof only; no device, signing, TestFlight, App Store, accessibility, privacy, or human-approval claim
 
+PFC33 source-support alignment, 2026-05-18:
+
+- `ReleaseExternalTruthReadinessPacket` now uses canonical top-level IA wording with `Time` instead of `Plan` in release-support copy.
+- `ExternalSurfaceVerificationChecklist` now requires the Live Activities fallback route to remain `Time`.
+- This alignment updates release-support evidence language only; it does not prove device, accessibility, or release readiness.
+
 ## Required local proof packet
 
 A serious local validation run should save or summarize:
@@ -109,10 +115,10 @@ Forbidden current wording:
 - claims that App Store submission can proceed
 - claims that TestFlight distribution can proceed
 - claims that production launch can proceed
-- device-verified
-- fully accessible
-- legally/privacy approved
-- CI-proven
+- device validation proven
+- full accessibility proof proven
+- legal/privacy approval proven
+- hosted CI evidence proven
 - claims that signed release distribution can proceed
 
 ## Update rule

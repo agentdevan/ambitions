@@ -45,14 +45,14 @@ enum ReleaseExternalTruthReadinessPacket {
             id: "app-store-copy",
             area: .appStoreCopy,
             preparedStatement: "Ambitions helps you capture what is on your mind, shape goals into believable next steps, plan a week that can survive real life, recover when plans change, and review proof of what moved.",
-            evidence: "The active native shell is Today, Goals, Capture, Plan, and You; D11-D26, M01-M12, and R01-R03 evidence cover the Golden Launch Loop, local-first trust posture, recovery, reviews, memory visibility, and release gates.",
+            evidence: "The active native shell is Today, Goals, Capture, Time, and You; D11-D26, M01-M12, and R01-R03 evidence cover the Golden Launch Loop, local-first trust posture, recovery, reviews, memory visibility, and release gates.",
             state: .draftedFromCurrentEvidence,
             limitation: "Final App Store metadata still needs human review, current screenshots, support and privacy URLs, signed archive validation, and approval."
         ),
         ReleaseExternalTruthItem(
             id: "screenshots",
             area: .screenshots,
-            preparedStatement: "Screenshot plan: capture Today, Goals or Goal Detail, Capture, Plan, You, What Ambitions Knows, and one recovery/review moment after the final release build is installed.",
+            preparedStatement: "Screenshot plan: capture Today, Goals or Goal Detail, Capture, Time, You, What Ambitions Knows, and one recovery/review moment after the final release build is installed.",
             evidence: "R03 completed simulator/source scenario coverage; no curated App Store screenshot set has been generated or human-approved in this environment.",
             state: .needsHumanAsset,
             limitation: "Do not submit screenshots until the signed build, device class, privacy-safe demo data, and human visual review are complete."
@@ -84,7 +84,7 @@ enum ReleaseExternalTruthReadinessPacket {
         ReleaseExternalTruthItem(
             id: "release-notes",
             area: .releaseNotes,
-            preparedStatement: "Release notes draft: Ambitions organizes life around Today, Goals, Capture, Plan, and You, with calmer capture, believable planning, recovery, proof, local trust controls, and clearer release-readiness limits.",
+            preparedStatement: "Release notes draft: Ambitions organizes life around Today, Goals, Capture, Time, and You, with calmer capture, believable planning, recovery, proof, local trust controls, and clearer release-readiness limits.",
             evidence: "D01-D26, M01-M12, and R01-R04 are complete for planning purposes, while R05 still gates RC lock.",
             state: .draftedFromCurrentEvidence,
             limitation: "Final release notes must be reviewed against the exact submitted build and must not claim accessibility, sync, TestFlight, App Store, or RC readiness beyond evidence."
@@ -92,7 +92,7 @@ enum ReleaseExternalTruthReadinessPacket {
         ReleaseExternalTruthItem(
             id: "investor-demo",
             area: .investorDemo,
-            preparedStatement: "Demo story: start with a loose thought in Capture, place it into a meaningful Goal, use Plan to make the week believable, land in Today for one protected next Step, recover when life changes, then inspect receipts, reviews, and What Ambitions Knows in You.",
+            preparedStatement: "Demo story: start with a loose thought in Capture, place it into a meaningful Goal, use Time to make the week believable, land in Today for one protected next Step, recover when life changes, then inspect receipts, reviews, and What Ambitions Knows in You.",
             evidence: "M01 scenario coverage and R03 representative fixtures prove the Golden Launch Loop as a QA/demo path over existing surfaces without productizing personal assumptions.",
             state: .draftedFromCurrentEvidence,
             limitation: "Demo remains investor/internal-ready with stated limits; it is not proof of App Store submission readiness or physical-device platform coverage."
@@ -101,7 +101,7 @@ enum ReleaseExternalTruthReadinessPacket {
             id: "marketing-one-pager",
             area: .marketingOnePager,
             preparedStatement: "One-page promise: Ambitions makes life feel organized and gives concrete steps to accomplish what the user sets their mind to, without adding another dashboard or requiring an account.",
-            evidence: "The top-level IA stays Today, Goals, Capture, Plan, and You; docs and tests guard against Tasks, Insights, Habits, Calendar, account, sync, cloud, and AI-wrapper drift.",
+            evidence: "The top-level IA stays Today, Goals, Capture, Time, and You; docs and tests guard against Tasks, Insights, Habits, Calendar, account, sync, cloud, and AI-wrapper drift.",
             state: .draftedFromCurrentEvidence,
             limitation: "Marketing must stay tied to shipped native behavior and avoid unverified platform, accessibility, sync, account, or advice claims."
         ),

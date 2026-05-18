@@ -104,6 +104,13 @@ final class ExternalSurfaceVerificationChecklistTests: XCTestCase {
         XCTAssertEqual(missingWidget.primaryURL?.absoluteString, "ambitions://tab/today?origin=widget")
         XCTAssertEqual(missingWidget.privacySummary, ExternalSurfacePrivacySnapshotPolicy.safeDefault.unavailableLabel)
     }
+
+    func testM04LiveActivityChecklistRoutesFallbackToTimeInsteadOfPlan() throws {
+        let record = ExternalSurfaceVerificationChecklist.record(for: .liveActivities)
+
+        XCTAssertTrue(record.routingRequirements.contains("Fallback route must remain Time"))
+        XCTAssertFalse(record.routingRequirements.contains("Fallback route must remain Plan"))
+    }
 }
 
 private extension ExternalSurfaceVerificationChecklistTests {

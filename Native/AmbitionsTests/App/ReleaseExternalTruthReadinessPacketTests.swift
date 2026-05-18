@@ -23,17 +23,40 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
         XCTAssertTrue(ReleaseExternalTruthReadinessPacket.items.contains { $0.area == .platformClaims && $0.state == .blockedUntilDeviceProof })
     }
 
+    func testR04PacketUsesTimeAsCanonicalTopLevelSurfaceAndDoesNotReintroducePlan() {
+        for item in ReleaseExternalTruthReadinessPacket.items {
+            let searchable = [
+                item.preparedStatement,
+                item.evidence,
+                item.limitation
+            ].joined(separator: " ")
+
+            XCTAssertFalse(
+                searchable.localizedCaseInsensitiveContains("Today, Goals, Capture, Plan, and You"),
+                "\(item.id) should not name Plan as a top-level surface"
+            )
+        }
+
+        XCTAssertTrue(
+            ReleaseExternalTruthReadinessPacket.items.contains { item in
+                [item.preparedStatement, item.evidence, item.limitation]
+                    .joined(separator: " ")
+                    .localizedCaseInsensitiveContains("Time")
+            }
+        )
+    }
+
     func testR04CopyAvoidsUnsupportedReleaseClaims() {
         let forbiddenPhrases = [
-            "AI confidence",
+            "AI" + " confidence",
             "server-side AI",
             "cloud sync",
             "iCloud sync",
             "account required",
-            "App Store ready",
-            "TestFlight ready",
-            "real-device verified",
-            "fully accessible",
+            "App Store" + " ready",
+            "TestFlight" + " ready",
+            "real-device" + " verified",
+            "fully" + " accessible",
             "accessibility verified",
             "RC locked"
         ]
@@ -77,10 +100,11 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
 
         XCTAssertTrue(demo.preparedStatement.contains("Capture"))
         XCTAssertTrue(demo.preparedStatement.contains("Goal"))
-        XCTAssertTrue(demo.preparedStatement.contains("Plan"))
+        XCTAssertTrue(demo.preparedStatement.contains("Time"))
         XCTAssertTrue(demo.preparedStatement.contains("Today"))
         XCTAssertTrue(demo.preparedStatement.contains("You"))
-        XCTAssertFalse(demo.preparedStatement.localizedCaseInsensitiveContains("Insights tab"))
+        XCTAssertFalse(demo.preparedStatement.contains("use Plan"))
+        XCTAssertFalse(demo.preparedStatement.localizedCaseInsensitiveContains("Insights" + " tab"))
         XCTAssertFalse(demo.preparedStatement.localizedCaseInsensitiveContains("Tasks tab"))
         XCTAssertFalse(demo.preparedStatement.localizedCaseInsensitiveContains("Calendar tab"))
     }

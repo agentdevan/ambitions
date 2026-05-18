@@ -116,7 +116,7 @@ enum ExternalSurfaceVerificationChecklist {
             ],
             routingRequirements: [
                 "Use ambitions:// links with live_activity origin",
-                "Fallback route must remain Plan"
+                "Fallback route must remain Time"
             ],
             receiptRequirements: [
                 "Mutation-capable Live Activity actions remain confirmation/receipt bound through shared command policy"
