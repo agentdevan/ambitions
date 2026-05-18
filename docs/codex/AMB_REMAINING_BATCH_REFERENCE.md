@@ -1,7 +1,7 @@
 # Ambitions Remaining Batch Reference
 
 Generated: 2026-05-18T08:31:00Z
-Next eligible: RHC05 — Validation Script Noise And Allowlist Hardening
+Next eligible: RHC06 — Repo Hygiene Closeout And Handoff
 
 ## Summary
 - Total queue entries: 146
@@ -112,8 +112,8 @@ Next eligible: RHC05 — Validation Script Noise And Allowlist Hardening
 | RHC02 | Large File Extraction And Module Boundary | historical_complete_do_not_run | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | historical-complete / Green | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | historical-complete do-not-run | Do not rerun; preserve RHC02 Green large-file extraction closeout and hand off to RHC03. |
 | RHC03 | Placeholder Stub And Compatibility Seam Cleanup | historical_complete_do_not_run | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | historical-complete / accepted Yellow | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | historical-complete do-not-run | Do not rerun; preserve RHC03 accepted-Yellow report repair closeout and hand off to RHC04. |
 | RHC04 | Stale Copy Docs And Generated Artifact Hygiene | historical_complete_do_not_run | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | historical-complete / Green | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | historical-complete do-not-run | Do not rerun; preserve RHC04 Green stale-report repair closeout and hand off to RHC05. |
-| RHC05 | Validation Script Noise And Allowlist Hardening | executable_now | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | executable-now | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor / immediate next | Runnable now after RHC04 Green closeout. |
-| RHC06 | Repo Hygiene Closeout And Handoff | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
+| RHC05 | Validation Script Noise And Allowlist Hardening | historical_complete_do_not_run | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | historical-complete / Green | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | historical-complete do-not-run | Do not rerun; preserve RHC05 Green validation-report repair closeout and hand off to RHC06. |
+| RHC06 | Repo Hygiene Closeout And Handoff | executable_now | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | executable-now | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor / immediate next | Runnable now after RHC05 Green closeout. |
 | EFC01 | Private Product Evidence Engine | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
 | EFC02 | First Useful Object Onboarding | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
 | EFC03 | First 30 Days Lifecycle And Retention Proof | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
@@ -292,8 +292,8 @@ Next eligible: RHC05 — Validation Script Noise And Allowlist Hardening
 - **RHC02** · historical-complete / Green · Large File Extraction And Module Boundary · Do not rerun; preserve RHC02 Green large-file extraction closeout and hand off to RHC03.
 - **RHC03** · historical-complete / accepted Yellow · Placeholder Stub And Compatibility Seam Cleanup · Do not rerun; preserve RHC03 accepted-Yellow report repair closeout and hand off to RHC04.
 - **RHC04** · historical-complete / Green · Stale Copy Docs And Generated Artifact Hygiene · Do not rerun; preserve RHC04 Green stale-report repair closeout and hand off to RHC05.
-- **RHC05** · executable-now · Validation Script Noise And Allowlist Hardening · Runnable now after RHC04 Green closeout.
-- **RHC06** · queued · Repo Hygiene Closeout And Handoff · Runnable once prior batch order and dependency gates are satisfied.
+- **RHC05** · historical-complete / Green · Validation Script Noise And Allowlist Hardening · Do not rerun; preserve RHC05 Green validation-report repair closeout and hand off to RHC06.
+- **RHC06** · executable-now · Repo Hygiene Closeout And Handoff · Runnable now after RHC05 Green closeout.
 
 ## CS conditional triggers
 - **CS02C** · conditional_trigger_only · CSCS02C · Run only when explicit trigger/research conditions are satisfied.

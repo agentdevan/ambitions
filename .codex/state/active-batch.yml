@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "RHC04 Stale Copy Docs And Generated Artifact Hygiene"
-  previous_batch: "RHC04 Stale Copy Docs And Generated Artifact Hygiene"
+  batch: "RHC05 Validation Script Noise And Allowlist Hardening"
+  previous_batch: "RHC05 Validation Script Noise And Allowlist Hardening"
   previous_result: "green"
-  next_eligible_batch: "RHC05 Validation Script Noise And Allowlist Hardening"
+  next_eligible_batch: "RHC06 Repo Hygiene Closeout And Handoff"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

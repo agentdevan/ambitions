@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-18T08:31:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "RHC05",
-    "next_eligible_title": "Validation Script Noise And Allowlist Hardening",
+    "next_eligible_batch": "RHC06",
+    "next_eligible_title": "Repo Hygiene Closeout And Handoff",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -1414,6 +1414,20 @@
     {
       "id": "RHC05",
       "title": "Validation Script Noise And Allowlist Hardening",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete / Green",
+      "owner_train": "RHC / Repo Hygiene Closeout",
+      "source_path": "docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md",
+      "dependency_gate": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "risk_class": "low",
+      "proof_class": "repo cleanup inventory + owner-bound cleanup scope + no behavior changes",
+      "efc_air_surface_inheritance": "CQS and historical cleanup owners",
+      "consolidation_posture": "historical-complete do-not-run",
+      "next_action": "Do not rerun; preserve RHC05 Green validation-report repair closeout and hand off to RHC06."
+    },
+    {
+      "id": "RHC06",
+      "title": "Repo Hygiene Closeout And Handoff",
       "classification": "executable_now",
       "status_class": "executable-now",
       "owner_train": "RHC / Repo Hygiene Closeout",
@@ -1423,21 +1437,7 @@
       "proof_class": "repo cleanup inventory + owner-bound cleanup scope + no behavior changes",
       "efc_air_surface_inheritance": "CQS and historical cleanup owners",
       "consolidation_posture": "queued successor / immediate next",
-      "next_action": "Runnable now after RHC04 Green closeout."
-    },
-    {
-      "id": "RHC06",
-      "title": "Repo Hygiene Closeout And Handoff",
-      "classification": "executable_later",
-      "status_class": "queued",
-      "owner_train": "RHC / Repo Hygiene Closeout",
-      "source_path": "docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md",
-      "dependency_gate": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
-      "risk_class": "low",
-      "proof_class": "repo cleanup inventory + owner-bound cleanup scope + no behavior changes",
-      "efc_air_surface_inheritance": "CQS and historical cleanup owners",
-      "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "next_action": "Runnable now after RHC05 Green closeout."
     },
     {
       "id": "EFC01",
