@@ -458,3 +458,11 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 - commit: 9b00fb7bfd636d48b102706b7f0b84e1b3bb970a
 - next batch: RHC01
 - mode: deterministic state advancement helper
+
+## Post-PK State Advancement — 2026-05-18T09:15:17Z
+
+- completed batch: RHC01
+- status: green
+- commit: 947f9a42d1140eb6a105d6cbc8ea6d55e9c5f460
+- next batch: RHC02
+- mode: deterministic state advancement helper

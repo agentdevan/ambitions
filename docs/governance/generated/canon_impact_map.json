@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T04:55:37-04:00",
+  "generated_at": "2026-05-18T05:14:59-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -9510,7 +9510,6 @@
       "docs/audits/pk34-batch-closeout-report.md",
       "docs/audits/pk39-batch-closeout-report.md",
       "docs/audits/px06-you-personal-system-center-report.md",
-      "docs/audits/rhc01-batch-closeout-report.md",
       "docs/audits/si11-personal-system-center-components-report.md",
       "docs/audits/si18-signature-interface-handoff-readiness-report.md",
       "docs/audits/swift6-modernization-foundation-01-report.md",

@@ -1,9 +1,9 @@
 {
   "blockers": [
-    "queue_prerequisites:Complete prior batch PFC40."
+    "queue_prerequisites:Complete prior batch RHC01."
   ],
   "classification": "executable_now",
-  "generated_at": "2026-05-18T04:55:37-04:00",
+  "generated_at": "2026-05-18T05:14:59-04:00",
   "lane": "rhc",
   "next_action_command": "",
   "postflight_commands": [
@@ -14,8 +14,8 @@
     "python3 scripts/governance/ambitions-repo-doctor.py",
     "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
   ],
-  "prompt_file": "prompts/batches/RHC01.md",
-  "reason": "Selected the safest live batch from current state: RHC01.",
-  "run_command": "make authorized-batch BATCH=RHC01 PROMPT=prompts/batches/RHC01.md",
-  "selected_batch": "RHC01"
+  "prompt_file": "prompts/batches/RHC02.md",
+  "reason": "Selected the safest live batch from current state: RHC02.",
+  "run_command": "make authorized-batch BATCH=RHC02 PROMPT=prompts/batches/RHC02.md",
+  "selected_batch": "RHC02"
 }

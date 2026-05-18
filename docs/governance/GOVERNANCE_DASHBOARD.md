@@ -1,6 +1,6 @@
 # Ambitions Governance Dashboard
 
-Generated: 2026-05-18T04:55:37-04:00
+Generated: 2026-05-18T05:14:59-04:00
 
 ## Snapshot
 
@@ -14,7 +14,7 @@ Generated: 2026-05-18T04:55:37-04:00
 
 - Next action: select_next_batch
 - Next command: python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
-- Selected batch: RHC01
+- Selected batch: RHC02
 - Performance missing outputs: 0
 
 ## Highest Priority Fixes

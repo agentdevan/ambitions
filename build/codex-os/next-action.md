@@ -1,9 +1,9 @@
 # Codex OS Next Action
 
-Generated: 2026-05-18T04:55:37-04:00
+Generated: 2026-05-18T05:14:59-04:00
 
 Decision: select_next_batch
-Reason: No blockers remain; select the safest executable batch (RHC01).
+Reason: No blockers remain; select the safest executable batch (RHC02).
 
 ## Blockers
 

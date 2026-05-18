@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PFC40 Platform Framework Compliance Closeout"
-  previous_batch: "PFC40 Platform Framework Compliance Closeout"
-  previous_result: "accepted_yellow"
-  next_eligible_batch: "RHC01 Repo Hygiene Triage And Owner Map"
+  batch: "RHC01 Repo Hygiene Triage And Owner Map"
+  previous_batch: "RHC01 Repo Hygiene Triage And Owner Map"
+  previous_result: "green"
+  next_eligible_batch: "RHC02 Large File Extraction And Module Boundary"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

@@ -379,6 +379,7 @@
 - classify/archive/rewrite: docs/audits/rec04-release-claim-copy-guard-report.md
 - classify/archive/rewrite: docs/audits/rec05-human-review-packet-report.md
 - classify/archive/rewrite: docs/audits/rec06-release-evidence-closure-handoff-report.md
+- classify/archive/rewrite: docs/audits/rhc01-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/rhc04-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/sa07-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/sa08-batch-closeout-report.md
