@@ -167,6 +167,7 @@
 - classify/archive/rewrite: docs/audits/eb24-onboarding-receipts-skip-later-setup-recovery-report.md
 - classify/archive/rewrite: docs/audits/eb31-cross-kernel-primitives-and-event-receipts-report.md
 - classify/archive/rewrite: docs/audits/eb32-cross-kernel-dependency-and-gate-integration-report.md
+- classify/archive/rewrite: docs/audits/efc01-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/faang-handoff-readiness-report.md
 - classify/archive/rewrite: docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md
 - classify/archive/rewrite: docs/audits/fcp01-flagship-completion-source-truth-lock-report.md

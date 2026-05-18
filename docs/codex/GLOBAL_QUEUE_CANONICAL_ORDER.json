@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC01",
-  "next_eligible_title": "Private Product Evidence Engine",
+  "next_eligible_batch": "EFC02",
+  "next_eligible_title": "First Useful Object Onboarding",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -844,17 +844,17 @@
     {
       "id": "EFC01",
       "title": "Private Product Evidence Engine",
-      "classification": "executable_now",
-      "reason": "RHC06 is complete / accepted yellow. EFC01 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch RHC06.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC01 Private Product Evidence Engine is complete / Accepted Yellow with closeout in docs/audits/efc01-batch-closeout-report.md and commit b23e0f0f28064a4cc59dd696f031071b1c5287e4 committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC02",
       "title": "First Useful Object Onboarding",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC01 is complete / accepted yellow. EFC02 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC01.",
       "efc_applicability": "invoked"
     },
     {

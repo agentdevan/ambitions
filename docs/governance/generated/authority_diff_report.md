@@ -3,7 +3,7 @@
 ## Active Changes
 
 - .codex/state/global-train.lock
-- docs/audits/rhc06-batch-closeout-report.md
+- docs/audits/efc01-batch-closeout-report.md
 
 ## Historical / Archive Changes
 
