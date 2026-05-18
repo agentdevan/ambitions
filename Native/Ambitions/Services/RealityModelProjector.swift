@@ -7,6 +7,8 @@ struct RealityProjectionInput: Sendable, Equatable {
     let workingWindows: [RealityWindow]
     let freeTimeWindows: [RealityWindow]
     let protectedWindows: [RealityWindow]
+    let blockedWindows: [RealityWindow]
+    let vacationAwayWindows: [RealityWindow]
     let flexibleWindows: [RealityWindow]
     let scheduledBlocks: [ScheduledAmbitionsBlock]
     let calendarBusyWindows: [RealityWindow]
@@ -21,6 +23,8 @@ struct RealityProjectionInput: Sendable, Equatable {
         workingWindows: [RealityWindow] = [],
         freeTimeWindows: [RealityWindow] = [],
         protectedWindows: [RealityWindow] = [],
+        blockedWindows: [RealityWindow] = [],
+        vacationAwayWindows: [RealityWindow] = [],
         flexibleWindows: [RealityWindow] = [],
         scheduledBlocks: [ScheduledAmbitionsBlock] = [],
         calendarBusyWindows: [RealityWindow] = [],
@@ -34,6 +38,8 @@ struct RealityProjectionInput: Sendable, Equatable {
         self.workingWindows = workingWindows
         self.freeTimeWindows = freeTimeWindows
         self.protectedWindows = protectedWindows
+        self.blockedWindows = blockedWindows
+        self.vacationAwayWindows = vacationAwayWindows
         self.flexibleWindows = flexibleWindows
         self.scheduledBlocks = scheduledBlocks
         self.calendarBusyWindows = calendarBusyWindows
@@ -70,6 +76,8 @@ struct RealityModelProjector: RealitySnapshotProjecting {
             input.workingWindows +
             input.freeTimeWindows +
             input.protectedWindows +
+            input.blockedWindows +
+            input.vacationAwayWindows +
             input.flexibleWindows +
             scheduledWindows +
             input.calendarBusyWindows +
@@ -77,7 +85,7 @@ struct RealityModelProjector: RealitySnapshotProjecting {
             to: input.horizon
         )
         let blocking = windows.filter { window in
-            [.blockedBusy, .protected, .scheduledAmbitionsBlock, .calendarDerivedBusy].contains(window.kind)
+            [.blockedBusy, .protected, .vacation, .away, .scheduledAmbitionsBlock, .calendarDerivedBusy].contains(window.kind)
         }
         let openCandidates = makeOpenCandidates(
             horizon: input.horizon,
@@ -87,19 +95,19 @@ struct RealityModelProjector: RealitySnapshotProjecting {
             minimumWindowMinutes: input.minimumWindowMinutes,
             nextDeadline: input.deadlineHints.filter { $0 >= input.horizon.start }.min()
         )
-        let capacity = makeCapacityEstimate(windows: windows, openCandidates: openCandidates)
+        let deadlinePressure = makeDeadlinePressure(deadlines: input.deadlineHints, openCandidates: openCandidates, horizon: input.horizon)
+        let capacity = makeCapacityEstimate(windows: windows, openCandidates: openCandidates, deadlinePressure: deadlinePressure)
         let conflicts = makeConflictSummary(windows: windows)
         let availability = AvailabilitySummary(
             horizonStart: input.horizon.start,
             horizonEnd: input.horizon.end,
             openWindowCount: openCandidates.count,
-            blockedWindowCount: windows.filter { $0.kind == .blockedBusy || $0.kind == .calendarDerivedBusy }.count,
+            blockedWindowCount: windows.filter { [.blockedBusy, .calendarDerivedBusy, .protected, .vacation, .away, .scheduledAmbitionsBlock].contains($0.kind) }.count,
             protectedWindowCount: windows.filter { $0.kind == .protected }.count,
             calendarDerivedBusyCount: windows.filter(\.isCalendarDerived).count,
             schedulePressure: capacity.capacityLevel,
             summary: availabilitySummary(openCandidates: openCandidates, capacity: capacity, calendarContext: input.calendarContext)
         )
-        let deadlinePressure = makeDeadlinePressure(deadlines: input.deadlineHints, openCandidates: openCandidates, horizon: input.horizon)
         let ledgerIDs = Array(Set(windows.flatMap(\.eventLedgerEntryIDs) + (input.calendarContext?.eventLedgerEntryIDs ?? []))).sorted()
         let explanationIDs = Array(Set(windows.flatMap(\.recommendationExplanationIDs) + (input.calendarContext?.recommendationExplanationIDs ?? []))).sorted()
 
@@ -110,6 +118,7 @@ struct RealityModelProjector: RealitySnapshotProjecting {
             horizonEnd: input.horizon.end,
             activeContextLens: input.activeContextLens,
             windows: windows,
+            vacationAwayWindows: windows.filter(\.isAwayLike),
             openWindowCandidates: openCandidates,
             availability: availability,
             calendarContext: input.calendarContext,
@@ -137,7 +146,7 @@ extension RealityModelProjector {
 
 private extension RealityModelProjector {
     func baselineWindowsIfNeeded(input: RealityProjectionInput) -> [RealityWindow] {
-        guard input.workingWindows.isEmpty && input.freeTimeWindows.isEmpty && input.flexibleWindows.isEmpty else {
+        guard input.workingWindows.isEmpty && input.freeTimeWindows.isEmpty && input.protectedWindows.isEmpty && input.blockedWindows.isEmpty && input.vacationAwayWindows.isEmpty && input.flexibleWindows.isEmpty else {
             return []
         }
         return [
@@ -248,15 +257,17 @@ private extension RealityModelProjector {
         )
     }
 
-    func makeCapacityEstimate(windows: [RealityWindow], openCandidates: [OpenWindowCandidate]) -> CapacityEstimate {
+    func makeCapacityEstimate(windows: [RealityWindow], openCandidates: [OpenWindowCandidate], deadlinePressure: NowPressureSummary) -> CapacityEstimate {
         let open = openCandidates.reduce(0) { $0 + $1.durationMinutes }
         let protected = windows.filter { $0.kind == .protected }.reduce(0) { $0 + $1.durationMinutes }
-        let busy = windows.filter { $0.kind == .blockedBusy || $0.kind == .calendarDerivedBusy }.reduce(0) { $0 + $1.durationMinutes }
+        let vacationAway = windows.filter { $0.kind == .vacation || $0.kind == .away }.reduce(0) { $0 + $1.durationMinutes }
+        let blockedBusy = windows.filter { $0.kind == .blockedBusy }.reduce(0) { $0 + $1.durationMinutes }
+        let calendarBusy = windows.filter { $0.kind == .calendarDerivedBusy }.reduce(0) { $0 + $1.durationMinutes }
         let flexible = windows.filter { $0.kind == .flexible || $0.kind == .open }.reduce(0) { $0 + $1.durationMinutes }
         let scheduled = windows.filter { $0.kind == .scheduledAmbitionsBlock }.reduce(0) { $0 + $1.durationMinutes }
-        let calendarBusy = windows.filter(\.isCalendarDerived).reduce(0) { $0 + $1.durationMinutes }
-        let total = max(1, open + protected + busy + scheduled)
-        let pressure = Double(busy + scheduled + protected) / Double(total)
+        let blocked = blockedBusy + calendarBusy
+        let total = max(1, open + protected + vacationAway + blocked + scheduled)
+        let pressure = Double(blocked + scheduled + protected + vacationAway) / Double(total)
         let level: NowPressureLevel
         if pressure >= 0.8 {
             level = .high
@@ -269,22 +280,28 @@ private extension RealityModelProjector {
         } else {
             level = .low
         }
+        let firstFitSummary = openCandidates.first?.fitSummary ?? "No open window is visible in this horizon."
         return CapacityEstimate(
+            openMinutes: open,
             totalOpenMinutes: open,
             protectedMinutes: protected,
-            blockedMinutes: busy,
+            vacationAwayMinutes: vacationAway,
+            blockedBusyMinutes: blockedBusy,
+            blockedMinutes: blocked,
             flexibleMinutes: flexible,
             scheduledAmbitionsMinutes: scheduled,
             calendarBusyMinutes: calendarBusy,
+            timeFitProofSummary: "Time fit proof: \(firstFitSummary) Deadline pressure: \(deadlinePressure.summary)",
+            deadlineFitProofSummary: deadlinePressure.summary,
             capacityLevel: level,
-            summary: open == 0 ? "No open windows are visible in this horizon." : "\(open) minutes remain visible as open planning capacity.",
+            summary: open == 0 ? "No open windows are visible in this horizon." : "\(open) minutes remain visible as open planning capacity after protected, away, blocked, and scheduled time.",
             localOnly: true,
             privacy: calendarBusy > 0 ? .calendarDerived : .standard
         )
     }
 
     func makeConflictSummary(windows: [RealityWindow]) -> RealityConflictSummary {
-        let blocking = windows.filter { [.blockedBusy, .protected, .scheduledAmbitionsBlock, .calendarDerivedBusy].contains($0.kind) }
+        let blocking = windows.filter { [.blockedBusy, .protected, .vacation, .away, .scheduledAmbitionsBlock, .calendarDerivedBusy].contains($0.kind) }
             .sorted { $0.start < $1.start }
         var affected: [String] = []
         for index in blocking.indices {

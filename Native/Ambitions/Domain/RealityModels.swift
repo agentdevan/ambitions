@@ -6,11 +6,17 @@ enum RealityWindowKind: String, Codable, Sendable, Equatable, Hashable, CaseIter
     case working
     case freeTime = "free_time"
     case protected
+    case vacation
+    case away
     case blockedBusy = "blocked_busy"
     case flexible
     case scheduledAmbitionsBlock = "scheduled_ambitions_block"
     case calendarDerivedBusy = "calendar_derived_busy"
     case open
+
+    var isAwayLike: Bool {
+        self == .vacation || self == .away
+    }
 }
 
 enum RealityWindowSource: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -95,6 +101,10 @@ struct RealityWindow: Codable, Sendable, Equatable, Hashable, Identifiable {
         DateInterval(start: start, end: end)
     }
 
+    var isAwayLike: Bool {
+        kind.isAwayLike
+    }
+
     private static func normalized(_ values: [String]) -> [String] {
         Array(Set(values.filter { $0.isEmpty == false })).sorted()
     }
@@ -137,12 +147,17 @@ struct OpenWindowCandidate: Codable, Sendable, Equatable, Hashable, Identifiable
 }
 
 struct CapacityEstimate: Codable, Sendable, Equatable, Hashable {
+    let openMinutes: Int
     let totalOpenMinutes: Int
     let protectedMinutes: Int
+    let vacationAwayMinutes: Int
+    let blockedBusyMinutes: Int
     let blockedMinutes: Int
     let flexibleMinutes: Int
     let scheduledAmbitionsMinutes: Int
     let calendarBusyMinutes: Int
+    let timeFitProofSummary: String
+    let deadlineFitProofSummary: String
     let capacityLevel: NowPressureLevel
     let summary: String
     let localOnly: Bool
@@ -283,6 +298,7 @@ struct RealitySnapshot: Codable, Sendable, Equatable, Identifiable {
     let horizonEnd: Date
     let activeContextLens: NowContextLens
     let windows: [RealityWindow]
+    let vacationAwayWindows: [RealityWindow]
     let openWindowCandidates: [OpenWindowCandidate]
     let availability: AvailabilitySummary
     let calendarContext: CalendarDerivedContext?
@@ -304,6 +320,7 @@ struct RealitySnapshot: Codable, Sendable, Equatable, Identifiable {
         horizonEnd: Date,
         activeContextLens: NowContextLens,
         windows: [RealityWindow],
+        vacationAwayWindows: [RealityWindow] = [],
         openWindowCandidates: [OpenWindowCandidate],
         availability: AvailabilitySummary,
         calendarContext: CalendarDerivedContext? = nil,
@@ -322,6 +339,10 @@ struct RealitySnapshot: Codable, Sendable, Equatable, Identifiable {
         self.horizonEnd = horizonEnd
         self.activeContextLens = activeContextLens
         self.windows = windows.sorted { lhs, rhs in
+            if lhs.start == rhs.start { return lhs.id < rhs.id }
+            return lhs.start < rhs.start
+        }
+        self.vacationAwayWindows = vacationAwayWindows.sorted { lhs, rhs in
             if lhs.start == rhs.start { return lhs.id < rhs.id }
             return lhs.start < rhs.start
         }
