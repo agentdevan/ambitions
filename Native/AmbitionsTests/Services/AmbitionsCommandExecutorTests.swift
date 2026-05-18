@@ -345,7 +345,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let events = try await ledger.fetchRecent(limit: 10)
 
         XCTAssertEqual(result.status, .succeeded)
-        XCTAssertEqual(result.summary, "Capture represented as a Plan idea. Scheduling is not implemented in this build.")
+        XCTAssertEqual(result.summary, "Capture represented as a Time-owned planning idea. Scheduling is not implemented in this build.")
         XCTAssertEqual(result.metadata["captureRoute"], CaptureRoute.timeSeed.rawValue)
         XCTAssertEqual(captures.first?.kind, .oneTimeCommitment)
         XCTAssertEqual(captures.first?.route, .timeSeed)
@@ -497,6 +497,10 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         )
 
         XCTAssertEqual(result.status, .unsupported)
+        XCTAssertEqual(
+            result.summary,
+            "Calendar write intents require the Time-owned calendar block writer and explicit user confirmation; this command path does not write calendar data."
+        )
         XCTAssertEqual(result.metadata["calendarWriteIntent"], "true")
         XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
     }

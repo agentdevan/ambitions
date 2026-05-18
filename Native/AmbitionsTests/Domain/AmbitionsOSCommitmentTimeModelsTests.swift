@@ -40,6 +40,27 @@ final class AmbitionsOSCommitmentTimeModelsTests: XCTestCase {
         XCTAssertTrue(validator.validate(projection).contains(.protectedTimeViolation))
     }
 
+    func testProtectedTimeCommitmentFitsInsideProtectedCapacityWindow() {
+        let projection = projection(
+            commitments: [
+                item(
+                    id: "protected-time-1",
+                    kind: .protectedTime,
+                    durationMinutes: 30,
+                    flexibility: .protected
+                )
+            ],
+            capacityWindows: [window(availableMinutes: 45, protected: true)]
+        )
+
+        XCTAssertFalse(validator.validate(projection).contains(.protectedTimeViolation))
+        XCTAssertFalse(validator.validate(projection).contains(.overCapacity))
+        XCTAssertEqual(projection.capacityFit, .fits)
+        XCTAssertEqual(projection.regularRequestedMinutes, 0)
+        XCTAssertEqual(projection.protectedRequestedMinutes, 30)
+        XCTAssertEqual(projection.protectedAvailableMinutes, 45)
+    }
+
     func testSourceNeededAndStaleDeadlineRequireReviewBeforeCapacityUse() {
         let projection = projection(
             commitments: [

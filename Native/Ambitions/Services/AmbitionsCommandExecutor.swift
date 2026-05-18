@@ -101,7 +101,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         case .scheduleItem where command.payload.metadata["calendarWriteIntent"] == "true":
             result = AmbitionsCommandExecutionResult(
                 status: .unsupported,
-                summary: "Calendar write intents require the Plan-owned calendar block writer and explicit user confirmation; this command path does not write calendar data.",
+                summary: "Calendar write intents require the Time-owned calendar block writer and explicit user confirmation; this command path does not write calendar data.",
                 target: command.target,
                 recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
                 metadata: [
@@ -351,7 +351,7 @@ private extension AmbitionsCommandExecutor {
             guard let capture else {
                 return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for commitment routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
             }
-            return captureResult(command: command, capture: capture, summary: "Commitment represented as a Plan idea. Scheduling remains deferred to Plan.")
+            return captureResult(command: command, capture: capture, summary: "Commitment represented as a Time-owned planning idea. Scheduling remains deferred to compatibility planning.")
         } catch {
             return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
         }
@@ -444,16 +444,16 @@ private extension AmbitionsCommandExecutor {
 
     func executePlanSeedRepresentation(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
         guard let captureService else {
-            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Plan idea representation is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
+            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Time-owned planning representation is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
         }
         guard let captureID = command.target.captureID else {
-            return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Creating new Plan items is represented through Capture 2.0 only when a capture target exists.", target: command.target, metadata: ["blockedBy": "plan_2_not_implemented"])
+            return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Creating new time items is represented through Capture 2.0 only when a capture target exists.", target: command.target, metadata: ["blockedBy": "plan_2_not_implemented"])
         }
         do {
             guard let capture = try await captureService.routeToTimeSeed(id: captureID, now: context.now) else {
-                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for Plan idea routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
+                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for time-owned planning routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
             }
-            return captureResult(command: command, capture: capture, summary: "Capture represented as a Plan idea. Scheduling is not implemented in this build.")
+            return captureResult(command: command, capture: capture, summary: "Capture represented as a Time-owned planning idea. Scheduling is not implemented in this build.")
         } catch {
             return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
         }

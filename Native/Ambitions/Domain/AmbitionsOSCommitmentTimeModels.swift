@@ -176,8 +176,24 @@ struct AmbitionsOSCommitmentTimeProjection: Codable, Sendable, Equatable, Hashab
         commitments.reduce(0) { $0 + max($1.durationMinutes, 0) }
     }
 
+    var regularRequestedMinutes: Int {
+        commitments
+            .filter { $0.kind != .protectedTime && $0.flexibility != .protected }
+            .reduce(0) { $0 + max($1.durationMinutes, 0) }
+    }
+
+    var protectedRequestedMinutes: Int {
+        commitments
+            .filter { $0.kind == .protectedTime || $0.flexibility == .protected }
+            .reduce(0) { $0 + max($1.durationMinutes, 0) }
+    }
+
     var availableMinutes: Int {
         capacityWindows.filter { $0.protected == false }.reduce(0) { $0 + $1.availableMinutes }
+    }
+
+    var protectedAvailableMinutes: Int {
+        capacityWindows.filter(\.protected).reduce(0) { $0 + $1.availableMinutes }
     }
 
     var capacityFit: AmbitionsOSCapacityFit {
@@ -188,7 +204,9 @@ struct AmbitionsOSCommitmentTimeProjection: Codable, Sendable, Equatable, Hashab
         if issues.contains(.overCapacity) {
             return .overCapacity
         }
-        if requestedMinutes > Int(Double(max(availableMinutes, 1)) * 0.8) {
+        let totalRequestedMinutes = regularRequestedMinutes + protectedRequestedMinutes
+        let totalAvailableMinutes = availableMinutes + protectedAvailableMinutes
+        if totalRequestedMinutes > Int(Double(max(totalAvailableMinutes, 1)) * 0.8) {
             return .tight
         }
         return .fits
@@ -222,7 +240,8 @@ struct AmbitionsOSCommitmentTimeValidator: Sendable, Equatable, Hashable {
             validate(item: item, issues: &issues)
         }
 
-        if projection.requestedMinutes > projection.availableMinutes {
+        if projection.regularRequestedMinutes > projection.availableMinutes ||
+            projection.protectedRequestedMinutes > projection.protectedAvailableMinutes {
             issues.insert(.overCapacity)
         }
         if projection.capacityWindows.contains(where: \.protected) &&
