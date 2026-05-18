@@ -7,9 +7,9 @@
       "production_swift_allowed": true
     },
     "current": {
-      "batch": "EFC06 Goal Thermodynamics And Drift Handling",
-      "next_eligible_batch": "EFC07 Ambitions Twin Fixture Library",
-      "previous_batch": "EFC06 Goal Thermodynamics And Drift Handling",
+      "batch": "EFC07 Ambitions Twin Fixture Library",
+      "next_eligible_batch": "EFC08 Source Freshness Commons And Operations",
+      "previous_batch": "EFC07 Ambitions Twin Fixture Library",
       "previous_result": "accepted_yellow",
       "train": "Global full-stack execution"
     },
@@ -150,127 +150,127 @@
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "927a35fe002b0e1c91ea38c465747df869841bf4c1a76f9b94df8c54a82c2b5c",
-      "size": 11134
+      "sha256": "11e1f7f1c629589a8a4dc963adf0235c5828817d430dad8f63f196b1194391b9",
+      "size": 11127
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "624bd04eebb06d7f3c418da47e98ea8d978253b8bc1773211c571bad38c0c2b7",
-      "size": 731829
+      "sha256": "1f997c0df2a5f4f10256543bd81ecf17550c4b4f93484a3c68652806b8d76581",
+      "size": 731822
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.json",
-      "sha256": "cc1993a88e64ca66ee4ad0477e8a21c259a579018c4814a976499bb9c3727572",
+      "sha256": "36620f2e1c7459b36f62165b9399861fd15676407624733cb610692068be61b7",
       "size": 61923
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.md",
-      "sha256": "c4811bd82c8634ca600cec190ac3d143829990b45fdfbd2530c256435a2a9739",
+      "sha256": "cc346f8a8484e7b3d24036224434f530103ecd2fedd9bb2461c1867ca77345b8",
       "size": 454
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.json",
-      "sha256": "e3f789af094fe381001a87b0aa576b83c3deececcaba33957e078ff37fae4452",
+      "sha256": "ea3e5e4c07617fa06794deb6f0093792b783a90922c52c55fab3ca80d5df7cc1",
       "size": 761
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.md",
-      "sha256": "2b1813abc5114b6da87d2fd5c1d89ac2735fdad72499bbe68a5abb38399e4223",
+      "sha256": "6fd95aa5c90f33dd87f2c5d8e1d9b85dbae19877f1700c25d84bf2268f15221b",
       "size": 685
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.json",
-      "sha256": "81dd63942a7f65fb39b18b374fd14513865c56c4e0d3449dac1204f0134ba800",
+      "sha256": "51ba9b9651e927b3400078c055d77010ced6b4940f65c956a1315fb58608081f",
       "size": 260
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.md",
-      "sha256": "2eefb8c571d0eeeafbb063bf467f2a22fc7fd3689d42ee19d3201e852726de68",
+      "sha256": "1f75c541b80b40ce7102dcf708a8b8b99f831173a359df7edff38d312be3c04e",
       "size": 246
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "3e8172e7fea22fd6ce878b0cd80e55c9b1d74cd0e18551bc2877ff1aaac58c38",
+      "sha256": "3c6d4621d44f23d02ec4b6af4c954fc4f10a4383424aafdc970ad47b653d2341",
       "size": 747
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.md",
-      "sha256": "e942c2838705c1d657e223b993c57d3e4100c9cd3d32b81be0b67c350ed4b20b",
+      "sha256": "e2e5dd1e2f272328d59df3c6b0a80e5b2db0091ab8742a246ff9163596368e37",
       "size": 383
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "55e0a648335d2328ab9fe915647263ddb2dba22dd60577deea6032c59a6bdbd9",
+      "sha256": "646501c55f1514212e4908800a9a324f95a0d023e2ac7a2d2c679d46a984bd98",
       "size": 76732
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.md",
-      "sha256": "4c70466a917dbf499654edfd757ec5c097d0524f3c5766a19013a872ecbdbde3",
+      "sha256": "c92df7472b9320d75d23cd42c52c043106b314f8ac9a359f576c166443b5ed8b",
       "size": 832
     }
   ],
   "compatibility_seams": [
     "Plan"
   ],
-  "generated_at": "2026-05-18T08:21:08-04:00",
+  "generated_at": "2026-05-18T08:33:11-04:00",
   "governance_outputs": [
     {
       "exists": true,
       "path": "docs/governance/GOVERNANCE_DASHBOARD.md",
-      "sha256": "dc493f60dbab3e3c2f37d0a49d4dde12628648af4ab0400587d16446887174d4",
+      "sha256": "3c8099f22f48b3ef1c68aef3af8966ae661db3ae8f7a1aa24d0423d13ffbba6e",
       "size": 1383
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.md",
-      "sha256": "329bc0ef91c3cd326db13b3991043b8e40a0310aafe5633cdd834675a32414d8",
+      "sha256": "a4ab0cf95eeec2f900624c00ef4fe5443e66c0fbcf9321b682059d4b932f36d2",
       "size": 3229
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "175f504839dde1fdde7c29f688a9a1b01b69ee474a00830758c52b5fa1e68c84",
+      "sha256": "ca8636d623582b8be8671385a067e07acc54189c1513aab81c35b2365fc238c1",
       "size": 12663
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_plan.md",
-      "sha256": "e9d7cfe1c5a886bbe184e0ab6962361bbc3437759c799751a0345b9c5d647e1b",
+      "sha256": "7cb71a8da47a54c9b2b8fbcba6d7a8357c8a8dd054c1f4b060dd3b94174d578c",
       "size": 33038
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_map.json",
-      "sha256": "0e9b62c9c531e0c6f787c16f2536b661ee931f5c42f0a0b282e14a8416a7d428",
+      "sha256": "4a66d73980601bdffb81d5899624590f0fd16d38abe82f587b25ba4e6934a43c",
       "size": 831927
     },
     {
       "exists": true,
       "path": "docs/governance/generated/implementation_expectation_map.json",
-      "sha256": "1ebabb60a9ed4f556b48fe9a21bfb9091f1c987e142dbc8f48ea666ccab6d645",
+      "sha256": "c577acfc0fc0db8f1c0223baf8b7a06161a2281ffb45838e846445b8903042bf",
       "size": 26483
     },
     {
       "exists": true,
       "path": "docs/governance/generated/global_train_resequence.json",
-      "sha256": "ab776209e89cd2af09651beb212df536c3b5f7ddbe86e1fb694a5c7082695c9f",
+      "sha256": "0638d6166e648a237c0f4f26e9da3285b0048155aee0334f8e2e5a32d2d8fb2e",
       "size": 423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/mature_spec_synthesis.md",
-      "sha256": "68de9d5754957a062835fe9c2dc8ad2b787bc7a73633fc7b365e4b0c5a33728f",
+      "sha256": "682644d5ebdf7452d775d416e5d13eb26dbe741a57ed7c82ccb2b9f77773d327",
       "size": 18518
     },
     {
@@ -282,8 +282,8 @@
     {
       "exists": true,
       "path": "docs/governance/generated/supersession_rewrite_plan.md",
-      "sha256": "6112bb4e6f09dfd294b4c51a8957e97e1ef20ffe6ee5de3966d81735abc61b9e",
-      "size": 88554
+      "sha256": "3fde4a35feecc334f54d2a04ca4281c7c55c7bf46c3f4ed19f36ea474a6d1e17",
+      "size": 88625
     },
     {
       "exists": true,
@@ -294,47 +294,47 @@
     {
       "exists": true,
       "path": "docs/governance/generated/orphan_prompt_audit.md",
-      "sha256": "ea050cf0623fa348df1b7534a187d114c142c124a0cfb1812368c765115081fd",
+      "sha256": "50456eb9690a1f17c373e015da9e62bf079adbd4ebe4aabef7ac5efa3f0ea504",
       "size": 163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/stale_overlay_audit.md",
-      "sha256": "0d8af470555f059e5358c82e9913bd9aa604ecf772ae2a314f65a384fbf4c016",
+      "sha256": "632116062cb80f6c64193efa6bf5a3ed4390640d5008d99d5238724d6b832bbf",
       "size": 150
     },
     {
       "exists": true,
       "path": "docs/governance/generated/architecture_debt_score.json",
-      "sha256": "cfce827844f69eaf4a91d22a3de6aa4b4e1946993d12ab573aa06fa404f08a8b",
+      "sha256": "0936a44f761416e1309431cfaad4c7e6bd7ab38e551a4ac0168f001dd4273c84",
       "size": 130
     },
     {
       "exists": true,
       "path": "docs/governance/generated/governance_reconciliation_summary.json",
-      "sha256": "a7513094311583332303b42aed3a525e20b4379080a25133dcfc3c2f541a31d1",
+      "sha256": "f5b3d14fae88e11437d6e130888f061c0e66eb31092262487d42dba4e440a93a",
       "size": 1694
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_lineage_graph.json",
-      "sha256": "539a12b656a3dec5147c661f7d8a771108898a89233ea759f0866c419b80404a",
-      "size": 6721177
+      "sha256": "1ed98e0bae9565b08c8cf777ba206b77e5f82c1c44d35dc9065402bbdb531b1d",
+      "size": 6739512
     },
     {
       "exists": true,
       "path": "docs/governance/generated/proof_linkage_graph.json",
-      "sha256": "d66243db66d5d005518a49d84eb6cc21c028720cf227384d88cabb083e4f348c",
-      "size": 1894852
+      "sha256": "7f6aaa80ac335a6cbe43808beeb71dbf15165e4146c2764bcaf925632c384682",
+      "size": 1901793
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_to_implementation_map.json",
-      "sha256": "88931bfb4f08c8e230a1e57eff50d92d8be2d309af03a32bf02a590bfb2fe549",
-      "size": 1139616
+      "sha256": "b1e4a60773619d591038cffd15442125d6a1c50e3073f312a5a060ea81f93423",
+      "size": 1141215
     }
   ],
-  "head_sha": "641b5074b1b65bee990b467b0abdd0b1be678a86",
+  "head_sha": "d8daa654d2fc818d66f60163ff79c8a525fb232b",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "top_level_ia": [
     "Today",

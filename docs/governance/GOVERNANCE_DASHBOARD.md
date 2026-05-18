@@ -1,6 +1,6 @@
 # Ambitions Governance Dashboard
 
-Generated: 2026-05-18T08:21:08-04:00
+Generated: 2026-05-18T08:33:11-04:00
 
 ## Snapshot
 
@@ -14,7 +14,7 @@ Generated: 2026-05-18T08:21:08-04:00
 
 - Next action: select_next_batch
 - Next command: python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
-- Selected batch: EFC07
+- Selected batch: EFC08
 - Performance missing outputs: 0
 
 ## Highest Priority Fixes

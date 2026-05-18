@@ -892,17 +892,17 @@
     {
       "id": "EFC07",
       "title": "Ambitions Twin Fixture Library",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC07 is absorbed_as_overlay / do-not-run queue coverage after EFC06 closeout. No implementation batch is authorized from this prompt.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC07 Ambitions Twin Fixture Library is complete / Accepted Yellow with closeout in docs/audits/efc07-batch-closeout-report.md and commit d8daa654d2fc818d66f60163ff79c8a525fb232b committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC08",
       "title": "Source Freshness Commons And Operations",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC07 is complete / accepted yellow. EFC08 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC07.",
       "efc_applicability": "invoked"
     },
     {

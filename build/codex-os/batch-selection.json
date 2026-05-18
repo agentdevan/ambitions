@@ -1,9 +1,9 @@
 {
   "blockers": [
-    "queue_prerequisites:Complete prior batch EFC06."
+    "queue_prerequisites:Complete prior batch EFC07."
   ],
   "classification": "executable_now",
-  "generated_at": "2026-05-18T08:21:08-04:00",
+  "generated_at": "2026-05-18T08:33:11-04:00",
   "lane": "efc",
   "next_action_command": "",
   "postflight_commands": [
@@ -14,8 +14,8 @@
     "python3 scripts/governance/ambitions-repo-doctor.py",
     "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
   ],
-  "prompt_file": "prompts/batches/EFC07.md",
-  "reason": "Selected the safest live batch from current state: EFC07.",
-  "run_command": "make authorized-batch BATCH=EFC07 PROMPT=prompts/batches/EFC07.md",
-  "selected_batch": "EFC07"
+  "prompt_file": "prompts/batches/EFC08.md",
+  "reason": "Selected the safest live batch from current state: EFC08.",
+  "run_command": "make authorized-batch BATCH=EFC08 PROMPT=prompts/batches/EFC08.md",
+  "selected_batch": "EFC08"
 }
