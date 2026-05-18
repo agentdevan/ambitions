@@ -6371,6 +6371,10 @@
   },
   "EFC08": {
     "commits": [
+      "5449848f1982aa492a67f32d88ff7b661888f823",
+      "ca06d0ff034ffc0433ea5808b47eb109c40c6ab6",
+      "455e126e24d75bac6d1766b55e5758722219a593",
+      "37cc76ae68291779126bbab1662a5b273cf6d275",
       "b5a62a35e14d0646eb646741aafe982e15ea7ee1"
     ],
     "governance_files": [
@@ -6388,7 +6392,32 @@
       "docs/codex/MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md",
       "docs/codex/README.md",
       "docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md",
-      "docs/codex/batches/EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt.md"
+      "docs/codex/batches/EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt.md",
+      "docs/governance/GOVERNANCE_DASHBOARD.md",
+      "docs/governance/generated/accepted_yellow_governance_debt.json",
+      "docs/governance/generated/accepted_yellow_governance_debt.md",
+      "docs/governance/generated/architecture_debt_score.json",
+      "docs/governance/generated/authority_diff_report.md",
+      "docs/governance/generated/canon_impact_map.json",
+      "docs/governance/generated/canon_impact_plan.md",
+      "docs/governance/generated/canon_propagation_plan.md",
+      "docs/governance/generated/global_train_resequence.json",
+      "docs/governance/generated/governance_reconciliation_summary.json",
+      "docs/governance/generated/governance_trend_history.json",
+      "docs/governance/generated/governance_trend_report.json",
+      "docs/governance/generated/implementation_expectation_map.json",
+      "docs/governance/generated/mature_spec_synthesis.md",
+      "docs/governance/generated/orphan_prompt_audit.md",
+      "docs/governance/generated/orphan_prompt_provenance.json",
+      "docs/governance/generated/orphan_prompt_provenance.md",
+      "docs/governance/generated/proof_linkage_graph.json",
+      "docs/governance/generated/registry_projection.md",
+      "docs/governance/generated/repo_doctor_summary.json",
+      "docs/governance/generated/repo_doctor_summary.md",
+      "docs/governance/generated/stale_overlay_audit.md",
+      "docs/governance/generated/supersession_rewrite_plan.md",
+      "docs/governance/generated/train_lineage_graph.json",
+      "docs/governance/generated/train_to_implementation_map.json"
     ],
     "implementation_files": [
       "scripts/ambitions-control-plane-check.py",

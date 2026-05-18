@@ -12,7 +12,7 @@ source_of_truth:
 current:
   train: "Global full-stack execution"
   batch: "EFC08 Source Freshness Commons And Operations"
-  previous_batch: "EFC07 Ambitions Twin Fixture Library"
+  previous_batch: "EFC08 Source Freshness Commons And Operations"
   previous_result: "accepted_yellow"
   next_eligible_batch: "EFC09 Accessibility Shadow Surface System"
 codex_os_override:

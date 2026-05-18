@@ -901,16 +901,16 @@
       "id": "EFC08",
       "title": "Source Freshness Commons And Operations",
       "classification": "historical_complete_do_not_run",
-      "reason": "EFC08 Source Freshness Commons And Operations is complete / Accepted Yellow with closeout in docs/audits/efc08-batch-closeout-report.md and no implementation changes. Do not rerun as an implementation batch.",
+      "reason": "EFC08 Source Freshness Commons And Operations is complete / Accepted Yellow with closeout in docs/audits/efc08-batch-closeout-report.md and commit 5449848f1982aa492a67f32d88ff7b661888f823 committed on local main. Do not rerun as an implementation batch.",
       "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC09",
       "title": "Accessibility Shadow Surface System",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC08 is complete / accepted yellow. EFC09 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC08.",
       "efc_applicability": "invoked"
     },
     {
