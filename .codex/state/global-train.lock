@@ -1,5 +1,0 @@
-pid: 92395
-command: scripts/ambitions-global-train-supervisor.sh --once
-batch: PFC34
-timestamp: 2026-05-18T05:52:08Z
-run_dir: pending

@@ -1,19 +1,19 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-18T01:45:15-04:00
+Generated: 2026-05-18T02:03:06-04:00
 
-Selected batch: PFC34
-Prompt file: prompts/batches/PFC34.md
+Selected batch: PFC35
+Prompt file: prompts/batches/PFC35.md
 Lane: platform
 Queue classification: executable_now
 
 ## Reason
 
-Selected the safest live batch from current state: PFC34.
+Selected the safest live batch from current state: PFC35.
 
 ## Blockers
 
-- queue_prerequisites:Complete prior batch PFC33.
+- queue_prerequisites:Complete prior batch PFC34.
 
 ## Preflight Commands
 
@@ -27,4 +27,4 @@ Selected the safest live batch from current state: PFC34.
 
 ## Run Command
 
-make authorized-batch BATCH=PFC34 PROMPT=prompts/batches/PFC34.md
+make authorized-batch BATCH=PFC35 PROMPT=prompts/batches/PFC35.md

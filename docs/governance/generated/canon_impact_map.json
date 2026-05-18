@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T01:45:15-04:00",
+  "generated_at": "2026-05-18T02:03:06-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -316,6 +316,7 @@
       "docs/audits/mri15-recommendation-rejection-learning-report.md",
       "docs/audits/pfc23-paywall-upgrade-ux-compliance-review-deferral-report.md",
       "docs/audits/pfc27-safety-professional-boundary-crisis-policy-report.md",
+      "docs/audits/pfc34-batch-closeout-report.md",
       "docs/audits/pk26-batch-closeout-report.md",
       "docs/audits/pk27-batch-closeout-report.md",
       "docs/audits/pk33-batch-closeout-report.md",
@@ -2472,7 +2473,6 @@
       "docs/governance/generated/prompt_rewrite_plan.md",
       "docs/governance/generated/proof_linkage_graph.json",
       "docs/governance/generated/registry_projection.md",
-      "docs/governance/generated/repo_doctor_summary.json",
       "docs/governance/generated/supersession_rewrite_plan.md",
       "docs/governance/generated/train_lineage_graph.json",
       "docs/governance/generated/train_to_implementation_map.json",
@@ -10796,6 +10796,7 @@
     "docs/audits/pfc29-logging-analytics-observability-policy-report.md",
     "docs/audits/pfc30-performance-budget-instruments-plan-report.md",
     "docs/audits/pfc33-batch-closeout-report.md",
+    "docs/audits/pfc34-batch-closeout-report.md",
     "docs/audits/pk-train-integration-and-dirty-worktree-report.md",
     "docs/audits/pk00-current-backend-proof-baseline-report.md",
     "docs/audits/pk04-atomic-goal-creation-report.md",
@@ -11743,7 +11744,6 @@
     "docs/governance/generated/prompt_rewrite_plan.md",
     "docs/governance/generated/proof_linkage_graph.json",
     "docs/governance/generated/registry_projection.md",
-    "docs/governance/generated/repo_doctor_summary.json",
     "docs/governance/generated/supersession_rewrite_plan.md",
     "docs/governance/generated/train_lineage_graph.json",
     "docs/governance/generated/train_to_implementation_map.json",

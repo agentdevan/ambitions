@@ -59,7 +59,7 @@ def update_queue(queue: dict[str, Any], completed: str, next_batch: str, status:
             found_completed = True
             entry["classification"] = STATUS_TO_CLASSIFICATION[status]
             status_label = status.replace("_", " ").title()
-            commit_note = f" and commit {commit} pushed to main" if commit else ""
+            commit_note = f" and commit {commit} committed on local main" if commit else ""
             report_note = f" in {report}" if report else ""
             entry["reason"] = (
                 f"{completed} {entry.get('title', '')} is complete / {status_label} with closeout{report_note}{commit_note}. "
@@ -121,7 +121,7 @@ def state_report_text(kind: str, completed: str, next_batch: str, queue: dict[st
     next_title = batch_title(queue, next_batch)
     completed_title = batch_title(queue, completed)
     status_label = status.replace("_", " ").title()
-    commit_line = f"- Commit: `{commit}` pushed to `main`.\n" if commit else ""
+    commit_line = f"- Commit: `{commit}` committed on local `main`.\n" if commit else ""
     report_line = f"- Report: `{report}`.\n" if report else ""
     return f'''# {kind}
 
