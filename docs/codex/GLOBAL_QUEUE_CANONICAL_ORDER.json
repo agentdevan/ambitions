@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC17",
-  "next_eligible_title": "App Store Creative And Reviewer Package",
+  "next_eligible_batch": "EFC18",
+  "next_eligible_title": "Anti-Ceremony Compiler",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -972,9 +972,9 @@
     {
       "id": "EFC17",
       "title": "App Store Creative And Reviewer Package",
-      "classification": "executable_now",
-      "reason": "EFC16 is complete / green. EFC17 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC16.",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC17 is canonical absorbed-as-overlay coverage only. Do not run this prompt as implementation work. EFC18 is the next fallback handoff.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
       "efc_applicability": "invoked"
     },
     {
