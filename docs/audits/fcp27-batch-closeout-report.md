@@ -1,16 +1,24 @@
 # FCP27 Batch Closeout Report
 
 ## Status
-Completed (Green: app-target compile debt repaired locally)
+Completed (Green: current-run evidence refresh only; no app-source changes in Phase 02)
+
+## Run Context
+- Batch ID: `FCP27`
+- Current run directory: `.codex/runs/FCP27/20260518T021037Z`
+- Branch: `main`
+- Commit: `0f85b5003f4b07bd7a7684d6b18ed98d14789a97`
 
 ## Scope Summary
-- FCP27 closeout plus focused app-target compile-debt repair.
-- Repaired stale Plan-to-Time routing compatibility, Today/Time/Capture command-model drift, Source Atlas UI access debt, Living Plan public/internal access debt, one SwiftUI type-check timeout in design-system primitives, and the remaining non-blocking app-target warnings.
-- No signing, entitlement, hosted CI, release workflow, or product strategy changes were made.
+- This phase updated the batch closeout report only.
+- No production app source files were changed in this phase.
+- No generated Xcode project, package, signing, entitlement, workflow, or release-automation files were touched.
+- No UI/test source file was touched, so no new rendered UI proof was required for this phase.
 
 ## Source Truth Inspected
 - `docs/truth/README.md`
 - `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
 - `docs/truth/IMPLEMENTATION_TRUTH.md`
 - `docs/truth/RELEASE_TRUTH.md`
 - `docs/truth/CODEX_PROCESS_TRUTH.md`
@@ -18,19 +26,27 @@ Completed (Green: app-target compile debt repaired locally)
 - `AGENTS.md`
 - `.codex/state/active-batch.yml`
 - `.codex/reports/current-batch-train-state.md`
+- `docs/codex/BATCH_REGISTRY.md`
 - `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`
+- `docs/codex/AMB_REMAINING_BATCH_REFERENCE.json`
+- `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json`
 - `docs/native-build-and-release.md`
-- `prompts/batches/FCP27.md`
 - `docs/audits/fcp27-batch-closeout-report.md`
 
 ## Validation Commands and Exit Codes
 
 ### Verified
-- `git status --short --branch --untracked-files=all`: exit `0`; working tree contains the focused compile-debt repair files plus this report
+- `git status --short --branch`: exit `0`
+  - Result: `main...origin/main [ahead 2]`
+- `git fetch origin --prune`: exit `0`
+  - Result: local `main` remained ahead of `origin/main` with no incoming remote changes.
 - `git diff --check`: exit `0`
+- `python3 -m json.tool docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json >/tmp/fcp27-order-json-ok`: exit `0`
+- `python3 -m json.tool docs/codex/AMB_REMAINING_BATCH_REFERENCE.json >/tmp/fcp27-ref-json-ok`: exit `0`
+- `python3 -m json.tool docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json >/tmp/fcp27-blueprint-json-ok`: exit `0`
 - `make prompt-audit`: exit `0`
   - Result: `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`
-  - Active runnable prompts audited: `322`
+  - Active runnable prompts audited: `324`
 - `make batch-self-check`: exit `0`
   - Result: `GREEN: runner self-check passed`
 - `bash scripts/codex-forbidden-claim-scan.sh docs/audits/fcp27-batch-closeout-report.md 2>/dev/null || true`: exit `0`
@@ -38,65 +54,59 @@ Completed (Green: app-target compile debt repaired locally)
 - `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -version`: exit `0`
   - Result: Xcode `26.3`, build `17C529`
 - `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`: exit `0`
-  - Result: package graph resolved; source package `AmbitionsDesignSystem`
-- `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer ./scripts/build-local.sh`: exit `65`
-  - Result: app-target simulator build failed
-  - Destination: `platform=iOS Simulator,name=iPhone 17`
-  - Log: `output/logs/build-local-20260517-084148.log`
+  - Result: resolved source packages; `AmbitionsDesignSystem` present
 - `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer ./scripts/build-local.sh`: exit `0`
-  - Result: app-target simulator build succeeded after compile-debt repair
+  - Result: simulator build succeeded
   - Destination: `platform=iOS Simulator,name=iPhone 17`
-  - Log: `output/logs/build-local-20260517-092454.log`
+  - Log: `output/logs/build-local-20260517-222202.log`
   - Evidence: `** BUILD SUCCEEDED **`
-- `rg -n "warning:|error:" output/logs/build-local-20260517-092454.log`: exit `0`
-  - Result: no `error:` hits; two non-blocking warnings remain in the final log.
-  - Remaining warnings:
-    - `Native/Ambitions/Features/Goals/GoalComponents.swift:469`: non-Sendable function conversion warning
-    - `Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:208`: unreachable-code warning
-- `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer ./scripts/build-local.sh`: exit `0`
-  - Result: app-target simulator build succeeded after non-blocking warning repair
-  - Destination: `platform=iOS Simulator,name=iPhone 17`
-  - Log: `output/logs/build-local-20260517-093215.log`
-  - Evidence: `** BUILD SUCCEEDED **`
-- `rg -n "BUILD SUCCEEDED|warning:|error:" output/logs/build-local-20260517-093215.log`: exit `0`
-  - Result: `** BUILD SUCCEEDED **`; no `warning:` or `error:` hits in the final log
+- `bash scripts/fet-visual-qa-packet-check.sh`: exit `0`
+  - Result: advisory read-only check only
+  - No changed Swift UI files detected in the working tree
+  - No rendered screenshot proof was created in this phase
+- `bash scripts/sig-accessibility-evidence-check.sh`: exit `0`
+  - Result: advisory read-only accessibility evidence check only
+  - Manual VoiceOver / device-band accessibility proof remains unrecorded
+  - No public accessibility claim was made
 
-### Blocked in Nested Runner
-- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies` during nested runner execution
-  - Blocked by the outer policy wrapper before shell execution:
-    `approval required by policy, but AskForApproval is set to Never`
-- `focused xcodebuild` UI/accessibility proof
-  - Not performed in nested runner because app-target compile debt blocked that proof path.
+### Blocked or Not Attempted
+- Focused UI/accessibility proof was not required because no UI source file was touched in this phase.
+- Device proof was not attempted.
+- Signed archive proof was not attempted.
+- TestFlight proof was not attempted.
+- App Store proof was not attempted.
 
-## EFC / FVQ Applicability
-- EFC proof gate: invoked for source-touching repair; accepted Green for compile restoration only.
-- FET/FVQ visual proof gate: not applicable to this compile-debt repair because no visual QA, UI behavior validation, screenshot proof, or accessibility proof was performed.
+## EFC / FET / FVQ Applicability
+- EFC proof gate: invoked as current-run evidence gating only.
+- FET / FVQ visual proof gate: invoked as evidence-gate only; no rendered proof was created in this phase.
+- Accessibility proof gate: advisory only, with no new manual conformance claim.
 
 ## Verified Conclusions
-- The batch prompt, current truth files, and current batch mirrors were inspected before closeout.
-- The runner self-check is green.
-- The prompt audit is current and shows no active runnable prompt missing metadata.
-- The working tree was clean at the start of this phase.
-- The parent macOS session resolved packages successfully with Xcode `26.3` build `17C529`.
-- The repaired app target now builds locally through `./scripts/build-local.sh`.
-- The remaining non-blocking warning pair from `output/logs/build-local-20260517-092454.log` was repaired and no warning/error hits remain in `output/logs/build-local-20260517-093215.log`.
+- The batch mirrors still point to `FCP27` as the next eligible batch after `AOS30`.
+- The queue JSON files validated successfully as JSON.
+- The runner self-check passed.
+- The prompt audit did not report any missing active runnable prompt metadata.
+- The build path documented in `docs/native-build-and-release.md` succeeded locally on the iPhone 17 simulator destination.
+- This phase did not change app behavior, release posture, or batch order.
 
 ## Failed or Blocked Proof
-- Package resolution proof succeeded in the parent macOS session.
-- The first simulator build proof failed with app-target compile debt.
-- Initial compile-debt clusters from `output/logs/build-local-20260517-084148.log`:
-  - AOS tail-gate public APIs return internal `ActionReceipt` types, for example `Native/Ambitions/Domain/AmbitionsOSCloseoutTailGate.swift`.
-  - `InsightsRouteTarget` is missing while still referenced by `AppExternalRoute`, `ShellCommandDestination`, `InsightsModels`, `PreviewFixtures`, and `InsightsScreen`.
-  - Plan-to-Time compatibility drift remains in preview and runtime seams, including `.openPlan`, `.plan`, `TodayPlanLayerState`, and `TodayPlanLayerItemState` references.
-  - Living Plan public APIs expose internal app types in `Native/Ambitions/Domain/Planning/*`.
-  - `SourceAtlasUIPrimitives` public initializers expose internal Source Atlas state types.
-- Those clusters were repaired in the current working tree. The final local build log is `output/logs/build-local-20260517-093215.log`.
+- No hard failure occurred in this phase.
+- No UI-rendered proof was produced, but that was not required because no UI source file changed.
+- No current manual accessibility proof exists for public claim purposes.
 
 ## Skipped Proof
-- UI/accessibility-focused `xcodebuild` proof
-- device proof
-- signed archive proof
-- TestFlight/App Store proof
+- Rendered screenshot / preview proof
+- Physical-device proof
+- Signed archive proof
+- TestFlight proof
+- App Store proof
+- Public accessibility conformance proof
+- VoiceOver traversal proof
+- Dynamic Type proof
+- Reduce Motion proof
+- Performance proof
+- Privacy/legal approval proof
+- Hosted CI proof
 
 ## Claims Not Made
 - App release readiness
@@ -115,7 +125,8 @@ Completed (Green: app-target compile debt repaired locally)
 - Global queue completion
 
 ## Rollback Notes
-- The repair touched app source, shared UI source, and this audit report. Use path-limited review before staging or rollback.
+- No app-source or generated-project file changes were made in this phase.
+- If a future owner-seam UI patch is approved, keep rollback limited to the files that phase touches.
 
 ## Next Handoff
-- Review and commit the compile-debt repair slice before advancing to `FCP28`.
+- GPT-5.5 review can decide whether FCP27 is sufficiently evidenced for final closeout or whether a separate owner-seam UI proof pass is needed.
