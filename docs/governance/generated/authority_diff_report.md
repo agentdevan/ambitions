@@ -2,8 +2,7 @@
 
 ## Active Changes
 
-- .codex/state/global-train.lock
-- docs/audits/pfc34-batch-closeout-report.md
+- docs/audits/pfc35-batch-closeout-report.md
 - docs/status/release-evidence-packet.md
 
 ## Historical / Archive Changes
