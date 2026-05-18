@@ -16,6 +16,7 @@ SUMMARY_JSON = GENERATED / "repo_doctor_summary.json"
 
 COMMANDS: list[tuple[str, list[str]]] = [
     ("governance_reconcile", ["python3", "scripts/governance/ambitions-governance-reconcile.py", "--write"]),
+    ("orphan_prompt_provenance_classifier", ["python3", "scripts/governance/ambitions-orphan-prompt-provenance-classifier.py"]),
     ("canon_impact_map", ["python3", "scripts/governance/ambitions-canon-impact-map.py"]),
     ("canon_propagation_engine", ["python3", "scripts/governance/ambitions-canon-propagation-engine.py"]),
     ("mature_spec_synthesis", ["python3", "scripts/governance/ambitions-spec-synthesis.py"]),
@@ -143,6 +144,8 @@ def main() -> int:
             "docs/governance/GOVERNANCE_DASHBOARD.md",
             "docs/governance/generated/repo_doctor_summary.md",
             "docs/governance/generated/repo_doctor_summary.json",
+            "docs/governance/generated/orphan_prompt_provenance.json",
+            "docs/governance/generated/orphan_prompt_provenance.md",
             "build/codex-os/active-authority-map.json",
             "build/codex-os/ambitions-context-pack.md",
             "build/codex-os/next-action.json",
