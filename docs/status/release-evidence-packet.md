@@ -33,10 +33,10 @@ There is no active hosted CI workflow in this repo.
 PFC32 closeout, 2026-05-18:
 
 - Branch: `main`
-- Commit: `d492ff17964aaa6d9baaf986006d081753ffeb15`
+- Commit: `a8b48c130ca8fdc2e79dc82e2daf445e56b80b69`
 - Command: `./scripts/build-local.sh`
 - Result: exit `0`, `Build Succeeded`
-- Log: `output/logs/build-local-20260518-003229.log`
+- Log: `output/logs/build-local-20260518-004033.log`
 - Scope: local simulator build proof only; no device, signing, TestFlight, App Store, accessibility, privacy, or human-approval claim
 
 ## Required local proof packet
