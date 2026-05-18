@@ -5,7 +5,7 @@
   "changed_canon_files": [],
   "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
   "decision": "select_next_batch",
-  "generated_at": "2026-05-17T19:39:51-04:00",
+  "generated_at": "2026-05-17T20:05:41-04:00",
   "generated_outputs_missing": [],
   "governance_stale_overlays": 0,
   "governance_unresolved": 0,

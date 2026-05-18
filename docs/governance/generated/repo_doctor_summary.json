@@ -13,28 +13,28 @@
       "name": "codex_os_batch_selector",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
+      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
       "name": "codex_os_repair_router",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-performance-check.py",
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"db4244eee9149293d581cc2e0ee6032411381efa7d8457247a98bf9ff26bee21\"\n  },\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"427262ded5597c50e1f19cac4532b86dc07bd023ad2477cf2f1b3966a6c81069\"\n  },\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
       "name": "codex_os_sync_governance",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
+      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
@@ -48,7 +48,7 @@
       "name": "generated_freshness_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2163\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     }
   ],
   "command_names": [
@@ -77,7 +77,7 @@
       "name": "governance_reconcile",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2163\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated"
     },
     {
       "command": "python3 scripts/governance/ambitions-canon-impact-map.py",
@@ -196,7 +196,7 @@
       "name": "generated_freshness_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2163\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-next-action.py",
@@ -210,28 +210,28 @@
       "name": "codex_os_batch_selector",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
+      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
       "name": "codex_os_repair_router",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-performance-check.py",
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"db4244eee9149293d581cc2e0ee6032411381efa7d8457247a98bf9ff26bee21\"\n  },\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"427262ded5597c50e1f19cac4532b86dc07bd023ad2477cf2f1b3966a6c81069\"\n  },\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
       "name": "codex_os_sync_governance",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
+      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
@@ -245,7 +245,7 @@
       "name": "generated_freshness_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2163\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     }
   ],
   "command_status": {
@@ -261,7 +261,7 @@
   },
   "failure_count": 0,
   "failures": [],
-  "generated_at": "2026-05-17T19:39:51-04:00",
+  "generated_at": "2026-05-17T20:05:41-04:00",
   "generated_outputs": [
     "docs/governance/GOVERNANCE_DASHBOARD.md",
     "docs/governance/generated/repo_doctor_summary.md",

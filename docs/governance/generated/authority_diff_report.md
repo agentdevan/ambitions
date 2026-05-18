@@ -15,8 +15,10 @@
 - build/codex-os/sync-report.json
 - build/codex-os/sync-report.md
 - docs/governance/GOVERNANCE_DASHBOARD.md
-- scripts/codex-os/ambitions-codex-os-performance-check.py
-- scripts/codex-os/ambitions-codex-os-sync-governance.py
+- scripts/codex-os/ambitions-codex-os-next-action.py
+- scripts/codex-os/ambitions-codex-os-repair-router.py
+- scripts/governance/ambitions-cleanup-action-plan.py
+- scripts/governance/ambitions-governance-reconcile.py
 
 ## Historical / Archive Changes
 
@@ -30,17 +32,19 @@
 - docs/governance/generated/canon_impact_map.json
 - docs/governance/generated/canon_impact_plan.md
 - docs/governance/generated/canon_propagation_plan.md
+- docs/governance/generated/cleanup_action_plan.md
 - docs/governance/generated/global_train_resequence.json
 - docs/governance/generated/governance_reconciliation_summary.json
 - docs/governance/generated/governance_trend_history.json
 - docs/governance/generated/governance_trend_report.json
 - docs/governance/generated/implementation_expectation_map.json
+- docs/governance/generated/lineage_confidence_scores.json
 - docs/governance/generated/mature_spec_synthesis.md
 - docs/governance/generated/orphan_prompt_audit.md
-- docs/governance/generated/prompt_rewrite_plan.md
 - docs/governance/generated/registry_projection.md
 - docs/governance/generated/repo_doctor_summary.json
 - docs/governance/generated/repo_doctor_summary.md
 - docs/governance/generated/stale_overlay_audit.md
 - docs/governance/generated/supersession_rewrite_plan.md
 - docs/governance/generated/train_lineage_graph.json
+- docs/governance/generated/train_to_implementation_map.json

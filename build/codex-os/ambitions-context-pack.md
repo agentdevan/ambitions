@@ -1,6 +1,6 @@
 # Ambitions Codex OS Context Pack
 
-Generated: 2026-05-17T19:39:51-04:00
+Generated: 2026-05-17T20:05:41-04:00
 
 This pack is generated from live repo files and current governance outputs.
 
@@ -156,85 +156,85 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "389ebb67724d3371d341fe7ce7ed60c710a44c8be107a5d1185b5dafd92ab96f",
+      "sha256": "641ed112c38bfad4a189ff9c1d4858225a2f853436422c607abb15b524d5958d",
       "size": 10710
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "f2d734c93c3f8e0798ec54d327fee0469a4b87890bd4760c021cf59de4bf598c",
+      "sha256": "99936dbf4baae9b3471fa2fb2d74b0fc28518d53f2cc0ca6291adf145db29e75",
       "size": 730814
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.json",
-      "sha256": "1aecba1918b05b23de7ceaae43b09d7cbf940814ead06a35a9d253ad76985f06",
+      "sha256": "0e9c905851e24ad0b9576be0cc7e633b741d1927961fa767cf87bc9f8f90c11e",
       "size": 61551
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.md",
-      "sha256": "ac101c28cf490d03573961ab8e68bfc9b54b9bfc8d5e9f72febb7e567b4756b4",
+      "sha256": "1c92826658b3e2b6331e26c3dc701b0998fc33e4befe6cccc496fa69ccdbf74c",
       "size": 494
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.json",
-      "sha256": "defa86f4d7d9b3cb76564d33e357188248a52385c71d4ffa32354e72f7c3575c",
+      "sha256": "2d92fac0ca9a38e64cd1b0c5c23cf8cda94e0c56c5f46b9b9592d944e25e4836",
       "size": 693
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.md",
-      "sha256": "b9e7a5cdde76d08c17ee67ebf338c427ff799fa2f7b803ae4754e7d8533eb2e2",
+      "sha256": "41d5b517a6dbab98b18f323cd4f4ad02826af4b8be6eff629892039d341cff00",
       "size": 668
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.json",
-      "sha256": "8563d4956d1c88b2f64a6954c3f9c1db3364363c62ed2eaa2a1756cbba8fb83c",
+      "sha256": "3dab3e76517bf2c3cb74756df6740fa2cf132c6cc7f609d03d08472b71dc7cf8",
       "size": 260
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.md",
-      "sha256": "e720867292fbcd4edd6bbc3d78527d7836c6c302b640243d94540480daba963a",
+      "sha256": "f1b868b2484f405f8abccf14779ba5b44f5dbde28f717c3851f42adb24677728",
       "size": 246
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "336203641471b2c001ff436937dcb7bf132c6013def69e8dcc519ed116402bfc",
+      "sha256": "d7a912c6656267eff6f3b9685f7e547386522c86d3dfeb1e404d8c531fea9ce0",
       "size": 747
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.md",
-      "sha256": "fe910fcd0795c1f5342d54d597cacd11fbc014da80cdfa586ce543e567f26ff5",
+      "sha256": "157343164f1ae5afb0b4418e322916dc0680ae6e853a288bc0e73ca005019a18",
       "size": 383
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "a38f930d683a65196d305d1788c32d76f45e3bfb106d2ec6a0804191ca309a2f",
+      "sha256": "467a6bb541aeadba34034c623c31266c2cbef00f794c224c6bb8d36448b9c33d",
       "size": 76192
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.md",
-      "sha256": "377ea3b28a31e1234ed5d6900e6f1513734a593120637f932fce3b901fe0f1d9",
+      "sha256": "d57879cae7d1d66ec91206adcf7beed3f065a97be4cb6315aa4c3a5ab04e7967",
       "size": 912
     }
   ],
   "compatibility_seams": [
     "Plan"
   ],
-  "generated_at": "2026-05-17T19:39:51-04:00",
+  "generated_at": "2026-05-17T20:05:41-04:00",
   "governance_outputs": [
     {
       "exists": true,
       "path": "docs/governance/GOVERNANCE_DASHBOARD.md",
-      "sha256": "e7895d9619b3c3bd33ba78391f1c46d9858e7999e3c48b0c45164ddcbe2a5eb2",
+      "sha256": "e8255a8cf54406a7a09d54f0e7bb541393c8a87f8f8af1a6683118f381a2696e",
       "size": 1423
     },
     {
@@ -246,37 +246,37 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "61cef602cf5368d8007e9d3870d5312d0e7c46fde145246779485476f9c4e0c5",
+      "sha256": "d1a808294ac09da493992ba153951f3c615b1b16ec03449456609ac1eb9e4539",
       "size": 12163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_plan.md",
-      "sha256": "52fc446acb2a65dbce80a5976550abd0ea4ce340d9779e72b892786d7655261c",
+      "sha256": "160ce18b5e5b593b0d847100fa958df662eeb82f1fb7166f920f083e3f415d71",
       "size": 33021
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_map.json",
-      "sha256": "098cb19b070ef3e8dea20d2f30f7c7974d8ac7b676c7c9bf24177433efd8c4a2",
+      "sha256": "3934184ea47473b299604446f36355e484aaaa0875c0a09952db6ec4576e118a",
       "size": 827968
     },
     {
       "exists": true,
       "path": "docs/governance/generated/implementation_expectation_map.json",
-      "sha256": "605428dfdc52ca4e72dffdffe9f8c11557ad3e8f3cf6b33097786126587f74be",
+      "sha256": "958428d23db147f158215fd5ec22d0900b6259ca13c84f91563cf0d2d33bd770",
       "size": 26483
     },
     {
       "exists": true,
       "path": "docs/governance/generated/global_train_resequence.json",
-      "sha256": "67f93bd83dce38302de657a215b77de93cde66f675d369125f22b854094f94e2",
+      "sha256": "29afca6cb0c1b91f49845b7f1a1c312505560f6857eb44f42077d93274c2407a",
       "size": 423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/mature_spec_synthesis.md",
-      "sha256": "5c0d876b395c9288a2a52a3377ffdf743fba79d6b52d7cde2760eba564090e98",
+      "sha256": "9a73ea1955b5f49acbb644463a82f8cae496fd67636aa2a6160bf34827411c59",
       "size": 18518
     },
     {
@@ -300,13 +300,13 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "docs/governance/generated/orphan_prompt_audit.md",
-      "sha256": "8a1a4380e51c16d8fcd6c8c718ab863b8850fd8677624b4d8cc5e35ec7549508",
+      "sha256": "fb4ddd70489ec4fce30ee033ced2ddb37db6f0f72101b18bdb4b6d1f9b793724",
       "size": 163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/stale_overlay_audit.md",
-      "sha256": "a3a10c0cbbc5c66de57d61b819bd4b00171fa423c5c834a78042e84e0e6a11d3",
+      "sha256": "41ddee63dd99a3be230da9defe14834df817e3b254c8742f13c91c8a8a36845a",
       "size": 150
     },
     {
@@ -318,13 +318,13 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "docs/governance/generated/governance_reconciliation_summary.json",
-      "sha256": "e1388ff36b6d3d5b83ccfcd4a60f401d0693fb90ac7168e0b621aac9462e3eac",
+      "sha256": "a7fbe41e88dd66766c7a5b2f1b7c6b25ac2d98038de6eeffa6a18f721dc8f43f",
       "size": 1694
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_lineage_graph.json",
-      "sha256": "441e5caf330e9719d6c5e0ee246fe83931fbd96220764e113bb3f642c35b9678",
+      "sha256": "d07db854b84bac024056d1c0a51e0ffc8e74940a184ab9e5e86db60bffa22a9b",
       "size": 5996846
     },
     {
@@ -340,7 +340,7 @@ This pack is generated from live repo files and current governance outputs.
       "size": 1093859
     }
   ],
-  "head_sha": "143614ec58423d42934b904dd0aa227d6870eed5",
+  "head_sha": "4e7fca307bebd2d1a1676b51ebe2c5208e9bb3d9",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "top_level_ia": [
     "Today",
@@ -356,7 +356,7 @@ This pack is generated from live repo files and current governance outputs.
 
 # Ambitions Governance Dashboard
 
-Generated: 2026-05-17T19:39:51-04:00
+Generated: 2026-05-17T20:05:41-04:00
 
 ## Snapshot
 
@@ -471,7 +471,7 @@ Repo doctor passed.
 
 # Canon Impact Plan
 
-Generated: 2026-05-17T19:39:51-04:00
+Generated: 2026-05-17T20:05:41-04:00
 
 ## Changed Canon Files
 
@@ -1782,7 +1782,7 @@ Generated: 2026-05-17T19:39:51-04:00
       "You"
     ]
   },
-  "generated_at": "2026-05-17T19:39:51-04:00"
+  "generated_at": "2026-05-17T20:05:41-04:00"
 }
 ```
 
@@ -1790,7 +1790,7 @@ Generated: 2026-05-17T19:39:51-04:00
 
 ```json
 {
-  "generated_at": "2026-05-17T19:39:51-04:00",
+  "generated_at": "2026-05-17T20:05:41-04:00",
   "lanes": [
     "governance_repair",
     "canon_propagation",
@@ -12146,7 +12146,7 @@ Generated: 2026-05-17T19:39:51-04:00
     ".yml": 18,
     "[no_ext]": 432
   },
-  "generated_at": "2026-05-17T19:39:51-04:00",
+  "generated_at": "2026-05-17T20:05:41-04:00",
   "notable_paths": {
     "app_entry": {
       "exists": true,
@@ -12235,7 +12235,7 @@ Generated: 2026-05-17T19:39:51-04:00
     "historical_markers": 2846,
     "plan_language_residue": 7127
   },
-  "generated_at": "2026-05-17T19:39:51-04:00",
+  "generated_at": "2026-05-17T20:05:41-04:00",
   "score": 0
 }
 ```
@@ -12258,7 +12258,7 @@ Status: GREEN
 
 # Generated Stale Overlay Audit
 
-Generated: 2026-05-17T19:39:51-04:00
+Generated: 2026-05-17T20:05:41-04:00
 
 | Kind | Path | Line | Text |
 |---|---|---:|---|
@@ -12268,7 +12268,7 @@ Generated: 2026-05-17T19:39:51-04:00
 
 # Generated Orphan Prompt Audit
 
-Generated: 2026-05-17T19:39:51-04:00
+Generated: 2026-05-17T20:05:41-04:00
 
 | Train | Prompt Files | State | Warning |
 |---|---:|---|---|
@@ -12290,14 +12290,14 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
 
 ```json
 {
-  "generated_at": "2026-05-17T19:39:51-04:00",
+  "generated_at": "2026-05-17T20:05:41-04:00",
   "missing": [],
   "missing_count": 0,
   "outputs": [
     {
       "exists": true,
       "path": "docs/governance/GOVERNANCE_DASHBOARD.md",
-      "sha256": "e7895d9619b3c3bd33ba78391f1c46d9858e7999e3c48b0c45164ddcbe2a5eb2",
+      "sha256": "e8255a8cf54406a7a09d54f0e7bb541393c8a87f8f8af1a6683118f381a2696e",
       "size": 1423
     },
     {
@@ -12309,37 +12309,37 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "61cef602cf5368d8007e9d3870d5312d0e7c46fde145246779485476f9c4e0c5",
+      "sha256": "d1a808294ac09da493992ba153951f3c615b1b16ec03449456609ac1eb9e4539",
       "size": 12163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_plan.md",
-      "sha256": "52fc446acb2a65dbce80a5976550abd0ea4ce340d9779e72b892786d7655261c",
+      "sha256": "160ce18b5e5b593b0d847100fa958df662eeb82f1fb7166f920f083e3f415d71",
       "size": 33021
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_map.json",
-      "sha256": "098cb19b070ef3e8dea20d2f30f7c7974d8ac7b676c7c9bf24177433efd8c4a2",
+      "sha256": "3934184ea47473b299604446f36355e484aaaa0875c0a09952db6ec4576e118a",
       "size": 827968
     },
     {
       "exists": true,
       "path": "docs/governance/generated/implementation_expectation_map.json",
-      "sha256": "605428dfdc52ca4e72dffdffe9f8c11557ad3e8f3cf6b33097786126587f74be",
+      "sha256": "958428d23db147f158215fd5ec22d0900b6259ca13c84f91563cf0d2d33bd770",
       "size": 26483
     },
     {
       "exists": true,
       "path": "docs/governance/generated/global_train_resequence.json",
-      "sha256": "67f93bd83dce38302de657a215b77de93cde66f675d369125f22b854094f94e2",
+      "sha256": "29afca6cb0c1b91f49845b7f1a1c312505560f6857eb44f42077d93274c2407a",
       "size": 423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/mature_spec_synthesis.md",
-      "sha256": "5c0d876b395c9288a2a52a3377ffdf743fba79d6b52d7cde2760eba564090e98",
+      "sha256": "9a73ea1955b5f49acbb644463a82f8cae496fd67636aa2a6160bf34827411c59",
       "size": 18518
     },
     {
@@ -12363,13 +12363,13 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "docs/governance/generated/orphan_prompt_audit.md",
-      "sha256": "8a1a4380e51c16d8fcd6c8c718ab863b8850fd8677624b4d8cc5e35ec7549508",
+      "sha256": "fb4ddd70489ec4fce30ee033ced2ddb37db6f0f72101b18bdb4b6d1f9b793724",
       "size": 163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/stale_overlay_audit.md",
-      "sha256": "a3a10c0cbbc5c66de57d61b819bd4b00171fa423c5c834a78042e84e0e6a11d3",
+      "sha256": "41ddee63dd99a3be230da9defe14834df817e3b254c8742f13c91c8a8a36845a",
       "size": 150
     },
     {
@@ -12381,13 +12381,13 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "docs/governance/generated/governance_reconciliation_summary.json",
-      "sha256": "e1388ff36b6d3d5b83ccfcd4a60f401d0693fb90ac7168e0b621aac9462e3eac",
+      "sha256": "a7fbe41e88dd66766c7a5b2f1b7c6b25ac2d98038de6eeffa6a18f721dc8f43f",
       "size": 1694
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_lineage_graph.json",
-      "sha256": "441e5caf330e9719d6c5e0ee246fe83931fbd96220764e113bb3f642c35b9678",
+      "sha256": "d07db854b84bac024056d1c0a51e0ffc8e74940a184ab9e5e86db60bffa22a9b",
       "size": 5996846
     },
     {
@@ -12405,73 +12405,73 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "8064d2804dd32e7815826da6abc570f04dcd7314b5b1af93a50891fed2a11aa5",
+      "sha256": "a1fcedbcb6c7fbd88bdb2e495ab1562ff923d9e6feb68fc410c60063f1422117",
       "size": 10710
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "f2d734c93c3f8e0798ec54d327fee0469a4b87890bd4760c021cf59de4bf598c",
+      "sha256": "99936dbf4baae9b3471fa2fb2d74b0fc28518d53f2cc0ca6291adf145db29e75",
       "size": 730814
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.json",
-      "sha256": "1aecba1918b05b23de7ceaae43b09d7cbf940814ead06a35a9d253ad76985f06",
+      "sha256": "0e9c905851e24ad0b9576be0cc7e633b741d1927961fa767cf87bc9f8f90c11e",
       "size": 61551
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.md",
-      "sha256": "ac101c28cf490d03573961ab8e68bfc9b54b9bfc8d5e9f72febb7e567b4756b4",
+      "sha256": "1c92826658b3e2b6331e26c3dc701b0998fc33e4befe6cccc496fa69ccdbf74c",
       "size": 494
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.json",
-      "sha256": "defa86f4d7d9b3cb76564d33e357188248a52385c71d4ffa32354e72f7c3575c",
+      "sha256": "2d92fac0ca9a38e64cd1b0c5c23cf8cda94e0c56c5f46b9b9592d944e25e4836",
       "size": 693
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.md",
-      "sha256": "b9e7a5cdde76d08c17ee67ebf338c427ff799fa2f7b803ae4754e7d8533eb2e2",
+      "sha256": "41d5b517a6dbab98b18f323cd4f4ad02826af4b8be6eff629892039d341cff00",
       "size": 668
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.json",
-      "sha256": "8563d4956d1c88b2f64a6954c3f9c1db3364363c62ed2eaa2a1756cbba8fb83c",
+      "sha256": "3dab3e76517bf2c3cb74756df6740fa2cf132c6cc7f609d03d08472b71dc7cf8",
       "size": 260
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.md",
-      "sha256": "e720867292fbcd4edd6bbc3d78527d7836c6c302b640243d94540480daba963a",
+      "sha256": "f1b868b2484f405f8abccf14779ba5b44f5dbde28f717c3851f42adb24677728",
       "size": 246
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "336203641471b2c001ff436937dcb7bf132c6013def69e8dcc519ed116402bfc",
+      "sha256": "d7a912c6656267eff6f3b9685f7e547386522c86d3dfeb1e404d8c531fea9ce0",
       "size": 747
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.md",
-      "sha256": "fe910fcd0795c1f5342d54d597cacd11fbc014da80cdfa586ce543e567f26ff5",
+      "sha256": "157343164f1ae5afb0b4418e322916dc0680ae6e853a288bc0e73ca005019a18",
       "size": 383
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "a38f930d683a65196d305d1788c32d76f45e3bfb106d2ec6a0804191ca309a2f",
+      "sha256": "467a6bb541aeadba34034c623c31266c2cbef00f794c224c6bb8d36448b9c33d",
       "size": 76192
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.md",
-      "sha256": "377ea3b28a31e1234ed5d6900e6f1513734a593120637f932fce3b901fe0f1d9",
+      "sha256": "d57879cae7d1d66ec91206adcf7beed3f065a97be4cb6315aa4c3a5ab04e7967",
       "size": 912
     }
   ],
@@ -12497,28 +12497,28 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
       "name": "codex_os_batch_selector",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
+      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
       "name": "codex_os_repair_router",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-performance-check.py",
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"db4244eee9149293d581cc2e0ee6032411381efa7d8457247a98bf9ff26bee21\"\n  },\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"427262ded5597c50e1f19cac4532b86dc07bd023ad2477cf2f1b3966a6c81069\"\n  },\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
       "name": "codex_os_sync_governance",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
+      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
@@ -12554,7 +12554,7 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
       "name": "governance_reconcile",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2163\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated"
     },
     {
       "command": "python3 scripts/governance/ambitions-canon-impact-map.py",
@@ -12673,7 +12673,7 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
       "name": "generated_freshness_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2163\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-next-action.py",
@@ -12687,28 +12687,28 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
       "name": "codex_os_batch_selector",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
+      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
       "name": "codex_os_repair_router",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-performance-check.py",
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"db4244eee9149293d581cc2e0ee6032411381efa7d8457247a98bf9ff26bee21\"\n  },\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"427262ded5597c50e1f19cac4532b86dc07bd023ad2477cf2f1b3966a6c81069\"\n  },\n  \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
       "name": "codex_os_sync_governance",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
+      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T20:05:41-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
@@ -12729,7 +12729,7 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
   },
   "failure_count": 0,
   "failures": [],
-  "generated_at": "2026-05-17T19:39:51-04:00",
+  "generated_at": "2026-05-17T20:05:41-04:00",
   "generated_outputs": [
     "docs/governance/GOVERNANCE_DASHBOARD.md",
     "docs/governance/generated/repo_doctor_summary.md",
