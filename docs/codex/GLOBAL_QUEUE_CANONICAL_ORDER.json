@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC16",
-  "next_eligible_title": "Release Truth Machine",
+  "next_eligible_batch": "EFC17",
+  "next_eligible_title": "App Store Creative And Reviewer Package",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -964,16 +964,16 @@
     {
       "id": "EFC16",
       "title": "Release Truth Machine",
-      "classification": "executable_now",
-      "reason": "EFC15 is complete / green. EFC16 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC15.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC16 Release Truth Machine is complete / Green with closeout in docs/audits/efc16-batch-closeout-report.md and no implementation executed. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC17",
       "title": "App Store Creative And Reviewer Package",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "classification": "executable_now",
+      "reason": "EFC16 is complete / Green. EFC17 is the next eligible batch.",
       "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
       "efc_applicability": "invoked"
     },

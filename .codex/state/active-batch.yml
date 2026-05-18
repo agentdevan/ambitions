@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "EFC15 Localization And Globalization Readiness"
+  batch: "EFC16 Release Truth Machine"
   previous_batch: "EFC15 Localization And Globalization Readiness"
   previous_result: "green"
-  next_eligible_batch: "EFC16 Release Truth Machine"
+  next_eligible_batch: "EFC17 App Store Creative And Reviewer Package"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
