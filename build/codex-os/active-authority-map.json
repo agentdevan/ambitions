@@ -7,9 +7,9 @@
       "production_swift_allowed": true
     },
     "current": {
-      "batch": "EFC08 Source Freshness Commons And Operations",
-      "next_eligible_batch": "EFC09 Accessibility Shadow Surface System",
-      "previous_batch": "EFC08 Source Freshness Commons And Operations",
+      "batch": "EFC09 Accessibility Shadow Surface System",
+      "next_eligible_batch": "EFC10 Real Device Proof Lab",
+      "previous_batch": "EFC09 Accessibility Shadow Surface System",
       "previous_result": "accepted_yellow",
       "train": "Global full-stack execution"
     },
@@ -150,127 +150,127 @@
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "176d5ef3983c7a625d5be95934a5cf60a3986c4180cea9f28dba906c9f2ce237",
-      "size": 11141
+      "sha256": "9696b18f555f03c7bf004ff84d12a06fecccaa8c75e85093b5e39c5d1b80d34b",
+      "size": 11119
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "12e4f8573608040ba372db68e60d7aad383b3f926bd526c2fb768b8d9d60cfc2",
-      "size": 731836
+      "sha256": "ffca0c8b452bc9c753396901e5db99d558b9ee2139c85393e4d208d9f3d3670a",
+      "size": 731814
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.json",
-      "sha256": "90c32508d24d106de3ab1a9c7492f313b79b958771711b739d4a52e57c1798e5",
+      "sha256": "92a51f74d65f897f53dda44bc699b7650ad16bc6e6b836a021a20c415850d502",
       "size": 61923
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.md",
-      "sha256": "eef1134f5615f67aaaec71459d09624ba39afe9bb96e238641e6254d4a01dd31",
+      "sha256": "8d22529c9d2c32d3be7351cf802b7286f96e8676b6454732a797a179e5848955",
       "size": 454
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.json",
-      "sha256": "3c419eb682b010067c36fdc456b697cfcf27c4bf39645d13c61f2d863156ef07",
+      "sha256": "c7478717bad1b2e1e9e22ce939180f3cb2f1810ecbe40ea57da2596ac0910bef",
       "size": 761
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.md",
-      "sha256": "18b16061184af3ea6500a8acaa415bba30fb9af21bca726e9afa3b802076adc3",
+      "sha256": "9f12295669b6f21699721f0d588b56861820c2ca81d87329f687dfd9c1561103",
       "size": 685
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.json",
-      "sha256": "4df5f9223032fc342b99a5d681eddccd09935e55a68ee092afa0f38cd1aba836",
+      "sha256": "583ab6b2e0e86d5797892f15793231d4b6bc495406ba9e4cfb43d092c8503cf8",
       "size": 260
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.md",
-      "sha256": "71eb4b127d8617d0c41fefc41c9a823fd91d03772a01b0fda9519384a006268b",
+      "sha256": "53faad5fc02e7984d67cafe38ee5b606bcd903a0b77d482afa227f090464c3ef",
       "size": 246
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "b61344401ed46c4411833f92db07e9f9edb0071dee81a22bd8f925dbfa18d139",
+      "sha256": "c67de2f4989ece9d4f7d23c0d738a711fb493f73f8509f0869b88f35b1b260f9",
       "size": 747
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.md",
-      "sha256": "722943658c5087bdca92d510e40251037f2070e3fefb3c84db0ecc1caf056753",
+      "sha256": "0890eaea5485726cf59bba73f348a0ccc16eac07a85f0030e42a769f43e0540c",
       "size": 383
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "9e8719bfb1a90fde736931624e2468f05f892f9aed512c02655f472615970b18",
+      "sha256": "b363fe51e8b5bf8b174089312aa2b98fe90377d187ba00c09d0fab93203c7409",
       "size": 76732
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.md",
-      "sha256": "f23f518ea0784dce32115b3b199b42cf6f2ddd2ad639690e90dd6feea443bdf0",
+      "sha256": "9dd037da7af267bcfdcc4c0a979a04ec9726c82c0cad49b17560dccdc0ded9f5",
       "size": 832
     }
   ],
   "compatibility_seams": [
     "Plan"
   ],
-  "generated_at": "2026-05-18T08:52:33-04:00",
+  "generated_at": "2026-05-18T09:13:30-04:00",
   "governance_outputs": [
     {
       "exists": true,
       "path": "docs/governance/GOVERNANCE_DASHBOARD.md",
-      "sha256": "2f93c651eab30e35f1a7f95c3c86dd310bd89148af2a7896e85b5b3c367ed635",
+      "sha256": "ad0eac7a5a50020fa40786d3ce868f245d920de81d9c02704564c40215f6f3a5",
       "size": 1383
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.md",
-      "sha256": "5c308394b75414ac57b15620a1154c5dab8c0be87d4d87db5a067c0871deb5ba",
+      "sha256": "7f23f810217a3b014f52f6ccf38792bcb052483c05643783298ffc26749fa1b6",
       "size": 3229
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "8938b6841ba64bad3f5fef689480e01162e670e300ec4742fc556cfdee819dd5",
+      "sha256": "2a97075703639ec9f13dce4f363ba7aeca6028601a0fbfacc9b72f79a1f364f4",
       "size": 12663
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_plan.md",
-      "sha256": "8eee7b7c11396bfeefd9da20cc1c379a5193515e7b23b9039d5ac7de54f5ffad",
+      "sha256": "e3b56a002b9f4ffdb57d250959ee0932f7caabb3f08a8ab720f10951916e4ba5",
       "size": 33038
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_map.json",
-      "sha256": "3eb9e29d984725e5470a5f03f04a047feacd078931410ec45649028cd63e41a7",
+      "sha256": "d5678c1d9451ed4b6aaf5444443bf74b9e7bb105f6a74e4c64a5af6b83f118b3",
       "size": 831927
     },
     {
       "exists": true,
       "path": "docs/governance/generated/implementation_expectation_map.json",
-      "sha256": "b4f93f7de8b5ddb2ac61498ea3da9cbfc848f8a9ed261bffa4c0591d59bf6af9",
+      "sha256": "c647d9bea018a641f65144ae4378e7d04f7492489ccaa5e49b295e7b75097f20",
       "size": 26483
     },
     {
       "exists": true,
       "path": "docs/governance/generated/global_train_resequence.json",
-      "sha256": "8576dc1a8cd5881b0db1a69d9d117b72bfdd191ade1692bef430f3abd5657ad5",
+      "sha256": "306225367ef4224b2ee45a868370087784bc4ea6b8bd9ca7015b3ea899bf2ec8",
       "size": 423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/mature_spec_synthesis.md",
-      "sha256": "5f67e3ef5462b1706ba43a07cb628c77346a341b219373f83305c9447a9c85ec",
+      "sha256": "db2e555535220cffb063aabeb5ccdd2d570f45e391af6e86e9e76b6d18ad0c73",
       "size": 18518
     },
     {
@@ -282,8 +282,8 @@
     {
       "exists": true,
       "path": "docs/governance/generated/supersession_rewrite_plan.md",
-      "sha256": "70f6e2aa371d50d60ca1f674af046789647e625ac53531d5a768cd8333c51960",
-      "size": 88696
+      "sha256": "17c81ae40a22bc8f101a584e26531c69ba03635867dcdbe02cd527e62e316765",
+      "size": 88767
     },
     {
       "exists": true,
@@ -294,47 +294,47 @@
     {
       "exists": true,
       "path": "docs/governance/generated/orphan_prompt_audit.md",
-      "sha256": "a8ac18fb3fce3b405f5d76c8cd7a9ebbac149f903db8c0b869fdef811e3a3584",
+      "sha256": "8f85e70fa560048663e4167ce2a3ab9c2233479375472fce0eef3604ca452af2",
       "size": 163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/stale_overlay_audit.md",
-      "sha256": "e46417e1e00159b6ac04c4b64b76708e58221e408d8cd1fda9f069314f9de84d",
+      "sha256": "b70b63c9679add733a3c491496fac24f55716d507452b48b7337beef62114566",
       "size": 150
     },
     {
       "exists": true,
       "path": "docs/governance/generated/architecture_debt_score.json",
-      "sha256": "01fe8fd7581f06090f2a823e9b531cfc8ae3c110ce97666917ed9928031dcc07",
+      "sha256": "c0a56b8ad4282b3119a605fa2bfc7c0fc77fa32b482fa05ca236d6d7b4514f27",
       "size": 130
     },
     {
       "exists": true,
       "path": "docs/governance/generated/governance_reconciliation_summary.json",
-      "sha256": "0451afb3ca4ad6c1407f5134da7da78bb4d3cb5fa85329449734865606b63e5a",
+      "sha256": "72bdc5632675039d18234f7b7df892232488f59df35d71ce69f0c13ede578afd",
       "size": 1694
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_lineage_graph.json",
-      "sha256": "93bfc514899088b8ab04a13078fb9e1d6e26cc9c1c10c4490f4c76fe8069da6e",
-      "size": 6767097
+      "sha256": "143bb937bfa0dfff8c5b359b80d6f5b5cddc5cbbc554dbf009fa9152b00027dd",
+      "size": 6794118
     },
     {
       "exists": true,
       "path": "docs/governance/generated/proof_linkage_graph.json",
-      "sha256": "0dacfd0333633146279de335552e455461d6e62bfccaa25d7bcdeadc1aad0e9d",
-      "size": 1913007
+      "sha256": "368bf52f803d437a19b06fe05cd69ab9795ab729be6548ef66f58e3ac295f8f7",
+      "size": 1924003
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_to_implementation_map.json",
-      "sha256": "68130c46ba979ef4829f465ad3b63735af93b5cb6717d7569a773cbc37645ace",
-      "size": 1142974
+      "sha256": "9d0a4ef91b4b6e4c305c0632750990996d7ecf2a9838f07fb02525573a9706e0",
+      "size": 1144733
     }
   ],
-  "head_sha": "5449848f1982aa492a67f32d88ff7b661888f823",
+  "head_sha": "ef15c8ae56b33bccdc8630c0b1c4240507a7d6e6",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "top_level_ia": [
     "Today",

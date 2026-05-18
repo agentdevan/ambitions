@@ -908,17 +908,17 @@
     {
       "id": "EFC09",
       "title": "Accessibility Shadow Surface System",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC09 is absorbed as overlay / do-not-run coverage; preserve the canonical batch ID and order, but do not execute implementation from this record.",
-      "blocking_prerequisites": "Do not run as an implementation batch; preserve canonical coverage only.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC09 Accessibility Shadow Surface System is complete / Accepted Yellow with closeout in docs/audits/efc09-batch-closeout-report.md and commit ef15c8ae56b33bccdc8630c0b1c4240507a7d6e6 committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC10",
       "title": "Real Device Proof Lab",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC09 is complete / accepted yellow. EFC10 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC09.",
       "efc_applicability": "invoked"
     },
     {
