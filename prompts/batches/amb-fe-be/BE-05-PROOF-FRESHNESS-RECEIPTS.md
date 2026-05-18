@@ -1,0 +1,88 @@
+<!-- AMBITIONS_RUNNER_REQUIRED: true -->
+<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+
+# BE-05-PROOF-FRESHNESS-RECEIPTS
+
+## Batch Identity
+
+- Batch ID: `BE-05-PROOF-FRESHNESS-RECEIPTS`
+- Objective: add durable proof, receipts, closure, recovery, source freshness, lineage, and proof trails.
+- Stage: backend/implementation
+
+## Active Source Truth to Inspect
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `Native/Ambitions/Domain/`
+- `Native/Ambitions/Persistence/`
+- `Native/Ambitions/Services/`
+- `Native/Ambitions/Features/You/`
+- `docs/status/release-evidence-packet.md`
+
+## Allowed Scope
+
+- Proof/receipt/closure/recovery code and tests only.
+- Additive lineage and freshness plumbing only.
+
+## Forbidden Scope
+
+- No release proof claims, no device proof claims.
+- No hidden mutation or silent repair.
+
+## Expected Changes
+
+- Make proof trails durable and inspectable.
+- Keep source freshness explicit.
+- Preserve local-only receipts.
+
+## Validation Expectations
+
+- `git status --short`
+- `git diff --check`
+- focused `xcodebuild` tests
+- `./scripts/build-local.sh`
+
+## Visual Proof Expectations
+
+- None unless receipts become a UI surface.
+
+## Accessibility Proof Expectations
+
+- None unless receipts become a UI surface.
+
+## Hard Red Stop Conditions
+
+- Proof becomes ungrounded from source.
+- Any claim jumps to release readiness.
+- Any durable receipt path becomes cloudy or hosted.
+
+## Rollback Expectations
+
+- Revert only the proof/receipt changes made by this batch.
+
+## Runner Command
+
+```bash
+ALLOW_DIRTY=1 AUTO_BRANCH=0 AUTO_COMMIT=0 ACCESS_MODE=full \
+  scripts/ambitions-codex-train.sh \
+  BE-05-PROOF-FRESHNESS-RECEIPTS \
+  prompts/batches/amb-fe-be/BE-05-PROOF-FRESHNESS-RECEIPTS.md
+```
+
+## Final Report Format
+
+- Status
+- Summary
+- Repo OS / Repo Doctor integration
+- Files changed
+- Installed train location
+- Recommended next runner command
+- Full recommended execution order
+- Validation
+- Classification
+- Risks / blockers
+- Worktree hygiene
+- Rollback
+- Next decision needed from user

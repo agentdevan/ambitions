@@ -20,6 +20,10 @@ Ambitions 3.0 is the active rebuild source of truth. For current execution and h
 
 Ambitions 2.0 docs remain preserved historical/supporting context unless the 3.0 source override explicitly keeps a domain binding where 3.0 has not replaced it.
 
+Supporting installer package:
+
+- AMB-FE-BE implementation train docs and prompts are installed under `docs/codex/batch-trains/amb-fe-be/` and `prompts/batches/amb-fe-be/`. They are discoverability assets only and do not alter the active queue or imply implementation proof.
+
 ## Ambitions 4.0 Execution Program Status
 
 Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It does not claim release readiness, App Store readiness, TestFlight readiness, physical-device proof, platform proof, public accessibility proof, PXOS implementation, Signature Interface implementation, Product Depth implementation, or AmbitionsOS implementation.

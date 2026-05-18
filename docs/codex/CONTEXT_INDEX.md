@@ -44,6 +44,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - Ambitions 3.0 is active for product, front-end, product language, primitive architecture, implementation sequencing, repo hygiene, dependency discipline, and handoff readiness.
 - Older 1.0/2.0/v2/Waves/D/M/R material is implementation history or supporting context only where Ambitions 3.0 explicitly keeps a domain binding.
 - `docs/codex/BATCH_REGISTRY.md` is implementation status truth only. It does not override Ambitions 3.0 product direction.
+- AMB-FE-BE implementation train docs and prompts are installed under `docs/codex/batch-trains/amb-fe-be/` and `prompts/batches/amb-fe-be/`; they are supporting installer assets only and do not change the active queue.
 - `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md` is the highest-priority
   overlay for remaining cross-train execution. It inserts FCP flagship
   completion, PFC platform/framework/compliance completion, and the active

@@ -35,6 +35,7 @@ Active repo authority starts in [`truth/README.md`](truth/README.md). If this in
 - `product-canon/` is supporting product canon.
 - `validation/` is the local proof and release-gate portal.
 - `history/` is the historical archive portal.
+- `codex/batch-trains/amb-fe-be/` is the installed AMB-FE-BE train package portal.
 
 ## Supporting areas
 
