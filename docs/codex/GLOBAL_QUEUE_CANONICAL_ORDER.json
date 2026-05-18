@@ -956,17 +956,17 @@
     {
       "id": "EFC15",
       "title": "Localization And Globalization Readiness",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC15 is preserved as overlay-only/do-not-run coverage; implementation execution stays blocked until active truth reauthorizes it.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC15 Localization And Globalization Readiness is complete / Green with closeout in docs/audits/efc15-batch-closeout-report.md and commit 1eaf414dba7064d9b7793753ed7231d6ceca3cff committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC16",
       "title": "Release Truth Machine",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC15 is complete / green. EFC16 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC15.",
       "efc_applicability": "invoked"
     },
     {
