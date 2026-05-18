@@ -5,6 +5,36 @@ enum AmbitionsRuntimeClientKind: String, Codable, CaseIterable, Sendable, Equata
     case bedsideRitualCompanion = "bedside_ritual_companion"
 }
 
+struct PrivateLifeRuntimeBoundary: Sendable, Equatable {
+    let usesSwiftDataPersistence: Bool
+    let usesRepositoryBackedMemory: Bool
+    let syncBackendKind: SyncBackendKind
+    let hasHostedBackend: Bool
+    let hasRemoteIntelligenceBackend: Bool
+    let hasExternalCloudLLMDependency: Bool
+    let allowsExternalSideEffectsInsideUnitOfWorkBoundaries: Bool
+
+    static let localOnly = PrivateLifeRuntimeBoundary(
+        usesSwiftDataPersistence: true,
+        usesRepositoryBackedMemory: true,
+        syncBackendKind: .localOnly,
+        hasHostedBackend: false,
+        hasRemoteIntelligenceBackend: false,
+        hasExternalCloudLLMDependency: false,
+        allowsExternalSideEffectsInsideUnitOfWorkBoundaries: false
+    )
+
+    var isLocalOnly: Bool {
+        usesSwiftDataPersistence &&
+            usesRepositoryBackedMemory &&
+            syncBackendKind == .localOnly &&
+            hasHostedBackend == false &&
+            hasRemoteIntelligenceBackend == false &&
+            hasExternalCloudLLMDependency == false &&
+            allowsExternalSideEffectsInsideUnitOfWorkBoundaries == false
+    }
+}
+
 struct AmbitionsRuntimeClientContext: Codable, Sendable, Equatable {
     let kind: AmbitionsRuntimeClientKind
     let displayName: String
@@ -24,6 +54,7 @@ struct AmbitionsRuntimeClientContext: Codable, Sendable, Equatable {
 }
 
 struct AmbitionsRuntimeCapabilities: Sendable, Equatable {
+    let privateLifeRuntimeBoundary: PrivateLifeRuntimeBoundary
     let syncBackendKind: SyncBackendKind
     let trustPosture: PortableTrustPosture
     let usesRepositoryBackedMemory: Bool
@@ -34,6 +65,7 @@ struct AmbitionsRuntimeCapabilities: Sendable, Equatable {
     let hasRemoteIntelligenceBackend: Bool
 
     static let currentLocalRuntime = AmbitionsRuntimeCapabilities(
+        privateLifeRuntimeBoundary: .localOnly,
         syncBackendKind: .localOnly,
         trustPosture: .localOnly,
         usesRepositoryBackedMemory: true,

@@ -66,6 +66,8 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         let expectedKnowledgeStatus = await knowledgeProvider.status(now: Date(timeIntervalSince1970: 1_776_600_000))
 
         XCTAssertEqual(context.clientContext.kind, .iphoneApp)
+        XCTAssertEqual(context.capabilities.privateLifeRuntimeBoundary, .localOnly)
+        XCTAssertTrue(context.capabilities.privateLifeRuntimeBoundary.isLocalOnly)
         XCTAssertEqual(context.capabilities.syncBackendKind, .localOnly)
         XCTAssertFalse(context.capabilities.hasRemoteIntelligenceBackend)
         XCTAssertEqual(context.syncStatus.detail, "Ambitions is running in explicit local-only mode.")
@@ -116,6 +118,8 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         )
 
         XCTAssertEqual(runtime.clientContext.kind, .iphoneApp)
+        XCTAssertEqual(runtime.capabilities.privateLifeRuntimeBoundary, .localOnly)
+        XCTAssertTrue(runtime.capabilities.privateLifeRuntimeBoundary.isLocalOnly)
         XCTAssertEqual(runtime.capabilities.syncBackendKind, .localOnly)
         XCTAssertNotNil(runtime.todayService as? NotificationSchedulingTodayService)
         XCTAssertNotNil(runtime.goalsService as? NotificationSchedulingGoalsService)
