@@ -1,19 +1,21 @@
 # FCP27 Batch Closeout Report
 
 ## Status
-Completed (Green: current-run evidence refresh only; no app-source changes in Phase 02)
+Completed (Green: current-run evidence refresh plus Phase 04 report-context repair only; no app-source changes)
 
 ## Run Context
 - Batch ID: `FCP27`
 - Current run directory: `.codex/runs/FCP27/20260518T021037Z`
 - Branch: `main`
-- Commit: `0f85b5003f4b07bd7a7684d6b18ed98d14789a97`
+- Starting commit: `0f85b5003f4b07bd7a7684d6b18ed98d14789a97`
+- Current evidence commit at Phase 04 start: `82d23f6a8 Close FCP27 evidence refresh`
 
 ## Scope Summary
 - This phase updated the batch closeout report only.
 - No production app source files were changed in this phase.
 - No generated Xcode project, package, signing, entitlement, workflow, or release-automation files were touched.
 - No UI/test source file was touched, so no new rendered UI proof was required for this phase.
+- Phase 04 repaired report context only after the Phase 03 Green review: current HEAD/ahead-state evidence was refreshed without broadening architecture or touching app source.
 
 ## Source Truth Inspected
 - `docs/truth/README.md`
@@ -32,12 +34,13 @@ Completed (Green: current-run evidence refresh only; no app-source changes in Ph
 - `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json`
 - `docs/native-build-and-release.md`
 - `docs/audits/fcp27-batch-closeout-report.md`
+- Phase 03 review handoff for FCP27
 
 ## Validation Commands and Exit Codes
 
 ### Verified
 - `git status --short --branch`: exit `0`
-  - Result: `main...origin/main [ahead 2]`
+  - Result after Phase 03 commit and before Phase 04 report repair: `main...origin/main [ahead 3]`
 - `git fetch origin --prune`: exit `0`
   - Result: local `main` remained ahead of `origin/main` with no incoming remote changes.
 - `git diff --check`: exit `0`
@@ -58,7 +61,8 @@ Completed (Green: current-run evidence refresh only; no app-source changes in Ph
 - `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer ./scripts/build-local.sh`: exit `0`
   - Result: simulator build succeeded
   - Destination: `platform=iOS Simulator,name=iPhone 17`
-  - Log: `output/logs/build-local-20260517-222202.log`
+  - Phase 03 log: `output/logs/build-local-20260517-222202.log`
+  - Phase 04 repair-rerun log: `output/logs/build-local-20260517-222818.log`
   - Evidence: `** BUILD SUCCEEDED **`
 - `bash scripts/fet-visual-qa-packet-check.sh`: exit `0`
   - Result: advisory read-only check only
@@ -67,6 +71,38 @@ Completed (Green: current-run evidence refresh only; no app-source changes in Ph
 - `bash scripts/sig-accessibility-evidence-check.sh`: exit `0`
   - Result: advisory read-only accessibility evidence check only
   - Manual VoiceOver / device-band accessibility proof remains unrecorded
+  - No public accessibility claim was made
+
+### Phase 04 Repair Rerun
+- `git status --short --branch`: exit `0`
+  - Result: `main...origin/main [ahead 3]` with only `docs/audits/fcp27-batch-closeout-report.md` modified during repair.
+- `git diff --check`: exit `0`
+- Queue JSON checks:
+  - `python3 -m json.tool docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json >/tmp/fcp27-p4-order-json-ok`: exit `0`
+  - `python3 -m json.tool docs/codex/AMB_REMAINING_BATCH_REFERENCE.json >/tmp/fcp27-p4-ref-json-ok`: exit `0`
+  - `python3 -m json.tool docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json >/tmp/fcp27-p4-blueprint-json-ok`: exit `0`
+- `make prompt-audit`: exit `0`
+  - Result: `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`
+  - Active runnable prompts audited: `324`
+- `make batch-self-check`: exit `0`
+  - Result: `GREEN: runner self-check passed`
+- `bash scripts/codex-forbidden-claim-scan.sh docs/audits/fcp27-batch-closeout-report.md 2>/dev/null || true`: exit `0`
+  - Result: `codex-forbidden-claim-scan: no blocking hits`
+- `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -version`: exit `0`
+  - Result: Xcode `26.3`, build `17C529`
+- `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`: exit `0`
+  - Result: resolved source packages; `AmbitionsDesignSystem` present
+- `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer ./scripts/build-local.sh`: exit `0`
+  - Result: simulator build succeeded
+  - Destination: `platform=iOS Simulator,name=iPhone 17`
+  - Log: `output/logs/build-local-20260517-222818.log`
+  - Evidence: `** BUILD SUCCEEDED **`
+- `bash scripts/fet-visual-qa-packet-check.sh`: exit `0`
+  - Result: advisory read-only check only
+  - No changed Swift UI files detected in the working tree
+  - No rendered screenshot proof was created in this repair pass
+- `bash scripts/sig-accessibility-evidence-check.sh`: exit `0`
+  - Result: advisory Yellow remains until SIG15 records final accessibility/motion closeout
   - No public accessibility claim was made
 
 ### Blocked or Not Attempted
