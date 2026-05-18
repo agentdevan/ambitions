@@ -1,31 +1,117 @@
-# Ambitions Codex Guidance
+# Ambitions Agent Contract
 
-This file is for AI/Codex contributors working in the Ambitions repo.
+Status: Active repo front-door guidance  
+Audience: Codex, ChatGPT, GitHub agents, and any AI contributor touching this repository  
+Last major canon refresh: 2026-05-18  
+Purpose: Route agents to the right authority, prevent stale-canon work, preserve proof honesty, and keep Ambitions on a premium local-first native iPhone product path.
 
-Authority notice: active repo authority starts in `docs/truth/README.md`. If this file conflicts with `docs/truth/*`, the truth files win. This file is contributor guidance, not implementation proof, validation proof, or release proof.
+This file is not implementation proof, validation proof, release proof, product completeness proof, or a roadmap. It is the standing operating contract for agents.
 
-Current repo posture:
+If this file conflicts with `docs/truth/*`, the truth files win. If any lower-level doc conflicts with this file and the truth files are silent, this file wins until `docs/truth/*` is updated.
 
-- `docs/truth/README.md` is the active authority index.
-- `docs/truth/PRODUCT_DESIGN_TRUTH.md` is current product/design truth.
-- `docs/truth/PRODUCT_MOAT_TRUTH.md` is current product moat strategy and anti-commodity alignment authority.
-- `docs/truth/IMPLEMENTATION_TRUTH.md` is current implementation/source truth.
-- `docs/truth/RELEASE_TRUTH.md` is current validation/release/proof truth.
-- `docs/truth/CODEX_PROCESS_TRUTH.md` is current Codex operating truth.
-- `docs/truth/HISTORICAL_POLICY.md` decides historical extraction, quarantine, archive, and deletion policy.
-- `.codex/REPO_INVENTORY.md` is the current repo map for future ChatGPT/Codex repo questions. It is a routing index, not product truth or proof.
-- AmbitionsCanon is supporting product/design canon where compatible with `docs/truth/*`.
-- `docs/status/current-implementation-map.md` is supporting implementation-status evidence.
-- `docs/status/release-evidence-packet.md` is supporting validation/release-evidence posture.
-- Validation is local VM/Mac only. There is no active hosted CI workflow.
-- Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, `.codex`, and `.agents` material is retained as history, operating context, or stricter proof gates where compatible with `docs/truth/*`. It is not the public repo front door.
-- EFC is an active peak-proof overlay for unfinished planned work. It does not replace the active batch, implement product behavior by itself, or authorize release/platform claims.
-- The local Ambitions Repo MCP under `tools/mcp/ambitions_repo_mcp/` is optional read-only Codex tooling for active-batch, EFC, source-truth, claim-scan, closeout, and changed-file impact checks. It is not an app dependency.
-- The local Ambitions Proof MCP under `tools/mcp/ambitions_proof_mcp/` exposes allowlisted validation names only. It is not a generic shell and must not gain write, network, secrets, signing, App Store, hosted CI, or git mutation tools without explicit approval.
+---
 
-## Required read order
+## 1. Non-negotiable Ambitions identity
 
-For normal repo work, read in this order:
+Ambitions is a premium native iPhone-first Personal Life Operating System.
+
+It is not a task manager, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+
+The active product standard is a polished local-first flagship iPhone experience: quiet luxury, inspectable intelligence, durable trust, privacy-first operation, recovery-aware execution, and no weak v1-feeling seams.
+
+The current product moat is the Private Life Runtime: a local-first intelligence layer that converts goals and intent into personalized, inspectable, capacity-aware daily steps, then adapts execution through time reality, closure, proof, and recovery.
+
+Agents must optimize for:
+
+- native iPhone-first product quality
+- local-first/on-device-first behavior unless active truth files explicitly allow otherwise
+- Apple-native iCloud/CloudKit continuity before custom server infrastructure
+- deterministic, inspectable intelligence before AI theater
+- proof-backed claims only
+- premium SwiftUI polish, accessibility, motion restraint, and interaction depth
+- clean repo authority hierarchy
+- safe autonomous Codex execution through the Ambitions runner
+
+---
+
+## 2. Current active product canon
+
+Top-level IA is exactly:
+
+`Today / Goals / Capture / Time / You`
+
+Primary top-level objects:
+
+- Today -> Reality Meridian / Start Here
+- Goals -> Constellation Atlas
+- Capture -> Atmosphere Composer
+- Time -> LifeShape Field
+- You -> User System Profile
+
+`Plan` is not an active user-facing top-level destination. Preserve existing `PlanScreen`, `.plan`, `planNavigation()`, and `Native/Ambitions/Features/Plan/` references only as internal compatibility seams unless a scoped migration batch explicitly changes them. Never reintroduce `Plan` as top-level IA.
+
+Locked user-facing language:
+
+- Use `Start here` for the flagship Today decision object.
+- Use `Recommended step`, not `Recommended next move`.
+- Use `step`, not `move`, for action items.
+- Use `Start now` when launching execution.
+- Use `Open step` when opening detail instead of a session.
+- Avoid shame, fake urgency, streak pressure, score pressure, and productivity-guilt framing.
+
+Current flagship product surfaces:
+
+- Today Root / Reality Meridian
+- Start Here Surface
+- Step Detail
+- Step Session
+- Action Closure / Recovery
+- Goal Detail / Mission Control
+- Capture Composer and secondary intake routes
+- Time / LifeShape Field
+- Schedule & Availability
+- Planning Defaults
+- Vacation / Away Time
+- Automation & Trust
+- User System Profile
+
+Do not create new top-level destinations without explicit active truth-file authority.
+
+---
+
+## 3. Current architecture canon
+
+Core intelligence must be local-first and deterministic through the Private Life Runtime / Intelligence Kernel.
+
+External/cloud LLMs are not part of the core product architecture. They may only exist, if ever, as optional user-controlled extensions outside core behavior. Do not introduce a required cloud AI dependency, AI SDK, hosted inference path, telemetry-driven intelligence loop, or server-side planning runtime unless active truth files explicitly authorize it.
+
+Pre-launch backend posture:
+
+- Favor local-first durable data and Apple-native continuity.
+- Use CloudKit/iCloud continuity before custom server/account infrastructure unless active truth files change this posture.
+- Do not assume a custom production server is required for launch.
+- Do not add analytics SDKs, backend SDKs, tracking, hosted CI, server dependencies, external AI infrastructure, or paid services without explicit approval and recorded policy gates.
+- Preserve privacy manifest honesty.
+- Preserve migration safety, durable operation/receipt handling, basic diagnostics, and release proof boundaries.
+
+Runtime/product behavior must support the moat proof:
+
+- same intent can produce different daily plans for different users
+- execution is grounded in schedule, capacity, protected time, evidence, and user-owned constraints
+- adaptation happens locally as reality changes
+- closure/recovery changes future recommendations without shame
+- Start Here receipts explain why a recommendation was made
+- relaunch/replay preserves proof and continuity
+
+Do not claim this behavior is complete unless live source, tests, and proof artifacts demonstrate it.
+
+---
+
+## 4. Active authority hierarchy
+
+Start every non-trivial repo task from the truth files.
+
+Mandatory read order:
 
 1. `docs/truth/README.md`
 2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
@@ -34,180 +120,285 @@ For normal repo work, read in this order:
 5. `docs/truth/RELEASE_TRUTH.md`
 6. `docs/truth/CODEX_PROCESS_TRUTH.md`
 7. `docs/truth/HISTORICAL_POLICY.md`
-8. `README.md`
-9. `docs/README.md`
-10. `docs/status/current-implementation-map.md`
-11. `docs/status/repo-cleanup-index.md`
-12. `docs/status/release-evidence-packet.md`
-13. `docs/native-build-and-release.md`
-14. the target source files and tests
-15. relevant `.codex` / `.agents` files only after the truth files
+8. `AGENTS.md`
+9. `README.md`
+10. `docs/README.md`
+11. `project.yml`
+12. `Package.swift`
+13. relevant source, tests, scripts, build docs, status docs, and proof artifacts
+14. relevant `.codex` / `.agents` files only after truth files
 
-For repo structure, status-location, or "where should I inspect first" questions, inspect `.codex/REPO_INVENTORY.md` after the truth files.
+Supporting but subordinate material:
 
-For product, visual, shell, chrome, IA, Signature Object, trust, accessibility, QA, token/material, or implementation-planning work, read `docs/truth/PRODUCT_DESIGN_TRUTH.md` first, then the compatible AmbitionsCanon files named by `docs/AmbitionsCanon/README.md` before changing source.
+- `docs/AmbitionsCanon/`
+- `docs/status/`
+- `docs/codex/`
+- `.codex/`
+- `.agents/`
+- historical batch-train, audit, handoff, and closeout material
 
-For Codex OS, batch-train, or long-run governance work, additionally read:
+`.codex/REPO_INVENTORY.md` is a routing index, not product truth or proof.
 
-- `.codex/state/active-batch.yml` before any write, and re-read it before updating train-state files
-- `docs/codex/CONTEXT_INDEX.md`
-- `docs/codex/BATCH_REGISTRY.md`
-- `docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md`
-- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
-- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md`
-- `docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`
-- `docs/codex/POST_BATCH_GATE_REGISTRY.md`
-- `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md` when local MCP tooling matters
-- `docs/codex/MCP_CODEX_SETUP.md` when configuring or verifying local MCP tooling
-- `docs/codex/MCP_EXTERNAL_SERVER_SETUP.md` when external MCP registration matters
-- `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md` when GitHub MCP, Dependabot, CodeQL, Actions, or runner setup matters
-- `docs/codex/CODEX_OS_INDEX.md`
-- `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` when the active model tier, Mini/Senior alias, or autonomous batch-train continuation matters
-- `docs/codex/MODEL_TIER_BATCH_MATRIX.md` when classifying remaining batch families for Mini/Senior routing
-- `.codex/README.md`
-- the selected route or batch manifest
+Older Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, and historical prompt material may be useful only where compatible with the truth files. It must not override active truth.
 
-For `resume global batch train`, immediately read `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files before continuing from repo evidence. If the Ambitions Repo MCP is configured, call `get_active_batch`, `summarize_repo_posture`, and `get_efc_overlay_status` before edits.
+---
 
-For `resume mini global batch train`, immediately read `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files. Mini may execute bounded batches, but must defer or stop on senior-only gates.
+## 5. Repo behavior rules
 
-For `resume senior global batch train`, immediately read `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, and the EFC overlay files. Senior resolves model-tier deferrals and owns judgment-heavy gates.
+Default branch behavior:
 
-## Source-truth rules
-
-- `docs/truth/README.md` decides active authority hierarchy and conflict rules.
-- `docs/truth/PRODUCT_DESIGN_TRUTH.md` decides product/design direction.
-- `docs/truth/IMPLEMENTATION_TRUTH.md` decides implementation/source boundaries together with live source, tests, scripts, and project evidence.
-- `docs/truth/RELEASE_TRUTH.md` decides validation, release, proof, and claim language.
-- `docs/truth/CODEX_PROCESS_TRUTH.md` decides Codex operating behavior.
-- `docs/truth/HISTORICAL_POLICY.md` decides historical extraction, quarantine, archive, and deletion policy.
-- AmbitionsCanon supports product/design direction where compatible with active truth files.
-- The active flagship top-level IA is `Today / Goals / Capture / Time / You`.
-- `Plan` is not an active top-level destination. It remains valid only as a contextual/action noun, historical reference, or internal compatibility seam.
-- The current implementation map supports what is implemented, scaffolded, planned, historical, or unproven.
-- The release evidence packet supports validation and release claim language.
-- `BATCH_REGISTRY.md` decides operational batch status only.
-- `EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`, `BATCH_REGISTRY_EFC_OVERLAY.md`, and `GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md` decide peak proof obligations for unfinished work where compatible with active batch state and `docs/truth/*`.
-- `POST_BATCH_GATE_REGISTRY.md` decides mandatory continuation gates such as the Post-PK03 Dirty Worktree Reconciliation Gate.
-- Historical docs may remain useful, but they do not override the current truth files.
-- Do not treat docs-only plans as shipped behavior.
-- MCP tool output is repo-derived execution aid, not a replacement for source truth, raw logs, or human/device/release evidence.
-
-## Repo behavior
-
-- Work on `main` only unless the user explicitly requests branch-based work.
+- Work on `main` only unless the user explicitly requests a branch or PR.
 - Do not create or switch branches for normal Ambitions execution.
 - Preserve completed implementation history as history.
-- Preserve XcodeGen. Edit `project.yml` and regenerate the project locally; do not rely on a checked-in `.xcodeproj` as source truth.
-- Preserve the native SwiftUI architecture.
-- Do not create new top-level Ambitions destinations. The canonical destinations are `Today / Goals / Capture / Time / You`.
-- Preserve existing `.plan`, `PlanScreen`, `planNavigation()`, and `Native/Ambitions/Features/Plan/` references only as internal compatibility seams unless a scoped AFI migration batch explicitly changes them.
-- Do not reintroduce `Plan` as user-facing top-level IA.
-- Do not implement product features in docs/tooling passes unless the tooling itself requires a narrow test or compatibility fix.
-- During Codex OS / developer-tooling / governance passes, do not implement app features, refactor SwiftUI source, modify product IA, or add runtime app dependencies.
-- Do not add hosted CI unless a future patch explicitly records provider, cost model, billing/quota risk, triggers, artifact retention, owner approval, and release-claim limits.
-- Do not treat EFC as approval for hosted AI, user-data servers, telemetry, analytics, productivity scoring, shame/streak mechanics, silent mutation, or release claims.
-- Do not add write-capable MCP tools, shell MCP tools, network MCP tools, or secret-reading MCP tools without explicit approval and a security review.
-- Do not add GitHub write MCP tools, hosted CI workflows, signing automation, App Store upload automation, or self-hosted runners without the policy gates in `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md`.
+- Keep generated run artifacts out of commits unless a task explicitly requires them.
+- Do not commit `.codex/runs/` noise by default.
 
-## Architecture boundaries
+Project structure rules:
+
+- Preserve XcodeGen.
+- Edit `project.yml` and regenerate locally; do not treat checked-in `.xcodeproj` as source truth.
+- Preserve native SwiftUI architecture.
+- Do not add runtime app dependencies during docs/tooling/governance passes.
+- Do not implement product features in docs-only or Codex OS passes unless a narrow test/compatibility fix is required.
+- Do not refactor SwiftUI source during Codex OS/developer-tooling/governance passes unless explicitly scoped.
+
+Architecture ownership:
 
 - `Native/Ambitions/App` owns app entry, dependency container, environment injection, shell, and routing.
-- `Native/Ambitions/Domain` owns domain models, contracts, state machines, receipts, proof, recommendation, and planning logic.
+- `Native/Ambitions/Domain` owns domain models, contracts, state machines, receipts, proof, recommendation, planning, and private runtime logic.
 - `Native/Ambitions/Services` owns service protocols and implementations.
-- `Native/Ambitions/Persistence` owns SwiftData persistence.
-- `Native/Ambitions/Features` owns feature UI for Today, Goals, Capture, Time, You, and owned secondary surfaces.
-- `Native/Ambitions/Features/Plan` currently remains the internal compatibility owner for the user-facing Time surface until a scoped route/file migration lands.
-- `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources` own shared UI and package surfaces.
-- `project.yml` is the XcodeGen source of truth for targets, schemes, app extensions, and build wiring.
-- `tools/mcp/` owns local developer MCP tooling only. It must not be referenced by production app targets.
+- `Native/Ambitions/Persistence` owns SwiftData persistence and local durability.
+- `Native/Ambitions/Features` owns feature UI for Today, Goals, Capture, Time, You, and secondary owned surfaces.
+- `Native/Ambitions/Features/Plan` remains an internal compatibility owner for the user-facing Time surface until a scoped migration changes it.
+- `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources` own shared UI/package surfaces.
+- `tools/mcp/` owns local developer MCP tooling only; it must not be referenced by production app targets.
 
-## Execution rules
+---
 
-- Start non-trivial work by checking repo status, current truth files, active batch state, post-batch gate registry, and the target code paths.
-- Use the smallest safe touch budget. Name primary files before edits.
-- Prefer deterministic, additive, compatibility-safe changes.
-- Do not silently rewrite product strategy, IA, naming, release posture, or roadmap structure.
-- Do not invent seams or claim implementation without repo evidence.
-- Do not add runtime app dependencies unless the dependency policy permits it and the user explicitly accepts the tradeoff.
-- After meaningful app-source changes, run `xcodegen generate` and the relevant local build/test/scan pack when local tooling supports it.
-- For docs-only cleanup, do not claim build/test success unless current local logs exist.
-- Validation summaries must separate verified, failed, not verified, and human/device follow-up.
-- Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, release readiness, CI proof, or legal/privacy approval without matching evidence.
-- Use repo-local Codex operating docs and scripts under `.codex/`, `docs/codex/`, `scripts/ai/`, and `tools/mcp/` only as operating context; they do not override source code, raw logs, current implementation status, or release evidence status.
-- When using a Mini-tier or unknown-tier model, follow `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` and `docs/codex/MODEL_TIER_BATCH_MATRIX.md`. Mini is execution-only for bounded batches; senior-only gates must be deferred or stopped, not guessed through.
-- After EFC insertion, every batch report must state EFC applicability: invoked, not applicable, or accepted Yellow with owner.
-- If the Ambitions Repo MCP is configured, use it to preflight active batch, EFC applicability, changed-file impact, and forbidden claims before closeout.
-- After PK03 closes, run `bash scripts/codex-post-pk03-dirty-reconciliation.sh` before continuing the global train. Exit code `86` blocks continuation until dirty files are classified.
+## 6. Ambitions runner rule
 
-## Local validation
+The canonical batch runner is:
 
-Primary validation remains local VM/Mac validation:
+```bash
+scripts/ambitions-codex-train.sh <BATCH_ID> <PROMPT_FILE>
+```
+
+or:
+
+```bash
+make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>
+```
+
+Ambitions implementation, Codex OS, repo cleanup, architecture, UI, product, and batch-train prompts must run through the runner unless the user explicitly says:
+
+`bypass the Ambitions runner`
+
+Any Ambitions runner-compatible prompt must include this header:
+
+```html
+<!-- AMBITIONS_RUNNER_REQUIRED: true -->
+<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+```
+
+If a prompt is pasted directly without the header:
+
+1. Save it under `prompts/batches/<BATCH_ID>.md` when the batch ID is clear, or `prompts/inbox/` when unclear.
+2. Add the required runner header.
+3. Route it through the runner.
+4. Do not execute it directly unless the user explicitly bypasses the runner.
+
+For serious Ambitions work, assume the operating sequence:
+
+`GPT-5.5 plan -> GPT-5.3-Codex-Spark bounded patch by default, falling back to GPT-5.4-mini only when Spark usage is exhausted -> GPT-5.5 review/repair/final commit`
+
+The planning/review model owns source-truth, canon, architecture, release-claim, and final commit eligibility. The bounded patch model may implement only the approved patch scope. Spark is the default bounded patch model. GPT-5.4-mini is a fallback bounded patch model only when Spark usage is exhausted, not a quality downgrade path for judgment-heavy work.
+
+Do not use stale model-tier names from older docs as current truth unless `docs/truth/CODEX_PROCESS_TRUTH.md` explicitly requires them for compatibility.
+
+---
+
+## 7. Batch train and resume rules
+
+Before any batch execution or continuation, inspect:
+
+- `docs/truth/README.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `.codex/state/active-batch.yml`
+- `docs/codex/POST_BATCH_GATE_REGISTRY.md`
+- `docs/codex/BATCH_REGISTRY.md`
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
+- active EFC overlay files when applicable
+- current repo status and dirty worktree state
+
+For `resume global batch train`, immediately inspect:
+
+- `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`
+- `.codex/state/active-batch.yml`
+- `docs/codex/POST_BATCH_GATE_REGISTRY.md`
+- EFC overlay files
+- current batch reports and train-state files
+
+For model-tiered train work, follow the active truth files and current model-tier policy docs. Do not guess through senior-only gates. Defer or stop where the current policy requires it.
+
+Continuation is allowed only through Green and accepted Yellow states where owner, safety reason, no-claim boundary, validation posture, and post-batch gates are recorded. Hard Red stops.
+
+Every batch that touches user-facing behavior, user data, intelligence, source/freshness, side effects, accessibility, performance, release posture, or public claims must state EFC applicability: invoked, not applicable, or accepted Yellow with owner.
+
+---
+
+## 8. Validation and proof rules
+
+Primary validation remains local VM/Mac validation unless active truth files specify otherwise.
+
+Expected local validation options:
 
 - `xcodegen generate`
 - `./scripts/build-local.sh`
 - focused `xcodebuild` unit tests
 - focused `xcodebuild` UI tests
 - unsigned archive sanity checks when relevant
-- raw command logs saved under `output/logs/`, `.codex/logs/`, or a named local proof packet
+- repo scan/claim-scan scripts when relevant
+- raw logs saved under `output/logs/`, `.codex/logs/`, or a named proof packet
 
-Local MCP validation:
+Local MCP validation options:
 
 - `python3 tools/mcp/ambitions_repo_mcp/server.py --self-test`
-- optional: `python3 -m pytest tools/mcp/ambitions_repo_mcp/tests` when pytest is available
+- `python3 -m pytest tools/mcp/ambitions_repo_mcp/tests` when pytest is available
 - `python3 tools/mcp/ambitions_proof_mcp/server.py --self-test`
-- optional: `python3 -m pytest tools/mcp/ambitions_proof_mcp/tests` when pytest is available
+- `python3 -m pytest tools/mcp/ambitions_proof_mcp/tests` when pytest is available
 
-Local dirty-worktree gate:
+Dirty-worktree gate:
 
 - `bash scripts/codex-post-pk03-dirty-reconciliation.sh`
 
-Local simulator evidence is not signed archive proof, TestFlight proof, App Store proof, real-hardware proof, public accessibility proof, legal/privacy signoff, or human release approval.
+If `xcodebuild` tests are blocked, disabled, or skipped by runner configuration, the closeout must explicitly say so and must not imply test coverage was proven. A disabled or non-blocking test path is Yellow at best for release proof.
 
-## Ambitions product truth
+Local simulator evidence is not signed archive proof, TestFlight proof, App Store proof, real-device proof, public accessibility proof, legal/privacy signoff, or human release approval.
 
-- Ambitions is a premium native iPhone app for turning long-term goals into grounded daily execution.
-- Core loop: `Capture -> Place -> Shape Time -> Do Today -> Close / Recover -> Save Proof`.
-- Ambitions is not a generic task app, calendar clone, habit tracker, score-based productivity app, chatbot, AI wrapper, dashboard, or SaaS admin panel.
-- User-facing language should follow `docs/truth/PRODUCT_DESIGN_TRUTH.md` first, then compatible AmbitionsCanon support.
-- Avoid fake precision, fake certainty, AI theater, shame language, and silent automation.
+Never claim:
 
-## Ambitions batch execution rule
+- build success without current logs
+- test success without current logs
+- accessibility verification without actual accessibility proof
+- performance verification without measured evidence
+- privacy/legal approval without reviewed artifacts
+- TestFlight/App Store readiness without matching release evidence
+- CI proof when validation is local-only
+- product behavior completion from docs-only changes
 
-- The canonical batch runner is `scripts/ambitions-codex-train.sh`.
-- Ambitions implementation batches must not be executed directly from pasted prompts.
-- If the user asks to run/resume/continue/implement a batch, first route it through the runner.
-- If the prompt is pasted directly, save it under `prompts/batches/<BATCH_ID>.md` or `prompts/inbox/` if the ID is unclear.
-- Add the required runner header if missing.
-- Then execute: `make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>`.
-- Only bypass the runner if the user explicitly says: "bypass the Ambitions runner."
-- GPT-5.5 owns planning, source-truth, canon, review, repair, and final commit eligibility.
-- GPT-5.4-mini owns only bounded implementation patches produced by the GPT-5.5 plan.
-- Final commits must come only after the GPT-5.5 final gate.
-- GPT-5.4-mini must never decide architecture, canon, continuation, repo cleanup, or final commit eligibility.
-- Preserve Ambitions quality rules: world-class native iPhone-first product quality; Today / Goals / Capture / Time / You; Start Here / Reality Meridian / LifeShape Field / Capture composer / You settings-style direction where relevant; Plan remains an internal compatibility seam only where current source/truth allows it; local-first/on-device-first posture unless active truth says otherwise; no generic productivity-app thinking; no card-stack/dashboard/task-list fallback; no false release, accessibility, privacy, performance, or production claims.
+Validation summaries must separate:
 
-## Batch train rule
+- Verified
+- Failed
+- Not verified
+- Blocked
+- Human/device follow-up
 
-For multi-batch execution, use `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`, `.codex/reports/current-batch-train-state.md`, `.codex/state/active-batch.yml`, `docs/codex/POST_BATCH_GATE_REGISTRY.md`, `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`, `docs/codex/MODEL_TIER_BATCH_MATRIX.md`, the EFC overlay files, and the selected manifest under `docs/codex/batch-trains/`.
+---
 
-Continue automatically through Green and accepted Yellow only when owner, safety reason, no-claim boundary, and applicable post-batch gates are recorded. Hard Red stops. Mini may additionally defer non-blocking senior-only batches to `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`; Senior must resolve blocking deferrals before closeout.
+## 9. UI, design, and product quality rules
 
-After EFC00, continuation also requires an EFC applicability note for every batch that touches user-facing behavior, user data, intelligence, source/freshness, side effects, accessibility, performance, release posture, or public claims.
+Ambitions UI must feel like a premium native Apple-quality iPhone app, not a web dashboard inside SwiftUI.
 
-## Ambitions Codex OS Local Control Plane
+Default visual/product direction:
 
-The Codex OS control plane for this repo is local-first and no-cost by default.
+- 70% Apple quiet luxury
+- 20% on-device intelligence / inspectable reasoning
+- 10% executive command clarity
+- graphite/warm dark palette
+- restrained celestial orientation
+- calm, alive, focused, and native
 
-- Ambitions prompts that modify repo control-plane or implementation behavior must include the runner header `<!-- AMBITIONS_RUNNER_REQUIRED: true -->` and run through `scripts/ambitions-codex-train.sh` unless the user explicitly says `bypass the Ambitions runner`.
-- Use required truth files before edits.
-- No claims of completion/release/accessibility/privacy without verified evidence.
-- Keep scope within approved files for this batch.
+Do not ship or propose:
 
-## Visual Canon + Moat control-plane references
+- generic stacked cards as the top-level design language
+- dashboard tile grids
+- chatbot-first UI
+- calendar-clone UI
+- generic task-list hierarchy
+- ornamental AI badges without proof
+- noisy gamification
+- streak/shame mechanics
+- fake productivity scoring
+- ungrounded automation
+- silent plan mutation
 
-- `docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md` is the active visual authority addendum.
-- `docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md` is the control-plane sequencing overlay.
-- `docs/codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md` is the visual front-end sequence and owner mapping.
-- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md` is the global-order overlay for this lane.
-- `docs/status/visual-canon-moat-installation-report.md` tracks this phase’s status, commands, and boundary proof notes.
+Top-level surfaces should follow one-primary-object discipline.
+
+Reality Meridian / Start Here is the flagship daily decision object. It must connect recommendation, current time reality, capacity, goal thread, proof, source freshness, trust receipts, and closure/recovery state. It must not degrade into a generic task card.
+
+Capture remains composer-driven and minimal at top level. Secondary intake triage belongs in drill-downs, not as the default Capture experience.
+
+Time is LifeShape/time-reality, not a generic calendar clone.
+
+You uses an iOS Settings-style User System Profile posture with grouped navigation and trust controls.
+
+All UI changes require accessibility, Dynamic Type, VoiceOver order, Reduce Motion, and preview/snapshot consideration according to active truth and relevant gates.
+
+---
+
+## 10. Safety, privacy, and dependency stop rules
+
+Hard Red stop conditions:
+
+- introducing required cloud AI/LLM infrastructure for core behavior
+- introducing analytics/tracking SDKs without explicit approval
+- introducing backend/server/account infrastructure without active truth authority
+- weakening privacy claims or privacy manifest honesty
+- adding hosted CI, signing automation, App Store upload automation, or self-hosted runners without policy gates
+- adding write-capable MCP, shell MCP, network MCP, secret-reading MCP, GitHub-write MCP, or production-affecting MCP tools without explicit approval and security review
+- making release, accessibility, privacy, device, TestFlight, App Store, CI, or legal claims without evidence
+- treating historical docs as active authority over truth files
+- reintroducing `Plan` as user-facing top-level IA
+- converting Ambitions into a generic productivity app, dashboard, chatbot, or calendar clone
+- mutating user data silently or without inspectable receipts
+- deleting historical material without following `docs/truth/HISTORICAL_POLICY.md`
+
+If a hard stop is hit, stop, record the reason, identify the smallest safe next step, and do not patch around it.
+
+---
+
+## 11. MCP and tooling boundaries
+
+The local Ambitions Repo MCP under `tools/mcp/ambitions_repo_mcp/` is optional read-only Codex tooling for active-batch, EFC, source-truth, claim-scan, closeout, and changed-file impact checks. It is not an app dependency.
+
+The local Ambitions Proof MCP under `tools/mcp/ambitions_proof_mcp/` exposes allowlisted validation names only. It is not a generic shell and must not gain write, network, secrets, signing, App Store, hosted CI, or git mutation tools without explicit approval.
+
+MCP output is repo-derived execution aid, not a replacement for source truth, raw logs, release evidence, or human/device proof.
+
+---
+
+## 12. Closeout standard
+
+Every non-trivial agent closeout must include:
+
+- files changed
+- why the change was needed
+- active truth files inspected
+- validation run, with raw command names
+- validation not run, with reason
+- proof/claim boundaries
+- risks or Yellow items
+- rollback notes
+- next eligible batch or gate, when relevant
+
+For docs-only updates, say docs-only. Do not imply app behavior changed.
+
+For source changes, include build/test status and relevant evidence.
+
+For UI changes, include preview/snapshot/visual proof status, accessibility status, and what remains unverified.
+
+For repo cleanup, classify touched material as active, supporting, historical, obsolete, archive-candidate, or delete-candidate when relevant.
+
+---
+
+## 13. Practical first question for every agent
+
+Before touching files, ask internally:
+
+"What should a fresh Codex session believe before touching this repo, and which active truth file proves that?"
+
+If the answer is unclear, inspect truth files and source evidence before editing.
+
+If the requested change would make a fresh agent believe the wrong thing about product canon, architecture, validation, release posture, or authority hierarchy, do not make the change as requested. Propose the safe correction instead.
