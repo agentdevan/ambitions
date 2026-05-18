@@ -8,6 +8,7 @@ struct TimeScreen: View {
     @State private var viewModel: TimeViewModel
     @State private var selectedDayID: String?
     @State private var selectedActionKind: TimeShapingActionKind = .patch
+    @State private var isShapeTimeDepthExpanded = false
     private let showsNavigationChrome: Bool
 
     @MainActor
@@ -41,13 +42,7 @@ struct TimeScreen: View {
 
                         TimeScopeChipStrip(timeframeLabel: dashboard.timeframeLabel)
 
-                        TimeTreatyCard(treaty: dashboard.treaty)
-
                         TimeCapacityEnvelopeCard(envelope: dashboard.capacityEnvelope)
-
-                        TimePressureRecoveryReviewCard(review: dashboard.pressureRecoveryReview)
-
-                        TimeTimelineStripCard(strip: dashboard.timelineStrip, onOpenGoal: openGoal)
 
                         if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
                             DegradedStateCard(
@@ -65,86 +60,21 @@ struct TimeScreen: View {
                             )
                         }
 
-                        TimePressureScrubberCard(
-                            scrubber: dashboard.pressureScrubber,
-                            selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
-                        )
-
-                        TimeGoalRelationshipCard(items: dashboard.goalShapingItems) { target in
-                            openGoal(target)
-                        }
-
-                        TimeSecondaryDestinationsCard(destinations: dashboard.secondaryDestinations) { destination in
-                            if let timeRoute = destination.timeRoute {
-                                openTimeRoute(timeRoute)
-                            }
-                        }
-
-                        TimeElasticWeekCard(
-                            days: dashboard.weekDays,
-                            selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
-                        )
-
-                        if let selectedDay = selectedDay(in: dashboard) {
-                            TimeBelievabilityCard(
-                                believability: dashboard.believability,
-                                selectedDay: selectedDay,
-                                onOpenGoal: openGoal,
-                                onOpenWindow: handleOpenWindow
-                            )
-                        }
-
-                        TimeCalendarAwarenessCard(
-                            state: dashboard.calendarAwareness,
-                            onPrimaryAction: handleCalendarAwarenessAction
-                        )
-
-                        TimeOpportunityWindowsCard(windows: dashboard.opportunityWindows, onOpenGoal: openGoal)
-
-                        // Decisions queue — renders nothing when both debt and conflict are empty
-                        TimeDecisionQueueCard(
-                            decisionDebt: dashboard.decisionDebt,
-                            conflictCourt: dashboard.conflictCourt,
-                            onActivate: handleDecisionItem
-                        )
-
-                        TimeCalendarBoundaryContractCard(
-                            boundary: dashboard.calendarBoundary,
-                            onPrimaryAction: {
-                                handleCalendarAwarenessAction(dashboard.calendarAwareness)
-                            }
-                        )
-
-                        TimeExecutionResilienceCard(
-                            resilience: dashboard.resilience,
-                            onOpenGoal: openGoal,
-                            onOpenTimeRoute: openTimeRoute
-                        )
-
-                        TimeShapingActionsCard(
-                            actions: dashboard.shapingActions,
-                            selectedKind: $selectedActionKind,
+                        TimeShapeDepthDisclosure(
+                            dashboard: dashboard,
+                            selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID),
+                            selectedActionKind: $selectedActionKind,
+                            isExpanded: $isShapeTimeDepthExpanded,
                             selectedDay: selectedDay(in: dashboard),
-                            onActivate: handleShapingAction
+                            onOpenGoal: openGoal,
+                            onOpenWindow: handleOpenWindow,
+                            onOpenTimeRoute: openTimeRoute,
+                            onCalendarAwarenessAction: handleCalendarAwarenessAction,
+                            onDecisionItem: handleDecisionItem,
+                            onShapingAction: handleShapingAction,
+                            onReflowSuggestion: handleReflowSuggestion,
+                            onReflowDecision: handleReflowDecision
                         )
-
-                        // Recovery composite — renders nothing when recovery is not active
-                        TimeRecoveryCompositeSection(
-                            recoveryEntry: dashboard.recoveryEntry,
-                            realityReflow: dashboard.realityReflow,
-                            reflowDecision: dashboard.reflowDecision,
-                            recoveryGradient: dashboard.recoveryGradient,
-                            saveTheDay: dashboard.saveTheDay,
-                            reflowReceiptPreview: dashboard.reflowReceiptPreview,
-                            recoveryMaturity: dashboard.recoveryMaturity,
-                            onActivateDecision: handleDecisionItem,
-                            onActivateReflow: handleReflowSuggestion,
-                            onActivateReflowDecision: handleReflowDecision
-                        )
-
-                        TimeLifeSuiteCard(suite: dashboard.lifeSuite)
-
-                        TimeGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)
@@ -296,6 +226,102 @@ struct TimeScreen: View {
 
     private func openGoal(_ target: GoalRouteTarget) {
         container.navigation.openGoalDetail(target)
+    }
+}
+
+private struct TimeShapeDepthDisclosure: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let dashboard: TimeDashboard
+    let selectedDayID: Binding<String>
+    @Binding var selectedActionKind: TimeShapingActionKind
+    @Binding var isExpanded: Bool
+    let selectedDay: TimeElasticWeekDayState?
+    let onOpenGoal: (GoalRouteTarget) -> Void
+    let onOpenWindow: (TimeOpenWindowState) -> Void
+    let onOpenTimeRoute: (TimeRouteTarget) -> Void
+    let onCalendarAwarenessAction: (TimeCalendarAwarenessState) -> Void
+    let onDecisionItem: (TimeDecisionItemState) -> Void
+    let onShapingAction: (TimeShapingActionState) -> Void
+    let onReflowSuggestion: (TimeReflowSuggestionState) -> Void
+    let onReflowDecision: (TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void
+
+    var body: some View {
+        StateDrivenMaterialPanel(context: .plan, state: .calm) {
+            DisclosureGroup(isExpanded: $isExpanded) {
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    TimeTreatyCard(treaty: dashboard.treaty)
+                    TimePressureRecoveryReviewCard(review: dashboard.pressureRecoveryReview)
+                    TimeTimelineStripCard(strip: dashboard.timelineStrip, onOpenGoal: onOpenGoal)
+                    TimePressureScrubberCard(scrubber: dashboard.pressureScrubber, selectedDayID: selectedDayID)
+                    TimeGoalRelationshipCard(items: dashboard.goalShapingItems, onOpenGoal: onOpenGoal)
+                    TimeSecondaryDestinationsCard(destinations: dashboard.secondaryDestinations) { destination in
+                        if let timeRoute = destination.timeRoute {
+                            onOpenTimeRoute(timeRoute)
+                        }
+                    }
+                    TimeElasticWeekCard(days: dashboard.weekDays, selectedDayID: selectedDayID)
+
+                    if let selectedDay {
+                        TimeBelievabilityCard(
+                            believability: dashboard.believability,
+                            selectedDay: selectedDay,
+                            onOpenGoal: onOpenGoal,
+                            onOpenWindow: onOpenWindow
+                        )
+                    }
+
+                    TimeCalendarAwarenessCard(state: dashboard.calendarAwareness, onPrimaryAction: onCalendarAwarenessAction)
+                    TimeOpportunityWindowsCard(windows: dashboard.opportunityWindows, onOpenGoal: onOpenGoal)
+                    TimeDecisionQueueCard(
+                        decisionDebt: dashboard.decisionDebt,
+                        conflictCourt: dashboard.conflictCourt,
+                        onActivate: onDecisionItem
+                    )
+                    TimeCalendarBoundaryContractCard(
+                        boundary: dashboard.calendarBoundary,
+                        onPrimaryAction: { onCalendarAwarenessAction(dashboard.calendarAwareness) }
+                    )
+                    TimeExecutionResilienceCard(
+                        resilience: dashboard.resilience,
+                        onOpenGoal: onOpenGoal,
+                        onOpenTimeRoute: onOpenTimeRoute
+                    )
+                    TimeShapingActionsCard(
+                        actions: dashboard.shapingActions,
+                        selectedKind: $selectedActionKind,
+                        selectedDay: selectedDay,
+                        onActivate: onShapingAction
+                    )
+                    TimeRecoveryCompositeSection(
+                        recoveryEntry: dashboard.recoveryEntry,
+                        realityReflow: dashboard.realityReflow,
+                        reflowDecision: dashboard.reflowDecision,
+                        recoveryGradient: dashboard.recoveryGradient,
+                        saveTheDay: dashboard.saveTheDay,
+                        reflowReceiptPreview: dashboard.reflowReceiptPreview,
+                        recoveryMaturity: dashboard.recoveryMaturity,
+                        onActivateDecision: onDecisionItem,
+                        onActivateReflow: onReflowSuggestion,
+                        onActivateReflowDecision: onReflowDecision
+                    )
+                    TimeLifeSuiteCard(suite: dashboard.lifeSuite)
+                    TimeGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
+                }
+                .padding(.top, theme.spacing.md)
+            } label: {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text("LifeShape Field depth")
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text("Open pressure, calendar source, recovery, reflow, and goal-time detail after capacity is clear.")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        }
+        .accessibilityIdentifier("time.lifeshape-depth")
     }
 }
 

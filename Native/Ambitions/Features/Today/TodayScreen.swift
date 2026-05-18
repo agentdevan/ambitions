@@ -8,6 +8,7 @@ struct TodayScreen: View {
     @State private var viewModel: TodayViewModel
     @State private var selectedStepDetail: DayRailStepDetailState?
     @State private var selectedActionClosure: TodayActionClosureSheetState?
+    @State private var isTodayDepthExpanded = false
 
     private let autoLoad: Bool
     private let showsNavigationChrome: Bool
@@ -75,8 +76,11 @@ struct TodayScreen: View {
                                 .transition(.ambitionPanel)
                         }
 
-                        TodayExecutionSupportPanels(state: experience.execution, onAction: handleAction)
-                        TodayExecutionDeepDive(state: experience.execution, onAction: handleAction)
+                        TodayExecutionDepthDisclosure(
+                            state: experience.execution,
+                            isExpanded: $isTodayDepthExpanded,
+                            onAction: handleAction
+                        )
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)
@@ -249,6 +253,42 @@ struct TodayScreen: View {
             preconditionFailure("App container must be injected.")
         }
         return appContainer
+    }
+}
+
+private struct TodayExecutionDepthDisclosure: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: TodayExecutionViewState
+    @Binding var isExpanded: Bool
+    let onAction: (TodayInlineAction) -> Void
+
+    @ViewBuilder
+    var body: some View {
+        if state.supportingPanels.isEmpty == false || state.deeperSections.isEmpty == false {
+            StateDrivenMaterialPanel(context: .today, state: .calm) {
+                DisclosureGroup(isExpanded: $isExpanded) {
+                    VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                        TodayExecutionSupportPanels(state: state, onAction: onAction)
+                        TodayExecutionDeepDive(state: state, onAction: onAction)
+                    }
+                    .padding(.top, theme.spacing.md)
+                } label: {
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        Text("Today depth")
+                            .font(theme.typography.section)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text("Open support, recovery, and detail rows after the Reality Meridian.")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+            .accessibilityIdentifier("today.depth-disclosure")
+        } else {
+            EmptyView()
+        }
     }
 }
 

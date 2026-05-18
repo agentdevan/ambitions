@@ -11,6 +11,7 @@ struct CaptureScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: CaptureViewModel
+    @State private var isCaptureDepthExpanded = false
     private let shellMode: CaptureScreenShellMode
 
     @MainActor
@@ -65,8 +66,19 @@ struct CaptureScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(viewState):
-                        loadedContent(viewState)
+                        if viewState.captures.isEmpty,
+                           viewModel.draftRoutePreview == nil,
+                           viewModel.actionMessage == nil {
+                            loadedContent(viewState)
+                                .transition(.ambitionPanel)
+                        } else {
+                            CaptureDepthDisclosure(
+                                isExpanded: $isCaptureDepthExpanded
+                            ) {
+                                loadedContent(viewState)
+                            }
                             .transition(.ambitionPanel)
+                        }
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)
@@ -192,6 +204,42 @@ struct CaptureScreen: View {
         }
     }
 
+    private struct CaptureDepthDisclosure<Content: View>: View {
+        @Environment(\.ambitionTheme) private var theme
+
+        @Binding var isExpanded: Bool
+        let content: Content
+
+        init(
+            isExpanded: Binding<Bool>,
+            @ViewBuilder content: () -> Content
+        ) {
+            _isExpanded = isExpanded
+            self.content = content()
+        }
+
+        var body: some View {
+            StateDrivenMaterialPanel(context: .capture, state: .calm) {
+                DisclosureGroup(isExpanded: $isExpanded) {
+                    content
+                        .padding(.top, theme.spacing.md)
+                } label: {
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        Text("Capture depth")
+                            .font(theme.typography.section)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text("Open placed items, receipts, and parked capture only after the composer has taken input.")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+            .accessibilityIdentifier("capture.depth-disclosure")
+            .accessibilityElement(children: .contain)
+        }
+    }
+
     private var emptyCaptureState: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             Text("What needs a place?")
@@ -285,18 +333,7 @@ struct CaptureScreen: View {
                     .accessibilityIdentifier("capture.metadata.\(capture.id)")
 
                 if let assumption = capture.assumptionSummary {
-                    TrustSeamExplainer(
-                        title: "Suggested Route Alignment",
-                        reason: assumption,
-                        confidence: 0.86,
-                        source: capture.sourceType?.title ?? "Local System",
-                        onOverride: {
-                            // Custom override action hook
-                        },
-                        onAccept: {
-                            // Confirm recommendation action hook
-                        }
-                    )
+                    captureTrustSeam(reason: assumption, source: capture.sourceType?.title ?? "Local capture")
                 }
 
                 placementReview(capture.placementReviewState, correction: capture.correctionReviewState)
@@ -387,6 +424,29 @@ struct CaptureScreen: View {
         case .seed, .actionable, .delegated:
             return .default
         }
+    }
+
+    private func captureTrustSeam(reason: String, source: String) -> some View {
+        StateDrivenMaterialPanel(context: .capture, state: .calm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                EvidenceLabel(
+                    "Why this?",
+                    detail: reason,
+                    source: source,
+                    state: .calm,
+                    context: .capture
+                )
+
+                Label("Review before saving; route choices stay editable.", systemImage: "hand.raised")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Capture route trust")
+        .accessibilityValue("\(reason). Review before saving; route choices stay editable.")
+        .accessibilityIdentifier("capture.route-trust")
     }
 
     @ViewBuilder
