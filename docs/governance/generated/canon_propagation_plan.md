@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T09:27:45-04:00
+Generated: 2026-05-18T09:46:47-04:00
 
 ## Plan → Time
 
@@ -165,6 +165,7 @@ Generated: 2026-05-18T09:27:45-04:00
 - docs/audits/cs03-insights-contextual-intelligence-semantics-map.md
 - docs/audits/ambitions-3-0-f17-shell-meridian-ownership-decision.md
 - docs/audits/fcp25-loading-empty-degraded-state-objectization-report.md
+- docs/audits/efc11-batch-closeout-report.md
 - docs/audits/pd01-product-depth-canon-inventory-ownership-map-report.md
 - docs/audits/cs02-profile-you-compatibility-contract-ledger.md
 - docs/audits/pd08-goal-alternate-path-tradeoff-depth-report.md
