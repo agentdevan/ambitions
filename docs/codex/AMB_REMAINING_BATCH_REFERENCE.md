@@ -1,7 +1,7 @@
 # Ambitions Remaining Batch Reference
 
-Generated: 2026-05-10T21:44:08Z
-Next eligible: PK17 — Today Read Model Extraction
+Generated: 2026-05-18T08:08:00Z
+Next eligible: PFC39 — Final Platform Handoff
 
 ## Summary
 - Total queue entries: 146

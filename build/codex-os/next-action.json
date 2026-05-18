@@ -5,12 +5,12 @@
   "changed_canon_files": [],
   "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
   "decision": "select_next_batch",
-  "generated_at": "2026-05-18T03:44:22-04:00",
+  "generated_at": "2026-05-18T04:06:58-04:00",
   "generated_outputs_missing": [],
   "governance_stale_overlays": 0,
   "governance_unresolved": 0,
   "implementation_expectation_count": 212,
-  "reason": "No blockers remain; select the safest executable batch (PFC38).",
+  "reason": "No blockers remain; select the safest executable batch (PFC39).",
   "repo_doctor_overall_status": "GREEN",
   "retired_canon_signals": [
     {

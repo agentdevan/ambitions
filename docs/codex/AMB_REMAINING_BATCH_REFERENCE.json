@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at_utc": "2026-05-18T07:22:01Z",
+    "generated_at_utc": "2026-05-18T08:08:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "PFC38",
-    "next_eligible_title": "Signed Candidate Preparation Gate",
+    "next_eligible_batch": "PFC39",
+    "next_eligible_title": "Final Platform Handoff",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -1316,6 +1316,20 @@
     {
       "id": "PFC38",
       "title": "Signed Candidate Preparation Gate",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete / accepted Yellow",
+      "owner_train": "PFC / Platform Framework Compliance",
+      "source_path": "docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md",
+      "dependency_gate": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "risk_class": "high",
+      "proof_class": "release/legal/privacy/architecture evidence required before claim ownership",
+      "efc_air_surface_inheritance": "REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls",
+      "consolidation_posture": "historical-complete do-not-run",
+      "next_action": "Do not rerun; preserve PFC38 accepted-Yellow signed candidate preparation closeout and hand off to PFC39."
+    },
+    {
+      "id": "PFC39",
+      "title": "Final Platform Handoff",
       "classification": "executable_now",
       "status_class": "executable-now",
       "owner_train": "PFC / Platform Framework Compliance",
@@ -1325,21 +1339,7 @@
       "proof_class": "release/legal/privacy/architecture evidence required before claim ownership",
       "efc_air_surface_inheritance": "REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls",
       "consolidation_posture": "queued successor / immediate next",
-      "next_action": "Runnable now after PFC37 accepted-Yellow closeout."
-    },
-    {
-      "id": "PFC39",
-      "title": "Final Platform Handoff",
-      "classification": "executable_later",
-      "status_class": "queued",
-      "owner_train": "PFC / Platform Framework Compliance",
-      "source_path": "docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md",
-      "dependency_gate": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
-      "risk_class": "high",
-      "proof_class": "release/legal/privacy/architecture evidence required before claim ownership",
-      "efc_air_surface_inheritance": "REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls",
-      "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "next_action": "Runnable now after PFC38 accepted-Yellow closeout."
     },
     {
       "id": "PFC40",
