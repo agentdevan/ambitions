@@ -45,6 +45,17 @@ PFC33 source-support alignment, 2026-05-18:
 - `ExternalSurfaceVerificationChecklist` now requires the Live Activities fallback route to remain `Time`.
 - This alignment updates release-support evidence language only; it does not prove device, accessibility, or release readiness.
 
+PFC33 Phase 04 repair-pass validation, 2026-05-18:
+
+- Branch: `main`
+- Commit: `21afcba6f75eebd8fe1acfc959c65bb249bc9da2`
+- Command: `./scripts/build-local.sh`
+- Result: exit `0`, `Build Succeeded`
+- Log: `output/logs/build-local-20260518-013309.log`
+- Focused XcodeBuildMCP test reruns for `ReleaseExternalTruthReadinessPacketTests` and `ExternalSurfaceVerificationChecklistTests` timed out in `build-for-testing` before producing a new Phase 04 result bundle.
+- GPT-5.5 final-gate XcodeBuildMCP rerun with the same focused test slice and isolated derived data path `output/DerivedData-pfc33-final-gate` also timed out at the 120s wrapper ceiling while the underlying `xcodebuild` remained in `build-for-testing`; the hung process was stopped after observation and no new result bundle was produced.
+- Scope: local simulator build proof only; no current focused-test pass, device, signing, TestFlight, App Store, accessibility, privacy, performance, or human-approval claim.
+
 ## Required local proof packet
 
 A serious local validation run should save or summarize:
