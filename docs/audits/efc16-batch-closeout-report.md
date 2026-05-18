@@ -81,6 +81,20 @@ Phase 03 repaired one queue-coherence issue before final validation: `docs/codex
 - `make batch-self-check` -> exit 0; GREEN
 - `bash scripts/codex-forbidden-claim-scan.sh docs/audits/efc16-batch-closeout-report.md docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json .codex/state/active-batch.yml .codex/reports/current-run-state.md .codex/reports/current-batch-train-state.md 2>/dev/null || true` -> exit 0; context-only hits only, no blocking hits
 
+## Phase 04 GPT-5.5 Repair Pass 1
+
+Status: Green. No remaining repair was required after live inspection of the EFC16 queue metadata, state mirrors, and closeout report. The Phase 03 repair is present: `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` points the top-level fallback to EFC17, preserves EFC16 as complete/do-not-run metadata coverage, and marks EFC17 as the next executable fallback. No app source, project, package, workflow, signing, entitlement, release automation, hosted service, or product behavior files were touched in this phase.
+
+Validation rerun:
+
+- `git status --short` -> exit 0; scoped Phase 04 report update plus unrelated untracked `.codex/state/global-train.lock`
+- `git diff --check` -> exit 0
+- `git diff HEAD~1..HEAD --check` -> exit 0
+- `jq empty docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json docs/codex/AMB_REMAINING_BATCH_REFERENCE.json docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json` -> exit 0
+- `make prompt-audit` -> exit 0; Yellow context-only classifications for support/eval/template/historical files
+- `make batch-self-check` -> exit 0; GREEN
+- `bash scripts/codex-forbidden-claim-scan.sh docs/audits/efc16-batch-closeout-report.md docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json .codex/state/active-batch.yml .codex/reports/current-run-state.md .codex/reports/current-batch-train-state.md 2>/dev/null || true` -> exit 0; context-only hits only, no blocking hits
+
 ## Next Handoff
 
 EFC17 App Store Creative And Reviewer Package
