@@ -86,6 +86,109 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertEqual(record.schemaVersion, ambitionsCommandExecutionRecordSchemaVersion)
     }
 
+    func testCommandReplayReturnsExistingReceiptWithoutDoubleApplyingMutation() async throws {
+        let captureRepository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-replay" })
+        let ledger = InMemoryEventLedgerRepository()
+        let commandRecordRepository = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            eventLedger: ledger,
+            commandExecutionRecords: commandRecordRepository
+        )
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+        let command = AmbitionsCommand(
+            id: "command-replay",
+            kind: .quickCapture,
+            source: .today,
+            payload: AmbitionsCommandPayload(rawText: "Replay me once"),
+            createdAt: DomainTimestamp.string(from: now)
+        )
+        let storedResult = AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: "Saved to Needs a Place",
+            route: .captureInbox,
+            target: AmbitionsCommandTarget(captureID: "capture-replay", destination: .captureInbox),
+            eventLedgerEntryIDs: ["ledger.command.command-replay"],
+            recommendationExplanationIDs: ["explanation-replay"],
+            metadata: ["captureID": "capture-replay"]
+        )
+        let storedRecord = AmbitionsCommandExecutionRecord(
+            command: command,
+            result: storedResult,
+            recordedAt: "2026-04-25T12:01:00Z"
+        )
+
+        try await commandRecordRepository.append(storedRecord)
+
+        let result = await executor.execute(
+            command,
+            context: CommandExecutionContext(now: now.addingTimeInterval(60))
+        )
+
+        let captures = try await captureRepository.listCaptures()
+        let events = try await ledger.fetchRecent(limit: 10)
+        let fetchedReplayRecord = try await commandRecordRepository.fetchRecord(commandID: command.id)
+        let replayedRecord = try XCTUnwrap(fetchedReplayRecord)
+
+        XCTAssertEqual(result.status, .succeeded)
+        XCTAssertEqual(result.summary, "Replayed existing command receipt: Saved to Needs a Place")
+        XCTAssertEqual(result.route, .captureInbox)
+        XCTAssertEqual(result.target?.captureID, "capture-replay")
+        XCTAssertEqual(result.eventLedgerEntryIDs, ["ledger.command.command-replay"])
+        XCTAssertEqual(result.recommendationExplanationIDs, ["explanation-replay"])
+        XCTAssertEqual(result.metadata["ledgerRecordKind"], LedgerRecordTaxonomyKind.receipt.rawValue)
+        XCTAssertEqual(result.metadata["replayDecision"], LedgerReplayDecision.replayExistingReceipt.rawValue)
+        XCTAssertEqual(result.metadata["idempotencyKey"], command.id)
+        XCTAssertEqual(result.metadata["doubleApplyDisposition"], LedgerDoubleApplyDisposition.skipDuplicateMutation.rawValue)
+        XCTAssertEqual(result.metadata["replayedReceiptSummary"], "Saved to Needs a Place")
+        XCTAssertEqual(result.metadata["captureID"], "capture-replay")
+        XCTAssertEqual(captures.count, 0)
+        XCTAssertTrue(events.isEmpty)
+        XCTAssertEqual(replayedRecord.recordedAt, "2026-04-25T12:01:00Z")
+    }
+
+    func testReplayLookupFailureBlocksMutationInsteadOfDoubleApplying() async throws {
+        let captureRepository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-should-not-write" })
+        let ledger = InMemoryEventLedgerRepository()
+        let commandRecordRepository = ThrowingFetchCommandExecutionRecordRepository()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            eventLedger: ledger,
+            commandExecutionRecords: commandRecordRepository
+        )
+        let command = AmbitionsCommand(
+            id: "command-replay-fetch-failure",
+            kind: .quickCapture,
+            source: .today,
+            payload: AmbitionsCommandPayload(rawText: "Do not double apply"),
+            createdAt: "2026-04-25T12:00:00Z"
+        )
+
+        let result = await executor.execute(
+            command,
+            context: CommandExecutionContext(now: Date(timeIntervalSince1970: 1_777_113_600))
+        )
+
+        let captures = try await captureRepository.listCaptures()
+        let events = try await ledger.fetchRecent(limit: 10)
+        let appendedRecords = await commandRecordRepository.appendedRecordCount
+
+        XCTAssertEqual(result.status, .blocked)
+        XCTAssertEqual(
+            result.summary,
+            "Command replay lookup could not be verified, so Ambitions skipped the mutation to avoid double apply."
+        )
+        XCTAssertEqual(result.metadata["replayDecision"], LedgerReplayDecision.lookupUnavailable.rawValue)
+        XCTAssertEqual(result.metadata["idempotencyKey"], "command-replay-fetch-failure")
+        XCTAssertEqual(result.metadata["doubleApplyDisposition"], LedgerDoubleApplyDisposition.skipUnverifiedMutation.rawValue)
+        XCTAssertEqual(result.metadata["blockedBy"], "command_replay_lookup_unavailable")
+        XCTAssertTrue(captures.isEmpty)
+        XCTAssertTrue(events.isEmpty)
+        XCTAssertEqual(appendedRecords, 0)
+    }
+
     func testQuickCapturePersistsExecutionRecordWhenEmissionDisabled() async throws {
         let captureRepository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-no-ledger" })
@@ -439,5 +542,29 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
             XCTAssertEqual(result.target?.reviewID, command.target.reviewID)
             XCTAssertEqual(result.metadata["blockedBy"], "owning_system_not_implemented")
         }
+    }
+}
+
+private enum CommandExecutionRecordTestError: Error {
+    case fetchUnavailable
+}
+
+private actor ThrowingFetchCommandExecutionRecordRepository: AmbitionsCommandExecutionRecordRepository {
+    private var appendedRecords: [AmbitionsCommandExecutionRecord] = []
+
+    var appendedRecordCount: Int {
+        appendedRecords.count
+    }
+
+    func append(_ record: AmbitionsCommandExecutionRecord) async throws {
+        appendedRecords.append(record)
+    }
+
+    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord] {
+        Array(appendedRecords.prefix(max(0, limit)))
+    }
+
+    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord? {
+        throw CommandExecutionRecordTestError.fetchUnavailable
     }
 }

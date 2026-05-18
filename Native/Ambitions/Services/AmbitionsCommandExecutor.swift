@@ -53,6 +53,15 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         _ command: AmbitionsCommand,
         context: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
+        switch await fetchExistingExecutionRecord(for: command) {
+        case .record(let replayRecord):
+            return replayResult(for: command, record: replayRecord)
+        case .lookupUnavailable:
+            return replayLookupUnavailableResult(for: command)
+        case .noRecord:
+            break
+        }
+
         let validation = validate(command)
         guard validation == .valid else {
             let result = blockedResult(for: validation, command: command)
@@ -133,6 +142,73 @@ struct AmbitionsCommandExecutor: CommandExecuting {
 
         try? await commandExecutionRecords.append(record)
     }
+
+    func fetchExistingExecutionRecord(
+        for command: AmbitionsCommand
+    ) async -> LedgerReplayLookupResult {
+        guard let commandExecutionRecords else { return .noRecord }
+        do {
+            guard let record = try await commandExecutionRecords.fetchRecord(commandID: command.id) else {
+                return .noRecord
+            }
+            return .record(record)
+        } catch {
+            return .lookupUnavailable
+        }
+    }
+
+    func replayResult(
+        for command: AmbitionsCommand,
+        record: AmbitionsCommandExecutionRecord
+    ) -> AmbitionsCommandExecutionResult {
+        let outcome = LedgerReplayOutcome(
+            idempotencyKey: LedgerIdempotencyKey(command.id),
+            decision: .replayExistingReceipt,
+            doubleApplyDisposition: .skipDuplicateMutation,
+            receiptSummary: record.result.summary
+        )
+        var metadata = record.result.metadata
+        metadata["ledgerRecordKind"] = LedgerRecordTaxonomyKind.receipt.rawValue
+        metadata["replayDecision"] = outcome.decision.rawValue
+        metadata["idempotencyKey"] = outcome.idempotencyKey.rawValue
+        metadata["doubleApplyDisposition"] = outcome.doubleApplyDisposition.rawValue
+        metadata["replayedReceiptSummary"] = outcome.receiptSummary
+        metadata["replayedRecordID"] = record.id
+        metadata["replayedRecordedAt"] = record.recordedAt
+
+        return AmbitionsCommandExecutionResult(
+            status: record.result.status,
+            summary: "Replayed existing command receipt: \(record.result.summary)",
+            route: record.result.route,
+            target: record.result.target ?? command.target,
+            eventLedgerEntryIDs: record.result.eventLedgerEntryIDs,
+            recommendationExplanationIDs: record.result.recommendationExplanationIDs,
+            metadata: metadata
+        )
+    }
+
+    func replayLookupUnavailableResult(
+        for command: AmbitionsCommand
+    ) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: .blocked,
+            summary: "Command replay lookup could not be verified, so Ambitions skipped the mutation to avoid double apply.",
+            target: command.target,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: [
+                "replayDecision": LedgerReplayDecision.lookupUnavailable.rawValue,
+                "idempotencyKey": LedgerIdempotencyKey(command.id).rawValue,
+                "doubleApplyDisposition": LedgerDoubleApplyDisposition.skipUnverifiedMutation.rawValue,
+                "blockedBy": "command_replay_lookup_unavailable"
+            ]
+        )
+    }
+}
+
+enum LedgerReplayLookupResult: Sendable, Equatable {
+    case noRecord
+    case record(AmbitionsCommandExecutionRecord)
+    case lookupUnavailable
 }
 
 private extension AmbitionsCommandExecutor {
