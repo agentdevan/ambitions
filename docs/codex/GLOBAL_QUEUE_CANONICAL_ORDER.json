@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PFC37",
-  "next_eligible_title": "Release Engineering Evidence",
+  "next_eligible_batch": "PFC38",
+  "next_eligible_title": "Signed Candidate Preparation Gate",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -764,17 +764,17 @@
     {
       "id": "PFC37",
       "title": "Release Engineering Evidence",
-      "classification": "executable_now",
-      "reason": "PFC36 is complete / green. PFC37 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch PFC36.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PFC37 Release Engineering Evidence is complete / Accepted Yellow with closeout in docs/audits/pfc37-batch-closeout-report.md and commit dd17a2528c353df656404ffa51daa752b342a0b6 committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PFC38",
       "title": "Signed Candidate Preparation Gate",
-      "classification": "executable_later",
-      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
-      "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
+      "classification": "executable_now",
+      "reason": "PFC37 is complete / accepted yellow. PFC38 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch PFC37.",
       "efc_applicability": "invoked"
     },
     {
