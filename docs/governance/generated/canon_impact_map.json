@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-17T23:55:08-04:00",
+  "generated_at": "2026-05-18T00:16:22-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -2458,7 +2458,6 @@
       "docs/governance/ACTIVE_EXECUTION_GRAPH.md",
       "docs/governance/AUTHORITY_HIERARCHY.md",
       "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md",
-      "docs/governance/GOVERNANCE_DASHBOARD.md",
       "docs/governance/IMPLEMENTATION_LEVEL_RECONCILIATION_PROTOCOL.md",
       "docs/governance/IMPLEMENTATION_OWNER_MATRIX.md",
       "docs/governance/PROOF_INTEGRITY_AUDIT.md",
@@ -11713,7 +11712,6 @@
     "docs/governance/AUTONOMY_COMMANDS.md",
     "docs/governance/BATCH_RECONCILIATION_AND_PROOF_AUTHORITY_PLAN.md",
     "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md",
-    "docs/governance/GOVERNANCE_DASHBOARD.md",
     "docs/governance/IMPLEMENTATION_LEVEL_RECONCILIATION_PROTOCOL.md",
     "docs/governance/IMPLEMENTATION_OWNER_MATRIX.md",
     "docs/governance/NORMALIZED_REGISTRY_REWRITE_PLAN.md",

@@ -1,11 +1,11 @@
 # Codex OS Sync Report
 
-Generated: 2026-05-17T23:55:08-04:00
+Generated: 2026-05-18T00:16:22-04:00
 
 - Repo doctor status: GREEN
 - Repo doctor missing: False
 - Next action decision: select_next_batch
-- Selected batch: PFC31
+- Selected batch: PFC32
 - Performance missing outputs: 0
 - Freshness missing outputs: 0
 
@@ -20,7 +20,7 @@ Generated: 2026-05-17T23:55:08-04:00
 
 ## Next Action
 
-No blockers remain; select the safest executable batch (PFC31).
+No blockers remain; select the safest executable batch (PFC32).
 
 ```bash
 python3 scripts/codex-os/ambitions-codex-os-batch-selector.py

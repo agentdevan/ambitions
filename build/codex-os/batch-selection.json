@@ -3,7 +3,7 @@
     "queue_prerequisites:Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named."
   ],
   "classification": "executable_now",
-  "generated_at": "2026-05-17T23:55:08-04:00",
+  "generated_at": "2026-05-18T00:16:22-04:00",
   "lane": "platform",
   "next_action_command": "",
   "postflight_commands": [
@@ -14,8 +14,8 @@
     "python3 scripts/governance/ambitions-repo-doctor.py",
     "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
   ],
-  "prompt_file": "prompts/batches/PFC31.md",
-  "reason": "Selected the safest live batch from current state: PFC31.",
-  "run_command": "make authorized-batch BATCH=PFC31 PROMPT=prompts/batches/PFC31.md",
-  "selected_batch": "PFC31"
+  "prompt_file": "prompts/batches/PFC32.md",
+  "reason": "Selected the safest live batch from current state: PFC32.",
+  "run_command": "make authorized-batch BATCH=PFC32 PROMPT=prompts/batches/PFC32.md",
+  "selected_batch": "PFC32"
 }
