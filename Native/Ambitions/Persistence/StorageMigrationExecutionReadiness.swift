@@ -9,6 +9,22 @@ enum StorageMigrationProofKind: String, CaseIterable, Sendable, Equatable, Hasha
     case releaseClaimBlockerAcknowledgement = "release_claim_blocker_acknowledgement"
 }
 
+enum StorageMigrationPlanIssueKind: String, Sendable, Equatable, Hashable, Codable {
+    case unsupportedPlanSchema = "unsupported_plan_schema"
+    case unsupportedSourceLedger = "unsupported_source_ledger"
+    case unsupportedTargetLedger = "unsupported_target_ledger"
+    case duplicatePlanEntryID = "duplicate_plan_entry_id"
+    case mutationMissingSafetyGate = "mutation_missing_safety_gate"
+    case migrationExecutionAuthorized = "migration_execution_authorized"
+}
+
+enum StorageMigrationExecutionReadinessIssueKind: String, Sendable, Equatable, Hashable, Codable {
+    case validatorIssue = "validator_issue"
+    case missingProof = "missing_proof"
+    case duplicateProofID = "duplicate_proof_id"
+    case mutationPlanHasNoMutation = "mutation_plan_has_no_mutation"
+}
+
 struct StorageMigrationProof: Identifiable, Sendable, Equatable, Hashable {
     let id: String
     let kind: StorageMigrationProofKind
@@ -39,6 +55,26 @@ enum StorageMigrationExecutionReadinessIssue: Sendable, Equatable, Hashable {
     case missingProof(entryID: String, gate: StorageMigrationPlanGate, expectedProofKind: StorageMigrationProofKind)
     case duplicateProofID(String)
     case mutationPlanHasNoMutation
+
+    var kind: StorageMigrationExecutionReadinessIssueKind {
+        switch self {
+        case .validatorIssue:
+            return .validatorIssue
+        case .missingProof:
+            return .missingProof
+        case .duplicateProofID:
+            return .duplicateProofID
+        case .mutationPlanHasNoMutation:
+            return .mutationPlanHasNoMutation
+        }
+    }
+
+    var validatorIssueKind: StorageMigrationPlanIssueKind? {
+        guard case let .validatorIssue(issue) = self else {
+            return nil
+        }
+        return issue.kind
+    }
 }
 
 struct StorageMigrationExecutionReadiness: Sendable, Equatable {
@@ -124,6 +160,25 @@ struct StorageMigrationExecutionReadinessEvaluator: Sendable {
             return .userReviewApproval
         case .releaseClaimBlocked:
             return .releaseClaimBlockerAcknowledgement
+        }
+    }
+}
+
+extension StorageMigrationPlanIssue {
+    var kind: StorageMigrationPlanIssueKind {
+        switch self {
+        case .unsupportedPlanSchema:
+            return .unsupportedPlanSchema
+        case .unsupportedSourceLedger:
+            return .unsupportedSourceLedger
+        case .unsupportedTargetLedger:
+            return .unsupportedTargetLedger
+        case .duplicatePlanEntryID:
+            return .duplicatePlanEntryID
+        case .mutationMissingSafetyGate:
+            return .mutationMissingSafetyGate
+        case .migrationExecutionAuthorized:
+            return .migrationExecutionAuthorized
         }
     }
 }

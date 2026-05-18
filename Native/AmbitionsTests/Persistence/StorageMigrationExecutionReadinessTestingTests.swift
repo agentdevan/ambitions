@@ -62,6 +62,7 @@ struct StorageMigrationExecutionReadinessTestingTests {
 
         #expect(readiness.isGreen == false)
         #expect(readiness.issues.contains(.duplicateProofID("duplicate-proof")))
+        #expect(readiness.issues.contains { $0.kind == .duplicateProofID })
     }
 
     @Test func noMutationPlanCannotRequestMigrationExecution() {
@@ -78,6 +79,37 @@ struct StorageMigrationExecutionReadinessTestingTests {
         #expect(readiness.isGreen == false)
         #expect(readiness.canRequestMigrationExecution == false)
         #expect(readiness.issues.contains(.mutationPlanHasNoMutation))
+        #expect(readiness.issues.contains { $0.kind == .mutationPlanHasNoMutation })
+    }
+
+    @Test func validatorIssuesExposeDeterministicFailureKinds() {
+        let plan = StorageMigrationPlan(
+            schemaVersion: "storage_migration_plan_scaffold.native.v0",
+            sourceLedgerSchemaVersion: StorageSchemaVersionLedger.current.schemaVersion,
+            targetLedgerSchemaVersion: StorageSchemaVersionLedger.current.schemaVersion,
+            entries: StorageSchemaVersionLedger.current.entries.map { entry in
+                StorageMigrationPlanEntry(
+                    id: "migration.no_change.\(entry.id)",
+                    sourceEntryID: entry.id,
+                    targetEntryID: entry.id,
+                    storedTypeName: entry.storedTypeName,
+                    action: .noChange,
+                    fromVersion: entry.currentVersion,
+                    toVersion: entry.currentVersion,
+                    requiredGates: [],
+                    notes: "No change test fixture."
+                )
+            }
+        )
+
+        let readiness = StorageMigrationExecutionReadinessEvaluator().evaluate(
+            plan: plan,
+            proofs: []
+        )
+
+        #expect(readiness.issues.contains { issue in
+            issue.kind == .validatorIssue && issue.validatorIssueKind == .unsupportedPlanSchema
+        })
     }
 
     private static func versionChangePlan() -> StorageMigrationPlan {

@@ -25,6 +25,7 @@ final class PortableRestoreRollbackTests: XCTestCase {
         XCTAssertEqual(report.requestedMode, .replaceLocalStore)
         XCTAssertTrue(report.rollbackAttempted)
         XCTAssertFalse(report.durableMutationAllowed)
+        XCTAssertEqual(report.diagnosticKind, .rollbackRestored)
         XCTAssertEqual(report.rollbackReport?.importedAppStateCount, 1)
         XCTAssertEqual(currentDisplayName, "Backup User")
         XCTAssertEqual(importCallCount, 2)
@@ -49,11 +50,42 @@ final class PortableRestoreRollbackTests: XCTestCase {
         let importCallCount = await scripted.importCallCount()
 
         XCTAssertEqual(report.status, .blockedBeforeImport)
+        XCTAssertEqual(report.diagnosticKind, .blockedBeforeImport)
         XCTAssertFalse(report.rollbackAttempted)
         XCTAssertNil(report.rollbackReport)
         XCTAssertEqual(currentDisplayName, "Backup User")
         XCTAssertEqual(importCallCount, 0)
         XCTAssertTrue(report.importErrorMessage?.contains("dry run failed") == true)
+    }
+
+    func testRestoreRollbackReportsRollbackFailedWhenRollbackImportAlsoThrows() async throws {
+        let backup = snapshot(displayName: "Rollback Package Fails")
+        let incoming = snapshot(displayName: "Incoming Fails")
+        let damaged = snapshot(displayName: "Damaged Partial Import")
+        let scripted = ScriptedRollbackSnapshotService(
+            current: backup,
+            failingImportDisplayName: "Incoming Fails",
+            rollbackFailureDisplayName: "Rollback Package Fails",
+            damagedSnapshot: damaged
+        )
+        let service = PortableRestoreRollbackService(snapshotService: scripted)
+
+        let report = await service.restoreSnapshotWithRollback(
+            incoming,
+            mode: .replaceLocalStore,
+            rollbackPackage: backup
+        )
+        let currentDisplayName = await scripted.currentDisplayName()
+        let importCallCount = await scripted.importCallCount()
+
+        XCTAssertEqual(report.status, .rollbackFailed)
+        XCTAssertEqual(report.diagnosticKind, .rollbackFailed)
+        XCTAssertTrue(report.rollbackAttempted)
+        XCTAssertFalse(report.durableMutationAllowed)
+        XCTAssertNil(report.rollbackReport)
+        XCTAssertNotNil(report.rollbackErrorMessage)
+        XCTAssertEqual(currentDisplayName, "Damaged Partial Import")
+        XCTAssertEqual(importCallCount, 2)
     }
 
     func testRestoreRollbackWrapperCanCompleteRealReplaceImportWithoutRollbackAttempt() async throws {
@@ -85,10 +117,30 @@ final class PortableRestoreRollbackTests: XCTestCase {
         let restoredState = try await repositories.appState.loadState()
 
         XCTAssertEqual(report.status, .importSucceeded)
+        XCTAssertEqual(report.diagnosticKind, .importSucceeded)
         XCTAssertFalse(report.rollbackAttempted)
         XCTAssertEqual(report.importReport?.importedAppStateCount, 1)
         XCTAssertEqual(report.rollbackDryRunReport?.wouldResetLocalStore, true)
         XCTAssertEqual(restoredState.userDisplayName, "After Restore")
+    }
+
+    func testRestoreRollbackReportDecodesOlderPayloadWithoutDiagnosticKind() throws {
+        let payload = """
+        {
+          "status": "rollback_restored_backup",
+          "requestedMode": "replace_local_store",
+          "rollbackAttempted": true,
+          "durableMutationAllowed": false,
+          "noClaimBoundary": "Restore rollback is local backup recovery proof only. It is not a migration-safe or data-loss-proof claim."
+        }
+        """.data(using: .utf8)!
+
+        let report = try JSONDecoder().decode(PortableRestoreRollbackReport.self, from: payload)
+
+        XCTAssertEqual(report.status, .rollbackRestoredBackup)
+        XCTAssertEqual(report.diagnosticKind, .rollbackRestored)
+        XCTAssertTrue(report.rollbackAttempted)
+        XCTAssertFalse(report.durableMutationAllowed)
     }
 }
 
@@ -110,6 +162,7 @@ private actor ScriptedRollbackSnapshotService: PortableSnapshotServicing {
     private var current: PortableAppSnapshot
     private let dryRunFailureDisplayName: String?
     private let failingImportDisplayName: String?
+    private let rollbackFailureDisplayName: String?
     private let damagedSnapshot: PortableAppSnapshot?
     private var imports = 0
 
@@ -117,11 +170,13 @@ private actor ScriptedRollbackSnapshotService: PortableSnapshotServicing {
         current: PortableAppSnapshot,
         dryRunFailureDisplayName: String? = nil,
         failingImportDisplayName: String? = nil,
+        rollbackFailureDisplayName: String? = nil,
         damagedSnapshot: PortableAppSnapshot? = nil
     ) {
         self.current = current
         self.dryRunFailureDisplayName = dryRunFailureDisplayName
         self.failingImportDisplayName = failingImportDisplayName
+        self.rollbackFailureDisplayName = rollbackFailureDisplayName
         self.damagedSnapshot = damagedSnapshot
     }
 
@@ -159,7 +214,8 @@ private actor ScriptedRollbackSnapshotService: PortableSnapshotServicing {
 
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
         imports += 1
-        if snapshot.appState.userDisplayName == failingImportDisplayName {
+        if snapshot.appState.userDisplayName == failingImportDisplayName
+            || snapshot.appState.userDisplayName == rollbackFailureDisplayName {
             if let damagedSnapshot {
                 current = damagedSnapshot
             }

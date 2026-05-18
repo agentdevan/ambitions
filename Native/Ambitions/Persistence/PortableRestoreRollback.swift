@@ -7,8 +7,16 @@ enum PortableRestoreRollbackStatus: String, Codable, Sendable, Equatable {
     case rollbackFailed = "rollback_failed"
 }
 
+enum PortableRestoreRollbackDiagnosticKind: String, Codable, Sendable, Equatable, Hashable {
+    case importSucceeded = "import_succeeded"
+    case blockedBeforeImport = "blocked_before_import"
+    case rollbackRestored = "rollback_restored"
+    case rollbackFailed = "rollback_failed"
+}
+
 struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
     let status: PortableRestoreRollbackStatus
+    let diagnosticKind: PortableRestoreRollbackDiagnosticKind
     let requestedMode: PortableImportMode
     let incomingDryRunReport: PortableImportDryRunReport?
     let rollbackDryRunReport: PortableImportDryRunReport?
@@ -20,8 +28,24 @@ struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
     let durableMutationAllowed: Bool
     let noClaimBoundary: String
 
+    private enum CodingKeys: String, CodingKey {
+        case status
+        case diagnosticKind
+        case requestedMode
+        case incomingDryRunReport
+        case rollbackDryRunReport
+        case importReport
+        case rollbackReport
+        case importErrorMessage
+        case rollbackErrorMessage
+        case rollbackAttempted
+        case durableMutationAllowed
+        case noClaimBoundary
+    }
+
     init(
         status: PortableRestoreRollbackStatus,
+        diagnosticKind: PortableRestoreRollbackDiagnosticKind? = nil,
         requestedMode: PortableImportMode,
         incomingDryRunReport: PortableImportDryRunReport?,
         rollbackDryRunReport: PortableImportDryRunReport?,
@@ -34,6 +58,7 @@ struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
         noClaimBoundary: String = "Restore rollback is local backup recovery proof only. It is not a migration-safe or data-loss-proof claim."
     ) {
         self.status = status
+        self.diagnosticKind = diagnosticKind ?? Self.diagnosticKind(for: status)
         self.requestedMode = requestedMode
         self.incomingDryRunReport = incomingDryRunReport
         self.rollbackDryRunReport = rollbackDryRunReport
@@ -44,6 +69,39 @@ struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
         self.rollbackAttempted = rollbackAttempted
         self.durableMutationAllowed = durableMutationAllowed
         self.noClaimBoundary = noClaimBoundary
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let status = try container.decode(PortableRestoreRollbackStatus.self, forKey: .status)
+        self.status = status
+        self.diagnosticKind = try container.decodeIfPresent(
+            PortableRestoreRollbackDiagnosticKind.self,
+            forKey: .diagnosticKind
+        ) ?? Self.diagnosticKind(for: status)
+        self.requestedMode = try container.decode(PortableImportMode.self, forKey: .requestedMode)
+        self.incomingDryRunReport = try container.decodeIfPresent(PortableImportDryRunReport.self, forKey: .incomingDryRunReport)
+        self.rollbackDryRunReport = try container.decodeIfPresent(PortableImportDryRunReport.self, forKey: .rollbackDryRunReport)
+        self.importReport = try container.decodeIfPresent(PortableImportReport.self, forKey: .importReport)
+        self.rollbackReport = try container.decodeIfPresent(PortableImportReport.self, forKey: .rollbackReport)
+        self.importErrorMessage = try container.decodeIfPresent(String.self, forKey: .importErrorMessage)
+        self.rollbackErrorMessage = try container.decodeIfPresent(String.self, forKey: .rollbackErrorMessage)
+        self.rollbackAttempted = try container.decode(Bool.self, forKey: .rollbackAttempted)
+        self.durableMutationAllowed = try container.decode(Bool.self, forKey: .durableMutationAllowed)
+        self.noClaimBoundary = try container.decode(String.self, forKey: .noClaimBoundary)
+    }
+
+    private static func diagnosticKind(for status: PortableRestoreRollbackStatus) -> PortableRestoreRollbackDiagnosticKind {
+        switch status {
+        case .importSucceeded:
+            return .importSucceeded
+        case .blockedBeforeImport:
+            return .blockedBeforeImport
+        case .rollbackRestoredBackup:
+            return .rollbackRestored
+        case .rollbackFailed:
+            return .rollbackFailed
+        }
     }
 }
 
