@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "RHC02",
-  "next_eligible_title": "Large File Extraction And Module Boundary",
+  "next_eligible_batch": "RHC03",
+  "next_eligible_title": "Placeholder Stub And Compatibility Seam Cleanup",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -804,17 +804,17 @@
     {
       "id": "RHC02",
       "title": "Large File Extraction And Module Boundary",
-      "classification": "executable_now",
-      "reason": "RHC01 is complete / green. RHC02 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch RHC01.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "RHC02 Large File Extraction And Module Boundary is complete / Green with closeout in docs/audits/rhc02-batch-closeout-report.md and commit 2c6dcba1da9ff13b650aca1f963e4d9a4459b46e committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "not applicable"
     },
     {
       "id": "RHC03",
       "title": "Placeholder Stub And Compatibility Seam Cleanup",
-      "classification": "executable_later",
-      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
-      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "classification": "executable_now",
+      "reason": "RHC02 is complete / green. RHC03 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch RHC02.",
       "efc_applicability": "not applicable"
     },
     {

@@ -1,7 +1,7 @@
 # Ambitions Remaining Batch Reference
 
 Generated: 2026-05-18T08:31:00Z
-Next eligible: RHC02 — Large File Extraction And Module Boundary
+Next eligible: RHC03 — Placeholder Stub And Compatibility Seam Cleanup
 
 ## Summary
 - Total queue entries: 146
@@ -109,8 +109,8 @@ Next eligible: RHC02 — Large File Extraction And Module Boundary
 | PFC39 | Final Platform Handoff | historical_complete_do_not_run | PFC / Platform Framework Compliance | `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md` | historical-complete / accepted Yellow | high | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls | historical-complete do-not-run | Do not rerun; preserve PFC39 accepted-Yellow final platform handoff closeout and hand off to PFC40. |
 | PFC40 | Platform Framework Compliance Closeout | historical_complete_do_not_run | PFC / Platform Framework Compliance | `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md` | historical-complete / accepted Yellow | high | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls | historical-complete do-not-run | Do not rerun; preserve PFC40 accepted-Yellow platform framework compliance closeout and hand off to RHC01. |
 | RHC01 | Repo Hygiene Triage And Owner Map | historical_complete_do_not_run | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | historical-complete / Green | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | historical-complete do-not-run | Do not rerun; preserve RHC01 Green repo hygiene owner-map closeout and hand off to RHC02. |
-| RHC02 | Large File Extraction And Module Boundary | executable_now | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | executable-now | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor / immediate next | Runnable now after RHC01 Green closeout. |
-| RHC03 | Placeholder Stub And Compatibility Seam Cleanup | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
+| RHC02 | Large File Extraction And Module Boundary | historical_complete_do_not_run | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | historical-complete / Green | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | historical-complete do-not-run | Do not rerun; preserve RHC02 Green large-file extraction closeout and hand off to RHC03. |
+| RHC03 | Placeholder Stub And Compatibility Seam Cleanup | executable_now | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | executable-now | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor / immediate next | Runnable now after RHC02 Green closeout. |
 | RHC04 | Stale Copy Docs And Generated Artifact Hygiene | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
 | RHC05 | Validation Script Noise And Allowlist Hardening | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
 | RHC06 | Repo Hygiene Closeout And Handoff | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
@@ -289,8 +289,8 @@ Next eligible: RHC02 — Large File Extraction And Module Boundary
 
 ## RHC train
 - **RHC01** · historical-complete / Green · Repo Hygiene Triage And Owner Map · Do not rerun; preserve RHC01 Green repo hygiene owner-map closeout and hand off to RHC02.
-- **RHC02** · executable-now · Large File Extraction And Module Boundary · Runnable now after RHC01 Green closeout.
-- **RHC03** · queued · Placeholder Stub And Compatibility Seam Cleanup · Runnable once prior batch order and dependency gates are satisfied.
+- **RHC02** · historical-complete / Green · Large File Extraction And Module Boundary · Do not rerun; preserve RHC02 Green large-file extraction closeout and hand off to RHC03.
+- **RHC03** · executable-now · Placeholder Stub And Compatibility Seam Cleanup · Runnable now after RHC02 Green closeout.
 - **RHC04** · queued · Stale Copy Docs And Generated Artifact Hygiene · Runnable once prior batch order and dependency gates are satisfied.
 - **RHC05** · queued · Validation Script Noise And Allowlist Hardening · Runnable once prior batch order and dependency gates are satisfied.
 - **RHC06** · queued · Repo Hygiene Closeout And Handoff · Runnable once prior batch order and dependency gates are satisfied.

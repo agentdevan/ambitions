@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T05:14:59-04:00
+Generated: 2026-05-18T05:41:29-04:00
 
 ## Plan → Time
 
@@ -1375,6 +1375,7 @@ Generated: 2026-05-18T05:14:59-04:00
 - Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift
 - Native/Ambitions/Features/Goals/GoalsFeatureModels.swift
 - Native/Ambitions/Features/Goals/GoalsFeatureService.swift
+- Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift
 - Native/Ambitions/Features/Goals/StubGoalsService.swift
 - Native/Ambitions/Features/Goals/GoalsScreen.swift
 - Native/Ambitions/Features/Goals/CreateGoalScreen.swift

@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T05:14:59-04:00",
+  "generated_at": "2026-05-18T05:41:29-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -2560,6 +2560,7 @@
       "Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift",
       "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift",
       "Native/Ambitions/Features/Goals/GoalsFeatureService.swift",
+      "Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift",
       "Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift",
       "Native/Ambitions/Features/Goals/GoalsScreen.swift",
       "Native/Ambitions/Features/Goals/GoalsViewModels.swift",
@@ -4158,6 +4159,7 @@
       "Native/Ambitions/Features/Goals/CreateGoalScreen.swift",
       "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift",
       "Native/Ambitions/Features/Goals/GoalsFeatureService.swift",
+      "Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift",
       "Native/Ambitions/Features/Goals/GoalsScreen.swift",
       "Native/Ambitions/Features/Goals/StubGoalsService.swift",
       "Native/Ambitions/Features/Habits/HabitsFeatureService.swift",
@@ -7416,7 +7418,6 @@
       "docs/audits/pxos-future-canon-integration-codex-os-upgrade-and-global-reorder-report.md",
       "docs/audits/queue-intel-codexos-upgrade-report.md",
       "docs/audits/rhc01-batch-closeout-report.md",
-      "docs/audits/rhc02-batch-closeout-report.md",
       "docs/audits/rhc04-batch-closeout-report.md",
       "docs/audits/rhc06-batch-closeout-report.md",
       "docs/audits/sa10-batch-closeout-report.md",
@@ -10029,6 +10030,7 @@
     "Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift",
     "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift",
     "Native/Ambitions/Features/Goals/GoalsFeatureService.swift",
+    "Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift",
     "Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift",
     "Native/Ambitions/Features/Goals/GoalsScreen.swift",
     "Native/Ambitions/Features/Goals/GoalsViewModels.swift",
@@ -12280,6 +12282,10 @@
     },
     {
       "path": "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
+      "path": "Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift",
       "signal": "possible active Plan top-level residue"
     },
     {

@@ -1,6 +1,6 @@
 # Canon Impact Plan
 
-Generated: 2026-05-18T05:14:59-04:00
+Generated: 2026-05-18T05:41:29-04:00
 
 ## Changed Canon Files
 
@@ -155,6 +155,7 @@ Generated: 2026-05-18T05:14:59-04:00
 - Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift
 - Native/Ambitions/Features/Goals/GoalsFeatureModels.swift
 - Native/Ambitions/Features/Goals/GoalsFeatureService.swift
+- Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift
 - Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift
 - Native/Ambitions/Features/Goals/GoalsScreen.swift
 - Native/Ambitions/Features/Goals/GoalsViewModels.swift
@@ -207,7 +208,6 @@ Generated: 2026-05-18T05:14:59-04:00
 - Native/Ambitions/Features/Today/TodayPanels.swift
 - Native/Ambitions/Features/Today/TodayProofReceiptLedgerState.swift
 - Native/Ambitions/Features/Today/TodayReadModelProjector.swift
-- Native/Ambitions/Features/Today/TodayScreen.swift
 
 ## Retired Canon Signals
 
@@ -221,6 +221,7 @@ Generated: 2026-05-18T05:14:59-04:00
 - Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift: possible active Plan top-level residue
 - Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift: possible active Plan top-level residue
 - Native/Ambitions/Features/Goals/GoalsFeatureModels.swift: possible active Plan top-level residue
+- Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift: possible active Plan top-level residue
 - Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift: possible active Plan top-level residue
 - Native/Ambitions/Features/Today/TodayScreenContractSnapshot.swift: possible active Plan top-level residue
 - Native/Ambitions/Features/You/YouCrossSurfaceProofReviewProjector.swift: possible active Plan top-level residue
@@ -410,7 +411,6 @@ Generated: 2026-05-18T05:14:59-04:00
 - docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md: possible Hero Step Panel without Start Here binding
 - docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md: possible active Plan top-level residue
 - docs/canon/Ambitions_3_0_Surface_State_Matrix.md: possible active Plan top-level residue
-- docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md: possible active Plan top-level residue
 
 ## Required Codex Behavior
 
