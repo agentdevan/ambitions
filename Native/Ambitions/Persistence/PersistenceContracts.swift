@@ -318,6 +318,7 @@ struct TrustHistoryQuery: Sendable, Equatable {
     let receiptPrivacyLevels: Set<ActionReceiptPrivacyLevel>
     let receiptProofRelevance: Set<ActionReceiptProofRelevance>
     let receiptTrustStatuses: Set<ActionReceiptTrustStatus>
+    let receiptRequiresFreshnessReview: Bool?
     let eventSources: Set<EventLedgerSource>
     let eventPrivacyLevels: Set<EventLedgerPrivacyClassification>
     let requiresReview: Bool?
@@ -335,6 +336,7 @@ struct TrustHistoryQuery: Sendable, Equatable {
         receiptPrivacyLevels: Set<ActionReceiptPrivacyLevel> = [],
         receiptProofRelevance: Set<ActionReceiptProofRelevance> = [],
         receiptTrustStatuses: Set<ActionReceiptTrustStatus> = [],
+        receiptRequiresFreshnessReview: Bool? = nil,
         eventSources: Set<EventLedgerSource> = [],
         eventPrivacyLevels: Set<EventLedgerPrivacyClassification> = [],
         requiresReview: Bool? = nil,
@@ -351,6 +353,7 @@ struct TrustHistoryQuery: Sendable, Equatable {
         self.receiptPrivacyLevels = receiptPrivacyLevels
         self.receiptProofRelevance = receiptProofRelevance
         self.receiptTrustStatuses = receiptTrustStatuses
+        self.receiptRequiresFreshnessReview = receiptRequiresFreshnessReview
         self.eventSources = eventSources
         self.eventPrivacyLevels = eventPrivacyLevels
         self.requiresReview = requiresReview
@@ -377,6 +380,7 @@ struct TrustHistoryQueryResult: Sendable, Equatable, Identifiable {
     let localOnly: Bool
     let title: String
     let summary: String
+    let proofFreshnessLineage: ActionReceiptProofFreshnessLineage?
 }
 
 struct TrustHistoryQueryProjection: Sendable, Equatable {

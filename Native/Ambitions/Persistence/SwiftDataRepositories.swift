@@ -770,7 +770,8 @@ private enum RepositoryMapping {
             localOnly: record.localOnly,
             createdAt: record.receipt.createdAt,
             occurredAt: record.receipt.occurredAt,
-            receiptData: try PersistenceCoding.encode(record.receipt)
+            receiptData: try PersistenceCoding.encode(record.receipt),
+            proofFreshnessLineageData: try PersistenceCoding.encode(record.proofFreshnessLineage)
         )
     }
 
@@ -786,37 +787,43 @@ private enum RepositoryMapping {
         persisted.createdAt = record.receipt.createdAt
         persisted.occurredAt = record.receipt.occurredAt
         persisted.receiptData = try PersistenceCoding.encode(record.receipt)
+        persisted.proofFreshnessLineageData = try PersistenceCoding.encode(record.proofFreshnessLineage)
     }
 
     static func actionReceiptHistoryRecord(from persistedRecord: ActionReceiptHistoryRecordModel) throws -> ActionReceiptHistoryRecord {
         if let receipt = try? PersistenceCoding.decode(ActionReceipt.self, from: persistedRecord.receiptData) {
+            let proofFreshnessLineage = (try? PersistenceCoding.decode(ActionReceiptProofFreshnessLineage.self, from: persistedRecord.proofFreshnessLineageData))
             return ActionReceiptHistoryRecord(
                 receipt: receipt,
                 privacyLevel: RepositoryMapping.persisted(ActionReceiptPrivacyLevel.self, rawValue: persistedRecord.privacyLevelRaw, fallback: .safeToShow, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "privacyLevelRaw"),
                 localOnly: persistedRecord.localOnly,
                 proofRelevance: RepositoryMapping.persisted(ActionReceiptProofRelevance.self, rawValue: persistedRecord.proofRelevanceRaw, fallback: .notProof, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "proofRelevanceRaw"),
-                requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse
+                requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse,
+                proofFreshnessLineage: proofFreshnessLineage
             )
         }
 
+        let fallbackReceipt = ActionReceipt(
+            id: persistedRecord.id,
+            resultState: RepositoryMapping.persisted(ActionReceiptResultState.self, rawValue: persistedRecord.resultStateRaw, fallback: .changed, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "resultStateRaw"),
+            title: "Recovered receipt",
+            summary: "Recovered receipt payload was unavailable.",
+            sourceDomain: RepositoryMapping.persisted(ActionReceiptSourceDomain.self, rawValue: persistedRecord.sourceDomainRaw, fallback: .system, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "sourceDomainRaw"),
+            occurredAt: persistedRecord.occurredAt,
+            createdAt: persistedRecord.createdAt,
+            affectedObjects: [],
+            changedFacts: [],
+            correctionAvailability: .unavailable,
+            undoAvailability: RepositoryMapping.persisted(ActionReceiptUndoAvailability.self, rawValue: persistedRecord.undoAvailabilityRaw, fallback: .unavailable, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "undoAvailabilityRaw")
+        )
+
         return ActionReceiptHistoryRecord(
-            receipt: ActionReceipt(
-                id: persistedRecord.id,
-                resultState: RepositoryMapping.persisted(ActionReceiptResultState.self, rawValue: persistedRecord.resultStateRaw, fallback: .changed, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "resultStateRaw"),
-                title: "Recovered receipt",
-                summary: "Recovered receipt payload was unavailable.",
-                sourceDomain: RepositoryMapping.persisted(ActionReceiptSourceDomain.self, rawValue: persistedRecord.sourceDomainRaw, fallback: .system, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "sourceDomainRaw"),
-                occurredAt: persistedRecord.occurredAt,
-                createdAt: persistedRecord.createdAt,
-                affectedObjects: [],
-                changedFacts: [],
-                correctionAvailability: .unavailable,
-                undoAvailability: RepositoryMapping.persisted(ActionReceiptUndoAvailability.self, rawValue: persistedRecord.undoAvailabilityRaw, fallback: .unavailable, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "undoAvailabilityRaw")
-            ),
+            receipt: fallbackReceipt,
             privacyLevel: RepositoryMapping.persisted(ActionReceiptPrivacyLevel.self, rawValue: persistedRecord.privacyLevelRaw, fallback: .safeToShow, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "privacyLevelRaw"),
             localOnly: persistedRecord.localOnly,
             proofRelevance: RepositoryMapping.persisted(ActionReceiptProofRelevance.self, rawValue: persistedRecord.proofRelevanceRaw, fallback: .notProof, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "proofRelevanceRaw"),
-            requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse
+            requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse,
+            proofFreshnessLineage: (try? PersistenceCoding.decode(ActionReceiptProofFreshnessLineage.self, from: persistedRecord.proofFreshnessLineageData))
         )
     }
 
@@ -1606,7 +1613,8 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
             proofReferenceKinds: [],
             localOnly: record.localOnly,
             title: record.receipt.title,
-            summary: record.receipt.summary
+            summary: record.receipt.summary,
+            proofFreshnessLineage: record.proofFreshnessLineage
         )
     }
 
@@ -1628,7 +1636,8 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
                 },
             localOnly: event.localOnly,
             title: event.title,
-            summary: event.summary ?? ""
+            summary: event.summary ?? "",
+            proofFreshnessLineage: nil
         )
     }
 
@@ -1640,6 +1649,7 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
         if query.receiptPrivacyLevels.isEmpty == false && query.receiptPrivacyLevels.contains(record.privacyLevel) == false { return false }
         if query.receiptProofRelevance.isEmpty == false && query.receiptProofRelevance.contains(record.proofRelevance) == false { return false }
         if query.receiptTrustStatuses.isEmpty == false && query.receiptTrustStatuses.contains(record.trustStatus) == false { return false }
+        if let requiresFreshnessReview = query.receiptRequiresFreshnessReview, record.proofFreshnessLineage.requiresFreshnessReview != requiresFreshnessReview { return false }
         return true
     }
 

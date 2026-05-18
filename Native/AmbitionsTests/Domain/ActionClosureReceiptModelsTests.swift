@@ -564,6 +564,48 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertFalse(summary.publicClaimAllowed)
     }
 
+    func testEB18ProofFreshnessLineageCapturesSourceIdentifiersAndLocksPublicProof() {
+        let goal = object(.goal, "goal-lineage", label: "Launch goal", sourceDomain: .goals)
+        let capture = object(.capture, "capture-lineage", label: "Launch checklist", sourceDomain: .capture)
+        let planItem = object(.action, "plan-lineage", label: "Publish notes", sourceDomain: .time)
+        let receipt = ActionReceipt(
+            id: "receipt-eb18-lineage",
+            resultState: .completed,
+            title: "Proof captured",
+            summary: "Saved launch proof.",
+            sourceDomain: .time,
+            occurredAt: "2026-05-03T13:05:00Z",
+            affectedObjects: [goal, planItem, capture],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-eb18-lineage",
+                    kind: .completedAction,
+                    object: planItem,
+                    summary: "Proof captured and stored."
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: capture
+        )
+
+        let record = ActionReceiptHistoryRecord(receipt: receipt)
+
+        XCTAssertEqual(record.proofFreshnessLineage.receiptID, "receipt-eb18-lineage")
+        XCTAssertEqual(record.proofFreshnessLineage.sourceObjectID, "capture-lineage")
+        XCTAssertEqual(record.proofFreshnessLineage.lineageObjectIDs, ["capture-lineage", "goal-lineage", "plan-lineage"])
+        XCTAssertEqual(record.proofFreshnessLineage.proofReferenceIDs, ["proof.receipt-eb18-lineage"])
+        XCTAssertEqual(record.proofFreshnessLineage.sourceFreshnessLabel, "Source freshness current local receipt")
+        XCTAssertEqual(record.proofFreshnessLineage.privacyReceiptLabel, "Privacy receipt stored on this device")
+        XCTAssertTrue(record.proofFreshnessLineage.canUseAsCurrentLocalSource)
+        XCTAssertFalse(record.proofFreshnessLineage.redactsPrivateDetail)
+        XCTAssertFalse(record.proofFreshnessLineage.requiresFreshnessReview)
+        XCTAssertTrue(record.proofFreshnessLineage.localOnly)
+        XCTAssertFalse(record.proofFreshnessLineage.publicClaimAllowed)
+        XCTAssertEqual(record.sourceFreshnessPrivacySummary.sourceFreshnessLabel, "Source freshness current local receipt")
+        XCTAssertFalse(record.sourceFreshnessPrivacySummary.publicClaimAllowed)
+    }
+
     func testEB18SourceFreshnessPrivacySummaryDegradesUnsafeOrMissingReceipts() {
         let planItem = object(.action, "plan-item-1", label: "Draft launch block", sourceDomain: .time)
         let safeFailure = ActionReceipt(

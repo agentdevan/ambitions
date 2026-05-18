@@ -703,6 +703,7 @@ final class ActionReceiptHistoryRecordModel {
     var createdAt: String
     var occurredAt: String
     var receiptData: Data
+    var proofFreshnessLineageData: Data
 
     init(
         id: String,
@@ -716,7 +717,8 @@ final class ActionReceiptHistoryRecordModel {
         localOnly: Bool,
         createdAt: String,
         occurredAt: String,
-        receiptData: Data
+        receiptData: Data,
+        proofFreshnessLineageData: Data
     ) {
         self.id = id
         self.schemaVersion = schemaVersion
@@ -730,5 +732,6 @@ final class ActionReceiptHistoryRecordModel {
         self.createdAt = createdAt
         self.occurredAt = occurredAt
         self.receiptData = receiptData
+        self.proofFreshnessLineageData = proofFreshnessLineageData
     }
 }

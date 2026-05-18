@@ -104,6 +104,7 @@ final class TrustHistoryQueryRepositoryTests: XCTestCase {
         XCTAssertEqual(projection.results.first?.requiresReview, nil)
         XCTAssertEqual(projection.results.first?.proofReferenceKinds, [])
         XCTAssertEqual(projection.results.first?.trustStatus, .safeToShow)
+        XCTAssertEqual(projection.results.first?.proofFreshnessLineage?.proofReferenceIDs, ["proof.receipt-1"])
         XCTAssertEqual(projection.results.last?.kind, .eventLedger)
         XCTAssertEqual(projection.results.last?.requiresReview, true)
         XCTAssertEqual(projection.results.last?.proofReferenceKinds, [.capture])
@@ -173,6 +174,59 @@ final class TrustHistoryQueryRepositoryTests: XCTestCase {
         )
         XCTAssertEqual(onlyEvents.totalMatchCount, 1)
         XCTAssertEqual(onlyEvents.results.map { $0.id }, ["event.event-only"])
+    }
+
+    func testSwiftDataTrustHistoryQueryFiltersReceiptFreshnessReviewFlags() async throws {
+        let store = try await makeStore()
+        let repository = SwiftDataTrustHistoryQueryRepository(store: store)
+        let receiptRepository = SwiftDataActionReceiptHistoryRepository(store: store)
+
+        let goal = object(.goal, "goal-freshness", label: "Freshness goal")
+        try await receiptRepository.save([
+            ActionReceiptHistoryRecord(
+                receipt: receipt(
+                    id: "receipt-freshness-required",
+                    resultState: .changed,
+                    title: "Freshness required",
+                    affectedObjects: [goal],
+                    changedFacts: [],
+                    sourceDomain: .capture
+                ),
+                privacyLevel: .safeToShow,
+                localOnly: true
+            ),
+            ActionReceiptHistoryRecord(
+                receipt: receipt(
+                    id: "receipt-freshness-clear",
+                    resultState: .completed,
+                    title: "Freshness clear",
+                    affectedObjects: [goal],
+                    changedFacts: [
+                        ActionReceiptChangedFact(
+                            id: "fact-freshness-clear",
+                            kind: .completedTask,
+                            object: goal,
+                            summary: "Completed."
+                        )
+                    ],
+                    sourceDomain: .time
+                ),
+                privacyLevel: .safeToShow,
+                localOnly: true
+            )
+        ])
+
+        let filtered = try await repository.fetch(
+            TrustHistoryQuery(
+                receiptRequiresFreshnessReview: true,
+                includeReceiptHistory: true,
+                includeEventLedger: false
+            )
+        )
+
+        XCTAssertEqual(filtered.totalMatchCount, 1)
+        XCTAssertEqual(filtered.results.map { $0.id }, ["receipt.receipt-freshness-required"])
+        XCTAssertEqual(filtered.results.first?.proofFreshnessLineage?.sourceFreshnessLabel, "Source freshness needs detail")
     }
 
     func testSwiftDataTrustHistoryQueryFiltersEventProofReferencePresence() async throws {

@@ -64,6 +64,9 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
         XCTAssertEqual(projection.results.map { $0.receiptID }, ["receipt-completed"])
         XCTAssertEqual(projection.results.first?.resultState, .completed)
         XCTAssertEqual(projection.results.first?.trustStatus, .safeToShow)
+        XCTAssertEqual(projection.results.first?.proofFreshnessLineage.proofReferenceIDs, ["proof.receipt-completed"])
+        XCTAssertEqual(Set(projection.results.first?.proofFreshnessLineage.lineageObjectIDs ?? []), ["goal-1", "plan-item-1"])
+        XCTAssertFalse(projection.results.first?.proofFreshnessLineage.requiresFreshnessReview ?? true)
     }
 
     func testSwiftDataReceiptHistoryRepositoryReplacesExistingRecordsByIDAndSortsDeterministically() async throws {
@@ -118,6 +121,7 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
         XCTAssertEqual(projection.totalMatchCount, 2)
         XCTAssertEqual(projection.results.map(\.receiptID), ["receipt-sorted", "receipt-anchor"])
         XCTAssertEqual(projection.results.first?.title, "A Title")
+        XCTAssertFalse(projection.results.first?.proofFreshnessLineage.publicClaimAllowed ?? true)
     }
 
     func testSwiftDataReceiptHistoryRepositoryPreservesRedactionAndLocalOnlyMetadata() async throws {
@@ -176,6 +180,10 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
         XCTAssertEqual(result.privacyLevel, .redacted)
         XCTAssertFalse(result.safeToShowInExternalSurface)
         XCTAssertTrue(result.localOnly)
+        XCTAssertEqual(result.proofFreshnessLineage.sourceFreshnessLabel, "Source freshness private")
+        XCTAssertEqual(result.proofFreshnessLineage.privacyReceiptLabel, "Privacy receipt hides private detail")
+        XCTAssertEqual(result.proofFreshnessLineage.lineageObjectIDs, ["goal-private"])
+        XCTAssertFalse(result.proofFreshnessLineage.publicClaimAllowed)
     }
 
     func testSwiftDataReceiptHistoryRepositoryFiltersBySourceDomainAndProofRelevanceWithLimit() async throws {
@@ -236,6 +244,58 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
         XCTAssertEqual(projection.totalMatchCount, 1)
         XCTAssertEqual(projection.results.map(\.receiptID), ["receipt-plan-proof"])
         XCTAssertEqual(projection.results.first?.proofRelevance, .countsAsProof)
+        XCTAssertEqual(projection.results.first?.proofFreshnessLineage.proofReferenceIDs, ["proof.receipt-plan-proof"])
+    }
+
+    func testSwiftDataReceiptHistoryRepositoryFiltersByFreshnessReviewFlag() async throws {
+        let repository = try await makeRepository()
+        let goal = object(.goal, "goal-review", label: "Review goal")
+
+        try await repository.save([
+            ActionReceiptHistoryRecord(
+                receipt: receipt(
+                    id: "receipt-review-required",
+                    resultState: .changed,
+                    title: "Needs review",
+                    affectedObjects: [goal],
+                    changedFacts: [],
+                    sourceDomain: .capture
+                ),
+                privacyLevel: .safeToShow,
+                localOnly: true
+            ),
+            ActionReceiptHistoryRecord(
+                receipt: receipt(
+                    id: "receipt-review-clear",
+                    resultState: .completed,
+                    title: "Review clear",
+                    affectedObjects: [goal],
+                    changedFacts: [
+                        ActionReceiptChangedFact(
+                            id: "fact-review-clear",
+                            kind: .completedTask,
+                            object: goal,
+                            summary: "Task completed."
+                        )
+                    ],
+                    sourceDomain: .time
+                ),
+                privacyLevel: .safeToShow,
+                localOnly: true
+            )
+        ])
+
+        let projection = try await repository.fetch(
+            ActionReceiptSearchQuery(
+                requiresFreshnessReview: true,
+                limit: 10,
+                projectionDetail: .fullDetail
+            )
+        )
+
+        XCTAssertEqual(projection.totalMatchCount, 1)
+        XCTAssertEqual(projection.results.map(\.receiptID), ["receipt-review-required"])
+        XCTAssertTrue(projection.results.first?.proofFreshnessLineage.requiresFreshnessReview ?? false)
     }
 
     private func makeRepository() async throws -> SwiftDataActionReceiptHistoryRepository {

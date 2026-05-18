@@ -41,6 +41,10 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
         receiptRecord.receipt
     }
 
+    var proofFreshnessLineage: ActionReceiptProofFreshnessLineage {
+        receiptRecord.proofFreshnessLineage
+    }
+
     var peekTitle: String {
         if proofReference != nil {
             return "Proof saved"

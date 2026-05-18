@@ -312,25 +312,53 @@ enum ActionReceiptProofRelevance: String, Codable, Sendable, Equatable, Hashable
     case needsConfirmation = "needs_confirmation"
 }
 
+struct ActionReceiptProofFreshnessLineage: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let receiptID: String
+    let sourceDomain: ActionReceiptSourceDomain
+    let sourceObjectID: String?
+    let sourceObjectKind: LifeGraphObjectKind?
+    let lineageObjectIDs: [String]
+    let proofReferenceIDs: [String]
+    let sourceFreshnessLabel: String
+    let privacyReceiptLabel: String
+    let sourceEvidenceLabel: String
+    let nonClaimLabel: String
+    let canUseAsCurrentLocalSource: Bool
+    let redactsPrivateDetail: Bool
+    let requiresFreshnessReview: Bool
+    let localOnly: Bool
+    let publicClaimAllowed: Bool
+}
+
 struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
     let receipt: ActionReceipt
     let privacyLevel: ActionReceiptPrivacyLevel
     let localOnly: Bool
     let proofRelevance: ActionReceiptProofRelevance
     let requiresConfirmationBeforeBroaderUse: Bool
+    let proofFreshnessLineage: ActionReceiptProofFreshnessLineage
 
     init(
         receipt: ActionReceipt,
         privacyLevel: ActionReceiptPrivacyLevel = .safeToShow,
         localOnly: Bool = true,
         proofRelevance: ActionReceiptProofRelevance? = nil,
-        requiresConfirmationBeforeBroaderUse: Bool? = nil
+        requiresConfirmationBeforeBroaderUse: Bool? = nil,
+        proofFreshnessLineage: ActionReceiptProofFreshnessLineage? = nil
     ) {
         self.receipt = receipt
         self.privacyLevel = privacyLevel
         self.localOnly = localOnly
         self.proofRelevance = proofRelevance ?? Self.inferredProofRelevance(receipt)
         self.requiresConfirmationBeforeBroaderUse = requiresConfirmationBeforeBroaderUse ?? Self.inferredConfirmationNeed(receipt)
+        self.proofFreshnessLineage = proofFreshnessLineage ?? Self.proofFreshnessLineage(
+            receipt: receipt,
+            privacyLevel: privacyLevel,
+            localOnly: localOnly,
+            proofRelevance: self.proofRelevance,
+            requiresConfirmationBeforeBroaderUse: self.requiresConfirmationBeforeBroaderUse
+        )
     }
 
     var id: String { receipt.id }
@@ -399,6 +427,7 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
             safeToShowInExternalSurface: shouldRedact ? false : safeToShowInExternalSurface,
             undoLabel: receipt.undoAvailability.isAvailable ? "Undo available" : "Undo not available",
             proofLabel: proofLabel,
+            proofFreshnessLineage: proofFreshnessLineage,
             relatedObjectLabels: relatedObjectLabels,
             changedFactSummaries: shouldRedact ? redactedChangedFactSummaries : receipt.changedFacts.map(\.summary),
             hiddenDetailLabel: shouldRedact ? "Detail hidden" : nil
@@ -463,6 +492,155 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         receipt.affectedObjects.filter { $0.kind == kind }.map(\.id).sorted()
     }
 
+    private static func proofFreshnessLineage(
+        receipt: ActionReceipt,
+        privacyLevel: ActionReceiptPrivacyLevel,
+        localOnly: Bool,
+        proofRelevance: ActionReceiptProofRelevance,
+        requiresConfirmationBeforeBroaderUse: Bool
+    ) -> ActionReceiptProofFreshnessLineage {
+        let hasMissingDetail = receipt.summary.isEmpty ||
+            (receipt.changedFacts.isEmpty && receipt.safeFailure == nil && receipt.why == nil)
+        let redactsPrivateDetail = privacyLevel.requiresRedactionByDefault || hasMissingDetail
+        let requiresFreshnessReview = Self.requiresFreshnessReview(
+            receipt: receipt,
+            proofRelevance: proofRelevance,
+            requiresConfirmationBeforeBroaderUse: requiresConfirmationBeforeBroaderUse
+        )
+
+        return ActionReceiptProofFreshnessLineage(
+            id: "receipt.proof-freshness-lineage.\(receipt.id)",
+            receiptID: receipt.id,
+            sourceDomain: receipt.sourceDomain,
+            sourceObjectID: receipt.sourceObject?.id,
+            sourceObjectKind: receipt.sourceObject?.kind,
+            lineageObjectIDs: Self.lineageObjectIDs(receipt: receipt),
+            proofReferenceIDs: Self.proofReferenceIDs(
+                receipt: receipt,
+                proofRelevance: proofRelevance,
+                requiresFreshnessReview: requiresFreshnessReview
+            ),
+            sourceFreshnessLabel: Self.sourceFreshnessLabel(
+                receipt: receipt,
+                redactsPrivateDetail: redactsPrivateDetail,
+                requiresFreshnessReview: requiresFreshnessReview
+            ),
+            privacyReceiptLabel: Self.privacyReceiptLabel(
+                localOnly: localOnly,
+                redactsPrivateDetail: redactsPrivateDetail,
+                hasMissingDetail: hasMissingDetail
+            ),
+            sourceEvidenceLabel: Self.sourceEvidenceLabel(receipt: receipt),
+            nonClaimLabel: "Public proof stays locked until evidence exists",
+            canUseAsCurrentLocalSource: localOnly &&
+                redactsPrivateDetail == false &&
+                requiresFreshnessReview == false,
+            redactsPrivateDetail: redactsPrivateDetail,
+            requiresFreshnessReview: requiresFreshnessReview,
+            localOnly: localOnly,
+            publicClaimAllowed: false
+        )
+    }
+
+    private static func lineageObjectIDs(receipt: ActionReceipt) -> [String] {
+        var seen = Set<String>()
+        var ids: [String] = []
+
+        if let sourceObjectID = receipt.sourceObject?.id, seen.insert(sourceObjectID).inserted {
+            ids.append(sourceObjectID)
+        }
+
+        let remainingObjectIDs = (receipt.affectedObjects.map(\.id) + receipt.changedFacts.compactMap { $0.object?.id })
+            .filter { seen.contains($0) == false }
+            .sorted()
+
+        for objectID in remainingObjectIDs where seen.insert(objectID).inserted {
+            ids.append(objectID)
+        }
+
+        return ids
+    }
+
+    private static func proofReferenceIDs(
+        receipt: ActionReceipt,
+        proofRelevance: ActionReceiptProofRelevance,
+        requiresFreshnessReview: Bool
+    ) -> [String] {
+        guard proofRelevance == .countsAsProof,
+              requiresFreshnessReview == false,
+              receipt.affectedObjects.isEmpty == false else {
+            return []
+        }
+        return ["proof.\(receipt.id)"]
+    }
+
+    private static func requiresFreshnessReview(
+        receipt: ActionReceipt,
+        proofRelevance: ActionReceiptProofRelevance,
+        requiresConfirmationBeforeBroaderUse: Bool
+    ) -> Bool {
+        receipt.summary.isEmpty ||
+            (receipt.changedFacts.isEmpty && receipt.safeFailure == nil && receipt.why == nil) ||
+            requiresConfirmationBeforeBroaderUse ||
+            receipt.safetyState != .normal ||
+            receipt.resultState == .needsConfirmation ||
+            receipt.resultState == .failedSafely ||
+            receipt.resultState == .draftedPrepared ||
+            proofRelevance == .needsConfirmation
+    }
+
+    private static func sourceFreshnessLabel(
+        receipt: ActionReceipt,
+        redactsPrivateDetail: Bool,
+        requiresFreshnessReview: Bool
+    ) -> String {
+        if receipt.summary.isEmpty ||
+            (receipt.changedFacts.isEmpty && receipt.safeFailure == nil && receipt.why == nil) {
+            return "Source freshness needs detail"
+        }
+        if receipt.safetyState != .normal || receipt.resultState == .failedSafely {
+            return "Source freshness degraded"
+        }
+        if redactsPrivateDetail {
+            return "Source freshness private"
+        }
+        if requiresFreshnessReview {
+            return "Source freshness needs review"
+        }
+        return "Source freshness current local receipt"
+    }
+
+    private static func privacyReceiptLabel(
+        localOnly: Bool,
+        redactsPrivateDetail: Bool,
+        hasMissingDetail: Bool
+    ) -> String {
+        if localOnly == false {
+            return "Privacy receipt needs confirmation"
+        }
+        if redactsPrivateDetail || hasMissingDetail {
+            return "Privacy receipt hides private detail"
+        }
+        return "Privacy receipt stored on this device"
+    }
+
+    private static func sourceEvidenceLabel(receipt: ActionReceipt) -> String {
+        if receipt.summary.isEmpty ||
+            (receipt.changedFacts.isEmpty && receipt.safeFailure == nil && receipt.why == nil) {
+            return "Source evidence unavailable"
+        }
+        if receipt.sourceObject != nil {
+            return "Source evidence links receipt to source object"
+        }
+        if receipt.why != nil {
+            return "Source evidence includes reason"
+        }
+        if receipt.changedFacts.isEmpty == false {
+            return "Source evidence includes changed facts"
+        }
+        return "Source evidence is receipt metadata only"
+    }
+
     private static func inferredProofRelevance(_ receipt: ActionReceipt) -> ActionReceiptProofRelevance {
         if receipt.resultState == .needsConfirmation {
             return .needsConfirmation
@@ -500,84 +678,19 @@ struct ActionReceiptSourceFreshnessPrivacySummary: Sendable, Equatable, Identifi
     let publicClaimAllowed: Bool
 
     init(record: ActionReceiptHistoryRecord) {
-        let receipt = record.receipt
-        let redactsPrivateDetail = record.privacyLevel.requiresRedactionByDefault ||
-            record.hasMissingDetail
-        let requiresFreshnessReview = Self.requiresFreshnessReview(record: record)
+        let lineage = record.proofFreshnessLineage
 
-        self.id = "receipt.source-freshness-privacy.\(receipt.id)"
-        self.receiptID = receipt.id
-        self.sourceFreshnessLabel = Self.sourceFreshnessLabel(
-            record: record,
-            redactsPrivateDetail: redactsPrivateDetail,
-            requiresFreshnessReview: requiresFreshnessReview
-        )
-        self.privacyReceiptLabel = Self.privacyReceiptLabel(record: record)
-        self.sourceEvidenceLabel = Self.sourceEvidenceLabel(record: record)
-        self.nonClaimLabel = "Public proof stays locked until evidence exists"
-        self.canUseAsCurrentLocalSource = record.localOnly &&
-            redactsPrivateDetail == false &&
-            requiresFreshnessReview == false
-        self.redactsPrivateDetail = redactsPrivateDetail
-        self.requiresFreshnessReview = requiresFreshnessReview
-        self.localOnly = record.localOnly
-        self.publicClaimAllowed = false
-    }
-
-    private static func requiresFreshnessReview(record: ActionReceiptHistoryRecord) -> Bool {
-        record.hasMissingDetail ||
-            record.requiresConfirmationBeforeBroaderUse ||
-            record.receipt.safetyState != .normal ||
-            record.receipt.resultState == .needsConfirmation ||
-            record.receipt.resultState == .failedSafely ||
-            record.receipt.resultState == .draftedPrepared ||
-            record.proofRelevance == .needsConfirmation
-    }
-
-    private static func sourceFreshnessLabel(
-        record: ActionReceiptHistoryRecord,
-        redactsPrivateDetail: Bool,
-        requiresFreshnessReview: Bool
-    ) -> String {
-        if record.hasMissingDetail {
-            return "Source freshness needs detail"
-        }
-        if record.receipt.safetyState != .normal || record.receipt.resultState == .failedSafely {
-            return "Source freshness degraded"
-        }
-        if redactsPrivateDetail {
-            return "Source freshness private"
-        }
-        if requiresFreshnessReview {
-            return "Source freshness needs review"
-        }
-        return "Source freshness current local receipt"
-    }
-
-    private static func privacyReceiptLabel(record: ActionReceiptHistoryRecord) -> String {
-        if record.localOnly == false {
-            return "Privacy receipt needs confirmation"
-        }
-        if record.privacyLevel.requiresRedactionByDefault || record.hasMissingDetail {
-            return "Privacy receipt hides private detail"
-        }
-        return "Privacy receipt stored on this device"
-    }
-
-    private static func sourceEvidenceLabel(record: ActionReceiptHistoryRecord) -> String {
-        if record.hasMissingDetail {
-            return "Source evidence unavailable"
-        }
-        if record.receipt.sourceObject != nil {
-            return "Source evidence links receipt to source object"
-        }
-        if record.receipt.why != nil {
-            return "Source evidence includes reason"
-        }
-        if record.receipt.changedFacts.isEmpty == false {
-            return "Source evidence includes changed facts"
-        }
-        return "Source evidence is receipt metadata only"
+        self.id = "receipt.source-freshness-privacy.\(lineage.receiptID)"
+        self.receiptID = lineage.receiptID
+        self.sourceFreshnessLabel = lineage.sourceFreshnessLabel
+        self.privacyReceiptLabel = lineage.privacyReceiptLabel
+        self.sourceEvidenceLabel = lineage.sourceEvidenceLabel
+        self.nonClaimLabel = lineage.nonClaimLabel
+        self.canUseAsCurrentLocalSource = lineage.canUseAsCurrentLocalSource
+        self.redactsPrivateDetail = lineage.redactsPrivateDetail
+        self.requiresFreshnessReview = lineage.requiresFreshnessReview
+        self.localOnly = lineage.localOnly
+        self.publicClaimAllowed = lineage.publicClaimAllowed
     }
 }
 
@@ -695,6 +808,7 @@ struct ActionReceiptSearchQuery: Sendable, Equatable {
     let undoAvailability: Set<ActionReceiptUndoAvailability>
     let trustStatuses: Set<ActionReceiptTrustStatus>
     let proofRelevance: Set<ActionReceiptProofRelevance>
+    let requiresFreshnessReview: Bool?
     let searchText: String?
     let limit: Int?
     let projectionDetail: ActionReceiptProjectionDetail
@@ -712,6 +826,7 @@ struct ActionReceiptSearchQuery: Sendable, Equatable {
         undoAvailability: Set<ActionReceiptUndoAvailability> = [],
         trustStatuses: Set<ActionReceiptTrustStatus> = [],
         proofRelevance: Set<ActionReceiptProofRelevance> = [],
+        requiresFreshnessReview: Bool? = nil,
         searchText: String? = nil,
         limit: Int? = nil,
         projectionDetail: ActionReceiptProjectionDetail = .redacted
@@ -728,6 +843,7 @@ struct ActionReceiptSearchQuery: Sendable, Equatable {
         self.undoAvailability = undoAvailability
         self.trustStatuses = trustStatuses
         self.proofRelevance = proofRelevance
+        self.requiresFreshnessReview = requiresFreshnessReview
         self.searchText = ActionReceiptChangedFact.normalizedOptional(searchText)
         self.limit = limit
         self.projectionDetail = projectionDetail
@@ -749,6 +865,7 @@ struct ActionReceiptSearchResult: Sendable, Equatable, Identifiable {
     let safeToShowInExternalSurface: Bool
     let undoLabel: String
     let proofLabel: String
+    let proofFreshnessLineage: ActionReceiptProofFreshnessLineage
     let relatedObjectLabels: [String]
     let changedFactSummaries: [String]
     let hiddenDetailLabel: String?
@@ -826,6 +943,7 @@ struct ActionReceiptHistoryProjection: Sendable, Equatable {
         if query.undoAvailability.isEmpty == false && query.undoAvailability.contains(record.receipt.undoAvailability) == false { return false }
         if query.trustStatuses.isEmpty == false && query.trustStatuses.contains(record.trustStatus) == false { return false }
         if query.proofRelevance.isEmpty == false && query.proofRelevance.contains(record.proofRelevance) == false { return false }
+        if let requiresFreshnessReview = query.requiresFreshnessReview, record.proofFreshnessLineage.requiresFreshnessReview != requiresFreshnessReview { return false }
         if let searchText = query.searchText, record.searchIndex.contains(searchText.lowercased()) == false { return false }
         return true
     }
