@@ -1,19 +1,19 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-18T05:41:29-04:00
+Generated: 2026-05-18T05:57:36-04:00
 
-Selected batch: RHC03
-Prompt file: prompts/batches/RHC03.md
+Selected batch: RHC04
+Prompt file: prompts/batches/RHC04.md
 Lane: rhc
 Queue classification: executable_now
 
 ## Reason
 
-Selected the safest live batch from current state: RHC03.
+Selected the safest live batch from current state: RHC04.
 
 ## Blockers
 
-- queue_prerequisites:Complete prior batch RHC02.
+- queue_prerequisites:Complete prior batch RHC03.
 
 ## Preflight Commands
 
@@ -27,4 +27,4 @@ Selected the safest live batch from current state: RHC03.
 
 ## Run Command
 
-make authorized-batch BATCH=RHC03 PROMPT=prompts/batches/RHC03.md
+make authorized-batch BATCH=RHC04 PROMPT=prompts/batches/RHC04.md

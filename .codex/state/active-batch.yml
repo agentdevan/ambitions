@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "RHC02 Large File Extraction And Module Boundary"
-  previous_batch: "RHC02 Large File Extraction And Module Boundary"
-  previous_result: "green"
-  next_eligible_batch: "RHC03 Placeholder Stub And Compatibility Seam Cleanup"
+  batch: "RHC03 Placeholder Stub And Compatibility Seam Cleanup"
+  previous_batch: "RHC03 Placeholder Stub And Compatibility Seam Cleanup"
+  previous_result: "accepted_yellow"
+  next_eligible_batch: "RHC04 Stale Copy Docs And Generated Artifact Hygiene"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

@@ -1,6 +1,6 @@
 # Orphan Prompt Provenance
 
-Generated: 2026-05-18T09:43:03.135598+00:00
+Generated: 2026-05-18T10:00:08.901264+00:00
 
 ## Counts
 
@@ -195,7 +195,7 @@ Generated: 2026-05-18T09:43:03.135598+00:00
 | PD18 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 18 | 38 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PFC01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 17 | 26 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PFC02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 19 | 27 | Prompt has commit lineage and evidence linkage but no implementation files. |
-| PFC03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 19 | 28 | Prompt has commit lineage and evidence linkage but no implementation files. |
+| PFC03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 22 | 28 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PFC04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 20 | 27 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PFC06 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 16 | 23 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PFC07 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 15 | 24 | Prompt has commit lineage and evidence linkage but no implementation files. |
@@ -611,31 +611,31 @@ Generated: 2026-05-18T09:43:03.135598+00:00
 | PK14 | COMPLETE_PROOF_LINKED | 4 | 4 | 20 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PK15 | COMPLETE_PROOF_LINKED | 5 | 13 | 23 | 35 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PK16 | COMPLETE_PROOF_LINKED | 4 | 21 | 63 | 53 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK17 | COMPLETE_PROOF_LINKED | 5 | 24 | 321 | 47 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK18 | COMPLETE_PROOF_LINKED | 9 | 37 | 345 | 55 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK19 | COMPLETE_PROOF_LINKED | 6 | 34 | 324 | 55 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK20 | COMPLETE_PROOF_LINKED | 6 | 34 | 332 | 55 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK21 | COMPLETE_PROOF_LINKED | 9 | 36 | 344 | 62 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK22 | COMPLETE_PROOF_LINKED | 9 | 40 | 323 | 58 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK23 | COMPLETE_PROOF_LINKED | 8 | 36 | 324 | 60 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK24 | COMPLETE_PROOF_LINKED | 8 | 35 | 323 | 61 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK25 | COMPLETE_PROOF_LINKED | 8 | 34 | 324 | 58 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK26 | COMPLETE_PROOF_LINKED | 6 | 17 | 282 | 42 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK27 | COMPLETE_PROOF_LINKED | 6 | 19 | 290 | 37 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK28 | COMPLETE_PROOF_LINKED | 6 | 21 | 296 | 46 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK29 | COMPLETE_PROOF_LINKED | 6 | 24 | 276 | 33 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK30 | COMPLETE_PROOF_LINKED | 6 | 18 | 272 | 33 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK31 | COMPLETE_PROOF_LINKED | 6 | 18 | 272 | 33 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK32 | COMPLETE_PROOF_LINKED | 6 | 18 | 275 | 40 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK33 | COMPLETE_PROOF_LINKED | 5 | 17 | 275 | 42 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK34 | COMPLETE_PROOF_LINKED | 4 | 17 | 275 | 42 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK35 | COMPLETE_PROOF_LINKED | 4 | 17 | 272 | 36 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK36 | COMPLETE_PROOF_LINKED | 4 | 17 | 274 | 39 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK37 | COMPLETE_PROOF_LINKED | 4 | 18 | 272 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK38 | COMPLETE_PROOF_LINKED | 4 | 17 | 275 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK39 | COMPLETE_PROOF_LINKED | 4 | 17 | 275 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK40 | COMPLETE_PROOF_LINKED | 4 | 17 | 275 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| PK41 | COMPLETE_PROOF_LINKED | 4 | 17 | 277 | 38 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK17 | COMPLETE_PROOF_LINKED | 5 | 24 | 326 | 47 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK18 | COMPLETE_PROOF_LINKED | 9 | 37 | 350 | 55 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK19 | COMPLETE_PROOF_LINKED | 6 | 34 | 329 | 55 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK20 | COMPLETE_PROOF_LINKED | 6 | 34 | 337 | 55 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK21 | COMPLETE_PROOF_LINKED | 9 | 36 | 349 | 62 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK22 | COMPLETE_PROOF_LINKED | 9 | 40 | 328 | 58 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK23 | COMPLETE_PROOF_LINKED | 8 | 36 | 329 | 60 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK24 | COMPLETE_PROOF_LINKED | 8 | 35 | 328 | 61 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK25 | COMPLETE_PROOF_LINKED | 8 | 34 | 329 | 58 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK26 | COMPLETE_PROOF_LINKED | 6 | 17 | 287 | 42 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK27 | COMPLETE_PROOF_LINKED | 6 | 19 | 295 | 37 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK28 | COMPLETE_PROOF_LINKED | 6 | 21 | 301 | 46 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK29 | COMPLETE_PROOF_LINKED | 6 | 24 | 281 | 33 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK30 | COMPLETE_PROOF_LINKED | 6 | 18 | 277 | 33 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK31 | COMPLETE_PROOF_LINKED | 6 | 18 | 277 | 33 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK32 | COMPLETE_PROOF_LINKED | 6 | 18 | 280 | 40 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK33 | COMPLETE_PROOF_LINKED | 5 | 17 | 280 | 42 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK34 | COMPLETE_PROOF_LINKED | 4 | 17 | 280 | 42 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK35 | COMPLETE_PROOF_LINKED | 4 | 17 | 277 | 36 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK36 | COMPLETE_PROOF_LINKED | 4 | 17 | 279 | 39 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK37 | COMPLETE_PROOF_LINKED | 4 | 18 | 277 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK38 | COMPLETE_PROOF_LINKED | 4 | 17 | 280 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK39 | COMPLETE_PROOF_LINKED | 4 | 17 | 280 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK40 | COMPLETE_PROOF_LINKED | 4 | 17 | 280 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| PK41 | COMPLETE_PROOF_LINKED | 4 | 17 | 282 | 38 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PX01 | COMPLETE_PROOF_LINKED | 2 | 4 | 29 | 27 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PX02 | COMPLETE_PROOF_LINKED | 2 | 4 | 28 | 25 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PX03 | COMPLETE_PROOF_LINKED | 2 | 4 | 28 | 27 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
@@ -656,12 +656,12 @@ Generated: 2026-05-18T09:43:03.135598+00:00
 | PX18 | COMPLETE_PROOF_LINKED | 3 | 4 | 13 | 27 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PX19 | COMPLETE_PROOF_LINKED | 3 | 4 | 11 | 21 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PX20 | COMPLETE_PROOF_LINKED | 3 | 4 | 11 | 22 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| RHC01 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 6 | 7 | 41 | 45 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| RHC01 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 6 | 7 | 44 | 45 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | RHC02 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 4 | 6 | 26 | 45 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| RHC03 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 2 | 4 | 15 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| RHC04 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 2 | 4 | 13 | 20 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| RHC05 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 2 | 4 | 13 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| RHC06 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 2 | 4 | 13 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| RHC03 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 5 | 4 | 27 | 43 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| RHC04 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 2 | 4 | 21 | 20 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| RHC05 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 2 | 4 | 18 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| RHC06 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 2 | 4 | 18 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | SA04 | COMPLETE_PROOF_LINKED | 1 | 19 | 8 | 10 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | SA06 | COMPLETE_PROOF_LINKED | 1 | 3 | 37 | 14 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | SA07 | COMPLETE_PROOF_LINKED | 3 | 10 | 45 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |

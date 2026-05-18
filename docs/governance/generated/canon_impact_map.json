@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T05:41:29-04:00",
+  "generated_at": "2026-05-18T05:57:36-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -3429,6 +3429,7 @@
       "docs/governance/ACTIVE_EXECUTION_GRAPH.md",
       "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md",
       "docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md",
+      "docs/governance/generated/authority_diff_report.md",
       "docs/governance/generated/canon_impact_map.json",
       "docs/governance/generated/canon_impact_plan.md",
       "docs/governance/generated/canon_propagation_plan.md",
@@ -11754,6 +11755,7 @@
     "docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md",
     "docs/governance/VERIFIED_COMPLETED_BATCHES.md",
     "docs/governance/execution_graph.json",
+    "docs/governance/generated/authority_diff_report.md",
     "docs/governance/generated/canon_impact_map.json",
     "docs/governance/generated/canon_impact_plan.md",
     "docs/governance/generated/canon_propagation_plan.md",

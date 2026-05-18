@@ -1,9 +1,9 @@
 # Codex OS Next Action
 
-Generated: 2026-05-18T05:41:29-04:00
+Generated: 2026-05-18T05:57:36-04:00
 
 Decision: select_next_batch
-Reason: No blockers remain; select the safest executable batch (RHC03).
+Reason: No blockers remain; select the safest executable batch (RHC04).
 
 ## Blockers
 
@@ -25,4 +25,4 @@ python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
 - governance unresolved: 0
 - stale overlays: 0
 - architecture debt score: 0
-- implementation expectations: 212
+- implementation expectations: 213
