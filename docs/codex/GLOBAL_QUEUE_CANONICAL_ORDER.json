@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-15",
   "post_pk03_total": 146,
-  "next_eligible_batch": "FCP30",
-  "next_eligible_title": "Flagship Completion Handoff",
+  "next_eligible_batch": "PFC31",
+  "next_eligible_title": "Architecture Extraction Closeout",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -708,16 +708,16 @@
     {
       "id": "FCP30",
       "title": "Flagship Completion Handoff",
-      "classification": "executable_now",
-      "reason": "FCP29 is complete / Accepted Yellow. FCP30 is the next implementation batch.",
-      "blocking_prerequisites": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "FCP30 is complete / Green with closeout in docs/audits/fcp30-batch-closeout-report.md and commit 24a158a5ce80f57928335e8dbcb6200629c486aa on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "PFC31",
       "title": "Architecture Extraction Closeout",
-      "classification": "executable_later",
-      "reason": "Late platform/release/compliance proof remains evidence-bound and cannot run as public readiness proof by implication.",
+      "classification": "executable_now",
+      "reason": "FCP30 is complete / Green. PFC31 is the next implementation batch.",
       "blocking_prerequisites": "Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named.",
       "efc_applicability": "invoked"
     },

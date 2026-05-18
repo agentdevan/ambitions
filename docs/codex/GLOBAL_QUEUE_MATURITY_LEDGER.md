@@ -43,8 +43,8 @@ also closes Green and runner/no-claim gates remain intact.
 
 | Classification | Batches | Reason |
 | --- | --- | --- |
-| executable_now | FCP30 | FCP29 is complete / Accepted Yellow; FCP30 is the next implementation batch. |
-| executable_later | PK19, PK20, PK21, PK22, PK23, PK24, PK25, PK26, PK27, PK28, PK29, PK30, PK31, PK32, PK33, PK34, PK35, PK36, PK37, PK38, PK39, PK40, PK41, SA07, SA08, SA09, SA10, SA10A, SA10B, SA10C, SA11, SA12, SA13, SA14, SA15, SA16, SA24, SA25, SA26, SA27, SA28, SA29, SA30, SA31, SA32, LDI17, LDI18, LDI19, PFC31, PFC32, PFC33, PFC34, PFC35, PFC36, PFC37, PFC38, PFC39, PFC40, RHC01, RHC02, RHC03, RHC04, RHC05, RHC06 | Later queued records remain dependency-gated and must not bypass the active executable_now record. |
+| executable_now | PFC31 | FCP30 is complete / Green; PFC31 is the next implementation batch. |
+| executable_later | PK19, PK20, PK21, PK22, PK23, PK24, PK25, PK26, PK27, PK28, PK29, PK30, PK31, PK32, PK33, PK34, PK35, PK36, PK37, PK38, PK39, PK40, PK41, SA07, SA08, SA09, SA10, SA10A, SA10B, SA11, SA12, SA13, SA14, SA15, SA16, SA24, SA25, SA26, SA27, SA28, SA29, SA30, SA31, SA32, LDI17, LDI18, LDI19, PFC32, PFC33, PFC34, PFC35, PFC36, PFC37, PFC38, PFC39, PFC40, RHC01, RHC02, RHC03, RHC04, RHC05, RHC06 | Later queued records remain dependency-gated and must not bypass the active executable_now record. |
 | blocked_until_dependency | LDI15, LDI16, LDI20, LDI21, LDI22, AOS24, AOS25, AOS26, AOS27, AOS28, AOS29, AOS30 | LDI tail is dependency-split; it must not blindly run before or after all AOS. |
 | absorbed_as_overlay | EFC01, EFC02, EFC03, EFC04, EFC05, EFC06, EFC07, EFC08, EFC09, EFC10, EFC11, EFC12, EFC13, EFC14, EFC15, EFC16, EFC17, EFC18 | EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof. |
 | conditional_trigger_only | CS02C, CS03C, CS04C, CS05C, CS06C, CS09C | Conditional seam-retirement or regression trigger only; not selected by normal autonomous fallback without named target. |
@@ -139,8 +139,8 @@ also closes Green and runner/no-claim gates remain intact.
 | FCP27 | App-Wide Flagship Audit And Remediation | historical_complete_do_not_run | Complete / Green in `docs/audits/fcp27-batch-closeout-report.md`; do not rerun through normal fallback. | invoked |
 | FCP28 | Final Visual Proof Packet | historical_complete_do_not_run | Complete / Accepted Yellow in `docs/audits/fcp28-batch-closeout-report.md`; do not rerun through normal fallback. | invoked |
 | FCP29 | Accessibility And Dynamic Type Closeout | historical_complete_do_not_run | Complete / Accepted Yellow in `docs/audits/fcp29-batch-closeout-report.md`; do not rerun through normal fallback. | invoked |
-| FCP30 | Flagship Completion Handoff | executable_now | Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries. | invoked |
-| PFC31 | Architecture Extraction Closeout | executable_later | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | invoked |
+| FCP30 | Flagship Completion Handoff | historical_complete_do_not_run | Complete / Green in `docs/audits/fcp30-batch-closeout-report.md`; do not rerun through normal fallback. | invoked |
+| PFC31 | Architecture Extraction Closeout | executable_now | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | invoked |
 | PFC32 | Build And Test Determinism Closeout | executable_later | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | invoked |
 | PFC33 | External Surface Release Evidence | executable_later | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | invoked |
 | PFC34 | Privacy Legal Review Reconciliation | executable_later | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | invoked |

@@ -7600,6 +7600,8 @@
   },
   "FCP30": {
     "commits": [
+      "24a158a5ce80f57928335e8dbcb6200629c486aa",
+      "bcebd11ae89679cdc58edc6e9d801d1eab2b915f",
       "204ec85ca4ac2b68c60e30780aeaab8907392cb9",
       "b5a62a35e14d0646eb646741aafe982e15ea7ee1"
     ],
@@ -7631,7 +7633,31 @@
       "docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md",
       "docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md",
       "docs/governance/GOVERNANCE_DASHBOARD.md",
-      "docs/governance/REMAINING_WORK_GRAPH.md"
+      "docs/governance/REMAINING_WORK_GRAPH.md",
+      "docs/governance/generated/accepted_yellow_governance_debt.json",
+      "docs/governance/generated/accepted_yellow_governance_debt.md",
+      "docs/governance/generated/architecture_debt_score.json",
+      "docs/governance/generated/authority_diff_report.md",
+      "docs/governance/generated/canon_impact_map.json",
+      "docs/governance/generated/canon_impact_plan.md",
+      "docs/governance/generated/canon_propagation_plan.md",
+      "docs/governance/generated/global_train_resequence.json",
+      "docs/governance/generated/governance_reconciliation_summary.json",
+      "docs/governance/generated/governance_trend_history.json",
+      "docs/governance/generated/governance_trend_report.json",
+      "docs/governance/generated/implementation_expectation_map.json",
+      "docs/governance/generated/mature_spec_synthesis.md",
+      "docs/governance/generated/orphan_prompt_audit.md",
+      "docs/governance/generated/orphan_prompt_provenance.json",
+      "docs/governance/generated/orphan_prompt_provenance.md",
+      "docs/governance/generated/proof_linkage_graph.json",
+      "docs/governance/generated/registry_projection.md",
+      "docs/governance/generated/repo_doctor_summary.json",
+      "docs/governance/generated/repo_doctor_summary.md",
+      "docs/governance/generated/stale_overlay_audit.md",
+      "docs/governance/generated/supersession_rewrite_plan.md",
+      "docs/governance/generated/train_lineage_graph.json",
+      "docs/governance/generated/train_to_implementation_map.json"
     ],
     "implementation_files": [
       "scripts/ambitions-control-plane-check.py",
@@ -14392,6 +14418,7 @@
       "docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md",
       "docs/governance/BLOCKED_AND_DEFERRED_BATCHES.md",
       "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md",
+      "docs/governance/GOVERNANCE_DASHBOARD.md",
       "docs/governance/REMAINING_WORK_GRAPH.md"
     ],
     "implementation_files": [
