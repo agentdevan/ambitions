@@ -320,6 +320,85 @@ PFC39 Phase 04 repair-pass validation, 2026-05-18:
 - EFC applicability:
   - Invoked
   - Docs/evidence reconciliation only; no source, UI, or user-facing behavior repair required
+  - Claims not made:
+  - release readiness
+  - TestFlight readiness
+  - App Store readiness
+  - signed archive readiness
+  - physical-device validation
+  - public accessibility conformance
+  - privacy/legal approval
+  - hosted CI proof
+  - production readiness
+  - global queue completion
+
+PFC40 platform framework compliance docs/proof closeout, 2026-05-18:
+
+- Branch: `main`
+- Commit: `d45640ba99f644675419b41d598da4dc00b56225`
+- Commands:
+  - `git status --short`
+  - `git diff --check`
+  - `make prompt-audit`
+  - `make batch-self-check`
+  - `xcodegen generate`
+  - `./scripts/build-local.sh`
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -configuration Release -destination "generic/platform=iOS" -archivePath output/Ambitions.xcarchive CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" archive`
+  - `bash scripts/codex-forbidden-claim-scan.sh docs/audits/pfc40-batch-closeout-report.md docs/status/release-evidence-packet.md 2>/dev/null || true`
+- Verified proof:
+  - `git status --short`: `0`, with the pre-existing `?? .codex/state/global-train.lock` preserved
+  - `git diff --check`: `0`
+  - `make prompt-audit`: `0`, `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`
+  - `make batch-self-check`: `0`, runner self-check passed
+  - `xcodegen generate`: `0`
+  - `./scripts/build-local.sh`: `0`, wrote `output/logs/build-local-20260518-044042.log` and completed with `Build Succeeded`
+  - `bash scripts/codex-forbidden-claim-scan.sh docs/audits/pfc40-batch-closeout-report.md docs/status/release-evidence-packet.md 2>/dev/null || true`: `0`, no blocking hits
+- Failed proof:
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -configuration Release -destination "generic/platform=iOS" -archivePath output/Ambitions.xcarchive CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" archive`: blocked before shell execution by the session policy wrapper (`approval required by policy, but AskForApproval is set to Never`); no exit code produced
+- Skipped proof:
+  - Separate `xcodebuild -resolvePackageDependencies` proof
+  - Unit tests
+  - UI tests
+  - Physical-device proof
+  - Accessibility proof
+  - Privacy/legal proof
+  - Signing proof
+- Human follow-up:
+  - If separate unsigned-archive proof is required, rerun the archive command in a session that permits `xcodebuild`.
+- EFC applicability:
+  - Invoked
+  - Docs/evidence reconciliation only; no source, UI, or user-facing behavior repair required
+- Claims not made:
+  - release readiness
+  - TestFlight readiness
+  - App Store readiness
+  - signed archive readiness
+  - physical-device validation
+  - public accessibility conformance
+  - privacy/legal approval
+  - hosted CI proof
+  - production readiness
+  - global queue completion
+
+PFC40 Phase 04 repair-pass validation, 2026-05-18:
+
+- Branch: `main`
+- Starting commit: `d45640ba99f644675419b41d598da4dc00b56225`
+- Result:
+  - No source, architecture, queue, scope, or claim-language repair required.
+  - Docs were updated only to record this Phase 04 validation rerun.
+  - `git status --short`: `0`, scoped tracked changes remain limited to `docs/audits/pfc40-batch-closeout-report.md` and this packet; pre-existing `?? .codex/state/global-train.lock` remains untracked
+  - `git diff --check -- docs/audits/pfc40-batch-closeout-report.md docs/status/release-evidence-packet.md`: `0`
+  - `make prompt-audit`: `0`, `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`
+  - `make batch-self-check`: `0`, runner self-check passed
+  - `xcodegen generate`: `0`
+  - `./scripts/build-local.sh`: `0`, wrote `output/logs/build-local-20260518-045010.log` and completed with `Build Succeeded`
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -configuration Release -destination "generic/platform=iOS" -archivePath output/Ambitions.xcarchive CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" archive`: still blocked before shell execution by the session policy wrapper (`approval required by policy, but AskForApproval is set to Never`); no exit code produced
+  - `bash scripts/codex-forbidden-claim-scan.sh docs/audits/pfc40-batch-closeout-report.md docs/status/release-evidence-packet.md 2>/dev/null || true`: `0`, no blocking hits
+- Scope: docs/proof closeout only; no app source, project config, signing, entitlements, workflow, release automation, UI, or user-facing behavior change.
+- EFC applicability:
+  - Invoked
+  - Docs/evidence reconciliation only; no source, UI, or user-facing behavior repair required
 - Claims not made:
   - release readiness
   - TestFlight readiness
