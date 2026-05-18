@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import shutil
@@ -13,7 +14,6 @@ import py_compile
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD_REPORTS = ROOT / "build" / "reports"
-BUILD_REPORTS.mkdir(parents=True, exist_ok=True)
 REPORT_PATH = BUILD_REPORTS / "ambitions-codex-os-validate.json"
 
 ALLOWED_REPORT_PATHS = {
@@ -41,11 +41,45 @@ REQUIRED_FILES = [
     ROOT / "docs" / "codex-os" / "CODEX_OS_COMPONENTS.md",
     ROOT / "docs" / "codex-os" / "EXCLUDED_FOR_COST_OR_SCOPE.md",
     ROOT / "docs" / "codex-os" / "ROLLBACK.md",
+    ROOT / "docs" / "codex" / "os" / "README.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-FLAGSHIP-UPGRADE-MANIFEST.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-AUTHORITY-RESOLVER.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-GREEN-YELLOW-RED-STANDARD.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-NO-SPRAWL-GUARD.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-PROOF-LEDGER.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-VISUAL-QA-GATE.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-PRIVACY-CLAIM-GATE.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-APPLE-CONTINUITY-GATE.md",
+    ROOT / "docs" / "codex" / "os" / "AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md",
+    ROOT / "docs" / "codex" / "reports" / "AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md",
     ROOT / "scripts" / "ambitions-codex-os-validate.py",
     ROOT / "scripts" / "ambitions-codex-os-doctor.py",
 ]
 
+REQUIRED_GENERATED_PROMPTS = [
+    ROOT / "prompts" / "batches" / "OS-FLAGSHIP-01-AUTHORITY-RESOLVER.md",
+    ROOT / "prompts" / "batches" / "OS-FLAGSHIP-02-NO-SPRAWL-GUARD.md",
+    ROOT / "prompts" / "batches" / "OS-FLAGSHIP-03-PROOF-LEDGER.md",
+    ROOT / "prompts" / "batches" / "OS-FLAGSHIP-04-VISUAL-QA-GATE.md",
+    ROOT / "prompts" / "batches" / "OS-FLAGSHIP-05-PRIVACY-APPLE-CONTINUITY-GATES.md",
+    ROOT / "prompts" / "batches" / "OS-FLAGSHIP-06-LAUNCH-BELIEVABILITY-REVIEW.md",
+    ROOT / "prompts" / "batches" / "OS-FLAGSHIP-07-SKILL-REGISTRY-AND-RUNNER-INTEGRATION.md",
+]
+
 SKILLS = [
+    ROOT / ".codex" / "skills" / "ambitions" / "README.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "authority-resolver.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "batch-train-composer.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "no-sprawl-guard.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "source-truth-classifier.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "swiftui-flagship-ui-reviewer.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "backend-local-first-reviewer.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "apple-continuity-reviewer.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "privacy-claim-verifier.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "proof-ledger-writer.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "accessibility-native-ios-reviewer.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "release-believability-reviewer.md",
+    ROOT / ".codex" / "skills" / "ambitions" / "red-team-reviewer.md",
     ROOT / ".agents" / "skills" / "ambitions-batch-runner-operator" / "SKILL.md",
     ROOT / ".agents" / "skills" / "ambitions-source-truth-auditor" / "SKILL.md",
     ROOT / ".agents" / "skills" / "ambitions-no-cost-gate" / "SKILL.md",
@@ -203,6 +237,11 @@ ALLOWED_PATTERN_CONTEXT_EXEMPT_PREFIXES = [
     ".codex/AGENTS.md",
 ]
 
+ALLOWED_PROMPT_CONTROL_FILES = {
+    "prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md",
+    *[path.relative_to(ROOT).as_posix() for path in REQUIRED_GENERATED_PROMPTS],
+}
+
 
 def ok(message: str) -> dict:
     return {"status": "pass", "message": message}
@@ -225,6 +264,15 @@ def has_yaml_front_matter(path: Path) -> bool:
         return False
     front = text[4:end]
     return "name:" in front and "description:" in front
+
+
+def has_runner_header(path: Path) -> bool:
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    return (
+        "<!-- AMBITIONS_RUNNER_REQUIRED: true -->" in text
+        and "<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->" in text
+        and "<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->" in text
+    )
 
 
 def run_json(path: Path) -> dict:
@@ -357,6 +405,9 @@ def forbidden_content_scan() -> list[dict]:
             issues.append(ok(f"external dirty prompt content intentionally excluded: {path}"))
             continue
 
+        if path in ALLOWED_PROMPT_CONTROL_FILES:
+            continue
+
         if any(path.startswith(prefix) for prefix in CONTENT_SCAN_EXEMPT_PREFIXES):
             continue
 
@@ -387,6 +438,16 @@ def git_diff_report() -> list[dict]:
 
         if not has_yaml_front_matter(path):
             checks.append(fail(f"invalid skill front matter: {path}"))
+
+    for path in REQUIRED_GENERATED_PROMPTS:
+        if not path.is_file():
+            checks.append(fail(f"missing generated batch prompt: {path}"))
+            continue
+
+        if has_runner_header(path):
+            checks.append(ok(f"generated batch prompt has runner header: {path}"))
+        else:
+            checks.append(fail(f"generated batch prompt missing runner header: {path}"))
 
     for path in HOOKS:
         if _compile_py(path):
@@ -544,6 +605,25 @@ def runner_header_scan() -> dict:
     return fail("runner header policy missing")
 
 
+def infer_batch_id(changed_files: list[str]) -> str:
+    if (
+        "prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md" in changed_files
+        or any(path.startswith("prompts/batches/OS-FLAGSHIP-") for path in changed_files)
+        or any(path.startswith("docs/codex/os/") for path in changed_files)
+        or any(path.startswith(".codex/skills/ambitions/") for path in changed_files)
+    ):
+        return "AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01"
+
+    return next(
+        (
+            changed.split("/", 2)[2].replace(".md", "")
+            for changed in changed_files
+            if changed.startswith("prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-")
+        ),
+        "AMB-CODEX-OS-NO-COST-HARDENING-002",
+    )
+
+
 def execpolicy_checks() -> list[dict]:
     checks: list[dict] = []
     if shutil.which("codex") is None:
@@ -639,14 +719,7 @@ def validate() -> int:
             status = "RED"
             checks.append(fail(f"disallowed report change: {path}"))
 
-    batch_id = next(
-        (
-            changed.split("/", 2)[2].replace(".md", "")
-            for changed in changed_files
-            if changed.startswith("prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-")
-        ),
-        "AMB-CODEX-OS-NO-COST-HARDENING-002",
-    )
+    batch_id = infer_batch_id(changed_files)
 
     if any(item["status"] == "fail" for item in hard_failures):
         status = "RED"
@@ -693,7 +766,11 @@ def validate() -> int:
             "rm -f scripts/ambitions-codex-os-validate.py scripts/ambitions-codex-os-doctor.py scripts/ambitions-codex-os-print-install-notes.py",
             "rm -f build/reports/ambitions-codex-os-validate.json",
         ],
-        "next_recommended_batch": "AMB-CODEX-OS-NO-COST-HARDENING-003",
+        "next_recommended_batch": (
+            "OS-FLAGSHIP-01-AUTHORITY-RESOLVER"
+            if batch_id == "AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01"
+            else "AMB-CODEX-OS-NO-COST-HARDENING-003"
+        ),
     }
 
     print("Validation summary:")
@@ -716,5 +793,27 @@ def validate() -> int:
     return 0 if report["status"] in {"GREEN", "YELLOW"} else 1
 
 
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Validate the local Ambitions Codex OS hardening control-plane.",
+    )
+    parser.add_argument(
+        "--report-path",
+        default=str(REPORT_PATH),
+        help="Override the JSON report output path.",
+    )
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    global REPORT_PATH
+    REPORT_PATH = Path(args.report_path)
+    REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    return validate()
+
+
 if __name__ == "__main__":
-    raise SystemExit(validate())
+    raise SystemExit(main())

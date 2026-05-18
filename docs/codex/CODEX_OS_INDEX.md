@@ -5,6 +5,7 @@ Active repo authority starts in [`../truth/README.md`](../truth/README.md). If t
 Human Codex OS portal: [`../../codex-os/README.md`](../../codex-os/README.md).
 Machine authority: [`../../.codex/OPERATING_SYSTEM.md`](../../.codex/OPERATING_SYSTEM.md).
 Current repo map for future ChatGPT/Codex questions: [`../../.codex/REPO_INVENTORY.md`](../../.codex/REPO_INVENTORY.md). It is a routing index, not product truth or proof.
+Flagship upgrade install layer: [`os/README.md`](os/README.md). It is subordinate to `docs/truth/*` and the existing `docs/codex-os/` portal.
 
 ## Required read order
 

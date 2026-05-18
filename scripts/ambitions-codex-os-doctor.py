@@ -36,10 +36,13 @@ def main() -> None:
     print(" -", line(".codex/hooks", exists_dir(".codex/hooks")))
     print(" -", line(".codex/rules", exists_dir(".codex/rules")))
     print(" -", line(".codex/schemas", exists_dir(".codex/schemas")))
+    print(" -", line("docs/codex/os", exists_dir("docs/codex/os")))
+    print(" -", line("docs/codex/reports", exists_dir("docs/codex/reports")))
     print(" -", line("scripts/ambitions-codex-os-validate.py", exists("scripts/ambitions-codex-os-validate.py")))
     print(" -", line("scripts/ambitions-codex-os-doctor.py", exists("scripts/ambitions-codex-os-doctor.py")))
     print(" -", line(".codex/rules/ambitions-no-cost.rules", exists(".codex/rules/ambitions-no-cost.rules")))
     print(" -", line("docs/codex-os", exists_dir("docs/codex-os")))
+    print(" -", line(".codex/skills/ambitions", exists_dir(".codex/skills/ambitions")))
 
     print("\nMake targets")
     makefile = ROOT / "Makefile"
