@@ -20,14 +20,17 @@ def extract_explicit_states(pack_data: dict) -> list[str]:
 def sign_pack(path: Path) -> dict:
     pack_data = json.loads(path.read_text())
     h = hash_pack(path)
-    
+
     explicit_states = extract_explicit_states(pack_data)
-    
+
     return {
         "sha256": h,
         "signature": f"mock-ed25519-{h[:12]}",
+        "signature_status": "mock-non-production",
+        "signature_claim": "no production signing or official-source claim is implied",
         "explicit_states": explicit_states,
-        "rollback_pointer": pack_data.get("metadata", {}).get("last_known_good_hash", "none")
+        "rollback_pointer": pack_data.get("metadata", {}).get("last_known_good_hash", "none"),
+        "last_known_good_pack": pack_data.get("metadata", {}).get("last_known_good_pack", "none"),
     }
 
 def check_revocation(pack_id: str, revocation_list: Path) -> bool:
@@ -59,20 +62,19 @@ def validate_pack(pack_path: Path, expected_hash: str = None, revocation_list: P
         return False
     
     # 2. Hash check
-    if expected_hash:
-        actual_hash = hash_pack(pack_path)
-        if actual_hash != expected_hash:
-            if quarantine_dir:
-                quarantine(pack_path, quarantine_dir, "hash_mismatch")
-            return False
-            
+    actual_hash = hash_pack(pack_path)
+    if expected_hash and actual_hash != expected_hash:
+        if quarantine_dir:
+            quarantine(pack_path, quarantine_dir, "hash_mismatch")
+        return False
+
     # 3. Revocation check
     pack_id = pack_data.get("id")
     if pack_id and revocation_list and check_revocation(pack_id, revocation_list):
         if quarantine_dir:
             quarantine(pack_path, quarantine_dir, "revoked")
         return False
-        
+
     return True
 
 def main() -> int:
