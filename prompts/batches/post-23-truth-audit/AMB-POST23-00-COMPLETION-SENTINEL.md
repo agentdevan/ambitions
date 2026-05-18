@@ -1,3 +1,7 @@
+<!-- AMBITIONS_RUNNER_REQUIRED: true -->
+<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+
 # AMB-POST23-00-COMPLETION-SENTINEL
 
 This runner batch is installed as the completion gate for the post-23 truth audit train.
