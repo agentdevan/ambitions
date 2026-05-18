@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "EFC12 Data Control And Proof Portability Vault"
-  previous_batch: "EFC12 Data Control And Proof Portability Vault"
+  batch: "EFC13 Notification Cadence Governor"
+  previous_batch: "EFC13 Notification Cadence Governor"
   previous_result: "green"
-  next_eligible_batch: "EFC13 Notification Cadence Governor"
+  next_eligible_batch: "EFC14 Local Language Quality Benchmark"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

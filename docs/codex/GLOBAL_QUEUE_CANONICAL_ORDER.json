@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC13",
-  "next_eligible_title": "Notification Cadence Governor",
+  "next_eligible_batch": "EFC14",
+  "next_eligible_title": "Local Language Quality Benchmark",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -940,9 +940,9 @@
     {
       "id": "EFC13",
       "title": "Notification Cadence Governor",
-      "classification": "executable_now",
-      "reason": "EFC12 is complete / green. EFC13 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC12.",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC13 is absorbed overlay canonical coverage; do not execute implementation from this prompt.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
       "efc_applicability": "invoked"
     },
     {
