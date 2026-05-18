@@ -14,6 +14,14 @@ Read-only local MCP server for Ambitions Codex production work.
 - forbidden claim scanning
 - batch closeout shape validation
 - concise repo posture summaries
+- autonomy preflight
+- validation planning
+- continuation decisions
+- active truth resolution
+- obsolete authority scanning
+- batch prompt preflight
+- latest run summarization
+- queue next-action lookup
 
 It is intentionally read-only and stdlib-only.
 
@@ -28,6 +36,7 @@ This server:
 - does not use network
 - does not add dependencies to the Ambitions app
 - does not claim app build/test/release readiness
+- does not bypass the Ambitions runner
 
 ## Self-Test
 
@@ -49,7 +58,7 @@ args = ["/Users/devan/Documents/GitHub/ambitions/tools/mcp/ambitions_repo_mcp/se
 
 See `docs/codex/MCP_CODEX_SETUP.md` for details.
 
-## Tools
+## Base Tools
 
 - `get_active_batch`
 - `get_efc_overlay_status`
@@ -59,6 +68,36 @@ See `docs/codex/MCP_CODEX_SETUP.md` for details.
 - `detect_forbidden_claims`
 - `check_batch_closeout_shape`
 - `summarize_repo_posture`
+
+## Autonomy Control-Plane Tools
+
+- `autonomy_preflight`
+- `required_validation_plan`
+- `continuation_oracle`
+- `resolve_active_truth`
+- `obsolete_authority_scan`
+- `batch_prompt_preflight`
+- `latest_run_summary`
+- `queue_next_action`
+
+Recommended start-of-batch MCP sequence:
+
+```text
+get_active_batch
+summarize_repo_posture
+autonomy_preflight
+required_validation_plan
+batch_prompt_preflight
+```
+
+Recommended post-run MCP sequence:
+
+```text
+latest_run_summary
+continuation_oracle
+check_batch_closeout_shape
+detect_forbidden_claims
+```
 
 ## Protocol
 
@@ -70,3 +109,7 @@ The server implements the stdio JSON-RPC MCP surface needed by Codex:
 - `ping`
 
 It avoids external Python dependencies so it can run on a clean Mac VM.
+
+## Non-Claims
+
+This MCP server provides read-only routing, truth, and proof-planning intelligence only. It does not prove release readiness, TestFlight readiness, App Store readiness, physical-device validation, public accessibility conformance, legal/privacy signoff, hosted CI safety, or production app behavior.
