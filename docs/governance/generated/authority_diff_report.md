@@ -5,7 +5,7 @@
 - .codex/reports/current-batch-train-state.md
 - .codex/state/active-batch.yml
 - .codex/state/global-train.lock
-- docs/audits/efc13-batch-closeout-report.md
+- docs/audits/efc14-batch-closeout-report.md
 - docs/codex/AMB_REMAINING_BATCH_REFERENCE.json
 - docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json
 

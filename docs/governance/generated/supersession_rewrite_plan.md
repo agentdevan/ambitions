@@ -180,6 +180,7 @@
 - classify/archive/rewrite: docs/audits/efc11-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/efc12-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/efc13-batch-closeout-report.md
+- classify/archive/rewrite: docs/audits/efc14-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/faang-handoff-readiness-report.md
 - classify/archive/rewrite: docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md
 - classify/archive/rewrite: docs/audits/fcp01-flagship-completion-source-truth-lock-report.md

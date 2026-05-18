@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T10:22:56-04:00
+Generated: 2026-05-18T10:46:34-04:00
 
 ## Plan → Time
 
@@ -58,6 +58,7 @@ Generated: 2026-05-18T10:22:56-04:00
 - docs/audits/hps09-privacy-memory-permission-local-intelligence-adapter-report.md
 - docs/audits/ambitions-3-0-f17-f30-faang-handoff-completion-train-setup-report.md
 - docs/audits/global-batch-train-sequence-optimization-report.md
+- docs/audits/efc14-batch-closeout-report.md
 - docs/audits/hps-source-truth-and-global-order-integration-report.md
 - docs/audits/global-sequence-autonomy-audit.md
 - docs/audits/pd11-grow-into-goal-flow-report.md

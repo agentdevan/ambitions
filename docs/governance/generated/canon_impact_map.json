@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T10:22:56-04:00",
+  "generated_at": "2026-05-18T10:46:34-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -4536,6 +4536,7 @@
       "docs/audits/efc11-batch-closeout-report.md",
       "docs/audits/efc12-batch-closeout-report.md",
       "docs/audits/efc13-batch-closeout-report.md",
+      "docs/audits/efc14-batch-closeout-report.md",
       "docs/audits/faang-handoff-readiness-report.md",
       "docs/audits/faang-handoff-traceability-matrix.md",
       "docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md",
@@ -10643,6 +10644,7 @@
     "docs/audits/efc11-batch-closeout-report.md",
     "docs/audits/efc12-batch-closeout-report.md",
     "docs/audits/efc13-batch-closeout-report.md",
+    "docs/audits/efc14-batch-closeout-report.md",
     "docs/audits/faang-handoff-readiness-report.md",
     "docs/audits/faang-handoff-traceability-matrix.md",
     "docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md",

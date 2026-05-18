@@ -948,17 +948,17 @@
     {
       "id": "EFC14",
       "title": "Local Language Quality Benchmark",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC14 is absorbed as overlay / do-not-run coverage. EFC15 is the next handoff.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC14 Local Language Quality Benchmark is complete / Green with closeout in docs/audits/efc14-batch-closeout-report.md and commit d9a4137aa338571afc768d4f6a8bc95ac6dd0b9d committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC15",
       "title": "Localization And Globalization Readiness",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC14 is complete / green. EFC15 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC14.",
       "efc_applicability": "invoked"
     },
     {
