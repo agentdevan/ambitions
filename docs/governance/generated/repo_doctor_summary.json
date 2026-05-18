@@ -35,6 +35,13 @@
       "returncode": 0,
       "stderr": "",
       "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [\n      \"queue_prerequisites:Complete prior batch EFC04.\"\n    ],\n    \"classification\": \"executable_now\",\n    \"generated_at\": \"2026-05-18T07:44:02-04:00\",\n    \"lane\": \"efc\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [ \u2026"
+    },
+    {
+      "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
+      "name": "codex_os_context_pack",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "/Users/devan/Documents/GitHub/ambitions/build/codex-os/ambitions-context-pack.md"
     }
   ],
   "command_names": [
@@ -226,21 +233,27 @@
       "returncode": 0,
       "stderr": "",
       "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [\n      \"queue_prerequisites:Complete prior batch EFC04.\"\n    ],\n    \"classification\": \"executable_now\",\n    \"generated_at\": \"2026-05-18T07:44:02-04:00\",\n    \"lane\": \"efc\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [ \u2026"
+    },
+    {
+      "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
+      "name": "codex_os_context_pack",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "/Users/devan/Documents/GitHub/ambitions/build/codex-os/ambitions-context-pack.md"
     }
   ],
   "command_status": {
     "codex_os_batch_selection_refreshed": true,
-    "codex_os_context_refreshed": false,
+    "codex_os_context_refreshed": true,
     "codex_os_next_action_refreshed": true,
     "codex_os_performance_refreshed": true,
     "codex_os_repair_router_refreshed": true,
-    "codex_os_sync_refreshed": true,
     "normal_mode_collect_all": true,
     "strict_mode_exit_nonzero_on_failure": false
   },
   "failure_count": 0,
   "failures": [],
-  "generated_at": "2026-05-18T07:44:02-04:00",
+  "generated_at": "2026-05-18T07:48:51-04:00",
   "generated_outputs": [
     "docs/governance/GOVERNANCE_DASHBOARD.md",
     "docs/governance/generated/repo_doctor_summary.md",
@@ -263,5 +276,5 @@
   "overall_status": "GREEN",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "strict_mode": true,
-  "success_count": 24
+  "success_count": 25
 }
