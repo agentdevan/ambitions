@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "RHC04",
-  "next_eligible_title": "Stale Copy Docs And Generated Artifact Hygiene",
+  "next_eligible_batch": "RHC05",
+  "next_eligible_title": "Validation Script Noise And Allowlist Hardening",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -820,17 +820,17 @@
     {
       "id": "RHC04",
       "title": "Stale Copy Docs And Generated Artifact Hygiene",
-      "classification": "executable_now",
-      "reason": "RHC03 is complete / accepted yellow. RHC04 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch RHC03.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "RHC04 Stale Copy Docs And Generated Artifact Hygiene is complete / Green with closeout in docs/audits/rhc04-batch-closeout-report.md and commit db839605c10b809ae8ca0e910ba45393fdb68864 committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "not applicable"
     },
     {
       "id": "RHC05",
       "title": "Validation Script Noise And Allowlist Hardening",
-      "classification": "executable_later",
-      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
-      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "classification": "executable_now",
+      "reason": "RHC04 is complete / green. RHC05 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch RHC04.",
       "efc_applicability": "not applicable"
     },
     {
