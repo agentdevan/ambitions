@@ -1,51 +1,10 @@
 {
   "architecture_debt_score": 0,
-  "categories": {
-    "archive/shrink repair": {
-      "reason": "Archive and shrink recommendations are present.",
-      "signals": [
-        "cleanup plan output exists"
-      ]
-    },
-    "canon propagation repair": {
-      "reason": "Canon inputs changed and propagation outputs require refresh.",
-      "signals": [
-        "retired:Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift",
-        "retired:Native/Ambitions/Domain/HabitsModels.swift",
-        "retired:Native/Ambitions/Domain/Planning/LivingPlanRecompiler.swift",
-        "retired:Native/Ambitions/Domain/Planning/PlanningEvaluation.swift",
-        "retired:Native/Ambitions/Domain/SafeAutomationPolicyModels.swift",
-        "retired:Native/Ambitions/Domain/SmartAttachmentModels.swift",
-        "retired:Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift",
-        "retired:Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift",
-        "retired:Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift",
-        "retired:Native/Ambitions/Features/Goals/GoalsFeatureModels.swift"
-      ]
-    },
-    "global train sequencing repair": {
-      "reason": "Train sequencing should be refreshed when governance debt stays elevated.",
-      "signals": [
-        "debt_score:0",
-        "cleanup_present:True"
-      ]
-    },
-    "governance repair": {
-      "reason": "Governance outputs are not fully reconciled.",
-      "signals": [
-        "repo_doctor_failures:0",
-        "unresolved:151",
-        "stale:1369"
-      ]
-    }
-  },
-  "commands": {
-    "archive/shrink repair": "python3 scripts/governance/ambitions-cleanup-action-plan.py",
-    "canon propagation repair": "python3 scripts/governance/ambitions-canon-installer.py",
-    "global train sequencing repair": "python3 scripts/governance/ambitions-global-train-resequencer.py",
-    "governance repair": "python3 scripts/governance/ambitions-repo-doctor.py --strict"
-  },
-  "generated_at": "2026-05-17T19:24:47-04:00",
-  "governance_stale_overlays": 1369,
-  "governance_unresolved": 151,
-  "repo_doctor_overall_status": "YELLOW"
+  "categories": {},
+  "commands": {},
+  "generated_at": "2026-05-17T19:39:51-04:00",
+  "governance_stale_overlays": 0,
+  "governance_unresolved": 0,
+  "repo_doctor_overall_status": "GREEN",
+  "status": "NO_REPAIRS_REQUIRED"
 }

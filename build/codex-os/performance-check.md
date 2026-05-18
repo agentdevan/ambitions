@@ -1,14 +1,14 @@
 # Codex OS Performance Check
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 - Generated outputs present: 6/6
 - Missing generated outputs: 0
-- Unresolved governance count: 151
-- Stale overlay count: 1369
-- Orphan prompt count: 131
+- Unresolved governance count: 0
+- Stale overlay count: 0
+- Orphan prompt count: 0
 - Architecture debt score: 0
-- Repo doctor command status: YELLOW
+- Repo doctor command status: GREEN
 - Context pack freshness: True
 - Next-action freshness: True
-- Next-action decision: repair_governance
+- Next-action decision: select_next_batch

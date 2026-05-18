@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 ## Plan → Time
 
@@ -950,7 +950,6 @@ Generated: 2026-05-17T19:24:47-04:00
 - docs/governance/SELF_IMPROVEMENT_BACKLOG.md
 - docs/governance/NORMALIZED_REGISTRY_REWRITE_PLAN.md
 - docs/governance/generated/train_to_implementation_map.json
-- docs/governance/generated/stale_overlay_audit.md
 - docs/governance/generated/implementation_expectation_map.json
 - docs/governance/generated/mature_spec_synthesis.md
 - docs/governance/generated/supersession_rewrite_plan.md
@@ -1618,7 +1617,6 @@ Generated: 2026-05-17T19:24:47-04:00
 - docs/truth/PRODUCT_DESIGN_TRUTH.md
 - docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md
 - docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md
-- docs/governance/generated/stale_overlay_audit.md
 - docs/governance/generated/train_lineage_graph.json
 - docs/governance/generated/canon_propagation_plan.md
 - docs/governance/generated/canon_impact_map.json
@@ -1793,7 +1791,6 @@ Generated: 2026-05-17T19:24:47-04:00
 - docs/truth/PRODUCT_DESIGN_TRUTH.md
 - docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md
 - docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md
-- docs/governance/generated/stale_overlay_audit.md
 - docs/governance/generated/train_lineage_graph.json
 - docs/governance/generated/canon_propagation_plan.md
 - docs/governance/generated/canon_impact_map.json

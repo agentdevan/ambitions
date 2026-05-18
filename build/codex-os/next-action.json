@@ -1,21 +1,17 @@
 {
   "architecture_debt_score": 0,
-  "blocked_reason": "Governance Red or unresolved reconciliation remains.",
-  "blockers": [
-    "repo_doctor:YELLOW",
-    "unresolved:151",
-    "stale:1369"
-  ],
+  "blocked_reason": "",
+  "blockers": [],
   "changed_canon_files": [],
-  "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
-  "decision": "repair_governance",
-  "generated_at": "2026-05-17T19:24:47-04:00",
+  "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
+  "decision": "select_next_batch",
+  "generated_at": "2026-05-17T19:39:51-04:00",
   "generated_outputs_missing": [],
-  "governance_stale_overlays": 1369,
-  "governance_unresolved": 151,
-  "implementation_expectation_count": 213,
-  "reason": "Repo doctor or governance reconciliation still reports unresolved work.",
-  "repo_doctor_overall_status": "YELLOW",
+  "governance_stale_overlays": 0,
+  "governance_unresolved": 0,
+  "implementation_expectation_count": 212,
+  "reason": "No blockers remain; select the safest executable batch (FCP27 App-Wide Flagship Audit And Remediation).",
+  "repo_doctor_overall_status": "GREEN",
   "retired_canon_signals": [
     {
       "path": "Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift",
@@ -1455,6 +1451,10 @@
     },
     {
       "path": "docs/governance/generated/canon_impact_plan.md",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
+      "path": "docs/governance/generated/cleanup_action_plan.md",
       "signal": "possible active Plan top-level residue"
     },
     {

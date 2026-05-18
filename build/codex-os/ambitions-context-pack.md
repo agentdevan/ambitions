@@ -1,6 +1,6 @@
 # Ambitions Codex OS Context Pack
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 This pack is generated from live repo files and current governance outputs.
 
@@ -156,128 +156,128 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "00fd4bf2a598203e4832a5046d028c0ec675e2b3c37f85afbbc6237ade0c2dd7",
-      "size": 10718
+      "sha256": "389ebb67724d3371d341fe7ce7ed60c710a44c8be107a5d1185b5dafd92ab96f",
+      "size": 10710
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "e057b97382719ea8053340273380f40c7b5ae514dca24fa38f2d030c0c3548a4",
-      "size": 752167
+      "sha256": "f2d734c93c3f8e0798ec54d327fee0469a4b87890bd4760c021cf59de4bf598c",
+      "size": 730814
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.json",
-      "sha256": "a0689d2f095983623d39c49bf8fa910bc7452d726e7bdc3a190a7faeaeffb6de",
-      "size": 61508
+      "sha256": "1aecba1918b05b23de7ceaae43b09d7cbf940814ead06a35a9d253ad76985f06",
+      "size": 61551
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.md",
-      "sha256": "66539a4a5dad945f476823ee5f516a2172cffb39304158cd6608af4ddbeb60c3",
-      "size": 559
+      "sha256": "ac101c28cf490d03573961ab8e68bfc9b54b9bfc8d5e9f72febb7e567b4756b4",
+      "size": 494
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.json",
-      "sha256": "d3ea41177e7a24cd4432c0ef6267255a743d60c377de4d0d81447272683e76f9",
+      "sha256": "defa86f4d7d9b3cb76564d33e357188248a52385c71d4ffa32354e72f7c3575c",
       "size": 693
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.md",
-      "sha256": "7f5832ee0cce3cd41a235768060676f67a96df80b37e341cf70d68ab39d38798",
+      "sha256": "b9e7a5cdde76d08c17ee67ebf338c427ff799fa2f7b803ae4754e7d8533eb2e2",
       "size": 668
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.json",
-      "sha256": "4e8b658f620863d01edc0a5dd26332c2926ecfe1e13aa32ff679771add7d2934",
-      "size": 2146
+      "sha256": "8563d4956d1c88b2f64a6954c3f9c1db3364363c62ed2eaa2a1756cbba8fb83c",
+      "size": 260
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.md",
-      "sha256": "9e6e66bca5177fb3a4e2c4bb23928a76849a9ffc81af2a102ae43c65140d7cb3",
-      "size": 1628
+      "sha256": "e720867292fbcd4edd6bbc3d78527d7836c6c302b640243d94540480daba963a",
+      "size": 246
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "d24ad813aacb89688526a9b1958e68831bb3d002516a876154e283da27b79daa",
-      "size": 755
+      "sha256": "336203641471b2c001ff436937dcb7bf132c6013def69e8dcc519ed116402bfc",
+      "size": 747
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.md",
-      "sha256": "cdae6edb96aa38b4b46043475ee2125bcc1091f502b67dc3e3c7d634d27d0f89",
-      "size": 391
+      "sha256": "fe910fcd0795c1f5342d54d597cacd11fbc014da80cdfa586ce543e567f26ff5",
+      "size": 383
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "5ec60bde21851c3d60c385e79973fb52c71e6f5a84fece7f6846b13f1afed946",
-      "size": 78302
+      "sha256": "a38f930d683a65196d305d1788c32d76f45e3bfb106d2ec6a0804191ca309a2f",
+      "size": 76192
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.md",
-      "sha256": "356aed9f5c275db809cab7853291b5197042ddcc0965e076a4038cb35dae44af",
-      "size": 880
+      "sha256": "377ea3b28a31e1234ed5d6900e6f1513734a593120637f932fce3b901fe0f1d9",
+      "size": 912
     }
   ],
   "compatibility_seams": [
     "Plan"
   ],
-  "generated_at": "2026-05-17T19:24:47-04:00",
+  "generated_at": "2026-05-17T19:39:51-04:00",
   "governance_outputs": [
     {
       "exists": true,
       "path": "docs/governance/GOVERNANCE_DASHBOARD.md",
-      "sha256": "8940eeae060f4e5e9ff1a057fadcea271475ef9169650d651c798f9a83d8f487",
-      "size": 2426
+      "sha256": "e7895d9619b3c3bd33ba78391f1c46d9858e7999e3c48b0c45164ddcbe2a5eb2",
+      "size": 1423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.md",
-      "sha256": "eabd778ab40933d918b0f724bfa47e09847c508bf358313e9631a3c4628c1558",
-      "size": 3357
+      "sha256": "2d39c3fbf32be0605fcd8c50921fb1888b653c017ff49b57106764bc01c95a7c",
+      "size": 3100
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "bde8cf1f17a6c5c331570fb042054bc2763dd1a9df610f377c5cbfff6be381da",
-      "size": 17426
+      "sha256": "61cef602cf5368d8007e9d3870d5312d0e7c46fde145246779485476f9c4e0c5",
+      "size": 12163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_plan.md",
-      "sha256": "4e1d33add3f2527e61dc05ffdd04406872d6921c93e358f9aea0b7a9210cf8d3",
+      "sha256": "52fc446acb2a65dbce80a5976550abd0ea4ce340d9779e72b892786d7655261c",
       "size": 33021
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_map.json",
-      "sha256": "209a1e5b36ebbe1df141c4929893c122b95c6ce449965f2cd791a6fc5aeee096",
-      "size": 828872
+      "sha256": "098cb19b070ef3e8dea20d2f30f7c7974d8ac7b676c7c9bf24177433efd8c4a2",
+      "size": 827968
     },
     {
       "exists": true,
       "path": "docs/governance/generated/implementation_expectation_map.json",
-      "sha256": "abfb10fa5eb79990517c85d9fea2675f727a2ba2d5ef2c4756ab50a7480584c1",
-      "size": 26696
+      "sha256": "605428dfdc52ca4e72dffdffe9f8c11557ad3e8f3cf6b33097786126587f74be",
+      "size": 26483
     },
     {
       "exists": true,
       "path": "docs/governance/generated/global_train_resequence.json",
-      "sha256": "53d86ce96b08ef22334e96d62bcc3c02ca8cccfdecef8e60ef83ef1e603fdce6",
+      "sha256": "67f93bd83dce38302de657a215b77de93cde66f675d369125f22b854094f94e2",
       "size": 423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/mature_spec_synthesis.md",
-      "sha256": "35bd39d049467c83f91411a56b6a92e9342539e100b80df1481cb2c0ae4fceda",
-      "size": 18695
+      "sha256": "5c0d876b395c9288a2a52a3377ffdf743fba79d6b52d7cde2760eba564090e98",
+      "size": 18518
     },
     {
       "exists": true,
@@ -288,44 +288,44 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "docs/governance/generated/supersession_rewrite_plan.md",
-      "sha256": "346fa7ed9fc576d3960cbded7a4ccc4bdc4696ee92c770434a9ad412e27772c7",
-      "size": 86997
+      "sha256": "54eb18daa928bda937cea955e3df03c1c1a6f7c0b443bb84211b0124fc15a85f",
+      "size": 86920
     },
     {
       "exists": true,
       "path": "docs/governance/generated/cleanup_action_plan.md",
-      "sha256": "ba1a73e12a894f17c0c1f64eec08f51f15f8f08593fb1cf4ab48ede97043c350",
-      "size": 8273
+      "sha256": "64fd851fa48ade58597835e81de90c08377b8d136308a0928ba0be4b2c994a42",
+      "size": 128
     },
     {
       "exists": true,
       "path": "docs/governance/generated/orphan_prompt_audit.md",
-      "sha256": "ac0ad59d6497212a93ea78eada1b8f779e78c29708341c56a489fa300dce9f6a",
-      "size": 15372
+      "sha256": "8a1a4380e51c16d8fcd6c8c718ab863b8850fd8677624b4d8cc5e35ec7549508",
+      "size": 163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/stale_overlay_audit.md",
-      "sha256": "ff12a71bdb3353d6c60f1ebc53e33471a105928e3e50146a21646cfe2cb5eb30",
-      "size": 103167
+      "sha256": "a3a10c0cbbc5c66de57d61b819bd4b00171fa423c5c834a78042e84e0e6a11d3",
+      "size": 150
     },
     {
       "exists": true,
       "path": "docs/governance/generated/architecture_debt_score.json",
-      "sha256": "06a33d74037a42160a2fd28f332bf1e8dac3b8079edd657742ebafc1b12566e2",
+      "sha256": "3fbd028de92c9d7c1173293ad2e4ede301243ee56202bb24a3fd455085fada7b",
       "size": 130
     },
     {
       "exists": true,
       "path": "docs/governance/generated/governance_reconciliation_summary.json",
-      "sha256": "fcd319a4de9b7f70f1baf287fe0dd598e914c2df0a68b63a228430ee12993aa7",
-      "size": 4922
+      "sha256": "e1388ff36b6d3d5b83ccfcd4a60f401d0693fb90ac7168e0b621aac9462e3eac",
+      "size": 1694
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_lineage_graph.json",
-      "sha256": "78b547dffd2698c14aee580eec37182785164948c4da0c28d57c43fc97192c6b",
-      "size": 6399597
+      "sha256": "441e5caf330e9719d6c5e0ee246fe83931fbd96220764e113bb3f642c35b9678",
+      "size": 5996846
     },
     {
       "exists": true,
@@ -336,11 +336,11 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "docs/governance/generated/train_to_implementation_map.json",
-      "sha256": "335b8b8f6c558a3a3b6076cd6ae10052f7e31f5843920dd1ab4a2b2d47cd2bdc",
-      "size": 1382133
+      "sha256": "ed1e01660a5db42e5115acb5761c8f25ebf40efe889101d6b1f7507ed2547d72",
+      "size": 1093859
     }
   ],
-  "head_sha": "d0ebf3a773e863714e6866792d643173378dd3cc",
+  "head_sha": "143614ec58423d42934b904dd0aa227d6870eed5",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "top_level_ia": [
     "Today",
@@ -356,20 +356,20 @@ This pack is generated from live repo files and current governance outputs.
 
 # Ambitions Governance Dashboard
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 ## Snapshot
 
 - Trains detected: 690
-- Unresolved reconciliation states: 151
+- Unresolved reconciliation states: 0
 - Orphan prompt candidates: 132
 - Completion proof gaps: 0
-- Stale overlay findings: 1369
+- Stale overlay findings: 0
 
 ## Codex OS Bridge
 
-- Next action: repair_governance
-- Next command: python3 scripts/codex-os/ambitions-codex-os-repair-router.py
+- Next action: select_next_batch
+- Next command: python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
 - Selected batch: FCP27 App-Wide Flagship Audit And Remediation
 - Performance missing outputs: 0
 
@@ -377,49 +377,30 @@ Generated: 2026-05-17T19:24:47-04:00
 
 ### Unresolved reconciliation
 
-- `AOS01` — NEEDS_RECONCILIATION / LOW
-- `AOS02` — NEEDS_RECONCILIATION / LOW
-- `AOS23` — NEEDS_RECONCILIATION / LOW
-- `AOS24` — NEEDS_RECONCILIATION / LOW
-- `AOS30` — NEEDS_RECONCILIATION / LOW
-- `AQOS01` — NEEDS_RECONCILIATION / LOW
-- `AQOS02` — NEEDS_RECONCILIATION / LOW
-- `AQOS03` — NEEDS_RECONCILIATION / LOW
-- `AQOS04` — NEEDS_RECONCILIATION / LOW
-- `AQOS05` — NEEDS_RECONCILIATION / LOW
-- `AQOS06` — NEEDS_RECONCILIATION / LOW
-- `AQOS07` — NEEDS_RECONCILIATION / LOW
-- `AQOS08` — NEEDS_RECONCILIATION / LOW
-- `AQOS09` — NEEDS_RECONCILIATION / LOW
-- `AQOS10` — NEEDS_RECONCILIATION / LOW
-- `AQOS11` — NEEDS_RECONCILIATION / LOW
-- `AQOS12` — NEEDS_RECONCILIATION / LOW
-- `AQOS13` — NEEDS_RECONCILIATION / LOW
-- `AQOS14` — NEEDS_RECONCILIATION / LOW
-- `AQOS15` — NEEDS_RECONCILIATION / LOW
+- None detected
 
 ### Orphan prompts
 
-- `AIR01` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR02` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR03` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR04` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR05` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR06` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR07` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR08` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR09` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR10` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR11` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR12` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR13` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR14` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR15` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR16` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR17` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR18` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR19` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
-- `AIR20` — PROMPT_WITHOUT_COMMIT_LINEAGE / LOW
+- `AIR01` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR02` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR03` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR04` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR05` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR06` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR07` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR08` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR09` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR10` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR11` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR12` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR13` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR14` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR15` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR16` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR17` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR18` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR19` — QUEUED_OR_BLOCKED / MEDIUM
+- `AIR20` — QUEUED_OR_BLOCKED / MEDIUM
 
 ### Completion proof gaps
 
@@ -429,8 +410,8 @@ Generated: 2026-05-17T19:24:47-04:00
 
 # Repo Doctor Summary
 
-Generated: 2026-05-17T19:24:47-04:00
-Overall status: YELLOW
+Generated: 2026-05-17T19:39:51-04:00
+Overall status: GREEN
 Strict mode requested: True
 Failures: 0
 
@@ -470,7 +451,7 @@ Failures: 0
 
 ## Accepted Yellow Advisories
 
-- `governance_reconciliation` — owner: Governance Reconciliation lane; reason: Historical registry normalization remains incomplete, but generated evidence is present and no product or release claim is made.
+- None
 
 ## Codex OS Bridge
 
@@ -484,13 +465,13 @@ Failures: 0
 
 ## Result
 
-Repo doctor strict path passed with explicit accepted Yellow advisories.
+Repo doctor passed.
 
 ## Canon Impact Plan
 
 # Canon Impact Plan
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 ## Changed Canon Files
 
@@ -1794,16 +1775,6 @@ Generated: 2026-05-17T19:24:47-04:00
       "Time",
       "Start Here"
     ],
-    "docs/governance/generated/stale_overlay_audit.md": [
-      "Today",
-      "Goals",
-      "Capture",
-      "Time",
-      "You",
-      "Reality Meridian",
-      "Constellation Atlas",
-      "Start Here"
-    ],
     "docs/governance/generated/supersession_rewrite_plan.md": [
       "Today",
       "Goals",
@@ -1811,7 +1782,7 @@ Generated: 2026-05-17T19:24:47-04:00
       "You"
     ]
   },
-  "generated_at": "2026-05-17T19:24:47-04:00"
+  "generated_at": "2026-05-17T19:39:51-04:00"
 }
 ```
 
@@ -1819,7 +1790,7 @@ Generated: 2026-05-17T19:24:47-04:00
 
 ```json
 {
-  "generated_at": "2026-05-17T19:24:47-04:00",
+  "generated_at": "2026-05-17T19:39:51-04:00",
   "lanes": [
     "governance_repair",
     "canon_propagation",
@@ -12175,7 +12146,7 @@ Generated: 2026-05-17T19:24:47-04:00
     ".yml": 18,
     "[no_ext]": 432
   },
-  "generated_at": "2026-05-17T19:24:47-04:00",
+  "generated_at": "2026-05-17T19:39:51-04:00",
   "notable_paths": {
     "app_entry": {
       "exists": true,
@@ -12186,8 +12157,8 @@ Generated: 2026-05-17T19:24:47-04:00
     "codex_os": {
       "exists": true,
       "path": "scripts/codex-os/ambitions-codex-os-next-action.py",
-      "sha256": "b888f9aa362759a4a3cc7f9ae34b1d72b88de96933a8e928f5266a2b9c2095cc",
-      "size": 6570
+      "sha256": "023e6cadcf68db94ed62022780584d0d249cdcd1c421c06ac8206d627e2491f2",
+      "size": 6459
     },
     "governance": {
       "exists": true,
@@ -12261,10 +12232,10 @@ Generated: 2026-05-17T19:24:47-04:00
 {
   "debt": {
     "governance_scripts": 32,
-    "historical_markers": 2914,
-    "plan_language_residue": 7544
+    "historical_markers": 2846,
+    "plan_language_residue": 7127
   },
-  "generated_at": "2026-05-17T19:24:47-04:00",
+  "generated_at": "2026-05-17T19:39:51-04:00",
   "score": 0
 }
 ```
@@ -12273,162 +12244,35 @@ Generated: 2026-05-17T19:24:47-04:00
 
 # Governance Cleanup Action Plan
 
+Status: GREEN
+
 ## Unresolved Reconciliation Actions
 
-- `AOS01`: reconcile registry state, proof linkage, and implementation ownership
-- `AOS02`: reconcile registry state, proof linkage, and implementation ownership
-- `AOS23`: reconcile registry state, proof linkage, and implementation ownership
-- `AOS24`: reconcile registry state, proof linkage, and implementation ownership
-- `AOS30`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS01`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS02`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS03`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS04`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS05`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS06`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS07`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS08`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS09`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS10`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS11`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS12`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS13`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS14`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS15`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS16`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS17`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS18`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS19`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS20`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS21`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS22`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS23`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS24`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS25`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS26`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS27`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS28`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS29`: reconcile registry state, proof linkage, and implementation ownership
-- `AQOS30`: reconcile registry state, proof linkage, and implementation ownership
-- `BLE01`: reconcile registry state, proof linkage, and implementation ownership
-- `CQS01`: reconcile registry state, proof linkage, and implementation ownership
-- `CQS24`: reconcile registry state, proof linkage, and implementation ownership
-- `CQS25`: reconcile registry state, proof linkage, and implementation ownership
-- `CS02`: reconcile registry state, proof linkage, and implementation ownership
-- `CS02C`: reconcile registry state, proof linkage, and implementation ownership
-- `CS03`: reconcile registry state, proof linkage, and implementation ownership
-- `CS03C`: reconcile registry state, proof linkage, and implementation ownership
-- `CS04`: reconcile registry state, proof linkage, and implementation ownership
-- `CS04C`: reconcile registry state, proof linkage, and implementation ownership
-- `CS05`: reconcile registry state, proof linkage, and implementation ownership
-- `CS05C`: reconcile registry state, proof linkage, and implementation ownership
-- `CS06`: reconcile registry state, proof linkage, and implementation ownership
-- `CS06C`: reconcile registry state, proof linkage, and implementation ownership
-- `CS09`: reconcile registry state, proof linkage, and implementation ownership
+- None
 
 ## Orphan Prompt Actions
 
-- `AIR01`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR02`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR03`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR04`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR05`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR06`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR07`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR08`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR09`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR10`: determine whether prompt is historical, superseded, or missing lineage
-- `AIR1
-
-[truncated]
+- None
 
 ## Stale Overlay Audit Summary
 
 # Generated Stale Overlay Audit
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 | Kind | Path | Line | Text |
 |---|---|---:|---|
-| plan_top_level_language | docs/permissions-privacy-foundation.md | 30 | \| App Intents \| Productized in this build, platform review still required. Shortcuts include quick capture plus quick focus, recovery, plan, command, Memory Lens, and canonical open routes. \| App-target shortcuts remain bounded to canonical app routes or local |
-| plan_top_level_language | docs/widget-live-activity-manual-testing.md | 21 | - Today, Focus, Goal, and Plan ambient hierarchy when snapshot has `ambientState` |
-| plan_top_level_language | docs/implementation-backlog.md | 15 | - The active flagship shell canon is Today / Goals / Capture / Time / You. Older code and historical notes may still use Captures, Plan, Habits, Insights, or Profile compatibility naming, but those are not active top-level IA promises. |
-| mission_control_primary_language | docs/implementation-backlog.md | 185 | 14. Goal Detail Mission Control Lanes Alignment. |
-| plan_top_level_language | docs/archive/generated/historical-registry-extract.md | 5 | Time / You. Plan is superseded as a top-level destination and remains valid |
-| plan_top_level_language | docs/archive/superseded-design-canon/rc1-native-finish-pass.md | 116 | ## QA Plan |
-| plan_top_level_language | docs/archive/superseded-design-canon/design/transformation-terminology-spec.md | 14 | Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 terminology now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md), including `Task = standalone One-Step Goal` and |
-| plan_top_level_language | docs/archive/superseded-design-canon/design/screen-architecture-spec.md | 35 | - `Plan`: How does this week hold together? |
-| plan_top_level_language | docs/archive/superseded-design-canon/design/novel-interaction-systems-spec.md | 44 | - lives in: Today, Goals, Plan, Insights, Profile |
-| plan_top_level_language | docs/archive/superseded-design-canon/design/motion-microinteraction-spec.md | 179 | ### Plan |
-| plan_top_level_language | docs/archive/superseded-design-canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md | 109 | \| Time Aperture \| Later core \| Strong and real, but it depends on Today and Plan structure being stable first. \| Today hero and Plan shaping surfaces. \| Interaction and time presentation. \| Required for full product, not day-one shell. \| Yes. \| Yes. \| Early la |
-| plan_top_level_language | docs/archive/superseded-design-canon/design/trust-explainability-correction-spec.md | 161 | - Plan: whisper plus shaping rationale |
-| plan_top_level_language | docs/archive/superseded-design-canon/design/shell-ia-spec.md | 14 | Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 shell truth is Today / Goals / Capture / Plan / You and now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md). If  |
-| plan_top_level_language | docs/archive/superseded-design-canon/design/design-system-spec.md | 158 | Mode Lens may expose Focus, Triage, Plan, Recover, and Review as contextual emphasis states. It must not add tabs, hide source-of-truth ownership, or route users into a second navigation system. |
-| plan_top_level_language | docs/archive/superseded-design-canon/presentations/frontend-transformation-investor-deck/narrative_plan.md | 61 | ## Editability Plan |
-| plan_top_level_language | docs/audits/CHROME_ENRICHMENT_INSTALL_REPORT.md | 118 | - make `Plan` a visible top-level destination |
-| release_ready_claim | docs/audits/cs02-profile-you-compatibility-seam-split-report.md | 84 | \| `grep -R "App Store ready\\\|TestFlight ready\\\|production ready\\\|physical device passed\\\|Profile seam retired\\\|You migration complete" README.md docs .codex \\| cat \\|\\| true` \| PASS WITH YELLOW \| Hits are forbidden-claim lists, scan commands, historical l |
-| plan_top_level_language | docs/audits/fvq02-top-level-surface-visual-sweep-report.md | 14 | from Goals, Capture, Plan, and You. Today had already received the same repair |
-| plan_top_level_language | docs/audits/px04-capture-experience-report.md | 91 | Capture routing review, Goals, Plan, Today, and proof surfaces own their |
-| mission_control_primary_language | docs/audits/px04-capture-experience-report.md | 13 | - last completed batch: PX03 Goals Mission Control Experience |
-| plan_top_level_language | docs/audits/ambitions-product-experience-pack-batch-1d-readiness-gate-report.md | 34 | - Five active tabs align as Today, Goals, Capture, Plan, You. |
-| plan_top_level_language | docs/audits/air-fold-in-integration-report.md | 143 | ## 11. Plan to Time Updates Made |
-| release_ready_claim | docs/audits/air-fold-in-integration-report.md | 253 | Ambitions is production-ready, release-ready, App Store-ready, TestFlight-ready, |
-| plan_top
-
-[truncated]
+| None detected | - | - | - |
 
 ## Orphan Prompt Audit Summary
 
 # Generated Orphan Prompt Audit
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 | Train | Prompt Files | State | Warning |
 |---|---:|---|---|
-| AIR01 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR02 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR03 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR04 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR05 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR06 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR07 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR08 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR09 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR10 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR11 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR12 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR13 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR14 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR15 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR16 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR17 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR18 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR19 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR20 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR21 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR22 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR23 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR24 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR25 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR26 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR27 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR28 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR29 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR30 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR31 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR32 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR33 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR34 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR35 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR36 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR37 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR38 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR39 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR40 | 2 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR41 | 4 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR42 | 3 | PROMPT_WITHOUT_COMMIT_LINEAGE | Prompt exists but no matching commit lineage was found by train I
-
-[truncated]
+| None detected | 0 | - | - |
 
 ## Next Recommended Codex Action
 
@@ -12446,57 +12290,57 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
 
 ```json
 {
-  "generated_at": "2026-05-17T19:24:47-04:00",
+  "generated_at": "2026-05-17T19:39:51-04:00",
   "missing": [],
   "missing_count": 0,
   "outputs": [
     {
       "exists": true,
       "path": "docs/governance/GOVERNANCE_DASHBOARD.md",
-      "sha256": "8940eeae060f4e5e9ff1a057fadcea271475ef9169650d651c798f9a83d8f487",
-      "size": 2426
+      "sha256": "e7895d9619b3c3bd33ba78391f1c46d9858e7999e3c48b0c45164ddcbe2a5eb2",
+      "size": 1423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.md",
-      "sha256": "eabd778ab40933d918b0f724bfa47e09847c508bf358313e9631a3c4628c1558",
-      "size": 3357
+      "sha256": "2d39c3fbf32be0605fcd8c50921fb1888b653c017ff49b57106764bc01c95a7c",
+      "size": 3100
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "bde8cf1f17a6c5c331570fb042054bc2763dd1a9df610f377c5cbfff6be381da",
-      "size": 17426
+      "sha256": "61cef602cf5368d8007e9d3870d5312d0e7c46fde145246779485476f9c4e0c5",
+      "size": 12163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_plan.md",
-      "sha256": "4e1d33add3f2527e61dc05ffdd04406872d6921c93e358f9aea0b7a9210cf8d3",
+      "sha256": "52fc446acb2a65dbce80a5976550abd0ea4ce340d9779e72b892786d7655261c",
       "size": 33021
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_map.json",
-      "sha256": "209a1e5b36ebbe1df141c4929893c122b95c6ce449965f2cd791a6fc5aeee096",
-      "size": 828872
+      "sha256": "098cb19b070ef3e8dea20d2f30f7c7974d8ac7b676c7c9bf24177433efd8c4a2",
+      "size": 827968
     },
     {
       "exists": true,
       "path": "docs/governance/generated/implementation_expectation_map.json",
-      "sha256": "abfb10fa5eb79990517c85d9fea2675f727a2ba2d5ef2c4756ab50a7480584c1",
-      "size": 26696
+      "sha256": "605428dfdc52ca4e72dffdffe9f8c11557ad3e8f3cf6b33097786126587f74be",
+      "size": 26483
     },
     {
       "exists": true,
       "path": "docs/governance/generated/global_train_resequence.json",
-      "sha256": "53d86ce96b08ef22334e96d62bcc3c02ca8cccfdecef8e60ef83ef1e603fdce6",
+      "sha256": "67f93bd83dce38302de657a215b77de93cde66f675d369125f22b854094f94e2",
       "size": 423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/mature_spec_synthesis.md",
-      "sha256": "35bd39d049467c83f91411a56b6a92e9342539e100b80df1481cb2c0ae4fceda",
-      "size": 18695
+      "sha256": "5c0d876b395c9288a2a52a3377ffdf743fba79d6b52d7cde2760eba564090e98",
+      "size": 18518
     },
     {
       "exists": true,
@@ -12507,44 +12351,44 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "docs/governance/generated/supersession_rewrite_plan.md",
-      "sha256": "346fa7ed9fc576d3960cbded7a4ccc4bdc4696ee92c770434a9ad412e27772c7",
-      "size": 86997
+      "sha256": "54eb18daa928bda937cea955e3df03c1c1a6f7c0b443bb84211b0124fc15a85f",
+      "size": 86920
     },
     {
       "exists": true,
       "path": "docs/governance/generated/cleanup_action_plan.md",
-      "sha256": "ba1a73e12a894f17c0c1f64eec08f51f15f8f08593fb1cf4ab48ede97043c350",
-      "size": 8273
+      "sha256": "64fd851fa48ade58597835e81de90c08377b8d136308a0928ba0be4b2c994a42",
+      "size": 128
     },
     {
       "exists": true,
       "path": "docs/governance/generated/orphan_prompt_audit.md",
-      "sha256": "ac0ad59d6497212a93ea78eada1b8f779e78c29708341c56a489fa300dce9f6a",
-      "size": 15372
+      "sha256": "8a1a4380e51c16d8fcd6c8c718ab863b8850fd8677624b4d8cc5e35ec7549508",
+      "size": 163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/stale_overlay_audit.md",
-      "sha256": "ff12a71bdb3353d6c60f1ebc53e33471a105928e3e50146a21646cfe2cb5eb30",
-      "size": 103167
+      "sha256": "a3a10c0cbbc5c66de57d61b819bd4b00171fa423c5c834a78042e84e0e6a11d3",
+      "size": 150
     },
     {
       "exists": true,
       "path": "docs/governance/generated/architecture_debt_score.json",
-      "sha256": "06a33d74037a42160a2fd28f332bf1e8dac3b8079edd657742ebafc1b12566e2",
+      "sha256": "3fbd028de92c9d7c1173293ad2e4ede301243ee56202bb24a3fd455085fada7b",
       "size": 130
     },
     {
       "exists": true,
       "path": "docs/governance/generated/governance_reconciliation_summary.json",
-      "sha256": "fcd319a4de9b7f70f1baf287fe0dd598e914c2df0a68b63a228430ee12993aa7",
-      "size": 4922
+      "sha256": "e1388ff36b6d3d5b83ccfcd4a60f401d0693fb90ac7168e0b621aac9462e3eac",
+      "size": 1694
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_lineage_graph.json",
-      "sha256": "78b547dffd2698c14aee580eec37182785164948c4da0c28d57c43fc97192c6b",
-      "size": 6399597
+      "sha256": "441e5caf330e9719d6c5e0ee246fe83931fbd96220764e113bb3f642c35b9678",
+      "size": 5996846
     },
     {
       "exists": true,
@@ -12555,80 +12399,80 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "docs/governance/generated/train_to_implementation_map.json",
-      "sha256": "335b8b8f6c558a3a3b6076cd6ae10052f7e31f5843920dd1ab4a2b2d47cd2bdc",
-      "size": 1382133
+      "sha256": "ed1e01660a5db42e5115acb5761c8f25ebf40efe889101d6b1f7507ed2547d72",
+      "size": 1093859
     },
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "0b8bcf2a73388d17fc3a1f3563c104875ba46a41799444294169b217bfe0b97d",
-      "size": 10718
+      "sha256": "8064d2804dd32e7815826da6abc570f04dcd7314b5b1af93a50891fed2a11aa5",
+      "size": 10710
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "e057b97382719ea8053340273380f40c7b5ae514dca24fa38f2d030c0c3548a4",
-      "size": 752167
+      "sha256": "f2d734c93c3f8e0798ec54d327fee0469a4b87890bd4760c021cf59de4bf598c",
+      "size": 730814
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.json",
-      "sha256": "a0689d2f095983623d39c49bf8fa910bc7452d726e7bdc3a190a7faeaeffb6de",
-      "size": 61508
+      "sha256": "1aecba1918b05b23de7ceaae43b09d7cbf940814ead06a35a9d253ad76985f06",
+      "size": 61551
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.md",
-      "sha256": "66539a4a5dad945f476823ee5f516a2172cffb39304158cd6608af4ddbeb60c3",
-      "size": 559
+      "sha256": "ac101c28cf490d03573961ab8e68bfc9b54b9bfc8d5e9f72febb7e567b4756b4",
+      "size": 494
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.json",
-      "sha256": "d3ea41177e7a24cd4432c0ef6267255a743d60c377de4d0d81447272683e76f9",
+      "sha256": "defa86f4d7d9b3cb76564d33e357188248a52385c71d4ffa32354e72f7c3575c",
       "size": 693
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.md",
-      "sha256": "7f5832ee0cce3cd41a235768060676f67a96df80b37e341cf70d68ab39d38798",
+      "sha256": "b9e7a5cdde76d08c17ee67ebf338c427ff799fa2f7b803ae4754e7d8533eb2e2",
       "size": 668
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.json",
-      "sha256": "4e8b658f620863d01edc0a5dd26332c2926ecfe1e13aa32ff679771add7d2934",
-      "size": 2146
+      "sha256": "8563d4956d1c88b2f64a6954c3f9c1db3364363c62ed2eaa2a1756cbba8fb83c",
+      "size": 260
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.md",
-      "sha256": "9e6e66bca5177fb3a4e2c4bb23928a76849a9ffc81af2a102ae43c65140d7cb3",
-      "size": 1628
+      "sha256": "e720867292fbcd4edd6bbc3d78527d7836c6c302b640243d94540480daba963a",
+      "size": 246
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "d24ad813aacb89688526a9b1958e68831bb3d002516a876154e283da27b79daa",
-      "size": 755
+      "sha256": "336203641471b2c001ff436937dcb7bf132c6013def69e8dcc519ed116402bfc",
+      "size": 747
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.md",
-      "sha256": "cdae6edb96aa38b4b46043475ee2125bcc1091f502b67dc3e3c7d634d27d0f89",
-      "size": 391
+      "sha256": "fe910fcd0795c1f5342d54d597cacd11fbc014da80cdfa586ce543e567f26ff5",
+      "size": 383
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "5ec60bde21851c3d60c385e79973fb52c71e6f5a84fece7f6846b13f1afed946",
-      "size": 78302
+      "sha256": "a38f930d683a65196d305d1788c32d76f45e3bfb106d2ec6a0804191ca309a2f",
+      "size": 76192
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.md",
-      "sha256": "356aed9f5c275db809cab7853291b5197042ddcc0965e076a4038cb35dae44af",
-      "size": 880
+      "sha256": "377ea3b28a31e1234ed5d6900e6f1513734a593120637f932fce3b901fe0f1d9",
+      "size": 912
     }
   ],
   "present_count": 30
@@ -12639,211 +12483,42 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
 
 ```json
 {
-  "accepted_yellow_advisories": [
-    {
-      "counts": {
-        "orphan_prompt_count": 132,
-        "stale_overlay_count": 1369,
-        "train_count": 690,
-        "unresolved_reconciliation_count": 151
-      },
-      "evidence": {
-        "orphan_prompt_audit": "docs/governance/generated/orphan_prompt_audit.md",
-        "proof_linkage_graph": "docs/governance/generated/proof_linkage_graph.json",
-        "registry_projection": "docs/governance/generated/registry_projection.md",
-        "stale_overlay_audit": "docs/governance/generated/stale_overlay_audit.md",
-        "train_to_implementation_map": "docs/governance/generated/train_to_implementation_map.json"
-      },
-      "generated_at": "2026-05-17T19:24:47-04:00",
-      "no_claim_boundary": [
-        "does not claim full registry normalization",
-        "does not claim release readiness",
-        "does not claim implementation proof for unresolved trains",
-        "does not authorize product feature work"
-      ],
-      "owner": "Governance Reconciliation lane",
-      "reason": "Historical registry normalization remains incomplete, but generated evidence is present and no product or release claim is made.",
-      "required_green_proof": [
-        "resolve every NEEDS_RECONCILIATION and COMPLETION_CLAIM_UNPROVEN train in registry_projection.md",
-        "reduce stale_overlay_audit.md findings to zero or move them under explicit historical policy",
-        "link orphan prompts to commits, proof artifacts, or explicit queued/deferred states"
-      ],
-      "sample_unresolved_trains": [
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS01",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS02",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS23",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS24",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS30",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS01",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS02",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS03",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS04",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS05",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS06",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS07",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS08",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS09",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS10",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS11",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS12",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS13",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS14",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS15",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS16",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS17",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS18",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS19",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS20",
-          "warnings": []
-        }
-      ],
-      "source": "governance_reconciliation",
-      "status": "ACCEPTED_YELLOW"
-    }
-  ],
+  "accepted_yellow_advisories": [],
   "bridge_results": [
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-next-action.py",
       "name": "codex_os_next_action",
       "returncode": 0,
       "stderr": "",
-      "stdout": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py"
+      "stdout": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
       "name": "codex_os_batch_selector",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
+      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
       "name": "codex_os_repair_router",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {\n    \"archive/shrink repair\": {\n      \"reason\": \"Archive and shrink recommendations are present.\",\n      \"signals\": [\n        \"cleanup plan output exists\"\n      ]\n    },\n    \"canon propagation repair\": {\n      \"reason\": \"Canon in \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-performance-check.py",
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"3633f1e4ae4e415037cc2434546b677da40de27f2da1b2118af665d4e66d1046\"\n  },\n  \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"db4244eee9149293d581cc2e0ee6032411381efa7d8457247a98bf9ff26bee21\"\n  },\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
       "name": "codex_os_sync_governance",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
+      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
@@ -12879,7 +12554,7 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
       "name": "governance_reconcile",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2161\nStale overlay findings: 1369\nUnresolved trains: 151\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated"
     },
     {
       "command": "python3 scripts/governance/ambitions-canon-impact-map.py",
@@ -12991,49 +12666,49 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
       "name": "governance_validate",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance validation\nUnresolved reconciliation count: 151\nStale overlay count: 1369\nAccepted Yellow status: ACCEPTED_YELLOW\nAccepted Yellow: unresolved reconciliation remains explicitly owned and no release/product claim is made"
+      "stdout": "Ambitions governance validation\nUnresolved reconciliation count: 0\nStale overlay count: 0\nAccepted Yellow status: GREEN"
     },
     {
       "command": "python3 scripts/governance/ambitions-generated-freshness-check.py",
       "name": "generated_freshness_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2161\nStale overlay findings: 1369\nUnresolved trains: 151\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance \u2026"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-next-action.py",
       "name": "codex_os_next_action",
       "returncode": 0,
       "stderr": "",
-      "stdout": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py"
+      "stdout": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
       "name": "codex_os_batch_selector",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
+      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
       "name": "codex_os_repair_router",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {\n    \"archive/shrink repair\": {\n      \"reason\": \"Archive and shrink recommendations are present.\",\n      \"signals\": [\n        \"cleanup plan output exists\"\n      ]\n    },\n    \"canon propagation repair\": {\n      \"reason\": \"Canon in \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-performance-check.py",
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"3633f1e4ae4e415037cc2434546b677da40de27f2da1b2118af665d4e66d1046\"\n  },\n  \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"db4244eee9149293d581cc2e0ee6032411381efa7d8457247a98bf9ff26bee21\"\n  },\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
       "name": "codex_os_sync_governance",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
+      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
@@ -13054,7 +12729,7 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
   },
   "failure_count": 0,
   "failures": [],
-  "generated_at": "2026-05-17T19:24:47-04:00",
+  "generated_at": "2026-05-17T19:39:51-04:00",
   "generated_outputs": [
     "docs/governance/GOVERNANCE_DASHBOARD.md",
     "docs/governance/generated/repo_doctor_summary.md",
@@ -13072,7 +12747,7 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     "build/codex-os/sync-report.json",
     "build/codex-os/sync-report.md"
   ],
-  "overall_status": "YELLOW",
+  "overall_status": "GREEN",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "strict_mode": true,
   "success_count": 24

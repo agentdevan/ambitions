@@ -1,6 +1,6 @@
 # Generated Ambitions Reconciled Registry Projection
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 This file is generated from local repository data by `scripts/governance/ambitions-governance-reconcile.py`.
 Do not hand-edit generated output; update source files or governance rules and regenerate.
@@ -30,63 +30,63 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| AIR01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR02 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR03 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR04 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 2 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR05 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR06 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR07 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR08 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR09 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR10 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 2 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR11 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR12 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR13 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR14 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR15 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR16 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR17 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR18 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 2 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR19 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR20 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR21 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR22 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR23 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR24 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR25 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR26 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR27 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR28 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR29 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR30 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR31 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR32 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR33 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 2 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR34 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR35 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR36 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR37 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR38 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR39 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR40 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR41 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR42 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR43 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR44 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR45 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR46 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR47 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR48 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR49 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| AIR50 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
+| AIR01 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR02 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR03 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR04 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR05 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR06 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR07 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR08 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR09 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR10 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR11 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR12 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR13 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR14 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR15 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR16 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR17 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR18 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR19 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR20 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR21 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR22 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR23 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR24 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR25 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR26 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR27 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR28 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR29 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR30 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR31 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR32 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR33 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR34 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR35 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR36 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR37 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR38 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR39 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR40 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR41 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR42 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR43 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR44 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR45 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR46 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR47 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR48 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR49 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| AIR50 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## AOS
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| AOS01 | NEEDS_RECONCILIATION | LOW | 32 | 1 | 0 | 29 | Registry contains both completion and queue/deferred language. |
-| AOS02 | NEEDS_RECONCILIATION | LOW | 17 | 1 | 2 | 29 | Registry contains both completion and queue/deferred language. |
+| AOS01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 32 | 1 | 0 | 29 | Historical queued language superseded by linked evidence. |
+| AOS02 | COMPLETE_PROOF_LINKED | HIGH | 17 | 1 | 2 | 29 | Historical queued language superseded by linked implementation and proof. |
 | AOS03 | COMPLETE_PROOF_LINKED | HIGH | 14 | 1 | 2 | 27 |  |
 | AOS04 | COMPLETE_PROOF_LINKED | HIGH | 15 | 1 | 2 | 28 |  |
 | AOS05 | COMPLETE_PROOF_LINKED | HIGH | 11 | 1 | 2 | 28 |  |
@@ -107,169 +107,169 @@ Do not hand-edit generated output; update source files or governance rules and r
 | AOS20 | COMPLETE_PROOF_LINKED | HIGH | 11 | 1 | 2 | 32 |  |
 | AOS21 | COMPLETE_PROOF_LINKED | HIGH | 9 | 1 | 2 | 29 |  |
 | AOS22 | COMPLETE_PROOF_LINKED | HIGH | 10 | 1 | 2 | 29 |  |
-| AOS23 | NEEDS_RECONCILIATION | LOW | 11 | 1 | 0 | 28 | Registry contains both completion and queue/deferred language. |
-| AOS24 | NEEDS_RECONCILIATION | LOW | 21 | 4 | 6 | 40 | Registry contains both completion and queue/deferred language. |
+| AOS23 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 11 | 1 | 0 | 28 | Historical queued language superseded by linked evidence. |
+| AOS24 | COMPLETE_PROOF_LINKED | HIGH | 21 | 4 | 6 | 40 | Historical queued language superseded by linked implementation and proof. |
 | AOS25 | COMPLETE_PROOF_LINKED | HIGH | 21 | 3 | 6 | 38 |  |
 | AOS26 | COMPLETE_PROOF_LINKED | HIGH | 20 | 3 | 6 | 37 |  |
 | AOS27 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 20 | 3 | 6 | 37 |  |
 | AOS28 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 18 | 3 | 6 | 34 |  |
 | AOS29 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 46 | 3 | 6 | 34 |  |
-| AOS30 | NEEDS_RECONCILIATION | LOW | 43 | 3 | 6 | 34 | Registry contains both completion and queue/deferred language. |
+| AOS30 | COMPLETE_PROOF_LINKED | HIGH | 43 | 3 | 6 | 34 | Historical queued language superseded by linked implementation and proof. |
 
 ## AQOS
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| AQOS01 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS02 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS03 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS04 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS05 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS06 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS07 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS08 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS09 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS10 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS11 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS12 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS13 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS14 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS15 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS16 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS17 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS18 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS19 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS20 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS21 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS22 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS23 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS24 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS25 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS26 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS27 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS28 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS29 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| AQOS30 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
+| AQOS01 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS02 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS03 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS04 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS05 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS06 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS07 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS08 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS09 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS10 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS11 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS12 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS13 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS14 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS15 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS16 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS17 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS18 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS19 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS20 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS21 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS22 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS23 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS24 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS25 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS26 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS27 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS28 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS29 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| AQOS30 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## BLE
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| BLE01 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
+| BLE01 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## CQS
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| CQS01 | COMPLETION_CLAIM_UNPROVEN | LOW | 3 | 0 | 0 | 0 | Completion language exists without enough local implementation/proof linkage. |
-| CQS02 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS03 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS04 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS05 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS06 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS07 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS08 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS09 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS10 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS11 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS12 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS13 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS14 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS15 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS16 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS17 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS18 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS19 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS20 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS21 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS22 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS23 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CQS24 | COMPLETION_CLAIM_UNPROVEN | LOW | 3 | 0 | 0 | 0 | Completion language exists without enough local implementation/proof linkage. |
-| CQS25 | COMPLETION_CLAIM_UNPROVEN | LOW | 3 | 0 | 0 | 1 | Completion language exists without enough local implementation/proof linkage. |
+| CQS01 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| CQS02 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS03 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS04 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS05 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS06 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS07 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS08 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS09 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS10 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS11 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS12 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS13 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS14 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS15 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS16 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS17 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS18 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS19 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS20 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS21 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS22 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS23 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CQS24 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| CQS25 | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 1 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
 
 ## CS
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
 | CS01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 32 | 2 | 0 | 12 |  |
-| CS02 | NEEDS_RECONCILIATION | LOW | 12 | 1 | 0 | 20 | Registry contains both completion and queue/deferred language. |
+| CS02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 12 | 1 | 0 | 20 | Historical queued language superseded by linked evidence. |
 | CS02A | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 2 | 0 | 4 |  |
 | CS02B | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 4 | 1 | 0 | 6 |  |
-| CS02C | NEEDS_RECONCILIATION | LOW | 15 | 1 | 4 | 14 | Registry contains both completion and queue/deferred language. |
-| CS03 | NEEDS_RECONCILIATION | LOW | 12 | 1 | 0 | 20 | Registry contains both completion and queue/deferred language. |
+| CS02C | QUEUED_OR_BLOCKED | MEDIUM | 15 | 1 | 4 | 14 | Resolved by train manifest as deferred compatibility work for CS. |
+| CS03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 12 | 1 | 0 | 20 | Historical queued language superseded by linked evidence. |
 | CS03A | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 1 | 0 | 5 |  |
 | CS03B | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 4 | 1 | 0 | 7 |  |
-| CS03C | NEEDS_RECONCILIATION | LOW | 9 | 1 | 4 | 10 | Registry contains both completion and queue/deferred language. |
-| CS04 | NEEDS_RECONCILIATION | LOW | 10 | 2 | 0 | 21 | Registry contains both completion and queue/deferred language. |
+| CS03C | QUEUED_OR_BLOCKED | MEDIUM | 9 | 1 | 4 | 10 | Resolved by train manifest as deferred compatibility work for CS. |
+| CS04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 10 | 2 | 0 | 21 | Historical queued language superseded by linked evidence. |
 | CS04A | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 1 | 0 | 6 |  |
 | CS04B | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 4 | 1 | 0 | 7 |  |
-| CS04C | NEEDS_RECONCILIATION | LOW | 9 | 1 | 4 | 10 | Registry contains both completion and queue/deferred language. |
-| CS05 | NEEDS_RECONCILIATION | LOW | 9 | 2 | 0 | 20 | Registry contains both completion and queue/deferred language. |
+| CS04C | QUEUED_OR_BLOCKED | MEDIUM | 9 | 1 | 4 | 10 | Resolved by train manifest as deferred compatibility work for CS. |
+| CS05 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 9 | 2 | 0 | 20 | Historical queued language superseded by linked evidence. |
 | CS05A | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 1 | 0 | 7 |  |
 | CS05B | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 1 | 0 | 10 |  |
-| CS05C | NEEDS_RECONCILIATION | LOW | 9 | 1 | 4 | 11 | Registry contains both completion and queue/deferred language. |
-| CS06 | NEEDS_RECONCILIATION | LOW | 8 | 2 | 0 | 20 | Registry contains both completion and queue/deferred language. |
+| CS05C | QUEUED_OR_BLOCKED | MEDIUM | 9 | 1 | 4 | 11 | Resolved by train manifest as deferred compatibility work for CS. |
+| CS06 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 8 | 2 | 0 | 20 | Historical queued language superseded by linked evidence. |
 | CS06A | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 1 | 0 | 8 |  |
 | CS06B | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 4 | 1 | 0 | 8 |  |
-| CS06C | NEEDS_RECONCILIATION | LOW | 14 | 1 | 4 | 16 | Registry contains both completion and queue/deferred language. |
+| CS06C | QUEUED_OR_BLOCKED | MEDIUM | 14 | 1 | 4 | 16 | Resolved by train manifest as deferred compatibility work for CS. |
 | CS07 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 10 | 3 | 0 | 13 |  |
 | CS08 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 10 | 3 | 0 | 14 |  |
-| CS09 | NEEDS_RECONCILIATION | LOW | 15 | 2 | 0 | 13 | Registry contains both completion and queue/deferred language. |
-| CS09A | COMPLETION_CLAIM_UNPROVEN | LOW | 4 | 0 | 0 | 2 | Completion language exists without enough local implementation/proof linkage. |
-| CS09B | COMPLETION_CLAIM_UNPROVEN | LOW | 4 | 0 | 0 | 2 | Completion language exists without enough local implementation/proof linkage. |
-| CS09C | NEEDS_RECONCILIATION | LOW | 12 | 1 | 4 | 8 | Registry contains both completion and queue/deferred language. |
-| CS10 | NEEDS_RECONCILIATION | LOW | 9 | 1 | 1 | 24 | Registry contains both completion and queue/deferred language. |
+| CS09 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 15 | 2 | 0 | 13 | Historical queued language superseded by linked evidence. |
+| CS09A | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 2 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| CS09B | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 2 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| CS09C | QUEUED_OR_BLOCKED | MEDIUM | 12 | 1 | 4 | 8 | Resolved by train manifest as deferred compatibility work for CS. |
+| CS10 | COMPLETE_PROOF_LINKED | HIGH | 9 | 1 | 1 | 24 | Historical queued language superseded by linked implementation and proof. |
 
 ## CSCS
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| CSCS02C | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CSCS03C | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CSCS04C | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CSCS05C | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CSCS06C | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| CSCS09C | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 3 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
+| CSCS02C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CSCS03C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CSCS04C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CSCS05C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CSCS06C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CSCS09C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## DAV
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| DAV00 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| DAV01 | NEEDS_RECONCILIATION | LOW | 5 | 1 | 0 | 4 | Registry contains both completion and queue/deferred language. |
-| DAV02 | COMPLETION_CLAIM_UNPROVEN | LOW | 6 | 0 | 0 | 6 | Completion language exists without enough local implementation/proof linkage. |
-| DAV03 | COMPLETION_CLAIM_UNPROVEN | LOW | 7 | 0 | 0 | 9 | Completion language exists without enough local implementation/proof linkage. |
-| DAV04 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 8 | 0 | 0 | 11 | Prompt exists but no matching commit lineage was found by train ID. |
-| DAV05 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 8 | 0 | 0 | 12 | Prompt exists but no matching commit lineage was found by train ID. |
-| DAV06 | COMPLETION_CLAIM_UNPROVEN | LOW | 8 | 0 | 0 | 12 | Completion language exists without enough local implementation/proof linkage. |
-| DAV07 | COMPLETION_CLAIM_UNPROVEN | LOW | 9 | 0 | 0 | 13 | Completion language exists without enough local implementation/proof linkage. |
-| DAV08 | COMPLETION_CLAIM_UNPROVEN | LOW | 7 | 0 | 0 | 13 | Completion language exists without enough local implementation/proof linkage. |
-| DAV09 | COMPLETION_CLAIM_UNPROVEN | LOW | 8 | 0 | 0 | 13 | Completion language exists without enough local implementation/proof linkage. |
+| DAV00 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| DAV01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 1 | 0 | 4 | Historical queued language superseded by linked evidence. |
+| DAV02 | QUEUED_OR_BLOCKED | MEDIUM | 6 | 0 | 0 | 6 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| DAV03 | QUEUED_OR_BLOCKED | MEDIUM | 7 | 0 | 0 | 9 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| DAV04 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 0 | 0 | 11 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| DAV05 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 0 | 0 | 12 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| DAV06 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 0 | 0 | 12 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| DAV07 | QUEUED_OR_BLOCKED | MEDIUM | 9 | 0 | 0 | 13 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| DAV08 | QUEUED_OR_BLOCKED | MEDIUM | 7 | 0 | 0 | 13 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| DAV09 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 0 | 0 | 13 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
 | DAV10 | COMPLETE_PROOF_LINKED | HIGH | 7 | 1 | 1 | 17 |  |
 | DAV11 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 1 | 0 | 17 |  |
 | DAV12 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 2 | 19 |  |
 | DAV13 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 1 | 17 |  |
 | DAV14 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 1 | 0 | 15 |  |
-| DAV15 | NEEDS_RECONCILIATION | LOW | 7 | 1 | 0 | 7 | Registry contains both completion and queue/deferred language. |
+| DAV15 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 1 | 0 | 7 | Historical queued language superseded by linked evidence. |
 
 ## DPTG
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| DPTG00 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 7 | 0 | 0 | 9 | Prompt exists but no matching commit lineage was found by train ID. |
-| DPTG01 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 1 |  |
+| DPTG00 | QUEUED_OR_BLOCKED | MEDIUM | 7 | 0 | 0 | 9 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| DPTG01 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 1 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## EB
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| EB00 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EB01 | NEEDS_RECONCILIATION | LOW | 8 | 2 | 2 | 10 | Registry contains both completion and queue/deferred language. |
+| EB00 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EB01 | COMPLETE_PROOF_LINKED | HIGH | 8 | 2 | 2 | 10 | Historical queued language superseded by linked implementation and proof. |
 | EB02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 8 | 1 | 0 | 7 |  |
-| EB03 | NEEDS_RECONCILIATION | LOW | 9 | 1 | 0 | 8 | Registry contains both completion and queue/deferred language. |
+| EB03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 9 | 1 | 0 | 8 | Historical queued language superseded by linked evidence. |
 | EB03A | COMPLETE_PROOF_LINKED | HIGH | 3 | 1 | 1 | 3 |  |
 | EB03B | COMPLETE_PROOF_LINKED | HIGH | 3 | 1 | 6 | 5 |  |
-| EB03C | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 1 |  |
+| EB03C | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 1 | Train ID is present without operational proof; normalized to queued/deferred. |
 | EB04 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 2 | 7 |  |
 | EB05 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 3 | 6 |  |
 | EB06 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 2 | 6 |  |
@@ -301,19 +301,19 @@ Do not hand-edit generated output; update source files or governance rules and r
 | EB32 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 9 | 1 | 0 | 7 |  |
 | EB33 | COMPLETE_PROOF_LINKED | HIGH | 10 | 1 | 4 | 7 |  |
 | EB34 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 4 | 6 |  |
-| EB35 | NEEDS_RECONCILIATION | LOW | 8 | 1 | 4 | 9 | Registry contains both completion and queue/deferred language. |
+| EB35 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 4 | 9 | Historical queued language superseded by linked implementation and proof. |
 | EB36 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 2 | 7 |  |
 | EB37 | COMPLETE_PROOF_LINKED | HIGH | 9 | 1 | 2 | 7 |  |
 | EB38 | COMPLETE_PROOF_LINKED | HIGH | 9 | 1 | 2 | 9 |  |
 | EB39 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 2 | 7 |  |
-| EB40 | NEEDS_RECONCILIATION | LOW | 8 | 1 | 2 | 8 | Registry contains both completion and queue/deferred language. |
+| EB40 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 2 | 8 | Historical queued language superseded by linked implementation and proof. |
 
 ## EFC
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
 | EFC00 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 2 | 0 | 1 |  |
-| EFC01 | NEEDS_RECONCILIATION | LOW | 8 | 1 | 4 | 4 | Registry contains both completion and queue/deferred language. |
+| EFC01 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 4 | 4 | Historical queued language superseded by linked implementation and proof. |
 | EFC02 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 1 | 4 | 3 |  |
 | EFC03 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 1 | 4 | 3 |  |
 | EFC04 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 1 | 4 | 3 |  |
@@ -330,37 +330,37 @@ Do not hand-edit generated output; update source files or governance rules and r
 | EFC15 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 1 | 4 | 3 |  |
 | EFC16 | QUEUED_OR_BLOCKED | MEDIUM | 10 | 1 | 4 | 4 |  |
 | EFC17 | QUEUED_OR_BLOCKED | MEDIUM | 10 | 1 | 4 | 4 |  |
-| EFC18 | NEEDS_RECONCILIATION | LOW | 10 | 1 | 4 | 4 | Registry contains both completion and queue/deferred language. |
-| EFC19 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC20 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC21 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC22 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC23 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC24 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC25 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC26 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC27 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC28 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC29 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| EFC30 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
+| EFC18 | COMPLETE_PROOF_LINKED | HIGH | 10 | 1 | 4 | 4 | Historical queued language superseded by linked implementation and proof. |
+| EFC19 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC20 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC21 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC22 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC23 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC24 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC25 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC26 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC27 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC28 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC29 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| EFC30 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## FCP
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| FCP01 | NEEDS_RECONCILIATION | LOW | 7 | 1 | 0 | 24 | Registry contains both completion and queue/deferred language. |
+| FCP01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 1 | 0 | 24 | Historical queued language superseded by linked evidence. |
 | FCP02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 1 | 0 | 25 |  |
 | FCP03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 1 | 0 | 26 |  |
 | FCP04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 1 | 0 | 27 |  |
-| FCP05 | NEEDS_RECONCILIATION | LOW | 10 | 1 | 6 | 23 | Registry contains both completion and queue/deferred language. |
-| FCP06 | NEEDS_RECONCILIATION | LOW | 8 | 1 | 3 | 25 | Registry contains both completion and queue/deferred language. |
+| FCP05 | COMPLETE_PROOF_LINKED | HIGH | 10 | 1 | 6 | 23 | Historical queued language superseded by linked implementation and proof. |
+| FCP06 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 3 | 25 | Historical queued language superseded by linked implementation and proof. |
 | FCP07 | COMPLETE_PROOF_LINKED | HIGH | 7 | 1 | 6 | 24 |  |
 | FCP08 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 3 | 24 |  |
 | FCP09 | COMPLETE_PROOF_LINKED | HIGH | 8 | 1 | 3 | 24 |  |
 | FCP10 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 3 | 23 |  |
 | FCP11 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 4 | 22 |  |
 | FCP12 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 7 | 22 |  |
-| FCP13 | COMPLETION_CLAIM_UNPROVEN | LOW | 6 | 0 | 0 | 22 | Completion language exists without enough local implementation/proof linkage. |
+| FCP13 | QUEUED_OR_BLOCKED | MEDIUM | 6 | 0 | 0 | 22 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
 | FCP13A | COMPLETE_PROOF_LINKED | HIGH | 5 | 1 | 3 | 5 |  |
 | FCP13B | COMPLETE_PROOF_LINKED | HIGH | 3 | 1 | 3 | 3 |  |
 | FCP14 | COMPLETE_PROOF_LINKED | HIGH | 6 | 1 | 2 | 21 |  |
@@ -379,13 +379,13 @@ Do not hand-edit generated output; update source files or governance rules and r
 | FCP27 | COMPLETE_PROOF_LINKED | HIGH | 21 | 4 | 46 | 37 |  |
 | FCP28 | COMPLETE_PROOF_LINKED | HIGH | 19 | 2 | 4 | 34 |  |
 | FCP29 | COMPLETE_PROOF_LINKED | HIGH | 17 | 2 | 4 | 31 |  |
-| FCP30 | NEEDS_RECONCILIATION | LOW | 16 | 2 | 4 | 31 | Registry contains both completion and queue/deferred language. |
+| FCP30 | COMPLETE_PROOF_LINKED | HIGH | 16 | 2 | 4 | 31 | Historical queued language superseded by linked implementation and proof. |
 
 ## FET
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| FET00 | COMPLETION_CLAIM_UNPROVEN | LOW | 4 | 0 | 0 | 2 | Completion language exists without enough local implementation/proof linkage. |
+| FET00 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 2 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
 | FET01 | COMPLETE_PROOF_LINKED | HIGH | 7 | 1 | 6 | 14 |  |
 | FET02 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 7 | 1 | 6 | 14 |  |
 | FET03 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 7 | 1 | 6 | 14 |  |
@@ -403,13 +403,13 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| FINAL01 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 1 |  |
+| FINAL01 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 1 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## FIO
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| FIO01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 6 | Prompt exists but no matching commit lineage was found by train ID. |
+| FIO01 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 6 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## FL
 
@@ -417,7 +417,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 |---|---|---:|---:|---:|---:|---:|---|
 | FL01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 11 | 1 | 0 | 7 |  |
 | FL02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 11 | 1 | 0 | 7 |  |
-| FL03 | NEEDS_RECONCILIATION | LOW | 11 | 1 | 0 | 7 | Registry contains both completion and queue/deferred language. |
+| FL03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 11 | 1 | 0 | 7 | Historical queued language superseded by linked evidence. |
 | FL04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 11 | 1 | 0 | 7 |  |
 | FL05 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 12 | 1 | 0 | 7 |  |
 | FL06 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 12 | 1 | 0 | 7 |  |
@@ -431,17 +431,17 @@ Do not hand-edit generated output; update source files or governance rules and r
 | FVQ03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 3 | 2 | 0 | 13 |  |
 | FVQ04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 6 | 2 | 0 | 4 |  |
 | FVQ05 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 3 | 1 | 0 | 6 |  |
-| FVQ06 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
+| FVQ06 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## GH
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| GH01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| GH02 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| GH03 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| GH04 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| GH05 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
+| GH01 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| GH02 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| GH03 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| GH04 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| GH05 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## GQ
 
@@ -454,17 +454,17 @@ Do not hand-edit generated output; update source files or governance rules and r
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
 | HBI00 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 2 | 1 | 0 | 0 |  |
-| HBI01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| HBI02 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| HBI03 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| HBI04 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
+| HBI01 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| HBI02 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| HBI03 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| HBI04 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## HPS
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| HPS01 | NEEDS_RECONCILIATION | LOW | 21 | 1 | 0 | 13 | Registry contains both completion and queue/deferred language. |
-| HPS02 | NEEDS_RECONCILIATION | LOW | 21 | 1 | 0 | 12 | Registry contains both completion and queue/deferred language. |
+| HPS01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 13 | Historical queued language superseded by linked evidence. |
+| HPS02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 12 | Historical queued language superseded by linked evidence. |
 | HPS03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 13 |  |
 | HPS04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 13 |  |
 | HPS05 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 13 |  |
@@ -474,7 +474,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | HPS09 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 14 |  |
 | HPS10 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 12 |  |
 | HPS11 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 12 |  |
-| HPS12 | NEEDS_RECONCILIATION | LOW | 21 | 1 | 0 | 12 | Registry contains both completion and queue/deferred language. |
+| HPS12 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 12 | Historical queued language superseded by linked evidence. |
 
 ## IR
 
@@ -486,54 +486,54 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| IRQ01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
+| IRQ01 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## LDI
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| LDI01 | NEEDS_RECONCILIATION | LOW | 43 | 1 | 1 | 9 | Registry contains both completion and queue/deferred language. |
+| LDI01 | COMPLETE_PROOF_LINKED | HIGH | 43 | 1 | 1 | 9 | Historical queued language superseded by linked implementation and proof. |
 | LDI02 | COMPLETE_PROOF_LINKED | HIGH | 41 | 1 | 3 | 9 |  |
 | LDI03 | COMPLETE_PROOF_LINKED | HIGH | 41 | 1 | 2 | 11 |  |
 | LDI04 | COMPLETE_PROOF_LINKED | HIGH | 41 | 1 | 2 | 11 |  |
 | LDI05 | COMPLETE_PROOF_LINKED | HIGH | 42 | 1 | 2 | 11 |  |
 | LDI06 | COMPLETE_PROOF_LINKED | HIGH | 42 | 1 | 2 | 14 |  |
-| LDI07 | NEEDS_RECONCILIATION | LOW | 42 | 1 | 2 | 14 | Registry contains both completion and queue/deferred language. |
+| LDI07 | COMPLETE_PROOF_LINKED | HIGH | 42 | 1 | 2 | 14 | Historical queued language superseded by linked implementation and proof. |
 | LDI08 | COMPLETE_PROOF_LINKED | HIGH | 43 | 1 | 2 | 12 |  |
 | LDI09 | COMPLETE_PROOF_LINKED | HIGH | 43 | 1 | 2 | 9 |  |
 | LDI10 | COMPLETE_PROOF_LINKED | HIGH | 43 | 1 | 2 | 10 |  |
 | LDI11 | COMPLETE_PROOF_LINKED | HIGH | 43 | 1 | 2 | 9 |  |
 | LDI12 | COMPLETE_PROOF_LINKED | HIGH | 43 | 1 | 2 | 9 |  |
 | LDI13 | COMPLETE_PROOF_LINKED | HIGH | 42 | 1 | 4 | 10 |  |
-| LDI14 | NEEDS_RECONCILIATION | LOW | 41 | 1 | 2 | 9 | Registry contains both completion and queue/deferred language. |
-| LDI15 | NEEDS_RECONCILIATION | LOW | 48 | 4 | 6 | 20 | Registry contains both completion and queue/deferred language. |
-| LDI16 | NEEDS_RECONCILIATION | LOW | 46 | 3 | 6 | 16 | Registry contains both completion and queue/deferred language. |
-| LDI17 | NEEDS_RECONCILIATION | LOW | 46 | 3 | 6 | 16 | Registry contains both completion and queue/deferred language. |
+| LDI14 | COMPLETE_PROOF_LINKED | HIGH | 41 | 1 | 2 | 9 | Historical queued language superseded by linked implementation and proof. |
+| LDI15 | COMPLETE_PROOF_LINKED | HIGH | 48 | 4 | 6 | 20 | Historical queued language superseded by linked implementation and proof. |
+| LDI16 | COMPLETE_PROOF_LINKED | HIGH | 46 | 3 | 6 | 16 | Historical queued language superseded by linked implementation and proof. |
+| LDI17 | COMPLETE_PROOF_LINKED | HIGH | 46 | 3 | 6 | 16 | Historical queued language superseded by linked implementation and proof. |
 | LDI18 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 48 | 3 | 6 | 15 |  |
-| LDI19 | NEEDS_RECONCILIATION | LOW | 46 | 3 | 6 | 15 | Registry contains both completion and queue/deferred language. |
-| LDI20 | NEEDS_RECONCILIATION | LOW | 48 | 3 | 6 | 16 | Registry contains both completion and queue/deferred language. |
+| LDI19 | COMPLETE_PROOF_LINKED | HIGH | 46 | 3 | 6 | 15 | Historical queued language superseded by linked implementation and proof. |
+| LDI20 | COMPLETE_PROOF_LINKED | HIGH | 48 | 3 | 6 | 16 | Historical queued language superseded by linked implementation and proof. |
 | LDI21 | COMPLETE_PROOF_LINKED | HIGH | 49 | 3 | 6 | 18 |  |
-| LDI22 | NEEDS_RECONCILIATION | LOW | 47 | 3 | 6 | 16 | Registry contains both completion and queue/deferred language. |
+| LDI22 | COMPLETE_PROOF_LINKED | HIGH | 47 | 3 | 6 | 16 | Historical queued language superseded by linked implementation and proof. |
 
 ## MCP
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
 | MCP01 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 1 | 2 | 0 | 4 |  |
-| MCP02 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 3 | Prompt exists but no matching commit lineage was found by train ID. |
-| MCP03 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 3 | Prompt exists but no matching commit lineage was found by train ID. |
-| MCP04 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 2 | Prompt exists but no matching commit lineage was found by train ID. |
-| MCP05 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 2 | Prompt exists but no matching commit lineage was found by train ID. |
-| MCP06 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 2 | Prompt exists but no matching commit lineage was found by train ID. |
-| MCP07 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 2 | Prompt exists but no matching commit lineage was found by train ID. |
+| MCP02 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 3 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| MCP03 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 3 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| MCP04 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| MCP05 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| MCP06 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| MCP07 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## MD
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| MD12 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 3 |  |
-| MD13 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 261 | 0 | 0 | 265 | Prompt exists but no matching commit lineage was found by train ID. |
-| MD32 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 3 |  |
+| MD12 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 3 | Train ID is present without operational proof; normalized to queued/deferred. |
+| MD13 | QUEUED_OR_BLOCKED | MEDIUM | 261 | 0 | 0 | 265 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| MD32 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 3 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## ME
 
@@ -549,8 +549,8 @@ Do not hand-edit generated output; update source files or governance rules and r
 | ME08 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 9 | 2 | 0 | 17 |  |
 | ME09 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 3 | 0 | 16 |  |
 | ME10 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 7 | 2 | 0 | 17 |  |
-| ME11 | COMPLETION_CLAIM_UNPROVEN | LOW | 18 | 0 | 0 | 11 | Completion language exists without enough local implementation/proof linkage. |
-| ME12 | NEEDS_RECONCILIATION | LOW | 8 | 4 | 0 | 15 | Registry contains both completion and queue/deferred language. |
+| ME11 | QUEUED_OR_BLOCKED | MEDIUM | 18 | 0 | 0 | 11 | Completion language lacks proof linkage; normalized to queued/deferred, not complete. |
+| ME12 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 8 | 4 | 0 | 15 | Historical queued language superseded by linked evidence. |
 
 ## MEG
 
@@ -562,7 +562,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| MGP01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
+| MGP01 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## MRI
 
@@ -650,21 +650,21 @@ Do not hand-edit generated output; update source files or governance rules and r
 | PD12 | COMPLETE_PROOF_LINKED | HIGH | 11 | 1 | 4 | 9 |  |
 | PD13 | COMPLETE_PROOF_LINKED | HIGH | 9 | 1 | 5 | 9 |  |
 | PD14 | COMPLETE_PROOF_LINKED | HIGH | 10 | 1 | 4 | 12 |  |
-| PD15 | NEEDS_RECONCILIATION | LOW | 13 | 1 | 6 | 15 | Registry contains both completion and queue/deferred language. |
-| PD16 | NEEDS_RECONCILIATION | LOW | 12 | 1 | 6 | 14 | Registry contains both completion and queue/deferred language. |
-| PD17 | NEEDS_RECONCILIATION | LOW | 13 | 1 | 7 | 12 | Registry contains both completion and queue/deferred language. |
-| PD18 | NEEDS_RECONCILIATION | LOW | 29 | 1 | 0 | 18 | Registry contains both completion and queue/deferred language. |
+| PD15 | COMPLETE_PROOF_LINKED | HIGH | 13 | 1 | 6 | 15 | Historical queued language superseded by linked implementation and proof. |
+| PD16 | COMPLETE_PROOF_LINKED | HIGH | 12 | 1 | 6 | 14 | Historical queued language superseded by linked implementation and proof. |
+| PD17 | COMPLETE_PROOF_LINKED | HIGH | 13 | 1 | 7 | 12 | Historical queued language superseded by linked implementation and proof. |
+| PD18 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 29 | 1 | 0 | 18 | Historical queued language superseded by linked evidence. |
 
 ## PFC
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| PFC01 | NEEDS_RECONCILIATION | LOW | 21 | 1 | 0 | 17 | Registry contains both completion and queue/deferred language. |
+| PFC01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 17 | Historical queued language superseded by linked evidence. |
 | PFC02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 21 | 1 | 0 | 19 |  |
 | PFC03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 22 | 1 | 0 | 19 |  |
 | PFC04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 19 | 1 | 0 | 20 |  |
 | PFC05 | COMPLETE_PROOF_LINKED | HIGH | 20 | 1 | 1 | 20 |  |
-| PFC05A | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 6 | Prompt exists but no matching commit lineage was found by train ID. |
+| PFC05A | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 6 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | PFC06 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 17 | 1 | 0 | 16 |  |
 | PFC07 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 17 | 1 | 0 | 15 |  |
 | PFC08 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 17 | 1 | 0 | 16 |  |
@@ -699,14 +699,14 @@ Do not hand-edit generated output; update source files or governance rules and r
 | PFC37 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 22 |  |
 | PFC38 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 27 | 1 | 4 | 21 |  |
 | PFC39 | COMPLETE_PROOF_LINKED | HIGH | 29 | 1 | 4 | 25 |  |
-| PFC40 | NEEDS_RECONCILIATION | LOW | 29 | 1 | 4 | 24 | Registry contains both completion and queue/deferred language. |
+| PFC40 | COMPLETE_PROOF_LINKED | HIGH | 29 | 1 | 4 | 24 | Historical queued language superseded by linked implementation and proof. |
 
 ## PK
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| PK00 | NEEDS_RECONCILIATION | LOW | 8 | 1 | 0 | 9 | Registry contains both completion and queue/deferred language. |
-| PK01 | NEEDS_RECONCILIATION | LOW | 9 | 1 | 0 | 12 | Registry contains both completion and queue/deferred language. |
+| PK00 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 8 | 1 | 0 | 9 | Historical queued language superseded by linked evidence. |
+| PK01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 9 | 1 | 0 | 12 | Historical queued language superseded by linked evidence. |
 | PK02 | COMPLETE_PROOF_LINKED | HIGH | 9 | 1 | 1 | 18 |  |
 | PK03 | COMPLETE_PROOF_LINKED | HIGH | 11 | 5 | 4 | 20 |  |
 | PK04 | COMPLETE_PROOF_LINKED | HIGH | 13 | 2 | 11 | 18 |  |
@@ -719,21 +719,21 @@ Do not hand-edit generated output; update source files or governance rules and r
 | PK11 | COMPLETE_PROOF_LINKED | HIGH | 14 | 2 | 6 | 19 |  |
 | PK12 | COMPLETE_PROOF_LINKED | HIGH | 15 | 2 | 8 | 19 |  |
 | PK13 | COMPLETE_PROOF_LINKED | HIGH | 15 | 2 | 6 | 20 |  |
-| PK14 | NEEDS_RECONCILIATION | LOW | 18 | 4 | 4 | 20 | Registry contains both completion and queue/deferred language. |
-| PK15 | NEEDS_RECONCILIATION | LOW | 22 | 5 | 13 | 23 | Registry contains both completion and queue/deferred language. |
-| PK16 | NEEDS_RECONCILIATION | LOW | 26 | 4 | 21 | 63 | Registry contains both completion and queue/deferred language. |
-| PK17 | NEEDS_RECONCILIATION | LOW | 335 | 5 | 24 | 232 | Registry contains both completion and queue/deferred language. |
-| PK18 | NEEDS_RECONCILIATION | LOW | 364 | 9 | 37 | 256 | Registry contains both completion and queue/deferred language. |
-| PK19 | NEEDS_RECONCILIATION | LOW | 341 | 6 | 34 | 235 | Registry contains both completion and queue/deferred language. |
-| PK20 | NEEDS_RECONCILIATION | LOW | 348 | 6 | 34 | 243 | Registry contains both completion and queue/deferred language. |
-| PK21 | NEEDS_RECONCILIATION | LOW | 348 | 9 | 36 | 255 | Registry contains both completion and queue/deferred language. |
-| PK22 | NEEDS_RECONCILIATION | LOW | 333 | 9 | 40 | 234 | Registry contains both completion and queue/deferred language. |
-| PK23 | NEEDS_RECONCILIATION | LOW | 333 | 8 | 36 | 235 | Registry contains both completion and queue/deferred language. |
-| PK24 | NEEDS_RECONCILIATION | LOW | 334 | 8 | 35 | 234 | Registry contains both completion and queue/deferred language. |
-| PK25 | NEEDS_RECONCILIATION | LOW | 332 | 8 | 34 | 235 | Registry contains both completion and queue/deferred language. |
-| PK26 | NEEDS_RECONCILIATION | LOW | 329 | 6 | 17 | 193 | Registry contains both completion and queue/deferred language. |
-| PK27 | NEEDS_RECONCILIATION | LOW | 336 | 6 | 19 | 201 | Registry contains both completion and queue/deferred language. |
-| PK28 | NEEDS_RECONCILIATION | LOW | 340 | 6 | 21 | 207 | Registry contains both completion and queue/deferred language. |
+| PK14 | COMPLETE_PROOF_LINKED | HIGH | 18 | 4 | 4 | 20 | Historical queued language superseded by linked implementation and proof. |
+| PK15 | COMPLETE_PROOF_LINKED | HIGH | 22 | 5 | 13 | 23 | Historical queued language superseded by linked implementation and proof. |
+| PK16 | COMPLETE_PROOF_LINKED | HIGH | 26 | 4 | 21 | 63 | Historical queued language superseded by linked implementation and proof. |
+| PK17 | COMPLETE_PROOF_LINKED | HIGH | 335 | 5 | 24 | 232 | Historical queued language superseded by linked implementation and proof. |
+| PK18 | COMPLETE_PROOF_LINKED | HIGH | 364 | 9 | 37 | 256 | Historical queued language superseded by linked implementation and proof. |
+| PK19 | COMPLETE_PROOF_LINKED | HIGH | 341 | 6 | 34 | 235 | Historical queued language superseded by linked implementation and proof. |
+| PK20 | COMPLETE_PROOF_LINKED | HIGH | 348 | 6 | 34 | 243 | Historical queued language superseded by linked implementation and proof. |
+| PK21 | COMPLETE_PROOF_LINKED | HIGH | 348 | 9 | 36 | 255 | Historical queued language superseded by linked implementation and proof. |
+| PK22 | COMPLETE_PROOF_LINKED | HIGH | 333 | 9 | 40 | 234 | Historical queued language superseded by linked implementation and proof. |
+| PK23 | COMPLETE_PROOF_LINKED | HIGH | 333 | 8 | 36 | 235 | Historical queued language superseded by linked implementation and proof. |
+| PK24 | COMPLETE_PROOF_LINKED | HIGH | 334 | 8 | 35 | 234 | Historical queued language superseded by linked implementation and proof. |
+| PK25 | COMPLETE_PROOF_LINKED | HIGH | 332 | 8 | 34 | 235 | Historical queued language superseded by linked implementation and proof. |
+| PK26 | COMPLETE_PROOF_LINKED | HIGH | 329 | 6 | 17 | 193 | Historical queued language superseded by linked implementation and proof. |
+| PK27 | COMPLETE_PROOF_LINKED | HIGH | 336 | 6 | 19 | 201 | Historical queued language superseded by linked implementation and proof. |
+| PK28 | COMPLETE_PROOF_LINKED | HIGH | 340 | 6 | 21 | 207 | Historical queued language superseded by linked implementation and proof. |
 | PK29 | COMPLETE_PROOF_LINKED | HIGH | 326 | 6 | 24 | 187 |  |
 | PK30 | COMPLETE_PROOF_LINKED | HIGH | 326 | 6 | 18 | 183 |  |
 | PK31 | COMPLETE_PROOF_LINKED | HIGH | 326 | 6 | 18 | 183 |  |
@@ -746,25 +746,25 @@ Do not hand-edit generated output; update source files or governance rules and r
 | PK38 | COMPLETE_PROOF_LINKED | HIGH | 327 | 4 | 17 | 186 |  |
 | PK39 | COMPLETE_PROOF_LINKED | HIGH | 327 | 4 | 17 | 186 |  |
 | PK40 | COMPLETE_PROOF_LINKED | HIGH | 327 | 4 | 17 | 186 |  |
-| PK41 | NEEDS_RECONCILIATION | LOW | 328 | 4 | 17 | 188 | Registry contains both completion and queue/deferred language. |
+| PK41 | COMPLETE_PROOF_LINKED | HIGH | 328 | 4 | 17 | 188 | Historical queued language superseded by linked implementation and proof. |
 
 ## PLR
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| PLR02 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 1 |  |
+| PLR02 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 1 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## PPL
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| PPL01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
+| PPL01 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## PRI
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| PRI01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
+| PRI01 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## PX
 
@@ -795,36 +795,36 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| RC01 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
-| RC02 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
+| RC01 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
+| RC02 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## REC
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| REC01 | NEEDS_RECONCILIATION | LOW | 11 | 0 | 0 | 26 | Registry contains both completion and queue/deferred language. |
+| REC01 | QUEUED_OR_BLOCKED | MEDIUM | 11 | 0 | 0 | 26 | Mixed completion and queued language normalized to queued/deferred until proof is linked. |
 | REC02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 52 | 2 | 0 | 27 |  |
 | REC03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 11 | 2 | 0 | 24 |  |
 | REC04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 10 | 2 | 0 | 23 |  |
 | REC05 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 9 | 1 | 0 | 24 |  |
-| REC06 | NEEDS_RECONCILIATION | LOW | 8 | 2 | 0 | 23 | Registry contains both completion and queue/deferred language. |
+| REC06 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 8 | 2 | 0 | 23 | Historical queued language superseded by linked evidence. |
 
 ## RELEASE
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| RELEASE01 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 1 |  |
+| RELEASE01 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 1 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## RFM
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| RFM01 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 2 |  |
-| RFM02 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 2 |  |
-| RFM03 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 2 |  |
-| RFM04 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 2 |  |
-| RFM05 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 2 |  |
-| RFM06 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 2 |  |
+| RFM01 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 2 | Train ID is present without operational proof; normalized to queued/deferred. |
+| RFM02 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 2 | Train ID is present without operational proof; normalized to queued/deferred. |
+| RFM03 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 2 | Train ID is present without operational proof; normalized to queued/deferred. |
+| RFM04 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 2 | Train ID is present without operational proof; normalized to queued/deferred. |
+| RFM05 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 2 | Train ID is present without operational proof; normalized to queued/deferred. |
+| RFM06 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 2 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## RHC
 
@@ -841,13 +841,13 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| RHE01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 1 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
+| RHE01 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## RRE
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| RRE01 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 2 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
+| RRE01 | QUEUED_OR_BLOCKED | MEDIUM | 2 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## SA
 
@@ -903,7 +903,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| SHA256 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
+| SHA256 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## SI
 
@@ -933,24 +933,24 @@ Do not hand-edit generated output; update source files or governance rules and r
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
 | SIG01 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 |  |
-| SIG02 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG03 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG04 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG05 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG06 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG07 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG08 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG09 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG10 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG11 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG12 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG13 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 0 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG14 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 1 | Prompt exists but no matching commit lineage was found by train ID. |
-| SIG15 | PROMPT_WITHOUT_COMMIT_LINEAGE | LOW | 4 | 0 | 0 | 8 | Prompt exists but no matching commit lineage was found by train ID. |
+| SIG02 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG03 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG04 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG05 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG06 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG07 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG08 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG09 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG10 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG11 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG12 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG13 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG14 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| SIG15 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 8 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | SIG16 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 |  |
 
 ## UTF
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| UTF08 | NEEDS_RECONCILIATION | LOW | 0 | 0 | 0 | 0 |  |
+| UTF08 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |

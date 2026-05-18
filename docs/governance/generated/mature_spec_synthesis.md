@@ -1,6 +1,6 @@
 # Mature Spec Synthesis
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
 ## Today
 
@@ -222,7 +222,6 @@ Generated: 2026-05-17T19:24:47-04:00
 - Source: docs/canon/AmbitionsOS_Surface_Encapsulation_And_Signature_Language.md
 - Source: docs/canon/SOURCE_OF_TRUTH_MAP.md
 - Source: docs/governance/generated/mature_spec_synthesis.md
-- Source: docs/governance/generated/stale_overlay_audit.md
 
 ## Constellation Atlas
 
@@ -231,7 +230,6 @@ Generated: 2026-05-17T19:24:47-04:00
 - Source: docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md
 - Source: docs/governance/generated/canon_propagation_plan.md
 - Source: docs/governance/generated/mature_spec_synthesis.md
-- Source: docs/governance/generated/stale_overlay_audit.md
 
 ## Atmosphere Composer
 
@@ -275,7 +273,6 @@ Generated: 2026-05-17T19:24:47-04:00
 - Source: docs/governance/generated/canon_propagation_plan.md
 - Source: docs/governance/generated/mature_spec_synthesis.md
 - Source: docs/governance/generated/prompt_rewrite_plan.md
-- Source: docs/governance/generated/stale_overlay_audit.md
 
 ## local-first
 

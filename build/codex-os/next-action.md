@@ -1,30 +1,28 @@
 # Codex OS Next Action
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
-Decision: repair_governance
-Reason: Repo doctor or governance reconciliation still reports unresolved work.
+Decision: select_next_batch
+Reason: No blockers remain; select the safest executable batch (FCP27 App-Wide Flagship Audit And Remediation).
 
 ## Blockers
 
-- repo_doctor:YELLOW
-- unresolved:151
-- stale:1369
+- None
 
 ## Blocked Reason
 
-Governance Red or unresolved reconciliation remains.
+None
 
 ## Exact Command
 
 ```bash
-python3 scripts/codex-os/ambitions-codex-os-repair-router.py
+python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
 ```
 
 ## Evidence
 
-- repo doctor status: YELLOW
-- governance unresolved: 151
-- stale overlays: 1369
+- repo doctor status: GREEN
+- governance unresolved: 0
+- stale overlays: 0
 - architecture debt score: 0
-- implementation expectations: 213
+- implementation expectations: 212

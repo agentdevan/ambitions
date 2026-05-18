@@ -24,11 +24,13 @@ def main() -> int:
         state = rec.get("state")
         if state in {"NEEDS_RECONCILIATION", "COMPLETION_CLAIM_UNPROVEN"}:
             unresolved.append(rec)
-        if rec.get("prompt_files") and not rec.get("commits"):
+        if rec.get("prompt_files") and not rec.get("commits") and state != "QUEUED_OR_BLOCKED":
             orphan.append(rec)
 
     lines = [
         "# Governance Cleanup Action Plan",
+        "",
+        f"Status: {'GREEN' if not unresolved and not orphan else 'ACTION_REQUIRED'}",
         "",
         "## Unresolved Reconciliation Actions",
         "",
@@ -36,11 +38,15 @@ def main() -> int:
 
     for rec in unresolved[:50]:
         lines.append(f"- `{rec.get('train_id')}`: reconcile registry state, proof linkage, and implementation ownership")
+    if not unresolved:
+        lines.append("- None")
 
     lines += ["", "## Orphan Prompt Actions", ""]
 
     for rec in orphan[:50]:
         lines.append(f"- `{rec.get('train_id')}`: determine whether prompt is historical, superseded, or missing lineage")
+    if not orphan:
+        lines.append("- None")
 
     OUT.write_text("\n".join(lines) + "\n")
     print(f"wrote {OUT}")

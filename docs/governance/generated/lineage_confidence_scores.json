@@ -80,264 +80,264 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "AIR01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR02": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR04": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR05": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR06": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR07": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR08": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR09": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR10": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR11": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR12": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR13": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR14": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR15": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR16": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR17": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR18": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR19": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR20": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR21": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR22": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR23": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR24": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR25": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR26": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR27": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR28": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR29": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR30": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR31": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR32": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR33": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR34": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR35": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR36": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR37": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR38": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR39": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR40": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR41": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR42": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR43": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR44": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR45": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR46": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR47": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR48": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR49": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AIR50": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AOS01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "AOS02": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "AOS03": {
     "confidence": "HIGH",
@@ -440,14 +440,14 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "AOS23": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "AOS24": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "AOS25": {
     "confidence": "HIGH",
@@ -475,289 +475,289 @@
     "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "AOS30": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "AQOS01": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS02": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS03": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS04": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS05": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS06": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS07": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS08": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS09": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS10": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS11": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS12": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS13": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS14": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS15": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS16": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS17": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS18": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS19": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS20": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS21": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS22": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS23": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS24": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS25": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS26": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS27": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS28": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS29": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "AQOS30": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "BLE01": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS02": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS04": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS05": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS06": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS07": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS08": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS09": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS10": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS11": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS12": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS13": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS14": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS15": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS16": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS17": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS18": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS19": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS20": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS21": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS22": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS23": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS24": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CQS25": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS01": {
     "confidence": "MEDIUM",
@@ -765,9 +765,9 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS02": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS02A": {
     "confidence": "MEDIUM",
@@ -780,14 +780,14 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS02C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS03A": {
     "confidence": "MEDIUM",
@@ -800,14 +800,14 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS03C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS04": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS04A": {
     "confidence": "MEDIUM",
@@ -820,14 +820,14 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS04C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS05": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS05A": {
     "confidence": "MEDIUM",
@@ -840,14 +840,14 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS05C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS06": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS06A": {
     "confidence": "MEDIUM",
@@ -860,9 +860,9 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS06C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS07": {
     "confidence": "MEDIUM",
@@ -875,109 +875,109 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS09": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "CS09A": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS09B": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS09C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CS10": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "CSCS02C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CSCS03C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CSCS04C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CSCS05C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CSCS06C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "CSCS09C": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV00": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "DAV02": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV04": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV05": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV06": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV07": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV08": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV09": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DAV10": {
     "confidence": "HIGH",
@@ -1005,29 +1005,29 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "DAV15": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "DPTG00": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "DPTG01": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EB00": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EB01": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "EB02": {
     "confidence": "MEDIUM",
@@ -1035,9 +1035,9 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "EB03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "EB03A": {
     "confidence": "HIGH",
@@ -1052,7 +1052,7 @@
   "EB03C": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EB04": {
     "confidence": "HIGH",
@@ -1210,9 +1210,9 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "EB35": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "EB36": {
     "confidence": "HIGH",
@@ -1235,9 +1235,9 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "EB40": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "EFC00": {
     "confidence": "MEDIUM",
@@ -1245,9 +1245,9 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "EFC01": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "EFC02": {
     "confidence": "MEDIUM",
@@ -1330,74 +1330,74 @@
     "state": "QUEUED_OR_BLOCKED"
   },
   "EFC18": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "EFC19": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC20": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC21": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC22": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC23": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC24": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC25": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC26": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC27": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC28": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC29": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "EFC30": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "FCP01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "FCP02": {
     "confidence": "MEDIUM",
@@ -1415,14 +1415,14 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "FCP05": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "FCP06": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "FCP07": {
     "confidence": "HIGH",
@@ -1455,9 +1455,9 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "FCP13": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "FCP13A": {
     "confidence": "HIGH",
@@ -1550,14 +1550,14 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "FCP30": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "FET00": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "FET01": {
     "confidence": "HIGH",
@@ -1622,12 +1622,12 @@
   "FINAL01": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "FIO01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "FL01": {
     "confidence": "MEDIUM",
@@ -1640,9 +1640,9 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "FL03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "FL04": {
     "confidence": "MEDIUM",
@@ -1687,32 +1687,32 @@
   "FVQ06": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "GH01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "GH02": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "GH03": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "GH04": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "GH05": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "GQ01": {
     "confidence": "HIGH",
@@ -1725,34 +1725,34 @@
     "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "HBI01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "HBI02": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "HBI03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "HBI04": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "HPS01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "HPS02": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "HPS03": {
     "confidence": "MEDIUM",
@@ -1800,9 +1800,9 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "HPS12": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "IR01": {
     "confidence": "MEDIUM",
@@ -1810,14 +1810,14 @@
     "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "IRQ01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "LDI01": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI02": {
     "confidence": "HIGH",
@@ -1845,9 +1845,9 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI07": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI08": {
     "confidence": "HIGH",
@@ -1880,24 +1880,24 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI14": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI15": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI16": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI17": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI18": {
     "confidence": "MEDIUM",
@@ -1905,14 +1905,14 @@
     "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "LDI19": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI20": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI21": {
     "confidence": "HIGH",
@@ -1920,9 +1920,9 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "LDI22": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "MCP01": {
     "confidence": "MEDIUM",
@@ -1930,49 +1930,49 @@
     "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "MCP02": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MCP03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MCP04": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MCP05": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MCP06": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MCP07": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MD12": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MD13": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MD32": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "ME01": {
     "confidence": "MEDIUM",
@@ -2025,14 +2025,14 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "ME11": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "COMPLETION_CLAIM_UNPROVEN"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "ME12": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "MEG01": {
     "confidence": "MEDIUM",
@@ -2040,9 +2040,9 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "MGP01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "MRI00": {
     "confidence": "MEDIUM",
@@ -2405,29 +2405,29 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "PD15": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PD16": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PD17": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PD18": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "PFC01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "PFC02": {
     "confidence": "MEDIUM",
@@ -2450,9 +2450,9 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "PFC05A": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "PFC06": {
     "confidence": "MEDIUM",
@@ -2625,19 +2625,19 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "PFC40": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK00": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "PK01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "PK02": {
     "confidence": "HIGH",
@@ -2700,79 +2700,79 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "PK14": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK15": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK16": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK17": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK18": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK19": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK20": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK21": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK22": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK23": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK24": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK25": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK26": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK27": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK28": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PK29": {
     "confidence": "HIGH",
@@ -2835,24 +2835,24 @@
     "state": "COMPLETE_PROOF_LINKED"
   },
   "PK41": {
-    "confidence": "LOW",
+    "confidence": "HIGH",
     "score": 90,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_PROOF_LINKED"
   },
   "PLR02": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "PPL01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "PRI01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "PX01": {
     "confidence": "HIGH",
@@ -2957,17 +2957,17 @@
   "RC01": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RC02": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "REC01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "REC02": {
     "confidence": "MEDIUM",
@@ -2990,44 +2990,44 @@
     "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "REC06": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 65,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "RELEASE01": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RFM01": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RFM02": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RFM03": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RFM04": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RFM05": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RFM06": {
     "confidence": "LOW",
     "score": 20,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RHC01": {
     "confidence": "MEDIUM",
@@ -3060,14 +3060,14 @@
     "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "RHE01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "RRE01": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SA01": {
     "confidence": "MEDIUM",
@@ -3272,7 +3272,7 @@
   "SHA256": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SI01": {
     "confidence": "HIGH",
@@ -3370,74 +3370,74 @@
     "state": "QUEUED_OR_BLOCKED"
   },
   "SIG02": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG03": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG04": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG05": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG06": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG07": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG08": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG09": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG10": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG11": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG12": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG13": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 20,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG14": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG15": {
-    "confidence": "LOW",
+    "confidence": "MEDIUM",
     "score": 40,
-    "state": "PROMPT_WITHOUT_COMMIT_LINEAGE"
+    "state": "QUEUED_OR_BLOCKED"
   },
   "SIG16": {
     "confidence": "MEDIUM",
@@ -3447,6 +3447,6 @@
   "UTF08": {
     "confidence": "LOW",
     "score": 0,
-    "state": "NEEDS_RECONCILIATION"
+    "state": "QUEUED_OR_BLOCKED"
   }
 }

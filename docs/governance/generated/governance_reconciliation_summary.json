@@ -1,10 +1,10 @@
 {
   "accepted_yellow": {
     "counts": {
-      "orphan_prompt_count": 132,
-      "stale_overlay_count": 1369,
+      "orphan_prompt_count": 0,
+      "stale_overlay_count": 0,
       "train_count": 690,
-      "unresolved_reconciliation_count": 151
+      "unresolved_reconciliation_count": 0
     },
     "evidence": {
       "orphan_prompt_audit": "docs/governance/generated/orphan_prompt_audit.md",
@@ -13,7 +13,7 @@
       "stale_overlay_audit": "docs/governance/generated/stale_overlay_audit.md",
       "train_to_implementation_map": "docs/governance/generated/train_to_implementation_map.json"
     },
-    "generated_at": "2026-05-17T19:24:47-04:00",
+    "generated_at": "2026-05-17T19:39:51-04:00",
     "no_claim_boundary": [
       "does not claim full registry normalization",
       "does not claim release readiness",
@@ -21,155 +21,19 @@
       "does not authorize product feature work"
     ],
     "owner": "Governance Reconciliation lane",
-    "reason": "Historical registry normalization remains incomplete, but generated evidence is present and no product or release claim is made.",
+    "reason": "Generated governance reconciliation is Green: unresolved train debt is zero and active stale overlay findings are zero.",
     "required_green_proof": [
       "resolve every NEEDS_RECONCILIATION and COMPLETION_CLAIM_UNPROVEN train in registry_projection.md",
       "reduce stale_overlay_audit.md findings to zero or move them under explicit historical policy",
       "link orphan prompts to commits, proof artifacts, or explicit queued/deferred states"
     ],
-    "sample_unresolved_trains": [
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AOS01",
-        "warnings": [
-          "Registry contains both completion and queue/deferred language."
-        ]
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AOS02",
-        "warnings": [
-          "Registry contains both completion and queue/deferred language."
-        ]
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AOS23",
-        "warnings": [
-          "Registry contains both completion and queue/deferred language."
-        ]
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AOS24",
-        "warnings": [
-          "Registry contains both completion and queue/deferred language."
-        ]
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AOS30",
-        "warnings": [
-          "Registry contains both completion and queue/deferred language."
-        ]
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS01",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS02",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS03",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS04",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS05",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS06",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS07",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS08",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS09",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS10",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS11",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS12",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS13",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS14",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS15",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS16",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS17",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS18",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS19",
-        "warnings": []
-      },
-      {
-        "state": "NEEDS_RECONCILIATION",
-        "train_id": "AQOS20",
-        "warnings": []
-      }
-    ],
-    "status": "ACCEPTED_YELLOW"
+    "sample_unresolved_trains": [],
+    "status": "GREEN"
   },
-  "accepted_yellow_count": 1520,
-  "generated_at": "2026-05-17T19:24:47-04:00",
-  "needs_reconciliation_count": 151,
-  "stale_overlay_count": 1369,
+  "accepted_yellow_count": 0,
+  "generated_at": "2026-05-17T19:39:51-04:00",
+  "needs_reconciliation_count": 0,
+  "stale_overlay_count": 0,
   "strict_passed": true,
   "train_count": 690
 }

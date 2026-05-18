@@ -1,7 +1,7 @@
 # Repo Doctor Summary
 
-Generated: 2026-05-17T19:24:47-04:00
-Overall status: YELLOW
+Generated: 2026-05-17T19:39:51-04:00
+Overall status: GREEN
 Strict mode requested: True
 Failures: 0
 
@@ -41,7 +41,7 @@ Failures: 0
 
 ## Accepted Yellow Advisories
 
-- `governance_reconciliation` — owner: Governance Reconciliation lane; reason: Historical registry normalization remains incomplete, but generated evidence is present and no product or release claim is made.
+- None
 
 ## Codex OS Bridge
 
@@ -55,4 +55,4 @@ Failures: 0
 
 ## Result
 
-Repo doctor strict path passed with explicit accepted Yellow advisories.
+Repo doctor passed.

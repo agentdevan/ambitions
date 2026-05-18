@@ -2,49 +2,45 @@
 
 ## Active Changes
 
-- DesignTokens/README.md
-- Makefile
-- build/reports/authority-supersession.json
-- build/reports/design-token-completeness.json
-- build/reports/faang-red-team-evidence.json
-- build/reports/mature-app-surface-universe-complete.json
-- build/reports/native-iphone-interaction-grammar.json
-- build/reports/source-provenance-batch-linkage-complete.json
-- build/reports/surface-scenario-coverage.json
-- build/reports/visual-100-hidden-automation.json
-- build/reports/visual-100-no-false-momentum.json
-- build/reports/visual-100-proof-dashboard.json
-- build/reports/visual-100-proof-dashboard.md
-- build/reports/visual-design-authority-final-form-04.md
-- build/reports/visual-design-final-form-lock-repair-05.json
-- build/reports/visual-design-final-form-lock-repair-05.md
-- build/reports/visual-encyclopedia-100-final-proof-authority-04.md
-- build/reports/visual-encyclopedia-dashboard.json
-- build/reports/visual-no-orphan-graph.json
-- build/reports/visual-source-linkage.json
-- build/reports/visual-vocabulary-boundary.json
-- frontend/visual-encyclopedia/CHROME_ENRICHMENT_DOCTRINE.md
-- frontend/visual-encyclopedia/DESIGN_SYSTEM_TO_VISUAL_ENCYCLOPEDIA_BRIDGE.md
-- frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md
-- frontend/visual-encyclopedia/FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md
-- frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md
-- frontend/visual-encyclopedia/OBJECT_GRAPH_ARCHITECTURE.md
-- frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md
-- frontend/visual-encyclopedia/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md
-- scripts/ambitions-swift6-final-gate.sh
-- scripts/ambitions-swift6-modernization-scan.py
-- scripts/ambitions-visual-100-anti-generic-check.py
-- scripts/ambitions-visual-100-vocabulary-full-corpus-check.py
-- scripts/ambitions_design_system_15_common.py
-- scripts/ambitions_visual_design_lock_repair_05_common.py
-- scripts/no-fake-proof-gate.sh
-- scripts/release-claim-safety-scan.sh
+- build/codex-os/active-authority-map.json
+- build/codex-os/ambitions-context-pack.md
+- build/codex-os/batch-selection.json
+- build/codex-os/batch-selection.md
+- build/codex-os/next-action.json
+- build/codex-os/next-action.md
+- build/codex-os/performance-check.json
+- build/codex-os/performance-check.md
+- build/codex-os/repair-plan.json
+- build/codex-os/repair-plan.md
+- build/codex-os/sync-report.json
+- build/codex-os/sync-report.md
+- docs/governance/GOVERNANCE_DASHBOARD.md
+- scripts/codex-os/ambitions-codex-os-performance-check.py
+- scripts/codex-os/ambitions-codex-os-sync-governance.py
 
 ## Historical / Archive Changes
 
 
 ## Generated Changes
 
+- docs/governance/generated/accepted_yellow_governance_debt.json
+- docs/governance/generated/accepted_yellow_governance_debt.md
+- docs/governance/generated/architecture_debt_score.json
+- docs/governance/generated/authority_diff_report.md
+- docs/governance/generated/canon_impact_map.json
+- docs/governance/generated/canon_impact_plan.md
 - docs/governance/generated/canon_propagation_plan.md
+- docs/governance/generated/global_train_resequence.json
+- docs/governance/generated/governance_reconciliation_summary.json
+- docs/governance/generated/governance_trend_history.json
+- docs/governance/generated/governance_trend_report.json
+- docs/governance/generated/implementation_expectation_map.json
+- docs/governance/generated/mature_spec_synthesis.md
+- docs/governance/generated/orphan_prompt_audit.md
 - docs/governance/generated/prompt_rewrite_plan.md
+- docs/governance/generated/registry_projection.md
+- docs/governance/generated/repo_doctor_summary.json
+- docs/governance/generated/repo_doctor_summary.md
+- docs/governance/generated/stale_overlay_audit.md
 - docs/governance/generated/supersession_rewrite_plan.md
+- docs/governance/generated/train_lineage_graph.json

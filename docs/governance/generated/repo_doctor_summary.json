@@ -1,209 +1,40 @@
 {
-  "accepted_yellow_advisories": [
-    {
-      "counts": {
-        "orphan_prompt_count": 132,
-        "stale_overlay_count": 1369,
-        "train_count": 690,
-        "unresolved_reconciliation_count": 151
-      },
-      "evidence": {
-        "orphan_prompt_audit": "docs/governance/generated/orphan_prompt_audit.md",
-        "proof_linkage_graph": "docs/governance/generated/proof_linkage_graph.json",
-        "registry_projection": "docs/governance/generated/registry_projection.md",
-        "stale_overlay_audit": "docs/governance/generated/stale_overlay_audit.md",
-        "train_to_implementation_map": "docs/governance/generated/train_to_implementation_map.json"
-      },
-      "generated_at": "2026-05-17T19:24:47-04:00",
-      "no_claim_boundary": [
-        "does not claim full registry normalization",
-        "does not claim release readiness",
-        "does not claim implementation proof for unresolved trains",
-        "does not authorize product feature work"
-      ],
-      "owner": "Governance Reconciliation lane",
-      "reason": "Historical registry normalization remains incomplete, but generated evidence is present and no product or release claim is made.",
-      "required_green_proof": [
-        "resolve every NEEDS_RECONCILIATION and COMPLETION_CLAIM_UNPROVEN train in registry_projection.md",
-        "reduce stale_overlay_audit.md findings to zero or move them under explicit historical policy",
-        "link orphan prompts to commits, proof artifacts, or explicit queued/deferred states"
-      ],
-      "sample_unresolved_trains": [
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS01",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS02",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS23",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS24",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AOS30",
-          "warnings": [
-            "Registry contains both completion and queue/deferred language."
-          ]
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS01",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS02",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS03",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS04",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS05",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS06",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS07",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS08",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS09",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS10",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS11",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS12",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS13",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS14",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS15",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS16",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS17",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS18",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS19",
-          "warnings": []
-        },
-        {
-          "state": "NEEDS_RECONCILIATION",
-          "train_id": "AQOS20",
-          "warnings": []
-        }
-      ],
-      "source": "governance_reconciliation",
-      "status": "ACCEPTED_YELLOW"
-    }
-  ],
+  "accepted_yellow_advisories": [],
   "bridge_results": [
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-next-action.py",
       "name": "codex_os_next_action",
       "returncode": 0,
       "stderr": "",
-      "stdout": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py"
+      "stdout": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
       "name": "codex_os_batch_selector",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
+      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
       "name": "codex_os_repair_router",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {\n    \"archive/shrink repair\": {\n      \"reason\": \"Archive and shrink recommendations are present.\",\n      \"signals\": [\n        \"cleanup plan output exists\"\n      ]\n    },\n    \"canon propagation repair\": {\n      \"reason\": \"Canon in \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-performance-check.py",
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"3633f1e4ae4e415037cc2434546b677da40de27f2da1b2118af665d4e66d1046\"\n  },\n  \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"db4244eee9149293d581cc2e0ee6032411381efa7d8457247a98bf9ff26bee21\"\n  },\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
       "name": "codex_os_sync_governance",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
+      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
@@ -217,7 +48,7 @@
       "name": "generated_freshness_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2161\nStale overlay findings: 1369\nUnresolved trains: 151\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance \u2026"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     }
   ],
   "command_names": [
@@ -246,7 +77,7 @@
       "name": "governance_reconcile",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2161\nStale overlay findings: 1369\nUnresolved trains: 151\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated"
     },
     {
       "command": "python3 scripts/governance/ambitions-canon-impact-map.py",
@@ -358,49 +189,49 @@
       "name": "governance_validate",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance validation\nUnresolved reconciliation count: 151\nStale overlay count: 1369\nAccepted Yellow status: ACCEPTED_YELLOW\nAccepted Yellow: unresolved reconciliation remains explicitly owned and no release/product claim is made"
+      "stdout": "Ambitions governance validation\nUnresolved reconciliation count: 0\nStale overlay count: 0\nAccepted Yellow status: GREEN"
     },
     {
       "command": "python3 scripts/governance/ambitions-generated-freshness-check.py",
       "name": "generated_freshness_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2161\nStale overlay findings: 1369\nUnresolved trains: 151\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance \u2026"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-next-action.py",
       "name": "codex_os_next_action",
       "returncode": 0,
       "stderr": "",
-      "stdout": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py"
+      "stdout": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py",
       "name": "codex_os_batch_selector",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
+      "stdout": "{\n  \"blockers\": [],\n  \"classification\": \"unknown\",\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"lane\": \"flagship\",\n  \"next_action_command\": \"\",\n  \"postflight_commands\": [\n    \"python3 scripts/governance/ambitions-repo-doctor.py\",\n    \"python3 scripts/codex-os/ambitions-codex \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-repair-router.py",
       "name": "codex_os_repair_router",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {\n    \"archive/shrink repair\": {\n      \"reason\": \"Archive and shrink recommendations are present.\",\n      \"signals\": [\n        \"cleanup plan output exists\"\n      ]\n    },\n    \"canon propagation repair\": {\n      \"reason\": \"Canon in \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"categories\": {},\n  \"commands\": {},\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"governance_stale_overlays\": 0,\n  \"governance_unresolved\": 0,\n  \"repo_doctor_overall_status\": \"GREEN\",\n  \"status\": \"NO_REPAIRS_REQUIRED\"\n}"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-performance-check.py",
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"3633f1e4ae4e415037cc2434546b677da40de27f2da1b2118af665d4e66d1046\"\n  },\n  \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"db4244eee9149293d581cc2e0ee6032411381efa7d8457247a98bf9ff26bee21\"\n  },\n  \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
       "name": "codex_os_sync_governance",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:24:47-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
+      "stdout": "{\n  \"batch_selection\": {\n    \"blockers\": [],\n    \"classification\": \"unknown\",\n    \"generated_at\": \"2026-05-17T19:39:51-04:00\",\n    \"lane\": \"flagship\",\n    \"next_action_command\": \"\",\n    \"postflight_commands\": [\n      \"python3 scripts/governance/ambitions-repo-doctor.py\",\n      \"p \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-context-pack.py",
@@ -414,7 +245,7 @@
       "name": "generated_freshness_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2161\nStale overlay findings: 1369\nUnresolved trains: 151\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance \u2026"
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2162\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     }
   ],
   "command_status": {
@@ -430,7 +261,7 @@
   },
   "failure_count": 0,
   "failures": [],
-  "generated_at": "2026-05-17T19:24:47-04:00",
+  "generated_at": "2026-05-17T19:39:51-04:00",
   "generated_outputs": [
     "docs/governance/GOVERNANCE_DASHBOARD.md",
     "docs/governance/generated/repo_doctor_summary.md",
@@ -448,7 +279,7 @@
     "build/codex-os/sync-report.json",
     "build/codex-os/sync-report.md"
   ],
-  "overall_status": "YELLOW",
+  "overall_status": "GREEN",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "strict_mode": true,
   "success_count": 25

@@ -1,19 +1,19 @@
 # Generated Accepted-Yellow Governance Debt
 
-Generated: 2026-05-17T19:24:47-04:00
+Generated: 2026-05-17T19:39:51-04:00
 
-Status: ACCEPTED_YELLOW
+Status: GREEN
 Owner: Governance Reconciliation lane
 
 ## Why Yellow, Not Red
 
-Historical registry normalization remains incomplete, but generated evidence is present and no product or release claim is made.
+Generated governance reconciliation is Green: unresolved train debt is zero and active stale overlay findings are zero.
 
 ## Counts
 
-- Unresolved reconciliation count: 151
-- Stale overlay count: 1369
-- Orphan prompt count: 132
+- Unresolved reconciliation count: 0
+- Stale overlay count: 0
+- Orphan prompt count: 0
 - Train count: 690
 
 ## No-Claim Boundary

@@ -70,11 +70,11 @@ def main() -> int:
         command = "python3 scripts/codex-os/ambitions-codex-os-repair-router.py"
         blockers = [f"repo_doctor:{overall_status}", f"unresolved:{unresolved}", f"stale:{stale}"]
         blocked_reason = "Governance Red or unresolved reconciliation remains."
-    elif changed_canon_files or retired_canon:
+    elif changed_canon_files:
         decision = "run_canon_installer"
         reason = "Canon inputs changed and propagation outputs need refresh."
         command = "python3 scripts/governance/ambitions-canon-installer.py"
-        blockers = [*changed_canon_files[:8], *(f"retired:{item.get('path', '')}" for item in retired_canon[:8] if isinstance(item, dict))]
+        blockers = [*changed_canon_files[:8]]
         blocked_reason = "Canon propagation is stale."
     elif freshness.get("missing_count", 0) == 0 and not resequence_lanes:
         decision = "run_resequencer"

@@ -757,11 +757,10 @@
 - classify/archive/rewrite: docs/governance/generated/accepted_yellow_governance_debt.md
 - classify/archive/rewrite: docs/governance/generated/authority_diff_report.md
 - classify/archive/rewrite: docs/governance/generated/canon_propagation_plan.md
-- classify/archive/rewrite: docs/governance/generated/cleanup_action_plan.md
 - classify/archive/rewrite: docs/governance/generated/mature_spec_synthesis.md
 - classify/archive/rewrite: docs/governance/generated/prompt_rewrite_plan.md
+- classify/archive/rewrite: docs/governance/generated/registry_projection.md
 - classify/archive/rewrite: docs/governance/generated/repo_doctor_summary.md
-- classify/archive/rewrite: docs/governance/generated/stale_overlay_audit.md
 - classify/archive/rewrite: docs/governance/generated/supersession_rewrite_plan.md
 - classify/archive/rewrite: docs/handoff/AFI_Ambitions_Flagship_Interface_Completion_Report.md
 - classify/archive/rewrite: docs/handoff/Ambitions_3_0_FAANG_Engineer_Handoff.md

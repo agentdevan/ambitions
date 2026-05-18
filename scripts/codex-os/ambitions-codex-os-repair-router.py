@@ -46,9 +46,9 @@ def main() -> int:
         }
         commands["governance repair"] = "python3 scripts/governance/ambitions-repo-doctor.py --strict"
 
-    if changed_canon or retired_canon:
+    if changed_canon:
         categories["canon propagation repair"] = {
-            "signals": [*changed_canon[:10], *(f"retired:{item.get('path', '')}" for item in retired_canon[:10] if isinstance(item, dict))],
+            "signals": [*changed_canon[:10]],
             "reason": "Canon inputs changed and propagation outputs require refresh.",
         }
         commands["canon propagation repair"] = "python3 scripts/governance/ambitions-canon-installer.py"
@@ -74,7 +74,7 @@ def main() -> int:
         }
         commands["encyclopedia repair"] = "python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py"
 
-    if unresolved or stale or debt.get("score", 0) < 90:
+    if unresolved or stale:
         categories["global train sequencing repair"] = {
             "signals": [f"debt_score:{debt.get('score', 0)}", f"cleanup_present:{bool(cleanup_plan_text.strip())}"],
             "reason": "Train sequencing should be refreshed when governance debt stays elevated.",
@@ -92,24 +92,19 @@ def main() -> int:
         }
         commands["proof/closeout repair"] = "python3 scripts/governance/ambitions-governance-validate.py"
 
-    if cleanup_plan_text.strip():
+    cleanup_has_actions = any(line.startswith("- `") for line in cleanup_plan_text.splitlines())
+    if cleanup_has_actions:
         categories["archive/shrink repair"] = {
             "signals": ["cleanup plan output exists"],
             "reason": "Archive and shrink recommendations are present.",
         }
         commands["archive/shrink repair"] = "python3 scripts/governance/ambitions-cleanup-action-plan.py"
 
-    if not categories:
-        categories["implementation safety repair"] = {
-            "signals": [f"architecture_debt_score:{debt.get('score', 0)}"],
-            "reason": "No specific repair class dominates, but implementation safety should still be checked.",
-        }
-        commands["implementation safety repair"] = "python3 scripts/governance/ambitions-generated-freshness-check.py"
-
     data = {
         "generated_at": git_head_commit_iso(),
         "categories": categories,
         "commands": commands,
+        "status": "NO_REPAIRS_REQUIRED" if not categories else "REPAIR_REQUIRED",
         "repo_doctor_overall_status": repo_doctor.get("overall_status", "missing") if isinstance(repo_doctor, dict) else "missing",
         "governance_unresolved": unresolved,
         "governance_stale_overlays": stale,
@@ -123,10 +118,13 @@ def main() -> int:
         f"Generated: {data['generated_at']}",
         "",
     ]
-    for category, payload in categories.items():
-        lines += [f"## {category}", "", str(payload.get("reason", "")), "", "### Signals", ""]
-        lines.extend(f"- {item}" for item in payload.get("signals", []))
-        lines += ["", "### Command", "", "```bash", commands.get(category, ""), "```", ""]
+    if not categories:
+        lines += ["Status: NO_REPAIRS_REQUIRED", "", "No governance, canon propagation, global sequencing, archive/shrink, proof, frontend, encyclopedia, or implementation safety repair is currently required."]
+    else:
+        for category, payload in categories.items():
+            lines += [f"## {category}", "", str(payload.get("reason", "")), "", "### Signals", ""]
+            lines.extend(f"- {item}" for item in payload.get("signals", []))
+            lines += ["", "### Command", "", "```bash", commands.get(category, ""), "```", ""]
     write_text("build/codex-os/repair-plan.md", "\n".join(lines).rstrip() + "\n")
     print(json.dumps(data, indent=2, sort_keys=True))
     return 0
