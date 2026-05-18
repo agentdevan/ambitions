@@ -1,9 +1,9 @@
 {
   "blockers": [
-    "queue_prerequisites:Complete prior batch PFC35."
+    "queue_prerequisites:Complete prior batch PFC36."
   ],
   "classification": "executable_now",
-  "generated_at": "2026-05-18T02:19:09-04:00",
+  "generated_at": "2026-05-18T03:22:01-04:00",
   "lane": "platform",
   "next_action_command": "",
   "postflight_commands": [
@@ -14,8 +14,8 @@
     "python3 scripts/governance/ambitions-repo-doctor.py",
     "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
   ],
-  "prompt_file": "prompts/batches/PFC36.md",
-  "reason": "Selected the safest live batch from current state: PFC36.",
-  "run_command": "make authorized-batch BATCH=PFC36 PROMPT=prompts/batches/PFC36.md",
-  "selected_batch": "PFC36"
+  "prompt_file": "prompts/batches/PFC37.md",
+  "reason": "Selected the safest live batch from current state: PFC37.",
+  "run_command": "make authorized-batch BATCH=PFC37 PROMPT=prompts/batches/PFC37.md",
+  "selected_batch": "PFC37"
 }

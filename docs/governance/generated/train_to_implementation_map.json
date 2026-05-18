@@ -14763,6 +14763,8 @@
   },
   "PFC36": {
     "commits": [
+      "f4b31e51ff8e1341e0532514bc9f4320f15bdb4b",
+      "9547af82121a1ec48a9cf62f27de58e484fdd648",
       "b5a62a35e14d0646eb646741aafe982e15ea7ee1"
     ],
     "governance_files": [
@@ -14799,9 +14801,35 @@
       "docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md",
       "docs/governance/BLOCKED_AND_DEFERRED_BATCHES.md",
       "docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md",
-      "docs/governance/REMAINING_WORK_GRAPH.md"
+      "docs/governance/GOVERNANCE_DASHBOARD.md",
+      "docs/governance/REMAINING_WORK_GRAPH.md",
+      "docs/governance/generated/accepted_yellow_governance_debt.json",
+      "docs/governance/generated/accepted_yellow_governance_debt.md",
+      "docs/governance/generated/authority_diff_report.md",
+      "docs/governance/generated/canon_impact_map.json",
+      "docs/governance/generated/canon_impact_plan.md",
+      "docs/governance/generated/canon_propagation_plan.md",
+      "docs/governance/generated/global_train_resequence.json",
+      "docs/governance/generated/governance_reconciliation_summary.json",
+      "docs/governance/generated/governance_trend_history.json",
+      "docs/governance/generated/governance_trend_report.json",
+      "docs/governance/generated/implementation_expectation_map.json",
+      "docs/governance/generated/mature_spec_synthesis.md",
+      "docs/governance/generated/orphan_prompt_audit.md",
+      "docs/governance/generated/orphan_prompt_provenance.json",
+      "docs/governance/generated/orphan_prompt_provenance.md",
+      "docs/governance/generated/proof_linkage_graph.json",
+      "docs/governance/generated/registry_projection.md",
+      "docs/governance/generated/repo_doctor_summary.json",
+      "docs/governance/generated/repo_doctor_summary.md",
+      "docs/governance/generated/stale_overlay_audit.md",
+      "docs/governance/generated/supersession_rewrite_plan.md",
+      "docs/governance/generated/train_lineage_graph.json",
+      "docs/governance/generated/train_to_implementation_map.json"
     ],
     "implementation_files": [
+      "Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift",
+      "Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift",
       "scripts/ambitions-control-plane-check.py",
       "scripts/ambitions-final-report-gate.py",
       "scripts/ambitions-queue-snapshot.py",

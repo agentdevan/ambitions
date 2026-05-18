@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T02:19:09-04:00
+Generated: 2026-05-18T03:22:01-04:00
 
 ## Plan → Time
 
@@ -27,6 +27,7 @@ Generated: 2026-05-18T02:19:09-04:00
 - docs/audits/fvq02-top-level-surface-visual-sweep-report.md
 - docs/audits/px04-capture-experience-report.md
 - docs/audits/ambitions-product-experience-pack-batch-1d-readiness-gate-report.md
+- docs/audits/pfc36-batch-closeout-report.md
 - docs/audits/air-fold-in-integration-report.md
 - docs/audits/ambitionsos-canon-integration-report.md
 - docs/audits/pd10-capture-correction-review-report.md
@@ -1234,6 +1235,7 @@ Generated: 2026-05-18T02:19:09-04:00
 - Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift
 - Native/AmbitionsTests/App/AppShellChromeTests.swift
 - Native/AmbitionsTests/App/ScreenContractRegistryTests.swift
+- Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift
 - Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift
 - Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift
 - Native/AmbitionsTests/App/ShellCommandRouterTests.swift

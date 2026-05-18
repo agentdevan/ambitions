@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PFC35 Security And Threat Model Reconciliation"
-  previous_batch: "PFC35 Security And Threat Model Reconciliation"
-  previous_result: "accepted_yellow"
-  next_eligible_batch: "PFC36 Performance And Observability Reconciliation"
+  batch: "PFC36 Performance And Observability Reconciliation"
+  previous_batch: "PFC36 Performance And Observability Reconciliation"
+  previous_result: "green"
+  next_eligible_batch: "PFC37 Release Engineering Evidence"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

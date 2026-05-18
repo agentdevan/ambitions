@@ -1,9 +1,9 @@
 # Codex OS Next Action
 
-Generated: 2026-05-18T02:19:09-04:00
+Generated: 2026-05-18T03:22:01-04:00
 
 Decision: select_next_batch
-Reason: No blockers remain; select the safest executable batch (PFC36).
+Reason: No blockers remain; select the safest executable batch (PFC37).
 
 ## Blockers
 
