@@ -1,23 +1,27 @@
-status: in_progress
+status: compact-mirror
 date: "2026-05-18"
 source_of_truth:
-  - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
-  - ".codex/state/active-batch.yml"
+  - ".codex/reports/current-batch-train-state.md"
+  - "docs/codex/BATCH_REGISTRY.md"
+  - "docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md"
   - "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
+  - "docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md"
+  - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md"
+  - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+  - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
-  train: "Manifest-faithful rerun reconciliation"
-  batch: "SA30 Freshness Broker Manifest Contract"
-  previous_batch: "SA29"
+  train: "Global full-stack execution"
+  batch: "AOS30 AmbitionsOS Closeout"
+  previous_batch: "AOS30 AmbitionsOS Closeout"
   previous_result: "green"
-  next_eligible_batch: "SA31 Official Source Adapter Contracts"
-blocked_forward_queue:
-  blocked_batch: "FCP27 App-Wide Flagship Audit And Remediation"
-  reason: "Manifest-faithful rerun must continue through SA32, LDI15-LDI22, and AOS24-AOS30 before FCP27"
-frontend_authority:
-  encyclopedia_required_for_frontend_touching_batches: false
-  entrypoint: "frontend/README.md"
+  next_eligible_batch: "FCP27 App-Wide Flagship Audit And Remediation"
 codex_os_override:
-  active_pass: "completed"
+  active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
   production_swift_allowed: true
   branch_creation_allowed: false
+efc_overlay:
+  status: "active proof overlay wired into canonical queue"
+  current_batch_preserved: true
+  next_batch_must_inherit_efc: true
+  peak_optimized_sequence_owner: "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
