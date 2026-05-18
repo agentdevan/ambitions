@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T20:05:41-04:00",
+  "generated_at": "2026-05-17T20:32:15-04:00",
   "records": {
     "AFI01": {
       "audit_files": [
@@ -10119,7 +10119,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "BLE",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [],
@@ -14582,7 +14584,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "DAV",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [],
@@ -15880,7 +15884,8 @@
       "confidence": "LOW",
       "family": "DPTG",
       "governance_files": [
-        "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md"
+        "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -15901,7 +15906,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "EB",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [],
@@ -16320,7 +16327,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "EB",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -24158,7 +24167,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24178,7 +24188,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24198,7 +24209,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24218,7 +24230,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24238,7 +24251,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24258,7 +24272,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24278,7 +24293,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24298,7 +24314,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24318,7 +24335,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24338,7 +24356,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24358,7 +24377,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -24378,7 +24398,8 @@
       "confidence": "LOW",
       "family": "EFC",
       "governance_files": [
-        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+        "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -30597,7 +30618,8 @@
       "confidence": "LOW",
       "family": "FINAL",
       "governance_files": [
-        "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md"
+        "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -31630,7 +31652,8 @@
       "confidence": "LOW",
       "family": "FVQ",
       "governance_files": [
-        "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md"
+        "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -31677,7 +31700,8 @@
       "confidence": "LOW",
       "family": "GH",
       "governance_files": [
-        "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md"
+        "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -31697,7 +31721,8 @@
       "confidence": "LOW",
       "family": "GH",
       "governance_files": [
-        "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md"
+        "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -31717,7 +31742,8 @@
       "confidence": "LOW",
       "family": "GH",
       "governance_files": [
-        "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md"
+        "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -31737,7 +31763,8 @@
       "confidence": "LOW",
       "family": "GH",
       "governance_files": [
-        "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md"
+        "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -31968,7 +31995,9 @@
       "commits": [],
       "confidence": "MEDIUM",
       "family": "HBI",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [
         "prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md"
@@ -31988,7 +32017,9 @@
       "commits": [],
       "confidence": "MEDIUM",
       "family": "HBI",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [
         "prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md"
@@ -32008,7 +32039,9 @@
       "commits": [],
       "confidence": "MEDIUM",
       "family": "HBI",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [
         "prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md"
@@ -33611,7 +33644,9 @@
       "commits": [],
       "confidence": "MEDIUM",
       "family": "IRQ",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [
         "prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md"
@@ -39395,7 +39430,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "MD",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -40662,7 +40699,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "MD",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -42154,7 +42193,9 @@
       "commits": [],
       "confidence": "MEDIUM",
       "family": "MGP",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [
         "prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md"
@@ -86640,7 +86681,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "PLR",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -86660,7 +86703,9 @@
       "commits": [],
       "confidence": "MEDIUM",
       "family": "PPL",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [
         "prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md"
@@ -86680,7 +86725,9 @@
       "commits": [],
       "confidence": "MEDIUM",
       "family": "PRI",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [
         "prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md"
@@ -92689,7 +92736,8 @@
       "family": "RC",
       "governance_files": [
         "docs/canon/Ambitions_2_0_RC_Maturity_Plan.md",
-        "docs/canon/Ambitions_2_0_Roadmap.md"
+        "docs/canon/Ambitions_2_0_Roadmap.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -92710,7 +92758,8 @@
       "family": "RC",
       "governance_files": [
         "docs/canon/Ambitions_2_0_RC_Maturity_Plan.md",
-        "docs/canon/Ambitions_2_0_Roadmap.md"
+        "docs/canon/Ambitions_2_0_Roadmap.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -93572,7 +93621,8 @@
       "confidence": "LOW",
       "family": "RELEASE",
       "governance_files": [
-        "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md"
+        "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -93596,7 +93646,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "RFM",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -93620,7 +93672,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "RFM",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -93644,7 +93698,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "RFM",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -93668,7 +93724,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "RFM",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -93692,7 +93750,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "RFM",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -93716,7 +93776,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "RFM",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [
@@ -95336,7 +95398,9 @@
       "commits": [],
       "confidence": "MEDIUM",
       "family": "RHE",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [
         "prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md"
@@ -106098,7 +106162,8 @@
       "governance_files": [
         "docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md",
         "docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md",
-        "docs/codex/CODEX_SPEED_ENGINE.md"
+        "docs/codex/CODEX_SPEED_ENGINE.md",
+        "docs/governance/orphan_prompt_provenance_overrides.json"
       ],
       "implementation_files": [],
       "prompt_files": [],
@@ -108921,7 +108986,9 @@
       "commits": [],
       "confidence": "LOW",
       "family": "UTF",
-      "governance_files": [],
+      "governance_files": [
+        "docs/governance/orphan_prompt_provenance_overrides.json"
+      ],
       "implementation_files": [],
       "prompt_files": [],
       "proof_files": [],

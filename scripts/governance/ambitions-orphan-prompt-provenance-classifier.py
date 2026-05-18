@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 
 GENERATED = Path("docs/governance/generated")
 LINEAGE = GENERATED / "train_lineage_graph.json"
+OVERRIDES = Path("docs/governance/orphan_prompt_provenance_overrides.json")
 OUT_JSON = GENERATED / "orphan_prompt_provenance.json"
 OUT_MD = GENERATED / "orphan_prompt_provenance.md"
 
@@ -20,7 +21,41 @@ PROVEN_STATES = {
 }
 
 
-def classify(record: dict) -> tuple[str, str]:
+def load_overrides() -> dict:
+    if not OVERRIDES.exists():
+        return {"exact": {}, "ranges": []}
+    return json.loads(OVERRIDES.read_text(encoding="utf-8"))
+
+
+def override_for(train_id: str, overrides: dict) -> tuple[str, str] | None:
+    exact = overrides.get("exact", {})
+    if isinstance(exact, dict) and train_id in exact:
+        item = exact[train_id]
+        if isinstance(item, dict):
+            return str(item.get("classification", "")), str(item.get("reason", ""))
+
+    for item in overrides.get("ranges", []):
+        if not isinstance(item, dict):
+            continue
+        prefix = str(item.get("prefix", ""))
+        if not train_id.startswith(prefix):
+            continue
+        suffix = train_id.removeprefix(prefix)
+        if not suffix.isdigit():
+            continue
+        number = int(suffix)
+        start = int(item.get("start", -1))
+        end = int(item.get("end", -1))
+        if start <= number <= end:
+            return str(item.get("classification", "")), str(item.get("reason", ""))
+    return None
+
+
+def classify(train_id: str, record: dict, overrides: dict) -> tuple[str, str]:
+    override = override_for(train_id, overrides)
+    if override and override[0]:
+        return override
+
     prompt_files = record.get("prompt_files") or []
     commits = record.get("commits") or []
     proof_files = record.get("proof_files") or []
@@ -58,10 +93,11 @@ def main() -> int:
 
     data = json.loads(LINEAGE.read_text(encoding="utf-8"))
     records = data.get("records", {})
+    overrides = load_overrides()
 
     buckets: dict[str, list[dict]] = {}
     for train_id, record in records.items():
-        bucket, reason = classify(record)
+        bucket, reason = classify(train_id, record, overrides)
         item = {
             "train_id": train_id,
             "state": record.get("state"),

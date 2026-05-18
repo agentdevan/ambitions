@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-17T20:05:41-04:00
+Generated: 2026-05-17T20:32:15-04:00
 
 ## Plan → Time
 
@@ -950,6 +950,7 @@ Generated: 2026-05-17T20:05:41-04:00
 - docs/governance/SELF_IMPROVEMENT_BACKLOG.md
 - docs/governance/NORMALIZED_REGISTRY_REWRITE_PLAN.md
 - docs/governance/generated/train_to_implementation_map.json
+- docs/governance/generated/orphan_prompt_provenance.json
 - docs/governance/generated/implementation_expectation_map.json
 - docs/governance/generated/mature_spec_synthesis.md
 - docs/governance/generated/supersession_rewrite_plan.md

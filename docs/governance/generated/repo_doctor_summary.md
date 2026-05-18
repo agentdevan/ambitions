@@ -1,6 +1,6 @@
 # Repo Doctor Summary
 
-Generated: 2026-05-17T20:05:41-04:00
+Generated: 2026-05-17T20:32:15-04:00
 Overall status: GREEN
 Strict mode requested: True
 Failures: 0
@@ -10,6 +10,7 @@ Failures: 0
 | Name | Status | Command |
 |---|---|---|
 | governance_reconcile | GREEN | `python3 scripts/governance/ambitions-governance-reconcile.py --write` |
+| orphan_prompt_provenance_classifier | GREEN | `python3 scripts/governance/ambitions-orphan-prompt-provenance-classifier.py` |
 | canon_impact_map | GREEN | `python3 scripts/governance/ambitions-canon-impact-map.py` |
 | canon_propagation_engine | GREEN | `python3 scripts/governance/ambitions-canon-propagation-engine.py` |
 | mature_spec_synthesis | GREEN | `python3 scripts/governance/ambitions-spec-synthesis.py` |

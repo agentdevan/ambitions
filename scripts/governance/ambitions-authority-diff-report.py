@@ -46,6 +46,9 @@ def main() -> int:
     for item in generated:
         lines.append(f"- {item}")
 
+    while lines and lines[-1] == "":
+        lines.pop()
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("\n".join(lines) + "\n")
 

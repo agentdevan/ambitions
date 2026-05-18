@@ -3001,7 +3001,9 @@
   },
   "BLE01": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "CQS01": {
@@ -4076,7 +4078,9 @@
   },
   "DAV00": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "DAV01": {
@@ -4472,13 +4476,16 @@
   "DPTG01": {
     "commits": [],
     "governance_files": [
-      "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md"
+      "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EB00": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "EB01": {
@@ -4615,7 +4622,9 @@
   },
   "EB03C": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "EB04": {
@@ -6469,84 +6478,96 @@
   "EFC19": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC20": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC21": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC22": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC23": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC24": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC25": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC26": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC27": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC28": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC29": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "EFC30": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+      "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
@@ -7984,7 +8005,8 @@
   "FINAL01": {
     "commits": [],
     "governance_files": [
-      "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md"
+      "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
@@ -8252,7 +8274,8 @@
   "FVQ06": {
     "commits": [],
     "governance_files": [
-      "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md"
+      "docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
@@ -8267,28 +8290,32 @@
   "GH02": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md"
+      "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "GH03": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md"
+      "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "GH04": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md"
+      "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "GH05": {
     "commits": [],
     "governance_files": [
-      "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md"
+      "docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
@@ -8349,17 +8376,23 @@
   },
   "HBI02": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "HBI03": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "HBI04": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "HPS01": {
@@ -8954,7 +8987,9 @@
   },
   "IRQ01": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "LDI01": {
@@ -10757,7 +10792,9 @@
   },
   "MD12": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "MD13": {
@@ -11196,7 +11233,9 @@
   },
   "MD32": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "ME01": {
@@ -11559,7 +11598,9 @@
   },
   "MGP01": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "MRI00": {
@@ -17600,17 +17641,23 @@
   },
   "PLR02": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "PPL01": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "PRI01": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "PX01": {
@@ -18421,7 +18468,8 @@
     "commits": [],
     "governance_files": [
       "docs/canon/Ambitions_2_0_RC_Maturity_Plan.md",
-      "docs/canon/Ambitions_2_0_Roadmap.md"
+      "docs/canon/Ambitions_2_0_Roadmap.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
@@ -18429,7 +18477,8 @@
     "commits": [],
     "governance_files": [
       "docs/canon/Ambitions_2_0_RC_Maturity_Plan.md",
-      "docs/canon/Ambitions_2_0_Roadmap.md"
+      "docs/canon/Ambitions_2_0_Roadmap.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
@@ -18663,38 +18712,51 @@
   "RELEASE01": {
     "commits": [],
     "governance_files": [
-      "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md"
+      "docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
   "RFM01": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "RFM02": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "RFM03": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "RFM04": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "RFM05": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "RFM06": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "RHC01": {
@@ -18904,7 +18966,9 @@
   },
   "RHE01": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   },
   "RRE01": {
@@ -20343,7 +20407,8 @@
     "governance_files": [
       "docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md",
       "docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md",
-      "docs/codex/CODEX_SPEED_ENGINE.md"
+      "docs/codex/CODEX_SPEED_ENGINE.md",
+      "docs/governance/orphan_prompt_provenance_overrides.json"
     ],
     "implementation_files": []
   },
@@ -21309,7 +21374,9 @@
   },
   "UTF08": {
     "commits": [],
-    "governance_files": [],
+    "governance_files": [
+      "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
     "implementation_files": []
   }
 }
