@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC18",
-  "next_eligible_title": "Anti-Ceremony Compiler",
+  "next_eligible_batch": "CS02C",
+  "next_eligible_title": "CSCS02C",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -980,9 +980,9 @@
     {
       "id": "EFC18",
       "title": "Anti-Ceremony Compiler",
-      "classification": "executable_now",
-      "reason": "EFC17 is complete / green. EFC18 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC17.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC18 Anti-Ceremony Compiler is complete / Green as overlay-only canonical queue coverage with closeout in docs/audits/efc18-batch-closeout-report.md. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {

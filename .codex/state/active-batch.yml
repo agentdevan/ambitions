@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "EFC17 App Store Creative And Reviewer Package"
-  previous_batch: "EFC17 App Store Creative And Reviewer Package"
+  batch: "EFC18 Anti-Ceremony Compiler"
+  previous_batch: "EFC18 Anti-Ceremony Compiler"
   previous_result: "green"
-  next_eligible_batch: "EFC18 Anti-Ceremony Compiler"
+  next_eligible_batch: "CS02C CSCS02C"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
