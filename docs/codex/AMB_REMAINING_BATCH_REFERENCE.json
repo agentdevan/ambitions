@@ -1523,20 +1523,20 @@
       "consolidation_posture": "historical-complete do-not-run",
       "next_action": "Do not rerun; preserved as EFC06 overlay-only accepted-Yellow closeout."
     },
-    {
-      "id": "EFC07",
-      "title": "Ambitions Twin Fixture Library",
-      "classification": "absorbed_as_overlay",
-      "status_class": "absorbed overlay",
-      "owner_train": "EFC / Proof Overlay",
-      "source_path": "docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md",
-      "dependency_gate": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
-      "risk_class": "high",
-      "proof_class": "overlay proof-plane requirements for unfinished surface/behavior claims",
-      "efc_air_surface_inheritance": "EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof",
-      "consolidation_posture": "proof-overlay owned",
-      "next_action": "Do not duplicate; this is the next overlay-handoff record after EFC06 closeout and owning batch must declare EFC applicability / Yellow ownership."
-    },
+  {
+    "id": "EFC07",
+    "title": "Ambitions Twin Fixture Library",
+    "classification": "absorbed_as_overlay",
+    "status_class": "absorbed overlay / accepted Yellow",
+    "owner_train": "EFC / Proof Overlay",
+    "source_path": "docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md",
+    "dependency_gate": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+    "risk_class": "high",
+    "proof_class": "overlay proof-plane requirements for unfinished surface/behavior claims",
+    "efc_air_surface_inheritance": "EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof",
+    "consolidation_posture": "proof-overlay owned",
+    "next_action": "Do not execute implementation; preserve EFC07 as canonical overlay coverage and hand off to EFC08."
+  },
     {
       "id": "EFC08",
       "title": "Source Freshness Commons And Operations",

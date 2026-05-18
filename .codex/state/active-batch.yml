@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "EFC06 Goal Thermodynamics And Drift Handling"
+  batch: "EFC07 Ambitions Twin Fixture Library"
   previous_batch: "EFC06 Goal Thermodynamics And Drift Handling"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "EFC07 Ambitions Twin Fixture Library"
+  next_eligible_batch: "EFC08 Source Freshness Commons And Operations"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
