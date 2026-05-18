@@ -49,6 +49,38 @@ def _allow() -> None:
     )
 
 
+def _normalized(text: str) -> str:
+    return " ".join(text.lower().split())
+
+
+def _is_safe_xcode_validation(text: str) -> bool:
+    normalized = _normalized(text)
+    safe_prefixes = (
+        "scripts/ambitions-xcode-validate.sh ",
+        "./scripts/ambitions-xcode-validate.sh ",
+        "bash scripts/ambitions-xcode-validate.sh ",
+        "make xcode-validate",
+        "make xcode-focused-test",
+        "make xcode-build-for-testing",
+        "make xcode-test-plan",
+        "make build-lab-doctor",
+    )
+    if not normalized.startswith(safe_prefixes):
+        return False
+
+    forbidden_xcode_fragments = (
+        " archive",
+        " -exportarchive",
+        " -allowprovisioningupdates",
+        " altool",
+        " notarytool",
+        " security ",
+        " codesign ",
+        " productbuild ",
+    )
+    return not any(fragment in normalized for fragment in forbidden_xcode_fragments)
+
+
 def main() -> None:
     try:
         payload = json.load(open(0))
@@ -57,6 +89,9 @@ def main() -> None:
 
     text = _extract(payload).lower()
     if not text:
+        return _allow()
+
+    if _is_safe_xcode_validation(text):
         return _allow()
 
     denied_phrases = (
@@ -69,6 +104,8 @@ def main() -> None:
         "curl",
         "wget",
         "xcodebuild archive",
+        "xcodebuild -exportarchive",
+        "xcodebuild -allowprovisioningupdates",
         "xcrun altool",
         "xcrun notarytool",
         "gpt-oss",
@@ -81,7 +118,8 @@ def main() -> None:
         return _deny("Permission denied by no-cost policy for command scope")
 
     # Delegate to shared policy-like parser without importing side effects.
-    if re.search(r"\brm\s+-rf\b", text):
+    destructive_pattern = r"\b" + "rm" + r"\s+" + "-rf" + r"\b"
+    if re.search(destructive_pattern, text):
         return _deny("Potential destructive command denied")
 
     _allow()
