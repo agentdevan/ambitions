@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-17T01:27:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "FCP28",
-    "next_eligible_title": "Final Visual Proof Packet",
+    "next_eligible_batch": "FCP29",
+    "next_eligible_title": "Accessibility And Dynamic Type Closeout",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -1176,6 +1176,20 @@
     {
       "id": "FCP28",
       "title": "Final Visual Proof Packet",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete",
+      "owner_train": "FCP / Flagship Completion",
+      "source_path": "docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md",
+      "dependency_gate": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
+      "risk_class": "medium-high",
+      "proof_class": "surface-implementation proof + FVQ/Accessibility evidence where user-facing",
+      "efc_air_surface_inheritance": "AFI/FVQ + EFC09/EFC10/EFC16, Surface Encapsulation/Signature Language where touched",
+      "consolidation_posture": "historical complete / do not rerun",
+      "next_action": "Preserve as completed FCP28 Accepted Yellow evidence; do not reactivate."
+    },
+    {
+      "id": "FCP29",
+      "title": "Accessibility And Dynamic Type Closeout",
       "classification": "executable_now",
       "status_class": "executable-now",
       "owner_train": "FCP / Flagship Completion",
@@ -1185,21 +1199,7 @@
       "proof_class": "surface-implementation proof + FVQ/Accessibility evidence where user-facing",
       "efc_air_surface_inheritance": "AFI/FVQ + EFC09/EFC10/EFC16, Surface Encapsulation/Signature Language where touched",
       "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
-    },
-    {
-      "id": "FCP29",
-      "title": "Accessibility And Dynamic Type Closeout",
-      "classification": "executable_later",
-      "status_class": "queued",
-      "owner_train": "FCP / Flagship Completion",
-      "source_path": "docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md",
-      "dependency_gate": "Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.",
-      "risk_class": "medium-high",
-      "proof_class": "surface-implementation proof + FVQ/Accessibility evidence where user-facing",
-      "efc_air_surface_inheritance": "AFI/FVQ + EFC09/EFC10/EFC16, Surface Encapsulation/Signature Language where touched",
-      "consolidation_posture": "queued successor",
-      "next_action": "Runnable once prior batch order and dependency gates are satisfied."
+      "next_action": "Runnable now after FCP28 Accepted Yellow closeout."
     },
     {
       "id": "FCP30",
