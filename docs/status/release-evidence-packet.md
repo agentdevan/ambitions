@@ -81,7 +81,8 @@ PFC34 privacy/legal reconciliation, 2026-05-18:
 PFC35 security/threat-model reconciliation, 2026-05-18:
 
 - Branch: `main`
-- Commit: `826b3a1edcb97002ee091388563ddeb0ada32416`
+- Starting commit: `826b3a1edcb97002ee091388563ddeb0ada32416`
+- Phase 03 commit reviewed for repair: `e7e4fe569c95d030f600cfcd30c81a9d92913dd1`
 - Commands:
   - `git status --short`
   - `git diff --check`
@@ -99,6 +100,20 @@ PFC35 security/threat-model reconciliation, 2026-05-18:
   - `scripts/cqs-privacy-security-claim-scan.sh`: `0`, no hits
   - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`: blocked by the session policy wrapper (`approval required by policy, but AskForApproval is set to Never`); no package-resolution proof was produced
 - Scope: docs-only proof reconciliation; no build/test/device/accessibility/privacy/legal/release-readiness claim
+
+PFC35 Phase 04 repair-pass validation, 2026-05-18:
+
+- Branch: `main`
+- Reviewed commit: `e7e4fe569c95d030f600cfcd30c81a9d92913dd1`
+- Result:
+  - No source, architecture, claim-language, or scope repair required.
+  - `git diff --check`: `0`
+  - `make prompt-audit`: `0`, `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`
+  - `make batch-self-check`: `0`, runner self-check passed
+  - `scripts/codex-forbidden-claim-scan.sh`: `0`, no blocking hits
+  - `scripts/cqs-privacy-security-claim-scan.sh`: `0`, no hits
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`: still blocked before shell execution by the policy wrapper (`approval required by policy, but AskForApproval is set to Never`); no package-resolution proof was produced
+- Scope: report/evidence update only; no build/test/device/accessibility/privacy/legal/release-readiness claim
 
 ## Required local proof packet
 
