@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "PFC38 Signed Candidate Preparation Gate"
-  previous_batch: "PFC38 Signed Candidate Preparation Gate"
+  batch: "PFC39 Final Platform Handoff"
+  previous_batch: "PFC39 Final Platform Handoff"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "PFC39 Final Platform Handoff"
+  next_eligible_batch: "PFC40 Platform Framework Compliance Closeout"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

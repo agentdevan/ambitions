@@ -12362,7 +12362,6 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
-          ".codex/reports/current-batch-train-state.md",
           ".codex/runs/PFC37/20260518T072806Z/prompts/01-plan.prompt.md",
           ".codex/runs/PFC37/20260518T072806Z/prompts/02-bounded-patch.prompt.md",
           ".codex/runs/PFC37/20260518T072806Z/prompts/03-review.prompt.md",
@@ -12373,7 +12372,6 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
-          ".codex/state/active-batch.yml",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12406,9 +12404,9 @@
         "train_id": "PFC38"
       },
       {
-        "commit_count": 1,
+        "commit_count": 4,
         "confidence": "HIGH",
-        "governance_file_count": 40,
+        "governance_file_count": 64,
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
@@ -12418,6 +12416,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/state/active-batch.yml",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
@@ -12447,7 +12450,7 @@
           "prompts/batches/PFC38.md",
           "prompts/batches/PFC39.md"
         ],
-        "proof_file_count": 33,
+        "proof_file_count": 44,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PFC39"
@@ -12459,6 +12462,13 @@
         "implementation_file_count": 4,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
+          ".codex/reports/current-batch-train-state.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
+          ".codex/state/active-batch.yml",
           "docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
@@ -12487,7 +12497,7 @@
           "prompts/batches/PFC39.md",
           "prompts/batches/PFC40.md"
         ],
-        "proof_file_count": 24,
+        "proof_file_count": 32,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PFC40"
@@ -12972,6 +12982,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -13306,7 +13321,7 @@
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 303,
+        "proof_file_count": 308,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK17"
@@ -13416,6 +13431,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -13753,7 +13773,7 @@
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 327,
+        "proof_file_count": 332,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK18"
@@ -13844,6 +13864,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -14177,7 +14202,7 @@
           "prompts/batches/THROUGHPUT-ACCELERATION-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 306,
+        "proof_file_count": 311,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK19"
@@ -14275,6 +14300,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -14608,7 +14638,7 @@
           "prompts/batches/THROUGHPUT-ACCELERATION-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 314,
+        "proof_file_count": 319,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK20"
@@ -14704,6 +14734,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -15039,7 +15074,7 @@
           "prompts/batches/THROUGHPUT-ACCELERATION-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 326,
+        "proof_file_count": 331,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK21"
@@ -15119,6 +15154,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -15455,7 +15495,7 @@
           "prompts/batches/THROUGHPUT-ACCELERATION-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 305,
+        "proof_file_count": 310,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK22"
@@ -15535,6 +15575,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -15871,7 +15916,7 @@
           "prompts/batches/THROUGHPUT-ACCELERATION-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 306,
+        "proof_file_count": 311,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK23"
@@ -15951,6 +15996,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -16288,7 +16338,7 @@
           "prompts/batches/THROUGHPUT-ACCELERATION-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 305,
+        "proof_file_count": 310,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK24"
@@ -16368,6 +16418,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -16703,7 +16758,7 @@
           "prompts/batches/THROUGHPUT-ACCELERATION-01.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 306,
+        "proof_file_count": 311,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK25"
@@ -16783,6 +16838,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -17115,7 +17175,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 264,
+        "proof_file_count": 269,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK26"
@@ -17202,6 +17262,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -17534,7 +17599,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 272,
+        "proof_file_count": 277,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK27"
@@ -17621,6 +17686,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -17957,7 +18027,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 278,
+        "proof_file_count": 283,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK28"
@@ -18037,6 +18107,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -18366,7 +18441,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 258,
+        "proof_file_count": 263,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK29"
@@ -18446,6 +18521,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -18775,7 +18855,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 254,
+        "proof_file_count": 259,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK30"
@@ -18855,6 +18935,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -19184,7 +19269,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 254,
+        "proof_file_count": 259,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK31"
@@ -19264,6 +19349,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -19595,7 +19685,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 257,
+        "proof_file_count": 262,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK32"
@@ -19675,6 +19765,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -20007,7 +20102,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 257,
+        "proof_file_count": 262,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK33"
@@ -20087,6 +20182,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -20419,7 +20519,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 257,
+        "proof_file_count": 262,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK34"
@@ -20499,6 +20599,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -20831,7 +20936,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 254,
+        "proof_file_count": 259,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK35"
@@ -20911,6 +21016,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -21243,7 +21353,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 256,
+        "proof_file_count": 261,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK36"
@@ -21323,6 +21433,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -21654,7 +21769,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 254,
+        "proof_file_count": 259,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK37"
@@ -21734,6 +21849,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -22064,7 +22184,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 257,
+        "proof_file_count": 262,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK38"
@@ -22144,6 +22264,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -22474,7 +22599,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 257,
+        "proof_file_count": 262,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK39"
@@ -22554,6 +22679,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -22884,7 +23014,7 @@
           "prompts/batches/SA32.md",
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md"
         ],
-        "proof_file_count": 257,
+        "proof_file_count": 262,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK40"
@@ -22964,6 +23094,11 @@
           ".codex/runs/PFC38/20260518T075144Z/prompts/03-review.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/PFC38/20260518T075144Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/01-plan.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/03-review.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/PFC39/20260518T081320Z/prompts/05-finalize.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/01-plan.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/02-spark-bounded-patch.prompt.md",
           ".codex/runs/PK21/20260512T035041Z/prompts/03-review.prompt.md",
@@ -23295,7 +23430,7 @@
           "prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md",
           "prompts/desktop/POST_PK_FAST_TRAIN_OPERATOR.md"
         ],
-        "proof_file_count": 259,
+        "proof_file_count": 264,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "PK41"
@@ -26101,5 +26236,5 @@
     "proven_implemented": 341,
     "queued_prompt_backed": 8
   },
-  "generated_at": "2026-05-18T08:08:35.521528+00:00"
+  "generated_at": "2026-05-18T08:32:10.074185+00:00"
 }

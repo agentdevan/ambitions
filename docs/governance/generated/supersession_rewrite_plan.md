@@ -319,6 +319,7 @@
 - classify/archive/rewrite: docs/audits/pfc35-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/pfc36-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/pfc38-batch-closeout-report.md
+- classify/archive/rewrite: docs/audits/pfc39-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/pk-train-integration-and-dirty-worktree-report.md
 - classify/archive/rewrite: docs/audits/pk00-current-backend-proof-baseline-report.md
 - classify/archive/rewrite: docs/audits/pk01-package-module-boundary-scaffold-report.md
@@ -802,6 +803,7 @@
 - classify/archive/rewrite: docs/status/old-canon-classification-index.md
 - classify/archive/rewrite: docs/status/quarantine-archive-folder-plan.md
 - classify/archive/rewrite: docs/status/reference-dependency-scan-cleanup-plan.md
+- classify/archive/rewrite: docs/status/release-evidence-packet.md
 - classify/archive/rewrite: docs/status/repo-authority-cleanup-active-path-allowlist.md
 - classify/archive/rewrite: docs/status/repo-authority-cleanup-green-gate-spec.md
 - classify/archive/rewrite: docs/status/repo-authority-cleanup-install-report.md

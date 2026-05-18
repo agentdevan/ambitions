@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T04:06:58-04:00
+Generated: 2026-05-18T04:30:55-04:00
 
 ## Plan → Time
 
@@ -241,6 +241,7 @@ Generated: 2026-05-18T04:06:58-04:00
 - docs/audits/me10-architecture-scan-gate-report.md
 - docs/audits/eb23-maturity-levels-progressive-disclosure-life-season-templates-report.md
 - docs/audits/cs07-external-route-widget-appintent-compatibility-proof-report.md
+- docs/audits/pfc39-batch-closeout-report.md
 - docs/audits/si05-hero-step-panel-system-report.md
 - docs/audits/pd12-plan-reflow-decision-depth-report.md
 - docs/audits/pfc07-migration-ladder-backward-compatibility-tests-report.md

@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T04:06:58-04:00",
+  "generated_at": "2026-05-18T04:30:55-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -4675,6 +4675,7 @@
       "docs/audits/pfc30-performance-budget-instruments-plan-report.md",
       "docs/audits/pfc33-batch-closeout-report.md",
       "docs/audits/pfc36-batch-closeout-report.md",
+      "docs/audits/pfc39-batch-closeout-report.md",
       "docs/audits/pk-train-integration-and-dirty-worktree-report.md",
       "docs/audits/pk04-atomic-goal-creation-report.md",
       "docs/audits/pk07-storage-schema-version-ledger-report.md",
@@ -10816,6 +10817,7 @@
     "docs/audits/pfc34-batch-closeout-report.md",
     "docs/audits/pfc36-batch-closeout-report.md",
     "docs/audits/pfc38-batch-closeout-report.md",
+    "docs/audits/pfc39-batch-closeout-report.md",
     "docs/audits/pk-train-integration-and-dirty-worktree-report.md",
     "docs/audits/pk00-current-backend-proof-baseline-report.md",
     "docs/audits/pk04-atomic-goal-creation-report.md",
