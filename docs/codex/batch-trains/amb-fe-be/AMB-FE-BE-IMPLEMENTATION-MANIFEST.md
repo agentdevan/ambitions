@@ -5,10 +5,12 @@ Scope: Train installer and prompt registry only
 
 ## Train summary
 
+This manifest is registry and sequencing support only. It does not claim implementation, release readiness, or proof, and it cannot widen the train beyond the contract boundary recorded in the companion contract note.
+
 | Batch | Stage | Objective | Main scope | Next dependency |
 | --- | --- | --- | --- | --- |
 | AMB-FE-BE-PREFLIGHT-00 | docs/governance | Re-ground repo authority, detect duplicates/obsoletes, and confirm safe runner posture. | Registry, prompt, truth, and readiness inspection. | AMB-FE-BE-CONTRACT-FREEZE-01 |
-| AMB-FE-BE-CONTRACT-FREEZE-01 | docs/governance | Freeze the product/design and source contracts for the train. | IA, source freshness, protected time, receipts, and replay/restoration contracts. | BE-01-RUNTIME-BASELINE |
+| AMB-FE-BE-CONTRACT-FREEZE-01 | docs/governance | Freeze the product/design and source contracts for the train. | IA, local-only/no-claim boundaries, source freshness, protected time, receipts, and replay/restoration contracts. | BE-01-RUNTIME-BASELINE |
 | BE-01-RUNTIME-BASELINE | docs + implementation | Bound the private-life runtime around existing local runtime/container/persistence/repository seams. | Runtime boundaries and local-only source wiring. | BE-02-LEDGER-REPLAY |
 | BE-02-LEDGER-REPLAY | docs + implementation | Formalize ledger taxonomy, idempotency, replay, and double-apply protection. | Command, event, side-effect, and receipt ledgers. | BE-03-REALITY-MERIDIAN-CAPACITY |
 | BE-03-REALITY-MERIDIAN-CAPACITY | docs + implementation | Make Reality Meridian and capacity projection backend-owned and UI-consumable. | Protected time, pressure, conflicts, and time-fit proof. | BE-04-RECOMMENDATION-DETERMINISM |
@@ -47,4 +49,4 @@ Do not run later implementation stages if earlier contract/foundation stages are
 
 ## Non-claims
 
-This manifest does not claim the train is active queue truth, implemented, validated, or release-ready.
+This manifest does not claim the train is active queue truth, implemented, validated, or release-ready. It does not authorize hosted AI, hosted sync, or cloud user-data claims for any downstream batch.

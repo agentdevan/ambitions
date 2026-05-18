@@ -7,7 +7,7 @@
 ## Batch Identity
 
 - Batch ID: `AMB-FE-BE-CONTRACT-FREEZE-01`
-- Objective: freeze the train contracts for Start Here, Reality Meridian, LifeShape capacity, recommendation explanation, source freshness, proof receipts, closure/recovery, protected time, privacy/local-only, and replay/restoration.
+- Objective: freeze the train contracts for Start Here, Reality Meridian, LifeShape capacity, recommendation explanation, source freshness, proof receipts, closure/recovery, protected time, privacy/local-only, replay/restoration, and the no-claim boundary for downstream AMB-FE-BE work.
 - Stage: docs/governance
 
 ## Active Source Truth to Inspect
@@ -41,6 +41,8 @@
 
 - Freeze the contract language for the whole train.
 - Document the exact no-claim boundaries and local-only posture.
+- Keep `Plan` as compatibility-only/contextual language, not active top-level IA.
+- Prevent any downstream prompt from implying hosted AI, hosted sync, cloud user profiling, or a custom cloud personal-data backend.
 
 ## Validation Expectations
 
@@ -62,7 +64,7 @@
 
 - Any contract would weaken the active IA or local-first posture.
 - Any text would restore a banned top-level tab or duplicate authority.
-- Any claim would outrun current proof.
+- Any claim would outrun current proof or imply a hosted data/backend posture the repo has not proven.
 
 ## Rollback Expectations
 
