@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC09",
-  "next_eligible_title": "Accessibility Shadow Surface System",
+  "next_eligible_batch": "EFC10",
+  "next_eligible_title": "Real Device Proof Lab",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -908,9 +908,9 @@
     {
       "id": "EFC09",
       "title": "Accessibility Shadow Surface System",
-      "classification": "executable_now",
-      "reason": "EFC08 is complete / accepted yellow. EFC09 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC08.",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC09 is absorbed as overlay / do-not-run coverage; preserve the canonical batch ID and order, but do not execute implementation from this record.",
+      "blocking_prerequisites": "Do not run as an implementation batch; preserve canonical coverage only.",
       "efc_applicability": "invoked"
     },
     {
