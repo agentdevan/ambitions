@@ -3,7 +3,7 @@
     "queue_prerequisites:Complete prior batch EFC04."
   ],
   "classification": "executable_now",
-  "generated_at": "2026-05-18T07:49:07-04:00",
+  "generated_at": "2026-05-18T07:49:46-04:00",
   "lane": "efc",
   "next_action_command": "",
   "postflight_commands": [
