@@ -1,8 +1,8 @@
 # Ambitions Agent Contract
 
-Status: Active repo front-door guidance  
-Audience: Codex, ChatGPT, GitHub agents, and any AI contributor touching this repository  
-Last major canon refresh: 2026-05-18  
+Status: Active repo front-door guidance
+Audience: Codex, ChatGPT, GitHub agents, and any AI contributor touching this repository
+Last major canon refresh: 2026-05-18
 Purpose: Route agents to the right authority, prevent stale-canon work, preserve proof honesty, and keep Ambitions on a premium local-first native iPhone product path.
 
 This file is not implementation proof, validation proof, release proof, product completeness proof, or a roadmap. It is the standing operating contract for agents.
