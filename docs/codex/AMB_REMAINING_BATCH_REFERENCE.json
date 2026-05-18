@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at_utc": "2026-05-18T13:06:58Z",
+    "generated_at_utc": "2026-05-18T13:28:19Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "EFC10",
-    "next_eligible_title": "Real Device Proof Lab",
+    "next_eligible_batch": "EFC11",
+    "next_eligible_title": "Privacy-Safe Observability And Support Pack",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },

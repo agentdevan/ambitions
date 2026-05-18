@@ -1,11 +1,11 @@
 # Codex OS Sync Report
 
-Generated: 2026-05-18T09:13:30-04:00
+Generated: 2026-05-18T09:27:45-04:00
 
 - Repo doctor status: GREEN
 - Repo doctor missing: False
 - Next action decision: select_next_batch
-- Selected batch: EFC10
+- Selected batch: EFC11
 - Performance missing outputs: 0
 - Freshness missing outputs: 0
 
@@ -20,7 +20,7 @@ Generated: 2026-05-18T09:13:30-04:00
 
 ## Next Action
 
-No blockers remain; select the safest executable batch (EFC10).
+No blockers remain; select the safest executable batch (EFC11).
 
 ```bash
 python3 scripts/codex-os/ambitions-codex-os-batch-selector.py

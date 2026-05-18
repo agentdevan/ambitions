@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC10",
-  "next_eligible_title": "Real Device Proof Lab",
+  "next_eligible_batch": "EFC11",
+  "next_eligible_title": "Privacy-Safe Observability And Support Pack",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -916,17 +916,17 @@
     {
       "id": "EFC10",
       "title": "Real Device Proof Lab",
-      "classification": "executable_now",
-      "reason": "EFC09 is complete / accepted yellow. EFC10 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC09.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC10 Real Device Proof Lab is complete / Green with closeout in docs/audits/efc10-batch-closeout-report.md and commit b7a921c714fad15cd6e3ad2be9e737ce49f10c8d committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC11",
       "title": "Privacy-Safe Observability And Support Pack",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC10 is complete / green. EFC11 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC10.",
       "efc_applicability": "invoked"
     },
     {
