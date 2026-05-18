@@ -522,3 +522,11 @@ This ledger is committed source-state. `.codex/runs/**` remains local run eviden
 - commit: fa68b15fd7b40dc0970ba44defc95b61094a10a6
 - next batch: EFC03
 - mode: deterministic state advancement helper
+
+## Post-PK State Advancement — 2026-05-18T11:33:51Z
+
+- completed batch: EFC03
+- status: accepted_yellow
+- commit: 44542eb4b7fa7a079974c1e0b80f8a866a1e9412
+- next batch: EFC04
+- mode: deterministic state advancement helper

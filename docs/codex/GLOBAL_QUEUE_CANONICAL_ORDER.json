@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC03",
-  "next_eligible_title": "First 30 Days Lifecycle And Retention Proof",
+  "next_eligible_batch": "EFC04",
+  "next_eligible_title": "Time Physics Edge Case Lab",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -860,17 +860,17 @@
     {
       "id": "EFC03",
       "title": "First 30 Days Lifecycle And Retention Proof",
-      "classification": "executable_now",
-      "reason": "EFC02 is complete / accepted yellow. EFC03 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC02.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC03 First 30 Days Lifecycle And Retention Proof is complete / Accepted Yellow with closeout in docs/audits/efc03-batch-closeout-report.md and commit 44542eb4b7fa7a079974c1e0b80f8a866a1e9412 committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC04",
       "title": "Time Physics Edge Case Lab",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC03 is complete / accepted yellow. EFC04 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC03.",
       "efc_applicability": "invoked"
     },
     {
