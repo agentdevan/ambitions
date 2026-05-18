@@ -1,0 +1,5 @@
+pid: 27669
+command: scripts/ambitions-global-train-supervisor.sh --once
+batch: EFC11
+timestamp: 2026-05-18T13:32:44Z
+run_dir: pending
