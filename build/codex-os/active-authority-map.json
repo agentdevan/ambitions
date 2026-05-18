@@ -150,13 +150,13 @@
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "bf4cfa1a3dbb4afca47e9e1048438bdc171f69f1710b6d93646f300e5409b83b",
+      "sha256": "4223eba6b194d714bde5984da4543e1e47ccf0cfccd49aa1ec31b3d478673750",
       "size": 11140
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "1b6aa97b68b5b32b25c7210b1a11e45e1ef5dcfe18b79c1cf9fa92866231ec18",
+      "sha256": "b7da26634abccf5ffe152d8bbe5261dcb11da2ceec183ccf1712e06be5640fd8",
       "size": 731835
     },
     {
@@ -198,7 +198,7 @@
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "881c103de8f0929db94876cf79d2dc75bc1e4cbbe3314167fa542a467b666063",
+      "sha256": "d5f006db8174ae44c3e98744d11854e195a2798049d4a86e05e58727a06c30f8",
       "size": 747
     },
     {
@@ -234,14 +234,14 @@
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.md",
-      "sha256": "52435f6bac16574f7a27de1d33f88518fef620550feb884436003fdc6f3a8605",
+      "sha256": "f415f97d26cb48046e39b0742a50a02bd8f098a135995bc0b65ba4e745111fb9",
       "size": 3229
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "153358c32fc2021357dc77a124c4f4bbf4adf35e396eee4522b23a7b3c1973a9",
-      "size": 12663
+      "sha256": "5867a7bb7c1cdb3a4c663effd6a5a5aa4c38ac939c3758caae753ffca7da9fbc",
+      "size": 13739
     },
     {
       "exists": true,

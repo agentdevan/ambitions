@@ -1,6 +1,6 @@
 # Ambitions Codex OS Context Pack
 
-Generated: 2026-05-18T07:33:17-04:00
+Generated: 2026-05-18T07:38:25-04:00
 
 This pack is generated from live repo files and current governance outputs.
 
@@ -159,13 +159,13 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "be5d9b39fd5cca37636cc06ad2860e94757ad6de62ccbf4a7ca2bcbdf6060569",
+      "sha256": "4223eba6b194d714bde5984da4543e1e47ccf0cfccd49aa1ec31b3d478673750",
       "size": 11140
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "b32a1cbc16813a86f2a6be1170288c8843a245426d2456a1d687d5145b518d9b",
+      "sha256": "b7da26634abccf5ffe152d8bbe5261dcb11da2ceec183ccf1712e06be5640fd8",
       "size": 731835
     },
     {
@@ -207,7 +207,7 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "881c103de8f0929db94876cf79d2dc75bc1e4cbbe3314167fa542a467b666063",
+      "sha256": "d5f006db8174ae44c3e98744d11854e195a2798049d4a86e05e58727a06c30f8",
       "size": 747
     },
     {
@@ -219,7 +219,7 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "894befea946a0642dd3a3ca6bd7623df54dbde472bf0e846ad47c8d18947fd8e",
+      "sha256": "6c7aee3c93057a440700cea4dbb5d9637dbda28f5f3102e4b28da2659442fa0e",
       "size": 76732
     },
     {
@@ -243,14 +243,14 @@ This pack is generated from live repo files and current governance outputs.
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.md",
-      "sha256": "52435f6bac16574f7a27de1d33f88518fef620550feb884436003fdc6f3a8605",
+      "sha256": "f415f97d26cb48046e39b0742a50a02bd8f098a135995bc0b65ba4e745111fb9",
       "size": 3229
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "153358c32fc2021357dc77a124c4f4bbf4adf35e396eee4522b23a7b3c1973a9",
-      "size": 12663
+      "sha256": "5867a7bb7c1cdb3a4c663effd6a5a5aa4c38ac939c3758caae753ffca7da9fbc",
+      "size": 13739
     },
     {
       "exists": true,
@@ -413,7 +413,7 @@ Generated: 2026-05-18T07:33:17-04:00
 
 # Repo Doctor Summary
 
-Generated: 2026-05-18T07:19:52-04:00
+Generated: 2026-05-18T07:33:17-04:00
 Overall status: GREEN
 Strict mode requested: False
 Failures: 0
@@ -12150,7 +12150,7 @@ Generated: 2026-05-18T07:33:17-04:00
     ".yml": 18,
     "[no_ext]": 432
   },
-  "generated_at": "2026-05-18T07:33:17-04:00",
+  "generated_at": "2026-05-18T07:38:25-04:00",
   "notable_paths": {
     "app_entry": {
       "exists": true,
@@ -12239,7 +12239,7 @@ Generated: 2026-05-18T07:33:17-04:00
     "historical_markers": 2909,
     "plan_language_residue": 7131
   },
-  "generated_at": "2026-05-18T07:33:17-04:00",
+  "generated_at": "2026-05-18T07:38:25-04:00",
   "score": 0
 }
 ```
@@ -12307,14 +12307,14 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.md",
-      "sha256": "52435f6bac16574f7a27de1d33f88518fef620550feb884436003fdc6f3a8605",
+      "sha256": "f415f97d26cb48046e39b0742a50a02bd8f098a135995bc0b65ba4e745111fb9",
       "size": 3229
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "153358c32fc2021357dc77a124c4f4bbf4adf35e396eee4522b23a7b3c1973a9",
-      "size": 12663
+      "sha256": "5867a7bb7c1cdb3a4c663effd6a5a5aa4c38ac939c3758caae753ffca7da9fbc",
+      "size": 13739
     },
     {
       "exists": true,
@@ -12409,13 +12409,13 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "bf4cfa1a3dbb4afca47e9e1048438bdc171f69f1710b6d93646f300e5409b83b",
+      "sha256": "9b04e8f442ec9b9d39577e1b5f29c5a1932c360e9a5df11b9731127b847064f1",
       "size": 11140
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "b32a1cbc16813a86f2a6be1170288c8843a245426d2456a1d687d5145b518d9b",
+      "sha256": "b7da26634abccf5ffe152d8bbe5261dcb11da2ceec183ccf1712e06be5640fd8",
       "size": 731835
     },
     {
@@ -12457,7 +12457,7 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "881c103de8f0929db94876cf79d2dc75bc1e4cbbe3314167fa542a467b666063",
+      "sha256": "d5f006db8174ae44c3e98744d11854e195a2798049d4a86e05e58727a06c30f8",
       "size": 747
     },
     {
@@ -12469,7 +12469,7 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "894befea946a0642dd3a3ca6bd7623df54dbde472bf0e846ad47c8d18947fd8e",
+      "sha256": "6c7aee3c93057a440700cea4dbb5d9637dbda28f5f3102e4b28da2659442fa0e",
       "size": 76732
     },
     {
@@ -12530,6 +12530,13 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
       "returncode": 0,
       "stderr": "",
       "stdout": "/Users/devan/Documents/GitHub/ambitions/build/codex-os/ambitions-context-pack.md"
+    },
+    {
+      "command": "python3 scripts/governance/ambitions-generated-freshness-check.py",
+      "name": "generated_freshness_check",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2227\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     }
   ],
   "command_names": [
@@ -12728,6 +12735,13 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
       "returncode": 0,
       "stderr": "",
       "stdout": "/Users/devan/Documents/GitHub/ambitions/build/codex-os/ambitions-context-pack.md"
+    },
+    {
+      "command": "python3 scripts/governance/ambitions-generated-freshness-check.py",
+      "name": "generated_freshness_check",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Ambitions governance reconciliation scan\nRepo: /Users/devan/Documents/GitHub/ambitions\nTrains detected: 690\nCommits scanned: 2227\nStale overlay findings: 0\nUnresolved trains: 0\nGenerated: /Users/devan/Documents/GitHub/ambitions/docs/governance/generated\nwrote docs/governance/GOVE \u2026"
     }
   ],
   "command_status": {
@@ -12736,6 +12750,8 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
     "codex_os_next_action_refreshed": true,
     "codex_os_performance_refreshed": true,
     "codex_os_repair_router_refreshed": true,
+    "codex_os_sync_refreshed": true,
+    "generated_freshness_refreshed": true,
     "normal_mode_collect_all": true,
     "strict_mode_exit_nonzero_on_failure": false
   },
@@ -12764,6 +12780,6 @@ python3 scripts/codex-os/ambitions-codex-os-next-action.py
   "overall_status": "GREEN",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "strict_mode": false,
-  "success_count": 25
+  "success_count": 26
 }
 ```

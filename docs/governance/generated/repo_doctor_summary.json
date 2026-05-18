@@ -27,7 +27,7 @@
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"9ab524b6a1b1dbd3fae3396f946c7e06e5ca15f355ff4d2a3d77d6ad0641439b\"\n  },\n  \"generated_at\": \"2026-05-18T07:33:17-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"cbfedee8d149b4a59b53e9b8d4c11cb89798cd9aa316d5dcd89d0940906fdb3c\"\n  },\n  \"generated_at\": \"2026-05-18T07:33:17-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
@@ -232,7 +232,7 @@
       "name": "codex_os_performance_check",
       "returncode": 0,
       "stderr": "",
-      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"9ab524b6a1b1dbd3fae3396f946c7e06e5ca15f355ff4d2a3d77d6ad0641439b\"\n  },\n  \"generated_at\": \"2026-05-18T07:33:17-04:00\",\n  \"miss \u2026"
+      "stdout": "{\n  \"architecture_debt_score\": 0,\n  \"context_pack_freshness\": {\n    \"exists\": true,\n    \"path\": \"build/codex-os/ambitions-context-pack.md\",\n    \"sha256\": \"cbfedee8d149b4a59b53e9b8d4c11cb89798cd9aa316d5dcd89d0940906fdb3c\"\n  },\n  \"generated_at\": \"2026-05-18T07:33:17-04:00\",\n  \"miss \u2026"
     },
     {
       "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
