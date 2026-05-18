@@ -26,6 +26,8 @@ For frontend/UI/design implementation work:
 8. `trace/FRONTEND_SOURCE_BINDINGS.yaml`
 9. `trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml`
 10. `trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml`
+11. `UI_STUDIO_OPERATING_SYSTEM.md`
+12. `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`
 
 ## Active Files
 
@@ -60,6 +62,7 @@ For frontend/UI/design implementation work:
 - Primitive bibles: `primitives/*.md`
 - Behavior bibles: `behavior/*.md`
 - Trace matrices and ledgers: `trace/*.md`, `trace/VISUAL_CONFLICT_LEDGER.md`, `trace/VISUAL_SOURCE_LINKAGE_LEDGER.md`, `trace/VISUAL_SURFACE_GRAPH_LEDGER.md`
+- UI Studio control plane: `UI_STUDIO_OPERATING_SYSTEM.md`, `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`, `../../prompts/batches/ui-flagship/*.md`, `../../docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`, `../../docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
 
 ## Flagship Object System Lock
 
