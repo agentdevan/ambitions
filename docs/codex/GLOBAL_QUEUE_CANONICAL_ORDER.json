@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC08",
-  "next_eligible_title": "Source Freshness Commons And Operations",
+  "next_eligible_batch": "EFC09",
+  "next_eligible_title": "Accessibility Shadow Surface System",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -900,9 +900,9 @@
     {
       "id": "EFC08",
       "title": "Source Freshness Commons And Operations",
-      "classification": "executable_now",
-      "reason": "EFC07 is complete / accepted yellow. EFC08 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC07.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC08 Source Freshness Commons And Operations is complete / Accepted Yellow with closeout in docs/audits/efc08-batch-closeout-report.md and no implementation changes. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {

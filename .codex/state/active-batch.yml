@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "EFC07 Ambitions Twin Fixture Library"
+  batch: "EFC08 Source Freshness Commons And Operations"
   previous_batch: "EFC07 Ambitions Twin Fixture Library"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "EFC08 Source Freshness Commons And Operations"
+  next_eligible_batch: "EFC09 Accessibility Shadow Surface System"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

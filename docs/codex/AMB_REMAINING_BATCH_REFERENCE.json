@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-18T08:31:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "EFC08",
-    "next_eligible_title": "Source Freshness Commons And Operations",
+    "next_eligible_batch": "EFC09",
+    "next_eligible_title": "Accessibility Shadow Surface System",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -1540,16 +1540,16 @@
     {
       "id": "EFC08",
       "title": "Source Freshness Commons And Operations",
-      "classification": "absorbed_as_overlay",
-      "status_class": "absorbed overlay / next eligible",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete / accepted Yellow",
       "owner_train": "EFC / Proof Overlay",
       "source_path": "docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md",
       "dependency_gate": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
       "risk_class": "high",
       "proof_class": "overlay proof-plane requirements for unfinished surface/behavior claims",
       "efc_air_surface_inheritance": "EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof",
-      "consolidation_posture": "proof-overlay owned",
-      "next_action": "Do not duplicate; this is the next overlay-handoff record after EFC07 closeout and owning batch must declare EFC applicability / Yellow ownership."
+      "consolidation_posture": "historical-complete do-not-run",
+      "next_action": "Do not rerun; preserve EFC08 overlay-only accepted-Yellow closeout and hand off to EFC09."
     },
     {
       "id": "EFC09",
