@@ -12,7 +12,7 @@ source_of_truth:
 current:
   train: "Global full-stack execution"
   batch: "EFC06 Goal Thermodynamics And Drift Handling"
-  previous_batch: "EFC05 Recommendation Court Integration Gate"
+  previous_batch: "EFC06 Goal Thermodynamics And Drift Handling"
   previous_result: "accepted_yellow"
   next_eligible_batch: "EFC07 Ambitions Twin Fixture Library"
 codex_os_override:

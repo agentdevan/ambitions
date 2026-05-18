@@ -885,16 +885,16 @@
       "id": "EFC06",
       "title": "Goal Thermodynamics And Drift Handling",
       "classification": "historical_complete_do_not_run",
-      "reason": "EFC06 Goal Thermodynamics And Drift Handling is complete / Accepted Yellow with closeout in docs/audits/efc06-batch-closeout-report.md and is preserved as overlay-only queue coverage. Do not rerun as an implementation batch.",
+      "reason": "EFC06 Goal Thermodynamics And Drift Handling is complete / Accepted Yellow with closeout in docs/audits/efc06-batch-closeout-report.md and commit 641b5074b1b65bee990b467b0abdd0b1be678a86 committed on local main. Do not rerun as an implementation batch.",
       "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC07",
       "title": "Ambitions Twin Fixture Library",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof. This remains the next overlay-handoff record after EFC06 closeout.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC06 is complete / accepted yellow. EFC07 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC06.",
       "efc_applicability": "invoked"
     },
     {
