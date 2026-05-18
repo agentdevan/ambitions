@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC15",
-  "next_eligible_title": "Localization And Globalization Readiness",
+  "next_eligible_batch": "EFC16",
+  "next_eligible_title": "Release Truth Machine",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -956,9 +956,9 @@
     {
       "id": "EFC15",
       "title": "Localization And Globalization Readiness",
-      "classification": "executable_now",
-      "reason": "EFC14 is complete / green. EFC15 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC14.",
+      "classification": "absorbed_as_overlay",
+      "reason": "EFC15 is preserved as overlay-only/do-not-run coverage; implementation execution stays blocked until active truth reauthorizes it.",
+      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
       "efc_applicability": "invoked"
     },
     {

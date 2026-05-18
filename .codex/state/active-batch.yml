@@ -14,7 +14,7 @@ current:
   batch: "EFC14 Local Language Quality Benchmark"
   previous_batch: "EFC14 Local Language Quality Benchmark"
   previous_result: "green"
-  next_eligible_batch: "EFC15 Localization And Globalization Readiness"
+  next_eligible_batch: "EFC16 Release Truth Machine"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
