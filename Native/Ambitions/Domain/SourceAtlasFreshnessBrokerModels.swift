@@ -1,27 +1,46 @@
 import Foundation
 
+public enum SourceAtlasFreshnessBrokerClaimState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case unknown
+    case sourceNeeded = "source_needed"
+    case stale
+    case contradicted
+    case revoked
+    case locallyProven = "locally_proven"
+}
+
+public struct SourceAtlasFreshnessBrokerClaimStateBucket: Codable, Sendable, Equatable, Hashable {
+    public let state: SourceAtlasFreshnessBrokerClaimState
+    public let claimIDs: [String]
+
+    public init(
+        state: SourceAtlasFreshnessBrokerClaimState,
+        claimIDs: [String] = []
+    ) {
+        self.state = state
+        self.claimIDs = claimIDs
+    }
+}
+
 public struct SourceAtlasFreshnessManifest: Codable, Sendable, Equatable, Hashable {
     public let schemaVersion: Int
     public let versionID: String
     public let publishedAt: Date
     public let packIndex: [SourceAtlasFreshnessPackEntry]
-    public let globalRevocationList: [String]
-    public let globalStaleClaims: [String]
+    public let globalClaimStateBuckets: [SourceAtlasFreshnessBrokerClaimStateBucket]
     
     public init(
         schemaVersion: Int,
         versionID: String,
         publishedAt: Date,
         packIndex: [SourceAtlasFreshnessPackEntry],
-        globalRevocationList: [String] = [],
-        globalStaleClaims: [String] = []
+        globalClaimStateBuckets: [SourceAtlasFreshnessBrokerClaimStateBucket] = []
     ) {
         self.schemaVersion = schemaVersion
         self.versionID = versionID
         self.publishedAt = publishedAt
         self.packIndex = packIndex
-        self.globalRevocationList = globalRevocationList
-        self.globalStaleClaims = globalStaleClaims
+        self.globalClaimStateBuckets = globalClaimStateBuckets
     }
 }
 
@@ -31,8 +50,7 @@ public struct SourceAtlasFreshnessPackEntry: Codable, Sendable, Equatable, Hasha
     public let currentSignature: String
     public let rollbackPointers: [String: String]
     public let changedClaimIDs: [String]
-    public let staleClaimIDs: [String]
-    public let revokedClaimIDs: [String]
+    public let claimStateBuckets: [SourceAtlasFreshnessBrokerClaimStateBucket]
     
     public init(
         packID: String,
@@ -40,16 +58,14 @@ public struct SourceAtlasFreshnessPackEntry: Codable, Sendable, Equatable, Hasha
         currentSignature: String,
         rollbackPointers: [String: String] = [:],
         changedClaimIDs: [String] = [],
-        staleClaimIDs: [String] = [],
-        revokedClaimIDs: [String] = []
+        claimStateBuckets: [SourceAtlasFreshnessBrokerClaimStateBucket] = []
     ) {
         self.packID = packID
         self.currentSHA256 = currentSHA256
         self.currentSignature = currentSignature
         self.rollbackPointers = rollbackPointers
         self.changedClaimIDs = changedClaimIDs
-        self.staleClaimIDs = staleClaimIDs
-        self.revokedClaimIDs = revokedClaimIDs
+        self.claimStateBuckets = claimStateBuckets
     }
 }
 

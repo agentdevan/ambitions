@@ -7,10 +7,51 @@ import json
 import sys
 from pathlib import Path
 
+STATE_BUCKET_ORDER = (
+    "unknown",
+    "source_needed",
+    "stale",
+    "contradicted",
+    "revoked",
+    "locally_proven",
+)
+
+STATE_FLAG_ALIASES = {
+    "source_needed": ("source_needed", "sourceNeeded"),
+    "locally_proven": ("locally_proven", "locallyProven"),
+}
+
+
+def _unique_claim_ids(values: object) -> list[str]:
+    if not isinstance(values, list):
+        return []
+
+    unique_values: list[str] = []
+    for value in values:
+        if isinstance(value, str) and value not in unique_values:
+            unique_values.append(value)
+    return unique_values
+
+
+def _build_state_buckets(flags: dict) -> list[dict]:
+    buckets = []
+    for state in STATE_BUCKET_ORDER:
+        claim_ids = []
+        for flag_name in STATE_FLAG_ALIASES.get(state, (state,)):
+            for claim_id in _unique_claim_ids(flags.get(flag_name, [])):
+                if claim_id not in claim_ids:
+                    claim_ids.append(claim_id)
+        if claim_ids:
+            buckets.append({
+                "state": state,
+                "claimIDs": claim_ids,
+            })
+    return buckets
+
+
 def build_manifest(version_id: str, diff_files: list[Path]) -> dict:
     pack_index = []
-    global_revoked = set()
-    global_stale = set()
+    global_state_buckets: dict[str, list[str]] = {}
     
     for df in diff_files:
         if not df.exists():
@@ -19,12 +60,16 @@ def build_manifest(version_id: str, diff_files: list[Path]) -> dict:
         data = json.loads(df.read_text())
         pack_id = data.get("packID", "unknown_pack")
         flags = data.get("flags", {})
-        
-        stale = flags.get("stale", [])
-        revoked = flags.get("revoked", [])
-        
-        global_stale.update(stale)
-        global_revoked.update(revoked)
+        if not isinstance(flags, dict):
+            flags = {}
+        claim_state_buckets = _build_state_buckets(flags)
+
+        for bucket in claim_state_buckets:
+            state = bucket["state"]
+            claim_ids = global_state_buckets.setdefault(state, [])
+            for claim_id in bucket["claimIDs"]:
+                if claim_id not in claim_ids:
+                    claim_ids.append(claim_id)
         
         entry = {
             "packID": pack_id,
@@ -32,18 +77,25 @@ def build_manifest(version_id: str, diff_files: list[Path]) -> dict:
             "currentSignature": data.get("currentSignature", ""),
             "rollbackPointers": data.get("rollbackPointers", {}),
             "changedClaimIDs": data.get("changedClaimIDs", []),
-            "staleClaimIDs": stale,
-            "revokedClaimIDs": revoked
+            "claimStateBuckets": claim_state_buckets,
         }
         pack_index.append(entry)
+
+    global_claim_state_buckets = [
+        {
+            "state": state,
+            "claimIDs": global_state_buckets[state],
+        }
+        for state in STATE_BUCKET_ORDER
+        if state in global_state_buckets
+    ]
 
     return {
         "schemaVersion": 1,
         "versionID": version_id,
         "publishedAt": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
         "packIndex": pack_index,
-        "globalRevocationList": sorted(list(global_revoked)),
-        "globalStaleClaims": sorted(list(global_stale))
+        "globalClaimStateBuckets": global_claim_state_buckets,
     }
 
 def main() -> int:

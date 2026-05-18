@@ -6,13 +6,13 @@ source_of_truth:
   - "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
 current:
   train: "Manifest-faithful rerun reconciliation"
-  batch: "SA29 Hash / Signature / Revocation Tooling"
-  previous_batch: "SA28"
+  batch: "SA30 Freshness Broker Manifest Contract"
+  previous_batch: "SA29"
   previous_result: "green"
-  next_eligible_batch: "SA30 Freshness Broker Manifest Contract"
+  next_eligible_batch: "SA31 Official Source Adapter Contracts"
 blocked_forward_queue:
   blocked_batch: "FCP27 App-Wide Flagship Audit And Remediation"
-  reason: "Manifest-faithful rerun must continue through SA30 before FCP27"
+  reason: "Manifest-faithful rerun must continue through SA32, LDI15-LDI22, and AOS24-AOS30 before FCP27"
 frontend_authority:
   encyclopedia_required_for_frontend_touching_batches: false
   entrypoint: "frontend/README.md"
