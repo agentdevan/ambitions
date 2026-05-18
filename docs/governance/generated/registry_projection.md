@@ -1,6 +1,6 @@
 # Generated Ambitions Reconciled Registry Projection
 
-Generated: 2026-05-18T07:44:02-04:00
+Generated: 2026-05-18T07:49:07-04:00
 
 This file is generated from local repository data by `scripts/governance/ambitions-governance-reconcile.py`.
 Do not hand-edit generated output; update source files or governance rules and regenerate.
@@ -317,7 +317,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | EFC02 | QUEUED_OR_BLOCKED | MEDIUM | 18 | 4 | 4 | 22 |  |
 | EFC03 | QUEUED_OR_BLOCKED | MEDIUM | 18 | 4 | 4 | 25 |  |
 | EFC04 | QUEUED_OR_BLOCKED | MEDIUM | 17 | 4 | 4 | 17 |  |
-| EFC05 | QUEUED_OR_BLOCKED | MEDIUM | 12 | 1 | 4 | 9 |  |
+| EFC05 | QUEUED_OR_BLOCKED | MEDIUM | 12 | 3 | 4 | 9 |  |
 | EFC06 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 1 | 4 | 3 |  |
 | EFC07 | QUEUED_OR_BLOCKED | MEDIUM | 8 | 1 | 4 | 3 |  |
 | EFC08 | QUEUED_OR_BLOCKED | MEDIUM | 115 | 1 | 4 | 99 |  |
