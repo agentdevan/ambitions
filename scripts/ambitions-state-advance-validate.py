@@ -47,6 +47,14 @@ def queue_exec_now() -> list[str]:
     return [entry.get("id", "") for entry in data.get("batches", []) if entry.get("classification") == "executable_now"]
 
 
+def queue_classification(batch_id: str) -> str:
+    data = json.loads(QUEUE.read_text(encoding="utf-8"))
+    for entry in data.get("batches", []):
+        if entry.get("id", "") == batch_id:
+            return str(entry.get("classification", ""))
+    return ""
+
+
 def main() -> int:
     failures: list[str] = []
     active_batch = active_value("batch")
@@ -64,7 +72,8 @@ def main() -> int:
 
     exec_now = queue_exec_now()
     if len(exec_now) != 1:
-        failures.append(f"queue has {len(exec_now)} executable_now batches: {exec_now}")
+        if not (len(exec_now) == 0 and queue_classification(active_next_id) == "conditional_trigger_only"):
+            failures.append(f"queue has {len(exec_now)} executable_now batches: {exec_now}")
     elif exec_now[0] != active_next_id:
         failures.append(f"queue executable_now {exec_now[0]!r} != active next {active_next_id!r}")
 
@@ -77,7 +86,8 @@ def main() -> int:
             print(f"- {failure}")
         return 1
 
-    print(f"GREEN: state advancement coherent; current={active_batch}; next={active_next}")
+    terminal_note = " terminal-no-executable" if not exec_now else ""
+    print(f"GREEN: state advancement coherent{terminal_note}; current={active_batch}; next={active_next}")
     return 0
 
 

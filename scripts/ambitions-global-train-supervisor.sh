@@ -158,7 +158,11 @@ try:
 except Exception:
     print("")
     raise SystemExit(0)
-print(data.get("selected_batch", ""))
+classification = str(data.get("classification", ""))
+if classification in {"executable_now", "active", "queued", "active_partial"}:
+    print(data.get("selected_batch", ""))
+else:
+    print("")
 PY
     )"
     if [[ -n "$codex_os_batch" ]]; then
@@ -211,7 +215,12 @@ print_next() {
   fi
   local batch prompt
   batch="$(next_batch)"
-  [[ -n "$batch" ]] || die "no executable next batch found"
+  if [[ -z "$batch" ]]; then
+    echo "Next batch: none"
+    echo "Prompt: none"
+    echo "Reason: no executable next batch found"
+    return 0
+  fi
   prompt="$(next_prompt "$batch")"
   echo "Next batch: $batch"
   echo "Prompt: $prompt"

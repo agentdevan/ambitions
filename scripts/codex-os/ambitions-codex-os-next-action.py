@@ -96,7 +96,7 @@ def main() -> int:
             command = "python3 scripts/codex-os/ambitions-codex-os-batch-selector.py"
         else:
             decision = "idle"
-            reason = "No executable batch is currently available."
+            reason = "No executable batch is currently available; any remaining handoff is conditional-trigger-only or otherwise blocked."
             command = "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
 
     record = command_record(decision, reason, command, blockers, blocked_reason)

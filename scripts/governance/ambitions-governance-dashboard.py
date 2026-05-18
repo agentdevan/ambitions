@@ -66,7 +66,7 @@ def main() -> int:
         "",
         f"- Next action: {next_action.get('decision', 'missing')}",
         f"- Next command: {next_action.get('command', 'missing')}",
-        f"- Selected batch: {batch_selection.get('selected_batch', 'none')}",
+        f"- Selected batch: {batch_selection.get('selected_batch') or 'none'}",
         f"- Performance missing outputs: {performance.get('missing_output_count', 'unknown')}",
         "",
         "## Highest Priority Fixes",

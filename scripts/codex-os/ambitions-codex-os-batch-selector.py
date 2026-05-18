@@ -35,7 +35,7 @@ def main() -> int:
     blockers: list[str] = []
 
     if not selected_batch:
-        reason = "No executable batch was found in the live queue."
+        reason = "No executable batch was found in the live queue; any remaining handoff is conditional-trigger-only or otherwise blocked."
     else:
         reason = f"Selected the safest live batch from current state: {selected_batch}."
         blocked = selection.get("blocked_forward_queue", {})
@@ -60,7 +60,7 @@ def main() -> int:
     ]
 
     command = ""
-    if selected_batch and prompt_file:
+    if selected_batch and prompt_file and classification in {"executable_now", "active", "queued", "active_partial"}:
         command = f"make authorized-batch BATCH={selected_batch} PROMPT={prompt_file}"
 
     data = {

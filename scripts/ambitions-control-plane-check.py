@@ -40,6 +40,13 @@ def load_payload(path: Path) -> object:
     return json.loads(path.read_text())
 
 
+def batch_by_id(queue: list[dict], batch_id: str) -> dict:
+    for item in queue:
+        if str(item.get("id", "")) == batch_id:
+            return item
+    return {}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--strict", action="store_true")
@@ -67,11 +74,14 @@ def main() -> int:
             errors.append("remaining-batch reference order differs from canonical queue")
 
         executable_now = [item for item in queue if item.get("classification") == "executable_now"]
-        if len(executable_now) != 1:
-            errors.append(f"canonical queue has {len(executable_now)} executable_now records, expected 1")
         next_batch = str(queue_payload.get("next_eligible_batch", "")) if isinstance(queue_payload, dict) else ""
         next_title = str(queue_payload.get("next_eligible_title", "")) if isinstance(queue_payload, dict) else ""
-        if executable_now and executable_now[0].get("id") != next_batch:
+        next_entry = batch_by_id(queue, next_batch)
+        next_classification = str(next_entry.get("classification", ""))
+        if len(executable_now) != 1:
+            if not (len(executable_now) == 0 and next_classification == "conditional_trigger_only"):
+                errors.append(f"canonical queue has {len(executable_now)} executable_now records, expected 1")
+        elif executable_now[0].get("id") != next_batch:
             errors.append(
                 f"next_eligible_batch {next_batch!r} does not match executable_now {executable_now[0].get('id')!r}"
             )

@@ -86,7 +86,7 @@ def main() -> int:
         f"- Repo doctor status: {data['repo_doctor_status']}",
         f"- Repo doctor missing: {data['repo_doctor_missing']}",
         f"- Next action decision: {next_action.get('decision', 'missing')}",
-        f"- Selected batch: {batch_selection.get('selected_batch', 'none')}",
+        f"- Selected batch: {batch_selection.get('selected_batch') or 'none'}",
         f"- Performance missing outputs: {perf.get('missing_output_count', 0)}",
         f"- Freshness missing outputs: {freshness.get('missing_count', 0)}",
         "",

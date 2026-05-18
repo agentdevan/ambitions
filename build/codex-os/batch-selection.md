@@ -1,19 +1,19 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-18T11:51:43-04:00
+Generated: 2026-05-18T12:13:56-04:00
 
-Selected batch: EFC18
-Prompt file: prompts/batches/EFC18.md
-Lane: efc
-Queue classification: executable_now
+Selected batch: none
+Prompt file: none
+Lane: unknown
+Queue classification: unknown
 
 ## Reason
 
-Selected the safest live batch from current state: EFC18.
+No executable batch was found in the live queue; any remaining handoff is conditional-trigger-only or otherwise blocked.
 
 ## Blockers
 
-- queue_prerequisites:Complete prior batch EFC17.
+- None
 
 ## Preflight Commands
 
@@ -27,4 +27,4 @@ Selected the safest live batch from current state: EFC18.
 
 ## Run Command
 
-make authorized-batch BATCH=EFC18 PROMPT=prompts/batches/EFC18.md
+No executable batch is available.

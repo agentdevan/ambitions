@@ -1,6 +1,6 @@
 # Ambitions Governance Dashboard
 
-Generated: 2026-05-18T11:51:43-04:00
+Generated: 2026-05-18T12:13:56-04:00
 
 ## Snapshot
 
@@ -12,9 +12,9 @@ Generated: 2026-05-18T11:51:43-04:00
 
 ## Codex OS Bridge
 
-- Next action: select_next_batch
-- Next command: python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
-- Selected batch: EFC18
+- Next action: idle
+- Next command: python3 scripts/codex-os/ambitions-codex-os-sync-governance.py
+- Selected batch: none
 - Performance missing outputs: 0
 
 ## Highest Priority Fixes

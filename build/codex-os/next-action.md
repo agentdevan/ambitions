@@ -1,9 +1,9 @@
 # Codex OS Next Action
 
-Generated: 2026-05-18T11:51:43-04:00
+Generated: 2026-05-18T12:13:56-04:00
 
-Decision: select_next_batch
-Reason: No blockers remain; select the safest executable batch (EFC18).
+Decision: idle
+Reason: No executable batch is currently available; any remaining handoff is conditional-trigger-only or otherwise blocked.
 
 ## Blockers
 
@@ -16,7 +16,7 @@ None
 ## Exact Command
 
 ```bash
-python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
+python3 scripts/codex-os/ambitions-codex-os-sync-governance.py
 ```
 
 ## Evidence

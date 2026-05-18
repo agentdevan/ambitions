@@ -1,10 +1,8 @@
 {
-  "blockers": [
-    "queue_prerequisites:Complete prior batch EFC17."
-  ],
-  "classification": "executable_now",
-  "generated_at": "2026-05-18T11:51:43-04:00",
-  "lane": "efc",
+  "blockers": [],
+  "classification": "unknown",
+  "generated_at": "2026-05-18T12:13:56-04:00",
+  "lane": "unknown",
   "next_action_command": "",
   "postflight_commands": [
     "python3 scripts/governance/ambitions-repo-doctor.py",
@@ -14,8 +12,8 @@
     "python3 scripts/governance/ambitions-repo-doctor.py",
     "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
   ],
-  "prompt_file": "prompts/batches/EFC18.md",
-  "reason": "Selected the safest live batch from current state: EFC18.",
-  "run_command": "make authorized-batch BATCH=EFC18 PROMPT=prompts/batches/EFC18.md",
-  "selected_batch": "EFC18"
+  "prompt_file": "",
+  "reason": "No executable batch was found in the live queue; any remaining handoff is conditional-trigger-only or otherwise blocked.",
+  "run_command": "",
+  "selected_batch": ""
 }

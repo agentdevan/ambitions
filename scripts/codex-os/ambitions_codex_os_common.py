@@ -433,18 +433,24 @@ def latest_active_batch_id() -> str:
     return ""
 
 
+RUNNABLE_QUEUE_CLASSIFICATIONS = {"executable_now", "active", "queued", "active_partial"}
+
+
 def next_eligible_queue_batch() -> str:
     state = parse_active_batch_state()
     current = state.get("current", {})
     if isinstance(current, dict):
         candidate = current.get("next_eligible_batch")
         if isinstance(candidate, str) and candidate:
-            return batch_id_from_label(candidate)
+            candidate_id = batch_id_from_label(candidate)
+            entry = queue_entry_for_batch(candidate_id)
+            if str(entry.get("classification", "")) in RUNNABLE_QUEUE_CLASSIFICATIONS:
+                return candidate_id
 
     queue = queue_entries()
     for item in queue:
         classification = str(item.get("classification", ""))
-        if classification in {"executable_now", "active", "queued", "active_partial"}:
+        if classification in RUNNABLE_QUEUE_CLASSIFICATIONS:
             batch_id = str(item.get("id", ""))
             if batch_id:
                 return batch_id
@@ -484,7 +490,7 @@ def batch_selection_candidates() -> dict[str, Any]:
     state = parse_active_batch_state()
     current = state.get("current", {})
     blocked = state.get("blocked_forward_queue", {})
-    candidate = next_eligible_queue_batch() or latest_active_batch_id()
+    candidate = next_eligible_queue_batch()
     queue_entry = queue_entry_for_batch(candidate) if candidate else {}
     prompt = prompt_file_for_batch(candidate) if candidate else ""
     lane = batch_lane(candidate)

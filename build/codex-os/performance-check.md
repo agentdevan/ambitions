@@ -1,6 +1,6 @@
 # Codex OS Performance Check
 
-Generated: 2026-05-18T11:51:43-04:00
+Generated: 2026-05-18T12:13:56-04:00
 
 - Generated outputs present: 6/6
 - Missing generated outputs: 0
@@ -11,4 +11,4 @@ Generated: 2026-05-18T11:51:43-04:00
 - Repo doctor command status: GREEN
 - Context pack freshness: True
 - Next-action freshness: True
-- Next-action decision: select_next_batch
+- Next-action decision: idle

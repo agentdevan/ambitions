@@ -1,11 +1,11 @@
 # Codex OS Sync Report
 
-Generated: 2026-05-18T11:51:43-04:00
+Generated: 2026-05-18T12:13:56-04:00
 
 - Repo doctor status: GREEN
 - Repo doctor missing: False
-- Next action decision: select_next_batch
-- Selected batch: EFC18
+- Next action decision: idle
+- Selected batch: none
 - Performance missing outputs: 0
 - Freshness missing outputs: 0
 
@@ -20,8 +20,8 @@ Generated: 2026-05-18T11:51:43-04:00
 
 ## Next Action
 
-No blockers remain; select the safest executable batch (EFC18).
+No executable batch is currently available; any remaining handoff is conditional-trigger-only or otherwise blocked.
 
 ```bash
-python3 scripts/codex-os/ambitions-codex-os-batch-selector.py
+python3 scripts/codex-os/ambitions-codex-os-sync-governance.py
 ```
