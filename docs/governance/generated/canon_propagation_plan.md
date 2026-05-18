@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T10:03:25-04:00
+Generated: 2026-05-18T10:22:56-04:00
 
 ## Plan → Time
 
@@ -232,6 +232,7 @@ Generated: 2026-05-18T10:03:25-04:00
 - docs/audits/mri10-recommendation-trace-runtime-report.md
 - docs/audits/afi05-shell-and-continuity-chrome-report.md
 - docs/audits/ldi06-pack-registry-and-pack-compiler-report.md
+- docs/audits/efc13-batch-closeout-report.md
 - docs/audits/hps08-living-dream-compiler-upgrade-report.md
 - docs/audits/afi12-accessibility-and-state-proof-report.md
 - docs/audits/dav04-capture-atmosphere-composer-and-routing-receipts-report.md

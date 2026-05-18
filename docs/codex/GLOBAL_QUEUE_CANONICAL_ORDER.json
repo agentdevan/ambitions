@@ -940,17 +940,17 @@
     {
       "id": "EFC13",
       "title": "Notification Cadence Governor",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC13 is absorbed overlay canonical coverage; do not execute implementation from this prompt.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC13 Notification Cadence Governor is complete / Green with closeout in docs/audits/efc13-batch-closeout-report.md and commit 216be778fb19d8aa38e73f728ebea68f8b3260b8 committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Green; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC14",
       "title": "Local Language Quality Benchmark",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC13 is complete / green. EFC14 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC13.",
       "efc_applicability": "invoked"
     },
     {
