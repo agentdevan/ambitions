@@ -57,6 +57,7 @@ prompt="$tmpdir/quote prompt (fixture).md"
 cat >"$prompt" <<'EOF'
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
 
 # Runner Quote Self Check
 
