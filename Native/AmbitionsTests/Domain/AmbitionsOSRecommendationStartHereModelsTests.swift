@@ -77,6 +77,52 @@ final class AmbitionsOSRecommendationStartHereModelsTests: XCTestCase {
         XCTAssertTrue(issues.contains(.missingUserControl))
     }
 
+    func testStartHereRecommendationNormalizesWhyNowAndControlCollections() {
+        let recommendation = startHere(
+            whyNow: [
+                "  You have a ready step.  ",
+                "The step is ready.",
+                "You have a ready step."
+            ],
+            advances: [
+                "Moves the goal forward.",
+                "  Keeps the plan moving.  ",
+                "Keeps the plan moving."
+            ],
+            protects: [
+                "Keeps protected time intact.",
+                "Keeps protected time intact.",
+                "Preserves focus."
+            ],
+            assumptions: [
+                "Duration still needs your review if it feels off.",
+                "  The exact duration may still need review. ",
+                "The exact duration may still need review."
+            ],
+            notChosen: [
+                "Another step fits the current context better.",
+                "  Another step fits the current context better. ",
+                "This is larger than needed right now."
+            ],
+            controlActions: [.open, .start, .reject, .start, .adjust, .reject]
+        )
+
+        XCTAssertEqual(recommendation.whyNow, ["The step is ready.", "You have a ready step."])
+        XCTAssertEqual(recommendation.advances, ["Keeps the plan moving.", "Moves the goal forward."])
+        XCTAssertEqual(recommendation.protects, ["Keeps protected time intact.", "Preserves focus."])
+        XCTAssertEqual(recommendation.assumptions, [
+            "Duration still needs your review if it feels off.",
+            "The exact duration may still need review."
+        ])
+        XCTAssertEqual(recommendation.notChosen, [
+            "Another step fits the current context better.",
+            "This is larger than needed right now."
+        ])
+        let expectedControlActions: [AmbitionsOSStartHereControlAction] = [.adjust, .open, .reject, .start]
+        XCTAssertEqual(recommendation.controlActions, expectedControlActions)
+        XCTAssertEqual(validator.validate(recommendation), [])
+    }
+
     func testStartHereRecommendationCanCreateStructuredRejectCorrectionWithoutMutation() throws {
         let recommendation = startHere(
             controlActions: [.adjust, .explainMore, .reject, .start],
@@ -304,6 +350,7 @@ private extension AmbitionsOSRecommendationStartHereModelsTests {
         advances: [String] = ["Moves the goal forward."],
         protects: [String] = ["Keeps protected time intact."],
         assumptions: [String] = ["Duration still needs your review if it feels off."],
+        notChosen: [String] = [],
         controlActions: [AmbitionsOSStartHereControlAction] = [.start, .open, .adjust],
         exposesConfidenceScore: Bool = false,
         usesGenericPriorityOnly: Bool = false,
@@ -329,6 +376,7 @@ private extension AmbitionsOSRecommendationStartHereModelsTests {
             advances: advances,
             protects: protects,
             assumptions: assumptions,
+            notChosen: notChosen,
             controlActions: controlActions,
             exposesConfidenceScore: exposesConfidenceScore,
             usesGenericPriorityOnly: usesGenericPriorityOnly,

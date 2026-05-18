@@ -461,6 +461,98 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         }
     }
 
+    func testRecommendationTraceNormalizesOrderSensitiveInputsAndTrimsIdentifiers() {
+        let ordered = RecommendationTrace(
+            id: " trace-1 ",
+            recommendationID: " recommendation-1 ",
+            source: RecommendationTraceSource(
+                citedSourceIDs: [" source-b ", "source-a", "source-b"],
+                sourceAtlasBlockReasons: [" block-b ", "block-a", "block-b"],
+                localEvidenceCategories: [.priority, .sourceTruth, .priority],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: " explanation-1 ",
+                summary: "A current source and local context support the suggestion.",
+                evidenceCategoryIDs: [" category-b ", "category-a", "category-b"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [" block-b ", "block-a", "block-b"],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: [" uncertainty-b ", "uncertainty-a", "uncertainty-b"],
+                summaries: [" Summary B ", "Summary A", "Summary B"]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: [" correct-b ", "correct-a", "correct-b"],
+                controlActionIDs: [" open ", "adjust", "open"],
+                correctableFieldKeys: [" field-b ", "field-a", "field-b"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .available(
+                receiptIDs: [" receipt-b ", "receipt-a", "receipt-b"],
+                actionReceiptIDs: [" action-b ", "action-a", "action-b"],
+                proofReferenceIDs: [" proof-b ", "proof-a", "proof-b"]
+            )
+        )
+        let reordered = RecommendationTrace(
+            id: "trace-1",
+            recommendationID: "recommendation-1",
+            source: RecommendationTraceSource(
+                citedSourceIDs: ["source-a", "source-b"],
+                sourceAtlasBlockReasons: ["block-a", "block-b"],
+                localEvidenceCategories: [.sourceTruth, .priority],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-1",
+                summary: "A current source and local context support the suggestion.",
+                evidenceCategoryIDs: ["category-a", "category-b"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: ["block-a", "block-b"],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty-a", "uncertainty-b"],
+                summaries: ["Summary A", "Summary B"]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct-a", "correct-b"],
+                controlActionIDs: ["adjust", "open"],
+                correctableFieldKeys: ["field-a", "field-b"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .available(
+                receiptIDs: ["receipt-a", "receipt-b"],
+                actionReceiptIDs: ["action-a", "action-b"],
+                proofReferenceIDs: ["proof-a", "proof-b"]
+            )
+        )
+
+        XCTAssertEqual(ordered, reordered)
+        XCTAssertEqual(ordered.id, "trace-1")
+        XCTAssertEqual(ordered.recommendationID, "recommendation-1")
+        XCTAssertEqual(ordered.source.citedSourceIDs, ["source-a", "source-b"])
+        XCTAssertEqual(ordered.source.sourceAtlasBlockReasons, ["block-a", "block-b"])
+        XCTAssertEqual(ordered.source.localEvidenceCategories, [.priority, .sourceTruth])
+        XCTAssertEqual(ordered.reason.evidenceCategoryIDs, ["category-a", "category-b"])
+        XCTAssertEqual(ordered.fit.blockReasons, ["block-a", "block-b"])
+        XCTAssertEqual(ordered.uncertainty.uncertaintyIDs, ["uncertainty-a", "uncertainty-b"])
+        XCTAssertEqual(ordered.uncertainty.summaries, ["Summary A", "Summary B"])
+        XCTAssertEqual(ordered.control.correctionActionIDs, ["correct-a", "correct-b"])
+        XCTAssertEqual(ordered.control.controlActionIDs, ["adjust", "open"])
+        XCTAssertEqual(ordered.control.correctableFieldKeys, ["field-a", "field-b"])
+        XCTAssertEqual(ordered.receiptBehavior.receiptIDs, ["receipt-a", "receipt-b"])
+        XCTAssertEqual(ordered.receiptBehavior.actionReceiptIDs, ["action-a", "action-b"])
+        XCTAssertEqual(ordered.receiptBehavior.proofReferenceIDs, ["proof-a", "proof-b"])
+        XCTAssertTrue(ordered.isComplete)
+        XCTAssertTrue(ordered.canDriveRecommendationBehavior)
+    }
+
     func testCompleteRecommendationTraceCarriesSourceReasonFitUncertaintyControlAndReceipt() {
         let result = Self.sourceAtlasResult(
             sourceState: .officialCurrent,

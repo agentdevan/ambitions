@@ -355,23 +355,83 @@ struct RecommendationTraceSource: Codable, Sendable, Equatable, Hashable {
     let sourceAtlasBlockReasons: [String]
     let localEvidenceCategories: [RecommendationExplanationEvidenceCategory]
     let canSupportRecommendation: Bool
+
+    init(
+        citedSourceIDs: [String],
+        sourceAtlasBlockReasons: [String],
+        localEvidenceCategories: [RecommendationExplanationEvidenceCategory],
+        canSupportRecommendation: Bool
+    ) {
+        self.citedSourceIDs = Self.orderedUnique(citedSourceIDs)
+        self.sourceAtlasBlockReasons = Self.orderedUnique(sourceAtlasBlockReasons)
+        self.localEvidenceCategories = Self.orderedUnique(localEvidenceCategories)
+        self.canSupportRecommendation = canSupportRecommendation
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+
+    private static func orderedUnique(_ values: [RecommendationExplanationEvidenceCategory]) -> [RecommendationExplanationEvidenceCategory] {
+        Array(Set(values)).sorted { $0.rawValue < $1.rawValue }
+    }
 }
 
 struct RecommendationTraceReason: Codable, Sendable, Equatable, Hashable {
     let explanationID: String
     let summary: String
     let evidenceCategoryIDs: [String]
+
+    init(
+        explanationID: String,
+        summary: String,
+        evidenceCategoryIDs: [String]
+    ) {
+        self.explanationID = explanationID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.summary = summary
+        self.evidenceCategoryIDs = Self.orderedUnique(evidenceCategoryIDs)
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
 }
 
 struct RecommendationTraceFit: Codable, Sendable, Equatable, Hashable {
     let state: RecommendationTraceFitState
     let blockReasons: [String]
     let canDriveRecommendation: Bool
+
+    init(
+        state: RecommendationTraceFitState,
+        blockReasons: [String],
+        canDriveRecommendation: Bool
+    ) {
+        self.state = state
+        self.blockReasons = Self.orderedUnique(blockReasons)
+        self.canDriveRecommendation = canDriveRecommendation
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
 }
 
 struct RecommendationTraceUncertainty: Codable, Sendable, Equatable, Hashable {
     let uncertaintyIDs: [String]
     let summaries: [String]
+
+    init(
+        uncertaintyIDs: [String],
+        summaries: [String]
+    ) {
+        self.uncertaintyIDs = Self.orderedUnique(uncertaintyIDs)
+        self.summaries = Self.orderedUnique(summaries)
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
 }
 
 struct RecommendationTraceControl: Codable, Sendable, Equatable, Hashable {
@@ -379,6 +439,22 @@ struct RecommendationTraceControl: Codable, Sendable, Equatable, Hashable {
     let controlActionIDs: [String]
     let correctableFieldKeys: [String]
     let hasRequiredControl: Bool
+
+    init(
+        correctionActionIDs: [String],
+        controlActionIDs: [String],
+        correctableFieldKeys: [String],
+        hasRequiredControl: Bool
+    ) {
+        self.correctionActionIDs = Self.orderedUnique(correctionActionIDs)
+        self.controlActionIDs = Self.orderedUnique(controlActionIDs)
+        self.correctableFieldKeys = Self.orderedUnique(correctableFieldKeys)
+        self.hasRequiredControl = hasRequiredControl
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
 }
 
 struct RecommendationTraceReceiptBehavior: Codable, Sendable, Equatable, Hashable {
