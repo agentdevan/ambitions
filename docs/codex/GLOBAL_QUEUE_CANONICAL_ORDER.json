@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC04",
-  "next_eligible_title": "Time Physics Edge Case Lab",
+  "next_eligible_batch": "EFC05",
+  "next_eligible_title": "Recommendation Court Integration Gate",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -868,17 +868,17 @@
     {
       "id": "EFC04",
       "title": "Time Physics Edge Case Lab",
-      "classification": "executable_now",
-      "reason": "EFC03 is complete / accepted yellow. EFC04 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC03.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC04 Time Physics Edge Case Lab is complete / Accepted Yellow with closeout in docs/audits/efc04-batch-closeout-report.md and commit f73eddaaaf8cf607ab0bbb52a2d0301de8dd0b1c committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC05",
       "title": "Recommendation Court Integration Gate",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC04 is complete / accepted yellow. EFC05 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC04.",
       "efc_applicability": "invoked"
     },
     {

@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-18T07:33:17-04:00",
+  "generated_at": "2026-05-18T07:44:02-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -6378,6 +6378,7 @@
       "docs/audits/dav14-visual-regression-product-experience-qa-report.md",
       "docs/audits/dav15-dynamic-adaptive-visual-system-closeout-report.md",
       "docs/audits/efc00-flagship-proof-operating-layer-integration-report.md",
+      "docs/audits/efc04-batch-closeout-report.md",
       "docs/audits/fcp01-flagship-completion-source-truth-lock-report.md",
       "docs/audits/fcp03-ownership-file-boundary-dependency-map-report.md",
       "docs/audits/fcp05-start-here-surface-report.md",
@@ -10635,6 +10636,7 @@
     "docs/audits/eb37-privacy-threat-model-report.md",
     "docs/audits/eb38-accessibility-evidence-closeout-report.md",
     "docs/audits/efc00-flagship-proof-operating-layer-integration-report.md",
+    "docs/audits/efc04-batch-closeout-report.md",
     "docs/audits/faang-handoff-readiness-report.md",
     "docs/audits/faang-handoff-traceability-matrix.md",
     "docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md",

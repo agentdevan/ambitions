@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "EFC03 First 30 Days Lifecycle And Retention Proof"
-  previous_batch: "EFC03 First 30 Days Lifecycle And Retention Proof"
+  batch: "EFC04 Time Physics Edge Case Lab"
+  previous_batch: "EFC04 Time Physics Edge Case Lab"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "EFC04 Time Physics Edge Case Lab"
+  next_eligible_batch: "EFC05 Recommendation Court Integration Gate"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

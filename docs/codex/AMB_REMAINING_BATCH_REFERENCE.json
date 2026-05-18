@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-18T08:31:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "EFC04",
-    "next_eligible_title": "Time Physics Edge Case Lab",
+    "next_eligible_batch": "EFC05",
+    "next_eligible_title": "Recommendation Court Integration Gate",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -1484,6 +1484,20 @@
     {
       "id": "EFC04",
       "title": "Time Physics Edge Case Lab",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete / accepted Yellow",
+      "owner_train": "EFC / Proof Overlay",
+      "source_path": "docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md",
+      "dependency_gate": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "risk_class": "high",
+      "proof_class": "overlay proof-plane requirements for unfinished surface/behavior claims",
+      "efc_air_surface_inheritance": "EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof",
+      "consolidation_posture": "historical-complete do-not-run",
+      "next_action": "Do not rerun; preserve EFC04 overlay-only accepted-Yellow closeout and hand off to EFC05."
+    },
+    {
+      "id": "EFC05",
+      "title": "Recommendation Court Integration Gate",
       "classification": "executable_now",
       "status_class": "executable-now / overlay-only",
       "owner_train": "EFC / Proof Overlay",
@@ -1493,21 +1507,7 @@
       "proof_class": "overlay proof-plane requirements for unfinished surface/behavior claims",
       "efc_air_surface_inheritance": "EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof",
       "consolidation_posture": "proof-overlay owned / immediate next",
-      "next_action": "Runnable now only as overlay-only/no-implementation queue coverage after EFC03 accepted-Yellow closeout."
-    },
-    {
-      "id": "EFC05",
-      "title": "Recommendation Court Integration Gate",
-      "classification": "absorbed_as_overlay",
-      "status_class": "absorbed overlay",
-      "owner_train": "EFC / Proof Overlay",
-      "source_path": "docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md",
-      "dependency_gate": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
-      "risk_class": "high",
-      "proof_class": "overlay proof-plane requirements for unfinished surface/behavior claims",
-      "efc_air_surface_inheritance": "EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof",
-      "consolidation_posture": "proof-overlay owned",
-      "next_action": "Do not duplicate; owning batch must declare EFC applicability / Yellow ownership."
+      "next_action": "Runnable now only as overlay-only/no-implementation queue coverage after EFC04 accepted-Yellow closeout."
     },
     {
       "id": "EFC06",

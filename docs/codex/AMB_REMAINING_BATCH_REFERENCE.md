@@ -1,7 +1,7 @@
 # Ambitions Remaining Batch Reference
 
 Generated: 2026-05-18T08:31:00Z
-Next eligible: EFC04 - Time Physics Edge Case Lab
+Next eligible: EFC05 - Recommendation Court Integration Gate
 
 ## Summary
 - Total queue entries: 146
@@ -117,8 +117,8 @@ Next eligible: EFC04 - Time Physics Edge Case Lab
 | EFC01 | Private Product Evidence Engine | historical_complete_do_not_run | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | historical-complete / accepted Yellow | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | historical-complete do-not-run | Do not rerun; preserve EFC01 overlay-only accepted-Yellow closeout and hand off to EFC02. |
 | EFC02 | First Useful Object Onboarding | historical_complete_do_not_run | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | historical-complete / accepted Yellow | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | historical-complete do-not-run | Do not rerun; preserve EFC02 overlay-only accepted-Yellow closeout and hand off to EFC03. |
 | EFC03 | First 30 Days Lifecycle And Retention Proof | historical_complete_do_not_run | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | historical-complete / accepted Yellow | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | historical-complete do-not-run | Do not rerun; preserve EFC03 overlay-only accepted-Yellow closeout and hand off to EFC04. |
-| EFC04 | Time Physics Edge Case Lab | executable_now | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | executable-now / overlay-only | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned / immediate next | Runnable now only as overlay-only/no-implementation queue coverage after EFC03 accepted-Yellow closeout. |
-| EFC05 | Recommendation Court Integration Gate | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
+| EFC04 | Time Physics Edge Case Lab | historical_complete_do_not_run | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | historical-complete / accepted Yellow | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | historical-complete do-not-run | Do not rerun; preserve EFC04 overlay-only accepted-Yellow closeout and hand off to EFC05. |
+| EFC05 | Recommendation Court Integration Gate | executable_now | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | executable-now / overlay-only | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned / immediate next | Runnable now only as overlay-only/no-implementation queue coverage after EFC04 accepted-Yellow closeout. |
 | EFC06 | Goal Thermodynamics And Drift Handling | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
 | EFC07 | Ambitions Twin Fixture Library | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
 | EFC08 | Source Freshness Commons And Operations | absorbed_as_overlay | EFC / Proof Overlay | `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md` | absorbed overlay | high | Existing owner batch must declare invoked/not applicable/accepted Yellow. | EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof | proof-overlay owned | Do not duplicate; owning batch must declare EFC applicability / Yellow ownership. |
@@ -271,8 +271,8 @@ Next eligible: EFC04 - Time Physics Edge Case Lab
 - **EFC01** · historical-complete / accepted Yellow · Private Product Evidence Engine · Do not rerun; preserve EFC01 overlay-only accepted-Yellow closeout and hand off to EFC02.
 - **EFC02** · historical-complete / accepted Yellow · First Useful Object Onboarding · Do not rerun; preserve EFC02 overlay-only accepted-Yellow closeout and hand off to EFC03.
 - **EFC03** · historical-complete / accepted Yellow · First 30 Days Lifecycle And Retention Proof · Do not rerun; preserve EFC03 overlay-only accepted-Yellow closeout and hand off to EFC04.
-- **EFC04** · executable-now / overlay-only · Time Physics Edge Case Lab · Runnable now only as overlay-only/no-implementation queue coverage after EFC03 accepted-Yellow closeout.
-- **EFC05** · absorbed overlay · Recommendation Court Integration Gate · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
+- **EFC04** · historical-complete / accepted Yellow · Time Physics Edge Case Lab · Do not rerun; preserve EFC04 overlay-only accepted-Yellow closeout and hand off to EFC05.
+- **EFC05** · executable-now / overlay-only · Recommendation Court Integration Gate · Runnable now only as overlay-only/no-implementation queue coverage after EFC04 accepted-Yellow closeout.
 - **EFC06** · absorbed overlay · Goal Thermodynamics And Drift Handling · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
 - **EFC07** · absorbed overlay · Ambitions Twin Fixture Library · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
 - **EFC08** · absorbed overlay · Source Freshness Commons And Operations · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
@@ -297,7 +297,7 @@ Next eligible: EFC04 - Time Physics Edge Case Lab
 
 ## EFC overlay handoff
 
-- **EFC04** · executable-now / overlay-only · Time Physics Edge Case Lab · Runnable now only as overlay-only/no-implementation queue coverage after EFC03 accepted-Yellow closeout.
+- **EFC05** · executable-now / overlay-only · Recommendation Court Integration Gate · Runnable now only as overlay-only/no-implementation queue coverage after EFC04 accepted-Yellow closeout.
 
 ## CS conditional triggers
 - **CS02C** · conditional_trigger_only · CSCS02C · Run only when explicit trigger/research conditions are satisfied.

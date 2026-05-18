@@ -1,0 +1,4 @@
+batch_id=EFC04
+prompt_file=prompts/batches/EFC04.md
+run_dir=.codex/runs/EFC04/20260518T113836Z
+final_summary_path=.codex/runs/EFC04/20260518T113836Z/final-summary.md
