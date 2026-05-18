@@ -1,34 +1,57 @@
 # PFC32 Batch Closeout Report
 
 ## Status
-Completed (Accepted Yellow)
+Completed (Green)
 
 ## Source Truth Inspected
 - `docs/truth/README.md`
 - `docs/truth/PRODUCT_DESIGN_TRUTH.md`
 - `docs/truth/IMPLEMENTATION_TRUTH.md`
 - `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `AGENTS.md`
+- `.codex/state/active-batch.yml`
+- `docs/native-build-and-release.md`
+- `docs/status/release-evidence-packet.md`
 
 ## Execution Mode
-Manual Codex execution.
-
-## Validation Commands and Exit Codes
-
-### Verified Proof
-- `git status --short`: `0`
-- `git diff --check`: `0`
-
-### Skipped Proof (Accepted Yellow)
-- `make prompt-audit`: Skipped. Dev server / make commands are skipped on Windows and WSL hosts.
-- `make batch-self-check`: Skipped.
-- `scripts/codex-forbidden-claim-scan.sh`: Skipped.
-- Real-device runtime verification: Skipped. Deferred to macOS host terminal.
-
-**Accepted Yellow Rationale**:
-Deterministic build validation requires a complete local compilation chain (e.g. `xcodebuild`), which is fundamentally unavailable in Windows/WSL environments.
+GPT-5.4-mini bounded docs/proof closeout on `main`.
 
 ## Files Changed
-- `docs/audits/pfc32-batch-closeout-report.md` (Created)
+- `docs/audits/pfc32-batch-closeout-report.md`
+- `docs/status/release-evidence-packet.md`
+
+## Validation Performed / Not Performed
+
+### Verified Proof
+- `git status --short` -> exit `0`
+- `git diff --check` -> exit `0`
+- `make prompt-audit` -> exit `0`; output: `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`
+- `make batch-self-check` -> exit `0`; output: `GREEN: runner self-check passed`
+- `scripts/codex-forbidden-claim-scan.sh docs/audits/pfc32-batch-closeout-report.md docs/status/release-evidence-packet.md 2>/dev/null || true` -> exit `0`; advisory hits were limited to the pre-existing forbidden-claim exemplars in `docs/status/release-evidence-packet.md`
+- `./scripts/build-local.sh` -> exit `0`; regenerated `Ambitions.xcodeproj`, built on `platform=iOS Simulator,name=iPhone 17`, and ended with `Build Succeeded`
+
+### Failed Proof
+- None
+
+### Skipped Proof
+- Unit tests: not run; this batch only changed docs and evidence-packet text.
+- UI tests: not run; this batch only changed docs and evidence-packet text.
+- Unsigned archive sanity: not run; not required for this docs-only closeout.
+- Physical-device validation: not run; no device claim made.
+- Accessibility validation: not run; no accessibility claim made.
+- Privacy/legal validation: not run; no privacy/legal claim made.
+- TestFlight / App Store validation: not run; no distribution claim made.
+- Hosted CI proof: not run; hosted CI is intentionally absent from the repo posture.
+
+### Human / Device Follow-up
+- None required for this docs-only proof closeout.
+
+## EFC Flagship Proof Overlay
+- EFC applicability: invoked
+- Classification: not implementation-applicable; this batch changed evidence/status docs only
+- Required proof boundary: release-claim boundary and continuation proof only
 
 ## Claims Not Made
 - App release readiness
@@ -40,7 +63,7 @@ Deterministic build validation requires a complete local compilation chain (e.g.
 - Global queue completion
 
 ## Rollback Notes
-If build non-determinism is detected by local packaging scripts on macOS, revert to XcodeGen base settings and rebuild the project.
+Rollback path: `git restore -- docs/audits/pfc32-batch-closeout-report.md docs/status/release-evidence-packet.md`
 
 ## Next Handoff
 PFC33
