@@ -3,12 +3,12 @@
 <!-- markdownlint-disable MD013 -->
 
 Status: Active plan for Ambitions local MCP tooling.  
-Date: 2026-05-08  
+Date: 2026-05-18  
 Scope: local Mac / Codex production acceleration. Not app runtime.
 
 ## Purpose
 
-Ambitions MCP is a local production operating layer for Codex. It gives Codex deterministic tools for repo truth, active batch state, EFC applicability, forbidden claim scanning, closeout validation, and changed-file impact routing.
+Ambitions MCP is a local production operating layer for Codex. It gives Codex deterministic tools for repo truth, active batch state, EFC applicability, forbidden claim scanning, closeout validation, changed-file impact routing, validation planning, continuation decisions, prompt preflight, run summaries, and queue next-action lookup.
 
 MCP is not part of the Ambitions app runtime. It is developer tooling for the dedicated Ambitions Mac VM.
 
@@ -23,19 +23,22 @@ MCP must not become an unbounded shell, telemetry system, hosted service, or app
 
 Ambitions uses local stdio MCP servers installed from the repo and configured in the Mac VM's Codex config.
 
-Initial server:
+Implemented servers:
 
 ```text
 tools/mcp/ambitions_repo_mcp/
+tools/mcp/ambitions_proof_mcp/
 ```
 
-This first server is read-only and stdlib-only. It has no arbitrary shell execution, no external network, no writes, no secrets access, and no production app dependency.
+The repo MCP is read-only and stdlib-only. It has no arbitrary shell execution, no external network, no writes, no secrets access, and no production app dependency.
 
-## Phase 1 — Repo Truth MCP
+The proof MCP exposes allowlisted validation execution only. It is not a generic shell and does not expose signing, release upload, hosted CI creation, network, secrets, or git mutation tools.
+
+## Phase 1 — Repo Truth + Autonomy Control MCP
 
 Server: `ambitions_repo_mcp`
 
-Tools:
+Base tools:
 
 - `get_active_batch`
 - `get_efc_overlay_status`
@@ -46,9 +49,39 @@ Tools:
 - `check_batch_closeout_shape`
 - `summarize_repo_posture`
 
+Autonomy control-plane tools:
+
+- `autonomy_preflight`
+- `required_validation_plan`
+- `continuation_oracle`
+- `resolve_active_truth`
+- `obsolete_authority_scan`
+- `batch_prompt_preflight`
+- `latest_run_summary`
+- `queue_next_action`
+
 Outcome:
 
-Codex can start every batch by asking the repo for active state and EFC obligations instead of rereading and guessing from long docs.
+Codex can start every batch by asking the repo for active state, source truth, EFC obligations, validation requirements, and continuation rules instead of rereading and guessing from long docs.
+
+Recommended start-of-batch sequence:
+
+```text
+get_active_batch
+summarize_repo_posture
+autonomy_preflight
+required_validation_plan
+batch_prompt_preflight
+```
+
+Recommended post-run sequence:
+
+```text
+latest_run_summary
+continuation_oracle
+check_batch_closeout_shape
+detect_forbidden_claims
+```
 
 ## Phase 2 — Controlled Proof MCP
 
@@ -61,8 +94,10 @@ Allowed named tools only:
 - `collect_latest_logs`
 - `generate_proof_packet`
 - `check_validation_policy`
+- `xcode_latest_summary`
+- `xcode_failure_classification`
 
-Allowed validation names:
+Preferred validation names:
 
 - `mcp01_self_test`
 - `repo_claim_scan`
@@ -70,10 +105,19 @@ Allowed validation names:
 - `doc_link_scan_basic`
 - `git_status_summary`
 - `xcodegen_check_dry_run`
+- `xcode_validate_build`
+- `xcode_validate_build_for_testing`
+- `xcode_validate_focused_test`
+- `xcode_validate_test_plan`
+
+Legacy fallback validation names:
+
 - `build_local`
 - `focused_tests`
 
 No generic shell tool is allowed. Commands must be allowlisted and must produce claim-safe evidence packets.
+
+Simulator/Xcode validations route through `scripts/ambitions-xcode-validate.sh` and use a server-side 1800-second timeout for simulator workflows.
 
 ## Phase 3 — Visual / Accessibility MCP
 
@@ -115,6 +159,7 @@ External MCPs are governed by [MCP External Server Setup](MCP_EXTERNAL_SERVER_SE
 Current approved posture:
 
 - Ambitions Repo MCP: local read-only.
+- Ambitions Proof MCP: local allowlisted proof execution.
 - OpenAI Developer Docs MCP: configured for docs lookup.
 - GitHub MCP: read-only future setup only; no token in repo; no write tools.
 - XcodeBuildMCP: simulator workflow only until baseline validation expands.
@@ -143,7 +188,12 @@ The MCP moat is not the protocol itself. The moat is the Ambitions-specific proo
 - active batch safety
 - EFC applicability
 - source-truth resolution
+- obsolete authority scanning
 - changed-file impact routing
+- validation planning
+- continuation decisions
+- prompt preflight
+- run summarization
 - claim scanning
 - closeout shape validation
 - future visual/accessibility/source/release proof tools
