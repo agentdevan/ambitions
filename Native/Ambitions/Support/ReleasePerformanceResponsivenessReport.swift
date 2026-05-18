@@ -5,7 +5,7 @@ enum ReleasePerformanceArea: String, CaseIterable, Sendable, Equatable {
     case tabSwitching = "Tab switching"
     case todayLoad = "Today load"
     case goalDetailLoad = "Goal Detail load"
-    case planLoad = "Plan load"
+    case planLoad = "Time load"
     case receiptHistoryQueries = "Receipt and history queries"
     case memoryReviewQueries = "Memory and review queries"
     case pathPortfolioQueries = "Path and portfolio queries"
@@ -40,7 +40,7 @@ enum ReleasePerformanceResponsivenessReport {
             id: "app-launch",
             area: .appLaunch,
             budget: "Launch must compile cleanly, avoid permission prompts during startup, and keep first-run claims conservative.",
-            evidence: "R02 simulator build launches the native app target from generated Xcode project wiring; onboarding/calendar access remains Plan-owned and not startup-owned.",
+            evidence: "R02 simulator build launches the native app target from generated Xcode project wiring; onboarding/calendar access remains Time-owned through the internal Plan compatibility seam and not startup-owned.",
             evidenceLevel: .automatedSimulator,
             readiness: .boundedButDeviceProofRequired,
             limitation: "Cold-start timing and memory pressure still require R03 device/TestFlight proof."
@@ -49,7 +49,7 @@ enum ReleasePerformanceResponsivenessReport {
             id: "tab-switching",
             area: .tabSwitching,
             budget: "The canonical five-tab shell must stay stable without hidden navigation or extra top-level surfaces.",
-            evidence: "M12 shell continuity tests cover Today, Goals, Capture, Plan, You, and review routes; R02 keeps this as a regression lane.",
+            evidence: "M12 shell continuity tests cover Today, Goals, Capture, Time, You, and review routes; R02 keeps this as a regression lane.",
             evidenceLevel: .automatedSimulator,
             readiness: .acceptableForInternalTesting,
             limitation: "Touch latency and animation smoothness need manual device review."
@@ -75,8 +75,8 @@ enum ReleasePerformanceResponsivenessReport {
         ReleasePerformanceCheck(
             id: "plan-load",
             area: .planLoad,
-            budget: "Plan must keep calendar-aware planning local and suggestion-first, with no silent calendar writes.",
-            evidence: "Plan feature regressions cover believability, recovery, waiting/commitment posture, Save the Day boundaries, and denied-calendar fallback.",
+            budget: "Time must keep calendar-aware planning local and suggestion-first, with no silent calendar writes or top-level Plan drift.",
+            evidence: "Time feature regressions cover believability, recovery, waiting/commitment posture, Save the Day boundaries, and denied-calendar fallback.",
             evidenceLevel: .automatedSimulator,
             readiness: .acceptableForInternalTesting,
             limitation: "Calendar permission permutations and real-device interaction timing remain R03 checks."
@@ -120,7 +120,7 @@ enum ReleasePerformanceResponsivenessReport {
     ]
 
     static var readinessSummary: String {
-        "R02 records \(checks.count) performance and responsiveness checks for simulator/source evidence; device and TestFlight proof remain separate gates."
+        "This report records \(checks.count) performance and responsiveness checks for simulator/source evidence; device, TestFlight, and App Store proof remain separate gates."
     }
 
     static var unverifiedReadinessClaims: [String] {

@@ -115,6 +115,31 @@ PFC35 Phase 04 repair-pass validation, 2026-05-18:
   - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies`: still blocked before shell execution by the policy wrapper (`approval required by policy, but AskForApproval is set to Never`); no package-resolution proof was produced
 - Scope: report/evidence update only; no build/test/device/accessibility/privacy/legal/release-readiness claim
 
+PFC36 performance and observability reconciliation, 2026-05-18:
+
+- Branch: `main`
+- Starting commit: `9547af82121a1ec48a9cf62f27de58e484fdd648`
+- Commands:
+  - `git status --short`
+  - `git diff --check`
+  - `make prompt-audit`
+  - `make batch-self-check`
+  - `xcodegen generate`
+  - `xcodebuildmcp test_sim` focused on `AmbitionsTests/ReleasePerformanceResponsivenessReportTests`
+  - `xcodebuildmcp test_sim` focused on `AmbitionsTests/AmbitionsOSPerformanceEnergyModelsTests`
+  - `bash scripts/codex-forbidden-claim-scan.sh Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift docs/status/release-evidence-packet.md docs/audits/pfc36-batch-closeout-report.md 2>/dev/null || true`
+- Result:
+  - `git status --short`: `0`, with the four edited batch files plus the pre-existing `?? .codex/state/global-train.lock`
+  - `git diff --check`: `0`
+  - `make prompt-audit`: `0`, `YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata`
+  - `make batch-self-check`: `0`, runner self-check passed
+  - `xcodegen generate`: `0`
+  - `ReleasePerformanceResponsivenessReportTests` MCP call timed out at `120s`; underlying result bundle: `Passed`, `6` tests, `0` recorded failures, iPhone 17 simulator, `iOS Simulator 26.3.1`; bundle `/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-05-18T07-08-00-828Z_pid38566_98ab36cb.xcresult`
+  - `AmbitionsOSPerformanceEnergyModelsTests` MCP call timed out at `120s`; underlying result bundle: `Passed`, `10` total tests recorded in the bundle, `0` recorded failures, iPhone 17 simulator, `iOS Simulator 26.3.1`; bundle `/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-05-18T07-13-28-056Z_pid38566_c9620e57.xcresult`
+  - Direct shell `xcodebuild ... -only-testing:AmbitionsTests/AmbitionsOSPerformanceEnergyModelsTests test CODE_SIGNING_ALLOWED=NO`: blocked before shell execution by the outer command policy (`approval required by policy, but AskForApproval is set to Never`); MCP-backed bundle proof above is the current test evidence
+  - `scripts/codex-forbidden-claim-scan.sh`: `0`, context-only `top-level Plan drift` guard in source; no blocking hits
+- Scope: performance/observability source-support reconciliation only; no device, signing, TestFlight, App Store, accessibility, privacy/legal, or release-readiness claim
+
 ## Required local proof packet
 
 A serious local validation run should save or summarize:
