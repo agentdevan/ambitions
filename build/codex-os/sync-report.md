@@ -1,11 +1,11 @@
 # Codex OS Sync Report
 
-Generated: 2026-05-17T22:30:47-04:00
+Generated: 2026-05-17T23:39:46-04:00
 
 - Repo doctor status: GREEN
 - Repo doctor missing: False
 - Next action decision: select_next_batch
-- Selected batch: FCP28
+- Selected batch: FCP30
 - Performance missing outputs: 0
 - Freshness missing outputs: 0
 
@@ -20,7 +20,7 @@ Generated: 2026-05-17T22:30:47-04:00
 
 ## Next Action
 
-No blockers remain; select the safest executable batch (FCP28).
+No blockers remain; select the safest executable batch (FCP30).
 
 ```bash
 python3 scripts/codex-os/ambitions-codex-os-batch-selector.py

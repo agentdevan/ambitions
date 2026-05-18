@@ -1,19 +1,19 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-17T23:14:53-04:00
+Generated: 2026-05-17T23:39:46-04:00
 
-Selected batch: FCP29
-Prompt file: prompts/batches/FCP29.md
+Selected batch: FCP30
+Prompt file: prompts/batches/FCP30.md
 Lane: flagship
 Queue classification: executable_now
 
 ## Reason
 
-Selected the safest live batch from current state: FCP29.
+Selected the safest live batch from current state: FCP30.
 
 ## Blockers
 
-- queue_prerequisites:Complete prior batch FCP28 and preserve accessibility, Dynamic Type, FVQ, and release-claim boundaries.
+- queue_prerequisites:Earlier FCP object maturity, FVQ rendered proof, accessibility and release-claim boundaries.
 
 ## Preflight Commands
 
@@ -27,4 +27,4 @@ Selected the safest live batch from current state: FCP29.
 
 ## Run Command
 
-make authorized-batch BATCH=FCP29 PROMPT=prompts/batches/FCP29.md
+make authorized-batch BATCH=FCP30 PROMPT=prompts/batches/FCP30.md

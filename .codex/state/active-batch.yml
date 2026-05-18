@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "FCP28 Final Visual Proof Packet"
-  previous_batch: "FCP28 Final Visual Proof Packet"
+  batch: "FCP29 Accessibility And Dynamic Type Closeout"
+  previous_batch: "FCP29 Accessibility And Dynamic Type Closeout"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "FCP29 Accessibility And Dynamic Type Closeout"
+  next_eligible_batch: "FCP30 Flagship Completion Handoff"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

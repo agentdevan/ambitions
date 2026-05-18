@@ -189,6 +189,8 @@
 - classify/archive/rewrite: docs/audits/fcp25-loading-empty-degraded-state-objectization-report.md
 - classify/archive/rewrite: docs/audits/fcp26-iconography-status-grammar-hardening-report.md
 - classify/archive/rewrite: docs/audits/fcp27-batch-closeout-report.md
+- classify/archive/rewrite: docs/audits/fcp28-batch-closeout-report.md
+- classify/archive/rewrite: docs/audits/fcp29-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/fet00-faang-frontend-codex-os-upgrade-report.md
 - classify/archive/rewrite: docs/audits/fet01-fet12-faang-frontend-excellence-train-report.md
 - classify/archive/rewrite: docs/audits/fl01-founder-backstory-product-soul-lock-report.md
