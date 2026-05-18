@@ -2,7 +2,7 @@
 
 ## Active Changes
 
-- docs/audits/efc04-batch-closeout-report.md
+- .codex/state/global-train.lock
 
 ## Historical / Archive Changes
 

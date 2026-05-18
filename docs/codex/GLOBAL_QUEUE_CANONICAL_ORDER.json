@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC05",
-  "next_eligible_title": "Recommendation Court Integration Gate",
+  "next_eligible_batch": "EFC06",
+  "next_eligible_title": "Goal Thermodynamics And Drift Handling",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -876,17 +876,17 @@
     {
       "id": "EFC05",
       "title": "Recommendation Court Integration Gate",
-      "classification": "executable_now",
-      "reason": "EFC04 is complete / accepted yellow. EFC05 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC04.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC05 Recommendation Court Integration Gate is complete / Accepted Yellow with closeout in docs/audits/efc05-batch-closeout-report.md and commit 0ed5536a1354acef1b7eaf5de35935c632195731 committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC06",
       "title": "Goal Thermodynamics And Drift Handling",
-      "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
-      "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
+      "classification": "executable_now",
+      "reason": "EFC05 is complete / accepted yellow. EFC06 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch EFC05.",
       "efc_applicability": "invoked"
     },
     {

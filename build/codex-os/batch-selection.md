@@ -1,19 +1,19 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-18T07:49:46-04:00
+Generated: 2026-05-18T08:01:34-04:00
 
-Selected batch: EFC05
-Prompt file: prompts/batches/EFC05.md
+Selected batch: EFC06
+Prompt file: prompts/batches/EFC06.md
 Lane: efc
 Queue classification: executable_now
 
 ## Reason
 
-Selected the safest live batch from current state: EFC05.
+Selected the safest live batch from current state: EFC06.
 
 ## Blockers
 
-- queue_prerequisites:Complete prior batch EFC04.
+- queue_prerequisites:Complete prior batch EFC05.
 
 ## Preflight Commands
 
@@ -27,4 +27,4 @@ Selected the safest live batch from current state: EFC05.
 
 ## Run Command
 
-make authorized-batch BATCH=EFC05 PROMPT=prompts/batches/EFC05.md
+make authorized-batch BATCH=EFC06 PROMPT=prompts/batches/EFC06.md

@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T07:44:02-04:00
+Generated: 2026-05-18T08:01:34-04:00
 
 ## Plan → Time
 
