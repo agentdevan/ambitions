@@ -210,9 +210,9 @@ If a prompt is pasted directly without the header:
 
 For serious Ambitions work, assume the operating sequence:
 
-`GPT-5.5 plan -> GPT-5.3-Codex-Spark bounded patch -> GPT-5.5 review/repair/final commit`
+`GPT-5.5 plan -> GPT-5.3-Codex-Spark bounded patch by default, falling back to GPT-5.4-mini only when Spark usage is exhausted -> GPT-5.5 review/repair/final commit`
 
-The planning/review model owns source-truth, canon, architecture, release-claim, and final commit eligibility. The bounded patch model may implement only the approved patch scope.
+The planning/review model owns source-truth, canon, architecture, release-claim, and final commit eligibility. The bounded patch model may implement only the approved patch scope. Spark is the default bounded patch model. GPT-5.4-mini is a fallback bounded patch model only when Spark usage is exhausted, not a quality downgrade path for judgment-heavy work.
 
 Do not use stale model-tier names from older docs as current truth unless `docs/truth/CODEX_PROCESS_TRUTH.md` explicitly requires them for compatibility.
 
