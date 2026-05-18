@@ -73,6 +73,20 @@ Resolution for this phase: preserve the canonical EFC06 ID and order position, b
 - `make batch-self-check` - exit `0`; runner self-check passed.
 - `scripts/codex-forbidden-claim-scan.sh docs/audits/efc06-batch-closeout-report.md .codex/state/active-batch.yml .codex/reports/current-batch-train-state.md .codex/reports/current-run-state.md docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json docs/codex/AMB_REMAINING_BATCH_REFERENCE.json 2>/dev/null || true` - exit `0`; no blocking forbidden-claim hits.
 
+## Phase 04 Repair Pass
+
+Repair: corrected the two current-state mirrors so they distinguish the EFC06 starting commit (`4ffebb46c93dc1eb64bd952d6eecadf86de633c7`) from the actual closeout commit (`e92dec94c27fcf2479e2446e35d7b26bfc5c620b`).
+
+Scope: metadata/proof wording only in `.codex/reports/current-batch-train-state.md`, `.codex/reports/current-run-state.md`, and this report. No app source, queue JSON, project, package, signing, workflow, release automation, hosted backend, LLM core, or IA files were changed.
+
+Validation rerun for Phase 04:
+
+- `git status --short` - exit `0`; repo state shows pre-existing untracked `.codex/state/global-train.lock` plus the Phase 04 metadata updates.
+- `git diff --check` - exit `0`.
+- `make prompt-audit` - exit `0`; expected Yellow classification remains limited to support/eval/template/historical prompt-like surfaces.
+- `make batch-self-check` - exit `0`.
+- `scripts/codex-forbidden-claim-scan.sh docs/audits/efc06-batch-closeout-report.md .codex/reports/current-batch-train-state.md .codex/reports/current-run-state.md 2>/dev/null || true` - exit `0`; no blocking forbidden-claim hits.
+
 ## EFC Applicability
 
 Invoked.

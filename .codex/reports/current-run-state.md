@@ -11,7 +11,8 @@ Plan is superseded as a top-level destination and remains valid only as an actio
 
 ## EFC06 Goal Thermodynamics And Drift Handling Closeout
 
-- Commit: `4ffebb46c93dc1eb64bd952d6eecadf86de633c7` current local `main` starting point for this metadata-only closeout.
+- Starting commit: `4ffebb46c93dc1eb64bd952d6eecadf86de633c7`.
+- Closeout commit: `e92dec94c27fcf2479e2446e35d7b26bfc5c620b` (`Close EFC06 overlay queue record`).
 - Report: `docs/audits/efc06-batch-closeout-report.md`.
 - Status: Accepted Yellow.
 - Proof: EFC06 accepted Yellow: overlay-only/no-implementation queue-coverage closeout; the EFC06 report records the absorbed-as-overlay boundary, EFC invoked, queue mirror conflict resolution, no app/source/project/signing/workflow/release behavior changes, and validation; make prompt-audit exited 0 with known Yellow support/eval/template/historical prompt classifications; focused forbidden-claim scan had no blocking findings; no release/device/accessibility/privacy/legal/performance/production/global-completion claim..
