@@ -7,6 +7,30 @@ This file documents local Codex command policy in `.codex/rules/ambitions-no-cos
 - Git status/diff/revision lookup, `rg`, `find`, `ls`, `cat`, `sed`, `awk`.
 - Local validation execution of `python3 scripts/ambitions-codex-os-validate.py` and `python3 scripts/ambitions-codex-os-doctor.py`.
 - Make targets for the same commands.
+- Safe local Xcode validation through Ambitions-owned wrapper entrypoints:
+  - `scripts/ambitions-xcode-validate.sh --batch <BATCH> --lane build`
+  - `scripts/ambitions-xcode-validate.sh --batch <BATCH> --lane build-for-testing`
+  - `scripts/ambitions-xcode-validate.sh --batch <BATCH> --lane focused-test`
+  - `scripts/ambitions-xcode-validate.sh --batch <BATCH> --lane test-plan`
+  - `make xcode-validate BATCH=<BATCH> LANE=<lane>`
+  - `make xcode-focused-test BATCH=<BATCH> TEST=<test-id>`
+  - `make xcode-build-for-testing BATCH=<BATCH>`
+  - `make xcode-test-plan BATCH=<BATCH> TEST_PLAN=<plan-name>`
+  - `make build-lab-doctor`
+
+## Xcode validation policy
+
+The runner should allow wrapper-mediated Xcode validation because source-touching SwiftUI, SwiftData, runtime, persistence, project, entitlement, and test batches need compile/test proof.
+
+Safe Xcode validation must remain local-only and proof-oriented:
+
+- Use Ambitions wrappers and Make targets as the default entrypoints.
+- Use repo-local DerivedData/result/log/summary roots defined by the Xcode Build Lab Protocol.
+- Disable signing for local compile lanes.
+- Capture logs and summaries for batch proof.
+- Do not claim release readiness from local validation alone.
+
+Raw `xcodebuild` remains prompt-level unless explicitly routed through approved wrappers. Archive/export/signing/upload commands remain forbidden.
 
 ## What is prompted or blocked
 
@@ -29,7 +53,10 @@ Test guardrails with:
 
 ```bash
 codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git status
+codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules scripts/ambitions-xcode-validate.sh --batch TEST --lane build
+codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules make xcode-validate BATCH=TEST LANE=build
 codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules git push
+codex execpolicy check --rules .codex/rules/ambitions-no-cost.rules xcodebuild archive
 ```
 
 When `codex execpolicy` is unavailable, treat this as Yellow verification risk and continue with manual review.
