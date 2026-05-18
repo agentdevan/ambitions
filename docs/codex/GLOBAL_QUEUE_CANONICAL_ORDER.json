@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "PFC40",
-  "next_eligible_title": "Platform Framework Compliance Closeout",
+  "next_eligible_batch": "RHC01",
+  "next_eligible_title": "Repo Hygiene Triage And Owner Map",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -788,17 +788,17 @@
     {
       "id": "PFC40",
       "title": "Platform Framework Compliance Closeout",
-      "classification": "executable_now",
-      "reason": "PFC39 is complete / accepted yellow. PFC40 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch PFC39.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "PFC40 Platform Framework Compliance Closeout is complete / Accepted Yellow with closeout in docs/audits/pfc40-batch-closeout-report.md and commit 9b00fb7bfd636d48b102706b7f0b84e1b3bb970a committed on local main. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "RHC01",
       "title": "Repo Hygiene Triage And Owner Map",
-      "classification": "executable_later",
-      "reason": "Repo hygiene closeout remains mostly late; GQ01 performs only the blocking root-prune/queue-maturity preparation now.",
-      "blocking_prerequisites": "Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work.",
+      "classification": "executable_now",
+      "reason": "PFC40 is complete / accepted yellow. RHC01 is the next implementation batch.",
+      "blocking_prerequisites": "Complete prior batch PFC40.",
       "efc_applicability": "not applicable"
     },
     {

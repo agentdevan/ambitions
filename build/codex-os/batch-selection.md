@@ -1,19 +1,19 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-18T04:30:55-04:00
+Generated: 2026-05-18T04:55:37-04:00
 
-Selected batch: PFC40
-Prompt file: prompts/batches/PFC40.md
-Lane: platform
+Selected batch: RHC01
+Prompt file: prompts/batches/RHC01.md
+Lane: rhc
 Queue classification: executable_now
 
 ## Reason
 
-Selected the safest live batch from current state: PFC40.
+Selected the safest live batch from current state: RHC01.
 
 ## Blockers
 
-- queue_prerequisites:Complete prior batch PFC39.
+- queue_prerequisites:Complete prior batch PFC40.
 
 ## Preflight Commands
 
@@ -27,4 +27,4 @@ Selected the safest live batch from current state: PFC40.
 
 ## Run Command
 
-make authorized-batch BATCH=PFC40 PROMPT=prompts/batches/PFC40.md
+make authorized-batch BATCH=RHC01 PROMPT=prompts/batches/RHC01.md

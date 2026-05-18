@@ -320,6 +320,7 @@
 - classify/archive/rewrite: docs/audits/pfc36-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/pfc38-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/pfc39-batch-closeout-report.md
+- classify/archive/rewrite: docs/audits/pfc40-batch-closeout-report.md
 - classify/archive/rewrite: docs/audits/pk-train-integration-and-dirty-worktree-report.md
 - classify/archive/rewrite: docs/audits/pk00-current-backend-proof-baseline-report.md
 - classify/archive/rewrite: docs/audits/pk01-package-module-boundary-scaffold-report.md

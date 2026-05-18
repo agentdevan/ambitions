@@ -1,7 +1,7 @@
 # Ambitions Remaining Batch Reference
 
 Generated: 2026-05-18T08:31:00Z
-Next eligible: PFC40 — Platform Framework Compliance Closeout
+Next eligible: RHC01 — Repo Hygiene Triage And Owner Map
 
 ## Summary
 - Total queue entries: 146
@@ -107,8 +107,8 @@ Next eligible: PFC40 — Platform Framework Compliance Closeout
 | PFC37 | Release Engineering Evidence | executable_later | PFC / Platform Framework Compliance | `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md` | queued | high | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
 | PFC38 | Signed Candidate Preparation Gate | executable_later | PFC / Platform Framework Compliance | `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md` | queued | high | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
 | PFC39 | Final Platform Handoff | historical_complete_do_not_run | PFC / Platform Framework Compliance | `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md` | historical-complete / accepted Yellow | high | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls | historical-complete do-not-run | Do not rerun; preserve PFC39 accepted-Yellow final platform handoff closeout and hand off to PFC40. |
-| PFC40 | Platform Framework Compliance Closeout | executable_now | PFC / Platform Framework Compliance | `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md` | executable-now | high | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls | queued successor / immediate next | Runnable now after PFC39 accepted-Yellow closeout. |
-| RHC01 | Repo Hygiene Triage And Owner Map | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
+| PFC40 | Platform Framework Compliance Closeout | historical_complete_do_not_run | PFC / Platform Framework Compliance | `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md` | historical-complete / accepted Yellow | high | Relevant PK/FCP/FVQ/EFC proof and human/legal/device gates where named. | REC + EFC10/EFC11/EFC16/EFC17, claims and legal boundary controls | historical-complete do-not-run | Do not rerun; preserve PFC40 accepted-Yellow platform framework compliance closeout and hand off to RHC01. |
+| RHC01 | Repo Hygiene Triage And Owner Map | executable_now | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | executable-now | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor / immediate next | Runnable now after PFC40 accepted-Yellow closeout. |
 | RHC02 | Large File Extraction And Module Boundary | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
 | RHC03 | Placeholder Stub And Compatibility Seam Cleanup | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
 | RHC04 | Stale Copy Docs And Generated Artifact Hygiene | executable_later | RHC / Repo Hygiene Closeout | `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md` | queued | low | Run after LDI/AOS/FCP/PFC tails unless a hygiene Hard Red blocks active work. | CQS and historical cleanup owners | queued successor | Runnable once prior batch order and dependency gates are satisfied. |
@@ -265,7 +265,7 @@ Next eligible: PFC40 — Platform Framework Compliance Closeout
 - **PFC37** · queued · Release Engineering Evidence · Runnable once prior batch order and dependency gates are satisfied.
 - **PFC38** · queued · Signed Candidate Preparation Gate · Runnable once prior batch order and dependency gates are satisfied.
 - **PFC39** · historical-complete / accepted Yellow · Final Platform Handoff · Do not rerun; preserve PFC39 accepted-Yellow final platform handoff closeout and hand off to PFC40.
-- **PFC40** · executable-now · Platform Framework Compliance Closeout · Runnable now after PFC39 accepted-Yellow closeout.
+- **PFC40** · historical-complete / accepted Yellow · Platform Framework Compliance Closeout · Do not rerun; preserve PFC40 accepted-Yellow platform framework compliance closeout and hand off to RHC01.
 
 ## EFC train
 - **EFC01** · absorbed overlay · Private Product Evidence Engine · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
@@ -288,7 +288,7 @@ Next eligible: PFC40 — Platform Framework Compliance Closeout
 - **EFC18** · absorbed overlay · Anti-Ceremony Compiler · Do not duplicate; owning batch must declare EFC applicability / Yellow ownership.
 
 ## RHC train
-- **RHC01** · queued · Repo Hygiene Triage And Owner Map · Runnable once prior batch order and dependency gates are satisfied.
+- **RHC01** · executable-now · Repo Hygiene Triage And Owner Map · Runnable now after PFC40 accepted-Yellow closeout.
 - **RHC02** · queued · Large File Extraction And Module Boundary · Runnable once prior batch order and dependency gates are satisfied.
 - **RHC03** · queued · Placeholder Stub And Compatibility Seam Cleanup · Runnable once prior batch order and dependency gates are satisfied.
 - **RHC04** · queued · Stale Copy Docs And Generated Artifact Hygiene · Runnable once prior batch order and dependency gates are satisfied.
