@@ -56,6 +56,28 @@ PFC33 Phase 04 repair-pass validation, 2026-05-18:
 - GPT-5.5 final-gate XcodeBuildMCP rerun with the same focused test slice and isolated derived data path `output/DerivedData-pfc33-final-gate` also timed out at the 120s wrapper ceiling while the underlying `xcodebuild` remained in `build-for-testing`; the hung process was stopped after observation and no new result bundle was produced.
 - Scope: local simulator build proof only; no current focused-test pass, device, signing, TestFlight, App Store, accessibility, privacy, performance, or human-approval claim.
 
+PFC34 privacy/legal reconciliation, 2026-05-18:
+
+- Branch: `main`
+- Commit: `3925f2eb9740c44a465ad0367b13e5deea9e1d64`
+- Commands:
+  - `git status --short`
+  - `git diff --check`
+  - `make prompt-audit`
+  - `make batch-self-check`
+  - `plutil -p Native/Ambitions/Resources/PrivacyInfo.xcprivacy`
+  - `bash scripts/codex-forbidden-claim-scan.sh docs/audits/pfc34-batch-closeout-report.md docs/status/release-evidence-packet.md 2>/dev/null || true`
+  - targeted `rg` scans over `Native`, `Sources`, `AppUI`, `Package.swift`, and `project.yml`
+- Result:
+  - `git status --short`: `0`, with the two PFC34 docs changes plus the pre-existing `?? .codex/state/global-train.lock`
+  - `git diff --check`: `0`
+  - `make prompt-audit`: `0`, yellow classification for prompt/support/template files and no active runnable prompt missing metadata
+  - `make batch-self-check`: `0`, runner self-check passed
+  - `plutil -p Native/Ambitions/Resources/PrivacyInfo.xcprivacy`: `0`, manifest still reports no tracking, no collected data, and no accessed APIs
+  - `scripts/codex-forbidden-claim-scan.sh`: `0`, no blocking forbidden-claim hits
+  - targeted scans: `0`, no privacy-manifest mismatch or scope violation requiring source-support edits
+- Scope: docs/proof reconciliation only; no build, test, device, accessibility, privacy/legal approval, or release-readiness claim
+
 ## Required local proof packet
 
 A serious local validation run should save or summarize:
