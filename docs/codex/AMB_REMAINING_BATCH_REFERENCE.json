@@ -2,8 +2,8 @@
   "metadata": {
     "generated_at_utc": "2026-05-18T08:31:00Z",
     "source": "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
-    "next_eligible_batch": "EFC06",
-    "next_eligible_title": "Goal Thermodynamics And Drift Handling",
+    "next_eligible_batch": "EFC07",
+    "next_eligible_title": "Ambitions Twin Fixture Library",
     "active_state_file": ".codex/state/active-batch.yml",
     "record_count": 146
   },
@@ -1512,16 +1512,16 @@
     {
       "id": "EFC06",
       "title": "Goal Thermodynamics And Drift Handling",
-      "classification": "executable_now",
-      "status_class": "executable-now / overlay-only",
+      "classification": "historical_complete_do_not_run",
+      "status_class": "historical-complete / accepted Yellow",
       "owner_train": "EFC / Proof Overlay",
       "source_path": "docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md",
       "dependency_gate": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
       "risk_class": "high",
       "proof_class": "overlay proof-plane requirements for unfinished surface/behavior claims",
       "efc_air_surface_inheritance": "EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof",
-      "consolidation_posture": "proof-overlay owned / immediate next",
-      "next_action": "Runnable now only as overlay-only/no-implementation queue coverage after EFC05 accepted-Yellow closeout."
+      "consolidation_posture": "historical-complete do-not-run",
+      "next_action": "Do not rerun; preserved as EFC06 overlay-only accepted-Yellow closeout."
     },
     {
       "id": "EFC07",
@@ -1535,7 +1535,7 @@
       "proof_class": "overlay proof-plane requirements for unfinished surface/behavior claims",
       "efc_air_surface_inheritance": "EFC Flagship Proof Operating Layer; standalone only when no owning batch can own proof",
       "consolidation_posture": "proof-overlay owned",
-      "next_action": "Do not duplicate; owning batch must declare EFC applicability / Yellow ownership."
+      "next_action": "Do not duplicate; this is the next overlay-handoff record after EFC06 closeout and owning batch must declare EFC applicability / Yellow ownership."
     },
     {
       "id": "EFC08",

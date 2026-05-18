@@ -11,10 +11,10 @@ source_of_truth:
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
   train: "Global full-stack execution"
-  batch: "EFC05 Recommendation Court Integration Gate"
+  batch: "EFC06 Goal Thermodynamics And Drift Handling"
   previous_batch: "EFC05 Recommendation Court Integration Gate"
   previous_result: "accepted_yellow"
-  next_eligible_batch: "EFC06 Goal Thermodynamics And Drift Handling"
+  next_eligible_batch: "EFC07 Ambitions Twin Fixture Library"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

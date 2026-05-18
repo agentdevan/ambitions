@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-05-18",
   "post_pk03_total": 146,
-  "next_eligible_batch": "EFC06",
-  "next_eligible_title": "Goal Thermodynamics And Drift Handling",
+  "next_eligible_batch": "EFC07",
+  "next_eligible_title": "Ambitions Twin Fixture Library",
   "source_truth": "GQ01 canonical queue maturity data. Live unfinished current-run state wins; otherwise this queue is the deterministic fallback.",
   "air_fold_in_overlay": {
     "status": "active_planned_fold_in_only",
@@ -884,16 +884,16 @@
     {
       "id": "EFC06",
       "title": "Goal Thermodynamics And Drift Handling",
-      "classification": "executable_now",
-      "reason": "EFC05 is complete / accepted yellow. EFC06 is the next implementation batch.",
-      "blocking_prerequisites": "Complete prior batch EFC05.",
+      "classification": "historical_complete_do_not_run",
+      "reason": "EFC06 Goal Thermodynamics And Drift Handling is complete / Accepted Yellow with closeout in docs/audits/efc06-batch-closeout-report.md and is preserved as overlay-only queue coverage. Do not rerun as an implementation batch.",
+      "blocking_prerequisites": "Complete / Accepted Yellow; do not rerun through normal fallback.",
       "efc_applicability": "invoked"
     },
     {
       "id": "EFC07",
       "title": "Ambitions Twin Fixture Library",
       "classification": "absorbed_as_overlay",
-      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof.",
+      "reason": "EFC is a proof-owner overlay first; standalone execution only when no existing owner batch can produce required proof. This remains the next overlay-handoff record after EFC06 closeout.",
       "blocking_prerequisites": "Existing owner batch must declare invoked/not applicable/accepted Yellow.",
       "efc_applicability": "invoked"
     },
