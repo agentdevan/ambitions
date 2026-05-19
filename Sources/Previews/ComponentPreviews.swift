@@ -10,7 +10,7 @@ private enum PreviewFilter: String, CaseIterable {
 private enum PreviewTab: String, CaseIterable {
     case today = "Today"
     case goals = "Goals"
-    case plan = "Plan"
+    case time = "Time"
     case profile = "You"
 }
 
@@ -76,7 +76,7 @@ private struct DesignSystemPreviewGallery: View {
                     primaryActionTitle: "Start now",
                     content: {
                         HStack {
-                            TimeContextBadge("Free time · 1h 20m open", sourceLabel: "Based on your plan", state: .selected)
+                            TimeContextBadge("Free time · 1h 20m open", sourceLabel: "Based on your schedule", state: .selected)
                             DurationBadge("30 min planned")
                         }
                     }
@@ -196,7 +196,7 @@ private struct DesignSystemPreviewGallery: View {
                     .init(
                         emphasis: .orientation,
                         title: "Start with the one thing that keeps the day together",
-                        subtitle: "A calm module shell for future Today, Goals, Capture, Plan, and You surfaces.",
+                        subtitle: "A calm module shell for future Today, Goals, Capture, Time, and You surfaces.",
                         status: "Ready",
                         accessibilityHint: "Reviews the primary orientation module."
                     )
@@ -274,7 +274,7 @@ private struct DesignSystemPreviewGallery: View {
                     )
 
                     LoadingSkeletonCard(lineCount: 4)
-                    CelebrationBanner(title: "Momentum is compounding", subtitle: "Use this after wins, completed plans, or rhythm milestones.")
+                    CelebrationBanner(title: "Momentum is compounding", subtitle: "Use this after wins, completed steps, or rhythm milestones.")
                 }
 
                 VStack(spacing: 12) {
@@ -304,7 +304,7 @@ private struct DesignSystemPreviewGallery: View {
         switch tab {
         case .today: "sun.max.fill"
         case .goals: "target"
-        case .plan: "calendar"
+        case .time: "clock"
         case .profile: "person.crop.circle"
         }
     }
@@ -373,7 +373,7 @@ private struct DesignSystemPreviewGallery: View {
         case .capture:
             HStack {
                 AmbitionChip("Raw", role: .capture)
-                AmbitionChip("Plan idea", role: .domain)
+                AmbitionChip("Schedule idea", role: .domain)
                 AmbitionChip("10 min", role: .time)
             }
         case .recovery:
