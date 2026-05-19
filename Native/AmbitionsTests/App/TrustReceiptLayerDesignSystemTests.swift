@@ -74,28 +74,32 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
 
     func testSI10TrustReceiptAccessibilitySummaryIsSourceFreshnessAndPrivacyBound() {
         let item = TrustReceiptLayerItem(
-            id: "source-review",
-            kind: .sourceConflict,
-            title: "Source conflict",
-            summary: "Two sources disagree, so Ambitions asks for review before anything changes.",
-            sourceLabel: "Local source index",
-            freshness: .stale,
-            privacyLabel: "Private source",
-            whyLabel: "Sources disagree, so no change is made without review.",
-            changeLabel: "Nothing changed yet.",
-            undoLabel: "No commitment changed",
+            id: "undo-recovery",
+            kind: .undone,
+            title: "Undo recorded",
+            summary: "The prior receipt was reversed and the reversal stayed visible.",
+            sourceLabel: "Recovery receipt",
+            freshness: .localOnly,
+            privacyLabel: "Private undo",
+            whyLabel: "The user reversed the earlier change.",
+            changeLabel: "The reversal was recorded locally.",
+            undoLabel: "Undo unavailable",
             correctionLabel: "Correction stays available.",
-            reviewLabel: "Review source"
+            reviewLabel: "Review undo"
         )
 
-        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Source conflict"))
-        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Local source index"))
-        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Review source"))
-        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Private source"))
-        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Sources disagree"))
-        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Nothing changed yet"))
+        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Undo recorded"))
+        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Recovery receipt"))
+        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Local only"))
+        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Private undo"))
+        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Review undo"))
+        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("The user reversed"))
+        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("The reversal was recorded locally"))
         XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Correction stays available"))
-        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("No commitment changed"))
+        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Undo unavailable"))
+        XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("cloud"))
+        XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("backend"))
+        XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("AI confidence"))
     }
 
     func testFCP06ReceiptDrawerSectionsPreserveTrustFacts() {
@@ -138,6 +142,7 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("guaranteed"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("production ready"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("cloud synced"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("backend"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("AI confidence"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("release ready"))
     }
@@ -178,5 +183,25 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         XCTAssertEqual(bead.visibleSummary, "Proof detail hidden.")
         XCTAssertTrue(bead.requiresReviewBeforeRecommendation)
         XCTAssertFalse(bead.accessibilitySummary.contains("Specific private details"))
+    }
+
+    func testFCP06ProofBeadKeepsFreshnessPrivacyAndRecoveryLabelsVisible() {
+        let bead = ProofBead(
+            id: "proof-recovery",
+            title: "Recovery proof",
+            summary: "The recovery path stayed visible.",
+            sourceLabel: "Source: Recovery receipt",
+            freshness: .blocked,
+            privacyLabel: "Protected state",
+            timestampLabel: "2026-05-18T12:10:00Z",
+            correctionLabel: "Correction unavailable",
+            staleReviewLabel: "Blocked safely until review"
+        )
+
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Recovery proof"))
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Source: Recovery receipt"))
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Blocked safely until review"))
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Protected state"))
+        XCTAssertTrue(bead.accessibilitySummary.localizedCaseInsensitiveContains("Correction unavailable"))
     }
 }

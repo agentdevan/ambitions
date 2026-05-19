@@ -168,6 +168,11 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Recent trust receipts", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Claims locked", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Receipt drawer", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("The drawer keeps source freshness, privacy, correction, undo, and review visible.", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Proof trail", in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["proof-spine"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["trust.why-this"].waitForExistence(timeout: 10))
     }
 
     func testLaunchURLCanLandOnCanonicalTimeSurface() throws {

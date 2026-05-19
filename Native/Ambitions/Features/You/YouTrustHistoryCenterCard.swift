@@ -64,7 +64,7 @@ private struct YouTrustHistoryItemRow: View {
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text("\(item.sourceLabel) · \(item.privacyLabel) · \(item.reversibilityLabel)")
+            Text("\(item.sourceLabel) · \(sourceFreshnessLabel(for: item)) · \(item.privacyLabel) · \(item.reversibilityLabel)")
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -74,7 +74,22 @@ private struct YouTrustHistoryItemRow: View {
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(item.category.title): \(item.title)")
-        .accessibilityValue("\(item.reviewLabel). \(item.sourceLabel). \(item.privacyLabel). \(item.reversibilityLabel).")
+        .accessibilityValue("\(item.reviewLabel). \(sourceFreshnessLabel(for: item)). \(item.sourceLabel). \(item.privacyLabel). \(item.reversibilityLabel).")
         .accessibilityHint("Reviews the local trust history boundary without opening raw logs.")
+    }
+
+    private func sourceFreshnessLabel(for item: YouTrustHistoryItem) -> String {
+        switch item.category {
+        case .receipts, .proof:
+            return item.state == .success ? "Fresh source" : "Review source"
+        case .changes:
+            return item.state == .warning ? "Review source" : "Fresh source"
+        case .sourceReview:
+            return item.state == .warning ? "Review source" : "Source review"
+        case .privacy:
+            return item.state == .success ? "Private and current" : "Private review"
+        case .automation:
+            return item.state == .warning ? "Review needed" : "Fresh source"
+        }
     }
 }

@@ -34,6 +34,20 @@ private struct TrustReceiptLayerPreviewGallery: View {
             reviewLabel: "Why this?"
         ),
         TrustReceiptLayerItem(
+            id: "undone",
+            kind: .undone,
+            title: "Undo recorded",
+            summary: "The prior receipt was reversed and the reversal stayed visible.",
+            sourceLabel: "Recovery receipt",
+            freshness: .fresh,
+            privacyLabel: "Private undo",
+            whyLabel: "The user reversed the earlier change.",
+            changeLabel: "The reversal was recorded locally.",
+            undoLabel: "Undo unavailable",
+            correctionLabel: "Correction stays available.",
+            reviewLabel: "Review undo"
+        ),
+        TrustReceiptLayerItem(
             id: "private",
             kind: .privateItem,
             title: "Sensitive detail hidden",
@@ -73,6 +87,20 @@ private struct TrustReceiptLayerPreviewGallery: View {
             undoLabel: "Undo"
         ),
         TrustReceiptLayerItem(
+            id: "recovery",
+            kind: .blockedSafely,
+            title: "Recovery path blocked safely",
+            summary: "The surface stayed honest about a blocked recovery state instead of implying a hidden change.",
+            sourceLabel: "Recovery path",
+            freshness: .blocked,
+            privacyLabel: "Protected state",
+            whyLabel: "The blocked path keeps the user in control.",
+            changeLabel: "No hidden change was applied.",
+            undoLabel: "Undo unavailable",
+            correctionLabel: "Correction unavailable",
+            reviewLabel: "Review recovery"
+        ),
+        TrustReceiptLayerItem(
             id: "boundary",
             kind: .professionalBoundary,
             title: "Professional boundary",
@@ -97,6 +125,77 @@ private struct TrustReceiptLayerPreviewGallery: View {
                     onReview: {}
                 )
 
+                WhyThisAffordance(
+                    summary: "Receipts show what changed, why it changed, and what remains reviewable.",
+                    evidence: "No hosted backend, account, or AI confidence language is implied.",
+                    onOpen: {}
+                )
+
+                ReceiptDrawer(
+                    title: "Receipt drawer",
+                    subtitle: "The drawer keeps source freshness, privacy, correction, undo, and review visible.",
+                    sections: [
+                        ReceiptDrawerSection(
+                            id: "recent",
+                            title: "Recent receipts",
+                            subtitle: "Normal, undo, and moved states stay separate from review-only states.",
+                            items: Array(items.prefix(4))
+                        ),
+                        ReceiptDrawerSection(
+                            id: "recovery",
+                            title: "Recovery states",
+                            subtitle: "Private, stale, offline, and blocked states stay visible without hidden claims.",
+                            items: Array(items.suffix(4))
+                        )
+                    ],
+                    onReview: { _ in },
+                    onUndo: { _ in }
+                )
+
+                ProofSpine(
+                    title: "Proof trail",
+                    subtitle: "Proof keeps source freshness and privacy attached to the visible trail.",
+                    beads: [
+                        ProofBead(
+                            id: "bead-saved",
+                            title: items[0].title,
+                            summary: items[0].summary,
+                            sourceLabel: items[0].sourceLabel,
+                            freshness: items[0].freshness,
+                            privacyLabel: items[0].privacyLabel,
+                            timestampLabel: "2026-05-18T12:00:00Z",
+                            correctionLabel: items[0].correctionLabel,
+                            staleReviewLabel: items[0].reviewLabel
+                        ),
+                        ProofBead(
+                            id: "bead-private",
+                            title: items[3].title,
+                            summary: items[3].summary,
+                            sourceLabel: items[3].sourceLabel,
+                            freshness: items[3].freshness,
+                            privacyLabel: items[3].privacyLabel,
+                            timestampLabel: "2026-05-18T12:05:00Z",
+                            correctionLabel: items[3].correctionLabel,
+                            staleReviewLabel: items[3].reviewLabel,
+                            redactedDetail: items[3].redactedDetail
+                        ),
+                        ProofBead(
+                            id: "bead-recovery",
+                            title: items[6].title,
+                            summary: items[6].summary,
+                            sourceLabel: items[6].sourceLabel,
+                            freshness: items[6].freshness,
+                            privacyLabel: items[6].privacyLabel,
+                            timestampLabel: "2026-05-18T12:10:00Z",
+                            correctionLabel: items[6].correctionLabel,
+                            staleReviewLabel: "Blocked safely until review"
+                        )
+                    ]
+                )
+
+                SourceFreshnessLabel(.fresh)
+                SourceFreshnessLabel(.localOnly)
+
                 InlineTrustReceipt(item: items[1], onReview: {}, onUndo: {})
 
                 ReceiptDrawer(
@@ -119,7 +218,7 @@ private struct TrustReceiptLayerPreviewGallery: View {
                     onUndo: { _ in }
                 )
 
-                ProofPreview(item: items[2])
+                ProofPreview(item: items[3])
 
                 SourceFreshnessLabel(.stale)
 

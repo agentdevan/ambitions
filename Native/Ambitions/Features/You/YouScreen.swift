@@ -2069,6 +2069,26 @@ private struct YouTrustCenterCard: View {
                     }
                 }
 
+                WhyThisAffordance(
+                    summary: "Receipts explain what changed, why it changed, and when review, correction, or undo is available.",
+                    evidence: "The surface stays local, inspectable, and explicit about source freshness instead of implying hosted intelligence.",
+                    onOpen: {}
+                )
+
+                ReceiptDrawer(
+                    title: "Receipt drawer",
+                    subtitle: "Receipt drawer keeps source freshness, privacy, correction, undo, and review paths visible.",
+                    sections: trustReceiptDrawerSections,
+                    onReview: { _ in },
+                    onUndo: { _ in }
+                )
+
+                ProofSpine(
+                    title: "Proof trail",
+                    subtitle: "Proof stays attached to source freshness, privacy, correction, and review state.",
+                    beads: trustProofTrailBeads
+                )
+
                 TrustReceiptStack(
                     title: "Recent trust receipts",
                     subtitle: "Privacy-safe summaries of what changed, why, and whether correction or undo is available.",
@@ -2104,6 +2124,30 @@ private struct YouTrustCenterCard: View {
                 state: receipt.trustReceiptVisualState
             )
         }
+    }
+
+    private var trustReceiptDrawerSections: [ReceiptDrawerSection] {
+        let receipts = trustCenter.receiptSummaries
+        guard receipts.isEmpty == false else { return [] }
+
+        return [
+            ReceiptDrawerSection(
+                id: "recent-receipts",
+                title: "Recent receipts",
+                subtitle: "What changed, why, and what remains reviewable or reversible.",
+                items: receipts.prefix(3).map(\.trustReceiptLayerItem)
+            ),
+            ReceiptDrawerSection(
+                id: "recovery-receipts",
+                title: "Recovery and review",
+                subtitle: "Local-only, blocked, and confirmation-gated paths stay visible.",
+                items: receipts.suffix(max(0, receipts.count - 3)).map(\.trustReceiptLayerItem)
+            )
+        ]
+    }
+
+    private var trustProofTrailBeads: [ProofBead] {
+        trustCenter.receiptSummaries.prefix(5).map(\.proofTrailBead)
     }
 }
 
@@ -2334,6 +2378,131 @@ private extension ActionReceiptCorrectionAvailability {
         case .availableWithReason: "Correction available with reason"
         case .unavailable: "Correction unavailable"
         case .notSupportedYet: "Correction not supported yet"
+        }
+    }
+}
+
+private extension ActionReceiptDisplaySummary {
+    var trustReceiptLayerItem: TrustReceiptLayerItem {
+        TrustReceiptLayerItem(
+            id: id,
+            kind: trustReceiptKind,
+            title: title,
+            summary: summary,
+            sourceLabel: sourceDomain.trustReceiptSourceLabel,
+            freshness: safetyState.trustReceiptFreshnessState,
+            privacyLabel: safetyState.trustReceiptPrivacyLabel,
+            whyLabel: trustReceiptWhyLabel,
+            changeLabel: trustReceiptChangeLabel,
+            undoLabel: undoAvailability.trustReceiptUndoLabel,
+            correctionLabel: correctionAvailability.trustReceiptCorrectionLabel,
+            reviewLabel: trustReceiptReviewLabel
+        )
+    }
+
+    var proofTrailBead: ProofBead {
+        ProofBead(
+            id: id,
+            title: title,
+            summary: summary,
+            sourceLabel: sourceDomain.trustReceiptSourceLabel,
+            freshness: safetyState.trustReceiptFreshnessState,
+            privacyLabel: safetyState.trustReceiptPrivacyLabel,
+            timestampLabel: occurredAt,
+            correctionLabel: correctionAvailability.trustReceiptCorrectionLabel,
+            staleReviewLabel: trustReceiptStaleReviewLabel
+        )
+    }
+
+    var trustReceiptKind: TrustReceiptLayerKind {
+        switch (safetyState, resultState) {
+        case (.safeFailure, _), (.externalUnavailable, _):
+            return .blockedSafely
+        case (.confirmationRequired, _):
+            return .needsReview
+        case (_, .undoAvailable):
+            return .undone
+        case (_, .correctionAvailable):
+            return .sourceChange
+        case (_, .moved):
+            return .moved
+        case (_, .changed), (_, .created), (_, .scheduled), (_, .attached), (_, .completed):
+            return .proofSaved
+        case (_, .failedSafely), (_, .needsConfirmation):
+            return .blockedSafely
+        case (_, .noOp), (_, .undoUnavailable), (_, .detached), (_, .exportedPrepared), (_, .draftedPrepared):
+            return .staleSource
+        }
+    }
+
+    var trustReceiptWhyLabel: String {
+        nextActionTitle ?? "User review keeps the next change visible and inspectable."
+    }
+
+    var trustReceiptChangeLabel: String {
+        switch resultState {
+        case .created: "A new local receipt was recorded."
+        case .changed: "The local record changed with a receipt."
+        case .scheduled: "A scheduled change was recorded locally."
+        case .moved: "The item moved with a receipt."
+        case .attached: "The item was attached with a receipt."
+        case .detached: "The item was detached with a receipt."
+        case .exportedPrepared: "Export was prepared locally."
+        case .draftedPrepared: "Draft preparation was recorded."
+        case .completed: "The completed step remains visible as proof."
+        case .failedSafely: "The change stayed blocked safely."
+        case .needsConfirmation: "The change waits for confirmation."
+        case .noOp: "No hidden change happened."
+        case .undoAvailable: "Undo remains available locally."
+        case .undoUnavailable: "Undo is not available for this receipt."
+        case .correctionAvailable: "Correction remains available locally."
+        }
+    }
+
+    var trustReceiptReviewLabel: String {
+        switch safetyState {
+        case .normal: "Review receipt"
+        case .degraded: "Review source"
+        case .safeFailure: "Review blocked change"
+        case .externalUnavailable: "Review local-only receipt"
+        case .confirmationRequired: "Review before confirming"
+        }
+    }
+
+    var trustReceiptStaleReviewLabel: String? {
+        switch safetyState {
+        case .normal:
+            return nil
+        case .degraded:
+            return "Review before broader use."
+        case .safeFailure:
+            return "Blocked safely until the source is reviewed."
+        case .externalUnavailable:
+            return "Source is unavailable, so the receipt stays local."
+        case .confirmationRequired:
+            return "Wait for confirmation before broader use."
+        }
+    }
+}
+
+private extension ActionReceiptSafetyState {
+    var trustReceiptFreshnessState: SourceFreshnessState {
+        switch self {
+        case .normal: .fresh
+        case .degraded: .partial
+        case .safeFailure: .blocked
+        case .externalUnavailable: .offline
+        case .confirmationRequired: .stale
+        }
+    }
+
+    var trustReceiptPrivacyLabel: String {
+        switch self {
+        case .normal: "Private by default"
+        case .degraded: "Private summary"
+        case .safeFailure: "Protected receipt"
+        case .externalUnavailable: "Local only"
+        case .confirmationRequired: "Private until confirmed"
         }
     }
 }

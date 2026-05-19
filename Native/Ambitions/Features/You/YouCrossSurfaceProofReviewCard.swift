@@ -57,7 +57,7 @@ private struct YouCrossSurfaceProofReviewRow: View {
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text("\(item.sourceLabel) · \(item.privacyLabel) · \(item.routeLabel)")
+            Text("\(item.sourceLabel) · \(sourceFreshnessLabel(for: item)) · \(item.privacyLabel) · \(item.routeLabel)")
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -67,7 +67,20 @@ private struct YouCrossSurfaceProofReviewRow: View {
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
         .accessibilityElement(children: .combine)
         .accessibilityLabel(item.title)
-        .accessibilityValue("\(item.reviewLabel). \(item.sourceLabel). \(item.privacyLabel). \(item.routeLabel).")
+        .accessibilityValue("\(item.reviewLabel). \(sourceFreshnessLabel(for: item)). \(item.sourceLabel). \(item.privacyLabel). \(item.routeLabel).")
         .accessibilityHint("Reviews the cross-surface proof boundary without opening raw logs.")
+    }
+
+    private func sourceFreshnessLabel(for item: YouCrossSurfaceProofReviewItem) -> String {
+        switch item.state {
+        case .success: "Fresh source"
+        case .warning: "Review source"
+        case .celebration: "Proof visible"
+        case .selected: "Fresh source"
+        case .loading: "Local only"
+        case .disabled: "Blocked safely"
+        case .pressed: "Review source"
+        case .default: "Review source"
+        }
     }
 }
