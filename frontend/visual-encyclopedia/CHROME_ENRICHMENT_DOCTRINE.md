@@ -41,6 +41,9 @@ This doctrine is an enrichment overlay. It does not replace existing recipes for
 - contextual sheets, not disconnected modals
 - one dominant object per top-level destination
 - active IA exactly `Today / Goals / Capture / Time / You`
+- global shell binding to named flagship objects: Today -> Reality Meridian + Start Here, Goals -> Constellation Atlas, Capture -> Atmosphere Composer, Time -> LifeShape Field, You -> User System Profile
+- receipts and why-this surfaces that expose source freshness, proof basis, and no-receipt reasons when local proof is unavailable
+- accessibility fallbacks that preserve meaning when color, glow, motion, or decorative chrome are removed
 
 If older frontend language conflicts with this doctrine and is not higher authority, prefer the chrome pattern that preserves the dominant object, the current reality state, and the local proof trail.
 
@@ -66,6 +69,7 @@ Global chrome must be shared enough that Ambitions feels like one product, but f
 - Premium bottom tab bar with exactly `Today / Goals / Capture / Time / You`.
 - Contextual sheet system for inspection, closure, recovery, adjustment, conflict, and proof.
 - Receipt micro-layer attached to the object or state it explains.
+- Source freshness line or equivalent local provenance cue wherever a recommendation, reflow, or proof claim depends on it.
 - Continuity strip only when an active execution, closure, recovery, reflow, or proof state needs to persist across surfaces.
 - Thumb-zone ownership for primary actions.
 - Safe-area-aware composition that respects one-handed iPhone use.
@@ -77,6 +81,7 @@ Global chrome must be shared enough that Ambitions feels like one product, but f
 - Do not use equal-weight card stacks as the primary orientation pattern.
 - Do not hide mutations. Any meaningful local adaptation needs a receipt, undo, or explicit no-receipt reason.
 - Do not use color, glow, or motion as the only state carrier.
+- Do not treat source freshness, receipt availability, or accessibility fallback as implied by decorative chrome alone.
 
 ## Destination Chrome Contracts
 
@@ -99,6 +104,7 @@ Required Today chrome:
 - The live current-time glow sits at the exact current time, even when the plan has drifted.
 - Start Here is physically related to the Meridian and never reads as a generic recommendation card.
 - Start Here includes recommended step, why now, goal thread, time fit, local receipt cue, primary action, and adjustment path.
+- Start Here receipts should expose source freshness and proof basis, not just a generic explanation.
 - Prior unresolved steps appear as soft closure prompts, not shameful overdue items.
 - Compact `Local · Ambitions` identity may appear where it anchors trust without becoming marketing chrome.
 - Proof/recovery remains sparse at rest and inspectable on demand.
@@ -255,6 +261,12 @@ Every chrome primitive must pass these gates:
 8. Sheets preserve focus and dismiss predictably.
 9. Local/privacy states are not icon-only.
 10. No surface requires the user to infer state from glow, animation, or celestial decoration.
+
+## Handoff Proof References
+
+When a UI-affecting handoff is prepared, the handoff notes must name the required visual and accessibility references separately, such as the current screenshot or preview artifact, the accessibility evidence artifact, and the report or packet that ties them to the current commit.
+
+Those references are handoff requirements only. This doctrine does not claim that a docs-only hardening pass produced screenshots, simulator output, or accessibility conformance.
 
 ## Anti-Patterns
 

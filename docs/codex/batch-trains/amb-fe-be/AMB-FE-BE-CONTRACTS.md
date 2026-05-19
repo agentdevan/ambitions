@@ -6,6 +6,8 @@ Status: Installed docs-only contract note
 
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - `Plan` stays an internal compatibility seam or contextual noun only where current truth allows it.
+- Chrome contracts must bind the global shell to object-first surfaces and named flagship objects: Today -> Reality Meridian + Start Here, Goals -> Constellation Atlas, Capture -> Atmosphere Composer, Time -> LifeShape Field, You -> User System Profile.
+- Chrome and handoff copy must treat source freshness, local proof, receipt/why-this paths, and accessibility fallbacks as mandatory contract terms whenever UI language is involved.
 - No prompt in this train may create a new top-level destination, duplicate canon, or duplicate repo OS.
 - No prompt may claim release, device, accessibility, privacy/legal, CI, hosted AI, hosted sync, custom cloud user-data storage, or integrated proof without current evidence.
 - No prompt may widen into `.codex/runs/` staging, branch creation, or unrelated cleanup.
@@ -14,7 +16,7 @@ Status: Installed docs-only contract note
 
 ## FE contract emphasis
 
-FE prompts must require visual and accessibility proof expectations wherever the batch touches UI.
+FE prompts must require visual proof references, accessibility proof references, and the exact screenshot/preview/report artifact names expected for a later UI-affecting handoff wherever the batch touches UI. These references are required handoff inputs only; they are not proof that the batch produced screenshots or accessibility conformance.
 
 ## BE contract emphasis
 

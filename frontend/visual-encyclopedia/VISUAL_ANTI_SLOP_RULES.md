@@ -35,6 +35,9 @@ Status: Active anti-generic control plane
 - "make it native"
 - "shared object system"
 - "related commitments, proof, source, state markers"
+- "chrome contract" when it does not name the object, source freshness cue, receipt path, accessibility fallback, or implementation boundary
+- "visual proof" when it does not name the required artifact type
+- "accessibility proof" when it does not name the fallback, audit path, or evidence artifact
 
 ## Required Replacement
 
@@ -46,6 +49,7 @@ Whenever one of the red-flag phrases appears, replace it with:
 - the source/receipt behavior
 - the accessibility fallback
 - the implementation boundary
+- the specific handoff artifacts when the doc is about a UI-affecting batch
 
 ## Enforcement Goal
 

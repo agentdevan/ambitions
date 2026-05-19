@@ -28,6 +28,10 @@ Fails if You can be described as a profile/settings page.
 
 Fails if the interface depends on decorative stars, neon glow, sci-fi HUD lines, fake glass everywhere, unreadable transparency, or dashboard metrics.
 
+### Generic Chrome Shell
+
+Fails if chrome is described as a neutral shell without a named dominant object, source freshness cue, receipt path, accessibility fallback, or action boundary.
+
 ## Required Alternatives
 
 - Today -> current-state meridian
@@ -35,3 +39,5 @@ Fails if the interface depends on decorative stars, neon glow, sci-fi HUD lines,
 - Capture -> local composer with route reveal
 - Goals -> relational atlas
 - You -> visible local runtime profile
+- Shell -> object-first chrome with receipts and fallbacks
+- Proof -> source freshness plus inspectable local receipt
