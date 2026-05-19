@@ -423,6 +423,18 @@ def generate_design_tokens() -> None:
             ## Rule
 
             Tokens encode Ambitions product meaning. They are not a color dump.
+
+            ## Current Architecture
+
+            The token tree is intentionally bucketed rather than generic:
+
+            - foundation: named surface/material colors such as graphite, quiet glass, and trace accents
+            - semantic: product-specific meaning colors such as Today, Capture, proof, source freshness, and trust
+            - component: spacing, radius, and panel geometry for reusable surface treatment
+            - motion / haptics / accessibility: interaction and fallback contracts
+            - objects / states: Reality Meridian, Start Here-adjacent surface behavior, closure, proof, recovery, and freshness semantics
+
+            Quiet Glass and Graphite Recess remain named material/surface concepts. Reality Meridian remains the Today flagship object. Start Here remains a Today-facing command concept. The live theme is the implementation truth for typography, spacing, and material rendering; DesignTokens keeps those meanings inspectable without creating a second authority root.
             """,
         ),
     )
@@ -820,7 +832,7 @@ def generate_design_tokens() -> None:
                 ["Validator reports", "report-only proof"],
                 ["Release/device/accessibility claims", "unproven"],
             ],
-            "This ledger is an authority map, not proof of runtime behavior.",
+            "The design-token tree stays bucketed by current source truth rather than a generic theme system. Surface, material, typography, spacing, geometry, motion, haptic, accessibility, proof, source freshness, closure, recovery, Start Here, Reality Meridian, Quiet Glass, and Graphite Recess are expressed across the existing token/source/theme seams, not through a second authority root.\n\nThis ledger is an authority map, not proof of runtime behavior.",
         ),
     )
     write_text(

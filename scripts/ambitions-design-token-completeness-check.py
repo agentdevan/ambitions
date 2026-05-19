@@ -79,6 +79,11 @@ def main() -> int:
         "debt_tokens": debt_tokens,
         "missing_tokens": missing_tokens,
         "status": overall_status,
+        "architecture_notes": [
+            "Surface, material, typography, spacing, and geometry are expressed through the existing foundation/component/theme seams rather than a second token root.",
+            "Motion, haptics, accessibility, proof, source freshness, closure, and recovery remain explicit control-plane meanings in the current token buckets.",
+            "Start Here, Reality Meridian, Quiet Glass, and Graphite Recess are represented as named Ambitions concepts, not generic theme knobs.",
+        ],
         "tokens": entries,
     }
     write_json(REPORT_JSON, payload)
