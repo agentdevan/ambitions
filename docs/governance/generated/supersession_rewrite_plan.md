@@ -635,6 +635,8 @@
 - classify/archive/rewrite: docs/codex/LDI_SOURCE_PACK_SCHEMA.md
 - classify/archive/rewrite: docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md
 - classify/archive/rewrite: docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md
+- classify/archive/rewrite: docs/codex/MCP02_CONTROLLED_PROOF_MCP.md
+- classify/archive/rewrite: docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md
 - classify/archive/rewrite: docs/codex/MOAT_RUNTIME_GOLDEN_SCENARIOS.md
 - classify/archive/rewrite: docs/codex/MOAT_RUNTIME_INTEGRATION_MASTER_PLAN.md
 - classify/archive/rewrite: docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md
@@ -664,6 +666,10 @@
 - classify/archive/rewrite: docs/codex/batch-trains/README.md
 - classify/archive/rewrite: docs/codex/batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md
 - classify/archive/rewrite: docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md
+- classify/archive/rewrite: docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-MANIFEST.md
+- classify/archive/rewrite: docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-RISKS.md
+- classify/archive/rewrite: docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md
+- classify/archive/rewrite: docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md
 - classify/archive/rewrite: docs/codex/batches/AFI01_Canon_Language_Purge.md
 - classify/archive/rewrite: docs/codex/batches/AFI02_IA_Hierarchy_Lock.md
 - classify/archive/rewrite: docs/codex/batches/AFI03_Flagship_Object_Silhouettes.md
@@ -761,9 +767,14 @@
 - classify/archive/rewrite: docs/codex/batches/batch-58.md
 - classify/archive/rewrite: docs/codex/batches/batch-59.md
 - classify/archive/rewrite: docs/codex/batches/batch-60.md
+- classify/archive/rewrite: docs/codex/chatgpt/AMB-CHATGPT-CODEX-HANDOFF-TEMPLATE.md
+- classify/archive/rewrite: docs/codex/chatgpt/AMB-CHATGPT-REPO-QUESTION-PATTERNS.md
 - classify/archive/rewrite: docs/codex/fixtures/ldi/redteam-fixture-manifest.md
+- classify/archive/rewrite: docs/codex/os/AMB-CODEX-OS-AUTHORITY-RESOLVER.md
+- classify/archive/rewrite: docs/codex/os/AMB-CODEX-OS-FLAGSHIP-UPGRADE-MANIFEST.md
 - classify/archive/rewrite: docs/codex/quality/AQOS_SCRIPT_AND_TOOL_MAP.md
 - classify/archive/rewrite: docs/codex/repo-audit-baseline.md
+- classify/archive/rewrite: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
 - classify/archive/rewrite: docs/governance/ACTIVE_EXECUTION_GRAPH.md
 - classify/archive/rewrite: docs/governance/AUTHORITY_HIERARCHY.md
 - classify/archive/rewrite: docs/governance/AUTOMATED_REGISTRY_GENERATION_PLAN.md
@@ -850,6 +861,10 @@
 - classify/archive/rewrite: prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-002.md
 - classify/archive/rewrite: prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-003.md
 - classify/archive/rewrite: prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-004.md
+- classify/archive/rewrite: prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md
+- classify/archive/rewrite: prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md
+- classify/archive/rewrite: prompts/batches/AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00.md
+- classify/archive/rewrite: prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
 - classify/archive/rewrite: prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md
 - classify/archive/rewrite: prompts/batches/AMB-REPO-AUTHORITY-01-FRONT-DOOR-PORTALS.md
 - classify/archive/rewrite: prompts/batches/AMB-REPO-AUTHORITY-02-FRONTEND-VISUAL-ENCYCLOPEDIA.md
@@ -1000,6 +1015,7 @@
 - classify/archive/rewrite: prompts/batches/MRI49-FINAL-REPO-HYGIENE-OBSOLETE-AUTHORITY-PRUNE.md
 - classify/archive/rewrite: prompts/batches/MRI50-FOUNDER-ACCEPTANCE-RELEASE-CANDIDATE-GATE.md
 - classify/archive/rewrite: prompts/batches/OBS00-OPENAI-BUILD-SUITE-INSTALL.md
+- classify/archive/rewrite: prompts/batches/OS-FLAGSHIP-01-AUTHORITY-RESOLVER.md
 - classify/archive/rewrite: prompts/batches/PFC31.md
 - classify/archive/rewrite: prompts/batches/PFC32.md
 - classify/archive/rewrite: prompts/batches/PFC33.md
@@ -1127,3 +1143,11 @@
 - classify/archive/rewrite: prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03-MERGED.md
 - classify/archive/rewrite: prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md
 - classify/archive/rewrite: prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md
+- classify/archive/rewrite: prompts/batches/amb-fe-be/AMB-FE-BE-CONTRACT-FREEZE-01.md
+- classify/archive/rewrite: prompts/batches/amb-fe-be/AMB-FE-BE-INTEGRATED-PROOF-99.md
+- classify/archive/rewrite: prompts/batches/amb-fe-be/AMB-FE-BE-PREFLIGHT-00.md
+- classify/archive/rewrite: prompts/batches/amb-fe-be/BE-01-RUNTIME-BASELINE.md
+- classify/archive/rewrite: prompts/batches/amb-fe-be/FE-01-CANON-FREEZE.md
+- classify/archive/rewrite: prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md
+- classify/archive/rewrite: prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md
+- classify/archive/rewrite: prompts/templates/ambitions-audit-template.md

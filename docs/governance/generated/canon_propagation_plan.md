@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-18T12:13:56-04:00
+Generated: 2026-05-19T00:06:35-04:00
 
 ## Plan → Time
 
@@ -473,6 +473,10 @@ Generated: 2026-05-18T12:13:56-04:00
 - docs/codex/FLAGSHIP_COMPLETION_OBJECT_SCORECARD.md
 - docs/codex/frontend-implementation/FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM.md
 - docs/codex/playbooks/XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK.md
+- docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+- docs/codex/chatgpt/AMB-CHATGPT-REPO-QUESTION-PATTERNS.md
+- docs/codex/chatgpt/AMB-CHATGPT-HANDOFF-OS.md
+- docs/codex/chatgpt/AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS.md
 - docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md
 - docs/codex/batches/HPS01_Verified_Human_Progress_OS_Category_Lock_Prompt.md
 - docs/codex/batches/EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt.md
@@ -699,6 +703,10 @@ Generated: 2026-05-18T12:13:56-04:00
 - docs/codex/batch-trains/F04_F06_Step_Closure_Proof_Train.md
 - docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md
 - docs/codex/batch-trains/F03_5_Today_Architecture_Hardening.md
+- docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md
+- docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md
+- docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-CONTRACTS.md
+- docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md
 - docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md
 - docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md
 - docs/codex/visual-quality/FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP.md
@@ -1081,6 +1089,7 @@ Generated: 2026-05-18T12:13:56-04:00
 - prompts/batches/RHC03.md
 - prompts/batches/PK05.md
 - prompts/batches/SA21.md
+- prompts/batches/AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00.md
 - prompts/batches/MRI07-AMBITION-GRAPH-CROSS-SURFACE-WIRING.md
 - prompts/batches/SA15.md
 - prompts/batches/PFC35.md
@@ -1201,6 +1210,7 @@ Generated: 2026-05-18T12:13:56-04:00
 - prompts/batches/PK39.md
 - prompts/batches/ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06.md
 - prompts/batches/CS02C.md
+- prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
 - prompts/batches/MRI40-VISUAL-MOAT-EVALS.md
 - prompts/batches/MOAT-ALIGNMENT-01.md
 - prompts/batches/CS03C.md
@@ -1225,6 +1235,11 @@ Generated: 2026-05-18T12:13:56-04:00
 - prompts/batches/ALIGN-01-NAMING.md
 - prompts/batches/PX07.md
 - prompts/batches/SA09.md
+- prompts/batches/amb-fe-be/AMB-FE-BE-CONTRACT-FREEZE-01.md
+- prompts/batches/amb-fe-be/FE-06-SHELL-MIGRATION.md
+- prompts/batches/ui-flagship/UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM.md
+- prompts/batches/ui-flagship/UI-STUDIO-05-FIVE-SURFACE-COMPOSITION.md
+- prompts/batches/ui-flagship/UI-STUDIO-01-SURFACE-BRIEF-SYSTEM.md
 - Sources/Components/ShellChromePrimitives.swift
 - Sources/Components/AmbitionsExtendedTactileKit.swift
 - Sources/Components/TopLevelSurfaceCompositionPrimitives.swift
@@ -1235,7 +1250,6 @@ Generated: 2026-05-18T12:13:56-04:00
 - Sources/Accessibility/AccessibilityNutrition.swift
 - Native/AmbitionsTests/Captures/CapturePlacementReviewStateTests.swift
 - Native/AmbitionsTests/Insights/InsightsFeatureServiceTests.swift
-- Native/AmbitionsTests/App/AppShellNavigationTests.swift
 - Native/AmbitionsTests/App/CalendarRealityServiceTests.swift
 - Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift
 - Native/AmbitionsTests/App/AppShellChromeTests.swift
@@ -1250,7 +1264,6 @@ Generated: 2026-05-18T12:13:56-04:00
 - Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift
 - Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift
 - Native/AmbitionsTests/App/AppIntentRoutingTests.swift
-- Native/AmbitionsTests/App/ExternalRoutingTests.swift
 - Native/AmbitionsTests/App/AppContainerFactoryTests.swift
 - Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift
 - Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift
@@ -1313,6 +1326,7 @@ Generated: 2026-05-18T12:13:56-04:00
 - Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamNorthStarModelsTests.swift
 - Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamPathPortfolioModelsTests.swift
 - Native/AmbitionsTests/Domain/AmbitionsOSRealityDriftModelsTests.swift
+- Native/AmbitionsTests/Domain/AmbitionsOSVerticalSliceProofModelsTests.swift
 - Native/AmbitionsTests/Domain/AmbitionsOSSourceTruthModelsTests.swift
 - Native/AmbitionsTests/Domain/GoalPathCompilerModelsTests.swift
 - Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModelsTests.swift

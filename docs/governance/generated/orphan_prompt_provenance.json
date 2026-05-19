@@ -1,5 +1,20 @@
 {
   "buckets": {
+    "candidate_orphan": [
+      {
+        "commit_count": 0,
+        "confidence": "MEDIUM",
+        "governance_file_count": 0,
+        "implementation_file_count": 0,
+        "prompt_files": [
+          ".codex/runs/FE-09-COMPONENT-SYSTEM/20260519T024050Z/prompts/03-review.prompt.md"
+        ],
+        "proof_file_count": 2,
+        "reason": "Prompt exists without automatic commit/proof/implementation linkage.",
+        "state": "QUEUED_OR_BLOCKED",
+        "train_id": "FE09"
+      }
+    ],
     "manifest_only_queued": [
       {
         "commit_count": 0,
@@ -2261,6 +2276,19 @@
         "train_id": "MCP01"
       },
       {
+        "commit_count": 1,
+        "confidence": "MEDIUM",
+        "governance_file_count": 3,
+        "implementation_file_count": 0,
+        "prompt_files": [
+          "docs/codex/batches/MCP02_Controlled_Proof_MCP_Prompt.md"
+        ],
+        "proof_file_count": 3,
+        "reason": "Prompt has commit lineage and evidence linkage but no implementation files.",
+        "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
+        "train_id": "MCP02"
+      },
+      {
         "commit_count": 2,
         "confidence": "MEDIUM",
         "governance_file_count": 35,
@@ -3832,6 +3860,29 @@
         "train_id": "PK01"
       },
       {
+        "commit_count": 13,
+        "confidence": "MEDIUM",
+        "governance_file_count": 8,
+        "implementation_file_count": 0,
+        "prompt_files": [
+          "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md",
+          "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE.md",
+          "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md",
+          "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md",
+          "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-STATUS.md",
+          "docs/codex/batch-trains/post-23-truth-audit/README.md",
+          "prompts/batches/post-23-truth-audit/AMB-POST23-00-COMPLETION-SENTINEL.md",
+          "prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md",
+          "prompts/batches/post-23-truth-audit/AMB-POST23-02-UNDERDELIVERY-REPAIR.md",
+          "prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md",
+          "prompts/batches/post-23-truth-audit/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md"
+        ],
+        "proof_file_count": 1,
+        "reason": "Prompt has commit lineage and evidence linkage but no implementation files.",
+        "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
+        "train_id": "POST23"
+      },
+      {
         "commit_count": 2,
         "confidence": "MEDIUM",
         "governance_file_count": 83,
@@ -5281,12 +5332,14 @@
         "implementation_file_count": 0,
         "prompt_files": [
           ".codex/reports/current-batch-train-state.md",
+          ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/03-review.prompt.md",
           ".codex/state/active-batch.yml",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
           "docs/codex/AMB_REMAINING_BATCH_REFERENCE.md",
           "prompts/batches/CS02C.md"
         ],
-        "proof_file_count": 0,
+        "proof_file_count": 3,
         "reason": "Prompt is linked to governance/canon files and appears docs/governance-only.",
         "state": "QUEUED_OR_BLOCKED",
         "train_id": "CSCS02C"
@@ -5641,19 +5694,6 @@
         "reason": "Prompt is linked to governance/canon files and appears docs/governance-only.",
         "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
         "train_id": "IR01"
-      },
-      {
-        "commit_count": 0,
-        "confidence": "MEDIUM",
-        "governance_file_count": 3,
-        "implementation_file_count": 0,
-        "prompt_files": [
-          "docs/codex/batches/MCP02_Controlled_Proof_MCP_Prompt.md"
-        ],
-        "proof_file_count": 3,
-        "reason": "Prompt is linked to governance/canon files and appears docs/governance-only.",
-        "state": "QUEUED_OR_BLOCKED",
-        "train_id": "MCP02"
       },
       {
         "commit_count": 0,
@@ -7327,6 +7367,8 @@
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
           ".codex/reports/current-batch-train-state.md",
+          ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/03-review.prompt.md",
           ".codex/runs/EFC18/20260518T155839Z/prompts/01-plan.prompt.md",
           ".codex/runs/EFC18/20260518T155839Z/prompts/02-bounded-patch.prompt.md",
           ".codex/runs/EFC18/20260518T155839Z/prompts/03-review.prompt.md",
@@ -7348,7 +7390,7 @@
           "prompts/batches/CS02C.md",
           "prompts/batches/EFC18.md"
         ],
-        "proof_file_count": 25,
+        "proof_file_count": 28,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "QUEUED_OR_BLOCKED",
         "train_id": "CS02C"
@@ -8907,6 +8949,8 @@
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
           ".codex/reports/current-batch-train-state.md",
+          ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/03-review.prompt.md",
           ".codex/runs/EFC17/20260518T153838Z/prompts/01-plan.prompt.md",
           ".codex/runs/EFC17/20260518T153838Z/prompts/02-bounded-patch.prompt.md",
           ".codex/runs/EFC17/20260518T153838Z/prompts/03-review.prompt.md",
@@ -8928,7 +8972,7 @@
           "prompts/batches/EFC18.md",
           "prompts/batches/QUEUE-INTEL-CODEXOS-UPGRADE-01.md"
         ],
-        "proof_file_count": 27,
+        "proof_file_count": 30,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "EFC18"
@@ -29304,7 +29348,7 @@
           "docs/codex/batches/SI17_Top_Level_Surface_Composition_Implementation_Prompt.md",
           "docs/codex/batches/SI18_Signature_Interface_Handoff_And_Product_Depth_Readiness_Prompt.md"
         ],
-        "proof_file_count": 15,
+        "proof_file_count": 16,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "SI17"
@@ -29418,11 +29462,12 @@
     ]
   },
   "counts": {
+    "candidate_orphan": 1,
     "manifest_only_queued": 67,
-    "proven_evidence_or_docs": 148,
-    "proven_governance_only": 126,
+    "proven_evidence_or_docs": 150,
+    "proven_governance_only": 125,
     "proven_implemented": 341,
     "queued_prompt_backed": 8
   },
-  "generated_at": "2026-05-18T16:25:41.546145+00:00"
+  "generated_at": "2026-05-19T04:36:03.571801+00:00"
 }

@@ -1,10 +1,10 @@
 # Ambitions Governance Dashboard
 
-Generated: 2026-05-18T12:13:56-04:00
+Generated: 2026-05-19T00:06:35-04:00
 
 ## Snapshot
 
-- Trains detected: 690
+- Trains detected: 692
 - Unresolved reconciliation states: 0
 - Orphan prompt candidates: 132
 - Completion proof gaps: 0

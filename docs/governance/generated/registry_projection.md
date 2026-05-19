@@ -1,6 +1,6 @@
 # Generated Ambitions Reconciled Registry Projection
 
-Generated: 2026-05-18T12:13:56-04:00
+Generated: 2026-05-19T00:06:35-04:00
 
 This file is generated from local repository data by `scripts/governance/ambitions-governance-reconcile.py`.
 Do not hand-edit generated output; update source files or governance rules and regenerate.
@@ -195,7 +195,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | CS02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 12 | 1 | 0 | 20 | Historical queued language superseded by linked evidence. |
 | CS02A | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 2 | 0 | 4 |  |
 | CS02B | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 4 | 1 | 0 | 6 |  |
-| CS02C | QUEUED_OR_BLOCKED | MEDIUM | 22 | 1 | 4 | 25 | Resolved by train manifest as deferred compatibility work for CS. |
+| CS02C | QUEUED_OR_BLOCKED | MEDIUM | 24 | 1 | 4 | 28 | Resolved by train manifest as deferred compatibility work for CS. |
 | CS03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 12 | 1 | 0 | 20 | Historical queued language superseded by linked evidence. |
 | CS03A | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 1 | 0 | 5 |  |
 | CS03B | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 4 | 1 | 0 | 7 |  |
@@ -224,7 +224,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| CSCS02C | QUEUED_OR_BLOCKED | MEDIUM | 5 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| CSCS02C | QUEUED_OR_BLOCKED | MEDIUM | 7 | 0 | 0 | 3 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | CSCS03C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | CSCS04C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | CSCS05C | QUEUED_OR_BLOCKED | MEDIUM | 3 | 0 | 0 | 0 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
@@ -330,7 +330,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | EFC15 | QUEUED_OR_BLOCKED | MEDIUM | 18 | 3 | 4 | 24 |  |
 | EFC16 | QUEUED_OR_BLOCKED | MEDIUM | 22 | 5 | 4 | 30 |  |
 | EFC17 | QUEUED_OR_BLOCKED | MEDIUM | 22 | 4 | 4 | 31 |  |
-| EFC18 | COMPLETE_PROOF_LINKED | HIGH | 22 | 4 | 4 | 27 | Historical queued language superseded by linked implementation and proof. |
+| EFC18 | COMPLETE_PROOF_LINKED | HIGH | 24 | 4 | 4 | 30 | Historical queued language superseded by linked implementation and proof. |
 | EFC19 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 | EFC20 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
 | EFC21 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 0 | Train ID is present without operational proof; normalized to queued/deferred. |
@@ -380,6 +380,12 @@ Do not hand-edit generated output; update source files or governance rules and r
 | FCP28 | COMPLETE_PROOF_LINKED | HIGH | 37 | 4 | 5 | 68 |  |
 | FCP29 | COMPLETE_PROOF_LINKED | HIGH | 34 | 5 | 4 | 61 |  |
 | FCP30 | COMPLETE_PROOF_LINKED | HIGH | 28 | 4 | 4 | 52 | Historical queued language superseded by linked implementation and proof. |
+
+## FE
+
+| Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
+|---|---|---:|---:|---:|---:|---:|---|
+| FE09 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 
 ## FET
 
@@ -520,7 +526,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
 | MCP01 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 1 | 2 | 0 | 4 |  |
-| MCP02 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 3 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| MCP02 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 1 | 1 | 0 | 3 |  |
 | MCP03 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 3 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | MCP04 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | MCP05 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
@@ -754,6 +760,12 @@ Do not hand-edit generated output; update source files or governance rules and r
 |---|---|---:|---:|---:|---:|---:|---|
 | PLR02 | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 1 | Train ID is present without operational proof; normalized to queued/deferred. |
 
+## POST
+
+| Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
+|---|---|---:|---:|---:|---:|---:|---|
+| POST23 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 11 | 13 | 0 | 1 |  |
+
 ## PPL
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
@@ -925,7 +937,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | SI14 | COMPLETE_PROOF_LINKED | HIGH | 24 | 1 | 3 | 16 |  |
 | SI15 | COMPLETE_PROOF_LINKED | HIGH | 23 | 1 | 3 | 14 |  |
 | SI16 | COMPLETE_PROOF_LINKED | HIGH | 23 | 1 | 3 | 15 |  |
-| SI17 | COMPLETE_PROOF_LINKED | HIGH | 24 | 1 | 8 | 15 |  |
+| SI17 | COMPLETE_PROOF_LINKED | HIGH | 24 | 1 | 8 | 16 |  |
 | SI18 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 23 | 1 | 0 | 13 |  |
 
 ## SIG

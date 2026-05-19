@@ -8166,6 +8166,11 @@
       "scripts/ambitions-source-atlas-title-check.py"
     ]
   },
+  "FE09": {
+    "commits": [],
+    "governance_files": [],
+    "implementation_files": []
+  },
   "FET00": {
     "commits": [],
     "governance_files": [
@@ -11322,7 +11327,9 @@
     "implementation_files": []
   },
   "MCP02": {
-    "commits": [],
+    "commits": [
+      "ac7d81562983db020a6c6cc4c7db8a59055f5d5a"
+    ],
     "governance_files": [
       "docs/codex/MCP02_CONTROLLED_PROOF_MCP.md",
       "docs/codex/MCP_CODEX_SETUP.md",
@@ -18505,6 +18512,34 @@
     "commits": [],
     "governance_files": [
       "docs/governance/orphan_prompt_provenance_overrides.json"
+    ],
+    "implementation_files": []
+  },
+  "POST23": {
+    "commits": [
+      "7fdb35aba1ff969262535a35df23698ebccd3a55",
+      "f7ff918cdaea6e0763153bd4ea0fea7cb30b19c1",
+      "8634f132b46f2875a42eafe22c643b78834c6e67",
+      "44bdb222404f61205828cffc029e83ff9c396a85",
+      "2761d64bd11826efd46c06ebc47a110c918d3ee4",
+      "296feef533ab54e18aab9c6a3ab00281c2591925",
+      "94e8908b2f089ff99fe7ded9b1951de868df772a",
+      "dd7ddd91bfd33a13cecfcd95ea787808f0ada4a5",
+      "8ef80c2534b6cef76b3657e8c4e406927e7cf781",
+      "e0e77550dfc5a07aaa66b922f4702fcc2e21dc5d",
+      "27b807b6d2b9df2e96d0113e1663edb5c8966344",
+      "9dd86efe8747eda0fd609014e6809eb9aa8c8217",
+      "2e50f9517cc7fe2643d08df40caa79f41cfb5a5c"
+    ],
+    "governance_files": [
+      "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md",
+      "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE.md",
+      "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md",
+      "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md",
+      "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-STATUS.md",
+      "docs/codex/batch-trains/post-23-truth-audit/README.md",
+      "docs/codex/os/AMB-CODEX-OS-POST23-AUTO-PICKUP.md",
+      "docs/codex/reports/AMB-POST23-TRUTH-AUDIT-REPAIR-INSTALL-01.md"
     ],
     "implementation_files": []
   },

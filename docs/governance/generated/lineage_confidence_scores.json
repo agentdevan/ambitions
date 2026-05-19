@@ -901,7 +901,7 @@
   },
   "CSCS02C": {
     "confidence": "MEDIUM",
-    "score": 20,
+    "score": 35,
     "state": "QUEUED_OR_BLOCKED"
   },
   "CSCS03C": {
@@ -1554,6 +1554,11 @@
     "score": 90,
     "state": "COMPLETE_PROOF_LINKED"
   },
+  "FE09": {
+    "confidence": "MEDIUM",
+    "score": 35,
+    "state": "QUEUED_OR_BLOCKED"
+  },
   "FET00": {
     "confidence": "MEDIUM",
     "score": 40,
@@ -1931,8 +1936,8 @@
   },
   "MCP02": {
     "confidence": "MEDIUM",
-    "score": 40,
-    "state": "QUEUED_OR_BLOCKED"
+    "score": 65,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "MCP03": {
     "confidence": "MEDIUM",
@@ -2843,6 +2848,11 @@
     "confidence": "LOW",
     "score": 20,
     "state": "QUEUED_OR_BLOCKED"
+  },
+  "POST23": {
+    "confidence": "MEDIUM",
+    "score": 60,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "PPL01": {
     "confidence": "MEDIUM",

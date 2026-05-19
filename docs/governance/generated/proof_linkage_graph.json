@@ -3383,6 +3383,9 @@
       "docs/audits/gq01-refactor-maturity-assessment.md"
     ],
     "proof_files": [
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/final/01-plan.final.md",
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/02-bounded-patch.prompt.md",
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/03-review.prompt.md",
       ".codex/runs/EFC18/20260518T155839Z/final/01-plan.final.md",
       ".codex/runs/EFC18/20260518T155839Z/final/02-bounded-patch.final.md",
       ".codex/runs/EFC18/20260518T155839Z/final/03-review.final.md",
@@ -4122,7 +4125,11 @@
   },
   "CSCS02C": {
     "audit_files": [],
-    "proof_files": [],
+    "proof_files": [
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/final/01-plan.final.md",
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/02-bounded-patch.prompt.md",
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/03-review.prompt.md"
+    ],
     "report_files": [],
     "test_files": []
   },
@@ -6430,6 +6437,9 @@
       "docs/audits/queue-intel-codexos-upgrade-report.md"
     ],
     "proof_files": [
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/final/01-plan.final.md",
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/02-bounded-patch.prompt.md",
+      ".codex/runs/AMB-FE-BE-PREFLIGHT-00/20260518T165233Z/prompts/03-review.prompt.md",
       ".codex/runs/EFC17/20260518T153838Z/final/01-plan.final.md",
       ".codex/runs/EFC17/20260518T153838Z/final/02-bounded-patch.final.md",
       ".codex/runs/EFC17/20260518T153838Z/final/03-review.final.md",
@@ -8360,6 +8370,15 @@
       "docs/audits/queue-intel-codexos-upgrade-report.md",
       "docs/audits/visual-evidence/fvq05/final-visual-proof-packet.md",
       "docs/audits/yellow-completion-repair/yellow-completion-repair-report.md"
+    ],
+    "report_files": [],
+    "test_files": []
+  },
+  "FE09": {
+    "audit_files": [],
+    "proof_files": [
+      ".codex/runs/FE-09-COMPONENT-SYSTEM/20260519T024050Z/final/02-bounded-patch.final.md",
+      ".codex/runs/FE-09-COMPONENT-SYSTEM/20260519T024050Z/prompts/03-review.prompt.md"
     ],
     "report_files": [],
     "test_files": []
@@ -27514,6 +27533,14 @@
     "report_files": [],
     "test_files": []
   },
+  "POST23": {
+    "audit_files": [],
+    "proof_files": [
+      ".codex/runs/BE-08-DIAGNOSTICS-MIGRATION-HARDENING/20260518T223900Z/final-summary.md"
+    ],
+    "report_files": [],
+    "test_files": []
+  },
   "PPL01": {
     "audit_files": [],
     "proof_files": [],
@@ -31794,6 +31821,7 @@
       "docs/audits/signature-interface-train-formalization-report.md"
     ],
     "proof_files": [
+      ".codex/runs/FE-07-ROOT-SURFACES/20260519T015732Z/final/02-bounded-patch.final.md",
       "docs/audits/ambitions-product-experience-pack-batch-1a-boundary-report.md",
       "docs/audits/ambitions-product-experience-pack-batch-1b-reconciliation-report.md",
       "docs/audits/ambitions-product-experience-pack-batch-1d-readiness-gate-report.md",

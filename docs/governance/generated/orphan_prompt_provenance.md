@@ -1,14 +1,21 @@
 # Orphan Prompt Provenance
 
-Generated: 2026-05-18T16:25:41.546145+00:00
+Generated: 2026-05-19T04:36:03.571801+00:00
 
 ## Counts
 
+- candidate_orphan: 1
 - manifest_only_queued: 67
-- proven_evidence_or_docs: 148
-- proven_governance_only: 126
+- proven_evidence_or_docs: 150
+- proven_governance_only: 125
 - proven_implemented: 341
 - queued_prompt_backed: 8
+
+## candidate_orphan
+
+| Train | State | Commits | Impl | Proof | Governance | Reason |
+|---|---|---:|---:|---:|---:|---|
+| FE09 | QUEUED_OR_BLOCKED | 0 | 0 | 2 | 0 | Prompt exists without automatic commit/proof/implementation linkage. |
 
 ## manifest_only_queued
 
@@ -151,6 +158,7 @@ Generated: 2026-05-18T16:25:41.546145+00:00
 | HPS11 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 12 | 39 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | HPS12 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 12 | 42 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | MCP01 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 2 | 0 | 4 | 1 | Prompt has commit lineage and evidence linkage but no implementation files. |
+| MCP02 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 1 | 0 | 3 | 3 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | ME01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 18 | 35 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | ME08 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 17 | 15 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | ME09 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 3 | 0 | 16 | 13 | Prompt has commit lineage and evidence linkage but no implementation files. |
@@ -220,6 +228,7 @@ Generated: 2026-05-18T16:25:41.546145+00:00
 | PFC30 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 21 | 31 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PK00 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 9 | 15 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PK01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 12 | 16 | Prompt has commit lineage and evidence linkage but no implementation files. |
+| POST23 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 13 | 0 | 1 | 8 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 27 | 83 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 24 | 20 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 23 | 19 | Prompt has commit lineage and evidence linkage but no implementation files. |
@@ -316,7 +325,7 @@ Generated: 2026-05-18T16:25:41.546145+00:00
 | CQS25 | QUEUED_OR_BLOCKED | 0 | 0 | 1 | 7 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | CS09A | QUEUED_OR_BLOCKED | 0 | 0 | 2 | 6 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | CS09B | QUEUED_OR_BLOCKED | 0 | 0 | 2 | 5 | Prompt is linked to governance/canon files and appears docs/governance-only. |
-| CSCS02C | QUEUED_OR_BLOCKED | 0 | 0 | 0 | 7 | Prompt is linked to governance/canon files and appears docs/governance-only. |
+| CSCS02C | QUEUED_OR_BLOCKED | 0 | 0 | 3 | 7 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | CSCS03C | QUEUED_OR_BLOCKED | 0 | 0 | 0 | 7 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | CSCS04C | QUEUED_OR_BLOCKED | 0 | 0 | 0 | 7 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | CSCS05C | QUEUED_OR_BLOCKED | 0 | 0 | 0 | 7 | Prompt is linked to governance/canon files and appears docs/governance-only. |
@@ -338,7 +347,6 @@ Generated: 2026-05-18T16:25:41.546145+00:00
 | HBI00 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 1 | 0 | 0 | 2 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | HBI01 | QUEUED_OR_BLOCKED | 0 | 0 | 0 | 1 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | IR01 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 1 | 0 | 0 | 1 | Prompt is linked to governance/canon files and appears docs/governance-only. |
-| MCP02 | QUEUED_OR_BLOCKED | 0 | 0 | 3 | 3 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | MCP03 | QUEUED_OR_BLOCKED | 0 | 0 | 3 | 3 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | MCP04 | QUEUED_OR_BLOCKED | 0 | 0 | 2 | 3 | Prompt is linked to governance/canon files and appears docs/governance-only. |
 | MCP05 | QUEUED_OR_BLOCKED | 0 | 0 | 2 | 3 | Prompt is linked to governance/canon files and appears docs/governance-only. |
@@ -409,7 +417,7 @@ Generated: 2026-05-18T16:25:41.546145+00:00
 | AOS28 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 3 | 6 | 34 | 35 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | AOS29 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 3 | 6 | 34 | 63 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | AOS30 | COMPLETE_PROOF_LINKED | 3 | 6 | 38 | 62 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| CS02C | QUEUED_OR_BLOCKED | 1 | 4 | 25 | 27 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| CS02C | QUEUED_OR_BLOCKED | 1 | 4 | 28 | 27 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | CS03C | QUEUED_OR_BLOCKED | 1 | 4 | 10 | 18 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | CS04C | QUEUED_OR_BLOCKED | 1 | 4 | 10 | 18 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | CS05C | QUEUED_OR_BLOCKED | 1 | 4 | 11 | 18 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
@@ -470,7 +478,7 @@ Generated: 2026-05-18T16:25:41.546145+00:00
 | EFC15 | QUEUED_OR_BLOCKED | 3 | 4 | 24 | 39 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | EFC16 | QUEUED_OR_BLOCKED | 5 | 4 | 30 | 40 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | EFC17 | QUEUED_OR_BLOCKED | 4 | 4 | 31 | 40 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| EFC18 | COMPLETE_PROOF_LINKED | 4 | 4 | 27 | 39 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| EFC18 | COMPLETE_PROOF_LINKED | 4 | 4 | 30 | 39 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP05 | COMPLETE_PROOF_LINKED | 1 | 6 | 23 | 20 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP06 | COMPLETE_PROOF_LINKED | 1 | 3 | 25 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP07 | COMPLETE_PROOF_LINKED | 1 | 6 | 24 | 18 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |

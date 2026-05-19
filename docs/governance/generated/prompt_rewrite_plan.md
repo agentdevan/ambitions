@@ -112,6 +112,7 @@
 - prompts/batches/RHC03.md: Plan -> Time
 - prompts/batches/PK05.md: Plan -> Time
 - prompts/batches/SA21.md: Plan -> Time
+- prompts/batches/AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00.md: Plan -> Time
 - prompts/batches/MRI07-AMBITION-GRAPH-CROSS-SURFACE-WIRING.md: Plan -> Time
 - prompts/batches/SA15.md: Plan -> Time
 - prompts/batches/PFC35.md: Plan -> Time
@@ -232,6 +233,7 @@
 - prompts/batches/PK39.md: Plan -> Time
 - prompts/batches/ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06.md: Plan -> Time
 - prompts/batches/CS02C.md: Plan -> Time
+- prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md: Plan -> Time
 - prompts/batches/MRI40-VISUAL-MOAT-EVALS.md: Plan -> Time
 - prompts/batches/MOAT-ALIGNMENT-01.md: Plan -> Time, Hero Step Panel -> Start Here
 - prompts/batches/CS03C.md: Plan -> Time
@@ -256,3 +258,8 @@
 - prompts/batches/ALIGN-01-NAMING.md: Plan -> Time
 - prompts/batches/PX07.md: Plan -> Time
 - prompts/batches/SA09.md: Plan -> Time
+- prompts/batches/amb-fe-be/AMB-FE-BE-CONTRACT-FREEZE-01.md: Plan -> Time
+- prompts/batches/amb-fe-be/FE-06-SHELL-MIGRATION.md: Plan -> Time
+- prompts/batches/ui-flagship/UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM.md: Plan -> Time
+- prompts/batches/ui-flagship/UI-STUDIO-05-FIVE-SURFACE-COMPOSITION.md: Plan -> Time
+- prompts/batches/ui-flagship/UI-STUDIO-01-SURFACE-BRIEF-SYSTEM.md: Plan -> Time

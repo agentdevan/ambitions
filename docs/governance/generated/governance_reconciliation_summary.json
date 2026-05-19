@@ -3,7 +3,7 @@
     "counts": {
       "orphan_prompt_count": 0,
       "stale_overlay_count": 0,
-      "train_count": 690,
+      "train_count": 692,
       "unresolved_reconciliation_count": 0
     },
     "evidence": {
@@ -13,7 +13,7 @@
       "stale_overlay_audit": "docs/governance/generated/stale_overlay_audit.md",
       "train_to_implementation_map": "docs/governance/generated/train_to_implementation_map.json"
     },
-    "generated_at": "2026-05-18T12:13:56-04:00",
+    "generated_at": "2026-05-19T00:06:35-04:00",
     "no_claim_boundary": [
       "does not claim full registry normalization",
       "does not claim release readiness",
@@ -31,9 +31,9 @@
     "status": "GREEN"
   },
   "accepted_yellow_count": 0,
-  "generated_at": "2026-05-18T12:13:56-04:00",
+  "generated_at": "2026-05-19T00:06:35-04:00",
   "needs_reconciliation_count": 0,
   "stale_overlay_count": 0,
   "strict_passed": true,
-  "train_count": 690
+  "train_count": 692
 }

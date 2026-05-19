@@ -5,7 +5,7 @@
   "changed_canon_files": [],
   "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
   "decision": "idle",
-  "generated_at": "2026-05-18T12:13:56-04:00",
+  "generated_at": "2026-05-19T00:06:35-04:00",
   "generated_outputs_missing": [],
   "governance_stale_overlays": 0,
   "governance_unresolved": 0,
@@ -90,10 +90,6 @@
       "signal": "possible active Plan top-level residue"
     },
     {
-      "path": "Native/Ambitions/Services/AmbitionsCommandExecutor.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
       "path": "Native/Ambitions/Services/MemoryLensService.swift",
       "signal": "possible active Plan top-level residue"
     },
@@ -127,10 +123,6 @@
     },
     {
       "path": "Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
-      "path": "Native/AmbitionsTests/App/ExternalRoutingTests.swift",
       "signal": "possible active Plan top-level residue"
     },
     {
@@ -210,10 +202,6 @@
       "signal": "possible active Plan top-level residue"
     },
     {
-      "path": "Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
       "path": "Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift",
       "signal": "possible active Plan top-level residue"
     },
@@ -239,10 +227,6 @@
     },
     {
       "path": "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
-      "path": "Sources/Previews/ComponentPreviews.swift",
       "signal": "possible active Plan top-level residue"
     },
     {
@@ -1294,6 +1278,14 @@
       "signal": "possible active Plan top-level residue"
     },
     {
+      "path": "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
+      "path": "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
       "path": "docs/codex/batches/AFI03_Flagship_Object_Silhouettes.md",
       "signal": "possible active Plan top-level residue"
     },
@@ -1583,6 +1575,14 @@
     },
     {
       "path": "prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
+      "path": "prompts/batches/ui-flagship/UI-STUDIO-05-FIVE-SURFACE-COMPOSITION.md",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
+      "path": "prompts/batches/ui-flagship/UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM.md",
       "signal": "possible active Plan top-level residue"
     },
     {

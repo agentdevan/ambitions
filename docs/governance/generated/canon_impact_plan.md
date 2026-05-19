@@ -1,6 +1,6 @@
 # Canon Impact Plan
 
-Generated: 2026-05-18T12:13:56-04:00
+Generated: 2026-05-19T00:06:35-04:00
 
 ## Changed Canon Files
 
@@ -8,6 +8,7 @@ Generated: 2026-05-18T12:13:56-04:00
 
 ## Likely Affected Files
 
+- DesignTokens/README.md
 - DesignTokens/objects/atmosphere-composer.tokens.json
 - DesignTokens/objects/constellation-atlas.tokens.json
 - DesignTokens/objects/lifeshape-field.tokens.json
@@ -72,6 +73,7 @@ Generated: 2026-05-18T12:13:56-04:00
 - Native/Ambitions/Domain/AmbitionsOSRuntimeTailGate.swift
 - Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift
 - Native/Ambitions/Domain/AmbitionsOSStartingPositionModels.swift
+- Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift
 - Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift
 - Native/Ambitions/Domain/CanonicalNowStateModels.swift
 - Native/Ambitions/Domain/CaptureModels.swift
@@ -206,8 +208,6 @@ Generated: 2026-05-18T12:13:56-04:00
 - Native/Ambitions/Features/Today/TodayHeroStepSignaturePrimitives.swift
 - Native/Ambitions/Features/Today/TodayMasthead.swift
 - Native/Ambitions/Features/Today/TodayPanels.swift
-- Native/Ambitions/Features/Today/TodayProofReceiptLedgerState.swift
-- Native/Ambitions/Features/Today/TodayReadModelProjector.swift
 
 ## Retired Canon Signals
 
@@ -230,7 +230,6 @@ Generated: 2026-05-18T12:13:56-04:00
 - Native/Ambitions/PreviewSupport/PreviewFixtures.swift: possible active Plan top-level residue
 - Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift: possible active Plan top-level residue
 - Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift: possible active Plan top-level residue
-- Native/Ambitions/Services/AmbitionsCommandExecutor.swift: possible active Plan top-level residue
 - Native/Ambitions/Services/MemoryLensService.swift: possible active Plan top-level residue
 - Native/Ambitions/Services/RealityIntegrationAdapters.swift: possible active Plan top-level residue
 - Native/Ambitions/Services/ReviewsV1Projector.swift: possible active Plan top-level residue
@@ -240,7 +239,6 @@ Generated: 2026-05-18T12:13:56-04:00
 - Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/AppShellChromeTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift: possible active Plan top-level residue
-- Native/AmbitionsTests/App/ExternalRoutingTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift: possible active Plan top-level residue
@@ -260,7 +258,6 @@ Generated: 2026-05-18T12:13:56-04:00
 - Native/AmbitionsTests/Persistence/CaptureServiceTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/Persistence/EventLedgerRepositoryTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/Persistence/TrustHistoryQueryRepositoryTests.swift: possible active Plan top-level residue
-- Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/You/YouFeatureServiceTests.swift: possible active Plan top-level residue
@@ -268,7 +265,6 @@ Generated: 2026-05-18T12:13:56-04:00
 - Sources/Accessibility/AccessibilityNutrition.swift: possible active Plan top-level residue
 - Sources/Components/ShellChromePrimitives.swift: possible active Plan top-level residue
 - Sources/Components/TopLevelSurfaceCompositionPrimitives.swift: possible active Plan top-level residue
-- Sources/Previews/ComponentPreviews.swift: possible active Plan top-level residue
 - Sources/Previews/SI03ShellNavigationPreviews.swift: possible active Plan top-level residue
 - docs/AmbitionsCanon/05_Accessibility_Motion_Performance.md: possible active Plan top-level residue
 - docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md: possible active Plan top-level residue
@@ -411,6 +407,10 @@ Generated: 2026-05-18T12:13:56-04:00
 - docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md: possible Hero Step Panel without Start Here binding
 - docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md: possible active Plan top-level residue
 - docs/canon/Ambitions_3_0_Surface_State_Matrix.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Test_Ownership_Matrix.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_Top_Level_Surface_Density_Constitution.md: possible active Plan top-level residue
+- docs/canon/Ambitions_3_0_UI_Invention_Evaluation_Framework.md: possible active Plan top-level residue
 
 ## Required Codex Behavior
 
