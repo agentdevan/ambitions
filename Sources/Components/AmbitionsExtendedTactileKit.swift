@@ -5,6 +5,7 @@ import SwiftUI
 /// A micro-visualizer representing the current Active Focus Interval (AFI) flow density.
 public struct AfiFlowIndicator: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var waveOffset: CGFloat = 0
     private let intensity: Double
 
@@ -23,11 +24,23 @@ public struct AfiFlowIndicator: View {
         .padding(.horizontal, theme.spacing.xs)
         .padding(.vertical, theme.spacing.xxs)
         .background(Capsule().fill(theme.shell.activeTabBackground))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("AFI flow indicator")
+        .accessibilityValue(accessibilityValue)
         .onAppear {
+            guard reduceMotion == false else {
+                waveOffset = 0
+                return
+            }
+
             withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
                 waveOffset = 1.0
             }
         }
+    }
+
+    public var accessibilityValue: String {
+        "Relative bars rise from shortest to tallest. Reduce Motion: static bars keep the same meaning. Non-color cue: height carries the state."
     }
 
     private func height(for index: Int) -> CGFloat {
@@ -75,6 +88,7 @@ public struct MeridianScaleAxis: View {
 /// An elegant breathing status dot showing local database synchronization.
 public struct QuietBreatheIndicator: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var pulse: CGFloat = 0.38
     private let title: String
 
@@ -87,18 +101,30 @@ public struct QuietBreatheIndicator: View {
             Circle()
                 .fill(theme.semanticColors.trust)
                 .frame(width: 8, height: 8)
-                .scaleEffect(1.0 + (pulse * 0.4))
-                .opacity(1.0 - (pulse * 0.5))
+                .scaleEffect(reduceMotion ? 1.0 : (1.0 + (pulse * 0.4)))
+                .opacity(reduceMotion ? 1.0 : (1.0 - (pulse * 0.5)))
             
             Text(title)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Quiet breathe indicator")
+        .accessibilityValue(accessibilityValue)
         .onAppear {
+            guard reduceMotion == false else {
+                pulse = 0.38
+                return
+            }
+
             withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
                 pulse = 1.0
             }
         }
+    }
+
+    public var accessibilityValue: String {
+        "\(title). Reduce Motion: static dot and label. Non-color cue: text identifies the sync state."
     }
 }
 
@@ -118,6 +144,9 @@ public struct TactileDialControl: View {
                 Image(systemName: "minus.circle")
                     .foregroundStyle(theme.colors.textSecondary)
             }
+            .accessibilityLabel("Decrease capacity threshold")
+            .accessibilityHint("Reduces the threshold by ten percent.")
+            .ambitionMinimumTapTarget(theme.panel.minimumTapTarget)
             
             ZStack {
                 Circle()
@@ -132,13 +161,24 @@ public struct TactileDialControl: View {
                 
                 Text(String(format: "%.0f%%", threshold * 100))
                     .font(theme.typography.caption.bold())
+                    .accessibilityHidden(true)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Capacity threshold")
+            .accessibilityValue(accessibilityValue)
             
             Button(action: { threshold = min(1.0, threshold + 0.1) }) {
                 Image(systemName: "plus.circle")
                     .foregroundStyle(theme.colors.textSecondary)
             }
+            .accessibilityLabel("Increase capacity threshold")
+            .accessibilityHint("Raises the threshold by ten percent.")
+            .ambitionMinimumTapTarget(theme.panel.minimumTapTarget)
         }
+    }
+
+    public var accessibilityValue: String {
+        "\(Int((threshold * 100).rounded())) percent selected. Non-color cue: the ring and number match the same threshold."
     }
 }
 
@@ -227,17 +267,32 @@ public struct RecoveryTideStrip: View {
 /// A micro-grid showing anchor-time availability status.
 public struct AnchorDotMeter: View {
     @Environment(\.ambitionTheme) private var theme
+    private let totalAnchors = 8
+    private let availableAnchors = 5
 
     public init() {}
 
     public var body: some View {
         HStack(spacing: 3) {
-            ForEach(0..<8) { index in
-                Circle()
-                    .fill(index < 5 ? theme.shell.statusClear : theme.colors.textTertiary.opacity(0.4))
-                    .frame(width: 6, height: 6)
+            ForEach(0..<totalAnchors, id: \.self) { index in
+                if index < availableAnchors {
+                    Circle()
+                        .fill(theme.shell.statusClear)
+                        .frame(width: 6, height: 6)
+                } else {
+                    Circle()
+                        .stroke(theme.colors.textTertiary.opacity(0.55), lineWidth: 1)
+                        .frame(width: 6, height: 6)
+                }
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Anchor dot meter")
+        .accessibilityValue(accessibilityValue)
+    }
+
+    public var accessibilityValue: String {
+        "\(availableAnchors) of \(totalAnchors) anchors available. Non-color cue: filled dots mean available and outlined dots mean unavailable."
     }
 }
 
@@ -297,6 +352,7 @@ public struct PacingNeedle: View {
 /// A live pulsating badge representing verified user evidence.
 public struct ProofPulseBadge: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var scale: CGFloat = 1.0
 
     public init() {}
@@ -306,17 +362,29 @@ public struct ProofPulseBadge: View {
             Circle()
                 .fill(theme.semanticColors.accessibilityVerified)
                 .frame(width: 8, height: 8)
-                .scaleEffect(scale)
+                .scaleEffect(reduceMotion ? 1.0 : scale)
             
             Text("VERIFIED")
                 .font(theme.typography.caption.bold())
                 .foregroundStyle(theme.semanticColors.accessibilityVerified)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Proof pulse badge")
+        .accessibilityValue(accessibilityValue)
         .onAppear {
+            guard reduceMotion == false else {
+                scale = 1.0
+                return
+            }
+
             withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
                 scale = 1.38
             }
         }
+    }
+
+    public var accessibilityValue: String {
+        "Verified. Reduce Motion: static badge and label. Non-color cue: the text stays visible alongside the symbol."
     }
 }
 
@@ -324,6 +392,7 @@ public struct ProofPulseBadge: View {
 /// An accordion-like layout for transparently disclosing on-device audit logs.
 public struct AuditFoldOut: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var isOpen: Bool = false
     private let title: String
     private let logs: [String]
@@ -335,7 +404,15 @@ public struct AuditFoldOut: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            Button(action: { withAnimation(.spring()) { isOpen.toggle() } }) {
+            Button(action: {
+                if reduceMotion {
+                    isOpen.toggle()
+                } else {
+                    withAnimation(.spring()) {
+                        isOpen.toggle()
+                    }
+                }
+            }) {
                 HStack {
                     Text(title)
                         .font(theme.typography.bodyEmphasized)
@@ -345,6 +422,10 @@ public struct AuditFoldOut: View {
                 }
             }
             .foregroundStyle(theme.colors.textPrimary)
+            .accessibilityLabel(title)
+            .accessibilityValue(accessibilityValue)
+            .accessibilityHint("Double tap to \(isOpen ? "hide" : "show") the audit logs.")
+            .ambitionMinimumTapTarget(theme.panel.minimumTapTarget)
             
             if isOpen {
                 VStack(alignment: .leading, spacing: 4) {
@@ -352,13 +433,17 @@ public struct AuditFoldOut: View {
                         Text("• \(log)")
                             .font(theme.typography.caption)
                             .foregroundStyle(theme.colors.textSecondary)
-                    }
+                        }
                 }
-                .transition(.opacity)
+                .transition(reduceMotion ? .identity : .opacity)
             }
         }
         .padding(theme.spacing.sm)
         .background(RoundedRectangle(cornerRadius: theme.radius.md).fill(theme.shell.controlBackground))
+    }
+
+    public var accessibilityValue: String {
+        isOpen ? "Open. \(logs.count) log entries visible." : "Closed. \(logs.count) log entries hidden."
     }
 }
 
@@ -430,12 +515,14 @@ public struct CapacitiveTensionBar: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xxs) {
             HStack {
+                Image(systemName: isOvercommitted ? "exclamationmark.triangle.fill" : "checkmark.seal.fill")
+                    .foregroundStyle(isOvercommitted ? theme.shell.statusAtRisk : theme.shell.statusClear)
                 Text("Planning Tension")
                     .font(theme.typography.caption.bold())
                 Spacer()
-                Text(stressScore > 0.8 ? "Overcommitted" : "Healthy")
+                Text(isOvercommitted ? "Overcommitted" : "Healthy")
                     .font(theme.typography.caption)
-                    .foregroundStyle(stressScore > 0.8 ? theme.shell.statusAtRisk : theme.shell.statusClear)
+                    .foregroundStyle(isOvercommitted ? theme.shell.statusAtRisk : theme.shell.statusClear)
             }
             
             GeometryReader { geo in
@@ -444,12 +531,23 @@ public struct CapacitiveTensionBar: View {
                         .fill(theme.colors.textTertiary.opacity(0.38))
                     
                     RoundedRectangle(cornerRadius: 2)
-                        .fill(stressScore > 0.8 ? theme.shell.statusAtRisk : theme.shell.statusClear)
+                        .fill(isOvercommitted ? theme.shell.statusAtRisk : theme.shell.statusClear)
                         .frame(width: geo.size.width * CGFloat(stressScore))
                 }
             }
             .frame(height: 6)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Planning tension")
+        .accessibilityValue(accessibilityValue)
+    }
+
+    private var isOvercommitted: Bool {
+        stressScore > 0.8
+    }
+
+    public var accessibilityValue: String {
+        "\(isOvercommitted ? "Overcommitted" : "Healthy"). \(Int((stressScore * 100).rounded())) percent. Non-color cue: the symbol and text carry the state."
     }
 }
 
@@ -531,6 +629,7 @@ public struct UncertaintyIndicator: View {
 /// A highly interactive toggle switch designed like a physical design system seam.
 public struct TactileToggleSeam: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Binding private var isOn: Bool
     private let title: String
 
@@ -540,7 +639,15 @@ public struct TactileToggleSeam: View {
     }
 
     public var body: some View {
-        Button(action: { withAnimation(.spring()) { isOn.toggle() } }) {
+        Button(action: {
+            if reduceMotion {
+                isOn.toggle()
+            } else {
+                withAnimation(.spring()) {
+                    isOn.toggle()
+                }
+            }
+        }) {
             HStack {
                 Text(title)
                     .font(theme.typography.bodyEmphasized)
@@ -560,7 +667,14 @@ public struct TactileToggleSeam: View {
                 }
             }
         }
+        .accessibilityLabel(title)
+        .accessibilityValue(isOn ? "On" : "Off")
+        .accessibilityHint("Double tap to toggle.")
         .ambitionMinimumTapTarget(theme.panel.minimumTapTarget)
+    }
+
+    public var accessibilityValue: String {
+        isOn ? "On" : "Off"
     }
 }
 

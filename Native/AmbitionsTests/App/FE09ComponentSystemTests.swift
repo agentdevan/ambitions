@@ -87,6 +87,26 @@ final class FE09ComponentSystemTests: XCTestCase {
         XCTAssertTrue(FE09ComponentSystemPreviewMatrix.validationFailures().isEmpty)
     }
 
+    func testFE09PreviewVariantsCoverAccessibilityProofModes() {
+        XCTAssertEqual(
+            FE09ComponentSystemPreviewMatrix.variants.map(\.title),
+            [
+                "Component System Matrix",
+                "Dynamic Type",
+                "Reduce Motion",
+                "Non-Color State",
+                "Increased Contrast"
+            ]
+        )
+
+        for variant in FE09ComponentSystemPreviewMatrix.variants {
+            XCTAssertFalse(variant.subtitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            XCTAssertFalse(variant.accessibilitySummary.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        }
+
+        XCTAssertTrue(FE09ComponentSystemPreviewMatrix.validationFailures().isEmpty)
+    }
+
     func testFE09PreviewMatrixMakesAccessibilityAndNonColorMeaningExplicit() {
         let searchable = FE09ComponentSystemPreviewMatrix.rows
             .map(\.accessibilitySummary)

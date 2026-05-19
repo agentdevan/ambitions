@@ -187,12 +187,11 @@ public enum SI16PreviewFixtureCatalog {
             object: "Reality Meridian / Start Here",
             fixtureIDs: [
                 "today.normal",
-                "today.empty",
+                "today.disabled",
                 "today.recovery",
-                "today.blocked",
-                "today.staleSource"
+                "today.waiting"
             ],
-            accessibilityNote: "Today keeps Start Here grounded in clear, empty, recovery, blocked, and stale-source states.",
+            accessibilityNote: "Today keeps Start Here grounded in clear, recommended-step, recovery, and waiting states.",
             nonColorNote: "State meaning stays visible through labels, symbols, and section order rather than color alone."
         ),
         surfaceRow(
@@ -201,6 +200,7 @@ public enum SI16PreviewFixtureCatalog {
             fixtureIDs: [
                 "goals.selected",
                 "goals.degraded",
+                "goals.staleSource",
                 "goals.needsReview"
             ],
             accessibilityNote: "Goals keeps mission control, review, and degraded source states inspectable without changing the product shape.",

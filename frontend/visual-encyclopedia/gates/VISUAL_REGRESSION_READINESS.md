@@ -6,6 +6,13 @@ Status: readiness scaffold with implemented preview fixtures
 
 This gate defines readiness criteria for future visual regression tests. The preview fixtures exist now, but screenshot export and device proof do not.
 
+## Current FE-11 Artifacts
+
+- `frontend/visual-encyclopedia/trace/SCREENSHOT_PROOF_MATRIX.md`
+- `frontend/visual-encyclopedia/trace/FE11_PREVIEW_VISUAL_QA_MATRIX.md`
+- `docs/audits/fe-11-preview-visual-qa-report.md`
+- `scripts/ambitions-fe11-preview-visual-qa-report.py`
+
 ## Allowed Use
 
 - Use to describe future snapshot coverage.

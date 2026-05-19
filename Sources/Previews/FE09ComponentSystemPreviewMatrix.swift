@@ -1,6 +1,36 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
+public enum FE09ComponentSystemPreviewVariant: String, CaseIterable, Identifiable, Sendable {
+    case standard = "Component System Matrix"
+    case dynamicType = "Dynamic Type"
+    case reduceMotion = "Reduce Motion"
+    case nonColorState = "Non-Color State"
+    case increasedContrast = "Increased Contrast"
+
+    public var id: String { rawValue }
+    public var title: String { rawValue }
+
+    public var subtitle: String {
+        switch self {
+        case .standard:
+            return "Baseline matrix for the owned Ambitions objects."
+        case .dynamicType:
+            return "Large text keeps the object title, source, and action readable."
+        case .reduceMotion:
+            return "Static equivalents keep meaning without motion dependency."
+        case .nonColorState:
+            return "Text, symbol, and structure carry meaning without color alone."
+        case .increasedContrast:
+            return "Higher contrast keeps boundaries and state readable."
+        }
+    }
+
+    public var accessibilitySummary: String {
+        "\(title). \(subtitle)"
+    }
+}
+
 public struct FE09ComponentSystemPreviewCell: Identifiable, Equatable, Sendable {
     public let role: FE09ComponentSystemRole
     public let state: FE09ComponentSystemState
@@ -46,6 +76,7 @@ public enum FE09ComponentSystemPreviewMatrix {
         )
     }
 
+    public static let variants: [FE09ComponentSystemPreviewVariant] = FE09ComponentSystemPreviewVariant.allCases
     public static let forbiddenLanguage = FE09ComponentSystemContract.forbiddenLanguage
 
     public static func validationFailures() -> [String] {
@@ -62,11 +93,39 @@ public enum FE09ComponentSystemPreviewMatrix {
             failures.append(contentsOf: validationFailures(for: row))
         }
 
+        if variants.count != FE09ComponentSystemPreviewVariant.allCases.count {
+            failures.append("variant count does not match preview variant count")
+        }
+        for variant in variants {
+            failures.append(contentsOf: validationFailures(for: variant))
+        }
+
         let searchable = rows
             .map(\.accessibilitySummary)
             .joined(separator: " ")
             .lowercased()
 
+        for phrase in forbiddenLanguage where searchable.contains(phrase) {
+            failures.append("forbidden language: \(phrase)")
+        }
+
+        return failures
+    }
+
+    public static func validationFailures(for variant: FE09ComponentSystemPreviewVariant) -> [String] {
+        var failures: [String] = []
+
+        if variant.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            failures.append("missing variant title")
+        }
+        if variant.subtitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            failures.append("missing variant subtitle")
+        }
+        if variant.accessibilitySummary.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            failures.append("missing variant accessibility summary")
+        }
+
+        let searchable = variant.accessibilitySummary.lowercased()
         for phrase in forbiddenLanguage where searchable.contains(phrase) {
             failures.append("forbidden language: \(phrase)")
         }
@@ -95,16 +154,34 @@ public enum FE09ComponentSystemPreviewMatrix {
 
 private struct FE09ComponentSystemPreviewGallery: View {
     @Environment(\.ambitionTheme) private var theme
+    let variant: FE09ComponentSystemPreviewVariant
 
     private let columns = [GridItem(.adaptive(minimum: 180), spacing: 12, alignment: .top)]
 
     var body: some View {
+        switch variant {
+        case .standard:
+            galleryBase
+        case .dynamicType:
+            galleryBase.environment(\.dynamicTypeSize, .accessibility3)
+        case .reduceMotion:
+            galleryBase.transaction { transaction in
+                transaction.disablesAnimations = true
+            }
+        case .nonColorState:
+            galleryBase
+        case .increasedContrast:
+            galleryBase
+        }
+    }
+
+    private var galleryBase: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: theme.spacing.lg) {
                 SectionHeader(
                     eyebrow: "FE09",
-                    title: "Component System Matrix",
-                    subtitle: "Deterministic role and state coverage for the owned Ambitions objects, with explicit source, privacy, recovery, accessibility, and non-color meaning."
+                    title: variant.title,
+                    subtitle: variant.subtitle
                 )
 
                 ForEach(FE09ComponentSystemPreviewMatrix.rows) { row in
@@ -136,6 +213,7 @@ private struct FE09ComponentSystemPreviewGallery: View {
                     Image(systemName: cell.state.symbolName)
                         .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                         .foregroundStyle(cell.role.context.accent(in: theme))
+                        .symbolRenderingMode(variant == .nonColorState ? .monochrome : .hierarchical)
                         .accessibilityHidden(true)
 
                     Text(cell.state.title)
@@ -146,13 +224,19 @@ private struct FE09ComponentSystemPreviewGallery: View {
 
                 Text(cell.state.summary)
                     .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textSecondary)
+                    .foregroundStyle(variant == .increasedContrast ? theme.colors.textPrimary : theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
 
                 Text(cell.role.primaryObject)
                     .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textTertiary)
+                    .foregroundStyle(variant == .increasedContrast ? theme.colors.textSecondary : theme.colors.textTertiary)
                     .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .overlay {
+            if variant == .increasedContrast {
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .stroke(theme.colors.textPrimary.opacity(0.55), lineWidth: 1)
             }
         }
         .accessibilityElement(children: .ignore)
@@ -163,18 +247,22 @@ private struct FE09ComponentSystemPreviewGallery: View {
 }
 
 #Preview("FE09 Component Matrix") {
-    FE09ComponentSystemPreviewGallery()
+    FE09ComponentSystemPreviewGallery(variant: .standard)
 }
 
 #Preview("FE09 Component Matrix Dynamic Type") {
-    FE09ComponentSystemPreviewGallery()
-        .environment(\.dynamicTypeSize, .accessibility3)
+    FE09ComponentSystemPreviewGallery(variant: .dynamicType)
 }
 
 #Preview("FE09 Component Matrix Reduce Motion") {
-    FE09ComponentSystemPreviewGallery()
-        .transaction { transaction in
-            transaction.disablesAnimations = true
-        }
+    FE09ComponentSystemPreviewGallery(variant: .reduceMotion)
+}
+
+#Preview("FE09 Component Matrix Non-Color State") {
+    FE09ComponentSystemPreviewGallery(variant: .nonColorState)
+}
+
+#Preview("FE09 Component Matrix Increased Contrast") {
+    FE09ComponentSystemPreviewGallery(variant: .increasedContrast)
 }
 #endif

@@ -49,6 +49,11 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
             XCTAssertFalse(row.nonColorNote.isEmpty)
             XCTAssertFalse(row.fixtureIDs.isEmpty)
             XCTAssertFalse(row.fixtures.isEmpty)
+            XCTAssertEqual(
+                row.fixtureIDs.count,
+                row.fixtures.count,
+                "Unresolved fixture IDs for \(row.ownerSurface): \(Set(row.fixtureIDs).subtracting(row.fixtures.map(\.id)))"
+            )
             for fixture in row.fixtures {
                 XCTAssertEqual(fixture.ownerSurface, row.ownerSurface)
                 XCTAssertFalse(fixture.nonColorNote.isEmpty)

@@ -1,3 +1,4 @@
+import SwiftUI
 import AmbitionsDesignSystem
 import XCTest
 
@@ -145,5 +146,38 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("habit"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("streak"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("score"))
+    }
+
+    func testSI12TactilePrimitivesExposeAccessibilityAndReduceMotionContracts() {
+        let afi = AfiFlowIndicator()
+        XCTAssertTrue(afi.accessibilityValue.localizedCaseInsensitiveContains("Reduce Motion"))
+        XCTAssertTrue(afi.accessibilityValue.localizedCaseInsensitiveContains("Non-color cue"))
+
+        let quiet = QuietBreatheIndicator()
+        XCTAssertTrue(quiet.accessibilityValue.localizedCaseInsensitiveContains("LOCAL ONLY"))
+        XCTAssertTrue(quiet.accessibilityValue.localizedCaseInsensitiveContains("static dot"))
+
+        let proof = ProofPulseBadge()
+        XCTAssertTrue(proof.accessibilityValue.localizedCaseInsensitiveContains("Verified"))
+        XCTAssertTrue(proof.accessibilityValue.localizedCaseInsensitiveContains("static badge"))
+
+        let anchorMeter = AnchorDotMeter()
+        XCTAssertTrue(anchorMeter.accessibilityValue.localizedCaseInsensitiveContains("filled dots"))
+        XCTAssertTrue(anchorMeter.accessibilityValue.localizedCaseInsensitiveContains("outlined dots"))
+
+        let tension = CapacitiveTensionBar(stressScore: 0.88)
+        XCTAssertTrue(tension.accessibilityValue.localizedCaseInsensitiveContains("Overcommitted"))
+        XCTAssertTrue(tension.accessibilityValue.localizedCaseInsensitiveContains("Non-color cue"))
+
+        let foldOut = AuditFoldOut(title: "On-device audit logs", logs: ["One", "Two"])
+        XCTAssertTrue(foldOut.accessibilityValue.localizedCaseInsensitiveContains("Closed"))
+        XCTAssertTrue(foldOut.accessibilityValue.contains("2 log entries"))
+
+        let dial = TactileDialControl(threshold: .constant(0.72))
+        XCTAssertTrue(dial.accessibilityValue.localizedCaseInsensitiveContains("72 percent"))
+        XCTAssertTrue(dial.accessibilityValue.localizedCaseInsensitiveContains("Non-color cue"))
+
+        let toggle = TactileToggleSeam(title: "Optional cadence", isOn: .constant(true))
+        XCTAssertEqual(toggle.accessibilityValue, "On")
     }
 }
