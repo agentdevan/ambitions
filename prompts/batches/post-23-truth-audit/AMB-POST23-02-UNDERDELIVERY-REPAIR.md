@@ -1,3 +1,7 @@
+<!-- AMBITIONS_RUNNER_REQUIRED: true -->
+<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+
 # AMB-POST23-02-UNDERDELIVERY-REPAIR
 
 This runner batch repairs only high-priority under-delivery found by `AMB-POST23-01-TRUTH-AUDIT`.

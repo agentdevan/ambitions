@@ -1,3 +1,7 @@
+<!-- AMBITIONS_RUNNER_REQUIRED: true -->
+<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+
 # AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING
 
 This runner batch classifies and routes authority after the original 23-batch train and post-23 repair.
