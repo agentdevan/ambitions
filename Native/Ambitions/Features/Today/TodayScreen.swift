@@ -26,6 +26,8 @@ struct TodayScreen: View {
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    TopLevelSurfaceCompositionBar(surface: .today)
+
                     switch viewModel.state {
                     case .loading:
                         DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.startHere))
@@ -341,7 +343,7 @@ private struct TodayExecutionDepthDisclosure: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Today No Plan") {
+#Preview("Today Open Room") {
     NavigationStack {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.noPlan)), autoLoad: false)
     }

@@ -24,6 +24,8 @@ struct TimeScreen: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    TopLevelSurfaceCompositionBar(surface: .time)
+
                     switch viewModel.state {
                     case .loading:
                         DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.lifeShapeContourMap))

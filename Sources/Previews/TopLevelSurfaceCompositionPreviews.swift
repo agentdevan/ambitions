@@ -10,7 +10,7 @@ struct TopLevelSurfaceCompositionPreviewGallery: View {
                 SectionHeader(
                     eyebrow: "SI17",
                     title: "Top-Level Surface Composition",
-                    subtitle: "Five canonical surfaces keep one primary Ambitions object with subordinate modules."
+                    subtitle: "Five root surfaces keep one primary Ambitions object with distinct supporting modules."
                 )
 
                 ForEach(AmbitionsTopLevelSurfaceComposition.allCases) { surface in

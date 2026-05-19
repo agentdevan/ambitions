@@ -5,7 +5,7 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
     func testSI17CompositionKeepsFiveCanonicalSurfacesOnly() {
         XCTAssertEqual(
             AmbitionsTopLevelSurfaceComposition.allCases,
-            [.today, .goals, .capture, .plan, .you]
+            [.today, .goals, .capture, .time, .you]
         )
 
         XCTAssertEqual(
@@ -62,7 +62,7 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
             AFI14CrossSurfaceCoherenceCatalog.productGrammar,
             ["Capture", "Clarify", "Shape", "Start", "Close", "Remember"]
         )
-        XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.containsPlanTopLevelSurface)
+        XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.activeTopLevelSurfaces.contains("Plan"))
         XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.changesRuntimeBehavior)
         XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.claimsRenderedProof)
         XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.claimsHumanApproval)

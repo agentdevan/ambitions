@@ -34,6 +34,8 @@ struct GoalsScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                TopLevelSurfaceCompositionBar(surface: .goals)
+
                 switch viewModel.state {
                 case .loading:
                     DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
@@ -46,8 +48,6 @@ struct GoalsScreen: View {
                         }
                     )
                 case let .loaded(overview):
-                    TopLevelSurfaceCompositionBar(surface: .goals)
-
                     GoalMissionControlLanes(
                         overview: overview,
                         onPrimaryAction: handlePrimaryAction

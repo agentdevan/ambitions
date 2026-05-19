@@ -5,7 +5,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
     case today
     case goals
     case capture
-    case plan
+    case time
     case you
 
     public var id: String { rawValue }
@@ -15,7 +15,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "Today"
         case .goals: "Goals"
         case .capture: "Capture"
-        case .plan: "Time"
+        case .time: "Time"
         case .you: "You"
         }
     }
@@ -25,8 +25,38 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "Reality Meridian"
         case .goals: "Constellation Atlas"
         case .capture: "Atmosphere Composer"
-        case .plan: "LifeShape Field"
+        case .time: "LifeShape Field"
         case .you: "User System Profile"
+        }
+    }
+
+    public var leadPhrase: String {
+        switch self {
+        case .today: "Start here"
+        case .goals: "Direction"
+        case .capture: "Compose"
+        case .time: "Shape Time"
+        case .you: "Trust & Continuity"
+        }
+    }
+
+    public var symbolName: String {
+        switch self {
+        case .today: "sun.max"
+        case .goals: "scope"
+        case .capture: "tray.and.arrow.down"
+        case .time: "clock"
+        case .you: "person.crop.circle"
+        }
+    }
+
+    public var supportingModuleIcon: String {
+        switch self {
+        case .today: "sun.max"
+        case .goals: "scope"
+        case .capture: "tray.and.arrow.down"
+        case .time: "clock"
+        case .you: "person.crop.circle"
         }
     }
 
@@ -35,7 +65,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "One calm execution path with Start here, Now, Next, Later, closure, and proof."
         case .goals: "Strategic direction, path pressure, proof lanes, and goal drill-downs stay connected."
         case .capture: "Capture Anything stays composer-first; placement appears only after input."
-        case .plan: "Capacity, pressure, protected time, and reflow stay visible without becoming a calendar clone."
+        case .time: "Capacity, pressure, protected time, and reflow stay visible without becoming a calendar clone."
         case .you: "Trust, setup, data, preferences, and receipts stay user-controlled."
         }
     }
@@ -45,7 +75,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: .focus
         case .goals: .review
         case .capture: .triage
-        case .plan: .plan
+        case .time: .plan
         case .you: .review
         }
     }
@@ -55,7 +85,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: .steady
         case .goals: .clear
         case .capture: .protected
-        case .plan: .tight
+        case .time: .tight
         case .you: .protected
         }
     }
@@ -68,7 +98,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
             ["Orbital Lens", "Life Path", "Proof"]
         case .capture:
             ["Needs a Place", "Ready to Place", "Grow into Goal"]
-        case .plan:
+        case .time:
             ["Open time", "Goal time", "Protected time"]
         case .you:
             ["Trust", "Data", "Setup"]
@@ -76,7 +106,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
     }
 
     public var accessibilitySummary: String {
-        "\(title). Primary object: \(primaryObject). \(orientation)"
+        "\(leadPhrase). \(title). Primary object: \(primaryObject). \(orientation)"
     }
 }
 
@@ -130,10 +160,6 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
         activeTopLevelSurfaces.filter { surface in
             stages.allSatisfy { $0.ownerSurfaces.contains(surface) == false }
         }
-    }
-
-    public static var containsPlanTopLevelSurface: Bool {
-        activeTopLevelSurfaces.contains("Plan")
     }
 
     public static var disconnectedOneOffRisk: Bool {
@@ -201,35 +227,57 @@ public struct TopLevelSurfaceCompositionBar: View {
 
     private var header: some View {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                HStack(spacing: theme.spacing.xs) {
-                    AmbitionModeLensPill(surface.lens)
-                    AmbitionAmbientStatusOrb(surface.ambientStatus)
-                }
-
-                Text(surface.primaryObject)
-                    .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.titleCompact : theme.typography.section)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                Text(surface.orientation)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            Spacer(minLength: theme.spacing.xs)
+            surfaceMark
+            identityBlock
         }
     }
 
+    @ViewBuilder
     private var supportingModuleRail: some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(spacing: theme.spacing.xs) {
-                supportingModuleChips
-            }
+        Group {
+            switch surface {
+            case .today:
+                HStack(spacing: theme.spacing.xs) {
+                    supportingModuleChips
+                }
+            case .goals:
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    HStack(spacing: theme.spacing.xs) {
+                        supportingModuleChips
+                    }
+                }
+            case .capture:
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    EvidenceLabel(
+                        surface.primaryObject,
+                        detail: surface.orientation,
+                        source: surface.title,
+                        state: state == .selected ? .active : .calm,
+                        context: .capture
+                    )
 
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                supportingModuleChips
+                    HStack(spacing: theme.spacing.xs) {
+                        supportingModuleChips
+                    }
+                }
+            case .time:
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    EvidenceLabel(
+                        surface.primaryObject,
+                        detail: surface.orientation,
+                        source: surface.title,
+                        state: state == .warning ? .stale : .active,
+                        context: .plan
+                    )
+
+                    HStack(spacing: theme.spacing.xs) {
+                        supportingModuleChips
+                    }
+                }
+            case .you:
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .leading, spacing: theme.spacing.xs) {
+                    supportingModuleChips
+                }
             }
         }
         .accessibilityHidden(true)
@@ -238,8 +286,94 @@ public struct TopLevelSurfaceCompositionBar: View {
     @ViewBuilder
     private var supportingModuleChips: some View {
         ForEach(surface.supportingModules, id: \.self) { module in
-            AmbitionChip(module, icon: "point.topleft.down.curvedto.point.bottomright.up", role: .state)
+            AmbitionChip(module, icon: surface.supportingModuleIcon, role: .state)
         }
+    }
+
+    private var surfaceMark: some View {
+        Image(systemName: surface.symbolName)
+            .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+            .foregroundStyle(surface.ambientStatus == .tight ? theme.semanticColors.waiting : theme.colors.accentPrimary)
+            .frame(width: 34, height: 34)
+            .background(
+                Circle()
+                    .fill(theme.colors.surfaceOverlay)
+            )
+            .overlay(
+                Circle()
+                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+            )
+            .accessibilityHidden(true)
+    }
+
+    @ViewBuilder
+    private var identityBlock: some View {
+        switch surface {
+        case .today:
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                surfaceLead
+                primaryText
+                orientationText
+            }
+        case .goals:
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.xs) {
+                    surfaceLead
+                    AmbitionModeLensPill(surface.lens)
+                }
+                primaryText
+                orientationText
+            }
+        case .capture:
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.xs) {
+                    surfaceLead
+                    AmbitionAmbientStatusOrb(surface.ambientStatus)
+                }
+                primaryText
+                orientationText
+            }
+        case .time:
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.xs) {
+                    surfaceLead
+                    AmbitionAmbientStatusOrb(surface.ambientStatus)
+                }
+                primaryText
+                orientationText
+            }
+        case .you:
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.xs) {
+                    surfaceLead
+                    AmbitionAmbientStatusOrb(surface.ambientStatus)
+                }
+                primaryText
+                orientationText
+            }
+        }
+    }
+
+    private var surfaceLead: some View {
+        Text(surface.leadPhrase)
+            .font(theme.typography.micro)
+            .foregroundStyle(theme.colors.accentPrimary)
+            .textCase(.uppercase)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var primaryText: some View {
+        Text(surface.primaryObject)
+            .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.titleCompact : theme.typography.section)
+            .foregroundStyle(theme.colors.textPrimary)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var orientationText: some View {
+        Text(surface.orientation)
+            .font(theme.typography.caption)
+            .foregroundStyle(theme.colors.textSecondary)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }
 #endif

@@ -212,9 +212,15 @@ public struct ContextAtmosphereLayer: View {
             ZStack(alignment: .topLeading) {
                 Circle()
                     .fill(accent.opacity(0.10 + 0.08 * intensity))
-                    .frame(width: proxy.size.width * 0.86, height: proxy.size.width * 0.86)
-                    .offset(x: proxy.size.width * stateOffset.x, y: proxy.size.height * stateOffset.y)
+                    .frame(width: proxy.size.width * primaryScale, height: proxy.size.width * primaryScale)
+                    .offset(x: proxy.size.width * primaryOffset.x, y: proxy.size.height * primaryOffset.y)
                     .blur(radius: 38)
+
+                Circle()
+                    .fill(theme.colors.canvas.opacity(0.03 + 0.02 * intensity))
+                    .frame(width: proxy.size.width * secondaryScale, height: proxy.size.width * secondaryScale)
+                    .offset(x: proxy.size.width * secondaryOffset.x, y: proxy.size.height * secondaryOffset.y)
+                    .blur(radius: 48)
 
                 LinearGradient(
                     colors: [
@@ -231,13 +237,61 @@ public struct ContextAtmosphereLayer: View {
         .accessibilityHidden(true)
     }
 
-    private var stateOffset: CGPoint {
+    private var primaryScale: CGFloat {
+        switch context {
+        case .today: 0.88
+        case .goals: 0.82
+        case .capture: 0.84
+        case .plan: 0.90
+        case .you: 0.80
+        case .memory: 0.84
+        case .trust: 0.78
+        }
+    }
+
+    private var secondaryScale: CGFloat {
+        switch context {
+        case .today: 0.34
+        case .goals: 0.28
+        case .capture: 0.26
+        case .plan: 0.30
+        case .you: 0.24
+        case .memory: 0.26
+        case .trust: 0.22
+        }
+    }
+
+    private var primaryOffset: CGPoint {
         switch state {
-        case .calm, .empty: CGPoint(x: 0.46, y: 0.04)
-        case .active, .proof: CGPoint(x: 0.34, y: -0.02)
-        case .pressured, .stale: CGPoint(x: 0.26, y: 0.08)
-        case .recovery: CGPoint(x: 0.42, y: 0.14)
-        case .sensitive: CGPoint(x: 0.52, y: 0.10)
+        case .calm, .empty: baseOffset
+        case .active, .proof: CGPoint(x: baseOffset.x - 0.10, y: baseOffset.y - 0.06)
+        case .pressured, .stale: CGPoint(x: baseOffset.x - 0.16, y: baseOffset.y + 0.04)
+        case .recovery: CGPoint(x: baseOffset.x - 0.04, y: baseOffset.y + 0.10)
+        case .sensitive: CGPoint(x: baseOffset.x + 0.02, y: baseOffset.y + 0.06)
+        }
+    }
+
+    private var secondaryOffset: CGPoint {
+        switch context {
+        case .today: CGPoint(x: 0.08, y: 0.24)
+        case .goals: CGPoint(x: 0.62, y: 0.18)
+        case .capture: CGPoint(x: 0.14, y: 0.30)
+        case .plan: CGPoint(x: 0.66, y: 0.16)
+        case .you: CGPoint(x: 0.50, y: 0.04)
+        case .memory: CGPoint(x: 0.24, y: 0.10)
+        case .trust: CGPoint(x: 0.56, y: 0.28)
+        }
+    }
+
+    private var baseOffset: CGPoint {
+        switch context {
+        case .today: CGPoint(x: 0.42, y: 0.02)
+        case .goals: CGPoint(x: 0.24, y: 0.06)
+        case .capture: CGPoint(x: 0.56, y: 0.03)
+        case .plan: CGPoint(x: 0.34, y: 0.10)
+        case .you: CGPoint(x: 0.46, y: 0.12)
+        case .memory: CGPoint(x: 0.36, y: 0.00)
+        case .trust: CGPoint(x: 0.50, y: 0.14)
         }
     }
 }

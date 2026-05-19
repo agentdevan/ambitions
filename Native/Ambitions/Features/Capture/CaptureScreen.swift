@@ -38,6 +38,8 @@ struct CaptureScreen: View {
                     Spacer()
                         .frame(height: 60)
 
+                    TopLevelSurfaceCompositionBar(surface: .capture)
+
                     AtmosphereComposerCanvas(
                         inputText: Binding(
                             get: { viewModel.draftText },

@@ -21,6 +21,8 @@ struct YouScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                TopLevelSurfaceCompositionBar(surface: .you)
+
                 switch viewModel.state {
                 case .loading:
                     DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.personalSystemCenter))
