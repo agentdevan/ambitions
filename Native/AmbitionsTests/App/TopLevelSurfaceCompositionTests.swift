@@ -17,11 +17,15 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
     func testSI17EachSurfaceHasOnePrimaryObjectAndSubordinateModules() {
         for surface in AmbitionsTopLevelSurfaceComposition.allCases {
             XCTAssertFalse(surface.primaryObject.isEmpty)
+            XCTAssertFalse(surface.primaryObject.contains(" + "))
             XCTAssertFalse(surface.orientation.isEmpty)
             XCTAssertEqual(surface.supportingModules.count, 3)
             XCTAssertTrue(surface.accessibilitySummary.contains(surface.title))
             XCTAssertTrue(surface.accessibilitySummary.contains(surface.primaryObject))
         }
+
+        XCTAssertEqual(AmbitionsTopLevelSurfaceComposition.goals.primaryObject, "Constellation Atlas")
+        XCTAssertTrue(AmbitionsTopLevelSurfaceComposition.goals.supportingModules.contains("Orbital Lens"))
     }
 
     func testSI17CompositionAvoidsGenericSurfaceDrift() {

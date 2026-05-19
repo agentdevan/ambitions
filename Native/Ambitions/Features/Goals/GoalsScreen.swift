@@ -46,6 +46,8 @@ struct GoalsScreen: View {
                         }
                     )
                 case let .loaded(overview):
+                    TopLevelSurfaceCompositionBar(surface: .goals)
+
                     GoalMissionControlLanes(
                         overview: overview,
                         onPrimaryAction: handlePrimaryAction
