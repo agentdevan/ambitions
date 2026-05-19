@@ -21,6 +21,7 @@ Status: Active behavior canon
 - State should preserve source and receipt continuity.
 - State should survive Dynamic Type and Reduce Motion.
 - State should not rely on color alone.
+- Closure and recovery interactions use `CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md` as the durable grammar home for interrupted, blocked, stale, and recoverable cases.
 
 ## Surface Expectations
 

@@ -22,6 +22,7 @@ Object-local help; source detail; closure/recovery sheets; receipt details.
 ## States
 
 Every visible state must name what changed, why it matters, what source powers it, what the user can do, and whether a receipt or proof object is expected. Required state classes: default, empty, active, overloaded, recovery, blocked/waiting, no-data, stale-source, local-only/offline, Dynamic Type, VoiceOver, and Reduce Motion.
+Interrupted and recoverable closures use `behavior/CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md` so the visible labels stay consistent across surfaces.
 
 ## Forbidden Patterns
 

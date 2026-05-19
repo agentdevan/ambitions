@@ -10,6 +10,7 @@ Start here:
 - [`DESIGN_LANGUAGE_DOCTRINE.md`](DESIGN_LANGUAGE_DOCTRINE.md) for the frozen design-language rules that keep the frontend object-first and non-generic.
 - [`recipes/today/today_reality_meridian_flagship_surface.md`](recipes/today/today_reality_meridian_flagship_surface.md) for the locked Today flagship viewport: Reality Meridian, exact current-time cursor, one-handable Start now CTA, compact proof/recovery, and `Local · Ambitions` chrome.
 - [`SIGNATURE_VISUAL_INSTRUMENTS.md`](SIGNATURE_VISUAL_INSTRUMENTS.md) for the top-level instrument doctrine that prevents generic card/list surfaces.
+- [`behavior/CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md`](behavior/CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md) for the durable closure/recovery interaction grammar.
 - [`trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`](trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml) for the machine-readable instrument-to-surface map.
 - [`ENCYCLOPEDIA_TO_FRONTEND_OS.md`](ENCYCLOPEDIA_TO_FRONTEND_OS.md) for the implementation workflow.
 - [`FRONTEND_AUTHORITY_INDEX.md`](FRONTEND_AUTHORITY_INDEX.md) for the human control-plane front door.

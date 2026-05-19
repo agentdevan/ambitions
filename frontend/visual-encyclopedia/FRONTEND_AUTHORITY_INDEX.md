@@ -51,6 +51,7 @@ For frontend/UI/design implementation work:
 - Final proof authority: `trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md`, `trace/VISUAL_100_RED_YELLOW_FLAG_LEDGER.md`, `trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.md`, `trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml`, `trace/VISUAL_100_SOURCE_DEBT_LEDGER.md`, `trace/VISUAL_100_SOURCE_LINK_DISTRIBUTION.md`
 - Frontend doc classification map: `FRONTEND_DOC_CLASSIFICATION.md`
 - Vocabulary boundary: `VISUAL_VOCABULARY_BOUNDARY.md`
+- Closure/recovery interaction grammar: `behavior/CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md`
 - Source-link manifest: `VISUAL_SOURCE_LINKS.yaml`
 - Recipe short-form template: `VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md`
 - Recipe schema contract: `VISUAL_RECIPE_SCHEMA_CONTRACT.md`, `VISUAL_RECIPE_SCHEMA_CONTRACT.yaml`

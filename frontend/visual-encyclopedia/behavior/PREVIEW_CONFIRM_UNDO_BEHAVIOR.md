@@ -12,6 +12,7 @@ Preview Confirm Undo Behavior exists to preserve object meaning, user control, a
 - Provide visible source/proof/receipt path when meaning changes.
 - Preserve cancel, confirm, undo, or manual fallback where appropriate.
 - Avoid shame, urgency mechanics, fake precision, and hidden automation.
+- Keep interrupted, blocked, stale, and recoverable labels visible when preview or undo changes the user-facing state.
 
 ## Accessibility
 

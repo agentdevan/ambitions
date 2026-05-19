@@ -7,6 +7,7 @@ Destination: Today / Cross-surface
 ## What It Is
 
 Closure System exists to provide Completed, Still Counts, moved, shortened, waiting, blocked, not needed, recovery. It is an object contract, not a decorative module.
+Its interaction language is governed by `../behavior/CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md`.
 
 ## Where It Appears
 

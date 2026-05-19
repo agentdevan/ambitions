@@ -4,6 +4,7 @@ Status: Active behavior canon
 
 ## Triggers
 
+- interrupted flow
 - multiple unclosed steps
 - repeated moves
 - protected-time conflict
@@ -21,6 +22,7 @@ Status: Active behavior canon
 - Capture defaults to hold-first after saving.
 - You exposes temporary automation controls.
 - Copy remains calm and direct.
+- Use `CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md` for interrupted, blocked, stale, and recoverable labels.
 
 ## Forbidden Behavior
 

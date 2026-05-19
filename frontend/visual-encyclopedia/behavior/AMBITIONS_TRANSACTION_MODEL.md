@@ -36,3 +36,7 @@ Core model: `Intent -> Preview -> Commit -> Receipt -> Undo / Recover`
 ## Destructive Actions
 
 Destructive changes require explicit preview, a clear receipt, and a visible undo or recovery path when possible.
+
+## Closure Grammar
+
+The transaction model uses `CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md` for interrupted, blocked, stale, and recoverable closeout states.
