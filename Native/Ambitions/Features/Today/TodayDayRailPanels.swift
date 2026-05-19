@@ -51,6 +51,7 @@ struct AmbitionsDayRailView: View {
             if let heroStep = state.heroStep {
                 StartHereSurface(
                     step: heroStep,
+                    mode: state.mode,
                     privacy: state.privacyProjection,
                     contextLabel: state.contextSummary,
                     onAction: onAction,
@@ -237,6 +238,7 @@ private struct StartHereSurface: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let step: DayRailHeroStepState
+    let mode: DayRailMode
     let privacy: DayRailPrivacyProjectionState
     let contextLabel: String
     let onAction: (TodayInlineAction) -> Void
@@ -266,48 +268,39 @@ private struct StartHereSurface: View {
                             .font(theme.typography.body)
                             .foregroundStyle(theme.colors.textSecondary)
                             .fixedSize(horizontal: false, vertical: true)
-
-                        Text(step.becauseLine)
-                            .font(theme.typography.bodySecondary)
-                            .foregroundStyle(theme.colors.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .accessibilityIdentifier("TodayStartHereBecauseLine")
-
-                        sourceAndFit
-
-                        startHereFacts
                     }
                     Spacer(minLength: theme.spacing.sm)
                 }
             }
             .buttonStyle(.plain)
 
-            ReceiptDrawer(
-                title: "Receipt seam",
-                subtitle: "What will stay reviewable after action.",
-                sections: [
-                    ReceiptDrawerSection(
-                        id: "start-here",
-                        title: "Start Here",
-                        subtitle: privacy.isSensitiveProjection ? "Private details stay hidden." : "Source, change, and correction path stay attached.",
-                        items: [step.receiptItem]
-                    )
-                ]
-            )
-            .accessibilityIdentifier("TodayStartHereReceiptDrawer")
+            footer
 
             actionRow
         }
         .padding(theme.spacing.md)
         .background(
-            UnevenRoundedRectangle(
-                topLeadingRadius: theme.radius.sm,
-                bottomLeadingRadius: theme.radius.sm,
-                bottomTrailingRadius: theme.radius.lg,
-                topTrailingRadius: theme.radius.lg,
-                style: .continuous
-            )
-            .fill(theme.colors.surfaceOverlay.opacity(0.95))
+            ZStack {
+                UnevenRoundedRectangle(
+                    topLeadingRadius: theme.radius.sm,
+                    bottomLeadingRadius: theme.radius.sm,
+                    bottomTrailingRadius: theme.radius.lg,
+                    topTrailingRadius: theme.radius.lg,
+                    style: .continuous
+                )
+                .fill(theme.colors.surfaceOverlay.opacity(0.76))
+
+                LinearGradient(
+                    colors: [
+                        theme.colors.accentWarm.opacity(0.14),
+                        theme.colors.surfaceOverlay.opacity(0.02),
+                        .clear
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .blendMode(.screen)
+            }
         )
         .overlay(
             HStack(spacing: 0) {
@@ -327,89 +320,79 @@ private struct StartHereSurface: View {
     }
 
     @ViewBuilder
-    private var sourceAndFit: some View {
-        let stacksVertically = dynamicTypeSize.isAccessibilitySize
-        if stacksVertically {
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                sourceAndFitContent
-            }
-        } else {
-            HStack(spacing: theme.spacing.xs) {
-                sourceAndFitContent
-            }
-        }
-    }
-
-    @ViewBuilder
-    private var sourceAndFitContent: some View {
-        AmbitionChip(step.duration.label, role: .time, semanticState: .calendarDerived)
-        AmbitionChip(step.fitLabel, role: .state, semanticState: .focus)
-        AmbitionChip(step.sourceQualityLabel, role: .state, semanticState: .trust)
-    }
-
-    private var startHereFacts: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            StartHereFactRow(
-                icon: "point.topleft.down.curvedto.point.bottomright.up",
-                title: step.contextEdge.title,
-                value: step.contextEdge.summary,
-                detail: step.contextEdge.sourceLabel,
-                identifier: "TodayStartHereContextEdge"
-            )
-            StartHereFactRow(
-                icon: "clock.badge.checkmark",
-                title: step.timeFitProof.title,
-                value: step.timeFitProof.summary,
-                detail: step.timeFitProof.detail,
-                identifier: "TodayStartHereTimeFitProof"
-            )
-            StartHereFactRow(
-                icon: "point.3.connected.trianglepath.dotted",
-                title: step.goalThread.title,
-                value: step.goalThread.summary,
-                detail: step.goalThread.detail,
-                identifier: "TodayStartHereGoalThread"
-            )
-            StartHereFactRow(
-                icon: "clock.arrow.circlepath",
-                title: "Source freshness",
-                value: step.receiptItem.freshness.label,
-                detail: step.receiptItem.freshness.detail,
-                identifier: "TodayStartHereSourceFreshness"
-            )
-        }
-    }
-
-    @ViewBuilder
     private var actionRow: some View {
         let stacksVertically = dynamicTypeSize.isAccessibilitySize
         if stacksVertically {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                actions
+                actionColumn
             }
         } else {
-            HStack(spacing: theme.spacing.sm) {
-                actions
+            HStack(alignment: .bottom, spacing: theme.spacing.md) {
+                Spacer(minLength: 0)
+                actionColumn
             }
         }
     }
 
-    @ViewBuilder
-    private var actions: some View {
-        TodayPrimaryActionButton(action: step.primaryAction, handler: onAction)
-            .accessibilityIdentifier("TodayRealityRailPrimaryAction")
-        if let secondaryAction = step.secondaryAction {
-            Button {
-                onAction(secondaryAction)
-            } label: {
-                Label(secondaryAction.title, systemImage: secondaryAction.systemImage)
-                    .font(theme.typography.bodyEmphasized)
-                    .frame(maxWidth: .infinity)
-                    .frame(minHeight: 48)
+    private var actionColumn: some View {
+        VStack(alignment: .trailing, spacing: theme.spacing.xs) {
+            TodayPrimaryActionButton(action: step.primaryAction, handler: onAction)
+                .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : 220, alignment: .trailing)
+                .accessibilityIdentifier("TodayRealityRailPrimaryAction")
+
+            if let secondaryAction = step.secondaryAction {
+                Button {
+                    onAction(secondaryAction)
+                } label: {
+                    Label(secondaryAction.title, systemImage: secondaryAction.systemImage)
+                        .font(theme.typography.caption.weight(.semibold))
+                        .padding(.horizontal, theme.spacing.sm)
+                        .padding(.vertical, theme.spacing.xs)
+                }
+                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                .accessibilityHint("Uses the existing Today action without changing anything silently.")
+                .accessibilityIdentifier("TodayStartHereSecondaryAction")
             }
-            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-            .accessibilityHint("Uses the existing Today action without changing anything silently.")
-            .accessibilityIdentifier("TodayStartHereSecondaryAction")
+        }
+    }
+
+    private var footer: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(spacing: theme.spacing.xs) {
+                AmbitionChip(step.duration.label, role: .time, semanticState: .calendarDerived)
+                AmbitionChip(step.fitLabel, role: .state, semanticState: .focus)
+            }
+            .accessibilityHidden(true)
+
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Text(proofCaption)
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .accessibilityHidden(true)
+
+                Spacer(minLength: theme.spacing.sm)
+
+                EvidenceLabel(
+                    "Why this?",
+                    detail: step.becauseLine,
+                    source: sourceSummary,
+                    state: privacy.isSensitiveProjection ? .sensitive : .proof,
+                    context: .today
+                )
+                .accessibilityIdentifier("TodayStartHereBecauseLine")
+            }
+
+            InlineTrustReceipt(item: step.receiptItem)
+                .accessibilityIdentifier("TodayStartHereReceiptPreview")
+        }
+    }
+
+    private var proofCaption: String {
+        switch mode {
+        case .recovery:
+            "Still counts."
+        default:
+            "Receipt saved"
         }
     }
 
@@ -431,50 +414,10 @@ private struct StartHereSurface: View {
         [
             step.duration.label,
             sourceSummary,
-            step.receiptItem.freshness.label,
-            step.contextEdge.summary,
-            step.timeFitProof.summary,
-            step.goalThread.summary,
+            step.becauseLine,
+            proofCaption,
             step.receiptItem.accessibilitySummary
         ].joined(separator: ". ")
-    }
-}
-
-private struct StartHereFactRow: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let icon: String
-    let title: String
-    let value: String
-    let detail: String
-    let identifier: String
-
-    var body: some View {
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
-            Image(systemName: icon)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.accentWarm)
-                .frame(width: 24, height: 24)
-                .accessibilityHidden(true)
-
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(title)
-                    .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textTertiary)
-                Text(value)
-                    .font(theme.typography.bodySecondary)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .fixedSize(horizontal: false, vertical: true)
-                Text(detail)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(title)
-        .accessibilityValue("\(value). \(detail)")
-        .accessibilityIdentifier(identifier)
     }
 }
 
