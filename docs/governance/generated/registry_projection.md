@@ -1,6 +1,6 @@
 # Generated Ambitions Reconciled Registry Projection
 
-Generated: 2026-05-19T00:06:35-04:00
+Generated: 2026-05-19T12:50:02-04:00
 
 This file is generated from local repository data by `scripts/governance/ambitions-governance-reconcile.py`.
 Do not hand-edit generated output; update source files or governance rules and regenerate.
@@ -385,7 +385,8 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| FE09 | QUEUED_OR_BLOCKED | MEDIUM | 1 | 0 | 0 | 2 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
+| FE09 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 9 | 1 | 8 | 19 |  |
+| FE11 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 0 | 1 | 8 | 2 |  |
 
 ## FET
 
@@ -764,7 +765,8 @@ Do not hand-edit generated output; update source files or governance rules and r
 
 | Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
 |---|---|---:|---:|---:|---:|---:|---|
-| POST23 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 11 | 13 | 0 | 1 |  |
+| POST23 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 47 | 16 | 0 | 200 |  |
+| POST24 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 7 | 1 | 12 | 59 |  |
 
 ## PPL
 
@@ -936,7 +938,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 | SI13 | COMPLETE_PROOF_LINKED | HIGH | 24 | 1 | 3 | 21 |  |
 | SI14 | COMPLETE_PROOF_LINKED | HIGH | 24 | 1 | 3 | 16 |  |
 | SI15 | COMPLETE_PROOF_LINKED | HIGH | 23 | 1 | 3 | 14 |  |
-| SI16 | COMPLETE_PROOF_LINKED | HIGH | 23 | 1 | 3 | 15 |  |
+| SI16 | COMPLETE_PROOF_LINKED | HIGH | 28 | 1 | 3 | 26 |  |
 | SI17 | COMPLETE_PROOF_LINKED | HIGH | 24 | 1 | 8 | 16 |  |
 | SI18 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 23 | 1 | 0 | 13 |  |
 
@@ -960,6 +962,12 @@ Do not hand-edit generated output; update source files or governance rules and r
 | SIG14 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 1 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | SIG15 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 9 | Prompt exists without commit lineage; normalized to queued/deferred until executed. |
 | SIG16 | QUEUED_OR_BLOCKED | MEDIUM | 4 | 0 | 0 | 0 |  |
+
+## THALCMIF
+
+| Train | State | Confidence | Prompts | Commits | Impl Files | Proof Files | Warnings |
+|---|---|---:|---:|---:|---:|---:|---|
+| THALCMIF108A | QUEUED_OR_BLOCKED | LOW | 0 | 0 | 0 | 1 | Train ID is present without operational proof; normalized to queued/deferred. |
 
 ## UTF
 

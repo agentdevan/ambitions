@@ -1,20 +1,5 @@
 {
   "buckets": {
-    "candidate_orphan": [
-      {
-        "commit_count": 0,
-        "confidence": "MEDIUM",
-        "governance_file_count": 0,
-        "implementation_file_count": 0,
-        "prompt_files": [
-          ".codex/runs/FE-09-COMPONENT-SYSTEM/20260519T024050Z/prompts/03-review.prompt.md"
-        ],
-        "proof_file_count": 2,
-        "reason": "Prompt exists without automatic commit/proof/implementation linkage.",
-        "state": "QUEUED_OR_BLOCKED",
-        "train_id": "FE09"
-      }
-    ],
     "manifest_only_queued": [
       {
         "commit_count": 0,
@@ -752,6 +737,30 @@
         "reason": "Encoding/provenance token is not an executable train and should not require prompt backing.",
         "state": "QUEUED_OR_BLOCKED",
         "train_id": "UTF08"
+      }
+    ],
+    "not_prompt_backed": [
+      {
+        "commit_count": 1,
+        "confidence": "MEDIUM",
+        "governance_file_count": 0,
+        "implementation_file_count": 8,
+        "prompt_files": [],
+        "proof_file_count": 2,
+        "reason": "No prompt file is linked to this train.",
+        "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
+        "train_id": "FE11"
+      },
+      {
+        "commit_count": 0,
+        "confidence": "LOW",
+        "governance_file_count": 0,
+        "implementation_file_count": 0,
+        "prompt_files": [],
+        "proof_file_count": 1,
+        "reason": "No prompt file is linked to this train.",
+        "state": "QUEUED_OR_BLOCKED",
+        "train_id": "THALCMIF108A"
       }
     ],
     "proven_evidence_or_docs": [
@@ -3860,11 +3869,47 @@
         "train_id": "PK01"
       },
       {
-        "commit_count": 13,
+        "commit_count": 16,
         "confidence": "MEDIUM",
-        "governance_file_count": 8,
+        "governance_file_count": 13,
         "implementation_file_count": 0,
         "prompt_files": [
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T045342Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T070244Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T102730Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T111117Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T122351Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T135524Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T141353Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T141353Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T141353Z/prompts/03-review.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T141353Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T141353Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/AMB-POST23-01-TRUTH-AUDIT/20260519T142713Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-01-TRUTH-AUDIT/20260519T142713Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-POST23-01-TRUTH-AUDIT/20260519T152623Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-01-TRUTH-AUDIT/20260519T152623Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-POST23-01-TRUTH-AUDIT/20260519T152623Z/prompts/03-review.prompt.md",
+          ".codex/runs/AMB-POST23-01-TRUTH-AUDIT/20260519T152623Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/AMB-POST23-01-TRUTH-AUDIT/20260519T152623Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/AMB-POST23-02-UNDERDELIVERY-REPAIR/20260519T154022Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-02-UNDERDELIVERY-REPAIR/20260519T154022Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-POST23-02-UNDERDELIVERY-REPAIR/20260519T154022Z/prompts/03-review.prompt.md",
+          ".codex/runs/AMB-POST23-02-UNDERDELIVERY-REPAIR/20260519T154022Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/AMB-POST23-02-UNDERDELIVERY-REPAIR/20260519T154022Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING/20260519T155046Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING/20260519T155046Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING/20260519T155046Z/prompts/03-review.prompt.md",
+          ".codex/runs/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING/20260519T155046Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING/20260519T155046Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T160212Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T160212Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T160212Z/prompts/03-review.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T162344Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T162344Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T162344Z/prompts/03-review.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T162344Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T162344Z/prompts/05-finalize.prompt.md",
           "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md",
           "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE.md",
           "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md",
@@ -3877,7 +3922,7 @@
           "prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md",
           "prompts/batches/post-23-truth-audit/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md"
         ],
-        "proof_file_count": 1,
+        "proof_file_count": 200,
         "reason": "Prompt has commit lineage and evidence linkage but no implementation files.",
         "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
         "train_id": "POST23"
@@ -9579,6 +9624,27 @@
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "FCP30"
+      },
+      {
+        "commit_count": 1,
+        "confidence": "MEDIUM",
+        "governance_file_count": 0,
+        "implementation_file_count": 8,
+        "prompt_files": [
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/03-review.prompt.md",
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/FE-09-COMPONENT-SYSTEM/20260519T024050Z/prompts/03-review.prompt.md",
+          ".codex/runs/FE-10-INTERACTION-ACCESSIBILITY/20260519T055354Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/FE-10-INTERACTION-ACCESSIBILITY/20260519T055354Z/prompts/03-review.prompt.md",
+          ".codex/runs/FE-11-PREVIEWS-VISUAL-QA/20260519T062800Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/FE-11-PREVIEWS-VISUAL-QA/20260519T062800Z/prompts/03-review.prompt.md"
+        ],
+        "proof_file_count": 19,
+        "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
+        "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
+        "train_id": "FE09"
       },
       {
         "commit_count": 1,
@@ -26584,6 +26650,25 @@
         "train_id": "PK41"
       },
       {
+        "commit_count": 1,
+        "confidence": "MEDIUM",
+        "governance_file_count": 1,
+        "implementation_file_count": 12,
+        "prompt_files": [
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/03-review.prompt.md",
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/04-repair-1.prompt.md",
+          ".codex/runs/AMB-MOAT-OS-FINAL-INSTALLER-POST24/20260519T050534Z/prompts/05-finalize.prompt.md",
+          "prompts/AMB-MOAT-OS-FINAL-INSTALLER-POST24.md",
+          "prompts/moat-install/AMB-POST24-TRUTH-AUTHORITY-AUDIT-00.md"
+        ],
+        "proof_file_count": 59,
+        "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
+        "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
+        "train_id": "POST24"
+      },
+      {
         "commit_count": 2,
         "confidence": "HIGH",
         "governance_file_count": 27,
@@ -29289,6 +29374,11 @@
         "implementation_file_count": 3,
         "prompt_files": [
           ".codex/BATCH_TRAIN_REGISTRY.md",
+          ".codex/runs/FE-11-PREVIEWS-VISUAL-QA/20260519T062800Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/FE-11-PREVIEWS-VISUAL-QA/20260519T062800Z/prompts/03-review.prompt.md",
+          ".codex/runs/FE-11-PREVIEWS-VISUAL-QA/20260519T062800Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/FE-11-PREVIEWS-VISUAL-QA/20260519T103614Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/FE-11-PREVIEWS-VISUAL-QA/20260519T103614Z/prompts/03-review.prompt.md",
           "docs/codex/BATCH_REGISTRY.md",
           "docs/codex/GLOBAL_FUTURE_BATCH_DEPENDENCY_GRAPH.md",
           "docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md",
@@ -29312,7 +29402,7 @@
           "docs/codex/batches/SI17_Top_Level_Surface_Composition_Implementation_Prompt.md",
           "docs/codex/batches/SI18_Signature_Interface_Handoff_And_Product_Depth_Readiness_Prompt.md"
         ],
-        "proof_file_count": 15,
+        "proof_file_count": 26,
         "reason": "Prompt has commit lineage, implementation files, and proof/audit/report linkage.",
         "state": "COMPLETE_PROOF_LINKED",
         "train_id": "SI16"
@@ -29462,12 +29552,12 @@
     ]
   },
   "counts": {
-    "candidate_orphan": 1,
     "manifest_only_queued": 67,
+    "not_prompt_backed": 2,
     "proven_evidence_or_docs": 150,
     "proven_governance_only": 125,
-    "proven_implemented": 341,
+    "proven_implemented": 343,
     "queued_prompt_backed": 8
   },
-  "generated_at": "2026-05-19T04:36:03.571801+00:00"
+  "generated_at": "2026-05-19T17:15:26.425274+00:00"
 }

@@ -2,7 +2,10 @@
 
 ## Active Changes
 
-- docs/audits/amb-fe-be-integrated-proof-99-report.md
+- docs/proof/amb-fe-be/moat-scenario-proof-98/privacy-boundary.log
+- docs/proof/amb-fe-be/moat-scenario-proof-98/same-intent-context-a.json
+- docs/proof/amb-fe-be/moat-scenario-proof-98/same-intent-context-b.json
+- docs/proof/amb-fe-be/moat-scenario-proof-98/swift-test-output.log
 
 ## Historical / Archive Changes
 

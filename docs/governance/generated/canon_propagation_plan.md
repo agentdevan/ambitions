@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-19T00:06:35-04:00
+Generated: 2026-05-19T12:50:02-04:00
 
 ## Plan → Time
 
@@ -8,6 +8,9 @@ Generated: 2026-05-19T00:06:35-04:00
 - docs/widget-live-activity-manual-testing.md
 - docs/native-build-and-release.md
 - docs/implementation-backlog.md
+- docs/proof/AMB_PROOF_RECEIPT_SYSTEM_SPEC.md
+- docs/proof/amb-fe-be/moat-scenario-proof-98/same-intent-context-a.json
+- docs/proof/amb-fe-be/moat-scenario-proof-98/same-intent-context-b.json
 - docs/archive/generated/historical-registry-extract.md
 - docs/archive/superseded-design-canon/rc1-native-finish-pass.md
 - docs/archive/superseded-design-canon/design/transformation-validation-standard.md
@@ -707,6 +710,9 @@ Generated: 2026-05-19T00:06:35-04:00
 - docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md
 - docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-CONTRACTS.md
 - docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md
+- docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+- docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md
+- docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md
 - docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md
 - docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md
 - docs/codex/visual-quality/FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP.md
@@ -947,6 +953,7 @@ Generated: 2026-05-19T00:06:35-04:00
 - docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md
 - docs/AmbitionsCanon/12_Screen_Composition_Constitution.md
 - docs/AmbitionsCanon/Archive/README.md
+- docs/visual/AMB_SCREENSHOT_CANDIDATE_REGISTRY.md
 - docs/review/D02_TERMINOLOGY_REVIEW_CHECKLIST.md
 - docs/review/VISUAL_REVIEW_CHECKLIST.md
 - docs/review/FRICTION_LOG.md
@@ -977,9 +984,17 @@ Generated: 2026-05-19T00:06:35-04:00
 - docs/governance/generated/prompt_rewrite_plan.md
 - docs/marketing/Ambitions_3_0_Demo_Script.md
 - docs/marketing/Ambitions_3_0_App_Store_Truth_Packet.md
+- docs/authority/AMB_MOAT_OS_AUTHORITY_MODEL.md
+- docs/authority/AMB_POST24_TRUTH_AUDIT.md
+- docs/authority/AMB_ROOT_IA_CANON.md
+- docs/authority/AMB_ACTIVE_SOURCE_TRUTH.md
+- docs/authority/AMB_OBSOLETE_AUTHORITY_REGISTER.md
+- prompts/AMB-MOAT-OS-FINAL-INSTALLER-POST24.md
 - prompts/README.md
 - prompts/_BATCH_TEMPLATE.md
 - prompts/generated/frontend/TODAY-REALITY-MERIDIAN-FLAGSHIP-IMPLEMENTATION-01.md
+- prompts/moat-install/AMB-CATEGORY-PERSONAL-LIFE-OS-CANON-01.md
+- prompts/moat-install/AMB-POST24-TRUTH-AUTHORITY-AUDIT-00.md
 - prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-001.md
 - prompts/templates/AMBITIONS_REMAINING_BATCH_EXECUTION_STANDARD.md
 - prompts/batches/TIME-PRESSURE-LEDGER-VISUAL-01.md
@@ -1247,6 +1262,7 @@ Generated: 2026-05-19T00:06:35-04:00
 - Sources/Previews/SignatureInterfaceVisualQAFixtures.swift
 - Sources/Previews/ComponentPreviews.swift
 - Sources/Previews/SI03ShellNavigationPreviews.swift
+- Sources/Previews/InteractionMotionHapticsPreviews.swift
 - Sources/Accessibility/AccessibilityNutrition.swift
 - Native/AmbitionsTests/Captures/CapturePlacementReviewStateTests.swift
 - Native/AmbitionsTests/Insights/InsightsFeatureServiceTests.swift
@@ -1307,6 +1323,7 @@ Generated: 2026-05-19T00:06:35-04:00
 - Native/AmbitionsTests/Domain/AmbitionsOSAlternatePathModelsTests.swift
 - Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModelsTests.swift
 - Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift
+- Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift
 - Native/AmbitionsTests/Domain/LifeGraphModelsTests.swift
 - Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamPackRegistryModelsTests.swift
 - Native/AmbitionsTests/Domain/LivingPlanRedTeamEvaluatorTests.swift

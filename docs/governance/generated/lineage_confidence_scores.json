@@ -1556,8 +1556,13 @@
   },
   "FE09": {
     "confidence": "MEDIUM",
-    "score": 35,
-    "state": "QUEUED_OR_BLOCKED"
+    "score": 90,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
+  "FE11": {
+    "confidence": "MEDIUM",
+    "score": 70,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
   "FET00": {
     "confidence": "MEDIUM",
@@ -2854,6 +2859,11 @@
     "score": 60,
     "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
   },
+  "POST24": {
+    "confidence": "MEDIUM",
+    "score": 85,
+    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+  },
   "PPL01": {
     "confidence": "MEDIUM",
     "score": 20,
@@ -3452,6 +3462,11 @@
   "SIG16": {
     "confidence": "MEDIUM",
     "score": 20,
+    "state": "QUEUED_OR_BLOCKED"
+  },
+  "THALCMIF108A": {
+    "confidence": "LOW",
+    "score": 15,
     "state": "QUEUED_OR_BLOCKED"
   },
   "UTF08": {

@@ -1,21 +1,15 @@
 # Orphan Prompt Provenance
 
-Generated: 2026-05-19T04:36:03.571801+00:00
+Generated: 2026-05-19T17:15:26.425274+00:00
 
 ## Counts
 
-- candidate_orphan: 1
 - manifest_only_queued: 67
+- not_prompt_backed: 2
 - proven_evidence_or_docs: 150
 - proven_governance_only: 125
-- proven_implemented: 341
+- proven_implemented: 343
 - queued_prompt_backed: 8
-
-## candidate_orphan
-
-| Train | State | Commits | Impl | Proof | Governance | Reason |
-|---|---|---:|---:|---:|---:|---|
-| FE09 | QUEUED_OR_BLOCKED | 0 | 0 | 2 | 0 | Prompt exists without automatic commit/proof/implementation linkage. |
 
 ## manifest_only_queued
 
@@ -88,6 +82,13 @@ Generated: 2026-05-19T04:36:03.571801+00:00
 | RFM06 | QUEUED_OR_BLOCKED | 0 | 0 | 2 | 1 | RFM01-RFM06 are proof/report references and should remain manifest-only until executable prompts are issued. |
 | SHA256 | QUEUED_OR_BLOCKED | 0 | 0 | 0 | 4 | Hash/provenance token is not an executable train and should not require prompt backing. |
 | UTF08 | QUEUED_OR_BLOCKED | 0 | 0 | 0 | 1 | Encoding/provenance token is not an executable train and should not require prompt backing. |
+
+## not_prompt_backed
+
+| Train | State | Commits | Impl | Proof | Governance | Reason |
+|---|---|---:|---:|---:|---:|---|
+| FE11 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 1 | 8 | 2 | 0 | No prompt file is linked to this train. |
+| THALCMIF108A | QUEUED_OR_BLOCKED | 0 | 0 | 1 | 0 | No prompt file is linked to this train. |
 
 ## proven_evidence_or_docs
 
@@ -228,7 +229,7 @@ Generated: 2026-05-19T04:36:03.571801+00:00
 | PFC30 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 21 | 31 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PK00 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 9 | 15 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PK01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 12 | 16 | Prompt has commit lineage and evidence linkage but no implementation files. |
-| POST23 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 13 | 0 | 1 | 8 | Prompt has commit lineage and evidence linkage but no implementation files. |
+| POST23 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 16 | 0 | 200 | 13 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 27 | 83 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 24 | 20 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 23 | 19 | Prompt has commit lineage and evidence linkage but no implementation files. |
@@ -506,6 +507,7 @@ Generated: 2026-05-19T04:36:03.571801+00:00
 | FCP28 | COMPLETE_PROOF_LINKED | 4 | 5 | 68 | 54 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP29 | COMPLETE_PROOF_LINKED | 5 | 4 | 61 | 56 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FCP30 | COMPLETE_PROOF_LINKED | 4 | 4 | 52 | 52 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| FE09 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 1 | 8 | 19 | 0 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FET01 | COMPLETE_PROOF_LINKED | 1 | 6 | 14 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FET02 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 1 | 6 | 14 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | FET03 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 1 | 6 | 14 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
@@ -644,6 +646,7 @@ Generated: 2026-05-19T04:36:03.571801+00:00
 | PK39 | COMPLETE_PROOF_LINKED | 4 | 17 | 378 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PK40 | COMPLETE_PROOF_LINKED | 4 | 17 | 378 | 34 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PK41 | COMPLETE_PROOF_LINKED | 4 | 17 | 380 | 38 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
+| POST24 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 1 | 12 | 59 | 1 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PX01 | COMPLETE_PROOF_LINKED | 2 | 4 | 29 | 27 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PX02 | COMPLETE_PROOF_LINKED | 2 | 4 | 28 | 25 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | PX03 | COMPLETE_PROOF_LINKED | 2 | 4 | 28 | 27 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
@@ -676,9 +679,7 @@ Generated: 2026-05-19T04:36:03.571801+00:00
 | SA08 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 4 | 8 | 50 | 18 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | SA09 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 6 | 6 | 50 | 18 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
 | SA10 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 8 | 7 | 48 | 19 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| SA10A | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 4 | 7 | 28 | 10 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| SA10B | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 4 | 7 | 25 | 9 | Prompt has commit lineage, implementation files, and proof/audit/report linkage. |
-| ... | truncated | | | | | 41 more entries in JSON |
+| ... | truncated | | | | | 43 more entries in JSON |
 
 ## queued_prompt_backed
 

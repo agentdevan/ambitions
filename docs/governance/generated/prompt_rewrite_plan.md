@@ -1,8 +1,11 @@
 # Prompt Rewrite Plan
 
+- prompts/AMB-MOAT-OS-FINAL-INSTALLER-POST24.md: Plan -> Time
 - prompts/README.md: Plan -> Time
 - prompts/_BATCH_TEMPLATE.md: Plan -> Time
 - prompts/generated/frontend/TODAY-REALITY-MERIDIAN-FLAGSHIP-IMPLEMENTATION-01.md: Plan -> Time
+- prompts/moat-install/AMB-CATEGORY-PERSONAL-LIFE-OS-CANON-01.md: Plan -> Time
+- prompts/moat-install/AMB-POST24-TRUTH-AUTHORITY-AUDIT-00.md: Plan -> Time
 - prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-001.md: Plan -> Time
 - prompts/templates/AMBITIONS_REMAINING_BATCH_EXECUTION_STANDARD.md: Plan -> Time
 - prompts/batches/TIME-PRESSURE-LEDGER-VISUAL-01.md: Plan -> Time

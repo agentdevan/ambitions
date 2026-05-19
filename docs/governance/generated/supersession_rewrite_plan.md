@@ -447,6 +447,10 @@
 - classify/archive/rewrite: docs/audits/throughput-acceleration-01-report.md
 - classify/archive/rewrite: docs/audits/today-reality-meridian-flagship-surface-install-report.md
 - classify/archive/rewrite: docs/audits/yellow-completion-repair/yellow-completion-repair-report.md
+- classify/archive/rewrite: docs/authority/AMB_ACTIVE_SOURCE_TRUTH.md
+- classify/archive/rewrite: docs/authority/AMB_MOAT_OS_AUTHORITY_MODEL.md
+- classify/archive/rewrite: docs/authority/AMB_OBSOLETE_AUTHORITY_REGISTER.md
+- classify/archive/rewrite: docs/authority/AMB_POST24_TRUTH_AUDIT.md
 - classify/archive/rewrite: docs/canon/AMBITION_CANON_COMPLETION_REPORT.md
 - classify/archive/rewrite: docs/canon/AmbitionsOS_Alternate_Path_Kernel.md
 - classify/archive/rewrite: docs/canon/AmbitionsOS_Index.md
@@ -598,6 +602,7 @@
 - classify/archive/rewrite: docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md
 - classify/archive/rewrite: docs/codex/AMBITIONS_CANON_UI_COMPLETION_INSERTION_OVERLAY.md
 - classify/archive/rewrite: docs/codex/AMBITIONS_PROMPT_QUALITY_GATE.md
+- classify/archive/rewrite: docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md
 - classify/archive/rewrite: docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md
 - classify/archive/rewrite: docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md
 - classify/archive/rewrite: docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md
@@ -775,6 +780,11 @@
 - classify/archive/rewrite: docs/codex/quality/AQOS_SCRIPT_AND_TOOL_MAP.md
 - classify/archive/rewrite: docs/codex/repo-audit-baseline.md
 - classify/archive/rewrite: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+- classify/archive/rewrite: docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+- classify/archive/rewrite: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+- classify/archive/rewrite: docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md
+- classify/archive/rewrite: docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md
+- classify/archive/rewrite: docs/contracts/AMB_PROJECTION_CONTRACT_REGISTRY.md
 - classify/archive/rewrite: docs/governance/ACTIVE_EXECUTION_GRAPH.md
 - classify/archive/rewrite: docs/governance/AUTHORITY_HIERARCHY.md
 - classify/archive/rewrite: docs/governance/AUTOMATED_REGISTRY_GENERATION_PLAN.md
@@ -855,6 +865,7 @@
 - classify/archive/rewrite: docs/truth/PRODUCT_DESIGN_TRUTH.md
 - classify/archive/rewrite: docs/truth/README.md
 - classify/archive/rewrite: docs/truth/RELEASE_TRUTH.md
+- classify/archive/rewrite: prompts/AMB-MOAT-OS-FINAL-INSTALLER-POST24.md
 - classify/archive/rewrite: prompts/README.md
 - classify/archive/rewrite: prompts/_BATCH_TEMPLATE.md
 - classify/archive/rewrite: prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-001.md
@@ -1150,4 +1161,6 @@
 - classify/archive/rewrite: prompts/batches/amb-fe-be/FE-01-CANON-FREEZE.md
 - classify/archive/rewrite: prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md
 - classify/archive/rewrite: prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md
+- classify/archive/rewrite: prompts/moat-install/AMB-CATEGORY-PERSONAL-LIFE-OS-CANON-01.md
+- classify/archive/rewrite: prompts/moat-install/AMB-POST24-TRUTH-AUTHORITY-AUDIT-00.md
 - classify/archive/rewrite: prompts/templates/ambitions-audit-template.md

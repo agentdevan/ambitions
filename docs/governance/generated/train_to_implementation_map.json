@@ -8167,9 +8167,36 @@
     ]
   },
   "FE09": {
-    "commits": [],
+    "commits": [
+      "f4a0d1a36e5702aaeff4ce4eff30c0fad09e5e4a"
+    ],
     "governance_files": [],
-    "implementation_files": []
+    "implementation_files": [
+      "Native/AmbitionsTests/App/FE09ComponentSystemTests.swift",
+      "Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift",
+      "Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift",
+      "Sources/Components/AmbitionsExtendedTactileKit.swift",
+      "Sources/Previews/FE09ComponentSystemPreviewMatrix.swift",
+      "Sources/Previews/InteractionMotionHapticsPreviews.swift",
+      "Sources/Previews/SignatureInterfaceVisualQAFixtures.swift",
+      "scripts/ambitions-fe11-preview-visual-qa-report.py"
+    ]
+  },
+  "FE11": {
+    "commits": [
+      "f4a0d1a36e5702aaeff4ce4eff30c0fad09e5e4a"
+    ],
+    "governance_files": [],
+    "implementation_files": [
+      "Native/AmbitionsTests/App/FE09ComponentSystemTests.swift",
+      "Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift",
+      "Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift",
+      "Sources/Components/AmbitionsExtendedTactileKit.swift",
+      "Sources/Previews/FE09ComponentSystemPreviewMatrix.swift",
+      "Sources/Previews/InteractionMotionHapticsPreviews.swift",
+      "Sources/Previews/SignatureInterfaceVisualQAFixtures.swift",
+      "scripts/ambitions-fe11-preview-visual-qa-report.py"
+    ]
   },
   "FET00": {
     "commits": [],
@@ -18517,6 +18544,9 @@
   },
   "POST23": {
     "commits": [
+      "abe8c5e65a765d4b072b90be4fa8cfc9fff3dcd9",
+      "c6d7a703617531c392227b0856900c1df075ed67",
+      "3fa45d9a6fc8f50993f377bab5e16f25c605b69f",
       "7fdb35aba1ff969262535a35df23698ebccd3a55",
       "f7ff918cdaea6e0763153bd4ea0fea7cb30b19c1",
       "8634f132b46f2875a42eafe22c643b78834c6e67",
@@ -18539,9 +18569,36 @@
       "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-STATUS.md",
       "docs/codex/batch-trains/post-23-truth-audit/README.md",
       "docs/codex/os/AMB-CODEX-OS-POST23-AUTO-PICKUP.md",
+      "docs/codex/reports/AMB-POST23-00-COMPLETION-SENTINEL.md",
+      "docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md",
+      "docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md",
+      "docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md",
+      "docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md",
       "docs/codex/reports/AMB-POST23-TRUTH-AUDIT-REPAIR-INSTALL-01.md"
     ],
     "implementation_files": []
+  },
+  "POST24": {
+    "commits": [
+      "f75876e487ccc86b3966fbdda4adc107c03b56bb"
+    ],
+    "governance_files": [
+      "docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md"
+    ],
+    "implementation_files": [
+      "scripts/ambitions_validate_accessibility_gates.py",
+      "scripts/ambitions_validate_authority_drift.py",
+      "scripts/ambitions_validate_batch_ids.py",
+      "scripts/ambitions_validate_claim_registry.py",
+      "scripts/ambitions_validate_continuity_claims.py",
+      "scripts/ambitions_validate_moat_install.py",
+      "scripts/ambitions_validate_projection_contracts.py",
+      "scripts/ambitions_validate_prompt_headers.py",
+      "scripts/ambitions_validate_proof_receipts.py",
+      "scripts/ambitions_validate_runtime_authority.py",
+      "scripts/ambitions_validate_trust_privacy.py",
+      "scripts/ambitions_validate_visual_proof.py"
+    ]
   },
   "PPL01": {
     "commits": [],
@@ -22432,6 +22489,11 @@
       "docs/codex/batch-trains/SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN.md",
       "docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md"
     ],
+    "implementation_files": []
+  },
+  "THALCMIF108A": {
+    "commits": [],
+    "governance_files": [],
     "implementation_files": []
   },
   "UTF08": {
