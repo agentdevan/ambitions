@@ -111,6 +111,14 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
         }
     }
 
+    func testSI16ProofArtifactsStayInsideTheFe11VisualEvidencePath() {
+        XCTAssertEqual(SI16PreviewFixtureCatalog.proofArtifactDirectory, "docs/audits/visual-evidence/fe11/")
+        XCTAssertEqual(SI16PreviewFixtureCatalog.screenshotProofDirectory, "docs/audits/visual-evidence/fe11/screenshots/")
+        XCTAssertEqual(SI16PreviewFixtureCatalog.proofManifestName, "fe11-preview-visual-qa-proof.md")
+        XCTAssertTrue(SI16PreviewFixtureCatalog.proofArtifactDirectory.hasPrefix("docs/audits/visual-evidence/fe11/"))
+        XCTAssertTrue(SI16PreviewFixtureCatalog.screenshotProofDirectory.hasPrefix("docs/audits/visual-evidence/fe11/"))
+    }
+
     func testAFI13VisualQAScorecardsLockActiveSurfaceTargetsWithoutClaims() {
         XCTAssertEqual(AFI13VisualQACatalog.ownerBatch, "AFI13")
         XCTAssertEqual(

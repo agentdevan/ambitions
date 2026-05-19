@@ -139,9 +139,131 @@ public struct SI16VisualQAFixture: Identifiable, Hashable, Sendable {
     public var changesRuntimeBehavior: Bool { false }
 }
 
+public struct SI16VisualQAFixtureSnapshotCard: View {
+    public let fixture: SI16VisualQAFixture
+
+    public init(fixture: SI16VisualQAFixture) {
+        self.fixture = fixture
+    }
+
+    public var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [surfaceBase.opacity(0.96), Color(red: 0.05, green: 0.06, blue: 0.07)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .overlay(alignment: .topTrailing) {
+                Circle()
+                    .fill(surfaceAccent.opacity(0.16))
+                    .frame(width: 230, height: 230)
+                    .offset(x: 54, y: -32)
+            }
+            .overlay(alignment: .bottomTrailing) {
+                Path { path in
+                    path.move(to: CGPoint(x: 80, y: 630))
+                    path.addCurve(
+                        to: CGPoint(x: 1120, y: 510),
+                        control1: CGPoint(x: 300, y: 530),
+                        control2: CGPoint(x: 650, y: 730)
+                    )
+                }
+                .stroke(surfaceAccent.opacity(0.42), lineWidth: 4)
+            }
+
+            VStack(alignment: .leading, spacing: 30) {
+                HStack(spacing: 14) {
+                    Text("FE-11")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .foregroundStyle(surfaceAccent)
+                        .padding(.horizontal, 28)
+                        .padding(.vertical, 12)
+                        .background(Capsule().fill(surfaceAccent.opacity(0.15)))
+
+                    Text(fixture.ownerSurface)
+                        .font(.system(size: 24, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.72))
+                }
+
+                Spacer(minLength: 28)
+
+                VStack(alignment: .leading, spacing: 14) {
+                    Text(fixture.stateFamily.title)
+                        .font(.system(size: 76, weight: .bold, design: .rounded))
+                        .foregroundStyle(Color(red: 0.96, green: 0.94, blue: 0.89))
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text(fixture.primaryObject)
+                        .font(.system(size: 42, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.78))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(fixture.id)
+                        .font(.system(size: 30, weight: .bold, design: .rounded))
+                        .foregroundStyle(surfaceAccent)
+
+                    Text(fixture.screenshotName)
+                        .font(.system(size: 24, weight: .regular, design: .monospaced))
+                        .foregroundStyle(.white.opacity(0.62))
+                }
+                .padding(28)
+                .frame(maxWidth: 560, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 26, style: .continuous)
+                        .fill(Color.black.opacity(0.28))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 26, style: .continuous)
+                        .stroke(.white.opacity(0.14), lineWidth: 1)
+                )
+
+                Spacer(minLength: 30)
+
+                Text("SwiftUI ImageRenderer snapshot from the FE-11 fixture catalog. Inventory proof only; not device proof, release proof, accessibility conformance, or human visual approval.")
+                    .font(.system(size: 23, weight: .regular, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.66))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(72)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        }
+        .frame(width: 1200, height: 800)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(fixture.previewName). \(fixture.accessibilityNote)")
+        .accessibilityValue("FE-11 SwiftUI snapshot. \(fixture.reduceMotionNote) \(fixture.nonColorNote)")
+    }
+
+    private var surfaceBase: Color {
+        switch fixture.ownerSurface {
+        case "Today": Color(red: 0.08, green: 0.13, blue: 0.12)
+        case "Goals": Color(red: 0.10, green: 0.10, blue: 0.18)
+        case "Capture": Color(red: 0.14, green: 0.09, blue: 0.15)
+        case "Time": Color(red: 0.14, green: 0.13, blue: 0.08)
+        case "You": Color(red: 0.08, green: 0.11, blue: 0.16)
+        default: Color(red: 0.10, green: 0.10, blue: 0.10)
+        }
+    }
+
+    private var surfaceAccent: Color {
+        switch fixture.ownerSurface {
+        case "Today": Color(red: 0.47, green: 0.85, blue: 0.70)
+        case "Goals": Color(red: 0.68, green: 0.72, blue: 1.00)
+        case "Capture": Color(red: 0.90, green: 0.66, blue: 0.84)
+        case "Time": Color(red: 0.86, green: 0.76, blue: 0.42)
+        case "You": Color(red: 0.57, green: 0.78, blue: 1.00)
+        default: Color.white
+        }
+    }
+}
+
 public enum SI16PreviewFixtureCatalog {
     public static let ownerBatch = "SI16"
     public static let screenshotDirectory = "docs/audits/si16-preview-fixture-evidence/"
+    public static let proofArtifactDirectory = "docs/audits/visual-evidence/fe11/"
+    public static let screenshotProofDirectory = "docs/audits/visual-evidence/fe11/screenshots/"
+    public static let proofManifestName = "fe11-preview-visual-qa-proof.md"
     public static let claimsHumanApproval = false
     public static let claimsDeviceProof = false
     public static let changesRuntimeBehavior = false
