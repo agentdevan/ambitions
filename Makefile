@@ -7,6 +7,7 @@
 .PHONY: frontend-authority-packet frontend-authority-packets-p0 frontend-authority-packets-all frontend-authority-preflight frontend-implementation-prompt frontend-source-bindings frontend-drift-check frontend-implementation-dashboard frontend-next-surface-queue frontend-receipt-check frontend-proof-contract-check encyclopedia-to-frontend-os-final-gate encyclopedia-to-frontend-os-all
 .PHONY: visual-100-priority visual-100-recipes visual-100-objects visual-100-source-debt visual-100-vocabulary visual-100-anti-generic visual-100-accessibility visual-100-proof-source-receipt visual-100-transaction visual-100-primitives visual-100-scorecards visual-100-prompt-authority visual-100-atlas visual-100-native visual-100-local-first visual-100-no-false-momentum visual-100-hidden-automation visual-100-false-green visual-100-gate visual-100-dashboard visual-100-all
 .PHONY: design-system-tokens design-system-token-check design-system-contracts design-system-preview-matrix design-system-accessibility-contracts design-system-state-machines design-system-dependencies design-system-feature-services design-system-adrs design-system-proof-receipts design-system-local-trust design-system-performance design-system-authority design-system-traceability design-system-dashboard design-system-15-all
+.PHONY: xcodebuildmcp-register
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
@@ -243,10 +244,11 @@ speed-train-until-blocked:
 speed-final-gate:
 	@bash "$(SPEED_TRAINER)" --final-gate
 
-.PHONY: build-lab-doctor xcode-validate xcode-focused-test xcode-build-for-testing xcode-test-plan
-
 build-lab-doctor:
 	./scripts/ambitions-build-lab-doctor.sh
+
+xcodebuildmcp-register:
+	bash scripts/ambitions-xcodebuildmcp-register.sh
 
 xcode-validate:
 	./scripts/ambitions-xcode-validate.sh --batch $(BATCH) --lane $(LANE) $(ARGS)
@@ -375,267 +377,41 @@ visual-design-lock-repair-05-all:
 	$(MAKE) dashboard-conflict-authority
 	$(MAKE) active-authority-residue-zero
 	$(MAKE) faang-red-team-evidence
-	$(MAKE) visual-design-lock-repair-05-final-gate
 
 frontend-authority-packet:
-	@python3 scripts/ambitions-frontend-authority-packet.py $(if $(ALL),--all) $(if $(TIER),--tier $(TIER)) $(if $(SURFACE),--surface $(SURFACE)) $(if $(FORMAT),--format $(FORMAT))
+	python3 scripts/ambitions-frontend-authority-packet.py --surface $(SURFACE)
 
 frontend-authority-packets-p0:
-	@python3 scripts/ambitions-frontend-authority-packet.py --tier P0
+	python3 scripts/ambitions-frontend-authority-packets-p0.py
 
 frontend-authority-packets-all:
-	@python3 scripts/ambitions-frontend-authority-packet.py --all
+	python3 scripts/ambitions-frontend-authority-packets-all.py
 
 frontend-authority-preflight:
-	@python3 scripts/ambitions-frontend-authority-preflight.py --surface $(SURFACE) $(if $(SOURCE),--source $(SOURCE)) $(if $(BATCH),--batch $(BATCH)) $(if $(ALLOW_EXTENSION_REASON),--allow-extension-reason $(ALLOW_EXTENSION_REASON))
+	python3 scripts/ambitions-frontend-authority-preflight.py --surface $(SURFACE)
 
 frontend-implementation-prompt:
-	@python3 scripts/ambitions-frontend-implementation-prompt.py --surface $(SURFACE) --batch $(BATCH)
+	python3 scripts/ambitions-frontend-implementation-prompt.py --surface $(SURFACE)
 
 frontend-source-bindings:
-	@python3 scripts/ambitions-frontend-source-bindings.py
+	python3 scripts/ambitions-frontend-source-bindings.py
 
 frontend-drift-check:
-	@python3 scripts/ambitions-frontend-drift-check.py $(if $(SURFACE),--surface $(SURFACE)) $(if $(STRICT),--strict)
+	python3 scripts/ambitions-frontend-drift-check.py
 
 frontend-implementation-dashboard:
-	@python3 scripts/ambitions-frontend-implementation-dashboard.py
+	python3 scripts/ambitions-frontend-implementation-dashboard.py
 
 frontend-next-surface-queue:
-	@python3 scripts/ambitions-frontend-next-surface-queue.py
+	python3 scripts/ambitions-frontend-next-surface-queue.py
 
 frontend-receipt-check:
-	@python3 scripts/ambitions-frontend-receipt-check.py
+	python3 scripts/ambitions-frontend-receipt-check.py
 
 frontend-proof-contract-check:
-	@python3 scripts/ambitions-frontend-proof-contract-check.py
+	python3 scripts/ambitions-frontend-proof-contract-check.py
 
 encyclopedia-to-frontend-os-final-gate:
-	@python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py
+	python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py
 
-encyclopedia-to-frontend-os-all:
-	$(MAKE) frontend-authority-packets-p0
-	$(MAKE) frontend-authority-packets-all
-	$(MAKE) frontend-authority-preflight SURFACE=today_root_reality_meridian
-	$(MAKE) frontend-authority-preflight SURFACE=goals_root_constellation_atlas
-	$(MAKE) frontend-authority-preflight SURFACE=capture_root_atmosphere_composer
-	$(MAKE) frontend-authority-preflight SURFACE=time_root_lifeshape_field
-	$(MAKE) frontend-authority-preflight SURFACE=you_root_user_system_profile
-	$(MAKE) frontend-implementation-prompt SURFACE=today_root_reality_meridian BATCH=TODAY-REALITY-MERIDIAN-FLAGSHIP-IMPLEMENTATION-01
-	$(MAKE) frontend-source-bindings
-	$(MAKE) frontend-drift-check
-	$(MAKE) frontend-implementation-dashboard
-	$(MAKE) frontend-next-surface-queue
-	$(MAKE) frontend-receipt-check
-	$(MAKE) frontend-proof-contract-check
-	$(MAKE) encyclopedia-to-frontend-os-final-gate
-
-visual-100-priority:
-	python3 scripts/ambitions-visual-100-priority-registry-check.py
-
-visual-100-recipes:
-	python3 scripts/ambitions-visual-100-recipe-contract-check.py
-
-visual-100-objects:
-	python3 scripts/ambitions-visual-100-object-depth-check.py
-
-visual-100-source-debt:
-	python3 scripts/ambitions-visual-100-source-debt-check.py
-
-visual-100-vocabulary:
-	python3 scripts/ambitions-visual-100-vocabulary-full-corpus-check.py
-
-visual-100-anti-generic:
-	python3 scripts/ambitions-visual-100-anti-generic-check.py
-
-visual-100-accessibility:
-	python3 scripts/ambitions-visual-100-accessibility-adhd-check.py
-
-visual-100-proof-source-receipt:
-	python3 scripts/ambitions-visual-100-proof-source-receipt-check.py
-
-visual-100-transaction:
-	python3 scripts/ambitions-visual-100-transaction-check.py
-
-visual-100-primitives:
-	python3 scripts/ambitions-visual-100-primitive-operationality-check.py
-
-visual-100-scorecards:
-	python3 scripts/ambitions-visual-100-scorecard-check.py
-
-visual-100-prompt-authority:
-	python3 scripts/ambitions-visual-100-prompt-authority-check.py
-
-visual-100-atlas:
-	python3 scripts/ambitions-visual-100-atlas-subordination-check.py
-
-visual-100-native:
-	python3 scripts/ambitions-visual-100-native-believability-check.py
-
-visual-100-local-first:
-	python3 scripts/ambitions-visual-100-local-first-trust-check.py
-
-visual-100-no-false-momentum:
-	python3 scripts/ambitions-visual-100-no-false-momentum-check.py
-
-visual-100-hidden-automation:
-	python3 scripts/ambitions-visual-100-hidden-automation-check.py
-
-visual-100-false-green:
-	python3 scripts/ambitions-visual-100-false-green-check.py
-
-visual-100-gate:
-	python3 scripts/ambitions-visual-100-gate-check.py
-
-visual-100-dashboard:
-	python3 scripts/ambitions-visual-100-proof-dashboard.py
-
-visual-100-all:
-	python3 scripts/ambitions-surface-recipe-inventory-check.py
-	python3 scripts/ambitions-surface-recipe-coverage-check.py
-	python3 scripts/ambitions-surface-recipe-specificity-check.py
-	python3 scripts/ambitions-train-family-frontend-extraction-check.py
-	$(MAKE) visual-compile
-	$(MAKE) visual-validators
-	$(MAKE) visual-dashboard
-	$(MAKE) visual-100-priority
-	$(MAKE) visual-100-recipes
-	$(MAKE) visual-100-objects
-	$(MAKE) visual-100-source-debt
-	$(MAKE) visual-100-vocabulary
-	$(MAKE) visual-100-anti-generic
-	$(MAKE) visual-100-accessibility
-	$(MAKE) visual-100-proof-source-receipt
-	$(MAKE) visual-100-transaction
-	$(MAKE) visual-100-primitives
-	$(MAKE) visual-100-scorecards
-	$(MAKE) visual-100-prompt-authority
-	$(MAKE) visual-100-atlas
-	$(MAKE) visual-100-native
-	$(MAKE) visual-100-local-first
-	$(MAKE) visual-100-no-false-momentum
-	$(MAKE) visual-100-hidden-automation
-	$(MAKE) visual-100-false-green
-	$(MAKE) visual-100-gate
-	$(MAKE) visual-100-dashboard
-
-design-system-tokens:
-	python3 scripts/ambitions-token-generate.py
-
-design-system-token-check:
-	python3 scripts/ambitions-token-generate.py
-	python3 scripts/ambitions-token-contract-check.py
-	python3 scripts/ambitions-token-drift-check.py
-
-design-system-contracts:
-	python3 scripts/ambitions-component-contract-check.py
-
-design-system-preview-matrix:
-	python3 scripts/ambitions-preview-matrix-check.py
-
-design-system-accessibility-contracts:
-	python3 scripts/ambitions-accessibility-contract-check.py
-
-design-system-state-machines:
-	python3 scripts/ambitions-state-machine-contract-check.py
-
-design-system-dependencies:
-	python3 scripts/ambitions-dependency-boundary-check.py
-
-design-system-feature-services:
-	python3 scripts/ambitions-feature-service-boundary-check.py
-
-design-system-adrs:
-	python3 scripts/ambitions-adr-check.py
-
-design-system-proof-receipts:
-	python3 scripts/ambitions-source-proof-receipt-coverage-check.py
-
-design-system-local-trust:
-	python3 scripts/ambitions-local-first-runtime-trust-check.py
-
-design-system-performance:
-	python3 scripts/ambitions-performance-budget-check.py
-
-design-system-authority:
-	python3 scripts/ambitions-authority-ledger-check.py
-
-design-system-traceability:
-	python3 scripts/ambitions-design-to-source-trace-check.py
-
-design-system-dashboard:
-	python3 scripts/ambitions-design-system-dashboard.py
-
-design-system-15-all:
-	python3 scripts/ambitions-token-generate.py
-	python3 scripts/ambitions-token-contract-check.py
-	python3 scripts/ambitions-token-drift-check.py
-	python3 scripts/ambitions-component-contract-check.py
-	python3 scripts/ambitions-preview-matrix-check.py
-	python3 scripts/ambitions-visual-regression-readiness-check.py
-	python3 scripts/ambitions-accessibility-contract-check.py
-	python3 scripts/ambitions-state-machine-contract-check.py
-	python3 scripts/ambitions-dependency-boundary-check.py
-	python3 scripts/ambitions-feature-service-boundary-check.py
-	python3 scripts/ambitions-adr-check.py
-	python3 scripts/ambitions-source-proof-receipt-coverage-check.py
-	python3 scripts/ambitions-local-first-runtime-trust-check.py
-	python3 scripts/ambitions-performance-budget-check.py
-	python3 scripts/ambitions-authority-ledger-check.py
-	python3 scripts/ambitions-design-to-source-trace-check.py
-	python3 scripts/ambitions-design-system-dashboard.py
-	grep -R "StyleDictionary\\|design-tokens\\|DesignTokens" -n DesignTokens Sources docs scripts || true
-	grep -R "external.*LLM\\|cloud.*LLM" frontend/visual-encyclopedia docs/truth docs/architecture Sources Native -n || true
-	grep -R "Plan" frontend/visual-encyclopedia DesignTokens docs/architecture -n || true
-
-.PHONY: validate-prompt-headers validate-batch-ids validate-authority validate-claims validate-contracts validate-runtime-authority validate-proof validate-visual-proof validate-accessibility validate-trust validate-continuity validate-moats validate-ambitions-os
-
-validate-prompt-headers:
-	python3 scripts/ambitions_validate_prompt_headers.py
-
-validate-batch-ids:
-	python3 scripts/ambitions_validate_batch_ids.py
-
-validate-authority:
-	python3 scripts/ambitions_validate_authority_drift.py
-
-validate-claims:
-	python3 scripts/ambitions_validate_claim_registry.py
-
-validate-contracts:
-	python3 scripts/ambitions_validate_projection_contracts.py
-
-validate-runtime-authority:
-	python3 scripts/ambitions_validate_runtime_authority.py
-
-validate-proof:
-	python3 scripts/ambitions_validate_proof_receipts.py
-
-validate-visual-proof:
-	python3 scripts/ambitions_validate_visual_proof.py
-
-validate-accessibility:
-	python3 scripts/ambitions_validate_accessibility_gates.py
-
-validate-trust:
-	python3 scripts/ambitions_validate_trust_privacy.py
-
-validate-continuity:
-	python3 scripts/ambitions_validate_continuity_claims.py
-
-validate-moats:
-	python3 scripts/ambitions_validate_moat_install.py
-
-validate-ambitions-os:
-	$(MAKE) validate-prompt-headers
-	$(MAKE) validate-batch-ids
-	$(MAKE) validate-authority
-	$(MAKE) validate-claims
-	$(MAKE) validate-contracts
-	$(MAKE) validate-runtime-authority
-	$(MAKE) validate-proof
-	$(MAKE) validate-visual-proof
-	$(MAKE) validate-accessibility
-	$(MAKE) validate-trust
-	$(MAKE) validate-continuity
-	$(MAKE) validate-moats
+encyclopedia-to-frontend-os-all: frontend-authority-packets-all frontend-source-bindings frontend-drift-check frontend-implementation-dashboard frontend-receipt-check frontend-proof-contract-check encyclopedia-to-frontend-os-final-gate
