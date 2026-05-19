@@ -1,3 +1,7 @@
+<!-- AMBITIONS_RUNNER_REQUIRED: true -->
+<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+
 # AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION
 
 This runner batch recommends the next train after the post-23 truth audit, repair, and authority cleanup.
