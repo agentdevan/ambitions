@@ -587,3 +587,55 @@ design-system-15-all:
 	grep -R "StyleDictionary\\|design-tokens\\|DesignTokens" -n DesignTokens Sources docs scripts || true
 	grep -R "external.*LLM\\|cloud.*LLM" frontend/visual-encyclopedia docs/truth docs/architecture Sources Native -n || true
 	grep -R "Plan" frontend/visual-encyclopedia DesignTokens docs/architecture -n || true
+
+.PHONY: validate-prompt-headers validate-batch-ids validate-authority validate-claims validate-contracts validate-runtime-authority validate-proof validate-visual-proof validate-accessibility validate-trust validate-continuity validate-moats validate-ambitions-os
+
+validate-prompt-headers:
+	python3 scripts/ambitions_validate_prompt_headers.py
+
+validate-batch-ids:
+	python3 scripts/ambitions_validate_batch_ids.py
+
+validate-authority:
+	python3 scripts/ambitions_validate_authority_drift.py
+
+validate-claims:
+	python3 scripts/ambitions_validate_claim_registry.py
+
+validate-contracts:
+	python3 scripts/ambitions_validate_projection_contracts.py
+
+validate-runtime-authority:
+	python3 scripts/ambitions_validate_runtime_authority.py
+
+validate-proof:
+	python3 scripts/ambitions_validate_proof_receipts.py
+
+validate-visual-proof:
+	python3 scripts/ambitions_validate_visual_proof.py
+
+validate-accessibility:
+	python3 scripts/ambitions_validate_accessibility_gates.py
+
+validate-trust:
+	python3 scripts/ambitions_validate_trust_privacy.py
+
+validate-continuity:
+	python3 scripts/ambitions_validate_continuity_claims.py
+
+validate-moats:
+	python3 scripts/ambitions_validate_moat_install.py
+
+validate-ambitions-os:
+	$(MAKE) validate-prompt-headers
+	$(MAKE) validate-batch-ids
+	$(MAKE) validate-authority
+	$(MAKE) validate-claims
+	$(MAKE) validate-contracts
+	$(MAKE) validate-runtime-authority
+	$(MAKE) validate-proof
+	$(MAKE) validate-visual-proof
+	$(MAKE) validate-accessibility
+	$(MAKE) validate-trust
+	$(MAKE) validate-continuity
+	$(MAKE) validate-moats
