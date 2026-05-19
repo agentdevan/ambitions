@@ -24,6 +24,17 @@ private struct TodayRealityMeridianCurrentTimeFusionModifier: ViewModifier {
                     .accessibilityIdentifier("TodayRealityMeridianCurrentTimeCursor")
             }
         }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.shell.elevatedMaterial)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.shell.divider.opacity(0.9), lineWidth: 1)
+        )
         .accessibilityElement(children: .contain)
+        .accessibilityLabel("Reality Meridian time band and rail")
+        .accessibilityIdentifier("TodayRealityMeridianFusedRail")
     }
 }

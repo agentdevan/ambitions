@@ -25,7 +25,7 @@ extension AmbitionsDayRailViewState {
             duration: duration,
             fitLabel: hero.confidenceLabel,
             whySummary: hero.explanation?.summary ?? hero.subtitle,
-            sourceQualityLabel: "Source-backed by the current plan",
+            sourceQualityLabel: "Source-backed by the current Time shape",
             becauseLine: "Because \(hero.explanation?.summary ?? hero.subtitle)",
             contextEdge: StartHereContextEdgeState(
                 title: "Context edge",
@@ -106,7 +106,7 @@ extension DayRailDurationState {
         case .complete:
             return DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set")
         case .openTime, .protectLater:
-            return DayRailDurationState(minutes: nil, source: .acceptedFromPlan, label: "Accepted from plan")
+            return DayRailDurationState(minutes: nil, source: .acceptedFromPlan, label: "Accepted from Time")
         default:
             return DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set")
         }
@@ -296,7 +296,7 @@ extension DayRailHeroStepState {
         case .stepDetail:
             return "Step Detail keeps the path and receipt together."
         case .planContext:
-            return "Plan keeps the next capacity choice reviewable."
+            return "Time keeps the next capacity choice reviewable."
         case .captureContext:
             return "Capture keeps placement reviewable before anything changes."
         case .unavailable:
@@ -483,7 +483,7 @@ private extension DayRailMode {
         case .empty:
             return "No pressure is invented."
         case .noSchedule:
-            return "Plan owns schedule review."
+            return "Time owns schedule review."
         }
     }
 }

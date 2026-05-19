@@ -380,8 +380,11 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(waitForTodayScreenReady(in: app))
         XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayRealityMeridianFusedRail"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRail"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Start here"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailTopologyStrip"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStartHereSourceFreshness"].waitForExistence(timeout: 10))
         XCTAssertTrue(todayPrimaryAction(in: app).waitForExistence(timeout: 10) || app.staticTexts["Start now"].exists || app.staticTexts["Open Plan"].exists || app.staticTexts["Open Time"].exists)
         XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailNowSection"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailNextSection"].waitForExistence(timeout: 10))

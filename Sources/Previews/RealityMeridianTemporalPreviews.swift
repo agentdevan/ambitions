@@ -5,6 +5,11 @@ private struct RealityMeridianTemporalPreviewGallery: View {
     @Environment(\.ambitionTheme) private var theme
 
     private let currentDate = Date(timeIntervalSince1970: 45_300.0)
+    private let reduceMotion: Bool
+
+    init(reduceMotion: Bool = false) {
+        self.reduceMotion = reduceMotion
+    }
 
     var body: some View {
         ScrollView {
@@ -24,7 +29,7 @@ private struct RealityMeridianTemporalPreviewGallery: View {
                         RealityMeridianCurrentTimeCursor(
                             title: FE04PrimitiveRole.currentTimeGlow.title,
                             date: currentDate,
-                            showsPulse: true,
+                            showsPulse: reduceMotion == false,
                             presentation: .standalone
                         )
                         .frame(height: 182)
@@ -66,8 +71,7 @@ private struct RealityMeridianTemporalPreviewGallery: View {
 }
 
 #Preview("Reality Meridian Temporal Primitives Reduce Motion") {
-    RealityMeridianTemporalPreviewGallery()
-        .environment(\.accessibilityReduceMotion, true)
+    RealityMeridianTemporalPreviewGallery(reduceMotion: true)
 }
 
 #Preview("Reality Meridian Temporal Primitives Dynamic Type") {
