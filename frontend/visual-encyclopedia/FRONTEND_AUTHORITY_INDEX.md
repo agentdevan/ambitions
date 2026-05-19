@@ -21,13 +21,14 @@ For frontend/UI/design implementation work:
 3. `docs/truth/IMPLEMENTATION_TRUTH.md` plus live source
 4. `docs/truth/RELEASE_TRUTH.md`
 5. This frontend atlas directory
-6. Compatible AmbitionsCanon, docs/codex, audits, previews, prompts, and historical docs
-7. `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
-8. `trace/FRONTEND_SOURCE_BINDINGS.yaml`
-9. `trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml`
-10. `trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml`
-11. `UI_STUDIO_OPERATING_SYSTEM.md`
-12. `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`
+6. `FRONTEND_DOC_CLASSIFICATION.md`
+7. Compatible AmbitionsCanon, docs/codex, audits, previews, prompts, and historical docs
+8. `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
+9. `trace/FRONTEND_SOURCE_BINDINGS.yaml`
+10. `trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml`
+11. `trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml`
+12. `UI_STUDIO_OPERATING_SYSTEM.md`
+13. `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`
 
 ## Active Files
 
@@ -46,6 +47,7 @@ For frontend/UI/design implementation work:
 - Audit: `VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md`
 - Perfection plan: `VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md`
 - Final proof authority: `trace/VISUAL_100_PROMPT_SUPERSESSION_LEDGER.md`, `trace/VISUAL_100_RED_YELLOW_FLAG_LEDGER.md`, `trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.md`, `trace/VISUAL_100_PRIORITY_RECIPE_REGISTRY.yaml`, `trace/VISUAL_100_SOURCE_DEBT_LEDGER.md`, `trace/VISUAL_100_SOURCE_LINK_DISTRIBUTION.md`
+- Frontend doc classification map: `FRONTEND_DOC_CLASSIFICATION.md`
 - Vocabulary boundary: `VISUAL_VOCABULARY_BOUNDARY.md`
 - Source-link manifest: `VISUAL_SOURCE_LINKS.yaml`
 - Recipe short-form template: `VISUAL_RECIPE_SHORT_FORM_TEMPLATE.md`
@@ -63,6 +65,12 @@ For frontend/UI/design implementation work:
 - Behavior bibles: `behavior/*.md`
 - Trace matrices and ledgers: `trace/*.md`, `trace/VISUAL_CONFLICT_LEDGER.md`, `trace/VISUAL_SOURCE_LINKAGE_LEDGER.md`, `trace/VISUAL_SURFACE_GRAPH_LEDGER.md`
 - UI Studio control plane: `UI_STUDIO_OPERATING_SYSTEM.md`, `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`, `../../prompts/batches/ui-flagship/*.md`, `../../docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`, `../../docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+
+## Frontend Doc Classification Note
+
+Use `FRONTEND_DOC_CLASSIFICATION.md` to decide whether a frontend doc is active, supporting, historical, obsolete, archive-candidate, or delete-candidate.
+
+`docs/canon/frontend/` is absent in this checkout and must not be recreated as a duplicate authority root.
 
 ## Flagship Object System Lock
 

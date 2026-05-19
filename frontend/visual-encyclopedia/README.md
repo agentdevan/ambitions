@@ -12,6 +12,7 @@ Start here:
 - [`trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`](trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml) for the machine-readable instrument-to-surface map.
 - [`ENCYCLOPEDIA_TO_FRONTEND_OS.md`](ENCYCLOPEDIA_TO_FRONTEND_OS.md) for the implementation workflow.
 - [`FRONTEND_AUTHORITY_INDEX.md`](FRONTEND_AUTHORITY_INDEX.md) for the human control-plane front door.
+- [`FRONTEND_DOC_CLASSIFICATION.md`](FRONTEND_DOC_CLASSIFICATION.md) for active/supporting/historical/obsolete/archive/delete classification.
 - [`AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`](AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md) for the broad atlas.
 - [`../installed-canon.md`](../installed-canon.md) for source-backed current installation.
 - [`../intended-canon.md`](../intended-canon.md) for truth-backed intended direction.
@@ -54,3 +55,5 @@ This family is visual canon only. It is not implementation proof, screenshot pro
 ## Implementation Workflow
 
 For frontend implementation work, start with [`ENCYCLOPEDIA_TO_FRONTEND_OS.md`](ENCYCLOPEDIA_TO_FRONTEND_OS.md), then use [`FRONTEND_AUTHORITY_INDEX.md`](FRONTEND_AUTHORITY_INDEX.md), generate a surface packet, run preflight, and generate the implementation prompt.
+
+`docs/canon/frontend/` is absent in this checkout and must not be recreated as a parallel frontend authority root.
