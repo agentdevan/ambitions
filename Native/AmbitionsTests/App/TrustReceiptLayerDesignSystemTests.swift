@@ -15,6 +15,63 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         XCTAssertTrue(requiredKinds.isSubset(of: Set(TrustReceiptLayerKind.allCases)))
     }
 
+    func testFE04PrimitiveSystemContractNamesSharedPrimitiveRolesWithoutGenericLanguage() {
+        let expectedRoles: Set<FE04PrimitiveRole> = [
+            .graphiteRecess,
+            .quietGlassShelf,
+            .inspectableStrip,
+            .ambientVignette,
+            .seamLine,
+            .luminousTrace,
+            .meridianNode,
+            .currentTimeGlow,
+            .proofTrail,
+            .receiptDrawer,
+            .sourceFreshnessBadge,
+            .closurePrompt,
+            .startHere,
+            .lifeShape,
+            .atmosphereComposer,
+            .constellationLane,
+            .userSystemProfile
+        ]
+
+        XCTAssertEqual(Set(FE04PrimitiveSystemContract.roles), expectedRoles)
+        XCTAssertTrue(FE04PrimitiveSystemContract.validationFailures().isEmpty)
+
+        let combined = FE04PrimitiveSystemContract.roles
+            .map(\.accessibilitySummary)
+            .joined(separator: " ")
+
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("task list"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("chatbot"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("production ready"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("release ready"))
+    }
+
+    func testFE04PrimitiveBindingsCoverSourceFreshnessReceiptAndRealityMeridianRoles() {
+        XCTAssertEqual(SourceFreshnessState.stale.fe04Role, .sourceFreshnessBadge)
+        XCTAssertEqual(ReceiptDrawerSection(id: "recent", title: "Recent receipts", items: []).fe04Role, .receiptDrawer)
+        XCTAssertEqual(
+            ProofBead(
+                id: "proof",
+                title: "Proof saved",
+                summary: "Source stays attached.",
+                sourceLabel: "Source: local",
+                freshness: .fresh,
+                privacyLabel: "Private proof"
+            ).fe04Role,
+            .proofTrail
+        )
+        XCTAssertEqual(RealityMeridianTemporalWindow().fe04Role, .lifeShape)
+        XCTAssertEqual(RealityMeridianCurrentTimeCursor().fe04Role, .currentTimeGlow)
+        XCTAssertEqual(
+            RealityMeridianScheduledNode(timeLabel: "10:00 AM", title: "Scheduled step").fe04Role,
+            .meridianNode
+        )
+    }
+
     func testSI10TrustReceiptAccessibilitySummaryIsSourceFreshnessAndPrivacyBound() {
         let item = TrustReceiptLayerItem(
             id: "source-review",
@@ -82,6 +139,7 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("production ready"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("cloud synced"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("release ready"))
     }
 
     func testFCP12ProofBeadCarriesSourceFreshnessPrivacyCorrectionAndStaleReview() {

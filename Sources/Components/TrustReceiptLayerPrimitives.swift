@@ -905,4 +905,57 @@ public struct WhyThisAffordance: View {
         .accessibilityHint("Opens source and receipt detail.")
     }
 }
+
+public extension TrustReceiptLayerKind {
+    public var fe04Role: FE04PrimitiveRole {
+        switch self {
+        case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+            return .proofTrail
+        case .moved, .undone, .blockedSafely, .unsafeRedirect:
+            return .receiptDrawer
+        case .privateItem, .offlineLocal, .professionalBoundary:
+            return .userSystemProfile
+        case .staleSource, .sourceChange:
+            return .sourceFreshnessBadge
+        case .needsReview:
+            return .closurePrompt
+        }
+    }
+}
+
+public extension SourceFreshnessState {
+    public var fe04Role: FE04PrimitiveRole {
+        .sourceFreshnessBadge
+    }
+}
+
+public extension ProofBead {
+    public var fe04Role: FE04PrimitiveRole {
+        .proofTrail
+    }
+}
+
+public extension ReceiptDrawerSection {
+    public var fe04Role: FE04PrimitiveRole {
+        .receiptDrawer
+    }
+}
+
+public extension ReceiptDrawer {
+    public var fe04Role: FE04PrimitiveRole {
+        .receiptDrawer
+    }
+}
+
+public extension SourceFreshnessLabel {
+    public var fe04Role: FE04PrimitiveRole {
+        .sourceFreshnessBadge
+    }
+}
+
+public extension ProofSpine {
+    public var fe04Role: FE04PrimitiveRole {
+        .proofTrail
+    }
+}
 #endif

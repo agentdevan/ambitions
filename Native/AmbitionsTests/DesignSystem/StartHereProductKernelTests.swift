@@ -33,6 +33,17 @@ final class StartHereProductKernelTests: XCTestCase {
         XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).contains("primary action must be Start now or Open step"))
     }
 
+    func testKernelBindsStartHereRoleWithoutDashboardOrTaskLanguage() {
+        let kernel = makeKernel()
+
+        XCTAssertEqual(kernel.fe04Role, .startHere)
+        XCTAssertEqual(kernel.fe04Role.ownerSurface, "Today")
+        XCTAssertTrue(kernel.accessibilitySummary.localizedCaseInsensitiveContains("Start here"))
+        XCTAssertFalse(kernel.accessibilitySummary.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(kernel.accessibilitySummary.localizedCaseInsensitiveContains("task list"))
+        XCTAssertFalse(kernel.accessibilitySummary.localizedCaseInsensitiveContains("release ready"))
+    }
+
     private func makeKernel(
         label: String = "Start here",
         becauseLine: String = "Because your calendar has a clean 30-minute opening.",

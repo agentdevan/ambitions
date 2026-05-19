@@ -76,4 +76,26 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
     }
+
+    func testFE04PrimitiveRolesBindYouAsThePersonalSystemCenter() {
+        let header = PersonalSystemCenterHeader(
+            title: "Your system",
+            summary: "Local-first controls are visible before any deeper setup.",
+            signals: []
+        )
+        let setup = PersonalSystemCenterSetupCompleteness(
+            title: "Setup completeness",
+            summary: "Setup-needed states stay visible.",
+            completedCount: 1,
+            totalCount: 2,
+            items: []
+        )
+
+        XCTAssertEqual(header.fe04Role, .userSystemProfile)
+        XCTAssertEqual(setup.fe04Role, .userSystemProfile)
+        XCTAssertEqual(FE04PrimitiveRole.userSystemProfile.ownerSurface, "You")
+        XCTAssertTrue(FE04PrimitiveSystemContract.validationFailures(for: .userSystemProfile).isEmpty)
+        XCTAssertFalse(FE04PrimitiveRole.userSystemProfile.accessibilitySummary.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(FE04PrimitiveRole.userSystemProfile.accessibilitySummary.localizedCaseInsensitiveContains("profile tab"))
+    }
 }

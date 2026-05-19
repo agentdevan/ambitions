@@ -261,4 +261,16 @@ public struct StartHereProductProofStack: View {
         }
     }
 }
+
+public extension StartHereProductKernel {
+    public var fe04Role: FE04PrimitiveRole {
+        .startHere
+    }
+}
+
+public extension StartHereProductProofStack {
+    public var fe04Role: FE04PrimitiveRole {
+        .startHere
+    }
+}
 #endif

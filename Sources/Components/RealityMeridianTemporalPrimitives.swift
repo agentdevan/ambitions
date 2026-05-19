@@ -246,4 +246,22 @@ public struct RealityMeridianScheduledNode: View {
         .accessibilityIdentifier("reality-meridian-scheduled-node")
     }
 }
+
+public extension RealityMeridianTemporalWindow {
+    public var fe04Role: FE04PrimitiveRole {
+        .lifeShape
+    }
+}
+
+public extension RealityMeridianCurrentTimeCursor {
+    public var fe04Role: FE04PrimitiveRole {
+        .currentTimeGlow
+    }
+}
+
+public extension RealityMeridianScheduledNode {
+    public var fe04Role: FE04PrimitiveRole {
+        .meridianNode
+    }
+}
 #endif
