@@ -1,0 +1,29 @@
+{
+  "contextA" : {
+    "firstRun" : {
+      "hash" : "466ff3dd6caade83a129a12e69cd9c154a7cae0ecf5f9d141274b6be75bc172e",
+      "heroKind" : "nextAction",
+      "result" : "Start now"
+    },
+    "replayRun" : {
+      "hash" : "466ff3dd6caade83a129a12e69cd9c154a7cae0ecf5f9d141274b6be75bc172e",
+      "heroKind" : "nextAction",
+      "result" : "Start now"
+    },
+    "stable" : true
+  },
+  "contextB" : {
+    "firstRun" : {
+      "hash" : "b0436872cfd74976b67cb16b9ad1da9edd45e55c25c689ae9078c69f77b9680b",
+      "heroKind" : "recovery",
+      "result" : "Open Time"
+    },
+    "replayRun" : {
+      "hash" : "b0436872cfd74976b67cb16b9ad1da9edd45e55c25c689ae9078c69f77b9680b",
+      "heroKind" : "recovery",
+      "result" : "Open Time"
+    },
+    "stable" : true
+  },
+  "stable" : true
+}

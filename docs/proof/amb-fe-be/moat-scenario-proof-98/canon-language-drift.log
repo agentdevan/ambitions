@@ -1,0 +1,83 @@
+canon-language-drift-scan
+GREEN no changed files to scan for new canon language drift
+YELLOW existing backlog / guardrail hits follow
+Sources/Previews/TrustReceiptLayerPreviews.swift:130:                    evidence: "No hosted backend, account, or AI confidence language is implied.",
+Sources/Components/FE09ComponentSystemPrimitives.swift:242:        "plan tab",
+Sources/Components/FE09ComponentSystemPrimitives.swift:243:        "profile tab",
+Sources/Components/AmbitionsPremiumMaterials.swift:388:        "ai confidence",
+Sources/Components/StartHereProductPrimitives.swift:89:        "next best move",
+Sources/Components/StartHereProductPrimitives.swift:95:        "productivity score",
+docs/authority/AMB_OBSOLETE_AUTHORITY_REGISTER.md:10:- `AI explanation` / `AI confidence` in user-facing copy
+.codex/manifests/repair-profiles.yml:33:      - "next best move"
+.codex/manifests/repair-profiles.yml:34:      - "Your best next move"
+.codex/validation/copy-qa-pack.md:11:rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' Native Sources AppUI docs .codex || true
+docs/marketing/Ambitions_3_0_App_Store_Truth_Packet.md:147:- productivity score or fake certainty
+Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift:424:            "ai confidence",
+Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift:426:            "productivity score",
+Native/Ambitions/Domain/ScreenContractModels.swift:274:        "AI Confidence",
+Native/Ambitions/Domain/ScreenContractModels.swift:275:        "AI Explanation",
+Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:170:            "ai confidence",
+Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:172:            "productivity score",
+.codex/SKILL_GOVERNANCE.md:29:applies_to: current-truth | AFI | legacy-ACUI | Ambitions-3.0-history | Ambitions-4.0-history | generic
+.codex/SKILL_GOVERNANCE.md:95:- historical Ambitions 3.0/4.0/PXOS/ACUI/SI skills as active truth
+.codex/skills/ambitions-canon-v2-reconciler/SKILL.md:28:- Deprecated user-facing language: `Your best next move`, `next best move`, `Start Focus`, `Focus session`, `Overdue`, `Failed`, `Missed`, `Behind`.
+.codex/templates/current-resume-prompt.md:12:Do not use old Ambitions 3.0/4.0/PXOS/ACUI/SI prompt files as active truth unless current truth files explicitly route there. Do not make release, device, accessibility, performance, legal/privacy, hosted CI, App Store, or TestFlight claims without current raw evidence. Close with Green/Yellow/Red, validation run, validation not run, hard claims not made, and next exact prompt.
+docs/governance/generated/train_lineage_graph.json:78:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy",
+docs/governance/generated/train_lineage_graph.json:155:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:227:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:298:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:405:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:503:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:601:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:693:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:866:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:959:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:1046:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy",
+docs/governance/generated/train_lineage_graph.json:1138:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy",
+docs/governance/generated/train_lineage_graph.json:1227:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:1311:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:1391:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy"
+docs/governance/generated/train_lineage_graph.json:1468:        "docs/codex/BATCH_REGISTRY.md:1396: | AFI01-AFI16 Ambitions Flagship Interface Implementation Lane | Complete / Accepted Yellow | AFI supersedes ACUI. AFI01 Canon Language Purge, AFI02 IA Hierarchy Lock, AFI03 Flagship Object Silhouettes, AFI04 Material Sy",
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:780:                lowercased.contains("next best move") ||
+.codex/skills/ambitions-v2-validation-closeout/SKILL.md:38:rg -n "Your best next move|next best move|Start Focus|Focus session|Overdue|Failed|Missed|Behind" Native Sources AppUI docs
+Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift:69:            owningRoute: "Plan tab and Weekly Review",
+Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift:78:            budget: "Time must keep calendar-aware planning local and suggestion-first, with no silent calendar writes or top-level Plan drift.",
+.codex/SESSION_BOOTSTRAP.md:83:Do not use Ambitions 3.0/4.0/PXOS/ACUI/SI/old prompt files as active truth
+Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:195:            "ai confidence",
+Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:196:            "productivity score",
+.codex/skills/copy-compression-product-language-reviewer.md:15:- top-level copy avoids phrases such as local-first trust visible, memory is inspectable, source-backed, confirmation, coherent backbone, controls privacy visible, keeps direction connected, time shapes the week, no silent changes, implementation, governance, diagnostic, runtime, model confidence, or AI explanation
+docs/truth/PRODUCT_DESIGN_TRUTH.md:59:| Life-improvement model | Improve life by reducing scatter, increasing fit, preserving proof, and normalizing recovery. | Sustainable and non-shaming. | Preserves Still Counts, Action Closure, Recovery. | Avoid health-score pressure while learning from reflection depth. | No life score, productivity score, streak pressure, or ranked self-worth. |
+docs/truth/PRODUCT_DESIGN_TRUTH.md:73:| Deterministic personalization | Use rules, recency, defaults, completion behavior, corrections, local scoring. | Predictable and testable. | Aligns with local runtime. | Object history supports deterministic ranking. | No opaque AI confidence language. |
+docs/truth/PRODUCT_DESIGN_TRUTH.md:81:| Learn from Oura/WHOOP | Headline state first, trend depth second. | Reflection without dashboard sprawl. | Supports calm review and recovery. | Dense health apps summarize before detail. | No readiness/life/productivity score as identity. |
+docs/truth/PRODUCT_DESIGN_TRUTH.md:170:| Anti-gamification | No streaks, badges, leaderboards, life scores, productivity scores. | Non-shaming premium. | Existing hard reds. | Do not copy social/fantasy mechanics. | Progress proof is not game reward. |
+docs/truth/PRODUCT_DESIGN_TRUTH.md:176:| Terms to avoid | Dashboard, Assistant, AI recommends, best next move, overdue, failed, streak, score, optimize, smart capture, Plan tab, Profile tab, DayTimelineRail, Hero Step Panel. | Blocks drift. | Vocabulary purge. | Avoid benchmark contamination. | Lint docs/UI for banned active terms. |
+docs/truth/PRODUCT_DESIGN_TRUTH.md:1144:- next best move
+docs/truth/PRODUCT_DESIGN_TRUTH.md:1234:- productivity score
+docs/truth/PRODUCT_DESIGN_TRUTH.md:1396:- productivity score
+docs/truth/PRODUCT_DESIGN_TRUTH.md:2327:- next best move
+docs/truth/PRODUCT_DESIGN_TRUTH.md:2338:- productivity score
+docs/truth/PRODUCT_DESIGN_TRUTH.md:2350:- Plan tab
+docs/truth/PRODUCT_DESIGN_TRUTH.md:2351:- Profile tab
+docs/truth/PRODUCT_DESIGN_TRUTH.md:2370:- productivity score system
+.codex/DEPARTMENT_REGISTRY.md:87:| `ACUI -> AFI` | Historical naming debt | Product, Design, Repo Hygiene | Old ACUI references classified or archived. |
+docs/truth/RELEASE_TRUTH.md:336:- Source inspection found naming drift risk: UI tests expect `Plan` tab buttons in places while app source maps the plan tab title to `Time`.
+docs/truth/HISTORICAL_POLICY.md:75:ACUI docs
+docs/truth/HISTORICAL_POLICY.md:361:old PXOS / ACUI / SI docs
+docs/truth/HISTORICAL_POLICY.md:451:ACUI docs
+docs/truth/CODEX_PROCESS_TRUTH.md:1042:- Plan tab
+docs/truth/CODEX_PROCESS_TRUTH.md:1043:- Profile tab
+docs/truth/CODEX_PROCESS_TRUTH.md:1058:- productivity scores
+docs/truth/PRODUCT_MOAT_TRUTH.md:71:- a habit score / life score / productivity score system
+docs/truth/PRODUCT_MOAT_TRUTH.md:179:- generic productivity scores or habit scores
+docs/truth/PRODUCT_MOAT_TRUTH.md:204:- next best move
+docs/truth/IMPLEMENTATION_TRUTH.md:743:- UI tests include stale or compatibility naming risk: they expect `Plan` tab buttons in places while app source maps the plan tab title to `Time`.
+Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift:269:            "ai confidence"
+docs/review/D02_TERMINOLOGY_REVIEW_CHECKLIST.md:41:- No new top-level Tasks, Habits, Calendar, Insights, Life Areas, or Profile tab.
+docs/review/D02_TERMINOLOGY_REVIEW_CHECKLIST.md:134:- No top-level Habits tab returns.
+docs/AmbitionsCanon/04_Trust_Privacy_Automation.md:77:- life/productivity scores
+docs/AmbitionsCanon/03_Signature_Object_Specs.md:98:It must not become a task list, calendar timeline, dashboard, habit tracker, or productivity score surface.
+docs/AmbitionsCanon/03_Signature_Object_Specs.md:210:- next best move
+docs/AmbitionsCanon/03_Signature_Object_Specs.md:319:- productivity score
+docs/AmbitionsCanon/03_Signature_Object_Specs.md:341:- next best move
+docs/AmbitionsCanon/03_Signature_Object_Specs.md:569:- productivity score
+docs/AmbitionsCanon/09_Flagship_Interface_Preservation_Ledger.md:36:| UPG-001 | Rename the top-level Plan tab to Time. | Product Canon, Vocabulary, Flagship Interface Canon | Direction → Time → Today hierarchy | Active canon |

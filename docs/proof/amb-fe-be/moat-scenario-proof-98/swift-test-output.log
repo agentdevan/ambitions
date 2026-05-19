@@ -1,0 +1,1545 @@
+Building for debugging...
+[0/3] Write sources
+[2/3] Write swift-version--58304C5D6DBC2206.txt
+[4/53] Compiling AmbitionsDesignSystem ChromeButtonPrimitives.swift
+[5/53] Compiling AmbitionsDesignSystem ControlPrimitives.swift
+[6/53] Compiling AmbitionsDesignSystem DynamicAdaptiveVisualPrimitives.swift
+[7/53] Compiling AmbitionsDesignSystem FE09ComponentSystemPrimitives.swift
+[8/53] Compiling AmbitionsDesignSystem FeedbackPrimitives.swift
+[9/53] Compiling AmbitionsDesignSystem GroupedNavigationList.swift
+[10/53] Compiling AmbitionsDesignSystem IconographyStatusPrimitives.swift
+[11/53] Compiling AmbitionsDesignSystem InformationPrimitives.swift
+[12/53] Compiling AmbitionsDesignSystem LifeDirectionalIntegrationPrimitives.swift
+[13/53] Compiling AmbitionsDesignSystem LoadingDegradedStatePrimitives.swift
+[14/53] Compiling AmbitionsDesignSystem PersonalSystemCenterPreviews.swift
+[15/53] Compiling AmbitionsDesignSystem RealityMeridianRichnessPreviews.swift
+[16/53] Compiling AmbitionsDesignSystem RealityMeridianTemporalPreviews.swift
+[17/53] Compiling AmbitionsDesignSystem RootDestinationIdentityPreviews.swift
+[18/53] Compiling AmbitionsDesignSystem SI03ShellNavigationPreviews.swift
+[19/53] Compiling AmbitionsDesignSystem ShellChromeTrustPreviews.swift
+[20/53] Compiling AmbitionsDesignSystem SignatureInterfaceVisualQAFixtures.swift
+[21/53] Compiling AmbitionsDesignSystem SignatureInterfaceVisualQAPreviews.swift
+[22/53] Compiling AmbitionsDesignSystem TopLevelSurfaceCompositionPreviews.swift
+[23/53] Emitting module AmbitionsDesignSystem
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[24/53] Compiling AmbitionsDesignSystem SurfaceShellPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[25/53] Compiling AmbitionsDesignSystem TopLevelSurfaceCompositionPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[26/53] Compiling AmbitionsDesignSystem TrustReceiptLayerPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[27/53] Compiling AmbitionsDesignSystem AccessibilityAdaptiveInterfacePreviews.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[28/53] Compiling AmbitionsDesignSystem ComponentPreviews.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[29/53] Compiling AmbitionsDesignSystem DynamicAdaptiveVisualPreviews.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[30/53] Compiling AmbitionsDesignSystem FE09ComponentSystemPreviewMatrix.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[31/53] Compiling AmbitionsDesignSystem IconographyStatusPreviews.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[32/53] Compiling AmbitionsDesignSystem InteractionMotionHapticsPreviews.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[33/53] Compiling AmbitionsDesignSystem LoadingDegradedStatePreviews.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:910:5: warning: 'public' modifier is redundant for property declared in a public extension
+908 |
+909 | public extension TrustReceiptLayerKind {
+910 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+911 |         switch self {
+912 |         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:927:5: warning: 'public' modifier is redundant for property declared in a public extension
+925 |
+926 | public extension SourceFreshnessState {
+927 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+928 |         .sourceFreshnessBadge
+929 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:933:5: warning: 'public' modifier is redundant for property declared in a public extension
+931 |
+932 | public extension ProofBead {
+933 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+934 |         .proofTrail
+935 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:939:5: warning: 'public' modifier is redundant for property declared in a public extension
+937 |
+938 | public extension ReceiptDrawerSection {
+939 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+940 |         .receiptDrawer
+941 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:945:5: warning: 'public' modifier is redundant for property declared in a public extension
+943 |
+944 | public extension ReceiptDrawer {
+945 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+946 |         .receiptDrawer
+947 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:951:5: warning: 'public' modifier is redundant for property declared in a public extension
+949 |
+950 | public extension SourceFreshnessLabel {
+951 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+952 |         .sourceFreshnessBadge
+953 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/TrustReceiptLayerPrimitives.swift:957:5: warning: 'public' modifier is redundant for property declared in a public extension
+955 |
+956 | public extension ProofSpine {
+957 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+958 |         .proofTrail
+959 |     }
+[34/53] Compiling AmbitionsDesignSystem MotionPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[35/53] Compiling AmbitionsDesignSystem NavigationPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[36/53] Compiling AmbitionsDesignSystem PersonalSystemCenterPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[37/53] Compiling AmbitionsDesignSystem RealityMeridianTemporalPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[38/53] Compiling AmbitionsDesignSystem RealityMeridianTimeBand.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[39/53] Compiling AmbitionsDesignSystem RichPanelPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[40/53] Compiling AmbitionsDesignSystem ShellChromePrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[41/53] Compiling AmbitionsDesignSystem ShellChromeTrustPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[42/53] Compiling AmbitionsDesignSystem StartHereProductPrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[43/53] Compiling AmbitionsDesignSystem SurfacePrimitives.swift
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:256:5: warning: 'public' modifier is redundant for property declared in a public extension
+254 |
+255 | public extension PersonalSystemCenterSignal {
+256 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+257 |         .userSystemProfile
+258 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:262:5: warning: 'public' modifier is redundant for property declared in a public extension
+260 |
+261 | public extension PersonalSystemCenterSetupItem {
+262 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+263 |         .userSystemProfile
+264 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:268:5: warning: 'public' modifier is redundant for property declared in a public extension
+266 |
+267 | public extension PersonalSystemCenterHeader {
+268 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+269 |         .userSystemProfile
+270 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:274:5: warning: 'public' modifier is redundant for property declared in a public extension
+272 |
+273 | public extension PersonalSystemCenterSetupCompleteness {
+274 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+275 |         .userSystemProfile
+276 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/PersonalSystemCenterPrimitives.swift:280:5: warning: 'public' modifier is redundant for property declared in a public extension
+278 |
+279 | public extension PersonalSystemCenterNavigation {
+280 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+281 |         .userSystemProfile
+282 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:251:5: warning: 'public' modifier is redundant for property declared in a public extension
+249 |
+250 | public extension RealityMeridianTemporalWindow {
+251 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+252 |         .lifeShape
+253 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:257:5: warning: 'public' modifier is redundant for property declared in a public extension
+255 |
+256 | public extension RealityMeridianCurrentTimeCursor {
+257 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+258 |         .currentTimeGlow
+259 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/RealityMeridianTemporalPrimitives.swift:263:5: warning: 'public' modifier is redundant for property declared in a public extension
+261 |
+262 | public extension RealityMeridianScheduledNode {
+263 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+264 |         .meridianNode
+265 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:266:5: warning: 'public' modifier is redundant for property declared in a public extension
+264 |
+265 | public extension StartHereProductKernel {
+266 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+267 |         .startHere
+268 |     }
+
+/Users/devan/Documents/GitHub/ambitions/Sources/Components/StartHereProductPrimitives.swift:272:5: warning: 'public' modifier is redundant for property declared in a public extension
+270 |
+271 | public extension StartHereProductProofStack {
+272 |     public var fe04Role: FE04PrimitiveRole {
+    |     `- warning: 'public' modifier is redundant for property declared in a public extension
+273 |         .startHere
+274 |     }
+[44/53] Compiling AmbitionsDesignSystem AccessibilityClaimsLock.swift
+[45/53] Compiling AmbitionsDesignSystem AccessibilityNutrition.swift
+[46/53] Compiling AmbitionsDesignSystem AmbitionsDesignSystem.swift
+[47/53] Compiling AmbitionsDesignSystem AccessibilityAdaptiveInterfacePrimitives.swift
+[48/53] Compiling AmbitionsDesignSystem AdaptivePanelPrimitives.swift
+[49/53] Compiling AmbitionsDesignSystem AmbitionsExtendedTactileKit.swift
+[50/53] Compiling AmbitionsDesignSystem AmbitionsFlagshipTactilePrimitives.swift
+[51/53] Compiling AmbitionsDesignSystem AmbitionsPremiumMaterials.swift
+[52/53] Compiling AmbitionsDesignSystem AmbitionsV2CanonicalComponents.swift
+[53/53] Compiling AmbitionsDesignSystem AsyncStatePrimitives.swift
+[54/62] Compiling AmbitionsDesignSystem TrustReceiptLayerPreviews.swift
+[55/62] Compiling AmbitionsDesignSystem AmbitionObjectTokens.generated.swift
+[56/62] Compiling AmbitionsDesignSystem AmbitionStateTokens.generated.swift
+[57/62] Compiling AmbitionsDesignSystem AmbitionTheme.swift
+[58/62] Compiling AmbitionsDesignSystem AmbitionTokens.generated.swift
+[59/62] Compiling AmbitionsDesignSystem AmbitionsFrontendAuthority.generated.swift
+[60/62] Compiling AmbitionsDesignSystem AmbitionsRecipeID.generated.swift
+[61/62] Compiling AmbitionsDesignSystem AmbitionsSurfaceID.generated.swift
+[62/62] Compiling AmbitionsDesignSystem PanelDensitySize.swift
+[63/68] Compiling AmbitionsWidgetUI WidgetPreviews.swift
+[64/68] Compiling AmbitionsWidgetUI WidgetFoundation.swift
+[65/68] Emitting module AmbitionsWidgetUI
+[66/68] Compiling AmbitionsWidgetUI WidgetFamiliesSecondary.swift
+[67/68] Compiling AmbitionsWidgetUI WidgetFamiliesPrimary.swift
+[68/68] Compiling AmbitionsWidgetUI WidgetComponents.swift
+Build complete! (60.58s)
+error: no tests found; create a target in the 'Tests' directory
