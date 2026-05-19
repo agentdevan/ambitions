@@ -153,6 +153,7 @@ public struct GroupedNavigationRow: View {
             )
         }
         .buttonStyle(GroupedNavigationButtonStyle())
+        .focusable()
         .groupedNavigationAccessibility(
             label: accessibilityLabel ?? title,
             value: accessibilityValue ?? accessibilityValueFallback,
@@ -214,6 +215,7 @@ public struct GroupedDisclosureNavigationRow: View {
             )
         }
         .buttonStyle(GroupedNavigationButtonStyle())
+        .focusable()
         .groupedNavigationAccessibility(
             label: accessibilityLabel ?? title,
             value: accessibilityValue ?? accessibilityValueFallback,
@@ -266,6 +268,7 @@ public struct GroupedPreferenceRow: View {
             )
         }
         .toggleStyle(SwitchToggleStyle(tint: theme.colors.accentPrimary))
+        .focusable()
         .padding(.trailing, theme.spacing.md)
         .contentShape(Rectangle())
         .frame(minHeight: max(theme.panel.minimumTapTarget, 56))
@@ -315,6 +318,7 @@ public struct GroupedStatusNavigationRow: View {
                 rowBody(showsChevron: true)
             }
             .buttonStyle(GroupedNavigationButtonStyle())
+            .focusable()
             .groupedNavigationAccessibility(
                 label: accessibilityLabel ?? title,
                 value: accessibilityValue ?? "\(value), \(state.accessibilityText)",
@@ -380,6 +384,7 @@ public struct GroupedDestructiveActionRow: View {
             )
         }
         .buttonStyle(GroupedNavigationButtonStyle(role: .destructive))
+        .focusable()
         .groupedNavigationAccessibility(
             label: accessibilityLabel ?? title,
             value: "Requires confirmation.",

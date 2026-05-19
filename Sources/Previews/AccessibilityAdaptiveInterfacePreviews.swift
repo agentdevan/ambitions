@@ -63,5 +63,8 @@ struct AccessibilityAdaptiveInterfacePreviewGallery: View {
 
 #Preview("SI15 Accessibility Adaptive Static Motion") {
     AccessibilityAdaptiveInterfacePreviewGallery()
+        .transaction { transaction in
+            transaction.disablesAnimations = true
+        }
 }
 #endif

@@ -65,6 +65,11 @@ private struct InteractionMotionHapticsPreviewGallery: View {
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
+
+            Text(token.hapticBoundary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(theme.spacing.sm)
         .background(

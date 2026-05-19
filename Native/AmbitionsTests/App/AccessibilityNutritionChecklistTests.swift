@@ -31,6 +31,25 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
             XCTAssertFalse(item.verificationGuidance.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             XCTAssertGreaterThan(item.verificationGuidance.count, item.label.count)
         }
+
+        XCTAssertTrue(
+            AccessibilityNutritionChecklist.item(for: .voiceOver)?.verificationGuidance.contains("labels, values, hints, grouping, and reading order") ?? false
+        )
+        XCTAssertTrue(
+            AccessibilityNutritionChecklist.item(for: .reduceMotion)?.verificationGuidance.contains("state changes, route transitions, completion, and recovery") ?? false
+        )
+        XCTAssertTrue(
+            AccessibilityNutritionChecklist.item(for: .keyboardAndFocusSupport)?.verificationGuidance.contains("logical focus order and visible focus") ?? false
+        )
+        XCTAssertTrue(
+            AccessibilityNutritionChecklist.item(for: .tapTargetSize)?.verificationGuidance.contains("hit-area expectations") ?? false
+        )
+        XCTAssertTrue(
+            AccessibilityNutritionChecklist.item(for: .contrast)?.verificationGuidance.contains("contrast expectations") ?? false
+        )
+        XCTAssertTrue(
+            AccessibilityNutritionChecklist.item(for: .colorNotOnlyMeaning)?.verificationGuidance.contains("text, icon, shape, position, or pattern") ?? false
+        )
     }
 
     func testUserFacingClaimsDefaultToUnverified() {

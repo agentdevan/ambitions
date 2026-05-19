@@ -165,8 +165,35 @@ public enum AmbitionInteractionToken: String, CaseIterable, Sendable {
         }
     }
 
+    public var hapticBoundary: String {
+        switch self {
+        case .routeOrientation:
+            return "Route haptics stay user initiated and only follow an explicit orientation change."
+        case .panelReveal:
+            return "Panel reveal stays silent and does not use reward-style haptics."
+        case .selectionConfirm:
+            return "Selection haptics stay user initiated and only follow a deliberate choice."
+        case .proofConfirm:
+            return "Proof haptics stay user initiated and only follow a user-recorded closure or save."
+        case .correctionNeeded:
+            return "Correction haptics stay user initiated and never imply praise or penalty."
+        case .sourceCheck:
+            return "Source state stays quiet while review or freshness copy carries the meaning."
+        case .reviewRequired:
+            return "Review state stays quiet while the review affordance carries the meaning."
+        case .privacyBoundary:
+            return "Privacy boundaries stay quiet and never use haptics to disclose private content."
+        case .unsafeRedirect:
+            return "Unsafe redirects stay quiet and use clear boundary copy instead of feedback haptics."
+        case .recompilePending:
+            return "Pending changes stay quiet and wait for user review before any feedback appears."
+        case .localOnlySettle:
+            return "Local-only settle stays quiet and keeps the data boundary explicit in text."
+        }
+    }
+
     public var accessibilitySummary: String {
-        "\(title). \(purpose.title). Reduce Motion: \(reduceMotionEquivalent)"
+        "\(title). \(purpose.title). Reduce Motion: \(reduceMotionEquivalent) Haptics: \(hapticBoundary)"
     }
 
     public var allowsAutomaticHaptics: Bool {

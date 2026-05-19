@@ -17,8 +17,11 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         for token in AmbitionInteractionToken.allCases {
             XCTAssertFalse(token.title.isEmpty)
             XCTAssertFalse(token.reduceMotionEquivalent.isEmpty)
+            XCTAssertFalse(token.hapticBoundary.isEmpty)
             XCTAssertFalse(token.accessibilitySummary.isEmpty)
             XCTAssertTrue(token.accessibilitySummary.localizedCaseInsensitiveContains("Reduce Motion"))
+            XCTAssertTrue(token.accessibilitySummary.localizedCaseInsensitiveContains("Haptics"))
+            XCTAssertTrue(token.accessibilitySummary.localizedCaseInsensitiveContains(token.hapticBoundary))
         }
     }
 
