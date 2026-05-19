@@ -1,6 +1,6 @@
 # Canon Impact Plan
 
-Generated: 2026-05-19T14:27:50-04:00
+Generated: 2026-05-19T18:25:49-04:00
 
 ## Changed Canon Files
 
@@ -246,6 +246,7 @@ Generated: 2026-05-19T14:27:50-04:00
 - Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/ScreenContractRegistryTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift: possible active Plan top-level residue
+- Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/Captures/CapturePlacementReviewStateTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift: possible active Plan top-level residue
 - Native/AmbitionsTests/Domain/FoundationPerformancePersistenceBudgetTests.swift: possible active Plan top-level residue
@@ -264,7 +265,6 @@ Generated: 2026-05-19T14:27:50-04:00
 - Native/AmbitionsWidgetExtension/NextStepWidget.swift: possible active Plan top-level residue
 - Sources/Accessibility/AccessibilityNutrition.swift: possible active Plan top-level residue
 - Sources/Components/ShellChromePrimitives.swift: possible active Plan top-level residue
-- Sources/Components/TopLevelSurfaceCompositionPrimitives.swift: possible active Plan top-level residue
 - Sources/Previews/SI03ShellNavigationPreviews.swift: possible active Plan top-level residue
 - docs/AmbitionsCanon/05_Accessibility_Motion_Performance.md: possible active Plan top-level residue
 - docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md: possible active Plan top-level residue

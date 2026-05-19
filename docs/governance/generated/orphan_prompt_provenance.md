@@ -1,6 +1,6 @@
 # Orphan Prompt Provenance
 
-Generated: 2026-05-19T18:33:23.523156+00:00
+Generated: 2026-05-19T22:29:12.600383+00:00
 
 ## Counts
 
@@ -230,7 +230,7 @@ Generated: 2026-05-19T18:33:23.523156+00:00
 | PK00 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 9 | 15 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | PK01 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 1 | 0 | 12 | 16 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | POST23 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 16 | 0 | 209 | 15 | Prompt has commit lineage and evidence linkage but no implementation files. |
-| POST99 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | 4 | 0 | 8 | 4 | Prompt has commit lineage and evidence linkage but no implementation files. |
+| POST99 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 4 | 0 | 8 | 4 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC02 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 27 | 83 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC03 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 24 | 20 | Prompt has commit lineage and evidence linkage but no implementation files. |
 | REC04 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | 2 | 0 | 23 | 19 | Prompt has commit lineage and evidence linkage but no implementation files. |

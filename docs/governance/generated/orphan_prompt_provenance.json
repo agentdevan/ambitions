@@ -3947,7 +3947,7 @@
         ],
         "proof_file_count": 8,
         "reason": "Prompt has commit lineage and evidence linkage but no implementation files.",
-        "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
+        "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY",
         "train_id": "POST99"
       },
       {
@@ -29582,5 +29582,5 @@
     "proven_implemented": 343,
     "queued_prompt_backed": 8
   },
-  "generated_at": "2026-05-19T18:33:23.523156+00:00"
+  "generated_at": "2026-05-19T22:29:12.600383+00:00"
 }

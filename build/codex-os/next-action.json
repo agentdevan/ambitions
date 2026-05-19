@@ -5,7 +5,7 @@
   "changed_canon_files": [],
   "command": "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py",
   "decision": "idle",
-  "generated_at": "2026-05-19T14:27:50-04:00",
+  "generated_at": "2026-05-19T18:25:49-04:00",
   "generated_outputs_missing": [],
   "governance_stale_overlays": 0,
   "governance_unresolved": 0,
@@ -154,6 +154,10 @@
       "signal": "possible active Plan top-level residue"
     },
     {
+      "path": "Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
       "path": "Native/AmbitionsTests/Captures/CapturePlacementReviewStateTests.swift",
       "signal": "possible active Plan top-level residue"
     },
@@ -223,10 +227,6 @@
     },
     {
       "path": "Sources/Components/ShellChromePrimitives.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
-      "path": "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
       "signal": "possible active Plan top-level residue"
     },
     {

@@ -1,6 +1,6 @@
 {
   "changed_canon_files": [],
-  "generated_at": "2026-05-19T14:27:50-04:00",
+  "generated_at": "2026-05-19T18:25:49-04:00",
   "key_term_hits": {
     "AFI": [
       "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
@@ -2726,6 +2726,7 @@
       "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
       "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift",
       "Native/AmbitionsTests/App/MemoryLensServiceTests.swift",
+      "Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift",
       "Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift",
       "Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift",
       "Native/AmbitionsTests/App/ScreenContractRegistryTests.swift",
@@ -4523,7 +4524,6 @@
       "Sources/Accessibility/AccessibilityNutrition.swift",
       "Sources/Components/AmbitionsExtendedTactileKit.swift",
       "Sources/Components/ShellChromePrimitives.swift",
-      "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
       "Sources/Previews/ComponentPreviews.swift",
       "Sources/Previews/InteractionMotionHapticsPreviews.swift",
       "Sources/Previews/SI03ShellNavigationPreviews.swift",
@@ -6515,6 +6515,7 @@
       "Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift",
       "Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift",
       "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift",
+      "Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift",
       "Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift",
       "Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift",
       "Native/AmbitionsTests/App/ScreenContractRegistryTests.swift",
@@ -7435,6 +7436,7 @@
       "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
       "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift",
       "Native/AmbitionsTests/App/MemoryLensServiceTests.swift",
+      "Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift",
       "Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift",
       "Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift",
       "Native/AmbitionsTests/App/ScreenContractRegistryTests.swift",
@@ -8809,6 +8811,7 @@
       "Native/AmbitionsTests/App/FE09ComponentSystemTests.swift",
       "Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift",
       "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
+      "Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift",
       "Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift",
       "Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift",
       "Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift",
@@ -12995,6 +12998,10 @@
       "signal": "possible active Plan top-level residue"
     },
     {
+      "path": "Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift",
+      "signal": "possible active Plan top-level residue"
+    },
+    {
       "path": "Native/AmbitionsTests/Captures/CapturePlacementReviewStateTests.swift",
       "signal": "possible active Plan top-level residue"
     },
@@ -13064,10 +13071,6 @@
     },
     {
       "path": "Sources/Components/ShellChromePrimitives.swift",
-      "signal": "possible active Plan top-level residue"
-    },
-    {
-      "path": "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
       "signal": "possible active Plan top-level residue"
     },
     {

@@ -2867,7 +2867,7 @@
   "POST99": {
     "confidence": "MEDIUM",
     "score": 60,
-    "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT"
+    "state": "COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY"
   },
   "PPL01": {
     "confidence": "MEDIUM",

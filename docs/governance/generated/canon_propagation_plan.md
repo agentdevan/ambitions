@@ -1,6 +1,6 @@
 # Canon Propagation Plan
 
-Generated: 2026-05-19T14:27:50-04:00
+Generated: 2026-05-19T18:25:49-04:00
 
 ## Plan → Time
 
@@ -1257,7 +1257,6 @@ Generated: 2026-05-19T14:27:50-04:00
 - prompts/batches/ui-flagship/UI-STUDIO-01-SURFACE-BRIEF-SYSTEM.md
 - Sources/Components/ShellChromePrimitives.swift
 - Sources/Components/AmbitionsExtendedTactileKit.swift
-- Sources/Components/TopLevelSurfaceCompositionPrimitives.swift
 - Sources/Theme/PanelDensitySize.swift
 - Sources/Previews/SignatureInterfaceVisualQAFixtures.swift
 - Sources/Previews/ComponentPreviews.swift

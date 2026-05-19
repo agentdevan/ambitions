@@ -1,6 +1,6 @@
 # Generated Ambitions Reconciled Registry Projection
 
-Generated: 2026-05-19T14:27:50-04:00
+Generated: 2026-05-19T18:25:49-04:00
 
 This file is generated from local repository data by `scripts/governance/ambitions-governance-reconcile.py`.
 Do not hand-edit generated output; update source files or governance rules and regenerate.
@@ -767,7 +767,7 @@ Do not hand-edit generated output; update source files or governance rules and r
 |---|---|---:|---:|---:|---:|---:|---|
 | POST23 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 53 | 16 | 0 | 209 |  |
 | POST24 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 7 | 1 | 12 | 59 |  |
-| POST99 | IMPLEMENTATION_OR_EVIDENCE_PRESENT | MEDIUM | 5 | 4 | 0 | 8 |  |
+| POST99 | COMPLETE_EVIDENCE_ONLY_OR_DOCS_ONLY | MEDIUM | 5 | 4 | 0 | 8 |  |
 
 ## PPL
 

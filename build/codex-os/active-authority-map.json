@@ -150,127 +150,127 @@
     {
       "exists": true,
       "path": "build/codex-os/active-authority-map.json",
-      "sha256": "e061449158e002942340495b95d4395d2ad6cbde54fdf7058e01199f301cf7d5",
+      "sha256": "2ce34fb993849f1f2372ba00534e005c6a5e92ae799ba00fbd1ccb432c9714ff",
       "size": 11069
     },
     {
       "exists": true,
       "path": "build/codex-os/ambitions-context-pack.md",
-      "sha256": "911cd727d6b192ad8075df49fc9bec4585ff4e3795bea2af5265a77a1a5bd137",
-      "size": 806983
+      "sha256": "936335770da9d29fced4f2ff8ca44092b924158c15b0411144a88f4ece338b90",
+      "size": 860190
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.json",
-      "sha256": "2e31395de7fbd6c106fa971322226e11fe1b9538b11c16cde4aea0676a2764f9",
-      "size": 62059
+      "sha256": "151c2160a5cdb6fb1ba2d68f991561cceaa8ca10891ba2684555c88180ad15ba",
+      "size": 62061
     },
     {
       "exists": true,
       "path": "build/codex-os/next-action.md",
-      "sha256": "ee8d835c84fd06ab853dae01abb495f3d756b87c65a35b5ee160e76e8cff9d04",
+      "sha256": "c220558031cfe3643fafe3a05d6f7b995d519610ebb3a3ea7910e92d86c38ea2",
       "size": 494
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.json",
-      "sha256": "8a93a4a05ce32f2847396b930ec657d7b246a3b6e5ac8ab2bbabb41d6fe3d60c",
+      "sha256": "77222a2ba4530c848f0cadd4d9e31f325a38ff6392c6cc6d4a99c851b647f7e6",
       "size": 670
     },
     {
       "exists": true,
       "path": "build/codex-os/batch-selection.md",
-      "sha256": "9f418beadf369b88afc5e24e3504f2e90877edaa52f196af9efe829fd39925b0",
+      "sha256": "fd9883451466728330626e6a9cd93e373a7f7dc0c03536e697f738b5e9e36e5d",
       "size": 649
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.json",
-      "sha256": "e15606aba131a0a0dfb3c0102dbcd0fd7b2d3a239cbc56969248168670b668f2",
+      "sha256": "323263f695ff782f58e4a4faf335295d00487a8332550f13d7c46e13f8d9799c",
       "size": 260
     },
     {
       "exists": true,
       "path": "build/codex-os/repair-plan.md",
-      "sha256": "057931149420377d40871bebb969d9a1651fa6921303d515fa685e2faf790ce3",
+      "sha256": "0bae4d3cb8ce7fdd2e09550760700bf2352ae2c5e24275d60dc47ebe827e0845",
       "size": 246
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.json",
-      "sha256": "85961225a2eea783176d7f62e99dc20adc1a2e456eb27caaf94e28108627a8a3",
+      "sha256": "1146b36917f4f83bbaf1ad45e6b930fc5374d7ed5d75da24ff3000370289cf84",
       "size": 734
     },
     {
       "exists": true,
       "path": "build/codex-os/performance-check.md",
-      "sha256": "10bd1cc7ad0d87932f01627b122fcc203c9c77085cbfb9504d80d8dc54b71cdb",
+      "sha256": "cd14ed62a25bee0b12da9c44a5aaa6f36597d2c5230974a19a90916876023292",
       "size": 370
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.json",
-      "sha256": "50f81c11028378f01b247b0aaf6daea5900ce413022ee79d1093e95435de0ee7",
-      "size": 76653
+      "sha256": "381d02f5156419fa6afba689033e2656944bbac2ca67d669a3b81f6fb5d53d71",
+      "size": 76655
     },
     {
       "exists": true,
       "path": "build/codex-os/sync-report.md",
-      "sha256": "93331ce25a8670f9bd353c30c3831324e9914d49c99f3726c1be0e481f53f163",
+      "sha256": "f3d459c7d4b6079111b60f999fd7ce65715d1b46e552515f752c0ded882dae58",
       "size": 871
     }
   ],
   "compatibility_seams": [
     "Plan"
   ],
-  "generated_at": "2026-05-19T14:27:50-04:00",
+  "generated_at": "2026-05-19T18:25:49-04:00",
   "governance_outputs": [
     {
       "exists": true,
       "path": "docs/governance/GOVERNANCE_DASHBOARD.md",
-      "sha256": "422b317c770e23e1ba3d112cb15e59fce72a1ac5cc94da9c66c8ee85dc3a5586",
+      "sha256": "07112a318903d21fbcaf940ae96e512f8afa8947b07d2e16ce73e99257fd1317",
       "size": 1370
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.md",
-      "sha256": "b4c13043b8ea0db3bd345eba3762c18bddc5c59f47a06fb796fb70130fb73066",
+      "sha256": "886cc4964d315a0c71fef232ed6c8af15c83eb0f0446820e2088830cf36b0339",
       "size": 3229
     },
     {
       "exists": true,
       "path": "docs/governance/generated/repo_doctor_summary.json",
-      "sha256": "e79acba8c43de1c6332cd4896c87bd6f6dd29446b62979ef852ea7940195b627",
+      "sha256": "98a87047be405b3c1f3c74febf8ac71e34269a887336671f9f5edea30499ccf0",
       "size": 12679
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_plan.md",
-      "sha256": "a5316651fad137f4ba6c54e4783733b15c1271d3fd549d098c610b88e83c93b1",
-      "size": 33023
+      "sha256": "456b25d85db63a70290d6aae20ed687d746b6c8de48125cb6cca1547d3ca1725",
+      "size": 33025
     },
     {
       "exists": true,
       "path": "docs/governance/generated/canon_impact_map.json",
-      "sha256": "3aaf48d4db87334ad28510f19209936aa18a84683360582eff45fd8001c84726",
-      "size": 872922
+      "sha256": "1cbd587de551ddb87d50c79f9a772a972830ddc2f52399e5e872f1a858d0fb46",
+      "size": 873145
     },
     {
       "exists": true,
       "path": "docs/governance/generated/implementation_expectation_map.json",
-      "sha256": "b842802e87e1b5a58cc3628a118c254642790d5ed52c8e582711e31b6adde0fd",
+      "sha256": "15ce1541ae9b5461c8a092467112baa99168810e3a66fe792d5927b798be97d6",
       "size": 26483
     },
     {
       "exists": true,
       "path": "docs/governance/generated/global_train_resequence.json",
-      "sha256": "ca74299a949ec0891523415c726455823a989494e2565d1c78fe73c31cff760f",
+      "sha256": "8a51f82c69b04a8beeab07241166a6839cfc5a951e8e50da1f6cfa4940d37bc4",
       "size": 423
     },
     {
       "exists": true,
       "path": "docs/governance/generated/mature_spec_synthesis.md",
-      "sha256": "23bf000cb6d2f3630050037fb110101566975296b9db8be7054e1c610041876f",
+      "sha256": "5d746ffbabcd559d78d5e9d0bcf21099c1686750e1a1bb300429486aaf32ef64",
       "size": 18518
     },
     {
@@ -294,32 +294,32 @@
     {
       "exists": true,
       "path": "docs/governance/generated/orphan_prompt_audit.md",
-      "sha256": "70b4c81a64a3fb4d42e0797206a79b5b5636335b197188e8530b8bb87b7190d9",
+      "sha256": "278ad57e5f5f86e88fe5db48f0516aee18b89a0057600b504ca25bd0d666f90b",
       "size": 163
     },
     {
       "exists": true,
       "path": "docs/governance/generated/stale_overlay_audit.md",
-      "sha256": "9ab9b26600586940e0278c5918a421ee751e715e26e9fcdbe71f3d77faf629a1",
+      "sha256": "66b0db651b41707f2fc340416a30479767ed3725f720075b1e9ec68ca61d3e18",
       "size": 150
     },
     {
       "exists": true,
       "path": "docs/governance/generated/architecture_debt_score.json",
-      "sha256": "60e76b8e908c06c307a17bbcf33a5e38f34f9fa19987cbaa675c74e63dae2268",
+      "sha256": "2454f1268188e58cd645315346591310f8be46cbf45829ae21af9d1639f5a28e",
       "size": 130
     },
     {
       "exists": true,
       "path": "docs/governance/generated/governance_reconciliation_summary.json",
-      "sha256": "d7a947c1ad089c3588809086ab40934caa3bbaf989843de5521edfab43c9b8f7",
+      "sha256": "f75528abe0a821fc673c278f15e4524edb2ea819ad772a9dee4347cf6888eabd",
       "size": 1694
     },
     {
       "exists": true,
       "path": "docs/governance/generated/train_lineage_graph.json",
-      "sha256": "f3ab4748cdd9ae089db39286d679d0eb8bb38405326f51b4a6d1c9604616dfeb",
-      "size": 7094912
+      "sha256": "8958a2d5953059573397ac6ce3a6217eeb7f75ebf0fa2a9d7dbeefab45fbb7a4",
+      "size": 7094913
     },
     {
       "exists": true,
@@ -334,7 +334,7 @@
       "size": 1164716
     }
   ],
-  "head_sha": "fdb8d11f4d113198080d7d07545849865a70b177",
+  "head_sha": "3f072eba6391a4cf72efc99089bf812180e15e7a",
   "repo_root": "/Users/devan/Documents/GitHub/ambitions",
   "top_level_ia": [
     "Today",
