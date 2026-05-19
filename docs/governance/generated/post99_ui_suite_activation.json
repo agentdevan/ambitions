@@ -1,0 +1,9 @@
+{
+  "status": "active",
+  "source_authority": "docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md",
+  "activation_train": "POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00",
+  "activation_prompt": "prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md",
+  "runner_command": "scripts/ambitions-codex-train.sh POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00 prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md",
+  "reason": "Post23 recommendation existed without executable activation routing.",
+  "created_by": "ChatGPT Repo OS activation install"
+}
