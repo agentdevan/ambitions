@@ -62,31 +62,37 @@ struct ActivationTrustMessage: Sendable, Equatable {
 }
 
 enum ActivationContract {
-    static let firstTenMinutesPromise = "Start with one real thing. Ambitions will turn it into one doable next step, show why it matters, give you a safe fallback, and stay honest about what is local."
+    static let firstTenMinutesPromise = "Start with one real thing. Ambitions turns it into one doable step, shows why it matters, offers a safe fallback, and stays honest about what is local."
 
-    static let orientationTitle = "Start with one real thing"
-    static let orientationSubtitle = "Ambitions becomes useful from one meaningful goal, one messy capture, or one calm return to Today. You do not need to set up your whole life first."
+    static let orientationTitle = "Ambitions starts with one real thing"
+    static let orientationSubtitle = "Today, Goals, Capture, Time, and You are the five primary objects. You only need one real thing to begin, and setup stays manual-first."
 
-    static let startTitle = "Choose the first useful step"
-    static let startSubtitle = "Create one specific goal or capture one loose thought. Either path keeps setup short and manual."
+    static let startTitle = "Choose the first honest action"
+    static let startSubtitle = "Create one specific goal, capture one loose thought, or open Today. Ambitions keeps the first step manual and local."
 
     static let trustMessage = ActivationTrustMessage(
         title: "Your work starts locally",
         explanation: "No Ambitions account, cloud provider, calendar connection, or external setup is required to begin. Permissions stay optional and contextual.",
         rows: [
-            ActivationCopyRow(title: "No account required", detail: "There is no in-app account setup for the current first-run path.", icon: "person.crop.circle.badge.xmark"),
-            ActivationCopyRow(title: "Starts locally", detail: "Goals, captures, and planning signals begin on this device.", icon: "lock.shield"),
-            ActivationCopyRow(title: "Manual first", detail: "Ambitions asks you to choose the first real thing before it suggests more structure.", icon: "hand.tap"),
+            ActivationCopyRow(title: "No account required", detail: "There is no in-app account setup on the current first-run path.", icon: "person.crop.circle.badge.xmark"),
+            ActivationCopyRow(title: "Starts locally", detail: "Goals, captures, and planning signals begin on this device first.", icon: "lock.shield"),
+            ActivationCopyRow(title: "Manual first", detail: "Ambitions asks you to choose one real thing before it suggests more structure.", icon: "hand.tap"),
             ActivationCopyRow(title: "Optional connections", detail: "Calendar and notifications are useful later, but neither is required to start.", icon: "bell.badge")
         ]
     )
 
     static let onboardingSurfaceRows: [ActivationCopyRow] = [
-        ActivationCopyRow(title: "Today", detail: "Choose one doable next step.", icon: AppTab.today.systemImage),
-        ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction.", icon: AppTab.goals.systemImage),
-        ActivationCopyRow(title: "Capture", detail: "Put messy life here first.", icon: AppTab.captures.systemImage),
+        ActivationCopyRow(title: "Today", detail: "Keep one doable step visible and grounded in current reality.", icon: AppTab.today.systemImage),
+        ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction before you build a plan.", icon: AppTab.goals.systemImage),
+        ActivationCopyRow(title: "Capture", detail: "Put messy life here first so nothing needs to be solved immediately.", icon: AppTab.captures.systemImage),
         ActivationCopyRow(title: "Time", detail: "Shape the week only when something real asks for room.", icon: AppTab.plan.systemImage),
         ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AppTab.profile.systemImage)
+    ]
+
+    static let onboardingBoundaryRows: [ActivationCopyRow] = [
+        ActivationCopyRow(title: "Manual first", detail: "Ambitions waits for one real thing before it suggests more structure.", icon: "hand.tap"),
+        ActivationCopyRow(title: "Calendar optional", detail: "Time can wait until you need scheduling help.", icon: "calendar"),
+        ActivationCopyRow(title: "Notifications optional", detail: "Reminders can wait until you want them.", icon: "bell")
     ]
 
     static func promise(for kind: ActivationMomentKind) -> ActivationPromise {
@@ -95,7 +101,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First meaningful goal",
-                explanation: "Start with one specific ambition in plain language. Ambitions should shape a doable first step without asking for a giant life plan.",
+                explanation: "Start with one specific ambition in plain language. Ambitions shapes one doable first step without asking for a giant life plan.",
                 primaryActionTitle: "Create first goal",
                 primaryRoutingHint: .createGoal
             )

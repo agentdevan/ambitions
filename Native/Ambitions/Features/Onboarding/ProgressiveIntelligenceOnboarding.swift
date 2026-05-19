@@ -91,8 +91,20 @@ struct ProgressiveIntelligenceOnboardingView: View {
             eyebrow: "Ambitions",
             title: ActivationContract.orientationTitle,
             subtitle: ActivationContract.orientationSubtitle,
-            rows: ActivationContract.onboardingSurfaceRows
-        )
+            rows: []
+        ) {
+            copySectionCard(
+                title: "Primary objects",
+                subtitle: "Ambitions organizes life through these five places.",
+                rows: ActivationContract.onboardingSurfaceRows
+            )
+
+            copySectionCard(
+                title: "Setup boundaries",
+                subtitle: "These parts stay optional until you need them.",
+                rows: ActivationContract.onboardingBoundaryRows
+            )
+        }
     }
 
     private var startPage: some View {
@@ -194,6 +206,39 @@ struct ProgressiveIntelligenceOnboardingView: View {
             .padding(.vertical, theme.spacing.xl)
         }
         .scrollIndicators(.hidden)
+    }
+
+    private func copySectionCard(title: String, subtitle: String, rows: [ActivationCopyRow]) -> some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(subtitle)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+
+                ForEach(rows, id: \.title) { row in
+                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                        Image(systemName: row.icon)
+                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .frame(width: 24)
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            Text(row.title)
+                                .font(theme.typography.bodyEmphasized)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text(row.detail)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                        }
+                    }
+                }
+            }
+            .padding(theme.spacing.lg)
+        }
     }
 
     private func choiceRow(choice: OnboardingEntryChoice, title: String, subtitle: String, icon: String) -> some View {

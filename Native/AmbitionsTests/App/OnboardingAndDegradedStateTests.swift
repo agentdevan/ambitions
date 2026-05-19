@@ -69,6 +69,15 @@ final class OnboardingAndDegradedStateTests: XCTestCase {
         XCTAssertEqual(decision, RepositoryBackedOnboardingService.routeDecision(for: .captureFirst))
     }
 
+    func testOnboardingCopyFramesPrimaryObjectsLocalTrustAndOptionalSetup() {
+        XCTAssertTrue(ActivationContract.orientationTitle.contains("real thing"))
+        XCTAssertTrue(ActivationContract.orientationSubtitle.contains("Today, Goals, Capture, Time, and You"))
+        XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(ActivationContract.onboardingBoundaryRows.map(\.title), ["Manual first", "Calendar optional", "Notifications optional"])
+        XCTAssertTrue(ActivationContract.trustMessage.explanation.contains("optional"))
+        XCTAssertTrue(ActivationContract.promise(for: .firstTodayContract).explanation.contains("doable step"))
+    }
+
     func testCreateFirstGoalRouteDecision() {
         let decision = RepositoryBackedOnboardingService.routeDecision(for: .createFirstGoal)
 
