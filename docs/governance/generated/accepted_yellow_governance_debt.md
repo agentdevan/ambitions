@@ -1,6 +1,6 @@
 # Generated Accepted-Yellow Governance Debt
 
-Generated: 2026-05-19T12:50:02-04:00
+Generated: 2026-05-19T14:27:50-04:00
 
 Status: GREEN
 Owner: Governance Reconciliation lane
@@ -14,7 +14,7 @@ Generated governance reconciliation is Green: unresolved train debt is zero and 
 - Unresolved reconciliation count: 0
 - Stale overlay count: 0
 - Orphan prompt count: 0
-- Train count: 695
+- Train count: 696
 
 ## No-Claim Boundary
 

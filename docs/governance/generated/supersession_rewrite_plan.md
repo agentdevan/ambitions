@@ -784,6 +784,7 @@
 - classify/archive/rewrite: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
 - classify/archive/rewrite: docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md
 - classify/archive/rewrite: docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md
+- classify/archive/rewrite: docs/codex/reports/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md
 - classify/archive/rewrite: docs/contracts/AMB_PROJECTION_CONTRACT_REGISTRY.md
 - classify/archive/rewrite: docs/governance/ACTIVE_EXECUTION_GRAPH.md
 - classify/archive/rewrite: docs/governance/AUTHORITY_HIERARCHY.md

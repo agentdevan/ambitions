@@ -3871,7 +3871,7 @@
       {
         "commit_count": 16,
         "confidence": "MEDIUM",
-        "governance_file_count": 13,
+        "governance_file_count": 15,
         "implementation_file_count": 0,
         "prompt_files": [
           ".codex/runs/AMB-POST23-00-COMPLETION-SENTINEL/20260519T045342Z/prompts/01-plan.prompt.md",
@@ -3910,22 +3910,45 @@
           ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T162344Z/prompts/03-review.prompt.md",
           ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T162344Z/prompts/04-repair-1.prompt.md",
           ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T162344Z/prompts/05-finalize.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T172248Z/prompts/01-plan.prompt.md",
+          ".codex/runs/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION/20260519T172248Z/prompts/02-bounded-patch.prompt.md",
+          ".codex/runs/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00/20260519T173841Z/prompts/01-plan.prompt.md",
+          ".codex/runs/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00/20260519T173841Z/prompts/02-bounded-patch.prompt.md",
           "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md",
           "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE.md",
           "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md",
           "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md",
           "docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-STATUS.md",
           "docs/codex/batch-trains/post-23-truth-audit/README.md",
+          "docs/codex/batch-trains/post99-ui-suite/README.md",
+          "prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md",
           "prompts/batches/post-23-truth-audit/AMB-POST23-00-COMPLETION-SENTINEL.md",
           "prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md",
           "prompts/batches/post-23-truth-audit/AMB-POST23-02-UNDERDELIVERY-REPAIR.md",
           "prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md",
           "prompts/batches/post-23-truth-audit/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md"
         ],
-        "proof_file_count": 200,
+        "proof_file_count": 209,
         "reason": "Prompt has commit lineage and evidence linkage but no implementation files.",
         "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
         "train_id": "POST23"
+      },
+      {
+        "commit_count": 4,
+        "confidence": "MEDIUM",
+        "governance_file_count": 4,
+        "implementation_file_count": 0,
+        "prompt_files": [
+          ".codex/runs/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00/20260519T173841Z/prompts/01-plan.prompt.md",
+          ".codex/runs/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00/20260519T173841Z/prompts/02-bounded-patch.prompt.md",
+          "docs/codex/BATCH_REGISTRY.md",
+          "docs/codex/batch-trains/post99-ui-suite/README.md",
+          "prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md"
+        ],
+        "proof_file_count": 8,
+        "reason": "Prompt has commit lineage and evidence linkage but no implementation files.",
+        "state": "IMPLEMENTATION_OR_EVIDENCE_PRESENT",
+        "train_id": "POST99"
       },
       {
         "commit_count": 2,
@@ -29554,10 +29577,10 @@
   "counts": {
     "manifest_only_queued": 67,
     "not_prompt_backed": 2,
-    "proven_evidence_or_docs": 150,
+    "proven_evidence_or_docs": 151,
     "proven_governance_only": 125,
     "proven_implemented": 343,
     "queued_prompt_backed": 8
   },
-  "generated_at": "2026-05-19T17:15:26.425274+00:00"
+  "generated_at": "2026-05-19T18:33:23.523156+00:00"
 }
