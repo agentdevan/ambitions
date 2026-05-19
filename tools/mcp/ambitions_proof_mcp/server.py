@@ -152,6 +152,7 @@ FORBIDDEN_EXTRA_TOKENS = {
 
 XCODE_ALLOWED_EXTRA_FLAGS = {"--batch", "--test", "--test-plan"}
 BATCH_ID_RE = re.compile(r"^[A-Za-z0-9._-]{1,120}$")
+TIMEOUT_CATEGORIES = {"test_timeout", "mcp_timeout", "simulator_boot_failure", "missing_destination"}
 
 
 @dataclass(frozen=True)
@@ -248,47 +249,6 @@ def _validated_xcode_extra_args(validation: Validation, extra_args: list[str]) -
     return extra_args
 
 
-def _run(validation: Validation, extra_args: list[str] | None = None) -> JSON:
-    extra_args = extra_args or []
-    if validation.requires_explicit_args and not extra_args:
-        raise ValueError(f"{validation.name} requires explicit target/test arguments")
-    status = _validation_status(validation)
-    if status["missing_paths"]:
-        raise FileNotFoundError(f"missing required paths: {', '.join(status['missing_paths'])}")
-    if validation.xcode_wrapper_lane:
-        extra_args = _validated_xcode_extra_args(validation, extra_args)
-    command = list(validation.command) + extra_args
-    _assert_command_allowed(command)
-    PROOF_ROOT.mkdir(parents=True, exist_ok=True)
-    log_path = PROOF_ROOT / f"{_timestamp()}-{validation.name}.log"
-    proc = subprocess.run(
-        command,
-        cwd=REPO_ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        timeout=validation.timeout_seconds,
-        check=False,
-    )
-    log_path.write_text(proc.stdout, encoding="utf-8")
-    return {
-        "validation": validation.name,
-        "command": command,
-        "exit_code": proc.returncode,
-        "passed": proc.returncode == 0,
-        "timeout_seconds": validation.timeout_seconds,
-        "log_path": str(log_path.relative_to(REPO_ROOT)),
-        "output_tail": proc.stdout[-4000:],
-        "xcode_summary": _latest_xcode_summary_for_command(command),
-        "non_claims": [
-            "not release proof",
-            "not device proof",
-            "not public accessibility proof",
-            "not legal/privacy signoff",
-        ],
-    }
-
-
 def _batch_from_command(command: list[str]) -> str | None:
     if "--batch" not in command:
         return None
@@ -296,6 +256,35 @@ def _batch_from_command(command: list[str]) -> str | None:
     if index + 1 >= len(command):
         return None
     return command[index + 1]
+
+
+def _xctest_recovery_state(
+    *,
+    validation_name: str | None,
+    classification: str | None,
+    status: str | None,
+    exit_code: int | None,
+    log_tail: str | None = None,
+) -> JSON:
+    normalized_status = (status or "").lower()
+    normalized_classification = (classification or "unknown").lower()
+    tail = (log_tail or "").lower()
+    proof_verified = normalized_status == "passed" and normalized_classification == "passed" and exit_code == 0
+    timed_out = normalized_classification in TIMEOUT_CATEGORIES or "timed out" in tail or "timeout" in tail
+    retry_validation = None
+    if timed_out or normalized_classification in {"test_failure", "test_discovery_failure", "unknown"}:
+        retry_validation = "xcode_validate_focused_test"
+    return {
+        "xctest_proof_verified": proof_verified,
+        "proof_state": "verified" if proof_verified else "not_verified",
+        "previous_attempt_classification": normalized_classification,
+        "previous_attempt_timed_out": timed_out,
+        "recommended_retry_validation": retry_validation,
+        "recommended_route": "ambitionsProof.run_named_validation" if retry_validation else None,
+        "preferred_xcode_path": "scripts/ambitions-xcode-validate.sh --lane focused-test --json" if retry_validation else None,
+        "continuation_status": "CONTINUE" if proof_verified else "RETRY_XCODE_WRAPPER_PROOF",
+        "note": "Timed-out focused XcodeBuildMCP attempts are not XCTest proof; recover through wrapper-native Ambitions Proof MCP validation." if timed_out else "Only a passing Xcode Build Lab summary verifies XCTest proof.",
+    }
 
 
 def _latest_xcode_summary_for_command(command: list[str]) -> JSON | None:
@@ -347,6 +336,68 @@ def _latest_xcode_log(batch_id: str) -> JSON | None:
     }
 
 
+def _run(validation: Validation, extra_args: list[str] | None = None) -> JSON:
+    extra_args = extra_args or []
+    if validation.requires_explicit_args and not extra_args:
+        raise ValueError(f"{validation.name} requires explicit target/test arguments")
+    status = _validation_status(validation)
+    if status["missing_paths"]:
+        raise FileNotFoundError(f"missing required paths: {', '.join(status['missing_paths'])}")
+    if validation.xcode_wrapper_lane:
+        extra_args = _validated_xcode_extra_args(validation, extra_args)
+    command = list(validation.command) + extra_args
+    _assert_command_allowed(command)
+    PROOF_ROOT.mkdir(parents=True, exist_ok=True)
+    log_path = PROOF_ROOT / f"{_timestamp()}-{validation.name}.log"
+    try:
+        proc = subprocess.run(
+            command,
+            cwd=REPO_ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=validation.timeout_seconds,
+            check=False,
+        )
+        output = proc.stdout
+        exit_code = proc.returncode
+        classification = "passed" if exit_code == 0 else "unknown"
+    except subprocess.TimeoutExpired as exc:
+        raw_output = exc.output or ""
+        if isinstance(raw_output, bytes):
+            raw_output = raw_output.decode("utf-8", errors="replace")
+        output = raw_output + f"\nMCP validation timed out after {validation.timeout_seconds} seconds.\n"
+        exit_code = 124
+        classification = "mcp_timeout"
+    log_path.write_text(output, encoding="utf-8")
+    passed = exit_code == 0
+    recovery = _xctest_recovery_state(
+        validation_name=validation.name,
+        classification=classification,
+        status="passed" if passed else "failed",
+        exit_code=exit_code,
+        log_tail=output[-4000:],
+    )
+    return {
+        "validation": validation.name,
+        "command": command,
+        "exit_code": exit_code,
+        "passed": passed,
+        "failure_category": classification,
+        "timeout_seconds": validation.timeout_seconds,
+        "log_path": str(log_path.relative_to(REPO_ROOT)),
+        "output_tail": output[-4000:],
+        "xcode_summary": _latest_xcode_summary_for_command(command),
+        "xctest_recovery": recovery,
+        "non_claims": [
+            "not release proof",
+            "not device proof",
+            "not public accessibility proof",
+            "not legal/privacy signoff",
+        ],
+    }
+
+
 def tool_list_available_validations(_: JSON) -> JSON:
     return {
         "validations": [_validation_status(item) for item in VALIDATIONS.values()],
@@ -358,6 +409,7 @@ def tool_list_available_validations(_: JSON) -> JSON:
             "no signing or App Store upload",
             "no git push/merge/rebase/reset",
             "wrapper-native Xcode validations use 1800-second timeout for simulator workflows",
+            "timed-out focused XcodeBuildMCP attempts do not verify XCTest proof",
         ],
     }
 
@@ -436,6 +488,7 @@ def tool_check_validation_policy(args: JSON) -> JSON:
             "xcode_validate_test_plan",
         ],
         "deprecated_xcode_validations": ["build_local", "focused_tests"],
+        "xctest_timeout_policy": "A focused XcodeBuildMCP timeout is not verified XCTest proof; retry via xcode_validate_focused_test through ambitionsProof.run_named_validation.",
         "forbidden": [
             "arbitrary command",
             "network command",
@@ -469,19 +522,59 @@ def tool_xcode_failure_classification(args: JSON) -> JSON:
         classification = data.get("failure_category")
         status = data.get("status")
         exit_code = data.get("exit_code")
+    latest_log = _latest_xcode_log(batch_id)
+    tail = latest_log.get("tail") if isinstance(latest_log, dict) else None
+    recovery = _xctest_recovery_state(
+        validation_name="xcode_failure_classification",
+        classification=classification,
+        status=status,
+        exit_code=exit_code,
+        log_tail=tail,
+    )
     return {
         "batch": batch_id,
         "summary": summary,
         "status": status,
         "exit_code": exit_code,
         "failure_category": classification,
-        "latest_log": _latest_xcode_log(batch_id),
+        "latest_log": latest_log,
+        "xctest_recovery": recovery,
         "non_claims": [
             "classification is local engineering evidence only",
             "not release proof",
             "not device proof",
             "not public accessibility proof",
         ],
+    }
+
+
+def tool_xctest_recovery_plan(args: JSON) -> JSON:
+    batch_id = args.get("batch_id")
+    test_id = args.get("test_id")
+    previous_failure_category = args.get("previous_failure_category") or "test_timeout"
+    previous_note = args.get("previous_note") or "focused XcodeBuildMCP attempt timed out"
+    if not isinstance(batch_id, str) or not BATCH_ID_RE.match(batch_id):
+        raise ValueError("batch_id is required and must be safe")
+    if test_id is not None and not isinstance(test_id, str):
+        raise ValueError("test_id must be a string when provided")
+    args_list = ["--batch", batch_id]
+    if test_id:
+        args_list.extend(["--test", test_id])
+    return {
+        "batch": batch_id,
+        "previous_attempt": {
+            "source": "XcodeBuildMCP",
+            "failure_category": previous_failure_category,
+            "note": previous_note,
+            "xctest_proof_verified": False,
+        },
+        "next_validation": {
+            "tool": "ambitionsProof.run_named_validation",
+            "name": "xcode_validate_focused_test",
+            "args": args_list,
+        },
+        "acceptance_gate": "Only a passing xcode_latest_summary for this batch verifies XCTest proof.",
+        "continuation_after_retry": "Call ambitionsProof.xcode_latest_summary, then ambitionsProof.xcode_failure_classification, then ambitionsRepo.continuation_oracle.",
     }
 
 
@@ -502,7 +595,8 @@ _register(ToolDef("collect_latest_logs", "Collect latest local proof and Xcode l
 _register(ToolDef("generate_proof_packet", "Generate a local proof packet from latest logs.", _tool_schema({"title": {"type": "string"}, "validations": {"type": "array", "items": {"type": "string"}}}), tool_generate_proof_packet))
 _register(ToolDef("check_validation_policy", "Return validation policy and forbidden actions.", _tool_schema({"name": {"type": "string"}}), tool_check_validation_policy))
 _register(ToolDef("xcode_latest_summary", "Return the latest Xcode Build Lab validate-summary.json for a batch.", _tool_schema({"batch_id": {"type": "string"}}, ["batch_id"]), tool_xcode_latest_summary))
-_register(ToolDef("xcode_failure_classification", "Return latest Xcode Build Lab failure category and log tail for a batch.", _tool_schema({"batch_id": {"type": "string"}}, ["batch_id"]), tool_xcode_failure_classification))
+_register(ToolDef("xcode_failure_classification", "Return latest Xcode Build Lab failure category, proof verification state, and log tail for a batch.", _tool_schema({"batch_id": {"type": "string"}}, ["batch_id"]), tool_xcode_failure_classification))
+_register(ToolDef("xctest_recovery_plan", "Return the wrapper-native recovery plan after an unverified or timed-out focused XCTest attempt.", _tool_schema({"batch_id": {"type": "string"}, "test_id": {"type": "string"}, "previous_failure_category": {"type": "string"}, "previous_note": {"type": "string"}}, ["batch_id"]), tool_xctest_recovery_plan))
 
 
 def _mcp_tools_list() -> JSON:
@@ -540,7 +634,7 @@ def _handle(message: JSON) -> JSON | None:
     is_notification = "id" not in message
     try:
         if method == "initialize":
-            return None if is_notification else _response(request_id, {"protocolVersion": "2025-03-26", "capabilities": {"tools": {}}, "serverInfo": {"name": "ambitions_proof_mcp", "version": "0.2.0"}})
+            return None if is_notification else _response(request_id, {"protocolVersion": "2025-03-26", "capabilities": {"tools": {}}, "serverInfo": {"name": "ambitions_proof_mcp", "version": "0.3.0"}})
         if method == "notifications/initialized":
             return None
         if method == "tools/list":
@@ -617,6 +711,7 @@ def run_self_test() -> int:
         "run_named_validation",
         "xcode_latest_summary",
         "xcode_failure_classification",
+        "xctest_recovery_plan",
     }
     if not required_validations.issubset(names):
         missing = sorted(required_validations - names)
@@ -634,6 +729,16 @@ def run_self_test() -> int:
         _validated_xcode_extra_args(focused, ["--batch", "MCP-SMOKE-01", "--test", "AmbitionsTests/Focused"])
     except Exception as exc:
         print(f"ambitions_proof_mcp self-test failed; focused-test args rejected: {exc}")
+        return 1
+    recovery = _xctest_recovery_state(
+        validation_name="xcode_validate_focused_test",
+        classification="test_timeout",
+        status="failed",
+        exit_code=25,
+        log_tail="focused XcodeBuildMCP attempt timed out",
+    )
+    if recovery["xctest_proof_verified"] or recovery["recommended_retry_validation"] != "xcode_validate_focused_test":
+        print("ambitions_proof_mcp self-test failed; timeout recovery did not route to wrapper focused test")
         return 1
     print("ambitions_proof_mcp self-test passed")
     return 0
