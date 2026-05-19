@@ -145,7 +145,7 @@ private extension RepositoryBackedYouService {
                     appearanceSummary: appearanceSummary
                 ),
                 supportingTruth: "Ambitions starts local-first, keeps risky actions confirmation-gated, and treats memory as something you can inspect and correct.",
-                trustWhisper: "No silent calendar changes. No active cloud sync claim. No destructive memory deletion from this surface.",
+                trustWhisper: "No silent calendar changes. \(syncTrustStatusLabel(syncStatus)). No destructive memory deletion from this surface.",
                 status: syncState,
                 pills: [
                     YouStatusPill(id: "you-pill-appearance", title: appearanceSummary, icon: "paintpalette", state: .selected),
@@ -282,7 +282,7 @@ private extension RepositoryBackedYouService {
                         title: "System trust posture",
                         subtitle: "The current runtime uses on-device storage. Apple-first sync is future-owned and not currently connected.",
                         icon: "lock.shield",
-                        valueLabel: syncStatus.detail
+                        valueLabel: syncTrustStatusLabel(syncStatus)
                     ),
                     SettingsItem(
                         id: "you-trust-calendar",
@@ -317,7 +317,7 @@ private extension RepositoryBackedYouService {
                         title: "Export and disaster recovery",
                         subtitle: "Portable snapshot foundations exist, but the proof drill is not complete. This surface does not claim export is production-ready.",
                         icon: "externaldrive.badge.icloud",
-                        valueLabel: "Future planned"
+                        valueLabel: "Requires confirmation"
                     )
                 ],
                 dataMap: makeTrustDataMap(
@@ -688,9 +688,9 @@ private extension RepositoryBackedYouService {
                     YouTrustCenterRoute(
                         id: "trust-route-sync-export",
                         title: "Sync / Export truth",
-                        subtitle: "Sync is not connected. Export and import proof remain future-owned until the disaster drill passes.",
+                        subtitle: syncExportTruthSubtitle(syncStatus),
                         icon: "externaldrive",
-                        statusLabel: syncStatus.detail,
+                        statusLabel: syncTrustStatusLabel(syncStatus),
                         semanticState: .caution,
                         accessibilityHint: "Shows sync and export truth."
                     ),
@@ -781,9 +781,9 @@ private extension RepositoryBackedYouService {
                         YouSystemCenterItem(
                             id: "what-ambitions-knows",
                             title: "What Ambitions Knows",
-                            subtitle: "Saved local context.",
+                            subtitle: "Saved local context you can inspect and correct.",
                             icon: "brain.head.profile",
-                            statusLabel: contextSignals == 0 ? "Empty" : "Local",
+                            statusLabel: contextSignals == 0 ? "Empty" : "Stored on this device",
                             semanticState: contextSignals == 0 ? .neutral : .trust,
                             accessibilityHint: "Opens local memory controls."
                         ),
@@ -801,7 +801,7 @@ private extension RepositoryBackedYouService {
                             title: "Receipts & History",
                             subtitle: "What changed and why.",
                             icon: "doc.text.magnifyingglass",
-                            statusLabel: "Local",
+                            statusLabel: "Stored on this device",
                             semanticState: .neutral,
                             accessibilityHint: "Opens receipt history."
                         ),
@@ -921,7 +921,7 @@ private extension RepositoryBackedYouService {
                             title: "Export / Import",
                             subtitle: "Local backup and restore posture.",
                             icon: "externaldrive",
-                            statusLabel: syncStatus.availability == .unavailable ? "Manual" : "Review",
+                            statusLabel: syncTrustStatusLabel(syncStatus),
                             semanticState: .caution,
                             accessibilityHint: "Opens export and import status."
                         )
@@ -2228,6 +2228,22 @@ private extension RepositoryBackedYouService {
         case .localOnly:
             return "Local-first and stable"
         }
+    }
+
+    func syncTrustStatusLabel(_ status: SyncCapabilityStatus) -> String {
+        if status.availability == .unavailable &&
+            status.detail == "Ambitions is running in explicit local-only mode." {
+            return "Not currently connected"
+        }
+        return status.detail
+    }
+
+    func syncExportTruthSubtitle(_ status: SyncCapabilityStatus) -> String {
+        if status.availability == .unavailable &&
+            status.detail == "Ambitions is running in explicit local-only mode." {
+            return "Sync is not connected. Export and import proof remain future-owned until the disaster drill passes."
+        }
+        return "\(status.detail) Export and import proof remain future-owned until the disaster drill passes."
     }
 
     func syncVisualState(_ status: SyncCapabilityStatus) -> AmbitionVisualState {

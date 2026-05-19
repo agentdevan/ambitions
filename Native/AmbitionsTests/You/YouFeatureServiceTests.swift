@@ -10,9 +10,9 @@ final class YouFeatureServiceTests: XCTestCase {
 
         XCTAssertTrue(dashboard.hero.subtitle.contains("Your System"))
         XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
-        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-sync" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-sync" && $0.valueLabel == "Not currently connected" }))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-accessibility" && $0.valueLabel == "Claims locked" }))
-        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-export-import" && $0.valueLabel == "Future planned" }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-export-import" && $0.valueLabel == "Requires confirmation" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-notifications" && $0.valueLabel == "Not requested" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-shortcuts" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-share" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
@@ -77,7 +77,10 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
 
+        XCTAssertTrue(dashboard.hero.trustWhisper.contains("Injected runtime trust posture."))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-sync" && $0.valueLabel == "Injected runtime trust posture." }))
+        XCTAssertTrue(dashboard.trustCenter.sections.flatMap(\.routes).contains(where: { $0.id == "trust-route-sync-export" && $0.statusLabel == "Injected runtime trust posture." }))
+        XCTAssertTrue(dashboard.systemCenter.sections.flatMap(\.items).contains(where: { $0.id == "export-import" && $0.statusLabel == "Injected runtime trust posture." }))
     }
 
     func testDashboardMapsNotificationAuthorizationIntoNarrowTrustSurface() async throws {
@@ -211,6 +214,19 @@ final class YouFeatureServiceTests: XCTestCase {
 
     func testD17SystemCenterGroupsYouWithoutAddingTopLevelTabsOrOverclaiming() async throws {
         let repositories = try await makeRepositories()
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-d17-local-context",
+                kind: .userCorrectionAdded,
+                occurredAt: "2026-05-19T21:26:00Z",
+                source: .you,
+                title: "Local context recorded",
+                summary: "Trust continuity fixture.",
+                tone: .correction,
+                privacy: .standard,
+                localOnly: true
+            )
+        )
         let service = RepositoryBackedYouService(repositories: repositories)
 
         let dashboard = try await service.loadYouDashboard()
@@ -264,7 +280,11 @@ final class YouFeatureServiceTests: XCTestCase {
         }))
         XCTAssertTrue(items.contains(where: {
             $0.id == "export-import" &&
-            $0.statusLabel == "Manual"
+            $0.statusLabel == "Not currently connected"
+        }))
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "what-ambitions-knows" &&
+            $0.statusLabel == "Stored on this device"
         }))
         XCTAssertTrue(items.contains(where: {
             $0.id == "automation-trust" &&
@@ -320,6 +340,7 @@ final class YouFeatureServiceTests: XCTestCase {
         }))
         XCTAssertTrue(routes.contains(where: {
             $0.id == "trust-route-sync-export" &&
+            $0.statusLabel == "Not currently connected" &&
             ($0.subtitle.contains("Sync is not connected"))
         }))
         XCTAssertEqual(dashboard.trustCenter.receiptSummaries.count, 3)
