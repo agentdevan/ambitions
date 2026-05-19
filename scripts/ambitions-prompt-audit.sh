@@ -13,11 +13,6 @@ has_runner_metadata() {
     && grep -Eq '^[[:space:]]*<!--[[:space:]]*DIRECT_CODEX_EXECUTION:[[:space:]]*forbidden_unless_user_explicitly_bypasses_runner[[:space:]]*-->' "$file"
 }
 
-looks_like_batch_prompt() {
-  local file="$1"
-  grep -Eq '^#[[:space:]]*Batch ID|^##[[:space:]]*Batch ID|make batch BATCH=' "$file"
-}
-
 is_historical_path() {
   local file="$1"
   local lower_path
@@ -48,7 +43,7 @@ is_eval_path() {
 is_template_path() {
   local file="$1"
   case "$file" in
-    prompts/_*.md|.codex/templates/*|.codex/templates/**/*)
+    prompts/README.md|prompts/*/README.md|prompts/_*.md|prompts/desktop/*|prompts/desktop/**/*|prompts/templates/*|prompts/templates/**/*|docs/codex/chatgpt/*|docs/codex/chatgpt/**/*|.codex/templates/*|.codex/templates/**/*)
       return 0
       ;;
     *)
@@ -57,30 +52,33 @@ is_template_path() {
   esac
 }
 
-looks_runnable() {
+is_active_prompt_path() {
   local file="$1"
+  local dir
 
-  case "$file" in
-    docs/codex/*)
-      has_runner_metadata "$file" && looks_like_batch_prompt "$file"
-      return
-      ;;
-  esac
+  if is_template_path "$file" || is_eval_path "$file" || is_historical_path "$file"; then
+    return 1
+  fi
 
-  case "$file" in
-    prompts/batches/*.md)
-      has_runner_metadata "$file" && looks_like_batch_prompt "$file"
+  dir="${file%/*}"
+  case "$dir" in
+    prompts|prompts/ambitions|prompts/batches|prompts/batches/*|prompts/generated|prompts/generated/*|prompts/moat-install|prompts/moat-install/*)
+      return 0
       ;;
     *)
-      if is_template_path "$file" || is_eval_path "$file" || is_historical_path "$file"; then
-        return 1
-      fi
-
-      has_runner_metadata "$file" && looks_like_batch_prompt "$file"
-      return
+      return 1
+      ;;
   esac
+}
 
-  return
+has_runner_metadata_outside_active_prompt_path() {
+  local file="$1"
+
+  ! is_active_prompt_path "$file" \
+    && ! is_template_path "$file" \
+    && ! is_eval_path "$file" \
+    && ! is_historical_path "$file" \
+    && has_runner_metadata "$file"
 }
 
 classification_for() {
@@ -92,8 +90,10 @@ classification_for() {
     printf 'eval prompt\n'
   elif is_template_path "$file"; then
     printf 'template/supporting prompt\n'
-  elif looks_runnable "$file"; then
+  elif is_active_prompt_path "$file"; then
     printf 'active runnable batch prompt\n'
+  elif has_runner_metadata_outside_active_prompt_path "$file"; then
+    printf 'mislocated runnable prompt\n'
   else
     printf 'supporting prompt/governance doc\n'
   fi
@@ -114,7 +114,8 @@ find_prompt_like_files() {
   done | sort -u
 }
 
-missing=()
+missing_metadata=()
+mislocated=()
 active=()
 support=()
 evals=()
@@ -129,8 +130,11 @@ while IFS= read -r file; do
     "active runnable batch prompt")
       active+=("$file")
       if ! has_runner_metadata "$file"; then
-        missing+=("$file")
+        missing_metadata+=("$file")
       fi
+      ;;
+    "mislocated runnable prompt")
+      mislocated+=("$file")
       ;;
     "eval prompt")
       evals+=("$file")
@@ -147,9 +151,9 @@ while IFS= read -r file; do
   esac
 done < <(find_prompt_like_files)
 
-if [[ "${#missing[@]}" -gt 0 ]]; then
-  echo "RED: active runnable prompt files missing runner metadata"
-  printf '%s\n' "${missing[@]}"
+if [[ "${#missing_metadata[@]}" -gt 0 ]]; then
+  echo "RED: active runnable prompt files missing exact Ambitions runner metadata"
+  printf '%s\n' "${missing_metadata[@]}"
   exit 1
 fi
 
@@ -162,16 +166,18 @@ if [[ "$VERBOSE" == "1" ]]; then
   printf '%s\n' "${evals[@]:-}"
   printf 'Historical/archive prompts (%s):\n' "${#historical[@]}"
   printf '%s\n' "${historical[@]:-}"
+  printf 'Mislocated runnable prompts (%s):\n' "${#mislocated[@]}"
+  printf '%s\n' "${mislocated[@]:-}"
   printf 'Supporting governance docs (%s):\n' "${#support[@]}"
   printf '%s\n' "${support[@]:-}"
 fi
 
-if [[ "${#templates[@]}" -gt 0 || "${#evals[@]}" -gt 0 || "${#historical[@]}" -gt 0 || "${#support[@]}" -gt 0 ]]; then
-  echo "YELLOW: prompt-like support/eval/template files classified; no active runnable prompt missing metadata"
-  printf 'Active runnable prompts audited: %s\n' "${#active[@]}"
-  printf 'Support/eval/template/historical files classified: %s\n' "$(( ${#templates[@]} + ${#evals[@]} + ${#historical[@]} + ${#support[@]} ))"
-  exit 0
+if [[ "${#mislocated[@]}" -gt 0 ]]; then
+  echo "YELLOW: runner-wrapped prompts found outside prompts/batches; move them, classify them as templates/evals/historical, or remove runnable metadata"
+  printf '%s\n' "${mislocated[@]}"
+  exit 1
 fi
 
-echo "GREEN: all active runnable prompts require the Ambitions runner"
+echo "GREEN: all active runnable prompts have exact Ambitions runner metadata"
 printf 'Active runnable prompts audited: %s\n' "${#active[@]}"
+printf 'Support/eval/template/historical files classified as non-actionable: %s\n' "$(( ${#templates[@]} + ${#evals[@]} + ${#historical[@]} + ${#support[@]} ))"

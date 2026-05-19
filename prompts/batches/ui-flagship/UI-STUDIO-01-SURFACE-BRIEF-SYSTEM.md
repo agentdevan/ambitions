@@ -46,6 +46,14 @@ Install a reusable surface brief contract that always includes:
 - `Performance risks`
 - `What must not be built`
 
+The contract must also preserve:
+
+- the active top-level IA: `Today / Goals / Capture / Time / You`
+- `Plan` as compatibility-only
+- one-primary-object discipline
+- local-first / on-device-first posture
+- non-claims around implementation, screenshot proof, accessibility proof, performance proof, and release proof
+
 ## Hard Rules
 
 - No dashboard default.
@@ -53,6 +61,7 @@ Install a reusable surface brief contract that always includes:
 - No card-stack fallback.
 - No fake proof claims.
 - No color-only meaning.
+- `What must not be built` must explicitly reject dashboard, chatbot, card-stack, calendar-clone, fake-proof, and color-only-meaning defaults.
 
 ## Validation Expectations
 

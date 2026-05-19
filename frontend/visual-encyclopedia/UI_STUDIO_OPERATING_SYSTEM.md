@@ -30,11 +30,38 @@ The flagship object canon is:
 
 The UI Studio stack must keep those objects visible in the prompt family, the review board, and the screen-state matrix.
 
+## Surface Brief Contract
+
+Every flagship UI implementation prompt in this family must define a surface brief before implementation. The brief is a contract, not a vibe check.
+
+Required brief fields:
+
+- `Surface`
+- `Primary object`
+- `User intent`
+- `Backend projection`
+- `Empty state`
+- `Normal state`
+- `Dense state`
+- `Recovery state`
+- `Accessibility risks`
+- `Performance risks`
+- `What must not be built`
+
+Required interpretations:
+
+- Preserve the active top-level IA: `Today / Goals / Capture / Time / You`
+- Keep `Plan` compatibility-only unless current truth explicitly widens it
+- Keep one primary object per root surface
+- Keep the local-first / on-device-first posture unless active truth says otherwise
+- Do not claim implementation, screenshot proof, accessibility proof, performance proof, or release proof from docs alone
+- `What must not be built` must explicitly block dashboard defaults, chatbot-first framing, card-stack fallback, calendar-clone behavior, fake proof claims, and color-only meaning
+
 ## Operating Loop
 
 1. Read the active truth files first.
 2. Read the frontend authority index and the relevant surface recipe.
-3. Pick the surface state coverage from `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`.
+3. Pick the surface state coverage and surface brief contract from `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`.
 4. Generate a bounded implementation prompt with the runner metadata header.
 5. Keep source scope narrow and explicit.
 6. Require proof artifacts for changed screens.
