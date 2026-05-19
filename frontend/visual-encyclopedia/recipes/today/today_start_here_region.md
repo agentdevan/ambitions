@@ -94,7 +94,7 @@ Reality Meridian
 ### Region 3: Start Here or active Step object
 
 - Purpose: Keep Start Here as the current-action aperture, with the active Step, fit reason, and closure path stronger than any surrounding Today metadata.
-- Contains: Start Here label, active Step title, time-fit or energy-fit reason, source freshness badge, proof attachment affordance, Still Counts path, and receipt expectation.
+- Contains: Start Here label, active Step title, time-fit or energy-fit reason, source freshness badge, proof attachment affordance, Still Counts path, receipt expectation, and one quieter correction path.
 - Primitives: GraphiteRecess ground, LuminousTrace attachment, CelestialField only for semantic orientation, SF Symbols, chevrons, label system.
 - Typography: Use native iPhone semantic text hierarchy: compact region label, Reality Meridian title or state label, source/proof caption, and readable action text. Emphasis stays on the active Reality Meridian decision or inspected state.
 - Spacing: Keep source, proof, CTA, and state notes visually attached to Reality Meridian, with tight native grouping, thumb-zone reach for actions, and enough separation to prevent equal-weight card stacking.
@@ -102,7 +102,7 @@ Reality Meridian
 - Color/state behavior: Meaning is carried by label, shape, placement, and accessibility text before color; color only reinforces state.
 - Icons/chevrons: SF Symbols or chevrons clarify navigation, source, lock/protected, receipt, warning, or disclosure; icons never carry meaning alone.
 - Labels: Use Ambitions-native language for Reality Meridian attachment, Start Here continuity, current-day fit, protected-time respect, closure and recovery visibility.
-- CTAs: Use a visible primary command only when this region changes Reality Meridian; otherwise prefer named disclosure rows such as Why this?, View source, View receipt, Add proof, Undo, or Close.
+- CTAs: Use one visible primary command only when this region changes Reality Meridian; otherwise prefer a quieter correction path such as Why this?, View source, View receipt, Add proof, Undo, or Close.
 - Receipts/proof: Source, proof, receipt, or explicit no-receipt reason remains visually attached to the changed or inspected object.
 - Interaction meaning: Tap inspects the object, opens the related detail, previews a change, or expands state context.
 - Accessibility intent: VoiceOver names region, object, state, source/proof availability, and available action in that order.
@@ -185,7 +185,7 @@ Color reinforces semantic state but never owns it. Fresh, stale, protected, pres
 Use SF Symbols where possible. Chevron means deeper inspection or navigation, not decoration. Icons must be paired with visible text or accessibility labels, especially for source, proof, protected, pressure, warning, receipt, and recovery meanings.
 
 ## CTA Recipe
-One primary CTA maximum at rest. Secondary actions are quieter, cancel remains reachable, destructive actions are explicit and receipt-backed, and disabled actions explain what is needed without shame.
+One primary CTA maximum at rest. Secondary actions stay quieter correction paths, cancel remains reachable, destructive actions are explicit and receipt-backed, and disabled actions explain what is needed without shame.
 
 ## Label and Microcopy Recipe
 Use plain Ambitions language: Start here, Shape Time, Still counts, Source, Why this?, Receipt, Needs a Place, Protected, Waiting, Blocked, Needs recovery, and local trust terms where relevant. Avoid AI confidence, model language, productivity scores, overdue/failure copy, motivational filler, and retired top-level destination phrasing.

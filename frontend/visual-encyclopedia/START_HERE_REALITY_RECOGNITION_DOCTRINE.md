@@ -8,7 +8,7 @@ Implementation claim: Docs-only. This doctrine does not prove SwiftUI implementa
 
 ## Core Canon Decision
 
-Start Here is a reality-recognition aperture, not a generic recommendation card.
+Start Here is a resolver-backed command object, not a generic recommendation card.
 
 Ambitions must recognize scheduled reality before it recommends anything. If a user-scheduled, user-accepted, or calendar-backed step is currently inside its time window, the front end frames it as the current reality state. It must not repackage that scheduled item as an AI-discovered recommendation.
 
@@ -81,7 +81,7 @@ Use stable anatomy while content changes by state:
 4. Threadline
 5. Time fit, schedule fit, or capacity fit
 6. Primary CTA
-7. Secondary CTA
+7. Quieter correction path
 8. Receipt Handle
 
 ### Active scheduled step copy
@@ -179,6 +179,16 @@ The Reality Meridian must visually prove the Start Here state.
 
 No state may present three equal-weight CTAs at rest.
 
+## Command Object Contract
+
+The Start Here surface must behave like a command object with one dominant action and one quieter correction path.
+
+- It exposes authority, temporal relation, receipt source, and visible state label together.
+- It never presents a generic recommendation-card hierarchy.
+- It uses exactly one primary CTA at rest.
+- It may offer one quieter correction path for adjustment, recovery, or inspection, but not an equal-weight second command.
+- It must keep `Recommended step`, `Active step`, `In progress`, `Up next`, `Needs closure`, `Recovery`, `Protected time`, `Away mode`, `Current commitment`, and `Schedule conflict` exact.
+
 ## Runtime Contract
 
 The local Start Here Resolver must return a reasoned state, not only a task id.
@@ -192,7 +202,7 @@ Required output fields:
 - primary object
 - explanation copy
 - primary CTA
-- secondary CTA
+- quieter correction path
 - receipt source
 - receipt signals
 - visual tone

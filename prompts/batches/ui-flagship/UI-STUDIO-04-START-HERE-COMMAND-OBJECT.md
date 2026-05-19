@@ -22,7 +22,7 @@ Define the Start Here command object so the flagship daily surface uses resolver
 ## Install Scope
 
 - Keep `Recommended step`, `Active step`, `In progress`, `Up next`, `Needs closure`, `Recovery`, `Protected time`, `Away mode`, `Current commitment`, and `Schedule conflict` exact.
-- Require the command object to expose authority and action without shaming language.
+- Require the command object to expose authority, temporal relation, receipt source, one primary CTA, and one quieter correction path without shaming language.
 
 ## Hard Rules
 
@@ -38,5 +38,5 @@ Define the Start Here command object so the flagship daily surface uses resolver
 
 ## Final Response Format
 
-- Summarize the command-object labels and boundaries.
+- Summarize the command-object labels and boundaries, including the one-primary-CTA and quieter-correction-path rule.
 - End with `STATUS: GREEN|YELLOW|RED`.
