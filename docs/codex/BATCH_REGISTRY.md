@@ -4,7 +4,7 @@ This file is the operational queue for active Ambitions work.
 It tracks which batch is completed, active, queued, or preserved as historical evidence.
 Registry batch numbers are operational status truth only. Canon batch numbers are semantic roadmap context and must not be renumbered retroactively.
 
-Ambitions 3.0 is the active rebuild source of truth. For current execution and handoff work, use the 3.0 canonical planning stack first:
+Active Ambitions source truth now starts with `docs/truth/*`, live source/project/test evidence, and current proof artifacts. Ambitions 3.0 is preserved completed rebuild history and compatibility context, not the active rebuild source of truth. For historical F-series interpretation only, use the completed 3.0 planning stack after the truth files:
 
 - [../canon/Ambitions_3_0_Source_Of_Truth_Override.md](../canon/Ambitions_3_0_Source_Of_Truth_Override.md)
 - [../canon/Ambitions_3_0_Front_End_Redesign_Index.md](../canon/Ambitions_3_0_Front_End_Redesign_Index.md)
@@ -18,7 +18,7 @@ Ambitions 3.0 is the active rebuild source of truth. For current execution and h
 - [../canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md](../canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md)
 - [../canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](../canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
 
-Ambitions 2.0 docs remain preserved historical/supporting context unless the 3.0 source override explicitly keeps a domain binding where 3.0 has not replaced it.
+Ambitions 2.0 and 3.0 docs remain preserved historical/supporting context. They do not override `docs/truth/*`, live source/project/test evidence, current proof artifacts, or newer active queue overlays.
 
 Supporting installer package:
 
@@ -26,7 +26,7 @@ Supporting installer package:
 
 ## Ambitions 4.0 Execution Program Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It does not claim release readiness, App Store readiness, TestFlight readiness, physical-device proof, platform proof, public accessibility proof, PXOS implementation, Signature Interface implementation, Product Depth implementation, or AmbitionsOS implementation.
+Ambitions 4.0 remains an active post-3.0 planning/execution overlay where current queue files still route through it, not a shipped product version and not a replacement for `docs/truth/*`. It does not claim release readiness, App Store readiness, TestFlight readiness, physical-device proof, platform proof, public accessibility proof, PXOS implementation, Signature Interface implementation, Product Depth implementation, or AmbitionsOS implementation.
 
 Current 4.0 status:
 
@@ -901,22 +901,22 @@ Older preserved continuity docs:
 
 - Keep one active batch at a time unless the user explicitly authorizes parallel work.
 - Do not start Batch N+1 while Batch N is unstable.
-- Do not use this registry to override the dependency order in the canonical planning stack.
+- Do not use this registry to override `docs/truth/*`, live source/project/test evidence, current proof artifacts, or the dependency order in the current active queue overlays.
 - Update status only after validation or an explicit user decision.
 - Preserve historical batch truth; this file is the live queue, not the full historical ledger.
-- If this registry conflicts with the canonical planning stack, the canonical planning stack wins.
+- If this registry conflicts with `docs/truth/*`, live source/project/test evidence, or current proof artifacts, those higher authorities win. If it conflicts with lower historical planning docs, this registry controls queue status only.
 
 ## Historical Note
 
 The earlier operational queue documented the repo through a post-2.0 hardening and frontend transformation sequence. That history is now complete for planning purposes and remains preserved below; it is not renumbered or deleted.
 
-Historical status: Ambitions 2.0 canon was adopted on 2026-04-24, and all phases and batches before Batch 61 remain complete for planning/history purposes. Batch 60 remains the completed release-candidate polish batch. This is history/status, not active Ambitions 3.0 product direction.
+Historical status: Ambitions 2.0 canon was adopted on 2026-04-24, and all phases and batches before Batch 61 remain complete for planning/history purposes. Batch 60 remains the completed release-candidate polish batch. This is history/status, not active product direction.
 
-Use [../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md) for the active 3.0 F-series rebuild sequence. Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) only as preserved history/supporting context.
+Use [../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md) only for the completed historical 3.0 F-series rebuild sequence. Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) only as preserved history/supporting context.
 
 ## Active Queue
 
-Current execution status: Ambitions 3.0 is the active rebuild canon and handoff-readiness frame. Batches 00-88, D01-D26, M01-M12, and R01-R05 remain complete for planning/history purposes; the R-series release gate layer remains recorded as `Candidate prepared; human approval required`, not as App Store submission readiness or final RC lock. The active 3.0 implementation continuation is the F-series sequence in [../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md). F00-F16.5 are complete through the SwiftUI architecture/state-contract checkpoint. The active completion train is [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, F26, F27, F27.5, F28, F29, and F30 are Green by current train evidence. F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof and reran F27 PASS with `779` unit tests and `29` UI tests. F27.5 found no critical maintainability blocker, fixed stale active train-entry wording, and indexed known large-file/compatibility seams as handoff debt. F29 created the final engineer handoff package under [../handoff/](../handoff/). F30 created [../canon/Ambitions_Beyond_3_0_Roadmap.md](../canon/Ambitions_Beyond_3_0_Roadmap.md) and the final train closeout. The F17-F30 train is complete after F30 commit/push; no post-train implementation starts automatically.
+Current execution status: The active rebuild/source-of-truth frame is `docs/truth/*` plus live source/project/test evidence and current proof artifacts, with current queue overlays below that authority. Ambitions 3.0 is a completed historical baseline and handoff evidence set, not the active rebuild source of truth. Batches 00-88, D01-D26, M01-M12, and R01-R05 remain complete for planning/history purposes; the R-series release gate layer remains recorded as `Candidate prepared; human approval required`, not as App Store submission readiness or final RC lock. The 3.0 F-series sequence in [../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md) is historical completed rebuild evidence. F00-F16.5 are complete through the SwiftUI architecture/state-contract checkpoint. The F17-F30 completion train in [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md) is complete. F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, F26, F27, F27.5, F28, F29, and F30 are Green by train evidence. F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof and reran F27 PASS with `779` unit tests and `29` UI tests. F27.5 found no critical maintainability blocker, fixed stale train-entry wording, and indexed known large-file/compatibility seams as handoff debt. F29 created the final engineer handoff package under [../handoff/](../handoff/). F30 created [../canon/Ambitions_Beyond_3_0_Roadmap.md](../canon/Ambitions_Beyond_3_0_Roadmap.md) and the final train closeout. No post-train implementation starts automatically from 3.0 history.
 
 Continuation note after F00: F00 produced the traceability-backed Ambitions 3.0 implementation map without app code, UI test fixes, identifier renames, workflow changes, or dependency changes. Validation evidence recorded dev tooling PASS, doc QA PARTIAL/advisory, simulator build PASS on `iPhone 17`, full `AmbitionsTests` PASS (`744` tests, `0` failures), and full UI smoke PARTIAL (`29` tests, `9` failures). Active limitations: FAANG handoff remains PARTIAL; F01-F16 implementation/test/legacy migration work remains pending; no TestFlight, App Store, device, public accessibility, or handoff-readiness claim is made.
 
@@ -1243,6 +1243,7 @@ note and the PD18 audit report.
 | CQS01-CQS24 Codex Quality System Train | Complete / Green | CQS is now inserted after PD17 and before PD18 as a Codex OS operating layer. It created CQS canon, train manifest, gate matrix, repair protocol, skill map, script map, report template, reviewer skills, advisory scripts, and global order integration. It does not implement product features or production Swift. |
 | CQS25 / FET00 FAANG Frontend Codex OS Upgrade | Complete / Green | FET00 completed as a Codex OS frontend excellence layer. It created FET source truth, Frontend Excellence gate matrix, FET01-FET12 train manifest, FET00 prompt, reviewer skills, read-only advisory scripts, and global protocol/order/registry integration. Future FCP/AFI/DAV/PD/SI/FVQ/AOS UI/LDI UI/Source Atlas UI/PFC external-surface UI batches inherit FET gates. It does not claim current UI repair, visual approval, accessibility approval, device proof, App Store/TestFlight/release readiness, or app behavior implementation. |
 | FET01-FET12 FAANG Frontend Excellence Train | Complete / Green | FET01-FET12 completed as Codex OS/frontend quality-system evidence. It added concrete screenshot evidence, first-viewport budget, shell/bottom chrome ownership, top-level surface composition, primitive misuse/density, copy compression, accessibility/Dynamic Type/Reduce Motion, motion/haptics, visual QA scorecard, UI regression stop, and global-train enforcement gates. It did not implement live UI recovery, mutate app UI behavior, change route/raw values, persistence/schema, signing, workflows, dependencies, generated project files, or make release/readiness/accessibility/device/legal claims. IR-01 Big Frontend Recovery Implementation is the next recommended UI implementation pass before further visible top-level expansion. |
+| POST99 UI Suite Review And Implementation Train | Active / executable | Activation bridge for the installed UI Suite lane after AMB-FE-BE-INTEGRATED-PROOF-99; routes to the existing `UI-STUDIO-01-SURFACE-BRIEF-SYSTEM` prompt family and does not invent a new UI program. |
 | PFC01 Repo And Build System Inventory | Complete / Green | PFC01 completed as docs-only repo/build inventory and repair-map evidence. It inventoried XcodeGen source truth, generated/local artifacts, scripts, GitHub Actions CI, local setup docs, SwiftPM package shape, and no-claim boundaries without editing production Swift, `project.yml`, `Package.swift`, workflows, signing, dependencies, or generated output. |
 | PFC02 Architecture Boundary And Module Map | Complete / Green | PFC02 completed as docs-only architecture boundary evidence. It mapped app, domain, services, persistence, runtime, feature UI, shared packages, external surfaces, previews, and tests; recorded Yellow architecture advisories for one domain SwiftUI import and oversized owner files; and changed no production Swift or config. |
 | PFC03 Dead Code / Prompt Artifact / Naming Smell Audit | Complete / Green | PFC03 completed as docs-only maintainability evidence. It created a cleanup queue for prompt-artifact, placeholder, stale-copy, stub, and compatibility naming signals; classified WidgetKit placeholders, domain placeholder states, negative scan/test guards, and script self-hits as allowed; and Yellow-owned shell placeholder, future integration placeholder, stale F-series copy, temporary overlay wording, and stub naming cleanup for future owner batches. No deletion, rename, production Swift, config, dependency, workflow, or generated output change was made. |

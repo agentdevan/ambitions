@@ -40,6 +40,46 @@ Read in this order:
 scripts/ambitions-codex-train.sh POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00 prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md
 ```
 
+## UI Suite Batch Map
+
+This activation file does not invent a new UI program. It routes into the existing UI Studio prompt family that was already installed for the flagship UI lane.
+
+1. `UI-STUDIO-01-SURFACE-BRIEF-SYSTEM`
+   - First executable UI Suite batch
+   - Best entry point for surface-level review and implementation because it establishes the shared visual brief before narrower polish or red-team passes
+   - Command:
+
+```bash
+scripts/ambitions-codex-train.sh UI-STUDIO-01-SURFACE-BRIEF-SYSTEM prompts/batches/ui-flagship/UI-STUDIO-01-SURFACE-BRIEF-SYSTEM.md
+```
+
+2. `UI-STUDIO-02-TOKENS-AND-MATERIALS-REVIEW`
+   - Follow-on review once the surface brief is established
+
+3. `UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION`
+   - Follow-on art-direction pass for the Today / Reality Meridian surface
+
+4. `UI-STUDIO-04-START-HERE-COMMAND-OBJECT`
+   - Follow-on command-object refinement for Start Here
+
+5. `UI-STUDIO-05-FIVE-SURFACE-COMPOSITION`
+   - Follow-on top-level composition review across the flagship shell
+
+6. `UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS`
+   - Follow-on review for closure and recovery interaction quality
+
+7. `UI-STUDIO-07-TRUST-CONTINUITY-UX`
+   - Follow-on trust and continuity review
+
+8. `UI-STUDIO-08-ONBOARDING-CATEGORY-UX`
+   - Follow-on onboarding and category UX review
+
+9. `UI-STUDIO-09-PREVIEW-SCREENSHOT-MATRIX`
+   - Follow-on preview and screenshot-readiness matrix
+
+10. `UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM`
+    - Final review pass for generic-drift and polish regressions
+
 ## Scope boundary
 
 This is a UI Suite review and implementation activation lane. It may inspect and modify SwiftUI, tests, previews, design-system primitives, screenshot-readiness proof, accessibility proof, motion/reduce-motion behavior, haptics, visual QA scaffolding, and review artifacts when the active batch explicitly scopes those changes.
@@ -69,7 +109,7 @@ The UI Suite must preserve:
 - local-first deterministic Private Life Runtime
 - proof, receipt, source freshness, closure, recovery, and replay visibility
 
-It must reject generic dashboard/card-stack/task-list/calendar/chatbot drift.
+It must reject generic productivity-app drift and preserve the flagship object discipline.
 
 ## Completion behavior
 
