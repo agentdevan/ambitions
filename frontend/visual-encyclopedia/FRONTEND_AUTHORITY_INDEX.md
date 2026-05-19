@@ -21,17 +21,19 @@ For frontend/UI/design implementation work:
 3. `docs/truth/IMPLEMENTATION_TRUTH.md` plus live source
 4. `docs/truth/RELEASE_TRUTH.md`
 5. This frontend atlas directory
-6. `FRONTEND_DOC_CLASSIFICATION.md`
-7. Compatible AmbitionsCanon, docs/codex, audits, previews, prompts, and historical docs
-8. `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
-9. `trace/FRONTEND_SOURCE_BINDINGS.yaml`
-10. `trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml`
-11. `trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml`
-12. `UI_STUDIO_OPERATING_SYSTEM.md`
-13. `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`
+6. `DESIGN_LANGUAGE_DOCTRINE.md`
+7. `FRONTEND_DOC_CLASSIFICATION.md`
+8. Compatible AmbitionsCanon, docs/codex, audits, previews, prompts, and historical docs
+9. `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
+10. `trace/FRONTEND_SOURCE_BINDINGS.yaml`
+11. `trace/FRONTEND_IMPLEMENTATION_RECEIPT_SCHEMA.yaml`
+12. `trace/FRONTEND_PROOF_CONTRACT_SCHEMA.yaml`
+13. `UI_STUDIO_OPERATING_SYSTEM.md`
+14. `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`
 
 ## Active Files
 
+- Design language doctrine: `DESIGN_LANGUAGE_DOCTRINE.md`
 - Encyclopedia to frontend OS: `ENCYCLOPEDIA_TO_FRONTEND_OS.md`
 - Master: `AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
 - Flagship object system doctrine: `FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md`

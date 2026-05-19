@@ -7,6 +7,7 @@ This map classifies the current frontend documentation surface so agents can sep
 
 ## Active
 
+- `DESIGN_LANGUAGE_DOCTRINE.md`
 - `README.md`
 - `FRONTEND_AUTHORITY_INDEX.md`
 - `ACTIVE_IA_AND_SURFACE_MAP.md`

@@ -7,6 +7,7 @@ Use this portal for the detailed visual encyclopedia, recipe system, trace ledge
 
 Start here:
 
+- [`DESIGN_LANGUAGE_DOCTRINE.md`](DESIGN_LANGUAGE_DOCTRINE.md) for the frozen design-language rules that keep the frontend object-first and non-generic.
 - [`recipes/today/today_reality_meridian_flagship_surface.md`](recipes/today/today_reality_meridian_flagship_surface.md) for the locked Today flagship viewport: Reality Meridian, exact current-time cursor, one-handable Start now CTA, compact proof/recovery, and `Local · Ambitions` chrome.
 - [`SIGNATURE_VISUAL_INSTRUMENTS.md`](SIGNATURE_VISUAL_INSTRUMENTS.md) for the top-level instrument doctrine that prevents generic card/list surfaces.
 - [`trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`](trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml) for the machine-readable instrument-to-surface map.
@@ -51,6 +52,12 @@ The mature frontend is organized around five owning visual instruments:
 Top-level destinations and major drill-downs should use these instruments or registered shared instrument primitives rather than defaulting to generic cards, static lists, or plain forms.
 
 This family is visual canon only. It is not implementation proof, screenshot proof, release proof, accessibility conformance proof, or a current-state audit.
+
+## Design Language Freeze
+
+The active design language is frozen in [`DESIGN_LANGUAGE_DOCTRINE.md`](DESIGN_LANGUAGE_DOCTRINE.md).
+
+That doctrine is subordinate to `docs/truth/*` and the active visual encyclopedia root. It freezes one-primary-object law, the five signature instruments, semantic material usage, proof/receipt language, calm recovery tone, and the banned counter-patterns that must not re-enter active canon.
 
 ## Implementation Workflow
 
