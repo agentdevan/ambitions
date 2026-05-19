@@ -21,7 +21,8 @@ Require a controlled preview and screenshot matrix for flagship UI work so proof
 ## Install Scope
 
 - Require preview fixtures for empty, normal, dense, recovery, error, reduced motion, large Dynamic Type, small iPhone, and large iPhone states when relevant.
-- Keep screenshots controlled and truthful.
+- Require an explicit screenshot inventory for the same state set when screenshots are owned.
+- Separate preview fixture coverage, screenshot inventory requirements, actual rendered screenshot proof, accessibility proof, device proof, and release proof.
 - Treat preview coverage as a proof requirement, not proof itself.
 
 ## Hard Rules
@@ -29,6 +30,7 @@ Require a controlled preview and screenshot matrix for flagship UI work so proof
 - No fake screenshot claims.
 - No release readiness claims from previews alone.
 - No omission of non-ideal states when the surface can show them.
+- Do not let "screenshot inventory complete" imply screenshots were captured, approved, device-verified, accessible, or release-ready.
 
 ## Validation Expectations
 

@@ -17,7 +17,7 @@ This matrix defines the screen-state coverage that the UI Studio prompt family m
 | `UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS` | Closure, recovery, interruption | recovery, blocked, interrupted, stale, error, undoable-close | Recovery language and control affordances | shame language or fake urgency |
 | `UI-STUDIO-07-TRUST-CONTINUITY-UX` | You / trust / continuity | privacy, redaction, unavailable, stale, signed-out, limited-access | Trust controls and continuity clarity | a generic settings dump |
 | `UI-STUDIO-08-ONBOARDING-CATEGORY-UX` | Onboarding and category education | empty, setup-needed, first-run, permission-boundary, skipped-later | Honest setup, no fake commitments | a motivational wizard |
-| `UI-STUDIO-09-PREVIEW-SCREENSHOT-MATRIX` | Preview and screenshot proof | empty, normal, dense, recovery, error, reduced motion, large Dynamic Type, small iPhone, large iPhone | Controlled proof coverage | fake screenshot claims |
+| `UI-STUDIO-09-PREVIEW-SCREENSHOT-MATRIX` | Preview and screenshot proof | empty, normal, dense, recovery, error, reduced motion, large Dynamic Type, small iPhone, large iPhone | Preview fixture coverage, screenshot inventory requirements, actual rendered screenshot proof, accessibility proof, device proof, and release proof stay separate | fake screenshot claims |
 | `UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM` | Review and red-team posture | generic, fake, inaccessible, over-designed, under-polished, Plan residue, dashboard drift | Anti-generic failure detection | a greenwashed review |
 
 ## Required Interpretation
@@ -32,3 +32,12 @@ This matrix defines the screen-state coverage that the UI Studio prompt family m
 ## Non-Claims
 
 This matrix does not claim implementation, simulator proof, or release proof.
+
+## Proof Boundary
+
+- Preview fixtures are required for the owned state set when the surface can show them.
+- Screenshot inventory requirements are tracked separately from screenshot capture.
+- Actual rendered screenshot proof is only true when the screenshots have been captured and stored as proof artifacts.
+- Accessibility proof is a distinct claim from screenshot inventory or preview coverage.
+- Device proof is a distinct claim from screenshot inventory, accessibility proof, and preview coverage.
+- Release proof is a distinct claim from all of the above.
