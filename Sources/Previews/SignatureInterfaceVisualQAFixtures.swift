@@ -102,6 +102,7 @@ public struct SI16VisualQAFixture: Identifiable, Hashable, Sendable {
     public let accessibilityNote: String
     public let reduceMotionNote: String
     public let privacyNote: String
+    public let nonColorNote: String
     public let ldiHandlingLane: String?
 
     public init(
@@ -114,6 +115,7 @@ public struct SI16VisualQAFixture: Identifiable, Hashable, Sendable {
         accessibilityNote: String,
         reduceMotionNote: String,
         privacyNote: String,
+        nonColorNote: String,
         ldiHandlingLane: String? = nil
     ) {
         self.id = id
@@ -125,6 +127,7 @@ public struct SI16VisualQAFixture: Identifiable, Hashable, Sendable {
         self.accessibilityNote = accessibilityNote
         self.reduceMotionNote = reduceMotionNote
         self.privacyNote = privacyNote
+        self.nonColorNote = nonColorNote
         self.ldiHandlingLane = ldiHandlingLane
     }
 
@@ -142,12 +145,17 @@ public enum SI16PreviewFixtureCatalog {
     public static let claimsHumanApproval = false
     public static let claimsDeviceProof = false
     public static let changesRuntimeBehavior = false
+    public static let canonicalTopLevelSurfaces = ["Today", "Goals", "Capture", "Time", "You"]
 
     public static let sourceFiles: [String] = [
         "Sources/Previews/SignatureInterfaceVisualQAFixtures.swift",
         "Sources/Previews/SignatureInterfaceVisualQAPreviews.swift",
         "Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift"
     ]
+
+    public static let fixtureLookup: [String: SI16VisualQAFixture] = Dictionary(
+        uniqueKeysWithValues: fixtures.map { ($0.id, $0) }
+    )
 
     public static let fixtures: [SI16VisualQAFixture] = [
         fixture(.normal, "Today", "Reality Meridian", lane: nil),
@@ -171,6 +179,70 @@ public enum SI16PreviewFixtureCatalog {
         fixture(.setupNeeded, "You", "Setup control row", lane: nil),
         fixture(.deniedSource, "Time", "Denied source state", lane: "source_check_first"),
         fixture(.noDataYet, "Capture", "No placed capture yet", lane: "parked_thought")
+    ]
+
+    public static let surfaceCoverageRows: [SI16PreviewSurfaceCoverageRow] = [
+        surfaceRow(
+            "Today",
+            object: "Reality Meridian / Start Here",
+            fixtureIDs: [
+                "today.normal",
+                "today.empty",
+                "today.recovery",
+                "today.blocked",
+                "today.staleSource"
+            ],
+            accessibilityNote: "Today keeps Start Here grounded in clear, empty, recovery, blocked, and stale-source states.",
+            nonColorNote: "State meaning stays visible through labels, symbols, and section order rather than color alone."
+        ),
+        surfaceRow(
+            "Goals",
+            object: "Constellation Atlas",
+            fixtureIDs: [
+                "goals.selected",
+                "goals.degraded",
+                "goals.needsReview"
+            ],
+            accessibilityNote: "Goals keeps mission control, review, and degraded source states inspectable without changing the product shape.",
+            nonColorNote: "The atlas remains readable through text hierarchy and status symbols even when the state is degraded."
+        ),
+        surfaceRow(
+            "Capture",
+            object: "Atmosphere Composer",
+            fixtureIDs: [
+                "capture.focused",
+                "capture.noDataYet",
+                "capture.blocked",
+                "capture.dynamicType"
+            ],
+            accessibilityNote: "Capture covers routed, empty, blocked, and large-text proof without turning into a task inbox.",
+            nonColorNote: "The composer uses copy, spacing, and status symbols to avoid color-only meaning."
+        ),
+        surfaceRow(
+            "Time",
+            object: "LifeShape Field",
+            fixtureIDs: [
+                "time.loading",
+                "time.partialSource",
+                "time.deniedSource",
+                "time.overwhelmingDay",
+                "time.reducedMotion"
+            ],
+            accessibilityNote: "Time stays legible in loading, partial-source, denied-source, overwhelmed-day, and reduce-motion states.",
+            nonColorNote: "Capacity, source, and recovery cues remain explicit in the surface text, not just the palette."
+        ),
+        surfaceRow(
+            "You",
+            object: "User System Profile",
+            fixtureIDs: [
+                "you.empty",
+                "you.privacySensitive",
+                "you.setupNeeded",
+                "you.offlineLocalOnly"
+            ],
+            accessibilityNote: "You keeps trust, setup, privacy, and local-only states inspectable in a settings-style shell.",
+            nonColorNote: "Private and local-only states stay understandable even with reduced contrast or color-blind viewing."
+        )
     ]
 
     public static var stateFamilies: Set<SI16VisualQAStateFamily> {
@@ -208,8 +280,59 @@ public enum SI16PreviewFixtureCatalog {
             privacyNote: lane == nil
                 ? "No private content is needed for this deterministic fixture."
                 : "LDI hook \(lane ?? "") uses lane vocabulary only and no user private data.",
+            nonColorNote: "State meaning stays visible without relying on color alone.",
             ldiHandlingLane: lane
         )
+    }
+
+    private static func surfaceRow(
+        _ ownerSurface: String,
+        object: String,
+        fixtureIDs: [String],
+        accessibilityNote: String,
+        nonColorNote: String
+    ) -> SI16PreviewSurfaceCoverageRow {
+        SI16PreviewSurfaceCoverageRow(
+            id: ownerSurface.lowercased(),
+            ownerSurface: ownerSurface,
+            primaryObject: object,
+            fixtureIDs: fixtureIDs,
+            accessibilityNote: accessibilityNote,
+            nonColorNote: nonColorNote
+        )
+    }
+}
+
+public struct SI16PreviewSurfaceCoverageRow: Identifiable, Hashable, Sendable {
+    public let id: String
+    public let ownerSurface: String
+    public let primaryObject: String
+    public let fixtureIDs: [String]
+    public let accessibilityNote: String
+    public let nonColorNote: String
+
+    public init(
+        id: String,
+        ownerSurface: String,
+        primaryObject: String,
+        fixtureIDs: [String],
+        accessibilityNote: String,
+        nonColorNote: String
+    ) {
+        self.id = id
+        self.ownerSurface = ownerSurface
+        self.primaryObject = primaryObject
+        self.fixtureIDs = fixtureIDs
+        self.accessibilityNote = accessibilityNote
+        self.nonColorNote = nonColorNote
+    }
+
+    public var fixtures: [SI16VisualQAFixture] {
+        fixtureIDs.compactMap { SI16PreviewFixtureCatalog.fixtureLookup[$0] }
+    }
+
+    public var accessibilitySummary: String {
+        "\(ownerSurface). \(primaryObject). \(accessibilityNote) \(nonColorNote)"
     }
 }
 

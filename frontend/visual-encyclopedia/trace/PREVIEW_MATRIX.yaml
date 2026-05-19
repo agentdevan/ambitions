@@ -1,76 +1,99 @@
 # Preview Matrix
 
-status: scaffold
+status: implemented_preview_fixture
+proof_status: screenshot_not_captured
+accessibility_status: checklist_scaffolded
+release_status: not_release_or_device_proof
 sections:
   - name: Today
+    preview_fixture_status: implemented_preview_fixture
+    screenshot_status: not_captured
+    accessibility_status: checklist_scaffolded
+    release_status: not_release_or_device_proof
     states:
       - key: clear_day
-        value: debt
+        value: implemented_preview_fixture
       - key: recovery_day
-        value: debt
+        value: implemented_preview_fixture
       - key: high_pressure
-        value: debt
+        value: implemented_preview_fixture
       - key: stale_source
-        value: debt
+        value: implemented_preview_fixture
       - key: protected_time
-        value: debt
+        value: implemented_preview_fixture
       - key: no_schedule_data
-        value: debt
+        value: implemented_preview_fixture
   - name: Goals
+    preview_fixture_status: implemented_preview_fixture
+    screenshot_status: not_captured
+    accessibility_status: checklist_scaffolded
+    release_status: not_release_or_device_proof
     states:
       - key: empty
-        value: debt
+        value: implemented_preview_fixture
       - key: active_threads
-        value: debt
+        value: implemented_preview_fixture
       - key: proof_gap
-        value: debt
+        value: implemented_preview_fixture
       - key: blocker
-        value: debt
+        value: implemented_preview_fixture
       - key: pivot
-        value: debt
+        value: implemented_preview_fixture
       - key: recovery
-        value: debt
+        value: implemented_preview_fixture
   - name: Capture
+    preview_fixture_status: implemented_preview_fixture
+    screenshot_status: not_captured
+    accessibility_status: checklist_scaffolded
+    release_status: not_release_or_device_proof
     states:
       - key: idle
-        value: debt
+        value: implemented_preview_fixture
       - key: active_text
-        value: debt
+        value: implemented_preview_fixture
       - key: route_reveal
-        value: debt
+        value: implemented_preview_fixture
       - key: held_with_dignity
-        value: debt
+        value: implemented_preview_fixture
       - key: proof_attached
-        value: debt
+        value: implemented_preview_fixture
       - key: wrong_route_recovery
-        value: debt
+        value: implemented_preview_fixture
   - name: Time
+    preview_fixture_status: implemented_preview_fixture
+    screenshot_status: not_captured
+    accessibility_status: checklist_scaffolded
+    release_status: not_release_or_device_proof
     states:
       - key: day_capacity
-        value: debt
+        value: implemented_preview_fixture
       - key: week_pressure
-        value: debt
+        value: implemented_preview_fixture
       - key: month_life_shape
-        value: debt
+        value: implemented_preview_fixture
       - key: protected_conflict
-        value: debt
+        value: implemented_preview_fixture
       - key: reflow_preview
-        value: debt
+        value: implemented_preview_fixture
       - key: stale_source
-        value: debt
+        value: implemented_preview_fixture
       - key: away_vacation
-        value: debt
+        value: implemented_preview_fixture
   - name: You
+    preview_fixture_status: implemented_preview_fixture
+    screenshot_status: not_captured
+    accessibility_status: checklist_scaffolded
+    release_status: not_release_or_device_proof
     states:
       - key: runtime_trust
-        value: debt
+        value: implemented_preview_fixture
       - key: automation_ladder
-        value: debt
+        value: implemented_preview_fixture
       - key: learned_pattern
-        value: debt
+        value: implemented_preview_fixture
       - key: privacy
-        value: debt
+        value: implemented_preview_fixture
       - key: reset_forget_preview
-        value: debt
+        value: implemented_preview_fixture
 
-The YAML is a control-plane matrix and intentionally avoids claiming preview implementation.
+The YAML is a control-plane matrix and intentionally avoids claiming screenshot export, device proof, or release proof.

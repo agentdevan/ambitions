@@ -23,6 +23,7 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
             XCTAssertFalse(fixture.accessibilityNote.isEmpty)
             XCTAssertFalse(fixture.reduceMotionNote.isEmpty)
             XCTAssertFalse(fixture.privacyNote.isEmpty)
+            XCTAssertFalse(fixture.nonColorNote.isEmpty)
         }
 
         XCTAssertEqual(
@@ -33,6 +34,26 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
             Set(SI16PreviewFixtureCatalog.screenshotNames).count,
             SI16PreviewFixtureCatalog.fixtures.count
         )
+    }
+
+    func testSI16SurfaceCoverageRowsMapTheFiveTopLevelSurfaces() {
+        XCTAssertEqual(SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces, ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(
+            SI16PreviewFixtureCatalog.surfaceCoverageRows.map(\.ownerSurface),
+            SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces
+        )
+
+        for row in SI16PreviewFixtureCatalog.surfaceCoverageRows {
+            XCTAssertFalse(row.primaryObject.isEmpty)
+            XCTAssertFalse(row.accessibilityNote.isEmpty)
+            XCTAssertFalse(row.nonColorNote.isEmpty)
+            XCTAssertFalse(row.fixtureIDs.isEmpty)
+            XCTAssertFalse(row.fixtures.isEmpty)
+            for fixture in row.fixtures {
+                XCTAssertEqual(fixture.ownerSurface, row.ownerSurface)
+                XCTAssertFalse(fixture.nonColorNote.isEmpty)
+            }
+        }
     }
 
     func testSI16FixturesStayEvidenceOnlyWithoutRuntimeOrProofClaims() {

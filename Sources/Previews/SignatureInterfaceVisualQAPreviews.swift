@@ -14,8 +14,14 @@ struct SignatureInterfaceVisualQAPreviewGallery: View {
                 SectionHeader(
                     eyebrow: "SI16",
                     title: "Preview Fixture And Visual QA",
-                    subtitle: "Deterministic preview states for SI primitives, accessibility notes, privacy states, and future LDI visual hooks."
+                    subtitle: "Deterministic preview states for the five top-level surfaces, accessibility notes, privacy states, and future LDI visual hooks."
                 )
+
+                LazyVGrid(columns: columns, alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(SI16PreviewFixtureCatalog.surfaceCoverageRows) { row in
+                        surfaceCoverageTile(row)
+                    }
+                }
 
                 LazyVGrid(columns: columns, alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(SI16PreviewFixtureCatalog.fixtures) { fixture in
@@ -71,6 +77,11 @@ struct SignatureInterfaceVisualQAPreviewGallery: View {
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
                 .fixedSize(horizontal: false, vertical: true)
+
+            Text(fixture.nonColorNote)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(theme.spacing.md)
         .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
@@ -84,7 +95,74 @@ struct SignatureInterfaceVisualQAPreviewGallery: View {
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(fixture.previewName). \(fixture.accessibilityNote)")
-        .accessibilityValue(fixture.reduceMotionNote)
+        .accessibilityValue("\(fixture.reduceMotionNote) \(fixture.nonColorNote)")
+    }
+
+    private func surfaceCoverageTile(_ row: SI16PreviewSurfaceCoverageRow) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                AmbitionsStatusSymbol(row.fixtures.first?.statusRole ?? .needsReview, style: .inline)
+
+                Text(row.ownerSurface)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+
+            Text(row.primaryObject)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(row.accessibilityNote)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(row.fixtures) { fixture in
+                    fixturePill(fixture)
+                }
+            }
+
+            Text(row.nonColorNote)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.md)
+        .frame(maxWidth: .infinity, minHeight: 190, alignment: .topLeading)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.72))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(row.accessibilitySummary)
+        .accessibilityValue("Preview fixtures: \(row.fixtures.count). Screenshot not captured.")
+    }
+
+    private func fixturePill(_ fixture: SI16VisualQAFixture) -> some View {
+        HStack(spacing: theme.spacing.xxs) {
+            AmbitionsStatusSymbol(fixture.statusRole, style: .inline)
+            Text(fixture.stateFamily.title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textPrimary)
+        }
+        .padding(.horizontal, theme.spacing.sm)
+        .padding(.vertical, theme.spacing.xs)
+        .background(
+            Capsule(style: .continuous)
+                .fill(theme.colors.surfacePrimary.opacity(0.72))
+        )
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(fixture.previewName). \(fixture.nonColorNote)")
     }
 
     private func scorecardTile(_ entry: AFI13VisualQAScorecardEntry) -> some View {
