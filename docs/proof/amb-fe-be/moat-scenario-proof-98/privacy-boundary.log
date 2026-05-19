@@ -1,2 +1,10 @@
-# Local-First Boundary Scan
-GREEN: local-first and claim-boundary checks passed in scanned files
+PrivateLifeRuntimeBoundary.localOnly.isLocalOnly = true
+usesSwiftDataPersistence = true
+usesRepositoryBackedMemory = true
+syncBackendKind = local_only
+hasHostedBackend = false
+hasRemoteIntelligenceBackend = false
+hasExternalCloudLLMDependency = false
+allowsExternalSideEffectsInsideUnitOfWorkBoundaries = false
+Runtime boundary is value model only = true
+No network, cloud LLM, backend, analytics, or hosted dependency is required for this proof.
