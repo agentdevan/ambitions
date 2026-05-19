@@ -69,7 +69,7 @@ For frontend/UI/design implementation work:
 - Trace matrices and ledgers: `trace/*.md`, `trace/VISUAL_CONFLICT_LEDGER.md`, `trace/VISUAL_SOURCE_LINKAGE_LEDGER.md`, `trace/VISUAL_SURFACE_GRAPH_LEDGER.md`
 - FE-12 chrome contracts hardening report: `../../docs/codex/reports/FE-12-CHROME-CONTRACTS-HARDENING.md`
 - UI Studio control plane: `UI_STUDIO_OPERATING_SYSTEM.md`, `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`, `../../prompts/batches/ui-flagship/*.md`, `../../docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`, `../../docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
-- UI Studio batch traces: `trace/UI_STUDIO_02_TOKENS_AND_MATERIALS_REVIEW.md`, `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`, `trace/UI_STUDIO_09_PREVIEW_SCREENSHOT_MATRIX.md`
+- UI Studio batch traces: `trace/UI_STUDIO_02_TOKENS_AND_MATERIALS_REVIEW.md`, `trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`, `trace/UI_STUDIO_09_PREVIEW_SCREENSHOT_MATRIX.md`, `trace/UI_STUDIO_10_FAANG_LEVEL_UI_RED_TEAM.md`
 
 ## Frontend Doc Classification Note
 
