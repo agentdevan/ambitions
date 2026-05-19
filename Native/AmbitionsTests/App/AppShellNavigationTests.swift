@@ -11,7 +11,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
     }
 
-    func testLegacyTabRawValuesRemainDecodableAndNormalizeSafely() {
+    func testLegacyTabRawValuesRemainDecodableAndNormalizeToCanonicalTabs() {
         XCTAssertEqual(AppTab(rawValue: "capture"), .capture)
         XCTAssertEqual(AppTab(rawValue: "captures"), .capture)
         XCTAssertEqual(AppTab(rawValue: "time"), .time)
@@ -174,7 +174,7 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testNavigationInitializesLegacyHabitsPreferenceIntoPlanHabitsRoute() {
+    func testNavigationInitializesLegacyHabitsPreferenceIntoTimeHabitsRoute() {
         let navigation = AppNavigationModel(selectedTab: .habits)
 
         XCTAssertEqual(navigation.selectedTab, .time)
@@ -183,7 +183,7 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testLegacyHabitsSelectionPreservesRitualPlanSemanticsWithoutDuplicateDestination() {
+    func testLegacyHabitsSelectionPreservesRitualTimeSemanticsWithoutDuplicateDestination() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
         navigation.selectTab(.habits)
@@ -213,7 +213,7 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testLegacyInsightsSelectionPreservesPlanCanonWithoutDuplicateDestination() {
+    func testLegacyInsightsSelectionPreservesYouCanonWithoutDuplicateDestination() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
         navigation.selectTab(.insights)
@@ -304,7 +304,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(preferences.preferredTab, .time)
     }
 
-    func testStoredProfilePreferredTabLoadsIntoYouSurfaceCompatibility() async throws {
+    func testStoredLegacyProfilePreferredTabLoadsIntoYouSurfaceCompatibility() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let appState = SwiftDataAppStateRepository(store: store)
         var state = AppStateSnapshot.default
@@ -348,7 +348,7 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testDemoPlanSurfaceProvidesGoalDetailRouteThatOpensInGoalsShell() async throws {
+    func testDemoTimeSurfaceProvidesGoalDetailRouteThatOpensInGoalsShell() async throws {
         let container = try await demoContainer()
         let dashboard = try await container.timeService.loadTimeDashboard(now: .now)
         let target = try XCTUnwrap(dashboard.goalShapingItems.first?.target)

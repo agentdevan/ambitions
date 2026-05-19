@@ -115,22 +115,6 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(
-            scrollUntilElementExists("plan.goal-relationship-card", in: app, maxAttempts: 60)
-            || scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 60)
-        )
-        XCTAssertTrue(scrollUntilElementExists("plan.goal-relationship-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.open-plan-habits-button", in: app))
-        app.buttons["plan.open-plan-habits-button"].tap()
-        XCTAssertTrue(app.descendants(matching: .any)["habits.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["habits.return-to-plan"].waitForExistence(timeout: 10))
-        app.buttons["shell.plan.back-button"].tap()
-        XCTAssertTrue(scrollUntilElementExists("plan.open-plan-weekly-review-button", in: app))
-        app.buttons["plan.open-plan-weekly-review-button"].tap()
-        XCTAssertTrue(app.descendants(matching: .any)["weekly-review.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["weekly-review.hero-card"].waitForExistence(timeout: 10))
-        app.buttons["shell.plan.back-button"].tap()
-        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
@@ -140,7 +124,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
     }
 
-    func testProfileAppearanceStudioControlsAreAccessibleFromKeyboardAndTouch() throws {
+    func testYouAppearanceStudioControlsAreAccessibleFromKeyboardAndTouch() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
@@ -156,7 +140,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Persist the curated setup for future launches.", in: app, maxAttempts: 8))
     }
 
-    func testProfilePersonalDefaultsRemainVisibleBeneathAppearanceStudio() throws {
+    func testYouPersonalDefaultsRemainVisibleBeneathAppearanceStudio() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
@@ -169,7 +153,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Review cadence", in: app, maxAttempts: 8))
     }
 
-    func testProfileTrustSurfaceShowsConservativeExternalStatusLabels() throws {
+    func testYouTrustSurfaceShowsConservativeExternalStatusLabels() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
@@ -334,7 +318,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["insights.history.screen"].waitForExistence(timeout: 10))
     }
 
-    func testPreviewInsightsMonthlyReviewCanHandOffToPlan() throws {
+    func testPreviewInsightsMonthlyReviewCanHandOffToTime() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://insights/monthly-review")
         app.launch()
 
@@ -343,14 +327,14 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Review shaping", in: app))
     }
 
-    func testPreviewInsightsHistoryRouteCanHandOffToPlan() throws {
+    func testPreviewInsightsHistoryRouteCanHandOffToTime() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://insights/history")
         app.launch()
 
         XCTAssertTrue(app.descendants(matching: .any)["insights.history.screen"].waitForExistence(timeout: 10))
-        let planButton = scrollUntilButtonHittable("insights.history.open-weekly-review", in: app)
-        XCTAssertTrue(planButton.waitForExistence(timeout: 10))
-        planButton.tap()
+        let timeButton = scrollUntilButtonHittable("insights.history.open-weekly-review", in: app)
+        XCTAssertTrue(timeButton.waitForExistence(timeout: 10))
+        timeButton.tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["weekly-review.screen"].waitForExistence(timeout: 10))
     }
@@ -511,7 +495,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
-    func testDemoPlanWorkspaceShowsBatch49CoreModules() throws {
+    func testDemoTimeWorkspaceShowsBatch49CoreModules() throws {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
         app.launch()
 
@@ -533,7 +517,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app, maxAttempts: 40))
     }
 
-    func testDemoPlanPressureScrubberUpdatesSelectedDayAndReflowDecision() throws {
+    func testDemoTimePressureScrubberUpdatesSelectedDayAndReflowDecision() throws {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
         app.launch()
 

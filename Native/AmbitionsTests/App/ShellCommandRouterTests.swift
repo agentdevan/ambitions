@@ -22,7 +22,7 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(captures.map(\.rawText), ["Capture this idea"])
         XCTAssertEqual(captures.first?.route, .captureInbox)
         XCTAssertEqual(captures.first?.assumptionSummary, "Saved as an Idea so it stays findable without becoming scheduled work.")
-        XCTAssertEqual(navigation.selectedTab, .captures)
+        XCTAssertEqual(navigation.selectedTab, .capture)
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(result.title, "Saved as Idea")
         XCTAssertEqual(result.destination, .timeRoute(.captureInbox))
@@ -48,7 +48,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testRouteToGoalUsesCanonicalGoalsDestination() {
-        let navigation = AppNavigationModel(selectedTab: .plan)
+        let navigation = AppNavigationModel(selectedTab: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         router.route(to: .goal("goal-123"), source: .shellCompose)
@@ -70,7 +70,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testQuickFocusCommandPreservesFocusContextCompatibility() async {
-        let navigation = AppNavigationModel(selectedTab: .plan)
+        let navigation = AppNavigationModel(selectedTab: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         let result = await router.execute(
@@ -90,7 +90,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testPresentCreateGoalCarriesSeedTextAndCaptureContext() {
-        let navigation = AppNavigationModel(selectedTab: .plan)
+        let navigation = AppNavigationModel(selectedTab: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         router.presentCreateGoal(
@@ -126,9 +126,9 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(memoryLens.sourceOfTruth, "Life Memory")
         XCTAssertTrue(memoryLens.safetySummary.contains("source-grounded"))
 
-        let plan = ShellCommandIntent.quickPlanPatch.externalBrainCommandContract
-        XCTAssertEqual(plan.commandKind, .openDestination)
-        XCTAssertEqual(plan.destination, .tab(.plan))
-        XCTAssertTrue(plan.safetySummary.contains("without writing calendar"))
+        let timePatch = ShellCommandIntent.quickPlanPatch.externalBrainCommandContract
+        XCTAssertEqual(timePatch.commandKind, .openDestination)
+        XCTAssertEqual(timePatch.destination, .tab(.time))
+        XCTAssertTrue(timePatch.safetySummary.contains("without writing calendar"))
     }
 }
