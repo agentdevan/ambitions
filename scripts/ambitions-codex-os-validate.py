@@ -140,6 +140,10 @@ DEFAULT_EXTERNAL_DIRTY_CONTROL_WORK = {
     "prompts/batches/MOAT-ALIGNMENT-01.md",
 }
 
+SCOPE_MODE = os.environ.get("AMBITIONS_CODEX_OS_SCOPE_MODE", "auto").strip().lower() or "auto"
+STRICT_SCOPE_MODES = {"strict", "control-plane", "codex-os"}
+SOURCE_TOLERANT_SCOPE_MODES = {"app-source", "source-train", "external-ok", "warn"}
+
 FORBIDDEN_CONTENT_PATTERNS = [
     "openai_api",
     "openai-sdk",
@@ -359,9 +363,34 @@ def _is_scoped_allow(path: str) -> bool:
     return False
 
 
+def _is_control_plane_path(path: str) -> bool:
+    control_paths = {item.relative_to(ROOT).as_posix() for item in CONTROL_FILES}
+    return (
+        path in control_paths
+        or path in ALLOWED_PROMPT_CONTROL_FILES
+        or path.startswith(".codex/")
+        or path.startswith(".agents/")
+        or path.startswith("docs/codex-os/")
+        or path.startswith("docs/codex/os/")
+        or path.startswith("prompts/ambitions/AMB-CODEX-OS-")
+        or path.startswith("prompts/batches/OS-FLAGSHIP-")
+        or path.startswith("scripts/codex-os/")
+        or path.startswith("scripts/ambitions-codex-os-")
+    )
+
+
+def _scope_hard_fails_for(changed_files: list[str]) -> bool:
+    if SCOPE_MODE in STRICT_SCOPE_MODES:
+        return True
+    if SCOPE_MODE in SOURCE_TOLERANT_SCOPE_MODES:
+        return False
+    return any(_is_control_plane_path(path) for path in changed_files)
+
+
 def scope_gate(changed_files: list[str]) -> list[dict]:
     issues: list[dict] = []
     external_dirty = external_dirty_paths()
+    hard_fail_forbidden_scope = _scope_hard_fails_for(changed_files)
     for path in changed_files:
         if path in external_dirty:
             issues.append(ok(f"external dirty work excluded from batch-owned scope checks: {path}"))
@@ -370,10 +399,22 @@ def scope_gate(changed_files: list[str]) -> list[dict]:
         if _is_scoped_allow(path):
             continue
 
+        forbidden_scope_matched = False
         for pattern in FORBIDDEN_SCOPE_PATTERNS:
             if fnmatch(path, pattern) or path.startswith(pattern):
-                issues.append(fail(f"forbidden scope path changed: {path}"))
+                forbidden_scope_matched = True
+                if hard_fail_forbidden_scope:
+                    issues.append(fail(f"forbidden scope path changed: {path}"))
+                else:
+                    issues.append(
+                        ok(
+                            "app-source dirty work excluded from Codex OS scope hard-fail checks: "
+                            f"{path}"
+                        )
+                    )
                 break
+        if forbidden_scope_matched and not hard_fail_forbidden_scope:
+            continue
 
         if path.endswith(".lock") and path not in {
             "package-lock.json",
@@ -811,6 +852,15 @@ def build_parser() -> argparse.ArgumentParser:
         default=str(REPORT_PATH),
         help="Override the JSON report output path.",
     )
+    parser.add_argument(
+        "--scope-mode",
+        choices=sorted({"auto", *STRICT_SCOPE_MODES, *SOURCE_TOLERANT_SCOPE_MODES}),
+        default=SCOPE_MODE,
+        help=(
+            "Scope policy for forbidden app-source paths. auto is strict when Codex OS/control-plane "
+            "files are dirty and warning-only for ordinary app-source trains."
+        ),
+    )
     return parser
 
 
@@ -818,8 +868,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
 
-    global REPORT_PATH
+    global REPORT_PATH, SCOPE_MODE
     REPORT_PATH = Path(args.report_path)
+    SCOPE_MODE = args.scope_mode
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     return validate()
 
