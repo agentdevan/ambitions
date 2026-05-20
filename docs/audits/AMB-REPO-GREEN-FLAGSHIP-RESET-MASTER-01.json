@@ -1,7 +1,7 @@
 {
   "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01",
   "branch": "main",
-  "sha": "085083d30cfee7ed586fdf74f642c74e8b6c1fab",
+  "sha": "2340f1dfb73e8ade06b128dc6020f9d5cb6b9faa",
   "final_status": "YELLOW",
   "trains_completed": [
     "0"
@@ -10,7 +10,7 @@
     "0"
   ],
   "trains_red": [],
-  "files_changed_count": 7,
+  "files_changed_count": 5,
   "files_moved_count": 0,
   "files_deleted_count": 0,
   "forbidden_paths_touched_unexpectedly": [],

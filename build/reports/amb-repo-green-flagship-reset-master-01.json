@@ -1,9 +1,9 @@
 {
   "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01",
   "status": "YELLOW",
-  "summary": "Train 0 scaffold plus Phase 04 repair for the prompt-required build report path and proof-claim boundary.",
+  "summary": "Train 0 snapshot refreshed to the current main SHA with the prompt-required build report path and proof-claim boundary preserved.",
   "branch": "main",
-  "sha": "085083d30cfee7ed586fdf74f642c74e8b6c1fab",
+  "sha": "2340f1dfb73e8ade06b128dc6020f9d5cb6b9faa",
   "final_status": "YELLOW",
   "trains_completed": [
     "0"
@@ -12,18 +12,16 @@
     "0"
   ],
   "trains_red": [],
-  "files_changed_count": 7,
+  "files_changed_count": 5,
   "files_moved_count": 0,
   "files_deleted_count": 0,
   "forbidden_paths_touched_unexpectedly": [],
   "changed_files": [
     "build/reports/amb-repo-green-flagship-reset-master-01.json",
-    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-authority-map.md",
     "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-train-manifest.md",
     "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-validation-proof.md",
     "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json",
-    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md",
-    "scripts/ambitions-codex-os-validate.py"
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md"
   ],
   "surface_vocabulary": {
     "status": "deferred",
@@ -57,7 +55,7 @@
     "credential_material_added": false,
     "network_or_ci_added": false,
     "paid_services_added": false,
-    "notes": "Phase 04 added no dependencies, credentials, network paths, hosted CI, or paid services."
+    "notes": "This snapshot refresh added no dependencies, credentials, network paths, hosted CI, or paid services."
   },
   "source_truth": {
     "truth_files_inspected": [
@@ -78,7 +76,6 @@
     "The surface vocabulary ledger has not run, so remaining hit counts are unmeasured."
   ],
   "rollback": [
-    "git restore -- scripts/ambitions-codex-os-validate.py",
     "rm -f build/reports/amb-repo-green-flagship-reset-master-01.json",
     "rm -f docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01*.md docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json"
   ],

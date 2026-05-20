@@ -47,7 +47,7 @@ Create the minimum batch scaffold needed to continue the reset without widening 
 - All train-0 artifacts exist.
 - The JSON report parses.
 - No unexpected file classes are touched.
-- The diff remains limited to batch docs/reports plus the exact validator allowlist line needed for the prompt-required build-report path.
+- The diff remains limited to batch docs/reports; no validator allowlist change is required because the prompt-required build-report path is already accepted.
 
 ## Yellow Criteria
 - Validation parses but one or more follow-up trains remain deferred.
@@ -64,7 +64,7 @@ Create the minimum batch scaffold needed to continue the reset without widening 
 
 ## Phase-04 Repair Ownership Decision
 - The required batch JSON now exists at `build/reports/amb-repo-green-flagship-reset-master-01.json`.
-- `scripts/ambitions-codex-os-validate.py` now allowlists that exact required report path.
+- `scripts/ambitions-codex-os-validate.py` already allowlists that exact required report path.
 - The docs-path JSON remains a supporting copy for audit readability.
 - `build/reports/ambitions-codex-os-validate.json` is a validator-generated side effect, not a batch-owned deliverable for this train.
 - Commit eligibility for this train excludes `build/reports/ambitions-codex-os-validate.json`; rerunning the validator may rewrite it locally, but it must be restored or left unstaged unless a later scoped batch explicitly owns that report.

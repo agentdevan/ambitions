@@ -8,8 +8,8 @@ Create the bounded audit scaffold for this repo reset batch without touching app
 
 ## Live Repo State
 - Branch: `main`
-- SHA: `085083d30cfee7ed586fdf74f642c74e8b6c1fab`
-- Dirty worktree before this patch: one modified report file, `build/reports/ambitions-codex-os-validate.json`, plus the untracked batch prompt file `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md`
+- SHA: `2340f1dfb73e8ade06b128dc6020f9d5cb6b9faa`
+- Worktree at the start of this phase: clean
 - Prompt-required batch report artifact: `build/reports/amb-repo-green-flagship-reset-master-01.json`
 - Supporting audit-copy report artifact: `docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json`
 
@@ -39,8 +39,8 @@ Create the bounded audit scaffold for this repo reset batch without touching app
 - Train manifest recorded
 - Validation proof recorded
 - Initial JSON report recorded
-- Phase-02 validation rerun completed cleanly after moving the batch JSON into `docs/audits/`
-- Phase-04 repair restored the prompt-required build-report JSON path and removed the unsupported Train-0 zero-hit vocabulary claim.
+- Phase-02 validation rerun completed cleanly for the current `main` snapshot.
+- The prompt-required build-report path remains owned by this batch, and the Train-0 surface vocabulary ledger stays deferred.
 
 ## Deferred Work
 - Source refactor map
