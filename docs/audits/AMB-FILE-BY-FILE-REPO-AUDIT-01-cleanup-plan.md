@@ -6,91 +6,52 @@
 4. Keep generated artifacts out of active source paths.
 
 ## Red Surfaces
-- `docs/status/current-implementation-map.md`: File makes a release-style claim that is not proven by current evidence.
-- `docs/status/performance-budgets.md`: File makes a release-style claim that is not proven by current evidence.
-- `docs/status/release-evidence-packet.md`: File references forbidden architecture or dependency language in an active surface.
-- `docs/status/repo-authority-cleanup-baseline.md`: File makes a release-style claim that is not proven by current evidence.
-- `docs/status/repo-cleanup-index.md`: File makes a release-style claim that is not proven by current evidence.
-- `docs/status/repo-wide-cleanup-report.md`: File makes a release-style claim that is not proven by current evidence.
-- `docs/status/yellow-to-green-reconciliation-plan.md`: File makes a release-style claim that is not proven by current evidence.
 - `docs/truth/CODEX_PROCESS_TRUTH.md`: File references forbidden architecture or dependency language in an active surface.
-- `docs/truth/HISTORICAL_POLICY.md`: File references forbidden architecture or dependency language in an active surface.
-- `docs/truth/IMPLEMENTATION_TRUTH.md`: File references forbidden architecture or dependency language in an active surface.
+- `docs/truth/HISTORICAL_POLICY.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
+- `docs/truth/IMPLEMENTATION_TRUTH.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
 - `docs/truth/PRODUCT_DESIGN_TRUTH.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
 - `docs/truth/PRODUCT_MOAT_TRUTH.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
 - `docs/truth/PRODUCT_UPGRADES_VISION.md`: File references forbidden architecture or dependency language in an active surface.
-- `docs/truth/RELEASE_TRUTH.md`: File references forbidden architecture or dependency language in an active surface.
-- `frontend/visual-encyclopedia/FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/OBJECT_GRAPH_ARCHITECTURE.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.yaml`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/contracts/VOICEOVER_ORDER_CONTRACT.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/recipes/time/month_detail.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/recipes/time/review_pressure_surface.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/recipes/time/shape_month_flow.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/recipes/time/time_stale_source_state.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/recipes/today/local_runtime_source_detail_from_today.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/trace/FLAGSHIP_OBJECT_MATURITY_GATES.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/trace/UI_STUDIO_09_PREVIEW_SCREENSHOT_MATRIX.md`: File makes a release-style claim that is not proven by current evidence.
-- `frontend/visual-encyclopedia/trace/VISUAL_SOURCE_LINKAGE_LEDGER.md`: File makes a release-style claim that is not proven by current evidence.
+- `docs/truth/RELEASE_TRUTH.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
 
 ## Yellow Surfaces
-- `.agents/skills/ambitions-release-proof-honesty/SKILL.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/DEPARTMENT_REGISTRY.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/GLOBAL_BATCH_TRAIN.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/OPERATING_SYSTEM.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/PR_PROTOCOL.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/REPO_INVENTORY.md`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/OPERATING_SYSTEM.md`: Contains forbidden architecture language only in non-claim context.
+- `.codex/REPO_INVENTORY.md`: Contains forbidden architecture language only in non-claim context.
 - `.codex/REVIEW_BOARD.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/SESSION_BOOTSTRAP.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/SKILL_GOVERNANCE.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/TOOLING_AND_VALIDATION.md`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/SESSION_BOOTSTRAP.md`: Contains forbidden architecture language only in non-claim context.
+- `.codex/SKILL_GOVERNANCE.md`: Contains forbidden architecture language only in non-claim context.
+- `.codex/TOOLING_AND_VALIDATION.md`: Contains forbidden architecture language only in non-claim context.
 - `.codex/VALIDATION_HARNESS.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/evals/prompts/03-ios-extension-builder.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/evals/prompts/06-ios-qa-regression-checker.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/evals/prompts/07-design-system-guard.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/evals/prompts/13-environment-blocked-validation.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/evals/prompts/21-weak-validation-refinement.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/evals/prompts/22-release-miss-refinement.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/evals/skill-eval-matrix.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/hooks/user_prompt_submit_guard.py`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/improvement/failure-taxonomy.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/improvement/prompt-patterns.md`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/evals/prompts/22-release-miss-refinement.md`: Contains release-style wording only in forbidden, proof-target, or historical context.
+- `.codex/evals/skill-eval-matrix.md`: Contains forbidden architecture language only in non-claim context.
+- `.codex/hooks/user_prompt_submit_guard.py`: Contains forbidden architecture language only in non-claim context.
 - `.codex/manifests/repair-profiles.yml`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/manifests/skills-routing-map.yml`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/manifests/skills-routing-map.yml`: Contains forbidden architecture language only in non-claim context.
 - `.codex/manifests/visual-proof-map.yml`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/operations/batch-execution-protocol.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/operations/manual-signoff-checklists.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/operations/release-claim-truth-protocol.md`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/operations/release-claim-truth-protocol.md`: Contains release-style wording only in forbidden, proof-target, or historical context.
 - `.codex/operations/task-classification.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/operations/task-intake.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/operations/validation-policy.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/review-boards/ambitions-ui-primitive-review-board.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/review-boards/ambitionsos-product-review-board.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/review-boards/continuity-sync-archive-review-board.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/review-boards/dream-safety-legality-review-board.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/review-boards/edge-case-abuse-resistance-review-board.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/review-boards/living-dream-architecture-review-board.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/review-boards/living-plan-recompiler-review-board.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/review-boards/signature-experience-review-board.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/review-boards/signature-interface-review-board.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/review-boards/source-claim-pack-security-review-board.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/review-boards/top-level-surface-review-board.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/routes/README.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/skills/accepted-yellow-classifier.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/skills/accessibility-cognitive-load-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/skills/accessibility-privacy-performance-quality-reviewer.md`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/accessibility-privacy-performance-quality-reviewer.md`: Contains forbidden architecture language only in non-claim context.
 - `.codex/skills/adaptive-screen-implementation-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/skills/ambitions-canon-v2-reconciler/SKILL.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/skills/ambitions-ios-surface-polisher/SKILL.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/skills/ambitions-long-term-data-survival-reviewer.md`: Classified conservatively from path, content, and current authority boundaries.
-- `.codex/skills/ambitions-time-context-builder/SKILL.md`: Classified conservatively from path, content, and current authority boundaries.
 - `.codex/skills/ambitions-v2-validation-closeout/SKILL.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/skills/ambitions/privacy-claim-verifier.md`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/ambitions/privacy-claim-verifier.md`: Contains forbidden architecture language only in non-claim context.
 - `.codex/skills/ambitions/swiftui-flagship-ui-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
-- `.codex/skills/analytics-privacy-reviewer.md`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/analytics-privacy-reviewer.md`: Contains forbidden architecture language only in non-claim context.
 - `.codex/skills/anti-agentic-slop-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/skills/aos-fixture-architect.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/skills/aos-invariant-enforcer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
@@ -117,3 +78,20 @@
 - `.codex/skills/external-brain-dedupe-merge-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/skills/external-brain-human-proof-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
 - `.codex/skills/external-brain-implementation-boundary-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-integration-architect.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-product-architect.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-release-claim-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-test-fixture-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/faang-frontend-implementation-lead.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/faang-frontend-implementation-team.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/faang-rendered-visual-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/faang-staff-ios-architect.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/flake-forensics-lead.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/founder-vision-and-handoff-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/human-made-codebase-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/ios-native-believability-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/large-file-extraction-architect.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/life-memory-graph-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/life-os-product-quality-reviewer.md`: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/living-dream-architect.md`: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/living-plan-recompiler-architect.md`: Classified conservatively from path, content, and current authority boundaries.

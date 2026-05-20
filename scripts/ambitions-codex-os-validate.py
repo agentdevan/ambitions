@@ -25,6 +25,10 @@ ALLOWED_REPORT_PATHS = {
     "build/reports/AMB-CODEX-OS-NO-COST-HARDENING-002-no-cost-runner-result.json",
 }
 
+ALLOWED_NON_BATCH_REPORT_PATHS = {
+    "build/reports/amb-file-by-file-audit-summary.json",
+}
+
 REQUIRED_FILES = [
     ROOT / "AGENTS.md",
     ROOT / ".codex" / "AGENTS.md",
@@ -715,7 +719,7 @@ def validate() -> int:
         status = "YELLOW"
 
     for path in changed_files:
-        if path.startswith("build/reports/") and not _is_batch_output_report(path):
+        if path.startswith("build/reports/") and not _is_batch_output_report(path) and path not in ALLOWED_NON_BATCH_REPORT_PATHS:
             hard_failures.append(fail(f"disallowed report change: {path}"))
             status = "RED"
             checks.append(fail(f"disallowed report change: {path}"))

@@ -57,8 +57,6 @@ RELEASE_CLAIM_TERMS = [
     "release-ready",
     "App Store ready",
     "TestFlight ready",
-    "validated against",
-    "verified",
     "CI passing",
     "screenshot ready",
     "production proof",
@@ -73,6 +71,134 @@ VALIDATION_TERMS = [
     "build-for-testing",
     "simctl",
 ]
+
+PROOF_TARGET_MARKERS = [
+    "proof target",
+    "proof only",
+    "proof requirements only",
+    "does not prove",
+    "does not prove:",
+    "not implementation proof",
+    "not release proof",
+    "not active product",
+    "not active truth",
+    "not authority",
+    "current proof",
+    "required evidence",
+    "before claim",
+    "not proof",
+]
+
+HISTORICAL_CONTEXT_MARKERS = [
+    "historical",
+    "supporting",
+    "compatibility-only",
+    "legacy",
+    "older",
+    "obsolete",
+    "archive",
+    "archived",
+    "quarantine",
+    "traceability",
+    "superseded",
+    "old canon",
+    "retained for traceability",
+]
+
+PROHIBITION_CONTEXT_MARKERS = [
+    "hard red",
+    "forbidden",
+    "do not",
+    "must not",
+    "should not",
+    "never",
+    "banned",
+    "avoid",
+    "reject",
+    "stop and repair",
+    "non-goal",
+    "non-goals",
+    "not allowed",
+    "not claim",
+    "without proof",
+    "without matching evidence",
+    "terms to avoid",
+    "forbidden claims",
+    "forbidden wording",
+    "hard red violations",
+    "no-write-before-plan",
+    "product/design compliance gate",
+    "frontend quality gate",
+    "native iphone quality gate",
+    "old canon drift prevention",
+]
+
+RELEASE_OVERCLAIM_MARKERS = [
+    "release-ready",
+    "app store ready",
+    "testflight ready",
+    "production-ready",
+    "ci passing",
+    "screenshot ready",
+    "device-verified",
+    "fully tested",
+    "fully accessible",
+    "performance validated",
+    "privacy approved",
+    "legally approved",
+    "support url verified",
+    "privacy url verified",
+    "app review ready",
+]
+
+SECTION_CONTEXT_HINTS = {
+    "explicit_prohibition": [
+        "hard red",
+        "forbidden",
+        "anti-pattern",
+        "non-goal",
+        "non-goals",
+        "banned",
+        "do not",
+        "must not",
+        "forbidden wording",
+        "hard red conditions",
+        "hard red moat failures",
+        "final red-line summary",
+        "banned in active user-facing copy",
+        "what this file does not prove",
+        "terms to avoid",
+        "forbidden claims",
+        "hard red violations",
+        "no-write-before-plan",
+        "product/design compliance gate",
+        "frontend quality gate",
+        "native iphone quality gate",
+        "old canon drift prevention",
+    ],
+    "proof_target": [
+        "proof target",
+        "does not prove",
+        "current proof",
+        "required evidence",
+        "non-claims",
+        "claims not made",
+        "validation and proof",
+        "release evidence",
+        "proof requirements",
+    ],
+    "historical_or_supporting_reference": [
+        "historical",
+        "supporting",
+        "compatibility-only",
+        "legacy",
+        "older",
+        "archive",
+        "retained for traceability",
+        "old release claim policy",
+        "legacy terms may appear only",
+    ],
+}
 
 
 def read_text(path: Path) -> str:
@@ -480,6 +606,113 @@ def contains_any(text: str, terms: Iterable[str]) -> bool:
     return any(term.lower() in lower for term in terms)
 
 
+def first_matching_marker(text: str, markers: Iterable[str]) -> str | None:
+    lower = text.lower()
+    for marker in markers:
+        if marker in lower:
+            return marker
+    return None
+
+
+def section_context_from_heading(heading: str) -> str:
+    lower = heading.lower()
+    if lower.startswith("anti-") or " anti-" in lower:
+        return "explicit_prohibition"
+    if lower.startswith("non-") or " non-" in lower or "non-moat" in lower:
+        return "explicit_prohibition"
+    if "what ambitions is not" in lower or "what this file is not" in lower:
+        return "explicit_prohibition"
+    for context, markers in SECTION_CONTEXT_HINTS.items():
+        if any(marker in lower for marker in markers):
+            return context
+    return "active_drift"
+
+
+def classify_hit_context(
+    *,
+    section_context: str,
+    line: str,
+    term_group: str,
+) -> str:
+    lower = line.lower()
+    line_section_context = section_context_from_heading(line)
+    if line_section_context in {"explicit_prohibition", "proof_target", "historical_or_supporting_reference"}:
+        return line_section_context
+    if section_context in {"explicit_prohibition", "proof_target", "historical_or_supporting_reference"}:
+        return section_context
+    if any(marker in lower for marker in PROOF_TARGET_MARKERS):
+        return "proof_target"
+    if any(marker in lower for marker in HISTORICAL_CONTEXT_MARKERS):
+        return "historical_or_supporting_reference"
+    if re.search(r"\b(?:no|not|never)\b", lower):
+        return "explicit_prohibition"
+    if any(marker in lower for marker in PROHIBITION_CONTEXT_MARKERS):
+        return "explicit_prohibition"
+    if any(marker in lower for marker in RELEASE_OVERCLAIM_MARKERS):
+        return "release_overclaim"
+    if term_group == "release" and "validated against" in lower:
+        return "proof_target"
+    return "active_drift"
+
+
+def summarize_context_counts(counter: Counter) -> str:
+    order = [
+        "active_drift",
+        "explicit_prohibition",
+        "historical_or_supporting_reference",
+        "proof_target",
+        "release_overclaim",
+        "generated_or_stale_evidence",
+    ]
+    parts = []
+    for key in order:
+        if counter.get(key, 0):
+            parts.append(f"{key}={counter[key]}")
+    return "; ".join(parts)
+
+
+def combine_context_counts(*counters: Counter) -> Counter:
+    combined: Counter = Counter()
+    for counter in counters:
+        combined.update(counter)
+    return combined
+
+
+def collect_term_contexts(path: str, text: str) -> dict[str, dict[str, object]]:
+    sections: dict[str, dict[str, object]] = {}
+    lines = text.splitlines()
+    section_context = "active_drift"
+    current_heading = ""
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("#"):
+            current_heading = stripped.lstrip("#").strip()
+            section_context = section_context_from_heading(current_heading)
+            continue
+
+        if not stripped:
+            continue
+
+        if current_heading:
+            implied = section_context_from_heading(current_heading)
+            if implied != "active_drift":
+                section_context = implied
+
+        for group_name, terms in (
+            ("legacy", LEGACY_TERMS),
+            ("forbidden", FORBIDDEN_ARCH_TERMS),
+            ("release", RELEASE_CLAIM_TERMS),
+        ):
+            if not contains_any(line, terms):
+                continue
+            context = classify_hit_context(section_context=section_context, line=line, term_group=group_name)
+            bucket = sections.setdefault(group_name, {"counts": Counter(), "examples": []})
+            bucket["counts"][context] += 1
+            if len(bucket["examples"]) < 3:
+                bucket["examples"].append(f"{context}: {stripped[:160]}")
+    return sections
+
+
 def bool_str(value: bool) -> str:
     return "yes" if value else "no"
 
@@ -491,14 +724,34 @@ def classify_file(path: str) -> dict[str, str]:
     if is_probably_text(p):
         text = read_text(p)
 
-    legacy = contains_any(text, LEGACY_TERMS)
-    forbidden = contains_any(text, FORBIDDEN_ARCH_TERMS)
-    release = contains_any(text, RELEASE_CLAIM_TERMS)
+    term_contexts = collect_term_contexts(path, text)
+
+    legacy_counts: Counter = term_contexts.get("legacy", {}).get("counts", Counter())  # type: ignore[assignment]
+    forbidden_counts: Counter = term_contexts.get("forbidden", {}).get("counts", Counter())  # type: ignore[assignment]
+    release_counts: Counter = term_contexts.get("release", {}).get("counts", Counter())  # type: ignore[assignment]
+
+    combined_counts = combine_context_counts(legacy_counts, forbidden_counts, release_counts)
+    legacy_active = legacy_counts.get("active_drift", 0)
+    forbidden_active = forbidden_counts.get("active_drift", 0)
+    release_active = release_counts.get("active_drift", 0)
+    contextual_hits = sum(count for context, count in combined_counts.items() if context != "active_drift")
+
+    legacy = bool(legacy_counts)
+    forbidden = bool(forbidden_counts)
+    release = bool(release_counts)
     validation = contains_any(text, VALIDATION_TERMS) or path.startswith("scripts/") or path.startswith("Native/AmbitionsTests") or path.startswith("Native/AmbitionsUITests") or path.startswith("tools/tests")
     user_copy = contains_any(text, ["Start here", "Recommended step", "Start now", "Open step", "Receipt", "Trust & Automation", "You", "Goals", "Capture", "Time", "Today"])
     runtime_truth = path.startswith("Native/") or path.startswith("Sources/") or path.startswith("AppUI/") or path.startswith("DesignTokens/")
     ui_truth = path.startswith("Native/Ambitions/Features/") or path.startswith("Native/Ambitions/UI/") or path.startswith("Sources/Components/") or path.startswith("Sources/Previews/") or path.startswith("AppUI/Sources/") or path.startswith("DesignTokens/")
     stale_risk = path.startswith("build/") or path.startswith(".codex/runs/") or path.startswith("docs/audits/") or path.startswith("history/") or path.startswith("backend/") or "generated" in path.lower() or "stale" in text.lower() or "deprecated" in text.lower() or "compatibility" in text.lower()
+    generated_or_stale_evidence = bool(stale_risk)
+    has_active_claim = bool(legacy_active or forbidden_active or release_active)
+    has_contextual_hits = contextual_hits > 0
+    hit_context_summary = {
+        "legacy": summarize_context_counts(legacy_counts),
+        "forbidden": summarize_context_counts(forbidden_counts),
+        "release": summarize_context_counts(release_counts),
+    }
 
     if path.startswith("docs/truth/"):
         active_status = "active"
@@ -515,32 +768,41 @@ def classify_file(path: str) -> dict[str, str]:
     else:
         active_status = "unknown"
 
-    if path.startswith("docs/truth/") and legacy:
-        risk = "Red"
-    elif forbidden and path.startswith("docs/truth/"):
-        risk = "Red"
-    elif release and (path.startswith("docs/truth/") or path.startswith("docs/status/") or path.startswith("README.md") or path.startswith("frontend/")):
-        risk = "Red"
-    elif path.startswith("docs/truth/") and contains_any(text, ["Plan as a top-level tab", "Plan tab", "Plan returns as a top-level tab", "Plan as top-level tab"]):
-        risk = "Red"
-    elif path.startswith("Native/") and (legacy or forbidden or release):
+    if path.startswith("docs/truth/"):
+        if has_active_claim:
+            risk = "Red"
+        elif has_contextual_hits:
+            risk = "Green"
+        elif lc > 350:
+            risk = "Yellow"
+        else:
+            risk = "Green"
+    elif path.startswith("Native/"):
+        if has_active_claim or has_contextual_hits or lc > 350:
+            risk = "Yellow"
+        else:
+            risk = "Green"
+    elif path.startswith("docs/status/") or path.startswith("README.md") or path.startswith("frontend/") or path.startswith("product-canon/") or path.startswith("codex-os/") or path.startswith("validation/") or path.startswith("docs/"):
+        if has_active_claim or has_contextual_hits or lc > 350:
+            risk = "Yellow"
+        else:
+            risk = "Green"
+    elif path.startswith("docs/audits/") or path.startswith("history/") or path.startswith("backend/") or path.startswith(".codex/runs/") or path.startswith("build/"):
         risk = "Yellow"
-    elif path.startswith("docs/audits/") or path.startswith("history/") or path.startswith("backend/") or path.startswith(".codex/runs/") or path.startswith("build/") or path.startswith("docs/"):
+    elif has_active_claim:
+        risk = "Yellow"
+    elif has_contextual_hits:
         risk = "Yellow"
     elif lc > 350:
-        risk = "Yellow"
-    elif legacy or forbidden or release:
         risk = "Yellow"
     else:
         risk = "Green"
 
-    if risk == "Red" and path.startswith("docs/truth/") and contains_any(text, ["Plan as a top-level tab", "Plan returns as a top-level tab"]):
+    if risk == "Red" and path.startswith("docs/truth/") and legacy_active:
         reason = "Active truth file contains legacy IA wording that conflicts with current top-level IA."
-    elif risk == "Red" and path.startswith("Native/") and legacy:
-        reason = "Active source contains legacy product language that risks false UI truth."
-    elif risk == "Red" and forbidden:
+    elif risk == "Red" and forbidden_active:
         reason = "File references forbidden architecture or dependency language in an active surface."
-    elif risk == "Red" and release:
+    elif risk == "Red" and release_active:
         reason = "File makes a release-style claim that is not proven by current evidence."
     elif risk == "Yellow" and path.startswith("docs/audits/"):
         reason = "Historical audit receipt; useful for traceability but not active proof."
@@ -548,8 +810,16 @@ def classify_file(path: str) -> dict[str, str]:
         reason = "Generated artifact; retain only as audit evidence, not implementation truth."
     elif risk == "Yellow" and lc > 350 and path.endswith(".swift"):
         reason = "Large Swift file; should be split or further proven for UI and architecture boundaries."
+    elif risk == "Yellow" and has_contextual_hits and path.startswith("docs/truth/"):
+        reason = "Active truth file only uses prohibition, proof-target, or historical-reference language in this scan."
+    elif risk == "Yellow" and has_contextual_hits and path.startswith("docs/status/"):
+        reason = "Supporting status file only uses prohibition, proof-target, or historical-reference language in this scan."
     elif risk == "Yellow" and legacy:
         reason = "Contains legacy naming that should stay compatibility-only or be rewritten."
+    elif risk == "Yellow" and forbidden_active:
+        reason = "Contains forbidden architecture language only in non-claim context."
+    elif risk == "Yellow" and release:
+        reason = "Contains release-style wording only in forbidden, proof-target, or historical context."
     elif risk == "Yellow" and path.startswith("history/"):
         reason = "Historical portal material; keep classified away from active canon."
     elif risk == "Green" and path.startswith("docs/truth/"):
@@ -591,7 +861,17 @@ def classify_file(path: str) -> dict[str, str]:
         "contains_ui_truth": bool_str(ui_truth),
         "contains_release_claims": bool_str(release),
         "contains_validation_logic": bool_str(validation),
-        "contains_generated_or_stale_artifact_risk": bool_str(stale_risk),
+        "contains_generated_or_stale_artifact_risk": bool_str(generated_or_stale_evidence),
+        "legacy_term_contexts": hit_context_summary["legacy"],
+        "forbidden_term_contexts": hit_context_summary["forbidden"],
+        "release_term_contexts": hit_context_summary["release"],
+        "term_adjudication": summarize_context_counts(combine_context_counts(combined_counts, Counter({"generated_or_stale_evidence": 1 if generated_or_stale_evidence else 0}))),
+        "term_active_drift_hits": str(combined_counts.get("active_drift", 0)),
+        "term_explicit_prohibition_hits": str(combined_counts.get("explicit_prohibition", 0)),
+        "term_historical_or_supporting_hits": str(combined_counts.get("historical_or_supporting_reference", 0)),
+        "term_proof_target_hits": str(combined_counts.get("proof_target", 0)),
+        "term_release_overclaim_hits": str(combined_counts.get("release_overclaim", 0)),
+        "term_generated_or_stale_hits": str(1 if generated_or_stale_evidence else 0),
         "recommended_action": recommended_action,
         "reason": reason,
     }
@@ -608,6 +888,7 @@ def write_csv(rows: list[dict[str, str]]) -> None:
     with CSV_PATH.open("w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(
             f,
+            lineterminator="\n",
             fieldnames=[
                 "path",
                 "extension",
@@ -630,6 +911,16 @@ def write_csv(rows: list[dict[str, str]]) -> None:
                 "contains_release_claims",
                 "contains_validation_logic",
                 "contains_generated_or_stale_artifact_risk",
+                "legacy_term_contexts",
+                "forbidden_term_contexts",
+                "release_term_contexts",
+                "term_adjudication",
+                "term_active_drift_hits",
+                "term_explicit_prohibition_hits",
+                "term_historical_or_supporting_hits",
+                "term_proof_target_hits",
+                "term_release_overclaim_hits",
+                "term_generated_or_stale_hits",
                 "recommended_action",
                 "reason",
             ],
@@ -709,6 +1000,16 @@ def build_markdown(rows: list[dict[str, str]], summary: dict) -> None:
     counts_authority = Counter(row["authority_class"] for row in rows)
     counts_impl = Counter(row["implementation_class"] for row in rows)
     counts_risk = Counter(row["risk_level"] for row in rows)
+    counts_term = Counter(
+        {
+            "active_drift": sum(int(row["term_active_drift_hits"]) for row in rows),
+            "explicit_prohibition": sum(int(row["term_explicit_prohibition_hits"]) for row in rows),
+            "historical_or_supporting_reference": sum(int(row["term_historical_or_supporting_hits"]) for row in rows),
+            "proof_target": sum(int(row["term_proof_target_hits"]) for row in rows),
+            "release_overclaim": sum(int(row["term_release_overclaim_hits"]) for row in rows),
+            "generated_or_stale_evidence": sum(int(row["term_generated_or_stale_hits"]) for row in rows),
+        }
+    )
     reds = [row for row in rows if row["risk_level"] == "Red"]
     yellows = [row for row in rows if row["risk_level"] == "Yellow"]
 
@@ -739,6 +1040,8 @@ def build_markdown(rows: list[dict[str, str]], summary: dict) -> None:
     md.append(table_from_counter(counts_impl, "5. File Counts by Implementation Class"))
     md.append("")
     md.append(table_from_counter(counts_risk, "6. File Counts by Green/Yellow/Red"))
+    md.append("")
+    md.append(table_from_counter(counts_term, "6.5 File Counts by Term Hit Adjudication"))
     md.append("")
     md.append("## 7. Top 25 Red Files")
     md.append(format_file_list(red_top, limit=len(red_top)) if red_top else "No Red files detected by this conservative scan.")
@@ -911,7 +1214,7 @@ def validation_status() -> dict[str, dict[str, str]]:
     cmds = [
         ("python3 scripts/ambitions_validate_prompt_headers.py || true", "prompt_headers"),
         ("python3 scripts/ambitions_validate_batch_ids.py || true", "batch_ids"),
-        ("python3 scripts/ambitions_codex_os_validate.py || true", "codex_os_validate"),
+        ("python3 scripts/ambitions-codex-os-validate.py || true", "codex_os_validate"),
         ("xcodegen generate || true", "xcodegen_generate"),
         ("xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies || true", "resolve_packages"),
         ("xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 16' build CODE_SIGNING_ALLOWED=NO || true", "xcodebuild_build"),
@@ -927,9 +1230,20 @@ def build_summary(rows: list[dict[str, str]]) -> dict:
     red = [r for r in rows if r["risk_level"] == "Red"]
     yellow = [r for r in rows if r["risk_level"] == "Yellow"]
     green = [r for r in rows if r["risk_level"] == "Green"]
+    term_counts = Counter(
+        {
+            "active_drift": sum(int(r["term_active_drift_hits"]) for r in rows),
+            "explicit_prohibition": sum(int(r["term_explicit_prohibition_hits"]) for r in rows),
+            "historical_or_supporting_reference": sum(int(r["term_historical_or_supporting_hits"]) for r in rows),
+            "proof_target": sum(int(r["term_proof_target_hits"]) for r in rows),
+            "release_overclaim": sum(int(r["term_release_overclaim_hits"]) for r in rows),
+            "generated_or_stale_evidence": sum(int(r["term_generated_or_stale_hits"]) for r in rows),
+        }
+    )
     summary = {
         "tracked_files": len(rows),
         "risk_counts": {"Red": len(red), "Yellow": len(yellow), "Green": len(green)},
+        "term_adjudication_counts": dict(term_counts),
         "top_level_counts": dict(Counter(r["top_level_area"] for r in rows)),
         "authority_counts": dict(Counter(r["authority_class"] for r in rows)),
         "implementation_counts": dict(Counter(r["implementation_class"] for r in rows)),

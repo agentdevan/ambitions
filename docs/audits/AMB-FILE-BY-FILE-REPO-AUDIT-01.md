@@ -7,16 +7,18 @@ This is a complete audit artifact set for the tracked-file manifest. The repo co
 
 ## 2. Current Branch/SHA/Status
 - Branch: `main`
-- SHA: `e27664ed0332146ed66ba3e53b8c6bc3a9c7f6c5`
-- Worktree status: ?? build/audits/
-?? build/reports/amb-file-by-file-audit-summary.json
-?? docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-cleanup-plan.md
-?? docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-reds.md
-?? docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-truth-drift.md
-?? docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-ui-sprawl.md
-?? docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-yellows.md
-?? docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01.csv
-?? docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01.md
+- SHA: `e9a83afaca33e48a949d211dcf56c1e90f6cfa4a`
+- Worktree status: M build/audits/amb_file_by_file_repo_audit.py
+ M build/reports/amb-file-by-file-audit-summary.json
+ M build/reports/ambitions-codex-os-validate.json
+ M docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-cleanup-plan.md
+ M docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-reds.md
+ M docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-truth-drift.md
+ M docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-yellows.md
+ M docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01.csv
+ M docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01.md
+ M docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-validation-proof.md
+ M scripts/ambitions-codex-os-validate.py
 - Tracked files audited: 5189
 
 ## 3. File Counts by Top-Level Folder
@@ -73,92 +75,85 @@ This is a complete audit artifact set for the tracked-file manifest. The repo co
 
 | Value | Count |
 | --- | ---: |
-| Yellow | 3635 |
-| Green | 1525 |
-| Red | 29 |
+| Green | 2634 |
+| Yellow | 2548 |
+| Red | 7 |
+
+## 6.5 File Counts by Term Hit Adjudication
+
+| Value | Count |
+| --- | ---: |
+| active_drift | 11785 |
+| explicit_prohibition | 6909 |
+| generated_or_stale_evidence | 2868 |
+| historical_or_supporting_reference | 417 |
+| release_overclaim | 209 |
+| proof_target | 33 |
 
 ## 7. Top 25 Red Files
 | Risk | Path | Top level | Action | Reason |
 | --- | --- | --- | --- | --- |
-| Red | `docs/status/current-implementation-map.md` | Status docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `docs/status/performance-budgets.md` | Status docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `docs/status/release-evidence-packet.md` | Status docs | repair or demote | File references forbidden architecture or dependency language in an active surface. |
-| Red | `docs/status/repo-authority-cleanup-baseline.md` | Status docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `docs/status/repo-cleanup-index.md` | Status docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `docs/status/repo-wide-cleanup-report.md` | Status docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `docs/status/yellow-to-green-reconciliation-plan.md` | Status docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
 | Red | `docs/truth/CODEX_PROCESS_TRUTH.md` | Truth docs | repair or demote | File references forbidden architecture or dependency language in an active surface. |
-| Red | `docs/truth/HISTORICAL_POLICY.md` | Truth docs | repair or demote | File references forbidden architecture or dependency language in an active surface. |
-| Red | `docs/truth/IMPLEMENTATION_TRUTH.md` | Truth docs | repair or demote | File references forbidden architecture or dependency language in an active surface. |
+| Red | `docs/truth/HISTORICAL_POLICY.md` | Truth docs | repair or demote | Active truth file contains legacy IA wording that conflicts with current top-level IA. |
+| Red | `docs/truth/IMPLEMENTATION_TRUTH.md` | Truth docs | repair or demote | Active truth file contains legacy IA wording that conflicts with current top-level IA. |
 | Red | `docs/truth/PRODUCT_DESIGN_TRUTH.md` | Truth docs | repair or demote | Active truth file contains legacy IA wording that conflicts with current top-level IA. |
 | Red | `docs/truth/PRODUCT_MOAT_TRUTH.md` | Truth docs | repair or demote | Active truth file contains legacy IA wording that conflicts with current top-level IA. |
 | Red | `docs/truth/PRODUCT_UPGRADES_VISION.md` | Truth docs | repair or demote | File references forbidden architecture or dependency language in an active surface. |
-| Red | `docs/truth/RELEASE_TRUTH.md` | Truth docs | repair or demote | File references forbidden architecture or dependency language in an active surface. |
-| Red | `frontend/visual-encyclopedia/FLAGSHIP_OBJECT_SYSTEM_DOCTRINE.md` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/OBJECT_GRAPH_ARCHITECTURE.md` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.yaml` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/contracts/VOICEOVER_ORDER_CONTRACT.md` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/recipes/time/month_detail.md` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/recipes/time/review_pressure_surface.md` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/recipes/time/shape_month_flow.md` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/recipes/time/time_stale_source_state.md` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
-| Red | `frontend/visual-encyclopedia/recipes/today/local_runtime_source_detail_from_today.md` | Canon docs | repair or demote | File makes a release-style claim that is not proven by current evidence. |
+| Red | `docs/truth/RELEASE_TRUTH.md` | Truth docs | repair or demote | Active truth file contains legacy IA wording that conflicts with current top-level IA. |
 
 ## 8. Top 50 Yellow Files
 | Risk | Path | Top level | Action | Reason |
 | --- | --- | --- | --- | --- |
-| Yellow | `.agents/skills/ambitions-release-proof-honesty/SKILL.md` | Agent skill | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
 | Yellow | `.codex/DEPARTMENT_REGISTRY.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
 | Yellow | `.codex/GLOBAL_BATCH_TRAIN.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/OPERATING_SYSTEM.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/PR_PROTOCOL.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/REPO_INVENTORY.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
+| Yellow | `.codex/OPERATING_SYSTEM.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
+| Yellow | `.codex/REPO_INVENTORY.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
 | Yellow | `.codex/REVIEW_BOARD.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/SESSION_BOOTSTRAP.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/SKILL_GOVERNANCE.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/TOOLING_AND_VALIDATION.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
+| Yellow | `.codex/SESSION_BOOTSTRAP.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
+| Yellow | `.codex/SKILL_GOVERNANCE.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
+| Yellow | `.codex/TOOLING_AND_VALIDATION.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
 | Yellow | `.codex/VALIDATION_HARNESS.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 | Yellow | `.codex/evals/prompts/03-ios-extension-builder.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/evals/prompts/06-ios-qa-regression-checker.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
 | Yellow | `.codex/evals/prompts/07-design-system-guard.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/evals/prompts/13-environment-blocked-validation.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/evals/prompts/21-weak-validation-refinement.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/evals/prompts/22-release-miss-refinement.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/evals/skill-eval-matrix.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/hooks/user_prompt_submit_guard.py` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/improvement/failure-taxonomy.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/improvement/prompt-patterns.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
+| Yellow | `.codex/evals/prompts/22-release-miss-refinement.md` | Codex governance | retain with proof or extraction plan | Contains release-style wording only in forbidden, proof-target, or historical context. |
+| Yellow | `.codex/evals/skill-eval-matrix.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
+| Yellow | `.codex/hooks/user_prompt_submit_guard.py` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
 | Yellow | `.codex/manifests/repair-profiles.yml` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/manifests/skills-routing-map.yml` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
+| Yellow | `.codex/manifests/skills-routing-map.yml` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
 | Yellow | `.codex/manifests/visual-proof-map.yml` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/operations/batch-execution-protocol.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
 | Yellow | `.codex/operations/manual-signoff-checklists.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/operations/release-claim-truth-protocol.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
+| Yellow | `.codex/operations/release-claim-truth-protocol.md` | Codex governance | retain with proof or extraction plan | Contains release-style wording only in forbidden, proof-target, or historical context. |
 | Yellow | `.codex/operations/task-classification.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/operations/task-intake.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/operations/validation-policy.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
 | Yellow | `.codex/review-boards/ambitions-ui-primitive-review-board.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 | Yellow | `.codex/review-boards/ambitionsos-product-review-board.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/review-boards/continuity-sync-archive-review-board.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/review-boards/dream-safety-legality-review-board.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/review-boards/edge-case-abuse-resistance-review-board.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/review-boards/living-dream-architecture-review-board.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/review-boards/living-plan-recompiler-review-board.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
 | Yellow | `.codex/review-boards/signature-experience-review-board.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 | Yellow | `.codex/review-boards/signature-interface-review-board.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/review-boards/source-claim-pack-security-review-board.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
 | Yellow | `.codex/review-boards/top-level-surface-review-board.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 | Yellow | `.codex/routes/README.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 | Yellow | `.codex/skills/accepted-yellow-classifier.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
 | Yellow | `.codex/skills/accessibility-cognitive-load-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
-| Yellow | `.codex/skills/accessibility-privacy-performance-quality-reviewer.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
+| Yellow | `.codex/skills/accessibility-privacy-performance-quality-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
 | Yellow | `.codex/skills/adaptive-screen-implementation-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 | Yellow | `.codex/skills/ambitions-canon-v2-reconciler/SKILL.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 | Yellow | `.codex/skills/ambitions-ios-surface-polisher/SKILL.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 | Yellow | `.codex/skills/ambitions-long-term-data-survival-reviewer.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
-| Yellow | `.codex/skills/ambitions-time-context-builder/SKILL.md` | Codex governance | retain with proof or extraction plan | Classified conservatively from path, content, and current authority boundaries. |
+| Yellow | `.codex/skills/ambitions-v2-validation-closeout/SKILL.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/ambitions/privacy-claim-verifier.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
+| Yellow | `.codex/skills/ambitions/swiftui-flagship-ui-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/analytics-privacy-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains forbidden architecture language only in non-claim context. |
+| Yellow | `.codex/skills/anti-agentic-slop-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/aos-fixture-architect.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/aos-invariant-enforcer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/aos-model-boundary-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/aos-performance-budget-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/aos-red-team-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/aos-release-claim-boundary-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/aos-schema-migration-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/aos-train-orchestrator.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/apple-design-award-visual-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/autonomous-quality-operating-system-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/capture-routing-classification-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
+| Yellow | `.codex/skills/codex-prompt-quality-reviewer.md` | Codex governance | retain with proof or extraction plan | Contains legacy naming that should stay compatibility-only or be rewritten. |
 
 ## 9. UI Sprawl Findings
 - SwiftUI view files detected: 92
@@ -322,29 +317,9 @@ This is a complete audit artifact set for the tracked-file manifest. The repo co
 
 ## 22. Truth Drift Targets
 - `docs/truth/CODEX_PROCESS_TRUTH.md`: File references forbidden architecture or dependency language in an active surface.
-- `docs/truth/HISTORICAL_POLICY.md`: File references forbidden architecture or dependency language in an active surface.
-- `docs/truth/IMPLEMENTATION_TRUTH.md`: File references forbidden architecture or dependency language in an active surface.
+- `docs/truth/HISTORICAL_POLICY.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
+- `docs/truth/IMPLEMENTATION_TRUTH.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
 - `docs/truth/PRODUCT_DESIGN_TRUTH.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
 - `docs/truth/PRODUCT_MOAT_TRUTH.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
 - `docs/truth/PRODUCT_UPGRADES_VISION.md`: File references forbidden architecture or dependency language in an active surface.
-- `docs/truth/RELEASE_TRUTH.md`: File references forbidden architecture or dependency language in an active surface.
-
-## 23. Validation Commands Run
-| Command | Status | Notes |
-| --- | --- | --- |
-| `python3 scripts/ambitions_validate_prompt_headers.py` | Green | Returned `GREEN`. |
-| `python3 scripts/ambitions_validate_batch_ids.py` | Green | Returned `GREEN`. |
-| `python3 scripts/ambitions_codex_os_validate.py` | Red | File is missing in this checkout. |
-| `xcodegen generate` | Green | Regenerated `Ambitions.xcodeproj`. |
-| `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies` | Yellow | Timed out after 60 seconds. |
-| `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 16' build CODE_SIGNING_ALLOWED=NO` | Yellow | Timed out after 60 seconds. |
-| `git diff --check` | Green | No whitespace or patch-discipline errors. |
-
-## 24. Validation Outputs
-- `python3 scripts/ambitions_validate_prompt_headers.py` -> `GREEN`
-- `python3 scripts/ambitions_validate_batch_ids.py` -> `GREEN`
-- `python3 scripts/ambitions_codex_os_validate.py` -> missing file error
-- `xcodegen generate` -> `Created project at /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj`
-- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies` -> timed out after 60 seconds
-- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 16' build CODE_SIGNING_ALLOWED=NO` -> timed out after 60 seconds
-- `git diff --check` -> no output, exit 0
+- `docs/truth/RELEASE_TRUTH.md`: Active truth file contains legacy IA wording that conflicts with current top-level IA.
