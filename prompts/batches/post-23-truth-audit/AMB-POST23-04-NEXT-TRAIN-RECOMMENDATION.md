@@ -14,6 +14,21 @@ Use these repo OS files as controlling instructions:
 - `docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md`
 - `docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md`
 
+Frontend authority is mandatory for any UI/source-facing recommendation in this batch.
+Consume the Encyclopedia Frontend OS before recommending UI or surface work:
+
+- `ENCYCLOPEDIA_TO_FRONTEND_OS`
+- `frontend-authority-packet`
+- `frontend-authority-preflight`
+- `build/reports/frontend-authority-packets`
+- `build/reports/frontend-authority-preflight`
+
+Surface ID: `today_root_reality_meridian`
+Surface ID: `goals_root_constellation_atlas`
+Surface ID: `capture_root_atmosphere_composer`
+Surface ID: `time_root_lifeshape_field`
+Surface ID: `you_root_user_system_profile`
+
 Default recommendation order is UI Suite, Backend Flagship, Frontend Flagship, Apple continuity/durability proof if not covered, then launch-believability/closed beta readiness. Override this order only when evidence requires it.
 
 Required output:
