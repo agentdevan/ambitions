@@ -12,7 +12,7 @@
 > [!IMPORTANT]
 > **Active Authority Index Notice**: Repository authority starts in [docs/truth/README.md](docs/truth/README.md). If this README conflicts with `docs/truth/*`, the active truth files win. This file serves as architectural orientation and engineering guidelines.
 
-Ambitions is a premium, native iOS **personal life operating system and external brain**. Designed to organize intent, ground long-term goals in daily constraints, and adapt elegantly to changing life realities, Ambitions rejects standard task lists, calendar clones, and cloud-first telemetry in favor of an elegant, local-first product experience.
+Ambitions is a premium, native iOS **personal life operating system and external brain**. Designed to organize intent, ground long-term goals in daily constraints, and adapt elegantly to changing life realities, Ambitions rejects generic task lists, calendar clones, and server-centered tracking in favor of an elegant, local-first product experience.
 
 ---
 
@@ -133,6 +133,7 @@ Engineers should use the localized checks under `scripts/` before proposing chan
 
 To navigate the historical, operational, and system layers of the Ambitions repository:
 *   [Frontend Portal](frontend/README.md): Active and historical UI canon.
+    *   [Encyclopedia to Frontend OS](frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md): Runner-gated frontend authority workflow.
 *   [Backend Portal](backend/README.md): Legacy cloud or database adapters.
 *   [Codex OS Portal](codex-os/README.md): AI/Codex developer workflow control plane.
 *   [Product Canon Portal](product-canon/README.md): Core design and canon artifacts.

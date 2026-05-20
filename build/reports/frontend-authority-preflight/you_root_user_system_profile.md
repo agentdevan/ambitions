@@ -24,9 +24,9 @@ Status: `green`
 - None
 
 ## Allowed Sources
-- Native/Ambitions/Features/Profile/ProfileScreen.swift
-- Native/Ambitions/Features/Profile/ProfileRootSurface.swift
-- Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift
+- Native/Ambitions/Features/You/YouScreen.swift
+- Native/Ambitions/Features/You/YouRootSurface.swift
+- Native/Ambitions/Features/You/YouTrustHistoryProjector.swift
 
 ## Issues
 - None

@@ -11,10 +11,45 @@ Source relationship: `implemented_source_present`
 Implementation status: `implemented_unproven`
 Proof status: `no_proof_required`
 
+## Signature Visual Instrument
+- instrument id: `user_system_profile_instrument`
+- instrument name: `User System Profile Instrument`
+- instrument required: `True`
+- implementation status: `intended_authority_pending_source_proof`
+- doctrine: `frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md`
+- matrix: `frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`
+- guidance: Use or create a dedicated visual-object SwiftUI component rather than burying this instrument inside a root screen file.
+
+### Shared Instrument Primitives
+- ContextualDrilldownHeader
+- LiveTelemetryPanel
+- FloatingGlassNav
+- MetricInstrumentChart
+
+### Future Visual Object Source Files
+- Native/Ambitions/Features/You/UserSystemProfileSurface.swift
+- Native/Ambitions/Features/You/TrustConsoleView.swift
+- Native/Ambitions/Features/You/AutomationLadderView.swift
+- Native/Ambitions/Features/You/LocalRuntimeTrustMap.swift
+
+### Native SwiftUI Technique Candidates
+- GeometryReader
+- state-driven materials
+- contextual headers
+- semantic metric panels
+
+### Forbidden Visual Regressions
+- surveillance posture
+- AI theater
+- hidden learning claims
+- generic settings dump
+
 ## Source Candidates
-- Native/Ambitions/Features/Profile/ProfileScreen.swift
-- Native/Ambitions/Features/Profile/ProfileRootSurface.swift
-- Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift
+- Native/Ambitions/Features/You/YouScreen.swift
+- Native/Ambitions/Features/You/YouRootSurface.swift
+- Native/Ambitions/Features/You/YouTrustHistoryProjector.swift
+- Native/Ambitions/Features/You/YouViewModel.swift
+- Native/Ambitions/Features/You/YouFeatureService.swift
 
 ## Tokens
 - Sources/Theme/AmbitionObjectTokens.generated.swift
@@ -144,9 +179,9 @@ Proof status: `no_proof_required`
 
 ## Allowed Scope
 - source_targets:
-  - Native/Ambitions/Features/Profile/ProfileScreen.swift
-  - Native/Ambitions/Features/Profile/ProfileRootSurface.swift
-  - Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift
+  - Native/Ambitions/Features/You/YouScreen.swift
+  - Native/Ambitions/Features/You/YouRootSurface.swift
+  - Native/Ambitions/Features/You/YouTrustHistoryProjector.swift
 - docs:
   - frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md
   - frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md

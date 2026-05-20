@@ -11,10 +11,46 @@ Source relationship: `implemented_source_present`
 Implementation status: `implemented_unproven`
 Proof status: `no_proof_required`
 
+## Signature Visual Instrument
+- instrument id: `reality_meridian_instrument`
+- instrument name: `Reality Meridian Instrument`
+- instrument required: `True`
+- implementation status: `intended_authority_pending_source_proof`
+- doctrine: `frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md`
+- matrix: `frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`
+- guidance: Use or create a dedicated visual-object SwiftUI component rather than burying this instrument inside a root screen file.
+
+### Shared Instrument Primitives
+- LivingBackground
+- LiveTelemetryPanel
+- ContextualDrilldownHeader
+- MetricInstrumentChart
+
+### Future Visual Object Source Files
+- Native/Ambitions/Features/Today/RealityMeridianSurface.swift
+- Native/Ambitions/Features/Today/RealityMeridianLiveStatePanel.swift
+- Native/Ambitions/Features/Today/RealityMeridianContinuitySpine.swift
+
+### Native SwiftUI Technique Candidates
+- Canvas
+- Shape
+- Path
+- GeometryReader
+- TimelineView
+- matchedGeometryEffect
+
+### Forbidden Visual Regressions
+- generic task list
+- generic dashboard
+- disconnected card stack
+- shame language
+- opaque model-certainty language
+
 ## Source Candidates
 - Native/Ambitions/Features/Today/TodayScreen.swift
 - Native/Ambitions/Features/Today/TodayViewModel.swift
 - Native/Ambitions/Features/Today/TodayExecutionViewState.swift
+- Native/Ambitions/Features/Today/TodayDayRailPanels.swift
 
 ## Tokens
 - Sources/Theme/AmbitionObjectTokens.generated.swift

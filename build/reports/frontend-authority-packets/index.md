@@ -7,482 +7,642 @@ Surface count: `159`
 - Destinations: {'Capture': 17, 'Cross-surface': 40, 'Goals': 19, 'Onboarding': 8, 'Time': 28, 'Today': 28, 'You': 19}
 - Tiers: {'P0': 30, 'P1': 9, 'P2': 75, 'candidate': 45}
 - Source relationships: {'canon_only_pending_lock': 105, 'implemented_source_present': 6, 'planned_source_target': 48}
+- Signature instruments: {'atmosphere_composer_instrument': 17, 'constellation_atlas_instrument': 19, 'lifeshape_field_instrument': 28, 'reality_meridian_instrument': 28, 'shared_or_none': 48, 'user_system_profile_instrument': 19}
 
 ## Packets
-- `global_app_shell` - Global App Shell - Cross-surface - P1 - implemented_source_present
+- `global_app_shell` - Global App Shell - Cross-surface - P1 - implemented_source_present - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/global_app_shell.md`
   - json: `build/reports/frontend-authority-packets/global_app_shell.json`
-- `destination_dock` - Destination Dock - Cross-surface - P1 - canon_only_pending_lock
+- `destination_dock` - Destination Dock - Cross-surface - P1 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/destination_dock.md`
   - json: `build/reports/frontend-authority-packets/destination_dock.json`
-- `destination_tab_item` - Destination Tab Item - Cross-surface - P1 - canon_only_pending_lock
+- `destination_tab_item` - Destination Tab Item - Cross-surface - P1 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/destination_tab_item.md`
   - json: `build/reports/frontend-authority-packets/destination_tab_item.json`
-- `compact_surface_header` - Compact Surface Header - Cross-surface - P1 - canon_only_pending_lock
+- `compact_surface_header` - Compact Surface Header - Cross-surface - P1 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/compact_surface_header.md`
   - json: `build/reports/frontend-authority-packets/compact_surface_header.json`
-- `context_crown` - Context Crown - Cross-surface - P1 - canon_only_pending_lock
+- `context_crown` - Context Crown - Cross-surface - P1 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/context_crown.md`
   - json: `build/reports/frontend-authority-packets/context_crown.json`
-- `back_navigation` - Back Navigation - Cross-surface - P1 - canon_only_pending_lock
+- `back_navigation` - Back Navigation - Cross-surface - P1 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/back_navigation.md`
   - json: `build/reports/frontend-authority-packets/back_navigation.json`
-- `sheet_chrome` - Sheet Chrome - Cross-surface - P1 - canon_only_pending_lock
+- `sheet_chrome` - Sheet Chrome - Cross-surface - P1 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/sheet_chrome.md`
   - json: `build/reports/frontend-authority-packets/sheet_chrome.json`
-- `tray_chrome` - Tray Chrome - Cross-surface - P1 - canon_only_pending_lock
+- `tray_chrome` - Tray Chrome - Cross-surface - P1 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/tray_chrome.md`
   - json: `build/reports/frontend-authority-packets/tray_chrome.json`
-- `receipt_toast_inline_confirmation` - Receipt Toast / Inline Confirmation - Cross-surface - P1 - canon_only_pending_lock
+- `receipt_toast_inline_confirmation` - Receipt Toast / Inline Confirmation - Cross-surface - P1 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/receipt_toast_inline_confirmation.md`
   - json: `build/reports/frontend-authority-packets/receipt_toast_inline_confirmation.json`
-- `global_empty_state_shell` - Global Empty State Shell - Cross-surface - P2 - canon_only_pending_lock
+- `global_empty_state_shell` - Global Empty State Shell - Cross-surface - P2 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/global_empty_state_shell.md`
   - json: `build/reports/frontend-authority-packets/global_empty_state_shell.json`
-- `global_error_fallback_shell` - Global Error / Fallback Shell - Cross-surface - P2 - canon_only_pending_lock
+- `global_error_fallback_shell` - Global Error / Fallback Shell - Cross-surface - P2 - canon_only_pending_lock - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/global_error_fallback_shell.md`
   - json: `build/reports/frontend-authority-packets/global_error_fallback_shell.json`
-- `today_root_reality_meridian` - Today Root / Reality Meridian - Today - P0 - implemented_source_present
+- `today_root_reality_meridian` - Today Root / Reality Meridian - Today - P0 - implemented_source_present - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_root_reality_meridian.md`
   - json: `build/reports/frontend-authority-packets/today_root_reality_meridian.json`
-- `today_current_context_header` - Today Current Context Header - Today - P2 - canon_only_pending_lock
+- `today_current_context_header` - Today Current Context Header - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_current_context_header.md`
   - json: `build/reports/frontend-authority-packets/today_current_context_header.json`
-- `today_start_here_region` - Today Start Here Region - Today - P0 - canon_only_pending_lock
+- `today_start_here_region` - Today Start Here Region - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_start_here_region.md`
   - json: `build/reports/frontend-authority-packets/today_start_here_region.json`
-- `today_reality_meridian_rail` - Today Reality Meridian Rail - Today - P0 - canon_only_pending_lock
+- `today_reality_meridian_rail` - Today Reality Meridian Rail - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_reality_meridian_rail.md`
   - json: `build/reports/frontend-authority-packets/today_reality_meridian_rail.json`
-- `today_recommended_step_object` - Today Recommended Step Object - Today - P0 - canon_only_pending_lock
+- `today_recommended_step_object` - Today Recommended Step Object - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_recommended_step_object.md`
   - json: `build/reports/frontend-authority-packets/today_recommended_step_object.json`
-- `today_now_next_later_sequence` - Today Now / Next / Later Sequence - Today - P0 - canon_only_pending_lock
+- `today_now_next_later_sequence` - Today Now / Next / Later Sequence - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_now_next_later_sequence.md`
   - json: `build/reports/frontend-authority-packets/today_now_next_later_sequence.json`
-- `today_upcoming_commitments_region` - Today Upcoming Commitments Region - Today - P2 - canon_only_pending_lock
+- `today_upcoming_commitments_region` - Today Upcoming Commitments Region - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_upcoming_commitments_region.md`
   - json: `build/reports/frontend-authority-packets/today_upcoming_commitments_region.json`
-- `today_closure_prompt_region` - Today Closure Prompt Region - Today - P2 - canon_only_pending_lock
+- `today_closure_prompt_region` - Today Closure Prompt Region - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_closure_prompt_region.md`
   - json: `build/reports/frontend-authority-packets/today_closure_prompt_region.json`
-- `today_receipt_shelf` - Today Receipt Shelf - Today - P2 - canon_only_pending_lock
+- `today_receipt_shelf` - Today Receipt Shelf - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_receipt_shelf.md`
   - json: `build/reports/frontend-authority-packets/today_receipt_shelf.json`
-- `today_source_freshness_indicator` - Today Source Freshness Indicator - Today - P2 - canon_only_pending_lock
+- `today_source_freshness_indicator` - Today Source Freshness Indicator - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_source_freshness_indicator.md`
   - json: `build/reports/frontend-authority-packets/today_source_freshness_indicator.json`
-- `step_detail` - Step Detail - Today - P0 - canon_only_pending_lock
+- `step_detail` - Step Detail - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/step_detail.md`
   - json: `build/reports/frontend-authority-packets/step_detail.json`
-- `step_session` - Step Session - Today - P0 - canon_only_pending_lock
+- `step_session` - Step Session - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/step_session.md`
   - json: `build/reports/frontend-authority-packets/step_session.json`
-- `recommendation_source_sheet` - Recommendation Source Sheet - Today - P0 - canon_only_pending_lock
+- `recommendation_source_sheet` - Recommendation Source Sheet - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/recommendation_source_sheet.md`
   - json: `build/reports/frontend-authority-packets/recommendation_source_sheet.json`
-- `closure_sheet` - Closure Sheet - Today - P0 - canon_only_pending_lock
+- `closure_sheet` - Closure Sheet - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/closure_sheet.md`
   - json: `build/reports/frontend-authority-packets/closure_sheet.json`
-- `receipt_detail` - Receipt Detail - Today - P0 - canon_only_pending_lock
+- `receipt_detail` - Receipt Detail - Today - P0 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/receipt_detail.md`
   - json: `build/reports/frontend-authority-packets/receipt_detail.json`
-- `proof_attachment_detail` - Proof Attachment Detail - Today - candidate - planned_source_target
+- `proof_attachment_detail` - Proof Attachment Detail - Today - candidate - planned_source_target - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/proof_attachment_detail.md`
   - json: `build/reports/frontend-authority-packets/proof_attachment_detail.json`
-- `adjust_plan_reflow_preview_entry` - Adjust Plan / Reflow Preview Entry - Today - P2 - canon_only_pending_lock
+- `adjust_plan_reflow_preview_entry` - Adjust Plan / Reflow Preview Entry - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/adjust_plan_reflow_preview_entry.md`
   - json: `build/reports/frontend-authority-packets/adjust_plan_reflow_preview_entry.json`
-- `blocked_detail` - Blocked Detail - Today - P2 - canon_only_pending_lock
+- `blocked_detail` - Blocked Detail - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/blocked_detail.md`
   - json: `build/reports/frontend-authority-packets/blocked_detail.json`
-- `waiting_detail` - Waiting Detail - Today - P2 - canon_only_pending_lock
+- `waiting_detail` - Waiting Detail - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/waiting_detail.md`
   - json: `build/reports/frontend-authority-packets/waiting_detail.json`
-- `goal_thread_context_from_today` - Goal Thread Context from Today - Today - P2 - canon_only_pending_lock
+- `goal_thread_context_from_today` - Goal Thread Context from Today - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/goal_thread_context_from_today.md`
   - json: `build/reports/frontend-authority-packets/goal_thread_context_from_today.json`
-- `local_runtime_source_detail_from_today` - Local Runtime Source Detail from Today - Today - P2 - canon_only_pending_lock
+- `local_runtime_source_detail_from_today` - Local Runtime Source Detail from Today - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/local_runtime_source_detail_from_today.md`
   - json: `build/reports/frontend-authority-packets/local_runtime_source_detail_from_today.json`
-- `today_empty_state` - Today Empty State - Today - P2 - canon_only_pending_lock
+- `today_empty_state` - Today Empty State - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_empty_state.md`
   - json: `build/reports/frontend-authority-packets/today_empty_state.json`
-- `today_no_schedule_data_state` - Today No Schedule Data State - Today - P2 - canon_only_pending_lock
+- `today_no_schedule_data_state` - Today No Schedule Data State - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_no_schedule_data_state.md`
   - json: `build/reports/frontend-authority-packets/today_no_schedule_data_state.json`
-- `today_overloaded_state` - Today Overloaded State - Today - P2 - canon_only_pending_lock
+- `today_overloaded_state` - Today Overloaded State - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_overloaded_state.md`
   - json: `build/reports/frontend-authority-packets/today_overloaded_state.json`
-- `today_recovery_state` - Today Recovery State - Today - P2 - canon_only_pending_lock
+- `today_recovery_state` - Today Recovery State - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_recovery_state.md`
   - json: `build/reports/frontend-authority-packets/today_recovery_state.json`
-- `today_vacation_away_state` - Today Vacation / Away State - Today - candidate - planned_source_target
+- `today_vacation_away_state` - Today Vacation / Away State - Today - candidate - planned_source_target - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_vacation_away_state.md`
   - json: `build/reports/frontend-authority-packets/today_vacation_away_state.json`
-- `today_protected_time_state` - Today Protected Time State - Today - P2 - canon_only_pending_lock
+- `today_protected_time_state` - Today Protected Time State - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_protected_time_state.md`
   - json: `build/reports/frontend-authority-packets/today_protected_time_state.json`
-- `today_stale_recommendation_state` - Today Stale Recommendation State - Today - P2 - canon_only_pending_lock
+- `today_stale_recommendation_state` - Today Stale Recommendation State - Today - P2 - canon_only_pending_lock - instrument `reality_meridian_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/today_stale_recommendation_state.md`
   - json: `build/reports/frontend-authority-packets/today_stale_recommendation_state.json`
-- `goals_root_constellation_atlas` - Goals Root / Constellation Atlas - Goals - P0 - implemented_source_present
+- `goals_root_constellation_atlas` - Goals Root / Constellation Atlas - Goals - P0 - implemented_source_present - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/goals_root_constellation_atlas.md`
   - json: `build/reports/frontend-authority-packets/goals_root_constellation_atlas.json`
-- `goals_life_area_map` - Goals Life Area Map - Goals - P2 - canon_only_pending_lock
+- `goals_life_area_map` - Goals Life Area Map - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/goals_life_area_map.md`
   - json: `build/reports/frontend-authority-packets/goals_life_area_map.json`
-- `selected_life_area_surface` - Selected Life Area Surface - Goals - P2 - canon_only_pending_lock
+- `selected_life_area_surface` - Selected Life Area Surface - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/selected_life_area_surface.md`
   - json: `build/reports/frontend-authority-packets/selected_life_area_surface.json`
-- `ambition_graph` - Ambition Graph - Goals - P2 - canon_only_pending_lock
+- `ambition_graph` - Ambition Graph - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/ambition_graph.md`
   - json: `build/reports/frontend-authority-packets/ambition_graph.json`
-- `goal_thread_detail` - Goal Thread Detail - Goals - P0 - canon_only_pending_lock
+- `goal_thread_detail` - Goal Thread Detail - Goals - P0 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/goal_thread_detail.md`
   - json: `build/reports/frontend-authority-packets/goal_thread_detail.json`
-- `goal_detail` - Goal Detail - Goals - P2 - canon_only_pending_lock
+- `goal_detail` - Goal Detail - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/goal_detail.md`
   - json: `build/reports/frontend-authority-packets/goal_detail.json`
-- `commitment_detail` - Commitment Detail - Goals - P2 - canon_only_pending_lock
+- `commitment_detail` - Commitment Detail - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/commitment_detail.md`
   - json: `build/reports/frontend-authority-packets/commitment_detail.json`
-- `proof_trail` - Proof Trail - Goals - P0 - canon_only_pending_lock
+- `proof_trail` - Proof Trail - Goals - P0 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/proof_trail.md`
   - json: `build/reports/frontend-authority-packets/proof_trail.json`
-- `proof_detail` - Proof Detail - Goals - P2 - canon_only_pending_lock
+- `proof_detail` - Proof Detail - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/proof_detail.md`
   - json: `build/reports/frontend-authority-packets/proof_detail.json`
-- `proof_gap_state` - Proof Gap State - Goals - P2 - canon_only_pending_lock
+- `proof_gap_state` - Proof Gap State - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/proof_gap_state.md`
   - json: `build/reports/frontend-authority-packets/proof_gap_state.json`
-- `blocker_detail` - Blocker Detail - Goals - P2 - canon_only_pending_lock
+- `blocker_detail` - Blocker Detail - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/blocker_detail.md`
   - json: `build/reports/frontend-authority-packets/blocker_detail.json`
-- `alternate_path_detail` - Alternate Path Detail - Goals - P2 - canon_only_pending_lock
+- `alternate_path_detail` - Alternate Path Detail - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/alternate_path_detail.md`
   - json: `build/reports/frontend-authority-packets/alternate_path_detail.json`
-- `milestone_detail` - Milestone Detail - Goals - P2 - canon_only_pending_lock
+- `milestone_detail` - Milestone Detail - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/milestone_detail.md`
   - json: `build/reports/frontend-authority-packets/milestone_detail.json`
-- `recommended_step_context_from_goals` - Recommended Step Context from Goals - Goals - P2 - canon_only_pending_lock
+- `recommended_step_context_from_goals` - Recommended Step Context from Goals - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/recommended_step_context_from_goals.md`
   - json: `build/reports/frontend-authority-packets/recommended_step_context_from_goals.json`
-- `reflection_recovery_detail` - Reflection / Recovery Detail - Goals - P0 - canon_only_pending_lock
+- `reflection_recovery_detail` - Reflection / Recovery Detail - Goals - P0 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/reflection_recovery_detail.md`
   - json: `build/reports/frontend-authority-packets/reflection_recovery_detail.json`
-- `goals_empty_state` - Goals Empty State - Goals - P2 - canon_only_pending_lock
+- `goals_empty_state` - Goals Empty State - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/goals_empty_state.md`
   - json: `build/reports/frontend-authority-packets/goals_empty_state.json`
-- `goals_review_state` - Goals Review State - Goals - P2 - canon_only_pending_lock
+- `goals_review_state` - Goals Review State - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/goals_review_state.md`
   - json: `build/reports/frontend-authority-packets/goals_review_state.json`
-- `goals_blocked_state` - Goals Blocked State - Goals - P2 - canon_only_pending_lock
+- `goals_blocked_state` - Goals Blocked State - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/goals_blocked_state.md`
   - json: `build/reports/frontend-authority-packets/goals_blocked_state.json`
-- `goals_archive_historical_goal_state` - Goals Archive / Historical Goal State - Goals - P2 - canon_only_pending_lock
+- `goals_archive_historical_goal_state` - Goals Archive / Historical Goal State - Goals - P2 - canon_only_pending_lock - instrument `constellation_atlas_instrument`
+  - primitives: `CinematicObjectHero, FloatingGlassNav, MetricInstrumentChart, ContextualDrilldownHeader`
   - md: `build/reports/frontend-authority-packets/goals_archive_historical_goal_state.md`
   - json: `build/reports/frontend-authority-packets/goals_archive_historical_goal_state.json`
-- `capture_root_atmosphere_composer` - Capture Root / Atmosphere Composer - Capture - P0 - implemented_source_present
+- `capture_root_atmosphere_composer` - Capture Root / Atmosphere Composer - Capture - P0 - implemented_source_present - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_root_atmosphere_composer.md`
   - json: `build/reports/frontend-authority-packets/capture_root_atmosphere_composer.json`
-- `capture_idle_composer` - Capture Idle Composer - Capture - P2 - canon_only_pending_lock
+- `capture_idle_composer` - Capture Idle Composer - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_idle_composer.md`
   - json: `build/reports/frontend-authority-packets/capture_idle_composer.json`
-- `capture_active_text_entry` - Capture Active Text Entry - Capture - P2 - canon_only_pending_lock
+- `capture_active_text_entry` - Capture Active Text Entry - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_active_text_entry.md`
   - json: `build/reports/frontend-authority-packets/capture_active_text_entry.json`
-- `capture_dictation_state` - Capture Dictation State - Capture - candidate - planned_source_target
+- `capture_dictation_state` - Capture Dictation State - Capture - candidate - planned_source_target - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_dictation_state.md`
   - json: `build/reports/frontend-authority-packets/capture_dictation_state.json`
-- `capture_attachment_proof_picker` - Capture Attachment / Proof Picker - Capture - candidate - planned_source_target
+- `capture_attachment_proof_picker` - Capture Attachment / Proof Picker - Capture - candidate - planned_source_target - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_attachment_proof_picker.md`
   - json: `build/reports/frontend-authority-packets/capture_attachment_proof_picker.json`
-- `capture_post_input_route_reveal` - Capture Post-Input Route Reveal - Capture - P0 - canon_only_pending_lock
+- `capture_post_input_route_reveal` - Capture Post-Input Route Reveal - Capture - P0 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_post_input_route_reveal.md`
   - json: `build/reports/frontend-authority-packets/capture_post_input_route_reveal.json`
-- `capture_save_as_proof_route` - Capture Save as Proof Route - Capture - P2 - canon_only_pending_lock
+- `capture_save_as_proof_route` - Capture Save as Proof Route - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_save_as_proof_route.md`
   - json: `build/reports/frontend-authority-packets/capture_save_as_proof_route.json`
-- `capture_make_commitment_route` - Capture Make Commitment Route - Capture - P2 - canon_only_pending_lock
+- `capture_make_commitment_route` - Capture Make Commitment Route - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_make_commitment_route.md`
   - json: `build/reports/frontend-authority-packets/capture_make_commitment_route.json`
-- `capture_grow_into_goal_route` - Capture Grow into Goal Route - Capture - P2 - canon_only_pending_lock
+- `capture_grow_into_goal_route` - Capture Grow into Goal Route - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_grow_into_goal_route.md`
   - json: `build/reports/frontend-authority-packets/capture_grow_into_goal_route.json`
-- `capture_mark_constraint_route` - Capture Mark Constraint Route - Capture - P2 - canon_only_pending_lock
+- `capture_mark_constraint_route` - Capture Mark Constraint Route - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_mark_constraint_route.md`
   - json: `build/reports/frontend-authority-packets/capture_mark_constraint_route.json`
-- `capture_reflect_route` - Capture Reflect Route - Capture - P2 - canon_only_pending_lock
+- `capture_reflect_route` - Capture Reflect Route - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_reflect_route.md`
   - json: `build/reports/frontend-authority-packets/capture_reflect_route.json`
-- `capture_hold_needs_a_place_route` - Capture Hold / Needs a Place Route - Capture - P0 - canon_only_pending_lock
+- `capture_hold_needs_a_place_route` - Capture Hold / Needs a Place Route - Capture - P0 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_hold_needs_a_place_route.md`
   - json: `build/reports/frontend-authority-packets/capture_hold_needs_a_place_route.json`
-- `capture_receipt` - Capture Receipt - Capture - P0 - canon_only_pending_lock
+- `capture_receipt` - Capture Receipt - Capture - P0 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_receipt.md`
   - json: `build/reports/frontend-authority-packets/capture_receipt.json`
-- `capture_parse_uncertain_state` - Capture Parse Uncertain State - Capture - P2 - canon_only_pending_lock
+- `capture_parse_uncertain_state` - Capture Parse Uncertain State - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_parse_uncertain_state.md`
   - json: `build/reports/frontend-authority-packets/capture_parse_uncertain_state.json`
-- `capture_offline_local_only_state` - Capture Offline Local-Only State - Capture - candidate - planned_source_target
+- `capture_offline_local_only_state` - Capture Offline Local-Only State - Capture - candidate - planned_source_target - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_offline_local_only_state.md`
   - json: `build/reports/frontend-authority-packets/capture_offline_local_only_state.json`
-- `capture_error_failed_attachment_state` - Capture Error / Failed Attachment State - Capture - candidate - planned_source_target
+- `capture_error_failed_attachment_state` - Capture Error / Failed Attachment State - Capture - candidate - planned_source_target - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_error_failed_attachment_state.md`
   - json: `build/reports/frontend-authority-packets/capture_error_failed_attachment_state.json`
-- `capture_empty_first_use_state` - Capture Empty First-Use State - Capture - P2 - canon_only_pending_lock
+- `capture_empty_first_use_state` - Capture Empty First-Use State - Capture - P2 - canon_only_pending_lock - instrument `atmosphere_composer_instrument`
+  - primitives: `LivingBackground, FloatingGlassNav, CinematicObjectHero, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/capture_empty_first_use_state.md`
   - json: `build/reports/frontend-authority-packets/capture_empty_first_use_state.json`
-- `time_root_lifeshape_field` - Time Root / LifeShape Field - Time - P0 - implemented_source_present
+- `time_root_lifeshape_field` - Time Root / LifeShape Field - Time - P0 - implemented_source_present - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/time_root_lifeshape_field.md`
   - json: `build/reports/frontend-authority-packets/time_root_lifeshape_field.json`
-- `time_scope_control` - Time Scope Control - Time - P2 - canon_only_pending_lock
+- `time_scope_control` - Time Scope Control - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/time_scope_control.md`
   - json: `build/reports/frontend-authority-packets/time_scope_control.json`
-- `day_lifeshape_surface` - Day LifeShape Surface - Time - P0 - canon_only_pending_lock
+- `day_lifeshape_surface` - Day LifeShape Surface - Time - P0 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/day_lifeshape_surface.md`
   - json: `build/reports/frontend-authority-packets/day_lifeshape_surface.json`
-- `week_lifeshape_surface` - Week LifeShape Surface - Time - P0 - canon_only_pending_lock
+- `week_lifeshape_surface` - Week LifeShape Surface - Time - P0 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/week_lifeshape_surface.md`
   - json: `build/reports/frontend-authority-packets/week_lifeshape_surface.json`
-- `month_lifeshape_surface` - Month LifeShape Surface - Time - P0 - planned_source_target
+- `month_lifeshape_surface` - Month LifeShape Surface - Time - P0 - planned_source_target - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/month_lifeshape_surface.md`
   - json: `build/reports/frontend-authority-packets/month_lifeshape_surface.json`
-- `open_time_region` - Open Time Region - Time - P2 - canon_only_pending_lock
+- `open_time_region` - Open Time Region - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/open_time_region.md`
   - json: `build/reports/frontend-authority-packets/open_time_region.json`
-- `protected_time_region` - Protected Time Region - Time - P2 - canon_only_pending_lock
+- `protected_time_region` - Protected Time Region - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/protected_time_region.md`
   - json: `build/reports/frontend-authority-packets/protected_time_region.json`
-- `pressure_region` - Pressure Region - Time - P2 - canon_only_pending_lock
+- `pressure_region` - Pressure Region - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/pressure_region.md`
   - json: `build/reports/frontend-authority-packets/pressure_region.json`
-- `best_fit_region` - Best Fit Region - Time - P2 - canon_only_pending_lock
+- `best_fit_region` - Best Fit Region - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/best_fit_region.md`
   - json: `build/reports/frontend-authority-packets/best_fit_region.json`
-- `recovery_flex_region` - Recovery / Flex Region - Time - P2 - canon_only_pending_lock
+- `recovery_flex_region` - Recovery / Flex Region - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/recovery_flex_region.md`
   - json: `build/reports/frontend-authority-packets/recovery_flex_region.json`
-- `review_pressure_surface` - Review Pressure Surface - Time - P2 - canon_only_pending_lock
+- `review_pressure_surface` - Review Pressure Surface - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/review_pressure_surface.md`
   - json: `build/reports/frontend-authority-packets/review_pressure_surface.json`
-- `best_fit_explanation_sheet` - Best Fit Explanation Sheet - Time - P0 - canon_only_pending_lock
+- `best_fit_explanation_sheet` - Best Fit Explanation Sheet - Time - P0 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/best_fit_explanation_sheet.md`
   - json: `build/reports/frontend-authority-packets/best_fit_explanation_sheet.json`
-- `protected_time_detail` - Protected Time Detail - Time - P0 - canon_only_pending_lock
+- `protected_time_detail` - Protected Time Detail - Time - P0 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/protected_time_detail.md`
   - json: `build/reports/frontend-authority-packets/protected_time_detail.json`
-- `day_detail` - Day Detail - Time - P2 - canon_only_pending_lock
+- `day_detail` - Day Detail - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/day_detail.md`
   - json: `build/reports/frontend-authority-packets/day_detail.json`
-- `week_detail` - Week Detail - Time - P2 - canon_only_pending_lock
+- `week_detail` - Week Detail - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/week_detail.md`
   - json: `build/reports/frontend-authority-packets/week_detail.json`
-- `month_detail` - Month Detail - Time - P2 - canon_only_pending_lock
+- `month_detail` - Month Detail - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/month_detail.md`
   - json: `build/reports/frontend-authority-packets/month_detail.json`
-- `reflow_preview_tray` - Reflow Preview Tray - Cross-surface - P0 - planned_source_target
+- `reflow_preview_tray` - Reflow Preview Tray - Cross-surface - P0 - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/reflow_preview_tray.md`
   - json: `build/reports/frontend-authority-packets/reflow_preview_tray.json`
-- `shape_day_flow` - Shape Day Flow - Time - P2 - canon_only_pending_lock
+- `shape_day_flow` - Shape Day Flow - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/shape_day_flow.md`
   - json: `build/reports/frontend-authority-packets/shape_day_flow.json`
-- `reflow_week_flow` - Reflow Week Flow - Time - P2 - canon_only_pending_lock
+- `reflow_week_flow` - Reflow Week Flow - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/reflow_week_flow.md`
   - json: `build/reports/frontend-authority-packets/reflow_week_flow.json`
-- `shape_month_flow` - Shape Month Flow - Time - P2 - canon_only_pending_lock
+- `shape_month_flow` - Shape Month Flow - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/shape_month_flow.md`
   - json: `build/reports/frontend-authority-packets/shape_month_flow.json`
-- `time_receipt_detail` - Time Receipt Detail - Time - P2 - canon_only_pending_lock
+- `time_receipt_detail` - Time Receipt Detail - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/time_receipt_detail.md`
   - json: `build/reports/frontend-authority-packets/time_receipt_detail.json`
-- `schedule_and_availability_entry` - Schedule & Availability Entry - Time - P2 - canon_only_pending_lock
+- `schedule_and_availability_entry` - Schedule & Availability Entry - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/schedule_and_availability_entry.md`
   - json: `build/reports/frontend-authority-packets/schedule_and_availability_entry.json`
-- `planning_defaults_entry` - Planning Defaults Entry - Time - P2 - canon_only_pending_lock
+- `planning_defaults_entry` - Planning Defaults Entry - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/planning_defaults_entry.md`
   - json: `build/reports/frontend-authority-packets/planning_defaults_entry.json`
-- `vacation_away_time_entry` - Vacation / Away Time Entry - Time - candidate - planned_source_target
+- `vacation_away_time_entry` - Vacation / Away Time Entry - Time - candidate - planned_source_target - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/vacation_away_time_entry.md`
   - json: `build/reports/frontend-authority-packets/vacation_away_time_entry.json`
-- `time_no_calendar_data_state` - Time No Calendar Data State - Time - P2 - canon_only_pending_lock
+- `time_no_calendar_data_state` - Time No Calendar Data State - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/time_no_calendar_data_state.md`
   - json: `build/reports/frontend-authority-packets/time_no_calendar_data_state.json`
-- `time_overloaded_state` - Time Overloaded State - Time - P2 - canon_only_pending_lock
+- `time_overloaded_state` - Time Overloaded State - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/time_overloaded_state.md`
   - json: `build/reports/frontend-authority-packets/time_overloaded_state.json`
-- `time_protected_block_state` - Time Protected Block State - Time - P2 - canon_only_pending_lock
+- `time_protected_block_state` - Time Protected Block State - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/time_protected_block_state.md`
   - json: `build/reports/frontend-authority-packets/time_protected_block_state.json`
-- `time_vacation_away_state` - Time Vacation / Away State - Time - candidate - planned_source_target
+- `time_vacation_away_state` - Time Vacation / Away State - Time - candidate - planned_source_target - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/time_vacation_away_state.md`
   - json: `build/reports/frontend-authority-packets/time_vacation_away_state.json`
-- `time_stale_source_state` - Time Stale Source State - Time - P2 - canon_only_pending_lock
+- `time_stale_source_state` - Time Stale Source State - Time - P2 - canon_only_pending_lock - instrument `lifeshape_field_instrument`
+  - primitives: `LivingBackground, LiveTelemetryPanel, MetricInstrumentChart, ContextualDrilldownHeader, FloatingGlassNav`
   - md: `build/reports/frontend-authority-packets/time_stale_source_state.md`
   - json: `build/reports/frontend-authority-packets/time_stale_source_state.json`
-- `you_root_user_system_profile` - You Root / User System Profile - You - P0 - implemented_source_present
+- `you_root_user_system_profile` - You Root / User System Profile - You - P0 - implemented_source_present - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/you_root_user_system_profile.md`
   - json: `build/reports/frontend-authority-packets/you_root_user_system_profile.json`
-- `user_profile_header` - User Profile Header - You - P2 - canon_only_pending_lock
+- `user_profile_header` - User Profile Header - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/user_profile_header.md`
   - json: `build/reports/frontend-authority-packets/user_profile_header.json`
-- `local_runtime_trust_panel` - Local Runtime Trust Panel - You - P0 - canon_only_pending_lock
+- `local_runtime_trust_panel` - Local Runtime Trust Panel - You - P0 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/local_runtime_trust_panel.md`
   - json: `build/reports/frontend-authority-packets/local_runtime_trust_panel.json`
-- `planning_setup_section` - Planning Setup Section - You - P2 - canon_only_pending_lock
+- `planning_setup_section` - Planning Setup Section - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/planning_setup_section.md`
   - json: `build/reports/frontend-authority-packets/planning_setup_section.json`
-- `schedule_and_availability` - Schedule & Availability - You - P2 - canon_only_pending_lock
+- `schedule_and_availability` - Schedule & Availability - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/schedule_and_availability.md`
   - json: `build/reports/frontend-authority-packets/schedule_and_availability.json`
-- `planning_defaults` - Planning Defaults - You - P2 - canon_only_pending_lock
+- `planning_defaults` - Planning Defaults - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/planning_defaults.md`
   - json: `build/reports/frontend-authority-packets/planning_defaults.json`
-- `vacation_away_time` - Vacation / Away Time - You - candidate - planned_source_target
+- `vacation_away_time` - Vacation / Away Time - You - candidate - planned_source_target - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/vacation_away_time.md`
   - json: `build/reports/frontend-authority-packets/vacation_away_time.json`
-- `automation_and_trust` - Automation & Trust - You - P0 - canon_only_pending_lock
+- `automation_and_trust` - Automation & Trust - You - P0 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/automation_and_trust.md`
   - json: `build/reports/frontend-authority-packets/automation_and_trust.json`
-- `notifications` - Notifications - You - P2 - canon_only_pending_lock
+- `notifications` - Notifications - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/notifications.md`
   - json: `build/reports/frontend-authority-packets/notifications.json`
-- `capture_preferences` - Capture Preferences - You - P2 - canon_only_pending_lock
+- `capture_preferences` - Capture Preferences - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/capture_preferences.md`
   - json: `build/reports/frontend-authority-packets/capture_preferences.json`
-- `focus_session_defaults` - Focus / Session Defaults - You - P2 - canon_only_pending_lock
+- `focus_session_defaults` - Focus / Session Defaults - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/focus_session_defaults.md`
   - json: `build/reports/frontend-authority-packets/focus_session_defaults.json`
-- `privacy` - Privacy - You - P2 - canon_only_pending_lock
+- `privacy` - Privacy - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/privacy.md`
   - json: `build/reports/frontend-authority-packets/privacy.json`
-- `personal_runtime` - Personal Runtime - You - P2 - canon_only_pending_lock
+- `personal_runtime` - Personal Runtime - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/personal_runtime.md`
   - json: `build/reports/frontend-authority-packets/personal_runtime.json`
-- `local_data_reset_forget` - Local Data / Reset / Forget - You - P0 - canon_only_pending_lock
+- `local_data_reset_forget` - Local Data / Reset / Forget - You - P0 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/local_data_reset_forget.md`
   - json: `build/reports/frontend-authority-packets/local_data_reset_forget.json`
-- `help` - Help - You - P2 - canon_only_pending_lock
+- `help` - Help - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/help.md`
   - json: `build/reports/frontend-authority-packets/help.json`
-- `about_ambitions` - About Ambitions - You - P2 - canon_only_pending_lock
+- `about_ambitions` - About Ambitions - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/about_ambitions.md`
   - json: `build/reports/frontend-authority-packets/about_ambitions.json`
-- `you_empty_first_run_state` - You Empty / First-Run State - You - P2 - canon_only_pending_lock
+- `you_empty_first_run_state` - You Empty / First-Run State - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/you_empty_first_run_state.md`
   - json: `build/reports/frontend-authority-packets/you_empty_first_run_state.json`
-- `you_trust_warning_state` - You Trust Warning State - You - P2 - canon_only_pending_lock
+- `you_trust_warning_state` - You Trust Warning State - You - P2 - canon_only_pending_lock - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/you_trust_warning_state.md`
   - json: `build/reports/frontend-authority-packets/you_trust_warning_state.json`
-- `you_offline_local_only_state` - You Offline Local-Only State - You - candidate - planned_source_target
+- `you_offline_local_only_state` - You Offline Local-Only State - You - candidate - planned_source_target - instrument `user_system_profile_instrument`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel, FloatingGlassNav, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/you_offline_local_only_state.md`
   - json: `build/reports/frontend-authority-packets/you_offline_local_only_state.json`
-- `commitment_staging_tray` - Commitment Staging Tray - Cross-surface - candidate - planned_source_target
+- `commitment_staging_tray` - Commitment Staging Tray - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/commitment_staging_tray.md`
   - json: `build/reports/frontend-authority-packets/commitment_staging_tray.json`
-- `reflow_preview_tray` - Reflow Preview Tray - Cross-surface - P0 - planned_source_target
+- `reflow_preview_tray` - Reflow Preview Tray - Cross-surface - P0 - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/reflow_preview_tray.md`
   - json: `build/reports/frontend-authority-packets/reflow_preview_tray.json`
-- `receipt_system` - Receipt System - Cross-surface - candidate - planned_source_target
+- `receipt_system` - Receipt System - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `ContextualDrilldownHeader, LiveTelemetryPanel`
   - md: `build/reports/frontend-authority-packets/receipt_system.md`
   - json: `build/reports/frontend-authority-packets/receipt_system.json`
-- `closure_system` - Closure System - Cross-surface - candidate - planned_source_target
+- `closure_system` - Closure System - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/closure_system.md`
   - json: `build/reports/frontend-authority-packets/closure_system.json`
-- `proof_trail_system` - Proof Trail System - Cross-surface - candidate - planned_source_target
+- `proof_trail_system` - Proof Trail System - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `CinematicObjectHero, ContextualDrilldownHeader, MetricInstrumentChart`
   - md: `build/reports/frontend-authority-packets/proof_trail_system.md`
   - json: `build/reports/frontend-authority-packets/proof_trail_system.json`
-- `recommendation_source_system` - Recommendation Source System - Cross-surface - candidate - planned_source_target
+- `recommendation_source_system` - Recommendation Source System - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/recommendation_source_system.md`
   - json: `build/reports/frontend-authority-packets/recommendation_source_system.json`
-- `why_this_sheet` - Why This Sheet - Cross-surface - candidate - planned_source_target
+- `why_this_sheet` - Why This Sheet - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/why_this_sheet.md`
   - json: `build/reports/frontend-authority-packets/why_this_sheet.json`
-- `source_freshness_badge` - Source Freshness Badge - Cross-surface - candidate - planned_source_target
+- `source_freshness_badge` - Source Freshness Badge - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/source_freshness_badge.md`
   - json: `build/reports/frontend-authority-packets/source_freshness_badge.json`
-- `still_counts_state` - Still Counts State - Cross-surface - candidate - planned_source_target
+- `still_counts_state` - Still Counts State - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/still_counts_state.md`
   - json: `build/reports/frontend-authority-packets/still_counts_state.json`
-- `moved_state` - Moved State - Cross-surface - candidate - planned_source_target
+- `moved_state` - Moved State - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/moved_state.md`
   - json: `build/reports/frontend-authority-packets/moved_state.json`
-- `skipped_not_needed_state` - Skipped / Not Needed State - Cross-surface - candidate - planned_source_target
+- `skipped_not_needed_state` - Skipped / Not Needed State - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/skipped_not_needed_state.md`
   - json: `build/reports/frontend-authority-packets/skipped_not_needed_state.json`
-- `blocked_state` - Blocked State - Cross-surface - candidate - planned_source_target
+- `blocked_state` - Blocked State - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/blocked_state.md`
   - json: `build/reports/frontend-authority-packets/blocked_state.json`
-- `waiting_state` - Waiting State - Cross-surface - candidate - planned_source_target
+- `waiting_state` - Waiting State - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/waiting_state.md`
   - json: `build/reports/frontend-authority-packets/waiting_state.json`
-- `needs_recovery_state` - Needs Recovery State - Cross-surface - candidate - planned_source_target
+- `needs_recovery_state` - Needs Recovery State - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/needs_recovery_state.md`
   - json: `build/reports/frontend-authority-packets/needs_recovery_state.json`
-- `needs_review_state` - Needs Review State - Cross-surface - candidate - planned_source_target
+- `needs_review_state` - Needs Review State - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/needs_review_state.md`
   - json: `build/reports/frontend-authority-packets/needs_review_state.json`
-- `protected_marker` - Protected Marker - Cross-surface - candidate - planned_source_target
+- `protected_marker` - Protected Marker - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/protected_marker.md`
   - json: `build/reports/frontend-authority-packets/protected_marker.json`
-- `pressure_marker` - Pressure Marker - Cross-surface - candidate - planned_source_target
+- `pressure_marker` - Pressure Marker - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/pressure_marker.md`
   - json: `build/reports/frontend-authority-packets/pressure_marker.json`
-- `best_fit_marker` - Best Fit Marker - Cross-surface - candidate - planned_source_target
+- `best_fit_marker` - Best Fit Marker - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/best_fit_marker.md`
   - json: `build/reports/frontend-authority-packets/best_fit_marker.json`
-- `open_marker` - Open Marker - Cross-surface - candidate - planned_source_target
+- `open_marker` - Open Marker - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/open_marker.md`
   - json: `build/reports/frontend-authority-packets/open_marker.json`
-- `primary_cta` - Primary CTA - Cross-surface - candidate - planned_source_target
+- `primary_cta` - Primary CTA - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/primary_cta.md`
   - json: `build/reports/frontend-authority-packets/primary_cta.json`
-- `secondary_cta` - Secondary CTA - Cross-surface - candidate - planned_source_target
+- `secondary_cta` - Secondary CTA - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/secondary_cta.md`
   - json: `build/reports/frontend-authority-packets/secondary_cta.json`
-- `destructive_cta` - Destructive CTA - Cross-surface - candidate - planned_source_target
+- `destructive_cta` - Destructive CTA - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/destructive_cta.md`
   - json: `build/reports/frontend-authority-packets/destructive_cta.json`
-- `disabled_cta` - Disabled CTA - Cross-surface - candidate - planned_source_target
+- `disabled_cta` - Disabled CTA - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/disabled_cta.md`
   - json: `build/reports/frontend-authority-packets/disabled_cta.json`
-- `chevron_disclosure_row` - Chevron / Disclosure Row - Cross-surface - candidate - planned_source_target
+- `chevron_disclosure_row` - Chevron / Disclosure Row - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/chevron_disclosure_row.md`
   - json: `build/reports/frontend-authority-packets/chevron_disclosure_row.json`
-- `quietglass_wrapper` - QuietGlass Wrapper - Cross-surface - candidate - planned_source_target
+- `quietglass_wrapper` - QuietGlass Wrapper - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/quietglass_wrapper.md`
   - json: `build/reports/frontend-authority-packets/quietglass_wrapper.json`
-- `graphiterecess_base` - GraphiteRecess Base - Cross-surface - candidate - planned_source_target
+- `graphiterecess_base` - GraphiteRecess Base - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/graphiterecess_base.md`
   - json: `build/reports/frontend-authority-packets/graphiterecess_base.json`
-- `luminoustrace_state_line` - LuminousTrace State Line - Cross-surface - candidate - planned_source_target
+- `luminoustrace_state_line` - LuminousTrace State Line - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/luminoustrace_state_line.md`
   - json: `build/reports/frontend-authority-packets/luminoustrace_state_line.json`
-- `celestialfield_semantic_layer` - CelestialField Semantic Layer - Cross-surface - candidate - planned_source_target
+- `celestialfield_semantic_layer` - CelestialField Semantic Layer - Cross-surface - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/celestialfield_semantic_layer.md`
   - json: `build/reports/frontend-authority-packets/celestialfield_semantic_layer.json`
-- `first_run_root` - First Run Root - Onboarding - candidate - planned_source_target
+- `first_run_root` - First Run Root - Onboarding - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/first_run_root.md`
   - json: `build/reports/frontend-authority-packets/first_run_root.json`
-- `schedule_setup_prompt` - Schedule Setup Prompt - Onboarding - candidate - planned_source_target
+- `schedule_setup_prompt` - Schedule Setup Prompt - Onboarding - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/schedule_setup_prompt.md`
   - json: `build/reports/frontend-authority-packets/schedule_setup_prompt.json`
-- `planning_defaults_prompt` - Planning Defaults Prompt - Onboarding - candidate - planned_source_target
+- `planning_defaults_prompt` - Planning Defaults Prompt - Onboarding - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/planning_defaults_prompt.md`
   - json: `build/reports/frontend-authority-packets/planning_defaults_prompt.json`
-- `privacy_local_runtime_explanation` - Privacy / Local Runtime Explanation - Onboarding - candidate - planned_source_target
+- `privacy_local_runtime_explanation` - Privacy / Local Runtime Explanation - Onboarding - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/privacy_local_runtime_explanation.md`
   - json: `build/reports/frontend-authority-packets/privacy_local_runtime_explanation.json`
-- `capture_first_use_prompt` - Capture First-Use Prompt - Onboarding - candidate - planned_source_target
+- `capture_first_use_prompt` - Capture First-Use Prompt - Onboarding - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/capture_first_use_prompt.md`
   - json: `build/reports/frontend-authority-packets/capture_first_use_prompt.json`
-- `goals_first_use_prompt` - Goals First-Use Prompt - Onboarding - candidate - planned_source_target
+- `goals_first_use_prompt` - Goals First-Use Prompt - Onboarding - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/goals_first_use_prompt.md`
   - json: `build/reports/frontend-authority-packets/goals_first_use_prompt.json`
-- `time_first_use_prompt` - Time First-Use Prompt - Onboarding - candidate - planned_source_target
+- `time_first_use_prompt` - Time First-Use Prompt - Onboarding - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/time_first_use_prompt.md`
   - json: `build/reports/frontend-authority-packets/time_first_use_prompt.json`
-- `today_first_use_state` - Today First-Use State - Onboarding - candidate - planned_source_target
+- `today_first_use_state` - Today First-Use State - Onboarding - candidate - planned_source_target - instrument `shared_or_none`
+  - primitives: `none`
   - md: `build/reports/frontend-authority-packets/today_first_use_state.md`
   - json: `build/reports/frontend-authority-packets/today_first_use_state.json`

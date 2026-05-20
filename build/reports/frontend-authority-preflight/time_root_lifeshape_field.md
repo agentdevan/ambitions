@@ -24,9 +24,9 @@ Status: `green`
 - None
 
 ## Allowed Sources
-- Native/Ambitions/Features/Plan/PlanScreen.swift
-- Native/Ambitions/Features/Plan/PlanViewModel.swift
-- Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift
+- Native/Ambitions/Features/Time/TimeScreen.swift
+- Native/Ambitions/Features/Time/TimeViewModel.swift
+- Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift
 
 ## Issues
 - None

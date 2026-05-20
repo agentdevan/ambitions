@@ -11,10 +11,46 @@ Source relationship: `implemented_source_present`
 Implementation status: `implemented_unproven`
 Proof status: `no_proof_required`
 
+## Signature Visual Instrument
+- instrument id: `lifeshape_field_instrument`
+- instrument name: `LifeShape Field Instrument`
+- instrument required: `True`
+- implementation status: `intended_authority_pending_source_proof`
+- doctrine: `frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md`
+- matrix: `frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`
+- guidance: Use or create a dedicated visual-object SwiftUI component rather than burying this instrument inside a root screen file.
+
+### Shared Instrument Primitives
+- LivingBackground
+- LiveTelemetryPanel
+- MetricInstrumentChart
+- ContextualDrilldownHeader
+- FloatingGlassNav
+
+### Future Visual Object Source Files
+- Native/Ambitions/Features/Time/LifeShapeFieldView.swift
+- Native/Ambitions/Features/Time/LifeShapePressureMap.swift
+- Native/Ambitions/Features/Time/LifeShapeCapacityBars.swift
+- Native/Ambitions/Features/Time/LifeShapeDrilldownHeader.swift
+
+### Native SwiftUI Technique Candidates
+- Canvas
+- Shape
+- Path
+- GeometryReader
+- TimelineView
+
+### Forbidden Visual Regressions
+- calendar clone
+- market board copy
+- fake precision
+- silent reflow
+
 ## Source Candidates
-- Native/Ambitions/Features/Plan/PlanScreen.swift
-- Native/Ambitions/Features/Plan/PlanViewModel.swift
-- Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift
+- Native/Ambitions/Features/Time/TimeScreen.swift
+- Native/Ambitions/Features/Time/TimeViewModel.swift
+- Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift
+- Native/Ambitions/Features/Time/TimeFeatureService.swift
 
 ## Tokens
 - Sources/Theme/AmbitionObjectTokens.generated.swift
@@ -144,9 +180,9 @@ Proof status: `no_proof_required`
 
 ## Allowed Scope
 - source_targets:
-  - Native/Ambitions/Features/Plan/PlanScreen.swift
-  - Native/Ambitions/Features/Plan/PlanViewModel.swift
-  - Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift
+  - Native/Ambitions/Features/Time/TimeScreen.swift
+  - Native/Ambitions/Features/Time/TimeViewModel.swift
+  - Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift
 - docs:
   - frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md
   - frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md

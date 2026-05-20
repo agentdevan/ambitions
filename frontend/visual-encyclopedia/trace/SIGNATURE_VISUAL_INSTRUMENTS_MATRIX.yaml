@@ -125,12 +125,12 @@ signature_instruments:
     likely_source_files:
       - Native/Ambitions/Features/Time/TimeScreen.swift
       - Native/Ambitions/Features/Time/TimeViewModel.swift
-      - Native/Ambitions/Features/Plan/PlanFeatureService.swift
+      - Native/Ambitions/Features/Time/TimeFeatureService.swift
     future_source_files:
-      - Native/Ambitions/Features/Plan/LifeShapeFieldView.swift
-      - Native/Ambitions/Features/Plan/LifeShapePressureMap.swift
-      - Native/Ambitions/Features/Plan/LifeShapeCapacityBars.swift
-      - Native/Ambitions/Features/Plan/LifeShapeDrilldownHeader.swift
+      - Native/Ambitions/Features/Time/LifeShapeFieldView.swift
+      - Native/Ambitions/Features/Time/LifeShapePressureMap.swift
+      - Native/Ambitions/Features/Time/LifeShapeCapacityBars.swift
+      - Native/Ambitions/Features/Time/LifeShapeDrilldownHeader.swift
     forbidden_patterns:
       - calendar_clone
       - market_board_copying
@@ -212,13 +212,13 @@ signature_instruments:
       - LiveTelemetryPanel
     likely_source_files:
       - Native/Ambitions/Features/Capture/CaptureScreen.swift
-      - Native/Ambitions/Features/Captures/CaptureViewModel.swift
-      - Native/Ambitions/Features/Captures/CaptureFeatureService.swift
+      - Native/Ambitions/Features/Capture/CaptureViewModel.swift
+      - Native/Ambitions/Features/Capture/CaptureFeatureService.swift
     future_source_files:
-      - Native/Ambitions/Features/Captures/AtmosphereComposerView.swift
-      - Native/Ambitions/Features/Captures/CaptureRoutingField.swift
-      - Native/Ambitions/Features/Captures/CapturePlacementResolver.swift
-      - Native/Ambitions/Features/Captures/CaptureReceiptSurface.swift
+      - Native/Ambitions/Features/Capture/AtmosphereComposerView.swift
+      - Native/Ambitions/Features/Capture/CaptureRoutingField.swift
+      - Native/Ambitions/Features/Capture/CapturePlacementResolver.swift
+      - Native/Ambitions/Features/Capture/CaptureReceiptSurface.swift
     forbidden_patterns:
       - chatbot_thread
       - inbox_as_top_level_default
@@ -255,13 +255,13 @@ signature_instruments:
       - MetricInstrumentChart
     likely_source_files:
       - Native/Ambitions/Features/You/YouScreen.swift
-      - Native/Ambitions/Features/Profile/ProfileViewModel.swift
-      - Native/Ambitions/Features/Profile/ProfileFeatureService.swift
+      - Native/Ambitions/Features/You/YouViewModel.swift
+      - Native/Ambitions/Features/You/YouFeatureService.swift
     future_source_files:
-      - Native/Ambitions/Features/Profile/UserSystemProfileSurface.swift
-      - Native/Ambitions/Features/Profile/TrustConsoleView.swift
-      - Native/Ambitions/Features/Profile/AutomationLadderView.swift
-      - Native/Ambitions/Features/Profile/LocalRuntimeTrustMap.swift
+      - Native/Ambitions/Features/You/UserSystemProfileSurface.swift
+      - Native/Ambitions/Features/You/TrustConsoleView.swift
+      - Native/Ambitions/Features/You/AutomationLadderView.swift
+      - Native/Ambitions/Features/You/LocalRuntimeTrustMap.swift
     forbidden_patterns:
       - surveillance_posture
       - ai_theater

@@ -24,9 +24,9 @@ Status: `green`
 - None
 
 ## Allowed Sources
-- Native/Ambitions/Features/Captures/CapturesScreen.swift
-- Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift
-- Native/Ambitions/Features/Captures/CapturesViewModel.swift
+- Native/Ambitions/Features/Capture/CaptureScreen.swift
+- Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift
+- Native/Ambitions/Features/Capture/CaptureViewModel.swift
 
 ## Issues
 - None

@@ -20,9 +20,9 @@
       "build/reports/frontend-authority-packets/you_root_user_system_profile.json"
     ],
     "source_targets": [
-      "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-      "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-      "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouRootSurface.swift",
+      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
     ]
   },
   "batch_id": "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06",
@@ -135,9 +135,9 @@
       "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-      "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-      "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-      "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouRootSurface.swift",
+      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
     ],
     "gap_reason": "no active gap in the mature universe",
     "gap_status": "none",
@@ -153,9 +153,9 @@
       "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-      "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-      "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-      "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouRootSurface.swift",
+      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
     ],
     "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
     "patch_target_reason": "planned batch prompt evidence extracted from FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
@@ -168,9 +168,9 @@
     "proof_status": "no_proof_required",
     "recipe_file": "frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md",
     "source_file_candidates": [
-      "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-      "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-      "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouRootSurface.swift",
+      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
     ],
     "source_origin": "live_repo_source",
     "source_relationship": "implemented_source_present",
@@ -304,10 +304,51 @@
     "python3 scripts/ambitions-frontend-proof-contract-check.py",
     "python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py"
   ],
+  "signature_visual_instrument": {
+    "dedicated_visual_object_guidance": "Use or create a dedicated visual-object SwiftUI component rather than burying this instrument inside a root screen file.",
+    "doctrine_path": "frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md",
+    "forbidden_visual_regressions": [
+      "surveillance posture",
+      "AI theater",
+      "hidden learning claims",
+      "generic settings dump"
+    ],
+    "future_visual_object_source_files": [
+      "Native/Ambitions/Features/You/UserSystemProfileSurface.swift",
+      "Native/Ambitions/Features/You/TrustConsoleView.swift",
+      "Native/Ambitions/Features/You/AutomationLadderView.swift",
+      "Native/Ambitions/Features/You/LocalRuntimeTrustMap.swift"
+    ],
+    "instrument_implementation_status": "intended_authority_pending_source_proof",
+    "instrument_required": true,
+    "likely_source_files": [
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouViewModel.swift",
+      "Native/Ambitions/Features/You/YouFeatureService.swift"
+    ],
+    "matrix_path": "frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml",
+    "primary_object": "User System Profile",
+    "shared_instrument_primitives": [
+      "ContextualDrilldownHeader",
+      "LiveTelemetryPanel",
+      "FloatingGlassNav",
+      "MetricInstrumentChart"
+    ],
+    "signature_instrument_id": "user_system_profile_instrument",
+    "signature_instrument_name": "User System Profile Instrument",
+    "swiftui_technique_candidates": [
+      "GeometryReader",
+      "state-driven materials",
+      "contextual headers",
+      "semantic metric panels"
+    ]
+  },
   "source_candidates": [
-    "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-    "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-    "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+    "Native/Ambitions/Features/You/YouScreen.swift",
+    "Native/Ambitions/Features/You/YouRootSurface.swift",
+    "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift",
+    "Native/Ambitions/Features/You/YouViewModel.swift",
+    "Native/Ambitions/Features/You/YouFeatureService.swift"
   ],
   "source_link_row": {
     "destination": "You",
@@ -317,13 +358,13 @@
     "recipe_id": "you_root_user_system_profile",
     "recipe_path": "frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md",
     "shared_components": [
-      "Native/Ambitions/Features/Profile/ProfileAvailabilityCenterCard.swift",
+      "Native/Ambitions/Features/You/YouAvailabilityCenterCard.swift",
       "Sources/Components/PersonalSystemCenterPrimitives.swift"
     ],
     "source_file_candidates": [
-      "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-      "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-      "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouRootSurface.swift",
+      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
     ],
     "source_link_confidence": "linked"
   },
@@ -544,9 +585,9 @@
       "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-      "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-      "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-      "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouRootSurface.swift",
+      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
     ],
     "gap_reason": "no active gap in the mature universe",
     "gap_status": "none",
@@ -565,9 +606,9 @@
       "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-      "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-      "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-      "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouRootSurface.swift",
+      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
     ],
     "parent_surface": "You Root",
     "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
@@ -586,9 +627,9 @@
     "recipe_inventory_id": "you_root_user_system_profile",
     "recipe_status": "intended_canon",
     "source_file_candidates": [
-      "Native/Ambitions/Features/Profile/ProfileScreen.swift",
-      "Native/Ambitions/Features/Profile/ProfileRootSurface.swift",
-      "Native/Ambitions/Features/Profile/ProfileTrustHistoryProjector.swift"
+      "Native/Ambitions/Features/You/YouScreen.swift",
+      "Native/Ambitions/Features/You/YouRootSurface.swift",
+      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
     ],
     "source_origin": "live_repo_source",
     "source_relationship": "implemented_source_present",

@@ -7,6 +7,10 @@ Surface count: `159`
 - implementation status: {'canon_only_pending_lock': 105, 'implemented_unproven': 6, 'planned': 48}
 - proof status: {'not_in_scope': 159}
 - destination counts: {'Capture': 17, 'Cross-surface': 39, 'Goals': 19, 'Onboarding': 8, 'Time': 29, 'Today': 28, 'You': 19}
+- signature instruments: {'atmosphere_composer_instrument': 17, 'constellation_atlas_instrument': 19, 'lifeshape_field_instrument': 28, 'reality_meridian_instrument': 28, 'shared_or_none': 48, 'user_system_profile_instrument': 19}
+
+## Missing Top-Level Instruments
+- `None`
 
 ## Missing Receipts
 - `global_app_shell`

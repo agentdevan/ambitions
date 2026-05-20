@@ -150,7 +150,7 @@ def write_generated_swift_files(bindings: list[dict[str, Any]]) -> list[str]:
             f"        .{surface_case}: AmbitionsFrontendAuthorityRecord(surfaceID: .{surface_case}, recipeID: .{recipe_case}, destination: .{destination_case}, primaryObject: {swift_string(binding['primary_object'])}, maturityTier: {swift_string(binding['maturity_tier'])}, sourceRelationship: {swift_string(binding['source_relationship'])}, proofStatus: {swift_string(binding['proof_status'])}, signatureInstrumentID: {instrument_expr}, instrumentImplementationStatus: {swift_string(binding.get('instrument_implementation_status'))})"
         )
     destination_lines.extend(f"{line}{',' if index < len(record_lines) - 1 else ''}" for index, line in enumerate(record_lines))
-    destination_lines.extend(["    ]", "}", ""])
+    destination_lines.extend(["    ]", "}"])
 
     generated_paths = []
     path_map = {

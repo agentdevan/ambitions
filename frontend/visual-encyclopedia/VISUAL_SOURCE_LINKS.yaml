@@ -682,7 +682,7 @@
         "Native/Ambitions/Features/Capture/CaptureViewModel.swift"
       ],
       "shared_components": [
-        "Native/Ambitions/Features/Captures/CaptureDraftRoutePreviewCard.swift",
+        "Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift",
         "Sources/Components/TrustReceiptLayerPrimitives.swift"
       ],
       "source_link_confidence": "linked",
@@ -876,8 +876,8 @@
         "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
       ],
       "shared_components": [
-        "Native/Ambitions/Features/Plan/PlanLifeSuiteCard.swift",
-        "Native/Ambitions/Features/Plan/PlanReflowDecisionCard.swift"
+        "Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift",
+        "Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift"
       ],
       "source_link_confidence": "linked",
       "notes": "Time source is linked to the current Plan compatibility seam; this is a source-location fact, not active IA language or final route proof.",
@@ -1202,7 +1202,7 @@
         "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift"
       ],
       "shared_components": [
-        "Native/Ambitions/Features/Profile/ProfileAvailabilityCenterCard.swift",
+        "Native/Ambitions/Features/You/YouAvailabilityCenterCard.swift",
         "Sources/Components/PersonalSystemCenterPrimitives.swift"
       ],
       "source_link_confidence": "linked",

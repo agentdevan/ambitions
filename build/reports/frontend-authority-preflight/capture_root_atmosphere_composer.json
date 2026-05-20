@@ -1,8 +1,8 @@
 {
   "allowed_sources": [
-    "Native/Ambitions/Features/Captures/CapturesScreen.swift",
-    "Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift",
-    "Native/Ambitions/Features/Captures/CapturesViewModel.swift"
+    "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+    "Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift",
+    "Native/Ambitions/Features/Capture/CaptureViewModel.swift"
   ],
   "batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
   "checks": {

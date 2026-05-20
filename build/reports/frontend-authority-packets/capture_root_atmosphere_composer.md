@@ -11,10 +11,44 @@ Source relationship: `implemented_source_present`
 Implementation status: `implemented_unproven`
 Proof status: `no_proof_required`
 
+## Signature Visual Instrument
+- instrument id: `atmosphere_composer_instrument`
+- instrument name: `Atmosphere Composer Instrument`
+- instrument required: `True`
+- implementation status: `intended_authority_pending_source_proof`
+- doctrine: `frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md`
+- matrix: `frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`
+- guidance: Use or create a dedicated visual-object SwiftUI component rather than burying this instrument inside a root screen file.
+
+### Shared Instrument Primitives
+- LivingBackground
+- FloatingGlassNav
+- CinematicObjectHero
+- LiveTelemetryPanel
+
+### Future Visual Object Source Files
+- Native/Ambitions/Features/Capture/AtmosphereComposerView.swift
+- Native/Ambitions/Features/Capture/CaptureRoutingField.swift
+- Native/Ambitions/Features/Capture/CapturePlacementResolver.swift
+- Native/Ambitions/Features/Capture/CaptureReceiptSurface.swift
+
+### Native SwiftUI Technique Candidates
+- Canvas
+- GeometryReader
+- matchedGeometryEffect
+- state-driven materials
+
+### Forbidden Visual Regressions
+- assistant-thread layout
+- inbox as top-level default
+- generic notes app
+- feed UI
+
 ## Source Candidates
-- Native/Ambitions/Features/Captures/CapturesScreen.swift
-- Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift
-- Native/Ambitions/Features/Captures/CapturesViewModel.swift
+- Native/Ambitions/Features/Capture/CaptureScreen.swift
+- Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift
+- Native/Ambitions/Features/Capture/CaptureViewModel.swift
+- Native/Ambitions/Features/Capture/CaptureFeatureService.swift
 
 ## Tokens
 - Sources/Theme/AmbitionObjectTokens.generated.swift
@@ -144,9 +178,9 @@ Proof status: `no_proof_required`
 
 ## Allowed Scope
 - source_targets:
-  - Native/Ambitions/Features/Captures/CapturesScreen.swift
-  - Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift
-  - Native/Ambitions/Features/Captures/CapturesViewModel.swift
+  - Native/Ambitions/Features/Capture/CaptureScreen.swift
+  - Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift
+  - Native/Ambitions/Features/Capture/CaptureViewModel.swift
 - docs:
   - frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md
   - frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md

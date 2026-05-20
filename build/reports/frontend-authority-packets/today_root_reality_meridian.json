@@ -313,10 +313,53 @@
     "python3 scripts/ambitions-frontend-proof-contract-check.py",
     "python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py"
   ],
+  "signature_visual_instrument": {
+    "dedicated_visual_object_guidance": "Use or create a dedicated visual-object SwiftUI component rather than burying this instrument inside a root screen file.",
+    "doctrine_path": "frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md",
+    "forbidden_visual_regressions": [
+      "generic task list",
+      "generic dashboard",
+      "disconnected card stack",
+      "shame language",
+      "opaque model-certainty language"
+    ],
+    "future_visual_object_source_files": [
+      "Native/Ambitions/Features/Today/RealityMeridianSurface.swift",
+      "Native/Ambitions/Features/Today/RealityMeridianLiveStatePanel.swift",
+      "Native/Ambitions/Features/Today/RealityMeridianContinuitySpine.swift"
+    ],
+    "instrument_implementation_status": "intended_authority_pending_source_proof",
+    "instrument_required": true,
+    "likely_source_files": [
+      "Native/Ambitions/Features/Today/TodayScreen.swift",
+      "Native/Ambitions/Features/Today/TodayDayRailPanels.swift",
+      "Native/Ambitions/Features/Today/TodayViewModel.swift",
+      "Native/Ambitions/Features/Today/TodayExecutionViewState.swift"
+    ],
+    "matrix_path": "frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml",
+    "primary_object": "Reality Meridian",
+    "shared_instrument_primitives": [
+      "LivingBackground",
+      "LiveTelemetryPanel",
+      "ContextualDrilldownHeader",
+      "MetricInstrumentChart"
+    ],
+    "signature_instrument_id": "reality_meridian_instrument",
+    "signature_instrument_name": "Reality Meridian Instrument",
+    "swiftui_technique_candidates": [
+      "Canvas",
+      "Shape",
+      "Path",
+      "GeometryReader",
+      "TimelineView",
+      "matchedGeometryEffect"
+    ]
+  },
   "source_candidates": [
     "Native/Ambitions/Features/Today/TodayScreen.swift",
     "Native/Ambitions/Features/Today/TodayViewModel.swift",
-    "Native/Ambitions/Features/Today/TodayExecutionViewState.swift"
+    "Native/Ambitions/Features/Today/TodayExecutionViewState.swift",
+    "Native/Ambitions/Features/Today/TodayDayRailPanels.swift"
   ],
   "source_link_row": {
     "destination": "Today",

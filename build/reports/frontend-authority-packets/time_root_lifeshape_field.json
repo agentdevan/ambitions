@@ -20,9 +20,9 @@
       "build/reports/frontend-authority-packets/time_root_lifeshape_field.json"
     ],
     "source_targets": [
-      "Native/Ambitions/Features/Plan/PlanScreen.swift",
-      "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-      "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
     ]
   },
   "batch_id": "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06",
@@ -135,9 +135,9 @@
       "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-      "Native/Ambitions/Features/Plan/PlanScreen.swift",
-      "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-      "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
     ],
     "gap_reason": "no active gap in the mature universe",
     "gap_status": "none",
@@ -153,9 +153,9 @@
       "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-      "Native/Ambitions/Features/Plan/PlanScreen.swift",
-      "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-      "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
     ],
     "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
     "patch_target_reason": "planned batch prompt evidence extracted from FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
@@ -168,9 +168,9 @@
     "proof_status": "no_proof_required",
     "recipe_file": "frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md",
     "source_file_candidates": [
-      "Native/Ambitions/Features/Plan/PlanScreen.swift",
-      "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-      "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
     ],
     "source_origin": "live_repo_source",
     "source_relationship": "implemented_source_present",
@@ -304,10 +304,52 @@
     "python3 scripts/ambitions-frontend-proof-contract-check.py",
     "python3 scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py"
   ],
+  "signature_visual_instrument": {
+    "dedicated_visual_object_guidance": "Use or create a dedicated visual-object SwiftUI component rather than burying this instrument inside a root screen file.",
+    "doctrine_path": "frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md",
+    "forbidden_visual_regressions": [
+      "calendar clone",
+      "market board copy",
+      "fake precision",
+      "silent reflow"
+    ],
+    "future_visual_object_source_files": [
+      "Native/Ambitions/Features/Time/LifeShapeFieldView.swift",
+      "Native/Ambitions/Features/Time/LifeShapePressureMap.swift",
+      "Native/Ambitions/Features/Time/LifeShapeCapacityBars.swift",
+      "Native/Ambitions/Features/Time/LifeShapeDrilldownHeader.swift"
+    ],
+    "instrument_implementation_status": "intended_authority_pending_source_proof",
+    "instrument_required": true,
+    "likely_source_files": [
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeFeatureService.swift"
+    ],
+    "matrix_path": "frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml",
+    "primary_object": "LifeShape Field",
+    "shared_instrument_primitives": [
+      "LivingBackground",
+      "LiveTelemetryPanel",
+      "MetricInstrumentChart",
+      "ContextualDrilldownHeader",
+      "FloatingGlassNav"
+    ],
+    "signature_instrument_id": "lifeshape_field_instrument",
+    "signature_instrument_name": "LifeShape Field Instrument",
+    "swiftui_technique_candidates": [
+      "Canvas",
+      "Shape",
+      "Path",
+      "GeometryReader",
+      "TimelineView"
+    ]
+  },
   "source_candidates": [
-    "Native/Ambitions/Features/Plan/PlanScreen.swift",
-    "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-    "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+    "Native/Ambitions/Features/Time/TimeScreen.swift",
+    "Native/Ambitions/Features/Time/TimeViewModel.swift",
+    "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
+    "Native/Ambitions/Features/Time/TimeFeatureService.swift"
   ],
   "source_link_row": {
     "destination": "Time",
@@ -317,13 +359,13 @@
     "recipe_id": "time_root_lifeshape_field",
     "recipe_path": "frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md",
     "shared_components": [
-      "Native/Ambitions/Features/Plan/PlanLifeSuiteCard.swift",
-      "Native/Ambitions/Features/Plan/PlanReflowDecisionCard.swift"
+      "Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift",
+      "Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift"
     ],
     "source_file_candidates": [
-      "Native/Ambitions/Features/Plan/PlanScreen.swift",
-      "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-      "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
     ],
     "source_link_confidence": "linked"
   },
@@ -544,9 +586,9 @@
       "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-      "Native/Ambitions/Features/Plan/PlanScreen.swift",
-      "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-      "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
     ],
     "gap_reason": "no active gap in the mature universe",
     "gap_status": "none",
@@ -565,9 +607,9 @@
       "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-      "Native/Ambitions/Features/Plan/PlanScreen.swift",
-      "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-      "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
     ],
     "parent_surface": "Time Root",
     "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
@@ -586,9 +628,9 @@
     "recipe_inventory_id": "time_root_lifeshape_field",
     "recipe_status": "intended_canon",
     "source_file_candidates": [
-      "Native/Ambitions/Features/Plan/PlanScreen.swift",
-      "Native/Ambitions/Features/Plan/PlanViewModel.swift",
-      "Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift"
+      "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "Native/Ambitions/Features/Time/TimeViewModel.swift",
+      "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
     ],
     "source_origin": "live_repo_source",
     "source_relationship": "implemented_source_present",

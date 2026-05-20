@@ -132,8 +132,19 @@
     "time_root_lifeshape_field",
     "you_root_user_system_profile"
   ],
+  "instrument_implementation_status_counts": {
+    "intended_authority_pending_source_proof": 111,
+    "not_required_for_this_surface": 45,
+    "shared_primitive_required_pending_source_proof": 3
+  },
+  "next_recommended_instrument_implementation": [
+    "today_root_reality_meridian",
+    "goals_root_constellation_atlas",
+    "capture_root_atmosphere_composer",
+    "time_root_lifeshape_field",
+    "you_root_user_system_profile"
+  ],
   "next_recommended_surfaces": [
-    "global_app_shell",
     "today_root_reality_meridian",
     "goals_root_constellation_atlas",
     "capture_root_atmosphere_composer",
@@ -184,6 +195,14 @@
     "not_in_scope": 159
   },
   "proven_surfaces": [],
+  "signature_instrument_counts": {
+    "atmosphere_composer_instrument": 17,
+    "constellation_atlas_instrument": 19,
+    "lifeshape_field_instrument": 28,
+    "reality_meridian_instrument": 28,
+    "shared_or_none": 48,
+    "user_system_profile_instrument": 19
+  },
   "source_approximation_surfaces": [],
   "source_linked_surfaces": [
     "global_app_shell",
@@ -363,5 +382,6 @@
     "candidate": 45
   },
   "top_drift_findings": [],
+  "top_level_surfaces_missing_instrument": [],
   "total_mature_surfaces": 159
 }

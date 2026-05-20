@@ -17,13 +17,56 @@ Preflight path: `build/reports/frontend-authority-preflight/today_root_reality_m
 - `docs/truth/CODEX_PROCESS_TRUTH.md`
 - `frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md`
 - `frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md`
+- `frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md`
+- `frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`
 - `frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md`
 - `frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md`
+
+## Signature Visual Instrument Requirements
+- owning instrument id: `reality_meridian_instrument`
+- owning instrument name: `Reality Meridian Instrument`
+- instrument required: `True`
+- instrument implementation status before this batch: `intended_authority_pending_source_proof`
+- guidance: Use or create a dedicated visual-object SwiftUI component rather than burying this instrument inside a root screen file.
+
+### Shared Instrument Primitives
+- `LivingBackground`
+- `LiveTelemetryPanel`
+- `ContextualDrilldownHeader`
+- `MetricInstrumentChart`
+
+### Future Dedicated Visual Object Files
+- `Native/Ambitions/Features/Today/RealityMeridianSurface.swift`
+- `Native/Ambitions/Features/Today/RealityMeridianLiveStatePanel.swift`
+- `Native/Ambitions/Features/Today/RealityMeridianContinuitySpine.swift`
+
+### Native SwiftUI Technique Candidates
+- `Canvas`
+- `Shape`
+- `Path`
+- `GeometryReader`
+- `TimelineView`
+- `matchedGeometryEffect`
+
+### Visual Regression Guardrails
+- `generic task list`
+- `generic dashboard`
+- `disconnected card stack`
+- `shame language`
+- `opaque model-certainty language`
+
+## Instrument Implementation Rules
+- Do not implement this surface as a generic card stack, static form, or list-only screen when it owns a signature instrument.
+- Prefer a dedicated SwiftUI visual-object component file for high-end instruments instead of burying the visual object inside the root screen.
+- Back the instrument with typed ViewState and preview fixtures.
+- Use AmbitionTheme and generated tokens; do not introduce hardcoded visual values when tokens exist.
+- Synthesize the instrument principles from the encyclopedia. Do not copy external app layouts, wording, brand marks, or mechanics.
 
 ## Allowed Source Targets
 - `Native/Ambitions/Features/Today/TodayScreen.swift`
 - `Native/Ambitions/Features/Today/TodayViewModel.swift`
 - `Native/Ambitions/Features/Today/TodayExecutionViewState.swift`
+- `Native/Ambitions/Features/Today/TodayDayRailPanels.swift`
 
 ## Forbidden Scope
 - unrelated surfaces
@@ -38,6 +81,7 @@ Preflight path: `build/reports/frontend-authority-preflight/today_root_reality_m
 ## Source Binding Requirements
 - Use only the source files declared by the packet or explicitly extend scope with a reason in the receipt.
 - Do not treat packet generation as implementation proof.
+- Record instrument source binding status in the implementation receipt.
 
 ## Token and Contract Requirements
 - `Sources/Theme/AmbitionObjectTokens.generated.swift`
@@ -68,14 +112,17 @@ Preflight path: `build/reports/frontend-authority-preflight/today_root_reality_m
 ## Implementation Receipt Requirements
 - Emit a receipt only after the changed files, proof, and drift results are known.
 - Record known gaps explicitly.
+- Include signature_instrument_id, shared_instrument_primitives, visual_object_source_file, and instrument_implementation_status.
 
 ## Drift Check Requirements
 - Run the frontend drift checker after the change set lands.
 - Keep the active IA labels exact.
+- Ensure the instrument-owned surface does not regress to generic cards/lists/forms.
 
 ## Validation Commands
 - `git diff --check`
 - `python3 scripts/ambitions-frontend-authority-preflight.py --surface today_root_reality_meridian`
+- `python3 scripts/ambitions-signature-visual-instruments-check.py`
 - `python3 scripts/ambitions-frontend-source-bindings.py`
 - `python3 scripts/ambitions-frontend-drift-check.py`
 - `python3 scripts/ambitions-frontend-implementation-dashboard.py`
@@ -89,6 +136,7 @@ Preflight path: `build/reports/frontend-authority-preflight/today_root_reality_m
 - Do not add chatbot UI.
 - Do not reintroduce Plan as a top-level destination.
 - Do not claim implementation, accessibility, device, or release proof without evidence.
+- Do not ship a generic card/list-only surface when this packet declares an owning signature instrument.
 
 ## Rollback Expectations
 - Restore only the files touched by the batch.
