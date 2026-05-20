@@ -20,6 +20,10 @@ Each contract must define:
 - migration/versioning expectations
 - rollback considerations
 
+Contract ownership rule:
+- `runtime_identity` names the authoritative runtime owner of the packet or state being projected.
+- `projection_identity` names the renderer only; it must not imply selection or mutation authority.
+
 ## Contract: StartHereDecisionPacket
 - owner: Private Life Runtime
 - consumer: Start Here UI + Step Detail
@@ -45,7 +49,7 @@ Each contract must define:
 - schema_maturity: L2
 - required_fields: [packet_id, decision_summary, evidence_snippet, next_step_id]
 - forbidden_fields: [opaque_ai_reasoning, raw_model_confidence]
-- runtime_identity: StartHereDecisionPacket
+- runtime_identity: PrivateLifeRuntime
 - projection_identity: TodaySurfaceRenderer
 - freshness_semantics: shows source freshness badge and degraded states
 - proof_semantics: proof_links + receipt_summary

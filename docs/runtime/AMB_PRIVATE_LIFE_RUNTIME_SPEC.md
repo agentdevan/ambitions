@@ -16,13 +16,24 @@
 - local learning state
 - privacy-sensitive memory state
 
+Ownership invariants:
+- Start Here selection is made by the runtime, not by projection code.
+- source freshness is computed and carried by the runtime, not synthesized by UI.
+- not-chosen reasons are emitted by the runtime as part of the decision packet.
+- replay identity is runtime-owned and stable across renderers.
+- runtime unavailable and continuity conflict states are runtime-authored states.
+- closure mutation is allowed only through `CommandPipeline`.
+- projections may render repair and refresh affordances, but they do not rank, override, or silently mutate runtime decisions.
+
 ## Maturity levels
 
-- **L0:** contract-defined data model and state scaffolding.
-- **L1:** deterministic ranking + freshness gating in place.
-- **L2:** replayable recommendations and not-chosen reasons for every decision.
-- **L3:** continuity-aware closure and recovery-first mutation.
-- **L4:** integrated offline, conflict, and repair loops with proven receipts.
+| Level | Required runtime entities | Proof expectation |
+| --- | --- | --- |
+| L0 | `PrivateLifeRuntime`, `RuntimeSourceTruth`, `CommandPipeline`, `RuntimeDecisionIR` | contract-defined data model, state scaffolding, and ownership boundaries exist |
+| L1 | `ConstraintFirewall`, `RuntimeCritic`, `SourceFreshness`, `DecisionReplayContract` | deterministic ranking with freshness gating and stable replay identity |
+| L2 | `TrustReceipt`, `NotChosenReason`, `CandidateRankingLedger`, `RealitySignature` | replayable recommendations and explicit not-chosen reasons for every decision |
+| L3 | `ClosureEngine`, `ContinuityReceipt`, `RuntimeUnavailableState` | continuity-aware closure with recovery-first mutation and explicit unavailable handling |
+| L4 | `LocalMemoryControls`, `PredictionCache`, `FrictionMap` | offline, conflict, and repair loops remain inspectable and receipt-backed |
 
 ## Core entities
 
@@ -59,6 +70,7 @@
 - `RuntimeCritic` can down-rank or reject unsafe/low-believability candidates.
 - `ClosureEngine` only mutates via `CommandPipeline` and emits `TrustReceipt` and `ContinuityReceipt` entries.
 - `DecisionReplayContract` guarantees replay id, actor, and source snapshot.
+- Projection surfaces consume runtime packets and may expose refresh or repair controls, but they do not become decision authorities.
 
 ## Unavailable and stale state behavior
 
