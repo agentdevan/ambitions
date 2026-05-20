@@ -100,6 +100,12 @@ struct ProgressiveIntelligenceOnboardingView: View {
             )
 
             copySectionCard(
+                title: "What is known now",
+                subtitle: "The first-run path only needs one real thing and one clear next move.",
+                rows: ActivationContract.onboardingKnownNowRows
+            )
+
+            copySectionCard(
                 title: "Setup boundaries",
                 subtitle: "These parts stay optional until you need them.",
                 rows: ActivationContract.onboardingBoundaryRows

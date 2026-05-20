@@ -64,20 +64,21 @@ struct ActivationTrustMessage: Sendable, Equatable {
 enum ActivationContract {
     static let firstTenMinutesPromise = "Start with one real thing. Ambitions turns it into one doable step, shows why it matters, offers a safe fallback, and stays honest about what is local."
 
-    static let orientationTitle = "Ambitions starts with one real thing"
-    static let orientationSubtitle = "Today, Goals, Capture, Time, and You are the five primary objects. You only need one real thing to begin, and setup stays manual-first."
+    static let orientationTitle = "Ambitions is a life organization system"
+    static let orientationSubtitle = "It works through five primary objects: Today, Goals, Capture, Time, and You. You only need one real thing to begin, and setup stays manual-first."
 
-    static let startTitle = "Choose the first honest action"
-    static let startSubtitle = "Create one specific goal, capture one loose thought, or open Today. Ambitions keeps the first step manual and local."
+    static let startTitle = "Choose one honest first action"
+    static let startSubtitle = "Create one specific goal, capture one loose thought, or open Today. Ambitions keeps the first step manual, local, and free of setup noise."
 
     static let trustMessage = ActivationTrustMessage(
         title: "Your work starts locally",
-        explanation: "No Ambitions account, cloud provider, calendar connection, or external setup is required to begin. Permissions stay optional and contextual.",
+        explanation: "No Ambitions account, cloud provider, calendar connection, or external setup is required to begin. Permissions stay optional and contextual, and your first actions stay on-device.",
         rows: [
             ActivationCopyRow(title: "No account required", detail: "There is no in-app account setup on the current first-run path.", icon: "person.crop.circle.badge.xmark"),
             ActivationCopyRow(title: "Starts locally", detail: "Goals, captures, and planning signals begin on this device first.", icon: "lock.shield"),
             ActivationCopyRow(title: "Manual first", detail: "Ambitions asks you to choose one real thing before it suggests more structure.", icon: "hand.tap"),
-            ActivationCopyRow(title: "Optional connections", detail: "Calendar and notifications are useful later, but neither is required to start.", icon: "bell.badge")
+            ActivationCopyRow(title: "Optional connections", detail: "Calendar and notifications are useful later, but neither is required to start.", icon: "bell.badge"),
+            ActivationCopyRow(title: "Trust stays local", detail: "Local data keeps the first run inspectable, reversible, and honest about what is ready.", icon: "checkmark.shield")
         ]
     )
 
@@ -87,6 +88,12 @@ enum ActivationContract {
         ActivationCopyRow(title: "Capture", detail: "Put messy life here first so nothing needs to be solved immediately.", icon: AppTab.captures.systemImage),
         ActivationCopyRow(title: "Time", detail: "Shape the week only when something real asks for room.", icon: AppTab.plan.systemImage),
         ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AppTab.profile.systemImage)
+    ]
+
+    static let onboardingKnownNowRows: [ActivationCopyRow] = [
+        ActivationCopyRow(title: "One real thing is enough", detail: "You can start with one goal, one capture, or one Today step.", icon: "circle"),
+        ActivationCopyRow(title: "The objects do the work", detail: "Today, Goals, Capture, Time, and You are the places Ambitions uses to organize life.", icon: "square.grid.2x2"),
+        ActivationCopyRow(title: "Setup can wait", detail: "Anything that needs calendar access, notifications, or more structure can stay off the first-run path.", icon: "hourglass")
     ]
 
     static let onboardingBoundaryRows: [ActivationCopyRow] = [

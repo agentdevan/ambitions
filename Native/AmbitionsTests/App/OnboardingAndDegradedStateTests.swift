@@ -70,11 +70,12 @@ final class OnboardingAndDegradedStateTests: XCTestCase {
     }
 
     func testOnboardingCopyFramesPrimaryObjectsLocalTrustAndOptionalSetup() {
-        XCTAssertTrue(ActivationContract.orientationTitle.contains("real thing"))
+        XCTAssertTrue(ActivationContract.orientationTitle.contains("life organization system"))
         XCTAssertTrue(ActivationContract.orientationSubtitle.contains("Today, Goals, Capture, Time, and You"))
         XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(ActivationContract.onboardingKnownNowRows.map(\.title), ["One real thing is enough", "The objects do the work", "Setup can wait"])
         XCTAssertEqual(ActivationContract.onboardingBoundaryRows.map(\.title), ["Manual first", "Calendar optional", "Notifications optional"])
-        XCTAssertTrue(ActivationContract.trustMessage.explanation.contains("optional"))
+        XCTAssertTrue(ActivationContract.trustMessage.explanation.contains("on-device"))
         XCTAssertTrue(ActivationContract.promise(for: .firstTodayContract).explanation.contains("doable step"))
     }
 
