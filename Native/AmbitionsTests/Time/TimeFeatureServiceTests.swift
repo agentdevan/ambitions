@@ -53,7 +53,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.timelineStrip.items.isEmpty)
     }
 
-    func testF10PlanLifeSuiteProjectsDayWeekAndLifeShapeWithoutCalendarClone() async throws {
+    func testF10TimeLifeSuiteProjectsDayWeekAndLifeShapeWithoutCalendarClone() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
         _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
@@ -76,7 +76,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.lifeSuite.trustLabel.localizedCaseInsensitiveContains("sync"))
     }
 
-    func testSI08LifeShapeMapItemsExposeCapacityPressureAndNoMutationBoundary() async throws {
+    func testSI08LifeShapeFieldItemsExposeCapacityPressureAndNoMutationBoundary() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([
             makeWeekVisibleGoal(id: "shape-tight-1", title: "Tight one"),
@@ -85,13 +85,13 @@ final class TimeFeatureServiceTests: XCTestCase {
         ])
         let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
 
-        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeMapItem.init(shape:))
+        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
         let weekItem = try XCTUnwrap(items.first { $0.id == TimeLifeSuiteShapeKind.week.rawValue })
 
         XCTAssertEqual(items.map(\.accessibilityIdentifier), [
-            "plan.life-shape-map.day_shape",
-            "plan.life-shape-map.week_shape",
-            "plan.life-shape-map.life_shape"
+            "time.life-shape-field.day_shape",
+            "time.life-shape-field.week_shape",
+            "time.life-shape-field.life_shape"
         ])
         XCTAssertGreaterThan(weekItem.pressureLevel, 0.45)
         XCTAssertTrue(weekItem.capacityLabel.localizedCaseInsensitiveContains("pressure"))
@@ -101,7 +101,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(items.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("calendar grid"))
     }
 
-    func testFCP14LifeShapeMapItemsExposeContourPocketFieldAndRidgePrimitives() async throws {
+    func testFCP14LifeShapeFieldItemsExposeContourPocketFieldAndRidgePrimitives() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([
             makeWeekVisibleGoal(id: "contour-tight-1", title: "Contour one"),
@@ -109,7 +109,7 @@ final class TimeFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "contour-tight-3", title: "Contour three")
         ])
         let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
-        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeMapItem.init(shape:))
+        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
         let combined = items.map(\.accessibilityLabel).joined(separator: " ")
 
         XCTAssertEqual(items.count, 3)
@@ -237,7 +237,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.primaryAction.kind, .shapeWeek)
     }
 
-    func testHabitLikeGoalsRemainRepresentedUnderPlanSupportLoops() async throws {
+    func testHabitLikeGoalsRemainRepresentedUnderTimeSupportLoops() async throws {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
@@ -252,7 +252,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         #endif
     }
 
-    func testD16RitualRouteIsPlanOwnedAndDoesNotRestoreStandaloneHabitsCopy() async throws {
+    func testD16RitualRouteIsTimeOwnedAndDoesNotRestoreStandaloneHabitsCopy() async throws {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
@@ -261,7 +261,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadTimeDashboard(now: fixedDate)
         let ritualDestination = try XCTUnwrap(dashboard.secondaryDestinations.first(where: { $0.timeRoute == .habits }))
         let ritualLane = try XCTUnwrap(dashboard.resilience.lanes.first(where: { $0.timeRoute == .habits }))
-        let planCopy = [
+        let timeCopy = [
             ritualDestination.title,
             ritualDestination.detail,
             ritualLane.title,
@@ -272,8 +272,8 @@ final class TimeFeatureServiceTests: XCTestCase {
 
         XCTAssertEqual(ritualDestination.title, "Rituals")
         XCTAssertEqual(ritualLane.title, "Rituals")
-        XCTAssertTrue(planCopy.localizedCaseInsensitiveContains("ritual"))
-        XCTAssertFalse(planCopy.localizedCaseInsensitiveContains("habit"))
+        XCTAssertTrue(timeCopy.localizedCaseInsensitiveContains("ritual"))
+        XCTAssertFalse(timeCopy.localizedCaseInsensitiveContains("habit"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
@@ -297,7 +297,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.returnActionTitle, "Return to Time")
     }
 
-    func testPK21TimeFeatureServiceMirrorsPlanLifeShapeDashboardSemantics() async throws {
+    func testPK21TimeFeatureServiceMirrorsTimeLifeShapeDashboardSemantics() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([
             makeWeekVisibleGoal(id: "pk21-life-1", title: "Life one"),
@@ -439,7 +439,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertEqual(source.loadSnapshotCount, 1)
     }
 
-    func testDemoPlanProtectActionRemainsActionable() async throws {
+    func testDemoTimeProtectActionRemainsActionable() async throws {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
@@ -454,10 +454,10 @@ final class TimeFeatureServiceTests: XCTestCase {
         #endif
     }
 
-    func testPlanCalendarAwareActionIsPlanOwnedAndWritesPrivacyLedger() async throws {
+    func testTimeCalendarAwareActionIsTimeOwnedAndWritesPrivacyLedger() async throws {
         let ledger = InMemoryEventLedgerRepository()
         let repositories = try await makeRepositories(eventLedger: ledger)
-        let calendar = RecordingPlanCalendarRealityService()
+        let calendar = RecordingTimeCalendarRealityService()
         let service = RepositoryBackedTimeService(
             repositories: repositories,
             calendarRealityService: calendar
@@ -495,7 +495,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.calendarBoundary.detail.lowercased().contains("export"))
     }
 
-    func testPlanLifecycleRailDistinguishesCarriedAndOutsideGoalStates() async throws {
+    func testTimeLifecycleRailDistinguishesCarriedAndOutsideGoalStates() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([
             makeWeekVisibleGoal(id: "goal-active", title: "Active carried goal"),
@@ -521,7 +521,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.lifecycleRail.segments.map(\.lifecycleState), [.previous, .active, .future, .waiting, .blocked, .parked, .protected, .completed, .cancelledDropped])
     }
 
-    func testPlanTimelineIncludesActiveFutureAndPreviousWithoutFakeCertainty() async throws {
+    func testTimeTimelineIncludesActiveFutureAndPreviousWithoutFakeCertainty() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([
             makeWeekVisibleGoal(id: "goal-active", title: "Active carried goal"),
@@ -655,7 +655,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.realityReflow.noChangeCopy.contains("Nothing changed"))
     }
 
-    func testOverloadedPlanProducesRealityReflowRecommendationWithoutMutation() async throws {
+    func testOverloadedTimeProducesRealityReflowRecommendationWithoutMutation() async throws {
         let repositories = try await makeRepositories()
         let goals = (0..<6).map { makeWeekVisibleGoal(id: "reflow-overload-\($0)", title: "Reflow overload \($0)") }
         try await repositories.goals.saveGoals(goals)
@@ -685,7 +685,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.realityReflow.suggestions.first?.detail.lowercased().contains("reschedule") ?? true)
     }
 
-    func testBlockedAndWaitingPlanSurfacesAppropriateRealityReasons() async throws {
+    func testBlockedAndWaitingTimeSurfacesAppropriateRealityReasons() async throws {
         let blockedRepositories = try await makeRepositories()
         try await blockedRepositories.goals.saveGoals([makeWeekVisibleGoal(id: "blocked-reflow", title: "Blocked reflow", stepState: .blocked)])
         let blockedDashboard = try await RepositoryBackedTimeService(repositories: blockedRepositories).loadTimeDashboard(now: fixedDate)
@@ -892,7 +892,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
     }
 
-    func testD15PlanScreenContractSnapshotSatisfiesImplementationGate() async throws {
+    func testD15TimeScreenContractSnapshotSatisfiesImplementationGate() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
         let service = RepositoryBackedTimeService(repositories: repositories)
@@ -1118,7 +1118,7 @@ private final class PK21TrackingTimeFeatureProjectionSource: TimeFeatureProjecti
     }
 }
 
-private actor RecordingPlanCalendarRealityService: CalendarRealityServicing {
+private actor RecordingTimeCalendarRealityService: CalendarRealityServicing {
     private(set) var requestedActionNames: [String] = []
 
     func calendarPermissionState() async -> CalendarPermissionState {

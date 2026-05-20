@@ -11,7 +11,7 @@ struct TimeLifeSuiteCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: suite.title, subtitle: suite.subtitle)
 
-                TimeLifeShapeTimeCapacityMap(suite: suite)
+                TimeLifeShapeField(suite: suite)
 
                 LazyVGrid(
                     columns: [
@@ -21,7 +21,7 @@ struct TimeLifeSuiteCard: View {
                     spacing: theme.spacing.sm
                 ) {
                     ForEach(suite.shapes) { shape in
-                        PlanLifeSuiteShapeTile(shape: shape)
+                        TimeLifeSuiteShapeTile(shape: shape)
                     }
                 }
 
@@ -41,7 +41,7 @@ struct TimeLifeSuiteCard: View {
     }
 }
 
-private struct PlanLifeSuiteShapeTile: View {
+private struct TimeLifeSuiteShapeTile: View {
     @Environment(\.ambitionTheme) private var theme
 
     let shape: TimeLifeSuiteShapeState
@@ -91,7 +91,7 @@ private struct PlanLifeSuiteShapeTile: View {
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
                 .stroke(theme.stateStyle(for: shape.visualState).stroke.opacity(0.5), lineWidth: 1)
         )
-        .accessibilityIdentifier("plan.life-suite.\(shape.kind.rawValue)")
+        .accessibilityIdentifier("time.life-suite.\(shape.kind.rawValue)")
     }
 
     private var iconName: String {

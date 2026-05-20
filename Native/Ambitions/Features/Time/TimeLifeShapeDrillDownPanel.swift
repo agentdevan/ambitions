@@ -24,7 +24,7 @@ struct TimeLifeShapeDrillDownPanel: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel(drillDown.accessibilityValue)
-        .accessibilityIdentifier("plan.life-shape-map.drill-down")
+        .accessibilityIdentifier("time.life-shape-field.drill-down")
     }
 
     private var header: some View {
@@ -46,7 +46,7 @@ struct TimeLifeShapeDrillDownPanel: View {
             spacing: theme.spacing.xs
         ) {
             ForEach(drillDown.items) { item in
-                PlanLifeShapeDrillDownItemCard(item: item)
+                TimeLifeShapeDrillDownItemCard(item: item)
             }
         }
     }
@@ -78,7 +78,7 @@ struct TimeLifeShapeDrillDownPanel: View {
     }
 }
 
-private struct PlanLifeShapeDrillDownItemCard: View {
+private struct TimeLifeShapeDrillDownItemCard: View {
     @Environment(\.ambitionTheme) private var theme
 
     let item: TimeLifeShapeDrillDownItemState

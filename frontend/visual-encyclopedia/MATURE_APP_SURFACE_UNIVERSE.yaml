@@ -5754,7 +5754,7 @@
         "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
         "Native/Ambitions/Features/Time/TimeScreen.swift",
         "Native/Ambitions/Features/Time/TimeViewModel.swift",
-        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeLifeShapeField.swift"
       ],
       "gap_reason": "no active gap in the mature universe",
       "gap_status": "none",
@@ -5775,7 +5775,7 @@
         "frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
         "Native/Ambitions/Features/Time/TimeScreen.swift",
         "Native/Ambitions/Features/Time/TimeViewModel.swift",
-        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeLifeShapeField.swift"
       ],
       "parent_surface": "Time Root",
       "patch_target_batch_id": "FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001",
@@ -5796,7 +5796,7 @@
       "source_file_candidates": [
         "Native/Ambitions/Features/Time/TimeScreen.swift",
         "Native/Ambitions/Features/Time/TimeViewModel.swift",
-        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeLifeShapeField.swift"
       ],
       "source_origin": "live_repo_source",
       "source_relationship": "implemented_source_present",

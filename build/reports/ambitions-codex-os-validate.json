@@ -3,17 +3,18 @@
   "status": "GREEN",
   "summary": "Ambitions Codex OS validation for local hardening control-plane",
   "changed_files": [
-    "build/audits/amb_file_by_file_repo_audit.py",
-    "build/reports/amb-file-by-file-audit-summary.json",
-    "build/reports/ambitions-codex-os-validate.json",
-    "docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-cleanup-plan.md",
-    "docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-reds.md",
-    "docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-truth-drift.md",
-    "docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-yellows.md",
-    "docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01.csv",
-    "docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01.md",
-    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-validation-proof.md",
-    "scripts/ambitions-codex-os-validate.py"
+    "Native/Ambitions/Domain/ScreenContractModels.swift",
+    "Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift",
+    "Native/Ambitions/Features/Time/TimeLifeShapeField.swift",
+    "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
+    "Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift",
+    "Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift",
+    "Native/AmbitionsTests/Time",
+    "Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift",
+    "frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml",
+    "frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml",
+    "frontend/visual-encyclopedia/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.yaml",
+    "frontend/visual-encyclopedia/trace/FRONTEND_SOURCE_BINDINGS.yaml"
   ],
   "validations_run": [
     {
@@ -187,6 +188,38 @@
     {
       "status": "pass",
       "message": "schema loaded"
+    },
+    {
+      "status": "pass",
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Domain/ScreenContractModels.swift"
+    },
+    {
+      "status": "pass",
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift"
+    },
+    {
+      "status": "pass",
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Features/Time/TimeLifeShapeField.swift"
+    },
+    {
+      "status": "pass",
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
+    },
+    {
+      "status": "pass",
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift"
+    },
+    {
+      "status": "pass",
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/AmbitionsTests/Time"
+    },
+    {
+      "status": "pass",
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift"
     },
     {
       "status": "pass",

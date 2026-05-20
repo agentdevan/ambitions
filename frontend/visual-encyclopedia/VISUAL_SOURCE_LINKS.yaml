@@ -873,7 +873,7 @@
       "source_file_candidates": [
         "Native/Ambitions/Features/Time/TimeScreen.swift",
         "Native/Ambitions/Features/Time/TimeViewModel.swift",
-        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
+        "Native/Ambitions/Features/Time/TimeLifeShapeField.swift"
       ],
       "shared_components": [
         "Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift",

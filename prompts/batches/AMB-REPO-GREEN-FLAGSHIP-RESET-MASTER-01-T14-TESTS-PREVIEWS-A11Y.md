@@ -9,6 +9,9 @@ AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T14-TESTS-PREVIEWS-A11Y
 ## Runner command
 `scripts/ambitions-codex-train.sh AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T14-TESTS-PREVIEWS-A11Y prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T14-TESTS-PREVIEWS-A11Y.md`
 
+## Protected workspace material
+Do not delete `.agents/` or `.codex/` material. Another workspace session may be updating the skills database. If unrelated `.agents/` or `.codex/` changes block this train, preserve them, stash them with an explicit message, or stop for owner direction; do not remove them to get Green.
+
 ## Objective
 Make tests, previews, and accessibility identifiers match canonical IA and object ownership.
 

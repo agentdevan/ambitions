@@ -9,6 +9,9 @@ AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T15-DOCS-HISTORICAL-PRUNING
 ## Runner command
 `scripts/ambitions-codex-train.sh AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T15-DOCS-HISTORICAL-PRUNING prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T15-DOCS-HISTORICAL-PRUNING.md`
 
+## Protected workspace material
+Do not delete `.agents/` or `.codex/` material. Another workspace session may be updating the skills database. If unrelated `.agents/` or `.codex/` changes block this train, preserve them, stash them with an explicit message, or stop for owner direction; do not remove them to get Green.
+
 ## Objective
 Remove active stale surface ownership from docs/status/visual encyclopedia while preserving useful historical/supporting value.
 

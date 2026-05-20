@@ -3601,7 +3601,7 @@
       "declared_implementation_files": [
         "Native/Ambitions/Features/Time/TimeScreen.swift",
         "Native/Ambitions/Features/Time/TimeViewModel.swift",
-        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
+        "Native/Ambitions/Features/Time/TimeLifeShapeField.swift",
         "Native/Ambitions/Features/Time/TimeFeatureService.swift"
       ],
       "destination": "Time",
@@ -3639,7 +3639,7 @@
       "source_candidates": [
         "Native/Ambitions/Features/Time/TimeScreen.swift",
         "Native/Ambitions/Features/Time/TimeViewModel.swift",
-        "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
+        "Native/Ambitions/Features/Time/TimeLifeShapeField.swift",
         "Native/Ambitions/Features/Time/TimeFeatureService.swift"
       ],
       "source_relationship": "implemented_source_present",

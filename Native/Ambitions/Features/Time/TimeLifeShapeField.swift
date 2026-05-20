@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct TimeLifeShapeMapItem: Identifiable, Sendable, Hashable {
+struct TimeLifeShapeFieldItem: Identifiable, Sendable, Hashable {
     let id: String
     let title: String
     let question: String
@@ -41,7 +41,7 @@ struct TimeLifeShapeMapItem: Identifiable, Sendable, Hashable {
         self.commitmentLoadContourLabel = Self.commitmentLoadContourLabel(for: shape)
         self.recoveryLabel = Self.recoveryLabel(for: shape)
         self.symbolName = Self.symbolName(for: shape.kind)
-        self.accessibilityIdentifier = "plan.life-shape-map.\(shape.kind.rawValue)"
+        self.accessibilityIdentifier = "time.life-shape-field.\(shape.kind.rawValue)"
     }
 
     var accessibilityLabel: String {
@@ -170,21 +170,21 @@ struct TimeLifeShapeMapItem: Identifiable, Sendable, Hashable {
     }
 }
 
-struct TimeLifeShapeTimeCapacityMap: View {
+struct TimeLifeShapeField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-    @State private var selectedItemID: TimeLifeShapeMapItem.ID?
+    @State private var selectedItemID: TimeLifeShapeFieldItem.ID?
     @State private var revealsPressure = false
 
     let suite: TimeLifeSuiteState
 
-    private var items: [TimeLifeShapeMapItem] {
-        suite.shapes.map(TimeLifeShapeMapItem.init(shape:))
+    private var items: [TimeLifeShapeFieldItem] {
+        suite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
     }
 
-    private var selectedItem: TimeLifeShapeMapItem? {
+    private var selectedItem: TimeLifeShapeFieldItem? {
         items.first { $0.id == selectedItemID } ?? items.first
     }
 
@@ -196,11 +196,11 @@ struct TimeLifeShapeTimeCapacityMap: View {
                 if dynamicTypeSize.isAccessibilitySize {
                     accessibilityContourStack
                 } else {
-                    visualContourMap
+                    visualContourField
                 }
 
                 if let selectedItem {
-                    PlanLifeShapeSelectedContourPanel(item: selectedItem, revealsPressure: revealsPressure)
+                    TimeLifeShapeSelectedContourPanel(item: selectedItem, revealsPressure: revealsPressure)
                 }
 
                 TimeLifeShapeDrillDownPanel(drillDown: suite.drillDown)
@@ -213,7 +213,7 @@ struct TimeLifeShapeTimeCapacityMap: View {
                         revealsPressure.toggle()
                     }
                 }
-                .accessibilityIdentifier("plan.life-shape-map.pressure-toggle")
+                .accessibilityIdentifier("time.life-shape-field.pressure-toggle")
 
                 EvidenceLabel(
                     "Shape Time",
@@ -225,7 +225,7 @@ struct TimeLifeShapeTimeCapacityMap: View {
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("plan.life-shape-map")
+        .accessibilityIdentifier("time.life-shape-field")
     }
 
     private var header: some View {
@@ -246,10 +246,10 @@ struct TimeLifeShapeTimeCapacityMap: View {
         }
     }
 
-    private var visualContourMap: some View {
+    private var visualContourField: some View {
         HStack(alignment: .center, spacing: theme.spacing.sm) {
             ForEach(items) { item in
-                PlanLifeShapeContourButton(
+                TimeLifeShapeContourButton(
                     item: item,
                     isSelected: selectedItem?.id == item.id,
                     revealsPressure: revealsPressure,
@@ -266,7 +266,7 @@ struct TimeLifeShapeTimeCapacityMap: View {
     private var accessibilityContourStack: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             ForEach(items) { item in
-                PlanLifeShapeContourButton(
+                TimeLifeShapeContourButton(
                     item: item,
                     isSelected: selectedItem?.id == item.id,
                     revealsPressure: revealsPressure,
@@ -278,17 +278,17 @@ struct TimeLifeShapeTimeCapacityMap: View {
         }
     }
 
-    private func select(_ item: TimeLifeShapeMapItem) {
+    private func select(_ item: TimeLifeShapeFieldItem) {
         withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) {
             selectedItemID = item.id
         }
     }
 }
 
-private struct PlanLifeShapeContourButton: View {
+private struct TimeLifeShapeContourButton: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: TimeLifeShapeMapItem
+    let item: TimeLifeShapeFieldItem
     let isSelected: Bool
     let revealsPressure: Bool
     let reduceMotion: Bool
@@ -312,7 +312,7 @@ private struct PlanLifeShapeContourButton: View {
 
             Spacer(minLength: theme.spacing.xs)
 
-            contourMap
+            contourField
 
             Text(item.capacityLabel)
                 .font(theme.typography.micro)
@@ -343,7 +343,7 @@ private struct PlanLifeShapeContourButton: View {
         }
     }
 
-    private var contourMap: some View {
+    private var contourField: some View {
         ZStack {
             Capsule(style: .continuous)
                 .fill(accent.opacity(isSelected ? 0.24 : 0.14))
@@ -437,10 +437,10 @@ private struct PlanLifeShapeContourButton: View {
     }
 }
 
-private struct PlanLifeShapeSelectedContourPanel: View {
+private struct TimeLifeShapeSelectedContourPanel: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: TimeLifeShapeMapItem
+    let item: TimeLifeShapeFieldItem
     let revealsPressure: Bool
 
     var body: some View {
@@ -474,12 +474,12 @@ private struct PlanLifeShapeSelectedContourPanel: View {
                 .fill(theme.stateStyle(for: item.visualState).accent.opacity(0.08))
         )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("plan.life-shape-map.selected-band")
+        .accessibilityIdentifier("time.life-shape-field.selected-band")
     }
 }
 
 #Preview("AFI09 Time LifeShape Field") {
-    TimeLifeShapeTimeCapacityMap(
+    TimeLifeShapeField(
         suite: TimeLifeSuiteState(
             title: "Shape Time",
             subtitle: "LifeShape Field shows what the week can hold.",
