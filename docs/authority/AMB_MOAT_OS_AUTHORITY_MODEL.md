@@ -4,11 +4,13 @@
 
 - Category: **Personal Life OS**
 - Positioning: local-first life reality system, not productivity wrapper.
+- Category canon: this installer phase treats Personal Life OS as the active category lens for all moat and IA references.
 
 ## Top-level authority
 
 - Root IA: `Today / Goals / Capture / Time / You`
 - Legacy names: `Plan` is compatibility seam only.
+- Active root set must not be re-labeled as `Tasks`, `Habits`, `Insights`, `Profile`, or a generic productivity shell.
 
 ## Ownership model
 
@@ -28,6 +30,7 @@
 - Do not move Start Here/source freshness/receipt truth to frontend ownership.
 - Do not mark release claims Green without proof evidence.
 - Do not reintroduce task/calendar/productivity/tabbed generic IA as active roots.
+- Do not frame Ambitions as a task manager, calendar clone, habit tracker, dashboard, or chatbot in authority docs.
 
 ## State model
 

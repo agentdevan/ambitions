@@ -7,11 +7,12 @@ This document is the master moat map for installer phase 24+ consolidation.
 ## Moat entries
 
 ### Category moat: Personal Life OS
-- **Definition:** A private life runtime-first system, not a generic productivity app.
+- **Definition:** A private life runtime-first system, not a generic productivity app, task manager, calendar clone, habit tracker, dashboard, or chatbot.
 - **Why defensible:** Core promise ties to daily reality, mission integrity, and inspectable evidence.
 - **Owner:** Product design + Codex governance docs.
 - **Downstream batches:** `AMB-CATEGORY-PERSONAL-LIFE-OS-CANON-01`
 - **Proof states:** Yellow if claims are pending; Green only with runtime and release evidence.
+- **Canonical IA:** `Today / Goals / Capture / Time / You`, with `Plan` as a compatibility seam only.
 
 ### Runtime moat: Private Life Runtime
 - **Definition:** Local deterministic decision core.
