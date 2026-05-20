@@ -8,6 +8,7 @@ Status: Installed docs-only status note
 - Runner prompts installed under `prompts/batches/amb-fe-be/`.
 - No app source was modified by this installer patch.
 - No implementation, validation, or release claim is made by the installer alone.
+- This contract freeze is docs-only and path-scoped; it does not change source, tests, project wiring, or proof status.
 
 ## Expected next state
 

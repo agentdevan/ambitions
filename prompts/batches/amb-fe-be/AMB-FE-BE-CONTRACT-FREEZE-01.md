@@ -58,6 +58,8 @@ Surface ID: `you_root_user_system_profile`
 - Document the exact no-claim boundaries and local-only posture.
 - Keep `Plan` as compatibility-only/contextual language, not active top-level IA.
 - Prevent any downstream prompt from implying hosted AI, hosted sync, cloud user profiling, or a custom cloud personal-data backend.
+- Treat frontend authority packets and preflight reports as contract inputs only, not shipped UI proof.
+- Make clear that this batch is docs-only and does not prove implementation, accessibility, privacy/legal, release, device, CI, or performance status.
 
 ## Validation Expectations
 
@@ -80,6 +82,7 @@ Surface ID: `you_root_user_system_profile`
 - Any contract would weaken the active IA or local-first posture.
 - Any text would restore a banned top-level tab or duplicate authority.
 - Any claim would outrun current proof or imply a hosted data/backend posture the repo has not proven.
+- Any edit would make the batch read like proof of implementation or release readiness.
 
 ## Rollback Expectations
 

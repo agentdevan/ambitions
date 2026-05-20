@@ -6,6 +6,7 @@ Scope: Train installer and prompt registry only
 ## Train summary
 
 This manifest is registry and sequencing support only. It does not claim implementation, release readiness, or proof, and it cannot widen the train beyond the contract boundary recorded in the companion contract note.
+It also freezes contract language only; it does not promote `Plan` out of compatibility-only status or convert frontend authority references into proof artifacts.
 
 | Batch | Stage | Objective | Main scope | Next dependency |
 | --- | --- | --- | --- | --- |
@@ -50,3 +51,4 @@ Do not run later implementation stages if earlier contract/foundation stages are
 ## Non-claims
 
 This manifest does not claim the train is active queue truth, implemented, validated, or release-ready. It does not authorize hosted AI, hosted sync, or cloud user-data claims for any downstream batch.
+It does not claim that the frontend authority packet or preflight reports are shipped proof, and it does not change implementation source truth.

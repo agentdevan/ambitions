@@ -29,3 +29,4 @@ Status: Installed docs-only order file
 ## Gate rule
 
 Later stages stop on Red unless the prompt explicitly says it is a repair batch.
+This order is sequencing only; it does not claim any stage is implemented, validated, or release-ready.
