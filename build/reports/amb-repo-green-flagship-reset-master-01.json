@@ -1,9 +1,10 @@
 {
   "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01",
+  "authority_boundary": "Prompt-required batch report only; active authority remains docs/truth/*, and this file does not prove implementation or release readiness.",
   "status": "YELLOW",
   "summary": "Train 0 snapshot refreshed to the current main SHA with the prompt-required build report path and proof-claim boundary preserved.",
   "branch": "main",
-  "sha": "2340f1dfb73e8ade06b128dc6020f9d5cb6b9faa",
+  "sha": "6148d416b9c4cc1fc4d1122da2d656cfa4da04ae",
   "final_status": "YELLOW",
   "trains_completed": [
     "0"

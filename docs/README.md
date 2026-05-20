@@ -1,6 +1,8 @@
 # Ambitions Docs
 
 Active repo authority starts in [`truth/README.md`](truth/README.md). If this index conflicts with `docs/truth/*`, the truth files win.
+Supporting portals and historical material below are subordinate to `docs/truth/*`.
+Generated reports and docs indexes do not prove implementation, validation, or release readiness.
 
 ## Required read order
 

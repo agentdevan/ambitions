@@ -2,6 +2,8 @@
 
 Ambitions is a premium native iPhone-first personal life operating system.
 Active authority starts in [`docs/truth/README.md`](docs/truth/README.md).
+`docs/truth/*` wins over every other repo doc.
+Docs and reports are navigation/support material only; they do not prove implementation or release readiness.
 
 ## Portals
 

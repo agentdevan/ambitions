@@ -14,6 +14,12 @@
 11. `project.yml`
 12. `Package.swift`
 
+## Authority Boundaries
+- `docs/truth/*` is the active authority layer; everything below is supporting or historical only.
+- Docs, audits, and generated reports do not prove implementation, validation, or release readiness.
+- `Plan` is compatibility-only or contextual language unless a current truth file explicitly says otherwise.
+- No custom hosted personal-data backend or external/cloud LLM claim belongs in this authority map.
+
 ## Active Product Truth
 - Top-level IA: `Today / Goals / Capture / Time / You`
 - `Today` is the flagship daily decision surface.
@@ -21,7 +27,6 @@
 - `Capture` is the atmosphere composer surface.
 - `Time` is the life-shape field surface.
 - `You` is the user system profile surface.
-- `Plan` is compatibility-only or contextual language unless a current truth file explicitly says otherwise.
 
 ## Supporting Material
 - `docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01.md`
@@ -40,4 +45,3 @@
 - Source refactor map
 - Surface vocabulary ledger
 - Final green report
-

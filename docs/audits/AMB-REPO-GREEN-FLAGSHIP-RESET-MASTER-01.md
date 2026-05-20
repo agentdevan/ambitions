@@ -8,10 +8,16 @@ Create the bounded audit scaffold for this repo reset batch without touching app
 
 ## Live Repo State
 - Branch: `main`
-- SHA: `2340f1dfb73e8ade06b128dc6020f9d5cb6b9faa`
+- SHA: `6148d416b9c4cc1fc4d1122da2d656cfa4da04ae`
 - Worktree at the start of this phase: clean
 - Prompt-required batch report artifact: `build/reports/amb-repo-green-flagship-reset-master-01.json`
 - Supporting audit-copy report artifact: `docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json`
+
+## Authority Boundary
+- `docs/truth/*` owns active authority for this batch.
+- This report is supporting classification only and does not prove implementation or release readiness.
+- `Plan` remains compatibility-only or contextual language, not active top-level IA.
+- No external/cloud LLM or custom hosted personal-data backend claim is made here.
 
 ## Active Truth Used
 - `docs/truth/README.md`
