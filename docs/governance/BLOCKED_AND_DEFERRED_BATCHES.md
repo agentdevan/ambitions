@@ -18,68 +18,71 @@ This document exists to prevent stale queued work from appearing operationally a
 
 ---
 
-# Compatibility Retirement Deferred Work
+# Compatibility Retirement Records
 
 ## CS02C
 
 State:
-- BLOCKED_DEFERRED
+- RETIRED_METADATA_ONLY
 
 Reason:
-- broad internal Profile retirement not yet proven safe
-- compatibility seams intentionally preserved
+- broad internal Profile retirement is not executable queue work
+- compatibility seams remain preserved unless a future scoped batch proves replacement safety
 
 ---
 
 ## CS03C
 
 State:
-- BLOCKED_DEFERRED
+- RETIRED_METADATA_ONLY
 
 Reason:
-- legacy insights compatibility intentionally preserved
-- no safe retirement proof yet established
+- legacy insights compatibility remains preserved
+- CS03C is retired queue metadata, not a runnable next batch
 
 ---
 
 ## CS04C
 
 State:
-- BLOCKED_DEFERRED
+- RETIRED_METADATA_ONLY
 
 Reason:
-- habits compatibility seam intentionally preserved
-- no validated retirement proof exists
+- habits compatibility seams remain preserved
+- CS04C is retired queue metadata, not a runnable next batch
 
 ---
 
 ## CS05C
 
 State:
-- BLOCKED_DEFERRED
+- RETIRED_METADATA_ONLY
 
 Reason:
-- ActiveFocus compatibility retirement not yet proven safe
+- ActiveFocus compatibility seams remain preserved
+- CS05C is retired queue metadata, not a runnable next batch
 
 ---
 
 ## CS06C
 
 State:
-- BLOCKED_DEFERRED
+- RETIRED_METADATA_ONLY
 
 Reason:
-- failed-taxonomy retirement not yet validated
+- failed-taxonomy technical compatibility remains preserved
+- CS06C is retired queue metadata, not a runnable next batch
 
 ---
 
 ## CS09C
 
 State:
-- BLOCKED_DEFERRED
+- RETIRED_METADATA_ONLY
 
 Reason:
 - no active compatibility regression owner currently defined
+- CS09C is retired queue metadata; future regressions require a newly scoped repair batch
 
 ---
 

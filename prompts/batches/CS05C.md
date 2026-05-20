@@ -21,14 +21,14 @@ Run through the Ambitions runner only: GPT-5.5 plan -> GPT-5.3-Codex-Spark bound
 - Title: CSCS05C
 - Queue position: 124
 - Train: CS
-- Classification: conditional_trigger_only
+- Classification: retired_metadata_only
 - Execution posture: Do not run this prompt as implementation work; it is canonical queue coverage only.
-- Dependency gate: Named regression/proof target, owner, rollback plan, and focused tests.
-- Next handoff: CS06C
+- Dependency gate: retired; future work requires a newly scoped prompt with named regression/proof target, owner, rollback plan, and focused tests.
+- Next handoff: none from this retired metadata record.
 
 # Objective
 
-Do not execute implementation from this conditional_trigger_only record; preserve CS05C as canonical coverage and use it only as historical, overlay, or conditional metadata until active truth reauthorizes it.
+Do not execute implementation from this retired_metadata_only record; preserve CS05C as canonical queue coverage and use it only as historical/overlay metadata. Future work requires a newly scoped prompt.
 
 # Active Source Truth To Inspect
 
@@ -65,11 +65,11 @@ No implementation scope. This prompt records canonical do-not-run or overlay-onl
 
 # Batch-Specific Implementation Instructions
 
-Primary implementation action: Do not execute implementation from this conditional_trigger_only record; preserve CS05C as canonical coverage and use it only as historical, overlay, or conditional metadata until active truth reauthorizes it.
+Primary implementation action: Do not execute implementation from this retired_metadata_only record; preserve CS05C as canonical coverage and use it only as historical/overlay metadata.
 
 Concrete instructions:
 - Do not run CS05C as an implementation batch from this prompt.
-- Use this file to preserve queue coverage for CSCS05C, the canonical status `conditional_trigger_only`, and the next handoff `CS06C`.
+- Use this file to preserve queue coverage for CSCS05C and the canonical status `retired_metadata_only`.
 - If future active truth reauthorizes work, create or approve a new runnable prompt that names exact source files, tests, rollback, and no-claim boundaries.
 
 Candidate owner files to inspect first:

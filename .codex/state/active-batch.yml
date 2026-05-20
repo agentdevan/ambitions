@@ -1,5 +1,5 @@
 status: compact-mirror
-date: "2026-05-18"
+date: "2026-05-20"
 source_of_truth:
   - ".codex/reports/current-batch-train-state.md"
   - "docs/codex/BATCH_REGISTRY.md"
@@ -14,7 +14,7 @@ current:
   batch: "EFC18 Anti-Ceremony Compiler"
   previous_batch: "EFC18 Anti-Ceremony Compiler"
   previous_result: "green"
-  next_eligible_batch: "CS02C CSCS02C"
+  next_eligible_batch: "none recorded in this mirror after CS02C-CS06C and CS09C retirement documentation"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true
@@ -25,3 +25,10 @@ efc_overlay:
   current_batch_preserved: true
   next_batch_must_inherit_efc: true
   peak_optimized_sequence_owner: "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
+retired_metadata_only:
+  - "CS02C"
+  - "CS03C"
+  - "CS04C"
+  - "CS05C"
+  - "CS06C"
+  - "CS09C"

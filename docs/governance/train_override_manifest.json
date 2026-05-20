@@ -17,23 +17,23 @@
       "reason": "Inventory/repair-map evidence batch."
     },
     "CS02C": {
-      "state": "BLOCKED",
-      "reason": "Compatibility retirement intentionally deferred."
+      "state": "RETIRED_METADATA_ONLY",
+      "reason": "Compatibility retirement C-stage is documented as retired queue coverage, not executable work."
     },
     "CS03C": {
-      "state": "BLOCKED"
+      "state": "RETIRED_METADATA_ONLY"
     },
     "CS04C": {
-      "state": "BLOCKED"
+      "state": "RETIRED_METADATA_ONLY"
     },
     "CS05C": {
-      "state": "BLOCKED"
+      "state": "RETIRED_METADATA_ONLY"
     },
     "CS06C": {
-      "state": "BLOCKED"
+      "state": "RETIRED_METADATA_ONLY"
     },
     "CS09C": {
-      "state": "BLOCKED"
+      "state": "RETIRED_METADATA_ONLY"
     }
   }
 }

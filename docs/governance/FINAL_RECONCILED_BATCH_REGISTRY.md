@@ -78,8 +78,8 @@ This document does NOT supersede:
 
 | Area | State | Reason |
 |---|---|---|
-| CS02C-CS06C | BLOCKED_DEFERRED | Compatibility retirement not yet proven safe |
-| CS09C | BLOCKED_DEFERRED | No active regression owner defined |
+| CS02C-CS06C | RETIRED_METADATA_ONLY | C-stage compatibility retirement records are documented as retired queue coverage, not executable work |
+| CS09C | RETIRED_METADATA_ONLY | Conditional regression record is retired; future regressions require a newly scoped repair batch |
 | Broad PFC Acceleration | GOVERNANCE_BLOCKED | Proof normalization incomplete |
 
 ---

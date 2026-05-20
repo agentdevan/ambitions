@@ -442,22 +442,22 @@ Current 4.0 status:
 - Completed: CS08 Import Export Persistence Compatibility Proof.
 - Completed: CS02A Profile/You Compatibility Map And Migration Design as internal stage of formal CS02; no seam retired.
 - Completed: CS02B User-Facing You Alias And Compatibility Preservation as focused test proof; old `profile` compatibility and visible `You` naming are preserved.
-- Accepted Yellow: CS02C Narrow Internal Naming Retirement remains blocked/deferred; broad Profile retirement is not required for current user-facing canon compliance.
+- Retired metadata-only: CS02C Narrow Internal Naming Retirement is not executable queue work; broad Profile retirement is not required for current user-facing canon compliance.
 - Completed: CS03A Insights/Plan Compatibility Map And Migration Design as internal stage of formal CS03; no seam retired.
 - Completed: CS03B User-Facing Plan Alias And Insights Compatibility Preservation as focused test proof; old `insights` compatibility and visible `Plan` naming are preserved.
-- Accepted Yellow: CS03C Narrow Internal Insights Retirement remains blocked/deferred; current repo truth preserves legacy `insights` compatibility through You/Profile history support until stronger proof exists.
+- Retired metadata-only: CS03C Narrow Internal Insights Retirement is not executable queue work; current repo truth preserves legacy `insights` compatibility through You/Profile history support until a future explicitly scoped owner proves replacement safety.
 - Completed: CS04A Habits/Ritual/Plan Compatibility Map And Retirement Ledger as internal docs/protocol stage of formal CS04; no seam retired and no app code edited.
 - Completed: CS04B Ritual/Plan Compatibility Preservation Proof as focused test proof; old `habits` compatibility and Plan-owned `Rituals` semantics are preserved.
-- Accepted Yellow: CS04C Narrow Internal Habits Retirement remains blocked/deferred; no Habits seam is claimed retired.
+- Retired metadata-only: CS04C Narrow Internal Habits Retirement is not executable queue work; no Habits source seam deletion is claimed.
 - Completed: CS05A ActiveFocus/TodayFocus Compatibility Map And Retirement Ledger as internal docs/protocol stage of formal CS05; no seam retired and no app code edited.
 - Completed: CS05B ActiveFocus Compatibility Preservation Proof as focused simulator/unit proof; no seam retired and no production Swift edited.
-- Accepted Yellow: CS05C Narrow Internal Today Focus Retirement remains blocked/deferred until a later proof shows retirement is safe.
+- Retired metadata-only: CS05C Narrow Internal Today Focus Retirement is not executable queue work; ActiveFocus/TodayFocus compatibility remains preserved unless a future scoped owner proves replacement safety.
 - Completed: CS06A Failed-Taxonomy Compatibility Map And Seam Ledger as internal docs/protocol stage of formal CS06; no seam retired, no app code edited, no enum/raw value changed, and no copy/accessibility identifier changed.
 - Completed: CS06B Failed-Taxonomy Compatibility Proof as focused simulator/unit proof; no seam retired and no production Swift edited.
-- Accepted Yellow: CS06C Narrow Internal Failed-Taxonomy Retirement remains blocked/deferred until a later proof shows retirement is safe.
-- Accepted Yellow / Parked: CS09 Compatibility Regression Repair was repaired into CS09A/CS09B/CS09C internal stages. CS09A/CS09B are docs/protocol proof stages; no named compatibility regression target exists, so CS09C is deferred.
-- Complete: CS10 Compatibility Retirement Handoff is complete as docs-only handoff evidence. It records the compatibility retirement handoff, residual seam ledger, and deferred owners for CS02C-CS06C and CS09C without retiring seams, touching production Swift/tests/project files, changing route/raw values, persistence/schema, import/export, widget/App Intent/Shortcut behavior, app behavior, or release/platform posture.
-- Queued / Blocked: CS02C, CS03C, CS04C, CS05C, CS06C, and CS09C remain deferred until a named owner batch and proof target exists.
+- Retired metadata-only: CS06C Narrow Internal Failed-Taxonomy Retirement is not executable queue work; failed-taxonomy technical compatibility remains preserved unless a future scoped owner proves replacement safety.
+- Accepted Yellow / Parked: CS09 Compatibility Regression Repair was repaired into CS09A/CS09B/CS09C internal stages. CS09A/CS09B are docs/protocol proof stages; no named compatibility regression target exists, so CS09C is retired metadata-only and must not be selected as executable work.
+- Complete: CS10 Compatibility Retirement Handoff is complete as docs-only handoff evidence. It records the compatibility retirement handoff and residual seam ledger while CS02C-CS06C and CS09C are retired as metadata-only queue coverage without touching production Swift/tests/project files, changing route/raw values, persistence/schema, import/export, widget/App Intent/Shortcut behavior, app behavior, or release/platform posture.
+- Retired metadata-only: CS02C, CS03C, CS04C, CS05C, CS06C, and CS09C are not executable next batches. Future seam changes require newly scoped owner batches and proof targets.
 - Complete: EB01 External Brain Source Truth And Kernel Architecture is complete as evidence/reconciliation only; External Brain app behavior is not implemented.
 - Complete: EB13 Trust Privacy User Control Canon is complete as canon/evidence only; Trust Center, private mode, export/delete, and durable memory app behavior are not implemented.
 - Complete: EB25 Accessibility Cognitive Load Canon is complete as canon/evidence only; accessibility modes, UI behavior, and public conformance proof are not implemented.

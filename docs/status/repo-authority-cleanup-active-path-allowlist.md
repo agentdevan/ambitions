@@ -5,6 +5,7 @@ Status: Active-path allowlist for `AMB-REPO-AUTHORITY-CLEANUP-RUN-ALL`
 ## Active portal paths
 
 - `README.md`
+- `docs/README.md`
 - `frontend/README.md`
 - `frontend/installed-canon.md`
 - `frontend/intended-canon.md`
@@ -18,6 +19,9 @@ Status: Active-path allowlist for `AMB-REPO-AUTHORITY-CLEANUP-RUN-ALL`
 - `docs/README.md`
 - `docs/AGENTS.md`
 - `docs/codex/CODEX_OS_INDEX.md`
+- `docs/status/repo-authority-cleanup-baseline.md`
+- `docs/status/repo-authority-cleanup-final-report.md`
+- `docs/status/repo-authority-cleanup-active-path-allowlist.md`
 - `.codex/REPO_INVENTORY.md`
 - `.codex/SKILL_GOVERNANCE.md`
 - `.env.example`

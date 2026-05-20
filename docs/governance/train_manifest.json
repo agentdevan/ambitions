@@ -14,7 +14,9 @@
     "COMPLETE_ACCEPTED_YELLOW",
     "DOCS_ONLY_COMPLETE",
     "EVIDENCE_ONLY_COMPLETE",
-    "NEEDS_RECONCILIATION"
+    "NEEDS_RECONCILIATION",
+    "COMPLETE_WITH_RETIRED_METADATA",
+    "RETIRED_METADATA_ONLY"
   ],
   "families": {
     "AFI": {
@@ -72,9 +74,9 @@
       "owner_domain": "External Brain foundation and trust/memory posture"
     },
     "CS": {
-      "state": "NEEDS_RECONCILIATION",
+      "state": "COMPLETE_WITH_RETIRED_METADATA",
       "owner_domain": "compatibility seams and retirement ledgers",
-      "known_deferred": ["CS02C", "CS03C", "CS04C", "CS05C", "CS06C", "CS09C"]
+      "retired_metadata_only": ["CS02C", "CS03C", "CS04C", "CS05C", "CS06C", "CS09C"]
     }
   }
 }
