@@ -16,6 +16,7 @@ Files under `prompts/` are execution artifacts. They are not active product trut
 ## Classification
 
 - `prompts/batches/`: historical or pending execution artifacts.
+- `prompts/ambitions/`, `prompts/moat-install/`, and `prompts/generated/`: supporting or historical execution artifacts unless a current runner-selected batch refreshes them.
 - Runner-compatible prompt files are only executable when the user explicitly chooses the runner path.
 - Direct GitHub API cleanup trains must not create prompt files as their deliverable.
 - Old prompts may be mined for durable decisions only after those decisions are extracted into active truth/status files.

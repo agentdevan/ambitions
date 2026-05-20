@@ -75,7 +75,7 @@ enum ReleasePerformanceResponsivenessReport {
         ReleasePerformanceCheck(
             id: "plan-load",
             area: .planLoad,
-            budget: "Time must keep calendar-aware planning local and suggestion-first, with no silent calendar writes or top-level Plan drift.",
+            budget: "Time must keep calendar-aware planning local and suggestion-first, with no silent calendar writes or stale top-level ownership drift.",
             evidence: "Time feature regressions cover believability, recovery, waiting/commitment posture, Save the Day boundaries, and denied-calendar fallback.",
             evidenceLevel: .automatedSimulator,
             readiness: .acceptableForInternalTesting,

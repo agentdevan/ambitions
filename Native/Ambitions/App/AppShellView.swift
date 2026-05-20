@@ -654,7 +654,7 @@ private struct MemoryLensOverlayView: View {
         case .openGoal:
             return "Find one goal and reopen it inside the canonical Goals destination."
         case .openCapture:
-            return "Find the relevant capture context and return to the Plan-owned inbox."
+            return "Find the relevant capture context and return to the Time-owned inbox."
         case .openWeek:
             return "Open the current week without leaving the shell-owned recall path."
         default:
@@ -669,5 +669,4 @@ private struct MemoryLensOverlayView: View {
         return appContainer
     }
 }
-
 

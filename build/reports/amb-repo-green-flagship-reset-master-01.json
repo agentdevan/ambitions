@@ -1,100 +1,495 @@
 {
-  "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01",
-  "authority_boundary": "Prompt-required batch report only; active authority remains docs/truth/*, and this file does not prove implementation or release readiness.",
-  "status": "YELLOW",
-  "summary": "Train 0 snapshot refreshed to the current main SHA with the prompt-required build report path and proof-claim boundary preserved.",
-  "branch": "main",
-  "sha": "6148d416b9c4cc1fc4d1122da2d656cfa4da04ae",
-  "final_status": "YELLOW",
-  "trains_completed": [
-    "0"
-  ],
-  "trains_yellow": [
-    "0"
-  ],
-  "trains_red": [],
-  "files_changed_count": 5,
-  "files_moved_count": 0,
-  "files_deleted_count": 0,
-  "forbidden_paths_touched_unexpectedly": [],
+  "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T06-CODEX-OS-GOVERNANCE",
+  "status": "GREEN",
+  "summary": "Ambitions Codex OS validation for local hardening control-plane",
   "changed_files": [
+    "Native/Ambitions/App/AmbitionsRootView.swift",
+    "Native/Ambitions/App/AppShellView.swift",
+    "Native/Ambitions/Features/Time/TimeScreen.swift",
+    "Native/Ambitions/Features/Time/WeeklyReviewScreen.swift",
+    "Native/Ambitions/Features/You/YouFeatureService.swift",
+    "Native/Ambitions/PreviewSupport/PreviewFixtures.swift",
+    "Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift",
+    "Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift",
+    "Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift",
+    "Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift",
+    "Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift",
+    "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
+    "Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift",
+    "Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift",
+    "Native/AmbitionsTests/You/YouFeatureServiceTests.swift",
+    "Native/AmbitionsUITests/AmbitionsUITests.swift",
+    "Sources/Previews/SI03ShellNavigationPreviews.swift",
     "build/reports/amb-repo-green-flagship-reset-master-01.json",
-    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-train-manifest.md",
-    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-validation-proof.md",
-    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json",
-    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md"
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T05-SOURCE-REFRACTOR-MAP.json",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T05-source-refactor-map.md",
+    "docs/codex-os/AUTHORITY_HIERARCHY.md",
+    "docs/codex/os/AMB-CODEX-OS-FLAGSHIP-UPGRADE-MANIFEST.md",
+    "docs/codex/os/README.md",
+    "prompts/README.md",
+    "prompts/ambitions/README.md",
+    "scripts/ambitions-codex-os-validate.py",
+    "scripts/ambitions_validate_batch_ids.py",
+    "scripts/ambitions_validate_prompt_headers.py"
   ],
-  "surface_vocabulary": {
-    "status": "deferred",
-    "forbidden_surface_owner_hits_remaining": null,
-    "allowed_context_hits_remaining": null,
-    "ledger_path": "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-ia-surface-vocabulary-ledger.md",
-    "claim_boundary": "Train 0 did not run the final surface vocabulary ledger, so remaining hit counts are unmeasured and not claimed as zero."
-  },
-  "validation": {
-    "prompt_header_validator": "GREEN",
-    "batch_id_validator": "GREEN",
-    "codex_os_validator": "GREEN",
-    "xcodegen_generate": "not run",
-    "package_resolution": "not run",
-    "simulator_build": "not run",
-    "unit_tests": "not run",
-    "ui_tests": "not run",
-    "git_diff_check": "GREEN",
-    "json_parse": "GREEN"
-  },
   "validations_run": [
-    "python3 -m json.tool docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json >/tmp/amb-green-reset-docs-path.json",
-    "python3 -m json.tool build/reports/amb-repo-green-flagship-reset-master-01.json >/tmp/amb-green-reset-build-path.json",
-    "python3 scripts/ambitions_validate_prompt_headers.py",
-    "python3 scripts/ambitions_validate_batch_ids.py",
-    "python3 scripts/ambitions-codex-os-validate.py",
-    "git diff --check"
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/AGENTS.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/AGENTS.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.agents/AGENTS.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/config.toml"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/hooks.json"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/.codex/schemas/ambitions-batch-result.schema.json"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/AUTHORITY_HIERARCHY.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/RUNNER_UPGRADE_NOTES.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/RULES_POLICY.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/HOOKS_POLICY.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/STRUCTURED_OUTPUT.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/NO_COST_CODEX_OS.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/CODEX_OS_COMPONENTS.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/EXCLUDED_FOR_COST_OR_SCOPE.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/ROLLBACK.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/README.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-FLAGSHIP-UPGRADE-MANIFEST.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-AUTHORITY-RESOLVER.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-GREEN-YELLOW-RED-STANDARD.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-NO-SPRAWL-GUARD.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-PROOF-LEDGER.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-VISUAL-QA-GATE.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-PRIVACY-CLAIM-GATE.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-APPLE-CONTINUITY-GATE.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/scripts/ambitions-codex-os-validate.py"
+    },
+    {
+      "status": "pass",
+      "message": "exists: /Users/devan/Documents/GitHub/ambitions/scripts/ambitions-codex-os-doctor.py"
+    },
+    {
+      "status": "pass",
+      "message": "generated batch prompt has runner header: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-01-AUTHORITY-RESOLVER.md"
+    },
+    {
+      "status": "pass",
+      "message": "generated batch prompt has runner header: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-02-NO-SPRAWL-GUARD.md"
+    },
+    {
+      "status": "pass",
+      "message": "generated batch prompt has runner header: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-03-PROOF-LEDGER.md"
+    },
+    {
+      "status": "pass",
+      "message": "generated batch prompt has runner header: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-04-VISUAL-QA-GATE.md"
+    },
+    {
+      "status": "pass",
+      "message": "generated batch prompt has runner header: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-05-PRIVACY-APPLE-CONTINUITY-GATES.md"
+    },
+    {
+      "status": "pass",
+      "message": "generated batch prompt has runner header: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-06-LAUNCH-BELIEVABILITY-REVIEW.md"
+    },
+    {
+      "status": "pass",
+      "message": "generated batch prompt has runner header: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-07-SKILL-REGISTRY-AND-RUNNER-INTEGRATION.md"
+    },
+    {
+      "status": "pass",
+      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/session_start_context.py"
+    },
+    {
+      "status": "pass",
+      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/user_prompt_submit_guard.py"
+    },
+    {
+      "status": "pass",
+      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py"
+    },
+    {
+      "status": "pass",
+      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/permission_request_guard.py"
+    },
+    {
+      "status": "pass",
+      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/post_tool_use_review.py"
+    },
+    {
+      "status": "pass",
+      "message": "compiled /Users/devan/Documents/GitHub/ambitions/.codex/hooks/stop_gate.py"
+    },
+    {
+      "status": "pass",
+      "message": "schema loaded"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/App/AmbitionsRootView.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/App/AppShellView.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Features/Time/TimeScreen.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Features/Time/WeeklyReviewScreen.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Features/You/YouFeatureService.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/PreviewSupport/PreviewFixtures.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/AmbitionsTests/You/YouFeatureServiceTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Native/AmbitionsUITests/AmbitionsUITests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty work excluded from batch-owned scope checks: Sources/Previews/SI03ShellNavigationPreviews.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/App/AmbitionsRootView.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/App/AppShellView.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/Features/Time/TimeScreen.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/Features/Time/WeeklyReviewScreen.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/Features/You/YouFeatureService.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/PreviewSupport/PreviewFixtures.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/AmbitionsTests/You/YouFeatureServiceTests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Native/AmbitionsUITests/AmbitionsUITests.swift"
+    },
+    {
+      "status": "pass",
+      "message": "external dirty content intentionally excluded: Sources/Previews/SI03ShellNavigationPreviews.swift"
+    },
+    {
+      "status": "pass",
+      "message": "schema parsed with expected required keys"
+    },
+    {
+      "status": "pass",
+      "message": "config enables hooks feature"
+    },
+    {
+      "status": "pass",
+      "message": "config leaves hook handlers to .codex/hooks.json discovery"
+    },
+    {
+      "status": "pass",
+      "message": "hooks.json declares expected hook events"
+    },
+    {
+      "status": "pass",
+      "message": "hooks.json references .codex/hooks/session_start_context.py"
+    },
+    {
+      "status": "pass",
+      "message": "hooks.json references .codex/hooks/user_prompt_submit_guard.py"
+    },
+    {
+      "status": "pass",
+      "message": "hooks.json references .codex/hooks/pre_tool_use_policy.py"
+    },
+    {
+      "status": "pass",
+      "message": "hooks.json references .codex/hooks/permission_request_guard.py"
+    },
+    {
+      "status": "pass",
+      "message": "hooks.json references .codex/hooks/post_tool_use_review.py"
+    },
+    {
+      "status": "pass",
+      "message": "hooks.json references .codex/hooks/stop_gate.py"
+    },
+    {
+      "status": "pass",
+      "message": "execpolicy git status: allow"
+    },
+    {
+      "status": "pass",
+      "message": "execpolicy make ambitions-codex-os-validate: allow"
+    },
+    {
+      "status": "pass",
+      "message": "execpolicy make ambitions-codex-os-doctor: allow"
+    },
+    {
+      "status": "pass",
+      "message": "execpolicy git push: forbidden"
+    },
+    {
+      "status": "pass",
+      "message": "execpolicy npm install: forbidden"
+    },
+    {
+      "status": "pass",
+      "message": "execpolicy curl https://example.com: forbidden"
+    },
+    {
+      "status": "pass",
+      "message": "execpolicy xcodebuild archive: forbidden"
+    },
+    {
+      "status": "pass",
+      "message": "hook pre_tool_use_policy.py rg openai docs/truth: approve"
+    },
+    {
+      "status": "pass",
+      "message": "hook pre_tool_use_policy.py OPENAI_API_KEY=secret python3 script.py: deny"
+    },
+    {
+      "status": "pass",
+      "message": "hook pre_tool_use_policy.py npm install: deny"
+    },
+    {
+      "status": "pass",
+      "message": "hook pre_tool_use_policy.py curl https://example.com: deny"
+    },
+    {
+      "status": "pass",
+      "message": "hook pre_tool_use_policy.py git push: deny"
+    },
+    {
+      "status": "pass",
+      "message": "hook pre_tool_use_policy.py xcodebuild archive: deny"
+    },
+    {
+      "status": "pass",
+      "message": "hook permission_request_guard.py rg openai docs/truth: allow"
+    },
+    {
+      "status": "pass",
+      "message": "hook permission_request_guard.py OPENAI_API_KEY=secret python3 script.py: deny"
+    },
+    {
+      "status": "pass",
+      "message": "hook permission_request_guard.py npm install: deny"
+    },
+    {
+      "status": "pass",
+      "message": "runner header policy documented"
+    }
   ],
   "no_cost_proof": {
     "new_dependencies_added": false,
     "credential_material_added": false,
     "network_or_ci_added": false,
     "paid_services_added": false,
-    "notes": "This snapshot refresh added no dependencies, credentials, network paths, hosted CI, or paid services."
+    "notes": "Control-plane changes remain local-only and standard-library based."
   },
   "source_truth": {
-    "truth_files_inspected": [
+    "active_truth_files": [
       "docs/truth/README.md",
       "docs/truth/PRODUCT_DESIGN_TRUTH.md",
-      "docs/truth/PRODUCT_MOAT_TRUTH.md",
       "docs/truth/IMPLEMENTATION_TRUTH.md",
       "docs/truth/RELEASE_TRUTH.md",
       "docs/truth/CODEX_PROCESS_TRUTH.md",
       "docs/truth/HISTORICAL_POLICY.md"
     ],
-    "app_source_changed": false,
-    "project_config_changed": false,
-    "release_claims_added": false
+    "supporting_files": [
+      "AGENTS.md",
+      ".codex/config.toml",
+      "docs/codex-os/"
+    ],
+    "uncertainties": [
+      "Validate final execpolicy behavior for allow/forbid outcomes after local CLI semantics are confirmed.",
+      "External dirty work was operator-classified and excluded from Codex OS scope: Native/Ambitions/App/AmbitionsRootView.swift, Native/Ambitions/App/AppShellView.swift, Native/Ambitions/Features/Time/TimeScreen.swift, Native/Ambitions/Features/Time/WeeklyReviewScreen.swift, Native/Ambitions/Features/You/YouFeatureService.swift, Native/Ambitions/PreviewSupport/PreviewFixtures.swift, Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift, Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift, Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift, Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift, Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift, Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift, Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift, Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift, Native/AmbitionsTests/You/YouFeatureServiceTests.swift, Native/AmbitionsUITests/AmbitionsUITests.swift, Sources/Previews/SI03ShellNavigationPreviews.swift"
+    ]
   },
   "risks": [
-    "The master reset remains incomplete after Train 0; later trains are deferred.",
-    "The surface vocabulary ledger has not run, so remaining hit counts are unmeasured."
+    "Rules parser syntax is inferred from existing project style; run-time validation is required via codex execpolicy.",
+    "Hard-fail scope checks require repository-specific path policy review if external build artifacts are expected."
   ],
   "rollback": [
-    "rm -f build/reports/amb-repo-green-flagship-reset-master-01.json",
-    "rm -f docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01*.md docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json"
+    "git checkout -- AGENTS.md docs/AGENTS.md .codex/config.toml Makefile",
+    "git checkout -- scripts/AGENTS.md .codex/AGENTS.md .agents/AGENTS.md prompts/ambitions/README.md 2>/dev/null || true",
+    "rm -rf .agents/skills/ambitions-*",
+    "rm -rf .codex/hooks .codex/rules .codex/schemas",
+    "rm -f .codex/hooks.json",
+    "rm -rf docs/codex-os",
+    "rm -rf .codex/runs/AMB-CODEX-OS-NO-COST-HARDENING-001",
+    "rm -f scripts/ambitions-codex-os-validate.py scripts/ambitions-codex-os-doctor.py scripts/ambitions-codex-os-print-install-notes.py",
+    "rm -f build/reports/ambitions-codex-os-validate.json"
   ],
-  "next_recommended_batch": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01 Train 1: Audit calibration and validator repair",
-  "ownership_decisions": [
-    "build/reports/amb-repo-green-flagship-reset-master-01.json is the batch-owned prompt-required report path",
-    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json is a supporting audit copy",
-    "build/reports/ambitions-codex-os-validate.json is a validator-generated side effect and is not owned by this train"
-  ],
-  "non_claims": [
-    "no release readiness claimed unless current proof exists",
-    "no TestFlight readiness claimed unless current proof exists",
-    "no App Store readiness claimed unless current proof exists",
-    "no physical-device validation claimed unless current proof exists",
-    "no public accessibility conformance claimed unless current proof exists",
-    "no performance readiness claimed unless current proof exists",
-    "no privacy/legal approval claimed unless current proof exists",
-    "no complete Private Life Runtime proof claimed unless scenario tests pass",
-    "no zero-hit surface vocabulary ledger claim is made for Train 0"
-  ]
+  "next_recommended_batch": "AMB-CODEX-OS-NO-COST-HARDENING-003"
 }

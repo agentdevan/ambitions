@@ -113,7 +113,7 @@ struct PreviewFixtures: Sendable {
             hero: InsightsHeroState(
                 eyebrow: "What you are learning",
                 title: "Adaptation is helping the plan stay believable",
-                subtitle: "Reflection stays calm, specific, and close to the work instead of drifting into analytics theater.",
+                subtitle: "Reflection stays calm, specific, and close to the work instead of drifting into metric theater.",
                 dominantTruth: "Smaller versions are carrying momentum more reliably than bigger plans.",
                 editorialSummary: "What changed recently is not just activity volume. The system is learning which lighter asks still create proof.",
                 trustWhisper: "This changed after recent feedback and still has visible proof.",
@@ -347,7 +347,7 @@ struct PreviewFixtures: Sendable {
                     YouConstitutionRule(id: "constitution-low-risk-preferences", title: "Make low-risk preferences visible", detail: "Display, density, recovery, and repeated routing preferences may be remembered only when they stay visible, source-tied, and correctable.", statusLabel: "Receipt first", state: .default),
                     YouConstitutionRule(id: "constitution-sensitive-memory", title: "Ask before sensitive memory", detail: "Health, relationship, financial, location, calendar-derived, and sensitive Life Area context requires user review before stronger memory use.", statusLabel: "Approval required", state: .warning),
                     YouConstitutionRule(id: "constitution-operating-manual-evidence", title: "Do not invent an operating manual", detail: "The personal operating manual can summarize explicit local choices and evidence, but it must admit when context is thin.", statusLabel: "Evidence-led", state: .success),
-                    YouConstitutionRule(id: "constitution-calendar", title: "Ask before calendar writes", detail: "Calendar access is explicit and Plan-owned. Calendar writes require confirmation and are never silent.", statusLabel: "Not requested", state: .warning)
+                    YouConstitutionRule(id: "constitution-calendar", title: "Ask before calendar writes", detail: "Calendar access is explicit and Time-owned. Calendar writes require confirmation and are never silent.", statusLabel: "Not requested", state: .warning)
                 ],
                 footer: "These are current local defaults, not a broad account/preferences system. Deeper Constitution maturity remains future-owned."
             ),
@@ -640,7 +640,7 @@ struct PreviewFixtures: Sendable {
                 ],
                 dataMap: [
                     YouTrustDataMapItem(id: "trust-data-map-local-context", title: "Local context", dataTypes: "Goals, captures, proof, corrections, receipts, reviews", sourceLabel: "Preview local signals", controlLabel: "Inspect and correct from owning surfaces", privacyLabel: "Private by default", statusLabel: "Stored on this device", semanticState: .trust),
-                    YouTrustDataMapItem(id: "trust-data-map-permissions", title: "Permission boundaries", dataTypes: "Notifications and Plan-owned calendar awareness", sourceLabel: "Notifications not requested; calendar not requested", controlLabel: "System permission controls stay explicit", privacyLabel: "No silent calendar writes", statusLabel: "Permission-gated", semanticState: .calendarDerived),
+                    YouTrustDataMapItem(id: "trust-data-map-permissions", title: "Permission boundaries", dataTypes: "Notifications and Time-owned calendar awareness", sourceLabel: "Notifications not requested; calendar not requested", controlLabel: "System permission controls stay explicit", privacyLabel: "No silent calendar writes", statusLabel: "Permission-gated", semanticState: .calendarDerived),
                     YouTrustDataMapItem(id: "trust-data-map-receipts", title: "Receipts and correction state", dataTypes: "Action receipts, undo posture, correction availability", sourceLabel: "2 receipt examples", controlLabel: "Change, correct, or review where supported", privacyLabel: "Summaries first", statusLabel: "Evidence-led", semanticState: .review),
                     YouTrustDataMapItem(id: "trust-data-map-future-owned", title: "Future-owned edges", dataTypes: "Sync, export proof, destructive delete, broad memory controls", sourceLabel: "Ambitions is running in explicit local-only mode.", controlLabel: "Blocked until owner batch proves safety", privacyLabel: "No hidden account or cloud claim", statusLabel: "Future-owned", semanticState: .caution)
                 ],
@@ -651,7 +651,7 @@ struct PreviewFixtures: Sendable {
                         footer: "These rows describe current runtime truth.",
                         routes: [
                             YouTrustCenterRoute(id: "trust-route-local-data", title: "Local data status", subtitle: "Goals, captures, proof, corrections, receipts, and reviews read from this device.", icon: "internaldrive", statusLabel: "Stored on this device", semanticState: .trust, accessibilityHint: "Shows local storage trust status."),
-                            YouTrustCenterRoute(id: "trust-route-calendar", title: "Calendar boundary", subtitle: "Calendar awareness is Plan-owned. Writes require confirmation.", icon: "calendar.badge.clock", statusLabel: "Not requested", semanticState: .calendarDerived, accessibilityHint: "Shows calendar permission and write boundary."),
+                            YouTrustCenterRoute(id: "trust-route-calendar", title: "Calendar boundary", subtitle: "Calendar awareness is Time-owned. Writes require confirmation.", icon: "calendar.badge.clock", statusLabel: "Not requested", semanticState: .calendarDerived, accessibilityHint: "Shows calendar permission and write boundary."),
                             YouTrustCenterRoute(id: "trust-route-external-surfaces", title: "External surfaces", subtitle: "External surfaces must use privacy snapshots and fallback routes.", icon: "rectangle.3.group", statusLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview, semanticState: .caution, accessibilityHint: "Shows external-surface verification status.")
                         ]
                     ),

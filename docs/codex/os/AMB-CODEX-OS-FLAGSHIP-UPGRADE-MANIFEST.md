@@ -4,6 +4,8 @@ Supporting note: This manifest supports current Ambitions Codex work but does no
 
 Current authority starts in [`../../truth/README.md`](../../truth/README.md). This manifest installs a thin flagship Codex OS layer on top of the existing control-plane material in `docs/codex-os/` and `.codex/`.
 
+Current product truth still comes from `docs/truth/*`; the active flagship IA remains `Today / Goals / Capture / Time / You`, and `Plan` stays a compatibility seam only where active truth allows it.
+
 ## Installed artifacts
 
 | Artifact | Role | Existing support |
@@ -31,3 +33,4 @@ Current authority starts in [`../../truth/README.md`](../../truth/README.md). Th
 ## Non-claims
 
 This manifest does not claim new app behavior, new validation proof, new release proof, or a new authority root.
+Prompt artifacts under `prompts/` remain supporting or historical unless a runner-selected batch refreshes them into the active queue.

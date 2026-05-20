@@ -114,7 +114,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(app.buttons["captures.return-to-plan"].exists)
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
-        XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
@@ -371,13 +371,13 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["TodayRealityMeridianFusedRail"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRail"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Start here"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailTopologyStrip"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailStartHereTitle"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["TodayStartHereSourceFreshness"].waitForExistence(timeout: 10))
         XCTAssertTrue(todayPrimaryAction(in: app).waitForExistence(timeout: 10) || app.staticTexts["Start now"].exists || app.staticTexts["Open Plan"].exists || app.staticTexts["Open Time"].exists)
-        XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailNowSection"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailNextSection"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailLaterSection"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists(identifier: "TodayRealityRailTopologyStrip", in: app))
+        XCTAssertTrue(scrollUntilElementExists(identifier: "TodayRealityRailNowSection", in: app))
+        XCTAssertTrue(scrollUntilElementExists(identifier: "TodayRealityRailNextSection", in: app))
+        XCTAssertTrue(scrollUntilElementExists(identifier: "TodayRealityRailLaterSection", in: app))
     }
 
     func testCreateGoalShowsClarificationWhenRequired() throws {
@@ -507,19 +507,19 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
-        XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(
-            scrollUntilElementExists("plan.hero-card", in: app, maxAttempts: 24)
+            scrollUntilElementExists("time.hero-card", in: app, maxAttempts: 24)
             || scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 24)
         )
         XCTAssertTrue(scrollUntilElementExists("time.timeline-strip", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("plan.weekly-plan-strip", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("plan.calendar-awareness", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("plan.calendar-boundary", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("plan.recovery-maturity", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("time.weekly-shaping-strip", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("time.believability-card", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar-awareness", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar-boundary", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("time.recovery-maturity", in: app, maxAttempts: 40))
         XCTAssertTrue(scrollUntilElementExists("time.execution-resilience", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app, maxAttempts: 40))
+        XCTAssertTrue(scrollUntilElementExists("time.action-lane", in: app, maxAttempts: 40))
     }
 
     func testDemoTimePressureScrubberUpdatesSelectedDayAndReflowDecision() throws {
@@ -530,7 +530,7 @@ final class AmbitionsUITests: XCTestCase {
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 40))
-        let scrubPoint = app.buttons["plan.scrubber.point.day-2"]
+        let scrubPoint = app.buttons["time.scrubber.point.day-2"]
         XCTAssertTrue(scrubPoint.waitForExistence(timeout: 10))
         scrubPoint.tap()
         XCTAssertEqual(scrubPoint.value as? String, "selected")
@@ -860,6 +860,19 @@ final class AmbitionsUITests: XCTestCase {
 
         for _ in 0..<maxAttempts {
             if element.waitForExistence(timeout: 2), element.isHittable {
+                return true
+            }
+            app.swipeUp()
+        }
+
+        return element.exists
+    }
+
+    private func scrollUntilElementExists(identifier: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
+        let element = app.descendants(matching: .any)[identifier]
+
+        for _ in 0..<maxAttempts {
+            if element.waitForExistence(timeout: 2) {
                 return true
             }
             app.swipeUp()

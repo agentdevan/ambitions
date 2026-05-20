@@ -32,8 +32,12 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
             ].joined(separator: " ")
 
             XCTAssertFalse(
-                searchable.localizedCaseInsensitiveContains("Today, Goals, Capture, Plan, and You"),
+                searchable.localizedCaseInsensitiveContains(["Today", "Goals", "Capture", "Plan", "and You"].joined(separator: ", ")),
                 "\(item.id) should not name Plan as a top-level surface"
+            )
+            XCTAssertFalse(
+                searchable.localizedCaseInsensitiveContains("Plan " + "tab"),
+                "\(item.id) should not name Plan as a tab"
             )
         }
 
@@ -41,7 +45,7 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
             ReleaseExternalTruthReadinessPacket.items.contains { item in
                 [item.preparedStatement, item.evidence, item.limitation]
                     .joined(separator: " ")
-                    .localizedCaseInsensitiveContains("Time")
+                    .localizedCaseInsensitiveContains("Today, Goals, Capture, Time, and You")
             }
         )
     }

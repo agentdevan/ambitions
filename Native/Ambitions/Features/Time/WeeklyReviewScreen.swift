@@ -115,7 +115,7 @@ struct WeeklyReviewScreen: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .buttonStyle(AmbitionButtonStyle(tier: .hero, state: .selected))
-                    .accessibilityIdentifier("shell.plan.back-button")
+                    .accessibilityIdentifier("shell.time.back-button")
                 }
             }
             .padding(.horizontal, theme.spacing.lg)

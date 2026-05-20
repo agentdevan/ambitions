@@ -94,7 +94,7 @@ struct TimeScreen: View {
                     } label: {
                         Label("Rituals", systemImage: AppTab.habits.systemImage)
                     }
-                    .accessibilityIdentifier("plan.open-plan-habits-button")
+                    .accessibilityIdentifier("time.open-time-rituals-button")
                 }
             }
         }
@@ -400,7 +400,7 @@ private struct TimeCalendarAwarenessCard: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(state.title). \(state.detail)")
-        .accessibilityIdentifier("plan.calendar-awareness")
+        .accessibilityIdentifier("time.calendar-awareness")
     }
 
     private var semanticState: AmbitionSemanticState {
@@ -612,7 +612,7 @@ private struct TimeCalendarBoundaryContractCard: View {
             }
         }
         .ambitionPanelAccessibility()
-        .accessibilityIdentifier("plan.calendar-boundary")
+        .accessibilityIdentifier("time.calendar-boundary")
     }
 }
 
@@ -1027,7 +1027,7 @@ private struct TimeRecoveryMaturityCard: View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: maturity.title, subtitle: maturity.detail)
-                    .accessibilityIdentifier("plan.recovery-maturity")
+                    .accessibilityIdentifier("time.recovery-maturity")
 
                 HStack(spacing: theme.spacing.xs) {
                     TagPill(maturity.planFitLabel, icon: "gauge", state: .selected)
@@ -1088,7 +1088,7 @@ private struct TimeRecoveryMaturityCard: View {
         .accessibilityLabel("\(maturity.title). \(maturity.detail). \(maturity.confirmationBoundary). \(maturity.calendarBoundary). \(maturity.socialBoundary).")
         .accessibilityHint("Review Plan recovery boundaries before confirming any broad change.")
         .ambitionPanelAccessibility()
-        .accessibilityIdentifier("plan.recovery-maturity")
+        .accessibilityIdentifier("time.recovery-maturity")
     }
 
     private func iconName(for signalID: String) -> String {
@@ -1201,10 +1201,10 @@ private struct TimeHeroCard: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .buttonStyle(AmbitionButtonStyle(tier: .hero, state: action.state))
-                .accessibilityIdentifier("plan.hero.primary-action")
+                .accessibilityIdentifier("time.hero.primary-action")
             }
         }
-        .accessibilityIdentifier("plan.hero-card")
+        .accessibilityIdentifier("time.hero-card")
         .ambitionPanelAccessibility()
     }
 }
@@ -1261,7 +1261,7 @@ private struct TimePressureScrubberCard: View {
                                 )
                             }
                             .buttonStyle(.plain)
-                            .accessibilityIdentifier("plan.scrubber.point.\(point.id)")
+                            .accessibilityIdentifier("time.scrubber.point.\(point.id)")
                             .accessibilityValue(selectedDayID == point.id ? "selected" : "not selected")
                         }
                     }
@@ -1286,7 +1286,7 @@ private struct TimeElasticWeekCard: View {
                     title: "Weekly Plan Strip",
                     subtitle: "Dense days expand, quiet days compress, and open room stays visible instead of disappearing into a calendar grid."
                 )
-                .accessibilityIdentifier("plan.weekly-plan-strip")
+                .accessibilityIdentifier("time.weekly-shaping-strip")
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .bottom, spacing: theme.spacing.sm) {
@@ -1297,7 +1297,7 @@ private struct TimeElasticWeekCard: View {
                                 TimeElasticWeekDayColumn(day: day, isSelected: selectedDayID == day.id)
                             }
                             .buttonStyle(.plain)
-                            .accessibilityIdentifier("plan.day.\(day.id)")
+                            .accessibilityIdentifier("time.day.\(day.id)")
                         }
                     }
                     .padding(.vertical, theme.spacing.xxs)
@@ -1305,7 +1305,7 @@ private struct TimeElasticWeekCard: View {
             }
         }
         .ambitionPanelAccessibility()
-        .accessibilityIdentifier("plan.weekly-plan-strip")
+        .accessibilityIdentifier("time.weekly-shaping-strip")
     }
 }
 
@@ -1407,7 +1407,7 @@ private struct TimeBelievabilityCard: View {
                     title: "Week believability",
                     subtitle: "Plan explains why the week looks doable, tight, or overloaded before it asks you to intervene."
                 )
-                .accessibilityIdentifier("plan.believability-card")
+                .accessibilityIdentifier("time.believability-card")
 
                 HStack(spacing: theme.spacing.xs) {
                     TagPill(believability.label, icon: "scope", state: believability.visualState)
@@ -1460,7 +1460,7 @@ private struct TimeBelievabilityCard: View {
                     }
                 }
                 .accessibilityElement(children: .contain)
-                .accessibilityIdentifier("plan.selected-day.\(selectedDay.id)")
+                .accessibilityIdentifier("time.selected-day.\(selectedDay.id)")
 
                 if let openWindow = selectedDay.openWindow {
                     Button {
@@ -1506,7 +1506,7 @@ private struct TimeBelievabilityCard: View {
             }
         }
         .ambitionPanelAccessibility()
-        .accessibilityIdentifier("plan.believability-card")
+        .accessibilityIdentifier("time.believability-card")
     }
 }
 
@@ -1624,7 +1624,7 @@ private struct TimeExecutionResilienceCard: View {
                         }
                         .buttonStyle(.plain)
                         .disabled(lane.goalTarget == nil && lane.timeRoute == nil)
-                        .accessibilityIdentifier("plan.resilience.\(lane.id)")
+                        .accessibilityIdentifier("time.resilience.\(lane.id)")
                     }
                 }
 
@@ -1643,7 +1643,7 @@ private struct TimeExecutionResilienceCard: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(windowMagnetism.target == nil)
-                    .accessibilityIdentifier("plan.window-magnetism")
+                    .accessibilityIdentifier("time.window-magnetism")
                 }
             }
         }
@@ -1727,7 +1727,7 @@ private struct TimeShapingActionsCard: View {
                     title: "Week-shaping actions",
                     subtitle: "Keep one shaping lane obvious: edit, patch, adjust later, or lighten."
                 )
-                .accessibilityIdentifier("plan.action-lane")
+                .accessibilityIdentifier("time.action-lane")
 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: theme.spacing.sm), GridItem(.flexible(), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
                     ForEach(actions) { action in
@@ -1763,7 +1763,7 @@ private struct TimeShapingActionsCard: View {
                             )
                         }
                         .buttonStyle(.plain)
-                        .accessibilityIdentifier("plan.action.select.\(action.kind.rawValue)")
+                        .accessibilityIdentifier("time.action.select.\(action.kind.rawValue)")
                     }
                 }
 
@@ -1789,19 +1789,19 @@ private struct TimeShapingActionsCard: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .accessibilityElement(children: .combine)
-                            .accessibilityIdentifier("plan.action.cta")
+                            .accessibilityIdentifier("time.action.cta")
                         }
                         .buttonStyle(AmbitionButtonStyle(tier: .hero, state: selectedAction.state))
                         .disabled(selectedAction.goalTarget == nil && selectedAction.timeRoute == nil)
                         .accessibilityLabel(callToActionTitle(for: selectedAction))
                         .accessibilityHint(selectedAction.recommendation)
-                        .accessibilityIdentifier("plan.action.cta")
+                        .accessibilityIdentifier("time.action.cta")
                     }
                 }
             }
         }
         .ambitionPanelAccessibility()
-        .accessibilityIdentifier("plan.action-lane")
+        .accessibilityIdentifier("time.action-lane")
     }
 
     private func callToActionTitle(for action: TimeShapingActionState) -> String {
@@ -1830,7 +1830,7 @@ private struct TimeGoalRelationshipCard: View {
                         ? "No active goals are asking the week for structure yet."
                         : "Plan stays tied to active goals instead of turning into a disconnected scheduler."
                 )
-                .accessibilityIdentifier("plan.goal-relationship-card")
+                .accessibilityIdentifier("time.goal-relationship-card")
 
                 if items.isEmpty {
                     Text("Once active goals carry real work, they will show up here with their week relationship and next doable step.")
@@ -1847,14 +1847,14 @@ private struct TimeGoalRelationshipCard: View {
                             }
                             .buttonStyle(.plain)
                             .disabled(item.target == nil)
-                            .accessibilityIdentifier("plan.goal.open.\(item.id)")
+                            .accessibilityIdentifier("time.goal.open.\(item.id)")
                         }
                     }
                 }
             }
         }
         .ambitionPanelAccessibility()
-        .accessibilityIdentifier("plan.goal-relationship-card")
+        .accessibilityIdentifier("time.goal-relationship-card")
     }
 }
 
@@ -1913,7 +1913,7 @@ private struct TimeSecondaryDestinationsCard: View {
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(title: "Plan-owned support routes", subtitle: "Rituals, Capture, and review stay subordinate so the week remains the dominant workspace.")
+                SectionHeader(title: "Time-owned support routes", subtitle: "Rituals, Capture, and review stay subordinate so the week remains the dominant workspace.")
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(destinations) { destination in
@@ -1959,12 +1959,12 @@ private struct TimeSecondaryDestinationsCard: View {
 
     private func accessibilityIdentifier(for destination: TimeSecondaryDestination) -> String {
         if destination.timeRoute == .habits {
-            return "plan.open-plan-habits-button"
+            return "time.open-time-rituals-button"
         }
         if destination.timeRoute == .weeklyReview {
-            return "plan.open-plan-weekly-review-button"
+            return "time.open-time-weekly-review-button"
         }
-        return "plan.open-\(destination.id)-button"
+        return "time.open-\(destination.id)-button"
     }
 }
 

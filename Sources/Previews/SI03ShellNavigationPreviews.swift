@@ -11,7 +11,7 @@ private struct SI03ShellNavigationPreview: View {
                 kind: .utilityHub,
                 title: "You",
                 subtitle: "Personal system center with grouped routes, trust controls, and calm return paths.",
-                statusMessage: "Top-level destinations stay Today, Goals, Capture, Plan, and You.",
+                statusMessage: "Top-level destinations stay Today, Goals, Capture, Time, and You.",
                 primaryAction: .init(
                     title: "Open command",
                     systemImage: "command",

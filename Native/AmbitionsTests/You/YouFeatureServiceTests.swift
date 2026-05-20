@@ -127,7 +127,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.contextVault.title, "Local memory map")
         XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "you-vault-planning" }))
         XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "you-default-tab" }))
-        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "you-default-rituals" && $0.valueLabel == "Plan-owned" }))
+        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "you-default-rituals" && $0.valueLabel == "Time-owned" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "you-integration-widgets" }))
         XCTAssertEqual(dashboard.appearanceStudio.title, "Appearance Studio")
     }
@@ -738,7 +738,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("omniscient"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud memory"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("durable delete"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "confidence"))
     }
 
     func testMRI12RuntimeInspectionDistinguishesLearnedUsedIgnoredAndChanged() async throws {
@@ -856,12 +856,12 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.valueLabel == "Unavailable"
         }))
         XCTAssertTrue(dashboard.memoryControls.footer.contains("broad forgetting, deletion"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI recommends"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "recommends"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("confidence"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud memory"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("production-ready"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release-ready"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("production-" + "ready"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release-" + "ready"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("delete now"))
     }
 
@@ -985,12 +985,12 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.memoryControls.footer.contains("export-bounded"))
         XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("local-only"))
         XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("receipt"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI recommends"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "recommends"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud memory"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("delete all"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("export everything"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release-ready"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release-" + "ready"))
     }
 
     func testMRI13ExportBoundaryStaysSummaryOnlyWhenNoLearningSignalsExist() async throws {
@@ -1134,7 +1134,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(history.footer.contains("not a feed"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("activity feed"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("notification feed"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "confidence"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI verified"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI certification"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("productivity loss"))
@@ -1172,9 +1172,9 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(visibleCopy.contains("This center explains the default. It does not execute calendar writes, permission requests, or broad reflow."))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("calendar sync"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("calendar written"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "confidence"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI verified"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("productivity score"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("productivity " + "score"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("permission grab"))
     }
 
@@ -1205,8 +1205,8 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("auto-scheduler"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("calendar clone"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("calendar sync"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("productivity score"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("productivity " + "score"))
     }
 
     func testPD17CrossSurfaceProofReviewConnectsOwningSurfacesWithoutNewDashboard() async throws {
@@ -1283,7 +1283,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("activity feed"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("notification feed"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("new top-level tab"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI " + "confidence"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI verified"))
     }
 

@@ -56,7 +56,7 @@ enum CrossSurfaceContinuityMaturityReport {
             id: "goals-direction",
             surface: .goals,
             modeLens: .focus,
-            continuityBehavior: "Goals carries direction, scope, weather, and Path Builder handoff back to Today or Plan without becoming a board.",
+            continuityBehavior: "Goals carries direction, scope, weather, and Path Builder handoff back to Today or Time without becoming a board.",
             owningRoute: "Goals tab and Goal Detail",
             state: .verified,
             limitation: "Confirmed path editing remains future maturity work."
@@ -65,8 +65,8 @@ enum CrossSurfaceContinuityMaturityReport {
             id: "plan-recovery",
             surface: .plan,
             modeLens: .plan,
-            continuityBehavior: "Plan owns week shaping, calendar boundaries, Save the Day, waiting, commitments, and confirmation-first recovery.",
-            owningRoute: "Plan tab and Weekly Review",
+            continuityBehavior: "Time owns week shaping, calendar boundaries, Save the Day, waiting, commitments, and confirmation-first recovery through Plan compatibility services.",
+            owningRoute: "Time tab and Weekly Review",
             state: .verified,
             limitation: "No silent calendar writes are available or claimed."
         ),
@@ -83,8 +83,8 @@ enum CrossSurfaceContinuityMaturityReport {
             id: "reviews-handoff",
             surface: .reviews,
             modeLens: .review,
-            continuityBehavior: "Reviews live under You and Plan, summarizing proof, decisions, recovery, and carry-forward guidance without silent plan mutation.",
-            owningRoute: "You / Plan review routes",
+            continuityBehavior: "Reviews live under You and Time, summarizing proof, decisions, recovery, and carry-forward guidance without silent plan mutation.",
+            owningRoute: "You / Time review routes",
             state: .verified,
             limitation: "Manual scenario review remains R03."
         ),
@@ -101,7 +101,7 @@ enum CrossSurfaceContinuityMaturityReport {
             id: "path-builder",
             surface: .goalDetail,
             modeLens: .focus,
-            continuityBehavior: "Path Builder stays inside Goal Detail and hands phases, forks, proof, Today, and Plan context back to owning surfaces.",
+            continuityBehavior: "Path Builder stays inside Goal Detail and hands phases, forks, proof, Today, and Time context back to owning surfaces.",
             owningRoute: "Goal Detail Path lane",
             state: .verified,
             limitation: "Path Builder is not a top-level tab and does not auto-edit roadmaps."
@@ -164,7 +164,7 @@ enum CrossSurfaceContinuityMaturityReport {
             id: "r02-performance",
             ownerBatch: "R02",
             title: "Final performance and responsiveness measurements remain unverified on realistic scenarios.",
-            requiredEvidence: "Launch, tab switching, Today, Goal Detail, Plan, receipt/history, memory/review, path/portfolio, and external snapshot measurements."
+            requiredEvidence: "Launch, tab switching, Today, Goal Detail, Time, receipt/history, memory/review, path/portfolio, and external snapshot measurements."
         ),
         Layer3ReadinessBlocker(
             id: "r03-device-qa",

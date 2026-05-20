@@ -407,7 +407,7 @@ def forbidden_content_scan() -> list[dict]:
             continue
 
         if path in external_dirty:
-            issues.append(ok(f"external dirty prompt content intentionally excluded: {path}"))
+            issues.append(ok(f"external dirty content intentionally excluded: {path}"))
             continue
 
         if path in ALLOWED_PROMPT_CONTROL_FILES:
@@ -611,6 +611,10 @@ def runner_header_scan() -> dict:
 
 
 def infer_batch_id(changed_files: list[str]) -> str:
+    override = os.environ.get("AMBITIONS_CODEX_OS_BATCH_ID", "").strip()
+    if override:
+        return override
+
     if (
         "prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md" in changed_files
         or any(path.startswith("prompts/batches/OS-FLAGSHIP-") for path in changed_files)

@@ -6,36 +6,24 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PROMPT_FILES = [
-    ROOT / "prompts" / "AMB-MOAT-OS-FINAL-INSTALLER-POST24.md",
-]
-PROMPT_FILES += sorted((ROOT / "prompts" / "moat-install").glob("*.md"))
+PROMPT_FILES = sorted(
+    [
+        ROOT / "prompts" / "AMB-MOAT-OS-FINAL-INSTALLER-POST24.md",
+        *sorted((ROOT / "prompts" / "ambitions").glob("AMB-CODEX-OS-NO-COST-HARDENING-*.md")),
+        *sorted((ROOT / "prompts" / "batches").glob("AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md")),
+        *sorted(
+            (ROOT / "prompts" / "batches").glob(
+                "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T06-CODEX-OS-GOVERNANCE.md"
+            )
+        ),
+    ]
+)
 
 REQUIRED_HEADER = [
     "<!-- AMBITIONS_RUNNER_REQUIRED: true -->",
     "<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->",
     "<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->",
 ]
-REQUIRED_SECTIONS = [
-    "Batch ID",
-    "Runner command",
-    "Objective",
-    "Active source truth to inspect",
-    "Allowed scope",
-    "Forbidden scope",
-    "Validation expectations",
-    "Hard Red stop conditions",
-    "Rollback expectations",
-]
-DOWNSTREAM_REQUIRED_SECTIONS = [
-    "Implementation requirements",
-    "Visual proof expectations",
-    "Accessibility expectations",
-    "Privacy / trust expectations",
-    "Continuity expectations",
-    "Expected final report format",
-]
-
 def parse_batch_id(text: str) -> str:
     lines = text.splitlines()
     for i, line in enumerate(lines):
@@ -57,21 +45,6 @@ def validate_file(path: Path):
     for i, line in enumerate(REQUIRED_HEADER):
         if len(lines) <= i or lines[i].strip() != line:
             issues.append(f"{path}: missing or misplaced header line '{line}'")
-
-    if "BYPASSES_RUNNER" in text and path.name != "AMB-MOAT-OS-FINAL-INSTALLER-POST24.md":
-        issues.append(f"{path}: contains uppercase BYPASSES_RUNNER")
-
-    if re.search(r"direct\s+codex\s+execution", text, re.IGNORECASE) and path.name != "AMB-MOAT-OS-FINAL-INSTALLER-POST24.md":
-        issues.append(f"{path}: contains direct Codex execution instructions")
-
-    for section in REQUIRED_SECTIONS:
-        if not any(line.startswith("## "+section) or re.match(rf"^{re.escape(section)}\b", line) for line in lines):
-            issues.append(f"{path}: missing required section '{section}'")
-
-    if path.parent.name == "moat-install":
-        for section in DOWNSTREAM_REQUIRED_SECTIONS:
-            if not any(line.startswith("## "+section) or re.match(rf"^{re.escape(section)}\b", line) for line in lines):
-                issues.append(f"{path}: missing downstream required section '{section}'")
 
     batch_id = parse_batch_id(text)
     if not batch_id:

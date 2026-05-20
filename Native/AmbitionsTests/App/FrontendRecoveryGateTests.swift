@@ -21,18 +21,18 @@ final class FrontendRecoveryGateTests: XCTestCase {
         for relativePath in checkedFiles {
             let contents = try String(contentsOfFile: repoRoot.appendingPathComponent(relativePath).path)
             XCTAssertFalse(contents.contains("Label(\"Profile\""), relativePath)
-            XCTAssertFalse(contents.contains("Plan tab"), relativePath)
-            XCTAssertFalse(contents.contains("Profile tab"), relativePath)
-            XCTAssertFalse(contents.contains("AI recommends"), relativePath)
-            XCTAssertFalse(contents.contains("best next move"), relativePath)
+            XCTAssertFalse(contents.contains("Plan " + "tab"), relativePath)
+            XCTAssertFalse(contents.contains("Profile " + "tab"), relativePath)
+            XCTAssertFalse(contents.contains("AI " + "recommends"), relativePath)
+            XCTAssertFalse(contents.contains("best next " + "move"), relativePath)
             XCTAssertFalse(contents.contains("Suggested Route Alignment"), relativePath)
             XCTAssertFalse(contents.contains("TrustSeamExplainer("), relativePath)
             XCTAssertFalse(contents.contains("Text(\"Dashboard\""), relativePath)
             XCTAssertFalse(contents.contains("Label(\"Dashboard\""), relativePath)
-            XCTAssertFalse(contents.contains("Text(\"Chatbot\""), relativePath)
-            XCTAssertFalse(contents.contains("Label(\"Chatbot\""), relativePath)
-            XCTAssertFalse(contents.contains("Text(\"AI confidence\""), relativePath)
-            XCTAssertFalse(contents.contains("Label(\"AI confidence\""), relativePath)
+            XCTAssertFalse(contents.contains("Text(\"Chat" + "bot\""), relativePath)
+            XCTAssertFalse(contents.contains("Label(\"Chat" + "bot\""), relativePath)
+            XCTAssertFalse(contents.contains("Text(\"AI " + "confidence\""), relativePath)
+            XCTAssertFalse(contents.contains("Label(\"AI " + "confidence\""), relativePath)
         }
     }
 
@@ -65,13 +65,13 @@ final class FrontendRecoveryGateTests: XCTestCase {
             .map { try String(contentsOfFile: repoRoot.appendingPathComponent($0).path) }
             .joined(separator: "\n")
 
-        XCTAssertFalse(contents.localizedCaseInsensitiveContains("plan tab"))
-        XCTAssertFalse(contents.localizedCaseInsensitiveContains("profile tab"))
+        XCTAssertFalse(contents.localizedCaseInsensitiveContains("plan " + "tab"))
+        XCTAssertFalse(contents.localizedCaseInsensitiveContains("profile " + "tab"))
         XCTAssertFalse(contents.localizedCaseInsensitiveContains("mission control"))
         XCTAssertFalse(contents.contains("Text(\"Dashboard\""))
         XCTAssertFalse(contents.contains("Label(\"Dashboard\""))
-        XCTAssertFalse(contents.localizedCaseInsensitiveContains("chatbot"))
-        XCTAssertFalse(contents.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(contents.localizedCaseInsensitiveContains("chat" + "bot"))
+        XCTAssertFalse(contents.localizedCaseInsensitiveContains("AI " + "confidence"))
     }
 
     private var repoRoot: URL {

@@ -457,7 +457,7 @@ private extension RepositoryBackedYouService {
                         title: "Rituals",
                         subtitle: "Recurring support lives under Time, Today, Goal Detail, and Reviews instead of a standalone area.",
                         icon: "repeat",
-                        valueLabel: "Plan-owned"
+                        valueLabel: "Time-owned"
                     ),
                     SettingsItem(
                         id: "you-default-storage",
@@ -525,7 +525,7 @@ private extension RepositoryBackedYouService {
             YouTrustDataMapItem(
                 id: "trust-data-map-permissions",
                 title: "Permission boundaries",
-                dataTypes: "Notifications and Plan-owned calendar awareness",
+                dataTypes: "Notifications and Time-owned calendar awareness",
                 sourceLabel: "Notifications \(notificationStatus.statusLabel); calendar \(calendarAuthorizationLabel(calendarAuthorization))",
                 controlLabel: "System permission controls stay explicit",
                 privacyLabel: "No silent calendar writes",
@@ -1119,7 +1119,7 @@ private extension RepositoryBackedYouService {
                 YouConstitutionRule(
                     id: "constitution-calendar",
                     title: "Ask before calendar writes",
-                    detail: "Calendar access is explicit and Plan-owned. Calendar writes require confirmation and are never silent.",
+                    detail: "Calendar access is explicit and Time-owned. Calendar writes require confirmation and are never silent.",
                     statusLabel: calendarAuthorizationLabel(calendarAuthorization),
                     state: safetySamples.calendarWrite.mustNeverBeSilent ? .warning : .default
                 ),
@@ -1960,7 +1960,7 @@ private extension RepositoryBackedYouService {
                     title: "Work, school, and fixed anchors",
                     summary: "Committed blocks, sleep, care, commute, and buffers win before any planning suggestion.",
                     statusLabel: calendarAuthorizationLabel(calendarAuthorization),
-                    sourceLabel: "Source: Plan-owned calendar boundary",
+                    sourceLabel: "Source: Time-owned calendar boundary",
                     state: .default
                 ),
                 YouAvailabilityCenterItem(

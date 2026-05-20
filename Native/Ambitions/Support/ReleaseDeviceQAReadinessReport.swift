@@ -63,7 +63,7 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseDeviceQACheck(
             id: "returning-user",
             scope: .returningUser,
-            requiredJourney: "Launch with existing local data and verify Today, Goals, Plan, You, Reviews, and receipts still orient the user.",
+            requiredJourney: "Launch with existing local data and verify Today, Goals, Time, You, Reviews, and receipts still orient the user.",
             evidence: "Preview bootstrap, core-surface scenario catalog, and repository-backed service tests cover returning-user local data paths.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "Returning users may lose context or trust."
@@ -79,8 +79,8 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseDeviceQACheck(
             id: "no-data",
             scope: .noData,
-            requiredJourney: "Open Today, Goals, Capture, Plan, and You with no goals/captures and verify calm useful empty states.",
-            evidence: "Daily loop, activation, Today, Goals, Capture, Plan, and You tests cover no-data/empty-state behavior.",
+            requiredJourney: "Open Today, Goals, Capture, Time, and You with no goals/captures and verify calm useful empty states.",
+            evidence: "Daily loop, activation, Today, Goals, Capture, Time, and You tests cover no-data/empty-state behavior.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "Empty states may feel blank or overclaim future systems."
         ),

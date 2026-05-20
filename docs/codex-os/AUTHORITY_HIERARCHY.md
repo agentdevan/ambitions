@@ -25,11 +25,13 @@
 - `scripts/ambitions-codex-os-doctor.py`
 - `Makefile` targets for Codex OS validation/doctor
 - `.agents/skills/` files
+- `prompts/` runner-compatible prompt artifacts that remain pending, historical, or supporting execution references only
 
 ## Historical reference
 
 - Previous prompt files and batch documentation that remain for continuity.
 - Legacy governance text in older batch logs and run directories.
+- Root prompt installers, `prompts/batches/`, `prompts/ambitions/`, `prompts/moat-install/`, `prompts/generated/`, and related runner-compatible prompt artifacts are historical or supporting unless a current runner-selected batch refreshes them.
 
 ## Obsolete / archive-candidate
 

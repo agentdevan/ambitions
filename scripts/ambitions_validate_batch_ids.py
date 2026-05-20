@@ -5,8 +5,18 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGET_DIR = ROOT / "prompts" / "moat-install"
-MAIN_PROMPT = ROOT / "prompts" / "AMB-MOAT-OS-FINAL-INSTALLER-POST24.md"
+PROMPT_FILES = sorted(
+    [
+        ROOT / "prompts" / "AMB-MOAT-OS-FINAL-INSTALLER-POST24.md",
+        *sorted((ROOT / "prompts" / "ambitions").glob("AMB-CODEX-OS-NO-COST-HARDENING-*.md")),
+        *sorted((ROOT / "prompts" / "batches").glob("AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md")),
+        *sorted(
+            (ROOT / "prompts" / "batches").glob(
+                "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T06-CODEX-OS-GOVERNANCE.md"
+            )
+        ),
+    ]
+)
 
 
 def batch_from_path(path: Path) -> str:
@@ -29,14 +39,7 @@ def main() -> int:
     seen = {}
     issues = []
 
-    files = []
-    if MAIN_PROMPT.exists():
-        files.append(MAIN_PROMPT)
-    files.extend(sorted(TARGET_DIR.glob("*.md")))
-
-    for path in files:
-        if not path.name.endswith(".md"):
-            continue
+    for path in PROMPT_FILES:
         text = path.read_text(encoding="utf-8")
         batch_id = batch_from_path(path)
         if not batch_id:

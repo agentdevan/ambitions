@@ -4,6 +4,8 @@ Supporting note: This subtree supports current Ambitions Codex work but does not
 
 Current authority starts in [`../../truth/README.md`](../../truth/README.md). This subtree is an install layer for the flagship Codex OS upgrade requested in batch `AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01`.
 
+Current product truth still comes from `docs/truth/*`; the active flagship IA remains `Today / Goals / Capture / Time / You`, and `Plan` stays a compatibility seam only where active truth allows it.
+
 It does not replace:
 
 - [`../../codex-os/README.md`](../../codex-os/README.md)
@@ -25,3 +27,4 @@ It does not replace:
 ## Routing rule
 
 These docs are routing and guardrail material only. They do not prove implementation, validation, release readiness, or product behavior.
+Runner-compatible prompt artifacts under `prompts/` are supporting or historical execution references unless a current runner-selected batch refreshes them.

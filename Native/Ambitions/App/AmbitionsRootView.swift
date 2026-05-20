@@ -190,7 +190,7 @@ struct AmbitionsRootView: View {
                         title: "Capture",
                         subtitle: "Time support route",
                         posture: .shaping,
-                        backButtonAccessibilityIdentifier: "shell.plan.back-button",
+                        backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
                         trailingButtons: shellUtilityButtons(for: .time)
                     ) {
@@ -201,7 +201,7 @@ struct AmbitionsRootView: View {
                         title: "Rituals",
                         subtitle: "Time-owned loop view",
                         posture: .shaping,
-                        backButtonAccessibilityIdentifier: "shell.plan.back-button",
+                        backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
                         trailingButtons: shellUtilityButtons(for: .time)
                     ) {
@@ -212,7 +212,7 @@ struct AmbitionsRootView: View {
                         title: "Weekly Review",
                         subtitle: "Time shaping continuation",
                         posture: .shaping,
-                        backButtonAccessibilityIdentifier: "shell.plan.back-button",
+                        backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
                         trailingButtons: shellUtilityButtons(for: .time)
                     ) {
