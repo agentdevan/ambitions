@@ -171,7 +171,8 @@ This audit does not claim:
 
 Verified:
 
-- `git status --short --branch` showed only the expected dirty prompt header plus this untracked report.
+- Original report creation found only the expected prompt/report diff for this audit boundary.
+- Follow-up runner reviews on 2026-05-20 found no tracked diff and only the transient `.codex/state/global-train.lock` runner artifact.
 - `test -f docs/codex/reports/AMB-POST23-00-COMPLETION-SENTINEL.md`
 - `test -f docs/audits/amb-fe-be-integrated-proof-99-report.md`
 - `test -f docs/proof/amb-fe-be/integrated-proof-99/README.md`
@@ -199,4 +200,24 @@ Remove this report only:
 rm -f docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
 ```
 
-STATUS: YELLOW
+## Accepted Yellow Closeout
+
+Accepted Yellow reason:
+
+- This batch is an audit/classification gate, not an implementation repair.
+- The Yellow findings are the intended handoff into `AMB-POST23-02-UNDERDELIVERY-REPAIR`.
+- Re-running the runner on 2026-05-20 produced Green review/finalization phases with no tracked source, prompt, truth, proof-pack, or report diff.
+- The remaining Yellow boundaries are explicitly preserved as repair inputs and non-claims, not ignored completion proof.
+
+Acceptance scope:
+
+- Accept only the audit result as complete enough to advance to the underdelivery repair batch.
+- Do not accept release readiness, device evidence, accessibility conformance, privacy/legal signoff, performance proof, hosted CI proof, full product completion, or full Private Life Runtime proof.
+
+Next batch:
+
+```text
+AMB-POST23-02-UNDERDELIVERY-REPAIR
+```
+
+STATUS: ACCEPTED YELLOW
