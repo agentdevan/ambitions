@@ -28,6 +28,9 @@ Ownership invariants:
 - `DecisionReplayContract` binds the seed, source snapshot, candidate sequence, ranking ledger, selected candidate, excluded candidates, and no-mutation-after-publish rule.
 - closure mutation is allowed only through `CommandPipeline`.
 - projections may render repair and refresh affordances, but they do not rank, override, or silently mutate runtime decisions.
+- recovery-first mutation applies to missed, blocked, shortened, or waiting outcomes only through `CommandPipeline` and receipt lineage.
+- blocked-goal unstick handling may assume a smaller next step, protected time, waiting state, stale or unavailable source data, recovery already in progress, or user correction/reset.
+- local learning state and privacy-sensitive memory state must remain inspectable and resettable.
 
 ## Maturity levels
 

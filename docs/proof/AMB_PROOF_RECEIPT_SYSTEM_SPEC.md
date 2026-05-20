@@ -52,7 +52,53 @@ Each receipt includes:
 - decision rationale
 - not-chosen reasons set
 - conflict/confidence (boolean and bounded)
-- closure outcome outcome
+- closure outcome
+- affected object IDs
+- command trace or replay reference
+- replay id
+- reversibility note
+- privacy-safe summary
+
+## Closure receipt path
+
+Closure-sensitive recommendations and mutations must carry a `ClosureReceipt` path that ties the decision to the runtime packet that produced it.
+
+The closure receipt path records:
+- closure outcome
+- source snapshot used at decision time
+- command trace or `CommandPipeline` reference
+- affected object IDs
+- not-chosen reasons for excluded alternatives
+- replay id and seed reference
+- reversibility or recovery path
+- privacy-safe summary suitable for user inspection
+
+The receipt path must make it possible to explain why a closure happened, what changed, and what remains available for replay or recovery.
+
+## Recovery-first mutation
+
+Missed, blocked, shortened, or waiting outcomes may only mutate future recommendations through `CommandPipeline` and receipt lineage.
+
+The runtime must not silently rewrite current intent. It may:
+- record the closure outcome
+- emit a receipt
+- update future recommendation inputs
+- preserve the prior source snapshot
+- preserve the no-mutation-after-publish rule for replayed decisions
+
+Any mutation that changes future guidance must remain inspectable through receipt lineage.
+
+## Blocked-goal unstick assumptions
+
+Blocked-goal recovery may assume:
+- the next step can be smaller than the original step
+- protected time may be required
+- the goal may be in a waiting state
+- source data may be stale or unavailable
+- recovery may already be in progress
+- the user may correct, reset, or re-open the path
+
+These assumptions are proof requirements, not auto-execution rules. They define the recovery vocabulary the runtime must be able to explain.
 
 ## Runtime obligations
 
@@ -65,3 +111,9 @@ Each receipt includes:
 ## Accessibility obligations
 
 Receipt surfaces are semantically summarized and include reduced-motion alternatives.
+
+## Claim boundary
+
+This document defines required proof assets and receipt controls.
+
+It does not prove app runtime behavior, accessibility conformance, privacy approval, build success, or release readiness.

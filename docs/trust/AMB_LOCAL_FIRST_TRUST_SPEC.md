@@ -18,6 +18,7 @@
 - network dependency scan.
 - third-party dependency ledger.
 - privacy manifest alignment when available.
+- receipt for every memory-control change.
 
 ## Trust states
 
@@ -35,8 +36,22 @@
 ## Local memory controls
 
 - opt-out controls for memory persistence
+- disable-learning controls
 - export controls
 - delete / reset flow with receipts
+- redaction controls for stored personal context
+- reset-pending state when a delete/reset request has not yet completed
+
+## Memory control states
+
+- memory_enabled
+- memory_disabled
+- memory_redacted
+- memory_reset_pending
+- export_ready
+- delete_reset_pending
+
+Memory control state changes must be accompanied by a receipt that records the source action, affected data classes, and resulting trust state.
 
 ## Red flags
 

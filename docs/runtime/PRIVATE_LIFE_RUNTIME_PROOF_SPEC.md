@@ -44,6 +44,12 @@ Every recommendation must answer:
 
 Future implementation proof must include fixtures or tests for each scenario, local persistence/replay evidence, closure/recovery evidence, receipt evidence, and a current status report that separates implemented behavior from planned behavior.
 
+## Proof boundary
+
+This proof spec defines the evidence that future implementations must produce.
+
+It does not prove the app runtime, accessibility conformance, privacy approval, build success, or release readiness.
+
 ## Non-Proof Boundary
 
 This document does not prove build success, test success, runtime implementation, visual QA, accessibility conformance, device validation, TestFlight readiness, App Store readiness, or release readiness.
