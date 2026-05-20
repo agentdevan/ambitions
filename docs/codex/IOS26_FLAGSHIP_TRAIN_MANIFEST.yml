@@ -1,0 +1,172 @@
+program_id: IOS26-FLAGSHIP
+status: installed_not_run
+runner_required: true
+run_with: scripts/ambitions-codex-train.sh
+direct_codex_execution: forbidden_unless_user_explicitly_bypasses_runner
+release_readiness: unproven
+claim_boundaries:
+  - no_app_implementation_claim
+  - no_release_readiness_claim
+  - no_accessibility_verification_claim_without_proof
+  - no_performance_validation_claim_without_measurements
+stop_rules:
+  - stop_on_red
+  - never_skip_train_0
+  - do_not_run_source_changing_trains_until_train_0_baseline_artifacts_exist
+  - do_not_run_ios_26_target_bump_until_toolchain_proof_exists
+dependencies:
+  TRAIN_00: []
+  TRAIN_01: [TRAIN_00]
+  TRAIN_02: [TRAIN_01]
+  TRAIN_03: [TRAIN_00, TRAIN_01]
+  TRAIN_04: [TRAIN_03]
+  TRAIN_05: [TRAIN_02, TRAIN_03, TRAIN_04]
+  TRAIN_06: [TRAIN_02, TRAIN_03, TRAIN_04]
+  TRAIN_07: [TRAIN_04]
+  TRAIN_08: [TRAIN_03, TRAIN_04, TRAIN_11_when_external_intake_is_included]
+  TRAIN_09: [TRAIN_03, TRAIN_04, TRAIN_11, TRAIN_13_for_public_accessibility_status]
+  TRAIN_10: [TRAIN_03_through_TRAIN_09]
+  TRAIN_11: [TRAIN_01, schema_decisions_from_TRAIN_03_TRAIN_04_TRAIN_10]
+  TRAIN_12: [TRAIN_02, TRAIN_10, TRAIN_11]
+  TRAIN_13: [TRAIN_05_through_TRAIN_12]
+  TRAIN_14: [TRAIN_02, TRAIN_05_through_TRAIN_13]
+  TRAIN_15: [TRAIN_00]
+  TRAIN_16: [TRAIN_00_through_TRAIN_15]
+proof_artifact_roots:
+  - build/reports/ios26-baseline/
+  - build/reports/ios26-migration/
+  - build/reports/ios26-shell/
+  - build/reports/private-life-runtime/
+  - build/reports/goal-intent-compiler/
+  - build/reports/reality-meridian/
+  - build/reports/lifeshape-field/
+  - build/reports/constellation-atlas/
+  - build/reports/atmosphere-composer/
+  - build/reports/user-system-profile/
+  - build/reports/proof-receipts-replay/
+  - build/reports/data-safety/
+  - build/reports/external-surfaces/
+  - build/reports/accessibility-nutrition/
+  - build/reports/performance/
+  - build/reports/repo-hygiene/
+  - build/reports/release-candidate/
+trains:
+  - id: TRAIN_00
+    title: Repo truth, audit, validation baseline
+    status: installed_not_run
+    batches:
+      - IOS26-T00-B01
+      - IOS26-T00-B02
+      - IOS26-T00-B03
+  - id: TRAIN_01
+    title: iOS 26 minimum migration foundation
+    status: installed_not_run
+    batches:
+      - IOS26-T01-B01
+      - IOS26-T01-B02
+      - IOS26-T01-B03
+  - id: TRAIN_02
+    title: Design system and Liquid Glass-era shell modernization
+    status: installed_not_run
+    batches:
+      - IOS26-T02-B01
+      - IOS26-T02-B02
+      - IOS26-T02-B03
+  - id: TRAIN_03
+    title: Private Life Runtime centralization and proof harness
+    status: installed_not_run
+    batches:
+      - IOS26-T03-B01
+      - IOS26-T03-B02
+      - IOS26-T03-B03
+  - id: TRAIN_04
+    title: Goal intent-to-day compiler
+    status: installed_not_run
+    batches:
+      - IOS26-T04-B01
+      - IOS26-T04-B02
+      - IOS26-T04-B03
+  - id: TRAIN_05
+    title: Today / Reality Meridian final object
+    status: installed_not_run
+    batches:
+      - IOS26-T05-B01
+      - IOS26-T05-B02
+      - IOS26-T05-B03
+  - id: TRAIN_06
+    title: Time / LifeShape Field final object
+    status: installed_not_run
+    batches:
+      - IOS26-T06-B01
+      - IOS26-T06-B02
+      - IOS26-T06-B03
+  - id: TRAIN_07
+    title: Goals / Constellation Atlas final object
+    status: installed_not_run
+    batches:
+      - IOS26-T07-B01
+      - IOS26-T07-B02
+      - IOS26-T07-B03
+  - id: TRAIN_08
+    title: Capture / Atmosphere Composer final object
+    status: installed_not_run
+    batches:
+      - IOS26-T08-B01
+      - IOS26-T08-B02
+      - IOS26-T08-B03
+  - id: TRAIN_09
+    title: You / User System Profile behavior-changing settings
+    status: installed_not_run
+    batches:
+      - IOS26-T09-B01
+      - IOS26-T09-B02
+      - IOS26-T09-B03
+  - id: TRAIN_10
+    title: Proof, receipts, closure, recovery, replay
+    status: installed_not_run
+    batches:
+      - IOS26-T10-B01
+      - IOS26-T10-B02
+      - IOS26-T10-B03
+  - id: TRAIN_11
+    title: Persistence, migration, export/delete, App Group durability
+    status: installed_not_run
+    batches:
+      - IOS26-T11-B01
+      - IOS26-T11-B02
+      - IOS26-T11-B03
+  - id: TRAIN_12
+    title: Widgets, Live Activities, App Intents, share extension
+    status: installed_not_run
+    batches:
+      - IOS26-T12-B01
+      - IOS26-T12-B02
+      - IOS26-T12-B03
+  - id: TRAIN_13
+    title: Accessibility, Dynamic Type, Reduce Motion, contrast/transparency
+    status: installed_not_run
+    batches:
+      - IOS26-T13-B01
+      - IOS26-T13-B02
+      - IOS26-T13-B03
+  - id: TRAIN_14
+    title: Performance, Instruments, power, launch, scroll, memory
+    status: installed_not_run
+    batches:
+      - IOS26-T14-B01
+      - IOS26-T14-B02
+      - IOS26-T14-B03
+  - id: TRAIN_15
+    title: Repo hygiene, naming drift, historical quarantine
+    status: installed_not_run
+    batches:
+      - IOS26-T15-B01
+      - IOS26-T15-B02
+      - IOS26-T15-B03
+  - id: TRAIN_16
+    title: Release proof, App Store readiness, final validation
+    status: installed_not_run
+    batches:
+      - IOS26-T16-B01
+      - IOS26-T16-B02
+      - IOS26-T16-B03

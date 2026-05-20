@@ -1230,3 +1230,7 @@ FET01-FET12 are complete and apply before any further visible top-level UI expan
 ## No-Claim Boundary
 
 This order does not claim implementation, legal compliance, App Store readiness, TestFlight readiness, physical-device proof, public accessibility conformance, iCloud sync, StoreKit monetization, widgets, Live Activities, App Intents, notifications, analytics, release readiness, Found Life runtime, searchable recall runtime, rendered flagship visual signoff, or FAANG handoff readiness. It defines the order required to prove or safely defer those claims.
+
+## IOS26 Flagship Train Overlay
+
+Status: installed_not_run. IOS26-FLAGSHIP is a future sequential maturation overlay. Train 0 baseline must precede source-changing IOS26 trains. This overlay does not supersede truth files or active completed history.

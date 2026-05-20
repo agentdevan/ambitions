@@ -66,3 +66,7 @@ Continuing with dirty unclassified state is a Hard Red.
 ## Non-Claims
 
 This registry does not implement app behavior, validate builds/tests, prove release readiness, prove device behavior, prove public accessibility conformance, or grant legal/privacy approval.
+
+## IOS26 Flagship Train Gates
+
+Status: installed_not_run. Accepted Yellow IOS26 closeouts must record owner, safety reason, no-claim boundary, and follow-up gate here before continuation. Red stops the train.
