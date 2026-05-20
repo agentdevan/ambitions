@@ -226,10 +226,28 @@ def report_is_closed(path: Path) -> bool:
     return False
 
 
+def runner_status_closed(batch_id: str, root: Path = ROOT) -> bool:
+    run_root = root / ".codex/runs" / batch_id
+    if not run_root.exists():
+        return False
+    status_files = sorted(run_root.glob("*/runner-status.env"), reverse=True)
+    for path in status_files:
+        text = read_text(path)
+        if re.search(r"(?m)^FINAL_STATUS=GREEN\s*$", text):
+            return True
+        if re.search(r"(?m)^FINAL_STATUS=ACCEPTED YELLOW\s*$", text):
+            return True
+        if re.search(r"(?m)^FINAL_STATUS=(YELLOW|RED|UNKNOWN)\s*$", text):
+            return False
+    return False
+
+
 def batch_completed(batch_id: str, root: Path = ROOT) -> bool:
     for path in completion_report_paths(batch_id, root=root):
         if report_is_closed(path):
             return True
+    if runner_status_closed(batch_id, root=root):
+        return True
 
     escaped = re.escape(batch_id)
     complete_patterns = [
@@ -525,6 +543,7 @@ def self_test() -> int:
         invalid = root / "prompts/batches/post-23-truth-audit/AMB-POST23-02-BAD.md"
         report = root / "docs/audits/amb-fe-be-integrated-proof-99-report.md"
         codex_report = root / ".codex/reports/AMB-FE-BE-PREFLIGHT-00.md"
+        runner_status = root / ".codex/runs/AMB-FE-BE-CONTRACT-FREEZE-01/20260520T000000Z/runner-status.env"
         nested.write_text(good, encoding="utf-8")
         legacy.write_text(good, encoding="utf-8")
         invalid.write_text(bad, encoding="utf-8")
@@ -532,17 +551,21 @@ def self_test() -> int:
         report.write_text("# Report\n\nStatus: Green\n\nBatch: AMB-FE-BE-INTEGRATED-PROOF-99\n", encoding="utf-8")
         codex_report.parent.mkdir(parents=True)
         codex_report.write_text("# Report\n\n## Status\n\nGREEN\n", encoding="utf-8")
+        runner_status.parent.mkdir(parents=True)
+        runner_status.write_text("BATCH_ID=AMB-FE-BE-CONTRACT-FREEZE-01\nFINAL_STATUS=GREEN\n", encoding="utf-8")
         idx = prompt_index(root)
         assert idx["AMB-POST23-01-TRUTH-AUDIT"].runnable
         assert idx["LEGACY-FLAT-01"].runnable
         assert not idx["AMB-POST23-02-BAD"].runnable
         assert batch_completed("AMB-FE-BE-INTEGRATED-PROOF-99", root=root)
         assert batch_completed("AMB-FE-BE-PREFLIGHT-00", root=root)
+        assert batch_completed("AMB-FE-BE-CONTRACT-FREEZE-01", root=root)
     print("self-test: nested runnable prompt discovered")
     print("self-test: legacy flat prompt discovered")
     print("self-test: missing runner metadata rejected")
     print("self-test: audit report closeout path discovered")
     print("self-test: codex report closeout path discovered")
+    print("self-test: runner status closeout discovered")
     return 0
 
 
