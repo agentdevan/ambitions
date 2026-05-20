@@ -1,0 +1,102 @@
+{
+  "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01",
+  "status": "YELLOW",
+  "summary": "Train 0 scaffold plus Phase 04 repair for the prompt-required build report path and proof-claim boundary.",
+  "branch": "main",
+  "sha": "085083d30cfee7ed586fdf74f642c74e8b6c1fab",
+  "final_status": "YELLOW",
+  "trains_completed": [
+    "0"
+  ],
+  "trains_yellow": [
+    "0"
+  ],
+  "trains_red": [],
+  "files_changed_count": 7,
+  "files_moved_count": 0,
+  "files_deleted_count": 0,
+  "forbidden_paths_touched_unexpectedly": [],
+  "changed_files": [
+    "build/reports/amb-repo-green-flagship-reset-master-01.json",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-authority-map.md",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-train-manifest.md",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-validation-proof.md",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md",
+    "scripts/ambitions-codex-os-validate.py"
+  ],
+  "surface_vocabulary": {
+    "status": "deferred",
+    "forbidden_surface_owner_hits_remaining": null,
+    "allowed_context_hits_remaining": null,
+    "ledger_path": "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-ia-surface-vocabulary-ledger.md",
+    "claim_boundary": "Train 0 did not run the final surface vocabulary ledger, so remaining hit counts are unmeasured and not claimed as zero."
+  },
+  "validation": {
+    "prompt_header_validator": "GREEN",
+    "batch_id_validator": "GREEN",
+    "codex_os_validator": "GREEN",
+    "xcodegen_generate": "not run",
+    "package_resolution": "not run",
+    "simulator_build": "not run",
+    "unit_tests": "not run",
+    "ui_tests": "not run",
+    "git_diff_check": "GREEN",
+    "json_parse": "GREEN"
+  },
+  "validations_run": [
+    "python3 -m json.tool docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json >/tmp/amb-green-reset-docs-path.json",
+    "python3 -m json.tool build/reports/amb-repo-green-flagship-reset-master-01.json >/tmp/amb-green-reset-build-path.json",
+    "python3 scripts/ambitions_validate_prompt_headers.py",
+    "python3 scripts/ambitions_validate_batch_ids.py",
+    "python3 scripts/ambitions-codex-os-validate.py",
+    "git diff --check"
+  ],
+  "no_cost_proof": {
+    "new_dependencies_added": false,
+    "credential_material_added": false,
+    "network_or_ci_added": false,
+    "paid_services_added": false,
+    "notes": "Phase 04 added no dependencies, credentials, network paths, hosted CI, or paid services."
+  },
+  "source_truth": {
+    "truth_files_inspected": [
+      "docs/truth/README.md",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "docs/truth/RELEASE_TRUTH.md",
+      "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "docs/truth/HISTORICAL_POLICY.md"
+    ],
+    "app_source_changed": false,
+    "project_config_changed": false,
+    "release_claims_added": false
+  },
+  "risks": [
+    "The master reset remains incomplete after Train 0; later trains are deferred.",
+    "The surface vocabulary ledger has not run, so remaining hit counts are unmeasured."
+  ],
+  "rollback": [
+    "git restore -- scripts/ambitions-codex-os-validate.py",
+    "rm -f build/reports/amb-repo-green-flagship-reset-master-01.json",
+    "rm -f docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01*.md docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json"
+  ],
+  "next_recommended_batch": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01 Train 1: Audit calibration and validator repair",
+  "ownership_decisions": [
+    "build/reports/amb-repo-green-flagship-reset-master-01.json is the batch-owned prompt-required report path",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json is a supporting audit copy",
+    "build/reports/ambitions-codex-os-validate.json is a validator-generated side effect and is not owned by this train"
+  ],
+  "non_claims": [
+    "no release readiness claimed unless current proof exists",
+    "no TestFlight readiness claimed unless current proof exists",
+    "no App Store readiness claimed unless current proof exists",
+    "no physical-device validation claimed unless current proof exists",
+    "no public accessibility conformance claimed unless current proof exists",
+    "no performance readiness claimed unless current proof exists",
+    "no privacy/legal approval claimed unless current proof exists",
+    "no complete Private Life Runtime proof claimed unless scenario tests pass",
+    "no zero-hit surface vocabulary ledger claim is made for Train 0"
+  ]
+}

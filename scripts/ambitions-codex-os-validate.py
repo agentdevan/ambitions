@@ -18,6 +18,7 @@ REPORT_PATH = BUILD_REPORTS / "ambitions-codex-os-validate.json"
 
 ALLOWED_REPORT_PATHS = {
     "build/reports/ambitions-codex-os-validate.json",
+    "build/reports/amb-repo-green-flagship-reset-master-01.json",
     "build/reports/ambitions-codex-os-dry-run-002.json",
     "build/reports/ambitions-codex-os-dry-run-003.json",
     "build/reports/ambitions-codex-os-dry-run-004.json",

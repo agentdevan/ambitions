@@ -1,0 +1,46 @@
+{
+  "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01",
+  "branch": "main",
+  "sha": "085083d30cfee7ed586fdf74f642c74e8b6c1fab",
+  "final_status": "YELLOW",
+  "trains_completed": [
+    "0"
+  ],
+  "trains_yellow": [
+    "0"
+  ],
+  "trains_red": [],
+  "files_changed_count": 7,
+  "files_moved_count": 0,
+  "files_deleted_count": 0,
+  "forbidden_paths_touched_unexpectedly": [],
+  "surface_vocabulary": {
+    "status": "deferred",
+    "forbidden_surface_owner_hits_remaining": null,
+    "allowed_context_hits_remaining": null,
+    "ledger_path": "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-ia-surface-vocabulary-ledger.md",
+    "claim_boundary": "Train 0 did not run the final surface vocabulary ledger, so remaining hit counts are unmeasured and not claimed as zero."
+  },
+  "validation": {
+    "prompt_header_validator": "GREEN",
+    "batch_id_validator": "GREEN",
+    "codex_os_validator": "GREEN",
+    "xcodegen_generate": "not run",
+    "package_resolution": "not run",
+    "simulator_build": "not run",
+    "unit_tests": "not run",
+    "ui_tests": "not run",
+    "git_diff_check": "GREEN",
+    "json_parse": "GREEN for docs audit copy and prompt-required build report path"
+  },
+  "non_claims": [
+    "no release readiness claimed unless current proof exists",
+    "no TestFlight readiness claimed unless current proof exists",
+    "no App Store readiness claimed unless current proof exists",
+    "no physical-device validation claimed unless current proof exists",
+    "no public accessibility conformance claimed unless current proof exists",
+    "no performance readiness claimed unless current proof exists",
+    "no privacy/legal approval claimed unless current proof exists",
+    "no complete Private Life Runtime proof claimed unless scenario tests pass"
+  ]
+}
