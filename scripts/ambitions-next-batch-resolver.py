@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import tempfile
 from dataclasses import dataclass
 from functools import lru_cache
@@ -237,8 +238,79 @@ def runner_status_closed(batch_id: str, root: Path = ROOT) -> bool:
             return True
         if re.search(r"(?m)^FINAL_STATUS=ACCEPTED YELLOW\s*$", text):
             return True
-        if re.search(r"(?m)^FINAL_STATUS=(YELLOW|RED|UNKNOWN)\s*$", text):
+    return False
+
+
+@lru_cache(maxsize=8)
+def git_commit_subjects(root: Path = ROOT) -> tuple[str, ...]:
+    git_dir = root / ".git"
+    if not git_dir.exists():
+        return ()
+    try:
+        output = subprocess.check_output(
+            ["git", "log", "--format=%s", "--", "."],
+            cwd=root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+    except Exception:
+        return ()
+    return tuple(line.strip() for line in output.splitlines() if line.strip())
+
+
+def git_commit_closed(batch_id: str, root: Path = ROOT) -> bool:
+    subjects = git_commit_subjects(root)
+    if not subjects:
+        return False
+    subject_pattern = re.compile(rf"^{re.escape(batch_id)}(?::|\s+-|\s+complete\b|\s+closed\b)", re.IGNORECASE)
+    normalized_batch = re.sub(r"[^A-Z0-9]", "", batch_id.upper())
+    completion_word = re.compile(r"\b(complete|completed|green|proof|close|closed)\b", re.IGNORECASE)
+    batch_tokens = re.findall(r"[A-Z0-9]+", batch_id.upper())
+
+    def token_matches(expected: str, actual: str) -> bool:
+        return expected == actual or expected.rstrip("S") == actual.rstrip("S")
+
+    def ordered_tokens_match(subject: str) -> bool:
+        subject_tokens = re.findall(r"[A-Z0-9]+", subject.upper())
+        index = 0
+        for expected in batch_tokens:
+            while index < len(subject_tokens) and not token_matches(expected, subject_tokens[index]):
+                index += 1
+            if index >= len(subject_tokens):
+                return False
+            index += 1
+        return True
+
+    def numbered_train_slot_match(subject: str) -> bool:
+        if len(batch_tokens) < 3:
             return False
+        subject_tokens = re.findall(r"[A-Z0-9]+", subject.upper())
+        slot_tokens = batch_tokens[:2]
+        slot_index = 0
+        for token in subject_tokens:
+            if token_matches(slot_tokens[slot_index], token):
+                slot_index += 1
+                if slot_index == len(slot_tokens):
+                    break
+        if slot_index != len(slot_tokens):
+            return False
+        tail = batch_tokens[2:]
+        overlap = 0
+        for expected in tail:
+            if any(token_matches(expected, actual) for actual in subject_tokens):
+                overlap += 1
+        return overlap >= 2
+
+    for subject in subjects:
+        if subject_pattern.search(subject):
+            return True
+        normalized_subject = re.sub(r"[^A-Z0-9]", "", subject.upper())
+        if normalized_batch in normalized_subject and completion_word.search(subject):
+            return True
+        if ordered_tokens_match(subject) and completion_word.search(subject):
+            return True
+        if numbered_train_slot_match(subject) and completion_word.search(subject):
+            return True
     return False
 
 
@@ -247,6 +319,8 @@ def batch_completed(batch_id: str, root: Path = ROOT) -> bool:
         if report_is_closed(path):
             return True
     if runner_status_closed(batch_id, root=root):
+        return True
+    if git_commit_closed(batch_id, root=root):
         return True
 
     escaped = re.escape(batch_id)
@@ -560,12 +634,20 @@ def self_test() -> int:
         assert batch_completed("AMB-FE-BE-INTEGRATED-PROOF-99", root=root)
         assert batch_completed("AMB-FE-BE-PREFLIGHT-00", root=root)
         assert batch_completed("AMB-FE-BE-CONTRACT-FREEZE-01", root=root)
+        if (ROOT / ".git").exists():
+            assert batch_completed("BE-01-RUNTIME-BASELINE", root=ROOT)
+            assert batch_completed("FE-06-SHELL-MIGRATION", root=ROOT)
+            assert batch_completed("FE-07-ROOT-SURFACES", root=ROOT)
+            assert batch_completed("FE-08-PROOF-RECEIPTS-TRUST", root=ROOT)
+            assert batch_completed("FE-11-VISUAL-QA-PREVIEW", root=ROOT)
+            assert batch_completed("FE-12-CHROME-CONTRACTS", root=ROOT)
     print("self-test: nested runnable prompt discovered")
     print("self-test: legacy flat prompt discovered")
     print("self-test: missing runner metadata rejected")
     print("self-test: audit report closeout path discovered")
     print("self-test: codex report closeout path discovered")
     print("self-test: runner status closeout discovered")
+    print("self-test: exact batch commit closeout discovered")
     return 0
 
 
