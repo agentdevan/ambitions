@@ -22,6 +22,10 @@ Ownership invariants:
 - not-chosen reasons are emitted by the runtime as part of the decision packet.
 - replay identity is runtime-owned and stable across renderers.
 - runtime unavailable and continuity conflict states are runtime-authored states.
+- `CandidateRankingLedger` records the deterministic tournament order, selected candidate, excluded candidates, source snapshot, replay id, and not-chosen reason ids for a single decision.
+- `ConstraintFirewall` runs before ranking and blocks unavailable, stale beyond policy, unsafe, privacy-redacted beyond policy, or recovery-incompatible candidates.
+- `RuntimeCritic` records deterministic weak-signal, stale-source, blocked-goal, recovery, and believability rejection reasons and may down-rank or reject candidates.
+- `DecisionReplayContract` binds the seed, source snapshot, candidate sequence, ranking ledger, selected candidate, excluded candidates, and no-mutation-after-publish rule.
 - closure mutation is allowed only through `CommandPipeline`.
 - projections may render repair and refresh affordances, but they do not rank, override, or silently mutate runtime decisions.
 
@@ -71,9 +75,11 @@ Ownership invariants:
 - `ClosureEngine` only mutates via `CommandPipeline` and emits `TrustReceipt` and `ContinuityReceipt` entries.
 - `DecisionReplayContract` guarantees replay id, actor, and source snapshot.
 - Projection surfaces consume runtime packets and may expose refresh or repair controls, but they do not become decision authorities.
+- Every non-selected candidate must carry a compact reason code and privacy-safe reason text or the decision packet is invalid.
 
 ## Unavailable and stale state behavior
 
-- `runtime_unavailable`: no recommendation produced; projection is blocked and explicit reason surfaced.
-- `stale_source`: recommendations include freshness severity and degrade strategy.
+- `runtime_unavailable`: no recommendation produced; projection is blocked and explicit repair path surfaced.
+- `stale_source`: recommendations include freshness severity and must degrade or require review.
 - `partial_conflict`: conflict state included and repairable path preserved.
+- `last_valid_packet` fallback is allowed only when explicitly marked stale or degraded; it is never promoted as fresh Green output.

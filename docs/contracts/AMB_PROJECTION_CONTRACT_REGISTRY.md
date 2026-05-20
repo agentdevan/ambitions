@@ -24,6 +24,12 @@ Contract ownership rule:
 - `runtime_identity` names the authoritative runtime owner of the packet or state being projected.
 - `projection_identity` names the renderer only; it must not imply selection or mutation authority.
 
+Decision competition terms:
+- `CandidateRankingLedger` is the deterministic tournament ledger for a single decision packet. It records the stable candidate order, the selected candidate, rejected candidates, source snapshot, replay id, and not-chosen reason ids.
+- `ConstraintFirewall` is the eligibility gate that runs before ranking. It excludes unavailable, stale beyond policy, unsafe, privacy-redacted beyond policy, or recovery-incompatible candidates.
+- `RuntimeCritic` is the deterministic down-rank and rejection layer. It records weak-signal, stale-source, blocked-goal, recovery, and believability reasons without model jargon.
+- `DecisionReplayContract` is the stable replay identity for the packet. It binds the seed, source snapshot, candidate sequence, ranking ledger ref, selected candidate, excluded candidates, and mutation prohibition after publish.
+
 ## Contract: StartHereDecisionPacket
 - owner: Private Life Runtime
 - consumer: Start Here UI + Step Detail
@@ -34,7 +40,7 @@ Contract ownership rule:
 - projection_identity: RealityMeridianProjection
 - freshness_semantics: every packet carries source_freshness state and stale severity
 - proof_semantics: trust_receipt_ids + unavailable_reason
-- not_chosen_semantics: reason_ids + excluded_candidate_ids + alternatives_count
+- not_chosen_semantics: reason_ids + excluded_candidate_ids + alternatives_count + privacy_safe_reason_text
 - privacy_semantics: redaction_flags and redaction_version
 - unavailable_stale_conflict_states: [runtime_unavailable, stale_source, partial_conflict]
 - fixtures: [start_here_normal.json, start_here_stale.json]
@@ -53,7 +59,7 @@ Contract ownership rule:
 - projection_identity: TodaySurfaceRenderer
 - freshness_semantics: shows source freshness badge and degraded states
 - proof_semantics: proof_links + receipt_summary
-- not_chosen_semantics: compact_not_chosen_preview
+- not_chosen_semantics: compact_not_chosen_preview + not_chosen_reason_ids
 - privacy_semantics: redacted_user_text and masked_intake
 - unavailable_stale_conflict_states: [runtime_unavailable, stale_source, partial_conflict]
 - fixtures: [rm_normal.json, rm_unavailable.json, rm_recovery.json]
@@ -338,7 +344,7 @@ Contract ownership rule:
 - projection_identity: NotChosenReasonsRenderer
 - freshness_semantics: reason_snapshot_at
 - proof_semantics: ranking_ledger_ref
-- not_chosen_semantics: explicit and compact
+- not_chosen_semantics: explicit and compact + privacy_safe_reason_text
 - privacy_semantics: redact_sensitive_context
 - unavailable_stale_conflict_states: [reasons_unavailable]
 - fixtures: [not_chosen_normal.json, not_chosen_compact.json]
@@ -351,7 +357,7 @@ Contract ownership rule:
 - owner: Runtime
 - consumer: Decision replay viewer
 - schema_maturity: L2
-- required_fields: [replay_id, seed, state_sequence, outcome]
+- required_fields: [replay_id, seed, source_snapshot_id, candidate_sequence, state_sequence, selected_candidate_id, excluded_candidate_ids, ranking_ledger_ref, outcome]
 - forbidden_fields: [mutated_trace]
 - runtime_identity: DecisionReplayContract
 - projection_identity: DecisionReplayRenderer

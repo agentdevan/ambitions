@@ -19,15 +19,15 @@ This document is the master moat map for installer phase 24+ consolidation.
 - **User-visible value:** Relevant recommendations with continuity and replay.
 - **Owner:** `Native/Ambitions/Domain` + runtime docs.
 - **Downstream batches:** `AMB-RUNTIME-PRIVATE-LIFE-RUNTIME-L0L1-02`
-- **Required contracts:** `StartHereDecisionPacket`, `RealityMeridianProjection`, `RuntimeDecisionIR`
+- **Required contracts:** `StartHereDecisionPacket`, `RealityMeridianProjection`, `RuntimeDecisionIR`, `CandidateRankingLedger`, `ConstraintFirewall`, `RuntimeCritic`, `DecisionReplayContract`
 - **Runtime artifacts:** `RuntimeUnavailableState`, `RealityLedger`, `IntelligenceEventLedger`
 
 ### Intelligence moat
 - **Definition:** Deterministic candidate competition + critic + replay.
 - **Owner:** runtime + closure runtime teams.
 - **Downstream batches:** `AMB-INTELLIGENCE-DETERMINISTIC-CANDIDATE-COMPETITION-04`, `AMB-INTELLIGENCE-CLOSURE-LEARNING-LOCAL-MEMORY-05`
-- **State states:** warm-start, source freshness invalidation, blocked-goal unstick path.
-- **Validation:** projection and runtime validators plus fixture completeness.
+- **State states:** warm-start, source freshness invalidation, blocked-goal unstick path, runtime unavailable, stale source, recovery review.
+- **Validation:** projection and runtime validators plus fixture completeness, replay identity, and not-chosen reason coverage.
 
 ### Proof moat
 - **Definition:** Every recommendation is explainable and replayable.
@@ -78,11 +78,14 @@ This document is the master moat map for installer phase 24+ consolidation.
 - instant Today projection cache
 - runtime warm-start
 - precomputed Start Here candidates
+- deterministic candidate ranking ledger
+- constraint firewall before ranking
+- runtime critic with explicit rejection reasons
+- decision replay identity and source snapshot binding
 - incremental projection invalidation
 - app-open source freshness refresh
 - offline command queue
 - state restoration snapshot
-- candidate tournament + Constraint Firewall + Runtime Critic
 - Reality Signature
 - decision replay identity
 - not-chosen reasons
@@ -101,6 +104,7 @@ Each enhancement is assigned to one or more moats in this map and must inherit t
 - prompt header missing or malformed.
 - missing required contracts or missing owners.
 - active IA drift to old top-level structures.
+- decision packets without a non-selected reason code and privacy-safe reason text.
 
 ## Rollback expectation
 
