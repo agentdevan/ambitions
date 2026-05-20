@@ -26,6 +26,21 @@
 - `docs/codex/BATCH_REGISTRY.md`
 - `docs/codex/CONTEXT_INDEX.md`
 
+Frontend authority is mandatory for any UI/source-facing contract language in this batch.
+Consume the Encyclopedia Frontend OS before freezing downstream UI/source-facing contracts:
+
+- `ENCYCLOPEDIA_TO_FRONTEND_OS`
+- `frontend-authority-packet`
+- `frontend-authority-preflight`
+- `build/reports/frontend-authority-packets`
+- `build/reports/frontend-authority-preflight`
+
+Surface ID: `today_root_reality_meridian`
+Surface ID: `goals_root_constellation_atlas`
+Surface ID: `capture_root_atmosphere_composer`
+Surface ID: `time_root_lifeshape_field`
+Surface ID: `you_root_user_system_profile`
+
 ## Allowed Scope
 
 - Train contract docs and prompt files only.
