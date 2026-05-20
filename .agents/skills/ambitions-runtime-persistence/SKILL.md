@@ -1,9 +1,9 @@
 ---
-name: ambitions-repo-hygiene-rollback
-description: Use for Ambitions repo cleanup, historical quarantine, duplicate deletion, path-limited staging, rollback plans, and preserving unrelated dirty work.
+name: ambitions-runtime-persistence
+description: Use for Ambitions Private Life Runtime, deterministic local decisions, receipts, replay, SwiftData migration, export/delete/reset, and persistence safety.
 ---
 
-# Ambitions Repo Hygiene Rollback
+# Ambitions Runtime Persistence
 
 ## Authority Boundary
 Start from `docs/truth/*` before using this skill. Skills are operating support only: they are not product truth, implementation proof, validation proof, release proof, privacy approval, accessibility proof, App Store proof, or permission to change app behavior outside the current task scope.
@@ -11,12 +11,12 @@ Start from `docs/truth/*` before using this skill. Skills are operating support 
 Active top-level IA is `Today / Goals / Capture / Time / You`. `Plan` may appear only as an internal compatibility seam unless an active truth-file-scoped migration changes it.
 
 Hard stops: required cloud AI/LLM core behavior, hosted personal-data backend, analytics/tracking SDKs without approval, privacy manifest dishonesty, release/App Store/TestFlight/device/accessibility/performance claims without evidence, `Plan` as top-level IA, broad staging, destructive cleanup without indexed approval, or converting Ambitions into a dashboard/chatbot/calendar clone/task manager/habit tracker.
-## Hygiene Rule
-Cleanups must clarify active authority without losing useful history. Delete only material that is indexed, superseded, delete-safe, and reversible. Preserve unrelated dirty work.
+## Runtime Rule
+The moat is the Private Life Runtime: local, deterministic, inspectable, capacity-aware decisions with receipts, replay, closure, proof, and recovery. Do not add opaque ranking or required cloud AI.
 
 ## Workflow
-1. Precompute the exact changed/deleted path list.
-2. Classify files as active, supporting, stale, duplicate, historical, or archive-candidate.
-3. Extract useful commands/checklists/stop rules into canonical active locations before deletion.
-4. Stage only approved paths; never use `git add .`, `git add -A`, or commit unrelated work.
-5. Report rollback commands path-by-path; never use hard reset as normal rollback advice.
+1. Inspect runtime/domain/persistence boundaries before changing behavior.
+2. Require deterministic fixtures for recommendation, compilation, closure, recovery, and replay changes.
+3. Prefer existing receipt/event ledgers before new schema.
+4. Do not make destructive SwiftData changes without migration fixtures and rollback behavior.
+5. For export/delete/reset, require confirmation, failure recovery, and proof-bound UI status.

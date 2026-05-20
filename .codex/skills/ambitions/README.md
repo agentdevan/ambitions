@@ -1,25 +1,25 @@
 ---
-name: ambitions-skill-wrappers
-description: Routing hub for the flagship Ambitions Codex skill wrappers that point at existing skills instead of duplicating them.
+name: ambitions-skill-compatibility-router
+description: Compatibility router from legacy .codex Ambitions skill wrappers to canonical .agents/skills lanes.
 ---
 
-# Ambitions Skill Wrappers
+# Ambitions Skill Compatibility Router
 
-Supporting note: These wrappers support current Ambitions Codex work but do not override `docs/truth/`.
+This folder is a compatibility router only. It is not a separate active skill system and does not override `docs/truth/*`.
 
-This directory installs routing wrappers for a small flagship Codex OS layer. The wrappers point at existing skills under `.codex/skills/` instead of duplicating them.
+Use canonical `.agents/skills/*/SKILL.md` lanes for active Ambitions work:
 
-## Installed wrappers
+| Need | Canonical lane |
+|---|---|
+| Authority/source truth | `.agents/skills/ambitions-source-truth-authority/SKILL.md` |
+| Runner/batch execution | `.agents/skills/ambitions-batch-runner-operator/SKILL.md` |
+| iOS/Xcode validation | `.agents/skills/ambitions-ios-validation-xcode-wrapper/SKILL.md` |
+| Release proof honesty | `.agents/skills/ambitions-release-proof-honesty/SKILL.md` |
+| Privacy/local-first | `.agents/skills/ambitions-privacy-local-first/SKILL.md` |
+| Accessibility proof | `.agents/skills/ambitions-accessibility-proof/SKILL.md` |
+| Visual/product quality | `.agents/skills/ambitions-visual-product-quality/SKILL.md` |
+| Runtime/persistence | `.agents/skills/ambitions-runtime-persistence/SKILL.md` |
+| External surfaces | `.agents/skills/ambitions-external-surfaces/SKILL.md` |
+| Repo hygiene/rollback | `.agents/skills/ambitions-repo-hygiene-rollback/SKILL.md` |
 
-- `authority-resolver.md`
-- `batch-train-composer.md`
-- `no-sprawl-guard.md`
-- `source-truth-classifier.md`
-- `swiftui-flagship-ui-reviewer.md`
-- `backend-local-first-reviewer.md`
-- `apple-continuity-reviewer.md`
-- `privacy-claim-verifier.md`
-- `proof-ledger-writer.md`
-- `accessibility-native-ios-reviewer.md`
-- `release-believability-reviewer.md`
-- `red-team-reviewer.md`
+Legacy wrappers in this folder may provide historical extraction clues only when compatible with the canonical lanes and `docs/truth/*`.

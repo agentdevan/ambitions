@@ -1,21 +1,30 @@
 # Ambitions Codex Skills
 
-Active repo authority starts in [`../../docs/truth/README.md`](../../docs/truth/README.md). If this skill folder conflicts with `docs/truth/*`, the truth files win.
+Active callable Ambitions skills live in `.agents/skills/*/SKILL.md`.
 
-## Required read order
+This `.codex/skills/` tree is supporting and historical extraction material unless a file is explicitly indexed as active in `docs/status/codex-agents-skill-inventory.md` and remains compatible with `docs/truth/*`.
 
-1. [`../../docs/truth/README.md`](../../docs/truth/README.md)
-2. [`../../docs/truth/PRODUCT_DESIGN_TRUTH.md`](../../docs/truth/PRODUCT_DESIGN_TRUTH.md)
-3. [`../../docs/truth/IMPLEMENTATION_TRUTH.md`](../../docs/truth/IMPLEMENTATION_TRUTH.md)
-4. [`../../docs/truth/RELEASE_TRUTH.md`](../../docs/truth/RELEASE_TRUTH.md)
-5. [`../../docs/truth/CODEX_PROCESS_TRUTH.md`](../../docs/truth/CODEX_PROCESS_TRUTH.md)
-6. [`../../docs/status/codex-agents-skill-inventory.md`](../../docs/status/codex-agents-skill-inventory.md)
-7. Current active-batch scope and relevant skill files.
+## Authority
 
-## Boundary
+Start from `docs/truth/README.md` before using any skill material. If this folder conflicts with `docs/truth/*`, the truth files win.
 
-`.codex/skills/` is Codex operating support. It is not product source truth, implementation proof, validation proof, release proof, or approval to change app behavior.
+Skills are not product truth, implementation proof, validation proof, release proof, privacy approval, accessibility proof, App Store proof, or permission to change app behavior.
 
-Use skills only when compatible with `docs/truth/*`, active batch scope, and evidence boundaries. Product or implementation builder skills are candidate support until an active batch explicitly selects them.
+## Active Callable Lanes
 
-Historical Ambitions 3.0 / 4.0 / PXOS / SI wording inside skill material is subordinate to `docs/truth/*`.
+Use the canonical `.agents/skills` lanes for current Ambitions development:
+
+- `ambitions-source-truth-authority`
+- `ambitions-batch-runner-operator`
+- `ambitions-ios-validation-xcode-wrapper`
+- `ambitions-release-proof-honesty`
+- `ambitions-privacy-local-first`
+- `ambitions-accessibility-proof`
+- `ambitions-visual-product-quality`
+- `ambitions-runtime-persistence`
+- `ambitions-external-surfaces`
+- `ambitions-repo-hygiene-rollback`
+
+## Historical Boundary
+
+Flat `.codex/skills/*.md` files are supporting extraction material by default. Older Ambitions 3.0/4.0/PXOS/SI wording, `Plan` top-level IA, raw `xcodebuild` front doors, and release/readiness claims are subordinate to the active truth files and current proof evidence.
