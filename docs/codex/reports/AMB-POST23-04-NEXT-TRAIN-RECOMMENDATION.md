@@ -1,6 +1,6 @@
 # AMB-POST23-04 Next Train Recommendation
 
-Status: Yellow
+Status: Accepted Yellow
 Date: 2026-05-19
 Batch: AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION
 Stage: next train recommendation
@@ -59,6 +59,41 @@ The key evidence pattern across those reports is consistent:
 - visual QA is unknown or unproven
 - accessibility hooks exist, but conformance is not proven
 - closure and recovery remain durable in part, but not fully end-to-end proven
+
+## Frontend Authority Evidence
+
+This recommendation also required the generated frontend authority artifacts for the active root surfaces.
+
+The encyclopedia-to-frontend OS final gate is green:
+
+- `build/reports/encyclopedia-to-frontend-os-final-gate.md`
+- status: `green`
+- checks passed for packet generation, packet index, root packets, all five required preflights, prompt runner headers, source bindings, drift checks, dashboard, queue, receipts/proof contracts, make targets, frontend routing, and the no-implementation/no-release-claim guards
+
+The five required root surfaces all have matching packet and preflight evidence:
+
+- `today_root_reality_meridian`
+  - packet: `build/reports/frontend-authority-packets/today_root_reality_meridian.md`
+  - preflight: `build/reports/frontend-authority-preflight/today_root_reality_meridian.md`
+  - preflight status: `green`
+- `goals_root_constellation_atlas`
+  - packet: `build/reports/frontend-authority-packets/goals_root_constellation_atlas.md`
+  - preflight: `build/reports/frontend-authority-preflight/goals_root_constellation_atlas.md`
+  - preflight status: `green`
+- `capture_root_atmosphere_composer`
+  - packet: `build/reports/frontend-authority-packets/capture_root_atmosphere_composer.md`
+  - preflight: `build/reports/frontend-authority-preflight/capture_root_atmosphere_composer.md`
+  - preflight status: `green`
+- `time_root_lifeshape_field`
+  - packet: `build/reports/frontend-authority-packets/time_root_lifeshape_field.md`
+  - preflight: `build/reports/frontend-authority-preflight/time_root_lifeshape_field.md`
+  - preflight status: `green`
+- `you_root_user_system_profile`
+  - packet: `build/reports/frontend-authority-packets/you_root_user_system_profile.md`
+  - preflight: `build/reports/frontend-authority-preflight/you_root_user_system_profile.md`
+  - preflight status: `green`
+
+Taken together, that frontend authority evidence supports the report's boundary condition: UI work is still not the first recommended next train because the core-loop proof and backend repair gaps remain the more urgent blockers.
 
 ## Decision Summary
 
@@ -141,7 +176,16 @@ git diff --check -- docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.m
 git status --short --branch
 ```
 
-Expected result for this phase: Yellow, because this is a recommendation report and the underlying foundation is still not fully proven.
+Expected result for this phase: Accepted Yellow, because this recommendation report is complete and validated while the underlying foundation proof intentionally remains open.
+
+## Accepted Yellow Closeout
+
+This Yellow is accepted only for the recommendation artifact:
+
+- The report completed its job: it recommends core-loop proof and backend repair before UI Suite.
+- Frontend authority evidence is now explicit and points to green packet/preflight artifacts for all five required root surfaces.
+- The remaining Yellow items are not report defects. They are the proof gaps routed to the next train: deterministic recommendation proof, relaunch replay, closure/recovery durability, receipt/proof persistence, visual QA, and accessibility evidence.
+- This closeout does not claim product completion, build/test success, device proof, release readiness, accessibility conformance, or flagship readiness.
 
 ## Rollback
 
@@ -151,4 +195,4 @@ Remove this report only:
 rm -f docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md
 ```
 
-STATUS: YELLOW
+STATUS: ACCEPTED YELLOW
