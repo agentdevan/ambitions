@@ -1,0 +1,14544 @@
+# AMB-FILE-BY-FILE-REPO-AUDIT-01 Yellow Files
+
+Count: 3635
+
+- `.agents/skills/ambitions-release-proof-honesty/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/DEPARTMENT_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/GLOBAL_BATCH_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/OPERATING_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/PR_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/REPO_INVENTORY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/REVIEW_BOARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/SESSION_BOOTSTRAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/SKILL_GOVERNANCE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/TOOLING_AND_VALIDATION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/VALIDATION_HARNESS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/evals/prompts/03-ios-extension-builder.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/evals/prompts/06-ios-qa-regression-checker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/evals/prompts/07-design-system-guard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/evals/prompts/13-environment-blocked-validation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/evals/prompts/21-weak-validation-refinement.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/evals/prompts/22-release-miss-refinement.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/evals/skill-eval-matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/hooks/user_prompt_submit_guard.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/improvement/failure-taxonomy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/improvement/prompt-patterns.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/manifests/repair-profiles.yml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/manifests/skills-routing-map.yml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/manifests/visual-proof-map.yml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/operations/batch-execution-protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/operations/manual-signoff-checklists.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/operations/release-claim-truth-protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/operations/task-classification.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/operations/task-intake.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/operations/validation-policy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/review-boards/ambitions-ui-primitive-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/review-boards/ambitionsos-product-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/review-boards/continuity-sync-archive-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/review-boards/dream-safety-legality-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/review-boards/edge-case-abuse-resistance-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/review-boards/living-dream-architecture-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/review-boards/living-plan-recompiler-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/review-boards/signature-experience-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/review-boards/signature-interface-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/review-boards/source-claim-pack-security-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/review-boards/top-level-surface-review-board.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/routes/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/accepted-yellow-classifier.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/accessibility-cognitive-load-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/accessibility-privacy-performance-quality-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/adaptive-screen-implementation-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/ambitions-canon-v2-reconciler/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/ambitions-ios-surface-polisher/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/ambitions-long-term-data-survival-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/ambitions-time-context-builder/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/ambitions-v2-validation-closeout/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/ambitions/privacy-claim-verifier.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/ambitions/swiftui-flagship-ui-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/analytics-privacy-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/anti-agentic-slop-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/aos-fixture-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/aos-invariant-enforcer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/aos-model-boundary-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/aos-performance-budget-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/aos-red-team-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/aos-release-claim-boundary-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/aos-schema-migration-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/aos-train-orchestrator.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/apple-design-award-visual-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/autonomous-quality-operating-system-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/capture-routing-classification-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/codex-prompt-quality-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/codex-repair-train-designer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/codex-train-integrity-lead.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/compatibility-migration-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/conservative-futurism-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/conservative-futurism-visual-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/continuity-sync-archive-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/deep-not-wide-product-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/design-system-guard/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/dream-red-team-fixture-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/dream-safety-legality-triage-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/external-brain-dedupe-merge-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-human-proof-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-implementation-boundary-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-integration-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-product-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-release-claim-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/external-brain-test-fixture-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/faang-frontend-implementation-lead.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/faang-frontend-implementation-team.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/faang-rendered-visual-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/faang-staff-ios-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/flake-forensics-lead.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/founder-vision-and-handoff-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/human-made-codebase-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/ios-native-believability-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/ios-qa-regression-checker/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/large-file-extraction-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/life-memory-graph-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/life-os-product-quality-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/living-dream-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/living-plan-recompiler-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/memory-privacy-boundary-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/multi-device-merge-ledger-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/no-creepy-intelligence-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/non-sycophantic-product-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/north-star-extraction-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/pack-supply-chain-security-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/performance-energy-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/plan-mutation-permission-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/premium-ios-visual-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/primitive-misuse-density-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/privacy-legal-app-store-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/privacy-projection-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/privacy-sensitive-plan-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/product-canon-drift-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/product-depth-strategist.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/product-language-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/product-maturity-onboarding-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/professional-boundary-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/recovery-ux-designer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/release-claim-truth-enforcer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/release-hardening/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/repo-truth-enforcer/SKILL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/runtime-contract-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/signature-experience-director.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/signature-iconography-symbol-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/signature-interface-creative-director.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/source-atlas-composition-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/source-claim-graph-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/source-freshness-broker-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/source-pack-compiler-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/skills/source-truth-safety-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/swiftui-composition-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/swiftui-state-contract-enforcer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/test-impact-architect.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/top-level-surface-composition-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/trust-privacy-user-control-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/trust-ux-designer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/universal-capture-kernel-reviewer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/skills/validation-evidence-auditor.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/state/ambitions-known-facts.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/state/global-train-attempt-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/templates/autonomous-execution-loop.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/templates/execution-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/templates/failure-recovery-checklist.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/templates/global-batch-resume-prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/templates/merge-readiness.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/templates/release-claim-firewall.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/templates/validation-summary.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/architecture-hygiene-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/batch-train-continuation-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/batch-train-gate-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/batch-train-release-claim-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/batch-train-resume-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/batch-train-stop-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/copy-qa-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `.codex/validation/feature-file-responsibility-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/release-claim-evidence-protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/swiftui-state-contract-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `.codex/validation/traceability-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `AGENTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `AppUI/Sources/WidgetFamiliesPrimary.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `AppUI/Sources/WidgetFamiliesSecondary.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `AppUI/Sources/WidgetFoundation.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `AppUI/Sources/WidgetPreviews.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `DesignTokens/states/source-freshness.tokens.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `MASTER_PRODUCT_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Makefile`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/App/AmbitionsRootView.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/App/AppContainer.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/App/AppContainerFactory.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/App/AppExternalRouting.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/App/AppNavigation.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/App/AppShellView.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/App/AppTab.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/App/ShellCommandModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/App/ShellCommandRouter.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/ActionClosureReceiptModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionGraphModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionGraphProjectionStore.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsCommandModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamHandlingModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamNorthStarModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamPackRegistryModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSPerformanceEnergyModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSPrivacySafetyTailGate.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/CanonicalNowStateModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/CaptureModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/CommitmentWaitingModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/CorrectionFoldModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/EventLedgerModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/ExecutionResilienceModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalBelievabilityModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/GoalsModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Domain/HabitsModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Domain/InsightsModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Domain/LedgerReplayModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Domain/LifeAreaModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/LifeGraphEventLogModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/LifeGraphModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/NorthStarModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/OneStepGoalModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/Planning/LivingPlanGovernanceConsole.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Domain/Planning/PlanningEvaluation.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/ProofResourceGraphModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/RealityModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/RecommendationExplanationModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SafeAutomationPolicyModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/ScreenContractModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SmartAttachmentModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasPackFactoryModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasPackModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasReviewModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Domain/TodayModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Domain/YouModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/ExternalSnapshots/ExternalSurfaceContractModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Capture/CaptureScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/FeatureEnginePackageBoundaryModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Goals/CreateGoalScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Goals/GoalComponents.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Goals/GoalDetailScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Goals/GoalsFeatureModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Habits/HabitComponents.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Habits/HabitsFeatureService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Habits/HabitsScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Habits/HabitsViewModel.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Insights/InsightsFeatureService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Insights/InsightsScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Insights/InsightsViewModel.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Shared/ActivationContract.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Time/TimeFeatureModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Time/TimeFeatureService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Time/TimeLifeSuiteState.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Time/TimeReflowDecisionState.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Time/TimeScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Time/TimeScreenContractSnapshot.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Time/TimeViewModel.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Time/WeeklyReviewScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Today/DayRailProjection.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Today/TodayDayRailPanels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Today/TodayExecutionCompatibility.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Today/TodayExecutionProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Today/TodayFeatureModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Today/TodayFeatureService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Today/TodayHeroStepSignaturePrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/Today/TodayPanels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Today/TodayReadModelProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/Today/TodayScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/You/YouCrossSurfaceProofReviewProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/You/YouFeatureService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/You/YouRootSurface.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Features/You/YouScreen.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Features/You/YouViewModel.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Notifications/LocalNotificationFoundation.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Persistence/LegacyImportService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Persistence/PersistenceContracts.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Persistence/PortableSnapshotContracts.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Persistence/PortableSnapshotService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Persistence/StorageInvariantChecker.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Persistence/SwiftDataModels.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Persistence/SwiftDataRepositories.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/PreviewSupport/PreviewAppContainer.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/PreviewSupport/PreviewFixtures.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Resources/PrivacyInfo.xcprivacy`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Services/AmbitionsCommandExecutor.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/AppServices.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/CanonicalNowStateProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/CaptureService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/ExecutionResilienceProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/GoalBelievabilityProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/GoalClarificationService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/GoalContradictionService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/GoalEnergyFitService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/GoalExplainabilityProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/GoalFreshnessUpdateService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/GoalTeachingSignalService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/GoalUnderstandingService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/LearningAnticipationService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/MemoryLensService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/PathIntelligenceProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/RealityModelProjector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/ReviewsV1Projector.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Services/SmartAttachmentService.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Support/ExternalSurfaceTruth.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/Ambitions/UI/SourceAtlasUIPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/App/AppShellChromeTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/AppShellNavigationTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/App/ExternalRoutingTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/App/FE09ComponentSystemTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/App/MemoryLensServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/ReleaseCandidateLockDecisionReportTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/App/ReleaseDeviceQAReadinessReportTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/App/RichPanelDesignSystemTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/App/ScreenContractRegistryTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Captures/CapturePlacementReviewStateTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Captures/CapturesViewModelTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionGraphModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionGraphProjectionStoreTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSAdaptationModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Domain/AmbitionsOSEvaluationModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSExperienceModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Domain/AmbitionsOSExperienceTailGateTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Domain/AmbitionsOSInteroperabilityModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamCapacityBridgeModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamEligibilityDeadlineModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamPackRegistryModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamPathPortfolioModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamRequirementGraphModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamSourceClaimGraphModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTrustReceiptModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSLongevityModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyTailGateTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSRecommendationStartHereModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/AmbitionsOSVerticalSliceProofModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/InspectableIntelligenceGoldenScenarioTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/LedgerReplayModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/LifeGraphModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/LivingPlanGovernanceConsoleTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/LivingPlanMergeLedgerTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/LivingPlanRedTeamEvaluatorTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/ProofResourceGraphModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/SmartAttachmentModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Domain/SourceAtlasClaimCandidateExtractorModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/SourceAtlasOfflineFallbackRuntimeModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Domain/SourceAtlasPackFactoryModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/SourceAtlasQueryEngineModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Domain/SourceAtlasUserMiniPackBuilderModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Features/FeatureEnginePackageBoundaryModelsTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/GoalEngine/GoalEnginePlannerTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Goals/CreateGoalViewModelTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Goals/GoalDetailStrategicPresentationTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Habits/HabitsFeatureServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Insights/InsightsFeatureServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Persistence/CaptureServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Persistence/PersistenceRepositoryTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Persistence/PortableSnapshotServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Persistence/StorageMigrationExecutionReadinessTestingTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Services/CanonicalNowStateProjectorTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Services/GoalFreshnessUpdateServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Services/GoalResourceGraphServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Services/KnowledgeProviderBoundaryTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/Today/TodayViewModelTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsTests/You/YouFeatureServiceTests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Native/AmbitionsUITests/AmbitionsUITests.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Accessibility/AccessibilityClaimsLock.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Sources/Accessibility/AccessibilityNutrition.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/AmbitionsExtendedTactileKit.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/AmbitionsFlagshipTactilePrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/AmbitionsPremiumMaterials.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/ControlPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/DynamicAdaptiveVisualPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/FE09ComponentSystemPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Sources/Components/GroupedNavigationList.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/IconographyStatusPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/InformationPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/LifeDirectionalIntegrationPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/LoadingDegradedStatePrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/MotionPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/RichPanelPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/ShellChromePrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/StartHereProductPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Sources/Components/TopLevelSurfaceCompositionPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Components/TrustReceiptLayerPrimitives.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Previews/ComponentPreviews.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Previews/DynamicAdaptiveVisualPreviews.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Sources/Previews/InteractionMotionHapticsPreviews.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Sources/Previews/SignatureInterfaceVisualQAFixtures.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Previews/TrustReceiptLayerPreviews.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `Sources/Theme/AmbitionStateTokens.generated.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `Sources/Theme/AmbitionTheme.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `Sources/Theme/PanelDensitySize.swift`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Large Swift file; should be split or further proven for UI and architecture boundaries.
+- `backend/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `build/codex-os/active-authority-map.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/ambitions-context-pack.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/authorized-batch-summary.txt`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/batch-selection.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/batch-selection.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/next-action.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/next-action.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/performance-check.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/performance-check.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/repair-plan.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/repair-plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/sync-report.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/codex-os/sync-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/accessibility-contract.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/active-authority-residue-zero.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/adr-check.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ambitions-codex-os-dry-run-002.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ambitions-codex-os-dry-run-003.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ambitions-codex-os-dry-run-004.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ambitions-codex-os-validate.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/authority-ledger.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/authority-supersession.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/chrome-enrichment-install-report.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/component-contract-check.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/dashboard-conflict-authority.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/dependency-boundary.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/design-system-15-systems-dashboard.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/design-system-15-systems-dashboard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/design-system-15-systems-install-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/design-to-source-trace.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/design-token-completeness.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/design-token-contract.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/design-token-drift.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/design-token-generation.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/encyclopedia-to-frontend-operating-system-06.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/encyclopedia-to-frontend-operating-system-06.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/encyclopedia-to-frontend-os-final-gate.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/encyclopedia-to-frontend-os-final-gate.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/faang-red-team-evidence.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/faang-red-team-review.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/feature-service-boundary.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/flagship-object-system-install-report.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-architecture-atlas-visual-encyclopedia-001.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-architecture-atlas-visual-encyclopedia-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-global-train-hook-install.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/about_ambitions.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/about_ambitions.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/adjust_plan_reflow_preview_entry.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/adjust_plan_reflow_preview_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/alternate_path_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/alternate_path_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/ambition_graph.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/ambition_graph.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/automation_and_trust.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/automation_and_trust.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/back_navigation.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/back_navigation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/best_fit_explanation_sheet.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/best_fit_explanation_sheet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/best_fit_marker.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/best_fit_marker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/best_fit_region.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/best_fit_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/blocked_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/blocked_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/blocked_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/blocked_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/blocker_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/blocker_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_active_text_entry.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_active_text_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_attachment_proof_picker.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_attachment_proof_picker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_dictation_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_dictation_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_empty_first_use_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_empty_first_use_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_error_failed_attachment_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_error_failed_attachment_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_first_use_prompt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_first_use_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_grow_into_goal_route.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_grow_into_goal_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_hold_needs_a_place_route.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_hold_needs_a_place_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_idle_composer.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_idle_composer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_make_commitment_route.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_make_commitment_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_mark_constraint_route.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_mark_constraint_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_offline_local_only_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_offline_local_only_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_parse_uncertain_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_parse_uncertain_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_post_input_route_reveal.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_post_input_route_reveal.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_preferences.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_preferences.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_receipt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_receipt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_reflect_route.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_reflect_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_root_atmosphere_composer.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_root_atmosphere_composer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_save_as_proof_route.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/capture_save_as_proof_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/celestialfield_semantic_layer.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/celestialfield_semantic_layer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/chevron_disclosure_row.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/chevron_disclosure_row.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/closure_sheet.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/closure_sheet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/closure_system.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/closure_system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/commitment_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/commitment_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/commitment_staging_tray.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/commitment_staging_tray.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/compact_surface_header.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/compact_surface_header.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/context_crown.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/context_crown.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/day_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/day_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/day_lifeshape_surface.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/day_lifeshape_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/destination_dock.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/destination_dock.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/destination_tab_item.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/destination_tab_item.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/destructive_cta.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/destructive_cta.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/disabled_cta.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/disabled_cta.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/first_run_root.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/first_run_root.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/focus_session_defaults.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/focus_session_defaults.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/global_app_shell.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/global_app_shell.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/global_empty_state_shell.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/global_empty_state_shell.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/global_error_fallback_shell.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/global_error_fallback_shell.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goal_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goal_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goal_thread_context_from_today.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goal_thread_context_from_today.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goal_thread_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goal_thread_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_archive_historical_goal_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_archive_historical_goal_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_blocked_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_blocked_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_empty_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_empty_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_first_use_prompt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_first_use_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_life_area_map.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_life_area_map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_review_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_review_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_root_constellation_atlas.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/goals_root_constellation_atlas.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/graphiterecess_base.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/graphiterecess_base.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/help.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/help.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/index.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/index.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/local_data_reset_forget.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/local_data_reset_forget.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/local_runtime_source_detail_from_today.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/local_runtime_source_detail_from_today.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/local_runtime_trust_panel.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/local_runtime_trust_panel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/luminoustrace_state_line.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/luminoustrace_state_line.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/milestone_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/milestone_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/month_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/month_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/month_lifeshape_surface.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/month_lifeshape_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/moved_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/moved_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/needs_recovery_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/needs_recovery_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/needs_review_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/needs_review_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/notifications.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/notifications.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/open_marker.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/open_marker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/open_time_region.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/open_time_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/personal_runtime.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/personal_runtime.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/planning_defaults.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/planning_defaults.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/planning_defaults_entry.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/planning_defaults_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/planning_defaults_prompt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/planning_defaults_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/planning_setup_section.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/planning_setup_section.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/pressure_marker.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/pressure_marker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/pressure_region.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/pressure_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/primary_cta.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/primary_cta.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/privacy.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/privacy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/privacy_local_runtime_explanation.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/privacy_local_runtime_explanation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_attachment_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_attachment_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_gap_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_gap_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_trail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_trail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_trail_system.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/proof_trail_system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/protected_marker.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/protected_marker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/protected_time_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/protected_time_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/protected_time_region.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/protected_time_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/quietglass_wrapper.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/quietglass_wrapper.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/receipt_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/receipt_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/receipt_system.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/receipt_system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/receipt_toast_inline_confirmation.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/receipt_toast_inline_confirmation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/recommendation_source_sheet.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/recommendation_source_sheet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/recommendation_source_system.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/recommendation_source_system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/recommended_step_context_from_goals.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/recommended_step_context_from_goals.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/recovery_flex_region.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/recovery_flex_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/reflection_recovery_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/reflection_recovery_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/reflow_preview_tray.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/reflow_preview_tray.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/reflow_week_flow.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/reflow_week_flow.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/review_pressure_surface.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/review_pressure_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/schedule_and_availability.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/schedule_and_availability.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/schedule_and_availability_entry.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/schedule_and_availability_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/schedule_setup_prompt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/schedule_setup_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/secondary_cta.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/secondary_cta.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/selected_life_area_surface.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/selected_life_area_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/shape_day_flow.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/shape_day_flow.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/shape_month_flow.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/shape_month_flow.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/sheet_chrome.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/sheet_chrome.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/skipped_not_needed_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/skipped_not_needed_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/source_freshness_badge.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/source_freshness_badge.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/step_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/step_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/step_session.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/step_session.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/still_counts_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/still_counts_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_first_use_prompt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_first_use_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_no_calendar_data_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_no_calendar_data_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_overloaded_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_overloaded_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_protected_block_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_protected_block_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_receipt_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_receipt_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_root_lifeshape_field.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_root_lifeshape_field.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_scope_control.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_scope_control.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_stale_source_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_stale_source_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_vacation_away_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/time_vacation_away_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_closure_prompt_region.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_closure_prompt_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_current_context_header.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_current_context_header.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_empty_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_empty_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_first_use_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_first_use_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_no_schedule_data_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_no_schedule_data_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_now_next_later_sequence.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_now_next_later_sequence.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_overloaded_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_overloaded_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_protected_time_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_protected_time_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_reality_meridian_rail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_reality_meridian_rail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_receipt_shelf.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_receipt_shelf.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_recommended_step_object.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_recommended_step_object.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_recovery_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_recovery_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_root_reality_meridian.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_root_reality_meridian.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_source_freshness_indicator.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_source_freshness_indicator.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_stale_recommendation_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_stale_recommendation_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_start_here_region.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_start_here_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_upcoming_commitments_region.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_upcoming_commitments_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_vacation_away_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/today_vacation_away_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/tray_chrome.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/tray_chrome.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/user_profile_header.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/user_profile_header.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/vacation_away_time.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/vacation_away_time.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/vacation_away_time_entry.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/vacation_away_time_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/waiting_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/waiting_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/waiting_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/waiting_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/week_detail.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/week_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/week_lifeshape_surface.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/week_lifeshape_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/why_this_sheet.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/why_this_sheet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/you_empty_first_run_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/you_empty_first_run_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/you_offline_local_only_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/you_offline_local_only_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/you_root_user_system_profile.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/you_root_user_system_profile.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/you_trust_warning_state.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-packets/you_trust_warning_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/capture_root_atmosphere_composer.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/capture_root_atmosphere_composer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/goals_root_constellation_atlas.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/goals_root_constellation_atlas.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/time_root_lifeshape_field.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/time_root_lifeshape_field.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/today_root_reality_meridian.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/today_root_reality_meridian.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/you_root_user_system_profile.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-authority-preflight/you_root_user_system_profile.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-decision-os-install.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-drift-check.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-drift-check.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-implementation-dashboard.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-implementation-dashboard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-implementation-prompts/TODAY-REALITY-MERIDIAN-FLAGSHIP-IMPLEMENTATION-01.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-next-surface-queue.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-next-surface-queue.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-proof-contract-check.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-proof-contract-check.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-receipt-check.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-receipt-check.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-source-bindings.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-source-bindings.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-surface-recipe-completeness-review-001.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-surface-recipe-completeness-review-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-surface-recipe-encyclopedia-001.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-surface-recipe-encyclopedia-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-surface-recipe-specificity-and-train-extraction-001.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-surface-recipe-specificity-and-train-extraction-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-visual-recipe-canon-finalization-001.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/frontend-visual-recipe-canon-finalization-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/local-first-runtime-trust.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/mature-app-surface-universe-complete.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/native-iphone-interaction-grammar.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/performance-budget.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/preview-matrix.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/signature-visual-instruments-encyclopedia-07-api-install.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/signature-visual-instruments-encyclopedia-07-install.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/source-proof-receipt-coverage.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/source-provenance-batch-linkage-complete.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/state-machine-contract.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/surface-scenario-coverage.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decision-final-gate.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decision-final-gate.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/decision-summary.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/design-system-gap-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/generated-implementation-prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/implementation-receipt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-bottom-ia-five-tabs/proof-contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/decision-summary.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/design-system-gap-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/generated-implementation-prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/implementation-receipt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/proof-contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-live-current-time-cursor/world-class-richness-followup.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/decision-summary.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/design-system-gap-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/generated-implementation-prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/implementation-receipt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-15-today-local-ambitions-lockup/proof-contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-16-start-here-product-kernel/design-system-gap-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-16-start-here-product-kernel/generated-implementation-prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-16-start-here-product-kernel/implementation-receipt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/ui-decisions/UID-2026-05-16-start-here-product-kernel/proof-contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-accessibility-adhd.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-anti-generic.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-atlas-subordination.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-false-green.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-gate.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-gate.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-hidden-automation.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-local-first-trust.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-native-believability.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-no-false-momentum.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-object-depth.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-p0-recipe-upgrade.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-primitive-operationality.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-priority-registry.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-prompt-authority.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-proof-dashboard.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-proof-dashboard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-proof-source-receipt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-recipe-contract.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-scorecard.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-source-debt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-transaction.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-100-vocabulary-full-corpus.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-design-authority-final-form-04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-design-authority-lock-prep-03-install.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-design-final-form-lock-repair-05-install.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-design-final-form-lock-repair-05.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-design-final-form-lock-repair-05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-design-lock-repair-05-final-gate.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-encyclopedia-100-final-proof-authority-04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-encyclopedia-100-perfection-install-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-encyclopedia-dashboard.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-encyclopedia-dashboard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-no-orphan-graph.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-regression-readiness.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-source-linkage.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-surface-graph.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-template-residue.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `build/reports/visual-vocabulary-boundary.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Generated artifact; retain only as audit evidence, not implementation truth.
+- `docs/AGENTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/AmbitionsCanon/00_Canon_Index_10_10_Maturity_Gate.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/AmbitionsCanon/01A_Product_Canon_Flagship_Amendment.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/01_Product_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/02_Continuity_Layer_Chrome.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/03_Signature_Object_Specs.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/04_Trust_Privacy_Automation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/05_Accessibility_Motion_Performance.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/06_QA_Preview_Visual_Drift.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/07_Native_Shell_Tokens_Materials.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/09_Flagship_Interface_Preservation_Ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/10_Ambitions_Flagship_Interface_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/11_Canonical_Vocabulary_And_Copy_Bible.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/12_Screen_Composition_Constitution.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/13_Flagship_Experience_Laws.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/14_Flagship_QA_And_Award_Caliber_Bar.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/15_AFI_Implementation_Lane.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/16_Surface_Identity_And_Signature_Moments.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/17_Ambitions_Product_Grammar.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/18_Trust_Receipts_And_Closure_Language.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/Ambitions_Design_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/Archive/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/AmbitionsCanon/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/accessibility/AMB_ACCESSIBILITY_MOAT_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/adr/ADR_TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/adr/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/APPLE_NATIVE_SYNC_CLOUDKIT_READINESS_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/DEPENDENCY_CLIENTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/FEATURE_SERVICE_BOUNDARIES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/architecture/PRODUCT_OBJECT_STATE_MACHINES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/decisions/ADR-001-native-swiftui-first.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/decisions/ADR-002-local-first-runtime.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/decisions/ADR-003-design-token-pipeline.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/decisions/ADR-004-product-object-architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/decisions/ADR-005-no-core-cloud-llm.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/architecture/decisions/ADR-006-state-machine-over-generic-mvvm.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/decisions/ADR-007-source-proof-receipt-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/decisions/ADR-008-generated-token-contracts.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/decisions/ADR-009-accessibility-contracts-before-claims.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/dependencies/CALENDAR_CLIENT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/dependencies/LOCAL_RUNTIME_CLIENT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/dependencies/NOTIFICATION_CLIENT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/dependencies/PERSISTENCE_CLIENT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/dependencies/SOURCE_FRESHNESS_CLIENT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/dependencies/WIDGET_SNAPSHOT_CLIENT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/CAPTURE_FEATURE_SERVICE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/CLOSURE_ENGINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/GOALS_FEATURE_SERVICE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/LOCAL_RUNTIME_TRUST_SERVICE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/PROOF_LEDGER_SERVICE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/REFLOW_ENGINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/SOURCE_AUTHORITY_SERVICE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/TIME_FEATURE_SERVICE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/TODAY_FEATURE_SERVICE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/feature-services/YOU_FEATURE_SERVICE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/performance/CAPTURE_LATENCY_BUDGET.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/performance/LOCAL_RUNTIME_COMPUTE_BUDGET.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/performance/TIME_LIFESHAPE_RENDER_BUDGET.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/performance/TODAY_RENDER_BUDGET.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/performance/WIDGET_SNAPSHOT_BUDGET.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/state-machines/CAPTURE_ROUTE_STATE_MACHINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/state-machines/CLOSURE_FLOW_STATE_MACHINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/state-machines/LOCAL_LEARNING_STATE_MACHINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/state-machines/PROOF_TRANSFER_STATE_MACHINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/state-machines/REFLOW_STATE_MACHINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/architecture/state-machines/SOURCE_FRESHNESS_STATE_MACHINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/generated/historical-registry-extract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/superseded-design-canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/archive/superseded-design-canon/design/copy-state-language-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/superseded-design-canon/design/cross-device-surface-roles-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/superseded-design-canon/design/design-system-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/archive/superseded-design-canon/design/external-surface-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/superseded-design-canon/design/motion-microinteraction-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/superseded-design-canon/design/novel-interaction-systems-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/archive/superseded-design-canon/design/screen-architecture-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/archive/superseded-design-canon/design/shell-ia-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/archive/superseded-design-canon/design/transformation-terminology-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/archive/superseded-design-canon/design/transformation-validation-standard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/superseded-design-canon/design/trust-explainability-correction-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/archive/superseded-design-canon/presentations/frontend-transformation-investor-deck/narrative_plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/archive/superseded-design-canon/rc1-native-finish-pass.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/audits/CHROME_ENRICHMENT_INSTALL_REPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/FLAGSHIP_OBJECT_SYSTEM_INSTALL_REPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/START_HERE_REALITY_RECOGNITION_INSTALL_REPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi-stash-reconciliation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi01-canon-language-purge-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi02-ia-hierarchy-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi03-flagship-object-silhouettes-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi04-material-system-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi05-shell-and-continuity-chrome-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi06-today-reality-meridian-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi07-goals-constellation-atlas-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi08-capture-atmosphere-composer-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi09-time-lifeshape-field-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi10-you-user-system-profile-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi11-trust-seam-and-receipts-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi12-accessibility-and-state-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi13-visual-qa-and-drift-gallery-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi14-cross-surface-coherence-review-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi15-founder-acceptance-review-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/afi16-release-claim-safety-review-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/air-fold-in-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/all-local-files.txt`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/amb-fe-be-integrated-proof-99-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-auto-batch-train-f12-through-f16-5-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-batch-train-orchestrator-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-codex-performance-operating-system-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-codex-system-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-dev-tooling-adoption-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f02-reality-rail-visual-states-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f03-5-today-state-contract-hardening-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f03-step-detail-recommendation-explanation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f04-step-session-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f05-action-closure-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f06-proof-receipt-ledger-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f07-capture-composer-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f08-placement-resolver-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f09-capture-to-goal-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f10-plan-life-suite-foundation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f11-day-week-shape-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f12-architecture-clarity-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f12-reflow-recovery-decisions-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f13-5-goals-you-trust-architecture-checkpoint-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f13-goal-mission-control-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f14-you-trust-what-ambitions-knows-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f15-legacy-identifier-migration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f16-5-swiftui-architecture-state-contract-hardening-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f16-ui-test-modernization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f17-f30-faang-handoff-completion-train-setup-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f17-repair-and-handoff-train-resume-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f17-shell-meridian-ownership-decision.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f17-shell-meridian-readiness-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f18-feature-flagged-meridian-shell-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f19-shell-route-parity-fallback-safety-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f20-external-surfaces-privacy-projection-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f21-5-ui-flake-reliability-hardening-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f21-full-ui-smoke-stabilization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f22-5-doc-qa-backlog-closure-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f22-7-human-made-active-repo-hygiene-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f23-accessibility-adhd-qa-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f24-privacy-trust-qa-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f25-device-performance-edge-case-qa-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f26-app-store-demo-truth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f27-5-human-made-codebase-maintainability-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f28-faang-handoff-repair-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-f29-final-handoff-package-engineer-onboarding-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-faang-team-operating-upgrade-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-final-faang-handoff-readiness-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-final-train-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-3-0-risk-register.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-4-0-global-sequence-readiness-review.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-4-0-status-semantics-and-global-order-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-4-external-brain-active-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-4-external-brain-dedupe-and-merge-map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-canon-pack-repo-phase-0-orientation-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-product-experience-pack-batch-1a-boundary-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-product-experience-pack-batch-1b-reconciliation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-product-experience-pack-batch-1c-copy-boundary-scan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-product-experience-pack-batch-1d-readiness-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitions-product-experience-pack-batch-1e-implementation-planning-gate.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitionsos-canon-integration-asset-manifest.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitionsos-canon-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitionsos-pretrain-hardening-and-3-0-truth-check-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ambitionsos-surface-encapsulation-signature-language-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos01-ambitionsos-canon-runtime-contract-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos02-life-graph-event-log-foundation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos03-graph-delta-review-projection-store-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos04-control-plane-work-classifier-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos05-starting-position-kernel-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos06-goal-path-kernel-goal-compiler-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos07-local-goal-packs-requirement-slots-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos08-alternate-path-kernel-path-portfolio-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos09-option-value-north-star-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos10-commitment-time-kernel-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos11-reality-drift-bounded-reflow-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos12-proof-trust-closure-receipts-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos13-source-truth-claim-state-machine-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos14-recommendation-start-here-kernel-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos15-local-language-kernel-planning-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos16-performance-energy-kernel-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos17-privacy-safety-kernel-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos18-evaluation-golden-scenarios-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos19-experience-kernel-celestial-cognitive-load-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos20-adaptation-kernel-local-personalization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos21-interoperability-kernel-app-intents-eventkit-planning-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos22-longevity-kernel-archive-aging-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos23-governance-kernel-registry-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos24-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos25-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos26-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos27-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos28-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos29-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aos30-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aqos-source-truth-and-overlay-insertion-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/aqos-tools-and-skills-insertion-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/auto-harden-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/autonomous-global-train-recovery-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/autonomous-train-fastpath-install-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/backend-final-form-green-repair-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/backend-final-form-human-code-review.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/backend-final-form-local-first-human-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/batch-prompt-completeness-audit-and-hardening-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/be-07-vertical-slice-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/codex-os-peak-upgrade-for-ambitions-4-external-brain-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cqs-source-truth-and-global-order-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs01-compatibility-seam-registry-and-risk-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs02-profile-you-accessibility-identifier-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs02-profile-you-compatibility-contract-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs02-profile-you-compatibility-preservation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs02-profile-you-compatibility-seam-inventory.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs02-profile-you-compatibility-seam-split-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs02c-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs03-insights-contextual-intelligence-semantics-map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs03-insights-plan-accessibility-identifier-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs03-insights-plan-compatibility-contract-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs03-insights-plan-compatibility-preservation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs03-insights-plan-compatibility-seam-inventory.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs03-insights-plan-compatibility-seam-split-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs04-habits-ritual-plan-accessibility-identifier-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs04-habits-ritual-plan-compatibility-contract-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs04-habits-ritual-plan-compatibility-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs04-habits-ritual-plan-compatibility-seam-inventory.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs04-habits-ritual-plan-compatibility-seam-split-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs04-habits-ritual-plan-dry-run-red-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs04-habits-ritual-plan-retirement-risk-map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs05-activefocus-todayfocus-accessibility-route-payload-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs05-activefocus-todayfocus-compatibility-contract-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs05-activefocus-todayfocus-compatibility-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs05-activefocus-todayfocus-compatibility-seam-inventory.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs05-activefocus-todayfocus-compatibility-seam-split-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs05-activefocus-todayfocus-dry-run-red-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs05-activefocus-todayfocus-retirement-risk-map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs06-failed-taxonomy-compatibility-contract-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs06-failed-taxonomy-copy-accessibility-language-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs06-failed-taxonomy-historical-docs-truth-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs06-failed-taxonomy-retirement-risk-map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs06-failed-taxonomy-technical-state-preservation-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs06-internal-failed-taxonomy-dry-run-red-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs06a-failed-taxonomy-compatibility-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs06b-failed-taxonomy-compatibility-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs07-external-route-widget-appintent-compatibility-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs08-import-export-persistence-compatibility-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs09-compatibility-regression-conditional-scope-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs09-compatibility-regression-repair-dry-run-red-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/cs10-compatibility-retirement-handoff-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav-dynamic-adaptive-visual-train-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav01-dynamic-visual-source-truth-and-surface-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav02-reusable-living-visual-primitives-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav03-today-daytimeline-rail-and-hero-panel-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav04-capture-atmosphere-composer-and-routing-receipts-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav05-plan-lifeshape-map-and-capacity-visuals-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav06-goals-photo-matched-visual-alignment-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav07-you-photo-matched-system-center-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav08-memory-photo-matched-context-recall-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav09-trust-photo-matched-receipt-stack-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav10-adaptive-motion-reduce-motion-state-transitions-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav11-dynamic-type-voiceover-visual-accessibility-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav12-surface-preview-fixtures-scenario-gallery-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav13-visual-performance-rendering-battery-risk-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav14-visual-regression-product-experience-qa-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dav15-dynamic-adaptive-visual-system-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/dependency-management-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/direct-github-hardening-2026-05-12-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/direct-pro-control-plane-upgrade-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb01-external-brain-source-truth-and-kernel-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb02-universal-capture-canon-and-domain-model-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb03-universal-capture-composer-routing-blocked-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb03a-universal-capture-composer-routing-owner-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb03b-universal-capture-composer-routing-implementation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb04-capture-classification-and-clarification-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb05-capture-clusters-review-bundles-open-loops-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb06-capture-receipts-undo-reclassification-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb07-life-memory-graph-canon-and-domain-model-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb08-memory-source-confidence-trust-decay-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb09-life-event-decision-context-recall-memory-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb10-personal-operating-manual-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb11-memory-correction-deletion-rejection-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb12-memory-receipts-why-remembered-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb13-trust-privacy-user-control-canon-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb14-trust-center-data-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb15-recommendation-evidence-inference-boundaries-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb16-private-mode-sensitive-area-controls-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb17-undo-correction-audit-trail-export-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb18-source-freshness-privacy-receipts-non-claims-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb19-product-maturity-onboarding-canon-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb20-value-based-onboarding-first-week-success-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb21-concierge-setup-planning-defaults-onboarding-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb22-privacy-setup-trust-onboarding-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb23-maturity-levels-progressive-disclosure-life-season-templates-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb24-onboarding-receipts-skip-later-setup-recovery-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb25-accessibility-cognitive-load-canon-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb26-cognitive-load-modes-interface-density-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb27-dynamic-type-voiceover-reduce-motion-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb28-plain-language-anxiety-safe-copy-screen-explanation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb29-voice-first-motor-accessibility-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb30-overloaded-day-low-cognitive-load-flows-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb31-cross-kernel-primitives-and-event-receipts-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb32-cross-kernel-dependency-and-gate-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb33-search-context-recall-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb34-command-surface-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb35-preview-fixtures-scenario-library-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb36-qa-regression-risk-register-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb37-privacy-threat-model-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb38-accessibility-evidence-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb39-handoff-rc-readiness-implications-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/eb40-external-brain-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc00-flagship-proof-operating-layer-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc01-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc02-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc03-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc04-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc05-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc06-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc07-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc08-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc09-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc10-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc11-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc12-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc13-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc14-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc15-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc16-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc17-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/efc18-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/faang-handoff-deprecated-language-scan.txt`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/faang-handoff-doc-headings.txt`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/faang-handoff-file-inventory.csv`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/faang-handoff-generated-artifact-scan.txt`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/faang-handoff-internal-identifier-scan.txt`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/faang-handoff-orphan-scan.txt`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/faang-handoff-readiness-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/faang-handoff-traceability-matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp01-flagship-completion-source-truth-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp02-object-vocabulary-anatomy-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp03-ownership-file-boundary-dependency-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp04-preview-fixture-qa-matrix-expansion-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp05-start-here-surface-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp06-receipt-drawer-trust-layer-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp07-reality-rail-continuity-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp08-ambition-meridian-shell-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp09-motion-haptics-reduced-motion-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp10-mission-control-time-spine-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp11-life-path-thread-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp12-proof-spine-evidence-ledger-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp13a-action-closure-diamond-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp13b-goal-alternate-path-decision-history-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp14-lifeshape-contour-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp15-reflow-decision-fold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp16-pressure-field-recovery-loop-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp17-schedule-availability-defaults-center-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp18-capture-placement-shelf-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp19-placement-resolver-correction-fold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp20-grow-into-goal-seed-incubator-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp21-voice-motor-capture-accessibility-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp22-personal-system-center-refactor-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp23-memory-lens-external-brain-visual-layer-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp24-appearance-studio-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp25-loading-empty-degraded-state-objectization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp26-iconography-status-grammar-hardening-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp27-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp28-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp29-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fcp30-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fe-11-preview-visual-qa-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet00-faang-frontend-codex-os-upgrade-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet01-fet12-faang-frontend-excellence-train-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet01-frontend-operating-system-source-truth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet02-screenshot-evidence-pipeline-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet03-first-viewport-budget-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet04-shell-bottom-chrome-ownership-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet05-top-level-surface-composition-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet06-primitive-misuse-density-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet07-copy-compression-product-language-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet08-accessibility-dynamic-type-reduce-motion-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet09-motion-haptics-interaction-believability-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet10-visual-qa-scorecard-review-packet-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet11-ui-regression-stop-protocol-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fet12-resume-global-train-with-frontend-council-enforcement-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fl01-founder-backstory-product-soul-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fl02-life-inventory-object-model-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fl03-commitment-memory-open-loop-registry-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fl04-searchable-life-recall-contract-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fl05-option-value-pivot-preservation-model-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fl06-weekly-life-sweep-ritual-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/flagship-completion-plan-source-truth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/flagship-implementation-upgrade-overlay-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/found-life-layer-source-truth-and-order-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fvq-visual-excellence-layer-insertion-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fvq01-rendered-visual-freshness-and-flagship-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fvq01-visual-quality-gate-insertion-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fvq02-top-level-surface-visual-sweep-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fvq03-drilldown-external-surface-visual-sweep-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fvq04-recurring-ui-batch-rendered-proof-protocol-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/fvq05-final-visual-proof-packet-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/gate-results/example-gate-result.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/gate-system-hardening-implementation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/gh01-github-native-tooling-policy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-batch-train-sequence-optimization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-future-batch-sequencing-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-optimized-implementation-order-update-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-patch-train-high-impact-additions-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-prompt-rebuild-remaining-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-queue-resolver-repair-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-remaining-train-blueprint-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-runner-loop-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/global-sequence-autonomy-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/gq01-global-queue-maturity-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/gq01-refactor-maturity-assessment.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/green-repo-standards-01-accessibility-source-check.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/green-repo-standards-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/historical-baseline-global-train-install-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hosted-workflow-removal-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps-source-truth-and-global-order-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps01-verified-human-progress-os-category-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps02-human-progress-graph-api-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps03-verified-proof-ledger-proof-portability-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps04-source-truth-requirement-graph-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps05-commitment-memory-searchable-life-recall-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps06-recommendation-quality-start-here-brain-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps07-option-value-pivot-preservation-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps08-living-dream-compiler-upgrade-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps09-privacy-memory-permission-local-intelligence-adapter-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps10-ai-governance-evaluation-assurance-lab-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps11-vertical-expansion-revenue-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/hps12-singular-experience-acquisition-readiness-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi01-living-dream-architecture-source-truth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi02-capture-handling-ladder-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi03-dream-safety-legality-feasibility-triage-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi04-north-star-extraction-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi05-source-claim-graph-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi06-pack-registry-and-pack-compiler-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi07-pack-supply-chain-security-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi08-requirement-graph-runtime-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi09-eligibility-and-deadline-runtime-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi10-starting-position-and-privacy-intake-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi11-path-portfolio-runtime-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi12-capacity-and-commitment-time-bridge-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi13-today-bridge-and-action-closure-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi14-trust-review-and-dream-handling-receipts-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi15-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi16-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi17-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi18-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi19-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi20-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi21-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ldi22-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/living-dream-architecture-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/local-production-toolchain-installation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp-codex-local-registration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp-external-server-setup-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp01-local-validation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp01-read-only-ambitions-repo-mcp-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp02-controlled-proof-mcp-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp03-visual-proof-mcp-scaffold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp04-accessibility-shadow-mcp-scaffold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp05-ambitions-twin-fixture-mcp-scaffold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp06-source-atlas-pack-mcp-scaffold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mcp07-release-truth-mcp-scaffold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me01-maintainability-baseline-and-ownership-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me02-goals-feature-service-extraction-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me03-today-feature-service-extraction-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me04-today-panels-extraction-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me05-plan-feature-service-extraction-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me06-profile-screen-you-surface-extraction-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me07-plan-screen-extraction-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me08-shared-projector-state-helper-standards-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me09-product-contract-test-rebaseline-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me10-architecture-scan-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/me12-maintainability-handoff-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/meg01-advanced-rendering-eligibility-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/model-tier-codex-os-upgrade-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri-autonomous-routing-install-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri00-moat-runtime-gap-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri01-ambition-graph-runtime-objects-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri02-ambition-graph-projection-store-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri03-commitment-lifecycle-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri04-proof-capital-model-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri05-recovery-thread-runtime-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri06-reflection-adaptation-runtime-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri07-ambition-graph-cross-surface-wiring-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri08-ambition-lifecycle-golden-tests-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri09-source-to-recommendation-bridge-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri10-recommendation-trace-runtime-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri11-why-this-trust-seam-runtime-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri12-personal-runtime-inspection-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri13-local-learning-controls-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri14-global-correction-fold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri15-recommendation-rejection-learning-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/mri16-inspectable-intelligence-golden-tests-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/object-os-canon-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/openai-build-suite-install-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd01-product-depth-canon-inventory-ownership-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd02-today-step-detail-depth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd03-today-step-session-depth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd04-today-recovery-closure-depth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd05-goals-mission-control-detail-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd06-goal-lifecycle-path-visualization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd07-goal-proof-decision-history-depth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd08-goal-alternate-path-tradeoff-depth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd09-capture-placement-review-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd10-capture-correction-review-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd11-grow-into-goal-flow-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd12-plan-reflow-decision-depth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd13-plan-recovery-pressure-review-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd14-life-shape-drilldowns-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd15-you-trust-history-receipts-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd16-schedule-availability-planning-defaults-depth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd17-cross-surface-proof-review-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pd18-product-depth-handoff-next-lane-readiness-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc01-repo-build-system-inventory-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc02-architecture-boundary-module-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc03-dead-code-prompt-artifact-naming-smell-audit-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc04-dependency-supply-chain-policy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc05-ci-local-toolchain-reproducibility-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc06-schema-persistence-source-truth-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc07-migration-ladder-backward-compatibility-tests-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc08-corruption-recovery-backup-restore-plan-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc09-icloud-cloudkit-sync-strategy-decision-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc10-cloudkit-schema-zone-conflict-model-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc11-sync-implementation-conflict-tests-deferral-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc12-app-groups-shared-storage-boundary-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc13-widgetkit-strategy-object-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc14-widgetkit-implementation-tests-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc15-live-activities-activitykit-strategy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc16-live-activities-implementation-tests-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc17-app-intents-shortcuts-spotlight-strategy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc18-app-intents-shortcuts-implementation-tests-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc19-notifications-focus-calendar-reminders-strategy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc20-notifications-calendar-reminders-implementation-proof-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc21-storekit-monetization-strategy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc22-storekit-entitlement-implementation-tests-deferral-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc23-paywall-upgrade-ux-compliance-review-deferral-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc24-privacy-data-map-app-privacy-labels-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc25-privacy-manifest-required-reason-api-audit-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc26-terms-privacy-policy-legal-review-packet-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc27-safety-professional-boundary-crisis-policy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc28-security-threat-model-and-secrets-audit-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc29-logging-analytics-observability-policy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc30-performance-budget-instruments-plan-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc31-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc32-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc33-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc34-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc35-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc36-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc37-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc38-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc39-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pfc40-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk-train-integration-and-dirty-worktree-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk00-current-backend-proof-baseline-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk01-package-module-boundary-scaffold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk02-architecture-boundary-scanner-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk03-app-unit-of-work-foundation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk04-atomic-goal-creation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk05-atomic-clarification-materialization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk06-atomic-capture-promotion-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk07-storage-schema-version-ledger-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk08-migration-plan-scaffold-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk09-unknown-persisted-value-degradation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk10-storage-invariant-checker-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk11-pre-migration-backup-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk12-staged-portable-import-dry-run-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk13-restore-rollback-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk14-conductor-repair-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk15-receipt-backend-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk16-trust-history-query-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk17-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk18-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk19-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk20-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk21-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk22-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk23-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk24-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk25-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk26-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk27-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk28-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk29-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk30-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk31-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk32-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk33-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk34-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk35-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk36-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk37-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk38-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk39-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk40-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pk41-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/platform-framework-compliance-plan-and-order-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/platform-kernel-risk-register.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/platform-kernel-train-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/post-pk-speed-upgrade-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/post-pk03-dirty-worktree-gate-installation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/product-depth-train-formalization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px01-product-experience-os-canon-surface-hierarchy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px02-today-experience-operating-surface-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px03-goals-mission-control-experience-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px04-capture-experience-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px05-plan-life-shape-experience-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px06-you-personal-system-center-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px07-action-closure-recovery-experience-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px08-trust-proof-receipts-experience-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px09-copy-language-explanation-system-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px10-visual-interaction-system-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px11-onboarding-setup-experience-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px12-accessibility-cognitive-load-emotional-safety-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px13-empty-edge-degraded-states-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px14-product-depth-drilldown-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px15-cross-surface-continuity-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px16-user-facing-ai-trust-and-recommendation-copy-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px17-release-truth-product-messaging-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px18-pxos-implementation-readiness-reorder-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px19-pxos-handoff-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/px20-pxos-beyond-roadmap-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pxeq-product-experience-equivalence-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/pxos-future-canon-integration-codex-os-upgrade-and-global-reorder-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/queue-intel-codexos-upgrade-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rec01-release-evidence-truth-inventory-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rec02-human-operator-release-proof-plan-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rec03-validation-log-ledger-closure-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rec04-release-claim-copy-guard-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rec05-human-review-packet-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rec06-release-evidence-closure-handoff-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/resume-global-batch-train-alias-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rhc01-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rhc02-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rhc03-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rhc04-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rhc05-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/rhc06-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/runner-repair-autopilot-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa01-source-atlas-canon-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa02-source-atlas-gate-matrix-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa03-universal-source-binder-coverage-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa04-source-atlas-codex-os-upgrade-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa05-source-atlas-global-order-integration-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa06-pack-schema-implementation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa07-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa08-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa09-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa10-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa10a-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa10b-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa10c-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa11-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa12-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa13-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa14-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa15-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa16-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa17-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa18-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa19-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa20-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa21-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa22-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa23-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa24-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa25-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa26-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa27-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa28-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa28-ldi15-aos30-manifest-rerun-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa29-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa30-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa31-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sa32-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sap01-composable-pack-architecture-lock-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sap02-goal-projection-object-model-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sap03-pack-factory-composition-rules-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sap04-projection-qa-fixtures-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/sap05-no-sprawl-no-duplicate-pack-gate-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si01-signature-interface-architecture-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si02-adaptive-panel-action-module-foundation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si03-app-shell-ia-navigation-list-system-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si04-daytimeline-rail-2-0-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si05-hero-step-panel-system-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si06-lifepath-visualization-system-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si07-mission-control-lane-components-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si08-lifeshape-time-capacity-map-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si09-capture-atmosphere-composer-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si10-trust-receipt-layer-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si11-personal-system-center-components-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si12-interaction-motion-haptics-system-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si13-loading-empty-degraded-state-primitives-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si14-iconography-symbol-status-grammar-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si15-accessibility-adaptive-interface-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si16-preview-fixture-visual-qa-infrastructure-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si17-top-level-surface-composition-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/si18-signature-interface-handoff-readiness-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/signature-experience-layer-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/signature-interface-codex-os-quality-gates-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/signature-interface-train-formalization-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/source-atlas-research-seeds-v1-local-import-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/source-atlas-source-truth-and-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/speed-train-autonomy-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/swift6-modernization-foundation-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/throughput-acceleration-01-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/today-reality-meridian-flagship-surface-install-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/tracked-files.txt`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/transformative-motion-integration-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/ui-studio-08-onboarding-category-ux-batch-closeout-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/fe11-preview-visual-qa-proof.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/fe11-preview-visual-qa-proof.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-capture-blocked.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-capture-dynamicType.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-capture-focused.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-capture-noDataYet.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-goals-degraded.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-goals-needsReview.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-goals-selected.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-goals-staleSource.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-time-deniedSource.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-time-loading.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-time-overwhelmingDay.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-time-partialSource.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-time-reducedMotion.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-today-disabled.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-today-normal.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-today-recovery.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-today-waiting.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-you-empty.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-you-offlineLocalOnly.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-you-privacySensitive.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fe11/screenshots/si16-you-setupNeeded.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq01/screenshot-freshness.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq01/today-accessibility-summary.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq01/today-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq02/capture-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq02/goals-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq02/plan-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq02/screenshot-freshness.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq02/today-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq02/top-level-reduce-motion.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq02/visual-scorecard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq02/you-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq03/goal-mission-lane-expanded.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq03/personalization-detail-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq03/schedule-availability-detail-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq03/screenshot-freshness.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq03/step-detail-default.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq03/visual-scorecard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/visual-evidence/fvq05/final-visual-proof-packet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/xcode-build-system-max-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/yellow-completion-repair/fcp28-runtime-screenshot-20260517.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/audits/yellow-completion-repair/yellow-completion-repair-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical audit receipt; useful for traceability but not active proof.
+- `docs/authority/AMB_ACTIVE_SOURCE_TRUTH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/authority/AMB_MOAT_OS_AUTHORITY_MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/authority/AMB_OBSOLETE_AUTHORITY_REGISTER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/authority/AMB_POST24_TRUTH_AUDIT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/authority/AMB_ROOT_IA_CANON.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/ACCESSIBILITY_FOCUS_SUPPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/AmbitionsOS_Adaptation_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Alternate_Path_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Commitment_Time_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Continuity_Sync_Archive_And_Merge.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Control_Plane.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Core_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Dream_Handling_Lanes_And_Ladder.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Evaluation_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Experience_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Goal_Path_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Governance_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Index.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/AmbitionsOS_Interoperability_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_LDI_Evaluation_And_Governance.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Life_Graph_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/AmbitionsOS_Living_Dream_System_Map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/AmbitionsOS_Living_Plan_Recompiler.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Local_Language_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Longevity_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Performance_Energy_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Privacy_Safety_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Proof_Trust_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Reality_Drift_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Recommendation_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/AmbitionsOS_Runtime_Contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Safety_Legality_Feasibility_Triage.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Source_Claim_Graph_And_Pack_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Source_Truth_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/AmbitionsOS_Starting_Position_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/AmbitionsOS_Strategy_SWOT_And_Risk_Register.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/AmbitionsOS_Surface_Encapsulation_And_Signature_Language.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_10_10_Flagship_Completion_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Accessibility_Nutrition.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_2_0_Batch_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Capability_Matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Decision_Log.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Intelligence_Standards.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Master_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Object_Terminology.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Product_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_RC_Maturity_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Roadmap.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Systems_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_2_0_Visual_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Accessibility_Conformance_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Accessibility_QA_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Active_History_Archive_Policy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Ambitions_Operating_Shell.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Architecture_Review_Board_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_As_Current_Baseline_Policy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Build_Failure_Triage_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Build_Skills_And_Dependency_Management.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Canon_To_Test_Traceability_Rules.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Codex_Value_Maximization_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Competitive_Positioning_And_Language_Research.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Copy_QA_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Data_Event_Taxonomy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Decision_Record_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Dependency_Management_Policy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Dependency_Promotion_Ladder.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Design_QA_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Design_System_Primitives.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Evidence_Hierarchy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Feature_Boundary_And_File_Size_Constitution.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_First_60_Seconds_Spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Flake_Management_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Human_Approval_Escalation_Rules.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Human_Made_Codebase_Standard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Information_Architecture_And_Routing_Model.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Local_Toolchain_Readiness_Matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Microcopy_Pattern_Library.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_North_Star_And_Product_Metrics.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Personalization_Consent_Model.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Placement_Resolver_Spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Postmortem_And_Learning_Loop.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Privacy_Threat_Model.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Privacy_Trust_QA_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Product_Language_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Product_Strategy_Brief.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Recommendation_Contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Release_Claim_Truth_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Risk_Register_Protocol.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Roadmap_To_Code_Traceability_Rules.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_State_Projection_Extraction_Rules.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Surface_State_Matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Test_Ownership_Matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Top_Level_Surface_Density_Constitution.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_UI_Invention_Evaluation_Framework.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_3_0_UI_Test_Contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_UX_Research_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_Execution_Program.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_4_0_External_Brain_Cross_Kernel_Primitives_And_Dependencies.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_External_Brain_Foundation_Index.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_4_0_External_Brain_Maintenance_Complexity_Value_Matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_External_Brain_Privacy_Threat_Model.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_4_0_Life_Memory_Graph_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_Matched_Geometry_Transition_Map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_4_0_Product_Maturity_And_Onboarding_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_Reduce_Motion_Transformation_Equivalents.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_Signature_Experience_Layer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_4_0_State_Transformation_Motion_Primitives.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_4_0_Transformative_Motion_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_Trust_Privacy_And_User_Control_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_4_0_Universal_Capture_Kernel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_AI_Governance_Evaluation_Assurance_Lab_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_App_Intents_Shortcuts_Spotlight_Strategy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_App_Store_Release_Compliance.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Beyond_3_0_Compatibility_Seam_Retirement_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Beyond_3_0_Continuity_Rules.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Beyond_3_0_Maintainability_Extraction_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_CloudKit_Schema_Zone_Conflict_Model.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Codex_Batch_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Codex_OS_Tooling_And_Dependency_Promotion_Ladder.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Codex_Quality_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Commitment_Memory_Searchable_Life_Recall_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Found_Life_Layer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Frontend_Batches_49_60_Revised.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Full_Frontend_Transformation_Program.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Human_Progress_Graph_API_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Human_Progress_Systems_Upgrade.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Intelligence_Runtime.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Launch_Master_Checklist.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Live_Activities_ActivityKit_Strategy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Living_Dream_Compiler_Upgrade_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Logging_Analytics_Observability_Policy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Notifications_Focus_Calendar_Reminders_Strategy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_OS_Master_Roadmap.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Option_Value_Pivot_Preservation_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Performance_Budget_And_Benchmark_Readiness.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Platform_Legal_And_Framework_Completion_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Privacy_Data_Map_And_App_Privacy_Labels.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Privacy_Manifest_Required_Reason_API_Audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Privacy_Memory_Permission_Local_Intelligence_Adapter_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Product_Depth_Canon_Inventory_And_Ownership_Map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Product_Depth_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Product_Experience_OS_Index.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Recommendation_Quality_Start_Here_Brain_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Safety_Professional_Boundary_Crisis_Policy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Security_Threat_Model_And_Secrets_Audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Signature_Interface_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Singular_Experience_Acquisition_Readiness_Lock.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Source_Atlas.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Source_Truth_Requirement_Graph_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_State_Continuity_Mesh.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_StoreKit_Monetization_Strategy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Surgical_Execution_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Terms_Privacy_Policy_Legal_Review_Packet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Verified_Proof_Ledger_Portability_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/Ambitions_Vertical_Expansion_Revenue_Architecture.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_Visual_QA_Red_Team_Audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Ambitions_WidgetKit_Strategy_And_Object_Map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/CANON_CONSOLIDATION_GAP_AUDIT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/CAPTURE_SMART_ATTACHMENT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/DATA_LOCAL_SYNC_EXPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/DOCS_RECONCILIATION_REVIEW.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/DOMAIN_MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/Documentation_Cleanup_Audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/EMPTY_ERROR_RECOVERY_STATES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/GOALS_GOAL_DETAIL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/GOAL_PLAN_TASK_LIFECYCLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/GOLDEN_LAUNCH_LOOP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/HUMAN_LANGUAGE_REVIEW.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/IA_NAVIGATION_DRILLDOWN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/IMPLEMENTATION_ACCEPTANCE_GATES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/MONETIZATION_PRICING_BUSINESS_MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/ONBOARDING_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/PLAN_CALENDAR_BELIEVABILITY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/POST_D26_MATURITY_ROADMAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PRODUCT_DECISIONS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Accessibility_Cognitive_Load_And_Emotional_Safety.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Action_Closure_Recovery_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/PXOS_Capture_Experience_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Copy_Language_And_Explanation_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Cross_Surface_Continuity_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Empty_Edge_And_Degraded_States.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/PXOS_Goals_Mission_Control_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Onboarding_Setup_And_Personalization.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Plan_Life_Shape_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Product_Depth_And_Drilldown_Rules.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Product_Promise_And_Experience_Principles.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/PXOS_Release_Safe_Product_Messaging.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Surface_Hierarchy_And_Navigation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Today_Experience_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Trust_Proof_Receipts_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/PXOS_User_Facing_AI_Trust_And_Recommendation_Expression.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_Visual_Interaction_System.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/PXOS_You_Personal_System_Center_Canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/ROADMAP_BATCH_GOVERNANCE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/SOURCE_OF_TRUTH_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/TODAY_NOW_STATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/TRUST_PRIVACY_MEMORY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/YOU_PROFILE_REVIEWS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/design/Ambitions_Design_Constitution.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/design/DESIGN_TOKENS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/design/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/design/accessibility-nutrition-screen-matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/design/component-contract-matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/design/external-surfaces-contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/design/grouped-navigation-list-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/design/panel-density-size-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/design/screen-contract-matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/canon/design/smart-attachment-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/canon/design/ux-writing-state-language-matrix.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex-os/AUTHORITY_HIERARCHY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/CODEX_OS_COMPONENTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/EXCLUDED_FOR_COST_OR_SCOPE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/HOOKS_POLICY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/NO_COST_CODEX_OS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_002.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_003.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/NO_COST_CODEX_OS_DRY_RUN_004.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/ROLLBACK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/RULES_POLICY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/RUNNER_UPGRADE_NOTES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex-os/STRUCTURED_OUTPUT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AIR_AMBITIONS_INTELLIGENCE_RUNTIME_FOLD_IN_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONSOS_AOS_FIXTURE_STRATEGY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONSOS_AOS_INVARIANT_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONSOS_AOS_MODEL_BOUNDARY_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_RED_TEAM_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_RELEASE_CLAIM_BOUNDARY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_SIMULATION_STRATEGY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_TEST_IMPACT_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_ASSUMPTION_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_CANON_SUPERSESSION_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_COPY_AND_LANGUAGE_INSERT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_DECISION_RECORD_INDEX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_FIXTURE_CATALOG.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_OPEN_QUESTIONS_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_PRIVACY_THREAT_MODEL_INSERT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_RELEASE_EVIDENCE_INSERT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONSOS_TEST_COVERAGE_STRATEGY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_CANON_UI_COMPLETION_INSERTION_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_CODEX_OS_TOOLING_WISHLIST.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_EVIDENCE_LEDGER_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_FAILURE_FORENSICS_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_OBJECT_OS_CANON.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONS_PROMPT_QUALITY_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_REPAIR_TRAIN_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_GLOBAL_TRAIN_CONSOLIDATION_AND_MODIFICATION_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_REMAINING_BATCH_REFERENCE.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AMB_REMAINING_BATCH_REFERENCE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/ANTIGRAVITY_MANIFEST_RERUN_START_HERE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/AUTONOMOUS_TRAIN_FASTPATH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/Ambitions_2_0_Codex_Execution_Guide.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/BATCH_EVIDENCE_MANIFEST_SCHEMA.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_F03_5_TODAY_ARCHITECTURE_HARDENING_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_F13_5_GOALS_YOU_TRUST_ARCHITECTURE_CHECKPOINT_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_F16_5_SWIFTUI_ARCHITECTURE_HARDENING_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_F17_SHELL_MERIDIAN_PLANNING_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_LANE_CLASSIFICATION_POLICY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_PREP_FACTORY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_REPORT_LAYER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TEST_ROUTER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_THROUGHPUT_OPERATING_MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_F04_F06_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_F07_F09_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_F10_F12_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_F13_F14_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_F15_F16_F16_5_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_F17_F30_FAANG_HANDOFF_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/BATCH_TRAIN_RUNNER_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_AGENT_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_BATCH_RESTART_PROMPT_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_EVIDENCE_STANDARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_GATE_ENGINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/CODEX_MULTI_AGENT_BUILD_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_INDEX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_NO_DOUBLE_WORK_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_RED_REPAIR_DECISION_TREE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_OS_UPGRADE_AUDIT_2026_05_07.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/CODEX_QUALITY_SYSTEM_SKILL_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_REPAIR_ENGINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_REPO_HYGIENE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_SKILLS_KIT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_SPEED_ENGINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_USAGE_EFFICIENCY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/CODEX_VISUAL_QA_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/COMPATIBILITY_RETIREMENT_HANDOFF.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/CONTEXT_INDEX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/DAV_PRODUCT_EXPERIENCE_SCORECARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/DEPENDENCY_RISK_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/EB_EXTERNAL_BRAIN_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/EB_OPTIMIZED_IMPLEMENTATION_ORDER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/EXTERNAL_BRAIN_EVIDENCE_PACKAGE_TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/EXTERNAL_BRAIN_EXECUTION_PLAYBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/EXTERNAL_BRAIN_RISK_REGISTER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FLAGSHIP_COMPLETION_OBJECT_SCORECARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FOUND_LIFE_LAYER_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FREE_WORKFLOW_OPERATING_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/FRONTEND_ACCESSIBILITY_DYNAMIC_TYPE_REDUCE_MOTION_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FRONTEND_COPY_COMPRESSION_PRODUCT_LANGUAGE_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FRONTEND_EXCELLENCE_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FRONTEND_FIRST_VIEWPORT_BUDGET_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/FRONTEND_MOTION_HAPTICS_INTERACTION_BELIEVABILITY_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FRONTEND_SCREENSHOT_EVIDENCE_STANDARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/FRONTEND_UI_REGRESSION_STOP_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/FRONTEND_VISUAL_QA_SCORECARD_AND_REVIEW_PACKET.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GATE_RESULT_MANIFEST_SCHEMA.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_AUTONOMOUS_QUALITY_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_BATCH_CONTINUATION_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_BATCH_EXECUTION_ORCHESTRATOR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_BATCH_FAANG_QUALITY_BAR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_BATCH_OPTIMAL_ORDER_REVIEW.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_BATCH_RUNBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_BATCH_TOPOLOGICAL_SORT_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_FUTURE_BATCH_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_HPS_COMPLETION_ORDER_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_RENDERED_VISUAL_EXCELLENCE_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_SOURCE_ATLAS_COMPLETION_ORDER_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/GLOBAL_TRAIN_HEALTH_DASHBOARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/HPS_CODEX_OS_UPGRADE_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/HPS_CROSS_TRAIN_INTEGRATION_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/HPS_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/HPS_MOAT_AND_ACQUISITION_READINESS_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/HUMAN_PLATFORM_PROOF_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/Human_Release_Review_Handoff.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/KNOWN_YELLOW_QUARANTINE_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/LAUNCH_DOCUMENTATION_LAYER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/LDI_BATCH_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/LDI_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/LDI_FIXTURE_STRATEGY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/LDI_INVARIANT_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/LDI_SOURCE_PACK_SCHEMA.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/Launch_Operator_Runbook.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/MAC_SESSION_BOOT_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MASTER_CODEX_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/MCP02_CONTROLLED_PROOF_MCP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MCP03_VISUAL_PROOF_MCP_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MCP05_AMBITIONS_TWIN_FIXTURE_MCP_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MCP07_RELEASE_TRUTH_MCP_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MCP_CODEX_SETUP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MCP_EXTERNAL_SERVER_SETUP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MOAT_RUNTIME_ACCEPTANCE_CRITERIA.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/MOAT_RUNTIME_GOLDEN_SCENARIOS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/MOAT_RUNTIME_INTEGRATION_MASTER_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MOAT_RUNTIME_LOOP_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MODEL_TIER_BATCH_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/OBJECT_OS_ACCEPTANCE_GATES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/OBJECT_OS_INDEX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/OBJECT_OS_MOTION_GRAMMAR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/OBJECT_OS_MRI25_34_UPGRADE_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/OBJECT_OS_NATIVE_SURFACES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/OBJECT_OS_PRIMITIVES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/OBJECT_OS_SURFACE_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/OPENAI_BUILD_SUITE_USAGE_POLICY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/OPENAI_EVAL_QA_LAYER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/POST_BATCH_GATE_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/POST_PK_BATCH_BUNDLES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/POST_PK_CLOSEOUT_CONTRACT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/POST_PK_PROOF_LIGHT_POLICY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/POST_PK_REPAIR_DECISION_TREE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PREVIEW_SCENARIO_COVERAGE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PRIVACY_SECURITY_TRUST_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/PROMPT_REPAIR_LAYER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXEQ_MOTION_AND_STATE_CHANGE_RULES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/PXOS_BATCH_PROMPT_STANDARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXOS_CODEX_OS_UPGRADE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXOS_DEFINITION_OF_READY_DONE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXOS_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/PXOS_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/PXOS_HANDOFF_PACKAGE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/REC02_Human_Operator_Release_Proof_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/REC03_Validation_Log_Ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/REC05_Human_Review_Packet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/REC06_Release_Evidence_Closure_Handoff.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/RELEASE_CLAIM_SAFETY_SEAL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/REPO_INTELLIGENCE_LAYER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/RESUME_SENIOR_GLOBAL_BATCH_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/Release_Candidate_Review_Checklist.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/SIG_APPLE_AWARD_CALIBER_SCORECARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/SIG_DEPENDENCY_AND_TOOLING_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SIG_EMOTIONAL_DESIGN_MOMENTS_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/SIG_FLUIDITY_AND_DELIGHT_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SIG_PREMIUM_INTERACTION_PRINCIPLES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SIG_SIGNATURE_EXPERIENCE_EVIDENCE_PACKAGE_TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SIG_SIGNATURE_EXPERIENCE_RUNBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SOURCE_ATLAS_GATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SOURCE_ATLAS_UI_OBJECT_LANGUAGE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SOURCE_TRUTH_CONFLICT_RESOLUTION_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SPEED_TRAIN_LANE_POLICY.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SPEED_TRAIN_OPERATING_MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/SPEED_TRAIN_QUICKSTART.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/TEST_STRATEGY_FOR_EXTERNAL_BRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/TIME_REPLACES_PLAN_COMPATIBILITY_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/TRANSFORMATIVE_MOTION_QA_SCORECARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/VISUAL_CRITIQUE_LAYER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/XCODE_BUILD_LAB_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/XCODE_RESULT_BUNDLE_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/XCODE_TOOLCHAIN_PINNING.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/XCODE_VALIDATION_LANE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/YELLOW_OWNER_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/ambitions-hybrid-runner.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK17.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK18.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK19.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK20.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK21.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK22.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK23.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK24.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/PK25.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-prep/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/AMB-REPO-AUTHORITY-CLEANUP-SEQUENCE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/DAV01_DAV15_DYNAMIC_ADAPTIVE_VISUAL_SYSTEM_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/EB01_EB40_EXTERNAL_BRAIN_FOUNDATION_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/EFC00_EFC18_FLAGSHIP_PROOF_CLOSURE_OVERLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/F03_5_Today_Architecture_Hardening.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/F04_F06_Step_Closure_Proof_Train.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/F07_F09_Capture_Placement_Train.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/F10_F12_Plan_Life_Suite_Train.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/F13_F14_Goals_You_Trust_Train.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/F15_F16_F16_5_Legacy_UI_Architecture_Train.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/F17_Shell_Meridian_Train.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/FET01_FET12_FAANG_FRONTEND_EXCELLENCE_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/FL01_FL06_FOUND_LIFE_LAYER_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-CONTRACTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-EXECUTION-ORDER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-MANIFEST.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-RISKS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-STATUS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/amb-fe-be/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-STATUS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/post-23-truth-audit/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batch-trains/post99-ui-suite/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI01_Canon_Language_Purge.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI02_IA_Hierarchy_Lock.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI03_Flagship_Object_Silhouettes.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AFI04_Material_System_Proof.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI05_Shell_And_Continuity_Chrome.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI06_Today_Reality_Meridian.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AFI07_Goals_Constellation_Atlas.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AFI08_Capture_Atmosphere_Composer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AFI09_Time_LifeShape_Field.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AFI10_You_User_System_Profile.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI11_Trust_Seam_And_Receipts.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AFI12_Accessibility_And_State_Proof.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI13_Visual_QA_And_Drift_Gallery.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI14_Cross_Surface_Coherence_Review.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AFI15_Founder_Acceptance_Review.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AFI16_Release_Claim_Safety_Review.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/AQOS_TOOLS_SKILLS_AND_SCRIPTS_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-00-repo-operating-system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-01-pre-phase9-cleanup-and-captures-tab.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-02-delete-legacy-typescript-runtime.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-03-canon-batch-1-domain-foundation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-04-canon-batch-2-first-class-capture-core.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-05-canon-batch-3-planning-engine-v2.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-06-canon-batch-4-recovery-engine.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-07-canon-batch-5a-time-orchestration-write-paths.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-08-canon-batch-5b-time-orchestration-read-paths.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-09-canon-batch-6-external-action-infrastructure.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-10-canon-batch-7-ambient-surfaces-bundle.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-11-canon-batch-8-ritual-os.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-12-canon-batch-9-sync-trust-foundation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-13-canon-batch-10-life-graph-foundation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-17-canon-batch-14-runtime-separation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-18-canon-batch-15-dedicated-device-prototype.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-19-ambitions-2.0-canon-reset.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-20-knowledge-provider-boundary.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-21-external-knowledge-ingestion-core.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-22-clarification-and-ambiguity-engine.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-24-path-compiler-foundation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-25-domain-pack-framework.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-26-resource-graph-and-source-ranking.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-27-update-and-freshness-engine.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-28-energy-model-foundation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-29-energy-learning-and-ranking.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-30-contradiction-engine.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-31-correction-and-teaching-loop.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-34-product-shell-integration.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-36-post-2.0-hardening-trust-extensions-and-external-surface-validation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/BATCH-37-post-2.0-hardening-secondary-surface-productization.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/CS01_Compatibility_Seam_Registry_And_Risk_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/CS02_Profile_To_You_Internal_Naming_Retirement_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/CS03_Insights_Compatibility_Retirement_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/CS04_Habits_Ritual_Plan_Compatibility_Retirement_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/CS05_ActiveFocus_TodayFocus_Retirement_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/CS06_Internal_Failed_Taxonomy_Retirement_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/CS07_External_Route_Widget_AppIntent_Compatibility_Proof_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/CS08_Import_Export_Persistence_Compatibility_Proof_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/CS09_Compatibility_Regression_Repair_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/CS10_Compatibility_Retirement_Handoff_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/DAV01_Dynamic_Visual_Source_Truth_And_Surface_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV02_Reusable_Living_Visual_Primitives_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/DAV04_Capture_AtmosphereComposer_And_RoutingReceipts_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/DAV06_Goals_MissionControlLanes_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV09_TrustReceiptStack_EvidenceLabels_And_ProofPulse_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV10_AdaptiveMotion_ReduceMotion_And_StateTransitions_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV12_SurfacePreviewFixtures_And_ScenarioGallery_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV14_VisualRegression_And_ProductExperience_QA_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB11_Memory_Correction_Deletion_And_Rejection_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB12_Memory_Receipts_And_Why_Remembered_This_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB13_Trust_Privacy_User_Control_Canon_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB14_Trust_Center_And_Data_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB17_Undo_Correction_Audit_Trail_And_Export_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB19_Product_Maturity_Onboarding_Canon_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB22_Privacy_Setup_And_Trust_Onboarding_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB25_Accessibility_Cognitive_Load_Canon_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB33_External_Brain_Search_And_Context_Recall_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB34_External_Brain_Command_Surface_Integration_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB37_External_Brain_Privacy_Threat_Model_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EB40_Ambitions_4_0_External_Brain_Closeout_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F13_5_Goals_You_Trust_Architecture_Checkpoint_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F18_5_Shell_Architecture_Hardening_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F19_Shell_Route_Parity_Fallback_Safety_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F20_External_Surface_Privacy_Projection_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F21_5_UI_Flake_Reliability_Hardening_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F21_Full_UI_Smoke_Stabilization_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F22_5_Doc_QA_Backlog_Closure_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F22_Product_Language_And_Doc_QA_Final_Migration_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/F23_Accessibility_ADHD_Dynamic_Type_VoiceOver_QA_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F24_5_Privacy_Threat_Model_Closure_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F25_Device_Performance_State_Restoration_Edge_Case_QA_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F26_App_Store_Marketing_Demo_Truth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F27_Final_FAANG_Handoff_Gate_Rerun_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F28_FAANG_Handoff_Repair_Train_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/F30_Beyond_3_0_Continuation_Plan_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FCP06_Receipt_Drawer_Trust_Layer_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/FCP13A_Action_Closure_Diamond_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/FCP_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/FET00_FAANG_FRONTEND_CODEX_OS_UPGRADE_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/FIO01_Flagship_Implementation_Upgrade_Overlay_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FL01_Founder_Backstory_Product_Soul_Lock_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FL02_Life_Inventory_Object_Model_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FL03_Commitment_Memory_Open_Loop_Registry_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FL04_Searchable_Life_Recall_Contract_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FL05_Option_Value_Pivot_Preservation_Model_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/FL06_Weekly_Life_Sweep_Ritual_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FL_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/GH01_GitHub_Native_Tooling_Policy_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS01_Verified_Human_Progress_OS_Category_Lock_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS02_Human_Progress_Graph_API_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS03_Verified_Proof_Ledger_Proof_Portability_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS04_Source_Truth_Requirement_Graph_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS05_Commitment_Memory_Searchable_Life_Recall_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS06_Recommendation_Quality_Start_Here_Brain_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS07_Option_Value_Pivot_Preservation_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS08_Living_Dream_Compiler_Upgrade_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS09_Privacy_Memory_Permission_Local_Intelligence_Adapter_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS10_AI_Governance_Evaluation_Assurance_Lab_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS11_Vertical_Expansion_Revenue_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS12_Singular_Experience_Acquisition_Readiness_Lock_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/HPS_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI11_Path_Portfolio_Runtime_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI12_Capacity_And_Commitment_Time_Bridge_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI13_Today_Bridge_And_Action_Closure_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI14_Trust_Review_And_Dream_Handling_Receipts_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI15_Living_Plan_Recompiler_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI16_Mutation_Permissions_And_Impact_Levels_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI17_Continuity_Sync_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI18_Archive_And_Schema_Migration_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI19_Multi_Device_Merge_Ledger_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI20_Freshness_Broker_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI21_Red_Team_Evaluation_Suite_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/LDI22_Governance_And_Maintenance_Console_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/MCP01_Read_Only_Ambitions_Repo_MCP_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/MCP02_Controlled_Proof_MCP_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/MCP03_Visual_Proof_MCP_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/MCP04_Accessibility_Shadow_MCP_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/MCP05_Ambitions_Twin_Fixture_MCP_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/MCP06_Source_Atlas_Pack_MCP_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/MCP07_Release_Truth_MCP_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME01_Maintainability_Baseline_And_Ownership_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME02_GoalsFeatureService_Extraction_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME03_TodayFeatureService_Extraction_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME04_TodayPanels_Extraction_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME05_PlanFeatureService_Extraction_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME06_ProfileScreen_You_Surface_Extraction_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME07_PlanScreen_Extraction_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME08_Shared_Projector_State_Helper_Standards_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME09_Product_Contract_Test_Rebaseline_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME10_Architecture_Scan_Gate_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME11_Maintainability_Regression_Repair_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/ME12_Maintainability_Handoff_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD02_Today_Step_Detail_Depth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD03_Today_Step_Session_Depth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD04_Today_Recovery_And_Closure_Depth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD05_Goals_Mission_Control_Detail_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD06_Goal_Lifecycle_And_Path_Visualization_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD07_Goal_Proof_And_Decision_History_Depth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD09_Capture_Placement_Review_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD10_Capture_Correction_And_Confidence_Loops_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD11_Grow_Into_Goal_Flow_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD12_Plan_Reflow_Decision_Depth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD13_Plan_Recovery_And_Pressure_Review_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD14_Life_Shape_Drilldowns_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD15_You_Trust_History_And_Receipts_Center_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD17_Cross_Surface_Proof_And_Review_Integration_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PFC01_Repo_And_Build_System_Inventory_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC02_Architecture_Boundary_And_Module_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC05_CI_Local_Toolchain_Reproducibility_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC10_CloudKit_Schema_Zone_Conflict_Model_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC11_Sync_Implementation_And_Conflict_Tests_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC14_WidgetKit_Implementation_And_Tests_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC16_Live_Activities_Implementation_And_Tests_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC18_App_Intents_Shortcuts_Implementation_And_Tests_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC20_Notifications_Calendar_Reminders_Implementation_Proof_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC22_StoreKit_Entitlement_Implementation_And_Tests_Deferral_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PK00_Current_Backend_Proof_Baseline.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PK02_Architecture_Boundary_Scanner.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/POST_PK03_Dirty_Worktree_Reconciliation_Gate_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX02_Today_Experience_Operating_Surface_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX03_Goals_Mission_Control_Experience_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX04_Capture_Experience_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX05_Plan_Life_Shape_Experience_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX06_You_Personal_System_Center_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX07_Action_Closure_Recovery_Experience_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX08_Trust_Proof_Receipts_Experience_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX09_Copy_Language_Explanation_System_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX10_Visual_Interaction_System_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX11_Onboarding_Setup_Experience_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX13_Empty_Edge_Degraded_States_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX14_Product_Depth_Drilldown_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX15_Cross_Surface_Continuity_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX17_Release_Truth_Product_Messaging_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX18_PXOS_Implementation_Readiness_Reorder_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX19_PXOS_Handoff_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/PX20_PXOS_Beyond_Roadmap_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/REC01_Release_Evidence_Truth_Inventory_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/REC02_Human_Operator_Release_Proof_Plan_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/REC03_Validation_Log_Ledger_Closure_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/REC04_Release_Claim_Copy_Guard_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/REC05_Human_Review_Packet_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/REC06_Release_Evidence_Closure_Handoff_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/RHC01_Repo_Hygiene_Triage_And_Owner_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/RHC04_Stale_Copy_Docs_And_Generated_Artifact_Hygiene_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/RHC06_Repo_Hygiene_Closeout_And_Handoff_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/SI01_Signature_Interface_Canon_To_SwiftUI_Architecture_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI08_LifeShape_Time_Capacity_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI09_Capture_Atmosphere_Composer_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/SI10_Trust_Receipt_Layer_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI11_Personal_System_Center_Components_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI12_Interaction_Motion_Haptics_System_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI13_Loading_Empty_Degraded_State_Primitives_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI14_Iconography_Symbol_And_Status_Grammar_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI15_Accessibility_Adaptive_Interface_Pass_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI16_Preview_Fixture_And_Visual_QA_Infrastructure_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SI17_Top_Level_Surface_Composition_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/SI18_Signature_Interface_Handoff_And_Product_Depth_Readiness_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG02_Premium_Interaction_Kit_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG03_Today_Signature_Experience_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/SIG04_Capture_Signature_Experience_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG05_Plan_Signature_Experience_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG06_Goals_Signature_Experience_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/SIG07_You_Signature_Experience_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG09_Step_Session_Signature_Experience_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG12_Transformative_Transitions_Surface_Wiring_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG14_Interaction_Performance_And_Battery_QA_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-39.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-40.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/batch-41.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-42.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-43.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/batch-44.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-45.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-46.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-47.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-48.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-49.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/batch-50.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/batch-51.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/batch-52.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-53.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-54.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-55.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-56.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-57.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/batches/batch-58.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-59.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/batches/batch-60.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-APP-STORE-HONESTY-PROMPT-TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-APPLE-CONTINUITY-PROMPT-TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-BACKEND-PROMPT-TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-CODEX-HANDOFF-TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-DECISION-LOG-STANDARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-FLAGSHIP-BAR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-HANDOFF-OS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-REPO-QUESTION-PATTERNS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-REVIEW-BOARD-STANDARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-REVIEW-PROMPT-TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-TO-CODEX-PROMPT-STANDARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/chatgpt/AMB-CHATGPT-UI-PROMPT-TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/chatgpt/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/fixtures/ldi/ldi06-pack-registry-fixture.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/fixtures/ldi/redteam-fixture-manifest.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/frontend-implementation/FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/global-train-supervisor.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-APPLE-CONTINUITY-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-AUTHORITY-RESOLVER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-FLAGSHIP-UPGRADE-MANIFEST.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-GREEN-YELLOW-RED-STANDARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/os/AMB-CODEX-OS-NO-SPRAWL-GUARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-POST23-AUTO-PICKUP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-PRIVACY-CLAIM-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-PROOF-LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/os/AMB-CODEX-OS-VISUAL-QA-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/os/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/platform-kernel-current-state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/platform-kernel-module-boundary-scaffold.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/playbooks/DERIVEDDATA_HYGIENE_PLAYBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/playbooks/TUIST_EVALUATION_AFTER_PK41_PLAYBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/playbooks/XCODE_FAILURE_CLASSIFICATION_PLAYBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/playbooks/XCODE_SICK_SIMULATOR_PLAYBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/playbooks/XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/quality/AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_COUNCIL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/quality/AQOS_BATCH_IMPACT_CLASSIFIER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/quality/AQOS_DOMAIN_QUALITY_GATES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/quality/AQOS_EVIDENCE_MATURITY_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/quality/AQOS_GOLDEN_SCENARIO_AND_STATE_COVERAGE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/quality/AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/quality/AQOS_REPORT_TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/quality/AQOS_REQUIRED_EVIDENCE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/quality/AQOS_SCRIPT_AND_TOOL_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/quality/AQOS_TOOL_DEPENDENCIES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/repo-audit-baseline.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/reports/AMB-POST23-00-COMPLETION-SENTINEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/reports/AMB-POST23-TRUTH-AUDIT-REPAIR-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/reports/FE-12-CHROME-CONTRACTS-HARDENING.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/reports/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/visual-quality/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/visual-quality/FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/visual-quality/FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/visual-quality/MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/codex/workflow-templates/codeql-swift-policy-gated.yml.example`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/workflow-templates/docs-and-claims.yml.example`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/codex/workflow-templates/mcp-self-test.yml.example`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/continuity/AMB_APPLE_CONTINUITY_CONFLICT_RESTORE_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/contracts/AMB_PROJECTION_CONTRACT_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/external-surface-snapshot-contract.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/goal-engine-contract-notes.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/ACTIVE_EXECUTION_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/AUTHORITY_HIERARCHY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/AUTOMATED_REGISTRY_GENERATION_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/AUTONOMOUS_REPO_OPERATING_MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/AUTONOMY_COMMANDS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/AUTONOMY_LOOP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/BATCH_CLOSEOUT_CONTRACT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/BATCH_RECONCILIATION_AND_PROOF_AUTHORITY_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/BATCH_STATUS_NORMALIZATION_RULES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/BLOCKED_AND_DEFERRED_BATCHES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/CLEANUP_QUEUE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/CODEX_OS_INTEGRATION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/FINAL_RECONCILED_BATCH_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/GOVERNANCE_DASHBOARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/IMPLEMENTATION_LEVEL_RECONCILIATION_PROTOCOL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/IMPLEMENTATION_OWNER_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/MULTI_AGENT_SPECIALIZATION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/NORMALIZED_REGISTRY_REWRITE_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/ORPHAN_PROMPT_AUDIT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/PROOF_INTEGRITY_AUDIT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/REGISTRY_CONFLICT_REPORT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/REMAINING_WORK_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/REPO_INTAKE_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/RUNNER_GOVERNANCE_CONTRACT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/RUN_IMPLEMENTATION_RECONCILIATION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/SELF_IMPROVEMENT_BACKLOG.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/SEVEN_STEP_AUTONOMY_CONTRACT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/SPRAWL_BUDGET.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/SUPERSEDED_AND_ARCHIVE_BATCHES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/TRAIN_LINEAGE_AND_PROOF_SCHEMA.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/VERIFIED_COMPLETED_BATCHES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/execution_graph.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/accepted_yellow_governance_debt.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/accepted_yellow_governance_debt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/architecture_debt_score.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/authority_diff_report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/canon_impact_map.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/canon_impact_plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/canon_propagation_plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/cleanup_action_plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/global_train_resequence.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/governance_reconciliation_summary.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/governance_trend_history.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/governance_trend_report.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/implementation_expectation_map.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/lineage_confidence_scores.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/mature_spec_synthesis.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/orphan_prompt_audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/orphan_prompt_provenance.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/orphan_prompt_provenance.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/post99_ui_suite_activation.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/prompt_rewrite_plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/proof_linkage_graph.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/registry_projection.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/repo_doctor_summary.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/repo_doctor_summary.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/stale_overlay_audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/generated/supersession_rewrite_plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/train_lineage_graph.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/generated/train_to_implementation_map.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/governance/governance_false_positive_allowlist.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/orphan_prompt_provenance_overrides.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/train_dependency_graph.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/train_manifest.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/governance/train_override_manifest.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/handoff/AFI_Ambitions_Flagship_Interface_Completion_Report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/handoff/Ambitions_3_0_Architecture_Map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/handoff/Ambitions_3_0_FAANG_Engineer_Handoff.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/handoff/Ambitions_3_0_Testing_And_Release_Proof.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/handoff/Ambitions_4_0_External_Brain_Handoff_RC_Implications.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/handoff/Ambitions_4_0_Signature_Interface_Handoff.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/handoff/Ambitions_Canon_Implementation_Run_Report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/handoff/Ambitions_Canon_Master_Implementation_Plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/handoff/Ambitions_Canon_To_Implementation_Boundary_Map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/handoff/Ambitions_Flagship_Interface_Canon_Expansion_Report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/handoff/Ambitions_Product_Experience_Pack_File_Boundary_Map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/handoff/Ambitions_Product_Experience_Pack_Final_File_Boundary_Approval.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/handoff/Ambitions_Product_Experience_Pack_Repo_Traceability_Map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/handoff/Ambitions_Product_Experience_Pack_Source_Truth_Packet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/implementation-backlog.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/local-notification-simulator-testing.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/marketing/Ambitions_3_0_App_Store_Truth_Packet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/marketing/Ambitions_3_0_Demo_Script.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/moats/AMB_MOAT_OS_IMPLEMENTATION_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/native-build-and-release.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/permissions-privacy-foundation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/presentations/frontend-transformation-investor-deck/Ambitions_Frontend_Transformation_Investor_Deck_Batches_39_59.pptx`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/presentations/frontend-transformation-investor-deck/output.pptx`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/AMB_PROOF_RECEIPT_SYSTEM_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/integrated-proof-99/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/canon-language-drift.log`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/diff-summary.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/no-fake-proof-gate.log`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/privacy-boundary.log`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/replay-output.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/same-intent-context-a.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/same-intent-context-b.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/swift-test-output.log`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/proof/amb-fe-be/moat-scenario-proof-98/test-output.log`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/reference/visual-targets/ambitionsos-photo-matched/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/reference/visual-targets/ambitionsos-photo-matched/assets/.gitkeep`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/reference/visual-targets/ambitionsos-photo-matched/assets/ambitionsos-photo-target-01-today.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/reference/visual-targets/ambitionsos-photo-matched/assets/ambitionsos-photo-target-02-surfaces.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/reference/visual-targets/ambitionsos-photo-matched/assets/ambitionsos-photo-target-03-flow.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/reference/visual-targets/ambitionsos-photo-matched/assets/ambitionsos-photo-target-04-memory-trust.png`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/release/AMB_CLAIM_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/review/D02_TERMINOLOGY_REVIEW_CHECKLIST.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/review/FRICTION_LOG.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/review/VISUAL_REVIEW_CHECKLIST.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/runtime/AMB_PRIVATE_LIFE_RUNTIME_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/ambition-graph-implementation-plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/archive-and-stale-material-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/archive-delete-candidate-register.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/cleanup-decision-register.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/status/codex-agents-skill-inventory.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/codex-execution-excellence-final-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/codex-free-github-api-audit-2026-05-15.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/status/codex-routing-reconciliation-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/defect-regression-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/status/design-to-code-bridge.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/status/generated-report-classification.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/golden-path-contracts.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/green-repo-standards-01-proof-packet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/historical-header-pass-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/large-doc-classification-overrides.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/old-canon-classification-index.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/personal-runtime-trust-map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/product-moat-alignment-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/proof-recovery-lifecycle-map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/quarantine-archive-folder-plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/reference-dependency-scan-cleanup-plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/repo-authority-cleanup-active-path-allowlist.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/repo-authority-cleanup-final-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/repo-authority-cleanup-green-gate-spec.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/repo-authority-cleanup-install-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/repo-control-plane-cleanup-final-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/repo-governance-master-cleanup-plan.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/signature-object-moat-gap-map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/swiftui-primitive-contracts.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/train-b-historical-header-quarantine-receipt-2026-05-16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/train-c-active-surface-hygiene-receipt-2026-05-16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/status/train-d-reference-dependency-scan-receipt-2026-05-16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/truth-wiring-audit.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/visual-canon-moat-installation-report.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/visual-proof-gap-green-repo-standards-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/status/visual-proof-ledger.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/trust/AMB_LOCAL_FIRST_TRUST_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/truth/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/visual/AMB_PERSONAL_REALITY_INSTRUMENT_SPEC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `docs/visual/AMB_SCREENSHOT_CANDIDATE_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `docs/widget-live-activity-manual-testing.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `fixtures/ambitions-twins/source-heavy-career-switcher.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `frontend/intended-canon.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/CHROME_ENRICHMENT_DOCTRINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/CHROME_PRIMITIVES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/DESIGN_LANGUAGE_DOCTRINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/ENCYCLOPEDIA_TO_FRONTEND_OS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/FRONTEND_AUTHORITY_INDEX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/FRONTEND_DOC_CLASSIFICATION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/OBSOLETE_AND_EXCLUDED_VISUAL_REFERENCE_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/SIGNATURE_VISUAL_INSTRUMENTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/START_HERE_REALITY_RECOGNITION_DOCTRINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/TERM_ALIAS_AND_DEPRECATION_REGISTRY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/UI_STUDIO_OPERATING_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/VISUAL_ANTI_SLOP_RULES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/VISUAL_DESIGN_AUTHORITY_LOCK_PREP_03.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/VISUAL_DESIGN_FINAL_FORM_LOCK_REPAIR_05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/VISUAL_ENCYCLOPEDIA_PERFECTION_PLAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/VISUAL_ENCYCLOPEDIA_RUTHLESS_AUDIT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/VISUAL_ITEM_REGISTRY.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/VISUAL_OBJECT_FIRST_REVIEW_RUBRIC.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/VISUAL_VOCABULARY_BOUNDARY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/behavior/ANTI_GENERIC_KILL_SWITCHES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/contracts/DISCLOSURE_ROW_CONTRACT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/contracts/TRUST_SEAM_CONTRACT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/decisions/active/UID-2026-05-15-bottom-ia-five-tabs.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/gates/FALSE_GREEN_PREVENTION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/gates/LOCAL_FIRST_RUNTIME_TRUST_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `frontend/visual-encyclopedia/gates/NORTH_STAR_100_ACCEPTANCE_GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/gates/NORTH_STAR_100_MEASURABLE_GATE_MATRIX.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/AMBITION_GRAPH.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/ATMOSPHERE_COMPOSER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/ATMOSPHERE_COMPOSER_ANATOMY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/CLOSURE_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/COMMITMENT_STAGING_TRAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/CONSTELLATION_ATLAS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/CONSTELLATION_ATLAS_ANATOMY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/LABEL_OFF_SIGNATURE_TESTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/LIFESHAPE_FIELD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/LOCAL_RUNTIME_TRUST_PANEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/PRIMARY_OBJECT_ANATOMY_CANON.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/PROOF_TRAIL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/REALITY_MERIDIAN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/REALITY_MERIDIAN_ANATOMY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/RECEIPT_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/RECOMMENDATION_SOURCE_SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/REFLOW_PREVIEW_TRAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/USER_SYSTEM_PROFILE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/objects/USER_SYSTEM_PROFILE_ANATOMY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/primitives/ADHD_DENSITY_PRIMITIVES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/primitives/LOCAL_RUNTIME_PRIMITIVES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/primitives/MATERIAL_PRIMITIVE_ROLES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/primitives/SOURCE_FRESHNESS_PRIMITIVES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_active_text_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_attachment_proof_picker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_dictation_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_empty_first_use_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_error_failed_attachment_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_grow_into_goal_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_hold_needs_a_place_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_idle_composer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_make_commitment_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_mark_constraint_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_offline_local_only_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_parse_uncertain_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_post_input_route_reveal.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_receipt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_reflect_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_root_atmosphere_composer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/capture/capture_save_as_proof_route.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/best_fit_marker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/blocked_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/celestialfield_semantic_layer.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/chevron_disclosure_row.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/closure_system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/commitment_staging_tray.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/destructive_cta.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/disabled_cta.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/graphiterecess_base.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/luminoustrace_state_line.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/moved_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/needs_recovery_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/needs_review_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/open_marker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/pressure_marker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/primary_cta.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/proof_trail_system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/protected_marker.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/quietglass_wrapper.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/receipt_system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/recommendation_source_system.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/reflow_preview_tray.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/secondary_cta.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/skipped_not_needed_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/source_freshness_badge.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/still_counts_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/waiting_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/cross_surface/why_this_sheet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/alternate_path_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/ambition_graph.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/blocker_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/commitment_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/goal_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/goal_thread_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/goals_archive_historical_goal_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/goals_blocked_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/goals_empty_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/goals_life_area_map.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/goals_review_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/goals_root_constellation_atlas.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/milestone_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/proof_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/proof_gap_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/proof_trail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/recommended_step_context_from_goals.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/reflection_recovery_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/goals/selected_life_area_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/onboarding/capture_first_use_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/onboarding/first_run_root.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/onboarding/goals_first_use_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/onboarding/planning_defaults_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/onboarding/privacy_local_runtime_explanation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/onboarding/schedule_setup_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/onboarding/time_first_use_prompt.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/onboarding/today_first_use_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/back_navigation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/compact_surface_header.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/context_crown.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/destination_dock.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/destination_tab_item.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/global_app_shell.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/global_empty_state_shell.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/global_error_fallback_shell.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/receipt_toast_inline_confirmation.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/sheet_chrome.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/shell/tray_chrome.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/best_fit_explanation_sheet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/best_fit_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/day_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/day_lifeshape_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/month_lifeshape_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/open_time_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/planning_defaults_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/pressure_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/protected_time_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/protected_time_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/recovery_flex_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/reflow_preview_tray.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/reflow_week_flow.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/schedule_and_availability_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/shape_day_flow.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/time_no_calendar_data_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/time_overloaded_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/time_protected_block_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/time_receipt_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/time_root_lifeshape_field.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/time_scope_control.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/time_vacation_away_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/vacation_away_time_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/week_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/time/week_lifeshape_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/adjust_plan_reflow_preview_entry.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/blocked_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/closure_sheet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/goal_thread_context_from_today.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/proof_attachment_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/receipt_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/recommendation_source_sheet.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/step_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/step_session.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_closure_prompt_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_current_context_header.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_empty_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_no_schedule_data_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_now_next_later_sequence.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_overloaded_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_protected_time_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_reality_meridian_flagship_surface.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_reality_meridian_rail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_receipt_shelf.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_recommended_step_object.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_recovery_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_root_reality_meridian.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_source_freshness_indicator.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_stale_recommendation_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_start_here_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_upcoming_commitments_region.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/today_vacation_away_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/today/waiting_detail.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/about_ambitions.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/automation_and_trust.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/capture_preferences.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/focus_session_defaults.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/help.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/local_data_reset_forget.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/local_runtime_trust_panel.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/notifications.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/personal_runtime.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/planning_defaults.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/planning_setup_section.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/privacy.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/schedule_and_availability.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/user_profile_header.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/vacation_away_time.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/you_empty_first_run_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/you_offline_local_only_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/you_root_user_system_profile.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/recipes/you/you_trust_warning_state.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/reviews/VISUAL_100_RECIPE_SCORECARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `frontend/visual-encyclopedia/source-families/HBI_FRONTEND_SOURCE_FAMILY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/source-families/MRI_FRONTEND_SOURCE_FAMILY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/CAPTURE_ATMOSPHERE_COMPOSER_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/EMPTY_STATES_AND_RECOVERY_STATES_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/EXTERNAL_SURFACES_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/GLOBAL_SHELL_AND_CHROME_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/GOALS_CONSTELLATION_ATLAS_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/ONBOARDING_AND_FIRST_RUN_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/TIME_LIFESHAPE_FIELD_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/TODAY_REALITY_MERIDIAN_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/surfaces/YOU_USER_SYSTEM_PROFILE_BIBLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/CHROME_ENRICHMENT_INSTALL_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/FAANG_FLAGSHIP_RED_TEAM_REVIEW.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/FINAL_FORM_LOCK_REPAIR_05_AUTHORITY_STATUS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/FLAGSHIP_OBJECT_SURFACE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/FRONTEND_SOURCE_BINDINGS.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `frontend/visual-encyclopedia/trace/NATIVE_IPHONE_INTERACTION_GRAMMAR_MATRIX.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `frontend/visual-encyclopedia/trace/PLANNED_BATCH_FRONTEND_DIRECTION_INVENTORY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/PLANNED_TRAIN_FRONTEND_DIRECTION_INVENTORY.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `frontend/visual-encyclopedia/trace/TRAIN_FAMILY_PRECEDENCE_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/TRAIN_FAMILY_TO_OBJECT_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/TRAIN_FAMILY_UNRESOLVED_DIRECTION_GAPS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/UI_STUDIO_02_TOKENS_AND_MATERIALS_REVIEW.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/UI_STUDIO_10_FAANG_LEVEL_UI_RED_TEAM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/UI_STUDIO_SCREEN_STATE_MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/VISUAL_100_FLAG_RESOLUTION_MATRIX.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/VISUAL_100_RED_YELLOW_FLAG_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/VISUAL_100_SOURCE_DEBT_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/VISUAL_100_SOURCE_LINK_DISTRIBUTION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/VISUAL_100_VOCABULARY_SCAN_SCOPE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/VISUAL_AUTHORITY_SUPERSESSION_MAP.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/VISUAL_CONFLICT_LEDGER.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `frontend/visual-encyclopedia/trace/VISUAL_NO_ORPHAN_GRAPH.yaml`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `history/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Historical portal material; keep classified away from active canon.
+- `prompts/AMB-MOAT-OS-FINAL-INSTALLER-POST24.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/_BATCH_TEMPLATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/ambitions/AMB-CODEX-OS-NO-COST-HARDENING-002.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/ACCESSIBILITY-DYNAMIC-TYPE-REDUCE-MOTION-PROOF-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/AMB-FILE-BY-FILE-REPO-AUDIT-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/AMB-REPO-AUTHORITY-03-BACKEND-HONESTY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AMB-REPO-AUTHORITY-CLEANUP-INSTALL-00.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AMB-REPO-AUTHORITY-CLEANUP-RUN-ALL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/AOS24.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AOS25.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AOS26.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AOS27.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AOS28.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AOS29.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AOS30.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AUTO-HARDEN-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/BACKEND-FINAL-FORM-GREEN-REPAIR-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/CAPTURE-ATMOSPHERE-COMPOSER-VISUAL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/CHROME-AUDIT-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/CLEAR-RUNNER-CONFLICTS-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/CS02C.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/CS03C.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/CS04C.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/CS05C.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/CS06C.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/CS09C.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/DESIGN-SYSTEM-15-SYSTEMS-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/EFC01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC02.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC03.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC06.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC07.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC08.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC09.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC10.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC11.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC12.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC13.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC14.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC15.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC17.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/EFC18.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/FCP27.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/FCP28.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/FCP29.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/FCP30.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/FRONTEND-SURFACE-RECIPE-SPECIFICITY-AND-TRAIN-EXTRACTION-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/FRONTEND-VISUAL-RECIPE-CANON-FINALIZATION-001.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/GLOBAL-BATCH-TRAIN-INSTALL-FIRST-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/GLOBAL-PROMPT-REBUILD-REMAINING-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/GLOBAL-REMAINING-TRAIN-BLUEPRINT-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/GLOBAL-SEQUENCE-AUTONOMY-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/GOALS-CONSTELLATION-ATLAS-VISUAL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/HBI-00.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/HBI-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/HBI-04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/HBI-09.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/HBI-10.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/IRQ-02.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/LDI15.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/LDI16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/LDI17.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/LDI18.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/LDI19.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/LDI20.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/LDI21.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/LDI22.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/MOAT-ALIGNMENT-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/MOAT-GOAL-REALITY-FULL-SEQUENCE-TRAIN.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI00-MOAT-RUNTIME-GAP-LOCK.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/MRI01-AMBITION-GRAPH-RUNTIME-OBJECTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI02-AMBITION-GRAPH-PROJECTION-STORE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI03-COMMITMENT-LIFECYCLE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI04-PROOF-CAPITAL-MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI05-RECOVERY-THREAD-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI06-REFLECTION-ADAPTATION-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI07-AMBITION-GRAPH-CROSS-SURFACE-WIRING.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI08-AMBITION-LIFECYCLE-GOLDEN-TESTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI09-SOURCE-TO-RECOMMENDATION-BRIDGE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI10-RECOMMENDATION-TRACE-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI11-WHY-THIS-TRUST-SEAM-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI12-PERSONAL-RUNTIME-INSPECTION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI13-LOCAL-LEARNING-CONTROLS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI14-GLOBAL-CORRECTION-FOLD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI15-RECOMMENDATION-REJECTION-LEARNING.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI16-INSPECTABLE-INTELLIGENCE-GOLDEN-TESTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI17-REALITY-STATE-ENGINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI18-CAPACITY-FIT-MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI19-LIFESHAPE-RUNTIME-MODEL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI20-REFLOW-DECISION-FOLD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI21-PRESSURE-RECOVERY-BRIDGE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI22-CALENDAR-EVENT-BOUNDARY-HARDENING.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI23-REALITY-FIT-IN-START-HERE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI24-REALITY-FIT-GOLDEN-TESTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI25-SHELL-CONTINUITY-DOCK-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI26-TODAY-REALITY-MERIDIAN-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI27-GOALS-CONSTELLATION-ATLAS-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI28-CAPTURE-ATMOSPHERE-COMPOSER-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI29-TIME-LIFESHAPE-FIELD-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI30-YOU-USER-SYSTEM-PROFILE-RUNTIME.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI31-NATIVE-APPLE-SURFACES-WITH-RECEIPTS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI32-VISUAL-STATE-SCREENS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI33-VISUAL-QA-PREVIEW-FIXTURES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI34-VISUAL-RUNTIME-ACCEPTANCE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI35-MOAT-GOLDEN-SCENARIO-SUITE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI36-START-HERE-QUALITY-EVALS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI37-CAPTURE-ROUTING-EVALS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI38-RECOVERY-QUALITY-EVALS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI39-SOURCE-TRUST-EVALS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI40-VISUAL-MOAT-EVALS.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI41-ACCESSIBILITY-SCENARIO-PROOF.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI42-PERFORMANCE-SCENARIO-PROOF.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI43-PRIVACY-LOCAL-TRUST-SCENARIO-PROOF.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI44-RELEASE-CLAIM-SAFETY-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI45-CROSS-SURFACE-MOAT-COHERENCE-REVIEW.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI46-USER-JOURNEY-END-TO-END-PROOF.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI47-APPLE-NATIVE-SURFACE-COHERENCE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI48-PRODUCT-NARRATIVE-APP-STORE-PROOF-DRAFT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI49-FINAL-REPO-HYGIENE-OBSOLETE-AUTHORITY-PRUNE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/MRI50-FOUNDER-ACCEPTANCE-RELEASE-CANDIDATE-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/OBJECT-OS-CANON-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/OBS00-OPENAI-BUILD-SUITE-INSTALL.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/OS-FLAGSHIP-02-NO-SPRAWL-GUARD.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/OS-FLAGSHIP-04-VISUAL-QA-GATE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/OS-FLAGSHIP-05-PRIVACY-APPLE-CONTINUITY-GATES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC31.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC32.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC33.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC34.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC35.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC36.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC37.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC38.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC39.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PFC40.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK06.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK07.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK08.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK09.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK10.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK11.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK12.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK13.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK14-CONDUCTOR-REPAIR-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK14.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK15-FINALIZE-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK15.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK17.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK18.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK19.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK20.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/PK21.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK22.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK23.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK24.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK25.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK26.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK27.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK28.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK29.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK30.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK31.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK32.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK33.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK34.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK35.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK36.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK37.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK38.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK39.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK40.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PK41.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/PRIVATE-LIFE-RUNTIME-GOLDEN-SCENARIO-PROOF-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX02.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX03.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX06.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX07.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX08.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX09.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX10.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX11.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX12.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX13.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX14.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX15.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX17.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX18.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX19.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/PX20.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/QUEUE-INTEL-CODEXOS-UPGRADE-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/README-SOURCE-TRUTH-LINK-AND-CLAIM-REPAIR-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/RECOMMENDATION-TRACE-TRUST-SEAM-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/RHC01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/RHC02.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/RHC03.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/RHC04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/RHC05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/RHC06.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/RUNNER-REPAIR-AUTOPILOT-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA07.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA08.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA09.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA10.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA10A.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA10B.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA10C.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA11.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA12.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA13.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA14.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA15.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA16.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA17.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA18.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA19.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA20.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA21.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA22.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA23.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA24.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA25.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA26.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA27.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA28.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA29.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA30.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA31.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SA32.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/SHELL-CONTINUITY-DOCK-MATERIALS-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/SPEED-TRAIN-AUTONOMY-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/START-HERE-REALITY-RECOGNITION-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/THROUGHPUT-ACCELERATION-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/TIME-PRESSURE-LEDGER-VISUAL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/TODAY-REALITY-MERIDIAN-VISUAL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/VISUAL-CANON-MOAT-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/VISUAL-DESIGN-AUTHORITY-FINAL-FORM-04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/VISUAL-DESIGN-AUTHORITY-LOCK-PREP-03.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/VISUAL-DESIGN-FINAL-FORM-LOCK-REPAIR-05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/VISUAL-ENCYCLOPEDIA-100-FINAL-PROOF-AUTHORITY-04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03-MERGED.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/amb-fe-be/AMB-FE-BE-MOAT-SCENARIO-PROOF-98.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/amb-fe-be/BE-01-RUNTIME-BASELINE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/amb-fe-be/BE-02-LEDGER-REPLAY.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/amb-fe-be/BE-04-RECOMMENDATION-DETERMINISM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/amb-fe-be/FE-02-DESIGN-LANGUAGE.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/amb-fe-be/FE-04-PRIMITIVES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/amb-fe-be/FE-06-SHELL-MIGRATION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/amb-fe-be/FE-07-ROOT-SURFACES.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/amb-fe-be/FE-08-PROOF-RECEIPTS-TRUST.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/amb-fe-be/FE-11-PREVIEWS-VISUAL-QA.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/ui-flagship/UI-STUDIO-01-SURFACE-BRIEF-SYSTEM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/ui-flagship/UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/ui-flagship/UI-STUDIO-04-START-HERE-COMMAND-OBJECT.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/batches/ui-flagship/UI-STUDIO-09-PREVIEW-SCREENSHOT-MATRIX.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/batches/ui-flagship/UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/generated/frontend/TODAY-REALITY-MERIDIAN-FLAGSHIP-IMPLEMENTATION-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/moat-install/AMB-ACCESSIBILITY-SEMANTIC-EQUIVALENTS-DENSE-RUNTIME-11.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-CATEGORY-PERSONAL-LIFE-OS-CANON-01.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/moat-install/AMB-CODEX-BATCH-TRAINS-VALIDATORS-HARD-RED-ROLLBACK-12.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-CONTINUITY-APPLE-NATIVE-CONFLICT-RESTORE-PROOF-10.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-INTELLIGENCE-CLOSURE-LEARNING-LOCAL-MEMORY-05.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-INTELLIGENCE-DETERMINISTIC-CANDIDATE-COMPETITION-04.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-MARKET-DEFINING-INTEGRATED-POLISH-14.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-OS-INTEGRATED-FREEZE-NO-FALSE-GREEN-15.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-POST24-TRUTH-AUTHORITY-AUDIT-00.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/moat-install/AMB-PROOF-RECEIPTS-FRESHNESS-WHY-NOT-CHOSEN-06.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/moat-install/AMB-RELEASE-CLAIM-REGISTRY-PROOF-SCREENSHOT-CANDIDATE-13.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-TRUST-LOCAL-FIRST-PRIVACY-HONESTY-USER-CONTROLS-09.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/moat-install/AMB-VISUAL-PERSONAL-REALITY-INSTRUMENT-FOUNDATION-07.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `prompts/templates/ambitions-launch-gate-template.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `prompts/templates/ambitions-ui-flagship-template.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/accessibility-cognitive-load-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/accessibility-ui-batch-readiness-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ai/acx.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ai/acx_local.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ai/acx_repair.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ai/acx_visual_packet.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-advance-batch-state.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-closeout-coalesce.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-codex-os-validate.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-codex-train.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-dashboard-conflict-authority-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-design-system-dashboard.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-faang-red-team-review-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-frontend-drift-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-frontend-implementation-dashboard.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-frontend-implementation-prompt.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-frontend-obsolete-term-scan.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-global-train-frontend-authority-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-historical-baseline-train-guard.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-human-code-quality-gate.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-install-signature-visual-instruments-07.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-local-first-boundary-scan.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-moat-drift-scan.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-mri-materialize-prompts.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-next-batch-resolver.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-process-preflight.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-repo-authority-validate.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-signature-visual-instruments-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-source-atlas-title-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-surface-recipe-coverage-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-surface-recipe-inventory-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-surface-recipe-specificity-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-swift6-modernization-scan.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-ui-decision-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-ui-decision-final-gate.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-unsupported-claim-scan.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-visible-copy-drift-scan.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-100-anti-generic-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-100-atlas-subordination-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-100-false-green-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-100-gate-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-100-local-first-trust-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions-visual-100-proof-dashboard.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-100-upgrade-p0-recipes.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-100-vocabulary-full-corpus-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-dashboard.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-design-lock-repair-05-final-gate.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-direction-change-protocol-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-no-orphan-graph-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-reference-ledger-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-visual-vocabulary-boundary-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions-vocabulary-drift-scan.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions_design_system_15_common.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions_frontend_authority_common.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions_signature_visual_instruments.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions_validate_authority_drift.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ambitions_validate_claim_registry.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions_validate_trust_privacy.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/ambitions_visual_design_lock_repair_05_common.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/canon-language-drift-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/capture-routing-readiness-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/codex-forbidden-claim-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/codex-os/ambitions-codex-os-context-pack.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/codex-os/ambitions-codex-os-performance-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/codex-os/ambitions_codex_os_common.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/cqs-privacy-security-claim-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/cqs-product-drift-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/cqs-prompt-built-smell-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/dav-generic-ui-drift-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/eb-no-unsupported-claim-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/fet-bottom-chrome-conflict-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/fet-copy-density-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/fet-primitive-density-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/fixture-coverage-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/generic-product-drift-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/governance/ambitions-autonomous-codemod-engine.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/governance/ambitions-canon-impact-map.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/governance/ambitions-canon-propagation-engine.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/governance/ambitions-generated-freshness-check.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/governance/ambitions-governance-dashboard.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/governance/ambitions-governance-reconcile.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/governance/ambitions-orphan-prompt-provenance-classifier.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/governance/ambitions-prompt-rewrite-planner.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/governance/ambitions-repo-doctor.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/ldi-release-claim-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/memory-safety-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/memory-source-confidence-readiness-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/no-creepy-intelligence-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/no-duplicate-canon-check.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/no-existing-status-regression-check.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/no-fake-proof-gate.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/no-unsupported-ai-claim-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/photo-matched-reference-assets-check.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/privacy-boundary-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/privacy-export-delete-readiness-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/pxeq-generic-card-stack-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/release-claim-safety-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/run-doc-qa.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/sa-no-claim-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/sa-private-document-leak-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `scripts/si-anti-generic-ui-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/si-top-level-composition-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/sig-no-generic-drift-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/skeletal-prompt-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/source-truth-duplicate-scan.sh`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `scripts/visual_final_form_common.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/mcp/ambitions_proof_mcp/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/mcp/ambitions_proof_mcp/server.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/mcp/ambitions_repo_mcp/autonomy_tools.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `tools/mcp/ambitions_repo_mcp/server.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Contains legacy naming that should stay compatibility-only or be rewritten.
+- `tools/mcp/ambitions_repo_mcp/tests/test_server_tools.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/mcp/ambitions_visual_mcp/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/openai/config/codex_agent_roles.json`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/openai/evals/datasets/claim_safety.jsonl`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/openai/launch_docs/generate_launch_packet.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/openai/repo_brain/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/source-atlas/ambitions-pack-diff.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `tools/source-atlas/research-import/import_source_atlas_research_seeds.py`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
+- `validation/README.md`
+  - Risk: Yellow
+  - Action: retain with proof or extraction plan
+  - Reason: Classified conservatively from path, content, and current authority boundaries.
