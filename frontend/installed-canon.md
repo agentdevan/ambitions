@@ -20,7 +20,7 @@ This file records what the current repo source and tests actually support today.
 - [`Native/Ambitions/App/`](../Native/Ambitions/App/)
 - [`Native/Ambitions/Features/Today/`](../Native/Ambitions/Features/Today/)
 - [`Native/Ambitions/Features/Goals/`](../Native/Ambitions/Features/Goals/)
-- [`Native/Ambitions/Features/Captures/`](../Native/Ambitions/Features/Captures/)
+- [`Native/Ambitions/Features/Capture/`](../Native/Ambitions/Features/Capture/)
 - [`Native/Ambitions/Features/Plan/`](../Native/Ambitions/Features/Plan/)
 - [`Native/Ambitions/Features/Profile/`](../Native/Ambitions/Features/Profile/)
 - [`Native/Ambitions/Persistence/`](../Native/Ambitions/Persistence/)

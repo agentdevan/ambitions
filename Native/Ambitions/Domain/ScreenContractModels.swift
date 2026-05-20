@@ -546,9 +546,9 @@ enum ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Captures/CapturesScreen.swift", note: "Current Capture surface"),
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Capture/CaptureScreen.swift", note: "Current Capture surface"),
             .init(kind: .sourceService, path: "Native/Ambitions/Services/SmartAttachmentService.swift", note: "Smart Attachment foundation"),
-            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Captures", note: "Focused Capture tests")
+            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Capture", note: "Focused Capture tests")
         ]
     )
 

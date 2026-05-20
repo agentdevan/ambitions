@@ -142,7 +142,7 @@ Required properties:
 
 Likely source family:
 
-- `Native/Ambitions/Features/Captures/**`
+- `Native/Ambitions/Features/Capture/**`
 - future `AtmosphereComposerView.swift`
 - future `CaptureRoutingField.swift`
 - future `CapturePlacementResolver.swift`

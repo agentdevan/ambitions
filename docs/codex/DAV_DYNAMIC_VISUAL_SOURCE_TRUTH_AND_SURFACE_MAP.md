@@ -24,7 +24,7 @@ those owners.
 | Surface | Primary visual object | DAV batch | Swift owner boundary | Proof boundary |
 | --- | --- | --- | --- | --- |
 | Today | DayTimelineRail plus HeroStepPanel | DAV03 | `Native/Ambitions/Features/Today/**`, shared `Sources/Components/**` only when using DAV02 primitives | Today behavior unchanged unless DAV03 tests prove it |
-| Capture | CaptureAtmosphereComposer plus RoutingReceipt | DAV04 | `Native/Ambitions/Features/Captures/**`, shared `Sources/Components/**` | Capture remains composer-first; no persistence/routing raw changes |
+| Capture | CaptureAtmosphereComposer plus RoutingReceipt | DAV04 | `Native/Ambitions/Features/Capture/**`, shared `Sources/Components/**` | Capture remains composer-first; no persistence/routing raw changes |
 | Plan | LifeShapeMap plus capacity/pressure visuals | DAV05 | `Native/Ambitions/Features/Plan/**`, shared `Sources/Components/**` | Plan remains suggestion-only; no calendar-write claim |
 | Goals | GoalMissionControlLanes | DAV06 | `Native/Ambitions/Features/Goals/**`, shared `Sources/Components/**` | No OKR/dashboard/task-list clone |
 | You | SystemProfilePanel plus GroupedNavigationSystem | DAV07 | `Native/Ambitions/Features/Profile/**`, shared `Sources/Components/**` | You remains Personal System Center; no settings dump |

@@ -100,7 +100,6 @@ final class AmbitionsUITests: XCTestCase {
             XCTAssertTrue(app.tabBars.buttons[tab].isHittable, "Top-level tab \(tab) is not hittable")
         }
         XCTAssertFalse(app.tabBars.buttons["More"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Captures"].exists)
         XCTAssertFalse(app.tabBars.buttons["Insights"].exists)
         XCTAssertFalse(app.tabBars.buttons["Profile"].exists)
         XCTAssertFalse(app.tabBars.buttons["Habits"].exists)
@@ -111,7 +110,7 @@ final class AmbitionsUITests: XCTestCase {
         assertShellFloatingButtonDoesNotCoverTabBar(in: app)
 
         XCTAssertTrue(openCanonicalDestination("Capture", screenIdentifier: "capture.screen", in: app))
-        XCTAssertFalse(app.buttons["captures.return-to-plan"].exists)
+        XCTAssertFalse(app.buttons["capture.return-to-time"].exists)
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 10))
@@ -646,7 +645,7 @@ final class AmbitionsUITests: XCTestCase {
         let labeledButtons = app.buttons.matching(NSPredicate(format: "label == %@", "New goal")).allElementsBoundByIndex
         if let control = labeledButtons.first(where: { button in
             button.waitForExistence(timeout: 2)
-                && button.identifier == "captures.card.preview-capture-2"
+                && button.identifier == "capture.new-goal.preview-capture-2"
                 && button.isEnabled
                 && button.isHittable
         }) {

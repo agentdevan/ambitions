@@ -204,7 +204,7 @@ Native/Ambitions/Features/Today/Objects/RealityMeridianView.swift
 Native/Ambitions/Features/Today/Objects/StartHereSurfaceView.swift
 Native/Ambitions/Features/Today/Objects/CurrentTimeGlowView.swift
 Native/Ambitions/Features/Goals/Objects/ConstellationAtlasView.swift
-Native/Ambitions/Features/Captures/Objects/AtmosphereComposerView.swift
+Native/Ambitions/Features/Capture/Objects/AtmosphereComposerView.swift
 Native/Ambitions/Features/Time/Objects/LifeShapeFieldView.swift
 Native/Ambitions/Features/Profile/Objects/UserSystemProfileView.swift
 Native/Ambitions/Features/Shared/Objects/ReceiptDrawerView.swift

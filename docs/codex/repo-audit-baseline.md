@@ -65,8 +65,8 @@ Confirmed examples:
   - screen: `Native/Ambitions/Features/Today/TodayScreen.swift`
   - view model: `Native/Ambitions/Features/Today/TodayViewModel.swift`
   - service: `Native/Ambitions/Features/Today/TodayFeatureService.swift`
-- Captures
-  - screen: `Native/Ambitions/Features/Captures/CapturesScreen.swift`
+- Capture
+  - screen: `Native/Ambitions/Features/Capture/CaptureScreen.swift`
   - service boundary: `Native/Ambitions/Services/AppServices.swift`
   - service implementation: `Native/Ambitions/Services/CaptureService.swift`
 - Goals

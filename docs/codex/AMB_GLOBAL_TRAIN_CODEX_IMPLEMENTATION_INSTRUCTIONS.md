@@ -518,10 +518,10 @@ Purpose: Extract Capture service boundaries while keeping the Capture composer a
 Start condition: Complete prior PK batch PK19 and any data-safety proof named by the PK train.
 Primary implementation action: Extract Capture service boundaries while keeping the Capture composer as the primary intake surface.
 Files likely involved:
-- `Native/Ambitions/Features/Captures/CapturesScreen.swift`
-- `Native/Ambitions/Features/Captures/CapturesViewModel.swift`
-- `Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift`
-- `Native/Ambitions/Features/Captures/CapturePlacementReviewState.swift`
+- `Native/Ambitions/Features/Capture/CaptureScreen.swift`
+- `Native/Ambitions/Features/Capture/CaptureViewModel.swift`
+- `Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift`
+- `Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift`
 - `Native/Ambitions/Services/CaptureService.swift`
 - `Native/Ambitions/Domain/CaptureModels.swift`
 - `Native/Ambitions/Services/SmartAttachmentCaptureAdapter.swift`

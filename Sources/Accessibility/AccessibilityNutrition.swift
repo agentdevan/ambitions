@@ -442,7 +442,7 @@ public enum EB29InputAlternativeEvidence {
         AccessibilityInputAlternativeRequirement(
             axis: .voiceFirstCapture,
             ownerFile: "Native/Ambitions/Features/Capture/CaptureScreen.swift",
-            automatedProofTarget: "Native/AmbitionsTests/Captures/CapturesViewModelTests.swift",
+            automatedProofTarget: "Native/AmbitionsTests/Capture/CaptureViewModelTests.swift",
             requiredAlternative: "Voice capture must have visible review, edit, place, and cancel controls before any routing or memory effect.",
             privacyBoundary: "No transcript, recording, or sensitive capture is stored or routed without user-visible review."
         ),
@@ -638,7 +638,7 @@ public enum AccessibilityNutritionChecklist {
             screenAudit("you", "You", "tab.you", "You", source: "Native/Ambitions/Features/You/YouScreen.swift", tests: "Native/AmbitionsTests/You"),
             screenAudit("grouped-navigation-list", "GroupedNavigationList", "component.grouped-navigation-list", "Design System", source: "Sources/Components/GroupedNavigationList.swift", tests: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"),
             screenAudit("goal-detail", "Goal Detail", "goals.detail", "Goals", source: "Native/Ambitions/Features/Goals/GoalDetailScreen.swift", tests: "Native/AmbitionsTests/Goals"),
-            screenAudit("capture", "Capture", "tab.capture", "Capture", source: "Native/Ambitions/Features/Capture/CaptureScreen.swift", tests: "Native/AmbitionsTests/Captures"),
+            screenAudit("capture", "Capture", "tab.capture", "Capture", source: "Native/Ambitions/Features/Capture/CaptureScreen.swift", tests: "Native/AmbitionsTests/Capture"),
             screenAudit("time", "Time", "tab.time", "Time", source: "Native/Ambitions/Features/Time/TimeScreen.swift", tests: "Native/AmbitionsTests/Time"),
             screenAudit("trust-center-what-ambitions-knows", "Trust Center / What Ambitions Knows", "you.trust.memory", "You", source: "Native/Ambitions/Features/You/YouScreen.swift", tests: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift"),
             screenAudit("quiet-command-sheet-smart-attachment", "Quiet Command Sheet / Smart Attachment", "shell.command-sheet", "Shell / Capture", source: "Native/Ambitions/App/AppShellView.swift", tests: "Native/AmbitionsUITests/AmbitionsUITests.swift"),

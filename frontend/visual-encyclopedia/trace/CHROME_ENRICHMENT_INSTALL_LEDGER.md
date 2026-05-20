@@ -83,7 +83,7 @@ The first implementation-facing pass must audit:
 - `Native/Ambitions/App/AmbitionsRootView.swift`
 - `Native/Ambitions/Features/Today/*`
 - `Native/Ambitions/Features/Goals/*`
-- `Native/Ambitions/Features/Captures/*`
+- `Native/Ambitions/Features/Capture/*`
 - `Native/Ambitions/Features/Plan/*` as internal compatibility seam only
 - `Native/Ambitions/Features/Profile/*`
 - `Sources/Theme/AmbitionTheme.swift`

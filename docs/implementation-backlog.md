@@ -37,7 +37,7 @@ Backlog impact:
 ### 2. Capture persistence now exists; the remaining gap is cross-surface rollout discipline
 
 Why this matters:
-- The native app already has `Capture`, `CaptureRecord`, `SwiftDataCaptureRepository`, `DefaultCaptureService`, and a `CapturesScreen`.
+- The native app already has `Capture`, `CaptureRecord`, `SwiftDataCaptureRepository`, `DefaultCaptureService`, and a `CaptureScreen`.
 - Today quick capture now writes through the capture service instead of remaining presentation-only state.
 - Share Extension and App Intent capture source types exist in the domain/tests, but those OS surfaces still need their own target-level wiring and end-to-end validation.
 

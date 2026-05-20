@@ -2,7 +2,7 @@
 
 Status: Active frontend canon index
 
-## Frontend Authority Workflow
+## Frontend Authority Process
 
 For frontend/UI/design implementation work:
 
@@ -167,7 +167,7 @@ This lock is design canon only. It does not prove SwiftUI implementation, simula
 - `Native/Ambitions/App/AmbitionsRootView.swift`
 - `Native/Ambitions/Features/Today/*`
 - `Native/Ambitions/Features/Goals/*`
-- `Native/Ambitions/Features/Captures/*`
+- `Native/Ambitions/Features/Capture/*`
 - `Native/Ambitions/Features/Plan/*` (internal compatibility seam)
 - `Native/Ambitions/Features/Profile/*`
 - `Sources/Theme/AmbitionTheme.swift`

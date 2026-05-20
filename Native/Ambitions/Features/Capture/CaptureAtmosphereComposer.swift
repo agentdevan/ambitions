@@ -131,7 +131,7 @@ struct CaptureAtmosphereComposer: View {
                 Text(error)
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.warning)
-                    .accessibilityIdentifier("captures.quick-error")
+                    .accessibilityIdentifier("capture.quick-error")
             }
 
             EvidenceLabel(
@@ -162,7 +162,7 @@ struct CaptureAtmosphereComposer: View {
             DAVMotionPreset.receiptConfirmation.animation(theme: theme, reduceMotion: reduceMotion),
             value: isFocused
         )
-        .accessibilityIdentifier("captures.composer")
+        .accessibilityIdentifier("capture.composer")
         .accessibilityElement(children: .contain)
         .accessibilityValue(presentation.accessibilityValue)
     }
@@ -195,7 +195,7 @@ struct CaptureAtmosphereComposer: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(presentation.inputAlternatives.title)
         .accessibilityValue(presentation.inputAlternatives.accessibilityValue)
-        .accessibilityIdentifier("captures.input-alternatives")
+        .accessibilityIdentifier("capture.input-alternatives")
     }
 
     private var composerInput: some View {
@@ -229,7 +229,7 @@ struct CaptureAtmosphereComposer: View {
                         onSubmit()
                     }
                 }
-                .accessibilityIdentifier("captures.quick-input")
+                .accessibilityIdentifier("capture.quick-input")
                 .accessibilityLabel("What needs a place?")
                 .accessibilityHint("Type a thought. Route suggestions appear after input.")
 
@@ -240,7 +240,7 @@ struct CaptureAtmosphereComposer: View {
             }
             .buttonStyle(.plain)
             .foregroundStyle(theme.colors.textSecondary)
-            .accessibilityIdentifier("captures.quick-mic")
+            .accessibilityIdentifier("capture.quick-mic")
             .accessibilityLabel("Voice capture")
             .accessibilityHint("Voice capture is not connected yet.")
         }
@@ -274,7 +274,7 @@ struct CaptureAtmosphereComposer: View {
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: isSubmitEnabled ? .selected : .disabled))
         .disabled(isSubmitEnabled == false)
-        .accessibilityIdentifier("captures.quick-submit")
+        .accessibilityIdentifier("capture.quick-submit")
         .accessibilityLabel(presentation.submitLabel)
         .accessibilityHint(isSubmitEnabled ? "Saves the capture and keeps the route editable." : "Type a thought first.")
     }
@@ -328,7 +328,7 @@ private struct CaptureRouteRevealStrip: View {
                 )
             }
         }
-        .accessibilityIdentifier("captures.route-reveal-strip")
+        .accessibilityIdentifier("capture.route-reveal-strip")
         .accessibilityElement(children: .contain)
         .accessibilityLabel(preview.accessibilityLabel)
         .accessibilityValue(preview.accessibilityValue)
@@ -362,7 +362,7 @@ private struct CaptureRouteRevealStrip: View {
             }
             .buttonStyle(.bordered)
             .controlSize(.small)
-            .accessibilityIdentifier("captures.route-choice.\(choice.routeType.rawValue)")
+            .accessibilityIdentifier("capture.route-choice.\(choice.routeType.rawValue)")
             .accessibilityLabel(choice.title)
             .accessibilityValue(choice.isSelected ? "Selected route" : "Available route")
         }

@@ -26,7 +26,7 @@ struct CaptureDraftRoutePreviewCard: View {
         .accessibilityLabel(preview.accessibilityLabel)
         .accessibilityValue(preview.accessibilityValue)
         .accessibilityHint(preview.accessibilityHint ?? "Choose a different route if this is not right.")
-        .accessibilityIdentifier("captures.smart-attachment-preview")
+        .accessibilityIdentifier("capture.smart-attachment-preview")
     }
 
     private var livingState: LivingVisualState {
@@ -105,7 +105,7 @@ struct CaptureDraftRoutePreviewCard: View {
             RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
-        .accessibilityIdentifier("captures.placement-shelf")
+        .accessibilityIdentifier("capture.placement-shelf")
     }
 
     private var resolverFold: some View {
@@ -148,7 +148,7 @@ struct CaptureDraftRoutePreviewCard: View {
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("captures.resolver-fold")
+        .accessibilityIdentifier("capture.resolver-fold")
     }
 
     private func placementLine(
@@ -197,7 +197,7 @@ struct CaptureDraftRoutePreviewCard: View {
                         .minimumScaleFactor(0.8)
                 }
                 .buttonStyle(AmbitionPressableButtonStyle(state: choice.isSelected ? .selected : .default))
-                .accessibilityIdentifier("captures.route-choice.\(choice.routeType.rawValue)")
+                .accessibilityIdentifier("capture.route-choice.\(choice.routeType.rawValue)")
             }
         }
     }

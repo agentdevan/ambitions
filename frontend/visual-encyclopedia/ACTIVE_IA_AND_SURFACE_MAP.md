@@ -8,7 +8,7 @@ Active top-level IA is exactly `Today / Goals / Capture / Time / You`.
 |---|---|---|---|
 | Today | Reality Meridian | Do what fits now and close/recover honestly. | `AppTab.today`, `TodayScreen`, Today feature files |
 | Goals | Constellation Atlas | Maintain direction, proof, goal threads, and alternate paths. | `AppTab.goals`, `GoalsScreen`, Goals feature files |
-| Capture | Atmosphere Composer | Capture without forced organization, then reveal routes. | `AppTab.captures` rendering `Capture`, Captures feature files |
+| Capture | Atmosphere Composer | Capture without forced organization, then reveal routes. | `AppTab.capture` rendering `Capture`, Capture feature files |
 | Time | LifeShape Field | Shape capacity, pressure, protected time, and reflow. | `AppTab.plan` rendering `Time`, Plan/Time compatibility files |
 | You | User System Profile | Control local runtime, trust, privacy, defaults, and support. | `AppTab.profile` rendering `You`, Profile feature files |
 

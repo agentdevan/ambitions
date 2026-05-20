@@ -33,8 +33,8 @@ selected prompt explicitly scopes them.
 | 3 | Ambition Meridian Shell | App / shell | `Native/Ambitions/App/AppShellView.swift`, `AppMeridianShell.swift`, `AppTab.swift`, `Sources/Components/TopLevelSurfaceCompositionPrimitives.swift`, `Sources/Previews/SI03ShellNavigationPreviews.swift` | `Native/AmbitionsTests/App/AppShellNavigationTests.swift`, `AppShellChromeTests.swift`, `TopLevelSurfaceCompositionTests.swift` | Depends on SI03, SI17, FCP04. Risk owner: shell/navigation; route/tab changes require explicit scope. |
 | 4 | LifePath View | Goals | `Native/Ambitions/Features/Goals/GoalDetailScreen.swift`, `GoalComponents.swift`, `GoalsFeatureModels.swift`, `GoalLifePathSignaturePrimitives.swift`, goal path domain/projector files if already owner-scoped | `Native/AmbitionsTests/Goals/GoalDetailStrategicPresentationTests.swift`, `GoalExplainabilityProjectionTests.swift`, `Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift` | Depends on SI06, PD06-PD08, FCP10. Risk owner: Goals; stop on roadmap board, generic path cards, or private-path leak. |
 | 5 | MissionControlTimeSpine / Mission Control Lanes | Goals | `GoalDetailScreen.swift`, `GoalMissionControlLanePrimitives.swift`, `GoalsFeatureModels.swift`, `GoalComponents.swift` | `GoalDetailStrategicPresentationTests.swift`, `GoalsOverviewBoardTests.swift`, `PreviewGoalsScenarios.swift` | Depends on SI07, PD05-PD08, FCP06. Risk owner: Goals; preserve Completed / Now / Friction / Next / Horizon and stop on grid/dashboard/PM-board drift. |
-| 6 | Capture Atmosphere Composer | Capture | `Native/Ambitions/Features/Captures/CapturesScreen.swift`, `CaptureAtmosphereComposer.swift`, `CaptureDraftRoutePreviewCard.swift`, `CapturesViewModel.swift` | `Native/AmbitionsTests/Captures/CapturesViewModelTests.swift`, `Native/Ambitions/PreviewSupport/PreviewFixtures.swift` | Depends on SI09, PD09, FCP18. Risk owner: Capture; text-first rule and no inbox/feed/notes posture are hard gates. |
-| 7 | Placement Resolver / Capture Correction | Capture | `CaptureDraftRoutePreviewCard.swift`, `CapturesViewModel.swift`, `Native/Ambitions/Domain/SmartAttachmentModels.swift`, `GoalEngine/GoalEngineIntake.swift` | `CapturePlacementReviewStateTests.swift`, `CapturesViewModelTests.swift`, `SmartAttachmentServiceTests.swift` | Depends on PD09-PD11, FCP18. Risk owner: Capture plus Goal intake; stop on hidden learning, auto-goal creation, or confidence percentages. |
+| 6 | Capture Atmosphere Composer | Capture | `Native/Ambitions/Features/Capture/CaptureScreen.swift`, `CaptureAtmosphereComposer.swift`, `CaptureDraftRoutePreviewCard.swift`, `CaptureViewModel.swift` | `Native/AmbitionsTests/Capture/CaptureViewModelTests.swift`, `Native/Ambitions/PreviewSupport/PreviewFixtures.swift` | Depends on SI09, PD09, FCP18. Risk owner: Capture; text-first rule and no inbox/feed/notes posture are hard gates. |
+| 7 | Placement Resolver / Capture Correction | Capture | `CaptureDraftRoutePreviewCard.swift`, `CaptureViewModel.swift`, `Native/Ambitions/Domain/SmartAttachmentModels.swift`, `GoalEngine/GoalEngineIntake.swift` | `CapturePlacementReviewStateTests.swift`, `CaptureViewModelTests.swift`, `SmartAttachmentServiceTests.swift` | Depends on PD09-PD11, FCP18. Risk owner: Capture plus Goal intake; stop on hidden learning, auto-goal creation, or confidence percentages. |
 | 8 | LifeShape Map | Plan | `Native/Ambitions/Features/Plan/PlanScreen.swift`, `PlanLifeShapeTimeCapacityMap.swift`, `PlanLifeShapeDrillDownPanel.swift`, `PlanFoundationCards.swift` | `Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift`, `Native/Ambitions/PreviewSupport/PreviewPlanScenarios.swift` | Depends on SI08, PD14, DAV05. Risk owner: Plan; stop on calendar grid, bar chart as primary object, or fake precision. |
 | 9 | Reflow Decision | Plan | `PlanLifeShapeDrillDownPanel.swift`, `PlanFoundationCards.swift`, `Native/Ambitions/Domain/Planning/PlanningEvaluation.swift`, `Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift` | `PlanFeatureServiceTests.swift`, `RescheduleEngineTests.swift`, `PreviewPlanScenarios.swift` | Depends on PD12, FCP14. Risk owner: Plan/domain; stop on silent rearrangement or unscoped calendar writes. |
 | 10 | Pressure / Recovery Review | Plan / Today | Plan LifeShape files, Today closure/recovery files, `Native/Ambitions/Domain/ExecutionResilience*` service/model files if owner-scoped | `PlanFeatureServiceTests.swift`, `TodayViewModelTests.swift`, `ExecutionResilienceProjectorTests.swift` | Depends on PD13, PD04, FCP14-FCP15. Risk owner: Plan/Today; stop on shame, failure, productivity, or fake precision framing. |
@@ -50,7 +50,7 @@ selected prompt explicitly scopes them.
 | 20 | Memory Lens / External Brain visual layer | You / memory | Profile memory/trust files, Memory Lens service/report files, `Native/AmbitionsTests/App/MemoryLensServiceTests.swift` owners | `MemoryLensServiceTests.swift`, `ProfileFeatureServiceTests.swift`, Personal System Center previews | Depends on EB memory/trust evidence, FCP22. Risk owner: You/memory; stop on creepy/omniscient copy or unsupported durable memory/sync/export/delete claims. |
 | 21 | Step Detail | Today | Today Step Detail/local detail files where present, `TodayDayRailPanels.swift`, `DayRailProjection.swift` | `TodayViewModelTests.swift`, `PreviewTodayScenarios.swift` | Depends on PD02, FCP05/FCP21. Risk owner: Today; stop on generic task-detail modal or unsupported Start now behavior. |
 | 22 | Step Session | Today | Today Step Session/local session files where present, `TodayDayRailPanels.swift`, `DayRailViewState.swift` | `TodayViewModelTests.swift`, Step Session preview scenarios | Depends on PD03, FCP05/FCP21. Risk owner: Today; stop on Pomodoro/focus gamification or timer-first posture. |
-| 23 | Grow into Goal | Capture / Goals | Capture placement/correction files, Goal creation/intake files, GoalEngine intake/domain files | `CapturesViewModelTests.swift`, `CreateGoalViewModelTests.swift`, `GoalEnginePlannerTests.swift` | Depends on PD11, FCP19. Risk owner: Capture/Goals; stop on automatic goal creation or project wizard posture. |
+| 23 | Grow into Goal | Capture / Goals | Capture placement/correction files, Goal creation/intake files, GoalEngine intake/domain files | `CaptureViewModelTests.swift`, `CreateGoalViewModelTests.swift`, `GoalEnginePlannerTests.swift` | Depends on PD11, FCP19. Risk owner: Capture/Goals; stop on automatic goal creation or project wizard posture. |
 | 24 | Cross-surface proof/review integration | Shared trust / all surfaces | Today proof receipt, Goals proof/history, Capture receipt, Plan reflow receipt, You trust history, shared receipt/proof primitives | Today, Goals, Capture, Plan, Profile, TrustReceipt tests and continuity scenarios | Depends on PD17, FCP06/FCP12, all owning surfaces. Risk owner: shared trust; stop on activity feed, duplicated islands, or privacy leak. |
 | 25 | Schedule / Availability / Defaults depth | You / Plan | Profile planning defaults/schedule files, Plan availability files, safe automation policy/domain files | `ProfileFeatureServiceTests.swift`, `PlanFeatureServiceTests.swift`, `SafeAutomationPolicyModelsTests.swift` | Depends on PD16, EB21/EB22, FCP17. Risk owner: You/Plan; stop on auto-scheduler black box, calendar clone, or vacation/free-time assumption. |
 
@@ -189,13 +189,13 @@ Required evidence:
 
 Likely files:
 
-- `Native/Ambitions/Features/Captures/CapturesScreen.swift`
-- `Native/Ambitions/Features/Captures/CaptureAtmosphereComposer.swift`
-- `Native/Ambitions/Features/Captures/CaptureDraftRoutePreviewCard.swift`
-- `Native/Ambitions/Features/Captures/CapturesViewModel.swift`
+- `Native/Ambitions/Features/Capture/CaptureScreen.swift`
+- `Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift`
+- `Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift`
+- `Native/Ambitions/Features/Capture/CaptureViewModel.swift`
 - `Native/Ambitions/Domain/SmartAttachmentModels.swift`
 - `Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift`
-- `Native/AmbitionsTests/Captures/CapturesViewModelTests.swift`
+- `Native/AmbitionsTests/Capture/CaptureViewModelTests.swift`
 - `Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift`
 
 FCP objects:
@@ -333,7 +333,7 @@ Each implementation batch must add/update tests in the closest owner target:
 
 - Today: `Native/AmbitionsTests/Today/`
 - Goals: `Native/AmbitionsTests/Goals/` and relevant domain tests
-- Capture: `Native/AmbitionsTests/Captures/`, `Native/AmbitionsTests/Services/`
+- Capture: `Native/AmbitionsTests/Capture/`, `Native/AmbitionsTests/Services/`
 - Plan: Plan tests under `Native/AmbitionsTests/`
 - You/Profile: Profile tests under `Native/AmbitionsTests/`
 - Shared primitives: design-system/component tests or closest existing test target
