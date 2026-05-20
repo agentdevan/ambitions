@@ -76,69 +76,16 @@ for i in $(seq 1 "$MAX_LOOPS"); do
   echo "Dirty state after runner:"
   git status --short
 
-  git add -A
+  cat <<'MSG'
+Refusing to auto-stage or auto-push runner output.
+Broad staging is not allowed for Ambitions trains.
 
-  if ! git diff --cached --check; then
-    echo "ERROR: git diff --cached --check failed."
-    exit 7
-  fi
-
-  if git diff --cached --quiet; then
-    echo "No staged changes after git add."
-    exit 0
-  fi
-
-  ACTIVE_BATCH="$(python3 - <<'PY'
-from pathlib import Path
-import re
-
-candidates = [
-    Path(".codex/state/active-batch.yml"),
-    Path(".codex/reports/current-batch-train-state.md"),
-]
-
-text = ""
-for p in candidates:
-    if p.exists():
-        text += "\n" + p.read_text(errors="ignore")
-
-patterns = [
-    r"next_eligible_batch:\s*['\"]?([A-Za-z0-9_.-]+)",
-    r"active_batch:\s*['\"]?([A-Za-z0-9_.-]+)",
-    r"Batch ID:\s*(?:\x60)?([A-Za-z0-9_.-]+)",
-    r"\b(PK\d+)\b",
-]
-
-for pat in patterns:
-    m = re.search(pat, text)
-    if m:
-        print(m.group(1))
-        raise SystemExit
-
-print("GLOBAL-BATCH-TRAIN")
-PY
-)"
-
-  COMMIT_MSG="${ACTIVE_BATCH}: supervisor checkpoint ${i}"
-
-  echo "Committing: $COMMIT_MSG"
-  git commit -m "$COMMIT_MSG" || exit 8
-
-  echo "Pushing to origin/main"
-  git push origin main || {
-    echo "Push failed. Trying fetch/rebase/push."
-    git fetch origin main || exit 9
-    git rebase origin/main || exit 10
-    git push origin main || exit 11
-  }
-
-  echo "Pushed commit:"
-  git log --oneline -1
-
-  if grep -Eiq "Hard Red|Status: Red" "$LOG"; then
-    echo "Runner reported Red, but changes were committed/pushed. Stopping for inspection. See $LOG."
-    exit 12
-  fi
+Next step:
+  1. Review the changed paths above.
+  2. Stage only runner-owned, batch-scoped paths from a normal Codex session.
+  3. Commit and push explicitly after validation.
+MSG
+  exit 7
 done
 
 echo "Reached MAX_LOOPS=$MAX_LOOPS. Stopping."

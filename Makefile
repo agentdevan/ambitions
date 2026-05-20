@@ -8,7 +8,7 @@
 .PHONY: frontend-authority-packet frontend-authority-packets-p0 frontend-authority-packets-all frontend-authority-preflight frontend-implementation-prompt frontend-source-bindings frontend-drift-check frontend-implementation-dashboard frontend-next-surface-queue frontend-receipt-check frontend-proof-contract-check encyclopedia-to-frontend-os-final-gate encyclopedia-to-frontend-os-all
 .PHONY: visual-100-priority visual-100-recipes visual-100-objects visual-100-source-debt visual-100-vocabulary visual-100-anti-generic visual-100-accessibility visual-100-proof-source-receipt visual-100-transaction visual-100-primitives visual-100-scorecards visual-100-prompt-authority visual-100-atlas visual-100-native visual-100-local-first visual-100-no-false-momentum visual-100-hidden-automation visual-100-false-green visual-100-gate visual-100-dashboard visual-100-all
 .PHONY: design-system-tokens design-system-token-check design-system-contracts design-system-preview-matrix design-system-accessibility-contracts design-system-state-machines design-system-dependencies design-system-feature-services design-system-adrs design-system-proof-receipts design-system-local-trust design-system-performance design-system-authority design-system-traceability design-system-dashboard design-system-15-all
-.PHONY: xcodebuildmcp-register
+.PHONY: xcodebuildmcp-register scripts-inventory scripts-doctor
 
 RUNNER := scripts/ambitions-codex-train.sh
 WRAPPER := scripts/ambitions-wrap-prompt.sh
@@ -311,6 +311,12 @@ ambitions-codex-os-validate:
 
 ambitions-codex-os-doctor:
 	python3 scripts/ambitions-codex-os-doctor.py
+
+scripts-inventory:
+	@python3 scripts/ambitions-script-doctor.py --summary-only
+
+scripts-doctor:
+	python3 scripts/ambitions-script-doctor.py
 
 openai-build-suite-validate:
 	python3 scripts/openai-build-suite-validate.py
