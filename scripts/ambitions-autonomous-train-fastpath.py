@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-ROUTER = ROOT / "scripts/ambitions-next-batch-router.py"
+ROUTER = ROOT / "scripts/ambitions-next-batch-resolver.py"
 HBI_GUARD = ROOT / "scripts/ambitions-historical-baseline-train-guard.py"
 MRI_ROUTER = ROOT / "scripts/ambitions-mri-autonomous-router.py"
 MRI_MATERIALIZER = ROOT / "scripts/ambitions-mri-materialize-prompts.py"
@@ -38,7 +38,7 @@ def run(cmd: list[str], *, capture: bool = False) -> subprocess.CompletedProcess
 
 
 def route() -> dict[str, Any]:
-    proc = run([sys.executable, str(ROUTER), "--dry-run", "--prefer-hbi"], capture=True)
+    proc = run([sys.executable, str(ROUTER), "--json", "--prefer-hbi"], capture=True)
     if proc.returncode != 0:
         print(proc.stdout or "", end="")
         print(proc.stderr or "", end="", file=sys.stderr)

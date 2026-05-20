@@ -9,7 +9,7 @@ RUNNER="scripts/ambitions-codex-train.sh"
 AUDIT="scripts/ambitions-prompt-audit.sh"
 PREFLIGHT="scripts/ambitions-process-preflight.sh"
 FRONTEND_AUTHORITY_CHECK="scripts/ambitions-global-train-frontend-authority-check.py"
-CODEX_OS_SELECTION="build/codex-os/batch-selection.json"
+RESOLVER="scripts/ambitions-next-batch-resolver.py"
 CODEX_OS_NEXT_ACTION="build/codex-os/next-action.json"
 
 die() {
@@ -40,6 +40,7 @@ require_base_files() {
   [[ -x "$AUDIT" ]] || die "$AUDIT is missing or not executable"
   [[ -x "$PREFLIGHT" ]] || die "$PREFLIGHT is missing or not executable"
   [[ -f "$FRONTEND_AUTHORITY_CHECK" ]] || die "$FRONTEND_AUTHORITY_CHECK is missing"
+  [[ -f "$RESOLVER" ]] || die "$RESOLVER is missing"
   [[ -f "$QUEUE" ]] || die "$QUEUE is missing"
   [[ -f "$LEDGER" ]] || die "$LEDGER is missing"
 }
@@ -113,20 +114,6 @@ require_clean_tracked_worktree() {
   fi
 }
 
-queue_next_batch() {
-  python3 - "$QUEUE" <<'PY'
-import json, sys
-path = sys.argv[1]
-with open(path, "r", encoding="utf-8") as fh:
-    data = json.load(fh)
-for batch in data.get("batches", []):
-    if batch.get("classification") == "executable_now":
-        print(batch.get("id", ""))
-        sys.exit(0)
-print("")
-PY
-}
-
 ledger_requires_finalization() {
   awk '
     /^## Current Active Attempt/ {active=1; next}
@@ -137,46 +124,14 @@ ledger_requires_finalization() {
   ' "$LEDGER"
 }
 
-prompt_for_batch() {
-  local batch="$1"
-  if [[ -f "prompts/batches/${batch}-FINALIZE-01.md" ]]; then
-    printf 'prompts/batches/%s-FINALIZE-01.md\n' "$batch"
-  else
-    printf 'prompts/batches/%s.md\n' "$batch"
-  fi
-}
-
 next_batch() {
-  if [[ -f "$CODEX_OS_SELECTION" ]]; then
-    local codex_os_batch
-    codex_os_batch="$(python3 - "$CODEX_OS_SELECTION" <<'PY'
-import json, sys
-path = sys.argv[1]
-try:
-    with open(path, "r", encoding="utf-8") as fh:
-        data = json.load(fh)
-except Exception:
-    print("")
-    raise SystemExit(0)
-classification = str(data.get("classification", ""))
-if classification in {"executable_now", "active", "queued", "active_partial"}:
-    print(data.get("selected_batch", ""))
-else:
-    print("")
-PY
-    )"
-    if [[ -n "$codex_os_batch" ]]; then
-      printf '%s\n' "$codex_os_batch"
-      return 0
-    fi
-  fi
   local finalize_child
   finalize_child="$(ledger_requires_finalization)"
   if [[ -n "$finalize_child" ]]; then
     printf '%s-FINALIZE-01\n' "$finalize_child"
     return 0
   fi
-  queue_next_batch
+  python3 "$RESOLVER" --field batch_id
 }
 
 next_prompt() {
@@ -184,7 +139,7 @@ next_prompt() {
   if [[ "$batch" == *-FINALIZE-01 ]]; then
     printf 'prompts/batches/%s.md\n' "$batch"
   else
-    prompt_for_batch "$batch"
+    python3 "$RESOLVER" --field prompt_path
   fi
 }
 
@@ -209,9 +164,19 @@ print_next() {
   require_base_files
   python3 -m json.tool "$QUEUE" >/dev/null
   if [[ -f "$CODEX_OS_NEXT_ACTION" ]]; then
-    echo "Codex OS next action:"
-    python3 -m json.tool "$CODEX_OS_NEXT_ACTION"
-    echo
+    local codex_os_decision
+    codex_os_decision="$(python3 - "$CODEX_OS_NEXT_ACTION" <<'PY'
+import json, sys
+try:
+    data = json.load(open(sys.argv[1], encoding="utf-8"))
+except Exception:
+    print("unreadable")
+else:
+    print(data.get("decision") or data.get("classification") or "unknown")
+PY
+)"
+    echo "Codex OS next action mirror: $codex_os_decision"
+    echo "Authoritative resolver result:"
   fi
   local batch prompt
   batch="$(next_batch)"
@@ -221,9 +186,7 @@ print_next() {
     echo "Reason: no executable next batch found"
     return 0
   fi
-  prompt="$(next_prompt "$batch")"
-  echo "Next batch: $batch"
-  echo "Prompt: $prompt"
+  python3 "$RESOLVER"
 }
 
 audit_prompts() {
