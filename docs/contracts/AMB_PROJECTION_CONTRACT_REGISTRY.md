@@ -294,7 +294,7 @@ Contract ownership rule:
 - owner: Trust runtime + frontend
 - consumer: You / Memory Lens
 - schema_maturity: L1
-- required_fields: [memory_pressure, operating_curve, fricton_map]
+- required_fields: [memory_pressure, operating_curve, friction_map]
 - forbidden_fields: [opaque_model_store]
 - runtime_identity: PersonalOperatingCurve
 - projection_identity: MemoryLensRenderer
