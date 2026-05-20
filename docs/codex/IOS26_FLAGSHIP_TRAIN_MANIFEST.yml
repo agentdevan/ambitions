@@ -14,6 +14,14 @@ stop_rules:
   - never_skip_train_0
   - do_not_run_source_changing_trains_until_train_0_baseline_artifacts_exist
   - do_not_run_ios_26_target_bump_until_toolchain_proof_exists
+installed_tooling:
+  - scripts/ios26-flagship-preflight.py
+  - scripts/ios26-flagship-proof-packet-check.py
+  - scripts/ios26-api-ledger-check.py
+  - scripts/ios26-flagship-run-sequential.sh
+  - scripts/setup-ambitions-proof-mcp.sh
+  - .xcodebuildmcp/config.yaml
+  - .xcodebuildmcp/codex-timeout-policy.json
 dependencies:
   TRAIN_00: []
   TRAIN_01: [TRAIN_00]

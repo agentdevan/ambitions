@@ -26,7 +26,7 @@ tools/mcp/ambitions_proof_mcp/
 - closeout shape validation
 - current repo posture summary
 
-`ambitions_proof_mcp` exposes named local validation tools only. It is not a generic shell and does not add write, network, secrets, signing, App Store, hosted CI, or git mutation tools.
+`ambitions_proof_mcp` exposes named local validation tools only. It is not a generic shell and does not add write, network, secrets, signing, App Store, hosted CI, or git mutation tools. It is registered as `ambitionsProof` in the local Codex config on this Mac when `codex mcp list` shows the server.
 
 Scaffold-only MCP plans also exist for visual proof, accessibility shadow proof, Ambitions Twin fixtures, Source Atlas packs, and release truth:
 
@@ -82,7 +82,7 @@ codex mcp add openaiDeveloperDocs --url https://developers.openai.com/mcp
 
 If the command is unavailable, use the `config.toml` method.
 
-MCP02 config example, for a later explicit registration step:
+MCP02 config:
 
 ```toml
 [mcp_servers.ambitionsProof]

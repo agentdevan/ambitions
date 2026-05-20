@@ -21,8 +21,10 @@ enabledWorkflows:
   - simulator
 sessionDefaults:
   default:
+    projectPath: Ambitions.xcodeproj
     scheme: Ambitions
     simulatorName: iPhone 17
+    bundleId: com.ambitions.ios
 YAML
 fi
 

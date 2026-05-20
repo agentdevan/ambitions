@@ -45,6 +45,7 @@ explicit approval and a security review.
 | LDI/AOS/EB scans | `ldi-*`, `eb-*` | Active/advisory by batch | Owner-specific evidence support |
 | AI/ACX scripts | `scripts/ai/acx*` | Candidate/supporting local repair and evidence helpers | Do not treat as autonomous authority |
 | Setup scripts | `setup-ambitions-repo-mcp.sh`, `setup_macos_ios_dev.sh` | Potentially mutating local setup | Run only when the user explicitly asks |
+| IOS26 train tooling | `ios26-flagship-preflight.py`, `ios26-flagship-proof-packet-check.py`, `ios26-api-ledger-check.py`, `ios26-flagship-run-sequential.sh` | Active IOS26 train support | Process/proof-shape evidence only; does not prove app behavior, release readiness, accessibility, performance, or device behavior |
 | Icon generation | `generate_ios_app_icons.ps1` | Asset mutation tool | Forbidden in cleanup unless explicitly approved |
 
 ## GitHub / CI Policy
