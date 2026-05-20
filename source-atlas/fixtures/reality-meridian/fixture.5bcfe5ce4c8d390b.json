@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.d962253f962028b9",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for capacity_constraint=transportation_limited plus derivative/proof boundaries.",
+  "family": "reality-meridian",
+  "generated_derivative_notice": true,
+  "id": "fixture.5bcfe5ce4c8d390b",
+  "input_hash": "1f04f3ab297027921dd69c92183f44ad1ef2817a1e884f7c83aa0333ac112a43",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect requires_local_only_handling with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.b5ffc5ccd7c5194f"
+  ],
+  "version": "runtime_fixture.v1"
+}

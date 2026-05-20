@@ -52,6 +52,13 @@ output/DerivedData*/
 # generated and scratch artifacts
 /tmp/
 tmp/
+.generated/
+source-atlas/generated/scenario-specs/
+source-atlas/generated/candidates/
+source-atlas/generated/rejected/
+source-atlas/generated/accepted/
+source-atlas/generated/receipts/
+source-atlas/generated/proof/
 *.ndjson
 *.log
 *.tmp
@@ -79,4 +86,3 @@ runs/
 # Python runtime caches
 __pycache__/
 *.pyc
-

@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.aec16d7b23ee01e4",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for time_reality=travel_day plus derivative/proof boundaries.",
+  "family": "replay",
+  "generated_derivative_notice": true,
+  "id": "fixture.892002abf78173c8",
+  "input_hash": "0f188d4506ae0b4133b394bc14bfa0c675e1e3fcc410a66aadfc84f007a6c673",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect family_sensitive with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.ce03c8d9a5ddfc25"
+  ],
+  "version": "runtime_fixture.v1"
+}

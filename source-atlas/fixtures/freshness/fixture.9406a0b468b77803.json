@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.1cf7a83cff6ea011",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for time_reality=disrupted_day plus derivative/proof boundaries.",
+  "family": "freshness",
+  "generated_derivative_notice": true,
+  "id": "fixture.9406a0b468b77803",
+  "input_hash": "27ea530edf649df113fe6d5fac7fcb2b9c251143726479997aa4155780497bad",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect ordinary with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.9ef534c3cfc37666"
+  ],
+  "version": "runtime_fixture.v1"
+}

@@ -1,0 +1,98 @@
+{
+  "version": "source_atlas_coverage_recipes.v1",
+  "recipes": [
+    {
+      "id": "core_runtime_minimum",
+      "purpose": "Cover every primary Private Life Runtime behavior across normal, overloaded, fragmented, and recovery days.",
+      "include_all": ["product_object", "closure_state", "runtime_proof_need"],
+      "pairwise": [["time_reality", "capacity_constraint", "evidence_quality"]],
+      "three_wise": [
+        ["product_object", "closure_state", "runtime_proof_need"],
+        ["time_reality", "capacity_constraint", "recommendation_failure_mode"],
+        ["privacy_sensitivity", "evidence_quality", "source_freshness"]
+      ],
+      "required_values": {
+        "time_reality": ["normal_workday", "overloaded_day", "fragmented_day", "recovery_day"]
+      }
+    },
+    {
+      "id": "start_here_receipt_stress",
+      "purpose": "Stress Start Here recommendation quality and receipt integrity.",
+      "include_all": ["start_here_receipt_risk", "recommendation_failure_mode"],
+      "required_values": {
+        "product_object": ["today_start_here"],
+        "runtime_proof_need": ["time_fit_validation", "capacity_fit_validation", "receipt_generation", "protected_time_validation", "freshness_warning", "replay_after_relaunch"]
+      },
+      "generate_bad_cases": true
+    },
+    {
+      "id": "reality_meridian_time_truth",
+      "purpose": "Stress Reality Meridian time, protected time, closure, recovery, and replay truth.",
+      "include_all": ["time_reality"],
+      "required_values": {
+        "product_object": ["today_reality_meridian"],
+        "time_reality": ["free_time_with_hidden_commute", "free_time_with_protected_block", "stale_calendar_data", "disrupted_day", "early_completion_reflow", "missed_morning", "vacation_away_not_available", "fragmented_day"]
+      },
+      "promote_fixture_family": "reality-meridian"
+    },
+    {
+      "id": "closure_recovery_universe",
+      "purpose": "Ensure all closure states and recovery paths have realistic, non-shaming, deterministic behavior.",
+      "include_all": ["closure_state", "recovery_path"],
+      "required_values": {
+        "product_object": ["closure_system"],
+        "disruption_type": ["repeated_move", "step_completed_outside_app", "long_absence_then_return"],
+        "closure_state": ["still_counts", "blocked", "waiting", "needs_recovery", "needs_review", "completed_outside_app", "partially_completed"]
+      }
+    },
+    {
+      "id": "source_quality_adversarial",
+      "purpose": "Prevent generated or stale source packs from becoming false truth.",
+      "required_values": {
+        "product_object": ["freshness_system", "receipt_system"],
+        "evidence_quality": ["stale", "incomplete", "contradictory", "generated_only", "professional_guidance_required"],
+        "source_freshness": ["unknown_freshness", "jurisdiction_dependent", "user_specific", "source_conflict"]
+      },
+      "force_validation": ["freshness_warning", "no_generated_pack_as_proof", "contradiction_handling"]
+    },
+    {
+      "id": "privacy_local_first_boundary",
+      "purpose": "Protect Ambitions from cloud-runtime leakage and unsafe inference.",
+      "include_all": ["privacy_sensitivity"],
+      "required_values": {
+        "product_object": ["local_only_privacy_boundary", "private_life_runtime"],
+        "runtime_proof_need": ["local_only_execution", "no_network_required", "invalid_input_rejection"]
+      }
+    },
+    {
+      "id": "life_domain_wide_coverage",
+      "purpose": "Cover all major life domains with Ambitions-specific edge cases.",
+      "include_all": ["life_domain"],
+      "required_values": {
+        "intent_shape": ["vague_intent", "deadline_driven_goal", "recurring_maintenance", "recovery_goal", "emotionally_loaded_goal", "externally_required_goal", "multi_person_goal"],
+        "time_reality": ["overloaded_day", "fragmented_day", "low_energy_day", "deadline_day", "protected_recovery_time", "no_calendar_data"]
+      }
+    },
+    {
+      "id": "adversarial_mutation_sweep",
+      "purpose": "Generate variants that expose brittle assumptions.",
+      "mutate_axes": ["evidence_quality", "source_freshness", "time_reality", "closure_state", "capacity_constraint", "privacy_sensitivity", "recommendation_failure_mode"]
+    },
+    {
+      "id": "launch_trust_destroyers",
+      "purpose": "Find cases that would destroy user trust at launch.",
+      "required_values": {
+        "severity": ["unsafe_if_wrong", "trust_destroying", "launch_blocking"],
+        "time_reality": ["protected_recovery_time", "vacation_away_not_available", "free_time_with_hidden_commute"],
+        "recommendation_failure_mode": ["violates_protected_time", "unsafe_or_inappropriate", "repeats_rejected_step", "lacks_time_fit_proof", "lacks_source_freshness", "privacy_violation"],
+        "runtime_proof_need": ["protected_time_validation", "replay_after_relaunch", "receipt_generation", "accessibility_copy_order"]
+      }
+    },
+    {
+      "id": "scale_candidate_generation",
+      "purpose": "Prepare for large-scale generation without polluting repo.",
+      "output_policy": "generated_or_dot_generated_only",
+      "commit_policy": "commit_schemas_recipes_fixtures_reports_and_small_samples_only"
+    }
+  ]
+}

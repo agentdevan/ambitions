@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.62f9aee3d8c93a3e",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for product_object=receipt_system plus derivative/proof boundaries.",
+  "family": "reality-meridian",
+  "generated_derivative_notice": true,
+  "id": "fixture.069a143881d649ed",
+  "input_hash": "5199e367aad6b8046b42390c6483140d739b7d70945a69fe104ec9a214dd5909",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect legally_sensitive with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.c93d6be2af2ebdf5"
+  ],
+  "version": "runtime_fixture.v1"
+}

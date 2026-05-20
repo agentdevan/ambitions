@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.1531a1031861518d",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate receipt_generation plus derivative/proof boundaries.",
+  "family": "start-here",
+  "generated_derivative_notice": true,
+  "id": "fixture.119257adcbb2c6a6",
+  "input_hash": "3d338aad94fa353f7338f8ea315532da4647cfd687a4bd70c7e192254913b364",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect legally_sensitive with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.6b02fa790dd75210"
+  ],
+  "version": "runtime_fixture.v1"
+}

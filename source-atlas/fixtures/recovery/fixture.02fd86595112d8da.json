@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.e3b67538b0b488b6",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for capacity_constraint=social_obligation_limited plus derivative/proof boundaries.",
+  "family": "recovery",
+  "generated_derivative_notice": true,
+  "id": "fixture.02fd86595112d8da",
+  "input_hash": "a4bb6ddd8e610ede5fac2933998ef5fa76bd4d8e71f894e22c75ff023912e272",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect ordinary with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.d2c2da5e73f2cc34"
+  ],
+  "version": "runtime_fixture.v1"
+}

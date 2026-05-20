@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.3f6b2fbfe31324d0",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for product_object=freshness_system plus derivative/proof boundaries.",
+  "family": "closure",
+  "generated_derivative_notice": true,
+  "id": "fixture.c8cddacd8222f823",
+  "input_hash": "6257043f83e78d7007c23f9b90482712915506812206708075237bc2b35847bc",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect family_sensitive with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.310530bae39420fb"
+  ],
+  "version": "runtime_fixture.v1"
+}

@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.dc6e2a7900f40aff",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for time_reality=normal_workday plus derivative/proof boundaries.",
+  "family": "reality-meridian",
+  "generated_derivative_notice": true,
+  "id": "fixture.7dacbb6917e0993c",
+  "input_hash": "55f89dafec64ef7d78bfc36a33b6f189ff74d8b648ef1c4d1604553e2e1c6655",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect requires_local_only_handling with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.5426823fceedda65"
+  ],
+  "version": "runtime_fixture.v1"
+}

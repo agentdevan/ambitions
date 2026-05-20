@@ -1,0 +1,42 @@
+{
+  "version": "source_atlas_promotion_policy.v1",
+  "destinations": {
+    "recommendation_selection": "runtime",
+    "time_fit_validation": "start-here",
+    "capacity_fit_validation": "start-here",
+    "protected_time_validation": "reality-meridian",
+    "closure_transition": "closure",
+    "recovery_transition": "recovery",
+    "freshness_warning": "freshness",
+    "receipt_generation": "start-here",
+    "replay_after_relaunch": "replay",
+    "deterministic_same_input_same_output": "runtime",
+    "different_context_different_output": "runtime",
+    "local_only_execution": "privacy",
+    "no_network_required": "privacy",
+    "no_generated_pack_as_proof": "freshness",
+    "migration_persistence": "runtime",
+    "invalid_input_rejection": "runtime",
+    "contradiction_handling": "freshness",
+    "duplicate_handling": "runtime",
+    "screenshot_or_preview_proof": "runtime",
+    "accessibility_copy_order": "start-here"
+  },
+  "requires": [
+    "promotion_receipt",
+    "source_manifest",
+    "input_hash",
+    "scenario_links",
+    "candidate_score",
+    "validation_output",
+    "reason_for_promotion",
+    "expected_test_behavior"
+  ],
+  "forbidden": [
+    "make_generated_pack_canon",
+    "make_generated_pack_proof",
+    "bypass_runtime_tests",
+    "bypass_validation",
+    "create_app_runtime_dependency"
+  ]
+}

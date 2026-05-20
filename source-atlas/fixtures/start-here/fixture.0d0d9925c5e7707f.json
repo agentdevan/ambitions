@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.5c85247c10c18a7e",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for product_object=time_lifeshape_field plus derivative/proof boundaries.",
+  "family": "start-here",
+  "generated_derivative_notice": true,
+  "id": "fixture.0d0d9925c5e7707f",
+  "input_hash": "6fe305e741a8e0deb2bc411ebbc14c5c1333068b53bf9d175fcc7bd89ab36316",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect requires_local_only_handling with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.0a3426ec08ab9aee"
+  ],
+  "version": "runtime_fixture.v1"
+}

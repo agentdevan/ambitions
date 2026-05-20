@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.9867d4fe7429e5a2",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for time_reality=school_day plus derivative/proof boundaries.",
+  "family": "closure",
+  "generated_derivative_notice": true,
+  "id": "fixture.defc411e1fe23ba7",
+  "input_hash": "1282ec9cb7df2c20766e35c7887d0553d141e1ad1f11915fa085de95af1891c1",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect should_not_be_model_generated_without_redaction with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.ad60f14c5b9c4c89"
+  ],
+  "version": "runtime_fixture.v1"
+}

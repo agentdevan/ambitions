@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.dbcf7f2f3794ae16",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for capacity_constraint=attention_limited plus derivative/proof boundaries.",
+  "family": "start-here",
+  "generated_derivative_notice": true,
+  "id": "fixture.4345aff08285bb52",
+  "input_hash": "e82f2813835478f69cb6eda4941588aae5df2d2aa5158c8decccc1ea42cc0bf8",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect location_sensitive with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.6eeeeb2c963d7c2e"
+  ],
+  "version": "runtime_fixture.v1"
+}

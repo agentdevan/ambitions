@@ -1,0 +1,51 @@
+{
+  "version": "source_atlas_mutation_rules.v1",
+  "mutation_families": {
+    "freshness_mutation": [
+      ["source_freshness", "timeless", "stale_warning"],
+      ["source_freshness", "recently_updated", "unknown_freshness"],
+      ["evidence_quality", "source_pack_backed", "contradictory"],
+      ["time_reality", "normal_workday", "stale_calendar_data"]
+    ],
+    "time_reality_mutation": [
+      ["time_reality", "normal_workday", "overloaded_day"],
+      ["time_reality", "empty_day", "fragmented_day"],
+      ["time_reality", "long_open_window", "protected_recovery_time"],
+      ["time_reality", "weekend", "protected_family_time"],
+      ["time_reality", "unexpected_gap", "free_time_with_hidden_commute"]
+    ],
+    "capacity_mutation": [
+      ["capacity_constraint", "time_limited", "energy_limited"],
+      ["capacity_constraint", "attention_limited", "money_limited"],
+      ["capacity_constraint", "confidence_limited", "emotional_capacity_limited"],
+      ["capacity_constraint", "too_many_open_loops", "executive_function_limited"]
+    ],
+    "closure_mutation": [
+      ["closure_state", "completed", "partially_completed"],
+      ["closure_state", "moved", "deferred_with_reason"],
+      ["closure_state", "skipped_not_needed", "still_counts"],
+      ["closure_state", "blocked", "waiting"],
+      ["closure_state", "abandoned", "reopened"]
+    ],
+    "privacy_mutation": [
+      ["privacy_sensitivity", "ordinary", "financially_sensitive"],
+      ["privacy_sensitivity", "ordinary", "medically_sensitive"],
+      ["privacy_sensitivity", "ordinary", "relationship_sensitive"],
+      ["privacy_sensitivity", "ordinary", "legally_sensitive"],
+      ["privacy_sensitivity", "ordinary", "safety_sensitive"]
+    ],
+    "receipt_mutation": [
+      ["start_here_receipt_risk", "weak_because_line", "weak_because_line"],
+      ["start_here_receipt_risk", "no_time_fit", "no_time_fit"],
+      ["start_here_receipt_risk", "stale_context", "stale_context"],
+      ["start_here_receipt_risk", "overstates_certainty", "overstates_certainty"],
+      ["start_here_receipt_risk", "hidden_conflict", "hidden_conflict"]
+    ],
+    "runtime_mutation": [
+      ["runtime_proof_need", "deterministic_same_input_same_output", "deterministic_same_input_same_output"],
+      ["runtime_proof_need", "different_context_different_output", "different_context_different_output"],
+      ["runtime_proof_need", "replay_after_relaunch", "replay_after_relaunch"],
+      ["runtime_proof_need", "no_generated_pack_as_proof", "no_generated_pack_as_proof"]
+    ]
+  }
+}

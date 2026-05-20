@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/source-atlas/schemas/candidate-source-pack.schema.json",
+  "title": "CandidateSourcePack",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "scenario_ids",
+    "domain",
+    "source_manifest",
+    "claim_graph",
+    "requirement_graph",
+    "proof_map",
+    "freshness_policy",
+    "privacy_policy",
+    "runtime_use",
+    "unsupported_claims",
+    "generated_derivative_notice",
+    "cannot_satisfy_proof_alone",
+    "validation_status",
+    "quality_score",
+    "promotion_status",
+    "receipts"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^candidate\\."},
+    "scenario_ids": {"type": "array", "items": {"type": "string"}},
+    "generated_derivative_notice": {"const": true},
+    "cannot_satisfy_proof_alone": {"const": true},
+    "quality_score": {"type": ["number", "integer", "null"]},
+    "promotion_status": {"type": "string"}
+  },
+  "additionalProperties": true
+}

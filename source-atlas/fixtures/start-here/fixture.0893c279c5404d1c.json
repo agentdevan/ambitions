@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.ed895f51aa10f9d8",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for start_here_receipt_risk=missing_closure_context plus derivative/proof boundaries.",
+  "family": "start-here",
+  "generated_derivative_notice": true,
+  "id": "fixture.0893c279c5404d1c",
+  "input_hash": "e1d17e708b29c04ec7e2a20d1a738ae0ef23b4ed9e958b0ac4071e26c646bdb9",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect ordinary with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.b05500d8ea939025"
+  ],
+  "version": "runtime_fixture.v1"
+}

@@ -1,0 +1,37 @@
+{
+  "version": "source_atlas_scale_presets.v1",
+  "presets": {
+    "small_proof": {
+      "scenarios": 300,
+      "mutations": 100,
+      "candidates": 50,
+      "promoted_fixtures": 20,
+      "output": "source-atlas/generated",
+      "commit_policy": "do_not_commit_mass_generated_outputs"
+    },
+    "medium_gap_fill": {
+      "scenarios": 2000,
+      "mutations": 1000,
+      "candidates": 500,
+      "promoted_fixtures": 75,
+      "output": ".generated/source-atlas",
+      "commit_policy": "promote_only_high_quality_artifacts_and_reports"
+    },
+    "large_edge_sweep": {
+      "scenarios": 10000,
+      "mutations": 5000,
+      "candidates": 2000,
+      "promoted_fixtures": 150,
+      "output": ".generated/source-atlas",
+      "commit_policy": "local_run_only_by_default"
+    },
+    "launch_trust_sweep": {
+      "scenarios": 3000,
+      "mutations": 3000,
+      "candidates": 1000,
+      "promoted_fixtures": 100,
+      "output": ".generated/source-atlas",
+      "commit_policy": "coverage_delta_and_receipts_required"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 .PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-read-only-audit batch-self-check batch-status runner-access-check prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
+.PHONY: source-atlas-coverage-inventory source-atlas-coverage-dry-run source-atlas-generate-scenarios source-atlas-mutate-scenarios source-atlas-validate-scenarios source-atlas-generate-candidates source-atlas-score-candidates source-atlas-dedupe-candidates source-atlas-promote-fixtures source-atlas-coverage-report source-atlas-coverage-proof
 .PHONY: repo-doctor repo-doctor-strict canon-install codex-os-context codex-os-next codex-os-sync codex-os-performance codex-os-repair-route codex-os-batch-select authorized-batch autonomy-loop
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
 .PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
@@ -20,6 +21,13 @@ LANE ?= none
 TEST ?=
 TEST_PLAN ?=
 RUN_ARGS ?=
+RECIPE ?= core_runtime_minimum
+MAX ?= 300
+SEED ?= 17
+OUTPUT ?=
+INPUT ?=
+CANDIDATES ?= source-atlas/generated/candidates/candidates.json
+SCENARIOS ?= source-atlas/generated/accepted/accepted-scenarios.json
 
 check-batch-input:
 	@test -n "$(BATCH)" || (echo "BATCH is required. Example: make batch BATCH=SI07 PROMPT=prompts/SI07.md" >&2; exit 2)
@@ -169,6 +177,42 @@ repo-doctor:
 
 repo-doctor-strict:
 	python3 scripts/governance/ambitions-repo-doctor.py --strict
+
+source-atlas-coverage-inventory:
+	@sed -n '1,240p' docs/audits/source-atlas-coverage-universe-inventory.md
+
+source-atlas-coverage-dry-run:
+	python3 tools/source-atlas/coverage.py expand --recipe "$(RECIPE)" --max "$(MAX)" --seed "$(SEED)" --dry-run
+
+source-atlas-generate-scenarios:
+	python3 tools/source-atlas/coverage.py expand --recipe "$(RECIPE)" --max "$(MAX)" --seed "$(SEED)" $(if $(OUTPUT),--output "$(OUTPUT)")
+
+source-atlas-mutate-scenarios:
+	@test -n "$(INPUT)" || (echo "INPUT is required. Example: make source-atlas-mutate-scenarios INPUT=source-atlas/generated/proof/scenarios-seed-a.json" >&2; exit 2)
+	python3 tools/source-atlas/coverage.py mutate --input "$(INPUT)" --max "$(MAX)" --seed "$(SEED)" $(if $(OUTPUT),--output "$(OUTPUT)")
+
+source-atlas-validate-scenarios:
+	@test -n "$(INPUT)" || (echo "INPUT is required. Example: make source-atlas-validate-scenarios INPUT=source-atlas/generated/proof/scenarios-with-mutations.json" >&2; exit 2)
+	python3 tools/source-atlas/coverage.py validate --input "$(INPUT)"
+
+source-atlas-generate-candidates:
+	@test -n "$(INPUT)" || (echo "INPUT is required. Example: make source-atlas-generate-candidates INPUT=source-atlas/generated/accepted/accepted-scenarios.json" >&2; exit 2)
+	python3 tools/source-atlas/coverage.py candidates --input "$(INPUT)" --max "$(MAX)" $(if $(OUTPUT),--output "$(OUTPUT)")
+
+source-atlas-score-candidates:
+	python3 tools/source-atlas/coverage.py score --input "$(CANDIDATES)" --scenarios "$(SCENARIOS)"
+
+source-atlas-dedupe-candidates:
+	python3 tools/source-atlas/coverage.py dedupe --input "$(CANDIDATES)"
+
+source-atlas-promote-fixtures:
+	python3 tools/source-atlas/coverage.py promote --input "$(CANDIDATES)" --scenarios "$(SCENARIOS)" --max "$(MAX)"
+
+source-atlas-coverage-report:
+	python3 tools/source-atlas/coverage.py report --scenarios "$(SCENARIOS)" --candidates "$(CANDIDATES)"
+
+source-atlas-coverage-proof:
+	python3 tools/source-atlas/coverage.py proof --seed "$(SEED)"
 
 canon-install:
 	python3 scripts/governance/ambitions-canon-installer.py

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/source-atlas/schemas/coverage-recipe.schema.json",
+  "title": "CoverageRecipeConfig",
+  "type": "object",
+  "required": ["version", "recipes"],
+  "properties": {
+    "version": {"type": "string"},
+    "recipes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "purpose"],
+        "properties": {
+          "id": {"type": "string"},
+          "purpose": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}

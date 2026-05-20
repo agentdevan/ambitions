@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.f69fefba07654375",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for time_reality=no_calendar_data plus derivative/proof boundaries.",
+  "family": "runtime",
+  "generated_derivative_notice": true,
+  "id": "fixture.5cf68f53ee673d71",
+  "input_hash": "6a3a518b1ae1277f125caf7a925e0a0f7c366ddc82d4a173ba9029fce06033c5",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect should_not_be_model_generated_without_redaction with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.98a858ed958738b5"
+  ],
+  "version": "runtime_fixture.v1"
+}

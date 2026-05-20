@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.d92bffbbe2b47c37",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for time_reality=vacation_away_explicitly_available plus derivative/proof boundaries.",
+  "family": "runtime",
+  "generated_derivative_notice": true,
+  "id": "fixture.994f9ed1905f1584",
+  "input_hash": "e59fe00658512f6a4fff142524e8104ce30c99d9bbe3a846db354a8944575170",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect location_sensitive with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.2eb845d82af19323"
+  ],
+  "version": "runtime_fixture.v1"
+}

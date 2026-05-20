@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/source-atlas/schemas/coverage-dimension.schema.json",
+  "title": "CoverageDimensionConfig",
+  "type": "object",
+  "required": ["version", "dimensions"],
+  "properties": {
+    "version": {"type": "string"},
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {"type": "string"},
+        "minItems": 1,
+        "uniqueItems": true
+      }
+    }
+  }
+}

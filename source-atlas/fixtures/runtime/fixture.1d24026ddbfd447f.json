@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.aa1022ec9757c592",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for time_reality=night_shift plus derivative/proof boundaries.",
+  "family": "runtime",
+  "generated_derivative_notice": true,
+  "id": "fixture.1d24026ddbfd447f",
+  "input_hash": "5b951dd1d82bcbdf7e9d7b839fff94a36c2d0d4387e04067537e118ae12cb10f",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect safety_sensitive with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.ae2ecf9896ad7dce"
+  ],
+  "version": "runtime_fixture.v1"
+}

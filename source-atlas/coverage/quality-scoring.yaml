@@ -1,0 +1,37 @@
+{
+  "version": "source_atlas_quality_scoring.v1",
+  "score_total": 100,
+  "categories": {
+    "ambitions_specificity": 15,
+    "edge_case_novelty": 15,
+    "runtime_usefulness": 15,
+    "start_here_receipt_usefulness": 10,
+    "reality_meridian_usefulness": 10,
+    "closure_recovery_usefulness": 10,
+    "privacy_local_first_safety": 10,
+    "source_quality_clarity": 5,
+    "freshness_clarity": 5,
+    "testability": 5
+  },
+  "automatic_rejection": [
+    "uses_generated_content_as_proof",
+    "lacks_local_only_boundary",
+    "lacks_privacy_boundary",
+    "lacks_validation_expectation",
+    "lacks_receipt_expectation",
+    "lacks_closure_recovery_expectation",
+    "generic_productivity_advice",
+    "duplicate_above_similarity_threshold",
+    "unsafe_recommendation_expectation",
+    "api_key_or_secret_present",
+    "private_credentials_present",
+    "cloud_runtime_dependency_implied",
+    "top_level_ia_language_violation"
+  ],
+  "promotion_thresholds": {
+    "promote": 85,
+    "accepted": 70,
+    "quarantine": 50,
+    "reject": 49
+  }
+}

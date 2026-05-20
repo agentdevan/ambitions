@@ -1,0 +1,16 @@
+{
+  "candidate_id": "candidate.4c5893234bc419c0",
+  "candidate_score": 100,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validate coverage for product_object=you_user_system plus derivative/proof boundaries.",
+  "family": "runtime",
+  "generated_derivative_notice": true,
+  "id": "fixture.dbafd9c041d35734",
+  "input_hash": "e28af3cf5f83426bd394035c7944fb7fb3b3fceae6f685c683fd7494707ebc99",
+  "local_only_requirement": "Scenario must run fully on local repo tooling with no network calls, API keys, telemetry, or external service requirement.",
+  "privacy_boundary": "Respect should_not_be_model_generated_without_redaction with local-only handling, redaction where needed, and no external model dependency.",
+  "scenario_ids": [
+    "scenario.97a5111152b8a920"
+  ],
+  "version": "runtime_fixture.v1"
+}
