@@ -83,7 +83,7 @@ struct GoalsScreen: View {
                     GoalsNorthStarsRailCard(state: overview.northStars)
                         .transition(.ambitionPanel)
 
-                    if hasVisibleBoardContent(overview) == false {
+                    if hasVisibleAtlasContent(overview) == false {
                         DegradedStateCard(
                             state: DegradedStateOrchestrator.goalsEmpty(),
                             primaryAccessibilityIdentifier: "goals.empty.create-goal",
@@ -165,11 +165,11 @@ struct GoalsScreen: View {
         }
     }
 
-    private func hasVisibleBoardContent(_ overview: GoalsOverview) -> Bool {
+    private func hasVisibleAtlasContent(_ overview: GoalsOverview) -> Bool {
         overview.bands.contains(where: { $0.cards.isEmpty == false }) || overview.lowerPriority.cards.isEmpty == false
     }
 
-    private func handlePrimaryAction(_ action: GoalsBoardPrimaryAction) {
+    private func handlePrimaryAction(_ action: GoalsAtlasPrimaryAction) {
         switch action.kind {
         case .createGoal:
             localCreationMessage = nil
@@ -209,9 +209,9 @@ struct GoalsScreen: View {
             let body: String = {
                 switch response.resultKind {
                 case .planned:
-                    return "\(response.blueprint.title) is now in the portfolio with a canonical plan."
+                    return "\(response.blueprint.title) is now in the portfolio with a canonical path."
                 case .starterPlanned:
-                    return "\(response.blueprint.title) is now in the portfolio with a starter plan."
+                    return "\(response.blueprint.title) is now in the portfolio with a starter path."
                 case .clarificationRequired:
                     return "\(response.blueprint.title) needs one clarification before Ambitions treats it as a live goal."
                 case .blocked:
@@ -253,7 +253,7 @@ private struct GoalsDirectionDepthDisclosure: View {
                     GoalsOneStepGoalsPanel(state: overview.oneStepGoals, onPromote: onPromote)
 
                     ForEach(overview.bands) { band in
-                        GoalsBoardBandSection(band: band)
+                        GoalsAtlasBandSection(band: band)
                     }
 
                     GoalsHorizonLadderCard(state: overview.horizonLadder)

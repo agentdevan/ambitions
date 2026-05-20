@@ -45,7 +45,7 @@ enum GoalRenderState: String, Hashable, Sendable {
     }
 }
 
-enum GoalsBoardPosture: String, Hashable, Sendable {
+enum GoalsAtlasPosture: String, Hashable, Sendable {
     case active
     case stalled
     case crowded
@@ -76,7 +76,7 @@ enum GoalsBoardPosture: String, Hashable, Sendable {
     }
 }
 
-enum GoalsBoardBandKind: String, Hashable, Sendable {
+enum GoalsAtlasBandKind: String, Hashable, Sendable {
     case activeDirection = "active_direction"
     case pressure
     case recentMovement = "recent_movement"
@@ -243,7 +243,7 @@ struct GoalPortfolioMaturitySummary: Sendable, Hashable {
 
     static var empty: GoalPortfolioMaturitySummary {
         let scope = GoalPortfolioMaturitySignal(id: "scope", title: "Scope is quiet", detail: "No live ambitions are competing for attention yet.", state: .default)
-        let stuck = GoalPortfolioMaturitySignal(id: "stuck-work", title: "No stuck work is loud", detail: "No blockers, waiting states, or overloaded standalone Tasks are driving the board.", state: .selected)
+        let stuck = GoalPortfolioMaturitySignal(id: "stuck-work", title: "No stuck work is loud", detail: "No blockers, waiting states, or overloaded standalone Tasks are driving the atlas.", state: .selected)
         let proof = GoalPortfolioMaturitySignal(id: "proof", title: "Proof will appear here", detail: "Proof maturity starts after a goal has evidence or receipts.", state: .default)
         let next = GoalPortfolioMaturitySignal(id: "next-step", title: "Next steps will appear here", detail: "Create or shape a goal to make the next step visible.", state: .default)
         return GoalPortfolioMaturitySummary(
@@ -432,7 +432,7 @@ struct GoalsOneStepGoalsPanelState: Sendable, Hashable {
     }
 }
 
-enum GoalsBoardPrimaryActionKind: String, Hashable, Sendable {
+enum GoalsAtlasPrimaryActionKind: String, Hashable, Sendable {
     case openGoal = "open_goal"
     case recoverGoal = "recover_goal"
     case refineStrategy = "refine_strategy"
@@ -447,7 +447,7 @@ struct GoalsHeroPillState: Identifiable, Sendable, Hashable {
     var id: String { [title, icon ?? "", state.rawValue].joined(separator: "|") }
 }
 
-struct GoalsBoardHeroState: Sendable {
+struct GoalsAtlasHeroState: Sendable {
     let eyebrow: String
     let title: String
     let subtitle: String
@@ -457,8 +457,8 @@ struct GoalsBoardHeroState: Sendable {
     let attentionPills: [GoalsHeroPillState]
 }
 
-struct GoalsBoardPrimaryAction: Sendable {
-    let kind: GoalsBoardPrimaryActionKind
+struct GoalsAtlasPrimaryAction: Sendable {
+    let kind: GoalsAtlasPrimaryActionKind
     let title: String
     let subtitle: String
     let systemImage: String
@@ -538,13 +538,13 @@ struct GoalListItem: Identifiable, Sendable {
     }
 }
 
-struct GoalsBoardCardState: Identifiable, Sendable {
+struct GoalsAtlasCardState: Identifiable, Sendable {
     let id: String
     let target: GoalRouteTarget
     let title: String
     let subtitle: String
     let modeLabel: String
-    let posture: GoalsBoardPosture
+    let posture: GoalsAtlasPosture
     let renderState: GoalRenderState
     let progressValue: Double
     let progressLabel: String
@@ -566,11 +566,11 @@ struct GoalsBoardCardState: Identifiable, Sendable {
     let shellSummary: GoalShellSummaryState?
 }
 
-struct GoalsBoardBand: Identifiable, Sendable {
-    let kind: GoalsBoardBandKind
+struct GoalsAtlasBand: Identifiable, Sendable {
+    let kind: GoalsAtlasBandKind
     let title: String
     let subtitle: String
-    let cards: [GoalsBoardCardState]
+    let cards: [GoalsAtlasCardState]
 
     var id: String { kind.rawValue }
 }
@@ -596,13 +596,13 @@ struct GoalsLowerPriorityState: Sendable {
     let title: String
     let subtitle: String
     let disclosureTitle: String
-    let cards: [GoalsBoardCardState]
+    let cards: [GoalsAtlasCardState]
 }
 
 struct GoalsOverview: Sendable {
-    let hero: GoalsBoardHeroState
-    let heroPrimaryAction: GoalsBoardPrimaryAction
-    let bands: [GoalsBoardBand]
+    let hero: GoalsAtlasHeroState
+    let heroPrimaryAction: GoalsAtlasPrimaryAction
+    let bands: [GoalsAtlasBand]
     let horizonLadder: GoalsHorizonLadderState
     let weekPressureSummary: GoalsWeekPressureSummary
     let lowerPriority: GoalsLowerPriorityState
@@ -620,9 +620,9 @@ struct GoalsOverview: Sendable {
     let emptyMessage: String
 
     init(
-        hero: GoalsBoardHeroState,
-        heroPrimaryAction: GoalsBoardPrimaryAction,
-        bands: [GoalsBoardBand],
+        hero: GoalsAtlasHeroState,
+        heroPrimaryAction: GoalsAtlasPrimaryAction,
+        bands: [GoalsAtlasBand],
         horizonLadder: GoalsHorizonLadderState,
         weekPressureSummary: GoalsWeekPressureSummary,
         lowerPriority: GoalsLowerPriorityState,
@@ -696,6 +696,15 @@ struct GoalsOverview: Sendable {
         )
     }
 }
+
+// Compatibility aliases retained for older callers and previews that still import Board names.
+typealias GoalsBoardPosture = GoalsAtlasPosture
+typealias GoalsBoardBandKind = GoalsAtlasBandKind
+typealias GoalsBoardPrimaryActionKind = GoalsAtlasPrimaryActionKind
+typealias GoalsBoardHeroState = GoalsAtlasHeroState
+typealias GoalsBoardPrimaryAction = GoalsAtlasPrimaryAction
+typealias GoalsBoardCardState = GoalsAtlasCardState
+typealias GoalsBoardBand = GoalsAtlasBand
 
 struct CreateGoalRequest: Sendable {
     let title: String

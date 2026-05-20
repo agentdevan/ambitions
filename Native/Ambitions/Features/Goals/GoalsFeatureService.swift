@@ -736,7 +736,7 @@ extension RepositoryBackedGoalsService {
         feedback: [GoalFeedbackEvent],
         learningSummary: GoalLearningSummary?,
         underrepresentedSignal: UnderrepresentedGoalSignal?,
-        manualRank: Int,
+        manualPosition: Int,
         shellSummary: GoalShellSummaryState?
     ) -> GoalListItem {
         let steps = goal.plan?.sections.flatMap(\.steps) ?? []
@@ -788,7 +788,7 @@ extension RepositoryBackedGoalsService {
             relevanceScore: relevanceScore,
             momentumScore: momentumScore,
             urgencyScore: urgencyScore,
-            manualPriorityRank: manualRank,
+            manualPriorityRank: manualPosition,
             updatedAt: goal.updatedAt,
             shellSummary: shellSummary
         )
@@ -796,7 +796,7 @@ extension RepositoryBackedGoalsService {
 
     func makeDraftListItem(
         draft: PersistedGoalDraft,
-        manualRank: Int,
+        manualPosition: Int,
         shellSummary: GoalShellSummaryState?
     ) -> GoalListItem {
         let renderState: GoalRenderState
@@ -839,7 +839,7 @@ extension RepositoryBackedGoalsService {
             relevanceScore: renderState == .blocked ? 0.92 : 0.78,
             momentumScore: renderState == .starter ? 0.38 : 0.2,
             urgencyScore: renderState == .blocked ? 0.9 : 0.64,
-            manualPriorityRank: manualRank,
+            manualPriorityRank: manualPosition,
             updatedAt: draft.updatedAt,
             shellSummary: shellSummary
         )
@@ -924,14 +924,14 @@ extension RepositoryBackedGoalsService {
         switch pressuredCount {
         case 0:
             title = "Direction pressure is calm"
-            subtitle = "The board can stay oriented around active ambitions instead of rescue work."
+            subtitle = "The atlas can stay oriented around active ambitions instead of rescue work."
             pill = GoalsHeroPillState(title: "Calm week", icon: "leaf", state: .success)
         case 1:
             title = "One goal is carrying the week"
-            subtitle = "A single pressure point is shaping the board and should stay visible."
+            subtitle = "A single pressure point is shaping the atlas and should stay visible."
             pill = GoalsHeroPillState(title: "Focused pressure", icon: "scope", state: .selected)
         default:
-            title = "Pressure is spreading across the board"
+            title = "Pressure is spreading across the atlas"
             subtitle = "Multiple goals are competing for week-level attention."
             pill = GoalsHeroPillState(title: "Compressed week", icon: "exclamationmark.triangle", state: .warning)
         }
@@ -947,18 +947,18 @@ extension RepositoryBackedGoalsService {
 
     func makeHeroState(
         seeded: Bool,
-        activeDirectionCards: [GoalsBoardCardState],
-        pressuredCards: [GoalsBoardCardState],
+        activeDirectionCards: [GoalsAtlasCardState],
+        pressuredCards: [GoalsAtlasCardState],
         items: [GoalListItem],
         weekPressureSummary: GoalsWeekPressureSummary
-    ) -> GoalsBoardHeroState {
+    ) -> GoalsAtlasHeroState {
         let dominantTruth: String
         if let primary = activeDirectionCards.first {
             dominantTruth = "\(primary.title) is the clearest live ambition right now."
         } else if let pressured = pressuredCards.first {
-            dominantTruth = "\(pressured.title) is shaping the board because pressure is outrunning movement."
+            dominantTruth = "\(pressured.title) is shaping the atlas because pressure is outrunning movement."
         } else {
-            dominantTruth = "The board is ready for a new live direction."
+            dominantTruth = "The atlas is ready for a new live direction."
         }
 
         let pressureSummary = pressuredCards.first?.pressureSummary ?? weekPressureSummary.subtitle
@@ -966,11 +966,11 @@ extension RepositoryBackedGoalsService {
             GoalsHeroPillState(title: $0, icon: "sparkle.magnifyingglass", state: .warning)
         }
 
-        return GoalsBoardHeroState(
+        return GoalsAtlasHeroState(
             eyebrow: "Your Direction",
             title: "Your Direction",
             subtitle: seeded
-                ? "Starter and live goals are arranged as a Constellation Atlas instead of a ranked list."
+                ? "Starter and live goals are arranged as a Constellation Atlas instead of an ordered list."
                 : "Live goals, drafts, and evidence stay grouped by life area and direction pressure instead of list sorting.",
             dominantTruth: dominantTruth,
             pressureSummary: pressureSummary,
@@ -984,12 +984,12 @@ extension RepositoryBackedGoalsService {
     }
 
     func heroPrimaryAction(
-        activeDirectionCards: [GoalsBoardCardState],
-        pressuredCards: [GoalsBoardCardState],
-        cards: [GoalsBoardCardState]
-    ) -> GoalsBoardPrimaryAction {
+        activeDirectionCards: [GoalsAtlasCardState],
+        pressuredCards: [GoalsAtlasCardState],
+        cards: [GoalsAtlasCardState]
+    ) -> GoalsAtlasPrimaryAction {
         if let atRisk = pressuredCards.first(where: { $0.posture == .atRisk }) {
-            return GoalsBoardPrimaryAction(
+            return GoalsAtlasPrimaryAction(
                 kind: .recoverGoal,
                 title: "Recover \(atRisk.title)",
                 subtitle: atRisk.pressureSummary,
@@ -1000,7 +1000,7 @@ extension RepositoryBackedGoalsService {
         }
 
         if let crowded = pressuredCards.first(where: { $0.posture == .crowded }) {
-            return GoalsBoardPrimaryAction(
+            return GoalsAtlasPrimaryAction(
                 kind: .refineStrategy,
                 title: "Refine \(crowded.title)",
                 subtitle: crowded.weekRelationship,
@@ -1011,7 +1011,7 @@ extension RepositoryBackedGoalsService {
         }
 
         if let primary = activeDirectionCards.first {
-            return GoalsBoardPrimaryAction(
+            return GoalsAtlasPrimaryAction(
                 kind: .openGoal,
                 title: "Open \(primary.title)",
                 subtitle: primary.weekRelationship,
@@ -1021,7 +1021,7 @@ extension RepositoryBackedGoalsService {
             )
         }
 
-        return GoalsBoardPrimaryAction(
+        return GoalsAtlasPrimaryAction(
             kind: .createGoal,
             title: cards.isEmpty ? "Create your first goal" : "Create another goal",
             subtitle: "Start one live direction instead of growing a passive list.",
@@ -1032,8 +1032,8 @@ extension RepositoryBackedGoalsService {
     }
 
     func makeHorizonLadder(
-        activeDirectionCards: [GoalsBoardCardState],
-        pressuredCards: [GoalsBoardCardState],
+        activeDirectionCards: [GoalsAtlasCardState],
+        pressuredCards: [GoalsAtlasCardState],
         snapshot: Snapshot
     ) -> GoalsHorizonLadderState {
         let sources = Array((activeDirectionCards + pressuredCards).prefix(4))
@@ -1079,7 +1079,7 @@ extension RepositoryBackedGoalsService {
         )
     }
 
-    func makeLifecycleRail(cards: [GoalsBoardCardState]) -> [GoalLifecycleRailSegment] {
+    func makeLifecycleRail(cards: [GoalsAtlasCardState]) -> [GoalLifecycleRailSegment] {
         let previousCount = cards.filter { [.completed, .cancelledDropped, .previous, .parked].contains($0.lifecycleState) }.count
         let activeCount = cards.filter(\.lifecycleState.isCurrentPortfolioState).count
         let futureCount = cards.filter { $0.lifecycleState == .future }.count
@@ -1109,14 +1109,14 @@ extension RepositoryBackedGoalsService {
         ]
     }
 
-    func makeStateChips(cards: [GoalsBoardCardState]) -> [GoalStateChipState] {
+    func makeStateChips(cards: [GoalsAtlasCardState]) -> [GoalStateChipState] {
         let chipStates: [GoalPortfolioLifecycleState] = [.protected, .waiting, .blocked, .parked, .completed, .cancelledDropped]
         return chipStates.map { state in
             GoalStateChipState(lifecycleState: state, count: cards.filter { $0.lifecycleState == state }.count)
         }
     }
 
-    func makeArchiveSummary(cards: [GoalsBoardCardState]) -> GoalPortfolioArchiveSummary {
+    func makeArchiveSummary(cards: [GoalsAtlasCardState]) -> GoalPortfolioArchiveSummary {
         let archiveChips = makeStateChips(cards: cards).filter {
             [.parked, .completed, .cancelledDropped].contains($0.lifecycleState)
         }
@@ -1133,7 +1133,7 @@ extension RepositoryBackedGoalsService {
     }
 
     func makePortfolioMaturitySummary(
-        cards: [GoalsBoardCardState],
+        cards: [GoalsAtlasCardState],
         oneStepGoals: [OneStepGoal],
         archiveSummary: GoalPortfolioArchiveSummary
     ) -> GoalPortfolioMaturitySummary {
@@ -1215,10 +1215,10 @@ extension RepositoryBackedGoalsService {
         if openOneStepCount > 3 {
             parts.append("\(openOneStepCount) open One-Step Goals")
         }
-        return parts.isEmpty ? "No blockers, waiting states, or overloaded standalone Tasks are driving the board." : parts.joined(separator: " · ")
+        return parts.isEmpty ? "No blockers, waiting states, or overloaded standalone Tasks are driving the atlas." : parts.joined(separator: " · ")
     }
 
-    func archiveLearningLines(cards: [GoalsBoardCardState]) -> [String] {
+    func archiveLearningLines(cards: [GoalsAtlasCardState]) -> [String] {
         let archivedCards = cards.filter {
             [.parked, .completed, .cancelledDropped, .previous].contains($0.lifecycleState)
         }
@@ -1244,7 +1244,7 @@ extension RepositoryBackedGoalsService {
 
     func makeLifeAreasState(
         snapshot: Snapshot,
-        cards: [GoalsBoardCardState],
+        cards: [GoalsAtlasCardState],
         northStars: [NorthStar],
         oneStepGoals: [OneStepGoal]
     ) -> GoalsLifeAreasOverviewState {
@@ -1297,7 +1297,7 @@ extension RepositoryBackedGoalsService {
             title: "Constellation Atlas",
             subtitle: contentAreas.isEmpty
                 ? "Life Areas will fill in as goals, North Stars, and One-Step Goals appear."
-                : "Life areas stay visible without being ranked by the system.",
+                : "Life areas stay visible without being ordered by the system.",
             items: Array(items),
             contentAreaCount: contentAreas.count,
             emptyTitle: projection.emptyTitle,
@@ -1456,7 +1456,7 @@ extension RepositoryBackedGoalsService {
 
     func makeAtlasPreview(
         snapshot: Snapshot,
-        cards: [GoalsBoardCardState],
+        cards: [GoalsAtlasCardState],
         northStars: [NorthStar],
         oneStepGoals: [OneStepGoal]
     ) -> GoalAtlasPreviewState? {
@@ -2854,11 +2854,11 @@ extension RepositoryBackedGoalsService {
             try await repositories.appState.saveState(state)
         }
 
-        let rank = (ordered.firstIndex(of: identifier) ?? currentIndex) + 1
+        let position = (ordered.firstIndex(of: identifier) ?? currentIndex) + 1
         return GoalDetailActionResponse(
             message: GoalDetailInlineMessage(
                 title: "Priority updated",
-                body: "This item now sits at manual priority #\(rank). Goals sort will preserve that order when you switch to the Priority lens.",
+                body: "This item now sits at manual priority position \(position). Goals sort will preserve that order when you switch to the Priority lens.",
                 state: .selected
             )
         )

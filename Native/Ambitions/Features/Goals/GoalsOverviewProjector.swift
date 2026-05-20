@@ -8,7 +8,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
     func makeOverview(from service: RepositoryBackedGoalsService) async throws -> GoalsOverview {
         let snapshot = try await service.loadSnapshot()
         let orderedIDs = service.normalizedPriorityOrder(snapshot: snapshot)
-        let manualRanks = Dictionary(uniqueKeysWithValues: orderedIDs.enumerated().map { ($1, $0) })
+        let manualPositions = Dictionary(uniqueKeysWithValues: orderedIDs.enumerated().map { ($1, $0) })
         let learningSnapshot = service.learningService.buildSnapshot(
             goals: snapshot.goals,
             evidence: snapshot.evidence,
@@ -25,7 +25,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
                 feedback: snapshot.feedback,
                 learningSummary: learningSnapshot.goalSummaries[goal.id],
                 underrepresentedSignal: learningSnapshot.underrepresentedGoalSignals.first(where: { $0.goalID == goal.id }),
-                manualRank: manualRanks[goal.id] ?? manualRanks.count,
+                manualPosition: manualPositions[goal.id] ?? manualPositions.count,
                 shellSummary: shellSummaries[goal.id]
             )
         }
@@ -34,14 +34,14 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
             guard draft.plannedGoalID == nil else { return nil }
             return service.makeDraftListItem(
                 draft: draft,
-                manualRank: manualRanks[draft.id] ?? manualRanks.count,
+                manualPosition: manualPositions[draft.id] ?? manualPositions.count,
                 shellSummary: shellSummaries[draft.id]
             )
         }
 
         let items = goalItems + draftItems
         let cards = items.map { item in
-            service.makeBoardCard(
+            service.makeAtlasCard(
                 from: item,
                 snapshot: snapshot,
                 learningSummary: learningSnapshot.goalSummaries[item.target.goalID ?? ""]
@@ -50,16 +50,16 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
         let activeCards = cards.filter { $0.lifecycleState.isCurrentPortfolioState || $0.renderState == .starter }
         let activeDirectionCards = activeCards
             .filter { $0.posture == .active || $0.lifecycleState == .protected }
-            .sorted(by: service.boardPriorityDescriptor(lhs:rhs:))
+            .sorted(by: service.atlasPriorityDescriptor(lhs:rhs:))
         let pressuredCards = cards
             .filter { [.atRisk, .crowded, .stalled].contains($0.posture) || $0.lifecycleState == .waiting || $0.lifecycleState == .blocked }
-            .sorted(by: service.boardPriorityDescriptor(lhs:rhs:))
+            .sorted(by: service.atlasPriorityDescriptor(lhs:rhs:))
         let recentMovementCards = activeCards
             .sorted(by: service.recentMovementDescriptor(lhs:rhs:))
             .prefix(3)
         let lowerPriorityCards = cards
             .filter { $0.posture == .lowerPriority || $0.posture == .achieved || $0.renderState == .onHold || $0.renderState == .achieved }
-            .sorted(by: service.boardPriorityDescriptor(lhs:rhs:))
+            .sorted(by: service.atlasPriorityDescriptor(lhs:rhs:))
         let heroPrimaryAction = service.heroPrimaryAction(
             activeDirectionCards: activeDirectionCards,
             pressuredCards: pressuredCards,
@@ -105,7 +105,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
             ),
             heroPrimaryAction: heroPrimaryAction,
             bands: [
-                GoalsBoardBand(
+                GoalsAtlasBand(
                     kind: .activeDirection,
                     title: "Active direction",
                     subtitle: activeDirectionCards.isEmpty
@@ -113,15 +113,15 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
                         : "The ambitions that are truly alive and still have believable momentum this week.",
                     cards: Array(activeDirectionCards.prefix(4))
                 ),
-                GoalsBoardBand(
+                GoalsAtlasBand(
                     kind: .pressure,
                     title: "Pressure points",
                     subtitle: pressuredCards.isEmpty
                         ? "Nothing is loudly off-track right now."
-                        : "Where pressure, crowding, or drift is starting to distort the direction board.",
+                        : "Where pressure, crowding, or drift is starting to distort the direction atlas.",
                     cards: Array(pressuredCards.prefix(4))
                 ),
-                GoalsBoardBand(
+                GoalsAtlasBand(
                     kind: .recentMovement,
                     title: "Recent movement",
                     subtitle: recentMovementCards.isEmpty

@@ -2,11 +2,11 @@ import AmbitionsDesignSystem
 import Foundation
 
 extension RepositoryBackedGoalsService {
-    func makeBoardCard(
+    func makeAtlasCard(
         from item: GoalListItem,
         snapshot: Snapshot,
         learningSummary: GoalLearningSummary?
-    ) -> GoalsBoardCardState {
+    ) -> GoalsAtlasCardState {
         let posture = classifyPosture(for: item, snapshot: snapshot, learningSummary: learningSummary)
         let pathSummary = pathSummary(for: item, snapshot: snapshot)
         let phaseSummary = activeStageTitle(for: pathSummary)
@@ -41,7 +41,7 @@ extension RepositoryBackedGoalsService {
             evidence: goalEvidence
         )
 
-        return GoalsBoardCardState(
+        return GoalsAtlasCardState(
             id: item.id,
             target: item.target,
             title: item.title,
@@ -64,17 +64,25 @@ extension RepositoryBackedGoalsService {
             nextVisibleStep: nextVisibleStep,
             momentumIntegrity: momentumIntegrity,
             supportLabel: item.supportLabel,
-            priorityLabel: "Priority #\(item.manualPriorityRank + 1)",
+            priorityLabel: "Priority position \(item.manualPriorityRank + 1)",
             manualPriorityRank: item.manualPriorityRank,
             shellSummary: item.shellSummary
         )
+    }
+
+    func makeBoardCard(
+        from item: GoalListItem,
+        snapshot: Snapshot,
+        learningSummary: GoalLearningSummary?
+    ) -> GoalsBoardCardState {
+        makeAtlasCard(from: item, snapshot: snapshot, learningSummary: learningSummary)
     }
 
     func classifyPosture(
         for item: GoalListItem,
         snapshot: Snapshot,
         learningSummary: GoalLearningSummary?
-    ) -> GoalsBoardPosture {
+    ) -> GoalsAtlasPosture {
         switch item.renderState {
         case .clarification, .blocked:
             return .atRisk
@@ -176,12 +184,12 @@ extension RepositoryBackedGoalsService {
             return "This week needs a small visible signal to stay alive."
         }
 
-        return "This week can stay steady without opening Plan."
+        return "This week can stay steady without opening more planning."
     }
 
     func pressureSummary(
         for item: GoalListItem,
-        posture: GoalsBoardPosture,
+        posture: GoalsAtlasPosture,
         learningSummary: GoalLearningSummary?
     ) -> String {
         switch posture {
@@ -331,7 +339,7 @@ extension RepositoryBackedGoalsService {
 
     func weatherState(
         lifecycleState: GoalPortfolioLifecycleState,
-        posture: GoalsBoardPosture,
+        posture: GoalsAtlasPosture,
         proofSummary: GoalProofSummary,
         nextVisibleStep: GoalNextVisibleStep,
         pathSummary: LifePathStateSummary?
@@ -354,7 +362,7 @@ extension RepositoryBackedGoalsService {
     func weatherSummary(
         for weather: GoalWeatherState,
         lifecycleState: GoalPortfolioLifecycleState,
-        posture: GoalsBoardPosture,
+        posture: GoalsAtlasPosture,
         proofSummary: GoalProofSummary,
         nextVisibleStep: GoalNextVisibleStep
     ) -> String {
@@ -374,7 +382,7 @@ extension RepositoryBackedGoalsService {
 
     func momentumIntegrity(
         lifecycleState: GoalPortfolioLifecycleState,
-        posture: GoalsBoardPosture,
+        posture: GoalsAtlasPosture,
         proofSummary: GoalProofSummary,
         nextVisibleStep: GoalNextVisibleStep,
         evidence: [ProgressEvidence]
@@ -438,9 +446,9 @@ extension RepositoryBackedGoalsService {
         }
     }
 
-    func boardPriorityDescriptor(lhs: GoalsBoardCardState, rhs: GoalsBoardCardState) -> Bool {
+    func atlasPriorityDescriptor(lhs: GoalsAtlasCardState, rhs: GoalsAtlasCardState) -> Bool {
         if lhs.posture != rhs.posture {
-            let order: [GoalsBoardPosture] = [.atRisk, .crowded, .stalled, .active, .lowerPriority, .achieved]
+            let order: [GoalsAtlasPosture] = [.atRisk, .crowded, .stalled, .active, .lowerPriority, .achieved]
             return (order.firstIndex(of: lhs.posture) ?? order.count) < (order.firstIndex(of: rhs.posture) ?? order.count)
         }
 
@@ -451,11 +459,15 @@ extension RepositoryBackedGoalsService {
         return lhs.progressValue > rhs.progressValue
     }
 
-    func recentMovementDescriptor(lhs: GoalsBoardCardState, rhs: GoalsBoardCardState) -> Bool {
+    func recentMovementDescriptor(lhs: GoalsAtlasCardState, rhs: GoalsAtlasCardState) -> Bool {
         if lhs.progressValue == rhs.progressValue {
             return lhs.manualPriorityRank < rhs.manualPriorityRank
         }
 
         return lhs.progressValue > rhs.progressValue
+    }
+
+    func boardPriorityDescriptor(lhs: GoalsBoardCardState, rhs: GoalsBoardCardState) -> Bool {
+        atlasPriorityDescriptor(lhs: lhs, rhs: rhs)
     }
 }

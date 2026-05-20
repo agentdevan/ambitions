@@ -485,7 +485,7 @@ extension MissionControlLaneItem {
         )
     }
 
-    init(boardLane lane: GoalMissionControlLaneState) {
+    init(atlasLane lane: GoalMissionControlLaneState) {
         self.init(
             id: lane.id,
             title: lane.title,
@@ -498,6 +498,10 @@ extension MissionControlLaneItem {
             sparkLevel: lane.level,
             pulseLabel: lane.showsProofPulse ? "Proof lane has saved proof" : nil
         )
+    }
+
+    init(boardLane lane: GoalMissionControlLaneState) {
+        self.init(atlasLane: lane)
     }
 }
 

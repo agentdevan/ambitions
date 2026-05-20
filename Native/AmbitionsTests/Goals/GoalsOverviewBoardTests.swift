@@ -1,8 +1,8 @@
 import XCTest
 @testable import Ambitions
 
-final class GoalsOverviewBoardTests: XCTestCase {
-    func testOverviewUsesRecoverPrimaryActionWhenAtRiskGoalExists() async throws {
+final class GoalsOverviewAtlasTests: XCTestCase {
+    func testOverviewUsesRecoverPrimaryActionWhenAtRiskAtlasItemExists() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let liveGoal = makeGoal(
@@ -56,10 +56,10 @@ final class GoalsOverviewBoardTests: XCTestCase {
         try await savePriorityOrder([active.id, stalled.id, crowded.id], repositories: repositories)
 
         let overview = try await service.loadOverview()
-        let boardCards = overview.bands.flatMap(\.cards)
+        let atlasCards = overview.bands.flatMap(\.cards)
 
-        XCTAssertTrue(boardCards.contains(where: { $0.posture == .stalled }))
-        XCTAssertTrue(boardCards.contains(where: { $0.target == GoalRouteTarget(goalID: crowded.id, draftID: nil) && $0.posture == .crowded }))
+        XCTAssertTrue(atlasCards.contains(where: { $0.posture == .stalled }))
+        XCTAssertTrue(atlasCards.contains(where: { $0.target == GoalRouteTarget(goalID: crowded.id, draftID: nil) && $0.posture == .crowded }))
         XCTAssertEqual(
             overview.bands.first(where: { $0.kind == .pressure })?.cards.first(where: { $0.target == GoalRouteTarget(goalID: crowded.id, draftID: nil) })?.posture,
             .crowded
@@ -360,7 +360,7 @@ final class GoalsOverviewBoardTests: XCTestCase {
     }
 }
 
-private extension GoalsOverviewBoardTests {
+private extension GoalsOverviewAtlasTests {
     var now: Date {
         Date()
     }

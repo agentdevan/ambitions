@@ -7,16 +7,16 @@ struct GoalMissionControlLanes: View {
     @State private var hasAppeared = false
 
     let overview: GoalsOverview
-    let onPrimaryAction: (GoalsBoardPrimaryAction) -> Void
+    let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
 
-    private var primaryGoal: GoalsBoardCardState? {
+    private var primaryGoal: GoalsAtlasCardState? {
         overview.bands
             .first(where: { $0.kind == .activeDirection })?
             .cards
             .first ?? overview.bands.flatMap(\.cards).first
     }
 
-    private var pressureGoal: GoalsBoardCardState? {
+    private var pressureGoal: GoalsAtlasCardState? {
         overview.bands
             .first(where: { $0.kind == .pressure })?
             .cards
@@ -44,7 +44,7 @@ struct GoalMissionControlLanes: View {
                 id: "blockers",
                 title: "Blockers",
                 value: blocker == nil ? "Clear" : blocker?.renderState.title ?? "Needs attention",
-                detail: blocker?.nextStepHint ?? "No true blocker is leading the board right now.",
+                detail: blocker?.nextStepHint ?? "No true blocker is leading the atlas right now.",
                 symbolName: "exclamationmark.triangle",
                 state: blocker == nil ? .calm : .pressured,
                 level: blocker == nil ? 0.18 : pressureLevel(for: blocker)
@@ -82,7 +82,7 @@ struct GoalMissionControlLanes: View {
                 heroHeader
 
                 MissionControlLaneGrid(
-                    items: lanes.map(MissionControlLaneItem.init(boardLane:)),
+                    items: lanes.map(MissionControlLaneItem.init(atlasLane:)),
                     density: .expanded,
                     animatedReveal: true,
                     hasAppeared: hasAppeared
@@ -154,7 +154,7 @@ struct GoalMissionControlLanes: View {
         ].joined(separator: ". "))
     }
 
-    private func pressureLevel(for goal: GoalsBoardCardState?) -> Double {
+    private func pressureLevel(for goal: GoalsAtlasCardState?) -> Double {
         guard let goal else { return 0.18 }
 
         switch goal.posture {
@@ -187,7 +187,7 @@ struct GoalsHeroCard: View {
     @Environment(\.ambitionTheme) private var theme
 
     let overview: GoalsOverview
-    let onPrimaryAction: (GoalsBoardPrimaryAction) -> Void
+    let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
 
     var body: some View {
         HeroCard(state: overview.heroPrimaryAction.state) {
@@ -245,9 +245,9 @@ struct GoalsHeroCard: View {
 private struct GoalsHeroPrimaryActionButton: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let action: GoalsBoardPrimaryAction
+    let action: GoalsAtlasPrimaryAction
     var accessibilityIdentifier = "goals.hero.primary-action"
-    let handler: (GoalsBoardPrimaryAction) -> Void
+    let handler: (GoalsAtlasPrimaryAction) -> Void
 
     var body: some View {
         Button {
@@ -778,10 +778,10 @@ private struct OneStepGoalPanelRow: View {
     }
 }
 
-struct GoalsBoardBandSection: View {
+struct GoalsAtlasBandSection: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let band: GoalsBoardBand
+    let band: GoalsAtlasBand
 
     var body: some View {
         AppCard {
@@ -798,7 +798,7 @@ struct GoalsBoardBandSection: View {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         ForEach(band.cards) { card in
                             NavigationLink(value: card.target) {
-                                GoalsBoardCardView(card: card)
+                                GoalsAtlasCardView(card: card)
                             }
                             .buttonStyle(.plain)
                             .accessibilityIdentifier("goals.card.open.\(card.target.goalID ?? card.target.draftID ?? card.id)")
@@ -812,10 +812,10 @@ struct GoalsBoardBandSection: View {
     }
 }
 
-struct GoalsBoardCardView: View {
+struct GoalsAtlasCardView: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let card: GoalsBoardCardState
+    let card: GoalsAtlasCardState
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -935,7 +935,7 @@ struct GoalsLowerPriorityDisclosureSection: View {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         ForEach(state.cards) { card in
                             NavigationLink(value: card.target) {
-                                GoalsBoardCardView(card: card)
+                                GoalsAtlasCardView(card: card)
                             }
                             .buttonStyle(.plain)
                         }

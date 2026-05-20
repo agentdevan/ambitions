@@ -270,7 +270,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["goals.creation-message"].waitForExistence(timeout: 30) || scrollUntilStaticTextExists(shellGoalTitle, in: app, maxAttempts: 12))
     }
 
-    func testDemoGoalsBoardLoadsCoreModules() throws {
+    func testDemoGoalsAtlasLoadsCoreModules() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
@@ -280,6 +280,7 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
+        XCTAssertTrue(openGoalsDirectionDepth(in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.week-pressure", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.portfolio-maturity", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.life-areas-panel", in: app))
@@ -288,7 +289,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("goals.band.active_direction", in: app))
     }
 
-    func testDemoGoalsBoardPrimaryActionAndCardRouteToGoalDetail() throws {
+    func testDemoGoalsAtlasPrimaryActionAndCardRouteToGoalDetail() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
@@ -754,6 +755,23 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return candidates.contains(where: { $0.exists })
+    }
+
+    private func openGoalsDirectionDepth(in app: XCUIApplication) -> Bool {
+        if app.descendants(matching: .any)["goals.week-pressure"].waitForExistence(timeout: 1) {
+            return true
+        }
+
+        let title = app.staticTexts["Direction depth"]
+        for _ in 0..<8 {
+            if title.exists || title.waitForExistence(timeout: 0.25) {
+                title.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+                return app.descendants(matching: .any)["goals.week-pressure"].waitForExistence(timeout: 5)
+            }
+            scrollPageUp(in: app)
+        }
+
+        return false
     }
 
     private func tapGoalsHeroPrimaryAction(in app: XCUIApplication) {
