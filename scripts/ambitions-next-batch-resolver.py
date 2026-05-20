@@ -181,11 +181,15 @@ def parse_next_eligible(path: Path) -> list[str]:
     return ids
 
 
-def completion_report_paths(batch_id: str) -> list[Path]:
+def completion_report_paths(batch_id: str, root: Path = ROOT) -> list[Path]:
+    batch_slug = batch_id.lower()
     paths = [
-        ROOT / f"docs/codex/reports/{batch_id}.md",
-        ROOT / f"docs/audits/{batch_id.lower()}-batch-closeout-report.md",
-        ROOT / f"docs/audits/{batch_id}-batch-closeout-report.md",
+        root / f".codex/reports/{batch_id}.md",
+        root / f"docs/codex/reports/{batch_id}.md",
+        root / f"docs/audits/{batch_slug}-batch-closeout-report.md",
+        root / f"docs/audits/{batch_id}-batch-closeout-report.md",
+        root / f"docs/audits/{batch_slug}-report.md",
+        root / f"docs/audits/{batch_id}-report.md",
     ]
     return [path for path in paths if path.exists()]
 
@@ -201,6 +205,14 @@ def report_is_closed(path: Path) -> bool:
         return True
     if re.search(r"(?im)^\s*status:\s*complete\s*/\s*green\b", scoped):
         return True
+    if re.search(r"(?ims)^##\s+Status\s*\n\s*GREEN\b", scoped):
+        return True
+    if re.search(r"(?ims)^##\s+Status\s*\n\s*ACCEPTED YELLOW\b", scoped):
+        return True
+    if re.search(r"(?ims)^##\s+Status\s*\n\s*YELLOW\b", scoped):
+        return False
+    if re.search(r"(?ims)^##\s+Status\s*\n\s*RED\b", scoped):
+        return False
     if re.search(r"(?im)^\s*status:\s*yellow\b", scoped):
         return False
     if re.search(r"(?im)^\s*status:\s*red\b", scoped):
@@ -214,8 +226,8 @@ def report_is_closed(path: Path) -> bool:
     return False
 
 
-def batch_completed(batch_id: str) -> bool:
-    for path in completion_report_paths(batch_id):
+def batch_completed(batch_id: str, root: Path = ROOT) -> bool:
+    for path in completion_report_paths(batch_id, root=root):
         if report_is_closed(path):
             return True
 
@@ -229,7 +241,14 @@ def batch_completed(batch_id: str) -> bool:
         rf"\b{escaped}\b[^\n]{{0,180}}\bhistorical complete\b",
     ]
     yellow_open = re.compile(rf"\b{escaped}\b[^\n]{{0,180}}\bStatus:\s*Yellow\b", re.IGNORECASE)
-    for source in STATUS_SOURCES:
+    status_sources = STATUS_SOURCES if root == ROOT else [
+        root / "docs/codex/BATCH_REGISTRY.md",
+        root / ".codex/reports/current-run-state.md",
+        root / ".codex/reports/current-batch-train-state.md",
+        root / "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md",
+        root / "docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md",
+    ]
+    for source in status_sources:
         text = read_text(source)
         if yellow_open.search(text):
             return False
@@ -504,16 +523,26 @@ def self_test() -> int:
         nested = root / "prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md"
         legacy = root / "prompts/batches/LEGACY-FLAT-01.md"
         invalid = root / "prompts/batches/post-23-truth-audit/AMB-POST23-02-BAD.md"
+        report = root / "docs/audits/amb-fe-be-integrated-proof-99-report.md"
+        codex_report = root / ".codex/reports/AMB-FE-BE-PREFLIGHT-00.md"
         nested.write_text(good, encoding="utf-8")
         legacy.write_text(good, encoding="utf-8")
         invalid.write_text(bad, encoding="utf-8")
+        report.parent.mkdir(parents=True)
+        report.write_text("# Report\n\nStatus: Green\n\nBatch: AMB-FE-BE-INTEGRATED-PROOF-99\n", encoding="utf-8")
+        codex_report.parent.mkdir(parents=True)
+        codex_report.write_text("# Report\n\n## Status\n\nGREEN\n", encoding="utf-8")
         idx = prompt_index(root)
         assert idx["AMB-POST23-01-TRUTH-AUDIT"].runnable
         assert idx["LEGACY-FLAT-01"].runnable
         assert not idx["AMB-POST23-02-BAD"].runnable
+        assert batch_completed("AMB-FE-BE-INTEGRATED-PROOF-99", root=root)
+        assert batch_completed("AMB-FE-BE-PREFLIGHT-00", root=root)
     print("self-test: nested runnable prompt discovered")
     print("self-test: legacy flat prompt discovered")
     print("self-test: missing runner metadata rejected")
+    print("self-test: audit report closeout path discovered")
+    print("self-test: codex report closeout path discovered")
     return 0
 
 
