@@ -17,6 +17,7 @@ The resolver selects a batch and exact prompt path only. It does not execute Cod
 - Updated `scripts/ambitions-global-train-supervisor.sh` so `--next`, `--once`, and `--until-complete` use the same resolver result.
 - Updated `scripts/ambitions-autonomous-train-fastpath.py` so `make autonomous-train-next` uses the same resolver result.
 - Kept `scripts/ambitions-next-batch-router.py` as a compatibility wrapper around the authoritative resolver.
+- Tightened resolver classification filtering after the first live train run proved stale mirrors could still name `CS02C` even though canonical queue truth marks it `conditional_trigger_only`.
 
 ## Resolver Rules
 
@@ -44,6 +45,9 @@ Ordered train handling:
 - prompt filename sorting is used only when no order source exists
 - Green and accepted/closed Yellow evidence may be skipped
 - plain Yellow remains unfinished and is not skipped
+- canonical queue classifications are authoritative when present
+- only `executable_now`, `active`, `queued`, and `active_partial` count as runnable classifications
+- `conditional_trigger_only`, absorbed overlay, historical complete, obsolete, and unknown repair classifications are not selected by normal global/autonomous routing
 
 ## Proof
 
@@ -51,6 +55,7 @@ Commands run:
 
 ```bash
 python3 scripts/ambitions-next-batch-resolver.py --self-test
+python3 scripts/ambitions-next-batch-resolver.py --json
 python3 scripts/ambitions-next-batch-resolver.py --json --train post-23-truth-audit
 python3 scripts/ambitions-next-batch-resolver.py --json --legacy-only
 scripts/global-train-next-batch.sh --field prompt_path
@@ -63,10 +68,11 @@ make prompt-audit
 Observed results:
 
 - resolver self-test proved nested runnable prompt discovery, legacy flat prompt discovery, and missing runner metadata rejection
+- full resolver dry-run now skips stale `CS02C` mirror state because `CS02C` is `conditional_trigger_only`
 - nested post-23 dry-run selected `AMB-POST23-01-TRUTH-AUDIT` with exact prompt path `prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md`
 - legacy-only dry-run selected a flat runnable prompt path, proving flat prompts still work as fallback
-- `scripts/global-train-next-batch.sh --field prompt_path` returned `prompts/batches/CS02C.md`
-- `make global-train-next` returned `Next batch: CS02C` and `Prompt: prompts/batches/CS02C.md`
+- `scripts/global-train-next-batch.sh --field prompt_path` returned `prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md`
+- `make global-train-next` returned `Next batch: AMB-POST23-01-TRUTH-AUDIT` and `Prompt: prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md`
 - `make autonomous-train-next` returned the same resolver result
 - `make prompt-audit` returned Green with 399 active runnable prompts audited and 917 support/eval/template/historical files classified as non-actionable
 
@@ -75,13 +81,13 @@ Observed results:
 The current full resolver result selects:
 
 ```text
-Batch: CS02C
-Prompt: prompts/batches/CS02C.md
-Source: .codex/state/active-batch.yml
-Reason: active batch mirror
+Batch: AMB-POST23-01-TRUTH-AUDIT
+Prompt: prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md
+Source: docs/codex/batch-trains/post-23-truth-audit
+Reason: train manifest/order
 ```
 
-This is expected because active-batch state has priority over manifest and prompt scanning when it points at a valid runnable prompt.
+This is expected because stale active-batch state is ignored when canonical queue truth classifies the mirrored batch as `conditional_trigger_only`.
 
 ## Non-Claims
 

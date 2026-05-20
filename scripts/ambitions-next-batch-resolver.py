@@ -12,6 +12,7 @@ import json
 import re
 import tempfile
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -23,7 +24,7 @@ REQUIRED_HEADER = (
     "<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->",
     "<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->",
 )
-RUNNABLE_CLASSIFICATIONS = {"executable_now", "active", "queued", "active_partial", "executable_later"}
+RUNNABLE_CLASSIFICATIONS = {"executable_now", "active", "queued", "active_partial"}
 NON_RUNNABLE_CLASSIFICATIONS = {
     "historical_complete_do_not_run",
     "absorbed_as_overlay",
@@ -32,6 +33,10 @@ NON_RUNNABLE_CLASSIFICATIONS = {
     "evidence_preserved_minimal",
     "unknown_requires_repair",
 }
+QUEUE_CLASSIFICATION_SOURCES = [
+    ROOT / "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json",
+    ROOT / "docs/codex/AMB_REMAINING_BATCH_REFERENCE.json",
+]
 STATUS_SOURCES = [
     ROOT / "docs/codex/BATCH_REGISTRY.md",
     ROOT / ".codex/reports/current-run-state.md",
@@ -78,6 +83,46 @@ def load_json(path: Path) -> Any:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return None
+
+
+def iter_json_dicts(value: Any) -> list[dict[str, Any]]:
+    found: list[dict[str, Any]] = []
+    if isinstance(value, dict):
+        found.append(value)
+        for child in value.values():
+            found.extend(iter_json_dicts(child))
+    elif isinstance(value, list):
+        for child in value:
+            found.extend(iter_json_dicts(child))
+    return found
+
+
+@lru_cache(maxsize=1)
+def queue_classifications() -> dict[str, str]:
+    classifications: dict[str, str] = {}
+    for source in QUEUE_CLASSIFICATION_SOURCES:
+        data = load_json(source)
+        if data is None:
+            continue
+        for item in iter_json_dicts(data):
+            batch_id = str(item.get("id") or item.get("batch_id") or "").strip()
+            classification = str(item.get("classification") or "").strip()
+            if batch_id and classification and batch_id not in classifications:
+                classifications[batch_id] = classification
+    return classifications
+
+
+def queue_classification(batch_id: str) -> str | None:
+    return queue_classifications().get(batch_id)
+
+
+def classification_is_runnable(batch_id: str) -> bool:
+    classification = queue_classification(batch_id)
+    if not classification:
+        return True
+    if classification in NON_RUNNABLE_CLASSIFICATIONS:
+        return False
+    return classification in RUNNABLE_CLASSIFICATIONS
 
 
 def prompt_metadata(path: Path) -> tuple[bool, tuple[str, ...]]:
@@ -203,6 +248,8 @@ def add_candidate(
 ) -> None:
     info = valid_prompt(batch_id, prompts)
     if info is None:
+        return
+    if not classification_is_runnable(batch_id):
         return
     if batch_completed(batch_id):
         return
