@@ -21,6 +21,12 @@ This is a review/finalization attempt, not an implementation restart. Inspect th
 - Do not invoke the global conductor.
 - Do not invoke nested `make batch`.
 - Do not run concurrent `xcodebuild`.
+- Do not run raw `xcodebuild` from nested Codex phases unless the unresolved
+  batch explicitly requires raw command proof.
+- Prefer `make xcode-focused-test BATCH=<BATCH_ID> TEST=<test-id>` or
+  `scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane focused-test --test <test-id>`.
+- If XcodeBuildMCP timed out, treat that as not XCTest proof and recover through
+  the wrapper lane instead of retrying the same MCP timeout path.
 - Do not broaden cleanup.
 - Do not fix unrelated failures unless the existing batch caused them.
 - Commit only if the bounded patch is safe, validation is Green or accepted Yellow, and all no-claim boundaries are recorded.
@@ -40,7 +46,7 @@ If helper output is `STATUS: UNKNOWN`, classify conservatively and stop with `ST
 
 # Validation Shape
 
-Use focused sequential validation. Prefer the smallest proof that exercises the changed seam. If a broader suite fails, classify whether the failure is caused by this batch. Do not convert unrelated failures into proof of success.
+Use focused sequential validation. Prefer the smallest proof that exercises the changed seam. For simulator build/test proof, use the Ambitions Xcode Build Lab wrapper so the run gets stable simulator selection, derived-data reuse, log capture, summary output, and failure classification. If a broader suite fails, classify whether the failure is caused by this batch. Do not convert unrelated failures into proof of success.
 
 # Final Output
 

@@ -26,6 +26,16 @@ FORBIDDEN = [
     re.compile(r"\bxcodebuild\s+archive\b", re.IGNORECASE),
 ]
 
+RAW_XCODEBUILD_VALIDATION = re.compile(
+    r"^\s*xcodebuild\b(?=.*\b(test|build|test-without-building|build-for-testing)\b)",
+    re.IGNORECASE,
+)
+
+XCODEBUILD_DISCOVERY = re.compile(
+    r"^\s*xcodebuild\s+(-version|-showsdks|-list)\b",
+    re.IGNORECASE,
+)
+
 ALLOWED_ABS_PATH_PREFIXES = {
     "/usr",
     "/bin",
@@ -117,6 +127,9 @@ def main() -> None:
         return _allow()
 
     lower = command.lower()
+    if RAW_XCODEBUILD_VALIDATION.search(command) and not XCODEBUILD_DISCOVERY.search(command):
+        return _deny("Use scripts/ambitions-xcode-validate.sh or make xcode-focused-test instead of raw xcodebuild for simulator validation")
+
     for pattern in FORBIDDEN:
         if pattern.search(lower):
             return _deny("Forbidden cost-risk, network, or destructive command pattern detected")

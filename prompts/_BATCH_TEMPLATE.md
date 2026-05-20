@@ -57,6 +57,22 @@ allows it.
 - review-board lanes selected from `.codex/REVIEW_BOARD.md`
 - exact commands, exit codes, and not-run checks recorded
 
+## Xcode Fast-Trust Route
+
+- Use the Ambitions Xcode Build Lab wrapper for simulator build/test proof:
+  `make xcode-focused-test BATCH=<BATCH_ID> TEST=<test-id>` or
+  `scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane focused-test --test <test-id>`.
+- Use `make xcode-build-for-testing` once when build reuse is useful.
+- Use `make xcode-test-plan` only when the batch genuinely needs a test plan.
+- Prefer `ambitionsProof.run_named_validation` wrapper-native validations when
+  using MCP proof.
+- Do not run raw `xcodebuild` from nested Codex phases unless this prompt
+  explicitly requires raw command proof.
+- Do not retry `xcodebuildmcp.test_sim` after a 120-second timeout; recover
+  through the wrapper lane and record the timeout as not XCTest proof.
+- Wrapper summaries under `.codex/xcode-summaries/` are local engineering
+  evidence only and do not imply release/device/accessibility/performance proof.
+
 ## Visual Proof Expectations If UI Changes
 
 - Capture current screenshot/preview/simulator evidence when visual quality is

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail fast when Ambitions runner access is not full/no-approval.
+"""Fail fast when Ambitions runner access is not full/approval-enabled.
 
 This validates the repo-scoped Codex config used by local trusted runs. It does
 not grant OS permissions by itself; it ensures the Ambitions repo config keeps
@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / ".codex/config.toml"
 
 REQUIRED = {
-    "approval_policy": "never",
+    "approval_policy": "on-request",
     "sandbox_mode": "danger-full-access",
 }
 
@@ -44,13 +44,13 @@ def main() -> int:
             failures.append(f"{key} is {actual!r}; expected {expected!r}")
 
     if failures:
-        print("RED: Ambitions runner is not configured for full-access/no-approval execution")
+        print("RED: Ambitions runner is not configured for full-access approval-enabled execution")
         for failure in failures:
             print(f"- {failure}")
         print("Fix .codex/config.toml or intentionally bypass this guard with explicit operator policy.")
         return 1
 
-    print("GREEN: Ambitions runner access posture is full-access/no-approval")
+    print("GREEN: Ambitions runner access posture is full-access approval-enabled")
     return 0
 
 

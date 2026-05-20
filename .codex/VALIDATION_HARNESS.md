@@ -18,6 +18,40 @@ Codex must choose validation from the task type, touched files, and claim risk.
 A command is evidence only when its command, scope, output summary, exit code,
 and non-claims are recorded in the closeout or proof packet.
 
+## 1A. Xcode Fast-Trust Route
+
+All simulator build/test proof should use the Ambitions Xcode Build Lab wrapper
+unless a prompt explicitly requires raw command proof.
+
+Preferred commands:
+
+- `make xcode-focused-test BATCH=<BATCH_ID> TEST=<test-id>`
+- `make xcode-build-for-testing BATCH=<BATCH_ID>`
+- `make xcode-test-plan BATCH=<BATCH_ID> TEST_PLAN=<plan-name>`
+- `scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane focused-test --test <test-id>`
+
+Preferred MCP route:
+
+- `ambitionsProof.run_named_validation` with `xcode_validate_focused_test`,
+  `xcode_validate_build_for_testing`, or `xcode_validate_test_plan`.
+
+Avoid by default:
+
+- raw nested `xcodebuild` from child Codex phases
+- repeated `xcodebuildmcp.test_sim` retries after a 120-second timeout
+- broad full test suites when a touched-owner focused test gives equivalent
+  scoped proof
+
+Trust boundary:
+
+- Wrapper summaries under `.codex/xcode-summaries/` are valid local XCTest
+  engineering evidence when exit code, lane, test id, log path, and failure
+  classification are recorded.
+- Wrapper proof is not release, device, public accessibility, performance, or
+  App Store proof.
+- If the wrapper cannot run, close Yellow with the exact blocker instead of
+  claiming test success from MCP timeout output.
+
 ## 2. Pack Selector
 
 | Task type | Required pack | Optional pack | Stop condition |
@@ -64,6 +98,7 @@ Minimum checks:
 - run `git diff --check`
 - run focused source scans relevant to the touched seam
 - run focused tests/build commands required by `.codex/TOOLING_AND_VALIDATION.md`
+  through the Xcode Fast-Trust Route above
 
 Evidence required:
 

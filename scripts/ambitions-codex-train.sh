@@ -449,7 +449,7 @@ Starting commit: $START_SHA
 Current branch: $BRANCH
 
 Runner defaults:
-- Full access / no approval prompts by default.
+- Full access with approval-enabled command policy by default.
 - Auto branch creation enabled by default.
 - Auto commit enabled by default, but only after final GPT-5.5 eligible status.
 - Dirty repo protection enabled by default.
@@ -458,6 +458,16 @@ Runner defaults:
 - Active branch-creation policy is checked before runner branch creation.
 - One bounded repair pass by default.
 - GPT-5.4-mini never owns architecture, canon, continuation, cleanup, or final decisions.
+
+Validation routing:
+- Do not run raw xcodebuild directly from nested Codex phases unless the prompt explicitly requires raw command proof.
+- Prefer the repo wrapper for simulator validation:
+  make xcode-focused-test BATCH=$BATCH_ID TEST=<test-id>
+  or scripts/ambitions-xcode-validate.sh --batch $BATCH_ID --lane focused-test --test <test-id>
+- Prefer wrapper-native Ambitions Proof MCP validation when available:
+  xcode_validate_focused_test with args ["--batch", "$BATCH_ID", "--test", "<test-id>"].
+- Treat XcodeBuildMCP 120-second timeouts as not XCTest proof; recover through the wrapper lane rather than retrying the same MCP timeout path.
+- The wrapper writes .codex/xcode-summaries, .codex/xcode-logs, and .codex/xcode-results with failure classification.
 
 $(standard_ambitions_quality_bar)
 

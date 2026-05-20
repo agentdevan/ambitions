@@ -91,10 +91,18 @@ Safe for control-plane cleanup when scoped and read-only:
 Safe only for implementation batches with explicit scope:
 
 - `xcodegen generate`
-- `scripts/build-local.sh`
-- `scripts/test-local.sh`
-- focused `xcodebuild` tests
+- `scripts/build-local.sh` only when the batch explicitly requires the legacy full local build path
+- `make xcode-focused-test BATCH=<BATCH_ID> TEST=<test-id>`
+- `make xcode-build-for-testing BATCH=<BATCH_ID>`
+- `make xcode-test-plan BATCH=<BATCH_ID> TEST_PLAN=<plan-name>`
+- `scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane focused-test --test <test-id>`
 - proof MCP allowlisted validation names
+
+Raw `xcodebuild build/test` is not the default simulator validation path.
+Use the Ambitions Xcode Build Lab wrapper so focused proof gets simulator
+selection, DerivedData reuse, log capture, summary output, and failure
+classification. Raw `xcodebuild -version`, `xcodebuild -showsdks`, and
+`xcodebuild -list` remain acceptable discovery commands.
 
 ## Dangerous Commands And Actions
 
@@ -106,6 +114,8 @@ Dangerous unless explicitly approved and gated:
 - dependency installation or package/project mutation
 - hosted CI activation
 - signing, App Store upload, TestFlight upload, notarization
+- raw nested `xcodebuild build/test` when the wrapper route can provide the same
+  scoped proof faster and with better logs
 - source/runtime mutation during docs/control-plane cleanup
 - provider/backend/auth/sync/analytics/telemetry/cloud/LLM activation
 - write/network/secrets/git MCP expansion

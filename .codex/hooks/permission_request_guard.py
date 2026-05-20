@@ -81,6 +81,20 @@ def _is_safe_xcode_validation(text: str) -> bool:
     return not any(fragment in normalized for fragment in forbidden_xcode_fragments)
 
 
+def _is_raw_xcodebuild_validation(text: str) -> bool:
+    normalized = _normalized(text)
+    if not normalized.startswith("xcodebuild "):
+        return False
+    discovery_fragments = (
+        "xcodebuild -version",
+        "xcodebuild -showsdks",
+        "xcodebuild -list",
+    )
+    if normalized.startswith(discovery_fragments):
+        return False
+    return any(fragment in normalized for fragment in (" test", " build", " test-without-building", " build-for-testing"))
+
+
 def main() -> None:
     try:
         payload = json.load(open(0))
@@ -93,6 +107,9 @@ def main() -> None:
 
     if _is_safe_xcode_validation(text):
         return _allow()
+
+    if _is_raw_xcodebuild_validation(text):
+        return _deny("Use Ambitions Xcode Build Lab wrapper instead of raw xcodebuild for simulator validation")
 
     denied_phrases = (
         "git push",

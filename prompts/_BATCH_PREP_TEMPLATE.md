@@ -21,6 +21,7 @@ This is a read-only preparation note and does **not** authorize implementation.
 - **Likely forbidden files:**
 - **Likely tests:**
 - **Validation commands:**
+- **Xcode wrapper lane:** (`none` / `build-for-testing` / `focused-test <test-id>` / `test-plan <plan-name>`)
 - **EFC applicability:**
 - **Known yellow caveats:**
 - **Senior-only risks:**
@@ -36,3 +37,6 @@ This is a read-only preparation note and does **not** authorize implementation.
 - No production behavior decisions.
 - No branching, commit, push, or app behavior change claims.
 - No implementation path is derived from this note alone.
+- If Xcode validation is likely needed, select the Ambitions Xcode Build Lab
+  wrapper route, not raw nested `xcodebuild` or repeated XcodeBuildMCP timeout
+  retries.
