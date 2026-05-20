@@ -1,5 +1,0 @@
-pid: 90693
-command: scripts/ambitions-global-train-supervisor.sh --once
-batch: AMB-FE-BE-CONTRACT-FREEZE-01
-timestamp: 2026-05-20T01:25:36Z
-run_dir: pending
