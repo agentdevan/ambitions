@@ -99,9 +99,10 @@ public struct PersonalSystemCenterHeader: View {
                             .foregroundStyle(theme.colors.textPrimary)
                             .fixedSize(horizontal: false, vertical: true)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
 
-                    Spacer(minLength: theme.spacing.xs)
-
+                HStack(alignment: .top, spacing: theme.spacing.xs) {
                     EvidenceLabel(
                         trustLabel,
                         detail: "Trust visible",
@@ -109,6 +110,8 @@ public struct PersonalSystemCenterHeader: View {
                         state: .proof,
                         context: .trust
                     )
+
+                    Spacer(minLength: 0)
                 }
 
                 Text(summary)
@@ -134,7 +137,7 @@ public struct PersonalSystemCenterHeader: View {
                 .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("you.system-profile-panel")
+        .accessibilityIdentifier("you.user-system-profile-panel")
         .accessibilityElement(children: .contain)
         .accessibilityLabel("\(title). \(controlLabel). \(summary)")
     }

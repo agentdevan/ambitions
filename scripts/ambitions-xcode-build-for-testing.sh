@@ -39,6 +39,28 @@ mkdir -p "$RESULT_DIR/$BATCH/$TS" "$LOG_DIR/$BATCH/$TS" "$SUMMARY_DIR/$BATCH/$TS
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
 
+sim_json="$(scripts/ambitions-xcode-sim-health.sh --json || true)"
+if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
+  sim_udid="${AMBITIONS_SIM_UDID}"
+else
+  sim_udid="$(python3 - "$sim_json" <<'PY'
+import json, sys
+text = sys.argv[1] if len(sys.argv) > 1 else "{}"
+try:
+    data = json.loads(text)
+except Exception:
+    data = {}
+print(data.get("udid", ""))
+PY
+)"
+fi
+
+SIM_DEST="platform=iOS Simulator,name=iPhone 17"
+if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
+  sim="${AMBITIONS_SIM_UDID:-$sim_udid}"
+  [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
+fi
+
 need_output="$(scripts/ambitions-xcodegen-needed.sh || true)"
 need_flag="$(awk -F= '/^XCODEGEN_NEEDED=/{print $2}' <<<"$need_output")"
 need_reason="$(awk -F= '/^REASON=/{print $2}' <<<"$need_output")"
@@ -52,7 +74,7 @@ if [[ "$need_flag" == "1" ]]; then
   xcodegen generate >/dev/null
 fi
 
-BUILD_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -derivedDataPath "$DERIVED_DATA" build-for-testing CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO -resultBundlePath "$RESULT_BUNDLE")
+BUILD_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -sdk iphonesimulator -destination "$SIM_DEST" -derivedDataPath "$DERIVED_DATA" build-for-testing CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO -resultBundlePath "$RESULT_BUNDLE")
 
 set +e
 if command -v xcbeautify >/dev/null 2>&1; then

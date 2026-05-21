@@ -144,8 +144,8 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Profile", in: app, maxAttempts: 8))
-        let profileRow = youRow(named: "Profile", in: app)
+        XCTAssertTrue(scrollUntilYouRowExists(named: "User System Profile", in: app, maxAttempts: 8))
+        let profileRow = youRow(named: "User System Profile", in: app)
         profileRow.tap()
         XCTAssertTrue(scrollUntilStaticTextExists("Personal defaults", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Default landing tab", in: app, maxAttempts: 8))
@@ -163,15 +163,15 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilYouRowExists(named: "Memory", in: app, maxAttempts: 6))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
         youRow(named: "Trust Center", in: app).tap()
-        XCTAssertTrue(app.descendants(matching: .any)["profile.trust-center-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["you.trust-center-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Recent trust receipts", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Claims locked", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Receipt drawer", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("The drawer keeps source freshness, privacy, correction, undo, and review visible.", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Receipt drawer keeps source freshness, privacy, correction, undo, and review paths visible.", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Proof trail", in: app))
-        XCTAssertTrue(app.descendants(matching: .any)["proof-spine"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["trust.why-this"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Proof stays attached to source freshness, privacy, correction, and review state.", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Why this?", in: app))
     }
 
     func testLaunchURLCanLandOnCanonicalTimeSurface() throws {

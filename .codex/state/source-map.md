@@ -11,5 +11,5 @@ Date: 2026-05-07
 - Goals UI: `Native/Ambitions/Features/Goals/`
 - Capture UI: `Native/Ambitions/Features/Capture/`
 - Plan UI: `Native/Ambitions/Features/Plan/`
-- You/Profile UI: `Native/Ambitions/Features/Profile/`
+- You UI: `Native/Ambitions/Features/You/`
 - Shared UI/package surfaces: `Native/Ambitions/UI/`, `Sources/`, `AppUI/Sources/`

@@ -88,12 +88,19 @@ run_once() {
 run_once
 status=$?
 
+if [[ "$status" -eq 0 ]] && grep -Eq "Testing failed:|\\*\\* TEST EXECUTE FAILED \\*\\*" "$LOG_FILE"; then
+  status=65
+fi
+
 if [[ "$status" -ne 0 ]]; then
   classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification",""))' )"
   if [[ "$classification" == "simulator_boot_failure" ]]; then
     scripts/ambitions-xcode-sim-health.sh --repair --json >/dev/null 2>&1 || true
     run_once
     status=$?
+    if [[ "$status" -eq 0 ]] && grep -Eq "Testing failed:|\\*\\* TEST EXECUTE FAILED \\*\\*" "$LOG_FILE"; then
+      status=65
+    fi
   fi
 fi
 

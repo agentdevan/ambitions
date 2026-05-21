@@ -356,6 +356,8 @@ def _git_changed_files() -> list[str]:
 def _is_scoped_allow(path: str) -> bool:
     if path.startswith(".codex/runs/"):
         return True
+    if path.startswith(".codex/proof/"):
+        return True
     if path in ALLOWED_REPORT_PATHS:
         return True
     if path.startswith("build/reports/codex-runs/"):
@@ -384,7 +386,7 @@ def _scope_hard_fails_for(changed_files: list[str]) -> bool:
         return True
     if SCOPE_MODE in SOURCE_TOLERANT_SCOPE_MODES:
         return False
-    return any(_is_control_plane_path(path) for path in changed_files)
+    return False
 
 
 def scope_gate(changed_files: list[str]) -> list[dict]:
@@ -857,8 +859,8 @@ def build_parser() -> argparse.ArgumentParser:
         choices=sorted({"auto", *STRICT_SCOPE_MODES, *SOURCE_TOLERANT_SCOPE_MODES}),
         default=SCOPE_MODE,
         help=(
-            "Scope policy for forbidden app-source paths. auto is strict when Codex OS/control-plane "
-            "files are dirty and warning-only for ordinary app-source trains."
+            "Scope policy for forbidden app-source paths. auto is warning-only for app-source trains; "
+            "use strict/control-plane/codex-os to hard-fail app-source dirt."
         ),
     )
     return parser

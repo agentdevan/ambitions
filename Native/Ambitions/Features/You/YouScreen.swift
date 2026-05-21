@@ -186,7 +186,7 @@ private struct YouRootDetailSheet: View {
                 preferredTab: $preferredTab,
                 reviewCadenceDays: $reviewCadenceDays
             )
-            YouSectionCard(eyebrow: "About you", section: dashboard.accountSection, accessibilityIdentifier: "you.account-card")
+            YouSectionCard(eyebrow: "User System Profile", section: dashboard.accountSection, accessibilityIdentifier: "you.account-card")
         case .personalization:
             YouConstitutionCard(constitution: dashboard.constitution)
         case .appearance:
@@ -2109,7 +2109,7 @@ private struct YouTrustCenterCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("profile.trust-center-card")
+        .accessibilityIdentifier("you.trust-center-card")
     }
 
     private var trustReceiptStackItems: [TrustReceiptStackItem] {

@@ -43,7 +43,7 @@ is_eval_path() {
 is_template_path() {
   local file="$1"
   case "$file" in
-    prompts/README.md|prompts/*/README.md|prompts/_*.md|prompts/desktop/*|prompts/desktop/**/*|prompts/templates/*|prompts/templates/**/*|docs/codex/chatgpt/*|docs/codex/chatgpt/**/*|.codex/templates/*|.codex/templates/**/*)
+    prompts/README.md|prompts/*/README.md|prompts/_*.md|prompts/desktop/*|prompts/desktop/**/*|prompts/templates/*|prompts/templates/**/*|prompts/trains/*|prompts/trains/**/*|docs/codex/chatgpt/*|docs/codex/chatgpt/**/*|.codex/templates/*|.codex/templates/**/*)
       return 0
       ;;
     *)

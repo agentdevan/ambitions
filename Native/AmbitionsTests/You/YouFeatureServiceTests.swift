@@ -181,7 +181,7 @@ final class YouFeatureServiceTests: XCTestCase {
         ])
         XCTAssertEqual(dashboard.constitution.title, "Personal Operating Constitution")
         XCTAssertTrue(dashboard.constitution.rules.contains(where: { $0.id == "constitution-calendar" && $0.detail.contains("never silent") }))
-        XCTAssertTrue(dashboard.receiptAudit.items.contains(where: { $0.id == "profile-receipts-review" && $0.title == "Reviews v1" }))
+        XCTAssertTrue(dashboard.receiptAudit.items.contains(where: { $0.id == "you-receipts-review" && $0.title == "Reviews v1" }))
         XCTAssertTrue(dashboard.receiptAudit.subtitle.contains("Reviews now"))
     }
 
@@ -248,7 +248,7 @@ final class YouFeatureServiceTests: XCTestCase {
             "Reviews",
             "Proof",
             "Archive / Completed",
-            "About You",
+            "User System Profile",
             "Personalization",
             "Appearance",
             "Notifications",
@@ -433,7 +433,7 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
 
-        let forget = try XCTUnwrap(dashboard.memoryControls.items.first(where: { $0.id == "profile-memory-forget" }))
+        let forget = try XCTUnwrap(dashboard.memoryControls.items.first(where: { $0.id == "you-memory-forget" }))
         XCTAssertEqual(forget.valueLabel, "Unavailable")
         XCTAssertTrue(forget.subtitle?.contains("Destructive memory deletion is not exposed here") ?? false)
         XCTAssertTrue(dashboard.automationBoundary.rules.contains(where: {
@@ -602,7 +602,7 @@ final class YouFeatureServiceTests: XCTestCase {
         let service = RepositoryBackedYouService(repositories: repositories)
 
         let dashboard = try await service.loadYouDashboard()
-        let rejected = try XCTUnwrap(dashboard.memoryControls.items.first(where: { $0.id == "profile-memory-rejected" }))
+        let rejected = try XCTUnwrap(dashboard.memoryControls.items.first(where: { $0.id == "you-memory-rejected" }))
         let correctionActions = dashboard.memoryControls.groups
             .flatMap(\.items)
             .first(where: { $0.id == "memory-item-corrections" })?
@@ -632,7 +632,7 @@ final class YouFeatureServiceTests: XCTestCase {
         let service = RepositoryBackedYouService(repositories: repositories)
 
         let dashboard = try await service.loadYouDashboard()
-        let memoryReceipt = try XCTUnwrap(dashboard.receiptAudit.items.first(where: { $0.id == "profile-receipts-memory" }))
+        let memoryReceipt = try XCTUnwrap(dashboard.receiptAudit.items.first(where: { $0.id == "you-receipts-memory" }))
 
         XCTAssertEqual(memoryReceipt.title, "Memory receipts")
         XCTAssertEqual(memoryReceipt.valueLabel, "Evidence-light")
@@ -852,7 +852,7 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.privacyLabel == "Private by default"
         }))
         XCTAssertTrue(dashboard.memoryControls.items.contains(where: {
-            $0.id == "profile-memory-forget" &&
+            $0.id == "you-memory-forget" &&
             $0.valueLabel == "Unavailable"
         }))
         XCTAssertTrue(dashboard.memoryControls.footer.contains("broad forgetting, deletion"))
@@ -1054,9 +1054,9 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
 
-        XCTAssertTrue(dashboard.memoryControls.items.contains(where: { $0.id == "profile-memory-corrections" && $0.valueLabel == "1 local" }))
-        XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "profile-correction-active" && $0.valueLabel == "1 active" }))
-        XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "profile-correction-ledger" && $0.valueLabel == "1 recent" }))
+        XCTAssertTrue(dashboard.memoryControls.items.contains(where: { $0.id == "you-memory-corrections" && $0.valueLabel == "1 local" }))
+        XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "you-correction-active" && $0.valueLabel == "1 active" }))
+        XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "you-correction-ledger" && $0.valueLabel == "1 recent" }))
         XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "you-vault-signals" && $0.detail.contains("1 recent ledger events") }))
     }
 

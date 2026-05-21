@@ -65,7 +65,7 @@ The repo currently contains these native foundations:
 | Goals | `Native/Ambitions/Features/Goals/` | Runtime surface exists. `Constellation Atlas` leads the viewport and deeper board material is now folded behind direction-depth disclosure. |
 | Capture | `Native/Ambitions/Features/Capture/` | User-facing destination is Capture. Internal folder/name compatibility remains. Composer-first foundation exists and the capture list now sits behind a disclosure when real depth appears. |
 | Time | User-facing shell through `AppTab.title`, `AmbitionsRootView`, and `TimeScreen` | Runtime surface exists. `LifeShape Field` now leads earlier and broader depth is folded into a disclosure, but the current implementation still remains foundation rather than final visual maturity. |
-| You | `Native/Ambitions/Features/You/` | User-facing destination is You. The visible top row is now normalized to `User System Profile`, while some internal route wiring remains profile compatibility debt. |
+| You | `Native/Ambitions/Features/You/` | User-facing destination is You. The visible top row is normalized to `User System Profile`. |
 
 ## Implemented capability foundations
 

@@ -856,13 +856,13 @@ private extension RepositoryBackedYouService {
                     footer: nil,
                     items: [
                         YouSystemCenterItem(
-                            id: "profile",
-                            title: "About You",
+                            id: "you",
+                            title: "User System Profile",
                             subtitle: "Name and default landing tab.",
                             icon: "person.crop.circle",
                             statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Local",
                             semanticState: .neutral,
-                            accessibilityHint: "Opens About You settings."
+                            accessibilityHint: "Opens User System Profile settings."
                         ),
                         YouSystemCenterItem(
                             id: "personalization",
@@ -1177,42 +1177,42 @@ private extension RepositoryBackedYouService {
             subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
             items: [
                 SettingsItem(
-                    id: "profile-memory-ledger",
+                    id: "you-memory-ledger",
                     title: "Event Ledger",
                     subtitle: "Recent meaningful actions and changes can support explanations. Full raw history stays off this top-level surface.",
                     icon: "list.bullet.rectangle",
                     valueLabel: snapshot.eventLedger.isEmpty ? "No recent events" : "\(snapshot.eventLedger.count) recent"
                 ),
                 SettingsItem(
-                    id: "profile-memory-evidence",
+                    id: "you-memory-evidence",
                     title: "Proof and feedback",
                     subtitle: "Progress evidence and feedback help Ambitions avoid relying only on intention.",
                     icon: "checkmark.seal",
                     valueLabel: "\(snapshot.evidence.count + snapshot.feedback.count) local"
                 ),
                 SettingsItem(
-                    id: "profile-memory-corrections",
+                    id: "you-memory-corrections",
                     title: "Corrections and teaching",
                     subtitle: "User-confirmed corrections can adjust future explanations where existing teaching signals support it.",
                     icon: "slider.horizontal.3",
                     valueLabel: correctionStatus
                 ),
                 SettingsItem(
-                    id: "profile-memory-captures",
+                    id: "you-memory-captures",
                     title: "Open captures",
                     subtitle: "Unarchived captures remain visible to the local planning loop until routed or archived.",
                     icon: "tray.full",
                     valueLabel: "\(snapshot.captures.filter { $0.status != .archived }.count) open"
                 ),
                 SettingsItem(
-                    id: "profile-memory-forget",
+                    id: "you-memory-forget",
                     title: "Forget or clear memory",
                     subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.",
                     icon: "trash.slash",
                     valueLabel: "Unavailable"
                 ),
                 SettingsItem(
-                    id: "profile-memory-rejected",
+                    id: "you-memory-rejected",
                     title: "Rejected memory",
                     subtitle: "Rejected learning stays reviewable and source-tied here; durable rejection rules wait for receipt-backed correction and delete coverage.",
                     icon: "xmark.seal",
@@ -1757,21 +1757,21 @@ private extension RepositoryBackedYouService {
             subtitle: "Ambitions should be teachable without asking you to understand its internals.",
             items: [
                 SettingsItem(
-                    id: "profile-correction-active",
+                    id: "you-correction-active",
                     title: "Active corrections",
                     subtitle: "Existing teaching signals are the current correction path. They are local and bounded to the artifacts they reference.",
                     icon: "checkmark.bubble",
                     valueLabel: activeSignals.isEmpty ? "None yet" : "\(activeSignals.count) active"
                 ),
                 SettingsItem(
-                    id: "profile-correction-ledger",
+                    id: "you-correction-ledger",
                     title: "Correction events",
                     subtitle: "Correction-shaped ledger entries can be used as evidence for why future recommendations changed.",
                     icon: "clock.arrow.circlepath",
                     valueLabel: correctionEvents.isEmpty ? "No recent entries" : "\(correctionEvents.count) recent"
                 ),
                 SettingsItem(
-                    id: "profile-correction-availability",
+                    id: "you-correction-availability",
                     title: "You can correct this",
                     subtitle: "Goal Detail explanations and existing teaching flows remain the supported place to correct assumptions.",
                     icon: "pencil.and.list.clipboard",
@@ -2095,28 +2095,28 @@ private extension RepositoryBackedYouService {
             subtitle: "A compact trust summary of what can explain actions today. Reviews now turns these signals into a calm receipt layer.",
             items: [
                 SettingsItem(
-                    id: "profile-receipts-domain",
+                    id: "you-receipts-domain",
                     title: "Receipts",
                     subtitle: "Receipts can summarize what changed, why, correction availability, safe fallback, and undo status where supported.",
                     icon: "doc.text.magnifyingglass",
                     valueLabel: "\(projection.displaySummaries(limit: 3).count) policy examples"
                 ),
                 SettingsItem(
-                    id: "profile-receipts-ledger",
+                    id: "you-receipts-ledger",
                     title: "Recent Event Ledger",
                     subtitle: "Recent ledger entries remain local evidence. This page shows counts and status rather than raw logs.",
                     icon: "clock",
                     valueLabel: snapshot.eventLedger.isEmpty ? "No recent events" : "\(snapshot.eventLedger.count) recent"
                 ),
                 SettingsItem(
-                    id: "profile-receipts-memory",
+                    id: "you-receipts-memory",
                     title: "Memory receipts",
                     subtitle: "Why remembered this should cite source, freshness, use, privacy posture, and correction or delete availability before memory is reused.",
                     icon: "brain.head.profile",
                     valueLabel: snapshot.teachingSignals.isEmpty ? "Evidence-light" : "Why remembered"
                 ),
                 SettingsItem(
-                    id: "profile-receipts-review",
+                    id: "you-receipts-review",
                     title: "Reviews v1",
                     subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a separate top-level destination.",
                     icon: "rectangle.stack.badge.play",

@@ -256,15 +256,15 @@ struct PreviewFixtures: Sendable {
                 trustWhisper: "Current trust posture: Ambitions is running in explicit local-only mode. Notifications are not requested for local reminders.",
                 status: .selected,
                 pills: [
-                    YouStatusPill(id: "profile-pill-appearance", title: "System mode with Sage", icon: "paintpalette", state: .selected),
-                    YouStatusPill(id: "profile-pill-sync", title: "Ambitions is running in explicit local-only mode.", icon: "lock.shield", state: .selected),
-                    YouStatusPill(id: "profile-pill-context", title: "6 context signals on device", icon: "waveform.path.ecg", state: .default)
+                    YouStatusPill(id: "you-pill-appearance", title: "System mode with Sage", icon: "paintpalette", state: .selected),
+                    YouStatusPill(id: "you-pill-sync", title: "Ambitions is running in explicit local-only mode.", icon: "lock.shield", state: .selected),
+                    YouStatusPill(id: "you-pill-context", title: "6 context signals on device", icon: "waveform.path.ecg", state: .default)
                 ],
                 stats: [
-                    MetricSummary(id: "profile-1", title: "Open goals", value: "3", detail: "In active review", icon: "target"),
-                    MetricSummary(id: "profile-2", title: "Tracked rituals", value: "6", detail: "Current set", icon: "repeat"),
-                    MetricSummary(id: "profile-3", title: "Review cadence", value: "Weekly", detail: "Sunday reset", icon: "calendar"),
-                    MetricSummary(id: "profile-4", title: "Context signals", value: "6", detail: "Evidence, feedback, and teaching", icon: "sparkles")
+                    MetricSummary(id: "you-1", title: "Open goals", value: "3", detail: "In active review", icon: "target"),
+                    MetricSummary(id: "you-2", title: "Tracked rituals", value: "6", detail: "Current set", icon: "repeat"),
+                    MetricSummary(id: "you-3", title: "Review cadence", value: "Weekly", detail: "Sunday reset", icon: "calendar"),
+                    MetricSummary(id: "you-4", title: "Context signals", value: "6", detail: "Evidence, feedback, and teaching", icon: "sparkles")
                 ]
             ),
             systemCenter: YouSystemCenterState(
@@ -276,7 +276,7 @@ struct PreviewFixtures: Sendable {
                         title: "Me",
                         footer: nil,
                         items: [
-                            YouSystemCenterItem(id: "profile", title: "Profile", subtitle: "Name and default landing tab.", icon: "person.crop.circle", statusLabel: "Local", semanticState: .neutral, accessibilityHint: "Opens profile settings."),
+                            YouSystemCenterItem(id: "you", title: "User System Profile", subtitle: "Name and default landing tab.", icon: "person.crop.circle", statusLabel: "Local", semanticState: .neutral, accessibilityHint: "Opens User System Profile settings."),
                             YouSystemCenterItem(id: "personalization", title: "Personalization", subtitle: "Tone and planning defaults.", icon: "slider.horizontal.3", statusLabel: "Defaults", semanticState: .trust, accessibilityHint: "Opens personalization settings."),
                             YouSystemCenterItem(id: "appearance", title: "Appearance", subtitle: "Mode and accent.", icon: "paintpalette", statusLabel: "System", semanticState: .success, accessibilityHint: "Opens Appearance Studio.")
                         ]
@@ -330,10 +330,10 @@ struct PreviewFixtures: Sendable {
                 title: "Control room",
                 subtitle: "A short map of the trust areas you can inspect without turning You into a settings dump.",
                 entries: [
-                    YouControlRoomEntry(id: "profile-control-constitution", title: "Personal Operating Constitution", subtitle: "Recommendation posture, recovery tone, planning strictness, and confirmation rules.", icon: "scroll", statusLabel: "Local defaults", state: .selected),
-                    YouControlRoomEntry(id: "profile-control-memory", title: "What Ambitions Knows", subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions can explain and let you correct.", icon: "brain.head.profile", statusLabel: "Stored on this device", state: .default),
-                    YouControlRoomEntry(id: "profile-control-corrections", title: "Corrections and assumptions", subtitle: "Assumptions can be corrected through existing teaching and explanation paths.", icon: "checkmark.bubble", statusLabel: "2 active", state: .success),
-                    YouControlRoomEntry(id: "profile-control-receipts", title: "Receipts and audit posture", subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.", icon: "doc.text.magnifyingglass", statusLabel: "Ready to review", state: .default)
+                    YouControlRoomEntry(id: "you-control-constitution", title: "Personal Operating Constitution", subtitle: "Recommendation posture, recovery tone, planning strictness, and confirmation rules.", icon: "scroll", statusLabel: "Local defaults", state: .selected),
+                    YouControlRoomEntry(id: "you-control-memory", title: "What Ambitions Knows", subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions can explain and let you correct.", icon: "brain.head.profile", statusLabel: "Stored on this device", state: .default),
+                    YouControlRoomEntry(id: "you-control-corrections", title: "Corrections and assumptions", subtitle: "Assumptions can be corrected through existing teaching and explanation paths.", icon: "checkmark.bubble", statusLabel: "2 active", state: .success),
+                    YouControlRoomEntry(id: "you-control-receipts", title: "Receipts and audit posture", subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.", icon: "doc.text.magnifyingglass", statusLabel: "Ready to review", state: .default)
                 ],
                 footer: "Open detail from the owning surfaces for deep review. This page stays oriented around trust, control, and next-safe status."
             ),
@@ -355,11 +355,11 @@ struct PreviewFixtures: Sendable {
                 title: "What Ambitions Knows",
                 subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
                 items: [
-                    SettingsItem(id: "profile-memory-ledger", title: "Event Ledger", subtitle: "Recent meaningful actions and changes can support explanations. Full raw history stays off this top-level surface.", icon: "list.bullet.rectangle", valueLabel: "2 recent"),
-                    SettingsItem(id: "profile-memory-evidence", title: "Proof and feedback", subtitle: "Progress evidence and feedback help Ambitions avoid relying only on intention.", icon: "checkmark.seal", valueLabel: "4 local"),
-                    SettingsItem(id: "profile-memory-corrections", title: "Corrections and teaching", subtitle: "User-confirmed corrections can adjust future explanations where existing teaching signals support it.", icon: "slider.horizontal.3", valueLabel: "2 local"),
-                    SettingsItem(id: "profile-memory-forget", title: "Forget or clear memory", subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.", icon: "trash.slash", valueLabel: "Unavailable"),
-                    SettingsItem(id: "profile-memory-rejected", title: "Rejected memory", subtitle: "Rejected learning stays reviewable and source-tied here; durable rejection rules wait for receipt-backed correction and delete coverage.", icon: "xmark.seal", valueLabel: "Review first")
+                    SettingsItem(id: "you-memory-ledger", title: "Event Ledger", subtitle: "Recent meaningful actions and changes can support explanations. Full raw history stays off this top-level surface.", icon: "list.bullet.rectangle", valueLabel: "2 recent"),
+                    SettingsItem(id: "you-memory-evidence", title: "Proof and feedback", subtitle: "Progress evidence and feedback help Ambitions avoid relying only on intention.", icon: "checkmark.seal", valueLabel: "4 local"),
+                    SettingsItem(id: "you-memory-corrections", title: "Corrections and teaching", subtitle: "User-confirmed corrections can adjust future explanations where existing teaching signals support it.", icon: "slider.horizontal.3", valueLabel: "2 local"),
+                    SettingsItem(id: "you-memory-forget", title: "Forget or clear memory", subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.", icon: "trash.slash", valueLabel: "Unavailable"),
+                    SettingsItem(id: "you-memory-rejected", title: "Rejected memory", subtitle: "Rejected learning stays reviewable and source-tied here; durable rejection rules wait for receipt-backed correction and delete coverage.", icon: "xmark.seal", valueLabel: "Review first")
                 ],
                 consent: YouPersonalizationConsentState(
                     title: "Personalization consent",
@@ -529,8 +529,8 @@ struct PreviewFixtures: Sendable {
                 title: "Corrections and assumptions",
                 subtitle: "Ambitions should be teachable without asking you to understand its internals.",
                 items: [
-                    SettingsItem(id: "profile-correction-active", title: "Active corrections", subtitle: "Existing teaching signals are the current correction path.", icon: "checkmark.bubble", valueLabel: "2 active"),
-                    SettingsItem(id: "profile-correction-availability", title: "You can correct this", subtitle: "Goal Detail explanations and existing teaching flows remain the supported place to correct assumptions.", icon: "pencil.and.list.clipboard", valueLabel: "Supported where shown")
+                    SettingsItem(id: "you-correction-active", title: "Active corrections", subtitle: "Existing teaching signals are the current correction path.", icon: "checkmark.bubble", valueLabel: "2 active"),
+                    SettingsItem(id: "you-correction-availability", title: "You can correct this", subtitle: "Goal Detail explanations and existing teaching flows remain the supported place to correct assumptions.", icon: "pencil.and.list.clipboard", valueLabel: "Supported where shown")
                 ],
                 footer: "This is a foundation layer, not a second memory model or a full Correction Review."
             ),
@@ -548,9 +548,9 @@ struct PreviewFixtures: Sendable {
                 title: "Receipts and audit posture",
                 subtitle: "A compact trust summary of what can explain actions today. Reviews now turns these signals into a calm receipt layer.",
                 items: [
-                    SettingsItem(id: "profile-receipts-domain", title: "Receipts", subtitle: "Receipts can summarize what changed, why, correction availability, safe fallback, and undo status where supported.", icon: "doc.text.magnifyingglass", valueLabel: "3 policy examples"),
-                    SettingsItem(id: "profile-receipts-memory", title: "Memory receipts", subtitle: "Why remembered this should cite source, freshness, use, privacy posture, and correction or delete availability before memory is reused.", icon: "brain.head.profile", valueLabel: "Why remembered"),
-                    SettingsItem(id: "profile-receipts-review", title: "Reviews", subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a separate top-level destination.", icon: "rectangle.stack.badge.play", valueLabel: "Ready to review")
+                    SettingsItem(id: "you-receipts-domain", title: "Receipts", subtitle: "Receipts can summarize what changed, why, correction availability, safe fallback, and undo status where supported.", icon: "doc.text.magnifyingglass", valueLabel: "3 policy examples"),
+                    SettingsItem(id: "you-receipts-memory", title: "Memory receipts", subtitle: "Why remembered this should cite source, freshness, use, privacy posture, and correction or delete availability before memory is reused.", icon: "brain.head.profile", valueLabel: "Why remembered"),
+                    SettingsItem(id: "you-receipts-review", title: "Reviews", subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a separate top-level destination.", icon: "rectangle.stack.badge.play", valueLabel: "Ready to review")
                 ],
                 footer: "Receipts are exposed here as trust posture, not as a full history browser."
             ),
@@ -634,9 +634,9 @@ struct PreviewFixtures: Sendable {
                     state: .selected
                 ),
                 items: [
-                    SettingsItem(id: "profile-trust-sync", title: "System trust posture", subtitle: "The current runtime runs from on-device storage, portable backup/restore, and no implied live cloud backend.", icon: "lock.shield", valueLabel: "Ambitions is running in explicit local-only mode."),
-                    SettingsItem(id: "profile-trust-notifications", title: "Notification pulse", subtitle: "Local reminder scheduling exists on the current runtime. Authorization stays explicit here so ambient trust never feels hidden.", icon: "bell.badge", valueLabel: "Not requested"),
-                    SettingsItem(id: "profile-trust-routing", title: "System status", subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and ambient surfaces preserve local-first continuity language.", icon: "arrow.triangle.branch", valueLabel: "Calm")
+                    SettingsItem(id: "you-trust-sync", title: "System trust posture", subtitle: "The current runtime runs from on-device storage, portable backup/restore, and no implied live cloud backend.", icon: "lock.shield", valueLabel: "Ambitions is running in explicit local-only mode."),
+                    SettingsItem(id: "you-trust-notifications", title: "Notification pulse", subtitle: "Local reminder scheduling exists on the current runtime. Authorization stays explicit here so ambient trust never feels hidden.", icon: "bell.badge", valueLabel: "Not requested"),
+                    SettingsItem(id: "you-trust-routing", title: "System status", subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and ambient surfaces preserve local-first continuity language.", icon: "arrow.triangle.branch", valueLabel: "Calm")
                 ],
                 dataMap: [
                     YouTrustDataMapItem(id: "trust-data-map-local-context", title: "Local context", dataTypes: "Goals, captures, proof, corrections, receipts, reviews", sourceLabel: "Preview local signals", controlLabel: "Inspect and correct from owning surfaces", privacyLabel: "Private by default", statusLabel: "Stored on this device", semanticState: .trust),
@@ -686,14 +686,14 @@ struct PreviewFixtures: Sendable {
                 title: "Context Vault",
                 subtitle: "Optional personal context is inspectable here before later compliance work deepens policy and export surfaces.",
                 items: [
-                    YouContextVaultItem(id: "profile-vault-signals", title: "Signals in use", subtitle: "These are the current categories the app can already read from its native repositories.", icon: "tray.full", detail: "2 evidence records, 2 feedback events, 2 teaching signals"),
-                    YouContextVaultItem(id: "profile-vault-planning", title: "Planning memory", subtitle: "Clarifications, blocked drafts, and open captures stay visible so future intelligence work remains auditable.", icon: "rectangle.stack.badge.person.crop", detail: "1 draft signal, 1 open capture"),
-                    YouContextVaultItem(id: "profile-vault-identity", title: "Personal defaults", subtitle: "Name, launch defaults, and appearance stay separate from the execution surfaces they influence.", icon: "person.text.rectangle", detail: "Preview User")
+                    YouContextVaultItem(id: "you-vault-signals", title: "Signals in use", subtitle: "These are the current categories the app can already read from its native repositories.", icon: "tray.full", detail: "2 evidence records, 2 feedback events, 2 teaching signals"),
+                    YouContextVaultItem(id: "you-vault-planning", title: "Planning memory", subtitle: "Clarifications, blocked drafts, and open captures stay visible so future intelligence work remains auditable.", icon: "rectangle.stack.badge.person.crop", detail: "1 draft signal, 1 open capture"),
+                    YouContextVaultItem(id: "you-vault-identity", title: "Personal defaults", subtitle: "Name, launch defaults, and appearance stay separate from the execution surfaces they influence.", icon: "person.text.rectangle", detail: "Preview User")
                 ],
                 policyItems: [
-                    YouSignalPolicyItem(id: "profile-policy-optional", title: "Optional by design", detail: "Context is there to improve fit and trust. It is not required to use the core planning system.", state: .default),
-                    YouSignalPolicyItem(id: "profile-policy-local", title: "Local-first posture", detail: "Signals stay on device in this build and should remain inspectable before any future continuity expansion.", state: .selected),
-                    YouSignalPolicyItem(id: "profile-policy-explicit", title: "Inspectable and understandable", detail: "The app should be able to explain what signal types exist without feeling invasive or technical.", state: .default)
+                    YouSignalPolicyItem(id: "you-policy-optional", title: "Optional by design", detail: "Context is there to improve fit and trust. It is not required to use the core planning system.", state: .default),
+                    YouSignalPolicyItem(id: "you-policy-local", title: "Local-first posture", detail: "Signals stay on device in this build and should remain inspectable before any future continuity expansion.", state: .selected),
+                    YouSignalPolicyItem(id: "you-policy-explicit", title: "Inspectable and understandable", detail: "The app should be able to explain what signal types exist without feeling invasive or technical.", state: .default)
                 ],
                 footer: "This is a foundation layer, not a second memory model or a full Correction Review."
             ),
@@ -701,12 +701,12 @@ struct PreviewFixtures: Sendable {
                 title: "Integrations and permissions",
                 subtitle: "Only the system edges that materially affect trust or routing belong here.",
                 items: [
-                    SettingsItem(id: "profile-integration-notifications", title: "Notifications", subtitle: "Authorization: Not requested yet. Local reminders stay on-device and bounded to the current runtime.", icon: "bell.badge", valueLabel: "Not requested"),
-                    SettingsItem(id: "profile-integration-reminders", title: "Reminders integration", subtitle: "Reminder write paths exist on the current EventKit seam. Authorization stays explicit so scheduling trust is legible.", icon: "checklist", valueLabel: "Not requested"),
-                    SettingsItem(id: "profile-integration-calendar", title: "Calendar integration", subtitle: "Calendar event creation and conflict detection exist on the shared EventKit seam. Read depth depends on authorization level.", icon: "calendar.badge.clock", valueLabel: "Not requested"),
-                    SettingsItem(id: "profile-integration-widgets", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Widgets and Live Activity read the shared external snapshot, Now State Lease, and local-first continuity posture.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview),
-                    SettingsItem(id: "profile-integration-shortcuts", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and keep canonical routing ownership.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
-                    SettingsItem(id: "profile-integration-share", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
+                    SettingsItem(id: "you-integration-notifications", title: "Notifications", subtitle: "Authorization: Not requested yet. Local reminders stay on-device and bounded to the current runtime.", icon: "bell.badge", valueLabel: "Not requested"),
+                    SettingsItem(id: "you-integration-reminders", title: "Reminders integration", subtitle: "Reminder write paths exist on the current EventKit seam. Authorization stays explicit so scheduling trust is legible.", icon: "checklist", valueLabel: "Not requested"),
+                    SettingsItem(id: "you-integration-calendar", title: "Calendar integration", subtitle: "Calendar event creation and conflict detection exist on the shared EventKit seam. Read depth depends on authorization level.", icon: "calendar.badge.clock", valueLabel: "Not requested"),
+                    SettingsItem(id: "you-integration-widgets", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Widgets and Live Activity read the shared external snapshot, Now State Lease, and local-first continuity posture.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview),
+                    SettingsItem(id: "you-integration-shortcuts", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and keep canonical routing ownership.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
+                    SettingsItem(id: "you-integration-share", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
                 ],
                 footer: "Notification and integration status should answer whether anything important needs attention without turning You into an admin checklist."
             ),
@@ -714,9 +714,9 @@ struct PreviewFixtures: Sendable {
                 title: "Personal defaults",
                 subtitle: "These choices shape the shell, not the truth of your goals or day.",
                 items: [
-                    SettingsItem(id: "profile-default-tab", title: "Default landing tab", subtitle: "Used on the next cold launch so re-entry starts where you prefer.", icon: "square.grid.2x2", valueLabel: "Today"),
-                    SettingsItem(id: "profile-default-review", title: "Review cadence", subtitle: "How often the app frames a planning reset using the current local planning loop.", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
-                    SettingsItem(id: "profile-default-storage", title: "Storage mode", subtitle: "Goals, captures, evidence, and teaching signals persist through the native on-device repositories.", icon: "internaldrive", valueLabel: "Local-only")
+                    SettingsItem(id: "you-default-tab", title: "Default landing tab", subtitle: "Used on the next cold launch so re-entry starts where you prefer.", icon: "square.grid.2x2", valueLabel: "Today"),
+                    SettingsItem(id: "you-default-review", title: "Review cadence", subtitle: "How often the app frames a planning reset using the current local planning loop.", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
+                    SettingsItem(id: "you-default-storage", title: "Storage mode", subtitle: "Goals, captures, evidence, and teaching signals persist through the native on-device repositories.", icon: "internaldrive", valueLabel: "Local-only")
                 ],
                 footer: nil
             ),
@@ -724,8 +724,8 @@ struct PreviewFixtures: Sendable {
                 title: "Account and billing",
                 subtitle: "This build stays explicit about what is not configured yet so You never implies hidden account requirements.",
                 items: [
-                    SettingsItem(id: "profile-account-mode", title: "Account mode", subtitle: "No sign-in or cloud account is required for the current shipping native experience.", icon: "person.crop.circle", valueLabel: "On-device only"),
-                    SettingsItem(id: "profile-account-billing", title: "Billing", subtitle: "Subscriptions, digital unlocks, and purchase flows are not active product scope in this build.", icon: "creditcard", valueLabel: "Not active")
+                    SettingsItem(id: "you-account-mode", title: "Account mode", subtitle: "No sign-in or cloud account is required for the current shipping native experience.", icon: "person.crop.circle", valueLabel: "On-device only"),
+                    SettingsItem(id: "you-account-billing", title: "Billing", subtitle: "Subscriptions, digital unlocks, and purchase flows are not active product scope in this build.", icon: "creditcard", valueLabel: "Not active")
                 ],
                 footer: "Future account or monetization work should land only when canon and release-compliance truth explicitly activate it."
             ),
@@ -801,7 +801,7 @@ struct PreviewFixtures: Sendable {
                 privacyBoundary: "Memory, receipts, privacy, and correction controls stay visible.",
                 accessibilityExpectation: "Rows need labels, hints, and non-color status text.",
                 yellowLimit: "Human trust review and device proof remain future-owned.",
-                expectedEvidence: ["profile fixture", "memory controls", "receipt audit"]
+                expectedEvidence: ["you fixture", "memory controls", "receipt audit"]
             ),
             ExternalBrainPreviewScenario(
                 id: "eb35-overloaded-recovery",

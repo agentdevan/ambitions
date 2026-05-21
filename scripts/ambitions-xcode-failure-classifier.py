@@ -16,6 +16,7 @@ PATTERNS = {
     "test_failure": [
         r"\b\d+\s+tests?\s+failed\b",
         r"\*\*\s+TEST\s+FAILED\b",
+        r"\*\*\s+TEST\s+EXECUTE\s+FAILED\b",
         r"\bTest Case .* failed\b",
         r"\bAssertion Failure\b",
         r"\btest failed\b",
@@ -45,6 +46,7 @@ PATTERNS = {
         r"module .* was created by an \w+ newer compiler",
         r"Could not use module.*because module was built with a different version",
         r"Build input file cannot be found",
+        r"No such file or directory: .*Build/Products/Debug-iphonesimulator/Ambitions\.app",
     ],
     "xcodegen_project_drift": [
         r"xcodegen generate",

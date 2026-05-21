@@ -29,7 +29,7 @@ enum YouRootDetail: String, Identifiable {
 
     var title: String {
         switch self {
-        case .you: "About You"
+        case .you: "User System Profile"
         case .personalization: "Personalization"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "What Ambitions Knows"
@@ -79,13 +79,13 @@ struct PersonalSystemCenterRootView: View {
             )
 
             Button {
-                selectedRowHapticToken = "system-profile"
+                selectedRowHapticToken = "user-system-profile"
                 onOpenDetail(.you)
             } label: {
                 Label("User System Profile", systemImage: "person.crop.circle")
             }
             .buttonStyle(.bordered)
-            .accessibilityIdentifier("you.row.system-profile")
+            .accessibilityIdentifier("you.row.user-system-profile")
 
             PersonalSystemCenterNavigation(sections: groupedNavigationSections) { item in
                 selectedRowHapticToken = item.id
