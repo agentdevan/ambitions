@@ -785,7 +785,7 @@ struct PreviewFixtures: Sendable {
                 sourceTruth: "Command Surface / Trust",
                 commandIntent: .quickPlanPatch,
                 memoryQuery: nil,
-                privacyBoundary: "Routes to Plan without calendar writes or silent reshaping.",
+                privacyBoundary: "Routes to Time without calendar writes or silent reshaping.",
                 accessibilityExpectation: "Command explanation must name destination and fallback.",
                 yellowLimit: "No rendered command UI proof in EB35.",
                 expectedEvidence: ["command contract", "fallback", "no calendar write"]
@@ -806,7 +806,7 @@ struct PreviewFixtures: Sendable {
             ExternalBrainPreviewScenario(
                 id: "eb35-overloaded-recovery",
                 title: "Overloaded recovery path",
-                surface: "Today / Plan",
+                surface: "Today / Time",
                 fixtureOwner: "Sources/Previews/DynamicAdaptiveVisualPreviews.swift",
                 sourceTruth: "Cognitive Load / Recovery",
                 commandIntent: .quickRecovery,

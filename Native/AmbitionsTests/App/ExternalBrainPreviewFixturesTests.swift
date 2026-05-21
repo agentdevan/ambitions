@@ -10,7 +10,7 @@ final class ExternalBrainPreviewFixturesTests: XCTestCase {
         XCTAssertTrue(scenarios.contains { $0.surface == "What Ambitions knows" })
         XCTAssertTrue(scenarios.contains { $0.surface == "Shell command" })
         XCTAssertTrue(scenarios.contains { $0.surface == "You" })
-        XCTAssertTrue(scenarios.contains { $0.surface == "Today / Plan" })
+        XCTAssertTrue(scenarios.contains { $0.surface == "Today / Time" })
         XCTAssertTrue(scenarios.contains { $0.memoryQuery == "safe context recall" })
         XCTAssertTrue(scenarios.contains { $0.memoryQuery == "Correction trail" })
         XCTAssertTrue(scenarios.contains { $0.commandIntent == .quickCapture })

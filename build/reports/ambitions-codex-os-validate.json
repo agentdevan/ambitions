@@ -3,18 +3,18 @@
   "status": "GREEN",
   "summary": "Ambitions Codex OS validation for local hardening control-plane",
   "changed_files": [
-    "Native/Ambitions/Domain/ScreenContractModels.swift",
-    "Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift",
-    "Native/Ambitions/Features/Time/TimeLifeShapeField.swift",
-    "Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift",
-    "Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift",
-    "Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift",
-    "Native/AmbitionsTests/Time",
-    "Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift",
-    "frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml",
-    "frontend/visual-encyclopedia/VISUAL_SOURCE_LINKS.yaml",
-    "frontend/visual-encyclopedia/VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.yaml",
-    "frontend/visual-encyclopedia/trace/FRONTEND_SOURCE_BINDINGS.yaml"
+    ".codex/proof",
+    ".codex/proof/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION-you-2.png",
+    ".codex/proof/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION-you-repair-2.png",
+    ".codex/proof/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION-you-repair-installed.png",
+    ".codex/proof/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION-you-repair-large-you.png",
+    ".codex/proof/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION-you-repair-large.png",
+    ".codex/proof/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION-you-repair.png",
+    ".codex/proof/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION-you.png",
+    "Native/Ambitions/PreviewSupport/PreviewFixtures.swift",
+    "Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift",
+    "Native/AmbitionsUITests/AmbitionsUITests.swift",
+    "build/reports/ambitions-codex-os-validate.json"
   ],
   "validations_run": [
     {
@@ -191,35 +191,15 @@
     },
     {
       "status": "pass",
-      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Domain/ScreenContractModels.swift"
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/PreviewSupport/PreviewFixtures.swift"
     },
     {
       "status": "pass",
-      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift"
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift"
     },
     {
       "status": "pass",
-      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Features/Time/TimeLifeShapeField.swift"
-    },
-    {
-      "status": "pass",
-      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Features/Time/TimeLifeShapeTimeCapacityMap.swift"
-    },
-    {
-      "status": "pass",
-      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift"
-    },
-    {
-      "status": "pass",
-      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift"
-    },
-    {
-      "status": "pass",
-      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/AmbitionsTests/Time"
-    },
-    {
-      "status": "pass",
-      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift"
+      "message": "app-source dirty work excluded from Codex OS scope hard-fail checks: Native/AmbitionsUITests/AmbitionsUITests.swift"
     },
     {
       "status": "pass",
