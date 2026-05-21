@@ -106,7 +106,7 @@ Cleanup classification/status only. No Swift source changes, app implementation 
 | `docs/canon/SOURCE_OF_TRUTH_MAP.md` still promoted older canon and Plan-era ordering. | Supporting map with active drift | Repaired directly on `main` in commit `386185bd15d29151fa46262dfb9871af124b26c3`. |
 | Search surfaced many `docs/canon/Ambitions_2_0*` and `docs/canon/Ambitions_3_0*` files. | Historical by policy | No deletion performed; extraction/quarantine pass required before movement. |
 | Search surfaced `Native/Ambitions/Features/Plan/*`. | Needs inspection | No source change performed; may be internal compatibility naming or real active drift. |
-| Search surfaced old `Hero Step Panel`, `Start Focus`, and `next best move` references. | Mixed: drift rules, historical prompts, and possible active copy risk | No blanket replacement; active path audit still required. |
+| Search surfaced old `Hero Step Panel`, `Start Focus`, and `next best move` references. | Historical/compatibility drift; active-looking usage now classified in frontend docs | No blanket replacement; preserve as historical material unless a later source-backed rename pass is approved. |
 
 ## 2026-05-16 Train B Header Quarantine Findings
 

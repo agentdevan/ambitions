@@ -1,12 +1,12 @@
 # Flagship Completion Object Scorecard
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth for FCP01-FCP30.
+Status: Historical/supporting planning truth for FCP01-FCP30.
 Date: 2026-05-05
 
 ## Purpose
 
-This scorecard defines the current object baseline, target state, priority, implementation risk, and exact acceptance gate for every major Ambitions flagship object. Codex must use this as a scoring and drift-prevention contract before implementing FCP batches.
+This scorecard preserves the legacy object baseline, target state, priority, implementation risk, and exact acceptance gate for every major Ambitions flagship object. Codex may use it as a drift-prevention contract for historical FCP batches, but `docs/truth/*` and the current frontend visual encyclopedia root win over any legacy alias here.
 
 ## Scoring Rule
 
@@ -20,8 +20,8 @@ This scorecard defines the current object baseline, target state, priority, impl
 
 | # | Object | Current score | Target | Priority | Implementation risk | Main weakness | Required FCP owner |
 |---:|---|---:|---:|---|---|---|---|
-| 1 | Start Here Surface / Hero Step Panel | 5.8 | 10 | P0 | High | Still a hero card, not a decision surface | FCP05 |
-| 2 | Reality Rail / DayTimelineRail | 7.4 | 10 | P0 | Medium | Rail pieces remain adjacent modules | FCP07 |
+| 1 | Start Here Surface (historical alias: Hero Step Panel) | 5.8 | 10 | P0 | High | Still a hero card, not a decision surface | FCP05 |
+| 2 | Reality Rail (historical alias: DayTimelineRail) | 7.4 | 10 | P0 | Medium | Rail pieces remain adjacent modules | FCP07 |
 | 3 | Ambition Meridian Shell | 6.8 | 10 | P0 | High | Composition bar, not flagship shell | FCP08 |
 | 4 | LifePath View | 7.2 | 10 | P1 | Medium | Node-card / alternate-card feel | FCP11 |
 | 5 | MissionControlTimeSpine / Mission Control Lanes | 6.7 | 10 | P1 | High | Mission Control still grid/card-like | FCP10 |
@@ -48,11 +48,11 @@ This scorecard defines the current object baseline, target state, priority, impl
 
 ## Object Acceptance Gates
 
-### 1. Start Here Surface / Hero Step Panel
+### 1. Start Here Surface (historical alias: Hero Step Panel)
 
 Pass only if StartHereSurface exists as the primary Today decision object and includes ContextEdge, TimeFitProof, GoalThread, source-quality because line, receipt drawer seam, primary action, secondary action, privacy behavior, stale-source behavior, and reduced-motion/VoiceOver equivalents. The object fails if it remains a rounded task/recommendation card.
 
-### 2. Reality Rail / DayTimelineRail
+### 2. Reality Rail (historical alias: DayTimelineRail)
 
 Pass only if Now / Next / Later, Start Here, closure, proof, and pressure form one continuous rail object. The object fails if Today becomes an agenda, task list, equal-card stack, or calendar timeline.
 

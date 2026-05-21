@@ -12,7 +12,7 @@ Start here:
 - [`SIGNATURE_VISUAL_INSTRUMENTS.md`](SIGNATURE_VISUAL_INSTRUMENTS.md) for the top-level instrument doctrine that prevents generic card/list surfaces.
 - [`behavior/CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md`](behavior/CLOSURE_RECOVERY_INTERACTION_GRAMMAR.md) for the durable closure/recovery interaction grammar.
 - [`trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml`](trace/SIGNATURE_VISUAL_INSTRUMENTS_MATRIX.yaml) for the machine-readable instrument-to-surface map.
-- [`ENCYCLOPEDIA_TO_FRONTEND_OS.md`](ENCYCLOPEDIA_TO_FRONTEND_OS.md) for the implementation workflow.
+- [`ENCYCLOPEDIA_TO_FRONTEND_OS.md`](ENCYCLOPEDIA_TO_FRONTEND_OS.md) for the implementation path.
 - [`FRONTEND_AUTHORITY_INDEX.md`](FRONTEND_AUTHORITY_INDEX.md) for the human control-plane front door.
 - [`FRONTEND_DOC_CLASSIFICATION.md`](FRONTEND_DOC_CLASSIFICATION.md) for active/supporting/historical/obsolete/archive/delete classification.
 - [`AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md`](AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md) for the broad atlas.
@@ -40,6 +40,8 @@ The locked Today viewport requires:
 
 This is visual canon only. It is not SwiftUI proof, screenshot proof, device proof, accessibility conformance proof, hosted-CI proof, or release readiness.
 
+Historical aliases such as `DayTimelineRail`, `Hero Step Panel`, and `Plan` may appear in trace or migration material only. They do not define active surface ownership.
+
 ## Signature Instrument Rule
 
 The mature frontend is organized around five owning visual instruments:
@@ -60,7 +62,7 @@ The active design language is frozen in [`DESIGN_LANGUAGE_DOCTRINE.md`](DESIGN_L
 
 That doctrine is subordinate to `docs/truth/*` and the active visual encyclopedia root. It freezes one-primary-object law, the five signature instruments, semantic material usage, proof/receipt language, calm recovery tone, and the banned counter-patterns that must not re-enter active canon.
 
-## Implementation Workflow
+## Implementation Path
 
 For frontend implementation work, start with [`ENCYCLOPEDIA_TO_FRONTEND_OS.md`](ENCYCLOPEDIA_TO_FRONTEND_OS.md), then use [`FRONTEND_AUTHORITY_INDEX.md`](FRONTEND_AUTHORITY_INDEX.md), generate a surface packet, run preflight, and generate the implementation prompt.
 

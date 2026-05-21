@@ -26,7 +26,7 @@ This ledger defines the proof categories that UI Studio 09 must keep separate. I
 - Rendered screenshot proof means actual images were captured, retained, and reviewed as proof artifacts.
 - Accessibility proof means the accessibility claim has its own evidence.
 - Device proof means the screenshot or rendering claim has been validated on the intended device or simulator target.
-- Release proof means the visual work has been accepted into a release-ready state.
+- Release proof means release-truth evidence exists for the visual work; it does not imply the work is release-ready, TestFlight-ready, or App Store-ready without matching `docs/truth/RELEASE_TRUTH.md` evidence.
 
 ## Non-Claims
 

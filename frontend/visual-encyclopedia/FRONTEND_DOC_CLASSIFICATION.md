@@ -62,3 +62,4 @@ This map classifies the current frontend documentation surface so agents can sep
 
 - This map does not replace truth files or live source evidence.
 - When a file appears in more than one historical/supporting bucket, the more specific and more recent classification wins.
+- `DayTimelineRail`, `Hero Step Panel`, and `Plan` are compatibility or historical aliases only; any active-looking usage of those terms must be read through `docs/truth/*` and the current frontend visual encyclopedia root.

@@ -2,18 +2,19 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active DAV01 source-truth map; not SwiftUI implementation evidence.
+Status: Historical/supporting DAV01 source-truth map; not SwiftUI implementation evidence.
 Date: 2026-05-03
 
 ## Source Truth Hierarchy
 
-1. Ambitions 3.0 source truth remains active shipping truth.
-2. Ambitions 4.0 Execution Program owns active planned batch status and order.
-3. PXOS owns future product-experience surface shape.
-4. PXEQ owns product-experience equivalence and living-interface gates.
-5. EB kernel canon owns External Brain trust, capture, memory, onboarding,
+1. `docs/truth/*` are the active repo authority.
+2. Ambitions 3.0 material is historical source context only.
+3. Ambitions 4.0 Execution Program owns active planned batch status and order.
+4. PXOS owns future product-experience surface shape.
+5. PXEQ owns product-experience equivalence and living-interface gates.
+6. EB kernel canon owns External Brain trust, capture, memory, onboarding,
    accessibility, and receipt boundaries.
-6. DAV owns implementation sequencing and visual primitive/surface evidence only.
+7. DAV owns implementation sequencing and visual primitive/surface evidence only.
 
 DAV must not create duplicate canon for PXEQ, PXOS, SI, EB, trust, memory,
 accessibility, or release claims. DAV implements or maps visual evidence against
@@ -23,9 +24,9 @@ those owners.
 
 | Surface | Primary visual object | DAV batch | Swift owner boundary | Proof boundary |
 | --- | --- | --- | --- | --- |
-| Today | DayTimelineRail plus HeroStepPanel | DAV03 | `Native/Ambitions/Features/Today/**`, shared `Sources/Components/**` only when using DAV02 primitives | Today behavior unchanged unless DAV03 tests prove it |
+| Today | Reality Meridian / Start Here (historical aliases: DayTimelineRail, Hero Step Panel) | DAV03 | `Native/Ambitions/Features/Today/**`, shared `Sources/Components/**` only when using DAV02 primitives | Today behavior unchanged unless DAV03 tests prove it |
 | Capture | CaptureAtmosphereComposer plus RoutingReceipt | DAV04 | `Native/Ambitions/Features/Capture/**`, shared `Sources/Components/**` | Capture remains composer-first; no persistence/routing raw changes |
-| Plan | LifeShapeMap plus capacity/pressure visuals | DAV05 | `Native/Ambitions/Features/Plan/**`, shared `Sources/Components/**` | Plan remains suggestion-only; no calendar-write claim |
+| Time | LifeShapeMap plus capacity/pressure visuals (Plan compatibility seam) | DAV05 | `Native/Ambitions/Features/Plan/**`, shared `Sources/Components/**` | Time remains suggestion-only; no calendar-write claim |
 | Goals | GoalMissionControlLanes | DAV06 | `Native/Ambitions/Features/Goals/**`, shared `Sources/Components/**` | No OKR/dashboard/task-list clone |
 | You | SystemProfilePanel plus GroupedNavigationSystem | DAV07 | `Native/Ambitions/Features/Profile/**`, shared `Sources/Components/**` | You remains Personal System Center; no settings dump |
 | Memory | ContextRecallCard and bounded MemoryConstellation | DAV08 | owned memory/trust drill-down surfaces or shared components only | Source, confidence, edit/delete, stale/rejected labels required |
