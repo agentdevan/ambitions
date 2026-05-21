@@ -1,12 +1,14 @@
 # Global Optimized Implementation Order
 <!-- markdownlint-disable MD013 -->
 
-Status: Active global order overlay for remaining implementation selection.
+Status: Supporting historical/global order overlay. Current singular sequence index: `GLOBAL_BATCH_SEQUENCE.md`.
 Date: 2026-05-05
 
 ## Purpose
 
 This document updates the remaining global batch order so Codex selects prompts in the best implementation order regardless of original train grouping. It is an execution map, not execution approval.
+
+For current sequence selection, stale-next-batch reconciliation, IOS26 train position, and no-claim boundaries, read `docs/codex/GLOBAL_BATCH_SEQUENCE.md` first. This file remains supporting evidence and does not override that index, `docs/truth/*`, live source, or current proof.
 
 The legacy `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md` preserves historical global numbering and completed batch evidence. This optimized order governs remaining batch selection when it conflicts with train-block order, while preserving canonical batch IDs and hard dependencies.
 

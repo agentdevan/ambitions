@@ -13,7 +13,7 @@ Modernize the app shell for iOS 26-native tab/control behavior.
 The shell should feel native and not fight system navigation.
 
 ## Dependencies
-Train 1 Green.
+IOS26-T02-B00 Green, or accepted Yellow with owner, no-claim boundary, and post-batch gate.
 
 ## Truth files to read
 - `docs/truth/README.md`

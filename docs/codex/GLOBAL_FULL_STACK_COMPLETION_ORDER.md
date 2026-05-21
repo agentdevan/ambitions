@@ -1,12 +1,14 @@
 # Global Full-Stack Completion Order
 <!-- markdownlint-disable MD013 -->
 
-Status: Active global order overlay for full Ambitions flagship completion.
+Status: Supporting historical/global order overlay. Current singular sequence index: `GLOBAL_BATCH_SEQUENCE.md`.
 Date: 2026-05-05
 
 ## Purpose
 
 This document extends the optimized implementation order to cover every non-user-facing domain required for a true 10/10 FAANG-grade app: repo cleanliness, build framework, architecture, schema, iCloud sync, widgets, Live Activities, App Intents, notifications, monetization, privacy, legal review, security, performance, observability, release engineering, and handoff.
+
+For current sequence selection, stale-next-batch reconciliation, IOS26 train position, and no-claim boundaries, read `docs/codex/GLOBAL_BATCH_SEQUENCE.md` first. This file remains supporting evidence and does not override that index, `docs/truth/*`, live source, or current proof.
 
 Use this file as the highest-priority overlay for remaining work. It supersedes `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` only where it adds or reorders PFC platform/framework/compliance batches, Found Life source-truth batches, rendered visual quality proof insertions, and the active Platform Kernel train. Historical batch identities remain stable.
 

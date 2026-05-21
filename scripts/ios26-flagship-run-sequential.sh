@@ -29,6 +29,7 @@ run_batch IOS26-T00-B03 prompts/batches/IOS26-T00-B03-naming-api-drift-inventory
 run_batch IOS26-T01-B01 prompts/batches/IOS26-T01-B01-toolchain-confirmation.md
 run_batch IOS26-T01-B02 prompts/batches/IOS26-T01-B02-deployment-target-bump.md
 run_batch IOS26-T01-B03 prompts/batches/IOS26-T01-B03-availability-compatibility-cleanup.md
+run_batch IOS26-T02-B00 prompts/batches/IOS26-T02-B00-safe-area-root-invariant.md
 run_batch IOS26-T02-B01 prompts/batches/IOS26-T02-B01-native-ios26-shell.md
 run_batch IOS26-T02-B02 prompts/batches/IOS26-T02-B02-liquid-glass-token-layer.md
 run_batch IOS26-T02-B03 prompts/batches/IOS26-T02-B03-icon-screenshot-foundation.md

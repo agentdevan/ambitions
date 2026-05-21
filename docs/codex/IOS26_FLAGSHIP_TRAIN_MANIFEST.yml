@@ -77,6 +77,7 @@ trains:
     title: Design system and Liquid Glass-era shell modernization
     status: installed_not_run
     batches:
+      - IOS26-T02-B00
       - IOS26-T02-B01
       - IOS26-T02-B02
       - IOS26-T02-B03

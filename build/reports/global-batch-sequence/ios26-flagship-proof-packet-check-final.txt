@@ -1,0 +1,4 @@
+GREEN: IOS26 proof packet shape passed
+proof_roots_declared=17
+proof_roots_existing=0
+missing_roots_yellow=17

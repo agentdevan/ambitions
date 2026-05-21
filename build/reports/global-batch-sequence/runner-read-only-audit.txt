@@ -1,0 +1,8 @@
+Ambitions runner read-only audit summary
+Batch ID: GLOBAL-BATCH-SEQUENCE-TRUTH-INDEX
+Repo root: /Users/devan/Documents/GitHub/ambitions
+Current branch: main
+Current SHA: 21a32580ffccc69f3e752ec03ddc8063198c5e0b
+Prompt file: /Users/devan/Documents/GitHub/ambitions/prompts/inbox/GLOBAL-BATCH-SEQUENCE-TRUTH-INDEX-2026-05-21.md
+Posture: READ_ONLY_AUDIT=1, AUTO_BRANCH=0, AUTO_COMMIT=0, AUTO_PUSH=0
+Side effects: no branch creation, no run directory, no Codex phases, no commit, no push

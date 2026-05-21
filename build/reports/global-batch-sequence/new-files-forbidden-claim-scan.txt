@@ -1,0 +1,4 @@
+Context-only hits:
+docs/codex/GLOBAL_BATCH_SEQUENCE.md:129: obsolete_hierarchy: | 9 | Historical 2.0/3.0/4.0/PXOS/DAV/HPS/FCP/PFC overlays | Older plans and completed waves | Historical/supporting/superseded where conflicts exist | `docs/canon/`, `docs/codex/`, `history/` | Mixed historical | Historical reports only | Use only after current truth and this index | Do not revive old IA, Plan tab, or readiness claims. |
+prompts/batches/IOS26-T02-B00-safe-area-root-invariant.md:56: provider_backend_drift: No required cloud AI/LLM, hosted backend, analytics/tracking SDK, or privacy manifest weakening.
+codex-forbidden-claim-scan: no blocking hits

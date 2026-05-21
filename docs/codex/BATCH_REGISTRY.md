@@ -4,6 +4,8 @@ This file is the operational queue for active Ambitions work.
 It tracks which batch is completed, active, queued, or preserved as historical evidence.
 Registry batch numbers are operational status truth only. Canon batch numbers are semantic roadmap context and must not be renumbered retroactively.
 
+Current sequence reconciliation entrypoint: `docs/codex/GLOBAL_BATCH_SEQUENCE.md`. Where append-only registry sections, older global order overlays, governance generated files, and active `.codex` mirrors disagree, use that document after `docs/truth/*`, live source, current proof, and the live state mirrors. This registry remains operational evidence, not release proof.
+
 Active Ambitions source truth now starts with `docs/truth/*`, live source/project/test evidence, and current proof artifacts. Ambitions 3.0 is preserved completed rebuild history and compatibility context, not the active rebuild source of truth. For historical F-series interpretation only, use the completed 3.0 planning stack after the truth files:
 
 - [../canon/Ambitions_3_0_Source_Of_Truth_Override.md](../canon/Ambitions_3_0_Source_Of_Truth_Override.md)

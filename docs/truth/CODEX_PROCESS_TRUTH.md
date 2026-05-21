@@ -39,6 +39,8 @@ Codex must follow this file for:
 - release reporting
 - final status reports
 
+Current global batch/train sequence reconciliation lives in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`. Use it as the singular operational sequence index after the truth files and live state mirrors; do not use it to infer implementation, validation, release, accessibility, performance, or device proof.
+
 ---
 
 ## 2. Codex Mission

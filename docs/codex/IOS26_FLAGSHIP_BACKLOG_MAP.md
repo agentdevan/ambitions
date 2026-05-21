@@ -48,7 +48,7 @@ Tests: See mapped prompts.
 Proof artifacts: See mapped prompts and manifest proof roots.
 Rollback/failure behavior: Stop on Red; revert only touched files.
 Dependencies: See IOS26_FLAGSHIP_TRAIN_MANIFEST.yml.
-Mapped train/batches: T02-B01, T02-B02, T02-B03
+Mapped train/batches: T02-B00, T02-B01, T02-B02, T02-B03
 
 ## BL-03 — Canonical route/naming closure
 ID: BL-03
@@ -401,4 +401,3 @@ Proof artifacts: See mapped prompts and manifest proof roots.
 Rollback/failure behavior: Stop on Red; revert only touched files.
 Dependencies: See IOS26_FLAGSHIP_TRAIN_MANIFEST.yml.
 Mapped train/batches: T16-B01, T16-B02, T16-B03
-

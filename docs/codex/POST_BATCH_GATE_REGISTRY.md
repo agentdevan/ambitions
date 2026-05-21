@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active continuation gate registry.  
+Status: Active continuation gate registry. Current singular sequence index: `GLOBAL_BATCH_SEQUENCE.md`.
 Date: 2026-05-08  
 Scope: post-batch safety gates for the global train.
 

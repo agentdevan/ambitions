@@ -13,6 +13,7 @@ This train matures Ambitions toward an iOS 26-minimum flagship native iPhone app
 See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 
 ## Batch list
+- IOS26-T02-B00
 - IOS26-T02-B01
 - IOS26-T02-B02
 - IOS26-T02-B03
@@ -34,12 +35,14 @@ Rollback only touched files. Preserve unrelated dirty work.
 
 ## Sequential commands for that train
 ```bash
+scripts/ambitions-codex-train.sh IOS26-T02-B00 prompts/batches/IOS26-T02-B00-safe-area-root-invariant.md
 scripts/ambitions-codex-train.sh IOS26-T02-B01 prompts/batches/IOS26-T02-B01-native-ios26-shell.md
 scripts/ambitions-codex-train.sh IOS26-T02-B02 prompts/batches/IOS26-T02-B02-liquid-glass-token-layer.md
 scripts/ambitions-codex-train.sh IOS26-T02-B03 prompts/batches/IOS26-T02-B03-icon-screenshot-foundation.md
 ```
 
 ## Batch summaries
+- IOS26-T02-B00: `prompts/batches/IOS26-T02-B00-safe-area-root-invariant.md`
 - IOS26-T02-B01: `prompts/batches/IOS26-T02-B01-native-ios26-shell.md`
 - IOS26-T02-B02: `prompts/batches/IOS26-T02-B02-liquid-glass-token-layer.md`
 - IOS26-T02-B03: `prompts/batches/IOS26-T02-B03-icon-screenshot-foundation.md`

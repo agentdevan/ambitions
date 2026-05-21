@@ -115,8 +115,8 @@ def main() -> int:
         return 1
 
     manifest_batches = parse_manifest_batches()
-    if len(manifest_batches) != 51:
-        issues.append(f"expected 51 manifest batches, found {len(manifest_batches)}")
+    if len(manifest_batches) != 52:
+        issues.append(f"expected 52 manifest batches, found {len(manifest_batches)}")
     if len(set(manifest_batches)) != len(manifest_batches):
         issues.append("manifest contains duplicate IOS26 batch ids")
 
