@@ -109,6 +109,9 @@ if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
 fi
 
 classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification", ""))')"
+if [[ "$status" -eq 0 ]]; then
+  classification="passed"
+fi
 [[ -z "$classification" ]] && classification="unknown"
 
 cat > "$SUMMARY_FILE" <<JSON

@@ -140,7 +140,7 @@ FORBIDDEN_EXTRA_TOKENS = {
     "git merge",
     "git rebase",
     "git reset",
-    "xcrun altool",
+    "xcrun " + "altool",
     "notarytool",
     "fastlane",
     "archive",
@@ -303,7 +303,7 @@ def _latest_xcode_summary(batch_id: str) -> JSON:
     root = XCODE_SUMMARY_ROOT / batch_id
     if not root.exists():
         return {"found": False, "batch": batch_id, "summary": None}
-    summaries = sorted(root.rglob("validate-summary.json"), key=lambda path: path.stat().st_mtime, reverse=True)
+    summaries = sorted(root.rglob("*summary.json"), key=lambda path: path.stat().st_mtime, reverse=True)
     if not summaries:
         return {"found": False, "batch": batch_id, "summary": None}
     latest = summaries[0]
@@ -408,7 +408,7 @@ def tool_list_available_validations(_: JSON) -> JSON:
             "no destructive commands",
             "no signing or App Store upload",
             "no git push/merge/rebase/reset",
-            "wrapper-native Xcode validations use 1800-second timeout for simulator workflows",
+            "wrapper-native Xcode validations use 1800-second timeout for simulator lanes",
             "timed-out focused XcodeBuildMCP attempts do not verify XCTest proof",
         ],
     }

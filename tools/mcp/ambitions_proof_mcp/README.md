@@ -39,6 +39,10 @@ Legacy fallback validations:
 
 `build_local` is disabled by default and should run only when an app-source batch explicitly requires the existing `./scripts/build-local.sh` proof. `focused_tests` is retained as a deprecated fallback and requires explicit target/test arguments. Prefer `xcode_validate_focused_test` because it routes through `scripts/ambitions-xcode-validate.sh`, inherits Xcode Build Lab logging/summaries/failure classification, and uses a simulator-safe 1800-second timeout instead of the short generic MCP path.
 
+## Proof Shape
+
+Named validation output includes the command that ran, the exit code, the local log path, the failure category, wrapper timeout metadata, the latest Xcode summary when available, and explicit non-claims. That output is local engineering evidence only; it is not release proof, device proof, accessibility proof, or legal/privacy signoff.
+
 ## Wrapper-Native Xcode Usage
 
 Focused simulator tests should use the wrapper-native validation path:
@@ -80,10 +84,11 @@ If a client-side MCP host still enforces a shorter timeout, run the same validat
 
 ```bash
 python3 tools/mcp/ambitions_proof_mcp/server.py --self-test
+python3 -m unittest tools.mcp.ambitions_proof_mcp.tests.test_server_tools -v
 python3 -m pytest tools/mcp/ambitions_proof_mcp/tests
 ```
 
-Pytest is optional in the Mac VM. If it is unavailable, record Yellow and rely on self-test plus manual JSON-RPC until the test runner is installed through an approved tooling batch.
+Pytest is optional in the Mac VM. If it is unavailable, use the standard-library `unittest` command above for the local server tool coverage and record pytest as not installed, not as a validation failure.
 
 ## Non-Claims
 

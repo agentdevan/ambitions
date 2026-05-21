@@ -6,24 +6,30 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PROMPT_FILES = sorted(
-    [
-        ROOT / "prompts" / "AMB-MOAT-OS-FINAL-INSTALLER-POST24.md",
-        *sorted((ROOT / "prompts" / "ambitions").glob("AMB-CODEX-OS-NO-COST-HARDENING-*.md")),
-        *sorted((ROOT / "prompts" / "batches").glob("AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md")),
-        *sorted(
-            (ROOT / "prompts" / "batches").glob(
-                "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T06-CODEX-OS-GOVERNANCE.md"
-            )
-        ),
+
+
+def discover_prompt_files() -> list[Path]:
+    """Return the active prompt files that must keep runner headers intact."""
+
+    prompt_root = ROOT / "prompts"
+    candidates = [
+        prompt_root / "AMB-MOAT-OS-FINAL-INSTALLER-POST24.md",
+        *sorted((prompt_root / "ambitions").glob("AMB-CODEX-OS-NO-COST-HARDENING-*.md")),
+        *sorted((prompt_root / "batches").glob("AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md")),
+        *sorted((prompt_root / "batches").glob("AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T*.md")),
     ]
-)
+    return sorted({path for path in candidates if path.exists()})
+
+
+PROMPT_FILES = discover_prompt_files()
 
 REQUIRED_HEADER = [
     "<!-- AMBITIONS_RUNNER_REQUIRED: true -->",
     "<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->",
     "<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->",
 ]
+
+
 def parse_batch_id(text: str) -> str:
     lines = text.splitlines()
     for i, line in enumerate(lines):
