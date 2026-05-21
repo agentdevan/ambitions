@@ -20,6 +20,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 PROMPTS_ROOT = ROOT / "prompts/batches"
 RUNNER = "scripts/ambitions-codex-train.sh"
+GLOBAL_SEQUENCE_AUTHORITY = ROOT / "docs/codex/GLOBAL_BATCH_SEQUENCE.md"
+GLOBAL_SEQUENCE_AUTHORITY_JSON = ROOT / "docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
+IOS26_MANIFEST = ROOT / "docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml"
+IOS26_PREFIX = "IOS26-"
 REQUIRED_HEADER = (
     "<!-- AMBITIONS_RUNNER_REQUIRED: true -->",
     "<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->",
@@ -27,6 +31,7 @@ REQUIRED_HEADER = (
 )
 RUNNABLE_CLASSIFICATIONS = {"executable_now", "active", "queued", "active_partial"}
 NON_RUNNABLE_CLASSIFICATIONS = {
+    "historical",
     "historical_complete_do_not_run",
     "absorbed_as_overlay",
     "conditional_trigger_only",
@@ -66,6 +71,14 @@ class Candidate:
 
 def rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
+
+
+def is_ios26_batch(batch_id: str) -> bool:
+    return batch_id.startswith(IOS26_PREFIX)
+
+
+def historical_classification(batch_id: str) -> str | None:
+    return None if is_ios26_batch(batch_id) else "historical"
 
 
 def read_text(path: Path) -> str:
@@ -114,10 +127,12 @@ def queue_classifications() -> dict[str, str]:
 
 
 def queue_classification(batch_id: str) -> str | None:
-    return queue_classifications().get(batch_id)
+    return historical_classification(batch_id) or queue_classifications().get(batch_id)
 
 
 def classification_is_runnable(batch_id: str) -> bool:
+    if historical_classification(batch_id):
+        return False
     classification = queue_classification(batch_id)
     if not classification:
         return True
@@ -141,7 +156,8 @@ def prompt_index(root: Path = ROOT) -> dict[str, PromptInfo]:
         if not path.is_file():
             continue
         runnable, missing = prompt_metadata(path)
-        batch_id = path.stem
+        ios26_match = re.match(r"(IOS26-T\d{2}-B\d{2})\b", path.stem)
+        batch_id = ios26_match.group(1) if ios26_match else path.stem
         # Prefer the shallower prompt if duplicate ids exist, then stable path order.
         current = found.get(batch_id)
         info = PromptInfo(batch_id=batch_id, prompt_path=path, runnable=runnable, missing_metadata=missing)
@@ -357,6 +373,8 @@ def add_candidate(
     priority: int,
     prompts: dict[str, PromptInfo],
 ) -> None:
+    if historical_classification(batch_id):
+        return
     info = valid_prompt(batch_id, prompts)
     if info is None:
         return
@@ -365,6 +383,28 @@ def add_candidate(
     if batch_completed(batch_id):
         return
     candidates.append(Candidate(batch_id=batch_id, prompt_path=info.prompt_path, source=source, reason=reason, priority=priority))
+
+
+def ios26_manifest_ids(path: Path = IOS26_MANIFEST) -> list[str]:
+    text = read_text(path)
+    ids: list[str] = []
+    seen: set[str] = set()
+    for match in re.finditer(r"^\s*-\s+(IOS26-T\d{2}-B\d{2})\s*$", text, re.MULTILINE):
+        batch_id = match.group(1)
+        if batch_id not in seen:
+            ids.append(batch_id)
+            seen.add(batch_id)
+    return ids
+
+
+def ios26_manifest_candidates(prompts: dict[str, PromptInfo]) -> list[Candidate]:
+    candidates: list[Candidate] = []
+    for batch_id in ios26_manifest_ids():
+        before = len(candidates)
+        add_candidate(candidates, batch_id, rel(IOS26_MANIFEST), "IOS26 flagship train manifest", 5, prompts)
+        if len(candidates) > before:
+            break
+    return candidates
 
 
 def codex_os_candidates(prompts: dict[str, PromptInfo]) -> list[Candidate]:
@@ -489,6 +529,8 @@ def nested_prompt_candidates(prompts: dict[str, PromptInfo]) -> list[Candidate]:
     for info in sorted(prompts.values(), key=lambda p: (len(p.prompt_path.parts), rel(p.prompt_path))):
         if not info.runnable:
             continue
+        if historical_classification(info.batch_id):
+            continue
         if batch_completed(info.batch_id):
             continue
         if info.prompt_path.parent == PROMPTS_ROOT:
@@ -525,6 +567,8 @@ def flat_prompt_candidates(prompts: dict[str, PromptInfo]) -> list[Candidate]:
     for info in sorted(prompts.values(), key=lambda p: rel(p.prompt_path)):
         if not info.runnable:
             continue
+        if historical_classification(info.batch_id):
+            continue
         if info.prompt_path.parent != PROMPTS_ROOT:
             continue
         if batch_completed(info.batch_id):
@@ -539,9 +583,10 @@ def resolve(*, ignore_live_state: bool = False, train_filter: str | None = None,
     if legacy_only:
         stages = [legacy_queue_candidates, flat_prompt_candidates]
     elif train_filter:
-        stages = [lambda p: train_manifest_candidates(p, train_filter=train_filter)]
+        stages = [ios26_manifest_candidates, lambda p: train_manifest_candidates(p, train_filter=train_filter)]
     elif ignore_live_state:
         stages = [
+            ios26_manifest_candidates,
             train_manifest_candidates,
             nested_prompt_candidates,
             legacy_queue_candidates,
@@ -549,6 +594,7 @@ def resolve(*, ignore_live_state: bool = False, train_filter: str | None = None,
         ]
     else:
         stages = [
+            ios26_manifest_candidates,
             codex_os_candidates,
             active_state_candidates,
             active_train_candidates,
@@ -574,6 +620,9 @@ def resolve(*, ignore_live_state: bool = False, train_filter: str | None = None,
             "metadata_required": list(REQUIRED_HEADER),
             "direct_codex_execution": "not introduced",
             "hard_red_reasons": ["unable_to_resolve_next_batch"],
+            "authority": rel(GLOBAL_SEQUENCE_AUTHORITY),
+            "authority_json": rel(GLOBAL_SEQUENCE_AUTHORITY_JSON),
+            "historical_policy": "all non-IOS26 batch ids are historical and non-runnable for Codex global train selection",
         }
     selected = sorted(candidates, key=lambda c: (c.priority, rel(c.prompt_path)))[0]
     prompt_rel = rel(selected.prompt_path)
@@ -589,6 +638,10 @@ def resolve(*, ignore_live_state: bool = False, train_filter: str | None = None,
         "metadata_required": list(REQUIRED_HEADER),
         "direct_codex_execution": "not introduced",
         "hard_red_reasons": [],
+        "authority": rel(GLOBAL_SEQUENCE_AUTHORITY),
+        "authority_json": rel(GLOBAL_SEQUENCE_AUTHORITY_JSON),
+        "classification": "ios26_runnable",
+        "historical_policy": "all non-IOS26 batch ids are historical and non-runnable for Codex global train selection",
     }
 
 
@@ -614,12 +667,14 @@ def self_test() -> int:
         bad = "<!-- AMBITIONS_RUNNER_REQUIRED: true -->\n# Missing metadata\n"
         nested = root / "prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md"
         legacy = root / "prompts/batches/LEGACY-FLAT-01.md"
+        ios26 = root / "prompts/batches/IOS26-T00-B01-repo-source-inventory.md"
         invalid = root / "prompts/batches/post-23-truth-audit/AMB-POST23-02-BAD.md"
         report = root / "docs/audits/amb-fe-be-integrated-proof-99-report.md"
         codex_report = root / ".codex/reports/AMB-FE-BE-PREFLIGHT-00.md"
         runner_status = root / ".codex/runs/AMB-FE-BE-CONTRACT-FREEZE-01/20260520T000000Z/runner-status.env"
         nested.write_text(good, encoding="utf-8")
         legacy.write_text(good, encoding="utf-8")
+        ios26.write_text(good, encoding="utf-8")
         invalid.write_text(bad, encoding="utf-8")
         report.parent.mkdir(parents=True)
         report.write_text("# Report\n\nStatus: Green\n\nBatch: AMB-FE-BE-INTEGRATED-PROOF-99\n", encoding="utf-8")
@@ -630,7 +685,10 @@ def self_test() -> int:
         idx = prompt_index(root)
         assert idx["AMB-POST23-01-TRUTH-AUDIT"].runnable
         assert idx["LEGACY-FLAT-01"].runnable
+        assert idx["IOS26-T00-B01"].runnable
         assert not idx["AMB-POST23-02-BAD"].runnable
+        assert not classification_is_runnable("LEGACY-FLAT-01")
+        assert classification_is_runnable("IOS26-T00-B01")
         assert batch_completed("AMB-FE-BE-INTEGRATED-PROOF-99", root=root)
         assert batch_completed("AMB-FE-BE-PREFLIGHT-00", root=root)
         assert batch_completed("AMB-FE-BE-CONTRACT-FREEZE-01", root=root)
@@ -643,6 +701,8 @@ def self_test() -> int:
             assert batch_completed("FE-12-CHROME-CONTRACTS", root=ROOT)
     print("self-test: nested runnable prompt discovered")
     print("self-test: legacy flat prompt discovered")
+    print("self-test: historical non-IOS26 batches rejected")
+    print("self-test: IOS26 prompt id normalized")
     print("self-test: missing runner metadata rejected")
     print("self-test: audit report closeout path discovered")
     print("self-test: codex report closeout path discovered")

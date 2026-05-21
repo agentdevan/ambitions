@@ -1,23 +1,30 @@
 # Global Batch Sequence
 
-Status: Active singular global sequence index  
-Date: 2026-05-21  
-Scope: Repo-governance sequence truth, implementation/proof classification, next-run selection, and no-claim boundaries  
-Authority posture: Supporting operational index. It does not override `docs/truth/*`, live source, current proof logs, or human release gates.
+Status: Active single global batch train authority
+Date: 2026-05-21
+Scope: Repo-governance sequence truth, implementation/proof classification, next-run selection, and no-claim boundaries
+Authority posture: Single Codex batch train authority after `docs/truth/*`, live source, current proof logs, and human release gates.
 
 ## Executive Status
 
-Current repo sequence status: Yellow / reconciled index installed.
+Current repo sequence status: Yellow / single authority installed.
 
-This document is now the first global sequence index to read after `docs/truth/*` and the live state mirrors. It consolidates the older global order overlays, current batch registry, IOS26 flagship train manifest, installed prompts, audit artifacts, and commit evidence into one operational answer.
+This document is now the single global batch train authority to read after `docs/truth/*`. It consolidates older global order overlays, current batch registry evidence, IOS26 flagship train manifest, installed prompts, audit artifacts, and commit evidence into one operational answer.
+
+Codex runner selection rule:
+
+- `IOS26-*` batches are the only runnable global train batches.
+- Every non-`IOS26-*` batch ID is classified as `historical`.
+- Historical batches preserve repository history, prompts, reports, and implementation evidence, but they must not be selected or executed by Codex global train runners.
+- The machine-readable runner authority is `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`.
 
 What is authoritative now:
 
 - Product, implementation, release, Codex process, and historical authority still begin in `docs/truth/*`.
 - Live source, project files, tests, scripts, and current proof artifacts remain stronger than plans or prompts.
-- `.codex/state/active-batch.yml`, `.codex/reports/current-run-state.md`, and `.codex/reports/current-batch-train-state.md` record the current global train mirror: `EFC18 Anti-Ceremony Compiler / Green`, with no next eligible global batch recorded after CS02C-CS06C and CS09C retirement documentation.
+- `.codex/state/active-batch.yml`, `.codex/reports/current-run-state.md`, and `.codex/reports/current-batch-train-state.md` are historical mirrors for non-IOS26 selection; they no longer select the next runnable Codex global batch when they point at non-`IOS26-*` work.
 - `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml` and `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md` govern the installed IOS26 flagship train, which is installed/not run and now includes `IOS26-T02-B00 Safe Area Root Invariant` before `IOS26-T02-B01`.
-- `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` remains useful fallback data, but its top-level `next_eligible_batch` value is stale relative to the live state mirrors and later registry/proof evidence.
+- `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` remains useful historical data only. Its non-IOS26 rows are not runnable global train candidates.
 
 What remains unproven:
 
@@ -35,12 +42,14 @@ Read in this order for sequence decisions:
 4. `.codex/state/active-batch.yml`.
 5. `.codex/reports/current-run-state.md`.
 6. `.codex/reports/current-batch-train-state.md`.
-7. `docs/codex/BATCH_REGISTRY.md`.
-8. `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
-9. `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md`.
-10. `prompts/batches/` and `prompts/trains/`.
-11. Commit history.
-12. Historical/supporting overlays listed below.
+7. `docs/codex/GLOBAL_BATCH_SEQUENCE.md`.
+8. `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`.
+9. `docs/codex/BATCH_REGISTRY.md`.
+10. `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+11. `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md`.
+12. `prompts/batches/` and `prompts/trains/`.
+13. Commit history.
+14. Historical/supporting overlays listed below.
 
 Older supporting overlays now defer to this document for current sequence interpretation:
 
@@ -79,15 +88,15 @@ Major implementation and governance waves:
 
 ## Current Authoritative Batch Sequence
 
-### Current Global Train Mirror
+### Historical Global Train Mirror
 
-The live global train mirror says:
+The pre-IOS26 global train mirror says:
 
 - Current batch: `EFC18 Anti-Ceremony Compiler / Green`.
 - Next eligible batch: none recorded in the mirror after CS02C-CS06C and CS09C retirement documentation.
 - CS02C, CS03C, CS04C, CS05C, CS06C, and CS09C are retired metadata-only records and must not be selected as executable next batches.
 
-Because this mirror is newer than stale queue text and explicitly says no next batch is recorded, this document does not select PK28, PK29, CS02C, or any EFC row as the next global batch.
+Because the single authority now routes runnable work through the IOS26 flagship train, this document does not select PK28, PK29, CS02C, EFC, SA, PK, AOS, LDI, FCP, PFC, SI, DAV, PXOS, AMB, or other non-IOS26 rows as next global batches. They are historical unless a future human-approved batch creates a new scoped IOS26-compatible repair.
 
 ### IOS26 Flagship Train
 
@@ -105,6 +114,12 @@ The IOS26 flagship train is installed/not run and runner-required. The cold-star
 10. `IOS26-T02-B03` Icon and screenshot foundation
 11. Continue through Train 03-16 as listed in `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml` and `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md`.
 
+Current runnable next batch:
+
+```bash
+scripts/ambitions-codex-train.sh IOS26-T00-B01 prompts/batches/IOS26-T00-B01-repo-source-inventory.md
+```
+
 Stop rules:
 
 - Stop on Red.
@@ -119,21 +134,21 @@ Stop rules:
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0 | Truth files | Active authority layer | Active | `docs/truth/*` | No direct app change | N/A | Read first | Truth does not prove implementation/release readiness. |
 | 1 | Current source | Native app/source state | Implemented in source / unproven release | `Native/`, `Sources/`, `AppUI/`, `project.yml`, `Package.swift` | Yes | Current logs required per batch | Inspect before claiming | Source presence is not build/test/release proof. |
-| 2 | Active global mirror | EFC18 closeout mirror | Docs/proof only; no next global batch recorded | `.codex/state/active-batch.yml`, `.codex/reports/current-run-state.md`, `.codex/reports/current-batch-train-state.md` | No | `docs/audits/efc18-batch-closeout-report.md` | Manual sequence decision or run a scoped next-batch resolver repair | No global completion claim. |
-| 3 | PK00-PK41 | Platform Kernel | Source-changing/proof mixed; canonical queue marks PK28-PK41 complete/do-not-run | `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`, `docs/audits/pk*-batch-closeout-report.md`, `.codex/state/global-train-attempt-ledger.md` | Yes for many PK rows | `docs/audits/pk*-batch-closeout-report.md` | Do not rerun completed PK rows | PK does not prove backend completion, sync, migration, performance, or release readiness. |
-| 4 | SA07-SA32 | Source Atlas | Source-changing/proof mixed; canonical queue evidence says complete/do-not-run | `prompts/batches/SA*.md`, `docs/audits/sa*-batch-closeout-report.md` | Yes for many SA rows | `docs/audits/sa*-batch-closeout-report.md` | Do not rerun without fresh conflict proof | Source Atlas does not prove public source freshness or release readiness. |
-| 5 | EFC01-EFC18 | Flagship proof closure overlay | Docs/proof overlay; absorbed/do-not-run after EFC18 | `prompts/batches/EFC*.md`, `docs/audits/efc*-batch-closeout-report.md` | Usually no | `docs/audits/efc*-batch-closeout-report.md` | Preserve as owner-batch proof obligations | Overlay proof does not equal implementation proof. |
-| 6 | IOS26-FLAGSHIP | iOS 26 flagship train | Installed as prompt/train/tooling only | `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`, `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md`, `prompts/batches/IOS26-*.md` | Not yet from train execution | `build/reports/ios26-*` when run | Run `IOS26-T00-B01` first if starting IOS26 | Installed prompt system is not migration proof. |
+| 2 | Active global mirror | EFC18 closeout mirror | Historical docs/proof mirror | `.codex/state/active-batch.yml`, `.codex/reports/current-run-state.md`, `.codex/reports/current-batch-train-state.md` | No | `docs/audits/efc18-batch-closeout-report.md` | Preserve as history; do not select as runnable | No global completion claim. |
+| 3 | PK00-PK41 | Platform Kernel | Historical; source-changing/proof mixed | `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`, `docs/audits/pk*-batch-closeout-report.md`, `.codex/state/global-train-attempt-ledger.md` | Yes for many PK rows | `docs/audits/pk*-batch-closeout-report.md` | Do not rerun as global train | PK does not prove backend completion, sync, migration, performance, or release readiness. |
+| 4 | SA07-SA32 | Source Atlas | Historical; source-changing/proof mixed | `prompts/batches/SA*.md`, `docs/audits/sa*-batch-closeout-report.md` | Yes for many SA rows | `docs/audits/sa*-batch-closeout-report.md` | Do not rerun as global train | Source Atlas does not prove public source freshness or release readiness. |
+| 5 | EFC01-EFC18 | Flagship proof closure overlay | Historical docs/proof overlay | `prompts/batches/EFC*.md`, `docs/audits/efc*-batch-closeout-report.md` | Usually no | `docs/audits/efc*-batch-closeout-report.md` | Preserve as owner-batch proof obligations | Overlay proof does not equal implementation proof. |
+| 6 | IOS26-FLAGSHIP | iOS 26 flagship train | Installed as prompt/train/tooling; runnable forward sequence | `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`, `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md`, `prompts/batches/IOS26-*.md`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json` | Not yet from train execution | `build/reports/ios26-*` when run | Run `IOS26-T00-B01` first | Installed prompt system is not migration proof. |
 | 7 | IOS26-T02-B00 | Safe Area Root Invariant | Installed as prompt/train only | `prompts/batches/IOS26-T02-B00-safe-area-root-invariant.md` | Not yet | `build/reports/ios26-shell/safe-area-root-invariant.md` when run | Run only after Train 1 / T01-B03 is Green or accepted Yellow | No safe-area, screenshot, visual, device, or accessibility claim yet. |
-| 8 | Reset master T00-T18 | Green flagship reset train | Recent docs/source/proof mixed | `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T*.md`, commits through `21a32580` | Mixed | Existing batch reports | Treat as current evidence only where source/logs prove it | Does not prove global completion or release readiness. |
-| 9 | Historical 2.0/3.0/4.0/PXOS/DAV/HPS/FCP/PFC overlays | Older plans and completed waves | Historical/supporting/superseded where conflicts exist | `docs/canon/`, `docs/codex/`, `history/` | Mixed historical | Historical reports only | Use only after current truth and this index | Do not revive old IA, Plan tab, or readiness claims. |
+| 8 | Reset master T00-T18 | Green flagship reset train | Historical; recent docs/source/proof mixed | `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T*.md`, commits through `21a32580` | Mixed | Existing batch reports | Treat as evidence only where source/logs prove it | Does not prove global completion or release readiness. |
+| 9 | Historical 2.0/3.0/4.0/PXOS/DAV/HPS/FCP/PFC/SI/AMB/DAV overlays | Older plans and completed waves | Historical/supporting/superseded where conflicts exist | `docs/canon/`, `docs/codex/`, `history/`, `prompts/batches/` | Mixed historical | Historical reports only | Do not select as runnable global train | Do not revive old IA, Plan tab, or readiness claims. |
 | 10 | This batch | GLOBAL-BATCH-SEQUENCE-TRUTH-INDEX | Truth-indexing docs/audit batch | `docs/codex/GLOBAL_BATCH_SEQUENCE.md`, `build/reports/global-batch-sequence/` | No app source | `build/reports/global-batch-sequence/` | Commit/push when accepted | Does not implement app behavior. |
 
 ## Supersession And Quarantine
 
-Superseded for current sequence selection:
+Historical for current sequence selection:
 
-- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md` is a supporting overlay, not the singular current sequence.
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md` is a supporting historical overlay, not the singular current sequence.
 - `docs/codex/GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` is a supporting historical optimization record.
 - `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md` preserves historical numbering and old planned scope.
 - `docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md` is supporting sequence context.
@@ -150,22 +165,7 @@ No historical document was deleted in this pass.
 
 ## Next-Run Recommendation
 
-There is no single global next implementation batch recorded in the live global mirror.
-
-Recommended next action for global train governance:
-
-```bash
-scripts/ambitions-codex-train.sh GLOBAL-NEXT-SEQUENCE-RESOLVER prompts/inbox/GLOBAL-BATCH-SEQUENCE-TRUTH-INDEX-2026-05-21.md
-```
-
-Use a new scoped resolver prompt if the goal is to select the next non-IOS26 global batch after EFC18. Preconditions:
-
-- Current worktree clean or explicitly classified.
-- `docs/truth/*` read.
-- `.codex/state/active-batch.yml`, current run mirrors, and `docs/codex/GLOBAL_BATCH_SEQUENCE.md` read.
-- Stale PK28/PK29 references classified before any next-batch claim.
-
-Recommended next action for IOS26 train execution:
+The next runnable global batch is the first unrun IOS26 train batch:
 
 ```bash
 scripts/ambitions-codex-train.sh IOS26-T00-B01 prompts/batches/IOS26-T00-B01-repo-source-inventory.md
@@ -173,7 +173,9 @@ scripts/ambitions-codex-train.sh IOS26-T00-B01 prompts/batches/IOS26-T00-B01-rep
 
 Preconditions:
 
-- Current worktree clean or explicitly allowed by the runner.
+- Current worktree clean or explicitly classified.
+- `docs/truth/*` read.
+- `docs/codex/GLOBAL_BATCH_SEQUENCE.md` and `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json` read.
 - IOS26 preflight passes.
 - Train 0 baseline artifacts can be written under `build/reports/ios26-baseline/`.
 

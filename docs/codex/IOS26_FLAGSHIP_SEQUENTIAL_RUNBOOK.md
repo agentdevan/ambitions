@@ -2,6 +2,8 @@
 
 Status: installed_not_run. Required runner command: `scripts/ambitions-codex-train.sh <BATCH_ID> <PROMPT_FILE>`.
 
+This is the current runnable global batch train under `docs/codex/GLOBAL_BATCH_SEQUENCE.md` and `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`. Non-`IOS26-*` batch IDs are historical for Codex global train selection.
+
 Run batches in Train 0 through Train 16 order. Stop on Red. Continue on Green. Continue on Yellow only with explicit reason, owner, no-claim boundary, and post-batch gate. Never skip Train 0. Do not run source-changing trains until Train 0 baseline artifacts exist. Do not run iOS 26 target bump until toolchain proof exists. Do not run release trains until build/test/accessibility/performance/privacy proof exists. Never treat docs-only installation as app implementation.
 
 ## Installed Tooling

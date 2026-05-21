@@ -4,7 +4,8 @@ set -Eeuo pipefail
 MODE="${1:---once}"
 LOCK_FILE=".codex/state/global-train.lock"
 LEDGER=".codex/state/global-train-attempt-ledger.md"
-QUEUE="docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
+GLOBAL_SEQUENCE_AUTHORITY="docs/codex/GLOBAL_BATCH_SEQUENCE.md"
+GLOBAL_SEQUENCE_AUTHORITY_JSON="docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
 RUNNER="scripts/ambitions-codex-train.sh"
 AUDIT="scripts/ambitions-prompt-audit.sh"
 PREFLIGHT="scripts/ambitions-process-preflight.sh"
@@ -41,7 +42,8 @@ require_base_files() {
   [[ -x "$PREFLIGHT" ]] || die "$PREFLIGHT is missing or not executable"
   [[ -f "$FRONTEND_AUTHORITY_CHECK" ]] || die "$FRONTEND_AUTHORITY_CHECK is missing"
   [[ -f "$RESOLVER" ]] || die "$RESOLVER is missing"
-  [[ -f "$QUEUE" ]] || die "$QUEUE is missing"
+  [[ -f "$GLOBAL_SEQUENCE_AUTHORITY" ]] || die "$GLOBAL_SEQUENCE_AUTHORITY is missing"
+  [[ -f "$GLOBAL_SEQUENCE_AUTHORITY_JSON" ]] || die "$GLOBAL_SEQUENCE_AUTHORITY_JSON is missing"
   [[ -f "$LEDGER" ]] || die "$LEDGER is missing"
 }
 
@@ -152,6 +154,8 @@ print_status() {
   tracked_dirty || true
   echo
   echo "Frontend authority hook: $FRONTEND_AUTHORITY_CHECK"
+  echo "Global sequence authority: $GLOBAL_SEQUENCE_AUTHORITY"
+  echo "Historical policy: non-IOS26 batches are historical and non-runnable"
   echo
   echo "Process conflicts:"
   active_conflicts || true
@@ -162,7 +166,7 @@ print_status() {
 
 print_next() {
   require_base_files
-  python3 -m json.tool "$QUEUE" >/dev/null
+  python3 -m json.tool "$GLOBAL_SEQUENCE_AUTHORITY_JSON" >/dev/null
   if [[ -f "$CODEX_OS_NEXT_ACTION" ]]; then
     local codex_os_decision
     codex_os_decision="$(python3 - "$CODEX_OS_NEXT_ACTION" <<'PY'
@@ -208,7 +212,7 @@ run_frontend_authority_hook() {
 
 run_once() {
   require_base_files
-  python3 -m json.tool "$QUEUE" >/dev/null
+  python3 -m json.tool "$GLOBAL_SEQUENCE_AUTHORITY_JSON" >/dev/null
   audit_prompts
   require_no_process_conflicts
   require_clean_tracked_worktree

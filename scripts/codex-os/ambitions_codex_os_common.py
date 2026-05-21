@@ -5,6 +5,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import hashlib
 from collections import Counter
 from datetime import datetime, timezone
@@ -405,6 +406,11 @@ def queue_entries() -> list[dict[str, Any]]:
 
 
 def prompt_file_for_batch(batch_id: str) -> str:
+    if batch_id.startswith("IOS26-"):
+        prompts_root = REPO_ROOT / "prompts" / "batches"
+        for candidate in sorted(prompts_root.glob(f"{batch_id}*.md")):
+            if candidate.is_file():
+                return candidate.relative_to(REPO_ROOT).as_posix()
     candidates = [
         REPO_ROOT / "prompts" / "batches" / f"{batch_id}.md",
         REPO_ROOT / "prompts" / "batches" / f"{batch_id}-FINALIZE-01.md",
@@ -437,22 +443,36 @@ RUNNABLE_QUEUE_CLASSIFICATIONS = {"executable_now", "active", "queued", "active_
 
 
 def next_eligible_queue_batch() -> str:
+    resolver = REPO_ROOT / "scripts" / "ambitions-next-batch-resolver.py"
+    if resolver.exists():
+        try:
+            output = subprocess.check_output(
+                [sys.executable, str(resolver), "--field", "batch_id"],
+                cwd=REPO_ROOT,
+                text=True,
+                stderr=subprocess.DEVNULL,
+            ).strip()
+        except Exception:
+            output = ""
+        if output.startswith("IOS26-"):
+            return output
     state = parse_active_batch_state()
     current = state.get("current", {})
     if isinstance(current, dict):
         candidate = current.get("next_eligible_batch")
         if isinstance(candidate, str) and candidate:
             candidate_id = batch_id_from_label(candidate)
-            entry = queue_entry_for_batch(candidate_id)
-            if str(entry.get("classification", "")) in RUNNABLE_QUEUE_CLASSIFICATIONS:
-                return candidate_id
+            if candidate_id.startswith("IOS26-"):
+                entry = queue_entry_for_batch(candidate_id)
+                if str(entry.get("classification", "")) in RUNNABLE_QUEUE_CLASSIFICATIONS:
+                    return candidate_id
 
     queue = queue_entries()
     for item in queue:
         classification = str(item.get("classification", ""))
         if classification in RUNNABLE_QUEUE_CLASSIFICATIONS:
             batch_id = str(item.get("id", ""))
-            if batch_id:
+            if batch_id.startswith("IOS26-"):
                 return batch_id
     return ""
 

@@ -34,6 +34,9 @@ AUTO_ROLLBACK_ON_RED="${AUTO_ROLLBACK_ON_RED:-0}"
 STRUCTURED_OUTPUT="${STRUCTURED_OUTPUT:-0}"
 OUTPUT_SCHEMA="${OUTPUT_SCHEMA:-.codex/schemas/ambitions-batch-result.schema.json}"
 OUTPUT_REPORT_DIR="${OUTPUT_REPORT_DIR:-build/reports/codex-runs}"
+GLOBAL_SEQUENCE_AUTHORITY="docs/codex/GLOBAL_BATCH_SEQUENCE.md"
+GLOBAL_SEQUENCE_AUTHORITY_JSON="docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
+ALLOW_HISTORICAL_BATCH="${ALLOW_HISTORICAL_BATCH:-0}"
 
 usage() {
   cat <<'EOF'
@@ -160,6 +163,14 @@ START_SHA="$(git rev-parse HEAD)"
 prompt_has_runner_metadata "$PROMPT_FILE" \
   || die "prompt file is missing required runner metadata: $PROMPT_FILE"
 
+batch_is_ios26() {
+  [[ "$BATCH_ID" == IOS26-* || "$BATCH_ID" == "SELF-CHECK" ]]
+}
+
+if ! batch_is_ios26 && [[ "$ALLOW_HISTORICAL_BATCH" != "1" ]]; then
+  die "batch $BATCH_ID is historical per $GLOBAL_SEQUENCE_AUTHORITY; Codex global train runners may execute only IOS26-* batches. Set ALLOW_HISTORICAL_BATCH=1 only for explicit human-approved historical replay."
+fi
+
 print_read_only_audit_summary() {
   cat <<EOF
 Ambitions runner read-only audit summary
@@ -168,6 +179,8 @@ Repo root: $REPO_ROOT
 Current branch: $START_BRANCH
 Current SHA: $START_SHA
 Prompt file: $PROMPT_FILE
+Global sequence authority: $GLOBAL_SEQUENCE_AUTHORITY
+Global sequence authority JSON: $GLOBAL_SEQUENCE_AUTHORITY_JSON
 Posture: READ_ONLY_AUDIT=1, AUTO_BRANCH=0, AUTO_COMMIT=0, AUTO_PUSH=0
 Side effects: no branch creation, no run directory, no Codex phases, no commit, no push
 EOF

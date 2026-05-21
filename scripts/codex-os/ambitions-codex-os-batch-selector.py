@@ -30,7 +30,7 @@ def main() -> int:
     queue_entry = queue_entry_for_batch(selected_batch) if selected_batch else {}
     prompt_file = str(selection.get("prompt_file", "")) or prompt_file_for_batch(selected_batch)
     lane = str(selection.get("lane", "unknown"))
-    classification = str(queue_entry.get("classification", "unknown"))
+    classification = "ios26_runnable" if selected_batch.startswith("IOS26-") else str(queue_entry.get("classification", "unknown"))
     reason = ""
     blockers: list[str] = []
 
@@ -60,7 +60,7 @@ def main() -> int:
     ]
 
     command = ""
-    if selected_batch and prompt_file and classification in {"executable_now", "active", "queued", "active_partial"}:
+    if selected_batch and prompt_file and classification in {"ios26_runnable", "executable_now", "active", "queued", "active_partial"}:
         command = f"make authorized-batch BATCH={selected_batch} PROMPT={prompt_file}"
 
     data = {

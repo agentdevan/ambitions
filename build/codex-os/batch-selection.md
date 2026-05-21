@@ -1,15 +1,15 @@
 # Codex OS Batch Selection
 
-Generated: 2026-05-19T18:25:49-04:00
+Generated: 2026-05-20T22:43:38-04:00
 
-Selected batch: none
-Prompt file: none
-Lane: unknown
-Queue classification: unknown
+Selected batch: IOS26-T00-B01
+Prompt file: prompts/batches/IOS26-T00-B01-repo-source-inventory.md
+Lane: ios
+Queue classification: ios26_runnable
 
 ## Reason
 
-No executable batch was found in the live queue; any remaining handoff is conditional-trigger-only or otherwise blocked.
+Selected the safest live batch from current state: IOS26-T00-B01.
 
 ## Blockers
 
@@ -27,4 +27,4 @@ No executable batch was found in the live queue; any remaining handoff is condit
 
 ## Run Command
 
-No executable batch is available.
+make authorized-batch BATCH=IOS26-T00-B01 PROMPT=prompts/batches/IOS26-T00-B01-repo-source-inventory.md

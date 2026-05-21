@@ -1,24 +1,16 @@
 #!/usr/bin/env python3
-"""Check Ambitions batch state mirrors for obvious stale-run drift.
-
-This script intentionally uses only the Python standard library and conservative
-text parsing so it can run in local Codex/runner contexts without extra deps.
-It is not a replacement for the queue snapshot; it catches the specific class of
-failure where commits advance but compact mirrors still point at old batches.
-"""
+"""Check Ambitions train mirrors against the single global sequence authority."""
 from __future__ import annotations
 
 import json
 import re
-import sys
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-
 ACTIVE_BATCH = ROOT / ".codex/state/active-batch.yml"
-CURRENT_RUN = ROOT / ".codex/reports/current-run-state.md"
-CURRENT_TRAIN = ROOT / ".codex/reports/current-batch-train-state.md"
-QUEUE_JSON = ROOT / "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
+AUTHORITY = ROOT / "docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
+RESOLVER = ROOT / "scripts/ambitions-next-batch-resolver.py"
 
 
 def read(path: Path) -> str:
@@ -33,73 +25,40 @@ def active_value(text: str, key: str) -> str | None:
     return match.group(1).strip() if match else None
 
 
-def current_batch(text: str) -> str | None:
-    match = re.search(r"^Current batch:\s*(.+?)\s*/\s*(Green|Accepted Yellow|Yellow|Red|GREEN|YELLOW|RED)\.?\s*$", text, re.MULTILINE)
-    return match.group(1).strip() if match else None
-
-
-def next_batch(text: str) -> str | None:
-    patterns = [
-        r"^Next eligible batch:\s*(.+?)\.?\s*$",
-        r"^Next recommended implementation pass:\s*(.+?)\.?\s*$",
-        r"^Next eligible non-UI platform batch:\s*(.+?)\.?\s*$",
-    ]
-    for pattern in patterns:
-        match = re.search(pattern, text, re.MULTILINE)
-        if match:
-            return match.group(1).strip()
-    return None
-
-
-def queue_classifications() -> dict[str, str]:
-    data = json.loads(read(QUEUE_JSON))
-    return {entry["id"]: entry["classification"] for entry in data.get("batches", [])}
+def resolver_batch() -> str:
+    return subprocess.check_output(
+        ["python3", str(RESOLVER), "--field", "batch_id"],
+        cwd=ROOT,
+        text=True,
+    ).strip()
 
 
 def main() -> int:
+    authority = json.loads(read(AUTHORITY))
     active = read(ACTIVE_BATCH)
-    run = read(CURRENT_RUN)
-    train = read(CURRENT_TRAIN)
-    classifications = queue_classifications()
-
-    expected_current = active_value(active, "batch")
-    expected_next = active_value(active, "next_eligible_batch")
-    run_current = current_batch(run)
-    train_current = current_batch(train)
-    run_next = next_batch(run)
-    train_next = next_batch(train)
-
+    current = active_value(active, "batch") or ""
+    next_from_state = active_value(active, "next_eligible_batch") or ""
+    selected = resolver_batch()
     failures: list[str] = []
 
-    if not expected_current:
-        failures.append("active-batch.yml missing current.batch")
-    if not expected_next:
-        failures.append("active-batch.yml missing current.next_eligible_batch")
-
-    for label, value in [("current-run-state current", run_current), ("current-batch-train-state current", train_current)]:
-        if expected_current and value != expected_current:
-            failures.append(f"{label} is {value!r}; expected {expected_current!r}")
-
-    for label, value in [("current-run-state next", run_next), ("current-batch-train-state next", train_next)]:
-        if expected_next and value != expected_next:
-            failures.append(f"{label} is {value!r}; expected {expected_next!r}")
-
-    next_id = expected_next.split()[0] if expected_next else None
-    current_id = expected_current.split()[0] if expected_current else None
-
-    if next_id and classifications.get(next_id) != "executable_now":
-        failures.append(f"queue marks {next_id} as {classifications.get(next_id)!r}; expected 'executable_now'")
-
-    if current_id and classifications.get(current_id) != "historical_complete_do_not_run":
-        failures.append(f"queue marks {current_id} as {classifications.get(current_id)!r}; expected 'historical_complete_do_not_run'")
+    if authority.get("historical_batch_policy", {}).get("classification") != "historical":
+        failures.append("authority JSON does not classify non-IOS26 batches as historical")
+    if not selected:
+        failures.append("resolver did not select an IOS26 batch")
+    elif not selected.startswith("IOS26-"):
+        failures.append(f"resolver selected non-IOS26 historical batch {selected}")
 
     if failures:
-        print("RED: stale state mirrors detected")
+        print("RED: stale state authority check failed")
         for failure in failures:
             print(f"- {failure}")
         return 1
 
-    print(f"GREEN: state mirrors agree: current={expected_current}; next={expected_next}")
+    print(
+        "GREEN: state mirrors are historical for non-IOS26 selection; "
+        f"current_mirror={current or 'none'}; next_mirror={next_from_state or 'none'}; "
+        f"authoritative_next={selected}"
+    )
     return 0
 
 

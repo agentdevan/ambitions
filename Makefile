@@ -264,7 +264,8 @@ throughput-classify:
 
 throughput-prep:
 	@echo "Throughput prep scaffold dry run"
-	@python3 scripts/ambitions-batch-prep-scaffold.py --from-queue docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json --start-at PK16 --limit 10 --output-dir docs/codex/batch-prep --dry-run
+	@echo "Non-IOS26 queue prep is historical under docs/codex/GLOBAL_BATCH_SEQUENCE.md"
+	@python3 scripts/ambitions-next-batch-resolver.py
 
 throughput-known-yellow:
 	@echo "Throughput known-yellow scan"

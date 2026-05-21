@@ -1,41 +1,39 @@
 #!/usr/bin/env python3
-"""Guard Speed Train batch selection against stale or unsafe queue state."""
+"""Guard Speed Train selection against historical non-IOS26 batches."""
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-QUEUE = ROOT / "docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
-ACTIVE = ROOT / ".codex/state/active-batch.yml"
+AUTHORITY = ROOT / "docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
+RESOLVER = ROOT / "scripts/ambitions-next-batch-resolver.py"
 
 
-def read_active_next() -> str | None:
-    for line in ACTIVE.read_text(encoding="utf-8").splitlines():
-        stripped = line.strip()
-        if stripped.startswith("next_eligible_batch:"):
-            return stripped.split(":", 1)[1].strip().strip('"')
-    return None
+def resolver_batch() -> str:
+    return subprocess.check_output(
+        ["python3", str(RESOLVER), "--field", "batch_id"],
+        cwd=ROOT,
+        text=True,
+    ).strip()
 
 
 def main(argv: list[str]) -> int:
     expected_batch = argv[0] if argv else None
-    data = json.loads(QUEUE.read_text(encoding="utf-8"))
-    executable_now = [entry for entry in data.get("batches", []) if entry.get("classification") == "executable_now"]
-
+    authority = json.loads(AUTHORITY.read_text(encoding="utf-8"))
+    batch = resolver_batch()
     failures: list[str] = []
-    if len(executable_now) != 1:
-        failures.append(f"expected exactly one executable_now batch, found {len(executable_now)}")
 
-    queue_batch = executable_now[0].get("id") if executable_now else None
-    active_next = read_active_next()
-    active_next_id = active_next.split()[0] if active_next else None
-
-    if expected_batch and queue_batch != expected_batch:
-        failures.append(f"requested {expected_batch}, but queue executable_now is {queue_batch}")
-    if queue_batch and active_next_id != queue_batch:
-        failures.append(f"active next batch {active_next_id} does not match queue executable_now {queue_batch}")
+    if not batch:
+        failures.append("resolver returned no runnable IOS26 batch")
+    if batch and not batch.startswith("IOS26-"):
+        failures.append(f"resolver selected non-IOS26 historical batch {batch}")
+    if expected_batch and batch != expected_batch:
+        failures.append(f"requested {expected_batch}, but resolver selected {batch}")
+    if authority.get("historical_batch_policy", {}).get("classification") != "historical":
+        failures.append("authority JSON no longer classifies non-IOS26 batches as historical")
 
     if failures:
         print("RED: speed queue guard failed")
@@ -43,7 +41,7 @@ def main(argv: list[str]) -> int:
             print(f"- {failure}")
         return 1
 
-    print(f"GREEN: speed queue guard passed; executable_now={queue_batch}")
+    print(f"GREEN: speed queue guard passed; next_ios26={batch}; non_ios26=historical")
     return 0
 
 

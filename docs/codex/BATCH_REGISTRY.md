@@ -4,7 +4,7 @@ This file is the operational queue for active Ambitions work.
 It tracks which batch is completed, active, queued, or preserved as historical evidence.
 Registry batch numbers are operational status truth only. Canon batch numbers are semantic roadmap context and must not be renumbered retroactively.
 
-Current sequence reconciliation entrypoint: `docs/codex/GLOBAL_BATCH_SEQUENCE.md`. Where append-only registry sections, older global order overlays, governance generated files, and active `.codex` mirrors disagree, use that document after `docs/truth/*`, live source, current proof, and the live state mirrors. This registry remains operational evidence, not release proof.
+Current sequence authority: `docs/codex/GLOBAL_BATCH_SEQUENCE.md`, with machine-readable runner policy in `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`. Where append-only registry sections, older global order overlays, governance generated files, and `.codex` mirrors disagree, use that authority after `docs/truth/*`, live source, and current proof. Non-`IOS26-*` batch IDs are historical for Codex global train selection. This registry remains operational evidence, not release proof.
 
 Active Ambitions source truth now starts with `docs/truth/*`, live source/project/test evidence, and current proof artifacts. Ambitions 3.0 is preserved completed rebuild history and compatibility context, not the active rebuild source of truth. For historical F-series interpretation only, use the completed 3.0 planning stack after the truth files:
 
@@ -26,9 +26,9 @@ Supporting installer package:
 
 - AMB-FE-BE implementation train docs and prompts are installed under `docs/codex/batch-trains/amb-fe-be/` and `prompts/batches/amb-fe-be/`. They are discoverability assets only and do not alter the active queue or imply implementation proof.
 
-## Ambitions 4.0 Execution Program Status
+## Ambitions 4.0 Historical Program Status
 
-Ambitions 4.0 remains an active post-3.0 planning/execution overlay where current queue files still route through it, not a shipped product version and not a replacement for `docs/truth/*`. It does not claim release readiness, App Store readiness, TestFlight readiness, physical-device proof, platform proof, public accessibility proof, PXOS implementation, Signature Interface implementation, Product Depth implementation, or AmbitionsOS implementation.
+Ambitions 4.0 remains preserved post-3.0 planning/execution history, not the current runnable Codex global train and not a shipped product version or replacement for `docs/truth/*`. Runnable global train selection now routes through the IOS26 sequence in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`. This section does not claim release readiness, App Store readiness, TestFlight readiness, physical-device proof, platform proof, public accessibility proof, PXOS implementation, Signature Interface implementation, Product Depth implementation, or AmbitionsOS implementation.
 
 Current 4.0 status:
 

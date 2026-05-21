@@ -38,7 +38,7 @@ docs/truth/RELEASE_TRUTH.md
 
 A feature is not implemented because it appears in a plan, canon document, batch document, audit, handoff, prompt, skill, README, or future roadmap. A feature is implementation truth only when live repo source/project/test/script evidence supports that state.
 
-Current global batch/train sequence reconciliation lives in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`. That document is an operational index only; it does not prove implementation beyond live source, project, test, script, and current proof evidence.
+Current global batch/train sequence authority lives in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`, with machine-readable runner policy in `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`. It makes the IOS26 train the runnable forward sequence and classifies non-`IOS26-*` batch IDs as historical for Codex global train selection. It does not prove implementation beyond live source, project, test, script, and current proof evidence.
 
 ---
 

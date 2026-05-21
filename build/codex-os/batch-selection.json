@@ -1,8 +1,8 @@
 {
   "blockers": [],
-  "classification": "unknown",
-  "generated_at": "2026-05-19T18:25:49-04:00",
-  "lane": "unknown",
+  "classification": "ios26_runnable",
+  "generated_at": "2026-05-20T22:43:38-04:00",
+  "lane": "ios",
   "next_action_command": "",
   "postflight_commands": [
     "python3 scripts/governance/ambitions-repo-doctor.py",
@@ -12,8 +12,8 @@
     "python3 scripts/governance/ambitions-repo-doctor.py",
     "python3 scripts/codex-os/ambitions-codex-os-sync-governance.py"
   ],
-  "prompt_file": "",
-  "reason": "No executable batch was found in the live queue; any remaining handoff is conditional-trigger-only or otherwise blocked.",
-  "run_command": "",
-  "selected_batch": ""
+  "prompt_file": "prompts/batches/IOS26-T00-B01-repo-source-inventory.md",
+  "reason": "Selected the safest live batch from current state: IOS26-T00-B01.",
+  "run_command": "make authorized-batch BATCH=IOS26-T00-B01 PROMPT=prompts/batches/IOS26-T00-B01-repo-source-inventory.md",
+  "selected_batch": "IOS26-T00-B01"
 }

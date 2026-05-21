@@ -8,7 +8,9 @@ USAGE="Usage:
   bash scripts/ambitions-throughput-plan.sh --classify --limit 20
   bash scripts/ambitions-throughput-plan.sh --known-yellow"
 
-QUEUE_FILE="docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
+AUTHORITY="docs/codex/GLOBAL_BATCH_SEQUENCE.md"
+AUTHORITY_JSON="docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
+RESOLVER="scripts/ambitions-next-batch-resolver.py"
 
 limit=20
 mode=""
@@ -20,7 +22,7 @@ $USAGE
 This script provides read-only, local throughput planning status.
 - status: local state + required runner preflight commands.
 - next: print next eligible batch from live queue/train lane.
-- classify: print batch->lane table for the first N entries.
+- classify: print the single-authority lane policy.
 - known-yellow: print known-yellow scan output.
 EOF
 }
@@ -83,7 +85,11 @@ case "$mode" in
     make autonomous-train-next
     ;;
   classify)
-    scripts/ambitions-batch-lane-classifier.py --queue "$QUEUE_FILE" --limit "$limit"
+    python3 -m json.tool "$AUTHORITY_JSON" >/dev/null
+    echo "Authority: $AUTHORITY"
+    echo "Historical policy: all non-IOS26 batches are historical and non-runnable"
+    echo "--"
+    python3 "$RESOLVER"
     ;;
   known-yellow)
     bash scripts/ambitions-known-yellow-scan.sh

@@ -12,7 +12,7 @@ LANE_POLICY="scripts/ambitions-speed-lane-policy.py"
 CLAIM_SCAN="scripts/ambitions-unsupported-claim-scan.py"
 PROMPT_AUDIT="scripts/ambitions-prompt-audit.sh"
 PROCESS_PREFLIGHT="scripts/ambitions-process-preflight.sh"
-QUEUE="docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json"
+AUTHORITY="docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
 
 MODE="${1:---status}"
 MAX_BATCHES="${MAX_BATCHES:-25}"
@@ -62,7 +62,7 @@ require_base_files() {
   require_file "$CLAIM_SCAN"
   require_file "$PROMPT_AUDIT"
   require_file "$PROCESS_PREFLIGHT"
-  require_file "$QUEUE"
+  require_file "$AUTHORITY"
 }
 
 next_batch() {

@@ -39,7 +39,7 @@ Codex must follow this file for:
 - release reporting
 - final status reports
 
-Current global batch/train sequence reconciliation lives in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`. Use it as the singular operational sequence index after the truth files and live state mirrors; do not use it to infer implementation, validation, release, accessibility, performance, or device proof.
+Current global batch/train sequence authority lives in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`, with machine-readable runner policy in `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`. Use it as the singular operational sequence index after the truth files; IOS26 is the runnable forward train and non-`IOS26-*` batch IDs are historical for Codex global train selection. Do not use it to infer implementation, validation, release, accessibility, performance, or device proof.
 
 ---
 

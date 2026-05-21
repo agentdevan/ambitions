@@ -10,7 +10,7 @@ This document extends the optimized implementation order to cover every non-user
 
 For current sequence selection, stale-next-batch reconciliation, IOS26 train position, and no-claim boundaries, read `docs/codex/GLOBAL_BATCH_SEQUENCE.md` first. This file remains supporting evidence and does not override that index, `docs/truth/*`, live source, or current proof.
 
-Use this file as the highest-priority overlay for remaining work. It supersedes `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` only where it adds or reorders PFC platform/framework/compliance batches, Found Life source-truth batches, rendered visual quality proof insertions, and the active Platform Kernel train. Historical batch identities remain stable.
+Use this file as historical/supporting evidence for completed and planned pre-IOS26 work. It no longer selects runnable Codex global train batches. `GLOBAL_BATCH_SEQUENCE.md` and `GLOBAL_BATCH_SEQUENCE_AUTHORITY.json` are the current sequence authority, and non-`IOS26-*` batch IDs are historical for runner selection. Historical batch identities remain stable.
 
 ## Core Rule
 
