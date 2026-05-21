@@ -13,10 +13,10 @@ from typing import Iterable
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MD_PATH = ROOT / "docs" / "audits" / "amb-repo-green-flagship-reset-master-01-t03-ia-surface-vocabulary-ledger.md"
-JSON_PATH = ROOT / "docs" / "audits" / "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER.json"
+MD_PATH = ROOT / "docs" / "audits" / "amb-repo-green-flagship-reset-master-01-t17-final-ia-scan.md"
+JSON_PATH = ROOT / "docs" / "audits" / "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN.json"
 
-BATCH_ID = "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER"
+BATCH_ID = "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN"
 
 SCAN_PREFIXES = (
     "README.md",
@@ -94,6 +94,18 @@ COMPATIBILITY_RE = re.compile(
     re.I,
 )
 
+SOURCE_COMPATIBILITY_RE = re.compile(
+    r"("
+    r"fallbackTab|routingHint|surfaceProofs|activeTopLevelSurfaces|open-captures-inbox|captures-inbox|"
+    r"ambitions://tab/plan|ambitions://tab/profile|ambitions://tab/habits|ambitions://tab/insights|"
+    r"plan tab|profile tab|habits tab|insights tab|captures tab|"
+    r"Plan destination|existing Plan destination|Open Time|Open Capture|plan correction|"
+    r"surface:\s*\.tab|surface:\s*\.goalDetail|"
+    r"\.plan\b|\.profile\b|\.habits\b|\.insights\b|\.captures\b"
+    r")",
+    re.I,
+)
+
 TEST_CONTEXT_RE = re.compile(
     r"\b(xctassert|assert|expect|expectation|should|test|smoke|snapshot|ui test|ui-test|automation)\b",
     re.I,
@@ -150,7 +162,7 @@ def path_role(path: Path) -> str:
         return "truth"
     if rel.startswith("docs/audits/") or rel.startswith("prompts/") or rel.startswith("docs/AmbitionsCanon/") or rel.startswith("docs/canon/") or rel.startswith("docs/archive/") or rel.startswith("docs/handoff/") or rel.startswith(".codex/runs/"):
         return "historical"
-    if rel in {"README.md", "AGENTS.md", "docs/README.md"} or rel.startswith("docs/status/") or rel.startswith("docs/codex/") or rel.startswith("docs/governance/") or rel.startswith("docs/proof/") or rel.startswith("docs/permissions-") or rel.startswith(".codex/") or rel.startswith(".agents/") or rel.startswith("scripts/") or rel.startswith("tools/") or rel.startswith("build/audits/") or rel.startswith("build/reports/") or rel.startswith("frontend/visual-encyclopedia/"):
+    if rel in {"README.md", "AGENTS.md", "docs/README.md"} or rel.startswith("docs/status/") or rel.startswith("docs/codex/") or rel.startswith("docs/governance/") or rel.startswith("docs/proof/") or rel.startswith("docs/review/") or rel.startswith("docs/permissions-") or rel.startswith(".codex/") or rel.startswith(".agents/") or rel.startswith("scripts/") or rel.startswith("tools/") or rel.startswith("build/audits/") or rel.startswith("build/reports/") or rel.startswith("frontend/visual-encyclopedia/"):
         return "supporting"
     if rel.startswith("Native/") or rel.startswith("Sources/") or rel.startswith("AppUI/") or rel == "project.yml" or rel == "Package.swift":
         return "source"
@@ -218,6 +230,7 @@ def classify_hit(path: Path, line: str, term: str) -> tuple[str, str]:
     has_accessibility_id = bool(ACCESSIBILITY_ID_RE.search(line))
     has_test_context = bool(TEST_CONTEXT_RE.search(line))
     has_compatibility = bool(COMPATIBILITY_RE.search(line))
+    has_source_compatibility = bool(SOURCE_COMPATIBILITY_RE.search(line))
     term_is_forbidden_root = is_forbidden_root_claim(line, term)
     has_negative_guardrail = bool(NEGATIVE_GUARDRAIL_RE.search(line) or "forbidden" in lower)
     has_forbidden_root = term_is_forbidden_root and is_root_claim(line)
@@ -230,21 +243,12 @@ def classify_hit(path: Path, line: str, term: str) -> tuple[str, str]:
     if role == "truth":
         return "active_truth_allowed", "active truth file states an allowed product/IA rule"
 
-    if role in {"historical", "supporting"} and re.search(r"(^\.?/|\.md\b|\.swift\b|\.json\b|\.py\b|\.sh\b|\.yml\b|\.yaml\b)", line):
-        return role, f"{role} material references a path, generated map, or scan pattern"
-
     if has_accessibility_id:
         return "accessibility_identifier", "line defines or references a stable accessibility identifier"
 
     if is_test_file or has_test_context:
         if has_forbidden_root or re.search(r"\b(top[- ]level|visible|surface|screen|route|tab)\b", lower):
             return "test_expectation", "test or automation expectation references a surface name"
-
-    if has_forbidden_root:
-        return "active_forbidden_root", "current source/supporting text frames a forbidden root as active or visible"
-
-    if term.lower() == "captures" and role == "source":
-        return "ordinary_language", "source uses captures as plural Capture-item data, not a root surface claim"
 
     if has_active_truth_phrase:
         return "active_truth_allowed", "line restates the active top-level IA"
@@ -261,6 +265,15 @@ def classify_hit(path: Path, line: str, term: str) -> tuple[str, str]:
         if ORDINARY_RE.search(line):
             return "ordinary_language", "supporting material uses the term in ordinary prose"
         return "supporting", "supporting material references the term without making active-product claims"
+
+    if role == "source" and has_source_compatibility:
+        return "internal_compatibility", "source line preserves an active compatibility seam or route alias"
+
+    if has_forbidden_root and role == "source":
+        return "active_forbidden_root", "current source text frames a forbidden root as active or visible"
+
+    if term.lower() == "captures" and role == "source":
+        return "ordinary_language", "source uses captures as plural Capture-item data, not a root surface claim"
 
     if ORDINARY_RE.search(line):
         return "ordinary_language", "term is used in ordinary prose or a non-root context"

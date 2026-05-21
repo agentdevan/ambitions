@@ -1,0 +1,177 @@
+{
+  "allowed_hit_policy": {
+    "accessibility_identifier": "Stable automation identifiers are compatibility surfaces and should be frozen, aliased, or retired only with proof.",
+    "active_truth_allowed": "Current truth files and current truth-consistent statements are allowed and do not imply implementation proof.",
+    "historical": "Historical material stays labeled as history and is not cleanup proof.",
+    "internal_compatibility": "Compatibility seams, aliases, raw values, and migration surfaces are retained until a scoped owner proves retirement.",
+    "needs_owner_review": "Ambiguous hits require a human or scoped owner decision before any cleanup or rename.",
+    "ordinary_language": "Ordinary prose uses of the words are allowed and should not be rewritten without need.",
+    "supporting": "Supporting material is non-authority and may retain compatibility language when clearly classified.",
+    "test_expectation": "Tests may assert current compatibility or visible labels; do not rewrite them blindly during a vocabulary audit."
+  },
+  "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN",
+  "branch": "main",
+  "counts_by_classification": {
+    "accessibility_identifier": 15055,
+    "active_truth_allowed": 1378,
+    "historical": 19507,
+    "internal_compatibility": 678,
+    "ordinary_language": 14530,
+    "supporting": 2093,
+    "test_expectation": 999
+  },
+  "counts_by_path_role": {
+    "historical": 20869,
+    "other": 130,
+    "source": 4844,
+    "supporting": 28122,
+    "truth": 275
+  },
+  "counts_by_term": {
+    "Capture": 6916,
+    "Captures": 558,
+    "Habits": 839,
+    "Insights": 957,
+    "Plan": 9157,
+    "Profile": 3763,
+    "capture": 4373,
+    "captures": 951,
+    "habits": 717,
+    "insights": 605,
+    "plan": 24213,
+    "profile": 1191
+  },
+  "files_scanned": 4529,
+  "files_with_hits": 2399,
+  "forbidden_active_owner_trains": [],
+  "forbidden_active_ownership_hits": [],
+  "generated_at": "2026-05-21T02:05:03.567934+00:00",
+  "non_claims": [
+    "No source, test, or product behavior was changed by this scan.",
+    "No zero-hit claim is made for the vocabulary families.",
+    "No implementation, accessibility, performance, privacy, or release readiness claim is made.",
+    "No blind replacement or mass rename was performed."
+  ],
+  "scan_roots": [
+    "README.md",
+    "AGENTS.md",
+    "docs/",
+    ".codex/",
+    ".agents/",
+    "Native/",
+    "Sources/",
+    "AppUI/",
+    "scripts/",
+    "tools/",
+    "prompts/",
+    "project.yml",
+    "Package.swift",
+    "frontend/visual-encyclopedia/",
+    "build/audits/"
+  ],
+  "sha": "7800986a2ddda248bc7f1511782385809bb44a30",
+  "top_files_by_hit_count": [
+    {
+      "file": "docs/governance/generated/train_lineage_graph.json",
+      "hits": 7299
+    },
+    {
+      "file": "docs/governance/generated/proof_linkage_graph.json",
+      "hits": 4053
+    },
+    {
+      "file": "docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01.csv",
+      "hits": 3017
+    },
+    {
+      "file": "build/audits/amb-file-audit-all-files.txt",
+      "hits": 2874
+    },
+    {
+      "file": "docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-yellows.md",
+      "hits": 2641
+    },
+    {
+      "file": "docs/governance/generated/orphan_prompt_provenance.json",
+      "hits": 2399
+    },
+    {
+      "file": "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER.json",
+      "hits": 2108
+    },
+    {
+      "file": "docs/audits/faang-handoff-internal-identifier-scan.txt",
+      "hits": 1569
+    },
+    {
+      "file": "docs/governance/generated/canon_impact_map.json",
+      "hits": 808
+    },
+    {
+      "file": "docs/audits/amb-repo-green-flagship-reset-master-01-t03-ia-surface-vocabulary-ledger.md",
+      "hits": 678
+    },
+    {
+      "file": "frontend/visual-encyclopedia/trace/PLANNED_BATCH_FRONTEND_DIRECTION_INVENTORY.md",
+      "hits": 554
+    },
+    {
+      "file": "docs/codex/BATCH_REGISTRY.md",
+      "hits": 380
+    },
+    {
+      "file": "frontend/visual-encyclopedia/VISUAL_ITEM_REGISTRY.yaml",
+      "hits": 366
+    },
+    {
+      "file": "docs/governance/generated/prompt_rewrite_plan.md",
+      "hits": 267
+    },
+    {
+      "file": "frontend/visual-encyclopedia/trace/FRONTEND_SOURCE_BINDINGS.yaml",
+      "hits": 261
+    },
+    {
+      "file": "docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md",
+      "hits": 218
+    },
+    {
+      "file": "docs/governance/generated/canon_impact_plan.md",
+      "hits": 217
+    },
+    {
+      "file": "docs/governance/generated/train_to_implementation_map.json",
+      "hits": 212
+    },
+    {
+      "file": "frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml",
+      "hits": 187
+    },
+    {
+      "file": "docs/audits/faang-handoff-deprecated-language-scan.txt",
+      "hits": 177
+    },
+    {
+      "file": "docs/governance/generated/implementation_expectation_map.json",
+      "hits": 176
+    },
+    {
+      "file": "frontend/visual-encyclopedia/SURFACE_RECIPE_INVENTORY.yaml",
+      "hits": 174
+    },
+    {
+      "file": "frontend/visual-encyclopedia/trace/SURFACE_SCENARIO_COVERAGE_MATRIX.yaml",
+      "hits": 174
+    },
+    {
+      "file": "build/audits/amb-file-audit-tracked-files.txt",
+      "hits": 152
+    },
+    {
+      "file": "docs/audits/tracked-files.txt",
+      "hits": 146
+    }
+  ],
+  "total_hits": 54240,
+  "yellow_owner_review_hits": []
+}
