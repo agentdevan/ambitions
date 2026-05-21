@@ -1,47 +1,66 @@
 {
-  "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01",
-  "authority_boundary": "Supporting audit copy only; active authority remains docs/truth/*, and this file does not prove implementation or release readiness.",
+  "batch_id": "AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T18-FINAL-GREEN-REPORT",
+  "report_type": "final_green_audit_copy",
+  "authority_boundary": "Supporting audit copy only; active authority remains docs/truth/* and current proof artifacts.",
   "branch": "main",
-  "sha": "6148d416b9c4cc1fc4d1122da2d656cfa4da04ae",
-  "final_status": "YELLOW",
-  "trains_completed": [
-    "0"
+  "runner_starting_commit": "a67af6a71d38e6eb70ec201a18ff1024b0e32034",
+  "phase_start_head": "516d788a125a3fa0e06b9fc824b40a38ce8beae6",
+  "upstream_baseline_at_phase_start": "a67af6a71d38e6eb70ec201a18ff1024b0e32034",
+  "phase_04_validation_head": "516d788a125a3fa0e06b9fc824b40a38ce8beae6",
+  "phase_04_tracked_upstream": "origin/main@516d788a125a3fa0e06b9fc824b40a38ce8beae6",
+  "phase_04_branch_relation": "main even with origin/main before committing these report artifacts",
+  "final_status": "GREEN",
+  "report_path": "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-final-green-report.md",
+  "build_report_path": "build/reports/amb-repo-green-flagship-reset-master-01.json",
+  "validation_proof_path": "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-validation-proof.md",
+  "changed_files": [
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-final-green-report.md",
+    "build/reports/amb-repo-green-flagship-reset-master-01.json",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json",
+    "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-validation-proof.md"
   ],
-  "trains_yellow": [
-    "0"
-  ],
-  "trains_red": [],
-  "files_changed_count": 5,
-  "files_moved_count": 0,
-  "files_deleted_count": 0,
-  "forbidden_paths_touched_unexpectedly": [],
-  "surface_vocabulary": {
-    "status": "deferred",
-    "forbidden_surface_owner_hits_remaining": null,
-    "allowed_context_hits_remaining": null,
-    "ledger_path": "docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-ia-surface-vocabulary-ledger.md",
-    "claim_boundary": "Train 0 did not run the final surface vocabulary ledger, so remaining hit counts are unmeasured and not claimed as zero."
-  },
   "validation": {
     "prompt_header_validator": "GREEN",
     "batch_id_validator": "GREEN",
     "codex_os_validator": "GREEN",
-    "xcodegen_generate": "not run",
-    "package_resolution": "not run",
-    "simulator_build": "not run",
-    "unit_tests": "not run",
-    "ui_tests": "not run",
+    "ia_surface_vocabulary_ledger": "GREEN",
+    "json_parse": "GREEN for both report copies",
     "git_diff_check": "GREEN",
-    "json_parse": "GREEN for docs audit copy and prompt-required build report path"
+    "git_status": "GREEN"
   },
+  "source_truth": {
+    "active_truth_files": [
+      "docs/truth/README.md",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "docs/truth/RELEASE_TRUTH.md",
+      "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "docs/truth/HISTORICAL_POLICY.md"
+    ],
+    "supporting_files": [
+      "AGENTS.md",
+      "README.md",
+      "docs/README.md",
+      "project.yml",
+      "Package.swift",
+      ".codex/config.toml",
+      ".codex/schemas/ambitions-batch-result.schema.json",
+      "docs/codex-os/"
+    ]
+  },
+  "accepted_yellow": [
+    "Build, simulator, unit-test, UI-test, accessibility, performance, privacy, and release proof were not rerun in this phase.",
+    "The vocabulary ledger remains classification evidence, not cleanup proof."
+  ],
+  "remaining_red": [],
   "non_claims": [
-    "no release readiness claimed unless current proof exists",
-    "no TestFlight readiness claimed unless current proof exists",
-    "no App Store readiness claimed unless current proof exists",
-    "no physical-device validation claimed unless current proof exists",
-    "no public accessibility conformance claimed unless current proof exists",
-    "no performance readiness claimed unless current proof exists",
-    "no privacy/legal approval claimed unless current proof exists",
-    "no complete Private Life Runtime proof claimed unless scenario tests pass"
-  ]
+    "No app implementation changed.",
+    "No release readiness is claimed.",
+    "No accessibility conformance is claimed.",
+    "No performance conformance is claimed.",
+    "No privacy/legal approval is claimed.",
+    "No device/TestFlight/App Store proof is claimed."
+  ],
+  "next_recommended_batch": "PK28 Data Control Commands"
 }

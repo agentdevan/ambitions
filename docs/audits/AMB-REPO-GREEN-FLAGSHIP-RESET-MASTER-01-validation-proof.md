@@ -1,5 +1,21 @@
 # AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01 Validation Proof
 
+## T18 Final Closeout Validation
+- `python3 scripts/ambitions_validate_prompt_headers.py` -> `GREEN`
+- `python3 scripts/ambitions_validate_batch_ids.py` -> `GREEN`
+- `python3 scripts/ambitions-codex-os-validate.py` -> `GREEN`
+- `python3 scripts/ambitions-ia-surface-vocabulary-ledger.py` -> `GREEN`
+- `python3 -m json.tool build/reports/amb-repo-green-flagship-reset-master-01.json >/tmp/amb-green-reset.json` -> `GREEN`
+- `python3 -m json.tool docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json >/tmp/amb-green-reset-audit-copy.json` -> `GREEN`
+- `git diff --check` -> `GREEN`
+- `git status --short --branch` -> `GREEN`
+
+## T18 Validation Notes
+- The hyphenated IA vocabulary validator path is the live repo script; the underscore-form path is absent in this checkout.
+- `scripts/ambitions-codex-os-validate.py` still allowlists the prompt-required build-report path, so the report JSON can be validated without widening the batch boundary.
+- If the Codex OS validator rewrote `build/reports/ambitions-codex-os-validate.json`, that generated side effect should be restored or left unstaged because it is not batch-owned.
+- Phase 04 live branch snapshot: `main` at `516d788a125a3fa0e06b9fc824b40a38ce8beae6`, even with `origin/main`, with only the four intended report/proof files changed.
+
 ## Phase-01 Validation Already Recorded
 - `python3 scripts/ambitions_validate_prompt_headers.py` -> `GREEN`
 - `python3 scripts/ambitions_validate_batch_ids.py` -> `GREEN`
