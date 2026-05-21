@@ -86,7 +86,7 @@ These capabilities appear as native foundations in code, but each still needs be
 
 | Area | Posture |
 | --- | --- |
-| Private Life Runtime proof target | Specification exists in `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md`; implementation and validation remain unproven until source/tests/logs demonstrate the scenario set. |
+| Private Life Runtime proof target | Specification exists in `docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md`. Focused source/test proof now covers core scenario slices in `Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift` while leaving some proof-spec scenarios partial or unproven; see `docs/status/private-life-runtime-proof-alignment.md` for the current proof boundary and remaining non-claims. |
 | Widgets | Foundation exists. Production behavior and rendered surfaces require manual validation. |
 | Live Activities | Foundation exists. Production behavior and device behavior require manual validation. |
 | Share Extension | Target/foundation exists. End-to-end behavior requires manual validation. |
