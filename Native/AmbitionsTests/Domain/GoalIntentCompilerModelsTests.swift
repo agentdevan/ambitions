@@ -11,7 +11,7 @@ final class GoalIntentCompilerModelsTests: XCTestCase {
             alternateInterpretationsActive: false,
             missingContextFields: []
         )
-            .makeGoalIntentDayCompilerInput(intent: intent)
+            .makeGoalIntentDayCompilerInput(intent: intent, capacityEnvelope: sampleCapacityEnvelope())
 
         let planStep = PlanStep(
             id: "plan-step-1",
@@ -89,7 +89,7 @@ final class GoalIntentCompilerModelsTests: XCTestCase {
                 )
             ]
         )
-        let input = path.makeGoalIntentDayCompilerInput(intent: intent)
+        let input = path.makeGoalIntentDayCompilerInput(intent: intent, capacityEnvelope: sampleCapacityEnvelope())
         let compiledSteps = path.makeCompiledSteps(intentID: intent.id)
         let output = input.makeOutput(compiledSteps: compiledSteps, compiledAt: "2026-05-22T18:13:20Z")
 
@@ -119,7 +119,7 @@ final class GoalIntentCompilerModelsTests: XCTestCase {
                 )
             ]
         )
-        let input = path.makeGoalIntentDayCompilerInput(intent: intent)
+        let input = path.makeGoalIntentDayCompilerInput(intent: intent, capacityEnvelope: sampleCapacityEnvelope())
         let output = input.makeOutput(compiledSteps: path.makeCompiledSteps(intentID: intent.id), compiledAt: "2026-05-22T18:13:20Z")
 
         XCTAssertEqual(output.status, .blocked)
@@ -142,7 +142,7 @@ final class GoalIntentCompilerModelsTests: XCTestCase {
             alternateInterpretationsActive: true,
             missingContextFields: [.goalShape]
         )
-        let input = path.makeGoalIntentDayCompilerInput(intent: intent)
+        let input = path.makeGoalIntentDayCompilerInput(intent: intent, capacityEnvelope: sampleCapacityEnvelope())
         let output = input.makeOutput(
             compiledSteps: path.makeCompiledSteps(intentID: intent.id),
             compiledAt: "2026-05-22T18:13:20Z"
@@ -155,6 +155,8 @@ final class GoalIntentCompilerModelsTests: XCTestCase {
 
         XCTAssertEqual(decodedInput, input)
         XCTAssertEqual(decodedOutput, output)
+        XCTAssertEqual(decodedInput.capacityEnvelope, input.capacityEnvelope)
+        XCTAssertEqual(decodedOutput.capacityEnvelope, output.capacityEnvelope)
     }
 
     func testCompilerContractsStayLocalOnlyAndDoNotExposeCloudBackendOrRuntimeMutationFields() {
@@ -166,7 +168,7 @@ final class GoalIntentCompilerModelsTests: XCTestCase {
             alternateInterpretationsActive: true,
             missingContextFields: [.goalShape]
         )
-        let input = path.makeGoalIntentDayCompilerInput(intent: intent)
+        let input = path.makeGoalIntentDayCompilerInput(intent: intent, capacityEnvelope: sampleCapacityEnvelope())
         let output = input.makeOutput(compiledSteps: path.makeCompiledSteps(intentID: intent.id), compiledAt: "2026-05-22T18:13:20Z")
 
         let inputLabels = Mirror(reflecting: input).children.compactMap(\.label)
@@ -181,6 +183,80 @@ final class GoalIntentCompilerModelsTests: XCTestCase {
         XCTAssertFalse(outputLabels.contains { label in
             forbiddenFragments.contains { label.localizedCaseInsensitiveContains($0) }
         })
+    }
+
+    func testLowCapacityEnvelopeTrimsOutputToOneSmallerStep() throws {
+        let intent = sampleIntent()
+        let path = samplePath(
+            posture: .stronger,
+            safeForStarterPlanning: true,
+            ambiguityActive: false,
+            alternateInterpretationsActive: false,
+            missingContextFields: []
+        )
+        let input = path.makeGoalIntentDayCompilerInput(
+            intent: intent,
+            capacityEnvelope: sampleLowCapacityEnvelope()
+        )
+        let output = input.makeOutput(
+            compiledSteps: path.makeCompiledSteps(intentID: intent.id),
+            compiledAt: "2026-05-22T18:13:20Z"
+        )
+
+        XCTAssertEqual(output.status, .clear)
+        XCTAssertEqual(output.compiledSteps.map(\.id), ["compiled-step-stage-setup"])
+        XCTAssertEqual(output.compiledSteps.first?.pace, .untimed)
+        XCTAssertTrue(output.compiledSteps.first?.blockingReasonIDs.contains("capacity.low_capacity") == true)
+        XCTAssertTrue(output.receipts.first?.reason.contains("Capacity is low") == true)
+    }
+
+    func testProtectedTimeConflictBlocksOutputWhenNoOpenWindowRemains() throws {
+        let intent = sampleIntent()
+        let path = samplePath(
+            posture: .stronger,
+            safeForStarterPlanning: true,
+            ambiguityActive: false,
+            alternateInterpretationsActive: false,
+            missingContextFields: []
+        )
+        let input = path.makeGoalIntentDayCompilerInput(
+            intent: intent,
+            capacityEnvelope: sampleProtectedTimeEnvelope()
+        )
+        let output = input.makeOutput(
+            compiledSteps: path.makeCompiledSteps(intentID: intent.id),
+            compiledAt: "2026-05-22T18:13:20Z"
+        )
+
+        XCTAssertEqual(output.status, .blocked)
+        XCTAssertTrue(output.compiledSteps.isEmpty)
+        XCTAssertEqual(output.receipts.count, 1)
+        XCTAssertTrue(output.receipts.first?.reason.contains("Protected time leaves no open window") == true)
+    }
+
+    func testRecoveryEnvelopeKeepsOneGentleStep() throws {
+        let intent = sampleIntent()
+        let path = samplePath(
+            posture: .stronger,
+            safeForStarterPlanning: true,
+            ambiguityActive: false,
+            alternateInterpretationsActive: false,
+            missingContextFields: []
+        )
+        let input = path.makeGoalIntentDayCompilerInput(
+            intent: intent,
+            capacityEnvelope: sampleRecoveryEnvelope()
+        )
+        let output = input.makeOutput(
+            compiledSteps: path.makeCompiledSteps(intentID: intent.id),
+            compiledAt: "2026-05-22T18:13:20Z"
+        )
+
+        XCTAssertEqual(output.status, .clear)
+        XCTAssertEqual(output.compiledSteps.map(\.id), ["compiled-step-stage-setup"])
+        XCTAssertEqual(output.compiledSteps.first?.pace, .untimed)
+        XCTAssertTrue(output.compiledSteps.first?.isOptional == true)
+        XCTAssertTrue(output.receipts.first?.reason.contains("Recovery is needed") == true)
     }
 }
 
@@ -281,6 +357,69 @@ private extension GoalIntentCompilerModelsTests {
                 ],
                 packEntries: []
             )
+        )
+    }
+
+    func sampleCapacityEnvelope() -> GoalIntentCapacityEnvelope {
+        GoalIntentCapacityEnvelope(
+            capacityLevel: .moderate,
+            recoveryState: .steady,
+            availableWindows: [
+                capacityWindow(id: "open-window-1", title: "Open window", summary: "Open room for the first pass.", availableMinutes: 60),
+                capacityWindow(id: "open-window-2", title: "Open window", summary: "A second open window keeps the day flexible.", availableMinutes: 45)
+            ],
+            localReasonCodes: [.assumedNeutralCapacity]
+        )
+    }
+
+    func sampleLowCapacityEnvelope() -> GoalIntentCapacityEnvelope {
+        GoalIntentCapacityEnvelope(
+            capacityLevel: .low,
+            recoveryState: .steady,
+            availableWindows: [
+                capacityWindow(id: "low-open-window", title: "Open window", summary: "Only a small open pocket is visible.", availableMinutes: 25)
+            ],
+            localReasonCodes: [.assumedNeutralCapacity]
+        )
+    }
+
+    func sampleProtectedTimeEnvelope() -> GoalIntentCapacityEnvelope {
+        GoalIntentCapacityEnvelope(
+            capacityLevel: .moderate,
+            recoveryState: .steady,
+            availableWindows: [
+                capacityWindow(id: "protected-window", title: "Protected time", summary: "This time stays protected.", availableMinutes: 60, isProtected: true)
+            ],
+            localReasonCodes: [.assumedNeutralCapacity]
+        )
+    }
+
+    func sampleRecoveryEnvelope() -> GoalIntentCapacityEnvelope {
+        GoalIntentCapacityEnvelope(
+            capacityLevel: .moderate,
+            recoveryState: .needsRecovery,
+            availableWindows: [
+                capacityWindow(id: "recovery-open-window", title: "Open window", summary: "A narrow open pocket remains available.", availableMinutes: 20)
+            ],
+            localReasonCodes: [.assumedNeutralCapacity, .recoveryCompatible]
+        )
+    }
+
+    func capacityWindow(
+        id: String,
+        title: String,
+        summary: String,
+        availableMinutes: Int,
+        isProtected: Bool = false,
+        reasonCodes: [GoalEnergyFitReasonCode] = []
+    ) -> GoalIntentCapacityWindow {
+        GoalIntentCapacityWindow(
+            id: id,
+            title: title,
+            summary: summary,
+            availableMinutes: availableMinutes,
+            isProtected: isProtected,
+            reasonCodes: reasonCodes
         )
     }
 }
