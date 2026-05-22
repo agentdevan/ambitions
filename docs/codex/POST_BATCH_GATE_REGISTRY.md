@@ -80,3 +80,13 @@ Status: installed_not_run. Accepted Yellow IOS26 closeouts must record owner, sa
 - Yellow reason: raw `xcodebuild -version` and `xcodebuild -showsdks` shell probes were blocked by the outer policy with `approval required by policy, but AskForApproval is set to Never`.
 - No-claim boundary: do not claim raw `xcodebuild` proof, build success, test success, accessibility proof, privacy approval, release readiness, device proof, or completed iOS 26 target migration from this batch.
 - Follow-up gate: `IOS26-T01-B02` may consume this as accepted-Yellow toolchain evidence only if it preserves the recorded raw-`xcodebuild` blocker and reruns build/test validation after the target bump.
+
+### IOS26-T02-B00 Safe-Area Screenshot/Device Gate
+
+- Date: 2026-05-22
+- Owner: Codex operator / next IOS26 train continuation owner
+- Run directory: `.codex/runs/IOS26-T02-B00/20260522T123555Z`
+- Safety reason: source and wrapper validation support the safe-area root invariant without broadening architecture: root bottom chrome moved into `AmbitionsRootView.safeAreaInset(edge: .bottom, spacing: 0)`, Capture foreground top safe-area ignore was removed, `xcodegen generate` passed, `scripts/build-local.sh` passed, and `make xcode-focused-test BATCH=IOS26-T02-B00 TEST=AmbitionsTests/AppShellChromeTests` passed.
+- Yellow reason: simulator screenshot proof, device proof, keyboard-specific visual proof, and manual accessibility proof were not collected for the touched root/Capture geometry.
+- No-claim boundary: do not claim screenshot proof, device validation, keyboard collision proof, visual quality completion, accessibility validation, release readiness, TestFlight readiness, App Store readiness, or physical-device behavior from IOS26-T02-B00 until current proof artifacts exist.
+- Follow-up gate: before Train 05 or any screenshot-dependent IOS26 shell/visual batch claims Green from this geometry invariant, collect simulator screenshot or device proof for status bar, Dynamic Island, home indicator, keyboard, tab chrome, and touched Capture top inset behavior; record accessibility/visual proof status in the relevant proof packet.

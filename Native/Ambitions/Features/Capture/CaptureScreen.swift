@@ -93,7 +93,6 @@ struct CaptureScreen: View {
                 title: "Capture",
                 contextPhrase: promptSubtitle
             )
-            .ignoresSafeArea(edges: .top)
         }
         .navigationTitle("")
         .refreshable {

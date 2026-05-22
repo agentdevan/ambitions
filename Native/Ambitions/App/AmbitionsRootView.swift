@@ -56,20 +56,21 @@ struct AmbitionsRootView: View {
 
             shellContinuityReceipt(theme: resolvedTheme)
         }
-        .overlay(alignment: .bottom) {
-            if shellPresentationMode == .meridian {
-                AppMeridianDestinationRail(
-                    theme: resolvedTheme,
-                    selectedTab: navigation.selectedTab.canonicalTopLevelTab
-                ) { tab in
-                    navigation.selectTab(tab)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            VStack(spacing: resolvedTheme.spacing.sm) {
+                if shellPresentationMode == .meridian {
+                    AppMeridianDestinationRail(
+                        theme: resolvedTheme,
+                        selectedTab: navigation.selectedTab.canonicalTopLevelTab
+                    ) { tab in
+                        navigation.selectTab(tab)
+                    }
                 }
-                .padding(.bottom, resolvedTheme.spacing.sm)
+
+                shellFloatingControlLane(theme: resolvedTheme)
             }
-        }
-        .overlay(alignment: .bottom) {
-            shellFloatingControlLane(theme: resolvedTheme)
-                .padding(.bottom, resolvedTheme.spacing.xxxl + resolvedTheme.spacing.xl)
+            .padding(.horizontal, resolvedTheme.spacing.sm)
+            .padding(.top, resolvedTheme.spacing.sm)
         }
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
         .onAppear {
