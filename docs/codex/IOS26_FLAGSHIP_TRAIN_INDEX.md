@@ -10,6 +10,7 @@ Status: installed_not_run. Governance/prompt library only; no app behavior or re
 - TRAIN_04A: Life Context & Historical Catch-Up Runtime Inputs
 - TRAIN_04B: Step Optionality, Rejection Replanning & Simulation Proof
 - TRAIN_04C: Source Atlas -> Runtime Compiler Bridge
+- TRAIN_04D: Capture-to-Runtime Factoring & Future Proof Bridge
 - TRAIN_05: Today / Reality Meridian final object
 - TRAIN_06: Time / LifeShape Field final object
 - TRAIN_07: Goals / Constellation Atlas final object

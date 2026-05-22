@@ -31,18 +31,19 @@ dependencies:
   TRAIN_04A: [TRAIN_03, TRAIN_04]
   TRAIN_04B: [TRAIN_03, TRAIN_04, TRAIN_04A]
   TRAIN_04C: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B]
-  TRAIN_05: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C]
-  TRAIN_06: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C]
-  TRAIN_07: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C]
-  TRAIN_08: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_11_when_external_intake_is_included]
-  TRAIN_09: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_11, TRAIN_13_for_public_accessibility_status]
-  TRAIN_10: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C]
-  TRAIN_11: [TRAIN_01, schema_decisions_from_TRAIN_03_TRAIN_04_TRAIN_10]
+  TRAIN_04D: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C]
+  TRAIN_05: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D]
+  TRAIN_06: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D]
+  TRAIN_07: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D]
+  TRAIN_08: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_11_when_external_intake_is_included]
+  TRAIN_09: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_11, TRAIN_13_for_public_accessibility_status]
+  TRAIN_10: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay]
+  TRAIN_11: [TRAIN_01, schema_decisions_from_TRAIN_03_TRAIN_04_TRAIN_04D_TRAIN_10]
   TRAIN_12: [TRAIN_02, TRAIN_10, TRAIN_11]
   TRAIN_13: [TRAIN_05_through_TRAIN_12]
   TRAIN_14: [TRAIN_02, TRAIN_05_through_TRAIN_13]
   TRAIN_15: [TRAIN_00]
-  TRAIN_16: [TRAIN_00_through_TRAIN_15, TRAIN_04A, TRAIN_04B_through_full_train_chain, TRAIN_04C_through_full_train_chain]
+  TRAIN_16: [TRAIN_00_through_TRAIN_15, TRAIN_04A, TRAIN_04B_through_full_train_chain, TRAIN_04C_through_full_train_chain, TRAIN_04D_through_full_train_chain]
 proof_artifact_roots:
   - build/reports/ios26-baseline/
   - build/reports/ios26-migration/
@@ -52,6 +53,7 @@ proof_artifact_roots:
   - build/reports/life-context/
   - build/reports/step-optionality/
   - build/reports/source-atlas-runtime-bridge/
+  - build/reports/capture-runtime-bridge/
   - build/reports/reality-meridian/
   - build/reports/lifeshape-field/
   - build/reports/constellation-atlas/
@@ -131,6 +133,17 @@ trains:
       - IOS26-T04C-B04
       - IOS26-T04C-B05
       - IOS26-T04C-B06
+  - id: TRAIN_04D
+    title: Capture-to-Runtime Factoring & Future Proof Bridge
+    status: installed_not_run
+    batches:
+      - IOS26-T04D-B01
+      - IOS26-T04D-B02
+      - IOS26-T04D-B03
+      - IOS26-T04D-B04
+      - IOS26-T04D-B05
+      - IOS26-T04D-B06
+      - IOS26-T04D-B07
   - id: TRAIN_05
     title: Today / Reality Meridian final object
     status: installed_not_run

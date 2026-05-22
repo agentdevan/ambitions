@@ -1,0 +1,137 @@
+<!-- AMBITIONS_RUNNER_REQUIRED: true -->
+<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+# IOS26-T04D-B06 - Capture runtime gauntlet
+
+## Objective
+Prove capture factoring across realistic inputs.
+
+## Why this exists
+Capture-to-runtime factoring is not credible from a few happy paths. Ambitions must prove at least 150 deterministic scenarios spanning scheduled activities, proof, context, ambiguity, sensitivity, correction, replay, protected time, future use, and no cloud/LLM dependency.
+
+## Dependencies
+IOS26-T04D-B01, IOS26-T04D-B02, IOS26-T04D-B03, IOS26-T04D-B04, IOS26-T04D-B05, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+
+## Truth files to read
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `AGENTS.md`
+- `README.md`
+- `docs/README.md`
+- `project.yml`
+- `Package.swift`
+
+## Exact source areas to inspect
+- `Native/Ambitions/Features/Capture/`
+- `Native/Ambitions/Features/Captures/`
+- `Native/Ambitions/Services/SmartAttachmentService.swift`
+- `Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift`
+- Runtime
+- Goal compiler
+- Recommendation engine
+- Source Atlas runtime bridge
+- Life Context
+- Time
+- Goals
+- Today
+- You
+- Persistence
+- Receipts
+- Replay
+- `Native/AmbitionsTests`
+- `Native/AmbitionsUITests`
+- Preview fixtures
+
+## Exact changes allowed
+- Add at least 150 deterministic capture scenarios.
+- Cover scheduled activities, proof events, facility/access facts, equipment facts, blockers, recovery/injury notes, social/support context, recurring commitments, ambiguous time, ambiguous goal relevance, no current goal but future useful context, high-risk/sensitive context, plan conflict, protected time conflict, user correction, paused/deleted context, and replay.
+- Add scenario runner/reporting if needed under existing local test/report patterns.
+- Add `build/reports/capture-runtime-bridge/capture-runtime-gauntlet.md` and deterministic scenario output.
+
+## Exact changes forbidden
+- no cloud dependency
+- no LLM dependency
+- no hidden profiling
+- no silent calendar mutation
+- no silent goal attachment
+- no top-level IA changes
+- no generic capture inbox dashboard
+- no sensitive logs
+- no external analytics dependency
+- no broad claim unless Green
+- no App Store/privacy/accessibility overclaims
+
+## Required scenario assertions
+- Every capture is preserved.
+- Useful captures are factored or held for review.
+- No weak match is forced.
+- No scheduled item is silently committed.
+- No sensitive fact is silently used.
+- Every material decision has receipt.
+- Replay is deterministic.
+- Future context can be queried by later goals.
+- No cloud/LLM dependency exists.
+
+## Implementation steps
+1. Re-read active truth files and confirm dependencies.
+2. Inspect all prior T04D proof artifacts and test surfaces.
+3. Build or extend deterministic scenario fixtures.
+4. Add at least 150 scenarios across all required categories.
+5. Emit scenario output and Red/Yellow/Green summary.
+6. List failing scenarios explicitly.
+7. Block broad claims unless all required assertions are Green.
+
+## Tests to add/update
+- Deterministic gauntlet has at least 150 scenarios.
+- Scenario categories cover the full required list.
+- Required assertions are enforced.
+- Red/Yellow/Green summary exists.
+- Failing scenarios are listed if any.
+- No cloud/LLM dependency is introduced.
+
+## Commands to run
+```bash
+make xcode-focused-test BATCH=IOS26-T04D-B06 TEST=AmbitionsTests
+make xcode-focused-test BATCH=IOS26-T04D-B06 TEST=AmbitionsUITests
+```
+
+## Required proof artifacts
+- `build/reports/capture-runtime-bridge/capture-runtime-gauntlet.md`
+- Deterministic scenario output under `build/reports/capture-runtime-bridge/`
+
+## Accessibility requirements
+Accessibility is not proven by the gauntlet alone. Any surfaced scenario states must preserve VoiceOver-readable labels, Dynamic Type-safe copy, Reduce Motion-safe paths, and non-color-only status.
+
+## Privacy/local-first requirements
+Scenario output must avoid sensitive logs, remain local, and prove no cloud/LLM dependency.
+
+## iOS 26 API verification requirements
+Any iOS 26 API use must be verified against the deployment target and recorded in the proof artifact.
+
+## Green / Yellow / Red closeout rules
+Green: gauntlet report exists; deterministic output exists; Red/Yellow/Green summary exists; every required assertion passes; no broad claim before Green.
+Yellow: bounded failing scenario list with owner, reason, no-claim boundary, and gate.
+Red: no deterministic gauntlet, silent mutation/use appears, weak match is forced, capture is lost, or cloud/LLM dependency is added.
+
+## Rollback strategy
+Rollback only files touched by IOS26-T04D-B06 and preserve unrelated dirty work.
+
+## Final report format
+```text
+Status:
+Files changed:
+Gauntlet scenario count:
+Gauntlet proof:
+Failing scenarios:
+Tests run:
+Validation not run:
+Claims allowed:
+Claims forbidden:
+Yellow/Red items:
+Next batch:
+```
