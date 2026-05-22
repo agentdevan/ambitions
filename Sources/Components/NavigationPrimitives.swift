@@ -61,6 +61,8 @@ public enum BottomNavigationContract {
 
 public struct RootDestinationIdentityRail: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
     private let selected: RootDestinationIdentity
 
@@ -69,8 +71,16 @@ public struct RootDestinationIdentityRail: View {
     }
 
     public var body: some View {
-        HStack(spacing: theme.spacing.xs) {
+        let useLiquidGlass = ambitionShouldUseLiquidGlass(
+            reduceTransparency: reduceTransparency,
+            colorSchemeContrast: colorSchemeContrast
+        )
+
+        let rail = HStack(spacing: theme.spacing.xs) {
             ForEach(BottomNavigationContract.requiredDestinations) { destination in
+                let isSelected = destination == selected
+                let chromeShape = Capsule(style: .continuous)
+
                 VStack(spacing: theme.spacing.xxxs) {
                     Image(systemName: destination.systemImage)
                         .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
@@ -80,26 +90,55 @@ public struct RootDestinationIdentityRail: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.82)
                 }
-                .foregroundStyle(destination == selected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground)
+                .foregroundStyle(isSelected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground)
                 .frame(maxWidth: .infinity, minHeight: theme.panel.minimumTapTarget)
-                .background(Capsule().fill(destination == selected ? theme.shell.activeTabBackground : .clear))
+                .background {
+                    if useLiquidGlass {
+                        chromeShape
+                            .fill(Color.clear)
+                            .glassEffect(theme.shell.glass.controlGlass, in: chromeShape)
+                    } else {
+                        chromeShape.fill(isSelected ? theme.shell.activeTabBackground : .clear)
+                    }
+                }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(destination.accessibilitySummary)
-                .accessibilityValue(destination == selected ? "Selected" : "Not selected")
+                .accessibilityValue(isSelected ? "Selected" : "Not selected")
             }
         }
-        .padding(theme.spacing.xxs)
-        .background(Capsule(style: .continuous).fill(theme.shell.bottomBarMaterial))
-        .overlay(Capsule(style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Bottom navigation")
-        .accessibilityValue(BottomNavigationContract.requiredTitleSequence)
+
+        Group {
+            if useLiquidGlass {
+                GlassEffectContainer(spacing: theme.shell.glass.containerSpacing) {
+                    rail
+                }
+            } else {
+                rail
+            }
+        }
+            .padding(theme.spacing.xxs)
+            .background {
+                let chromeShape = Capsule(style: .continuous)
+                if useLiquidGlass {
+                    chromeShape
+                        .fill(Color.clear)
+                        .glassEffect(theme.shell.glass.bottomBarGlass, in: chromeShape)
+                } else {
+                    chromeShape.fill(theme.shell.bottomBarMaterial)
+                }
+            }
+            .overlay(Capsule(style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("Bottom navigation")
+            .accessibilityValue(BottomNavigationContract.requiredTitleSequence)
     }
 }
 
 public struct SegmentedFilterBar<Item: Hashable>: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
     private let items: [Item]
     @Binding private var selection: Item
@@ -112,7 +151,12 @@ public struct SegmentedFilterBar<Item: Hashable>: View {
     }
 
     public var body: some View {
-        HStack(spacing: theme.spacing.xs) {
+        let useLiquidGlass = ambitionShouldUseLiquidGlass(
+            reduceTransparency: reduceTransparency,
+            colorSchemeContrast: colorSchemeContrast
+        )
+
+        let segments = HStack(spacing: theme.spacing.xs) {
             ForEach(items, id: \.self) { item in
                 let state: AmbitionVisualState = item == selection ? .selected : .default
 
@@ -131,10 +175,28 @@ public struct SegmentedFilterBar<Item: Hashable>: View {
                 .accessibilityAddTraits(item == selection ? [.isSelected] : [])
             }
         }
-        .padding(theme.spacing.xxs)
-        .background(Capsule(style: .continuous).fill(theme.colors.surfaceOverlay))
-        .overlay(Capsule(style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
-        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: selection)
+        Group {
+            if useLiquidGlass {
+                GlassEffectContainer(spacing: theme.shell.glass.containerSpacing) {
+                    segments
+                }
+            } else {
+                segments
+            }
+        }
+            .padding(theme.spacing.xxs)
+            .background {
+                let chromeShape = Capsule(style: .continuous)
+                if useLiquidGlass {
+                    chromeShape
+                        .fill(Color.clear)
+                        .glassEffect(theme.shell.glass.bottomBarGlass, in: chromeShape)
+                } else {
+                    chromeShape.fill(theme.colors.surfaceOverlay)
+                }
+            }
+            .overlay(Capsule(style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+            .animation(theme.motion.animation(reduceMotion: reduceMotion), value: selection)
     }
 }
 
@@ -184,6 +246,8 @@ public struct ListChevronRow<Leading: View, Trailing: View>: View {
 public struct BottomNavShell<Item: Hashable>: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
     private let items: [Item]
     @Binding private var selection: Item
@@ -198,7 +262,12 @@ public struct BottomNavShell<Item: Hashable>: View {
     }
 
     public var body: some View {
-        HStack(spacing: theme.spacing.sm) {
+        let useLiquidGlass = ambitionShouldUseLiquidGlass(
+            reduceTransparency: reduceTransparency,
+            colorSchemeContrast: colorSchemeContrast
+        )
+
+        let bar = HStack(spacing: theme.spacing.sm) {
             ForEach(items, id: \.self) { item in
                 let selected = item == selection
 
@@ -225,18 +294,29 @@ public struct BottomNavShell<Item: Hashable>: View {
                 .accessibilityAddTraits(selected ? [.isSelected] : [])
             }
         }
-        .padding(theme.spacing.xs)
-        .background {
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(.ultraThinMaterial)
+        Group {
+            if useLiquidGlass {
+                GlassEffectContainer(spacing: theme.shell.glass.containerSpacing) {
+                    bar
+                }
+            } else {
+                bar
+            }
         }
-        .background {
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.canvasElevated.opacity(theme.surfaces.backgroundBlurOpacity))
-        }
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
-        .shadow(color: theme.elevation.raised.color, radius: theme.elevation.raised.radius, x: 0, y: theme.elevation.raised.y)
-        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: selection)
+            .padding(theme.spacing.xs)
+            .background {
+                let chromeShape = RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                if useLiquidGlass {
+                    chromeShape
+                        .fill(Color.clear)
+                        .glassEffect(theme.shell.glass.bottomBarGlass, in: chromeShape)
+                } else {
+                    chromeShape.fill(theme.colors.canvasElevated.opacity(theme.surfaces.backgroundBlurOpacity))
+                }
+            }
+            .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+            .shadow(color: theme.elevation.raised.color, radius: theme.elevation.raised.radius, x: 0, y: theme.elevation.raised.y)
+            .animation(theme.motion.animation(reduceMotion: reduceMotion), value: selection)
     }
 }
 

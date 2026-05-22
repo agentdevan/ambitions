@@ -177,6 +177,7 @@ public struct AmbitionTheme: Sendable {
         public let bottomBarMaterial: LinearGradient
         public let ribbonMaterial: LinearGradient
         public let receiptMaterial: LinearGradient
+        public let glass: ShellGlassTokens
         public let activeTabForeground: Color
         public let activeTabBackground: Color
         public let inactiveTabForeground: Color
@@ -192,6 +193,13 @@ public struct AmbitionTheme: Sendable {
         public let statusRecovered: Color
         public let statusProtected: Color
         public let trustBadgeSurface: Color
+    }
+
+    public struct ShellGlassTokens: Sendable {
+        public let controlGlass: Glass
+        public let headerGlass: Glass
+        public let bottomBarGlass: Glass
+        public let containerSpacing: CGFloat
     }
 
     public struct Typography: Sendable {
@@ -856,6 +864,12 @@ private extension AmbitionTheme {
                 ),
                 ribbonMaterial: materials.bandGradient,
                 receiptMaterial: materials.elevatedGradient,
+                glass: ShellGlassTokens(
+                    controlGlass: Glass.regular.interactive(true).tint(accent.secondary.opacity(0.18)),
+                    headerGlass: Glass.regular.interactive(false).tint(accent.warm.opacity(0.12)),
+                    bottomBarGlass: Glass.regular.interactive(false).tint(accent.warm.opacity(0.10)),
+                    containerSpacing: 14
+                ),
                 activeTabForeground: accent.warm,
                 activeTabBackground: accent.warm.opacity(0.18),
                 inactiveTabForeground: Color(red: 0.72, green: 0.78, blue: 0.84),
@@ -894,6 +908,12 @@ private extension AmbitionTheme {
                 ),
                 ribbonMaterial: materials.bandGradient,
                 receiptMaterial: materials.elevatedGradient,
+                glass: ShellGlassTokens(
+                    controlGlass: Glass.regular.interactive(true).tint(accent.secondary.opacity(0.12)),
+                    headerGlass: Glass.regular.interactive(false).tint(accent.warm.opacity(0.08)),
+                    bottomBarGlass: Glass.regular.interactive(false).tint(accent.warm.opacity(0.08)),
+                    containerSpacing: 14
+                ),
                 activeTabForeground: accent.warm,
                 activeTabBackground: accent.warm.opacity(0.16),
                 inactiveTabForeground: Color(red: 0.39, green: 0.45, blue: 0.52),

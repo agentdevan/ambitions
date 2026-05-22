@@ -121,6 +121,8 @@ public struct AmbitionChromeButton: View {
 private struct ChromePressStyle: ButtonStyle {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.isEnabled) private var isEnabled
 
     let role: AmbitionChromeButtonRole
@@ -130,16 +132,26 @@ private struct ChromePressStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         let semantic = theme.semanticStyle(for: role.semanticState)
         let isPressed = configuration.isPressed && reduceMotion == false
+        let useLiquidGlass = ambitionShouldUseLiquidGlass(
+            reduceTransparency: reduceTransparency,
+            colorSchemeContrast: colorSchemeContrast
+        )
         let shape = Capsule(style: .continuous)
 
         configuration.label
             .padding(.horizontal, horizontalPadding)
             .foregroundStyle(foreground(semantic: semantic))
             .background {
-                ZStack {
-                    shape.fill(baseGradient(semantic: semantic))
-                    shape.fill(highlightGradient.opacity(isPressed ? 0.18 : 0.34))
-                    shape.strokeBorder(theme.colors.textPrimary.opacity(isEnabled ? 0.10 : 0.04), lineWidth: 0.8)
+                if useLiquidGlass {
+                    shape
+                        .fill(Color.clear)
+                        .glassEffect(theme.shell.glass.controlGlass, in: shape)
+                } else {
+                    ZStack {
+                        shape.fill(baseGradient(semantic: semantic))
+                        shape.fill(highlightGradient.opacity(isPressed ? 0.18 : 0.34))
+                        shape.strokeBorder(theme.colors.textPrimary.opacity(isEnabled ? 0.10 : 0.04), lineWidth: 0.8)
+                    }
                 }
             }
             .overlay(alignment: .top) {

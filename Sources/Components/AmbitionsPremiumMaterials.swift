@@ -1,6 +1,21 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
+public func ambitionShouldUseLiquidGlass(
+    reduceTransparency: Bool,
+    colorSchemeContrast: ColorSchemeContrast
+) -> Bool {
+    guard reduceTransparency == false, colorSchemeContrast != .increased else {
+        return false
+    }
+
+    if #available(iOS 26, *) {
+        return true
+    }
+
+    return false
+}
+
 /// A gravity-drift spatial micro-particle background reacting to device tilt,
 /// touch ripples, and deep ambient midnight glow.
 /// Pauses motion in `reduceMotion` mode and falls back to a clean canvas in increased contrast mode.

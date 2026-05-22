@@ -68,6 +68,8 @@ public struct AmbitionsSurfaceHeaderAction {
 public struct AmbitionsSurfaceShell<Content: View>: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private let kind: AmbitionsSurfaceShellKind
@@ -112,7 +114,13 @@ public struct AmbitionsSurfaceShell<Content: View>: View {
         )
     }
 
+    @ViewBuilder
     private var header: some View {
+        let useLiquidGlass = ambitionShouldUseLiquidGlass(
+            reduceTransparency: reduceTransparency,
+            colorSchemeContrast: colorSchemeContrast
+        )
+
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             HStack(alignment: .top, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -150,7 +158,16 @@ public struct AmbitionsSurfaceShell<Content: View>: View {
             }
         }
         .padding(theme.spacing.md)
-        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.shell.headerMaterial))
+        .background {
+            let chromeShape = RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+            if useLiquidGlass {
+                chromeShape
+                    .fill(Color.clear)
+                    .glassEffect(theme.shell.glass.headerGlass, in: chromeShape)
+            } else {
+                chromeShape.fill(theme.shell.headerMaterial)
+            }
+        }
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
         .shadow(color: theme.depth.resting.color, radius: theme.depth.resting.radius, x: theme.depth.resting.x, y: theme.depth.resting.y)
         .accessibilityElement(children: .contain)
@@ -183,6 +200,8 @@ public struct AmbitionsSurfaceShell<Content: View>: View {
 public struct ShellOverlayZone<Overlay: View>: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
     private let title: String
     private let subtitle: String?
@@ -205,6 +224,11 @@ public struct ShellOverlayZone<Overlay: View>: View {
     }
 
     public var body: some View {
+        let useLiquidGlass = ambitionShouldUseLiquidGlass(
+            reduceTransparency: reduceTransparency,
+            colorSchemeContrast: colorSchemeContrast
+        )
+
         ZStack(alignment: .bottom) {
             if isPresented {
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -239,7 +263,16 @@ public struct ShellOverlayZone<Overlay: View>: View {
                     overlay
                 }
                 .padding(theme.spacing.md)
-                .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.shell.receiptMaterial))
+                .background {
+                    let chromeShape = RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                    if useLiquidGlass {
+                        chromeShape
+                            .fill(Color.clear)
+                            .glassEffect(theme.shell.glass.headerGlass, in: chromeShape)
+                    } else {
+                        chromeShape.fill(theme.shell.receiptMaterial)
+                    }
+                }
                 .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
                 .shadow(color: theme.depth.overlay.color, radius: theme.depth.overlay.radius, x: theme.depth.overlay.x, y: theme.depth.overlay.y)
                 .transition(reduceMotion ? .opacity : .move(edge: .bottom).combined(with: .opacity))
