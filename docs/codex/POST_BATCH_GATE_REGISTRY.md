@@ -70,3 +70,13 @@ This registry does not implement app behavior, validate builds/tests, prove rele
 ## IOS26 Flagship Train Gates
 
 Status: installed_not_run. Accepted Yellow IOS26 closeouts must record owner, safety reason, no-claim boundary, and follow-up gate here before continuation. Red stops the train.
+
+### IOS26-T01-B01 Accepted Yellow
+
+- Date: 2026-05-22
+- Owner: Codex operator for the user-requested global train continuation
+- Run directory: `.codex/runs/IOS26-T01-B01/20260522T113527Z`
+- Safety reason: toolchain proof artifacts confirm Xcode app `26.3`, iOS SDK `26.2`, iOS runtime `26.3`, booted `iPhone 17`, XcodeGen `2.45.4`, Swift `6.2.4`, and the SwiftPM boundary that `.iOS(.v26)` requires PackageDescription `6.2`; no target bump, project/package edit, source edit, build claim, test claim, accessibility claim, privacy claim, or release claim was made.
+- Yellow reason: raw `xcodebuild -version` and `xcodebuild -showsdks` shell probes were blocked by the outer policy with `approval required by policy, but AskForApproval is set to Never`.
+- No-claim boundary: do not claim raw `xcodebuild` proof, build success, test success, accessibility proof, privacy approval, release readiness, device proof, or completed iOS 26 target migration from this batch.
+- Follow-up gate: `IOS26-T01-B02` may consume this as accepted-Yellow toolchain evidence only if it preserves the recorded raw-`xcodebuild` blocker and reruns build/test validation after the target bump.
