@@ -35,7 +35,8 @@ actor AmbitionsPersistenceStore {
         SideEffectLedgerStorageRecord.self,
         EntityRevisionTombstoneRecord.self,
         AppStateRecord.self,
-        ActionReceiptHistoryRecordModel.self
+        ActionReceiptHistoryRecordModel.self,
+        LifeContextBundleRecord.self
     ])
 
     private let container: ModelContainer
@@ -111,6 +112,7 @@ actor AmbitionsPersistenceStore {
         try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<AppStateRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<LifeContextBundleRecord>()).forEach(context.delete)
 
         if context.hasChanges {
             try context.save()

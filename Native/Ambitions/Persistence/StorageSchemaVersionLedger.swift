@@ -165,6 +165,13 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Receipt history records persisted locally for deterministic local history search and recovery."
         ),
         .swiftData(
+            id: "swiftdata.life_context_bundle_record",
+            storedTypeName: "LifeContextBundleRecord",
+            currentVersion: "life_context_bundle_record.swiftdata.v1",
+            versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
+            notes: "Local life-context bundle snapshot with profile, pathways, opportunities, historical facts, and source controls."
+        ),
+        .swiftData(
             id: "swiftdata.command_execution_record",
             storedTypeName: "CommandExecutionRecord",
             currentVersion: ambitionsCommandExecutionRecordSchemaVersion,
@@ -232,6 +239,7 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "SideEffectLedgerStorageRecord",
         "EntityRevisionTombstoneRecord",
         "AppStateRecord",
+        "LifeContextBundleRecord",
     ]
 
     func validate(_ ledger: StorageSchemaVersionLedger) -> [StorageSchemaVersionLedgerIssue] {

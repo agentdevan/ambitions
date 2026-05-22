@@ -94,6 +94,7 @@ struct StorageInvariantChecker: Sendable {
         let events = try context.fetch(FetchDescriptor<EventLedgerRecord>())
         let sideEffects = try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
         let appStates = try context.fetch(FetchDescriptor<AppStateRecord>())
+        let lifeContextBundles = try context.fetch(FetchDescriptor<LifeContextBundleRecord>())
 
         let goalIDs = Set(goals.map(\.id))
         let planIDs = Set(plans.map(\.id))
@@ -221,6 +222,12 @@ struct StorageInvariantChecker: Sendable {
                 appendReference(lastOpenedGoalID, in: goalIDs, "AppStateRecord", record.id, "lastOpenedGoalID", to: &issues)
             }
             appendJSON(record.snapshotData, "AppStateRecord", record.id, "snapshotData", to: &issues)
+        }
+
+        for record in lifeContextBundles {
+            appendRequired(record.id, "LifeContextBundleRecord", record.id, "id", to: &issues)
+            appendRequired(record.schemaVersion, "LifeContextBundleRecord", record.id, "schemaVersion", to: &issues)
+            appendJSON(record.snapshotData, "LifeContextBundleRecord", record.id, "snapshotData", to: &issues)
         }
 
         return StorageInvariantReport(issues: issues.sorted { $0.id < $1.id })

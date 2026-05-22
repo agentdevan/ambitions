@@ -439,6 +439,14 @@ protocol AppStateRepository: Sendable {
     func saveState(_ state: AppStateSnapshot) async throws
 }
 
+protocol LifeContextRepository: Sendable {
+    func listBundles() async throws -> [LifeContextBundle]
+    func bundle(id: String) async throws -> LifeContextBundle?
+    func saveBundles(_ bundles: [LifeContextBundle]) async throws
+    func deleteBundle(id: String, at timestamp: String) async throws
+    func projectRuntime(for bundleID: String, asOf now: Date) async throws -> LifeContextRuntimeProjection?
+}
+
 enum AppUnitOfWorkWriteScope: String, Sendable, Codable, Equatable {
     case localSwiftDataSingleContext = "local_swiftdata_single_context"
 }
@@ -517,6 +525,7 @@ struct AppRepositories: Sendable {
     let actionReceiptHistory: (any ActionReceiptHistoryRepository)?
     let entityRevisionTombstones: (any EntityRevisionTombstoneRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
+    let lifeContext: (any LifeContextRepository)?
     let goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)?
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
     let appState: any AppStateRepository
@@ -533,6 +542,7 @@ struct AppRepositories: Sendable {
         actionReceiptHistory: (any ActionReceiptHistoryRepository)? = nil,
         entityRevisionTombstones: (any EntityRevisionTombstoneRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
+        lifeContext: (any LifeContextRepository)? = nil,
         goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)? = nil,
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
         appState: any AppStateRepository
@@ -548,6 +558,7 @@ struct AppRepositories: Sendable {
         self.actionReceiptHistory = actionReceiptHistory
         self.entityRevisionTombstones = entityRevisionTombstones
         self.commandExecutionRecords = commandExecutionRecords
+        self.lifeContext = lifeContext
         self.goalCreationUnitOfWork = goalCreationUnitOfWork
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork
         self.appState = appState

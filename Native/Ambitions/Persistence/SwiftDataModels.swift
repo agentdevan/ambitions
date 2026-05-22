@@ -735,3 +735,29 @@ final class ActionReceiptHistoryRecordModel {
         self.proofFreshnessLineageData = proofFreshnessLineageData
     }
 }
+
+@Model
+final class LifeContextBundleRecord {
+    @Attribute(.unique) var id: String
+    var schemaVersion: String
+    var createdAt: String
+    var updatedAt: String
+    var deletedAt: String?
+    var snapshotData: Data
+
+    init(
+        id: String,
+        schemaVersion: String,
+        createdAt: String,
+        updatedAt: String,
+        deletedAt: String? = nil,
+        snapshotData: Data
+    ) {
+        self.id = id
+        self.schemaVersion = schemaVersion
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.deletedAt = deletedAt
+        self.snapshotData = snapshotData
+    }
+}
