@@ -6,7 +6,7 @@ settings:
   base:
     SWIFT_VERSION: 6.0
     SWIFT_STRICT_CONCURRENCY: complete
-    IPHONEOS_DEPLOYMENT_TARGET: 17.0
+    IPHONEOS_DEPLOYMENT_TARGET: 26.0
 packages:
   AmbitionsPackages:
     path: .
@@ -14,7 +14,7 @@ targets:
   Ambitions:
     type: application
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "26.0"
     sources:
       - path: Native/Ambitions
         excludes:
@@ -49,7 +49,7 @@ targets:
   AmbitionsWidgetExtension:
     type: app-extension
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "26.0"
     sources:
       - path: Native/AmbitionsWidgetExtension
         excludes:
@@ -74,7 +74,7 @@ targets:
   AmbitionsShareExtension:
     type: app-extension
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "26.0"
     sources:
       - path: Native/AmbitionsShareExtension
         excludes:
@@ -99,7 +99,7 @@ targets:
   AmbitionsTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "26.0"
     sources:
       - path: Native/AmbitionsTests
         excludes:
@@ -114,7 +114,7 @@ targets:
   AmbitionsUITests:
     type: bundle.ui-testing
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "26.0"
     sources:
       - path: Native/AmbitionsUITests
         excludes:

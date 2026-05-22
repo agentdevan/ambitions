@@ -231,7 +231,7 @@ Release truth:
 - Local build script exists.
 - Local setup script exists.
 - Build command is documented.
-- Current build success is not proven.
+- Current build success is proven by `scripts/build-local.sh` and `output/logs/build-local-20260522-080717.log` for the current iOS 26 deployment-target bump.
 
 Required proof before claiming build success:
 
@@ -287,7 +287,8 @@ Release truth:
 
 - Unit test target exists.
 - Unit test source exists.
-- Current unit test pass/fail is not proven.
+- Current focused unit test pass/fail is proven for `AmbitionsTests/AppReleaseConfigurationTests` by `.codex/xcode-summaries/IOS26-T01-B02/20260522T120851Z/focused-test-summary.json`.
+- Full unit test suite pass/fail is not proven by that focused lane.
 
 Required proof before claiming unit tests pass:
 
