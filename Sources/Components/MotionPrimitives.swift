@@ -408,11 +408,7 @@ public extension View {
         _ intent: AmbitionTheme.HapticIntent,
         trigger: T
     ) -> some View {
-        if #available(iOS 17.0, macOS 14.0, *) {
-            sensoryFeedback(hapticFeedback(for: intent), trigger: trigger)
-        } else {
-            self
-        }
+        sensoryFeedback(hapticFeedback(for: intent), trigger: trigger)
     }
 
     @ViewBuilder
@@ -428,7 +424,6 @@ public extension View {
         }
     }
 
-    @available(iOS 17.0, macOS 14.0, *)
     private func hapticFeedback(for intent: AmbitionTheme.HapticIntent) -> SensoryFeedback {
         switch intent {
         case .selection, .routeChange:

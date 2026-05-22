@@ -6,8 +6,6 @@ import WidgetKit
 struct AmbitionsWidgetBundle: WidgetBundle {
     var body: some Widget {
         NextStepWidget()
-        if #available(iOS 16.1, *) {
-            NextStepLiveActivityWidget()
-        }
+        NextStepLiveActivityWidget()
     }
 }

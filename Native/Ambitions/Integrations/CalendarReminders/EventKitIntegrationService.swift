@@ -801,38 +801,20 @@ actor EventKitStoreClientLive: EventKitStoreClient {
     func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
         switch scope {
         case .reminders:
-            if #available(iOS 17.0, *) {
-                _ = try? await request { completion in
-                    store.requestFullAccessToReminders(completion: completion)
-                }
-            } else {
-                _ = try? await request { completion in
-                    store.requestAccess(to: .reminder, completion: completion)
-                }
+            _ = try? await request { completion in
+                store.requestFullAccessToReminders(completion: completion)
             }
         case .calendarEvents:
-            if #available(iOS 17.0, *) {
-                _ = try? await request { completion in
-                    store.requestFullAccessToEvents(completion: completion)
-                }
-            } else {
-                _ = try? await request { completion in
-                    store.requestAccess(to: .event, completion: completion)
-                }
+            _ = try? await request { completion in
+                store.requestFullAccessToEvents(completion: completion)
             }
         }
         return await authorizationState(for: scope)
     }
 
     func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
-        if #available(iOS 17.0, *) {
-            _ = try? await request { completion in
-                store.requestWriteOnlyAccessToEvents(completion: completion)
-            }
-        } else {
-            _ = try? await request { completion in
-                store.requestAccess(to: .event, completion: completion)
-            }
+        _ = try? await request { completion in
+            store.requestWriteOnlyAccessToEvents(completion: completion)
         }
         return await authorizationState(for: .calendarEvents)
     }

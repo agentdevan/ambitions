@@ -2,7 +2,6 @@ import ActivityKit
 import SwiftUI
 import WidgetKit
 
-@available(iOS 16.1, *)
 struct NextStepLiveActivityWidget: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: NextStepActivityAttributes.self) { context in
