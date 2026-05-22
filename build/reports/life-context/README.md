@@ -10,6 +10,7 @@ Expected future artifacts:
 - `runtime-effect-proof.md`
 - `you-controls-receipts.md`
 - `you-life-context-premium-panel.md`
+- `anti-bucket-factor-ledger-proof.md`
 - `TRAIN_04A_CLOSEOUT.md`
 
 This file does not prove implementation, tests, accessibility, privacy approval, release readiness, or App Store readiness.

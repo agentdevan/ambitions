@@ -106,6 +106,7 @@ trains:
       - IOS26-T04A-B03
       - IOS26-T04A-B04
       - IOS26-T04A-B05
+      - IOS26-T04A-B06
   - id: TRAIN_05
     title: Today / Reality Meridian final object
     status: installed_not_run

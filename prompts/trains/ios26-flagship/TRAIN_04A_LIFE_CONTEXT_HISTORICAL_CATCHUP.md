@@ -20,6 +20,7 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`. This train depends on TRAIN_
 - IOS26-T04A-B03
 - IOS26-T04A-B04
 - IOS26-T04A-B05
+- IOS26-T04A-B06
 
 ## Source scope
 See the exact source areas in each mapped batch prompt.
@@ -61,6 +62,8 @@ The closeout must include:
 - "Life Context can affect runtime recommendations."
 - "Historical context can be captured, reviewed, corrected, and excluded."
 - "The same goal can produce different plans for different life contexts."
+- "Life Context personalization is inspectable through a factor ledger."
+- "Recommendation changes can be traced to source-labeled, freshness-aware, user-controlled factors."
 
 ## Claims forbidden unless proven
 - "Perfect plans"
@@ -69,6 +72,10 @@ The closeout must include:
 - "Fully accurate local opportunity discovery"
 - "Medical, legal, recruiting, or professional advice"
 - "Automatic demographic optimization"
+- "Demographic template planning"
+- "AI profile buckets"
+- "Static user archetype recommendations"
+- "Hidden behavioral manipulation"
 
 ## Red/Yellow/Green closeout rules
 Green requires evidence. Yellow requires owner, reason, no-claim boundary, and gate. Red stops.
@@ -83,6 +90,7 @@ scripts/ambitions-codex-train.sh IOS26-T04A-B02 prompts/batches/IOS26-T04A-B02-h
 scripts/ambitions-codex-train.sh IOS26-T04A-B03 prompts/batches/IOS26-T04A-B03-runtime-effect-proof.md
 scripts/ambitions-codex-train.sh IOS26-T04A-B04 prompts/batches/IOS26-T04A-B04-you-controls-receipts.md
 scripts/ambitions-codex-train.sh IOS26-T04A-B05 prompts/batches/IOS26-T04A-B05-you-life-context-premium-panel.md
+scripts/ambitions-codex-train.sh IOS26-T04A-B06 prompts/batches/IOS26-T04A-B06-anti-bucket-factor-ledger-proof.md
 ```
 
 ## Batch summaries
@@ -91,6 +99,7 @@ scripts/ambitions-codex-train.sh IOS26-T04A-B05 prompts/batches/IOS26-T04A-B05-y
 - IOS26-T04A-B03: `prompts/batches/IOS26-T04A-B03-runtime-effect-proof.md`
 - IOS26-T04A-B04: `prompts/batches/IOS26-T04A-B04-you-controls-receipts.md`
 - IOS26-T04A-B05: `prompts/batches/IOS26-T04A-B05-you-life-context-premium-panel.md`
+- IOS26-T04A-B06: `prompts/batches/IOS26-T04A-B06-anti-bucket-factor-ledger-proof.md` - anti-bucket personalization and first-class factor ledger proof for deterministic, inspectable, multi-factor recommendation reasoning.
 
 ## Post-batch gates
 Record accepted Yellow gates in `docs/codex/POST_BATCH_GATE_REGISTRY.md`.
