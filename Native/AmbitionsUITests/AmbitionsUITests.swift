@@ -107,6 +107,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["shell.header.rail"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.continuity-ribbon"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.floating-control-lane"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["shell.global-entry-button"].waitForExistence(timeout: 10))
         assertShellFloatingButtonDoesNotCoverTabBar(in: app)
 
         XCTAssertTrue(openCanonicalDestination("Capture", screenIdentifier: "capture.screen", in: app))

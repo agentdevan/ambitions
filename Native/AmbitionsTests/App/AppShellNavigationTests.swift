@@ -38,18 +38,18 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertFalse(AppTab.insights.isCanonicalTopLevel)
     }
 
-    func testFCP08ShellPresentationModeDefaultsToMeridianWithNativeRollback() {
+    func testShellPresentationModeDefaultsToNativeFallbackWithMeridianOptIn() {
         XCTAssertEqual(
             AppShellPresentationMode.resolved(arguments: ["Ambitions"], environment: [:]),
-            .meridian
+            .nativeFallback
         )
 
         XCTAssertEqual(
             AppShellPresentationMode.resolved(
-                arguments: ["Ambitions", "--ambitions-shell=native"],
+                arguments: ["Ambitions", "--ambitions-shell=meridian"],
                 environment: [:]
             ),
-            .nativeFallback
+            .meridian
         )
     }
 
@@ -88,6 +88,16 @@ final class AppShellNavigationTests: XCTestCase {
                 environment: ["AMBITIONS_SHELL_PRESENTATION": "enabled"]
             ),
             .meridian
+        )
+    }
+
+    func testShellPresentationModeEnvironmentDefaultsToNativeFallbackWhenNotMeridian() {
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(
+                arguments: ["Ambitions"],
+                environment: ["AMBITIONS_SHELL_PRESENTATION": "nativeFallback"]
+            ),
+            .nativeFallback
         )
     }
 

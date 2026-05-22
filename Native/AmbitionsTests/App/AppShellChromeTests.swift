@@ -32,6 +32,20 @@ final class AppShellChromeTests: XCTestCase {
         XCTAssertEqual(RootDestinationIdentity.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
     }
 
+    func testShellIdentifiersStayStableForMeridianDestinations() {
+        XCTAssertEqual(
+            AppMeridianDestination.all.map(\.accessibilityIdentifier),
+            [
+                "shell.meridian.destination.today",
+                "shell.meridian.destination.goals",
+                "shell.meridian.destination.capture",
+                "shell.meridian.destination.time",
+                "shell.meridian.destination.you"
+            ]
+        )
+        XCTAssertTrue(AppMeridianShellChromeState.launchDefault.rollbackLabel.contains("--ambitions-shell=meridian"))
+    }
+
     func testTrustBadgeCopyDoesNotClaimGlobalSyncByDefault() {
         XCTAssertEqual(AmbitionTrustBadgeState.localOnly.title, "Local only")
         XCTAssertEqual(AmbitionTrustBadgeState.calendarLocal.title, "From calendar")

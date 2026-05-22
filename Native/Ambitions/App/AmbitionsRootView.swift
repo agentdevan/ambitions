@@ -32,45 +32,25 @@ struct AmbitionsRootView: View {
         )
 
         ZStack(alignment: .bottomTrailing) {
-            TabView(selection: $navigation.selectedTab) {
-                todayNavigation()
-                goalsNavigation()
-                captureNavigation()
-                timeNavigation()
-                youNavigation()
-            }
-            .tint(resolvedTheme.shell.activeTabForeground)
-            .toolbarBackground(resolvedTheme.shell.bottomBarMaterial, for: .tabBar)
-            .toolbarBackground(.visible, for: .tabBar)
-            .toolbarColorScheme(resolvedTheme.mode == .dark ? .dark : .light, for: .tabBar)
-            .toolbar(shellPresentationMode == .meridian ? .hidden : .visible, for: .tabBar)
-            #if canImport(UIKit)
-            .background(
-                ShellTabReselectionObserver { _ in
-                    navigation.handleCurrentTabReselection()
-                }
-                .frame(width: 0, height: 0)
-                .accessibilityHidden(true)
-            )
-            #endif
+            shellTabView(theme: resolvedTheme)
 
             shellContinuityReceipt(theme: resolvedTheme)
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            VStack(spacing: resolvedTheme.spacing.sm) {
-                if shellPresentationMode == .meridian {
+            if shellPresentationMode == .meridian {
+                VStack(spacing: resolvedTheme.spacing.sm) {
                     AppMeridianDestinationRail(
                         theme: resolvedTheme,
                         selectedTab: navigation.selectedTab.canonicalTopLevelTab
                     ) { tab in
                         navigation.selectTab(tab)
                     }
-                }
 
-                shellFloatingControlLane(theme: resolvedTheme)
+                    shellFloatingControlLane(theme: resolvedTheme)
+                }
+                .padding(.horizontal, resolvedTheme.spacing.sm)
+                .padding(.top, resolvedTheme.spacing.sm)
             }
-            .padding(.horizontal, resolvedTheme.spacing.sm)
-            .padding(.top, resolvedTheme.spacing.sm)
         }
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
         .onAppear {
@@ -122,6 +102,54 @@ struct AmbitionsRootView: View {
         .ambitionTheme(resolvedTheme)
     }
 
+    @ViewBuilder
+    private func shellTabView(theme: AmbitionTheme) -> some View {
+        let tabView = TabView(selection: $navigation.selectedTab) {
+            Tab(AppTab.today.title, systemImage: AppTab.today.systemImage, value: AppTab.today) {
+                todayNavigation()
+            }
+
+            Tab(AppTab.goals.title, systemImage: AppTab.goals.systemImage, value: AppTab.goals) {
+                goalsNavigation()
+            }
+
+            Tab(AppTab.capture.title, systemImage: AppTab.capture.systemImage, value: AppTab.capture) {
+                captureNavigation()
+            }
+
+            Tab(AppTab.time.title, systemImage: AppTab.time.systemImage, value: AppTab.time) {
+                timeNavigation()
+            }
+
+            Tab(AppTab.you.title, systemImage: AppTab.you.systemImage, value: AppTab.you) {
+                youNavigation()
+            }
+        }
+        .tint(theme.shell.activeTabForeground)
+        .toolbarBackground(theme.shell.bottomBarMaterial, for: .tabBar)
+        .toolbarBackground(.visible, for: .tabBar)
+        .toolbarColorScheme(theme.mode == .dark ? .dark : .light, for: .tabBar)
+        .toolbar(shellPresentationMode == .meridian ? .hidden : .visible, for: .tabBar)
+        #if canImport(UIKit)
+        .background(
+            ShellTabReselectionObserver { _ in
+                navigation.handleCurrentTabReselection()
+            }
+            .frame(width: 0, height: 0)
+            .accessibilityHidden(true)
+        )
+        #endif
+
+        if shellPresentationMode == .nativeFallback {
+            tabView
+                .tabViewBottomAccessory {
+                    shellFloatingControlLane(theme: theme)
+                }
+        } else {
+            tabView
+        }
+    }
+
     private func todayNavigation() -> some View {
         NavigationStack {
             AppShellScaffold(
@@ -132,10 +160,6 @@ struct AmbitionsRootView: View {
             ) {
                 TodayScreen(showsNavigationChrome: false)
             }
-        }
-        .tag(AppTab.today)
-        .tabItem {
-            Label(AppTab.today.title, systemImage: AppTab.today.systemImage)
         }
     }
 
@@ -167,10 +191,6 @@ struct AmbitionsRootView: View {
             .navigationDestination(for: GoalRouteTarget.self) { target in
                 GoalDetailScreen(target: target)
             }
-        }
-        .tag(AppTab.goals)
-        .tabItem {
-            Label(AppTab.goals.title, systemImage: AppTab.goals.systemImage)
         }
     }
 
@@ -225,10 +245,6 @@ struct AmbitionsRootView: View {
                 GoalDetailScreen(target: target)
             }
         }
-        .tag(AppTab.time)
-        .tabItem {
-            Label(AppTab.time.title, systemImage: AppTab.time.systemImage)
-        }
     }
 
     private func captureNavigation() -> some View {
@@ -241,10 +257,6 @@ struct AmbitionsRootView: View {
             ) {
                 CaptureScreen(shellMode: .topLevelCapture)
             }
-        }
-        .tag(AppTab.capture)
-        .tabItem {
-            Label(AppTab.capture.title, systemImage: AppTab.capture.systemImage)
         }
     }
 
@@ -284,10 +296,6 @@ struct AmbitionsRootView: View {
                     }
                 }
             }
-        }
-        .tag(AppTab.you)
-        .tabItem {
-            Label(AppTab.you.title, systemImage: AppTab.you.systemImage)
         }
     }
 

@@ -19,7 +19,7 @@ enum AppShellPresentationMode: String, Equatable {
             return mode(for: environmentValue)
         }
 
-        return .meridian
+        return .nativeFallback
     }
 
     private static func shellArgumentValue(in arguments: [String]) -> String? {
@@ -97,7 +97,7 @@ struct AppMeridianShellChromeState: Equatable {
         receiptOverlayZoneLabel: "Receipt overlay zone stays temporary and dismissible.",
         globalActionLabel: "Global add opens capture or command choices without changing tabs.",
         safeAreaLabel: "Shell chrome stays inside safe areas and keeps native navigation available.",
-        rollbackLabel: "Native fallback remains available with --ambitions-shell=native.",
+        rollbackLabel: "Meridian remains available with --ambitions-shell=meridian.",
         destinations: AppMeridianDestination.all
     )
 }
