@@ -39,6 +39,11 @@ run_batch IOS26-T03-B03 prompts/batches/IOS26-T03-B03-replayable-decision-traces
 run_batch IOS26-T04-B01 prompts/batches/IOS26-T04-B01-compiler-input-output-model.md
 run_batch IOS26-T04-B02 prompts/batches/IOS26-T04-B02-capacity-aware-compilation.md
 run_batch IOS26-T04-B03 prompts/batches/IOS26-T04-B03-compiler-persistence-receipts.md
+run_batch IOS26-T04A-B01 prompts/batches/IOS26-T04A-B01-life-context-domain.md
+run_batch IOS26-T04A-B02 prompts/batches/IOS26-T04A-B02-historical-catchup-intake.md
+run_batch IOS26-T04A-B03 prompts/batches/IOS26-T04A-B03-runtime-effect-proof.md
+run_batch IOS26-T04A-B04 prompts/batches/IOS26-T04A-B04-you-controls-receipts.md
+run_batch IOS26-T04A-B05 prompts/batches/IOS26-T04A-B05-you-life-context-premium-panel.md
 run_batch IOS26-T05-B01 prompts/batches/IOS26-T05-B01-reality-meridian-recomposition.md
 run_batch IOS26-T05-B02 prompts/batches/IOS26-T05-B02-closure-still-counts.md
 run_batch IOS26-T05-B03 prompts/batches/IOS26-T05-B03-today-explainability-privacy.md

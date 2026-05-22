@@ -28,24 +28,26 @@ dependencies:
   TRAIN_02: [TRAIN_01]
   TRAIN_03: [TRAIN_00, TRAIN_01]
   TRAIN_04: [TRAIN_03]
-  TRAIN_05: [TRAIN_02, TRAIN_03, TRAIN_04]
-  TRAIN_06: [TRAIN_02, TRAIN_03, TRAIN_04]
-  TRAIN_07: [TRAIN_04]
-  TRAIN_08: [TRAIN_03, TRAIN_04, TRAIN_11_when_external_intake_is_included]
-  TRAIN_09: [TRAIN_03, TRAIN_04, TRAIN_11, TRAIN_13_for_public_accessibility_status]
-  TRAIN_10: [TRAIN_03_through_TRAIN_09]
+  TRAIN_04A: [TRAIN_03, TRAIN_04]
+  TRAIN_05: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A]
+  TRAIN_06: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A]
+  TRAIN_07: [TRAIN_04, TRAIN_04A]
+  TRAIN_08: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_11_when_external_intake_is_included]
+  TRAIN_09: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_11, TRAIN_13_for_public_accessibility_status]
+  TRAIN_10: [TRAIN_03_through_TRAIN_09, TRAIN_04A]
   TRAIN_11: [TRAIN_01, schema_decisions_from_TRAIN_03_TRAIN_04_TRAIN_10]
   TRAIN_12: [TRAIN_02, TRAIN_10, TRAIN_11]
   TRAIN_13: [TRAIN_05_through_TRAIN_12]
   TRAIN_14: [TRAIN_02, TRAIN_05_through_TRAIN_13]
   TRAIN_15: [TRAIN_00]
-  TRAIN_16: [TRAIN_00_through_TRAIN_15]
+  TRAIN_16: [TRAIN_00_through_TRAIN_15, TRAIN_04A]
 proof_artifact_roots:
   - build/reports/ios26-baseline/
   - build/reports/ios26-migration/
   - build/reports/ios26-shell/
   - build/reports/private-life-runtime/
   - build/reports/goal-intent-compiler/
+  - build/reports/life-context/
   - build/reports/reality-meridian/
   - build/reports/lifeshape-field/
   - build/reports/constellation-atlas/
@@ -95,6 +97,15 @@ trains:
       - IOS26-T04-B01
       - IOS26-T04-B02
       - IOS26-T04-B03
+  - id: TRAIN_04A
+    title: Life Context & Historical Catch-Up Runtime Inputs
+    status: installed_not_run
+    batches:
+      - IOS26-T04A-B01
+      - IOS26-T04A-B02
+      - IOS26-T04A-B03
+      - IOS26-T04A-B04
+      - IOS26-T04A-B05
   - id: TRAIN_05
     title: Today / Reality Meridian final object
     status: installed_not_run

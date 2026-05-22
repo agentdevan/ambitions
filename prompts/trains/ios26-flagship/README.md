@@ -4,3 +4,5 @@
 # iOS 26 Flagship Train
 
 Status: installed_not_run. Runner-required prompt library for sequential iOS 26 flagship maturation. This is not app implementation proof or release proof.
+
+Current train order is governed by `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`. `TRAIN_04A - Life Context & Historical Catch-Up Runtime Inputs` sits after TRAIN_04 and before TRAIN_05.

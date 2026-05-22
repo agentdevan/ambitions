@@ -54,6 +54,11 @@ scripts/ambitions-codex-train.sh IOS26-T03-B03 prompts/batches/IOS26-T03-B03-rep
 scripts/ambitions-codex-train.sh IOS26-T04-B01 prompts/batches/IOS26-T04-B01-compiler-input-output-model.md
 scripts/ambitions-codex-train.sh IOS26-T04-B02 prompts/batches/IOS26-T04-B02-capacity-aware-compilation.md
 scripts/ambitions-codex-train.sh IOS26-T04-B03 prompts/batches/IOS26-T04-B03-compiler-persistence-receipts.md
+scripts/ambitions-codex-train.sh IOS26-T04A-B01 prompts/batches/IOS26-T04A-B01-life-context-domain.md
+scripts/ambitions-codex-train.sh IOS26-T04A-B02 prompts/batches/IOS26-T04A-B02-historical-catchup-intake.md
+scripts/ambitions-codex-train.sh IOS26-T04A-B03 prompts/batches/IOS26-T04A-B03-runtime-effect-proof.md
+scripts/ambitions-codex-train.sh IOS26-T04A-B04 prompts/batches/IOS26-T04A-B04-you-controls-receipts.md
+scripts/ambitions-codex-train.sh IOS26-T04A-B05 prompts/batches/IOS26-T04A-B05-you-life-context-premium-panel.md
 scripts/ambitions-codex-train.sh IOS26-T05-B01 prompts/batches/IOS26-T05-B01-reality-meridian-recomposition.md
 scripts/ambitions-codex-train.sh IOS26-T05-B02 prompts/batches/IOS26-T05-B02-closure-still-counts.md
 scripts/ambitions-codex-train.sh IOS26-T05-B03 prompts/batches/IOS26-T05-B03-today-explainability-privacy.md

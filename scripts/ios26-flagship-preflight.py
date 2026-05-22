@@ -71,7 +71,7 @@ def run_git_status() -> list[str]:
 
 def parse_manifest_batches() -> list[str]:
     text = MANIFEST.read_text(encoding="utf-8")
-    return re.findall(r"^\s+- (IOS26-T\d{2}-B\d{2})\s*$", text, flags=re.MULTILINE)
+    return re.findall(r"^\s+- (IOS26-T\d{2}A?-B\d{2})\s*$", text, flags=re.MULTILINE)
 
 
 def expected_prompt_path(batch_id: str) -> Path | None:
@@ -115,8 +115,8 @@ def main() -> int:
         return 1
 
     manifest_batches = parse_manifest_batches()
-    if len(manifest_batches) != 52:
-        issues.append(f"expected 52 manifest batches, found {len(manifest_batches)}")
+    if len(manifest_batches) != 57:
+        issues.append(f"expected 57 manifest batches, found {len(manifest_batches)}")
     if len(set(manifest_batches)) != len(manifest_batches):
         issues.append("manifest contains duplicate IOS26 batch ids")
 
@@ -135,8 +135,8 @@ def main() -> int:
             issues.append(f"{batch_id}: runbook missing exact command")
 
     train_prompts = sorted(TRAIN_DIR.glob("TRAIN_*.md"))
-    if len(train_prompts) != 17:
-        issues.append(f"expected 17 train prompt files, found {len(train_prompts)}")
+    if len(train_prompts) != 18:
+        issues.append(f"expected 18 train prompt files, found {len(train_prompts)}")
 
     if args.strict_dirty:
         dirty = run_git_status()
