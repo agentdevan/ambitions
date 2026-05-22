@@ -90,3 +90,13 @@ Status: installed_not_run. Accepted Yellow IOS26 closeouts must record owner, sa
 - Yellow reason: simulator screenshot proof, device proof, keyboard-specific visual proof, and manual accessibility proof were not collected for the touched root/Capture geometry.
 - No-claim boundary: do not claim screenshot proof, device validation, keyboard collision proof, visual quality completion, accessibility validation, release readiness, TestFlight readiness, App Store readiness, or physical-device behavior from IOS26-T02-B00 until current proof artifacts exist.
 - Follow-up gate: before Train 05 or any screenshot-dependent IOS26 shell/visual batch claims Green from this geometry invariant, collect simulator screenshot or device proof for status bar, Dynamic Island, home indicator, keyboard, tab chrome, and touched Capture top inset behavior; record accessibility/visual proof status in the relevant proof packet.
+
+### IOS26-T02-B03 Screenshot/Icon Proof Foundation Gate
+
+- Date: 2026-05-22
+- Owner: Codex operator / Design-QA proof continuation owner
+- Run directory: `.codex/runs/IOS26-T02-B03/20260522T142815Z`
+- Safety reason: scoped proof infrastructure landed without app-source, project-config, asset, privacy-manifest, entitlement, or runtime behavior changes. `make validate-visual-proof` and `python3 scripts/ambitions_validate_visual_proof.py` passed with `GREEN`; `xcodegen generate` passed; `scripts/build-local.sh` passed with latest reviewed log `output/logs/build-local-20260522-104146.log`.
+- Yellow reason: current screenshot capture proof, manual visual approval, public accessibility verification, device proof, and full test-suite Green are absent. The wrapper lane `make xcode-focused-test BATCH=IOS26-T02-B03 TEST=AmbitionsTests` produced `.codex/xcode-summaries/IOS26-T02-B03/20260522T144322Z/focused-test-summary.json` with `test_failure`; the failures are outside the B03 proof-foundation slice.
+- No-claim boundary: do not claim screenshot proof, visual approval, accessibility approval, physical-device validation, performance validation, release readiness, TestFlight readiness, App Store readiness, or full test-suite Green from IOS26-T02-B03 until current proof artifacts exist.
+- Follow-up gate: before any screenshot-dependent IOS26 shell/visual batch claims Green, add current screenshot capture artifacts or a real screenshot-helper proof lane, attach them to the current commit, classify accessibility proof separately from source support, and rerun the visual proof validator plus the appropriate Xcode wrapper lane.

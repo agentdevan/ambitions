@@ -24,6 +24,7 @@ REQUIRED_COLUMNS = {
 }
 
 REGISTRY = ROOT / "docs" / "visual" / "AMB_SCREENSHOT_CANDIDATE_REGISTRY.md"
+REPORT = ROOT / "build" / "reports" / "ios26-shell" / "screenshot-foundation.md"
 REQUIRE_SURFACES = {
     "today": ["today", "start here", "today / reality meridian", "reality meridian"],
     "capture": ["capture"],
@@ -42,6 +43,11 @@ def main() -> int:
     if not REGISTRY.exists():
         print("RED")
         print(f"missing file: {REGISTRY}")
+        return 1
+
+    if not REPORT.exists():
+        print("RED")
+        print(f"missing file: {REPORT}")
         return 1
 
     lines = [line.strip() for line in REGISTRY.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -88,6 +94,25 @@ def main() -> int:
         if marker not in flat_text:
             print("RED")
             print(f"missing required visual state marker: {marker}")
+            return 1
+
+    report_lines = [line.strip() for line in REPORT.read_text(encoding="utf-8").splitlines() if line.strip()]
+    report_text = " ".join(report_lines).lower()
+    report_markers = [
+        "status: yellow",
+        "batch: ios26-t02-b03",
+        "current icon asset status",
+        "validation routes",
+        "no-claim boundaries",
+        "accessibility proof classification",
+        "privacy/local-first status",
+        "claims not made",
+        "visual quality unproven",
+    ]
+    for marker in report_markers:
+        if marker not in report_text:
+            print("RED")
+            print(f"missing report marker: {marker}")
             return 1
 
     print("GREEN")
