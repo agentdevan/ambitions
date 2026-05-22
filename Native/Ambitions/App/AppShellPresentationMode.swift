@@ -97,7 +97,7 @@ struct AppMeridianShellChromeState: Equatable {
         receiptOverlayZoneLabel: "Receipt overlay zone stays temporary and dismissible.",
         globalActionLabel: "Global add opens capture or command choices without changing tabs.",
         safeAreaLabel: "Shell chrome stays inside safe areas and keeps native navigation available.",
-        rollbackLabel: "Meridian remains available with --ambitions-shell=meridian.",
+        rollbackLabel: "Rollback to --ambitions-shell=native. Meridian remains available with --ambitions-shell=meridian.",
         destinations: AppMeridianDestination.all
     )
 }

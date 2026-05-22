@@ -149,7 +149,7 @@ final class CoreSurfaceIntegrationScenarioTests: XCTestCase {
         let proofReviewItems = dashboard.crossSurfaceProofReview.items
         let systemCenterItems = dashboard.systemCenter.sections.flatMap(\.items)
         let receiptLedgerItem = try XCTUnwrap(
-            dashboard.receiptAudit.items.first(where: { $0.id == "profile-receipts-ledger" })
+            dashboard.receiptAudit.items.first(where: { $0.id == "you-receipts-ledger" })
         )
 
         XCTAssertTrue(dashboard.preferences.localOnlyModeEnabled)
@@ -159,7 +159,7 @@ final class CoreSurfaceIntegrationScenarioTests: XCTestCase {
         XCTAssertEqual(dashboard.preferences.reviewCadenceDays, 7)
         XCTAssertTrue(trustHistoryItems.contains { $0.category == .proof && $0.title == "Local proof available" })
         XCTAssertTrue(proofReviewItems.contains { $0.id == "cross-review-today-goal-proof" && $0.state == .success })
-        XCTAssertTrue(systemCenterItems.contains { $0.id == "what-ambitions-knows" && $0.statusLabel == "Local" })
+        XCTAssertTrue(systemCenterItems.contains { $0.id == "what-ambitions-knows" && $0.statusLabel == "Stored on this device" })
         XCTAssertNotEqual(receiptLedgerItem.valueLabel, "No recent events")
     }
 }

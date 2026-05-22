@@ -173,6 +173,7 @@ final class AmbitionsRuntime {
     let youService: any YouServicing
     let notificationService: any NotificationServicing
     let calendarRemindersService: any CalendarRemindersServicing
+    let privateLifeRuntimeKernel: PrivateLifeRuntimeKernel
     let dedicatedDevicePrototypeRuntime: DedicatedDevicePrototypeRuntime
 
     init(
@@ -195,6 +196,7 @@ final class AmbitionsRuntime {
         youService: any YouServicing,
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
+        privateLifeRuntimeKernel: PrivateLifeRuntimeKernel,
         dedicatedDevicePrototypeRuntime: DedicatedDevicePrototypeRuntime
     ) {
         self.clientContext = clientContext
@@ -216,6 +218,7 @@ final class AmbitionsRuntime {
         self.youService = youService
         self.notificationService = notificationService
         self.calendarRemindersService = calendarRemindersService
+        self.privateLifeRuntimeKernel = privateLifeRuntimeKernel
         self.dedicatedDevicePrototypeRuntime = dedicatedDevicePrototypeRuntime
     }
 }

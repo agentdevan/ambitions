@@ -94,10 +94,29 @@ private extension SourceAtlasCoverageRuntimeFixtureModelsTests {
     }
 
     static func repoRoot() -> URL {
-        URL(fileURLWithPath: #filePath)
+        let start = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()
             .deletingLastPathComponent()
+
+        var current = start
+        let fileManager = FileManager.default
+
+        while true {
+            let fixtureRoot = current
+                .appendingPathComponent("source-atlas", isDirectory: true)
+                .appendingPathComponent("fixtures", isDirectory: true)
+            if fileManager.fileExists(atPath: fixtureRoot.path, isDirectory: nil) {
+                return current
+            }
+
+            let parent = current.deletingLastPathComponent()
+            if parent.path == current.path {
+                return start
+            }
+
+            current = parent
+        }
     }
 }
 

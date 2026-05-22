@@ -193,7 +193,7 @@ final class AmbitionsOSVerticalSliceProofModelsTests: XCTestCase {
         XCTAssertTrue(events.allSatisfy { $0.captureID == capture.id })
         XCTAssertEqual(record.command.id, command.id)
         XCTAssertEqual(commandReceipt.why?.eventLedgerEntryIDs, [captureEvent.id])
-        XCTAssertEqual(proofTrustReceipt.actionReceiptIDs, [commandReceipt.id, closureReceipt.id])
+        XCTAssertEqual(proofTrustReceipt.actionReceiptIDs, [commandReceipt.id, closureReceipt.id].sorted())
         XCTAssertEqual(proofTrustReceipt.proofReferenceIDs, [proofReference.id])
         XCTAssertTrue(sourceClaim.canDriveSourceSensitiveRecommendation)
         XCTAssertTrue(recommendation.isWellFormed)

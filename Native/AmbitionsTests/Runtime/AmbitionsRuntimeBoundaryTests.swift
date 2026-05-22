@@ -121,6 +121,8 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         XCTAssertEqual(runtime.capabilities.privateLifeRuntimeBoundary, .localOnly)
         XCTAssertTrue(runtime.capabilities.privateLifeRuntimeBoundary.isLocalOnly)
         XCTAssertEqual(runtime.capabilities.syncBackendKind, .localOnly)
+        XCTAssertEqual(runtime.privateLifeRuntimeKernel.boundary, .localOnly)
+        XCTAssertTrue(runtime.privateLifeRuntimeKernel.boundary.isLocalOnly)
         XCTAssertNotNil(runtime.todayService as? NotificationSchedulingTodayService)
         XCTAssertNotNil(runtime.goalsService as? NotificationSchedulingGoalsService)
         XCTAssertNotNil(runtime.goalIntelligenceService as? RepositoryBackedRuntimeGoalIntelligenceService)

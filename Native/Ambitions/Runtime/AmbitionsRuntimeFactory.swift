@@ -91,6 +91,7 @@ enum AmbitionsRuntimeFactory {
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService
         )
+        let privateLifeRuntimeKernel = PrivateLifeRuntimeKernel()
         let actionExecutor = DefaultRuntimeActionCommandExecutor(todayService: todayService)
         let dedicatedDevicePrototypeRuntime = DedicatedDevicePrototypeRuntime(
             contextService: contextService,
@@ -120,6 +121,7 @@ enum AmbitionsRuntimeFactory {
             youService: youService,
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
+            privateLifeRuntimeKernel: privateLifeRuntimeKernel,
             dedicatedDevicePrototypeRuntime: dedicatedDevicePrototypeRuntime
         )
     }
