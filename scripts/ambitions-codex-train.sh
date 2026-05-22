@@ -315,7 +315,17 @@ parse_status() {
     return
   fi
   status="$(
-    sed -nE 's/.*STATUS:[[:space:]]*(GREEN|YELLOW|RED)([^A-Za-z].*)?$/\1/p' "$file" \
+    awk '
+      {
+        line = toupper($0)
+        if (match(line, /^[[:space:]]*STATUS[[:space:]]*:[[:space:]]*(GREEN|YELLOW|RED)([^A-Z]|$)/)) {
+          value = substr(line, RSTART, RLENGTH)
+          sub(/^[[:space:]]*STATUS[[:space:]]*:[[:space:]]*/, "", value)
+          sub(/[^A-Z].*$/, "", value)
+          print value
+        }
+      }
+    ' "$file" \
       | tail -1
   )"
   if [[ -n "$status" ]]; then

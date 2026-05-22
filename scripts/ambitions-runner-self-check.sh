@@ -92,6 +92,8 @@ flags_output="$(ACCESS_MODE=full bash -c '
   || die "GREEN parser sample failed"
 [[ "$(check_status_parser_sample 'STATUS: YELLOW')" == "YELLOW" ]] \
   || die "YELLOW parser sample failed"
+[[ "$(check_status_parser_sample 'Status: YELLOW')" == "YELLOW" ]] \
+  || die "mixed-case status label parser sample failed"
 [[ "$(check_status_parser_sample 'STATUS: RED')" == "RED" ]] \
   || die "RED parser sample failed"
 [[ "$(check_status_parser_sample 'no explicit status')" == "UNKNOWN" ]] \
