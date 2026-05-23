@@ -938,7 +938,10 @@ private struct YouLifeContextFactRowView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: theme.spacing.xs) {
                         TagPill(factRow.sourceLabel, icon: "doc.text.magnifyingglass", state: .default)
+                        TagPill(factRow.activityLabel, icon: "play.circle", state: factRow.activityLabel.localizedCaseInsensitiveContains("active") ? .success : .warning)
+                        TagPill(factRow.lastAffectedLabel, icon: "clock", state: factRow.freshness.visualState)
                         TagPill("Runtime use \(factRow.runtimeUseState.label)", icon: "hand.raised", state: factRow.runtimeUseState.visualState)
+                        TagPill(factRow.runtimePermissionLabel, icon: "lock.shield", state: factRow.runtimeUseState == .used ? .success : .warning)
                         TagPill(factRow.whereUsed, icon: "tray.full", state: factRow.runtimeUseState.visualState)
                     }
                 }

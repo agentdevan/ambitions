@@ -280,6 +280,7 @@ struct ReplayableDecisionTrace: Codable, Sendable, Equatable, Hashable, Identifi
     let blockingReasons: [ReplayableDecisionTraceBlockReason]
     let runtime: ReplayableDecisionTraceRuntimeFacts
     let lifeContext: ReplayableDecisionTraceLifeContextFacts
+    let personalizationFactorLedger: PersonalizationFactorLedger
     let goalIntelligence: ReplayableDecisionTraceGoalIntelligenceFacts?
     let recommendation: ReplayableDecisionTraceRecommendationFacts?
 
@@ -297,6 +298,7 @@ struct ReplayableDecisionTrace: Codable, Sendable, Equatable, Hashable, Identifi
             output.lifeContextEffect,
             projection: input.traceContext.lifeContextProjection
         )
+        personalizationFactorLedger = output.personalizationFactorLedger
         goalIntelligence = input.traceContext.goalIntelligenceContext.map(ReplayableDecisionTraceGoalIntelligenceFacts.init)
         recommendation = record.map(ReplayableDecisionTraceRecommendationFacts.init)
 

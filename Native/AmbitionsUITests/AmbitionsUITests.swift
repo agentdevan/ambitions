@@ -191,7 +191,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(reviewButton.waitForExistence(timeout: 10))
 
         reviewButton.tap()
-        XCTAssertTrue(scrollUntilStaticTextExists("Review Needed", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Needs Review", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Older context that may need review", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-review-needed", in: app, maxAttempts: 8))
 
@@ -200,6 +200,27 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Schedule & Availability", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Travel & Access", in: app, maxAttempts: 8))
         XCTAssertTrue(app.buttons["you.life-context.fact.life-context-age.edit"].waitForExistence(timeout: 10))
+    }
+
+    func testYouLifeContextLedgerInspectionShowsRuntimeFactorsAndReplayReceipts() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(scrollUntilYouRowExists(named: "What Ambitions Knows", in: app, maxAttempts: 8))
+        youRow(named: "What Ambitions Knows", in: app).tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["you.life-context-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Runtime Factors", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Recommendation Inputs", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Why This Changes Plans", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Rejected Factors", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Sensitive Context Usage", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Context Confidence", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Needs Review", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Disabled Factors", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Replay & Receipts", in: app, maxAttempts: 8))
     }
 
     func testLaunchURLCanLandOnCanonicalTimeSurface() throws {

@@ -652,6 +652,7 @@ final class YouFeatureServiceTests: XCTestCase {
             "life-context-eligibility-pathways",
             "life-context-history",
             "life-context-constraints",
+            "life-context-runtime-factors",
             "life-context-review-needed"
         ])
         XCTAssertEqual(lifeContext.sections.map(\.id), [
@@ -662,7 +663,15 @@ final class YouFeatureServiceTests: XCTestCase {
             "life-context-eligibility-pathways",
             "life-context-history",
             "life-context-constraints",
-            "life-context-review-needed"
+            "life-context-runtime-factors",
+            "life-context-recommendation-inputs",
+            "life-context-why-this-changes-plans",
+            "life-context-rejected-factors",
+            "life-context-sensitive-context-usage",
+            "life-context-context-confidence",
+            "life-context-review-needed",
+            "life-context-disabled-factors",
+            "life-context-replay-receipts"
         ])
         XCTAssertTrue(allFactRows.contains(where: {
             $0.id == "life-context-age" &&
@@ -691,6 +700,14 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.id == "life-context-constraint-dont-assume" &&
             $0.runtimeUseState == .used &&
             $0.whereUsed.contains("Guardrail")
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-runtime-factor-factor.goal_requirement" &&
+            $0.whereUsed.contains("Goal thread")
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-replay-fingerprint" &&
+            $0.whereUsed.contains("Deterministic replay")
         }))
         XCTAssertTrue(allFactRows.contains(where: {
             $0.id == "life-context-source-source.imported.catch-up" &&

@@ -519,6 +519,9 @@ struct YouLifeContextFactRow: Identifiable, Sendable, Equatable {
     let sourceLabel: String
     let freshness: YouMemoryFreshness
     let runtimeUseState: YouLifeContextRuntimeUseState
+    let activityLabel: String
+    let lastAffectedLabel: String
+    let runtimePermissionLabel: String
     let whereUsed: String
     let editPath: String
     let pausePath: String
@@ -535,6 +538,60 @@ struct YouLifeContextFactRow: Identifiable, Sendable, Equatable {
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String
+
+    init(
+        id: String,
+        title: String,
+        detail: String,
+        sourceLabel: String,
+        freshness: YouMemoryFreshness,
+        runtimeUseState: YouLifeContextRuntimeUseState,
+        activityLabel: String = "Active",
+        lastAffectedLabel: String = "This run",
+        runtimePermissionLabel: String = "Allowed",
+        whereUsed: String,
+        editPath: String,
+        pausePath: String,
+        deletePath: String,
+        reviewPath: String,
+        confirmPath: String,
+        editLabel: String,
+        pauseLabel: String,
+        deleteLabel: String,
+        reviewLabel: String,
+        confirmLabel: String,
+        updateTargets: [YouLifeContextUpdateTarget],
+        captureRouteContext: CaptureBackgroundFactRoute,
+        accessibilityLabel: String,
+        accessibilityValue: String,
+        accessibilityHint: String
+    ) {
+        self.id = id
+        self.title = title
+        self.detail = detail
+        self.sourceLabel = sourceLabel
+        self.freshness = freshness
+        self.runtimeUseState = runtimeUseState
+        self.activityLabel = activityLabel
+        self.lastAffectedLabel = lastAffectedLabel
+        self.runtimePermissionLabel = runtimePermissionLabel
+        self.whereUsed = whereUsed
+        self.editPath = editPath
+        self.pausePath = pausePath
+        self.deletePath = deletePath
+        self.reviewPath = reviewPath
+        self.confirmPath = confirmPath
+        self.editLabel = editLabel
+        self.pauseLabel = pauseLabel
+        self.deleteLabel = deleteLabel
+        self.reviewLabel = reviewLabel
+        self.confirmLabel = confirmLabel
+        self.updateTargets = updateTargets
+        self.captureRouteContext = captureRouteContext
+        self.accessibilityLabel = accessibilityLabel
+        self.accessibilityValue = accessibilityValue
+        self.accessibilityHint = accessibilityHint
+    }
 }
 
 struct YouLifeContextSection: Identifiable, Sendable, Equatable {

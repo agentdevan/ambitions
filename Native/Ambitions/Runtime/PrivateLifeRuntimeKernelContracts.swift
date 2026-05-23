@@ -74,6 +74,7 @@ struct PrivateLifeRuntimeKernelDecisionRecord: Sendable {
     let goalText: String?
     let traceContext: PrivateLifeRuntimeKernelTraceContext
     let recommendationTrace: RecommendationTrace
+    let personalizationFactorLedger: PersonalizationFactorLedger
     let boundary: PrivateLifeRuntimeBoundary
     let canDriveRecommendation: Bool
     let traceShape: String
@@ -112,6 +113,7 @@ struct PrivateLifeRuntimeKernelDecisionOutput: Sendable, Equatable {
     let hasRecommendationTrace: Bool
     let traceShape: String?
     let recordID: String?
+    let personalizationFactorLedger: PersonalizationFactorLedger
     let lifeContextEffect: PrivateLifeRuntimeLifeContextEffect
     let lifeContextSignature: String
 
@@ -129,6 +131,11 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
 
     func evaluate(_ input: PrivateLifeRuntimeKernelDecisionInput) -> PrivateLifeRuntimeKernelDecisionOutput {
         let record = makeDecisionRecord(input)
+        let personalizationFactorLedger = record?.personalizationFactorLedger ?? makePersonalizationFactorLedger(
+            for: input,
+            decisionRecord: nil,
+            decisionOutput: nil
+        )
         let lifeContextEffect = record?.lifeContextEffect ?? makeLifeContextEffect(
             goalText: input.goalText ?? input.traceContext.goalText,
             projection: input.traceContext.lifeContextProjection
@@ -145,6 +152,7 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
             hasRecommendationTrace: record != nil,
             traceShape: record?.traceShape,
             recordID: record?.id,
+            personalizationFactorLedger: personalizationFactorLedger,
             lifeContextEffect: lifeContextEffect,
             lifeContextSignature: lifeContextSignature
         )
@@ -160,6 +168,7 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
             recommendationTrace: recommendationTrace
         )
         let traceShape = traceShape(for: recommendationTrace)
+        let personalizationFactorLedger = makePersonalizationFactorLedger(for: input)
         let lifeContextEffect = makeLifeContextEffect(
             goalText: input.goalText ?? input.traceContext.goalText,
             projection: input.traceContext.lifeContextProjection
@@ -175,6 +184,7 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
             goalText: input.goalText ?? input.traceContext.goalText,
             traceContext: input.traceContext,
             recommendationTrace: recommendationTrace,
+            personalizationFactorLedger: personalizationFactorLedger,
             boundary: boundary,
             canDriveRecommendation: canDriveRecommendation,
             traceShape: traceShape,
@@ -566,6 +576,31 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
         }
 
         return "\(goalText) " + reasonParts.joined(separator: ", ") + "."
+    }
+
+    private func makePersonalizationFactorLedger(
+        for input: PrivateLifeRuntimeKernelDecisionInput,
+        decisionRecord: PrivateLifeRuntimeKernelDecisionRecord? = nil,
+        decisionOutput: PrivateLifeRuntimeKernelDecisionOutput? = nil
+    ) -> PersonalizationFactorLedger {
+        let builder = PersonalizationFactorLedgerBuilder()
+        let userContextVersion = lifeContextSignature(
+            goalText: input.goalText ?? input.traceContext.goalText,
+            projection: input.traceContext.lifeContextProjection
+        )
+        return builder.build(
+            PersonalizationFactorLedgerInput(
+                goalID: input.traceContext.goalIntelligenceContext?.goalID,
+                goalText: input.goalText ?? input.traceContext.goalText,
+                projection: input.traceContext.lifeContextProjection,
+                recommendationTrace: input.recommendationTrace,
+                decisionRecord: decisionRecord,
+                decisionOutput: decisionOutput,
+                generatedAt: .now,
+                runtimeVersion: "private_life_runtime.factor_ledger.v1",
+                userContextVersion: userContextVersion
+            )
+        )
     }
 
     private func normalizeGoalText(_ value: String?) -> String? {

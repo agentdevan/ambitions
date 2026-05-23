@@ -1373,9 +1373,16 @@ private extension RepositoryBackedYouService {
     func makeLifeContextState(snapshot: Snapshot) -> YouLifeContextState {
         let bundle = latestLifeContextBundle(from: snapshot.lifeContextBundles)
         let projection = bundle?.projection(asOf: .now)
+        let ledger = PersonalizationFactorLedgerBuilder().build(
+            PersonalizationFactorLedgerInput(
+                goalID: bundle?.id,
+                goalText: bundle?.profile.userNotes ?? bundle?.profile.schoolOrWorkContext,
+                projection: projection
+            )
+        )
         let basePath = "You > What Ambitions Knows > Life Context"
-        let summaryItems = makeLifeContextSummaryItems(bundle: bundle, projection: projection)
-        let sections = makeLifeContextSections(bundle: bundle, projection: projection, basePath: basePath)
+        let summaryItems = makeLifeContextSummaryItems(bundle: bundle, projection: projection, ledger: ledger)
+        let sections = makeLifeContextSections(bundle: bundle, projection: projection, ledger: ledger, basePath: basePath)
 
         return YouLifeContextState(
             title: "Life Context",
@@ -1398,7 +1405,8 @@ private extension RepositoryBackedYouService {
 
     func makeLifeContextSummaryItems(
         bundle: LifeContextBundle?,
-        projection: LifeContextRuntimeProjection?
+        projection: LifeContextRuntimeProjection?,
+        ledger: PersonalizationFactorLedger
     ) -> [SettingsItem] {
         let ageValue: String
         if let ageYears = projection?.ageYears ?? bundle?.profile.exactAgeYears {
@@ -1419,7 +1427,8 @@ private extension RepositoryBackedYouService {
         let excludedReviewCount = projection?.excludedHistorySummary.count ?? 0
         let sensitiveReviewCount = projection?.sensitiveUseWarnings.count ?? 0
         let questionReviewCount = projection?.missingContextQuestions.count ?? 0
-        let reviewCount = sourceReviewCount + excludedReviewCount + sensitiveReviewCount + questionReviewCount
+        let ledgerReviewCount = ledger.factors.filter { $0.allowedForRuntimeUse == false || $0.freshness.needsReview }.count
+        let reviewCount = sourceReviewCount + excludedReviewCount + sensitiveReviewCount + questionReviewCount + ledgerReviewCount
 
         return [
             SettingsItem(
@@ -1472,8 +1481,15 @@ private extension RepositoryBackedYouService {
                 valueLabel: "\(constraintCount)"
             ),
             SettingsItem(
+                id: "life-context-runtime-factors",
+                title: "Runtime Factors",
+                subtitle: "What actually shapes recommendations right now.",
+                icon: "waveform.path.ecg",
+                valueLabel: "\(ledger.factors.count)"
+            ),
+            SettingsItem(
                 id: "life-context-review-needed",
-                title: "Review Needed",
+                title: "Needs Review",
                 subtitle: "Stale, imported, inferred, and sensitive context.",
                 icon: "exclamationmark.triangle",
                 valueLabel: reviewCount == 0 ? "Clear" : "\(reviewCount)"
@@ -1484,6 +1500,7 @@ private extension RepositoryBackedYouService {
     func makeLifeContextSections(
         bundle: LifeContextBundle?,
         projection: LifeContextRuntimeProjection?,
+        ledger: PersonalizationFactorLedger,
         basePath: String
     ) -> [YouLifeContextSection] {
         return [
@@ -1530,10 +1547,58 @@ private extension RepositoryBackedYouService {
                 factRows: makeConstraintsRows(bundle: bundle, projection: projection, basePath: basePath)
             ),
             YouLifeContextSection(
+                id: "life-context-runtime-factors",
+                title: "Runtime Factors",
+                subtitle: "These are the current factors shaping recommendation behavior.",
+                factRows: makeRuntimeFactorRows(ledger: ledger, basePath: basePath)
+            ),
+            YouLifeContextSection(
+                id: "life-context-recommendation-inputs",
+                title: "Recommendation Inputs",
+                subtitle: "Selected and rejected candidate inputs stay inspectable.",
+                factRows: makeRecommendationInputRows(ledger: ledger, basePath: basePath)
+            ),
+            YouLifeContextSection(
+                id: "life-context-why-this-changes-plans",
+                title: "Why This Changes Plans",
+                subtitle: "The concrete reasons that are allowed to move a recommendation.",
+                factRows: makeWhyThisChangesPlanRows(ledger: ledger, basePath: basePath)
+            ),
+            YouLifeContextSection(
+                id: "life-context-rejected-factors",
+                title: "Rejected Factors",
+                subtitle: "Factors that are blocked or intentionally excluded.",
+                factRows: makeRejectedFactorRows(ledger: ledger, basePath: basePath)
+            ),
+            YouLifeContextSection(
+                id: "life-context-sensitive-context-usage",
+                title: "Sensitive Context Usage",
+                subtitle: "Sensitive inputs stay visible without leaking raw detail.",
+                factRows: makeSensitiveContextUsageRows(ledger: ledger, basePath: basePath)
+            ),
+            YouLifeContextSection(
+                id: "life-context-context-confidence",
+                title: "Context Confidence",
+                subtitle: "Freshness and review posture together shape confidence.",
+                factRows: makeContextConfidenceRows(ledger: ledger, basePath: basePath)
+            ),
+            YouLifeContextSection(
                 id: "life-context-review-needed",
-                title: "Review Needed",
+                title: "Needs Review",
                 subtitle: "These rows need a fresh check before runtime use.",
                 factRows: makeReviewNeededRows(bundle: bundle, projection: projection, basePath: basePath)
+            ),
+            YouLifeContextSection(
+                id: "life-context-disabled-factors",
+                title: "Disabled Factors",
+                subtitle: "These factors are explicitly removed from runtime use.",
+                factRows: makeDisabledFactorRows(ledger: ledger, basePath: basePath)
+            ),
+            YouLifeContextSection(
+                id: "life-context-replay-receipts",
+                title: "Replay & Receipts",
+                subtitle: "The replay fingerprint and receipt seam stay visible.",
+                factRows: makeReplayAndReceiptRows(ledger: ledger, basePath: basePath)
             )
         ]
     }
@@ -2211,6 +2276,334 @@ private extension RepositoryBackedYouService {
         return rows
     }
 
+    func makeRuntimeFactorRows(
+        ledger: PersonalizationFactorLedger,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        ledger.factors.map { factor in
+            makeLifeContextFactRow(
+                id: "life-context-runtime-factor-\(factor.id)",
+                title: displayLabel(for: factor.factorType),
+                detail: factor.humanReadableReason,
+                sourceLabel: factor.source.sourceLabel,
+                freshness: memoryFreshness(for: factor.freshness.state),
+                runtimeUseState: runtimeUseState(for: factor),
+                activityLabel: factor.active ? "Active" : "Disabled",
+                lastAffectedLabel: factor.lastAffectedLabel,
+                runtimePermissionLabel: factor.allowedForRuntimeUse ? "Allowed" : "Blocked",
+                whereUsed: factor.affectedRecommendationArea,
+                updateTargets: factorUpdateTargets(for: factor),
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        }
+    }
+
+    func makeRecommendationInputRows(
+        ledger: PersonalizationFactorLedger,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        [
+            makeLifeContextFactRow(
+                id: "life-context-recommendation-selected",
+                title: "Selected candidate",
+                detail: ledger.selectedCandidateID,
+                sourceLabel: "Runtime output",
+                freshness: ledger.replayProjection.canReplay ? .current : .mayNeedReview,
+                runtimeUseState: ledger.replayProjection.canReplay ? .used : .needsReview,
+                activityLabel: "Selected",
+                lastAffectedLabel: "This run",
+                runtimePermissionLabel: "Allowed",
+                whereUsed: "Candidate competition",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-recommendation-rejected",
+                title: "Rejected candidates",
+                detail: ledger.rejectedCandidateIDs.isEmpty ? "None" : ledger.rejectedCandidateIDs.joined(separator: ", "),
+                sourceLabel: "Runtime output",
+                freshness: ledger.rejectedCandidateIDs.isEmpty ? .current : .mayNeedReview,
+                runtimeUseState: ledger.rejectedCandidateIDs.isEmpty ? .used : .needsReview,
+                activityLabel: ledger.rejectedCandidateIDs.isEmpty ? "None rejected" : "Rejected",
+                lastAffectedLabel: ledger.replayProjection.stableFingerprint,
+                runtimePermissionLabel: "Allowed",
+                whereUsed: "Candidate competition",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-recommendation-sources",
+                title: "Recommendation inputs",
+                detail: ledger.explanationProjection.sourceLabels.isEmpty ? "No source labels yet." : ledger.explanationProjection.sourceLabels.joined(separator: ", "),
+                sourceLabel: "Explanation projection",
+                freshness: ledger.confidenceBand == .reviewNeeded ? .mayNeedReview : .current,
+                runtimeUseState: ledger.confidenceBand == .reviewNeeded ? .needsReview : .used,
+                activityLabel: "Explained",
+                lastAffectedLabel: ledger.explanationProjection.confidenceLabel,
+                runtimePermissionLabel: "Allowed",
+                whereUsed: "Why the recommendation changed",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        ]
+    }
+
+    func makeWhyThisChangesPlanRows(
+        ledger: PersonalizationFactorLedger,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        [
+            makeLifeContextFactRow(
+                id: "life-context-why-summary",
+                title: "Why this changes plans",
+                detail: ledger.explanationProjection.summary,
+                sourceLabel: "Explanation projection",
+                freshness: ledger.confidenceBand == .reviewNeeded ? .mayNeedReview : .current,
+                runtimeUseState: ledger.confidenceBand == .reviewNeeded ? .needsReview : .used,
+                activityLabel: ledger.confidenceBand == .reviewNeeded ? "Needs review" : "Active",
+                lastAffectedLabel: ledger.generatedAt,
+                runtimePermissionLabel: "Allowed",
+                whereUsed: "Plan-shaping explanation",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-why-reasons",
+                title: "Reason stack",
+                detail: ledger.explanationProjection.whyThisChangesPlans.isEmpty ? "No local reasons recorded yet." : ledger.explanationProjection.whyThisChangesPlans.joined(separator: " • "),
+                sourceLabel: "Explanation projection",
+                freshness: ledger.explanationProjection.whyThisChangesPlans.isEmpty ? .basedOnOlderContext : .current,
+                runtimeUseState: ledger.explanationProjection.whyThisChangesPlans.isEmpty ? .needsReview : .used,
+                activityLabel: "Active",
+                lastAffectedLabel: ledger.replayProjection.stableFingerprint,
+                runtimePermissionLabel: "Allowed",
+                whereUsed: "Reasons allowed to change the plan",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        ]
+    }
+
+    func makeRejectedFactorRows(
+        ledger: PersonalizationFactorLedger,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        let rejectedFactors = ledger.factors.filter {
+            $0.allowedForRuntimeUse == false ||
+                $0.control.active == false ||
+                $0.sensitiveUse.permissionState == .blocked
+        }
+        if rejectedFactors.isEmpty {
+            return [
+                makeLifeContextFactRow(
+                    id: "life-context-rejected-empty",
+                    title: "Rejected factors",
+                    detail: "None yet.",
+                    sourceLabel: "Runtime output",
+                    freshness: .current,
+                    runtimeUseState: .used,
+                    activityLabel: "None rejected",
+                    lastAffectedLabel: ledger.generatedAt,
+                    runtimePermissionLabel: "Allowed",
+                    whereUsed: "No factor rejection yet",
+                    updateTargets: [.historicalFact],
+                    captureRouteContext: .needsReview,
+                    basePath: basePath
+                )
+            ]
+        }
+
+        return rejectedFactors.map { factor in
+            makeLifeContextFactRow(
+                id: "life-context-rejected-\(factor.id)",
+                title: displayLabel(for: factor.factorType),
+                detail: factor.fallbackBehaviorIfRemoved,
+                sourceLabel: factor.source.sourceLabel,
+                freshness: memoryFreshness(for: factor.freshness.state),
+                runtimeUseState: .notUsed,
+                activityLabel: "Rejected",
+                lastAffectedLabel: factor.lastAffectedLabel,
+                runtimePermissionLabel: factor.sensitiveUse.permissionState.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+                whereUsed: factor.affectedRecommendationArea,
+                updateTargets: factorUpdateTargets(for: factor),
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        }
+    }
+
+    func makeSensitiveContextUsageRows(
+        ledger: PersonalizationFactorLedger,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        let sensitiveFactors = ledger.factors.filter { $0.sensitiveUse.isSensitive || $0.sensitiveUse.permissionState != .allowed }
+        if sensitiveFactors.isEmpty {
+            return [
+                makeLifeContextFactRow(
+                    id: "life-context-sensitive-empty",
+                    title: "Sensitive context",
+                    detail: "No sensitive factor is active.",
+                    sourceLabel: "Runtime output",
+                    freshness: .current,
+                    runtimeUseState: .used,
+                    activityLabel: "No sensitive use",
+                    lastAffectedLabel: ledger.generatedAt,
+                    runtimePermissionLabel: "Allowed",
+                    whereUsed: "Sensitive inputs stay blocked unless approved",
+                    updateTargets: [.historicalFact],
+                    captureRouteContext: .needsReview,
+                    basePath: basePath
+                )
+            ]
+        }
+
+        return sensitiveFactors.map { factor in
+            makeLifeContextFactRow(
+                id: "life-context-sensitive-\(factor.id)",
+                title: displayLabel(for: factor.factorType),
+                detail: factor.sensitiveUse.sensitiveUseLabel,
+                sourceLabel: factor.source.sourceLabel,
+                freshness: memoryFreshness(for: factor.freshness.state),
+                runtimeUseState: factor.allowedForRuntimeUse ? .used : .needsReview,
+                activityLabel: factor.sensitiveUse.permissionState == .allowed ? "Allowed" : "Blocked",
+                lastAffectedLabel: factor.lastAffectedLabel,
+                runtimePermissionLabel: factor.sensitiveUse.permissionState.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+                whereUsed: factor.affectedRecommendationArea,
+                updateTargets: factorUpdateTargets(for: factor),
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        }
+    }
+
+    func makeContextConfidenceRows(
+        ledger: PersonalizationFactorLedger,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        [
+            makeLifeContextFactRow(
+                id: "life-context-confidence-band",
+                title: "Confidence band",
+                detail: ledger.confidenceBand.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+                sourceLabel: "Runtime output",
+                freshness: ledger.confidenceBand == .reviewNeeded ? .mayNeedReview : .current,
+                runtimeUseState: ledger.confidenceBand == .reviewNeeded ? .needsReview : .used,
+                activityLabel: "Active",
+                lastAffectedLabel: ledger.replayProjection.stableFingerprint,
+                runtimePermissionLabel: ledger.replayProjection.canReplay ? "Allowed" : "Blocked",
+                whereUsed: "How sure the runtime is",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-confidence-review",
+                title: "Needs review",
+                detail: ledger.missingContextQuestions.isEmpty ? "No unanswered questions." : ledger.missingContextQuestions.joined(separator: ", "),
+                sourceLabel: "Runtime output",
+                freshness: ledger.missingContextQuestions.isEmpty ? .current : .mayNeedReview,
+                runtimeUseState: ledger.missingContextQuestions.isEmpty ? .used : .needsReview,
+                activityLabel: ledger.missingContextQuestions.isEmpty ? "Clear" : "Needs review",
+                lastAffectedLabel: ledger.generatedAt,
+                runtimePermissionLabel: ledger.missingContextQuestions.isEmpty ? "Allowed" : "Needs review",
+                whereUsed: "What still needs attention before trust is higher",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        ]
+    }
+
+    func makeDisabledFactorRows(
+        ledger: PersonalizationFactorLedger,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        let disabledFactors = ledger.factors.filter {
+            $0.control.active == false || $0.allowedForRuntimeUse == false || $0.sensitiveUse.permissionState == .disabled
+        }
+        if disabledFactors.isEmpty {
+            return [
+                makeLifeContextFactRow(
+                    id: "life-context-disabled-empty",
+                    title: "Disabled factors",
+                    detail: "None yet.",
+                    sourceLabel: "Runtime output",
+                    freshness: .current,
+                    runtimeUseState: .used,
+                    activityLabel: "None disabled",
+                    lastAffectedLabel: ledger.generatedAt,
+                    runtimePermissionLabel: "Allowed",
+                    whereUsed: "Nothing has been disabled yet",
+                    updateTargets: [.historicalFact],
+                    captureRouteContext: .needsReview,
+                    basePath: basePath
+                )
+            ]
+        }
+
+        return disabledFactors.map { factor in
+            makeLifeContextFactRow(
+                id: "life-context-disabled-\(factor.id)",
+                title: displayLabel(for: factor.factorType),
+                detail: factor.fallbackBehaviorIfRemoved,
+                sourceLabel: factor.source.sourceLabel,
+                freshness: memoryFreshness(for: factor.freshness.state),
+                runtimeUseState: .notUsed,
+                activityLabel: "Disabled",
+                lastAffectedLabel: factor.lastAffectedLabel,
+                runtimePermissionLabel: factor.sensitiveUse.permissionState.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+                whereUsed: factor.affectedRecommendationArea,
+                updateTargets: factorUpdateTargets(for: factor),
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        }
+    }
+
+    func makeReplayAndReceiptRows(
+        ledger: PersonalizationFactorLedger,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        [
+            makeLifeContextFactRow(
+                id: "life-context-replay-fingerprint",
+                title: "Replay fingerprint",
+                detail: ledger.replayProjection.stableFingerprint,
+                sourceLabel: "Replay projection",
+                freshness: ledger.replayProjection.canReplay ? .current : .mayNeedReview,
+                runtimeUseState: ledger.replayProjection.canReplay ? .used : .needsReview,
+                activityLabel: ledger.replayProjection.canReplay ? "Replayable" : "Needs review",
+                lastAffectedLabel: ledger.generatedAt,
+                runtimePermissionLabel: ledger.replayProjection.canReplay ? "Allowed" : "Blocked",
+                whereUsed: "Deterministic replay",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-replay-candidate",
+                title: "Selected / rejected candidates",
+                detail: "Selected \(ledger.replayProjection.selectedCandidateID); rejected \(ledger.replayProjection.rejectedCandidateIDs.isEmpty ? "none" : ledger.replayProjection.rejectedCandidateIDs.joined(separator: ", "))",
+                sourceLabel: "Replay projection",
+                freshness: ledger.replayProjection.canReplay ? .current : .mayNeedReview,
+                runtimeUseState: ledger.replayProjection.canReplay ? .used : .needsReview,
+                activityLabel: "Replayable",
+                lastAffectedLabel: ledger.replayProjection.stableFingerprint,
+                runtimePermissionLabel: "Allowed",
+                whereUsed: "Selected and rejected candidate memory",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        ]
+    }
+
     func makeHistoricalContextRows(
         bundle: LifeContextBundle?,
         projection: LifeContextRuntimeProjection?,
@@ -2436,6 +2829,9 @@ private extension RepositoryBackedYouService {
         sourceLabel: String,
         freshness: YouMemoryFreshness,
         runtimeUseState: YouLifeContextRuntimeUseState,
+        activityLabel: String = "Active",
+        lastAffectedLabel: String = "This run",
+        runtimePermissionLabel: String = "Allowed",
         whereUsed: String,
         updateTargets: [YouLifeContextUpdateTarget],
         captureRouteContext: CaptureBackgroundFactRoute,
@@ -2459,6 +2855,9 @@ private extension RepositoryBackedYouService {
             sourceLabel: sourceLabel,
             freshness: freshness,
             runtimeUseState: runtimeUseState,
+            activityLabel: activityLabel,
+            lastAffectedLabel: lastAffectedLabel,
+            runtimePermissionLabel: runtimePermissionLabel,
             whereUsed: whereUsed,
             editPath: editPath,
             pausePath: pausePath,
@@ -2473,7 +2872,7 @@ private extension RepositoryBackedYouService {
             updateTargets: updateTargets,
             captureRouteContext: captureRouteContext,
             accessibilityLabel: title,
-            accessibilityValue: "\(detail). Source \(sourceLabel). Freshness \(freshness.label). Runtime use \(runtimeUseState.label). Used for \(whereUsed).",
+            accessibilityValue: "\(detail). Source \(sourceLabel). Freshness \(freshness.label). Runtime use \(runtimeUseState.label). Activity \(activityLabel). Last affected \(lastAffectedLabel). Permission \(runtimePermissionLabel). Used for \(whereUsed).",
             accessibilityHint: "Edit, pause, delete, review, and confirm paths stay visible from the owning Life Context surface."
         )
     }
@@ -2568,6 +2967,17 @@ private extension RepositoryBackedYouService {
         }
     }
 
+    func memoryFreshness(for freshness: PersonalizationFactorLedgerFreshnessState) -> YouMemoryFreshness {
+        switch freshness {
+        case .current:
+            return .current
+        case .mayNeedReview:
+            return .mayNeedReview
+        case .basedOnOlderContext, .stale:
+            return .basedOnOlderContext
+        }
+    }
+
     func displayLabel(for budgetConstraintBand: LifeContextBudgetConstraintBand) -> String {
         switch budgetConstraintBand {
         case .tight:
@@ -2642,6 +3052,79 @@ private extension RepositoryBackedYouService {
             return "Finance"
         case .custom:
             return "Custom"
+        }
+    }
+
+    func displayLabel(for factorType: PersonalizationFactorLedgerFactorType) -> String {
+        switch factorType {
+        case .goalRequirement:
+            return "Goal requirement"
+        case .deadlinePressure:
+            return "Deadline pressure"
+        case .availabilityWindow:
+            return "Availability window"
+        case .travelFit:
+            return "Travel fit"
+        case .transportationConstraint:
+            return "Transportation constraint"
+        case .facilityAccess:
+            return "Facility access"
+        case .equipmentAccess:
+            return "Equipment access"
+        case .historicalContext:
+            return "Historical context"
+        case .pastFailure:
+            return "Past failure"
+        case .pastSuccess:
+            return "Past success"
+        case .recoveryConstraint:
+            return "Recovery constraint"
+        case .executionBehavior:
+            return "Execution behavior"
+        case .timeOfDayFit:
+            return "Time of day fit"
+        case .energyPattern:
+            return "Energy pattern"
+        case .eligibilityPathway:
+            return "Eligibility pathway"
+        case .seasonality:
+            return "Seasonality"
+        case .dependencyConstraint:
+            return "Dependency constraint"
+        case .budgetConstraint:
+            return "Budget constraint"
+        case .preference:
+            return "Preference"
+        case .trustAllowance:
+            return "Trust allowance"
+        case .recentProof:
+            return "Recent proof"
+        case .recentDrift:
+            return "Recent drift"
+        case .safetyConstraint:
+            return "Safety constraint"
+        }
+    }
+
+    func runtimeUseState(for factor: PersonalizationFactorLedgerFactor) -> YouLifeContextRuntimeUseState {
+        if factor.allowedForRuntimeUse == false || factor.active == false {
+            return .notUsed
+        }
+        return factor.freshness.state == .current ? .used : .needsReview
+    }
+
+    func factorUpdateTargets(for factor: PersonalizationFactorLedgerFactor) -> [YouLifeContextUpdateTarget] {
+        switch factor.factorCategory {
+        case .eligibility:
+            return [.profile, .eligibilityPathway]
+        case .access:
+            return [.profile, .opportunityContext]
+        case .history:
+            return [.historicalFact]
+        case .recovery, .safety:
+            return [.profile, .historicalFact]
+        case .timing, .preference, .trust, .proof, .freshness, .sensitivity, .replay, .goal:
+            return [.historicalFact]
         }
     }
 
